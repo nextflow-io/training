@@ -11,10 +11,10 @@
         <link rel="canonical" href="https://training.nextflow.io/es/side_quests/workflows_of_workflows/">
       
       
-        <link rel="prev" href="../splitting_and_grouping/">
+        <link rel="prev" href="../nf_test/">
       
       
-        <link rel="next" href="../debugging/">
+        <link rel="next" href="../working_with_files/">
       
       
         
@@ -47,7 +47,7 @@
     
     
       
-        <title>Flujos de trabajo de flujos de trabajo - training.nextflow.io</title>
+        <title>Workflows of Workflows - training.nextflow.io</title>
       
     
     
@@ -157,7 +157,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#flujos-de-trabajo-de-flujos-de-trabajo" class="md-skip">
+        <a href="#workflows-of-workflows" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -196,7 +196,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Flujos de trabajo de flujos de trabajo
+              Workflows of Workflows
             
           </span>
         </div>
@@ -2345,7 +2345,35 @@
   <span class="md-ellipsis">
     
   
-    Entorno de Desarrollo
+    Development Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../essential_scripting_patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Essential Nextflow Scripting Patterns
   
 
     
@@ -2373,35 +2401,7 @@
   <span class="md-ellipsis">
     
   
-    Metadatos y mapas de metadatos
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../working_with_files/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Procesamiento de archivos de entrada
+    Metadata and meta maps
   
 
     
@@ -2429,7 +2429,35 @@
   <span class="md-ellipsis">
     
   
-    División y Agrupación
+    Splitting and Grouping
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nf_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing with nf-test
   
 
     
@@ -2466,7 +2494,7 @@
   <span class="md-ellipsis">
     
   
-    Flujos de trabajo de flujos de trabajo
+    Workflows of Workflows
   
 
     
@@ -2484,7 +2512,7 @@
   <span class="md-ellipsis">
     
   
-    Flujos de trabajo de flujos de trabajo
+    Workflows of Workflows
   
 
     
@@ -2504,40 +2532,40 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#objetivos-de-aprendizaje" class="md-nav__link">
+  <a href="#learning-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Objetivos de aprendizaje
+        Learning goals
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#requisitos-previos" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Requisitos previos
+        Prerequisites
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#0-comenzar" class="md-nav__link">
+  <a href="#0-get-started" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Comenzar
+        0. Get started
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="0. Comenzar">
+    <nav class="md-nav" aria-label="0. Get started">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#abrir-el-codespace-de-entrenamiento" class="md-nav__link">
+  <a href="#open-the-training-codespace" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Abrir el codespace de entrenamiento
+        Open the training codespace
       
     </span>
   </a>
@@ -2545,10 +2573,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#moverse-al-directorio-del-proyecto" class="md-nav__link">
+  <a href="#move-into-the-project-directory" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Moverse al directorio del proyecto
+        Move into the project directory
       
     </span>
   </a>
@@ -2556,10 +2584,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#revisar-los-materiales" class="md-nav__link">
+  <a href="#review-the-materials" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Revisar los materiales
+        Review the materials
       
     </span>
   </a>
@@ -2567,10 +2595,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#revisar-la-asignacion" class="md-nav__link">
+  <a href="#review-the-assignment" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Revisar la asignación
+        Review the assignment
       
     </span>
   </a>
@@ -2578,10 +2606,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#lista-de-verificacion-de-preparacion" class="md-nav__link">
+  <a href="#readiness-checklist" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Lista de verificación de preparación
+        Readiness checklist
       
     </span>
   </a>
@@ -2592,22 +2620,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-crear-el-flujo-de-trabajo-de-saludo" class="md-nav__link">
+  <a href="#1-create-the-greeting-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Crear el flujo de trabajo de saludo
+        1. Create the Greeting Workflow
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Crear el flujo de trabajo de saludo">
+    <nav class="md-nav" aria-label="1. Create the Greeting Workflow">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-crear-la-estructura-del-flujo-de-trabajo" class="md-nav__link">
+  <a href="#11-create-the-workflow-structure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Crear la estructura del flujo de trabajo
+        1.1. Create the workflow structure
       
     </span>
   </a>
@@ -2615,10 +2643,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-agregar-el-codigo-del-primer-subflujo-de-trabajo" class="md-nav__link">
+  <a href="#12-add-the-first-subworkflow-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Agregar el código del primer (sub)flujo de trabajo
+        1.2. Add the first (sub)workflow code
       
     </span>
   </a>
@@ -2626,10 +2654,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-hacer-el-flujo-de-trabajo-componible" class="md-nav__link">
+  <a href="#13-make-the-workflow-composable" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Hacer el flujo de trabajo componible
+        1.3. Make the workflow composable
       
     </span>
   </a>
@@ -2637,10 +2665,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-crear-y-probar-el-flujo-de-trabajo-principal" class="md-nav__link">
+  <a href="#14-create-and-test-the-main-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Crear y probar el flujo de trabajo principal
+        1.4. Create and test the main workflow
       
     </span>
   </a>
@@ -2648,10 +2676,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#conclusion" class="md-nav__link">
+  <a href="#takeaway" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conclusión
+        Takeaway
       
     </span>
   </a>
@@ -2662,22 +2690,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-agregar-el-flujo-de-trabajo-de-transformacion" class="md-nav__link">
+  <a href="#2-add-the-transform-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Agregar el flujo de trabajo de transformación
+        2. Add the Transform Workflow
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Agregar el flujo de trabajo de transformación">
+    <nav class="md-nav" aria-label="2. Add the Transform Workflow">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-crear-el-archivo-de-flujo-de-trabajo" class="md-nav__link">
+  <a href="#21-create-the-workflow-file" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Crear el archivo de flujo de trabajo
+        2.1. Create the workflow file
       
     </span>
   </a>
@@ -2685,10 +2713,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-agregar-el-codigo-del-flujo-de-trabajo" class="md-nav__link">
+  <a href="#22-add-the-workflow-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Agregar el código del flujo de trabajo
+        2.2. Add the workflow code
       
     </span>
   </a>
@@ -2696,10 +2724,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-actualizar-el-flujo-de-trabajo-principal" class="md-nav__link">
+  <a href="#23-update-the-main-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Actualizar el flujo de trabajo principal
+        2.3. Update the main workflow
       
     </span>
   </a>
@@ -2707,10 +2735,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#conclusion_1" class="md-nav__link">
+  <a href="#takeaway_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conclusión
+        Takeaway
       
     </span>
   </a>
@@ -2721,22 +2749,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#resumen" class="md-nav__link">
+  <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resumen
+        Summary
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Resumen">
+    <nav class="md-nav" aria-label="Summary">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#patrones-clave" class="md-nav__link">
+  <a href="#key-patterns" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Patrones clave
+        Key patterns
       
     </span>
   </a>
@@ -2744,10 +2772,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#recursos-adicionales" class="md-nav__link">
+  <a href="#additional-resources" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Recursos adicionales
+        Additional resources
       
     </span>
   </a>
@@ -2758,10 +2786,10 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#que-sigue" class="md-nav__link">
+  <a href="#whats-next" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Qué sigue?
+        What's next?
       
     </span>
   </a>
@@ -2969,6 +2997,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../working_with_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File input processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../debugging/" class="md-nav__link">
         
   
@@ -2976,7 +3032,82 @@
   <span class="md-ellipsis">
     
   
-    Depuración de Flujos de Trabajo
+    Debugging Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_11" id="__nav_6_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Plugin Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Development
   
 
     
@@ -2997,14 +3128,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../essential_scripting_patterns/" class="md-nav__link">
+      <a href="../plugin_development/01_plugin_basics/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Patrones Esenciales de Scripting en Nextflow
+    Part 1: Plugin Basics
   
 
     
@@ -3025,14 +3156,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../nf-test/" class="md-nav__link">
+      <a href="../plugin_development/02_create_project/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Pruebas con nf-test
+    Part 2: Create a Plugin Project
   
 
     
@@ -3041,6 +3172,182 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/03_custom_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 3: Custom Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/04_build_and_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 4: Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/05_observers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 5: Trace Observers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/06_configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 6: Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/next_steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Next Steps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -3489,40 +3796,40 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#objetivos-de-aprendizaje" class="md-nav__link">
+  <a href="#learning-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Objetivos de aprendizaje
+        Learning goals
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#requisitos-previos" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Requisitos previos
+        Prerequisites
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#0-comenzar" class="md-nav__link">
+  <a href="#0-get-started" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Comenzar
+        0. Get started
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="0. Comenzar">
+    <nav class="md-nav" aria-label="0. Get started">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#abrir-el-codespace-de-entrenamiento" class="md-nav__link">
+  <a href="#open-the-training-codespace" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Abrir el codespace de entrenamiento
+        Open the training codespace
       
     </span>
   </a>
@@ -3530,10 +3837,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#moverse-al-directorio-del-proyecto" class="md-nav__link">
+  <a href="#move-into-the-project-directory" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Moverse al directorio del proyecto
+        Move into the project directory
       
     </span>
   </a>
@@ -3541,10 +3848,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#revisar-los-materiales" class="md-nav__link">
+  <a href="#review-the-materials" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Revisar los materiales
+        Review the materials
       
     </span>
   </a>
@@ -3552,10 +3859,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#revisar-la-asignacion" class="md-nav__link">
+  <a href="#review-the-assignment" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Revisar la asignación
+        Review the assignment
       
     </span>
   </a>
@@ -3563,10 +3870,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#lista-de-verificacion-de-preparacion" class="md-nav__link">
+  <a href="#readiness-checklist" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Lista de verificación de preparación
+        Readiness checklist
       
     </span>
   </a>
@@ -3577,22 +3884,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-crear-el-flujo-de-trabajo-de-saludo" class="md-nav__link">
+  <a href="#1-create-the-greeting-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Crear el flujo de trabajo de saludo
+        1. Create the Greeting Workflow
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Crear el flujo de trabajo de saludo">
+    <nav class="md-nav" aria-label="1. Create the Greeting Workflow">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-crear-la-estructura-del-flujo-de-trabajo" class="md-nav__link">
+  <a href="#11-create-the-workflow-structure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Crear la estructura del flujo de trabajo
+        1.1. Create the workflow structure
       
     </span>
   </a>
@@ -3600,10 +3907,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-agregar-el-codigo-del-primer-subflujo-de-trabajo" class="md-nav__link">
+  <a href="#12-add-the-first-subworkflow-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Agregar el código del primer (sub)flujo de trabajo
+        1.2. Add the first (sub)workflow code
       
     </span>
   </a>
@@ -3611,10 +3918,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-hacer-el-flujo-de-trabajo-componible" class="md-nav__link">
+  <a href="#13-make-the-workflow-composable" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Hacer el flujo de trabajo componible
+        1.3. Make the workflow composable
       
     </span>
   </a>
@@ -3622,10 +3929,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-crear-y-probar-el-flujo-de-trabajo-principal" class="md-nav__link">
+  <a href="#14-create-and-test-the-main-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Crear y probar el flujo de trabajo principal
+        1.4. Create and test the main workflow
       
     </span>
   </a>
@@ -3633,10 +3940,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#conclusion" class="md-nav__link">
+  <a href="#takeaway" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conclusión
+        Takeaway
       
     </span>
   </a>
@@ -3647,22 +3954,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-agregar-el-flujo-de-trabajo-de-transformacion" class="md-nav__link">
+  <a href="#2-add-the-transform-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Agregar el flujo de trabajo de transformación
+        2. Add the Transform Workflow
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Agregar el flujo de trabajo de transformación">
+    <nav class="md-nav" aria-label="2. Add the Transform Workflow">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-crear-el-archivo-de-flujo-de-trabajo" class="md-nav__link">
+  <a href="#21-create-the-workflow-file" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Crear el archivo de flujo de trabajo
+        2.1. Create the workflow file
       
     </span>
   </a>
@@ -3670,10 +3977,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-agregar-el-codigo-del-flujo-de-trabajo" class="md-nav__link">
+  <a href="#22-add-the-workflow-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Agregar el código del flujo de trabajo
+        2.2. Add the workflow code
       
     </span>
   </a>
@@ -3681,10 +3988,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-actualizar-el-flujo-de-trabajo-principal" class="md-nav__link">
+  <a href="#23-update-the-main-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Actualizar el flujo de trabajo principal
+        2.3. Update the main workflow
       
     </span>
   </a>
@@ -3692,10 +3999,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#conclusion_1" class="md-nav__link">
+  <a href="#takeaway_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conclusión
+        Takeaway
       
     </span>
   </a>
@@ -3706,22 +4013,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#resumen" class="md-nav__link">
+  <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resumen
+        Summary
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Resumen">
+    <nav class="md-nav" aria-label="Summary">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#patrones-clave" class="md-nav__link">
+  <a href="#key-patterns" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Patrones clave
+        Key patterns
       
     </span>
   </a>
@@ -3729,10 +4036,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#recursos-adicionales" class="md-nav__link">
+  <a href="#additional-resources" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Recursos adicionales
+        Additional resources
       
     </span>
   </a>
@@ -3743,10 +4050,10 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#que-sigue" class="md-nav__link">
+  <a href="#whats-next" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Qué sigue?
+        What's next?
       
     </span>
   </a>
@@ -3992,7 +4299,7 @@
 
  
 <a
-  href="https://github.com/nextflow-io/training/edit/master/docs/side_quests/workflows_of_workflows.md"
+  href="https://github.com/nextflow-io/training/edit/master/docs/side_quests/workflows_of_workflows/index.md"
   title="Editar esta página"
   class="md-content__button md-icon"
   rel="edit"
@@ -4009,72 +4316,79 @@
 </a>
  
 
-<h1 id="flujos-de-trabajo-de-flujos-de-trabajo">Flujos de trabajo de flujos de trabajo<a class="headerlink" href="#flujos-de-trabajo-de-flujos-de-trabajo" title="Permanent link">&para;</a></h1>
-<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traducción asistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">más información y sugerencias</a></span></p>
-<p>Cuando está desarrollando un pipeline, a menudo se encuentra creando secuencias similares de procesos para diferentes tipos de datos o pasos de análisis. Podría terminar copiando y pegando estas secuencias de procesos, lo que lleva a código duplicado que es difícil de mantener; o podría crear un flujo de trabajo masivo que es difícil de entender y modificar.</p>
-<p>Una de las características más poderosas de Nextflow es su capacidad para componer pipelines complejos a partir de módulos de flujos de trabajo más pequeños y reutilizables. Este enfoque modular hace que los pipelines sean más fáciles de desarrollar, probar y mantener.</p>
-<h3 id="objetivos-de-aprendizaje">Objetivos de aprendizaje<a class="headerlink" href="#objetivos-de-aprendizaje" title="Permanent link">&para;</a></h3>
-<p>En esta misión secundaria, exploraremos cómo desarrollar módulos de flujos de trabajo que se pueden probar y usar por separado, componer esos módulos en un pipeline más grande y gestionar el flujo de datos entre módulos.</p>
-<p>Al final de esta misión secundaria, usted podrá:</p>
+<h1 id="workflows-of-workflows">Workflows of Workflows<a class="headerlink" href="#workflows-of-workflows" title="Permanent link">&para;</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Translation in Progress</p>
+<p>This page has not yet been translated into your language.
+You are viewing the original English content.</p>
+<p>Want to help? See our <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">translation guide</a>.</p>
+</div>
+<p>When you're developing a pipeline, you often find yourself creating similar sequences of processes for different data types or analysis steps. You might end up copying and pasting these process sequences, leading to duplicated code that's hard to maintain; or you might create one massive workflow that's difficult to understand and modify.</p>
+<p>One of the most powerful features of Nextflow is its ability to compose complex pipelines from smaller, reusable workflow modules. This modular approach makes pipelines easier to develop, test, and maintain.</p>
+<h3 id="learning-goals">Learning goals<a class="headerlink" href="#learning-goals" title="Permanent link">&para;</a></h3>
+<p>In this side quest, we'll explore how to develop workflow modules that can be tested and used separately, compose those modules into a larger pipeline, and manage data flow between modules.</p>
+<p>By the end of this side quest, you'll be able to:</p>
 <ul>
-<li>Dividir pipelines complejos en unidades lógicas y reutilizables</li>
-<li>Probar cada módulo de flujo de trabajo de forma independiente</li>
-<li>Mezclar y combinar flujos de trabajo para crear nuevos pipelines</li>
-<li>Compartir módulos de flujos de trabajo comunes entre diferentes pipelines</li>
-<li>Hacer su código más mantenible y más fácil de entender</li>
+<li>Break down complex pipelines into logical, reusable units</li>
+<li>Test each workflow module independently</li>
+<li>Mix and match workflows to create new pipelines</li>
+<li>Share common workflow modules across different pipelines</li>
+<li>Make your code more maintainable and easier to understand</li>
 </ul>
-<p>Estas habilidades le ayudarán a construir pipelines complejos mientras mantiene una estructura de código limpia y mantenible.</p>
-<h3 id="requisitos-previos">Requisitos previos<a class="headerlink" href="#requisitos-previos" title="Permanent link">&para;</a></h3>
-<p>Antes de asumir esta misión secundaria debería:</p>
+<p>These skills will help you build complex pipelines while maintaining clean, maintainable code structure.</p>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<p>Before taking on this side quest you should:</p>
 <ul>
-<li>Haber completado el tutorial <a href="../hello_nextflow/README.md">Hello Nextflow</a> o un curso equivalente para principiantes.</li>
-<li>Sentirse cómodo usando conceptos y mecanismos básicos de Nextflow (procesos, canales, operadores, módulos)</li>
+<li>Have completed the <a href="../hello_nextflow/README.md">Hello Nextflow</a> tutorial or equivalent beginner's course.</li>
+<li>Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators, modules)</li>
 </ul>
 <hr />
-<h2 id="0-comenzar">0. Comenzar<a class="headerlink" href="#0-comenzar" title="Permanent link">&para;</a></h2>
-<h4 id="abrir-el-codespace-de-entrenamiento">Abrir el codespace de entrenamiento<a class="headerlink" href="#abrir-el-codespace-de-entrenamiento" title="Permanent link">&para;</a></h4>
-<p>Si aún no lo ha hecho, asegúrese de abrir el entorno de entrenamiento como se describe en <a href="../../envsetup/">Configuración del Entorno</a>.</p>
+<h2 id="0-get-started">0. Get started<a class="headerlink" href="#0-get-started" title="Permanent link">&para;</a></h2>
+<h4 id="open-the-training-codespace">Open the training codespace<a class="headerlink" href="#open-the-training-codespace" title="Permanent link">&para;</a></h4>
+<p>If you haven't yet done so, make sure to open the training environment as described in the <a href="../envsetup/index.md">Environment Setup</a>.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
-<h4 id="moverse-al-directorio-del-proyecto">Moverse al directorio del proyecto<a class="headerlink" href="#moverse-al-directorio-del-proyecto" title="Permanent link">&para;</a></h4>
-<p>Vamos a movernos al directorio donde se encuentran los archivos para este tutorial.</p>
+<h4 id="move-into-the-project-directory">Move into the project directory<a class="headerlink" href="#move-into-the-project-directory" title="Permanent link">&para;</a></h4>
+<p>Let's move into the directory where the files for this tutorial are located.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>side-quests/workflows_of_workflows
 </code></pre></div>
-<p>Puede configurar VSCode para enfocarse en este directorio:</p>
+<p>You can set VSCode to focus on this directory:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>code<span class="w"> </span>.
 </code></pre></div>
-<h4 id="revisar-los-materiales">Revisar los materiales<a class="headerlink" href="#revisar-los-materiales" title="Permanent link">&para;</a></h4>
-<p>Encontrará un directorio <code>modules</code> que contiene varias definiciones de procesos que se basan en lo que aprendió en 'Hello Nextflow':</p>
-<div class="highlight"><span class="filename">Contenido del directorio</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">modules/</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">├── say_hello.nf             # Crea un saludo (de Hello Nextflow)</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">├── say_hello_upper.nf       # Convierte a mayúsculas (de Hello Nextflow)</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="go">├── timestamp_greeting.nf    # Agrega marcas de tiempo a los saludos</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="go">├── validate_name.nf         # Valida nombres de entrada</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="go">└── reverse_text.nf          # Invierte el contenido del texto</span>
+<h4 id="review-the-materials">Review the materials<a class="headerlink" href="#review-the-materials" title="Permanent link">&para;</a></h4>
+<p>You'll find a <code>modules</code> directory containing several process definitions that build upon what you learned in 'Hello Nextflow':</p>
+<div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">modules/</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">├── say_hello.nf             # Creates a greeting (from Hello Nextflow)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">├── say_hello_upper.nf       # Converts to uppercase (from Hello Nextflow)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="go">├── timestamp_greeting.nf    # Adds timestamps to greetings</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="go">├── validate_name.nf         # Validates input names</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="go">└── reverse_text.nf          # Reverses text content</span>
 </code></pre></div>
-<h4 id="revisar-la-asignacion">Revisar la asignación<a class="headerlink" href="#revisar-la-asignacion" title="Permanent link">&para;</a></h4>
-<p>Su desafío es ensamblar estos módulos en dos flujos de trabajo separados que luego compondremos en un flujo de trabajo principal:</p>
+<h4 id="review-the-assignment">Review the assignment<a class="headerlink" href="#review-the-assignment" title="Permanent link">&para;</a></h4>
+<p>Your challenge is to assemble these modules into two separate workflows that we will then compose into a main workflow:</p>
 <ul>
-<li>Un <code>GREETING_WORKFLOW</code> que valida nombres, crea saludos y agrega marcas de tiempo</li>
-<li>Un <code>TRANSFORM_WORKFLOW</code> que convierte texto a mayúsculas y lo invierte</li>
+<li>A <code>GREETING_WORKFLOW</code> that validates names, creates greetings, and adds timestamps</li>
+<li>A <code>TRANSFORM_WORKFLOW</code> that converts text to uppercase and reverses it</li>
 </ul>
-<h4 id="lista-de-verificacion-de-preparacion">Lista de verificación de preparación<a class="headerlink" href="#lista-de-verificacion-de-preparacion" title="Permanent link">&para;</a></h4>
-<p>¿Cree que está listo para comenzar?</p>
+<!-- TODO: give a bit more details, similar to how it's done in the Metadata side quest -->
+
+<h4 id="readiness-checklist">Readiness checklist<a class="headerlink" href="#readiness-checklist" title="Permanent link">&para;</a></h4>
+<p>Think you're ready to dive in?</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Entiendo el objetivo de este curso y sus requisitos previos</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Mi codespace está funcionando</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> He configurado mi directorio de trabajo apropiadamente</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Entiendo la asignación</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I understand the goal of this course and its prerequisites</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> My codespace is up and running</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I've set my working directory appropriately</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I understand the assignment</li>
 </ul>
-<p>Si puede marcar todas las casillas, está listo para comenzar.</p>
+<p>If you can check all the boxes, you're good to go.</p>
 <hr />
-<h2 id="1-crear-el-flujo-de-trabajo-de-saludo">1. Crear el flujo de trabajo de saludo<a class="headerlink" href="#1-crear-el-flujo-de-trabajo-de-saludo" title="Permanent link">&para;</a></h2>
-<p>Comencemos creando un flujo de trabajo que valide nombres y genere saludos con marcas de tiempo.</p>
-<h3 id="11-crear-la-estructura-del-flujo-de-trabajo">1.1. Crear la estructura del flujo de trabajo<a class="headerlink" href="#11-crear-la-estructura-del-flujo-de-trabajo" title="Permanent link">&para;</a></h3>
-<div class="highlight"><span class="filename">Crear directorio de flujo de trabajo y archivo</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>workflows
+<h2 id="1-create-the-greeting-workflow">1. Create the Greeting Workflow<a class="headerlink" href="#1-create-the-greeting-workflow" title="Permanent link">&para;</a></h2>
+<p>Let's start by creating a workflow that validates names and generates timestamped greetings.</p>
+<h3 id="11-create-the-workflow-structure">1.1. Create the workflow structure<a class="headerlink" href="#11-create-the-workflow-structure" title="Permanent link">&para;</a></h3>
+<div class="highlight"><span class="filename">Create workflow directory and file</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>workflows
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>touch<span class="w"> </span>workflows/greeting.nf
 </code></pre></div>
-<h3 id="12-agregar-el-codigo-del-primer-subflujo-de-trabajo">1.2. Agregar el código del primer (sub)flujo de trabajo<a class="headerlink" href="#12-agregar-el-codigo-del-primer-subflujo-de-trabajo" title="Permanent link">&para;</a></h3>
-<p>Agregue este código a <code>workflows/greeting.nf</code>:</p>
+<h3 id="12-add-the-first-subworkflow-code">1.2. Add the first (sub)workflow code<a class="headerlink" href="#12-add-the-first-subworkflow-code" title="Permanent link">&para;</a></h3>
+<p>Add this code to <code>workflows/greeting.nf</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
@@ -4095,17 +4409,17 @@
 <a id="__codelineno-4-6" name="__codelineno-4-6"></a>
 <a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">    </span><span class="n">names_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Alice&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Charlie&#39;</span><span class="o">)</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8"></a>
-<a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">    </span><span class="c1">// Encadenar procesos: validar -&gt; crear saludo -&gt; agregar marca de tiempo</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">    </span><span class="c1">// Chain processes: validate -&gt; create greeting -&gt; add timestamp</span>
 <a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="w">    </span><span class="n">validated_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="o">(</span><span class="n">names_ch</span><span class="o">)</span>
 <a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="w">    </span><span class="n">greetings_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="o">(</span><span class="n">validated_ch</span><span class="o">)</span>
 <a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="w">    </span><span class="n">timestamped_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="o">(</span><span class="n">greetings_ch</span><span class="o">)</span>
 <a id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Este es un flujo de trabajo completo, con una estructura similar a los que vio en el tutorial 'Hello Nextflow', que podemos probar de forma independiente. Probémoslo ahora:</p>
+<p>This is a complete workflow, with a structure similar to the ones you saw in the 'Hello Nextflow' tutorial, that we can test independently. Let's try that now:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>workflows/greeting.nf
 </code></pre></div>
 <details class="success">
-<summary>Salida del comando</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="go">Launching `workflows/greeting.nf` [peaceful_montalcini] DSL2 - revision: 90f61b7093</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">executor &gt;  local (9)</span>
@@ -4114,16 +4428,18 @@
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="go">[8e/882565] process &gt; TIMESTAMP_GREETING (adding timestamp to greeting) [100%] 3 of 3 ✔</span>
 </code></pre></div>
 </details>
-<p>Esto funciona como se esperaba, pero para hacerlo componible hay algunas cosas que necesitamos cambiar.</p>
-<h3 id="13-hacer-el-flujo-de-trabajo-componible">1.3. Hacer el flujo de trabajo componible<a class="headerlink" href="#13-hacer-el-flujo-de-trabajo-componible" title="Permanent link">&para;</a></h3>
-<p>Los flujos de trabajo componibles tienen algunas diferencias con respecto a los que vio en el tutorial 'Hello Nextflow':</p>
+<p>This works as expected, but to make it composable there's a few things we need to change.</p>
+<h3 id="13-make-the-workflow-composable">1.3. Make the workflow composable<a class="headerlink" href="#13-make-the-workflow-composable" title="Permanent link">&para;</a></h3>
+<p>Composable workflows have some differences from the ones you saw in the 'Hello Nextflow' tutorial:</p>
 <ul>
-<li>El bloque workflow necesita tener un nombre</li>
-<li>Las entradas se declaran usando la palabra clave <code>take:</code></li>
-<li>El contenido del flujo de trabajo se coloca dentro del bloque <code>main:</code></li>
-<li>Las salidas se declaran usando la palabra clave <code>emit:</code></li>
+<li>The workflow block needs to be named</li>
+<li>Inputs are declared using the <code>take:</code> keyword</li>
+<li>Workflow content is placed inside the <code>main:</code> block</li>
+<li>Outputs are declared using the <code>emit:</code> keyword</li>
 </ul>
-<p>Actualicemos el flujo de trabajo de saludo para que coincida con esta estructura. Cambie el código a lo siguiente:</p>
+<p>Let's update the greeting workflow to match this structure. Change the code to the following:</p>
+<!-- TODO: switch to before/after tabs -->
+
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
@@ -4147,42 +4463,42 @@
 <a id="__codelineno-7-4" name="__codelineno-7-4"></a>
 <a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="n">workflow</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="hll"><span class="w">    </span><span class="nl">take:</span>
-</span><a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="hll"><span class="w">        </span><span class="n">names_ch</span><span class="w">        </span><span class="c1">// Canal de entrada con nombres</span>
+</span><a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="hll"><span class="w">        </span><span class="n">names_ch</span><span class="w">        </span><span class="c1">// Input channel with names</span>
 </span><a id="__codelineno-7-8" name="__codelineno-7-8"></a>
 <a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="hll"><span class="w">    </span><span class="nl">main:</span>
-</span><a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="w">        </span><span class="c1">// Encadenar procesos: validar -&gt; crear saludo -&gt; agregar marca de tiempo</span>
+</span><a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="w">        </span><span class="c1">// Chain processes: validate -&gt; create greeting -&gt; add timestamp</span>
 <a id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="w">        </span><span class="n">validated_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="o">(</span><span class="n">names_ch</span><span class="o">)</span>
 <a id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="w">        </span><span class="n">greetings_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="o">(</span><span class="n">validated_ch</span><span class="o">)</span>
 <a id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="w">        </span><span class="n">timestamped_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="o">(</span><span class="n">greetings_ch</span><span class="o">)</span>
 <a id="__codelineno-7-14" name="__codelineno-7-14"></a>
 <a id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="hll"><span class="w">    </span><span class="nl">emit:</span>
-</span><a id="__codelineno-7-16" name="__codelineno-7-16"></a><span class="hll"><span class="w">        </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">greetings_ch</span><span class="w">      </span><span class="c1">// Saludos originales</span>
-</span><a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="hll"><span class="w">        </span><span class="n">timestamped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timestamped_ch</span><span class="w">  </span><span class="c1">// Saludos con marca de tiempo</span>
+</span><a id="__codelineno-7-16" name="__codelineno-7-16"></a><span class="hll"><span class="w">        </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">greetings_ch</span><span class="w">      </span><span class="c1">// Original greetings</span>
+</span><a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="hll"><span class="w">        </span><span class="n">timestamped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timestamped_ch</span><span class="w">  </span><span class="c1">// Timestamped greetings</span>
 </span><a id="__codelineno-7-18" name="__codelineno-7-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Puede ver que el flujo de trabajo ahora tiene un nombre y tiene un bloque <code>take:</code> y <code>emit:</code>, y estas son las conexiones que usaremos para componer un flujo de trabajo de nivel superior.
-El contenido del flujo de trabajo también se coloca dentro del bloque <code>main:</code>. Note también que hemos eliminado la declaración del canal de entrada <code>names_ch</code>, ya que ahora se pasa como argumento al flujo de trabajo.</p>
-<p>Probemos el flujo de trabajo nuevamente para ver si funciona como se esperaba:</p>
+<p>You can see that the workflow is now named and has a <code>take:</code> and <code>emit:</code> block, and these are the connections we will use to compose a higher level workflow.
+The workflow content is also placed inside the <code>main:</code> block. Note also that we have removed the <code>names_ch</code> input channel declaration, as it's now passed as an argument to the workflow.</p>
+<p>Let's test the workflow again to see if it works as expected:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>workflows/greeting.nf
 </code></pre></div>
 <details class="failure">
-<summary>Salida del comando</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="go">Launching `workflows/greeting.nf` [high_brahmagupta] DSL2 - revision: 8f5857af25</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">No entry workflow specified</span>
 </code></pre></div>
 </details>
-<p>Esto le informa sobre otro concepto nuevo, un 'flujo de trabajo de entrada'. El flujo de trabajo de entrada es el flujo de trabajo que se llama cuando ejecuta un script de Nextflow. Por defecto, Nextflow usará un flujo de trabajo sin nombre como flujo de trabajo de entrada, cuando esté presente, y eso es lo que ha estado haciendo hasta ahora, con bloques de flujo de trabajo que comienzan así:</p>
+<p>This tells you about another new concept, an 'entry workflow'. The entry workflow is the workflow that gets called when you run a Nextflow script. By default, Nextflow will use an unnamed workflow as the entry workflow, when present, and that's what you've been doing so far, with workflow blocks starting like this:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 </code></pre></div></td></tr></table></div>
-<p>Pero nuestro flujo de trabajo de saludo no tiene un flujo de trabajo sin nombre, sino que tenemos un flujo de trabajo con nombre:</p>
+<p>But our greeting workflow doesn't have an un-named workflow, rather we have a named workflow:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="n">workflow</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
 </code></pre></div></td></tr></table></div>
-<p>Por eso Nextflow arrojó un error y no hizo lo que queríamos.</p>
-<p>No agregamos la sintaxis <code>take:</code>/<code>emit:</code> para poder llamar al flujo de trabajo directamente - lo hicimos para poder componerlo con otros flujos de trabajo. La solución es crear un script principal con un flujo de trabajo de entrada sin nombre que importe y llame a nuestro flujo de trabajo con nombre.</p>
-<h3 id="14-crear-y-probar-el-flujo-de-trabajo-principal">1.4. Crear y probar el flujo de trabajo principal<a class="headerlink" href="#14-crear-y-probar-el-flujo-de-trabajo-principal" title="Permanent link">&para;</a></h3>
-<p>Ahora crearemos un flujo de trabajo principal que importa y usa el flujo de trabajo de saludo.</p>
-<p>Crear <code>main.nf</code>:</p>
+<p>That's why Nextflow threw an error and did not do what we wanted.</p>
+<p>We didn't add the <code>take:</code>/<code>emit:</code> syntax so we could call the workflow directly - we did it so we could compose it with other workflows. The solution is to create a main script with an unnamed entry workflow that imports and calls our named workflow.</p>
+<h3 id="14-create-and-test-the-main-workflow">1.4. Create and test the main workflow<a class="headerlink" href="#14-create-and-test-the-main-workflow" title="Permanent link">&para;</a></h3>
+<p>Now we will create a main workflow that imports and uses the <code>greeting</code> workflow.</p>
+<p>Create <code>main.nf</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
 <span class="normal"><a href="#__codelineno-12-2">2</a></span>
 <span class="normal"><a href="#__codelineno-12-3">3</a></span>
@@ -4201,12 +4517,12 @@ El contenido del flujo de trabajo también se coloca dentro del bloque <code>mai
 <a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">    </span><span class="n">GREETING_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">timestamped</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;Timestamped: $it&quot;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Note que nuestra entrada de flujo de trabajo en este archivo no tiene nombre, y eso es porque vamos a usarla como un flujo de trabajo de entrada.</p>
-<p>Ejecute esto y vea la salida:</p>
+<p>Note that our workflow entry in this file is un-named, and that's because we're going to use it as an entry workflow.</p>
+<p>Run this and see the output:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Salida del comando</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="go">Launching `main.nf` [goofy_mayer] DSL2 - revision: 543f8742fe</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="go">executor &gt;  local (9)</span>
@@ -4221,33 +4537,33 @@ El contenido del flujo de trabajo también se coloca dentro del bloque <code>mai
 <a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="go">Timestamped: /workspaces/training/side_quests/workflows_of_workflows/work/ea/342168d4ba04cc899a89c56cbfd9b0/timestamped_Charlie-output.txt</span>
 </code></pre></div>
 </details>
-<p>¡Funciona! Hemos envuelto el flujo de trabajo de saludo con nombre en un flujo de trabajo principal con un bloque de entrada <code>workflow</code> sin nombre. El flujo de trabajo principal está usando el flujo de trabajo <code>GREETING_WORKFLOW</code> casi (no exactamente) como un proceso, y pasando el canal <code>names</code> como argumento.</p>
-<h3 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h3>
-<p>En esta sección, ha aprendido varios conceptos importantes:</p>
+<p>It works! We've wrapped the named greeting workflow in a main workflow with an un-named entry <code>workflow</code> block. The main workflow is using the <code>GREETING_WORKFLOW</code> workflow almost (not quite) like a process, and passing the <code>names</code> channel as an argument.</p>
+<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
+<p>In this section, you've learned several important concepts:</p>
 <ul>
-<li><strong>Flujos de trabajo con nombre</strong>: Crear un flujo de trabajo con nombre (<code>GREETING_WORKFLOW</code>) que puede importarse y reutilizarse</li>
-<li><strong>Interfaces de flujo de trabajo</strong>: Definir entradas claras con <code>take:</code> y salidas con <code>emit:</code> para crear un flujo de trabajo componible</li>
-<li><strong>Puntos de entrada</strong>: Entender que Nextflow necesita un flujo de trabajo de entrada sin nombre para ejecutar un script</li>
-<li><strong>Composición de flujos de trabajo</strong>: Importar y usar un flujo de trabajo con nombre dentro de otro flujo de trabajo</li>
-<li><strong>Espacios de nombres de flujo de trabajo</strong>: Acceder a las salidas del flujo de trabajo usando el espacio de nombres <code>.out</code> (<code>GREETING_WORKFLOW.out.greetings</code>)</li>
+<li><strong>Named Workflows</strong>: Creating a named workflow (<code>GREETING_WORKFLOW</code>) that can be imported and reused</li>
+<li><strong>Workflow Interfaces</strong>: Defining clear inputs with <code>take:</code> and outputs with <code>emit:</code> to create a composable workflow</li>
+<li><strong>Entry Points</strong>: Understanding that Nextflow needs an unnamed entry workflow to run a script</li>
+<li><strong>Workflow Composition</strong>: Importing and using a named workflow within another workflow</li>
+<li><strong>Workflow Namespaces</strong>: Accessing workflow outputs using the <code>.out</code> namespace (<code>GREETING_WORKFLOW.out.greetings</code>)</li>
 </ul>
-<p>Ahora tiene un flujo de trabajo de saludo funcional que:</p>
+<p>You now have a working greeting workflow that:</p>
 <ul>
-<li>Toma un canal de nombres como entrada</li>
-<li>Valida cada nombre</li>
-<li>Crea un saludo para cada nombre válido</li>
-<li>Agrega marcas de tiempo a los saludos</li>
-<li>Expone tanto los saludos originales como los que tienen marca de tiempo como salidas</li>
+<li>Takes a channel of names as input</li>
+<li>Validates each name</li>
+<li>Creates a greeting for each valid name</li>
+<li>Adds timestamps to the greetings</li>
+<li>Exposes both original and timestamped greetings as outputs</li>
 </ul>
-<p>Este enfoque modular le permite probar el flujo de trabajo de saludo de forma independiente o usarlo como componente en pipelines más grandes.</p>
+<p>This modular approach allows you to test the greeting workflow independently or use it as a component in larger pipelines.</p>
 <hr />
-<h2 id="2-agregar-el-flujo-de-trabajo-de-transformacion">2. Agregar el flujo de trabajo de transformación<a class="headerlink" href="#2-agregar-el-flujo-de-trabajo-de-transformacion" title="Permanent link">&para;</a></h2>
-<p>Ahora creemos un flujo de trabajo que aplica transformaciones de texto a los saludos.</p>
-<h3 id="21-crear-el-archivo-de-flujo-de-trabajo">2.1. Crear el archivo de flujo de trabajo<a class="headerlink" href="#21-crear-el-archivo-de-flujo-de-trabajo" title="Permanent link">&para;</a></h3>
+<h2 id="2-add-the-transform-workflow">2. Add the Transform Workflow<a class="headerlink" href="#2-add-the-transform-workflow" title="Permanent link">&para;</a></h2>
+<p>Now let's create a workflow that applies text transformations to the greetings.</p>
+<h3 id="21-create-the-workflow-file">2.1. Create the workflow file<a class="headerlink" href="#21-create-the-workflow-file" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>touch<span class="w"> </span>workflows/transform.nf
 </code></pre></div>
-<h3 id="22-agregar-el-codigo-del-flujo-de-trabajo">2.2. Agregar el código del flujo de trabajo<a class="headerlink" href="#22-agregar-el-codigo-del-flujo-de-trabajo" title="Permanent link">&para;</a></h3>
-<p>Agregue este código a <code>workflows/transform.nf</code>:</p>
+<h3 id="22-add-the-workflow-code">2.2. Add the workflow code<a class="headerlink" href="#22-add-the-workflow-code" title="Permanent link">&para;</a></h3>
+<p>Add this code to <code>workflows/transform.nf</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/transform.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
@@ -4268,21 +4584,21 @@ El contenido del flujo de trabajo también se coloca dentro del bloque <code>mai
 <a id="__codelineno-16-3" name="__codelineno-16-3"></a>
 <a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="n">workflow</span><span class="w"> </span><span class="n">TRANSFORM_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">    </span><span class="nl">take:</span>
-<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="w">        </span><span class="n">input_ch</span><span class="w">         </span><span class="c1">// Canal de entrada con mensajes</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="w">        </span><span class="n">input_ch</span><span class="w">         </span><span class="c1">// Input channel with messages</span>
 <a id="__codelineno-16-7" name="__codelineno-16-7"></a>
 <a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="w">        </span><span class="c1">// Aplicar transformaciones en secuencia</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="w">        </span><span class="c1">// Apply transformations in sequence</span>
 <a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="w">        </span><span class="n">upper_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO_UPPER</span><span class="o">(</span><span class="n">input_ch</span><span class="o">)</span>
 <a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="w">        </span><span class="n">reversed_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REVERSE_TEXT</span><span class="o">(</span><span class="n">upper_ch</span><span class="o">)</span>
 <a id="__codelineno-16-12" name="__codelineno-16-12"></a>
 <a id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="w">    </span><span class="nl">emit:</span>
-<a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="w">        </span><span class="n">upper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">upper_ch</span><span class="w">        </span><span class="c1">// Saludos en mayúsculas</span>
-<a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="w">        </span><span class="n">reversed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reversed_ch</span><span class="w">  </span><span class="c1">// Saludos en mayúsculas invertidos</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="w">        </span><span class="n">upper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">upper_ch</span><span class="w">        </span><span class="c1">// Uppercase greetings</span>
+<a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="w">        </span><span class="n">reversed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reversed_ch</span><span class="w">  </span><span class="c1">// Reversed uppercase greetings</span>
 <a id="__codelineno-16-16" name="__codelineno-16-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>No repetiremos la explicación de la sintaxis componible aquí, pero note que el flujo de trabajo con nombre se declara nuevamente con un bloque <code>take:</code> y <code>emit:</code>, y el contenido del flujo de trabajo se coloca dentro del bloque <code>main:</code>.</p>
-<h3 id="23-actualizar-el-flujo-de-trabajo-principal">2.3. Actualizar el flujo de trabajo principal<a class="headerlink" href="#23-actualizar-el-flujo-de-trabajo-principal" title="Permanent link">&para;</a></h3>
-<p>Actualice <code>main.nf</code> para usar ambos flujos de trabajo:</p>
+<p>We won't repeat the explanation of the composable syntax here, but note the named workflow is again declared with a <code>take:</code> and <code>emit:</code> block, and the workflow content is placed inside the <code>main:</code> block.</p>
+<h3 id="23-update-the-main-workflow">2.3. Update the main workflow<a class="headerlink" href="#23-update-the-main-workflow" title="Permanent link">&para;</a></h3>
+<p>Update <code>main.nf</code> to use both workflows:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
@@ -4304,22 +4620,22 @@ El contenido del flujo de trabajo también se coloca dentro del bloque <code>mai
 <a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="w">    </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Alice&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Charlie&#39;</span><span class="o">)</span>
 <a id="__codelineno-17-6" name="__codelineno-17-6"></a>
-<a id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="w">    </span><span class="c1">// Ejecutar el flujo de trabajo de saludo</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="w">    </span><span class="c1">// Run the greeting workflow</span>
 <a id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="w">    </span><span class="n">GREETING_WORKFLOW</span><span class="o">(</span><span class="n">names</span><span class="o">)</span>
 <a id="__codelineno-17-9" name="__codelineno-17-9"></a>
-<a id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="w">    </span><span class="c1">// Ejecutar el flujo de trabajo de transformación</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="w">    </span><span class="c1">// Run the transform workflow</span>
 <a id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="w">    </span><span class="n">TRANSFORM_WORKFLOW</span><span class="o">(</span><span class="n">GREETING_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">timestamped</span><span class="o">)</span>
 <a id="__codelineno-17-12" name="__codelineno-17-12"></a>
-<a id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="w">    </span><span class="c1">// Ver resultados</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="w">    </span><span class="c1">// View results</span>
 <a id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="w">    </span><span class="n">TRANSFORM_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">upper</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;Uppercase: $it&quot;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="w">    </span><span class="n">TRANSFORM_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">reversed</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;Reversed: $it&quot;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-17-16" name="__codelineno-17-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Ejecute el pipeline completo:</p>
+<p>Run the complete pipeline:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Salida del comando</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="go">Launching `main.nf` [sick_kimura] DSL2 - revision: 8dc45fc6a8</span>
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="go">executor &gt;  local (13)</span>
@@ -4337,103 +4653,103 @@ El contenido del flujo de trabajo también se coloca dentro del bloque <code>mai
 <a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="go">Reversed: /workspaces/training/side_quests/workflows_of_workflows/work/f0/74ba4a10d9ef5c82f829d1c154d0f6/REVERSED-UPPER-timestamped_Alice-output.txt</span>
 </code></pre></div>
 </details>
-<p>Si echa un vistazo a uno de esos archivos invertidos, verá que es la versión en mayúsculas del saludo invertido:</p>
+<p>If you take a look at one of those reversed files, you'll see that it's the uppercase version of the greeting reversed:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>cat<span class="w"> </span>/workspaces/training/side_quests/workflows_of_workflows/work/f0/74ba4a10d9ef5c82f829d1c154d0f6/REVERSED-UPPER-timestamped_Alice-output.txt
 </code></pre></div>
-<div class="highlight"><span class="filename">Contenido del archivo invertido</span><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">!ECILA ,OLLEH ]04:50:71 60-30-5202[</span>
+<div class="highlight"><span class="filename">Reversed file content</span><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">!ECILA ,OLLEH ]04:50:71 60-30-5202[</span>
 </code></pre></div>
-<h3 id="conclusion_1">Conclusión<a class="headerlink" href="#conclusion_1" title="Permanent link">&para;</a></h3>
-<p>Ahora debería tener un pipeline completo que:</p>
+<h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
+<p>You should now have a complete pipeline that:</p>
 <ul>
-<li>Procesa nombres a través del flujo de trabajo de saludo</li>
-<li>Alimenta los saludos con marca de tiempo al flujo de trabajo de transformación</li>
-<li>Produce versiones tanto en mayúsculas como invertidas de los saludos</li>
+<li>Processes names through the greeting workflow</li>
+<li>Feeds the timestamped greetings into the transform workflow</li>
+<li>Produces both uppercase and reversed versions of the greetings</li>
 </ul>
 <hr />
-<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
-<p>En esta misión secundaria, hemos explorado el poderoso concepto de composición de flujos de trabajo en Nextflow, que nos permite construir pipelines complejos a partir de componentes más pequeños y reutilizables.</p>
-<p>Este enfoque modular ofrece varias ventajas sobre los pipelines monolíticos:</p>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>In this side quest, we've explored the powerful concept of workflow composition in Nextflow, which allows us to build complex pipelines from smaller, reusable components.</p>
+<p>This modular approach offers several advantages over monolithic pipelines:</p>
 <ul>
-<li>Cada flujo de trabajo puede desarrollarse, probarse y depurarse de forma independiente</li>
-<li>Los flujos de trabajo pueden reutilizarse en diferentes pipelines</li>
-<li>La estructura general del pipeline se vuelve más legible y mantenible</li>
-<li>Los cambios en un flujo de trabajo no necesariamente afectan a otros si las interfaces permanecen consistentes</li>
-<li>Los puntos de entrada pueden configurarse para ejecutar diferentes partes de su pipeline según sea necesario</li>
+<li>Each workflow can be developed, tested, and debugged independently</li>
+<li>Workflows can be reused across different pipelines</li>
+<li>The overall pipeline structure becomes more readable and maintainable</li>
+<li>Changes to one workflow don't necessarily affect others if the interfaces remain consistent</li>
+<li>Entry points can be configured to run different parts of your pipeline as needed</li>
 </ul>
-<p><em>Es importante notar sin embargo que aunque llamar flujos de trabajo es un poco como llamar procesos, en realidad no es lo mismo. No puede, por ejemplo, ejecutar un flujo de trabajo N veces llamándolo con un canal de tamaño N - necesitaría pasar un canal de tamaño N al flujo de trabajo e iterar internamente.</em></p>
-<p>Aplicar estas técnicas en su propio trabajo le permitirá construir pipelines de Nextflow más sofisticados que puedan manejar tareas bioinformáticas complejas mientras permanecen mantenibles y escalables.</p>
-<h3 id="patrones-clave">Patrones clave<a class="headerlink" href="#patrones-clave" title="Permanent link">&para;</a></h3>
+<p><em>It's important to note however that while calling workflows is a bit like calling processes, it's not actually the same thing. You can't, for example, run a workflow N times by calling it with a channel of size N - you would need to pass a channel of size N to the workflow and iterate internally.</em></p>
+<p>Applying these techniques in your own work will enable you to build more sophisticated Nextflow pipelines that can handle complex bioinformatics tasks while remaining maintainable and scalable.</p>
+<h3 id="key-patterns">Key patterns<a class="headerlink" href="#key-patterns" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
-<p><strong>Estructura de flujo de trabajo</strong>: Definimos entradas y salidas claras para cada flujo de trabajo usando la sintaxis <code>take:</code> y <code>emit:</code>, creando interfaces bien definidas entre componentes, y envolvimos la lógica del flujo de trabajo dentro del bloque <code>main:</code>.</p>
+<p><strong>Workflow structure</strong>: We defined clear inputs and outputs for each workflow using the <code>take:</code> and <code>emit:</code> syntax, creating well-defined interfaces between components, and wrapped workflow logic within the <code>main:</code> block.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">workflow</span><span class="w"> </span><span class="n">EXAMPLE_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span><span class="nl">take:</span>
-<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">        </span><span class="c1">// Los canales de entrada se declaran aquí</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">        </span><span class="c1">// Input channels are declared here</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="w">        </span><span class="n">input_ch</span>
 <a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>
 <a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="w">        </span><span class="c1">// La lógica del flujo de trabajo va aquí</span>
-<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="w">        </span><span class="c1">// Aquí es donde se llaman los procesos y se manipulan los canales</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="w">        </span><span class="c1">// Workflow logic goes here</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="w">        </span><span class="c1">// This is where processes are called and channels are manipulated</span>
 <a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="w">        </span><span class="n">result_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SOME_PROCESS</span><span class="o">(</span><span class="n">input_ch</span><span class="o">)</span>
 <a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>
 <a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="w">    </span><span class="nl">emit:</span>
-<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="w">        </span><span class="c1">// Los canales de salida se declaran aquí</span>
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="w">        </span><span class="c1">// Output channels are declared here</span>
 <a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="w">        </span><span class="n">output_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result_ch</span>
 <a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a><span class="o">}</span>
 </code></pre></div>
 </li>
 <li>
-<p><strong>Importaciones de flujos de trabajo:</strong> Construimos dos módulos de flujos de trabajo independientes y los importamos en un pipeline principal con declaraciones include.</p>
+<p><strong>Workflow imports:</strong> We built two independent workflow modules and imported them into a main pipeline with include statements.</p>
 <ul>
-<li>Incluir un único flujo de trabajo</li>
+<li>Include a single workflow</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">WORKFLOW_NAME</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./path/to/workflow&#39;</span>
 </code></pre></div>
 <ul>
-<li>Incluir múltiples flujos de trabajo</li>
+<li>Include multiple workflows</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">WORKFLOW_A</span><span class="o">;</span><span class="w"> </span><span class="n">WORKFLOW_B</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./path/to/workflows&#39;</span>
 </code></pre></div>
 <ul>
-<li>Incluir con alias para evitar conflictos de nombres</li>
+<li>Include with alias to avoid name conflicts</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">WORKFLOW_A</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">WORKFLOW_A_ALIAS</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./path/to/workflow&#39;</span>
 </code></pre></div>
 </li>
 <li>
-<p><strong>Puntos de entrada</strong>: Nextflow requiere un flujo de trabajo de entrada sin nombre para saber dónde comenzar la ejecución. Este flujo de trabajo de entrada llama a sus flujos de trabajo con nombre.</p>
+<p><strong>Entry points</strong>: Nextflow requires an unnamed entry workflow to know where to start execution. This entry workflow calls your named workflows.</p>
 <ul>
-<li>Flujo de trabajo sin nombre (punto de entrada)</li>
+<li>Unnamed workflow (entry point)</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">    </span><span class="c1">// Este es el punto de entrada cuando se ejecuta el script</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">    </span><span class="c1">// This is the entry point when the script is run</span>
 <a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">    </span><span class="n">NAMED_WORKFLOW</span><span class="o">(</span><span class="n">input_ch</span><span class="o">)</span>
 <a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="o">}</span>
 </code></pre></div>
 <ul>
-<li>Flujo de trabajo con nombre (llamado desde el flujo de trabajo de entrada)</li>
+<li>Named workflow (called from entry workflow)</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">workflow</span><span class="w"> </span><span class="n">NAMED_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">    </span><span class="c1">// Debe ser llamado desde el flujo de trabajo de entrada</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">    </span><span class="c1">// Must be called from the entry workflow</span>
 <a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="o">}</span>
 </code></pre></div>
 </li>
 <li>
-<p><strong>Gestión del flujo de datos:</strong> Aprendimos cómo acceder a las salidas del flujo de trabajo usando la notación de espacio de nombres (<code>WORKFLOW_NAME.out.channel_name</code>) y pasarlas a otros flujos de trabajo.</p>
+<p><strong>Managing data flow:</strong> We learned how to access workflow outputs using the namespace notation (<code>WORKFLOW_NAME.out.channel_name</code>) and pass them to other workflows.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>WORKFLOW_A(input_ch)
 <a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>WORKFLOW_B(WORKFLOW_A.out.some_channel)
 </code></pre></div>
 </li>
 </ol>
-<h3 id="recursos-adicionales">Recursos adicionales<a class="headerlink" href="#recursos-adicionales" title="Permanent link">&para;</a></h3>
+<h3 id="additional-resources">Additional resources<a class="headerlink" href="#additional-resources" title="Permanent link">&para;</a></h3>
 <ul>
-<li><a href="https://www.nextflow.io/docs/latest/workflow.html">Documentación de Workflow de Nextflow</a></li>
-<li><a href="https://www.nextflow.io/docs/latest/operator.html">Referencia de Operadores de Canal</a></li>
-<li><a href="https://www.nextflow.io/docs/latest/process.html#errorstrategy">Documentación de Error Strategy</a></li>
+<li><a href="https://www.nextflow.io/docs/latest/workflow.html">Nextflow Workflow Documentation</a></li>
+<li><a href="https://www.nextflow.io/docs/latest/operator.html">Channel Operators Reference</a></li>
+<li><a href="https://www.nextflow.io/docs/latest/process.html#errorstrategy">Error Strategy Documentation</a></li>
 </ul>
 <hr />
-<h2 id="que-sigue">¿Qué sigue?<a class="headerlink" href="#que-sigue" title="Permanent link">&para;</a></h2>
-<p>Regrese al <a href="../">menú de Misiones Secundarias</a> o haga clic en el botón en la parte inferior derecha de la página para pasar al siguiente tema de la lista.</p><style type="text/css">.quiz {
+<h2 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
+<p>Return to the <a href="../">menu of Side Quests</a> or click the button in the bottom right of the page to move on to the next topic in the list.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -6131,7 +6447,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../splitting_and_grouping/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: División y Agrupación">
+          <a href="../nf_test/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Testing with nf-test">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -6141,20 +6457,20 @@ window.mkdocsQuizConfig = {
                 Anterior
               </span>
               <div class="md-ellipsis">
-                División y Agrupación
+                Testing with nf-test
               </div>
             </div>
           </a>
         
         
           
-          <a href="../debugging/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Depuración de Flujos de Trabajo">
+          <a href="../working_with_files/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: File input processing">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                Depuración de Flujos de Trabajo
+                File input processing
               </div>
             </div>
             <div class="md-footer__button md-icon">

@@ -11,10 +11,10 @@
         <link rel="canonical" href="https://training.nextflow.io/tr/side_quests/splitting_and_grouping/">
       
       
-        <link rel="prev" href="../working_with_files/">
+        <link rel="prev" href="../metadata/">
       
       
-        <link rel="next" href="../workflows_of_workflows/">
+        <link rel="next" href="../nf_test/">
       
       
         
@@ -47,7 +47,7 @@
     
     
       
-        <title>Bölme ve Gruplama - training.nextflow.io</title>
+        <title>Splitting and Grouping - training.nextflow.io</title>
       
     
     
@@ -157,7 +157,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#bolme-ve-gruplama" class="md-skip">
+        <a href="#splitting-and-grouping" class="md-skip">
           Ana içeriğe geç
         </a>
       
@@ -196,7 +196,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Bölme ve Gruplama
+              Splitting and Grouping
             
           </span>
         </div>
@@ -2345,7 +2345,35 @@
   <span class="md-ellipsis">
     
   
-    Geliştirme Ortamı
+    Development Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../essential_scripting_patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Essential Nextflow Scripting Patterns
   
 
     
@@ -2373,35 +2401,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata ve meta map'ler
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../working_with_files/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Dosya Girdi İşleme
+    Metadata and meta maps
   
 
     
@@ -2438,7 +2438,7 @@
   <span class="md-ellipsis">
     
   
-    Bölme ve Gruplama
+    Splitting and Grouping
   
 
     
@@ -2456,7 +2456,7 @@
   <span class="md-ellipsis">
     
   
-    Bölme ve Gruplama
+    Splitting and Grouping
   
 
     
@@ -2476,40 +2476,40 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#ogrenme-hedefleri" class="md-nav__link">
+  <a href="#learning-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Öğrenme hedefleri
+        Learning goals
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#on-kosullar" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ön koşullar
+        Prerequisites
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#0-baslangc" class="md-nav__link">
+  <a href="#0-get-started" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Başlangıç
+        0. Get started
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="0. Başlangıç">
+    <nav class="md-nav" aria-label="0. Get started">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#egitim-codespaceini-acn" class="md-nav__link">
+  <a href="#open-the-training-codespace" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Eğitim codespace'ini açın
+        Open the training codespace
       
     </span>
   </a>
@@ -2517,10 +2517,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#proje-dizinine-gecin" class="md-nav__link">
+  <a href="#move-into-the-project-directory" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Proje dizinine geçin
+        Move into the project directory
       
     </span>
   </a>
@@ -2528,10 +2528,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#materyalleri-inceleyin" class="md-nav__link">
+  <a href="#review-the-materials" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Materyalleri inceleyin
+        Review the materials
       
     </span>
   </a>
@@ -2539,10 +2539,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#gorevi-inceleyin" class="md-nav__link">
+  <a href="#review-the-assignment" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Görevi inceleyin
+        Review the assignment
       
     </span>
   </a>
@@ -2550,10 +2550,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#hazrlk-kontrol-listesi" class="md-nav__link">
+  <a href="#readiness-checklist" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Hazırlık kontrol listesi
+        Readiness checklist
       
     </span>
   </a>
@@ -2564,22 +2564,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-ornek-verilerini-okuma" class="md-nav__link">
+  <a href="#1-read-in-sample-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Örnek verilerini okuma
+        1. Read in sample data
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Örnek verilerini okuma">
+    <nav class="md-nav" aria-label="1. Read in sample data">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-splitcsv-ile-ornek-verilerini-okuma-ve-meta-mapler-olusturma" class="md-nav__link">
+  <a href="#11-read-in-sample-data-with-splitcsv-and-create-meta-maps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. splitCsv ile örnek verilerini okuma ve meta map'ler oluşturma
+        1.1. Read in sample data with splitCsv and create meta maps
       
     </span>
   </a>
@@ -2590,22 +2590,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-verileri-filtreleme-ve-donusturme" class="md-nav__link">
+  <a href="#2-filter-and-transform-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Verileri filtreleme ve dönüştürme
+        2. Filter and transform data
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Verileri filtreleme ve dönüştürme">
+    <nav class="md-nav" aria-label="2. Filter and transform data">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-filter-ile-verileri-filtreleme" class="md-nav__link">
+  <a href="#21-filter-data-with-filter" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. filter ile verileri filtreleme
+        2.1. Filter data with filter
       
     </span>
   </a>
@@ -2613,10 +2613,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-ayr-filtrelenmis-kanallar-olusturma" class="md-nav__link">
+  <a href="#22-create-separate-filtered-channels" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Ayrı filtrelenmiş kanallar oluşturma
+        2.2. Create separate filtered channels
       
     </span>
   </a>
@@ -2624,10 +2624,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozetle" class="md-nav__link">
+  <a href="#takeaway" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özetle
+        Takeaway
       
     </span>
   </a>
@@ -2638,34 +2638,34 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-kanallar-tanmlayclara-gore-birlestirme" class="md-nav__link">
+  <a href="#3-joining-channels-by-identifiers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Kanalları tanımlayıcılara göre birleştirme
+        3. Joining channels by identifiers
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Kanalları tanımlayıcılara göre birleştirme">
+    <nav class="md-nav" aria-label="3. Joining channels by identifiers">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-hasta-kimligine-gore-birlestirmek-icin-map-ve-join-kullanma" class="md-nav__link">
+  <a href="#31-use-map-and-join-to-combine-based-on-patient-id" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Hasta kimliğine göre birleştirmek için map ve join kullanma
+        3.1. Use map and join to combine based on patient ID
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3.1. Hasta kimliğine göre birleştirmek için map ve join kullanma">
+    <nav class="md-nav" aria-label="3.1. Use map and join to combine based on patient ID">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#311-veri-yapsn-kontrol-etme" class="md-nav__link">
+  <a href="#311-check-the-data-structure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.1. Veri yapısını kontrol etme
+        3.1.1. Check the data structure
       
     </span>
   </a>
@@ -2673,10 +2673,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#312-id-alann-izole-etme" class="md-nav__link">
+  <a href="#312-isolate-the-id-field" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.2. id alanını izole etme
+        3.1.2. Isolate the id field
       
     </span>
   </a>
@@ -2684,10 +2684,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#313-iki-kanal-birlestirme" class="md-nav__link">
+  <a href="#313-combine-the-two-channels" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.3. İki kanalı birleştirme
+        3.1.3. Combine the two channels
       
     </span>
   </a>
@@ -2700,10 +2700,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-birden-fazla-alanda-birlestirme" class="md-nav__link">
+  <a href="#32-join-on-multiple-fields" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Birden fazla alanda birleştirme
+        3.2. Join on multiple fields
       
     </span>
   </a>
@@ -2711,10 +2711,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-yeni-bir-birlestirme-anahtar-olusturmak-icin-submap-kullanma" class="md-nav__link">
+  <a href="#33-use-submap-to-create-a-new-joining-key" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. Yeni bir birleştirme anahtarı oluşturmak için subMap kullanma
+        3.3. Use subMap to create a new joining key
       
     </span>
   </a>
@@ -2722,10 +2722,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-mapte-adlandrlms-closure-kullanma" class="md-nav__link">
+  <a href="#34-use-a-named-closure-in-map" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4. map'te adlandırılmış closure kullanma
+        3.4. Use a named closure in map
       
     </span>
   </a>
@@ -2733,10 +2733,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35-veri-cogaltmasn-azaltma" class="md-nav__link">
+  <a href="#35-reduce-duplication-of-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5. Veri çoğaltmasını azaltma
+        3.5. Reduce duplication of data
       
     </span>
   </a>
@@ -2744,10 +2744,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#36-gereksiz-bilgileri-kaldrma" class="md-nav__link">
+  <a href="#36-remove-redundant-information" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.6. Gereksiz bilgileri kaldırma
+        3.6. Remove redundant information
       
     </span>
   </a>
@@ -2755,58 +2755,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozetle_1" class="md-nav__link">
+  <a href="#takeaway_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özetle
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>  <li class="md-nav__item">
-  <a href="#4-ornekleri-aralklara-yayma" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Örnekleri aralıklara yayma
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. Örnekleri aralıklara yayma">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#41-combine-kullanarak-ornekleri-aralklara-yayma" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.1. combine kullanarak örnekleri aralıklara yayma
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#42-kanal-duzenleme" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.2. Kanalı düzenleme
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ozetle_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Özetle
+        Takeaway
       
     </span>
   </a>
@@ -2817,22 +2769,44 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#5-grouptuple-kullanarak-ornekleri-toplama" class="md-nav__link">
+  <a href="#4-spread-samples-intervals" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. groupTuple kullanarak örnekleri toplama
+        4. Spread samples intervals
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. groupTuple kullanarak örnekleri toplama">
+    <nav class="md-nav" aria-label="4. Spread samples intervals">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ozetle_3" class="md-nav__link">
+  <a href="#41-spread-samples-over-intervals-using-combine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özetle
+        4.1. Spread samples over intervals using combine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-organize-the-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Organize the channel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Takeaway
       
     </span>
   </a>
@@ -2843,33 +2817,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#ozet" class="md-nav__link">
+  <a href="#5-aggregating-samples-using-grouptuple" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        5. Aggregating samples using groupTuple
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Özet">
+    <nav class="md-nav" aria-label="5. Aggregating samples using groupTuple">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#temel-desenler" class="md-nav__link">
+  <a href="#takeaway_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Temel desenler
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ek-kaynaklar" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Ek kaynaklar
+        Takeaway
       
     </span>
   </a>
@@ -2880,10 +2843,47 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#srada-ne-var" class="md-nav__link">
+  <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Sırada ne var?
+        Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's next?
       
     </span>
   </a>
@@ -3091,6 +3091,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../nf_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing with nf-test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../workflows_of_workflows/" class="md-nav__link">
         
   
@@ -3098,7 +3126,35 @@
   <span class="md-ellipsis">
     
   
-    İç İçe Workflow'lar
+    Workflows of Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../working_with_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File input processing
   
 
     
@@ -3126,7 +3182,82 @@
   <span class="md-ellipsis">
     
   
-    İş Akışlarında Hata Ayıklama
+    Debugging Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_11" id="__nav_6_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Plugin Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Development
   
 
     
@@ -3147,14 +3278,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../essential_scripting_patterns/" class="md-nav__link">
+      <a href="../plugin_development/01_plugin_basics/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Temel Nextflow Kodlama Kalıpları
+    Part 1: Plugin Basics
   
 
     
@@ -3175,14 +3306,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../nf-test/" class="md-nav__link">
+      <a href="../plugin_development/02_create_project/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    nf-test ile Test Etme
+    Part 2: Create a Plugin Project
   
 
     
@@ -3191,6 +3322,182 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/03_custom_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 3: Custom Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/04_build_and_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 4: Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/05_observers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 5: Trace Observers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/06_configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 6: Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/next_steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Next Steps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -3639,40 +3946,40 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#ogrenme-hedefleri" class="md-nav__link">
+  <a href="#learning-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Öğrenme hedefleri
+        Learning goals
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#on-kosullar" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ön koşullar
+        Prerequisites
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#0-baslangc" class="md-nav__link">
+  <a href="#0-get-started" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Başlangıç
+        0. Get started
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="0. Başlangıç">
+    <nav class="md-nav" aria-label="0. Get started">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#egitim-codespaceini-acn" class="md-nav__link">
+  <a href="#open-the-training-codespace" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Eğitim codespace'ini açın
+        Open the training codespace
       
     </span>
   </a>
@@ -3680,10 +3987,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#proje-dizinine-gecin" class="md-nav__link">
+  <a href="#move-into-the-project-directory" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Proje dizinine geçin
+        Move into the project directory
       
     </span>
   </a>
@@ -3691,10 +3998,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#materyalleri-inceleyin" class="md-nav__link">
+  <a href="#review-the-materials" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Materyalleri inceleyin
+        Review the materials
       
     </span>
   </a>
@@ -3702,10 +4009,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#gorevi-inceleyin" class="md-nav__link">
+  <a href="#review-the-assignment" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Görevi inceleyin
+        Review the assignment
       
     </span>
   </a>
@@ -3713,10 +4020,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#hazrlk-kontrol-listesi" class="md-nav__link">
+  <a href="#readiness-checklist" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Hazırlık kontrol listesi
+        Readiness checklist
       
     </span>
   </a>
@@ -3727,22 +4034,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-ornek-verilerini-okuma" class="md-nav__link">
+  <a href="#1-read-in-sample-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Örnek verilerini okuma
+        1. Read in sample data
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Örnek verilerini okuma">
+    <nav class="md-nav" aria-label="1. Read in sample data">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-splitcsv-ile-ornek-verilerini-okuma-ve-meta-mapler-olusturma" class="md-nav__link">
+  <a href="#11-read-in-sample-data-with-splitcsv-and-create-meta-maps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. splitCsv ile örnek verilerini okuma ve meta map'ler oluşturma
+        1.1. Read in sample data with splitCsv and create meta maps
       
     </span>
   </a>
@@ -3753,22 +4060,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-verileri-filtreleme-ve-donusturme" class="md-nav__link">
+  <a href="#2-filter-and-transform-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Verileri filtreleme ve dönüştürme
+        2. Filter and transform data
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Verileri filtreleme ve dönüştürme">
+    <nav class="md-nav" aria-label="2. Filter and transform data">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-filter-ile-verileri-filtreleme" class="md-nav__link">
+  <a href="#21-filter-data-with-filter" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. filter ile verileri filtreleme
+        2.1. Filter data with filter
       
     </span>
   </a>
@@ -3776,10 +4083,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-ayr-filtrelenmis-kanallar-olusturma" class="md-nav__link">
+  <a href="#22-create-separate-filtered-channels" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Ayrı filtrelenmiş kanallar oluşturma
+        2.2. Create separate filtered channels
       
     </span>
   </a>
@@ -3787,10 +4094,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozetle" class="md-nav__link">
+  <a href="#takeaway" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özetle
+        Takeaway
       
     </span>
   </a>
@@ -3801,34 +4108,34 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-kanallar-tanmlayclara-gore-birlestirme" class="md-nav__link">
+  <a href="#3-joining-channels-by-identifiers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Kanalları tanımlayıcılara göre birleştirme
+        3. Joining channels by identifiers
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Kanalları tanımlayıcılara göre birleştirme">
+    <nav class="md-nav" aria-label="3. Joining channels by identifiers">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-hasta-kimligine-gore-birlestirmek-icin-map-ve-join-kullanma" class="md-nav__link">
+  <a href="#31-use-map-and-join-to-combine-based-on-patient-id" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Hasta kimliğine göre birleştirmek için map ve join kullanma
+        3.1. Use map and join to combine based on patient ID
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3.1. Hasta kimliğine göre birleştirmek için map ve join kullanma">
+    <nav class="md-nav" aria-label="3.1. Use map and join to combine based on patient ID">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#311-veri-yapsn-kontrol-etme" class="md-nav__link">
+  <a href="#311-check-the-data-structure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.1. Veri yapısını kontrol etme
+        3.1.1. Check the data structure
       
     </span>
   </a>
@@ -3836,10 +4143,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#312-id-alann-izole-etme" class="md-nav__link">
+  <a href="#312-isolate-the-id-field" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.2. id alanını izole etme
+        3.1.2. Isolate the id field
       
     </span>
   </a>
@@ -3847,10 +4154,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#313-iki-kanal-birlestirme" class="md-nav__link">
+  <a href="#313-combine-the-two-channels" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.3. İki kanalı birleştirme
+        3.1.3. Combine the two channels
       
     </span>
   </a>
@@ -3863,10 +4170,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-birden-fazla-alanda-birlestirme" class="md-nav__link">
+  <a href="#32-join-on-multiple-fields" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Birden fazla alanda birleştirme
+        3.2. Join on multiple fields
       
     </span>
   </a>
@@ -3874,10 +4181,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-yeni-bir-birlestirme-anahtar-olusturmak-icin-submap-kullanma" class="md-nav__link">
+  <a href="#33-use-submap-to-create-a-new-joining-key" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. Yeni bir birleştirme anahtarı oluşturmak için subMap kullanma
+        3.3. Use subMap to create a new joining key
       
     </span>
   </a>
@@ -3885,10 +4192,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-mapte-adlandrlms-closure-kullanma" class="md-nav__link">
+  <a href="#34-use-a-named-closure-in-map" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4. map'te adlandırılmış closure kullanma
+        3.4. Use a named closure in map
       
     </span>
   </a>
@@ -3896,10 +4203,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35-veri-cogaltmasn-azaltma" class="md-nav__link">
+  <a href="#35-reduce-duplication-of-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5. Veri çoğaltmasını azaltma
+        3.5. Reduce duplication of data
       
     </span>
   </a>
@@ -3907,10 +4214,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#36-gereksiz-bilgileri-kaldrma" class="md-nav__link">
+  <a href="#36-remove-redundant-information" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.6. Gereksiz bilgileri kaldırma
+        3.6. Remove redundant information
       
     </span>
   </a>
@@ -3918,58 +4225,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozetle_1" class="md-nav__link">
+  <a href="#takeaway_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özetle
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>  <li class="md-nav__item">
-  <a href="#4-ornekleri-aralklara-yayma" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Örnekleri aralıklara yayma
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. Örnekleri aralıklara yayma">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#41-combine-kullanarak-ornekleri-aralklara-yayma" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.1. combine kullanarak örnekleri aralıklara yayma
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#42-kanal-duzenleme" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.2. Kanalı düzenleme
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ozetle_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Özetle
+        Takeaway
       
     </span>
   </a>
@@ -3980,22 +4239,44 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#5-grouptuple-kullanarak-ornekleri-toplama" class="md-nav__link">
+  <a href="#4-spread-samples-intervals" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. groupTuple kullanarak örnekleri toplama
+        4. Spread samples intervals
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. groupTuple kullanarak örnekleri toplama">
+    <nav class="md-nav" aria-label="4. Spread samples intervals">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ozetle_3" class="md-nav__link">
+  <a href="#41-spread-samples-over-intervals-using-combine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özetle
+        4.1. Spread samples over intervals using combine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-organize-the-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Organize the channel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Takeaway
       
     </span>
   </a>
@@ -4006,33 +4287,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#ozet" class="md-nav__link">
+  <a href="#5-aggregating-samples-using-grouptuple" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        5. Aggregating samples using groupTuple
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Özet">
+    <nav class="md-nav" aria-label="5. Aggregating samples using groupTuple">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#temel-desenler" class="md-nav__link">
+  <a href="#takeaway_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Temel desenler
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ek-kaynaklar" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Ek kaynaklar
+        Takeaway
       
     </span>
   </a>
@@ -4043,10 +4313,47 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#srada-ne-var" class="md-nav__link">
+  <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Sırada ne var?
+        Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's next?
       
     </span>
   </a>
@@ -4292,7 +4599,7 @@
 
  
 <a
-  href="https://github.com/nextflow-io/training/edit/master/docs/side_quests/splitting_and_grouping.md"
+  href="https://github.com/nextflow-io/training/edit/master/docs/side_quests/splitting_and_grouping/index.md"
   title="Düzenle"
   class="md-content__button md-icon"
   rel="edit"
@@ -4309,52 +4616,57 @@
 </a>
  
 
-<h1 id="bolme-ve-gruplama">Bölme ve Gruplama<a class="headerlink" href="#bolme-ve-gruplama" title="Permanent link">&para;</a></h1>
-<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Yapay zeka destekli çeviri - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">daha fazla bilgi ve iyileştirme önerileri</a></span></p>
-<p>Nextflow, verilerle esnek bir şekilde çalışmak için güçlü araçlar sağlar. Temel bir özellik, verileri farklı akışlara bölmek ve ardından ilişkili öğeleri tekrar birleştirmektir. Bu, özellikle analiz için sonuçları birleştirmeden önce farklı örnek türlerini ayrı ayrı işlemeniz gereken biyoinformatik iş akışlarında değerlidir.</p>
-<p>Bunu mektup sıralama gibi düşünün: mektupları varış yerine göre ayırırsınız, her yığını farklı şekilde işlersiniz, ardından aynı kişiye giden öğeleri yeniden birleştirirsiniz. Nextflow, bilimsel verilerle bunu başarmak için özel operatörler kullanır. Bu yaklaşım aynı zamanda dağıtık hesaplama ve biyoinformatik iş akışlarında yaygın olarak <strong>scatter/gather</strong> deseni olarak bilinir.</p>
-<p>Nextflow'un kanal sistemi bu esnekliğin merkezindedir. Kanallar, iş akışınızın farklı bölümlerini bağlayarak verilerin analiziniz boyunca akmasını sağlar. Tek bir veri kaynağından birden fazla kanal oluşturabilir, her kanalı farklı şekilde işleyebilir ve gerektiğinde kanalları tekrar birleştirebilirsiniz. Bu yaklaşım, karmaşık biyoinformatik analizlerin dallanma ve birleşme yollarını doğal olarak yansıtan iş akışları tasarlamanıza olanak tanır.</p>
-<h3 id="ogrenme-hedefleri">Öğrenme hedefleri<a class="headerlink" href="#ogrenme-hedefleri" title="Permanent link">&para;</a></h3>
-<p>Bu yan görevde, Nextflow'un kanal operatörlerini kullanarak verileri bölmeyi ve gruplamayı öğreneceksiniz.
-Örnek bilgileri ve ilişkili veri dosyalarını içeren bir CSV dosyasıyla başlayacak, ardından bu verileri manipüle edip yeniden düzenleyeceğiz.</p>
-<p>Bu yan görevin sonunda, aşağıdaki teknikleri kullanarak veri akışlarını etkili bir şekilde ayırıp birleştirebileceksiniz:</p>
+<h1 id="splitting-and-grouping">Splitting and Grouping<a class="headerlink" href="#splitting-and-grouping" title="Permanent link">&para;</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Translation in Progress</p>
+<p>This page has not yet been translated into your language.
+You are viewing the original English content.</p>
+<p>Want to help? See our <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">translation guide</a>.</p>
+</div>
+<p>Nextflow provides powerful tools for working with data flexibly. A key capability is splitting data into different streams and then grouping related items back together. This is especially valuable in bioinformatics workflows where you need to process different types of samples separately before combining results for analysis.</p>
+<p>Think of it like sorting mail: you separate letters by destination, process each pile differently, then recombine items going to the same person. Nextflow uses special operators to accomplish this with scientific data. This approach is also commonly known as the <strong>scatter/gather</strong> pattern in distributed computing and bioinformatics workflows.</p>
+<p>Nextflow's channel system is at the heart of this flexibility. Channels connect different parts of your workflow, allowing data to flow through your analysis. You can create multiple channels from a single data source, process each channel differently, and then merge channels back together when needed. This approach lets you design workflows that naturally mirror the branching and converging paths of complex bioinformatics analyses.</p>
+<h3 id="learning-goals">Learning goals<a class="headerlink" href="#learning-goals" title="Permanent link">&para;</a></h3>
+<p>In this side quest, you'll learn to split and group data using Nextflow's channel operators.
+We'll start with a CSV file containing sample information and associated data files, then manipulate and reorganize this data.</p>
+<p>By the end of this side quest, you'll be able to separate and combine data streams effectively, using the following techniques:</p>
 <ul>
-<li><code>splitCsv</code> kullanarak dosyalardan veri okuma</li>
-<li><code>filter</code> ve <code>map</code> ile verileri filtreleme ve dönüştürme</li>
-<li><code>join</code> ve <code>groupTuple</code> kullanarak ilişkili verileri birleştirme</li>
-<li>Paralel işleme için <code>combine</code> ile veri kombinasyonları oluşturma</li>
-<li><code>subMap</code> ve tekilleştirme stratejileri kullanarak veri yapısını optimize etme</li>
-<li>Kanal yapılarını manipüle etmenize yardımcı olacak adlandırılmış closure'lar ile yeniden kullanılabilir fonksiyonlar oluşturma</li>
+<li>Read data from files using <code>splitCsv</code></li>
+<li>Filter and transform data with <code>filter</code> and <code>map</code></li>
+<li>Combine related data using <code>join</code> and <code>groupTuple</code></li>
+<li>Create data combinations with <code>combine</code> for parallel processing</li>
+<li>Optimize data structure using <code>subMap</code> and deduplication strategies</li>
+<li>Build reusable functions with named closures to help you manipulate channel structures</li>
 </ul>
-<p>Bu beceriler, temiz ve bakımı kolay kod yapısını korurken birden fazla girdi dosyası ve farklı veri türlerini verimli bir şekilde işleyebilen iş akışları oluşturmanıza yardımcı olacaktır.</p>
-<h3 id="on-kosullar">Ön koşullar<a class="headerlink" href="#on-kosullar" title="Permanent link">&para;</a></h3>
-<p>Bu yan göreve başlamadan önce:</p>
+<p>These skills will help you build workflows that can handle multiple input files and different types of data efficiently, while maintaining clean, maintainable code structure.</p>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<p>Before taking on this side quest, you should:</p>
 <ul>
-<li><a href="../hello_nextflow/README.md">Hello Nextflow</a> eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmalısınız.</li>
-<li>Temel Nextflow kavramları ve mekanizmalarını (süreçler, kanallar, operatörler, dosyalarla çalışma, meta veri) rahatça kullanabiliyor olmalısınız.</li>
+<li>Have completed the <a href="../hello_nextflow/README.md">Hello Nextflow</a> tutorial or equivalent beginner's course.</li>
+<li>Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators, working with files, meta data)</li>
 </ul>
-<p><strong>İsteğe bağlı:</strong> Önce <a href="../metadata/">İş akışlarında meta veri</a> yan görevini tamamlamanızı öneririz.
-Bu, burada yoğun şekilde kullanacağımız <code>splitCsv</code> ile CSV dosyalarını okuma ve meta map oluşturma temellerini kapsar.</p>
+<p><strong>Optional:</strong> We recommend completing the <a href="../metadata/">Metadata in workflows</a> side quest first.
+That covers the fundamentals of reading CSV files with <code>splitCsv</code> and creating meta maps, which we'll use heavily here.</p>
 <hr />
-<h2 id="0-baslangc">0. Başlangıç<a class="headerlink" href="#0-baslangc" title="Permanent link">&para;</a></h2>
-<h4 id="egitim-codespaceini-acn">Eğitim codespace'ini açın<a class="headerlink" href="#egitim-codespaceini-acn" title="Permanent link">&para;</a></h4>
-<p>Henüz yapmadıysanız, <a href="../../envsetup/">Ortam Kurulumu</a>'nda açıklandığı gibi eğitim ortamını açtığınızdan emin olun.</p>
+<h2 id="0-get-started">0. Get started<a class="headerlink" href="#0-get-started" title="Permanent link">&para;</a></h2>
+<h4 id="open-the-training-codespace">Open the training codespace<a class="headerlink" href="#open-the-training-codespace" title="Permanent link">&para;</a></h4>
+<p>If you haven't yet done so, make sure to open the training environment as described in the <a href="../envsetup/index.md">Environment Setup</a>.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
-<h4 id="proje-dizinine-gecin">Proje dizinine geçin<a class="headerlink" href="#proje-dizinine-gecin" title="Permanent link">&para;</a></h4>
-<p>Bu eğitim için dosyaların bulunduğu dizine geçelim.</p>
+<h4 id="move-into-the-project-directory">Move into the project directory<a class="headerlink" href="#move-into-the-project-directory" title="Permanent link">&para;</a></h4>
+<p>Let's move into the directory where the files for this tutorial are located.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>side-quests/splitting_and_grouping
 </code></pre></div>
-<p>VSCode'u bu dizine odaklanacak şekilde ayarlayabilirsiniz:</p>
+<p>You can set VSCode to focus on this directory:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>code<span class="w"> </span>.
 </code></pre></div>
-<h4 id="materyalleri-inceleyin">Materyalleri inceleyin<a class="headerlink" href="#materyalleri-inceleyin" title="Permanent link">&para;</a></h4>
-<p>Bir ana iş akışı dosyası ve <code>samplesheet.csv</code> adlı bir örnek sayfası içeren bir <code>data</code> dizini bulacaksınız.</p>
+<h4 id="review-the-materials">Review the materials<a class="headerlink" href="#review-the-materials" title="Permanent link">&para;</a></h4>
+<p>You'll find a main workflow file and a <code>data</code> directory containing a samplesheet named <code>samplesheet.csv</code>.</p>
 <div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">.</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">├── data</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">│   └── samplesheet.csv</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="go">└── main.nf</span>
 </code></pre></div>
-<p>Örnek sayfası, hasta kimliği, örnek tekrar numarası, tür (normal veya tümör) ve varsayımsal veri dosyalarına giden yollar (gerçekte mevcut değil, ancak varmış gibi davranacağız) dahil olmak üzere farklı hastalardan alınan örnekler hakkında bilgi içerir.</p>
+<p>The samplesheet contains information about samples from different patients, including the patient ID, sample repeat number, type (normal or tumor), and paths to hypothetical data files (which don't actually exist, but we will pretend they do).</p>
 <div class="highlight"><span class="filename">samplesheet.csv</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">id,repeat,type,bam</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="go">patientA,1,normal,patientA_rep1_normal.bam</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">patientA,1,tumor,patientA_rep1_tumor.bam</span>
@@ -4365,37 +4677,37 @@ Bu, burada yoğun şekilde kullanacağımız <code>splitCsv</code> ile CSV dosya
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="go">patientC,1,normal,patientC_rep1_normal.bam</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="go">patientC,1,tumor,patientC_rep1_tumor.bam</span>
 </code></pre></div>
-<p>Bu örnek sayfası, üç hastadan (A, B, C) sekiz örnek listeler.</p>
-<p>Her hasta için <code>tumor</code> (genellikle tümör biyopsilerinden kaynaklanan) veya <code>normal</code> (sağlıklı doku veya kandan alınan) türünde örneklerimiz var.
-Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler gerçekleştirmek için eşleştirilmiş tümör/normal örnekleri kullanan deneysel bir modele karşılık geldiğini bilin.</p>
-<p>Özellikle A hastası için iki set teknik replik (tekrar) var.</p>
+<p>This samplesheet lists eight samples from three patients (A, B, C).</p>
+<p>For each patient, we have samples that are of type <code>tumor</code> (typically originating from tumor biopsies) or <code>normal</code> (taken from healthy tissue or blood).
+If you're not familiar with cancer analysis, just know that this corresponds to an experimental model that uses paired tumor/normal samples to perform contrastive analyses.</p>
+<p>For patient A specifically, we have two sets of technical replicates (repeats).</p>
 <div class="admonition note">
-<p class="admonition-title">Not</p>
-<p>Bu deneysel tasarıma aşina değilseniz endişelenmeyin; bu eğitimi anlamak için kritik değil.</p>
+<p class="admonition-title">Note</p>
+<p>Don't worry if you're not familiar with this experimental design, it's not critical for understanding this tutorial.</p>
 </div>
-<h4 id="gorevi-inceleyin">Görevi inceleyin<a class="headerlink" href="#gorevi-inceleyin" title="Permanent link">&para;</a></h4>
-<p>Göreviniz şunları yapacak bir Nextflow iş akışı yazmaktır:</p>
+<h4 id="review-the-assignment">Review the assignment<a class="headerlink" href="#review-the-assignment" title="Permanent link">&para;</a></h4>
+<p>Your challenge is to write a Nextflow workflow that will:</p>
 <ol>
-<li>Bir CSV dosyasından örnek verilerini <strong>okuma</strong> ve meta map'lerle yapılandırma</li>
-<li>Türe göre (normal vs tümör) örnekleri farklı kanallara <strong>ayırma</strong></li>
-<li>Hasta kimliği ve replik numarasına göre eşleşen tümör/normal çiftlerini <strong>birleştirme</strong></li>
-<li>Paralel işleme için örnekleri genomik aralıklara <strong>dağıtma</strong></li>
-<li>Aşağı akış analizi için ilişkili örnekleri tekrar <strong>gruplama</strong></li>
+<li><strong>Read</strong> sample data from a CSV file and structure it with meta maps</li>
+<li><strong>Separate</strong> samples into different channels based on type (normal vs tumor)</li>
+<li><strong>Join</strong> matched tumor/normal pairs by patient ID and replicate number</li>
+<li><strong>Distribute</strong> samples across genomic intervals for parallel processing</li>
+<li><strong>Group</strong> related samples back together for downstream analysis</li>
 </ol>
-<p>Bu, verileri bağımsız işleme için bölmeniz ve ardından karşılaştırmalı analiz için ilişkili öğeleri yeniden birleştirmeniz gereken yaygın bir biyoinformatik desenidir.</p>
-<h4 id="hazrlk-kontrol-listesi">Hazırlık kontrol listesi<a class="headerlink" href="#hazrlk-kontrol-listesi" title="Permanent link">&para;</a></h4>
-<p>Başlamaya hazır olduğunuzu düşünüyor musunuz?</p>
+<p>This represents a common bioinformatics pattern where you need to split data for independent processing, then recombine related items for comparative analysis.</p>
+<h4 id="readiness-checklist">Readiness checklist<a class="headerlink" href="#readiness-checklist" title="Permanent link">&para;</a></h4>
+<p>Think you're ready to dive in?</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Bu kursun amacını ve ön koşullarını anlıyorum</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Codespace'im çalışıyor</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Çalışma dizinini uygun şekilde ayarladım</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Görevi anlıyorum</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I understand the goal of this course and its prerequisites</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> My codespace is up and running</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I've set my working directory appropriately</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I understand the assignment</li>
 </ul>
-<p>Tüm kutuları işaretleyebiliyorsanız, başlamaya hazırsınız.</p>
+<p>If you can check all the boxes, you're good to go.</p>
 <hr />
-<h2 id="1-ornek-verilerini-okuma">1. Örnek verilerini okuma<a class="headerlink" href="#1-ornek-verilerini-okuma" title="Permanent link">&para;</a></h2>
-<h3 id="11-splitcsv-ile-ornek-verilerini-okuma-ve-meta-mapler-olusturma">1.1. <code>splitCsv</code> ile örnek verilerini okuma ve meta map'ler oluşturma<a class="headerlink" href="#11-splitcsv-ile-ornek-verilerini-okuma-ve-meta-mapler-olusturma" title="Permanent link">&para;</a></h3>
-<p><code>splitCsv</code> ile örnek verilerini okuyarak ve meta map deseninde organize ederek başlayalım. <code>main.nf</code> dosyasında, iş akışını zaten başlattığımızı göreceksiniz.</p>
+<h2 id="1-read-in-sample-data">1. Read in sample data<a class="headerlink" href="#1-read-in-sample-data" title="Permanent link">&para;</a></h2>
+<h3 id="11-read-in-sample-data-with-splitcsv-and-create-meta-maps">1.1. Read in sample data with <code>splitCsv</code> and create meta maps<a class="headerlink" href="#11-read-in-sample-data-with-splitcsv-and-create-meta-maps" title="Permanent link">&para;</a></h3>
+<p>Let's start by reading in the sample data with <code>splitCsv</code> and organizing it into the meta map pattern. In the <code>main.nf</code>, you'll see that we've already started the workflow.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
 <span class="normal"><a href="#__codelineno-4-2">2</a></span>
 <span class="normal"><a href="#__codelineno-4-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
@@ -4403,21 +4715,21 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 </span><a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <div class="admonition note">
-<p class="admonition-title">Not</p>
-<p>Bu eğitim boyunca, Nextflow kanalları olduklarını açıkça belirtmek için tüm kanal değişkenleri için <code>ch_</code> önekini kullanacağız.</p>
+<p class="admonition-title">Note</p>
+<p>Throughout this tutorial, we'll use the <code>ch_</code> prefix for all channel variables to clearly indicate they are Nextflow channels.</p>
 </div>
-<p><a href="../metadata/">İş akışlarında meta veri</a> yan görevini tamamladıysanız, bu deseni tanıyacaksınız. Meta veriyi dosya yollarından ayırmak için CSV'yi okumak ve verileri hemen bir meta map ile yapılandırmak için <code>splitCsv</code> kullanacağız.</p>
+<p>If you completed the <a href="../metadata/">Metadata in workflows</a> side quest, you'll recognize this pattern. We'll use <code>splitCsv</code> to read the CSV and immediately structure the data with a meta map to separate metadata from file paths.</p>
 <div class="admonition info">
-<p class="admonition-title">Bilgi</p>
-<p>Bu eğitimde <code>map</code> olarak adlandırılan iki farklı kavramla karşılaşacağız:</p>
+<p class="admonition-title">Info</p>
+<p>We'll encounter two different concepts called <code>map</code> in this training:</p>
 <ul>
-<li><strong>Veri yapısı</strong>: Anahtar-değer çiftlerini saklayan Groovy map (diğer dillerdeki sözlükler/hash'ler ile eşdeğer)</li>
-<li><strong>Kanal operatörü</strong>: Bir kanaldaki öğeleri dönüştüren <code>.map()</code> operatörü</li>
+<li><strong>Data structure</strong>: The Groovy map (equivalent to dictionaries/hashes in other languages) that stores key-value pairs</li>
+<li><strong>Channel operator</strong>: The <code>.map()</code> operator that transforms items in a channel</li>
 </ul>
-<p>Bağlamda hangisini kastettiğimizi açıklayacağız, ancak Nextflow ile çalışırken bu ayrımı anlamak önemlidir.</p>
+<p>We'll clarify which one we mean in context, but this distinction is important to understand when working with Nextflow.</p>
 </div>
-<p>Bu değişiklikleri <code>main.nf</code> dosyasına uygulayın:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Sonra</label><label for="__tabbed_1_2">Önce</label></div>
+<p>Apply these changes to <code>main.nf</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">After</label><label for="__tabbed_1_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-2">2</a></span>
@@ -4439,11 +4751,11 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 </div>
 </div>
 </div>
-<p>Bu, <code>splitCsv</code> işlemini (başlıklarla CSV'yi okuma) ve <code>map</code> işlemini (verileri <code>[meta, file]</code> tuple'ları olarak yapılandırma) tek adımda birleştirir. Bu değişikliği uygulayın ve pipeline'ı çalıştırın:</p>
+<p>This combines the <code>splitCsv</code> operation (reading the CSV with headers) and the <code>map</code> operation (structuring data as <code>[meta, file]</code> tuples) in one step. Apply that change and run the pipeline:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Komut çıktısı</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9</span>
@@ -4458,12 +4770,12 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 <a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="go">[[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>Artık her öğenin bir <code>[meta, file]</code> tuple'ı olduğu bir kanalımız var; meta veri, dosya yollarından ayrılmış durumda. Bu yapı, meta veri alanlarına göre iş yükümüzü bölmemize ve gruplamamıza olanak tanır.</p>
+<p>We now have a channel where each item is a <code>[meta, file]</code> tuple - metadata separated from file paths. This structure allows us to split and group our workload based on metadata fields.</p>
 <hr />
-<h2 id="2-verileri-filtreleme-ve-donusturme">2. Verileri filtreleme ve dönüştürme<a class="headerlink" href="#2-verileri-filtreleme-ve-donusturme" title="Permanent link">&para;</a></h2>
-<h3 id="21-filter-ile-verileri-filtreleme">2.1. <code>filter</code> ile verileri filtreleme<a class="headerlink" href="#21-filter-ile-verileri-filtreleme" title="Permanent link">&para;</a></h3>
-<p>Bir koşula göre verileri filtrelemek için <a href="https://www.nextflow.io/docs/latest/operator.html#filter"><code>filter</code> operatörünü</a> kullanabiliriz. Diyelim ki sadece normal örnekleri işlemek istiyoruz. Bunu <code>type</code> alanına göre verileri filtreleyerek yapabiliriz. Bunu <code>view</code> operatöründen önce ekleyelim.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Sonra</label><label for="__tabbed_2_2">Önce</label></div>
+<h2 id="2-filter-and-transform-data">2. Filter and transform data<a class="headerlink" href="#2-filter-and-transform-data" title="Permanent link">&para;</a></h2>
+<h3 id="21-filter-data-with-filter">2.1. Filter data with <code>filter</code><a class="headerlink" href="#21-filter-data-with-filter" title="Permanent link">&para;</a></h3>
+<p>We can use the <a href="https://www.nextflow.io/docs/latest/operator.html#filter"><code>filter</code> operator</a> to filter the data based on a condition. Let's say we only want to process normal samples. We can do this by filtering the data based on the <code>type</code> field. Let's insert this before the <code>view</code> operator.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">After</label><label for="__tabbed_2_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-2">2</a></span>
@@ -4497,11 +4809,11 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 </div>
 </div>
 </div>
-<p>Filtrelenmiş sonucu görmek için iş akışını tekrar çalıştırın:</p>
+<p>Run the workflow again to see the filtered result:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Komut çıktısı</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="go">Launching `main.nf` [admiring_brown] DSL2 - revision: 194d61704d</span>
@@ -4512,15 +4824,15 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 <a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="go">[[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]</span>
 </code></pre></div>
 </details>
-<p>Verileri başarıyla sadece normal örnekleri içerecek şekilde filtreledik. Bunun nasıl çalıştığını özetleyelim.</p>
-<p><code>filter</code> operatörü, kanaldaki her öğeye uygulanan bir closure alır. Closure <code>true</code> döndürürse öğe dahil edilir; <code>false</code> döndürürse öğe hariç tutulur.</p>
-<p>Bizim durumumuzda, sadece <code>meta.type == 'normal'</code> olan örnekleri tutmak istiyoruz. Closure, her örneğe başvurmak için <code>meta,file</code> tuple'ını kullanır, <code>meta.type</code> ile örnek türüne erişir ve <code>'normal'</code>'e eşit olup olmadığını kontrol eder.</p>
-<p>Bu, yukarıda tanıttığımız tek closure ile gerçekleştirilir:</p>
+<p>We have successfully filtered the data to only include normal samples. Let's recap how this works.</p>
+<p>The <code>filter</code> operator takes a closure that is applied to each element in the channel. If the closure returns <code>true</code>, the element is included; if it returns <code>false</code>, the element is excluded.</p>
+<p>In our case, we want to keep only samples where <code>meta.type == 'normal'</code>. The closure uses the tuple <code>meta,file</code> to refer to each sample, accesses the sample type with <code>meta.type</code>, and checks if it equals <code>'normal'</code>.</p>
+<p>This is accomplished with the single closure we introduced above:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="w">    </span><span class="o">.</span><span class="na">filter</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="22-ayr-filtrelenmis-kanallar-olusturma">2.2. Ayrı filtrelenmiş kanallar oluşturma<a class="headerlink" href="#22-ayr-filtrelenmis-kanallar-olusturma" title="Permanent link">&para;</a></h3>
-<p>Şu anda filtreyi doğrudan CSV'den oluşturulan kanala uyguluyoruz, ancak bunu birden fazla şekilde filtrelemek istiyoruz; bu yüzden mantığı normal örnekler için ayrı bir filtrelenmiş kanal oluşturmak üzere yeniden yazalım:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Sonra</label><label for="__tabbed_3_2">Önce</label></div>
+<h3 id="22-create-separate-filtered-channels">2.2. Create separate filtered channels<a class="headerlink" href="#22-create-separate-filtered-channels" title="Permanent link">&para;</a></h3>
+<p>Currently we're applying the filter to the channel created directly from the CSV, but we want to filter this in more ways than one, so let's re-write the logic to create a separate filtered channel for normal samples:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">After</label><label for="__tabbed_3_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
@@ -4560,11 +4872,11 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 </div>
 </div>
 </div>
-<p>Sonuçları görmek için pipeline'ı çalıştırın:</p>
+<p>Run the pipeline to see the results:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Komut çıktısı</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74</span>
@@ -4575,9 +4887,9 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 <a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="go">[[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]</span>
 </code></pre></div>
 </details>
-<p>Verileri başarıyla filtreledik ve normal örnekler için ayrı bir kanal oluşturduk.</p>
-<p>Tümör örnekleri için de filtrelenmiş bir kanal oluşturalım:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Sonra</label><label for="__tabbed_4_2">Önce</label></div>
+<p>We've successfully filtered the data and created a separate channel for normal samples.</p>
+<p>Let's create a filtered channel for the tumor samples as well:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">After</label><label for="__tabbed_4_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-7"> 7</a></span>
@@ -4612,7 +4924,7 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Komut çıktısı</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b</span>
@@ -4627,27 +4939,27 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 <a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="go">Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>Normal ve tümör örneklerini iki farklı kanala ayırdık ve çıktıda farklı şekilde etiketlemek için <code>view()</code>'a bir closure sağladık: <code>ch_tumor_samples.view{'Tümör örnek: ' + it}</code>.</p>
-<h3 id="ozetle">Özetle<a class="headerlink" href="#ozetle" title="Permanent link">&para;</a></h3>
-<p>Bu bölümde öğrendikleriniz:</p>
+<p>We've separated out the normal and tumor samples into two different channels, and used a closure supplied to <code>view()</code> to label them differently in the output: <code>ch_tumor_samples.view{'Tumor sample: ' + it}</code>.</p>
+<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
+<p>In this section, you've learned:</p>
 <ul>
-<li><strong>Verileri filtreleme</strong>: <code>filter</code> ile verileri nasıl filtreleyeceğiniz</li>
-<li><strong>Verileri bölme</strong>: Bir koşula göre verileri farklı kanallara nasıl böleceğiniz</li>
-<li><strong>Verileri görüntüleme</strong>: <code>view</code> kullanarak verileri yazdırma ve farklı kanallardan çıktıları nasıl etiketleyeceğiniz</li>
+<li><strong>Filtering data</strong>: How to filter data with <code>filter</code></li>
+<li><strong>Splitting data</strong>: How to split data into different channels based on a condition</li>
+<li><strong>Viewing data</strong>: How to use <code>view</code> to print the data and label output from different channels</li>
 </ul>
-<p>Artık normal ve tümör örneklerini iki farklı kanala ayırdık. Şimdi normal ve tümör örneklerini <code>id</code> alanına göre birleştireceğiz.</p>
+<p>We've now separated out the normal and tumor samples into two different channels. Next, we'll join the normal and tumor samples on the <code>id</code> field.</p>
 <hr />
-<h2 id="3-kanallar-tanmlayclara-gore-birlestirme">3. Kanalları tanımlayıcılara göre birleştirme<a class="headerlink" href="#3-kanallar-tanmlayclara-gore-birlestirme" title="Permanent link">&para;</a></h2>
-<p>Önceki bölümde, normal ve tümör örneklerini iki farklı kanala ayırdık. Bunlar türlerine göre belirli süreçler veya iş akışları kullanılarak bağımsız olarak işlenebilir. Ancak aynı hastadan normal ve tümör örneklerini karşılaştırmak istediğimizde ne olur? Bu noktada, örnekleri <code>id</code> alanına göre eşleştirerek tekrar birleştirmemiz gerekir.</p>
-<p>Nextflow, kanalları birleştirmek için birçok yöntem içerir, ancak bu durumda en uygun operatör <a href="https://www.nextflow.io/docs/latest/operator.html#join"><code>join</code></a>'dir. SQL'e aşinaysanız, birleştirme anahtarını ve gerçekleştirilecek birleştirme türünü belirttiğimiz <code>JOIN</code> işlemi gibi çalışır.</p>
-<h3 id="31-hasta-kimligine-gore-birlestirmek-icin-map-ve-join-kullanma">3.1. Hasta kimliğine göre birleştirmek için <code>map</code> ve <code>join</code> kullanma<a class="headerlink" href="#31-hasta-kimligine-gore-birlestirmek-icin-map-ve-join-kullanma" title="Permanent link">&para;</a></h3>
-<p><a href="https://www.nextflow.io/docs/latest/operator.html#join"><code>join</code></a> belgelerine bakarsak, varsayılan olarak her tuple'daki ilk öğeye göre iki kanalı birleştirdiğini görebiliriz.</p>
-<h4 id="311-veri-yapsn-kontrol-etme">3.1.1. Veri yapısını kontrol etme<a class="headerlink" href="#311-veri-yapsn-kontrol-etme" title="Permanent link">&para;</a></h4>
-<p>Konsol çıktısı hala mevcut değilse, veri yapımızı kontrol etmek ve <code>id</code> alanına göre birleştirmek için nasıl değiştirmemiz gerektiğini görmek amacıyla pipeline'ı çalıştıralım.</p>
+<h2 id="3-joining-channels-by-identifiers">3. Joining channels by identifiers<a class="headerlink" href="#3-joining-channels-by-identifiers" title="Permanent link">&para;</a></h2>
+<p>In the previous section, we separated out the normal and tumor samples into two different channels. These could be processed independently using specific processes or workflows based on their type. But what happens when we want to compare the normal and tumor samples from the same patient? At this point, we need to join them back together making sure to match the samples based on their <code>id</code> field.</p>
+<p>Nextflow includes many methods for combining channels, but in this case the most appropriate operator is <a href="https://www.nextflow.io/docs/latest/operator.html#join"><code>join</code></a>. If you are familiar with SQL, it acts like the <code>JOIN</code> operation, where we specify the key to join on and the type of join to perform.</p>
+<h3 id="31-use-map-and-join-to-combine-based-on-patient-id">3.1. Use <code>map</code> and <code>join</code> to combine based on patient ID<a class="headerlink" href="#31-use-map-and-join-to-combine-based-on-patient-id" title="Permanent link">&para;</a></h3>
+<p>If we check the <a href="https://www.nextflow.io/docs/latest/operator.html#join"><code>join</code></a> documentation, we can see that by default it joins two channels based on the first item in each tuple.</p>
+<h4 id="311-check-the-data-structure">3.1.1. Check the data structure<a class="headerlink" href="#311-check-the-data-structure" title="Permanent link">&para;</a></h4>
+<p>If you don't have the console output still available, let's run the pipeline to check our data structure and see how we need to modify it to join on the <code>id</code> field.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Komut çıktısı</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b</span>
@@ -4662,10 +4974,10 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 <a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="go">Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p><code>id</code> alanının her meta map'teki ilk öğe olduğunu görebiliriz. <code>join</code>'in çalışması için her tuple'daki <code>id</code> alanını izole etmeliyiz. Bundan sonra, iki kanalı birleştirmek için <code>join</code> operatörünü kolayca kullanabiliriz.</p>
-<h4 id="312-id-alann-izole-etme">3.1.2. <code>id</code> alanını izole etme<a class="headerlink" href="#312-id-alann-izole-etme" title="Permanent link">&para;</a></h4>
-<p><code>id</code> alanını izole etmek için, ilk öğe olarak <code>id</code> alanıyla yeni bir tuple oluşturmak üzere <a href="https://www.nextflow.io/docs/latest/operator.html#map"><code>map</code> operatörünü</a> kullanabiliriz.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Sonra</label><label for="__tabbed_5_2">Önce</label></div>
+<p>We can see that the <code>id</code> field is the first element in each meta map. For <code>join</code> to work, we should isolate the <code>id</code> field in each tuple. After that, we can simply use the <code>join</code> operator to combine the two channels.</p>
+<h4 id="312-isolate-the-id-field">3.1.2. Isolate the <code>id</code> field<a class="headerlink" href="#312-isolate-the-id-field" title="Permanent link">&para;</a></h4>
+<p>To isolate the <code>id</code> field, we can use the <a href="https://www.nextflow.io/docs/latest/operator.html#map"><code>map</code> operator</a> to create a new tuple with the <code>id</code> field as the first element.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">After</label><label for="__tabbed_5_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-7"> 7</a></span>
@@ -4712,7 +5024,7 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Komut çıktısı</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
 <a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="go">Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d</span>
@@ -4727,11 +5039,11 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 <a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a><span class="go">Normal sample: [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]</span>
 </code></pre></div>
 </details>
-<p>Belki de ince bir fark, ancak her tuple'daki ilk öğenin <code>id</code> alanı olduğunu görmelisiniz.</p>
-<h4 id="313-iki-kanal-birlestirme">3.1.3. İki kanalı birleştirme<a class="headerlink" href="#313-iki-kanal-birlestirme" title="Permanent link">&para;</a></h4>
-<p>Artık <code>id</code> alanına göre iki kanalı birleştirmek için <code>join</code> operatörünü kullanabiliriz.</p>
-<p>Bir kez daha, birleştirilmiş çıktıları yazdırmak için <code>view</code> kullanacağız.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Sonra</label><label for="__tabbed_6_2">Önce</label></div>
+<p>It might be subtle, but you should be able to see the first element in each tuple is the <code>id</code> field.</p>
+<h4 id="313-combine-the-two-channels">3.1.3. Combine the two channels<a class="headerlink" href="#313-combine-the-two-channels" title="Permanent link">&para;</a></h4>
+<p>Now we can use the <code>join</code> operator to combine the two channels based on the <code>id</code> field.</p>
+<p>Once again, we will use <code>view</code> to print the joined outputs.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">After</label><label for="__tabbed_6_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-7"> 7</a></span>
@@ -4780,7 +5092,7 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Komut çıktısı</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="go">Launching `main.nf` [soggy_wiles] DSL2 - revision: 3bc1979889</span>
@@ -4791,26 +5103,26 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 <a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="go">[patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>Çok geniş olduğu için söylemek biraz zor, ancak örneklerin <code>id</code> alanına göre birleştirildiğini görmelisiniz. Her tuple artık şu formata sahip:</p>
+<p>It's a little hard to tell because it's so wide, but you should be able to see the samples have been joined by the <code>id</code> field. Each tuple now has the format:</p>
 <ul>
-<li><code>id</code>: Örnek kimliği</li>
-<li><code>normal_meta_map</code>: Tür, replik ve bam dosyası yolu dahil normal örnek meta verisi</li>
-<li><code>normal_sample_file</code>: Normal örnek dosyası</li>
-<li><code>tumor_meta_map</code>: Tür, replik ve bam dosyası yolu dahil tümör örnek meta verisi</li>
-<li><code>tumor_sample</code>: Tür, replik ve bam dosyası yolu dahil tümör örneği</li>
+<li><code>id</code>: The sample ID</li>
+<li><code>normal_meta_map</code>: The normal sample meta data including type, replicate and path to bam file</li>
+<li><code>normal_sample_file</code>: The normal sample file</li>
+<li><code>tumor_meta_map</code>: The tumor sample meta data including type, replicate and path to bam file</li>
+<li><code>tumor_sample</code>: The tumor sample including type, replicate and path to bam file</li>
 </ul>
 <div class="admonition warning">
-<p class="admonition-title">Uyarı</p>
-<p><code>join</code> operatörü eşleşmeyen tuple'ları atacaktır. Bu örnekte, tüm örneklerin tümör ve normal için eşleştirildiğinden emin olduk, ancak bu doğru değilse eşleşmeyen tuple'ları tutmak için <code>remainder: true</code> parametresini kullanmanız gerekir. Daha fazla ayrıntı için <a href="https://www.nextflow.io/docs/latest/operator.html#join">belgelere</a> bakın.</p>
+<p class="admonition-title">Warning</p>
+<p>The <code>join</code> operator will discard any un-matched tuples. In this example, we made sure all samples were matched for tumor and normal but if this is not true you must use the parameter <code>remainder: true</code> to keep the unmatched tuples. Check the <a href="https://www.nextflow.io/docs/latest/operator.html#join">documentation</a> for more details.</p>
 </div>
-<p>Artık bir tuple'daki bir alanı izole etmek için <code>map</code>'i ve tuple'ları ilk alana göre birleştirmek için <code>join</code>'i nasıl kullanacağınızı biliyorsunuz.
-Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebilirsiniz.</p>
-<p>Şimdi, birden fazla alanda birleştirmek istediğiniz durumu ele alacağız.</p>
-<h3 id="32-birden-fazla-alanda-birlestirme">3.2. Birden fazla alanda birleştirme<a class="headerlink" href="#32-birden-fazla-alanda-birlestirme" title="Permanent link">&para;</a></h3>
-<p>ÖrnekA için 2 replikimiz var, ancak örnekB ve örnekC için sadece 1'er tane. Bu durumda <code>id</code> alanını kullanarak bunları etkili bir şekilde birleştirebildik, ancak eşzamanlı olmasalardı ne olurdu? Farklı repliklerden normal ve tümör örneklerini karıştırabilirdik!</p>
-<p>Bunu önlemek için birden fazla alanda birleştirme yapabiliriz. Bunu başarmanın aslında birden fazla yolu var, ancak hem örnek <code>id</code>'sini hem de <code>replicate</code> numarasını içeren yeni bir birleştirme anahtarı oluşturmaya odaklanacağız.</p>
-<p>Yeni bir birleştirme anahtarı oluşturarak başlayalım. Bunu, ilk öğe olarak <code>id</code> ve <code>repeat</code> alanlarıyla yeni bir tuple oluşturmak için <a href="https://www.nextflow.io/docs/latest/operator.html#map"><code>map</code> operatörünü</a> kullanarak daha önce yaptığımız gibi yapabiliriz.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Sonra</label><label for="__tabbed_7_2">Önce</label></div>
+<p>So now you know how to use <code>map</code> to isolate a field in a tuple, and how to use <code>join</code> to combine tuples based on the first field.
+With this knowledge, we can successfully combine channels based on a shared field.</p>
+<p>Next, we'll consider the situation where you want to join on multiple fields.</p>
+<h3 id="32-join-on-multiple-fields">3.2. Join on multiple fields<a class="headerlink" href="#32-join-on-multiple-fields" title="Permanent link">&para;</a></h3>
+<p>We have 2 replicates for sampleA, but only 1 for sampleB and sampleC. In this case we were able to join them effectively by using the <code>id</code> field, but what would happen if they were out of sync? We could mix up the normal and tumor samples from different replicates!</p>
+<p>To avoid this, we can join on multiple fields. There are actually multiple ways to achieve this but we are going to focus on creating a new joining key which includes both the sample <code>id</code> and <code>replicate</code> number.</p>
+<p>Let's start by creating a new joining key. We can do this in the same way as before by using the <a href="https://www.nextflow.io/docs/latest/operator.html#map"><code>map</code> operator</a> to create a new tuple with the <code>id</code> and <code>repeat</code> fields as the first element.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">After</label><label for="__tabbed_7_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-7"> 7</a></span>
@@ -4842,11 +5154,11 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 </div>
 </div>
 </div>
-<p>Şimdi birleştirmenin hem <code>id</code> hem de <code>repeat</code> alanlarını kullanarak gerçekleştiğini görmeliyiz. İş akışını çalıştırın:</p>
+<p>Now we should see the join is occurring but using both the <code>id</code> and <code>repeat</code> fields. Run the workflow:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Komut çıktısı</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">Launching `main.nf` [prickly_wing] DSL2 - revision: 3bebf22dee</span>
@@ -4857,12 +5169,12 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 <a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="go">[[patientC, 1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>Her birleştirilmiş sonucun ilk öğesi olarak iki öğeli bir tuple (<code>id</code> ve <code>repeat</code> alanları) olduğunu not edin. Bu, karmaşık öğelerin birleştirme anahtarı olarak nasıl kullanılabileceğini gösterir ve aynı koşullardan gelen örnekler arasında oldukça karmaşık eşleştirme sağlar.</p>
-<p>Farklı anahtarlarda birleştirmenin daha fazla yolunu keşfetmek istiyorsanız, ek seçenekler ve örnekler için <a href="https://www.nextflow.io/docs/latest/operator.html#join">join operatörü belgelerine</a> bakın.</p>
-<h3 id="33-yeni-bir-birlestirme-anahtar-olusturmak-icin-submap-kullanma">3.3. Yeni bir birleştirme anahtarı oluşturmak için <code>subMap</code> kullanma<a class="headerlink" href="#33-yeni-bir-birlestirme-anahtar-olusturmak-icin-submap-kullanma" title="Permanent link">&para;</a></h3>
-<p>Önceki yaklaşım, birleştirme anahtarımızdaki alan adlarını kaybeder; <code>id</code> ve <code>repeat</code> alanları sadece bir değerler listesi haline gelir. Daha sonra erişim için alan adlarını korumak amacıyla <a href="https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)"><code>subMap</code> metodunu</a> kullanabiliriz.</p>
-<p><code>subMap</code> metodu, bir map'ten yalnızca belirtilen anahtar-değer çiftlerini çıkarır. Burada birleştirme anahtarımızı oluşturmak için sadece <code>id</code> ve <code>repeat</code> alanlarını çıkaracağız.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Sonra</label><label for="__tabbed_8_2">Önce</label></div>
+<p>Note how we have a tuple of two elements (<code>id</code> and <code>repeat</code> fields) as the first element of each joined result. This demonstrates how complex items can be used as a joining key, enabling fairly intricate matching between samples from the same conditions.</p>
+<p>If you want to explore more ways to join on different keys, check out the <a href="https://www.nextflow.io/docs/latest/operator.html#join">join operator documentation</a> for additional options and examples.</p>
+<h3 id="33-use-submap-to-create-a-new-joining-key">3.3. Use <code>subMap</code> to create a new joining key<a class="headerlink" href="#33-use-submap-to-create-a-new-joining-key" title="Permanent link">&para;</a></h3>
+<p>The previous approach loses the field names from our joining key - the <code>id</code> and <code>repeat</code> fields become just a list of values. To retain the field names for later access, we can use the <a href="https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)"><code>subMap</code> method</a>.</p>
+<p>The <code>subMap</code> method extracts only the specified key-value pairs from a map. Here we'll extract just the <code>id</code> and <code>repeat</code> fields to create our joining key.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">After</label><label for="__tabbed_8_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-7"> 7</a></span>
@@ -4897,7 +5209,7 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 <div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Komut çıktısı</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>
 <a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="go">Launching `main.nf` [reverent_wing] DSL2 - revision: 847016c3b7</span>
@@ -4908,11 +5220,11 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 <a id="__codelineno-39-8" name="__codelineno-39-8" href="#__codelineno-39-8"></a><span class="go">[[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>Artık yalnızca <code>id</code> ve <code>repeat</code> alanlarını içermekle kalmayıp alan adlarını da koruyan yeni bir birleştirme anahtarımız var; böylece daha sonra bunlara <code>meta.id</code> ve <code>meta.repeat</code> gibi adla erişebiliriz.</p>
-<h3 id="34-mapte-adlandrlms-closure-kullanma">3.4. map'te adlandırılmış closure kullanma<a class="headerlink" href="#34-mapte-adlandrlms-closure-kullanma" title="Permanent link">&para;</a></h3>
-<p>Çoğaltmayı önlemek ve hataları azaltmak için adlandırılmış bir closure kullanabiliriz. Adlandırılmış bir closure, birden fazla yerde çağırabileceğimiz yeniden kullanılabilir bir fonksiyon oluşturmamıza olanak tanır.</p>
-<p>Bunu yapmak için önce closure'ı yeni bir değişken olarak tanımlarız:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">Sonra</label><label for="__tabbed_9_2">Önce</label></div>
+<p>Now we have a new joining key that not only includes the <code>id</code> and <code>repeat</code> fields but also retains the field names so we can access them later by name, e.g. <code>meta.id</code> and <code>meta.repeat</code>.</p>
+<h3 id="34-use-a-named-closure-in-map">3.4. Use a named closure in map<a class="headerlink" href="#34-use-a-named-closure-in-map" title="Permanent link">&para;</a></h3>
+<p>To avoid duplication and reduce errors, we can use a named closure. A named closure allows us to create a reusable function that we can call in multiple places.</p>
+<p>To do so, first we define the closure as a new variable:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">After</label><label for="__tabbed_9_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-2"> 2</a></span>
@@ -4954,10 +5266,10 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 </div>
 </div>
 </div>
-<p>Map dönüşümünü yeniden kullanabileceğimiz adlandırılmış bir değişken olarak tanımladık.</p>
-<p>Ayrıca dosya yolunu <code>file()</code> kullanarak bir Path nesnesine dönüştürdüğümüzü not edin; böylece bu kanalı alan herhangi bir süreç dosyayı doğru şekilde işleyebilir (daha fazla bilgi için <a href="../working_with_files/">Dosyalarla çalışma</a>'ya bakın).</p>
-<p>Closure'ı iş akışımızda uygulayalım:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">Sonra</label><label for="__tabbed_10_2">Önce</label></div>
+<p>We've defined the map transformation as a named variable that we can reuse.</p>
+<p>Note that we also convert the file path to a Path object using <code>file()</code> so that any process receiving this channel can handle the file correctly (for more information see <a href="../working_with_files/">Working with files</a>).</p>
+<p>Let's implement the closure in our workflow:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">After</label><label for="__tabbed_10_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-10">10</a></span>
@@ -4990,14 +5302,14 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 </div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">Not</p>
-<p><code>map</code> operatörü closure'ı argüman olarak geçirmek için <code>{ }</code> yerine <code>( )</code> kullanmaya geçti. Bunun nedeni, <code>map</code> operatörünün argüman olarak bir closure beklemesi ve <code>{ }</code> işaretinin anonim bir closure tanımlamak için kullanılmasıdır. Adlandırılmış bir closure çağırırken <code>( )</code> sözdizimini kullanın.</p>
+<p class="admonition-title">Note</p>
+<p>The <code>map</code> operator has switched from using <code>{ }</code> to using <code>( )</code> to pass the closure as an argument. This is because the <code>map</code> operator expects a closure as an argument and <code>{ }</code> is used to define an anonymous closure. When calling a named closure, use the <code>( )</code> syntax.</p>
 </div>
-<p>Her şeyin hala çalıştığını kontrol etmek için iş akışını bir kez daha çalıştırın:</p>
+<p>Run the workflow once more to check everything is still working:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Komut çıktısı</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>
 <a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="go">Launching `main.nf` [angry_meninsky] DSL2 - revision: 2edc226b1d</span>
@@ -5008,9 +5320,9 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 <a id="__codelineno-45-8" name="__codelineno-45-8" href="#__codelineno-45-8"></a><span class="go">[[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>Adlandırılmış bir closure kullanmak, aynı dönüşümü birden fazla yerde yeniden kullanmamıza olanak tanır; hata riskini azaltır ve kodu daha okunabilir ve bakımı kolay hale getirir.</p>
-<h3 id="35-veri-cogaltmasn-azaltma">3.5. Veri çoğaltmasını azaltma<a class="headerlink" href="#35-veri-cogaltmasn-azaltma" title="Permanent link">&para;</a></h3>
-<p>İş akışımızda çok fazla çoğaltılmış veri var. Birleştirilmiş örneklerdeki her öğe <code>id</code> ve <code>repeat</code> alanlarını tekrarlar. Bu bilgi zaten gruplama anahtarında mevcut olduğundan, bu fazlalıktan kaçınabiliriz. Hatırlatma olarak, mevcut veri yapımız şöyle görünüyor:</p>
+<p>Using a named closure allows us to reuse the same transformation in multiple places, reducing the risk of errors and making the code more readable and maintainable.</p>
+<h3 id="35-reduce-duplication-of-data">3.5. Reduce duplication of data<a class="headerlink" href="#35-reduce-duplication-of-data" title="Permanent link">&para;</a></h3>
+<p>We have a lot of duplicated data in our workflow. Each item in the joined samples repeats the <code>id</code> and <code>repeat</code> fields. Since this information is already available in the grouping key, we can avoid this redundancy. As a reminder, our current data structure looks like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="o">[</span>
 <a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="w">  </span><span class="o">[</span>
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="w">    </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;sampleC&quot;</span><span class="o">,</span>
@@ -5030,8 +5342,8 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 <a id="__codelineno-46-17" name="__codelineno-46-17" href="#__codelineno-46-17"></a><span class="w">  </span><span class="s2">&quot;sampleC_rep1_tumor.bam&quot;</span>
 <a id="__codelineno-46-18" name="__codelineno-46-18" href="#__codelineno-46-18"></a><span class="o">]</span>
 </code></pre></div>
-<p><code>id</code> ve <code>repeat</code> alanları gruplama anahtarında mevcut olduğundan, çoğaltmayı önlemek için bunları her kanal öğesinin geri kalanından kaldıralım. Bunu, yalnızca <code>type</code> alanıyla yeni bir map oluşturmak için <code>subMap</code> metodunu kullanarak yapabiliriz. Bu yaklaşım, veri yapımızdaki fazlalığı ortadan kaldırırken tüm gerekli bilgileri korumamıza olanak tanır.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">Sonra</label><label for="__tabbed_11_2">Önce</label></div>
+<p>Since the <code>id</code> and <code>repeat</code> fields are available in the grouping key, let's remove them from the rest of each channel item to avoid duplication. We can do this by using the <code>subMap</code> method to create a new map with only the <code>type</code> field. This approach allows us to maintain all necessary information while eliminating redundancy in our data structure.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">After</label><label for="__tabbed_11_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-8" name="__codelineno-47-8"></a><span class="hll"><span class="w">    </span><span class="n">getSampleIdAndReplicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;repeat&#39;</span><span class="o">]),</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;type&#39;</span><span class="o">]),</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">bam</span><span class="o">)</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
@@ -5043,24 +5355,24 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 </div>
 </div>
 </div>
-<p>Şimdi closure, ilk öğenin <code>id</code> ve <code>repeat</code> alanlarını, ikinci öğenin sadece <code>type</code> alanını içerdiği bir tuple döndürüyor. Bu, <code>id</code> ve <code>repeat</code> bilgilerini gruplama anahtarında bir kez saklayarak fazlalığı ortadan kaldırır ve tüm gerekli bilgileri korur.</p>
-<p>Bunun nasıl göründüğünü görmek için iş akışını çalıştırın:</p>
+<p>Now the closure returns a tuple where the first element contains the <code>id</code> and <code>repeat</code> fields, and the second element contains only the <code>type</code> field. This eliminates redundancy by storing the <code>id</code> and <code>repeat</code> information once in the grouping key, while maintaining all necessary information.</p>
+<p>Run the workflow to see what this looks like:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Komut çıktısı</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">[[id:patientA, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]</span>
 <a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a><span class="go">[[id:patientA, repeat:2], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]</span>
 <a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="go">[[id:patientB, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]</span>
 <a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a><span class="go">[[id:patientC, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p><code>id</code> ve <code>repeat</code> alanlarını gruplama anahtarında yalnızca bir kez belirttiğimizi ve örnek verisinde <code>type</code> alanına sahip olduğumuzu görebiliriz. Hiçbir bilgi kaybetmedik ama kanal içeriklerimizi daha öz hale getirmeyi başardık.</p>
-<h3 id="36-gereksiz-bilgileri-kaldrma">3.6. Gereksiz bilgileri kaldırma<a class="headerlink" href="#36-gereksiz-bilgileri-kaldrma" title="Permanent link">&para;</a></h3>
-<p>Yukarıda çoğaltılmış bilgileri kaldırdık, ancak kanallarımızda hala başka gereksiz bilgiler var.</p>
-<p>Başlangıçta, <code>filter</code> kullanarak normal ve tümör örneklerini ayırdık, ardından <code>id</code> ve <code>repeat</code> anahtarlarına göre birleştirdik. <code>join</code> operatörü tuple'ların birleştirildiği sırayı korur; bu nedenle bizim durumumuzda, normal örnekler sol tarafta ve tümör örnekleri sağ tarafta olmak üzere, ortaya çıkan kanal bu yapıyı korur: <code>id, &lt;normal öğeleri&gt;, &lt;tümör öğeleri&gt;</code>.</p>
-<p>Kanaldaki her öğenin konumunu bildiğimiz için, <code>[type:normal]</code> ve <code>[type:tumor]</code> meta verilerini bırakarak yapıyı daha da basitleştirebiliriz.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">Sonra</label><label for="__tabbed_12_2">Önce</label></div>
+<p>We can see we only state the <code>id</code> and <code>repeat</code> fields once in the grouping key and we have the <code>type</code> field in the sample data. We haven't lost any information but we managed to make our channel contents more succinct.</p>
+<h3 id="36-remove-redundant-information">3.6. Remove redundant information<a class="headerlink" href="#36-remove-redundant-information" title="Permanent link">&para;</a></h3>
+<p>We removed duplicated information above, but we still have some other redundant information in our channels.</p>
+<p>In the beginning, we separated the normal and tumor samples using <code>filter</code>, then joined them based on <code>id</code> and <code>repeat</code> keys. The <code>join</code> operator preserves the order in which tuples are merged, so in our case, with normal samples on the left side and tumor samples on the right, the resulting channel maintains this structure: <code>id, &lt;normal elements&gt;, &lt;tumor elements&gt;</code>.</p>
+<p>Since we know the position of each element in our channel, we can simplify the structure further by dropping the <code>[type:normal]</code> and <code>[type:tumor]</code> metadata.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">After</label><label for="__tabbed_12_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-51-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-51-8" name="__codelineno-51-8"></a><span class="hll"><span class="w">    </span><span class="n">getSampleIdAndReplicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;repeat&#39;</span><span class="o">]),</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
@@ -5072,11 +5384,11 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 </div>
 </div>
 </div>
-<p>Sonucu görmek için tekrar çalıştırın:</p>
+<p>Run again to see the result:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Komut çıktısı</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>
 <a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a><span class="go">Launching `main.nf` [confident_leavitt] DSL2 - revision: a2303895bd</span>
@@ -5087,24 +5399,24 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 <a id="__codelineno-54-8" name="__codelineno-54-8" href="#__codelineno-54-8"></a><span class="go">[[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<h3 id="ozetle_1">Özetle<a class="headerlink" href="#ozetle_1" title="Permanent link">&para;</a></h3>
-<p>Bu bölümde öğrendikleriniz:</p>
+<h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
+<p>In this section, you've learned:</p>
 <ul>
-<li><strong>Tuple'ları manipüle etme</strong>: Bir tuple'daki bir alanı izole etmek için <code>map</code> nasıl kullanılır</li>
-<li><strong>Tuple'ları birleştirme</strong>: Tuple'ları ilk alana göre birleştirmek için <code>join</code> nasıl kullanılır</li>
-<li><strong>Birleştirme anahtarları oluşturma</strong>: Yeni bir birleştirme anahtarı oluşturmak için <code>subMap</code> nasıl kullanılır</li>
-<li><strong>Adlandırılmış Closure'lar</strong>: map'te adlandırılmış bir closure nasıl kullanılır</li>
-<li><strong>Çoklu alan birleştirme</strong>: Daha hassas eşleştirme için birden fazla alanda nasıl birleştirme yapılır</li>
-<li><strong>Veri yapısı optimizasyonu</strong>: Gereksiz bilgileri kaldırarak kanal yapısı nasıl düzenlenir</li>
+<li><strong>Manipulating Tuples</strong>: How to use <code>map</code> to isolate a field in a tuple</li>
+<li><strong>Joining Tuples</strong>: How to use <code>join</code> to combine tuples based on the first field</li>
+<li><strong>Creating Joining Keys</strong>: How to use <code>subMap</code> to create a new joining key</li>
+<li><strong>Named Closures</strong>: How to use a named closure in map</li>
+<li><strong>Multiple Field Joining</strong>: How to join on multiple fields for more precise matching</li>
+<li><strong>Data Structure Optimization</strong>: How to streamline channel structure by removing redundant information</li>
 </ul>
-<p>Artık bir örnek sayfasını bölebilen, normal ve tümör örneklerini filtreleyebilen, bunları örnek kimliği ve replik numarasına göre birleştirebilen ve sonuçları yazdırabilen bir iş akışınız var.</p>
-<p>Bu, bağımsız olarak işledikten sonra örnekleri veya diğer veri türlerini eşleştirmeniz gereken biyoinformatik iş akışlarında yaygın bir desendir; bu yüzden yararlı bir beceridir. Şimdi, bir örneği birden fazla kez tekrarlamaya bakacağız.</p>
-<h2 id="4-ornekleri-aralklara-yayma">4. Örnekleri aralıklara yayma<a class="headerlink" href="#4-ornekleri-aralklara-yayma" title="Permanent link">&para;</a></h2>
-<p>Biyoinformatik iş akışlarında temel bir desen, analizi genomik bölgelere dağıtmaktır. Örneğin, varyant çağırma, genomu aralıklara (kromozomlar veya daha küçük bölgeler gibi) bölerek paralelleştirilebilir. Bu paralelleştirme stratejisi, hesaplama yükünü birden fazla çekirdeğe veya düğüme dağıtarak pipeline verimliliğini önemli ölçüde artırır ve toplam yürütme süresini azaltır.</p>
-<p>Aşağıdaki bölümde, örnek verilerimizi birden fazla genomik aralığa nasıl dağıtacağımızı göstereceğiz. Her örneği her aralıkla eşleştireceğiz; bu, farklı genomik bölgelerin paralel işlenmesine olanak tanır. Bu işlem, veri kümemizin boyutunu aralık sayısıyla çarpacak ve daha sonra bir araya getirilebilecek birden fazla bağımsız analiz birimi oluşturacaktır.</p>
-<h3 id="41-combine-kullanarak-ornekleri-aralklara-yayma">4.1. <code>combine</code> kullanarak örnekleri aralıklara yayma<a class="headerlink" href="#41-combine-kullanarak-ornekleri-aralklara-yayma" title="Permanent link">&para;</a></h3>
-<p>Bir aralık kanalı oluşturarak başlayalım. İşleri basit tutmak için, manuel olarak tanımlayacağımız sadece 3 aralık kullanacağız. Gerçek bir iş akışında, bunları bir dosya girdisinden okuyabilir veya hatta çok sayıda aralık dosyasıyla bir kanal oluşturabilirsiniz.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">Sonra</label><label for="__tabbed_13_2">Önce</label></div>
+<p>You now have a workflow that can split a samplesheet, filter the normal and tumor samples, join them together by sample ID and replicate number, then print the results.</p>
+<p>This is a common pattern in bioinformatics workflows where you need to match up samples or other types of data after processing independently, so it is a useful skill. Next, we will look at repeating a sample multiple times.</p>
+<h2 id="4-spread-samples-intervals">4. Spread samples intervals<a class="headerlink" href="#4-spread-samples-intervals" title="Permanent link">&para;</a></h2>
+<p>A key pattern in bioinformatics workflows is distributing analysis across genomic regions. For instance, variant calling can be parallelized by dividing the genome into intervals (like chromosomes or smaller regions). This parallelization strategy significantly improves pipeline efficiency by distributing computational load across multiple cores or nodes, reducing overall execution time.</p>
+<p>In the following section, we'll demonstrate how to distribute our sample data across multiple genomic intervals. We'll pair each sample with every interval, allowing parallel processing of different genomic regions. This will multiply our dataset size by the number of intervals, creating multiple independent analysis units that can be brought back together later.</p>
+<h3 id="41-spread-samples-over-intervals-using-combine">4.1. Spread samples over intervals using <code>combine</code><a class="headerlink" href="#41-spread-samples-over-intervals-using-combine" title="Permanent link">&para;</a></h3>
+<p>Let's start by creating a channel of intervals. To keep life simple, we will just use 3 intervals we will manually define. In a real workflow, you could read these in from a file input or even create a channel with lots of interval files.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">After</label><label for="__tabbed_13_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-17">17</a></span>
@@ -5120,8 +5432,8 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 </div>
 </div>
 </div>
-<p>Şimdi hatırlayın, her örneği her aralık için tekrarlamak istiyoruz. Bu bazen örneklerin ve aralıkların Kartezyen çarpımı olarak adlandırılır. Bunu <a href="https://www.nextflow.io/docs/latest/operator.html#combine"><code>combine</code> operatörünü</a> kullanarak başarabiliriz. Bu, kanal 1'den her öğeyi alacak ve kanal 2'deki her öğe için tekrarlayacaktır. İş akışımıza bir combine operatörü ekleyelim:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">Sonra</label><label for="__tabbed_14_2">Önce</label></div>
+<p>Now remember, we want to repeat each sample for each interval. This is sometimes referred to as the Cartesian product of the samples and intervals. We can achieve this by using the <a href="https://www.nextflow.io/docs/latest/operator.html#combine"><code>combine</code> operator</a>. This will take every item from channel 1 and repeat it for each item in channel 2. Let's add a combine operator to our workflow:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">After</label><label for="__tabbed_14_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-57-18">18</a></span>
@@ -5141,11 +5453,11 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 </div>
 </div>
 </div>
-<p>Şimdi çalıştıralım ve ne olduğunu görelim:</p>
+<p>Now let's run it and see what happens:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Komut çıktısı</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a>
 <a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="go">Launching `main.nf` [mighty_tesla] DSL2 - revision: ae013ab70b</span>
@@ -5164,11 +5476,11 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 <a id="__codelineno-60-16" name="__codelineno-60-16" href="#__codelineno-60-16"></a><span class="go">[[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr3]</span>
 </code></pre></div>
 </details>
-<p>Başarılı! Her örneği 3 aralıklık listemizdeki her bir aralık için tekrarladık. Kanaldaki öğe sayısını etkili bir şekilde üçe katladık.</p>
-<p>Okumak biraz zor olsa da, bir sonraki bölümde düzenleyeceğiz.</p>
-<h3 id="42-kanal-duzenleme">4.2. Kanalı düzenleme<a class="headerlink" href="#42-kanal-duzenleme" title="Permanent link">&para;</a></h3>
-<p>Örnek verilerimizi daha kolay anlaşılır hale getirmek için <code>map</code> operatörünü kullanarak düzenleyip yeniden yapılandırabiliriz. Aralık dizesini ilk öğedeki birleştirme map'ine taşıyalım.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">Sonra</label><label for="__tabbed_15_2">Önce</label></div>
+<p>Success! We have repeated every sample for every single interval in our 3 interval list. We've effectively tripled the number of items in our channel.</p>
+<p>It's a little hard to read though, so in the next section we will tidy it up.</p>
+<h3 id="42-organize-the-channel">4.2. Organize the channel<a class="headerlink" href="#42-organize-the-channel" title="Permanent link">&para;</a></h3>
+<p>We can use the <code>map</code> operator to tidy and refactor our sample data so it's easier to understand. Let's move the intervals string to the joining map at the first element.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">After</label><label for="__tabbed_15_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-61-20">20</a></span>
@@ -5202,25 +5514,25 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 </div>
 </div>
 </div>
-<p>Bu map işleminin adım adım ne yaptığını açıklayalım.</p>
-<p>İlk olarak, kodu daha okunabilir hale getirmek için adlandırılmış parametreler kullanıyoruz. <code>grouping_key</code>, <code>normal</code>, <code>tumor</code> ve <code>interval</code> adlarını kullanarak, tuple'daki öğelere dizin yerine adla başvurabiliriz:</p>
+<p>Let's break down what this map operation does step by step.</p>
+<p>First, we use named parameters to make the code more readable. By using the names <code>grouping_key</code>, <code>normal</code>, <code>tumor</code> and <code>interval</code>, we can refer to the elements in the tuple by name instead of by index:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">grouping_key</span><span class="o">,</span><span class="w"> </span><span class="n">normal</span><span class="o">,</span><span class="w"> </span><span class="n">tumor</span><span class="o">,</span><span class="w"> </span><span class="n">interval</span><span class="w"> </span><span class="o">-&gt;</span>
 </code></pre></div>
-<p>Ardından, <code>grouping_key</code>'i <code>interval</code> alanıyla birleştiriyoruz. <code>grouping_key</code>, <code>id</code> ve <code>repeat</code> alanlarını içeren bir map'tir. <code>interval</code> ile yeni bir map oluşturuyoruz ve Groovy'nin map toplama (<code>+</code>) işlemini kullanarak bunları birleştiriyoruz:</p>
+<p>Next, we combine the <code>grouping_key</code> with the <code>interval</code> field. The <code>grouping_key</code> is a map containing <code>id</code> and <code>repeat</code> fields. We create a new map with the <code>interval</code> and merge them using Groovy's map addition (<code>+</code>):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="w">                </span><span class="n">grouping_key</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">interval:</span><span class="w"> </span><span class="n">interval</span><span class="o">],</span>
 </code></pre></div>
-<p>Son olarak, bunu üç öğeli bir tuple olarak döndürüyoruz: birleştirilmiş meta veri map'i, normal örnek dosyası ve tümör örnek dosyası:</p>
+<p>Finally, we return this as a tuple with three elements: the combined metadata map, the normal sample file, and the tumor sample file:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a><span class="w">            </span><span class="o">[</span>
 <a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a><span class="w">                </span><span class="n">grouping_key</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">interval:</span><span class="w"> </span><span class="n">interval</span><span class="o">],</span>
 <a id="__codelineno-65-3" name="__codelineno-65-3" href="#__codelineno-65-3"></a><span class="w">                </span><span class="n">normal</span><span class="o">,</span>
 <a id="__codelineno-65-4" name="__codelineno-65-4" href="#__codelineno-65-4"></a><span class="w">                </span><span class="n">tumor</span>
 <a id="__codelineno-65-5" name="__codelineno-65-5" href="#__codelineno-65-5"></a><span class="w">            </span><span class="o">]</span>
 </code></pre></div>
-<p>Tekrar çalıştıralım ve kanal içeriklerini kontrol edelim:</p>
+<p>Let's run it again and check the channel contents:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Komut çıktısı</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>
 <a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a><span class="go">Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd</span>
@@ -5239,22 +5551,22 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 <a id="__codelineno-67-16" name="__codelineno-67-16" href="#__codelineno-67-16"></a><span class="go">[[id:patientC, repeat:1, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>Verilerinizi doğru yapıya zorlamak için <code>map</code> kullanmak zor olabilir, ancak etkili veri manipülasyonu için çok önemlidir.</p>
-<p>Artık her örneği tüm genomik aralıklarda tekrarladık; paralel olarak işlenebilecek birden fazla bağımsız analiz birimi oluşturduk. Peki ya ilişkili örnekleri tekrar bir araya getirmek istersek? Bir sonraki bölümde, ortak özellikleri paylaşan örnekleri nasıl gruplayacağımızı öğreneceğiz.</p>
-<h3 id="ozetle_2">Özetle<a class="headerlink" href="#ozetle_2" title="Permanent link">&para;</a></h3>
-<p>Bu bölümde öğrendikleriniz:</p>
+<p>Using <code>map</code> to coerce your data into the correct structure can be tricky, but it's crucial for effective data manipulation.</p>
+<p>We now have every sample repeated across all genomic intervals, creating multiple independent analysis units that can be processed in parallel. But what if we want to bring related samples back together? In the next section, we'll learn how to group samples that share common attributes.</p>
+<h3 id="takeaway_2">Takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
+<p>In this section, you've learned:</p>
 <ul>
-<li><strong>Örnekleri aralıklara yayma</strong>: Örnekleri aralıklara yaymak için <code>combine</code> nasıl kullanılır</li>
-<li><strong>Kartezyen çarpımlar oluşturma</strong>: Örneklerin ve aralıkların tüm kombinasyonları nasıl oluşturulur</li>
-<li><strong>Kanal yapısını düzenleme</strong>: Daha iyi okunabilirlik için verileri yeniden yapılandırmak üzere <code>map</code> nasıl kullanılır</li>
-<li><strong>Paralel işleme hazırlığı</strong>: Dağıtık analiz için veriler nasıl ayarlanır</li>
+<li><strong>Spreading samples over intervals</strong>: How to use <code>combine</code> to repeat samples over intervals</li>
+<li><strong>Creating Cartesian products</strong>: How to generate all combinations of samples and intervals</li>
+<li><strong>Organizing channel structure</strong>: How to use <code>map</code> to restructure data for better readability</li>
+<li><strong>Parallel processing preparation</strong>: How to set up data for distributed analysis</li>
 </ul>
-<h2 id="5-grouptuple-kullanarak-ornekleri-toplama">5. <code>groupTuple</code> kullanarak örnekleri toplama<a class="headerlink" href="#5-grouptuple-kullanarak-ornekleri-toplama" title="Permanent link">&para;</a></h2>
-<p>Önceki bölümlerde, bir girdi dosyasından verileri bölmeyi ve belirli alanlara göre filtrelemeyi (bizim durumumuzda normal ve tümör örnekleri) öğrendik. Ancak bu yalnızca tek bir birleştirme türünü kapsar. Ya örnekleri belirli bir özelliğe göre gruplamak istersek? Örneğin, eşleşen normal-tümör çiftlerini birleştirmek yerine, türlerine bakılmaksızın "sampleA"dan tüm örnekleri birlikte işlemek isteyebiliriz. Bu desen, verimlilik nedenleriyle ilişkili örnekleri ayrı ayrı işlemek ve sonunda sonuçları karşılaştırmak veya birleştirmek istediğiniz biyoinformatik iş akışlarında yaygındır.</p>
-<p>Nextflow bunu yapmak için yerleşik yöntemler içerir; bakacağımız ana yöntem <code>groupTuple</code>'dır.</p>
-<p>Aynı <code>id</code> ve <code>interval</code> alanlarına sahip tüm örneklerimizi gruplayarak başlayalım. Bu, teknik replikleri gruplamak istediğimiz ancak anlamlı olarak farklı örnekleri ayrı tutmak istediğimiz bir analizin tipik örneği olur.</p>
-<p>Bunu yapmak için, gruplama değişkenlerimizi izole etmek amacıyla bunları ayırmalıyız.</p>
-<p>İlk adım, önceki bölümde yaptığımıza benzer. Gruplama değişkenimizi tuple'ın ilk öğesi olarak izole etmeliyiz. Hatırlayın, ilk öğemiz şu anda <code>id</code>, <code>repeat</code> ve <code>interval</code> alanlarının bir map'i:</p>
+<h2 id="5-aggregating-samples-using-grouptuple">5. Aggregating samples using <code>groupTuple</code><a class="headerlink" href="#5-aggregating-samples-using-grouptuple" title="Permanent link">&para;</a></h2>
+<p>In the previous sections, we learned how to split data from an input file and filter by specific fields (in our case normal and tumor samples). But this only covers a single type of joining. What if we want to group samples by a specific attribute? For example, instead of joining matched normal-tumor pairs, we might want to process all samples from "sampleA" together regardless of their type. This pattern is common in bioinformatics workflows where you may want to process related samples separately for efficiency reasons before comparing or combining the results at the end.</p>
+<p>Nextflow includes built in methods to do this, the main one we will look at is <code>groupTuple</code>.</p>
+<p>Let's start by grouping all of our samples that have the same <code>id</code> and <code>interval</code> fields, this would be typical of an analysis where we wanted to group technical replicates but keep meaningfully different samples separated.</p>
+<p>To do this, we should separate out our grouping variables so we can use them in isolation.</p>
+<p>The first step is similar to what we did in the previous section. We must isolate our grouping variable as the first element of the tuple. Remember, our first element is currently a map of <code>id</code>, <code>repeat</code> and <code>interval</code> fields:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-68-1">1</a></span>
 <span class="normal"><a href="#__codelineno-68-2">2</a></span>
 <span class="normal"><a href="#__codelineno-68-3">3</a></span>
@@ -5265,8 +5577,8 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 <a id="__codelineno-68-4" name="__codelineno-68-4"></a><span class="w">  </span><span class="s2">&quot;interval&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;chr1&quot;</span>
 <a id="__codelineno-68-5" name="__codelineno-68-5"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p><code>id</code> ve <code>interval</code> alanlarımızı map'ten izole etmek için daha önceki <code>subMap</code> metodunu yeniden kullanabiliriz. Daha önce olduğu gibi, her örnek için tuple'ın ilk öğesine <code>subMap</code> metodunu uygulamak amacıyla <code>map</code> operatörünü kullanacağız.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">Sonra</label><label for="__tabbed_16_2">Önce</label></div>
+<p>We can reuse the <code>subMap</code> method from before to isolate our <code>id</code> and <code>interval</code> fields from the map. Like before, we will use <code>map</code> operator to apply the <code>subMap</code> method to the first element of the tuple for each sample.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">After</label><label for="__tabbed_16_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-69-20">20</a></span>
@@ -5332,11 +5644,11 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 </div>
 </div>
 </div>
-<p>Kanal içeriklerini kontrol etmek için tekrar çalıştıralım:</p>
+<p>Let's run it again and check the channel contents:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Komut çıktısı</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-72-2" name="__codelineno-72-2" href="#__codelineno-72-2"></a>
 <a id="__codelineno-72-3" name="__codelineno-72-3" href="#__codelineno-72-3"></a><span class="go">Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76</span>
@@ -5355,13 +5667,13 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 <a id="__codelineno-72-16" name="__codelineno-72-16" href="#__codelineno-72-16"></a><span class="go">[[id:patientC, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p><code>id</code> ve <code>interval</code> alanlarını başarıyla izole ettiğimizi ancak örnekleri henüz gruplamadığımızı görebiliriz.</p>
+<p>We can see that we have successfully isolated the <code>id</code> and <code>interval</code> fields, but not grouped the samples yet.</p>
 <div class="admonition note">
-<p class="admonition-title">Not</p>
-<p>Burada <code>replicate</code> alanını atıyoruz. Bunun nedeni, daha aşağı akış işleme için buna ihtiyacımız olmamasıdır. Bu eğitimi tamamladıktan sonra, sonraki gruplamayı etkilemeden bunu dahil edip edemeyeceğinize bakın!</p>
+<p class="admonition-title">Note</p>
+<p>We are discarding the <code>replicate</code> field here. This is because we don't need it for further downstream processing. After completing this tutorial, see if you can include it without affecting the later grouping!</p>
 </div>
-<p>Şimdi <a href="https://www.nextflow.io/docs/latest/operator.html#grouptuple"><code>groupTuple</code> operatörünü</a> kullanarak örnekleri bu yeni gruplama öğesine göre gruplayalım.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">Sonra</label><label for="__tabbed_17_2">Önce</label></div>
+<p>Let's now group the samples by this new grouping element, using the <a href="https://www.nextflow.io/docs/latest/operator.html#grouptuple"><code>groupTuple</code> operator</a>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">After</label><label for="__tabbed_17_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-73-30">30</a></span>
@@ -5407,11 +5719,11 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 </div>
 </div>
 </div>
-<p>Hepsi bu kadar! Sadece tek bir satır kod ekledik. Çalıştırdığımızda ne olacağını görelim:</p>
+<p>That's all there is to it! We just added a single line of code. Let's see what happens when we run it:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Komut çıktısı</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a>
 <a id="__codelineno-76-3" name="__codelineno-76-3" href="#__codelineno-76-3"></a><span class="go">Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d</span>
@@ -5427,35 +5739,35 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 <a id="__codelineno-76-13" name="__codelineno-76-13" href="#__codelineno-76-13"></a><span class="go">[[id:patientC, interval:chr3], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]</span>
 </code></pre></div>
 </details>
-<p>Verilerimizin yapısının değiştiğini ve her kanal öğesinde dosyaların artık <code>[patientA_rep1_normal.bam, patientA_rep2_normal.bam]</code> gibi tuple'lar içinde yer aldığını not edin. Bunun nedeni, <code>groupTuple</code> kullandığımızda Nextflow'un bir grubun her örneği için tekil dosyaları birleştirmesidir. Aşağı akışta verileri işlemeye çalışırken bunu hatırlamak önemlidir.</p>
+<p>Note our data has changed structure and within each channel element the files now contained in tuples like <code>[patientA_rep1_normal.bam, patientA_rep2_normal.bam]</code>. This is because when we use <code>groupTuple</code>, Nextflow combines the single files for each sample of a group. This is important to remember when trying to handle the data downstream.</p>
 <div class="admonition note">
-<p class="admonition-title">Not</p>
-<p><a href="https://www.nextflow.io/docs/latest/reference/operator.html#transpose"><code>transpose</code></a>, groupTuple'ın tersidir. Bir kanaldaki öğeleri açar ve düzleştirir. Yukarıda gerçekleştirdiğimiz gruplamayı geri almak için <code>transpose</code> eklemeyi deneyin!</p>
+<p class="admonition-title">Note</p>
+<p><a href="https://www.nextflow.io/docs/latest/reference/operator.html#transpose"><code>transpose</code></a> is the opposite of groupTuple. It unpacks the items in a channel and flattens them. Try and add <code>transpose</code> and undo the grouping we performed above!</p>
 </div>
-<h3 id="ozetle_3">Özetle<a class="headerlink" href="#ozetle_3" title="Permanent link">&para;</a></h3>
-<p>Bu bölümde öğrendikleriniz:</p>
+<h3 id="takeaway_3">Takeaway<a class="headerlink" href="#takeaway_3" title="Permanent link">&para;</a></h3>
+<p>In this section, you've learned:</p>
 <ul>
-<li><strong>İlgili örnekleri gruplama</strong>: Örnekleri ortak özelliklere göre toplamak için <code>groupTuple</code> nasıl kullanılır</li>
-<li><strong>Gruplama anahtarlarını izole etme</strong>: Gruplama için belirli alanları çıkarmak üzere <code>subMap</code> nasıl kullanılır</li>
-<li><strong>Gruplanmış veri yapılarını işleme</strong>: <code>groupTuple</code> tarafından oluşturulan iç içe yapıyla nasıl çalışılır</li>
-<li><strong>Teknik replik işleme</strong>: Aynı deneysel koşulları paylaşan örnekler nasıl gruplandırılır</li>
+<li><strong>Grouping related samples</strong>: How to use <code>groupTuple</code> to aggregate samples by common attributes</li>
+<li><strong>Isolating grouping keys</strong>: How to use <code>subMap</code> to extract specific fields for grouping</li>
+<li><strong>Handling grouped data structures</strong>: How to work with the nested structure created by <code>groupTuple</code></li>
+<li><strong>Technical replicate handling</strong>: How to group samples that share the same experimental conditions</li>
 </ul>
 <hr />
-<h2 id="ozet">Özet<a class="headerlink" href="#ozet" title="Permanent link">&para;</a></h2>
-<p>Bu yan görevde, kanalları kullanarak verileri bölmeyi ve gruplamayı öğrendiniz.</p>
-<p>Verileri pipeline boyunca akarken değiştirerek, döngüler veya while ifadeleri kullanmadan ölçeklenebilir bir pipeline oluşturabilirsiniz; bu, daha geleneksel yaklaşımlara göre çeşitli avantajlar sunar:</p>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>In this side quest, you've learned how to split and group data using channels.</p>
+<p>By modifying the data as it flows through the pipeline, you can construct a scalable pipeline without using loops or while statements, offering several advantages over more traditional approaches:</p>
 <ul>
-<li>Ek kod olmadan istediğimiz kadar çok veya az girdiyle ölçeklenebiliriz</li>
-<li>Yineleme yerine verilerin pipeline boyunca akışını yönetmeye odaklanıyoruz</li>
-<li>Gerektiği kadar karmaşık veya basit olabiliriz</li>
-<li>Pipeline daha bildirimsel hale gelir; nasıl yapılacağı yerine ne yapılması gerektiğine odaklanır</li>
-<li>Nextflow, bağımsız işlemleri paralel olarak çalıştırarak yürütmeyi bizim için optimize eder</li>
+<li>We can scale to as many or as few inputs as we want with no additional code</li>
+<li>We focus on handling the flow of data through the pipeline, instead of iteration</li>
+<li>We can be as complex or simple as required</li>
+<li>The pipeline becomes more declarative, focusing on what should happen rather than how it should happen</li>
+<li>Nextflow will optimize execution for us by running independent operations in parallel</li>
 </ul>
-<p>Bu kanal işlemlerinde ustalaşmak, karmaşık veri ilişkilerini döngülere veya yinelemeli programlamaya başvurmadan ele alan esnek, ölçeklenebilir pipeline'lar oluşturmanıza olanak tanır ve Nextflow'un yürütmeyi optimize etmesine ve bağımsız işlemleri otomatik olarak paralelleştirmesine izin verir.</p>
-<h3 id="temel-desenler">Temel desenler<a class="headerlink" href="#temel-desenler" title="Permanent link">&para;</a></h3>
+<p>Mastering these channel operations will enable you to build flexible, scalable pipelines that handle complex data relationships without resorting to loops or iterative programming, allowing Nextflow to optimize execution and parallelize independent operations automatically.</p>
+<h3 id="key-patterns">Key patterns<a class="headerlink" href="#key-patterns" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
-<p><strong>Yapılandırılmış girdi verileri oluşturma:</strong> Meta map'lerle bir CSV dosyasından başlama (<a href="../metadata/">İş akışlarında meta veri</a>'den desenlere dayanarak)</p>
+<p><strong>Creating structured input data:</strong> Starting from a CSV file with meta maps (building on patterns from <a href="../metadata/">Metadata in workflows</a>)</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="n">ch_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/samplesheet.csv&quot;</span><span class="o">)</span>
 <a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-77-3" name="__codelineno-77-3" href="#__codelineno-77-3"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
@@ -5464,19 +5776,19 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 </code></pre></div>
 </li>
 <li>
-<p><strong>Verileri ayrı kanallara bölme:</strong> <code>type</code> alanına göre verileri bağımsız akışlara bölmek için <code>filter</code> kullandık</p>
+<p><strong>Splitting data into separate channels:</strong> We used <code>filter</code> to divide data into independent streams based on the <code>type</code> field</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a><span class="n">channel</span><span class="o">.</span><span class="na">filter</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="o">.</span><span class="na">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;tumor&#39;</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div>
 </li>
 <li>
-<p><strong>Eşleşen örnekleri birleştirme:</strong> <code>id</code> ve <code>repeat</code> alanlarına göre ilişkili örnekleri yeniden birleştirmek için <code>join</code> kullandık</p>
+<p><strong>Joining matched samples:</strong> We used <code>join</code> to recombine related samples based on <code>id</code> and <code>repeat</code> fields</p>
 <ul>
-<li>İki kanalı anahtara göre birleştirme (tuple'ın ilk öğesi)</li>
+<li>Join two channels by key (first element of tuple)</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a><span class="n">tumor_ch</span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="n">normal_ch</span><span class="o">)</span>
 </code></pre></div>
 <ul>
-<li>Birleştirme anahtarını çıkarma ve bu değere göre birleştirme</li>
+<li>Extract joining key and join by this value</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-80-1" name="__codelineno-80-1" href="#__codelineno-80-1"></a><span class="n">tumor_ch</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-80-2" name="__codelineno-80-2" href="#__codelineno-80-2"></a><span class="w">    </span><span class="o">.</span><span class="na">join</span><span class="o">(</span>
@@ -5484,7 +5796,7 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 <a id="__codelineno-80-4" name="__codelineno-80-4" href="#__codelineno-80-4"></a><span class="w">    </span><span class="o">)</span>
 </code></pre></div>
 <ul>
-<li>subMap kullanarak birden fazla alanda birleştirme</li>
+<li>Join on multiple fields using subMap</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-81-1" name="__codelineno-81-1" href="#__codelineno-81-1"></a><span class="n">tumor_ch</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;repeat&#39;</span><span class="o">]),</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-81-2" name="__codelineno-81-2" href="#__codelineno-81-2"></a><span class="w">    </span><span class="o">.</span><span class="na">join</span><span class="o">(</span>
@@ -5493,31 +5805,31 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 </code></pre></div>
 </li>
 <li>
-<p><strong>Aralıklara dağıtma:</strong> Paralel işleme için örneklerin genomik aralıklarla Kartezyen çarpımlarını oluşturmak üzere <code>combine</code> kullandık.</p>
+<p><strong>Distributing across intervals:</strong> We used <code>combine</code> to create Cartesian products of samples with genomic intervals for parallel processing.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-82-1" name="__codelineno-82-1" href="#__codelineno-82-1"></a><span class="n">samples_ch</span><span class="o">.</span><span class="na">combine</span><span class="o">(</span><span class="n">intervals_ch</span><span class="o">)</span>
 </code></pre></div>
 </li>
 <li>
-<p><strong>Gruplama anahtarlarına göre toplama:</strong> Her tuple'daki ilk öğeye göre gruplamak için <code>groupTuple</code> kullandık; böylece <code>id</code> ve <code>interval</code> alanlarını paylaşan örnekleri topladık ve teknik replikleri birleştirdik.</p>
+<p><strong>Aggregating by grouping keys:</strong> We used <code>groupTuple</code> to group by the first element in each tuple, thereby collecting samples sharing <code>id</code> and <code>interval</code> fields and merging technical replicates.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-83-1" name="__codelineno-83-1" href="#__codelineno-83-1"></a><span class="n">channel</span><span class="o">.</span><span class="na">groupTuple</span><span class="o">()</span>
 </code></pre></div>
 </li>
 <li>
-<p><strong>Veri yapısını optimize etme:</strong> Belirli alanları çıkarmak için <code>subMap</code> kullandık ve dönüşümleri yeniden kullanılabilir hale getirmek için adlandırılmış bir closure oluşturduk.</p>
+<p><strong>Optimizing the data structure:</strong> We used <code>subMap</code> to extract specific fields and created a named closure for making transformations reusable.</p>
 <ul>
-<li>Bir map'ten belirli alanları çıkarma</li>
+<li>Extract specific fields from a map</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;repeat&#39;</span><span class="o">])</span>
 </code></pre></div>
 <ul>
-<li>Yeniden kullanılabilir dönüşümler için adlandırılmış closure kullanma</li>
+<li>Use named closure for reusable transformations</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a><span class="n">getSampleIdAndReplicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;repeat&#39;</span><span class="o">]),</span><span class="w"> </span><span class="n">file</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-85-2" name="__codelineno-85-2" href="#__codelineno-85-2"></a><span class="n">channel</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">getSampleIdAndReplicate</span><span class="o">)</span>
 </code></pre></div>
 </li>
 </ol>
-<h3 id="ek-kaynaklar">Ek kaynaklar<a class="headerlink" href="#ek-kaynaklar" title="Permanent link">&para;</a></h3>
+<h3 id="additional-resources">Additional resources<a class="headerlink" href="#additional-resources" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://www.nextflow.io/docs/latest/operator.html#filter">filter</a></li>
 <li><a href="https://www.nextflow.io/docs/latest/operator.html#map">map</a></li>
@@ -5526,8 +5838,8 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 <li><a href="https://www.nextflow.io/docs/latest/operator.html#combine">combine</a></li>
 </ul>
 <hr />
-<h2 id="srada-ne-var">Sırada ne var?<a class="headerlink" href="#srada-ne-var" title="Permanent link">&para;</a></h2>
-<p><a href="../">Yan Görevler menüsüne</a> dönün veya listedeki bir sonraki konuya geçmek için sayfanın sağ alt köşesindeki düğmeye tıklayın.</p><style type="text/css">.quiz {
+<h2 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
+<p>Return to the <a href="../">menu of Side Quests</a> or click the button in the bottom right of the page to move on to the next topic in the list.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -7225,7 +7537,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Altbilgi" >
         
           
-          <a href="../working_with_files/" class="md-footer__link md-footer__link--prev" aria-label="Önceki: Dosya Girdi İşleme">
+          <a href="../metadata/" class="md-footer__link md-footer__link--prev" aria-label="Önceki: Metadata and meta maps">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -7235,20 +7547,20 @@ window.mkdocsQuizConfig = {
                 Önceki
               </span>
               <div class="md-ellipsis">
-                Dosya Girdi İşleme
+                Metadata and meta maps
               </div>
             </div>
           </a>
         
         
           
-          <a href="../workflows_of_workflows/" class="md-footer__link md-footer__link--next" aria-label="Sonraki: İç İçe Workflow&#39;lar">
+          <a href="../nf_test/" class="md-footer__link md-footer__link--next" aria-label="Sonraki: Testing with nf-test">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Sonraki
               </span>
               <div class="md-ellipsis">
-                İç İçe Workflow'lar
+                Testing with nf-test
               </div>
             </div>
             <div class="md-footer__button md-icon">

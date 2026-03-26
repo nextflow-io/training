@@ -11,10 +11,10 @@
         <link rel="canonical" href="https://training.nextflow.io/ko/side_quests/splitting_and_grouping/">
       
       
-        <link rel="prev" href="../working_with_files/">
+        <link rel="prev" href="../metadata/">
       
       
-        <link rel="next" href="../workflows_of_workflows/">
+        <link rel="next" href="../nf_test/">
       
       
         
@@ -47,7 +47,7 @@
     
     
       
-        <title>데이터 분할 및 그룹화 - training.nextflow.io</title>
+        <title>Splitting and Grouping - training.nextflow.io</title>
       
     
     
@@ -157,7 +157,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#splitting-and-grouping" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -196,7 +196,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              데이터 분할 및 그룹화
+              Splitting and Grouping
             
           </span>
         </div>
@@ -2345,7 +2345,35 @@
   <span class="md-ellipsis">
     
   
-    개발 환경
+    Development Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../essential_scripting_patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Essential Nextflow Scripting Patterns
   
 
     
@@ -2373,35 +2401,7 @@
   <span class="md-ellipsis">
     
   
-    메타데이터와 메타 맵
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../working_with_files/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    파일 입력 처리
+    Metadata and meta maps
   
 
     
@@ -2438,7 +2438,7 @@
   <span class="md-ellipsis">
     
   
-    데이터 분할 및 그룹화
+    Splitting and Grouping
   
 
     
@@ -2456,7 +2456,7 @@
   <span class="md-ellipsis">
     
   
-    데이터 분할 및 그룹화
+    Splitting and Grouping
   
 
     
@@ -2476,40 +2476,40 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#learning-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
-        학습 목표
+        Learning goals
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        사전 요구 사항
+        Prerequisites
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#0" class="md-nav__link">
+  <a href="#0-get-started" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. 시작하기
+        0. Get started
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="0. 시작하기">
+    <nav class="md-nav" aria-label="0. Get started">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#open-the-training-codespace" class="md-nav__link">
     <span class="md-ellipsis">
       
-        교육 코드스페이스 열기
+        Open the training codespace
       
     </span>
   </a>
@@ -2517,10 +2517,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#move-into-the-project-directory" class="md-nav__link">
     <span class="md-ellipsis">
       
-        프로젝트 디렉토리로 이동
+        Move into the project directory
       
     </span>
   </a>
@@ -2528,10 +2528,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#review-the-materials" class="md-nav__link">
     <span class="md-ellipsis">
       
-        자료 검토
+        Review the materials
       
     </span>
   </a>
@@ -2539,10 +2539,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#review-the-assignment" class="md-nav__link">
     <span class="md-ellipsis">
       
-        과제 검토
+        Review the assignment
       
     </span>
   </a>
@@ -2550,10 +2550,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#readiness-checklist" class="md-nav__link">
     <span class="md-ellipsis">
       
-        준비 체크리스트
+        Readiness checklist
       
     </span>
   </a>
@@ -2564,22 +2564,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#1-read-in-sample-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. 샘플 데이터 읽기
+        1. Read in sample data
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. 샘플 데이터 읽기">
+    <nav class="md-nav" aria-label="1. Read in sample data">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-splitcsv" class="md-nav__link">
+  <a href="#11-read-in-sample-data-with-splitcsv-and-create-meta-maps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. splitCsv로 샘플 데이터 읽고 메타 맵 생성
+        1.1. Read in sample data with splitCsv and create meta maps
       
     </span>
   </a>
@@ -2590,22 +2590,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#2-filter-and-transform-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 데이터 필터링 및 변환
+        2. Filter and transform data
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. 데이터 필터링 및 변환">
+    <nav class="md-nav" aria-label="2. Filter and transform data">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-filter" class="md-nav__link">
+  <a href="#21-filter-data-with-filter" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. filter로 데이터 필터링
+        2.1. Filter data with filter
       
     </span>
   </a>
@@ -2613,10 +2613,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22" class="md-nav__link">
+  <a href="#22-create-separate-filtered-channels" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. 별도의 필터링된 채널 생성
+        2.2. Create separate filtered channels
       
     </span>
   </a>
@@ -2624,10 +2624,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#takeaway" class="md-nav__link">
     <span class="md-ellipsis">
       
-        핵심 정리
+        Takeaway
       
     </span>
   </a>
@@ -2638,34 +2638,34 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
+  <a href="#3-joining-channels-by-identifiers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. 식별자로 채널 결합
+        3. Joining channels by identifiers
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. 식별자로 채널 결합">
+    <nav class="md-nav" aria-label="3. Joining channels by identifiers">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-map-join-id" class="md-nav__link">
+  <a href="#31-use-map-and-join-to-combine-based-on-patient-id" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. map과 join을 사용하여 환자 ID 기준으로 결합
+        3.1. Use map and join to combine based on patient ID
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3.1. map과 join을 사용하여 환자 ID 기준으로 결합">
+    <nav class="md-nav" aria-label="3.1. Use map and join to combine based on patient ID">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#311" class="md-nav__link">
+  <a href="#311-check-the-data-structure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.1. 데이터 구조 확인
+        3.1.1. Check the data structure
       
     </span>
   </a>
@@ -2673,10 +2673,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#312-id" class="md-nav__link">
+  <a href="#312-isolate-the-id-field" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.2. id 필드 분리
+        3.1.2. Isolate the id field
       
     </span>
   </a>
@@ -2684,10 +2684,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#313" class="md-nav__link">
+  <a href="#313-combine-the-two-channels" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.3. 두 채널 결합
+        3.1.3. Combine the two channels
       
     </span>
   </a>
@@ -2700,10 +2700,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32" class="md-nav__link">
+  <a href="#32-join-on-multiple-fields" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. 여러 필드로 결합
+        3.2. Join on multiple fields
       
     </span>
   </a>
@@ -2711,10 +2711,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-submap" class="md-nav__link">
+  <a href="#33-use-submap-to-create-a-new-joining-key" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. subMap을 사용하여 새 결합 키 생성
+        3.3. Use subMap to create a new joining key
       
     </span>
   </a>
@@ -2722,10 +2722,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-map" class="md-nav__link">
+  <a href="#34-use-a-named-closure-in-map" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4. map에서 명명된 클로저 사용
+        3.4. Use a named closure in map
       
     </span>
   </a>
@@ -2733,10 +2733,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35" class="md-nav__link">
+  <a href="#35-reduce-duplication-of-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5. 데이터 중복 줄이기
+        3.5. Reduce duplication of data
       
     </span>
   </a>
@@ -2744,10 +2744,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#36" class="md-nav__link">
+  <a href="#36-remove-redundant-information" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.6. 중복 정보 제거
+        3.6. Remove redundant information
       
     </span>
   </a>
@@ -2755,58 +2755,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
+  <a href="#takeaway_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        핵심 정리
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>  <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. 구간에 샘플 분산
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. 구간에 샘플 분산">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#41-combine" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.1. combine을 사용하여 구간에 샘플 분산
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#42" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.2. 채널 구성
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        핵심 정리
+        Takeaway
       
     </span>
   </a>
@@ -2817,22 +2769,44 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#5-grouptuple" class="md-nav__link">
+  <a href="#4-spread-samples-intervals" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. groupTuple을 사용하여 샘플 집계
+        4. Spread samples intervals
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. groupTuple을 사용하여 샘플 집계">
+    <nav class="md-nav" aria-label="4. Spread samples intervals">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+  <a href="#41-spread-samples-over-intervals-using-combine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        핵심 정리
+        4.1. Spread samples over intervals using combine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-organize-the-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Organize the channel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Takeaway
       
     </span>
   </a>
@@ -2843,33 +2817,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#5-aggregating-samples-using-grouptuple" class="md-nav__link">
     <span class="md-ellipsis">
       
-        요약
+        5. Aggregating samples using groupTuple
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="요약">
+    <nav class="md-nav" aria-label="5. Aggregating samples using groupTuple">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
+  <a href="#takeaway_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        핵심 패턴
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_15" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        추가 자료
+        Takeaway
       
     </span>
   </a>
@@ -2880,10 +2843,47 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#_16" class="md-nav__link">
+  <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        다음 단계
+        Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's next?
       
     </span>
   </a>
@@ -3091,6 +3091,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../nf_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing with nf-test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../workflows_of_workflows/" class="md-nav__link">
         
   
@@ -3098,7 +3126,35 @@
   <span class="md-ellipsis">
     
   
-    워크플로우의 워크플로우
+    Workflows of Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../working_with_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File input processing
   
 
     
@@ -3126,7 +3182,82 @@
   <span class="md-ellipsis">
     
   
-    워크플로우 디버깅
+    Debugging Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_11" id="__nav_6_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Plugin Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Development
   
 
     
@@ -3147,14 +3278,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../essential_scripting_patterns/" class="md-nav__link">
+      <a href="../plugin_development/01_plugin_basics/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    필수 Nextflow 스크립팅 패턴
+    Part 1: Plugin Basics
   
 
     
@@ -3175,14 +3306,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../nf-test/" class="md-nav__link">
+      <a href="../plugin_development/02_create_project/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    nf-test로 테스트하기
+    Part 2: Create a Plugin Project
   
 
     
@@ -3191,6 +3322,182 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/03_custom_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 3: Custom Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/04_build_and_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 4: Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/05_observers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 5: Trace Observers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/06_configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 6: Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/next_steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Next Steps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -3639,40 +3946,40 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#learning-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
-        학습 목표
+        Learning goals
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        사전 요구 사항
+        Prerequisites
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#0" class="md-nav__link">
+  <a href="#0-get-started" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. 시작하기
+        0. Get started
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="0. 시작하기">
+    <nav class="md-nav" aria-label="0. Get started">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#open-the-training-codespace" class="md-nav__link">
     <span class="md-ellipsis">
       
-        교육 코드스페이스 열기
+        Open the training codespace
       
     </span>
   </a>
@@ -3680,10 +3987,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#move-into-the-project-directory" class="md-nav__link">
     <span class="md-ellipsis">
       
-        프로젝트 디렉토리로 이동
+        Move into the project directory
       
     </span>
   </a>
@@ -3691,10 +3998,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#review-the-materials" class="md-nav__link">
     <span class="md-ellipsis">
       
-        자료 검토
+        Review the materials
       
     </span>
   </a>
@@ -3702,10 +4009,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#review-the-assignment" class="md-nav__link">
     <span class="md-ellipsis">
       
-        과제 검토
+        Review the assignment
       
     </span>
   </a>
@@ -3713,10 +4020,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#readiness-checklist" class="md-nav__link">
     <span class="md-ellipsis">
       
-        준비 체크리스트
+        Readiness checklist
       
     </span>
   </a>
@@ -3727,22 +4034,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#1-read-in-sample-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. 샘플 데이터 읽기
+        1. Read in sample data
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. 샘플 데이터 읽기">
+    <nav class="md-nav" aria-label="1. Read in sample data">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-splitcsv" class="md-nav__link">
+  <a href="#11-read-in-sample-data-with-splitcsv-and-create-meta-maps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. splitCsv로 샘플 데이터 읽고 메타 맵 생성
+        1.1. Read in sample data with splitCsv and create meta maps
       
     </span>
   </a>
@@ -3753,22 +4060,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#2-filter-and-transform-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 데이터 필터링 및 변환
+        2. Filter and transform data
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. 데이터 필터링 및 변환">
+    <nav class="md-nav" aria-label="2. Filter and transform data">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-filter" class="md-nav__link">
+  <a href="#21-filter-data-with-filter" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. filter로 데이터 필터링
+        2.1. Filter data with filter
       
     </span>
   </a>
@@ -3776,10 +4083,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22" class="md-nav__link">
+  <a href="#22-create-separate-filtered-channels" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. 별도의 필터링된 채널 생성
+        2.2. Create separate filtered channels
       
     </span>
   </a>
@@ -3787,10 +4094,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#takeaway" class="md-nav__link">
     <span class="md-ellipsis">
       
-        핵심 정리
+        Takeaway
       
     </span>
   </a>
@@ -3801,34 +4108,34 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
+  <a href="#3-joining-channels-by-identifiers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. 식별자로 채널 결합
+        3. Joining channels by identifiers
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. 식별자로 채널 결합">
+    <nav class="md-nav" aria-label="3. Joining channels by identifiers">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-map-join-id" class="md-nav__link">
+  <a href="#31-use-map-and-join-to-combine-based-on-patient-id" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. map과 join을 사용하여 환자 ID 기준으로 결합
+        3.1. Use map and join to combine based on patient ID
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3.1. map과 join을 사용하여 환자 ID 기준으로 결합">
+    <nav class="md-nav" aria-label="3.1. Use map and join to combine based on patient ID">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#311" class="md-nav__link">
+  <a href="#311-check-the-data-structure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.1. 데이터 구조 확인
+        3.1.1. Check the data structure
       
     </span>
   </a>
@@ -3836,10 +4143,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#312-id" class="md-nav__link">
+  <a href="#312-isolate-the-id-field" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.2. id 필드 분리
+        3.1.2. Isolate the id field
       
     </span>
   </a>
@@ -3847,10 +4154,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#313" class="md-nav__link">
+  <a href="#313-combine-the-two-channels" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.3. 두 채널 결합
+        3.1.3. Combine the two channels
       
     </span>
   </a>
@@ -3863,10 +4170,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32" class="md-nav__link">
+  <a href="#32-join-on-multiple-fields" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. 여러 필드로 결합
+        3.2. Join on multiple fields
       
     </span>
   </a>
@@ -3874,10 +4181,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-submap" class="md-nav__link">
+  <a href="#33-use-submap-to-create-a-new-joining-key" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. subMap을 사용하여 새 결합 키 생성
+        3.3. Use subMap to create a new joining key
       
     </span>
   </a>
@@ -3885,10 +4192,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-map" class="md-nav__link">
+  <a href="#34-use-a-named-closure-in-map" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4. map에서 명명된 클로저 사용
+        3.4. Use a named closure in map
       
     </span>
   </a>
@@ -3896,10 +4203,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35" class="md-nav__link">
+  <a href="#35-reduce-duplication-of-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5. 데이터 중복 줄이기
+        3.5. Reduce duplication of data
       
     </span>
   </a>
@@ -3907,10 +4214,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#36" class="md-nav__link">
+  <a href="#36-remove-redundant-information" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.6. 중복 정보 제거
+        3.6. Remove redundant information
       
     </span>
   </a>
@@ -3918,58 +4225,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
+  <a href="#takeaway_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        핵심 정리
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>  <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. 구간에 샘플 분산
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. 구간에 샘플 분산">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#41-combine" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.1. combine을 사용하여 구간에 샘플 분산
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#42" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.2. 채널 구성
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        핵심 정리
+        Takeaway
       
     </span>
   </a>
@@ -3980,22 +4239,44 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#5-grouptuple" class="md-nav__link">
+  <a href="#4-spread-samples-intervals" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. groupTuple을 사용하여 샘플 집계
+        4. Spread samples intervals
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. groupTuple을 사용하여 샘플 집계">
+    <nav class="md-nav" aria-label="4. Spread samples intervals">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+  <a href="#41-spread-samples-over-intervals-using-combine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        핵심 정리
+        4.1. Spread samples over intervals using combine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-organize-the-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Organize the channel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Takeaway
       
     </span>
   </a>
@@ -4006,33 +4287,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#5-aggregating-samples-using-grouptuple" class="md-nav__link">
     <span class="md-ellipsis">
       
-        요약
+        5. Aggregating samples using groupTuple
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="요약">
+    <nav class="md-nav" aria-label="5. Aggregating samples using groupTuple">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
+  <a href="#takeaway_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        핵심 패턴
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_15" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        추가 자료
+        Takeaway
       
     </span>
   </a>
@@ -4043,10 +4313,47 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#_16" class="md-nav__link">
+  <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        다음 단계
+        Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's next?
       
     </span>
   </a>
@@ -4292,7 +4599,7 @@
 
  
 <a
-  href="https://github.com/nextflow-io/training/edit/master/docs/side_quests/splitting_and_grouping.md"
+  href="https://github.com/nextflow-io/training/edit/master/docs/side_quests/splitting_and_grouping/index.md"
   title="이 페이지를 편집"
   class="md-content__button md-icon"
   rel="edit"
@@ -4309,52 +4616,57 @@
 </a>
  
 
-<h1 id="_1">데이터 분할 및 그룹화<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> AI 지원 번역 - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">자세히 알아보기 및 개선 제안</a></span></p>
-<p>Nextflow는 데이터를 유연하게 다룰 수 있는 강력한 도구를 제공합니다. 핵심 기능 중 하나는 데이터를 여러 스트림으로 분할한 다음 관련 항목을 다시 그룹화하는 것입니다. 이는 분석을 위해 결과를 결합하기 전에 다양한 유형의 샘플을 별도로 처리해야 하는 생물정보학 워크플로우에서 특히 유용합니다.</p>
-<p>우편물을 분류하는 것과 같다고 생각하면 됩니다. 목적지별로 편지를 분리하고, 각 묶음을 다르게 처리한 다음, 같은 사람에게 가는 항목을 다시 결합합니다. Nextflow는 특수 연산자를 사용하여 과학 데이터로 이를 수행합니다. 이 접근 방식은 분산 컴퓨팅 및 생물정보학 워크플로우에서 일반적으로 <strong>scatter/gather</strong> 패턴으로 알려져 있습니다.</p>
-<p>Nextflow의 채널 시스템은 이러한 유연성의 핵심입니다. 채널은 워크플로우의 여러 부분을 연결하여 데이터가 분석을 통해 흐를 수 있도록 합니다. 단일 데이터 소스에서 여러 채널을 생성하고, 각 채널을 다르게 처리한 다음, 필요할 때 채널을 다시 병합할 수 있습니다. 이 접근 방식을 사용하면 복잡한 생물정보학 분석의 분기 및 수렴 경로를 자연스럽게 반영하는 워크플로우를 설계할 수 있습니다.</p>
-<h3 id="_2">학습 목표<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p>이 사이드 퀘스트에서는 Nextflow의 채널 연산자를 사용하여 데이터를 분할하고 그룹화하는 방법을 학습합니다.
-샘플 정보와 관련 데이터 파일이 포함된 CSV 파일로 시작한 다음, 이 데이터를 조작하고 재구성합니다.</p>
-<p>이 사이드 퀘스트를 마치면 다음 기술을 사용하여 데이터 스트림을 효과적으로 분리하고 결합할 수 있습니다:</p>
+<h1 id="splitting-and-grouping">Splitting and Grouping<a class="headerlink" href="#splitting-and-grouping" title="Permanent link">&para;</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Translation in Progress</p>
+<p>This page has not yet been translated into your language.
+You are viewing the original English content.</p>
+<p>Want to help? See our <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">translation guide</a>.</p>
+</div>
+<p>Nextflow provides powerful tools for working with data flexibly. A key capability is splitting data into different streams and then grouping related items back together. This is especially valuable in bioinformatics workflows where you need to process different types of samples separately before combining results for analysis.</p>
+<p>Think of it like sorting mail: you separate letters by destination, process each pile differently, then recombine items going to the same person. Nextflow uses special operators to accomplish this with scientific data. This approach is also commonly known as the <strong>scatter/gather</strong> pattern in distributed computing and bioinformatics workflows.</p>
+<p>Nextflow's channel system is at the heart of this flexibility. Channels connect different parts of your workflow, allowing data to flow through your analysis. You can create multiple channels from a single data source, process each channel differently, and then merge channels back together when needed. This approach lets you design workflows that naturally mirror the branching and converging paths of complex bioinformatics analyses.</p>
+<h3 id="learning-goals">Learning goals<a class="headerlink" href="#learning-goals" title="Permanent link">&para;</a></h3>
+<p>In this side quest, you'll learn to split and group data using Nextflow's channel operators.
+We'll start with a CSV file containing sample information and associated data files, then manipulate and reorganize this data.</p>
+<p>By the end of this side quest, you'll be able to separate and combine data streams effectively, using the following techniques:</p>
 <ul>
-<li><code>splitCsv</code>를 사용하여 파일에서 데이터 읽기</li>
-<li><code>filter</code> 및 <code>map</code>으로 데이터 필터링 및 변환</li>
-<li><code>join</code> 및 <code>groupTuple</code>을 사용하여 관련 데이터 결합</li>
-<li>병렬 처리를 위해 <code>combine</code>으로 데이터 조합 생성</li>
-<li><code>subMap</code> 및 중복 제거 전략을 사용하여 데이터 구조 최적화</li>
-<li>채널 구조를 조작하는 데 도움이 되는 명명된 클로저로 재사용 가능한 함수 구축</li>
+<li>Read data from files using <code>splitCsv</code></li>
+<li>Filter and transform data with <code>filter</code> and <code>map</code></li>
+<li>Combine related data using <code>join</code> and <code>groupTuple</code></li>
+<li>Create data combinations with <code>combine</code> for parallel processing</li>
+<li>Optimize data structure using <code>subMap</code> and deduplication strategies</li>
+<li>Build reusable functions with named closures to help you manipulate channel structures</li>
 </ul>
-<p>이러한 기술은 깔끔하고 유지 관리 가능한 코드 구조를 유지하면서 여러 입력 파일과 다양한 유형의 데이터를 효율적으로 처리할 수 있는 워크플로우를 구축하는 데 도움이 됩니다.</p>
-<h3 id="_3">사전 요구 사항<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>이 사이드 퀘스트를 시작하기 전에 다음을 충족해야 합니다:</p>
+<p>These skills will help you build workflows that can handle multiple input files and different types of data efficiently, while maintaining clean, maintainable code structure.</p>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<p>Before taking on this side quest, you should:</p>
 <ul>
-<li><a href="../hello_nextflow/README.md">Hello Nextflow</a> 튜토리얼 또는 이에 상응하는 초급 과정을 완료했어야 합니다.</li>
-<li>기본 Nextflow 개념 및 메커니즘(프로세스, 채널, 연산자, 파일 작업, 메타데이터)을 편안하게 사용할 수 있어야 합니다.</li>
+<li>Have completed the <a href="../hello_nextflow/README.md">Hello Nextflow</a> tutorial or equivalent beginner's course.</li>
+<li>Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators, working with files, meta data)</li>
 </ul>
-<p><strong>선택 사항:</strong> <a href="../metadata/">워크플로우의 메타데이터</a> 사이드 퀘스트를 먼저 완료하는 것을 권장합니다.
-이 과정에서는 <code>splitCsv</code>로 CSV 파일을 읽고 메타 맵을 생성하는 기본 사항을 다루며, 여기서 이를 많이 사용할 것입니다.</p>
+<p><strong>Optional:</strong> We recommend completing the <a href="../metadata/">Metadata in workflows</a> side quest first.
+That covers the fundamentals of reading CSV files with <code>splitCsv</code> and creating meta maps, which we'll use heavily here.</p>
 <hr />
-<h2 id="0">0. 시작하기<a class="headerlink" href="#0" title="Permanent link">&para;</a></h2>
-<h4 id="_4">교육 코드스페이스 열기<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
-<p>아직 열지 않았다면 <a href="../../envsetup/">환경 설정</a>에 설명된 대로 교육 환경을 열어야 합니다.</p>
+<h2 id="0-get-started">0. Get started<a class="headerlink" href="#0-get-started" title="Permanent link">&para;</a></h2>
+<h4 id="open-the-training-codespace">Open the training codespace<a class="headerlink" href="#open-the-training-codespace" title="Permanent link">&para;</a></h4>
+<p>If you haven't yet done so, make sure to open the training environment as described in the <a href="../envsetup/index.md">Environment Setup</a>.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
-<h4 id="_5">프로젝트 디렉토리로 이동<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
-<p>이 튜토리얼의 파일이 있는 디렉토리로 이동하겠습니다.</p>
+<h4 id="move-into-the-project-directory">Move into the project directory<a class="headerlink" href="#move-into-the-project-directory" title="Permanent link">&para;</a></h4>
+<p>Let's move into the directory where the files for this tutorial are located.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>side-quests/splitting_and_grouping
 </code></pre></div>
-<p>VSCode가 이 디렉토리에 집중하도록 설정할 수 있습니다:</p>
+<p>You can set VSCode to focus on this directory:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>code<span class="w"> </span>.
 </code></pre></div>
-<h4 id="_6">자료 검토<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
-<p>메인 워크플로우 파일과 <code>samplesheet.csv</code>라는 샘플시트가 포함된 <code>data</code> 디렉토리를 찾을 수 있습니다.</p>
+<h4 id="review-the-materials">Review the materials<a class="headerlink" href="#review-the-materials" title="Permanent link">&para;</a></h4>
+<p>You'll find a main workflow file and a <code>data</code> directory containing a samplesheet named <code>samplesheet.csv</code>.</p>
 <div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">.</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">├── data</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">│   └── samplesheet.csv</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="go">└── main.nf</span>
 </code></pre></div>
-<p>샘플시트에는 환자 ID, 샘플 반복 번호, 유형(정상 또는 종양), 가상 데이터 파일 경로(실제로 존재하지 않지만 존재한다고 가정)를 포함한 여러 환자의 샘플 정보가 포함되어 있습니다.</p>
+<p>The samplesheet contains information about samples from different patients, including the patient ID, sample repeat number, type (normal or tumor), and paths to hypothetical data files (which don't actually exist, but we will pretend they do).</p>
 <div class="highlight"><span class="filename">samplesheet.csv</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">id,repeat,type,bam</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="go">patientA,1,normal,patientA_rep1_normal.bam</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">patientA,1,tumor,patientA_rep1_tumor.bam</span>
@@ -4365,37 +4677,37 @@
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="go">patientC,1,normal,patientC_rep1_normal.bam</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="go">patientC,1,tumor,patientC_rep1_tumor.bam</span>
 </code></pre></div>
-<p>이 샘플시트는 세 명의 환자(A, B, C)로부터 얻은 8개의 샘플을 나열합니다.</p>
-<p>각 환자에 대해 <code>tumor</code> 유형(일반적으로 종양 생검에서 유래) 또는 <code>normal</code> 유형(건강한 조직이나 혈액에서 채취)의 샘플이 있습니다.
-암 분석에 익숙하지 않다면, 이것이 대조 분석을 수행하기 위해 쌍을 이루는 종양/정상 샘플을 사용하는 실험 모델에 해당한다는 것만 알면 됩니다.</p>
-<p>특히 환자 A의 경우 두 세트의 기술적 반복(repeats)이 있습니다.</p>
+<p>This samplesheet lists eight samples from three patients (A, B, C).</p>
+<p>For each patient, we have samples that are of type <code>tumor</code> (typically originating from tumor biopsies) or <code>normal</code> (taken from healthy tissue or blood).
+If you're not familiar with cancer analysis, just know that this corresponds to an experimental model that uses paired tumor/normal samples to perform contrastive analyses.</p>
+<p>For patient A specifically, we have two sets of technical replicates (repeats).</p>
 <div class="admonition note">
-<p class="admonition-title">참고</p>
-<p>이 실험 설계에 익숙하지 않더라도 걱정하지 마세요. 이 튜토리얼을 이해하는 데 중요하지 않습니다.</p>
+<p class="admonition-title">Note</p>
+<p>Don't worry if you're not familiar with this experimental design, it's not critical for understanding this tutorial.</p>
 </div>
-<h4 id="_7">과제 검토<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
-<p>여러분의 과제는 다음을 수행하는 Nextflow 워크플로우를 작성하는 것입니다:</p>
+<h4 id="review-the-assignment">Review the assignment<a class="headerlink" href="#review-the-assignment" title="Permanent link">&para;</a></h4>
+<p>Your challenge is to write a Nextflow workflow that will:</p>
 <ol>
-<li>CSV 파일에서 샘플 데이터를 <strong>읽고</strong> 메타 맵으로 구조화</li>
-<li>유형(정상 vs 종양)에 따라 샘플을 다른 채널로 <strong>분리</strong></li>
-<li>환자 ID 및 반복 번호로 일치하는 종양/정상 쌍을 <strong>결합</strong></li>
-<li>병렬 처리를 위해 게놈 구간에 샘플을 <strong>분산</strong></li>
-<li>다운스트림 분석을 위해 관련 샘플을 다시 <strong>그룹화</strong></li>
+<li><strong>Read</strong> sample data from a CSV file and structure it with meta maps</li>
+<li><strong>Separate</strong> samples into different channels based on type (normal vs tumor)</li>
+<li><strong>Join</strong> matched tumor/normal pairs by patient ID and replicate number</li>
+<li><strong>Distribute</strong> samples across genomic intervals for parallel processing</li>
+<li><strong>Group</strong> related samples back together for downstream analysis</li>
 </ol>
-<p>이는 독립적인 처리를 위해 데이터를 분할한 다음 비교 분석을 위해 관련 항목을 재결합해야 하는 일반적인 생물정보학 패턴을 나타냅니다.</p>
-<h4 id="_8">준비 체크리스트<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
-<p>시작할 준비가 되었다고 생각하시나요?</p>
+<p>This represents a common bioinformatics pattern where you need to split data for independent processing, then recombine related items for comparative analysis.</p>
+<h4 id="readiness-checklist">Readiness checklist<a class="headerlink" href="#readiness-checklist" title="Permanent link">&para;</a></h4>
+<p>Think you're ready to dive in?</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> 이 과정의 목표와 사전 요구 사항을 이해했습니다</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> 코드스페이스가 실행 중입니다</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> 작업 디렉토리를 적절하게 설정했습니다</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> 과제를 이해했습니다</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I understand the goal of this course and its prerequisites</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> My codespace is up and running</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I've set my working directory appropriately</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I understand the assignment</li>
 </ul>
-<p>모든 항목을 체크할 수 있다면 시작할 준비가 된 것입니다.</p>
+<p>If you can check all the boxes, you're good to go.</p>
 <hr />
-<h2 id="1">1. 샘플 데이터 읽기<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
-<h3 id="11-splitcsv">1.1. <code>splitCsv</code>로 샘플 데이터 읽고 메타 맵 생성<a class="headerlink" href="#11-splitcsv" title="Permanent link">&para;</a></h3>
-<p><code>splitCsv</code>로 샘플 데이터를 읽고 메타 맵 패턴으로 구성하는 것부터 시작하겠습니다. <code>main.nf</code>에서 이미 워크플로우를 시작했음을 볼 수 있습니다.</p>
+<h2 id="1-read-in-sample-data">1. Read in sample data<a class="headerlink" href="#1-read-in-sample-data" title="Permanent link">&para;</a></h2>
+<h3 id="11-read-in-sample-data-with-splitcsv-and-create-meta-maps">1.1. Read in sample data with <code>splitCsv</code> and create meta maps<a class="headerlink" href="#11-read-in-sample-data-with-splitcsv-and-create-meta-maps" title="Permanent link">&para;</a></h3>
+<p>Let's start by reading in the sample data with <code>splitCsv</code> and organizing it into the meta map pattern. In the <code>main.nf</code>, you'll see that we've already started the workflow.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
 <span class="normal"><a href="#__codelineno-4-2">2</a></span>
 <span class="normal"><a href="#__codelineno-4-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
@@ -4403,21 +4715,21 @@
 </span><a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <div class="admonition note">
-<p class="admonition-title">참고</p>
-<p>이 튜토리얼 전체에서 모든 채널 변수에 <code>ch_</code> 접두사를 사용하여 Nextflow 채널임을 명확하게 표시합니다.</p>
+<p class="admonition-title">Note</p>
+<p>Throughout this tutorial, we'll use the <code>ch_</code> prefix for all channel variables to clearly indicate they are Nextflow channels.</p>
 </div>
-<p><a href="../metadata/">워크플로우의 메타데이터</a> 사이드 퀘스트를 완료했다면 이 패턴을 알아볼 것입니다. <code>splitCsv</code>를 사용하여 CSV를 읽고 즉시 메타 맵으로 데이터를 구조화하여 메타데이터를 파일 경로와 분리합니다.</p>
+<p>If you completed the <a href="../metadata/">Metadata in workflows</a> side quest, you'll recognize this pattern. We'll use <code>splitCsv</code> to read the CSV and immediately structure the data with a meta map to separate metadata from file paths.</p>
 <div class="admonition info">
-<p class="admonition-title">정보</p>
-<p>이 교육에서 <code>map</code>이라는 두 가지 다른 개념을 접하게 됩니다:</p>
+<p class="admonition-title">Info</p>
+<p>We'll encounter two different concepts called <code>map</code> in this training:</p>
 <ul>
-<li><strong>데이터 구조</strong>: 키-값 쌍을 저장하는 Groovy 맵(다른 언어의 딕셔너리/해시와 동등)</li>
-<li><strong>채널 연산자</strong>: 채널의 항목을 변환하는 <code>.map()</code> 연산자</li>
+<li><strong>Data structure</strong>: The Groovy map (equivalent to dictionaries/hashes in other languages) that stores key-value pairs</li>
+<li><strong>Channel operator</strong>: The <code>.map()</code> operator that transforms items in a channel</li>
 </ul>
-<p>문맥에서 어떤 것을 의미하는지 명확히 하겠지만, Nextflow로 작업할 때 이 구분을 이해하는 것이 중요합니다.</p>
+<p>We'll clarify which one we mean in context, but this distinction is important to understand when working with Nextflow.</p>
 </div>
-<p><code>main.nf</code>에 다음 변경 사항을 적용하세요:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">후</label><label for="__tabbed_1_2">전</label></div>
+<p>Apply these changes to <code>main.nf</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">After</label><label for="__tabbed_1_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-2">2</a></span>
@@ -4439,11 +4751,11 @@
 </div>
 </div>
 </div>
-<p>이것은 <code>splitCsv</code> 작업(헤더가 있는 CSV 읽기)과 <code>map</code> 작업(데이터를 <code>[meta, file]</code> 튜플로 구조화)을 한 단계로 결합합니다. 변경 사항을 적용하고 파이프라인을 실행하세요:</p>
+<p>This combines the <code>splitCsv</code> operation (reading the CSV with headers) and the <code>map</code> operation (structuring data as <code>[meta, file]</code> tuples) in one step. Apply that change and run the pipeline:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>명령 출력</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9</span>
@@ -4458,12 +4770,12 @@
 <a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="go">[[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>이제 각 항목이 <code>[meta, file]</code> 튜플인 채널이 생겼습니다. 메타데이터가 파일 경로와 분리되어 있습니다. 이 구조를 통해 메타데이터 필드를 기반으로 작업을 분할하고 그룹화할 수 있습니다.</p>
+<p>We now have a channel where each item is a <code>[meta, file]</code> tuple - metadata separated from file paths. This structure allows us to split and group our workload based on metadata fields.</p>
 <hr />
-<h2 id="2">2. 데이터 필터링 및 변환<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<h3 id="21-filter">2.1. <code>filter</code>로 데이터 필터링<a class="headerlink" href="#21-filter" title="Permanent link">&para;</a></h3>
-<p><a href="https://www.nextflow.io/docs/latest/operator.html#filter"><code>filter</code> 연산자</a>를 사용하여 조건에 따라 데이터를 필터링할 수 있습니다. 정상 샘플만 처리하고 싶다고 가정해 봅시다. <code>type</code> 필드를 기반으로 데이터를 필터링하여 이를 수행할 수 있습니다. <code>view</code> 연산자 앞에 이것을 삽입하겠습니다.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">후</label><label for="__tabbed_2_2">전</label></div>
+<h2 id="2-filter-and-transform-data">2. Filter and transform data<a class="headerlink" href="#2-filter-and-transform-data" title="Permanent link">&para;</a></h2>
+<h3 id="21-filter-data-with-filter">2.1. Filter data with <code>filter</code><a class="headerlink" href="#21-filter-data-with-filter" title="Permanent link">&para;</a></h3>
+<p>We can use the <a href="https://www.nextflow.io/docs/latest/operator.html#filter"><code>filter</code> operator</a> to filter the data based on a condition. Let's say we only want to process normal samples. We can do this by filtering the data based on the <code>type</code> field. Let's insert this before the <code>view</code> operator.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">After</label><label for="__tabbed_2_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-2">2</a></span>
@@ -4497,11 +4809,11 @@
 </div>
 </div>
 </div>
-<p>워크플로우를 다시 실행하여 필터링된 결과를 확인하세요:</p>
+<p>Run the workflow again to see the filtered result:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>명령 출력</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="go">Launching `main.nf` [admiring_brown] DSL2 - revision: 194d61704d</span>
@@ -4512,15 +4824,15 @@
 <a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="go">[[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]</span>
 </code></pre></div>
 </details>
-<p>정상 샘플만 포함하도록 데이터를 성공적으로 필터링했습니다. 이것이 어떻게 작동하는지 요약해 보겠습니다.</p>
-<p><code>filter</code> 연산자는 채널의 각 요소에 적용되는 클로저를 받습니다. 클로저가 <code>true</code>를 반환하면 요소가 포함되고, <code>false</code>를 반환하면 요소가 제외됩니다.</p>
-<p>우리의 경우 <code>meta.type == 'normal'</code>인 샘플만 유지하려고 합니다. 클로저는 튜플 <code>meta,file</code>을 사용하여 각 샘플을 참조하고, <code>meta.type</code>으로 샘플 유형에 액세스하며, <code>'normal'</code>과 같은지 확인합니다.</p>
-<p>이는 위에서 소개한 단일 클로저로 수행됩니다:</p>
+<p>We have successfully filtered the data to only include normal samples. Let's recap how this works.</p>
+<p>The <code>filter</code> operator takes a closure that is applied to each element in the channel. If the closure returns <code>true</code>, the element is included; if it returns <code>false</code>, the element is excluded.</p>
+<p>In our case, we want to keep only samples where <code>meta.type == 'normal'</code>. The closure uses the tuple <code>meta,file</code> to refer to each sample, accesses the sample type with <code>meta.type</code>, and checks if it equals <code>'normal'</code>.</p>
+<p>This is accomplished with the single closure we introduced above:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="w">    </span><span class="o">.</span><span class="na">filter</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="22">2.2. 별도의 필터링된 채널 생성<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
-<p>현재 CSV에서 직접 생성된 채널에 필터를 적용하고 있지만, 여러 방식으로 필터링하고 싶으므로 정상 샘플에 대한 별도의 필터링된 채널을 생성하도록 로직을 다시 작성하겠습니다:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">후</label><label for="__tabbed_3_2">전</label></div>
+<h3 id="22-create-separate-filtered-channels">2.2. Create separate filtered channels<a class="headerlink" href="#22-create-separate-filtered-channels" title="Permanent link">&para;</a></h3>
+<p>Currently we're applying the filter to the channel created directly from the CSV, but we want to filter this in more ways than one, so let's re-write the logic to create a separate filtered channel for normal samples:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">After</label><label for="__tabbed_3_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
@@ -4560,11 +4872,11 @@
 </div>
 </div>
 </div>
-<p>파이프라인을 실행하여 결과를 확인하세요:</p>
+<p>Run the pipeline to see the results:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>명령 출력</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74</span>
@@ -4575,9 +4887,9 @@
 <a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="go">[[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]</span>
 </code></pre></div>
 </details>
-<p>데이터를 성공적으로 필터링하고 정상 샘플에 대한 별도의 채널을 생성했습니다.</p>
-<p>종양 샘플에 대한 필터링된 채널도 생성하겠습니다:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">후</label><label for="__tabbed_4_2">전</label></div>
+<p>We've successfully filtered the data and created a separate channel for normal samples.</p>
+<p>Let's create a filtered channel for the tumor samples as well:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">After</label><label for="__tabbed_4_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-7"> 7</a></span>
@@ -4612,7 +4924,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>명령 출력</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b</span>
@@ -4627,27 +4939,27 @@
 <a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="go">Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>정상 샘플과 종양 샘플을 두 개의 다른 채널로 분리했으며, <code>view()</code>에 제공된 클로저를 사용하여 출력에서 다르게 레이블을 지정했습니다: <code>ch_tumor_samples.view{'Tumor sample: ' + it}</code>.</p>
-<h3 id="_9">핵심 정리<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<p>이 섹션에서 다음을 학습했습니다:</p>
+<p>We've separated out the normal and tumor samples into two different channels, and used a closure supplied to <code>view()</code> to label them differently in the output: <code>ch_tumor_samples.view{'Tumor sample: ' + it}</code>.</p>
+<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
+<p>In this section, you've learned:</p>
 <ul>
-<li><strong>데이터 필터링</strong>: <code>filter</code>로 데이터를 필터링하는 방법</li>
-<li><strong>데이터 분할</strong>: 조건에 따라 데이터를 다른 채널로 분할하는 방법</li>
-<li><strong>데이터 보기</strong>: <code>view</code>를 사용하여 데이터를 출력하고 다른 채널의 출력에 레이블을 지정하는 방법</li>
+<li><strong>Filtering data</strong>: How to filter data with <code>filter</code></li>
+<li><strong>Splitting data</strong>: How to split data into different channels based on a condition</li>
+<li><strong>Viewing data</strong>: How to use <code>view</code> to print the data and label output from different channels</li>
 </ul>
-<p>이제 정상 샘플과 종양 샘플을 두 개의 다른 채널로 분리했습니다. 다음으로 <code>id</code> 필드를 기준으로 정상 샘플과 종양 샘플을 결합하겠습니다.</p>
+<p>We've now separated out the normal and tumor samples into two different channels. Next, we'll join the normal and tumor samples on the <code>id</code> field.</p>
 <hr />
-<h2 id="3">3. 식별자로 채널 결합<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
-<p>이전 섹션에서 정상 샘플과 종양 샘플을 두 개의 다른 채널로 분리했습니다. 이들은 유형에 따라 특정 프로세스나 워크플로우를 사용하여 독립적으로 처리될 수 있습니다. 그러나 같은 환자의 정상 샘플과 종양 샘플을 비교하려면 어떻게 해야 할까요? 이 시점에서 <code>id</code> 필드를 기준으로 샘플을 일치시켜 다시 결합해야 합니다.</p>
-<p>Nextflow에는 채널을 결합하는 많은 방법이 포함되어 있지만, 이 경우 가장 적절한 연산자는 <a href="https://www.nextflow.io/docs/latest/operator.html#join"><code>join</code></a>입니다. SQL에 익숙하다면 <code>JOIN</code> 작업처럼 작동하며, 결합할 키와 수행할 결합 유형을 지정합니다.</p>
-<h3 id="31-map-join-id">3.1. <code>map</code>과 <code>join</code>을 사용하여 환자 ID 기준으로 결합<a class="headerlink" href="#31-map-join-id" title="Permanent link">&para;</a></h3>
-<p><a href="https://www.nextflow.io/docs/latest/operator.html#join"><code>join</code></a> 문서를 확인하면 기본적으로 각 튜플의 첫 번째 항목을 기준으로 두 채널을 결합한다는 것을 알 수 있습니다.</p>
-<h4 id="311">3.1.1. 데이터 구조 확인<a class="headerlink" href="#311" title="Permanent link">&para;</a></h4>
-<p>콘솔 출력이 아직 사용 가능하지 않다면 파이프라인을 실행하여 데이터 구조를 확인하고 <code>id</code> 필드를 기준으로 결합하기 위해 어떻게 수정해야 하는지 살펴보겠습니다.</p>
+<h2 id="3-joining-channels-by-identifiers">3. Joining channels by identifiers<a class="headerlink" href="#3-joining-channels-by-identifiers" title="Permanent link">&para;</a></h2>
+<p>In the previous section, we separated out the normal and tumor samples into two different channels. These could be processed independently using specific processes or workflows based on their type. But what happens when we want to compare the normal and tumor samples from the same patient? At this point, we need to join them back together making sure to match the samples based on their <code>id</code> field.</p>
+<p>Nextflow includes many methods for combining channels, but in this case the most appropriate operator is <a href="https://www.nextflow.io/docs/latest/operator.html#join"><code>join</code></a>. If you are familiar with SQL, it acts like the <code>JOIN</code> operation, where we specify the key to join on and the type of join to perform.</p>
+<h3 id="31-use-map-and-join-to-combine-based-on-patient-id">3.1. Use <code>map</code> and <code>join</code> to combine based on patient ID<a class="headerlink" href="#31-use-map-and-join-to-combine-based-on-patient-id" title="Permanent link">&para;</a></h3>
+<p>If we check the <a href="https://www.nextflow.io/docs/latest/operator.html#join"><code>join</code></a> documentation, we can see that by default it joins two channels based on the first item in each tuple.</p>
+<h4 id="311-check-the-data-structure">3.1.1. Check the data structure<a class="headerlink" href="#311-check-the-data-structure" title="Permanent link">&para;</a></h4>
+<p>If you don't have the console output still available, let's run the pipeline to check our data structure and see how we need to modify it to join on the <code>id</code> field.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>명령 출력</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b</span>
@@ -4662,10 +4974,10 @@
 <a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="go">Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p><code>id</code> 필드가 각 메타 맵의 첫 번째 요소임을 알 수 있습니다. <code>join</code>이 작동하려면 각 튜플에서 <code>id</code> 필드를 분리해야 합니다. 그런 다음 <code>join</code> 연산자를 사용하여 두 채널을 결합할 수 있습니다.</p>
-<h4 id="312-id">3.1.2. <code>id</code> 필드 분리<a class="headerlink" href="#312-id" title="Permanent link">&para;</a></h4>
-<p><code>id</code> 필드를 분리하려면 <a href="https://www.nextflow.io/docs/latest/operator.html#map"><code>map</code> 연산자</a>를 사용하여 <code>id</code> 필드를 첫 번째 요소로 하는 새 튜플을 생성할 수 있습니다.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">후</label><label for="__tabbed_5_2">전</label></div>
+<p>We can see that the <code>id</code> field is the first element in each meta map. For <code>join</code> to work, we should isolate the <code>id</code> field in each tuple. After that, we can simply use the <code>join</code> operator to combine the two channels.</p>
+<h4 id="312-isolate-the-id-field">3.1.2. Isolate the <code>id</code> field<a class="headerlink" href="#312-isolate-the-id-field" title="Permanent link">&para;</a></h4>
+<p>To isolate the <code>id</code> field, we can use the <a href="https://www.nextflow.io/docs/latest/operator.html#map"><code>map</code> operator</a> to create a new tuple with the <code>id</code> field as the first element.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">After</label><label for="__tabbed_5_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-7"> 7</a></span>
@@ -4712,7 +5024,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>명령 출력</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
 <a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="go">Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d</span>
@@ -4727,11 +5039,11 @@
 <a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a><span class="go">Normal sample: [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]</span>
 </code></pre></div>
 </details>
-<p>미묘할 수 있지만 각 튜플의 첫 번째 요소가 <code>id</code> 필드임을 알 수 있어야 합니다.</p>
-<h4 id="313">3.1.3. 두 채널 결합<a class="headerlink" href="#313" title="Permanent link">&para;</a></h4>
-<p>이제 <code>join</code> 연산자를 사용하여 <code>id</code> 필드를 기준으로 두 채널을 결합할 수 있습니다.</p>
-<p>다시 한 번 <code>view</code>를 사용하여 결합된 출력을 출력합니다.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">후</label><label for="__tabbed_6_2">전</label></div>
+<p>It might be subtle, but you should be able to see the first element in each tuple is the <code>id</code> field.</p>
+<h4 id="313-combine-the-two-channels">3.1.3. Combine the two channels<a class="headerlink" href="#313-combine-the-two-channels" title="Permanent link">&para;</a></h4>
+<p>Now we can use the <code>join</code> operator to combine the two channels based on the <code>id</code> field.</p>
+<p>Once again, we will use <code>view</code> to print the joined outputs.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">After</label><label for="__tabbed_6_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-7"> 7</a></span>
@@ -4780,7 +5092,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>명령 출력</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="go">Launching `main.nf` [soggy_wiles] DSL2 - revision: 3bc1979889</span>
@@ -4791,26 +5103,26 @@
 <a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="go">[patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>너무 넓어서 구분하기 어렵지만 샘플이 <code>id</code> 필드로 결합되었음을 알 수 있어야 합니다. 이제 각 튜플의 형식은 다음과 같습니다:</p>
+<p>It's a little hard to tell because it's so wide, but you should be able to see the samples have been joined by the <code>id</code> field. Each tuple now has the format:</p>
 <ul>
-<li><code>id</code>: 샘플 ID</li>
-<li><code>normal_meta_map</code>: 유형, 반복 및 bam 파일 경로를 포함한 정상 샘플 메타데이터</li>
-<li><code>normal_sample_file</code>: 정상 샘플 파일</li>
-<li><code>tumor_meta_map</code>: 유형, 반복 및 bam 파일 경로를 포함한 종양 샘플 메타데이터</li>
-<li><code>tumor_sample</code>: 유형, 반복 및 bam 파일 경로를 포함한 종양 샘플</li>
+<li><code>id</code>: The sample ID</li>
+<li><code>normal_meta_map</code>: The normal sample meta data including type, replicate and path to bam file</li>
+<li><code>normal_sample_file</code>: The normal sample file</li>
+<li><code>tumor_meta_map</code>: The tumor sample meta data including type, replicate and path to bam file</li>
+<li><code>tumor_sample</code>: The tumor sample including type, replicate and path to bam file</li>
 </ul>
 <div class="admonition warning">
-<p class="admonition-title">경고</p>
-<p><code>join</code> 연산자는 일치하지 않는 튜플을 버립니다. 이 예제에서는 모든 샘플이 종양과 정상에 대해 일치하도록 했지만, 그렇지 않은 경우 일치하지 않는 튜플을 유지하려면 <code>remainder: true</code> 매개변수를 사용해야 합니다. 자세한 내용은 <a href="https://www.nextflow.io/docs/latest/operator.html#join">문서</a>를 확인하세요.</p>
+<p class="admonition-title">Warning</p>
+<p>The <code>join</code> operator will discard any un-matched tuples. In this example, we made sure all samples were matched for tumor and normal but if this is not true you must use the parameter <code>remainder: true</code> to keep the unmatched tuples. Check the <a href="https://www.nextflow.io/docs/latest/operator.html#join">documentation</a> for more details.</p>
 </div>
-<p>이제 <code>map</code>을 사용하여 튜플의 필드를 분리하는 방법과 <code>join</code>을 사용하여 첫 번째 필드를 기준으로 튜플을 결합하는 방법을 알게 되었습니다.
-이 지식을 통해 공유 필드를 기준으로 채널을 성공적으로 결합할 수 있습니다.</p>
-<p>다음으로 여러 필드를 기준으로 결합하려는 상황을 고려하겠습니다.</p>
-<h3 id="32">3.2. 여러 필드로 결합<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
-<p>sampleA에는 2개의 반복이 있지만 sampleB와 sampleC에는 1개만 있습니다. 이 경우 <code>id</code> 필드를 사용하여 효과적으로 결합할 수 있었지만, 동기화되지 않으면 어떻게 될까요? 다른 반복의 정상 샘플과 종양 샘플을 혼동할 수 있습니다!</p>
-<p>이를 방지하기 위해 여러 필드를 기준으로 결합할 수 있습니다. 실제로 이를 달성하는 여러 방법이 있지만 샘플 <code>id</code>와 <code>replicate</code> 번호를 모두 포함하는 새 결합 키를 생성하는 데 집중하겠습니다.</p>
-<p>새 결합 키를 생성하는 것부터 시작하겠습니다. 이전과 같은 방식으로 <a href="https://www.nextflow.io/docs/latest/operator.html#map"><code>map</code> 연산자</a>를 사용하여 <code>id</code> 및 <code>repeat</code> 필드를 첫 번째 요소로 하는 새 튜플을 생성할 수 있습니다.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">후</label><label for="__tabbed_7_2">전</label></div>
+<p>So now you know how to use <code>map</code> to isolate a field in a tuple, and how to use <code>join</code> to combine tuples based on the first field.
+With this knowledge, we can successfully combine channels based on a shared field.</p>
+<p>Next, we'll consider the situation where you want to join on multiple fields.</p>
+<h3 id="32-join-on-multiple-fields">3.2. Join on multiple fields<a class="headerlink" href="#32-join-on-multiple-fields" title="Permanent link">&para;</a></h3>
+<p>We have 2 replicates for sampleA, but only 1 for sampleB and sampleC. In this case we were able to join them effectively by using the <code>id</code> field, but what would happen if they were out of sync? We could mix up the normal and tumor samples from different replicates!</p>
+<p>To avoid this, we can join on multiple fields. There are actually multiple ways to achieve this but we are going to focus on creating a new joining key which includes both the sample <code>id</code> and <code>replicate</code> number.</p>
+<p>Let's start by creating a new joining key. We can do this in the same way as before by using the <a href="https://www.nextflow.io/docs/latest/operator.html#map"><code>map</code> operator</a> to create a new tuple with the <code>id</code> and <code>repeat</code> fields as the first element.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">After</label><label for="__tabbed_7_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-7"> 7</a></span>
@@ -4842,11 +5154,11 @@
 </div>
 </div>
 </div>
-<p>이제 <code>id</code>와 <code>repeat</code> 필드를 모두 사용하여 결합이 발생하는 것을 볼 수 있어야 합니다. 워크플로우를 실행하세요:</p>
+<p>Now we should see the join is occurring but using both the <code>id</code> and <code>repeat</code> fields. Run the workflow:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>명령 출력</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">Launching `main.nf` [prickly_wing] DSL2 - revision: 3bebf22dee</span>
@@ -4857,12 +5169,12 @@
 <a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="go">[[patientC, 1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>각 결합 결과의 첫 번째 요소로 두 요소(<code>id</code> 및 <code>repeat</code> 필드)의 튜플이 있는 것을 주목하세요. 이는 복잡한 항목을 결합 키로 사용할 수 있음을 보여주며, 같은 조건의 샘플 간에 상당히 복잡한 일치를 가능하게 합니다.</p>
-<p>다른 키로 결합하는 더 많은 방법을 탐색하려면 추가 옵션 및 예제에 대한 <a href="https://www.nextflow.io/docs/latest/operator.html#join">join 연산자 문서</a>를 확인하세요.</p>
-<h3 id="33-submap">3.3. <code>subMap</code>을 사용하여 새 결합 키 생성<a class="headerlink" href="#33-submap" title="Permanent link">&para;</a></h3>
-<p>이전 접근 방식은 결합 키에서 필드 이름을 잃습니다. <code>id</code> 및 <code>repeat</code> 필드는 단순히 값 목록이 됩니다. 나중에 액세스할 수 있도록 필드 이름을 유지하려면 <a href="https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)"><code>subMap</code> 메서드</a>를 사용할 수 있습니다.</p>
-<p><code>subMap</code> 메서드는 맵에서 지정된 키-값 쌍만 추출합니다. 여기서는 <code>id</code> 및 <code>repeat</code> 필드만 추출하여 결합 키를 생성합니다.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">후</label><label for="__tabbed_8_2">전</label></div>
+<p>Note how we have a tuple of two elements (<code>id</code> and <code>repeat</code> fields) as the first element of each joined result. This demonstrates how complex items can be used as a joining key, enabling fairly intricate matching between samples from the same conditions.</p>
+<p>If you want to explore more ways to join on different keys, check out the <a href="https://www.nextflow.io/docs/latest/operator.html#join">join operator documentation</a> for additional options and examples.</p>
+<h3 id="33-use-submap-to-create-a-new-joining-key">3.3. Use <code>subMap</code> to create a new joining key<a class="headerlink" href="#33-use-submap-to-create-a-new-joining-key" title="Permanent link">&para;</a></h3>
+<p>The previous approach loses the field names from our joining key - the <code>id</code> and <code>repeat</code> fields become just a list of values. To retain the field names for later access, we can use the <a href="https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)"><code>subMap</code> method</a>.</p>
+<p>The <code>subMap</code> method extracts only the specified key-value pairs from a map. Here we'll extract just the <code>id</code> and <code>repeat</code> fields to create our joining key.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">After</label><label for="__tabbed_8_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-7"> 7</a></span>
@@ -4897,7 +5209,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>명령 출력</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>
 <a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="go">Launching `main.nf` [reverent_wing] DSL2 - revision: 847016c3b7</span>
@@ -4908,11 +5220,11 @@
 <a id="__codelineno-39-8" name="__codelineno-39-8" href="#__codelineno-39-8"></a><span class="go">[[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>이제 <code>id</code> 및 <code>repeat</code> 필드를 포함할 뿐만 아니라 필드 이름도 유지하는 새 결합 키가 있어 나중에 이름으로 액세스할 수 있습니다(예: <code>meta.id</code> 및 <code>meta.repeat</code>).</p>
-<h3 id="34-map">3.4. map에서 명명된 클로저 사용<a class="headerlink" href="#34-map" title="Permanent link">&para;</a></h3>
-<p>중복을 피하고 오류를 줄이기 위해 명명된 클로저를 사용할 수 있습니다. 명명된 클로저를 사용하면 여러 곳에서 호출할 수 있는 재사용 가능한 함수를 만들 수 있습니다.</p>
-<p>이를 위해 먼저 클로저를 새 변수로 정의합니다:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">후</label><label for="__tabbed_9_2">전</label></div>
+<p>Now we have a new joining key that not only includes the <code>id</code> and <code>repeat</code> fields but also retains the field names so we can access them later by name, e.g. <code>meta.id</code> and <code>meta.repeat</code>.</p>
+<h3 id="34-use-a-named-closure-in-map">3.4. Use a named closure in map<a class="headerlink" href="#34-use-a-named-closure-in-map" title="Permanent link">&para;</a></h3>
+<p>To avoid duplication and reduce errors, we can use a named closure. A named closure allows us to create a reusable function that we can call in multiple places.</p>
+<p>To do so, first we define the closure as a new variable:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">After</label><label for="__tabbed_9_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-2"> 2</a></span>
@@ -4954,10 +5266,10 @@
 </div>
 </div>
 </div>
-<p>재사용할 수 있는 명명된 변수로 맵 변환을 정의했습니다.</p>
-<p>또한 <code>file()</code>을 사용하여 파일 경로를 Path 객체로 변환하여 이 채널을 받는 모든 프로세스가 파일을 올바르게 처리할 수 있도록 했습니다(자세한 내용은 <a href="../working_with_files/">파일 작업</a> 참조).</p>
-<p>워크플로우에서 클로저를 구현해 보겠습니다:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">후</label><label for="__tabbed_10_2">전</label></div>
+<p>We've defined the map transformation as a named variable that we can reuse.</p>
+<p>Note that we also convert the file path to a Path object using <code>file()</code> so that any process receiving this channel can handle the file correctly (for more information see <a href="../working_with_files/">Working with files</a>).</p>
+<p>Let's implement the closure in our workflow:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">After</label><label for="__tabbed_10_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-10">10</a></span>
@@ -4990,14 +5302,14 @@
 </div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">참고</p>
-<p><code>map</code> 연산자가 <code>{ }</code>를 사용하는 대신 <code>( )</code>를 사용하여 클로저를 인수로 전달하도록 전환되었습니다. 이는 <code>map</code> 연산자가 클로저를 인수로 예상하고 <code>{ }</code>는 익명 클로저를 정의하는 데 사용되기 때문입니다. 명명된 클로저를 호출할 때는 <code>( )</code> 구문을 사용하세요.</p>
+<p class="admonition-title">Note</p>
+<p>The <code>map</code> operator has switched from using <code>{ }</code> to using <code>( )</code> to pass the closure as an argument. This is because the <code>map</code> operator expects a closure as an argument and <code>{ }</code> is used to define an anonymous closure. When calling a named closure, use the <code>( )</code> syntax.</p>
 </div>
-<p>워크플로우를 다시 실행하여 모든 것이 여전히 작동하는지 확인하세요:</p>
+<p>Run the workflow once more to check everything is still working:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>명령 출력</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>
 <a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="go">Launching `main.nf` [angry_meninsky] DSL2 - revision: 2edc226b1d</span>
@@ -5008,9 +5320,9 @@
 <a id="__codelineno-45-8" name="__codelineno-45-8" href="#__codelineno-45-8"></a><span class="go">[[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>명명된 클로저를 사용하면 여러 곳에서 동일한 변환을 재사용할 수 있어 오류 위험을 줄이고 코드를 더 읽기 쉽고 유지 관리하기 쉽게 만듭니다.</p>
-<h3 id="35">3.5. 데이터 중복 줄이기<a class="headerlink" href="#35" title="Permanent link">&para;</a></h3>
-<p>워크플로우에 중복된 데이터가 많습니다. 결합된 샘플의 각 항목은 <code>id</code> 및 <code>repeat</code> 필드를 반복합니다. 이 정보는 이미 그룹화 키에서 사용 가능하므로 이러한 중복을 피할 수 있습니다. 참고로 현재 데이터 구조는 다음과 같습니다:</p>
+<p>Using a named closure allows us to reuse the same transformation in multiple places, reducing the risk of errors and making the code more readable and maintainable.</p>
+<h3 id="35-reduce-duplication-of-data">3.5. Reduce duplication of data<a class="headerlink" href="#35-reduce-duplication-of-data" title="Permanent link">&para;</a></h3>
+<p>We have a lot of duplicated data in our workflow. Each item in the joined samples repeats the <code>id</code> and <code>repeat</code> fields. Since this information is already available in the grouping key, we can avoid this redundancy. As a reminder, our current data structure looks like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="o">[</span>
 <a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="w">  </span><span class="o">[</span>
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="w">    </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;sampleC&quot;</span><span class="o">,</span>
@@ -5030,8 +5342,8 @@
 <a id="__codelineno-46-17" name="__codelineno-46-17" href="#__codelineno-46-17"></a><span class="w">  </span><span class="s2">&quot;sampleC_rep1_tumor.bam&quot;</span>
 <a id="__codelineno-46-18" name="__codelineno-46-18" href="#__codelineno-46-18"></a><span class="o">]</span>
 </code></pre></div>
-<p><code>id</code> 및 <code>repeat</code> 필드가 그룹화 키에서 사용 가능하므로 중복을 피하기 위해 각 채널 항목의 나머지 부분에서 제거하겠습니다. <code>subMap</code> 메서드를 사용하여 <code>type</code> 필드만 있는 새 맵을 생성할 수 있습니다. 이 접근 방식을 사용하면 데이터 구조에서 중복을 제거하면서 필요한 모든 정보를 유지할 수 있습니다.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">후</label><label for="__tabbed_11_2">전</label></div>
+<p>Since the <code>id</code> and <code>repeat</code> fields are available in the grouping key, let's remove them from the rest of each channel item to avoid duplication. We can do this by using the <code>subMap</code> method to create a new map with only the <code>type</code> field. This approach allows us to maintain all necessary information while eliminating redundancy in our data structure.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">After</label><label for="__tabbed_11_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-8" name="__codelineno-47-8"></a><span class="hll"><span class="w">    </span><span class="n">getSampleIdAndReplicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;repeat&#39;</span><span class="o">]),</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;type&#39;</span><span class="o">]),</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">bam</span><span class="o">)</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
@@ -5043,24 +5355,24 @@
 </div>
 </div>
 </div>
-<p>이제 클로저는 첫 번째 요소에 <code>id</code> 및 <code>repeat</code> 필드가 포함되고 두 번째 요소에 <code>type</code> 필드만 포함된 튜플을 반환합니다. 이렇게 하면 그룹화 키에 <code>id</code> 및 <code>repeat</code> 정보를 한 번만 저장하여 중복을 제거하면서 필요한 모든 정보를 유지합니다.</p>
-<p>워크플로우를 실행하여 어떻게 보이는지 확인하세요:</p>
+<p>Now the closure returns a tuple where the first element contains the <code>id</code> and <code>repeat</code> fields, and the second element contains only the <code>type</code> field. This eliminates redundancy by storing the <code>id</code> and <code>repeat</code> information once in the grouping key, while maintaining all necessary information.</p>
+<p>Run the workflow to see what this looks like:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>명령 출력</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">[[id:patientA, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]</span>
 <a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a><span class="go">[[id:patientA, repeat:2], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]</span>
 <a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="go">[[id:patientB, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]</span>
 <a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a><span class="go">[[id:patientC, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>그룹화 키에서 <code>id</code> 및 <code>repeat</code> 필드를 한 번만 명시하고 샘플 데이터에 <code>type</code> 필드가 있는 것을 볼 수 있습니다. 정보를 잃지 않았지만 채널 내용을 더 간결하게 만들었습니다.</p>
-<h3 id="36">3.6. 중복 정보 제거<a class="headerlink" href="#36" title="Permanent link">&para;</a></h3>
-<p>위에서 중복된 정보를 제거했지만 채널에 여전히 일부 다른 중복 정보가 있습니다.</p>
-<p>처음에 <code>filter</code>를 사용하여 정상 샘플과 종양 샘플을 분리한 다음 <code>id</code> 및 <code>repeat</code> 키를 기준으로 결합했습니다. <code>join</code> 연산자는 튜플이 병합되는 순서를 유지하므로 우리의 경우 왼쪽에 정상 샘플이 있고 오른쪽에 종양 샘플이 있는 경우 결과 채널은 이 구조를 유지합니다: <code>id, &lt;정상 요소&gt;, &lt;종양 요소&gt;</code>.</p>
-<p>채널에서 각 요소의 위치를 알고 있으므로 <code>[type:normal]</code> 및 <code>[type:tumor]</code> 메타데이터를 삭제하여 구조를 더욱 단순화할 수 있습니다.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">후</label><label for="__tabbed_12_2">전</label></div>
+<p>We can see we only state the <code>id</code> and <code>repeat</code> fields once in the grouping key and we have the <code>type</code> field in the sample data. We haven't lost any information but we managed to make our channel contents more succinct.</p>
+<h3 id="36-remove-redundant-information">3.6. Remove redundant information<a class="headerlink" href="#36-remove-redundant-information" title="Permanent link">&para;</a></h3>
+<p>We removed duplicated information above, but we still have some other redundant information in our channels.</p>
+<p>In the beginning, we separated the normal and tumor samples using <code>filter</code>, then joined them based on <code>id</code> and <code>repeat</code> keys. The <code>join</code> operator preserves the order in which tuples are merged, so in our case, with normal samples on the left side and tumor samples on the right, the resulting channel maintains this structure: <code>id, &lt;normal elements&gt;, &lt;tumor elements&gt;</code>.</p>
+<p>Since we know the position of each element in our channel, we can simplify the structure further by dropping the <code>[type:normal]</code> and <code>[type:tumor]</code> metadata.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">After</label><label for="__tabbed_12_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-51-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-51-8" name="__codelineno-51-8"></a><span class="hll"><span class="w">    </span><span class="n">getSampleIdAndReplicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;repeat&#39;</span><span class="o">]),</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
@@ -5072,11 +5384,11 @@
 </div>
 </div>
 </div>
-<p>다시 실행하여 결과를 확인하세요:</p>
+<p>Run again to see the result:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>명령 출력</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>
 <a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a><span class="go">Launching `main.nf` [confident_leavitt] DSL2 - revision: a2303895bd</span>
@@ -5087,24 +5399,24 @@
 <a id="__codelineno-54-8" name="__codelineno-54-8" href="#__codelineno-54-8"></a><span class="go">[[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<h3 id="_10">핵심 정리<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<p>이 섹션에서 다음을 학습했습니다:</p>
+<h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
+<p>In this section, you've learned:</p>
 <ul>
-<li><strong>튜플 조작</strong>: <code>map</code>을 사용하여 튜플의 필드를 분리하는 방법</li>
-<li><strong>튜플 결합</strong>: <code>join</code>을 사용하여 첫 번째 필드를 기준으로 튜플을 결합하는 방법</li>
-<li><strong>결합 키 생성</strong>: <code>subMap</code>을 사용하여 새 결합 키를 생성하는 방법</li>
-<li><strong>명명된 클로저</strong>: map에서 명명된 클로저를 사용하는 방법</li>
-<li><strong>여러 필드 결합</strong>: 더 정확한 일치를 위해 여러 필드를 기준으로 결합하는 방법</li>
-<li><strong>데이터 구조 최적화</strong>: 중복 정보를 제거하여 채널 구조를 간소화하는 방법</li>
+<li><strong>Manipulating Tuples</strong>: How to use <code>map</code> to isolate a field in a tuple</li>
+<li><strong>Joining Tuples</strong>: How to use <code>join</code> to combine tuples based on the first field</li>
+<li><strong>Creating Joining Keys</strong>: How to use <code>subMap</code> to create a new joining key</li>
+<li><strong>Named Closures</strong>: How to use a named closure in map</li>
+<li><strong>Multiple Field Joining</strong>: How to join on multiple fields for more precise matching</li>
+<li><strong>Data Structure Optimization</strong>: How to streamline channel structure by removing redundant information</li>
 </ul>
-<p>이제 샘플시트를 분할하고, 정상 샘플과 종양 샘플을 필터링하고, 샘플 ID 및 반복 번호로 결합한 다음 결과를 출력할 수 있는 워크플로우가 있습니다.</p>
-<p>이는 독립적으로 처리한 후 샘플이나 다른 유형의 데이터를 일치시켜야 하는 생물정보학 워크플로우의 일반적인 패턴이므로 유용한 기술입니다. 다음으로 샘플을 여러 번 반복하는 방법을 살펴보겠습니다.</p>
-<h2 id="4">4. 구간에 샘플 분산<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<p>생물정보학 워크플로우의 핵심 패턴은 게놈 영역에 분석을 분산하는 것입니다. 예를 들어, 변이 호출은 게놈을 구간(염색체 또는 더 작은 영역과 같은)으로 나누어 병렬화할 수 있습니다. 이 병렬화 전략은 여러 코어 또는 노드에 계산 부하를 분산하여 전체 실행 시간을 줄임으로써 파이프라인 효율성을 크게 향상시킵니다.</p>
-<p>다음 섹션에서는 여러 게놈 구간에 샘플 데이터를 분산하는 방법을 보여드리겠습니다. 각 샘플을 모든 구간과 쌍으로 만들어 다른 게놈 영역의 병렬 처리를 허용합니다. 이렇게 하면 구간 수만큼 데이터 세트 크기가 곱해져 나중에 다시 결합할 수 있는 여러 독립적인 분석 단위가 생성됩니다.</p>
-<h3 id="41-combine">4.1. <code>combine</code>을 사용하여 구간에 샘플 분산<a class="headerlink" href="#41-combine" title="Permanent link">&para;</a></h3>
-<p>구간 채널을 생성하는 것부터 시작하겠습니다. 간단하게 유지하기 위해 수동으로 정의할 3개의 구간만 사용하겠습니다. 실제 워크플로우에서는 파일 입력에서 읽거나 많은 구간 파일이 있는 채널을 생성할 수도 있습니다.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">후</label><label for="__tabbed_13_2">전</label></div>
+<p>You now have a workflow that can split a samplesheet, filter the normal and tumor samples, join them together by sample ID and replicate number, then print the results.</p>
+<p>This is a common pattern in bioinformatics workflows where you need to match up samples or other types of data after processing independently, so it is a useful skill. Next, we will look at repeating a sample multiple times.</p>
+<h2 id="4-spread-samples-intervals">4. Spread samples intervals<a class="headerlink" href="#4-spread-samples-intervals" title="Permanent link">&para;</a></h2>
+<p>A key pattern in bioinformatics workflows is distributing analysis across genomic regions. For instance, variant calling can be parallelized by dividing the genome into intervals (like chromosomes or smaller regions). This parallelization strategy significantly improves pipeline efficiency by distributing computational load across multiple cores or nodes, reducing overall execution time.</p>
+<p>In the following section, we'll demonstrate how to distribute our sample data across multiple genomic intervals. We'll pair each sample with every interval, allowing parallel processing of different genomic regions. This will multiply our dataset size by the number of intervals, creating multiple independent analysis units that can be brought back together later.</p>
+<h3 id="41-spread-samples-over-intervals-using-combine">4.1. Spread samples over intervals using <code>combine</code><a class="headerlink" href="#41-spread-samples-over-intervals-using-combine" title="Permanent link">&para;</a></h3>
+<p>Let's start by creating a channel of intervals. To keep life simple, we will just use 3 intervals we will manually define. In a real workflow, you could read these in from a file input or even create a channel with lots of interval files.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">After</label><label for="__tabbed_13_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-17">17</a></span>
@@ -5120,8 +5432,8 @@
 </div>
 </div>
 </div>
-<p>이제 각 구간에 대해 각 샘플을 반복하려고 합니다. 이것은 때때로 샘플과 구간의 데카르트 곱이라고 합니다. <a href="https://www.nextflow.io/docs/latest/operator.html#combine"><code>combine</code> 연산자</a>를 사용하여 이를 달성할 수 있습니다. 이것은 채널 1의 모든 항목을 가져와 채널 2의 각 항목에 대해 반복합니다. 워크플로우에 combine 연산자를 추가해 보겠습니다:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">후</label><label for="__tabbed_14_2">전</label></div>
+<p>Now remember, we want to repeat each sample for each interval. This is sometimes referred to as the Cartesian product of the samples and intervals. We can achieve this by using the <a href="https://www.nextflow.io/docs/latest/operator.html#combine"><code>combine</code> operator</a>. This will take every item from channel 1 and repeat it for each item in channel 2. Let's add a combine operator to our workflow:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">After</label><label for="__tabbed_14_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-57-18">18</a></span>
@@ -5141,11 +5453,11 @@
 </div>
 </div>
 </div>
-<p>이제 실행하여 어떤 일이 일어나는지 봅시다:</p>
+<p>Now let's run it and see what happens:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>명령 출력</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a>
 <a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="go">Launching `main.nf` [mighty_tesla] DSL2 - revision: ae013ab70b</span>
@@ -5164,11 +5476,11 @@
 <a id="__codelineno-60-16" name="__codelineno-60-16" href="#__codelineno-60-16"></a><span class="go">[[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr3]</span>
 </code></pre></div>
 </details>
-<p>성공입니다! 3개 구간 목록의 모든 단일 구간에 대해 모든 샘플을 반복했습니다. 채널의 항목 수를 효과적으로 3배로 늘렸습니다.</p>
-<p>하지만 읽기가 조금 어려우므로 다음 섹션에서 정리하겠습니다.</p>
-<h3 id="42">4.2. 채널 구성<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
-<p><code>map</code> 연산자를 사용하여 샘플 데이터를 정리하고 리팩토링하여 이해하기 쉽게 만들 수 있습니다. 구간 문자열을 첫 번째 요소의 결합 맵으로 이동하겠습니다.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">후</label><label for="__tabbed_15_2">전</label></div>
+<p>Success! We have repeated every sample for every single interval in our 3 interval list. We've effectively tripled the number of items in our channel.</p>
+<p>It's a little hard to read though, so in the next section we will tidy it up.</p>
+<h3 id="42-organize-the-channel">4.2. Organize the channel<a class="headerlink" href="#42-organize-the-channel" title="Permanent link">&para;</a></h3>
+<p>We can use the <code>map</code> operator to tidy and refactor our sample data so it's easier to understand. Let's move the intervals string to the joining map at the first element.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">After</label><label for="__tabbed_15_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-61-20">20</a></span>
@@ -5202,25 +5514,25 @@
 </div>
 </div>
 </div>
-<p>이 map 작업이 단계별로 무엇을 하는지 분석해 보겠습니다.</p>
-<p>먼저 명명된 매개변수를 사용하여 코드를 더 읽기 쉽게 만듭니다. <code>grouping_key</code>, <code>normal</code>, <code>tumor</code> 및 <code>interval</code>이라는 이름을 사용하여 인덱스 대신 이름으로 튜플의 요소를 참조할 수 있습니다:</p>
+<p>Let's break down what this map operation does step by step.</p>
+<p>First, we use named parameters to make the code more readable. By using the names <code>grouping_key</code>, <code>normal</code>, <code>tumor</code> and <code>interval</code>, we can refer to the elements in the tuple by name instead of by index:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">grouping_key</span><span class="o">,</span><span class="w"> </span><span class="n">normal</span><span class="o">,</span><span class="w"> </span><span class="n">tumor</span><span class="o">,</span><span class="w"> </span><span class="n">interval</span><span class="w"> </span><span class="o">-&gt;</span>
 </code></pre></div>
-<p>다음으로 <code>grouping_key</code>를 <code>interval</code> 필드와 결합합니다. <code>grouping_key</code>는 <code>id</code> 및 <code>repeat</code> 필드를 포함하는 맵입니다. <code>interval</code>로 새 맵을 생성하고 Groovy의 맵 덧셈(<code>+</code>)을 사용하여 병합합니다:</p>
+<p>Next, we combine the <code>grouping_key</code> with the <code>interval</code> field. The <code>grouping_key</code> is a map containing <code>id</code> and <code>repeat</code> fields. We create a new map with the <code>interval</code> and merge them using Groovy's map addition (<code>+</code>):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="w">                </span><span class="n">grouping_key</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">interval:</span><span class="w"> </span><span class="n">interval</span><span class="o">],</span>
 </code></pre></div>
-<p>마지막으로 이것을 세 요소가 있는 튜플로 반환합니다: 결합된 메타데이터 맵, 정상 샘플 파일, 종양 샘플 파일:</p>
+<p>Finally, we return this as a tuple with three elements: the combined metadata map, the normal sample file, and the tumor sample file:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a><span class="w">            </span><span class="o">[</span>
 <a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a><span class="w">                </span><span class="n">grouping_key</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">interval:</span><span class="w"> </span><span class="n">interval</span><span class="o">],</span>
 <a id="__codelineno-65-3" name="__codelineno-65-3" href="#__codelineno-65-3"></a><span class="w">                </span><span class="n">normal</span><span class="o">,</span>
 <a id="__codelineno-65-4" name="__codelineno-65-4" href="#__codelineno-65-4"></a><span class="w">                </span><span class="n">tumor</span>
 <a id="__codelineno-65-5" name="__codelineno-65-5" href="#__codelineno-65-5"></a><span class="w">            </span><span class="o">]</span>
 </code></pre></div>
-<p>다시 실행하여 채널 내용을 확인하겠습니다:</p>
+<p>Let's run it again and check the channel contents:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>명령 출력</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>
 <a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a><span class="go">Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd</span>
@@ -5239,22 +5551,22 @@
 <a id="__codelineno-67-16" name="__codelineno-67-16" href="#__codelineno-67-16"></a><span class="go">[[id:patientC, repeat:1, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p><code>map</code>을 사용하여 데이터를 올바른 구조로 강제하는 것은 까다로울 수 있지만 효과적인 데이터 조작에 중요합니다.</p>
-<p>이제 모든 게놈 구간에 반복된 모든 샘플이 있어 병렬로 처리할 수 있는 여러 독립적인 분석 단위가 생성되었습니다. 그러나 관련 샘플을 다시 결합하려면 어떻게 해야 할까요? 다음 섹션에서는 공통 속성을 공유하는 샘플을 그룹화하는 방법을 학습하겠습니다.</p>
-<h3 id="_11">핵심 정리<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
-<p>이 섹션에서 다음을 학습했습니다:</p>
+<p>Using <code>map</code> to coerce your data into the correct structure can be tricky, but it's crucial for effective data manipulation.</p>
+<p>We now have every sample repeated across all genomic intervals, creating multiple independent analysis units that can be processed in parallel. But what if we want to bring related samples back together? In the next section, we'll learn how to group samples that share common attributes.</p>
+<h3 id="takeaway_2">Takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
+<p>In this section, you've learned:</p>
 <ul>
-<li><strong>구간에 샘플 분산</strong>: <code>combine</code>을 사용하여 구간에 샘플을 반복하는 방법</li>
-<li><strong>데카르트 곱 생성</strong>: 샘플과 구간의 모든 조합을 생성하는 방법</li>
-<li><strong>채널 구조 구성</strong>: <code>map</code>을 사용하여 가독성을 높이기 위해 데이터를 재구성하는 방법</li>
-<li><strong>병렬 처리 준비</strong>: 분산 분석을 위한 데이터 설정 방법</li>
+<li><strong>Spreading samples over intervals</strong>: How to use <code>combine</code> to repeat samples over intervals</li>
+<li><strong>Creating Cartesian products</strong>: How to generate all combinations of samples and intervals</li>
+<li><strong>Organizing channel structure</strong>: How to use <code>map</code> to restructure data for better readability</li>
+<li><strong>Parallel processing preparation</strong>: How to set up data for distributed analysis</li>
 </ul>
-<h2 id="5-grouptuple">5. <code>groupTuple</code>을 사용하여 샘플 집계<a class="headerlink" href="#5-grouptuple" title="Permanent link">&para;</a></h2>
-<p>이전 섹션에서 입력 파일에서 데이터를 분할하고 특정 필드(우리의 경우 정상 샘플과 종양 샘플)로 필터링하는 방법을 학습했습니다. 그러나 이것은 단일 유형의 결합만 다룹니다. 특정 속성으로 샘플을 그룹화하려면 어떻게 해야 할까요? 예를 들어, 일치하는 정상-종양 쌍을 결합하는 대신 유형에 관계없이 "sampleA"의 모든 샘플을 함께 처리하고 싶을 수 있습니다. 이 패턴은 끝에서 결과를 비교하거나 결합하기 전에 효율성을 위해 관련 샘플을 별도로 처리하려는 생물정보학 워크플로우에서 일반적입니다.</p>
-<p>Nextflow에는 이를 수행하는 내장 메서드가 포함되어 있으며, 주로 살펴볼 것은 <code>groupTuple</code>입니다.</p>
-<p>동일한 <code>id</code> 및 <code>interval</code> 필드를 가진 모든 샘플을 그룹화하는 것부터 시작하겠습니다. 이는 기술적 반복을 그룹화하지만 의미 있게 다른 샘플을 분리하려는 분석의 전형입니다.</p>
-<p>이를 위해 그룹화 변수를 분리하여 독립적으로 사용할 수 있도록 해야 합니다.</p>
-<p>첫 번째 단계는 이전 섹션에서 수행한 것과 유사합니다. 그룹화 변수를 튜플의 첫 번째 요소로 분리해야 합니다. 현재 첫 번째 요소는 <code>id</code>, <code>repeat</code> 및 <code>interval</code> 필드의 맵입니다:</p>
+<h2 id="5-aggregating-samples-using-grouptuple">5. Aggregating samples using <code>groupTuple</code><a class="headerlink" href="#5-aggregating-samples-using-grouptuple" title="Permanent link">&para;</a></h2>
+<p>In the previous sections, we learned how to split data from an input file and filter by specific fields (in our case normal and tumor samples). But this only covers a single type of joining. What if we want to group samples by a specific attribute? For example, instead of joining matched normal-tumor pairs, we might want to process all samples from "sampleA" together regardless of their type. This pattern is common in bioinformatics workflows where you may want to process related samples separately for efficiency reasons before comparing or combining the results at the end.</p>
+<p>Nextflow includes built in methods to do this, the main one we will look at is <code>groupTuple</code>.</p>
+<p>Let's start by grouping all of our samples that have the same <code>id</code> and <code>interval</code> fields, this would be typical of an analysis where we wanted to group technical replicates but keep meaningfully different samples separated.</p>
+<p>To do this, we should separate out our grouping variables so we can use them in isolation.</p>
+<p>The first step is similar to what we did in the previous section. We must isolate our grouping variable as the first element of the tuple. Remember, our first element is currently a map of <code>id</code>, <code>repeat</code> and <code>interval</code> fields:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-68-1">1</a></span>
 <span class="normal"><a href="#__codelineno-68-2">2</a></span>
 <span class="normal"><a href="#__codelineno-68-3">3</a></span>
@@ -5265,8 +5577,8 @@
 <a id="__codelineno-68-4" name="__codelineno-68-4"></a><span class="w">  </span><span class="s2">&quot;interval&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;chr1&quot;</span>
 <a id="__codelineno-68-5" name="__codelineno-68-5"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>이전과 같이 <code>subMap</code> 메서드를 재사용하여 맵에서 <code>id</code> 및 <code>interval</code> 필드를 분리할 수 있습니다. 이전과 마찬가지로 <code>map</code> 연산자를 사용하여 각 샘플의 튜플의 첫 번째 요소에 <code>subMap</code> 메서드를 적용합니다.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">후</label><label for="__tabbed_16_2">전</label></div>
+<p>We can reuse the <code>subMap</code> method from before to isolate our <code>id</code> and <code>interval</code> fields from the map. Like before, we will use <code>map</code> operator to apply the <code>subMap</code> method to the first element of the tuple for each sample.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">After</label><label for="__tabbed_16_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-69-20">20</a></span>
@@ -5332,11 +5644,11 @@
 </div>
 </div>
 </div>
-<p>다시 실행하여 채널 내용을 확인하겠습니다:</p>
+<p>Let's run it again and check the channel contents:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>명령 출력</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-72-2" name="__codelineno-72-2" href="#__codelineno-72-2"></a>
 <a id="__codelineno-72-3" name="__codelineno-72-3" href="#__codelineno-72-3"></a><span class="go">Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76</span>
@@ -5355,13 +5667,13 @@
 <a id="__codelineno-72-16" name="__codelineno-72-16" href="#__codelineno-72-16"></a><span class="go">[[id:patientC, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p><code>id</code> 및 <code>interval</code> 필드를 성공적으로 분리했지만 아직 샘플을 그룹화하지 않았음을 알 수 있습니다.</p>
+<p>We can see that we have successfully isolated the <code>id</code> and <code>interval</code> fields, but not grouped the samples yet.</p>
 <div class="admonition note">
-<p class="admonition-title">참고</p>
-<p>여기서 <code>replicate</code> 필드를 버리고 있습니다. 이는 추가 다운스트림 처리에 필요하지 않기 때문입니다. 이 튜토리얼을 완료한 후 나중 그룹화에 영향을 주지 않고 포함할 수 있는지 확인해 보세요!</p>
+<p class="admonition-title">Note</p>
+<p>We are discarding the <code>replicate</code> field here. This is because we don't need it for further downstream processing. After completing this tutorial, see if you can include it without affecting the later grouping!</p>
 </div>
-<p>이제 <a href="https://www.nextflow.io/docs/latest/operator.html#grouptuple"><code>groupTuple</code> 연산자</a>를 사용하여 이 새 그룹화 요소로 샘플을 그룹화하겠습니다.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">후</label><label for="__tabbed_17_2">전</label></div>
+<p>Let's now group the samples by this new grouping element, using the <a href="https://www.nextflow.io/docs/latest/operator.html#grouptuple"><code>groupTuple</code> operator</a>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">After</label><label for="__tabbed_17_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-73-30">30</a></span>
@@ -5407,11 +5719,11 @@
 </div>
 </div>
 </div>
-<p>그게 전부입니다! 단 한 줄의 코드만 추가했습니다. 실행하면 어떤 일이 일어나는지 봅시다:</p>
+<p>That's all there is to it! We just added a single line of code. Let's see what happens when we run it:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>명령 출력</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a>
 <a id="__codelineno-76-3" name="__codelineno-76-3" href="#__codelineno-76-3"></a><span class="go">Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d</span>
@@ -5427,35 +5739,35 @@
 <a id="__codelineno-76-13" name="__codelineno-76-13" href="#__codelineno-76-13"></a><span class="go">[[id:patientC, interval:chr3], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]</span>
 </code></pre></div>
 </details>
-<p>데이터가 구조를 변경했으며 각 채널 요소 내에서 파일이 이제 <code>[patientA_rep1_normal.bam, patientA_rep2_normal.bam]</code>과 같은 튜플에 포함되어 있습니다. 이는 <code>groupTuple</code>을 사용할 때 Nextflow가 그룹의 각 샘플에 대한 단일 파일을 결합하기 때문입니다. 다운스트림에서 데이터를 처리할 때 이것을 기억하는 것이 중요합니다.</p>
+<p>Note our data has changed structure and within each channel element the files now contained in tuples like <code>[patientA_rep1_normal.bam, patientA_rep2_normal.bam]</code>. This is because when we use <code>groupTuple</code>, Nextflow combines the single files for each sample of a group. This is important to remember when trying to handle the data downstream.</p>
 <div class="admonition note">
-<p class="admonition-title">참고</p>
-<p><a href="https://www.nextflow.io/docs/latest/reference/operator.html#transpose"><code>transpose</code></a>는 groupTuple의 반대입니다. 채널의 항목을 풀고 평탄화합니다. <code>transpose</code>를 추가하여 위에서 수행한 그룹화를 취소해 보세요!</p>
+<p class="admonition-title">Note</p>
+<p><a href="https://www.nextflow.io/docs/latest/reference/operator.html#transpose"><code>transpose</code></a> is the opposite of groupTuple. It unpacks the items in a channel and flattens them. Try and add <code>transpose</code> and undo the grouping we performed above!</p>
 </div>
-<h3 id="_12">핵심 정리<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
-<p>이 섹션에서 다음을 학습했습니다:</p>
+<h3 id="takeaway_3">Takeaway<a class="headerlink" href="#takeaway_3" title="Permanent link">&para;</a></h3>
+<p>In this section, you've learned:</p>
 <ul>
-<li><strong>관련 샘플 그룹화</strong>: <code>groupTuple</code>을 사용하여 공통 속성으로 샘플을 집계하는 방법</li>
-<li><strong>그룹화 키 분리</strong>: <code>subMap</code>을 사용하여 그룹화를 위한 특정 필드를 추출하는 방법</li>
-<li><strong>그룹화된 데이터 구조 처리</strong>: <code>groupTuple</code>로 생성된 중첩 구조로 작업하는 방법</li>
-<li><strong>기술적 반복 처리</strong>: 동일한 실험 조건을 공유하는 샘플을 그룹화하는 방법</li>
+<li><strong>Grouping related samples</strong>: How to use <code>groupTuple</code> to aggregate samples by common attributes</li>
+<li><strong>Isolating grouping keys</strong>: How to use <code>subMap</code> to extract specific fields for grouping</li>
+<li><strong>Handling grouped data structures</strong>: How to work with the nested structure created by <code>groupTuple</code></li>
+<li><strong>Technical replicate handling</strong>: How to group samples that share the same experimental conditions</li>
 </ul>
 <hr />
-<h2 id="_13">요약<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
-<p>이 사이드 퀘스트에서 채널을 사용하여 데이터를 분할하고 그룹화하는 방법을 학습했습니다.</p>
-<p>파이프라인을 통해 흐르는 데이터를 수정함으로써 루프나 while 문을 사용하지 않고 확장 가능한 파이프라인을 구축할 수 있으며, 이는 더 전통적인 접근 방식에 비해 여러 가지 장점을 제공합니다:</p>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>In this side quest, you've learned how to split and group data using channels.</p>
+<p>By modifying the data as it flows through the pipeline, you can construct a scalable pipeline without using loops or while statements, offering several advantages over more traditional approaches:</p>
 <ul>
-<li>추가 코드 없이 원하는 만큼 많거나 적은 입력으로 확장할 수 있습니다</li>
-<li>반복 대신 파이프라인을 통한 데이터 흐름에 집중합니다</li>
-<li>필요에 따라 복잡하거나 간단할 수 있습니다</li>
-<li>파이프라인이 어떻게 해야 하는지보다 무엇이 일어나야 하는지에 집중하여 더 선언적이 됩니다</li>
-<li>Nextflow가 독립적인 작업을 병렬로 실행하여 실행을 최적화합니다</li>
+<li>We can scale to as many or as few inputs as we want with no additional code</li>
+<li>We focus on handling the flow of data through the pipeline, instead of iteration</li>
+<li>We can be as complex or simple as required</li>
+<li>The pipeline becomes more declarative, focusing on what should happen rather than how it should happen</li>
+<li>Nextflow will optimize execution for us by running independent operations in parallel</li>
 </ul>
-<p>이러한 채널 작업을 마스터하면 루프나 반복 프로그래밍에 의존하지 않고 복잡한 데이터 관계를 처리하는 유연하고 확장 가능한 파이프라인을 구축할 수 있으며, Nextflow가 실행을 최적화하고 독립적인 작업을 자동으로 병렬화할 수 있습니다.</p>
-<h3 id="_14">핵심 패턴<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>Mastering these channel operations will enable you to build flexible, scalable pipelines that handle complex data relationships without resorting to loops or iterative programming, allowing Nextflow to optimize execution and parallelize independent operations automatically.</p>
+<h3 id="key-patterns">Key patterns<a class="headerlink" href="#key-patterns" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
-<p><strong>구조화된 입력 데이터 생성:</strong> 메타 맵이 있는 CSV 파일에서 시작(<a href="../metadata/">워크플로우의 메타데이터</a>의 패턴 기반)</p>
+<p><strong>Creating structured input data:</strong> Starting from a CSV file with meta maps (building on patterns from <a href="../metadata/">Metadata in workflows</a>)</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="n">ch_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/samplesheet.csv&quot;</span><span class="o">)</span>
 <a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-77-3" name="__codelineno-77-3" href="#__codelineno-77-3"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
@@ -5464,19 +5776,19 @@
 </code></pre></div>
 </li>
 <li>
-<p><strong>데이터를 별도의 채널로 분할:</strong> <code>filter</code>를 사용하여 <code>type</code> 필드를 기준으로 데이터를 독립적인 스트림으로 나눴습니다</p>
+<p><strong>Splitting data into separate channels:</strong> We used <code>filter</code> to divide data into independent streams based on the <code>type</code> field</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a><span class="n">channel</span><span class="o">.</span><span class="na">filter</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="o">.</span><span class="na">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;tumor&#39;</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div>
 </li>
 <li>
-<p><strong>일치하는 샘플 결합:</strong> <code>join</code>을 사용하여 <code>id</code> 및 <code>repeat</code> 필드를 기준으로 관련 샘플을 재결합했습니다</p>
+<p><strong>Joining matched samples:</strong> We used <code>join</code> to recombine related samples based on <code>id</code> and <code>repeat</code> fields</p>
 <ul>
-<li>키(튜플의 첫 번째 요소)로 두 채널 결합</li>
+<li>Join two channels by key (first element of tuple)</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a><span class="n">tumor_ch</span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="n">normal_ch</span><span class="o">)</span>
 </code></pre></div>
 <ul>
-<li>결합 키를 추출하고 이 값으로 결합</li>
+<li>Extract joining key and join by this value</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-80-1" name="__codelineno-80-1" href="#__codelineno-80-1"></a><span class="n">tumor_ch</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-80-2" name="__codelineno-80-2" href="#__codelineno-80-2"></a><span class="w">    </span><span class="o">.</span><span class="na">join</span><span class="o">(</span>
@@ -5484,7 +5796,7 @@
 <a id="__codelineno-80-4" name="__codelineno-80-4" href="#__codelineno-80-4"></a><span class="w">    </span><span class="o">)</span>
 </code></pre></div>
 <ul>
-<li>subMap을 사용하여 여러 필드로 결합</li>
+<li>Join on multiple fields using subMap</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-81-1" name="__codelineno-81-1" href="#__codelineno-81-1"></a><span class="n">tumor_ch</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;repeat&#39;</span><span class="o">]),</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-81-2" name="__codelineno-81-2" href="#__codelineno-81-2"></a><span class="w">    </span><span class="o">.</span><span class="na">join</span><span class="o">(</span>
@@ -5493,31 +5805,31 @@
 </code></pre></div>
 </li>
 <li>
-<p><strong>구간에 분산:</strong> <code>combine</code>을 사용하여 병렬 처리를 위해 샘플과 게놈 구간의 데카르트 곱을 생성했습니다.</p>
+<p><strong>Distributing across intervals:</strong> We used <code>combine</code> to create Cartesian products of samples with genomic intervals for parallel processing.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-82-1" name="__codelineno-82-1" href="#__codelineno-82-1"></a><span class="n">samples_ch</span><span class="o">.</span><span class="na">combine</span><span class="o">(</span><span class="n">intervals_ch</span><span class="o">)</span>
 </code></pre></div>
 </li>
 <li>
-<p><strong>그룹화 키로 집계:</strong> <code>groupTuple</code>을 사용하여 각 튜플의 첫 번째 요소로 그룹화하여 <code>id</code> 및 <code>interval</code> 필드를 공유하는 샘플을 수집하고 기술적 반복을 병합했습니다.</p>
+<p><strong>Aggregating by grouping keys:</strong> We used <code>groupTuple</code> to group by the first element in each tuple, thereby collecting samples sharing <code>id</code> and <code>interval</code> fields and merging technical replicates.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-83-1" name="__codelineno-83-1" href="#__codelineno-83-1"></a><span class="n">channel</span><span class="o">.</span><span class="na">groupTuple</span><span class="o">()</span>
 </code></pre></div>
 </li>
 <li>
-<p><strong>데이터 구조 최적화:</strong> <code>subMap</code>을 사용하여 특정 필드를 추출하고 변환을 재사용 가능하게 만들기 위한 명명된 클로저를 생성했습니다.</p>
+<p><strong>Optimizing the data structure:</strong> We used <code>subMap</code> to extract specific fields and created a named closure for making transformations reusable.</p>
 <ul>
-<li>맵에서 특정 필드 추출</li>
+<li>Extract specific fields from a map</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;repeat&#39;</span><span class="o">])</span>
 </code></pre></div>
 <ul>
-<li>재사용 가능한 변환을 위한 명명된 클로저 사용</li>
+<li>Use named closure for reusable transformations</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a><span class="n">getSampleIdAndReplicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;repeat&#39;</span><span class="o">]),</span><span class="w"> </span><span class="n">file</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-85-2" name="__codelineno-85-2" href="#__codelineno-85-2"></a><span class="n">channel</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">getSampleIdAndReplicate</span><span class="o">)</span>
 </code></pre></div>
 </li>
 </ol>
-<h3 id="_15">추가 자료<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<h3 id="additional-resources">Additional resources<a class="headerlink" href="#additional-resources" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://www.nextflow.io/docs/latest/operator.html#filter">filter</a></li>
 <li><a href="https://www.nextflow.io/docs/latest/operator.html#map">map</a></li>
@@ -5526,8 +5838,8 @@
 <li><a href="https://www.nextflow.io/docs/latest/operator.html#combine">combine</a></li>
 </ul>
 <hr />
-<h2 id="_16">다음 단계<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
-<p><a href="../">사이드 퀘스트 메뉴</a>로 돌아가거나 페이지 오른쪽 하단의 버튼을 클릭하여 목록의 다음 주제로 이동하세요.</p><style type="text/css">.quiz {
+<h2 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
+<p>Return to the <a href="../">menu of Side Quests</a> or click the button in the bottom right of the page to move on to the next topic in the list.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -7225,7 +7537,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
         
           
-          <a href="../working_with_files/" class="md-footer__link md-footer__link--prev" aria-label="이전: 파일 입력 처리">
+          <a href="../metadata/" class="md-footer__link md-footer__link--prev" aria-label="이전: Metadata and meta maps">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -7235,20 +7547,20 @@ window.mkdocsQuizConfig = {
                 이전
               </span>
               <div class="md-ellipsis">
-                파일 입력 처리
+                Metadata and meta maps
               </div>
             </div>
           </a>
         
         
           
-          <a href="../workflows_of_workflows/" class="md-footer__link md-footer__link--next" aria-label="다음: 워크플로우의 워크플로우">
+          <a href="../nf_test/" class="md-footer__link md-footer__link--next" aria-label="다음: Testing with nf-test">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
               </span>
               <div class="md-ellipsis">
-                워크플로우의 워크플로우
+                Testing with nf-test
               </div>
             </div>
             <div class="md-footer__button md-icon">

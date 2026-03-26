@@ -11,10 +11,10 @@
         <link rel="canonical" href="https://training.nextflow.io/pt/side_quests/splitting_and_grouping/">
       
       
-        <link rel="prev" href="../working_with_files/">
+        <link rel="prev" href="../metadata/">
       
       
-        <link rel="next" href="../workflows_of_workflows/">
+        <link rel="next" href="../nf_test/">
       
       
         
@@ -47,7 +47,7 @@
     
     
       
-        <title>Divisão e Agrupamento - training.nextflow.io</title>
+        <title>Splitting and Grouping - training.nextflow.io</title>
       
     
     
@@ -157,7 +157,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#divisao-e-agrupamento" class="md-skip">
+        <a href="#splitting-and-grouping" class="md-skip">
           Ir para o conteúdo
         </a>
       
@@ -196,7 +196,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Divisão e Agrupamento
+              Splitting and Grouping
             
           </span>
         </div>
@@ -2345,7 +2345,35 @@
   <span class="md-ellipsis">
     
   
-    Ambiente de Desenvolvimento
+    Development Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../essential_scripting_patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Essential Nextflow Scripting Patterns
   
 
     
@@ -2373,35 +2401,7 @@
   <span class="md-ellipsis">
     
   
-    Metadados e mapas meta
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../working_with_files/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Processamento de entrada de arquivos
+    Metadata and meta maps
   
 
     
@@ -2438,7 +2438,7 @@
   <span class="md-ellipsis">
     
   
-    Divisão e Agrupamento
+    Splitting and Grouping
   
 
     
@@ -2456,7 +2456,7 @@
   <span class="md-ellipsis">
     
   
-    Divisão e Agrupamento
+    Splitting and Grouping
   
 
     
@@ -2476,40 +2476,40 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#objetivos-de-aprendizado" class="md-nav__link">
+  <a href="#learning-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Objetivos de aprendizado
+        Learning goals
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#pre-requisitos" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pré-requisitos
+        Prerequisites
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#0-primeiros-passos" class="md-nav__link">
+  <a href="#0-get-started" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Primeiros passos
+        0. Get started
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="0. Primeiros passos">
+    <nav class="md-nav" aria-label="0. Get started">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#abrir-o-codespace-de-treinamento" class="md-nav__link">
+  <a href="#open-the-training-codespace" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Abrir o codespace de treinamento
+        Open the training codespace
       
     </span>
   </a>
@@ -2517,10 +2517,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#mover-para-o-diretorio-do-projeto" class="md-nav__link">
+  <a href="#move-into-the-project-directory" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mover para o diretório do projeto
+        Move into the project directory
       
     </span>
   </a>
@@ -2528,10 +2528,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#revisar-os-materiais" class="md-nav__link">
+  <a href="#review-the-materials" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Revisar os materiais
+        Review the materials
       
     </span>
   </a>
@@ -2539,10 +2539,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#revisar-a-tarefa" class="md-nav__link">
+  <a href="#review-the-assignment" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Revisar a tarefa
+        Review the assignment
       
     </span>
   </a>
@@ -2550,10 +2550,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#lista-de-verificacao-de-prontidao" class="md-nav__link">
+  <a href="#readiness-checklist" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Lista de verificação de prontidão
+        Readiness checklist
       
     </span>
   </a>
@@ -2564,22 +2564,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-ler-dados-de-amostras" class="md-nav__link">
+  <a href="#1-read-in-sample-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Ler dados de amostras
+        1. Read in sample data
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Ler dados de amostras">
+    <nav class="md-nav" aria-label="1. Read in sample data">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-ler-dados-de-amostras-com-splitcsv-e-criar-mapas-de-metadados" class="md-nav__link">
+  <a href="#11-read-in-sample-data-with-splitcsv-and-create-meta-maps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Ler dados de amostras com splitCsv e criar mapas de metadados
+        1.1. Read in sample data with splitCsv and create meta maps
       
     </span>
   </a>
@@ -2590,22 +2590,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-filtrar-e-transformar-dados" class="md-nav__link">
+  <a href="#2-filter-and-transform-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Filtrar e transformar dados
+        2. Filter and transform data
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Filtrar e transformar dados">
+    <nav class="md-nav" aria-label="2. Filter and transform data">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-filtrar-dados-com-filter" class="md-nav__link">
+  <a href="#21-filter-data-with-filter" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Filtrar dados com filter
+        2.1. Filter data with filter
       
     </span>
   </a>
@@ -2613,10 +2613,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-criar-canais-filtrados-separados" class="md-nav__link">
+  <a href="#22-create-separate-filtered-channels" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Criar canais filtrados separados
+        2.2. Create separate filtered channels
       
     </span>
   </a>
@@ -2624,10 +2624,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#conclusao" class="md-nav__link">
+  <a href="#takeaway" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conclusão
+        Takeaway
       
     </span>
   </a>
@@ -2638,34 +2638,34 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-unir-canais-por-identificadores" class="md-nav__link">
+  <a href="#3-joining-channels-by-identifiers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Unir canais por identificadores
+        3. Joining channels by identifiers
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Unir canais por identificadores">
+    <nav class="md-nav" aria-label="3. Joining channels by identifiers">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-usar-map-e-join-para-combinar-com-base-no-id-do-paciente" class="md-nav__link">
+  <a href="#31-use-map-and-join-to-combine-based-on-patient-id" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Usar map e join para combinar com base no ID do paciente
+        3.1. Use map and join to combine based on patient ID
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3.1. Usar map e join para combinar com base no ID do paciente">
+    <nav class="md-nav" aria-label="3.1. Use map and join to combine based on patient ID">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#311-verificar-a-estrutura-de-dados" class="md-nav__link">
+  <a href="#311-check-the-data-structure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.1. Verificar a estrutura de dados
+        3.1.1. Check the data structure
       
     </span>
   </a>
@@ -2673,10 +2673,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#312-isolar-o-campo-id" class="md-nav__link">
+  <a href="#312-isolate-the-id-field" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.2. Isolar o campo id
+        3.1.2. Isolate the id field
       
     </span>
   </a>
@@ -2684,10 +2684,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#313-combinar-os-dois-canais" class="md-nav__link">
+  <a href="#313-combine-the-two-channels" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.3. Combinar os dois canais
+        3.1.3. Combine the two channels
       
     </span>
   </a>
@@ -2700,10 +2700,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-unir-em-multiplos-campos" class="md-nav__link">
+  <a href="#32-join-on-multiple-fields" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Unir em múltiplos campos
+        3.2. Join on multiple fields
       
     </span>
   </a>
@@ -2711,10 +2711,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-usar-submap-para-criar-uma-nova-chave-de-juncao" class="md-nav__link">
+  <a href="#33-use-submap-to-create-a-new-joining-key" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. Usar subMap para criar uma nova chave de junção
+        3.3. Use subMap to create a new joining key
       
     </span>
   </a>
@@ -2722,10 +2722,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-usar-um-closure-nomeado-em-map" class="md-nav__link">
+  <a href="#34-use-a-named-closure-in-map" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4. Usar um closure nomeado em map
+        3.4. Use a named closure in map
       
     </span>
   </a>
@@ -2733,10 +2733,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35-reduzir-duplicacao-de-dados" class="md-nav__link">
+  <a href="#35-reduce-duplication-of-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5. Reduzir duplicação de dados
+        3.5. Reduce duplication of data
       
     </span>
   </a>
@@ -2744,10 +2744,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#36-remover-informacoes-redundantes" class="md-nav__link">
+  <a href="#36-remove-redundant-information" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.6. Remover informações redundantes
+        3.6. Remove redundant information
       
     </span>
   </a>
@@ -2755,58 +2755,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#conclusao_1" class="md-nav__link">
+  <a href="#takeaway_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conclusão
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>  <li class="md-nav__item">
-  <a href="#4-distribuir-amostras-em-intervalos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Distribuir amostras em intervalos
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. Distribuir amostras em intervalos">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#41-distribuir-amostras-em-intervalos-usando-combine" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.1. Distribuir amostras em intervalos usando combine
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#42-organizar-o-canal" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.2. Organizar o canal
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#conclusao_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Conclusão
+        Takeaway
       
     </span>
   </a>
@@ -2817,22 +2769,44 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#5-agregar-amostras-usando-grouptuple" class="md-nav__link">
+  <a href="#4-spread-samples-intervals" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Agregar amostras usando groupTuple
+        4. Spread samples intervals
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. Agregar amostras usando groupTuple">
+    <nav class="md-nav" aria-label="4. Spread samples intervals">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#conclusao_3" class="md-nav__link">
+  <a href="#41-spread-samples-over-intervals-using-combine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conclusão
+        4.1. Spread samples over intervals using combine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-organize-the-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Organize the channel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Takeaway
       
     </span>
   </a>
@@ -2843,33 +2817,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#resumo" class="md-nav__link">
+  <a href="#5-aggregating-samples-using-grouptuple" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resumo
+        5. Aggregating samples using groupTuple
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Resumo">
+    <nav class="md-nav" aria-label="5. Aggregating samples using groupTuple">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#padroes-chave" class="md-nav__link">
+  <a href="#takeaway_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Padrões chave
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#recursos-adicionais" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Recursos adicionais
+        Takeaway
       
     </span>
   </a>
@@ -2880,10 +2843,47 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#o-que-vem-a-seguir" class="md-nav__link">
+  <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        O que vem a seguir?
+        Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's next?
       
     </span>
   </a>
@@ -3091,6 +3091,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../nf_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing with nf-test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../workflows_of_workflows/" class="md-nav__link">
         
   
@@ -3098,7 +3126,35 @@
   <span class="md-ellipsis">
     
   
-    Fluxos de Trabalho de Fluxos de Trabalho
+    Workflows of Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../working_with_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File input processing
   
 
     
@@ -3126,7 +3182,82 @@
   <span class="md-ellipsis">
     
   
-    Depurando Workflows
+    Debugging Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_11" id="__nav_6_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Plugin Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Development
   
 
     
@@ -3147,14 +3278,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../essential_scripting_patterns/" class="md-nav__link">
+      <a href="../plugin_development/01_plugin_basics/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Padrões Essenciais de Script Nextflow
+    Part 1: Plugin Basics
   
 
     
@@ -3175,14 +3306,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../nf-test/" class="md-nav__link">
+      <a href="../plugin_development/02_create_project/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Testando com nf-test
+    Part 2: Create a Plugin Project
   
 
     
@@ -3191,6 +3322,182 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/03_custom_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 3: Custom Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/04_build_and_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 4: Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/05_observers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 5: Trace Observers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/06_configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 6: Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin_development/next_steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Next Steps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -3639,40 +3946,40 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#objetivos-de-aprendizado" class="md-nav__link">
+  <a href="#learning-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Objetivos de aprendizado
+        Learning goals
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#pre-requisitos" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pré-requisitos
+        Prerequisites
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#0-primeiros-passos" class="md-nav__link">
+  <a href="#0-get-started" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Primeiros passos
+        0. Get started
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="0. Primeiros passos">
+    <nav class="md-nav" aria-label="0. Get started">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#abrir-o-codespace-de-treinamento" class="md-nav__link">
+  <a href="#open-the-training-codespace" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Abrir o codespace de treinamento
+        Open the training codespace
       
     </span>
   </a>
@@ -3680,10 +3987,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#mover-para-o-diretorio-do-projeto" class="md-nav__link">
+  <a href="#move-into-the-project-directory" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mover para o diretório do projeto
+        Move into the project directory
       
     </span>
   </a>
@@ -3691,10 +3998,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#revisar-os-materiais" class="md-nav__link">
+  <a href="#review-the-materials" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Revisar os materiais
+        Review the materials
       
     </span>
   </a>
@@ -3702,10 +4009,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#revisar-a-tarefa" class="md-nav__link">
+  <a href="#review-the-assignment" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Revisar a tarefa
+        Review the assignment
       
     </span>
   </a>
@@ -3713,10 +4020,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#lista-de-verificacao-de-prontidao" class="md-nav__link">
+  <a href="#readiness-checklist" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Lista de verificação de prontidão
+        Readiness checklist
       
     </span>
   </a>
@@ -3727,22 +4034,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-ler-dados-de-amostras" class="md-nav__link">
+  <a href="#1-read-in-sample-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Ler dados de amostras
+        1. Read in sample data
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Ler dados de amostras">
+    <nav class="md-nav" aria-label="1. Read in sample data">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-ler-dados-de-amostras-com-splitcsv-e-criar-mapas-de-metadados" class="md-nav__link">
+  <a href="#11-read-in-sample-data-with-splitcsv-and-create-meta-maps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Ler dados de amostras com splitCsv e criar mapas de metadados
+        1.1. Read in sample data with splitCsv and create meta maps
       
     </span>
   </a>
@@ -3753,22 +4060,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-filtrar-e-transformar-dados" class="md-nav__link">
+  <a href="#2-filter-and-transform-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Filtrar e transformar dados
+        2. Filter and transform data
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Filtrar e transformar dados">
+    <nav class="md-nav" aria-label="2. Filter and transform data">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-filtrar-dados-com-filter" class="md-nav__link">
+  <a href="#21-filter-data-with-filter" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Filtrar dados com filter
+        2.1. Filter data with filter
       
     </span>
   </a>
@@ -3776,10 +4083,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-criar-canais-filtrados-separados" class="md-nav__link">
+  <a href="#22-create-separate-filtered-channels" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Criar canais filtrados separados
+        2.2. Create separate filtered channels
       
     </span>
   </a>
@@ -3787,10 +4094,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#conclusao" class="md-nav__link">
+  <a href="#takeaway" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conclusão
+        Takeaway
       
     </span>
   </a>
@@ -3801,34 +4108,34 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-unir-canais-por-identificadores" class="md-nav__link">
+  <a href="#3-joining-channels-by-identifiers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Unir canais por identificadores
+        3. Joining channels by identifiers
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Unir canais por identificadores">
+    <nav class="md-nav" aria-label="3. Joining channels by identifiers">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-usar-map-e-join-para-combinar-com-base-no-id-do-paciente" class="md-nav__link">
+  <a href="#31-use-map-and-join-to-combine-based-on-patient-id" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Usar map e join para combinar com base no ID do paciente
+        3.1. Use map and join to combine based on patient ID
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3.1. Usar map e join para combinar com base no ID do paciente">
+    <nav class="md-nav" aria-label="3.1. Use map and join to combine based on patient ID">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#311-verificar-a-estrutura-de-dados" class="md-nav__link">
+  <a href="#311-check-the-data-structure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.1. Verificar a estrutura de dados
+        3.1.1. Check the data structure
       
     </span>
   </a>
@@ -3836,10 +4143,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#312-isolar-o-campo-id" class="md-nav__link">
+  <a href="#312-isolate-the-id-field" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.2. Isolar o campo id
+        3.1.2. Isolate the id field
       
     </span>
   </a>
@@ -3847,10 +4154,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#313-combinar-os-dois-canais" class="md-nav__link">
+  <a href="#313-combine-the-two-channels" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.3. Combinar os dois canais
+        3.1.3. Combine the two channels
       
     </span>
   </a>
@@ -3863,10 +4170,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-unir-em-multiplos-campos" class="md-nav__link">
+  <a href="#32-join-on-multiple-fields" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Unir em múltiplos campos
+        3.2. Join on multiple fields
       
     </span>
   </a>
@@ -3874,10 +4181,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-usar-submap-para-criar-uma-nova-chave-de-juncao" class="md-nav__link">
+  <a href="#33-use-submap-to-create-a-new-joining-key" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. Usar subMap para criar uma nova chave de junção
+        3.3. Use subMap to create a new joining key
       
     </span>
   </a>
@@ -3885,10 +4192,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-usar-um-closure-nomeado-em-map" class="md-nav__link">
+  <a href="#34-use-a-named-closure-in-map" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4. Usar um closure nomeado em map
+        3.4. Use a named closure in map
       
     </span>
   </a>
@@ -3896,10 +4203,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35-reduzir-duplicacao-de-dados" class="md-nav__link">
+  <a href="#35-reduce-duplication-of-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5. Reduzir duplicação de dados
+        3.5. Reduce duplication of data
       
     </span>
   </a>
@@ -3907,10 +4214,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#36-remover-informacoes-redundantes" class="md-nav__link">
+  <a href="#36-remove-redundant-information" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.6. Remover informações redundantes
+        3.6. Remove redundant information
       
     </span>
   </a>
@@ -3918,58 +4225,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#conclusao_1" class="md-nav__link">
+  <a href="#takeaway_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conclusão
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>  <li class="md-nav__item">
-  <a href="#4-distribuir-amostras-em-intervalos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Distribuir amostras em intervalos
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. Distribuir amostras em intervalos">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#41-distribuir-amostras-em-intervalos-usando-combine" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.1. Distribuir amostras em intervalos usando combine
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#42-organizar-o-canal" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.2. Organizar o canal
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#conclusao_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Conclusão
+        Takeaway
       
     </span>
   </a>
@@ -3980,22 +4239,44 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#5-agregar-amostras-usando-grouptuple" class="md-nav__link">
+  <a href="#4-spread-samples-intervals" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Agregar amostras usando groupTuple
+        4. Spread samples intervals
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. Agregar amostras usando groupTuple">
+    <nav class="md-nav" aria-label="4. Spread samples intervals">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#conclusao_3" class="md-nav__link">
+  <a href="#41-spread-samples-over-intervals-using-combine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conclusão
+        4.1. Spread samples over intervals using combine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-organize-the-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Organize the channel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeaway_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Takeaway
       
     </span>
   </a>
@@ -4006,33 +4287,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#resumo" class="md-nav__link">
+  <a href="#5-aggregating-samples-using-grouptuple" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resumo
+        5. Aggregating samples using groupTuple
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Resumo">
+    <nav class="md-nav" aria-label="5. Aggregating samples using groupTuple">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#padroes-chave" class="md-nav__link">
+  <a href="#takeaway_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Padrões chave
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#recursos-adicionais" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Recursos adicionais
+        Takeaway
       
     </span>
   </a>
@@ -4043,10 +4313,47 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#o-que-vem-a-seguir" class="md-nav__link">
+  <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        O que vem a seguir?
+        Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's next?
       
     </span>
   </a>
@@ -4292,7 +4599,7 @@
 
  
 <a
-  href="https://github.com/nextflow-io/training/edit/master/docs/side_quests/splitting_and_grouping.md"
+  href="https://github.com/nextflow-io/training/edit/master/docs/side_quests/splitting_and_grouping/index.md"
   title="Editar esta página"
   class="md-content__button md-icon"
   rel="edit"
@@ -4309,52 +4616,57 @@
 </a>
  
 
-<h1 id="divisao-e-agrupamento">Divisão e Agrupamento<a class="headerlink" href="#divisao-e-agrupamento" title="Permanent link">&para;</a></h1>
-<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tradução assistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">saiba mais e sugira melhorias</a></span></p>
-<p>O Nextflow fornece ferramentas poderosas para trabalhar com dados de forma flexível. Uma capacidade-chave é dividir dados em diferentes fluxos e depois agrupar itens relacionados de volta. Isso é especialmente valioso em fluxos de trabalho de bioinformática onde você precisa processar diferentes tipos de amostras separadamente antes de combinar resultados para análise.</p>
-<p>Pense nisso como classificar correspondências: você separa cartas por destino, processa cada pilha de forma diferente e depois recombina itens indo para a mesma pessoa. O Nextflow usa operadores especiais para realizar isso com dados científicos. Essa abordagem também é comumente conhecida como o padrão <strong>scatter/gather</strong> em computação distribuída e fluxos de trabalho de bioinformática.</p>
-<p>O sistema de canais do Nextflow está no centro dessa flexibilidade. Os canais conectam diferentes partes do seu fluxo de trabalho, permitindo que os dados fluam através da sua análise. Você pode criar múltiplos canais a partir de uma única fonte de dados, processar cada canal de forma diferente e depois mesclar canais de volta quando necessário. Essa abordagem permite que você projete fluxos de trabalho que naturalmente espelham os caminhos de ramificação e convergência de análises complexas de bioinformática.</p>
-<h3 id="objetivos-de-aprendizado">Objetivos de aprendizado<a class="headerlink" href="#objetivos-de-aprendizado" title="Permanent link">&para;</a></h3>
-<p>Nesta missão secundária, você aprenderá a dividir e agrupar dados usando os operadores de canal do Nextflow.
-Começaremos com um arquivo CSV contendo informações de amostras e arquivos de dados associados, depois manipularemos e reorganizaremos esses dados.</p>
-<p>Ao final desta missão secundária, você será capaz de separar e combinar fluxos de dados de forma eficaz, usando as seguintes técnicas:</p>
+<h1 id="splitting-and-grouping">Splitting and Grouping<a class="headerlink" href="#splitting-and-grouping" title="Permanent link">&para;</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Translation in Progress</p>
+<p>This page has not yet been translated into your language.
+You are viewing the original English content.</p>
+<p>Want to help? See our <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">translation guide</a>.</p>
+</div>
+<p>Nextflow provides powerful tools for working with data flexibly. A key capability is splitting data into different streams and then grouping related items back together. This is especially valuable in bioinformatics workflows where you need to process different types of samples separately before combining results for analysis.</p>
+<p>Think of it like sorting mail: you separate letters by destination, process each pile differently, then recombine items going to the same person. Nextflow uses special operators to accomplish this with scientific data. This approach is also commonly known as the <strong>scatter/gather</strong> pattern in distributed computing and bioinformatics workflows.</p>
+<p>Nextflow's channel system is at the heart of this flexibility. Channels connect different parts of your workflow, allowing data to flow through your analysis. You can create multiple channels from a single data source, process each channel differently, and then merge channels back together when needed. This approach lets you design workflows that naturally mirror the branching and converging paths of complex bioinformatics analyses.</p>
+<h3 id="learning-goals">Learning goals<a class="headerlink" href="#learning-goals" title="Permanent link">&para;</a></h3>
+<p>In this side quest, you'll learn to split and group data using Nextflow's channel operators.
+We'll start with a CSV file containing sample information and associated data files, then manipulate and reorganize this data.</p>
+<p>By the end of this side quest, you'll be able to separate and combine data streams effectively, using the following techniques:</p>
 <ul>
-<li>Ler dados de arquivos usando <code>splitCsv</code></li>
-<li>Filtrar e transformar dados com <code>filter</code> e <code>map</code></li>
-<li>Combinar dados relacionados usando <code>join</code> e <code>groupTuple</code></li>
-<li>Criar combinações de dados com <code>combine</code> para processamento paralelo</li>
-<li>Otimizar a estrutura de dados usando <code>subMap</code> e estratégias de deduplicação</li>
-<li>Construir funções reutilizáveis com closures nomeados para ajudar a manipular estruturas de canal</li>
+<li>Read data from files using <code>splitCsv</code></li>
+<li>Filter and transform data with <code>filter</code> and <code>map</code></li>
+<li>Combine related data using <code>join</code> and <code>groupTuple</code></li>
+<li>Create data combinations with <code>combine</code> for parallel processing</li>
+<li>Optimize data structure using <code>subMap</code> and deduplication strategies</li>
+<li>Build reusable functions with named closures to help you manipulate channel structures</li>
 </ul>
-<p>Essas habilidades ajudarão você a construir fluxos de trabalho que podem lidar com múltiplos arquivos de entrada e diferentes tipos de dados de forma eficiente, mantendo uma estrutura de código limpa e de fácil manutenção.</p>
-<h3 id="pre-requisitos">Pré-requisitos<a class="headerlink" href="#pre-requisitos" title="Permanent link">&para;</a></h3>
-<p>Antes de começar esta missão secundária, você deve:</p>
+<p>These skills will help you build workflows that can handle multiple input files and different types of data efficiently, while maintaining clean, maintainable code structure.</p>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<p>Before taking on this side quest, you should:</p>
 <ul>
-<li>Ter completado o tutorial <a href="../hello_nextflow/README.md">Hello Nextflow</a> ou curso equivalente para iniciantes.</li>
-<li>Estar confortável usando conceitos e mecanismos básicos do Nextflow (processos, canais, operadores, trabalhando com arquivos, metadados)</li>
+<li>Have completed the <a href="../hello_nextflow/README.md">Hello Nextflow</a> tutorial or equivalent beginner's course.</li>
+<li>Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators, working with files, meta data)</li>
 </ul>
-<p><strong>Opcional:</strong> Recomendamos completar a missão secundária <a href="../metadata/">Metadados em fluxos de trabalho</a> primeiro.
-Ela cobre os fundamentos de leitura de arquivos CSV com <code>splitCsv</code> e criação de mapas de metadados, que usaremos intensamente aqui.</p>
+<p><strong>Optional:</strong> We recommend completing the <a href="../metadata/">Metadata in workflows</a> side quest first.
+That covers the fundamentals of reading CSV files with <code>splitCsv</code> and creating meta maps, which we'll use heavily here.</p>
 <hr />
-<h2 id="0-primeiros-passos">0. Primeiros passos<a class="headerlink" href="#0-primeiros-passos" title="Permanent link">&para;</a></h2>
-<h4 id="abrir-o-codespace-de-treinamento">Abrir o codespace de treinamento<a class="headerlink" href="#abrir-o-codespace-de-treinamento" title="Permanent link">&para;</a></h4>
-<p>Se você ainda não o fez, certifique-se de abrir o ambiente de treinamento conforme descrito em <a href="../../envsetup/">Configuração do Ambiente</a>.</p>
+<h2 id="0-get-started">0. Get started<a class="headerlink" href="#0-get-started" title="Permanent link">&para;</a></h2>
+<h4 id="open-the-training-codespace">Open the training codespace<a class="headerlink" href="#open-the-training-codespace" title="Permanent link">&para;</a></h4>
+<p>If you haven't yet done so, make sure to open the training environment as described in the <a href="../envsetup/index.md">Environment Setup</a>.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
-<h4 id="mover-para-o-diretorio-do-projeto">Mover para o diretório do projeto<a class="headerlink" href="#mover-para-o-diretorio-do-projeto" title="Permanent link">&para;</a></h4>
-<p>Vamos mover para o diretório onde os arquivos deste tutorial estão localizados.</p>
+<h4 id="move-into-the-project-directory">Move into the project directory<a class="headerlink" href="#move-into-the-project-directory" title="Permanent link">&para;</a></h4>
+<p>Let's move into the directory where the files for this tutorial are located.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>side-quests/splitting_and_grouping
 </code></pre></div>
-<p>Você pode configurar o VSCode para focar neste diretório:</p>
+<p>You can set VSCode to focus on this directory:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>code<span class="w"> </span>.
 </code></pre></div>
-<h4 id="revisar-os-materiais">Revisar os materiais<a class="headerlink" href="#revisar-os-materiais" title="Permanent link">&para;</a></h4>
-<p>Você encontrará um arquivo de fluxo de trabalho principal e um diretório <code>data</code> contendo uma planilha de amostras chamada <code>samplesheet.csv</code>.</p>
-<div class="highlight"><span class="filename">Conteúdo do diretório</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">.</span>
+<h4 id="review-the-materials">Review the materials<a class="headerlink" href="#review-the-materials" title="Permanent link">&para;</a></h4>
+<p>You'll find a main workflow file and a <code>data</code> directory containing a samplesheet named <code>samplesheet.csv</code>.</p>
+<div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">.</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">├── data</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">│   └── samplesheet.csv</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="go">└── main.nf</span>
 </code></pre></div>
-<p>A planilha de amostras contém informações sobre amostras de diferentes pacientes, incluindo o ID do paciente, número de repetição da amostra, tipo (normal ou tumor) e caminhos para arquivos de dados hipotéticos (que não existem de fato, mas vamos fingir que existem).</p>
+<p>The samplesheet contains information about samples from different patients, including the patient ID, sample repeat number, type (normal or tumor), and paths to hypothetical data files (which don't actually exist, but we will pretend they do).</p>
 <div class="highlight"><span class="filename">samplesheet.csv</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">id,repeat,type,bam</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="go">patientA,1,normal,patientA_rep1_normal.bam</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">patientA,1,tumor,patientA_rep1_tumor.bam</span>
@@ -4365,37 +4677,37 @@ Ela cobre os fundamentos de leitura de arquivos CSV com <code>splitCsv</code> e 
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="go">patientC,1,normal,patientC_rep1_normal.bam</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="go">patientC,1,tumor,patientC_rep1_tumor.bam</span>
 </code></pre></div>
-<p>Esta planilha lista oito amostras de três pacientes (A, B, C).</p>
-<p>Para cada paciente, temos amostras que são do tipo <code>tumor</code> (tipicamente originadas de biópsias de tumor) ou <code>normal</code> (coletadas de tecido saudável ou sangue).
-Se você não está familiarizado com análise de câncer, saiba apenas que isso corresponde a um modelo experimental que usa amostras pareadas tumor/normal para realizar análises contrastivas.</p>
-<p>Para o paciente A especificamente, temos dois conjuntos de réplicas técnicas (repetições).</p>
+<p>This samplesheet lists eight samples from three patients (A, B, C).</p>
+<p>For each patient, we have samples that are of type <code>tumor</code> (typically originating from tumor biopsies) or <code>normal</code> (taken from healthy tissue or blood).
+If you're not familiar with cancer analysis, just know that this corresponds to an experimental model that uses paired tumor/normal samples to perform contrastive analyses.</p>
+<p>For patient A specifically, we have two sets of technical replicates (repeats).</p>
 <div class="admonition note">
-<p class="admonition-title">Nota</p>
-<p>Não se preocupe se você não está familiarizado com este desenho experimental, não é crítico para entender este tutorial.</p>
+<p class="admonition-title">Note</p>
+<p>Don't worry if you're not familiar with this experimental design, it's not critical for understanding this tutorial.</p>
 </div>
-<h4 id="revisar-a-tarefa">Revisar a tarefa<a class="headerlink" href="#revisar-a-tarefa" title="Permanent link">&para;</a></h4>
-<p>Seu desafio é escrever um fluxo de trabalho Nextflow que irá:</p>
+<h4 id="review-the-assignment">Review the assignment<a class="headerlink" href="#review-the-assignment" title="Permanent link">&para;</a></h4>
+<p>Your challenge is to write a Nextflow workflow that will:</p>
 <ol>
-<li><strong>Ler</strong> dados de amostras de um arquivo CSV e estruturá-los com mapas de metadados</li>
-<li><strong>Separar</strong> amostras em diferentes canais com base no tipo (normal vs tumor)</li>
-<li><strong>Unir</strong> pares correspondentes tumor/normal por ID do paciente e número de réplica</li>
-<li><strong>Distribuir</strong> amostras através de intervalos genômicos para processamento paralelo</li>
-<li><strong>Agrupar</strong> amostras relacionadas de volta para análise downstream</li>
+<li><strong>Read</strong> sample data from a CSV file and structure it with meta maps</li>
+<li><strong>Separate</strong> samples into different channels based on type (normal vs tumor)</li>
+<li><strong>Join</strong> matched tumor/normal pairs by patient ID and replicate number</li>
+<li><strong>Distribute</strong> samples across genomic intervals for parallel processing</li>
+<li><strong>Group</strong> related samples back together for downstream analysis</li>
 </ol>
-<p>Isso representa um padrão comum de bioinformática onde você precisa dividir dados para processamento independente, depois recombinar itens relacionados para análise comparativa.</p>
-<h4 id="lista-de-verificacao-de-prontidao">Lista de verificação de prontidão<a class="headerlink" href="#lista-de-verificacao-de-prontidao" title="Permanent link">&para;</a></h4>
-<p>Acha que está pronto para começar?</p>
+<p>This represents a common bioinformatics pattern where you need to split data for independent processing, then recombine related items for comparative analysis.</p>
+<h4 id="readiness-checklist">Readiness checklist<a class="headerlink" href="#readiness-checklist" title="Permanent link">&para;</a></h4>
+<p>Think you're ready to dive in?</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Entendo o objetivo deste curso e seus pré-requisitos</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Meu codespace está funcionando</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Defini meu diretório de trabalho apropriadamente</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Entendo a tarefa</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I understand the goal of this course and its prerequisites</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> My codespace is up and running</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I've set my working directory appropriately</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I understand the assignment</li>
 </ul>
-<p>Se você pode marcar todas as caixas, está pronto para começar.</p>
+<p>If you can check all the boxes, you're good to go.</p>
 <hr />
-<h2 id="1-ler-dados-de-amostras">1. Ler dados de amostras<a class="headerlink" href="#1-ler-dados-de-amostras" title="Permanent link">&para;</a></h2>
-<h3 id="11-ler-dados-de-amostras-com-splitcsv-e-criar-mapas-de-metadados">1.1. Ler dados de amostras com <code>splitCsv</code> e criar mapas de metadados<a class="headerlink" href="#11-ler-dados-de-amostras-com-splitcsv-e-criar-mapas-de-metadados" title="Permanent link">&para;</a></h3>
-<p>Vamos começar lendo os dados de amostras com <code>splitCsv</code> e organizando-os no padrão de mapa de metadados. No <code>main.nf</code>, você verá que já começamos o fluxo de trabalho.</p>
+<h2 id="1-read-in-sample-data">1. Read in sample data<a class="headerlink" href="#1-read-in-sample-data" title="Permanent link">&para;</a></h2>
+<h3 id="11-read-in-sample-data-with-splitcsv-and-create-meta-maps">1.1. Read in sample data with <code>splitCsv</code> and create meta maps<a class="headerlink" href="#11-read-in-sample-data-with-splitcsv-and-create-meta-maps" title="Permanent link">&para;</a></h3>
+<p>Let's start by reading in the sample data with <code>splitCsv</code> and organizing it into the meta map pattern. In the <code>main.nf</code>, you'll see that we've already started the workflow.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
 <span class="normal"><a href="#__codelineno-4-2">2</a></span>
 <span class="normal"><a href="#__codelineno-4-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
@@ -4403,21 +4715,21 @@ Se você não está familiarizado com análise de câncer, saiba apenas que isso
 </span><a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <div class="admonition note">
-<p class="admonition-title">Nota</p>
-<p>Ao longo deste tutorial, usaremos o prefixo <code>ch_</code> para todas as variáveis de canal para indicar claramente que são canais Nextflow.</p>
+<p class="admonition-title">Note</p>
+<p>Throughout this tutorial, we'll use the <code>ch_</code> prefix for all channel variables to clearly indicate they are Nextflow channels.</p>
 </div>
-<p>Se você completou a missão secundária <a href="../metadata/">Metadados em fluxos de trabalho</a>, você reconhecerá esse padrão. Usaremos <code>splitCsv</code> para ler o CSV e imediatamente estruturar os dados com um mapa de metadados para separar metadados de caminhos de arquivo.</p>
+<p>If you completed the <a href="../metadata/">Metadata in workflows</a> side quest, you'll recognize this pattern. We'll use <code>splitCsv</code> to read the CSV and immediately structure the data with a meta map to separate metadata from file paths.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>Encontraremos dois conceitos diferentes chamados <code>map</code> neste treinamento:</p>
+<p>We'll encounter two different concepts called <code>map</code> in this training:</p>
 <ul>
-<li><strong>Estrutura de dados</strong>: O mapa Groovy (equivalente a dicionários/hashes em outras linguagens) que armazena pares chave-valor</li>
-<li><strong>Operador de canal</strong>: O operador <code>.map()</code> que transforma itens em um canal</li>
+<li><strong>Data structure</strong>: The Groovy map (equivalent to dictionaries/hashes in other languages) that stores key-value pairs</li>
+<li><strong>Channel operator</strong>: The <code>.map()</code> operator that transforms items in a channel</li>
 </ul>
-<p>Esclareceremos qual deles queremos dizer no contexto, mas essa distinção é importante para entender ao trabalhar com Nextflow.</p>
+<p>We'll clarify which one we mean in context, but this distinction is important to understand when working with Nextflow.</p>
 </div>
-<p>Aplique estas mudanças ao <code>main.nf</code>:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Depois</label><label for="__tabbed_1_2">Antes</label></div>
+<p>Apply these changes to <code>main.nf</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">After</label><label for="__tabbed_1_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-2">2</a></span>
@@ -4439,11 +4751,11 @@ Se você não está familiarizado com análise de câncer, saiba apenas que isso
 </div>
 </div>
 </div>
-<p>Isso combina a operação <code>splitCsv</code> (lendo o CSV com cabeçalhos) e a operação <code>map</code> (estruturando dados como tuplas <code>[meta, file]</code>) em uma etapa. Aplique essa mudança e execute o pipeline:</p>
+<p>This combines the <code>splitCsv</code> operation (reading the CSV with headers) and the <code>map</code> operation (structuring data as <code>[meta, file]</code> tuples) in one step. Apply that change and run the pipeline:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Saída do comando</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9</span>
@@ -4458,12 +4770,12 @@ Se você não está familiarizado com análise de câncer, saiba apenas que isso
 <a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="go">[[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>Agora temos um canal onde cada item é uma tupla <code>[meta, file]</code> - metadados separados de caminhos de arquivo. Esta estrutura nos permite dividir e agrupar nossa carga de trabalho com base em campos de metadados.</p>
+<p>We now have a channel where each item is a <code>[meta, file]</code> tuple - metadata separated from file paths. This structure allows us to split and group our workload based on metadata fields.</p>
 <hr />
-<h2 id="2-filtrar-e-transformar-dados">2. Filtrar e transformar dados<a class="headerlink" href="#2-filtrar-e-transformar-dados" title="Permanent link">&para;</a></h2>
-<h3 id="21-filtrar-dados-com-filter">2.1. Filtrar dados com <code>filter</code><a class="headerlink" href="#21-filtrar-dados-com-filter" title="Permanent link">&para;</a></h3>
-<p>Podemos usar o <a href="https://www.nextflow.io/docs/latest/operator.html#filter">operador <code>filter</code></a> para filtrar os dados com base em uma condição. Digamos que queremos processar apenas amostras normais. Podemos fazer isso filtrando os dados com base no campo <code>type</code>. Vamos inserir isso antes do operador <code>view</code>.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Depois</label><label for="__tabbed_2_2">Antes</label></div>
+<h2 id="2-filter-and-transform-data">2. Filter and transform data<a class="headerlink" href="#2-filter-and-transform-data" title="Permanent link">&para;</a></h2>
+<h3 id="21-filter-data-with-filter">2.1. Filter data with <code>filter</code><a class="headerlink" href="#21-filter-data-with-filter" title="Permanent link">&para;</a></h3>
+<p>We can use the <a href="https://www.nextflow.io/docs/latest/operator.html#filter"><code>filter</code> operator</a> to filter the data based on a condition. Let's say we only want to process normal samples. We can do this by filtering the data based on the <code>type</code> field. Let's insert this before the <code>view</code> operator.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">After</label><label for="__tabbed_2_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-2">2</a></span>
@@ -4497,11 +4809,11 @@ Se você não está familiarizado com análise de câncer, saiba apenas que isso
 </div>
 </div>
 </div>
-<p>Execute o fluxo de trabalho novamente para ver o resultado filtrado:</p>
+<p>Run the workflow again to see the filtered result:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Saída do comando</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="go">Launching `main.nf` [admiring_brown] DSL2 - revision: 194d61704d</span>
@@ -4512,15 +4824,15 @@ Se você não está familiarizado com análise de câncer, saiba apenas que isso
 <a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="go">[[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]</span>
 </code></pre></div>
 </details>
-<p>Filtramos com sucesso os dados para incluir apenas amostras normais. Vamos recapitular como isso funciona.</p>
-<p>O operador <code>filter</code> recebe um closure que é aplicado a cada elemento no canal. Se o closure retornar <code>true</code>, o elemento é incluído; se retornar <code>false</code>, o elemento é excluído.</p>
-<p>No nosso caso, queremos manter apenas amostras onde <code>meta.type == 'normal'</code>. O closure usa a tupla <code>meta,file</code> para se referir a cada amostra, acessa o tipo de amostra com <code>meta.type</code> e verifica se é igual a <code>'normal'</code>.</p>
-<p>Isso é realizado com o único closure que introduzimos acima:</p>
+<p>We have successfully filtered the data to only include normal samples. Let's recap how this works.</p>
+<p>The <code>filter</code> operator takes a closure that is applied to each element in the channel. If the closure returns <code>true</code>, the element is included; if it returns <code>false</code>, the element is excluded.</p>
+<p>In our case, we want to keep only samples where <code>meta.type == 'normal'</code>. The closure uses the tuple <code>meta,file</code> to refer to each sample, accesses the sample type with <code>meta.type</code>, and checks if it equals <code>'normal'</code>.</p>
+<p>This is accomplished with the single closure we introduced above:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="w">    </span><span class="o">.</span><span class="na">filter</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="22-criar-canais-filtrados-separados">2.2. Criar canais filtrados separados<a class="headerlink" href="#22-criar-canais-filtrados-separados" title="Permanent link">&para;</a></h3>
-<p>Atualmente estamos aplicando o filtro ao canal criado diretamente do CSV, mas queremos filtrar isso de mais de uma maneira, então vamos reescrever a lógica para criar um canal filtrado separado para amostras normais:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Depois</label><label for="__tabbed_3_2">Antes</label></div>
+<h3 id="22-create-separate-filtered-channels">2.2. Create separate filtered channels<a class="headerlink" href="#22-create-separate-filtered-channels" title="Permanent link">&para;</a></h3>
+<p>Currently we're applying the filter to the channel created directly from the CSV, but we want to filter this in more ways than one, so let's re-write the logic to create a separate filtered channel for normal samples:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">After</label><label for="__tabbed_3_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
@@ -4560,11 +4872,11 @@ Se você não está familiarizado com análise de câncer, saiba apenas que isso
 </div>
 </div>
 </div>
-<p>Execute o pipeline para ver os resultados:</p>
+<p>Run the pipeline to see the results:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Saída do comando</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74</span>
@@ -4575,9 +4887,9 @@ Se você não está familiarizado com análise de câncer, saiba apenas que isso
 <a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="go">[[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]</span>
 </code></pre></div>
 </details>
-<p>Filtramos com sucesso os dados e criamos um canal separado para amostras normais.</p>
-<p>Vamos criar um canal filtrado para as amostras de tumor também:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Depois</label><label for="__tabbed_4_2">Antes</label></div>
+<p>We've successfully filtered the data and created a separate channel for normal samples.</p>
+<p>Let's create a filtered channel for the tumor samples as well:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">After</label><label for="__tabbed_4_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-7"> 7</a></span>
@@ -4612,7 +4924,7 @@ Se você não está familiarizado com análise de câncer, saiba apenas que isso
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Saída do comando</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b</span>
@@ -4627,27 +4939,27 @@ Se você não está familiarizado com análise de câncer, saiba apenas que isso
 <a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="go">Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>Separamos as amostras normais e de tumor em dois canais diferentes e usamos um closure fornecido a <code>view()</code> para rotulá-las de forma diferente na saída: <code>ch_tumor_samples.view{'Tumor sample: ' + it}</code>.</p>
-<h3 id="conclusao">Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h3>
-<p>Nesta seção, você aprendeu:</p>
+<p>We've separated out the normal and tumor samples into two different channels, and used a closure supplied to <code>view()</code> to label them differently in the output: <code>ch_tumor_samples.view{'Tumor sample: ' + it}</code>.</p>
+<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
+<p>In this section, you've learned:</p>
 <ul>
-<li><strong>Filtrar dados</strong>: Como filtrar dados com <code>filter</code></li>
-<li><strong>Dividir dados</strong>: Como dividir dados em diferentes canais com base em uma condição</li>
-<li><strong>Visualizar dados</strong>: Como usar <code>view</code> para imprimir os dados e rotular a saída de diferentes canais</li>
+<li><strong>Filtering data</strong>: How to filter data with <code>filter</code></li>
+<li><strong>Splitting data</strong>: How to split data into different channels based on a condition</li>
+<li><strong>Viewing data</strong>: How to use <code>view</code> to print the data and label output from different channels</li>
 </ul>
-<p>Agora separamos as amostras normais e de tumor em dois canais diferentes. Em seguida, vamos unir as amostras normais e de tumor no campo <code>id</code>.</p>
+<p>We've now separated out the normal and tumor samples into two different channels. Next, we'll join the normal and tumor samples on the <code>id</code> field.</p>
 <hr />
-<h2 id="3-unir-canais-por-identificadores">3. Unir canais por identificadores<a class="headerlink" href="#3-unir-canais-por-identificadores" title="Permanent link">&para;</a></h2>
-<p>Na seção anterior, separamos as amostras normais e de tumor em dois canais diferentes. Elas poderiam ser processadas independentemente usando processos ou fluxos de trabalho específicos com base em seu tipo. Mas o que acontece quando queremos comparar as amostras normais e de tumor do mesmo paciente? Neste ponto, precisamos uni-las de volta, certificando-nos de combinar as amostras com base em seu campo <code>id</code>.</p>
-<p>O Nextflow inclui muitos métodos para combinar canais, mas neste caso o operador mais apropriado é <a href="https://www.nextflow.io/docs/latest/operator.html#join"><code>join</code></a>. Se você está familiarizado com SQL, ele age como a operação <code>JOIN</code>, onde especificamos a chave para unir e o tipo de junção a ser executada.</p>
-<h3 id="31-usar-map-e-join-para-combinar-com-base-no-id-do-paciente">3.1. Usar <code>map</code> e <code>join</code> para combinar com base no ID do paciente<a class="headerlink" href="#31-usar-map-e-join-para-combinar-com-base-no-id-do-paciente" title="Permanent link">&para;</a></h3>
-<p>Se verificarmos a documentação do <a href="https://www.nextflow.io/docs/latest/operator.html#join"><code>join</code></a>, podemos ver que por padrão ele une dois canais com base no primeiro item em cada tupla.</p>
-<h4 id="311-verificar-a-estrutura-de-dados">3.1.1. Verificar a estrutura de dados<a class="headerlink" href="#311-verificar-a-estrutura-de-dados" title="Permanent link">&para;</a></h4>
-<p>Se você não tem a saída do console ainda disponível, vamos executar o pipeline para verificar nossa estrutura de dados e ver como precisamos modificá-la para unir no campo <code>id</code>.</p>
+<h2 id="3-joining-channels-by-identifiers">3. Joining channels by identifiers<a class="headerlink" href="#3-joining-channels-by-identifiers" title="Permanent link">&para;</a></h2>
+<p>In the previous section, we separated out the normal and tumor samples into two different channels. These could be processed independently using specific processes or workflows based on their type. But what happens when we want to compare the normal and tumor samples from the same patient? At this point, we need to join them back together making sure to match the samples based on their <code>id</code> field.</p>
+<p>Nextflow includes many methods for combining channels, but in this case the most appropriate operator is <a href="https://www.nextflow.io/docs/latest/operator.html#join"><code>join</code></a>. If you are familiar with SQL, it acts like the <code>JOIN</code> operation, where we specify the key to join on and the type of join to perform.</p>
+<h3 id="31-use-map-and-join-to-combine-based-on-patient-id">3.1. Use <code>map</code> and <code>join</code> to combine based on patient ID<a class="headerlink" href="#31-use-map-and-join-to-combine-based-on-patient-id" title="Permanent link">&para;</a></h3>
+<p>If we check the <a href="https://www.nextflow.io/docs/latest/operator.html#join"><code>join</code></a> documentation, we can see that by default it joins two channels based on the first item in each tuple.</p>
+<h4 id="311-check-the-data-structure">3.1.1. Check the data structure<a class="headerlink" href="#311-check-the-data-structure" title="Permanent link">&para;</a></h4>
+<p>If you don't have the console output still available, let's run the pipeline to check our data structure and see how we need to modify it to join on the <code>id</code> field.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Saída do comando</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b</span>
@@ -4662,10 +4974,10 @@ Se você não está familiarizado com análise de câncer, saiba apenas que isso
 <a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="go">Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>Podemos ver que o campo <code>id</code> é o primeiro elemento em cada mapa de metadados. Para que <code>join</code> funcione, devemos isolar o campo <code>id</code> em cada tupla. Depois disso, podemos simplesmente usar o operador <code>join</code> para combinar os dois canais.</p>
-<h4 id="312-isolar-o-campo-id">3.1.2. Isolar o campo <code>id</code><a class="headerlink" href="#312-isolar-o-campo-id" title="Permanent link">&para;</a></h4>
-<p>Para isolar o campo <code>id</code>, podemos usar o <a href="https://www.nextflow.io/docs/latest/operator.html#map">operador <code>map</code></a> para criar uma nova tupla com o campo <code>id</code> como o primeiro elemento.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Depois</label><label for="__tabbed_5_2">Antes</label></div>
+<p>We can see that the <code>id</code> field is the first element in each meta map. For <code>join</code> to work, we should isolate the <code>id</code> field in each tuple. After that, we can simply use the <code>join</code> operator to combine the two channels.</p>
+<h4 id="312-isolate-the-id-field">3.1.2. Isolate the <code>id</code> field<a class="headerlink" href="#312-isolate-the-id-field" title="Permanent link">&para;</a></h4>
+<p>To isolate the <code>id</code> field, we can use the <a href="https://www.nextflow.io/docs/latest/operator.html#map"><code>map</code> operator</a> to create a new tuple with the <code>id</code> field as the first element.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">After</label><label for="__tabbed_5_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-7"> 7</a></span>
@@ -4712,7 +5024,7 @@ Se você não está familiarizado com análise de câncer, saiba apenas que isso
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Saída do comando</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
 <a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="go">Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d</span>
@@ -4727,11 +5039,11 @@ Se você não está familiarizado com análise de câncer, saiba apenas que isso
 <a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a><span class="go">Normal sample: [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]</span>
 </code></pre></div>
 </details>
-<p>Pode ser sutil, mas você deve ser capaz de ver que o primeiro elemento em cada tupla é o campo <code>id</code>.</p>
-<h4 id="313-combinar-os-dois-canais">3.1.3. Combinar os dois canais<a class="headerlink" href="#313-combinar-os-dois-canais" title="Permanent link">&para;</a></h4>
-<p>Agora podemos usar o operador <code>join</code> para combinar os dois canais com base no campo <code>id</code>.</p>
-<p>Mais uma vez, usaremos <code>view</code> para imprimir as saídas unidas.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Depois</label><label for="__tabbed_6_2">Antes</label></div>
+<p>It might be subtle, but you should be able to see the first element in each tuple is the <code>id</code> field.</p>
+<h4 id="313-combine-the-two-channels">3.1.3. Combine the two channels<a class="headerlink" href="#313-combine-the-two-channels" title="Permanent link">&para;</a></h4>
+<p>Now we can use the <code>join</code> operator to combine the two channels based on the <code>id</code> field.</p>
+<p>Once again, we will use <code>view</code> to print the joined outputs.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">After</label><label for="__tabbed_6_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-7"> 7</a></span>
@@ -4780,7 +5092,7 @@ Se você não está familiarizado com análise de câncer, saiba apenas que isso
 <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Saída do comando</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="go">Launching `main.nf` [soggy_wiles] DSL2 - revision: 3bc1979889</span>
@@ -4791,26 +5103,26 @@ Se você não está familiarizado com análise de câncer, saiba apenas que isso
 <a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="go">[patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>É um pouco difícil de ver porque é muito largo, mas você deve ser capaz de ver que as amostras foram unidas pelo campo <code>id</code>. Cada tupla agora tem o formato:</p>
+<p>It's a little hard to tell because it's so wide, but you should be able to see the samples have been joined by the <code>id</code> field. Each tuple now has the format:</p>
 <ul>
-<li><code>id</code>: O ID da amostra</li>
-<li><code>normal_meta_map</code>: Os metadados da amostra normal incluindo tipo, réplica e caminho para o arquivo bam</li>
-<li><code>normal_sample_file</code>: O arquivo da amostra normal</li>
-<li><code>tumor_meta_map</code>: Os metadados da amostra de tumor incluindo tipo, réplica e caminho para o arquivo bam</li>
-<li><code>tumor_sample</code>: A amostra de tumor incluindo tipo, réplica e caminho para o arquivo bam</li>
+<li><code>id</code>: The sample ID</li>
+<li><code>normal_meta_map</code>: The normal sample meta data including type, replicate and path to bam file</li>
+<li><code>normal_sample_file</code>: The normal sample file</li>
+<li><code>tumor_meta_map</code>: The tumor sample meta data including type, replicate and path to bam file</li>
+<li><code>tumor_sample</code>: The tumor sample including type, replicate and path to bam file</li>
 </ul>
 <div class="admonition warning">
-<p class="admonition-title">Aviso</p>
-<p>O operador <code>join</code> descartará quaisquer tuplas não correspondidas. Neste exemplo, garantimos que todas as amostras fossem correspondidas para tumor e normal, mas se isso não for verdade você deve usar o parâmetro <code>remainder: true</code> para manter as tuplas não correspondidas. Consulte a <a href="https://www.nextflow.io/docs/latest/operator.html#join">documentação</a> para mais detalhes.</p>
+<p class="admonition-title">Warning</p>
+<p>The <code>join</code> operator will discard any un-matched tuples. In this example, we made sure all samples were matched for tumor and normal but if this is not true you must use the parameter <code>remainder: true</code> to keep the unmatched tuples. Check the <a href="https://www.nextflow.io/docs/latest/operator.html#join">documentation</a> for more details.</p>
 </div>
-<p>Então agora você sabe como usar <code>map</code> para isolar um campo em uma tupla, e como usar <code>join</code> para combinar tuplas com base no primeiro campo.
-Com esse conhecimento, podemos combinar com sucesso canais com base em um campo compartilhado.</p>
-<p>Em seguida, consideraremos a situação onde você quer unir em múltiplos campos.</p>
-<h3 id="32-unir-em-multiplos-campos">3.2. Unir em múltiplos campos<a class="headerlink" href="#32-unir-em-multiplos-campos" title="Permanent link">&para;</a></h3>
-<p>Temos 2 réplicas para a sampleA, mas apenas 1 para sampleB e sampleC. Neste caso fomos capazes de uni-las efetivamente usando o campo <code>id</code>, mas o que aconteceria se estivessem fora de sincronia? Poderíamos misturar as amostras normais e de tumor de diferentes réplicas!</p>
-<p>Para evitar isso, podemos unir em múltiplos campos. Na verdade, existem várias maneiras de fazer isso, mas vamos focar em criar uma nova chave de junção que inclui tanto o <code>id</code> da amostra quanto o número de <code>replicate</code>.</p>
-<p>Vamos começar criando uma nova chave de junção. Podemos fazer isso da mesma forma que antes, usando o <a href="https://www.nextflow.io/docs/latest/operator.html#map">operador <code>map</code></a> para criar uma nova tupla com os campos <code>id</code> e <code>repeat</code> como o primeiro elemento.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Depois</label><label for="__tabbed_7_2">Antes</label></div>
+<p>So now you know how to use <code>map</code> to isolate a field in a tuple, and how to use <code>join</code> to combine tuples based on the first field.
+With this knowledge, we can successfully combine channels based on a shared field.</p>
+<p>Next, we'll consider the situation where you want to join on multiple fields.</p>
+<h3 id="32-join-on-multiple-fields">3.2. Join on multiple fields<a class="headerlink" href="#32-join-on-multiple-fields" title="Permanent link">&para;</a></h3>
+<p>We have 2 replicates for sampleA, but only 1 for sampleB and sampleC. In this case we were able to join them effectively by using the <code>id</code> field, but what would happen if they were out of sync? We could mix up the normal and tumor samples from different replicates!</p>
+<p>To avoid this, we can join on multiple fields. There are actually multiple ways to achieve this but we are going to focus on creating a new joining key which includes both the sample <code>id</code> and <code>replicate</code> number.</p>
+<p>Let's start by creating a new joining key. We can do this in the same way as before by using the <a href="https://www.nextflow.io/docs/latest/operator.html#map"><code>map</code> operator</a> to create a new tuple with the <code>id</code> and <code>repeat</code> fields as the first element.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">After</label><label for="__tabbed_7_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-7"> 7</a></span>
@@ -4842,11 +5154,11 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 </div>
 </div>
 </div>
-<p>Agora devemos ver a junção ocorrendo, mas usando tanto os campos <code>id</code> quanto <code>repeat</code>. Execute o fluxo de trabalho:</p>
+<p>Now we should see the join is occurring but using both the <code>id</code> and <code>repeat</code> fields. Run the workflow:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Saída do comando</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">Launching `main.nf` [prickly_wing] DSL2 - revision: 3bebf22dee</span>
@@ -4857,12 +5169,12 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 <a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="go">[[patientC, 1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>Note como temos uma tupla de dois elementos (campos <code>id</code> e <code>repeat</code>) como o primeiro elemento de cada resultado unido. Isso demonstra como itens complexos podem ser usados como uma chave de junção, permitindo correspondências bastante intrincadas entre amostras das mesmas condições.</p>
-<p>Se você quiser explorar mais maneiras de unir em chaves diferentes, consulte a <a href="https://www.nextflow.io/docs/latest/operator.html#join">documentação do operador join</a> para opções e exemplos adicionais.</p>
-<h3 id="33-usar-submap-para-criar-uma-nova-chave-de-juncao">3.3. Usar <code>subMap</code> para criar uma nova chave de junção<a class="headerlink" href="#33-usar-submap-para-criar-uma-nova-chave-de-juncao" title="Permanent link">&para;</a></h3>
-<p>A abordagem anterior perde os nomes dos campos da nossa chave de junção - os campos <code>id</code> e <code>repeat</code> se tornam apenas uma lista de valores. Para reter os nomes dos campos para acesso posterior, podemos usar o <a href="https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)">método <code>subMap</code></a>.</p>
-<p>O método <code>subMap</code> extrai apenas os pares chave-valor especificados de um mapa. Aqui extrairemos apenas os campos <code>id</code> e <code>repeat</code> para criar nossa chave de junção.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Depois</label><label for="__tabbed_8_2">Antes</label></div>
+<p>Note how we have a tuple of two elements (<code>id</code> and <code>repeat</code> fields) as the first element of each joined result. This demonstrates how complex items can be used as a joining key, enabling fairly intricate matching between samples from the same conditions.</p>
+<p>If you want to explore more ways to join on different keys, check out the <a href="https://www.nextflow.io/docs/latest/operator.html#join">join operator documentation</a> for additional options and examples.</p>
+<h3 id="33-use-submap-to-create-a-new-joining-key">3.3. Use <code>subMap</code> to create a new joining key<a class="headerlink" href="#33-use-submap-to-create-a-new-joining-key" title="Permanent link">&para;</a></h3>
+<p>The previous approach loses the field names from our joining key - the <code>id</code> and <code>repeat</code> fields become just a list of values. To retain the field names for later access, we can use the <a href="https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)"><code>subMap</code> method</a>.</p>
+<p>The <code>subMap</code> method extracts only the specified key-value pairs from a map. Here we'll extract just the <code>id</code> and <code>repeat</code> fields to create our joining key.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">After</label><label for="__tabbed_8_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-7"> 7</a></span>
@@ -4897,7 +5209,7 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 <div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Saída do comando</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>
 <a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="go">Launching `main.nf` [reverent_wing] DSL2 - revision: 847016c3b7</span>
@@ -4908,11 +5220,11 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 <a id="__codelineno-39-8" name="__codelineno-39-8" href="#__codelineno-39-8"></a><span class="go">[[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>Agora temos uma nova chave de junção que não apenas inclui os campos <code>id</code> e <code>repeat</code>, mas também retém os nomes dos campos para que possamos acessá-los mais tarde por nome, por exemplo <code>meta.id</code> e <code>meta.repeat</code>.</p>
-<h3 id="34-usar-um-closure-nomeado-em-map">3.4. Usar um closure nomeado em map<a class="headerlink" href="#34-usar-um-closure-nomeado-em-map" title="Permanent link">&para;</a></h3>
-<p>Para evitar duplicação e reduzir erros, podemos usar um closure nomeado. Um closure nomeado nos permite criar uma função reutilizável que podemos chamar em vários lugares.</p>
-<p>Para fazer isso, primeiro definimos o closure como uma nova variável:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">Depois</label><label for="__tabbed_9_2">Antes</label></div>
+<p>Now we have a new joining key that not only includes the <code>id</code> and <code>repeat</code> fields but also retains the field names so we can access them later by name, e.g. <code>meta.id</code> and <code>meta.repeat</code>.</p>
+<h3 id="34-use-a-named-closure-in-map">3.4. Use a named closure in map<a class="headerlink" href="#34-use-a-named-closure-in-map" title="Permanent link">&para;</a></h3>
+<p>To avoid duplication and reduce errors, we can use a named closure. A named closure allows us to create a reusable function that we can call in multiple places.</p>
+<p>To do so, first we define the closure as a new variable:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">After</label><label for="__tabbed_9_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-2"> 2</a></span>
@@ -4954,10 +5266,10 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 </div>
 </div>
 </div>
-<p>Definimos a transformação do map como uma variável nomeada que podemos reutilizar.</p>
-<p>Note que também convertemos o caminho do arquivo para um objeto Path usando <code>file()</code> para que qualquer processo recebendo este canal possa lidar com o arquivo corretamente (para mais informações veja <a href="../working_with_files/">Trabalhando com arquivos</a>).</p>
-<p>Vamos implementar o closure em nosso fluxo de trabalho:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">Depois</label><label for="__tabbed_10_2">Antes</label></div>
+<p>We've defined the map transformation as a named variable that we can reuse.</p>
+<p>Note that we also convert the file path to a Path object using <code>file()</code> so that any process receiving this channel can handle the file correctly (for more information see <a href="../working_with_files/">Working with files</a>).</p>
+<p>Let's implement the closure in our workflow:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">After</label><label for="__tabbed_10_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-10">10</a></span>
@@ -4990,14 +5302,14 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 </div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">Nota</p>
-<p>O operador <code>map</code> mudou de usar <code>{ }</code> para usar <code>( )</code> para passar o closure como um argumento. Isso ocorre porque o operador <code>map</code> espera um closure como argumento e <code>{ }</code> é usado para definir um closure anônimo. Ao chamar um closure nomeado, use a sintaxe <code>( )</code>.</p>
+<p class="admonition-title">Note</p>
+<p>The <code>map</code> operator has switched from using <code>{ }</code> to using <code>( )</code> to pass the closure as an argument. This is because the <code>map</code> operator expects a closure as an argument and <code>{ }</code> is used to define an anonymous closure. When calling a named closure, use the <code>( )</code> syntax.</p>
 </div>
-<p>Execute o fluxo de trabalho mais uma vez para verificar se tudo ainda está funcionando:</p>
+<p>Run the workflow once more to check everything is still working:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Saída do comando</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>
 <a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="go">Launching `main.nf` [angry_meninsky] DSL2 - revision: 2edc226b1d</span>
@@ -5008,9 +5320,9 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 <a id="__codelineno-45-8" name="__codelineno-45-8" href="#__codelineno-45-8"></a><span class="go">[[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>Usar um closure nomeado nos permite reutilizar a mesma transformação em vários lugares, reduzindo o risco de erros e tornando o código mais legível e de fácil manutenção.</p>
-<h3 id="35-reduzir-duplicacao-de-dados">3.5. Reduzir duplicação de dados<a class="headerlink" href="#35-reduzir-duplicacao-de-dados" title="Permanent link">&para;</a></h3>
-<p>Temos muitos dados duplicados em nosso fluxo de trabalho. Cada item nas amostras unidas repete os campos <code>id</code> e <code>repeat</code>. Como essa informação já está disponível na chave de agrupamento, podemos evitar essa redundância. Como lembrete, nossa estrutura de dados atual se parece com isso:</p>
+<p>Using a named closure allows us to reuse the same transformation in multiple places, reducing the risk of errors and making the code more readable and maintainable.</p>
+<h3 id="35-reduce-duplication-of-data">3.5. Reduce duplication of data<a class="headerlink" href="#35-reduce-duplication-of-data" title="Permanent link">&para;</a></h3>
+<p>We have a lot of duplicated data in our workflow. Each item in the joined samples repeats the <code>id</code> and <code>repeat</code> fields. Since this information is already available in the grouping key, we can avoid this redundancy. As a reminder, our current data structure looks like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="o">[</span>
 <a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="w">  </span><span class="o">[</span>
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="w">    </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;sampleC&quot;</span><span class="o">,</span>
@@ -5030,8 +5342,8 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 <a id="__codelineno-46-17" name="__codelineno-46-17" href="#__codelineno-46-17"></a><span class="w">  </span><span class="s2">&quot;sampleC_rep1_tumor.bam&quot;</span>
 <a id="__codelineno-46-18" name="__codelineno-46-18" href="#__codelineno-46-18"></a><span class="o">]</span>
 </code></pre></div>
-<p>Como os campos <code>id</code> e <code>repeat</code> estão disponíveis na chave de agrupamento, vamos removê-los do resto de cada item do canal para evitar duplicação. Podemos fazer isso usando o método <code>subMap</code> para criar um novo mapa com apenas o campo <code>type</code>. Essa abordagem nos permite manter todas as informações necessárias enquanto eliminamos redundância em nossa estrutura de dados.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">Depois</label><label for="__tabbed_11_2">Antes</label></div>
+<p>Since the <code>id</code> and <code>repeat</code> fields are available in the grouping key, let's remove them from the rest of each channel item to avoid duplication. We can do this by using the <code>subMap</code> method to create a new map with only the <code>type</code> field. This approach allows us to maintain all necessary information while eliminating redundancy in our data structure.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">After</label><label for="__tabbed_11_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-8" name="__codelineno-47-8"></a><span class="hll"><span class="w">    </span><span class="n">getSampleIdAndReplicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;repeat&#39;</span><span class="o">]),</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;type&#39;</span><span class="o">]),</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">bam</span><span class="o">)</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
@@ -5043,24 +5355,24 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 </div>
 </div>
 </div>
-<p>Agora o closure retorna uma tupla onde o primeiro elemento contém os campos <code>id</code> e <code>repeat</code>, e o segundo elemento contém apenas o campo <code>type</code>. Isso elimina redundância armazenando as informações de <code>id</code> e <code>repeat</code> uma vez na chave de agrupamento, mantendo todas as informações necessárias.</p>
-<p>Execute o fluxo de trabalho para ver como isso se parece:</p>
+<p>Now the closure returns a tuple where the first element contains the <code>id</code> and <code>repeat</code> fields, and the second element contains only the <code>type</code> field. This eliminates redundancy by storing the <code>id</code> and <code>repeat</code> information once in the grouping key, while maintaining all necessary information.</p>
+<p>Run the workflow to see what this looks like:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Saída do comando</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">[[id:patientA, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]</span>
 <a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a><span class="go">[[id:patientA, repeat:2], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]</span>
 <a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="go">[[id:patientB, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]</span>
 <a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a><span class="go">[[id:patientC, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>Podemos ver que só declaramos os campos <code>id</code> e <code>repeat</code> uma vez na chave de agrupamento e temos o campo <code>type</code> nos dados da amostra. Não perdemos nenhuma informação, mas conseguimos tornar o conteúdo do nosso canal mais sucinto.</p>
-<h3 id="36-remover-informacoes-redundantes">3.6. Remover informações redundantes<a class="headerlink" href="#36-remover-informacoes-redundantes" title="Permanent link">&para;</a></h3>
-<p>Removemos informações duplicadas acima, mas ainda temos algumas outras informações redundantes em nossos canais.</p>
-<p>No início, separamos as amostras normais e de tumor usando <code>filter</code>, depois as unimos com base nas chaves <code>id</code> e <code>repeat</code>. O operador <code>join</code> preserva a ordem em que as tuplas são mescladas, então no nosso caso, com amostras normais no lado esquerdo e amostras de tumor no lado direito, o canal resultante mantém esta estrutura: <code>id, &lt;elementos normais&gt;, &lt;elementos tumor&gt;</code>.</p>
-<p>Como sabemos a posição de cada elemento em nosso canal, podemos simplificar ainda mais a estrutura removendo os metadados <code>[type:normal]</code> e <code>[type:tumor]</code>.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">Depois</label><label for="__tabbed_12_2">Antes</label></div>
+<p>We can see we only state the <code>id</code> and <code>repeat</code> fields once in the grouping key and we have the <code>type</code> field in the sample data. We haven't lost any information but we managed to make our channel contents more succinct.</p>
+<h3 id="36-remove-redundant-information">3.6. Remove redundant information<a class="headerlink" href="#36-remove-redundant-information" title="Permanent link">&para;</a></h3>
+<p>We removed duplicated information above, but we still have some other redundant information in our channels.</p>
+<p>In the beginning, we separated the normal and tumor samples using <code>filter</code>, then joined them based on <code>id</code> and <code>repeat</code> keys. The <code>join</code> operator preserves the order in which tuples are merged, so in our case, with normal samples on the left side and tumor samples on the right, the resulting channel maintains this structure: <code>id, &lt;normal elements&gt;, &lt;tumor elements&gt;</code>.</p>
+<p>Since we know the position of each element in our channel, we can simplify the structure further by dropping the <code>[type:normal]</code> and <code>[type:tumor]</code> metadata.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">After</label><label for="__tabbed_12_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-51-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-51-8" name="__codelineno-51-8"></a><span class="hll"><span class="w">    </span><span class="n">getSampleIdAndReplicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;repeat&#39;</span><span class="o">]),</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
@@ -5072,11 +5384,11 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 </div>
 </div>
 </div>
-<p>Execute novamente para ver o resultado:</p>
+<p>Run again to see the result:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Saída do comando</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>
 <a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a><span class="go">Launching `main.nf` [confident_leavitt] DSL2 - revision: a2303895bd</span>
@@ -5087,24 +5399,24 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 <a id="__codelineno-54-8" name="__codelineno-54-8" href="#__codelineno-54-8"></a><span class="go">[[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<h3 id="conclusao_1">Conclusão<a class="headerlink" href="#conclusao_1" title="Permanent link">&para;</a></h3>
-<p>Nesta seção, você aprendeu:</p>
+<h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
+<p>In this section, you've learned:</p>
 <ul>
-<li><strong>Manipular Tuplas</strong>: Como usar <code>map</code> para isolar um campo em uma tupla</li>
-<li><strong>Unir Tuplas</strong>: Como usar <code>join</code> para combinar tuplas com base no primeiro campo</li>
-<li><strong>Criar Chaves de Junção</strong>: Como usar <code>subMap</code> para criar uma nova chave de junção</li>
-<li><strong>Closures Nomeados</strong>: Como usar um closure nomeado em map</li>
-<li><strong>Junção em Múltiplos Campos</strong>: Como unir em múltiplos campos para correspondência mais precisa</li>
-<li><strong>Otimização da Estrutura de Dados</strong>: Como simplificar a estrutura do canal removendo informações redundantes</li>
+<li><strong>Manipulating Tuples</strong>: How to use <code>map</code> to isolate a field in a tuple</li>
+<li><strong>Joining Tuples</strong>: How to use <code>join</code> to combine tuples based on the first field</li>
+<li><strong>Creating Joining Keys</strong>: How to use <code>subMap</code> to create a new joining key</li>
+<li><strong>Named Closures</strong>: How to use a named closure in map</li>
+<li><strong>Multiple Field Joining</strong>: How to join on multiple fields for more precise matching</li>
+<li><strong>Data Structure Optimization</strong>: How to streamline channel structure by removing redundant information</li>
 </ul>
-<p>Você agora tem um fluxo de trabalho que pode dividir uma planilha de amostras, filtrar as amostras normais e de tumor, uni-las por ID de amostra e número de réplica, depois imprimir os resultados.</p>
-<p>Este é um padrão comum em fluxos de trabalho de bioinformática onde você precisa combinar amostras ou outros tipos de dados após processamento independente, então é uma habilidade útil. Em seguida, vamos olhar para repetir uma amostra várias vezes.</p>
-<h2 id="4-distribuir-amostras-em-intervalos">4. Distribuir amostras em intervalos<a class="headerlink" href="#4-distribuir-amostras-em-intervalos" title="Permanent link">&para;</a></h2>
-<p>Um padrão-chave em fluxos de trabalho de bioinformática é distribuir análises através de regiões genômicas. Por exemplo, a chamada de variantes pode ser paralelizada dividindo o genoma em intervalos (como cromossomos ou regiões menores). Essa estratégia de paralelização melhora significativamente a eficiência do pipeline distribuindo a carga computacional entre múltiplos núcleos ou nós, reduzindo o tempo total de execução.</p>
-<p>Na seção seguinte, demonstraremos como distribuir nossos dados de amostras através de múltiplos intervalos genômicos. Vamos parear cada amostra com cada intervalo, permitindo processamento paralelo de diferentes regiões genômicas. Isso multiplicará o tamanho do nosso conjunto de dados pelo número de intervalos, criando múltiplas unidades de análise independentes que podem ser reunidas mais tarde.</p>
-<h3 id="41-distribuir-amostras-em-intervalos-usando-combine">4.1. Distribuir amostras em intervalos usando <code>combine</code><a class="headerlink" href="#41-distribuir-amostras-em-intervalos-usando-combine" title="Permanent link">&para;</a></h3>
-<p>Vamos começar criando um canal de intervalos. Para manter a vida simples, usaremos apenas 3 intervalos que definiremos manualmente. Em um fluxo de trabalho real, você poderia lê-los de uma entrada de arquivo ou até criar um canal com vários arquivos de intervalo.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">Depois</label><label for="__tabbed_13_2">Antes</label></div>
+<p>You now have a workflow that can split a samplesheet, filter the normal and tumor samples, join them together by sample ID and replicate number, then print the results.</p>
+<p>This is a common pattern in bioinformatics workflows where you need to match up samples or other types of data after processing independently, so it is a useful skill. Next, we will look at repeating a sample multiple times.</p>
+<h2 id="4-spread-samples-intervals">4. Spread samples intervals<a class="headerlink" href="#4-spread-samples-intervals" title="Permanent link">&para;</a></h2>
+<p>A key pattern in bioinformatics workflows is distributing analysis across genomic regions. For instance, variant calling can be parallelized by dividing the genome into intervals (like chromosomes or smaller regions). This parallelization strategy significantly improves pipeline efficiency by distributing computational load across multiple cores or nodes, reducing overall execution time.</p>
+<p>In the following section, we'll demonstrate how to distribute our sample data across multiple genomic intervals. We'll pair each sample with every interval, allowing parallel processing of different genomic regions. This will multiply our dataset size by the number of intervals, creating multiple independent analysis units that can be brought back together later.</p>
+<h3 id="41-spread-samples-over-intervals-using-combine">4.1. Spread samples over intervals using <code>combine</code><a class="headerlink" href="#41-spread-samples-over-intervals-using-combine" title="Permanent link">&para;</a></h3>
+<p>Let's start by creating a channel of intervals. To keep life simple, we will just use 3 intervals we will manually define. In a real workflow, you could read these in from a file input or even create a channel with lots of interval files.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">After</label><label for="__tabbed_13_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-17">17</a></span>
@@ -5120,8 +5432,8 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 </div>
 </div>
 </div>
-<p>Agora lembre-se, queremos repetir cada amostra para cada intervalo. Isso às vezes é chamado de produto cartesiano das amostras e intervalos. Podemos conseguir isso usando o <a href="https://www.nextflow.io/docs/latest/operator.html#combine">operador <code>combine</code></a>. Isso pegará cada item do canal 1 e o repetirá para cada item no canal 2. Vamos adicionar um operador combine ao nosso fluxo de trabalho:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">Depois</label><label for="__tabbed_14_2">Antes</label></div>
+<p>Now remember, we want to repeat each sample for each interval. This is sometimes referred to as the Cartesian product of the samples and intervals. We can achieve this by using the <a href="https://www.nextflow.io/docs/latest/operator.html#combine"><code>combine</code> operator</a>. This will take every item from channel 1 and repeat it for each item in channel 2. Let's add a combine operator to our workflow:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">After</label><label for="__tabbed_14_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-57-18">18</a></span>
@@ -5141,11 +5453,11 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 </div>
 </div>
 </div>
-<p>Agora vamos executá-lo e ver o que acontece:</p>
+<p>Now let's run it and see what happens:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Saída do comando</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a>
 <a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="go">Launching `main.nf` [mighty_tesla] DSL2 - revision: ae013ab70b</span>
@@ -5164,11 +5476,11 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 <a id="__codelineno-60-16" name="__codelineno-60-16" href="#__codelineno-60-16"></a><span class="go">[[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr3]</span>
 </code></pre></div>
 </details>
-<p>Sucesso! Repetimos cada amostra para cada intervalo em nossa lista de 3 intervalos. Efetivamente triplicamos o número de itens em nosso canal.</p>
-<p>É um pouco difícil de ler, então na próxima seção vamos organizá-lo.</p>
-<h3 id="42-organizar-o-canal">4.2. Organizar o canal<a class="headerlink" href="#42-organizar-o-canal" title="Permanent link">&para;</a></h3>
-<p>Podemos usar o operador <code>map</code> para organizar e refatorar nossos dados de amostras para que seja mais fácil de entender. Vamos mover a string de intervalos para o mapa de junção no primeiro elemento.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">Depois</label><label for="__tabbed_15_2">Antes</label></div>
+<p>Success! We have repeated every sample for every single interval in our 3 interval list. We've effectively tripled the number of items in our channel.</p>
+<p>It's a little hard to read though, so in the next section we will tidy it up.</p>
+<h3 id="42-organize-the-channel">4.2. Organize the channel<a class="headerlink" href="#42-organize-the-channel" title="Permanent link">&para;</a></h3>
+<p>We can use the <code>map</code> operator to tidy and refactor our sample data so it's easier to understand. Let's move the intervals string to the joining map at the first element.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">After</label><label for="__tabbed_15_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-61-20">20</a></span>
@@ -5202,25 +5514,25 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 </div>
 </div>
 </div>
-<p>Vamos analisar o que essa operação map faz passo a passo.</p>
-<p>Primeiro, usamos parâmetros nomeados para tornar o código mais legível. Ao usar os nomes <code>grouping_key</code>, <code>normal</code>, <code>tumor</code> e <code>interval</code>, podemos nos referir aos elementos na tupla por nome em vez de por índice:</p>
+<p>Let's break down what this map operation does step by step.</p>
+<p>First, we use named parameters to make the code more readable. By using the names <code>grouping_key</code>, <code>normal</code>, <code>tumor</code> and <code>interval</code>, we can refer to the elements in the tuple by name instead of by index:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">grouping_key</span><span class="o">,</span><span class="w"> </span><span class="n">normal</span><span class="o">,</span><span class="w"> </span><span class="n">tumor</span><span class="o">,</span><span class="w"> </span><span class="n">interval</span><span class="w"> </span><span class="o">-&gt;</span>
 </code></pre></div>
-<p>Em seguida, combinamos o <code>grouping_key</code> com o campo <code>interval</code>. O <code>grouping_key</code> é um mapa contendo os campos <code>id</code> e <code>repeat</code>. Criamos um novo mapa com o <code>interval</code> e os mesclamos usando a adição de mapas do Groovy (<code>+</code>):</p>
+<p>Next, we combine the <code>grouping_key</code> with the <code>interval</code> field. The <code>grouping_key</code> is a map containing <code>id</code> and <code>repeat</code> fields. We create a new map with the <code>interval</code> and merge them using Groovy's map addition (<code>+</code>):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="w">                </span><span class="n">grouping_key</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">interval:</span><span class="w"> </span><span class="n">interval</span><span class="o">],</span>
 </code></pre></div>
-<p>Finalmente, retornamos isso como uma tupla com três elementos: o mapa de metadados combinado, o arquivo da amostra normal e o arquivo da amostra de tumor:</p>
+<p>Finally, we return this as a tuple with three elements: the combined metadata map, the normal sample file, and the tumor sample file:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a><span class="w">            </span><span class="o">[</span>
 <a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a><span class="w">                </span><span class="n">grouping_key</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">interval:</span><span class="w"> </span><span class="n">interval</span><span class="o">],</span>
 <a id="__codelineno-65-3" name="__codelineno-65-3" href="#__codelineno-65-3"></a><span class="w">                </span><span class="n">normal</span><span class="o">,</span>
 <a id="__codelineno-65-4" name="__codelineno-65-4" href="#__codelineno-65-4"></a><span class="w">                </span><span class="n">tumor</span>
 <a id="__codelineno-65-5" name="__codelineno-65-5" href="#__codelineno-65-5"></a><span class="w">            </span><span class="o">]</span>
 </code></pre></div>
-<p>Vamos executá-lo novamente e verificar o conteúdo do canal:</p>
+<p>Let's run it again and check the channel contents:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Saída do comando</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>
 <a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a><span class="go">Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd</span>
@@ -5239,22 +5551,22 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 <a id="__codelineno-67-16" name="__codelineno-67-16" href="#__codelineno-67-16"></a><span class="go">[[id:patientC, repeat:1, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>Usar <code>map</code> para forçar seus dados na estrutura correta pode ser complicado, mas é crucial para manipulação eficaz de dados.</p>
-<p>Agora temos cada amostra repetida em todos os intervalos genômicos, criando múltiplas unidades de análise independentes que podem ser processadas em paralelo. Mas e se quisermos trazer amostras relacionadas de volta? Na próxima seção, aprenderemos como agrupar amostras que compartilham atributos comuns.</p>
-<h3 id="conclusao_2">Conclusão<a class="headerlink" href="#conclusao_2" title="Permanent link">&para;</a></h3>
-<p>Nesta seção, você aprendeu:</p>
+<p>Using <code>map</code> to coerce your data into the correct structure can be tricky, but it's crucial for effective data manipulation.</p>
+<p>We now have every sample repeated across all genomic intervals, creating multiple independent analysis units that can be processed in parallel. But what if we want to bring related samples back together? In the next section, we'll learn how to group samples that share common attributes.</p>
+<h3 id="takeaway_2">Takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
+<p>In this section, you've learned:</p>
 <ul>
-<li><strong>Distribuir amostras em intervalos</strong>: Como usar <code>combine</code> para repetir amostras em intervalos</li>
-<li><strong>Criar produtos cartesianos</strong>: Como gerar todas as combinações de amostras e intervalos</li>
-<li><strong>Organizar estrutura de canal</strong>: Como usar <code>map</code> para reestruturar dados para melhor legibilidade</li>
-<li><strong>Preparação para processamento paralelo</strong>: Como configurar dados para análise distribuída</li>
+<li><strong>Spreading samples over intervals</strong>: How to use <code>combine</code> to repeat samples over intervals</li>
+<li><strong>Creating Cartesian products</strong>: How to generate all combinations of samples and intervals</li>
+<li><strong>Organizing channel structure</strong>: How to use <code>map</code> to restructure data for better readability</li>
+<li><strong>Parallel processing preparation</strong>: How to set up data for distributed analysis</li>
 </ul>
-<h2 id="5-agregar-amostras-usando-grouptuple">5. Agregar amostras usando <code>groupTuple</code><a class="headerlink" href="#5-agregar-amostras-usando-grouptuple" title="Permanent link">&para;</a></h2>
-<p>Nas seções anteriores, aprendemos como dividir dados de um arquivo de entrada e filtrar por campos específicos (no nosso caso amostras normais e de tumor). Mas isso cobre apenas um tipo de junção. E se quisermos agrupar amostras por um atributo específico? Por exemplo, em vez de unir pares correspondentes normal-tumor, podemos querer processar todas as amostras de "sampleA" juntas independentemente de seu tipo. Esse padrão é comum em fluxos de trabalho de bioinformática onde você pode querer processar amostras relacionadas separadamente por razões de eficiência antes de comparar ou combinar os resultados no final.</p>
-<p>O Nextflow inclui métodos integrados para fazer isso, o principal que vamos olhar é <code>groupTuple</code>.</p>
-<p>Vamos começar agrupando todas as nossas amostras que têm os mesmos campos <code>id</code> e <code>interval</code>, isso seria típico de uma análise onde quiséssemos agrupar réplicas técnicas mas manter amostras significativamente diferentes separadas.</p>
-<p>Para fazer isso, devemos separar nossas variáveis de agrupamento para que possamos usá-las isoladamente.</p>
-<p>O primeiro passo é similar ao que fizemos na seção anterior. Devemos isolar nossa variável de agrupamento como o primeiro elemento da tupla. Lembre-se, nosso primeiro elemento é atualmente um mapa dos campos <code>id</code>, <code>repeat</code> e <code>interval</code>:</p>
+<h2 id="5-aggregating-samples-using-grouptuple">5. Aggregating samples using <code>groupTuple</code><a class="headerlink" href="#5-aggregating-samples-using-grouptuple" title="Permanent link">&para;</a></h2>
+<p>In the previous sections, we learned how to split data from an input file and filter by specific fields (in our case normal and tumor samples). But this only covers a single type of joining. What if we want to group samples by a specific attribute? For example, instead of joining matched normal-tumor pairs, we might want to process all samples from "sampleA" together regardless of their type. This pattern is common in bioinformatics workflows where you may want to process related samples separately for efficiency reasons before comparing or combining the results at the end.</p>
+<p>Nextflow includes built in methods to do this, the main one we will look at is <code>groupTuple</code>.</p>
+<p>Let's start by grouping all of our samples that have the same <code>id</code> and <code>interval</code> fields, this would be typical of an analysis where we wanted to group technical replicates but keep meaningfully different samples separated.</p>
+<p>To do this, we should separate out our grouping variables so we can use them in isolation.</p>
+<p>The first step is similar to what we did in the previous section. We must isolate our grouping variable as the first element of the tuple. Remember, our first element is currently a map of <code>id</code>, <code>repeat</code> and <code>interval</code> fields:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-68-1">1</a></span>
 <span class="normal"><a href="#__codelineno-68-2">2</a></span>
 <span class="normal"><a href="#__codelineno-68-3">3</a></span>
@@ -5265,8 +5577,8 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 <a id="__codelineno-68-4" name="__codelineno-68-4"></a><span class="w">  </span><span class="s2">&quot;interval&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;chr1&quot;</span>
 <a id="__codelineno-68-5" name="__codelineno-68-5"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Podemos reutilizar o método <code>subMap</code> de antes para isolar nossos campos <code>id</code> e <code>interval</code> do mapa. Como antes, usaremos o operador <code>map</code> para aplicar o método <code>subMap</code> ao primeiro elemento da tupla para cada amostra.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">Depois</label><label for="__tabbed_16_2">Antes</label></div>
+<p>We can reuse the <code>subMap</code> method from before to isolate our <code>id</code> and <code>interval</code> fields from the map. Like before, we will use <code>map</code> operator to apply the <code>subMap</code> method to the first element of the tuple for each sample.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">After</label><label for="__tabbed_16_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-69-20">20</a></span>
@@ -5332,11 +5644,11 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 </div>
 </div>
 </div>
-<p>Vamos executá-lo novamente e verificar o conteúdo do canal:</p>
+<p>Let's run it again and check the channel contents:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Saída do comando</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-72-2" name="__codelineno-72-2" href="#__codelineno-72-2"></a>
 <a id="__codelineno-72-3" name="__codelineno-72-3" href="#__codelineno-72-3"></a><span class="go">Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76</span>
@@ -5355,13 +5667,13 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 <a id="__codelineno-72-16" name="__codelineno-72-16" href="#__codelineno-72-16"></a><span class="go">[[id:patientC, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>Podemos ver que isolamos com sucesso os campos <code>id</code> e <code>interval</code>, mas ainda não agrupamos as amostras.</p>
+<p>We can see that we have successfully isolated the <code>id</code> and <code>interval</code> fields, but not grouped the samples yet.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Estamos descartando o campo <code>replicate</code> aqui. Isso ocorre porque não precisamos dele para o processamento posterior. Após concluir este tutorial, tente incluí-lo sem afetar o agrupamento posterior!</p>
+<p>We are discarding the <code>replicate</code> field here. This is because we don't need it for further downstream processing. After completing this tutorial, see if you can include it without affecting the later grouping!</p>
 </div>
-<p>Vamos agora agrupar as amostras por este novo elemento de agrupamento, usando o <a href="https://www.nextflow.io/docs/latest/operator.html#grouptuple">operador <code>groupTuple</code></a>.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">Depois</label><label for="__tabbed_17_2">Antes</label></div>
+<p>Let's now group the samples by this new grouping element, using the <a href="https://www.nextflow.io/docs/latest/operator.html#grouptuple"><code>groupTuple</code> operator</a>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">After</label><label for="__tabbed_17_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-73-30">30</a></span>
@@ -5407,11 +5719,11 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 </div>
 </div>
 </div>
-<p>É só isso! Adicionamos apenas uma única linha de código. Vamos ver o que acontece quando executamos:</p>
+<p>That's all there is to it! We just added a single line of code. Let's see what happens when we run it:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
-<summary>Saída do comando</summary>
+<summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a>
 <a id="__codelineno-76-3" name="__codelineno-76-3" href="#__codelineno-76-3"></a><span class="go">Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d</span>
@@ -5427,35 +5739,35 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 <a id="__codelineno-76-13" name="__codelineno-76-13" href="#__codelineno-76-13"></a><span class="go">[[id:patientC, interval:chr3], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]</span>
 </code></pre></div>
 </details>
-<p>Observe que a estrutura dos nossos dados mudou e, dentro de cada elemento do canal, os arquivos agora estão contidos em tuplas como <code>[patientA_rep1_normal.bam, patientA_rep2_normal.bam]</code>. Isso ocorre porque quando usamos <code>groupTuple</code>, o Nextflow combina os arquivos individuais de cada amostra de um grupo. É importante lembrar disso ao tentar manipular os dados a jusante.</p>
+<p>Note our data has changed structure and within each channel element the files now contained in tuples like <code>[patientA_rep1_normal.bam, patientA_rep2_normal.bam]</code>. This is because when we use <code>groupTuple</code>, Nextflow combines the single files for each sample of a group. This is important to remember when trying to handle the data downstream.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><a href="https://www.nextflow.io/docs/latest/reference/operator.html#transpose"><code>transpose</code></a> é o oposto de groupTuple. Ele descompacta os itens em um canal e os achata. Tente adicionar <code>transpose</code> e desfazer o agrupamento que realizamos acima!</p>
+<p><a href="https://www.nextflow.io/docs/latest/reference/operator.html#transpose"><code>transpose</code></a> is the opposite of groupTuple. It unpacks the items in a channel and flattens them. Try and add <code>transpose</code> and undo the grouping we performed above!</p>
 </div>
-<h3 id="conclusao_3">Conclusão<a class="headerlink" href="#conclusao_3" title="Permanent link">&para;</a></h3>
-<p>Nesta seção, você aprendeu:</p>
+<h3 id="takeaway_3">Takeaway<a class="headerlink" href="#takeaway_3" title="Permanent link">&para;</a></h3>
+<p>In this section, you've learned:</p>
 <ul>
-<li><strong>Agrupamento de amostras relacionadas</strong>: Como usar <code>groupTuple</code> para agregar amostras por atributos comuns</li>
-<li><strong>Isolamento de chaves de agrupamento</strong>: Como usar <code>subMap</code> para extrair campos específicos para agrupamento</li>
-<li><strong>Manipulação de estruturas de dados agrupadas</strong>: Como trabalhar com a estrutura aninhada criada por <code>groupTuple</code></li>
-<li><strong>Tratamento de réplicas técnicas</strong>: Como agrupar amostras que compartilham as mesmas condições experimentais</li>
+<li><strong>Grouping related samples</strong>: How to use <code>groupTuple</code> to aggregate samples by common attributes</li>
+<li><strong>Isolating grouping keys</strong>: How to use <code>subMap</code> to extract specific fields for grouping</li>
+<li><strong>Handling grouped data structures</strong>: How to work with the nested structure created by <code>groupTuple</code></li>
+<li><strong>Technical replicate handling</strong>: How to group samples that share the same experimental conditions</li>
 </ul>
 <hr />
-<h2 id="resumo">Resumo<a class="headerlink" href="#resumo" title="Permanent link">&para;</a></h2>
-<p>Nesta side quest, você aprendeu como dividir e agrupar dados usando canais.</p>
-<p>Ao modificar os dados conforme fluem pela pipeline, você pode construir uma pipeline escalável sem usar loops ou instruções while, oferecendo várias vantagens sobre abordagens mais tradicionais:</p>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>In this side quest, you've learned how to split and group data using channels.</p>
+<p>By modifying the data as it flows through the pipeline, you can construct a scalable pipeline without using loops or while statements, offering several advantages over more traditional approaches:</p>
 <ul>
-<li>Podemos escalar para quantas ou poucas entradas quisermos sem código adicional</li>
-<li>Focamos na gestão do fluxo de dados pela pipeline, em vez da iteração</li>
-<li>Podemos ser tão complexos ou simples quanto necessário</li>
-<li>A pipeline se torna mais declarativa, focando no que deve acontecer em vez de como deve acontecer</li>
-<li>O Nextflow otimizará a execução para nós executando operações independentes em paralelo</li>
+<li>We can scale to as many or as few inputs as we want with no additional code</li>
+<li>We focus on handling the flow of data through the pipeline, instead of iteration</li>
+<li>We can be as complex or simple as required</li>
+<li>The pipeline becomes more declarative, focusing on what should happen rather than how it should happen</li>
+<li>Nextflow will optimize execution for us by running independent operations in parallel</li>
 </ul>
-<p>Dominar essas operações de canais permitirá que você construa pipelines flexíveis e escaláveis que lidam com relações complexas de dados sem recorrer a loops ou programação iterativa, permitindo que o Nextflow otimize a execução e paralelize operações independentes automaticamente.</p>
-<h3 id="padroes-chave">Padrões chave<a class="headerlink" href="#padroes-chave" title="Permanent link">&para;</a></h3>
+<p>Mastering these channel operations will enable you to build flexible, scalable pipelines that handle complex data relationships without resorting to loops or iterative programming, allowing Nextflow to optimize execution and parallelize independent operations automatically.</p>
+<h3 id="key-patterns">Key patterns<a class="headerlink" href="#key-patterns" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
-<p><strong>Criação de dados de entrada estruturados:</strong> Partindo de um arquivo CSV com meta maps (baseando-se nos padrões de <a href="../metadata/">Metadata in workflows</a>)</p>
+<p><strong>Creating structured input data:</strong> Starting from a CSV file with meta maps (building on patterns from <a href="../metadata/">Metadata in workflows</a>)</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="n">ch_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/samplesheet.csv&quot;</span><span class="o">)</span>
 <a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-77-3" name="__codelineno-77-3" href="#__codelineno-77-3"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
@@ -5464,19 +5776,19 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 </code></pre></div>
 </li>
 <li>
-<p><strong>Divisão de dados em canais separados:</strong> Usamos <code>filter</code> para dividir dados em fluxos independentes com base no campo <code>type</code></p>
+<p><strong>Splitting data into separate channels:</strong> We used <code>filter</code> to divide data into independent streams based on the <code>type</code> field</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a><span class="n">channel</span><span class="o">.</span><span class="na">filter</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="o">.</span><span class="na">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;tumor&#39;</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div>
 </li>
 <li>
-<p><strong>União de amostras correspondentes:</strong> Usamos <code>join</code> para recombinar amostras relacionadas com base nos campos <code>id</code> e <code>repeat</code></p>
+<p><strong>Joining matched samples:</strong> We used <code>join</code> to recombine related samples based on <code>id</code> and <code>repeat</code> fields</p>
 <ul>
-<li>Unir dois canais por chave (primeiro elemento da tupla)</li>
+<li>Join two channels by key (first element of tuple)</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a><span class="n">tumor_ch</span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="n">normal_ch</span><span class="o">)</span>
 </code></pre></div>
 <ul>
-<li>Extrair chave de união e unir por este valor</li>
+<li>Extract joining key and join by this value</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-80-1" name="__codelineno-80-1" href="#__codelineno-80-1"></a><span class="n">tumor_ch</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-80-2" name="__codelineno-80-2" href="#__codelineno-80-2"></a><span class="w">    </span><span class="o">.</span><span class="na">join</span><span class="o">(</span>
@@ -5484,7 +5796,7 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 <a id="__codelineno-80-4" name="__codelineno-80-4" href="#__codelineno-80-4"></a><span class="w">    </span><span class="o">)</span>
 </code></pre></div>
 <ul>
-<li>Unir em múltiplos campos usando subMap</li>
+<li>Join on multiple fields using subMap</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-81-1" name="__codelineno-81-1" href="#__codelineno-81-1"></a><span class="n">tumor_ch</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;repeat&#39;</span><span class="o">]),</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-81-2" name="__codelineno-81-2" href="#__codelineno-81-2"></a><span class="w">    </span><span class="o">.</span><span class="na">join</span><span class="o">(</span>
@@ -5493,31 +5805,31 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 </code></pre></div>
 </li>
 <li>
-<p><strong>Distribuição através de intervalos:</strong> Usamos <code>combine</code> para criar produtos cartesianos de amostras com intervalos genômicos para processamento paralelo.</p>
+<p><strong>Distributing across intervals:</strong> We used <code>combine</code> to create Cartesian products of samples with genomic intervals for parallel processing.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-82-1" name="__codelineno-82-1" href="#__codelineno-82-1"></a><span class="n">samples_ch</span><span class="o">.</span><span class="na">combine</span><span class="o">(</span><span class="n">intervals_ch</span><span class="o">)</span>
 </code></pre></div>
 </li>
 <li>
-<p><strong>Agregação por chaves de agrupamento:</strong> Usamos <code>groupTuple</code> para agrupar pelo primeiro elemento em cada tupla, coletando assim amostras que compartilham os campos <code>id</code> e <code>interval</code> e mesclando réplicas técnicas.</p>
+<p><strong>Aggregating by grouping keys:</strong> We used <code>groupTuple</code> to group by the first element in each tuple, thereby collecting samples sharing <code>id</code> and <code>interval</code> fields and merging technical replicates.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-83-1" name="__codelineno-83-1" href="#__codelineno-83-1"></a><span class="n">channel</span><span class="o">.</span><span class="na">groupTuple</span><span class="o">()</span>
 </code></pre></div>
 </li>
 <li>
-<p><strong>Otimização da estrutura de dados:</strong> Usamos <code>subMap</code> para extrair campos específicos e criamos uma closure nomeada para tornar as transformações reutilizáveis.</p>
+<p><strong>Optimizing the data structure:</strong> We used <code>subMap</code> to extract specific fields and created a named closure for making transformations reusable.</p>
 <ul>
-<li>Extrair campos específicos de um mapa</li>
+<li>Extract specific fields from a map</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;repeat&#39;</span><span class="o">])</span>
 </code></pre></div>
 <ul>
-<li>Usar closure nomeada para transformações reutilizáveis</li>
+<li>Use named closure for reusable transformations</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a><span class="n">getSampleIdAndReplicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;repeat&#39;</span><span class="o">]),</span><span class="w"> </span><span class="n">file</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-85-2" name="__codelineno-85-2" href="#__codelineno-85-2"></a><span class="n">channel</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">getSampleIdAndReplicate</span><span class="o">)</span>
 </code></pre></div>
 </li>
 </ol>
-<h3 id="recursos-adicionais">Recursos adicionais<a class="headerlink" href="#recursos-adicionais" title="Permanent link">&para;</a></h3>
+<h3 id="additional-resources">Additional resources<a class="headerlink" href="#additional-resources" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://www.nextflow.io/docs/latest/operator.html#filter">filter</a></li>
 <li><a href="https://www.nextflow.io/docs/latest/operator.html#map">map</a></li>
@@ -5526,8 +5838,8 @@ Com esse conhecimento, podemos combinar com sucesso canais com base em um campo 
 <li><a href="https://www.nextflow.io/docs/latest/operator.html#combine">combine</a></li>
 </ul>
 <hr />
-<h2 id="o-que-vem-a-seguir">O que vem a seguir?<a class="headerlink" href="#o-que-vem-a-seguir" title="Permanent link">&para;</a></h2>
-<p>Volte ao <a href="../">menu das Side Quests</a> ou clique no botão no canto inferior direito da página para avançar para o próximo tópico da lista.</p><style type="text/css">.quiz {
+<h2 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
+<p>Return to the <a href="../">menu of Side Quests</a> or click the button in the bottom right of the page to move on to the next topic in the list.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -7225,7 +7537,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
         
           
-          <a href="../working_with_files/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Processamento de entrada de arquivos">
+          <a href="../metadata/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Metadata and meta maps">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -7235,20 +7547,20 @@ window.mkdocsQuizConfig = {
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Processamento de entrada de arquivos
+                Metadata and meta maps
               </div>
             </div>
           </a>
         
         
           
-          <a href="../workflows_of_workflows/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Fluxos de Trabalho de Fluxos de Trabalho">
+          <a href="../nf_test/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Testing with nf-test">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Próximo
               </span>
               <div class="md-ellipsis">
-                Fluxos de Trabalho de Fluxos de Trabalho
+                Testing with nf-test
               </div>
             </div>
             <div class="md-footer__button md-icon">
