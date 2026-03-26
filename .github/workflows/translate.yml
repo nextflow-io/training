@@ -122,6 +122,7 @@ jobs:
         with:
           pattern: translation-*
           path: artifacts/
+          merge-multiple: false
 
       - name: Check for artifacts
         id: check
@@ -138,7 +139,17 @@ jobs:
       - name: Merge translations
         if: steps.check.outputs.has_artifacts == 'true'
         run: |
-          for dir in artifacts/translation-*/; do
+          # Without nullglob, an unmatched glob gives dirs=("artifacts/translation-*/") with length 1,
+          # so the empty check below would silently pass with a literal string instead of a real path.
+          shopt -s nullglob
+          dirs=(artifacts/translation-*/)
+          if [ ${#dirs[@]} -eq 0 ]; then
+            echo "ERROR: No translation-* subdirectories found in artifacts/"
+            echo "Contents of artifacts/:"
+            ls -la artifacts/
+            exit 1
+          fi
+          for dir in "${dirs[@]}"; do
             lang=$(basename "$dir" | sed 's/translation-//')
             echo "Merging $lang..."
             mkdir -p "docs/$lang/docs/"
