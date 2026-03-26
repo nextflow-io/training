@@ -73,7 +73,7 @@ process handleFiles {
  * Main workflow with channel issues
  */
 workflow {
-
+    main:
     // Channel with incorrect usage
     input_ch = channel
         .fromPath(params.input)
