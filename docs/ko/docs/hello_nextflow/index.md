@@ -26,6 +26,7 @@ additional_information:
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 
+
 **Hello Nextflow는 재현 가능하고 확장 가능한 데이터 분석 워크플로우 구축에 대한 실습 입문 과정입니다.**
 
 실제 예제와 안내 연습을 통해 Nextflow로 파이프라인을 개발하는 기초를 학습합니다. 프로세스 정의, 파이프라인 연결, 파일 및 소프트웨어 의존성 관리, 손쉬운 실행 병렬화, 다양한 컴퓨팅 환경에서 워크플로우 실행 방법 등을 다룹니다.

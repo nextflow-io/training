@@ -20,7 +20,7 @@ Eğitim kurslarımızın birkaç ek gereksinimi vardır.
 Toplamda, aşağıdaki yazılımların yüklü olması gerekir:
 
 - Bash veya eşdeğer kabuk
-- [Java 11 (veya sonrası, 21'e kadar)](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+- [Java 21 veya sonrası](https://www.oracle.com/technetwork/java/javase/downloads/index.html) (Nextflow'u çalıştırmak için Java 17+ yeterlidir; ancak [eklenti geliştirme](../side_quests/plugin_development/index.md) kursu Java 21 gerektirir)
 - [Git](https://git-scm.com/)
 - [Docker](https://docs.docker.com/get-docker/)
 - [Conda](https://conda.io/) 4.5 (veya sonrası)

@@ -6,7 +6,7 @@ Bölüm 1'de, Nextflow çalıştırmasının temellerini anlamak için basit bir
 Şimdi gerçek dünyadan bir biyogörüntüleme pipeline'ı çalıştıracağız: **nf-core/molkart**.
 
 Bu pipeline, Resolve Bioscience'dan gelen Molecular Cartography uzamsal transkriptomik verilerini işler.
-Ancak, burada öğreneceğiniz Nextflow kalıpları herhangi bir nf-core pipeline'ı veya üretim iş akışı için geçerlidir.
+Ancak burada öğreneceğiniz Nextflow kalıpları, herhangi bir nf-core pipeline'ı veya üretim iş akışı için geçerlidir.
 
 ## 1. nf-core pipeline'larını anlama
 
@@ -64,7 +64,7 @@ Bu, tam pipeline kaynak kodunu içeren bir `molkart/` dizini oluşturur.
 
     Genellikle, nf-core pipeline'larını doğrudan GitHub'dan `nextflow run nf-core/molkart -r 1.2.0` kullanarak çalıştırırsınız.
     Nextflow, istenen pipeline sürümünü sizin için otomatik olarak `$HOME/.nextflow/assets/nf-core/molkart` dizinine indirir ve oradan çalıştırır.
-    Ancak, bu eğitim için kodu daha kolay inceleyebilmemiz amacıyla pipeline'ı farklı bir yerel dizine klonluyoruz.
+    Ancak bu eğitim için, kodu daha kolay inceleyebilmemiz amacıyla pipeline'ı farklı bir yerel dizine klonluyoruz.
 
 ### 2.1. Konteyner gereksinimlerini anlama
 
@@ -486,7 +486,7 @@ Hello World'den temel fark:
 Çalışma dizini, birden fazla pipeline çalıştırması üzerinden oldukça büyüyebilir.
 Bölüm 1'de öğrendiğimiz gibi, eski çalıştırmalardan çalışma dizinlerini kaldırmak için `nextflow clean` kullanabilirsiniz.
 
-Ancak, büyük ara dosyalara sahip nf-core pipeline'ları için düzenli olarak temizlik yapmak özellikle önemlidir.
+Ancak büyük ara dosyalara sahip nf-core pipeline'ları için düzenli olarak temizlik yapmak özellikle önemlidir.
 
 ### Özetle
 

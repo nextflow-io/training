@@ -41,7 +41,7 @@ Yeni bir pipeline'ı kullanmayı düşündüğünüzde, ne yaptığını ve çal
 
 #### 1.1.1. Pipeline'a genel bakış
 
-`Introduction` sekmesi, metro haritası adı verilen görsel bir temsil ve pipeline'ın bir parçası olarak çalıştırılan araçların listesi dahil olmak üzere pipeline'a genel bir bakış sağlar.
+`Introduction` sekmesi, metro haritası (subway map) adı verilen görsel bir temsil ve pipeline'ın bir parçası olarak çalıştırılan araçların listesi dahil olmak üzere pipeline'a genel bir bakış sağlar.
 
 ![pipeline metro haritası](./img/nf-core-demo-subway-cropped.png)
 

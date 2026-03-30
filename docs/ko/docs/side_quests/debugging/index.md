@@ -2617,7 +2617,7 @@ cat work/ab/cdef12/.command.err
 
     - `.command.sh` - 실행된 스크립트
     - `.command.err` - 오류 메시지
-    - `.exitcode` - 종료 상태 (127 =명령을 찾을 수 없음, 137 = 종료됨)
+    - `.exitcode` - 종료 상태 (127 = 명령을 찾을 수 없음, 137 = 종료됨)
 
     **원인 불명의 동작?** → `-stub-run`으로 워크플로우 로직 테스트
 

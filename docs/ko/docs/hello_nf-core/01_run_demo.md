@@ -323,7 +323,7 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
 이것은 nf-core 웹사이트의 파이프라인 문서 페이지에 표시된 세 가지 도구에 해당하는 세 개의 프로세스가 실행되었음을 알려줍니다: FASTQC, SEQTK_TRIM 및 MULTIQC.
 
 여기에 표시된 `NFCORE_DEMO:DEMO:MULTIQC`와 같은 전체 프로세스 이름은 Hello Nextflow 입문 자료에서 본 것보다 깁니다.
-여기에는 상위 workflow의 이름이 포함되어 있으며 파이프라인 코드의 모듈성을 반영합니다.
+여기에는 상위 워크플로우의 이름이 포함되어 있으며 파이프라인 코드의 모듈성을 반영합니다.
 조금 후에 이에 대해 자세히 설명하겠습니다.
 
 ### 2.3. 파이프라인 출력 살펴보기
@@ -443,7 +443,7 @@ tree -L 1 pipelines/nf-core/demo
 ### 3.1. 파이프라인 코드 구성요소
 
 표준 nf-core 파이프라인 코드 구성은 [Hello Nextflow](../hello_nextflow/04_hello_modules.md) 과정의 Part 4인 [Hello Modules](../hello_nextflow/index.md)에서 소개된 것처럼 코드 재사용을 극대화하도록 설계된 모듈식 구조를 따릅니다. 다만 진정한 nf-core 방식으로 약간의 복잡성이 추가되어 구현됩니다.
-특히, nf-core 파이프라인은 subworkflow, 즉 상위 workflow에서 가져오는 workflow 스크립트를 풍부하게 사용합니다.
+특히, nf-core 파이프라인은 subworkflow, 즉 상위 워크플로우에서 가져오는 워크플로우 스크립트를 풍부하게 사용합니다.
 
 조금 추상적으로 들릴 수 있으므로 `nf-core/demo` 파이프라인에서 실제로 어떻게 사용되는지 살펴보겠습니다.
 
@@ -460,8 +460,8 @@ tree -L 1 pipelines/nf-core/demo
     --8<-- "docs/en/docs/hello_nf-core/img/nf-core_demo_code_organization.svg"
 </figure>
 
-`main.nf`라는 _엔트리포인트_ 스크립트가 있으며, 이는 두 종류의 내포된 workflow에 대한 래퍼 역할을 합니다: `workflows/` 아래에 있고 `demo.nf`라고 하는 실제 분석 로직을 포함하는 workflow와 `subworkflows/` 아래에 있는 관리용 workflow 집합입니다.
-`demo.nf` workflow는 `modules/` 아래에 있는 **모듈**을 호출하며, 이들은 실제 분석 단계를 수행할 **프로세스**를 포함합니다.
+`main.nf`라는 _엔트리포인트_ 스크립트가 있으며, 이는 두 종류의 내포된 워크플로우에 대한 래퍼 역할을 합니다: `workflows/` 아래에 있고 `demo.nf`라고 하는 실제 분석 로직을 포함하는 워크플로우와 `subworkflows/` 아래에 있는 관리용 워크플로우 집합입니다.
+`demo.nf` 워크플로우는 `modules/` 아래에 있는 **모듈**을 호출하며, 이들은 실제 분석 단계를 수행할 **프로세스**를 포함합니다.
 
 !!! note "참고"
 
@@ -478,19 +478,19 @@ tree -L 1 pipelines/nf-core/demo
 이것은 nf-core 파이프라인뿐만 아니라 이러한 관례적인 명명 및 구조를 따르는 모든 Nextflow 파이프라인에 적용됩니다.
 
 엔트리포인트 스크립트를 사용하면 실제 분석 스크립트가 실행되기 전후에 표준화된 '관리용' subworkflow를 쉽게 실행할 수 있습니다.
-실제 분석 workflow와 그 모듈을 검토한 후에 이에 대해 살펴보겠습니다.
+실제 분석 워크플로우와 그 모듈을 검토한 후에 이에 대해 살펴보겠습니다.
 
 #### 3.1.3. 분석 스크립트: `workflows/demo.nf`
 
-`workflows/demo.nf` workflow는 파이프라인의 핵심 로직이 저장된 곳입니다.
-상위 workflow에서 호출되도록 설계되어 몇 가지 추가 기능이 필요하다는 점을 제외하면 일반 Nextflow workflow와 매우 유사하게 구성됩니다.
+`workflows/demo.nf` 워크플로우는 파이프라인의 핵심 로직이 저장된 곳입니다.
+상위 워크플로우에서 호출되도록 설계되어 몇 가지 추가 기능이 필요하다는 점을 제외하면 일반 Nextflow 워크플로우와 매우 유사하게 구성됩니다.
 다음 과정 파트에서 Hello Nextflow의 간단한 Hello 파이프라인을 nf-core 호환 형태로 변환할 때 관련 차이점을 다루겠습니다.
 
-`demo.nf` workflow는 다음에 검토할 `modules/` 아래에 있는 **모듈**을 호출합니다.
+`demo.nf` 워크플로우는 다음에 검토할 `modules/` 아래에 있는 **모듈**을 호출합니다.
 
 !!! note "참고"
 
-    일부 nf-core 분석 workflow는 하위 레벨 subworkflow를 호출하여 추가 내포 레벨을 표시합니다.
+    일부 nf-core 분석 워크플로우는 하위 레벨 subworkflow를 호출하여 추가 내포 레벨을 표시합니다.
     이것은 주로 일반적으로 함께 사용되는 두 개 이상의 모듈을 쉽게 재사용 가능한 파이프라인 세그먼트로 적용하는 데 사용됩니다.
     nf-core 웹사이트에서 사용 가능한 [nf-core subworkflows](https://nf-co.re/subworkflows/)를 탐색하여 몇 가지 예제를 볼 수 있습니다.
 
@@ -536,7 +536,7 @@ tree -L 3 pipelines/nf-core/demo/modules
 
 프로세스를 설명하는 모듈 코드 파일은 항상 `main.nf`라고 하며, 지금은 무시할 테스트 및 `.yml` 파일이 함께 제공됩니다.
 
-엔트리포인트 workflow, 분석 workflow 및 모듈을 종합하면 파이프라인의 '흥미로운' 부분을 실행하기에 충분합니다.
+엔트리포인트 워크플로우, 분석 워크플로우 및 모듈을 종합하면 파이프라인의 '흥미로운' 부분을 실행하기에 충분합니다.
 그러나 관리용 subworkflow도 있다는 것을 알고 있으므로 이제 살펴보겠습니다.
 
 #### 3.1.5. 관리용 subworkflow
@@ -571,7 +571,7 @@ tree -L 3 pipelines/nf-core/demo/subworkflows
     9 directories, 7 files
     ```
 
-위에서 언급했듯이 `nf-core/demo` 파이프라인에는 분석 관련 subworkflow가 포함되어 있지 않으므로 여기에 표시된 모든 subworkflow는 이름의 `utils_` 접두사로 표시된 것처럼 소위 '관리용' 또는 '유틸리티' workflow입니다.
+위에서 언급했듯이 `nf-core/demo` 파이프라인에는 분석 관련 subworkflow가 포함되어 있지 않으므로 여기에 표시된 모든 subworkflow는 이름의 `utils_` 접두사로 표시된 것처럼 소위 '관리용' 또는 '유틸리티' 워크플로우입니다.
 이러한 subworkflow는 다른 부속 기능 중에서도 콘솔 출력에 멋진 nf-core 헤더를 생성하는 것입니다.
 
 !!! tip "팁"
@@ -642,4 +642,4 @@ SAMPLE_SINGLE_END,/path/to/fastq/files/AEG588A4_S4_L003_R1_001.fastq.gz,
 
 !!! tip "팁"
 
-    다음 파트로 이동하기 전에 subworkflow를 사용하여 workflow를 구성하는 방법을 배우고 싶다면 [Workflows of Workflows](../side_quests/workflows_of_workflows.md) Side Quest를 확인하십시오.
+    다음 파트로 이동하기 전에 subworkflow를 사용하여 워크플로우를 구성하는 방법을 배우고 싶다면 [Workflows of Workflows](../side_quests/workflows_of_workflows.md) Side Quest를 확인하십시오.
