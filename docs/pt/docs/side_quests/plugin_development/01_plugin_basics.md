@@ -10,12 +10,12 @@ Nesta seção, você aprenderá como os plugins estendem o Nextflow e, em seguid
 
 Os plugins estendem o Nextflow por meio de vários tipos de extensão:
 
-| Tipo de Extensão      | O que faz                                              | Exemplo                          |
-| --------------------- | ------------------------------------------------------ | -------------------------------- |
-| Funções               | Adiciona funções personalizadas chamáveis nos fluxos de trabalho | `samplesheetToList()`    |
-| Monitores de fluxo    | Respondem a eventos como conclusão de tarefas          | Logging personalizado, alertas no Slack |
-| Executors             | Adicionam backends de execução de tarefas              | AWS Batch, Kubernetes            |
-| Filesystems           | Adicionam backends de armazenamento                    | S3, Azure Blob                   |
+| Tipo de Extensão   | O que faz                                                        | Exemplo                                 |
+| ------------------ | ---------------------------------------------------------------- | --------------------------------------- |
+| Funções            | Adiciona funções personalizadas chamáveis nos fluxos de trabalho | `samplesheetToList()`                   |
+| Monitores de fluxo | Respondem a eventos como conclusão de tarefas                    | Logging personalizado, alertas no Slack |
+| Executors          | Adicionam backends de execução de tarefas                        | AWS Batch, Kubernetes                   |
+| Filesystems        | Adicionam backends de armazenamento                              | S3, Azure Blob                          |
 
 Funções e monitores de fluxo de trabalho (chamados de "trace observers" na API do Nextflow) são os tipos mais comuns para autores de plugins.
 Executors e filesystems são tipicamente criados por fornecedores de plataformas.

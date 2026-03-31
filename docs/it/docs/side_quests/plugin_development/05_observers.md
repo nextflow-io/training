@@ -81,14 +81,14 @@ Ci sono due cose da notare:
 
 L'insieme completo degli eventi del ciclo di vita a cui puoi agganciarti al momento della stesura è:
 
-| Metodo              | Quando viene chiamato                  |
-| ------------------- | -------------------------------------- |
-| `onFlowCreate`      | Il flusso di lavoro si avvia           |
-| `onFlowComplete`    | Il flusso di lavoro termina            |
-| `onProcessStart`    | Un'attività inizia l'esecuzione        |
-| `onProcessComplete` | Un'attività termina                    |
-| `onProcessCached`   | Un'attività in cache viene riutilizzata|
-| `onFilePublish`     | Un file viene pubblicato               |
+| Metodo              | Quando viene chiamato                   |
+| ------------------- | --------------------------------------- |
+| `onFlowCreate`      | Il flusso di lavoro si avvia            |
+| `onFlowComplete`    | Il flusso di lavoro termina             |
+| `onProcessStart`    | Un'attività inizia l'esecuzione         |
+| `onProcessComplete` | Un'attività termina                     |
+| `onProcessCached`   | Un'attività in cache viene riutilizzata |
+| `onFilePublish`     | Un file viene pubblicato                |
 
 Per un elenco completo, consulta l'[interfaccia TraceObserver](https://github.com/nextflow-io/nextflow/blob/master/modules/nextflow/src/main/groovy/nextflow/trace/TraceObserver.groovy) nel codice sorgente di Nextflow.
 

@@ -727,14 +727,14 @@ Esto demuestra conceptos clave de **procesamiento de strings**:
 
 Analicemos el patrón regex `^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$`:
 
-| Patrón              | Coincide con                           | Captura                                    |
-| ------------------- | -------------------------------------- | ------------------------------------------ |
-| `^(.+)`             | Nombre de muestra desde el inicio      | Grupo 1: nombre de muestra                 |
-| `_S(\d+)`           | Número de muestra `_S1`, `_S2`, etc.   | Grupo 2: número de muestra                 |
-| `_L(\d{3})`         | Número de carril `_L001`               | Grupo 3: carril (3 dígitos)                |
-| `_(R[12])`          | Dirección de lectura `_R1` o `_R2`     | Grupo 4: dirección de lectura              |
-| `_(\d{3})`          | Número de fragmento `_001`             | Grupo 5: fragmento (3 dígitos)             |
-| `\.fastq(?:\.gz)?$` | Extensión `.fastq` o `.fastq.gz`       | No capturado (?:  es no capturante)        |
+| Patrón              | Coincide con                         | Captura                            |
+| ------------------- | ------------------------------------ | ---------------------------------- |
+| `^(.+)`             | Nombre de muestra desde el inicio    | Grupo 1: nombre de muestra         |
+| `_S(\d+)`           | Número de muestra `_S1`, `_S2`, etc. | Grupo 2: número de muestra         |
+| `_L(\d{3})`         | Número de carril `_L001`             | Grupo 3: carril (3 dígitos)        |
+| `_(R[12])`          | Dirección de lectura `_R1` o `_R2`   | Grupo 4: dirección de lectura      |
+| `_(\d{3})`          | Número de fragmento `_001`           | Grupo 5: fragmento (3 dígitos)     |
+| `\.fastq(?:\.gz)?$` | Extensión `.fastq` o `.fastq.gz`     | No capturado (?: es no capturante) |
 
 Esto analiza las convenciones de nomenclatura estilo Illumina para extraer metadatos automáticamente.
 

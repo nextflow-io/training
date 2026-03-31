@@ -17,13 +17,13 @@ En aquesta secció, fareu el mateix per al vostre propi plugin.
 
 **Què canviareu:**
 
-| Fitxer                     | Canvi                                                          |
-| -------------------------- | -------------------------------------------------------------- |
-| `GreetingExtension.groovy` | Llegir la configuració de prefix/sufix a `init()`              |
+| Fitxer                     | Canvi                                                                |
+| -------------------------- | -------------------------------------------------------------------- |
+| `GreetingExtension.groovy` | Llegir la configuració de prefix/sufix a `init()`                    |
 | `GreetingFactory.groovy`   | Llegir valors de configuració per controlar la creació d'observadors |
-| `GreetingConfig.groovy`    | Fitxer nou: classe formal `@ConfigScope`                       |
-| `build.gradle`             | Registrar la classe de configuració com a punt d'extensió      |
-| `nextflow.config`          | Afegir un bloc `#!groovy greeting {}` per provar-ho            |
+| `GreetingConfig.groovy`    | Fitxer nou: classe formal `@ConfigScope`                             |
+| `build.gradle`             | Registrar la classe de configuració com a punt d'extensió            |
+| `nextflow.config`          | Afegir un bloc `#!groovy greeting {}` per provar-ho                  |
 
 !!! tip "Comenceu des d'aquí?"
 
@@ -431,11 +431,11 @@ Heu après que:
 - La configuració es pot aplicar tant als observadors com a les funcions d'extensió
 - Les variables d'instància s'han de declarar abans d'usar-les a Groovy/Java; `init()` les omple des de la configuració quan el plugin es carrega
 
-| Cas d'ús                                    | Enfocament recomanat                                                    |
-| ------------------------------------------- | ----------------------------------------------------------------------- |
-| Prototip ràpid o plugin senzill             | Només `session.config.navigate()`                                       |
-| Plugin de producció amb moltes opcions      | Afegir una classe `ConfigScope` juntament amb les crides a `navigate()` |
-| Plugin que compartireu públicament          | Afegir una classe `ConfigScope` juntament amb les crides a `navigate()` |
+| Cas d'ús                               | Enfocament recomanat                                                    |
+| -------------------------------------- | ----------------------------------------------------------------------- |
+| Prototip ràpid o plugin senzill        | Només `session.config.navigate()`                                       |
+| Plugin de producció amb moltes opcions | Afegir una classe `ConfigScope` juntament amb les crides a `navigate()` |
+| Plugin que compartireu públicament     | Afegir una classe `ConfigScope` juntament amb les crides a `navigate()` |
 
 ---
 

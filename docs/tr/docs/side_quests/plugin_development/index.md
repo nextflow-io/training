@@ -16,8 +16,8 @@ Bu eğitim boyunca mevcut plugin'leri nasıl kullanacağınızı ve isteğe bağ
 ## Hedef kitle ve ön koşullar
 
 1. Bölüm, mevcut plugin'lerin kullanımını kapsar ve tüm Nextflow kullanıcıları için geçerlidir.
-2-6. Bölümler, kendi plugin'inizi oluşturmayı ele alır ve Groovy kodu ile derleme araçlarını içerir.
-Önceden Java veya Groovy deneyimi gerekmez.
+   2-6. Bölümler, kendi plugin'inizi oluşturmayı ele alır ve Groovy kodu ile derleme araçlarını içerir.
+   Önceden Java veya Groovy deneyimi gerekmez.
 
 **Ön koşullar**
 

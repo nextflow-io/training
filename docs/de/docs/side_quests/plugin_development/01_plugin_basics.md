@@ -10,12 +10,12 @@ In diesem Abschnitt lernst du, wie Plugins Nextflow erweitern, und probierst dre
 
 Plugins erweitern Nextflow durch verschiedene Arten von Erweiterungen:
 
-| Erweiterungstyp    | Was es tut                                              | Beispiel                     |
-| ------------------ | ------------------------------------------------------- | ---------------------------- |
-| Functions          | Fügt benutzerdefinierte Funktionen hinzu, die aus Workflows aufgerufen werden können | `samplesheetToList()`        |
-| Workflow monitors  | Reagiert auf Ereignisse wie den Abschluss von Aufgaben  | Benutzerdefiniertes Logging, Slack-Benachrichtigungen |
-| Executors          | Fügt Backends für die Aufgabenausführung hinzu          | AWS Batch, Kubernetes        |
-| Filesystems        | Fügt Speicher-Backends hinzu                            | S3, Azure Blob               |
+| Erweiterungstyp   | Was es tut                                                                           | Beispiel                                              |
+| ----------------- | ------------------------------------------------------------------------------------ | ----------------------------------------------------- |
+| Functions         | Fügt benutzerdefinierte Funktionen hinzu, die aus Workflows aufgerufen werden können | `samplesheetToList()`                                 |
+| Workflow monitors | Reagiert auf Ereignisse wie den Abschluss von Aufgaben                               | Benutzerdefiniertes Logging, Slack-Benachrichtigungen |
+| Executors         | Fügt Backends für die Aufgabenausführung hinzu                                       | AWS Batch, Kubernetes                                 |
+| Filesystems       | Fügt Speicher-Backends hinzu                                                         | S3, Azure Blob                                        |
 
 Functions und Workflow-Monitore (im Nextflow-API als „trace observers" bezeichnet) sind die häufigsten Typen für Plugin-Entwickler\*innen.
 Executors und Filesystems werden typischerweise von Plattformanbietern erstellt.

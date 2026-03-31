@@ -10,12 +10,12 @@ W tej sekcji dowiesz się, jak wtyczki rozszerzają Nextflow'a, a następnie wyp
 
 Wtyczki rozszerzają Nextflow'a poprzez kilka typów rozszerzeń:
 
-| Typ rozszerzenia    | Co robi                                                    | Przykład                        |
-| ------------------- | ---------------------------------------------------------- | ------------------------------- |
-| Funkcje             | Dodają własne funkcje wywoływalne z workflow'ów            | `samplesheetToList()`           |
-| Monitory workflow'u | Reagują na zdarzenia, takie jak zakończenie zadania        | Własne logowanie, alerty Slack  |
-| Executory           | Dodają backendy do wykonywania zadań                       | AWS Batch, Kubernetes           |
-| Systemy plików      | Dodają backendy do przechowywania danych                   | S3, Azure Blob                  |
+| Typ rozszerzenia    | Co robi                                             | Przykład                       |
+| ------------------- | --------------------------------------------------- | ------------------------------ |
+| Funkcje             | Dodają własne funkcje wywoływalne z workflow'ów     | `samplesheetToList()`          |
+| Monitory workflow'u | Reagują na zdarzenia, takie jak zakończenie zadania | Własne logowanie, alerty Slack |
+| Executory           | Dodają backendy do wykonywania zadań                | AWS Batch, Kubernetes          |
+| Systemy plików      | Dodają backendy do przechowywania danych            | S3, Azure Blob                 |
 
 Funkcje i monitory workflow'u (zwane „trace observers" w API Nextflow'a) to najczęstsze typy rozszerzeń dla autorów wtyczek.
 Executory i systemy plików są zazwyczaj tworzone przez dostawców platform.

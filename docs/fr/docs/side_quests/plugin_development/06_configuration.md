@@ -17,13 +17,13 @@ Dans cette section, vous ferez de même pour votre propre plugin.
 
 **Ce que vous allez modifier :**
 
-| Fichier                    | Modification                                                    |
-| -------------------------- | --------------------------------------------------------------- |
-| `GreetingExtension.groovy` | Lire la configuration préfixe/suffixe dans `init()`            |
+| Fichier                    | Modification                                                               |
+| -------------------------- | -------------------------------------------------------------------------- |
+| `GreetingExtension.groovy` | Lire la configuration préfixe/suffixe dans `init()`                        |
 | `GreetingFactory.groovy`   | Lire les valeurs de configuration pour contrôler la création de l'observer |
-| `GreetingConfig.groovy`    | Nouveau fichier : classe formelle `@ConfigScope`                |
-| `build.gradle`             | Enregistrer la classe de configuration comme point d'extension  |
-| `nextflow.config`          | Ajouter un bloc `#!groovy greeting {}` pour le tester           |
+| `GreetingConfig.groovy`    | Nouveau fichier : classe formelle `@ConfigScope`                           |
+| `build.gradle`             | Enregistrer la classe de configuration comme point d'extension             |
+| `nextflow.config`          | Ajouter un bloc `#!groovy greeting {}` pour le tester                      |
 
 !!! tip "Astuce"
 
@@ -431,11 +431,11 @@ Vous avez appris que :
 - La configuration peut être appliquée à la fois aux observers et aux fonctions d'extension
 - Les variables d'instance doivent être déclarées avant utilisation en Groovy/Java ; `init()` les alimente depuis la configuration au chargement du plugin
 
-| Cas d'usage                                    | Approche recommandée                                                    |
-| ---------------------------------------------- | ----------------------------------------------------------------------- |
-| Prototype rapide ou plugin simple              | `session.config.navigate()` uniquement                                  |
-| Plugin de production avec de nombreuses options | Ajouter une classe `ConfigScope` aux côtés de vos appels `navigate()`  |
-| Plugin destiné à être partagé publiquement     | Ajouter une classe `ConfigScope` aux côtés de vos appels `navigate()`  |
+| Cas d'usage                                     | Approche recommandée                                                  |
+| ----------------------------------------------- | --------------------------------------------------------------------- |
+| Prototype rapide ou plugin simple               | `session.config.navigate()` uniquement                                |
+| Plugin de production avec de nombreuses options | Ajouter une classe `ConfigScope` aux côtés de vos appels `navigate()` |
+| Plugin destiné à être partagé publiquement      | Ajouter une classe `ConfigScope` aux côtés de vos appels `navigate()` |
 
 ---
 

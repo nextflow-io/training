@@ -48,11 +48,11 @@ Plugin'iniz yerel ortamda çalışır hale geldikten sonra Nextflow plugin kayı
 
 Sürümleriniz için [anlamsal sürümlemeyi](https://semver.org/) takip edin:
 
-| Sürüm değişikliği         | Ne zaman kullanılır                    | Örnek                                              |
-| ------------------------- | -------------------------------------- | -------------------------------------------------- |
+| Sürüm değişikliği         | Ne zaman kullanılır                    | Örnek                                                 |
+| ------------------------- | -------------------------------------- | ----------------------------------------------------- |
 | **MAJOR** (1.0.0 → 2.0.0) | Geriye dönük uyumsuz değişiklikler     | Bir fonksiyonu kaldırmak, dönüş türlerini değiştirmek |
-| **MINOR** (1.0.0 → 1.1.0) | Yeni özellikler, geriye dönük uyumlu   | Yeni bir fonksiyon eklemek                         |
-| **PATCH** (1.0.0 → 1.0.1) | Hata düzeltmeleri, geriye dönük uyumlu | Mevcut bir fonksiyondaki hatayı düzeltmek          |
+| **MINOR** (1.0.0 → 1.1.0) | Yeni özellikler, geriye dönük uyumlu   | Yeni bir fonksiyon eklemek                            |
+| **PATCH** (1.0.0 → 1.0.1) | Hata düzeltmeleri, geriye dönük uyumlu | Mevcut bir fonksiyondaki hatayı düzeltmek             |
 
 Her sürümden önce `build.gradle` dosyasındaki sürümü güncelleyin:
 
@@ -137,11 +137,11 @@ workflow {
 
 ## Genişletme noktası özeti
 
-| Tür                    | Sınıf/Anotasyon  | Amaç                                                        |
-| ---------------------- | ---------------- | ----------------------------------------------------------- |
-| Fonksiyon              | `@Function`      | İş akışlarından çağrılabilir                                |
-| Trace Observer         | `TraceObserver`  | İş akışı yaşam döngüsü olaylarına bağlanır                  |
-| Yapılandırma kapsamı   | `@ScopeName`     | nextflow.config dosyasında plugin yapılandırmasını tanımlar |
+| Tür                  | Sınıf/Anotasyon | Amaç                                                        |
+| -------------------- | --------------- | ----------------------------------------------------------- |
+| Fonksiyon            | `@Function`     | İş akışlarından çağrılabilir                                |
+| Trace Observer       | `TraceObserver` | İş akışı yaşam döngüsü olaylarına bağlanır                  |
+| Yapılandırma kapsamı | `@ScopeName`    | nextflow.config dosyasında plugin yapılandırmasını tanımlar |
 
 ---
 

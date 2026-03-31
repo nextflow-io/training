@@ -723,14 +723,14 @@ Bu, temel **dize işleme kavramlarını** göstermektedir:
 
 `^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$` regex kalıbını inceleyelim:
 
-| Kalıp               | Eşleşir                                    | Yakalar                                    |
-| ------------------- | ------------------------------------------ | ------------------------------------------ |
-| `^(.+)`             | Baştan örnek adı                           | Grup 1: örnek adı                          |
-| `_S(\d+)`           | Örnek numarası `_S1`, `_S2` vb.            | Grup 2: örnek numarası                     |
-| `_L(\d{3})`         | Şerit numarası `_L001`                     | Grup 3: şerit (3 basamak)                  |
-| `_(R[12])`          | Okuma yönü `_R1` veya `_R2`               | Grup 4: okuma yönü                         |
-| `_(\d{3})`          | Parça numarası `_001`                      | Grup 5: parça (3 basamak)                  |
-| `\.fastq(?:\.gz)?$` | Dosya uzantısı `.fastq` veya `.fastq.gz`   | Yakalanmaz (?:, yakalamayan gruptur)       |
+| Kalıp               | Eşleşir                                  | Yakalar                              |
+| ------------------- | ---------------------------------------- | ------------------------------------ |
+| `^(.+)`             | Baştan örnek adı                         | Grup 1: örnek adı                    |
+| `_S(\d+)`           | Örnek numarası `_S1`, `_S2` vb.          | Grup 2: örnek numarası               |
+| `_L(\d{3})`         | Şerit numarası `_L001`                   | Grup 3: şerit (3 basamak)            |
+| `_(R[12])`          | Okuma yönü `_R1` veya `_R2`              | Grup 4: okuma yönü                   |
+| `_(\d{3})`          | Parça numarası `_001`                    | Grup 5: parça (3 basamak)            |
+| `\.fastq(?:\.gz)?$` | Dosya uzantısı `.fastq` veya `.fastq.gz` | Yakalanmaz (?:, yakalamayan gruptur) |
 
 Bu, meta veriyi otomatik olarak çıkarmak için Illumina tarzı adlandırma kurallarını ayrıştırır.
 

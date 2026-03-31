@@ -81,14 +81,14 @@ Hay dos cosas a destacar aquí:
 
 El conjunto completo de eventos del ciclo de vida a los que puede conectarse al momento de escribir esto son:
 
-| Método              | Cuándo se llama                    |
-| ------------------- | ---------------------------------- |
-| `onFlowCreate`      | El workflow inicia                 |
-| `onFlowComplete`    | El workflow finaliza               |
-| `onProcessStart`    | Una tarea comienza su ejecución    |
-| `onProcessComplete` | Una tarea finaliza                 |
-| `onProcessCached`   | Se reutiliza una tarea en caché    |
-| `onFilePublish`     | Se publica un archivo              |
+| Método              | Cuándo se llama                 |
+| ------------------- | ------------------------------- |
+| `onFlowCreate`      | El workflow inicia              |
+| `onFlowComplete`    | El workflow finaliza            |
+| `onProcessStart`    | Una tarea comienza su ejecución |
+| `onProcessComplete` | Una tarea finaliza              |
+| `onProcessCached`   | Se reutiliza una tarea en caché |
+| `onFilePublish`     | Se publica un archivo           |
 
 Para una lista completa, consulte la [interfaz TraceObserver](https://github.com/nextflow-io/nextflow/blob/master/modules/nextflow/src/main/groovy/nextflow/trace/TraceObserver.groovy) en el código fuente de Nextflow.
 

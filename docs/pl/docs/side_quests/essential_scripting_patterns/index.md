@@ -723,13 +723,13 @@ Demonstruje to kluczowe **koncepty przetwarzania stringów**:
 
 Rozłóżmy wzorzec regex `^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$`:
 
-| Wzorzec             | Dopasowuje                                | Przechwytuje                                    |
-| ------------------- | ----------------------------------------- | ----------------------------------------------- |
-| `^(.+)`             | Nazwa próbki od początku                  | Grupa 1: nazwa próbki                           |
-| `_S(\d+)`           | Numer próbki `_S1`, `_S2` itp.            | Grupa 2: numer próbki                           |
-| `_L(\d{3})`         | Numer ścieżki `_L001`                     | Grupa 3: ścieżka (3 cyfry)                      |
-| `_(R[12])`          | Kierunek odczytu `_R1` lub `_R2`          | Grupa 4: kierunek odczytu                       |
-| `_(\d{3})`          | Numer fragmentu `_001`                    | Grupa 5: fragment (3 cyfry)                     |
+| Wzorzec             | Dopasowuje                                  | Przechwytuje                                       |
+| ------------------- | ------------------------------------------- | -------------------------------------------------- |
+| `^(.+)`             | Nazwa próbki od początku                    | Grupa 1: nazwa próbki                              |
+| `_S(\d+)`           | Numer próbki `_S1`, `_S2` itp.              | Grupa 2: numer próbki                              |
+| `_L(\d{3})`         | Numer ścieżki `_L001`                       | Grupa 3: ścieżka (3 cyfry)                         |
+| `_(R[12])`          | Kierunek odczytu `_R1` lub `_R2`            | Grupa 4: kierunek odczytu                          |
+| `_(\d{3})`          | Numer fragmentu `_001`                      | Grupa 5: fragment (3 cyfry)                        |
 | `\.fastq(?:\.gz)?$` | Rozszerzenie pliku `.fastq` lub `.fastq.gz` | Nie przechwycone (`?:` to grupa nieprzechwytująca) |
 
 Parsuje to konwencje nazewnictwa w stylu Illumina, automatycznie wyodrębniając metadane.

@@ -17,13 +17,13 @@ Users task counter को बंद नहीं कर सकते, या dec
 
 **तुम क्या बदलोगे:**
 
-| फ़ाइल                        | बदलाव                                                    |
-| ---------------------------- | -------------------------------------------------------- |
-| `GreetingExtension.groovy`   | `init()` में prefix/suffix config पढ़ना                  |
-| `GreetingFactory.groovy`     | observer creation को नियंत्रित करने के लिए config values पढ़ना |
-| `GreetingConfig.groovy`      | नई फ़ाइल: formal `@ConfigScope` class                    |
-| `build.gradle`               | config class को extension point के रूप में register करना |
-| `nextflow.config`            | इसे test करने के लिए `#!groovy greeting {}` block जोड़ना  |
+| फ़ाइल                      | बदलाव                                                          |
+| -------------------------- | -------------------------------------------------------------- |
+| `GreetingExtension.groovy` | `init()` में prefix/suffix config पढ़ना                        |
+| `GreetingFactory.groovy`   | observer creation को नियंत्रित करने के लिए config values पढ़ना |
+| `GreetingConfig.groovy`    | नई फ़ाइल: formal `@ConfigScope` class                          |
+| `build.gradle`             | config class को extension point के रूप में register करना       |
+| `nextflow.config`          | इसे test करने के लिए `#!groovy greeting {}` block जोड़ना       |
 
 !!! tip "यहाँ से शुरू कर रहे हो?"
 
@@ -431,11 +431,11 @@ Pipeline का behavior identical है, लेकिन "Unrecognized config 
 - Configuration को observers और extension functions दोनों पर apply किया जा सकता है
 - Groovy/Java में instance variables को उपयोग से पहले declare करना ज़रूरी है; `init()` plugin load होने पर उन्हें config से populate करता है
 
-| Use case                                | Recommended approach                                              |
-| --------------------------------------- | ----------------------------------------------------------------- |
-| Quick prototype या simple plugin        | केवल `session.config.navigate()`                                  |
-| कई options वाला production plugin       | अपने `navigate()` calls के साथ एक `ConfigScope` class जोड़ो      |
-| Plugin जिसे तुम publicly share करोगे   | अपने `navigate()` calls के साथ एक `ConfigScope` class जोड़ो      |
+| Use case                             | Recommended approach                                        |
+| ------------------------------------ | ----------------------------------------------------------- |
+| Quick prototype या simple plugin     | केवल `session.config.navigate()`                            |
+| कई options वाला production plugin    | अपने `navigate()` calls के साथ एक `ConfigScope` class जोड़ो |
+| Plugin जिसे तुम publicly share करोगे | अपने `navigate()` calls के साथ एक `ConfigScope` class जोड़ो |
 
 ---
 

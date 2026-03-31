@@ -81,14 +81,14 @@ class GreetingObserver implements TraceObserver {    // (1)!
 
 लिखते समय जिन lifecycle events में तुम hook कर सकते हो, उनका पूरा सेट है:
 
-| Method              | कब call होता है              |
-| ------------------- | ---------------------------- |
-| `onFlowCreate`      | Workflow शुरू होता है        |
-| `onFlowComplete`    | Workflow समाप्त होता है      |
+| Method              | कब call होता है                  |
+| ------------------- | -------------------------------- |
+| `onFlowCreate`      | Workflow शुरू होता है            |
+| `onFlowComplete`    | Workflow समाप्त होता है          |
 | `onProcessStart`    | कोई कार्य execution शुरू करता है |
-| `onProcessComplete` | कोई कार्य समाप्त होता है     |
-| `onProcessCached`   | cached कार्य पुनः उपयोग होता है |
-| `onFilePublish`     | कोई फ़ाइल publish होती है    |
+| `onProcessComplete` | कोई कार्य समाप्त होता है         |
+| `onProcessCached`   | cached कार्य पुनः उपयोग होता है  |
+| `onFilePublish`     | कोई फ़ाइल publish होती है        |
 
 पूरी सूची के लिए, Nextflow source में [TraceObserver interface](https://github.com/nextflow-io/nextflow/blob/master/modules/nextflow/src/main/groovy/nextflow/trace/TraceObserver.groovy) देखो।
 

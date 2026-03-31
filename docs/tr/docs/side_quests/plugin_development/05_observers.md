@@ -81,14 +81,14 @@ Burada dikkat edilmesi gereken iki nokta vardır:
 
 Yazım sırasında bağlanabileceğiniz yaşam döngüsü olaylarının tam listesi şöyledir:
 
-| Metod               | Ne zaman çağrılır                  |
-| ------------------- | ---------------------------------- |
-| `onFlowCreate`      | İş akışı başladığında              |
-| `onFlowComplete`    | İş akışı tamamlandığında           |
-| `onProcessStart`    | Bir görev yürütmeye başladığında   |
-| `onProcessComplete` | Bir görev tamamlandığında          |
+| Metod               | Ne zaman çağrılır                       |
+| ------------------- | --------------------------------------- |
+| `onFlowCreate`      | İş akışı başladığında                   |
+| `onFlowComplete`    | İş akışı tamamlandığında                |
+| `onProcessStart`    | Bir görev yürütmeye başladığında        |
+| `onProcessComplete` | Bir görev tamamlandığında               |
 | `onProcessCached`   | Önbelleğe alınmış görev kullanıldığında |
-| `onFilePublish`     | Bir dosya yayımlandığında          |
+| `onFilePublish`     | Bir dosya yayımlandığında               |
 
 Tam liste için Nextflow kaynak kodundaki [TraceObserver arayüzüne](https://github.com/nextflow-io/nextflow/blob/master/modules/nextflow/src/main/groovy/nextflow/trace/TraceObserver.groovy) bakın.
 

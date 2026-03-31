@@ -48,11 +48,11 @@ Sobald dein Plugin lokal funktioniert, kannst du es über die Nextflow-Plugin-Re
 
 Verwende [semantische Versionierung](https://semver.org/) für deine Releases:
 
-| Versionsänderung          | Wann verwenden                    | Beispiel                                              |
-| ------------------------- | --------------------------------- | ----------------------------------------------------- |
-| **MAJOR** (1.0.0 → 2.0.0) | Breaking Changes                  | Eine Funktion entfernen, Rückgabetypen ändern         |
-| **MINOR** (1.0.0 → 1.1.0) | Neue Features, abwärtskompatibel  | Eine neue Funktion hinzufügen                         |
-| **PATCH** (1.0.0 → 1.0.1) | Bugfixes, abwärtskompatibel       | Einen Fehler in einer bestehenden Funktion beheben    |
+| Versionsänderung          | Wann verwenden                   | Beispiel                                           |
+| ------------------------- | -------------------------------- | -------------------------------------------------- |
+| **MAJOR** (1.0.0 → 2.0.0) | Breaking Changes                 | Eine Funktion entfernen, Rückgabetypen ändern      |
+| **MINOR** (1.0.0 → 1.1.0) | Neue Features, abwärtskompatibel | Eine neue Funktion hinzufügen                      |
+| **PATCH** (1.0.0 → 1.0.1) | Bugfixes, abwärtskompatibel      | Einen Fehler in einer bestehenden Funktion beheben |
 
 Aktualisiere die Version in `build.gradle` vor jedem Release:
 
@@ -137,11 +137,11 @@ workflow {
 
 ## Übersicht der Erweiterungspunkte
 
-| Typ                  | Klasse/Annotation | Zweck                                                       |
-| -------------------- | ----------------- | ----------------------------------------------------------- |
-| Funktion             | `@Function`       | Aus Workflows aufrufbar                                     |
-| Trace Observer       | `TraceObserver`   | In Workflow-Lifecycle-Events einklinken                     |
-| Konfigurationsbereich | `@ScopeName`     | Plugin-Konfiguration in nextflow.config definieren          |
+| Typ                   | Klasse/Annotation | Zweck                                              |
+| --------------------- | ----------------- | -------------------------------------------------- |
+| Funktion              | `@Function`       | Aus Workflows aufrufbar                            |
+| Trace Observer        | `TraceObserver`   | In Workflow-Lifecycle-Events einklinken            |
+| Konfigurationsbereich | `@ScopeName`      | Plugin-Konfiguration in nextflow.config definieren |
 
 ---
 

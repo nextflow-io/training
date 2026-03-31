@@ -10,12 +10,12 @@
 
 Plugins कई प्रकार के एक्सटेंशन के माध्यम से Nextflow को विस्तारित करते हैं:
 
-| एक्सटेंशन का प्रकार | यह क्या करता है                                    | उदाहरण                       |
-| ------------------- | -------------------------------------------------- | ---------------------------- |
-| Functions           | वर्कफ़्लो से callable कस्टम functions जोड़ता है   | `samplesheetToList()`        |
-| Workflow monitors   | कार्य पूर्णता जैसी events पर प्रतिक्रिया देता है  | Custom logging, Slack alerts |
-| Executors           | कार्य execution backends जोड़ता है                 | AWS Batch, Kubernetes        |
-| Filesystems         | स्टोरेज backends जोड़ता है                         | S3, Azure Blob               |
+| एक्सटेंशन का प्रकार | यह क्या करता है                                  | उदाहरण                       |
+| ------------------- | ------------------------------------------------ | ---------------------------- |
+| Functions           | वर्कफ़्लो से callable कस्टम functions जोड़ता है  | `samplesheetToList()`        |
+| Workflow monitors   | कार्य पूर्णता जैसी events पर प्रतिक्रिया देता है | Custom logging, Slack alerts |
+| Executors           | कार्य execution backends जोड़ता है               | AWS Batch, Kubernetes        |
+| Filesystems         | स्टोरेज backends जोड़ता है                       | S3, Azure Blob               |
 
 Functions और workflow monitors (Nextflow API में "trace observers" कहलाते हैं) plugin लेखकों के लिए सबसे सामान्य प्रकार हैं।
 Executors और filesystems आमतौर पर platform vendors द्वारा बनाए जाते हैं।

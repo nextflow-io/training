@@ -729,14 +729,14 @@ Cela démontre des **concepts clés de traitement de chaînes** :
 
 Décomposons le modèle regex `^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$` :
 
-| Modèle              | Correspond à                                   | Capture                                    |
-| ------------------- | ---------------------------------------------- | ------------------------------------------ |
-| `^(.+)`             | Nom de l'échantillon depuis le début           | Groupe 1 : nom de l'échantillon            |
-| `_S(\d+)`           | Numéro d'échantillon `_S1`, `_S2`, etc.        | Groupe 2 : numéro d'échantillon            |
-| `_L(\d{3})`         | Numéro de lane `_L001`                         | Groupe 3 : lane (3 chiffres)               |
-| `_(R[12])`          | Direction de lecture `_R1` ou `_R2`            | Groupe 4 : direction de lecture            |
-| `_(\d{3})`          | Numéro de chunk `_001`                         | Groupe 5 : chunk (3 chiffres)              |
-| `\.fastq(?:\.gz)?$` | Extension de fichier `.fastq` ou `.fastq.gz`   | Non capturé (?:  est non-capturant)        |
+| Modèle              | Correspond à                                 | Capture                            |
+| ------------------- | -------------------------------------------- | ---------------------------------- |
+| `^(.+)`             | Nom de l'échantillon depuis le début         | Groupe 1 : nom de l'échantillon    |
+| `_S(\d+)`           | Numéro d'échantillon `_S1`, `_S2`, etc.      | Groupe 2 : numéro d'échantillon    |
+| `_L(\d{3})`         | Numéro de lane `_L001`                       | Groupe 3 : lane (3 chiffres)       |
+| `_(R[12])`          | Direction de lecture `_R1` ou `_R2`          | Groupe 4 : direction de lecture    |
+| `_(\d{3})`          | Numéro de chunk `_001`                       | Groupe 5 : chunk (3 chiffres)      |
+| `\.fastq(?:\.gz)?$` | Extension de fichier `.fastq` ou `.fastq.gz` | Non capturé (?: est non-capturant) |
 
 Cela analyse les conventions de nommage de style Illumina pour extraire automatiquement les métadonnées.
 

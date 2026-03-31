@@ -17,13 +17,13 @@ In diesem Abschnitt machst du dasselbe für dein eigenes Plugin.
 
 **Was du änderst:**
 
-| Datei                      | Änderung                                                        |
-| -------------------------- | --------------------------------------------------------------- |
-| `GreetingExtension.groovy` | Präfix/Suffix-Konfiguration in `init()` einlesen               |
+| Datei                      | Änderung                                                            |
+| -------------------------- | ------------------------------------------------------------------- |
+| `GreetingExtension.groovy` | Präfix/Suffix-Konfiguration in `init()` einlesen                    |
 | `GreetingFactory.groovy`   | Konfigurationswerte einlesen, um die Observer-Erstellung zu steuern |
-| `GreetingConfig.groovy`    | Neue Datei: formale `@ConfigScope`-Klasse                       |
-| `build.gradle`             | Die Konfigurationsklasse als Extension Point registrieren       |
-| `nextflow.config`          | Einen `#!groovy greeting {}` Block zum Testen hinzufügen        |
+| `GreetingConfig.groovy`    | Neue Datei: formale `@ConfigScope`-Klasse                           |
+| `build.gradle`             | Die Konfigurationsklasse als Extension Point registrieren           |
+| `nextflow.config`          | Einen `#!groovy greeting {}` Block zum Testen hinzufügen            |
 
 !!! tip "Hier eingestiegen?"
 
@@ -431,11 +431,11 @@ Du hast gelernt, dass:
 - Konfiguration sowohl auf Observer als auch auf Extension-Funktionen angewendet werden kann
 - Instanzvariablen in Groovy/Java vor der Verwendung deklariert werden müssen; `init()` befüllt sie aus der Konfiguration, wenn das Plugin geladen wird
 
-| Anwendungsfall                                  | Empfohlener Ansatz                                                    |
-| ----------------------------------------------- | --------------------------------------------------------------------- |
-| Schneller Prototyp oder einfaches Plugin        | Nur `session.config.navigate()`                                       |
-| Produktions-Plugin mit vielen Optionen          | `ConfigScope`-Klasse parallel zu den `navigate()`-Aufrufen hinzufügen |
-| Plugin, das du öffentlich teilen möchtest       | `ConfigScope`-Klasse parallel zu den `navigate()`-Aufrufen hinzufügen |
+| Anwendungsfall                            | Empfohlener Ansatz                                                    |
+| ----------------------------------------- | --------------------------------------------------------------------- |
+| Schneller Prototyp oder einfaches Plugin  | Nur `session.config.navigate()`                                       |
+| Produktions-Plugin mit vielen Optionen    | `ConfigScope`-Klasse parallel zu den `navigate()`-Aufrufen hinzufügen |
+| Plugin, das du öffentlich teilen möchtest | `ConfigScope`-Klasse parallel zu den `navigate()`-Aufrufen hinzufügen |
 
 ---
 

@@ -81,14 +81,14 @@ Warto zwrócić uwagę na dwie rzeczy:
 
 Pełny zestaw zdarzeń cyklu życia dostępnych w chwili pisania tego materiału:
 
-| Metoda              | Kiedy jest wywoływana              |
-| ------------------- | ---------------------------------- |
-| `onFlowCreate`      | Start workflow'u                   |
-| `onFlowComplete`    | Zakończenie workflow'u             |
-| `onProcessStart`    | Rozpoczęcie wykonania zadania      |
-| `onProcessComplete` | Zakończenie zadania                |
-| `onProcessCached`   | Ponowne użycie zadania z cache'u   |
-| `onFilePublish`     | Opublikowanie pliku                |
+| Metoda              | Kiedy jest wywoływana            |
+| ------------------- | -------------------------------- |
+| `onFlowCreate`      | Start workflow'u                 |
+| `onFlowComplete`    | Zakończenie workflow'u           |
+| `onProcessStart`    | Rozpoczęcie wykonania zadania    |
+| `onProcessComplete` | Zakończenie zadania              |
+| `onProcessCached`   | Ponowne użycie zadania z cache'u |
+| `onFilePublish`     | Opublikowanie pliku              |
 
 Pełna lista dostępna jest w [interfejsie TraceObserver](https://github.com/nextflow-io/nextflow/blob/master/modules/nextflow/src/main/groovy/nextflow/trace/TraceObserver.groovy) w kodzie źródłowym Nextflow'a.
 

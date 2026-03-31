@@ -10,12 +10,12 @@ En aquesta secció, aprendreu com els plugins amplien Nextflow i, a continuació
 
 Els plugins amplien Nextflow mitjançant diversos tipus d'extensió:
 
-| Tipus d'extensió    | Què fa                                                  | Exemple                      |
-| ------------------- | ------------------------------------------------------- | ---------------------------- |
-| Funcions            | Afegeix funcions personalitzades invocables des de workflows | `samplesheetToList()`        |
-| Monitors de workflow | Responen a esdeveniments com la finalització de tasques | Registre personalitzat, alertes de Slack |
-| Executors           | Afegeix backends d'execució de tasques                  | AWS Batch, Kubernetes        |
-| Sistemes de fitxers | Afegeix backends d'emmagatzematge                       | S3, Azure Blob               |
+| Tipus d'extensió     | Què fa                                                       | Exemple                                  |
+| -------------------- | ------------------------------------------------------------ | ---------------------------------------- |
+| Funcions             | Afegeix funcions personalitzades invocables des de workflows | `samplesheetToList()`                    |
+| Monitors de workflow | Responen a esdeveniments com la finalització de tasques      | Registre personalitzat, alertes de Slack |
+| Executors            | Afegeix backends d'execució de tasques                       | AWS Batch, Kubernetes                    |
+| Sistemes de fitxers  | Afegeix backends d'emmagatzematge                            | S3, Azure Blob                           |
 
 Les funcions i els monitors de workflow (anomenats "trace observers" a l'API de Nextflow) són els tipus més habituals per als autors de plugins.
 Els executors i els sistemes de fitxers els creen habitualment els proveïdors de plataformes.

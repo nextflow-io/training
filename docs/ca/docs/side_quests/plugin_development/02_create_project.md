@@ -191,12 +191,12 @@ Actualitzeu-lo perquè coincideixi amb la versió de Nextflow instal·lada per g
 El codi font del plugin es troba a `src/main/groovy/training/plugin/`.
 Hi ha quatre fitxers font, cadascun amb un rol diferent:
 
-| Fitxer                     | Rol                                                          | Modificat a       |
-| -------------------------- | ------------------------------------------------------------ | ----------------- |
-| `GreetingPlugin.groovy`    | Punt d'entrada que Nextflow carrega primer                   | Mai (generat)     |
-| `GreetingExtension.groovy` | Defineix funcions invocables des dels workflows              | Part 3            |
-| `GreetingFactory.groovy`   | Crea instàncies d'observer quan s'inicia un workflow         | Part 5            |
-| `GreetingObserver.groovy`  | Executa codi en resposta a esdeveniments del cicle de vida del workflow | Part 5  |
+| Fitxer                     | Rol                                                                     | Modificat a   |
+| -------------------------- | ----------------------------------------------------------------------- | ------------- |
+| `GreetingPlugin.groovy`    | Punt d'entrada que Nextflow carrega primer                              | Mai (generat) |
+| `GreetingExtension.groovy` | Defineix funcions invocables des dels workflows                         | Part 3        |
+| `GreetingFactory.groovy`   | Crea instàncies d'observer quan s'inicia un workflow                    | Part 5        |
+| `GreetingObserver.groovy`  | Executa codi en resposta a esdeveniments del cicle de vida del workflow | Part 5        |
 
 Cada fitxer s'introdueix en detall a la part indicada, quan el modifiqueu per primera vegada.
 Els més importants a tenir en compte:

@@ -723,14 +723,14 @@ Bioinformatics फ़ाइलों में अक्सर metadata encode �
 
 चलो regex pattern `^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$` को break down करते हैं:
 
-| Pattern             | Matches करता है                        | Captures करता है                       |
-| ------------------- | -------------------------------------- | -------------------------------------- |
-| `^(.+)`             | शुरू से sample name                    | Group 1: sample name                   |
-| `_S(\d+)`           | Sample number `_S1`, `_S2`, आदि        | Group 2: sample number                 |
-| `_L(\d{3})`         | Lane number `_L001`                    | Group 3: lane (3 digits)               |
-| `_(R[12])`          | Read direction `_R1` या `_R2`          | Group 4: read direction                |
-| `_(\d{3})`          | Chunk number `_001`                    | Group 5: chunk (3 digits)              |
-| `\.fastq(?:\.gz)?$` | File extension `.fastq` या `.fastq.gz` | Capture नहीं होता (?:  non-capturing है) |
+| Pattern             | Matches करता है                        | Captures करता है                        |
+| ------------------- | -------------------------------------- | --------------------------------------- |
+| `^(.+)`             | शुरू से sample name                    | Group 1: sample name                    |
+| `_S(\d+)`           | Sample number `_S1`, `_S2`, आदि        | Group 2: sample number                  |
+| `_L(\d{3})`         | Lane number `_L001`                    | Group 3: lane (3 digits)                |
+| `_(R[12])`          | Read direction `_R1` या `_R2`          | Group 4: read direction                 |
+| `_(\d{3})`          | Chunk number `_001`                    | Group 5: chunk (3 digits)               |
+| `\.fastq(?:\.gz)?$` | File extension `.fastq` या `.fastq.gz` | Capture नहीं होता (?: non-capturing है) |
 
 यह metadata automatically extract करने के लिए Illumina-style naming conventions parse करता है।
 
@@ -2164,7 +2164,7 @@ nextflow run main.nf --input ./data/samples.csv -ansi-log false
 
 तुम file operations का उपयोग करके summary को एक file में भी लिख सकते हो:
 
-```groovy title="main.nf - Summary को file में लिखना"
+````groovy title="main.nf - Summary को file में लिखना"
 workflow {
     // ... तुम्हारा workflow code ...
 
@@ -2194,7 +2194,7 @@ workflow {
         log_file.text = summary
     }
 }
-```
+````
 
 ### 8.2. `onError` Handler
 

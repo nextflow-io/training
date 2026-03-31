@@ -48,11 +48,11 @@ Una vez que tu plugin funciona localmente, puedes compartirlo con otros a travé
 
 Sigue el [versionado semántico](https://semver.org/) para tus versiones:
 
-| Cambio de versión         | Cuándo usarlo                          | Ejemplo                                              |
-| ------------------------- | -------------------------------------- | ---------------------------------------------------- |
-| **MAJOR** (1.0.0 → 2.0.0) | Cambios que rompen compatibilidad      | Eliminar una función, cambiar tipos de retorno       |
-| **MINOR** (1.0.0 → 1.1.0) | Nuevas funcionalidades, retrocompatible | Agregar una nueva función                            |
-| **PATCH** (1.0.0 → 1.0.1) | Corrección de errores, retrocompatible | Corregir un error en una función existente           |
+| Cambio de versión         | Cuándo usarlo                           | Ejemplo                                        |
+| ------------------------- | --------------------------------------- | ---------------------------------------------- |
+| **MAJOR** (1.0.0 → 2.0.0) | Cambios que rompen compatibilidad       | Eliminar una función, cambiar tipos de retorno |
+| **MINOR** (1.0.0 → 1.1.0) | Nuevas funcionalidades, retrocompatible | Agregar una nueva función                      |
+| **PATCH** (1.0.0 → 1.0.1) | Corrección de errores, retrocompatible  | Corregir un error en una función existente     |
 
 Actualiza la versión en `build.gradle` antes de cada versión publicada:
 
@@ -137,11 +137,11 @@ workflow {
 
 ## Resumen de puntos de extensión
 
-| Tipo                    | Clase/Anotación  | Propósito                                                    |
-| ----------------------- | ---------------- | ------------------------------------------------------------ |
-| Función                 | `@Function`      | Invocable desde workflows                                    |
-| Observador de traza     | `TraceObserver`  | Conectarse a los eventos del ciclo de vida del workflow      |
-| Ámbito de configuración | `@ScopeName`     | Definir la configuración del plugin en nextflow.config       |
+| Tipo                    | Clase/Anotación | Propósito                                               |
+| ----------------------- | --------------- | ------------------------------------------------------- |
+| Función                 | `@Function`     | Invocable desde workflows                               |
+| Observador de traza     | `TraceObserver` | Conectarse a los eventos del ciclo de vida del workflow |
+| Ámbito de configuración | `@ScopeName`    | Definir la configuración del plugin en nextflow.config  |
 
 ---
 

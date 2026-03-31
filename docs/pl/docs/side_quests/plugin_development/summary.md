@@ -48,11 +48,11 @@ Gdy Twoja wtyczka działa lokalnie, możesz udostępnić ją innym przez rejestr
 
 Stosuj [wersjonowanie semantyczne](https://semver.org/) dla swoich wydań:
 
-| Zmiana wersji             | Kiedy stosować                        | Przykład                                              |
-| ------------------------- | ------------------------------------- | ----------------------------------------------------- |
-| **MAJOR** (1.0.0 → 2.0.0) | Zmiany niekompatybilne wstecz         | Usunięcie funkcji, zmiana typów zwracanych wartości   |
-| **MINOR** (1.0.0 → 1.1.0) | Nowe funkcje, kompatybilne wstecz     | Dodanie nowej funkcji                                 |
-| **PATCH** (1.0.0 → 1.0.1) | Poprawki błędów, kompatybilne wstecz  | Naprawa błędu w istniejącej funkcji                   |
+| Zmiana wersji             | Kiedy stosować                       | Przykład                                            |
+| ------------------------- | ------------------------------------ | --------------------------------------------------- |
+| **MAJOR** (1.0.0 → 2.0.0) | Zmiany niekompatybilne wstecz        | Usunięcie funkcji, zmiana typów zwracanych wartości |
+| **MINOR** (1.0.0 → 1.1.0) | Nowe funkcje, kompatybilne wstecz    | Dodanie nowej funkcji                               |
+| **PATCH** (1.0.0 → 1.0.1) | Poprawki błędów, kompatybilne wstecz | Naprawa błędu w istniejącej funkcji                 |
 
 Zaktualizuj wersję w `build.gradle` przed każdym wydaniem:
 
@@ -137,11 +137,11 @@ workflow {
 
 ## Podsumowanie punktów rozszerzenia
 
-| Typ                  | Klasa / adnotacja | Przeznaczenie                                              |
-| -------------------- | ----------------- | ---------------------------------------------------------- |
-| Funkcja              | `@Function`       | Wywoływalna z workflow'ów                                  |
-| Obserwator śladów    | `TraceObserver`   | Podłączenie do zdarzeń cyklu życia workflow'u              |
-| Zakres konfiguracji  | `@ScopeName`      | Definiowanie konfiguracji wtyczki w nextflow.config        |
+| Typ                 | Klasa / adnotacja | Przeznaczenie                                       |
+| ------------------- | ----------------- | --------------------------------------------------- |
+| Funkcja             | `@Function`       | Wywoływalna z workflow'ów                           |
+| Obserwator śladów   | `TraceObserver`   | Podłączenie do zdarzeń cyklu życia workflow'u       |
+| Zakres konfiguracji | `@ScopeName`      | Definiowanie konfiguracji wtyczki w nextflow.config |
 
 ---
 

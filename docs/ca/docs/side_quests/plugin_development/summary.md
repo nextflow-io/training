@@ -48,11 +48,11 @@ Un cop el vostre plugin funcioni localment, podeu compartir-lo amb altres person
 
 Seguiu el [versionat semàntic](https://semver.org/) per als vostres llançaments:
 
-| Canvi de versió           | Quan utilitzar-lo                  | Exemple                                              |
-| ------------------------- | ---------------------------------- | ---------------------------------------------------- |
-| **MAJOR** (1.0.0 → 2.0.0) | Canvis incompatibles               | Eliminar una funció, canviar tipus de retorn         |
-| **MINOR** (1.0.0 → 1.1.0) | Noves funcionalitats, compatible   | Afegir una nova funció                               |
-| **PATCH** (1.0.0 → 1.0.1) | Correccions d'errors, compatible   | Corregir un error en una funció existent             |
+| Canvi de versió           | Quan utilitzar-lo                | Exemple                                      |
+| ------------------------- | -------------------------------- | -------------------------------------------- |
+| **MAJOR** (1.0.0 → 2.0.0) | Canvis incompatibles             | Eliminar una funció, canviar tipus de retorn |
+| **MINOR** (1.0.0 → 1.1.0) | Noves funcionalitats, compatible | Afegir una nova funció                       |
+| **PATCH** (1.0.0 → 1.0.1) | Correccions d'errors, compatible | Corregir un error en una funció existent     |
 
 Actualitzeu la versió a `build.gradle` abans de cada llançament:
 
@@ -137,11 +137,11 @@ workflow {
 
 ## Resum dels punts d'extensió
 
-| Tipus               | Classe/Anotació  | Propòsit                                                    |
-| ------------------- | ---------------- | ----------------------------------------------------------- |
-| Funció              | `@Function`      | Invocable des de workflows                                  |
-| Observador de traça | `TraceObserver`  | Connectar-se als esdeveniments del cicle de vida del workflow |
-| Àmbit de configuració | `@ScopeName`   | Definir la configuració del plugin a nextflow.config        |
+| Tipus                 | Classe/Anotació | Propòsit                                                      |
+| --------------------- | --------------- | ------------------------------------------------------------- |
+| Funció                | `@Function`     | Invocable des de workflows                                    |
+| Observador de traça   | `TraceObserver` | Connectar-se als esdeveniments del cicle de vida del workflow |
+| Àmbit de configuració | `@ScopeName`    | Definir la configuració del plugin a nextflow.config          |
 
 ---
 

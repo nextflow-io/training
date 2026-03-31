@@ -723,14 +723,14 @@ Isso demonstra **conceitos-chave de processamento de strings**:
 
 Vamos detalhar o padrão regex `^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$`:
 
-| Padrão              | Corresponde a                          | Captura                                    |
-| ------------------- | -------------------------------------- | ------------------------------------------ |
-| `^(.+)`             | Nome da amostra desde o início         | Grupo 1: nome da amostra                   |
-| `_S(\d+)`           | Número da amostra `_S1`, `_S2`, etc.   | Grupo 2: número da amostra                 |
-| `_L(\d{3})`         | Número da lane `_L001`                 | Grupo 3: lane (3 dígitos)                  |
-| `_(R[12])`          | Direção de leitura `_R1` ou `_R2`      | Grupo 4: direção de leitura                |
-| `_(\d{3})`          | Número do chunk `_001`                 | Grupo 5: chunk (3 dígitos)                 |
-| `\.fastq(?:\.gz)?$` | Extensão `.fastq` ou `.fastq.gz`       | Não capturado (?:  é não-capturante)       |
+| Padrão              | Corresponde a                        | Captura                             |
+| ------------------- | ------------------------------------ | ----------------------------------- |
+| `^(.+)`             | Nome da amostra desde o início       | Grupo 1: nome da amostra            |
+| `_S(\d+)`           | Número da amostra `_S1`, `_S2`, etc. | Grupo 2: número da amostra          |
+| `_L(\d{3})`         | Número da lane `_L001`               | Grupo 3: lane (3 dígitos)           |
+| `_(R[12])`          | Direção de leitura `_R1` ou `_R2`    | Grupo 4: direção de leitura         |
+| `_(\d{3})`          | Número do chunk `_001`               | Grupo 5: chunk (3 dígitos)          |
+| `\.fastq(?:\.gz)?$` | Extensão `.fastq` ou `.fastq.gz`     | Não capturado (?: é não-capturante) |
 
 Isso analisa convenções de nomenclatura no estilo Illumina para extrair metadados automaticamente.
 

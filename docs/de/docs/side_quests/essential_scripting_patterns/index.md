@@ -723,14 +723,14 @@ Dies demonstriert wichtige **String-Verarbeitungskonzepte**:
 
 Lass uns das Regex-Muster `^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$` aufschlüsseln:
 
-| Muster              | Trifft auf                                 | Erfasst                                    |
-| ------------------- | ------------------------------------------ | ------------------------------------------ |
-| `^(.+)`             | Probenname vom Anfang                      | Gruppe 1: Probenname                       |
-| `_S(\d+)`           | Probennummer `_S1`, `_S2` usw.             | Gruppe 2: Probennummer                     |
-| `_L(\d{3})`         | Lane-Nummer `_L001`                        | Gruppe 3: Lane (3 Ziffern)                 |
-| `_(R[12])`          | Leserichtung `_R1` oder `_R2`              | Gruppe 4: Leserichtung                     |
-| `_(\d{3})`          | Chunk-Nummer `_001`                        | Gruppe 5: Chunk (3 Ziffern)                |
-| `\.fastq(?:\.gz)?$` | Dateiendung `.fastq` oder `.fastq.gz`      | Nicht erfasst (?:  ist nicht-erfassend)    |
+| Muster              | Trifft auf                            | Erfasst                                |
+| ------------------- | ------------------------------------- | -------------------------------------- |
+| `^(.+)`             | Probenname vom Anfang                 | Gruppe 1: Probenname                   |
+| `_S(\d+)`           | Probennummer `_S1`, `_S2` usw.        | Gruppe 2: Probennummer                 |
+| `_L(\d{3})`         | Lane-Nummer `_L001`                   | Gruppe 3: Lane (3 Ziffern)             |
+| `_(R[12])`          | Leserichtung `_R1` oder `_R2`         | Gruppe 4: Leserichtung                 |
+| `_(\d{3})`          | Chunk-Nummer `_001`                   | Gruppe 5: Chunk (3 Ziffern)            |
+| `\.fastq(?:\.gz)?$` | Dateiendung `.fastq` oder `.fastq.gz` | Nicht erfasst (?: ist nicht-erfassend) |
 
 Dies parst Illumina-Benennungskonventionen, um Metadaten automatisch zu extrahieren.
 

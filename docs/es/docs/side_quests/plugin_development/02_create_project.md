@@ -191,12 +191,12 @@ Actualícelo para que coincida con su versión instalada de Nextflow y garantiza
 El código fuente del plugin se encuentra en `src/main/groovy/training/plugin/`.
 Hay cuatro archivos fuente, cada uno con un rol específico:
 
-| Archivo                    | Rol                                                          | Modificado en       |
-| -------------------------- | ------------------------------------------------------------ | ------------------- |
-| `GreetingPlugin.groovy`    | Punto de entrada que Nextflow carga primero                  | Nunca (generado)    |
-| `GreetingExtension.groovy` | Define funciones invocables desde los workflows              | Parte 3             |
-| `GreetingFactory.groovy`   | Crea instancias del observer cuando inicia un workflow       | Parte 5             |
-| `GreetingObserver.groovy`  | Ejecuta código en respuesta a eventos del ciclo de vida del workflow | Parte 5       |
+| Archivo                    | Rol                                                                  | Modificado en    |
+| -------------------------- | -------------------------------------------------------------------- | ---------------- |
+| `GreetingPlugin.groovy`    | Punto de entrada que Nextflow carga primero                          | Nunca (generado) |
+| `GreetingExtension.groovy` | Define funciones invocables desde los workflows                      | Parte 3          |
+| `GreetingFactory.groovy`   | Crea instancias del observer cuando inicia un workflow               | Parte 5          |
+| `GreetingObserver.groovy`  | Ejecuta código en respuesta a eventos del ciclo de vida del workflow | Parte 5          |
 
 Cada archivo se presenta en detalle en la parte indicada, cuando lo modifique por primera vez.
 Los más importantes a tener en cuenta:

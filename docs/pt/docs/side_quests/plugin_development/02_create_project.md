@@ -191,12 +191,12 @@ Atualize-o para corresponder à versão do Nextflow instalada para garantir comp
 O código-fonte do plugin fica em `src/main/groovy/training/plugin/`.
 Há quatro arquivos-fonte, cada um com um papel distinto:
 
-| Arquivo                    | Papel                                                          | Modificado em     |
-| -------------------------- | -------------------------------------------------------------- | ----------------- |
-| `GreetingPlugin.groovy`    | Ponto de entrada que o Nextflow carrega primeiro               | Nunca (gerado)    |
-| `GreetingExtension.groovy` | Define funções chamáveis a partir dos fluxos de trabalho       | Parte 3           |
-| `GreetingFactory.groovy`   | Cria instâncias de observer quando um fluxo de trabalho inicia | Parte 5           |
-| `GreetingObserver.groovy`  | Executa código em resposta a eventos do ciclo de vida          | Parte 5           |
+| Arquivo                    | Papel                                                          | Modificado em  |
+| -------------------------- | -------------------------------------------------------------- | -------------- |
+| `GreetingPlugin.groovy`    | Ponto de entrada que o Nextflow carrega primeiro               | Nunca (gerado) |
+| `GreetingExtension.groovy` | Define funções chamáveis a partir dos fluxos de trabalho       | Parte 3        |
+| `GreetingFactory.groovy`   | Cria instâncias de observer quando um fluxo de trabalho inicia | Parte 5        |
+| `GreetingObserver.groovy`  | Executa código em resposta a eventos do ciclo de vida          | Parte 5        |
 
 Cada arquivo é apresentado em detalhes na parte listada acima, quando você o modifica pela primeira vez.
 Os principais a ter em mente:

@@ -81,14 +81,14 @@ Deux éléments sont à noter ici :
 
 L'ensemble complet des événements du cycle de vie auxquels vous pouvez vous accrocher au moment de la rédaction est le suivant :
 
-| Méthode             | Moment d'appel                    |
-| ------------------- | --------------------------------- |
-| `onFlowCreate`      | Démarrage du workflow             |
-| `onFlowComplete`    | Fin du workflow                   |
-| `onProcessStart`    | Début d'exécution d'une tâche     |
-| `onProcessComplete` | Fin d'une tâche                   |
+| Méthode             | Moment d'appel                     |
+| ------------------- | ---------------------------------- |
+| `onFlowCreate`      | Démarrage du workflow              |
+| `onFlowComplete`    | Fin du workflow                    |
+| `onProcessStart`    | Début d'exécution d'une tâche      |
+| `onProcessComplete` | Fin d'une tâche                    |
 | `onProcessCached`   | Réutilisation d'une tâche en cache |
-| `onFilePublish`     | Publication d'un fichier          |
+| `onFilePublish`     | Publication d'un fichier           |
 
 Pour une liste complète, consultez l'[interface TraceObserver](https://github.com/nextflow-io/nextflow/blob/master/modules/nextflow/src/main/groovy/nextflow/trace/TraceObserver.groovy) dans le code source de Nextflow.
 

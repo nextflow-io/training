@@ -723,14 +723,14 @@ Questo dimostra i concetti chiave di **elaborazione delle stringhe**:
 
 Analizziamo il pattern regex `^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$`:
 
-| Pattern             | Corrisponde a                          | Cattura                                |
-| ------------------- | -------------------------------------- | -------------------------------------- |
-| `^(.+)`             | Nome campione dall'inizio              | Gruppo 1: nome campione                |
-| `_S(\d+)`           | Numero campione `_S1`, `_S2`, ecc.     | Gruppo 2: numero campione              |
-| `_L(\d{3})`         | Numero lane `_L001`                    | Gruppo 3: lane (3 cifre)               |
-| `_(R[12])`          | Direzione lettura `_R1` o `_R2`        | Gruppo 4: direzione lettura            |
-| `_(\d{3})`          | Numero chunk `_001`                    | Gruppo 5: chunk (3 cifre)              |
-| `\.fastq(?:\.gz)?$` | Estensione file `.fastq` o `.fastq.gz` | Non catturato (?:  è non-catturante)   |
+| Pattern             | Corrisponde a                          | Cattura                             |
+| ------------------- | -------------------------------------- | ----------------------------------- |
+| `^(.+)`             | Nome campione dall'inizio              | Gruppo 1: nome campione             |
+| `_S(\d+)`           | Numero campione `_S1`, `_S2`, ecc.     | Gruppo 2: numero campione           |
+| `_L(\d{3})`         | Numero lane `_L001`                    | Gruppo 3: lane (3 cifre)            |
+| `_(R[12])`          | Direzione lettura `_R1` o `_R2`        | Gruppo 4: direzione lettura         |
+| `_(\d{3})`          | Numero chunk `_001`                    | Gruppo 5: chunk (3 cifre)           |
+| `\.fastq(?:\.gz)?$` | Estensione file `.fastq` o `.fastq.gz` | Non catturato (?: è non-catturante) |
 
 Questo analizza le convenzioni di denominazione in stile Illumina per estrarre automaticamente i metadati.
 

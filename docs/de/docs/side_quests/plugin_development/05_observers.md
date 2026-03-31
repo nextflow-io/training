@@ -81,14 +81,14 @@ Zwei Dinge sind hier wichtig:
 
 Die vollständige Liste der Lifecycle-Ereignisse, in die du dich zum Zeitpunkt der Erstellung einhängen kannst:
 
-| Methode             | Wann sie aufgerufen wird          |
-| ------------------- | --------------------------------- |
-| `onFlowCreate`      | Workflow startet                  |
-| `onFlowComplete`    | Workflow wird beendet             |
-| `onProcessStart`    | Eine Aufgabe beginnt die Ausführung |
-| `onProcessComplete` | Eine Aufgabe wird abgeschlossen   |
+| Methode             | Wann sie aufgerufen wird                   |
+| ------------------- | ------------------------------------------ |
+| `onFlowCreate`      | Workflow startet                           |
+| `onFlowComplete`    | Workflow wird beendet                      |
+| `onProcessStart`    | Eine Aufgabe beginnt die Ausführung        |
+| `onProcessComplete` | Eine Aufgabe wird abgeschlossen            |
 | `onProcessCached`   | Eine gecachte Aufgabe wird wiederverwendet |
-| `onFilePublish`     | Eine Datei wird veröffentlicht    |
+| `onFilePublish`     | Eine Datei wird veröffentlicht             |
 
 Eine vollständige Liste findest du im [TraceObserver-Interface](https://github.com/nextflow-io/nextflow/blob/master/modules/nextflow/src/main/groovy/nextflow/trace/TraceObserver.groovy) im Nextflow-Quellcode.
 

@@ -48,11 +48,11 @@ Une fois votre plugin fonctionnel en local, vous pouvez le partager avec d'autre
 
 Suivez le [versionnage sémantique](https://semver.org/) pour vos versions :
 
-| Changement de version     | Quand l'utiliser                       | Exemple                                                    |
-| ------------------------- | -------------------------------------- | ---------------------------------------------------------- |
-| **MAJEUR** (1.0.0 → 2.0.0) | Changements incompatibles             | Suppression d'une fonction, modification des types de retour |
-| **MINEUR** (1.0.0 → 1.1.0) | Nouvelles fonctionnalités, rétrocompatibles | Ajout d'une nouvelle fonction                         |
-| **CORRECTIF** (1.0.0 → 1.0.1) | Corrections de bugs, rétrocompatibles | Correction d'un bug dans une fonction existante        |
+| Changement de version         | Quand l'utiliser                            | Exemple                                                      |
+| ----------------------------- | ------------------------------------------- | ------------------------------------------------------------ |
+| **MAJEUR** (1.0.0 → 2.0.0)    | Changements incompatibles                   | Suppression d'une fonction, modification des types de retour |
+| **MINEUR** (1.0.0 → 1.1.0)    | Nouvelles fonctionnalités, rétrocompatibles | Ajout d'une nouvelle fonction                                |
+| **CORRECTIF** (1.0.0 → 1.0.1) | Corrections de bugs, rétrocompatibles       | Correction d'un bug dans une fonction existante              |
 
 Mettez à jour la version dans `build.gradle` avant chaque version :
 
@@ -137,11 +137,11 @@ workflow {
 
 ## Résumé des points d'extension
 
-| Type                | Classe/Annotation | Objectif                                                    |
-| ------------------- | ----------------- | ----------------------------------------------------------- |
-| Fonction            | `@Function`       | Appelable depuis les workflows                              |
-| Observateur de trace | `TraceObserver`  | S'intégrer aux événements du cycle de vie du workflow       |
-| Portée de configuration | `@ScopeName`  | Définir la configuration du plugin dans nextflow.config     |
+| Type                    | Classe/Annotation | Objectif                                                |
+| ----------------------- | ----------------- | ------------------------------------------------------- |
+| Fonction                | `@Function`       | Appelable depuis les workflows                          |
+| Observateur de trace    | `TraceObserver`   | S'intégrer aux événements du cycle de vie du workflow   |
+| Portée de configuration | `@ScopeName`      | Définir la configuration du plugin dans nextflow.config |
 
 ---
 

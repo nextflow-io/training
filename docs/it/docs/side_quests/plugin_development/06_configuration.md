@@ -17,13 +17,13 @@ In questa sezione, farai lo stesso per il tuo plugin.
 
 **Cosa cambierai:**
 
-| File                       | Modifica                                                        |
-| -------------------------- | --------------------------------------------------------------- |
-| `GreetingExtension.groovy` | Leggere la configurazione di prefisso/suffisso in `init()`      |
+| File                       | Modifica                                                                      |
+| -------------------------- | ----------------------------------------------------------------------------- |
+| `GreetingExtension.groovy` | Leggere la configurazione di prefisso/suffisso in `init()`                    |
 | `GreetingFactory.groovy`   | Leggere i valori di configurazione per controllare la creazione dell'observer |
-| `GreetingConfig.groovy`    | Nuovo file: classe formale `@ConfigScope`                       |
-| `build.gradle`             | Registrare la classe di configurazione come extension point     |
-| `nextflow.config`          | Aggiungere un blocco `#!groovy greeting {}` per testarlo        |
+| `GreetingConfig.groovy`    | Nuovo file: classe formale `@ConfigScope`                                     |
+| `build.gradle`             | Registrare la classe di configurazione come extension point                   |
+| `nextflow.config`          | Aggiungere un blocco `#!groovy greeting {}` per testarlo                      |
 
 !!! tip "Stai iniziando da qui?"
 
@@ -431,11 +431,11 @@ Hai imparato che:
 - La configurazione può essere applicata sia agli observer che alle funzioni di extension
 - Le variabili di istanza devono essere dichiarate prima dell'uso in Groovy/Java; `init()` le popola dalla configurazione quando il plugin viene caricato
 
-| Caso d'uso                                    | Approccio consigliato                                                    |
-| --------------------------------------------- | ------------------------------------------------------------------------ |
-| Prototipo rapido o plugin semplice            | Solo `session.config.navigate()`                                         |
-| Plugin di produzione con molte opzioni        | Aggiungere una classe `ConfigScope` insieme alle chiamate `navigate()`   |
-| Plugin che condividerai pubblicamente         | Aggiungere una classe `ConfigScope` insieme alle chiamate `navigate()`   |
+| Caso d'uso                             | Approccio consigliato                                                  |
+| -------------------------------------- | ---------------------------------------------------------------------- |
+| Prototipo rapido o plugin semplice     | Solo `session.config.navigate()`                                       |
+| Plugin di produzione con molte opzioni | Aggiungere una classe `ConfigScope` insieme alle chiamate `navigate()` |
+| Plugin che condividerai pubblicamente  | Aggiungere una classe `ConfigScope` insieme alle chiamate `navigate()` |
 
 ---
 

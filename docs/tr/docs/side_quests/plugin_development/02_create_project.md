@@ -191,12 +191,12 @@ Tam uyumluluk için kurulu Nextflow sürümünüzle eşleşecek şekilde güncel
 Plugin kaynak kodu `src/main/groovy/training/plugin/` dizininde bulunur.
 Her biri farklı bir role sahip dört kaynak dosya vardır:
 
-| Dosya                      | Rol                                                       | Değiştirildiği bölüm |
-| -------------------------- | --------------------------------------------------------- | -------------------- |
-| `GreetingPlugin.groovy`    | Nextflow'un ilk yüklediği giriş noktası                   | Hiçbir zaman (oluşturulmuş) |
-| `GreetingExtension.groovy` | İş akışlarından çağrılabilecek fonksiyonları tanımlar     | Bölüm 3              |
-| `GreetingFactory.groovy`   | Bir iş akışı başladığında gözlemci örnekleri oluşturur    | Bölüm 5              |
-| `GreetingObserver.groovy`  | İş akışı yaşam döngüsü olaylarına yanıt olarak kod çalıştırır | Bölüm 5          |
+| Dosya                      | Rol                                                           | Değiştirildiği bölüm        |
+| -------------------------- | ------------------------------------------------------------- | --------------------------- |
+| `GreetingPlugin.groovy`    | Nextflow'un ilk yüklediği giriş noktası                       | Hiçbir zaman (oluşturulmuş) |
+| `GreetingExtension.groovy` | İş akışlarından çağrılabilecek fonksiyonları tanımlar         | Bölüm 3                     |
+| `GreetingFactory.groovy`   | Bir iş akışı başladığında gözlemci örnekleri oluşturur        | Bölüm 5                     |
+| `GreetingObserver.groovy`  | İş akışı yaşam döngüsü olaylarına yanıt olarak kod çalıştırır | Bölüm 5                     |
 
 Her dosya, ilk kez değiştirdiğinizde yukarıda belirtilen bölümde ayrıntılı olarak tanıtılmaktadır.
 Dikkat edilmesi gereken temel dosyalar şunlardır:

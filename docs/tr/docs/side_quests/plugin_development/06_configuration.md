@@ -17,13 +17,13 @@ Bu bölümde, kendi eklentiniz için aynısını yapacaksınız.
 
 **Değiştirecekleriniz:**
 
-| Dosya                      | Değişiklik                                                    |
-| -------------------------- | ------------------------------------------------------------- |
-| `GreetingExtension.groovy` | `init()` içinde ön ek/son ek yapılandırmasını okumak          |
+| Dosya                      | Değişiklik                                                              |
+| -------------------------- | ----------------------------------------------------------------------- |
+| `GreetingExtension.groovy` | `init()` içinde ön ek/son ek yapılandırmasını okumak                    |
 | `GreetingFactory.groovy`   | Gözlemci oluşturmayı kontrol etmek için yapılandırma değerlerini okumak |
-| `GreetingConfig.groovy`    | Yeni dosya: resmi `@ConfigScope` sınıfı                       |
-| `build.gradle`             | Yapılandırma sınıfını bir uzantı noktası olarak kaydetmek     |
-| `nextflow.config`          | Test etmek için bir `#!groovy greeting {}` bloğu eklemek      |
+| `GreetingConfig.groovy`    | Yeni dosya: resmi `@ConfigScope` sınıfı                                 |
+| `build.gradle`             | Yapılandırma sınıfını bir uzantı noktası olarak kaydetmek               |
+| `nextflow.config`          | Test etmek için bir `#!groovy greeting {}` bloğu eklemek                |
 
 !!! tip "Buradan mı başlıyorsunuz?"
 
@@ -431,11 +431,11 @@ nf-schema bir `#!groovy validation {}` bloğu veya nf-co2footprint bir `#!groovy
 - Yapılandırma hem gözlemcilere hem de uzantı fonksiyonlarına uygulanabilir
 - Groovy/Java'da örnek değişkenler kullanılmadan önce bildirilmelidir; `init()` eklenti yüklendiğinde bunları yapılandırmadan doldurur
 
-| Kullanım durumu                          | Önerilen yaklaşım                                                    |
-| ---------------------------------------- | -------------------------------------------------------------------- |
-| Hızlı prototip veya basit eklenti        | Yalnızca `session.config.navigate()`                                 |
+| Kullanım durumu                            | Önerilen yaklaşım                                                   |
+| ------------------------------------------ | ------------------------------------------------------------------- |
+| Hızlı prototip veya basit eklenti          | Yalnızca `session.config.navigate()`                                |
 | Çok sayıda seçeneğe sahip üretim eklentisi | `navigate()` çağrılarınızın yanına bir `ConfigScope` sınıfı ekleyin |
-| Herkese açık paylaşacağınız eklenti      | `navigate()` çağrılarınızın yanına bir `ConfigScope` sınıfı ekleyin |
+| Herkese açık paylaşacağınız eklenti        | `navigate()` çağrılarınızın yanına bir `ConfigScope` sınıfı ekleyin |
 
 ---
 

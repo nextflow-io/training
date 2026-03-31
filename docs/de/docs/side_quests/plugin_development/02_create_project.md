@@ -191,12 +191,12 @@ Aktualisiere ihn auf deine installierte Nextflow-Version, um volle Kompatibilit�
 Der Plugin-Quellcode befindet sich in `src/main/groovy/training/plugin/`.
 Es gibt vier Quelldateien, jede mit einer eigenen Aufgabe:
 
-| Datei                      | Aufgabe                                                        | Geändert in       |
-| -------------------------- | -------------------------------------------------------------- | ----------------- |
-| `GreetingPlugin.groovy`    | Einstiegspunkt, den Nextflow zuerst lädt                       | Nie (generiert)   |
-| `GreetingExtension.groovy` | Definiert Funktionen, die aus Workflows aufgerufen werden können | Teil 3            |
-| `GreetingFactory.groovy`   | Erstellt Observer-Instanzen beim Start eines Workflows         | Teil 5            |
-| `GreetingObserver.groovy`  | Führt Code als Reaktion auf Workflow-Lifecycle-Ereignisse aus  | Teil 5            |
+| Datei                      | Aufgabe                                                          | Geändert in     |
+| -------------------------- | ---------------------------------------------------------------- | --------------- |
+| `GreetingPlugin.groovy`    | Einstiegspunkt, den Nextflow zuerst lädt                         | Nie (generiert) |
+| `GreetingExtension.groovy` | Definiert Funktionen, die aus Workflows aufgerufen werden können | Teil 3          |
+| `GreetingFactory.groovy`   | Erstellt Observer-Instanzen beim Start eines Workflows           | Teil 5          |
+| `GreetingObserver.groovy`  | Führt Code als Reaktion auf Workflow-Lifecycle-Ereignisse aus    | Teil 5          |
 
 Jede Datei wird in dem oben genannten Teil ausführlich vorgestellt, wenn du sie zum ersten Mal bearbeitest.
 Die wichtigsten im Überblick:

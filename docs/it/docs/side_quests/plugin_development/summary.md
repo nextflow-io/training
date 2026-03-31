@@ -48,11 +48,11 @@ Una volta che il tuo plugin funziona in locale, puoi condividerlo con altri tram
 
 Segui il [versionamento semantico](https://semver.org/) per le tue release:
 
-| Cambio di versione        | Quando usarlo                     | Esempio                                                  |
-| ------------------------- | --------------------------------- | -------------------------------------------------------- |
-| **MAJOR** (1.0.0 → 2.0.0) | Modifiche incompatibili           | Rimozione di una funzione, cambio dei tipi di ritorno    |
-| **MINOR** (1.0.0 → 1.1.0) | Nuove funzionalità, compatibili   | Aggiunta di una nuova funzione                           |
-| **PATCH** (1.0.0 → 1.0.1) | Correzioni di bug, compatibili    | Correzione di un bug in una funzione esistente           |
+| Cambio di versione        | Quando usarlo                   | Esempio                                               |
+| ------------------------- | ------------------------------- | ----------------------------------------------------- |
+| **MAJOR** (1.0.0 → 2.0.0) | Modifiche incompatibili         | Rimozione di una funzione, cambio dei tipi di ritorno |
+| **MINOR** (1.0.0 → 1.1.0) | Nuove funzionalità, compatibili | Aggiunta di una nuova funzione                        |
+| **PATCH** (1.0.0 → 1.0.1) | Correzioni di bug, compatibili  | Correzione di un bug in una funzione esistente        |
 
 Aggiorna la versione in `build.gradle` prima di ogni release:
 
@@ -137,11 +137,11 @@ workflow {
 
 ## Riepilogo dei punti di estensione
 
-| Tipo                | Classe/Annotazione | Scopo                                                        |
-| ------------------- | ------------------ | ------------------------------------------------------------ |
-| Funzione            | `@Function`        | Chiamabile dai flussi di lavoro                              |
-| Trace Observer      | `TraceObserver`    | Aggancio agli eventi del ciclo di vita del flusso di lavoro  |
-| Scope di configurazione | `@ScopeName`  | Definire la configurazione del plugin in nextflow.config     |
+| Tipo                    | Classe/Annotazione | Scopo                                                       |
+| ----------------------- | ------------------ | ----------------------------------------------------------- |
+| Funzione                | `@Function`        | Chiamabile dai flussi di lavoro                             |
+| Trace Observer          | `TraceObserver`    | Aggancio agli eventi del ciclo di vita del flusso di lavoro |
+| Scope di configurazione | `@ScopeName`       | Definire la configurazione del plugin in nextflow.config    |
 
 ---
 

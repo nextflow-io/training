@@ -725,14 +725,14 @@ Això demostra **conceptes clau de processament de strings**:
 
 Desglossem el patró regex `^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$`:
 
-| Patró               | Coincideix amb                              | Captura                                    |
-| ------------------- | ------------------------------------------- | ------------------------------------------ |
-| `^(.+)`             | Nom de mostra des del principi              | Grup 1: nom de mostra                      |
-| `_S(\d+)`           | Número de mostra `_S1`, `_S2`, etc.         | Grup 2: número de mostra                   |
-| `_L(\d{3})`         | Número de carril `_L001`                    | Grup 3: carril (3 dígits)                  |
-| `_(R[12])`          | Direcció de lectura `_R1` o `_R2`           | Grup 4: direcció de lectura                |
-| `_(\d{3})`          | Número de fragment `_001`                   | Grup 5: fragment (3 dígits)                |
-| `\.fastq(?:\.gz)?$` | Extensió de fitxer `.fastq` o `.fastq.gz`   | No capturat (?:  és no capturador)         |
+| Patró               | Coincideix amb                            | Captura                           |
+| ------------------- | ----------------------------------------- | --------------------------------- |
+| `^(.+)`             | Nom de mostra des del principi            | Grup 1: nom de mostra             |
+| `_S(\d+)`           | Número de mostra `_S1`, `_S2`, etc.       | Grup 2: número de mostra          |
+| `_L(\d{3})`         | Número de carril `_L001`                  | Grup 3: carril (3 dígits)         |
+| `_(R[12])`          | Direcció de lectura `_R1` o `_R2`         | Grup 4: direcció de lectura       |
+| `_(\d{3})`          | Número de fragment `_001`                 | Grup 5: fragment (3 dígits)       |
+| `\.fastq(?:\.gz)?$` | Extensió de fitxer `.fastq` o `.fastq.gz` | No capturat (?: és no capturador) |
 
 Això analitza les convencions de nomenclatura d'estil Illumina per extreure metadades automàticament.
 

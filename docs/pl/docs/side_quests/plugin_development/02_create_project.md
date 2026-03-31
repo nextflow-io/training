@@ -193,12 +193,12 @@ Zaktualizuj ją, aby odpowiadała zainstalowanej wersji Nextflow'a i zapewnić p
 Kod źródłowy wtyczki znajduje się w `src/main/groovy/training/plugin/`.
 Są tam cztery pliki źródłowe, każdy z odrębną rolą:
 
-| Plik                       | Rola                                                        | Modyfikowany w    |
-| -------------------------- | ----------------------------------------------------------- | ----------------- |
-| `GreetingPlugin.groovy`    | Punkt wejścia ładowany przez Nextflow'a jako pierwszy       | Nigdy (generowany)|
-| `GreetingExtension.groovy` | Definiuje funkcje wywoływalne z workflow'ów                 | Część 3           |
-| `GreetingFactory.groovy`   | Tworzy instancje obserwatora przy uruchomieniu workflow'u   | Część 5           |
-| `GreetingObserver.groovy`  | Uruchamia kod w odpowiedzi na zdarzenia cyklu życia workflow'u | Część 5        |
+| Plik                       | Rola                                                           | Modyfikowany w     |
+| -------------------------- | -------------------------------------------------------------- | ------------------ |
+| `GreetingPlugin.groovy`    | Punkt wejścia ładowany przez Nextflow'a jako pierwszy          | Nigdy (generowany) |
+| `GreetingExtension.groovy` | Definiuje funkcje wywoływalne z workflow'ów                    | Część 3            |
+| `GreetingFactory.groovy`   | Tworzy instancje obserwatora przy uruchomieniu workflow'u      | Część 5            |
+| `GreetingObserver.groovy`  | Uruchamia kod w odpowiedzi na zdarzenia cyklu życia workflow'u | Część 5            |
 
 Każdy plik jest szczegółowo omówiony w odpowiedniej części, gdy po raz pierwszy go modyfikujesz.
 Kluczowe pliki, o których warto wiedzieć:

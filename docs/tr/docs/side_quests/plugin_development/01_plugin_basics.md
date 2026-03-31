@@ -10,12 +10,12 @@ Bu bölümde, eklentilerin Nextflow'u nasıl genişlettiğini öğrenecek, ardı
 
 Eklentiler, Nextflow'u çeşitli uzantı türleri aracılığıyla genişletir:
 
-| Uzantı Türü          | Ne yapar                                              | Örnek                        |
-| -------------------- | ----------------------------------------------------- | ---------------------------- |
-| Fonksiyonlar         | İş akışlarından çağrılabilir özel fonksiyonlar ekler  | `samplesheetToList()`        |
-| İş akışı monitörleri | Görev tamamlama gibi olaylara yanıt verir             | Özel günlükleme, Slack uyarıları |
-| Yürütücüler          | Görev yürütme arka uçları ekler                       | AWS Batch, Kubernetes        |
-| Dosya sistemleri     | Depolama arka uçları ekler                            | S3, Azure Blob               |
+| Uzantı Türü          | Ne yapar                                             | Örnek                            |
+| -------------------- | ---------------------------------------------------- | -------------------------------- |
+| Fonksiyonlar         | İş akışlarından çağrılabilir özel fonksiyonlar ekler | `samplesheetToList()`            |
+| İş akışı monitörleri | Görev tamamlama gibi olaylara yanıt verir            | Özel günlükleme, Slack uyarıları |
+| Yürütücüler          | Görev yürütme arka uçları ekler                      | AWS Batch, Kubernetes            |
+| Dosya sistemleri     | Depolama arka uçları ekler                           | S3, Azure Blob                   |
 
 Fonksiyonlar ve iş akışı monitörleri (Nextflow API'sinde "trace observer" olarak adlandırılır), eklenti yazarları için en yaygın türlerdir.
 Yürütücüler ve dosya sistemleri genellikle platform satıcıları tarafından oluşturulur.
