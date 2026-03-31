@@ -42,7 +42,7 @@ Bu harika, ancak merak ediyor olabilirsiniz: çıktı nerede?
 
 ### 1.2. `results` dizininde çıktı dosyasını bulun
 
-Bu workflow, çıktısını `results` adlı bir dizine yayınlamak üzere yapılandırılmıştır.
+Bu workflow, çıktısını `results` adlı bir dizine yayımlamak üzere yapılandırılmıştır.
 Mevcut dizininize bakarsanız, workflow'u çalıştırdığınızda Nextflow'un `results` adında yeni bir dizin oluşturduğunu göreceksiniz; bu dizin `output.txt` adlı bir dosya içerir.
 
 ```console title="results/" linenums="1"
@@ -63,13 +63,13 @@ Hello World!
 
 Harika, workflow'umuz yapması gerekeni yaptı!
 
-Ancak, 'yayınlanmış' sonucun, Nextflow'un workflow'u çalıştırırken ürettiği gerçek çıktının bir kopyası (veya bazı durumlarda bir sembolik bağlantısı) olduğunu unutmayın.
+Ancak, 'yayımlanan' sonucun, Nextflow'un workflow'u çalıştırırken ürettiği gerçek çıktının bir kopyası (veya bazı durumlarda bir sembolik bağlantısı) olduğunu unutmayın.
 
 Şimdi, Nextflow'un çalışmayı gerçekte nerede yürüttüğünü görmek için kaputun altına bakacağız.
 
 !!! warning "Uyarı"
 
-    Tüm workflow'lar çıktıları bir results dizinine yayınlayacak şekilde ayarlanmamış olabilir ve/veya dizin adı farklı olabilir.
+    Tüm workflow'lar çıktıları bir results dizinine yayımlamak üzere ayarlanmamış olabilir ve/veya dizin adı farklı olabilir.
     Bu bölümde biraz ilerledikten sonra, bu davranışın nerede belirtildiğini nasıl öğreneceğinizi göstereceğiz.
 
 ### 1.3. `work/` dizininde orijinal çıktıyı ve günlükleri bulun
@@ -130,7 +130,7 @@ work
 
 </details>
 
-`output.txt` dosyasını hemen tanımalısınız; aslında bu, `results` dizinine yayınlanan `sayHello` sürecinin orijinal çıktısıdır.
+`output.txt` dosyasını hemen tanımalısınız; aslında bu, `results` dizinine yayımlanan `sayHello` sürecinin orijinal çıktısıdır.
 Açarsanız, yine `Hello World!` selamlamasını bulacaksınız.
 
 <details>

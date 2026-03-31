@@ -27,7 +27,7 @@ hide:
   index_type: course
   additional_information:
   technical_requirements: true
-  learning_objectives: - Tek bir örneğe {METHOD} uygulamak için doğrusal bir iş akışı yazın - {ACCESSORY_FILES} gibi yardımcı dosyaları uygun şekilde yönetin - Örnek başına işlemeyi paralel hale getirmek için Nextflow'un veri akışı paradigmasından yararlanın - İlgili kanal operatörlerini kullanarak çok örnekli toplama işlemini uygulayın
+  learning_objectives: - Tek bir örneğe {METHOD} uygulamak için doğrusal bir iş akışı yazın - {ACCESSORY_FILES} gibi yardımcı dosyaları uygun şekilde yönetin - Örnek başına işlemeyi paralel hale getirmek için Nextflow'un veri akışı paradigmasından yararlanın - İlgili kanal operatörlerini kullanarak çok örnekli toplama işlemi uygulayın
   audience_prerequisites: - "**Hedef Kitle:** Bu kurs, veri analizi pipeline'ları geliştirmek veya özelleştirmek isteyen {DOMAIN} ve ilgili alanlardaki araştırmacılar için tasarlanmıştır." - "**Beceriler:** Komut satırına, temel betik yazma kavramlarına ve yaygın {DOMAIN} dosya formatlarına belirli düzeyde aşinalık varsayılmaktadır." - "**Ön Koşullar:** [Hello Nextflow](../../hello_nextflow/) kursunda ele alınan temel Nextflow kavramları ve araçları."
 
 ---
@@ -36,7 +36,7 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-**Nextflow'u gerçek dünya {DOMAIN} kullanım senaryosuna uygulayan uygulamalı bir kurs: {METHOD_SHORT_DESCRIPTION}.**
+**Nextflow'u gerçek dünyadan bir {DOMAIN} kullanım senaryosuna uygulayan uygulamalı bir kurs: {METHOD_SHORT_DESCRIPTION}.**
 
 Bu kurs, [Hello Nextflow](../../hello_nextflow/) başlangıç eğitimini temel alarak Nextflow'un {DOMAIN} alanına özgü bağlamda nasıl kullanılacağını göstermektedir.
 [{TOOL_A}]({TOOL_A_URL}) ve [{TOOL_B}]({TOOL_B_URL}) araçlarıyla bir {METHOD} pipeline'ı uygulayacaksınız.
@@ -45,13 +45,13 @@ Bu kurs, [Hello Nextflow](../../hello_nextflow/) başlangıç eğitimini temel a
 
 ## Kursa genel bakış
 
-Bu kurs uygulamalıdır; bilgiyi kademeli olarak sunmak amacıyla hedefe yönelik alıştırmalar içermektedir.
+Bu kurs uygulamalıdır; bilgiyi kademeli olarak sunan, hedefe yönelik alıştırmalardan oluşmaktadır.
 
-Metodolojiye hakim olmak için önce analiz araçlarını terminalde elle çalıştıracak, ardından analizi otomatikleştiren ve ölçeklendiren bir Nextflow pipeline'ını adım adım oluşturacaksınız.
+Metodolojiye hakim olmak için analiz araçlarını önce terminalde elle çalıştıracak, ardından analizi otomatikleştiren ve ölçeklendiren bir Nextflow pipeline'ını adım adım oluşturacaksınız.
 
 ### Ders planı
 
-Kursu, Nextflow'un {DOMAIN} kullanım senaryosuna uygulanmasının belirli yönlerine odaklanan üç bölüme ayırdık.
+Kursu, Nextflow'un bir {DOMAIN} kullanım senaryosuna uygulanmasının belirli yönlerine odaklanan üç bölüme ayırdık.
 
 | Kurs bölümü                                          | Özet                                                                                                          | Tahmini süre |
 | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------ |

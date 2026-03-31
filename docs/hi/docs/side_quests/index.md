@@ -30,15 +30,27 @@ hide:
 
 ## साइड क्वेस्ट
 
-| साइड क्वेस्ट                                                               | शिक्षण के लिए अनुमानित समय |
-| -------------------------------------------------------------------------- | -------------------------- |
-| [Nextflow development environment walkthrough](./ide_features.md)          | 45 मिनट                    |
-| [Essential Nextflow Scripting Patterns](./essential_scripting_patterns.md) | 90 मिनट                    |
-| [Metadata in workflows](./metadata.md)                                     | 45 मिनट                    |
-| [Splitting and Grouping](./splitting_and_grouping.md)                      | 45 मिनट                    |
-| [Testing with nf-test](./nf-test.md)                                       | 1 घंटा                     |
-| [Workflows of workflows](./workflows_of_workflows.md)                      | 30 मिनट                    |
-| [Working with files](./working_with_files.md)                              | 45 मिनट                    |
-| [Debugging workflows](./debugging.md)                                      | 1 घंटा                     |
+| साइड क्वेस्ट                                                             | शिक्षण के लिए अनुमानित समय |
+| ------------------------------------------------------------------------ | -------------------------- |
+| [Nextflow development environment walkthrough](./dev_environment/)       | 45 मिनट                    |
+| [Essential Nextflow Scripting Patterns](./essential_scripting_patterns/) | 90 मिनट                    |
+| [Metadata in workflows](./metadata/)                                     | 45 मिनट                    |
+| [Splitting and Grouping](./splitting_and_grouping/)                      | 45 मिनट                    |
+| [Testing with nf-test](./nf_test/)                                       | 1 घंटा                     |
+| [Workflows of workflows](./workflows_of_workflows/)                      | 30 मिनट                    |
+| [Working with files](./working_with_files/)                              | 45 मिनट                    |
+| [Debugging workflows](./debugging/)                                      | 1 घंटा                     |
+
+## मल्टी-पार्ट कोर्स
+
+!!! exercise "Plugin Development"
+
+    !!! tip inline end ""
+
+        :material-run-fast: Nextflow plugins का उपयोग करना और बनाना सीखें।
+
+    यह कोर्स तुम्हारे वर्कफ़्लो में मौजूदा plugins का उपयोग करने और अपना खुद का plugin शुरू से बनाने को कवर करता है, जिसमें कस्टम फ़ंक्शन, वर्कफ़्लो मॉनिटरिंग, कॉन्फ़िगरेशन और वितरण शामिल हैं।
+
+    [Plugin Development प्रशिक्षण शुरू करें :material-arrow-right:](plugin_development/){ .md-button .md-button--primary }
 
 हमें बताएं कि आप यहाँ किन अन्य डोमेन और उपयोग के मामलों को शामिल देखना चाहेंगे, कम्युनिटी फोरम के [Training section](https://community.seqera.io/c/training/) में पोस्ट करके।

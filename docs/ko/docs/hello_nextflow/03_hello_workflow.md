@@ -336,7 +336,7 @@ nextflow run hello-workflow.nf -resume
     └── UPPER-Holà-output.txt
     ```
 
-편리합니다! 하지만 두 번째 프로세스 호출 중 하나의 작업 디렉토리를 살펴볼 가치가 있습니다.
+편리합니다! 하지만 두 번째 프로세스 호출 중 하나의 work 디렉토리를 살펴볼 가치가 있습니다.
 
 ??? abstract "디렉토리 내용"
 

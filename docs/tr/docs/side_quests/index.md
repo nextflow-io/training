@@ -30,15 +30,27 @@ Aksi takdirde, aşağıdaki tablodan bir yan görev seçin.
 
 ## Yan Görevler
 
-| Yan Görev                                                           | Öğretim için Tahmini Süre |
-| ------------------------------------------------------------------- | ------------------------- |
-| [Nextflow geliştirme ortamı açıklaması](./ide_features.md)          | 45 dakika                 |
-| [Temel Nextflow Betik Kalıpları](./essential_scripting_patterns.md) | 90 dakika                 |
-| [İş akışlarında üst veri](./metadata.md)                            | 45 dakika                 |
-| [Bölme ve Gruplama](./splitting_and_grouping.md)                    | 45 dakika                 |
-| [nf-test ile Test Etme](./nf-test.md)                               | 1 saat                    |
-| [İş akışlarının iş akışları](./workflows_of_workflows.md)           | 30 dakika                 |
-| [Dosyalarla çalışma](./working_with_files.md)                       | 45 dakika                 |
-| [İş akışlarında hata ayıklama](./debugging.md)                      | 1 saat                    |
+| Yan Görev                                                         | Öğretim için Tahmini Süre |
+| ----------------------------------------------------------------- | ------------------------- |
+| [Nextflow geliştirme ortamı açıklaması](./dev_environment/)       | 45 dakika                 |
+| [Temel Nextflow Betik Kalıpları](./essential_scripting_patterns/) | 90 dakika                 |
+| [İş akışlarında üst veri](./metadata/)                            | 45 dakika                 |
+| [Bölme ve Gruplama](./splitting_and_grouping/)                    | 45 dakika                 |
+| [nf-test ile Test Etme](./nf_test/)                               | 1 saat                    |
+| [İş akışlarının iş akışları](./workflows_of_workflows/)           | 30 dakika                 |
+| [Dosyalarla çalışma](./working_with_files/)                       | 45 dakika                 |
+| [İş akışlarında hata ayıklama](./debugging/)                      | 1 saat                    |
+
+## Çok Bölümlü Kurslar
+
+!!! exercise "Plugin Geliştirme"
+
+    !!! tip inline end ""
+
+        :material-run-fast: Nextflow plugin'lerini kullanmayı ve geliştirmeyi öğrenin.
+
+    Bu kurs, mevcut plugin'lerin iş akışlarınızda kullanılmasını ve sıfırdan kendi plugin'lerinizi oluşturmayı kapsar; özel fonksiyonlar, iş akışı izleme, yapılandırma ve dağıtım konularını içerir.
+
+    [Plugin Geliştirme eğitimine başlayın :material-arrow-right:](plugin_development/){ .md-button .md-button--primary }
 
 Burada hangi diğer alanların ve kullanım durumlarının ele alınmasını istediğinizi topluluk forumunun [Eğitim bölümünde](https://community.seqera.io/c/training/) paylaşarak bize bildirin.

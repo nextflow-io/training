@@ -30,15 +30,27 @@ W przeciwnym razie wybierz side quest z poniższej tabeli.
 
 ## Side Quests
 
-| Side Quest                                                                  | Szacowany czas nauczania |
-| --------------------------------------------------------------------------- | ------------------------ |
-| [Przewodnik po środowisku programistycznym Nextflow'a](./ide_features.md)   | 45 min                   |
-| [Podstawowe wzorce skryptowe Nextflow'a](./essential_scripting_patterns.md) | 90 min                   |
-| [Metadane w workflow'ach](./metadata.md)                                    | 45 min                   |
-| [Dzielenie i grupowanie](./splitting_and_grouping.md)                       | 45 min                   |
-| [Testowanie za pomocą nf-test](./nf-test.md)                                | 1 godzina                |
-| [Workflow'y złożone z workflow'ów](./workflows_of_workflows.md)             | 30 min                   |
-| [Praca z plikami](./working_with_files.md)                                  | 45 min                   |
-| [Debugowanie workflow'ów](./debugging.md)                                   | 1 godzina                |
+| Side Quest                                                                 | Szacowany czas nauczania |
+| -------------------------------------------------------------------------- | ------------------------ |
+| [Przewodnik po środowisku programistycznym Nextflow'a](./dev_environment/) | 45 min                   |
+| [Podstawowe wzorce skryptowe Nextflow'a](./essential_scripting_patterns/)  | 90 min                   |
+| [Metadane w workflow'ach](./metadata/)                                     | 45 min                   |
+| [Dzielenie i grupowanie](./splitting_and_grouping/)                        | 45 min                   |
+| [Testowanie za pomocą nf-test](./nf_test/)                                 | 1 godzina                |
+| [Workflow'y złożone z workflow'ów](./workflows_of_workflows/)              | 30 min                   |
+| [Praca z plikami](./working_with_files/)                                   | 45 min                   |
+| [Debugowanie workflow'ów](./debugging/)                                    | 1 godzina                |
+
+## Kursy wieloczęściowe
+
+!!! exercise "Tworzenie wtyczek"
+
+    !!! tip inline end ""
+
+        :material-run-fast: Naucz się używać i tworzyć wtyczki do Nextflow'a.
+
+    Ten kurs omawia korzystanie z istniejących wtyczek w Twoich workflow'ach oraz budowanie własnych od podstaw — w tym niestandardowe funkcje, monitorowanie workflow'ów, konfigurację i dystrybucję.
+
+    [Rozpocznij szkolenie z tworzenia wtyczek :material-arrow-right:](plugin_development/){ .md-button .md-button--primary }
 
 Daj nam znać, jakie inne dziedziny i przypadki użycia chciałbyś tutaj zobaczyć, publikując wpis w [sekcji Training](https://community.seqera.io/c/training/) na forum społeczności.

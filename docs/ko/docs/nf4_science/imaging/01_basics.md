@@ -2,9 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-In this first part of the Nextflow for Bioimaging training course, we'll use a very basic domain-agnostic Hello World example to demonstrate essential operations and point out the corresponding Nextflow code components.
-
-Nextflow for Bioimaging 교육 과정의 첫 번째 파트에서는 매우 기본적인 도메인 독립적 Hello World 예제를 사용하여 필수 작업을 시연하고 해당하는 Nextflow 코드 구성 요소를 설명합니다.
+이 Nextflow for Bioimaging 교육 과정의 첫 번째 파트에서는 매우 기본적인 도메인 독립적 Hello World 예제를 사용하여 필수 작업을 시연하고 해당하는 Nextflow 코드 구성 요소를 설명합니다.
 
 ## 1. 워크플로우 실행하기
 

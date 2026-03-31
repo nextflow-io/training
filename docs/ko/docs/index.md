@@ -17,7 +17,7 @@ hide:
     **Nextflow 커뮤니티 교육 포털에 오신 것을 환영합니다!**
 
     아래에 나열된 교육 과정은 셀프 서비스 방식으로 활용할 수 있도록 설계되었습니다.
-    GitHub Codespaces를 통해 제공되는 웹 기반 환경이나 직접 구성한 환경에서 언제든지 학습할 수 있습니다.
+    Github Codespaces를 통해 제공되는 웹 기반 환경이나 직접 구성한 환경에서 언제든지 학습할 수 있습니다.
 
     [과정 살펴보기 :material-arrow-right:](#catalog-of-nextflow-training-courses){ .md-button .md-button--primary .mt-1 }
 
@@ -36,7 +36,7 @@ hide:
 
     ??? terminal "환경 옵션"
 
-        교육에 필요한 모든 것이 사전 설치된 웹 기반 교육 환경을 제공합니다. GitHub Codespaces를 통해 이용할 수 있습니다(무료 GitHub 계정 필요).
+        교육에 필요한 모든 것이 사전 설치된 웹 기반 교육 환경을 제공합니다. Github Codespaces를 통해 이용할 수 있습니다(무료 GitHub 계정 필요).
 
         [![GitHub Codespaces에서 열기](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -63,7 +63,7 @@ hide:
 
         이 교육 자료는 [Seqera](https://seqera.io)가 개발 및 유지 관리하며, 커뮤니티의 이익을 위해 오픈 소스 라이선스([CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/)) 하에 공개되었습니다. 라이선스 범위를 벗어나는 방식으로 이 자료를 사용하고자 하는 경우(상업적 이용 및 재배포 제한 사항 참고), [community@seqera.io](mailto:community@seqera.io)로 문의해 주세요.
 
-        커뮤니티의 개선 사항, 수정 및 버그 리포트를 환영합니다. 각 페이지 오른쪽 상단의 :material-file-edit-outline: 아이콘을 클릭하면 코드 저장소로 이동하며, 이슈를 보고하거나 pull request를 통해 교육 자료 변경을 제안할 수 있습니다. 자세한 내용은 저장소의 `README.md`를 참조하세요.
+        커뮤니티의 개선 사항, 수정 및 버그 리포트를 환영합니다. 각 페이지 오른쪽 상단의 :material-file-edit-outline: 아이콘을 클릭하면 코드 저장소로 이동하며, 이슈를 보고하거나 pull request를 통해 교육 소스 자료의 변경을 제안할 수 있습니다. 자세한 내용은 저장소의 `README.md`를 참조하세요.
 
 </div>
 
@@ -81,19 +81,19 @@ hide:
 
     ---
 
-    ### :material-compass:{.nextflow-primary} Nextflow 입문자를 위한 과정 {.mt-1}
+    ### :material-compass:{.nextflow-primary} 입문자를 위한 Nextflow {.mt-1}
 
     Nextflow를 처음 접하는 분들을 위한 도메인 비특화 과정입니다. 각 과정은 학습자가 단계적으로 역량을 쌓을 수 있도록 설계된 일련의 교육 모듈로 구성됩니다.
 
     ??? courses "**Hello Nextflow:** 나만의 파이프라인 개발 학습"
 
-        이 과정은 간단하지만 완전히 기능하는 파이프라인을 개발할 수 있을 만큼 Nextflow 언어의 핵심 구성 요소를 충분히 다루며, 파이프라인 설계, 개발 및 설정 방법의 핵심 요소도 포함합니다.
+        이 과정은 간단하지만 완전히 기능하는 파이프라인을 개발할 수 있을 만큼 Nextflow 언어의 핵심 구성 요소를 충분히 다루며, 파이프라인 설계, 개발 및 설정 방법의 주요 요소도 포함합니다.
 
         [Hello Nextflow 교육 시작하기 :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--secondary }
 
     ??? courses "**Nextflow Run:** 기존 파이프라인 실행 학습"
 
-        Nextflow 파이프라인 실행 및 설정에 대한 간결한 입문 과정으로, Hello Nextflow 개발자 과정을 기반으로 하되 코드에 대한 비중이 적습니다. 실행, 출력, 기본 코드 구조, 다양한 컴퓨팅 환경을 위한 설정을 다룹니다.
+        Nextflow 파이프라인의 실행 및 설정에 대한 간결한 입문 과정으로, Hello Nextflow 개발자 과정을 기반으로 하되 코드에 대한 비중이 적습니다. 실행, 출력, 기본 코드 구조, 다양한 컴퓨팅 환경을 위한 설정을 다룹니다.
 
         [Nextflow Run 교육 시작하기 :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
 
@@ -103,23 +103,23 @@ hide:
 
     'Hello Nextflow'에서 소개된 개념과 구성 요소를 특정 과학적 활용 사례에 적용하는 방법을 학습합니다.
 
-    ??? courses "**Nextflow for Genomics** (변이 분석)"
+    ??? courses "**유전체학을 위한 Nextflow** (변이 분석)"
 
-        자체 유전체 파이프라인 개발을 원하는 연구자를 위한 과정입니다. 변이 분석 사례를 활용하여 간단하지만 기능적인 유전체 파이프라인을 개발하는 방법을 학습합니다.
+        자체 유전체학 파이프라인 개발을 원하는 연구자를 위한 과정입니다. 변이 분석 활용 사례를 통해 간단하지만 기능적인 유전체학 파이프라인을 개발하는 방법을 학습합니다.
 
-        [Nextflow for Genomics 교육 시작하기 :material-arrow-right:](nf4_science/genomics/){ .md-button .md-button--secondary }
+        [유전체학을 위한 Nextflow 교육 시작하기 :material-arrow-right:](nf4_science/genomics/){ .md-button .md-button--secondary }
 
-    ??? courses "**Nextflow for RNAseq** (bulk RNAseq)"
+    ??? courses "**RNAseq를 위한 Nextflow** (bulk RNAseq)"
 
-        자체 RNAseq 파이프라인 개발을 원하는 연구자를 위한 과정입니다. bulk RNAseq 처리 사례를 활용하여 간단하지만 기능적인 RNAseq 파이프라인을 개발하는 방법을 학습합니다.
+        자체 RNAseq 파이프라인 개발을 원하는 연구자를 위한 과정입니다. bulk RNAseq 처리 활용 사례를 통해 간단하지만 기능적인 RNAseq 파이프라인을 개발하는 방법을 학습합니다.
 
-        [Nextflow for RNAseq 교육 시작하기 :material-arrow-right:](nf4_science/rnaseq/){ .md-button .md-button--secondary }
+        [RNAseq를 위한 Nextflow 교육 시작하기 :material-arrow-right:](nf4_science/rnaseq/){ .md-button .md-button--secondary }
 
-    ??? courses "**Nextflow for Imaging** (공간 오믹스)"
+    ??? courses "**이미징을 위한 Nextflow** (공간 오믹스)"
 
-        이미징 및 공간 오믹스 분야 연구자 중 분석 파이프라인 실행 및 맞춤화를 원하는 분들을 위한 과정입니다. nf-core/molkart 파이프라인을 활용하여 생물학적으로 관련성 있는 파이프라인을 통해 Nextflow 파이프라인 워크플로우의 실행, 설정 및 입력 관리 방법을 학습합니다.
+        이미징 및 공간 오믹스 분야의 연구자 중 분석 파이프라인의 실행 및 맞춤화를 학습하고자 하는 분들을 위한 과정입니다. nf-core/molkart 파이프라인을 활용하여 생물학적으로 관련성 있는 파이프라인을 통해 Nextflow 파이프라인 워크플로우의 실행, 설정 및 입력 관리 방법을 학습합니다.
 
-        [Nextflow for Imaging 교육 시작하기 :material-arrow-right:](nf4_science/imaging/){ .md-button .md-button--secondary }
+        [이미징을 위한 Nextflow 교육 시작하기 :material-arrow-right:](nf4_science/imaging/){ .md-button .md-button--secondary }
 
 -   :material-run:{ .lg .middle } __심화 트랙__
 
@@ -134,13 +134,13 @@ hide:
 
     ??? courses "**Hello nf-core:** nf-core 시작하기"
 
-        [nf-core](https://nf-co.re/) 호환 파이프라인을 실행하고 개발하고자 하는 개발자를 위한 과정입니다. nf-core 템플릿과 개발 모범 사례를 따르는 간단하지만 완전히 기능하는 파이프라인을 개발하고, 기존 nf-core 모듈을 활용할 수 있을 만큼 nf-core 파이프라인 구조를 충분히 다룹니다.
+        [nf-core](https://nf-co.re/) 호환 파이프라인의 실행 및 개발을 원하는 개발자를 위한 과정입니다. nf-core 파이프라인의 구조를 충분히 다루어 nf-core 템플릿과 개발 모범 사례를 따르는 간단하지만 완전히 기능하는 파이프라인을 개발하고, 기존 nf-core 모듈을 활용할 수 있도록 합니다.
 
         [Hello nf-core 교육 시작하기 :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
 
     ---
 
-    ### :material-rocket-launch:{.nextflow-primary} Nextflow 심화 교육 {.mt-1}
+    ### :material-rocket-launch:{.nextflow-primary} 고급 Nextflow 교육 {.mt-1}
 
     실제 활용 사례를 해결하기 위한 Nextflow 파이프라인 개발 및 배포의 고급 개념과 메커니즘을 학습합니다.
 
