@@ -735,7 +735,18 @@ def ensure_translation_notice(text: str, lang: str, is_homepage: bool = False) -
             break
 
     if h1_idx is None:
-        return text  # No H1 found, skip
+        # No H1 found: insert after frontmatter (if any), or at start of file
+        insert_at = 0
+        if lines and lines[0].strip() == "---":
+            for i, line in enumerate(lines[1:], 1):
+                if line.strip() == "---":
+                    insert_at = i + 1
+                    break
+        # Skip blank lines after frontmatter
+        while insert_at < len(lines) and lines[insert_at].strip() == "":
+            insert_at += 1
+        lines = lines[:insert_at] + [notice_span, ""] + lines[insert_at:]
+        return "\n".join(lines)
 
     # Insert: blank line, notice, blank line after H1
     insert_at = h1_idx + 1

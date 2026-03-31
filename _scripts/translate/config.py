@@ -25,7 +25,7 @@ BASE_DELAY = 2.0  # seconds, doubles each retry: 2, 4, 8, 16, 32, 64, 128, 256
 # Translation settings
 MAX_CONTINUATIONS = 5  # Max continuation requests for very large files
 MAX_VERIFY_RETRIES = 2  # Re-translation attempts after verification failure
-DEFAULT_PARALLEL = 50
+DEFAULT_PARALLEL = 10
 PRIORITY_DIRS = ["hello_nextflow", "hello_nf-core", "nf4_science", "envsetup"]
 
 # Comment styles by language (used for code block post-processing)

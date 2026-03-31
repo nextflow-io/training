@@ -29,11 +29,34 @@ def file_changed_since(path: Path, since_commit: str) -> bool:
     return len(commits) > 0
 
 
-def get_file_diff(path: Path, since_commit: str) -> str | None:
+def get_file_at_commit(path: Path, commit: str) -> str | None:
+    """Get file content at a specific commit.
+
+    Returns the file content as a string, or None if the file did not
+    exist at that commit.
+    """
+    repo = _get_repo()
+    rel_path = path.relative_to(REPO_ROOT)
+    try:
+        return repo.git.show(f"{commit}:{rel_path}")
+    except git.GitCommandError:
+        return None
+
+
+def get_file_diff(
+    path: Path, since_commit: str, *, max_change_ratio: float | None = 0.2
+) -> str | None:
     """Get the git diff for a file since a specific commit.
 
     Returns the unified diff string, or None if no changes or
-    diff is too large (>20% of current file lines).
+    diff is too large relative to the file.
+
+    Args:
+        path: File to diff.
+        since_commit: Base commit SHA.
+        max_change_ratio: If set, return None when the number of changed
+            lines exceeds this fraction of the file's total lines.
+            Pass ``None`` to always return the diff regardless of size.
     """
     repo = _get_repo()
     rel_path = path.relative_to(REPO_ROOT)
@@ -42,15 +65,16 @@ def get_file_diff(path: Path, since_commit: str) -> str | None:
     if not diff:
         return None
 
-    # Check if diff is too large (>20% of file lines)
-    file_lines = path.read_text(encoding="utf-8").count("\n") + 1
-    diff_changes = sum(
-        1
-        for line in diff.split("\n")
-        if line.startswith(("+", "-")) and not line.startswith(("+++", "---"))
-    )
-    if diff_changes > file_lines * 0.2:
-        return None
+    # Check if diff is too large
+    if max_change_ratio is not None:
+        file_lines = path.read_text(encoding="utf-8").count("\n") + 1
+        diff_changes = sum(
+            1
+            for line in diff.split("\n")
+            if line.startswith(("+", "-")) and not line.startswith(("+++", "---"))
+        )
+        if diff_changes > file_lines * max_change_ratio:
+            return None
 
     return diff
 
@@ -130,14 +154,28 @@ def resolve_baseline(since: str | None, console=None) -> str:
     return baseline
 
 
+def _prompt_paths(lang: str) -> tuple[Path, Path]:
+    """Return (general_prompt, lang_prompt) paths for a language."""
+    return SCRIPTS_DIR / "general-llm-prompt.md", DOCS_ROOT / lang / "llm-prompt.md"
+
+
 def prompt_changed_since(lang: str, baseline: str) -> bool:
     """Check if any prompt files affecting this language changed since baseline."""
-    general_prompt = SCRIPTS_DIR / "general-llm-prompt.md"
-    lang_prompt = DOCS_ROOT / lang / "llm-prompt.md"
+    return any(file_changed_since(p, baseline) for p in _prompt_paths(lang))
 
-    return file_changed_since(general_prompt, baseline) or file_changed_since(
-        lang_prompt, baseline
-    )
+
+def get_prompt_diff(lang: str, baseline: str) -> str | None:
+    """Get the combined diff of prompt files since baseline.
+
+    Unlike content diffs, no size threshold is applied — prompt diffs are
+    always returned in full so the model can see exactly what changed.
+    """
+    diffs = [
+        d
+        for p in _prompt_paths(lang)
+        if (d := get_file_diff(p, baseline, max_change_ratio=None))
+    ]
+    return "\n".join(diffs) if diffs else None
 
 
 def get_outdated_files(lang: str, baseline: str | None = None) -> list[TranslationFile]:
@@ -186,17 +224,92 @@ def get_orphaned_files(lang: str) -> list[Path]:
     return [p for p in lang_docs.rglob("*.md") if not lang_to_en_path(p, lang).exists()]
 
 
+def get_renamed_files(baseline: str) -> dict[Path, Path]:
+    """Detect renamed/moved English doc files since baseline.
+
+    Uses git's rename detection to find files that were moved rather than
+    deleted and recreated.
+
+    Returns:
+        dict mapping old_en_path -> new_en_path (absolute paths).
+    """
+    repo = _get_repo()
+    diff_output = repo.git.diff(
+        "--name-status", "-M", f"{baseline}..HEAD", "--", "docs/en/docs/"
+    )
+    renames: dict[Path, Path] = {}
+    for line in diff_output.splitlines():
+        if not line.startswith("R"):
+            continue
+        parts = line.split("\t")
+        if len(parts) == 3:
+            old_path = REPO_ROOT / parts[1]
+            new_path = REPO_ROOT / parts[2]
+            renames[old_path] = new_path
+    return renames
+
+
+def _apply_renames(
+    lang: str,
+    baseline: str,
+    renames: dict[Path, Path],
+    console=None,
+) -> list[TranslationFile]:
+    """Move translation files to match renamed English sources.
+
+    For each renamed English file, if a translation exists at the old path,
+    move it to the new path.  If the English content also changed, the file
+    is returned as outdated so it will be re-translated.
+
+    Returns:
+        List of TranslationFile entries for renamed files whose content
+        also changed (need re-translation at the new path).
+    """
+    outdated: list[TranslationFile] = []
+    for old_en, new_en in renames.items():
+        old_lang = en_to_lang_path(old_en, lang)
+        new_lang = en_to_lang_path(new_en, lang)
+        if not old_lang.exists():
+            continue
+        new_lang.parent.mkdir(parents=True, exist_ok=True)
+        old_lang.rename(new_lang)
+        if console:
+            console.print(
+                f"  [cyan]Renamed:[/cyan] {old_lang.relative_to(REPO_ROOT)} "
+                f"→ {new_lang.relative_to(REPO_ROOT)}"
+            )
+        # Check if the content also changed (not just a path rename)
+        old_content = get_file_at_commit(old_en, baseline) or ""
+        new_content = new_en.read_text(encoding="utf-8") if new_en.exists() else ""
+        if old_content != new_content:
+            outdated.append(TranslationFile(new_en, new_lang, lang))
+    return outdated
+
+
 def gather_work(
-    lang: str, baseline: str | None = None
+    lang: str, baseline: str | None = None, console=None
 ) -> tuple[list[Path], list[TranslationFile], list[TranslationFile]]:
     """Gather all work items for a language.
+
+    Handles file renames first (moving translations to new paths), then
+    detects orphaned, missing, and outdated files.
 
     Returns:
         (orphaned, missing, outdated) tuple.
     """
+    # Handle renames before detecting orphans/missing to avoid false positives
+    if baseline:
+        renames = get_renamed_files(baseline)
+        if renames:
+            rename_outdated = _apply_renames(lang, baseline, renames, console)
+        else:
+            rename_outdated = []
+    else:
+        rename_outdated = []
+
     orphaned = get_orphaned_files(lang)
     missing = get_missing_files(lang)
-    outdated = get_outdated_files(lang, baseline=baseline)
+    outdated = get_outdated_files(lang, baseline=baseline) + rename_outdated
     return orphaned, missing, outdated
 
 
