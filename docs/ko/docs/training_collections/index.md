@@ -21,7 +21,7 @@ hide:
 
 ## 사용 가능한 컬렉션
 
-- [The Architect's Toolkit I](./architects_toolkit_1.md) - 복잡한 파이프라인 조립, 테스트 전략 구현, 메타데이터 관리, 데이터 그룹화 및 분할을 위한 워크플로우 아키텍처 패턴을 다루는 네 가지 Side Quest 컬렉션입니다. _예상 소요 시간: 그룹 교육 기준 4시간._
+- [The Architect's Toolkit I](./architects_toolkit_1.md) - 복잡한 파이프라인 구성, 테스트 전략 구현, 메타데이터 관리, 데이터 그룹화 및 분할을 위한 워크플로우 아키텍처 패턴을 다루는 네 가지 Side Quest 컬렉션입니다. _예상 소요 시간: 그룹 교육 기준 4시간._
 
 ## 새로운 컬렉션 제안하기
 

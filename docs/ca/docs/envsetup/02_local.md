@@ -20,7 +20,7 @@ Els nostres cursos de formació tenen alguns requisits addicionals.
 En total, necessitaràs tenir el següent programari instal·lat:
 
 - Bash o shell equivalent
-- [Java 11 (o posterior, fins a 21)](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+- [Java 21 o posterior](https://www.oracle.com/technetwork/java/javase/downloads/index.html) (Java 17+ és suficient per executar Nextflow, però el curs de [desenvolupament de plugins](../side_quests/plugin_development/index.md) requereix Java 21)
 - [Git](https://git-scm.com/)
 - [Docker](https://docs.docker.com/get-docker/)
 - [Conda](https://conda.io/) 4.5 (o posterior)

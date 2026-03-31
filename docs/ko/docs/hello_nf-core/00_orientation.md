@@ -6,7 +6,7 @@
 
 GitHub Codespaces에서 제공하는 사전 구축된 환경을 사용하려면 아래의 "Open in GitHub Codespaces" 버튼을 클릭하십시오. 다른 옵션은 [환경 옵션](../envsetup/index.md)을 참조하십시오.
 
-환경이 로드되는 동안 계속 읽을 수 있도록 새 브라우저 탭 또는 창에서 교육 환경을 여는 것을 권장합니다(장비에 따라 우클릭, ctrl-클릭 또는 cmd-클릭 사용).
+환경이 로드되는 동안 계속 읽을 수 있도록 새 브라우저 탭 또는 창에서 교육 환경을 여는 것을 권장합니다(사용 중인 운영체제에 따라 우클릭, ctrl-클릭 또는 cmd-클릭 사용).
 과정을 진행하려면 이 지침을 계속 열어두어야 합니다.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
@@ -57,7 +57,7 @@ cd hello-nf-core/
 
 !!! tip "팁"
 
-    어떤 이유로든 이 디렉토리를 벗어나는 경우(예: codespace가 중지 모드로 전환됨) Github Codespaces 교육 환경 내에서 실행하는 경우 전체 경로를 사용하여 언제든지 돌아갈 수 있습니다:
+    어떤 이유로든 이 디렉토리를 벗어나는 경우(예: codespace가 중지 상태로 전환됨) Github Codespaces 교육 환경 내에서 실행하는 경우 전체 경로를 사용하여 언제든지 돌아갈 수 있습니다:
 
     ```bash
     cd /workspaces/training/hello-nf-core
@@ -103,12 +103,12 @@ tree . -L 2
 
 - **`original-hello` 디렉토리**에는 전체 Hello Nextflow 교육 시리즈를 진행하여 생성된 소스 코드의 사본이 포함되어 있습니다(Docker 활성화 상태).
 
-- **`solutions` 디렉토리**에는 과정의 각 단계에서 생성되는 완성된 workflow 스크립트가 포함되어 있습니다.
+- **`solutions` 디렉토리**에는 과정의 각 단계에서 생성되는 완성된 워크플로우 스크립트가 포함되어 있습니다.
   작업을 확인하고 문제를 해결하는 데 사용할 참조 자료로 제공됩니다.
 
 ## 준비 상태 체크리스트
 
-시작할 준비가 되었다고 생각하십니까?
+시작할 준비가 되었습니까?
 
 - [ ] 이 과정의 목표와 전제 조건을 이해했습니다
 - [ ] 환경이 실행 중입니다

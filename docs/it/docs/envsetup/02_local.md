@@ -20,7 +20,7 @@ I nostri corsi di formazione hanno alcuni requisiti aggiuntivi.
 In totale, dovrà avere installato il seguente software:
 
 - Bash o shell equivalente
-- [Java 11 (o successivo, fino a 21)](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+- [Java 21 o successivo](https://www.oracle.com/technetwork/java/javase/downloads/index.html) (Java 17+ è sufficiente per eseguire Nextflow, ma il corso di [sviluppo plugin](../side_quests/plugin_development/index.md) richiede Java 21)
 - [Git](https://git-scm.com/)
 - [Docker](https://docs.docker.com/get-docker/)
 - [Conda](https://conda.io/) 4.5 (o successivo)

@@ -20,7 +20,7 @@ Les prérequis spécifiques de chaque mini-cours varient et sont documentés dan
 Néanmoins, tous supposent une familiarité minimale avec les éléments suivants :
 
 - Expérience avec la ligne de commande
-- Concepts et outils fondamentaux de Nextflow couverts dans le cours de formation pour débutants [Hello Nextflow](../../hello_nextflow/).
+- Concepts et outils fondamentaux de Nextflow couverts dans le cours de formation pour débutant·es [Hello Nextflow](../../hello_nextflow/).
 
 Pour les exigences techniques et la configuration de l'environnement, consultez le mini-cours [Configuration de l'environnement](../../envsetup/).
 
@@ -30,15 +30,27 @@ Sinon, sélectionnez une quête secondaire dans le tableau ci-dessous.
 
 ## Quêtes secondaires
 
-| Quête secondaire                                                               | Durée estimée pour l'enseignement |
-| ------------------------------------------------------------------------------ | --------------------------------- |
-| [Présentation de l'environnement de développement Nextflow](./ide_features.md) | 45 min                            |
-| [Modèles de script Nextflow essentiels](./essential_scripting_patterns.md)     | 90 min                            |
-| [Métadonnées dans les workflows](./metadata.md)                                | 45 min                            |
-| [Division et regroupement](./splitting_and_grouping.md)                        | 45 min                            |
-| [Tests avec nf-test](./nf-test.md)                                             | 1 heure                           |
-| [Workflows de workflows](./workflows_of_workflows.md)                          | 30 min                            |
-| [Travailler avec les fichiers](./working_with_files.md)                        | 45 min                            |
-| [Débogage des workflows](./debugging.md)                                       | 1 heure                           |
+| Quête secondaire                                                                | Durée estimée pour l'enseignement |
+| ------------------------------------------------------------------------------- | --------------------------------- |
+| [Présentation de l'environnement de développement Nextflow](./dev_environment/) | 45 min                            |
+| [Modèles de script Nextflow essentiels](./essential_scripting_patterns/)        | 90 min                            |
+| [Métadonnées dans les workflows](./metadata/)                                   | 45 min                            |
+| [Division et regroupement](./splitting_and_grouping/)                           | 45 min                            |
+| [Tests avec nf-test](./nf_test/)                                                | 1 heure                           |
+| [Workflows de workflows](./workflows_of_workflows/)                             | 30 min                            |
+| [Travailler avec les fichiers](./working_with_files/)                           | 45 min                            |
+| [Débogage des workflows](./debugging/)                                          | 1 heure                           |
+
+## Cours en plusieurs parties
+
+!!! exercise "Développement de plugins"
+
+    !!! tip inline end ""
+
+        :material-run-fast: Apprenez à utiliser et à créer des plugins Nextflow.
+
+    Ce cours couvre l'utilisation de plugins existants dans vos workflows et la création des vôtres depuis zéro, notamment les fonctions personnalisées, la surveillance des workflows, la configuration et la distribution.
+
+    [Commencer la formation sur le développement de plugins :material-arrow-right:](plugin_development/){ .md-button .md-button--primary }
 
 Faites-nous savoir quels autres domaines et cas d'usage vous aimeriez voir couverts ici en publiant dans la [section Formation](https://community.seqera.io/c/training/) du forum communautaire.

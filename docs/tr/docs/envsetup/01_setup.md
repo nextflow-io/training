@@ -1,6 +1,6 @@
 # GitHub Codespaces
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 GitHub Codespaces, buluttaki sanal makineler tarafından desteklenen, eğitim için önceden yapılandırılmış bir ortam sağlamamıza olanak tanıyan web tabanlı bir platformdur.
 Platform, Github (Microsoft'a ait) tarafından işletilmektedir ve Github hesabı olan herkes için ücretsiz olarak (kullanım kotalarıyla) erişilebilir.
@@ -45,16 +45,16 @@ Ancak "Change options" düğmesine tıklayarak ortamı özelleştirmek mümkünd
 
     #### Machine type
 
-    Bu, eğitim üzerinde çalışmak için kullanacağınız sanal makineyi özelleştirmenize olanak tanır.
+    Bu, eğitim üzerinde çalışmak için kullanacağınız sanal makinenin özelliklerini belirlemenize olanak tanır.
 
     Daha fazla çekirdeğe sahip bir makine kullanmak, Nextflow'un iş akışı yürütmeyi paralelleştirme yeteneğinden daha fazla yararlanmanızı sağlar.
-    Ancak ücretsiz kota tahsisatınızı daha hızlı tüketir, bu nedenle almayı planladığınız kursun talimatlarında tavsiye edilmedikçe bu ayarı değiştirmenizi önermiyoruz.
+    Ancak ücretsiz kota tahsisatınızı daha hızlı tüketir; bu nedenle almayı planladığınız kursun talimatlarında tavsiye edilmedikçe bu ayarı değiştirmenizi önermiyoruz.
 
     Kotalar hakkında daha fazla ayrıntı için aşağıdaki 'GitHub Codespaces kotaları' bölümüne bakın.
 
 ### Başlatma süresi
 
-İlk kez yeni bir GitHub Codespaces ortamı açmak birkaç dakika sürebilir, çünkü sistemin sanal makinenizi kurması gerekir, bu yüzden bir bekleme süresi olursa endişelenmeyin.
+İlk kez yeni bir GitHub Codespaces ortamı açmak birkaç dakika sürebilir; çünkü sistemin sanal makinenizi kurması gerekir. Bu nedenle bir bekleme süresi olursa endişelenmeyin.
 Ancak beş dakikadan fazla sürmemelidir.
 
 ## Eğitim arayüzünde gezinme
@@ -91,7 +91,7 @@ Alternatif olarak, ilk başta oluşturmak için kullandığınız düğmeye tık
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-Önceki oturumu görmelisiniz, varsayılan seçenek devam etmektir:
+Önceki oturumu görmelisiniz; varsayılan seçenek devam etmektir:
 
 ![Resume a GitHub Codespace](img/codespaces_resume.png)
 

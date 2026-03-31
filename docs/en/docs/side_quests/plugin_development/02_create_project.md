@@ -1,0 +1,335 @@
+# Part 2: Create a Plugin Project
+
+You've seen how plugins extend Nextflow with reusable functionality.
+Now you'll create your own, starting with a project template that handles the build configuration for you.
+
+!!! tip "Starting from here?"
+
+    If you're joining at this part, copy the solution from Part 1 to use as your starting point:
+
+    ```bash
+    cp -r solutions/1-plugin-basics/* .
+    ```
+
+!!! info "Official documentation"
+
+    This section and those that follow cover plugin development essentials.
+    For comprehensive details, see the [official Nextflow plugin development documentation](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html).
+
+---
+
+## 1. Create the plugin project
+
+The built-in `nextflow plugin create` command generates a complete plugin project:
+
+```bash
+nextflow plugin create nf-greeting training
+```
+
+```console title="Output"
+Plugin created successfully at path: /workspaces/training/side-quests/plugin_development/nf-greeting
+```
+
+The first argument is the plugin name, and the second is your organization name (used to organize the generated code into folders).
+
+!!! tip "Manual creation"
+
+    You can also create plugin projects manually or use the [nf-hello template](https://github.com/nextflow-io/nf-hello) on GitHub as a starting point.
+
+---
+
+## 2. Examine the project structure
+
+A Nextflow plugin is a piece of Groovy software that runs inside Nextflow.
+It extends Nextflow's capabilities using well-defined integration points, which means it can work with Nextflow features like channels, processes, and configuration.
+
+Before writing any code, look at what the template generated so you know where things go.
+
+Change into the plugin directory:
+
+```bash
+cd nf-greeting
+```
+
+List the contents:
+
+```bash
+tree
+```
+
+You should see:
+
+```console
+.
+├── build.gradle
+├── COPYING
+├── gradle
+│   └── wrapper
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── gradlew
+├── Makefile
+├── README.md
+├── settings.gradle
+└── src
+    ├── main
+    │   └── groovy
+    │       └── training
+    │           └── plugin
+    │               ├── GreetingExtension.groovy
+    │               ├── GreetingFactory.groovy
+    │               ├── GreetingObserver.groovy
+    │               └── GreetingPlugin.groovy
+    └── test
+        └── groovy
+            └── training
+                └── plugin
+                    └── GreetingObserverTest.groovy
+
+11 directories, 13 files
+```
+
+---
+
+## 3. Explore the build configuration
+
+A Nextflow plugin is Java-based software that must be compiled and packaged before Nextflow can use it.
+This requires a build tool.
+
+Gradle is a build tool that compiles code, runs tests, and packages software.
+The plugin template includes a Gradle wrapper (`./gradlew`) so you don't need Gradle installed separately.
+
+The build configuration tells Gradle how to compile your plugin and tells Nextflow how to load it.
+Two files matter most.
+
+### 3.1. settings.gradle
+
+This file identifies the project:
+
+```bash
+cat settings.gradle
+```
+
+```groovy title="settings.gradle"
+rootProject.name = 'nf-greeting'
+```
+
+The name here must match what you'll put in `nextflow.config` when using the plugin.
+
+### 3.2. build.gradle
+
+The build file is where most configuration happens:
+
+```bash
+cat build.gradle
+```
+
+The file contains several sections.
+The most important is the `nextflowPlugin` block:
+
+```groovy title="build.gradle"
+plugins {
+    id 'io.nextflow.nextflow-plugin' version '1.0.0-beta.10'
+}
+
+version = '0.1.0'
+
+nextflowPlugin {
+    nextflowVersion = '24.10.0'       // (1)!
+
+    provider = 'training'             // (2)!
+    className = 'training.plugin.GreetingPlugin'  // (3)!
+    extensionPoints = [               // (4)!
+        'training.plugin.GreetingExtension',
+        'training.plugin.GreetingFactory'
+    ]
+
+}
+```
+
+1. **`nextflowVersion`**: Minimum Nextflow version required
+2. **`provider`**: Your name or organization
+3. **`className`**: The main plugin class, the entry point that Nextflow loads first
+4. **`extensionPoints`**: Classes that add features to Nextflow (your functions, monitoring, etc.)
+
+The `nextflowPlugin` block configures:
+
+- `nextflowVersion`: Minimum Nextflow version required
+- `provider`: Your name or organization
+- `className`: The main plugin class (the entry point that Nextflow loads first, specified in `build.gradle`)
+- `extensionPoints`: Classes that add features to Nextflow (your functions, monitoring, etc.)
+
+### 3.3. Update nextflowVersion
+
+The template generates a `nextflowVersion` value that may be outdated.
+Update it to match your installed Nextflow version for full compatibility:
+
+=== "After"
+
+    ```groovy title="build.gradle" hl_lines="2"
+    nextflowPlugin {
+        nextflowVersion = '25.10.0'
+
+        provider = 'training'
+    ```
+
+=== "Before"
+
+    ```groovy title="build.gradle" hl_lines="2"
+    nextflowPlugin {
+        nextflowVersion = '24.10.0'
+
+        provider = 'training'
+    ```
+
+---
+
+## 4. Know the source files
+
+The plugin source code lives in `src/main/groovy/training/plugin/`.
+There are four source files, each with a distinct role:
+
+| File                       | Role                                               | Modified in       |
+| -------------------------- | -------------------------------------------------- | ----------------- |
+| `GreetingPlugin.groovy`    | Entry point that Nextflow loads first              | Never (generated) |
+| `GreetingExtension.groovy` | Defines functions callable from workflows          | Part 3            |
+| `GreetingFactory.groovy`   | Creates observer instances when a workflow starts  | Part 5            |
+| `GreetingObserver.groovy`  | Runs code in response to workflow lifecycle events | Part 5            |
+
+Each file is introduced in detail in the part listed above, when you first modify it.
+The key ones to be aware of:
+
+- `GreetingPlugin` is the entry point that Nextflow loads
+- `GreetingExtension` provides the functions this plugin makes available to workflows
+- `GreetingObserver` runs alongside the pipeline and responds to events without requiring changes to pipeline code
+
+```mermaid
+graph TD
+    A[GreetingPlugin] -->|registers| B[GreetingExtension]
+    A -->|registers| C[GreetingFactory]
+    C -->|creates| D[GreetingObserver]
+
+    B -->|provides| E["@Function methods<br/>(callable from workflows)"]
+    D -->|hooks into| F["Lifecycle events<br/>(onFlowCreate, onProcessComplete, etc.)"]
+
+    style A fill:#e1f5fe
+    style B fill:#fff3e0
+    style C fill:#fff3e0
+    style D fill:#fff3e0
+```
+
+---
+
+## 5. Build, install, and run
+
+The template includes working code out of the box, so you can build and run it right away to verify the project is set up correctly.
+
+Compile the plugin and install it locally:
+
+```bash
+make install
+```
+
+`make install` compiles the plugin code and copies it to your local Nextflow plugin directory (`$NXF_HOME/plugins/`), making it available to use.
+
+??? example "Build output"
+
+    The first time you run this, Gradle will download itself (this may take a minute):
+
+    ```console
+    Downloading https://services.gradle.org/distributions/gradle-8.14-bin.zip
+    ...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+
+    Welcome to Gradle 8.14!
+    ...
+
+    Deprecated Gradle features were used in this build...
+
+    BUILD SUCCESSFUL in 23s
+    5 actionable tasks: 5 executed
+    ```
+
+    **The warnings are expected.**
+
+    - **"Downloading gradle..."**: This only happens the first time. Subsequent builds are much faster.
+    - **"Deprecated Gradle features..."**: This warning comes from the plugin template, not your code. It is safe to ignore.
+    - **"BUILD SUCCESSFUL"**: This is what matters. Your plugin compiled without errors.
+
+Go back to the pipeline directory:
+
+```bash
+cd ..
+```
+
+Add the nf-greeting plugin to `nextflow.config`:
+
+=== "After"
+
+    ```groovy title="nextflow.config" hl_lines="4"
+    // Configuration for plugin development exercises
+    plugins {
+        id 'nf-schema@2.6.1'
+        id 'nf-greeting@0.1.0'
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config"
+    // Configuration for plugin development exercises
+    plugins {
+        id 'nf-schema@2.6.1'
+    }
+    ```
+
+!!! note "Version required for local plugins"
+
+    When using locally installed plugins, you must specify the version (e.g., `nf-greeting@0.1.0`).
+    Published plugins in the registry can use just the name.
+
+Run the pipeline:
+
+```bash
+nextflow run greet.nf -ansi-log false
+```
+
+The `-ansi-log false` flag disables the animated progress display so that all output, including observer messages, is printed in order.
+
+```console title="Output"
+Pipeline is starting! 🚀
+[bc/f10449] Submitted process > SAY_HELLO (1)
+[9a/f7bcb2] Submitted process > SAY_HELLO (2)
+[6c/aff748] Submitted process > SAY_HELLO (3)
+[de/8937ef] Submitted process > SAY_HELLO (4)
+[98/c9a7d6] Submitted process > SAY_HELLO (5)
+Output: Bonjour
+Output: Hello
+Output: Holà
+Output: Ciao
+Output: Hallo
+Pipeline complete! 👋
+```
+
+(Your output order and work directory hashes will differ.)
+
+The "Pipeline is starting!" and "Pipeline complete!" messages look familiar from the nf-hello plugin in Part 1, but this time they come from the `GreetingObserver` in your own plugin.
+The pipeline itself is unchanged; the observer runs automatically because it's registered in the factory.
+
+---
+
+## Takeaway
+
+You learned that:
+
+- The `nextflow plugin create` command generates a complete starter project
+- `build.gradle` configures plugin metadata, dependencies, and which classes provide features
+- The plugin has four main components: Plugin (entry point), Extension (functions), Factory (creates monitors), and Observer (responds to workflow events)
+- The development cycle is: edit code, `make install`, run the pipeline
+
+---
+
+## What's next?
+
+Now you'll implement custom functions in the Extension class and use them in the workflow.
+
+[Continue to Part 3 :material-arrow-right:](03_custom_functions.md){ .md-button .md-button--primary }

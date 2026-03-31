@@ -13,7 +13,7 @@ Kurs boyunca çalışmak için bu talimatları paralel olarak açık tutmanız g
 
 ### Ortam temelleri
 
-Bu eğitim ortamı, eğitim kursunda çalışmak için gerekli tüm yazılımı, kodu ve veriyi içerir, bu nedenle kendiniz herhangi bir şey yüklemenize gerek yoktur.
+Bu eğitim ortamı, eğitim kursunda çalışmak için gerekli tüm yazılımı, kodu ve veriyi içerir; bu nedenle kendiniz herhangi bir şey yüklemenize gerek yoktur.
 
 Codespace bir VSCode arayüzü ile kurulmuştur; bu arayüz bir dosya sistemi gezgini, bir kod düzenleyici ve bir terminal kabuğu içerir.
 Kurs boyunca verilen tüm talimatlar (örn. 'dosyayı açın', 'kodu düzenleyin' veya 'bu komutu çalıştırın') aksi belirtilmedikçe VSCode arayüzünün bu üç bölümüne atıfta bulunur.
