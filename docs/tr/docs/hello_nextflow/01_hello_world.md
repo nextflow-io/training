@@ -880,7 +880,7 @@ Tamam, bu uygundu, ancak birçok durumda, her çalıştırma için belirtmek zor
  * Pipeline parametreleri
  */
 params {
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
 }
 ```
 
@@ -890,7 +890,7 @@ Desteklenen türler arasında `String`, `Integer`, `Float`, `Boolean` ve `Path` 
 
 !!! info "Bilgi"
 
-    Eski iş akışlarında, tüm bu `params` bloğunun sadece `input = 'Holà mundo!'` olarak yazıldığını görebilirsiniz.
+    Eski iş akışlarında, tüm bu `params` bloğunun sadece `input = 'Hola mundo!'` olarak yazıldığını görebilirsiniz.
 
 İş akışınıza daha fazla parametre ekledikçe, varsayılan değer vermeniz gerekip gerekmediğine bakılmaksızın hepsini bu bloğa eklemelisiniz.
 Bu, yapılandırılabilir tüm parametreleri bir bakışta bulmayı kolaylaştıracaktır.
@@ -923,7 +923,7 @@ nextflow run hello-world.nf
     - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
     - cause: you tried to assign a value to the class 'java.lang.String'
     @ line 24, column 12.
-          input: String = 'Holà mundo!'
+          input: String = 'Hola mundo!'
                   ^
 
     1 error
@@ -947,7 +947,7 @@ nextflow run hello-world.nf
 ??? abstract "Dosya içeriği"
 
     ```console title="results/hello_world/output.txt"
-    Holà mundo!
+    Hola mundo!
     ```
 
 Nextflow, çıktıyı oluşturmak için selamlama parametresinin varsayılan değerini kullandı.

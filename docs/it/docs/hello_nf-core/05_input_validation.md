@@ -410,7 +410,7 @@ cat assets/greetings.csv
 ```csv title="assets/greetings.csv"
 Hello,en,87
 Bonjour,fr,96
-Holà,es,98
+Hola,es,98
 ```
 
 Questo è un semplice CSV con:
@@ -536,7 +536,7 @@ Per il nostro caso semplice, dobbiamo aggiungere una riga di intestazione al nos
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 === "Prima"
@@ -544,7 +544,7 @@ Per il nostro caso semplice, dobbiamo aggiungere una riga di intestazione al nos
     ```csv title="assets/greetings.csv" linenums="1"
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 Ora il file CSV ha una riga di intestazione che corrisponde ai nomi dei campi nel nostro schema.
@@ -711,7 +711,7 @@ Ora aprite il file e cambiate il nome della prima colonna, nella riga di intesta
     message,language,score
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 === "Prima"
@@ -720,7 +720,7 @@ Ora aprite il file e cambiate il nome della prima colonna, nella riga di intesta
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 Questo non corrisponde al nostro schema, quindi la validazione dovrebbe generare un errore.

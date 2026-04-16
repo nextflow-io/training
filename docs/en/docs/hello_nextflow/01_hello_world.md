@@ -878,7 +878,7 @@ Let's give the `input` parameter a default value by declaring it before the work
  * Pipeline parameters
  */
 params {
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
 }
 ```
 
@@ -888,7 +888,7 @@ Supported types include `String`, `Integer`, `Float`, `Boolean`, and `Path`.
 
 !!! info
 
-    In older workflows, you may see that whole `params` block written as just `input = 'Holà mundo!'`.
+    In older workflows, you may see that whole `params` block written as just `input = 'Hola mundo!'`.
 
 As you add more parameters to your pipeline, you should add them all to this block, whether or not you need to give them a default value.
 This will make it easy to find all configurable parameters at a glance.
@@ -921,7 +921,7 @@ nextflow run hello-world.nf
     - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
     - cause: you tried to assign a value to the class 'java.lang.String'
     @ line 24, column 12.
-          input: String = 'Holà mundo!'
+          input: String = 'Hola mundo!'
                   ^
 
     1 error
@@ -945,7 +945,7 @@ The output will be in the same place as previously, but the contents should be u
 ??? abstract "File contents"
 
     ```console title="results/hello_world/output.txt"
-    Holà mundo!
+    Hola mundo!
     ```
 
 Nextflow used the default value of the greeting parameter to create the output.

@@ -256,9 +256,9 @@ Wenn wir stattdessen zum Beispiel eine Zahl wollen, könnten wir float schreiben
 
 Diese Typsicherheit ist also eine sehr neue Funktion von Nextflow, aber wirklich mächtig, um deinen Code sicherer zu schreiben und auszuführen.
 
-Dann danach haben wir ein Gleichheitszeichen und dann den Standardwert hier. Nextflow wurde ursprünglich in Barcelona geschrieben, also scheint es angemessen, dass wir etwas Spanisches hier haben, _"Holà mundo!"_ als Standard.
+Dann danach haben wir ein Gleichheitszeichen und dann den Standardwert hier. Nextflow wurde ursprünglich in Barcelona geschrieben, also scheint es angemessen, dass wir etwas Spanisches hier haben, _"Hola mundo!"_ als Standard.
 
-Richtig, ich werde das Skript speichern, zurückgehen, das Skript wieder ohne _--input_ ausführen. Und diesmal sollte es laufen und es wird unsere neue Datei oben in _results_ erstellen. Und in dieser Datei steht jetzt _"Holà mundo!"_.
+Richtig, ich werde das Skript speichern, zurückgehen, das Skript wieder ohne _--input_ ausführen. Und diesmal sollte es laufen und es wird unsere neue Datei oben in _results_ erstellen. Und in dieser Datei steht jetzt _"Hola mundo!"_.
 
 Das ist aber nur ein Standard, also bedeutet es nicht, dass wir nicht immer noch das Gleiche wie vorher tun können. Wenn ich zurückgehe und mein altes Skript hier finde, _"Hej Världen"_, weil ich _--input_ auf der Kommandozeile mache, wird das diesen Standard überschreiben und das wieder in der output.txt-Datei verwenden.
 

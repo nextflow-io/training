@@ -302,7 +302,7 @@ Workflow'y zazwyczaj działają na partiach wejść, które mają być przetwarz
 Dogodnie, fabryka kanałów `channel.of()`, której używamy, chętnie przyjmuje więcej niż jedną wartość, więc nie musimy jej w ogóle modyfikować.
 Możemy po prostu załadować wiele wartości do kanału.
 
-Niech to będą `'Hello'`, `'Bonjour'` i `'Holà'`.
+Niech to będą `'Hello'`, `'Bonjour'` i `'Hola'`.
 
 #### 2.1.1. Dodaj więcej pozdrowień
 
@@ -312,7 +312,7 @@ Przed blokiem workflow wprowadź następującą zmianę kodu:
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
     // utwórz kanał dla danych wejściowych
-    greeting_ch = channel.of('Hello','Bonjour','Holà')
+    greeting_ch = channel.of('Hello','Bonjour','Hola')
                          .view()
     ```
 
@@ -345,7 +345,7 @@ nextflow run hello-channels.nf
     [f4/c9962c] process > sayHello (1) [100%] 3 of 3 ✔
     Hello
     Bonjour
-    Holà
+    Hola
     ```
 
 Z pewnością wygląda na to, że uruchomił się bez problemów.
@@ -367,7 +367,7 @@ Jednak w katalogu wyników nadal jest tylko jedno wyjście:
 ??? abstract "Zawartość pliku"
 
     ```console title="results/hello_channels/output.txt"
-    Holà
+    Hola
     ```
 
 Powinieneś zobaczyć tam jedno z trzech pozdrowień, choć to, które otrzymałeś, może różnić się od pokazanego tutaj.
@@ -424,7 +424,7 @@ nextflow run hello-channels.nf -ansi-log false
     Launching `hello-channels.nf` [desperate_monod] DSL2 - revision: 59a9a5888a
     Hello
     Bonjour
-    Holà
+    Hola
     [23/871c7e] Submitted process > sayHello (2)
     [7f/21e2c2] Submitted process > sayHello (1)
     [f4/ea10a6] Submitted process > sayHello (3)
@@ -493,7 +493,7 @@ W każdym razie, teraz gdy mamy podkatalogi każdego wywołania procesu, możemy
     ```
 
     ```txt title="work/f4/ea10a680d5687596d3eaa3fcf69272/output.txt"
-    Holà
+    Hola
     ```
 
 To pokazuje, że wszystkie trzy procesy uruchomiły się pomyślnie (juhu).
@@ -589,7 +589,7 @@ nextflow run hello-channels.nf
     [e8/33ee64] sayHello (2) [100%] 3 of 3 ✔
     Hello
     Bonjour
-    Holà
+    Hola
     ```
 
 Wracając do widoku podsumowania, wyjście jest ponownie podsumowane w jednej linii.
@@ -601,7 +601,7 @@ Spójrz na katalog `results`, aby zobaczyć, czy wszystkie wyjściowe pozdrowien
     results/hello_channels/
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     └── output.txt
     ```
 
@@ -617,8 +617,8 @@ Tak! I każdy ma oczekiwaną zawartość.
     Hello
     ```
 
-    ```console title="Holà-output.txt"
-    Holà
+    ```console title="Hola-output.txt"
+    Hola
     ```
 
 Sukces! Teraz możemy dodawać tyle pozdrowień, ile chcemy, bez martwienia się o nadpisywanie plików wyjściowych.
@@ -647,7 +647,7 @@ Co jeśli chcielibyśmy dostarczyć te wiele wejść w inny sposób?
 
 Na przykład wyobraź sobie, że skonfigurowaliśmy zmienną wejściową zawierającą tablicę elementów w ten sposób:
 
-`greetings_array = ['Hello','Bonjour','Holà']`
+`greetings_array = ['Hello','Bonjour','Hola']`
 
 Czy możemy załadować to do naszego kanału wyjściowego i oczekiwać, że zadziała?
 
@@ -673,9 +673,9 @@ Weźmy zmienną `greetings_array`, którą właśnie sobie wyobraziłeś, i uczy
 
         main:
         // zadeklaruj tablicę pozdrowień wejściowych
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // utwórz kanał dla danych wejściowych
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // wyemituj pozdrowienie
         sayHello(greeting_ch)
@@ -692,7 +692,7 @@ Weźmy zmienną `greetings_array`, którą właśnie sobie wyobraziłeś, i uczy
 
         main:
         // utwórz kanał dla danych wejściowych
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // wyemituj pozdrowienie
         sayHello(greeting_ch)
@@ -706,7 +706,7 @@ To jeszcze nie jest funkcjonalne, dodaliśmy tylko deklarację tablicy.
 
 #### 3.1.2. Ustaw tablicę pozdrowień jako wejście do fabryki kanałów
 
-Teraz zamierzamy zastąpić wartości `'Hello','Bonjour','Holà'` aktualnie zakodowane na sztywno w fabryce kanałów tablicą `greetings_array`, którą właśnie utworzyliśmy.
+Teraz zamierzamy zastąpić wartości `'Hello','Bonjour','Hola'` aktualnie zakodowane na sztywno w fabryce kanałów tablicą `greetings_array`, którą właśnie utworzyliśmy.
 
 W bloku workflow wprowadź następującą zmianę:
 
@@ -717,7 +717,7 @@ W bloku workflow wprowadź następującą zmianę:
 
         main:
         // zadeklaruj tablicę pozdrowień wejściowych
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // utwórz kanał dla danych wejściowych
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -736,9 +736,9 @@ W bloku workflow wprowadź następującą zmianę:
 
         main:
         // zadeklaruj tablicę pozdrowień wejściowych
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // utwórz kanał dla danych wejściowych
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // wyemituj pozdrowienie
         sayHello(greeting_ch)
@@ -767,16 +767,16 @@ nextflow run hello-channels.nf
 
     executor >  local (1)
     [a8/1f6ead] sayHello (1) | 0 of 1
-    [Hello, Bonjour, Holà]
+    [Hello, Bonjour, Hola]
     ERROR ~ Error executing process > 'sayHello (1)'
 
     Caused by:
-      Missing output file(s) `[Hello, Bonjour, Holà]-output.txt` expected by process `sayHello (1)`
+      Missing output file(s) `[Hello, Bonjour, Hola]-output.txt` expected by process `sayHello (1)`
 
 
     Command executed:
 
-      echo '[Hello, Bonjour, Holà]' > '[Hello, Bonjour, Holà]-output.txt'
+      echo '[Hello, Bonjour, Hola]' > '[Hello, Bonjour, Hola]-output.txt'
 
     Command exit status:
       0
@@ -796,7 +796,7 @@ O nie! Jest błąd!
 
 Spójrz na wyjście `view()` i komunikaty o błędach.
 
-Wygląda na to, że Nextflow próbował uruchomić pojedyncze wywołanie procesu, używając `[Hello, Bonjour, Holà]` jako wartości ciągu, zamiast używać trzech ciągów w tablicy jako osobnych wartości.
+Wygląda na to, że Nextflow próbował uruchomić pojedyncze wywołanie procesu, używając `[Hello, Bonjour, Hola]` jako wartości ciągu, zamiast używać trzech ciągów w tablicy jako osobnych wartości.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-fail.svg"
@@ -826,7 +826,7 @@ W bloku workflow wprowadź następującą zmianę kodu:
 
         main:
         // zadeklaruj tablicę pozdrowień wejściowych
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // utwórz kanał dla danych wejściowych
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -846,7 +846,7 @@ W bloku workflow wprowadź następującą zmianę kodu:
 
         main:
         // zadeklaruj tablicę pozdrowień wejściowych
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // utwórz kanał dla danych wejściowych
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -880,7 +880,7 @@ W bloku workflow wprowadź następującą zmianę kodu:
 
         main:
         // zadeklaruj tablicę pozdrowień wejściowych
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // utwórz kanał dla danych wejściowych
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
@@ -901,7 +901,7 @@ W bloku workflow wprowadź następującą zmianę kodu:
 
         main:
         // zadeklaruj tablicę pozdrowień wejściowych
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // utwórz kanał dla danych wejściowych
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -946,10 +946,10 @@ nextflow run hello-channels.nf
 
     executor >  local (3)
     [b1/6a1e15] sayHello (2) [100%] 3 of 3 ✔
-    Before flatten: [Hello, Bonjour, Holà]
+    Before flatten: [Hello, Bonjour, Hola]
     After flatten: Hello
     After flatten: Bonjour
-    After flatten: Holà
+    After flatten: Hola
     ```
 
 Tym razem działa I daje nam dodatkowy wgląd w to, jak zawartość kanału wygląda przed i po uruchomieniu operatora `flatten()`.
@@ -985,7 +985,7 @@ Przygotowaliśmy plik CSV o nazwie `greetings.csv`, który zawiera kilka pozdrow
 ```csv title="data/greetings.csv" linenums="1"
 Hello,English,123
 Bonjour,French,456
-Holà,Spanish,789
+Hola,Spanish,789
 ```
 
 Naszym następnym zadaniem jest dostosowanie workflow'u do odczytania wartości z tego pliku.
@@ -1027,7 +1027,7 @@ Wprowadź następującą edycję deklaracji parametru:
     /*
      * Pipeline parameters
      */
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
     ```
 
 Edycja ta zakłada, że plik jest współlokalizowany z kodem workflow'u.
@@ -1066,7 +1066,7 @@ W bloku workflow wprowadź następującą zmianę kodu:
 
         main:
         // zadeklaruj tablicę pozdrowień wejściowych
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // utwórz kanał dla danych wejściowych
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
@@ -1206,7 +1206,7 @@ nextflow run hello-channels.nf
     Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
     After splitCsv: [Hello, English, 123]
     After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Holà, Spanish, 789]
+    After splitCsv: [Hola, Spanish, 789]
     ERROR ~ Error executing process > 'sayHello (2)'
 
     Caused by:
@@ -1326,10 +1326,10 @@ nextflow run hello-channels.nf
     Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
     After splitCsv: [Hello, English, 123]
     After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Holà, Spanish, 789]
+    After splitCsv: [Hola, Spanish, 789]
     After map: Hello
     After map: Bonjour
-    After map: Holà
+    After map: Hola
     ```
 
 Tym razem powinno się uruchomić bez błędu.

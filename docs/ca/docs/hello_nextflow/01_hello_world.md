@@ -880,7 +880,7 @@ Donem al paràmetre `input` un valor per defecte declarant-lo abans de la defini
  * Paràmetres del pipeline
  */
 params {
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
 }
 ```
 
@@ -890,7 +890,7 @@ Els tipus suportats inclouen `String`, `Integer`, `Float`, `Boolean` i `Path`.
 
 !!! info "Info"
 
-    En workflows més antics, podeu veure que tot aquest bloc `params` s'escriu simplement com `input = 'Holà mundo!'`.
+    En workflows més antics, podeu veure que tot aquest bloc `params` s'escriu simplement com `input = 'Hola mundo!'`.
 
 A mesura que afegiu més paràmetres al vostre pipeline, hauríeu d'afegir-los tots a aquest bloc, tant si necessiteu donar-los un valor per defecte com si no.
 Això facilitarà trobar tots els paràmetres configurables d'una ullada.
@@ -923,7 +923,7 @@ nextflow run hello-world.nf
     - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
     - cause: you tried to assign a value to the class 'java.lang.String'
     @ line 24, column 12.
-          input: String = 'Holà mundo!'
+          input: String = 'Hola mundo!'
                   ^
 
     1 error
@@ -947,7 +947,7 @@ La sortida estarà al mateix lloc que anteriorment, però el contingut hauria d'
 ??? abstract "Contingut del fitxer"
 
     ```console title="results/hello_world/output.txt"
-    Holà mundo!
+    Hola mundo!
     ```
 
 Nextflow va utilitzar el valor per defecte del paràmetre de salutació per crear la sortida.

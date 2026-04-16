@@ -99,10 +99,10 @@ Com abans, trobareu els fitxers de sortida al directori especificat al bloc `out
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
+    │   ├── Hola-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     └── batch-report.txt
     ```
 
@@ -524,10 +524,10 @@ Això publica les sortides a `custom-outdir-cli/` en lloc de `results/`:
             ├── Bonjour-output.txt
             ├── COLLECTED-batch-output.txt
             ├── Hello-output.txt
-            ├── Holà-output.txt
+            ├── Hola-output.txt
             ├── UPPER-Bonjour-output.txt
             ├── UPPER-Hello-output.txt
-            └── UPPER-Holà-output.txt
+            └── UPPER-Hola-output.txt
     ```
 
 Tingueu en compte que encara tenim el subdirectori `hello_config` de les declaracions `path` al bloc output.
@@ -612,10 +612,10 @@ Ara les sortides es publiquen directament sota `custom-outdir-cli-2/`, sense el 
         ├── Bonjour-output.txt
         ├── COLLECTED-batch-output.txt
         ├── Hello-output.txt
-        ├── Holà-output.txt
+        ├── Hola-output.txt
         ├── UPPER-Bonjour-output.txt
         ├── UPPER-Hello-output.txt
-        └── UPPER-Holà-output.txt
+        └── UPPER-Hola-output.txt
     ```
 
 !!! tip "Consell"
@@ -860,11 +860,11 @@ Això publica les sortides a `custom-outdir-config-2/rep2/`, amb el camí base e
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Holà-output.txt
+            │   └── UPPER-Hola-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Holà-output.txt
+                └── Hola-output.txt
     ```
 
 ### 2.3. Establir el mode de publicació a nivell de workflow
@@ -990,11 +990,11 @@ Això publica les sortides a `config-output-mode/`, i encara són totes còpies 
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Holà-output.txt
+            │   └── UPPER-Hola-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Holà-output.txt
+                └── Hola-output.txt
     ```
 
 La raó principal per la qual encara podríeu voler utilitzar la manera per sortida d'establir el mode és si voleu barrejar i combinar dins del mateix workflow, _és a dir_ tenir algunes sortides copiades i algunes enllaçades simbòlicament.

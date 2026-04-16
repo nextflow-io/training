@@ -136,7 +136,7 @@ Si vous êtes intéressé·e par comment faire ceci avec les meilleures pratique
 
 D'accord. Ensuite nous allons explorer un peu comment les canaux sont structurés et comment ils diffèrent d'autres types de structures de données dans le langage de codage. Et je vais réfléchir un peu à comment je pourrais potentiellement utiliser un tableau, qui pourrait être un concept familier si vous venez d'autres langages.
 
-Puis-je utiliser un tableau dans un canal ? Essayons. Je vais créer un tableau, et j'ai copié ceci de la documentation, _"greetings_array"_ et _"Hello", "Bonjour"_ et _"Holà"_. Et ensuite je vais mettre ça ici au lieu de mes chaînes codées en dur. Donc je vais dire "channel.of" _"greetings_array"_, passant ce tableau dans un canal. Essayons.
+Puis-je utiliser un tableau dans un canal ? Essayons. Je vais créer un tableau, et j'ai copié ceci de la documentation, _"greetings_array"_ et _"Hello", "Bonjour"_ et _"Hola"_. Et ensuite je vais mettre ça ici au lieu de mes chaînes codées en dur. Donc je vais dire "channel.of" _"greetings_array"_, passant ce tableau dans un canal. Essayons.
 
 Ouvrir le terminal, et exécuter le pipeline.
 
@@ -212,7 +212,7 @@ D'accord, jetons un œil à ce canal et voyons à quoi il ressemble. Nous pouvon
 
 Si je l'exécute à nouveau, il échouera toujours, mais il nous montrera ce qui est à l'intérieur de ce canal. Ce n'est pas particulièrement excitant. C'est cette variable _path_. Donc vous pouvez voir que c'est juste une chaîne ici parce qu'elle est affichée dans un terminal, mais c'est un objet _path_, qui contient les informations et les métadonnées sur ce fichier.
 
-Nous ne voulons pas passer les métadonnées du fichier à l'entrée. Nous voulons passer le contenu de ce fichier. Si nous regardons le fichier _greetings.csv_, vous pouvez voir ici qu'il a ces différentes variables ici. _Hello, Bonjour, Holà_ à nouveau. Et ce sont les choses que nous voulons vraiment passer à notre processus, pas juste le fichier lui-même comme un seul objet.
+Nous ne voulons pas passer les métadonnées du fichier à l'entrée. Nous voulons passer le contenu de ce fichier. Si nous regardons le fichier _greetings.csv_, vous pouvez voir ici qu'il a ces différentes variables ici. _Hello, Bonjour, Hola_ à nouveau. Et ce sont les choses que nous voulons vraiment passer à notre processus, pas juste le fichier lui-même comme un seul objet.
 
 Donc nous devons analyser ce fichier CSV. Nous devons le déballer, accéder au contenu du fichier CSV, et ensuite passer le contenu dans le canal au processus.
 
@@ -246,7 +246,7 @@ Les tableaux dans Nextflow sont basés sur zéro, donc nous allons dire juste le
 
 Et maintenant, nous pouvons exécuter le pipeline à nouveau et voir s'il fait ce que nous attendons.
 
-Effectivement, après _splitCsv_ nous avons nos tableaux, et ensuite après le _map_, nous avons nos belles chaînes propres, juste _"Hello", "Bonjour"_ et _"Holà"_. Et le pipeline fait maintenant ce que nous voulons qu'il fasse. Fantastique.
+Effectivement, après _splitCsv_ nous avons nos tableaux, et ensuite après le _map_, nous avons nos belles chaînes propres, juste _"Hello", "Bonjour"_ et _"Hola"_. Et le pipeline fait maintenant ce que nous voulons qu'il fasse. Fantastique.
 
 Donc nous pouvons nous débarrasser de toutes ces commandes view maintenant. Nous n'en avons plus besoin.
 

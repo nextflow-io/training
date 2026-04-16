@@ -136,7 +136,7 @@ Jeśli jesteś zainteresowany, jak to zrobić zgodnie z najlepszymi praktykami, 
 
 Dobrze. Następnie zbadamy trochę, jak kanały są zbudowane i jak różnią się od innych rodzajów struktur danych w języku kodowania. I pomyślę trochę o tym, jak mógłbym potencjalnie użyć tablicy, która może być znajomą koncepcją, jeśli przyszedłeś z innych języków.
 
-Czy mogę użyć tablicy w kanale? Spróbujmy. Utworzę tablicę, a skopiowałem to z dokumentacji, _"greetings_array"_ i _"Hello", "Bonjour"_ i _"Holà"_. A potem wstawię to tutaj zamiast moich zakodowanych na stałe ciągów znaków. Więc powiem `channel.of` _"greetings_array"_, przekazując tę tablicę do kanału. Spróbujmy.
+Czy mogę użyć tablicy w kanale? Spróbujmy. Utworzę tablicę, a skopiowałem to z dokumentacji, _"greetings_array"_ i _"Hello", "Bonjour"_ i _"Hola"_. A potem wstawię to tutaj zamiast moich zakodowanych na stałe ciągów znaków. Więc powiem `channel.of` _"greetings_array"_, przekazując tę tablicę do kanału. Spróbujmy.
 
 Wywołuję terminal i uruchamiam pipeline.
 
@@ -212,7 +212,7 @@ Dobrze, spójrzmy na ten kanał i zobaczmy, jak wygląda. Możemy zrobić _".vie
 
 Jeśli uruchomię to ponownie, nadal się nie powiedzie, ale pokaże nam, co jest w tym kanale. To nie jest szczególnie ekscytujące. To ta zmienna _path_. Więc możesz zobaczyć, że to po prostu ciąg znaków tutaj, ponieważ jest drukowany do terminala, ale to jest obiekt _path_, który zawiera informacje i metadane o tym pliku.
 
-Nie chcemy przekazywać metadanych pliku do wejścia. Chcemy przekazać zawartość tego pliku. Jeśli spojrzymy na plik _greetings.csv_, możesz zobaczyć tutaj, że ma te różne zmienne tutaj. _Hello, Bonjour, Holà_ znowu. I to są rzeczy, które naprawdę chcemy przekazywać do naszego procesu, a nie tylko sam plik jako pojedynczy obiekt.
+Nie chcemy przekazywać metadanych pliku do wejścia. Chcemy przekazać zawartość tego pliku. Jeśli spojrzymy na plik _greetings.csv_, możesz zobaczyć tutaj, że ma te różne zmienne tutaj. _Hello, Bonjour, Hola_ znowu. I to są rzeczy, które naprawdę chcemy przekazywać do naszego procesu, a nie tylko sam plik jako pojedynczy obiekt.
 
 Więc musimy sparsować ten plik CSV. Musimy go rozpakować, dostać się do zawartości pliku CSV, a potem przekazać zawartość w kanale do procesu.
 
@@ -246,7 +246,7 @@ Tablice w Nextflow są indeksowane od zera, więc powiemy tylko pierwszy element
 
 I teraz możemy uruchomić pipeline ponownie i zobaczyć, czy robi to, czego oczekujemy.
 
-I rzeczywiście, po _splitCsv_ mamy nasze tablice, a potem po _map_ mamy nasze ładne czyste ciągi znaków, tylko _"Hello", "Bonjour"_ i _"Holà"_. I pipeline teraz robi to, czego chcemy. Fantastycznie.
+I rzeczywiście, po _splitCsv_ mamy nasze tablice, a potem po _map_ mamy nasze ładne czyste ciągi znaków, tylko _"Hello", "Bonjour"_ i _"Hola"_. I pipeline teraz robi to, czego chcemy. Fantastycznie.
 
 Więc możemy teraz pozbyć się wszystkich tych poleceń `view`. Nie potrzebujemy ich już.
 

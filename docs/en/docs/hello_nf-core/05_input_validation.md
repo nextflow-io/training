@@ -408,7 +408,7 @@ cat assets/greetings.csv
 ```csv title="assets/greetings.csv"
 Hello,en,87
 Bonjour,fr,96
-Holà,es,98
+Hola,es,98
 ```
 
 This is a simple CSV with:
@@ -534,7 +534,7 @@ For our simple case, we need to add a header line to our greetings file:
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 === "Before"
@@ -542,7 +542,7 @@ For our simple case, we need to add a header line to our greetings file:
     ```csv title="assets/greetings.csv" linenums="1"
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 Now the CSV file has a header line that matches the field names in our schema.
@@ -709,7 +709,7 @@ Now open the file and change the name of the first column, in the header line, f
     message,language,score
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 === "Before"
@@ -718,7 +718,7 @@ Now open the file and change the name of the first column, in the header line, f
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 This doesn't match our schema, so the validation should throw an error.

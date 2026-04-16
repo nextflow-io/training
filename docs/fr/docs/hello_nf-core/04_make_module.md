@@ -893,10 +893,10 @@ Vous devriez voir le fichier de sortie cowpy avec la même dénomination qu'avan
     ├── Bonjour-output.txt
     ├── cowpy-test.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 N'hésitez pas à modifier la configuration `ext.prefix` dans `conf/modules.config` pour vous assurer que vous pouvez changer le modèle de dénomination sans avoir à apporter de modifications au code du module ou du workflow.

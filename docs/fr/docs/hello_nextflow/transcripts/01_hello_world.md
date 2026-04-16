@@ -256,9 +256,9 @@ Si nous voulons un nombre à la place, par exemple, nous pourrions écrire float
 
 Donc cette sécurité de type est une fonctionnalité très nouvelle de Nextflow, mais vraiment puissante pour rendre votre code plus sûr à écrire et à exécuter.
 
-Ensuite après cela nous avons un symbole égal puis la valeur par défaut ici. Nextflow a été écrit à Barcelone à l'origine, donc il semble approprié que nous ayons un peu d'espagnol ici, _« Holà mundo ! »_ comme valeur par défaut.
+Ensuite après cela nous avons un symbole égal puis la valeur par défaut ici. Nextflow a été écrit à Barcelone à l'origine, donc il semble approprié que nous ayons un peu d'espagnol ici, _« Hola mundo ! »_ comme valeur par défaut.
 
-Bon je vais enregistrer ce script, retourner, exécuter le script à nouveau sans _--input_. Et cette fois il devrait s'exécuter et il créera notre nouveau fichier dans _results_. Et dans ce fichier maintenant il dit _« Holà mundo ! »_.
+Bon je vais enregistrer ce script, retourner, exécuter le script à nouveau sans _--input_. Et cette fois il devrait s'exécuter et il créera notre nouveau fichier dans _results_. Et dans ce fichier maintenant il dit _« Hola mundo ! »_.
 
 Ce n'est qu'une valeur par défaut cependant, donc cela ne signifie pas que nous ne pouvons toujours pas faire la même chose qu'avant. Si je retourne et trouve mon ancien script ici, _« Hej Världen »_, parce que je fais _--input_ sur la ligne de commande, cela écrasera cette valeur par défaut et utilisera cela à nouveau dans le fichier output.txt.
 

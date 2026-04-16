@@ -308,7 +308,7 @@ Pipeline is starting! 🚀
 [98/c9a7d6] Submitted process > SAY_HELLO (5)
 Output: Bonjour
 Output: Hello
-Output: Holà
+Output: Hola
 Output: Ciao
 Output: Hallo
 Pipeline complete! 👋

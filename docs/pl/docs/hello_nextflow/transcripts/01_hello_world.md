@@ -256,9 +256,9 @@ Jeśli chcemy liczby zamiast tego, na przykład, moglibyśmy napisać float, i t
 
 Więc to bezpieczeństwo typów jest bardzo nową funkcją Nextflow'a, ale naprawdę potężną, żeby uczynić Twój kod bezpieczniejszym do pisania i uruchamiania.
 
-Następnie po tym mamy znak równości, a następnie wartość domyślną tutaj. Nextflow został napisany w Barcelonie pierwotnie, więc wydaje się odpowiednie, że mamy trochę hiszpańskiego tutaj, _"Holà mundo!"_ jako wartość domyślną.
+Następnie po tym mamy znak równości, a następnie wartość domyślną tutaj. Nextflow został napisany w Barcelonie pierwotnie, więc wydaje się odpowiednie, że mamy trochę hiszpańskiego tutaj, _"Hola mundo!"_ jako wartość domyślną.
 
-Dobra, zapiszę ten skrypt, wrócę, uruchomię skrypt ponownie bez _--input_. I tym razem powinien się uruchomić i utworzy nasz nowy plik w _results_. I w tym pliku teraz mówi _"Holà mundo!"_.
+Dobra, zapiszę ten skrypt, wrócę, uruchomię skrypt ponownie bez _--input_. I tym razem powinien się uruchomić i utworzy nasz nowy plik w _results_. I w tym pliku teraz mówi _"Hola mundo!"_.
 
 To jest tylko wartość domyślna, więc nie oznacza to, że nie możemy nadal robić tego samego co wcześniej. Jeśli wrócę i znajdę mój stary skrypt tutaj, _"Hej Världen"_, ponieważ robię _--input_ w wierszu poleceń, to nadpisze tę wartość domyślną i użyje tego ponownie w pliku output.txt.
 

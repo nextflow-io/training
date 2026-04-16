@@ -88,11 +88,11 @@ Daha önce olduğu gibi, çıktı dosyalarını `output` bloğunda belirtilen di
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Bu sizin için çalıştıysa, iş akışı kodunuzu modülerleştirmeyi öğrenmeye hazırsınız.

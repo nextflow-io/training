@@ -880,7 +880,7 @@ Note करो कि new execution ने `results` directory में publish
  * Pipeline parameters
  */
 params {
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
 }
 ```
 
@@ -890,7 +890,7 @@ Supported types में `String`, `Integer`, `Float`, `Boolean`, और `Path`
 
 !!! info "जानकारी"
 
-    पुराने workflows में, तुम देख सकते हो कि पूरा `params` block सिर्फ `input = 'Holà mundo!'` के रूप में लिखा गया है।
+    पुराने workflows में, तुम देख सकते हो कि पूरा `params` block सिर्फ `input = 'Hola mundo!'` के रूप में लिखा गया है।
 
 जैसे-जैसे तुम अपने pipeline में more parameters add करते हो, तुम्हें उन सभी को इस block में add करना चाहिए, चाहे तुम्हें उन्हें default value देने की need हो या नहीं।
 यह एक glance में सभी configurable parameters खोजना आसान बना देगा।
@@ -923,7 +923,7 @@ nextflow run hello-world.nf
     - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
     - cause: you tried to assign a value to the class 'java.lang.String'
     @ line 24, column 12.
-          input: String = 'Holà mundo!'
+          input: String = 'Hola mundo!'
                   ^
 
     1 error
@@ -947,7 +947,7 @@ Output पहले जैसी same place में होगा, लेकि
 ??? abstract "फ़ाइल सामग्री"
 
     ```console title="results/hello_world/output.txt"
-    Holà mundo!
+    Hola mundo!
     ```
 
 Nextflow ने output बनाने के लिए greeting parameter की default value use की।

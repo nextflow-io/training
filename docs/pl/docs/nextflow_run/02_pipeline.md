@@ -20,7 +20,7 @@ Zauważ, że liczby nie mają znaczenia, są tam tylko w celach ilustracyjnych.
 ```csv title="data/greetings.csv" linenums="1"
 Hello,English,123
 Bonjour,French,456
-Holà,Spanish,789
+Hola,Spanish,789
 ```
 
 Napisaliśmy również ulepszoną wersję oryginalnego workflow'a, teraz o nazwie `2a-inputs.nf`, która odczyta plik CSV, wyodrębni powitania i zapisze każde z nich do oddzielnego pliku.
@@ -66,7 +66,7 @@ Przyjrzyjmy się katalogowi 'results', aby zobaczyć, czy nasz workflow nadal za
     └── 2a-inputs
         ├── Bonjour-output.txt
         ├── Hello-output.txt
-        └── Holà-output.txt
+        └── Hola-output.txt
     ```
 
 Tak! Widzimy nowy katalog o nazwie `2a-inputs` z trzema plikami wyjściowymi o różnych nazwach, co jest wygodne.
@@ -83,8 +83,8 @@ Możesz otworzyć każdy z nich, aby upewnić się, że zawierają odpowiedni ci
     Bonjour
     ```
 
-    ```console title="results/2a-inputs/Holà-output.txt"
-    Holà
+    ```console title="results/2a-inputs/Hola-output.txt"
+    Hola
     ```
 
 To potwierdza, że każde powitanie w pliku wejściowym zostało odpowiednio przetworzone.
@@ -156,7 +156,7 @@ Jeśli zajrzymy do każdego z katalogów zadań wymienionych tam, możemy zweryf
 
     ```console title="b5/0df1d6"
     work/b5/0df1d642353269909c2ce23fc2a8fa/
-    └── Holà-output.txt
+    └── Hola-output.txt
     ```
 
 To potwierdza, że każde wywołanie procesu jest wykonywane w izolacji od wszystkich innych.
@@ -244,7 +244,7 @@ Rozłóżmy to na czynniki.
 ```
 
 Ten kod tworzy kanał o nazwie `greeting_ch`, który odczytuje plik CSV, parsuje go i wyodrębnia pierwszą kolumnę z każdego wiersza.
-Wynikiem jest kanał zawierający `Hello`, `Bonjour` i `Holà`.
+Wynikiem jest kanał zawierający `Hello`, `Bonjour` i `Hola`.
 
 ??? tip "Jak to działa?"
 
@@ -265,16 +265,16 @@ Wynikiem jest kanał zawierający `Hello`, `Bonjour` i `Holà`.
     ```csv title="greetings.csv" linenums="1"
     Hello,English,123
     Bonjour,French,456
-    Holà,Spanish,789
+    Hola,Spanish,789
     ```
 
     Przekształciliśmy to w tablicę, która wygląda tak:
 
     ```txt title="Zawartość tablicy"
-    [[Hello,English,123],[Bonjour,French,456],[Holà,Spanish,789]]
+    [[Hello,English,123],[Bonjour,French,456],[Hola,Spanish,789]]
     ```
 
-    A następnie wzięliśmy pierwszy element z każdego z trzech wierszy i załadowaliśmy je do kanału Nextflow, który teraz zawiera: `Hello`, `Bonjour` i `Holà`.
+    A następnie wzięliśmy pierwszy element z każdego z trzech wierszy i załadowaliśmy je do kanału Nextflow, który teraz zawiera: `Hello`, `Bonjour` i `Hola`.
 
     Jeśli chcesz zrozumieć kanały i operatory dogłębnie, w tym jak je samodzielnie pisać, zobacz [Hello Nextflow Część 2: Hello Channels](../hello_nextflow/02_hello_channels.md#4-read-input-values-from-a-csv-file).
 
@@ -386,17 +386,17 @@ Zweryfikujmy, że to faktycznie się stało, patrząc na katalog `results`.
     ├── 2a-inputs
     |   ├── Bonjour-output.txt
     |   ├── Hello-output.txt
-    |   └── Holà-output.txt
+    |   └── Hola-output.txt
     └── 2b-multistep
         ├── COLLECTED-batch-output.txt
         ├── batch-report.txt
         └── intermediates
             ├── Bonjour-output.txt
             ├── Hello-output.txt
-            ├── Holà-output.txt
+            ├── Hola-output.txt
             ├── UPPER-Bonjour-output.txt
             ├── UPPER-Hello-output.txt
-            └── UPPER-Holà-output.txt
+            └── UPPER-Hola-output.txt
 
     ```
 
@@ -690,7 +690,7 @@ Powinieneś zobaczyć nowe końcowe wyjścia nazwane Twoją własną nazwą batc
     ├── 2a-inputs
     |   ├── Bonjour-output.txt
     |   ├── Hello-output.txt
-    |   └── Holà-output.txt
+    |   └── Hola-output.txt
     └── 2b-multistep
         ├── COLLECTED-batch-output.txt
         ├── COLLECTED-test-output.txt
@@ -699,10 +699,10 @@ Powinieneś zobaczyć nowe końcowe wyjścia nazwane Twoją własną nazwą batc
         └── intermediates
             ├── Bonjour-output.txt
             ├── Hello-output.txt
-            ├── Holà-output.txt
+            ├── Hola-output.txt
             ├── UPPER-Bonjour-output.txt
             ├── UPPER-Hello-output.txt
-            └── UPPER-Holà-output.txt
+            └── UPPER-Hola-output.txt
     ```
 
 To jest aspekt konfiguracji danych wejściowych, który omówimy bardziej szczegółowo w Części 3, ale na razie ważne jest, aby wiedzieć, że parametry wejściowe mogą mieć wartości domyślne.

@@ -893,10 +893,10 @@ results directory में आउटपुट पर नज़र डाले�
     ├── Bonjour-output.txt
     ├── cowpy-test.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 `conf/modules.config` में `ext.prefix` configuration को बदलकर संतुष्ट होने के लिए स्वतंत्र महसूस करें कि आप module या workflow code में कोई बदलाव किए बिना naming pattern बदल सकते हैं।

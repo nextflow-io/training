@@ -880,7 +880,7 @@ Démosle al parámetro `input` un valor predeterminado declarándolo antes de la
  * Parámetros del pipeline
  */
 params {
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
 }
 ```
 
@@ -890,7 +890,7 @@ Los tipos soportados incluyen `String`, `Integer`, `Float`, `Boolean` y `Path`.
 
 !!! info "Info"
 
-    En workflows más antiguos, puede ver que todo ese bloque `params` está escrito como solo `input = 'Holà mundo!'`.
+    En workflows más antiguos, puede ver que todo ese bloque `params` está escrito como solo `input = 'Hola mundo!'`.
 
 A medida que agregue más parámetros a su pipeline, debe agregarlos todos a este bloque, ya sea que necesite darles un valor predeterminado o no.
 Esto facilitará encontrar todos los parámetros configurables de un vistazo.
@@ -923,7 +923,7 @@ nextflow run hello-world.nf
     - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
     - cause: you tried to assign a value to the class 'java.lang.String'
     @ line 24, column 12.
-          input: String = 'Holà mundo!'
+          input: String = 'Hola mundo!'
                   ^
 
     1 error
@@ -947,7 +947,7 @@ La salida estará en el mismo lugar que anteriormente, pero el contenido deberí
 ??? abstract "Contenido del archivo"
 
     ```console title="results/hello_world/output.txt"
-    Holà mundo!
+    Hola mundo!
     ```
 
 Nextflow usó el valor predeterminado del parámetro greeting para crear la salida.

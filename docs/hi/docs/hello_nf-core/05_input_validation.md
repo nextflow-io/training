@@ -410,7 +410,7 @@ cat assets/greetings.csv
 ```csv title="assets/greetings.csv"
 Hello,en,87
 Bonjour,fr,96
-Holà,es,98
+Hola,es,98
 ```
 
 यह एक सरल CSV है जिसमें:
@@ -536,7 +536,7 @@ nf-core pipeline टेम्पलेट में एक डिफ़ॉल्
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 === "पहले"
@@ -544,7 +544,7 @@ nf-core pipeline टेम्पलेट में एक डिफ़ॉल्
     ```csv title="assets/greetings.csv" linenums="1"
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 अब CSV फ़ाइल में एक हेडर लाइन है जो हमारी स्कीमा में फ़ील्ड नामों से मेल खाती है।
@@ -711,7 +711,7 @@ cp assets/greetings.csv assets/invalid_greetings.csv
     message,language,score
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 === "पहले"
@@ -720,7 +720,7 @@ cp assets/greetings.csv assets/invalid_greetings.csv
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 यह हमारी स्कीमा से मेल नहीं खाता, इसलिए सत्यापन को एक त्रुटि फेंकनी चाहिए।

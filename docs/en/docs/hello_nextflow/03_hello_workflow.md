@@ -82,7 +82,7 @@ For this chapter, it's under `results/hello_workflow/`.
     results/hello_workflow
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    └── Holà-output.txt
+    └── Hola-output.txt
     ```
 
 If that worked for you, you're ready to learn how to assemble a multi-step workflow.
@@ -111,7 +111,7 @@ To do the conversion of the greetings to uppercase, we're going to use a classic
 tr '[a-z]' '[A-Z]'
 ```
 
-This is a very naive text replacement one-liner that does not account for accented letters, so for example 'Holà' will become 'HOLà', but it will do a good enough job for demonstrating the Nextflow concepts and that's what matters.
+This is a very naive text replacement one-liner that does not account for accented letters, so for example 'Hola' will become 'HOLà', but it will do a good enough job for demonstrating the Nextflow concepts and that's what matters.
 
 To test it out, we can run the `echo 'Hello World'` command and pipe its output to the `tr` command:
 
@@ -328,10 +328,10 @@ You'll find the outputs in the `results/hello_workflow` directory as set in the 
     results/hello_workflow/
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 That's convenient! But it's still worth taking a look inside the work directory of one of the calls to the second process.
@@ -340,8 +340,8 @@ That's convenient! But it's still worth taking a look inside the work directory 
 
     ```console
     work/e0/ecf81b4cacc648b9b994218d5b29d7/
-    ├── Holà-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Holà-output.txt
-    └── UPPER-Holà-output.txt
+    ├── Hola-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Hola-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Notice there are two `*-output` files: the output of the first process as well as the output of the second.
@@ -389,8 +389,8 @@ Run the following in your terminal:
 ```bash
 echo 'Hello' | tr '[a-z]' '[A-Z]' > UPPER-Hello-output.txt
 echo 'Bonjour' | tr '[a-z]' '[A-Z]' > UPPER-Bonjour-output.txt
-echo 'Holà' | tr '[a-z]' '[A-Z]' > UPPER-Holà-output.txt
-cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Holà-output.txt > COLLECTED-output.txt
+echo 'Hola' | tr '[a-z]' '[A-Z]' > UPPER-Hola-output.txt
+cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Hola-output.txt > COLLECTED-output.txt
 ```
 
 The output is a text file called `COLLECTED-output.txt` that contains the uppercase versions of the original greetings.
@@ -565,7 +565,7 @@ Now have a look at the contents of the final output file.
 ??? abstract "File contents"
 
     ```console title="results/COLLECTED-output.txt"
-    Holà
+    Hola
     ```
 
 Oh no. The collection step was run individually on each greeting, which is NOT what we wanted.
@@ -653,8 +653,8 @@ nextflow run hello-workflow.nf -resume
     [1e/83586c] collectGreetings   | 1 of 1 ✔
     Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
     Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
-    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
-    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
+    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt
+    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt]
     ```
 
 It runs successfully, although the log output may look a little messier than this (we cleaned it up for readability).

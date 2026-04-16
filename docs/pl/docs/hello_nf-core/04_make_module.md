@@ -893,10 +893,10 @@ Powinieneś zobaczyć plik wyjściowy cowpy z takim samym nazewnictwem jak wcze�
     ├── Bonjour-output.txt
     ├── cowpy-test.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Możesz zmienić konfigurację `ext.prefix` w `conf/modules.config`, aby upewnić się, że możesz zmienić wzorzec nazewnictwa bez konieczności wprowadzania jakichkolwiek zmian w module lub kodzie workflow.

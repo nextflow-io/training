@@ -302,7 +302,7 @@ Els workflows normalment s'executen amb lots d'entrades que estan destinades a s
 Convenientment, el constructor de canals `channel.of()` que hem estat utilitzant està molt content d'acceptar més d'un valor, així que no necessitem modificar-lo en absolut.
 Simplement podem carregar múltiples valors al canal.
 
-Fem-los `'Hello'`, `'Bonjour'` i `'Holà'`.
+Fem-los `'Hello'`, `'Bonjour'` i `'Hola'`.
 
 #### 2.1.1. Afegiu més salutacions
 
@@ -312,7 +312,7 @@ Al bloc workflow, feu el següent canvi de codi:
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
     // crea un canal per a les entrades
-    greeting_ch = channel.of('Hello','Bonjour','Holà')
+    greeting_ch = channel.of('Hello','Bonjour','Hola')
                          .view()
     ```
 
@@ -345,7 +345,7 @@ nextflow run hello-channels.nf
     [f4/c9962c] process > sayHello (1) [100%] 3 of 3 ✔
     Hello
     Bonjour
-    Holà
+    Hola
     ```
 
 Certament sembla que s'ha executat correctament.
@@ -367,7 +367,7 @@ No obstant això, encara només hi ha una sortida al directori de resultats:
 ??? abstract "Contingut del fitxer"
 
     ```console title="results/hello_channels/output.txt"
-    Holà
+    Hola
     ```
 
 Hauríeu de veure una de les tres salutacions allà, encara que la que heu obtingut pot ser diferent del que es mostra aquí.
@@ -424,7 +424,7 @@ nextflow run hello-channels.nf -ansi-log false
     Launching `hello-channels.nf` [desperate_monod] DSL2 - revision: 59a9a5888a
     Hello
     Bonjour
-    Holà
+    Hola
     [23/871c7e] Submitted process > sayHello (2)
     [7f/21e2c2] Submitted process > sayHello (1)
     [f4/ea10a6] Submitted process > sayHello (3)
@@ -493,7 +493,7 @@ De totes maneres, ara que tenim els subdirectoris de cada crida de procés, pode
     ```
 
     ```txt title="work/f4/ea10a680d5687596d3eaa3fcf69272/output.txt"
-    Holà
+    Hola
     ```
 
 Això mostra que els tres processos s'han executat amb èxit (visca).
@@ -589,7 +589,7 @@ nextflow run hello-channels.nf
     [e8/33ee64] sayHello (2) [100%] 3 of 3 ✔
     Hello
     Bonjour
-    Holà
+    Hola
     ```
 
 Tornant a la vista de resum, la sortida es resumeix en una línia de nou.
@@ -601,7 +601,7 @@ Doneu una ullada al directori `results` per veure si totes les salutacions de so
     results/hello_channels/
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     └── output.txt
     ```
 
@@ -617,8 +617,8 @@ Sí! I cadascun té el contingut esperat.
     Hello
     ```
 
-    ```console title="Holà-output.txt"
-    Holà
+    ```console title="Hola-output.txt"
+    Hola
     ```
 
 Èxit! Ara podem afegir tantes salutacions com vulguem sense preocupar-nos que els fitxers de sortida siguin sobreescrits.
@@ -647,7 +647,7 @@ Què passa si volíem proporcionar aquestes múltiples entrades d'una manera dif
 
 Per exemple, imagineu que configurem una variable d'entrada que conté un array d'elements com aquest:
 
-`greetings_array = ['Hello','Bonjour','Holà']`
+`greetings_array = ['Hello','Bonjour','Hola']`
 
 Podem carregar això al nostre canal de sortida i esperar que funcioni?
 
@@ -673,9 +673,9 @@ Prenem la variable `greetings_array` que acabem d'imaginar i fem-la realitat afe
 
         main:
         // declara un array de salutacions d'entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // crea un canal per a les entrades
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // emet una salutacio
         sayHello(greeting_ch)
@@ -692,7 +692,7 @@ Prenem la variable `greetings_array` que acabem d'imaginar i fem-la realitat afe
 
         main:
         // crea un canal per a les entrades
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // emet una salutacio
         sayHello(greeting_ch)
@@ -706,7 +706,7 @@ Això encara no és funcional, només hem afegit una declaració per a l'array.
 
 #### 3.1.2. Establiu l'array de salutacions com a entrada al constructor de canals
 
-Ara substituirem els valors `'Hello','Bonjour','Holà'` actualment codificats al constructor de canals amb el `greetings_array` que acabem de crear.
+Ara substituirem els valors `'Hello','Bonjour','Hola'` actualment codificats al constructor de canals amb el `greetings_array` que acabem de crear.
 
 Al bloc workflow, feu el següent canvi:
 
@@ -717,7 +717,7 @@ Al bloc workflow, feu el següent canvi:
 
         main:
         // declara un array de salutacions d'entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // crea un canal per a les entrades
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -736,9 +736,9 @@ Al bloc workflow, feu el següent canvi:
 
         main:
         // declara un array de salutacions d'entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // crea un canal per a les entrades
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // emet una salutacio
         sayHello(greeting_ch)
@@ -767,16 +767,16 @@ nextflow run hello-channels.nf
 
     executor >  local (1)
     [a8/1f6ead] sayHello (1) | 0 of 1
-    [Hello, Bonjour, Holà]
+    [Hello, Bonjour, Hola]
     ERROR ~ Error executing process > 'sayHello (1)'
 
     Caused by:
-      Missing output file(s) `[Hello, Bonjour, Holà]-output.txt` expected by process `sayHello (1)`
+      Missing output file(s) `[Hello, Bonjour, Hola]-output.txt` expected by process `sayHello (1)`
 
 
     Command executed:
 
-      echo '[Hello, Bonjour, Holà]' > '[Hello, Bonjour, Holà]-output.txt'
+      echo '[Hello, Bonjour, Hola]' > '[Hello, Bonjour, Hola]-output.txt'
 
     Command exit status:
       0
@@ -796,7 +796,7 @@ Oh no! Hi ha un error!
 
 Mireu la sortida de `view()` i els missatges d'error.
 
-Sembla que Nextflow va intentar executar una única crida de procés, utilitzant `[Hello, Bonjour, Holà]` com un únic valor de cadena, en lloc d'utilitzar les tres cadenes de l'array com a valors separats.
+Sembla que Nextflow va intentar executar una única crida de procés, utilitzant `[Hello, Bonjour, Hola]` com un únic valor de cadena, en lloc d'utilitzar les tres cadenes de l'array com a valors separats.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-fail.svg"
@@ -826,7 +826,7 @@ Al bloc workflow, feu el següent canvi de codi:
 
         main:
         // declara un array de salutacions d'entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // crea un canal per a les entrades
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -846,7 +846,7 @@ Al bloc workflow, feu el següent canvi de codi:
 
         main:
         // declara un array de salutacions d'entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // crea un canal per a les entrades
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -880,7 +880,7 @@ Al bloc workflow, feu el següent canvi de codi:
 
         main:
         // declara un array de salutacions d'entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // crea un canal per a les entrades
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
@@ -901,7 +901,7 @@ Al bloc workflow, feu el següent canvi de codi:
 
         main:
         // declara un array de salutacions d'entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // crea un canal per a les entrades
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -947,10 +947,10 @@ nextflow run hello-channels.nf
 
     executor >  local (3)
     [b1/6a1e15] sayHello (2) [100%] 3 of 3 ✔
-    Before flatten: [Hello, Bonjour, Holà]
+    Before flatten: [Hello, Bonjour, Hola]
     After flatten: Hello
     After flatten: Bonjour
-    After flatten: Holà
+    After flatten: Hola
     ```
 
 Aquesta vegada funciona I ens dóna la visió addicional de com es veu el contingut del canal abans i després d'executar l'operador `flatten()`.
@@ -986,7 +986,7 @@ Hem preparat un fitxer CSV anomenat `greetings.csv` que conté diverses salutaci
 ```csv title="data/greetings.csv" linenums="1"
 Hello,English,123
 Bonjour,French,456
-Holà,Spanish,789
+Hola,Spanish,789
 ```
 
 La nostra següent tasca és adaptar el nostre workflow per llegir els valors d'aquest fitxer.
@@ -1028,7 +1028,7 @@ Feu la següent edició a la declaració del paràmetre:
     /*
      * Parametres del pipeline
      */
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
     ```
 
 Això assumeix que el fitxer està col·locat amb el codi del workflow.
@@ -1067,7 +1067,7 @@ Al bloc workflow, feu el següent canvi de codi:
 
         main:
         // declara un array de salutacions d'entrada
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // crea un canal per a les entrades
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
@@ -1207,7 +1207,7 @@ nextflow run hello-channels.nf
     Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
     After splitCsv: [Hello, English, 123]
     After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Holà, Spanish, 789]
+    After splitCsv: [Hola, Spanish, 789]
     ERROR ~ Error executing process > 'sayHello (2)'
 
     Caused by:
@@ -1327,10 +1327,10 @@ nextflow run hello-channels.nf
     Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
     After splitCsv: [Hello, English, 123]
     After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Holà, Spanish, 789]
+    After splitCsv: [Hola, Spanish, 789]
     After map: Hello
     After map: Bonjour
-    After map: Holà
+    After map: Hola
     ```
 
 Aquesta vegada hauria d'executar-se sense error.

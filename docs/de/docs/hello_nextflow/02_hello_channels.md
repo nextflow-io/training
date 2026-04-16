@@ -302,7 +302,7 @@ Workflows werden typischerweise auf Stapel von Eingaben ausgeführt, die in gro�
 Praktischerweise ist die `channel.of()` Channel Factory, die wir verwendet haben, durchaus bereit, mehr als einen Wert zu akzeptieren, daher müssen wir das überhaupt nicht ändern.
 Wir können einfach mehrere Werte in den Channel laden.
 
-Machen wir sie zu `'Hello'`, `'Bonjour'` und `'Holà'`.
+Machen wir sie zu `'Hello'`, `'Bonjour'` und `'Hola'`.
 
 #### 2.1.1. Weitere Begrüßungen hinzufügen
 
@@ -312,7 +312,7 @@ Nimm im Workflow-Block die folgende Codeänderung vor:
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
     // Einen Channel für Eingaben erstellen
-    greeting_ch = channel.of('Hello','Bonjour','Holà')
+    greeting_ch = channel.of('Hello','Bonjour','Hola')
                          .view()
     ```
 
@@ -345,7 +345,7 @@ nextflow run hello-channels.nf
     [f4/c9962c] process > sayHello (1) [100%] 3 of 3 ✔
     Hello
     Bonjour
-    Holà
+    Hola
     ```
 
 Es scheint tatsächlich gut gelaufen zu sein.
@@ -367,7 +367,7 @@ Allerdings gibt es im Ergebnisverzeichnis immer noch nur eine Ausgabe:
 ??? abstract "Dateiinhalt"
 
     ```console title="results/hello_channels/output.txt"
-    Holà
+    Hola
     ```
 
 Du solltest eine der drei Begrüßungen darin sehen, aber die, die du bekommen hast, könnte anders sein als hier gezeigt.
@@ -424,7 +424,7 @@ nextflow run hello-channels.nf -ansi-log false
     Launching `hello-channels.nf` [desperate_monod] DSL2 - revision: 59a9a5888a
     Hello
     Bonjour
-    Holà
+    Hola
     [23/871c7e] Submitted process > sayHello (2)
     [7f/21e2c2] Submitted process > sayHello (1)
     [f4/ea10a6] Submitted process > sayHello (3)
@@ -493,7 +493,7 @@ Wie auch immer, jetzt da wir die Unterverzeichnisse jedes Prozess-Aufrufs haben,
     ```
 
     ```txt title="work/f4/ea10a680d5687596d3eaa3fcf69272/output.txt"
-    Holà
+    Hola
     ```
 
 Dies zeigt, dass alle drei Prozesse erfolgreich ausgeführt wurden (juhu).
@@ -589,7 +589,7 @@ nextflow run hello-channels.nf
     [e8/33ee64] sayHello (2) [100%] 3 of 3 ✔
     Hello
     Bonjour
-    Holà
+    Hola
     ```
 
 Zurück in der Zusammenfassungsansicht wird die Ausgabe wieder auf einer Zeile zusammengefasst.
@@ -601,7 +601,7 @@ Schau in das `results`-Verzeichnis, um zu sehen, ob alle Ausgabebegrüßungen da
     results/hello_channels/
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     └── output.txt
     ```
 
@@ -617,8 +617,8 @@ Ja! Und sie haben jeweils die erwarteten Inhalte.
     Hello
     ```
 
-    ```console title="Holà-output.txt"
-    Holà
+    ```console title="Hola-output.txt"
+    Hola
     ```
 
 Erfolg! Jetzt können wir so viele Begrüßungen hinzufügen, wie wir möchten, ohne uns Sorgen zu machen, dass Ausgabedateien überschrieben werden.
@@ -647,7 +647,7 @@ Was ist, wenn wir diese mehreren Eingaben auf eine andere Weise bereitstellen wo
 
 Stell dir zum Beispiel vor, wir richten eine Eingabevariable ein, die ein Array von Elementen enthält wie dieses:
 
-`greetings_array = ['Hello','Bonjour','Holà']`
+`greetings_array = ['Hello','Bonjour','Hola']`
 
 Können wir das in unseren Channel laden und erwarten, dass es funktioniert?
 
@@ -673,9 +673,9 @@ Lass uns die `greetings_array`-Variable, die wir uns gerade vorgestellt haben, R
 
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // Einen Channel für Eingaben erstellen
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // Eine Begrüßung ausgeben
         sayHello(greeting_ch)
@@ -692,7 +692,7 @@ Lass uns die `greetings_array`-Variable, die wir uns gerade vorgestellt haben, R
 
         main:
         // Einen Channel für Eingaben erstellen
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // Eine Begrüßung ausgeben
         sayHello(greeting_ch)
@@ -706,7 +706,7 @@ Dies ist noch nicht funktionsfähig, wir haben nur eine Deklaration für das Arr
 
 #### 3.1.2. Das Array von Begrüßungen als Eingabe für die Channel Factory setzen
 
-Jetzt werden wir die Werte `'Hello','Bonjour','Holà'`, die derzeit in der Channel Factory fest codiert sind, durch das `greetings_array` ersetzen, das wir gerade erstellt haben.
+Jetzt werden wir die Werte `'Hello','Bonjour','Hola'`, die derzeit in der Channel Factory fest codiert sind, durch das `greetings_array` ersetzen, das wir gerade erstellt haben.
 
 Nimm im Workflow-Block die folgende Änderung vor:
 
@@ -717,7 +717,7 @@ Nimm im Workflow-Block die folgende Änderung vor:
 
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // Einen Channel für Eingaben erstellen
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -736,9 +736,9 @@ Nimm im Workflow-Block die folgende Änderung vor:
 
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // Einen Channel für Eingaben erstellen
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // Eine Begrüßung ausgeben
         sayHello(greeting_ch)
@@ -767,16 +767,16 @@ nextflow run hello-channels.nf
 
     executor >  local (1)
     [a8/1f6ead] sayHello (1) | 0 of 1
-    [Hello, Bonjour, Holà]
+    [Hello, Bonjour, Hola]
     ERROR ~ Error executing process > 'sayHello (1)'
 
     Caused by:
-      Missing output file(s) `[Hello, Bonjour, Holà]-output.txt` expected by process `sayHello (1)`
+      Missing output file(s) `[Hello, Bonjour, Hola]-output.txt` expected by process `sayHello (1)`
 
 
     Command executed:
 
-      echo '[Hello, Bonjour, Holà]' > '[Hello, Bonjour, Holà]-output.txt'
+      echo '[Hello, Bonjour, Hola]' > '[Hello, Bonjour, Hola]-output.txt'
 
     Command exit status:
       0
@@ -796,7 +796,7 @@ Oh nein! Es gibt einen Fehler!
 
 Schau dir die Ausgabe von `view()` und die Fehlermeldungen an.
 
-Es sieht so aus, als hätte Nextflow versucht, einen einzelnen Prozess-Aufruf auszuführen, wobei `[Hello, Bonjour, Holà]` als Stringwert verwendet wurde, anstatt die drei Strings im Array als separate Werte zu verwenden.
+Es sieht so aus, als hätte Nextflow versucht, einen einzelnen Prozess-Aufruf auszuführen, wobei `[Hello, Bonjour, Hola]` als Stringwert verwendet wurde, anstatt die drei Strings im Array als separate Werte zu verwenden.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-fail.svg"
@@ -826,7 +826,7 @@ Nimm im Workflow-Block die folgende Codeänderung vor:
 
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // Einen Channel für Eingaben erstellen
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -846,7 +846,7 @@ Nimm im Workflow-Block die folgende Codeänderung vor:
 
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // Einen Channel für Eingaben erstellen
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -880,7 +880,7 @@ Nimm im Workflow-Block die folgende Codeänderung vor:
 
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // Einen Channel für Eingaben erstellen
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
@@ -901,7 +901,7 @@ Nimm im Workflow-Block die folgende Codeänderung vor:
 
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // Einen Channel für Eingaben erstellen
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -947,10 +947,10 @@ nextflow run hello-channels.nf
 
     executor >  local (3)
     [b1/6a1e15] sayHello (2) [100%] 3 of 3 ✔
-    Before flatten: [Hello, Bonjour, Holà]
+    Before flatten: [Hello, Bonjour, Hola]
     After flatten: Hello
     After flatten: Bonjour
-    After flatten: Holà
+    After flatten: Hola
     ```
 
 Diesmal funktioniert es UND gibt uns den zusätzlichen Einblick, wie die Inhalte des Channels vor und nach der Ausführung des `flatten()`-Operators aussehen.
@@ -986,7 +986,7 @@ Wir haben eine CSV-Datei namens `greetings.csv` vorbereitet, die mehrere Eingabe
 ```csv title="data/greetings.csv" linenums="1"
 Hello,English,123
 Bonjour,French,456
-Holà,Spanish,789
+Hola,Spanish,789
 ```
 
 Unsere nächste Aufgabe ist es, unseren Workflow anzupassen, um die Werte aus dieser Datei einzulesen.
@@ -1028,7 +1028,7 @@ Nimm die folgende Änderung an der Parameterdeklaration vor:
     /*
      * Pipeline-Parameter
      */
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
     ```
 
 Dies setzt voraus, dass die Datei am selben Ort wie der Workflow-Code liegt.
@@ -1067,7 +1067,7 @@ Nimm im Workflow-Block die folgende Codeänderung vor:
 
         main:
         // Ein Array von Eingabe-Begrüßungen deklarieren
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // Einen Channel für Eingaben erstellen
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
@@ -1207,7 +1207,7 @@ nextflow run hello-channels.nf
     Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
     After splitCsv: [Hello, English, 123]
     After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Holà, Spanish, 789]
+    After splitCsv: [Hola, Spanish, 789]
     ERROR ~ Error executing process > 'sayHello (2)'
 
     Caused by:
@@ -1327,10 +1327,10 @@ nextflow run hello-channels.nf
     Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
     After splitCsv: [Hello, English, 123]
     After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Holà, Spanish, 789]
+    After splitCsv: [Hola, Spanish, 789]
     After map: Hello
     After map: Bonjour
-    After map: Holà
+    After map: Hola
     ```
 
 Diesmal sollte es ohne Fehler laufen.

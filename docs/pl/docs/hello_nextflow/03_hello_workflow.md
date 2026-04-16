@@ -84,7 +84,7 @@ W tym rozdziale jest to katalog `results/hello_workflow/`.
     results/hello_workflow
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    └── Holà-output.txt
+    └── Hola-output.txt
     ```
 
 Jeśli to zadziałało, jesteś gotowy, aby nauczyć się składać wieloetapowy workflow.
@@ -113,7 +113,7 @@ Do konwersji powitań na wielkie litery użyjemy klasycznego narzędzia UNIX o n
 tr '[a-z]' '[A-Z]'
 ```
 
-To bardzo naiwna jednolinijkowa zamiana tekstu, która nie uwzględnia liter akcentowanych, więc na przykład 'Holà' stanie się 'HOLà', ale wystarczająco dobrze posłuży do zademonstrowania koncepcji Nextflow, a to się liczy.
+To bardzo naiwna jednolinijkowa zamiana tekstu, która nie uwzględnia liter akcentowanych, więc na przykład 'Hola' stanie się 'HOLà', ale wystarczająco dobrze posłuży do zademonstrowania koncepcji Nextflow, a to się liczy.
 
 Aby to przetestować, możemy uruchomić polecenie `echo 'Hello World'` i przekierować jego wyjście do polecenia `tr`:
 
@@ -330,10 +330,10 @@ Wyjścia znajdziesz w katalogu `results/hello_workflow`, jak ustawiono w bloku `
     results/hello_workflow/
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 To wygodne! Ale warto też zajrzeć do katalogu roboczego jednego z wywołań drugiego procesu.
@@ -342,8 +342,8 @@ To wygodne! Ale warto też zajrzeć do katalogu roboczego jednego z wywołań dr
 
     ```console
     work/e0/ecf81b4cacc648b9b994218d5b29d7/
-    ├── Holà-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Holà-output.txt
-    └── UPPER-Holà-output.txt
+    ├── Hola-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Hola-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Zauważ, że są tam dwa pliki `*-output`: wyjście pierwszego procesu oraz wyjście drugiego.
@@ -391,8 +391,8 @@ Uruchom następujące polecenie w swoim terminalu:
 ```bash
 echo 'Hello' | tr '[a-z]' '[A-Z]' > UPPER-Hello-output.txt
 echo 'Bonjour' | tr '[a-z]' '[A-Z]' > UPPER-Bonjour-output.txt
-echo 'Holà' | tr '[a-z]' '[A-Z]' > UPPER-Holà-output.txt
-cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Holà-output.txt > COLLECTED-output.txt
+echo 'Hola' | tr '[a-z]' '[A-Z]' > UPPER-Hola-output.txt
+cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Hola-output.txt > COLLECTED-output.txt
 ```
 
 Wyjściem jest plik tekstowy o nazwie `COLLECTED-output.txt`, który zawiera wersje oryginalnych powitań zapisane wielkimi literami.
@@ -567,7 +567,7 @@ Teraz spójrz na zawartość końcowego pliku wyjściowego.
 ??? abstract "Zawartość pliku"
 
     ```console title="results/COLLECTED-output.txt"
-    Holà
+    Hola
     ```
 
 O nie. Krok zbierania został uruchomiony indywidualnie dla każdego powitania, co NIE jest tym, czego chcieliśmy.
@@ -655,8 +655,8 @@ nextflow run hello-workflow.nf -resume
     [1e/83586c] collectGreetings   | 1 of 1 ✔
     Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
     Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
-    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
-    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
+    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt
+    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt]
     ```
 
 Uruchamia się pomyślnie, chociaż wyjście logów może wyglądać nieco bardziej chaotycznie (uporządkowaliśmy je dla czytelności).

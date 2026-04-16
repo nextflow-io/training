@@ -88,11 +88,11 @@ Come in precedenza, troverete i file di output nella directory specificata nel b
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Se tutto ha funzionato, siete pronti a imparare come modularizzare il codice del workflow.

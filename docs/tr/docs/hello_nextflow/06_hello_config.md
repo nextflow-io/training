@@ -99,10 +99,10 @@ Daha önce olduğu gibi, çıktı dosyalarını `output` bloğunda belirtilen di
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
+    │   ├── Hola-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     └── batch-report.txt
     ```
 
@@ -524,10 +524,10 @@ Bu, çıktıları `results/` yerine `custom-outdir-cli/` dizinine yayınlar:
             ├── Bonjour-output.txt
             ├── COLLECTED-batch-output.txt
             ├── Hello-output.txt
-            ├── Holà-output.txt
+            ├── Hola-output.txt
             ├── UPPER-Bonjour-output.txt
             ├── UPPER-Hello-output.txt
-            └── UPPER-Holà-output.txt
+            └── UPPER-Hola-output.txt
     ```
 
 Çıktı bloğundaki `path` bildirimlerinden hala `hello_config` alt dizinine sahip olduğumuza dikkat edin.
@@ -612,10 +612,10 @@ Artık çıktılar `hello_config` alt dizini olmadan doğrudan `custom-outdir-cl
         ├── Bonjour-output.txt
         ├── COLLECTED-batch-output.txt
         ├── Hello-output.txt
-        ├── Holà-output.txt
+        ├── Hola-output.txt
         ├── UPPER-Bonjour-output.txt
         ├── UPPER-Hello-output.txt
-        └── UPPER-Holà-output.txt
+        └── UPPER-Hola-output.txt
     ```
 
 !!! tip "İpucu"
@@ -860,11 +860,11 @@ Bu, çıktıları belirtilen temel yol _ve_ batch adı alt dizini _ve_ sürece g
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Holà-output.txt
+            │   └── UPPER-Hola-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Holà-output.txt
+                └── Hola-output.txt
     ```
 
 ### 2.3. Yayınlama modunu iş akışı düzeyinde ayarlayın
@@ -990,11 +990,11 @@ Bu, çıktıları `config-output-mode/` dizinine yayınlar ve hepsi hala semboli
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Holà-output.txt
+            │   └── UPPER-Hola-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Holà-output.txt
+                └── Hola-output.txt
     ```
 
 Çıktı başına mod ayarlama yöntemini kullanmak isteyebileceğiniz ana neden, aynı iş akışı içinde karıştırmak ve eşleştirmek istemenizdir; _yani_ bazı çıktıların kopyalanmasını ve bazılarının sembolik bağlantı olmasını sağlamak.

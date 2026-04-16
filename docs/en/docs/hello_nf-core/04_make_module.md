@@ -891,10 +891,10 @@ You should see the cowpy output file with the same naming as before: `cowpy-test
     ├── Bonjour-output.txt
     ├── cowpy-test.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Feel free to change the `ext.prefix` configuration in `conf/modules.config` to satisfy yourself that you can change the naming pattern without having to make any changes to the module or workflow code.

@@ -880,7 +880,7 @@ Geben wir dem `input`-Parameter einen Standardwert, indem wir ihn vor der Workfl
  * Pipeline-Parameter
  */
 params {
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
 }
 ```
 
@@ -890,7 +890,7 @@ Unterstützte Typen sind `String`, `Integer`, `Float`, `Boolean` und `Path`.
 
 !!! info "Info"
 
-    In älteren Workflows siehst du möglicherweise, dass der gesamte `params`-Block nur als `input = 'Holà mundo!'` geschrieben ist.
+    In älteren Workflows siehst du möglicherweise, dass der gesamte `params`-Block nur als `input = 'Hola mundo!'` geschrieben ist.
 
 Wenn du deiner Pipeline weitere Parameter hinzufügst, solltest du sie alle zu diesem Block hinzufügen, unabhängig davon, ob du ihnen einen Standardwert geben musst oder nicht.
 Dies macht es einfach, alle konfigurierbaren Parameter auf einen Blick zu finden.
@@ -923,7 +923,7 @@ nextflow run hello-world.nf
     - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
     - cause: you tried to assign a value to the class 'java.lang.String'
     @ line 24, column 12.
-          input: String = 'Holà mundo!'
+          input: String = 'Hola mundo!'
                   ^
 
     1 error
@@ -947,7 +947,7 @@ Die Ausgabe wird am selben Ort wie zuvor sein, aber der Inhalt sollte mit dem ne
 ??? abstract "Dateiinhalt"
 
     ```console title="results/hello_world/output.txt"
-    Holà mundo!
+    Hola mundo!
     ```
 
 Nextflow hat den Standardwert des Begrüßungsparameters verwendet, um die Ausgabe zu erstellen.
