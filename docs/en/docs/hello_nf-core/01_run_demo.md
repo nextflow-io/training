@@ -241,7 +241,7 @@ Here is the content of that file:
 
 process {
     resourceLimits = [
-        cpus: 4,
+        cpus: 2,
         memory: '4.GB',
         time: '1.h'
     ]
@@ -260,7 +260,8 @@ params {
 You'll notice right away that the comment block at the top includes a usage example showing how to run the pipeline with this test profile.
 
 ```groovy title="conf/test.config" linenums="7"
-don        nextflow run nf-core/demo -profile test,<docker/singularity> --outdir <OUTDIR>
+    Use as follows:
+        nextflow run nf-core/demo -profile test,<docker/singularity> --outdir <OUTDIR>
 ```
 
 The only things we need to supply are what's shown between carets in the example command: `<docker/singularity>` and `<OUTDIR>`.
@@ -302,9 +303,9 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
-    Launching `https://github.com/nf-core/demo` [magical_pauling] DSL2 - revision: db7f526ce1 [master]
+    Launching `https://github.com/nf-core/demo` [magical_pauling] DSL2 - revision: 45904cb9d1 [master]
 
 
     ------------------------------------------------------
@@ -313,7 +314,7 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
       |\ | |__  __ /  ` /  \ |__) |__         }  {
       | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                             `._,._,'
-      nf-core/demo 1.0.2
+      nf-core/demo 1.1.0
     ------------------------------------------------------
     Input/output options
       input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
@@ -368,7 +369,7 @@ There's a header that includes a summary of the pipeline's version, inputs and o
 Notice the line near the top of the output:
 
 ```console
-Launching `https://github.com/nf-core/demo` [magical_pauling] DSL2 - revision: db7f526ce1 [master]
+Launching `https://github.com/nf-core/demo` [magical_pauling] DSL2 - revision: 45904cb9d1 [master]
 ```
 
 This tells you which revision of the pipeline was used.
@@ -376,7 +377,7 @@ Because we did not specify a version, Nextflow used the latest commit on `master
 For reproducible runs, you should pin a specific release using the `-r` flag:
 
 ```bash
-nextflow run nf-core/demo -r 1.0.2 -profile docker,test --outdir demo-results
+nextflow run nf-core/demo -r 1.1.0 -profile docker,test --outdir demo-results
 ```
 
 This ensures that the same pipeline code is used every time, regardless of new commits or releases.
@@ -385,9 +386,11 @@ For this training we omit `-r` for simplicity, but in production you should alwa
 Moving on to the execution output, let's have a look at the lines that tell us what processes were run:
 
 ```console
-    [ff/a6976b] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
-    [39/731ab7] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
-    [7c/78d96e] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+executor >  local (7)
+[ff/a6976b] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
+[39/731ab7] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
+[7c/78d96e] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+-[nf-core/demo] Pipeline completed successfully-
 ```
 
 This tells us that three processes were run, corresponding to the three tools shown in the pipeline documentation page on the nf-core website: FASTQC, SEQTK_TRIM and MULTIQC.
@@ -430,7 +433,7 @@ tree -L 2 demo-results
     ```
 
 That might seem like a lot.
-To learn more about the `nf-core/demo` pipeline's outputs, check out its [documentation page](https://nf-co.re/demo/1.0.2/docs/output/).
+To learn more about the `nf-core/demo` pipeline's outputs, check out its [documentation page](https://nf-co.re/demo/1.1.0/docs/output/).
 
 At this stage, what's important to observe is that the results are organized by module, and there is additionally a directory called `pipeline_info` containing various timestamped reports about the pipeline execution.
 
@@ -483,7 +486,55 @@ Run the help command for the demo pipeline:
 nextflow run nf-core/demo --help
 ```
 
-[TODO: add expected output]
+??? success "Command output"
+
+    ```console
+     N E X T F L O W   ~  version 25.10.4
+
+    Launching `https://github.com/nf-core/demo` [run_name] DSL2 - revision: 45904cb9d1 [master]
+
+    ----------------------------------------------------
+                                            ,--./,-.
+            ___     __   __   __   ___     /,-._.--~'
+      |\ | |__  __ /  ` /  \ |__) |__         }  {
+      | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                            `._,._,'
+      nf-core/demo 1.1.0
+    ----------------------------------------------------
+    Typical pipeline command:
+
+      nextflow run nf-core/demo -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>
+
+    Input/output options
+      --input                       [string]           Path to a metadata file containing information about the samples in the experiment.
+      --outdir                      [string]           The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.
+      --email                       [string]           Email address for completion summary.
+      --multiqc_title               [string]           MultiQC report title. Printed as page header, used for filename if not otherwise specified.
+
+    Reference genome options
+      --genome                      [string]           Name of iGenomes reference.
+      --fasta                       [string]           Path to FASTA genome file.
+
+    Process skipping options
+      --skip_trim                   [boolean]          Skip trimming fastq files with seqtk
+
+    Generic options
+      --multiqc_methods_description [string]           Custom MultiQC yaml file containing HTML including a methods description.
+      --help                        [boolean, string]  Display the help message.
+      --help_full                   [boolean]          Display the full detailed help message.
+      --show_hidden                 [boolean]          Display hidden parameters in the help message (only works when --help or --help_full are provided).
+     !! Hiding 20 param(s), use the `--show_hidden` parameter to show them !!
+    ----------------------------------------------------
+
+    * The pipeline
+        https://doi.org/10.5281/zenodo.12192442
+
+    * The nf-core framework
+        https://doi.org/10.1038/s41587-020-0439-x
+
+    * Software dependencies
+        https://github.com/nf-core/demo/blob/master/CITATIONS.md
+    ```
 
 As you can see, the output groups parameters into categories (Input/output options, Reference genome options, etc.) with types and descriptions for each one.
 
@@ -505,7 +556,14 @@ For example, to skip the trimming step:
 nextflow run nf-core/demo -profile docker,test --outdir demo-results-notrim --skip_trim
 ```
 
-[TODO: add expected output]
+??? success "Command output"
+
+    ```console
+    executor >  local (4)
+    [3f/a82c91] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE) | 3 of 3 ✔
+    [7d/c5e014] NFCORE_DEMO:DEMO:MULTIQC             | 1 of 1 ✔
+    -[nf-core/demo] Pipeline completed successfully-
+    ```
 
 The `SEQTK_TRIM` process no longer appears in the output.
 
@@ -577,20 +635,58 @@ We also cover this in more detail in [Part 5: Input Validation](05_input_validat
 The `nf-core/demo` pipeline expects a CSV file with columns `sample`, `fastq_1`, and `fastq_2`.
 This is defined in a schema file (`assets/schema_input.json`) that specifies the expected structure, column types, and constraints.
 
-[TODO: add the schema_input.json as a file snippet]
+??? abstract "assets/schema_input.json"
+
+    ```json title="assets/schema_input.json"
+    {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://raw.githubusercontent.com/nf-core/demo/master/assets/schema_input.json",
+        "title": "nf-core/demo pipeline - params.input schema",
+        "description": "Schema for the file provided with params.input",
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "sample": {
+                    "type": "string",
+                    "pattern": "^\\S+$",
+                    "errorMessage": "Sample name must be provided and cannot contain spaces",
+                    "meta": ["id"]
+                },
+                "fastq_1": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
+                    "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                },
+                "fastq_2": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
+                    "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                }
+            },
+            "required": ["sample", "fastq_1"]
+        }
+    }
+    ```
+
+The schema specifies that `sample` and `fastq_1` are required, while `fastq_2` is optional (supporting both paired-end and single-end data).
+File paths are validated for existence and extension pattern.
 
 ##### 3.1.4.1. Create an invalid samplesheet
 
 Create a samplesheet with a missing column and a non-existent file path:
 
 ```csv title="malformed_samplesheet.csv"
-sample,fastq_1
+sample,fastq_2
 SAMPLE1,/not/a/real/file.fastq.gz
 ```
 
-This will produce validation errors in the next step.
-
-<!-- does the missing column not get flagged?? -->
+This samplesheet is missing the required `fastq_1` column and has a non-existent file path in `fastq_2`.
+Both issues will produce validation errors in the next step.
 
 ##### 3.1.4.2. Run the demo pipeline with the invalid samplesheet
 
@@ -606,13 +702,16 @@ ERROR ~ Validation of pipeline parameters failed!
 The following invalid input values have been detected:
 
 * --input (malformed_samplesheet.csv): Validation of file failed:
-    -> Entry 1: Error for field 'fastq_1' (/not/a/real/file.fastq.gz): the file or directory
-       '/not/a/real/file.fastq.gz' does not exist
+    -> Entry 1: Error for field 'fastq_2' (/not/a/real/file.fastq.gz): the file or directory
+       '/not/a/real/file.fastq.gz' does not exist (FastQ file for reads 2 cannot contain spaces
+       and must have extension '.fq.gz' or '.fastq.gz')
+    -> Entry 1: Missing required field(s): fastq_1
 ```
 
-As you can see, the pipeline fails immediately with a clear error message.
+As you can see, the pipeline fails immediately and reports **all** validation errors at once.
+nf-schema does not stop at the first error — it collects every problem and lists them together, so you can fix everything in one go rather than discovering issues one by one.
 
-The error identifies the exact entry and field that caused the problem, so you can fix your samplesheet then re-launch the pipeline with confidence that it's not going to fail at some later point when Nextflow actually goes to access the file path.
+Each error identifies the exact entry and field that caused the problem, so you can fix your samplesheet then re-launch the pipeline with confidence that it's not going to fail at some later point when Nextflow actually goes to access the file path.
 
 For developers, all of this is covered in more detail in [Part 5](./05_input_validation.md) of this course.
 
@@ -631,20 +730,19 @@ ls $NXF_HOME/assets/nf-core/demo/conf/
 ```
 
 ```console
-base.config  modules.config  test.config  test_full.config
+base.config  igenomes.config  igenomes_ignored.config  modules.config  test.config  test_full.config
 ```
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nf-core/img/nfcore_config_files.excalidraw.svg"
 </figure>
 
-The three most important configuration files are:
+The most important configuration files are:
 
 - **`conf/base.config`**: Defines resource labels (`process_low`, `process_medium`, `process_high`) that assign CPUs, memory, and time to processes. When you see a process using more resources than expected, this is where those defaults come from.
 - **`conf/modules.config`**: Sets per-process tool arguments (`ext.args`) and output publishing settings (`publishDir`). Open this file to see what arguments each tool receives by default.
 - **`conf/test.config`**: The test profile you used in section 2.1, which caps resources via `resourceLimits` and sets a test samplesheet. Activated with `-profile test`.
-
-There is also a `conf/test_full.config` for running with a full-sized test dataset, useful for benchmarking.
+  There is also a `conf/test_full.config` for running with a full-sized test dataset, useful for benchmarking.
 
 The central `nextflow.config` loads all of the above and sets the appropriate default values for everything.
 
@@ -678,9 +776,17 @@ Run the pipeline with your custom config:
 nextflow run nf-core/demo -profile docker,test --outdir demo-results-custom -c custom.config
 ```
 
-The `-c` flag adds your config on top of the pipeline's built-in configuration.
+??? success "Command output"
 
-[TODO: explain concretely how to check what changed]
+    ```console
+    executor >  local (7)
+    [2a/f17b3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
+    [9c/e4d028] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
+    [5b/a93c71] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+    -[nf-core/demo] Pipeline completed successfully-
+    ```
+
+The `-c` flag adds your config on top of the pipeline's built-in configuration.
 
 #### 3.2.2. Set tool argument values with `ext.args`
 
@@ -693,7 +799,7 @@ For example, let's add a trimming argument to the `SEQTK_TRIM` module using `ext
 
 Update your `custom.config`:
 
-```groovy title="custom.config" linenums="1" hl_lines="5 6 7"
+```groovy title="custom.config" linenums="1" hl_lines="6 7 8"
 process {
     withName: 'FASTQC' {
         cpus = 2
@@ -715,11 +821,29 @@ Run the pipeline again with this config to see the effect:
 nextflow run nf-core/demo -profile docker,test --outdir demo-results-extargs -c custom.config
 ```
 
+??? success "Command output"
+
+    ```console
+    executor >  local (7)
+    [1e/b7a392] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
+    [ab/cd1234] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
+    [4f/c8d105] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+    -[nf-core/demo] Pipeline completed successfully-
+    ```
+
 To verify the argument was applied, find the `SEQTK_TRIM` work directory hash from the run output (e.g. `work/ab/cd1234...`) and check the `.command.sh` file inside it:
 
 ```bash
 cat work/ab/cd1234/.command.sh
 ```
+
+??? success "Command output"
+
+    ```console
+    #!/usr/bin/env bash
+    ...
+    seqtk trimfq -b 5 SAMPLE3_SE.fastq.gz | gzip -c > SAMPLE3_SE.trimmed.fastq.gz
+    ```
 
 You should see `-b 5` in the `seqtk trimfq` command, confirming your `ext.args` override took effect.
 
@@ -728,7 +852,16 @@ You should see `-b 5` in the `seqtk trimfq` command, confirming your `ext.args` 
 Some modules have `ext.args` already set by default.
 For example, the `FASTQC` module is configured with `ext.args = '--quiet'` by default (defined in `conf/modules.config`).
 
-[TODO: show snippet of `conf/modules.config` with `ext.args = '--quiet'` line highlighted]
+```groovy title="conf/modules.config" linenums="21" hl_lines="2"
+    withName: FASTQC {
+        ext.args = '--quiet'
+        publishDir = [
+            path: { "${params.outdir}/fastqc/${meta.id}" },
+            mode: params.publish_dir_mode,
+            pattern: "*.{html,json}"
+        ]
+    }
+```
 
 If you provide a value for `ext.args` via a custom configuration file, that value will completely replace the default set for that process.
 

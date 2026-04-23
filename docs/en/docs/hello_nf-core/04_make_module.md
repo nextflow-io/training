@@ -125,7 +125,7 @@ Process names are case-sensitive, so now that we've changed the process name, we
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
     include { COWPY                  } from '../modules/local/cowpy.nf'
-    include { FIND_CONCATENATE                } from '../modules/nf-core/cat/cat/main'
+    include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
     ```
 
 === "Before"
@@ -141,7 +141,7 @@ Process names are case-sensitive, so now that we've changed the process name, we
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
     include { cowpy                  } from '../modules/local/cowpy.nf'
-    include { FIND_CONCATENATE                } from '../modules/nf-core/cat/cat/main'
+    include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
     ```
 
 We could use an alias in the import statement to avoid having to update calls to the process, but that would somewhat defeat the point of adopting the uppercasing convention.
@@ -251,7 +251,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [elegant_plateau] DSL2 - revision: b9e9b3b8de
 
@@ -399,7 +399,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [modest_saha] DSL2 - revision: b9e9b3b8de
 
@@ -627,7 +627,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [exotic_planck] DSL2 - revision: b9e9b3b8de
 
@@ -845,7 +845,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [admiring_turing] DSL2 - revision: b9e9b3b8de
 
@@ -982,7 +982,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [silly_caravaggio] DSL2 - revision: b9e9b3b8de
 
@@ -1025,7 +1025,7 @@ Now the `core-hello-results` also contains the outputs of the `COWPY` module.
 
     ```console hl_lines="4-5"
     core-hello-results/
-    ├── cat
+    ├── find
     │   └── test.txt
     ├── cowpy
     │   └── cowpy-test.txt
@@ -1079,7 +1079,7 @@ This may look complicated, so let's look at each of the three components:
 - **`path:`** Determines the output directory based on the process name.
   The full name of a process contained in `task.process` includes the hierarchy of workflow and module imports (such as `CORE_HELLO:HELLO:FIND_CONCATENATE`).
   The `tokenize` operations strip away that hierarchy to get just the process name, then take the first part before any underscore (if applicable), and convert it to lowercase.
-  This is what determines that the results of `FIND_CONCATENATE` get published to `${params.outdir}/cat/`.
+  This is what determines that the results of `FIND_CONCATENATE` get published to `${params.outdir}/find/`.
 - **`mode:`** Controls how files are published (copy, symlink, etc.).
   This is configurable via the `params.publish_dir_mode` parameter.
 - **`saveAs:`** Filters which files to publish.
@@ -1163,13 +1163,32 @@ No changes to the script block are needed — the version is declared statically
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
 ```
 
+??? success "Command output"
+
+    ```console
+     N E X T F L O W   ~  version 25.10.4
+
+    Launching `./main.nf` [silly_fermat] DSL2 - revision: b9e9b3b8de
+
+    ...
+
+    executor >  local (8)
+    [8d/f3a091] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
+    [2e/b5c742] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
+    [6a/d9e183] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
+    [3c/f20b54] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
+    ```
+
 Open `core-hello-results/pipeline_info/hello_software_versions.yml` and you'll now see both modules:
 
 ```yaml title="core-hello-results/pipeline_info/hello_software_versions.yml"
-FIND_CONCATENATE:
-  pigz: 2.8
 COWPY:
   cowpy: 1.1.5
+FIND_CONCATENATE:
+  coreutils: 9.4
+  find: 4.6.0
+  pigz: 2.8
 ```
 
 The workflow-side collection — the `Channel.topic("versions")` block you saw in the placeholder workflow in Part 2 — subscribes to the topic and writes this combined report automatically.
@@ -1533,12 +1552,12 @@ All we need to do to try out this new version of the `COWPY` module is to switch
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
     include { COWPY                  } from '../modules/local/cowpy/main.nf'
-    include { FIND_CONCATENATE                } from '../modules/nf-core/cat/cat/main'
+    include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
     ```
 
 === "Before"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="1" hl_lines="10"
+    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="10"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -1549,7 +1568,7 @@ All we need to do to try out this new version of the `COWPY` module is to switch
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
     include { COWPY                  } from '../modules/local/cowpy.nf'
-    include { FIND_CONCATENATE                } from '../modules/nf-core/cat/cat/main'
+    include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
     ```
 
 Let's run the pipeline to test it.
@@ -1561,7 +1580,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Command output"
 
     ```console hl_lines="33"
-      N E X T F L O W   ~  version 25.04.3
+      N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [prickly_neumann] DSL2 - revision: b9e9b3b8de
 

@@ -72,17 +72,28 @@ Alternatively, you can also search for modules directly from the command line us
 nf-core modules list remote
 ```
 
+??? success "Command output (truncated)"
+
+    ```console
+    ...
+    │ fastqc                                                │
+    │ find/concatenate                                      │
+    │ gatk4/applybqsr                                       │
+    │ gatk4/baserecalibrator                                │
+    ...
+    ```
+
 This will display a list of all available modules in the nf-core/modules repository, though it's a little less convenient if you don't already know the name of the module you're searching for.
 However, if you do, you can pipe the list to `grep` to find specific modules:
 
 ```bash
-nf-core modules list remote | grep 'find_concatenate'
+nf-core modules list remote | grep 'find/concatenate'
 ```
 
 ??? success "Command output"
 
     ```console
-    │ find_concatenate
+    │ find/concatenate                                      │
     ```
 
 Just keep in mind the that `grep` approach will only pull out results with the search term in their name.
@@ -97,8 +108,6 @@ nf-core modules info find/concatenate
 
 This displays documentation about the module, including its inputs, outputs, and basic usage information.
 
-[TODO: update command output]
-
 ??? success "Command output"
 
     ```console
@@ -112,40 +121,64 @@ This displays documentation about the module, including its inputs, outputs, and
         nf-core/tools version 3.5.2 - https://nf-co.re
 
 
-    ╭─ Module: find/concatenate  ─────────────────────────────────────────────────╮
-    │ 🌐 Repository: https://github.com/nf-core/modules.git              │
-    │ 🔧 Tools: cat                                                      │
-    │ 📖 Description: A module for concatenation of gzipped or           │
-    │ uncompressed files                                                 │
-    ╰────────────────────────────────────────────────────────────────────╯
-                      ╷                                          ╷
-    📥 Inputs        │Description                               │Pattern
-    ╺━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━╸
-    input[0]         │                                          │
-    ╶─────────────────┼──────────────────────────────────────────┼───────╴
-      meta  (map)     │Groovy Map containing sample information  │
-                      │e.g. [ id:'test', single_end:false ]      │
-    ╶─────────────────┼──────────────────────────────────────────┼───────╴
-      files_in  (file)│List of compressed / uncompressed files   │      *
-                      ╵                                          ╵
-                          ╷                                 ╷
-    📥 Outputs           │Description                      │     Pattern
-    ╺━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━╸
-    file_out             │                                 │
-    ╶─────────────────────┼─────────────────────────────────┼────────────╴
-      meta  (map)         │Groovy Map containing sample     │
-                          │information                      │
-    ╶─────────────────────┼─────────────────────────────────┼────────────╴
-      ${prefix}  (file)   │Concatenated file. Will be       │ ${file_out}
-                          │gzipped if file_out ends with    │
-                          │".gz"                            │
-    ╶─────────────────────┼─────────────────────────────────┼────────────╴
-    versions_cat         │                                 │
-    ╶─────────────────────┼─────────────────────────────────┼────────────╴
-      versions_cat (tuple)│Software version information     │
-                          ╵                                 ╵
+    ╭─ Module: find/concatenate  ──────────────────────────────────────────────────╮
+    │ 🌐 Repository: https://github.com/nf-core/modules.git                        │
+    │ 🔧 Tools: find, pigz                                                         │
+    │ 📖 Description: A module for concatenation of gzipped or uncompressed files  │
+    │ getting around UNIX terminal argument size                                   │
+    ╰──────────────────────────────────────────────────────────────────────────────╯
+                      ╷                                                    ╷
+     📥 Inputs        │Description                                         │Pattern
+    ╺━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━╸
+     input[0]         │                                                    │
+    ╶─────────────────┼────────────────────────────────────────────────────┼───────╴
+      meta  (map)     │Groovy Map containing sample information e.g. [     │
+                      │id:'test' ]                                         │
+    ╶─────────────────┼────────────────────────────────────────────────────┼───────╴
+      files_in  (file)│List of either compressed or uncompressed files     │      *
+                      ╵                                                    ╵
+                                      ╷                                ╷
+     📥 Outputs                       │Description                     │    Pattern
+    ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━╸
+     file_out                         │                                │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      meta  (map)                     │Groovy Map containing sample    │
+                                      │information e.g. [ id:'test' ]  │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      ${prefix}  (file)               │Concatenated file. Will be      │${file_out}
+                                      │gzipped if ${prefix} ends with  │
+                                      │".gz" or inputs are gzipped,    │
+                                      │will be uncompressed otherwise. │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+     versions_find                    │                                │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      ${task.process}  (string)       │The name of the process         │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      find  (string)                  │The name of the tool            │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      find --version | sed '1!d; s/.* │The expression to obtain the    │
+     //'  (eval)                      │version of the tool             │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+     versions_pigz                    │                                │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      ${task.process}  (string)       │The name of the process         │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      pigz  (string)                  │The name of the tool            │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      pigz --version 2>&1 | sed       │The expression to obtain the    │
+     's/pigz //g'  (eval)             │version of the tool             │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+     versions_coreutils               │                                │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      ${task.process}  (string)       │The name of the process         │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      coreutils  (string)             │The name of the tool            │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      cat --version | sed '1!d; s/.*  │The expression to obtain the    │
+     //'  (eval)                      │version of the tool             │
+                                      ╵                                ╵
 
-    💻  Installation command: nf-core modules install find/concatenate
+     💻  Installation command: nf-core modules install find/concatenate
 
     ```
 
@@ -167,8 +200,6 @@ nf-core modules install find/concatenate
 
 The tool will proceed to install the module.
 
-[TODO: update command output]
-
 ??? success "Command output"
 
     ```console
@@ -182,10 +213,10 @@ The tool will proceed to install the module.
     nf-core/tools version 3.5.2 - https://nf-co.re
 
 
-    INFO Installing 'find/concatenate'
-    INFO Use the following statement to include this module:
+    INFO     Installing 'find/concatenate'
+    INFO     Use the following statement to include this module:
 
-        include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
+     include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
     ```
 
 The command automatically:
@@ -230,19 +261,23 @@ You can also verify the installation by asking the nf-core utility to list local
 nf-core modules list local
 ```
 
-[TODO: update command output]
-
 ??? success "Command output"
 
     ```console
     INFO     Repository type: pipeline
     INFO     Modules installed in '.':
 
-    ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
-    ┃ Module Name ┃ Repository      ┃ Version SHA ┃ Message                                ┃ Date       ┃
-    ┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
-    │ cat/cat     │ nf-core/modules │ 41dfa3f     │ update meta.yml of all modules (#8747) │ 2025-07-07 │
-    └─────────────┴─────────────────┴─────────────┴────────────────────────────────────────┴────────────┘
+    ┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+    ┃ Module Name    ┃ Repository      ┃ Version SHA ┃ Message        ┃ Date       ┃
+    ┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+    │ find/concaten… │ nf-core/modules │ 6d46786     │ Support for    │ 2026-04-23 │
+    │                │                 │             │ apptainer as   │            │
+    │                │                 │             │ well as        │            │
+    │                │                 │             │ singularity    │            │
+    │                │                 │             │ for .sif in    │            │
+    │                │                 │             │ `container`    │            │
+    │                │                 │             │ (#11260)       │            │
+    └────────────────┴─────────────────┴─────────────┴────────────────┴────────────┘
     ```
 
 This confirms that the `find/concatenate` module is now part of your project's source code.
@@ -368,20 +403,22 @@ In comparison, the `find/concatenate` module's interface is more complex:
 
 ```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="1" hl_lines="11 14"
 process FIND_CONCATENATE {
-    tag "$meta.id"
+    tag "${meta.id}"
     label 'process_low'
 
     conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/pigz:2.8' :
-        'biocontainers/pigz:2.8' }"
+    container "${workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container
+        ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/7f/7fd226561e12b32bcacdf4f5ff74577e76233adf52ae5cbc499a2cdfe0e27d82/data'
+        : 'community.wave.seqera.io/library/findutils_pigz:c4dd5edc44402661'}"
 
     input:
     tuple val(meta), path(files_in)
 
     output:
     tuple val(meta), path("${prefix}"), emit: file_out
-    tuple val("${task.process}"), val("pigz"), eval("pigz --version 2>&1 | sed 's/pigz //g'"), topic: versions, emit: versions_cat
+    tuple val("${task.process}"), val("find"), eval("find --version | sed '1!d; s/.* //'"), topic: versions, emit: versions_find
+    tuple val("${task.process}"), val("pigz"), eval("pigz --version 2>&1 | sed 's/pigz //g'"), topic: versions, emit: versions_pigz
+    tuple val("${task.process}"), val("coreutils"), eval("cat --version | sed '1!d; s/.* //'"), topic: versions, emit: versions_coreutils
 ```
 
 The FIND_CONCATENATE module takes a single input, but that input is a tuple containing two things:
@@ -391,8 +428,8 @@ The FIND_CONCATENATE module takes a single input, but that input is a tuple cont
 
 Upon completion, FIND_CONCATENATE delivers its outputs in two parts:
 
-- Another tuple containing the metamap and the concatenated output file, emitted with the `file_out` tag;
-- A version tuple published to the `versions` topic channel for software version tracking.
+- A tuple containing the metamap and the concatenated output file, emitted with the `file_out` tag;
+- Three version tuples (one per tool used) published to the `versions` topic channel for software version tracking.
 
 Note also that by default, the output file will be named based on an identifier that is part of the metadata (code not shown here).
 
@@ -432,7 +469,7 @@ Or in a case where the metadata is attached at the batch level:
 
 Now let's put this in the context of the `FIND_CONCATENATE` process, which expects the input files to be packaged into a tuple with a metamap, and outputs the metamap as part of the output tuple as well.
 
-```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="1" hl_lines="2 5"
+```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="10" hl_lines="2 5"
 input:
 tuple val(meta), path(files_in)
 
@@ -446,8 +483,8 @@ Subsequent processes can then readily access that metadata too.
 Remember how we told you that the file output by `FIND_CONCATENATE` will be named based on an identifier that is part of the metadata?
 This is the relevant code:
 
-```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="35"
-prefix   = task.ext.prefix ?: "${meta.id}${getFileSuffix(file_list[0])}"
+```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="37"
+prefix = task.ext.prefix ?: "${meta.id}${file_extensions[0]}"
 ```
 
 This translates roughly as follows: if a `prefix` is provided via the external task parameter system (`task.ext`), use that to name the output file; otherwise create one using `${meta.id}`, which corresponds to the `id` field in the metamap.
@@ -731,7 +768,7 @@ This should run reasonably quickly.
 ??? success "Command output"
 
     ```console
-    N E X T F L O W ~ version 25.04.3
+    N E X T F L O W ~ version 25.10.4
 
         Launching `./main.nf` [evil_pike] DSL2 - revision: b9e9b3b8de
 
