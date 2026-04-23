@@ -166,6 +166,64 @@
     </div>
     <div data-md-component="announce">
       
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div style="text-align: center">
+  Nextflow Training Week (2025-Q1):
+  <strong>March 10-14, 2025</strong>
+  <a
+    class="md-button"
+    href="https://community.seqera.io/t/nextflow-training-week-2025-q1/1775/6"
+    target="_blank"
+  >
+    More info
+    <span class="twemoji"
+      ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path
+          d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"
+        ></path></svg
+    ></span>
+  </a>
+</div>
+<style type="text/css">
+  .md-banner {
+    display: none;
+  }
+</style>
+
+<script>
+  (function () {
+    function hideAnnouncement() {
+      var announcementDate = new Date(
+        "2025-03-15T00:00:00Z",
+      );
+      var currentDate = new Date();
+      var banner = document.querySelector(".md-banner");
+      if (banner && currentDate <= announcementDate) {
+        banner.style.display = "block";
+      }
+    }
+
+    // Run on initial load
+    hideAnnouncement();
+
+    // Hook into XHR to run after each page update
+    var originalOpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function () {
+      this.addEventListener("load", function () {
+        setTimeout(hideAnnouncement, 0); // Ensure it runs after the request completes
+      });
+      return originalOpen.apply(this, arguments);
+    };
+  })();
+</script>
+ 
+          </div>
+          
+        </aside>
+      
     </div>
     
       <div data-md-color-scheme="default" data-md-component="outdated" hidden>
@@ -381,40 +439,13 @@
     <div class="md-container" data-md-component="container">
       
       
-  
-  <nav id="quiz-progress-mobile" class="quiz-progress-mobile md-nav" aria-label="Quiz Progress" style="display: none;">
-    <!-- mkdocs-quiz progress sidebar (mobile) -->
-    <div class="quiz-progress-bar">
-      <div class="quiz-progress-bar-incorrect" style="width: 0%"></div>
-      <div class="quiz-progress-bar-correct" style="width: 0%"></div>
-    </div>
-    <div data-md-component="quiz-progress">
-        <div class="quiz-correct-reset">
-          <span class="md-ellipsis">
-            <span data-quiz-translate="Answered:">Answered:</span> <span class="quiz-progress-answered">0</span> / <span class="quiz-progress-total">0</span>
-          </span>
-          <span class="md-ellipsis">
-            <span data-quiz-translate="Correct:">Correct:</span> <span class="quiz-progress-score">0</span> / <span class="quiz-progress-score-total">0</span>
-          </span>
-          <a href="#" class="quiz-reset-all-link" style="color: var(--md-primary-fg-color); text-decoration: none;">
-            <span data-quiz-translate="Reset">Reset</span>
-          </a>
-        </div>
-    </div>
-  </nav>
-
-  
-  
         
           
         
       
-
       <main class="md-main" data-md-component="main">
         <div class="md-main__inner md-grid">
           
-  
-  
             
               
                 
@@ -3753,43 +3784,6 @@
               </div>
             
           
-
-  
-  <div id="quiz-progress-sidebar" aria-label="Quiz Progress" style="display: none;">
-    <!-- mkdocs-quiz progress sidebar (desktop) -->
-    <label class="md-nav__title">
-      <span class="md-nav__icon md-icon"></span>
-      <span data-quiz-translate="Quiz Progress">Quiz Progress</span>
-    </label>
-    <ul class="md-nav__list" data-md-component="quiz-progress">
-      <li class="md-nav__item">
-        <div class="md-nav__link">
-          <span class="md-ellipsis">
-            <span data-quiz-translate="Answered:">Answered:</span> <span class="quiz-progress-answered">0</span> / <span class="quiz-progress-total">0</span> (<span class="quiz-progress-answered-percentage">0%</span>)
-          </span>
-        </div>
-      </li>
-      <li class="md-nav__item">
-        <div class="md-nav__link">
-          <div class="quiz-progress-bar">
-            <div class="quiz-progress-bar-incorrect" style="width: 0%"></div>
-            <div class="quiz-progress-bar-correct" style="width: 0%"></div>
-          </div>
-        </div>
-      </li>
-      <li class="md-nav__item">
-        <div class="md-nav__link quiz-correct-reset">
-          <span class="md-ellipsis">
-            <span data-quiz-translate="Correct:">Correct:</span> <span class="quiz-progress-score">0</span> / <span class="quiz-progress-score-total">0</span> (<span class="quiz-progress-score-percentage">0%</span>)
-          </span>
-          <a href="#" class="quiz-reset-all-link" style="color: var(--md-primary-fg-color); text-decoration: none;">
-            <span data-quiz-translate="Reset">Reset</span>
-          </a>
-        </div>
-      </li>
-    </ul>
-  </div>
-
           
             <div class="md-content" data-md-component="content">
               
@@ -3848,7 +3842,60 @@ Allerdings entschieden sich die Macher von Gitpod, die kostenlose Funktionalitä
 Aus diesem Grund sind wir zu GitHub Codespaces gewechselt, das ebenfalls eine Ein-Klick-Entwicklungsumgebung ohne vorherige Einrichtung bietet.</p>
 <p>Je nachdem, wann du dich bei Gitpod angemeldet hast und wann genau der Dienst eingestellt wird, kannst du das Training möglicherweise noch in deren alter Cloud-IDE starten, obwohl wir keinen zuverlässigen Zugang für die Zukunft garantieren können:
 <a href="https://gitpod.io/#https://github.com/nextflow-io/training">In Gitpod öffnen</a>.</p>
-</div><style type="text/css">.quiz {
+</div><div id="quiz-progress-sidebar" aria-label="Quiz-Fortschritt" style="display: none;">
+  <!-- mkdocs-quiz progress sidebar (desktop) -->
+  <label class="md-nav__title">
+    <span class="md-nav__icon md-icon"></span>
+    Quiz-Fortschritt
+  </label>
+  <ul class="md-nav__list" data-md-component="quiz-progress">
+    <li class="md-nav__item">
+      <div class="md-nav__link">
+        <span class="md-ellipsis">
+          Beantwortet: <span class="quiz-progress-answered">0</span> / <span class="quiz-progress-total">0</span> (<span class="quiz-progress-answered-percentage">0%</span>)
+        </span>
+      </div>
+    </li>
+    <li class="md-nav__item">
+      <div class="md-nav__link">
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-bar-incorrect" style="width: 0%"></div>
+          <div class="quiz-progress-bar-correct" style="width: 0%"></div>
+        </div>
+      </div>
+    </li>
+    <li class="md-nav__item">
+      <div class="md-nav__link quiz-correct-reset">
+        <span class="md-ellipsis">
+          Richtig: <span class="quiz-progress-score">0</span> / <span class="quiz-progress-score-total">0</span> (<span class="quiz-progress-score-percentage">0%</span>)
+        </span>
+        <a href="#" class="quiz-reset-all-link" style="color: var(--md-primary-fg-color); text-decoration: none;">
+          Zurücksetzen
+        </a>
+      </div>
+    </li>
+  </ul>
+</div>
+<nav id="quiz-progress-mobile" class="quiz-progress-mobile md-nav" aria-label="Quiz-Fortschritt" style="display: none;">
+  <!-- mkdocs-quiz progress sidebar (mobile) -->
+  <div class="quiz-progress-bar">
+    <div class="quiz-progress-bar-incorrect" style="width: 0%"></div>
+    <div class="quiz-progress-bar-correct" style="width: 0%"></div>
+  </div>
+  <div data-md-component="quiz-progress">
+    <div class="quiz-correct-reset">
+      <span class="md-ellipsis">
+        Beantwortet: <span class="quiz-progress-answered">0</span> / <span class="quiz-progress-total">0</span>
+      </span>
+      <span class="md-ellipsis">
+        Richtig: <span class="quiz-progress-score">0</span> / <span class="quiz-progress-score-total">0</span>
+      </span>
+      <a href="#" class="quiz-reset-all-link" style="color: var(--md-primary-fg-color); text-decoration: none;">
+        Zurücksetzen
+      </a>
+    </div>
+  </div>
+</nav><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -3895,10 +3942,12 @@ Aus diesem Grund sind wir zu GitHub Codespaces gewechselt, das ebenfalls eine Ei
 .wrong label,
 .wrong label * {
   color: #dc3545;
+  text-decoration: line-through;
 }
 .correct label,
 .correct label * {
   color: #198754;
+  font-weight: bold;
 }
 
 fieldset {
@@ -4819,16 +4868,6 @@ window.mkdocsQuizConfig = {
     },
   };
 
-  // Translate template elements with data-quiz-translate attributes
-  function translateTemplateElements() {
-    document.querySelectorAll("[data-quiz-translate]").forEach((element) => {
-      const key = element.getAttribute("data-quiz-translate");
-      if (key) {
-        element.textContent = t(key);
-      }
-    });
-  }
-
   // Truncate text to a maximum length, adding ellipsis if needed
   function truncateText(text, maxLength) {
     if (text.length <= maxLength) return text;
@@ -5462,9 +5501,6 @@ window.mkdocsQuizConfig = {
   function initializePage() {
     // Initialize tracker
     quizTracker.init();
-
-    // Translate template elements
-    translateTemplateElements();
 
     // Reposition sidebar for Material theme TOC integration
     repositionSidebar();
