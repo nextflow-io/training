@@ -5873,7 +5873,7 @@ However, the results of the previous runs are still preserved in the task direct
 <a id="__codelineno-43-21" name="__codelineno-43-21"></a><span class="cm"> * Pipeline parameters</span>
 <a id="__codelineno-43-22" name="__codelineno-43-22"></a><span class="cm"> */</span>
 <a id="__codelineno-43-23" name="__codelineno-43-23"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-43-24" name="__codelineno-43-24"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Holà mundo!&#39;</span>
+<a id="__codelineno-43-24" name="__codelineno-43-24"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Hola mundo!&#39;</span>
 <a id="__codelineno-43-25" name="__codelineno-43-25"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>As you see, we can specify the type of input that the workflow expects (Nextflow 25.10.2 and later).
@@ -5881,7 +5881,7 @@ The syntax is <code>name: Type = default_value</code>.
 Supported types include <code>String</code>, <code>Integer</code>, <code>Float</code>, <code>Boolean</code>, and <code>Path</code>.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>In older workflows, you may see that whole <code>params</code> block written as just <code>input = 'Holà mundo!'</code>.</p>
+<p>In older workflows, you may see that whole <code>params</code> block written as just <code>input = 'Hola mundo!'</code>.</p>
 </div>
 <p>As you add more parameters to your pipeline, you should add them all to this block, whether or not you need to give them a default value.
 This will make it easy to find all configurable parameters at a glance.</p>
@@ -5906,7 +5906,7 @@ This will make it easy to find all configurable parameters at a glance.</p>
 <a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>- file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>- cause: you tried to assign a value to the class &#39;java.lang.String&#39;
 <a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a>@ line 24, column 12.
-<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>      input: String = &#39;Holà mundo!&#39;
+<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>      input: String = &#39;Hola mundo!&#39;
 <a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a>              ^
 <a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a>
 <a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a>1 error
@@ -5924,7 +5924,7 @@ Check the <a href="../../info/nxf_versions/">Nextflow versions</a> help material
 <p>The output will be in the same place as previously, but the contents should be updated with the new text.</p>
 <details class="abstract">
 <summary>File contents</summary>
-<div class="highlight"><span class="filename">results/hello_world/output.txt</span><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go">Holà mundo!</span>
+<div class="highlight"><span class="filename">results/hello_world/output.txt</span><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go">Hola mundo!</span>
 </code></pre></div>
 </details>
 <p>Nextflow used the default value of the greeting parameter to create the output.</p>
