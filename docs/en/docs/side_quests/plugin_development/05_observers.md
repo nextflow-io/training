@@ -308,7 +308,7 @@ nextflow run greet.nf -ansi-log false
 ??? example "Output"
 
     ```console
-    N E X T F L O W  ~  version 25.10.2
+    N E X T F L O W  ~  version 25.10.4
     Launching `greet.nf` [pensive_engelbart] DSL2 - revision: 85fefd90d0
     Pipeline is starting! 🚀
     Reversed: olleH
