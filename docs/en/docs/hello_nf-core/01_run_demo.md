@@ -260,7 +260,7 @@ params {
 You'll notice right away that the comment block at the top includes a usage example showing how to run the pipeline with this test profile.
 
 ```groovy title="conf/test.config" linenums="7"
-don        nextflow run nf-core/demo -profile test,<docker/singularity> --outdir <OUTDIR>
+        nextflow run nf-core/demo -profile test,<docker/singularity> --outdir <OUTDIR>
 ```
 
 The only things we need to supply are what's shown between carets in the example command: `<docker/singularity>` and `<OUTDIR>`.
