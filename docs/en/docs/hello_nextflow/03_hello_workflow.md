@@ -400,7 +400,7 @@ The output is a text file called `COLLECTED-output.txt` that contains the upperc
     ```console title="COLLECTED-output.txt"
     HELLO
     BONJOUR
-    HOLà
+    HOLA
     ```
 
 That is the result we want to achieve with our workflow.
@@ -955,7 +955,7 @@ It runs successfully and produces the desired output:
     ```console title="results/COLLECTED-trio-output.txt"
     HELLO
     BONJOUR
-    HOLà
+    HOLA
     ```
 
 Now, as long as we specify the parameter appropriately, subsequent runs on other batches of inputs won't clobber previous results.

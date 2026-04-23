@@ -845,7 +845,7 @@ The final ASCII art output is in the `results/hello_containers/` directory, unde
 
     ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
