@@ -46,7 +46,7 @@ segmentation_method: "cellpose"
 nextflow run ./molkart -params-file params.yaml -resume
 ```
 
-이것으로 끝입니다! 매개변수 파일은 정확한 구성을 문서화하고 재실행이나 공유를 쉽게 만듭니다.
+이것으로 끝입니다! 매개변수 파일은 정확한 설정을 문서화하고 재실행이나 공유를 쉽게 만듭니다.
 
 ### 1.3. 매개변수 재정의하기
 
@@ -60,7 +60,7 @@ nextflow run ./molkart -params-file params.yaml --segmentation_method "stardist"
 또한 `-resume` 플래그가 이전 실행의 전처리 결과를 재사용하여 시간을 절약했음을 확인할 수 있습니다.
 이 패턴을 사용하여 파이프라인의 다양한 변형을 빠르게 테스트할 수 있습니다.
 
-### 요점
+### 핵심 정리
 
 매개변수 파일은 분석을 재현 가능하고 공유하기 쉽게 만듭니다.
 실제 분석 작업에는 매개변수 파일을 사용하십시오.
@@ -125,21 +125,21 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! warning "경고"
+!!! Warning "경고"
 
     샘플시트의 경로는 샘플시트가 위치한 곳이 아니라 Nextflow를 **실행**하는 위치에 상대적입니다.
 
-마지막으로 로컬 파일 경로가 있는 샘플시트로 nf-core/molkart를 한 번 더 실행하겠습니다:
+마지막으로 로컬 파일 경로가 있는 샘플시트로 nf-core/molkart를 한 번 더 실행합니다:
 
 `nextflow run ./molkart -params-file params.yaml -resume`
 
 보시다시피 Nextflow는 파일이 Github에서 다운로드되었을 때와 유사하게 이 실행을 수행합니다. 이것은 Nextflow의 훌륭한 기능 중 하나로, 데이터가 어디에 위치하든 상관없이 적절하게 스테이징합니다.
 
-### 요점
+### 핵심 정리
 
 샘플시트는 파일 경로와 함께 메타데이터를 명시적으로 정의할 수 있는 방식으로 다중 샘플 데이터셋을 구성합니다.
 대부분의 nf-core 파이프라인은 이 패턴을 사용합니다.
 
 ### 다음 단계
 
-입력에 대해 다루었으니, 이제 다양한 컴퓨팅 환경에 맞게 Nextflow 파이프라인을 구성하는 방법을 살펴보겠습니다.
+입력에 대해 다루었으니, 이제 다양한 컴퓨팅 환경에 맞게 Nextflow 파이프라인을 설정하는 방법을 살펴보겠습니다.

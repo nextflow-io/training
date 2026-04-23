@@ -116,6 +116,11 @@ class FileLogEntry:
     output_tokens: int = 0
     stop_reason: str = ""
     continuations: int = 0
+    # Chunk-based translation metadata
+    chunked: bool = False
+    total_chunks: int = 0
+    translated_chunks: int = 0
+    unchanged_chunks: int = 0
 
 
 class TranslationLog:

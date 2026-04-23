@@ -1,6 +1,6 @@
 # Başlarken
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Eğitim ortamını başlatma
 
@@ -13,7 +13,7 @@ Kursu takip edebilmek için bu talimatları paralel olarak açık tutmanız gere
 
 ### Ortam temelleri
 
-Bu eğitim ortamı, eğitim kursu boyunca çalışmak için gerekli tüm yazılım, kod ve veriyi içerir, dolayısıyla kendiniz herhangi bir şey yüklemenize gerek yoktur.
+Bu eğitim ortamı, eğitim kursu boyunca çalışmak için gerekli tüm yazılım, kod ve veriyi içerir; dolayısıyla kendiniz herhangi bir şey yüklemenize gerek yoktur.
 
 Codespace, bir dosya sistemi gezgini, bir kod düzenleyici ve bir terminal kabuğu içeren bir VSCode arayüzü ile kurulmuştur.
 Kurs boyunca verilen tüm talimatlar (örn. 'dosyayı açın', 'kodu düzenleyin' veya 'bu komutu çalıştırın') aksi belirtilmedikçe VSCode arayüzünün bu üç bölümünü ifade eder.
@@ -47,7 +47,7 @@ Codespace'iniz çalışmaya başladığında, eğitime dalmadan önce yapmanız 
 
 ### Çalışma dizinini ayarlama
 
-Varsayılan olarak, codespace tüm eğitim kurslarının kök dizininde ayarlanmış çalışma dizini ile açılır, ancak bu kurs için `hello-nf-core/` dizininde çalışacağız.
+Varsayılan olarak, codespace tüm eğitim kurslarının kök dizininde ayarlanmış çalışma dizini ile açılır; ancak bu kurs için `hello-nf-core/` dizininde çalışacağız.
 
 Terminalde şu komutu çalıştırarak şimdi dizini değiştirin:
 
@@ -70,7 +70,7 @@ cd hello-nf-core/
 Bu dizinin içeriğini, eğitim çalışma alanının sol tarafındaki dosya gezginini kullanarak keşfedebilirsiniz.
 Alternatif olarak, `tree` komutunu kullanabilirsiniz.
 
-Kurs boyunca, dizin yapısını ve içeriğini okunabilir bir biçimde göstermek için `tree` çıktısını kullanıyoruz, bazen netlik için küçük değişikliklerle.
+Kurs boyunca, dizin yapısını ve içeriğini okunabilir bir biçimde göstermek için `tree` çıktısını kullanıyoruz; bazen netlik için küçük değişikliklerle.
 
 Burada ikinci seviyeye kadar bir içindekiler tablosu oluşturuyoruz:
 
@@ -103,7 +103,7 @@ Beklenen komut çıktısını özlü bir şekilde dahil etmek için bunun gibi d
 
 - **`original-hello` dizini**, Hello Nextflow eğitim serisinin tamamı boyunca çalışarak üretilen kaynak kodun bir kopyasını içerir (Docker etkinleştirilmiş olarak).
 
-- **`solutions` dizini**, kursun her adımından kaynaklanan tamamlanmış workflow betiklerini içerir.
+- **`solutions` dizini**, kursun her adımından kaynaklanan tamamlanmış iş akışı betiklerini içerir.
   Bunlar, çalışmanızı kontrol etmek ve herhangi bir sorunu gidermek için referans olarak kullanılmak üzere tasarlanmıştır.
 
 ## Hazırlık kontrol listesi

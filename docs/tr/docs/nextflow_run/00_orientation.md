@@ -1,6 +1,6 @@
 # Başlangıç
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Eğitim ortamını başlatın
 
@@ -13,16 +13,16 @@ Kurs boyunca çalışmak için bu talimatları paralel olarak açık tutmanız g
 
 ### Ortam temelleri
 
-Bu eğitim ortamı, eğitim kursunda çalışmak için gerekli tüm yazılım, kod ve verileri içerir, böylece kendiniz hiçbir şey yüklemeniz gerekmez.
+Bu eğitim ortamı, eğitim kursunda çalışmak için gerekli tüm yazılım, kod ve verileri içerir; böylece kendiniz hiçbir şey yüklemeniz gerekmez.
 
 Codespace, dosya sistemi gezgini, kod editörü ve terminal shell içeren bir VSCode arayüzüyle kurulmuştur.
-Kurs sırasında verilen tüm talimatlar (örn. 'dosyayı açın', 'kodu düzenleyin' veya 'bu komutu çalıştırın') aksi belirtilmedikçe VScode arayüzünün bu üç bölümüne atıfta bulunur.
+Kurs sırasında verilen tüm talimatlar (örn. 'dosyayı açın', 'kodu düzenleyin' veya 'bu komutu çalıştırın') aksi belirtilmedikçe VSCode arayüzünün bu üç bölümüne atıfta bulunur.
 
 Bu kursu kendi başınıza çalışıyorsanız, daha fazla ayrıntı için [ortam temelleri](../envsetup/01_setup.md) ile tanışın.
 
 ### Versiyon gereksinimleri
 
-Bu eğitim, v2 sözdizimi ayrıştırıcısı ETKİNLEŞTİRİLMİŞ olarak Nextflow 25.10.2 veya üstü için tasarlanmıştır.
+Bu eğitim, v2 sözdizimi ayrıştırıcısı **ETKİNLEŞTİRİLMİŞ** olarak Nextflow 25.10.2 veya üstü için tasarlanmıştır.
 Yerel veya özel bir ortam kullanıyorsanız, [burada](../info/nxf_versions.md) belgelendiği gibi doğru ayarları kullandığınızdan emin olun.
 
 ## Çalışmaya hazırlanın
@@ -31,7 +31,7 @@ Codespace'iniz çalışmaya başladığında, eğitime dalmadan önce yapmanız 
 
 ### Çalışma dizinini ayarlayın
 
-Varsayılan olarak, codespace tüm eğitim kurslarının kökünde çalışma dizini ayarlanmış şekilde açılır, ancak bu kurs için `nextflow-run/` dizininde çalışacağız.
+Varsayılan olarak, codespace tüm eğitim kurslarının kökünde çalışma dizini ayarlanmış şekilde açılır; ancak bu kurs için `nextflow-run/` dizininde çalışacağız.
 
 Şimdi terminalde bu komutu çalıştırarak dizini değiştirin:
 
@@ -39,7 +39,7 @@ Varsayılan olarak, codespace tüm eğitim kurslarının kökünde çalışma di
 cd nextflow-run/
 ```
 
-VSCode'u bu dizine odaklanacak şekilde ayarlayabilirsiniz, böylece dosya gezgini kenar çubuğunda yalnızca ilgili dosyalar görünür:
+VSCode'u bu dizine odaklanacak şekilde ayarlayabilirsiniz; böylece dosya gezgini kenar çubuğunda yalnızca ilgili dosyalar görünür:
 
 ```bash
 code .
@@ -60,7 +60,7 @@ code .
 Bu dizinin içeriğini eğitim çalışma alanının sol tarafındaki dosya gezginini kullanarak keşfedebilirsiniz.
 Alternatif olarak, `tree` komutunu kullanabilirsiniz.
 
-Kurs boyunca, dizin yapısını ve içeriğini okunabilir bir biçimde temsil etmek için `tree` çıktısını kullanıyoruz, bazen netlik için küçük değişikliklerle.
+Kurs boyunca, dizin yapısını ve içeriğini okunabilir bir biçimde temsil etmek için `tree` çıktısını kullanıyoruz; bazen netlik için küçük değişikliklerle.
 
 Burada ikinci seviyeye kadar bir içindekiler tablosu oluşturuyoruz:
 
@@ -97,7 +97,7 @@ tree . -L 2
 Bölümü genişletmek ve içeriğini görüntülemek için renkli kutuya tıklayın.
 Beklenen komut çıktısının yanı sıra dizin ve dosya içeriğini özlü bir şekilde görüntülemek için bu tür daraltılabilir bölümler kullanıyoruz.
 
-- **`.nf` dosyaları**, kursun hangi bölümünde kullanıldıklarına göre numaralandırılmış workflow betikleridir.
+- **`.nf` dosyaları**, kursun hangi bölümünde kullanıldıklarına göre numaralandırılmış iş akışı betikleridir.
 
 - **`nextflow.config` dosyası**, minimum ortam özelliklerini ayarlayan bir yapılandırma dosyasıdır.
   Şimdilik görmezden gelebilirsiniz.
@@ -106,7 +106,7 @@ Beklenen komut çıktısının yanı sıra dizin ve dosya içeriğini özlü bir
 
 - **`test-params.*`** dosyaları, Bölüm 3'te (Yapılandırma) kullanacağımız yapılandırma dosyalarıdır. Şimdilik görmezden gelebilirsiniz.
 
-- **`solutions` dizini**, kursu tamamlamanın sonucunda oluşan workflow'un ve yardımcı dosyalarının (yapılandırma ve modüller) son halini içerir.
+- **`solutions` dizini**, kursu tamamlamanın sonucunda oluşan iş akışının ve yardımcı dosyalarının (yapılandırma ve modüller) son halini içerir.
   Çalışmanızı kontrol etmek ve herhangi bir sorunu gidermek için referans olarak kullanılması amaçlanmıştır.
 
 ## Hazırlık kontrol listesi
