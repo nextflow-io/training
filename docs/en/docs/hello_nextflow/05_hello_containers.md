@@ -665,7 +665,7 @@ Do you think it's going to work?
 Let's delete the previous published outputs to have a clean slate, and run the workflow with the `-resume` flag.
 
 ```bash
-rm -r hello_containers/
+rm -r results/hello_containers/
 nextflow run hello-containers.nf -resume
 ```
 
