@@ -516,10 +516,10 @@ Das produziert immer noch dieselbe Ausgabe wie zuvor, außer dass wir unsere Aus
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-outdir-output.txt
     │   ├── Hello-output.txt
-    │   ├── Hola-output.txt
+    │   ├── Holà-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Hola-output.txt
+    │   └── UPPER-Holà-output.txt
     └── outdir-report.txt
     ```
 
@@ -625,13 +625,13 @@ Das produziert immer noch dieselbe Ausgabe wie zuvor, außer dass wir unsere Aus
     ├── convertToUpper
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Hola-output.txt
+    │   └── UPPER-Holà-output.txt
     ├── cowpy
     │   └── cowpy-COLLECTED-pnames-output.txt
     └── sayHello
         ├── Bonjour-output.txt
         ├── Hello-output.txt
-        └── Hola-output.txt
+        └── Holà-output.txt
     ```
 
 !!! note "Hinweis"
@@ -758,13 +758,13 @@ Es sind immer noch alles echte Kopien, keine Symlinks.
     ├── convertToUpper
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Hola-output.txt
+    │   └── UPPER-Holà-output.txt
     ├── cowpy
     │   └── cowpy-COLLECTED-outmode-output.txt
     └── sayHello
         ├── Bonjour-output.txt
         ├── Hello-output.txt
-        └── Hola-output.txt
+        └── Holà-output.txt
     ```
 
 Der Hauptgrund, warum du vielleicht immer noch die pro-Ausgabe-Art des Setzens des mode verwenden möchtest, ist, wenn du innerhalb desselben Workflows mischen und kombinieren möchtest, _d.h._ einige Ausgaben kopiert und einige per Symlink verlinkt haben möchtest.

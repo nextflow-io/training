@@ -410,7 +410,7 @@ cat assets/greetings.csv
 ```csv title="assets/greetings.csv"
 Hello,en,87
 Bonjour,fr,96
-Hola,es,98
+Holà,es,98
 ```
 
 Aquest és un CSV simple amb:
@@ -536,7 +536,7 @@ Per al nostre cas simple, necessitem afegir una línia de capçalera al nostre f
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 === "Abans"
@@ -544,7 +544,7 @@ Per al nostre cas simple, necessitem afegir una línia de capçalera al nostre f
     ```csv title="assets/greetings.csv" linenums="1"
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 Ara el fitxer CSV té una línia de capçalera que coincideix amb els noms de camp del nostre esquema.
@@ -711,7 +711,7 @@ Ara obriu el fitxer i canvieu el nom de la primera columna, a la línia de capç
     message,language,score
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 === "Abans"
@@ -720,7 +720,7 @@ Ara obriu el fitxer i canvieu el nom de la primera columna, a la línia de capç
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 Això no coincideix amb el nostre esquema, així que la validació hauria de llançar un error.

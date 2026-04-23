@@ -111,7 +111,7 @@ To do the conversion of the greetings to uppercase, we're going to use a classic
 tr '[a-z]' '[A-Z]'
 ```
 
-This is a very naive text replacement one-liner that does not account for accented letters, so for example 'Hola' will become 'HOLà', but it will do a good enough job for demonstrating the Nextflow concepts and that's what matters.
+This is a very naive text replacement one-liner that does not account for accented letters, but it will do a good enough job for demonstrating the Nextflow concepts and that's what matters.
 
 To test it out, we can run the `echo 'Hello World'` command and pipe its output to the `tr` command:
 

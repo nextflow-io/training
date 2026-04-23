@@ -892,10 +892,10 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     ├── Bonjour-output.txt
     ├── cowpy-test.txt
     ├── Hello-output.txt
-    ├── Hola-output.txt
+    ├── Holà-output.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt
+    └── UPPER-Holà-output.txt
     ```
 
 모듈이나 워크플로우 코드를 변경하지 않고도 명명 패턴을 변경할 수 있다는 것을 확인하기 위해 `conf/modules.config`에서 `ext.prefix` 구성을 자유롭게 변경해 보십시오.

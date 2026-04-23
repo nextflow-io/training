@@ -92,11 +92,11 @@ Wie zuvor findest du die Ausgabedateien im Verzeichnis, das im `output`-Block an
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Hola-output.txt
+    ├── Holà-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt
+    └── UPPER-Holà-output.txt
     ```
 
 Wenn das bei dir funktioniert hat, bist du bereit zu lernen, wie man Container verwendet.
@@ -356,7 +356,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
      ____________________
     / Hello,English,123  \
     | Bonjour,French,456 |
-    \ Hola,Spanish,789   /
+    \ Holà,Spanish,789   /
     --------------------
       \                                  ,+*^^*+___+++_
       \                           ,*^^^^              )
@@ -834,10 +834,10 @@ Wie üblich findest du die Workflow-Ausgaben im entsprechenden Ergebnisverzeichn
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Hola-output.txt
+    │   ├── Holà-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Hola-output.txt
+    │   └── UPPER-Holà-output.txt
     └── batch-report.txt
     ```
 

@@ -410,7 +410,7 @@ cat assets/greetings.csv
 ```csv title="assets/greetings.csv"
 Hello,en,87
 Bonjour,fr,96
-Hola,es,98
+Holà,es,98
 ```
 
 Dies ist eine einfache CSV mit:
@@ -536,7 +536,7 @@ Für unseren einfachen Fall müssen wir unserer Greetings-Datei eine Kopfzeile h
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 === "Vorher"
@@ -544,7 +544,7 @@ Für unseren einfachen Fall müssen wir unserer Greetings-Datei eine Kopfzeile h
     ```csv title="assets/greetings.csv" linenums="1"
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 Nun hat die CSV-Datei eine Kopfzeile, die mit den Feldnamen in unserem Schema übereinstimmt.
@@ -711,7 +711,7 @@ cp assets/greetings.csv assets/invalid_greetings.csv
     message,language,score
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 === "Vorher"
@@ -720,7 +720,7 @@ cp assets/greetings.csv assets/invalid_greetings.csv
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 Dies stimmt nicht mit unserem Schema überein, daher sollte die Validierung einen Fehler werfen.

@@ -516,10 +516,10 @@ Bu hala öncekiyle aynı çıktıyı üretiyor, ancak bu sefer çıktılarımız
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-outdir-output.txt
     │   ├── Hello-output.txt
-    │   ├── Hola-output.txt
+    │   ├── Holà-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Hola-output.txt
+    │   └── UPPER-Holà-output.txt
     └── outdir-report.txt
     ```
 
@@ -625,13 +625,13 @@ Bu hala öncekiyle aynı çıktıyı üretiyor, ancak bu sefer çıktılarımız
     ├── convertToUpper
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Hola-output.txt
+    │   └── UPPER-Holà-output.txt
     ├── cowpy
     │   └── cowpy-COLLECTED-pnames-output.txt
     └── sayHello
         ├── Bonjour-output.txt
         ├── Hello-output.txt
-        └── Hola-output.txt
+        └── Holà-output.txt
     ```
 
 !!! note "Not"
@@ -758,13 +758,13 @@ Hala hepsi düzgün kopyalar, symlink değil.
     ├── convertToUpper
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Hola-output.txt
+    │   └── UPPER-Holà-output.txt
     ├── cowpy
     │   └── cowpy-COLLECTED-outmode-output.txt
     └── sayHello
         ├── Bonjour-output.txt
         ├── Hello-output.txt
-        └── Hola-output.txt
+        └── Holà-output.txt
     ```
 
 Çıktı başına mod ayarlama yolunu hala kullanmak istemenizin ana nedeni, aynı workflow içinde karıştırıp eşleştirmek istemeniz durumudur; yani bazı çıktıların kopyalanmasını ve bazılarının symlink olmasını isterseniz.

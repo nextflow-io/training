@@ -88,11 +88,11 @@ Com abans, trobareu els fitxers de sortida al directori especificat al bloc `out
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Hola-output.txt
+    ├── Holà-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt
+    └── UPPER-Holà-output.txt
     ```
 
 Si això ha funcionat, esteu preparats per aprendre com modularitzar el codi del vostre workflow.

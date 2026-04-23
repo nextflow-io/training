@@ -92,11 +92,11 @@ Daha önce olduğu gibi, çıktı dosyalarını `output` bloğunda belirtilen di
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Hola-output.txt
+    ├── Holà-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt
+    └── UPPER-Holà-output.txt
     ```
 
 Bu sizin için çalıştıysa, konteynerleri nasıl kullanacağınızı öğrenmeye hazırsınız.
@@ -356,7 +356,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
      ____________________
     / Hello,English,123  \
     | Bonjour,French,456 |
-    \ Hola,Spanish,789   /
+    \ Holà,Spanish,789   /
     --------------------
       \                                  ,+*^^*+___+++_
       \                           ,*^^^^              )
@@ -834,10 +834,10 @@ Her zamanki gibi iş akışı çıktılarını ilgili sonuçlar dizininde bulabi
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Hola-output.txt
+    │   ├── Holà-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Hola-output.txt
+    │   └── UPPER-Holà-output.txt
     └── batch-report.txt
     ```
 

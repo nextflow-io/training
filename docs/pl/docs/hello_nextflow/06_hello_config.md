@@ -99,10 +99,10 @@ Jak poprzednio, pliki wyjściowe znajdziesz w katalogu określonym w bloku `outp
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Hola-output.txt
+    │   ├── Holà-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Hola-output.txt
+    │   └── UPPER-Holà-output.txt
     └── batch-report.txt
     ```
 
@@ -524,10 +524,10 @@ To publikuje wyjścia do `custom-outdir-cli/` zamiast `results/`:
             ├── Bonjour-output.txt
             ├── COLLECTED-batch-output.txt
             ├── Hello-output.txt
-            ├── Hola-output.txt
+            ├── Holà-output.txt
             ├── UPPER-Bonjour-output.txt
             ├── UPPER-Hello-output.txt
-            └── UPPER-Hola-output.txt
+            └── UPPER-Holà-output.txt
     ```
 
 Zauważ, że nadal mamy podkatalog `hello_config` z deklaracji `path` w bloku wyjścia.
@@ -612,10 +612,10 @@ Teraz wyjścia są publikowane bezpośrednio w `custom-outdir-cli-2/`, bez podka
         ├── Bonjour-output.txt
         ├── COLLECTED-batch-output.txt
         ├── Hello-output.txt
-        ├── Hola-output.txt
+        ├── Holà-output.txt
         ├── UPPER-Bonjour-output.txt
         ├── UPPER-Hello-output.txt
-        └── UPPER-Hola-output.txt
+        └── UPPER-Holà-output.txt
     ```
 
 !!! tip "Wskazówka"
@@ -860,11 +860,11 @@ To publikuje wyjścia do `custom-outdir-config-2/rep2/`, z określoną ścieżk�
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Hola-output.txt
+            │   └── UPPER-Holà-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Hola-output.txt
+                └── Holà-output.txt
     ```
 
 ### 2.3. Ustaw tryb publikacji na poziomie workflow
@@ -990,11 +990,11 @@ To publikuje wyjścia do `config-output-mode/`, i nadal są to wszystkie właśc
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Hola-output.txt
+            │   └── UPPER-Holà-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Hola-output.txt
+                └── Holà-output.txt
     ```
 
 Głównym powodem, dla którego możesz nadal chcieć używać sposobu ustawiania trybu dla każdego wyjścia osobno, jest sytuacja, gdy chcesz mieszać i dopasowywać w ramach tego samego workflow, tzn. mieć niektóre wyjścia kopiowane, a niektóre dowiązywane symbolicznie.

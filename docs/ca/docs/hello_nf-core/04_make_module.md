@@ -893,10 +893,10 @@ Hauries de veure el fitxer de sortida de cowpy amb el mateix nomenament que aban
     ├── Bonjour-output.txt
     ├── cowpy-test.txt
     ├── Hello-output.txt
-    ├── Hola-output.txt
+    ├── Holà-output.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt
+    └── UPPER-Holà-output.txt
     ```
 
 Sent lliure de canviar la configuració `ext.prefix` a `conf/modules.config` per satisfer-te que pots canviar el patró de nomenament sense haver de fer cap canvi al codi del mòdul o del workflow.

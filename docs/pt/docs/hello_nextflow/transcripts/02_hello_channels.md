@@ -136,7 +136,7 @@ Se você está interessado em como fazer isso com as melhores práticas, há uma
 
 Ok. A seguir vamos explorar um pouco sobre como os canais são estruturados e como eles diferem de outros tipos de estruturas de dados na linguagem de codificação. E vou pensar um pouco sobre como eu poderia potencialmente usar um array, que pode ser um conceito familiar se você veio de outras linguagens.
 
-Posso usar um array em um canal? Vamos tentar. Vou criar um array, e copiei isso da documentação, _"greetings_array"_ e _"Hello", "Bonjour"_ e _"Hola"_. E então vou colocar isso aqui em vez das minhas strings codificadas. Então vou dizer "channel.of" _"greetings_array"_, passando este array para um canal. Vamos tentar.
+Posso usar um array em um canal? Vamos tentar. Vou criar um array, e copiei isso da documentação, _"greetings_array"_ e _"Hello", "Bonjour"_ e _"Holà"_. E então vou colocar isso aqui em vez das minhas strings codificadas. Então vou dizer "channel.of" _"greetings_array"_, passando este array para um canal. Vamos tentar.
 
 Abrir o terminal, e executar o pipeline.
 
@@ -212,7 +212,7 @@ Ok, vamos dar uma olhada neste canal e ver como ele se parece. Podemos fazer _".
 
 Se eu executar novamente, ainda vai falhar, mas vai nos mostrar o que está dentro deste canal. Não é particularmente emocionante. É aquela variável _path_. Então você pode ver que é apenas uma string aqui porque está sendo impressa no terminal, mas é um objeto _path_, que contém a informação e metadados sobre este arquivo.
 
-Não queremos passar os metadados do arquivo para a entrada. Queremos passar o conteúdo daquele arquivo. Se olharmos o arquivo _greetings.csv_, você pode ver aqui que tem essas diferentes variáveis aqui. _Hello, Bonjour, Hola_ novamente. E essas são as coisas que realmente queremos estar passando para nosso processo, não apenas o arquivo em si como um único objeto.
+Não queremos passar os metadados do arquivo para a entrada. Queremos passar o conteúdo daquele arquivo. Se olharmos o arquivo _greetings.csv_, você pode ver aqui que tem essas diferentes variáveis aqui. _Hello, Bonjour, Holà_ novamente. E essas são as coisas que realmente queremos estar passando para nosso processo, não apenas o arquivo em si como um único objeto.
 
 Então precisamos analisar este arquivo CSV. Precisamos desempacotá-lo, chegar ao conteúdo do arquivo CSV, e então passar o conteúdo dentro do canal para o processo.
 
@@ -246,7 +246,7 @@ Arrays no Nextflow são baseados em zero, então vamos dizer apenas o primeiro e
 
 E agora, podemos executar o pipeline novamente e ver se faz o que esperamos.
 
-Com certeza, depois de _splitCsv_ temos nossos arrays, e então depois do _map_, temos nossas strings limpas e agradáveis, apenas _"Hello", "Bonjour"_ e _"Hola"_. E o pipeline agora está fazendo o que queremos. Fantástico.
+Com certeza, depois de _splitCsv_ temos nossos arrays, e então depois do _map_, temos nossas strings limpas e agradáveis, apenas _"Hello", "Bonjour"_ e _"Holà"_. E o pipeline agora está fazendo o que queremos. Fantástico.
 
 Então podemos nos livrar de todos esses comandos view agora. Não precisamos mais deles.
 

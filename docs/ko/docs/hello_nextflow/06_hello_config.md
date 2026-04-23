@@ -99,10 +99,10 @@ nextflow run hello-config.nf
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Hola-output.txt
+    │   ├── Holà-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Hola-output.txt
+    │   └── UPPER-Holà-output.txt
     └── batch-report.txt
     ```
 
@@ -524,10 +524,10 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli/
             ├── Bonjour-output.txt
             ├── COLLECTED-batch-output.txt
             ├── Hello-output.txt
-            ├── Hola-output.txt
+            ├── Holà-output.txt
             ├── UPPER-Bonjour-output.txt
             ├── UPPER-Hello-output.txt
-            └── UPPER-Hola-output.txt
+            └── UPPER-Holà-output.txt
     ```
 
 출력 블록의 `path` 선언에서 여전히 `hello_config` 하위 디렉토리가 있다는 점에 유의하세요.
@@ -612,10 +612,10 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli-2/
         ├── Bonjour-output.txt
         ├── COLLECTED-batch-output.txt
         ├── Hello-output.txt
-        ├── Hola-output.txt
+        ├── Holà-output.txt
         ├── UPPER-Bonjour-output.txt
         ├── UPPER-Hello-output.txt
-        └── UPPER-Hola-output.txt
+        └── UPPER-Holà-output.txt
     ```
 
 !!! tip "팁"
@@ -860,11 +860,11 @@ nextflow run hello-config.nf -output-dir custom-outdir-config-2 --batch rep2
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Hola-output.txt
+            │   └── UPPER-Holà-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Hola-output.txt
+                └── Holà-output.txt
     ```
 
 ### 2.3. 워크플로우 수준에서 게시 모드 설정
@@ -990,11 +990,11 @@ nextflow run hello-config.nf -output-dir config-output-mode
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Hola-output.txt
+            │   └── UPPER-Holà-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Hola-output.txt
+                └── Holà-output.txt
     ```
 
 출력별 모드 설정 방식을 여전히 사용하고 싶은 주된 이유는 동일한 워크플로우 내에서 혼합하고 일치시키려는 경우, _즉_ 일부 출력은 복사하고 일부는 심볼릭 링크로 만들려는 경우입니다.

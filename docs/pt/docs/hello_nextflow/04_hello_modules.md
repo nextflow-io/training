@@ -88,11 +88,11 @@ Como anteriormente, você encontrará os arquivos de saída no diretório especi
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Hola-output.txt
+    ├── Holà-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt
+    └── UPPER-Holà-output.txt
     ```
 
 Se funcionou para você, você está pronto para aprender como modularizar o código do seu fluxo de trabalho.

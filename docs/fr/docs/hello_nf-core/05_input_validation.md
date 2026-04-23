@@ -410,7 +410,7 @@ cat assets/greetings.csv
 ```csv title="assets/greetings.csv"
 Hello,en,87
 Bonjour,fr,96
-Hola,es,98
+Holà,es,98
 ```
 
 Il s'agit d'un simple CSV avec :
@@ -536,7 +536,7 @@ Pour notre cas simple, nous devons ajouter une ligne d'en-tête à notre fichier
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 === "Avant"
@@ -544,7 +544,7 @@ Pour notre cas simple, nous devons ajouter une ligne d'en-tête à notre fichier
     ```csv title="assets/greetings.csv" linenums="1"
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 Maintenant le fichier CSV a une ligne d'en-tête qui correspond aux noms de champs dans notre schéma.
@@ -711,7 +711,7 @@ Maintenant ouvrez le fichier et changez le nom de la première colonne, dans la 
     message,language,score
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 === "Avant"
@@ -720,7 +720,7 @@ Maintenant ouvrez le fichier et changez le nom de la première colonne, dans la 
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 Cela ne correspond pas à notre schéma, donc la validation devrait générer une erreur.

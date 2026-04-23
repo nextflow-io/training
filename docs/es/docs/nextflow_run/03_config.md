@@ -516,10 +516,10 @@ Esto todavía produce la misma salida que anteriormente, excepto que esta vez en
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-outdir-output.txt
     │   ├── Hello-output.txt
-    │   ├── Hola-output.txt
+    │   ├── Holà-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Hola-output.txt
+    │   └── UPPER-Holà-output.txt
     └── outdir-report.txt
     ```
 
@@ -625,13 +625,13 @@ Esto todavía produce la misma salida que anteriormente, excepto que esta vez en
     ├── convertToUpper
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Hola-output.txt
+    │   └── UPPER-Holà-output.txt
     ├── cowpy
     │   └── cowpy-COLLECTED-pnames-output.txt
     └── sayHello
         ├── Bonjour-output.txt
         ├── Hello-output.txt
-        └── Hola-output.txt
+        └── Holà-output.txt
     ```
 
 !!! note "Nota"
@@ -758,13 +758,13 @@ Todavía son todas copias propias, no symlinks.
     ├── convertToUpper
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Hola-output.txt
+    │   └── UPPER-Holà-output.txt
     ├── cowpy
     │   └── cowpy-COLLECTED-outmode-output.txt
     └── sayHello
         ├── Bonjour-output.txt
         ├── Hello-output.txt
-        └── Hola-output.txt
+        └── Holà-output.txt
     ```
 
 La razón principal por la que aún podría querer usar la forma de establecer el modo por salida es si quiere mezclar y combinar dentro del mismo workflow, _es decir_, tener algunas salidas copiadas y otras como symlinks.

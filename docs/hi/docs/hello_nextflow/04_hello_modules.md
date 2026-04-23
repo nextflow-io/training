@@ -88,11 +88,11 @@ nextflow run hello-modules.nf
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Hola-output.txt
+    ├── Holà-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt
+    └── UPPER-Holà-output.txt
     ```
 
 अगर यह तुम्हारे लिए काम कर गया, तो तुम अपने वर्कफ़्लो कोड को modularize करना सीखने के लिए तैयार हो।

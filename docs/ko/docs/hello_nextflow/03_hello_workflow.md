@@ -84,7 +84,7 @@ nextflow run hello-workflow.nf
     results/hello_workflow
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    └── Hola-output.txt
+    └── Holà-output.txt
     ```
 
 이것이 정상적으로 작동했다면 다단계 워크플로우를 구성하는 방법을 학습할 준비가 되었습니다.
@@ -113,7 +113,7 @@ nextflow run hello-workflow.nf
 tr '[a-z]' '[A-Z]'
 ```
 
-이것은 악센트가 있는 문자를 고려하지 않는 매우 단순한 텍스트 대체 한 줄 명령이므로 예를 들어 'Hola'는 'HOLà'가 됩니다. 하지만 Nextflow 개념을 시연하기에는 충분히 작동하며 그것이 중요합니다.
+이것은 악센트가 있는 문자를 고려하지 않는 매우 단순한 텍스트 대체 한 줄 명령이므로 예를 들어 'Holà'는 'HOLà'가 됩니다. 하지만 Nextflow 개념을 시연하기에는 충분히 작동하며 그것이 중요합니다.
 
 테스트하려면 `echo 'Hello World'` 명령을 실행하고 그 출력을 `tr` 명령으로 파이프할 수 있습니다:
 
@@ -330,10 +330,10 @@ nextflow run hello-workflow.nf -resume
     results/hello_workflow/
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    ├── Hola-output.txt
+    ├── Holà-output.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt
+    └── UPPER-Holà-output.txt
     ```
 
 편리합니다! 하지만 두 번째 프로세스 호출 중 하나의 work 디렉토리를 살펴볼 가치가 있습니다.
@@ -342,8 +342,8 @@ nextflow run hello-workflow.nf -resume
 
     ```console
     work/e0/ecf81b4cacc648b9b994218d5b29d7/
-    ├── Hola-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Hola-output.txt
-    └── UPPER-Hola-output.txt
+    ├── Holà-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Holà-output.txt
+    └── UPPER-Holà-output.txt
     ```
 
 두 개의 `*-output` 파일이 있습니다: 첫 번째 프로세스의 출력과 두 번째의 출력입니다.
@@ -391,8 +391,8 @@ Nextflow가 개별 입력 및 출력 파일을 처리하고 두 명령 사이에
 ```bash
 echo 'Hello' | tr '[a-z]' '[A-Z]' > UPPER-Hello-output.txt
 echo 'Bonjour' | tr '[a-z]' '[A-Z]' > UPPER-Bonjour-output.txt
-echo 'Hola' | tr '[a-z]' '[A-Z]' > UPPER-Hola-output.txt
-cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Hola-output.txt > COLLECTED-output.txt
+echo 'Holà' | tr '[a-z]' '[A-Z]' > UPPER-Holà-output.txt
+cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Holà-output.txt > COLLECTED-output.txt
 ```
 
 출력은 원래 인사말의 대문자 버전이 포함된 `COLLECTED-output.txt`라는 텍스트 파일입니다.
@@ -567,7 +567,7 @@ nextflow run hello-workflow.nf -resume
 ??? abstract "파일 내용"
 
     ```console title="results/COLLECTED-output.txt"
-    Hola
+    Holà
     ```
 
 이런. 수집 단계가 각 인사말에 대해 개별적으로 실행되었으며, 이것은 우리가 원했던 것이 아닙니다.
@@ -655,8 +655,8 @@ nextflow run hello-workflow.nf -resume
     [1e/83586c] collectGreetings   | 1 of 1 ✔
     Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
     Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
-    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt
-    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt]
+    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
+    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
     ```
 
 성공적으로 실행되지만, 로그 출력이 이것보다 약간 지저분하게 보일 수 있습니다(가독성을 위해 정리했습니다).

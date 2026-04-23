@@ -516,10 +516,10 @@ To nadal produkuje to samo wyjście co poprzednio, z wyjątkiem tego, że tym ra
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-outdir-output.txt
     │   ├── Hello-output.txt
-    │   ├── Hola-output.txt
+    │   ├── Holà-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Hola-output.txt
+    │   └── UPPER-Holà-output.txt
     └── outdir-report.txt
     ```
 
@@ -625,13 +625,13 @@ To nadal produkuje to samo wyjście co poprzednio, z wyjątkiem tego, że tym ra
     ├── convertToUpper
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Hola-output.txt
+    │   └── UPPER-Holà-output.txt
     ├── cowpy
     │   └── cowpy-COLLECTED-pnames-output.txt
     └── sayHello
         ├── Bonjour-output.txt
         ├── Hello-output.txt
-        └── Hola-output.txt
+        └── Holà-output.txt
     ```
 
 !!! note "Uwaga"
@@ -758,13 +758,13 @@ Wszystkie nadal są właściwymi kopiami, nie symlinkami.
     ├── convertToUpper
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Hola-output.txt
+    │   └── UPPER-Holà-output.txt
     ├── cowpy
     │   └── cowpy-COLLECTED-outmode-output.txt
     └── sayHello
         ├── Bonjour-output.txt
         ├── Hello-output.txt
-        └── Hola-output.txt
+        └── Holà-output.txt
     ```
 
 Głównym powodem, dla którego nadal możesz chcieć użyć sposobu ustawiania trybu dla każdego wyjścia, jest sytuacja, gdy chcesz mieszać i łączyć w tym samym workflow, _tzn._ mieć niektóre wyjścia kopiowane, a niektóre dowiązane symbolicznie.

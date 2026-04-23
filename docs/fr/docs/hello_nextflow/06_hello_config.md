@@ -99,10 +99,10 @@ Comme précédemment, vous trouverez les fichiers de sortie dans le répertoire 
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Hola-output.txt
+    │   ├── Holà-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Hola-output.txt
+    │   └── UPPER-Holà-output.txt
     └── batch-report.txt
     ```
 
@@ -524,10 +524,10 @@ Cela publie les sorties dans `custom-outdir-cli/` au lieu de `results/` :
             ├── Bonjour-output.txt
             ├── COLLECTED-batch-output.txt
             ├── Hello-output.txt
-            ├── Hola-output.txt
+            ├── Holà-output.txt
             ├── UPPER-Bonjour-output.txt
             ├── UPPER-Hello-output.txt
-            └── UPPER-Hola-output.txt
+            └── UPPER-Holà-output.txt
     ```
 
 Notez que nous avons toujours le sous-répertoire `hello_config` provenant des déclarations `path` dans le bloc output.
@@ -612,10 +612,10 @@ Maintenant les sorties sont publiées directement sous `custom-outdir-cli-2/`, s
         ├── Bonjour-output.txt
         ├── COLLECTED-batch-output.txt
         ├── Hello-output.txt
-        ├── Hola-output.txt
+        ├── Holà-output.txt
         ├── UPPER-Bonjour-output.txt
         ├── UPPER-Hello-output.txt
-        └── UPPER-Hola-output.txt
+        └── UPPER-Holà-output.txt
     ```
 
 !!! tip "Astuce"
@@ -860,11 +860,11 @@ Cela publie les sorties dans `custom-outdir-config-2/rep2/`, avec le chemin de b
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Hola-output.txt
+            │   └── UPPER-Holà-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Hola-output.txt
+                └── Holà-output.txt
     ```
 
 ### 2.3. Définir le mode de publication au niveau du workflow
@@ -990,11 +990,11 @@ Cela publie les sorties dans `config-output-mode/`, et ce sont toujours toutes d
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Hola-output.txt
+            │   └── UPPER-Holà-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Hola-output.txt
+                └── Holà-output.txt
     ```
 
 La principale raison pour laquelle vous pourriez encore vouloir utiliser la façon par sortie de définir le mode est si vous voulez mélanger et assortir au sein du même workflow, _c.-à-d._ avoir certaines sorties copiées et d'autres liées symboliquement.

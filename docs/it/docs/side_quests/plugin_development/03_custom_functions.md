@@ -280,7 +280,7 @@ nextflow run greet.nf
     Reversed: ollaH
     Output: Hello
     Output: Bonjour
-    Output: Hola
+    Output: Holà
     Output: Ciao
     Output: Hallo
     Pipeline complete! 👋
@@ -457,7 +457,7 @@ nextflow run greet.nf
     Reversed: ollaH
     Decorated: *** Hello ***
     Decorated: *** Bonjour ***
-    Decorated: *** Hola ***
+    Decorated: *** Holà ***
     Decorated: *** Ciao ***
     Decorated: *** Hallo ***
     Pipeline complete! 👋

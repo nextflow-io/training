@@ -256,9 +256,9 @@ Se vogliamo un numero invece, per esempio, potremmo scrivere float, e questo dir
 
 Quindi quella sicurezza del tipo è una caratteristica molto nuova di Nextflow, ma davvero potente per rendere il vostro codice più sicuro da scrivere e da eseguire.
 
-Poi dopo quello abbiamo un simbolo uguale e poi il valore predefinito qui. Nextflow è stato scritto a Barcellona originariamente, quindi sembra appropriato che abbiamo un po' di, spagnolo qui, _"Hola mundo!"_ come predefinito.
+Poi dopo quello abbiamo un simbolo uguale e poi il valore predefinito qui. Nextflow è stato scritto a Barcellona originariamente, quindi sembra appropriato che abbiamo un po' di, spagnolo qui, _"Holà mundo!"_ come predefinito.
 
-Giusto salverò quello script, tornerò indietro, eseguirò di nuovo lo script senza _--input_. E questa volta dovrebbe essere eseguito e creerà il nostro nuovo file su in _results_. E in questo file ora dice _"Hola mundo!"_.
+Giusto salverò quello script, tornerò indietro, eseguirò di nuovo lo script senza _--input_. E questa volta dovrebbe essere eseguito e creerà il nostro nuovo file su in _results_. E in questo file ora dice _"Holà mundo!"_.
 
 Questo è solo un valore predefinito però, quindi non significa che non possiamo ancora fare la stessa cosa di prima. Se torno indietro e trovo il mio vecchio script qui, _"Hej Världen"_, perché faccio _--input_ sulla riga di comando, questo sovrascriverà quel valore predefinito e lo userà di nuovo nel file output.txt.
 

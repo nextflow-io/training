@@ -88,7 +88,7 @@ nextflow run hello.nf
 ```console title="Output"
 Output: Hello_aBcDeFgH
 Output: Bonjour_xYzWvUtS
-Output: Hola_qRsPdMnK
+Output: Holà_qRsPdMnK
 Output: Ciao_jLhGfEcB
 Output: Hallo_tNwOiAuR
 ```
@@ -194,7 +194,7 @@ nextflow run hello.nf
 Pipeline is starting! 🚀
 Output: Hello_yqvtclcc
 Output: Bonjour_vwwpyzcs
-Output: Hola_wrghmgab
+Output: Holà_wrghmgab
 Output: Ciao_noniajuy
 Output: Hallo_tvrtuxtp
 Pipeline complete! 👋
@@ -354,7 +354,7 @@ nextflow run hello.nf
 Pipeline is starting! 🚀
 Output: Hello_diozjdwm
 Output: Bonjour_speathmm
-Output: Hola_dllxnzap
+Output: Holà_dllxnzap
 Output: Ciao_wzueddzc
 Output: Hallo_hsxwrjbh
 Pipeline complete! 👋
@@ -375,7 +375,7 @@ Zorunlu `greeting` sütununu `message` olarak yeniden adlandırın:
 message,language
 Hello,English
 Bonjour,French
-Hola,Spanish
+Holà,Spanish
 Ciao,Italian
 Hallo,German
 ```
@@ -406,7 +406,7 @@ The following errors have been detected in greetings.csv:
 greeting,lang
 Hello,English
 Bonjour,French
-Hola,Spanish
+Holà,Spanish
 Ciao,Italian
 Hallo,German
 ```
@@ -478,7 +478,7 @@ Devam etmeden önce `greetings.csv` dosyasını özgün hâline geri yükleyin v
 greeting,language
 Hello,English
 Bonjour,French
-Hola,Spanish
+Holà,Spanish
 Ciao,Italian
 Hallo,German
 ```

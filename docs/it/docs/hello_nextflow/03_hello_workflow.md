@@ -84,7 +84,7 @@ Per questo capitolo, è sotto `results/hello_workflow/`.
     results/hello_workflow
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    └── Hola-output.txt
+    └── Holà-output.txt
     ```
 
 Se tutto ha funzionato, siete pronti a imparare come assemblare un flusso di lavoro multi-step.
@@ -113,7 +113,7 @@ Per effettuare la conversione dei saluti in maiuscolo, useremo un classico strum
 tr '[a-z]' '[A-Z]'
 ```
 
-Questa è una sostituzione di testo molto semplice che non tiene conto delle lettere accentate, quindi per esempio 'Hola' diventerà 'HOLà', ma farà un lavoro abbastanza buono per dimostrare i concetti di Nextflow e questo è ciò che conta.
+Questa è una sostituzione di testo molto semplice che non tiene conto delle lettere accentate, quindi per esempio 'Holà' diventerà 'HOLà', ma farà un lavoro abbastanza buono per dimostrare i concetti di Nextflow e questo è ciò che conta.
 
 Per testarlo, possiamo eseguire il comando `echo 'Hello World'` e fare il pipe del suo output al comando `tr`:
 
@@ -330,10 +330,10 @@ Troverete gli output nella directory `results/hello_workflow` come impostato nel
     results/hello_workflow/
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    ├── Hola-output.txt
+    ├── Holà-output.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt
+    └── UPPER-Holà-output.txt
     ```
 
 Comodo! Ma vale comunque la pena dare un'occhiata dentro la directory di lavoro di una delle chiamate al secondo processo.
@@ -342,8 +342,8 @@ Comodo! Ma vale comunque la pena dare un'occhiata dentro la directory di lavoro 
 
     ```console
     work/e0/ecf81b4cacc648b9b994218d5b29d7/
-    ├── Hola-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Hola-output.txt
-    └── UPPER-Hola-output.txt
+    ├── Holà-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Holà-output.txt
+    └── UPPER-Holà-output.txt
     ```
 
 Notate che ci sono due file `*-output`: l'output del primo processo così come l'output del secondo.
@@ -391,8 +391,8 @@ Eseguite il seguente nel vostro terminale:
 ```bash
 echo 'Hello' | tr '[a-z]' '[A-Z]' > UPPER-Hello-output.txt
 echo 'Bonjour' | tr '[a-z]' '[A-Z]' > UPPER-Bonjour-output.txt
-echo 'Hola' | tr '[a-z]' '[A-Z]' > UPPER-Hola-output.txt
-cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Hola-output.txt > COLLECTED-output.txt
+echo 'Holà' | tr '[a-z]' '[A-Z]' > UPPER-Holà-output.txt
+cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Holà-output.txt > COLLECTED-output.txt
 ```
 
 L'output è un file di testo chiamato `COLLECTED-output.txt` che contiene le versioni maiuscole dei saluti originali.
@@ -567,7 +567,7 @@ Ora date un'occhiata ai contenuti del file di output finale.
 ??? abstract "Contenuti del file"
 
     ```console title="results/COLLECTED-output.txt"
-    Hola
+    Holà
     ```
 
 Oh no. Il passaggio di raccolta è stato eseguito individualmente su ogni saluto, il che NON è quello che volevamo.
@@ -655,8 +655,8 @@ nextflow run hello-workflow.nf -resume
     [1e/83586c] collectGreetings   | 1 of 1 ✔
     Prima di collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
     Prima di collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
-    Prima di collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt
-    Dopo collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt]
+    Prima di collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
+    Dopo collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
     ```
 
 Viene eseguito con successo, anche se l'output del log potrebbe apparire un po' più disordinato di questo (lo abbiamo ripulito per leggibilità).

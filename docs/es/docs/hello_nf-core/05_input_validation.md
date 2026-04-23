@@ -410,7 +410,7 @@ cat assets/greetings.csv
 ```csv title="assets/greetings.csv"
 Hello,en,87
 Bonjour,fr,96
-Hola,es,98
+Holà,es,98
 ```
 
 Este es un CSV simple con:
@@ -536,7 +536,7 @@ Para nuestro caso simple, necesitamos agregar una línea de encabezado a nuestro
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 === "Antes"
@@ -544,7 +544,7 @@ Para nuestro caso simple, necesitamos agregar una línea de encabezado a nuestro
     ```csv title="assets/greetings.csv" linenums="1"
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 Ahora el archivo CSV tiene una línea de encabezado que coincide con los nombres de campo en nuestro schema.
@@ -711,7 +711,7 @@ Ahora abra el archivo y cambie el nombre de la primera columna, en la línea de 
     message,language,score
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 === "Antes"
@@ -720,7 +720,7 @@ Ahora abra el archivo y cambie el nombre de la primera columna, en la línea de 
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 Esto no coincide con nuestro schema, por lo que la validación debería lanzar un error.

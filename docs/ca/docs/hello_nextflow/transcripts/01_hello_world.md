@@ -256,9 +256,9 @@ Si volem un número en lloc d'això, per exemple, podríem escriure float, i aix
 
 Així que aquesta seguretat de tipus és una característica molt nova de Nextflow, però realment potent per fer el vostre codi més segur d'escriure i executar.
 
-Després d'això tenim un símbol igual i després el valor per defecte aquí. Nextflow es va escriure a Barcelona originalment, així que sembla apropiat que tinguem una mica d'espanyol aquí, _"Hola mundo!"_ com a valor per defecte.
+Després d'això tenim un símbol igual i després el valor per defecte aquí. Nextflow es va escriure a Barcelona originalment, així que sembla apropiat que tinguem una mica d'espanyol aquí, _"Holà mundo!"_ com a valor per defecte.
 
-D'acord, desaré aquest script, tornaré, executaré l'script de nou sense _--input_. I aquesta vegada hauria d'executar-se i crearà el nostre nou fitxer a _results_. I en aquest fitxer ara diu _"Hola mundo!"_.
+D'acord, desaré aquest script, tornaré, executaré l'script de nou sense _--input_. I aquesta vegada hauria d'executar-se i crearà el nostre nou fitxer a _results_. I en aquest fitxer ara diu _"Holà mundo!"_.
 
 Això és només un valor per defecte però, així que no significa que no puguem fer encara el mateix que abans. Si torno i trobo el meu antic script aquí, _"Hej Världen"_, perquè faig _--input_ a la línia de comandes, això sobreescriurà aquest valor per defecte i utilitzarà això de nou al fitxer output.txt.
 

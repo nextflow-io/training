@@ -410,7 +410,7 @@ cat assets/greetings.csv
 ```csv title="assets/greetings.csv"
 Hello,en,87
 Bonjour,fr,96
-Hola,es,98
+Holà,es,98
 ```
 
 To prosty CSV z:
@@ -536,7 +536,7 @@ W naszym prostym przypadku musimy dodać linię nagłówka do naszego pliku powi
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 === "Przed"
@@ -544,7 +544,7 @@ W naszym prostym przypadku musimy dodać linię nagłówka do naszego pliku powi
     ```csv title="assets/greetings.csv" linenums="1"
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 Teraz plik CSV ma linię nagłówka, która pasuje do nazw pól w naszym schemacie.
@@ -711,7 +711,7 @@ Teraz otwórz plik i zmień nazwę pierwszej kolumny, w linii nagłówka, z `gre
     message,language,score
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 === "Przed"
@@ -720,7 +720,7 @@ Teraz otwórz plik i zmień nazwę pierwszej kolumny, w linii nagłówka, z `gre
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 To nie pasuje do naszego schematu, więc walidacja powinna zgłosić błąd.

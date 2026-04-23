@@ -893,10 +893,10 @@ Debería ver el archivo de salida de cowpy con el mismo nombre que antes: `cowpy
     ├── Bonjour-output.txt
     ├── cowpy-test.txt
     ├── Hello-output.txt
-    ├── Hola-output.txt
+    ├── Holà-output.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt
+    └── UPPER-Holà-output.txt
     ```
 
 Siéntase libre de cambiar la configuración de `ext.prefix` en `conf/modules.config` para satisfacerse de que puede cambiar el patrón de nomenclatura sin tener que hacer ningún cambio en el código del módulo o del flujo de trabajo.

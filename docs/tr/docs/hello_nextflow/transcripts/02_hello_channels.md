@@ -136,7 +136,7 @@ Bunu en iyi uygulamalarla nasıl yapacağınızla ilgileniyorsanız, _training.n
 
 Tamam. Şimdi kanalların nasıl yapılandırıldığı ve kodlama dilindeki diğer veri yapılarından nasıl farklı olduğu hakkında biraz keşfedeceğiz. Diğer dillerden geldiyseniz tanıdık bir kavram olabilecek bir diziyi potansiyel olarak nasıl kullanabileceğimi düşüneceğim.
 
-Bir kanalda dizi kullanabilir miyim? Deneyelim. Bir dizi oluşturacağım; bunu dokümanlardan kopyaladım: _"greetings_array"_ ve _"Hello"_, _"Bonjour"_ ve _"Hola"_. Sonra bunu sabit kodlanmış string'lerimin yerine buraya koyacağım. Yani "channel.of" _"greetings_array"_ diyeceğim; bu diziyi bir kanala geçireceğim. Deneyelim.
+Bir kanalda dizi kullanabilir miyim? Deneyelim. Bir dizi oluşturacağım; bunu dokümanlardan kopyaladım: _"greetings_array"_ ve _"Hello"_, _"Bonjour"_ ve _"Holà"_. Sonra bunu sabit kodlanmış string'lerimin yerine buraya koyacağım. Yani "channel.of" _"greetings_array"_ diyeceğim; bu diziyi bir kanala geçireceğim. Deneyelim.
 
 Terminali açın ve pipeline'ı çalıştırın.
 
@@ -212,7 +212,7 @@ Tamam, bu kanala bir bakalım ve nasıl göründüğünü görelim. _".view"_ ya
 
 Tekrar çalıştırırsam, yine başarısız olacak; ama bu kanalın içinde ne olduğunu bize gösterecek. Özellikle heyecan verici değil. O _path_ değişkeni. Yani görebilirsiniz ki terminale yazdırıldığı için burada sadece bir string; ama bu dosya hakkındaki bilgileri ve meta verileri içeren bir _path_ nesnesi.
 
-Dosyanın meta verilerini girdiye geçirmek istemiyoruz. O dosyanın içeriğini geçirmek istiyoruz. _greetings.csv_ dosyasına bakarsak, burada bu farklı değişkenlerin olduğunu görebilirsiniz. Yine _Hello, Bonjour, Hola_. Ve bunlar gerçekten sürece geçirmek istediğimiz şeyler; sadece dosyanın kendisi tek bir nesne olarak değil.
+Dosyanın meta verilerini girdiye geçirmek istemiyoruz. O dosyanın içeriğini geçirmek istiyoruz. _greetings.csv_ dosyasına bakarsak, burada bu farklı değişkenlerin olduğunu görebilirsiniz. Yine _Hello, Bonjour, Holà_. Ve bunlar gerçekten sürece geçirmek istediğimiz şeyler; sadece dosyanın kendisi tek bir nesne olarak değil.
 
 Bu yüzden bu CSV dosyasını ayrıştırmamız gerekiyor. Onu açmamız, CSV dosyasının içeriğine ulaşmamız ve sonra içerikleri kanal içinde sürece geçirmemiz gerekiyor.
 
@@ -246,7 +246,7 @@ Nextflow'daki diziler sıfır tabanlıdır; bu yüzden sadece ilk öğe olduğun
 
 Ve şimdi, pipeline'ı tekrar çalıştırabiliriz ve beklediğimizi yapıp yapmadığını görebiliriz.
 
-Nitekim, _splitCsv_'den sonra dizilerimiz var ve sonra _map_'ten sonra güzel temiz string'lerimiz var; sadece _"Hello"_, _"Bonjour"_ ve _"Hola"_. Ve pipeline şimdi istediğimizi yapıyor. Fantastik.
+Nitekim, _splitCsv_'den sonra dizilerimiz var ve sonra _map_'ten sonra güzel temiz string'lerimiz var; sadece _"Hello"_, _"Bonjour"_ ve _"Holà"_. Ve pipeline şimdi istediğimizi yapıyor. Fantastik.
 
 Artık tüm bu view komutlarından kurtulabiliriz. Artık onlara ihtiyacımız yok.
 

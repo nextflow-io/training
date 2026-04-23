@@ -136,7 +136,7 @@ Si esteu interessats en com fer això amb les millors pràctiques, hi ha una mis
 
 D'acord. A continuació explorarem una mica sobre com s'estructuren els canals i com difereixen d'altres tipus d'estructures de dades en el llenguatge de codificació. I pensaré una mica sobre com podria potencialment utilitzar un array, que podria ser un concepte familiar si veniu d'altres llenguatges.
 
-Puc utilitzar un array en un canal? Provem-ho. Crearé un array, i he copiat això de la documentació, _"greetings_array"_ i _"Hello", "Bonjour"_ i _"Hola"_. I després posaré això aquí en lloc de les meves cadenes codificades. Així que diré "channel.of" _"greetings_array"_, passant aquest array a un canal. Provem-ho.
+Puc utilitzar un array en un canal? Provem-ho. Crearé un array, i he copiat això de la documentació, _"greetings_array"_ i _"Hello", "Bonjour"_ i _"Holà"_. I després posaré això aquí en lloc de les meves cadenes codificades. Així que diré "channel.of" _"greetings_array"_, passant aquest array a un canal. Provem-ho.
 
 Obrir el terminal, i executar el pipeline.
 
@@ -212,7 +212,7 @@ D'acord, donem una ullada a aquest canal i vegem com es veu. Podem fer _".view",
 
 Si l'executo de nou, encara fallarà, però ens mostrarà què hi ha dins d'aquest canal. No és particularment emocionant. És aquesta variable _path_. Així que podeu veure que només és una cadena aquí perquè s'està imprimint a un terminal, però és un objecte _path_, que conté la informació i les metadades sobre aquest fitxer.
 
-No volem passar les metadades del fitxer a l'entrada. Volem passar els continguts d'aquest fitxer. Si mirem el fitxer _greetings.csv_, podeu veure aquí que té aquestes variables diferents aquí. _Hello, Bonjour, Hola_ de nou. I aquestes són les coses que realment volem passar al nostre procés, no només el fitxer mateix com un únic objecte.
+No volem passar les metadades del fitxer a l'entrada. Volem passar els continguts d'aquest fitxer. Si mirem el fitxer _greetings.csv_, podeu veure aquí que té aquestes variables diferents aquí. _Hello, Bonjour, Holà_ de nou. I aquestes són les coses que realment volem passar al nostre procés, no només el fitxer mateix com un únic objecte.
 
 Així que necessitem analitzar aquest fitxer CSV. Necessitem desempaquetar-lo, arribar als continguts del fitxer CSV, i després passar els continguts dins del canal al procés.
 
@@ -246,7 +246,7 @@ Els arrays a Nextflow es basen en zero, així que direm només el primer element
 
 I ara, podem executar el pipeline de nou i veure si fa el que esperem.
 
-Efectivament, després de _splitCsv_ tenim els nostres arrays, i després després del _map,_ tenim les nostres cadenes netes i agradables, només _"Hello", "Bonjour"_ i _"Hola"_. I el pipeline ara està fent el que volem. Fantàstic.
+Efectivament, després de _splitCsv_ tenim els nostres arrays, i després després del _map,_ tenim les nostres cadenes netes i agradables, només _"Hello", "Bonjour"_ i _"Holà"_. I el pipeline ara està fent el que volem. Fantàstic.
 
 Així que podem desfer-nos de totes aquestes comandes view ara. Ja no les necessitem.
 

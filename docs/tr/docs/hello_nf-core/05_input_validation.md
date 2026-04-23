@@ -410,7 +410,7 @@ cat assets/greetings.csv
 ```csv title="assets/greetings.csv"
 Hello,en,87
 Bonjour,fr,96
-Hola,es,98
+Holà,es,98
 ```
 
 Bu, şunlarla basit bir CSV'dir:
@@ -536,7 +536,7 @@ Basit durumumuz için, selamlamalar dosyamıza bir başlık satırı eklememiz g
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 === "Önce"
@@ -544,7 +544,7 @@ Basit durumumuz için, selamlamalar dosyamıza bir başlık satırı eklememiz g
     ```csv title="assets/greetings.csv" linenums="1"
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 Artık CSV dosyası, şemamızdaki alan adlarıyla eşleşen bir başlık satırına sahip.
@@ -711,7 +711,7 @@ cp assets/greetings.csv assets/invalid_greetings.csv
     message,language,score
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 === "Önce"
@@ -720,7 +720,7 @@ cp assets/greetings.csv assets/invalid_greetings.csv
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Hola,es,98
+    Holà,es,98
     ```
 
 Bu, şemamızla eşleşmez; bu nedenle doğrulama bir hata atmalıdır.

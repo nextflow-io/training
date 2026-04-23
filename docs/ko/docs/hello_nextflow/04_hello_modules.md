@@ -88,11 +88,11 @@ nextflow run hello-modules.nf
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Hola-output.txt
+    ├── Holà-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Hola-output.txt
+    └── UPPER-Holà-output.txt
     ```
 
 이것이 정상적으로 작동했다면 워크플로우 코드를 모듈화하는 방법을 배울 준비가 되었습니다.

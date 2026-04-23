@@ -99,10 +99,10 @@ Como anteriormente, encontrará los archivos de salida en el directorio especifi
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Hola-output.txt
+    │   ├── Holà-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Hola-output.txt
+    │   └── UPPER-Holà-output.txt
     └── batch-report.txt
     ```
 
@@ -524,10 +524,10 @@ Esto publica las salidas en `custom-outdir-cli/` en lugar de `results/`:
             ├── Bonjour-output.txt
             ├── COLLECTED-batch-output.txt
             ├── Hello-output.txt
-            ├── Hola-output.txt
+            ├── Holà-output.txt
             ├── UPPER-Bonjour-output.txt
             ├── UPPER-Hello-output.txt
-            └── UPPER-Hola-output.txt
+            └── UPPER-Holà-output.txt
     ```
 
 Note que todavía tenemos el subdirectorio `hello_config` de las declaraciones `path` en el bloque output.
@@ -612,10 +612,10 @@ Ahora las salidas se publican directamente bajo `custom-outdir-cli-2/`, sin el s
         ├── Bonjour-output.txt
         ├── COLLECTED-batch-output.txt
         ├── Hello-output.txt
-        ├── Hola-output.txt
+        ├── Holà-output.txt
         ├── UPPER-Bonjour-output.txt
         ├── UPPER-Hello-output.txt
-        └── UPPER-Hola-output.txt
+        └── UPPER-Holà-output.txt
     ```
 
 !!! tip "Consejo"
@@ -860,11 +860,11 @@ Esto publica las salidas en `custom-outdir-config-2/rep2/`, con la ruta base esp
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Hola-output.txt
+            │   └── UPPER-Holà-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Hola-output.txt
+                └── Holà-output.txt
     ```
 
 ### 2.3. Establecer el modo de publicación a nivel de flujo de trabajo
@@ -990,11 +990,11 @@ Esto publica las salidas en `config-output-mode/`, y todavía son todas copias a
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Hola-output.txt
+            │   └── UPPER-Holà-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Hola-output.txt
+                └── Holà-output.txt
     ```
 
 La razón principal por la que aún podría querer usar la forma por salida de establecer el modo es si quiere mezclar y combinar dentro del mismo flujo de trabajo, _es decir_, tener algunas salidas copiadas y algunas enlazadas simbólicamente.
