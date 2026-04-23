@@ -205,7 +205,7 @@ nextflow run genomics.nf -profile test
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [nostalgic_franklin] DSL2 - revision: f2c0a93c6a
 
@@ -647,7 +647,7 @@ nextflow run genomics.nf -profile test -resume
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [crazy_marconi] DSL2 - revision: 5da9afc841
 
