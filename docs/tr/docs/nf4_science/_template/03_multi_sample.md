@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Bölüm 2'de, her örneği bağımsız olarak işleyen örnek başına bir işleme boru hattı oluşturdunuz.
+Bölüm 2'de, her örneği bağımsız olarak işleyen örnek başına bir işleme pipeline'ı oluşturdunuz.
 Şimdi bunu genişleterek [Bölüm 1](01_method.md)'de ele alınan çoklu örnek {AGGREGATION_METHOD} işlemini uygulayacağız.
 
 ## Görev
@@ -22,7 +22,7 @@ Bu bölüm doğrudan Bölüm 2'de üretilen iş akışı üzerine inşa edilmekt
 
 ??? info "Bu bölümden nasıl başlanır"
 
-    Kursun bu bölümü, [Bölüm 2: Tek örnek işleme](./02_single_sample.md) bölümünü tamamladığınızı ve çalışan bir `{DOMAIN_DIR}.nf` boru hattınız olduğunu varsayar.
+    Kursun bu bölümü, [Bölüm 2: Tek örnek işleme](./02_single_sample.md) bölümünü tamamladığınızı ve çalışan bir `{DOMAIN_DIR}.nf` pipeline'ınız olduğunu varsayar.
 
     Eğer Bölüm 2'yi tamamlamadıysanız veya bu bölüm için yeni başlamak istiyorsanız, Bölüm 2 çözümünü başlangıç noktanız olarak kullanabilirsiniz.
     `nf4-science/{DOMAIN_DIR}/` dizininin içinden şu komutları çalıştırın:
@@ -98,7 +98,7 @@ nextflow run {DOMAIN_DIR}.nf -profile test
 
 {VERIFY_OUTPUT_INSTRUCTIONS}
 
-### Özet
+### Özetle
 
 Süreç komutlarını ve çıktılarını değiştirerek iş akışı davranışını nasıl uyarlayacağınızı biliyorsunuz.
 
@@ -136,9 +136,9 @@ nextflow run {DOMAIN_DIR}.nf -profile test
 
 ---
 
-### Özet
+### Özetle
 
-Örnekleri ayrı ayrı işleyen ve tüm örnekler genelinde sonuçları toplayan eksiksiz bir boru hattınız var.
+Örnekleri ayrı ayrı işleyen ve tüm örnekler genelinde sonuçları toplayan eksiksiz bir pipeline'ınız var.
 Örnek başına çıktıları çoklu örnek analizi için toplamak üzere `collect()` gibi kanal operatörlerini nasıl kullanacağınızı biliyorsunuz.
 
 ### Sırada ne var?

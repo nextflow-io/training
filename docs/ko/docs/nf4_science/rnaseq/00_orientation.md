@@ -6,7 +6,7 @@
 
 GitHub Codespaces에서 제공하는 사전 구축된 환경을 사용하려면 아래의 "Open in GitHub Codespaces" 버튼을 클릭하세요. 다른 옵션은 [환경 옵션](../../envsetup/index.md)을 참조하세요.
 
-환경이 로드되는 동안 계속 읽을 수 있도록 새 브라우저 탭이나 창에서 교육 환경을 여는 것을 권장합니다(장비에 따라 마우스 오른쪽 클릭, ctrl-클릭 또는 cmd-클릭 사용).
+환경이 로드되는 동안 계속 읽을 수 있도록 새 브라우저 탭이나 창에서 교육 환경을 여는 것을 권장합니다(사용 중인 운영체제에 따라 마우스 오른쪽 클릭, ctrl-클릭 또는 cmd-클릭 사용).
 과정을 진행하려면 이 지침을 병행하여 열어 두어야 합니다.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
@@ -126,7 +126,7 @@ tree . -L 3
 
 ## 준비 상태 체크리스트
 
-시작할 준비가 되었다고 생각하시나요?
+시작할 준비가 되셨나요?
 
 - [ ] 이 과정의 목표와 전제 조건을 이해했습니다
 - [ ] 환경이 실행 중입니다

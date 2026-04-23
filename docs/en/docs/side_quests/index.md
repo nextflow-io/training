@@ -28,15 +28,27 @@ Otherwise, select a side quest from the table below.
 
 ## Side Quests
 
-| Side Quest                                                                 | Time Estimate for Teaching |
-| -------------------------------------------------------------------------- | -------------------------- |
-| [Nextflow development environment walkthrough](./ide_features.md)          | 45 mins                    |
-| [Essential Nextflow Scripting Patterns](./essential_scripting_patterns.md) | 90 mins                    |
-| [Metadata in workflows](./metadata.md)                                     | 45 mins                    |
-| [Splitting and Grouping](./splitting_and_grouping.md)                      | 45 mins                    |
-| [Testing with nf-test](./nf-test.md)                                       | 1 hour                     |
-| [Workflows of workflows](./workflows_of_workflows.md)                      | 30 mins                    |
-| [Working with files](./working_with_files.md)                              | 45 mins                    |
-| [Debugging workflows](./debugging.md)                                      | 1 hour                     |
+| Side Quest                                                               | Time Estimate for Teaching |
+| ------------------------------------------------------------------------ | -------------------------- |
+| [Nextflow development environment walkthrough](./dev_environment/)       | 45 mins                    |
+| [Essential Nextflow Scripting Patterns](./essential_scripting_patterns/) | 90 mins                    |
+| [Metadata in workflows](./metadata/)                                     | 45 mins                    |
+| [Splitting and Grouping](./splitting_and_grouping/)                      | 45 mins                    |
+| [Testing with nf-test](./nf_test/)                                       | 1 hour                     |
+| [Workflows of workflows](./workflows_of_workflows/)                      | 30 mins                    |
+| [Working with files](./working_with_files/)                              | 45 mins                    |
+| [Debugging workflows](./debugging/)                                      | 1 hour                     |
+
+## Multi-part courses
+
+!!! exercise "Plugin Development"
+
+    !!! tip inline end ""
+
+        :material-run-fast: Learn to use and build Nextflow plugins.
+
+    This course covers using existing plugins in your workflows and building your own from scratch, including custom functions, workflow monitoring, configuration, and distribution.
+
+    [Start the Plugin Development training :material-arrow-right:](plugin_development/){ .md-button .md-button--primary }
 
 Let us know what other domains and use cases you'd like to see covered here by posting in the [Training section](https://community.seqera.io/c/training/) of the community forum.

@@ -13,7 +13,7 @@ Kurs boyunca çalışmak için bu talimatları paralel olarak açık tutmanız g
 
 ### Ortam temelleri
 
-Bu eğitim ortamı, eğitim kursu boyunca çalışmak için gerekli tüm yazılımı, kodu ve veriyi içerir, bu nedenle kendiniz herhangi bir şey yüklemenize gerek yoktur.
+Bu eğitim ortamı, eğitim kursu boyunca çalışmak için gerekli tüm yazılımı, kodu ve veriyi içerir; bu nedenle kendiniz herhangi bir şey yüklemenize gerek yoktur.
 
 Codespace, bir dosya sistemi gezgini, bir kod düzenleyici ve bir terminal kabuğu içeren bir VSCode arayüzü ile kurulmuştur.
 Kurs boyunca verilen tüm talimatlar (örneğin 'dosyayı açın', 'kodu düzenleyin' veya 'bu komutu çalıştırın'), aksi belirtilmedikçe VSCode arayüzünün bu üç bölümüne atıfta bulunur.
@@ -31,7 +31,7 @@ Codespace'iniz çalışmaya başladığında, eğitime dalmadan önce yapmanız 
 
 ### Çalışma dizinini ayarlayın
 
-Varsayılan olarak, codespace tüm eğitim kurslarının kök dizininde ayarlanmış çalışma dizini ile açılır, ancak bu kurs için `nf4-science/{DOMAIN_DIR}/` dizininde çalışacağız.
+Varsayılan olarak, codespace tüm eğitim kurslarının kök dizininde ayarlanmış çalışma dizini ile açılır; ancak bu kurs için `nf4-science/{DOMAIN_DIR}/` dizininde çalışacağız.
 
 Terminalde şu komutu çalıştırarak şimdi dizini değiştirin:
 
@@ -60,7 +60,7 @@ code .
 Bu dizinin içeriğini, eğitim çalışma alanının sol tarafındaki dosya gezginini kullanarak keşfedebilirsiniz.
 Alternatif olarak, `tree` komutunu kullanabilirsiniz.
 
-Kurs boyunca, dizin yapısını ve içeriğini okunabilir bir biçimde temsil etmek için `tree` çıktısını kullanırız, bazen netlik için küçük değişikliklerle.
+Kurs boyunca, dizin yapısını ve içeriğini okunabilir bir biçimde temsil etmek için `tree` çıktısını kullanırız; bazen netlik için küçük değişikliklerle.
 
 Burada ikinci seviyeye kadar bir içindekiler tablosu oluşturuyoruz:
 
@@ -98,7 +98,7 @@ Beklenen komut çıktısını ve ayrıca dizin ve dosya içeriklerini özlü bir
 - **`nextflow.config` dosyası**, minimum ortam özelliklerini ayarlayan bir yapılandırma dosyasıdır.
   Şimdilik göz ardı edebilirsiniz.
 
-- **`data` dizini**, girdi verilerini ve ilgili kaynakları içerir, kursta daha sonra açıklanacaktır.
+- **`data` dizini**, girdi verilerini ve ilgili kaynakları içerir; kursta daha sonra açıklanacaktır.
 
 - **`solutions` dizini**, tamamlanmış modül dosyalarını ve bir sonraki bölüm için başlangıç noktası olarak kullanılabilecek bölüme özel çözümleri içerir.
   Çalışmanızı kontrol etmek ve sorunları gidermek için referans olarak kullanılmaları amaçlanmıştır.

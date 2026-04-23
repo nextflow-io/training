@@ -118,7 +118,7 @@ Beklenen komut çıktısını ve dizin ve dosya içeriklerini özlü bir şekild
 - **`nextflow.config` dosyası**, minimum ortam özelliklerini ayarlayan bir yapılandırma dosyasıdır.
   Şimdilik bunu göz ardı edebilirsiniz.
 
-- **`data` dizini**, girdi verilerini ve ilgili kaynakları içerir, kursun ilerleyen bölümlerinde açıklanacaktır.
+- **`data` dizini**, girdi verilerini ve ilgili kaynakları içerir; kursun ilerleyen bölümlerinde açıklanacaktır.
 
 - **`solutions` dizini**, kursun her adımından kaynaklanan tamamlanmış iş akışı betiklerini ve modüllerini içerir.
   Bunlar, çalışmanızı kontrol etmek ve sorunları gidermek için referans olarak kullanılmak üzere tasarlanmıştır.

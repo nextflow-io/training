@@ -30,7 +30,7 @@ Kursu tamamlamak için bu talimatları paralel olarak açık tutmanız gerekecek
 
 ### Ortam temelleri
 
-Bu eğitim ortamı, eğitim kursunda çalışmak için gerekli tüm yazılımları, kodları ve verileri içerir, bu nedenle kendiniz herhangi bir şey yüklemenize gerek yoktur.
+Bu eğitim ortamı, eğitim kursunda çalışmak için gerekli tüm yazılımları, kodları ve verileri içerir; bu nedenle kendiniz herhangi bir şey yüklemenize gerek yoktur.
 
 Codespace, bir dosya sistemi gezgini, bir kod düzenleyici ve bir terminal kabuğu içeren bir VSCode arayüzü ile kurulmuştur.
 Kurs boyunca verilen tüm talimatlar (örneğin 'dosyayı açın', 'kodu düzenleyin' veya 'bu komutu çalıştırın') aksi belirtilmedikçe VSCode arayüzünün bu üç bölümüne atıfta bulunur.
@@ -48,7 +48,7 @@ Codespace'iniz çalışmaya başladığında, eğitime dalmadan önce yapmanız 
 
 ### Çalışma dizinini ayarlayın
 
-Varsayılan olarak, codespace tüm eğitim kurslarının kök dizininde ayarlanmış çalışma dizini ile açılır, ancak bu kurs için `hello-nextflow/` dizininde çalışacağız.
+Varsayılan olarak, codespace tüm eğitim kurslarının kök dizininde ayarlanmış çalışma dizini ile açılır; ancak bu kurs için `hello-nextflow/` dizininde çalışacağız.
 
 Terminalde şu komutu çalıştırarak şimdi dizini değiştirin:
 
@@ -77,7 +77,7 @@ code .
 Bu dizinin içeriğini, eğitim çalışma alanının sol tarafındaki dosya gezginini kullanarak keşfedebilirsiniz.
 Alternatif olarak, `tree` komutunu kullanabilirsiniz.
 
-Kurs boyunca, dizin yapısını ve içeriğini okunabilir bir biçimde temsil etmek için `tree` çıktısını kullanırız, bazen netlik için küçük değişikliklerle.
+Kurs boyunca, dizin yapısını ve içeriğini okunabilir bir biçimde temsil etmek için `tree` çıktısını kullanırız; bazen netlik için küçük değişikliklerle.
 
 Burada ikinci seviyeye kadar bir içindekiler tablosu oluşturuyoruz:
 
@@ -117,7 +117,7 @@ Beklenen komut çıktısını özlü bir şekilde dahil etmek için bunun gibi d
 - **`nextflow.config` dosyası**, minimal ortam özelliklerini ayarlayan bir yapılandırma dosyasıdır.
   Şimdilik görmezden gelebilirsiniz.
 
-- **`data/` altındaki `greetings.csv` dosyası**, kursun çoğunda kullanacağımız girdi verilerini içerir. İlk kez tanıttığımızda Bölüm 2'de (Kanallar) açıklanmaktadır.
+- **`data/` altındaki `greetings.csv` dosyası**, kursun büyük bölümünde kullanacağımız girdi verilerini içerir. İlk kez tanıttığımızda Bölüm 2'de (Kanallar) açıklanmaktadır.
 
 - **`test-params.*` dosyaları**, Bölüm 6'da (Yapılandırma) kullanacağımız yapılandırma dosyalarıdır. Şimdilik görmezden gelebilirsiniz.
 

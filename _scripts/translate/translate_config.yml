@@ -1,0 +1,8 @@
+# Translation configuration
+# Controls which English documentation files are included in automatic translation.
+
+# Directories under docs/en/docs/ to exclude from translation.
+# Files in these directories will not be translated, and existing
+# translations will not be flagged as orphaned.
+# Example: ["side_quests", "archive"]
+exclude_dirs: []

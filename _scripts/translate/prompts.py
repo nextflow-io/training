@@ -31,6 +31,7 @@ def build_translation_prompt(
     en_content: str,
     existing: str | None = None,
     en_diff: str | None = None,
+    prompt_diff: str | None = None,
 ) -> str:
     """Build the full prompt for translation.
 
@@ -40,11 +41,25 @@ def build_translation_prompt(
         en_content: Full English source content
         existing: Existing translation content, if updating
         en_diff: Git diff of English changes, for incremental updates
+        prompt_diff: Git diff of prompt changes, for targeted prompt updates
     """
     parts = [get_general_prompt(), get_lang_prompt(lang)]
 
     if existing is not None:
-        if en_diff:
+        if prompt_diff:
+            # Prompt-change update mode: show what changed in the guidelines
+            parts.append(
+                "## Prompt Update Mode\n\n"
+                "The translation guidelines have been updated. "
+                "The following diff shows exactly what changed:\n\n"
+                f"```diff\n{prompt_diff}\n```\n\n"
+                "**Instructions:**\n\n"
+                "1. Review the existing translation below\n"
+                "2. Update ONLY the parts affected by these guideline changes\n"
+                "3. Preserve ALL other content exactly as-is, character for character\n\n"
+                f"## Existing Translation\n\n%%%\n{existing}%%%"
+            )
+        elif en_diff:
             # Diff-aware incremental update mode
             parts.append(
                 "## Incremental Update Mode\n\n"
@@ -75,6 +90,58 @@ def build_translation_prompt(
     parts.append(
         f"## Task\nTranslate to {lang} ({lang_name}).\n\n"
         f"Original content:\n%%%\n{en_content}%%%"
+    )
+
+    return "\n\n".join(parts)
+
+
+def build_chunk_translation_prompt(
+    lang: str,
+    lang_name: str,
+    en_chunk: str,
+    existing_chunk: str | None = None,
+    prev_heading: str | None = None,
+    next_heading: str | None = None,
+) -> str:
+    """Build a prompt for translating a single chunk of a document.
+
+    Args:
+        lang: Language code (e.g., 'pt', 'es')
+        lang_name: Human-readable language name
+        en_chunk: The English chunk content to translate
+        existing_chunk: Existing translation of this chunk, if updating
+        prev_heading: Heading of the previous section (for context)
+        next_heading: Heading of the next section (for context)
+    """
+    parts = [get_general_prompt(), get_lang_prompt(lang)]
+
+    context_lines = []
+    if prev_heading:
+        context_lines.append(f"Previous section: {prev_heading}")
+    if next_heading:
+        context_lines.append(f"Next section: {next_heading}")
+    context = "\n".join(context_lines) if context_lines else "This is a standalone section."
+
+    if existing_chunk is not None:
+        parts.append(
+            "## Section Update Mode\n\n"
+            "You are updating a single section of a larger translated document.\n"
+            "Update the existing translation to match the new English content.\n"
+            "Preserve correct translations exactly; only change what differs.\n\n"
+            f"### Context\n{context}\n\n"
+            f"### Existing Translation of This Section\n%%%\n{existing_chunk}%%%"
+        )
+    else:
+        parts.append(
+            "## Section Translation Mode\n\n"
+            "You are translating a single section of a larger document.\n\n"
+            f"### Context\n{context}"
+        )
+
+    parts.append(
+        f"## Task\nTranslate this section to {lang} ({lang_name}).\n"
+        "Output ONLY the translated section, nothing else.\n\n"
+        f"Section to translate:\n%%%\n{en_chunk}%%%"
     )
 
     return "\n\n".join(parts)
