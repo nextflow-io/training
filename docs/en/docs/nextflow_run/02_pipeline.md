@@ -409,7 +409,7 @@ Take a minute to look at the file names and check their contents to confirm that
     ```txt title="results/2b-multistep/COLLECTED-batch-output.txt"
     HELLO
     BONJOUR
-    HOLà
+    HOLA
     ```
 
     ```txt title="results/2b-multistep/batch-report.txt"
@@ -1315,7 +1315,7 @@ You can find the output of the `cowpy` step in the `results` directory.
 
     ```console title="results/2d-container/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------

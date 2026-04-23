@@ -665,7 +665,7 @@ Do you think it's going to work?
 Let's delete the previous published outputs to have a clean slate, and run the workflow with the `-resume` flag.
 
 ```bash
-rm -r hello_containers/
+rm -r results/hello_containers/
 nextflow run hello-containers.nf -resume
 ```
 
@@ -845,7 +845,7 @@ The final ASCII art output is in the `results/hello_containers/` directory, unde
 
     ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------

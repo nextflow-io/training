@@ -677,7 +677,7 @@ cat work/38/eb29ea*/cowpy-test.txt
     ```console
     _________
     / HELLO   \
-    | HOLà    |
+    | HOLA    |
     \ BONJOUR /
     ---------
         \

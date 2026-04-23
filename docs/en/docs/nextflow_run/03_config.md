@@ -135,7 +135,7 @@ The final ASCII art output is in the `results/3-main/` directory, under the name
 
     ```console title="results/3-main/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -238,7 +238,7 @@ The final output file should contain the tux character saying the greetings.
     _________
     / HELLO   \
     | BONJOUR |
-    \ HOLà    /
+    \ HOLA    /
     ---------
       \
         \
@@ -323,7 +323,7 @@ The final output file should contain the stegosaurus character saying the greeti
     ```console title="results/3-main/cowpy-COLLECTED-yaml-output.txt"
     _________
     / HELLO   \
-    | HOLà    |
+    | HOLA    |
     \ BONJOUR /
     ---------
     \                             .       .
@@ -1318,7 +1318,7 @@ This will use Docker where possible and produce outputs under `results_config/te
 
     ```console title="results_config/test/"
      _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
