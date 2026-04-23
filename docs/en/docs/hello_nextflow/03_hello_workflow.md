@@ -534,7 +534,68 @@ In the workflow block, make the following code change:
 
 This connects the output of `convertToUpper()` to the input of `collectGreetings()`.
 
-#### 2.3.2. Run the workflow with `-resume`
+#### 2.3.2. Update the `publish:` section
+
+In the `workflow` block, make the following code change:
+
+=== "After"
+
+    ```groovy title="hello-workflow.nf" linenums="76" hl_lines="4"
+        publish:
+        first_output = sayHello.out
+        uppercased = convertToUpper.out
+        collected = collectGreetings.out
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="hello-workflow.nf" linenums="76"
+        publish:
+        first_output = sayHello.out
+        uppercased = convertToUpper.out
+    }
+    ```
+
+#### 2.3.3. Update the `output` block
+
+In the `output` block, make the following code change:
+
+=== "After"
+
+    ```groovy title="hello-workflow.nf" linenums="82" hl_lines="9-12"
+    output {
+        first_output {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+        uppercased {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+        collected {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="hello-workflow.nf" linenums="82"
+    output {
+        first_output {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+        uppercased {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+    }
+    ```
+
+#### 2.3.4. Run the workflow with `-resume`
 
 Let's try it.
 
@@ -678,7 +739,7 @@ Finally, you can have a look at the contents of the output file to satisfy yours
     ```console title="results/COLLECTED-output.txt"
     BONJOUR
     HELLO
-    HOLà
+    HOLA
     ```
 
 This time we have all three greetings in the final output file. Success!
