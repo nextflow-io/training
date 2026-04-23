@@ -20,7 +20,7 @@ If you are working through this course by yourself, please acquaint yourself wit
 
 ### Version requirements
 
-This training is designed for **Nextflow 25.10.4** or later **with the v2 syntax parser DISABLED**.
+This training works with **Nextflow 25.10.2** or later **with the v2 syntax parser DISABLED**.
 
 #### If you are using our training environment:
 
