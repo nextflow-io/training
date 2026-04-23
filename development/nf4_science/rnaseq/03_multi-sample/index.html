@@ -5158,14 +5158,14 @@ The <code>val output_name</code> input is a string that controls the report file
 <span class="normal"><a href="#__codelineno-24-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-82" name="__codelineno-24-82"></a><span class="w">    </span><span class="n">align_log</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-24-83" name="__codelineno-24-83"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;align&#39;</span>
 <a id="__codelineno-24-84" name="__codelineno-24-84"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-24-85" name="__codelineno-24-85"></a><span class="w">    </span><span class="n">multiqc_report</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-24-86" name="__codelineno-24-86"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;multiqc&#39;</span>
-<a id="__codelineno-24-87" name="__codelineno-24-87"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-24-88" name="__codelineno-24-88"></a><span class="hll"><span class="w">    </span><span class="n">multiqc_data</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-24-85" name="__codelineno-24-85"></a><span class="hll"><span class="w">    </span><span class="n">multiqc_report</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-24-86" name="__codelineno-24-86"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;multiqc&#39;</span>
+</span><a id="__codelineno-24-87" name="__codelineno-24-87"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
+</span><a id="__codelineno-24-88" name="__codelineno-24-88"></a><span class="hll"><span class="w">    </span><span class="n">multiqc_data</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-24-89" name="__codelineno-24-89"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;multiqc&#39;</span>
 </span><a id="__codelineno-24-90" name="__codelineno-24-90"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
-</span><a id="__codelineno-24-91" name="__codelineno-24-91"></a><span class="hll"><span class="o">}</span>
-</span></code></pre></div></td></tr></table></div>
+</span><a id="__codelineno-24-91" name="__codelineno-24-91"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">rnaseq.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-82">82</a></span>
@@ -5201,7 +5201,9 @@ The <code>val output_name</code> input is a string that controls the report file
 <p>You can find the MultiQC outputs in the results directory.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>tree<span class="w"> </span>-L<span class="w"> </span><span class="m">2</span><span class="w"> </span>results/multiqc
 </code></pre></div>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="go">results/multiqc</span>
+<details class="abstract">
+<summary>Directory contents</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="go">results/multiqc</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="go">├── all_single-end_data</span>
 <a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="go">│   ├── cutadapt_filtered_reads_plot.txt</span>
 <a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="go">│   ├── cutadapt_trimmed_sequences_plot_3_Counts.txt</span>
@@ -5230,6 +5232,7 @@ The <code>val output_name</code> input is a string that controls the report file
 <a id="__codelineno-29-27" name="__codelineno-29-27" href="#__codelineno-29-27"></a><span class="go">│   └── multiqc_sources.txt</span>
 <a id="__codelineno-29-28" name="__codelineno-29-28" href="#__codelineno-29-28"></a><span class="go">└── all_single-end.html</span>
 </code></pre></div>
+</details>
 <p>That last <code>all_single-end.html</code> file is the full aggregated report, conveniently packaged into one easy to browse HTML file.</p>
 <h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
 <p>You know how to collect outputs from multiple channels, bundle them with <code>.mix()</code> and <code>.collect()</code>, and pass them to an aggregation process.</p>

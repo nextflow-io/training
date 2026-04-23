@@ -5192,7 +5192,7 @@ This means that you can use any container image you like to run your processes, 
 
 <p>Do you think it's going to work?</p>
 <p>Let's delete the previous published outputs to have a clean slate, and run the workflow with the <code>-resume</code> flag.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>rm<span class="w"> </span>-r<span class="w"> </span>hello_containers/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>rm<span class="w"> </span>-r<span class="w"> </span>results/hello_containers/
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-containers.nf<span class="w"> </span>-resume
 </code></pre></div>
 <details class="failure">
@@ -5376,7 +5376,7 @@ As usual you can find the workflow outputs in the corresponding results director
 <details class="abstract">
 <summary>File contents</summary>
 <div class="highlight"><span class="filename">results/hello_containers/cowpy-COLLECTED-batch-output.txt</span><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">_________</span>
-<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="go">/ HOLà    \</span>
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="go">/ HOLA    \</span>
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="go">| HELLO   |</span>
 <a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a><span class="go">\ BONJOUR /</span>
 <a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a><span class="go">---------</span>
