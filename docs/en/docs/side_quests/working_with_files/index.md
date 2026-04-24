@@ -54,6 +54,8 @@ You can set VSCode to focus on this directory:
 code .
 ```
 
+The editor opens with the project directory in focus.
+
 #### Review the materials
 
 You'll find a simple workflow file called `main.nf`, a `modules` directory containing two module files, and a `data` directory containing some example data files.
@@ -129,11 +131,19 @@ Take a look at the workflow file `main.nf`:
 #!/usr/bin/env nextflow
 
 workflow {
-
+    main:
     // Create a Path object from a string path
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
     println "${myFile} is of class ${myFile.class}"
+
+    publish:
+    analysis_results = channel.empty()
+}
+
+output {
+    analysis_results {
+    }
 }
 ```
 
@@ -224,6 +234,8 @@ As we'll see later, remote files will have different class names (such as `nextf
     - **Path object**: A smart file reference that Nextflow can work with
 
     Think of it like this: a path string is like writing an address on paper, while a Path object is like having the address loaded in a GPS device that knows how to navigate to there and can tell you details about the journey.
+
+Understanding this difference is key to using file operations correctly in Nextflow.
 
 ### 1.3. Access file attributes
 
@@ -333,6 +345,8 @@ As you can see, it's a fairly straightforward little script that unzips the file
     Without this, you would only see the process execution status but not the actual output from your script.
 
     For more information on debugging Nextflow processes, see the [Debugging Nextflow Workflows](debugging.md) side quest.
+
+With the module imported and its code examined, we can call the process from the workflow.
 
 #### 1.4.2. Add a call to `COUNT_LINES`
 
@@ -599,6 +613,8 @@ Taken together, these two examples show you how important it is to tell Nextflow
 
     Make sure to go back and fix both intentional errors before continuing to the next section.
 
+With both fixes applied, the workflow correctly stages and processes the input file.
+
 ### Takeaway
 
 - Path strings vs Path objects: Strings are just text, Path objects are smart file references
@@ -776,6 +792,8 @@ We're going to go back to using our local example files for the rest of this sid
         println "Extension: ${myFile.extension}"
         println "Parent directory: ${myFile.parent}"
     ```
+
+The workflow is now back to using the local input file.
 
 ### Takeaway
 
@@ -1600,6 +1618,8 @@ process ANALYZE_READS {
     We are calling our metadata map `meta` by convention.
     For a deeper dive into meta maps, see the [Metadata and meta maps](../metadata/) side quest.
 
+With the `ANALYZE_READS` process imported and its code reviewed, we can add a call to it in the workflow.
+
 ### 6.2. Call the process in the workflow
 
 Now that the process is available to the workflow, we can add a call to the `ANALYZE_READS` process to run it.
@@ -1657,7 +1677,6 @@ In the main workflow, replace the `.view()` operator with `.set { ch_samples }`,
            ]
         }
         .view()
-    }
     ```
 
 Let's run this:
@@ -1684,14 +1703,14 @@ Now let's actually call the `ANALYZE_READS` process on the `ch_samples` channel.
 
 In the main workflow, make the following code changes:
 
-1. Add a `main:` label at the top of the workflow block (before the existing channel code)
-2. Replace the temporary `.view()` call with the process call
-3. Add a `publish:` section to the workflow
-4. Add an `output {}` block after the workflow
+1. Refactor the channel setup: change `ch_files.map {}` to `ch_samples = ch_files.map {}` (direct assignment, removing the `.set` operator) and use `tuple()` instead of `[]`
+2. Replace the `.view()` call with a call to `ANALYZE_READS(ch_samples)`
+3. Replace `channel.empty()` with `ANALYZE_READS.out` in the `publish:` section
+4. Add a `path` closure to the `output {}` block
 
 === "After"
 
-    ```groovy title="main.nf" linenums="5" hl_lines="2 5 7 14 17 18 20 21 24 25 26 27 28"
+    ```groovy title="main.nf" linenums="5" hl_lines="5 7 14 17 18 21 26"
     workflow {
         main:
         // Load files with channel.fromFilePairs
@@ -1726,6 +1745,7 @@ In the main workflow, make the following code changes:
 
     ```groovy title="main.nf" linenums="5"
     workflow {
+        main:
         // Load files with channel.fromFilePairs
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id,  files ->
@@ -1743,11 +1763,19 @@ In the main workflow, make the following code changes:
 
         // Temporary: peek into ch_samples
         ch_samples.view()
+
+        publish:
+        analysis_results = channel.empty()
+    }
+
+    output {
+        analysis_results {
+        }
     }
     ```
 
-The `publish:` section declares which process outputs to publish, and the `output {}` block configures where and how they are published.
-The `path` closure in the `output {}` block receives each output element and determines the subdirectory structure. Here we use `meta.id` to organize results by patient.
+The `path` closure in the `output {}` block receives each output element and determines the subdirectory structure.
+Here we use `meta.id` to organize results by patient.
 
 Let's run this:
 

@@ -57,6 +57,8 @@ You can set VSCode to focus on this directory:
 code .
 ```
 
+The editor opens with the project directory in focus.
+
 #### Review the materials
 
 You'll find a main workflow file and a `data` directory containing a datasheet and a handful of data files.
@@ -243,6 +245,8 @@ For example, we could access the file ID with `id` or the txt file path with `re
     id: sampleA
     character: squirrel
     ```
+
+With the map data structure understood, the next step is selecting specific fields from it using the `map` channel operator.
 
 ### 1.2. Pick out specific fields with `map`
 
@@ -522,6 +526,8 @@ This will prove useful in the next step.
     Instead, you must use keys to associate data correctly, and meta maps provide an ideal structure for this purpose.
 
     We explore this use case in detail in the [Splitting & Grouping](../splitting_and_grouping/) side quest.
+
+This association between meta map and results is what makes the next step possible: adding process outputs back into the meta map.
 
 ### 2.3. Augment metadata with process outputs
 
