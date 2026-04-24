@@ -8,9 +8,12 @@ hide:
 
 ## Current supported Nextflow syntax version & requirements
 
-As of version 3.0 of the training portal, all our training courses are based on the 25.10.2 version release of Nextflow unless otherwise specified on the course index page (except deprecated or otherwise archived materials which may not include a version notice).
+As of version 3.0 of the training portal, all our training courses are compatible with Nextflow version 25.10.2 or later unless otherwise specified on the course index page.
+(This does not include deprecated or otherwise archived materials which may not have a version notice).
 
-Because the courses now use typed inputs at the workflow level as well as workflow-level output directives, they require the use of the V2 syntax parser.
+The version of Nextflow currently loaded by default in our training environment is **Nextflow 25.10.4**.
+
+Because the courses now use typed inputs at the workflow level as well as workflow-level output directives, they require the use of the V2 syntax parser, **unless otherwise specified**.
 If you plan to use the environment we provide through [Github Codespaces](../envsetup/01_setup.md) or [local devcontainers](../envsetup/03_devcontainer.md), you don't need to do anything unless specifically noted in the course instructions.
 However, if you are planning to work through the trainings in your own environment ([Manual install](../envsetup/02_local.md)), you will need to make sure to use Nextflow version 25.10.2 or later with the v2 syntax parser enabled.
 

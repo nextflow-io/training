@@ -75,7 +75,7 @@ nextflow run hello-config.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [nice_escher] DSL2 - revision: d5dfdc9872
 
@@ -97,10 +97,10 @@ As previously, you will find the output files in the directory specified in the 
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
+    │   ├── Hola-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     └── batch-report.txt
     ```
 
@@ -110,7 +110,7 @@ The final ASCII art output is in the `results/hello_config/` directory, under th
 
     ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -235,7 +235,7 @@ nextflow run hello-config.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
 
@@ -254,7 +254,7 @@ The final ASCII art output is in the `results/hello_config/` directory, under th
 
     ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -331,7 +331,7 @@ nextflow run ../hello-config.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `../hello-config.nf` [trusting_escher] DSL2 - revision: 356df0818d
 
@@ -354,7 +354,7 @@ The final output file should contain the tux character saying the greetings.
     _________
     / HELLO   \
     | BONJOUR |
-    \ HOLà    /
+    \ HOLA    /
     ---------
       \
         \
@@ -417,7 +417,7 @@ nextflow run hello-config.nf -params-file test-params.yaml
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
@@ -435,7 +435,7 @@ The final output file should contain the stegosaurus character saying the greeti
     ```console title="results/hello_config/cowpy-COLLECTED-yaml-output.txt"
     _________
     / HELLO   \
-    | HOLà    |
+    | HOLA    |
     \ BONJOUR /
     ---------
     \                             .       .
@@ -498,7 +498,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli/
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [prickly_kay] DSL2 - revision: 32ecc4fba2
 
@@ -522,10 +522,10 @@ This publishes outputs to `custom-outdir-cli/` instead of `results/`:
             ├── Bonjour-output.txt
             ├── COLLECTED-batch-output.txt
             ├── Hello-output.txt
-            ├── Holà-output.txt
+            ├── Hola-output.txt
             ├── UPPER-Bonjour-output.txt
             ├── UPPER-Hello-output.txt
-            └── UPPER-Holà-output.txt
+            └── UPPER-Hola-output.txt
     ```
 
 Notice we still have the `hello_config` subdirectory from the `path` declarations in the output block.
@@ -610,10 +610,10 @@ Now the outputs are published directly under `custom-outdir-cli-2/`, without the
         ├── Bonjour-output.txt
         ├── COLLECTED-batch-output.txt
         ├── Hello-output.txt
-        ├── Holà-output.txt
+        ├── Hola-output.txt
         ├── UPPER-Bonjour-output.txt
         ├── UPPER-Hello-output.txt
-        └── UPPER-Holà-output.txt
+        └── UPPER-Hola-output.txt
     ```
 
 !!! tip
@@ -830,7 +830,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-config-2 --batch rep2
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [mad_curry] DSL2 - revision: 668a98ccb9
 
@@ -858,11 +858,11 @@ This publishes outputs to `custom-outdir-config-2/rep2/`, with the specified bas
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Holà-output.txt
+            │   └── UPPER-Hola-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Holà-output.txt
+                └── Hola-output.txt
     ```
 
 ### 2.3. Set the publish mode at the workflow level
@@ -960,7 +960,7 @@ nextflow run hello-config.nf -output-dir config-output-mode
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [small_stone] DSL2 - revision: 024d6361b5
 
@@ -988,11 +988,11 @@ This publishes outputs to `config-output-mode/`, and they are still all proper c
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Holà-output.txt
+            │   └── UPPER-Hola-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Holà-output.txt
+                └── Hola-output.txt
     ```
 
 The main reason you might still want to use the per-output way of setting mode is if you want to mix and match within the same workflow, _i.e._ have some outputs be copied and some be symlinked.
@@ -1092,7 +1092,7 @@ nextflow run hello-config.nf --batch conda
 ??? success "Command output"
 
     ```console title="Output"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [friendly_lamport] DSL2 - revision: 024d6361b5
 
@@ -1486,7 +1486,7 @@ nextflow run hello-config.nf -profile my_laptop
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [hungry_sanger] DSL2 - revision: 024d6361b5
 
@@ -1570,7 +1570,7 @@ nextflow run hello-config.nf -profile my_laptop,test
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [modest_becquerel] DSL2 - revision: 024d6361b5
 
@@ -1587,7 +1587,7 @@ This will use Docker where possible and produce outputs under `custom-outdir-con
 
     ```console title="custom-outdir-config/test/cowpy/cowpy-COLLECTED-test-output.txt"
      _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------

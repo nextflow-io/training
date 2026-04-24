@@ -275,7 +275,7 @@ gatk GenotypeGVCFs \
 ```
 
 첫 번째 명령은 샘플별 GVCF와 인터벌 파일을 받아 GenomicsDB 데이터 저장소를 생성합니다.
-두 번째 명령은 해당 데이터 저장소와 참조 게놈을 받아 최종 코호트 수준의 VCF를 생성합니다.
+두 번째 명령은 해당 데이터 저장소와 레퍼런스 게놈을 받아 최종 코호트 수준의 VCF를 생성합니다.
 컨테이너 URI는 HaplotypeCaller와 동일합니다: `community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867`.
 
 ### 2.1. 입력 설정

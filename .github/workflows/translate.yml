@@ -68,6 +68,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false # Continue other languages if one fails
+      max-parallel: 5 # Limit concurrent languages to avoid API rate limits
       matrix:
         language: ${{ fromJson(needs.detect.outputs.languages) }}
     steps:

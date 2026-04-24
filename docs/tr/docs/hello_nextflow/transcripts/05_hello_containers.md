@@ -16,7 +16,7 @@
 
 Merhaba ve Hello Nextflow'a tekrar hoş geldiniz. Bu, Hello Containers adlı beşinci bölüm. Kursun bu bölümünde, bir pipeline için yazılım gereksinimlerini nasıl kapsülleyeceğimizi konuşacağız; böylece pipeline'ı çalıştıran kişilerin yazılımı yüklemeyi düşünmelerine gerek kalmayacak.
 
-Benim kadar uzun süredir biyoinformatikte çalışıyorsanız, sık sık "kötü eski günler" dediğim zamanları hatırlayabilirsiniz. Başkasının pipeline'ını çalıştırmak veya çalışmalarını tekrarlamak istediğinizde, kullandıkları tüm farklı yazılım araçlarını aynı sürümlerde makinenizde derlemek için saatler veya günler harcardınız; bu gerçek bir kabusту. Gerçekten zordu.
+Benim kadar uzun süredir biyoinformatikte çalışıyorsanız, sık sık "kötü eski günler" dediğim zamanları hatırlayabilirsiniz. Başkasının pipeline'ını çalıştırmak veya çalışmalarını tekrarlamak istediğinizde, kullandıkları tüm farklı yazılım araçlarını aynı sürümlerde makinenizde derlemek için saatler veya günler harcardınız; bu gerçek bir kabustu. Gerçekten zordu.
 
 Bir HPC üzerinde çalışıyorsanız, sistem yöneticilerinin sizin için yazılım yüklemeye çalıştığı ortam modüllerini kullanmış olabilirsiniz. Bu yöntem işe yarıyordu, ama yine de kusurlu bir çözümdü.
 

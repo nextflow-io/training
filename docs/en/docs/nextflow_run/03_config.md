@@ -116,7 +116,7 @@ nextflow run 3-main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
 
@@ -135,7 +135,7 @@ The final ASCII art output is in the `results/3-main/` directory, under the name
 
     ```console title="results/3-main/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -215,7 +215,7 @@ nextflow run ../3-main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `../3-main.nf` [trusting_escher] DSL2 - revision: 356df0818d
 
@@ -238,7 +238,7 @@ The final output file should contain the tux character saying the greetings.
     _________
     / HELLO   \
     | BONJOUR |
-    \ HOLà    /
+    \ HOLA    /
     ---------
       \
         \
@@ -305,7 +305,7 @@ nextflow run 3-main.nf -params-file test-params.yaml
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
@@ -323,7 +323,7 @@ The final output file should contain the stegosaurus character saying the greeti
     ```console title="results/3-main/cowpy-COLLECTED-yaml-output.txt"
     _________
     / HELLO   \
-    | HOLà    |
+    | HOLA    |
     \ BONJOUR /
     ---------
     \                             .       .
@@ -492,7 +492,7 @@ nextflow run 3-main.nf --batch outdir
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [amazing_church] DSL2 - revision: 6e18cd130e
 
@@ -514,10 +514,10 @@ This still produces the same output as previously, except this time we find our 
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-outdir-output.txt
     │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
+    │   ├── Hola-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     └── outdir-report.txt
     ```
 
@@ -600,7 +600,7 @@ nextflow run 3-main.nf --batch pnames
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [jovial_mcclintock] DSL2 - revision: ede9037d02
 
@@ -623,13 +623,13 @@ This still produces the same output as previously, except this time we find our 
     ├── convertToUpper
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     ├── cowpy
     │   └── cowpy-COLLECTED-pnames-output.txt
     └── sayHello
         ├── Bonjour-output.txt
         ├── Hello-output.txt
-        └── Holà-output.txt
+        └── Hola-output.txt
     ```
 
 !!! note
@@ -732,7 +732,7 @@ nextflow run 3-main.nf --batch outmode
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [rowdy_sagan] DSL2 - revision: ede9037d02
 
@@ -756,13 +756,13 @@ They are still all proper copies, not symlinks.
     ├── convertToUpper
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     ├── cowpy
     │   └── cowpy-COLLECTED-outmode-output.txt
     └── sayHello
         ├── Bonjour-output.txt
         ├── Hello-output.txt
-        └── Holà-output.txt
+        └── Hola-output.txt
     ```
 
 The main reason you might still want to use the per-output way of setting mode is if you want to mix and match within the same workflow, _i.e._ have some outputs be copied and some be symlinked.
@@ -866,7 +866,7 @@ nextflow run 3-main.nf --batch conda
 ??? success "Command output"
 
     ```console title="Output"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
 
@@ -1213,7 +1213,7 @@ nextflow run 3-main.nf -profile my_laptop
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
@@ -1301,7 +1301,7 @@ nextflow run 3-main.nf -profile my_laptop,test
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [jovial_coulomb] DSL2 - revision: 46a6763141
 
@@ -1318,7 +1318,7 @@ This will use Docker where possible and produce outputs under `results_config/te
 
     ```console title="results_config/test/"
      _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -1486,7 +1486,7 @@ nextflow run nextflow-io/hello
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Pulling nextflow-io/hello ...
      downloaded from https://github.com/nextflow-io/hello.git
@@ -1518,7 +1518,7 @@ nextflow run nextflow-io/hello -r v1.3
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `https://github.com/nextflow-io/hello` [sick_carson] DSL2 - revision: 2ce0b0e294 [v1.3]
 

@@ -313,7 +313,7 @@ Konteynerin ana dosya sistemine erişmesine izin vermek için, aşağıdaki söz
 -v <outside_path>:<inside_path>
 ```
 
-Bizim durumumuzda `<dış_yol>` mevcut çalışma dizini olacak; bu yüzden sadece bir nokta (`.`) kullanabiliriz. `<iç_yol>` ise uydurduğumuz bir takma addır; buna `/my_project` diyelim (iç yol mutlak olmalıdır).
+Bizim durumumuzda `<outside_path>` mevcut çalışma dizini olacak; bu yüzden sadece bir nokta (`.`) kullanabiliriz. `<inside_path>` ise uydurduğumuz bir takma addır; buna `/my_project` diyelim (iç yol mutlak olmalıdır).
 
 Bir hacim bağlamak için, yolları değiştirip hacim bağlama argümanını docker run komutuna şu şekilde ekliyoruz:
 

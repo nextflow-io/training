@@ -22,7 +22,7 @@ Sona ulaştınız ve Hello Nextflow eğitim kursunu tamamladınız. Umarım keyi
 
 training.nextflow.io'yu ziyaret etmeye devam etmeyi unutmayın. Sürekli olarak yeni kısa kurslar ekliyoruz ve ayrıca zaten burada olan materyallerin çoğunu yeniliyoruz. Dolayısıyla bu Hello Nextflow eğitim kursu zamanla güncellenecektir.
 
-Bu özellikle önemlidir çünkü Nextflow'da sözdizimini güncelliyoruz ve 2026'da oldukça fazla yeni özellik gelecek, dolayısıyla bu kurs 2027'de bir sonraki yaptığımızda biraz farklı görünecek ve hissettirecek.
+Bu özellikle önemlidir çünkü Nextflow'da sözdizimini güncelliyoruz ve 2026'da oldukça fazla yeni özellik gelecek; dolayısıyla bu kurs 2027'de bir sonraki yaptığımızda biraz farklı görünecek ve hissettirecek.
 
 Özellikle "Nextflow for Science" sayfasına dikkat çekmek istiyorum. Bunlar kısa kurslardır ve bu Hello Nextflow kursunu takip edecek şekilde tasarlanmıştır. Genomik, RNAseq veya her türlü farklı şey olsun, belirli farklı kullanım durumlarıyla Nextflow'un nasıl kullanılacağını gösterirler. Sürekli olarak daha fazla bilimsel kullanım durumu eklemeye çalışıyoruz.
 

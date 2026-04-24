@@ -30,7 +30,7 @@ Holà,Spanish,789
 --8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-multi-inputs.svg"
 </figure>
 
-먼저 workflow를 실행한 다음 관련 Nextflow 코드를 살펴보겠습니다.
+먼저 workflow를 실행한 다음 관련 Nextflow 코드를 살펴봅니다.
 
 ### 1.1. Workflow 실행
 
@@ -233,7 +233,7 @@ workflow 코드에서 무엇이 이를 가능하게 하는지 살펴봅니다.
 Nextflow에서는 [**channel**](https://nextflow.io/docs/latest/channel.html)로 이를 수행합니다.
 channel은 입력을 효율적으로 처리하고 다단계 workflow에서 한 단계에서 다른 단계로 전달하도록 설계된 큐 구조로, 내장된 병렬 처리와 많은 추가 이점을 제공합니다.
 
-분석해 보겠습니다.
+분석해 봅니다.
 
 ```groovy title="2a-inputs.nf" linenums="29" hl_lines="3-5"
     main:

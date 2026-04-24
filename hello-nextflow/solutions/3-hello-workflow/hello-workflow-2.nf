@@ -79,7 +79,7 @@ workflow {
     publish:
     first_output = sayHello.out
     uppercased = convertToUpper.out
-    collected_output = collectGreetings.out
+    collected = collectGreetings.out
 }
 
 output {
@@ -91,7 +91,7 @@ output {
         path 'hello_workflow'
         mode 'copy'
     }
-    collected_output {
+    collected {
         path 'hello_workflow'
         mode 'copy'
     }

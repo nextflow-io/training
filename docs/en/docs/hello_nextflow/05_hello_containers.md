@@ -70,7 +70,7 @@ nextflow run hello-containers.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-containers.nf` [nice_escher] DSL2 - revision: d5dfdc9872
 
@@ -90,11 +90,11 @@ As previously, you will find the output files in the directory specified in the 
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 If that worked for you, you're ready to learn how to use containers.
@@ -354,7 +354,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
      ____________________
     / Hello,English,123  \
     | Bonjour,French,456 |
-    \ Holà,Spanish,789   /
+    \ Hola,Spanish,789   /
     --------------------
       \                                  ,+*^^*+___+++_
       \                           ,*^^^^              )
@@ -665,14 +665,14 @@ Do you think it's going to work?
 Let's delete the previous published outputs to have a clean slate, and run the workflow with the `-resume` flag.
 
 ```bash
-rm -r hello_containers/
+rm -r results/hello_containers/
 nextflow run hello-containers.nf -resume
 ```
 
 ??? failure "Command output (edited for clarity)"
 
     ```console hl_lines="10 13 20-21 26-27"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-containers.nf` [lonely_woese] DSL2 - revision: abf1dccf7f
 
@@ -809,7 +809,7 @@ nextflow run hello-containers.nf -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-containers.nf` [drunk_perlman] DSL2 - revision: abf1dccf7f
 
@@ -832,10 +832,10 @@ As usual you can find the workflow outputs in the corresponding results director
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
+    │   ├── Hola-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     └── batch-report.txt
     ```
 
@@ -845,7 +845,7 @@ The final ASCII art output is in the `results/hello_containers/` directory, unde
 
     ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------

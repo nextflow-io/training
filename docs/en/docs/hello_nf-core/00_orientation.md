@@ -20,7 +20,7 @@ If you are working through this course by yourself, please acquaint yourself wit
 
 ### Version requirements
 
-This training is designed for **Nextflow 25.10.2** or later **with the v2 syntax parser DISABLED**.
+This training works with **Nextflow 25.10.2** or later **with the v2 syntax parser DISABLED**.
 
 #### If you are using our training environment:
 
@@ -34,7 +34,7 @@ export NXF_SYNTAX_PARSER=v1
 
 Please make sure you are using the correct settings as documented [here](../info/nxf_versions.md).
 
-The training additionally requires **nf-core tools 3.4.1**.
+The training additionally requires **nf-core tools 3.5.2**.
 If you use a different version of nf-core tooling, you may have difficulty following along.
 
 You can check what version is installed in your environment using the command `nf-core --version`.
@@ -61,7 +61,7 @@ cd hello-nf-core/
     cd /workspaces/training/hello-nf-core
     ```
 
-Now let's have a look at the contents of this directory.
+Next, explore the contents of this directory.
 
 ### Explore the materials provided
 

@@ -1379,9 +1379,9 @@ Conda 환경의 경우, 모듈 코드는 `conda "${moduleDir}/environment.yml"`�
       - conda-forge
       - bioconda
     dependencies:
-      # TODO nf-core: List required Conda package(s).
-      #               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
-      #               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
+      # TODO nf-core: 필요한 Conda 패키지를 나열하십시오.
+      #               소프트웨어는 채널(예: "bioconda"), 버전(예: "1.10")에 고정되어야 합니다.
+      #               Conda의 경우, 다른 운영체제에서의 설치를 지원하기 위해 빌드(예: "h9402c20_2")는 제외해야 합니다.
       - "YOUR-TOOL-HERE"
     ```
 

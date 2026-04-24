@@ -184,7 +184,7 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [exotic_albattani] DSL2 - revision: c0d03cec83
 
@@ -237,7 +237,7 @@ For example, we could access the file ID with `id` or the txt file path with `re
     And here's what you can expect to see in the output:
 
     ```console title="Output"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `map_demo.nf` [cheesy_plateau] DSL2 - revision: fae5b8496e
 
@@ -283,7 +283,7 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [exotic_albattani] DSL2 - revision: c0d03cec83
 
@@ -353,7 +353,7 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console title="View meta map"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [lethal_booth] DSL2 - revision: 0d8f844c07
 
@@ -496,7 +496,7 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [voluminous_mcnulty] DSL2 - revision: f9bcfebabb
 
@@ -657,7 +657,7 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [cheeky_fermat] DSL2 - revision: d096281ee4
 
@@ -768,7 +768,7 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [wise_almeida] DSL2 - revision: 46778c3cd0
 
@@ -985,7 +985,7 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [friendly_austin] DSL2 - revision: 3dbe460fd6
 
@@ -1038,7 +1038,7 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [cheesy_cantor] DSL2 - revision: 15af9c1ec7
 
@@ -1106,7 +1106,7 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [suspicious_crick] DSL2 - revision: 25541014c5
 
@@ -1298,7 +1298,7 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [wise_sammet] DSL2 - revision: 99797b1e92
 
@@ -1358,7 +1358,7 @@ This will cause an error.
 ??? failure "Command output"
 
     ```console hl_lines="8 11 16 28"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [marvelous_hirsch] DSL2 - revision: 0dfeee3cc1
 
@@ -1426,7 +1426,7 @@ It will not find any elements that match the instruction, so it will not run `CO
 ??? success "Command output"
 
     ```console hl_lines="7"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [desperate_montalcini] DSL2 - revision: 0dfeee3cc1
 
@@ -1447,7 +1447,7 @@ This will cause an error, but a different one compared to the first case.
 ??? failure "Command output"
 
     ```console hl_lines="8 11 16"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [jovial_bohr] DSL2 - revision: eaaf375827
 
