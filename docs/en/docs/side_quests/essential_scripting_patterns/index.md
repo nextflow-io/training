@@ -165,7 +165,7 @@ Here's what that map operation looks like:
 
 This is our first **closure** - an anonymous function you can pass as an argument (similar to lambdas in Python or arrow functions in JavaScript). Closures are essential for working with Nextflow operators.
 
-The closure `{ row -> return row }` takes a parameter `row` (could be any name: `item`, `sample`, etc.).
+The closure `#!groovy { row -> return row }` takes a parameter `row` (could be any name: `item`, `sample`, etc.).
 
 When the `.map()` operator processes each channel item, it passes that item to your closure. Here, `row` holds one CSV row at a time.
 
@@ -276,7 +276,7 @@ The ternary operator is a shorthand for an if/else statement that follows the pa
 
 The map addition operator `+` creates a **new map** rather than modifying the existing one. This line creates a new map that contains all the key-value pairs from `sample_meta` plus the new `priority` key.
 
-!!! Note
+!!! note
 
     Never modify maps passed into closures - always create new ones using `+` (for example). In Nextflow, the same data often flows through multiple operations simultaneously. Modifying a map in-place can cause unpredictable side effects when other operations reference that same object. Creating new maps ensures each operation has its own clean copy.
 
@@ -1057,7 +1057,7 @@ Include the process in your `main.nf` and add it to the workflow:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="1 10-29"
+    ```groovy title="main.nf" linenums="1" hl_lines="1 28"
     include { FASTP } from './modules/fastp.nf'
 
     workflow {
@@ -1124,7 +1124,7 @@ But what if we want to add information about when and where the processing occur
         """
     ```
 
-If you run this, you'll notice an error - Nextflow tries to interpret `${USER}` as a Nextflow variable that doesn't exist.
+If you run this, you'll notice an error - Nextflow tries to interpret `#!groovy ${USER}` as a Nextflow variable that doesn't exist.
 
 ??? failure "Command output"
 
@@ -1175,9 +1175,9 @@ In this section, you've learned **string processing** techniques:
 - **Regular expressions for file parsing**: Using the `=~` operator and regex patterns (`~/pattern/`) to extract metadata from complex file naming conventions
 - **Dynamic script generation**: Using conditional logic (if/else, ternary operators) to generate different script strings based on input characteristics
 - **Variable interpolation**: Understanding when Nextflow interprets strings vs when the shell does
-  - `${var}` - Nextflow variables (interpolated by Nextflow at workflow compile time)
-  - `\${var}` - Shell environment variables (escaped, passed to bash at runtime)
-  - `\$(cmd)` - Shell command substitution (escaped, executed by bash at runtime)
+  - `#!groovy ${var}` - Nextflow variables (interpolated by Nextflow at workflow compile time)
+  - `#!groovy \${var}` - Shell environment variables (escaped, passed to bash at runtime)
+  - `#!groovy \$(cmd)` - Shell command substitution (escaped, executed by bash at runtime)
 
 These string processing and generation patterns are essential for handling the diverse file formats and naming conventions you'll encounter in real-world bioinformatics workflows.
 
@@ -1342,7 +1342,7 @@ Currently, our FASTP process uses default resources. Let's make it smarter by al
         tuple val(meta), path(reads)
     ```
 
-The closure `{ meta.depth > 40000000 ? 2 : 1 }` uses the **ternary operator** (covered in Section 1.1) and is evaluated for each task, allowing per-sample resource allocation. High-depth samples (>40M reads) get 2 CPUs, while others get 1 CPU.
+The closure `#!groovy { meta.depth > 40000000 ? 2 : 1 }` uses the **ternary operator** (covered in Section 1.1) and is evaluated for each task, allowing per-sample resource allocation. High-depth samples (>40M reads) get 2 CPUs, while others get 1 CPU.
 
 !!! note "Accessing Input Variables in Directives"
 

@@ -352,7 +352,7 @@ nextflow run main.nf
     Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
-We've separated out the normal and tumor samples into two different channels, and used a closure supplied to `view()` to label them differently in the output: `ch_tumor_samples.view{'Tumor sample: ' + it}`.
+We've separated out the normal and tumor samples into two different channels, and used a closure supplied to `view()` to label them differently in the output: `#!groovy ch_tumor_samples.view{'Tumor sample: ' + it}`.
 
 ### Takeaway
 
