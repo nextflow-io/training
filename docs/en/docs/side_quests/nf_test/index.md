@@ -835,7 +835,7 @@ We won't print it here, but you should see a JSON file containing details of the
 
 This represents the outputs created by the `sayHello` process, which we are testing explicitly. If we re-run the test, the program will check that the new output matches the output that was originally recorded. This is a quick, simple way of testing that process outputs don't change, which is why nf-test provides it as a default.
 
-!!!warning
+!!! warning
 
     That means we have to be sure that the output we record in the original run is correct!
 
