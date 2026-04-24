@@ -428,9 +428,7 @@ Make the following edit to the workflow:
 
 You can open the module file to examine its code:
 
-```groovy title="modules/langid.nf" linenums="1" hl_lines="9 12"
-#!/usr/bin/env nextflow
-
+```groovy title="modules/langid.nf" linenums="1" hl_lines="7 10"
 // Use langid to predict the language of each input file
 process IDENTIFY_LANGUAGE {
 
@@ -879,8 +877,6 @@ Make the following edit to the workflow:
 You can open the module file to examine its code:
 
 ```groovy title="modules/cowpy.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 // Generate ASCII art with cowpy
 process COWPY {
 
@@ -1216,14 +1212,14 @@ Make the following edits to the `cowpy.nf` module file:
 
 === "After"
 
-    ```groovy title="cowpy.nf" linenums="10" hl_lines="2"
+    ```groovy title="cowpy.nf" linenums="6" hl_lines="2"
     input:
     tuple val(meta), path(input_file)
     ```
 
 === "Before"
 
-    ```groovy title="cowpy.nf" linenums="10" hl_lines="2-3"
+    ```groovy title="cowpy.nf" linenums="6" hl_lines="2-3"
     input:
     path(input_file)
     val character
@@ -1241,7 +1237,7 @@ Make the following edits to the `cowpy.nf` module file:
 
 === "After"
 
-    ```groovy title="cowpy.nf" linenums="16" hl_lines="3"
+    ```groovy title="cowpy.nf" linenums="12" hl_lines="3"
     script:
     """
     cat ${input_file} | cowpy -c ${meta.character} > cowpy-${input_file}
@@ -1250,7 +1246,7 @@ Make the following edits to the `cowpy.nf` module file:
 
 === "Before"
 
-    ```groovy title="cowpy.nf" linenums="16" hl_lines="3"
+    ```groovy title="cowpy.nf" linenums="12" hl_lines="3"
     script:
     """
     cat ${input_file} | cowpy -c ${character} > cowpy-${input_file}

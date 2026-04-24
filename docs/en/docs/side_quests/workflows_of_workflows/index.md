@@ -315,6 +315,7 @@ Open `main.nf` and make the following changes:
 
     output {
         greetings {
+            path 'greetings'
         }
     }
     ```
@@ -332,6 +333,7 @@ Open `main.nf` and make the following changes:
 
     output {
         greetings {
+            path 'greetings'
         }
     }
     ```
@@ -491,10 +493,13 @@ Update `main.nf` to use both workflows:
 
     output {
         greetings {
+            path 'greetings'
         }
         upper {
+            path 'upper'
         }
         reversed {
+            path 'reversed'
         }
     }
     ```
@@ -515,6 +520,7 @@ Update `main.nf` to use both workflows:
 
     output {
         greetings {
+            path 'greetings'
         }
     }
     ```
