@@ -290,11 +290,11 @@ The solution is an entry workflow in `main.nf` that imports and calls `GREETING_
 
 ### 1.3. Update and test the main workflow
 
-Now we will update the main workflow to import and use the `greeting` workflow.
+Now , let's update the main workflow to call the greeting workflow.
 
-#### 1.3.1. Add the `include` and wire the workflow
+#### 1.3.1. Include the greeting workflow and call it
 
-Add the `include` statement and update the workflow body to call `GREETING_WORKFLOW`, replacing the `channel.empty()` placeholder in `publish:`:
+Add the `include` statement, update the workflow body to call `GREETING_WORKFLOW` and replace the `channel.empty()` placeholder in `publish:`:
 
 === "After"
 
@@ -325,7 +325,7 @@ Add the `include` statement and update the workflow body to call `GREETING_WORKF
     }
     ```
 
-The entry workflow stays un-named so Nextflow uses it as the pipeline entry point.
+The entry workflow stays un-named so that Nextflow will use it as the pipeline entry point.
 
 #### 1.3.2. Update the output block
 
@@ -490,11 +490,11 @@ workflow TRANSFORM_WORKFLOW {
 
 The transform workflow is now composable and ready to be imported into the main workflow.
 
-### 2.3. Update the main workflow
+### 2.3. Update and test the main workflow
 
-All that remains is to include the `TRANSFORM_WORKFLOW` in the main workflow and chain it after `GREETING_WORKFLOW`, then update the output definitions.
+Now , let's update the main workflow to call the transformation workflow.
 
-#### 2.3.1. Include `TRANSFORM_WORKFLOW` and add the call
+#### 2.3.1. Include the transformation workflow and call it
 
 Add the include statement, a call to `TRANSFORM_WORKFLOW` chained on the timestamped greetings, and the two new `publish:` entries:
 
