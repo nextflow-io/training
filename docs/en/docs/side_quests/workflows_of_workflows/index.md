@@ -424,7 +424,7 @@ include { REVERSE_TEXT } from '../modules/reverse_text'
 
 workflow {
     main:
-    input_ch = channel.fromPath('results/timestamped/*.txt')
+    input_ch = channel.fromPath('results/timestamped_*.txt')
 
     // Apply transformations in sequence
     upper_ch = SAY_HELLO_UPPER(input_ch)
@@ -666,7 +666,7 @@ Applying these techniques in your own work will enable you to build more sophist
     }
     ```
 
-2.  **Workflow imports:** We built two independent workflow modules and imported them into a main pipeline with include statements.
+2.  **Workflow imports:** We built two independent workflow modules and imported them into a main pipeline with `include` statements.
 
     - Include a single workflow
 

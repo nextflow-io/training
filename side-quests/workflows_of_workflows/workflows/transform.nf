@@ -3,7 +3,7 @@ include { REVERSE_TEXT } from '../modules/reverse_text'
 
 workflow {
     main:
-    input_ch = channel.fromPath('results/timestamped/*.txt')
+    input_ch = channel.fromPath('results/timestamped_*.txt')
 
     // Apply transformations in sequence
     upper_ch = SAY_HELLO_UPPER(input_ch)
