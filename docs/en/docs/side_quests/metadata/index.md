@@ -1102,7 +1102,7 @@ We can create a new meta map to replace the original one using the Groovy `+` op
 
 The heart of this operation is `#!groovy meta + [lang: lang_id]`.
 
-That code essentially creates a temporary map with a single key-value pair containing the (`[lang: lang_id]`), then uses the Groovy `+` operator to combine it with the original `meta` map containing the pre-existing metadata, producing a new and expanded meta map.
+That code essentially creates a temporary map with a single key-value pair containing the language code (`[lang: lang_id]`), then uses the Groovy `+` operator to combine it with the original `meta` map containing the pre-existing metadata, producing a new and expanded meta map.
 
 For a more detailed explanation, see the box below.
 
@@ -1340,9 +1340,9 @@ The channel structure is still `[meta, file]`.
 
 ### 2.4. Use metadata to name and organize outputs
 
-With `lang` and `lang_group` now available in the meta map, we can use them to give the output files meaningful names and organize them into subdirectories by language family.
+With `lang` and `lang_group` now available in the meta map, we can use them to add a language code to the output file names and organize them into subdirectories by language family.
 
-This requires three changes: updating the `COWPY` process to rename its output and include `meta` in what it emits, wiring `ch_languages` into `COWPY`, and updating the output block to specify the subdirectory path.
+This requires three changes: updating the `COWPY` process to rename its output and include `meta` in what it emits, updating the `COWPY` call to run on `ch_languages`, and updating the output block to specify the subdirectory path.
 
 #### 2.4.1. Update the `COWPY` process
 
@@ -1374,19 +1374,45 @@ Rename the output file using the language code from the meta map, and add `meta`
 
 This shows how we can take advantage of other metadata fields to customize the behavior of a process, without having to modify the input definition at all.
 
-#### 2.4.2. Wire `ch_languages` into `COWPY` and update the output block
+#### 2.4.2. Update the `COWPY` call to run on `ch_languages`
 
-Replace `COWPY(ch_datasheet)` with `COWPY(ch_languages)` and update the `output {}` block to route each file into its language group subdirectory:
+Replace `COWPY(ch_datasheet)` with `COWPY(ch_languages)`:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="36" hl_lines="1 7-9"
+    ```groovy title="main.nf" linenums="32" hl_lines="3"
+        .set { ch_languages }
+
         COWPY(ch_languages)
 
         publish:
         cowpy_art = COWPY.out
     }
+    ```
 
+=== "Before"
+
+    ```groovy title="main.nf" linenums="32" hl_lines="3 5"
+        .set { ch_languages }
+
+        ch_languages.view()
+
+        COWPY(ch_datasheet)
+
+        publish:
+        cowpy_art = COWPY.out
+    }
+    ```
+
+We also remove the `ch_languages.view()` line since we don't need to inspect channel contents anymore.
+
+#### 2.4.3. Update the output block
+
+Add a `path` closure to the `output {}` block to route each file into its language group subdirectory:
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="40" hl_lines="3"
     output {
         cowpy_art {
             path { meta, file -> meta.lang_group }
@@ -1396,22 +1422,16 @@ Replace `COWPY(ch_datasheet)` with `COWPY(ch_languages)` and update the `output 
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="36" hl_lines="1 7-9"
-        COWPY(ch_datasheet)
-
-        publish:
-        cowpy_art = COWPY.out
-    }
-
+    ```groovy title="main.nf" linenums="40" hl_lines="2 3"
     output {
         cowpy_art {
         }
     }
     ```
 
-Also remove the temporary `ch_languages.view()` line.
+This shows how we can use metadata to organize outputs with great flexibility.
 
-#### 2.4.3. Run the full pipeline
+#### 2.4.4. Run the full pipeline
 
 Delete the previous results and run the full pipeline:
 
