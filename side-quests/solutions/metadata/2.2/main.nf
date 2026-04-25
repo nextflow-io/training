@@ -11,27 +11,15 @@ workflow  {
             [[id: row.id, character: row.character], row.recording]
         }
 
+    COWPY(ch_datasheet)
+
     // Run langid to identify the language of each greeting
     IDENTIFY_LANGUAGE(ch_datasheet)
     IDENTIFY_LANGUAGE.out
         .map { meta, file, lang_id ->
             [meta + [lang: lang_id], file]
         }
-        .map { meta, file ->
-
-            def lang_group = "unknown"
-            if (meta.lang.equals("de") || meta.lang.equals('en')) {
-                lang_group = "germanic"
-            }
-            else if (meta.lang in ["fr", "es", "it"]) {
-                lang_group = "romance"
-            }
-
-            [meta + [lang_group: lang_group], file]
-        }
-        .set { ch_languages }
-
-    COWPY(ch_languages.map { meta, file -> [meta, meta.character, file] })
+        .view()
 
     publish:
     cowpy_art = COWPY.out
@@ -39,6 +27,5 @@ workflow  {
 
 output {
     cowpy_art {
-        path { meta, file -> meta.lang_group }
     }
 }

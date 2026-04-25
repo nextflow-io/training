@@ -4,13 +4,13 @@ process COWPY {
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
     input:
-    tuple val(meta), val(character), path(input_file)
+    tuple val(id), val(character), path(recording)
 
     output:
-    tuple val(meta), path("${meta.lang}-${input_file}")
+    path "cowpy-${recording}"
 
     script:
     """
-    cat ${input_file} | cowpy -c ${character} > ${meta.lang}-${input_file}
+    cat ${recording} | cowpy -c ${character} > cowpy-${recording}
     """
 }

@@ -1,14 +1,17 @@
 #!/usr/bin/env nextflow
 
+include { COWPY } from './modules/cowpy.nf'
 include { IDENTIFY_LANGUAGE } from './modules/langid.nf'
 
-workflow {
-
+workflow  {
+    main:
     ch_datasheet = channel.fromPath("./data/datasheet.csv")
         .splitCsv(header: true)
         .map { row ->
             [[id: row.id, character: row.character], row.recording]
         }
+
+    COWPY(ch_datasheet)
 
     // Run langid to identify the language of each greeting
     IDENTIFY_LANGUAGE(ch_datasheet)
@@ -28,5 +31,15 @@ workflow {
 
             [meta + [lang_group: lang_group], file]
         }
-        .view()
+        .set { ch_languages }
+
+    ch_languages.view()
+
+    publish:
+    cowpy_art = COWPY.out
+}
+
+output {
+    cowpy_art {
+    }
 }
