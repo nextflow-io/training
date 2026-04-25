@@ -1,4 +1,4 @@
-# Metadata and meta maps
+# Metadata and Meta Maps
 
 In any scientific analysis, we rarely work with just the raw data files.
 Each file comes with its own additional information: what it is, where it came from, and what makes it special.

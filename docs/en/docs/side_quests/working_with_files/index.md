@@ -1,4 +1,4 @@
-# File input processing
+# File Input Processing
 
 Scientific analysis workflows often involve processing large numbers of files.
 Nextflow provides powerful tools to handle files efficiently, helping you organize and process your data with minimal code.

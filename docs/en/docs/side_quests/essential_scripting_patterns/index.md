@@ -1,4 +1,4 @@
-# Essential Nextflow Scripting Patterns
+# Essential Scripting Patterns
 
 Nextflow is a programming language that runs on the Java Virtual Machine. While Nextflow is built on [Groovy](http://groovy-lang.org/) and shares much of its syntax, Nextflow is more than just "Groovy with extensions" -- it is a standalone language with a fully-specified [syntax](https://nextflow.io/docs/latest/reference/syntax.html) and [standard library](https://nextflow.io/docs/latest/reference/stdlib.html).
 
