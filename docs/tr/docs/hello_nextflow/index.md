@@ -26,6 +26,7 @@ additional_information:
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 
+
 **Hello Nextflow, tekrarlanabilir ve ölçeklenebilir veri analizi iş akışları oluşturmaya uygulamalı bir girişdir.**
 
 Pratik örnekler ve rehberli alıştırmalar üzerinde çalışarak, süreçleri tanımlama, bunları pipeline'lara bağlama, dosya ve yazılım bağımlılıklarını yönetme, yürütmeyi zahmetsizce paralelleştirme ve farklı hesaplama ortamlarında iş akışlarını çalıştırma dahil olmak üzere Nextflow ile pipeline geliştirmenin temellerini öğreneceksiniz.

@@ -213,7 +213,7 @@ nextflow run hello-world.nf
 ??? success "Command output"
 
     ```console hl_lines="7"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
 
@@ -484,7 +484,7 @@ nextflow run hello-world.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5
 
@@ -572,7 +572,7 @@ nextflow run hello-world.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
 
@@ -651,7 +651,7 @@ nextflow run hello-world.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
 
@@ -835,7 +835,7 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea
 
@@ -878,7 +878,7 @@ Let's give the `input` parameter a default value by declaring it before the work
  * Pipeline parameters
  */
 params {
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
 }
 ```
 
@@ -888,7 +888,7 @@ Supported types include `String`, `Integer`, `Float`, `Boolean`, and `Path`.
 
 !!! info
 
-    In older workflows, you may see that whole `params` block written as just `input = 'Holà mundo!'`.
+    In older workflows, you may see that whole `params` block written as just `input = 'Hola mundo!'`.
 
 As you add more parameters to your pipeline, you should add them all to this block, whether or not you need to give them a default value.
 This will make it easy to find all configurable parameters at a glance.
@@ -904,7 +904,7 @@ nextflow run hello-world.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582
 
@@ -921,7 +921,7 @@ nextflow run hello-world.nf
     - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
     - cause: you tried to assign a value to the class 'java.lang.String'
     @ line 24, column 12.
-          input: String = 'Holà mundo!'
+          input: String = 'Hola mundo!'
                   ^
 
     1 error
@@ -945,7 +945,7 @@ The output will be in the same place as previously, but the contents should be u
 ??? abstract "File contents"
 
     ```console title="results/hello_world/output.txt"
-    Holà mundo!
+    Hola mundo!
     ```
 
 Nextflow used the default value of the greeting parameter to create the output.
@@ -963,7 +963,7 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582
 
@@ -1026,7 +1026,7 @@ nextflow run hello-world.nf -resume
 ??? success "Command output"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
 

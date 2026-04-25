@@ -124,7 +124,7 @@ def _sync_normal(
     check_api_key()
     baseline = resolve_baseline(since, console)
 
-    orphaned, missing, outdated = gather_work(lang, baseline)
+    orphaned, missing, outdated = gather_work(lang, baseline, console)
 
     prompts_changed = baseline and prompt_changed_since(lang, baseline)
     if prompts_changed:

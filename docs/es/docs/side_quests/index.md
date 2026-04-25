@@ -30,15 +30,27 @@ De lo contrario, seleccione una misión secundaria de la tabla a continuación.
 
 ## Misiones Secundarias
 
-| Misión Secundaria                                                                 | Tiempo Estimado para Enseñanza |
-| --------------------------------------------------------------------------------- | ------------------------------ |
-| [Recorrido del entorno de desarrollo de Nextflow](./ide_features.md)              | 45 mins                        |
-| [Patrones Esenciales de Scripting en Nextflow](./essential_scripting_patterns.md) | 90 mins                        |
-| [Metadatos en workflows](./metadata.md)                                           | 45 mins                        |
-| [División y Agrupación](./splitting_and_grouping.md)                              | 45 mins                        |
-| [Pruebas con nf-test](./nf-test.md)                                               | 1 hora                         |
-| [Workflows de workflows](./workflows_of_workflows.md)                             | 30 mins                        |
-| [Trabajar con archivos](./working_with_files.md)                                  | 45 mins                        |
-| [Depuración de workflows](./debugging.md)                                         | 1 hora                         |
+| Misión Secundaria                                                               | Tiempo Estimado para Enseñanza |
+| ------------------------------------------------------------------------------- | ------------------------------ |
+| [Recorrido del entorno de desarrollo de Nextflow](./dev_environment/)           | 45 mins                        |
+| [Patrones Esenciales de Scripting en Nextflow](./essential_scripting_patterns/) | 90 mins                        |
+| [Metadatos en workflows](./metadata/)                                           | 45 mins                        |
+| [División y Agrupación](./splitting_and_grouping/)                              | 45 mins                        |
+| [Pruebas con nf-test](./nf_test/)                                               | 1 hora                         |
+| [Workflows de workflows](./workflows_of_workflows/)                             | 30 mins                        |
+| [Trabajar con archivos](./working_with_files/)                                  | 45 mins                        |
+| [Depuración de workflows](./debugging/)                                         | 1 hora                         |
+
+## Cursos de múltiples partes
+
+!!! exercise "Desarrollo de Plugins"
+
+    !!! tip inline end ""
+
+        :material-run-fast: Aprenda a usar y crear plugins de Nextflow.
+
+    Este curso cubre el uso de plugins existentes en sus workflows y la creación de los propios desde cero, incluyendo funciones personalizadas, monitoreo de workflows, configuración y distribución.
+
+    [Iniciar el entrenamiento de Desarrollo de Plugins :material-arrow-right:](plugin_development/){ .md-button .md-button--primary }
 
 Háganos saber qué otros dominios y casos de uso le gustaría ver cubiertos aquí publicando en la [sección de Training](https://community.seqera.io/c/training/) del foro de la comunidad.

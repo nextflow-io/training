@@ -2,24 +2,217 @@
 
 In this second part of the Hello nf-core training course, we show you how to create an nf-core compatible version of the pipeline produced by the [Hello Nextflow](../hello_nextflow/index.md) beginners' course.
 
-You'll have noticed in the first section of the training that nf-core pipelines follow a fairly elaborate structure with a lot of accessory files.
-Creating all that from scratch would be very tedious, so the nf-core community has developed tooling to do it from a template instead, to bootstrap the process.
-
-We are going to show you how to use this tooling to create a pipeline scaffold, then adapt existing 'regular' pipeline code onto the nf-core scaffold.
+We're going to do this in two phases: first, we'll use nf-core tooling to create a pipeline scaffold, then graft the existing 'regular' pipeline code onto the scaffold.
 
 If you're not familiar with the Hello pipeline or you could use a reminder, see [this info page](../info/hello_pipeline.md).
 
----
+!!! tip
 
-## 1. Create a new pipeline project
+    This part of the course will introduce two important Nextflow mechanisms that are not covered in the Hello Nextflow introductory course: [meta maps](../side_quests/workflows_of_workflows.md) and [workflows of workflows](../side_quests/metadata.md), which are both covered in detail in the linked Side Quests.
 
-First, we create the scaffold for the new pipeline.
+    The instructions below includes the essential information you need in order to understand how these are used in the nf-core context, but it can be a lot to take in at once.
+    If you have the time, we recommend working through the two Side Quests first (in no particular order):
+
+    - [Workflows of Workflows](../side_quests/workflows_of_workflows.md)
+    - [Metadata and meta maps](../side_quests/metadata.md)
 
 !!! note
 
-    Make sure you are in the `hello-nf-core` directory in your terminal.
+    Make sure you are starting in the `hello-nf-core` directory in your terminal.
 
-### 1.1. Run the template-based pipeline creation tool
+---
+
+## 1. Examine the pipeline code structure
+
+The nf-core project enforces strong guidelines for how pipelines are structured, and for how the code is organized, configured and documented.
+
+Before we tackle our pipeline creation project, we need to understand that structure and organization.
+So let's have a look at how the pipeline code is organized in the `nf-core/demo` repository, using the `pipelines` symlink we created in Part 1.
+
+As a reminder, you can either use `tree` or use the file explorer to find and open the `nf-core/demo` directory.
+
+```bash
+tree -L 1 pipelines/nf-core/demo
+```
+
+??? abstract "Directory contents"
+
+    ```console
+    pipelines/nf-core/demo
+    ├── assets
+    ├── CHANGELOG.md
+    ├── CITATIONS.md
+    ├── CODE_OF_CONDUCT.md
+    ├── conf
+    ├── docs
+    ├── LICENSE
+    ├── main.nf
+    ├── modules
+    ├── modules.json
+    ├── nextflow.config
+    ├── nextflow_schema.json
+    ├── nf-test.config
+    ├── README.md
+    ├── ro-crate-metadata.json
+    ├── subworkflows
+    ├── tests
+    ├── tower.yml
+    └── workflows
+    ```
+
+For now we are going to focus specifically on the pipeline code components (`main.nf`, `workflows`, `subworkflows`, `modules`) and how they relate to each other.
+
+### 1.1. Modular structure of nf-core workflows
+
+The standard nf-core pipeline code organization follows a modular structure that is designed to maximize code reuse, as introduced in [Hello Modules](../hello_nextflow/04_hello_modules.md), Part 4 of the [Hello Nextflow](../hello_nextflow/index.md) course, although in true nf-core fashion, this is implemented with a bit of additional complexity.
+Specifically, nf-core pipelines make abundant use of subworkflows, i.e. workflow scripts that are imported by a parent workflow.
+
+That may sound a bit abstract, so let's take a look how this is used in practice in the `nf-core/demo` pipeline.
+
+If you look inside the `main.nf` file, you'll see it imports a workflow called `DEMO` from `workflows/demo.nf`, as well as some modules and subworkflows.
+
+Here is what the relationships between the relevant code components look like:
+
+<figure class="excalidraw">
+    --8<-- "docs/en/docs/hello_nf-core/img/nf-core_demo_code_organization.svg"
+</figure>
+
+The unnamed workflow in `main.nf` is called an _entrypoint_ script. It acts as a wrapper for two kinds of nested workflows: the `DEMO` workflow containing the actual analysis logic, located in `workflows/demo.nf`, and a set of housekeeping workflows located under `subworkflows/`.
+The `demo.nf` workflow calls on **modules** located under `modules/`; these contain the **processes** that will perform the actual analysis steps.
+
+!!! note
+
+    Subworkflows are not limited to housekeeping functions, and they can make use of process modules.
+
+    The `nf-core/demo` pipeline shown here happens to be on the simpler side on the spectrum, but other nf-core pipelines (such as `nf-core/rnaseq`) utilize subworkflows that are involved in the actual analysis.
+
+Now, let's review these components in detail.
+
+### 1.2. The entrypoint script: `main.nf`
+
+The `main.nf` script is the entrypoint that Nextflow starts from when we execute `nextflow run nf-core/demo`.
+That means when you run `nextflow run nf-core/demo` to run the pipeline, Nextflow automatically finds and executes the `main.nf` script.
+This works for any Nextflow pipeline that follows this conventional naming and structure, not just nf-core pipelines.
+
+Using an entrypoint script makes it easy to run standardized 'housekeeping' subworkflows before and after the actual analysis script gets run.
+We'll go over those after we've reviewed the actual analysis workflow and its modules.
+
+### 1.3. The analysis script: `workflows/demo.nf`
+
+The `workflows/demo.nf` workflow is where the central logic of the pipeline is stored.
+It is structured much like a normal Nextflow workflow, except it is designed to be called from a parent workflow, which requires a few extra features.
+We'll cover the relevant differences in the next part of this course, when we tackle the conversion of the simple Hello pipeline from Hello Nextflow into an nf-core-compatible form.
+
+The `demo.nf` workflow calls on **modules** located under `modules/`, which we'll review next.
+
+!!! note
+
+    Some nf-core analysis workflows display additional levels of nesting by calling on lower-level subworkflows.
+    This is mostly used for wrapping two or more modules that are commonly used together into easily reusable pipeline segments.
+    You can see some examples by browsing available [nf-core subworkflows](https://nf-co.re/subworkflows/) on the nf-core website.
+
+    When the analysis script uses subworkflows, those are stored under the `subworkflows/` directory.
+
+### 1.4. The modules
+
+The modules are where the process code lives, as described in [Part 4 of the Hello Nextflow training course](../hello_nextflow/04_hello_modules.md).
+
+In the nf-core project, modules are organized using a multi-level nested structure that reflect both their origin and their contents.
+At the top level, modules are differentiated as either `nf-core` or `local` (not part of the nf-core project), and then further placed into a directory named after the tool(s) they wrap.
+If the tool belongs to a toolkit (i.e. a package containing multiple tools) then there is an intermediate directory level named after the toolkit.
+
+You can see this applied in practice to the `nf-core/demo` pipeline modules:
+
+```bash
+tree -L 3 pipelines/nf-core/demo/modules
+```
+
+??? abstract "Directory contents"
+
+    ```console
+    pipelines/nf-core/demo/modules
+    └── nf-core
+        ├── fastqc
+        │   ├── environment.yml
+        │   ├── main.nf
+        │   ├── meta.yml
+        │   └── tests
+        ├── multiqc
+        │   ├── environment.yml
+        │   ├── main.nf
+        │   ├── meta.yml
+        │   └── tests
+        └── seqtk
+            └── trim
+
+    7 directories, 6 files
+    ```
+
+Here you see that the `fastqc` and `multiqc` modules sit at the top level within the `nf-core` modules, whereas the `trim` module sits under the toolkit that it belongs to, `seqtk`.
+In this case there are no `local` modules.
+
+The module code file describing the process is always called `main.nf`, and is accompanied by tests and `.yml` files which we'll ignore for now.
+
+Taken together, the entrypoint workflow, analysis workflow and modules are sufficient for running the 'interesting' parts of the pipeline.
+However, we know there are also housekeeping subworkflows in there, so let's look at those now.
+
+### 1.5. The housekeeping subworkflows
+
+Like modules, subworkflows are differentiated into `local` and `nf-core` directories, and each subworkflow has its own nested directory structure with its own `main.nf` script, tests and `.yml` file.
+
+```bash
+tree -L 3 pipelines/nf-core/demo/subworkflows
+```
+
+??? abstract "Directory contents"
+
+    ```console
+    pipelines/nf-core/demo/subworkflows
+    ├── local
+    │   └── utils_nfcore_demo_pipeline
+    │       └── main.nf
+    └── nf-core
+        ├── utils_nextflow_pipeline
+        │   ├── main.nf
+        │   ├── meta.yml
+        │   └── tests
+        ├── utils_nfcore_pipeline
+        │   ├── main.nf
+        │   ├── meta.yml
+        │   └── tests
+        └── utils_nfschema_plugin
+            ├── main.nf
+            ├── meta.yml
+            └── tests
+
+    9 directories, 7 files
+    ```
+
+As noted above, the `nf-core/demo` pipeline does not include any analysis-specific subworkflows, so all the subworkflows we see here are so-called 'housekeeping' or 'utility' workflows, as denoted by the `utils_` prefix in their names.
+These subworkflows are what produces the fancy nf-core header in the console output, among other accessory functions.
+
+!!! tip
+
+    Aside from their naming pattern, another indication that these subworkflows do not perform any truly analysis-related function is that they do not call any processes at all.
+
+This completes the round-up of core code components that constitute the `nf-core/demo` pipeline.
+
+### Takeaway
+
+You now have a high-level understanding of the modular structure of nf-core pipelines.
+
+### What's next?
+
+Create a pipeline scaffold using nf-core tooling.
+
+---
+
+## 2. Create a new pipeline project
+
+As you have seen, nf-core pipelines follow a standardized structure with many accessory files.
+Creating all that from scratch would be very tedious, so the nf-core community has developed tooling to do it from a template instead, to bootstrap the process.
+
+### 2.1. Run the template-based pipeline creation tool
 
 Let's start by creating a new pipeline with the `nf-core pipelines create` command.
 This will create a new pipeline scaffold using the nf-core base template, customized with a pipeline name, description, and author.
@@ -89,6 +282,7 @@ tree core-hello
 
     ```console
     core-hello/
+    ├── README.md
     ├── assets
     │   ├── samplesheet.csv
     │   └── schema_input.json
@@ -98,14 +292,13 @@ tree core-hello
     │   ├── test.config
     │   └── test_full.config
     ├── docs
-    │   ├── output.md
     │   ├── README.md
+    │   ├── output.md
     │   └── usage.md
     ├── main.nf
     ├── modules.json
     ├── nextflow.config
     ├── nextflow_schema.json
-    ├── README.md
     ├── subworkflows
     │   ├── local
     │   │   └── utils_nfcore_hello_pipeline
@@ -138,20 +331,15 @@ tree core-hello
     └── workflows
         └── hello.nf
 
-    14 directories, 34 files
+    15 directories, 34 files
     ```
 
 That's a lot of files!
+Don't worry if you're feeling a little lost; we'll walk through the important parts shortly, and then step by step throughout the rest of the course.
 
-Hopefully you'll recognize a lot of them as the same we came across when we explored the `nf-core/demo` pipeline structure.
-But don't worry if you're still feeling a little lost; we'll walk through the important parts together in the course of this training.
+Overall, this should look similar to the code structure we observed for the nf-core/demo pipeline, except there is no `modules` directory here.
 
-!!! note
-
-    One important difference compared to the `nf-core/demo` pipeline we examined in the first part of this training is that there is no `modules` directory.
-    This is because we didn't elect to include any of the default nf-core modules.
-
-### 1.2. Test that the scaffold is functional
+### 2.2. Test that the scaffold is functional
 
 Believe it or not, even though you haven't yet added any modules to make it do real work, the pipeline scaffold can actually be run using the test profile, the same way we ran the `nf-core/demo` pipeline.
 
@@ -162,7 +350,7 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `./core-hello/main.nf` [scruffy_marconi] DSL2 - revision: b9e9b3b8de
 
@@ -221,13 +409,29 @@ You can take a peek at the reports to see what was run, and the answer is: nothi
 
 ![empty execution timeline report](./img/execution_timeline_empty.png)
 
-Let's have a look at what is actually in the code.
+Let's have a closer look at what is actually in the box.
 
-### 1.3. Examine the placeholder workflow
+### 2.3. Examine the scaffold structure
 
-If you look inside the `main.nf` file, you'll see it imports a workflow called `HELLO` from `workflows/hello`.
+If you recall the structure of the `nf-core/demo` pipeline, there was a `main.nf` file containing an entrypoint workflow that wrapped the `DEMO` workflow.
+Now if you open the `main.nf` file in your newly created project, you'll see it imports a workflow called `HELLO` from `workflows/hello.nf`.
+That is the direct equivalent to the `DEMO` workflow, though at the moment it's just a placeholder.
 
-This is equivalent to the `workflows/demo.nf` workflow we encountered in Part 1, and serves as a placeholder workflow for our workflow of interest, with some nf-core functionality already in place.
+And accordingly, this is what the overall structure of the pipeline scaffold looks like:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nf-core/img/core-hello-initial.svg"
+</figure>
+
+This should remind you of the `nf-core/demo` pipeline structure!
+The only real difference is that the `DEMO` workflow included processes from modules.
+Here, the equivalent `HELLO` workflow does not yet include any processes.
+
+Let's take a closer look.
+
+### 2.4. Examine the placeholder workflow
+
+This serves as the placeholder for our analysis workflow, with some nf-core functionality already in place.
 
 ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 19 53"
 /*
@@ -303,23 +507,18 @@ Compared to a basic Nextflow workflow like the one developed in [Hello Nextflow]
 
 These are optional features of Nextflow that make the workflow **composable**, meaning that it can be called from within another workflow.
 
-!!! note "The `Channel.topic` block"
+??? note "The `Channel.topic` block"
 
     You may have noticed the `def topic_versions = Channel.topic("versions")` block starting at line 17.
     This is boilerplate housekeeping code that collects software version information from all modules automatically.
     nf-core is rolling out this mechanism across all pipelines in 2026, so you'll see it in all new pipelines going forward.
     Part 4 of this course explains how it works in detail.
 
-!!! note "Composable workflows in depth"
-
-    The [Workflows of Workflows](../side_quests/workflows_of_workflows.md) Side Quest explores workflow composition in much greater depth, including how to compose multiple workflows together and manage complex data flows between them. We're introducing composability here because it's a fundamental requirement of the nf-core template architecture, which uses nested workflows to organize pipeline initialization, the main analysis workflow, and completion tasks into separate, reusable components.
-
 We are going to need to plug the relevant logic from our workflow of interest into that structure.
-The first step for that is to make our original workflow composable.
 
 ### Takeaway
 
-You now know how to create a pipeline scaffold using nf-core tools.
+You now know how to create a pipeline scaffold using nf-core tools and compare it to the demo pipeline structure.
 
 ### What's next?
 
@@ -327,14 +526,22 @@ Learn how to make a simple workflow composable as a prelude to making it nf-core
 
 ---
 
-## 2. Make the original Hello Nextflow workflow composable
+## 3. Make a composable Hello Nextflow workflow
 
 Now it's time to get to work integrating our workflow into the nf-core scaffold.
+
 As a reminder, we're working with the workflow featured in our [Hello Nextflow](../hello_nextflow/index.md) training course.
+That workflow was written as a simple unnamed workflow that can be run on its own.
 
-!!! tip
+In order to map clearly what parts of the original workflow should go where in the nf-core scaffold, we're going to start by transforming the original Hello workflow into a **composable** workflow that can be run from within a parent workflow, as the nf-core template requires.
 
-    If you're not familiar with that pipeline or you could use a reminder, see [The Hello pipeline](../info/hello_pipeline.md).
+This is what we are trying to build right now:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nf-core/img/composable-hello.svg"
+</figure>
+
+Effectively, we want to mimic the modular structure of the nf-core scaffold, but with less complexity to start with.
 
 We provide you with a clean, fully functional copy of the completed Hello Nextflow workflow in the directory `original-hello` along with its modules and the default CSV file it expects to use as input.
 
@@ -366,7 +573,7 @@ nextflow run original-hello/hello.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `original-hello/hello.nf` [goofy_babbage] DSL2 - revision: e9e72441e9
 
@@ -376,6 +583,10 @@ nextflow run original-hello/hello.nf
     [0c/17263b] collectGreetings   | 1 of 1 ✔
     [94/542280] cowpy              | 1 of 1 ✔
     ```
+
+If that works for you, you're ready to start hacking.
+
+### 3.1. Modify the original Hello workflow
 
 Let's open the `hello.nf` workflow file to inspect the code, which is shown in full below (not counting the processes, which are in modules):
 
@@ -417,11 +628,16 @@ workflow {
 ```
 
 As you can see, this workflow was written as a simple unnamed workflow that can be run on its own.
-In order to make it runnable from within a parent workflow as the nf-core template requires, we need to make it **composable**.
+To make it composable, we are going to make the following changes:
+
+1. Name the workflow
+2. Replace channel construction with `take:`
+3. Preface workflow operations with `main:`
+4. Add `emit:` statement
 
 Let's walk through the necessary changes one by one.
 
-### 2.1. Name the workflow
+#### 3.1.1. Name the workflow
 
 First, let's give the workflow a name so we can refer to it from a parent workflow.
 
@@ -439,7 +655,7 @@ First, let's give the workflow a name so we can refer to it from a parent workfl
 
 The same conventions apply to workflow names as to module names.
 
-### 2.2. Replace channel construction with `take`
+#### 3.1.2. Replace channel construction with `take`
 
 Now, replace the channel construction with a simple `take` statement declaring expected inputs.
 
@@ -493,7 +709,7 @@ While we're at it, we can also comment out the line `params.greeting = 'greeting
 
     We'll add that in the next step.
 
-### 2.3. Preface workflow operations with `main` statement
+#### 3.1.3. Preface workflow operations with `main` statement
 
 Next, add a `main` statement before the rest of the operations called in the body of the workflow.
 
@@ -533,7 +749,7 @@ Next, add a `main` statement before the rest of the operations called in the bod
 
 This basically says 'this is what this workflow _does_'.
 
-### 2.4. Add `emit` statement
+#### 3.1.4. Add `emit` statement
 
 Finally, add an `emit` statement declaring what are the final outputs of the workflow.
 
@@ -544,7 +760,7 @@ Finally, add an `emit` statement declaring what are the final outputs of the wor
 
 This is a net new addition to the code compared to the original workflow.
 
-### 2.5. Recap of the completed changes
+#### 3.1.5. Recap of the completed changes
 
 If you've done all the changes as described, your workflow should now look like this:
 
@@ -592,7 +808,7 @@ workflow HELLO {
 This describes everything Nextflow needs EXCEPT what to feed into the input channel.
 That is going to be defined in the parent workflow, also called the **entrypoint** workflow.
 
-### 2.6. Make a dummy entrypoint workflow
+### 3.2. Make a dummy entrypoint workflow
 
 Before integrating our composable workflow into the complex nf-core scaffold, let's verify it works correctly.
 We can make a simple dummy entrypoint workflow to test the composable workflow in isolation.
@@ -643,7 +859,7 @@ There are two important observations to make here:
     However, you can name the entrypoint workflow file something else if you prefer.
     In that case, be sure to specify the workflow file name in your `nextflow run` command.
 
-### 2.7. Test that the workflow runs
+### 3.3. Test that the workflow runs
 
 We finally have all the pieces we need to verify that the composable workflow works.
 Let's run it!
@@ -660,7 +876,7 @@ If you made all the changes correctly, this should run to completion.
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `original-hello/main.nf` [friendly_wright] DSL2 - revision: 1ecd2d9c0a
 
@@ -684,7 +900,7 @@ Learn how to graft a basic composable workflow onto the nf-core scaffold.
 
 ---
 
-## 3. Fit the updated workflow logic into the placeholder workflow
+## 4. Fit the updated workflow logic into the placeholder workflow
 
 Now that we've verified our composable workflow works correctly, let's return to the nf-core pipeline scaffold we created in section 1.
 We want to integrate the composable workflow we just developed into the nf-core template structure, so the end result should look something like this.
@@ -778,7 +994,7 @@ We're going to tackle this in the following stages:
     We're going to ignore the version capture block for this first pass.
     Part 4 explains how it works.
 
-### 3.1. Copy the modules and set up module imports
+### 4.1. Copy the modules and set up module imports
 
 The four processes from our Hello Nextflow workflow are stored as modules in `original-hello/modules/`.
 We need to copy those modules into the nf-core project structure (under `core-hello/modules/local/`) and add import statements to the nf-core workflow file.
@@ -856,7 +1072,7 @@ Two more interesting observations here:
 - We've adapted the formatting of the import statements to follow the nf-core style convention.
 - We've updated the relative paths to the modules to reflect that they're now stored at a different level of nesting.
 
-### 3.2. Leave the `take` declaration as is
+### 4.2. Leave the `take` declaration as is
 
 The nf-core project has a lot of prebuilt functionality around the concept of the samplesheet, which is typically a CSV file containing columnar data.
 Since that is essentially what our `greetings.csv` file is, we'll keep the current `take` declaration as is, and simply update the name of the input channel in the next step.
@@ -868,7 +1084,7 @@ Since that is essentially what our `greetings.csv` file is, we'll keep the curre
 
 The input handling will be done upstream of this workflow (not in this code file).
 
-### 3.3. Add the workflow logic to the `main` block
+### 4.3. Add the workflow logic to the `main` block
 
 Now that our modules are available to the workflow, we can plug the workflow logic into the `main` block.
 
@@ -906,7 +1122,7 @@ This ordering makes sense because in a real pipeline, the processes would emit v
 
         main:
 
-        ch_versions = Channel.empty()
+        ch_versions = channel.empty()
 
         // emit a greeting
         sayHello(greeting_ch)
@@ -965,7 +1181,7 @@ This ordering makes sense because in a real pipeline, the processes would emit v
         ch_samplesheet // channel: samplesheet read in from --input
         main:
 
-        ch_versions = Channel.empty()
+        ch_versions = channel.empty()
 
         //
         // Collate and save software versions
@@ -1023,7 +1239,7 @@ This looks great, but we still need to update the name of the channel we're pass
 
 Now the workflow logic is correctly wired up.
 
-### 3.4. Update the `emit` block
+### 4.4. Update the `emit` block
 
 Finally, we need to update the `emit` block to include the declaration of the workflow's final outputs.
 
@@ -1055,12 +1271,12 @@ Learn how to adapt how the inputs are handled in the nf-core pipeline scaffold.
 
 ---
 
-## 4. Adapt the input handling
+## 5. Adapt the input handling
 
 Now that we've successfully integrated our workflow logic into the nf-core scaffold, we need to address one more critical piece: ensuring that our input data is processed correctly.
 The nf-core template comes with sophisticated input handling designed for complex genomics datasets, so we need to adapt it to work with our simpler `greetings.csv` file.
 
-### 4.1. Identify where inputs are handled
+### 5.1. Identify where inputs are handled
 
 The first step is to figure out where the input handling is done.
 
@@ -1127,7 +1343,10 @@ workflow {
         params.monochrome_logs,
         args,
         params.outdir,
-        params.input
+        params.input,
+        params.help,
+        params.help_full,
+        params.show_hidden
     )
 
     //
@@ -1219,7 +1438,7 @@ This is the channel factory that parses the samplesheet and passes it on in a fo
 
 This code involves some parsing and validation steps that are highly specific to the example samplesheet included with the nf-core pipeline template, which at time of writing is very domain-specific and not suitable for our simple pipeline project.
 
-### 4.2. Replace the templated input channel code
+### 5.2. Replace the templated input channel code
 
 The good news is that our pipeline's needs are much simpler, so we can replace all of that by the channel construction code we developed in the original Hello Nextflow workflow.
 
@@ -1287,7 +1506,7 @@ That completes the changes we need to make the input processing work.
 In its current form, this won't let us take advantage of nf-core's built-in capabilities for schema validation, but we can add that in later.
 For now, we're focused on keeping it as simple as possible to get to something we can run successfully on test data.
 
-### 4.3. Update the test profile
+### 5.3. Update the test profile
 
 Speaking of test data and parameters, let's update the test profile for this pipeline to use the `greetings.csv` mini-samplesheet instead of the example samplesheet provided in the template.
 
@@ -1295,7 +1514,7 @@ Under `core-hello/conf`, we find two templated test profiles: `test.config` and 
 Given the purpose of our pipeline, there's not really a point to setting up a full-size test profile, so feel free to ignore or delete `test_full.config`.
 We're going to focus on setting up `test.config` to run on our `greetings.csv` file with a few default parameters.
 
-#### 4.3.1. Copy over the `greetings.csv` file
+#### 5.3.1. Copy over the `greetings.csv` file
 
 First we need to copy the `greetings.csv` file to an appropriate place in our pipeline project.
 Typically small test files are stored in the `assets` directory, so let's copy the file over from our working directory.
@@ -1306,7 +1525,7 @@ cp greetings.csv core-hello/assets/.
 
 Now the `greetings.csv` file is ready to be used as test input.
 
-#### 4.3.2. Update the `test.config` file
+#### 5.3.2. Update the `test.config` file
 
 Now we can update the `test.config` file as follows:
 
@@ -1374,7 +1593,7 @@ And while we're at it, let's tighten the default resource limits to ensure this 
 
 This completes the code modifications we need to do.
 
-### 4.4. Run the pipeline with the test profile
+### 5.4. Run the pipeline with the test profile
 
 That was a lot, but we can finally try running the pipeline!
 Note that we have to add `--validate_params false` to the command line because we didn't set up the validation yet (that will come later).
@@ -1388,7 +1607,7 @@ If you've done all of the modifications correctly, it should run to completion.
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `core-hello/main.nf` [condescending_allen] DSL2 - revision: b9e9b3b8de
 
@@ -1426,7 +1645,7 @@ If you've done all of the modifications correctly, it should run to completion.
 
 As you can see, this produced the typical nf-core summary at the start thanks to the initialisation subworkflow, and the lines for each module now show the full PIPELINE:WORKFLOW:module names.
 
-### 4.5. Find the pipeline outputs
+### 5.5. Find the pipeline outputs
 
 The question now is: where are the outputs of the pipeline?
 And the answer is quite interesting: there are now two different places to look for the results.
@@ -1451,7 +1670,7 @@ tree core-hello-results
         ├── hello_software_versions.yml
         ├── params_2025-11-21_04-47-13.json
         ├── params_2025-11-21_07-29-41.json
-        └── pipeline_dag_2025-11-21_04-47-18.html
+        ├── pipeline_dag_2025-11-21_04-47-18.html
         └── pipeline_dag_2025-11-21_07-29-37.html
 
     1 directory, 12 files
@@ -1485,10 +1704,10 @@ tree results
     ├── cowpy-COLLECTED-test-batch-output.txt
     ├── cowpy-COLLECTED-test-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
 
     0 directories, 10 files
     ```

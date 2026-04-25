@@ -165,7 +165,7 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [exotic_albattani] DSL2 - revision: c0d03cec83
 
@@ -218,7 +218,7 @@ For example, we could access the file ID with `id` or the txt file path with `re
     And here's what you can expect to see in the output:
 
     ```console title="Output"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `map_demo.nf` [cheesy_plateau] DSL2 - revision: fae5b8496e
 
@@ -267,7 +267,7 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [exotic_albattani] DSL2 - revision: c0d03cec83
 
@@ -714,7 +714,7 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console title="View meta map"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [lethal_booth] DSL2 - revision: 0d8f844c07
 
@@ -987,7 +987,7 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [voluminous_mcnulty] DSL2 - revision: f9bcfebabb
 
@@ -1135,7 +1135,7 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [cheeky_fermat] DSL2 - revision: d096281ee4
 
@@ -1239,7 +1239,7 @@ nextflow run main.nf -resume
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [wise_almeida] DSL2 - revision: 46778c3cd0
 
@@ -1340,7 +1340,7 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [suspicious_crick] DSL2 - revision: 25541014c5
 
@@ -1405,7 +1405,7 @@ When Nextflow substitutes `#!groovy ${meta.character}` into the command, the `co
 ??? failure "Command output"
 
     ```console hl_lines="8 11 16 28"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [marvelous_hirsch] DSL2 - revision: 0dfeee3cc1
 
@@ -1465,7 +1465,7 @@ When the process script evaluates `#!groovy ${meta.character}`, the missing key 
 ??? failure "Command output"
 
     ```console hl_lines="8 11 16"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [jovial_bohr] DSL2 - revision: eaaf375827
 

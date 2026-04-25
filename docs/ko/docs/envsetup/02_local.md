@@ -20,7 +20,7 @@ Nextflow는 Java가 설치된 모든 POSIX 호환 시스템(Linux, macOS, Window
 총합적으로 다음 소프트웨어가 설치되어 있어야 합니다:
 
 - Bash 또는 동등한 셸
-- [Java 21 이상](https://www.oracle.com/technetwork/java/javase/downloads/index.html) (Nextflow 실행에는 Java 11 이상으로 충분하지만, [플러그인 개발](../side_quests/plugin_development/index.md) 과정에는 Java 21이 필요합니다)
+- [Java 21 이상](https://www.oracle.com/technetwork/java/javase/downloads/index.html) (Nextflow 실행에는 Java 17 이상으로 충분하지만, [플러그인 개발](../side_quests/plugin_development/index.md) 과정에는 Java 21이 필요합니다)
 - [Git](https://git-scm.com/)
 - [Docker](https://docs.docker.com/get-docker/)
 - [Conda](https://conda.io/) 4.5 (또는 이후 버전)

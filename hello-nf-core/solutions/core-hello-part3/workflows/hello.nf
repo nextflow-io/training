@@ -8,7 +8,7 @@ include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pi
 include { sayHello               } from '../modules/local/sayHello.nf'
 include { convertToUpper         } from '../modules/local/convertToUpper.nf'
 include { cowpy                  } from '../modules/local/cowpy.nf'
-include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
+include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -38,10 +38,10 @@ workflow HELLO {
     ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
     // concatenate the greetings
-    CAT_CAT(ch_for_cat)
+    FIND_CONCATENATE(ch_for_cat)
 
     // extract the file from the tuple since cowpy doesn't use metadata yet
-    ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+    ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
     // generate ASCII art of the greetings with cowpy
     cowpy(ch_for_cowpy, params.character)

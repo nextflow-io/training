@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import asyncio
 import json
 import re
 from pathlib import Path
@@ -14,7 +13,6 @@ from .config import (
     DEFAULT_PARALLEL,
     EN_DOCS,
     TranslationError,
-    check_api_key,
     make_console,
 )
 from .models import TranslationFile
@@ -226,6 +224,13 @@ def verify_translation_structural(en_path: Path, lang_path: Path) -> list[str]:
         if not has_notice:
             issues.append("Missing AI translation notice span")
 
+    # Truncation check: translation should be roughly comparable in length
+    if len(trans_lines) < len(en_lines) * 0.7:
+        issues.append(
+            f"Translation may be truncated: {len(trans_lines)} lines "
+            f"vs {len(en_lines)} in English"
+        )
+
     return issues
 
 
@@ -298,14 +303,18 @@ async def verify_translation_async(
     lang_path: Path,
     client: anthropic.AsyncAnthropic,
 ) -> list[str]:
-    """Full verification: structural + semantic. Returns list of issues."""
-    issues = verify_translation_structural(en_path, lang_path)
-    if lang_path.exists():
-        semantic_issues = await verify_translation_semantic_async(
-            en_path, lang_path, client
-        )
-        issues.extend(semantic_issues)
-    return issues
+    """Full verification: structural checks only.
+
+    Semantic verification (LLM-based first/last sentence check) was removed
+    from the hot path because it produced false positives that triggered
+    expensive retries.  Truncation is now caught by the line-count ratio
+    check in ``verify_translation_structural``, combined with the API
+    continuation loop in ``api.py`` and header/code-block count checks.
+
+    The ``verify_translation_semantic_async`` function is still available
+    for manual or debug use.
+    """
+    return verify_translation_structural(en_path, lang_path)
 
 
 # ---------------------------------------------------------------------------
@@ -318,42 +327,31 @@ async def get_broken_files(
 ) -> list[TranslationFile]:
     """Scan all translations for a language, returning those with issues.
 
-    Runs full verification (structural + semantic) on every file in parallel.
+    Runs structural verification on every file.  The ``parallel`` parameter
+    is kept for API compatibility but is no longer used since verification
+    is now purely structural (no LLM calls).
     """
     console = make_console(stderr=True)
-    check_api_key()
-    client = anthropic.AsyncAnthropic()
-    semaphore = asyncio.Semaphore(parallel)
-
     en_files = iter_en_docs()
+    broken: list[TranslationFile] = []
 
-    async def check_one(en_path: Path) -> TranslationFile | None:
+    console.print(f"[cyan]Scanning {len(en_files)} files for {lang}...[/cyan]")
+    for en_path in en_files:
         lang_path = en_to_lang_path(en_path, lang)
-        async with semaphore:
-            issues = await verify_translation_async(en_path, lang_path, client)
+        issues = verify_translation_structural(en_path, lang_path)
         if issues:
             rel = en_path.relative_to(EN_DOCS)
             console.print(f"  [red]Broken:[/red] {rel}")
             for issue in issues:
                 console.print(f"    {issue}")
-            return TranslationFile(
-                en_path=en_path,
-                lang_path=lang_path,
-                language=lang,
-                force_full=True,
+            broken.append(
+                TranslationFile(
+                    en_path=en_path,
+                    lang_path=lang_path,
+                    language=lang,
+                    force_full=True,
+                )
             )
-        return None
-
-    console.print(f"[cyan]Scanning {len(en_files)} files for {lang}...[/cyan]")
-    results = await asyncio.gather(
-        *[check_one(p) for p in en_files], return_exceptions=True
-    )
-    broken: list[TranslationFile] = []
-    for r in results:
-        if isinstance(r, Exception):
-            console.print(f"  [red]Error during scan: {r}[/red]")
-        elif r is not None:
-            broken.append(r)
 
     if broken:
         console.print(f"[yellow]Found {len(broken)} broken files for {lang}[/yellow]")

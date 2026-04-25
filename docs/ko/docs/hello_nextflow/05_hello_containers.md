@@ -285,7 +285,7 @@ cowpy "Hello Containers" -c tux
 
 !!! Tip "팁"
 
-    '-c' 플래그를 사용하여 다른 캐릭터를 선택할 수 있습니다:
+    `-c` 플래그를 사용하여 다른 캐릭터를 선택할 수 있습니다:
     `beavis`, `cheese`, `daemon`, `dragonandcow`, `ghostbusters`, `kitty`, `moose`, `milk`, `stegosaurus`, `turkey`, `turtle`, `tux`
 
 좋습니다. 더 좋은 것은 `greetings.csv`를 입력으로 제공할 수 있다면 좋겠습니다.
