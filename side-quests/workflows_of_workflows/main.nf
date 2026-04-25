@@ -8,6 +8,5 @@ workflow {
 
 output {
     greetings {
-        path 'greetings'
     }
 }

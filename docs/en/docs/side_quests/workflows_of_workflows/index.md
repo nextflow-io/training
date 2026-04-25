@@ -96,7 +96,7 @@ If you can check all the boxes, you're good to go.
 
 The greeting workflow validates names and generates timestamped greetings.
 
-### 1.1. Review the greeting workflow
+### 1.1. Review and run the greeting workflow
 
 Open `workflows/greeting.nf` and take a look at the code:
 
@@ -130,8 +130,6 @@ output {
 This is a complete, self-contained workflow with the same structure you saw in the 'Hello Nextflow' tutorial.
 It hardcodes the input names, chains three processes, and publishes two outputs.
 
-### 1.2. Run the standalone greeting workflow
-
 Run it to verify everything works:
 
 ```bash
@@ -149,10 +147,9 @@ nextflow run workflows/greeting.nf
     [8e/882565] process > TIMESTAMP_GREETING (adding timestamp to greeting) [100%] 3 of 3 ✔
     ```
 
-This works as expected.
 To make it composable with other workflows, a few things need to change.
 
-### 1.3. Make the workflow composable
+### 1.2. Make the workflow composable
 
 To make a workflow composable, four things need to change:
 the workflow gets a name, inputs move to a `take:` block, outputs move to an `emit:` block,
@@ -160,7 +157,7 @@ and the standalone `publish:`/`output {}` blocks are removed (they belong in the
 
 Let's walk through these changes one by one.
 
-#### 1.3.1. Name the workflow
+#### 1.2.1. Name the workflow
 
 Give the workflow a name so it can be imported from a parent workflow.
 
@@ -178,7 +175,7 @@ Give the workflow a name so it can be imported from a parent workflow.
 
 With a name, the workflow can be imported into other scripts.
 
-#### 1.3.2. Declare inputs with `take:`
+#### 1.2.2. Declare inputs with `take:`
 
 Replace the hardcoded channel declaration with a `take:` block that declares what inputs the workflow expects.
 The `take:` block goes before `main:`, and the `names_ch = channel.of(...)` line is removed.
@@ -212,7 +209,7 @@ The `take:` block goes before `main:`, and the `names_ch = channel.of(...)` line
 
 The `take:` block declares the channel by name only — the details of what goes into it will be defined by the parent workflow.
 
-#### 1.3.3. Declare outputs with `emit:`
+#### 1.2.3. Declare outputs with `emit:`
 
 Replace the `publish:` section and remove the `output {}` block, replacing them with an `emit:` block that names the outputs.
 
@@ -245,7 +242,7 @@ Replace the `publish:` section and remove the `output {}` block, replacing them 
 
 The `emit:` block exposes named outputs that parent workflows can access via `GREETING_WORKFLOW.out.greetings` and `GREETING_WORKFLOW.out.timestamped`.
 
-#### 1.3.4. Verify the result and test it
+#### 1.2.4. Verify the result and test it
 
 After all three changes, the complete file should look like this:
 
@@ -291,17 +288,17 @@ Nextflow uses an unnamed `workflow {}` block as the entry point when you run a s
 That's intentional — composable workflows are designed to be called from an entry workflow, not run directly.
 The solution is an entry workflow in `main.nf` that imports and calls `GREETING_WORKFLOW`.
 
-### 1.4. Update and test the main workflow
+### 1.3. Update and test the main workflow
 
 Now we will update the main workflow to import and use the `greeting` workflow.
 
-#### 1.4.1. Edit `main.nf`
+#### 1.3.1. Add the `include` and wire the workflow
 
-Open `main.nf` and make the following changes:
+Add the `include` statement and update the workflow body to call `GREETING_WORKFLOW`, replacing the `channel.empty()` placeholder in `publish:`:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1"
+    ```groovy title="main.nf" linenums="1" hl_lines="1 7 8 11"
     include { GREETING_WORKFLOW } from './workflows/greeting'
 
     workflow {
@@ -313,12 +310,6 @@ Open `main.nf` and make the following changes:
 
         publish:
         greetings = GREETING_WORKFLOW.out.greetings
-    }
-
-    output {
-        greetings {
-            path 'greetings'
-        }
     }
     ```
 
@@ -332,7 +323,17 @@ Open `main.nf` and make the following changes:
         publish:
         greetings = channel.empty()
     }
+    ```
 
+The entry workflow stays un-named so Nextflow uses it as the pipeline entry point.
+
+#### 1.3.2. Update the output block
+
+Add a `path` directive to route published greetings into a `greetings/` subdirectory:
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="14" hl_lines="3"
     output {
         greetings {
             path 'greetings'
@@ -340,10 +341,16 @@ Open `main.nf` and make the following changes:
     }
     ```
 
-The entry workflow is un-named because it's used as the pipeline entry point.
-The `publish:` section wires the `greetings` output to the GREETING_WORKFLOW result, replacing the `channel.empty()` placeholder.
+=== "Before"
 
-#### 1.4.2. Run the workflow
+    ```groovy title="main.nf" linenums="14" hl_lines="2 3"
+    output {
+        greetings {
+        }
+    }
+    ```
+
+#### 1.3.3. Run the workflow
 
 Run the workflow to test that it works:
 
@@ -407,7 +414,7 @@ This modular approach allows you to test the greeting workflow independently or 
 
 The transform workflow applies text transformations to the timestamped greetings.
 
-### 2.1. Review the workflow
+### 2.1. Review and run the workflow
 
 Open `workflows/transform.nf` and take a look at the code:
 
@@ -438,9 +445,27 @@ output {
 
 This standalone workflow reads timestamped greeting files from the `results/` directory produced by `greeting.nf`, converts them to uppercase, then reverses the text.
 
+Run it to verify it works with the greeting results from section 1.1:
+
+```bash
+nextflow run workflows/transform.nf
+```
+
+??? success "Command output"
+
+    ```console
+    N E X T F L O W  ~  version 24.10.0
+    Launching `workflows/transform.nf` [blissful_curie] DSL2 - revision: 4e7b1c9f02
+    executor >  local (6)
+    [3e/a14c29] process > SAY_HELLO_UPPER (converting t... [100%] 3 of 3 ✔
+    [c8/51b9e3] process > REVERSE_TEXT (reversing UPPER... [100%] 3 of 3 ✔
+    ```
+
+To make it composable with `GREETING_WORKFLOW`, the same three changes from section 1.2 apply.
+
 ### 2.2. Make it composable
 
-Apply the same three changes as in section 1.3: name the workflow, replace the hardcoded input with `take:`, and replace `publish:`/`output {}` with `emit:`.
+Apply the same three changes as in section 1.2: name the workflow, replace the hardcoded input with `take:`, and replace `publish:`/`output {}` with `emit:`.
 
 The finished file should look like this:
 
