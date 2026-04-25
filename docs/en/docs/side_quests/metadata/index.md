@@ -491,7 +491,18 @@ nextflow run main.nf
 
 As you can see, `COWPY` ran on each file using the correct character for each one.
 
-[TODO: add admonition showing tree listing of results directory]
+??? abstract "Results directory contents"
+
+    ```console
+    results/
+    ├── cowpy-bonjour.txt
+    ├── cowpy-ciao.txt
+    ├── cowpy-guten_tag.txt
+    ├── cowpy-hallo.txt
+    ├── cowpy-hello.txt
+    ├── cowpy-hola.txt
+    └── cowpy-salut.txt
+    ```
 
 ??? example "Content of results/cowpy-guten_tag.txt"
 
@@ -651,7 +662,18 @@ nextflow run main.nf
 
 The output is the same seven `cowpy-*.txt` files as before, now produced with a simpler call to `COWPY`.
 
-[TODO: add admonition showing tree listing of results directory]
+??? abstract "Results directory contents"
+
+    ```console
+    results/
+    ├── cowpy-bonjour.txt
+    ├── cowpy-ciao.txt
+    ├── cowpy-guten_tag.txt
+    ├── cowpy-hallo.txt
+    ├── cowpy-hello.txt
+    ├── cowpy-hola.txt
+    └── cowpy-salut.txt
+    ```
 
 ??? example "Content of results/cowpy-guten_tag.txt"
 
@@ -1200,7 +1222,15 @@ nextflow run main.nf -resume
 Yep, that checks out!
 We've neatly reorganized the output of the process from `meta, file, lang_id` so that `lang_id` is now one of the keys in the meta map, and the channel's tuples fit the `meta, file` model once again.
 
-[TODO: mention briefly that it is possible to remove a key using subMap and link to reference docs]
+!!! tip "Removing keys from a meta map"
+
+    You can remove a key from a meta map using the Groovy [`subMap`](https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)) method, which returns a new map containing only the keys you specify:
+
+    ```groovy
+    meta.subMap(['id', 'character'])  // returns a map with only 'id' and 'character'
+    ```
+
+    This is useful when a downstream process or module does not need all the fields that have accumulated in the meta map.
 
 ### 2.4. Assign a language group using conditionals
 
