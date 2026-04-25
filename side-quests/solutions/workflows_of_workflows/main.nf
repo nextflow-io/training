@@ -23,9 +23,12 @@ workflow {
 
 output {
     greetings {
+        path 'greetings'
     }
     upper {
+        path 'upper'
     }
     reversed {
+        path 'reversed'
     }
 }
