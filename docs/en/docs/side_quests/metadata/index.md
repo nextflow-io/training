@@ -394,7 +394,7 @@ Now, include the `COWPY` process and give it each sub-channel as a separate argu
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="3 14-15"
+    ```groovy title="main.nf" linenums="1" hl_lines="3 14"
     #!/usr/bin/env nextflow
 
     include { COWPY } from './modules/cowpy.nf'
@@ -582,7 +582,7 @@ Update `COWPY` to accept a tuple corresponding to the three elements in each row
 
 Now the process takes just one input containing all the things we might want to give it.
 
-#### 1.4.2. `Use map()` to create the input tuple
+#### 1.4.2. Use `map()` to create the input tuple
 
 We still need to use a mapping operation to enumerate the elements we want to pass in the tuple to the process:
 
@@ -607,7 +607,7 @@ We still need to use a mapping operation to enumerate the elements we want to pa
             }
     ```
 
-You might wonder why we can't just pass the entire Groovy map coming from splitCsv as is.
+You might wonder why we can't just pass the entire Groovy map coming from `splitCsv` as is.
 It's because we need to tell Nextflow explicitly that the recording file needs to be handled as a path (i.e. it needs to be staged properly).
 That happens at the level of `COWPY`'s input interface, where the `recording` element is explicitly designated as a `path`.
 
@@ -1058,7 +1058,7 @@ nextflow run main.nf -resume
     [[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/work/4e/f722fe47271ba7ebcd69afa42964ca/ciao.txt, it]
     ```
 
-We now have a language prediction for each
+We now have a language prediction for each file in the dataset.
 
 Note that the output tuple is composed of `[meta, file, lang_id]`, meaning the meta map and file are carried through alongside the new result.
 
@@ -1071,12 +1071,12 @@ Note that the output tuple is composed of `[meta, file, lang_id]`, meaning the m
 
     This use case is explored in detail in the [Splitting & Grouping](../splitting_and_grouping/) side quest.
 
-### 2.3. Augment metadata with process outputs
+### 2.2. Augment metadata with process outputs
 
 The language prediction is itself metadata about the data in the file.
 Rather than keeping it as a separate element, let's fold it back into the meta map.
 
-#### 2.3.1. Create a new and expanded meta map
+#### 2.2.1. Create a new and expanded meta map
 
 We can create a new meta map to replace the original one using the Groovy `+` operator:
 
@@ -1100,7 +1100,7 @@ We can create a new meta map to replace the original one using the Groovy `+` op
         IDENTIFY_LANGUAGE.out.view()
     ```
 
-The heart of this operation is `meta + [lang: lang_id]`.
+The heart of this operation is `#!groovy meta + [lang: lang_id]`.
 
 That code essentially creates a temporary map with a single key-value pair containing the (`[lang: lang_id]`), then uses the Groovy `+` operator to combine it with the original `meta` map containing the pre-existing metadata, producing a new and expanded meta map.
 
@@ -1193,7 +1193,7 @@ For a more detailed explanation, see the box below.
 
     **And this brings us back to the `tuple val(meta), path(file)` channel structure!**
 
-#### 2.3.2. Run the workflow
+#### 2.2.2. Run the workflow
 
 Once you're confident you understand what the code is doing, run the workflow to see if it works:
 
@@ -1232,13 +1232,13 @@ We've neatly reorganized the output of the process from `meta, file, lang_id` so
 
     This is useful when a downstream process or module does not need all the fields that have accumulated in the meta map.
 
-### 2.4. Assign a language group using conditionals
+### 2.3. Assign a language group using conditionals
 
 With the language prediction in the meta map, we can derive further metadata from it.
 The languages in our dataset fall into two families: Germanic (English, German) and Romance (French, Spanish, Italian).
 Adding a `lang_group` field will make that classification available downstream.
 
-#### 2.4.1. Add a `map` operation with the conditional logic
+#### 2.3.1. Add a `map` operation with the conditional logic
 
 We're going to use a second `map` operation with conditional logic to assign the language family:
 
@@ -1265,7 +1265,7 @@ Make the following changes to the workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="13" hl_lines="7-20"
+    ```groovy title="main.nf" linenums="13" hl_lines="7-19 21"
         // Run langid to identify the language of each greeting
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out
@@ -1305,11 +1305,11 @@ Key points:
 
 - `def lang_group = "unknown"` initializes the variable with a safe default.
 - The `if / else if` structure handles the two language families; anything else stays `'unknown'`.
-- `.set { ch_languages }` gives the resulting channel a name for use in the next step.
+- `#!groovy .set { ch_languages }` gives the resulting channel a name for use in the next step.
 
 <!-- TODO (future) Add note/links to relevant docs in additional resources section -->
 
-#### 2.4.2. Run the workflow:
+#### 2.3.2. Run the workflow:
 
 Run the workflow to verify that it works:
 
@@ -1338,13 +1338,13 @@ nextflow run main.nf -resume
 The meta map now carries four fields: `id`, `character`, `lang`, and `lang_group`.
 The channel structure is still `[meta, file]`.
 
-### 2.5. Use metadata to name and organize outputs
+### 2.4. Use metadata to name and organize outputs
 
 With `lang` and `lang_group` now available in the meta map, we can use them to give the output files meaningful names and organize them into subdirectories by language family.
 
 This requires three changes: updating the `COWPY` process to rename its output and include `meta` in what it emits, wiring `ch_languages` into `COWPY`, and updating the output block to specify the subdirectory path.
 
-#### 2.5.1. Update the `COWPY` process
+#### 2.4.1. Update the `COWPY` process
 
 Rename the output file using the language code from the meta map, and add `meta` to the output so the output block can access `lang_group` for subdirectory routing:
 
@@ -1374,7 +1374,7 @@ Rename the output file using the language code from the meta map, and add `meta`
 
 This shows how we can take advantage of other metadata fields to customize the behavior of a process, without having to modify the input definition at all.
 
-#### 2.5.2. Wire `ch_languages` into `COWPY` and update the output block
+#### 2.4.2. Wire `ch_languages` into `COWPY` and update the output block
 
 Replace `COWPY(ch_datasheet)` with `COWPY(ch_languages)` and update the `output {}` block to route each file into its language group subdirectory:
 
@@ -1411,7 +1411,7 @@ Replace `COWPY(ch_datasheet)` with `COWPY(ch_languages)` and update the `output 
 
 Also remove the temporary `ch_languages.view()` line.
 
-#### 2.5.3. Run the full pipeline
+#### 2.4.3. Run the full pipeline
 
 Delete the previous results and run the full pipeline:
 
@@ -1455,7 +1455,7 @@ Both pieces of metadata (language code and language group) come from the enriche
 
 In this section, you've learned:
 
-- **How to augment the meta map with process outputs:** Adding new keys with `meta + [key: value]` keeps the `[meta, file]` channel structure intact while enriching the metadata.
+- **How to augment the meta map with process outputs:** Adding new keys with `#!groovy meta + [key: value]` keeps the `[meta, file]` channel structure intact while enriching the metadata.
 - **How to derive metadata from metadata:** Conditional logic inside a `map` operation can compute new fields from existing ones.
 - **How to use metadata for output organization:** The `path` closure in the `output {}` block can read from the meta map to route files into subdirectories.
 
