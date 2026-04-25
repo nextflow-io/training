@@ -101,16 +101,57 @@ sampleG,turtle,/workspaces/training/side-quests/metadata/data/ciao.txt
 
 Each data file contains some greeting text in one of five languages (fr: French, de: German, es: Spanish, it: Italian, en: English).
 
-We will also provide you with a containerized language analysis tool called `langid`.
+We're going to use a tool called [`COWPY`](https://github.com/jeffbuttars/cowpy) to generate ASCII art of each character speaking its recorded greeting.
+
+??? info "What does `COWPY` do?"
+
+    `COWPY` is a command-line tool that generates ASCII art to display arbitrary text inputs in a fun way.
+    It is a Python implementation of the classic [cowsay](https://en.wikipedia.org/wiki/Cowsay) tool by Tony Monroe.
+
+    ```console
+    cowpy "Hello Nextflow"
+    ```
+
+    ```console
+    ______________________________________________________
+    < Hello Nextflow >
+    ------------------------------------------------------
+        \   ^__^
+          \  (oo)\_______
+            (__)\       )\/\
+              ||----w |
+              ||     ||
+    ```
+
+    Optionally, you can select a character (or 'cowacter') to use instead of the default cow.
+
+    ```console
+    cowpy "Hello Nextflow" -c tux
+    ```
+
+    ```console
+    __________________
+    < Hello Nextflow >
+    ------------------
+      \
+        \
+            .--.
+          |o_o |
+          |:_/ |
+          //   \ \
+        (|     | )
+        /'\_   _/`\
+        \___)=(___/
+    ```
+
+In addition, we'll use a language analysis tool called `langid` to identify what language each character speaks and organize the outputs of the pipeline accordingly.
 
 #### Review the assignment
 
 Your challenge is to write a Nextflow workflow that will:
 
-1. **Identify** the language in each file automatically
-2. **Group** files by language family (Germanic vs Romance languages)
-3. **Customize** the processing for each file based on its language and metadata
-4. **Organize** outputs by language group
+1. **Generate ASCII art** of each character
+2. **Organize** outputs by language group (Germanic vs Romance languages)
 
 This represents a typical workflow pattern where file-specific metadata drives processing decisions; exactly the kind of problem that metadata maps solve elegantly.
 
@@ -151,12 +192,16 @@ output {
 ```
 
 The [`splitCsv`](https://www.nextflow.io/docs/latest/reference/operator.html#splitcsv) operator reads each row in the file as a channel element.
+This is the same approach we use to load CSV data in Hello Nextflow, our beginner course.
+Have a look at [this section](../../hello_nextflow/02_hello_channels/#4-read-input-values-from-a-csv-file) if you need a reminder of how that works.
+
 With `header: true`, the first row is treated as column headers, so each element becomes a map of key-value pairs keyed by column name.
-The `.view()` call lets us inspect the output.
 
-### 1.1. Inspect the parsed data
+Note that since we're not running any processes on the data yet, the `publish` and `output` blocks are just stubs.
 
-Run the workflow:
+### 1.1. Run the workflow
+
+Run the workflow to see how the channel contents are structured once everything is loaded:
 
 ```bash
 nextflow run main.nf
@@ -178,7 +223,7 @@ nextflow run main.nf
     [id:sampleG, character:turtle, recording:/workspaces/training/side-quests/metadata/data/ciao.txt]
     ```
 
-The operator has constructed a map of key-value pairs for each row in the CSV file, with the column headers as keys for the corresponding values.
+As you can see, the operator has constructed a map of key-value pairs for each row in the CSV file, with the column headers as keys for the corresponding values.
 
 Each map entry corresponds to a column in our datasheet:
 
@@ -189,7 +234,7 @@ Each map entry corresponds to a column in our datasheet:
 This makes it easy to access specific fields from each row.
 For example, we could access the file ID with `id` or the txt file path with `recording`.
 
-??? info "(Optional) More about maps"
+??? info "(Optional) More about Groovy maps"
 
     In Groovy, the programming language that Nextflow is built on, a map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby.
 
@@ -229,13 +274,11 @@ For example, we could access the file ID with `id` or the txt file path with `re
 
 ### 1.2. Pick out a specific field with `map`
 
-The map structure produced by `splitCsv` makes individual fields accessible by name using dot notation — the same approach you used with channel tuples in Hello Nextflow.
-
-The Nextflow `map` operator can iterate over each element in a channel and apply a transformation, including simply picking out one named field.
+We're going to use the `map` operator to iterate over each element in a channel and pick out just the character field, which we can access by name using dot notation.
 
 #### 1.2.1. Add the map operation
 
-To access the `character` column, add a `map` operation that picks out that field before the `.view()` operation:
+To access the `character` column, add the `map` operation before the `.view()` operation as follows:
 
 === "After"
 
@@ -256,9 +299,11 @@ To access the `character` column, add a `map` operation that picks out that fiel
             .view()
     ```
 
+This way of accessing a specific field is explained in more detail in [this section](../../hello_nextflow/02_hello_channels/#43-use-the-map-operator-to-extract-the-greetings) of Hello Nextflow, if you need a reminder of how that works.
+
 #### 1.2.2. Run the workflow
 
-Run the workflow to verify that you can view the extracted field.
+Run the workflow to verify that you can view the extracted character names.
 
 ```bash
 nextflow run main.nf
@@ -280,59 +325,17 @@ nextflow run main.nf
     turtle
     ```
 
-We've accessed the values from the `character` column for each row.
+This shows that we're able to access the values from the `character` column for each row.
 
-Now let's do something more interesting with this data: use the `character` and `recording` fields together to generate ASCII art.
+Now let's do something with this data: use the `character` and `recording` fields together to generate ASCII art using `COWPY`.
 
-### 1.3. Pick out separate fields with `multiMap`
+### 1.3. Emit sub-channels with `multiMap`
 
-We're going to use a tool called [`cowpy`](https://github.com/jeffbuttars/cowpy) to generate ASCII art of each character speaking its recorded greeting.
+We provide you with a pre-written `COWPY` process module, so first you need to examine the input requirements of the process.
 
-??? info "What does `cowpy` do?"
+You can open the file to see what the process looks like:
 
-    `cowpy` is a command-line tool that generates ASCII art to display arbitrary text inputs in a fun way.
-    It is a Python implementation of the classic [cowsay](https://en.wikipedia.org/wiki/Cowsay) tool by Tony Monroe.
-
-    ```console
-    cowpy "Hello Nextflow"
-    ```
-
-    ```console
-    ______________________________________________________
-    < Hello Nextflow >
-    ------------------------------------------------------
-        \   ^__^
-          \  (oo)\_______
-            (__)\       )\/\
-              ||----w |
-              ||     ||
-    ```
-
-    Optionally, you can select a character (or 'cowacter') to use instead of the default cow.
-
-    ```console
-    cowpy "Hello Nextflow" -c tux
-    ```
-
-    ```console
-    __________________
-    < Hello Nextflow >
-    ------------------
-      \
-        \
-            .--.
-          |o_o |
-          |:_/ |
-          //   \ \
-        (|     | )
-        /'\_   _/`\
-        \___)=(___/
-    ```
-
-We provide you with a pre-written `COWPY` process module.
-You can open the file to see what the process currently looks like:
-
-```groovy title="modules/cowpy.nf" linenums="1"
+```groovy title="modules/cowpy.nf" linenums="1" hl_lines="7 8"
 // Generate ASCII art with cowpy
 process COWPY {
 
@@ -383,11 +386,11 @@ Replace the `map` operation with `multiMap`:
             .view()
     ```
 
-The `multiMap` block defines two named sub-channels (`file` and `character`) from each row, which we then access as `ch_datasheet.file` and `ch_datasheet.character`.
+The `multiMap` block defines two named sub-channels (`file` and `character`) from each row, which we can access as `ch_datasheet.file` and `ch_datasheet.character`.
 
 #### 1.3.2. Call COWPY on the sub-channels
 
-With the channel split into `file` and `character` sub-channels, include the `COWPY` process and pass each sub-channel as a separate argument:
+Now, include the `COWPY` process and give it each sub-channel as a separate argument:
 
 === "After"
 
@@ -406,7 +409,6 @@ With the channel split into `file` and `character` sub-channels, include the `CO
             }
 
         COWPY(ch_datasheet.file, ch_datasheet.character)
-        COWPY.out.view()
 
         publish:
         cowpy_art = channel.empty()
@@ -442,15 +444,16 @@ With the channel split into `file` and `character` sub-channels, include the `CO
     }
     ```
 
+This allows us to pass the two fields separately as `COWPY` requires.
+
 #### 1.3.3. Set up the output publishing
 
-Connect the `COWPY` output to the `publish:` block:
+Finally, add the output of `COWPY` to the `publish:` block:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="14" hl_lines="5"
+    ```groovy title="main.nf" linenums="14" hl_lines="4"
         COWPY(ch_datasheet.file, ch_datasheet.character)
-        COWPY.out.view()
 
         publish:
         cowpy_art = COWPY.out
@@ -458,17 +461,18 @@ Connect the `COWPY` output to the `publish:` block:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="14" hl_lines="5"
+    ```groovy title="main.nf" linenums="14" hl_lines="4"
         COWPY(ch_datasheet.file, ch_datasheet.character)
-        COWPY.out.view()
 
         publish:
         cowpy_art = channel.empty()
     ```
 
+This will allow us to easily view the outputs produced by the workflow.
+
 #### 1.3.4. Run the workflow
 
-Run the workflow to check that `cowpy` runs on the inputs we provided:
+Run the workflow to check that `COWPY` runs on the inputs we provided:
 
 ```bash
 nextflow run main.nf
@@ -483,16 +487,11 @@ nextflow run main.nf
 
     executor >  local (7)
     [3a/f1c290] COWPY (7) [100%] 7 of 7 ✔
-    /workspaces/training/side-quests/metadata/work/3a/f1c290.../cowpy-bonjour.txt
-    /workspaces/training/side-quests/metadata/work/8d/4b9498.../cowpy-guten_tag.txt
-    /workspaces/training/side-quests/metadata/work/d3/604274.../cowpy-hallo.txt
-    /workspaces/training/side-quests/metadata/work/c4/b75624.../cowpy-hello.txt
-    /workspaces/training/side-quests/metadata/work/af/ee7c69.../cowpy-hola.txt
-    /workspaces/training/side-quests/metadata/work/5a/6c2b84.../cowpy-salut.txt
-    /workspaces/training/side-quests/metadata/work/4e/f722fe.../cowpy-ciao.txt
     ```
 
-As you can see, `cowpy` ran on each file using the correct character for each one.
+As you can see, `COWPY` ran on each file using the correct character for each one.
+
+[TODO: add admonition showing tree listing of results directory]
 
 ??? example "Content of results/cowpy-guten_tag.txt"
 
@@ -514,7 +513,7 @@ As you can see, `cowpy` ran on each file using the correct character for each on
     ```
 
 This approach works, but has a limitation: we had to split the channel into two separate sub-channels.
-If we wanted to pass more fields to the process, we'd need to split them all out individually.
+If we wanted to pass more fields to the process, we'd need to split them out into more sub-channels.
 That could get annoying and messy.
 
 Good news: there is a simpler way to do this.
@@ -570,13 +569,44 @@ Update `COWPY` to accept a tuple corresponding to the three elements in each row
     }
     ```
 
-#### 1.4.2. Simplify the channel handling
+Now the process takes just one input containing all the things we might want to give it.
 
-We still need to use a mapping operation to enumerate the elements we want to pass to the process, but we can do it with a simple map operation that creates a single tuple.
+#### 1.4.2. `Use map()` to create the input tuple
+
+We still need to use a mapping operation to enumerate the elements we want to pass in the tuple to the process:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="5" hl_lines="3-5 7"
+    ```groovy title="main.nf" linenums="5" hl_lines="3-5"
+        ch_datasheet = channel.fromPath("./data/datasheet.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                [row.id, row.character, row.recording]
+            }
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="5" hl_lines="3-6"
+        ch_datasheet = channel.fromPath("./data/datasheet.csv")
+            .splitCsv(header: true)
+            .multiMap { row ->
+                file: row.recording
+                character: row.character
+            }
+    ```
+
+You might wonder why we can't just pass the entire Groovy map coming from splitCsv as is.
+It's because we need to tell Nextflow explicitly that the recording file needs to be handled as a path (i.e. it needs to be staged properly).
+That happens at the level of `COWPY`'s input interface, where the `recording` element is explicitly designated as a `path`.
+
+#### 1.4.3. Update the call to the process
+
+Finally, let's replace the two separate inputs in the process call with the single tuple we just created:
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="5" hl_lines="7"
         ch_datasheet = channel.fromPath("./data/datasheet.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -584,32 +614,25 @@ We still need to use a mapping operation to enumerate the elements we want to pa
             }
 
         COWPY(ch_datasheet)
-        COWPY.out.view()
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="5" hl_lines="3-6 8-9"
+    ```groovy title="main.nf" linenums="5" hl_lines="7"
         ch_datasheet = channel.fromPath("./data/datasheet.csv")
             .splitCsv(header: true)
-            .multiMap { row ->
-                file: row.recording
-                character: row.character
+            .map { row ->
+                [row.id, row.character, row.recording]
             }
 
         COWPY(ch_datasheet.file, ch_datasheet.character)
-        COWPY.out.view()
     ```
 
-!!! info
+This simplifies the call to the process a little.
 
-    You might wonder why we can't just pass the entire Groovy map coming from splitCsv as is.
-    It's because we need to tell Nextflow explicitly that the recording file needs to be handled as a path (i.e. it needs to be staged properly).
-    That happens at the level of `cowpy`'s input interface, where the `recording` element is explicitly designated as a `path`.
+#### 1.4.4. Run the workflow
 
-#### 1.4.3. Run the workflow
-
-Run the workflow to verify that `cowpy` can still process the data correctly:
+Run the workflow to verify that `COWPY` can still process the data correctly:
 
 ```bash
 nextflow run main.nf
@@ -627,6 +650,8 @@ nextflow run main.nf
     ```
 
 The output is the same seven `cowpy-*.txt` files as before, now produced with a simpler call to `COWPY`.
+
+[TODO: add admonition showing tree listing of results directory]
 
 ??? example "Content of results/cowpy-guten_tag.txt"
 
@@ -648,7 +673,7 @@ The output is the same seven `cowpy-*.txt` files as before, now produced with a 
     ```
 
 This is a slight improvement over the `multiMap` approach.
-But there's still a tight coupling between the process and the datasheet: the `COWPY` input definition now references the column names `id`, `character`, and `recording` directly.
+But we still had to unpack the original Groovy map to create the input tuple, and there's a tight coupling between the process and the datasheet: the `COWPY` input definition now references the column names `id`, `character`, and `recording` directly.
 
 ```groovy
 input:
@@ -656,13 +681,13 @@ tuple val(id), val(character), path(recording)
 ```
 
 If a collaborator uses a differently structured datasheet — with additional columns, or columns in a different order — this process won't work without modification.
-The process is fragile, because its input structure is tied to the exact composition of the datasheet.
+This makes the process fragile, because its input structure is tied to the exact composition of the datasheet.
 
 To solve this, we need a way to pass all the metadata as a bundle without hard-coding its exact structure into the process interface.
 
 ### 1.5. Use a meta map + file interface
 
-The key insight is to separate two distinct concerns in the channel: the **metadata about a sample**, and the **data file** itself.
+The solution is to separate two distinct concerns in the channel: the **metadata about a sample**, and the **data file** itself.
 By bundling all metadata into a single map — the "meta map" — we get a consistent two-element tuple regardless of how many metadata columns the datasheet contains:
 
 ```groovy title="Syntax example"
@@ -675,11 +700,11 @@ Processes that accept this structure don't need to know or care how many metadat
 
 #### 1.5.1. Re-organize the tuple content into a meta map
 
-Restructure the `map` output into a `[meta, file]` tuple, and comment out the `COWPY` call for now because the process input definition doesn't match the new structure yet:
+Let's restructure the `map` operation to produce a `[meta, file]` tuple:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="5" hl_lines="4 6 8"
+    ```groovy title="main.nf" linenums="5" hl_lines="4 6 8 11"
         ch_datasheet = channel.fromPath("./data/datasheet.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -688,11 +713,14 @@ Restructure the `map` output into a `[meta, file]` tuple, and comment out the `C
             .view()
 
         // COWPY(ch_datasheet)  // Will update in the next step
+
+        publish:
+        cowpy_art = channel.empty() // COWPY.out
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="5" hl_lines="4 7-8"
+    ```groovy title="main.nf" linenums="5" hl_lines="4 7"
         ch_datasheet = channel.fromPath("./data/datasheet.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -700,12 +728,16 @@ Restructure the `map` output into a `[meta, file]` tuple, and comment out the `C
             }
 
         COWPY(ch_datasheet)
-        COWPY.out.view()
+
+        publish:
+        cowpy_art = COWPY.out
     ```
+
+You'll notice that we also added a `view()` statement, commented out the `COWPY` call and replaced `COWPY.out` with `channel.empty()` because the process input definition doesn't match the new structure yet.
 
 #### 1.5.2. Run the workflow to inspect the re-organized content
 
-Run to see the new channel shape:
+Run the workflow to see the new channel shape:
 
 ```bash
 nextflow run main.nf
@@ -736,7 +768,7 @@ Each element in the channel is now a two-element tuple: the meta map first, the 
 ]
 ```
 
-If we later add a `language` column to the datasheet, it becomes available as `meta.language` without touching any process definitions.
+If we later add a `language` column to the datasheet, it will become available as `meta.language` without requiring any changes to the process input definition.
 
 #### 1.5.3. Update the `COWPY` process to use the meta map
 
@@ -819,8 +851,10 @@ Restore the `COWPY` call and connect its output for publishing:
         // COWPY(ch_datasheet)  // Will update in the next step
 
         publish:
-        cowpy_art = channel.empty()
+        cowpy_art = channel.empty() // COWPY.out
     ```
+
+We've also restored the output publishing.
 
 #### 1.5.5. Run the workflow
 
@@ -876,7 +910,9 @@ The results directory now contains the ASCII art files.
     ```
 
 The process now receives all metadata as a bundle via `meta`, uses what it needs (`meta.character`), and ignores the rest.
-This is the standard interface used by all [nf-core](https://nf-co.re/) modules — the `tuple val(meta), path(file)` pattern appears consistently throughout the nf-core module library, which is why workflows that adopt this convention can swap in nf-core modules with minimal friction.
+
+This is the standard interface used by all [nf-core](https://nf-co.re/) modules.
+The `tuple val(meta), path(file)` pattern appears consistently throughout the nf-core module library, which is why workflows that adopt this convention can swap in nf-core modules with minimal friction.
 
 ### Takeaway
 
@@ -888,38 +924,16 @@ In this section, you've learned:
 
 ---
 
-## 2. Manipulating metadata
+## 2. Additional metadata manipulations
 
 Now that the meta map interface is in place, we can enrich it as data flows through the pipeline.
 
 We're going to use a tool called [`langid`](https://github.com/saffsd/langid.py) to identify the language in each recording file.
 Given a snippet of text, it outputs a language prediction and a probability score to `stdout`.
 
-### 2.1. Import the process and examine the code
+### 2.1. Add a language identification step
 
 We provide a pre-written process module called `IDENTIFY_LANGUAGE` that wraps the `langid` tool.
-Add the include statement before the workflow block:
-
-=== "After"
-
-    ```groovy title="main.nf" linenums="1" hl_lines="3"
-    #!/usr/bin/env nextflow
-
-    include { IDENTIFY_LANGUAGE } from './modules/langid.nf'
-    include { COWPY } from './modules/cowpy.nf'
-
-    workflow {
-    ```
-
-=== "Before"
-
-    ```groovy title="main.nf" linenums="1"
-    #!/usr/bin/env nextflow
-
-    include { COWPY } from './modules/cowpy.nf'
-
-    workflow {
-    ```
 
 Open the module file to examine its code:
 
@@ -942,24 +956,32 @@ process IDENTIFY_LANGUAGE {
 }
 ```
 
-The input definition uses the same `tuple val(meta), path(file)` structure we just built in Section 1 — so `ch_datasheet` can feed directly into this process without any adaptation.
+The input definition uses the same `tuple val(meta), path(file)` structure we just built in Section 1, so `ch_datasheet` can feed directly into this process without any adaptation.
 
 The output adds `stdout` as a third element: this captures the language prediction that `langid` prints to the console.
 The `sed` command strips the probability score and trailing newline, leaving just the two-letter language code.
 
-### 2.2. Add a call to `IDENTIFY_LANGUAGE`
+#### 2.1.1. Add a call to `IDENTIFY_LANGUAGE`
 
-Add the `IDENTIFY_LANGUAGE` call to the workflow.
-`COWPY` continues to run on `ch_datasheet` in the background; focus on the `IDENTIFY_LANGUAGE` output for now.
+Include the `IDENTIFY_LANGUAGE` process module and call it on the datasheet channel:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="7" hl_lines="7-9"
+    ```groovy title="main.nf" linenums="1" hl_lines="4 16-18"
+    #!/usr/bin/env nextflow
+
+    include { COWPY } from './modules/cowpy.nf'
+    include { IDENTIFY_LANGUAGE } from './modules/langid.nf'
+
+    workflow {
+        main:
         ch_datasheet = channel.fromPath("./data/datasheet.csv")
             .splitCsv(header: true)
             .map { row ->
                 [[id: row.id, character: row.character], row.recording]
             }
+
+        COWPY(ch_datasheet)
 
         // Run langid to identify the language of each greeting
         IDENTIFY_LANGUAGE(ch_datasheet)
@@ -968,7 +990,13 @@ Add the `IDENTIFY_LANGUAGE` call to the workflow.
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="7"
+    ```groovy title="main.nf" linenums="1"
+    #!/usr/bin/env nextflow
+
+    include { COWPY } from './modules/cowpy.nf'
+
+    workflow {
+        main:
         ch_datasheet = channel.fromPath("./data/datasheet.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -978,10 +1006,15 @@ Add the `IDENTIFY_LANGUAGE` call to the workflow.
         COWPY(ch_datasheet)
     ```
 
-Run the workflow:
+The main output of this process is just a string, so there are no output files to publish.
+Instead, we use `IDENTIFY_LANGUAGE.out.view()` to view the results of the operation.
+
+#### 2.1.2. Run the workflow
+
+Run the workflow to produce the language identification, using `-resume` to avoid re-running the `COWPY` tasks:
 
 ```bash
-nextflow run main.nf
+nextflow run main.nf -resume
 ```
 
 ??? success "Command output"
@@ -992,8 +1025,8 @@ nextflow run main.nf
     Launching `main.nf` [voluminous_mcnulty] DSL2 - revision: f9bcfebabb
 
     executor >  local (14)
+    [5d/dffd4e] COWPY (7)             [100%] 7 of 7, cached: 7 ✔
     [4e/f722fe] IDENTIFY_LANGUAGE (7) [100%] 7 of 7 ✔
-    [5d/dffd4e] COWPY (7)             [100%] 7 of 7 ✔
     [[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/work/eb/f7148ebdd898fbe1136bec6a714acb/bonjour.txt, fr]
     [[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/work/16/71d72410952c22cd0086d9bca03680/guten_tag.txt, de]
     [[id:sampleD, character:turkey], /workspaces/training/side-quests/metadata/work/c4/b7562adddc1cc0b7d414ec45d436eb/hello.txt, en]
@@ -1003,21 +1036,27 @@ nextflow run main.nf
     [[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/work/4e/f722fe47271ba7ebcd69afa42964ca/ciao.txt, it]
     ```
 
-We now have a language prediction for each file.
-The output tuple is `[meta, file, lang_id]` — the meta map and file are carried through alongside the new result.
+We now have a language prediction for each
+
+Note that the output tuple is composed of `[meta, file, lang_id]`, meaning the meta map and file are carried through alongside the new result.
 
 !!! note
 
     This pattern of keeping the meta map associated with results makes it easier to join results across channels later on.
-    You can't rely on the order of items in channels to associate data correctly — you must use keys.
+    You can't rely on the order of items in channels to associate data correctly.
+    You must use keys instead.
     Meta maps provide an ideal structure for this purpose.
 
     This use case is explored in detail in the [Splitting & Grouping](../splitting_and_grouping/) side quest.
 
 ### 2.3. Augment metadata with process outputs
 
-The language prediction is itself metadata about the file.
-Rather than keeping it as a separate element, fold it back into the meta map using the Groovy `+` operator to merge maps.
+The language prediction is itself metadata about the data in the file.
+Rather than keeping it as a separate element, let's fold it back into the meta map.
+
+#### 2.3.1. Create a new and expanded meta map
+
+We can create a new meta map to replace the original one using the Groovy `+` operator:
 
 === "After"
 
@@ -1038,6 +1077,12 @@ Rather than keeping it as a separate element, fold it back into the meta map usi
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out.view()
     ```
+
+The heart of this operation is `meta + [lang: lang_id]`.
+
+That code essentially creates a temporary map with a single key-value pair containing the (`[lang: lang_id]`), then uses the Groovy `+` operator to combine it with the original `meta` map containing the pre-existing metadata, producing a new and expanded meta map.
+
+For a more detailed explanation, see the box below.
 
 ??? info "Creation of the new meta map using the `+` operator"
 
@@ -1126,7 +1171,9 @@ Rather than keeping it as a separate element, fold it back into the meta map usi
 
     **And this brings us back to the `tuple val(meta), path(file)` channel structure!**
 
-Once you're confident you understand what this code is doing, run the workflow to see if it worked:
+#### 2.3.2. Run the workflow
+
+Once you're confident you understand what the code is doing, run the workflow to see if it works:
 
 ```bash
 nextflow run main.nf -resume
@@ -1139,8 +1186,8 @@ nextflow run main.nf -resume
 
     Launching `main.nf` [cheeky_fermat] DSL2 - revision: d096281ee4
 
-    [4e/f722fe] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔
     [5d/dffd4e] COWPY (7)             [100%] 7 of 7, cached: 7 ✔
+    [4e/f722fe] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔
     [[id:sampleA, character:squirrel, lang:fr], /workspaces/training/side-quests/metadata/work/eb/f7148ebdd898fbe1136bec6a714acb/bonjour.txt]
     [[id:sampleB, character:tux, lang:de], /workspaces/training/side-quests/metadata/work/16/71d72410952c22cd0086d9bca03680/guten_tag.txt]
     [[id:sampleC, character:sheep, lang:de], /workspaces/training/side-quests/metadata/work/ea/04f5d979429e4455e14b9242fb3b45/hallo.txt]
@@ -1153,7 +1200,7 @@ nextflow run main.nf -resume
 Yep, that checks out!
 We've neatly reorganized the output of the process from `meta, file, lang_id` so that `lang_id` is now one of the keys in the meta map, and the channel's tuples fit the `meta, file` model once again.
 
-<!-- TODO (future) Should we also show how to remove a key using subMap?! Or note where to find that. -->
+[TODO: mention briefly that it is possible to remove a key using subMap and link to reference docs]
 
 ### 2.4. Assign a language group using conditionals
 
@@ -1161,7 +1208,9 @@ With the language prediction in the meta map, we can derive further metadata fro
 The languages in our dataset fall into two families: Germanic (English, German) and Romance (French, Spanish, Italian).
 Adding a `lang_group` field will make that classification available downstream.
 
-The general structure uses a second `map` operation with conditional logic:
+#### 2.4.1. Add a `map` operation with the conditional logic
+
+We're going to use a second `map` operation with conditional logic to assign the language family:
 
 ```groovy
 .map { meta, file ->
@@ -1230,7 +1279,9 @@ Key points:
 
 <!-- TODO (future) Add note/links to relevant docs in additional resources section -->
 
-Run the workflow:
+#### 2.4.2. Run the workflow:
+
+Run the workflow to verify that it works:
 
 ```bash
 nextflow run main.nf -resume
@@ -1243,8 +1294,8 @@ nextflow run main.nf -resume
 
     Launching `main.nf` [wise_almeida] DSL2 - revision: 46778c3cd0
 
-    [da/652cc6] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔
     [5d/dffd4e] COWPY (7)             [100%] 7 of 7, cached: 7 ✔
+    [da/652cc6] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔
     [[id:sampleA, character:squirrel, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/data/bonjour.txt]
     [[id:sampleB, character:tux, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/data/guten_tag.txt]
     [[id:sampleC, character:sheep, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/data/hallo.txt]
@@ -1290,6 +1341,8 @@ Rename the output file using the language code from the meta map, and add `meta`
         cat ${input_file} | cowpy -c ${meta.character} > cowpy-${input_file}
         """
     ```
+
+This shows how we can take advantage of other metadata fields to customize the behavior of a process, without having to modify the input definition at all.
 
 #### 2.5.2. Wire `ch_languages` into `COWPY` and update the output block
 
@@ -1366,7 +1419,7 @@ results/
 
 The `path` closure in the `output {}` block receives each `[meta, file]` tuple and returns `meta.lang_group` as the subdirectory name.
 The file name itself comes from what the process outputs (`#!groovy "${meta.lang}-${input_file}"`).
-Both pieces of metadata — language code and language group — come from the enriched meta map built up in this section.
+Both pieces of metadata (language code and language group) come from the enriched meta map built up in this section.
 
 ### Takeaway
 
@@ -1400,7 +1453,7 @@ sampleB,tux,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 ```
 
 The `character` key is created for all entries when the datasheet is parsed, but `meta.character` for `sampleA` will be an empty string.
-When Nextflow substitutes `#!groovy ${meta.character}` into the command, the `cowpy` tool receives an empty argument for `-c` and fails:
+When Nextflow substitutes `#!groovy ${meta.character}` into the command, the `COWPY` tool receives an empty argument for `-c` and fails:
 
 ??? failure "Command output"
 
