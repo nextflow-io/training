@@ -11,10 +11,6 @@ workflow {
     // Run the transform workflow
     TRANSFORM_WORKFLOW(GREETING_WORKFLOW.out.timestamped)
 
-    // View results
-    TRANSFORM_WORKFLOW.out.upper.view { "Uppercase: ${it}" }
-    TRANSFORM_WORKFLOW.out.reversed.view { "Reversed: ${it}" }
-
     publish:
     greetings = GREETING_WORKFLOW.out.greetings
     upper = TRANSFORM_WORKFLOW.out.upper

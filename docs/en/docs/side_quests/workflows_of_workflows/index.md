@@ -92,7 +92,7 @@ If you can check all the boxes, you're good to go.
 
 ---
 
-## 1. The Greeting Workflow
+## 1. Add the greeting workflow to the pipeline
 
 The greeting workflow validates names and generates timestamped greetings.
 
@@ -188,7 +188,7 @@ The `take:` block goes before `main:`, and the `names_ch = channel.of(...)` line
     ```groovy title="workflows/greeting.nf" linenums="5" hl_lines="2 3 5"
     workflow GREETING_WORKFLOW {
         take:
-        names_ch        // Input channel with names
+        names_ch // Input channel with names
 
         main:
         // Chain processes: validate -> create greeting -> add timestamp
@@ -221,8 +221,8 @@ Replace the `publish:` section and remove the `output {}` block, replacing them 
     ```groovy title="workflows/greeting.nf" linenums="14" hl_lines="2 3 4"
 
         emit:
-        greetings = greetings_ch      // Original greetings
-        timestamped = timestamped_ch  // Timestamped greetings
+        greetings = greetings_ch // Original greetings
+        timestamped = timestamped_ch // Timestamped greetings
     }
     ```
 
@@ -256,7 +256,7 @@ include { TIMESTAMP_GREETING } from '../modules/timestamp_greeting'
 
 workflow GREETING_WORKFLOW {
     take:
-    names_ch        // Input channel with names
+    names_ch // Input channel with names
 
     main:
     // Chain processes: validate -> create greeting -> add timestamp
@@ -265,8 +265,8 @@ workflow GREETING_WORKFLOW {
     timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
 
     emit:
-    greetings = greetings_ch      // Original greetings
-    timestamped = timestamped_ch  // Timestamped greetings
+    greetings = greetings_ch // Original greetings
+    timestamped = timestamped_ch // Timestamped greetings
 }
 ```
 
@@ -307,6 +307,8 @@ Open `main.nf` and make the following changes:
     workflow {
         main:
         names = channel.of('Alice', 'Bob', 'Charlie')
+
+        // Run the greeting workflow
         GREETING_WORKFLOW(names)
 
         publish:
@@ -401,7 +403,7 @@ This modular approach allows you to test the greeting workflow independently or 
 
 ---
 
-## 2. Adapt the TRANSFORM workflow
+## 2. Add the transformation workflow to the pipeline
 
 The transform workflow applies text transformations to the timestamped greetings.
 
@@ -448,7 +450,7 @@ include { REVERSE_TEXT } from '../modules/reverse_text'
 
 workflow TRANSFORM_WORKFLOW {
     take:
-    input_ch         // Input channel with messages
+    input_ch // Input channel with messages
 
     main:
     // Apply transformations in sequence
@@ -456,8 +458,8 @@ workflow TRANSFORM_WORKFLOW {
     reversed_ch = REVERSE_TEXT(upper_ch)
 
     emit:
-    upper = upper_ch        // Uppercase greetings
-    reversed = reversed_ch  // Reversed uppercase greetings
+    upper = upper_ch // Uppercase greetings
+    reversed = reversed_ch // Reversed uppercase greetings
 }
 ```
 
@@ -465,13 +467,15 @@ The transform workflow is now composable and ready to be imported into the main 
 
 ### 2.3. Update the main workflow
 
-#### 2.3.1. Edit `main.nf`
+All that remains is to include the `TRANSFORM_WORKFLOW` in the main workflow and chain it after `GREETING_WORKFLOW`, then update the output definitions.
 
-Update `main.nf` to use both workflows:
+#### 2.3.1. Include `TRANSFORM_WORKFLOW` and add the call
+
+Add the include statement, a call to `TRANSFORM_WORKFLOW` chained on the timestamped greetings, and the two new `publish:` entries:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1"
+    ```groovy title="main.nf" linenums="1" hl_lines="2 11 12 16 17"
     include { GREETING_WORKFLOW } from './workflows/greeting'
     include { TRANSFORM_WORKFLOW } from './workflows/transform'
 
@@ -490,7 +494,34 @@ Update `main.nf` to use both workflows:
         upper = TRANSFORM_WORKFLOW.out.upper
         reversed = TRANSFORM_WORKFLOW.out.reversed
     }
+    ```
 
+=== "Before"
+
+    ```groovy title="main.nf" linenums="1"
+    include { GREETING_WORKFLOW } from './workflows/greeting'
+
+    workflow {
+        main:
+        names = channel.of('Alice', 'Bob', 'Charlie')
+
+        // Run the greeting workflow
+        GREETING_WORKFLOW(names)
+
+        publish:
+        greetings = GREETING_WORKFLOW.out.greetings
+    }
+    ```
+
+This will run the transformation workflow on the timestamped greetings.
+
+#### 2.3.2. Update the output block
+
+Add `upper` and `reversed` entries to the `output {}` block, each with a `path` directive for its subdirectory:
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="20" hl_lines="5 6 7 8 9 10"
     output {
         greetings {
             path 'greetings'
@@ -506,18 +537,7 @@ Update `main.nf` to use both workflows:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="1"
-    include { GREETING_WORKFLOW } from './workflows/greeting'
-
-    workflow {
-        main:
-        names = channel.of('Alice', 'Bob', 'Charlie')
-        GREETING_WORKFLOW(names)
-
-        publish:
-        greetings = GREETING_WORKFLOW.out.greetings
-    }
-
+    ```groovy title="main.nf" linenums="20" hl_lines="2 3 4 5"
     output {
         greetings {
             path 'greetings'
@@ -525,7 +545,9 @@ Update `main.nf` to use both workflows:
     }
     ```
 
-#### 2.3.2. Run the complete pipeline
+This will publish the final outputs to the appropriate directories.
+
+#### 2.3.3. Run the complete pipeline
 
 Run the pipeline to test that it all works:
 
@@ -596,7 +618,7 @@ This modular approach offers several advantages over monolithic pipelines:
 
 It's important to note that while calling workflows is a bit like calling processes, it's not actually the same thing. You can't, for example, run a workflow N times by calling it with a channel of size N - you would need to pass a channel of size N to the workflow and iterate internally.
 
-Applying these techniques in your own work will enable you to build more sophisticated Nextflow pipelines that can handle complex bioinformatics tasks while remaining maintainable and scalable.
+Applying these techniques in your own work will enable you to build more sophisticated Nextflow pipelines that can handle complex data processing tasks while remaining maintainable and scalable.
 
 ### Key patterns
 
