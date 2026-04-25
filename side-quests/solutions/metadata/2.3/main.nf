@@ -11,8 +11,6 @@ workflow  {
             [[id: row.id, character: row.character], row.recording]
         }
 
-    COWPY(ch_datasheet)
-
     // Run langid to identify the language of each greeting
     IDENTIFY_LANGUAGE(ch_datasheet)
     IDENTIFY_LANGUAGE.out
@@ -34,6 +32,8 @@ workflow  {
         .set { ch_languages }
 
     ch_languages.view()
+
+    COWPY(ch_datasheet)
 
     publish:
     cowpy_art = COWPY.out

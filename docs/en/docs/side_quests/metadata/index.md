@@ -989,7 +989,7 @@ Include the `IDENTIFY_LANGUAGE` process module and call it on the datasheet chan
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="4 16-18"
+    ```groovy title="main.nf" linenums="1" hl_lines="4 14-16"
     #!/usr/bin/env nextflow
 
     include { COWPY } from './modules/cowpy.nf'
@@ -1003,11 +1003,11 @@ Include the `IDENTIFY_LANGUAGE` process module and call it on the datasheet chan
                 [[id: row.id, character: row.character], row.recording]
             }
 
-        COWPY(ch_datasheet)
-
         // Run langid to identify the language of each greeting
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out.view()
+
+        COWPY(ch_datasheet)
     ```
 
 === "Before"
@@ -1082,7 +1082,7 @@ We can create a new meta map to replace the original one using the Groovy `+` op
 
 === "After"
 
-    ```groovy title="main.nf" linenums="13" hl_lines="3-7"
+    ```groovy title="main.nf" linenums="14" hl_lines="3-7"
         // Run langid to identify the language of each greeting
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out
@@ -1094,7 +1094,7 @@ We can create a new meta map to replace the original one using the Groovy `+` op
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="13" hl_lines="3"
+    ```groovy title="main.nf" linenums="14" hl_lines="3"
         // Run langid to identify the language of each greeting
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out.view()
@@ -1265,7 +1265,7 @@ Make the following changes to the workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="13" hl_lines="7-19 21"
+    ```groovy title="main.nf" linenums="14" hl_lines="7-19 21"
         // Run langid to identify the language of each greeting
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out
@@ -1291,7 +1291,7 @@ Make the following changes to the workflow:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="13" hl_lines="7"
+    ```groovy title="main.nf" linenums="14" hl_lines="7"
         // Run langid to identify the language of each greeting
         IDENTIFY_LANGUAGE(ch_datasheet)
         IDENTIFY_LANGUAGE.out
@@ -1380,7 +1380,7 @@ Replace `COWPY(ch_datasheet)` with `COWPY(ch_languages)` and update the `output 
 
 === "After"
 
-    ```groovy title="main.nf" linenums="32" hl_lines="1 7-9"
+    ```groovy title="main.nf" linenums="36" hl_lines="1 7-9"
         COWPY(ch_languages)
 
         publish:
@@ -1396,7 +1396,7 @@ Replace `COWPY(ch_datasheet)` with `COWPY(ch_languages)` and update the `output 
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="32" hl_lines="1 7-9"
+    ```groovy title="main.nf" linenums="36" hl_lines="1 7-9"
         COWPY(ch_datasheet)
 
         publish:
