@@ -181,7 +181,7 @@ workflow {
 
 이 예제에서는 오류 위치를 표시하는 주석을 남겨두었습니다. Nextflow VSCode 확장 프로그램도 불일치하는 중괄호를 빨간색으로 표시하고 파일의 조기 종료를 강조하여 힌트를 제공합니다:
 
-![잘못된 구문](../img/bad_syntax.png)
+![잘못된 구문](img/bad_syntax.png)
 
 **중괄호 오류 디버깅 전략:**
 
@@ -330,7 +330,7 @@ workflow {
 
 오류 컨텍스트의 4번 줄을 보면 문제를 발견할 수 있습니다: 올바른 `input` 지시문 대신 `inputs`를 사용하고 있습니다. Nextflow VSCode 확장 프로그램도 이를 표시합니다:
 
-![잘못된 프로세스 메시지](../img/invalid_process_message.png)
+![잘못된 프로세스 메시지](img/invalid_process_message.png)
 
 #### 코드 수정
 
@@ -748,7 +748,7 @@ workflow {
 
 VSCode 확장 프로그램도 `input_ch` 변수가 workflow 블록 외부에 정의되어 있음을 강조 표시합니다:
 
-![치명적이지 않은 구문 오류](../img/nonlethal.png)
+![치명적이지 않은 구문 오류](img/nonlethal.png)
 
 #### 코드 수정
 
@@ -913,7 +913,7 @@ workflow {
 
 프로세스가 하나의 입력 채널만 정의하는데 여러 입력 채널을 제공하는 `PROCESS_FILES` 호출의 불일치를 확인할 수 있습니다. VSCode 확장 프로그램도 프로세스 호출에 빨간 밑줄을 표시하고, 마우스를 올리면 진단 메시지를 제공합니다:
 
-![잘못된 인자 수 메시지](../img/incorrect_num_args.png)
+![잘못된 인자 수 메시지](img/incorrect_num_args.png)
 
 #### 코드 수정
 

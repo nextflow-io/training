@@ -181,7 +181,7 @@ workflow {
 
 Pour les besoins de cet exemple, nous avons laissé un commentaire pour vous indiquer où se trouve l'erreur. L'extension Nextflow pour VSCode devrait également vous donner des indices sur ce qui pourrait ne pas aller, en affichant l'accolade mal appariée en rouge et en mettant en évidence la fin prématurée du fichier :
 
-![Bad syntax](../img/bad_syntax.png)
+![Bad syntax](img/bad_syntax.png)
 
 **Stratégie de débogage pour les erreurs d'accolades :**
 
@@ -330,7 +330,7 @@ workflow {
 
 En regardant la ligne 4 dans le contexte de l'erreur, nous pouvons repérer le problème : nous utilisons `inputs` au lieu de la directive correcte `input`. L'extension Nextflow pour VSCode signalera également ceci :
 
-![Invalid process message](../img/invalid_process_message.png)
+![Invalid process message](img/invalid_process_message.png)
 
 #### Corriger le code
 
@@ -748,7 +748,7 @@ workflow {
 
 L'extension VSCode mettra également en évidence la variable `input_ch` comme étant définie en dehors du bloc workflow :
 
-![Non-lethal syntax error](../img/nonlethal.png)
+![Non-lethal syntax error](img/nonlethal.png)
 
 #### Corriger le code
 
@@ -913,7 +913,7 @@ workflow {
 
 Vous devriez voir l'appel `PROCESS_FILES` mal assorti, fournissant plusieurs canaux d'entrée alors que le processus n'en définit qu'un. L'extension VSCode soulignera également l'appel du processus en rouge et fournira un message de diagnostic au survol :
 
-![Incorrect number of args message](../img/incorrect_num_args.png)
+![Incorrect number of args message](img/incorrect_num_args.png)
 
 #### Corriger le code
 

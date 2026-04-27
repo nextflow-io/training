@@ -181,7 +181,7 @@ workflow {
 
 Für dieses Beispiel haben wir einen Kommentar hinterlassen, der zeigt, wo der Fehler liegt. Die Nextflow-VSCode-Erweiterung sollte dir ebenfalls Hinweise geben, indem sie die nicht übereinstimmende geschweifte Klammer rot markiert und das vorzeitige Dateiende hervorhebt:
 
-![Bad syntax](../img/bad_syntax.png)
+![Bad syntax](img/bad_syntax.png)
 
 **Debugging-Strategie für Klammerfehler:**
 
@@ -330,7 +330,7 @@ workflow {
 
 In Zeile 4 des Fehlerkontexts sehen wir das Problem: Wir verwenden `inputs` statt der korrekten `input`-Direktive. Die Nextflow-VSCode-Erweiterung wird das ebenfalls markieren:
 
-![Invalid process message](../img/invalid_process_message.png)
+![Invalid process message](img/invalid_process_message.png)
 
 #### Den Code korrigieren
 
@@ -748,7 +748,7 @@ workflow {
 
 Die VSCode-Erweiterung hebt die Variable `input_ch` ebenfalls hervor, da sie außerhalb des workflow-Blocks definiert ist:
 
-![Non-lethal syntax error](../img/nonlethal.png)
+![Non-lethal syntax error](img/nonlethal.png)
 
 #### Den Code korrigieren
 
@@ -913,7 +913,7 @@ workflow {
 
 Du siehst den nicht übereinstimmenden `PROCESS_FILES`-Aufruf, der mehrere Eingabekanäle liefert, obwohl der Prozess nur einen definiert. Die VSCode-Erweiterung unterstreicht den Prozessaufruf ebenfalls rot und zeigt eine Diagnosemeldung beim Darüberfahren mit der Maus:
 
-![Incorrect number of args message](../img/incorrect_num_args.png)
+![Incorrect number of args message](img/incorrect_num_args.png)
 
 #### Den Code korrigieren
 
