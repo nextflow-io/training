@@ -8,13 +8,13 @@ If you're not familiar with the Hello pipeline or you could use a reminder, see 
 
 !!! tip
 
-    This part of the course will introduce two important Nextflow mechanisms that are not covered in the Hello Nextflow introductory course: [meta maps](../side_quests/workflows_of_workflows.md) and [workflows of workflows](../side_quests/metadata.md), which are both covered in detail in the linked Side Quests.
+    This part of the course will introduce two important Nextflow mechanisms that are not covered in the Hello Nextflow introductory course: [meta maps](../side_quests/workflows_of_workflows/) and [workflows of workflows](../side_quests/metadata/), which are both covered in detail in the linked Side Quests.
 
     The instructions below includes the essential information you need in order to understand how these are used in the nf-core context, but it can be a lot to take in at once.
     If you have the time, we recommend working through the two Side Quests first (in no particular order):
 
-    - [Workflows of Workflows](../side_quests/workflows_of_workflows.md)
-    - [Metadata and meta maps](../side_quests/metadata.md)
+    - [Workflows of Workflows](../side_quests/workflows_of_workflows/)
+    - [Metadata and meta maps](../side_quests/metadata/)
 
 !!! note
 

@@ -342,7 +342,7 @@ As you can see, it's a fairly straightforward little script that unzips the file
     The `debug true` directive in the process definition causes Nextflow to print the output from your script (like the line count "40") directly in the execution log.
     Without this, you would only see the process execution status but not the actual output from your script.
 
-    For more information on debugging Nextflow processes, see the [Debugging Nextflow Workflows](debugging.md) side quest.
+    For more information on debugging Nextflow processes, see the [Debugging Nextflow Workflows](../debugging/) side quest.
 
 With the module imported and its code examined, we can call the process from the workflow.
 

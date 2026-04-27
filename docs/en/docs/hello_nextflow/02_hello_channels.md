@@ -626,7 +626,7 @@ Success! Now we can add as many greetings as we like without worrying about outp
     In practice, naming files based on the input data itself is almost always impractical.
     The better way to generate dynamic filenames is to pass metadata to a process along with the input files.
     The metadata is typically provided via a 'sample sheet' or equivalents.
-    You'll learn how to do that later in your Nextflow training (see [Metadata side quest](../side_quests/metadata.md)).
+    You'll learn how to do that later in your Nextflow training (see [Metadata side quest](../side_quests/metadata/)).
 
 ### Takeaway
 

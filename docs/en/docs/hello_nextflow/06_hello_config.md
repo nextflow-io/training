@@ -1616,7 +1616,7 @@ This means that as long as we distribute any test data files with the workflow c
     We can point to URLs for larger files that are stored externally.
     Nextflow will download them automatically as long as there is an open connection.
 
-    For more details, see the Side Quest [Working with Files](../side_quests/working_with_files.md)
+    For more details, see the Side Quest [Working with Files](../side_quests/working_with_files/)
 
 ### 6.3. Use `nextflow config` to see the resolved configuration
 

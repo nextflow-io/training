@@ -617,7 +617,7 @@ We don't expect you to remember everything, but now you know that these features
 
 Apply these IDE skills while working through other training modules, for example:
 
-- **[nf-test](nf-test.md)**: Create comprehensive test suites for your workflows
+- **[nf-test](../nf_test/)**: Create comprehensive test suites for your workflows
 - **[Hello nf-core](../../hello_nf-core/)**: Build production-quality pipelines with community standards
 
 The true power of these IDE features emerges as you work on larger, more complex projects. Start incorporating them into your workflow gradually—within a few sessions, they'll become second nature and transform how you approach Nextflow development.
