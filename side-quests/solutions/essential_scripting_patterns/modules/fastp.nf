@@ -1,7 +1,7 @@
 process FASTP {
     container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-    cpus { meta.depth > 40000000 ? 4 : 2 }
+    cpus { meta.depth > 40000000 ? 2 : 1 }
     memory { 1.GB * task.attempt }
     errorStrategy 'retry'
     maxRetries 2

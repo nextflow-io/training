@@ -1,9 +1,5 @@
-/*
-    * Generate ASCII art with cowpy
-*/
+// Generate ASCII art with cowpy
 process COWPY {
-
-    publishDir "results/", mode: 'copy'
 
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 

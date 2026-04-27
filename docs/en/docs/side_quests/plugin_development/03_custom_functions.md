@@ -348,7 +348,7 @@ Edit `GreetingExtension.groovy` to add `decorateGreeting` after `reverseGreeting
     }
     ```
 
-This function uses Groovy string interpolation (`"*** ${greeting} ***"`) to embed the greeting variable inside a string.
+This function uses Groovy string interpolation (`#!groovy "*** ${greeting} ***"`) to embed the greeting variable inside a string.
 
 Build, install, and update the workflow:
 

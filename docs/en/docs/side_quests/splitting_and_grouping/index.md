@@ -56,6 +56,8 @@ You can set VSCode to focus on this directory:
 code .
 ```
 
+The editor opens with the project directory in focus.
+
 #### Review the materials
 
 You'll find a main workflow file and a `data` directory containing a samplesheet named `samplesheet.csv`.
@@ -91,6 +93,8 @@ For patient A specifically, we have two sets of technical replicates (repeats).
 !!! note
 
     Don't worry if you're not familiar with this experimental design, it's not critical for understanding this tutorial.
+
+With the data contents understood, we can look at what the workflow needs to accomplish.
 
 #### Review the assignment
 
@@ -250,6 +254,8 @@ This is accomplished with the single closure we introduced above:
     .filter { meta, file -> meta.type == 'normal' }
 ```
 
+This filter is chained directly in the channel operation.
+
 ### 2.2. Create separate filtered channels
 
 Currently we're applying the filter to the channel created directly from the CSV, but we want to filter this in more ways than one, so let's re-write the logic to create a separate filtered channel for normal samples:
@@ -346,7 +352,7 @@ nextflow run main.nf
     Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
-We've separated out the normal and tumor samples into two different channels, and used a closure supplied to `view()` to label them differently in the output: `ch_tumor_samples.view{'Tumor sample: ' + it}`.
+We've separated out the normal and tumor samples into two different channels, and used a closure supplied to `view()` to label them differently in the output: `#!groovy ch_tumor_samples.view{'Tumor sample: ' + it}`.
 
 ### Takeaway
 
@@ -805,6 +811,8 @@ nextflow run main.nf
     [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
     ```
 
+Each tuple now contains just the grouping key and the two file paths, with no repeated fields.
+
 ### Takeaway
 
 In this section, you've learned:
@@ -1138,6 +1146,8 @@ Note our data has changed structure and within each channel element the files no
 !!! note
 
     [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) is the opposite of groupTuple. It unpacks the items in a channel and flattens them. Try and add `transpose` and undo the grouping we performed above!
+
+Both directions of the operation — grouping and ungrouping — are now in your toolkit.
 
 ### Takeaway
 

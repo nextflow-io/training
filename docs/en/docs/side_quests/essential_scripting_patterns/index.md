@@ -1,4 +1,4 @@
-# Essential Nextflow Scripting Patterns
+# Essential Scripting Patterns
 
 Nextflow is a programming language that runs on the Java Virtual Machine. While Nextflow is built on [Groovy](http://groovy-lang.org/) and shares much of its syntax, Nextflow is more than just "Groovy with extensions" -- it is a standalone language with a fully-specified [syntax](https://nextflow.io/docs/latest/reference/syntax.html) and [standard library](https://nextflow.io/docs/latest/reference/stdlib.html).
 
@@ -165,7 +165,7 @@ Here's what that map operation looks like:
 
 This is our first **closure** - an anonymous function you can pass as an argument (similar to lambdas in Python or arrow functions in JavaScript). Closures are essential for working with Nextflow operators.
 
-The closure `{ row -> return row }` takes a parameter `row` (could be any name: `item`, `sample`, etc.).
+The closure `#!groovy { row -> return row }` takes a parameter `row` (could be any name: `item`, `sample`, etc.).
 
 When the `.map()` operator processes each channel item, it passes that item to your closure. Here, `row` holds one CSV row at a time.
 
@@ -276,7 +276,7 @@ The ternary operator is a shorthand for an if/else statement that follows the pa
 
 The map addition operator `+` creates a **new map** rather than modifying the existing one. This line creates a new map that contains all the key-value pairs from `sample_meta` plus the new `priority` key.
 
-!!! Note
+!!! note
 
     Never modify maps passed into closures - always create new ones using `+` (for example). In Nextflow, the same data often flows through multiple operations simultaneously. Modifying a map in-place can cause unpredictable side effects when other operations reference that same object. Creating new maps ensures each operation has its own clean copy.
 
@@ -896,7 +896,7 @@ Fix this by adding conditional logic to the `FASTP` process `script:` block. An 
 
 === "After"
 
-    ```groovy title="main.nf" linenums="10" hl_lines="3-27"
+    ```groovy title="main.nf" linenums="10" hl_lines="2-26"
         script:
         // Simple single-end vs paired-end detection
         def is_single = reads instanceof List ? reads.size() == 1 : true
@@ -1001,8 +1001,6 @@ Take a look a the module file `modules/generate_report.nf`:
 ```groovy title="modules/generate_report.nf" linenums="1"
 process GENERATE_REPORT {
 
-    publishDir 'results/reports', mode: 'copy'
-
     input:
     tuple val(meta), path(reads)
 
@@ -1059,7 +1057,7 @@ Include the process in your `main.nf` and add it to the workflow:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="1 10-29"
+    ```groovy title="main.nf" linenums="1" hl_lines="1 28"
     include { FASTP } from './modules/fastp.nf'
 
     workflow {
@@ -1126,7 +1124,7 @@ But what if we want to add information about when and where the processing occur
         """
     ```
 
-If you run this, you'll notice an error - Nextflow tries to interpret `${USER}` as a Nextflow variable that doesn't exist.
+If you run this, you'll notice an error - Nextflow tries to interpret `#!groovy ${USER}` as a Nextflow variable that doesn't exist.
 
 ??? failure "Command output"
 
@@ -1177,9 +1175,9 @@ In this section, you've learned **string processing** techniques:
 - **Regular expressions for file parsing**: Using the `=~` operator and regex patterns (`~/pattern/`) to extract metadata from complex file naming conventions
 - **Dynamic script generation**: Using conditional logic (if/else, ternary operators) to generate different script strings based on input characteristics
 - **Variable interpolation**: Understanding when Nextflow interprets strings vs when the shell does
-  - `${var}` - Nextflow variables (interpolated by Nextflow at workflow compile time)
-  - `\${var}` - Shell environment variables (escaped, passed to bash at runtime)
-  - `\$(cmd)` - Shell command substitution (escaped, executed by bash at runtime)
+  - `#!groovy ${var}` - Nextflow variables (interpolated by Nextflow at workflow compile time)
+  - `#!groovy \${var}` - Shell environment variables (escaped, passed to bash at runtime)
+  - `#!groovy \$(cmd)` - Shell command substitution (escaped, executed by bash at runtime)
 
 These string processing and generation patterns are essential for handling the diverse file formats and naming conventions you'll encounter in real-world bioinformatics workflows.
 
@@ -1344,7 +1342,7 @@ Currently, our FASTP process uses default resources. Let's make it smarter by al
         tuple val(meta), path(reads)
     ```
 
-The closure `{ meta.depth > 40000000 ? 2 : 1 }` uses the **ternary operator** (covered in Section 1.1) and is evaluated for each task, allowing per-sample resource allocation. High-depth samples (>40M reads) get 2 CPUs, while others get 1 CPU.
+The closure `#!groovy { meta.depth > 40000000 ? 2 : 1 }` uses the **ternary operator** (covered in Section 1.1) and is evaluated for each task, allowing per-sample resource allocation. High-depth samples (>40M reads) get 2 CPUs, while others get 1 CPU.
 
 !!! note "Accessing Input Variables in Directives"
 
@@ -1378,7 +1376,7 @@ cat work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.run | grep "docker run"
 You should see something like:
 
 ```bash title="docker command"
-    docker run -i --cpu-shares 4096 --memory 2048m -e "NXF_TASK_WORKDIR" -v /workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690 /bin/bash -ue /workspaces/training/side-quests/essential_scripting_patterns/work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.sh
+    docker run -i --cpu-shares 2048 --memory 2048m -e "NXF_TASK_WORKDIR" -v /workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690 /bin/bash -ue /workspaces/training/side-quests/essential_scripting_patterns/work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.sh
 ```
 
 In this example we've chosen an example that requested 2 CPUs (`--cpu-shares 2048`), because it was a high-depth sample, but you should see different CPU allocations depending on the sample depth. Try this for the other tasks as well.
@@ -1393,7 +1391,7 @@ Another powerful pattern is using `task.attempt` for retry strategies. To show w
     process FASTP {
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-        cpus { meta.depth > 40000000 ? 4 : 2 }
+        cpus { meta.depth > 40000000 ? 2 : 1 }
         memory 1.GB
 
         input:
@@ -1406,7 +1404,7 @@ Another powerful pattern is using `task.attempt` for retry strategies. To show w
     process FASTP {
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-        cpus { meta.depth > 40000000 ? 4 : 2 }
+        cpus { meta.depth > 40000000 ? 2 : 1 }
         memory 2.GB
 
         input:
@@ -1432,7 +1430,7 @@ nextflow run main.nf
       Detecting adapter sequence for read1...
       No adapter detected for read1
 
-      .command.sh: line 7:   101 Killed                  fastp --in1 SAMPLE_002_S2_L001_R1_001.fastq --out1 sample_002_trimmed.fastq.gz --json sample_002.fastp.json --html sample_002.fastp.html --thread 2
+      .command.sh: line 7:   101 Killed                  fastp --in1 SAMPLE_002_S2_L001_R1_001.fastq --out1 sample_002_trimmed.fastq.gz --json sample_002.fastp.json --html sample_002.fastp.html --thread 1
     ```
 
 This indicates that the process was killed for exceeding memory limits.
@@ -1447,7 +1445,7 @@ To make our workflow more robust, we can implement a retry strategy that increas
     process FASTP {
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-        cpus { meta.depth > 40000000 ? 4 : 2 }
+        cpus { meta.depth > 40000000 ? 2 : 1 }
         memory { 1.GB * task.attempt }
         errorStrategy 'retry'
         maxRetries 2
@@ -1462,7 +1460,7 @@ To make our workflow more robust, we can implement a retry strategy that increas
     process FASTP {
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-        cpus { meta.depth > 40000000 ? 4 : 2 }
+        cpus { meta.depth > 40000000 ? 2 : 1 }
         memory 2.GB
 
         input:

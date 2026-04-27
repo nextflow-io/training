@@ -1,9 +1,10 @@
 #!/usr/bin/env nextflow
 
+include { COWPY } from './modules/cowpy.nf'
 include { IDENTIFY_LANGUAGE } from './modules/langid.nf'
 
-workflow {
-
+workflow  {
+    main:
     ch_datasheet = channel.fromPath("./data/datasheet.csv")
         .splitCsv(header: true)
         .map { row ->
@@ -16,17 +17,15 @@ workflow {
         .map { meta, file, lang_id ->
             [meta + [lang: lang_id], file]
         }
-        .map { meta, file ->
-
-            def lang_group = "unknown"
-            if (meta.lang.equals("de") || meta.lang.equals('en')) {
-                lang_group = "germanic"
-            }
-            else if (meta.lang in ["fr", "es", "it"]) {
-                lang_group = "romance"
-            }
-
-            [meta + [lang_group: lang_group], file]
-        }
         .view()
+
+    COWPY(ch_datasheet)
+
+    publish:
+    cowpy_art = COWPY.out
+}
+
+output {
+    cowpy_art {
+    }
 }

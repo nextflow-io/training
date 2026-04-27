@@ -2,8 +2,6 @@
  * Use a text manipulation tool to reverse the text in a file
  */
 process REVERSE_TEXT {
-    publishDir 'results', mode: 'copy'
-
     tag "reversing ${input_file}"
 
     input:

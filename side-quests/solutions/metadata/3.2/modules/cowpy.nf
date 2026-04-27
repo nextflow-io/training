@@ -1,21 +1,16 @@
-/*
-    * Generate ASCII art with cowpy
-*/
+// Generate ASCII art with cowpy
 process COWPY {
-
-    publishDir "results/", mode: 'copy'
 
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
     input:
-    path input_file
-    val character
+    tuple val(meta), val(character), path(input_file)
 
     output:
-    path "cowpy-${input_file}"
+    tuple val(meta), path("${meta.lang}-${input_file}")
 
     script:
     """
-    cat ${input_file} | cowpy -c ${character} > cowpy-${input_file}
+    cat ${input_file} | cowpy -c ${character} > ${meta.lang}-${input_file}
     """
 }

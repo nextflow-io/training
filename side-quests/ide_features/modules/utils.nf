@@ -1,5 +1,4 @@
 process MULTIQC {
-    publishDir "${params.output}/multiqc", mode: 'copy'
     container 'biocontainers/multiqc:1.13_cv1'
     cpus 2
     memory '4.GB'
@@ -28,7 +27,6 @@ process MULTIQC {
 }
 
 process CUSTOM_DUMPSOFTWAREVERSIONS {
-    publishDir "${params.output}/pipeline_info", mode: 'copy'
 
     input:
     path versions

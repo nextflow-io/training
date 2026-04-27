@@ -1,4 +1,4 @@
-# File input processing
+# File Input Processing
 
 Scientific analysis workflows often involve processing large numbers of files.
 Nextflow provides powerful tools to handle files efficiently, helping you organize and process your data with minimal code.
@@ -53,6 +53,8 @@ You can set VSCode to focus on this directory:
 ```bash
 code .
 ```
+
+The editor opens with the project directory in focus.
 
 #### Review the materials
 
@@ -129,11 +131,19 @@ Take a look at the workflow file `main.nf`:
 #!/usr/bin/env nextflow
 
 workflow {
-
+    main:
     // Create a Path object from a string path
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
     println "${myFile} is of class ${myFile.class}"
+
+    publish:
+    analysis_results = channel.empty()
+}
+
+output {
+    analysis_results {
+    }
 }
 ```
 
@@ -157,7 +167,7 @@ nextflow run main.nf
 
     Launching `main.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
 
-    data/patientA_rep1_normal_R1_001.fastq.gz is of class java.lang.String
+    data/patientA_rep1_normal_R1_001.fastq.gz is of class class java.lang.String
     ```
 
 As you can see, Nextflow printed the string path exactly as we wrote it.
@@ -225,6 +235,8 @@ As we'll see later, remote files will have different class names (such as `nextf
 
     Think of it like this: a path string is like writing an address on paper, while a Path object is like having the address loaded in a GPS device that knows how to navigate to there and can tell you details about the journey.
 
+Understanding this difference is key to using file operations correctly in Nextflow.
+
 ### 1.3. Access file attributes
 
 Why is this helpful? Well, now that Nextflow understands that `myFile` is a Path object and not just a string, we can access the various attributes of the Path object.
@@ -267,7 +279,7 @@ nextflow run main.nf
 
     Launching `main.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48
 
-    File object class: sun.nio.fs.UnixPath
+    File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
     Simple name: patientA_rep1_normal_R1_001
     Extension: gz
@@ -308,8 +320,6 @@ To use the process in the workflow, you just need to add an include statement be
 You can open the module file to examine its code:
 
 ```groovy title="modules/count_lines.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 process COUNT_LINES {
     debug true
 
@@ -333,6 +343,8 @@ As you can see, it's a fairly straightforward little script that unzips the file
     Without this, you would only see the process execution status but not the actual output from your script.
 
     For more information on debugging Nextflow processes, see the [Debugging Nextflow Workflows](debugging.md) side quest.
+
+With the module imported and its code examined, we can call the process from the workflow.
 
 #### 1.4.2. Add a call to `COUNT_LINES`
 
@@ -504,7 +516,7 @@ Make the following edit to the module:
 
 === "After"
 
-    ```groovy title="modules/count_lines.nf" linenums="3" hl_lines="5"
+    ```groovy title="modules/count_lines.nf" linenums="1" hl_lines="5"
     process COUNT_LINES {
         debug true
 
@@ -514,7 +526,7 @@ Make the following edit to the module:
 
 === "Before"
 
-    ```groovy title="modules/count_lines.nf" linenums="3" hl_lines="5"
+    ```groovy title="modules/count_lines.nf" linenums="1" hl_lines="5"
     process COUNT_LINES {
         debug true
 
@@ -598,6 +610,8 @@ Taken together, these two examples show you how important it is to tell Nextflow
 !!! note
 
     Make sure to go back and fix both intentional errors before continuing to the next section.
+
+With both fixes applied, the workflow correctly stages and processes the input file.
 
 ### Takeaway
 
@@ -777,6 +791,8 @@ We're going to go back to using our local example files for the rest of this sid
         println "Parent directory: ${myFile.parent}"
     ```
 
+The workflow is now back to using the local input file.
+
 ### Takeaway
 
 - Remote data is accessed using a URI (HTTP, FTP, S3, Azure, Google Cloud)
@@ -924,7 +940,7 @@ nextflow run main.nf
 
     executor >  local (1)
     [9d/6701a6] COUNT_LINES (1) [100%] 1 of 1 ✔
-    File object class: sun.nio.fs.UnixPath
+    File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
     Simple name: patientA_rep1_normal_R1_001
     Extension: gz
@@ -1568,18 +1584,14 @@ Make the following edit to the workflow:
 You can open the module file to examine its code:
 
 ```groovy title="modules/analyze_reads.nf - process example" linenums="1"
-#!/usr/bin/env nextflow
-
 process ANALYZE_READS {
     tag { meta.id }
-
-    publishDir { "results/${meta.id}" }, mode: 'copy'
 
     input:
     tuple val(meta), path(files)
 
     output:
-    tuple val(meta.id), path("${meta.id}_stats.txt")
+    tuple val(meta), path("${meta.id}_stats.txt")
 
     script:
     """
@@ -1596,14 +1608,15 @@ process ANALYZE_READS {
 
 !!! note
 
-    The `tag` and `publishDir` directives use closure syntax (`{ ... }`) instead of string interpolation (`"${...}"`).
-    This is because these directives reference input variables (`meta`) that aren't available until runtime.
-    The closure syntax defers evaluation until the process actually runs.
+    The `tag` directive uses closure syntax (`{ ... }`) because it references input variables (`meta`) that aren't available until the process runs.
+    The closure defers evaluation until runtime.
 
 !!! note
 
     We are calling our metadata map `meta` by convention.
     For a deeper dive into meta maps, see the [Metadata and meta maps](../metadata/) side quest.
+
+With the `ANALYZE_READS` process imported and its code reviewed, we can add a call to it in the workflow.
 
 ### 6.2. Call the process in the workflow
 
@@ -1662,7 +1675,6 @@ In the main workflow, replace the `.view()` operator with `.set { ch_samples }`,
            ]
         }
         .view()
-    }
     ```
 
 Let's run this:
@@ -1689,19 +1701,79 @@ Now let's actually call the `ANALYZE_READS` process on the `ch_samples` channel.
 
 In the main workflow, make the following code changes:
 
+1. Refactor the channel setup: change `ch_files.map {}` to `ch_samples = ch_files.map {}` (direct assignment, removing the `.set` operator) and use `tuple()` instead of `[]`
+2. Replace the `.view()` call with a call to `ANALYZE_READS(ch_samples)`
+3. Replace `channel.empty()` with `ANALYZE_READS.out` in the `publish:` section
+4. Add a `path` closure to the `output {}` block
+
 === "After"
 
-    ```groovy title="main.nf" linenums="23"
+    ```groovy title="main.nf" linenums="5" hl_lines="5 7 14 17 18 21 26"
+    workflow {
+        main:
+        // Load files with channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_samples = ch_files.map { id,  files ->
+           def (sample, replicate, type, readNum) = id.tokenize('_')
+           tuple(
+               [
+                   id: sample,
+                   replicate: replicate.replace('rep', ''),
+                   type: type
+               ],
+               files
+           )
+        }
+
         // Run the analysis
         ANALYZE_READS(ch_samples)
+
+        publish:
+        analysis_results = ANALYZE_READS.out
+    }
+
+    output {
+        analysis_results {
+            path { meta, file -> "${meta.id}" }
+        }
+    }
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="23"
+    ```groovy title="main.nf" linenums="5"
+    workflow {
+        main:
+        // Load files with channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_files.map { id,  files ->
+           def (sample, replicate, type, readNum) = id.tokenize('_')
+           [
+               [
+                   id: sample,
+                   replicate: replicate.replace('rep', ''),
+                   type: type
+               ],
+               files
+           ]
+        }
+            .set { ch_samples }
+
         // Temporary: peek into ch_samples
         ch_samples.view()
+
+        publish:
+        analysis_results = channel.empty()
+    }
+
+    output {
+        analysis_results {
+        }
+    }
     ```
+
+The `path` closure in the `output {}` block receives each output element and determines the subdirectory structure.
+Here we use `meta.id` to organize results by patient.
 
 Let's run this:
 
@@ -1720,7 +1792,7 @@ nextflow run main.nf
     [b5/110360] process > ANALYZE_READS (patientA) [100%] 1 of 1 ✔
     ```
 
-This process is set up to publish its outputs to a `results` directory, so have a look in there.
+The outputs are published to a `results` directory, so have a look in there.
 
 ??? abstract "Directory and file contents"
 
@@ -1809,18 +1881,22 @@ We are overwriting the output file each time.
 
 Since we have access to the patient metadata, we can use it to make the published files unique by including differentiating metadata, either in the directory structure or in the filenames themselves.
 
-Make the following change to the workflow:
+Make the following change to the `output {}` block:
 
 === "After"
 
-    ```groovy title="modules/analyze_reads.nf" linenums="6"
-        publishDir { "results/${meta.type}/${meta.id}/${meta.replicate}" }, mode: 'copy'
+    ```groovy title="main.nf" hl_lines="3"
+    analysis_results {
+        path { meta, file -> "${meta.type}/${meta.id}/${meta.replicate}" }
+    }
     ```
 
 === "Before"
 
-    ```groovy title="modules/analyze_reads.nf" linenums="6"
-        publishDir { "results/${meta.id}" }, mode: 'copy'
+    ```groovy title="main.nf" hl_lines="3"
+    analysis_results {
+        path { meta, file -> "${meta.id}" }
+    }
     ```
 
 Here we show the option of using additional directory levels to account for sample types and replicates, but you could experiment with doing it at the filename level as well.
@@ -1888,7 +1964,7 @@ You can learn more about this in the [Metadata and meta maps](../metadata/) side
 
 ### Takeaway
 
-- The `publishDir` directive can organize outputs based on metadata values
+- The `output {}` block can organize outputs based on metadata values using dynamic path closures
 - Metadata in tuples enables structured organization of results
 - This approach creates maintainable workflows with clear data provenance
 - Processes can take tuples of metadata and files as input
@@ -1996,24 +2072,23 @@ Applying these techniques in your own work will enable you to build more efficie
     ch_pairs = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
     ```
 
-6.  **Using File Operations in Processes:** We integrated file operations into Nextflow processes with proper input handling, using `publishDir` to organize outputs based on metadata.
+6.  **Using File Operations in Processes:** We integrated file operations into Nextflow processes with proper input handling, using the `output {}` block to organize outputs based on metadata.
 
     - Associate a meta map with the process inputs
 
     ```groovy
     ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
-    ch_files.map { id,  files ->
+    ch_samples = ch_files.map { id,  files ->
         def (sample, replicate, type, readNum) = id.tokenize('_')
-        [
+        tuple(
             [
                 id: sample,
                 replicate: replicate.replace('rep', ''),
                 type: type
             ],
-             files
-        ]
+            files
+        )
     }
-        .set { ch_samples }
 
     ANALYZE_READS(ch_samples)
     ```
@@ -2021,7 +2096,11 @@ Applying these techniques in your own work will enable you to build more efficie
     - Organize outputs based on metadata
 
     ```groovy
-    publishDir { "results/${meta.type}/${meta.id}/${meta.replicate}" }, mode: 'copy'
+    output {
+        analysis_results {
+            path { meta, file -> "${meta.type}/${meta.id}/${meta.replicate}" }
+        }
+    }
     ```
 
 ### Additional resources

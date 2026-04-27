@@ -283,7 +283,6 @@ Efficient navigation is crucial when working with complex workflows spanning mul
     ```groovy title="basic_workflow.nf" linenums="3"
     process FASTQC {
         tag "${sample_id}"
-        publishDir "${params.output_dir}/fastqc", mode: 'copy'
 
         input:
         tuple val(sample_id), path(reads)
@@ -417,13 +416,13 @@ This is invaluable when:
 
 Sometimes you need to find where specific patterns are used across your entire project. Press `Ctrl/Cmd+Shift+F` to open the search panel.
 
-Try searching for `publishDir` across the workspace:
+Try searching for `container` across the workspace:
 
 ![Project search](img/project_search.png)
 
-This shows you every file that uses publish directories, helping you:
+This shows you every file that uses the container directive, helping you:
 
-- Understand output organization patterns
+- Understand which processes use containers
 - Find examples of specific directives
 - Ensure consistency across modules
 

@@ -1,4 +1,4 @@
-# Debugging Workflows
+# Troubleshooting Workflows
 
 Debugging is a critical skill that can save you hours of frustration and help you become a more effective Nextflow developer. Throughout your career, especially when you're starting out, you'll encounter bugs while building and maintaining your workflows. Learning systematic debugging approaches will help you identify and resolve issues quickly.
 
@@ -468,7 +468,7 @@ workflow {
 }
 ```
 
-The error message indicates that the variable is not recognized in the script template, and there you go- you should be able to see `${undefined_var}` used in the script block, but not defined elsewhere.
+The error message indicates that the variable is not recognized in the script template, and there you go- you should be able to see `#!groovy ${undefined_var}` used in the script block, but not defined elsewhere.
 
 #### Fix the code
 
@@ -484,7 +484,7 @@ If you get a 'No such variable' error, you can fix it by either defining the var
         val sample_name
 
         output:
-        path "${sample_name}_output.txt"
+        path "${sample_name}_processed.txt"
 
         script:
         // Define variables in Groovy code before the script
@@ -578,7 +578,7 @@ nextflow run bad_bash_var.nf
 
 #### Check the code
 
-The error points to line 13 where `${prefix}` is used. Let's examine `bad_bash_var.nf` to see what's causing the issue:
+The error points to line 13 where `#!groovy ${prefix}` is used. Let's examine `bad_bash_var.nf` to see what's causing the issue:
 
 ```groovy title="bad_bash_var.nf" hl_lines="13" linenums="1"
 #!/usr/bin/env nextflow
@@ -598,7 +598,7 @@ process PROCESS_FILES {
 }
 ```
 
-In this example, we're defining the `prefix` variable in Bash, but in a Nexflow process the `$` syntax we used to refer to it (`${prefix}`) is interpreted as a Groovy variable, not Bash. The variable doesn't exist in the Groovy context, so we get a 'no such variable' error.
+In this example, we're defining the `prefix` variable in Bash, but in a Nexflow process the `$` syntax we used to refer to it (`#!groovy ${prefix}`) is interpreted as a Groovy variable, not Bash. The variable doesn't exist in the Groovy context, so we get a 'no such variable' error.
 
 #### Fix the code
 
@@ -1728,7 +1728,7 @@ process PROCESS_FILES {
 
     script:
     """
-    sleep 1  // Takes 1 second, but time limit is 1ms
+    sleep 1  # Takes 1 second, but time limit is 1ms
     cowpy ${sample_name} > ${sample_name}_output.txt
     """
 }
@@ -1776,7 +1776,7 @@ Increase the time limit to a realistic value:
 
         script:
         """
-        sleep 1  // Takes 1 second, but time limit is 1ms
+        sleep 1  # Takes 1 second, but time limit is 1ms
         cowpy ${sample_name} > ${sample_name}_output.txt
         """
     }
@@ -2415,7 +2415,7 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         ```
         **Fix:** Take the output from the previous process
         ```groovy linenums="88"
-        handleFiles(heavyProcess.out)
+        file_ch = handleFiles(heavy_ch)
         ```
 
         With that, the whole workflow should run.
@@ -2439,7 +2439,6 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         * Process with input/output mismatch
         */
         process processFiles {
-            publishDir "${params.output}/processed", mode: 'copy'
 
             input:
                 tuple val(sample_id), path(input_file)
@@ -2458,7 +2457,6 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         * Process with resource issues
         */
         process heavyProcess {
-            publishDir "${params.output}/heavy", mode: 'copy'
 
             time '100 s'
 
@@ -2481,7 +2479,6 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         * Process with file handling issues
         */
         process handleFiles {
-            publishDir "${params.output}/files", mode: 'copy'
 
             input:
                 path input_file
@@ -2501,7 +2498,7 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         * Main workflow with channel issues
         */
         workflow {
-
+            main:
             // Channel with incorrect usage
             input_ch = channel
                 .fromPath(params.input)
@@ -2512,7 +2509,24 @@ Now it's time to put the systematic debugging approach into practice. The workfl
 
             heavy_ch = heavyProcess(input_ch.map{it[0]})
 
-            handleFiles(heavyProcess.out)
+            file_ch = handleFiles(heavy_ch)
+
+            publish:
+            processed = processed_ch
+            heavy = heavy_ch
+            files = file_ch
+        }
+
+        output {
+            processed {
+                path 'processed'
+            }
+            heavy {
+                path 'heavy'
+            }
+            files {
+                path 'files'
+            }
         }
         ```
 

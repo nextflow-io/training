@@ -57,7 +57,7 @@ Use this checklist when reviewing a specific lesson file.
 
 See CLAUDE.md for full guidelines.
 
-- [ ] No LLM-style interjections ("Let's", "Remember when...?", "Don't worry")
+- [ ] No LLM-style interjections ("Remember when...?", "Don't worry") — "Let's" is acceptable in tutorial prose
 - [ ] No exclamation-based emphasis ("Much faster!", "So powerful!")
 - [ ] Em-dash elaborations replaced with periods or semicolons
 - [ ] List explanations use colons, not hyphens

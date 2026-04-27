@@ -1,6 +1,5 @@
 process STAR_ALIGN {
     tag "${sample_id}"
-    publishDir "${params.output}/alignments", mode: 'copy'
     container 'biocontainers/star:2.7.10a_cv1'
     cpus 8
     memory '32.GB'
