@@ -560,7 +560,7 @@ Add variables for the accessory file paths inside the workflow block:
     ```
 
 The `file()` syntax tells Nextflow explicitly to handle these inputs as file paths.
-You can learn more about this in the Side Quest [Working with files](../../side_quests/working_with_files/).
+You can learn more about this in the Side Quest [Working with files](../../side_quests/working_with_files/index.md).
 
 ### 2.2. Write the variant calling process and call it in the workflow
 
