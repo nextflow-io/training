@@ -547,7 +547,7 @@ withName: 'COWPY' {
 }
 ```
 
-The `withName:` syntax assigns this configuration to the `COWPY` process only, and `ext.args = { "-c ${params.character}" }` simply composes a string that will include the value of the `character` parameter.
+The `withName:` syntax assigns this configuration to the `COWPY` process only, and `#!groovy ext.args = { "-c ${params.character}" }` simply composes a string that will include the value of the `character` parameter.
 Note the use of curly braces, which tell Nextflow to evaluate the value of the parameter at runtime.
 
 Makes sense? Let's add it in.
@@ -786,14 +786,14 @@ Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and modify i
 
 You can see we made three changes.
 
-1. **In the `script:` block, we added the line `prefix = task.ext.prefix ?: "${meta.id}"`.**
+1. **In the `script:` block, we added the line `#!groovy prefix = task.ext.prefix ?: "${meta.id}"`.**
    That line uses the `?:` operator to determine the value of the `prefix` variable: the content of `task.ext.prefix` if it is not empty, or the identifier from the metamap (`meta.id`) if it is.
    Note that while we generally refer to `ext.prefix`, this code must reference `task.ext.prefix` to pull out the module-level `ext.prefix` configuration.
 
-2. **In the command line, we replaced `cowpy-${input_file}` with `${prefix}.txt`.**
+2. **In the command line, we replaced `#!groovy cowpy-${input_file}` with `#!groovy ${prefix}.txt`.**
    This is where Nextflow will inject the value of `prefix` determined by the line above.
 
-3. **In the `output:` block, we replaced `path("cowpy-${input_file}")` with `path("${prefix}.txt")`.**
+3. **In the `output:` block, we replaced `#!groovy path("cowpy-${input_file}")` with `#!groovy path("${prefix}.txt")`.**
    This simply reiterates what the file path will be according to what is written in the command line.
 
 As a result, the output file name is now constructed using a sensible default (the identifier from the metamap) combined with the appropriate file format extension.
@@ -1079,7 +1079,7 @@ This may look complicated, so let's look at each of the three components:
 - **`path:`** Determines the output directory based on the process name.
   The full name of a process contained in `task.process` includes the hierarchy of workflow and module imports (such as `CORE_HELLO:HELLO:FIND_CONCATENATE`).
   The `tokenize` operations strip away that hierarchy to get just the process name, then take the first part before any underscore (if applicable), and convert it to lowercase.
-  This is what determines that the results of `FIND_CONCATENATE` get published to `${params.outdir}/find/`.
+  This is what determines that the results of `FIND_CONCATENATE` get published to `#!groovy ${params.outdir}/find/`.
 - **`mode:`** Controls how files are published (copy, symlink, etc.).
   This is configurable via the `params.publish_dir_mode` parameter.
 - **`saveAs:`** Filters which files to publish.
@@ -1449,10 +1449,10 @@ Update the input and output blocks:
 This specifies:
 
 - The input file parameter name (`input_file` instead of generic `input`)
-- The output filename using the configurable prefix pattern (`${prefix}.txt` instead of wildcard `*`)
+- The output filename using the configurable prefix pattern (`#!groovy ${prefix}.txt` instead of wildcard `*`)
 - A descriptive emit name (`cowpy_output` instead of generic `output`)
 
-If you're using the Nextflow language server to validate syntax, the `${prefix}` part will be flagged as an error at this stage because we haven't added it to the script block yet.
+If you're using the Nextflow language server to validate syntax, the `#!groovy ${prefix}` part will be flagged as an error at this stage because we haven't added it to the script block yet.
 Let's get to that now.
 
 #### 2.3.2. The script block
@@ -1488,7 +1488,7 @@ Based on the module we wrote manually earlier, we should make the following edit
 Key changes:
 
 - Change `def prefix` to just `prefix` (without `def`) to make it accessible in the output block
-- Fill in the actual `cowpy` command that uses both `$args` and `${prefix}.txt`
+- Fill in the actual `cowpy` command that uses both `$args` and `#!groovy ${prefix}.txt`
 
 Note that if we hadn't already done the work of adding the `ext.args` and `ext.prefix` configuration for the `COWPY` process to the `modules.config` file, we would need to do that now.
 
@@ -1529,7 +1529,7 @@ Key changes:
 
 - Change `def prefix` to just `prefix` to match the script block
 - Remove the `echo $args` line (which was just template placeholder code)
-- The stub creates an empty `${prefix}.txt` file matching what the script block produces
+- The stub creates an empty `#!groovy ${prefix}.txt` file matching what the script block produces
 
 This allows you to test workflow logic and file handling without waiting for the actual tool to run.
 

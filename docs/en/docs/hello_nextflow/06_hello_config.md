@@ -41,7 +41,7 @@ By learning to utilize these configuration options effectively, you can enhance 
 We're going to use the workflow script `hello-config.nf` as a starting point.
 It is equivalent to the script produced by working through Part 5 of this training course, except we've changed the output destinations:
 
-```groovy title="hello-config.nf" linenums="37" hl_lines="3 7 11 15"
+```groovy title="hello-config.nf" linenums="37" hl_lines="3 7 11 15 19"
 output {
     first_output {
         path 'hello_config/intermediates'
@@ -743,7 +743,7 @@ Let's put that back, and also put the files in a `params.batch` subdirectory.
 
     Including `params.batch` in the output block `path`, instead of the `outputDir` config, means that it won't be overwritten with `-output-dir` on the CLI.
 
-First, update the config file to remove `${params.batch}` from `outputDir` (since we're moving it to the path declarations):
+First, update the config file to remove `#!groovy ${params.batch}` from `outputDir` (since we're moving it to the path declarations):
 
 === "After"
 

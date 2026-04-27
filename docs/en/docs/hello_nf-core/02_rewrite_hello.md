@@ -1561,8 +1561,8 @@ Now we can update the `test.config` file as follows:
 
 Key points:
 
-- **Using `${projectDir}`**: This is a Nextflow implicit variable that points to the directory where the main workflow script is located (the pipeline root). Using it ensures the path works regardless of where the pipeline is run from.
-- **Absolute paths**: By using `${projectDir}`, we create an absolute path, which is important for test data that ships with the pipeline.
+- **Using `#!groovy ${projectDir}`**: This is a Nextflow implicit variable that points to the directory where the main workflow script is located (the pipeline root). Using it ensures the path works regardless of where the pipeline is run from.
+- **Absolute paths**: By using `#!groovy ${projectDir}`, we create an absolute path, which is important for test data that ships with the pipeline.
 - **Test data location**: nf-core pipelines typically store test data in the `assets/` directory within the pipeline repository for small test files, or reference external test datasets for larger files.
 
 And while we're at it, let's tighten the default resource limits to ensure this will run on very basic machines (like the minimal VMs in Github Codespaces):
