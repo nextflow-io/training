@@ -563,7 +563,7 @@ In the `output` block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="82" hl_lines="9-12"
+    ```groovy title="hello-workflow.nf" linenums="82" hl_lines="10-13"
     output {
         first_output {
             path 'hello_workflow'

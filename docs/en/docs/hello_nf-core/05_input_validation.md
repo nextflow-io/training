@@ -625,7 +625,7 @@ Now update the channel creation code:
 
 Let's break down what changed:
 
-1. **`samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")`**: Validates the input file against our schema and returns a list
+1. **`#!groovy samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")`**: Validates the input file against our schema and returns a list
 2. **`channel.fromList(...)`**: Converts the list into a Nextflow channel
 
 This completes the implementation of input data validation using `samplesheetToList` and JSON schemas.

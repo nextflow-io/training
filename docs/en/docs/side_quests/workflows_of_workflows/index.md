@@ -290,7 +290,7 @@ The solution is an entry workflow in `main.nf` that imports and calls `GREETING_
 
 ### 1.3. Update and test the main workflow
 
-Now , let's update the main workflow to call the greeting workflow.
+Now let's update the main workflow to call the greeting workflow.
 
 #### 1.3.1. Include the greeting workflow and call it
 
@@ -492,7 +492,7 @@ The transform workflow is now composable and ready to be imported into the main 
 
 ### 2.3. Update and test the main workflow
 
-Now , let's update the main workflow to call the transformation workflow.
+Now let's update the main workflow to call the transformation workflow.
 
 #### 2.3.1. Include the transformation workflow and call it
 

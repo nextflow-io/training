@@ -212,7 +212,7 @@ nextflow run hello-world.nf
 
 ??? success "Command output"
 
-    ```console hl_lines="7"
+    ```console hl_lines="6"
     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479

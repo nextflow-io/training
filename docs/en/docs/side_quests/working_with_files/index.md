@@ -1634,7 +1634,7 @@ In order to feed the remapped contents to the `ANALYZE_READS` process (and do so
 
 We can do that using the [`set`](https://www.nextflow.io/docs/latest/reference/operator.html#set) operator.
 
-In the main workflow, replace the `.view()` operator with `.set { ch_samples }`, and add a line testing that we can refer to the channel by name.
+In the main workflow, replace the `.view()` operator with `#!groovy .set { ch_samples }`, and add a line testing that we can refer to the channel by name.
 
 === "After"
 

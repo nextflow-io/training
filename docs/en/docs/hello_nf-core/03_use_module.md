@@ -487,7 +487,7 @@ This is the relevant code:
 prefix = task.ext.prefix ?: "${meta.id}${file_extensions[0]}"
 ```
 
-This translates roughly as follows: if a `prefix` is provided via the external task parameter system (`task.ext`), use that to name the output file; otherwise create one using `${meta.id}`, which corresponds to the `id` field in the metamap.
+This translates roughly as follows: if a `prefix` is provided via the external task parameter system (`task.ext`), use that to name the output file; otherwise create one using `#!groovy ${meta.id}`, which corresponds to the `id` field in the metamap.
 
 You can imagine the input channel coming into this module with contents like this:
 

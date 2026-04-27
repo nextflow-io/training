@@ -227,7 +227,7 @@ Add this tiny line to the workflow block:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="6"
     workflow {
 
         main:
@@ -912,7 +912,7 @@ In the workflow block, make the following code change:
     }
     ```
 
-You see we've added a second `.view` statement, and for each of them, we've replaced the empty parentheses (`()`) with curly braces containing some code, such as `{ greeting -> "Before flatten: $greeting" }`.
+You see we've added a second `.view` statement, and for each of them, we've replaced the empty parentheses (`()`) with curly braces containing some code, such as `#!groovy { greeting -> "Before flatten: $greeting" }`.
 
 These are called _closures_. The code they contain will be executed for each item in the channel.
 We define a temporary variable for the inner value, here called `greeting` (but it could be any arbitrary name), which is only used within the scope of that closure.
@@ -1022,7 +1022,7 @@ Make the following edit to the parameter declaration:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
+    ```groovy title="hello-channels.nf" linenums="20" hl_lines="4"
     /*
      * Pipeline parameters
      */
@@ -1092,7 +1092,7 @@ nextflow run hello-channels.nf
 
 ??? failure "Command output"
 
-    ```console hl_lines="5 6 9 14"
+    ```console hl_lines="5 6 9 15"
      N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-channels.nf` [peaceful_poisson] DSL2 - revision: a286c08ad5

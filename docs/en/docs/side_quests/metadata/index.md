@@ -1158,8 +1158,8 @@ For a more detailed explanation, see the box below.
 
     This does the following:
 
-    - `map1, lang_id ->` takes the two items in the tuple
-    - `map1 + [lang: lang_id]` creates the new map as detailed above
+    - `#!groovy map1, lang_id ->` takes the two items in the tuple
+    - `#!groovy map1 + [lang: lang_id]` creates the new map as detailed above
 
     The output is a single unnamed map with the same contents as `new_map` in our example above.
     So we've effectively transformed:
@@ -1188,7 +1188,7 @@ For a more detailed explanation, see the box below.
     }
     ```
 
-    If you're having a hard time following why the `file` seems to be moving around in the `map` operation, imagine that instead of `[meta + [lang: lang_id], file]`, that line reads `[new_map, file]`.
+    If you're having a hard time following why the `file` seems to be moving around in the `map` operation, imagine that instead of `#!groovy [meta + [lang: lang_id], file]`, that line reads `[new_map, file]`.
     This should make it more clear that we're simply leaving the `file` in its original place in second position in the tuple. We've just taken the `new_info` value and folded it into the map that's in first position.
 
     **And this brings us back to the `tuple val(meta), path(file)` channel structure!**
