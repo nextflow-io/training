@@ -6583,7 +6583,7 @@ For a deeper dive into meta maps, see the <a href="../metadata/">Metadata and me
 <p>We previously applied the mapping manipulations directly to the input channel.
 In order to feed the remapped contents to the <code>ANALYZE_READS</code> process (and do so in a way that is clear and easy to read) we want to create a new channel named <code>ch_samples</code>.</p>
 <p>We can do that using the <a href="https://www.nextflow.io/docs/latest/reference/operator.html#set"><code>set</code></a> operator.</p>
-<p>In the main workflow, replace the <code>.view()</code> operator with <code>.set { ch_samples }</code>, and add a line testing that we can refer to the channel by name.</p>
+<p>In the main workflow, replace the <code>.view()</code> operator with <code class="highlight"><span class="o">.</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_samples</span><span class="w"> </span><span class="o">}</span></code>, and add a line testing that we can refer to the channel by name.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="19:2"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><input id="__tabbed_19_2" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">After</label><label for="__tabbed_19_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">

@@ -6674,8 +6674,8 @@ Typically small test files are stored in the <code>assets</code> directory, so l
 </div>
 <p>Key points:</p>
 <ul>
-<li><strong>Using <code>${projectDir}</code></strong>: This is a Nextflow implicit variable that points to the directory where the main workflow script is located (the pipeline root). Using it ensures the path works regardless of where the pipeline is run from.</li>
-<li><strong>Absolute paths</strong>: By using <code>${projectDir}</code>, we create an absolute path, which is important for test data that ships with the pipeline.</li>
+<li><strong>Using <code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">projectDir</span><span class="o">}</span></code></strong>: This is a Nextflow implicit variable that points to the directory where the main workflow script is located (the pipeline root). Using it ensures the path works regardless of where the pipeline is run from.</li>
+<li><strong>Absolute paths</strong>: By using <code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">projectDir</span><span class="o">}</span></code>, we create an absolute path, which is important for test data that ships with the pipeline.</li>
 <li><strong>Test data location</strong>: nf-core pipelines typically store test data in the <code>assets/</code> directory within the pipeline repository for small test files, or reference external test datasets for larger files.</li>
 </ul>
 <p>And while we're at it, let's tighten the default resource limits to ensure this will run on very basic machines (like the minimal VMs in Github Codespaces):</p>

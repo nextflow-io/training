@@ -5643,7 +5643,7 @@ Open the <code>cowpy.nf</code> module file (under <code>core-hello/modules/local
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span><span class="n">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;-c ${params.character}&quot;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="o">}</span>
 </code></pre></div>
-<p>The <code>withName:</code> syntax assigns this configuration to the <code>COWPY</code> process only, and <code>ext.args = { "-c ${params.character}" }</code> simply composes a string that will include the value of the <code>character</code> parameter.
+<p>The <code>withName:</code> syntax assigns this configuration to the <code>COWPY</code> process only, and <code class="highlight"><span class="n">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;-c ${params.character}&quot;</span><span class="w"> </span><span class="o">}</span></code> simply composes a string that will include the value of the <code>character</code> parameter.
 Note the use of curly braces, which tell Nextflow to evaluate the value of the parameter at runtime.</p>
 <p>Makes sense? Let's add it in.</p>
 <p>Open <code>conf/modules.config</code> and add the configuration code inside the <code>process {}</code> block as shown below.</p>
@@ -5882,16 +5882,16 @@ We're going to need to make the following changes:</p>
 <p>You can see we made three changes.</p>
 <ol>
 <li>
-<p><strong>In the <code>script:</code> block, we added the line <code>prefix = task.ext.prefix ?: "${meta.id}"</code>.</strong>
+<p><strong>In the <code>script:</code> block, we added the line <code class="highlight"><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">prefix</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s2">&quot;${meta.id}&quot;</span></code>.</strong>
    That line uses the <code>?:</code> operator to determine the value of the <code>prefix</code> variable: the content of <code>task.ext.prefix</code> if it is not empty, or the identifier from the metamap (<code>meta.id</code>) if it is.
    Note that while we generally refer to <code>ext.prefix</code>, this code must reference <code>task.ext.prefix</code> to pull out the module-level <code>ext.prefix</code> configuration.</p>
 </li>
 <li>
-<p><strong>In the command line, we replaced <code>cowpy-${input_file}</code> with <code>${prefix}.txt</code>.</strong>
+<p><strong>In the command line, we replaced <code class="highlight"><span class="n">cowpy</span><span class="o">-</span><span class="n">$</span><span class="o">{</span><span class="n">input_file</span><span class="o">}</span></code> with <code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">prefix</span><span class="o">}.</span><span class="na">txt</span></code>.</strong>
    This is where Nextflow will inject the value of <code>prefix</code> determined by the line above.</p>
 </li>
 <li>
-<p><strong>In the <code>output:</code> block, we replaced <code>path("cowpy-${input_file}")</code> with <code>path("${prefix}.txt")</code>.</strong>
+<p><strong>In the <code>output:</code> block, we replaced <code class="highlight"><span class="n">path</span><span class="o">(</span><span class="s2">&quot;cowpy-${input_file}&quot;</span><span class="o">)</span></code> with <code class="highlight"><span class="n">path</span><span class="o">(</span><span class="s2">&quot;${prefix}.txt&quot;</span><span class="o">)</span></code>.</strong>
    This simply reiterates what the file path will be according to what is written in the command line.</p>
 </li>
 </ol>
@@ -6147,7 +6147,7 @@ This is the default <code>publishDir</code> configuration that is part of the nf
 <li><strong><code>path:</code></strong> Determines the output directory based on the process name.
   The full name of a process contained in <code>task.process</code> includes the hierarchy of workflow and module imports (such as <code>CORE_HELLO:HELLO:FIND_CONCATENATE</code>).
   The <code>tokenize</code> operations strip away that hierarchy to get just the process name, then take the first part before any underscore (if applicable), and convert it to lowercase.
-  This is what determines that the results of <code>FIND_CONCATENATE</code> get published to <code>${params.outdir}/find/</code>.</li>
+  This is what determines that the results of <code>FIND_CONCATENATE</code> get published to <code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">params</span><span class="o">.</span><span class="na">outdir</span><span class="o">}</span><span class="s">/find/</span></code>.</li>
 <li><strong><code>mode:</code></strong> Controls how files are published (copy, symlink, etc.).
   This is configurable via the <code>params.publish_dir_mode</code> parameter.</li>
 <li><strong><code>saveAs:</code></strong> Filters which files to publish.
@@ -6504,10 +6504,10 @@ Looking back at our manual <code>COWPY</code> module from section 1, we can use 
 <p>This specifies:</p>
 <ul>
 <li>The input file parameter name (<code>input_file</code> instead of generic <code>input</code>)</li>
-<li>The output filename using the configurable prefix pattern (<code>${prefix}.txt</code> instead of wildcard <code>*</code>)</li>
+<li>The output filename using the configurable prefix pattern (<code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">prefix</span><span class="o">}.</span><span class="na">txt</span></code> instead of wildcard <code>*</code>)</li>
 <li>A descriptive emit name (<code>cowpy_output</code> instead of generic <code>output</code>)</li>
 </ul>
-<p>If you're using the Nextflow language server to validate syntax, the <code>${prefix}</code> part will be flagged as an error at this stage because we haven't added it to the script block yet.
+<p>If you're using the Nextflow language server to validate syntax, the <code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">prefix</span><span class="o">}</span></code> part will be flagged as an error at this stage because we haven't added it to the script block yet.
 Let's get to that now.</p>
 <h4 id="232-the-script-block">2.3.2. The script block<a class="headerlink" href="#232-the-script-block" title="Permanent link">&para;</a></h4>
 <p>The template generates an empty script block that you need to fill in with the actual tool command.</p>
@@ -6551,7 +6551,7 @@ Let's get to that now.</p>
 <p>Key changes:</p>
 <ul>
 <li>Change <code>def prefix</code> to just <code>prefix</code> (without <code>def</code>) to make it accessible in the output block</li>
-<li>Fill in the actual <code>cowpy</code> command that uses both <code>$args</code> and <code>${prefix}.txt</code></li>
+<li>Fill in the actual <code>cowpy</code> command that uses both <code>$args</code> and <code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">prefix</span><span class="o">}.</span><span class="na">txt</span></code></li>
 </ul>
 <p>Note that if we hadn't already done the work of adding the <code>ext.args</code> and <code>ext.prefix</code> configuration for the <code>COWPY</code> process to the <code>modules.config</code> file, we would need to do that now.</p>
 <h4 id="233-implementing-the-stub-block">2.3.3. Implementing the stub block<a class="headerlink" href="#233-implementing-the-stub-block" title="Permanent link">&para;</a></h4>
@@ -6601,7 +6601,7 @@ Let's get to that now.</p>
 <ul>
 <li>Change <code>def prefix</code> to just <code>prefix</code> to match the script block</li>
 <li>Remove the <code>echo $args</code> line (which was just template placeholder code)</li>
-<li>The stub creates an empty <code>${prefix}.txt</code> file matching what the script block produces</li>
+<li>The stub creates an empty <code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">prefix</span><span class="o">}.</span><span class="na">txt</span></code> file matching what the script block produces</li>
 </ul>
 <p>This allows you to test workflow logic and file handling without waiting for the actual tool to run.</p>
 <p>Once you've completed the environment setup (section 2.2), inputs/outputs (section 2.3.1), script block (section 2.3.2), and stub block (section 2.3.3), the module is ready to test!</p>

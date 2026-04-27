@@ -5039,7 +5039,7 @@ We need to replace it with a simpler schema for our greetings use case.</p>
 </div>
 <p>Let's break down what changed:</p>
 <ol>
-<li><strong><code>samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")</code></strong>: Validates the input file against our schema and returns a list</li>
+<li><strong><code class="highlight"><span class="n">samplesheetToList</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;${projectDir}/assets/schema_input.json&quot;</span><span class="o">)</span></code></strong>: Validates the input file against our schema and returns a list</li>
 <li><strong><code>channel.fromList(...)</code></strong>: Converts the list into a Nextflow channel</li>
 </ol>
 <p>This completes the implementation of input data validation using <code>samplesheetToList</code> and JSON schemas.</p>

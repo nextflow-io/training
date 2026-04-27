@@ -6358,8 +6358,8 @@ Instead, it is held in a variable called <code>lang_id</code>, and you know you 
 </code></pre></div>
 <p>This does the following:</p>
 <ul>
-<li><code>map1, lang_id -&gt;</code> takes the two items in the tuple</li>
-<li><code>map1 + [lang: lang_id]</code> creates the new map as detailed above</li>
+<li><code class="highlight"><span class="n">map1</span><span class="o">,</span><span class="w"> </span><span class="n">lang_id</span><span class="w"> </span><span class="o">-&gt;</span></code> takes the two items in the tuple</li>
+<li><code class="highlight"><span class="n">map1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">lang:</span><span class="w"> </span><span class="n">lang_id</span><span class="o">]</span></code> creates the new map as detailed above</li>
 </ul>
 <p>The output is a single unnamed map with the same contents as <code>new_map</code> in our example above.
 So we've effectively transformed:</p>
@@ -6376,7 +6376,7 @@ So we've effectively transformed:</p>
 <a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a><span class="w">    </span><span class="o">[</span><span class="n">meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">lang:</span><span class="w"> </span><span class="n">lang_id</span><span class="o">],</span><span class="w"> </span><span class="n">file</span><span class="o">]</span>
 <a id="__codelineno-68-3" name="__codelineno-68-3" href="#__codelineno-68-3"></a><span class="o">}</span>
 </code></pre></div>
-<p>If you're having a hard time following why the <code>file</code> seems to be moving around in the <code>map</code> operation, imagine that instead of <code>[meta + [lang: lang_id], file]</code>, that line reads <code>[new_map, file]</code>.
+<p>If you're having a hard time following why the <code>file</code> seems to be moving around in the <code>map</code> operation, imagine that instead of <code class="highlight"><span class="o">[</span><span class="n">meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">lang:</span><span class="w"> </span><span class="n">lang_id</span><span class="o">],</span><span class="w"> </span><span class="n">file</span><span class="o">]</span></code>, that line reads <code>[new_map, file]</code>.
 This should make it more clear that we're simply leaving the <code>file</code> in its original place in second position in the tuple. We've just taken the <code>new_info</code> value and folded it into the map that's in first position.</p>
 <p><strong>And this brings us back to the <code>tuple val(meta), path(file)</code> channel structure!</strong></p>
 </details>
