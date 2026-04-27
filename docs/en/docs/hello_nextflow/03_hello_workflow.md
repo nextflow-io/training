@@ -498,7 +498,7 @@ In theory this should handle any arbitrary number of input files.
 
     Some command-line tools require providing an argument (like `-input`) for each input file.
     In that case, we would have to do a little bit of extra work to compose the command.
-    You can see an example of this in the [Nextflow for Genomics](../../nf4_science/genomics/) training course.
+    You can see an example of this in the [Nextflow for Genomics](../../nf4_science/genomics/index.md) training course.
 
 ### 2.3. Add the collection step to the workflow
 

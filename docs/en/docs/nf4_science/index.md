@@ -6,7 +6,7 @@ hide:
 
 # Nextflow for Science
 
-These are courses that demonstrate how to apply the concepts and components presented in the [Hello Nextflow](../hello_nextflow/) beginner course to specific scientific use cases. Each course consists of a series of training modules that are designed to help learners build up their skills progressively.
+These are courses that demonstrate how to apply the concepts and components presented in the [Hello Nextflow](../hello_nextflow/index.md) beginner course to specific scientific use cases. Each course consists of a series of training modules that are designed to help learners build up their skills progressively.
 
 !!! exercise "Nextflow for Genomics"
 

@@ -1069,7 +1069,7 @@ Note that the output tuple is composed of `[meta, file, lang_id]`, meaning the m
     You must use keys instead.
     Meta maps provide an ideal structure for this purpose.
 
-    This use case is explored in detail in the [Splitting & Grouping](../splitting_and_grouping/) side quest.
+    This use case is explored in detail in the [Splitting & Grouping](../splitting_and_grouping/index.md) side quest.
 
 ### 2.2. Augment metadata with process outputs
 

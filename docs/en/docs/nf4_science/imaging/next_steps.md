@@ -16,8 +16,8 @@ Here are some recommended next steps to deepen your Nextflow knowledge:
 
 If you want to learn how to write Nextflow pipelines:
 
-- **[Hello Nextflow](../../hello_nextflow/)**: Comprehensive Nextflow development training
-- **[Side Quests](../../side_quests/)**: Advanced topics for pipeline developers
+- **[Hello Nextflow](../../hello_nextflow/index.md)**: Comprehensive Nextflow development training
+- **[Side Quests](../../side_quests/index.md)**: Advanced topics for pipeline developers
 
 ### Join the community
 

@@ -25,7 +25,7 @@ These skills will help you build workflows that can handle different kinds of fi
 
 Before taking on this side quest, you should:
 
-- Have completed the [Hello Nextflow](../../hello_nextflow/) tutorial or equivalent beginner's course.
+- Have completed the [Hello Nextflow](../../hello_nextflow/index.md) tutorial or equivalent beginner's course.
 - Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators)
 
 <!-- I removed the suggestion to do the metamaps SQ first because that works more naturally after -->
@@ -1614,7 +1614,7 @@ process ANALYZE_READS {
 !!! note
 
     We are calling our metadata map `meta` by convention.
-    For a deeper dive into meta maps, see the [Metadata and meta maps](../metadata/) side quest.
+    For a deeper dive into meta maps, see the [Metadata and meta maps](../metadata/index.md) side quest.
 
 With the `ANALYZE_READS` process imported and its code reviewed, we can add a call to it in the workflow.
 
@@ -1960,7 +1960,7 @@ There's a lot more you can do once you have your metadata loaded into a map like
 3. Split, join, and recombine data based on metadata values
 
 This pattern of keeping metadata explicit and attached to the data (rather than encoded in filenames) is a core best practice in Nextflow that enables building robust, maintainable analysis workflows.
-You can learn more about this in the [Metadata and meta maps](../metadata/) side quest.
+You can learn more about this in the [Metadata and meta maps](../metadata/index.md) side quest.
 
 ### Takeaway
 

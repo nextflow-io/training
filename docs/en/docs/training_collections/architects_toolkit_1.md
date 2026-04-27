@@ -25,7 +25,7 @@ This collection is designed for users who have completed the basic Nextflow trai
 
 **Prerequisites**
 
-- Completion of [Hello Nextflow](../../hello_nextflow/) training or equivalent experience
+- Completion of [Hello Nextflow](../../hello_nextflow/index.md) training or equivalent experience
 - Basic familiarity with Nextflow syntax and concepts
 - Understanding of basic workflow development patterns
 - Experience with command-line tools

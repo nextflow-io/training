@@ -36,17 +36,17 @@ If this is your first time exploring the Side Quests, start with the [Orientatio
 
 ### Side Quests
 
-| Side Quest                                                      | Summary                                                                  | Time Estimate |
-| --------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------- |
-| [Development Environment](./dev_environment/)                   | Set up and configure a productive local Nextflow development environment | 45 mins       |
-| [Essential Scripting Patterns](./essential_scripting_patterns/) | Advanced scripting techniques for common workflow challenges             | 90 mins       |
-| [File Input Processing](./working_with_files/)                  | File handling, path operations, and organizing outputs                   | 45 mins       |
-| [Metadata and Meta Maps](./metadata/)                           | Using metadata maps to track and propagate sample information            | 45 mins       |
-| [Splitting and Grouping](./splitting_and_grouping/)             | Techniques for splitting and regrouping data channels                    | 45 mins       |
-| [Testing with nf-test](./nf_test/)                              | Writing and running tests for Nextflow workflows                         | 1 hour        |
-| [Troubleshooting Workflows](./debugging/)                       | Identifying and fixing common workflow errors                            | 1 hour        |
-| [Workflows of Workflows](./workflows_of_workflows/)             | Composing complex pipelines from reusable named workflow modules         | 30 mins       |
-| [Plugin Development](./plugin_development/)                     | Using and building Nextflow plugins                                      | 3 hours       |
+| Side Quest                                                              | Summary                                                                  | Time Estimate |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------- |
+| [Development Environment](./dev_environment/index.md)                   | Set up and configure a productive local Nextflow development environment | 45 mins       |
+| [Essential Scripting Patterns](./essential_scripting_patterns/index.md) | Advanced scripting techniques for common workflow challenges             | 90 mins       |
+| [File Input Processing](./working_with_files/index.md)                  | File handling, path operations, and organizing outputs                   | 45 mins       |
+| [Metadata and Meta Maps](./metadata/index.md)                           | Using metadata maps to track and propagate sample information            | 45 mins       |
+| [Splitting and Grouping](./splitting_and_grouping/index.md)             | Techniques for splitting and regrouping data channels                    | 45 mins       |
+| [Testing with nf-test](./nf_test/index.md)                              | Writing and running tests for Nextflow workflows                         | 1 hour        |
+| [Troubleshooting Workflows](./debugging/index.md)                       | Identifying and fixing common workflow errors                            | 1 hour        |
+| [Workflows of Workflows](./workflows_of_workflows/index.md)             | Composing complex pipelines from reusable named workflow modules         | 30 mins       |
+| [Plugin Development](./plugin_development/index.md)                     | Using and building Nextflow plugins                                      | 3 hours       |
 
 [Get started :material-arrow-right:](orientation.md){ .md-button .md-button--primary }
 
