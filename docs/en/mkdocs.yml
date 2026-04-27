@@ -68,6 +68,10 @@ nav:
       - side_quests/essential_scripting_patterns/index.md
       - side_quests/working_with_files/index.md
       - side_quests/metadata/index.md
+      - side_quests/splitting_and_grouping/index.md
+      - side_quests/nf_test/index.md
+      - side_quests/debugging/index.md
+      - side_quests/workflows_of_workflows/index.md
       - Plugin Development:
           - side_quests/plugin_development/index.md
           - side_quests/plugin_development/01_plugin_basics.md
@@ -78,10 +82,6 @@ nav:
           - side_quests/plugin_development/06_configuration.md
           - side_quests/plugin_development/summary.md
           - side_quests/plugin_development/next_steps.md
-      - side_quests/splitting_and_grouping/index.md
-      - side_quests/nf_test/index.md
-      - side_quests/debugging/index.md
-      - side_quests/workflows_of_workflows/index.md
   - Training Collections:
       - training_collections/index.md
       - training_collections/architects_toolkit_1.md

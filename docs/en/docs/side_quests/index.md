@@ -2,53 +2,55 @@
 title: Side Quests
 hide:
   - toc
+page_type: index_page
+index_type: course
+additional_information:
+  technical_requirements: true
+  learning_objectives:
+    - Set up and configure a productive Nextflow development environment
+    - Apply advanced scripting patterns for complex data transformations
+    - Handle and propagate metadata through multi-step workflows
+    - Split and group data channels for parallel and serial processing
+    - Test Nextflow workflows using nf-test
+    - Compose complex pipelines from reusable named workflow modules
+    - Work efficiently with files using Nextflow file operations
+    - Debug common workflow issues systematically
+    - Use and build Nextflow plugins
+  audience_prerequisites:
+    - "**Audience:** This collection is designed for learners who have completed the Hello Nextflow beginner course and want to go deeper into specific topics."
+    - "**Skills:** Experience with the command line and familiarity with basic Nextflow concepts and tooling is assumed."
+    - "**Courses:** Must have completed [Hello Nextflow](../hello_nextflow/index.md) or equivalent."
 ---
 
 # Side Quests
 
-This is a collection of standalone training mini-courses that go deeper into specific topics. You can go through them in any order.
+**Side Quests are standalone training mini-courses that go deeper into specific Nextflow topics.**
 
-Let's get started! Click on the "Open in GitHub Codespaces" button below to launch the training environment (preferably in a separate tab), then read on while it loads.
+Each side quest can be taken independently, in any order, based on your interests and needs.
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+<!-- additional_information -->
 
-## Prerequisites
+## Course overview
 
-The specific prerequisites of each mini-courses vary and are documented in the corresponding pages.
-Nevertheless, they all assume some minimal familiarity with the following:
+If this is your first time exploring the Side Quests, start with the [Orientation](./orientation.md) page for an overview of the training environment and materials.
 
-- Experience with the command line
-- Foundational Nextflow concepts and tooling covered in the [Hello Nextflow](../../hello_nextflow/) beginner training course.
+### Side Quests
 
-For technical requirements and environment setup, see the [Environment Setup](../../envsetup/) mini-course.
+| Side Quest                                                      | Summary                                                                  | Time Estimate |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------- |
+| [Development Environment](./dev_environment/)                   | Set up and configure a productive local Nextflow development environment | 45 mins       |
+| [Essential Scripting Patterns](./essential_scripting_patterns/) | Advanced scripting techniques for common workflow challenges             | 90 mins       |
+| [File Input Processing](./working_with_files/)                  | File handling, path operations, and organizing outputs                   | 45 mins       |
+| [Metadata and Meta Maps](./metadata/)                           | Using metadata maps to track and propagate sample information            | 45 mins       |
+| [Splitting and Grouping](./splitting_and_grouping/)             | Techniques for splitting and regrouping data channels                    | 45 mins       |
+| [Testing with nf-test](./nf_test/)                              | Writing and running tests for Nextflow workflows                         | 1 hour        |
+| [Troubleshooting Workflows](./debugging/)                       | Identifying and fixing common workflow errors                            | 1 hour        |
+| [Workflows of Workflows](./workflows_of_workflows/)             | Composing complex pipelines from reusable named workflow modules         | 30 mins       |
+| [Plugin Development](./plugin_development/)                     | Using and building Nextflow plugins                                      | 3 hours       |
 
-**If this is the first time you delve into the Side Quests, make sure to check out the [Orientation](./orientation.md) page first!**
+[Get started :material-arrow-right:](orientation.md){ .md-button .md-button--primary }
 
-Otherwise, select a side quest from the table below.
+<!-- Clearfix for float -->
+<div style="content: ''; clear: both; display: table;"></div>
 
-## Side Quests
-
-| Side Quest                                                               | Time Estimate for Teaching |
-| ------------------------------------------------------------------------ | -------------------------- |
-| [Nextflow development environment walkthrough](./dev_environment/)       | 45 mins                    |
-| [Essential Nextflow Scripting Patterns](./essential_scripting_patterns/) | 90 mins                    |
-| [Metadata in workflows](./metadata/)                                     | 45 mins                    |
-| [Splitting and Grouping](./splitting_and_grouping/)                      | 45 mins                    |
-| [Testing with nf-test](./nf_test/)                                       | 1 hour                     |
-| [Workflows of workflows](./workflows_of_workflows/)                      | 30 mins                    |
-| [Working with files](./working_with_files/)                              | 45 mins                    |
-| [Debugging workflows](./debugging/)                                      | 1 hour                     |
-
-## Multi-part courses
-
-!!! exercise "Plugin Development"
-
-    !!! tip inline end ""
-
-        :material-run-fast: Learn to use and build Nextflow plugins.
-
-    This course covers using existing plugins in your workflows and building your own from scratch, including custom functions, workflow monitoring, configuration, and distribution.
-
-    [Start the Plugin Development training :material-arrow-right:](plugin_development/){ .md-button .md-button--primary }
-
-Let us know what other domains and use cases you'd like to see covered here by posting in the [Training section](https://community.seqera.io/c/training/) of the community forum.
+Let us know what other topics you'd like to see covered here by posting in the [Training section](https://community.seqera.io/c/training/) of the community forum.
