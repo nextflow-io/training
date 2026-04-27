@@ -181,7 +181,7 @@ workflow {
 
 Per a aquest exemple hem deixat un comentari per mostrar-vos on és l'error. L'extensió VSCode de Nextflow també us hauria de donar algunes pistes sobre el que podria estar malament, posant la clau no coincident en vermell i ressaltant el final prematur del fitxer:
 
-![Bad syntax](img/bad_syntax.png)
+![Bad syntax](../img/bad_syntax.png)
 
 **Estratègia de depuració per a errors de claus:**
 
@@ -330,7 +330,7 @@ workflow {
 
 Mirant la línia 4 en el context de l'error, podem detectar el problema: estem usant `inputs` en lloc de la directiva correcta `input`. L'extensió VSCode de Nextflow també ho marcarà:
 
-![Invalid process message](img/invalid_process_message.png)
+![Invalid process message](../img/invalid_process_message.png)
 
 #### Corregiu el codi
 
@@ -748,7 +748,7 @@ workflow {
 
 L'extensió VSCode també ressaltarà la variable `input_ch` com a definida fora del bloc workflow:
 
-![Non-lethal syntax error](img/nonlethal.png)
+![Non-lethal syntax error](../img/nonlethal.png)
 
 #### Corregiu el codi
 
@@ -913,7 +913,7 @@ workflow {
 
 Hauríeu de veure la crida `PROCESS_FILES` no coincident, que subministra múltiples canals d'entrada quan el procés només en defineix un. L'extensió VSCode també subratllará la crida del procés en vermell i proporcionarà un missatge de diagnòstic quan hi passeu el ratolí per sobre:
 
-![Incorrect number of args message](img/incorrect_num_args.png)
+![Incorrect number of args message](../img/incorrect_num_args.png)
 
 #### Corregiu el codi
 

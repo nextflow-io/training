@@ -181,7 +181,7 @@ workflow {
 
 Bu örnek için hatanın nerede olduğunu göstermek amacıyla bir yorum bıraktık. Nextflow VSCode eklentisi de eşleşmeyen süslü parantezi kırmızıyla işaretleyerek ve dosyanın erken sonlandığını vurgulayarak size ipuçları vermelidir:
 
-![Hatalı sözdizimi](img/bad_syntax.png)
+![Hatalı sözdizimi](../img/bad_syntax.png)
 
 **Parantez hataları için hata ayıklama stratejisi:**
 
@@ -330,7 +330,7 @@ workflow {
 
 Hata bağlamındaki 4. satıra bakıldığında sorun fark edilebilir: doğru `input` yönergesi yerine `inputs` kullanılmış. Nextflow VSCode eklentisi de bunu işaretleyecektir:
 
-![Geçersiz süreç mesajı](img/invalid_process_message.png)
+![Geçersiz süreç mesajı](../img/invalid_process_message.png)
 
 #### Kodu düzeltin
 
@@ -748,7 +748,7 @@ workflow {
 
 VSCode eklentisi de `input_ch` değişkeninin iş akışı bloğu dışında tanımlandığını vurgulayacaktır:
 
-![Önemsiz sözdizimi hatası](img/nonlethal.png)
+![Önemsiz sözdizimi hatası](../img/nonlethal.png)
 
 #### Kodu düzeltin
 
@@ -913,7 +913,7 @@ workflow {
 
 Süreç yalnızca bir girdi kanalı tanımlarken birden fazla girdi kanalı sağlayan eşleşmeyen `PROCESS_FILES` çağrısını görebilirsiniz. VSCode eklentisi de süreç çağrısının altını kırmızıyla çizer ve üzerine geldiğinizde bir tanı mesajı gösterir:
 
-![Yanlış bağımsız değişken sayısı mesajı](img/incorrect_num_args.png)
+![Yanlış bağımsız değişken sayısı mesajı](../img/incorrect_num_args.png)
 
 #### Kodu düzeltin
 

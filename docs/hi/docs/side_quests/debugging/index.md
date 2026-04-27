@@ -181,7 +181,7 @@ workflow {
 
 इस उदाहरण के लिए हमने तुम्हें एक comment छोड़ा है जो दिखाता है कि error कहाँ है। Nextflow VSCode extension भी तुम्हें कुछ संकेत दे रहा होगा, mismatched brace को लाल रंग में दिखाकर और फ़ाइल के समय से पहले समाप्त होने को हाइलाइट करके:
 
-![Bad syntax](img/bad_syntax.png)
+![Bad syntax](../img/bad_syntax.png)
 
 **Bracket errors के लिए डीबगिंग रणनीति:**
 
@@ -330,7 +330,7 @@ workflow {
 
 Error context में line 4 को देखने पर, हम समस्या पहचान सकते हैं: हम सही `input` directive के बजाय `inputs` का उपयोग कर रहे हैं। Nextflow VSCode extension भी इसे flag करेगा:
 
-![Invalid process message](img/invalid_process_message.png)
+![Invalid process message](../img/invalid_process_message.png)
 
 #### कोड ठीक करो
 
@@ -748,7 +748,7 @@ workflow {
 
 VSCode extension `input_ch` variable को workflow block के बाहर define किए जाने के रूप में भी highlight करेगा:
 
-![Non-lethal syntax error](img/nonlethal.png)
+![Non-lethal syntax error](../img/nonlethal.png)
 
 #### कोड ठीक करो
 
@@ -913,7 +913,7 @@ workflow {
 
 तुम mismatched `PROCESS_FILES` call देख सकते हो, जो multiple input channels supply कर रहा है जबकि process केवल एक define करता है। VSCode extension भी process call को लाल रंग में underline करेगा, और mouse over करने पर diagnostic message देगा:
 
-![Incorrect number of args message](img/incorrect_num_args.png)
+![Incorrect number of args message](../img/incorrect_num_args.png)
 
 #### कोड ठीक करो
 
