@@ -179,7 +179,7 @@ workflow {
 
 For the purpose of this example we've left a comment for you to show where the error is. The Nextflow VSCode extension should also be giving you some hints about what might be wrong, putting the mismatched brace in red and highlighting the premature end of the file:
 
-![Bad syntax](img/bad_syntax.png)
+![Bad syntax](../img/bad_syntax.png)
 
 **Debugging strategy for bracket errors:**
 
@@ -328,7 +328,7 @@ workflow {
 
 Looking at line 4 in the error context, we can spot the issue: we're using `inputs` instead of the correct `input` directive. The Nextflow VSCode extension will also flag this:
 
-![Invalid process message](img/invalid_process_message.png)
+![Invalid process message](../img/invalid_process_message.png)
 
 #### Fix the code
 
@@ -746,7 +746,7 @@ workflow {
 
 The VSCode extension will also highlight the `input_ch` variable as being defined outside the workflow block:
 
-![Non-lethal syntax error](img/nonlethal.png)
+![Non-lethal syntax error](../img/nonlethal.png)
 
 #### Fix the code
 
@@ -911,7 +911,7 @@ workflow {
 
 You should see the mismatched `PROCESS_FILES` call, supplying multiple input channels when the process only defines one. The VSCode extension will also under line process call in red, and supply a diagnostic message when you mouse over:
 
-![Incorrect number of args message](img/incorrect_num_args.png)
+![Incorrect number of args message](../img/incorrect_num_args.png)
 
 #### Fix the code
 
