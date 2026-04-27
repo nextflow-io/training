@@ -97,18 +97,18 @@ If you are using a Mac, some (not all) keyboard shortcuts will use "cmd" instead
 To install the extension manually:
 
 1. Open VS Code
-2. Go to the Extensions view by clicking the extensions icon to the left: ![extensions icon](img/extensions_icon.png) (shortcut `Ctrl/Cmd+Shift+X` if you're running VSCode locally)
+2. Go to the Extensions view by clicking the extensions icon to the left: ![extensions icon](../img/extensions_icon.png) (shortcut `Ctrl/Cmd+Shift+X` if you're running VSCode locally)
 3. Search for "Nextflow"
 4. Install the official Nextflow extension
 
-![Install Nextflow Extension](img/install_extension.png)
+![Install Nextflow Extension](../img/install_extension.png)
 
 ### 0.2. Workspace Layout
 
 Since you've been using VS Code throughout Hello Nextflow, you're already familiar with the basics. Here's how to organize your workspace efficiently for this session:
 
 - **Editor Area**: For viewing and editing files. You can split this into multiple panes to compare files side by side.
-- **File Explorer** click (![file explorer icon](img/files_icon.png)) (`Ctrl/Cmd+Shift+E`): The local files and folders on your system. Keep this open on the left to navigate between files
+- **File Explorer** click (![file explorer icon](../img/files_icon.png)) (`Ctrl/Cmd+Shift+E`): The local files and folders on your system. Keep this open on the left to navigate between files
 - **Integrated Terminal** (`Ctrl+Shift+` backtick for both Windows and MacOS): A terminal for interacting with the computer at the bottom. Use this to run Nextflow or other commands.
 - **Problems Panel** (`Ctrl+Shift+M`): VS Code will show any errors and problems it detects here. This is useful for highlighting issues at a glance.
 
@@ -132,7 +132,7 @@ Now that your workspace is set up, let's explore how VS Code's syntax highlighti
 
 Open `basic_workflow.nf` to see syntax highlighting in action:
 
-![Syntax Showcase](img/syntax_showcase.png)
+![Syntax Showcase](../img/syntax_showcase.png)
 
 Notice how VS Code highlights:
 
@@ -180,7 +180,7 @@ The auto-completion options vary depending on where you are in your code:
 
 Open `basic_workflow.nf` again and try typing `channel.` in the workflow block:
 
-![Channel auto-completion](img/autocomplete_channel.png)
+![Channel auto-completion](../img/autocomplete_channel.png)
 
 You'll see suggestions for:
 
@@ -194,19 +194,19 @@ This helps you quickly find the right channel factory to use without needing to 
 
 You can also discover the operators available to apply to channels. For example, type `FASTQC.out.html.` to see available operations:
 
-![Channel operations auto-completion](img/autocomplete_operators.png)
+![Channel operations auto-completion](../img/autocomplete_operators.png)
 
 #### Process Directives
 
 Inside a process script block, type `task.` to see available runtime properties:
 
-![Task properties auto-completion](img/autocomplete_task.png)
+![Task properties auto-completion](../img/autocomplete_task.png)
 
 #### Configuration
 
 Open nextflow.config and type `process.` anywhere to see available process directives:
 
-![Config auto-completion](img/autocomplete_config.png)
+![Config auto-completion](../img/autocomplete_config.png)
 
 You'll see suggestions for:
 
@@ -232,17 +232,17 @@ VS Code's real-time error detection helps you catch issues before running your w
 
 Let's create a deliberate error to see the detection in action. Open `basic_workflow.nf` and change the process name from `FASTQC` to `FASTQ` (or any other invalid name). VS Code will immediately highlight the error in the workflow block with a red squiggly underline:
 
-![Error underline](img/error_underline.png)
+![Error underline](../img/error_underline.png)
 
 ### 3.2. Problems Panel
 
 Beyond individual error highlighting, VS Code provides a centralized Problems panel that aggregates all errors, warnings, and info messages across your workspace. Open it with `Ctrl/Cmd+Shift+M` and use the filter icon to show only errors relevant to the current file:
 
-![Filter the problems panel](img/active_file.png)
+![Filter the problems panel](../img/active_file.png)
 
 Click on any issue to jump directly to the problematic line
 
-![Problems Panel](img/problems_panel.png)
+![Problems Panel](../img/problems_panel.png)
 
 Fix the error by changing the process name back to `FASTQC`.
 
@@ -306,13 +306,13 @@ Efficient navigation is crucial when working with complex workflows spanning mul
 
 If you mouse over a process name like `FASTQC`, you'll see a popup with the module interface (inputs and outputs):
 
-![Go to definition](img/syntax.png)
+![Go to definition](../img/syntax.png)
 
 This feature is particularly valuable when authoring workflows, as it allows you to understand the module interface without opening the module file directly.
 
 You can quickly navigate to any process, module, or variable definition using **Ctrl/Cmd-click** . Mouse over the link to the module file at the top of the script, and follow the link as suggested:
 
-![Follow link](img/follow_link.png)
+![Follow link](../img/follow_link.png)
 
 The same thing works for process names. Go back to `basic_workflow.nf` and try this on the `FASTQC` process name in the workflow block. This links you directly to the process name (which is the same as the module file in this example, but could be part-way through a much larger file).
 
@@ -331,7 +331,7 @@ Now let's explore navigation in a more complex workflow using `complex_workflow.
 
 With `complex_workflow.nf` still open, you can get an overview of all symbols in the file by typing `@` into the search bar at the top of VSCode (the keyboard shortcut is `Ctrl/Cmd+Shift+O`, but may not work in Codespaces). This opens the symbol navigation panel, which lists all symbols in the current file:
 
-![Symbol navigation](img/symbols.png)
+![Symbol navigation](../img/symbols.png)
 
 This shows:
 
@@ -345,15 +345,15 @@ Start typing to filter results.
 
 Understanding where a process or variable is used throughout your codebase can be very helpful. For instance, if you want to find all references to the `FASTQC` process, start by navigating to its definition. You can do this by opening `modules/fastqc.nf` directly, or by using VS Code's quick navigation feature with `Ctrl/Cmd-click` as we did above. Once at the process definition, right-click on the `FASTQC` process name and select "Find All References" from the context menu to see all instances where it is used.
 
-![Find references](img/references.png)
+![Find references](../img/references.png)
 
 This feature displays all instances where `FASTQC` is referenced within your workspace, including its usage in the two distinct workflows. This insight is crucial for assessing the potential impact of modifications to the `FASTQC` process.
 
 ### 4.4. Outline Panel
 
-The Outline panel, located in the Explorer sidebar (click ![Explorer icon](img/files_icon.png)), provides a convenient overview of all symbols in your current file. This feature allows you to quickly navigate and manage the structure of your code by displaying functions, variables, and other key elements in a hierarchical view.
+The Outline panel, located in the Explorer sidebar (click ![Explorer icon](../img/files_icon.png)), provides a convenient overview of all symbols in your current file. This feature allows you to quickly navigate and manage the structure of your code by displaying functions, variables, and other key elements in a hierarchical view.
 
-![Outline panel](img/outline.png)
+![Outline panel](../img/outline.png)
 
 Use the Outline panel to navigate quickly to different parts of your code without using the file browser.
 
@@ -361,11 +361,11 @@ Use the Outline panel to navigate quickly to different parts of your code withou
 
 VS Code's Nextflow extension can visualize your workflow as a Directed Acyclic Graph (DAG). This helps you understand the data flow and dependencies between processes. Open `complex_workflow.nf` and click the "Preview DAG" button above `workflow {` (the second `workflow` block in this file):
 
-![DAG preview](img/dag_preview.png)
+![DAG preview](../img/dag_preview.png)
 
 This is just the 'entry' workflow, but you can also preview the DAG for the inner workflows by clicking the "Preview DAG" button above the workflow `RNASEQ_PIPELINE {` further up:
 
-![DAG preview inner workflow](img/dag_preview_inner.png)
+![DAG preview inner workflow](../img/dag_preview_inner.png)
 
 For this workflow, you can use the nodes in the DAG to navigate to the corresponding process definitions in the code. Click on a node, and it will take you to the relevant process definition in the editor. Particularly when a workflow grows to a large size, this can really help you to navigate around the code and understand how the processes are connected.
 
@@ -404,7 +404,7 @@ When working with modules, you often need to see both the main workflow and modu
 3. Right-click on the `modules/fastqc.nf` tab and select "Split Right"
 4. Now you can see both files side by side
 
-![Split editor](img/split_editor.png)
+![Split editor](../img/split_editor.png)
 
 This is invaluable when:
 
@@ -418,7 +418,7 @@ Sometimes you need to find where specific patterns are used across your entire p
 
 Try searching for `container` across the workspace:
 
-![Project search](img/project_search.png)
+![Project search](../img/project_search.png)
 
 This shows you every file that uses the container directive, helping you:
 
@@ -489,7 +489,7 @@ Use **Ctrl+/** (or **Cmd+/**) again to uncomment the code.
 
 In `complex_workflow.nf`, notice the small arrows next to process definitions. Click them to fold (collapse) processes:
 
-![Code folding](img/code_folding.png)
+![Code folding](../img/code_folding.png)
 
 This gives you a high-level overview of your workflow structure without getting lost in implementation details.
 
@@ -543,9 +543,9 @@ If your project is a git repository (as this is), VS Code shows:
 - Inline diff views
 - Commit and push capabilities
 
-Open the Source Control panel using the source control button (![Source control icon](img/source_control_icon.png)) (`Ctrl+Shift+G` or `Cmd+Shift+G` if you're working with VSCode locally) to see git changes and stage commits directly in the editor.
+Open the Source Control panel using the source control button (![Source control icon](../img/source_control_icon.png)) (`Ctrl+Shift+G` or `Cmd+Shift+G` if you're working with VSCode locally) to see git changes and stage commits directly in the editor.
 
-![Source Control Panel](img/source_control.png)
+![Source Control Panel](../img/source_control.png)
 
 ### 7.2. Running and Inspecting Workflows
 
