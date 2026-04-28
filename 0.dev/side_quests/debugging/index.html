@@ -6309,7 +6309,7 @@
 <h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
 <p>Before taking on this side quest, you should:</p>
 <ul>
-<li>Have completed the <a href="../hello_nextflow/README.md">Hello Nextflow</a> tutorial or equivalent beginner's course.</li>
+<li>Have completed the <a href="../../hello_nextflow/">Hello Nextflow</a> tutorial or equivalent beginner's course.</li>
 <li>Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators)</li>
 </ul>
 <p><strong>Optional:</strong> We recommend completing the <a href="../dev_environment/">IDE Features for Nextflow Development</a> side quest first.
@@ -6317,7 +6317,7 @@ That covers comprehensive coverage of IDE features that support debugging (synta
 <hr />
 <h2 id="0-get-started">0. Get started<a class="headerlink" href="#0-get-started" title="Permanent link">&para;</a></h2>
 <h4 id="open-the-training-codespace">Open the training codespace<a class="headerlink" href="#open-the-training-codespace" title="Permanent link">&para;</a></h4>
-<p>If you haven't yet done so, make sure to open the training environment as described in the <a href="../envsetup/index.md">Environment Setup</a>.</p>
+<p>If you haven't yet done so, make sure to open the training environment as described in the <a href="../../envsetup/">Environment Setup</a>.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h4 id="move-into-the-project-directory">Move into the project directory<a class="headerlink" href="#move-into-the-project-directory" title="Permanent link">&para;</a></h4>
 <p>Let's move into the directory where the files for this tutorial are located.</p>
@@ -7010,7 +7010,7 @@ Solutions are discussed inline, but try to solve each one yourself before readin
 </span><a id="__codelineno-26-14" name="__codelineno-26-14"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-26-15" name="__codelineno-26-15"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>In this example, we're defining the <code>prefix</code> variable in Bash, but in a Nexflow process the <code>$</code> syntax we used to refer to it (<code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">prefix</span><span class="o">}</span></code>) is interpreted as a Groovy variable, not Bash. The variable doesn't exist in the Groovy context, so we get a 'no such variable' error.</p>
+<p>In this example, we're defining the <code>prefix</code> variable in Bash, but in a Nextflow process the <code>$</code> syntax we used to refer to it (<code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">prefix</span><span class="o">}</span></code>) is interpreted as a Groovy variable, not Bash. The variable doesn't exist in the Groovy context, so we get a 'no such variable' error.</p>
 <h4 id="fix-the-code_3">Fix the code<a class="headerlink" href="#fix-the-code_3" title="Permanent link">&para;</a></h4>
 <p>If you want to use a Bash variable, you must escape the dollar sign like this:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">After</label><label for="__tabbed_4_2">Before</label></div>
@@ -8280,7 +8280,7 @@ Solutions are discussed inline, but try to solve each one yourself before readin
 </details>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>To learn more about how Nextflow uses containers, see <a href="../hello_nextflow/05_hello_containers.md">Hello Nextflow</a></p>
+<p>To learn more about how Nextflow uses containers, see <a href="../../hello_nextflow/05_hello_containers/">Hello Nextflow</a></p>
 </div>
 <h3 id="33-bad-resource-configuration">3.3. Bad resource configuration<a class="headerlink" href="#33-bad-resource-configuration" title="Permanent link">&para;</a></h3>
 <p>In production usage, you'll be configuring resources on your processes. For example <code>memory</code> defines the maximum amount of memory available to your process, and if the process exceeds that, your scheduler will typically kill the process and return an exit code of <code>137</code>. We can't demonstrate that here because we're using the <code>local</code> executor, but we can show something similar with <code>time</code>.</p>
@@ -8781,7 +8781,7 @@ Solutions are discussed inline, but try to solve each one yourself before readin
 <div class="admonition tip">
 <p class="admonition-title">Using Resume for Efficient Debugging</p>
 <p>Once you've identified a problem, you need an efficient way to test your fixes without wasting time re-running successful parts of your workflow. Nextflow's <code>-resume</code> functionality is invaluable for debugging.</p>
-<p>You will have encountered <code>-resume</code> if you've worked through <a href="../hello_nextflow/">Hello Nextflow</a>, and it's important that you make good use of it when debugging to save yourself waiting while the processes before your problem process run.</p>
+<p>You will have encountered <code>-resume</code> if you've worked through <a href="../../hello_nextflow/">Hello Nextflow</a>, and it's important that you make good use of it when debugging to save yourself waiting while the processes before your problem process run.</p>
 <p><strong>Resume debugging strategy:</strong></p>
 <ol>
 <li>Run workflow until failure</li>

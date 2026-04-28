@@ -4932,7 +4932,7 @@ We'll transform a simple CSV-reading workflow into a sophisticated bioinformatic
 <h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
 <p>Before taking on this side quest, you should:</p>
 <ul>
-<li>Have completed the <a href="../hello_nextflow/README.md">Hello Nextflow</a> tutorial or equivalent beginner's course.</li>
+<li>Have completed the <a href="../../hello_nextflow/">Hello Nextflow</a> tutorial or equivalent beginner's course.</li>
 <li>Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators, working with files, meta data)</li>
 <li>Have basic familiarity with common programming constructs (variables, maps, lists)</li>
 </ul>
@@ -4941,7 +4941,7 @@ We'll start with fundamental concepts and build up to advanced patterns.</p>
 <hr />
 <h2 id="0-get-started">0. Get started<a class="headerlink" href="#0-get-started" title="Permanent link">&para;</a></h2>
 <h4 id="open-the-training-codespace">Open the training codespace<a class="headerlink" href="#open-the-training-codespace" title="Permanent link">&para;</a></h4>
-<p>If you haven't yet done so, make sure to open the training environment as described in the <a href="../envsetup/index.md">Environment Setup</a>.</p>
+<p>If you haven't yet done so, make sure to open the training environment as described in the <a href="../../envsetup/">Environment Setup</a>.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h4 id="move-into-the-project-directory">Move into the project directory<a class="headerlink" href="#move-into-the-project-directory" title="Permanent link">&para;</a></h4>
 <p>Let's move into the directory where the files for this tutorial are located.</p>
@@ -6073,7 +6073,7 @@ We'll start with fundamental concepts and build up to advanced patterns.</p>
 <a id="__codelineno-52-6" name="__codelineno-52-6" href="#__codelineno-52-6"></a><span class="w">    </span>--html<span class="w"> </span>sample_003.fastp.html<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-52-7" name="__codelineno-52-7" href="#__codelineno-52-7"></a><span class="w">    </span>--thread<span class="w"> </span><span class="m">2</span>
 </code></pre></div>
-<p>Another common usage of dynamic script logic can be seen in <a href="../../nf4science/genomics/02_joint_calling">the Nextflow for Science Genomics module</a>. In that module, the GATK process being called can take multiple input files, but each must be prefixed with <code>-V</code> to form a correct command line. The process uses scripting to transform a collection of input files (<code>all_gvcfs</code>) into the correct command arguments:</p>
+<p>Another common usage of dynamic script logic can be seen in <a href="../../nf4_science/genomics/03_joint_calling/">the Nextflow for Science Genomics module</a>. In that module, the GATK process being called can take multiple input files, but each must be prefixed with <code>-V</code> to form a correct command line. The process uses scripting to transform a collection of input files (<code>all_gvcfs</code>) into the correct command arguments:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">command line manipulation for GATK</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-53-1">1</a></span>
 <span class="normal"><a href="#__codelineno-53-2">2</a></span>
 <span class="normal"><a href="#__codelineno-53-3">3</a></span>

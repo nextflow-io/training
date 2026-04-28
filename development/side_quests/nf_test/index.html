@@ -4500,13 +4500,13 @@
 <h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
 <p>Before taking on this side quest, you should:</p>
 <ul>
-<li>Have completed the <a href="../hello_nextflow/README.md">Hello Nextflow</a> tutorial or equivalent beginner's course.</li>
+<li>Have completed the <a href="../../hello_nextflow/">Hello Nextflow</a> tutorial or equivalent beginner's course.</li>
 <li>Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators, working with files, meta data)</li>
 </ul>
 <hr />
 <h2 id="0-get-started">0. Get started<a class="headerlink" href="#0-get-started" title="Permanent link">&para;</a></h2>
 <h4 id="open-the-training-codespace">Open the training codespace<a class="headerlink" href="#open-the-training-codespace" title="Permanent link">&para;</a></h4>
-<p>If you haven't yet done so, make sure to open the training environment as described in the <a href="../envsetup/index.md">Environment Setup</a>.</p>
+<p>If you haven't yet done so, make sure to open the training environment as described in the <a href="../../envsetup/">Environment Setup</a>.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h4 id="move-into-the-project-directory">Move into the project directory<a class="headerlink" href="#move-into-the-project-directory" title="Permanent link">&para;</a></h4>
 <p>Let's move into the directory where the files for this tutorial are located.</p>
@@ -4521,11 +4521,11 @@
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">├── greetings.csv</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">└── main.nf</span>
 </code></pre></div>
-<p>For a detailed description of the files, see the <a href="../hello_nextflow/00_orientation.md">warmup from Hello Nextflow</a>.</p>
-<p>The workflow we'll be testing is a subset of the Hello workflow built in <a href="../hello_nextflow/03_hello_workflow.md">Hello Workflow</a>.</p>
+<p>For a detailed description of the files, see the <a href="../../hello_nextflow/00_orientation/">warmup from Hello Nextflow</a>.</p>
+<p>The workflow we'll be testing is a subset of the Hello workflow built in <a href="../../hello_nextflow/03_hello_workflow/">Hello Workflow</a>.</p>
 <details class="example">
 <summary>What does the Hello Nextflow workflow do?</summary>
-<p>If you haven't done the <a href="../hello_nextflow/index.md">Hello Nextflow</a> training, here's a quick overview of what this simple workflow does.</p>
+<p>If you haven't done the <a href="../../hello_nextflow/">Hello Nextflow</a> training, here's a quick overview of what this simple workflow does.</p>
 <p>The workflow takes a CSV file containing greetings, runs four consecutive transformation steps on them, and outputs a single text file containing an ASCII picture of a fun character saying the greetings.</p>
 <p>The four steps are implemented as Nextflow processes (<code>sayHello</code>, <code>convertToUpper</code>, <code>collectGreetings</code>, and <code>cowpy</code>) stored in separate module files.</p>
 <ol>
@@ -5133,7 +5133,7 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-35-23" name="__codelineno-35-23" href="#__codelineno-35-23"></a>
 <a id="__codelineno-35-24" name="__codelineno-35-24" href="#__codelineno-35-24"></a><span class="go">FAILURE: Executed 1 tests in 4.884s (1 failed)</span>
 </code></pre></div>
-<p>The test fails because the <code>sayHello</code> process declares 1 input but was called with 0 arguments. Let's fix that by adding an input to the process. Remember from <a href="../hello_nextflow/03_hello_workflow.md">Hello Workflow</a> (and the warmup section above) that our <code>sayHello</code> process takes a single value input, which we will need to provide. We should also fix the test name to better reflect what we're testing.</p>
+<p>The test fails because the <code>sayHello</code> process declares 1 input but was called with 0 arguments. Let's fix that by adding an input to the process. Remember from <a href="../../hello_nextflow/03_hello_workflow/">Hello Workflow</a> (and the warmup section above) that our <code>sayHello</code> process takes a single value input, which we will need to provide. We should also fix the test name to better reflect what we're testing.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">After</label><label for="__tabbed_4_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">

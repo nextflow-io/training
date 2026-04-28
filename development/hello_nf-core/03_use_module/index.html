@@ -4516,7 +4516,7 @@ Specifically, the <code>nf-core modules install</code> command makes it possible
 <div class="highlight"><span class="filename">Import statement produced by install command</span><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">FIND_CONCATENATE</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/nf-core/find/concatenate/main&#39;</span>
 </code></pre></div>
 <p>Note that the nf-core convention is to use uppercase for module names when importing them.</p>
-<p>Open up <a href="core-hello/workflows/hello.nf">core-hello/workflows/hello.nf</a> and make the following substitution:</p>
+<p>Open up <code>core-hello/workflows/hello.nf</code> and make the following substitution:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">After</label><label for="__tabbed_1_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -4730,7 +4730,7 @@ This is the relevant code:</p>
 Not only does it allow you to name outputs based on metadata, but you can also do things like use it to apply different parameter values, and in combination with specific operators, you can even group, sort or filter out data as it flows through the pipeline.</p>
 <div class="admonition note">
 <p class="admonition-title">Learn more about metadata</p>
-<p>For a comprehensive introduction to working with metadata in Nextflow workflows, including how to read metadata from samplesheets and use it to customize processing, see the <a href="../side_quests/metadata">Metadata in workflows</a> side quest.</p>
+<p>For a comprehensive introduction to working with metadata in Nextflow workflows, including how to read metadata from samplesheets and use it to customize processing, see the <a href="../../side_quests/metadata/">Metadata in workflows</a> side quest.</p>
 </div>
 <h3 id="23-summarize-changes-to-be-made">2.3. Summarize changes to be made<a class="headerlink" href="#23-summarize-changes-to-be-made" title="Permanent link">&para;</a></h3>
 <p>Based on what we've reviewed, these are the major changes we need to make to our pipeline to utilize the <code>find/concatenate</code> module:</p>
