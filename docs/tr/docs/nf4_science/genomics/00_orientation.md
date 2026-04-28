@@ -22,7 +22,7 @@ Bu kursu kendi başınıza çalışıyorsanız, lütfen daha fazla ayrıntı iç
 
 ### Sürüm gereksinimleri
 
-Bu eğitim, Nextflow 25.10.2 veya sonrası için **v2 sözdizimi ayrıştırıcısının ETKİN olduğu** sürüm için tasarlanmıştır.
+Bu eğitim, Nextflow 25.10.2 veya sonrası için **v2 sözdizimi ayrıştırıcısının ETKİN olduğu** sürüm ile çalışmaktadır.
 Yerel veya özel bir ortam kullanıyorsanız, lütfen [burada](../../info/nxf_versions.md) belgelenen doğru ayarları kullandığınızdan emin olun.
 
 ## Çalışmaya hazır olun

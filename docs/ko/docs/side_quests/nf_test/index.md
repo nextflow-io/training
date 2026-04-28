@@ -47,7 +47,7 @@
 
 이 사이드 퀘스트를 시작하기 전에 다음을 완료해야 합니다:
 
-- [Hello Nextflow](../hello_nextflow/README.md) 튜토리얼 또는 동급의 입문 과정을 완료해야 합니다.
+- [Hello Nextflow](../../hello_nextflow/index.md) 튜토리얼 또는 동급의 입문 과정을 완료해야 합니다.
 - 기본적인 Nextflow 개념과 메커니즘(process, 채널, 연산자, 파일 작업, 메타데이터)에 익숙해야 합니다.
 
 ---
@@ -56,7 +56,7 @@
 
 #### 교육 코드스페이스 열기
 
-아직 열지 않았다면 [환경 설정](../envsetup/index.md)에 설명된 대로 교육 환경을 열어 주세요.
+아직 열지 않았다면 [환경 설정](../../envsetup/index.md)에 설명된 대로 교육 환경을 열어 주세요.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -84,13 +84,13 @@ code .
 └── main.nf
 ```
 
-파일에 대한 자세한 설명은 [Hello Nextflow의 준비 운동](../hello_nextflow/00_orientation.md)을 참조하세요.
+파일에 대한 자세한 설명은 [Hello Nextflow의 준비 운동](../../hello_nextflow/00_orientation.md)을 참조하세요.
 
-테스트할 워크플로우는 [Hello Workflow](../hello_nextflow/03_hello_workflow.md)에서 구축한 Hello 워크플로우의 일부입니다.
+테스트할 워크플로우는 [Hello Workflow](../../hello_nextflow/03_hello_workflow.md)에서 구축한 Hello 워크플로우의 일부입니다.
 
 ??? example "Hello Nextflow 워크플로우는 무엇을 하나요?"
 
-    [Hello Nextflow](../hello_nextflow/index.md) 교육을 수행하지 않은 경우, 이 간단한 워크플로우가 무엇을 하는지 간략히 설명합니다.
+    [Hello Nextflow](../../hello_nextflow/index.md) 교육을 수행하지 않은 경우, 이 간단한 워크플로우가 무엇을 하는지 간략히 설명합니다.
 
     워크플로우는 인사말이 담긴 CSV 파일을 받아 네 가지 연속적인 변환 단계를 실행하고, 재미있는 캐릭터가 인사말을 말하는 ASCII 그림이 담긴 단일 텍스트 파일을 출력합니다.
 
@@ -121,8 +121,6 @@ code .
     */
     process sayHello {
 
-        publishDir 'results', mode: 'copy'
-
         input:
             val greeting
 
@@ -140,8 +138,6 @@ code .
     */
     process convertToUpper {
 
-        publishDir 'results', mode: 'copy'
-
         input:
             path input_file
 
@@ -155,7 +151,7 @@ code .
     }
 
     workflow {
-
+        main:
         // CSV 파일에서 입력 채널 생성
         greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
 
@@ -164,6 +160,17 @@ code .
 
         // 인사말을 대문자로 변환
         convertToUpper(sayHello.out)
+
+        publish:
+        greetings = sayHello.out
+        upper_greetings = convertToUpper.out
+    }
+
+    output {
+        greetings {
+        }
+        upper_greetings {
+        }
     }
     ```
 
@@ -568,10 +575,10 @@ SUCCESS: Executed 1 tests in 1.588s
             then {
                 assert file("$launchDir/results/Bonjour-output.txt").exists()
                 assert file("$launchDir/results/Hello-output.txt").exists()
-                assert file("$launchDir/results/Holà-output.txt").exists()
+                assert file("$launchDir/results/Hola-output.txt").exists()
                 assert file("$launchDir/results/UPPER-Bonjour-output.txt").exists()
                 assert file("$launchDir/results/UPPER-Hello-output.txt").exists()
-                assert file("$launchDir/results/UPPER-Holà-output.txt").exists()
+                assert file("$launchDir/results/UPPER-Hola-output.txt").exists()
             }
 
         }
@@ -728,7 +735,7 @@ Test Process sayHello
 FAILURE: Executed 1 tests in 4.884s (1 failed)
 ```
 
-`sayHello` process가 1개의 입력을 선언했지만 0개의 인자로 호출되었기 때문에 테스트가 실패합니다. process에 입력을 추가하여 이를 수정합니다. [Hello Workflow](../hello_nextflow/03_hello_workflow.md)(및 위의 준비 운동 섹션)에서 `sayHello` process가 단일 값 입력을 받는다는 것을 기억하세요. 이를 제공해야 합니다. 또한 테스트 이름을 테스트하는 내용을 더 잘 반영하도록 수정합니다.
+`sayHello` process가 1개의 입력을 선언했지만 0개의 인자로 호출되었기 때문에 테스트가 실패합니다. process에 입력을 추가하여 이를 수정합니다. [Hello Workflow](../../hello_nextflow/03_hello_workflow.md)(및 위의 준비 운동 섹션)에서 `sayHello` process가 단일 값 입력을 받는다는 것을 기억하세요. 이를 제공해야 합니다. 또한 테스트 이름을 테스트하는 내용을 더 잘 반영하도록 수정합니다.
 
 === "후"
 
@@ -830,7 +837,7 @@ code tests/main.sayhello.nf.test.snap
 
 이는 명시적으로 테스트하는 `sayHello` process가 생성한 출력을 나타냅니다. 테스트를 다시 실행하면 프로그램은 새 출력이 원래 기록된 출력과 일치하는지 확인합니다. 이는 process 출력이 변경되지 않는지 테스트하는 빠르고 간단한 방법이므로 nf-test가 기본값으로 제공합니다.
 
-!!!warning "경고"
+!!! warning "경고"
 
     즉, 원래 실행에서 기록한 출력이 올바른지 확인해야 합니다!
 
@@ -1195,4 +1202,4 @@ SUCCESS: Executed 4 tests in 13.481s
 
 ## 다음 단계
 
-[사이드 퀘스트 메뉴](../)로 돌아가거나 페이지 오른쪽 하단의 버튼을 클릭하여 목록의 다음 주제로 이동하세요.
+[사이드 퀘스트 메뉴](../index.md)로 돌아가거나 페이지 오른쪽 하단의 버튼을 클릭하여 목록의 다음 주제로 이동하세요.

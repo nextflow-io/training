@@ -1,53 +1,38 @@
-# Orientació
+# Primers passos
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-L'entorn de GitHub Codespaces conté tot el programari, codi i dades necessaris per treballar en aquest curs de formació, així que no cal que instal·lis res tu mateix.
-No obstant això, necessites un compte (gratuït) per iniciar sessió, i hauries de dedicar uns minuts a familiaritzar-te amb la interfície.
+## Inicia un entorn de formació
 
-Si encara no ho has fet, si us plau segueix [aquest enllaç](../../envsetup/) abans de continuar.
+Per utilitzar l'entorn preconstruït que proporcionem a GitHub Codespaces, feu clic al botó "Open in GitHub Codespaces" que trobareu a continuació.
+Per a altres opcions, consulteu [Opcions d'entorn](../envsetup/index.md).
 
-## Materials proporcionats
+Us recomanem obrir l'entorn de formació en una nova pestanya o finestra del navegador (utilitzeu el clic dret, ctrl+clic o cmd+clic segons el vostre equip) per poder continuar llegint mentre es carrega l'entorn.
+Haureu de mantenir aquestes instruccions obertes en paral·lel per treballar al llarg del curs.
 
-Al llarg d'aquest curs de formació, treballarem al directori `side-quests/`.
-Aquest directori conté tots els fitxers de codi, dades de prova i fitxers accessoris que necessitaràs.
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-Sent lliure d'explorar els continguts d'aquest directori; la manera més fàcil de fer-ho és utilitzar l'explorador de fitxers a la part esquerra de l'espai de treball de GitHub Codespaces.
-Alternativament, pots utilitzar la comanda `tree`.
-Al llarg del curs, utilitzem la sortida de `tree` per representar l'estructura i els continguts del directori de forma llegible, de vegades amb modificacions menors per claredat.
+### Conceptes bàsics de l'entorn
 
-Aquí generem una taula de continguts fins al segon nivell:
+Aquest entorn de formació conté tot el programari, codi i dades necessaris per treballar en aquest curs de formació, de manera que no cal que instal·leu res vosaltres mateixos.
 
-```bash
-tree . -L 2
-```
+L'espai de treball està configurat amb una interfície VSCode, que inclou un explorador de fitxers, un editor de codi i un terminal.
+Totes les instruccions donades durant el curs (p. ex., "obriu el fitxer", "editeu el codi" o "executeu aquesta comanda") fan referència a aquestes tres parts de la interfície VSCode llevat que s'indiqui el contrari.
 
-Si executes això dins de `side-quests`, hauries de veure la següent sortida:
+Si esteu treballant en aquest curs de manera independent, familiaritzeu-vos amb els [conceptes bàsics de l'entorn](../envsetup/01_setup.md) per obtenir més detalls.
 
-```console title="Directory contents"
-.
-├── metadata
-├── nf-core
-├── nf-test
-├── solutions
-├── splitting_and_grouping
-└── workflows_of_workflows
-```
+### Requisits de versió
 
-**Aquí tens un resum del que hauries de saber per començar:**
+Aquesta formació funciona amb Nextflow 25.10.2 o posterior **amb l'analitzador de sintaxi v2 ACTIVAT**.
+Si utilitzeu un entorn local o personalitzat, assegureu-vos d'utilitzar la configuració correcta tal com es documenta [aquí](../info/nxf_versions.md).
 
-- **Cada directori correspon a una missió secundària individual.**
-  Els seus continguts es detallen a la pàgina de la missió secundària corresponent.
+## Llista de verificació de preparació
 
-- **El directori `solutions`** conté els scripts de workflow i/o mòdul completats que resulten d'executar els diversos passos de cada missió secundària.
-  Estan pensats per ser utilitzats com a referència per comprovar el teu treball i resoldre qualsevol problema.
+Creieu que esteu a punt per començar?
 
-!!!tip "Consell"
+- [ ] Entenc l'objectiu d'aquest curs i els seus prerequisits
+- [ ] El meu entorn està en funcionament
 
-    Si per qualsevol raó surts d'aquest directori, sempre pots executar aquesta comanda per tornar-hi:
+Si podeu marcar totes les caselles, esteu a punt per continuar.
 
-    ```bash
-    cd /workspaces/training/side-quests
-    ```
-
-Ara, per començar el curs, fes clic a la fletxa a la cantonada inferior dreta d'aquesta pàgina.
+**Per començar, seleccioneu una Side Quest del menú de navegació.**

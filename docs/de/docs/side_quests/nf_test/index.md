@@ -1,3 +1,16 @@
+I'll analyze the diff and update only the specific sections that changed in the existing German translation.
+
+The changes are:
+
+1. Link URL: `../hello_nextflow/README.md` → `../../hello_nextflow/index.md` (Prerequisites section)
+2. Link URL: `../envsetup/index.md` → `../../envsetup/index.md` (Open training codespace section)
+3. Link URLs: `../hello_nextflow/00_orientation.md` → `../../hello_nextflow/00_orientation.md`, `../hello_nextflow/03_hello_workflow.md` → `../../hello_nextflow/03_hello_workflow.md`, `../hello_nextflow/index.md` → `../../hello_nextflow/index.md` (Review materials section)
+4. Workflow code block: removed `publishDir` directives, added `main:`, `publish:`, and `output {}` block
+5. File assertions: `Holà` → `Hola` (two occurrences)
+6. Link URL: `../hello_nextflow/03_hello_workflow.md` → `../../hello_nextflow/03_hello_workflow.md` (process test section)
+7. `!!!warning` → `!!! warning` (formatting fix)
+8. Link URL: `../` → `../index.md` (What's next section)
+
 # Testen mit nf-test
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
@@ -47,7 +60,7 @@ Diese Fähigkeiten helfen dir, eine umfassende Teststrategie in deinen Pipeline-
 
 Bevor du diese Side Quest in Angriff nimmst, solltest du:
 
-- Das Tutorial [Hello Nextflow](../hello_nextflow/README.md) oder einen gleichwertigen Einsteigerkurs abgeschlossen haben.
+- Das Tutorial [Hello Nextflow](../../hello_nextflow/index.md) oder einen gleichwertigen Einsteigerkurs abgeschlossen haben.
 - Mit grundlegenden Nextflow-Konzepten und -Mechanismen vertraut sein (Prozesse, Kanäle, Operatoren, Arbeiten mit Dateien, Metadaten).
 
 ---
@@ -56,7 +69,7 @@ Bevor du diese Side Quest in Angriff nimmst, solltest du:
 
 #### Den Training-Codespace öffnen
 
-Falls du das noch nicht getan hast, öffne die Trainingsumgebung wie in der [Umgebung einrichten](../envsetup/index.md) beschrieben.
+Falls du das noch nicht getan hast, öffne die Trainingsumgebung wie in der [Umgebung einrichten](../../envsetup/index.md) beschrieben.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -84,13 +97,13 @@ Du findest eine Haupt-Workflow-Datei und eine CSV-Datei namens `greetings.csv`, 
 └── main.nf
 ```
 
-Eine detaillierte Beschreibung der Dateien findest du im [Aufwärmen aus Hello Nextflow](../hello_nextflow/00_orientation.md).
+Eine detaillierte Beschreibung der Dateien findest du im [Aufwärmen aus Hello Nextflow](../../hello_nextflow/00_orientation.md).
 
-Der Workflow, den wir testen werden, ist eine Teilmenge des Hello-Workflows, der in [Hello Workflow](../hello_nextflow/03_hello_workflow.md) erstellt wurde.
+Der Workflow, den wir testen werden, ist eine Teilmenge des Hello-Workflows, der in [Hello Workflow](../../hello_nextflow/03_hello_workflow.md) erstellt wurde.
 
 ??? example "Was macht der Hello Nextflow Workflow?"
 
-    Falls du das [Hello Nextflow](../hello_nextflow/index.md)-Training nicht gemacht hast, hier ein kurzer Überblick darüber, was dieser einfache Workflow tut.
+    Falls du das [Hello Nextflow](../../hello_nextflow/index.md)-Training nicht gemacht hast, hier ein kurzer Überblick darüber, was dieser einfache Workflow tut.
 
     Der Workflow nimmt eine CSV-Datei mit Begrüßungen entgegen, führt vier aufeinanderfolgende Transformationsschritte durch und gibt eine einzelne Textdatei aus, die ein ASCII-Bild einer lustigen Figur enthält, die die Begrüßungen sagt.
 
@@ -121,8 +134,6 @@ Den vollständigen Workflow-Code siehst du unten.
     */
     process sayHello {
 
-        publishDir 'results', mode: 'copy'
-
         input:
             val greeting
 
@@ -140,8 +151,6 @@ Den vollständigen Workflow-Code siehst du unten.
     */
     process convertToUpper {
 
-        publishDir 'results', mode: 'copy'
-
         input:
             path input_file
 
@@ -155,7 +164,7 @@ Den vollständigen Workflow-Code siehst du unten.
     }
 
     workflow {
-
+        main:
         // Erstelle einen Kanal für Eingaben aus einer CSV-Datei
         greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
 
@@ -164,6 +173,17 @@ Den vollständigen Workflow-Code siehst du unten.
 
         // Die Begrüßung in Großbuchstaben umwandeln
         convertToUpper(sayHello.out)
+
+        publish:
+        greetings = sayHello.out
+        upper_greetings = convertToUpper.out
+    }
+
+    output {
+        greetings {
+        }
+        upper_greetings {
+        }
     }
     ```
 
@@ -568,10 +588,10 @@ Fügen wir unserer Test-Datei eine Assertion hinzu, um zu überprüfen, ob die A
             then {
                 assert file("$launchDir/results/Bonjour-output.txt").exists()
                 assert file("$launchDir/results/Hello-output.txt").exists()
-                assert file("$launchDir/results/Holà-output.txt").exists()
+                assert file("$launchDir/results/Hola-output.txt").exists()
                 assert file("$launchDir/results/UPPER-Bonjour-output.txt").exists()
                 assert file("$launchDir/results/UPPER-Hello-output.txt").exists()
-                assert file("$launchDir/results/UPPER-Holà-output.txt").exists()
+                assert file("$launchDir/results/UPPER-Hola-output.txt").exists()
             }
 
         }
@@ -728,7 +748,7 @@ Test Process sayHello
 FAILURE: Executed 1 tests in 4.884s (1 failed)
 ```
 
-Der Test schlägt fehl, weil der `sayHello`-Prozess 1 Eingabe deklariert, aber mit 0 Argumenten aufgerufen wurde. Beheben wir das, indem wir eine Eingabe für den Prozess hinzufügen. Denk daran aus [Hello Workflow](../hello_nextflow/03_hello_workflow.md) (und dem Aufwärm-Abschnitt oben), dass unser `sayHello`-Prozess eine einzelne Wert-Eingabe nimmt, die wir angeben müssen. Wir sollten auch den Test-Namen korrigieren, um besser widerzuspiegeln, was wir testen.
+Der Test schlägt fehl, weil der `sayHello`-Prozess 1 Eingabe deklariert, aber mit 0 Argumenten aufgerufen wurde. Beheben wir das, indem wir eine Eingabe für den Prozess hinzufügen. Denk daran aus [Hello Workflow](../../hello_nextflow/03_hello_workflow.md) (und dem Aufwärm-Abschnitt oben), dass unser `sayHello`-Prozess eine einzelne Wert-Eingabe nimmt, die wir angeben müssen. Wir sollten auch den Test-Namen korrigieren, um besser widerzuspiegeln, was wir testen.
 
 === "Danach"
 
@@ -830,7 +850,7 @@ Wir drucken es hier nicht aus, aber du solltest eine JSON-Datei sehen, die Detai
 
 Dies repräsentiert die vom `sayHello`-Prozess erstellten Ausgaben, die wir explizit testen. Wenn wir den Test erneut ausführen, prüft das Programm, ob die neue Ausgabe mit der ursprünglich aufgezeichneten Ausgabe übereinstimmt. Das ist eine schnelle, einfache Möglichkeit zu testen, dass sich Prozessausgaben nicht ändern, weshalb nf-test es als Standard bereitstellt.
 
-!!!warning "Warnung"
+!!! warning "Warnung"
 
     Das bedeutet, dass wir sicherstellen müssen, dass die Ausgabe, die wir beim ursprünglichen Durchlauf aufzeichnen, korrekt ist!
 
@@ -1195,4 +1215,4 @@ Schau dir die [nf-test-Dokumentation](https://www.nf-test.com/) für erweiterte 
 
 ## Wie geht es weiter?
 
-Kehre zum [Menü der Side Quests](../) zurück oder klicke auf die Schaltfläche unten rechts auf der Seite, um zum nächsten Thema in der Liste zu wechseln.
+Kehre zum [Menü der Side Quests](../index.md) zurück oder klicke auf die Schaltfläche unten rechts auf der Seite, um zum nächsten Thema in der Liste zu wechseln.

@@ -36,7 +36,7 @@ export NXF_SYNTAX_PARSER=v1
 
 Veuillez vous assurer d'utiliser les paramètres corrects comme documenté [ici](../info/nxf_versions.md).
 
-La formation nécessite en outre **nf-core tools 3.4.1**.
+La formation nécessite en outre **nf-core tools 3.5.2**.
 Si vous utilisez une version différente des outils nf-core, vous pourriez rencontrer des difficultés à suivre.
 
 Vous pouvez vérifier quelle version est installée dans votre environnement à l'aide de la commande `nf-core --version`.
@@ -63,7 +63,7 @@ cd hello-nf-core/
     cd /workspaces/training/hello-nf-core
     ```
 
-Maintenant, jetons un coup d'œil au contenu de ce répertoire.
+Ensuite, explorez le contenu de ce répertoire.
 
 ### Explorer les ressources fournies
 

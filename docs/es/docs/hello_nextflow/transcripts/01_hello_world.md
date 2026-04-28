@@ -240,9 +240,9 @@ Lógica bastante compleja con muy poca sintaxis aquí. Y puedes ver con suerte c
 
 Bien, eso es genial. El problema ahora es que, cada vez que ejecuto este pipeline, necesito hacer guión, input para que se ejecute.
 
-Si intento ejecutar sin este parámetro, ahora Nextflow va a lanzar un error diciendo que necesitaba este parámetro y no fue establecido. y así no sabía qué hacer.
+Si intento ejecutar sin este parámetro, Nextflow lanzará un error diciendo que necesitaba este parámetro y no fue establecido, y así no sabía qué hacer.
 
-Esto es algo nuevo genial, por cierto. En el pasado, Nextflow simplemente se habría ejecutado con una cadena vacía, y habrías tenido todo tipo de errores extraños, que habrían sido difíciles de entender. Pero en el nuevo analizador de sintaxis de Nextflow, es un poco más cuidadoso y te lo dice de inmediato.
+Esto es algo nuevo y genial, por cierto. En el pasado, Nextflow simplemente se habría ejecutado con una cadena vacía, y habrías tenido todo tipo de errores extraños, que habrían sido difíciles de entender. Pero en el nuevo analizador de sintaxis de Nextflow, es un poco más cuidadoso y te lo dice de inmediato.
 
 Así que no siempre queremos especificar cada opción. Es una buena práctica especificar valores predeterminados sensatos. Entonces, ¿cómo hacemos eso en nuestro script?
 
@@ -252,13 +252,13 @@ De nuevo, algo de sintaxis nueva aquí, así que presta atención. Esto es realm
 
 Y luego después de este carácter de dos puntos, estamos definiendo un tipo de la variable. No tienes que hacer esto, puedes simplemente dejarlo en blanco, pero es realmente agradable. Le dice a Nextflow que estamos esperando una cadena y tratarla como tal.
 
-Si queremos un número en su lugar, por ejemplo, podríamos escribir float, y eso diría que queremos un número de punto flotante. Y si intentamos ejecutar con eso, entonces lanzará un error. Si le damos una cadena, que no es un float. Y también lo pasará como tal. Como si hacemos string, entonces sabe que es una cadena. E incluso si tiene ceros a la izquierda y es todo numérico, aún lo pasará como una cadena real.
+Si queremos un número en su lugar, por ejemplo, podríamos escribir float, y eso diría que queremos un número de punto flotante. Y si intentamos ejecutar con eso, entonces lanzará un error. Si le damos una cadena, que no es un float. Y también lo pasará como tal. Si hacemos string, entonces sabe que es una cadena. E incluso si tiene ceros a la izquierda y es todo numérico, aún lo pasará como una cadena real.
 
 Así que esa seguridad de tipos es una característica muy nueva de Nextflow, pero realmente poderosa para hacer tu código más seguro de escribir y ejecutar.
 
-Luego después de eso tenemos un símbolo igual y luego el valor predeterminado aquí. Nextflow fue escrito en Barcelona originalmente, así que parece apropiado que tengamos algo de español aquí, _"Holà mundo!"_ como predeterminado.
+Luego después de eso tenemos un símbolo igual y luego el valor predeterminado aquí. Nextflow fue escrito en Barcelona originalmente, así que parece apropiado que tengamos algo de español aquí, _"¡Hola mundo!"_ como predeterminado.
 
-Bien, voy a guardar ese script, volver, ejecutar el script de nuevo sin _--input_. Y esta vez debería ejecutarse y creará nuestro nuevo archivo en _results_. Y en este archivo ahora dice _"Holà mundo!"_.
+Bien, voy a guardar ese script, volver, ejecutar el script de nuevo sin _--input_. Y esta vez debería ejecutarse y creará nuestro nuevo archivo en _results_. Y en este archivo ahora dice _"¡Hola mundo!"_.
 
 Esto es solo un valor predeterminado, sin embargo, así que no significa que no podamos hacer lo mismo que antes. Si vuelvo y encuentro mi viejo script aquí, _"Hej Världen"_, porque hago _--input_ en la línea de comandos, eso sobrescribirá ese valor predeterminado y usará eso de nuevo en el archivo output.txt.
 
@@ -266,13 +266,13 @@ Así que esto en el script es solo el valor predeterminado que estoy establecien
 
 A medida que construimos nuestro workflow para que sea más complejo e incluya más parámetros, este bloque params en la parte superior del script comenzará a recopilarlos todos en un solo lugar.
 
-Y terminas con esta simetría bastante agradable en tu script, donde efectivamente tienes todas tus entradas de workflow aquí y tus salidas de workflow en la parte inferior. Y es muy claro cuál es la interfaz de tu workflow con el mundo exterior. Así que puedes tomar un nuevo pipeline muy rápidamente con la nueva sintaxis y entender cómo usarlo.
+Y terminas con esta simetría bastante agradable en tu script, donde efectivamente tienes todas tus entradas del workflow aquí y tus salidas del workflow en la parte inferior. Y es muy claro cuál es la interfaz de tu workflow con el mundo exterior. Así que puedes tomar un nuevo pipeline muy rápidamente con la nueva sintaxis y entender cómo usarlo.
 
 Una última cosa genial. No tenemos que establecer un valor predeterminado con esto. Si hacemos params input pero no establecemos un valor predeterminado, entonces le dice a Nextflow que este parámetro es requerido, y de nuevo, el pipeline fallará al ejecutarse sin él, pero te dará un mensaje de error más útil en lugar de algo sobre que es nulo.
 
-Así que dice que estamos esperando que su entrada sea requerida, pero no fue especificada en la línea de comandos. Muy agradable.
+Así que dice que estamos esperando que su entrada sea requerida, pero no fue especificada en la línea de comandos. Muy bien.
 
-Bien, así que esperemos que ahora esté claro cómo configurar tu pipeline de Nextflow con entradas variables y parámetros, cómo establecer el valor predeterminado, establecer los tipos, podría ser un booleano verdadero falso bandera o un entero o diferentes tipos aquí. Cómo pasarlos a tu workflow, donde pasa, y luego interpola en tu proceso. Y también sabes cómo personalizar esos en la línea de comandos cuando lanzas Nextflow. Esto está comenzando a verse más interesante que nuestro simple comando bash.
+Bien, así que esperemos que ahora esté claro cómo configurar tu pipeline de Nextflow con entradas variables y parámetros, cómo establecer el valor predeterminado, establecer los tipos, podría ser un booleano de verdadero/falso o un entero u otros tipos. Cómo pasarlos a tu workflow, por dónde pasan, y luego se interpolan en tu proceso. Y también sabes cómo personalizarlos en la línea de comandos cuando lanzas Nextflow. Esto está comenzando a verse más interesante que nuestro simple comando bash.
 
 ## 4. Gestionar ejecuciones de workflow
 

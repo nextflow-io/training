@@ -27,10 +27,8 @@ Aquestes habilitats us ajudaran a construir workflows que puguin gestionar difer
 
 Abans d'abordar aquesta missió secundària, hauríeu de:
 
-- Haver completat el tutorial [Hello Nextflow](../../hello_nextflow/) o un curs equivalent per a principiants.
+- Haver completat el tutorial [Hello Nextflow](../../hello_nextflow/index.md) o un curs equivalent per a principiants.
 - Estar còmodes amb els conceptes i mecanismes bàsics de Nextflow (processos, canals, operadors)
-
-<!-- He eliminat el suggeriment de fer primer la missió secundària de metamaps perquè funciona de manera més natural després -->
 
 ---
 
@@ -38,7 +36,7 @@ Abans d'abordar aquesta missió secundària, hauríeu de:
 
 #### Obriu l'espai de treball de formació
 
-Si encara no ho heu fet, assegureu-vos d'obrir l'entorn de formació tal com es descriu a la [Configuració de l'entorn](../envsetup/index.md).
+Si encara no ho heu fet, assegureu-vos d'obrir l'entorn de formació tal com es descriu a la [Configuració de l'entorn](../../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -55,6 +53,8 @@ Podeu configurar VSCode perquè es centri en aquest directori:
 ```bash
 code .
 ```
+
+L'editor s'obre amb el directori del projecte en focus.
 
 #### Reviseu els materials
 
@@ -131,11 +131,19 @@ Feu una ullada al fitxer de workflow `main.nf`:
 #!/usr/bin/env nextflow
 
 workflow {
-
+    main:
     // Crea un objecte Path a partir d'una ruta de cadena
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
     println "${myFile} is of class ${myFile.class}"
+
+    publish:
+    analysis_results = channel.empty()
+}
+
+output {
+    analysis_results {
+    }
 }
 ```
 
@@ -155,11 +163,11 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
 
-    data/patientA_rep1_normal_R1_001.fastq.gz is of class java.lang.String
+    data/patientA_rep1_normal_R1_001.fastq.gz is of class class java.lang.String
     ```
 
 Com podeu veure, Nextflow ha imprès la ruta de cadena exactament tal com l'hem escrit.
@@ -203,7 +211,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
 
@@ -226,6 +234,8 @@ Com veurem més endavant, els fitxers remots tindran noms de classe diferents (c
     - **Objecte Path**: Una referència de fitxer intel·ligent amb la qual Nextflow pot treballar
 
     Penseu-hi d'aquesta manera: una cadena de ruta és com escriure una adreça en paper, mentre que un objecte Path és com tenir l'adreça carregada en un dispositiu GPS que sap com navegar fins allà i us pot donar detalls sobre el trajecte.
+
+Entendre aquesta diferència és clau per utilitzar les operacions de fitxers correctament a Nextflow.
 
 ### 1.3. Accedir als atributs dels fitxers
 
@@ -265,11 +275,11 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48
 
-    File object class: sun.nio.fs.UnixPath
+    File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
     Simple name: patientA_rep1_normal_R1_001
     Extension: gz
@@ -310,8 +320,6 @@ Per utilitzar el procés en el workflow, simplement heu d'afegir una declaració
 Podeu obrir el fitxer del mòdul per examinar el seu codi:
 
 ```groovy title="modules/count_lines.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 process COUNT_LINES {
     debug true
 
@@ -334,7 +342,9 @@ Com podeu veure, és un script bastant senzill que descomprimeix el fitxer i com
     La directiva `debug true` en la definició del procés fa que Nextflow imprimeixi la sortida del vostre script (com el recompte de línies "40") directament al registre d'execució.
     Sense això, només veuríeu l'estat d'execució del procés però no la sortida real del vostre script.
 
-    Per obtenir més informació sobre la depuració de processos Nextflow, consulteu la missió secundària [Debugging Nextflow Workflows](debugging.md).
+    Per obtenir més informació sobre la depuració de processos Nextflow, consulteu la missió secundària [Debugging Nextflow Workflows](../debugging/index.md).
+
+Amb el mòdul importat i el seu codi examinat, podem cridar el procés des del workflow.
 
 #### 1.4.2. Afegir una crida a `COUNT_LINES`
 
@@ -382,7 +392,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [cheeky_hypatia] DSL2 - revision: 281d13c414
 
@@ -465,7 +475,7 @@ nextflow run main.nf
 ??? failure "Sortida de la comanda"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [friendly_goodall] DSL2 - revision: ae50609b20
 
@@ -506,7 +516,7 @@ Feu la edició següent al mòdul:
 
 === "Després"
 
-    ```groovy title="modules/count_lines.nf" linenums="3" hl_lines="5"
+    ```groovy title="modules/count_lines.nf" linenums="1" hl_lines="5"
     process COUNT_LINES {
         debug true
 
@@ -516,7 +526,7 @@ Feu la edició següent al mòdul:
 
 === "Abans"
 
-    ```groovy title="modules/count_lines.nf" linenums="3" hl_lines="5"
+    ```groovy title="modules/count_lines.nf" linenums="1" hl_lines="5"
     process COUNT_LINES {
         debug true
 
@@ -533,7 +543,7 @@ nextflow run main.nf
 ??? failure "Sortida de la comanda"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [soggy_golick] DSL2 - revision: ae50609b20
 
@@ -600,6 +610,8 @@ En conjunt, aquests dos exemples us mostren la importància de dir a Nextflow si
 !!! note "Nota"
 
     Assegureu-vos de tornar enrere i corregir tots dos errors intencionals abans de continuar a la secció següent.
+
+Amb les dues correccions aplicades, el workflow prepara i processa correctament el fitxer d'entrada.
 
 ### Conclusió
 
@@ -680,7 +692,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
 
@@ -779,6 +791,8 @@ Tornarem a utilitzar els nostres fitxers d'exemple locals per a la resta d'aques
         println "Parent directory: ${myFile.parent}"
     ```
 
+El workflow ara torna a utilitzar el fitxer d'entrada local.
+
 ### Conclusió
 
 - Les dades remotes s'accedeixen mitjançant un URI (HTTP, FTP, S3, Azure, Google Cloud)
@@ -863,7 +877,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [grave_meucci] DSL2 - revision: b09964a583
 
@@ -920,13 +934,13 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [furious_swanson] DSL2 - revision: c35c34950d
 
     executor >  local (1)
     [9d/6701a6] COUNT_LINES (1) [100%] 1 of 1 ✔
-    File object class: sun.nio.fs.UnixPath
+    File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
     Simple name: patientA_rep1_normal_R1_001
     Extension: gz
@@ -989,7 +1003,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [boring_sammet] DSL2 - revision: d2aa789c9a
 
@@ -1094,7 +1108,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console hl_lines="7-8"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [suspicious_mahavira] DSL2 - revision: ae8edc4e48
 
@@ -1150,7 +1164,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console hl_lines="7-8"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [gigantic_gauss] DSL2 - revision: a39baabb57
 
@@ -1251,7 +1265,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console hl_lines="7-8"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
 
@@ -1370,7 +1384,7 @@ nextflow run main.nf
 ??? failure "Sortida de la comanda"
 
     ```console hl_lines="7-8"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [angry_koch] DSL2 - revision: 44fdf66105
 
@@ -1437,7 +1451,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console hl_lines="5"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [fabulous_davinci] DSL2 - revision: 22b53268dc
 
@@ -1512,7 +1526,7 @@ nextflow run main.nf
 
     ```console
 
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [prickly_stonebraker] DSL2 - revision: f62ab10a3f
 
@@ -1570,18 +1584,14 @@ Feu la edició següent al workflow:
 Podeu obrir el fitxer del mòdul per examinar el seu codi:
 
 ```groovy title="modules/analyze_reads.nf - process example" linenums="1"
-#!/usr/bin/env nextflow
-
 process ANALYZE_READS {
     tag { meta.id }
-
-    publishDir { "results/${meta.id}" }, mode: 'copy'
 
     input:
     tuple val(meta), path(files)
 
     output:
-    tuple val(meta.id), path("${meta.id}_stats.txt")
+    tuple val(meta), path("${meta.id}_stats.txt")
 
     script:
     """
@@ -1598,14 +1608,15 @@ process ANALYZE_READS {
 
 !!! note "Nota"
 
-    Les directives `tag` i `publishDir` utilitzen la sintaxi de closure (`{ ... }`) en lloc de la interpolació de cadenes (`"${...}"`).
-    Això és perquè aquestes directives fan referència a variables d'entrada (`meta`) que no estan disponibles fins al moment d'execució.
-    La sintaxi de closure difereix l'avaluació fins que el procés s'executa realment.
+    La directiva `tag` utilitza la sintaxi de closure (`{ ... }`) perquè fa referència a variables d'entrada (`meta`) que no estan disponibles fins que el procés s'executa.
+    El closure difereix l'avaluació fins al moment d'execució.
 
 !!! note "Nota"
 
     Anomenem el nostre map de metadades `meta` per convenció.
-    Per a una immersió més profunda en els meta maps, consulteu la missió secundària [Metadata and meta maps](../metadata/).
+    Per a una immersió més profunda en els meta maps, consulteu la missió secundària [Metadata and meta maps](../metadata/index.md).
+
+Amb el procés `ANALYZE_READS` importat i el seu codi revisat, podem afegir una crida al workflow.
 
 ### 6.2. Cridar el procés al workflow
 
@@ -1623,7 +1634,7 @@ Per tal d'alimentar el contingut remapat al procés `ANALYZE_READS` (i fer-ho d'
 
 Podem fer-ho utilitzant l'operador [`set`](https://www.nextflow.io/docs/latest/reference/operator.html#set).
 
-Al workflow principal, substituïu l'operador `.view()` per `.set { ch_samples }`, i afegiu una línia per verificar que podem fer referència al canal pel seu nom.
+Al workflow principal, substituïu l'operador `.view()` per `#!groovy .set { ch_samples }`, i afegiu una línia per verificar que podem fer referència al canal pel seu nom.
 
 === "Després"
 
@@ -1664,7 +1675,6 @@ Al workflow principal, substituïu l'operador `.view()` per `.set { ch_samples }
            ]
         }
         .view()
-    }
     ```
 
 Executem-ho:
@@ -1676,7 +1686,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [goofy_kirch] DSL2 - revision: 3313283e42
 
@@ -1691,19 +1701,79 @@ Ara cridem realment el procés `ANALYZE_READS` sobre el canal `ch_samples`.
 
 Al workflow principal, feu els canvis de codi següents:
 
+1. Refactoritzeu la configuració del canal: canvieu `ch_files.map {}` per `ch_samples = ch_files.map {}` (assignació directa, eliminant l'operador `.set`) i utilitzeu `tuple()` en lloc de `[]`
+2. Substituïu la crida a `.view()` per una crida a `ANALYZE_READS(ch_samples)`
+3. Substituïu `channel.empty()` per `ANALYZE_READS.out` a la secció `publish:`
+4. Afegiu un closure `path` al bloc `output {}`
+
 === "Després"
 
-    ```groovy title="main.nf" linenums="23"
+    ```groovy title="main.nf" linenums="5" hl_lines="5 7 14 17 18 21 26"
+    workflow {
+        main:
+        // Carrega fitxers amb channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_samples = ch_files.map { id,  files ->
+           def (sample, replicate, type, readNum) = id.tokenize('_')
+           tuple(
+               [
+                   id: sample,
+                   replicate: replicate.replace('rep', ''),
+                   type: type
+               ],
+               files
+           )
+        }
+
         // Executa l'anàlisi
         ANALYZE_READS(ch_samples)
+
+        publish:
+        analysis_results = ANALYZE_READS.out
+    }
+
+    output {
+        analysis_results {
+            path { meta, file -> "${meta.id}" }
+        }
+    }
     ```
 
 === "Abans"
 
-    ```groovy title="main.nf" linenums="23"
+    ```groovy title="main.nf" linenums="5"
+    workflow {
+        main:
+        // Carrega fitxers amb channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_files.map { id,  files ->
+           def (sample, replicate, type, readNum) = id.tokenize('_')
+           [
+               [
+                   id: sample,
+                   replicate: replicate.replace('rep', ''),
+                   type: type
+               ],
+               files
+           ]
+        }
+            .set { ch_samples }
+
         // Temporal: inspeccionem ch_samples
         ch_samples.view()
+
+        publish:
+        analysis_results = channel.empty()
+    }
+
+    output {
+        analysis_results {
+        }
+    }
     ```
+
+El closure `path` al bloc `output {}` rep cada element de sortida i determina l'estructura de subdirectoris.
+Aquí utilitzem `meta.id` per organitzar els resultats per pacient.
 
 Executem-ho:
 
@@ -1714,7 +1784,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [shrivelled_cori] DSL2 - revision: b546a31769
 
@@ -1722,7 +1792,7 @@ nextflow run main.nf
     [b5/110360] process > ANALYZE_READS (patientA) [100%] 1 of 1 ✔
     ```
 
-Aquest procés està configurat per publicar les seves sortides a un directori `results`, així que feu una ullada allà.
+Les sortides es publiquen a un directori `results`, així que feu una ullada allà.
 
 ??? abstract "Contingut de directori i fitxer"
 
@@ -1779,7 +1849,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [big_stonebraker] DSL2 - revision: f7f9b8a76c
 
@@ -1811,18 +1881,22 @@ Estem sobreescrivint el fitxer de sortida cada vegada.
 
 Com que tenim accés a les metadades del pacient, podem utilitzar-les per fer únics els fitxers publicats incloent metadades diferenciadores, ja sigui a l'estructura de directoris o als propis noms de fitxer.
 
-Feu el canvi següent al workflow:
+Feu el canvi següent al bloc `output {}`:
 
 === "Després"
 
-    ```groovy title="modules/analyze_reads.nf" linenums="6"
-        publishDir { "results/${meta.type}/${meta.id}/${meta.replicate}" }, mode: 'copy'
+    ```groovy title="main.nf" hl_lines="3"
+    analysis_results {
+        path { meta, file -> "${meta.type}/${meta.id}/${meta.replicate}" }
+    }
     ```
 
 === "Abans"
 
-    ```groovy title="modules/analyze_reads.nf" linenums="6"
-        publishDir { "results/${meta.id}" }, mode: 'copy'
+    ```groovy title="main.nf" hl_lines="3"
+    analysis_results {
+        path { meta, file -> "${meta.id}" }
+    }
     ```
 
 Aquí mostrem l'opció d'utilitzar nivells de directori addicionals per tenir en compte els tipus de mostra i les rèpliques, però podríeu experimentar fent-ho també a nivell del nom de fitxer.
@@ -1837,7 +1911,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
 
@@ -1886,11 +1960,11 @@ Hi ha molt més que podeu fer un cop teniu les vostres metadades carregades en u
 3. Dividir, unir i recombinar dades basant-se en valors de metadades
 
 Aquest patró de mantenir les metadades explícites i adjuntes a les dades (en lloc de codificades als noms de fitxer) és una pràctica recomanada fonamental a Nextflow que permet construir workflows d'anàlisi robustos i mantenibles.
-Podeu aprendre més sobre això a la missió secundària [Metadata and meta maps](../metadata/).
+Podeu aprendre més sobre això a la missió secundària [Metadata and meta maps](../metadata/index.md).
 
 ### Conclusió
 
-- La directiva `publishDir` pot organitzar les sortides basant-se en valors de metadades
+- El bloc `output {}` pot organitzar les sortides basant-se en valors de metadades mitjançant closures de ruta dinàmics
 - Les metadades en tuples permeten una organització estructurada dels resultats
 - Aquest enfocament crea workflows mantenibles amb una clara procedència de les dades
 - Els processos poden prendre tuples de metadades i fitxers com a entrada
@@ -1998,24 +2072,23 @@ L'aplicació d'aquestes tècniques en el vostre propi treball us permetrà const
     ch_pairs = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
     ```
 
-6.  **Ús d'operacions de fitxers en processos:** Hem integrat operacions de fitxers en processos Nextflow amb una gestió correcta de l'entrada, utilitzant `publishDir` per organitzar les sortides basant-se en metadades.
+6.  **Ús d'operacions de fitxers en processos:** Hem integrat operacions de fitxers en processos Nextflow amb una gestió correcta de l'entrada, utilitzant el bloc `output {}` per organitzar les sortides basant-se en metadades.
 
     - Associar un meta map amb les entrades del procés
 
     ```groovy
     ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
-    ch_files.map { id,  files ->
+    ch_samples = ch_files.map { id,  files ->
         def (sample, replicate, type, readNum) = id.tokenize('_')
-        [
+        tuple(
             [
                 id: sample,
                 replicate: replicate.replace('rep', ''),
                 type: type
             ],
-             files
-        ]
+            files
+        )
     }
-        .set { ch_samples }
 
     ANALYZE_READS(ch_samples)
     ```
@@ -2023,7 +2096,11 @@ L'aplicació d'aquestes tècniques en el vostre propi treball us permetrà const
     - Organitzar les sortides basant-se en metadades
 
     ```groovy
-    publishDir { "results/${meta.type}/${meta.id}/${meta.replicate}" }, mode: 'copy'
+    output {
+        analysis_results {
+            path { meta, file -> "${meta.type}/${meta.id}/${meta.replicate}" }
+        }
+    }
     ```
 
 ### Recursos addicionals
@@ -2036,4 +2113,4 @@ L'aplicació d'aquestes tècniques en el vostre propi treball us permetrà const
 
 ## Què segueix?
 
-Torneu al [menú de missions secundàries](../) o feu clic al botó a la part inferior dreta de la pàgina per continuar amb el tema següent de la llista.
+Torneu al [menú de missions secundàries](../index.md) o feu clic al botó a la part inferior dreta de la pàgina per continuar amb el tema següent de la llista.

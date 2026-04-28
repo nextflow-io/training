@@ -477,7 +477,7 @@ nextflow run rnaseq.nf -profile test
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `rnaseq.nf` [mad_lorenz] DSL2 - revision: 5846a164d2
 
@@ -738,7 +738,7 @@ nextflow run rnaseq.nf -profile test
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `rnaseq.nf` [gloomy_becquerel] DSL2 - revision: bb11055736
 
@@ -852,7 +852,7 @@ hisat2 -x <genome_index> -U <reads> \
 
 ### 3.2. 정렬 프로세스 작성 및 워크플로우에서 호출
 
-이전과 마찬가지로 프로세스 정의를 채우고, 모듈을 가져오고, 프로세스 호출을 추가해야 합니다.
+이전과 마찬가지로 프로세스 정의를 채우고, 모듈을 가져오고, 프로세스 실행을 추가해야 합니다.
 
 #### 3.2.1. 정렬 프로세스용 모듈 채우기
 
@@ -938,9 +938,9 @@ script 블록은 먼저 아카이브에서 인덱스를 추출한 다음, HISAT2
     include { TRIM_GALORE } from './modules/trim_galore.nf'
     ```
 
-다음으로 워크플로우에 프로세스 호출을 추가합니다.
+다음으로 워크플로우에 프로세스 실행을 추가합니다.
 
-#### 3.2.3. 정렬 프로세스 호출
+#### 3.2.3. 정렬 프로세스 실행
 
 트리밍된 리드는 이전 단계에서 출력된 `TRIM_GALORE.out.trimmed_reads` 채널에 있습니다.
 `#!groovy file(params.hisat2_index_zip)`를 사용하여 게놈 인덱스 아카이브를 제공합니다.
@@ -1085,7 +1085,7 @@ nextflow run rnaseq.nf -profile test
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `rnaseq.nf` [elated_stonebraker] DSL2 - revision: e8e57d0cdd
 

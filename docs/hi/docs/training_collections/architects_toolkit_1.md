@@ -8,7 +8,7 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-हमारे प्रशिक्षण संग्रह हमारी उन्नत प्रशिक्षण सामग्री (जिसे [Side Quests](../../side_quests) कहा जाता है) के माध्यम से क्यूरेटेड लर्निंग पाथ प्रदान करते हैं। यह संग्रह चार आवश्यक विषयों को कवर करता है जो मजबूत और स्केलेबल workflows बनाने के लिए अक्सर एक साथ उपयोग किए जाते हैं।
+हमारे प्रशिक्षण संग्रह हमारी उन्नत प्रशिक्षण सामग्री (जिसे [Side Quests](../side_quests/index.md) कहा जाता है) के माध्यम से क्यूरेटेड लर्निंग पाथ प्रदान करते हैं। यह संग्रह चार आवश्यक विषयों को कवर करता है जो मजबूत और स्केलेबल workflows बनाने के लिए अक्सर एक साथ उपयोग किए जाते हैं।
 
 ## सीखने के उद्देश्य
 
@@ -27,7 +27,7 @@ hide:
 
 **पूर्वापेक्षाएँ**
 
-- [Hello Nextflow](../../hello_nextflow/) प्रशिक्षण या समकक्ष अनुभव का पूरा होना
+- [Hello Nextflow](../hello_nextflow/index.md) प्रशिक्षण या समकक्ष अनुभव का पूरा होना
 - Nextflow सिंटैक्स और अवधारणाओं से बुनियादी परिचित
 - बुनियादी workflow विकास पैटर्न की समझ
 - कमांड-लाइन टूल्स के साथ अनुभव
@@ -36,10 +36,10 @@ hide:
 
 इस संग्रह में चार Side Quests हैं जो पूरक workflow इंजीनियरिंग विषयों को कवर करते हैं:
 
-1. **[Workflows of Workflows](../../side_quests/workflows_of_workflows)** - जटिल workflow आर्किटेक्चर और कंपोजिशन
-2. **[Testing with nf-test](../../side_quests/nf-test)** - Nextflow workflows के लिए टेस्टिंग रणनीतियाँ
-3. **[Metadata](../../side_quests/metadata)** - Nextflow channels में आइटम्स के लिए मेटाडेटा हैंडलिंग
-4. **[Splitting and Grouping](../../side_quests/splitting_and_grouping)** - उन्नत डेटा प्रोसेसिंग पैटर्न
+1. **[Workflows of Workflows](../side_quests/workflows_of_workflows/index.md)** - जटिल workflow आर्किटेक्चर और कंपोजिशन
+2. **[Testing with nf-test](../side_quests/nf_test/index.md)** - Nextflow workflows के लिए टेस्टिंग रणनीतियाँ
+3. **[Metadata](../side_quests/metadata/index.md)** - Nextflow channels में आइटम्स के लिए मेटाडेटा हैंडलिंग
+4. **[Splitting and Grouping](../side_quests/splitting_and_grouping/index.md)** - उन्नत डेटा प्रोसेसिंग पैटर्न
 
 प्रत्येक Side Quest स्व-निहित है और स्वतंत्र अवधारणाओं को कवर करता है, लेकिन हम विषयों के माध्यम से तार्किक प्रगति के लिए उन्हें ऊपर सूचीबद्ध क्रम में पूरा करने की सलाह देते हैं।
 

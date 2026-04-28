@@ -20,7 +20,7 @@ Note que los números no tienen significado, están ahí solo con propósitos il
 ```csv title="data/greetings.csv" linenums="1"
 Hello,English,123
 Bonjour,French,456
-Holà,Spanish,789
+Hola,Spanish,789
 ```
 
 También hemos escrito una versión mejorada del workflow original, ahora llamada `2a-inputs.nf`, que leerá el archivo CSV, extraerá los saludos y escribirá cada uno de ellos en un archivo separado.
@@ -42,7 +42,7 @@ nextflow run 2a-inputs.nf --input data/greetings.csv
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `2a-inputs.nf` [mighty_sammet] DSL2 - revision: 29fb5352b3
 
@@ -57,7 +57,7 @@ Esto sugiere que el process `sayHello()` fue llamado tres veces, una vez en cada
 
 Veamos el directorio 'results' para ver si nuestro workflow todavía está escribiendo una copia de nuestras salidas allí.
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console linenums="1" hl_lines="4-7"
     results
@@ -66,14 +66,14 @@ Veamos el directorio 'results' para ver si nuestro workflow todavía está escri
     └── 2a-inputs
         ├── Bonjour-output.txt
         ├── Hello-output.txt
-        └── Holà-output.txt
+        └── Hola-output.txt
     ```
 
 ¡Sí! Vemos un nuevo directorio llamado `2a-inputs` con tres archivos de salida con diferentes nombres, convenientemente.
 
 Puede abrir cada uno de ellos para asegurarse de que contienen la cadena de saludo apropiada.
 
-??? abstract "Contenido de los archivos"
+??? abstract "Contenido del archivo"
 
     ```console title="results/2a-inputs/Hello-output.txt"
     Hello
@@ -83,8 +83,8 @@ Puede abrir cada uno de ellos para asegurarse de que contienen la cadena de salu
     Bonjour
     ```
 
-    ```console title="results/2a-inputs/Holà-output.txt"
-    Holà
+    ```console title="results/2a-inputs/Hola-output.txt"
+    Hola
     ```
 
 Esto confirma que cada saludo en el archivo de entrada ha sido procesado apropiadamente.
@@ -98,7 +98,7 @@ Puede haber notado que la salida de consola anterior se refería a solo un direc
 
 Echemos un vistazo dentro de ese directorio de tarea `8e/0eb066`.
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console title="8e/0eb066"
     work/8e/0eb066071cdb4123906b7b4ea8b047/
@@ -124,7 +124,7 @@ nextflow run 2a-inputs.nf --input data/greetings.csv -ansi-log false
 ??? success "Salida del comando"
 
     ```console linenums="1"
-    N E X T F L O W  ~  version 25.10.2
+    N E X T F L O W  ~  version 25.10.4
     Launching `2a-inputs.nf` [pedantic_hamilton] DSL2 - revision: 6bbc42e49f
     [ab/1a8ece] Submitted process > sayHello (1)
     [0d/2cae24] Submitted process > sayHello (2)
@@ -142,7 +142,7 @@ Esto confirma que el process `sayHello()` es llamado tres veces, y se crea un di
 
 Si miramos dentro de cada uno de los directorios de tarea listados allí, podemos verificar que cada uno corresponde a uno de los saludos.
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console title="ab/1a8ece"
     work/ab/1a8ece307e53f03fce689dde904b64/
@@ -156,7 +156,7 @@ Si miramos dentro de cada uno de los directorios de tarea listados allí, podemo
 
     ```console title="b5/0df1d6"
     work/b5/0df1d642353269909c2ce23fc2a8fa/
-    └── Holà-output.txt
+    └── Hola-output.txt
     ```
 
 Esto confirma que cada llamada de process se ejecuta aislada de todas las demás.
@@ -244,7 +244,7 @@ Desglosémoslo.
 ```
 
 Este código crea un channel llamado `greeting_ch` que lee el archivo CSV, lo analiza y extrae la primera columna de cada fila.
-El resultado es un channel que contiene `Hello`, `Bonjour` y `Holà`.
+El resultado es un channel que contiene `Hello`, `Bonjour` y `Hola`.
 
 ??? tip "¿Cómo funciona esto?"
 
@@ -265,16 +265,16 @@ El resultado es un channel que contiene `Hello`, `Bonjour` y `Holà`.
     ```csv title="greetings.csv" linenums="1"
     Hello,English,123
     Bonjour,French,456
-    Holà,Spanish,789
+    Hola,Spanish,789
     ```
 
     Hemos transformado eso en un array que se ve así:
 
     ```txt title="Contenido del array"
-    [[Hello,English,123],[Bonjour,French,456],[Holà,Spanish,789]]
+    [[Hello,English,123],[Bonjour,French,456],[Hola,Spanish,789]]
     ```
 
-    Y luego hemos tomado el primer elemento de cada una de las tres filas y los hemos cargado en un channel de Nextflow que ahora contiene: `Hello`, `Bonjour` y `Holà`.
+    Y luego hemos tomado el primer elemento de cada una de las tres filas y los hemos cargado en un channel de Nextflow que ahora contiene: `Hello`, `Bonjour` y `Hola`.
 
     Si quiere entender los channels y operadores en profundidad, incluyendo cómo escribirlos usted mismo, vea [Hello Nextflow Part 2: Hello Channels](../hello_nextflow/02_hello_channels.md#4-read-input-values-from-a-csv-file).
 
@@ -362,7 +362,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv
 ??? success "Salida del comando"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
@@ -377,7 +377,7 @@ Puede ver que como se prometió, se ejecutaron múltiples pasos como parte del w
 
 Verifiquemos que eso es de hecho lo que sucedió echando un vistazo en el directorio `results`.
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console linenums="1" hl_lines="8-16"
     results
@@ -386,17 +386,17 @@ Verifiquemos que eso es de hecho lo que sucedió echando un vistazo en el direct
     ├── 2a-inputs
     |   ├── Bonjour-output.txt
     |   ├── Hello-output.txt
-    |   └── Holà-output.txt
+    |   └── Hola-output.txt
     └── 2b-multistep
         ├── COLLECTED-batch-output.txt
         ├── batch-report.txt
         └── intermediates
             ├── Bonjour-output.txt
             ├── Hello-output.txt
-            ├── Holà-output.txt
+            ├── Hola-output.txt
             ├── UPPER-Bonjour-output.txt
             ├── UPPER-Hello-output.txt
-            └── UPPER-Holà-output.txt
+            └── UPPER-Hola-output.txt
 
     ```
 
@@ -406,12 +406,12 @@ Algunos de los archivos han sido agrupados en un subdirectorio llamado `intermed
 Esos dos son los resultados finales del workflow de múltiples pasos.
 Tómese un minuto para mirar los nombres de los archivos y verificar su contenido para confirmar que son lo que espera.
 
-??? abstract "Contenido de los archivos"
+??? abstract "Contenido del archivo"
 
     ```txt title="results/2b-multistep/COLLECTED-batch-output.txt"
     HELLO
     BONJOUR
-    HOLà
+    HOLA
     ```
 
     ```txt title="results/2b-multistep/batch-report.txt"
@@ -583,7 +583,7 @@ Así es como transportamos datos de un paso al siguiente en Nextflow.
 
 La tercera llamada de process, a `collectGreetings`, es un poco diferente.
 
-```groovy title="2b-multistep.nf" linenums="78"
+```groovy title="2b-multistep.nf" linenums="77"
     // recopilar todos los saludos en un archivo
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
@@ -640,7 +640,7 @@ La desventaja es que a veces puede hacer más difícil descifrar lo que está ha
 
 Puede haber notado que `collectGreetings` toma una segunda entrada, `params.batch`:
 
-```groovy title="2b-multistep.nf" linenums="78"
+```groovy title="2b-multistep.nf" linenums="77"
     // recopilar todos los saludos en un archivo
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
@@ -670,7 +670,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv --batch test
 ??? success "Salida del comando"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
@@ -681,7 +681,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv --batch test
 
 Debería ver nuevas salidas finales nombradas con su nombre de lote personalizado.
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console linenums="1" hl_lines="10 12"
     results
@@ -690,7 +690,7 @@ Debería ver nuevas salidas finales nombradas con su nombre de lote personalizad
     ├── 2a-inputs
     |   ├── Bonjour-output.txt
     |   ├── Hello-output.txt
-    |   └── Holà-output.txt
+    |   └── Hola-output.txt
     └── 2b-multistep
         ├── COLLECTED-batch-output.txt
         ├── COLLECTED-test-output.txt
@@ -699,10 +699,10 @@ Debería ver nuevas salidas finales nombradas con su nombre de lote personalizad
         └── intermediates
             ├── Bonjour-output.txt
             ├── Hello-output.txt
-            ├── Holà-output.txt
+            ├── Hola-output.txt
             ├── UPPER-Bonjour-output.txt
             ├── UPPER-Hello-output.txt
-            └── UPPER-Holà-output.txt
+            └── UPPER-Hola-output.txt
     ```
 
 Este es un aspecto de la configuración de entrada, que cubriremos con más detalle en la Parte 3, pero por ahora lo importante es saber que los parámetros de entrada pueden tener valores predeterminados.
@@ -793,7 +793,7 @@ Por supuesto, hemos preparado nuevamente un workflow adecuado para propósitos d
 --8<-- "docs/en/docs/nextflow_run/img/modules.svg"
 </figure>
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console
     modules/
@@ -873,7 +873,7 @@ Comience abriendo el archivo de workflow `2c-modules.nf`.
 Puede ver que la lógica del workflow es exactamente la misma que en la versión anterior del workflow.
 Sin embargo, el código del process ya no está en el archivo del workflow, y en su lugar hay declaraciones `include` que apuntan a archivos separados bajo `modules`.
 
-```groovy title="2c-modules.nf" linenums="3"
+```groovy title="hello-modules.nf" linenums="3"
 // Incluir módulos
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
@@ -921,7 +921,7 @@ nextflow run 2c-modules.nf --input data/greetings.csv -resume
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
@@ -1298,7 +1298,7 @@ nextflow run 2d-container.nf --input data/greetings.csv --character turkey -resu
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `2d-container.nf` [elegant_brattain] DSL2 - revision: 028a841db1
 
@@ -1317,7 +1317,7 @@ Puede encontrar la salida del paso `cowpy` en el directorio `results`.
 
     ```console title="results/2d-container/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------

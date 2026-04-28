@@ -76,9 +76,9 @@ echo 'Hello World!' > output.txt
 
 ## 2. 워크플로우 실행
 
-`--input` 명령줄 인수를 통해 입력 인사말을 받아 해당 인사말이 포함된 텍스트 파일을 생성하는 `1-hello.nf`라는 워크플로우 스크립트를 제공합니다.
+`--input`이라는 명령줄 인수를 통해 입력 인사말을 받아 해당 인사말이 포함된 텍스트 파일을 생성하는 `1-hello.nf`라는 워크플로우 스크립트를 제공합니다.
 
-코드를 아직 살펴보지 않겠습니다. 먼저 실행하면 어떻게 되는지 확인합니다.
+코드는 아직 살펴보지 않겠습니다. 먼저 실행하면 어떻게 되는지 확인합니다.
 
 ### 2.1. 워크플로우 시작 및 실행 모니터링
 
@@ -91,7 +91,7 @@ nextflow run 1-hello.nf --input 'Hello World!'
 ??? success "명령 출력"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
 
@@ -168,7 +168,7 @@ nextflow run 1-hello.nf --input 'Hello World!' -output-dir hello_results
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78
 
@@ -623,7 +623,7 @@ nextflow run 1-hello.nf --input 'Hello World!' -resume
 ??? success "명령 출력"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479
 

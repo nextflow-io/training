@@ -134,9 +134,9 @@ Bunu en iyi uygulamalarla nasıl yapacağınızla ilgileniyorsanız, _training.n
 
 ## 3. Bir dizi aracılığıyla birden fazla girdi sağlayın
 
-Tamam. Şimdi kanalların nasıl yapılandırıldığı ve kodlama dilindeki diğer veri yapılarından nasıl farklı olduğu hakkında biraz keşfedeceğiz. Diğer dillerden geldiyseniz tanıdık bir kavram olabilecek bir diziyi potansiyel olarak nasıl kullanabileceğimi düşüneceğim.
+Tamam. Şimdi kanalların nasıl yapılandırıldığı ve kodlama dilindeki diğer veri yapılarından nasıl farklı olduğu hakkında biraz keşfedeceğiz. Başka dillerden geldiyseniz tanıdık bir kavram olabilecek bir diziyi potansiyel olarak nasıl kullanabileceğimi düşüneceğim.
 
-Bir kanalda dizi kullanabilir miyim? Deneyelim. Bir dizi oluşturacağım; bunu dokümanlardan kopyaladım: _"greetings_array"_ ve _"Hello"_, _"Bonjour"_ ve _"Holà"_. Sonra bunu sabit kodlanmış string'lerimin yerine buraya koyacağım. Yani "channel.of" _"greetings_array"_ diyeceğim; bu diziyi bir kanala geçireceğim. Deneyelim.
+Bir kanalda dizi kullanabilir miyim? Deneyelim. Bir dizi oluşturacağım; bunu dokümanlardan kopyaladım: _"greetings_array"_ ve _"Hello"_, _"Bonjour"_ ve _"Hola"_. Sonra bunu sabit kodlanmış string'lerimin yerine buraya koyacağım. Yani "channel.of" _"greetings_array"_ diyeceğim; bu diziyi bir kanala geçireceğim. Deneyelim.
 
 Terminali açın ve pipeline'ı çalıştırın.
 
@@ -212,7 +212,7 @@ Tamam, bu kanala bir bakalım ve nasıl göründüğünü görelim. _".view"_ ya
 
 Tekrar çalıştırırsam, yine başarısız olacak; ama bu kanalın içinde ne olduğunu bize gösterecek. Özellikle heyecan verici değil. O _path_ değişkeni. Yani görebilirsiniz ki terminale yazdırıldığı için burada sadece bir string; ama bu dosya hakkındaki bilgileri ve meta verileri içeren bir _path_ nesnesi.
 
-Dosyanın meta verilerini girdiye geçirmek istemiyoruz. O dosyanın içeriğini geçirmek istiyoruz. _greetings.csv_ dosyasına bakarsak, burada bu farklı değişkenlerin olduğunu görebilirsiniz. Yine _Hello, Bonjour, Holà_. Ve bunlar gerçekten sürece geçirmek istediğimiz şeyler; sadece dosyanın kendisi tek bir nesne olarak değil.
+Dosyanın meta verilerini girdiye geçirmek istemiyoruz. O dosyanın içeriğini geçirmek istiyoruz. _greetings.csv_ dosyasına bakarsak, burada bu farklı değişkenlerin olduğunu görebilirsiniz. Yine _Hello, Bonjour, Hola_. Ve bunlar gerçekten sürece geçirmek istediğimiz şeyler; sadece dosyanın kendisi tek bir nesne olarak değil.
 
 Bu yüzden bu CSV dosyasını ayrıştırmamız gerekiyor. Onu açmamız, CSV dosyasının içeriğine ulaşmamız ve sonra içerikleri kanal içinde sürece geçirmemiz gerekiyor.
 
@@ -238,7 +238,7 @@ Yani bu sefer çalışacağız; CSV'yi üç dizi nesnesine ayrıştırdık ve so
 
 Peki sadece ilk sütuna nasıl ulaşırız? Flatten burada çok basitse, aslında özelleştirebileceğimiz ve CSV'den ne istediğimizi söyleyebileceğimiz daha karmaşık bir operatöre ihtiyacımız var.
 
-Bunu yapmak için _map_ kullanacağız. Temelde _map_ sadece diyor ki: bana verilen her öğe üzerinde bir kod, bir fonksiyon çalıştır ve üzerinde bir tür dönüşüm yap. Ve çok esnek olduğu için, Nextflow kodunda her zaman karşınıza çıktığını göreceksiniz.
+Bunu yapmak için _map_ kullanacağız. Temelde _map_ sadece şunu söyler: bana verilen her öğe üzerinde bir kod, bir fonksiyon çalıştır ve üzerinde bir tür dönüşüm yap. Ve çok esnek olduğu için, Nextflow kodunda her zaman karşınıza çıktığını göreceksiniz.
 
 Kendi başına hiçbir şey yapmaz. Yani normal parantez istemiyoruz; burada bir closure istiyoruz ve ne yapacağını söylememiz gerekiyor. Yani _"row"_ diyeceğim; çünkü CSV'den satırlar veriliyor, bu yüzden mantıklı bir değişken adı. Girdi. Ve sadece o dizinin ilk öğesini döndürmek istiyorum.
 
@@ -246,7 +246,7 @@ Nextflow'daki diziler sıfır tabanlıdır; bu yüzden sadece ilk öğe olduğun
 
 Ve şimdi, pipeline'ı tekrar çalıştırabiliriz ve beklediğimizi yapıp yapmadığını görebiliriz.
 
-Nitekim, _splitCsv_'den sonra dizilerimiz var ve sonra _map_'ten sonra güzel temiz string'lerimiz var; sadece _"Hello"_, _"Bonjour"_ ve _"Holà"_. Ve pipeline şimdi istediğimizi yapıyor. Fantastik.
+Nitekim, _splitCsv_'den sonra dizilerimiz var ve sonra _map_'ten sonra güzel temiz string'lerimiz var; sadece _"Hello"_, _"Bonjour"_ ve _"Hola"_. Ve pipeline şimdi istediğimizi yapıyor. Harika.
 
 Artık tüm bu view komutlarından kurtulabiliriz. Artık onlara ihtiyacımız yok.
 

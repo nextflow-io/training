@@ -82,7 +82,7 @@ Non guarderemo ancora il codice; prima vediamo come appare eseguirlo.
 
 ### 2.1. Avvia il workflow e monitora l'esecuzione
 
-Nel terminale, esegui il seguente comando:
+Nel terminale, esegui il seguente comando.
 
 ```bash
 nextflow run 1-hello.nf --input 'Hello World!'
@@ -91,7 +91,7 @@ nextflow run 1-hello.nf --input 'Hello World!'
 ??? success "Output del comando"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
 
@@ -168,7 +168,7 @@ nextflow run 1-hello.nf --input 'Hello World!' -output-dir hello_results
 ??? success "Output del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78
 
@@ -368,7 +368,7 @@ Al contrario, se guardi la directory `results`, c'è ancora solo un set di risul
 
 Questo ti mostra che i risultati pubblicati verranno sovrascritti dalle esecuzioni successive, mentre le directory di attività sotto `work/` vengono preservate.
 
-### Riepilogo
+### Takeaway
 
 Sai come eseguire un semplice script Nextflow, monitorare la sua esecuzione e trovare i suoi output.
 
@@ -568,7 +568,7 @@ Per saperne di più, consulta [Publishing outputs](https://nextflow.io/docs/late
 
     Invece di avere un blocco `publish:` nel workflow e un blocco `output` al livello superiore, vedresti una riga `publishDir` nella definizione del process `sayHello`:
 
-    ```groovy title="Esempio di sintassi" linenums="1" hl_lines="3"
+    ```groovy title="Syntax example" linenums="1" hl_lines="3"
     process sayHello {
 
         publishDir 'results/1-hello', mode: 'copy'
@@ -623,7 +623,7 @@ nextflow run 1-hello.nf --input 'Hello World!' -resume
 ??? success "Output del comando"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479
 
@@ -746,7 +746,7 @@ Nota che questo non rimuove le sottodirectory di due caratteri (come `eb/` sopra
 
     Sei responsabile di salvare tutti gli output a cui tieni! Questo è il motivo principale per cui preferiamo usare la modalità `copy` piuttosto che la modalità `symlink` per la direttiva `publish`.
 
-### Riepilogo
+### Takeaway
 
 Sai come rilanciare una pipeline senza ripetere step che sono già stati eseguiti in modo identico, ispezionare il log di esecuzione, e usare il comando `nextflow clean` per pulire le vecchie directory di lavoro.
 
@@ -767,7 +767,7 @@ Nella riga di output della console `[a3/7be2fa] SAYHELLO | 1 of 1 ✔`, cosa rap
 - [x] Il percorso troncato alla directory di lavoro dell'attività
 - [ ] Il checksum del file di output
 
-Approfondisci: [2.4. Trova l'output originale e i log nella directory `work/`](#24-trova-loutput-originale-e-i-log-nella-directory-work)
+Approfondisci: [2.4. Trova l'output originale e i log nella directory `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -777,7 +777,7 @@ Qual è lo scopo del file `.command.sh` in una directory di attività?
 - [ ] Contiene messaggi di errore dalle attività fallite
 - [ ] Elenca i file di input messi in staging per l'attività
 
-Approfondisci: [2.4. Trova l'output originale e i log nella directory `work/`](#24-trova-loutput-originale-e-i-log-nella-directory-work)
+Approfondisci: [2.4. Trova l'output originale e i log nella directory `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -787,7 +787,7 @@ Cosa succede ai risultati pubblicati quando riesegui un workflow senza `-resume`
 - [ ] Nextflow previene la sovrascrittura e fallisce
 - [ ] Vengono automaticamente backed up
 
-Approfondisci: [2.5. Riesegui il workflow con saluti diversi](#25-riesegui-il-workflow-con-saluti-diversi)
+Approfondisci: [2.5. Riesegui il workflow con saluti diversi](#24-re-run-the-workflow-with-different-greetings)
 </quiz>
 
 <quiz>
@@ -802,7 +802,7 @@ Cosa indica questo output della console?
 - [x] Nextflow ha riutilizzato i risultati di una precedente esecuzione identica
 - [ ] L'attività è stata cancellata manualmente
 
-Approfondisci: [4.1. Rilancia un workflow con `-resume`](#41-rilancia-un-workflow-con--resume)
+Approfondisci: [4.1. Rilancia un workflow con `-resume`](#41-re-launch-a-workflow-with--resume)
 </quiz>
 
 <quiz>
@@ -812,7 +812,7 @@ Dove memorizza Nextflow la cronologia delle esecuzioni che il comando `nextflow 
 - [x] Nel file `.nextflow/history`
 - [ ] In `nextflow.config`
 
-Approfondisci: [4.2. Ispeziona il log delle esecuzioni passate](#42-ispeziona-il-log-delle-esecuzioni-passate)
+Approfondisci: [4.2. Ispeziona il log delle esecuzioni passate](#42-inspect-the-log-of-past-executions)
 </quiz>
 
 <quiz>
@@ -822,7 +822,7 @@ Qual è lo scopo del blocco `params` in un file di workflow?
 - [x] Dichiarare e tipizzare i parametri di input del workflow
 - [ ] Specificare le opzioni di pubblicazione dell'output
 
-Approfondisci: [3.4. Il sistema params per i parametri da riga di comando](#34-il-sistema-params-per-i-parametri-da-riga-di-comando)
+Approfondisci: [3.4. Il sistema params per i parametri da riga di comando](#34-the-params-system-of-command-line-parameters)
 </quiz>
 
 <quiz>
@@ -832,7 +832,7 @@ Nel blocco `output` del workflow, cosa fa `mode 'copy'`?
 - [ ] Copia lo script del workflow nei risultati
 - [ ] Abilita la copia incrementale dei file
 
-Approfondisci: [3.5. La direttiva publish](#35-la-direttiva-publish)
+Approfondisci: [3.5. La direttiva publish](#35-the-publish-directive)
 </quiz>
 
 <quiz>
@@ -842,5 +842,5 @@ Qual è il flag raccomandato da usare con il comando `nextflow clean` prima di e
 - [ ] `-a` (all) per selezionare tutte le directory
 - [ ] `-q` (quiet) per sopprimere gli avvisi
 
-Approfondisci: [4.3. Elimina le vecchie directory di lavoro](#43-elimina-le-vecchie-directory-di-lavoro)
+Approfondisci: [4.3. Elimina le vecchie directory di lavoro](#43-delete-older-work-directories)
 </quiz>

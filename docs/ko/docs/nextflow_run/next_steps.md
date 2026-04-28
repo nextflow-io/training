@@ -51,7 +51,7 @@ Nextflow Run 교육 과정을 완료하신 것을 축하합니다! 🎉
 - Nextflow를 실행만 하지 말고 작성하세요! [Hello Nextflow](../hello_nextflow/index.md)로 Nextflow 개발자가 되세요
 - [Nextflow for Science](../nf4_science/index.md)로 과학적 분석 사용 사례에 Nextflow 적용
 - [Hello nf-core](../hello_nf-core/index.md)로 nf-core 시작하기
-- [디버깅 Side Quest](../side_quests/debugging.md)로 문제 해결 기술 배우기
+- [디버깅 Side Quest](../side_quests/debugging/index.md)로 문제 해결 기술 배우기
 
 마지막으로 [**Seqera Platform**](https://seqera.io/)을 살펴보시기를 권장합니다. Nextflow 제작자가 개발한 클라우드 기반 플랫폼으로, 워크플로우를 시작하고 관리하고, 데이터를 관리하고, 모든 환경에서 대화형으로 분석을 실행하는 것을 더욱 쉽게 해줍니다.
 

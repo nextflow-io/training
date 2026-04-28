@@ -17,7 +17,7 @@ Dann hast du die Pipeline schrittweise verfeinert, indem du eines der lokalen Mo
 Deine finale `core-hello`-Pipeline verfügt nun über:
 
 - **Standardisierte Struktur** unter Verwendung der nf-core-Vorlage mit organisierten Verzeichnissen für Workflows, Subworkflows, Module und Konfiguration
-- **Community-Module** aus dem nf-core-Repository (`cat/cat`) neben deinen benutzerdefinierten Modulen
+- **Community-Module** aus dem nf-core-Repository (`find/concatenate`) neben deinen benutzerdefinierten Modulen
 - **Umfassende Validierung**, die sowohl Parameter als auch Eingabedaten prüft, bevor die Pipeline läuft
 - **Professionelle Konfiguration** mit Profilen für verschiedene Ausführungsumgebungen
 - **Vollständige Dokumentation** und Metadaten gemäß nf-core-Konventionen

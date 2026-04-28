@@ -29,7 +29,7 @@ Channels ऐसी queues हैं जो inputs को efficiently handle क�
 
 ---
 
-## 0. Warmup: `hello-channels.nf` चलाएं
+## 0. वार्मअप: `hello-channels.nf` चलाएं
 
 हम starting point के रूप में workflow script `hello-channels.nf` use करेंगे।
 यह इस training course के Part 1 में काम करके produce की गई script के equivalent है, सिवाय इसके कि हमने output destination बदल दी है:
@@ -52,7 +52,7 @@ nextflow run hello-channels.nf --input 'Hello Channels!'
 ??? success "कमांड आउटपुट"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-channels.nf` [wise_jennings] DSL2 - revision: b24f4902d6
 
@@ -196,7 +196,7 @@ nextflow run hello-channels.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-channels.nf` [fabulous_crick] DSL2 - revision: 23e20f76e8
 
@@ -229,7 +229,7 @@ Workflow block में यह tiny line add करो:
 
 === "बाद में"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="6"
     workflow {
 
         main:
@@ -271,7 +271,7 @@ nextflow run hello-channels.nf
 ??? success "कमांड आउटपुट"
 
     ```console hl_lines="7"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-channels.nf` [scruffy_shaw] DSL2 - revision: 2ede41e14a
 
@@ -283,11 +283,11 @@ nextflow run hello-channels.nf
 जैसा कि तुम देख सकते हो, यह channel contents को console पर output करता है।
 यहाँ हमारे पास केवल एक element है, लेकिन जब हम next section में channel में multiple values load करना शुरू करेंगे, तुम देखोगे कि यह एक element per line output करने के लिए set है।
 
-### सीख
+### सारांश
 
 तुम जानते हो कि process को input provide करने के लिए basic channel factory कैसे use करें।
 
-### आगे क्या?
+### आगे क्या है?
 
 सीखो कि workflow को multiple input values पर iterate करने के लिए channels कैसे use करें।
 
@@ -302,7 +302,7 @@ Workflows typically inputs के batches पर run होते हैं ज�
 Conveniently, `channel.of()` channel factory जो हम use कर रहे हैं वह एक से अधिक value accept करने में काफी खुश है, इसलिए हमें उसे modify करने की need नहीं है।
 हम बस channel में multiple values load कर सकते हैं।
 
-चलो उन्हें `'Hello'`, `'Bonjour'` और `'Holà'` बनाते हैं।
+चलो उन्हें `'Hello'`, `'Bonjour'` और `'Hola'` बनाते हैं।
 
 #### 2.1.1. More greetings add करें
 
@@ -312,7 +312,7 @@ Workflow block से पहले, निम्नलिखित code change �
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
     // इनपुट के लिए एक channel बनाएं
-    greeting_ch = channel.of('Hello','Bonjour','Holà')
+    greeting_ch = channel.of('Hello','Bonjour','Hola')
                          .view()
     ```
 
@@ -337,7 +337,7 @@ nextflow run hello-channels.nf
 ??? success "कमांड आउटपुट"
 
     ```console hl_lines="6"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-channels.nf` [amazing_crick] DSL2 - revision: 59a9a5888a
 
@@ -345,7 +345,7 @@ nextflow run hello-channels.nf
     [f4/c9962c] process > sayHello (1) [100%] 3 of 3 ✔
     Hello
     Bonjour
-    Holà
+    Hola
     ```
 
 यह certainly ठीक से run हुआ लगता है।
@@ -367,7 +367,7 @@ Execution monitor दिखाता है कि `sayHello` process के ल
 ??? abstract "फ़ाइल सामग्री"
 
     ```console title="results/hello_channels/output.txt"
-    Holà
+    Hola
     ```
 
 तुम्हें वहाँ तीन greetings में से एक दिखनी चाहिए, लेकिन जो तुम्हें मिली वह यहाँ दिखाई गई से different हो सकती है।
@@ -420,11 +420,11 @@ nextflow run hello-channels.nf -ansi-log false
 ??? success "कमांड आउटपुट"
 
     ```console
-     N E X T F L O W  ~  version 25.10.2
+     N E X T F L O W  ~  version 25.10.4
     Launching `hello-channels.nf` [desperate_monod] DSL2 - revision: 59a9a5888a
     Hello
     Bonjour
-    Holà
+    Hola
     [23/871c7e] Submitted process > sayHello (2)
     [7f/21e2c2] Submitted process > sayHello (1)
     [f4/ea10a6] Submitted process > sayHello (3)
@@ -493,7 +493,7 @@ Anyway, अब जबकि हमारे पास प्रत्येक p
     ```
 
     ```txt title="work/f4/ea10a680d5687596d3eaa3fcf69272/output.txt"
-    Holà
+    Hola
     ```
 
 यह दिखाता है कि तीनों processes successfully run हुईं (yay)।
@@ -581,7 +581,7 @@ nextflow run hello-channels.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-channels.nf` [sharp_minsky] DSL2 - revision: 16a291febe
 
@@ -589,7 +589,7 @@ nextflow run hello-channels.nf
     [e8/33ee64] sayHello (2) [100%] 3 of 3 ✔
     Hello
     Bonjour
-    Holà
+    Hola
     ```
 
 Summary view पर वापस आते हुए, output फिर से एक line पर summarize हो गया है।
@@ -601,7 +601,7 @@ Summary view पर वापस आते हुए, output फिर से �
     results/hello_channels/
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     └── output.txt
     ```
 
@@ -617,8 +617,8 @@ Summary view पर वापस आते हुए, output फिर से �
     Hello
     ```
 
-    ```console title="Holà-output.txt"
-    Holà
+    ```console title="Hola-output.txt"
+    Hola
     ```
 
 Success! अब हम जितनी चाहें उतनी greetings add कर सकते हैं बिना output files के overwrite होने की चिंता किए।
@@ -628,13 +628,13 @@ Success! अब हम जितनी चाहें उतनी greetings ad
     Practice में, input data itself के आधार पर files name करना almost हमेशा impractical है।
     Dynamic filenames generate करने का better तरीका input files के साथ metadata को process में pass करना है।
     Metadata typically 'sample sheet' या equivalents के माध्यम से provide किया जाता है।
-    तुम यह बाद में अपने Nextflow training में सीखोगे ([Metadata side quest](../side_quests/metadata.md) देखें)।
+    तुम यह बाद में अपने Nextflow training में सीखोगे ([Metadata side quest](../side_quests/metadata/index.md) देखें)।
 
-### सीख
+### सारांश
 
 तुम जानते हो कि channel के माध्यम से multiple input elements कैसे feed करें।
 
-### आगे क्या?
+### आगे क्या है?
 
 सीखो कि channel की contents transform करने के लिए operator कैसे use करें।
 
@@ -647,7 +647,7 @@ Success! अब हम जितनी चाहें उतनी greetings ad
 
 उदाहरण के लिए, imagine करो कि हम इस तरह elements का array वाला एक input variable set up करते हैं:
 
-`greetings_array = ['Hello','Bonjour','Holà']`
+`greetings_array = ['Hello','Bonjour','Hola']`
 
 क्या हम उसे अपने output channel में load कर सकते हैं और expect कर सकते हैं कि यह काम करे?
 
@@ -673,9 +673,9 @@ Common sense suggest करता है कि हमें single value के
 
         main:
         // इनपुट अभिवादनों की एक array declare करें
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // इनपुट के लिए एक channel बनाएं
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // एक अभिवादन emit करें
         sayHello(greeting_ch)
@@ -692,7 +692,7 @@ Common sense suggest करता है कि हमें single value के
 
         main:
         // इनपुट के लिए एक channel बनाएं
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // एक अभिवादन emit करें
         sayHello(greeting_ch)
@@ -706,7 +706,7 @@ Common sense suggest करता है कि हमें single value के
 
 #### 3.1.2. Channel factory को input के रूप में greetings का array set करें
 
-अब हम channel factory में currently hardcoded values `'Hello','Bonjour','Holà'` को अभी बनाए गए `greetings_array` से replace करेंगे।
+अब हम channel factory में currently hardcoded values `'Hello','Bonjour','Hola'` को अभी बनाए गए `greetings_array` से replace करेंगे।
 
 Workflow block में, निम्नलिखित change करो:
 
@@ -717,7 +717,7 @@ Workflow block में, निम्नलिखित change करो:
 
         main:
         // इनपुट अभिवादनों की एक array declare करें
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -736,9 +736,9 @@ Workflow block में, निम्नलिखित change करो:
 
         main:
         // इनपुट अभिवादनों की एक array declare करें
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // इनपुट के लिए एक channel बनाएं
-        greeting_ch = channel.of('Hello','Bonjour','Holà')
+        greeting_ch = channel.of('Hello','Bonjour','Hola')
                              .view()
         // एक अभिवादन emit करें
         sayHello(greeting_ch)
@@ -761,22 +761,22 @@ nextflow run hello-channels.nf
 ??? failure "कमांड आउटपुट"
 
     ```console hl_lines="7 11 16"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-channels.nf` [friendly_koch] DSL2 - revision: 97256837a7
 
     executor >  local (1)
     [a8/1f6ead] sayHello (1) | 0 of 1
-    [Hello, Bonjour, Holà]
+    [Hello, Bonjour, Hola]
     ERROR ~ Error executing process > 'sayHello (1)'
 
     Caused by:
-      Missing output file(s) `[Hello, Bonjour, Holà]-output.txt` expected by process `sayHello (1)`
+      Missing output file(s) `[Hello, Bonjour, Hola]-output.txt` expected by process `sayHello (1)`
 
 
     Command executed:
 
-      echo '[Hello, Bonjour, Holà]' > '[Hello, Bonjour, Holà]-output.txt'
+      echo '[Hello, Bonjour, Hola]' > '[Hello, Bonjour, Hola]-output.txt'
 
     Command exit status:
       0
@@ -796,7 +796,7 @@ nextflow run hello-channels.nf
 
 `view()` का output और error messages देखो।
 
-ऐसा लगता है Nextflow ने single process call run करने की कोशिश की, `[Hello, Bonjour, Holà]` को string value के रूप में use करते हुए, array में तीन strings को separate values के रूप में use करने के बजाय।
+ऐसा लगता है Nextflow ने single process call run करने की कोशिश की, `[Hello, Bonjour, Hola]` को string value के रूप में use करते हुए, array में तीन strings को separate values के रूप में use करने के बजाय।
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-fail.svg"
@@ -826,7 +826,7 @@ Workflow block में, निम्नलिखित code change करो:
 
         main:
         // इनपुट अभिवादनों की एक array declare करें
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -846,7 +846,7 @@ Workflow block में, निम्नलिखित code change करो:
 
         main:
         // इनपुट अभिवादनों की एक array declare करें
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -880,7 +880,7 @@ Workflow block में, निम्नलिखित code change करो:
 
         main:
         // इनपुट अभिवादनों की एक array declare करें
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
@@ -901,7 +901,7 @@ Workflow block में, निम्नलिखित code change करो:
 
         main:
         // इनपुट अभिवादनों की एक array declare करें
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.of(greetings_array)
                              .view()
@@ -914,7 +914,7 @@ Workflow block में, निम्नलिखित code change करो:
     }
     ```
 
-तुम देखोगे कि हमने दूसरा `.view` statement add किया है, और प्रत्येक के लिए, हमने empty parentheses (`()`) को curly braces से replace किया है जिसमें कुछ code है, जैसे `{ greeting -> "Before flatten: $greeting" }`।
+तुम देखोगे कि हमने दूसरा `.view` statement add किया है, और प्रत्येक के लिए, हमने empty parentheses (`()`) को curly braces से replace किया है जिसमें कुछ code है, जैसे `#!groovy { greeting -> "Before flatten: $greeting" }`।
 
 इन्हें _closures_ कहते हैं। इनमें contained code channel में प्रत्येक item के लिए execute होगा।
 हम inner value के लिए एक temporary variable define करते हैं, यहाँ `greeting` कहलाता है (लेकिन यह कोई भी arbitrary name हो सकता है), जो केवल उस closure के scope के भीतर use होता है।
@@ -941,16 +941,16 @@ nextflow run hello-channels.nf
 ??? success "कमांड आउटपुट"
 
     ```console hl_lines="7-10"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-channels.nf` [sleepy_gutenberg] DSL2 - revision: 1db4f760ee
 
     executor >  local (3)
     [b1/6a1e15] sayHello (2) [100%] 3 of 3 ✔
-    Before flatten: [Hello, Bonjour, Holà]
+    Before flatten: [Hello, Bonjour, Hola]
     After flatten: Hello
     After flatten: Bonjour
-    After flatten: Holà
+    After flatten: Hola
     ```
 
 इस बार यह काम करता है AND हमें `flatten()` operator run करने से पहले और बाद में channel की contents कैसी दिखती हैं इसकी additional insight देता है।
@@ -965,11 +965,11 @@ nextflow run hello-channels.nf
     एक different channel factory, [`channel.fromList`](https://nextflow.io/docs/latest/reference/channel.html#fromlist) use करके technically same results achieve करना संभव है, जिसमें इसके operation में एक implicit mapping step शामिल है।
     यहाँ हमने वह use न करने का choice किया ताकि एक simple use case पर operator के use को demonstrate किया जा सके।
 
-### सीख
+### सारांश
 
 तुम जानते हो कि channel की contents transform करने के लिए `flatten()` जैसे operator कैसे use करें, और operator apply करने से पहले और बाद में channel contents inspect करने के लिए `view()` operator कैसे use करें।
 
-### आगे क्या?
+### आगे क्या है?
 
 सीखो कि workflow को input values के source के रूप में file कैसे लेने दें।
 
@@ -986,7 +986,7 @@ Most likely, हमारे पास एक या अधिक files हो�
 ```csv title="data/greetings.csv" linenums="1"
 Hello,English,123
 Bonjour,French,456
-Holà,Spanish,789
+Hola,Spanish,789
 ```
 
 हमारा next task अपने workflow को इस file से values पढ़ने के लिए adapt करना है।
@@ -1024,11 +1024,11 @@ Parameter declaration में निम्नलिखित edit करो:
 
 === "पहले"
 
-    ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
+    ```groovy title="hello-channels.nf" linenums="20" hl_lines="4"
     /*
      * Pipeline parameters
      */
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
     ```
 
 यह मानता है कि file workflow code के साथ co-located है।
@@ -1050,8 +1050,8 @@ Workflow block में, निम्नलिखित code change करो:
         // CSV फ़ाइल से इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.fromPath(params.input)
                              .view { greeting -> "Before flatten: $greeting" }
-                             // .flatten() को uncomment करें
-                             // .view { greeting -> "Flatten के बाद: $greeting" }
+                             // .flatten()
+                             // .view { greeting -> "After flatten: $greeting" }
         // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
@@ -1067,7 +1067,7 @@ Workflow block में, निम्नलिखित code change करो:
 
         main:
         // इनपुट अभिवादनों की एक array declare करें
-        greetings_array = ['Hello','Bonjour','Holà']
+        greetings_array = ['Hello','Bonjour','Hola']
         // इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.of(greetings_array)
                              .view { greeting -> "Before flatten: $greeting" }
@@ -1094,8 +1094,8 @@ nextflow run hello-channels.nf
 
 ??? failure "कमांड आउटपुट"
 
-    ```console hl_lines="5 6 9 14"
-     N E X T F L O W   ~  version 25.10.2
+    ```console hl_lines="5 6 9 15"
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-channels.nf` [peaceful_poisson] DSL2 - revision: a286c08ad5
 
@@ -1174,8 +1174,8 @@ Workflow block में, `flatten()` को `splitCsv()` (uncommented) से r
         // CSV फ़ाइल से इनपुट के लिए एक channel बनाएं
         greeting_ch = channel.fromPath(params.input)
                              .view { greeting -> "Before flatten: $greeting" }
-                             // .flatten() को uncomment करें
-                             // .view { greeting -> "Flatten के बाद: $greeting" }
+                             // .flatten()
+                             // .view { greeting -> "After flatten: $greeting" }
         // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
@@ -1198,7 +1198,7 @@ nextflow run hello-channels.nf
 ??? failure "कमांड आउटपुट"
 
     ```console hl_lines="7-11 14 19"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-channels.nf` [insane_fermat] DSL2 - revision: 8e62fcbeb1
 
@@ -1207,7 +1207,7 @@ nextflow run hello-channels.nf
     Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
     After splitCsv: [Hello, English, 123]
     After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Holà, Spanish, 789]
+    After splitCsv: [Hola, Spanish, 789]
     ERROR ~ Error executing process > 'sayHello (2)'
 
     Caused by:
@@ -1318,7 +1318,7 @@ nextflow run hello-channels.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-channels.nf` [focused_volhard] DSL2 - revision: de435e45be
 
@@ -1327,10 +1327,10 @@ nextflow run hello-channels.nf
     Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
     After splitCsv: [Hello, English, 123]
     After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Holà, Spanish, 789]
+    After splitCsv: [Hola, Spanish, 789]
     After map: Hello
     After map: Bonjour
-    After map: Holà
+    After map: Hola
     ```
 
 इस बार यह बिना error के run होना चाहिए।
@@ -1352,7 +1352,7 @@ _Note करो कि lines तुम्हारे output में different
 हमने पहले जैसा same result achieve किया है, लेकिन अब हमारे पास process करने के लिए greetings के channel में more elements add करने की बहुत अधिक flexibility है एक input file modify करके, बिना कोई code modify किए।
 तुम बाद की training में complex inputs handle करने के लिए more sophisticated approaches सीखोगे।
 
-### सीख
+### सारांश
 
 तुम जानते हो कि `.fromPath()` channel constructor और operators `splitCsv()` और `map()` का उपयोग करके input values की file पढ़ना और उन्हें appropriately handle करना।
 
@@ -1363,7 +1363,7 @@ _Note करो कि lines तुम्हारे output में different
 --8<-- "docs/en/docs/hello_nextflow/img/hello-channels-parallel.svg"
 </figure>
 
-### आगे क्या?
+### आगे क्या है?
 
 एक big break लो, तुमने इसमें hard work किया!
 

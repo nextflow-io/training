@@ -2,71 +2,71 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-La crida de variants és un mètode d'anàlisi genòmica que té com a objectiu identificar variacions en una seqüència genòmica en relació amb un genoma de referència.
-Aquí utilitzarem eines i mètodes dissenyats per cridar variants germinals curtes, _és a dir_ SNPs i indels, en dades de seqüenciació de genoma complet.
+La identificació de variants és un mètode d'anàlisi genòmica que té com a objectiu identificar variacions en una seqüència genòmica respecte a un genoma de referència.
+Aquí farem servir eines i mètodes dissenyats per identificar variants germinals curtes, _és a dir_, SNPs i indels, en dades de seqüenciació de genoma complet.
 
-![Pipeline GATK](img/gatk-pipeline.png)
+![Pipeline de GATK](img/gatk-pipeline.png)
 
-Un pipeline complet de crida de variants normalment implica molts passos, incloent el mapatge a la referència (de vegades anomenat alineament del genoma) i el filtratge i priorització de variants.
-Per simplicitat, en aquest curs ens centrarem només en la part de crida de variants.
+Un pipeline complet d'identificació de variants normalment implica molts passos, incloent el mapatge a la referència (de vegades anomenat alineament genòmic) i el filtratge i priorització de variants.
+Per simplicitat, en aquest curs ens centrarem únicament en la part d'identificació de variants.
 
 ### Mètodes
 
-Us mostrarem dues maneres d'aplicar la crida de variants a mostres de seqüenciació de genoma complet per identificar SNPs i indels germinals.
-Primer començarem amb un **enfocament simple per mostra** que crida variants independentment de cada mostra.
-Després us mostrarem un **enfocament de crida conjunta** més sofisticat que analitza múltiples mostres conjuntament, produint resultats més precisos i informatius.
+Us mostrarem dues maneres d'aplicar la identificació de variants a mostres de seqüenciació de genoma complet per identificar SNPs i indels germinals.
+Primer començarem amb un senzill **enfocament per mostra** que identifica variants de manera independent per a cada mostra.
+Després us mostrarem un **enfocament de genotipatge conjunt** més sofisticat que analitza múltiples mostres alhora, produint resultats més precisos i informatius.
 
-Abans d'endinsar-nos en escriure cap codi de workflow per a qualsevol dels dos enfocaments, provarem les comandes manualment amb algunes dades de prova.
+Abans d'endinsar-nos en l'escriptura de codi de workflow per a cap dels dos enfocaments, provarem les comandes manualment amb algunes dades de prova.
 
 ### Conjunt de dades
 
-Proporcionem les següents dades i recursos relacionats:
+Proporcionem les dades i recursos relacionats següents:
 
-- **Un genoma de referència** que consisteix en una petita regió del cromosoma humà 20 (de hg19/b37) i els seus fitxers accessoris (índex i diccionari de seqüències).
-- **Tres mostres de seqüenciació de genoma complet** corresponents a un trio familiar (mare, pare i fill), que s'han reduït a una petita porció de dades del cromosoma 20 per mantenir les mides de fitxer petites.
-  Aquestes són dades de seqüenciació Illumina de lectures curtes que ja s'han mapejat al genoma de referència, proporcionades en format [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) (Binary Alignment Map, una versió comprimida de SAM, Sequence Alignment Map).
-- **Una llista d'intervals genòmics**, és a dir coordenades al genoma on les nostres mostres tenen dades adequades per cridar variants, proporcionades en format BED.
+- **Un genoma de referència** que consisteix en una petita regió del cromosoma 20 humà (de hg19/b37) i els seus fitxers accessoris (índex i diccionari de seqüència).
+- **Tres mostres de seqüenciació de genoma complet** corresponents a un trio familiar (mare, pare i fill), que s'han reduït a una petita porció de dades del cromosoma 20 per mantenir les mides dels fitxers petites.
+  Aquestes són dades de seqüenciació de lectures curtes d'Illumina que ja han estat mapades al genoma de referència, proporcionades en format [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) (Binary Alignment Map, una versió comprimida de SAM, Sequence Alignment Map).
+- **Una llista d'intervals genòmics**, és a dir, coordenades al genoma on les nostres mostres tenen dades adequades per identificar variants, proporcionades en format BED.
 
 ### Programari
 
-Les dues eines principals implicades són [Samtools](https://www.htslib.org/), un conjunt d'eines àmpliament utilitzat per manipular fitxers d'alineament de seqüències, i [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), un conjunt d'eines per al descobriment de variants desenvolupat al Broad Institute.
+Les dues eines principals implicades són [Samtools](https://www.htslib.org/), un conjunt d'eines àmpliament utilitzat per manipular fitxers d'alineament de seqüències, i [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), un conjunt d'eines per a la descoberta de variants desenvolupat al Broad Institute.
 
-Aquestes eines no estan instal·lades a l'entorn GitHub Codespaces, així que les utilitzarem mitjançant contenidors recuperats a través del servei Seqera Containers (vegeu [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
+Aquestes eines no estan instal·lades a l'entorn de GitHub Codespaces, de manera que les farem servir mitjançant contenidors obtinguts a través del servei Seqera Containers (vegeu [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
 
 !!! tip "Consell"
 
-    Assegureu-vos que esteu al directori `nf4-science/genomics` de manera que l'última part del camí mostrat quan executeu `pwd` sigui `genomics`.
+    Assegureu-vos que esteu al directori `nf4-science/genomics` de manera que l'última part del camí que es mostra quan escriviu `pwd` sigui `genomics`.
 
 ---
 
-## 1. Crida de variants per mostra
+## 1. Identificació de variants per mostra
 
-La crida de variants per mostra processa cada mostra independentment: el cridador de variants examina les dades de seqüenciació d'una mostra cada vegada i identifica posicions on la mostra difereix de la referència.
+La identificació de variants per mostra processa cada mostra de manera independent: l'identificador de variants examina les dades de seqüenciació d'una mostra a la vegada i identifica les posicions on la mostra difereix de la referència.
 
-En aquesta secció provem les dues comandes que componen l'enfocament de crida de variants per mostra: indexar un fitxer BAM amb Samtools i cridar variants amb GATK HaplotypeCaller.
-Aquestes són les comandes que encapsularem en un workflow Nextflow a la Part 2 d'aquest curs.
+En aquesta secció provem les dues comandes que formen l'enfocament d'identificació de variants per mostra: indexar un fitxer BAM amb Samtools i identificar variants amb GATK HaplotypeCaller.
+Aquestes són les comandes que encapsularem en un workflow de Nextflow a la Part 2 d'aquest curs.
 
 1. Generar un fitxer d'índex per a un fitxer d'entrada BAM utilitzant [Samtools](https://www.htslib.org/)
-2. Executar GATK HaplotypeCaller sobre el fitxer BAM indexat per generar crides de variants per mostra en VCF (Variant Call Format)
+2. Executar GATK HaplotypeCaller sobre el fitxer BAM indexat per generar identificacions de variants per mostra en format VCF (Variant Call Format)
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.svg"
 </figure>
 
-Comencem provant les dues comandes només amb una mostra.
+Comencem provant les dues comandes amb una sola mostra.
 
 ### 1.1. Indexar un fitxer d'entrada BAM amb Samtools
 
-Els fitxers d'índex són una característica comuna dels formats de fitxer bioinformàtics; contenen informació sobre l'estructura del fitxer principal que permet a eines com GATK accedir a un subconjunt de les dades sense haver de llegir tot el fitxer.
+Els fitxers d'índex són una característica habitual dels formats de fitxers de bioinformàtica; contenen informació sobre l'estructura del fitxer principal que permet a eines com GATK accedir a un subconjunt de les dades sense haver de llegir tot el fitxer.
 Això és important a causa de la mida que poden arribar a tenir aquests fitxers.
 
-Els fitxers BAM sovint es proporcionen sense índex, així que el primer pas en molts workflows d'anàlisi és generar-ne un utilitzant `samtools index`.
+Els fitxers BAM sovint es proporcionen sense un índex, de manera que el primer pas en molts workflows d'anàlisi és generar-ne un utilitzant `samtools index`.
 
-Descarregarem un contenidor Samtools, l'iniciarem interactivament i executarem la comanda `samtools index` sobre un dels fitxers BAM.
+Descarregarem un contenidor de Samtools, l'iniciarem de manera interactiva i executarem la comanda `samtools index` sobre un dels fitxers BAM.
 
-#### 1.1.1. Descarregar el contenidor Samtools
+#### 1.1.1. Descarregar el contenidor de Samtools
 
-Executeu la comanda `docker pull` per descarregar la imatge del contenidor Samtools:
+Executeu la comanda `docker pull` per descarregar la imatge del contenidor de Samtools:
 
 ```bash
 docker pull community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
@@ -96,11 +96,11 @@ docker pull community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
     ```
 
 Si no heu descarregat aquesta imatge abans, pot trigar un minut a completar-se.
-Un cop finalitzat, teniu una còpia local de la imatge del contenidor.
+Un cop acabat, teniu una còpia local de la imatge del contenidor.
 
-#### 1.1.2. Iniciar el contenidor Samtools interactivament
+#### 1.1.2. Iniciar el contenidor de Samtools de manera interactiva
 
-Per executar el contenidor interactivament, utilitzeu `docker run` amb les opcions `-it`.
+Per executar el contenidor de manera interactiva, feu servir `docker run` amb els indicadors `-it`.
 L'opció `-v ./data:/data` munta el directori local `data` dins del contenidor perquè les eines puguin accedir als fitxers d'entrada.
 
 ```bash
@@ -113,9 +113,9 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b
     (base) root@1409896f77b1:/tmp#
     ```
 
-Notareu que el vostre prompt canvia a alguna cosa com `(base) root@a1b2c3d4e5f6:/tmp#`, indicant que ara esteu dins del contenidor.
+Notareu que el vostre indicador canvia a quelcom com `(base) root@a1b2c3d4e5f6:/tmp#`, indicant que ara esteu dins del contenidor.
 
-Verifiqueu que podeu veure els fitxers de dades de seqüència sota `/data/bam`:
+Verifiqueu que podeu veure els fitxers de dades de seqüència a `/data/bam`:
 
 ```bash
 ls /data/bam
@@ -127,12 +127,12 @@ ls /data/bam
     reads_father.bam  reads_mother.bam  reads_mother.bam.bai  reads_son.bam
     ```
 
-Amb això, esteu preparats per provar la vostra primera comanda.
+Amb això, esteu a punt per provar la primera comanda.
 
 #### 1.1.3. Executar la comanda d'indexació
 
-La [documentació de Samtools](https://www.htslib.org/doc/samtools-index.html) ens dóna la línia de comandes per executar per indexar un fitxer BAM.
-Només necessitem proporcionar el fitxer d'entrada; l'eina generarà automàticament un nom per a la sortida afegint `.bai` al nom del fitxer d'entrada.
+La [documentació de Samtools](https://www.htslib.org/doc/samtools-index.html) ens proporciona la línia de comandes per executar per indexar un fitxer BAM.
+Només cal proporcionar el fitxer d'entrada; l'eina generarà automàticament un nom per a la sortida afegint `.bai` al nom del fitxer d'entrada.
 
 Executeu la comanda `samtools index` sobre un fitxer de dades:
 
@@ -140,7 +140,7 @@ Executeu la comanda `samtools index` sobre un fitxer de dades:
 samtools index /data/bam/reads_mother.bam
 ```
 
-La comanda no produeix cap sortida al terminal, però ara hauríeu de veure un fitxer anomenat `reads_mother.bam.bai` al mateix directori que el fitxer BAM d'entrada original.
+La comanda no produeix cap sortida al terminal, però ara hauríeu de veure un fitxer anomenat `reads_mother.bam.bai` al mateix directori que el fitxer d'entrada BAM original.
 
 ??? abstract "Contingut del directori"
 
@@ -154,7 +154,7 @@ La comanda no produeix cap sortida al terminal, però ara hauríeu de veure un f
 
 Això completa la prova del primer pas.
 
-#### 1.1.4. Sortir del contenidor Samtools
+#### 1.1.4. Sortir del contenidor de Samtools
 
 Per sortir del contenidor, escriviu `exit`.
 
@@ -162,15 +162,15 @@ Per sortir del contenidor, escriviu `exit`.
 exit
 ```
 
-El vostre prompt hauria de tornar al que era abans d'iniciar el contenidor.
+El vostre indicador hauria de tornar a ser el que era abans d'iniciar el contenidor.
 
-### 1.2. Cridar variants amb GATK HaplotypeCaller
+### 1.2. Identificar variants amb GATK HaplotypeCaller
 
 Volem executar la comanda `gatk HaplotypeCaller` sobre el fitxer BAM que acabem d'indexar.
 
-#### 1.2.1. Descarregar el contenidor GATK
+#### 1.2.1. Descarregar el contenidor de GATK
 
-Primer, executem la comanda `docker pull` per descarregar la imatge del contenidor GATK:
+Primer, executem la comanda `docker pull` per descarregar la imatge del contenidor de GATK:
 
 ```bash
 docker pull community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
@@ -178,7 +178,7 @@ docker pull community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 
 ??? success "Sortida de la comanda"
 
-    Algunes capes mostren `Already exists` perquè es comparteixen amb la imatge del contenidor Samtools que vam descarregar abans.
+    Algunes capes mostren `Already exists` perquè es comparteixen amb la imatge del contenidor de Samtools que hem descarregat anteriorment.
 
     ```console
     4.5.0.0--730ee8817e436867: Pulling from library/gatk4
@@ -203,30 +203,30 @@ docker pull community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 
 Això hauria de ser més ràpid que la primera descàrrega perquè les dues imatges de contenidor comparteixen la majoria de les seves capes.
 
-#### 1.2.2. Iniciar el contenidor GATK interactivament
+#### 1.2.2. Iniciar el contenidor de GATK de manera interactiva
 
-Inicieu el contenidor GATK interactivament amb el directori de dades muntat, tal com vam fer amb Samtools.
+Inicieu el contenidor de GATK de manera interactiva amb el directori de dades muntat, tal com vam fer amb Samtools.
 
 ```bash
 docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 ```
 
-El vostre prompt canvia per indicar que ara esteu dins del contenidor GATK.
+El vostre indicador canvia per indicar que ara esteu dins del contenidor de GATK.
 
-#### 1.2.3. Executar la comanda de crida de variants
+#### 1.2.3. Executar la comanda d'identificació de variants
 
-La [documentació de GATK](https://gatk.broadinstitute.org/hc/en-us/articles/21905025322523-HaplotypeCaller) ens dóna la línia de comandes per executar per realitzar la crida de variants sobre un fitxer BAM.
+La [documentació de GATK](https://gatk.broadinstitute.org/hc/en-us/articles/21905025322523-HaplotypeCaller) ens proporciona la línia de comandes per executar per realitzar la identificació de variants sobre un fitxer BAM.
 
-Necessitem proporcionar el fitxer d'entrada BAM (`-I`) així com el genoma de referència (`-R`), un nom per al fitxer de sortida (`-O`) i una llista d'intervals genòmics a analitzar (`-L`).
+Cal proporcionar el fitxer d'entrada BAM (`-I`), el genoma de referència (`-R`), un nom per al fitxer de sortida (`-O`) i una llista d'intervals genòmics a analitzar (`-L`).
 
-No obstant això, no necessitem especificar el camí al fitxer d'índex; l'eina el buscarà automàticament al mateix directori, basant-se en la convenció establerta de nomenclatura i col·locació.
-El mateix s'aplica als fitxers accessoris del genoma de referència (fitxers d'índex i diccionari de seqüències, `*.fai` i `*.dict`).
+No obstant això, no cal especificar el camí al fitxer d'índex; l'eina el buscarà automàticament al mateix directori, basant-se en la convenció establerta de nomenclatura i co-localització.
+El mateix s'aplica als fitxers accessoris del genoma de referència (fitxers d'índex i de diccionari de seqüència, `*.fai` i `*.dict`).
 
 ```bash
 gatk HaplotypeCaller \
         -R /data/ref/ref.fasta \
         -I /data/bam/reads_mother.bam \
-        -O /data/vcf/reads_mother.vcf \
+        -O reads_mother.vcf \
         -L /data/ref/intervals.bed
 ```
 
@@ -292,7 +292,7 @@ gatk HaplotypeCaller \
     Runtime.totalMemory()=203423744
     ```
 
-La sortida del registre és molt detallada, així que hem destacat les línies més rellevants a l'exemple anterior.
+La sortida del registre és molt detallada, de manera que hem destacat les línies més rellevants a l'exemple anterior.
 
 Els fitxers de sortida, `reads_mother.vcf` i el seu fitxer d'índex, `reads_mother.vcf.idx`, es creen dins del vostre directori de treball al contenidor.
 
@@ -302,10 +302,10 @@ Els fitxers de sortida, `reads_mother.vcf` i el seu fitxer d'índex, `reads_moth
     conda.yml  hsperfdata_root  reads_mother.vcf  reads_mother.vcf.idx
     ```
 
-El fitxer VCF conté les crides de variants, com veurem d'aquí a un moment, i el fitxer d'índex té la mateixa funció que el fitxer d'índex BAM, permetre a les eines cercar i recuperar subconjunts de dades sense carregar tot el fitxer.
+El fitxer VCF conté les identificacions de variants, com veurem d'aquí a un moment, i el fitxer d'índex té la mateixa funció que el fitxer d'índex BAM, per permetre a les eines cercar i recuperar subconjunts de dades sense carregar tot el fitxer.
 
 Com que VCF és un format de text i aquest és un fitxer de prova petit, podeu executar `cat reads_mother.vcf` per obrir-lo i veure el seu contingut.
-Si us desplaceu cap amunt fins al començament del fitxer, trobareu una capçalera composta de moltes línies de metadades, seguida d'una llista de crides de variants, una per línia.
+Si desplaceu cap amunt fins al principi del fitxer, trobareu una capçalera composta de moltes línies de metadades, seguida d'una llista d'identificacions de variants, una per línia.
 
 ??? abstract "Contingut del fitxer (abreujat)"
 
@@ -317,7 +317,7 @@ Si us desplaceu cap amunt fins al començament del fitxer, trobareu una capçale
     ##FORMAT=<ID=GQ,Number=1,Type=Integer,Description="Genotype Quality">
     ##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
     ##FORMAT=<ID=PL,Number=G,Type=Integer,Description="Normalized, Phred-scaled likelihoods for genotypes as defined in the VCF specification">
-    ##GATKCommandLine=<ID=HaplotypeCaller,CommandLine="HaplotypeCaller --output reads_mother.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abreujat]",Version="4.5.0.0",Date="February 11, 2026 at 4:23:43 PM GMT">
+    ##GATKCommandLine=<ID=HaplotypeCaller,CommandLine="HaplotypeCaller --output reads_mother.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abridged]",Version="4.5.0.0",Date="February 11, 2026 at 4:23:43 PM GMT">
     ##INFO=<ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes, for each ALT allele, in the same order as listed">
     ##INFO=<ID=AF,Number=A,Type=Float,Description="Allele Frequency, for each ALT allele, in the same order as listed">
     ##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
@@ -351,13 +351,13 @@ Si us desplaceu cap amunt fins al començament del fitxer, trobareu una capçale
     20_10037292_10066351    14156   .       T       C       183.64  .       AC=1;AF=0.500;AN=2;BaseQRankSum=0.703;DP=20;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=9.18;ReadPosRankSum=-0.193;SOR=1.034        GT:AD:DP:GQ:PL  0/1:12,8:20:99:191,0,319
     ```
 
-A l'exemple de sortida anterior, hem destacat l'última línia de capçalera, que dóna els noms de les columnes per a les dades tabulars que segueixen.
-Cada línia de dades descriu una possible variant identificada a les dades de seqüenciació de la mostra. Per a orientació sobre com interpretar el format VCF, vegeu [aquest article útil](https://www.ebi.ac.uk/training/online/courses/human-genetic-variation-introduction/variant-identification-and-analysis/understanding-vcf-format/).
+A l'exemple de sortida anterior, hem destacat l'última línia de capçalera, que dona els noms de les columnes per a les dades tabulars que segueixen.
+Cada línia de dades descriu una possible variant identificada en les dades de seqüenciació de la mostra. Per obtenir orientació sobre la interpretació del format VCF, vegeu [aquest article útil](https://www.ebi.ac.uk/training/online/courses/human-genetic-variation-introduction/variant-identification-and-analysis/understanding-vcf-format/).
 
 #### 1.2.4. Moure els fitxers de sortida
 
 Qualsevol cosa que romangui dins del contenidor serà inaccessible per a treballs futurs.
-El fitxer d'índex BAM es va crear directament al directori `/data/bam` del sistema de fitxers muntat, però no el fitxer VCF i el seu índex, així que necessitem moure aquests dos manualment.
+El fitxer d'índex BAM es va crear directament al directori `/data/bam` del sistema de fitxers muntat, però no el fitxer VCF i el seu índex, de manera que cal moure'ls manualment.
 
 ```bash
 mkdir /data/vcf
@@ -384,9 +384,9 @@ mv reads_mother.vcf* /data/vcf
         └── reads_mother.vcf.idx
     ```
 
-Un cop fet això, tots els fitxers són ara accessibles al vostre sistema de fitxers normal.
+Un cop fet, tots els fitxers ja són accessibles al vostre sistema de fitxers normal.
 
-#### 1.2.5. Sortir del contenidor GATK
+#### 1.2.5. Sortir del contenidor de GATK
 
 Per sortir del contenidor, escriviu `exit`.
 
@@ -394,62 +394,62 @@ Per sortir del contenidor, escriviu `exit`.
 exit
 ```
 
-El vostre prompt hauria de tornar a la normalitat.
-Això conclou la prova de crida de variants per mostra.
+El vostre indicador hauria de tornar a la normalitat.
+Això conclou la prova d'identificació de variants per mostra.
 
-!!! example "Escriviu-ho com un workflow!"
+!!! example "Escriviu-ho com a workflow!"
 
-    Podeu passar directament a la [Part 2](./02_per_sample_variant_calling.md) si voleu començar a implementar aquesta anàlisi com un workflow Nextflow.
-    Només haureu de tornar per completar la segona ronda de proves abans de passar a la Part 3.
+    Podeu passar directament a la [Part 2](./02_per_sample_variant_calling.md) si voleu començar a implementar aquesta anàlisi com a workflow de Nextflow.
+    Només caldrà que torneu aquí per completar la segona ronda de proves abans de passar a la Part 3.
 
 ---
 
-## 2. Crida conjunta sobre una cohort
+## 2. Genotipatge conjunt d'una cohort
 
-L'enfocament de crida de variants que acabem d'utilitzar genera crides de variants per mostra.
-Això està bé per examinar variants de cada mostra de manera aïllada, però proporciona informació limitada.
-Sovint és més interessant veure com difereixen les crides de variants entre múltiples mostres.
-GATK ofereix un mètode alternatiu anomenat crida conjunta de variants per a aquest propòsit.
+L'enfocament d'identificació de variants que acabem d'utilitzar genera identificacions de variants per mostra.
+Això és adequat per examinar les variants de cada mostra de manera aïllada, però proporciona informació limitada.
+Sovint és més interessant examinar com difereixen les identificacions de variants entre múltiples mostres.
+GATK ofereix un mètode alternatiu anomenat genotipatge conjunt de variants per a aquest propòsit.
 
-La crida conjunta de variants implica generar un tipus especial de sortida de variants anomenada GVCF (per Genomic VCF) per a cada mostra, després combinar les dades GVCF de totes les mostres i executar una anàlisi estadística de 'genotipat conjunt'.
+El genotipatge conjunt de variants implica generar un tipus especial de sortida de variants anomenada GVCF (Genomic VCF) per a cada mostra, combinar les dades GVCF de totes les mostres i executar una anàlisi estadística de "genotipatge conjunt".
 
 ![Anàlisi conjunta](img/joint-calling.png)
 
-El que és especial del GVCF d'una mostra és que conté registres que resumeixen estadístiques de dades de seqüència sobre totes les posicions de l'àrea objectiu del genoma, no només les posicions on el programa va trobar evidència de variació.
-Això és crític per al càlcul del genotipat conjunt ([lectura addicional](https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants)).
+El que és especial d'un GVCF d'una mostra és que conté registres que resumeixen estadístiques de dades de seqüència sobre totes les posicions de l'àrea objectiu del genoma, no només les posicions on el programa va trobar evidència de variació.
+Això és fonamental per al càlcul del genotipatge conjunt ([lectura addicional](https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants)).
 
 El GVCF és produït per GATK HaplotypeCaller, la mateixa eina que acabem de provar, amb un paràmetre addicional (`-ERC GVCF`).
-La combinació dels GVCFs es fa amb GATK GenomicsDBImport, que combina les crides per mostra en un magatzem de dades (anàleg a una base de dades).
-L'anàlisi de 'genotipat conjunt' pròpiament dit es fa després amb GATK GenotypeGVCFs.
+La combinació dels GVCFs es fa amb GATK GenomicsDBImport, que combina les identificacions per mostra en un magatzem de dades (anàleg a una base de dades).
+L'anàlisi de "genotipatge conjunt" pròpiament dita es realitza amb GATK GenotypeGVCFs.
 
-Aquí provem les comandes necessàries per generar GVCFs i executar el genotipat conjunt.
-Aquestes són les comandes que encapsularem en un workflow Nextflow a la Part 3 d'aquest curs.
+Aquí provem les comandes necessàries per generar GVCFs i executar el genotipatge conjunt.
+Aquestes són les comandes que encapsularem en un workflow de Nextflow a la Part 3 d'aquest curs.
 
 1. Generar un fitxer d'índex per a cada fitxer d'entrada BAM utilitzant Samtools
-2. Executar GATK HaplotypeCaller sobre cada fitxer d'entrada BAM per generar un GVCF de crides de variants genòmiques per mostra
+2. Executar GATK HaplotypeCaller sobre cada fitxer d'entrada BAM per generar un GVCF d'identificacions de variants genòmiques per mostra
 3. Recollir tots els GVCFs i combinar-los en un magatzem de dades GenomicsDB
-4. Executar el genotipat conjunt sobre el magatzem de dades GVCF combinat per produir un VCF a nivell de cohort
+4. Executar el genotipatge conjunt sobre el magatzem de dades GVCF combinat per produir un VCF a nivell de cohort
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
 </figure>
 
-Ara necessitem provar totes aquestes comandes, començant per indexar els tres fitxers BAM.
+Ara cal provar totes aquestes comandes, començant per indexar els tres fitxers BAM.
 
-### 2.1. Indexar fitxers BAM per a les tres mostres
+### 2.1. Indexar els fitxers BAM per a les tres mostres
 
 A la primera secció anterior, només vam indexar un fitxer BAM.
-Ara necessitem indexar les tres mostres perquè GATK HaplotypeCaller pugui processar-les.
+Ara cal indexar les tres mostres perquè GATK HaplotypeCaller les pugui processar.
 
-#### 2.1.1. Iniciar el contenidor Samtools interactivament
+#### 2.1.1. Iniciar el contenidor de Samtools de manera interactiva
 
-Ja hem descarregat la imatge del contenidor Samtools, així que podem iniciar-lo directament:
+Ja hem descarregat la imatge del contenidor de Samtools, de manera que podem iniciar-lo directament:
 
 ```bash
 docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
 ```
 
-El vostre prompt canvia per indicar que esteu dins del contenidor, amb el directori de dades muntat com abans.
+El vostre indicador canvia per indicar que esteu dins del contenidor, amb el directori de dades muntat com abans.
 
 #### 2.1.2. Executar la comanda d'indexació sobre les tres mostres
 
@@ -475,7 +475,7 @@ samtools index /data/bam/reads_son.bam
 
 Això hauria de produir els fitxers d'índex al mateix directori que els fitxers BAM corresponents.
 
-#### 2.1.3. Sortir del contenidor Samtools
+#### 2.1.3. Sortir del contenidor de Samtools
 
 Per sortir del contenidor, escriviu `exit`.
 
@@ -483,28 +483,28 @@ Per sortir del contenidor, escriviu `exit`.
 exit
 ```
 
-El vostre prompt hauria de tornar a la normalitat.
+El vostre indicador hauria de tornar a la normalitat.
 
 ### 2.2. Generar GVCFs per a les tres mostres
 
-Per executar el pas de genotipat conjunt, necessitem GVCFs per a les tres mostres.
+Per executar el pas de genotipatge conjunt, necessitem GVCFs per a les tres mostres.
 
-#### 2.2.1. Iniciar el contenidor GATK interactivament
+#### 2.2.1. Iniciar el contenidor de GATK de manera interactiva
 
-Ja hem descarregat la imatge del contenidor GATK abans, així que podem iniciar-lo directament:
+Ja hem descarregat la imatge del contenidor de GATK anteriorment, de manera que podem iniciar-lo directament:
 
 ```bash
 docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 ```
 
-El vostre prompt canvia per indicar que esteu dins del contenidor GATK.
+El vostre indicador canvia per indicar que esteu dins del contenidor de GATK.
 
-#### 2.2.2. Executar la comanda de crida de variants amb l'opció GVCF
+#### 2.2.2. Executar la comanda d'identificació de variants amb l'opció GVCF
 
-Per produir un VCF genòmic (GVCF), afegim l'opció `-ERC GVCF` a la comanda base, que activa el mode GVCF de HaplotypeCaller.
+Per produir un VCF genòmic (GVCF), afegim l'opció `-ERC GVCF` a la comanda base, que activa el mode GVCF del HaplotypeCaller.
 
 També canviem l'extensió del fitxer de sortida de `.vcf` a `.g.vcf`.
-Tècnicament això no és un requisit, però és una convenció fortament recomanada.
+Tècnicament no és un requisit, però és una convenció molt recomanada.
 
 ```bash
 gatk HaplotypeCaller \
@@ -605,7 +605,7 @@ Si executeu `head -200 reads_mother.g.vcf` per veure les primeres 200 línies de
     ##FORMAT=<ID=PL,Number=G,Type=Integer,Description="Normalized, Phred-scaled likelihoods for genotypes as defined in the VCF specification">
     ##FORMAT=<ID=PS,Number=1,Type=Integer,Description="Phasing set (typically the position of the first variant in the set)">
     ##FORMAT=<ID=SB,Number=4,Type=Integer,Description="Per-sample component statistics which comprise the Fisher's Exact Test to detect strand bias.">
-    ##GATKCommandLine=<ID=HaplotypeCaller,CommandLine="HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abreujat]",Version="4.5.0.0",Date="February 11, 2026 at 4:51:00 PM GMT">
+    ##GATKCommandLine=<ID=HaplotypeCaller,CommandLine="HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abridged]",Version="4.5.0.0",Date="February 11, 2026 at 4:51:00 PM GMT">
     ##GVCFBlock0-1=minGQ=0(inclusive),maxGQ=1(exclusive)
     ##GVCFBlock1-2=minGQ=1(inclusive),maxGQ=2(exclusive)
     ##GVCFBlock10-11=minGQ=10(inclusive),maxGQ=11(exclusive)
@@ -794,17 +794,17 @@ Si executeu `head -200 reads_mother.g.vcf` per veure les primeres 200 línies de
     20_10037292_10066351	3537	.	A	<NON_REF>	.	.	END=3546	GT:DP:GQ:MIN_DP:PL	0/0:29:72:26:0,72,1080
     ```
 
-Hem destacat una vegada més l'última línia de capçalera, així com les tres primeres crides de variants 'pròpies' del fitxer.
+Hem tornat a destacar l'última línia de capçalera, així com les tres primeres identificacions de variants "pròpies" del fitxer.
 
-Notareu que les línies de crida de variants estan intercalades amb moltes línies no-variant, que representen regions no-variant on el cridador de variants no va trobar evidència de variació.
-Com s'ha esmentat breument abans, això és el que és especial del mode GVCF de crida de variants: el cridador de variants captura algunes estadístiques que descriuen el seu nivell de confiança en l'absència de variació.
-Això fa possible distingir entre dos casos molt diferents: (1) hi ha dades de bona qualitat que mostren que la mostra és homozigota-referència, i (2) no hi ha prou dades bones disponibles per fer una determinació en cap sentit.
+Notareu que les línies d'identificació de variants estan intercalades amb moltes línies de no-variant, que representen regions sense variació on l'identificador de variants no va trobar cap evidència de variació.
+Com s'ha esmentat breument anteriorment, això és el que fa especial el mode GVCF d'identificació de variants: la variant identificada captura algunes estadístiques que descriuen el seu nivell de confiança en l'absència de variació.
+Això fa possible distingir entre dos casos molt diferents: (1) hi ha dades de bona qualitat que mostren que la mostra és homozigota-referència, i (2) no hi ha prou dades de bona qualitat disponibles per fer una determinació en cap sentit.
 
-En un GVCF com aquest, normalment hi ha moltes d'aquestes línies no-variant, amb un nombre més petit de registres de variants escampats entre elles.
+En un GVCF com aquest, normalment hi ha moltes d'aquestes línies de no-variant, amb un nombre menor de registres de variants intercalats entre elles.
 
-#### 2.2.3. Repetir el procés amb les altres dues mostres
+#### 2.2.3. Repetir el procés per a les altres dues mostres
 
-Ara generem GVCFs per a les dues mostres restants executant les comandes següents, una després de l'altra.
+Ara generem GVCFs per a les dues mostres restants executant les comandes següents, una darrere l'altra.
 
 ```bash
 gatk HaplotypeCaller \
@@ -952,7 +952,7 @@ gatk HaplotypeCaller \
     Runtime.totalMemory()=226492416
     ```
 
-Un cop completat, hauríeu de tenir tres fitxers que acaben en `.g.vcf` al vostre directori actual (un per mostra) i els seus respectius fitxers d'índex que acaben en `.g.vcf.idx`.
+Un cop completat, hauríeu de tenir tres fitxers acabats en `.g.vcf` al vostre directori actual (un per mostra) i els seus respectius fitxers d'índex acabats en `.g.vcf.idx`.
 
 ??? abstract "Contingut del directori"
 
@@ -961,20 +961,20 @@ Un cop completat, hauríeu de tenir tres fitxers que acaben en `.g.vcf` al vostr
     hsperfdata_root  reads_father.g.vcf.idx  reads_mother.g.vcf.idx  reads_son.g.vcf.idx
     ```
 
-En aquest punt, hem cridat variants en mode GVCF per a cadascuna de les nostres mostres d'entrada.
-És hora de passar a la crida conjunta.
+En aquest punt, hem identificat variants en mode GVCF per a cadascuna de les nostres mostres d'entrada.
+És hora de passar al genotipatge conjunt.
 
 Però no sortiu del contenidor!
-Utilitzarem el mateix al següent pas.
+Farem servir el mateix al pas següent.
 
-### 2.3. Executar el genotipat conjunt
+### 2.3. Executar el genotipatge conjunt
 
-Ara que tenim tots els GVCFs, podem provar l'enfocament de genotipat conjunt per generar crides de variants per a una cohort de mostres.
-És un mètode de dos passos que consisteix a combinar les dades de tots els GVCFs en un magatzem de dades, després executar l'anàlisi de genotipat conjunt pròpiament dit per generar el VCF final de variants cridats conjuntament.
+Ara que tenim tots els GVCFs, podem provar l'enfocament de genotipatge conjunt per generar identificacions de variants per a una cohort de mostres.
+És un mètode de dos passos que consisteix a combinar les dades de tots els GVCFs en un magatzem de dades, i després executar l'anàlisi de genotipatge conjunt pròpiament dita per generar el VCF final de variants identificades conjuntament.
 
 #### 2.3.1. Combinar tots els GVCFs per mostra
 
-Aquest primer pas utilitza una altra eina GATK, anomenada GenomicsDBImport, per combinar les dades de tots els GVCFs en un magatzem de dades GenomicsDB.
+Aquest primer pas utilitza una altra eina de GATK, anomenada GenomicsDBImport, per combinar les dades de tots els GVCFs en un magatzem de dades GenomicsDB.
 El magatzem de dades GenomicsDB és una mena de format de base de dades que serveix com a emmagatzematge intermedi per a la informació de variants.
 
 ```bash
@@ -1033,16 +1033,16 @@ gatk GenomicsDBImport \
     true
     ```
 
-La sortida d'aquest pas és efectivament un directori que conté un conjunt de directoris més imbricats que contenen les dades de variants combinades en forma de múltiples fitxers diferents.
-Podeu explorar-lo però ràpidament veureu que aquest format de magatzem de dades no està pensat per ser llegit directament per humans.
+La sortida d'aquest pas és efectivament un directori que conté un conjunt de directoris niats addicionals que contenen les dades de variants combinades en forma de múltiples fitxers diferents.
+Podeu explorar-lo, però veureu ràpidament que aquest format de magatzem de dades no està pensat per ser llegit directament per humans.
 
 !!! tip "Consell"
 
-    GATK inclou eines que fan possible inspeccionar i extreure dades de crides de variants del magatzem de dades segons sigui necessari.
+    GATK inclou eines que permeten inspeccionar i extreure dades d'identificació de variants del magatzem de dades quan sigui necessari.
 
-#### 2.3.2. Executar l'anàlisi de genotipat conjunt pròpiament dit
+#### 2.3.2. Executar l'anàlisi de genotipatge conjunt pròpiament dita
 
-Aquest segon pas utilitza encara una altra eina GATK, anomenada GenotypeGVCFs, per recalcular estadístiques de variants i genotips individuals a la llum de les dades disponibles a través de totes les mostres de la cohort.
+Aquest segon pas utilitza una altra eina de GATK, anomenada GenotypeGVCFs, per recalcular les estadístiques de variants i els genotips individuals tenint en compte les dades disponibles de totes les mostres de la cohort.
 
 ```bash
 gatk GenotypeGVCFs \
@@ -1081,24 +1081,21 @@ gatk GenotypeGVCFs \
     17:38:45.544 INFO  GenomicsDBLibLoader - GenomicsDB native library version : 1.5.1-84e800e
     17:38:45.561 INFO  NativeGenomicsDB - pid=221 tid=222 No valid combination operation found for INFO field InbreedingCoeff  - the field will NOT be part of INFO fields in the generated VCF records
     17:38:45.561 INFO  NativeGenomicsDB - pid=221 tid=222 No valid combination operation found for INFO field MLEAC  - the field will NOT be part of INFO fields in the generated VCF records
-    17:38:45.```console
-
-561 INFO NativeGenomicsDB - pid=221 tid=222 No valid combination operation found for INFO field MLEAF - the field will NOT be part of INFO fields in the generated VCF records
-17:38:45.577 INFO GenotypeGVCFs - Done initializing engine
-17:38:45.615 INFO ProgressMeter - Starting traversal
-17:38:45.615 INFO ProgressMeter - Current Locus Elapsed Minutes Variants Processed Variants/Minute
-17:38:45.903 WARN InbreedingCoeff - InbreedingCoeff will not be calculated at position 20_10037292_10066351:3480 and possibly subsequent; at least 10 samples must have called genotypes
-GENOMICSDB_TIMER,GenomicsDB iterator next() timer,Wall-clock time(s),0.07757032800000006,Cpu time(s),0.07253379200000037
-17:38:46.421 INFO ProgressMeter - 20_10037292_10066351:13953 0.0 3390 252357.3
-17:38:46.422 INFO ProgressMeter - Traversal complete. Processed 3390 total variants in 0.0 minutes.
-17:38:46.423 INFO GenotypeGVCFs - Shutting down engine
-[February 11, 2026 at 5:38:46 PM GMT] org.broadinstitute.hellbender.tools.walkers.GenotypeGVCFs done. Elapsed time: 0.02 minutes.
-Runtime.totalMemory()=203423744
-
-````
+    17:38:45.561 INFO  NativeGenomicsDB - pid=221 tid=222 No valid combination operation found for INFO field MLEAF  - the field will NOT be part of INFO fields in the generated VCF records
+    17:38:45.577 INFO  GenotypeGVCFs - Done initializing engine
+    17:38:45.615 INFO  ProgressMeter - Starting traversal
+    17:38:45.615 INFO  ProgressMeter -        Current Locus  Elapsed Minutes    Variants Processed  Variants/Minute
+    17:38:45.903 WARN  InbreedingCoeff - InbreedingCoeff will not be calculated at position 20_10037292_10066351:3480 and possibly subsequent; at least 10 samples must have called genotypes
+    GENOMICSDB_TIMER,GenomicsDB iterator next() timer,Wall-clock time(s),0.07757032800000006,Cpu time(s),0.07253379200000037
+    17:38:46.421 INFO  ProgressMeter - 20_10037292_10066351:13953              0.0                  3390         252357.3
+    17:38:46.422 INFO  ProgressMeter - Traversal complete. Processed 3390 total variants in 0.0 minutes.
+    17:38:46.423 INFO  GenotypeGVCFs - Shutting down engine
+    [February 11, 2026 at 5:38:46 PM GMT] org.broadinstitute.hellbender.tools.walkers.GenotypeGVCFs done. Elapsed time: 0.02 minutes.
+    Runtime.totalMemory()=203423744
+    ```
 
 Això crea el fitxer de sortida VCF `family_trio.vcf` al directori de treball actual del contenidor, així com el seu índex, `family_trio.vcf.idx`.
-És un altre fitxer raonablement petit, així que podeu executar `cat family_trio.vcf` per veure el contingut del fitxer, i desplaçar-vos cap avall per trobar les primeres línies de variants.
+És un fitxer raonablement petit, de manera que podeu executar `cat family_trio.vcf` per veure el contingut del fitxer i desplaçar-vos cap avall per trobar les primeres línies de variants.
 
 ??? abstract "Contingut del fitxer (abreujat)"
 
@@ -1118,9 +1115,9 @@ Això crea el fitxer de sortida VCF `family_trio.vcf` al directori de treball ac
     ##FORMAT=<ID=PS,Number=1,Type=Integer,Description="Phasing set (typically the position of the first variant in the set)">
     ##FORMAT=<ID=RGQ,Number=1,Type=Integer,Description="Unconditional reference genotype confidence, encoded as a phred quality -10*log10 p(genotype call is wrong)">
     ##FORMAT=<ID=SB,Number=4,Type=Integer,Description="Per-sample component statistics which comprise the Fisher's Exact Test to detect strand bias.">
-    ##GATKCommandLine=<ID=GenomicsDBImport,CommandLine="GenomicsDBImport --genomicsdb-workspace-path family_trio_gdb --variant reads_mother.g.vcf --variant reads_father.g.vcf --variant reads_son.g.vcf --intervals /data/ref/intervals.bed [abreujat]",Version="4.5.0.0",Date="February 11, 2026 at 5:37:07 PM GMT">
-    ##GATKCommandLine=<ID=GenotypeGVCFs,CommandLine="GenotypeGVCFs --output family_trio.vcf --variant gendb://family_trio_gdb --reference /data/ref/ref.fasta --include-non-variant-sites false [abreujat]",Version="4.5.0.0",Date="February 11, 2026 at 5:38:45 PM GMT">
-    ##GATKCommandLine=<ID=HaplotypeCaller,CommandLine="HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abreujat]",Version="4.5.0.0",Date="February 11, 2026 at 4:51:00 PM GMT">
+    ##GATKCommandLine=<ID=GenomicsDBImport,CommandLine="GenomicsDBImport --genomicsdb-workspace-path family_trio_gdb --variant reads_mother.g.vcf --variant reads_father.g.vcf --variant reads_son.g.vcf --intervals /data/ref/intervals.bed [abridged]",Version="4.5.0.0",Date="February 11, 2026 at 5:37:07 PM GMT">
+    ##GATKCommandLine=<ID=GenotypeGVCFs,CommandLine="GenotypeGVCFs --output family_trio.vcf --variant gendb://family_trio_gdb --reference /data/ref/ref.fasta --include-non-variant-sites false [abridged]",Version="4.5.0.0",Date="February 11, 2026 at 5:38:45 PM GMT">
+    ##GATKCommandLine=<ID=HaplotypeCaller,CommandLine="HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abridged]",Version="4.5.0.0",Date="February 11, 2026 at 4:51:00 PM GMT">
     ##INFO=<ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes, for each ALT allele, in the same order as listed">
     ##INFO=<ID=AF,Number=A,Type=Float,Description="Allele Frequency, for each ALT allele, in the same order as listed">
     ##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
@@ -1163,24 +1160,24 @@ Això crea el fitxer de sortida VCF `family_trio.vcf` al directori de treball ac
     20_10037292_10066351    14403   .       G       A       144.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=2.63;DP=116;ExcessHet=0.0000;FS=1.435;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=3.52;ReadPosRankSum=0.252;SOR=0.802  GT:AD:DP:GQ:PL  0/1:32,9:41:99:153,0,821        0/0:37,0:37:99:0,109,1169       0/0:37,0:37:99:0,99,1113
     ```
 
-Hem destacat una vegada més l'última línia de capçalera, que marca l'inici de les dades de crides de variants.
+Hem tornat a destacar l'última línia de capçalera, que marca l'inici de les dades d'identificació de variants.
 
-Això sembla similar al VCF que vam generar abans, excepte que aquesta vegada tenim informació a nivell de genotip per a les tres mostres.
-Les últimes tres columnes del fitxer són els blocs de genotip per a les mostres, llistades en ordre alfabètic del seu camp ID, com es mostra a la línia de capçalera destacada.
+Això s'assembla al VCF que vam generar anteriorment, excepte que aquesta vegada tenim informació a nivell de genotip per a les tres mostres.
+Les tres últimes columnes del fitxer són els blocs de genotip per a les mostres, llistades en ordre alfabètic del seu camp d'identificador, tal com es mostra a la línia de capçalera destacada.
 
-Si mirem els genotips cridats per al nostre trio familiar de prova per a la primera variant, veiem que el pare és heterozigot-variant (`0/1`), i la mare i el fill són tots dos homozigots-variant (`1/1`).
+Si mirem els genotips identificats per al nostre trio familiar de prova per a la primera variant, veiem que el pare és heterozigot-variant (`0/1`), i la mare i el fill són tots dos homozigots-variant (`1/1`).
 
-Aquesta és en última instància el tipus d'informació que busquem extreure del conjunt de dades!
+Aquesta és, en definitiva, la mena d'informació que volem extreure del conjunt de dades!
 
 #### 2.3.3. Moure els fitxers de sortida
 
-Com s'ha esmentat anteriorment, qualsevol cosa que romangui dins del contenidor serà inaccessible per a treballs futurs.
-Abans de sortir del contenidor, mourem els fitxers GVCF, el VCF final multi-mostra i tots els seus fitxers d'índex manualment al sistema de fitxers fora del contenidor.
-D'aquesta manera, tindrem alguna cosa per comparar quan construïm el nostre workflow per automatitzar tot aquest treball.
+Com s'ha indicat anteriorment, qualsevol cosa que romangui dins del contenidor serà inaccessible per a treballs futurs.
+Abans de sortir del contenidor, mourem els fitxers GVCF, el VCF final de múltiples mostres i tots els seus fitxers d'índex manualment al sistema de fitxers fora del contenidor.
+D'aquesta manera, tindrem alguna cosa amb la qual comparar quan construïm el nostre workflow per automatitzar tota aquesta feina.
 
 ```bash
 mv *.vcf* /data/vcf
-````
+```
 
 ??? abstract "Contingut del directori" hl_lines="14-19 22-23"
 
@@ -1212,9 +1209,9 @@ mv *.vcf* /data/vcf
         └── reads_son.g.vcf.idx
     ```
 
-Un cop fet això, tots els fitxers són ara accessibles al vostre sistema de fitxers normal.
+Un cop fet, tots els fitxers ja són accessibles al vostre sistema de fitxers normal.
 
-#### 2.3.4. Sortir del contenidor GATK
+#### 2.3.4. Sortir del contenidor de GATK
 
 Per sortir del contenidor, escriviu `exit`.
 
@@ -1222,15 +1219,15 @@ Per sortir del contenidor, escriviu `exit`.
 exit
 ```
 
-El vostre prompt hauria de tornar a la normalitat.
-Això conclou la prova manual de les comandes de crida conjunta de variants.
+El vostre indicador hauria de tornar a la normalitat.
+Això conclou la prova manual de les comandes d'identificació conjunta de variants.
 
 ---
 
-### Conclusió
+### Conclusio
 
-Sabeu com provar les comandes d'indexació de Samtools i crida de variants de GATK als seus respectius contenidors, incloent com generar GVCFs i executar el genotipat conjunt sobre múltiples mostres.
+Sabeu com provar les comandes d'indexació de Samtools i d'identificació de variants de GATK als seus respectius contenidors, incloent com generar GVCFs i executar el genotipatge conjunt sobre múltiples mostres.
 
 ### Què segueix?
 
-Feu una pausa, després aneu a la [Part 2](./02_per_sample_variant_calling.md) per aprendre com encapsular aquestes mateixes comandes en workflows que utilitzen contenidors per executar el treball.
+Feu una pausa i després aneu a la [Part 2](./02_per_sample_variant_calling.md) per aprendre com encapsular aquestes mateixes comandes en workflows que utilitzen contenidors per executar la feina.

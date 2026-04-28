@@ -8,7 +8,7 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-트레이닝 컬렉션은 고급 교육 자료([Side Quests](../../side_quests)라고 함)를 통한 선별된 학습 경로를 제공합니다. 이 컬렉션은 견고하고 확장 가능한 워크플로우를 구축하기 위해 자주 함께 사용되는 네 가지 필수 주제를 다룹니다.
+트레이닝 컬렉션은 고급 교육 자료([Side Quests](../side_quests/index.md)라고 함)를 통한 선별된 학습 경로를 제공합니다. 이 컬렉션은 견고하고 확장 가능한 워크플로우를 구축하기 위해 자주 함께 사용되는 네 가지 필수 주제를 다룹니다.
 
 ## 학습 목표
 
@@ -27,7 +27,7 @@ hide:
 
 **사전 요구 사항**
 
-- [Hello Nextflow](../../hello_nextflow/) 교육 완료 또는 이에 상응하는 경험
+- [Hello Nextflow](../hello_nextflow/index.md) 교육 완료 또는 이에 상응하는 경험
 - Nextflow 구문 및 개념에 대한 기본적인 이해
 - 기본 워크플로우 개발 패턴에 대한 이해
 - 명령줄 도구 사용 경험
@@ -36,10 +36,10 @@ hide:
 
 이 컬렉션은 상호 보완적인 워크플로우 엔지니어링 주제를 다루는 네 개의 Side Quest로 구성됩니다:
 
-1. **[Workflows of Workflows](../../side_quests/workflows_of_workflows)** - 복잡한 워크플로우 아키텍처 및 구성
-2. **[Testing with nf-test](../../side_quests/nf-test)** - Nextflow 워크플로우를 위한 테스트 전략
-3. **[Metadata](../../side_quests/metadata)** - Nextflow 채널의 항목에 대한 메타데이터 처리
-4. **[Splitting and Grouping](../../side_quests/splitting_and_grouping)** - 고급 데이터 처리 패턴
+1. **[Workflows of Workflows](../side_quests/workflows_of_workflows/index.md)** - 복잡한 워크플로우 아키텍처 및 구성
+2. **[Testing with nf-test](../side_quests/nf_test/index.md)** - Nextflow 워크플로우를 위한 테스트 전략
+3. **[Metadata](../side_quests/metadata/index.md)** - Nextflow 채널의 항목에 대한 메타데이터 처리
+4. **[Splitting and Grouping](../side_quests/splitting_and_grouping/index.md)** - 고급 데이터 처리 패턴
 
 각 Side Quest는 독립적인 개념을 다루는 자체 완결형이지만, 주제에 대한 논리적 진행을 위해 위에 나열된 순서대로 완료하는 것을 권장합니다.
 

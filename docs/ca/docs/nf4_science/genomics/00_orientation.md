@@ -22,7 +22,7 @@ Si esteu treballant en aquest curs pel vostre compte, familiaritzeu-vos amb els 
 
 ### Requisits de versió
 
-Aquesta formació està dissenyada per a Nextflow 25.10.2 o posterior **amb l'analitzador de sintaxi v2 ACTIVAT**.
+Aquesta formació funciona amb Nextflow 25.10.2 o posterior **amb l'analitzador de sintaxi v2 ACTIVAT**.
 Si utilitzeu un entorn local o personalitzat, assegureu-vos que utilitzeu la configuració correcta tal com es documenta [aquí](../../info/nxf_versions.md).
 
 ## Prepareu-vos per treballar

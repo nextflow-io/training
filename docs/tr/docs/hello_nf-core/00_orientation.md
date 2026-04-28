@@ -36,7 +36,7 @@ export NXF_SYNTAX_PARSER=v1
 
 Lütfen [burada](../info/nxf_versions.md) belgelenen doğru ayarları kullandığınızdan emin olun.
 
-Eğitim ayrıca **nf-core tools 3.4.1** gerektirir.
+Eğitim ayrıca **nf-core tools 3.5.2** gerektirir.
 nf-core araçlarının farklı bir sürümünü kullanırsanız, takip etmekte zorluk yaşayabilirsiniz.
 
 Ortamınızda hangi sürümün yüklü olduğunu `nf-core --version` komutunu kullanarak kontrol edebilirsiniz.
@@ -63,7 +63,7 @@ cd hello-nf-core/
     cd /workspaces/training/hello-nf-core
     ```
 
-Şimdi bu dizinin içeriğine göz atalım.
+Şimdi bu dizinin içeriğini keşfedelim.
 
 ### Sağlanan materyalleri keşfetme
 

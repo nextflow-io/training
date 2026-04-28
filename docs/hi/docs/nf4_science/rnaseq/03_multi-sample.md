@@ -528,40 +528,42 @@ nextflow run rnaseq.nf -profile test -resume
 tree -L 2 results/multiqc
 ```
 
-```console title="आउटपुट"
-results/multiqc
-├── all_single-end_data
-│   ├── cutadapt_filtered_reads_plot.txt
-│   ├── cutadapt_trimmed_sequences_plot_3_Counts.txt
-│   ├── cutadapt_trimmed_sequences_plot_3_Obs_Exp.txt
-│   ├── fastqc_adapter_content_plot.txt
-│   ├── fastqc_overrepresented_sequences_plot.txt
-│   ├── fastqc_per_base_n_content_plot.txt
-│   ├── fastqc_per_base_sequence_quality_plot.txt
-│   ├── fastqc_per_sequence_gc_content_plot_Counts.txt
-│   ├── fastqc_per_sequence_gc_content_plot_Percentages.txt
-│   ├── fastqc_per_sequence_quality_scores_plot.txt
-│   ├── fastqc_sequence_counts_plot.txt
-│   ├── fastqc_sequence_duplication_levels_plot.txt
-│   ├── fastqc_sequence_length_distribution_plot.txt
-│   ├── fastqc-status-check-heatmap.txt
-│   ├── fastqc_top_overrepresented_sequences_table.txt
-│   ├── hisat2_se_plot.txt
-│   ├── multiqc_citations.txt
-│   ├── multiqc_cutadapt.txt
-│   ├── multiqc_data.json
-│   ├── multiqc_fastqc.txt
-│   ├── multiqc_general_stats.txt
-│   ├── multiqc_hisat2.txt
-│   ├── multiqc.log
-│   ├── multiqc_software_versions.txt
-│   └── multiqc_sources.txt
-└── all_single-end.html
-```
+??? abstract "डायरेक्टरी सामग्री"
+
+    ```console
+    results/multiqc
+    ├── all_single-end_data
+    │   ├── cutadapt_filtered_reads_plot.txt
+    │   ├── cutadapt_trimmed_sequences_plot_3_Counts.txt
+    │   ├── cutadapt_trimmed_sequences_plot_3_Obs_Exp.txt
+    │   ├── fastqc_adapter_content_plot.txt
+    │   ├── fastqc_overrepresented_sequences_plot.txt
+    │   ├── fastqc_per_base_n_content_plot.txt
+    │   ├── fastqc_per_base_sequence_quality_plot.txt
+    │   ├── fastqc_per_sequence_gc_content_plot_Counts.txt
+    │   ├── fastqc_per_sequence_gc_content_plot_Percentages.txt
+    │   ├── fastqc_per_sequence_quality_scores_plot.txt
+    │   ├── fastqc_sequence_counts_plot.txt
+    │   ├── fastqc_sequence_duplication_levels_plot.txt
+    │   ├── fastqc_sequence_length_distribution_plot.txt
+    │   ├── fastqc-status-check-heatmap.txt
+    │   ├── fastqc_top_overrepresented_sequences_table.txt
+    │   ├── hisat2_se_plot.txt
+    │   ├── multiqc_citations.txt
+    │   ├── multiqc_cutadapt.txt
+    │   ├── multiqc_data.json
+    │   ├── multiqc_fastqc.txt
+    │   ├── multiqc_general_stats.txt
+    │   ├── multiqc_hisat2.txt
+    │   ├── multiqc.log
+    │   ├── multiqc_software_versions.txt
+    │   └── multiqc_sources.txt
+    └── all_single-end.html
+    ```
 
 वह अंतिम `all_single-end.html` फ़ाइल पूर्ण एकत्रित रिपोर्ट है, जो एक आसान ब्राउज़ करने योग्य HTML फ़ाइल में सुविधाजनक रूप से पैक की गई है।
 
-### मुख्य बातें
+### सारांश
 
 तुम जानते हो कि कई channels से आउटपुट कैसे एकत्रित करें, उन्हें `.mix()` और `.collect()` से कैसे बंडल करें, और उन्हें एकत्रीकरण process को कैसे पास करें।
 

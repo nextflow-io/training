@@ -1,53 +1,38 @@
-# Yönlendirme
+# Başlarken
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-GitHub Codespaces ortamı, bu eğitim kursunu tamamlamak için gerekli tüm yazılımları, kodları ve verileri içerir; bu nedenle kendiniz herhangi bir şey yüklemenize gerek yoktur.
-Ancak, oturum açmak için (ücretsiz) bir hesaba ihtiyacınız var ve arayüze aşina olmak için birkaç dakikanızı ayırmalısınız.
+## Eğitim ortamını başlatın
 
-Henüz yapmadıysanız, lütfen daha ileri gitmeden önce [bu bağlantıyı](../../envsetup/) takip edin.
+GitHub Codespaces üzerinde sunduğumuz hazır ortamı kullanmak için aşağıdaki "Open in GitHub Codespaces" düğmesine tıklayın.
+Diğer seçenekler için [Ortam seçenekleri](../envsetup/index.md) sayfasına bakın.
 
-## Sağlanan materyaller
+Eğitim ortamını yeni bir tarayıcı sekmesinde veya penceresinde açmanızı öneririz (ekipmanınıza bağlı olarak sağ tıklama, ctrl+tıklama veya cmd+tıklama kullanın); böylece ortam yüklenirken okumaya devam edebilirsiniz.
+Kursu tamamlarken bu talimatları paralel olarak açık tutmanız gerekecektir.
 
-Bu eğitim kursu boyunca, `side-quests/` dizininde çalışacağız.
-Bu dizin, ihtiyacınız olacak tüm kod dosyalarını, test verilerini ve ek dosyaları içerir.
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-Bu dizinin içeriğini keşfetmekten çekinmeyin; bunu yapmanın en kolay yolu, GitHub Codespaces çalışma alanının sol tarafındaki dosya gezginini kullanmaktır.
-Alternatif olarak, `tree` komutunu kullanabilirsiniz.
-Kurs boyunca, dizin yapısını ve içeriğini okunabilir bir biçimde temsil etmek için `tree` çıktısını kullanıyoruz; bazen netlik için küçük değişikliklerle.
+### Ortam temelleri
 
-Burada ikinci seviyeye kadar bir içindekiler tablosu oluşturuyoruz:
+Bu eğitim ortamı, eğitim kursunu tamamlamak için gerekli tüm yazılımları, kodları ve verileri içerir; bu nedenle kendiniz herhangi bir şey yüklemenize gerek yoktur.
 
-```bash
-tree . -L 2
-```
+Codespace, bir dosya gezgini, kod düzenleyici ve terminal kabuğu içeren VSCode arayüzüyle kurulmuştur.
+Kurs boyunca verilen tüm talimatlar (örneğin "dosyayı açın", "kodu düzenleyin" veya "bu komutu çalıştırın"), aksi belirtilmedikçe VSCode arayüzünün bu üç bölümüne atıfta bulunur.
 
-Bunu `side-quests` içinde çalıştırırsanız, aşağıdaki çıktıyı görmelisiniz:
+Bu kursu kendi başınıza tamamlıyorsanız, daha fazla ayrıntı için lütfen [ortam temelleri](../envsetup/01_setup.md) sayfasına göz atın.
 
-```console title="Directory contents"
-.
-├── metadata
-├── nf-core
-├── nf-test
-├── solutions
-├── splitting_and_grouping
-└── workflows_of_workflows
-```
+### Sürüm gereksinimleri
 
-**Başlamak için bilmeniz gerekenler şunlardır:**
+Bu eğitim, **v2 sözdizimi ayrıştırıcısı ETKİN** olarak Nextflow 25.10.2 veya sonraki sürümlerle çalışır.
+Yerel veya özel bir ortam kullanıyorsanız, lütfen [burada](../info/nxf_versions.md) belgelenen doğru ayarları kullandığınızdan emin olun.
 
-- **Her dizin ayrı bir yan göreve karşılık gelir.**
-  İçerikleri ilgili yan görevin sayfasında ayrıntılı olarak açıklanmıştır.
+## Hazırlık kontrol listesi
 
-- **`solutions` dizini**, her yan görevin çeşitli adımlarını tamamlamaktan kaynaklanan tamamlanmış iş akışı ve/veya modül betiklerini içerir.
-  Çalışmanızı kontrol etmek ve sorunları gidermek için referans olarak kullanılmaları amaçlanmıştır.
+Başlamaya hazır olduğunuzu düşünüyor musunuz?
 
-!!!tip "İpucu"
+- [ ] Bu kursun amacını ve ön koşullarını anlıyorum
+- [ ] Ortamım çalışır durumda
 
-    Herhangi bir nedenle bu dizinden çıkarsanız, buraya geri dönmek için her zaman bu komutu çalıştırabilirsiniz:
+Tüm kutuları işaretleyebildiyseniz, başlayabilirsiniz.
 
-    ```bash
-    cd /workspaces/training/side-quests
-    ```
-
-Şimdi, kursa başlamak için bu sayfanın sağ alt köşesindeki oka tıklayın.
+**Başlamak için gezinme menüsünden bir Yan Görev seçin.**

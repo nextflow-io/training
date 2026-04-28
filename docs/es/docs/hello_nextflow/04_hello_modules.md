@@ -69,7 +69,7 @@ nextflow run hello-modules.nf
 ??? success "Salida del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-modules.nf` [hopeful_avogadro] DSL2 - revision: b09af1237d
 
@@ -88,11 +88,11 @@ Como anteriormente, encontrará los archivos de salida en el directorio especifi
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Si eso funcionó para usted, está listo para aprender cómo modularizar el código de su workflow.
@@ -156,7 +156,7 @@ Una vez hecho eso, elimine la definición del proceso del archivo de workflow.
 
 La sintaxis para incluir un proceso desde un módulo es bastante sencilla:
 
-```groovy title="Sintaxis: Declaración de importación"
+```groovy title="Syntax: include declaration"
 include { <PROCESS_NAME> } from '<path_to_module>'
 ```
 
@@ -202,7 +202,7 @@ nextflow run hello-modules.nf -resume
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-modules.nf` [romantic_poisson] DSL2 - revision: 96edfa9ad3
 
@@ -311,7 +311,7 @@ nextflow run hello-modules.nf -resume
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-modules.nf` [nauseous_heisenberg] DSL2 - revision: a04a9f2da0
 
@@ -415,7 +415,7 @@ nextflow run hello-modules.nf -resume
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-modules.nf` [friendly_coulomb] DSL2 - revision: 7aa2b9bc0f
 
@@ -452,7 +452,7 @@ Cuando esté listo, continúe con [**Parte 5: Hello Containers**](./05_hello_con
 - [ ] Una definición de workflow
 - [ ] Un operador de canal
 
-Aprenda más: [2. Crear un módulo para `sayHello()`](#2-crear-un-modulo-para-sayhello)
+Aprenda más: [2. Crear un módulo para `sayHello()`](#2-create-a-module-for-sayhello)
 </quiz>
 
 <quiz>
@@ -462,7 +462,7 @@ Aprenda más: [2. Crear un módulo para `sayHello()`](#2-crear-un-modulo-para-sa
 - [x] En un directorio `modules/`
 - [ ] En un directorio `lib/`
 
-Aprenda más: [1. Crear un directorio para almacenar módulos](#1-crear-un-directorio-para-almacenar-modulos)
+Aprenda más: [1. Crear un directorio para almacenar módulos](#1-create-a-directory-to-store-modules)
 </quiz>
 
 <quiz>
@@ -473,7 +473,7 @@ Aprenda más: [1. Crear un directorio para almacenar módulos](#1-crear-un-direc
 - [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
-Aprenda más: [2.3. Agregar una declaración de importación](#23-agregar-una-declaracion-de-importacion-antes-del-bloque-workflow)
+Aprenda más: [2.3. Agregar una declaración de importación](#23-add-an-include-declaration-before-the-workflow-block)
 </quiz>
 
 <quiz>

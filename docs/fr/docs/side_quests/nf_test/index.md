@@ -47,7 +47,7 @@ Ces compétences vous aideront à mettre en œuvre une stratégie de test compl�
 
 Avant de vous lancer dans cette quête secondaire, vous devriez :
 
-- Avoir complété le tutoriel [Hello Nextflow](../hello_nextflow/README.md) ou un cours équivalent pour débutant·es.
+- Avoir complété le tutoriel [Hello Nextflow](../../hello_nextflow/index.md) ou un cours équivalent pour débutant·es.
 - Être à l'aise avec les concepts et mécanismes de base de Nextflow (processus, canaux, opérateurs, manipulation de fichiers, métadonnées)
 
 ---
@@ -56,7 +56,7 @@ Avant de vous lancer dans cette quête secondaire, vous devriez :
 
 #### Ouvrir le codespace de formation
 
-Si vous ne l'avez pas encore fait, assurez-vous d'ouvrir l'environnement de formation comme décrit dans la [Configuration de l'environnement](../envsetup/index.md).
+Si vous ne l'avez pas encore fait, assurez-vous d'ouvrir l'environnement de formation comme décrit dans la [Configuration de l'environnement](../../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -84,13 +84,13 @@ Vous trouverez un fichier de workflow principal et un fichier CSV appelé `greet
 └── main.nf
 ```
 
-Pour une description détaillée des fichiers, consultez [l'échauffement de Hello Nextflow](../hello_nextflow/00_orientation.md).
+Pour une description détaillée des fichiers, consultez [l'échauffement de Hello Nextflow](../../hello_nextflow/00_orientation.md).
 
-Le workflow que nous allons tester est un sous-ensemble du workflow Hello construit dans [Hello Workflow](../hello_nextflow/03_hello_workflow.md).
+Le workflow que nous allons tester est un sous-ensemble du workflow Hello construit dans [Hello Workflow](../../hello_nextflow/03_hello_workflow.md).
 
 ??? example "Que fait le workflow Hello Nextflow ?"
 
-    Si vous n'avez pas suivi la formation [Hello Nextflow](../hello_nextflow/index.md), voici un aperçu rapide de ce que fait ce workflow simple.
+    Si vous n'avez pas suivi la formation [Hello Nextflow](../../hello_nextflow/index.md), voici un aperçu rapide de ce que fait ce workflow simple.
 
     Le workflow prend un fichier CSV contenant des salutations, effectue quatre étapes de transformation consécutives sur celles-ci, et produit un seul fichier texte contenant une image ASCII d'un personnage amusant prononçant les salutations.
 
@@ -121,8 +121,6 @@ Vous pouvez voir le code complet du workflow ci-dessous.
     */
     process sayHello {
 
-        publishDir 'results', mode: 'copy'
-
         input:
             val greeting
 
@@ -140,8 +138,6 @@ Vous pouvez voir le code complet du workflow ci-dessous.
     */
     process convertToUpper {
 
-        publishDir 'results', mode: 'copy'
-
         input:
             path input_file
 
@@ -155,7 +151,7 @@ Vous pouvez voir le code complet du workflow ci-dessous.
     }
 
     workflow {
-
+        main:
         // crée un canal pour les entrées à partir d'un fichier CSV
         greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
 
@@ -164,6 +160,17 @@ Vous pouvez voir le code complet du workflow ci-dessous.
 
         // convertit la salutation en majuscules
         convertToUpper(sayHello.out)
+
+        publish:
+        greetings = sayHello.out
+        upper_greetings = convertToUpper.out
+    }
+
+    output {
+        greetings {
+        }
+        upper_greetings {
+        }
     }
     ```
 
@@ -568,10 +575,10 @@ Ajoutons une assertion à notre test pour vérifier que le fichier de sortie a �
             then {
                 assert file("$launchDir/results/Bonjour-output.txt").exists()
                 assert file("$launchDir/results/Hello-output.txt").exists()
-                assert file("$launchDir/results/Holà-output.txt").exists()
+                assert file("$launchDir/results/Hola-output.txt").exists()
                 assert file("$launchDir/results/UPPER-Bonjour-output.txt").exists()
                 assert file("$launchDir/results/UPPER-Hello-output.txt").exists()
-                assert file("$launchDir/results/UPPER-Holà-output.txt").exists()
+                assert file("$launchDir/results/UPPER-Hola-output.txt").exists()
             }
 
         }
@@ -728,7 +735,7 @@ Test Process sayHello
 FAILURE: Executed 1 tests in 4.884s (1 failed)
 ```
 
-Le test échoue parce que le processus `sayHello` déclare 1 entrée mais a été appelé avec 0 arguments. Corrigeons cela en ajoutant une entrée au processus. Rappelons-nous de [Hello Workflow](../hello_nextflow/03_hello_workflow.md) (et de la section d'échauffement ci-dessus) que notre processus `sayHello` prend une seule entrée de type valeur, que nous devrons fournir. Nous devrions également corriger le nom du test pour mieux refléter ce que nous testons.
+Le test échoue parce que le processus `sayHello` déclare 1 entrée mais a été appelé avec 0 arguments. Corrigeons cela en ajoutant une entrée au processus. Rappelons-nous de [Hello Workflow](../../hello_nextflow/03_hello_workflow.md) (et de la section d'échauffement ci-dessus) que notre processus `sayHello` prend une seule entrée de type valeur, que nous devrons fournir. Nous devrions également corriger le nom du test pour mieux refléter ce que nous testons.
 
 === "Après"
 
@@ -830,7 +837,7 @@ Nous ne l'afficherons pas ici, mais vous devriez voir un fichier JSON contenant 
 
 Cela représente les sorties créées par le processus `sayHello`, que nous testons explicitement. Si nous réexécutons le test, le programme vérifiera que la nouvelle sortie correspond à la sortie enregistrée initialement. C'est un moyen rapide et simple de tester que les sorties des processus ne changent pas, c'est pourquoi nf-test le fournit par défaut.
 
-!!!warning "Avertissement"
+!!! warning "Avertissement"
 
     Cela signifie que nous devons nous assurer que la sortie que nous enregistrons lors de l'exécution initiale est correcte !
 
@@ -1195,4 +1202,4 @@ Consultez la [documentation nf-test](https://www.nf-test.com/) pour des fonction
 
 ## Et ensuite ?
 
-Retournez au [menu des Quêtes secondaires](../) ou cliquez sur le bouton en bas à droite de la page pour passer au sujet suivant de la liste.
+Retournez au [menu des Quêtes secondaires](../index.md) ou cliquez sur le bouton en bas à droite de la page pour passer au sujet suivant de la liste.

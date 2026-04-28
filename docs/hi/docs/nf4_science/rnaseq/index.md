@@ -7,15 +7,32 @@ index_type: course
 additional_information:
   technical_requirements: true
   learning_objectives:
-    - बुनियादी RNAseq प्रोसेसिंग और QC विधियों को लागू करने के लिए एक रैखिक वर्कफ़्लो लिखना
-    - FASTQ जैसी डोमेन-विशिष्ट फ़ाइलों और जीनोम संदर्भ संसाधनों को उचित रूप से संभालना
-    - सिंगल-एंड और पेयर्ड-एंड सीक्वेंसिंग डेटा को संभालना
-    - प्रति-नमूना RNAseq प्रोसेसिंग को समानांतरित करने के लिए Nextflow के डेटाफ़्लो प्रतिमान का लाभ उठाना
-    - प्रासंगिक channel ऑपरेटरों का उपयोग करके कई चरणों और नमूनों में QC रिपोर्ट एकत्रित करना
+    - Write a linear workflow to apply basic RNAseq processing and QC methods
+    - Handle domain-specific files such as FASTQ and reference genome resources appropriately
+    - Handle single-end and paired-end sequencing data
+    - Leverage Nextflow's dataflow paradigm to parallelize per-sample RNAseq processing
+    - Aggregate QC reports across multiple steps and samples using relevant channel operators
   audience_prerequisites:
-    - "**दर्शक:** यह कोर्स ट्रांसक्रिप्टोमिक्स और संबंधित क्षेत्रों के शोधकर्ताओं के लिए है जो डेटा विश्लेषण पाइपलाइन विकसित करने या कस्टमाइज़ करने में रुचि रखते हैं।"
-    - "**कौशल:** कमांड लाइन, बुनियादी स्क्रिप्टिंग अवधारणाओं और सामान्य RNAseq फ़ाइल फॉर्मेट के साथ कुछ परिचितता मानी जाती है।"
-    - "**पूर्वापेक्षाएँ:** [Hello Nextflow](../../hello_nextflow/) में कवर की गई बुनियादी Nextflow अवधारणाएँ और टूलिंग।"
+    - "**Audience:** This course is designed for researchers in transcriptomics and related fields who want to develop or customize data analysis pipelines."
+    - "**Skills:** Some familiarity with the command line, basic scripting concepts, and common RNAseq file formats is assumed."
+    - "**Prerequisites:** Foundational Nextflow concepts and tooling covered in [Hello Nextflow](../../hello_nextflow/index.md)."
+---
+
+Looking at the diff, I need to update only the link in the `audience_prerequisites` section and the link in the course description paragraph. Both changes update `../../hello_nextflow/` to `../../hello_nextflow/index.md`.
+
+## %%%
+
+title: RNAseq
+hide:
+
+- toc
+  page_type: index_page
+  index_type: course
+  additional_information:
+  technical_requirements: true
+  learning_objectives: - बुनियादी RNAseq प्रोसेसिंग और QC विधियों को लागू करने के लिए एक रैखिक वर्कफ़्लो लिखना - FASTQ जैसी डोमेन-विशिष्ट फ़ाइलों और जीनोम संदर्भ संसाधनों को उचित रूप से संभालना - सिंगल-एंड और पेयर्ड-एंड सीक्वेंसिंग डेटा को संभालना - प्रति-नमूना RNAseq प्रोसेसिंग को समानांतरित करने के लिए Nextflow के डेटाफ़्लो प्रतिमान का लाभ उठाना - प्रासंगिक channel ऑपरेटरों का उपयोग करके कई चरणों और नमूनों में QC रिपोर्ट एकत्रित करना
+  audience_prerequisites: - "**दर्शक:** यह कोर्स ट्रांसक्रिप्टोमिक्स और संबंधित क्षेत्रों के शोधकर्ताओं के लिए है जो डेटा विश्लेषण पाइपलाइन विकसित करने या कस्टमाइज़ करने में रुचि रखते हैं।" - "**कौशल:** कमांड लाइन, बुनियादी स्क्रिप्टिंग अवधारणाओं और सामान्य RNAseq फ़ाइल फॉर्मेट के साथ कुछ परिचितता मानी जाती है।" - "**पूर्वापेक्षाएँ:** [Hello Nextflow](../../hello_nextflow/index.md) में कवर की गई बुनियादी Nextflow अवधारणाएँ और टूलिंग।"
+
 ---
 
 # RNAseq के लिए Nextflow
@@ -24,7 +41,7 @@ additional_information:
 
 **एक व्यावहारिक कोर्स जो Nextflow को वास्तविक दुनिया के ट्रांसक्रिप्टोमिक्स उपयोग के मामले में लागू करता है: Trim Galore, HISAT2 और FastQC के साथ बल्क RNAseq प्रोसेसिंग।**
 
-यह कोर्स [Hello Nextflow](../../hello_nextflow/) शुरुआती प्रशिक्षण पर आधारित है और दर्शाता है कि बल्क RNAseq विश्लेषण के विशिष्ट संदर्भ में Nextflow का उपयोग कैसे करें।
+यह कोर्स [Hello Nextflow](../../hello_nextflow/index.md) शुरुआती प्रशिक्षण पर आधारित है और दर्शाता है कि बल्क RNAseq विश्लेषण के विशिष्ट संदर्भ में Nextflow का उपयोग कैसे करें।
 तुम एक प्रोसेसिंग पाइपलाइन लागू करोगे जो एडॉप्टर अनुक्रमों को ट्रिम करती है, रीड्स को जीनोम संदर्भ के साथ संरेखित करती है और कई चरणों में गुणवत्ता नियंत्रण (QC) करती है।
 
 <!-- additional_information -->
@@ -53,3 +70,4 @@ additional_information:
 
 <!-- Clearfix for float -->
 <div style="content: ''; clear: both; display: table;"></div>
+%%%

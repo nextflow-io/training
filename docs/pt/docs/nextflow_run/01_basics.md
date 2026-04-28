@@ -82,7 +82,7 @@ Não vamos olhar o código ainda; primeiro vamos ver como é executá-lo.
 
 ### 2.1. Inicie o fluxo de trabalho e monitore a execução
 
-No terminal, execute o seguinte comando:
+No terminal, execute o seguinte comando.
 
 ```bash
 nextflow run 1-hello.nf --input 'Hello World!'
@@ -91,7 +91,7 @@ nextflow run 1-hello.nf --input 'Hello World!'
 ??? success "Saída do comando"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
 
@@ -168,7 +168,7 @@ nextflow run 1-hello.nf --input 'Hello World!' -output-dir hello_results
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78
 
@@ -568,7 +568,7 @@ Para saber mais, veja [Publishing outputs](https://nextflow.io/docs/latest/workf
 
     Em vez de ter um bloco `publish:` no fluxo de trabalho e um bloco `output` no nível superior, você veria uma linha `publishDir` na definição do processo `sayHello`:
 
-    ```groovy title="Exemplo de sintaxe" linenums="1" hl_lines="3"
+    ```groovy title="Syntax example" linenums="1" hl_lines="3"
     process sayHello {
 
         publishDir 'results/1-hello', mode: 'copy'
@@ -623,7 +623,7 @@ nextflow run 1-hello.nf --input 'Hello World!' -resume
 ??? success "Saída do comando"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479
 
@@ -767,7 +767,7 @@ Na linha de saída do console `[a3/7be2fa] SAYHELLO | 1 of 1 ✔`, o que `[a3/7b
 - [x] O caminho truncado para o diretório de trabalho da tarefa
 - [ ] O checksum do arquivo de saída
 
-Saiba mais: [2.4. Encontre a saída original e os logs no diretório `work/`](#24-encontre-a-saida-original-e-os-logs-no-diretorio-work)
+Saiba mais: [2.4. Encontre a saída original e os logs no diretório `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -777,7 +777,7 @@ Qual é o propósito do arquivo `.command.sh` em um diretório de tarefa?
 - [ ] Ele contém mensagens de erro de tarefas que falharam
 - [ ] Ele lista os arquivos de entrada preparados para a tarefa
 
-Saiba mais: [2.4. Encontre a saída original e os logs no diretório `work/`](#24-encontre-a-saida-original-e-os-logs-no-diretorio-work)
+Saiba mais: [2.4. Encontre a saída original e os logs no diretório `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -787,7 +787,7 @@ O que acontece com os resultados publicados quando você re-executa um fluxo de 
 - [ ] O Nextflow impede a sobrescrita e falha
 - [ ] Eles são automaticamente copiados como backup
 
-Saiba mais: [2.5. Re-execute o fluxo de trabalho com diferentes saudações](#25-re-execute-o-fluxo-de-trabalho-com-diferentes-saudacoes)
+Saiba mais: [2.5. Re-execute o fluxo de trabalho com diferentes saudações](#24-re-run-the-workflow-with-different-greetings)
 </quiz>
 
 <quiz>
@@ -802,7 +802,7 @@ O que esta saída do console indica?
 - [x] O Nextflow reutilizou resultados de uma execução idêntica anterior
 - [ ] A tarefa foi cancelada manualmente
 
-Saiba mais: [4.1. Relance um fluxo de trabalho com `-resume`](#41-relance-um-fluxo-de-trabalho-com--resume)
+Saiba mais: [4.1. Relance um fluxo de trabalho com `-resume`](#41-re-launch-a-workflow-with--resume)
 </quiz>
 
 <quiz>
@@ -812,7 +812,7 @@ Onde o Nextflow armazena o histórico de execução que o comando `nextflow log`
 - [x] No arquivo `.nextflow/history`
 - [ ] No `nextflow.config`
 
-Saiba mais: [4.2. Inspecione o log de execuções passadas](#42-inspecione-o-log-de-execucoes-passadas)
+Saiba mais: [4.2. Inspecione o log de execuções passadas](#42-inspect-the-log-of-past-executions)
 </quiz>
 
 <quiz>
@@ -822,7 +822,7 @@ Qual é o propósito do bloco `params` em um arquivo de fluxo de trabalho?
 - [x] Declarar e tipar parâmetros de entrada do fluxo de trabalho
 - [ ] Especificar opções de publicação de saída
 
-Saiba mais: [3.4. O sistema params de parâmetros de linha de comando](#34-o-sistema-params-de-parametros-de-linha-de-comando)
+Saiba mais: [3.4. O sistema params de parâmetros de linha de comando](#34-the-params-system-of-command-line-parameters)
 </quiz>
 
 <quiz>
@@ -832,7 +832,7 @@ No bloco `output` do fluxo de trabalho, o que `mode 'copy'` faz?
 - [ ] Copia o script do fluxo de trabalho para results
 - [ ] Habilita cópia incremental de arquivos
 
-Saiba mais: [3.5. A diretiva publish](#35-a-diretiva-publish)
+Saiba mais: [3.5. A diretiva publish](#35-the-publish-directive)
 </quiz>
 
 <quiz>
@@ -842,5 +842,5 @@ Qual é a flag recomendada para usar com o comando `nextflow clean` antes de rea
 - [ ] `-a` (all) para selecionar todos os diretórios
 - [ ] `-q` (quiet) para suprimir avisos
 
-Saiba mais: [4.3. Exclua diretórios de trabalho mais antigos](#43-exclua-diretorios-de-trabalho-mais-antigos)
+Saiba mais: [4.3. Exclua diretórios de trabalho mais antigos](#43-delete-older-work-directories)
 </quiz>

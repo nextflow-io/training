@@ -28,10 +28,10 @@ Diese Fähigkeiten helfen dir, Workflows zu erstellen, die mehrere Eingabedateie
 
 Bevor du diese Side Quest in Angriff nimmst, solltest du:
 
-- Das Tutorial [Hello Nextflow](../hello_nextflow/README.md) oder einen gleichwertigen Einsteigerkurs abgeschlossen haben.
+- Das Tutorial [Hello Nextflow](../../hello_nextflow/index.md) oder einen gleichwertigen Einsteigerkurs abgeschlossen haben.
 - Mit grundlegenden Nextflow-Konzepten und -Mechanismen vertraut sein (Prozesse, Kanäle, Operatoren, Arbeiten mit Dateien, Metadaten)
 
-**Optional:** Wir empfehlen, zuerst die Side Quest [Metadata in workflows](../metadata/) abzuschließen.
+**Optional:** Wir empfehlen, zuerst die Side Quest [Metadata in workflows](../metadata/index.md) abzuschließen.
 Diese behandelt die Grundlagen des Lesens von CSV-Dateien mit `splitCsv` und das Erstellen von Meta-Maps, die wir hier intensiv verwenden werden.
 
 ---
@@ -40,7 +40,7 @@ Diese behandelt die Grundlagen des Lesens von CSV-Dateien mit `splitCsv` und das
 
 #### Trainings-Codespace öffnen
 
-Falls du das noch nicht getan hast, öffne die Trainingsumgebung wie in der [Umgebung einrichten](../envsetup/index.md) beschrieben.
+Falls du das noch nicht getan hast, öffne die Trainingsumgebung wie in der [Umgebung einrichten](../../envsetup/index.md) beschrieben.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -57,6 +57,8 @@ Du kannst VSCode so einstellen, dass es sich auf dieses Verzeichnis konzentriert
 ```bash
 code .
 ```
+
+Der Editor öffnet sich mit dem Projektverzeichnis im Fokus.
 
 #### Die Materialien ansehen
 
@@ -93,6 +95,8 @@ Für Patient A haben wir speziell zwei Sätze technischer Replikate (Wiederholun
 !!! note "Hinweis"
 
     Mach dir keine Sorgen, wenn du mit diesem experimentellen Design nicht vertraut bist – es ist nicht entscheidend für das Verständnis dieses Tutorials.
+
+Nachdem wir den Inhalt der Daten verstanden haben, können wir uns ansehen, was der Workflow leisten soll.
 
 #### Die Aufgabe ansehen
 
@@ -135,7 +139,7 @@ workflow {
 
     In diesem Tutorial verwenden wir das Präfix `ch_` für alle Kanalvariablen, um klar anzuzeigen, dass es sich um Nextflow-Kanäle handelt.
 
-Wenn du die Side Quest [Metadata in workflows](../metadata/) abgeschlossen hast, wirst du dieses Muster wiedererkennen. Wir verwenden `splitCsv`, um die CSV zu lesen, und strukturieren die Daten sofort mit einer Meta-Map, um Metadaten von Dateipfaden zu trennen.
+Wenn du die Side Quest [Metadata in workflows](../metadata/index.md) abgeschlossen hast, wirst du dieses Muster wiedererkennen. Wir verwenden `splitCsv`, um die CSV zu lesen, und strukturieren die Daten sofort mit einer Meta-Map, um Metadaten von Dateipfaden zu trennen.
 
 !!! info "Info"
 
@@ -174,7 +178,7 @@ nextflow run main.nf
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9
 
@@ -230,7 +234,7 @@ nextflow run main.nf
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [admiring_brown] DSL2 - revision: 194d61704d
 
@@ -251,6 +255,8 @@ Dies wird mit der einzelnen Closure erreicht, die wir oben eingeführt haben:
 ```groovy title="main.nf" linenums="7"
     .filter { meta, file -> meta.type == 'normal' }
 ```
+
+Dieser Filter wird direkt in der Kanaloperation verkettet.
 
 ### 2.2. Separate gefilterte Kanäle erstellen
 
@@ -291,7 +297,7 @@ nextflow run main.nf
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74
 
@@ -334,7 +340,7 @@ nextflow run main.nf
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
 
@@ -348,7 +354,7 @@ nextflow run main.nf
     Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
-Wir haben die normalen und Tumorproben in zwei verschiedene Kanäle getrennt und eine Closure verwendet, die an `view()` übergeben wird, um sie in der Ausgabe unterschiedlich zu kennzeichnen: `ch_tumor_samples.view{'Tumor sample: ' + it}`.
+Wir haben die normalen und Tumorproben in zwei verschiedene Kanäle getrennt und eine Closure verwendet, die an `view()` übergeben wird, um sie in der Ausgabe unterschiedlich zu kennzeichnen: `#!groovy ch_tumor_samples.view{'Tumor sample: ' + it}`.
 
 ### Fazit
 
@@ -383,7 +389,7 @@ nextflow run main.nf
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
 
@@ -438,7 +444,7 @@ nextflow run main.nf
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d
 
@@ -496,7 +502,7 @@ nextflow run main.nf
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [soggy_wiles] DSL2 - revision: 3bc1979889
 
@@ -562,7 +568,7 @@ nextflow run main.nf
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [prickly_wing] DSL2 - revision: 3bebf22dee
 
@@ -611,7 +617,7 @@ nextflow run main.nf
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [reverent_wing] DSL2 - revision: 847016c3b7
 
@@ -658,7 +664,7 @@ Dazu definieren wir zunächst die Closure als neue Variable:
 
 Wir haben die Map-Transformation als benannte Variable definiert, die wir wiederverwenden können.
 
-Beachte, dass wir den Dateipfad auch mit `file()` in ein Path-Objekt umwandeln, damit jeder Prozess, der diesen Kanal empfängt, die Datei korrekt verarbeiten kann (weitere Informationen findest du unter [Working with files](../working_with_files/)).
+Beachte, dass wir den Dateipfad auch mit `file()` in ein Path-Objekt umwandeln, damit jeder Prozess, der diesen Kanal empfängt, die Datei korrekt verarbeiten kann (weitere Informationen findest du unter [Working with files](../working_with_files/index.md)).
 
 Implementieren wir die Closure in unserem Workflow:
 
@@ -698,7 +704,7 @@ nextflow run main.nf
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [angry_meninsky] DSL2 - revision: 2edc226b1d
 
@@ -797,7 +803,7 @@ nextflow run main.nf
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [confident_leavitt] DSL2 - revision: a2303895bd
 
@@ -806,6 +812,8 @@ nextflow run main.nf
     [[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
     [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
     ```
+
+Jedes Tupel enthält jetzt nur noch den Gruppierungsschlüssel und die beiden Dateipfade, ohne wiederholte Felder.
 
 ### Fazit
 
@@ -873,7 +881,7 @@ nextflow run main.nf
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [mighty_tesla] DSL2 - revision: ae013ab70b
 
@@ -955,7 +963,7 @@ nextflow run main.nf
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd
 
@@ -1056,7 +1064,7 @@ nextflow run main.nf
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76
 
@@ -1120,7 +1128,7 @@ nextflow run main.nf
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d
 
@@ -1140,6 +1148,8 @@ Beachte, dass sich unsere Datenstruktur geändert hat und die Dateien innerhalb 
 !!! note "Hinweis"
 
     [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) ist das Gegenteil von groupTuple. Es entpackt die Elemente in einem Kanal und flacht sie ab. Versuche, `transpose` hinzuzufügen und die oben durchgeführte Gruppierung rückgängig zu machen!
+
+Beide Richtungen der Operation – Gruppieren und Aufheben der Gruppierung – stehen dir jetzt zur Verfügung.
 
 ### Fazit
 
@@ -1168,7 +1178,7 @@ Die Beherrschung dieser Kanaloperationen ermöglicht es dir, flexible, skalierba
 
 ### Wichtige Muster
 
-1.  **Strukturierte Eingabedaten erstellen:** Ausgehend von einer CSV-Datei mit Meta-Maps (aufbauend auf Mustern aus [Metadata in workflows](../metadata/))
+1.  **Strukturierte Eingabedaten erstellen:** Ausgehend von einer CSV-Datei mit Meta-Maps (aufbauend auf Mustern aus [Metadata in workflows](../metadata/index.md))
 
     ```groovy
     ch_samples = channel.fromPath("./data/samplesheet.csv")
@@ -1249,4 +1259,4 @@ Die Beherrschung dieser Kanaloperationen ermöglicht es dir, flexible, skalierba
 
 ## Wie geht es weiter?
 
-Kehre zum [Menü der Side Quests](../) zurück oder klicke auf die Schaltfläche unten rechts auf der Seite, um zum nächsten Thema in der Liste zu wechseln.
+Kehre zum [Menü der Side Quests](../index.md) zurück oder klicke auf die Schaltfläche unten rechts auf der Seite, um zum nächsten Thema in der Liste zu wechseln.

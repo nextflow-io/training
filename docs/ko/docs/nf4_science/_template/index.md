@@ -14,7 +14,7 @@ additional_information:
   audience_prerequisites:
     - "**Audience:** This course is designed for researchers in {DOMAIN} and related fields who want to develop or customize data analysis pipelines."
     - "**Skills:** Some familiarity with the command line, basic scripting concepts, and common {DOMAIN} file formats is assumed."
-    - "**Prerequisites:** Foundational Nextflow concepts and tooling covered in [Hello Nextflow](../../hello_nextflow/)."
+    - "**Prerequisites:** Foundational Nextflow concepts and tooling covered in [Hello Nextflow](../../hello_nextflow/index.md)."
 ---
 
 # Nextflow for {DOMAIN}
@@ -23,7 +23,7 @@ additional_information:
 
 **{METHOD_SHORT_DESCRIPTION}를 다루는 실제 {DOMAIN} 사용 사례에 Nextflow를 적용하는 실습 과정입니다.**
 
-이 과정은 [Hello Nextflow](../../hello_nextflow/) 초급 교육을 기반으로 하며, {DOMAIN} 분야의 특정 맥락에서 Nextflow를 사용하는 방법을 보여줍니다.
+이 과정은 [Hello Nextflow](../../hello_nextflow/index.md) 초급 교육을 기반으로 하며, {DOMAIN} 분야의 특정 맥락에서 Nextflow를 사용하는 방법을 보여줍니다.
 [{TOOL_A}]({TOOL_A_URL})와 [{TOOL_B}]({TOOL_B_URL})를 사용하여 {METHOD} 파이프라인을 구현합니다.
 
 <!-- additional_information -->

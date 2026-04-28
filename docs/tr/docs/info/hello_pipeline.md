@@ -43,7 +43,7 @@ Sonuçlar `results/` adlı bir dizine yayınlanır ve pipeline'ın son çıktıs
   _________
 / BONJOUR \
 | HELLO   |
-\ HOLà    /
+\ HOLA    /
 ---------
   \                                  ,+*^^*+___+++_
   \                           ,*^^^^              )

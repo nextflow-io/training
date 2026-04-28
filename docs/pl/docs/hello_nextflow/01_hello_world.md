@@ -214,8 +214,8 @@ nextflow run hello-world.nf
 
 ??? success "Wyjście polecenia"
 
-    ```console hl_lines="7"
-    N E X T F L O W   ~  version 25.10.2
+    ```console hl_lines="6"
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
 
@@ -390,7 +390,7 @@ Jak właśnie się dowiedziałeś, wyjście utworzone przez nasz pipeline jest z
 Jest to zrobione celowo; Nextflow kontroluje ten katalog i nie powinniśmy z nim wchodzić w interakcję.
 Jednak to sprawia, że jest niewygodne pobieranie wyjść, na których nam zależy.
 
-Na szczęście Nextflow zapewnia sposób publikowania wyjść do wyznaczonego katalogu za pomocą [definicji wyjść na poziomie workflow'u](https://www.nextflow.io/docs/latest/workflow.html#workflow-outputs).
+Na szczęście Nextflow zapewnia sposób publikowania wyjść do wyznaczonego katalogu za pomocą [definicji wyjść na poziomie workflow'u](https://nextflow.io/docs/latest/workflow.html#workflow-outputs).
 
 ### 2.1. Podstawowe użycie
 
@@ -486,7 +486,7 @@ nextflow run hello-world.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5
 
@@ -574,7 +574,7 @@ nextflow run hello-world.nf
 ??? success "Wyjście polecenia"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
 
@@ -653,7 +653,7 @@ nextflow run hello-world.nf
 ??? success "Wyjście polecenia"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
 
@@ -758,7 +758,7 @@ W bloku procesu wprowadź następującą zmianę kodu:
 
 Zmienna `greeting` jest poprzedzona `val`, aby powiedzieć Nextflow'owi, że to wartość (nie ścieżka).
 
-#### 3.1.2. Edytuj polecenie procesu, aby używać zmiennej wejściowej
+#### 3.1.2. Edytuj polecenie procesu, aby używało zmiennej wejściowej
 
 Teraz zamieniamy oryginalną wartość zakodowaną na sztywno na wartość zmiennej wejściowej, którą oczekujemy otrzymać.
 
@@ -837,7 +837,7 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea
 
@@ -880,7 +880,7 @@ Nadajmy parametrowi `input` wartość domyślną, deklarując go przed definicj�
  * Parametry pipeline'u
  */
 params {
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
 }
 ```
 
@@ -890,7 +890,7 @@ Obsługiwane typy to `String`, `Integer`, `Float`, `Boolean` i `Path`.
 
 !!! info "Info"
 
-    W starszych workflow'ach możesz zobaczyć, że cały blok `params` jest zapisany po prostu jako `input = 'Holà mundo!'`.
+    W starszych workflow'ach możesz zobaczyć, że cały blok `params` jest zapisany po prostu jako `input = 'Hola mundo!'`.
 
 Gdy dodajesz więcej parametrów do Swojego pipeline'u, powinieneś dodawać je wszystkie do tego bloku, niezależnie od tego, czy musisz nadać im wartość domyślną.
 To ułatwi znalezienie wszystkich konfigurowalnych parametrów na pierwszy rzut oka.
@@ -906,7 +906,7 @@ nextflow run hello-world.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582
 
@@ -923,7 +923,7 @@ nextflow run hello-world.nf
     - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
     - cause: you tried to assign a value to the class 'java.lang.String'
     @ line 24, column 12.
-          input: String = 'Holà mundo!'
+          input: String = 'Hola mundo!'
                   ^
 
     1 error
@@ -947,7 +947,7 @@ Wyjście będzie w tym samym miejscu co poprzednio, ale zawartość powinna być
 ??? abstract "Zawartość pliku"
 
     ```console title="results/hello_world/output.txt"
-    Holà mundo!
+    Hola mundo!
     ```
 
 Nextflow użył domyślnej wartości parametru greeting do utworzenia wyjścia.
@@ -965,7 +965,7 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582
 
@@ -1028,7 +1028,7 @@ nextflow run hello-world.nf -resume
 ??? success "Wyjście polecenia"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
 
@@ -1171,7 +1171,7 @@ Jakie są minimalne wymagane komponenty procesu Nextflow'a?
 - [ ] Bloki wejścia, wyjścia i skryptu
 - [ ] Tylko blok skryptu
 
-Dowiedz się więcej: [1.1.1. Definicja process](#111-definicja-process)
+Dowiedz się więcej: [1.1.1. Definicja process](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1181,7 +1181,7 @@ Jaki jest cel bloku output w procesie?
 - [x] Deklarowanie oczekiwanych wyjść z procesu
 - [ ] Definiowanie zmiennych środowiskowych
 
-Dowiedz się więcej: [1.1.1. Definicja process](#111-definicja-process)
+Dowiedz się więcej: [1.1.1. Definicja process](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1212,7 +1212,7 @@ work/a3/7be2fa.../
 - [ ] `.command.log`
 - [ ] `.command.out`
 
-Dowiedz się więcej: [1.2.2. Znajdź wyjście i dzienniki w katalogu `work`](#122-znajdz-wyjscie-i-dzienniki-w-katalogu-work)
+Dowiedz się więcej: [1.2.2. Znajdź wyjście i dzienniki w katalogu `work`](#122-find-the-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -1222,7 +1222,7 @@ Co robi flaga `-resume`?
 - [x] Pomija procesy, które już zakończyły się pomyślnie
 - [ ] Tworzy kopię zapasową workflow'u
 
-Dowiedz się więcej: [4.1. Uruchom ponownie workflow z `-resume`](#41-uruchom-ponownie-workflow-z--resume)
+Dowiedz się więcej: [4.1. Uruchom ponownie workflow z `-resume`](#41-re-launch-a-workflow-with--resume)
 </quiz>
 
 <quiz>
@@ -1232,7 +1232,7 @@ Jaki jest domyślny tryb publikowania wyjść workflow'u?
 - [ ] Przenoszenie plików do katalogu wyjściowego
 - [ ] Kompresowanie plików w katalogu wyjściowym
 
-Dowiedz się więcej: [2.3. Ustaw tryb publikowania na kopiowanie](#23-ustaw-tryb-publikowania-na-kopiowanie)
+Dowiedz się więcej: [2.3. Ustaw tryb publikowania na kopiowanie](#23-set-the-publish-mode-to-copy)
 </quiz>
 
 <quiz>
@@ -1242,7 +1242,7 @@ Jak przekazujesz wartość parametru do workflow'u Nextflow'a z wiersza poleceń
 - [x] `--parameter value`
 - [ ] `-p parameter=value`
 
-Dowiedz się więcej: [3.2. Skonfiguruj parametr wiersza poleceń do przechwytywania danych wejściowych użytkownika](#32-skonfiguruj-parametr-wiersza-polecen-do-przechwytywania-danych-wejsciowych-uzytkownika)
+Dowiedz się więcej: [3.2. Skonfiguruj parametr wiersza poleceń do przechwytywania danych wejściowych użytkownika](#32-set-up-a-command-line-parameter-to-capture-user-input)
 </quiz>
 
 <quiz>

@@ -36,7 +36,7 @@ export NXF_SYNTAX_PARSER=v1
 
 Upewnij się, że używasz prawidłowych ustawień zgodnie z dokumentacją [tutaj](../info/nxf_versions.md).
 
-Szkolenie wymaga dodatkowo **nf-core tools 3.4.1**.
+Szkolenie wymaga dodatkowo **nf-core tools 3.5.2**.
 Jeśli używasz innej wersji narzędzi nf-core, możesz mieć trudności z śledzeniem kursu.
 
 Możesz sprawdzić, jaka wersja jest zainstalowana w Twoim środowisku, używając polecenia `nf-core --version`.

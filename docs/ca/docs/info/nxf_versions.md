@@ -6,11 +6,16 @@ hide:
   - footer
 ---
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 ## Versió de sintaxi de Nextflow i requisits actuals
 
-A partir de la versió 3.0 del portal de formació, tots els nostres cursos de formació es basen en la versió 25.10.2 de Nextflow, tret que s'especifiqui el contrari a la pàgina d'índex del curs (excepte materials obsolets o arxivats que poden no incloure un avís de versió).
+A partir de la versió 3.0 del portal de formació, tots els nostres cursos de formació són compatibles amb la versió 25.10.2 de Nextflow o posterior, tret que s'especifiqui el contrari a la pàgina d'índex del curs.
+(Això no inclou materials obsolets o arxivats que poden no incloure un avís de versió).
 
-Com que els cursos ara utilitzen entrades tipades a nivell de workflow així com directives de sortida a nivell de workflow, requereixen l'ús de l'analitzador de sintaxi V2.
+La versió de Nextflow carregada per defecte al nostre entorn de formació és **Nextflow 25.10.4**.
+
+Com que els cursos ara utilitzen entrades tipades a nivell de workflow així com directives de sortida a nivell de workflow, requereixen l'ús de l'analitzador de sintaxi V2, **tret que s'especifiqui el contrari**.
 Si teniu previst utilitzar l'entorn que proporcionem a través de [Github Codespaces](../envsetup/01_setup.md) o [devcontainers locals](../envsetup/03_devcontainer.md), no cal que feu res tret que s'indiqui específicament a les instruccions del curs.
 No obstant això, si teniu previst treballar amb les formacions al vostre propi entorn ([Instal·lació manual](../envsetup/02_local.md)), haureu d'assegurar-vos d'utilitzar Nextflow versió 25.10.2 o posterior amb l'analitzador de sintaxi v2 habilitat.
 

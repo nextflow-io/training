@@ -1,4 +1,4 @@
-# 필수 Nextflow 스크립팅 패턴
+# 필수 스크립팅 패턴
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
@@ -26,7 +26,7 @@ Nextflow는 Java Virtual Machine에서 실행되는 프로그래밍 언어입니
 
 이 사이드 퀘스트를 시작하기 전에 다음을 갖추어야 합니다.
 
-- [Hello Nextflow](../hello_nextflow/README.md) 튜토리얼 또는 동급의 입문 과정을 완료했어야 합니다.
+- [Hello Nextflow](../../hello_nextflow/index.md) 튜토리얼 또는 동급의 입문 과정을 완료했어야 합니다.
 - 기본적인 Nextflow 개념과 메커니즘(프로세스, 채널, 연산자, 파일 작업, 메타 데이터)에 익숙해야 합니다.
 - 일반적인 프로그래밍 구조(변수, map, 리스트)에 대한 기본적인 이해가 있어야 합니다.
 
@@ -39,7 +39,7 @@ Nextflow는 Java Virtual Machine에서 실행되는 프로그래밍 언어입니
 
 #### 교육 코드스페이스 열기
 
-아직 열지 않았다면, [환경 설정](../envsetup/index.md)에 설명된 대로 교육 환경을 열어야 합니다.
+아직 열지 않았다면, [환경 설정](../../envsetup/index.md)에 설명된 대로 교육 환경을 열어야 합니다.
 
 [![GitHub Codespaces에서 열기](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -167,7 +167,7 @@ map 연산이 어떻게 생겼는지 확인합니다.
 
 이것이 첫 번째 **closure**입니다. 인자로 전달할 수 있는 익명 함수입니다(Python의 람다나 JavaScript의 화살표 함수와 유사합니다). closure는 Nextflow 연산자를 사용하는 데 필수적입니다.
 
-closure `{ row -> return row }`는 매개변수 `row`를 받습니다(이름은 `item`, `sample` 등 무엇이든 될 수 있습니다).
+closure `#!groovy { row -> return row }`는 매개변수 `row`를 받습니다(이름은 `item`, `sample` 등 무엇이든 될 수 있습니다).
 
 `.map()` 연산자가 각 채널 항목을 처리할 때, 해당 항목을 closure에 전달합니다. 여기서 `row`는 한 번에 하나의 CSV 행을 보유합니다.
 
@@ -278,7 +278,7 @@ nextflow run main.nf
 
 map 추가 연산자 `+`는 기존 map을 수정하는 것이 아니라 **새로운 map**을 생성합니다. 이 줄은 `sample_meta`의 모든 키-값 쌍과 새로운 `priority` 키를 포함하는 새 map을 생성합니다.
 
-!!! Note "참고"
+!!! note "참고"
 
     closure에 전달된 map은 절대 수정하지 마세요. 항상 `+`를 사용하여 새로운 map을 생성하세요. Nextflow에서는 동일한 데이터가 여러 연산을 동시에 통과하는 경우가 많습니다. map을 직접 수정하면 다른 연산이 동일한 객체를 참조할 때 예측할 수 없는 부작용이 발생할 수 있습니다. 새로운 map을 생성하면 각 연산이 자체적인 깨끗한 복사본을 갖게 됩니다.
 
@@ -356,7 +356,7 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [peaceful_cori] DSL2 - revision: 4cc4a8340f
 
@@ -444,7 +444,7 @@ nextflow run main.nf
 
 !!! note "참고"
 
-    **Map과 메타데이터**: Map은 Nextflow에서 메타데이터를 다루는 데 기본적입니다. 메타데이터 map 작업에 대한 자세한 설명은 [메타데이터 작업](../metadata/) 사이드 퀘스트를 참조하세요.
+    **Map과 메타데이터**: Map은 Nextflow에서 메타데이터를 다루는 데 기본적입니다. 메타데이터 map 작업에 대한 자세한 설명은 [메타데이터 작업](../metadata/index.md) 사이드 퀘스트를 참조하세요.
 
 우리의 워크플로우는 핵심 패턴을 보여줍니다. **데이터플로우 연산**(`workflow`, `channel.fromPath()`, `.splitCsv()`, `.map()`, `.view()`)은 데이터가 파이프라인을 통해 이동하는 방식을 오케스트레이션하고, `.map()` closure 내부의 **스크립팅**(map `[key: value]`, 문자열 메서드, 타입 변환, 삼항 연산자)은 개별 데이터 항목의 변환을 처리합니다.
 
@@ -485,7 +485,7 @@ nextflow run collect.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `collect.nf` [loving_mendel] DSL2 - revision: e8d054a46e
 
@@ -543,7 +543,7 @@ nextflow run collect.nf
 ??? success "명령 출력"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `collect.nf` [cheeky_stonebraker] DSL2 - revision: 2d5039fb47
 
@@ -614,7 +614,7 @@ nextflow run collect.nf
 ??? success "명령 출력"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `collect.nf` [cranky_galileo] DSL2 - revision: 5f3c8b2a91
 
@@ -643,7 +643,7 @@ def names = files.collect { it.getName() }
 !!! tip "팁: 스프레드 vs Collect 사용 시기"
 
     - **스프레드(`*.`) 사용**: 단순 속성 접근: `samples*.id`, `files*.name`
-    - **collect 사용**: 변환이나 복잡한 로직: `samples.collect { it.id.toUpperCase() }`, `samples.collect { [it.id, it.quality > 40] }`
+    - **collect 사용**: 변환이나 복잡한 로직: `#!groovy samples.collect { it.id.toUpperCase() }`, `#!groovy samples.collect { [it.id, it.quality > 40] }`
 
 ### 핵심 정리
 
@@ -743,7 +743,7 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [clever_pauling] DSL2 - revision: 605d2058b4
 
@@ -898,7 +898,7 @@ nextflow run main.nf
 
 === "후"
 
-    ```groovy title="main.nf" linenums="10" hl_lines="3-27"
+    ```groovy title="main.nf" linenums="10" hl_lines="2-26"
         script:
         // 단일 엔드 vs 페어드 엔드 감지
         def is_single = reads instanceof List ? reads.size() == 1 : true
@@ -953,7 +953,7 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [adoring_rosalind] DSL2 - revision: 04b1cd93e9
 
@@ -979,7 +979,7 @@ fastp \
     --thread 2
 ```
 
-동적 스크립트 로직의 또 다른 일반적인 사용 예는 [Nextflow for Science Genomics 모듈](../../nf4science/genomics/02_joint_calling)에서 볼 수 있습니다. 해당 모듈에서 호출되는 GATK 프로세스는 여러 입력 파일을 받을 수 있지만, 올바른 명령줄을 구성하려면 각 파일 앞에 `-V`를 붙여야 합니다. 프로세스는 스크립팅을 사용하여 입력 파일 컬렉션(`all_gvcfs`)을 올바른 명령 인자로 변환합니다.
+동적 스크립트 로직의 또 다른 일반적인 사용 예는 [Nextflow for Science Genomics 모듈](../../nf4_science/genomics/03_joint_calling.md)에서 볼 수 있습니다. 해당 모듈에서 호출되는 GATK 프로세스는 여러 입력 파일을 받을 수 있지만, 올바른 명령줄을 구성하려면 각 파일 앞에 `-V`를 붙여야 합니다. 프로세스는 스크립팅을 사용하여 입력 파일 컬렉션(`all_gvcfs`)을 올바른 명령 인자로 변환합니다.
 
 ```groovy title="command line manipulation for GATK" linenums="1" hl_lines="2 5"
     script:
@@ -1002,8 +1002,6 @@ fastp \
 
 ```groovy title="modules/generate_report.nf" linenums="1"
 process GENERATE_REPORT {
-
-    publishDir 'results/reports', mode: 'copy'
 
     input:
     tuple val(meta), path(reads)
@@ -1061,7 +1059,7 @@ process GENERATE_REPORT {
 
 === "전"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="1 10-29"
+    ```groovy title="main.nf" linenums="1" hl_lines="1 28"
     include { FASTP } from './modules/fastp.nf'
 
     workflow {
@@ -1128,7 +1126,7 @@ process GENERATE_REPORT {
         """
     ```
 
-실행하면 오류가 발생합니다. Nextflow가 `${USER}`를 존재하지 않는 Nextflow 변수로 해석하려고 하기 때문입니다.
+실행하면 오류가 발생합니다. Nextflow가 `#!groovy ${USER}`를 존재하지 않는 Nextflow 변수로 해석하려고 하기 때문입니다.
 
 ??? failure "명령 출력"
 
@@ -1179,9 +1177,9 @@ Bash가 처리할 수 있도록 이스케이프해야 합니다.
 - **파일 파싱을 위한 정규 표현식**: `=~` 연산자와 regex 패턴(`~/pattern/`)을 사용하여 복잡한 파일 명명 규칙에서 메타데이터를 추출합니다
 - **동적 스크립트 생성**: 조건부 로직(if/else, 삼항 연산자)을 사용하여 입력 특성에 따라 다른 스크립트 문자열을 생성합니다
 - **변수 보간**: Nextflow가 문자열을 해석하는 시점과 셸이 해석하는 시점을 이해합니다
-  - `${var}` - Nextflow 변수 (워크플로우 컴파일 시 Nextflow가 보간)
-  - `\${var}` - 셸 환경 변수 (이스케이프되어 런타임에 bash에 전달)
-  - `\$(cmd)` - 셸 명령 치환 (이스케이프되어 런타임에 bash가 실행)
+  - `#!groovy ${var}` - Nextflow 변수 (워크플로우 컴파일 시 Nextflow가 보간)
+  - `#!groovy \${var}` - 셸 환경 변수 (이스케이프되어 런타임에 bash에 전달)
+  - `#!groovy \$(cmd)` - 셸 명령 치환 (이스케이프되어 런타임에 bash가 실행)
 
 이러한 문자열 처리 및 생성 패턴은 실제 바이오인포매틱스 워크플로우에서 접하게 될 다양한 파일 형식과 명명 규칙을 처리하는 데 필수적입니다.
 
@@ -1291,7 +1289,7 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [admiring_panini] DSL2 - revision: 8cc832e32f
 
@@ -1346,7 +1344,7 @@ nextflow run main.nf
         tuple val(meta), path(reads)
     ```
 
-closure `{ meta.depth > 40000000 ? 2 : 1 }`는 **삼항 연산자**(섹션 1.1에서 다룸)를 사용하며 각 작업에 대해 평가되어 샘플별 리소스 할당이 가능합니다. 고심도 샘플(>4천만 읽기)은 CPU 2개를 받고, 나머지는 CPU 1개를 받습니다.
+closure `#!groovy { meta.depth > 40000000 ? 2 : 1 }`는 **삼항 연산자**(섹션 1.1에서 다룸)를 사용하며 각 작업에 대해 평가되어 샘플별 리소스 할당이 가능합니다. 고심도 샘플(>4천만 읽기)은 CPU 2개를 받고, 나머지는 CPU 1개를 받습니다.
 
 !!! note "참고: 지시문에서 입력 변수 접근하기"
 
@@ -1361,7 +1359,7 @@ nextflow run main.nf -ansi-log false
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W  ~  version 25.10.2
+    N E X T F L O W  ~  version 25.10.4
     Launching `main.nf` [fervent_albattani] DSL2 - revision: fa8f249759
     [bd/ff3d41] Submitted process > FASTP (2)
     [a4/a3aab2] Submitted process > FASTP (1)
@@ -1380,7 +1378,7 @@ cat work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.run | grep "docker run"
 다음과 같은 내용이 표시됩니다.
 
 ```bash title="docker command"
-    docker run -i --cpu-shares 4096 --memory 2048m -e "NXF_TASK_WORKDIR" -v /workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690 /bin/bash -ue /workspaces/training/side-quests/essential_scripting_patterns/work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.sh
+    docker run -i --cpu-shares 2048 --memory 2048m -e "NXF_TASK_WORKDIR" -v /workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690 /bin/bash -ue /workspaces/training/side-quests/essential_scripting_patterns/work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.sh
 ```
 
 이 예시에서는 고심도 샘플이었기 때문에 CPU 2개를 요청했습니다(`--cpu-shares 2048`). 샘플 심도에 따라 다른 CPU 할당이 표시될 것입니다. 다른 작업에 대해서도 확인해 보세요.
@@ -1395,7 +1393,7 @@ cat work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.run | grep "docker run"
     process FASTP {
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-        cpus { meta.depth > 40000000 ? 4 : 2 }
+        cpus { meta.depth > 40000000 ? 2 : 1 }
         memory 1.GB
 
         input:
@@ -1408,7 +1406,7 @@ cat work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.run | grep "docker run"
     process FASTP {
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-        cpus { meta.depth > 40000000 ? 4 : 2 }
+        cpus { meta.depth > 40000000 ? 2 : 1 }
         memory 2.GB
 
         input:
@@ -1434,7 +1432,7 @@ nextflow run main.nf
       Detecting adapter sequence for read1...
       No adapter detected for read1
 
-      .command.sh: line 7:   101 Killed                  fastp --in1 SAMPLE_002_S2_L001_R1_001.fastq --out1 sample_002_trimmed.fastq.gz --json sample_002.fastp.json --html sample_002.fastp.html --thread 2
+      .command.sh: line 7:   101 Killed                  fastp --in1 SAMPLE_002_S2_L001_R1_001.fastq --out1 sample_002_trimmed.fastq.gz --json sample_002.fastp.json --html sample_002.fastp.html --thread 1
     ```
 
 이는 프로세스가 메모리 한도를 초과하여 종료되었음을 나타냅니다.
@@ -1449,7 +1447,7 @@ nextflow run main.nf
     process FASTP {
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-        cpus { meta.depth > 40000000 ? 4 : 2 }
+        cpus { meta.depth > 40000000 ? 2 : 1 }
         memory { 1.GB * task.attempt }
         errorStrategy 'retry'
         maxRetries 2
@@ -1464,7 +1462,7 @@ nextflow run main.nf
     process FASTP {
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-        cpus { meta.depth > 40000000 ? 4 : 2 }
+        cpus { meta.depth > 40000000 ? 2 : 1 }
         memory 2.GB
 
         input:
@@ -1558,7 +1556,7 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [adoring_galileo] DSL2 - revision: c9e83aaef1
 
@@ -1626,7 +1624,7 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W  ~  version 25.10.2
+    N E X T F L O W  ~  version 25.10.4
     Launching `main.nf` [lonely_williams] DSL2 - revision: d0b3f121ec
     [94/b48eac] Submitted process > FASTP (2)
     [2c/d2b28f] Submitted process > GENERATE_REPORT (2)
@@ -1710,7 +1708,7 @@ nextflow run main.nf
 ??? failure "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [trusting_torvalds] DSL2 - revision: b56fbfbce2
 
@@ -1872,7 +1870,7 @@ nextflow run main.nf
 
 === "후"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="5-20 23-24"
+    ```groovy title="main.nf" linenums="1" hl_lines="5-15 18-19"
     include { FASTP } from './modules/fastp.nf'
     include { TRIMGALORE } from './modules/trimgalore.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
@@ -1915,7 +1913,7 @@ nextflow run main.nf
 ??? failure "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [confident_coulomb] DSL2 - revision: 07059399ed
 
@@ -1934,7 +1932,7 @@ nextflow run main.nf --input ./data/nonexistent.csv
 ??? failure "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [cranky_gates] DSL2 - revision: 26839ae3eb
 
@@ -1989,7 +1987,7 @@ nextflow run main.nf --input ./data/samples.csv
 ??? warning "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [awesome_goldwasser] DSL2 - revision: a31662a7c1
 
@@ -2066,7 +2064,7 @@ nextflow run main.nf --input ./data/samples.csv -ansi-log false
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W  ~  version 25.10.2
+    N E X T F L O W  ~  version 25.10.4
     Launching `main.nf` [marvelous_boltzmann] DSL2 - revision: a31662a7c1
     WARN: Low sequencing depth for sample_002: 25000000
     [9b/d48e40] Submitted process > FASTP (2)
@@ -2142,7 +2140,7 @@ nextflow run main.nf --input ./data/samples.csv -ansi-log false
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W  ~  version 25.10.2
+    N E X T F L O W  ~  version 25.10.4
     Launching `main.nf` [boring_linnaeus] DSL2 - revision: a31662a7c1
     WARN: Low sequencing depth for sample_002: 25000000
     [e5/242efc] Submitted process > FASTP (2)
@@ -2460,4 +2458,4 @@ workflow {
 
 ## 다음 단계
 
-[사이드 퀘스트 메뉴](../)로 돌아가거나 페이지 오른쪽 하단의 버튼을 클릭하여 목록의 다음 주제로 이동하세요.
+[사이드 퀘스트 메뉴](../index.md)로 돌아가거나 페이지 오른쪽 하단의 버튼을 클릭하여 목록의 다음 주제로 이동하세요.

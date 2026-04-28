@@ -15,9 +15,9 @@ Esta seção contém coleções selecionadas de módulos de treinamento chamados
 Cada coleção tem pré-requisitos específicos documentados em sua página de índice. No entanto, a maioria das coleções assume:
 
 - Experiência com a linha de comando
-- Conceitos fundamentais de Nextflow e ferramentas abordados no curso introdutório [Hello Nextflow](../../hello_nextflow/)
+- Conceitos fundamentais de Nextflow e ferramentas abordados no curso introdutório [Hello Nextflow](../hello_nextflow/index.md)
 
-Para requisitos técnicos e configuração do ambiente, consulte o mini-curso de [Configuração do Ambiente](../../envsetup/).
+Para requisitos técnicos e configuração do ambiente, consulte o mini-curso de [Configuração do Ambiente](../envsetup/index.md).
 
 ## Coleções disponíveis
 

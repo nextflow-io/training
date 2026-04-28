@@ -51,7 +51,7 @@ Aquí están nuestras principales sugerencias de qué hacer a continuación:
 - ¡No solo ejecute Nextflow, escríbalo! Conviértase en un desarrollador de Nextflow con [Hello Nextflow](../hello_nextflow/index.md)
 - Aplique Nextflow a un caso de uso de análisis científico con [Nextflow for Science](../nf4_science/index.md)
 - Comience con nf-core con [Hello nf-core](../hello_nf-core/index.md)
-- Aprenda técnicas de solución de problemas con el [Debugging Side Quest](../side_quests/debugging.md)
+- Aprenda técnicas de solución de problemas con el [Debugging Side Quest](../side_quests/debugging/index.md)
 
 Finalmente, le recomendamos que eche un vistazo a [**Seqera Platform**](https://seqera.io/), una plataforma basada en la nube desarrollada por los creadores de Nextflow que hace aún más fácil lanzar y gestionar sus workflows, así como gestionar sus datos y ejecutar análisis interactivamente en cualquier entorno.
 

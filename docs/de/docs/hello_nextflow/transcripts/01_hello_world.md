@@ -238,41 +238,41 @@ Ziemlich komplexe Logik mit sehr wenig Syntax hier. Und du kannst hoffentlich se
 
 ## 3.4. Standardwerte für Kommandozeilen-Parameter verwenden
 
-Okay, das ist großartig. Das Problem ist jetzt aber, dass ich jedes Mal, wenn ich diese Pipeline ausführe, dash input machen muss, damit sie läuft.
+Okay, das ist großartig. Das Problem ist jetzt aber, dass ich jedes Mal, wenn ich diese Pipeline ausführe, `--input` angeben muss, damit sie läuft.
 
-Wenn ich versuche, ohne diesen Parameter zu laufen, wird Nextflow jetzt einen Fehler werfen und sagen, dass es diesen Parameter brauchte und er nicht gesetzt wurde. Und es wusste also nicht, was zu tun ist.
+Wenn ich versuche, ohne diesen Parameter zu laufen, wird Nextflow jetzt einen Fehler werfen und sagen, dass dieser Parameter benötigt wurde, aber nicht gesetzt war. Es wusste also nicht, was zu tun ist.
 
 Das ist übrigens eine coole neue Sache. In der Vergangenheit wäre Nextflow einfach mit einem leeren String gelaufen, und du hättest alle möglichen seltsamen Fehler gehabt, die schwer zu verstehen gewesen wären. Aber im neuen Nextflow-Syntax-Parser ist es etwas vorsichtiger und sagt es dir sofort.
 
-Wir wollen also nicht immer jede einzelne Option angeben. Es ist gute Praxis, vernünftige Standards anzugeben. Wie machen wir das also in unserem Skript?
+Wir wollen also nicht immer jede einzelne Option angeben. Es ist gute Praxis, sinnvolle Standardwerte anzugeben. Wie machen wir das also in unserem Skript?
 
-Du wirst bemerken, dass wir, als wir das geschrieben haben, einfach _params.input_ direkt dort eingefügt haben, wo wir es verwenden. Die offensichtliche Lösung ist also, dass wir einen Standard definieren, und wir tun das oben im Skript hier in einem speziellen Params-Block im Workflow. Das ist im Workflow-Skript hier.
+Du wirst bemerken, dass wir, als wir das geschrieben haben, _params.input_ einfach direkt dort eingefügt haben, wo wir es verwenden. Die naheliegende Lösung ist also, einen Standardwert zu definieren. Das machen wir oben im Skript in einem speziellen Params-Block im Workflow. Das ist hier im Workflow-Skript.
 
-Wieder etwas neue Syntax hier, also pass auf. Das ist wirklich cooles Zeug. Wir haben den Namen des Parameters, der hier erwartet wird.
+Wieder etwas neue Syntax, also pass auf. Das ist wirklich cooles Zeug. Wir haben den Namen des Parameters, der hier erwartet wird.
 
-Und dann nach diesem Doppelpunkt-Zeichen definieren wir einen Typ der Variable. Du musst das nicht tun, du kannst es einfach leer lassen, aber es ist wirklich schön. Es sagt Nextflow, dass wir einen String erwarten und ihn als solchen behandeln.
+Und dann nach diesem Doppelpunkt definieren wir einen Typ der Variable. Das musst du nicht tun, du kannst es einfach leer lassen, aber es ist wirklich praktisch. Es sagt Nextflow, dass wir einen String erwarten, und behandelt ihn entsprechend.
 
-Wenn wir stattdessen zum Beispiel eine Zahl wollen, könnten wir float schreiben, und das würde sagen, wir wollen eine Gleitkommazahl. Und wenn wir versuchen, damit zu laufen, wird es einen Fehler werfen. Wenn wir ihm einen String geben, der kein Float ist. Und es wird ihn auch als solchen übergeben. Wenn wir string machen, dann weiß es, dass es ein String ist. Und selbst wenn es führende Nullen hat und ganz numerisch ist, wird es ihn trotzdem als tatsächlichen String übergeben.
+Wenn wir stattdessen zum Beispiel eine Zahl wollen, könnten wir `float` schreiben, und das würde bedeuten, wir wollen eine Gleitkommazahl. Wenn wir dann versuchen, damit zu laufen, und ihm einen String übergeben, der kein Float ist, wird es einen Fehler werfen. Und es wird ihn auch als solchen übergeben. Wenn wir `string` angeben, weiß Nextflow, dass es ein String ist. Und selbst wenn er führende Nullen hat und rein numerisch ist, wird er trotzdem als tatsächlicher String übergeben.
 
-Diese Typsicherheit ist also eine sehr neue Funktion von Nextflow, aber wirklich mächtig, um deinen Code sicherer zu schreiben und auszuführen.
+Diese Typsicherheit ist eine sehr neue Funktion von Nextflow, aber wirklich mächtig, um deinen Code sicherer zu schreiben und auszuführen.
 
-Dann danach haben wir ein Gleichheitszeichen und dann den Standardwert hier. Nextflow wurde ursprünglich in Barcelona geschrieben, also scheint es angemessen, dass wir etwas Spanisches hier haben, _"Holà mundo!"_ als Standard.
+Danach haben wir ein Gleichheitszeichen und dann den Standardwert. Nextflow wurde ursprünglich in Barcelona geschrieben, also scheint es passend, dass wir hier etwas Spanisches haben: _"Hola mundo!"_ als Standard.
 
-Richtig, ich werde das Skript speichern, zurückgehen, das Skript wieder ohne _--input_ ausführen. Und diesmal sollte es laufen und es wird unsere neue Datei oben in _results_ erstellen. Und in dieser Datei steht jetzt _"Holà mundo!"_.
+Gut, ich speichere das Skript, gehe zurück und führe das Skript wieder ohne _--input_ aus. Und diesmal sollte es laufen und unsere neue Datei in _results_ erstellen. Und in dieser Datei steht jetzt _"Hola mundo!"_.
 
-Das ist aber nur ein Standard, also bedeutet es nicht, dass wir nicht immer noch das Gleiche wie vorher tun können. Wenn ich zurückgehe und mein altes Skript hier finde, _"Hej Världen"_, weil ich _--input_ auf der Kommandozeile mache, wird das diesen Standard überschreiben und das wieder in der output.txt-Datei verwenden.
+Das ist aber nur ein Standardwert, also bedeutet das nicht, dass wir nicht trotzdem dasselbe wie vorher tun können. Wenn ich zurückgehe und mein altes Skript hier finde, _"Hej Världen"_, und _--input_ auf der Kommandozeile angebe, wird das den Standardwert überschreiben und diesen wieder in der output.txt-Datei verwenden.
 
 Das im Skript ist also nur der Standardwert, den ich setze.
 
-Während wir unseren Workflow aufbauen, um komplexer zu sein und mehr Parameter einzuschließen, wird dieser Params-Block oben im Skript anfangen, sie alle an einem Ort zu sammeln.
+Während wir unseren Workflow komplexer aufbauen und mehr Parameter einschließen, wird dieser Params-Block oben im Skript anfangen, sie alle an einem Ort zu sammeln.
 
-Und du endest mit dieser ziemlich schönen Symmetrie in deinem Skript, wo du effektiv alle deine Workflow-Eingaben hier und deine Workflow-Ausgaben unten hast. Und es ist sehr klar, was die Schnittstelle deines Workflows zur Außenwelt ist. Du kannst also eine neue Pipeline sehr schnell mit der neuen Syntax aufnehmen und verstehen, wie man sie verwendet.
+Und du erhältst eine ziemlich schöne Symmetrie in deinem Skript: Du hast effektiv alle deine Workflow-Eingaben hier oben und deine Workflow-Ausgaben unten. Es ist sehr klar, was die Schnittstelle deines Workflows zur Außenwelt ist. Du kannst also eine neue Pipeline mit der neuen Syntax sehr schnell aufnehmen und verstehen, wie man sie verwendet.
 
-Eine letzte coole Sache. Wir müssen keinen Standardwert damit setzen. Wenn wir params input machen, aber keinen Standardwert setzen, dann sagt es Nextflow, dass dieser Parameter erforderlich ist, und wieder wird die Pipeline nicht ohne ihn laufen, aber sie wird dir eine nützlichere Fehlermeldung geben, anstatt etwas darüber, dass es null ist.
+Eine letzte coole Sache. Wir müssen keinen Standardwert setzen. Wenn wir `params.input` angeben, aber keinen Standardwert setzen, teilt das Nextflow mit, dass dieser Parameter erforderlich ist. Die Pipeline wird dann ohne ihn nicht laufen, aber du bekommst eine nützlichere Fehlermeldung, anstatt etwas über einen null-Wert.
 
-Es sagt also, wir erwarten, dass seine Eingabe erforderlich ist, aber sie wurde nicht auf der Kommandozeile angegeben. Sehr schön.
+Es sagt also: Wir erwarten, dass die Eingabe erforderlich ist, aber sie wurde nicht auf der Kommandozeile angegeben. Sehr schön.
 
-Okay, hoffentlich ist jetzt klar, wie man seine Nextflow-Pipeline mit variablen Eingaben und Parametern einrichtet, wie man den Standard setzt, die Typen setzt, es könnte ein Boolean true-false-Flag oder eine Ganzzahl oder verschiedene Typen hier sein. Wie man sie in deinen Workflow übergibt, wo es durchgeht, und dann in deinen Prozess interpoliert. Und du weißt auch, wie man diese auf der Kommandozeile anpasst, wenn du Nextflow startest. Das fängt an, interessanter auszusehen als unser einfacher Bash-Befehl.
+Okay, hoffentlich ist jetzt klar, wie man seine Nextflow-Pipeline mit variablen Eingaben und Parametern einrichtet: wie man den Standardwert setzt, die Typen festlegt – es könnte ein Boolean true/false-Flag, eine Ganzzahl oder verschiedene andere Typen sein. Wie man sie in den Workflow übergibt, wo sie durchlaufen und dann in den Prozess interpoliert werden. Und du weißt auch, wie man diese auf der Kommandozeile anpasst, wenn du Nextflow startest. Das fängt an, interessanter auszusehen als unser einfacher Bash-Befehl.
 
 ## 4. Workflow-Ausführungen verwalten
 

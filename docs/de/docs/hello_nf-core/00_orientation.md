@@ -36,7 +36,7 @@ export NXF_SYNTAX_PARSER=v1
 
 Bitte stelle sicher, dass du die korrekten Einstellungen verwendest, wie [hier](../info/nxf_versions.md) dokumentiert.
 
-Das Training erfordert zusätzlich **nf-core tools 3.4.1**.
+Das Training erfordert zusätzlich **nf-core tools 3.5.2**.
 Wenn du eine andere Version der nf-core-Tools verwendest, könntest du Schwierigkeiten haben, dem Training zu folgen.
 
 Du kannst überprüfen, welche Version in deiner Umgebung installiert ist, indem du den Befehl `nf-core --version` verwendest.
@@ -63,7 +63,7 @@ cd hello-nf-core/
     cd /workspaces/training/hello-nf-core
     ```
 
-Lass uns nun einen Blick auf den Inhalt dieses Verzeichnisses werfen.
+Erkunde als Nächstes den Inhalt dieses Verzeichnisses.
 
 ### Die bereitgestellten Materialien erkunden
 
@@ -78,7 +78,7 @@ Hier erzeugen wir ein Inhaltsverzeichnis bis zur zweiten Ebene:
 tree . -L 2
 ```
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     .

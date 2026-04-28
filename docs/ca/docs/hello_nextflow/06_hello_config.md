@@ -43,7 +43,7 @@ Aprenent a utilitzar aquestes opcions de configuració de manera efectiva, podeu
 Utilitzarem l'script de workflow `hello-config.nf` com a punt de partida.
 És equivalent a l'script produït en treballar la Part 5 d'aquest curs de formació, excepte que hem canviat les destinacions de sortida:
 
-```groovy title="hello-config.nf" linenums="37" hl_lines="3 7 11 15"
+```groovy title="hello-config.nf" linenums="37" hl_lines="3 7 11 15 19"
 output {
     first_output {
         path 'hello_config/intermediates'
@@ -77,7 +77,7 @@ nextflow run hello-config.nf
 ??? success "Sortida de la comanda"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [nice_escher] DSL2 - revision: d5dfdc9872
 
@@ -99,10 +99,10 @@ Com abans, trobareu els fitxers de sortida al directori especificat al bloc `out
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
+    │   ├── Hola-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     └── batch-report.txt
     ```
 
@@ -112,7 +112,7 @@ La sortida final d'art ASCII es troba al directori `results/hello_config/`, amb 
 
     ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -237,7 +237,7 @@ nextflow run hello-config.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
 
@@ -256,7 +256,7 @@ La sortida final d'art ASCII es troba al directori `results/hello_config/`, amb 
 
     ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -333,7 +333,7 @@ nextflow run ../hello-config.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `../hello-config.nf` [trusting_escher] DSL2 - revision: 356df0818d
 
@@ -356,7 +356,7 @@ El fitxer de sortida final hauria de contenir el caràcter tux dient les salutac
     _________
     / HELLO   \
     | BONJOUR |
-    \ HOLà    /
+    \ HOLA    /
     ---------
       \
         \
@@ -419,7 +419,7 @@ nextflow run hello-config.nf -params-file test-params.yaml
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
@@ -437,7 +437,7 @@ El fitxer de sortida final hauria de contenir el caràcter stegosaurus dient les
     ```console title="results/hello_config/cowpy-COLLECTED-yaml-output.txt"
     _________
     / HELLO   \
-    | HOLà    |
+    | HOLA    |
     \ BONJOUR /
     ---------
     \                             .       .
@@ -500,7 +500,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli/
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [prickly_kay] DSL2 - revision: 32ecc4fba2
 
@@ -524,10 +524,10 @@ Això publica les sortides a `custom-outdir-cli/` en lloc de `results/`:
             ├── Bonjour-output.txt
             ├── COLLECTED-batch-output.txt
             ├── Hello-output.txt
-            ├── Holà-output.txt
+            ├── Hola-output.txt
             ├── UPPER-Bonjour-output.txt
             ├── UPPER-Hello-output.txt
-            └── UPPER-Holà-output.txt
+            └── UPPER-Hola-output.txt
     ```
 
 Tingueu en compte que encara tenim el subdirectori `hello_config` de les declaracions `path` al bloc output.
@@ -612,10 +612,10 @@ Ara les sortides es publiquen directament sota `custom-outdir-cli-2/`, sense el 
         ├── Bonjour-output.txt
         ├── COLLECTED-batch-output.txt
         ├── Hello-output.txt
-        ├── Holà-output.txt
+        ├── Hola-output.txt
         ├── UPPER-Bonjour-output.txt
         ├── UPPER-Hello-output.txt
-        └── UPPER-Holà-output.txt
+        └── UPPER-Hola-output.txt
     ```
 
 !!! tip "Consell"
@@ -745,7 +745,7 @@ Tornem a posar-ho, i també posem els fitxers en un subdirectori `params.batch`.
 
     Incloure `params.batch` al `path` del bloc output, en lloc del `outputDir` de configuració, significa que no se sobreescriurà amb `-output-dir` a la CLI.
 
-Primer, actualitzeu el fitxer de configuració per eliminar `${params.batch}` de `outputDir` (ja que l'estem movent a les declaracions de camí):
+Primer, actualitzeu el fitxer de configuració per eliminar `#!groovy ${params.batch}` de `outputDir` (ja que l'estem movent a les declaracions de camí):
 
 === "Després"
 
@@ -832,7 +832,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-config-2 --batch rep2
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [mad_curry] DSL2 - revision: 668a98ccb9
 
@@ -860,11 +860,11 @@ Això publica les sortides a `custom-outdir-config-2/rep2/`, amb el camí base e
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Holà-output.txt
+            │   └── UPPER-Hola-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Holà-output.txt
+                └── Hola-output.txt
     ```
 
 ### 2.3. Establir el mode de publicació a nivell de workflow
@@ -962,7 +962,7 @@ nextflow run hello-config.nf -output-dir config-output-mode
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [small_stone] DSL2 - revision: 024d6361b5
 
@@ -990,11 +990,11 @@ Això publica les sortides a `config-output-mode/`, i encara són totes còpies 
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Holà-output.txt
+            │   └── UPPER-Hola-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Holà-output.txt
+                └── Hola-output.txt
     ```
 
 La raó principal per la qual encara podríeu voler utilitzar la manera per sortida d'establir el mode és si voleu barrejar i combinar dins del mateix workflow, _és a dir_ tenir algunes sortides copiades i algunes enllaçades simbòlicament.
@@ -1094,7 +1094,7 @@ nextflow run hello-config.nf --batch conda
 ??? success "Sortida de la comanda"
 
     ```console title="Output"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [friendly_lamport] DSL2 - revision: 024d6361b5
 
@@ -1488,7 +1488,7 @@ nextflow run hello-config.nf -profile my_laptop
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [hungry_sanger] DSL2 - revision: 024d6361b5
 
@@ -1572,7 +1572,7 @@ nextflow run hello-config.nf -profile my_laptop,test
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [modest_becquerel] DSL2 - revision: 024d6361b5
 
@@ -1589,7 +1589,7 @@ Això utilitzarà Docker on sigui possible i produirà sortides sota `custom-out
 
     ```console title="custom-outdir-config/test/cowpy/cowpy-COLLECTED-test-output.txt"
      _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -1618,7 +1618,7 @@ Això significa que mentre distribuïm qualsevol fitxer de dades de prova amb el
     Podem apuntar a URLs per a fitxers més grans que s'emmagatzemen externament.
     Nextflow els descarregarà automàticament sempre que hi hagi una connexió oberta.
 
-    Per a més detalls, vegeu la Missió Secundària [Treballar amb Fitxers](../side_quests/working_with_files.md)
+    Per a més detalls, vegeu la Missió Secundària [Treballar amb Fitxers](../side_quests/working_with_files/index.md)
 
 ### 6.3. Utilitzar `nextflow config` per veure la configuració resolta
 

@@ -17,7 +17,7 @@ Daha sonra yerel modüllerden birini bir nf-core modülü ile değiştirerek, bi
 Final `core-hello` pipeline'ınız artık şunlara sahip:
 
 - **Standartlaştırılmış yapı**: workflows, subworkflows, modüller ve yapılandırma için düzenlenmiş dizinler içeren nf-core şablonu kullanıyor
-- **Topluluk modülleri**: nf-core deposundan (`cat/cat`) özel modüllerinizin yanı sıra
+- **Topluluk modülleri**: nf-core deposundan (`find/concatenate`) özel modüllerinizin yanı sıra
 - **Kapsamlı doğrulama**: pipeline çalışmadan önce hem parametreleri hem de girdi verilerini kontrol ediyor
 - **Profesyonel yapılandırma**: farklı çalıştırma ortamları için profiller içeriyor
 - **Eksiksiz dokümantasyon**: nf-core kurallarına uygun meta veriler

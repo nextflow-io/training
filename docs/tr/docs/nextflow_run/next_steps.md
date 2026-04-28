@@ -51,7 +51,7 @@ Sırada ne yapacağınız için en iyi önerilerimiz:
 - Sadece Nextflow çalıştırmayın, yazın! [Hello Nextflow](../hello_nextflow/index.md) ile Nextflow geliştiricisi olun
 - Bilimsel analiz kullanım durumlarına Nextflow uygulayın: [Nextflow for Science](../nf4_science/index.md)
 - [Hello nf-core](../hello_nf-core/index.md) ile nf-core'a başlayın
-- [Debugging Side Quest](../side_quests/debugging.md) ile hata ayıklama tekniklerini öğrenin
+- [Debugging Side Quest](../side_quests/debugging/index.md) ile hata ayıklama tekniklerini öğrenin
 
 Son olarak, Nextflow'un yaratıcıları tarafından geliştirilen bulut tabanlı bir platform olan [**Seqera Platform**](https://seqera.io/)'a bakmanızı öneririz; iş akışlarınızı başlatmayı ve yönetmeyi, verilerinizi yönetmeyi ve herhangi bir ortamda etkileşimli analizler çalıştırmayı çok daha kolay hale getirir.
 
