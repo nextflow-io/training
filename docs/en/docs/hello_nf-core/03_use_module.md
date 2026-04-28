@@ -296,7 +296,7 @@ include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
 
 Note that the nf-core convention is to use uppercase for module names when importing them.
 
-Open up [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and make the following substitution:
+Open up `core-hello/workflows/hello.nf` and make the following substitution:
 
 === "After"
 
