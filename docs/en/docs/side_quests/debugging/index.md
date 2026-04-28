@@ -18,10 +18,10 @@ By the end, you'll have a robust debugging methodology that transforms frustrati
 
 Before taking on this side quest, you should:
 
-- Have completed the [Hello Nextflow](../hello_nextflow/README.md) tutorial or equivalent beginner's course.
+- Have completed the [Hello Nextflow](../../hello_nextflow/index.md) tutorial or equivalent beginner's course.
 - Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators)
 
-**Optional:** We recommend completing the [IDE Features for Nextflow Development](../dev_environment/) side quest first.
+**Optional:** We recommend completing the [IDE Features for Nextflow Development](../dev_environment/index.md) side quest first.
 That covers comprehensive coverage of IDE features that support debugging (syntax highlighting, error detection, etc.), which we'll use heavily here.
 
 ---
@@ -30,7 +30,7 @@ That covers comprehensive coverage of IDE features that support debugging (synta
 
 #### Open the training codespace
 
-If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../envsetup/index.md).
+If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -598,7 +598,7 @@ process PROCESS_FILES {
 }
 ```
 
-In this example, we're defining the `prefix` variable in Bash, but in a Nexflow process the `$` syntax we used to refer to it (`#!groovy ${prefix}`) is interpreted as a Groovy variable, not Bash. The variable doesn't exist in the Groovy context, so we get a 'no such variable' error.
+In this example, we're defining the `prefix` variable in Bash, but in a Nextflow process the `$` syntax we used to refer to it (`#!groovy ${prefix}`) is interpreted as a Groovy variable, not Bash. The variable doesn't exist in the Groovy context, so we get a 'no such variable' error.
 
 #### Fix the code
 
@@ -1662,7 +1662,7 @@ nextflow run missing_software.nf -profile docker
 
 !!! note
 
-    To learn more about how Nextflow uses containers, see [Hello Nextflow](../hello_nextflow/05_hello_containers.md)
+    To learn more about how Nextflow uses containers, see [Hello Nextflow](../../hello_nextflow/05_hello_containers.md)
 
 ### 3.3. Bad resource configuration
 
@@ -2192,7 +2192,7 @@ This methodology combines all the tools we've covered into an efficient workflow
 
     Once you've identified a problem, you need an efficient way to test your fixes without wasting time re-running successful parts of your workflow. Nextflow's `-resume` functionality is invaluable for debugging.
 
-    You will have encountered `-resume` if you've worked through [Hello Nextflow](../hello_nextflow/), and it's important that you make good use of it when debugging to save yourself waiting while the processes before your problem process run.
+    You will have encountered `-resume` if you've worked through [Hello Nextflow](../../hello_nextflow/index.md), and it's important that you make good use of it when debugging to save yourself waiting while the processes before your problem process run.
 
     **Resume debugging strategy:**
 
@@ -2656,4 +2656,4 @@ For production workflows, consider:
 
 ## What's next?
 
-Return to the [menu of Side Quests](../) or click the button in the bottom right of the page to move on to the next topic in the list.
+Return to the [menu of Side Quests](../index.md) or click the button in the bottom right of the page to move on to the next topic in the list.

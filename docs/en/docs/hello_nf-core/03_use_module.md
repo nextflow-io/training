@@ -296,7 +296,7 @@ include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
 
 Note that the nf-core convention is to use uppercase for module names when importing them.
 
-Open up [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and make the following substitution:
+Open up `core-hello/workflows/hello.nf` and make the following substitution:
 
 === "After"
 
@@ -512,7 +512,7 @@ Not only does it allow you to name outputs based on metadata, but you can also d
 
 !!! note "Learn more about metadata"
 
-    For a comprehensive introduction to working with metadata in Nextflow workflows, including how to read metadata from samplesheets and use it to customize processing, see the [Metadata in workflows](../side_quests/metadata) side quest.
+    For a comprehensive introduction to working with metadata in Nextflow workflows, including how to read metadata from samplesheets and use it to customize processing, see the [Metadata in workflows](../side_quests/metadata/index.md) side quest.
 
 ### 2.3. Summarize changes to be made
 

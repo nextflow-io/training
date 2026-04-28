@@ -16,7 +16,7 @@ index_page:
 defaults:
   technical_requirements: >-
     You will need a GitHub account OR a local installation of Nextflow. Our training courses are compatible with Nextflow version 25.10.2 or later and require the use of the v2 parser **EXCEPT the Hello nf-core course**, which requires the v1 parser.
-    See [Environment options](../envsetup/index.md) for more details.
+    See [Environment options](/envsetup/) for more details.
   videos: >-
     Videos are available for each chapter, featuring an instructor working
     through the exercises. The video for each part of the course is embedded

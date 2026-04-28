@@ -14,14 +14,14 @@ additional_information:
   audience_prerequisites:
     - "**Audience:** This course is designed for researchers in genomics and related fields who want to develop or customize data analysis pipelines."
     - "**Skills:** Some familiarity with the command line, basic scripting concepts, and common genomics file formats is assumed."
-    - "**Prerequisites:** Foundational Nextflow concepts and tooling covered in [Hello Nextflow](../../hello_nextflow/)."
+    - "**Prerequisites:** Foundational Nextflow concepts and tooling covered in [Hello Nextflow](../../hello_nextflow/index.md)."
 ---
 
 # Nextflow for Genomics
 
 **A hands-on course applying Nextflow to a real-world genomics use case: variant calling with GATK.**
 
-This course builds on the [Hello Nextflow](../../hello_nextflow/) beginner training and demonstrates how to use Nextflow in the specific context of the genomics domain.
+This course builds on the [Hello Nextflow](../../hello_nextflow/index.md) beginner training and demonstrates how to use Nextflow in the specific context of the genomics domain.
 You will implement a variant calling pipeline with [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), a widely used software package for analyzing high-throughput sequencing data.
 
 <!-- additional_information -->

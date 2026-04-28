@@ -24,7 +24,7 @@ We'll transform a simple CSV-reading workflow into a sophisticated bioinformatic
 
 Before taking on this side quest, you should:
 
-- Have completed the [Hello Nextflow](../hello_nextflow/README.md) tutorial or equivalent beginner's course.
+- Have completed the [Hello Nextflow](../../hello_nextflow/index.md) tutorial or equivalent beginner's course.
 - Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators, working with files, meta data)
 - Have basic familiarity with common programming constructs (variables, maps, lists)
 
@@ -37,7 +37,7 @@ We'll start with fundamental concepts and build up to advanced patterns.
 
 #### Open the training codespace
 
-If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../envsetup/index.md).
+If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -442,7 +442,7 @@ This `[meta, file]` tuple structure is a common pattern in Nextflow for passing 
 
 !!! note
 
-    **Maps and Metadata**: Maps are fundamental to working with metadata in Nextflow. For a more detailed explanation of working with metadata maps, see the [Working with metadata](../metadata/) side quest.
+    **Maps and Metadata**: Maps are fundamental to working with metadata in Nextflow. For a more detailed explanation of working with metadata maps, see the [Working with metadata](../metadata/index.md) side quest.
 
 Our workflow demonstrates the core pattern: **dataflow operations** (`workflow`, `channel.fromPath()`, `.splitCsv()`, `.map()`, `.view()`) orchestrate how data moves through the pipeline, while **scripting** (maps `[key: value]`, string methods, type conversions, ternary operators) inside the `.map()` closure handles the transformation of individual data items.
 
@@ -977,7 +977,7 @@ fastp \
     --thread 2
 ```
 
-Another common usage of dynamic script logic can be seen in [the Nextflow for Science Genomics module](../../nf4science/genomics/02_joint_calling). In that module, the GATK process being called can take multiple input files, but each must be prefixed with `-V` to form a correct command line. The process uses scripting to transform a collection of input files (`all_gvcfs`) into the correct command arguments:
+Another common usage of dynamic script logic can be seen in [the Nextflow for Science Genomics module](../../nf4_science/genomics/03_joint_calling.md). In that module, the GATK process being called can take multiple input files, but each must be prefixed with `-V` to form a correct command line. The process uses scripting to transform a collection of input files (`all_gvcfs`) into the correct command arguments:
 
 ```groovy title="command line manipulation for GATK" linenums="1" hl_lines="2 5"
     script:
@@ -2456,4 +2456,4 @@ You'll benefit from practicing and expanding your skills in order to:
 
 ## What's next?
 
-Return to the [menu of Side Quests](../) or click the button in the bottom right of the page to move on to the next topic in the list.
+Return to the [menu of Side Quests](../index.md) or click the button in the bottom right of the page to move on to the next topic in the list.

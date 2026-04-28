@@ -101,19 +101,19 @@ hide:
 
         For researchers who wish to learn how to develop their own genomics pipelines. The course uses a variant calling use case to demonstrate how to develop a simple but functional genomics pipeline.
 
-        [Start the Nextflow for Genomics training :material-arrow-right:](nf4_science/genomics/){ .md-button .md-button--secondary }
+        [Start the Nextflow for Genomics training :material-arrow-right:](nf4_science/genomics/index.md){ .md-button .md-button--secondary }
 
     ??? courses "**Nextflow for RNAseq** (bulk RNAseq)"
 
         For researchers who wish to learn how to develop their own RNAseq pipelines. The course uses a bulk RNAseq processing use case to demonstrate how to develop a simple but functional RNAseq pipeline.
 
-        [Start the Nextflow for RNAseq training :material-arrow-right:](nf4_science/rnaseq/){ .md-button .md-button--secondary }
+        [Start the Nextflow for RNAseq training :material-arrow-right:](nf4_science/rnaseq/index.md){ .md-button .md-button--secondary }
 
     ??? courses "**Nextflow for Imaging** (spatial omics)"
 
         For researchers in imaging and spatial omics who wish to learn how to run and customize analysis pipelines. The course uses the nf-core/molkart pipeline to provide a biologically-relevant pipeline demonstrate how to run, configure, and manage inputs for Nextflow pipelines workflows.
 
-        [Start the Nextflow for Imaging training :material-arrow-right:](nf4_science/imaging/){ .md-button .md-button--secondary }
+        [Start the Nextflow for Imaging training :material-arrow-right:](nf4_science/imaging/index.md){ .md-button .md-button--secondary }
 
 -   :material-run:{ .lg .middle } __Advanced track__
 
@@ -142,13 +142,13 @@ hide:
 
         Standalone mini-courses intended for Nextflow developers who wish to widen their range and/or deepen their skills on particular topics. They are presented linearly but can be taken in any order (see dependencies in each mini-course overview).
 
-        [Browse the Side Quests :material-arrow-right:](side_quests/){ .md-button .md-button--secondary }
+        [Browse the Side Quests :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
 
     ??? courses "**Training Collections:** Recommended learning paths through the Side Quests"
 
         Training Collections combine multiple Side Quests in order to provide a comprehensive learning experience around a particular theme or use case.
 
-        [Browse the Training Collections :material-arrow-right:](training_collections/){ .md-button .md-button--secondary }
+        [Browse the Training Collections :material-arrow-right:](training_collections/index.md){ .md-button .md-button--secondary }
 
 </div>
 

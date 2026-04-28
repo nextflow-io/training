@@ -6,7 +6,7 @@ hide:
 
 # Nextflow for Science
 
-These are courses that demonstrate how to apply the concepts and components presented in the [Hello Nextflow](../hello_nextflow/) beginner course to specific scientific use cases. Each course consists of a series of training modules that are designed to help learners build up their skills progressively.
+These are courses that demonstrate how to apply the concepts and components presented in the [Hello Nextflow](../hello_nextflow/index.md) beginner course to specific scientific use cases. Each course consists of a series of training modules that are designed to help learners build up their skills progressively.
 
 !!! exercise "Nextflow for Genomics"
 
@@ -16,7 +16,7 @@ These are courses that demonstrate how to apply the concepts and components pres
 
     This is a course for researchers who wish to learn how to develop their own genomics pipelines. The course uses a variant calling use case to demonstrate how to develop a simple but functional genomics pipeline.
 
-    [Start the Nextflow for Genomics training :material-arrow-right:](genomics/){ .md-button .md-button--primary }
+    [Start the Nextflow for Genomics training :material-arrow-right:](genomics/index.md){ .md-button .md-button--primary }
 
 !!! exercise "Nextflow for RNAseq"
 
@@ -26,7 +26,7 @@ These are courses that demonstrate how to apply the concepts and components pres
 
     This is a course for researchers who wish to learn how to develop their own RNAseq pipelines. The course uses a bulk RNAseq processing use case to demonstrate how to develop a simple but functional RNAseq pipeline.
 
-    [Start the Nextflow for RNAseq training :material-arrow-right:](rnaseq/){ .md-button .md-button--primary }
+    [Start the Nextflow for RNAseq training :material-arrow-right:](rnaseq/index.md){ .md-button .md-button--primary }
 
 !!! exercise "Nextflow for Bioimaging"
 
@@ -36,6 +36,6 @@ These are courses that demonstrate how to apply the concepts and components pres
 
     This is a course for researchers who wish to learn how to run and configure bioimaging pipelines. The course uses nf-core/molkart to demonstrate essential Nextflow usage patterns applicable to any pipeline.
 
-    [Start the Nextflow for Bioimaging training :material-arrow-right:](imaging/){ .md-button .md-button--primary }
+    [Start the Nextflow for Bioimaging training :material-arrow-right:](imaging/index.md){ .md-button .md-button--primary }
 
 Let us know what other domains and use cases you'd like to see covered here by posting in the [Training section](https://community.seqera.io/c/training/) of the community forum.

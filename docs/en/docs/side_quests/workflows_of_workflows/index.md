@@ -22,7 +22,7 @@ These skills will help you build complex pipelines while maintaining clean, main
 
 Before taking on this side quest you should:
 
-- Have completed the [Hello Nextflow](../hello_nextflow/README.md) tutorial or equivalent beginner's course.
+- Have completed the [Hello Nextflow](../../hello_nextflow/index.md) tutorial or equivalent beginner's course.
 - Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators, modules)
 
 ---
@@ -31,7 +31,7 @@ Before taking on this side quest you should:
 
 #### Open the training codespace
 
-If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../envsetup/index.md).
+If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -722,4 +722,4 @@ Applying these techniques in your own work will enable you to build more sophist
 
 ## What's next?
 
-Return to the [menu of Side Quests](../) or click the button in the bottom right of the page to move on to the next topic in the list.
+Return to the [menu of Side Quests](../index.md) or click the button in the bottom right of the page to move on to the next topic in the list.

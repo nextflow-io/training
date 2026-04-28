@@ -8,7 +8,7 @@ Modern Integrated Development Environments (IDEs) can dramatically transform you
 
 ## What you should know first
 
-This guide assumes you've completed the [Hello Nextflow](../hello_nextflow/) training course and are comfortable with foundational Nextflow concepts including:
+This guide assumes you've completed the [Hello Nextflow](../../hello_nextflow/index.md) training course and are comfortable with foundational Nextflow concepts including:
 
 - **Basic workflow structure**: Understanding processes, workflows, and how they connect together
 - **Channel operations**: Creating channels, passing data between processes, and using basic operators
@@ -28,7 +28,7 @@ This guide focuses on **IDE productivity features** that will make you a more ef
 
 !!! info "Why IDE features now?"
 
-    You've likely already been using VS Code during the [Hello Nextflow](../hello_nextflow/) course, but we kept the focus on learning Nextflow fundamentals rather than IDE features. Now that you're comfortable with basic Nextflow concepts like processes, workflows, channels, and modules, you're ready to leverage the sophisticated IDE features that will make you a more efficient developer.
+    You've likely already been using VS Code during the [Hello Nextflow](../../hello_nextflow/index.md) course, but we kept the focus on learning Nextflow fundamentals rather than IDE features. Now that you're comfortable with basic Nextflow concepts like processes, workflows, channels, and modules, you're ready to leverage the sophisticated IDE features that will make you a more efficient developer.
 
     Think of this as "leveling up" your development environment - the same editor you've been using has much more powerful capabilities that become truly valuable once you understand what they're helping you with.
 
@@ -617,8 +617,8 @@ We don't expect you to remember everything, but now you know that these features
 
 Apply these IDE skills while working through other training modules, for example:
 
-- **[nf-test](nf-test.md)**: Create comprehensive test suites for your workflows
-- **[Hello nf-core](../../hello_nf-core/)**: Build production-quality pipelines with community standards
+- **[nf-test](../nf_test/index.md)**: Create comprehensive test suites for your workflows
+- **[Hello nf-core](../../hello_nf-core/index.md)**: Build production-quality pipelines with community standards
 
 The true power of these IDE features emerges as you work on larger, more complex projects. Start incorporating them into your workflow gradually—within a few sessions, they'll become second nature and transform how you approach Nextflow development.
 
