@@ -36,18 +36,18 @@ export NXF_SYNTAX_PARSER=v1
 
 Por favor asegúrese de estar usando la configuración correcta como se documenta [aquí](../info/nxf_versions.md).
 
-El entrenamiento además requiere **nf-core tools 3.4.1**.
+El entrenamiento además requiere **nf-core tools 3.5.2**.
 Si usa una versión diferente de las herramientas nf-core, puede tener dificultades para seguir el curso.
 
 Puede verificar qué versión está instalada en su entorno usando el comando `nf-core --version`.
 
 ## Prepararse para trabajar
 
-Una vez que su codespace esté funcionando, hay dos cosas que necesita hacer antes de sumergirse en el entrenamiento: establecer su directorio de trabajo para este curso específico y echar un vistazo a los materiales proporcionados.
+Una vez que su codespace esté funcionando, hay dos cosas que necesita hacer antes de sumergirse en la capacitación: establecer su directorio de trabajo para este curso específico y echar un vistazo a los materiales proporcionados.
 
 ### Establecer el directorio de trabajo
 
-Por defecto, el codespace se abre con el directorio de trabajo establecido en la raíz de todos los cursos de entrenamiento, pero para este curso, trabajaremos en el directorio `hello-nf-core/`.
+Por defecto, el codespace se abre con el directorio de trabajo establecido en la raíz de todos los cursos de capacitación, pero para este curso, trabajaremos en el directorio `hello-nf-core/`.
 
 Cambie de directorio ahora ejecutando este comando en el terminal:
 
@@ -57,17 +57,17 @@ cd hello-nf-core/
 
 !!! tip "Consejo"
 
-    Si por alguna razón sale de este directorio (por ejemplo, su codespace se suspende), siempre puede usar la ruta completa para volver a él, asumiendo que está ejecutando esto dentro del entorno de entrenamiento de Github Codespaces:
+    Si por alguna razón sale de este directorio (por ejemplo, su codespace se suspende), siempre puede usar la ruta completa para volver a él, asumiendo que está ejecutando esto dentro del entorno de capacitación de Github Codespaces:
 
     ```bash
     cd /workspaces/training/hello-nf-core
     ```
 
-Ahora echemos un vistazo al contenido de este directorio.
+A continuación, explore el contenido de este directorio.
 
 ### Explorar los materiales proporcionados
 
-Puede explorar el contenido de este directorio usando el explorador de archivos en el lado izquierdo del espacio de trabajo de entrenamiento.
+Puede explorar el contenido de este directorio usando el explorador de archivos en el lado izquierdo del espacio de trabajo de capacitación.
 Alternativamente, puede usar el comando `tree`.
 
 A lo largo del curso, usamos la salida de `tree` para representar la estructura y contenidos del directorio en una forma legible, a veces con modificaciones menores para mayor claridad.
@@ -78,7 +78,7 @@ Aquí generamos una tabla de contenidos hasta el segundo nivel:
 tree . -L 2
 ```
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console
     .
@@ -101,7 +101,7 @@ Usamos secciones colapsables como esta para incluir la salida esperada de comand
 
 - **El archivo `greetings.csv`** es un CSV que contiene algunos datos columnares mínimos que usamos con fines de prueba.
 
-- **El directorio `original-hello`** contiene una copia del código fuente producido al trabajar a través de la serie completa de entrenamiento Hello Nextflow (con Docker habilitado).
+- **El directorio `original-hello`** contiene una copia del código fuente producido al trabajar a través de la serie completa de capacitación Hello Nextflow (con Docker habilitado).
 
 - **El directorio `solutions`** contiene los scripts de workflow completados que resultan de cada paso del curso.
   Están destinados a ser usados como referencia para verificar su trabajo y solucionar cualquier problema.

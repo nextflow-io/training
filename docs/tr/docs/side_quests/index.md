@@ -2,55 +2,57 @@
 title: Yan Görevler
 hide:
   - toc
+page_type: index_page
+index_type: course
+additional_information:
+  technical_requirements: true
+  learning_objectives:
+    - Üretken bir Nextflow geliştirme ortamı kurun ve yapılandırın
+    - Karmaşık veri dönüşümleri için gelişmiş betik kalıpları uygulayın
+    - Çok adımlı iş akışlarında üst veriyi yönetin ve iletin
+    - Paralel ve sıralı işleme için veri kanallarını bölün ve gruplandırın
+    - nf-test kullanarak Nextflow iş akışlarını test edin
+    - Yeniden kullanılabilir adlandırılmış iş akışı modüllerinden karmaşık pipeline'lar oluşturun
+    - Nextflow dosya işlemleri kullanarak dosyalarla verimli çalışın
+    - Yaygın iş akışı sorunlarını sistematik olarak hata ayıklayın
+    - Nextflow plugin'lerini kullanın ve geliştirin
+  audience_prerequisites:
+    - "**Hedef Kitle:** Bu koleksiyon, Hello Nextflow başlangıç kursunu tamamlamış ve belirli konulara daha derinlemesine inmek isteyen öğrenenler için tasarlanmıştır."
+    - "**Beceriler:** Komut satırı deneyimi ve temel Nextflow kavramları ile araçlarına aşinalık varsayılmaktadır."
+    - "**Kurslar:** [Hello Nextflow](../hello_nextflow/index.md) veya eşdeğerini tamamlamış olmanız gerekmektedir."
 ---
 
 # Yan Görevler
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Bu, belirli konuları daha derinlemesine ele alan bağımsız eğitim mini kurslarının bir koleksiyonudur. Bunları istediğiniz sırada tamamlayabilirsiniz.
+**Yan Görevler, belirli Nextflow konularını daha derinlemesine ele alan bağımsız eğitim mini kurslarıdır.**
 
-Hadi başlayalım! Eğitim ortamını başlatmak için aşağıdaki "GitHub Codespaces'te Aç" düğmesine tıklayın (tercihen ayrı bir sekmede), ardından yüklenirken okumaya devam edin.
+Her yan görev, ilgi alanlarınıza ve ihtiyaçlarınıza göre herhangi bir sırada bağımsız olarak tamamlanabilir.
 
-[![GitHub Codespaces'te Aç](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+<!-- additional_information -->
 
-## Ön Koşullar
+## Kursa genel bakış
 
-Her mini kursun özel ön koşulları farklılık gösterir ve ilgili sayfalarda belgelenmiştir.
-Bununla birlikte, hepsi aşağıdakilerle ilgili minimal bir aşinalık varsayar:
+Yan Görevleri ilk kez keşfediyorsanız, eğitim ortamına ve materyallerine genel bir bakış için [Oryantasyon](./orientation.md) sayfasıyla başlayın.
 
-- Komut satırı deneyimi
-- [Hello Nextflow](../../hello_nextflow/) başlangıç eğitim kursunda ele alınan temel Nextflow kavramları ve araçları.
+### Yan Görevler
 
-Teknik gereksinimler ve ortam kurulumu için [Ortam Kurulumu](../../envsetup/) mini kursuna bakın.
+| Yan Görev                                                        | Özet                                                                                        | Tahmini Süre |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------ |
+| [Geliştirme Ortamı](./dev_environment/index.md)                  | Üretken bir yerel Nextflow geliştirme ortamı kurun ve yapılandırın                          | 45 dakika    |
+| [Temel Betik Kalıpları](./essential_scripting_patterns/index.md) | Yaygın iş akışı zorlukları için gelişmiş betik teknikleri                                   | 90 dakika    |
+| [Dosya Girdisi İşleme](./working_with_files/index.md)            | Dosya yönetimi, yol işlemleri ve çıktıların düzenlenmesi                                    | 45 dakika    |
+| [Üst Veri ve Meta Map'ler](./metadata/index.md)                  | Örnek bilgilerini izlemek ve iletmek için üst veri map'lerinin kullanımı                    | 45 dakika    |
+| [Bölme ve Gruplama](./splitting_and_grouping/index.md)           | Veri kanallarını bölme ve yeniden gruplama teknikleri                                       | 45 dakika    |
+| [nf-test ile Test Etme](./nf_test/index.md)                      | Nextflow iş akışları için test yazma ve çalıştırma                                          | 1 saat       |
+| [İş Akışı Sorunlarını Giderme](./debugging/index.md)             | Yaygın iş akışı hatalarını tespit etme ve düzeltme                                          | 1 saat       |
+| [İş Akışlarının İş Akışları](./workflows_of_workflows/index.md)  | Yeniden kullanılabilir adlandırılmış iş akışı modüllerinden karmaşık pipeline'lar oluşturma | 30 dakika    |
+| [Plugin Geliştirme](./plugin_development/index.md)               | Nextflow plugin'lerini kullanma ve geliştirme                                               | 3 saat       |
 
-**Yan Görevlere ilk kez dalıyorsanız, önce [Oryantasyon](./orientation.md) sayfasına göz atmayı unutmayın!**
+[Başlayın :material-arrow-right:](orientation.md){ .md-button .md-button--primary }
 
-Aksi takdirde, aşağıdaki tablodan bir yan görev seçin.
+<!-- Clearfix for float -->
+<div style="content: ''; clear: both; display: table;"></div>
 
-## Yan Görevler
-
-| Yan Görev                                                         | Öğretim için Tahmini Süre |
-| ----------------------------------------------------------------- | ------------------------- |
-| [Nextflow geliştirme ortamı açıklaması](./dev_environment/)       | 45 dakika                 |
-| [Temel Nextflow Betik Kalıpları](./essential_scripting_patterns/) | 90 dakika                 |
-| [İş akışlarında üst veri](./metadata/)                            | 45 dakika                 |
-| [Bölme ve Gruplama](./splitting_and_grouping/)                    | 45 dakika                 |
-| [nf-test ile Test Etme](./nf_test/)                               | 1 saat                    |
-| [İş akışlarının iş akışları](./workflows_of_workflows/)           | 30 dakika                 |
-| [Dosyalarla çalışma](./working_with_files/)                       | 45 dakika                 |
-| [İş akışlarında hata ayıklama](./debugging/)                      | 1 saat                    |
-
-## Çok Bölümlü Kurslar
-
-!!! exercise "Plugin Geliştirme"
-
-    !!! tip inline end ""
-
-        :material-run-fast: Nextflow plugin'lerini kullanmayı ve geliştirmeyi öğrenin.
-
-    Bu kurs, mevcut plugin'lerin iş akışlarınızda kullanılmasını ve sıfırdan kendi plugin'lerinizi oluşturmayı kapsar; özel fonksiyonlar, iş akışı izleme, yapılandırma ve dağıtım konularını içerir.
-
-    [Plugin Geliştirme eğitimine başlayın :material-arrow-right:](plugin_development/){ .md-button .md-button--primary }
-
-Burada hangi diğer alanların ve kullanım durumlarının ele alınmasını istediğinizi topluluk forumunun [Eğitim bölümünde](https://community.seqera.io/c/training/) paylaşarak bize bildirin.
+Burada hangi diğer konuların ele alınmasını istediğinizi topluluk forumunun [Eğitim bölümünde](https://community.seqera.io/c/training/) paylaşarak bize bildirin.

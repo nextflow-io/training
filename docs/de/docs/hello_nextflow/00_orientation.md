@@ -39,7 +39,7 @@ Wenn du diesen Kurs selbstständig durcharbeitest, mache dich bitte mit den [Gru
 
 ### Versionsanforderungen
 
-Dieses Training ist für Nextflow 25.10.2 oder höher **mit aktiviertem v2 Syntax-Parser** konzipiert.
+Dieses Training funktioniert mit Nextflow 25.10.2 oder höher **mit aktiviertem v2 Syntax-Parser**.
 Wenn du eine lokale oder benutzerdefinierte Umgebung verwendest, stelle bitte sicher, dass du die korrekten Einstellungen wie [hier](../info/nxf_versions.md) dokumentiert verwendest.
 
 ## Vorbereitung

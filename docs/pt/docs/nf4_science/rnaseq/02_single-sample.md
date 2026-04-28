@@ -185,7 +185,7 @@ Precisamos declarar um parâmetro de entrada, criar um perfil de teste para forn
 
 #### 1.1.1. Adicionar uma declaração de parâmetro de entrada
 
-Em `rnaseq.nf`, na seção `Pipeline parameters`, declare um parâmetro chamado `input` com o tipo `Path`.
+Em `rnaseq.nf`, na seção `Pipeline parameters`, declare um parâmetro chamado `reads` com o tipo `Path`.
 
 === "Depois"
 
@@ -217,7 +217,7 @@ Existem várias opções para fornecer um valor padrão; aqui usamos um perfil d
 Um perfil de teste fornece valores padrão convenientes para experimentar um fluxo de trabalho sem especificar entradas na linha de comando.
 Esta é uma convenção comum no ecossistema Nextflow (veja [Hello Config](../../hello_nextflow/06_hello_config.md) para mais detalhes).
 
-Adicione um bloco `profiles` ao `nextflow.config` com um perfil `test` que define o parâmetro `input` para um dos arquivos FASTQ de teste.
+Adicione um bloco `profiles` ao `nextflow.config` com um perfil `test` que define o parâmetro `reads` para um dos arquivos FASTQ de teste.
 
 === "Depois"
 
@@ -477,7 +477,7 @@ nextflow run rnaseq.nf -profile test
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `rnaseq.nf` [mad_lorenz] DSL2 - revision: 5846a164d2
 
@@ -494,7 +494,7 @@ Você pode verificar as saídas no diretório results.
 ls results/fastqc
 ```
 
-```console title="Saída"
+```console title="Output"
 ENCSR000COQ1_1_fastqc.html  ENCSR000COQ1_1_fastqc.zip
 ```
 
@@ -738,7 +738,7 @@ nextflow run rnaseq.nf -profile test
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `rnaseq.nf` [gloomy_becquerel] DSL2 - revision: bb11055736
 
@@ -755,7 +755,7 @@ Você pode encontrar as saídas de corte no diretório results.
 ls results/trimming
 ```
 
-```console title="Saída"
+```console title="Output"
 ENCSR000COQ1_1.fastq.gz_trimming_report.txt  ENCSR000COQ1_1_trimmed_fastqc.zip
 ENCSR000COQ1_1_trimmed_fastqc.html           ENCSR000COQ1_1_trimmed.fq.gz
 ```
@@ -821,7 +821,7 @@ Adicione uma declaração de parâmetro para o arquivo de índice do genoma em `
 
 #### 3.1.2. Adicionar o padrão do índice do genoma ao perfil de teste
 
-Assim como fizemos para `input` na seção 1.1.2, adicione um valor padrão para o índice do genoma ao perfil de teste em `nextflow.config`:
+Assim como fizemos para `reads` na seção 1.1.2, adicione um valor padrão para o índice do genoma ao perfil de teste em `nextflow.config`:
 
 === "Depois"
 
@@ -1085,7 +1085,7 @@ nextflow run rnaseq.nf -profile test
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `rnaseq.nf` [elated_stonebraker] DSL2 - revision: e8e57d0cdd
 
@@ -1101,7 +1101,7 @@ Você pode encontrar as saídas de alinhamento no diretório results.
 ls results/align
 ```
 
-```console title="Saída"
+```console title="Output"
 ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log
 ```
 

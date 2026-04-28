@@ -226,7 +226,7 @@ Lo mismo aplica para los archivos accesorios del genoma de referencia (archivos 
 gatk HaplotypeCaller \
         -R /data/ref/ref.fasta \
         -I /data/bam/reads_mother.bam \
-        -O /data/vcf/reads_mother.vcf \
+        -O reads_mother.vcf \
         -L /data/ref/intervals.bed
 ```
 
@@ -302,7 +302,7 @@ Los archivos de salida, `reads_mother.vcf` y su archivo índice, `reads_mother.v
     conda.yml  hsperfdata_root  reads_mother.vcf  reads_mother.vcf.idx
     ```
 
-El archivo VCF contiene los llamados de variantes, como veremos en un minuto, y el archivo índice tiene la misma función que el archivo índice BAM, permitir que las herramientas busquen y recuperen subconjuntos de datos sin cargar todo el archivo.
+El archivo VCF contiene los llamados de variantes, como veremos en un momento, y el archivo índice tiene la misma función que el archivo índice BAM: permitir que las herramientas busquen y recuperen subconjuntos de datos sin cargar todo el archivo.
 
 Como VCF es un formato de texto y este es un archivo de prueba pequeño, puedes ejecutar `cat reads_mother.vcf` para abrirlo y ver su contenido.
 Si te desplazas hacia el inicio del archivo, encontrarás un encabezado compuesto de muchas líneas de metadatos, seguido de una lista de llamados de variantes, uno por línea.
@@ -317,7 +317,7 @@ Si te desplazas hacia el inicio del archivo, encontrarás un encabezado compuest
     ##FORMAT=<ID=GQ,Number=1,Type=Integer,Description="Genotype Quality">
     ##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
     ##FORMAT=<ID=PL,Number=G,Type=Integer,Description="Normalized, Phred-scaled likelihoods for genotypes as defined in the VCF specification">
-    ##GATKCommandLine=<ID=HaplotypeCaller,CommandLine="HaplotypeCaller --output reads_mother.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abreviado]",Version="4.5.0.0",Date="February 11, 2026 at 4:23:43 PM GMT">
+    ##GATKCommandLine=<ID=HaplotypeCaller,CommandLine="HaplotypeCaller --output reads_mother.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abridged]",Version="4.5.0.0",Date="February 11, 2026 at 4:23:43 PM GMT">
     ##INFO=<ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes, for each ALT allele, in the same order as listed">
     ##INFO=<ID=AF,Number=A,Type=Float,Description="Allele Frequency, for each ALT allele, in the same order as listed">
     ##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
@@ -605,7 +605,7 @@ Si ejecutas `head -200 reads_mother.g.vcf` para ver las primeras 200 líneas del
     ##FORMAT=<ID=PL,Number=G,Type=Integer,Description="Normalized, Phred-scaled likelihoods for genotypes as defined in the VCF specification">
     ##FORMAT=<ID=PS,Number=1,Type=Integer,Description="Phasing set (typically the position of the first variant in the set)">
     ##FORMAT=<ID=SB,Number=4,Type=Integer,Description="Per-sample component statistics which comprise the Fisher's Exact Test to detect strand bias.">
-    ##GATKCommandLine=<ID=HaplotypeCaller,CommandLine="HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abreviado]",Version="4.5.0.0",Date="February 11, 2026 at 4:51:00 PM GMT">
+    ##GATKCommandLine=<ID=HaplotypeCaller,CommandLine="HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abridged]",Version="4.5.0.0",Date="February 11, 2026 at 4:51:00 PM GMT">
     ##GVCFBlock0-1=minGQ=0(inclusive),maxGQ=1(exclusive)
     ##GVCFBlock1-2=minGQ=1(inclusive),maxGQ=2(exclusive)
     ##GVCFBlock10-11=minGQ=10(inclusive),maxGQ=11(exclusive)
@@ -1086,7 +1086,7 @@ gatk GenotypeGVCFs \
     17:38:45.615 INFO  ProgressMeter - Starting traversal
     17:38:45.615 INFO  ProgressMeter -        Current Locus  Elapsed Minutes    Variants Processed  Variants/Minute
     17:38:45.903 WARN  InbreedingCoeff - InbreedingCoeff will not be calculated at position 20_10037292_10066351:3480 and possibly subsequent; at least 10 samples must have called genotypes
-    GENOMICSDB_TIMER,GenomicsDBiterator next() timer,Wall-clock time(s),0.07757032800000006,Cpu time(s),0.07253379200000037
+    GENOMICSDB_TIMER,GenomicsDB iterator next() timer,Wall-clock time(s),0.07757032800000006,Cpu time(s),0.07253379200000037
     17:38:46.421 INFO  ProgressMeter - 20_10037292_10066351:13953              0.0                  3390         252357.3
     17:38:46.422 INFO  ProgressMeter - Traversal complete. Processed 3390 total variants in 0.0 minutes.
     17:38:46.423 INFO  GenotypeGVCFs - Shutting down engine
@@ -1115,9 +1115,9 @@ Es otro archivo razonablemente pequeño, así que puedes ejecutar `cat family_tr
     ##FORMAT=<ID=PS,Number=1,Type=Integer,Description="Phasing set (typically the position of the first variant in the set)">
     ##FORMAT=<ID=RGQ,Number=1,Type=Integer,Description="Unconditional reference genotype confidence, encoded as a phred quality -10*log10 p(genotype call is wrong)">
     ##FORMAT=<ID=SB,Number=4,Type=Integer,Description="Per-sample component statistics which comprise the Fisher's Exact Test to detect strand bias.">
-    ##GATKCommandLine=<ID=GenomicsDBImport,CommandLine="GenomicsDBImport --genomicsdb-workspace-path family_trio_gdb --variant reads_mother.g.vcf --variant reads_father.g.vcf --variant reads_son.g.vcf --intervals /data/ref/intervals.bed [abreviado]",Version="4.5.0.0",Date="February 11, 2026 at 5:37:07 PM GMT">
-    ##GATKCommandLine=<ID=GenotypeGVCFs,CommandLine="GenotypeGVCFs --output family_trio.vcf --variant gendb://family_trio_gdb --reference /data/ref/ref.fasta --include-non-variant-sites false [abreviado]",Version="4.5.0.0",Date="February 11, 2026 at 5:38:45 PM GMT">
-    ##GATKCommandLine=<ID=HaplotypeCaller,CommandLine="HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abreviado]",Version="4.5.0.0",Date="February 11, 2026 at 4:51:00 PM GMT">
+    ##GATKCommandLine=<ID=GenomicsDBImport,CommandLine="GenomicsDBImport --genomicsdb-workspace-path family_trio_gdb --variant reads_mother.g.vcf --variant reads_father.g.vcf --variant reads_son.g.vcf --intervals /data/ref/intervals.bed [abridged]",Version="4.5.0.0",Date="February 11, 2026 at 5:37:07 PM GMT">
+    ##GATKCommandLine=<ID=GenotypeGVCFs,CommandLine="GenotypeGVCFs --output family_trio.vcf --variant gendb://family_trio_gdb --reference /data/ref/ref.fasta --include-non-variant-sites false [abridged]",Version="4.5.0.0",Date="February 11, 2026 at 5:38:45 PM GMT">
+    ##GATKCommandLine=<ID=HaplotypeCaller,CommandLine="HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abridged]",Version="4.5.0.0",Date="February 11, 2026 at 4:51:00 PM GMT">
     ##INFO=<ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes, for each ALT allele, in the same order as listed">
     ##INFO=<ID=AF,Number=A,Type=Float,Description="Allele Frequency, for each ALT allele, in the same order as listed">
     ##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">

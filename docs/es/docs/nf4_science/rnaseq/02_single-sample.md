@@ -194,7 +194,7 @@ En `rnaseq.nf`, bajo la sección `Pipeline parameters`, declare un parámetro ll
      * Pipeline parameters
      */
     params {
-        // Primary input
+        // Entrada principal
         input: Path
     }
     ```
@@ -206,7 +206,7 @@ En `rnaseq.nf`, bajo la sección `Pipeline parameters`, declare un parámetro ll
      * Pipeline parameters
      */
 
-    // Primary input
+    // Entrada principal
     ```
 
 Eso configura el parámetro CLI, pero no queremos escribir la ruta del archivo cada vez que ejecutamos el flujo de trabajo durante el desarrollo.
@@ -252,13 +252,13 @@ En el bloque workflow, cree un canal de entrada a partir del valor del parámetr
     workflow {
 
         main:
-        // Create input channel from a file path
+        // Crear canal de entrada desde una ruta de archivo
         read_ch = channel.fromPath(params.input)
 
-        // Call processes
+        // Llamar procesos
 
         publish:
-        // Declare outputs to publish
+        // Declarar salidas a publicar
     }
     ```
 
@@ -268,12 +268,12 @@ En el bloque workflow, cree un canal de entrada a partir del valor del parámetr
     workflow {
 
         main:
-        // Create input channel
+        // Crear canal de entrada
 
-        // Call processes
+        // Llamar procesos
 
         publish:
-        // Declare outputs to publish
+        // Declarar salidas a publicar
     }
     ```
 
@@ -296,7 +296,7 @@ Adelante, complete la definición del proceso por su cuenta usando la informaci�
     #!/usr/bin/env nextflow
 
     /*
-     * Run FastQC on input reads
+     * Ejecutar FastQC en las lecturas de entrada
      */
     process FASTQC {
 
@@ -319,7 +319,7 @@ Adelante, complete la definición del proceso por su cuenta usando la informaci�
     #!/usr/bin/env nextflow
 
     /*
-     * Run FastQC on input reads
+     * Ejecutar FastQC en las lecturas de entrada
      */
     process FASTQC {
 
@@ -352,14 +352,14 @@ En `rnaseq.nf`, agregue una declaración `include` para hacer que el proceso est
 === "Después"
 
     ```groovy title="rnaseq.nf" linenums="3" hl_lines="2"
-    // Module INCLUDE statements
+    // Declaraciones INCLUDE de módulos
     include { FASTQC } from './modules/fastqc.nf'
     ```
 
 === "Antes"
 
     ```groovy title="rnaseq.nf" linenums="3"
-    // Module INCLUDE statements
+    // Declaraciones INCLUDE de módulos
     ```
 
 El proceso ahora está disponible en el ámbito del flujo de trabajo.
@@ -374,14 +374,14 @@ Agregue una llamada a `FASTQC` en el bloque workflow, pasando el canal de entrad
     workflow {
 
         main:
-        // Create input channel from a file path
+        // Crear canal de entrada desde una ruta de archivo
         read_ch = channel.fromPath(params.input)
 
-        // Initial quality control
+        // Control de calidad inicial
         FASTQC(read_ch)
 
         publish:
-        // Declare outputs to publish
+        // Declarar salidas a publicar
     }
     ```
 
@@ -391,13 +391,13 @@ Agregue una llamada a `FASTQC` en el bloque workflow, pasando el canal de entrad
     workflow {
 
         main:
-        // Create input channel from a file path
+        // Crear canal de entrada desde una ruta de archivo
         read_ch = channel.fromPath(params.input)
 
-        // Call processes
+        // Llamar procesos
 
         publish:
-        // Declare outputs to publish
+        // Declarar salidas a publicar
     }
     ```
 
@@ -426,7 +426,7 @@ Asigne las salidas de `FASTQC` a destinos nombrados.
 
     ```groovy title="rnaseq.nf" linenums="23"
         publish:
-        // Declare outputs to publish
+        // Declarar salidas a publicar
     }
     ```
 
@@ -454,7 +454,7 @@ Configure ambos destinos para publicar en un subdirectorio `fastqc/`.
 
     ```groovy title="rnaseq.nf" linenums="28"
     output {
-        // Configure publish targets
+        // Configurar destinos de publicación
     }
     ```
 
@@ -477,7 +477,7 @@ nextflow run rnaseq.nf -profile test
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `rnaseq.nf` [mad_lorenz] DSL2 - revision: 5846a164d2
 
@@ -494,7 +494,7 @@ Puede verificar las salidas en el directorio de resultados.
 ls results/fastqc
 ```
 
-```console title="Salida"
+```console title="Output"
 ENCSR000COQ1_1_fastqc.html  ENCSR000COQ1_1_fastqc.zip
 ```
 
@@ -524,9 +524,9 @@ El comando recorta adaptadores de un archivo FASTQ y ejecuta FastQC en la salida
 Produce lecturas recortadas, un informe de recorte e informes FastQC para las lecturas recortadas.
 El URI del contenedor era `community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18`.
 
-Solo necesitamos escribir la definición del proceso, importarlo, llamarlo en el flujo de trabajo y actualizar el manejo de salida.
+Solo necesitamos escribir la definición del proceso, importarlo, llamarlo en el workflow y actualizar el manejo de salida.
 
-### 2.1. Escribir el proceso de recorte y llamarlo en el flujo de trabajo
+### 2.1. Escribir el proceso de recorte y llamarlo en el workflow
 
 Como antes, necesitamos completar la definición del proceso, importar el módulo y agregar la llamada al proceso.
 
@@ -596,7 +596,7 @@ Actualice `rnaseq.nf` para importar el nuevo módulo:
 === "Después"
 
     ```groovy title="rnaseq.nf" linenums="3" hl_lines="3"
-    // Module INCLUDE statements
+    // Declaraciones INCLUDE de módulos
     include { FASTQC } from './modules/fastqc.nf'
     include { TRIM_GALORE } from './modules/trim_galore.nf'
     ```
@@ -604,11 +604,11 @@ Actualice `rnaseq.nf` para importar el nuevo módulo:
 === "Antes"
 
     ```groovy title="rnaseq.nf" linenums="3"
-    // Module INCLUDE statements
+    // Declaraciones INCLUDE de módulos
     include { FASTQC } from './modules/fastqc.nf'
     ```
 
-A continuación, agregaremos la llamada al proceso al flujo de trabajo.
+A continuación, agregaremos la llamada al proceso al workflow.
 
 #### 2.1.3. Llamar al proceso de recorte en la entrada
 
@@ -620,13 +620,13 @@ Agregue la llamada al proceso en el bloque workflow:
     workflow {
 
         main:
-        // Create input channel from a file path
+        // Crear canal de entrada desde una ruta de archivo
         read_ch = channel.fromPath(params.input)
 
-        // Initial quality control
+        // Control de calidad inicial
         FASTQC(read_ch)
 
-        // Adapter trimming and post-trimming QC
+        // Recorte de adaptadores y control de calidad posterior al recorte
         TRIM_GALORE(read_ch)
 
         publish:
@@ -641,10 +641,10 @@ Agregue la llamada al proceso en el bloque workflow:
     workflow {
 
         main:
-        // Create input channel from a file path
+        // Crear canal de entrada desde una ruta de archivo
         read_ch = channel.fromPath(params.input)
 
-        // Initial quality control
+        // Control de calidad inicial
         FASTQC(read_ch)
 
         publish:
@@ -653,7 +653,7 @@ Agregue la llamada al proceso en el bloque workflow:
     }
     ```
 
-El proceso de recorte ahora está conectado al flujo de trabajo.
+El proceso de recorte ahora está conectado al workflow.
 
 ### 2.2. Actualizar el manejo de salida
 
@@ -727,9 +727,9 @@ Agregue entradas para los destinos de recorte en el bloque `output {}`, publicá
 
 La configuración de salida está completa.
 
-### 2.3. Ejecutar el flujo de trabajo
+### 2.3. Ejecutar el workflow
 
-El flujo de trabajo ahora incluye tanto el control de calidad inicial como el recorte de adaptadores.
+El workflow ahora incluye tanto el control de calidad inicial como el recorte de adaptadores.
 
 ```bash
 nextflow run rnaseq.nf -profile test
@@ -738,7 +738,7 @@ nextflow run rnaseq.nf -profile test
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `rnaseq.nf` [gloomy_becquerel] DSL2 - revision: bb11055736
 
@@ -755,7 +755,7 @@ Puede encontrar las salidas de recorte en el directorio de resultados.
 ls results/trimming
 ```
 
-```console title="Salida"
+```console title="Output"
 ENCSR000COQ1_1.fastq.gz_trimming_report.txt  ENCSR000COQ1_1_trimmed_fastqc.zip
 ENCSR000COQ1_1_trimmed_fastqc.html           ENCSR000COQ1_1_trimmed.fq.gz
 ```
@@ -1085,7 +1085,7 @@ nextflow run rnaseq.nf -profile test
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `rnaseq.nf` [elated_stonebraker] DSL2 - revision: e8e57d0cdd
 
@@ -1101,7 +1101,7 @@ Puede encontrar las salidas de alineamiento en el directorio de resultados.
 ls results/align
 ```
 
-```console title="Salida"
+```console title="Output"
 ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log
 ```
 

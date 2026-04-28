@@ -474,7 +474,7 @@ Ajoutez des entrées pour les cibles MultiQC dans le bloc `output {}`, en les pu
 
 === "Après"
 
-    ```groovy title="rnaseq.nf" linenums="82" hl_lines="7-12"
+    ```groovy title="rnaseq.nf" linenums="82" hl_lines="4-9"
         align_log {
             path 'align'
         }
@@ -528,36 +528,38 @@ Vous pouvez trouver les sorties MultiQC dans le répertoire des résultats.
 tree -L 2 results/multiqc
 ```
 
-```console title="Sortie"
-results/multiqc
-├── all_single-end_data
-│   ├── cutadapt_filtered_reads_plot.txt
-│   ├── cutadapt_trimmed_sequences_plot_3_Counts.txt
-│   ├── cutadapt_trimmed_sequences_plot_3_Obs_Exp.txt
-│   ├── fastqc_adapter_content_plot.txt
-│   ├── fastqc_overrepresented_sequences_plot.txt
-│   ├── fastqc_per_base_n_content_plot.txt
-│   ├── fastqc_per_base_sequence_quality_plot.txt
-│   ├── fastqc_per_sequence_gc_content_plot_Counts.txt
-│   ├── fastqc_per_sequence_gc_content_plot_Percentages.txt
-│   ├── fastqc_per_sequence_quality_scores_plot.txt
-│   ├── fastqc_sequence_counts_plot.txt
-│   ├── fastqc_sequence_duplication_levels_plot.txt
-│   ├── fastqc_sequence_length_distribution_plot.txt
-│   ├── fastqc-status-check-heatmap.txt
-│   ├── fastqc_top_overrepresented_sequences_table.txt
-│   ├── hisat2_se_plot.txt
-│   ├── multiqc_citations.txt
-│   ├── multiqc_cutadapt.txt
-│   ├── multiqc_data.json
-│   ├── multiqc_fastqc.txt
-│   ├── multiqc_general_stats.txt
-│   ├── multiqc_hisat2.txt
-│   ├── multiqc.log
-│   ├── multiqc_software_versions.txt
-│   └── multiqc_sources.txt
-└── all_single-end.html
-```
+??? abstract "Contenu du répertoire"
+
+    ```console
+    results/multiqc
+    ├── all_single-end_data
+    │   ├── cutadapt_filtered_reads_plot.txt
+    │   ├── cutadapt_trimmed_sequences_plot_3_Counts.txt
+    │   ├── cutadapt_trimmed_sequences_plot_3_Obs_Exp.txt
+    │   ├── fastqc_adapter_content_plot.txt
+    │   ├── fastqc_overrepresented_sequences_plot.txt
+    │   ├── fastqc_per_base_n_content_plot.txt
+    │   ├── fastqc_per_base_sequence_quality_plot.txt
+    │   ├── fastqc_per_sequence_gc_content_plot_Counts.txt
+    │   ├── fastqc_per_sequence_gc_content_plot_Percentages.txt
+    │   ├── fastqc_per_sequence_quality_scores_plot.txt
+    │   ├── fastqc_sequence_counts_plot.txt
+    │   ├── fastqc_sequence_duplication_levels_plot.txt
+    │   ├── fastqc_sequence_length_distribution_plot.txt
+    │   ├── fastqc-status-check-heatmap.txt
+    │   ├── fastqc_top_overrepresented_sequences_table.txt
+    │   ├── hisat2_se_plot.txt
+    │   ├── multiqc_citations.txt
+    │   ├── multiqc_cutadapt.txt
+    │   ├── multiqc_data.json
+    │   ├── multiqc_fastqc.txt
+    │   ├── multiqc_general_stats.txt
+    │   ├── multiqc_hisat2.txt
+    │   ├── multiqc.log
+    │   ├── multiqc_software_versions.txt
+    │   └── multiqc_sources.txt
+    └── all_single-end.html
+    ```
 
 Ce dernier fichier `all_single-end.html` est le rapport agrégé complet, commodément emballé dans un seul fichier HTML facile à consulter.
 

@@ -91,7 +91,7 @@ nextflow run 1-hello.nf --input 'Hello World!'
 ??? success "Befehlsausgabe"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
 
@@ -168,7 +168,7 @@ nextflow run 1-hello.nf --input 'Hello World!' -output-dir hello_results
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78
 
@@ -568,7 +568,7 @@ Um mehr zu erfahren, siehe [Publishing outputs](https://nextflow.io/docs/latest/
 
     Anstatt einen `publish:`-Block im Workflow und einen `output`-Block auf oberster Ebene zu haben, würdest du eine `publishDir`-Zeile in der `sayHello`-Prozessdefinition sehen:
 
-    ```groovy title="Syntax-Beispiel" linenums="1" hl_lines="3"
+    ```groovy title="Syntax example" linenums="1" hl_lines="3"
     process sayHello {
 
         publishDir 'results/1-hello', mode: 'copy'
@@ -623,7 +623,7 @@ nextflow run 1-hello.nf --input 'Hello World!' -resume
 ??? success "Befehlsausgabe"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479
 
@@ -767,7 +767,7 @@ Was repräsentiert `[a3/7be2fa]` in der Konsolenausgabezeile `[a3/7be2fa] SAYHEL
 - [x] Der abgekürzte Pfad zum Work-Verzeichnis der Aufgabe
 - [ ] Die Prüfsumme der Ausgabedatei
 
-Mehr erfahren: [2.4. Die ursprüngliche Ausgabe und Protokolle im `work/`-Verzeichnis finden](#24-die-ursprungliche-ausgabe-und-protokolle-im-work-verzeichnis-finden)
+Mehr erfahren: [2.4. Die ursprüngliche Ausgabe und Protokolle im `work/`-Verzeichnis finden](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -777,7 +777,7 @@ Was ist der Zweck der `.command.sh`-Datei in einem Aufgabenverzeichnis?
 - [ ] Sie enthält Fehlermeldungen von fehlgeschlagenen Aufgaben
 - [ ] Sie listet Eingabedateien auf, die für die Aufgabe bereitgestellt wurden
 
-Mehr erfahren: [2.4. Die ursprüngliche Ausgabe und Protokolle im `work/`-Verzeichnis finden](#24-die-ursprungliche-ausgabe-und-protokolle-im-work-verzeichnis-finden)
+Mehr erfahren: [2.4. Die ursprüngliche Ausgabe und Protokolle im `work/`-Verzeichnis finden](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -787,7 +787,7 @@ Was passiert mit veröffentlichten Ergebnissen, wenn du einen Workflow ohne `-re
 - [ ] Nextflow verhindert das Überschreiben und schlägt fehl
 - [ ] Sie werden automatisch gesichert
 
-Mehr erfahren: [2.5. Den Workflow mit verschiedenen Grüßen erneut ausführen](#25-den-workflow-mit-verschiedenen-grussen-erneut-ausfuhren)
+Mehr erfahren: [2.5. Den Workflow mit verschiedenen Grüßen erneut ausführen](#24-re-run-the-workflow-with-different-greetings)
 </quiz>
 
 <quiz>
@@ -802,7 +802,7 @@ Was zeigt diese Konsolenausgabe an?
 - [x] Nextflow hat Ergebnisse von einer vorherigen identischen Ausführung wiederverwendet
 - [ ] Die Aufgabe wurde manuell abgebrochen
 
-Mehr erfahren: [4.1. Einen Workflow mit `-resume` neu starten](#41-einen-workflow-mit--resume-neu-starten)
+Mehr erfahren: [4.1. Einen Workflow mit `-resume` neu starten](#41-re-launch-a-workflow-with--resume)
 </quiz>
 
 <quiz>
@@ -812,7 +812,7 @@ Wo speichert Nextflow den Ausführungsverlauf, den der Befehl `nextflow log` anz
 - [x] In der `.nextflow/history`-Datei
 - [ ] In `nextflow.config`
 
-Mehr erfahren: [4.2. Das Protokoll vergangener Ausführungen überprüfen](#42-das-protokoll-vergangener-ausfuhrungen-uberprufen)
+Mehr erfahren: [4.2. Das Protokoll vergangener Ausführungen überprüfen](#42-inspect-the-log-of-past-executions)
 </quiz>
 
 <quiz>
@@ -822,7 +822,7 @@ Was ist der Zweck des `params`-Blocks in einer Workflow-Datei?
 - [x] Um Workflow-Eingabeparameter zu deklarieren und zu typisieren
 - [ ] Um Ausgabe-Veröffentlichungsoptionen anzugeben
 
-Mehr erfahren: [3.4. Das params-System der Befehlszeilenparameter](#34-das-params-system-der-befehlszeilenparameter)
+Mehr erfahren: [3.4. Das params-System der Befehlszeilenparameter](#34-the-params-system-of-command-line-parameters)
 </quiz>
 
 <quiz>
@@ -832,7 +832,7 @@ Was macht `mode 'copy'` im `output`-Block des Workflows?
 - [ ] Kopiert das Workflow-Script zu results
 - [ ] Aktiviert inkrementelles Datei-Kopieren
 
-Mehr erfahren: [3.5. Die publish-Direktive](#35-die-publish-direktive)
+Mehr erfahren: [3.5. Die publish-Direktive](#35-the-publish-directive)
 </quiz>
 
 <quiz>
@@ -842,5 +842,5 @@ Was ist das empfohlene Flag für den `nextflow clean`-Befehl, bevor tatsächlich
 - [ ] `-a` (all), um alle Verzeichnisse auszuwählen
 - [ ] `-q` (quiet), um Warnungen zu unterdrücken
 
-Mehr erfahren: [4.3. Ältere Work-Verzeichnisse löschen](#43-altere-work-verzeichnisse-loschen)
+Mehr erfahren: [4.3. Ältere Work-Verzeichnisse löschen](#43-delete-older-work-directories)
 </quiz>

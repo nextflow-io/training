@@ -15,9 +15,9 @@ Dieser Abschnitt enthält kuratierte Sammlungen von Trainingsmodulen, die [Side 
 Jede Sammlung hat spezifische Voraussetzungen, die auf ihrer Indexseite dokumentiert sind. Die meisten Sammlungen setzen jedoch Folgendes voraus:
 
 - Erfahrung mit der Kommandozeile
-- Grundlegende Nextflow-Konzepte und -Werkzeuge, die im [Hello Nextflow](../../hello_nextflow/) Einsteiger-Trainingskurs behandelt werden
+- Grundlegende Nextflow-Konzepte und -Werkzeuge, die im [Hello Nextflow](../hello_nextflow/index.md) Einsteiger-Trainingskurs behandelt werden
 
-Für technische Anforderungen und die Einrichtung der Umgebung siehe den [Environment Setup](../../envsetup/) Mini-Kurs.
+Für technische Anforderungen und die Einrichtung der Umgebung siehe den [Environment Setup](../envsetup/index.md) Mini-Kurs.
 
 ## Verfügbare Sammlungen
 

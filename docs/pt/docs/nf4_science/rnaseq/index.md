@@ -15,7 +15,7 @@ additional_information:
   audience_prerequisites:
     - "**Público:** Este curso é destinado a pesquisadores em transcriptômica e áreas relacionadas que desejam desenvolver ou personalizar pipelines de análise de dados."
     - "**Habilidades:** Assume-se alguma familiaridade com a linha de comando, conceitos básicos de script e formatos de arquivo comuns de RNAseq."
-    - "**Pré-requisitos:** Conceitos e ferramentas fundamentais do Nextflow abordados no [Hello Nextflow](../../hello_nextflow/)."
+    - "**Pré-requisitos:** Conceitos e ferramentas fundamentais do Nextflow abordados no [Hello Nextflow](../../hello_nextflow/index.md)."
 ---
 
 # Nextflow para RNAseq
@@ -24,7 +24,7 @@ additional_information:
 
 **Um curso prático aplicando Nextflow a um caso de uso real de transcriptômica: processamento de RNAseq bulk com Trim Galore, HISAT2 e FastQC.**
 
-Este curso se baseia no treinamento para iniciantes [Hello Nextflow](../../hello_nextflow/) e demonstra como usar Nextflow no contexto específico de análise de RNAseq bulk.
+Este curso se baseia no treinamento para iniciantes [Hello Nextflow](../../hello_nextflow/index.md) e demonstra como usar Nextflow no contexto específico de análise de RNAseq bulk.
 Você implementará um pipeline de processamento que remove sequências adaptadoras, alinha as reads a um genoma de referência e realiza controle de qualidade (QC) em várias etapas.
 
 <!-- additional_information -->

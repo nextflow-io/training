@@ -477,7 +477,7 @@ nextflow run rnaseq.nf -profile test
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `rnaseq.nf` [mad_lorenz] DSL2 - revision: 5846a164d2
 
@@ -494,7 +494,7 @@ Vous pouvez vérifier les sorties dans le répertoire results.
 ls results/fastqc
 ```
 
-```console title="Sortie"
+```console title="Output"
 ENCSR000COQ1_1_fastqc.html  ENCSR000COQ1_1_fastqc.zip
 ```
 
@@ -738,7 +738,7 @@ nextflow run rnaseq.nf -profile test
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `rnaseq.nf` [gloomy_becquerel] DSL2 - revision: bb11055736
 
@@ -755,7 +755,7 @@ Vous pouvez trouver les sorties de nettoyage dans le répertoire results.
 ls results/trimming
 ```
 
-```console title="Sortie"
+```console title="Output"
 ENCSR000COQ1_1.fastq.gz_trimming_report.txt  ENCSR000COQ1_1_trimmed_fastqc.zip
 ENCSR000COQ1_1_trimmed_fastqc.html           ENCSR000COQ1_1_trimmed.fq.gz
 ```
@@ -1085,7 +1085,7 @@ nextflow run rnaseq.nf -profile test
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `rnaseq.nf` [elated_stonebraker] DSL2 - revision: e8e57d0cdd
 
@@ -1101,7 +1101,7 @@ Vous pouvez trouver les sorties d'alignement dans le répertoire results.
 ls results/align
 ```
 
-```console title="Sortie"
+```console title="Output"
 ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log
 ```
 

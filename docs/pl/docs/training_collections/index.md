@@ -15,9 +15,9 @@ Ta sekcja zawiera wyselekcjonowane kolekcje modułów szkoleniowych zwanych [Sid
 Każda kolekcja ma określone wymagania wstępne udokumentowane na swojej stronie indeksu. Jednak większość kolekcji zakłada:
 
 - Doświadczenie z linią poleceń
-- Podstawowe koncepcje Nextflow i narzędzia omówione w kursie szkoleniowym dla początkujących [Hello Nextflow](../../hello_nextflow/)
+- Podstawowe koncepcje Nextflow i narzędzia omówione w kursie szkoleniowym dla początkujących [Hello Nextflow](../hello_nextflow/index.md)
 
-Wymagania techniczne i konfigurację środowiska można znaleźć w mini-kursie [Konfiguracja Środowiska](../../envsetup/).
+Wymagania techniczne i konfigurację środowiska można znaleźć w mini-kursie [Konfiguracja Środowiska](../envsetup/index.md).
 
 ## Dostępne kolekcje
 

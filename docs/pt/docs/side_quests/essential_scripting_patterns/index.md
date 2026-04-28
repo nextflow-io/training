@@ -1,4 +1,4 @@
-# Padrões Essenciais de Scripting em Nextflow
+# Padrões Essenciais de Scripting
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
@@ -26,7 +26,7 @@ Vamos transformar um fluxo de trabalho simples de leitura de CSV em um pipeline 
 
 Antes de embarcar nesta side quest, você deve:
 
-- Ter concluído o tutorial [Hello Nextflow](../hello_nextflow/README.md) ou um curso equivalente para iniciantes.
+- Ter concluído o tutorial [Hello Nextflow](../../hello_nextflow/index.md) ou um curso equivalente para iniciantes.
 - Estar confortável com os conceitos e mecanismos básicos do Nextflow (processos, canais, operadores, trabalho com arquivos, metadados)
 - Ter familiaridade básica com construções de programação comuns (variáveis, maps, listas)
 
@@ -39,7 +39,7 @@ Começaremos com conceitos fundamentais e avançaremos até padrões mais sofist
 
 #### Abra o codespace de treinamento
 
-Se ainda não o fez, certifique-se de abrir o ambiente de treinamento conforme descrito em [Configuração do Ambiente](../envsetup/index.md).
+Se ainda não o fez, certifique-se de abrir o ambiente de treinamento conforme descrito em [Configuração do Ambiente](../../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -167,7 +167,7 @@ Veja como essa operação map fica:
 
 Esta é nossa primeira **closure** — uma função anônima que você pode passar como argumento (similar a lambdas em Python ou arrow functions em JavaScript). Closures são essenciais para trabalhar com operadores Nextflow.
 
-A closure `{ row -> return row }` recebe um parâmetro `row` (poderia ter qualquer nome: `item`, `sample`, etc.).
+A closure `#!groovy { row -> return row }` recebe um parâmetro `row` (poderia ter qualquer nome: `item`, `sample`, etc.).
 
 Quando o operador `.map()` processa cada item do canal, ele passa esse item para a sua closure. Aqui, `row` contém uma linha do CSV por vez.
 
@@ -278,7 +278,7 @@ O operador ternário é uma forma abreviada de uma instrução if/else que segue
 
 O operador de adição de map `+` cria um **novo map** em vez de modificar o existente. Esta linha cria um novo map que contém todos os pares chave-valor de `sample_meta` mais a nova chave `priority`.
 
-!!! Note "Nota"
+!!! note "Nota"
 
     Nunca modifique maps passados para closures — sempre crie novos usando `+` (por exemplo). No Nextflow, os mesmos dados frequentemente fluem por múltiplas operações simultaneamente. Modificar um map no lugar pode causar efeitos colaterais imprevisíveis quando outras operações referenciam esse mesmo objeto. Criar novos maps garante que cada operação tenha sua própria cópia limpa.
 
@@ -356,7 +356,7 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [peaceful_cori] DSL2 - revision: 4cc4a8340f
 
@@ -444,7 +444,7 @@ Essa estrutura de tupla `[meta, arquivo]` é um padrão comum no Nextflow para p
 
 !!! note "Nota"
 
-    **Maps e Metadados**: Maps são fundamentais para trabalhar com metadados no Nextflow. Para uma explicação mais detalhada sobre como trabalhar com maps de metadados, consulte a side quest [Trabalhando com metadados](../metadata/).
+    **Maps e Metadados**: Maps são fundamentais para trabalhar com metadados no Nextflow. Para uma explicação mais detalhada sobre como trabalhar com maps de metadados, consulte a side quest [Trabalhando com metadados](../metadata/index.md).
 
 Nosso fluxo de trabalho demonstra o padrão central: **operações de dataflow** (`workflow`, `channel.fromPath()`, `.splitCsv()`, `.map()`, `.view()`) orquestram como os dados se movem pelo pipeline, enquanto o **scripting** (maps `[chave: valor]`, métodos de string, conversões de tipo, operadores ternários) dentro da closure `.map()` lida com a transformação de itens de dados individuais.
 
@@ -485,7 +485,7 @@ nextflow run collect.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `collect.nf` [loving_mendel] DSL2 - revision: e8d054a46e
 
@@ -543,7 +543,7 @@ nextflow run collect.nf
 ??? success "Saída do comando"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `collect.nf` [cheeky_stonebraker] DSL2 - revision: 2d5039fb47
 
@@ -614,7 +614,7 @@ nextflow run collect.nf
 ??? success "Saída do comando"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `collect.nf` [cranky_galileo] DSL2 - revision: 5f3c8b2a91
 
@@ -643,7 +643,7 @@ O operador spread é particularmente útil quando você precisa extrair uma úni
 !!! tip "Dica: Quando Usar Spread vs Collect"
 
     - **Use spread (`*.`)** para acesso simples a propriedades: `samples*.id`, `files*.name`
-    - **Use collect** para transformações ou lógica complexa: `samples.collect { it.id.toUpperCase() }`, `samples.collect { [it.id, it.quality > 40] }`
+    - **Use collect** para transformações ou lógica complexa: `#!groovy samples.collect { it.id.toUpperCase() }`, `#!groovy samples.collect { [it.id, it.quality > 40] }`
 
 ### Conclusão
 
@@ -743,7 +743,7 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [clever_pauling] DSL2 - revision: 605d2058b4
 
@@ -898,7 +898,7 @@ Corrija isso adicionando lógica condicional ao bloco `script:` do processo `FAS
 
 === "Depois"
 
-    ```groovy title="main.nf" linenums="10" hl_lines="3-27"
+    ```groovy title="main.nf" linenums="10" hl_lines="2-26"
         script:
         // Detecção simples de single-end vs paired-end
         def is_single = reads instanceof List ? reads.size() == 1 : true
@@ -953,7 +953,7 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [adoring_rosalind] DSL2 - revision: 04b1cd93e9
 
@@ -979,7 +979,7 @@ fastp \
     --thread 2
 ```
 
-Outro uso comum de lógica de script dinâmica pode ser visto no [módulo de Genômica do Nextflow for Science](../../nf4science/genomics/02_joint_calling). Nesse módulo, o processo GATK sendo chamado pode receber múltiplos arquivos de entrada, mas cada um deve ser prefixado com `-V` para formar uma linha de comando correta. O processo usa scripting para transformar uma coleção de arquivos de entrada (`all_gvcfs`) nos argumentos de comando corretos:
+Outro uso comum de lógica de script dinâmica pode ser visto no [módulo de Genômica do Nextflow for Science](../../nf4_science/genomics/03_joint_calling.md). Nesse módulo, o processo GATK sendo chamado pode receber múltiplos arquivos de entrada, mas cada um deve ser prefixado com `-V` para formar uma linha de comando correta. O processo usa scripting para transformar uma coleção de arquivos de entrada (`all_gvcfs`) nos argumentos de comando corretos:
 
 ```groovy title="command line manipulation for GATK" linenums="1" hl_lines="2 5"
     script:
@@ -1002,8 +1002,6 @@ Dê uma olhada no arquivo de módulo `modules/generate_report.nf`:
 
 ```groovy title="modules/generate_report.nf" linenums="1"
 process GENERATE_REPORT {
-
-    publishDir 'results/reports', mode: 'copy'
 
     input:
     tuple val(meta), path(reads)
@@ -1061,7 +1059,7 @@ Inclua o processo no seu `main.nf` e adicione-o ao fluxo de trabalho:
 
 === "Antes"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="1 10-29"
+    ```groovy title="main.nf" linenums="1" hl_lines="1 28"
     include { FASTP } from './modules/fastp.nf'
 
     workflow {
@@ -1128,7 +1126,7 @@ Mas e se quisermos adicionar informações sobre quando e onde o processamento o
         """
     ```
 
-Se você executar isso, notará um erro — o Nextflow tenta interpretar `${USER}` como uma variável Nextflow que não existe.
+Se você executar isso, notará um erro — o Nextflow tenta interpretar `#!groovy ${USER}` como uma variável Nextflow que não existe.
 
 ??? failure "Saída do comando"
 
@@ -1179,9 +1177,9 @@ Nesta seção, você aprendeu técnicas de **processamento de strings**:
 - **Expressões regulares para análise de arquivos**: Usando o operador `=~` e padrões regex (`~/padrão/`) para extrair metadados de convenções complexas de nomenclatura de arquivos
 - **Geração dinâmica de scripts**: Usando lógica condicional (if/else, operadores ternários) para gerar diferentes strings de script com base nas características da entrada
 - **Interpolação de variáveis**: Entendendo quando o Nextflow interpreta strings versus quando o shell o faz
-  - `${var}` - Variáveis Nextflow (interpoladas pelo Nextflow no momento da compilação do fluxo de trabalho)
-  - `\${var}` - Variáveis de ambiente shell (escapadas, passadas para o bash em tempo de execução)
-  - `\$(cmd)` - Substituição de comandos shell (escapada, executada pelo bash em tempo de execução)
+  - `#!groovy ${var}` - Variáveis Nextflow (interpoladas pelo Nextflow no momento da compilação do fluxo de trabalho)
+  - `#!groovy \${var}` - Variáveis de ambiente shell (escapadas, passadas para o bash em tempo de execução)
+  - `#!groovy \$(cmd)` - Substituição de comandos shell (escapada, executada pelo bash em tempo de execução)
 
 Esses padrões de processamento e geração de strings são essenciais para lidar com os diversos formatos de arquivo e convenções de nomenclatura que você encontrará em fluxos de trabalho reais de bioinformática.
 
@@ -1291,7 +1289,7 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [admiring_panini] DSL2 - revision: 8cc832e32f
 
@@ -1346,7 +1344,7 @@ Atualmente, nosso processo FASTP usa recursos padrão. Vamos torná-lo mais inte
         tuple val(meta), path(reads)
     ```
 
-A closure `{ meta.depth > 40000000 ? 2 : 1 }` usa o **operador ternário** (abordado na Seção 1.1) e é avaliada para cada tarefa, permitindo alocação de recursos por amostra. Amostras de alta profundidade (>40M leituras) recebem 2 CPUs, enquanto as demais recebem 1 CPU.
+A closure `#!groovy { meta.depth > 40000000 ? 2 : 1 }` usa o **operador ternário** (abordado na Seção 1.1) e é avaliada para cada tarefa, permitindo alocação de recursos por amostra. Amostras de alta profundidade (>40M leituras) recebem 2 CPUs, enquanto as demais recebem 1 CPU.
 
 !!! note "Nota: Acessando Variáveis de Entrada em Diretivas"
 
@@ -1361,7 +1359,7 @@ nextflow run main.nf -ansi-log false
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W  ~  version 25.10.2
+    N E X T F L O W  ~  version 25.10.4
     Launching `main.nf` [fervent_albattani] DSL2 - revision: fa8f249759
     [bd/ff3d41] Submitted process > FASTP (2)
     [a4/a3aab2] Submitted process > FASTP (1)
@@ -1380,7 +1378,7 @@ cat work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.run | grep "docker run"
 Você deve ver algo como:
 
 ```bash title="docker command"
-    docker run -i --cpu-shares 4096 --memory 2048m -e "NXF_TASK_WORKDIR" -v /workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690 /bin/bash -ue /workspaces/training/side-quests/essential_scripting_patterns/work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.sh
+    docker run -i --cpu-shares 2048 --memory 2048m -e "NXF_TASK_WORKDIR" -v /workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690 /bin/bash -ue /workspaces/training/side-quests/essential_scripting_patterns/work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.sh
 ```
 
 Neste exemplo, escolhemos um exemplo que solicitou 2 CPUs (`--cpu-shares 2048`), porque era uma amostra de alta profundidade, mas você deve ver diferentes alocações de CPU dependendo da profundidade da amostra. Tente isso para as outras tarefas também.
@@ -1395,7 +1393,7 @@ Outro padrão poderoso é usar `task.attempt` para estratégias de retry. Para m
     process FASTP {
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-        cpus { meta.depth > 40000000 ? 4 : 2 }
+        cpus { meta.depth > 40000000 ? 2 : 1 }
         memory 1.GB
 
         input:
@@ -1408,7 +1406,7 @@ Outro padrão poderoso é usar `task.attempt` para estratégias de retry. Para m
     process FASTP {
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-        cpus { meta.depth > 40000000 ? 4 : 2 }
+        cpus { meta.depth > 40000000 ? 2 : 1 }
         memory 2.GB
 
         input:
@@ -1434,7 +1432,7 @@ nextflow run main.nf
       Detecting adapter sequence for read1...
       No adapter detected for read1
 
-      .command.sh: line 7:   101 Killed                  fastp --in1 SAMPLE_002_S2_L001_R1_001.fastq --out1 sample_002_trimmed.fastq.gz --json sample_002.fastp.json --html sample_002.fastp.html --thread 2
+      .command.sh: line 7:   101 Killed                  fastp --in1 SAMPLE_002_S2_L001_R1_001.fastq --out1 sample_002_trimmed.fastq.gz --json sample_002.fastp.json --html sample_002.fastp.html --thread 1
     ```
 
 Isso indica que o processo foi encerrado por exceder os limites de memória.
@@ -1449,7 +1447,7 @@ Para tornar nosso fluxo de trabalho mais robusto, podemos implementar uma estrat
     process FASTP {
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-        cpus { meta.depth > 40000000 ? 4 : 2 }
+        cpus { meta.depth > 40000000 ? 2 : 1 }
         memory { 1.GB * task.attempt }
         errorStrategy 'retry'
         maxRetries 2
@@ -1464,7 +1462,7 @@ Para tornar nosso fluxo de trabalho mais robusto, podemos implementar uma estrat
     process FASTP {
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-        cpus { meta.depth > 40000000 ? 4 : 2 }
+        cpus { meta.depth > 40000000 ? 2 : 1 }
         memory 2.GB
 
         input:
@@ -1558,7 +1556,7 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [adoring_galileo] DSL2 - revision: c9e83aaef1
 
@@ -1626,7 +1624,7 @@ nextflow run main.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W  ~  version 25.10.2
+    N E X T F L O W  ~  version 25.10.4
     Launching `main.nf` [lonely_williams] DSL2 - revision: d0b3f121ec
     [94/b48eac] Submitted process > FASTP (2)
     [2c/d2b28f] Submitted process > GENERATE_REPORT (2)
@@ -1710,7 +1708,7 @@ nextflow run main.nf
 ??? failure "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [trusting_torvalds] DSL2 - revision: b56fbfbce2
 
@@ -1872,7 +1870,7 @@ Crie uma função de validação antes do seu bloco de fluxo de trabalho, chame-
 
 === "Depois"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="5-20 23-24"
+    ```groovy title="main.nf" linenums="1" hl_lines="5-15 18-19"
     include { FASTP } from './modules/fastp.nf'
     include { TRIMGALORE } from './modules/trimgalore.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
@@ -1915,7 +1913,7 @@ nextflow run main.nf
 ??? failure "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [confident_coulomb] DSL2 - revision: 07059399ed
 
@@ -1934,7 +1932,7 @@ nextflow run main.nf --input ./data/nonexistent.csv
 ??? failure "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [cranky_gates] DSL2 - revision: 26839ae3eb
 
@@ -1989,7 +1987,7 @@ nextflow run main.nf --input ./data/samples.csv
 ??? warning "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [awesome_goldwasser] DSL2 - revision: a31662a7c1
 
@@ -2066,7 +2064,7 @@ nextflow run main.nf --input ./data/samples.csv -ansi-log false
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W  ~  version 25.10.2
+    N E X T F L O W  ~  version 25.10.4
     Launching `main.nf` [marvelous_boltzmann] DSL2 - revision: a31662a7c1
     WARN: Low sequencing depth for sample_002: 25000000
     [9b/d48e40] Submitted process > FASTP (2)
@@ -2142,7 +2140,7 @@ Agora obtemos um resumo ainda mais informativo, incluindo uma mensagem de sucess
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W  ~  version 25.10.2
+    N E X T F L O W  ~  version 25.10.4
     Launching `main.nf` [boring_linnaeus] DSL2 - revision: a31662a7c1
     WARN: Low sequencing depth for sample_002: 25000000
     [e5/242efc] Submitted process > FASTP (2)
@@ -2460,4 +2458,4 @@ Você se beneficiará praticando e expandindo suas habilidades para:
 
 ## O que vem a seguir?
 
-Retorne ao [menu de Side Quests](../) ou clique no botão no canto inferior direito da página para avançar para o próximo tópico da lista.
+Retorne ao [menu de Side Quests](../index.md) ou clique no botão no canto inferior direito da página para avançar para o próximo tópico da lista.

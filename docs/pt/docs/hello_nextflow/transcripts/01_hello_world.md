@@ -240,25 +240,25 @@ Lógica bastante complexa com muito pouca sintaxe aqui. E você pode espero que 
 
 Ok, isso é ótimo. O problema agora é que toda vez que eu executar este pipeline, preciso fazer dash, input para ele rodar.
 
-Se eu tentar executar sem este parâmetro, agora o Nextflow vai lançar um erro dizendo que precisava deste parâmetro e ele não foi definido. e então não sabia o que fazer.
+Se eu tentar executar sem este parâmetro, o Nextflow vai lançar um erro dizendo que precisava deste parâmetro e ele não foi definido. E então não sabia o que fazer.
 
-Isso é uma coisa legal nova, a propósito. No passado, o Nextflow teria apenas rodado com uma string vazia, e você teria tido todos os tipos de erros estranhos, que teriam sido difíceis de entender. Mas no novo analisador de sintaxe do Nextflow, ele é um pouco mais cuidadoso e te diz imediatamente.
+Isso é uma coisa nova e legal, a propósito. No passado, o Nextflow teria apenas rodado com uma string vazia, e você teria tido todos os tipos de erros estranhos, que teriam sido difíceis de entender. Mas no novo analisador de sintaxe do Nextflow, ele é um pouco mais cuidadoso e te diz imediatamente.
 
-Então nem sempre queremos especificar cada opção única. É uma boa prática especificar padrões sensatos. Então como fazemos isso no nosso script?
+Então nem sempre queremos especificar cada opção. É uma boa prática especificar padrões sensatos. Então como fazemos isso no nosso script?
 
-Você notará que quando escrevemos isso, apenas colocamos _params.input_ direto onde estamos usando. Então a solução óbvia é definir um padrão, e fazemos isso no topo do script aqui em um bloco params especial no fluxo de trabalho. Isso está no script de fluxo de trabalho aqui.
+Você vai notar que quando escrevemos isso, apenas colocamos _params.input_ direto onde estamos usando. Então a solução óbvia é definir um padrão, e fazemos isso no topo do script aqui em um bloco params especial no fluxo de trabalho. Isso está no script de fluxo de trabalho aqui.
 
 Novamente, alguma sintaxe nova aqui, então preste atenção. Isso é realmente legal. Temos o nome do parâmetro, que será esperado aqui.
 
-E então depois deste caractere de dois pontos, estamos definindo um tipo da variável. Você não tem que fazer isso, você pode apenas deixar em branco, mas é realmente bom. Diz ao Nextflow que estamos esperando uma string e trate como tal.
+E então depois deste caractere de dois pontos, estamos definindo um tipo da variável. Você não precisa fazer isso, pode simplesmente deixar em branco, mas é realmente bom. Diz ao Nextflow que estamos esperando uma string e que a trate como tal.
 
 Se quisermos um número em vez disso, por exemplo, poderíamos escrever float, e isso diria que queremos um número de ponto flutuante. E se tentarmos executar com isso, então lançará um erro. Se dermos a ele uma string, que não é um float. E também passará como tal. Como se fizermos string, então sabe que é uma string. E mesmo se tiver zeros à esquerda e for todo numérico, ainda passará como uma string real.
 
 Então essa segurança de tipo é um recurso muito novo do Nextflow, mas realmente poderoso para tornar seu código mais seguro de escrever e executar.
 
-Então depois disso temos um símbolo de igual e então o valor padrão aqui. O Nextflow foi escrito em Barcelona originalmente, então parece apropriado que tenhamos algum espanhol aqui, _"Holà mundo!"_ como padrão.
+Então depois disso temos um símbolo de igual e então o valor padrão aqui. O Nextflow foi escrito em Barcelona originalmente, então parece apropriado que tenhamos um pouco de espanhol aqui, _"Hola mundo!"_ como padrão.
 
-Certo vou salvar esse script, voltar, executar o script novamente sem _--input_. E desta vez deve executar e criará nosso novo arquivo em _results_. E neste arquivo agora diz _"Holà mundo!"_.
+Certo, vou salvar esse script, voltar, executar o script novamente sem _--input_. E desta vez deve executar e criará nosso novo arquivo em _results_. E neste arquivo agora diz _"Hola mundo!"_.
 
 Isso é apenas um padrão, então não significa que não possamos ainda fazer a mesma coisa de antes. Se eu voltar e encontrar meu script antigo aqui, _"Hej Världen"_, porque faço _--input_ na linha de comando, isso sobrescreverá aquele padrão e usará isso novamente no arquivo output.txt.
 
@@ -266,13 +266,13 @@ Então isso no script é apenas o valor padrão que estou definindo.
 
 Conforme construímos nosso fluxo de trabalho para ser mais complexo e incluir mais parâmetros, este bloco params no topo do script começará a coletar todos eles em um lugar.
 
-E você acaba com essa simetria bastante agradável no seu script, onde você efetivamente tem todas as suas entradas de fluxo de trabalho aqui e suas saídas de fluxo de trabalho lá embaixo. E é muito claro qual é a interface do seu fluxo de trabalho para o mundo externo. Então você pode pegar um novo pipeline muito rapidamente com a nova sintaxe e entender como usá-lo.
+E você acaba com uma simetria bastante agradável no seu script, onde você efetivamente tem todas as suas entradas de fluxo de trabalho aqui e suas saídas de fluxo de trabalho lá embaixo. E fica muito claro qual é a interface do seu fluxo de trabalho para o mundo externo. Então você pode pegar um novo pipeline muito rapidamente com a nova sintaxe e entender como usá-lo.
 
-Uma última coisa legal. Não temos que definir um valor padrão com isso. Se fizermos params input mas não definirmos um valor padrão, então diz ao Nextflow que este parâmetro é obrigatório, e novamente, o pipeline falhará ao executar sem ele, mas dará uma mensagem de erro mais útil em vez de algo sobre ser nulo.
+Uma última coisa legal. Não precisamos definir um valor padrão com isso. Se fizermos params input mas não definirmos um valor padrão, então dizemos ao Nextflow que este parâmetro é obrigatório, e novamente, o pipeline falhará ao executar sem ele, mas dará uma mensagem de erro mais útil em vez de algo sobre ser nulo.
 
 Então diz que estamos esperando que sua entrada seja obrigatória, mas não foi especificada na linha de comando. Muito bom.
 
-Ok, então esperançosamente agora está claro sobre como configurar seu pipeline Nextflow com entradas e parâmetros variáveis, como definir o padrão, definir os tipos, poderia ser um sinalizador booleano verdadeiro falso ou um inteiro ou diferentes tipos aqui. Como passá-los para seu fluxo de trabalho, onde passa, e então interpola no seu processo. E então você também sabe como personalizá-los na linha de comando quando você lança o Nextflow. Isso está começando a parecer mais interessante do que nosso simples comando bash.
+Ok, então esperançosamente agora está claro sobre como configurar seu pipeline Nextflow com entradas e parâmetros variáveis, como definir o padrão, definir os tipos — poderia ser um sinalizador boolean verdadeiro/falso ou um integer ou diferentes tipos aqui. Como passá-los para seu fluxo de trabalho, onde passa, e então interpola no seu processo. E então você também sabe como personalizá-los na linha de comando quando você lança o Nextflow. Isso está começando a parecer mais interessante do que nosso simples comando bash.
 
 ## 4. Gerencie execuções de fluxo de trabalho
 

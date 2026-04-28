@@ -47,7 +47,7 @@ Bu beceriler, pipeline projelerinizde kapsamlı bir test stratejisi uygulamanız
 
 Bu yan göreve başlamadan önce şunları yapmanız gerekir:
 
-- [Hello Nextflow](../hello_nextflow/README.md) eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmanız.
+- [Hello Nextflow](../../hello_nextflow/index.md) eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmanız.
 - Temel Nextflow kavramları ve mekanizmalarını (süreçler, kanallar, operatörler, dosyalarla çalışma, meta veri) rahatça kullanabilmeniz.
 
 ---
@@ -56,7 +56,7 @@ Bu yan göreve başlamadan önce şunları yapmanız gerekir:
 
 #### Eğitim kod alanını açın
 
-Henüz yapmadıysanız, eğitim ortamını [Ortam Kurulumu](../envsetup/index.md) bölümünde açıklandığı şekilde açtığınızdan emin olun.
+Henüz yapmadıysanız, eğitim ortamını [Ortam Kurulumu](../../envsetup/index.md) bölümünde açıklandığı şekilde açtığınızdan emin olun.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -84,13 +84,13 @@ Bir ana iş akışı dosyası ve pipeline'ın girdisini içeren `greetings.csv` 
 └── main.nf
 ```
 
-Dosyaların ayrıntılı açıklaması için [Hello Nextflow'daki ısınma bölümüne](../hello_nextflow/00_orientation.md) bakın.
+Dosyaların ayrıntılı açıklaması için [Hello Nextflow'daki ısınma bölümüne](../../hello_nextflow/00_orientation.md) bakın.
 
-Test edeceğimiz iş akışı, [Hello Workflow](../hello_nextflow/03_hello_workflow.md) bölümünde oluşturulan Hello iş akışının bir alt kümesidir.
+Test edeceğimiz iş akışı, [Hello Workflow](../../hello_nextflow/03_hello_workflow.md) bölümünde oluşturulan Hello iş akışının bir alt kümesidir.
 
 ??? example "Hello Nextflow iş akışı ne yapar?"
 
-    [Hello Nextflow](../hello_nextflow/index.md) eğitimini yapmadıysanız, bu basit iş akışının ne yaptığına dair kısa bir genel bakış:
+    [Hello Nextflow](../../hello_nextflow/index.md) eğitimini yapmadıysanız, bu basit iş akışının ne yaptığına dair kısa bir genel bakış:
 
     İş akışı, selamlamaları içeren bir CSV dosyası alır, bunlar üzerinde dört ardışık dönüşüm adımı çalıştırır ve eğlenceli bir karakterin selamlamaları söylediğini gösteren ASCII resmi içeren tek bir metin dosyası çıktısı verir.
 
@@ -121,8 +121,6 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.
     */
     process sayHello {
 
-        publishDir 'results', mode: 'copy'
-
         input:
             val greeting
 
@@ -140,8 +138,6 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.
     */
     process convertToUpper {
 
-        publishDir 'results', mode: 'copy'
-
         input:
             path input_file
 
@@ -155,7 +151,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.
     }
 
     workflow {
-
+        main:
         // CSV dosyasından girdiler için bir kanal oluştur
         greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
 
@@ -164,6 +160,17 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.
 
         // selamlamayı büyük harfe dönüştür
         convertToUpper(sayHello.out)
+
+        publish:
+        greetings = sayHello.out
+        upper_greetings = convertToUpper.out
+    }
+
+    output {
+        greetings {
+        }
+        upper_greetings {
+        }
     }
     ```
 
@@ -568,10 +575,10 @@ Başarılı! Pipeline başarıyla çalışıyor ve test geçiyor. Artık pipelin
             then {
                 assert file("$launchDir/results/Bonjour-output.txt").exists()
                 assert file("$launchDir/results/Hello-output.txt").exists()
-                assert file("$launchDir/results/Holà-output.txt").exists()
+                assert file("$launchDir/results/Hola-output.txt").exists()
                 assert file("$launchDir/results/UPPER-Bonjour-output.txt").exists()
                 assert file("$launchDir/results/UPPER-Hello-output.txt").exists()
-                assert file("$launchDir/results/UPPER-Holà-output.txt").exists()
+                assert file("$launchDir/results/UPPER-Hola-output.txt").exists()
             }
 
         }
@@ -728,7 +735,7 @@ Test Process sayHello
 FAILURE: Executed 1 tests in 4.884s (1 failed)
 ```
 
-`sayHello` süreci 1 girdi bildirdiği ancak 0 argümanla çağrıldığı için test başarısız oldu. Sürece bir girdi ekleyerek bunu düzeltelim. [Hello Workflow](../hello_nextflow/03_hello_workflow.md) bölümünden (ve yukarıdaki ısınma bölümünden) hatırlayacağınız üzere, `sayHello` sürecimiz sağlamamız gereken tek bir değer girdisi alır. Ayrıca test adını neyi test ettiğimizi daha iyi yansıtacak şekilde düzeltmeliyiz.
+`sayHello` süreci 1 girdi bildirdiği ancak 0 argümanla çağrıldığı için test başarısız oldu. Sürece bir girdi ekleyerek bunu düzeltelim. [Hello Workflow](../../hello_nextflow/03_hello_workflow.md) bölümünden (ve yukarıdaki ısınma bölümünden) hatırlayacağınız üzere, `sayHello` sürecimiz sağlamamız gereken tek bir değer girdisi alır. Ayrıca test adını neyi test ettiğimizi daha iyi yansıtacak şekilde düzeltmeliyiz.
 
 === "Sonra"
 
@@ -830,7 +837,7 @@ Burada yazdırmayacağız, ancak süreç ve süreç çıktılarının ayrıntıl
 
 Bu, açıkça test ettiğimiz `sayHello` süreci tarafından oluşturulan çıktıları temsil eder. Testi yeniden çalıştırırsak, program yeni çıktının başlangıçta kaydedilen çıktıyla eşleşip eşleşmediğini kontrol edecektir. Bu, süreç çıktılarının değişmediğini test etmenin hızlı ve basit bir yoludur; bu nedenle nf-test bunu varsayılan olarak sunar.
 
-!!!warning "Uyarı"
+!!! warning "Uyarı"
 
     Bu, orijinal çalıştırmada kaydettiğimiz çıktının doğru olduğundan emin olmamız gerektiği anlamına gelir!
 
@@ -1195,4 +1202,4 @@ Daha gelişmiş test özellikleri ve en iyi uygulamalar için [nf-test belgeleri
 
 ## Sırada ne var?
 
-[Yan Görevler menüsüne](../) dönün veya listedeki bir sonraki konuya geçmek için sayfanın sağ alt köşesindeki düğmeye tıklayın.
+[Yan Görevler menüsüne](../index.md) dönün veya listedeki bir sonraki konuya geçmek için sayfanın sağ alt köşesindeki düğmeye tıklayın.

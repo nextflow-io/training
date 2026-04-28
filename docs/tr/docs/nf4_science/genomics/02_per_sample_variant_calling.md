@@ -402,7 +402,7 @@ nextflow run genomics.nf -profile test
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [reverent_sinoussi] DSL2 - revision: 41d43ad7fe
 
@@ -562,7 +562,7 @@ Ardından, bu dosya yollarını iş akışında kullanmak üzere yükleyen deği
     ```
 
 `file()` sözdizimi, Nextflow'a bu girdileri açıkça dosya yolları olarak işlemesini söyler.
-Bu konuda daha fazla bilgiyi [Dosyalarla çalışma](../../side_quests/working_with_files.md) Yan Görevinde öğrenebilirsiniz.
+Bu konuda daha fazla bilgiyi [Dosyalarla çalışma](../../side_quests/working_with_files/index.md) Yan Görevinde öğrenebilirsiniz.
 
 ### 2.2. Varyant çağırma sürecini yazın ve iş akışında çağırın
 
@@ -769,7 +769,7 @@ nextflow run genomics.nf -profile test -resume
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [grave_volta] DSL2 - revision: 4790abc96a
 
@@ -891,7 +891,7 @@ Komik olan şu: bu _çalışabilir_ VEYA _başarısız olabilir_. Örneğin, iş
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [peaceful_yalow] DSL2 - revision: a256d113ad
 
@@ -905,7 +905,7 @@ Komik olan şu: bu _çalışabilir_ VEYA _başarısız olabilir_. Örneğin, iş
 ??? failure "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [loving_pasteur] DSL2 - revision: d2a8e63076
 
@@ -1164,7 +1164,7 @@ Bu sefer (ve her seferinde) her şey doğru şekilde çalışmalıdır:
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [special_goldstine] DSL2 - revision: 4cbbf6ea3e
 
@@ -1327,7 +1327,7 @@ nextflow run genomics.nf -profile test
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [sick_albattani] DSL2 - revision: 46d84642f6
 

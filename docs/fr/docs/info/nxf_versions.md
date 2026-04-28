@@ -6,11 +6,16 @@ hide:
   - footer
 ---
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 ## Version de syntaxe Nextflow actuellement prise en charge et exigences
 
-Depuis la version 3.0 du portail de formation, tous nos cours de formation sont basés sur la version 25.10.2 de Nextflow, sauf indication contraire sur la page d'index du cours (à l'exception des supports obsolètes ou archivés qui peuvent ne pas inclure de mention de version).
+À partir de la version 3.0 du portail de formation, tous nos cours de formation sont compatibles avec Nextflow version 25.10.2 ou ultérieure, sauf indication contraire sur la page d'index du cours.
+(Cela ne s'applique pas aux supports obsolètes ou archivés qui peuvent ne pas inclure de mention de version.)
 
-Étant donné que les cours utilisent désormais des entrées typées au niveau du workflow ainsi que des directives de sortie au niveau du workflow, ils nécessitent l'utilisation de l'analyseur syntaxique V2.
+La version de Nextflow actuellement chargée par défaut dans notre environnement de formation est **Nextflow 25.10.4**.
+
+Étant donné que les cours utilisent désormais des entrées typées au niveau du workflow ainsi que des directives de sortie au niveau du workflow, ils nécessitent l'utilisation de l'analyseur syntaxique V2, **sauf indication contraire**.
 Si vous prévoyez d'utiliser l'environnement que nous fournissons via [Github Codespaces](../envsetup/01_setup.md) ou les [devcontainers locaux](../envsetup/03_devcontainer.md), vous n'avez rien à faire sauf indication contraire dans les instructions du cours.
 Cependant, si vous prévoyez de suivre les formations dans votre propre environnement ([Installation manuelle](../envsetup/02_local.md)), vous devrez vous assurer d'utiliser Nextflow version 25.10.2 ou ultérieure avec l'analyseur syntaxique v2 activé.
 

@@ -14,22 +14,7 @@ additional_information:
   audience_prerequisites:
     - "**Audience:** This course is designed for researchers in {DOMAIN} and related fields who want to develop or customize data analysis pipelines."
     - "**Skills:** Some familiarity with the command line, basic scripting concepts, and common {DOMAIN} file formats is assumed."
-    - "**Prerequisites:** Foundational Nextflow concepts and tooling covered in [Hello Nextflow](../../hello_nextflow/)."
----
-
----
-
-title: Nextflow für {DOMAIN}
-hide:
-
-- toc
-  page_type: index_page
-  index_type: course
-  additional_information:
-  technical_requirements: true
-  learning_objectives: - Schreibe einen linearen Workflow, um {METHOD} auf eine einzelne Probe anzuwenden - Verarbeite zusätzliche Dateien wie {ACCESSORY_FILES} angemessen - Nutze Nextflows Dataflow-Paradigma, um die Verarbeitung pro Probe zu parallelisieren - Implementiere Multi-Sample-Aggregation mit relevanten Channel-Operatoren
-  audience_prerequisites: - "**Zielgruppe:** Dieser Kurs richtet sich an Forscher\*innen im Bereich {DOMAIN} und verwandten Feldern, die Datenanalyse-Pipelines entwickeln oder anpassen möchten." - "**Fähigkeiten:** Grundkenntnisse der Kommandozeile, grundlegende Skripting-Konzepte und gängige {DOMAIN}-Dateiformate werden vorausgesetzt." - "**Voraussetzungen:** Grundlegende Nextflow-Konzepte und -Werkzeuge, die in [Hello Nextflow](../../hello_nextflow/) behandelt werden."
-
+    - "**Prerequisites:** Foundational Nextflow concepts and tooling covered in [Hello Nextflow](../../hello_nextflow/index.md)."
 ---
 
 # Nextflow für {DOMAIN}
@@ -38,7 +23,7 @@ hide:
 
 **Ein praxisorientierter Kurs, der Nextflow auf einen realen {DOMAIN}-Anwendungsfall anwendet: {METHOD_SHORT_DESCRIPTION}.**
 
-Dieser Kurs baut auf dem [Hello Nextflow](../../hello_nextflow/)-Einsteiger-Training auf und zeigt, wie du Nextflow im spezifischen Kontext der {DOMAIN}-Domäne verwendest.
+Dieser Kurs baut auf dem [Hello Nextflow](../../hello_nextflow/index.md)-Einsteiger-Training auf und zeigt, wie du Nextflow im spezifischen Kontext der {DOMAIN}-Domäne verwendest.
 Du wirst eine {METHOD}-Pipeline mit [{TOOL_A}]({TOOL_A_URL}) und [{TOOL_B}]({TOOL_B_URL}) implementieren.
 
 <!-- additional_information -->

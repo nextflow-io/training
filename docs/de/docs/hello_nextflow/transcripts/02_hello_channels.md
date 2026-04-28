@@ -136,7 +136,7 @@ Wenn du daran interessiert bist, wie man das mit Best Practices macht, gibt es e
 
 Okay. Als Nächstes werden wir ein bisschen darüber erkunden, wie Kanäle strukturiert sind und wie sie sich von anderen Arten von Datenstrukturen in der Programmiersprache unterscheiden. Und ich werde ein bisschen darüber nachdenken, wie ich potenziell ein Array verwenden könnte, was ein vertrautes Konzept sein könnte, wenn du von anderen Sprachen kommst.
 
-Kann ich ein Array in einem Kanal verwenden? Lass es uns versuchen. Ich werde ein Array erstellen, und ich habe das aus den Docs kopiert, _"greetings_array"_ und _"Hello", "Bonjour"_ und _"Holà"_. Und dann werde ich das hier anstelle meiner fest codierten Strings einfügen. Also sage ich "channel.of" _"greetings_array"_, dieses Array in einen Kanal übergeben. Lass es uns versuchen.
+Kann ich ein Array in einem Kanal verwenden? Lass es uns versuchen. Ich werde ein Array erstellen, und ich habe das aus den Docs kopiert, _"greetings_array"_ und _"Hello", "Bonjour"_ und _"Hola"_. Und dann werde ich das hier anstelle meiner fest codierten Strings einfügen. Also sage ich "channel.of" _"greetings_array"_, dieses Array in einen Kanal übergeben. Lass es uns versuchen.
 
 Terminal hochbringen und die Pipeline ausführen.
 
@@ -212,7 +212,7 @@ Okay, lass uns einen Blick auf diesen Kanal werfen und sehen, wie er aussieht. W
 
 Wenn ich es nochmal ausführe, wird es immer noch fehlschlagen, aber es wird uns zeigen, was in diesem Kanal ist. Es ist nicht besonders aufregend. Es ist diese _path_-Variable. Du kannst also sehen, es ist nur ein String hier, weil es ins Terminal ausgegeben wird, aber es ist ein _path_-Objekt, das die Informationen und Metadaten über diese Datei enthält.
 
-Wir wollen nicht die Metadaten der Datei an die Eingabe übergeben. Wir wollen den Inhalt dieser Datei übergeben. Wenn wir uns die _greetings.csv_-Datei ansehen, kannst du hier sehen, dass sie diese verschiedenen Variablen hier hat. _Hello, Bonjour, Holà_ wieder. Und das sind die Dinge, die wir wirklich an unseren Prozess übergeben wollen, nicht nur die Datei selbst als einzelnes Objekt.
+Wir wollen nicht die Metadaten der Datei an die Eingabe übergeben. Wir wollen den Inhalt dieser Datei übergeben. Wenn wir uns die _greetings.csv_-Datei ansehen, kannst du hier sehen, dass sie diese verschiedenen Variablen hat. _Hello, Bonjour, Hola_ wieder. Und das sind die Dinge, die wir wirklich an unseren Prozess übergeben wollen, nicht nur die Datei selbst als einzelnes Objekt.
 
 Wir müssen also diese CSV-Datei parsen. Wir müssen sie auspacken, an den Inhalt der CSV-Datei kommen und dann den Inhalt innerhalb des Kanals an den Prozess übergeben.
 
@@ -228,7 +228,7 @@ Mit unserem Logging vom view-Operator können wir sehen, vor _splitCsv_ war der 
 
 Was also hier passiert ist, ist, dass Nextflow diese CSV-Datei geparst hat, uns drei Objekte gegeben hat, ein Array für jede Zeile der CSV-Datei. Also haben wir dann dreimal ein Array von Variablen an den Kanal übergeben anstelle eines einzelnen String-Werts.
 
-Okay, also das letzte Mal, als wir dieses Problem hatten, haben wir _flatten_ verwendet. Lass uns ganz schnell. Flatten ausprobieren und sehen, was passiert.
+Okay, also das letzte Mal, als wir dieses Problem hatten, haben wir _flatten_ verwendet. Lass uns ganz schnell flatten ausprobieren und sehen, was passiert.
 
 Ich kann diese Variablen nennen, wie auch immer. Also werde ich es _myarray_ nennen, weil es nicht mehr wirklich ein CSV ist. Lass uns versuchen, es nochmal auszuführen und sehen, was mit _flatten_ passiert.
 
@@ -246,7 +246,7 @@ Arrays in Nextflow sind nullbasiert, also werden wir nur das erste Element sagen
 
 Und jetzt können wir die Pipeline nochmal ausführen und sehen, ob sie das macht, was wir erwarten.
 
-Tatsächlich, nach _splitCsv_ haben wir unsere Arrays, und dann nach dem _map_ haben wir unsere schönen sauberen Strings, nur _"Hello", "Bonjour"_ und _"Holà"_. Und die Pipeline macht jetzt das, was wir wollen. Fantastisch.
+Tatsächlich, nach _splitCsv_ haben wir unsere Arrays, und dann nach dem _map_ haben wir unsere schönen sauberen Strings, nur _"Hello", "Bonjour"_ und _"Hola"_. Und die Pipeline macht jetzt das, was wir wollen. Fantastisch.
 
 Wir können jetzt all diese view-Befehle loswerden. Wir brauchen sie nicht mehr.
 

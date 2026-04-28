@@ -28,10 +28,10 @@ Aquestes habilitats us ajudaran a construir workflows que puguin gestionar múlt
 
 Abans d'abordar aquesta missió secundària, hauríeu de:
 
-- Haver completat el tutorial [Hello Nextflow](../hello_nextflow/README.md) o un curs equivalent per a principiants.
+- Haver completat el tutorial [Hello Nextflow](../../hello_nextflow/index.md) o un curs equivalent per a principiants.
 - Estar còmodes amb els conceptes i mecanismes bàsics de Nextflow (processos, canals, operadors, treball amb fitxers, metadades)
 
-**Opcional:** Recomanem completar primer la missió secundària [Metadata in workflows](../metadata/).
+**Opcional:** Recomanem completar primer la missió secundària [Metadata in workflows](../metadata/index.md).
 Aquesta cobreix els fonaments de la lectura de fitxers CSV amb `splitCsv` i la creació de mapes de metadades, que utilitzarem àmpliament aquí.
 
 ---
@@ -40,7 +40,7 @@ Aquesta cobreix els fonaments de la lectura de fitxers CSV amb `splitCsv` i la c
 
 #### Obriu l'espai de treball de formació
 
-Si encara no ho heu fet, assegureu-vos d'obrir l'entorn de formació tal com es descriu a la [Configuració de l'entorn](../envsetup/index.md).
+Si encara no ho heu fet, assegureu-vos d'obrir l'entorn de formació tal com es descriu a la [Configuració de l'entorn](../../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -57,6 +57,8 @@ Podeu configurar VSCode perquè es centri en aquest directori:
 ```bash
 code .
 ```
+
+L'editor s'obre amb el directori del projecte en focus.
 
 #### Reviseu els materials
 
@@ -93,6 +95,8 @@ Per al pacient A específicament, tenim dos conjunts de rèpliques tècniques (r
 !!! note "Nota"
 
     No us preocupeu si no esteu familiaritzats amb aquest disseny experimental, no és crític per entendre aquest tutorial.
+
+Amb el contingut de les dades entès, podem veure què ha d'aconseguir el workflow.
 
 #### Reviseu l'assignació
 
@@ -135,7 +139,7 @@ workflow {
 
     Al llarg d'aquest tutorial, utilitzarem el prefix `ch_` per a totes les variables de canal per indicar clarament que són canals de Nextflow.
 
-Si heu completat la missió secundària [Metadata in workflows](../metadata/), reconeixereu aquest patró. Utilitzarem `splitCsv` per llegir el CSV i estructurar immediatament les dades amb un mapa de metadades per separar les metadades de les rutes dels fitxers.
+Si heu completat la missió secundària [Metadata in workflows](../metadata/index.md), reconeixereu aquest patró. Utilitzarem `splitCsv` per llegir el CSV i estructurar immediatament les dades amb un mapa de metadades per separar les metadades de les rutes dels fitxers.
 
 !!! info "Info"
 
@@ -174,7 +178,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9
 
@@ -230,7 +234,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [admiring_brown] DSL2 - revision: 194d61704d
 
@@ -251,6 +255,8 @@ Això s'aconsegueix amb la closure única que hem introduït anteriorment:
 ```groovy title="main.nf" linenums="7"
     .filter { meta, file -> meta.type == 'normal' }
 ```
+
+Aquest filtre s'encadena directament en l'operació del canal.
 
 ### 2.2. Crear canals filtrats separats
 
@@ -291,7 +297,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74
 
@@ -334,7 +340,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
 
@@ -348,7 +354,7 @@ nextflow run main.nf
     Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
-Hem separat les mostres normals i tumorals en dos canals diferents, i hem utilitzat una closure subministrada a `view()` per etiquetar-les de manera diferent a la sortida: `ch_tumor_samples.view{'Tumor sample: ' + it}`.
+Hem separat les mostres normals i tumorals en dos canals diferents, i hem utilitzat una closure subministrada a `view()` per etiquetar-les de manera diferent a la sortida: `#!groovy ch_tumor_samples.view{'Tumor sample: ' + it}`.
 
 ### Conclusió
 
@@ -383,7 +389,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
 
@@ -438,7 +444,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d
 
@@ -496,7 +502,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [soggy_wiles] DSL2 - revision: 3bc1979889
 
@@ -562,7 +568,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [prickly_wing] DSL2 - revision: 3bebf22dee
 
@@ -611,7 +617,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [reverent_wing] DSL2 - revision: 847016c3b7
 
@@ -658,7 +664,7 @@ Per fer-ho, primer definim la closure com una nova variable:
 
 Hem definit la transformació map com una variable amb nom que podem reutilitzar.
 
-Tingueu en compte que també convertim la ruta del fitxer a un objecte Path utilitzant `file()` perquè qualsevol procés que rebi aquest canal pugui gestionar el fitxer correctament (per a més informació vegeu [Working with files](../working_with_files/)).
+Tingueu en compte que també convertim la ruta del fitxer a un objecte Path utilitzant `file()` perquè qualsevol procés que rebi aquest canal pugui gestionar el fitxer correctament (per a més informació vegeu [Working with files](../working_with_files/index.md)).
 
 Implementem la closure al nostre workflow:
 
@@ -698,7 +704,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [angry_meninsky] DSL2 - revision: 2edc226b1d
 
@@ -797,7 +803,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [confident_leavitt] DSL2 - revision: a2303895bd
 
@@ -806,6 +812,8 @@ nextflow run main.nf
     [[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
     [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
     ```
+
+Cada tupla ara conté només la clau d'agrupació i les dues rutes de fitxer, sense camps repetits.
 
 ### Conclusió
 
@@ -873,7 +881,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [mighty_tesla] DSL2 - revision: ae013ab70b
 
@@ -955,7 +963,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd
 
@@ -1056,7 +1064,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76
 
@@ -1120,7 +1128,7 @@ nextflow run main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d
 
@@ -1140,6 +1148,8 @@ Observeu que les nostres dades han canviat d'estructura i dins de cada element d
 !!! note "Nota"
 
     [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) és l'operació inversa de groupTuple. Desempaqueta els elements d'un canal i els aplana. Proveu d'afegir `transpose` i desfer l'agrupació que hem realitzat anteriorment!
+
+Ambdues direccions de l'operació — agrupar i desagrupar — formen ara part del vostre conjunt d'eines.
 
 ### Conclusió
 
@@ -1168,7 +1178,7 @@ Dominar aquestes operacions de canal us permetrà construir pipelines flexibles 
 
 ### Patrons clau
 
-1.  **Crear dades d'entrada estructurades:** Partint d'un fitxer CSV amb mapes de metadades (basant-se en patrons de [Metadata in workflows](../metadata/))
+1.  **Crear dades d'entrada estructurades:** Partint d'un fitxer CSV amb mapes de metadades (basant-se en patrons de [Metadata in workflows](../metadata/index.md))
 
     ```groovy
     ch_samples = channel.fromPath("./data/samplesheet.csv")
@@ -1249,4 +1259,4 @@ Dominar aquestes operacions de canal us permetrà construir pipelines flexibles 
 
 ## Què segueix?
 
-Torneu al [menú de missions secundàries](../) o feu clic al botó a la part inferior dreta de la pàgina per continuar amb el tema següent de la llista.
+Torneu al [menú de missions secundàries](../index.md) o feu clic al botó a la part inferior dreta de la pàgina per continuar amb el tema següent de la llista.

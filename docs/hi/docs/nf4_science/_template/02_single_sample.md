@@ -72,7 +72,7 @@
      * Pipeline parameters
      */
     params {
-        // Primary input
+        // प्राथमिक इनपुट
         {PRIMARY_PARAM_NAME}: Path
     }
     ```
@@ -84,7 +84,7 @@
      * Pipeline parameters
      */
 
-    // Primary input
+    // प्राथमिक इनपुट
     ```
 
 यह CLI पैरामीटर सेट अप करता है, लेकिन हम डेवलपमेंट के दौरान हर बार वर्कफ़्लो चलाते समय फ़ाइल पाथ टाइप नहीं करना चाहते।
@@ -143,7 +143,7 @@ nextflow run {DOMAIN_DIR}.nf -profile test
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `{DOMAIN_DIR}.nf` [{RUN_NAME}] DSL2 - revision: {HASH}
 

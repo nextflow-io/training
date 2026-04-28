@@ -47,7 +47,7 @@
 
 इस साइड क्वेस्ट को शुरू करने से पहले, तुम्हें:
 
-- [Hello Nextflow](../hello_nextflow/README.md) ट्यूटोरियल या समकक्ष शुरुआती कोर्स पूरा करना चाहिए।
+- [Hello Nextflow](../../hello_nextflow/index.md) ट्यूटोरियल या समकक्ष शुरुआती कोर्स पूरा करना चाहिए।
 - बुनियादी Nextflow अवधारणाओं और तंत्रों (प्रोसेस, चैनल, ऑपरेटर, फ़ाइलों के साथ काम करना, मेटा डेटा) का उपयोग करने में सहज होना चाहिए।
 
 ---
@@ -56,7 +56,7 @@
 
 #### ट्रेनिंग codespace खोलो
 
-अगर तुमने अभी तक ऐसा नहीं किया है, तो सुनिश्चित करो कि [पर्यावरण सेटअप](../envsetup/index.md) में वर्णित अनुसार ट्रेनिंग वातावरण खोलो।
+अगर तुमने अभी तक ऐसा नहीं किया है, तो सुनिश्चित करो कि [पर्यावरण सेटअप](../../envsetup/index.md) में वर्णित अनुसार ट्रेनिंग वातावरण खोलो।
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -84,13 +84,13 @@ code .
 └── main.nf
 ```
 
-फ़ाइलों के विस्तृत विवरण के लिए, [Hello Nextflow का वार्मअप](../hello_nextflow/00_orientation.md) देखो।
+फ़ाइलों के विस्तृत विवरण के लिए, [Hello Nextflow का वार्मअप](../../hello_nextflow/00_orientation.md) देखो।
 
-जिस वर्कफ़्लो का हम परीक्षण करेंगे वह [Hello Workflow](../hello_nextflow/03_hello_workflow.md) में बनाए गए Hello वर्कफ़्लो का एक उपसमूह है।
+जिस वर्कफ़्लो का हम परीक्षण करेंगे वह [Hello Workflow](../../hello_nextflow/03_hello_workflow.md) में बनाए गए Hello वर्कफ़्लो का एक उपसमूह है।
 
 ??? example "Hello Nextflow वर्कफ़्लो क्या करता है?"
 
-    अगर तुमने [Hello Nextflow](../hello_nextflow/index.md) प्रशिक्षण नहीं किया है, तो यहाँ एक त्वरित अवलोकन है कि यह सरल वर्कफ़्लो क्या करता है।
+    अगर तुमने [Hello Nextflow](../../hello_nextflow/index.md) प्रशिक्षण नहीं किया है, तो यहाँ एक त्वरित अवलोकन है कि यह सरल वर्कफ़्लो क्या करता है।
 
     वर्कफ़्लो एक CSV फ़ाइल लेता है जिसमें अभिवादन हैं, उन पर चार लगातार परिवर्तन चरण चलाता है, और एक एकल टेक्स्ट फ़ाइल आउटपुट करता है जिसमें एक मज़ेदार पात्र का ASCII चित्र है जो अभिवादन कह रहा है।
 
@@ -121,8 +121,6 @@ code .
     */
     process sayHello {
 
-        publishDir 'results', mode: 'copy'
-
         input:
             val greeting
 
@@ -140,8 +138,6 @@ code .
     */
     process convertToUpper {
 
-        publishDir 'results', mode: 'copy'
-
         input:
             path input_file
 
@@ -155,7 +151,7 @@ code .
     }
 
     workflow {
-
+        main:
         // CSV फ़ाइल से इनपुट के लिए एक चैनल बनाएं
         greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
 
@@ -164,6 +160,17 @@ code .
 
         // अभिवादन को अपरकेस में बदलें
         convertToUpper(sayHello.out)
+
+        publish:
+        greetings = sayHello.out
+        upper_greetings = convertToUpper.out
+    }
+
+    output {
+        greetings {
+        }
+        upper_greetings {
+        }
     }
     ```
 
@@ -568,10 +575,10 @@ SUCCESS: Executed 1 tests in 1.588s
             then {
                 assert file("$launchDir/results/Bonjour-output.txt").exists()
                 assert file("$launchDir/results/Hello-output.txt").exists()
-                assert file("$launchDir/results/Holà-output.txt").exists()
+                assert file("$launchDir/results/Hola-output.txt").exists()
                 assert file("$launchDir/results/UPPER-Bonjour-output.txt").exists()
                 assert file("$launchDir/results/UPPER-Hello-output.txt").exists()
-                assert file("$launchDir/results/UPPER-Holà-output.txt").exists()
+                assert file("$launchDir/results/UPPER-Hola-output.txt").exists()
             }
 
         }
@@ -728,7 +735,7 @@ Test Process sayHello
 FAILURE: Executed 1 tests in 4.884s (1 failed)
 ```
 
-परीक्षण विफल होता है क्योंकि `sayHello` प्रोसेस 1 इनपुट घोषित करता है लेकिन 0 arguments के साथ बुलाया गया था। आइए प्रोसेस में एक इनपुट जोड़कर इसे ठीक करें। [Hello Workflow](../hello_nextflow/03_hello_workflow.md) (और ऊपर वार्मअप अनुभाग) से याद करो कि हमारा `sayHello` प्रोसेस एक single value इनपुट लेता है, जिसे हमें प्रदान करना होगा। हमें परीक्षण का नाम भी ठीक करना चाहिए ताकि यह बेहतर ढंग से दर्शाए कि हम क्या परीक्षण कर रहे हैं।
+परीक्षण विफल होता है क्योंकि `sayHello` प्रोसेस 1 इनपुट घोषित करता है लेकिन 0 arguments के साथ बुलाया गया था। आइए प्रोसेस में एक इनपुट जोड़कर इसे ठीक करें। [Hello Workflow](../../hello_nextflow/03_hello_workflow.md) (और ऊपर वार्मअप अनुभाग) से याद करो कि हमारा `sayHello` प्रोसेस एक single value इनपुट लेता है, जिसे हमें प्रदान करना होगा। हमें परीक्षण का नाम भी ठीक करना चाहिए ताकि यह बेहतर ढंग से दर्शाए कि हम क्या परीक्षण कर रहे हैं।
 
 === "बाद में"
 
@@ -830,7 +837,7 @@ code tests/main.sayhello.nf.test.snap
 
 यह `sayHello` प्रोसेस द्वारा बनाए गए आउटपुट का प्रतिनिधित्व करता है, जिसका हम स्पष्ट रूप से परीक्षण कर रहे हैं। अगर हम परीक्षण फिर से चलाते हैं, तो प्रोग्राम जाँच करेगा कि नया आउटपुट मूल रूप से रिकॉर्ड किए गए आउटपुट से मेल खाता है। यह परीक्षण करने का एक त्वरित, सरल तरीका है कि प्रोसेस आउटपुट नहीं बदलते, यही कारण है कि nf-test इसे डिफ़ॉल्ट के रूप में प्रदान करता है।
 
-!!!warning "चेतावनी"
+!!! warning "चेतावनी"
 
     इसका मतलब है कि हमें यह सुनिश्चित करना होगा कि मूल रन में हम जो आउटपुट रिकॉर्ड करते हैं वह सही है!
 
@@ -1195,4 +1202,4 @@ SUCCESS: Executed 4 tests in 13.481s
 
 ## आगे क्या है?
 
-[साइड क्वेस्ट के मेनू](../) पर वापस जाओ या सूची में अगले विषय पर जाने के लिए पृष्ठ के नीचे दाईं ओर बटन पर क्लिक करो।
+[साइड क्वेस्ट के मेनू](../index.md) पर वापस जाओ या सूची में अगले विषय पर जाने के लिए पृष्ठ के नीचे दाईं ओर बटन पर क्लिक करो।

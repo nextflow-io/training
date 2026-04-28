@@ -72,7 +72,7 @@ nextflow run hello-containers.nf
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-containers.nf` [nice_escher] DSL2 - revision: d5dfdc9872
 
@@ -92,11 +92,11 @@ nextflow run hello-containers.nf
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 이것이 정상적으로 작동했다면 컨테이너를 사용하는 방법을 배울 준비가 되었습니다.
@@ -356,7 +356,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
      ____________________
     / Hello,English,123  \
     | Bonjour,French,456 |
-    \ Holà,Spanish,789   /
+    \ Hola,Spanish,789   /
     --------------------
       \                                  ,+*^^*+___+++_
       \                           ,*^^^^              )
@@ -667,14 +667,14 @@ process cowpy {
 이전에 게시된 출력을 삭제하여 깨끗한 상태로 만들고 `-resume` 플래그로 워크플로우를 실행합시다.
 
 ```bash
-rm -r hello_containers/
+rm -r results/hello_containers/
 nextflow run hello-containers.nf -resume
 ```
 
 ??? failure "명령 출력 (명확성을 위해 편집됨)"
 
     ```console hl_lines="10 13 20-21 26-27"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-containers.nf` [lonely_woese] DSL2 - revision: abf1dccf7f
 
@@ -811,7 +811,7 @@ nextflow run hello-containers.nf -resume
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-containers.nf` [drunk_perlman] DSL2 - revision: abf1dccf7f
 
@@ -834,10 +834,10 @@ nextflow run hello-containers.nf -resume
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
+    │   ├── Hola-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     └── batch-report.txt
     ```
 
@@ -847,7 +847,7 @@ nextflow run hello-containers.nf -resume
 
     ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------

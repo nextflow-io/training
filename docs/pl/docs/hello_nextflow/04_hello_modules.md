@@ -66,10 +66,10 @@ Aby upewnić się, że wszystko działa, uruchom skrypt raz przed wprowadzeniem 
 nextflow run hello-modules.nf
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-modules.nf` [hopeful_avogadro] DSL2 - revision: b09af1237d
 
@@ -88,11 +88,11 @@ Jak poprzednio, pliki wyjściowe znajdziesz w katalogu określonym w bloku `outp
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Jeśli to zadziałało, jesteś gotowy do nauki modularyzacji kodu workflow'u.
@@ -156,8 +156,8 @@ Po wykonaniu tego usuń definicję procesu z pliku workflow'u.
 
 Składnia importowania procesu z modułu jest dość prosta:
 
-```groovy title="Składnia: Deklaracja importu"
-include { <NAZWA_PROCESU> } from '<ścieżka_do_modułu>'
+```groovy title="Syntax: include declaration"
+include { <PROCESS_NAME> } from '<path_to_module>'
 ```
 
 Wstawmy ją powyżej bloku `params` i wypełnijmy odpowiednio.
@@ -199,10 +199,10 @@ Uruchamiamy workflow z zasadniczo tym samym kodem i wejściami co poprzednio, wi
 nextflow run hello-modules.nf -resume
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-modules.nf` [romantic_poisson] DSL2 - revision: 96edfa9ad3
 
@@ -308,10 +308,10 @@ Uruchom z flagą `-resume`.
 nextflow run hello-modules.nf -resume
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-modules.nf` [nauseous_heisenberg] DSL2 - revision: a04a9f2da0
 
@@ -412,10 +412,10 @@ Uruchom z flagą `-resume`.
 nextflow run hello-modules.nf -resume
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-modules.nf` [friendly_coulomb] DSL2 - revision: 7aa2b9bc0f
 
@@ -452,7 +452,7 @@ Czym jest moduł w Nextflow?
 - [ ] Definicja workflow'u
 - [ ] Operator kanału
 
-Dowiedz się więcej: [2. Utwórz moduł dla `sayHello()`](#2-utworz-modul-dla-sayhello)
+Dowiedz się więcej: [2. Utwórz moduł dla `sayHello()`](#2-create-a-module-for-sayhello)
 </quiz>
 
 <quiz>
@@ -462,7 +462,7 @@ Jaka konwencja jest zwykle stosowana do przechowywania plików modułów?
 - [x] W katalogu `modules/`
 - [ ] W katalogu `lib/`
 
-Dowiedz się więcej: [1. Utwórz katalog do przechowywania modułów](#1-utworz-katalog-do-przechowywania-modulow)
+Dowiedz się więcej: [1. Utwórz katalog do przechowywania modułów](#1-create-a-directory-to-store-modules)
 </quiz>
 
 <quiz>
@@ -473,7 +473,7 @@ Jaka jest poprawna składnia do użycia modułu?
 - [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
-Dowiedz się więcej: [2.3. Dodaj deklarację importu](#23-dodaj-deklaracje-importu-przed-blokiem-workflow)
+Dowiedz się więcej: [2.3. Dodaj deklarację importu](#23-add-an-include-declaration-before-the-workflow-block)
 </quiz>
 
 <quiz>

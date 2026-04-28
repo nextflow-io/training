@@ -8,7 +8,7 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Nos Collections de Formation proposent des parcours d'apprentissage organisés à travers nos supports de formation avancés (appelés [Side Quests](../../side_quests)). Cette collection couvre quatre sujets essentiels qui sont fréquemment utilisés ensemble pour construire des workflows robustes et évolutifs.
+Nos Collections de Formation proposent des parcours d'apprentissage organisés à travers nos supports de formation avancés (appelés [Side Quests](../side_quests/index.md)). Cette collection couvre quatre sujets essentiels qui sont fréquemment utilisés ensemble pour construire des workflows robustes et évolutifs.
 
 ## Objectifs pédagogiques
 
@@ -27,7 +27,7 @@ Cette collection est conçue pour les utilisateur·trices qui ont terminé la fo
 
 **Prérequis**
 
-- Avoir terminé la formation [Hello Nextflow](../../hello_nextflow/) ou posséder une expérience équivalente
+- Avoir terminé la formation [Hello Nextflow](../hello_nextflow/index.md) ou posséder une expérience équivalente
 - Connaissance de base de la syntaxe et des concepts Nextflow
 - Compréhension des modèles de développement de workflows de base
 - Expérience avec les outils en ligne de commande
@@ -36,10 +36,10 @@ Cette collection est conçue pour les utilisateur·trices qui ont terminé la fo
 
 Cette collection se compose de quatre Side Quests qui couvrent des sujets complémentaires d'ingénierie de workflows :
 
-1. **[Workflows de Workflows](../../side_quests/workflows_of_workflows)** - Architecture et composition de workflows complexes
-2. **[Tests avec nf-test](../../side_quests/nf-test)** - Stratégies de test pour les workflows Nextflow
-3. **[Métadonnées](../../side_quests/metadata)** - Gestion des métadonnées pour les éléments dans les canaux Nextflow
-4. **[Division et Regroupement](../../side_quests/splitting_and_grouping)** - Modèles avancés de traitement des données
+1. **[Workflows de Workflows](../side_quests/workflows_of_workflows/index.md)** - Architecture et composition de workflows complexes
+2. **[Tests avec nf-test](../side_quests/nf_test/index.md)** - Stratégies de test pour les workflows Nextflow
+3. **[Métadonnées](../side_quests/metadata/index.md)** - Gestion des métadonnées pour les éléments dans les canaux Nextflow
+4. **[Division et Regroupement](../side_quests/splitting_and_grouping/index.md)** - Modèles avancés de traitement des données
 
 Chaque Side Quest est autonome et couvre des concepts indépendants, mais nous recommandons de les compléter dans l'ordre listé ci-dessus pour une progression logique à travers les sujets.
 
@@ -58,4 +58,4 @@ Une fois votre environnement en cours d'exécution, parcourez la collection comm
 
 [![Take the survey](https://img.shields.io/badge/Take%20the-Survey-blue?style=flat-square)](https://seqera.typeform.com/to/Q9pc2YKw)
 
-Prêt à commencer ? Démarrez avec le premier module ci-dessus !
+Prêt·e à commencer ? Démarrez avec le premier module ci-dessus !

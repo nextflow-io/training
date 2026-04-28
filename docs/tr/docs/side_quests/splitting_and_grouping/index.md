@@ -28,10 +28,10 @@ Bu beceriler, temiz ve sürdürülebilir bir kod yapısını korurken birden faz
 
 Bu yan göreve başlamadan önce:
 
-- [Hello Nextflow](../hello_nextflow/README.md) eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmalısınız.
+- [Hello Nextflow](../../hello_nextflow/index.md) eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmalısınız.
 - Temel Nextflow kavramları ve mekanizmalarını (süreçler, kanallar, operatörler, dosyalarla çalışma, meta veri) rahatça kullanabiliyor olmalısınız.
 
-**İsteğe bağlı:** Önce [İş akışlarında meta veri](../metadata/) yan görevini tamamlamanızı öneririz.
+**İsteğe bağlı:** Önce [İş akışlarında meta veri](../metadata/index.md) yan görevini tamamlamanızı öneririz.
 Bu görev, `splitCsv` ile CSV dosyalarını okuma ve burada yoğun biçimde kullanacağımız meta map'leri oluşturma konularının temellerini kapsar.
 
 ---
@@ -40,7 +40,7 @@ Bu görev, `splitCsv` ile CSV dosyalarını okuma ve burada yoğun biçimde kull
 
 #### Eğitim kod alanını açın
 
-Henüz yapmadıysanız, [Ortam Kurulumu](../envsetup/index.md) bölümünde açıklandığı şekilde eğitim ortamını açtığınızdan emin olun.
+Henüz yapmadıysanız, [Ortam Kurulumu](../../envsetup/index.md) bölümünde açıklandığı şekilde eğitim ortamını açtığınızdan emin olun.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -57,6 +57,8 @@ VSCode'u bu dizine odaklanacak şekilde ayarlayabilirsiniz:
 ```bash
 code .
 ```
+
+Düzenleyici, proje dizinine odaklanmış şekilde açılır.
 
 #### Materyalleri inceleyin
 
@@ -93,6 +95,8 @@ Kanser analiziyle tanışık değilseniz, bunun eşleştirilmiş tümör/normal 
 !!! note "Not"
 
     Bu deneysel tasarıma aşina değilseniz endişelenmeyin; bu eğitimi anlamak için kritik değildir.
+
+Veri içerikleri anlaşıldıktan sonra, iş akışının ne yapması gerektiğine bakabiliriz.
 
 #### Görevi inceleyin
 
@@ -135,7 +139,7 @@ workflow {
 
     Bu eğitim boyunca, tüm kanal değişkenleri için Nextflow kanalları olduklarını açıkça belirtmek amacıyla `ch_` önekini kullanacağız.
 
-[İş akışlarında meta veri](../metadata/) yan görevini tamamladıysanız bu deseni tanıyacaksınız. CSV'yi okumak için `splitCsv` kullanacak ve meta veriyi dosya yollarından ayırmak amacıyla verileri hemen bir meta map ile yapılandıracağız.
+[İş akışlarında meta veri](../metadata/index.md) yan görevini tamamladıysanız bu deseni tanıyacaksınız. CSV'yi okumak için `splitCsv` kullanacak ve meta veriyi dosya yollarından ayırmak amacıyla verileri hemen bir meta map ile yapılandıracağız.
 
 !!! info "Bilgi"
 
@@ -174,7 +178,7 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9
 
@@ -230,7 +234,7 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [admiring_brown] DSL2 - revision: 194d61704d
 
@@ -251,6 +255,8 @@ Bu, yukarıda tanıttığımız tek closure ile gerçekleştirilir:
 ```groovy title="main.nf" linenums="7"
     .filter { meta, file -> meta.type == 'normal' }
 ```
+
+Bu filter, kanal işlemine doğrudan zincirlenmiştir.
 
 ### 2.2. Ayrı filtrelenmiş kanallar oluşturma
 
@@ -291,7 +297,7 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74
 
@@ -334,7 +340,7 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
 
@@ -348,7 +354,7 @@ nextflow run main.nf
     Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
-Normal ve tümör örneklerini iki farklı kanala ayırdık ve çıktıda farklı şekilde etiketlemek için `view()` fonksiyonuna bir closure sağladık: `ch_tumor_samples.view{'Tumor sample: ' + it}`.
+Normal ve tümör örneklerini iki farklı kanala ayırdık ve çıktıda farklı şekilde etiketlemek için `view()` fonksiyonuna bir closure sağladık: `#!groovy ch_tumor_samples.view{'Tumor sample: ' + it}`.
 
 ### Özetle
 
@@ -383,7 +389,7 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
 
@@ -438,7 +444,7 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d
 
@@ -496,7 +502,7 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [soggy_wiles] DSL2 - revision: 3bc1979889
 
@@ -562,7 +568,7 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [prickly_wing] DSL2 - revision: 3bebf22dee
 
@@ -611,7 +617,7 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [reverent_wing] DSL2 - revision: 847016c3b7
 
@@ -658,7 +664,7 @@ Bunu yapmak için önce closure'ı yeni bir değişken olarak tanımlıyoruz:
 
 Map dönüşümünü yeniden kullanabileceğimiz adlandırılmış bir değişken olarak tanımladık.
 
-Ayrıca, bu kanalı alan herhangi bir sürecin dosyayı doğru şekilde işleyebilmesi için `file()` kullanarak dosya yolunu bir Path nesnesine dönüştürdüğümüze dikkat edin (daha fazla bilgi için [Dosyalarla çalışma](../working_with_files/) bölümüne bakın).
+Ayrıca, bu kanalı alan herhangi bir sürecin dosyayı doğru şekilde işleyebilmesi için `file()` kullanarak dosya yolunu bir Path nesnesine dönüştürdüğümüze dikkat edin (daha fazla bilgi için [Dosyalarla çalışma](../working_with_files/index.md) bölümüne bakın).
 
 Closure'ı iş akışımızda uygulayalım:
 
@@ -698,7 +704,7 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [angry_meninsky] DSL2 - revision: 2edc226b1d
 
@@ -797,7 +803,7 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [confident_leavitt] DSL2 - revision: a2303895bd
 
@@ -806,6 +812,8 @@ nextflow run main.nf
     [[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
     [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
     ```
+
+Her demet artık yalnızca gruplama anahtarını ve iki dosya yolunu içermektedir; tekrarlanan alan bulunmamaktadır.
 
 ### Özetle
 
@@ -873,7 +881,7 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [mighty_tesla] DSL2 - revision: ae013ab70b
 
@@ -955,7 +963,7 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd
 
@@ -1056,7 +1064,7 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76
 
@@ -1120,7 +1128,7 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d
 
@@ -1140,6 +1148,8 @@ Verilerimizin yapısının değiştiğine ve her kanal öğesinde dosyaların ar
 !!! note "Not"
 
     [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose), groupTuple'ın tersidir. Bir kanaldaki öğeleri açar ve düzleştirir. `transpose` ekleyerek yukarıda gerçekleştirdiğimiz gruplamayı geri almayı deneyin!
+
+İşlemin her iki yönü — gruplama ve gruplama geri alma — artık araç setinizde yer almaktadır.
 
 ### Özetle
 
@@ -1168,7 +1178,7 @@ Bu kanal işlemlerinde ustalaşmak, döngülere veya yinelemeli programlamaya ba
 
 ### Temel desenler
 
-1.  **Yapılandırılmış girdi verisi oluşturma:** Meta map'lerle bir CSV dosyasından başlama ([İş akışlarında meta veri](../metadata/) bölümündeki desenleri temel alarak)
+1.  **Yapılandırılmış girdi verisi oluşturma:** Meta map'lerle bir CSV dosyasından başlama ([İş akışlarında meta veri](../metadata/index.md) bölümündeki desenleri temel alarak)
 
     ```groovy
     ch_samples = channel.fromPath("./data/samplesheet.csv")
@@ -1249,4 +1259,4 @@ Bu kanal işlemlerinde ustalaşmak, döngülere veya yinelemeli programlamaya ba
 
 ## Sırada ne var?
 
-[Yan Görevler menüsüne](../) dönün veya listedeki bir sonraki konuya geçmek için sayfanın sağ alt köşesindeki düğmeye tıklayın.
+[Yan Görevler menüsüne](../index.md) dönün veya listedeki bir sonraki konuya geçmek için sayfanın sağ alt köşesindeki düğmeye tıklayın.

@@ -68,7 +68,7 @@ Qui generiamo un indice dei contenuti fino al secondo livello:
 tree . -L 2
 ```
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     .

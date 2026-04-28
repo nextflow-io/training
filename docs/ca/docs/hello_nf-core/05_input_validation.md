@@ -154,11 +154,11 @@ El comportament de validació es controla mitjançant l'àmbit `validation{}` a 
 
 Com que treballarem primer en la validació de paràmetres (aquesta secció) i no configurarem l'esquema de dades d'entrada fins a la secció 2, necessitem dir temporalment a nf-schema que ometi la validació dels continguts del fitxer del paràmetre `input`.
 
-Obriu `nextflow.config` i trobeu el bloc `validation` (al voltant de la línia 246). Afegiu `ignoreParams` per ometre la validació de fitxers d'entrada:
+Obriu `nextflow.config` i trobeu el bloc `validation` (al voltant de la línia 247). Afegiu `ignoreParams` per ometre la validació de fitxers d'entrada:
 
 === "Després"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="246"
+    ```groovy title="nextflow.config" hl_lines="3" linenums="247"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
@@ -168,7 +168,7 @@ Obriu `nextflow.config` i trobeu el bloc `validation` (al voltant de la línia 2
 
 === "Abans"
 
-    ```groovy title="nextflow.config" linenums="246"
+    ```groovy title="nextflow.config" linenums="247"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
@@ -257,13 +257,13 @@ nf-core pipelines schema build
 Hauríeu de veure alguna cosa així:
 
 ```console
-                                      ,--./,-.
-      ___     __   __   __   ___     /,-._.--\
-|\ | |__  __ /  ` /  \ |__) |__         }  {
-| \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                      `._,._,'
+                                          ,--./,-.
+          ___     __   __   __   ___     /,-._.--~\
+    |\ | |__  __ /  ` /  \ |__) |__         }  {
+    | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                          `._,._,'
 
-nf-core/tools version 3.5.2 - https://nf-co.re
+    nf-core/tools version 3.5.2 - https://nf-co.re
 
 INFO     [✓] Default parameters match schema validation
 INFO     [✓] Pipeline schema looks valid (found 17 params)
@@ -369,14 +369,14 @@ nextflow run . --input assets/greetings.csv --outdir results --batch my-batch -p
 ??? success "Sortida de la comanda"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [peaceful_wozniak] DSL2 - revision: b9e9b3b8de
 
     executor >  local (8)
     [de/a1b2c3] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
     [4f/d5e6f7] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-    [8a/b9c0d1] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔
+    [8a/b9c0d1] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
     [e2/f3a4b5] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
@@ -410,7 +410,7 @@ cat assets/greetings.csv
 ```csv title="assets/greetings.csv"
 Hello,en,87
 Bonjour,fr,96
-Holà,es,98
+Hola,es,98
 ```
 
 Aquest és un CSV simple amb:
@@ -446,7 +446,7 @@ Obriu `assets/schema_input.json` i reemplaceu les seccions `properties` i `requi
     ```json title="assets/schema_input.json" linenums="1" hl_lines="10-25 27"
     {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
-        "$id": "https://raw.githubusercontent.com/core/hello/main/assets/schema_input.json",
+        "$id": "https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json",
         "title": "core/hello pipeline - params.input schema",
         "description": "Schema for the greetings file provided with params.input",
         "type": "array",
@@ -480,7 +480,7 @@ Obriu `assets/schema_input.json` i reemplaceu les seccions `properties` i `requi
     ```json title="assets/schema_input.json" linenums="1" hl_lines="10-29 31"
     {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
-        "$id": "https://raw.githubusercontent.com/core/hello/main/assets/schema_input.json",
+        "$id": "https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json",
         "title": "core/hello pipeline - params.input schema",
         "description": "Schema for the file provided with params.input",
         "type": "array",
@@ -536,7 +536,7 @@ Per al nostre cas simple, necessitem afegir una línia de capçalera al nostre f
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 === "Abans"
@@ -544,7 +544,7 @@ Per al nostre cas simple, necessitem afegir una línia de capçalera al nostre f
     ```csv title="assets/greetings.csv" linenums="1"
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 Ara el fitxer CSV té una línia de capçalera que coincideix amb els noms de camp del nostre esquema.
@@ -627,8 +627,8 @@ Ara actualitzeu el codi de creació del canal:
 
 Desglossem què ha canviat:
 
-1. **`samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")`**: Valida el fitxer d'entrada contra el nostre esquema i retorna una llista
-2. **`Channel.fromList(...)`**: Converteix la llista en un canal de Nextflow
+1. **`#!groovy samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")`**: Valida el fitxer d'entrada contra el nostre esquema i retorna una llista
+2. **`channel.fromList(...)`**: Converteix la llista en un canal de Nextflow
 
 Això completa la implementació de la validació de dades d'entrada utilitzant `samplesheetToList` i esquemes JSON.
 
@@ -640,7 +640,7 @@ Obriu `nextflow.config` i elimineu la línia `ignoreParams` del bloc `validation
 
 === "Després"
 
-    ```groovy title="nextflow.config" linenums="246"
+    ```groovy title="nextflow.config" linenums="247"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
@@ -649,7 +649,7 @@ Obriu `nextflow.config` i elimineu la línia `ignoreParams` del bloc `validation
 
 === "Abans"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="246"
+    ```groovy title="nextflow.config" hl_lines="3" linenums="247"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
@@ -684,7 +684,7 @@ nextflow run . --outdir core-hello-results -profile test,docker
     executor >  local (8)
     [c1/39f64a] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
     [44/c3fb82] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-    [62/80fab2] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔
+    [62/80fab2] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
     [e1/4db4fd] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
@@ -711,7 +711,7 @@ Ara obriu el fitxer i canvieu el nom de la primera columna, a la línia de capç
     message,language,score
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 === "Abans"
@@ -720,7 +720,7 @@ Ara obriu el fitxer i canvieu el nom de la primera columna, a la línia de capç
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 Això no coincideix amb el nostre esquema, així que la validació hauria de llançar un error.
@@ -734,7 +734,7 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
 ??? failure "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 24.10.4
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [trusting_ochoa] DSL2 - revision: b9e9b3b8de
 
@@ -743,17 +743,17 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
       outdir             : test-results
 
     Generic options
-      trace_report_suffix: 2025-01-27_03-16-04
+      trace_report_suffix: 2025-11-21_07-35-12
 
     Core Nextflow options
       runName            : trusting_ochoa
       containerEngine    : docker
-      launchDir          : /workspace/hello-nf-core
-      workDir            : /workspace/hello-nf-core/work
-      projectDir         : /workspace/hello-nf-core
-      userName           : user
+      launchDir          : /workspaces/training/hello-nf-core/core-hello
+      workDir            : /workspaces/training/hello-nf-core/core-hello/work
+      projectDir         : /workspaces/training/hello-nf-core/core-hello
+      userName           : root
       profile            : docker
-      configFiles        : /workspace/hello-nf-core/nextflow.config
+      configFiles        : /workspaces/training/hello-nf-core/core-hello/nextflow.config
 
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
@@ -793,4 +793,4 @@ Heu implementat i provat tant la validació de paràmetres com la validació de 
 
 Heu completat les cinc parts del curs de formació Hello nf-core!
 
-Continueu al [Resum](summary.md) per reflexionar sobre el que heu construït i après.
+Continueu al [Resum](next_steps.md) per reflexionar sobre el que heu construït i après.

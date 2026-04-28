@@ -447,6 +447,6 @@ Nextflow for Bioimaging kursunu tamamladığınız için tebrikler!
 Sonraki adımlar:
 
 - Geri bildirim sağlamak için kurs anketini doldurun
-- İş akışları geliştirme hakkında daha fazla bilgi edinmek için [Hello Nextflow](../hello_nextflow/index.md) sayfasına göz atın
-- nf-core araçlarına daha derinlemesine dalmak için [Hello nf-core](../hello_nf-core/index.md) sayfasını keşfedin
-- [Eğitim koleksiyonlarında](../training_collections/index.md) diğer kurslara göz atın
+- İş akışları geliştirme hakkında daha fazla bilgi edinmek için [Hello Nextflow](../../hello_nextflow/index.md) sayfasına göz atın
+- nf-core araçlarına daha derinlemesine dalmak için [Hello nf-core](../../hello_nf-core/index.md) sayfasını keşfedin
+- [Eğitim koleksiyonlarında](../../training_collections/index.md) diğer kurslara göz atın

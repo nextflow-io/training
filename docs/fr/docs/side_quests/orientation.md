@@ -1,53 +1,38 @@
-# Orientation
+# Premiers pas
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-L'environnement GitHub Codespaces contient tous les logiciels, le code et les données nécessaires pour suivre cette formation, vous n'avez donc rien à installer vous-même.
-Cependant, vous avez besoin d'un compte (gratuit) pour vous connecter, et vous devriez prendre quelques minutes pour vous familiariser avec l'interface.
+## Démarrer un environnement de formation
 
-Si vous ne l'avez pas encore fait, veuillez suivre [ce lien](../../envsetup/) avant d'aller plus loin.
+Pour utiliser l'environnement préconstruit que nous fournissons sur GitHub Codespaces, cliquez sur le bouton "Open in GitHub Codespaces" ci-dessous.
+Pour d'autres options, consultez [Options d'environnement](../envsetup/index.md).
 
-## Matériel fourni
+Nous vous recommandons d'ouvrir l'environnement de formation dans un nouvel onglet ou une nouvelle fenêtre de navigateur (utilisez le clic droit, ctrl+clic ou cmd+clic selon votre équipement) afin de pouvoir continuer à lire pendant que l'environnement se charge.
+Vous devrez garder ces instructions ouvertes en parallèle pour suivre le cours.
 
-Tout au long de cette formation, nous travaillerons dans le répertoire `side-quests/`.
-Ce répertoire contient tous les fichiers de code, les données de test et les fichiers accessoires dont vous aurez besoin.
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-N'hésitez pas à explorer le contenu de ce répertoire ; la façon la plus simple de le faire est d'utiliser l'explorateur de fichiers sur le côté gauche de l'espace de travail GitHub Codespaces.
-Alternativement, vous pouvez utiliser la commande `tree`.
-Tout au long de la formation, nous utilisons la sortie de `tree` pour représenter la structure et le contenu des répertoires sous une forme lisible, parfois avec des modifications mineures pour plus de clarté.
+### Bases de l'environnement
 
-Ici, nous générons une table des matières jusqu'au deuxième niveau :
+Cet environnement de formation contient tous les logiciels, le code et les données nécessaires pour suivre le cours, vous n'avez donc rien à installer vous-même.
 
-```bash
-tree . -L 2
-```
+Le codespace est configuré avec une interface VSCode, qui comprend un explorateur de fichiers, un éditeur de code et un terminal.
+Toutes les instructions données pendant le cours (par exemple, « ouvrir le fichier », « modifier le code » ou « exécuter cette commande ») font référence à ces trois parties de l'interface VSCode, sauf indication contraire.
 
-Si vous exécutez ceci dans `side-quests`, vous devriez voir la sortie suivante :
+Si vous suivez ce cours par vous-même, veuillez vous familiariser avec les [bases de l'environnement](../envsetup/01_setup.md) pour plus de détails.
 
-```console title="Contenu du répertoire"
-.
-├── metadata
-├── nf-core
-├── nf-test
-├── solutions
-├── splitting_and_grouping
-└── workflows_of_workflows
-```
+### Exigences de version
 
-**Voici un résumé de ce que vous devez savoir pour commencer :**
+Cette formation fonctionne avec Nextflow 25.10.2 ou une version ultérieure **avec le parseur de syntaxe v2 ACTIVÉ**.
+Si vous utilisez un environnement local ou personnalisé, veuillez vous assurer que vous utilisez les paramètres corrects tels que documentés [ici](../info/nxf_versions.md).
 
-- **Chaque répertoire correspond à une quête secondaire individuelle.**
-  Leur contenu est détaillé sur la page de la quête secondaire correspondante.
+## Liste de vérification
 
-- **Le répertoire `solutions`** contient les scripts de workflow et/ou de module complétés qui résultent de l'exécution des différentes étapes de chaque quête secondaire.
-  Ils sont destinés à être utilisés comme référence pour vérifier votre travail et résoudre tout problème.
+Vous pensez être prêt·e à vous lancer ?
 
-!!!tip "Astuce"
+- [ ] Je comprends l'objectif de ce cours et ses prérequis
+- [ ] Mon environnement est opérationnel
 
-    Si pour une raison quelconque vous sortez de ce répertoire, vous pouvez toujours exécuter cette commande pour y revenir :
+Si vous pouvez cocher toutes les cases, vous êtes prêt·e à commencer.
 
-    ```bash
-    cd /workspaces/training/side-quests
-    ```
-
-Maintenant, pour commencer la formation, cliquez sur la flèche dans le coin inférieur droit de cette page.
+**Pour débuter, sélectionnez une Quête secondaire dans le menu de navigation.**

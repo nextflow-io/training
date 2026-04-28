@@ -35,4 +35,4 @@ Bu kurs aşağıdakiler konusunda minimal bir aşinalık varsayar:
 - Komut satırı deneyimi
 - Görüntüleme dosya formatları hakkında temel bilgi (TIFF görüntüleri, tablo verileri)
 
-Teknik gereksinimler ve ortam kurulumu için [Ortam Kurulumu](../../envsetup/) mini kursuna bakın.
+Teknik gereksinimler ve ortam kurulumu için [Ortam Kurulumu](../../envsetup/index.md) mini kursuna bakın.

@@ -1,4 +1,4 @@
-# Depurando Fluxos de Trabalho
+# Solução de Problemas em Fluxos de Trabalho
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
@@ -20,10 +20,10 @@ Ao final, você terá uma metodologia robusta de depuração que transforma mens
 
 Antes de embarcar nesta side quest, você deve:
 
-- Ter concluído o tutorial [Hello Nextflow](../hello_nextflow/README.md) ou um curso equivalente para iniciantes.
+- Ter concluído o tutorial [Hello Nextflow](../../hello_nextflow/index.md) ou um curso equivalente para iniciantes.
 - Estar confortável com os conceitos e mecanismos básicos do Nextflow (processos, canais, operadores)
 
-**Opcional:** Recomendamos concluir a side quest [IDE Features for Nextflow Development](../dev_environment/) primeiro.
+**Opcional:** Recomendamos concluir a side quest [IDE Features for Nextflow Development](../dev_environment/index.md) primeiro.
 Ela oferece uma cobertura abrangente dos recursos do IDE que auxiliam na depuração (realce de sintaxe, detecção de erros, etc.), que usaremos bastante aqui.
 
 ---
@@ -32,7 +32,7 @@ Ela oferece uma cobertura abrangente dos recursos do IDE que auxiliam na depura�
 
 #### Abra o codespace de treinamento
 
-Se ainda não tiver feito isso, certifique-se de abrir o ambiente de treinamento conforme descrito em [Configuração do Ambiente](../envsetup/index.md).
+Se ainda não tiver feito isso, certifique-se de abrir o ambiente de treinamento conforme descrito em [Configuração do Ambiente](../../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -132,7 +132,7 @@ nextflow run bad_syntax.nf
 ??? failure "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `bad_syntax.nf` [stupefied_bhabha] DSL2 - revision: ca6327fad2
 
@@ -181,7 +181,7 @@ workflow {
 
 Para fins deste exemplo, deixamos um comentário para mostrar onde está o erro. A extensão Nextflow para VSCode também deve estar te dando algumas dicas sobre o que pode estar errado, colocando a chave incompatível em vermelho e destacando o fim prematuro do arquivo:
 
-![Bad syntax](img/bad_syntax.png)
+![Bad syntax](../img/bad_syntax.png)
 
 **Estratégia de depuração para erros de chaves:**
 
@@ -260,7 +260,7 @@ nextflow run bad_syntax.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `bad_syntax.nf` [insane_faggin] DSL2 - revision: 961938ee2b
 
@@ -281,7 +281,7 @@ nextflow run invalid_process.nf
 ??? failure "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `invalid_process.nf` [nasty_jepsen] DSL2 - revision: da9758d614
 
@@ -330,7 +330,7 @@ workflow {
 
 Olhando para a linha 4 no contexto do erro, podemos identificar o problema: estamos usando `inputs` em vez da diretiva correta `input`. A extensão Nextflow para VSCode também vai sinalizar isso:
 
-![Invalid process message](img/invalid_process_message.png)
+![Invalid process message](../img/invalid_process_message.png)
 
 #### Corrija o código
 
@@ -403,7 +403,7 @@ nextflow run invalid_process.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `invalid_process.nf` [silly_fermi] DSL2 - revision: 961938ee2b
 
@@ -424,7 +424,7 @@ nextflow run no_such_var.nf
 ??? failure "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `no_such_var.nf` [gloomy_meninsky] DSL2 - revision: 0c4d3bc28c
 
@@ -470,7 +470,7 @@ workflow {
 }
 ```
 
-A mensagem de erro indica que a variável não é reconhecida no template do script, e aí está — você deve conseguir ver `${undefined_var}` sendo usada no bloco de script, mas não definida em outro lugar.
+A mensagem de erro indica que a variável não é reconhecida no template do script, e aí está — você deve conseguir ver `#!groovy ${undefined_var}` sendo usada no bloco de script, mas não definida em outro lugar.
 
 #### Corrija o código
 
@@ -486,7 +486,7 @@ Se você receber um erro 'No such variable', pode corrigi-lo definindo a variáv
         val sample_name
 
         output:
-        path "${sample_name}_output.txt"
+        path "${sample_name}_processed.txt"
 
         script:
         // Define variáveis em código Groovy antes do script
@@ -544,7 +544,7 @@ nextflow run no_such_var.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `no_such_var.nf` [suspicious_venter] DSL2 - revision: 6ba490f7c5
 
@@ -565,7 +565,7 @@ nextflow run bad_bash_var.nf
 ??? failure "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `bad_bash_var.nf` [infallible_mandelbrot] DSL2 - revision: 0853c11080
 
@@ -580,7 +580,7 @@ nextflow run bad_bash_var.nf
 
 #### Verifique o código
 
-O erro aponta para a linha 13, onde `${prefix}` é usado. Vamos examinar `bad_bash_var.nf` para ver o que está causando o problema:
+O erro aponta para a linha 13, onde `#!groovy ${prefix}` é usado. Vamos examinar `bad_bash_var.nf` para ver o que está causando o problema:
 
 ```groovy title="bad_bash_var.nf" hl_lines="13" linenums="1"
 #!/usr/bin/env nextflow
@@ -600,7 +600,7 @@ process PROCESS_FILES {
 }
 ```
 
-Neste exemplo, estamos definindo a variável `prefix` em Bash, mas em um processo Nextflow a sintaxe `$` que usamos para referenciá-la (`${prefix}`) é interpretada como uma variável Groovy, não Bash. A variável não existe no contexto Groovy, então recebemos um erro 'no such variable'.
+Neste exemplo, estamos definindo a variável `prefix` em Bash, mas em um processo Nextflow a sintaxe `$` que usamos para referenciá-la (`#!groovy ${prefix}`) é interpretada como uma variável Groovy, não Bash. A variável não existe no contexto Groovy, então recebemos um erro 'no such variable'.
 
 #### Corrija o código
 
@@ -664,7 +664,7 @@ nextflow run bad_bash_var.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `bad_bash_var.nf` [naughty_franklin] DSL2 - revision: 58c1c83709
 
@@ -700,7 +700,7 @@ nextflow run badpractice_syntax.nf
 ??? failure "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `badpractice_syntax.nf` [intergalactic_colden] DSL2 - revision: 5e4b291bde
 
@@ -748,7 +748,7 @@ workflow {
 
 A extensão VSCode também vai destacar a variável `input_ch` como sendo definida fora do bloco workflow:
 
-![Non-lethal syntax error](img/nonlethal.png)
+![Non-lethal syntax error](../img/nonlethal.png)
 
 #### Corrija o código
 
@@ -822,7 +822,7 @@ nextflow run badpractice_syntax.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `badpractice_syntax.nf` [naughty_ochoa] DSL2 - revision: 5e4b291bde
 
@@ -867,7 +867,7 @@ nextflow run bad_number_inputs.nf
 ??? failure "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `bad_number_inputs.nf` [happy_swartz] DSL2 - revision: d83e58dcd3
 
@@ -913,7 +913,7 @@ workflow {
 
 Você deve ver a chamada incompatível de `PROCESS_FILES`, fornecendo múltiplos canais de entrada quando o processo define apenas um. A extensão VSCode também vai sublinhar a chamada do processo em vermelho e fornecer uma mensagem de diagnóstico quando você passar o mouse sobre ela:
 
-![Incorrect number of args message](img/incorrect_num_args.png)
+![Incorrect number of args message](../img/incorrect_num_args.png)
 
 #### Corrija o código
 
@@ -986,7 +986,7 @@ nextflow run bad_number_inputs.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `bad_number_inputs.nf` [big_euler] DSL2 - revision: e302bd87be
 
@@ -1009,7 +1009,7 @@ nextflow run exhausted.nf
 ??? success "Saída do comando"
 
 ```console title="Exhausted channel output"
- N E X T F L O W   ~  version 25.10.2
+ N E X T F L O W   ~  version 25.10.4
 
 Launching `exhausted.nf` [extravagant_gauss] DSL2 - revision: 08cff7ba2a
 
@@ -1133,7 +1133,7 @@ nextflow run exhausted.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `exhausted.nf` [maniac_leavitt] DSL2 - revision: f372a56a7d
 
@@ -1328,7 +1328,7 @@ nextflow run bad_channel_shape.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `bad_channel_shape.nf` [clever_thompson] DSL2 - revision: 8cbcae3746
 
@@ -1353,7 +1353,7 @@ nextflow run bad_channel_shape_viewed.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `bad_channel_shape_viewed.nf` [maniac_poisson] DSL2 - revision: b4f24dc9da
 
@@ -1418,7 +1418,7 @@ nextflow run bad_channel_shape_viewed.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `bad_channel_shape_viewed.nf` [marvelous_koch] DSL2 - revision: 03e79cdbad
 
@@ -1459,7 +1459,7 @@ nextflow run missing_output.nf
 ??? failure "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `missing_output.nf` [zen_stone] DSL2 - revision: 37ff61f926
 
@@ -1567,7 +1567,7 @@ nextflow run missing_output.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `missing_output.nf` [elated_hamilton] DSL2 - revision: 961938ee2b
 
@@ -1654,7 +1654,7 @@ nextflow run missing_software.nf -profile docker
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `missing_software.nf` [awesome_stonebraker] DSL2 - revision: 0296d12839
 
@@ -1664,7 +1664,7 @@ nextflow run missing_software.nf -profile docker
 
 !!! note "Nota"
 
-    Para saber mais sobre como o Nextflow usa contêineres, consulte [Hello Nextflow](../hello_nextflow/05_hello_containers.md)
+    Para saber mais sobre como o Nextflow usa contêineres, consulte [Hello Nextflow](../../hello_nextflow/05_hello_containers.md)
 
 ### 3.3. Configuração de recursos incorreta
 
@@ -1681,7 +1681,7 @@ nextflow run bad_resources.nf -profile docker
 ??? failure "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `bad_resources.nf` [disturbed_elion] DSL2 - revision: 27d2066e86
 
@@ -1730,7 +1730,7 @@ process PROCESS_FILES {
 
     script:
     """
-    sleep 1  // Leva 1 segundo, mas o limite de tempo é 1ms
+    sleep 1  # Leva 1 segundo, mas o limite de tempo é 1ms
     cowpy ${sample_name} > ${sample_name}_output.txt
     """
 }
@@ -1778,7 +1778,7 @@ Aumente o limite de tempo para um valor realista:
 
         script:
         """
-        sleep 1  // Leva 1 segundo, mas o limite de tempo é 1ms
+        sleep 1  # Leva 1 segundo, mas o limite de tempo é 1ms
         cowpy ${sample_name} > ${sample_name}_output.txt
         """
     }
@@ -1793,7 +1793,7 @@ nextflow run bad_resources.nf -profile docker
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `bad_resources.nf` [friendly_mcclintock] DSL2 - revision: 381567d2c1
 
@@ -1822,7 +1822,7 @@ nextflow run missing_output.nf
 ??? failure "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `missing_output.nf` [irreverent_payne] DSL2 - revision: 3d5117f7e2
 
@@ -1980,7 +1980,7 @@ nextflow run bad_channel_shape_viewed_debug.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `bad_channel_shape_viewed_debug.nf` [agitated_crick] DSL2 - revision: ea3676d9ec
 
@@ -2044,7 +2044,7 @@ nextflow run bad_syntax.nf -preview
 ??? failure "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `bad_syntax.nf` [magical_mercator] DSL2 - revision: 550b9a8873
 
@@ -2110,7 +2110,7 @@ nextflow run missing_software_with_stub.nf -stub-run
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `missing_software_with_stub.nf` [astonishing_shockley] DSL2 - revision: f1f4f05d7d
 
@@ -2194,7 +2194,7 @@ Esta metodologia combina todas as ferramentas que cobrimos em um fluxo de trabal
 
     Depois de identificar um problema, você precisa de uma maneira eficiente de testar suas correções sem desperdiçar tempo re-executando partes bem-sucedidas do seu fluxo de trabalho. A funcionalidade `-resume` do Nextflow é inestimável para depuração.
 
-    Você já deve ter encontrado o `-resume` se trabalhou com o [Hello Nextflow](../hello_nextflow/), e é importante que você o use bem ao depurar para evitar esperar enquanto os processos antes do seu processo problemático são executados.
+    Você já deve ter encontrado o `-resume` se trabalhou com o [Hello Nextflow](../../hello_nextflow/index.md), e é importante que você o use bem ao depurar para evitar esperar enquanto os processos antes do seu processo problemático são executados.
 
     **Estratégia de depuração com resume:**
 
@@ -2249,7 +2249,7 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
     ??? failure "Saída do comando"
 
         ```console
-        N E X T F L O W   ~  version 25.10.2
+        N E X T F L O W   ~  version 25.10.4
 
         Launching `buggy_workflow.nf` [wise_ramanujan] DSL2 - revision: d51a8e83fd
 
@@ -2417,7 +2417,7 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
         ```
         **Correção:** Obtenha a saída do processo anterior
         ```groovy linenums="88"
-        handleFiles(heavyProcess.out)
+        file_ch = handleFiles(heavy_ch)
         ```
 
         Com isso, o fluxo de trabalho completo deve ser executado.
@@ -2441,7 +2441,6 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
         * Processo com incompatibilidade de entrada/saída
         */
         process processFiles {
-            publishDir "${params.output}/processed", mode: 'copy'
 
             input:
                 tuple val(sample_id), path(input_file)
@@ -2460,7 +2459,6 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
         * Processo com problemas de recursos
         */
         process heavyProcess {
-            publishDir "${params.output}/heavy", mode: 'copy'
 
             time '100 s'
 
@@ -2483,7 +2481,6 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
         * Processo com problemas de manipulação de arquivos
         */
         process handleFiles {
-            publishDir "${params.output}/files", mode: 'copy'
 
             input:
                 path input_file
@@ -2503,7 +2500,7 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
         * Fluxo de trabalho principal com problemas de canal
         */
         workflow {
-
+            main:
             // Canal com uso incorreto
             input_ch = channel
                 .fromPath(params.input)
@@ -2514,7 +2511,24 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
 
             heavy_ch = heavyProcess(input_ch.map{it[0]})
 
-            handleFiles(heavyProcess.out)
+            file_ch = handleFiles(heavy_ch)
+
+            publish:
+            processed = processed_ch
+            heavy = heavy_ch
+            files = file_ch
+        }
+
+        output {
+            processed {
+                path 'processed'
+            }
+            heavy {
+                path 'heavy'
+            }
+            files {
+                path 'files'
+            }
         }
         ```
 
@@ -2644,4 +2658,4 @@ Para fluxos de trabalho em produção, considere:
 
 ## O que vem a seguir?
 
-Volte ao [menu de Side Quests](../) ou clique no botão no canto inferior direito da página para avançar para o próximo tópico da lista.
+Volte ao [menu de Side Quests](../index.md) ou clique no botão no canto inferior direito da página para avançar para o próximo tópico da lista.

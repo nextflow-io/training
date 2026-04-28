@@ -15,9 +15,9 @@ hide:
 각 컬렉션에는 인덱스 페이지에 문서화된 특정 전제 조건이 있습니다. 그러나 대부분의 컬렉션은 다음을 가정합니다:
 
 - 명령줄 사용 경험
-- [Hello Nextflow](../../hello_nextflow/) 초급 교육 과정에서 다루는 기본적인 Nextflow 개념 및 도구
+- [Hello Nextflow](../hello_nextflow/index.md) 초급 교육 과정에서 다루는 기본적인 Nextflow 개념 및 도구
 
-기술적 요구 사항 및 환경 설정에 대해서는 [Environment Setup](../../envsetup/) 단기 과정을 참조하십시오.
+기술적 요구 사항 및 환경 설정에 대해서는 [Environment Setup](../envsetup/index.md) 단기 과정을 참조하십시오.
 
 ## 사용 가능한 컬렉션
 

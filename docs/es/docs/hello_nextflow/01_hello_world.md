@@ -214,8 +214,8 @@ nextflow run hello-world.nf
 
 ??? success "Salida del comando"
 
-    ```console hl_lines="7"
-    N E X T F L O W   ~  version 25.10.2
+    ```console hl_lines="6"
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
 
@@ -486,7 +486,7 @@ nextflow run hello-world.nf
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5
 
@@ -574,7 +574,7 @@ nextflow run hello-world.nf
 ??? success "Salida del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
 
@@ -653,7 +653,7 @@ nextflow run hello-world.nf
 ??? success "Salida del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
 
@@ -837,7 +837,7 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea
 
@@ -880,7 +880,7 @@ Démosle al parámetro `input` un valor predeterminado declarándolo antes de la
  * Parámetros del pipeline
  */
 params {
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
 }
 ```
 
@@ -890,7 +890,7 @@ Los tipos soportados incluyen `String`, `Integer`, `Float`, `Boolean` y `Path`.
 
 !!! info "Info"
 
-    En workflows más antiguos, puede ver que todo ese bloque `params` está escrito como solo `input = 'Holà mundo!'`.
+    En workflows más antiguos, puede ver que todo ese bloque `params` está escrito como solo `input = 'Hola mundo!'`.
 
 A medida que agregue más parámetros a su pipeline, debe agregarlos todos a este bloque, ya sea que necesite darles un valor predeterminado o no.
 Esto facilitará encontrar todos los parámetros configurables de un vistazo.
@@ -906,7 +906,7 @@ nextflow run hello-world.nf
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582
 
@@ -923,7 +923,7 @@ nextflow run hello-world.nf
     - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
     - cause: you tried to assign a value to the class 'java.lang.String'
     @ line 24, column 12.
-          input: String = 'Holà mundo!'
+          input: String = 'Hola mundo!'
                   ^
 
     1 error
@@ -947,7 +947,7 @@ La salida estará en el mismo lugar que anteriormente, pero el contenido deberí
 ??? abstract "Contenido del archivo"
 
     ```console title="results/hello_world/output.txt"
-    Holà mundo!
+    Hola mundo!
     ```
 
 Nextflow usó el valor predeterminado del parámetro greeting para crear la salida.
@@ -965,7 +965,7 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582
 
@@ -1026,7 +1026,7 @@ nextflow run hello-world.nf -resume
 ??? success "Salida del comando"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
 
@@ -1154,7 +1154,7 @@ Más generalmente, sabe cómo interpretar un workflow simple de Nextflow, admini
 
 ### ¿Qué sigue?
 
-Tómese un pequeño descanso, ¡se lo ha ganado!
+¡Tómese un pequeño descanso, se lo ha ganado!
 
 Cuando esté listo, pase a [**Parte 2: Hello Channels**](./02_hello_channels.md) para aprender cómo usar canales para alimentar entradas en su workflow, lo que le permitirá aprovechar el paralelismo de flujo de datos incorporado de Nextflow y otras características poderosas.
 

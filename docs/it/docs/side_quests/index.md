@@ -2,55 +2,57 @@
 title: Missioni Secondarie
 hide:
   - toc
+page_type: index_page
+index_type: course
+additional_information:
+  technical_requirements: true
+  learning_objectives:
+    - Configurare un ambiente di sviluppo Nextflow produttivo
+    - Applicare pattern di scripting avanzati per trasformazioni di dati complesse
+    - Gestire e propagare i metadati attraverso flussi di lavoro multi-step
+    - Suddividere e raggruppare canali di dati per l'elaborazione parallela e seriale
+    - Testare i flussi di lavoro Nextflow usando nf-test
+    - Comporre pipeline complesse da moduli di flusso di lavoro riutilizzabili con nome
+    - Lavorare in modo efficiente con i file usando le operazioni sui file di Nextflow
+    - Eseguire il debug sistematico dei problemi comuni nei flussi di lavoro
+    - Usare e creare plugin per Nextflow
+  audience_prerequisites:
+    - "**Destinatari:** Questa raccolta è pensata per chi ha completato il corso per principianti Hello Nextflow e vuole approfondire argomenti specifici."
+    - "**Competenze:** Si presuppone esperienza con la linea di comando e familiarità con i concetti e gli strumenti di base di Nextflow."
+    - "**Corsi:** È necessario aver completato [Hello Nextflow](../hello_nextflow/index.md) o equivalente."
 ---
 
 # Missioni Secondarie
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Questa è una raccolta di mini-corsi di formazione indipendenti che approfondiscono argomenti specifici. Può seguirli in qualsiasi ordine.
+**Le Missioni Secondarie sono mini-corsi di formazione indipendenti che approfondiscono argomenti specifici di Nextflow.**
 
-Iniziamo! Clicca sul pulsante "Open in GitHub Codespaces" qui sotto per avviare l'ambiente di formazione (preferibilmente in una scheda separata), quindi continua a leggere mentre si carica.
+Ogni missione secondaria può essere seguita in modo indipendente, in qualsiasi ordine, in base ai propri interessi e necessità.
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+<!-- additional_information -->
 
-## Prerequisiti
+## Panoramica del corso
 
-I prerequisiti specifici di ciascun mini-corso variano e sono documentati nelle pagine corrispondenti.
-Tuttavia, tutti presuppongono una familiarità minima con i seguenti aspetti:
+Se è la prima volta che ti addentri nelle Missioni Secondarie, inizia dalla pagina [Orientamento](./orientation.md) per una panoramica dell'ambiente di formazione e dei materiali.
 
-- Esperienza con la linea di comando
-- Concetti e strumenti fondamentali di Nextflow trattati nel corso di formazione per principianti [Hello Nextflow](../../hello_nextflow/).
+### Missioni Secondarie
 
-Per i requisiti tecnici e la configurazione dell'ambiente, consulta il mini-corso [Configurazione dell'Ambiente](../../envsetup/).
+| Missione Secondaria                                                        | Sommario                                                                                 | Tempo Stimato |
+| -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ------------- |
+| [Ambiente di Sviluppo](./dev_environment/index.md)                         | Configurare un ambiente di sviluppo Nextflow locale e produttivo                         | 45 minuti     |
+| [Pattern di Scripting Essenziali](./essential_scripting_patterns/index.md) | Tecniche di scripting avanzate per le sfide comuni nei flussi di lavoro                  | 90 minuti     |
+| [Elaborazione dell'Input di File](./working_with_files/index.md)           | Gestione dei file, operazioni sui path e organizzazione degli output                     | 45 minuti     |
+| [Metadati e Meta Map](./metadata/index.md)                                 | Utilizzo delle meta map per tracciare e propagare le informazioni sui campioni           | 45 minuti     |
+| [Suddivisione e Raggruppamento](./splitting_and_grouping/index.md)         | Tecniche per suddividere e raggruppare i canali di dati                                  | 45 minuti     |
+| [Test con nf-test](./nf_test/index.md)                                     | Scrittura ed esecuzione di test per i flussi di lavoro Nextflow                          | 1 ora         |
+| [Risoluzione dei Problemi nei Flussi di Lavoro](./debugging/index.md)      | Identificazione e correzione degli errori comuni nei flussi di lavoro                    | 1 ora         |
+| [Flussi di Lavoro di Flussi di Lavoro](./workflows_of_workflows/index.md)  | Composizione di pipeline complesse da moduli di flusso di lavoro riutilizzabili con nome | 30 minuti     |
+| [Sviluppo di Plugin](./plugin_development/index.md)                        | Utilizzo e creazione di plugin per Nextflow                                              | 3 ore         |
 
-**Se questa è la prima volta che ti addentri nelle Missioni Secondarie, assicurati di consultare prima la pagina [Orientamento](./orientation.md)!**
+[Inizia :material-arrow-right:](orientation.md){ .md-button .md-button--primary }
 
-Altrimenti, seleziona una missione secondaria dalla tabella qui sotto.
+<!-- Clearfix for float -->
+<div style="content: ''; clear: both; display: table;"></div>
 
-## Missioni Secondarie
-
-| Missione Secondaria                                                             | Tempo Stimato per l'Insegnamento |
-| ------------------------------------------------------------------------------- | -------------------------------- |
-| [Panoramica dell'ambiente di sviluppo Nextflow](./dev_environment/)             | 45 minuti                        |
-| [Pattern di Scripting Essenziali per Nextflow](./essential_scripting_patterns/) | 90 minuti                        |
-| [Metadati nei flussi di lavoro](./metadata/)                                    | 45 minuti                        |
-| [Suddivisione e Raggruppamento](./splitting_and_grouping/)                      | 45 minuti                        |
-| [Test con nf-test](./nf_test/)                                                  | 1 ora                            |
-| [Flussi di lavoro di flussi di lavoro](./workflows_of_workflows/)               | 30 minuti                        |
-| [Lavorare con i file](./working_with_files/)                                    | 45 minuti                        |
-| [Debug dei flussi di lavoro](./debugging/)                                      | 1 ora                            |
-
-## Corsi multi-parte
-
-!!! exercise "Sviluppo di Plugin"
-
-    !!! tip inline end ""
-
-        :material-run-fast: Impara a usare e creare plugin per Nextflow.
-
-    Questo corso tratta l'utilizzo di plugin esistenti nei tuoi flussi di lavoro e la creazione dei tuoi da zero, incluse funzioni personalizzate, monitoraggio del flusso di lavoro, configurazione e distribuzione.
-
-    [Inizia la formazione sullo Sviluppo di Plugin :material-arrow-right:](plugin_development/){ .md-button .md-button--primary }
-
-Facci sapere quali altri domini e casi d'uso vorresti vedere trattati qui pubblicando nella [sezione Training](https://community.seqera.io/c/training/) del forum della community.
+Facci sapere quali altri argomenti vorresti vedere trattati qui pubblicando nella [sezione Training](https://community.seqera.io/c/training/) del forum della community.

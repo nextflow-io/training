@@ -69,7 +69,7 @@ nextflow run hello-modules.nf
 ??? success "Befehlsausgabe"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-modules.nf` [hopeful_avogadro] DSL2 - revision: b09af1237d
 
@@ -88,11 +88,11 @@ Wie zuvor findest du die Ausgabedateien im Verzeichnis, das im `output`-Block an
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Wenn das bei dir funktioniert hat, bist du bereit zu lernen, wie du deinen Workflow-Code modularisierst.
@@ -202,7 +202,7 @@ nextflow run hello-modules.nf -resume
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-modules.nf` [romantic_poisson] DSL2 - revision: 96edfa9ad3
 
@@ -311,7 +311,7 @@ nextflow run hello-modules.nf -resume
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-modules.nf` [nauseous_heisenberg] DSL2 - revision: a04a9f2da0
 
@@ -415,7 +415,7 @@ nextflow run hello-modules.nf -resume
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-modules.nf` [friendly_coulomb] DSL2 - revision: 7aa2b9bc0f
 

@@ -266,7 +266,7 @@ nextflow run greet.nf
 ??? example "Output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `greet.nf` [elated_marconi] DSL2 - revision: cd8d52c97c
 
@@ -280,7 +280,7 @@ nextflow run greet.nf
     Reversed: ollaH
     Output: Hello
     Output: Bonjour
-    Output: Holà
+    Output: Hola
     Output: Ciao
     Output: Hallo
     Pipeline complete! 👋
@@ -350,7 +350,7 @@ Edytuj `GreetingExtension.groovy`, dodając `decorateGreeting` po `reverseGreeti
     }
     ```
 
-Ta funkcja używa interpolacji stringów w Groovy (`"*** ${greeting} ***"`), żeby osadzić zmienną z pozdrowieniem wewnątrz stringa.
+Ta funkcja używa interpolacji stringów w Groovy (`#!groovy "*** ${greeting} ***"`), żeby osadzić zmienną z pozdrowieniem wewnątrz stringa.
 
 Zbuduj, zainstaluj i zaktualizuj workflow:
 
@@ -443,7 +443,7 @@ nextflow run greet.nf
 ??? example "Output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `greet.nf` [elated_marconi] DSL2 - revision: cd8d52c97c
 
@@ -457,7 +457,7 @@ nextflow run greet.nf
     Reversed: ollaH
     Decorated: *** Hello ***
     Decorated: *** Bonjour ***
-    Decorated: *** Holà ***
+    Decorated: *** Hola ***
     Decorated: *** Ciao ***
     Decorated: *** Hallo ***
     Pipeline complete! 👋

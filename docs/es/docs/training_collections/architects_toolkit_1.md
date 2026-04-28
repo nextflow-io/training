@@ -8,7 +8,7 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Nuestras Colecciones de Capacitación proporcionan rutas de aprendizaje seleccionadas a través de nuestros materiales de capacitación avanzada (llamados [Side Quests](../../side_quests)). Esta colección cubre cuatro temas esenciales que se utilizan frecuentemente en conjunto para construir workflows robustos y escalables.
+Nuestras Colecciones de Capacitación proporcionan rutas de aprendizaje seleccionadas a través de nuestros materiales de capacitación avanzada (llamados [Side Quests](../side_quests/index.md)). Esta colección cubre cuatro temas esenciales que se utilizan frecuentemente en conjunto para construir workflows robustos y escalables.
 
 ## Objetivos de aprendizaje
 
@@ -27,7 +27,7 @@ Esta colección está diseñada para usuarios que han completado la capacitació
 
 **Requisitos previos**
 
-- Completar la capacitación [Hello Nextflow](../../hello_nextflow/) o experiencia equivalente
+- Completar la capacitación [Hello Nextflow](../hello_nextflow/index.md) o experiencia equivalente
 - Familiaridad básica con la sintaxis y conceptos de Nextflow
 - Comprensión de patrones básicos de desarrollo de workflows
 - Experiencia con herramientas de línea de comandos
@@ -36,10 +36,10 @@ Esta colección está diseñada para usuarios que han completado la capacitació
 
 Esta colección consta de cuatro Side Quests que cubren temas complementarios de ingeniería de workflows:
 
-1. **[Workflows of Workflows](../../side_quests/workflows_of_workflows)** - Arquitectura y composición de workflows complejos
-2. **[Testing with nf-test](../../side_quests/nf-test)** - Estrategias de pruebas para workflows de Nextflow
-3. **[Metadata](../../side_quests/metadata)** - Manejo de metadatos para elementos en canales de Nextflow
-4. **[Splitting and Grouping](../../side_quests/splitting_and_grouping)** - Patrones avanzados de procesamiento de datos
+1. **[Workflows of Workflows](../side_quests/workflows_of_workflows/index.md)** - Arquitectura y composición de workflows complejos
+2. **[Testing with nf-test](../side_quests/nf_test/index.md)** - Estrategias de pruebas para workflows de Nextflow
+3. **[Metadata](../side_quests/metadata/index.md)** - Manejo de metadatos para elementos en canales de Nextflow
+4. **[Splitting and Grouping](../side_quests/splitting_and_grouping/index.md)** - Patrones avanzados de procesamiento de datos
 
 Cada Side Quest es independiente y cubre conceptos autónomos, pero recomendamos completarlos en el orden listado arriba para una progresión lógica a través de los temas.
 

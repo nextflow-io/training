@@ -14,7 +14,7 @@ additional_information:
   audience_prerequisites:
     - "**대상:** 이 과정은 데이터 분석 파이프라인을 개발하거나 맞춤화하려는 유전체학 및 관련 분야의 연구자를 위해 설계되었습니다."
     - "**기술:** 명령줄, 기본 스크립팅 개념, 일반적인 유전체학 파일 형식에 대한 어느 정도의 친숙함을 가정합니다."
-    - "**전제 조건:** [Hello Nextflow](../../hello_nextflow/)에서 다루는 기초적인 Nextflow 개념 및 도구에 대한 이해가 필요합니다."
+    - "**전제 조건:** [Hello Nextflow](../../hello_nextflow/index.md)에서 다루는 기초적인 Nextflow 개념 및 도구에 대한 이해가 필요합니다."
 ---
 
 # Nextflow for Genomics
@@ -23,7 +23,7 @@ additional_information:
 
 **실제 유전체학 사용 사례에 Nextflow를 적용하는 실습 과정: GATK를 사용한 변이 호출.**
 
-이 과정은 [Hello Nextflow](../../hello_nextflow/) 초급 교육을 기반으로 하며, 유전체학 도메인의 특정 맥락에서 Nextflow를 사용하는 방법을 보여줍니다.
+이 과정은 [Hello Nextflow](../../hello_nextflow/index.md) 초급 교육을 기반으로 하며, 유전체학 도메인의 특정 맥락에서 Nextflow를 사용하는 방법을 보여줍니다.
 고처리량 시퀀싱 데이터를 분석하는 데 널리 사용되는 소프트웨어 패키지인 [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit)를 사용하여 변이 호출 파이프라인을 구현합니다.
 
 <!-- additional_information -->

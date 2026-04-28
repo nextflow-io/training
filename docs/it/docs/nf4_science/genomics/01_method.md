@@ -226,7 +226,7 @@ Lo stesso vale per i file accessori del genoma di riferimento (file indice e diz
 gatk HaplotypeCaller \
         -R /data/ref/ref.fasta \
         -I /data/bam/reads_mother.bam \
-        -O /data/vcf/reads_mother.vcf \
+        -O reads_mother.vcf \
         -L /data/ref/intervals.bed
 ```
 
@@ -302,7 +302,7 @@ I file di output, `reads_mother.vcf` e il suo file indice, `reads_mother.vcf.idx
     conda.yml  hsperfdata_root  reads_mother.vcf  reads_mother.vcf.idx
     ```
 
-Il file VCF contiene le varianti identificate, come vedremo tra un momento, e il file indice ha la stessa funzione del file indice BAM, permettere agli strumenti di cercare e recuperare sottoinsiemi di dati senza caricare l'intero file.
+Il file VCF contiene le varianti identificate, come vedremo tra un momento, e il file indice ha la stessa funzione del file indice BAM: permettere agli strumenti di cercare e recuperare sottoinsiemi di dati senza caricare l'intero file.
 
 Poiché VCF è un formato di testo e questo è un file di test piccolo, potete eseguire `cat reads_mother.vcf` per aprirlo e visualizzarne il contenuto.
 Se scorrete verso l'inizio del file, troverete un'intestazione composta da molte righe di metadati, seguita da una lista di varianti identificate, una per riga.

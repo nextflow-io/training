@@ -7,7 +7,7 @@ En aquesta tercera part del curs de formació Hello nf-core, us mostrem com trob
 Un dels grans avantatges de treballar amb nf-core és la capacitat d'aprofitar mòduls preconstruïts i provats del repositori [nf-core/modules](https://github.com/nf-core/modules).
 En lloc d'escriure cada procés des de zero, podeu instal·lar i utilitzar mòduls mantinguts per la comunitat que segueixen les millors pràctiques.
 
-Per demostrar com funciona això, substituirem el mòdul personalitzat `collectGreetings` pel mòdul `cat/cat` de nf-core/modules al pipeline `core-hello`.
+Per demostrar com funciona això, substituirem el mòdul personalitzat `collectGreetings` pel mòdul `find/concatenate` de nf-core/modules al pipeline `core-hello`.
 
 ??? info "Com començar des d'aquesta secció"
 
@@ -48,7 +48,7 @@ Navegueu a la pàgina de mòduls al vostre navegador web i utilitzeu la barra de
 ![resultats de cerca de mòduls](./img/module-search-results.png)
 
 Com podeu veure, hi ha força resultats, molts d'ells mòduls dissenyats per concatenar tipus de fitxers molt específics.
-Entre ells, hauríeu de veure un anomenat `cat_cat` que és de propòsit general.
+Entre ells, hauríeu de veure un anomenat `find_concatenate` que és de propòsit general.
 
 !!! note "Convenció de nomenclatura de mòduls"
 
@@ -57,12 +57,12 @@ Entre ells, hauríeu de veure un anomenat `cat_cat` que és de propòsit general
     Els mòduls nf-core segueixen la convenció de nomenclatura `programari/comanda` quan una eina proporciona múltiples comandes, com `samtools/view` (paquet samtools, comanda view) o `gatk/haplotypecaller` (paquet GATK, comanda HaplotypeCaller).
     Per a eines que només proporcionen una comanda principal, els mòduls utilitzen un sol nivell com `fastqc` o `multiqc`.
 
-Feu clic a la caixa del mòdul `cat_cat` per veure la documentació del mòdul.
+Feu clic a la caixa del mòdul `find_concatenate` per veure la documentació del mòdul.
 
 La pàgina del mòdul mostra:
 
-- Una breu descripció: "A module for concatenation of gzipped or uncompressed files"
-- Comanda d'instal·lació: `nf-core modules install cat/cat`
+- Una breu descripció: "A module for concatenation of gzipped or uncompressed files getting around UNIX terminal argument size"
+- Comanda d'instal·lació: `nf-core modules install find/concatenate`
 - Estructura del canal d'entrada i sortida
 - Paràmetres disponibles
 
@@ -74,27 +74,38 @@ Alternativament, també podeu cercar mòduls directament des de la línia de com
 nf-core modules list remote
 ```
 
+??? success "Sortida de la comanda (truncada)"
+
+    ```console
+    ...
+    │ fastqc                                                │
+    │ find/concatenate                                      │
+    │ gatk4/applybqsr                                       │
+    │ gatk4/baserecalibrator                                │
+    ...
+    ```
+
 Això mostrarà una llista de tots els mòduls disponibles al repositori nf-core/modules, tot i que és una mica menys convenient si no coneixeu ja el nom del mòdul que esteu cercant.
 No obstant això, si el coneixeu, podeu canalitzar la llista a `grep` per trobar mòduls específics:
 
 ```bash
-nf-core modules list remote | grep 'cat/cat'
+nf-core modules list remote | grep 'find/concatenate'
 ```
 
 ??? success "Sortida de la comanda"
 
     ```console
-    │ cat/cat
+    │ find/concatenate                                      │
     ```
 
-Tingueu en compte que l'enfocament amb `grep` només extraurà resultats amb el terme de cerca al seu nom, cosa que no funcionaria per a `cat_cat`.
+Tingueu en compte que l'enfocament amb `grep` només extraurà resultats amb el terme de cerca al seu nom.
 
 ### 1.3. Obtenir informació detallada sobre el mòdul
 
 Per veure informació detallada sobre un mòdul específic des de la línia de comandes, utilitzeu la comanda `info`:
 
 ```bash
-nf-core modules info cat/cat
+nf-core modules info find/concatenate
 ```
 
 Això mostra documentació sobre el mòdul, incloent les seves entrades, sortides i informació bàsica d'ús.
@@ -112,46 +123,70 @@ Això mostra documentació sobre el mòdul, incloent les seves entrades, sortide
         nf-core/tools version 3.5.2 - https://nf-co.re
 
 
-    ╭─ Module: cat/cat  ─────────────────────────────────────────────────╮
-    │ 🌐 Repository: https://github.com/nf-core/modules.git              │
-    │ 🔧 Tools: cat                                                      │
-    │ 📖 Description: A module for concatenation of gzipped or           │
-    │ uncompressed files                                                 │
-    ╰────────────────────────────────────────────────────────────────────╯
-                      ╷                                          ╷
-    📥 Inputs        │Description                               │Pattern
-    ╺━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━╸
-    input[0]         │                                          │
-    ╶─────────────────┼──────────────────────────────────────────┼───────╴
-      meta  (map)     │Groovy Map containing sample information  │
-                      │e.g. [ id:'test', single_end:false ]      │
-    ╶─────────────────┼──────────────────────────────────────────┼───────╴
-      files_in  (file)│List of compressed / uncompressed files   │      *
-                      ╵                                          ╵
-                          ╷                                 ╷
-    📥 Outputs           │Description                      │     Pattern
-    ╺━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━╸
-    file_out             │                                 │
-    ╶─────────────────────┼─────────────────────────────────┼────────────╴
-      meta  (map)         │Groovy Map containing sample     │
-                          │information                      │
-    ╶─────────────────────┼─────────────────────────────────┼────────────╴
-      ${prefix}  (file)   │Concatenated file. Will be       │ ${file_out}
-                          │gzipped if file_out ends with    │
-                          │".gz"                            │
-    ╶─────────────────────┼─────────────────────────────────┼────────────╴
-    versions_cat         │                                 │
-    ╶─────────────────────┼─────────────────────────────────┼────────────╴
-      versions_cat (tuple)│Software version information     │
-                          ╵                                 ╵
+    ╭─ Module: find/concatenate  ──────────────────────────────────────────────────╮
+    │ 🌐 Repository: https://github.com/nf-core/modules.git                        │
+    │ 🔧 Tools: find, pigz                                                         │
+    │ 📖 Description: A module for concatenation of gzipped or uncompressed files  │
+    │ getting around UNIX terminal argument size                                   │
+    ╰──────────────────────────────────────────────────────────────────────────────╯
+                      ╷                                                    ╷
+     📥 Inputs        │Description                                         │Pattern
+    ╺━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━╸
+     input[0]         │                                                    │
+    ╶─────────────────┼────────────────────────────────────────────────────┼───────╴
+      meta  (map)     │Groovy Map containing sample information e.g. [     │
+                      │id:'test' ]                                         │
+    ╶─────────────────┼────────────────────────────────────────────────────┼───────╴
+      files_in  (file)│List of either compressed or uncompressed files     │      *
+                      ╵                                                    ╵
+                                      ╷                                ╷
+     📥 Outputs                       │Description                     │    Pattern
+    ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━╸
+     file_out                         │                                │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      meta  (map)                     │Groovy Map containing sample    │
+                                      │information e.g. [ id:'test' ]  │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      ${prefix}  (file)               │Concatenated file. Will be      │${file_out}
+                                      │gzipped if ${prefix} ends with  │
+                                      │".gz" or inputs are gzipped,    │
+                                      │will be uncompressed otherwise. │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+     versions_find                    │                                │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      ${task.process}  (string)       │The name of the process         │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      find  (string)                  │The name of the tool            │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      find --version | sed '1!d; s/.* │The expression to obtain the    │
+     //'  (eval)                      │version of the tool             │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+     versions_pigz                    │                                │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      ${task.process}  (string)       │The name of the process         │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      pigz  (string)                  │The name of the tool            │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      pigz --version 2>&1 | sed       │The expression to obtain the    │
+     's/pigz //g'  (eval)             │version of the tool             │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+     versions_coreutils               │                                │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      ${task.process}  (string)       │The name of the process         │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      coreutils  (string)             │The name of the tool            │
+    ╶─────────────────────────────────┼────────────────────────────────┼───────────╴
+      cat --version | sed '1!d; s/.*  │The expression to obtain the    │
+     //'  (eval)                      │version of the tool             │
+                                      ╵                                ╵
 
-    💻  Installation command: nf-core modules install cat/cat
+     💻  Installation command: nf-core modules install find/concatenate
 
     ```
 
 Aquesta és exactament la mateixa informació que podeu trobar al lloc web.
 
-### 1.4. Instal·lar el mòdul cat/cat
+### 1.4. Instal·lar el mòdul find/concatenate
 
 Ara que hem trobat el mòdul que volem, hem d'afegir-lo al codi font del nostre pipeline.
 
@@ -162,7 +197,7 @@ Navegueu al directori del vostre pipeline i executeu la comanda d'instal·lació
 
 ```bash
 cd core-hello
-nf-core modules install cat/cat
+nf-core modules install find/concatenate
 ```
 
 L'eina procedirà a instal·lar el mòdul.
@@ -180,15 +215,15 @@ L'eina procedirà a instal·lar el mòdul.
     nf-core/tools version 3.5.2 - https://nf-co.re
 
 
-    INFO Installing 'cat/cat'
-    INFO Use the following statement to include this module:
+    INFO     Installing 'find/concatenate'
+    INFO     Use the following statement to include this module:
 
-        include { CAT_CAT } from '../modules/nf-core/cat/cat/main'
+     include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
     ```
 
 La comanda automàticament:
 
-- Descarrega els fitxers del mòdul a `modules/nf-core/cat/cat/`
+- Descarrega els fitxers del mòdul a `modules/nf-core/find/concatenate/`
 - Actualitza `modules.json` per fer seguiment del mòdul instal·lat
 - Us proporciona la declaració `include` correcta per utilitzar al vostre workflow
 
@@ -212,8 +247,8 @@ tree -L 4 modules
     │   ├── cowpy.nf
     │   └── sayHello.nf
     └── nf-core
-        └── cat
-            └── cat
+        └── find
+            └── concatenate
                 ├── environment.yml
                 ├── main.nf
                 ├── meta.yml
@@ -234,30 +269,36 @@ nf-core modules list local
     INFO     Repository type: pipeline
     INFO     Modules installed in '.':
 
-    ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
-    ┃ Module Name ┃ Repository      ┃ Version SHA ┃ Message                                ┃ Date       ┃
-    ┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
-    │ cat/cat     │ nf-core/modules │ 41dfa3f     │ update meta.yml of all modules (#8747) │ 2025-07-07 │
-    └─────────────┴─────────────────┴─────────────┴────────────────────────────────────────┴────────────┘
+    ┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+    ┃ Module Name    ┃ Repository      ┃ Version SHA ┃ Message        ┃ Date       ┃
+    ┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+    │ find/concaten… │ nf-core/modules │ 6d46786     │ Support for    │ 2026-04-23 │
+    │                │                 │             │ apptainer as   │            │
+    │                │                 │             │ well as        │            │
+    │                │                 │             │ singularity    │            │
+    │                │                 │             │ for .sif in    │            │
+    │                │                 │             │ `container`    │            │
+    │                │                 │             │ (#11260)       │            │
+    └────────────────┴─────────────────┴─────────────┴────────────────┴────────────┘
     ```
 
-Això confirma que el mòdul `cat/cat` ara forma part del codi font del vostre projecte.
+Això confirma que el mòdul `find/concatenate` ara forma part del codi font del vostre projecte.
 
 No obstant això, per utilitzar realment el nou mòdul, hem d'importar-lo al nostre pipeline.
 
 ### 1.5. Actualitzar les importacions de mòduls
 
-Substituïm la declaració `include` del mòdul `collectGreetings` per la de `CAT_CAT` a la secció d'importacions del workflow `workflows/hello.nf`.
+Substituïm la declaració `include` del mòdul `collectGreetings` per la de `FIND_CONCATENATE` a la secció d'importacions del workflow `workflows/hello.nf`.
 
 Com a recordatori, l'eina d'instal·lació de mòduls ens va proporcionar la declaració exacta a utilitzar:
 
 ```groovy title="Import statement produced by install command"
-include { CAT_CAT } from '../modules/nf-core/cat/cat/main'
+include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
 ```
 
 Tingueu en compte que la convenció nf-core és utilitzar majúscules per als noms de mòduls quan s'importen.
 
-Obriu [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) i feu la substitució següent:
+Obriu `core-hello/workflows/hello.nf` i feu la substitució següent:
 
 === "Després"
 
@@ -272,7 +313,7 @@ Obriu [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) i feu la su
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
     include { cowpy                  } from '../modules/local/cowpy.nf'
-    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
+    include { FIND_CONCATENATE                } from '../modules/nf-core/find/concatenate/main'
     ```
 
 === "Abans"
@@ -293,10 +334,10 @@ Obriu [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) i feu la su
 
 Observeu com el camí per al mòdul nf-core difereix dels mòduls locals:
 
-- **Mòdul nf-core**: `'../modules/nf-core/cat/cat/main'` (referència a `main.nf`)
+- **Mòdul nf-core**: `'../modules/nf-core/find/concatenate/main'` (referència a `main.nf`)
 - **Mòdul local**: `'../modules/local/collectGreetings.nf'` (referència a un sol fitxer)
 
-El mòdul ara està disponible per al workflow, així que només cal que substituïm la crida a `collectGreetings` per utilitzar `CAT_CAT`. Oi?
+El mòdul ara està disponible per al workflow, així que només cal que substituïm la crida a `collectGreetings` per utilitzar `FIND_CONCATENATE`. Oi?
 
 No tan ràpid.
 
@@ -334,7 +375,7 @@ Idealment això és quelcom que hauríeu de fer _abans_ fins i tot d'instal·lar
 
 !!! note "Nota"
 
-    El procés CAT_CAT inclou una gestió força intel·ligent de diferents tipus de compressió, extensions de fitxer i altres aspectes que no són estrictament rellevants per al que intentem mostrar-vos aquí, així que ignorarem la major part i ens centrarem només en les parts que són importants.
+    El procés FIND_CONCATENATE inclou una gestió força intel·ligent de diferents tipus de compressió, extensions de fitxer i altres aspectes que no són estrictament rellevants per al que intentem mostrar-vos aquí, així que ignorarem la major part i ens centrarem només en les parts que són importants.
 
 ### 2.1. Comparar les interfícies dels dos mòduls
 
@@ -360,35 +401,37 @@ El mòdul `collectGreetings` pren dues entrades:
 
 En completar-se, `collectGreetings` produeix un sol camí de fitxer, emès amb l'etiqueta `outfile`.
 
-En comparació, la interfície del mòdul `cat/cat` és més complexa:
+En comparació, la interfície del mòdul `find/concatenate` és més complexa:
 
-```groovy title="modules/nf-core/cat/cat/main.nf (excerpt)" linenums="1" hl_lines="11 14"
-process CAT_CAT {
-    tag "$meta.id"
+```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="1" hl_lines="11 14"
+process FIND_CONCATENATE {
+    tag "${meta.id}"
     label 'process_low'
 
     conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/pigz:2.8' :
-        'biocontainers/pigz:2.8' }"
+    container "${workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container
+        ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/7f/7fd226561e12b32bcacdf4f5ff74577e76233adf52ae5cbc499a2cdfe0e27d82/data'
+        : 'community.wave.seqera.io/library/findutils_pigz:c4dd5edc44402661'}"
 
     input:
     tuple val(meta), path(files_in)
 
     output:
     tuple val(meta), path("${prefix}"), emit: file_out
-    tuple val("${task.process}"), val("pigz"), eval("pigz --version 2>&1 | sed 's/pigz //g'"), topic: versions, emit: versions_cat
+    tuple val("${task.process}"), val("find"), eval("find --version | sed '1!d; s/.* //'"), topic: versions, emit: versions_find
+    tuple val("${task.process}"), val("pigz"), eval("pigz --version 2>&1 | sed 's/pigz //g'"), topic: versions, emit: versions_pigz
+    tuple val("${task.process}"), val("coreutils"), eval("cat --version | sed '1!d; s/.* //'"), topic: versions, emit: versions_coreutils
 ```
 
-El mòdul CAT_CAT pren una sola entrada, però aquesta entrada és una tupla que conté dues coses:
+El mòdul FIND_CONCATENATE pren una sola entrada, però aquesta entrada és una tupla que conté dues coses:
 
 - `meta` és una estructura que conté metadades, anomenada metamap;
 - `files_in` conté un o més fitxers d'entrada a processar, equivalent a `input_files` de `collectGreetings`.
 
-En completar-se, CAT_CAT lliura les seves sortides en dues parts:
+En completar-se, FIND_CONCATENATE lliura les seves sortides en dues parts:
 
-- Una altra tupla que conté el metamap i el fitxer de sortida concatenat, emès amb l'etiqueta `file_out`;
-- Una tupla de versió publicada al canal de tema `versions` per al seguiment de versions de programari.
+- Una tupla que conté el metamap i el fitxer de sortida concatenat, emès amb l'etiqueta `file_out`;
+- Tres tuples de versió (una per eina utilitzada) publicades al canal de tema `versions` per al seguiment de versions de programari.
 
 Tingueu en compte també que per defecte, el fitxer de sortida es nomenarà basant-se en un identificador que forma part de les metadades (codi no mostrat aquí).
 
@@ -399,14 +442,14 @@ Això pot semblar molt a tenir en compte només mirant el codi, així que aquí 
 </figure>
 
 Podeu veure que els dos mòduls tenen requisits d'entrada similars pel que fa al contingut (un conjunt de fitxers d'entrada més algunes metadades) però expectatives molt diferents sobre com s'empaqueta aquest contingut.
-Ignorant la sortida de versions per ara, la seva sortida principal també és equivalent (un fitxer concatenat), excepte que CAT_CAT també emet el metamap conjuntament amb el fitxer de sortida.
+Ignorant la sortida de versions per ara, la seva sortida principal també és equivalent (un fitxer concatenat), excepte que FIND_CONCATENATE també emet el metamap conjuntament amb el fitxer de sortida.
 
 Les diferències d'empaquetament seran força fàcils de gestionar, com veureu d'aquí a poc.
 No obstant això, per entendre la part del metamap, hem d'introduir-vos a algun context addicional.
 
 ### 2.2. Entendre els metamaps
 
-Acabem de dir-vos que el mòdul CAT_CAT espera un mapa de metadades com a part de la seva tupla d'entrada.
+Acabem de dir-vos que el mòdul FIND_CONCATENATE espera un mapa de metadades com a part de la seva tupla d'entrada.
 Prenguem-nos uns minuts per examinar més de prop què és això.
 
 El **mapa de metadades**, sovint anomenat **metamap** per abreujar, és un mapa d'estil Groovy que conté informació sobre unitats de dades.
@@ -426,9 +469,9 @@ O en un cas on les metadades s'adjunten a nivell de lot:
 [id: 'batch1', date: '25.10.01']
 ```
 
-Ara posem això en el context del procés `CAT_CAT`, que espera que els fitxers d'entrada s'empaqueten en una tupla amb un metamap, i també produeix el metamap com a part de la tupla de sortida.
+Ara posem això en el context del procés `FIND_CONCATENATE`, que espera que els fitxers d'entrada s'empaqueten en una tupla amb un metamap, i també produeix el metamap com a part de la tupla de sortida.
 
-```groovy title="modules/nf-core/cat/cat/main.nf (excerpt)" linenums="1" hl_lines="2 5"
+```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="10" hl_lines="2 5"
 input:
 tuple val(meta), path(files_in)
 
@@ -439,14 +482,14 @@ tuple val(meta), path("${prefix}"), emit: file_out
 Com a resultat, cada unitat de dades viatja pel pipeline amb les metadades rellevants adjuntes.
 Els processos posteriors poden accedir fàcilment a aquestes metadades també.
 
-Recordeu com us vam dir que el fitxer produït per `CAT_CAT` es nomenarà basant-se en un identificador que forma part de les metadades?
+Recordeu com us vam dir que el fitxer produït per `FIND_CONCATENATE` es nomenarà basant-se en un identificador que forma part de les metadades?
 Aquest és el codi rellevant:
 
-```groovy title="modules/nf-core/cat/cat/main.nf (excerpt)" linenums="35"
-prefix   = task.ext.prefix ?: "${meta.id}${getFileSuffix(file_list[0])}"
+```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="37"
+prefix = task.ext.prefix ?: "${meta.id}${file_extensions[0]}"
 ```
 
-Això es tradueix aproximadament com segueix: si es proporciona un `prefix` mitjançant el sistema de paràmetres de tasca extern (`task.ext`), utilitzeu-lo per nomenar el fitxer de sortida; en cas contrari, creeu-ne un utilitzant `${meta.id}`, que correspon al camp `id` del metamap.
+Això es tradueix aproximadament com segueix: si es proporciona un `prefix` mitjançant el sistema de paràmetres de tasca extern (`task.ext`), utilitzeu-lo per nomenar el fitxer de sortida; en cas contrari, creeu-ne un utilitzant `#!groovy ${meta.id}`, que correspon al camp `id` del metamap.
 
 Podeu imaginar el canal d'entrada que arriba a aquest mòdul amb continguts com aquest:
 
@@ -471,16 +514,16 @@ No només us permet nomenar sortides basant-vos en metadades, sinó que també p
 
 !!! note "Més informació sobre metadades"
 
-    Per a una introducció completa sobre com treballar amb metadades als workflows Nextflow, incloent com llegir metadades des de fulls de mostres i utilitzar-les per personalitzar el processament, consulteu la missió secundària [Metadades als workflows](../side_quests/metadata).
+    Per a una introducció completa sobre com treballar amb metadades als workflows Nextflow, incloent com llegir metadades des de fulls de mostres i utilitzar-les per personalitzar el processament, consulteu la missió secundària [Metadades als workflows](../side_quests/metadata/index.md).
 
 ### 2.3. Resumir els canvis a fer
 
-Basant-nos en el que hem revisat, aquests són els canvis principals que hem de fer al nostre pipeline per utilitzar el mòdul `cat/cat`:
+Basant-nos en el que hem revisat, aquests són els canvis principals que hem de fer al nostre pipeline per utilitzar el mòdul `find/concatenate`:
 
 - Crear un metamap que contingui el nom del lot;
 - Empaquetar el metamap en una tupla amb el conjunt de fitxers d'entrada a concatenar (provinents de `convertToUpper`);
-- Canviar la crida de `collectGreetings()` a `CAT_CAT`;
-- Extreure el fitxer de sortida de la tupla produïda pel procés `CAT_CAT` abans de passar-lo a `cowpy`.
+- Canviar la crida de `collectGreetings()` a `FIND_CONCATENATE`;
+- Extreure el fitxer de sortida de la tupla produïda pel procés `FIND_CONCATENATE` abans de passar-lo a `cowpy`.
 
 Això hauria de ser suficient! Ara que tenim un pla, estem preparats per començar.
 
@@ -494,7 +537,7 @@ Integrar el nou mòdul en un workflow.
 
 ---
 
-## 3. Integrar CAT_CAT al workflow `hello.nf`
+## 3. Integrar FIND_CONCATENATE al workflow `hello.nf`
 
 Ara que sabeu tot sobre els metamaps (o prou per als propòsits d'aquest curs, almenys), és hora d'implementar realment els canvis que hem descrit anteriorment.
 
@@ -506,7 +549,7 @@ Per claredat, dividirem això i cobrirem cada pas per separat.
 
 ### 3.1. Crear un mapa de metadades
 
-Primer, hem de crear un mapa de metadades per a `CAT_CAT`, tenint en compte que els mòduls nf-core requereixen que el metamap contingui almenys un camp `id`.
+Primer, hem de crear un mapa de metadades per a `FIND_CONCATENATE`, tenint en compte que els mòduls nf-core requereixen que el metamap contingui almenys un camp `id`.
 
 Com que no necessitem cap altra metadada, podem mantenir-ho simple i utilitzar quelcom així:
 
@@ -601,13 +644,13 @@ A continuació, transformeu el canal de fitxers en un canal de tuples que contin
 La línia que hem afegit aconsegueix dues coses:
 
 - `.collect()` recull tots els fitxers de la sortida de `convertToUpper` en una sola llista
-- `#!groovy .map { files -> tuple(cat_meta, files) }` crea una tupla de `[metadades, fitxers]` en el format que `CAT_CAT` espera
+- `#!groovy .map { files -> tuple(cat_meta, files) }` crea una tupla de `[metadades, fitxers]` en el format que `FIND_CONCATENATE` espera
 
-Això és tot el que necessitem fer per configurar la tupla d'entrada per a `CAT_CAT`.
+Això és tot el que necessitem fer per configurar la tupla d'entrada per a `FIND_CONCATENATE`.
 
-### 3.3. Cridar el mòdul CAT_CAT
+### 3.3. Cridar el mòdul FIND_CONCATENATE
 
-Ara cridem `CAT_CAT` sobre el canal acabat de crear:
+Ara cridem `FIND_CONCATENATE` sobre el canal acabat de crear:
 
 === "Després"
 
@@ -625,7 +668,7 @@ Ara cridem `CAT_CAT` sobre el canal acabat de crear:
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
         // concatena les salutacions
-        CAT_CAT(ch_for_cat)
+        FIND_CONCATENATE(ch_for_cat)
 
         // genera art ASCII de les salutacions amb cowpy
         cowpy(collectGreetings.out.outfile, params.character)
@@ -655,9 +698,9 @@ Això completa la part més complicada d'aquesta substitució, però encara no h
 ### 3.4. Extreure el fitxer de sortida de la tupla per a `cowpy`
 
 Anteriorment, el procés `collectGreetings` només produïa un fitxer que podíem passar directament a `cowpy`.
-No obstant això, el procés `CAT_CAT` produeix una tupla que inclou el metamap a més del fitxer de sortida.
+No obstant això, el procés `FIND_CONCATENATE` produeix una tupla que inclou el metamap a més del fitxer de sortida.
 
-Com que `cowpy` encara no accepta tuples de metadades (ho arreglarem a la següent part del curs), hem d'extreure el fitxer de sortida de la tupla produïda per `CAT_CAT` abans de passar-lo a `cowpy`:
+Com que `cowpy` encara no accepta tuples de metadades (ho arreglarem a la següent part del curs), hem d'extreure el fitxer de sortida de la tupla produïda per `FIND_CONCATENATE` abans de passar-lo a `cowpy`:
 
 === "Després"
 
@@ -675,10 +718,10 @@ Com que `cowpy` encara no accepta tuples de metadades (ho arreglarem a la següe
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
         // concatena les salutacions
-        CAT_CAT(ch_for_cat)
+        FIND_CONCATENATE(ch_for_cat)
 
         // extreu el fitxer de la tupla ja que cowpy encara no utilitza metadades
-        ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+        ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
         // genera art ASCII de les salutacions amb cowpy
         cowpy(ch_for_cowpy, params.character)
@@ -700,13 +743,13 @@ Com que `cowpy` encara no accepta tuples de metadades (ho arreglarem a la següe
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
         // concatena les salutacions
-        CAT_CAT(ch_for_cat)
+        FIND_CONCATENATE(ch_for_cat)
 
         // genera art ASCII de les salutacions amb cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
-L'operació `#!groovy .map { meta, file -> file }` extreu el fitxer de la tupla `[metadades, fitxer]` produïda per `CAT_CAT` en un nou canal, `ch_for_cowpy`.
+L'operació `#!groovy .map { meta, file -> file }` extreu el fitxer de la tupla `[metadades, fitxer]` produïda per `FIND_CONCATENATE` en un nou canal, `ch_for_cowpy`.
 
 Llavors només cal passar `ch_for_cowpy` a `cowpy` en lloc de `collectGreetings.out.outfile` en aquesta última línia.
 
@@ -716,7 +759,7 @@ Llavors només cal passar `ch_for_cowpy` a `cowpy` en lloc de `collectGreetings.
 
 ### 3.5. Provar el workflow
 
-Provem que el workflow funciona amb el mòdul `cat/cat` acabat d'integrar:
+Provem que el workflow funciona amb el mòdul `find/concatenate` acabat d'integrar:
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
@@ -727,7 +770,7 @@ Això hauria d'executar-se raonablement ràpid.
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W ~ version 25.04.3
+    N E X T F L O W ~ version 25.10.4
 
         Launching `./main.nf` [evil_pike] DSL2 - revision: b9e9b3b8de
 
@@ -758,12 +801,12 @@ Això hauria d'executar-se raonablement ràpid.
         executor >  local (8)
         [b3/f005fd] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
         [08/f923d0] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-        [34/3729a9] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+        [34/3729a9] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
         [24/df918a] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
         -[core/hello] Pipeline completed successfully-
     ```
 
-Observeu que `CAT_CAT` ara apareix a la llista d'execució de processos en lloc de `collectGreetings`.
+Observeu que `FIND_CONCATENATE` ara apareix a la llista d'execució de processos en lloc de `collectGreetings`.
 
 I això és tot! Ara estem utilitzant un mòdul robust mantingut per la comunitat en lloc de codi personalitzat de qualitat prototip per a aquest pas del pipeline.
 

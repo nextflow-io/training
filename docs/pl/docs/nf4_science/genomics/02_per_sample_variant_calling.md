@@ -402,7 +402,7 @@ nextflow run genomics.nf -profile test
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [reverent_sinoussi] DSL2 - revision: 41d43ad7fe
 
@@ -562,7 +562,7 @@ Dodaj zmienne dla ścieżek plików pomocniczych wewnątrz bloku workflow:
     ```
 
 Składnia `file()` mówi Nextflow'owi jawnie, aby obsługiwał te wejścia jako ścieżki plików.
-Możesz dowiedzieć się więcej na ten temat w Side Quest [Working with files](../../side_quests/working_with_files.md).
+Możesz dowiedzieć się więcej na ten temat w Side Quest [Working with files](../../side_quests/working_with_files/index.md).
 
 ### 2.2. Napisz proces wywoływania wariantów i wywołaj go w workflow
 
@@ -769,7 +769,7 @@ nextflow run genomics.nf -profile test -resume
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [grave_volta] DSL2 - revision: 4790abc96a
 
@@ -891,7 +891,7 @@ Zabawna rzecz: to _może zadziałać_ LUB _może się nie udać_. Na przykład, 
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [peaceful_yalow] DSL2 - revision: a256d113ad
 
@@ -905,7 +905,7 @@ Jeśli Twoje uruchomienie workflow'a się powiodło, uruchom je ponownie, aż ot
 ??? failure "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [loving_pasteur] DSL2 - revision: d2a8e63076
 
@@ -1164,7 +1164,7 @@ Tym razem (i za każdym razem) wszystko powinno działać poprawnie:
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [special_goldstine] DSL2 - revision: 4cbbf6ea3e
 
@@ -1327,7 +1327,7 @@ nextflow run genomics.nf -profile test
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [sick_albattani] DSL2 - revision: 46d84642f6
 

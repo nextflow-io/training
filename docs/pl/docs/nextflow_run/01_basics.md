@@ -91,7 +91,7 @@ nextflow run 1-hello.nf --input 'Hello World!'
 ??? success "Wyjście polecenia"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
 
@@ -153,7 +153,7 @@ Hello World!
 ### 2.3. Zapisz wyniki do innego katalogu
 
 Domyślnie Nextflow zapisze wyjścia pipeline'u do katalogu o nazwie `results` w Twojej bieżącej ścieżce.
-Aby zmienić miejsce, w którym Twoje pliki są publikowane, użyj flagi CLI `-output-dir` (lub `-o` w skrócie)
+Aby zmienić miejsce, w którym Twoje pliki są publikowane, użyj flagi CLI `-output-dir` (lub `-o` w skrócie).
 
 !!! danger "Niebezpieczeństwo"
 
@@ -168,7 +168,7 @@ nextflow run 1-hello.nf --input 'Hello World!' -output-dir hello_results
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78
 
@@ -187,7 +187,7 @@ hello_results
 Pliki w tym katalogu są takie same jak wcześniej, to tylko katalog najwyższego poziomu jest inny.
 Jednak pamiętaj, że w obu przypadkach 'opublikowany' wynik jest kopią (lub w niektórych przypadkach dowiązaniem symbolicznym) rzeczywistego wyjścia wyprodukowanego przez Nextflow podczas wykonywania workflow'u.
 
-Więc teraz zajrzymy pod maskę, aby zobaczyć, gdzie Nextflow faktycznie wykonał pracę.
+Teraz zajrzymy pod maskę, aby zobaczyć, gdzie Nextflow faktycznie wykonał pracę.
 
 !!! Warning "Ostrzeżenie"
 
@@ -261,7 +261,7 @@ Zobaczmy, co jest w środku.
 
 W `work/` znajdują się dwa zestawy katalogów, z dwóch różnych uruchomień pipeline'u, które wykonaliśmy.
 Każde wykonanie zadania otrzymuje swój własny, odizolowany katalog do pracy.
-W tym przypadku pipeline zrobił to samo za każdym razem, więc zawartość każdego katalogu zadania jest identyczna
+W tym przypadku pipeline zrobił to samo za każdym razem, więc zawartość każdego katalogu zadania jest identyczna.
 
 Powinieneś natychmiast rozpoznać plik `output.txt`, który jest w rzeczywistości oryginalnym wyjściem **procesu** `sayHello`, które zostało opublikowane do katalogu `results`.
 Jeśli go otworzysz, znajdziesz ponownie powitanie `Hello World!`.
@@ -568,7 +568,7 @@ Aby dowiedzieć się więcej, zobacz [Publishing outputs](https://nextflow.io/do
 
     Zamiast mieć blok `publish:` w workflow'ie i blok `output` na najwyższym poziomie, zobaczyłbyś linię `publishDir` w definicji **procesu** `sayHello`:
 
-    ```groovy title="Przykład składni" linenums="1" hl_lines="3"
+    ```groovy title="Syntax example" linenums="1" hl_lines="3"
     process sayHello {
 
         publishDir 'results/1-hello', mode: 'copy'
@@ -623,7 +623,7 @@ nextflow run 1-hello.nf --input 'Hello World!' -resume
 ??? success "Wyjście polecenia"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479
 
@@ -767,7 +767,7 @@ W linii wyjścia konsoli `[a3/7be2fa] SAYHELLO | 1 of 1 ✔`, co reprezentuje `[
 - [x] Skróconą ścieżkę do katalogu roboczego zadania
 - [ ] Sumę kontrolną pliku wyjściowego
 
-Dowiedz się więcej: [2.4. Znajdź oryginalne wyjście i logi w katalogu `work/`](#24-znajdz-oryginalne-wyjscie-i-logi-w-katalogu-work)
+Dowiedz się więcej: [2.4. Znajdź oryginalne wyjście i logi w katalogu `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -777,7 +777,7 @@ Jaki jest cel pliku `.command.sh` w katalogu zadania?
 - [ ] Zawiera komunikaty o błędach z nieudanych zadań
 - [ ] Wymienia pliki wejściowe przygotowane dla zadania
 
-Dowiedz się więcej: [2.4. Znajdź oryginalne wyjście i logi w katalogu `work/`](#24-znajdz-oryginalne-wyjscie-i-logi-w-katalogu-work)
+Dowiedz się więcej: [2.4. Znajdź oryginalne wyjście i logi w katalogu `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -787,7 +787,7 @@ Co dzieje się z opublikowanymi wynikami, gdy ponownie uruchamiasz workflow bez 
 - [ ] Nextflow zapobiega nadpisywaniu i kończy się niepowodzeniem
 - [ ] Są automatycznie archiwizowane
 
-Dowiedz się więcej: [2.5. Uruchom ponownie workflow z różnymi powitaniami](#25-uruchom-ponownie-workflow-z-roznymi-powitaniami)
+Dowiedz się więcej: [2.5. Uruchom ponownie workflow z różnymi powitaniami](#24-re-run-the-workflow-with-different-greetings)
 </quiz>
 
 <quiz>
@@ -802,7 +802,7 @@ Co wskazuje to wyjście konsoli?
 - [x] Nextflow ponownie użył wyników z poprzedniego identycznego wykonania
 - [ ] Zadanie zostało ręcznie anulowane
 
-Dowiedz się więcej: [4.1. Ponownie uruchom workflow z `-resume`](#41-ponownie-uruchom-workflow-z--resume)
+Dowiedz się więcej: [4.1. Ponownie uruchom workflow z `-resume`](#41-re-launch-a-workflow-with--resume)
 </quiz>
 
 <quiz>
@@ -812,7 +812,7 @@ Gdzie Nextflow przechowuje historię wykonania, którą wyświetla polecenie `ne
 - [x] W pliku `.nextflow/history`
 - [ ] W `nextflow.config`
 
-Dowiedz się więcej: [4.2. Sprawdź dziennik poprzednich wykonań](#42-sprawdz-dziennik-poprzednich-wykonan)
+Dowiedz się więcej: [4.2. Sprawdź dziennik poprzednich wykonań](#42-inspect-the-log-of-past-executions)
 </quiz>
 
 <quiz>
@@ -822,7 +822,7 @@ Jaki jest cel bloku `params` w pliku workflow'u?
 - [x] Deklarowanie i typowanie parametrów wejściowych workflow'u
 - [ ] Określanie opcji publikowania wyjść
 
-Dowiedz się więcej: [3.4. System parametrów wiersza poleceń `params`](#34-system-parametrow-wiersza-polecen-params)
+Dowiedz się więcej: [3.4. System parametrów wiersza poleceń `params`](#34-the-params-system-of-command-line-parameters)
 </quiz>
 
 <quiz>
@@ -832,7 +832,7 @@ Co robi `mode 'copy'` w bloku `output` workflow'u?
 - [ ] Kopiuje skrypt workflow'u do results
 - [ ] Włącza przyrostowe kopiowanie plików
 
-Dowiedz się więcej: [3.5. Dyrektywa `publish`](#35-dyrektywa-publish)
+Dowiedz się więcej: [3.5. Dyrektywa `publish`](#35-the-publish-directive)
 </quiz>
 
 <quiz>
@@ -842,5 +842,5 @@ Jaka jest zalecana flaga do użycia z poleceniem `nextflow clean` przed faktyczn
 - [ ] `-a` (wszystko) aby wybrać wszystkie katalogi
 - [ ] `-q` (cicho) aby pominąć ostrzeżenia
 
-Dowiedz się więcej: [4.3. Usuń starsze katalogi robocze](#43-usun-starsze-katalogi-robocze)
+Dowiedz się więcej: [4.3. Usuń starsze katalogi robocze](#43-delete-older-work-directories)
 </quiz>

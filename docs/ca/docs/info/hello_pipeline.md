@@ -43,7 +43,7 @@ Els resultats es publiquen en un directori anomenat `results/`, i la sortida fin
   _________
 / BONJOUR \
 | HELLO   |
-\ HOLà    /
+\ HOLA    /
 ---------
   \                                  ,+*^^*+___+++_
   \                           ,*^^^^              )

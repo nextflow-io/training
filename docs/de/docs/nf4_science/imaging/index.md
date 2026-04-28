@@ -35,4 +35,4 @@ Dieser Kurs setzt ein Mindestmaß an Vertrautheit mit Folgendem voraus:
 - Erfahrung mit der Befehlszeile
 - Grundlegende Vertrautheit mit Bildgebungsdateiformaten (TIFF-Bilder, tabellarische Daten)
 
-Für technische Anforderungen und die Einrichtung der Umgebung siehe den Mini-Kurs [Umgebungseinrichtung](../../envsetup/).
+Für technische Anforderungen und die Einrichtung der Umgebung siehe den Mini-Kurs [Umgebungseinrichtung](../../envsetup/index.md).

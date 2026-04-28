@@ -402,7 +402,7 @@ nextflow run genomics.nf -profile test
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [reverent_sinoussi] DSL2 - revision: 41d43ad7fe
 
@@ -562,7 +562,7 @@ Ajoutez des variables pour les chemins des fichiers accessoires à l'intérieur 
     ```
 
 La syntaxe `file()` indique explicitement à Nextflow de gérer ces entrées comme des chemins de fichiers.
-Vous pouvez en apprendre plus à ce sujet dans la Quête secondaire [Working with files](../../side_quests/working_with_files.md).
+Vous pouvez en apprendre plus à ce sujet dans la Quête secondaire [Working with files](../../side_quests/working_with_files/index.md).
 
 ### 2.2. Écrire le processus d'appel de variants et l'appeler dans le workflow
 
@@ -769,7 +769,7 @@ nextflow run genomics.nf -profile test -resume
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [grave_volta] DSL2 - revision: 4790abc96a
 
@@ -891,7 +891,7 @@ Chose amusante : cela _pourrait fonctionner_, OU cela _pourrait échouer_. Par e
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [peaceful_yalow] DSL2 - revision: a256d113ad
 
@@ -905,7 +905,7 @@ Si votre exécution de workflow a réussi, exécutez-la à nouveau jusqu'à obte
 ??? failure "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [loving_pasteur] DSL2 - revision: d2a8e63076
 
@@ -1164,7 +1164,7 @@ Cette fois (et à chaque fois) tout devrait s'exécuter correctement :
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [special_goldstine] DSL2 - revision: 4cbbf6ea3e
 
@@ -1327,7 +1327,7 @@ nextflow run genomics.nf -profile test
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [sick_albattani] DSL2 - revision: 46d84642f6
 

@@ -25,7 +25,7 @@ Typically, तुम्हें इन tools को install करना हो
 
 Note करो कि हम यह [Docker](https://www.docker.com/get-started/) का उपयोग करके teach करेंगे, लेकिन ध्यान रखो कि Nextflow [कई अन्य container technologies](https://nextflow.io/docs/latest/container.html) को भी support करता है।
 
-??? info "इस section से कैसे शुरू करें"
+??? info "इस खंड से कैसे शुरू करें"
 
     Course का यह section मानता है कि तुमने [Hello Nextflow](./index.md) course के Parts 1-4 complete कर लिए हैं और एक complete working pipeline है।
 
@@ -72,7 +72,7 @@ nextflow run hello-containers.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-containers.nf` [nice_escher] DSL2 - revision: d5dfdc9872
 
@@ -85,18 +85,18 @@ nextflow run hello-containers.nf
 
 पहले की तरह, तुम्हें output files `output` block में specified directory (`results/hello_containers/`) में मिलेंगी।
 
-??? abstract "डायरेक्टरी contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console
     results/hello_containers/
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 यदि यह तुम्हारे लिए काम किया, तो तुम containers use करना सीखने के लिए ready हो।
@@ -125,7 +125,7 @@ docker pull '<container>'
 
 एक example के रूप में, चलो एक container image pull करते हैं जिसमें [cowpy](https://github.com/jeffbuttars/cowpy) है, `cowsay` नामक tool का python implementation जो arbitrary text inputs को fun तरीके से display करने के लिए ASCII art generate करता है।
 
-```txt title="उदाहरण"
+```txt title="Example"
  ________________________
 < Are we having fun yet? >
  ------------------------
@@ -283,7 +283,7 @@ cowpy "Hello Containers" -c tux
 
 क्योंकि तुम container के अंदर हो, तुम `cowpy` command जितनी बार चाहो उतनी बार run कर सकते हो, input parameters vary करते हुए, बिना Docker commands की परेशानी के।
 
-!!! Tip
+!!! Tip "सुझाव"
 
     एक different character pick करने के लिए '-c' flag use करो, जिनमें शामिल हैं:
     `beavis`, `cheese`, `daemon`, `dragonandcow`, `ghostbusters`, `kitty`, `moose`, `milk`, `stegosaurus`, `turkey`, `turtle`, `tux`
@@ -356,7 +356,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
      ____________________
     / Hello,English,123  \
     | Bonjour,French,456 |
-    \ Holà,Spanish,789   /
+    \ Hola,Spanish,789   /
     --------------------
       \                                  ,+*^^*+___+++_
       \                           ,*^^^^              )
@@ -667,14 +667,14 @@ Notice करो कि हमने एक new CLI parameter, `params.character
 चलो पिछली published outputs delete करते हैं clean slate के लिए, और workflow को `-resume` flag के साथ run करते हैं।
 
 ```bash
-rm -r hello_containers/
+rm -r results/hello_containers/
 nextflow run hello-containers.nf -resume
 ```
 
-??? failure "कमांड आउटपुट (clarity के लिए edited)"
+??? failure "कमांड आउटपुट (स्पष्टता के लिए संपादित)"
 
     ```console hl_lines="10 13 20-21 26-27"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-containers.nf` [lonely_woese] DSL2 - revision: abf1dccf7f
 
@@ -794,7 +794,7 @@ Workflow execution configure करने के लिए Nextflow जो main 
     docker.enabled = false
     ```
 
-!!! tip
+!!! tip "सुझाव"
 
     Command-line से, per-run basis पर, `-with-docker <container>` parameter use करके Docker execution enable करना possible है।
     हालाँकि, वह हमें केवल entire workflow के लिए एक container specify करने देता है, जबकि हमने अभी जो approach दिखाया वह हमें per process different container specify करने देता है।
@@ -811,7 +811,7 @@ nextflow run hello-containers.nf -resume
 ??? success "कमांड आउटपुट"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-containers.nf` [drunk_perlman] DSL2 - revision: abf1dccf7f
 
@@ -825,7 +825,7 @@ nextflow run hello-containers.nf -resume
 इस बार यह indeed काम करता है!
 Usual की तरह तुम corresponding results directory में workflow outputs पा सकते हो, हालाँकि इस बार वे थोड़ी अधिक neatly organized हैं, केवल report और final output top level पर, और सभी intermediate files एक subdirectory में out of the way shove किए गए।
 
-??? abstract "डायरेक्टरी contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console
     results/hello_containers/
@@ -834,20 +834,20 @@ Usual की तरह तुम corresponding results directory में workf
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
+    │   ├── Hola-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     └── batch-report.txt
     ```
 
 Final ASCII art output `results/hello_containers/` directory में है, `cowpy-COLLECTED-batch-output.txt` नाम के under।
 
-??? abstract "फ़ाइल contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -886,7 +886,7 @@ Final ASCII art output `results/hello_containers/` directory में है, `
 
 उस directory में, तुम्हें `.command.run` file मिलेगी जिसमें सभी commands हैं जो Nextflow ने pipeline execute करने के course में तुम्हारी behalf पर run कीं।
 
-??? abstract "फ़ाइल contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="work/98/656c6c90cce1667c094d880f4b6dcc/.command.run"
     #!/bin/bash
@@ -1116,7 +1116,7 @@ Container image और container instance में क्या difference ह�
 - [x] Host system से container में volume mount करता है
 - [ ] Container का version specify करता है
 
-और जानें: [1.3.4. Container में data mount करें](#134-container-में-data-mount-करें)
+और जानें: [1.3.4. Container में data mount करें](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1126,7 +1126,7 @@ Containers use करते समय volumes mount करने की need क
 - [x] क्योंकि containers default रूप से host filesystem से isolated हैं
 - [ ] Networking enable करने के लिए
 
-और जानें: [1.3.4. Container में data mount करें](#134-container-में-data-mount-करें)
+और जानें: [1.3.4. Container में data mount करें](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1136,7 +1136,7 @@ Nextflow process के लिए container कैसे specify करते �
 - [x] `container 'container-uri'`
 - [ ] `use 'container-uri'`
 
-और जानें: [2.3.1. `cowpy` के लिए container specify करें](#231-cowpy-के-लिए-container-specify-करें)
+और जानें: [2.3.1. `cowpy` के लिए container specify करें](#231-specify-a-container-for-cowpy)
 </quiz>
 
 <quiz>
@@ -1146,7 +1146,7 @@ Nextflow process के लिए container कैसे specify करते �
 - [ ] `#!groovy container.engine = 'docker'`
 - [ ] `#!groovy docker.activate = true`
 
-और जानें: [2.3.2. `nextflow.config` file के माध्यम से Docker use enable करें](#232-nextflowconfig-file-के-माध्यम-से-docker-use-enable-करें)
+और जानें: [2.3.2. `nextflow.config` file के माध्यम से Docker use enable करें](#232-enable-use-of-docker-via-the-nextflowconfig-file)
 </quiz>
 
 <quiz>
@@ -1156,5 +1156,5 @@ Container में process run करते समय Nextflow automatically �
 - [x] Container के अंदर process script run करना
 - [x] Execution के बाद container instance clean up करना
 
-और जानें: [2.3.4. Inspect करें कि Nextflow ने containerized task कैसे launch की](#234-inspect-करें-कि-nextflow-ने-containerized-task-कैसे-launch-की)
+और जानें: [2.3.4. Inspect करें कि Nextflow ने containerized task कैसे launch की](#234-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>

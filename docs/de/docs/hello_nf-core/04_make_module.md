@@ -10,7 +10,7 @@ Danach zeigen wir dir, wie du die vorlagenbasierte Modulerstellung nutzt, um in 
 
 ??? info "Wie du von diesem Abschnitt aus beginnst"
 
-    Dieser Abschnitt setzt voraus, dass du [Teil 3: Ein nf-core-Modul verwenden](./03_use_module.md) abgeschlossen hast und das `CAT_CAT`-Modul in deine Pipeline integriert hast.
+    Dieser Abschnitt setzt voraus, dass du [Teil 3: Ein nf-core-Modul verwenden](./03_use_module.md) abgeschlossen hast und das `FIND_CONCATENATE`-Modul in deine Pipeline integriert hast.
 
     Wenn du Teil 3 nicht abgeschlossen hast oder für diesen Teil neu beginnen möchtest, kannst du die Lösung `core-hello-part3` als Ausgangspunkt verwenden.
     Führe diese Befehle im Verzeichnis `hello-nf-core/` aus:
@@ -20,7 +20,7 @@ Danach zeigen wir dir, wie du die vorlagenbasierte Modulerstellung nutzt, um in 
     cd core-hello
     ```
 
-    Dies gibt dir eine Pipeline mit dem bereits integrierten `CAT_CAT`-Modul.
+    Dies gibt dir eine Pipeline mit dem bereits integrierten `FIND_CONCATENATE`-Modul.
     Du kannst testen, ob sie erfolgreich läuft, indem du den folgenden Befehl ausführst:
 
     ```bash
@@ -127,7 +127,7 @@ Prozessnamen sind case-sensitiv, daher müssen wir, nachdem wir den Prozessnamen
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
     include { COWPY                  } from '../modules/local/cowpy.nf'
-    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
+    include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
     ```
 
 === "Vorher"
@@ -143,7 +143,7 @@ Prozessnamen sind case-sensitiv, daher müssen wir, nachdem wir den Prozessnamen
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
     include { cowpy                  } from '../modules/local/cowpy.nf'
-    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
+    include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
     ```
 
 Wir könnten einen Alias in der Import-Anweisung verwenden, um zu vermeiden, dass wir Aufrufe des Prozesses aktualisieren müssen, aber das würde den Sinn der Übernahme der Großbuchstaben-Konvention etwas verfehlen.
@@ -156,7 +156,7 @@ Also aktualisieren wir jetzt die beiden Referenzen auf den Prozess im Workflow-B
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 38"
     // Die Datei aus dem Tupel extrahieren, da cowpy noch keine Metadaten verwendet
-    ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+    ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
     // ASCII-Kunst der Begrüßungen mit cowpy generieren
     COWPY(ch_for_cowpy, params.character)
@@ -200,7 +200,7 @@ Also aktualisieren wir jetzt die beiden Referenzen auf den Prozess im Workflow-B
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 38"
     // Die Datei aus dem Tupel extrahieren, da cowpy noch keine Metadaten verwendet
-    ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+    ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
     // ASCII-Kunst der Begrüßungen mit cowpy generieren
     cowpy(ch_for_cowpy, params.character)
@@ -253,7 +253,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Befehlsausgabe"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [elegant_plateau] DSL2 - revision: b9e9b3b8de
 
@@ -284,7 +284,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     executor >  local (8)
     [7b/66ceb5] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
     [8e/1bafb9] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-    [bb/203575] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔
+    [bb/203575] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
     [39/715489] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
@@ -293,7 +293,7 @@ Gut, das funktioniert! Lass uns nun zu substanzielleren Änderungen übergehen.
 
 ### 1.2. `COWPY` aktualisieren, um Metadaten-Tupel zu verwenden
 
-In der aktuellen Version der `core-hello`-Pipeline extrahieren wir die Datei aus dem Ausgabe-Tupel von `CAT_CAT`, um sie an `COWPY` zu übergeben, wie in der oberen Hälfte des Diagramms unten gezeigt.
+In der aktuellen Version der `core-hello`-Pipeline extrahieren wir die Datei aus dem Ausgabe-Tupel von `FIND_CONCATENATE`, um sie an `COWPY` zu übergeben, wie in der oberen Hälfte des Diagramms unten gezeigt.
 
 <figure class="excalidraw">
     --8<-- "docs/en/docs/hello_nf-core/img/cowpy-inputs.svg"
@@ -343,7 +343,7 @@ Jetzt, da wir geändert haben, was der Prozess erwartet, müssen wir aktualisier
 #### 1.2.2. Den Prozessaufruf im Workflow aktualisieren
 
 Die gute Nachricht ist, dass diese Änderung den Prozessaufruf vereinfachen wird.
-Da die Ausgabe von `CAT_CAT` und die Eingabe von `COWPY` jetzt die gleiche 'Form' haben, d.h. beide aus einer `tuple val(meta), path(input_file)`-Struktur bestehen, können wir sie einfach direkt verbinden, anstatt die Datei explizit aus der Ausgabe des `CAT_CAT`-Prozesses extrahieren zu müssen.
+Da die Ausgabe von `FIND_CONCATENATE` und die Eingabe von `COWPY` jetzt die gleiche 'Form' haben, d.h. beide aus einer `tuple val(meta), path(input_file)`-Struktur bestehen, können wir sie einfach direkt verbinden, anstatt die Datei explizit aus der Ausgabe des `FIND_CONCATENATE`-Prozesses extrahieren zu müssen.
 
 Öffne die Workflow-Datei `hello.nf` (unter `core-hello/workflows/`) und aktualisiere den Aufruf von `COWPY` wie unten gezeigt.
 
@@ -351,20 +351,20 @@ Da die Ausgabe von `CAT_CAT` und die Eingabe von `COWPY` jetzt die gleiche 'Form
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2"
         // ASCII-Kunst der Begrüßungen mit cowpy generieren
-        COWPY(CAT_CAT.out.file_out, params.character)
+        COWPY(FIND_CONCATENATE.out.file_out, params.character)
     ```
 
 === "Vorher"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="1-2 5"
         // Die Datei aus dem Tupel extrahieren, da cowpy noch keine Metadaten verwendet
-        ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+        ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
         // ASCII-Kunst der Begrüßungen mit cowpy generieren
         COWPY(ch_for_cowpy, params.character)
     ```
 
-Wir rufen jetzt `COWPY` direkt mit `CAT_CAT.out.file_out` auf.
+Wir rufen jetzt `COWPY` direkt mit `FIND_CONCATENATE.out.file_out` auf.
 
 Dadurch müssen wir den `ch_for_cowpy`-Kanal nicht mehr konstruieren, sodass diese Zeile (und ihre Kommentarzeile) vollständig gelöscht werden kann.
 
@@ -401,7 +401,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Befehlsausgabe"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [modest_saha] DSL2 - revision: b9e9b3b8de
 
@@ -433,12 +433,12 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     executor >  local (8)
     [a8/447993] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
     [00/1fc59c] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [57/ac800d] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+    [57/ac800d] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
     [b7/092f2b] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
-Die Pipeline sollte erfolgreich laufen, wobei Metadaten nun von `CAT_CAT` durch `COWPY` fließen.
+Die Pipeline sollte erfolgreich laufen, wobei Metadaten nun von `FIND_CONCATENATE` durch `COWPY` fließen.
 
 Damit ist abgeschlossen, was wir tun mussten, um `COWPY` Metadaten-Tupel verarbeiten zu lassen.
 Schauen wir uns nun an, was wir sonst noch tun können, um die nf-core-Modulmuster zu nutzen.
@@ -543,13 +543,13 @@ Nachdem wir die `character`-Deklaration aus dem Modul entfernt haben, müssen wi
 
 Konkret werden wir dieses kleine Code-Stück zum `process {}`-Block hinzufügen:
 
-```groovy title="Hinzuzufügender Code"
+```groovy title="Code to add"
 withName: 'COWPY' {
     ext.args = { "-c ${params.character}" }
 }
 ```
 
-Die `withName:`-Syntax weist diese Konfiguration nur dem `COWPY`-Prozess zu, und `ext.args = { "-c ${params.character}" }` komponiert einfach eine Zeichenkette, die den Wert des `character`-Parameters enthält.
+Die `withName:`-Syntax weist diese Konfiguration nur dem `COWPY`-Prozess zu, und `#!groovy ext.args = { "-c ${params.character}" }` komponiert einfach eine Zeichenkette, die den Wert des `character`-Parameters enthält.
 Beachte die Verwendung der geschweiften Klammern, die Nextflow anweisen, den Wert des Parameters zur Laufzeit zu evaluieren.
 
 Macht das Sinn? Lass es uns hinzufügen.
@@ -603,14 +603,14 @@ Da das `COWPY`-Modul den `character`-Parameter nicht mehr als Eingabe benötigt,
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
         // ASCII-Kunst der Begrüßungen mit cowpy generieren
-        COWPY(CAT_CAT.out.file_out)
+        COWPY(FIND_CONCATENATE.out.file_out)
     ```
 
 === "Vorher"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
         // ASCII-Kunst der Begrüßungen mit cowpy generieren
-        COWPY(CAT_CAT.out.file_out, params.character)
+        COWPY(FIND_CONCATENATE.out.file_out, params.character)
     ```
 
 Der Workflow-Code ist jetzt sauberer: Wir müssen `params.character` nicht direkt an den Prozess übergeben.
@@ -629,7 +629,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Befehlsausgabe"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [exotic_planck] DSL2 - revision: b9e9b3b8de
 
@@ -660,7 +660,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     executor >  local (8)
     [13/9e3c0e] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
     [e2/5b0ee5] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [b6/4fb569] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+    [b6/4fb569] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
     [38/eb29ea] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
@@ -679,7 +679,7 @@ cat work/38/eb29ea*/cowpy-test.txt
     ```console
     _________
     / HELLO   \
-    | HOLà    |
+    | HOLA    |
     \ BONJOUR /
     ---------
         \
@@ -788,14 +788,14 @@ Nachdem wir das getan haben, führen wir die Pipeline aus, um zu testen, dass al
 
 Du kannst sehen, dass wir drei Änderungen vorgenommen haben.
 
-1. **Im `script:`-Block haben wir die Zeile `prefix = task.ext.prefix ?: "${meta.id}"` hinzugefügt.**
+1. **Im `script:`-Block haben wir die Zeile `#!groovy prefix = task.ext.prefix ?: "${meta.id}"` hinzugefügt.**
    Diese Zeile verwendet den `?:`-Operator, um den Wert der `prefix`-Variable zu bestimmen: den Inhalt von `task.ext.prefix`, wenn er nicht leer ist, oder die Kennung aus der Metamap (`meta.id`), wenn er es ist.
    Beachte, dass wir zwar allgemein auf `ext.prefix` verweisen, dieser Code jedoch `task.ext.prefix` referenzieren muss, um die `ext.prefix`-Konfiguration auf Modulebene herauszuziehen.
 
-2. **In der Befehlszeile haben wir `cowpy-${input_file}` durch `${prefix}.txt` ersetzt.**
+2. **In der Befehlszeile haben wir `#!groovy cowpy-${input_file}` durch `#!groovy ${prefix}.txt` ersetzt.**
    Hier fügt Nextflow den durch die obige Zeile bestimmten Wert von `prefix` ein.
 
-3. **Im `output:`-Block haben wir `path("cowpy-${input_file}")` durch `path("${prefix}.txt")` ersetzt.**
+3. **Im `output:`-Block haben wir `#!groovy path("cowpy-${input_file}")` durch `#!groovy path("${prefix}.txt")` ersetzt.**
    Dies wiederholt einfach, wie der Dateipfad gemäß dem in der Befehlszeile Geschriebenen sein wird.
 
 Dadurch wird der Name der Ausgabedatei nun mit einem sinnvollen Standard (der Kennung aus der Metamap) kombiniert mit der entsprechenden Dateiformaterweiterung konstruiert.
@@ -806,7 +806,7 @@ In diesem Fall ist der sinnvolle Standard nach unserem Geschmack nicht ausreiche
 
 Wir tun dies, indem wir `ext.prefix` in `modules.config` konfigurieren, genau wie wir es für den `character`-Parameter mit `ext.args` getan haben, außer dass diesmal der Block `withName: 'COWPY' {}` bereits existiert und wir nur die folgende Zeile hinzufügen müssen:
 
-```groovy title="Hinzuzufügender Code"
+```groovy title="Code to add"
 ext.prefix = { "cowpy-${meta.id}" }
 ```
 
@@ -847,7 +847,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Befehlsausgabe"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [admiring_turing] DSL2 - revision: b9e9b3b8de
 
@@ -878,7 +878,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     executor >  local (8)
     [b2/e08524] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
     [13/88939f] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [23/4554e1] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+    [23/4554e1] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
     [a3/c6cbe9] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
@@ -893,10 +893,10 @@ Du solltest die cowpy-Ausgabedatei mit der gleichen Benennung wie zuvor sehen: `
     ├── Bonjour-output.txt
     ├── cowpy-test.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Ändere gerne die `ext.prefix`-Konfiguration in `conf/modules.config`, um dich zu überzeugen, dass du das Benennungsmuster ändern kannst, ohne Änderungen am Modul- oder Workflow-Code vornehmen zu müssen.
@@ -920,7 +920,7 @@ Nun, es gibt noch eine wichtige Änderung, die wir vornehmen müssen, um unser M
 Du hast vielleicht bemerkt, dass wir Ausgaben in zwei verschiedene Verzeichnisse veröffentlicht haben:
 
 - **`results`** — Das ursprüngliche Ausgabeverzeichnis, das wir von Anfang an für unsere lokalen Module verwendet haben, individuell mit per-Modul `publishDir`-Direktiven gesetzt;
-- **`core-hello-results`** — Das Ausgabeverzeichnis, das mit `--outdir` auf der Befehlszeile gesetzt wurde, das die nf-core-Logs und die von `CAT_CAT` veröffentlichten Ergebnisse erhalten hat.
+- **`core-hello-results`** — Das Ausgabeverzeichnis, das mit `--outdir` auf der Befehlszeile gesetzt wurde, das die nf-core-Logs und die von `FIND_CONCATENATE` veröffentlichten Ergebnisse erhalten hat.
 
 Dies ist unordentlich und suboptimal; es wäre besser, einen Ort für alles zu haben.
 Natürlich könnten wir in jedes unserer lokalen Module gehen und die `publishDir`-Direktive manuell aktualisieren, um das Verzeichnis `core-hello-results` zu verwenden, aber was ist beim nächsten Mal, wenn wir das Ausgabeverzeichnis ändern?
@@ -928,7 +928,7 @@ Natürlich könnten wir in jedes unserer lokalen Module gehen und die `publishDi
 Einzelne Module Publishing-Entscheidungen treffen zu lassen, ist eindeutig nicht der richtige Weg, insbesondere in einer Welt, in der dasselbe Modul in vielen verschiedenen Pipelines von Personen verwendet werden könnte, die unterschiedliche Bedürfnisse oder Präferenzen haben.
 Wir möchten in der Lage sein, auf Ebene der Workflow-Konfiguration zu kontrollieren, wo Ausgaben veröffentlicht werden.
 
-"Hey", könntest du sagen, "`CAT_CAT` sendet seine Ausgaben an `--outdir`. Vielleicht sollten wir dessen `publishDir`-Direktive kopieren?"
+"Hey", könntest du sagen, "`FIND_CONCATENATE` sendet seine Ausgaben an `--outdir`. Vielleicht sollten wir dessen `publishDir`-Direktive kopieren?"
 
 Ja, das ist eine großartige Idee.
 
@@ -950,7 +950,7 @@ Lass uns das tun.
 
 === "Danach"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf (Auszug)" linenums="1"
+    ```groovy title="core-hello/modules/local/cowpy.nf (excerpt)" linenums="1"
     // ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
@@ -960,7 +960,7 @@ Lass uns das tun.
 
 === "Vorher"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf (Auszug)" linenums="1" hl_lines="4"
+    ```groovy title="core-hello/modules/local/cowpy.nf (excerpt)" linenums="1" hl_lines="4"
     // ASCII-Kunst mit cowpy generieren (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
@@ -984,7 +984,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Befehlsausgabe"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [silly_caravaggio] DSL2 - revision: b9e9b3b8de
 
@@ -1015,7 +1015,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     executor >  local (8)
     [db/39978e] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
     [b5/bf6a8d] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [b7/c61842] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+    [b7/c61842] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
     [46/5839d6] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
@@ -1027,7 +1027,7 @@ Jetzt enthält `core-hello-results` auch die Ausgaben des `COWPY`-Moduls.
 
     ```console hl_lines="4-5"
     core-hello-results/
-    ├── cat
+    ├── find
     │   └── test.txt
     ├── cowpy
     │   └── cowpy-test.txt
@@ -1060,7 +1060,7 @@ Du kannst sehen, dass Nextflow diese Hierarchie von Verzeichnissen basierend auf
 !!! note "Hinweis"
 
     Du wirst vielleicht `hello_software_versions.yml` in `pipeline_info/` bemerken.
-    Diese Datei enthält derzeit nur Versionsinformationen von `CAT_CAT`, weil `COWPY` seine Version noch nicht meldet.
+    Diese Datei enthält derzeit nur Versionsinformationen von `FIND_CONCATENATE`, weil `COWPY` seine Version noch nicht meldet.
     Abschnitt 1.6 erklärt, wie man das hinzufügt.
 
 Der verantwortliche Code befindet sich in der Datei `conf/modules.config`.
@@ -1079,9 +1079,9 @@ process {
 Dies mag kompliziert aussehen, also schauen wir uns jede der drei Komponenten an:
 
 - **`path:`** Bestimmt das Ausgabeverzeichnis basierend auf dem Prozessnamen.
-  Der vollständige Name eines in `task.process` enthaltenen Prozesses umfasst die Hierarchie von Workflow- und Modulimporten (wie `CORE_HELLO:HELLO:CAT_CAT`).
+  Der vollständige Name eines in `task.process` enthaltenen Prozesses umfasst die Hierarchie von Workflow- und Modulimporten (wie `CORE_HELLO:HELLO:FIND_CONCATENATE`).
   Die `tokenize`-Operationen entfernen diese Hierarchie, um nur den Prozessnamen zu erhalten, nehmen dann den ersten Teil vor einem Unterstrich (falls zutreffend) und konvertieren ihn in Kleinbuchstaben.
-  Dies bestimmt, dass die Ergebnisse von `CAT_CAT` nach `${params.outdir}/cat/` veröffentlicht werden.
+  Dies bestimmt, dass die Ergebnisse von `FIND_CONCATENATE` nach `#!groovy ${params.outdir}/find/` veröffentlicht werden.
 - **`mode:`** Steuert, wie Dateien veröffentlicht werden (copy, symlink usw.).
   Dies ist über den Parameter `params.publish_dir_mode` konfigurierbar.
 - **`saveAs:`** Filtert, welche Dateien veröffentlicht werden sollen.
@@ -1165,13 +1165,32 @@ Am script-Block sind keine Änderungen nötig — die Version wird statisch im o
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
 ```
 
+??? success "Befehlsausgabe"
+
+    ```console
+     N E X T F L O W   ~  version 25.10.4
+
+    Launching `./main.nf` [silly_fermat] DSL2 - revision: b9e9b3b8de
+
+    ...
+
+    executor >  local (8)
+    [8d/f3a091] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
+    [2e/b5c742] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
+    [6a/d9e183] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
+    [3c/f20b54] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
+    ```
+
 Öffne `core-hello-results/pipeline_info/hello_software_versions.yml` und du siehst jetzt beide Module:
 
 ```yaml title="core-hello-results/pipeline_info/hello_software_versions.yml"
-CAT_CAT:
-  pigz: 2.8
 COWPY:
   cowpy: 1.1.5
+FIND_CONCATENATE:
+  coreutils: 9.4
+  find: 4.6.0
+  pigz: 2.8
 ```
 
 Die Sammlung auf Workflow-Seite — der `Channel.topic("versions")`-Block, den du im Platzhalter-Workflow in Teil 2 gesehen hast — abonniert das Topic und schreibt diesen kombinierten Bericht automatisch.
@@ -1256,7 +1275,7 @@ Jede Datei erfüllt einen bestimmten Zweck:
 
 !!! tip "Mehr über Tests erfahren"
 
-    Die generierte Testdatei verwendet nf-test, ein Test-Framework für Nextflow-Pipelines und -Module. Um zu lernen, wie man diese Tests schreibt und ausführt, siehe die [nf-test-Nebenquest](../side_quests/nf-test.md).
+    Die generierte Testdatei verwendet nf-test, ein Test-Framework für Nextflow-Pipelines und -Module. Um zu lernen, wie man diese Tests schreibt und ausführt, siehe die [nf-test-Nebenquest](../side_quests/nf_test/index.md).
 
 Die generierte `main.nf` enthält alle Muster, die du gerade gelernt hast, plus einige zusätzliche Features:
 
@@ -1432,10 +1451,10 @@ Aktualisiere die Eingabe- und Ausgabeblöcke:
 Dies spezifiziert:
 
 - Den Eingabedatei-Parameternamen (`input_file` statt dem generischen `input`)
-- Den Ausgabedateinamen mit dem konfigurierbaren Präfix-Muster (`${prefix}.txt` statt Wildcard `*`)
+- Den Ausgabedateinamen mit dem konfigurierbaren Präfix-Muster (`#!groovy ${prefix}.txt` statt Wildcard `*`)
 - Einen beschreibenden Emit-Namen (`cowpy_output` statt dem generischen `output`)
 
-Wenn du den Nextflow Language Server zur Syntaxvalidierung verwendest, wird der Teil `${prefix}` in dieser Phase als Fehler markiert, weil wir ihn noch nicht zum Script-Block hinzugefügt haben.
+Wenn du den Nextflow Language Server zur Syntaxvalidierung verwendest, wird der Teil `#!groovy ${prefix}` in dieser Phase als Fehler markiert, weil wir ihn noch nicht zum Script-Block hinzugefügt haben.
 Kommen wir jetzt dazu.
 
 #### 2.3.2. Der Script-Block
@@ -1471,7 +1490,7 @@ Basierend auf dem Modul, das wir zuvor manuell geschrieben haben, sollten wir di
 Wichtige Änderungen:
 
 - Ändere `def prefix` zu nur `prefix` (ohne `def`), um es im Output-Block zugänglich zu machen
-- Füge den eigentlichen `cowpy`-Befehl ein, der sowohl `$args` als auch `${prefix}.txt` verwendet
+- Füge den eigentlichen `cowpy`-Befehl ein, der sowohl `$args` als auch `#!groovy ${prefix}.txt` verwendet
 
 Beachte, dass wir, wenn wir nicht bereits die Arbeit des Hinzufügens der `ext.args`- und `ext.prefix`-Konfiguration für den `COWPY`-Prozess zur Datei `modules.config` erledigt hätten, dies jetzt tun müssten.
 
@@ -1512,7 +1531,7 @@ Wichtige Änderungen:
 
 - Ändere `def prefix` zu nur `prefix`, um es dem Script-Block anzupassen
 - Entferne die Zeile `echo $args` (die nur Vorlagen-Platzhaltercode war)
-- Der Stub erstellt eine leere `${prefix}.txt`-Datei, die dem entspricht, was der Script-Block erzeugt
+- Der Stub erstellt eine leere `#!groovy ${prefix}.txt`-Datei, die dem entspricht, was der Script-Block erzeugt
 
 Dies ermöglicht es dir, die Workflow-Logik und Dateibehandlung zu testen, ohne auf die Ausführung des eigentlichen Tools warten zu müssen.
 
@@ -1535,12 +1554,12 @@ Alles, was wir tun müssen, um diese neue Version des `COWPY`-Moduls auszuprobie
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
     include { COWPY                  } from '../modules/local/cowpy/main.nf'
-    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
+    include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
     ```
 
 === "Vorher"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="1" hl_lines="10"
+    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="10"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -1551,7 +1570,7 @@ Alles, was wir tun müssen, um diese neue Version des `COWPY`-Moduls auszuprobie
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
     include { COWPY                  } from '../modules/local/cowpy.nf'
-    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
+    include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
     ```
 
 Führen wir die Pipeline aus, um sie zu testen.
@@ -1563,7 +1582,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Befehlsausgabe"
 
     ```console hl_lines="33"
-      N E X T F L O W   ~  version 25.04.3
+      N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [prickly_neumann] DSL2 - revision: b9e9b3b8de
 
@@ -1594,7 +1613,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     executor >  local (8)
     [e9/008ede] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
     [f0/d70cfe] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [be/0ecc58] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+    [be/0ecc58] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
     [11/8e082f] CORE_HELLO:HELLO:COWPY (test)       [100%] 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```

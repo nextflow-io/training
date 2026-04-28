@@ -72,7 +72,7 @@ Al fitxer principal del workflow `{DOMAIN_DIR}.nf`, sota la secció `Pipeline pa
      * Pipeline parameters
      */
     params {
-        // Primary input
+        // Entrada principal
         {PRIMARY_PARAM_NAME}: Path
     }
     ```
@@ -84,7 +84,7 @@ Al fitxer principal del workflow `{DOMAIN_DIR}.nf`, sota la secció `Pipeline pa
      * Pipeline parameters
      */
 
-    // Primary input
+    // Entrada principal
     ```
 
 Això configura el paràmetre CLI, però no volem escriure el camí del fitxer cada vegada que executem el workflow durant el desenvolupament.
@@ -143,7 +143,7 @@ nextflow run {DOMAIN_DIR}.nf -profile test
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `{DOMAIN_DIR}.nf` [{RUN_NAME}] DSL2 - revision: {HASH}
 

@@ -82,7 +82,7 @@ No vamos a mirar el código todavía; primero veamos cómo se ve ejecutarlo.
 
 ### 2.1. Lanzar el workflow y monitorear la ejecución
 
-En la terminal, ejecute el siguiente comando:
+En la terminal, ejecute el siguiente comando.
 
 ```bash
 nextflow run 1-hello.nf --input 'Hello World!'
@@ -91,7 +91,7 @@ nextflow run 1-hello.nf --input 'Hello World!'
 ??? success "Salida del comando"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
 
@@ -168,7 +168,7 @@ nextflow run 1-hello.nf --input 'Hello World!' -output-dir hello_results
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78
 
@@ -568,7 +568,7 @@ Para más información, consulte [Publishing outputs](https://nextflow.io/docs/l
 
     En lugar de tener un bloque `publish:` en el workflow y un bloque `output` en el nivel superior, vería una línea `publishDir` en la definición del process `sayHello`:
 
-    ```groovy title="Ejemplo de sintaxis" linenums="1" hl_lines="3"
+    ```groovy title="Syntax example" linenums="1" hl_lines="3"
     process sayHello {
 
         publishDir 'results/1-hello', mode: 'copy'
@@ -606,12 +606,12 @@ Aquí le mostramos cómo aprovechar la función `resume` para cuando necesite re
 A veces, va a querer re-ejecutar un pipeline que ya lanzó anteriormente sin rehacer ningún trabajo que ya se completó exitosamente.
 
 Nextflow tiene una opción llamada `-resume` que le permite hacer esto.
-Específicamente, en este modo, cualquier process que ya se haya ejecutado con exactamente el mismo código, configuración y entradas será omitido.
-Esto significa que Nextflow solo ejecutará los processes que haya agregado o modificado desde la última ejecución, o a los que esté proporcionando nuevas configuraciones o entradas.
+Específicamente, en este modo, cualquier proceso que ya se haya ejecutado con exactamente el mismo código, configuración y entradas será omitido.
+Esto significa que Nextflow solo ejecutará los procesos que haya agregado o modificado desde la última ejecución, o a los que esté proporcionando nuevas configuraciones o entradas.
 
 Hay dos ventajas clave de hacer esto:
 
-- Si está en medio del desarrollo de un pipeline, puede iterar más rápidamente ya que solo tiene que ejecutar el o los process(es) en los que está trabajando activamente para probar sus cambios.
+- Si está en medio del desarrollo de un pipeline, puede iterar más rápidamente ya que solo tiene que ejecutar el o los proceso(s) en los que está trabajando activamente para probar sus cambios.
 - Si está ejecutando un pipeline en producción y algo sale mal, en muchos casos puede arreglar el problema y relanzar el pipeline, y reanudará la ejecución desde el punto de falla, lo que puede ahorrarle mucho tiempo y cómputo.
 
 Para usarlo, simplemente agregue `-resume` a su comando y ejecútelo:
@@ -623,7 +623,7 @@ nextflow run 1-hello.nf --input 'Hello World!' -resume
 ??? success "Salida del comando"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479
 
@@ -632,7 +632,7 @@ nextflow run 1-hello.nf --input 'Hello World!' -resume
 
 La salida de consola debería verse familiar, pero hay una cosa que es un poco diferente comparado con antes.
 
-Busque el bit `cached:` que se ha agregado en la línea de estado del process (línea 5), lo que significa que Nextflow ha reconocido que ya hizo este trabajo y simplemente reutilizó el resultado de la ejecución exitosa anterior.
+Busque el bit `cached:` que se ha agregado en la línea de estado del proceso (línea 5), lo que significa que Nextflow ha reconocido que ya hizo este trabajo y simplemente reutilizó el resultado de la ejecución exitosa anterior.
 
 También puede ver que el hash del subdirectorio de trabajo es el mismo que en la ejecución anterior.
 Nextflow está literalmente señalándole la ejecución anterior y diciendo "Ya hice eso ahí".
@@ -742,7 +742,7 @@ Note que esto no elimina los subdirectorios de dos caracteres (como `eb/` arriba
 !!! Warning "Advertencia"
 
     Eliminar subdirectorios de trabajo de ejecuciones pasadas los elimina de la caché de Nextflow y elimina cualquier salida que se almacenó en esos directorios.
-    Eso significa que rompe la capacidad de Nextflow de reanudar la ejecución sin re-ejecutar los processes correspondientes.
+    Eso significa que rompe la capacidad de Nextflow de reanudar la ejecución sin re-ejecutar los procesos correspondientes.
 
     ¡Usted es responsable de guardar cualquier salida que le importe! Esa es la razón principal por la que preferimos usar el modo `copy` en lugar del modo `symlink` para la directiva `publish`.
 
@@ -767,7 +767,7 @@ En la línea de salida de consola `[a3/7be2fa] SAYHELLO | 1 of 1 ✔`, ¿qué re
 - [x] La ruta truncada al directorio de trabajo de la tarea
 - [ ] La suma de verificación del archivo de salida
 
-Más información: [2.4. Encontrar la salida original y los registros en el directorio `work/`](#24-encontrar-la-salida-original-y-los-registros-en-el-directorio-work)
+Más información: [2.4. Encontrar la salida original y los registros en el directorio `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -777,7 +777,7 @@ Más información: [2.4. Encontrar la salida original y los registros en el dire
 - [ ] Contiene mensajes de error de tareas fallidas
 - [ ] Lista los archivos de entrada preparados para la tarea
 
-Más información: [2.4. Encontrar la salida original y los registros en el directorio `work/`](#24-encontrar-la-salida-original-y-los-registros-en-el-directorio-work)
+Más información: [2.4. Encontrar la salida original y los registros en el directorio `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -787,7 +787,7 @@ Más información: [2.4. Encontrar la salida original y los registros en el dire
 - [ ] Nextflow previene la sobrescritura y falla
 - [ ] Son respaldados automáticamente
 
-Más información: [2.5. Re-ejecutar el workflow con diferentes saludos](#25-re-ejecutar-el-workflow-con-diferentes-saludos)
+Más información: [2.5. Re-ejecutar el workflow con diferentes saludos](#24-re-run-the-workflow-with-different-greetings)
 </quiz>
 
 <quiz>
@@ -802,7 +802,7 @@ Más información: [2.5. Re-ejecutar el workflow con diferentes saludos](#25-re-
 - [x] Nextflow reutilizó resultados de una ejecución idéntica anterior
 - [ ] La tarea fue cancelada manualmente
 
-Más información: [4.1. Re-lanzar un workflow con `-resume`](#41-re-lanzar-un-workflow-con--resume)
+Más información: [4.1. Re-lanzar un workflow con `-resume`](#41-re-launch-a-workflow-with--resume)
 </quiz>
 
 <quiz>
@@ -812,7 +812,7 @@ Más información: [4.1. Re-lanzar un workflow con `-resume`](#41-re-lanzar-un-w
 - [x] En el archivo `.nextflow/history`
 - [ ] En `nextflow.config`
 
-Más información: [4.2. Inspeccionar el registro de ejecuciones pasadas](#42-inspeccionar-el-registro-de-ejecuciones-pasadas)
+Más información: [4.2. Inspeccionar el registro de ejecuciones pasadas](#42-inspect-the-log-of-past-executions)
 </quiz>
 
 <quiz>
@@ -822,7 +822,7 @@ Más información: [4.2. Inspeccionar el registro de ejecuciones pasadas](#42-in
 - [x] Declarar y tipificar los parámetros de entrada del workflow
 - [ ] Especificar opciones de publicación de salida
 
-Más información: [3.4. El sistema params de parámetros de línea de comandos](#34-el-sistema-params-de-parámetros-de-línea-de-comandos)
+Más información: [3.4. El sistema params de parámetros de línea de comandos](#34-the-params-system-of-command-line-parameters)
 </quiz>
 
 <quiz>
@@ -832,7 +832,7 @@ En el bloque `output` del workflow, ¿qué hace `mode 'copy'`?
 - [ ] Copia el script del workflow a los resultados
 - [ ] Habilita la copia incremental de archivos
 
-Más información: [3.5. La directiva publish](#35-la-directiva-publish)
+Más información: [3.5. La directiva publish](#35-the-publish-directive)
 </quiz>
 
 <quiz>
@@ -842,5 +842,5 @@ Más información: [3.5. La directiva publish](#35-la-directiva-publish)
 - [ ] `-a` (all) para seleccionar todos los directorios
 - [ ] `-q` (quiet) para suprimir advertencias
 
-Más información: [4.3. Eliminar directorios de trabajo antiguos](#43-eliminar-directorios-de-trabajo-antiguos)
+Más información: [4.3. Eliminar directorios de trabajo antiguos](#43-delete-older-work-directories)
 </quiz>

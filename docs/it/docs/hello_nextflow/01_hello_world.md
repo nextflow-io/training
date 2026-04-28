@@ -214,8 +214,8 @@ nextflow run hello-world.nf
 
 ??? success "Output del comando"
 
-    ```console hl_lines="7"
-    N E X T F L O W   ~  version 25.10.2
+    ```console hl_lines="6"
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
 
@@ -486,7 +486,7 @@ nextflow run hello-world.nf
 ??? success "Output del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5
 
@@ -574,7 +574,7 @@ nextflow run hello-world.nf
 ??? success "Output del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
 
@@ -653,7 +653,7 @@ nextflow run hello-world.nf
 ??? success "Output del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
 
@@ -837,7 +837,7 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
 ??? success "Output del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea
 
@@ -880,7 +880,7 @@ Diamo al parametro `input` un valore predefinito dichiarandolo prima della defin
  * Pipeline parameters
  */
 params {
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
 }
 ```
 
@@ -890,7 +890,7 @@ I tipi supportati includono `String`, `Integer`, `Float`, `Boolean` e `Path`.
 
 !!! info "Info"
 
-    Nei workflow più vecchi, potreste vedere quel intero blocco `params` scritto semplicemente come `input = 'Holà mundo!'`.
+    Nei workflow più vecchi, potreste vedere quel intero blocco `params` scritto semplicemente come `input = 'Hola mundo!'`.
 
 Man mano che aggiungete più parametri alla vostra pipeline, dovreste aggiungerli tutti a questo blocco, che debbano o meno avere un valore predefinito.
 Questo renderà facile trovare tutti i parametri configurabili a colpo d'occhio.
@@ -906,7 +906,7 @@ nextflow run hello-world.nf
 ??? success "Output del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582
 
@@ -923,7 +923,7 @@ nextflow run hello-world.nf
     - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
     - cause: you tried to assign a value to the class 'java.lang.String'
     @ line 24, column 12.
-          input: String = 'Holà mundo!'
+          input: String = 'Hola mundo!'
                   ^
 
     1 error
@@ -947,7 +947,7 @@ L'output sarà nella stessa posizione di prima, ma i contenuti dovrebbero essere
 ??? abstract "Contenuto del file"
 
     ```console title="results/hello_world/output.txt"
-    Holà mundo!
+    Hola mundo!
     ```
 
 Nextflow ha usato il valore predefinito del parametro greeting per creare l'output.
@@ -965,7 +965,7 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 ??? success "Output del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582
 
@@ -1028,7 +1028,7 @@ nextflow run hello-world.nf -resume
 ??? success "Output del comando"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
 
@@ -1097,7 +1097,7 @@ Fortunatamente Nextflow include un utile sottocomando `clean` che potete usare p
 
 #### 4.3.1. Determinare i criteri di eliminazione
 
-Ci sono multiple [opzioni](https://nextflow.io/docs/latest/reference/cli.html#clean) per determinare cosa eliminare.
+Ci sono multiple [opzioni](https://www.nextflow.io/docs/latest/reference/cli.html#clean) per determinare cosa eliminare.
 
 Qui vi mostriamo un esempio che elimina tutte le sottodirectory dalle esecuzioni precedenti a una data esecuzione, specificata usando il suo nome di esecuzione.
 
@@ -1171,7 +1171,7 @@ Quali sono i componenti minimi richiesti di un process Nextflow?
 - [ ] Blocchi input, output e script
 - [ ] Solo un blocco script
 
-Approfondisci: [1.1.1. La definizione del `process`](#111-la-definizione-del-process)
+Approfondisci: [1.1.1. La definizione del `process`](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1181,7 +1181,7 @@ Qual è lo scopo del blocco output in un process?
 - [x] Dichiarare gli output attesi dal process
 - [ ] Definire variabili d'ambiente
 
-Approfondisci: [1.1.1. La definizione del `process`](#111-la-definizione-del-process)
+Approfondisci: [1.1.1. La definizione del `process`](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1212,7 +1212,7 @@ work/a3/7be2fa.../
 - [ ] `.command.log`
 - [ ] `.command.out`
 
-Approfondisci: [1.2.2. Trovare l'output e i log nella directory `work`](#122-trovare-loutput-e-i-log-nella-directory-work)
+Approfondisci: [1.2.2. Trovare l'output e i log nella directory `work`](#122-find-the-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -1222,7 +1222,7 @@ Cosa fa il flag `-resume`?
 - [x] Salta i processi che sono già stati completati con successo
 - [ ] Crea un backup del workflow
 
-Approfondisci: [4.1. Ri-avviare un workflow con `-resume`](#41-ri-avviare-un-workflow-con--resume)
+Approfondisci: [4.1. Ri-avviare un workflow con `-resume`](#41-re-launch-a-workflow-with--resume)
 </quiz>
 
 <quiz>
@@ -1232,7 +1232,7 @@ Qual è la modalità predefinita per pubblicare gli output del workflow?
 - [ ] Spostare i file nella directory di output
 - [ ] Comprimere i file nella directory di output
 
-Approfondisci: [2.3. Impostare la modalità di pubblicazione su copy](#23-impostare-la-modalità-di-pubblicazione-su-copy)
+Approfondisci: [2.3. Impostare la modalità di pubblicazione su copy](#23-set-the-publish-mode-to-copy)
 </quiz>
 
 <quiz>
@@ -1242,7 +1242,7 @@ Come si passa un valore di parametro a un workflow Nextflow dalla riga di comand
 - [x] `--parameter value`
 - [ ] `-p parameter=value`
 
-Approfondisci: [3.2. Impostare un parametro da riga di comando per catturare l'input dell'utente](#32-impostare-un-parametro-da-riga-di-comando-per-catturare-linput-dellutente)
+Approfondisci: [3.2. Impostare un parametro da riga di comando per catturare l'input dell'utente](#32-set-up-a-command-line-parameter-to-capture-user-input)
 </quiz>
 
 <quiz>
