@@ -3321,7 +3321,7 @@
   <span class="md-ellipsis">
     
   
-    Orientamento
+    Per iniziare
   
 
     
@@ -3377,7 +3377,7 @@
   <span class="md-ellipsis">
     
   
-    Pattern Essenziali di Scripting in Nextflow
+    Pattern Essenziali di Scripting
   
 
     
@@ -3489,7 +3489,7 @@
   <span class="md-ellipsis">
     
   
-    Test con nf-test
+    Index
   
 
     
@@ -3517,7 +3517,7 @@
   <span class="md-ellipsis">
     
   
-    Debug dei Workflow
+    Risoluzione dei Problemi nei Workflow
   
 
     
@@ -5344,8 +5344,8 @@ Imparando a utilizzare efficacemente queste opzioni di configurazione, potete mi
 </span><a id="__codelineno-1-52" name="__codelineno-1-52"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
 <a id="__codelineno-1-53" name="__codelineno-1-53"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-1-54" name="__codelineno-1-54"></a><span class="w">    </span><span class="n">cowpy_art</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-1-55" name="__codelineno-1-55"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_config&#39;</span>
-<a id="__codelineno-1-56" name="__codelineno-1-56"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-1-55" name="__codelineno-1-55"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_config&#39;</span>
+</span><a id="__codelineno-1-56" name="__codelineno-1-56"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
 <a id="__codelineno-1-57" name="__codelineno-1-57"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-1-58" name="__codelineno-1-58"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5354,7 +5354,7 @@ Imparando a utilizzare efficacemente queste opzioni di configurazione, potete mi
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">Launching `hello-config.nf` [nice_escher] DSL2 - revision: d5dfdc9872</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
@@ -5367,25 +5367,25 @@ Imparando a utilizzare efficacemente queste opzioni di configurazione, potete mi
 </details>
 <p>Come in precedenza, troverete i file di output nella directory specificata nel blocco <code>output</code> (<code>results/hello_config/</code>).</p>
 <details class="abstract">
-<summary>Contenuti della directory</summary>
+<summary>Contenuto della directory</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">results/hello_config/</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">├── cowpy-COLLECTED-batch-output.txt</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">├── intermediates</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">│   ├── Bonjour-output.txt</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">│   ├── COLLECTED-batch-output.txt</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">│   ├── Hello-output.txt</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">│   ├── Holà-output.txt</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">│   ├── Hola-output.txt</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="go">│   ├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="go">│   ├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="go">│   └── UPPER-Holà-output.txt</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="go">│   └── UPPER-Hola-output.txt</span>
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="go">└── batch-report.txt</span>
 </code></pre></div>
 </details>
 <p>L'output ASCII art finale è nella directory <code>results/hello_config/</code>, sotto il nome <code>cowpy-COLLECTED-batch-output.txt</code>.</p>
 <details class="abstract">
-<summary>Contenuti del file</summary>
+<summary>Contenuto del file</summary>
 <div class="highlight"><span class="filename">results/hello_config/cowpy-COLLECTED-batch-output.txt</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">_________</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="go">/ HOLà    \</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="go">/ HOLA    \</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go">| HELLO   |</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="go">\ BONJOUR /</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="go">---------</span>
@@ -5511,7 +5511,7 @@ Potreste modificare il personaggio, per esempio, ed eseguire il workflow per ver
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">Launching `hello-config.nf` [disturbed_einstein] DSL2 - revision: ede9037d02</span>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
@@ -5525,9 +5525,9 @@ Potreste modificare il personaggio, per esempio, ed eseguire il workflow per ver
 <p>Questo produce ancora lo stesso output di prima.</p>
 <p>L'output ASCII art finale è nella directory <code>results/hello_config/</code>, sotto il nome <code>cowpy-COLLECTED-batch-output.txt</code>, come prima.</p>
 <details class="abstract">
-<summary>Contenuti del file</summary>
+<summary>Contenuto del file</summary>
 <div class="highlight"><span class="filename">results/hello_config/cowpy-COLLECTED-batch-output.txt</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">_________</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="go">/ HOLà    \</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="go">/ HOLA    \</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="go">| HELLO   |</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="go">\ BONJOUR /</span>
 <a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="go">---------</span>
@@ -5587,7 +5587,7 @@ Assicuratevi di adattare il percorso di conseguenza!</p>
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">Launching `../hello-config.nf` [trusting_escher] DSL2 - revision: 356df0818d</span>
 <a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
@@ -5602,11 +5602,11 @@ Assicuratevi di adattare il percorso di conseguenza!</p>
 <p>In questa esecuzione, Nextflow combina il <code>nextflow.config</code> nella nostra directory corrente con il <code>nextflow.config</code> nella directory radice della pipeline, e quindi sovrascrive il personaggio predefinito (turkey) con il personaggio tux.</p>
 <p>Il file di output finale dovrebbe contenere il personaggio tux che dice i saluti.</p>
 <details class="abstract">
-<summary>Contenuti del file</summary>
+<summary>Contenuto del file</summary>
 <div class="highlight"><span class="filename">tux-run/results/hello_config/cowpy-COLLECTED-experiment-output.txt</span><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="go">_________</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="go">/ HELLO   \</span>
 <a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="go">| BONJOUR |</span>
-<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="go">\ HOLà    /</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="go">\ HOLA    /</span>
 <a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="go">---------</span>
 <a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="go">  \</span>
 <a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="go">    \</span>
@@ -5643,7 +5643,7 @@ C'è un approccio più semplice per quando volete eseguire la vostra pipeline co
 Nota l'uso dei due punti (<code>:</code>) invece dei segni di uguale (<code>=</code>) se confronta la sintassi con il file di configurazione.
 Il file di configurazione è scritto in Groovy, mentre il file di parametri è scritto in YAML.</p>
 <div class="admonition info">
-<p class="admonition-title">Informazione</p>
+<p class="admonition-title">Info</p>
 <p>Forniamo anche una versione JSON del file di parametri come esempio ma non la eseguiremo qui.
 Sentitevi liberi di provare quella da soli.</p>
 </div>
@@ -5653,7 +5653,7 @@ Sentitevi liberi di provare quella da soli.</p>
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>
 <a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="go">Launching `hello-config.nf` [disturbed_sammet] DSL2 - revision: ede9037d02</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>
@@ -5666,10 +5666,10 @@ Sentitevi liberi di provare quella da soli.</p>
 </details>
 <p>Il file di output finale dovrebbe contenere il personaggio stegosaurus che dice i saluti.</p>
 <details class="abstract">
-<summary>Contenuti del file</summary>
+<summary>Contenuto del file</summary>
 <div class="highlight"><span class="filename">results/hello_config/cowpy-COLLECTED-yaml-output.txt</span><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">_________</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="go">/ HELLO   \</span>
-<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">| HOLà    |</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">| HOLA    |</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="go">\ BONJOUR /</span>
 <a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="go">---------</span>
 <a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="go">\                             .       .</span>
@@ -5715,7 +5715,7 @@ Questo è il modo raccomandato per controllare il percorso radice dove vengono p
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>
 <a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="go">Launching `hello-config.nf` [prickly_kay] DSL2 - revision: 32ecc4fba2</span>
 <a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>
@@ -5728,7 +5728,7 @@ Questo è il modo raccomandato per controllare il percorso radice dove vengono p
 </details>
 <p>Questo pubblica gli output in <code>custom-outdir-cli/</code> invece di <code>results/</code>:</p>
 <details class="abstract">
-<summary>Contenuti della directory</summary>
+<summary>Contenuto della directory</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go">custom-outdir-cli/</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="go">└── hello_config</span>
 <a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="go">    ├── batch-report.txt</span>
@@ -5737,10 +5737,10 @@ Questo è il modo raccomandato per controllare il percorso radice dove vengono p
 <a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="go">        ├── Bonjour-output.txt</span>
 <a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="go">        ├── COLLECTED-batch-output.txt</span>
 <a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="go">        ├── Hello-output.txt</span>
-<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="go">        ├── Holà-output.txt</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="go">        ├── Hola-output.txt</span>
 <a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="go">        ├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="go">        ├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="go">        └── UPPER-Holà-output.txt</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="go">        └── UPPER-Hola-output.txt</span>
 </code></pre></div>
 </details>
 <p>Notate che abbiamo ancora la sottodirectory <code>hello_config</code> dalle dichiarazioni <code>path</code> nel blocco output.
@@ -5850,7 +5850,7 @@ Per gli output che non necessitano di una sottodirectory possiamo impostare la d
 </code></pre></div>
 <p>Ora gli output sono pubblicati direttamente sotto <code>custom-outdir-cli-2/</code>, senza la sottodirectory <code>hello_config</code>:</p>
 <details class="abstract">
-<summary>Contenuti della directory</summary>
+<summary>Contenuto della directory</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="go">custom-outdir-cli-2/</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="go">├── batch-report.txt</span>
 <a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="go">├── cowpy-COLLECTED-batch-output.txt</span>
@@ -5858,10 +5858,10 @@ Per gli output che non necessitano di una sottodirectory possiamo impostare la d
 <a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="go">    ├── Bonjour-output.txt</span>
 <a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="go">    ├── COLLECTED-batch-output.txt</span>
 <a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="go">    ├── Hello-output.txt</span>
-<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="go">    ├── Holà-output.txt</span>
+<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="go">    ├── Hola-output.txt</span>
 <a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a><span class="go">    ├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a><span class="go">    ├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a><span class="go">    └── UPPER-Holà-output.txt</span>
+<a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a><span class="go">    └── UPPER-Hola-output.txt</span>
 </code></pre></div>
 </details>
 <div class="admonition tip">
@@ -6039,7 +6039,7 @@ Rimettiamola a posto, e mettiamo anche i file in una sottodirectory <code>params
 <p class="admonition-title">Suggerimento</p>
 <p>Includere <code>params.batch</code> nel <code>path</code> del blocco output, invece del <code>outputDir</code> di configurazione, significa che non verrà sovrascritto con <code>-output-dir</code> sulla CLI.</p>
 </div>
-<p>Prima, aggiornate il file di configurazione per rimuovere <code>${params.batch}</code> da <code>outputDir</code> (dato che lo stiamo spostando nelle dichiarazioni di percorso):</p>
+<p>Prima, aggiornate il file di configurazione per rimuovere <code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">}</span></code> da <code>outputDir</code> (dato che lo stiamo spostando nelle dichiarazioni di percorso):</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Dopo</label><label for="__tabbed_6_2">Prima</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -6167,7 +6167,7 @@ Rimettiamola a posto, e mettiamo anche i file in una sottodirectory <code>params
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>
 <a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="go">Launching `hello-config.nf` [mad_curry] DSL2 - revision: 668a98ccb9</span>
 <a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>
@@ -6180,7 +6180,7 @@ Rimettiamola a posto, e mettiamo anche i file in una sottodirectory <code>params
 </details>
 <p>Questo pubblica gli output in <code>custom-outdir-config-2/rep2/</code>, con il percorso base specificato <em>e</em> la sottodirectory del nome del batch <em>e</em> i risultati raggruppati per processo:</p>
 <details class="abstract">
-<summary>Contenuti della directory</summary>
+<summary>Contenuto della directory</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="go">custom-outdir-config-2</span>
 <a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="go">└── rep2</span>
 <a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="go">    ├── collectGreetings</span>
@@ -6193,11 +6193,11 @@ Rimettiamola a posto, e mettiamo anche i file in una sottodirectory <code>params
 <a id="__codelineno-42-10" name="__codelineno-42-10" href="#__codelineno-42-10"></a><span class="go">        ├── convertToUpper</span>
 <a id="__codelineno-42-11" name="__codelineno-42-11" href="#__codelineno-42-11"></a><span class="go">        │   ├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-42-12" name="__codelineno-42-12" href="#__codelineno-42-12"></a><span class="go">        │   ├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-42-13" name="__codelineno-42-13" href="#__codelineno-42-13"></a><span class="go">        │   └── UPPER-Holà-output.txt</span>
+<a id="__codelineno-42-13" name="__codelineno-42-13" href="#__codelineno-42-13"></a><span class="go">        │   └── UPPER-Hola-output.txt</span>
 <a id="__codelineno-42-14" name="__codelineno-42-14" href="#__codelineno-42-14"></a><span class="go">        └── sayHello</span>
 <a id="__codelineno-42-15" name="__codelineno-42-15" href="#__codelineno-42-15"></a><span class="go">            ├── Bonjour-output.txt</span>
 <a id="__codelineno-42-16" name="__codelineno-42-16" href="#__codelineno-42-16"></a><span class="go">            ├── Hello-output.txt</span>
-<a id="__codelineno-42-17" name="__codelineno-42-17" href="#__codelineno-42-17"></a><span class="go">            └── Holà-output.txt</span>
+<a id="__codelineno-42-17" name="__codelineno-42-17" href="#__codelineno-42-17"></a><span class="go">            └── Hola-output.txt</span>
 </code></pre></div>
 </details>
 <h3 id="23-impostare-la-modalita-di-pubblicazione-a-livello-di-workflow">2.3. Impostare la modalità di pubblicazione a livello di workflow<a class="headerlink" href="#23-impostare-la-modalita-di-pubblicazione-a-livello-di-workflow" title="Permanent link">&para;</a></h3>
@@ -6326,7 +6326,7 @@ Rimettiamola a posto, e mettiamo anche i file in una sottodirectory <code>params
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>
 <a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a><span class="go">Launching `hello-config.nf` [small_stone] DSL2 - revision: 024d6361b5</span>
 <a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a>
@@ -6339,7 +6339,7 @@ Rimettiamola a posto, e mettiamo anche i file in una sottodirectory <code>params
 </details>
 <p>Questo pubblica gli output in <code>config-output-mode/</code>, e sono ancora tutte copie appropriate, non symlink.</p>
 <details class="abstract">
-<summary>Contenuti della directory</summary>
+<summary>Contenuto della directory</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="go">config-output-mode</span>
 <a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a><span class="go">└── batch</span>
 <a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a><span class="go">    ├── collectGreetings</span>
@@ -6352,11 +6352,11 @@ Rimettiamola a posto, e mettiamo anche i file in una sottodirectory <code>params
 <a id="__codelineno-49-10" name="__codelineno-49-10" href="#__codelineno-49-10"></a><span class="go">        ├── convertToUpper</span>
 <a id="__codelineno-49-11" name="__codelineno-49-11" href="#__codelineno-49-11"></a><span class="go">        │   ├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-49-12" name="__codelineno-49-12" href="#__codelineno-49-12"></a><span class="go">        │   ├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-49-13" name="__codelineno-49-13" href="#__codelineno-49-13"></a><span class="go">        │   └── UPPER-Holà-output.txt</span>
+<a id="__codelineno-49-13" name="__codelineno-49-13" href="#__codelineno-49-13"></a><span class="go">        │   └── UPPER-Hola-output.txt</span>
 <a id="__codelineno-49-14" name="__codelineno-49-14" href="#__codelineno-49-14"></a><span class="go">        └── sayHello</span>
 <a id="__codelineno-49-15" name="__codelineno-49-15" href="#__codelineno-49-15"></a><span class="go">            ├── Bonjour-output.txt</span>
 <a id="__codelineno-49-16" name="__codelineno-49-16" href="#__codelineno-49-16"></a><span class="go">            ├── Hello-output.txt</span>
-<a id="__codelineno-49-17" name="__codelineno-49-17" href="#__codelineno-49-17"></a><span class="go">            └── Holà-output.txt</span>
+<a id="__codelineno-49-17" name="__codelineno-49-17" href="#__codelineno-49-17"></a><span class="go">            └── Hola-output.txt</span>
 </code></pre></div>
 </details>
 <p>Il motivo principale per cui potreste ancora voler usare il modo per-output di impostare la modalità è se volete mescolare all'interno dello stesso workflow, <em>cioè</em> avere alcuni output copiati e alcuni come symlink.</p>
@@ -6441,7 +6441,7 @@ Raccomandiamo di usare la query di ricerca di <a href="https://seqera.io/contain
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a>
 <a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a><span class="go">Launching `hello-config.nf` [friendly_lamport] DSL2 - revision: 024d6361b5</span>
 <a id="__codelineno-55-4" name="__codelineno-55-4" href="#__codelineno-55-4"></a>
@@ -6830,7 +6830,7 @@ Tuttavia, se provaste a eseguire il workflow con allocazioni di risorse che supe
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-72-2" name="__codelineno-72-2" href="#__codelineno-72-2"></a>
 <a id="__codelineno-72-3" name="__codelineno-72-3" href="#__codelineno-72-3"></a><span class="go">Launching `hello-config.nf` [hungry_sanger] DSL2 - revision: 024d6361b5</span>
 <a id="__codelineno-72-4" name="__codelineno-72-4" href="#__codelineno-72-4"></a>
@@ -6917,7 +6917,7 @@ Se le impostazioni in conflitto sono impostate in diverse fonti di configurazion
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a>
 <a id="__codelineno-76-3" name="__codelineno-76-3" href="#__codelineno-76-3"></a><span class="go">Launching `hello-config.nf` [modest_becquerel] DSL2 - revision: 024d6361b5</span>
 <a id="__codelineno-76-4" name="__codelineno-76-4" href="#__codelineno-76-4"></a>
@@ -6930,9 +6930,9 @@ Se le impostazioni in conflitto sono impostate in diverse fonti di configurazion
 </details>
 <p>Questo userà Docker dove possibile e produrrà output sotto <code>custom-outdir-config/test</code>, e questa volta il personaggio è il duo comico <code>dragonandcow</code>.</p>
 <details class="abstract">
-<summary>Contenuti del file</summary>
+<summary>Contenuto del file</summary>
 <div class="highlight"><span class="filename">custom-outdir-config/test/cowpy/cowpy-COLLECTED-test-output.txt</span><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="go"> _________</span>
-<a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a><span class="go">/ HOLà    \</span>
+<a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a><span class="go">/ HOLA    \</span>
 <a id="__codelineno-77-3" name="__codelineno-77-3" href="#__codelineno-77-3"></a><span class="go">| HELLO   |</span>
 <a id="__codelineno-77-4" name="__codelineno-77-4" href="#__codelineno-77-4"></a><span class="go">\ BONJOUR /</span>
 <a id="__codelineno-77-5" name="__codelineno-77-5" href="#__codelineno-77-5"></a><span class="go">---------</span>
@@ -6959,7 +6959,7 @@ Se le impostazioni in conflitto sono impostate in diverse fonti di configurazion
 <p class="admonition-title">Suggerimento</p>
 <p>Possiamo puntare a URL per file più grandi che sono memorizzati esternamente.
 Nextflow li scaricherà automaticamente finché c'è una connessione aperta.</p>
-<p>Per maggiori dettagli, vedete la Side Quest <a href="../side_quests/working_with_files.md">Lavorare con i file</a></p>
+<p>Per maggiori dettagli, vedete la Side Quest <a href="../../side_quests/working_with_files/">Lavorare con i file</a></p>
 </div>
 <h3 id="63-usare-nextflow-config-per-vedere-la-configurazione-risolta">6.3. Usare <code>nextflow config</code> per vedere la configurazione risolta<a class="headerlink" href="#63-usare-nextflow-config-per-vedere-la-configurazione-risolta" title="Permanent link">&para;</a></h3>
 <p>Come notato sopra, a volte lo stesso parametro può essere impostato a valori diversi in profili che volete combinare.
@@ -7085,7 +7085,7 @@ Cosa ha la precedenza quando lo stesso parametro è impostato sia nel file di co
 - [ ] Il primo valore incontrato
 - [ ] Nessuno dei due; causa un errore
 
-Per approfondire: [1.1. Spostare i valori predefiniti in `nextflow.config`](#11-spostare-i-valori-predefiniti-in-nextflowconfig)
+Per approfondire: [1.1. Spostare i valori predefiniti in `nextflow.config`](#11-move-default-values-to-nextflowconfig)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -7099,7 +7099,7 @@ Per approfondire: [1.1. Spostare i valori predefiniti in `nextflow.config`](#11-
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Per approfondire: <a href="#11-spostare-i-valori-predefiniti-in-nextflowconfig">1.1. Spostare i valori predefiniti in <code>nextflow.config</code></a></p></section>
+    <section class="content hidden"><p>Per approfondire: <a href="#11-move-default-values-to-nextflowconfig">1.1. Spostare i valori predefiniti in <code>nextflow.config</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -7133,7 +7133,7 @@ Se sia Docker che Conda sono abilitati e un processo ha entrambe le direttive, q
 - [ ] Il primo definito
 - [ ] Causa un errore
 
-Per approfondire: [3. Selezionare una tecnologia di packaging del software](#3-selezionare-una-tecnologia-di-packaging-del-software)
+Per approfondire: [3. Selezionare una tecnologia di packaging del software](#3-select-a-software-packaging-technology)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
@@ -7147,7 +7147,7 @@ Per approfondire: [3. Selezionare una tecnologia di packaging del software](#3-s
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Per approfondire: <a href="#3-selezionare-una-tecnologia-di-packaging-del-software">3. Selezionare una tecnologia di packaging del software</a></p></section>
+    <section class="content hidden"><p>Per approfondire: <a href="#3-select-a-software-packaging-technology">3. Selezionare una tecnologia di packaging del software</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -7181,7 +7181,7 @@ Come si impostano i requisiti di risorse per un processo specifico nel file di c
 - [x] `#!groovy process { withName: 'processName' { memory = '4 GB' } }`
 - [ ] `#!groovy resources.processName.memory = '4 GB'`
 
-Per approfondire: [5.3. Impostare allocazioni di risorse per un processo specifico](#53-impostare-allocazioni-di-risorse-per-un-processo-specifico)
+Per approfondire: [5.3. Impostare allocazioni di risorse per un processo specifico](#53-set-resource-allocations-for-a-specific-process)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
@@ -7195,7 +7195,7 @@ Per approfondire: [5.3. Impostare allocazioni di risorse per un processo specifi
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Per approfondire: <a href="#53-impostare-allocazioni-di-risorse-per-un-processo-specifico">5.3. Impostare allocazioni di risorse per un processo specifico</a></p></section>
+    <section class="content hidden"><p>Per approfondire: <a href="#53-set-resource-allocations-for-a-specific-process">5.3. Impostare allocazioni di risorse per un processo specifico</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -7206,7 +7206,7 @@ Quale opzione da riga di comando genera un report di utilizzo delle risorse?
 - [x] `-with-report`
 - [ ] `-with-profile`
 
-Per approfondire: [5.1. Eseguire il workflow per generare un report di utilizzo delle risorse](#51-eseguire-il-workflow-per-generare-un-report-di-utilizzo-delle-risorse)
+Per approfondire: [5.1. Eseguire il workflow per generare un report di utilizzo delle risorse](#51-run-the-workflow-to-generate-a-resource-utilization-report)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -7220,7 +7220,7 @@ Per approfondire: [5.1. Eseguire il workflow per generare un report di utilizzo 
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Per approfondire: <a href="#51-eseguire-il-workflow-per-generare-un-report-di-utilizzo-delle-risorse">5.1. Eseguire il workflow per generare un report di utilizzo delle risorse</a></p></section>
+    <section class="content hidden"><p>Per approfondire: <a href="#51-run-the-workflow-to-generate-a-resource-utilization-report">5.1. Eseguire il workflow per generare un report di utilizzo delle risorse</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -7231,7 +7231,7 @@ Cosa fa la direttiva `resourceLimits`?
 - [x] Limita le risorse massime che possono essere richieste
 - [ ] Monitora l'uso delle risorse
 
-Per approfondire: [5.5. Aggiungere limiti di risorse](#55-aggiungere-limiti-di-risorse)
+Per approfondire: [5.5. Aggiungere limiti di risorse](#55-add-resource-limits)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-7">
@@ -7245,7 +7245,7 @@ Per approfondire: [5.5. Aggiungere limiti di risorse](#55-aggiungere-limiti-di-r
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Per approfondire: <a href="#55-aggiungere-limiti-di-risorse">5.5. Aggiungere limiti di risorse</a></p></section>
+    <section class="content hidden"><p>Per approfondire: <a href="#55-add-resource-limits">5.5. Aggiungere limiti di risorse</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -7256,7 +7256,7 @@ Qual è l'executor predefinito in Nextflow?
 - [ ] `kubernetes`
 - [ ] `aws`
 
-Per approfondire: [4. Selezionare una piattaforma di esecuzione](#4-selezionare-una-piattaforma-di-esecuzione)
+Per approfondire: [4. Selezionare una piattaforma di esecuzione](#4-select-an-execution-platform)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-8">
@@ -7270,7 +7270,7 @@ Per approfondire: [4. Selezionare una piattaforma di esecuzione](#4-selezionare-
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Per approfondire: <a href="#4-selezionare-una-piattaforma-di-esecuzione">4. Selezionare una piattaforma di esecuzione</a></p></section>
+    <section class="content hidden"><p>Per approfondire: <a href="#4-select-an-execution-platform">4. Selezionare una piattaforma di esecuzione</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -7281,7 +7281,7 @@ Come si specifica un file di parametri quando si esegue Nextflow?
 - [x] `-params-file params.json`
 - [ ] `--input params.json`
 
-Per approfondire: [1.3. Usare un file di parametri](#13-usare-un-file-di-parametri)
+Per approfondire: [1.3. Usare un file di parametri](#13-use-a-parameter-file)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-9">
@@ -7295,7 +7295,7 @@ Per approfondire: [1.3. Usare un file di parametri](#13-usare-un-file-di-paramet
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Per approfondire: <a href="#13-usare-un-file-di-parametri">1.3. Usare un file di parametri</a></p></section>
+    <section class="content hidden"><p>Per approfondire: <a href="#13-use-a-parameter-file">1.3. Usare un file di parametri</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -7306,7 +7306,7 @@ Per cosa possono essere usati i profili? (Selezionate tutte le risposte applicab
 - [x] Fornire parametri di test
 - [ ] Definire nuovi processi
 
-Per approfondire: [6. Usare profili per passare tra configurazioni preimpostate](#6-usare-profili-per-passare-tra-configurazioni-preimpostate)
+Per approfondire: [6. Usare profili per passare tra configurazioni preimpostate](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-10">
@@ -7320,7 +7320,7 @@ Per approfondire: [6. Usare profili per passare tra configurazioni preimpostate]
         <div class="quiz-feedback hidden"></div>
         <button type="submit" class="quiz-button">Submit</button>
     </form>
-    <section class="content hidden"><p>Per approfondire: <a href="#6-usare-profili-per-passare-tra-configurazioni-preimpostate">6. Usare profili per passare tra configurazioni preimpostate</a></p></section>
+    <section class="content hidden"><p>Per approfondire: <a href="#6-use-profiles-to-switch-between-preset-configurations">6. Usare profili per passare tra configurazioni preimpostate</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -7331,7 +7331,7 @@ Come si specificano più profili in un singolo comando?
 - [x] `-profile profile1,profile2`
 - [ ] `--profile profile1 --profile profile2`
 
-Per approfondire: [6. Usare profili per passare tra configurazioni preimpostate](#6-usare-profili-per-passare-tra-configurazioni-preimpostate)
+Per approfondire: [6. Usare profili per passare tra configurazioni preimpostate](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-11">
@@ -7345,7 +7345,7 @@ Per approfondire: [6. Usare profili per passare tra configurazioni preimpostate]
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Per approfondire: <a href="#6-usare-profili-per-passare-tra-configurazioni-preimpostate">6. Usare profili per passare tra configurazioni preimpostate</a></p></section>
+    <section class="content hidden"><p>Per approfondire: <a href="#6-use-profiles-to-switch-between-preset-configurations">6. Usare profili per passare tra configurazioni preimpostate</a></p></section>
 </div><div id="quiz-progress-sidebar" aria-label="Quiz Progress" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">

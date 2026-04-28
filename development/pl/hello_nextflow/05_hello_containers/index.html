@@ -2962,7 +2962,7 @@
   <span class="md-ellipsis">
     
   
-    Orientacja
+    Pierwsze kroki
   
 
     
@@ -2990,7 +2990,7 @@
   <span class="md-ellipsis">
     
   
-    Środowisko programistyczne
+    Index
   
 
     
@@ -3018,7 +3018,7 @@
   <span class="md-ellipsis">
     
   
-    Podstawowe Wzorce Skryptowania w Nextflow
+    Podstawowe Wzorce Skryptowania
   
 
     
@@ -3130,7 +3130,7 @@
   <span class="md-ellipsis">
     
   
-    Testowanie z nf-test
+    Index
   
 
     
@@ -3158,7 +3158,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow'ów
+    Rozwiązywanie problemów z Workflow'ami
   
 
     
@@ -4627,8 +4627,8 @@ Jest on równoważny skryptowi utworzonemu podczas pracy nad Częścią 4 tego k
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-containers.nf
 </code></pre></div>
 <details class="success">
-<summary>Wynik polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<summary>Wyjście polecenia</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">Launching `hello-containers.nf` [nice_escher] DSL2 - revision: d5dfdc9872</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
@@ -4645,11 +4645,11 @@ Jest on równoważny skryptowi utworzonemu podczas pracy nad Częścią 4 tego k
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">├── Bonjour-output.txt</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">├── COLLECTED-batch-output.txt</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">├── Hello-output.txt</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">├── Holà-output.txt</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">├── Hola-output.txt</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">├── batch-report.txt</span>
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="go">├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="go">└── UPPER-Holà-output.txt</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="go">└── UPPER-Hola-output.txt</span>
 </code></pre></div>
 </details>
 <p>Jeśli to zadziałało, jesteś gotowy do nauki używania kontenerów.</p>
@@ -4660,12 +4660,12 @@ Jest on równoważny skryptowi utworzonemu podczas pracy nad Częścią 4 tego k
 <h3 id="11-pobierz-obraz-kontenera">1.1. Pobierz obraz kontenera<a class="headerlink" href="#11-pobierz-obraz-kontenera" title="Permanent link">&para;</a></h3>
 <p>Aby użyć kontenera, zazwyczaj pobierasz lub <em>ściągasz</em> obraz kontenera z rejestru kontenerów, a następnie uruchamiasz go, aby utworzyć działającą instancję.</p>
 <p>Ogólna składnia jest następująca:</p>
-<div class="highlight"><span class="filename">Składnia</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>pull<span class="w"> </span><span class="s1">&#39;&lt;kontener&gt;&#39;</span>
+<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>pull<span class="w"> </span><span class="s1">&#39;&lt;container&gt;&#39;</span>
 </code></pre></div>
 <p>Część <code>docker pull</code> to instrukcja dla systemu kontenerowego, aby pobrał obraz kontenera z repozytorium.</p>
 <p>Część <code>'&lt;kontener&gt;'</code> to adres URI obrazu kontenera.</p>
 <p>Jako przykład pobierzmy obraz kontenera zawierający <a href="https://github.com/jeffbuttars/cowpy">cowpy</a>, pythonową implementację narzędzia o nazwie <code>cowsay</code>, które generuje grafikę ASCII do wyświetlania dowolnych tekstów wejściowych w zabawny sposób.</p>
-<div class="highlight"><span class="filename">Przykład</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a> ________________________
+<div class="highlight"><span class="filename">Example</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a> ________________________
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>&lt; Are we having fun yet? &gt;
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a> ------------------------
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    \                                  ___-------___
@@ -4690,7 +4690,7 @@ Użyliśmy usługi <a href="https://seqera.io/containers/">Seqera Containers</a>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>pull<span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
 </code></pre></div>
 <details class="success">
-<summary>Wynik polecenia</summary>
+<summary>Wyjście polecenia</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">1.1.5--3db457ae1977a273: Pulling from library/cowpy</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="go">dafa2b0c44d2: Pull complete</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">dec6b097362e: Pull complete</span>
@@ -4716,7 +4716,7 @@ Po zakończeniu masz lokalną kopię obrazu kontenera.</p>
 <p>Bardzo częstym sposobem używania kontenerów jest uruchamianie ich bezpośrednio, czyli nieinteraktywnie.
 To świetne rozwiązanie do uruchamiania jednorazowych poleceń.</p>
 <p>Ogólna składnia jest następująca:</p>
-<div class="highlight"><span class="filename">Składnia</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="s1">&#39;&lt;kontener&gt;&#39;</span><span class="w"> </span><span class="o">[</span>polecenie<span class="w"> </span>narzędzia<span class="o">]</span>
+<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="s1">&#39;&lt;container&gt;&#39;</span><span class="w"> </span><span class="o">[</span>tool<span class="w"> </span>command<span class="o">]</span>
 </code></pre></div>
 <p>Część <code>docker run --rm '&lt;kontener&gt;'</code> to instrukcja dla systemu, aby uruchomił instancję kontenera z obrazu i wykonał w niej polecenie.
 Flaga <code>--rm</code> mówi systemowi, aby wyłączył instancję kontenera po zakończeniu polecenia.</p>
@@ -4726,7 +4726,7 @@ Zacznijmy po prostu od <code>cowpy</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span><span class="w"> </span>cowpy
 </code></pre></div>
 <details class="success">
-<summary>Wynik polecenia</summary>
+<summary>Wyjście polecenia</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">______________________________________________________</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="go">&lt; Cowacter, eyes:default, tongue:False, thoughts:False &gt;</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">------------------------------------------------------</span>
@@ -4750,7 +4750,7 @@ Opcjonalnie możemy określić powłokę, której chcemy używać wewnątrz kont
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>ls<span class="w"> </span>/
 </code></pre></div>
 <details class="abstract">
-<summary>Wynik polecenia</summary>
+<summary>Wyjście polecenia</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="go">bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var</span>
 </code></pre></div>
 </details>
@@ -4765,7 +4765,7 @@ Na przykład dokumentacja narzędzia mówi, że możemy zmienić postać ('cowac
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>cowpy<span class="w"> </span><span class="s2">&quot;Hello Containers&quot;</span><span class="w"> </span>-c<span class="w"> </span>tux
 </code></pre></div>
 <details class="success">
-<summary>Wynik polecenia</summary>
+<summary>Wyjście polecenia</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="go">__________________</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="go">&lt; Hello Containers &gt;</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="go">------------------</span>
@@ -4798,7 +4798,7 @@ Ale ponieważ nie mamy dostępu do systemu plików, nie możemy.</p>
 <h4 id="134-zamontuj-dane-w-kontenerze">1.3.4. Zamontuj dane w kontenerze<a class="headerlink" href="#134-zamontuj-dane-w-kontenerze" title="Permanent link">&para;</a></h4>
 <p>Jak wspomniano wcześniej, kontener jest domyślnie odizolowany od systemu hosta.</p>
 <p>Aby pozwolić kontenerowi na dostęp do systemu plików hosta, możesz <strong>zamontować</strong> <strong>wolumen</strong> z systemu hosta do kontenera, używając następującej składni:</p>
-<div class="highlight"><span class="filename">Składnia</span><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>-v<span class="w"> </span>&lt;ścieżka_zewnętrzna&gt;:&lt;ścieżka_wewnętrzna&gt;
+<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>-v<span class="w"> </span>&lt;outside_path&gt;:&lt;inside_path&gt;
 </code></pre></div>
 <p>W naszym przypadku <code>&lt;ścieżka_zewnętrzna&gt;</code> będzie bieżącym katalogiem roboczym, więc możemy po prostu użyć kropki (<code>.</code>), a <code>&lt;ścieżka_wewnętrzna&gt;</code> to alias, który wymyślamy; nazwijmy go <code>/my_project</code> (ścieżka wewnętrzna musi być bezwzględna).</p>
 <p>Aby zamontować wolumen, zastępujemy ścieżki i dodajemy argument montowania wolumenu do polecenia docker run w następujący sposób:</p>
@@ -4809,7 +4809,7 @@ Ale ponieważ nie mamy dostępu do systemu plików, nie możemy.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>ls<span class="w"> </span>/my_project
 </code></pre></div>
 <details class="success">
-<summary>Wynik polecenia</summary>
+<summary>Wyjście polecenia</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">data               hello-config.nf      hello-modules.nf   hello-world.nf  nextflow.config  solutions         work</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="go">hello-channels.nf  hello-containers.nf  hello-workflow.nf  modules         results          test-params.json</span>
 </code></pre></div>
@@ -4822,11 +4822,11 @@ Ale ponieważ nie mamy dostępu do systemu plików, nie możemy.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>cat<span class="w"> </span>/my_project/data/greetings.csv<span class="w"> </span><span class="p">|</span><span class="w"> </span>cowpy<span class="w"> </span>-c<span class="w"> </span>turkey
 </code></pre></div>
 <details class="success">
-<summary>Wynik polecenia</summary>
+<summary>Wyjście polecenia</summary>
 <div class="highlight"><span class="filename">data/greetings.csv</span><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go"> ____________________</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="go">/ Hello,English,123  \</span>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">| Bonjour,French,456 |</span>
-<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="go">\ Holà,Spanish,789   /</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="go">\ Hola,Spanish,789   /</span>
 <a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="go">--------------------</span>
 <a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="go">  \                                  ,+*^^*+___+++_</span>
 <a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="go">  \                           ,*^^^^              )</span>
@@ -4839,7 +4839,7 @@ Ale ponieważ nie mamy dostępu do systemu plików, nie możemy.</p>
 <a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a><span class="go">          ( /  (    (        ,___    ^*+_+* )   &lt;    &lt;      \</span>
 <a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a><span class="go">          U _/     )    *--&lt;  ) ^\-----++__)   )    )       )</span>
 <a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a><span class="go">            (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /</span>
-<a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a><span class="go">          (      /  (_))^)) )  )  ))^^^^^))^^^)__/     +^^</span>
+<a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a><span class="go">          (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^</span>
 <a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a><span class="go">        (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)</span>
 <a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a><span class="go">          *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^</span>
 <a id="__codelineno-23-20" name="__codelineno-23-20" href="#__codelineno-23-20"></a><span class="go">          \             \_)^)_)) ))^^^^^^^^^^))^^^^)</span>
@@ -5201,12 +5201,12 @@ Oznacza to, że możesz użyć dowolnego obrazu kontenera do wykonywania proces�
 
 <p>Myślisz, że zadziała?</p>
 <p>Usuńmy poprzednie opublikowane wyjścia, aby mieć czystą kartę, i uruchommy workflow z flagą <code>-resume</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>rm<span class="w"> </span>-r<span class="w"> </span>hello_containers/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>rm<span class="w"> </span>-r<span class="w"> </span>results/hello_containers/
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-containers.nf<span class="w"> </span>-resume
 </code></pre></div>
 <details class="failure">
-<summary>Wynik polecenia (zredagowany dla przejrzystości)</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<summary>Wyjście polecenia (zredagowane dla przejrzystości)</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>
 <a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="go">Launching `hello-containers.nf` [lonely_woese] DSL2 - revision: abf1dccf7f</span>
 <a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>
@@ -5352,8 +5352,8 @@ To jest lepsze dla modularności, utrzymania kodu i powtarzalności.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-containers.nf<span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
-<summary>Wynik polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<summary>Wyjście polecenia</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>
 <a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="go">Launching `hello-containers.nf` [drunk_perlman] DSL2 - revision: abf1dccf7f</span>
 <a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a>
@@ -5374,10 +5374,10 @@ Jak zwykle wyjścia workflow'a znajdziesz w odpowiednim katalogu results, choć 
 <a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a><span class="go">│   ├── Bonjour-output.txt</span>
 <a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a><span class="go">│   ├── COLLECTED-batch-output.txt</span>
 <a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a><span class="go">│   ├── Hello-output.txt</span>
-<a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a><span class="go">│   ├── Holà-output.txt</span>
+<a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a><span class="go">│   ├── Hola-output.txt</span>
 <a id="__codelineno-45-8" name="__codelineno-45-8" href="#__codelineno-45-8"></a><span class="go">│   ├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-45-9" name="__codelineno-45-9" href="#__codelineno-45-9"></a><span class="go">│   ├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-45-10" name="__codelineno-45-10" href="#__codelineno-45-10"></a><span class="go">│   └── UPPER-Holà-output.txt</span>
+<a id="__codelineno-45-10" name="__codelineno-45-10" href="#__codelineno-45-10"></a><span class="go">│   └── UPPER-Hola-output.txt</span>
 <a id="__codelineno-45-11" name="__codelineno-45-11" href="#__codelineno-45-11"></a><span class="go">└── batch-report.txt</span>
 </code></pre></div>
 </details>
@@ -5385,7 +5385,7 @@ Jak zwykle wyjścia workflow'a znajdziesz w odpowiednim katalogu results, choć 
 <details class="abstract">
 <summary>Zawartość pliku</summary>
 <div class="highlight"><span class="filename">results/hello_containers/cowpy-COLLECTED-batch-output.txt</span><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">_________</span>
-<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="go">/ HOLà    \</span>
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="go">/ HOLA    \</span>
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="go">| HELLO   |</span>
 <a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a><span class="go">\ BONJOUR /</span>
 <a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a><span class="go">---------</span>
@@ -5400,7 +5400,7 @@ Jak zwykle wyjścia workflow'a znajdziesz w odpowiednim katalogu results, choć 
 <a id="__codelineno-46-14" name="__codelineno-46-14" href="#__codelineno-46-14"></a><span class="go">          ( /  (    (        ,___    ^*+_+* )   &lt;    &lt;      \</span>
 <a id="__codelineno-46-15" name="__codelineno-46-15" href="#__codelineno-46-15"></a><span class="go">          U _/     )    *--&lt;  ) ^\-----++__)   )    )       )</span>
 <a id="__codelineno-46-16" name="__codelineno-46-16" href="#__codelineno-46-16"></a><span class="go">            (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /</span>
-<a id="__codelineno-46-17" name="__codelineno-46-17" href="#__codelineno-46-17"></a><span class="go">          (      /  (_))^^)) )  )  ))^^^^^))^^^)__/     +^^</span>
+<a id="__codelineno-46-17" name="__codelineno-46-17" href="#__codelineno-46-17"></a><span class="go">          (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^</span>
 <a id="__codelineno-46-18" name="__codelineno-46-18" href="#__codelineno-46-18"></a><span class="go">        (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)</span>
 <a id="__codelineno-46-19" name="__codelineno-46-19" href="#__codelineno-46-19"></a><span class="go">          *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^</span>
 <a id="__codelineno-46-20" name="__codelineno-46-20" href="#__codelineno-46-20"></a><span class="go">          \             \_)^)_)) ))^^^^^^^^^^))^^^^)</span>
@@ -5663,7 +5663,7 @@ Co robi flaga `-v` w poleceniu `docker run`?
 - [x] Montuje wolumen z systemu hosta do kontenera
 - [ ] Określa wersję kontenera
 
-Dowiedz się więcej: [1.3.4. Zamontuj dane w kontenerze](#134-zamontuj-dane-w-kontenerze)
+Dowiedz się więcej: [1.3.4. Zamontuj dane w kontenerze](#134-mount-data-into-the-container)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
@@ -5677,7 +5677,7 @@ Dowiedz się więcej: [1.3.4. Zamontuj dane w kontenerze](#134-zamontuj-dane-w-k
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#134-zamontuj-dane-w-kontenerze">1.3.4. Zamontuj dane w kontenerze</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#134-mount-data-into-the-container">1.3.4. Zamontuj dane w kontenerze</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5688,7 +5688,7 @@ Dlaczego trzeba montować wolumeny podczas używania kontenerów?
 - [x] Ponieważ kontenery są domyślnie odizolowane od systemu plików hosta
 - [ ] Aby włączyć sieć
 
-Dowiedz się więcej: [1.3.4. Zamontuj dane w kontenerze](#134-zamontuj-dane-w-kontenerze)
+Dowiedz się więcej: [1.3.4. Zamontuj dane w kontenerze](#134-mount-data-into-the-container)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
@@ -5702,7 +5702,7 @@ Dowiedz się więcej: [1.3.4. Zamontuj dane w kontenerze](#134-zamontuj-dane-w-k
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#134-zamontuj-dane-w-kontenerze">1.3.4. Zamontuj dane w kontenerze</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#134-mount-data-into-the-container">1.3.4. Zamontuj dane w kontenerze</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5713,7 +5713,7 @@ Jak określasz kontener dla procesu Nextflow'a?
 - [x] `container 'container-uri'`
 - [ ] `use 'container-uri'`
 
-Dowiedz się więcej: [2.3.1. Określ kontener dla cowpy](#231-okresl-kontener-dla-cowpy)
+Dowiedz się więcej: [2.3.1. Określ kontener dla cowpy](#231-specify-a-container-for-cowpy)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
@@ -5727,7 +5727,7 @@ Dowiedz się więcej: [2.3.1. Określ kontener dla cowpy](#231-okresl-kontener-d
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#231-okresl-kontener-dla-cowpy">2.3.1. Określ kontener dla cowpy</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#231-specify-a-container-for-cowpy">2.3.1. Określ kontener dla cowpy</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5738,7 +5738,7 @@ Które ustawienie `nextflow.config` włącza Docker dla Twojego workflow'a?
 - [ ] `#!groovy container.engine = 'docker'`
 - [ ] `#!groovy docker.activate = true`
 
-Dowiedz się więcej: [2.3.2. Włącz użycie Docker przez plik `nextflow.config`](#232-wlacz-uzycie-docker-przez-plik-nextflowconfig)
+Dowiedz się więcej: [2.3.2. Włącz użycie Docker przez plik `nextflow.config`](#232-enable-use-of-docker-via-the-nextflowconfig-file)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
@@ -5752,7 +5752,7 @@ Dowiedz się więcej: [2.3.2. Włącz użycie Docker przez plik `nextflow.config
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#232-wlacz-uzycie-docker-przez-plik-nextflowconfig">2.3.2. Włącz użycie Docker przez plik <code>nextflow.config</code></a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#232-enable-use-of-docker-via-the-nextflowconfig-file">2.3.2. Włącz użycie Docker przez plik <code>nextflow.config</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5763,7 +5763,7 @@ Co Nextflow automatycznie obsługuje podczas uruchamiania procesu w kontenerze? 
 - [x] Uruchamianie skryptu procesu wewnątrz kontenera
 - [x] Czyszczenie instancji kontenera po wykonaniu
 
-Dowiedz się więcej: [2.3.4. Sprawdź, jak Nextflow uruchomił skonteneryzowane zadanie](#234-sprawdz-jak-nextflow-uruchomil-skonteneryzowane-zadanie)
+Dowiedz się więcej: [2.3.4. Sprawdź, jak Nextflow uruchomił skonteneryzowane zadanie](#234-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -5777,7 +5777,7 @@ Dowiedz się więcej: [2.3.4. Sprawdź, jak Nextflow uruchomił skonteneryzowane
         <div class="quiz-feedback hidden"></div>
         <button type="submit" class="quiz-button">Submit</button>
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#234-sprawdz-jak-nextflow-uruchomil-skonteneryzowane-zadanie">2.3.4. Sprawdź, jak Nextflow uruchomił skonteneryzowane zadanie</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#234-inspect-how-nextflow-launched-the-containerized-task">2.3.4. Sprawdź, jak Nextflow uruchomił skonteneryzowane zadanie</a></p></section>
 </div><div id="quiz-progress-sidebar" aria-label="Quiz Progress" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">

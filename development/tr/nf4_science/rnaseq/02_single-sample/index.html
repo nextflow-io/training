@@ -3096,7 +3096,7 @@
   <span class="md-ellipsis">
     
   
-    Yönlendirme
+    Başlarken
   
 
     
@@ -3152,7 +3152,7 @@
   <span class="md-ellipsis">
     
   
-    Temel Nextflow Betik Kalıpları
+    Temel Betik Kalıpları
   
 
     
@@ -3292,7 +3292,7 @@
   <span class="md-ellipsis">
     
   
-    İş Akışlarında Hata Ayıklama
+    İş Akışlarında Sorun Giderme
   
 
     
@@ -4984,7 +4984,7 @@ Konteyner URI'si <code>community.wave.seqera.io/library/trim-galore:0.6.10--1bf8
 <h3 id="11-girdiyi-ayarlayn">1.1. Girdiyi ayarlayın<a class="headerlink" href="#11-girdiyi-ayarlayn" title="Permanent link">&para;</a></h3>
 <p>Bir girdi parametresi bildirmemiz, uygun bir varsayılan değer sağlamak için bir test profili oluşturmamız ve bir girdi kanalı oluşturmamız gerekiyor.</p>
 <h4 id="111-bir-girdi-parametresi-bildirimi-ekleyin">1.1.1. Bir girdi parametresi bildirimi ekleyin<a class="headerlink" href="#111-bir-girdi-parametresi-bildirimi-ekleyin" title="Permanent link">&para;</a></h4>
-<p><code>rnaseq.nf</code> dosyasında, <code>Pipeline parametreleri</code> bölümü altında, <code>Path</code> türünde <code>input</code> adlı bir parametre bildirin.</p>
+<p><code>rnaseq.nf</code> dosyasında, <code>Pipeline parametreleri</code> bölümü altında, <code>Path</code> türünde <code>reads</code> adlı bir parametre bildirin.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Sonra</label><label for="__tabbed_1_2">Önce</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5022,7 +5022,7 @@ Varsayılan bir değer sağlamak için birden fazla seçenek vardır; burada bir
 <h4 id="112-nextflowconfig-dosyasnda-varsaylan-degere-sahip-bir-test-profili-olusturun">1.1.2. <code>nextflow.config</code> dosyasında varsayılan değere sahip bir test profili oluşturun<a class="headerlink" href="#112-nextflowconfig-dosyasnda-varsaylan-degere-sahip-bir-test-profili-olusturun" title="Permanent link">&para;</a></h4>
 <p>Bir test profili, komut satırında girdi belirtmeden bir iş akışını denemek için uygun varsayılan değerler sağlar.
 Bu, Nextflow ekosisteminde yaygın bir kuraldır (daha fazla ayrıntı için <a href="../../../hello_nextflow/06_hello_config/">Hello Config</a> bölümüne bakın).</p>
-<p><code>nextflow.config</code> dosyasına, <code>input</code> parametresini test FASTQ dosyalarından birine ayarlayan bir <code>test</code> profili içeren bir <code>profiles</code> bloğu ekleyin.</p>
+<p><code>nextflow.config</code> dosyasına, <code>reads</code> parametresini test FASTQ dosyalarından birine ayarlayan bir <code>test</code> profili içeren bir <code>profiles</code> bloğu ekleyin.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Sonra</label><label for="__tabbed_2_2">Önce</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5348,7 +5348,7 @@ Sembolik bağlantılar, <code>work</code> dizininizi temizlediğinizde bozulur; 
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `rnaseq.nf` [mad_lorenz] DSL2 - revision: 5846a164d2</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
@@ -5665,7 +5665,7 @@ Konteyner URI'si <code>community.wave.seqera.io/library/trim-galore:0.6.10--1bf8
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>
 <a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="go">Launching `rnaseq.nf` [gloomy_becquerel] DSL2 - revision: bb11055736</span>
 <a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>
@@ -6104,7 +6104,7 @@ Genom dizin arşivini sağlamak için <code class="highlight"><span class="n">fi
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a>
 <a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a><span class="go">Launching `rnaseq.nf` [elated_stonebraker] DSL2 - revision: e8e57d0cdd</span>
 <a id="__codelineno-57-4" name="__codelineno-57-4" href="#__codelineno-57-4"></a>

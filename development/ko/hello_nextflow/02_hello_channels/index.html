@@ -3103,7 +3103,7 @@
   <span class="md-ellipsis">
     
   
-    오리엔테이션
+    시작하기
   
 
     
@@ -3159,7 +3159,7 @@
   <span class="md-ellipsis">
     
   
-    필수 Nextflow 스크립팅 패턴
+    필수 스크립팅 패턴
   
 
     
@@ -3299,7 +3299,7 @@
   <span class="md-ellipsis">
     
   
-    워크플로우 디버깅
+    워크플로우 문제 해결
   
 
     
@@ -4883,7 +4883,7 @@ Channel은 입력을 효율적으로 처리하고 다단계 워크플로우에�
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">Launching `hello-channels.nf` [wise_jennings] DSL2 - revision: b24f4902d6</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
@@ -5043,7 +5043,7 @@ Channel은 입력을 효율적으로 처리하고 다단계 워크플로우에�
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">Launching `hello-channels.nf` [fabulous_crick] DSL2 - revision: 23e20f76e8</span>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
@@ -5085,9 +5085,9 @@ results 디렉토리를 확인하여 결과가 이전과 동일한지 확인할 
 <a id="__codelineno-13-29" name="__codelineno-13-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-13-30" name="__codelineno-13-30"></a><span class="w">    </span><span class="c1">// 입력용 channel 생성</span>
 <a id="__codelineno-13-31" name="__codelineno-13-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello Channels!&#39;</span><span class="o">)</span>
-<a id="__codelineno-13-32" name="__codelineno-13-32"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
-<a id="__codelineno-13-33" name="__codelineno-13-33"></a><span class="hll"><span class="w">    </span><span class="c1">// 인사말을 내보냅니다</span>
-</span><a id="__codelineno-13-34" name="__codelineno-13-34"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
+<a id="__codelineno-13-32" name="__codelineno-13-32"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</span><a id="__codelineno-13-33" name="__codelineno-13-33"></a><span class="w">    </span><span class="c1">// 인사말을 내보냅니다</span>
+<a id="__codelineno-13-34" name="__codelineno-13-34"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-13-35" name="__codelineno-13-35"></a>
 <a id="__codelineno-13-36" name="__codelineno-13-36"></a><span class="w">    </span><span class="nl">publish:</span>
 <a id="__codelineno-13-37" name="__codelineno-13-37"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span>
@@ -5126,7 +5126,7 @@ results 디렉토리를 확인하여 결과가 이전과 동일한지 확인할 
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="go">Launching `hello-channels.nf` [scruffy_shaw] DSL2 - revision: 2ede41e14a</span>
 <a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
@@ -5147,7 +5147,7 @@ results 디렉토리를 확인하여 결과가 이전과 동일한지 확인할 
 <h3 id="21-channel">2.1. 입력 channel에 여러 인사말 로드<a class="headerlink" href="#21-channel" title="Permanent link">&para;</a></h3>
 <p>편리하게도, 사용해 온 <code>channel.of()</code> channel 팩토리는 둘 이상의 값을 기꺼이 허용하므로 전혀 수정할 필요가 없습니다.
 Channel에 여러 값을 로드하기만 하면 됩니다.</p>
-<p><code>'Hello'</code>, <code>'Bonjour'</code>, <code>'Holà'</code>로 만들어 봅시다.</p>
+<p><code>'Hello'</code>, <code>'Bonjour'</code>, <code>'Hola'</code>로 만들어 봅시다.</p>
 <h4 id="211">2.1.1. 더 많은 인사말 추가<a class="headerlink" href="#211" title="Permanent link">&para;</a></h4>
 <p>workflow 블록 전에 다음 코드 변경을 수행하십시오:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">후</label><label for="__tabbed_4_2">전</label></div>
@@ -5156,7 +5156,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-30">30</a></span>
 <span class="normal"><a href="#__codelineno-17-31">31</a></span>
 <span class="normal"><a href="#__codelineno-17-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-30" name="__codelineno-17-30"></a><span class="c1">// 입력용 channel 생성</span>
-<a id="__codelineno-17-31" name="__codelineno-17-31"></a><span class="hll"><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">)</span>
+<a id="__codelineno-17-31" name="__codelineno-17-31"></a><span class="hll"><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">)</span>
 </span><a id="__codelineno-17-32" name="__codelineno-17-32"></a><span class="w">                     </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5177,7 +5177,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="go">Launching `hello-channels.nf` [amazing_crick] DSL2 - revision: 59a9a5888a</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>
@@ -5185,7 +5185,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 <a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="hll"><span class="go">[f4/c9962c] process &gt; sayHello (1) [100%] 3 of 3 ✔</span>
 </span><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="go">Hello</span>
 <a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="go">Bonjour</span>
-<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="go">Holà</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="go">Hola</span>
 </code></pre></div>
 </details>
 <p>확실히 잘 실행된 것 같습니다.
@@ -5203,7 +5203,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 </details>
 <details class="abstract">
 <summary>파일 내용</summary>
-<div class="highlight"><span class="filename">results/hello_channels/output.txt</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">Holà</span>
+<div class="highlight"><span class="filename">results/hello_channels/output.txt</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">Hola</span>
 </code></pre></div>
 </details>
 <p>세 개의 인사말 중 하나가 있어야 하지만, 여기에 표시된 것과 다를 수 있습니다.
@@ -5246,11 +5246,11 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go"> N E X T F L O W  ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go"> N E X T F L O W  ~  version 25.10.4</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="go">Launching `hello-channels.nf` [desperate_monod] DSL2 - revision: 59a9a5888a</span>
 <a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="go">Hello</span>
 <a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="go">Bonjour</span>
-<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="go">Holà</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="go">Hola</span>
 <a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="go">[23/871c7e] Submitted process &gt; sayHello (2)</span>
 <a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="go">[7f/21e2c2] Submitted process &gt; sayHello (1)</span>
 <a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="go">[f4/ea10a6] Submitted process &gt; sayHello (3)</span>
@@ -5306,7 +5306,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 </code></pre></div>
 <div class="highlight"><span class="filename">work/7f/21e2c2f3cc8833ef3858b236e5575c/output.txt</span><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>Hello
 </code></pre></div>
-<div class="highlight"><span class="filename">work/f4/ea10a680d5687596d3eaa3fcf69272/output.txt</span><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>Holà
+<div class="highlight"><span class="filename">work/f4/ea10a680d5687596d3eaa3fcf69272/output.txt</span><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>Hola
 </code></pre></div>
 </details>
 <p>이것은 세 개의 process가 모두 성공적으로 실행되었음을 보여줍니다.</p>
@@ -5408,7 +5408,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>
 <a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="go">Launching `hello-channels.nf` [sharp_minsky] DSL2 - revision: 16a291febe</span>
 <a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a>
@@ -5416,7 +5416,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 <a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a><span class="go">[e8/33ee64] sayHello (2) [100%] 3 of 3 ✔</span>
 <a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a><span class="go">Hello</span>
 <a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a><span class="go">Bonjour</span>
-<a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a><span class="go">Holà</span>
+<a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a><span class="go">Hola</span>
 </code></pre></div>
 </details>
 <p>요약 보기로 돌아가면 출력이 다시 한 줄로 요약됩니다.
@@ -5426,7 +5426,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="go">results/hello_channels/</span>
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="go">├── Bonjour-output.txt</span>
 <a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="go">├── Hello-output.txt</span>
-<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="go">├── Holà-output.txt</span>
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="go">├── Hola-output.txt</span>
 <a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="go">└── output.txt</span>
 </code></pre></div>
 </details>
@@ -5437,7 +5437,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 </code></pre></div>
 <div class="highlight"><span class="filename">Hello-output.txt</span><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="go">Hello</span>
 </code></pre></div>
-<div class="highlight"><span class="filename">Holà-output.txt</span><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="go">Holà</span>
+<div class="highlight"><span class="filename">Hola-output.txt</span><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="go">Hola</span>
 </code></pre></div>
 </details>
 <p>성공입니다! 이제 출력 파일이 덮어쓰여지는 것에 대해 걱정하지 않고 원하는 만큼 많은 인사말을 추가할 수 있습니다.</p>
@@ -5446,7 +5446,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 <p>실제로 입력 데이터 자체를 기반으로 파일 이름을 지정하는 것은 거의 항상 비실용적입니다.
 동적 파일 이름을 생성하는 더 좋은 방법은 입력 파일과 함께 메타데이터를 process에 전달하는 것입니다.
 메타데이터는 일반적으로 'sample sheet' 또는 이와 동등한 것을 통해 제공됩니다.
-나중에 Nextflow 교육에서 이를 수행하는 방법을 학습합니다(<a href="../side_quests/metadata.md">메타데이터 사이드 퀘스트</a> 참조).</p>
+나중에 Nextflow 교육에서 이를 수행하는 방법을 학습합니다(<a href="../../side_quests/metadata/">메타데이터 사이드 퀘스트</a> 참조).</p>
 </div>
 <h3 id="_3">핵심 정리<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>Channel을 통해 여러 입력 요소를 공급하는 방법을 알게 되었습니다.</p>
@@ -5457,7 +5457,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 <p>방금 channel 팩토리에 직접 하드코딩된 여러 입력 요소를 처리하는 방법을 보여드렸습니다.
 다른 방식으로 여러 입력을 제공하려면 어떻게 해야 할까요?</p>
 <p>예를 들어, 다음과 같이 요소 배열을 포함하는 입력 변수를 설정한다고 상상해 보십시오:</p>
-<p><code>greetings_array = ['Hello','Bonjour','Holà']</code></p>
+<p><code>greetings_array = ['Hello','Bonjour','Hola']</code></p>
 <p>이것을 출력 channel에 로드하고 작동할 것으로 기대할 수 있을까요?</p>
 <figure class="excalidraw">
 <?xml version="1.0" standalone="no"?>
@@ -5492,9 +5492,9 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 <a id="__codelineno-41-28" name="__codelineno-41-28"></a>
 <a id="__codelineno-41-29" name="__codelineno-41-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-41-30" name="__codelineno-41-30"></a><span class="hll"><span class="w">    </span><span class="c1">// 입력 인사말 배열 선언</span>
-</span><a id="__codelineno-41-31" name="__codelineno-41-31"></a><span class="hll"><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">]</span>
+</span><a id="__codelineno-41-31" name="__codelineno-41-31"></a><span class="hll"><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
 </span><a id="__codelineno-41-32" name="__codelineno-41-32"></a><span class="w">    </span><span class="c1">// 입력용 channel 생성</span>
-<a id="__codelineno-41-33" name="__codelineno-41-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">)</span>
+<a id="__codelineno-41-33" name="__codelineno-41-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">)</span>
 <a id="__codelineno-41-34" name="__codelineno-41-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 <a id="__codelineno-41-35" name="__codelineno-41-35"></a><span class="w">    </span><span class="c1">// 인사말을 내보냅니다</span>
 <a id="__codelineno-41-36" name="__codelineno-41-36"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
@@ -5520,7 +5520,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 <a id="__codelineno-42-28" name="__codelineno-42-28"></a>
 <a id="__codelineno-42-29" name="__codelineno-42-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-42-30" name="__codelineno-42-30"></a><span class="w">    </span><span class="c1">// 입력용 channel 생성</span>
-<a id="__codelineno-42-31" name="__codelineno-42-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">)</span>
+<a id="__codelineno-42-31" name="__codelineno-42-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">)</span>
 <a id="__codelineno-42-32" name="__codelineno-42-32"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 <a id="__codelineno-42-33" name="__codelineno-42-33"></a><span class="w">    </span><span class="c1">// 인사말을 내보냅니다</span>
 <a id="__codelineno-42-34" name="__codelineno-42-34"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
@@ -5534,7 +5534,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 </div>
 <p>아직 작동하지 않습니다. 배열에 대한 선언만 추가했습니다.</p>
 <h4 id="312-channel">3.1.2. Channel 팩토리에 인사말 배열을 입력으로 설정<a class="headerlink" href="#312-channel" title="Permanent link">&para;</a></h4>
-<p>이제 channel 팩토리에 현재 하드코딩된 값 <code>'Hello','Bonjour','Holà'</code>를 방금 생성한 <code>greetings_array</code>로 교체할 것입니다.</p>
+<p>이제 channel 팩토리에 현재 하드코딩된 값 <code>'Hello','Bonjour','Hola'</code>를 방금 생성한 <code>greetings_array</code>로 교체할 것입니다.</p>
 <p>workflow 블록에서 다음 변경을 수행하십시오:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">후</label><label for="__tabbed_7_2">전</label></div>
 <div class="tabbed-content">
@@ -5556,7 +5556,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 <a id="__codelineno-43-28" name="__codelineno-43-28"></a>
 <a id="__codelineno-43-29" name="__codelineno-43-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-43-30" name="__codelineno-43-30"></a><span class="w">    </span><span class="c1">// 입력 인사말 배열 선언</span>
-<a id="__codelineno-43-31" name="__codelineno-43-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">]</span>
+<a id="__codelineno-43-31" name="__codelineno-43-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
 <a id="__codelineno-43-32" name="__codelineno-43-32"></a><span class="w">    </span><span class="c1">// 입력용 channel 생성</span>
 <a id="__codelineno-43-33" name="__codelineno-43-33"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 </span><a id="__codelineno-43-34" name="__codelineno-43-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
@@ -5586,9 +5586,9 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 <a id="__codelineno-44-28" name="__codelineno-44-28"></a>
 <a id="__codelineno-44-29" name="__codelineno-44-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-44-30" name="__codelineno-44-30"></a><span class="w">    </span><span class="c1">// 입력 인사말 배열 선언</span>
-<a id="__codelineno-44-31" name="__codelineno-44-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">]</span>
+<a id="__codelineno-44-31" name="__codelineno-44-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
 <a id="__codelineno-44-32" name="__codelineno-44-32"></a><span class="w">    </span><span class="c1">// 입력용 channel 생성</span>
-<a id="__codelineno-44-33" name="__codelineno-44-33"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">)</span>
+<a id="__codelineno-44-33" name="__codelineno-44-33"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">)</span>
 </span><a id="__codelineno-44-34" name="__codelineno-44-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 <a id="__codelineno-44-35" name="__codelineno-44-35"></a><span class="w">    </span><span class="c1">// 인사말을 내보냅니다</span>
 <a id="__codelineno-44-36" name="__codelineno-44-36"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
@@ -5607,22 +5607,22 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 </code></pre></div>
 <details class="failure">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="go">Launching `hello-channels.nf` [friendly_koch] DSL2 - revision: 97256837a7</span>
 <a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a>
 <a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a><span class="go">executor &gt;  local (1)</span>
 <a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a><span class="go">[a8/1f6ead] sayHello (1) | 0 of 1</span>
-<a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a><span class="hll"><span class="go">[Hello, Bonjour, Holà]</span>
+<a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a><span class="hll"><span class="go">[Hello, Bonjour, Hola]</span>
 </span><a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a><span class="go">ERROR ~ Error executing process &gt; &#39;sayHello (1)&#39;</span>
 <a id="__codelineno-46-9" name="__codelineno-46-9" href="#__codelineno-46-9"></a>
 <a id="__codelineno-46-10" name="__codelineno-46-10" href="#__codelineno-46-10"></a><span class="go">Caused by:</span>
-<a id="__codelineno-46-11" name="__codelineno-46-11" href="#__codelineno-46-11"></a><span class="hll"><span class="go">  Missing output file(s) `[Hello, Bonjour, Holà]-output.txt` expected by process `sayHello (1)`</span>
+<a id="__codelineno-46-11" name="__codelineno-46-11" href="#__codelineno-46-11"></a><span class="hll"><span class="go">  Missing output file(s) `[Hello, Bonjour, Hola]-output.txt` expected by process `sayHello (1)`</span>
 </span><a id="__codelineno-46-12" name="__codelineno-46-12" href="#__codelineno-46-12"></a>
 <a id="__codelineno-46-13" name="__codelineno-46-13" href="#__codelineno-46-13"></a>
 <a id="__codelineno-46-14" name="__codelineno-46-14" href="#__codelineno-46-14"></a><span class="go">Command executed:</span>
 <a id="__codelineno-46-15" name="__codelineno-46-15" href="#__codelineno-46-15"></a>
-<a id="__codelineno-46-16" name="__codelineno-46-16" href="#__codelineno-46-16"></a><span class="hll"><span class="go">  echo &#39;[Hello, Bonjour, Holà]&#39; &gt; &#39;[Hello, Bonjour, Holà]-output.txt&#39;</span>
+<a id="__codelineno-46-16" name="__codelineno-46-16" href="#__codelineno-46-16"></a><span class="hll"><span class="go">  echo &#39;[Hello, Bonjour, Hola]&#39; &gt; &#39;[Hello, Bonjour, Hola]-output.txt&#39;</span>
 </span><a id="__codelineno-46-17" name="__codelineno-46-17" href="#__codelineno-46-17"></a>
 <a id="__codelineno-46-18" name="__codelineno-46-18" href="#__codelineno-46-18"></a><span class="go">Command exit status:</span>
 <a id="__codelineno-46-19" name="__codelineno-46-19" href="#__codelineno-46-19"></a><span class="go">  0</span>
@@ -5640,7 +5640,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 </details>
 <p>오류가 발생했습니다!</p>
 <p><code>view()</code>의 출력과 오류 메시지를 살펴보십시오.</p>
-<p>Nextflow가 배열의 세 문자열을 별도의 값으로 사용하는 대신 <code>[Hello, Bonjour, Holà]</code>를 단일 문자열 값으로 사용하여 단일 process 실행을 시도한 것 같습니다.</p>
+<p>Nextflow가 배열의 세 문자열을 별도의 값으로 사용하는 대신 <code>[Hello, Bonjour, Hola]</code>를 단일 문자열 값으로 사용하여 단일 process 실행을 시도한 것 같습니다.</p>
 <figure class="excalidraw">
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -5679,7 +5679,7 @@ Nextflow가 배열을 풀고 개별 문자열을 channel에 로드하도록 하�
 <a id="__codelineno-47-28" name="__codelineno-47-28"></a>
 <a id="__codelineno-47-29" name="__codelineno-47-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-47-30" name="__codelineno-47-30"></a><span class="w">    </span><span class="c1">// 입력 인사말 배열 선언</span>
-<a id="__codelineno-47-31" name="__codelineno-47-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">]</span>
+<a id="__codelineno-47-31" name="__codelineno-47-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
 <a id="__codelineno-47-32" name="__codelineno-47-32"></a><span class="w">    </span><span class="c1">// 입력용 channel 생성</span>
 <a id="__codelineno-47-33" name="__codelineno-47-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 <a id="__codelineno-47-34" name="__codelineno-47-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
@@ -5710,7 +5710,7 @@ Nextflow가 배열을 풀고 개별 문자열을 channel에 로드하도록 하�
 <a id="__codelineno-48-28" name="__codelineno-48-28"></a>
 <a id="__codelineno-48-29" name="__codelineno-48-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-48-30" name="__codelineno-48-30"></a><span class="w">    </span><span class="c1">// 입력 인사말 배열 선언</span>
-<a id="__codelineno-48-31" name="__codelineno-48-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">]</span>
+<a id="__codelineno-48-31" name="__codelineno-48-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
 <a id="__codelineno-48-32" name="__codelineno-48-32"></a><span class="w">    </span><span class="c1">// 입력용 channel 생성</span>
 <a id="__codelineno-48-33" name="__codelineno-48-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 <a id="__codelineno-48-34" name="__codelineno-48-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
@@ -5759,7 +5759,7 @@ Nextflow가 배열을 풀고 개별 문자열을 channel에 로드하도록 하�
 <a id="__codelineno-49-28" name="__codelineno-49-28"></a>
 <a id="__codelineno-49-29" name="__codelineno-49-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-49-30" name="__codelineno-49-30"></a><span class="w">    </span><span class="c1">// 입력 인사말 배열 선언</span>
-<a id="__codelineno-49-31" name="__codelineno-49-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">]</span>
+<a id="__codelineno-49-31" name="__codelineno-49-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
 <a id="__codelineno-49-32" name="__codelineno-49-32"></a><span class="w">    </span><span class="c1">// 입력용 channel 생성</span>
 <a id="__codelineno-49-33" name="__codelineno-49-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 <a id="__codelineno-49-34" name="__codelineno-49-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
@@ -5792,7 +5792,7 @@ Nextflow가 배열을 풀고 개별 문자열을 channel에 로드하도록 하�
 <a id="__codelineno-50-28" name="__codelineno-50-28"></a>
 <a id="__codelineno-50-29" name="__codelineno-50-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-50-30" name="__codelineno-50-30"></a><span class="w">    </span><span class="c1">// 입력 인사말 배열 선언</span>
-<a id="__codelineno-50-31" name="__codelineno-50-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">]</span>
+<a id="__codelineno-50-31" name="__codelineno-50-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
 <a id="__codelineno-50-32" name="__codelineno-50-32"></a><span class="w">    </span><span class="c1">// 입력용 channel 생성</span>
 <a id="__codelineno-50-33" name="__codelineno-50-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 <a id="__codelineno-50-34" name="__codelineno-50-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
@@ -5807,7 +5807,7 @@ Nextflow가 배열을 풀고 개별 문자열을 channel에 로드하도록 하�
 </div>
 </div>
 </div>
-<p>두 번째 <code>.view</code> 문을 추가했으며, 각각에 대해 빈 괄호(<code>()</code>)를 <code>{ greeting -&gt; "Before flatten: $greeting" }</code>와 같은 코드가 포함된 중괄호로 교체했습니다.</p>
+<p>두 번째 <code>.view</code> 문을 추가했으며, 각각에 대해 빈 괄호(<code>()</code>)를 <code class="highlight"><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span></code>와 같은 코드가 포함된 중괄호로 교체했습니다.</p>
 <p>이것을 <em>클로저</em>라고 합니다. 포함된 코드는 channel의 각 항목에 대해 실행됩니다.
 해당 클로저의 범위 내에서만 사용되는 내부 값에 대한 임시 변수를 정의합니다. 여기서는 <code>greeting</code>이라고 합니다(임의의 이름일 수 있음).</p>
 <p>이 예에서 <code>$greeting</code>은 channel에 로드된 각 개별 항목을 나타냅니다.
@@ -5824,16 +5824,16 @@ Nextflow가 배열을 풀고 개별 문자열을 channel에 로드하도록 하�
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a>
 <a id="__codelineno-52-3" name="__codelineno-52-3" href="#__codelineno-52-3"></a><span class="go">Launching `hello-channels.nf` [sleepy_gutenberg] DSL2 - revision: 1db4f760ee</span>
 <a id="__codelineno-52-4" name="__codelineno-52-4" href="#__codelineno-52-4"></a>
 <a id="__codelineno-52-5" name="__codelineno-52-5" href="#__codelineno-52-5"></a><span class="go">executor &gt;  local (3)</span>
 <a id="__codelineno-52-6" name="__codelineno-52-6" href="#__codelineno-52-6"></a><span class="go">[b1/6a1e15] sayHello (2) [100%] 3 of 3 ✔</span>
-<a id="__codelineno-52-7" name="__codelineno-52-7" href="#__codelineno-52-7"></a><span class="hll"><span class="go">Before flatten: [Hello, Bonjour, Holà]</span>
+<a id="__codelineno-52-7" name="__codelineno-52-7" href="#__codelineno-52-7"></a><span class="hll"><span class="go">Before flatten: [Hello, Bonjour, Hola]</span>
 </span><a id="__codelineno-52-8" name="__codelineno-52-8" href="#__codelineno-52-8"></a><span class="hll"><span class="go">After flatten: Hello</span>
 </span><a id="__codelineno-52-9" name="__codelineno-52-9" href="#__codelineno-52-9"></a><span class="hll"><span class="go">After flatten: Bonjour</span>
-</span><a id="__codelineno-52-10" name="__codelineno-52-10" href="#__codelineno-52-10"></a><span class="hll"><span class="go">After flatten: Holà</span>
+</span><a id="__codelineno-52-10" name="__codelineno-52-10" href="#__codelineno-52-10"></a><span class="hll"><span class="go">After flatten: Hola</span>
 </span></code></pre></div>
 </details>
 <p>이번에는 작동하며 <code>flatten()</code> 연산자를 실행하기 전과 후에 channel의 내용이 어떻게 보이는지에 대한 추가 통찰력을 제공합니다.</p>
@@ -5861,7 +5861,7 @@ Nextflow가 배열을 풀고 개별 문자열을 channel에 로드하도록 하�
 <span class="normal"><a href="#__codelineno-53-2">2</a></span>
 <span class="normal"><a href="#__codelineno-53-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1"></a>Hello,English,123
 <a id="__codelineno-53-2" name="__codelineno-53-2"></a>Bonjour,French,456
-<a id="__codelineno-53-3" name="__codelineno-53-3"></a>Holà,Spanish,789
+<a id="__codelineno-53-3" name="__codelineno-53-3"></a>Hola,Spanish,789
 </code></pre></div></td></tr></table></div>
 <p>다음 작업은 이 파일에서 값을 읽도록 워크플로우를 조정하는 것입니다.</p>
 <figure class="excalidraw">
@@ -5905,8 +5905,8 @@ Nextflow가 배열을 풀고 개별 문자열을 channel에 로드하도록 하�
 <span class="normal"><a href="#__codelineno-55-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-55-20" name="__codelineno-55-20"></a><span class="cm">/*</span>
 <a id="__codelineno-55-21" name="__codelineno-55-21"></a><span class="cm"> * 파이프라인 매개변수</span>
 <a id="__codelineno-55-22" name="__codelineno-55-22"></a><span class="cm"> */</span>
-<a id="__codelineno-55-23" name="__codelineno-55-23"></a><span class="nl">input:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Holà mundo!&#39;</span>
-</code></pre></div></td></tr></table></div>
+<a id="__codelineno-55-23" name="__codelineno-55-23"></a><span class="hll"><span class="nl">input:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Hola mundo!&#39;</span>
+</span></code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
@@ -5968,7 +5968,7 @@ Nextflow가 배열을 풀고 개별 문자열을 channel에 로드하도록 하�
 <a id="__codelineno-57-28" name="__codelineno-57-28"></a>
 <a id="__codelineno-57-29" name="__codelineno-57-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-57-30" name="__codelineno-57-30"></a><span class="hll"><span class="w">    </span><span class="c1">// 입력 인사말 배열 선언</span>
-</span><a id="__codelineno-57-31" name="__codelineno-57-31"></a><span class="hll"><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">]</span>
+</span><a id="__codelineno-57-31" name="__codelineno-57-31"></a><span class="hll"><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
 </span><a id="__codelineno-57-32" name="__codelineno-57-32"></a><span class="hll"><span class="w">    </span><span class="c1">// 입력용 channel 생성</span>
 </span><a id="__codelineno-57-33" name="__codelineno-57-33"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 </span><a id="__codelineno-57-34" name="__codelineno-57-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
@@ -5992,7 +5992,7 @@ Nextflow가 배열을 풀고 개별 문자열을 channel에 로드하도록 하�
 </code></pre></div>
 <details class="failure">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a>
 <a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a><span class="go">Launching `hello-channels.nf` [peaceful_poisson] DSL2 - revision: a286c08ad5</span>
 <a id="__codelineno-59-4" name="__codelineno-59-4" href="#__codelineno-59-4"></a>
@@ -6005,9 +6005,9 @@ Nextflow가 배열을 풀고 개별 문자열을 channel에 로드하도록 하�
 <a id="__codelineno-59-11" name="__codelineno-59-11" href="#__codelineno-59-11"></a>
 <a id="__codelineno-59-12" name="__codelineno-59-12" href="#__codelineno-59-12"></a>
 <a id="__codelineno-59-13" name="__codelineno-59-13" href="#__codelineno-59-13"></a><span class="go">Command executed:</span>
-<a id="__codelineno-59-14" name="__codelineno-59-14" href="#__codelineno-59-14"></a><span class="hll">
-</span><a id="__codelineno-59-15" name="__codelineno-59-15" href="#__codelineno-59-15"></a><span class="go">  echo &#39;/workspaces/training/hello-nextflow/data/greetings.csv&#39; &gt; &#39;/workspaces/training/hello-nextflow/data/greetings.csv-output.txt&#39;</span>
-<a id="__codelineno-59-16" name="__codelineno-59-16" href="#__codelineno-59-16"></a>
+<a id="__codelineno-59-14" name="__codelineno-59-14" href="#__codelineno-59-14"></a>
+<a id="__codelineno-59-15" name="__codelineno-59-15" href="#__codelineno-59-15"></a><span class="hll"><span class="go">  echo &#39;/workspaces/training/hello-nextflow/data/greetings.csv&#39; &gt; &#39;/workspaces/training/hello-nextflow/data/greetings.csv-output.txt&#39;</span>
+</span><a id="__codelineno-59-16" name="__codelineno-59-16" href="#__codelineno-59-16"></a>
 <a id="__codelineno-59-17" name="__codelineno-59-17" href="#__codelineno-59-17"></a><span class="go">Command exit status:</span>
 <a id="__codelineno-59-18" name="__codelineno-59-18" href="#__codelineno-59-18"></a><span class="go">  -</span>
 <a id="__codelineno-59-19" name="__codelineno-59-19" href="#__codelineno-59-19"></a>
@@ -6106,7 +6106,7 @@ Nextflow가 파일 경로 자체를 문자열 값으로 사용하여 단일 proc
 </code></pre></div>
 <details class="failure">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-63-2" name="__codelineno-63-2" href="#__codelineno-63-2"></a>
 <a id="__codelineno-63-3" name="__codelineno-63-3" href="#__codelineno-63-3"></a><span class="go">Launching `hello-channels.nf` [insane_fermat] DSL2 - revision: 8e62fcbeb1</span>
 <a id="__codelineno-63-4" name="__codelineno-63-4" href="#__codelineno-63-4"></a>
@@ -6115,7 +6115,7 @@ Nextflow가 파일 경로 자체를 문자열 값으로 사용하여 단일 proc
 <a id="__codelineno-63-7" name="__codelineno-63-7" href="#__codelineno-63-7"></a><span class="hll"><span class="go">Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv</span>
 </span><a id="__codelineno-63-8" name="__codelineno-63-8" href="#__codelineno-63-8"></a><span class="hll"><span class="go">After splitCsv: [Hello, English, 123]</span>
 </span><a id="__codelineno-63-9" name="__codelineno-63-9" href="#__codelineno-63-9"></a><span class="hll"><span class="go">After splitCsv: [Bonjour, French, 456]</span>
-</span><a id="__codelineno-63-10" name="__codelineno-63-10" href="#__codelineno-63-10"></a><span class="hll"><span class="go">After splitCsv: [Holà, Spanish, 789]</span>
+</span><a id="__codelineno-63-10" name="__codelineno-63-10" href="#__codelineno-63-10"></a><span class="hll"><span class="go">After splitCsv: [Hola, Spanish, 789]</span>
 </span><a id="__codelineno-63-11" name="__codelineno-63-11" href="#__codelineno-63-11"></a><span class="hll"><span class="go">ERROR ~ Error executing process &gt; &#39;sayHello (2)&#39;</span>
 </span><a id="__codelineno-63-12" name="__codelineno-63-12" href="#__codelineno-63-12"></a>
 <a id="__codelineno-63-13" name="__codelineno-63-13" href="#__codelineno-63-13"></a><span class="go">Caused by:</span>
@@ -6238,7 +6238,7 @@ Nextflow가 파일 경로 자체를 문자열 값으로 사용하여 단일 proc
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a>
 <a id="__codelineno-68-3" name="__codelineno-68-3" href="#__codelineno-68-3"></a><span class="go">Launching `hello-channels.nf` [focused_volhard] DSL2 - revision: de435e45be</span>
 <a id="__codelineno-68-4" name="__codelineno-68-4" href="#__codelineno-68-4"></a>
@@ -6247,10 +6247,10 @@ Nextflow가 파일 경로 자체를 문자열 값으로 사용하여 단일 proc
 <a id="__codelineno-68-7" name="__codelineno-68-7" href="#__codelineno-68-7"></a><span class="go">Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv</span>
 <a id="__codelineno-68-8" name="__codelineno-68-8" href="#__codelineno-68-8"></a><span class="go">After splitCsv: [Hello, English, 123]</span>
 <a id="__codelineno-68-9" name="__codelineno-68-9" href="#__codelineno-68-9"></a><span class="go">After splitCsv: [Bonjour, French, 456]</span>
-<a id="__codelineno-68-10" name="__codelineno-68-10" href="#__codelineno-68-10"></a><span class="go">After splitCsv: [Holà, Spanish, 789]</span>
+<a id="__codelineno-68-10" name="__codelineno-68-10" href="#__codelineno-68-10"></a><span class="go">After splitCsv: [Hola, Spanish, 789]</span>
 <a id="__codelineno-68-11" name="__codelineno-68-11" href="#__codelineno-68-11"></a><span class="go">After map: Hello</span>
 <a id="__codelineno-68-12" name="__codelineno-68-12" href="#__codelineno-68-12"></a><span class="go">After map: Bonjour</span>
-<a id="__codelineno-68-13" name="__codelineno-68-13" href="#__codelineno-68-13"></a><span class="go">After map: Holà</span>
+<a id="__codelineno-68-13" name="__codelineno-68-13" href="#__codelineno-68-13"></a><span class="go">After map: Hola</span>
 </code></pre></div>
 </details>
 <p>이번에는 오류 없이 실행될 것입니다.</p>

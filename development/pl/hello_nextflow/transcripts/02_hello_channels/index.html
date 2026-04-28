@@ -2342,7 +2342,7 @@
   <span class="md-ellipsis">
     
   
-    Orientacja
+    Pierwsze kroki
   
 
     
@@ -2370,7 +2370,7 @@
   <span class="md-ellipsis">
     
   
-    Środowisko programistyczne
+    Index
   
 
     
@@ -2398,7 +2398,7 @@
   <span class="md-ellipsis">
     
   
-    Podstawowe Wzorce Skryptowania w Nextflow
+    Podstawowe Wzorce Skryptowania
   
 
     
@@ -2510,7 +2510,7 @@
   <span class="md-ellipsis">
     
   
-    Testowanie z nf-test
+    Index
   
 
     
@@ -2538,7 +2538,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow'ów
+    Rozwiązywanie problemów z Workflow'ami
   
 
     
@@ -3766,15 +3766,15 @@
 <p>Więc w prawdziwych, bardziej dojrzałych pipeline'ach Nextflow często będziesz przekazywać obiekt meta ze wszystkimi metadanymi powiązanymi z daną próbką. Możesz wtedy tworzyć dynamiczne nazwy plików na podstawie tego, co jest o wiele bardziej praktyczne.</p>
 <p>Jeśli jesteś zainteresowany, jak to zrobić zgodnie z najlepszymi praktykami, jest side quest na <em>training.nextflow.io</em>, który dotyczy specyficznie metadanych i map meta, więc możesz tam zagłębić się w więcej szczegółów.</p>
 <h2 id="3-dostarczanie-wielu-danych-wejsciowych-przez-tablice">3. Dostarczanie wielu danych wejściowych przez tablicę<a class="headerlink" href="#3-dostarczanie-wielu-danych-wejsciowych-przez-tablice" title="Permanent link">&para;</a></h2>
-<p>Dobrze. Następnie zbadamy trochę, jak kanały są zbudowane i jak różnią się od innych rodzajów struktur danych w języku kodowania. I pomyślę trochę o tym, jak mógłbym potencjalnie użyć tablicy, która może być znajomą koncepcją, jeśli przyszedłeś z innych języków.</p>
-<p>Czy mogę użyć tablicy w kanale? Spróbujmy. Utworzę tablicę, a skopiowałem to z dokumentacji, <em>"greetings_array"</em> i <em>"Hello", "Bonjour"</em> i <em>"Holà"</em>. A potem wstawię to tutaj zamiast moich zakodowanych na stałe ciągów znaków. Więc powiem <code>channel.of</code> <em>"greetings_array"</em>, przekazując tę tablicę do kanału. Spróbujmy.</p>
-<p>Wywołuję terminal i uruchamiam pipeline.</p>
-<p>Dobrze. Możesz zobaczyć, że instrukcja <code>view</code> tutaj wydrukowała naszą tablicę zgodnie z oczekiwaniami, ale potem cały ten czerwony tekst, lub nie będzie czerwony, jeśli nadal masz wyłączony <em>"-ansi-log"</em>, ale cały ten czerwony tekst mówi nam, że coś poszło nie tak.</p>
-<p>Nie mamy już ładnego zielonego ptaszka. Mamy czerwony krzyżyk, a jeśli tylko zrobię to trochę szersze, żeby było łatwiej czytać, Nextflow mówi nam, co poszło nie tak.</p>
-<p>Więc rozłóżmy to na sekcje. Mówi, że błąd został spowodowany przez, a potem powód błędu, którym są brakujące pliki wyjściowe. Więc w zasadzie ten blok <code>output</code> powiedział, że ten plik powinien zostać utworzony, a nie został. Następnie mówi, że to jest polecenie, które zostało wykonane. Więc to jest w zasadzie zawartość tego pliku <em>.command.sh</em>. Tak to wyglądało po tym, jak wszystkie te zmienne zostały wstawione.</p>
-<p>I możesz zobaczyć tutaj, że nasze polecenie <code>echo</code> zostało uruchomione tylko raz i użyło całej tablicy, ale w reprezentacji ciągu znaków, co nie jest tym, czego chcieliśmy.</p>
-<p>A potem polecenie zakończyło się w ten sposób, i to był katalog roboczy, gdzie możemy pójść i zobaczyć pliki, aby zrozumieć trochę więcej.</p>
-<p>Dobrze. Więc co się stało, to Nextflow po prostu przekazał całą tę tablicę jako pojedynczy element kanału do procesu, co oznaczało, że proces uruchomił się tylko raz. Miał jedno zadanie i nie użył danych w strukturze, której oczekiwaliśmy.</p>
+<p>Dobrze. Następnie zbadamy trochę, jak kanały są zbudowane i czym różnią się od innych rodzajów struktur danych w języku kodowania. Zastanowię się też, jak można by potencjalnie użyć tablicy, która może być znajomą koncepcją, jeśli przyszedłeś z innych języków.</p>
+<p>Czy można użyć tablicy w kanale? Spróbujmy. Utworzę tablicę — skopiowałem to z dokumentacji — <em>"greetings_array"</em> z wartościami <em>"Hello"</em>, <em>"Bonjour"</em> i <em>"Hola"</em>. Następnie wstawię ją tutaj zamiast zakodowanych na stałe ciągów znaków. Powiem więc <code>channel.of</code> <em>"greetings_array"</em>, przekazując tę tablicę do kanału. Spróbujmy.</p>
+<p>Otwieram terminal i uruchamiam pipeline'a.</p>
+<p>Dobrze. Widać, że instrukcja <code>view</code> wydrukowała naszą tablicę zgodnie z oczekiwaniami, ale cały ten czerwony tekst — lub nie będzie czerwony, jeśli nadal masz wyłączone <em>"-ansi-log"</em> — mówi nam, że coś poszło nie tak.</p>
+<p>Nie mamy już ładnego zielonego ptaszka. Mamy czerwony krzyżyk, a jeśli trochę poszerzę okno, żeby łatwiej było czytać, Nextflow powie nam, co poszło nie tak.</p>
+<p>Rozłóżmy to na części. Mówi, że błąd został spowodowany przez — a następnie podaje jego przyczynę — brakujące pliki wyjściowe. Blok <code>output</code> stwierdził więc, że ten plik powinien zostać utworzony, a nie został. Dalej widnieje polecenie, które zostało wykonane — to w zasadzie zawartość pliku <em>.command.sh</em>, czyli to, jak wyglądało po podstawieniu wszystkich zmiennych.</p>
+<p>Widać tutaj, że polecenie <code>echo</code> zostało uruchomione tylko raz i użyło całej tablicy, ale w reprezentacji ciągu znaków, co nie jest tym, czego chcieliśmy.</p>
+<p>Polecenie zakończyło się w ten sposób, a podany katalog roboczy to miejsce, gdzie możemy przejrzeć pliki i lepiej zrozumieć, co się stało.</p>
+<p>Dobrze. Co się więc wydarzyło? Nextflow po prostu przekazał całą tablicę jako pojedynczy element kanału do procesu, co oznaczało, że proces uruchomił się tylko raz. Miał jedno zadanie i nie użył danych w strukturze, której oczekiwaliśmy.</p>
 <h2 id="32-uzywanie-operatora-do-transformacji-zawartosci-kanau">3.2. Używanie operatora do transformacji zawartości kanału<a class="headerlink" href="#32-uzywanie-operatora-do-transformacji-zawartosci-kanau" title="Permanent link">&para;</a></h2>
 <p>Więc musimy coś zrobić z tym kanałem najpierw, zanim będzie mógł być użyty. I to przygotowuje scenę do używania operatorów, które są specjalnymi funkcjami, których możemy używać na kanałach do manipulowania zawartością kanałów.</p>
 <p>W tym przypadku użyjemy czegoś, co nazywa się <em>flatten</em>. Które przekazujemy na końcu kanału tutaj. Więc tworzymy kanał, a potem uruchamiamy <em>flatten</em>. I znowu, jeśli najedziemy na to, pokazuje nam dokumentację dla tego polecenia od razu w VS Code, co jest bardzo pomocne. Możesz też znaleźć wszystkie te dokumenty na stronie Nextflow, w dokumentacji.</p>
@@ -3803,27 +3803,27 @@
 <p>A potem rzeczywiście, ponieważ próbował zapisać to do tej naprawdę skomplikowanej ścieżki, nie bardzo wiedział, co zrobić. I było to poza zakresem katalogu roboczego procesu.</p>
 <p>Wspomniałem na początku, że Nextflow enkapsuluje każde wykonane zadanie w specjalnym katalogu roboczym. A jeśli próbujesz zapisać dane, które są poza tym katalogiem roboczym, Nextflow Cię zatrzyma jako środek ostrożności. I to właśnie się tutaj stało. Próbowaliśmy zapisać do ścieżki bezwzględnej i Nextflow zawiódł i nas powstrzymał.</p>
 <h2 id="42-uzywanie-operatora-splitcsv-do-parsowania-pliku">4.2. Używanie operatora <code>splitCsv()</code> do parsowania pliku<a class="headerlink" href="#42-uzywanie-operatora-splitcsv-do-parsowania-pliku" title="Permanent link">&para;</a></h2>
-<p>Dobrze, spójrzmy na ten kanał i zobaczmy, jak wygląda. Możemy zrobić <em>".view"</em>, a skopiowałem to ze strony. Więc <code>.view</code>, i mamy dynamiczne domknięcie tutaj i mówimy nazwa zmiennej "<em>csv"</em> jako wejście. Więc to zawartość kanału, i mówimy <code>before splitCsv</code>, i tak to wygląda.</p>
-<p>Jeśli uruchomię to ponownie, nadal się nie powiedzie, ale pokaże nam, co jest w tym kanale. To nie jest szczególnie ekscytujące. To ta zmienna <em>path</em>. Więc możesz zobaczyć, że to po prostu ciąg znaków tutaj, ponieważ jest drukowany do terminala, ale to jest obiekt <em>path</em>, który zawiera informacje i metadane o tym pliku.</p>
-<p>Nie chcemy przekazywać metadanych pliku do wejścia. Chcemy przekazać zawartość tego pliku. Jeśli spojrzymy na plik <em>greetings.csv</em>, możesz zobaczyć tutaj, że ma te różne zmienne tutaj. <em>Hello, Bonjour, Holà</em> znowu. I to są rzeczy, które naprawdę chcemy przekazywać do naszego procesu, a nie tylko sam plik jako pojedynczy obiekt.</p>
-<p>Więc musimy sparsować ten plik CSV. Musimy go rozpakować, dostać się do zawartości pliku CSV, a potem przekazać zawartość w kanale do procesu.</p>
-<p>Jak prawdopodobnie możesz wywnioskować z komunikatu logowania, chcemy użyć <em>splitCsv</em>, który jest kolejnym operatorem, kolejnym operatorem kanału. Więc jeśli zrobię "<em>dot" "s"</em>, a potem zobaczysz, że jest automatycznie sugerowany. Ups, <em>splitCsv</em> i nawiasy.</p>
-<p>A potem po <em>splitCsv</em>, wstawię kolejną instrukcję <code>view</code>, żebyśmy mogli zobaczyć, jak to wygląda potem. Uruchommy pipeline i zobaczmy, co mamy.</p>
-<p>Dobrze. Nadal się nie powiodło, ale w nowy i ekscytujący sposób, co jest postępem.</p>
-<p>Tym razem znowu mamy jakiś problem z naszym skryptem, który został wyrenderowany. Teraz. Nie mamy już końcowej ścieżki, ale mamy tablicę zmiennych, która wygląda bardzo podobnie do błędu, który mieliśmy wcześniej, gdy przekazywaliśmy tablicę jako stałe wejście.</p>
-<p>Z naszym logowaniem z operatora <code>view</code> możemy zobaczyć, że <code>before splitCsv</code> była ścieżka. I rzeczywiście, po <em>splitCsv</em> mamy trzy różne wyjścia i każde z tych wyjść wygląda strasznie podobnie do każdego z wierszy z pliku <em>greetings.csv</em>, co ma sens.</p>
-<p>Więc co się tutaj stało, to Nextflow sparsował ten plik CSV, dał nam trzy obiekty, jedną tablicę dla każdej linii pliku CSV. Więc potem trzy razy przekazaliśmy tablicę zmiennych do kanału zamiast pojedynczej wartości ciągu znaków.</p>
-<p>Dobrze, więc ostatnim razem mieliśmy ten problem, użyliśmy <em>flatten</em>. Spróbujmy bardzo szybko. Wypróbujmy <code>flatten</code> i zobaczmy, co się stanie.</p>
-<p>Mogę nazwać te zmienne, jak chcę. Więc nazwę to <em>myarray</em>, bo to nie jest już naprawdę CSV. Spróbujmy uruchomić to ponownie i zobaczmy, co się stanie z <em>flatten</em>.</p>
-<p>Więc tym razem uruchomimy, sparsowaliśmy CSV na trzy obiekty tablicowe, a potem je spłaszczyliśmy. I tym razem przeszło. I pipeline Nextflow się uruchomił. Jednak możesz zobaczyć, że <em>flatten</em> naprawdę się rozpędza i spłaszcza wszystko. I więc otrzymujemy trzy niezależne wpisy tablicowe dla każdego wiersza. I więc uruchomił proces trzy razy dla każdego wiersza CSV. I teraz mamy całą masę plików wyników, i 123, 456, i wszelkiego rodzaju rzeczy, nie tylko tę pierwszą kolumnę CSV, której naprawdę chcieliśmy.</p>
+<p>Dobrze, przyjrzyjmy się temu kanałowi i zobaczmy, jak wygląda. Możemy użyć <em>".view"</em> — skopiowałem to ze strony. Więc <code>.view</code>, mamy tu dynamiczne domknięcie i podajemy nazwę zmiennej "<em>csv"</em> jako wejście. To jest zawartość kanału, i mówimy <code>before splitCsv</code> — tak to wygląda.</p>
+<p>Jeśli uruchomię to ponownie, nadal się nie powiedzie, ale pokaże nam, co jest w tym kanale. Nie jest to szczególnie ekscytujące — to ta zmienna <em>path</em>. Możesz zobaczyć, że to po prostu ciąg znaków wydrukowany do terminala, ale jest to obiekt <em>path</em>, który zawiera informacje i metadane o tym pliku.</p>
+<p>Nie chcemy przekazywać metadanych pliku na wejście. Chcemy przekazać zawartość tego pliku. Jeśli spojrzymy na plik <em>greetings.csv</em>, zobaczymy, że zawiera różne zmienne: <em>Hello, Bonjour, Hola</em> — znowu. To właśnie te wartości chcemy przekazywać do naszego procesu, a nie sam plik jako pojedynczy obiekt.</p>
+<p>Musimy więc sparsować ten plik CSV — rozpakować go, dostać się do jego zawartości, a następnie przekazać tę zawartość przez kanał do procesu.</p>
+<p>Jak pewnie możesz wywnioskować z komunikatu w logu, chcemy użyć <em>splitCsv</em>, który jest kolejnym operatorem kanału. Jeśli wpiszę "<em>dot" "s"</em>, zobaczysz, że jest automatycznie podpowiadany. Ups — <em>splitCsv</em> i nawiasy.</p>
+<p>Po <em>splitCsv</em> dodam kolejną instrukcję <em>view</em>, żebyśmy mogli zobaczyć, jak to wygląda po parsowaniu. Uruchommy pipeline i zobaczmy, co mamy.</p>
+<p>Dobrze. Nadal się nie powiodło, ale w nowy i ekscytujący sposób — co jest postępem.</p>
+<p>Tym razem znowu mamy jakiś problem ze skryptem, który został wyrenderowany. Nie mamy już końcowej ścieżki, ale mamy tablicę zmiennych, która wygląda bardzo podobnie do błędu sprzed chwili, gdy przekazywaliśmy tablicę jako stałe wejście.</p>
+<p>Z logowania przez operator <code>view</code> możemy zobaczyć, że <code>before splitCsv</code> była ścieżka. I rzeczywiście, po <em>splitCsv</em> mamy trzy różne wyjścia — każde z nich wygląda bardzo podobnie do jednego z wierszy pliku <em>greetings.csv</em>, co ma sens.</p>
+<p>Co się tutaj stało: Nextflow sparsował plik CSV i dał nam trzy obiekty — jedną tablicę dla każdej linii. Trzy razy przekazaliśmy więc tablicę zmiennych do kanału zamiast pojedynczej wartości ciągu znaków.</p>
+<p>Dobrze, ostatnim razem gdy mieliśmy ten problem, użyliśmy <em>flatten</em>. Spróbujmy szybko — wypróbujmy <code>flatten</code> i zobaczmy, co się stanie.</p>
+<p>Mogę nazwać te zmienne jak chcę, więc nazwę to <em>myarray</em>, bo to już właściwie nie jest CSV. Spróbujmy uruchomić ponownie i zobaczmy, co się stanie z <em>flatten</em>.</p>
+<p>Tym razem uruchomimy pipeline: sparsowaliśmy CSV na trzy obiekty tablicowe, a potem je spłaszczyliśmy. I tym razem przeszło — pipeline Nextflow'a się uruchomił. Możesz jednak zobaczyć, że <em>flatten</em> naprawdę idzie na całość i spłaszcza wszystko. Otrzymujemy trzy niezależne wpisy tablicowe dla każdego wiersza, więc proces uruchomił się trzy razy dla każdego wiersza CSV. Teraz mamy całą masę plików wyników — 123, 456 i wszelkiego rodzaju rzeczy — nie tylko pierwszą kolumnę CSV, której naprawdę chcieliśmy.</p>
 <h2 id="43-uzywanie-operatora-map-do-wyodrebnienia-powitan">4.3. Używanie operatora <code>map()</code> do wyodrębnienia powitań<a class="headerlink" href="#43-uzywanie-operatora-map-do-wyodrebnienia-powitan" title="Permanent link">&para;</a></h2>
-<p>Więc jak dostać się tylko do pierwszej kolumny? Jeśli <code>flatten</code> jest tutaj zbyt uproszczony, potrzebujemy bardziej złożonego operatora, gdzie możemy faktycznie dostosować i powiedzieć mu, czego chcemy z CSV.</p>
-<p>Aby to zrobić, użyjemy <em>map</em>. W zasadzie <em>map</em> po prostu mówi, uruchom jakiś kod, jakąś funkcję na każdym elemencie, który otrzymam i zrób jakąś transformację na nim. A ponieważ jest tak elastyczny, zobaczysz, że pojawia się w kodzie Nextflow cały czas.</p>
-<p>Sam w sobie nic nie robi. Więc nie chcemy zwykłych nawiasów, chcemy tutaj domknięcie i musimy mu powiedzieć, co zrobić. Więc powiem <em>"row"</em>, bo dostaje wiersze z CSV, więc to logiczna nazwa zmiennej. Jest wejściem. I chcę zwrócić tylko pierwszy element tej tablicy.</p>
-<p>Tablice w Nextflow są indeksowane od zera, więc powiemy tylko pierwszy element, który jest wierszem zero. Gdybym chciał drugą kolumnę, mógłbym być jeden lub trzecią kolumnę być dwa, i tak dalej. Możemy zwrócić tutaj, co chcemy, ale zwrócę tylko pierwszą wartość.</p>
-<p>I teraz możemy uruchomić pipeline ponownie i zobaczyć, czy robi to, czego oczekujemy.</p>
-<p>I rzeczywiście, po <em>splitCsv</em> mamy nasze tablice, a potem po <em>map</em> mamy nasze ładne czyste ciągi znaków, tylko <em>"Hello", "Bonjour"</em> i <em>"Holà"</em>. I pipeline teraz robi to, czego chcemy. Fantastycznie.</p>
-<p>Więc możemy teraz pozbyć się wszystkich tych poleceń <code>view</code>. Nie potrzebujemy ich już.</p>
+<p>Jak więc dostać się tylko do pierwszej kolumny? Jeśli <code>flatten</code> jest tutaj zbyt uproszczony, potrzebujemy bardziej złożonego operatora, który pozwoli nam dostosować i wskazać, czego chcemy z CSV.</p>
+<p>Użyjemy do tego <em>map</em>. W zasadzie <em>map</em> mówi po prostu: uruchom jakiś kod, jakąś funkcję na każdym otrzymanym elemencie i wykonaj na nim pewną transformację. Ponieważ jest tak elastyczny, zobaczysz go w kodzie Nextflow bardzo często.</p>
+<p>Sam w sobie nic nie robi. Nie chcemy więc zwykłych nawiasów — potrzebujemy tutaj domknięcia i musimy mu powiedzieć, co ma robić. Użyjemy nazwy <em>"row"</em>, bo operator otrzymuje wiersze z CSV — to logiczna nazwa zmiennej. Jest ona wejściem. Chcemy zwrócić tylko pierwszy element tej tablicy.</p>
+<p>Tablice w Nextflow są indeksowane od zera, więc wskazujemy pierwszy element, czyli wiersz zero. Gdybyśmy chcieli drugiej kolumny, użylibyśmy jedynki, trzeciej — dwójki, i tak dalej. Możemy zwrócić tutaj cokolwiek chcemy, ale zwrócimy tylko pierwszą wartość.</p>
+<p>Teraz możemy uruchomić pipeline ponownie i sprawdzić, czy robi to, czego oczekujemy.</p>
+<p>I rzeczywiście — po <em>splitCsv</em> mamy nasze tablice, a po <em>map</em> mamy czyste ciągi znaków: <em>"Hello"</em>, <em>"Bonjour"</em> i <em>"Hola"</em>. Pipeline robi teraz dokładnie to, czego chcemy. Świetnie.</p>
+<p>Możemy więc pozbyć się wszystkich tych poleceń <code>view</code> — nie są nam już potrzebne.</p>
 <h2 id="podsumowanie">Podsumowanie<a class="headerlink" href="#podsumowanie" title="Permanent link">&para;</a></h2>
 <p>Skończyliśmy nasze debugowanie i to jest kod, z którym kończymy. Bierzemy nasz parametr CLI zwany <em>input</em>, który jest sklasyfikowany jako <em>Path</em>. Nextflow znajduje ścieżkę, ładuje ją i rozumie plik CSV. Zwraca wszystkie różne wiersze. A potem mapujemy tylko pierwszy element tego wiersza do kanału, który daje nam zawartość kanału, która jest przekazywana do procesu.</p>
 <p>A proces uruchamia się na każdym elemencie w kanale, których jest trzy. I uruchamia proces trzy razy, dając mu trzy zadania. A te wyniki są następnie publikowane z workflow'a, przechwycone przez wyjście procesu. Publikowane z workflow'a i zapisane w bloku <code>output</code> do podkatalogu o nazwie <em>"hello_channels"</em>.</p>

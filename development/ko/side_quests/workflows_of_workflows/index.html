@@ -2348,7 +2348,7 @@
   <span class="md-ellipsis">
     
   
-    오리엔테이션
+    시작하기
   
 
     
@@ -2404,7 +2404,7 @@
   <span class="md-ellipsis">
     
   
-    필수 Nextflow 스크립팅 패턴
+    필수 스크립팅 패턴
   
 
     
@@ -2544,7 +2544,7 @@
   <span class="md-ellipsis">
     
   
-    워크플로우 디버깅
+    워크플로우 문제 해결
   
 
     
@@ -2710,19 +2710,19 @@
   <a href="#1-greeting" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Greeting 워크플로우 만들기
+        1. 파이프라인에 greeting 워크플로우 추가하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Greeting 워크플로우 만들기">
+    <nav class="md-nav" aria-label="1. 파이프라인에 greeting 워크플로우 추가하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11" class="md-nav__link">
+  <a href="#11-greeting" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. 워크플로우 구조 만들기
+        1.1. greeting 워크플로우 검토 및 실행
       
     </span>
   </a>
@@ -2733,10 +2733,60 @@
   <a href="#12" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. 첫 번째 (서브)워크플로우 코드 추가
+        1.2. 워크플로우를 구성 가능하게 만들기
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="1.2. 워크플로우를 구성 가능하게 만들기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.1. 워크플로우에 이름 부여하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-take" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.2. take:로 입력 선언하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-emit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.3. emit:으로 출력 선언하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.4. 결과 확인 및 테스트
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2744,7 +2794,19 @@
   <a href="#13" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. 워크플로우를 구성 가능하게 만들기
+        1.3. 메인 워크플로우 업데이트 및 테스트
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3. 메인 워크플로우 업데이트 및 테스트">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-greeting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.1. greeting 워크플로우 가져오기 및 호출
       
     </span>
   </a>
@@ -2752,13 +2814,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14" class="md-nav__link">
+  <a href="#132-output" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. 메인 워크플로우 만들기 및 테스트
+        1.3.2. output 블록 업데이트
       
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.3. 워크플로우 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2777,22 +2855,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-transform" class="md-nav__link">
+  <a href="#2-transformation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Transform 워크플로우 추가하기
+        2. 파이프라인에 transformation 워크플로우 추가하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Transform 워크플로우 추가하기">
+    <nav class="md-nav" aria-label="2. 파이프라인에 transformation 워크플로우 추가하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#21" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. 워크플로우 파일 만들기
+        2.1. 워크플로우 검토 및 실행
       
     </span>
   </a>
@@ -2803,7 +2881,7 @@
   <a href="#22" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. 워크플로우 코드 추가
+        2.2. 구성 가능하게 만들기
       
     </span>
   </a>
@@ -2814,10 +2892,49 @@
   <a href="#23" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. 메인 워크플로우 업데이트
+        2.3. 메인 워크플로우 업데이트 및 테스트
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="2.3. 메인 워크플로우 업데이트 및 테스트">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-transformation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1. transformation 워크플로우 가져오기 및 호출
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.2. output 블록 업데이트
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#233" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.3. 전체 파이프라인 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -3918,19 +4035,19 @@
   <a href="#1-greeting" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Greeting 워크플로우 만들기
+        1. 파이프라인에 greeting 워크플로우 추가하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Greeting 워크플로우 만들기">
+    <nav class="md-nav" aria-label="1. 파이프라인에 greeting 워크플로우 추가하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11" class="md-nav__link">
+  <a href="#11-greeting" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. 워크플로우 구조 만들기
+        1.1. greeting 워크플로우 검토 및 실행
       
     </span>
   </a>
@@ -3941,10 +4058,60 @@
   <a href="#12" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. 첫 번째 (서브)워크플로우 코드 추가
+        1.2. 워크플로우를 구성 가능하게 만들기
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="1.2. 워크플로우를 구성 가능하게 만들기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.1. 워크플로우에 이름 부여하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-take" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.2. take:로 입력 선언하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-emit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.3. emit:으로 출력 선언하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.4. 결과 확인 및 테스트
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -3952,7 +4119,19 @@
   <a href="#13" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. 워크플로우를 구성 가능하게 만들기
+        1.3. 메인 워크플로우 업데이트 및 테스트
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3. 메인 워크플로우 업데이트 및 테스트">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-greeting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.1. greeting 워크플로우 가져오기 및 호출
       
     </span>
   </a>
@@ -3960,13 +4139,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14" class="md-nav__link">
+  <a href="#132-output" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. 메인 워크플로우 만들기 및 테스트
+        1.3.2. output 블록 업데이트
       
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.3. 워크플로우 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -3985,22 +4180,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-transform" class="md-nav__link">
+  <a href="#2-transformation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Transform 워크플로우 추가하기
+        2. 파이프라인에 transformation 워크플로우 추가하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Transform 워크플로우 추가하기">
+    <nav class="md-nav" aria-label="2. 파이프라인에 transformation 워크플로우 추가하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#21" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. 워크플로우 파일 만들기
+        2.1. 워크플로우 검토 및 실행
       
     </span>
   </a>
@@ -4011,7 +4206,7 @@
   <a href="#22" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. 워크플로우 코드 추가
+        2.2. 구성 가능하게 만들기
       
     </span>
   </a>
@@ -4022,10 +4217,49 @@
   <a href="#23" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. 메인 워크플로우 업데이트
+        2.3. 메인 워크플로우 업데이트 및 테스트
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="2.3. 메인 워크플로우 업데이트 및 테스트">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-transformation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1. transformation 워크플로우 가져오기 및 호출
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.2. output 블록 업데이트
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#233" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.3. 전체 파이프라인 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4328,13 +4562,13 @@
 <h3 id="_3">사전 요구 사항<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>이 사이드 퀘스트를 시작하기 전에 다음을 완료해야 합니다:</p>
 <ul>
-<li><a href="../hello_nextflow/README.md">Hello Nextflow</a> 튜토리얼 또는 동급의 입문 과정을 완료해야 합니다.</li>
+<li><a href="../../hello_nextflow/">Hello Nextflow</a> 튜토리얼 또는 동급의 입문 과정을 완료해야 합니다.</li>
 <li>기본적인 Nextflow 개념과 메커니즘(프로세스, 채널, 연산자, 모듈)을 편안하게 사용할 수 있어야 합니다.</li>
 </ul>
 <hr />
 <h2 id="0">0. 시작하기<a class="headerlink" href="#0" title="Permanent link">&para;</a></h2>
 <h4 id="_4">교육 코드스페이스 열기<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
-<p>아직 열지 않았다면, <a href="../envsetup/index.md">환경 설정</a>에 설명된 대로 교육 환경을 열어야 합니다.</p>
+<p>아직 열지 않았다면, <a href="../../envsetup/">환경 설정</a>에 설명된 대로 교육 환경을 열어야 합니다.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h4 id="_5">프로젝트 디렉토리로 이동<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
 <p>이 튜토리얼의 파일이 있는 디렉토리로 이동합니다.</p>
@@ -4343,15 +4577,21 @@
 <p>VSCode가 이 디렉토리에 집중하도록 설정할 수 있습니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>code<span class="w"> </span>.
 </code></pre></div>
+<p>편집기가 해당 프로젝트 디렉토리에 집중된 상태로 열립니다.</p>
 <h4 id="_6">자료 검토<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
-<p>'Hello Nextflow'에서 학습한 내용을 기반으로 하는 여러 프로세스 정의가 포함된 <code>modules</code> 디렉토리를 확인할 수 있습니다:</p>
-<div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">modules/</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">├── say_hello.nf             # Creates a greeting (from Hello Nextflow)</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">├── say_hello_upper.nf       # Converts to uppercase (from Hello Nextflow)</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="go">├── timestamp_greeting.nf    # Adds timestamps to greetings</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="go">├── validate_name.nf         # Validates input names</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="go">└── reverse_text.nf          # Reverses text content</span>
+<p><code>modules</code> 디렉토리에는 프로세스 정의가, <code>workflows</code> 디렉토리에는 미리 작성된 두 개의 워크플로우 스크립트가 있으며, 단계적으로 업데이트할 <code>main.nf</code> 파일도 확인할 수 있습니다:</p>
+<div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">├── main.nf</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">├── workflows/</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">│   ├── greeting.nf              # Standalone greeting workflow (to be made composable)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="go">│   └── transform.nf             # Standalone transform workflow (to be made composable)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="go">└── modules/</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="go">    ├── say_hello.nf             # Creates a greeting (from Hello Nextflow)</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="go">    ├── say_hello_upper.nf       # Converts to uppercase (from Hello Nextflow)</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="go">    ├── timestamp_greeting.nf    # Adds timestamps to greetings</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="go">    ├── validate_name.nf         # Validates input names</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="go">    └── reverse_text.nf          # Reverses text content</span>
 </code></pre></div>
+<p><code>modules/</code> 디렉토리에는 개별 프로세스 정의가 포함되어 있고, <code>workflows/</code> 디렉토리에는 이 사이드 퀘스트에서 사용할 두 개의 미리 작성된 워크플로우 스크립트가 포함되어 있습니다.</p>
 <h4 id="_7">과제 검토<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
 <p>여러분의 과제는 이 모듈들을 두 개의 별도 워크플로우로 조합하고, 이를 하나의 메인 워크플로우로 구성하는 것입니다:</p>
 <ul>
@@ -4370,163 +4610,343 @@
 </ul>
 <p>모든 항목을 확인했다면 시작할 준비가 된 것입니다.</p>
 <hr />
-<h2 id="1-greeting">1. Greeting 워크플로우 만들기<a class="headerlink" href="#1-greeting" title="Permanent link">&para;</a></h2>
-<p>이름을 유효성 검사하고 타임스탬프가 포함된 인사말을 생성하는 워크플로우를 만들어 봅니다.</p>
-<h3 id="11">1.1. 워크플로우 구조 만들기<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
-<div class="highlight"><span class="filename">Create workflow directory and file</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>workflows
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>touch<span class="w"> </span>workflows/greeting.nf
-</code></pre></div>
-<h3 id="12">1.2. 첫 번째 (서브)워크플로우 코드 추가<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
-<p><code>workflows/greeting.nf</code>에 다음 코드를 추가합니다:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-4-10">10</a></span>
-<span class="normal"><a href="#__codelineno-4-11">11</a></span>
-<span class="normal"><a href="#__codelineno-4-12">12</a></span>
-<span class="normal"><a href="#__codelineno-4-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/validate_name&#39;</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/say_hello&#39;</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/timestamp_greeting&#39;</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4"></a>
-<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6"></a>
-<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">    </span><span class="n">names_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Alice&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Charlie&#39;</span><span class="o">)</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8"></a>
-<a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">    </span><span class="c1">// 프로세스 연결: 유효성 검사 -&gt; 인사말 생성 -&gt; 타임스탬프 추가</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="w">    </span><span class="n">validated_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="o">(</span><span class="n">names_ch</span><span class="o">)</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="w">    </span><span class="n">greetings_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="o">(</span><span class="n">validated_ch</span><span class="o">)</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="w">    </span><span class="n">timestamped_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="o">(</span><span class="n">greetings_ch</span><span class="o">)</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="o">}</span>
+<h2 id="1-greeting">1. 파이프라인에 greeting 워크플로우 추가하기<a class="headerlink" href="#1-greeting" title="Permanent link">&para;</a></h2>
+<p>greeting 워크플로우는 이름을 유효성 검사하고 타임스탬프가 포함된 인사말을 생성합니다.</p>
+<h3 id="11-greeting">1.1. greeting 워크플로우 검토 및 실행<a class="headerlink" href="#11-greeting" title="Permanent link">&para;</a></h3>
+<p><code>workflows/greeting.nf</code>를 열고 코드를 확인합니다:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span>
+<span class="normal"><a href="#__codelineno-3-14">14</a></span>
+<span class="normal"><a href="#__codelineno-3-15">15</a></span>
+<span class="normal"><a href="#__codelineno-3-16">16</a></span>
+<span class="normal"><a href="#__codelineno-3-17">17</a></span>
+<span class="normal"><a href="#__codelineno-3-18">18</a></span>
+<span class="normal"><a href="#__codelineno-3-19">19</a></span>
+<span class="normal"><a href="#__codelineno-3-20">20</a></span>
+<span class="normal"><a href="#__codelineno-3-21">21</a></span>
+<span class="normal"><a href="#__codelineno-3-22">22</a></span>
+<span class="normal"><a href="#__codelineno-3-23">23</a></span>
+<span class="normal"><a href="#__codelineno-3-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/validate_name&#39;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/say_hello&#39;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/timestamp_greeting&#39;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">    </span><span class="n">names_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Alice&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Charlie&#39;</span><span class="o">)</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">    </span><span class="c1">// 프로세스 연결: 유효성 검사 -&gt; 인사말 생성 -&gt; 타임스탬프 추가</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">    </span><span class="n">validated_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="o">(</span><span class="n">names_ch</span><span class="o">)</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">    </span><span class="n">greetings_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="o">(</span><span class="n">validated_ch</span><span class="o">)</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">    </span><span class="n">timestamped_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="o">(</span><span class="n">greetings_ch</span><span class="o">)</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a>
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">greetings_ch</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="w">    </span><span class="n">timestamped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timestamped_ch</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="o">}</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18"></a>
+<a id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22"></a><span class="w">    </span><span class="n">timestamped</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>이것은 'Hello Nextflow' 튜토리얼에서 본 것과 유사한 구조를 가진 완전한 워크플로우로, 독립적으로 테스트할 수 있습니다. 지금 바로 테스트합니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>workflows/greeting.nf
+<p>이것은 'Hello Nextflow' 튜토리얼에서 본 것과 동일한 구조를 가진 완전한 단독 실행형 워크플로우입니다.
+입력 이름이 하드코딩되어 있고, 세 개의 프로세스를 연결하며, 두 개의 출력을 게시합니다.</p>
+<p>모든 것이 정상적으로 작동하는지 실행하여 확인합니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>workflows/greeting.nf
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="go">Launching `workflows/greeting.nf` [peaceful_montalcini] DSL2 - revision: 90f61b7093</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">executor &gt;  local (9)</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="go">[51/4f980f] process &gt; VALIDATE_NAME (validating Bob)                    [100%] 3 of 3 ✔</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="go">[2b/dd8dc2] process &gt; SAY_HELLO (greeting Bob)                          [100%] 3 of 3 ✔</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="go">[8e/882565] process &gt; TIMESTAMP_GREETING (adding timestamp to greeting) [100%] 3 of 3 ✔</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="go">Launching `workflows/greeting.nf` [peaceful_montalcini] DSL2 - revision: 90f61b7093</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go">executor &gt;  local (9)</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="go">[51/4f980f] process &gt; VALIDATE_NAME (validating Bob)                    [100%] 3 of 3 ✔</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="go">[2b/dd8dc2] process &gt; SAY_HELLO (greeting Bob)                          [100%] 3 of 3 ✔</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="go">[8e/882565] process &gt; TIMESTAMP_GREETING (adding timestamp to greeting) [100%] 3 of 3 ✔</span>
 </code></pre></div>
 </details>
-<p>예상대로 작동하지만, 구성 가능하게 만들기 위해 몇 가지를 변경해야 합니다.</p>
-<h3 id="13">1.3. 워크플로우를 구성 가능하게 만들기<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
-<p>구성 가능한 워크플로우는 'Hello Nextflow' 튜토리얼에서 본 것과 몇 가지 차이점이 있습니다:</p>
-<ul>
-<li>워크플로우 블록에 이름이 있어야 합니다</li>
-<li>입력은 <code>take:</code> 키워드를 사용하여 선언합니다</li>
-<li>워크플로우 내용은 <code>main:</code> 블록 안에 배치합니다</li>
-<li>출력은 <code>emit:</code> 키워드를 사용하여 선언합니다</li>
-</ul>
-<p>이 구조에 맞게 greeting 워크플로우를 업데이트합니다. 코드를 다음과 같이 변경합니다:</p>
-<!-- TODO: switch to before/after tabs -->
-
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-7-10">10</a></span>
-<span class="normal"><a href="#__codelineno-7-11">11</a></span>
-<span class="normal"><a href="#__codelineno-7-12">12</a></span>
-<span class="normal"><a href="#__codelineno-7-13">13</a></span>
-<span class="normal"><a href="#__codelineno-7-14">14</a></span>
-<span class="normal"><a href="#__codelineno-7-15">15</a></span>
-<span class="normal"><a href="#__codelineno-7-16">16</a></span>
-<span class="normal"><a href="#__codelineno-7-17">17</a></span>
-<span class="normal"><a href="#__codelineno-7-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/validate_name&#39;</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/say_hello&#39;</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/timestamp_greeting&#39;</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4"></a>
-<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="n">workflow</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="hll"><span class="w">    </span><span class="nl">take:</span>
-</span><a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="hll"><span class="w">        </span><span class="n">names_ch</span><span class="w">        </span><span class="c1">// 이름이 담긴 입력 채널</span>
-</span><a id="__codelineno-7-8" name="__codelineno-7-8"></a>
-<a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="hll"><span class="w">    </span><span class="nl">main:</span>
-</span><a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="w">        </span><span class="c1">// 프로세스 연결: 유효성 검사 -&gt; 인사말 생성 -&gt; 타임스탬프 추가</span>
-<a id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="w">        </span><span class="n">validated_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="o">(</span><span class="n">names_ch</span><span class="o">)</span>
-<a id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="w">        </span><span class="n">greetings_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="o">(</span><span class="n">validated_ch</span><span class="o">)</span>
-<a id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="w">        </span><span class="n">timestamped_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="o">(</span><span class="n">greetings_ch</span><span class="o">)</span>
-<a id="__codelineno-7-14" name="__codelineno-7-14"></a>
-<a id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="hll"><span class="w">    </span><span class="nl">emit:</span>
-</span><a id="__codelineno-7-16" name="__codelineno-7-16"></a><span class="hll"><span class="w">        </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">greetings_ch</span><span class="w">      </span><span class="c1">// 원본 인사말</span>
-</span><a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="hll"><span class="w">        </span><span class="n">timestamped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timestamped_ch</span><span class="w">  </span><span class="c1">// 타임스탬프가 추가된 인사말</span>
-</span><a id="__codelineno-7-18" name="__codelineno-7-18"></a><span class="o">}</span>
+<p>다른 워크플로우와 구성 가능하게 만들기 위해 몇 가지를 변경해야 합니다.</p>
+<h3 id="12">1.2. 워크플로우를 구성 가능하게 만들기<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p>워크플로우를 구성 가능하게 만들려면 네 가지를 변경해야 합니다:
+워크플로우에 이름을 부여하고, 입력을 <code>take:</code> 블록으로 이동하고, 출력을 <code>emit:</code> 블록으로 이동하고,
+단독 실행형 <code>publish:</code>/<code>output {}</code> 블록을 제거합니다(이 블록들은 진입 워크플로우에 속합니다).</p>
+<p>각 변경 사항을 하나씩 살펴봅니다.</p>
+<h4 id="121">1.2.1. 워크플로우에 이름 부여하기<a class="headerlink" href="#121" title="Permanent link">&para;</a></h4>
+<p>상위 워크플로우에서 가져올 수 있도록 워크플로우에 이름을 부여합니다.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">후</label><label for="__tabbed_1_2">전</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="hll"><span class="n">workflow</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="hll"><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>이름이 생기면 워크플로우를 다른 스크립트로 가져올 수 있습니다.</p>
+<h4 id="122-take">1.2.2. <code>take:</code>로 입력 선언하기<a class="headerlink" href="#122-take" title="Permanent link">&para;</a></h4>
+<p>하드코딩된 채널 선언을 워크플로우가 기대하는 입력을 선언하는 <code>take:</code> 블록으로 교체합니다.
+<code>take:</code> 블록은 <code>main:</code> 앞에 위치하며, <code>names_ch = channel.of(...)</code> 줄은 제거합니다.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">후</label><label for="__tabbed_2_2">전</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="n">workflow</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="hll"><span class="w">    </span><span class="nl">take:</span>
+</span><a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="hll"><span class="w">    </span><span class="n">names_ch</span><span class="w"> </span><span class="c1">// 이름이 담긴 입력 채널</span>
+</span><a id="__codelineno-8-8" name="__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="hll"><span class="w">    </span><span class="nl">main:</span>
+</span><a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">    </span><span class="c1">// 프로세스 연결: 유효성 검사 -&gt; 인사말 생성 -&gt; 타임스탬프 추가</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="w">    </span><span class="n">validated_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="o">(</span><span class="n">names_ch</span><span class="o">)</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="w">    </span><span class="n">greetings_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="o">(</span><span class="n">validated_ch</span><span class="o">)</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="w">    </span><span class="n">timestamped_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="o">(</span><span class="n">greetings_ch</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
-<p>워크플로우에 이름이 생겼고 <code>take:</code> 및 <code>emit:</code> 블록이 추가된 것을 확인할 수 있습니다. 이것이 상위 레벨 워크플로우를 구성하는 데 사용할 연결 지점입니다.
-워크플로우 내용도 <code>main:</code> 블록 안에 배치되었습니다. 또한 <code>names_ch</code> 입력 채널 선언이 제거된 것을 확인할 수 있는데, 이제 워크플로우의 인자로 전달되기 때문입니다.</p>
-<p>워크플로우가 예상대로 작동하는지 다시 테스트합니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>workflows/greeting.nf
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-9-10">10</a></span>
+<span class="normal"><a href="#__codelineno-9-11">11</a></span>
+<span class="normal"><a href="#__codelineno-9-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="n">workflow</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="w">    </span><span class="n">names_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Alice&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Charlie&#39;</span><span class="o">)</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="w">    </span><span class="c1">// 프로세스 연결: 유효성 검사 -&gt; 인사말 생성 -&gt; 타임스탬프 추가</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="w">    </span><span class="n">validated_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="o">(</span><span class="n">names_ch</span><span class="o">)</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="w">    </span><span class="n">greetings_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="o">(</span><span class="n">validated_ch</span><span class="o">)</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="w">    </span><span class="n">timestamped_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="o">(</span><span class="n">greetings_ch</span><span class="o">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p><code>take:</code> 블록은 채널을 이름으로만 선언합니다. 채널에 무엇이 들어갈지는 상위 워크플로우에서 정의됩니다.</p>
+<h4 id="123-emit">1.2.3. <code>emit:</code>으로 출력 선언하기<a class="headerlink" href="#123-emit" title="Permanent link">&para;</a></h4>
+<p><code>publish:</code> 섹션을 제거하고 <code>output {}</code> 블록을 삭제한 후, 출력에 이름을 부여하는 <code>emit:</code> 블록으로 교체합니다.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">후</label><label for="__tabbed_3_2">전</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-14">14</a></span>
+<span class="normal"><a href="#__codelineno-10-15">15</a></span>
+<span class="normal"><a href="#__codelineno-10-16">16</a></span>
+<span class="normal"><a href="#__codelineno-10-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="w">    </span><span class="nl">emit:</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="hll"><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">greetings_ch</span><span class="w"> </span><span class="c1">// 원본 인사말</span>
+</span><a id="__codelineno-10-16" name="__codelineno-10-16"></a><span class="hll"><span class="w">    </span><span class="n">timestamped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timestamped_ch</span><span class="w"> </span><span class="c1">// 타임스탬프가 추가된 인사말</span>
+</span><a id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="hll"><span class="o">}</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-14">14</a></span>
+<span class="normal"><a href="#__codelineno-11-15">15</a></span>
+<span class="normal"><a href="#__codelineno-11-16">16</a></span>
+<span class="normal"><a href="#__codelineno-11-17">17</a></span>
+<span class="normal"><a href="#__codelineno-11-18">18</a></span>
+<span class="normal"><a href="#__codelineno-11-19">19</a></span>
+<span class="normal"><a href="#__codelineno-11-20">20</a></span>
+<span class="normal"><a href="#__codelineno-11-21">21</a></span>
+<span class="normal"><a href="#__codelineno-11-22">22</a></span>
+<span class="normal"><a href="#__codelineno-11-23">23</a></span>
+<span class="normal"><a href="#__codelineno-11-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">greetings_ch</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="w">    </span><span class="n">timestamped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timestamped_ch</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="o">}</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18"></a>
+<a id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-11-22" name="__codelineno-11-22"></a><span class="w">    </span><span class="n">timestamped</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-11-23" name="__codelineno-11-23"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p><code>emit:</code> 블록은 상위 워크플로우가 <code>GREETING_WORKFLOW.out.greetings</code> 및 <code>GREETING_WORKFLOW.out.timestamped</code>를 통해 접근할 수 있는 이름 있는 출력을 노출합니다.</p>
+<h4 id="124">1.2.4. 결과 확인 및 테스트<a class="headerlink" href="#124" title="Permanent link">&para;</a></h4>
+<p>세 가지 변경 사항을 모두 적용한 후, 완성된 파일은 다음과 같아야 합니다:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span>
+<span class="normal"><a href="#__codelineno-12-14">14</a></span>
+<span class="normal"><a href="#__codelineno-12-15">15</a></span>
+<span class="normal"><a href="#__codelineno-12-16">16</a></span>
+<span class="normal"><a href="#__codelineno-12-17">17</a></span>
+<span class="normal"><a href="#__codelineno-12-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/validate_name&#39;</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/say_hello&#39;</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/timestamp_greeting&#39;</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="hll"><span class="n">workflow</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="hll"><span class="w">    </span><span class="nl">take:</span>
+</span><a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="hll"><span class="w">    </span><span class="n">names_ch</span><span class="w"> </span><span class="c1">// 이름이 담긴 입력 채널</span>
+</span><a id="__codelineno-12-8" name="__codelineno-12-8"></a>
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="hll"><span class="w">    </span><span class="nl">main:</span>
+</span><a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="w">    </span><span class="c1">// 프로세스 연결: 유효성 검사 -&gt; 인사말 생성 -&gt; 타임스탬프 추가</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="w">    </span><span class="n">validated_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="o">(</span><span class="n">names_ch</span><span class="o">)</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="w">    </span><span class="n">greetings_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="o">(</span><span class="n">validated_ch</span><span class="o">)</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="w">    </span><span class="n">timestamped_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="o">(</span><span class="n">greetings_ch</span><span class="o">)</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14"></a>
+<a id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="hll"><span class="w">    </span><span class="nl">emit:</span>
+</span><a id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="hll"><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">greetings_ch</span><span class="w"> </span><span class="c1">// 원본 인사말</span>
+</span><a id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="hll"><span class="w">    </span><span class="n">timestamped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timestamped_ch</span><span class="w"> </span><span class="c1">// 타임스탬프가 추가된 인사말</span>
+</span><a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>직접 실행해 봅니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>workflows/greeting.nf
 </code></pre></div>
 <details class="failure">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="go">Launching `workflows/greeting.nf` [high_brahmagupta] DSL2 - revision: 8f5857af25</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">No entry workflow specified</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="go">Launching `workflows/greeting.nf` [high_brahmagupta] DSL2 - revision: 8f5857af25</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="go">No entry workflow specified</span>
 </code></pre></div>
 </details>
-<p>이것은 '진입 워크플로우(entry workflow)'라는 새로운 개념을 알려줍니다. 진입 워크플로우는 Nextflow 스크립트를 실행할 때 호출되는 워크플로우입니다. 기본적으로 Nextflow는 이름 없는 워크플로우가 있을 경우 이를 진입 워크플로우로 사용하며, 지금까지는 다음과 같이 시작하는 워크플로우 블록으로 이 방식을 사용해 왔습니다:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<p>이것은 <strong>진입 워크플로우(entry workflow)</strong>라는 핵심 개념을 알려줍니다.
+Nextflow는 스크립트를 직접 실행할 때 이름 없는 <code>workflow {}</code> 블록을 진입점으로 사용합니다.
+<code>GREETING_WORKFLOW</code>는 이름이 있으므로 Nextflow는 단독으로 실행하는 방법을 알지 못합니다.</p>
+<p>이것은 의도된 동작입니다. 구성 가능한 워크플로우는 직접 실행하는 것이 아니라 진입 워크플로우에서 호출하도록 설계되어 있습니다.
+해결책은 <code>main.nf</code>에 <code>GREETING_WORKFLOW</code>를 가져와서 호출하는 진입 워크플로우를 만드는 것입니다.</p>
+<h3 id="13">1.3. 메인 워크플로우 업데이트 및 테스트<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<p>이제 greeting 워크플로우를 호출하도록 메인 워크플로우를 업데이트합니다.</p>
+<h4 id="131-greeting">1.3.1. greeting 워크플로우 가져오기 및 호출<a class="headerlink" href="#131-greeting" title="Permanent link">&para;</a></h4>
+<p><code>include</code> 구문을 추가하고, <code>GREETING_WORKFLOW</code>를 호출하도록 워크플로우 본문을 업데이트하며, <code>publish:</code>의 <code>channel.empty()</code> 플레이스홀더를 교체합니다:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">후</label><label for="__tabbed_4_2">전</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-15-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-15-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-15-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-15-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-15-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-15-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-15-10">10</a></span>
+<span class="normal"><a href="#__codelineno-15-11">11</a></span>
+<span class="normal"><a href="#__codelineno-15-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./workflows/greeting&#39;</span>
+</span><a id="__codelineno-15-2" name="__codelineno-15-2"></a>
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="w">    </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Alice&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Charlie&#39;</span><span class="o">)</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6"></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="hll"><span class="w">    </span><span class="c1">// greeting 워크플로우 실행</span>
+</span><a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="hll"><span class="w">    </span><span class="n">GREETING_WORKFLOW</span><span class="o">(</span><span class="n">names</span><span class="o">)</span>
+</span><a id="__codelineno-15-9" name="__codelineno-15-9"></a>
+<a id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11"></a><span class="hll"><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">greetings</span>
+</span><a id="__codelineno-15-12" name="__codelineno-15-12"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>하지만 greeting 워크플로우에는 이름 없는 워크플로우가 없고, 대신 이름이 있는 워크플로우가 있습니다:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="n">workflow</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span>
+<span class="normal"><a href="#__codelineno-16-2">2</a></span>
+<span class="normal"><a href="#__codelineno-16-3">3</a></span>
+<span class="normal"><a href="#__codelineno-16-4">4</a></span>
+<span class="normal"><a href="#__codelineno-16-5">5</a></span>
+<span class="normal"><a href="#__codelineno-16-6">6</a></span>
+<span class="normal"><a href="#__codelineno-16-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="w">    </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Alice&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Charlie&#39;</span><span class="o">)</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4"></a>
+<a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">empty</span><span class="o">()</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>그래서 Nextflow가 오류를 발생시키고 원하는 대로 실행되지 않은 것입니다.</p>
-<p><code>take:</code>/<code>emit:</code> 구문을 추가한 것은 워크플로우를 직접 호출하기 위해서가 아니라, 다른 워크플로우와 구성하기 위해서입니다. 해결책은 이름이 있는 워크플로우를 가져와서 호출하는 이름 없는 진입 워크플로우가 있는 메인 스크립트를 만드는 것입니다.</p>
-<h3 id="14">1.4. 메인 워크플로우 만들기 및 테스트<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
-<p>이제 <code>greeting</code> 워크플로우를 가져와서 사용하는 메인 워크플로우를 만들겠습니다.</p>
-<p><code>main.nf</code>를 만듭니다:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
-<span class="normal"><a href="#__codelineno-12-2">2</a></span>
-<span class="normal"><a href="#__codelineno-12-3">3</a></span>
-<span class="normal"><a href="#__codelineno-12-4">4</a></span>
-<span class="normal"><a href="#__codelineno-12-5">5</a></span>
-<span class="normal"><a href="#__codelineno-12-6">6</a></span>
-<span class="normal"><a href="#__codelineno-12-7">7</a></span>
-<span class="normal"><a href="#__codelineno-12-8">8</a></span>
-<span class="normal"><a href="#__codelineno-12-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./workflows/greeting&#39;</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2"></a>
-<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="w">    </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Alice&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Charlie&#39;</span><span class="o">)</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">    </span><span class="n">GREETING_WORKFLOW</span><span class="o">(</span><span class="n">names</span><span class="o">)</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6"></a>
-<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="w">    </span><span class="n">GREETING_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">greetings</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;Original: $it&quot;</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">    </span><span class="n">GREETING_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">timestamped</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;Timestamped: $it&quot;</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="o">}</span>
+</div>
+</div>
+</div>
+<p>진입 워크플로우는 Nextflow가 파이프라인 진입점으로 사용할 수 있도록 이름 없이 유지합니다.</p>
+<h4 id="132-output">1.3.2. output 블록 업데이트<a class="headerlink" href="#132-output" title="Permanent link">&para;</a></h4>
+<p>게시된 인사말을 <code>greetings/</code> 하위 디렉토리로 라우팅하는 <code>path</code> 지시문을 추가합니다:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">후</label><label for="__tabbed_5_2">전</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-14">14</a></span>
+<span class="normal"><a href="#__codelineno-17-15">15</a></span>
+<span class="normal"><a href="#__codelineno-17-16">16</a></span>
+<span class="normal"><a href="#__codelineno-17-17">17</a></span>
+<span class="normal"><a href="#__codelineno-17-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-17-16" name="__codelineno-17-16"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;greetings&#39;</span>
+</span><a id="__codelineno-17-17" name="__codelineno-17-17"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-17-18" name="__codelineno-17-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>이 파일의 워크플로우 진입점은 이름이 없으며, 진입 워크플로우로 사용할 것이기 때문입니다.</p>
-<p>실행하여 출력을 확인합니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-14">14</a></span>
+<span class="normal"><a href="#__codelineno-18-15">15</a></span>
+<span class="normal"><a href="#__codelineno-18-16">16</a></span>
+<span class="normal"><a href="#__codelineno-18-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="hll"><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-18-16" name="__codelineno-18-16"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
+</span><a id="__codelineno-18-17" name="__codelineno-18-17"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<h4 id="133">1.3.3. 워크플로우 실행<a class="headerlink" href="#133" title="Permanent link">&para;</a></h4>
+<p>워크플로우를 실행하여 정상적으로 작동하는지 테스트합니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="go">Launching `main.nf` [goofy_mayer] DSL2 - revision: 543f8742fe</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="go">executor &gt;  local (9)</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="go">[05/3cc752] process &gt; GREETING_WORKFLOW:VALIDATE_NAME (validating Char... [100%] 3 of 3 ✔</span>
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="go">[b1/b56ecf] process &gt; GREETING_WORKFLOW:SAY_HELLO (greeting Charlie)      [100%] 3 of 3 ✔</span>
-<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="go">[ea/342168] process &gt; GREETING_WORKFLOW:TIMESTAMP_GREETING (adding tim... [100%] 3 of 3 ✔</span>
-<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="go">Original: /workspaces/training/side_quests/workflows_of_workflows/work/bb/c8aff3df0ebc15a4d7d35f736db44c/Alice-output.txt</span>
-<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="go">Original: /workspaces/training/side_quests/workflows_of_workflows/work/fb/fa877776e8a5d90b537b1bcd3b6f5b/Bob-output.txt</span>
-<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="go">Original: /workspaces/training/side_quests/workflows_of_workflows/work/b1/b56ecf938fda8bcbec211847c8f0be/Charlie-output.txt</span>
-<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="go">Timestamped: /workspaces/training/side_quests/workflows_of_workflows/work/06/877bc909f140bbf8223343450cea36/timestamped_Alice-output.txt</span>
-<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="go">Timestamped: /workspaces/training/side_quests/workflows_of_workflows/work/aa/bd31b71cdb745b7c155ca7f8837b8a/timestamped_Bob-output.txt</span>
-<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="go">Timestamped: /workspaces/training/side_quests/workflows_of_workflows/work/ea/342168d4ba04cc899a89c56cbfd9b0/timestamped_Charlie-output.txt</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="go">Launching `main.nf` [goofy_mayer] DSL2 - revision: 543f8742fe</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="go">executor &gt;  local (9)</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="go">[05/3cc752] process &gt; GREETING_WORKFLOW:VALIDATE_NAME (validating Char... [100%] 3 of 3 ✔</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="go">[b1/b56ecf] process &gt; GREETING_WORKFLOW:SAY_HELLO (greeting Charlie)      [100%] 3 of 3 ✔</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="go">[ea/342168] process &gt; GREETING_WORKFLOW:TIMESTAMP_GREETING (adding tim... [100%] 3 of 3 ✔</span>
 </code></pre></div>
 </details>
-<p>작동합니다! 이름이 있는 greeting 워크플로우를 이름 없는 진입 <code>workflow</code> 블록이 있는 메인 워크플로우로 감쌌습니다. 메인 워크플로우는 <code>GREETING_WORKFLOW</code> 워크플로우를 프로세스와 거의 유사하게(완전히 같지는 않음) 사용하며, <code>names</code> 채널을 인자로 전달합니다.</p>
+<details class="abstract">
+<summary>디렉토리 내용</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">results/</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="go">└── greetings</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">    ├── Alice-output.txt</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="go">    ├── Bob-output.txt</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="go">    └── Charlie-output.txt</span>
+</code></pre></div>
+</details>
+<details class="abstract">
+<summary>파일 내용</summary>
+<div class="highlight"><span class="filename">results/greetings/Alice-output.txt</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">Hello, Alice!</span>
+</code></pre></div>
+</details>
+<p>인사말 파일이 <code>results/greetings/</code>에 게시됩니다.
+메인 워크플로우는 <code>GREETING_WORKFLOW</code>를 호출하고 그 출력을 <code>publish:</code> 섹션에 직접 연결합니다.</p>
 <h3 id="_9">핵심 정리<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>이 섹션에서는 다음과 같은 중요한 개념들을 학습했습니다:</p>
 <ul>
@@ -4546,107 +4966,259 @@
 </ul>
 <p>이 모듈식 접근 방식을 통해 greeting 워크플로우를 독립적으로 테스트하거나 더 큰 파이프라인의 구성 요소로 사용할 수 있습니다.</p>
 <hr />
-<h2 id="2-transform">2. Transform 워크플로우 추가하기<a class="headerlink" href="#2-transform" title="Permanent link">&para;</a></h2>
-<p>이제 인사말에 텍스트 변환을 적용하는 워크플로우를 만들어 봅니다.</p>
-<h3 id="21">2.1. 워크플로우 파일 만들기<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>touch<span class="w"> </span>workflows/transform.nf
-</code></pre></div>
-<h3 id="22">2.2. 워크플로우 코드 추가<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
-<p><code>workflows/transform.nf</code>에 다음 코드를 추가합니다:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/transform.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-16-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-16-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-16-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-16-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-16-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-16-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-16-10">10</a></span>
-<span class="normal"><a href="#__codelineno-16-11">11</a></span>
-<span class="normal"><a href="#__codelineno-16-12">12</a></span>
-<span class="normal"><a href="#__codelineno-16-13">13</a></span>
-<span class="normal"><a href="#__codelineno-16-14">14</a></span>
-<span class="normal"><a href="#__codelineno-16-15">15</a></span>
-<span class="normal"><a href="#__codelineno-16-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAY_HELLO_UPPER</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/say_hello_upper&#39;</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">REVERSE_TEXT</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/reverse_text&#39;</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3"></a>
-<a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="n">workflow</span><span class="w"> </span><span class="n">TRANSFORM_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">    </span><span class="nl">take:</span>
-<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="w">        </span><span class="n">input_ch</span><span class="w">         </span><span class="c1">// 메시지가 담긴 입력 채널</span>
-<a id="__codelineno-16-7" name="__codelineno-16-7"></a>
-<a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="w">        </span><span class="c1">// 순서대로 변환 적용</span>
-<a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="w">        </span><span class="n">upper_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO_UPPER</span><span class="o">(</span><span class="n">input_ch</span><span class="o">)</span>
-<a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="w">        </span><span class="n">reversed_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REVERSE_TEXT</span><span class="o">(</span><span class="n">upper_ch</span><span class="o">)</span>
-<a id="__codelineno-16-12" name="__codelineno-16-12"></a>
-<a id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="w">    </span><span class="nl">emit:</span>
-<a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="w">        </span><span class="n">upper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">upper_ch</span><span class="w">        </span><span class="c1">// 대문자 인사말</span>
-<a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="w">        </span><span class="n">reversed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reversed_ch</span><span class="w">  </span><span class="c1">// 뒤집힌 대문자 인사말</span>
-<a id="__codelineno-16-16" name="__codelineno-16-16"></a><span class="o">}</span>
+<h2 id="2-transformation">2. 파이프라인에 transformation 워크플로우 추가하기<a class="headerlink" href="#2-transformation" title="Permanent link">&para;</a></h2>
+<p>transform 워크플로우는 타임스탬프가 추가된 인사말에 텍스트 변환을 적용합니다.</p>
+<h3 id="21">2.1. 워크플로우 검토 및 실행<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p><code>workflows/transform.nf</code>를 열고 코드를 확인합니다:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/transform.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-23-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-23-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-23-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-23-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-23-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-23-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-23-10">10</a></span>
+<span class="normal"><a href="#__codelineno-23-11">11</a></span>
+<span class="normal"><a href="#__codelineno-23-12">12</a></span>
+<span class="normal"><a href="#__codelineno-23-13">13</a></span>
+<span class="normal"><a href="#__codelineno-23-14">14</a></span>
+<span class="normal"><a href="#__codelineno-23-15">15</a></span>
+<span class="normal"><a href="#__codelineno-23-16">16</a></span>
+<span class="normal"><a href="#__codelineno-23-17">17</a></span>
+<span class="normal"><a href="#__codelineno-23-18">18</a></span>
+<span class="normal"><a href="#__codelineno-23-19">19</a></span>
+<span class="normal"><a href="#__codelineno-23-20">20</a></span>
+<span class="normal"><a href="#__codelineno-23-21">21</a></span>
+<span class="normal"><a href="#__codelineno-23-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAY_HELLO_UPPER</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/say_hello_upper&#39;</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">REVERSE_TEXT</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/reverse_text&#39;</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3"></a>
+<a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6"></a><span class="w">    </span><span class="n">input_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;results/timestamped_*.txt&#39;</span><span class="o">)</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7"></a>
+<a id="__codelineno-23-8" name="__codelineno-23-8"></a><span class="w">    </span><span class="c1">// 순서대로 변환 적용</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="w">    </span><span class="n">upper_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO_UPPER</span><span class="o">(</span><span class="n">input_ch</span><span class="o">)</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10"></a><span class="w">    </span><span class="n">reversed_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REVERSE_TEXT</span><span class="o">(</span><span class="n">upper_ch</span><span class="o">)</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11"></a>
+<a id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-23-13" name="__codelineno-23-13"></a><span class="w">    </span><span class="n">upper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">upper_ch</span>
+<a id="__codelineno-23-14" name="__codelineno-23-14"></a><span class="w">    </span><span class="n">reversed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reversed_ch</span>
+<a id="__codelineno-23-15" name="__codelineno-23-15"></a><span class="o">}</span>
+<a id="__codelineno-23-16" name="__codelineno-23-16"></a>
+<a id="__codelineno-23-17" name="__codelineno-23-17"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-23-18" name="__codelineno-23-18"></a><span class="w">    </span><span class="n">upper</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-23-19" name="__codelineno-23-19"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-23-20" name="__codelineno-23-20"></a><span class="w">    </span><span class="n">reversed</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-23-21" name="__codelineno-23-21"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-23-22" name="__codelineno-23-22"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>구성 가능한 구문에 대한 설명은 반복하지 않겠지만, 이름 있는 워크플로우가 다시 <code>take:</code> 및 <code>emit:</code> 블록과 함께 선언되고, 워크플로우 내용이 <code>main:</code> 블록 안에 배치된 것을 확인하세요.</p>
-<h3 id="23">2.3. 메인 워크플로우 업데이트<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
-<p>두 워크플로우를 모두 사용하도록 <code>main.nf</code>를 업데이트합니다:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-17-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-17-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-17-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-17-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-17-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-17-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-17-10">10</a></span>
-<span class="normal"><a href="#__codelineno-17-11">11</a></span>
-<span class="normal"><a href="#__codelineno-17-12">12</a></span>
-<span class="normal"><a href="#__codelineno-17-13">13</a></span>
-<span class="normal"><a href="#__codelineno-17-14">14</a></span>
-<span class="normal"><a href="#__codelineno-17-15">15</a></span>
-<span class="normal"><a href="#__codelineno-17-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./workflows/greeting&#39;</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">TRANSFORM_WORKFLOW</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./workflows/transform&#39;</span>
-<a id="__codelineno-17-3" name="__codelineno-17-3"></a>
-<a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="w">    </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Alice&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Charlie&#39;</span><span class="o">)</span>
-<a id="__codelineno-17-6" name="__codelineno-17-6"></a>
-<a id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="w">    </span><span class="c1">// greeting 워크플로우 실행</span>
-<a id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="w">    </span><span class="n">GREETING_WORKFLOW</span><span class="o">(</span><span class="n">names</span><span class="o">)</span>
-<a id="__codelineno-17-9" name="__codelineno-17-9"></a>
-<a id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="w">    </span><span class="c1">// transform 워크플로우 실행</span>
-<a id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="w">    </span><span class="n">TRANSFORM_WORKFLOW</span><span class="o">(</span><span class="n">GREETING_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">timestamped</span><span class="o">)</span>
-<a id="__codelineno-17-12" name="__codelineno-17-12"></a>
-<a id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="w">    </span><span class="c1">// 결과 확인</span>
-<a id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="w">    </span><span class="n">TRANSFORM_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">upper</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;Uppercase: $it&quot;</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="w">    </span><span class="n">TRANSFORM_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">reversed</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;Reversed: $it&quot;</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-17-16" name="__codelineno-17-16"></a><span class="o">}</span>
-</code></pre></div></td></tr></table></div>
-<p>전체 파이프라인을 실행합니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
+<p>이 단독 실행형 워크플로우는 <code>greeting.nf</code>가 생성한 <code>results/</code> 디렉토리의 타임스탬프가 추가된 인사말 파일을 읽어 대문자로 변환한 후 텍스트를 뒤집습니다.</p>
+<p>1.1 섹션의 greeting 결과와 함께 정상적으로 작동하는지 실행하여 확인합니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>workflows/transform.nf
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="go">Launching `main.nf` [sick_kimura] DSL2 - revision: 8dc45fc6a8</span>
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="go">executor &gt;  local (13)</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="go">executor &gt;  local (15)</span>
-<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="go">[83/1b51f4] process &gt; GREETING_WORKFLOW:VALIDATE_NAME (validating Alice)  [100%] 3 of 3 ✔</span>
-<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="go">[68/556150] process &gt; GREETING_WORKFLOW:SAY_HELLO (greeting Alice)        [100%] 3 of 3 ✔</span>
-<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="go">[de/511abd] process &gt; GREETING_WORKFLOW:TIMESTAMP_GREETING (adding tim... [100%] 3 of 3 ✔</span>
-<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="go">[cd/e6a7e0] process &gt; TRANSFORM_WORKFLOW:SAY_HELLO_UPPER (converting t... [100%] 3 of 3 ✔</span>
-<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="go">[f0/74ba4a] process &gt; TRANSFORM_WORKFLOW:REVERSE_TEXT (reversing UPPER... [100%] 3 of 3 ✔</span>
-<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="go">Uppercase: /workspaces/training/side_quests/workflows_of_workflows/work/a0/d4f5df4d6344604498fa47a6084a11/UPPER-timestamped_Bob-output.txt</span>
-<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="go">Uppercase: /workspaces/training/side_quests/workflows_of_workflows/work/69/b5e37f6c79c2fd38adb75d0eca8f87/UPPER-timestamped_Charlie-output.txt</span>
-<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="go">Uppercase: /workspaces/training/side_quests/workflows_of_workflows/work/cd/e6a7e0b17e7d5a2f71bb8123cd53a7/UPPER-timestamped_Alice-output.txt</span>
-<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="go">Reversed: /workspaces/training/side_quests/workflows_of_workflows/work/7a/7a222f7957b35d1d121338566a24ac/REVERSED-UPPER-timestamped_Bob-output.txt</span>
-<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="go">Reversed: /workspaces/training/side_quests/workflows_of_workflows/work/46/8d19af62e33a5a6417c773496e0f90/REVERSED-UPPER-timestamped_Charlie-output.txt</span>
-<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="go">Reversed: /workspaces/training/side_quests/workflows_of_workflows/work/f0/74ba4a10d9ef5c82f829d1c154d0f6/REVERSED-UPPER-timestamped_Alice-output.txt</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="go">Launching `workflows/transform.nf` [blissful_curie] DSL2 - revision: 4e7b1c9f02</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="go">executor &gt;  local (6)</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="go">[3e/a14c29] process &gt; SAY_HELLO_UPPER (converting t... [100%] 3 of 3 ✔</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="go">[c8/51b9e3] process &gt; REVERSE_TEXT (reversing UPPER... [100%] 3 of 3 ✔</span>
 </code></pre></div>
 </details>
-<p>뒤집힌 파일 중 하나를 확인하면, 인사말의 대문자 버전이 뒤집혀 있는 것을 볼 수 있습니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>cat<span class="w"> </span>/workspaces/training/side_quests/workflows_of_workflows/work/f0/74ba4a10d9ef5c82f829d1c154d0f6/REVERSED-UPPER-timestamped_Alice-output.txt
+<p><code>GREETING_WORKFLOW</code>와 구성 가능하게 만들려면 1.2 섹션과 동일한 세 가지 변경 사항을 적용합니다.</p>
+<h3 id="22">2.2. 구성 가능하게 만들기<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<p>1.2 섹션과 동일한 세 가지 변경 사항을 적용합니다: 워크플로우에 이름을 부여하고, 하드코딩된 입력을 <code>take:</code>로 교체하고, <code>publish:</code>/<code>output {}</code>을 <code>emit:</code>으로 교체합니다.</p>
+<p>완성된 파일은 다음과 같아야 합니다:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/transform.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-26-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-26-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-26-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-26-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-26-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-26-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-26-10">10</a></span>
+<span class="normal"><a href="#__codelineno-26-11">11</a></span>
+<span class="normal"><a href="#__codelineno-26-12">12</a></span>
+<span class="normal"><a href="#__codelineno-26-13">13</a></span>
+<span class="normal"><a href="#__codelineno-26-14">14</a></span>
+<span class="normal"><a href="#__codelineno-26-15">15</a></span>
+<span class="normal"><a href="#__codelineno-26-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAY_HELLO_UPPER</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/say_hello_upper&#39;</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">REVERSE_TEXT</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/reverse_text&#39;</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3"></a>
+<a id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="hll"><span class="n">workflow</span><span class="w"> </span><span class="n">TRANSFORM_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="hll"><span class="w">    </span><span class="nl">take:</span>
+</span><a id="__codelineno-26-6" name="__codelineno-26-6"></a><span class="hll"><span class="w">    </span><span class="n">input_ch</span><span class="w"> </span><span class="c1">// 메시지가 담긴 입력 채널</span>
+</span><a id="__codelineno-26-7" name="__codelineno-26-7"></a>
+<a id="__codelineno-26-8" name="__codelineno-26-8"></a><span class="hll"><span class="w">    </span><span class="nl">main:</span>
+</span><a id="__codelineno-26-9" name="__codelineno-26-9"></a><span class="w">    </span><span class="c1">// 순서대로 변환 적용</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10"></a><span class="w">    </span><span class="n">upper_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO_UPPER</span><span class="o">(</span><span class="n">input_ch</span><span class="o">)</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11"></a><span class="w">    </span><span class="n">reversed_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REVERSE_TEXT</span><span class="o">(</span><span class="n">upper_ch</span><span class="o">)</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12"></a>
+<a id="__codelineno-26-13" name="__codelineno-26-13"></a><span class="hll"><span class="w">    </span><span class="nl">emit:</span>
+</span><a id="__codelineno-26-14" name="__codelineno-26-14"></a><span class="hll"><span class="w">    </span><span class="n">upper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">upper_ch</span><span class="w"> </span><span class="c1">// 대문자 인사말</span>
+</span><a id="__codelineno-26-15" name="__codelineno-26-15"></a><span class="hll"><span class="w">    </span><span class="n">reversed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reversed_ch</span><span class="w"> </span><span class="c1">// 뒤집힌 대문자 인사말</span>
+</span><a id="__codelineno-26-16" name="__codelineno-26-16"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>transform 워크플로우가 이제 구성 가능해졌으며 메인 워크플로우로 가져올 준비가 되었습니다.</p>
+<h3 id="23">2.3. 메인 워크플로우 업데이트 및 테스트<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<p>이제 transformation 워크플로우를 호출하도록 메인 워크플로우를 업데이트합니다.</p>
+<h4 id="231-transformation">2.3.1. transformation 워크플로우 가져오기 및 호출<a class="headerlink" href="#231-transformation" title="Permanent link">&para;</a></h4>
+<p>include 구문을 추가하고, 타임스탬프가 추가된 인사말에 연결된 <code>TRANSFORM_WORKFLOW</code> 호출을 추가하며, 두 개의 새로운 <code>publish:</code> 항목을 추가합니다:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">후</label><label for="__tabbed_6_2">전</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-27-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-27-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-27-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-27-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-27-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-27-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-27-10">10</a></span>
+<span class="normal"><a href="#__codelineno-27-11">11</a></span>
+<span class="normal"><a href="#__codelineno-27-12">12</a></span>
+<span class="normal"><a href="#__codelineno-27-13">13</a></span>
+<span class="normal"><a href="#__codelineno-27-14">14</a></span>
+<span class="normal"><a href="#__codelineno-27-15">15</a></span>
+<span class="normal"><a href="#__codelineno-27-16">16</a></span>
+<span class="normal"><a href="#__codelineno-27-17">17</a></span>
+<span class="normal"><a href="#__codelineno-27-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./workflows/greeting&#39;</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">TRANSFORM_WORKFLOW</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./workflows/transform&#39;</span>
+</span><a id="__codelineno-27-3" name="__codelineno-27-3"></a>
+<a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="w">    </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Alice&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Charlie&#39;</span><span class="o">)</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7"></a>
+<a id="__codelineno-27-8" name="__codelineno-27-8"></a><span class="w">    </span><span class="c1">// greeting 워크플로우 실행</span>
+<a id="__codelineno-27-9" name="__codelineno-27-9"></a><span class="w">    </span><span class="n">GREETING_WORKFLOW</span><span class="o">(</span><span class="n">names</span><span class="o">)</span>
+<a id="__codelineno-27-10" name="__codelineno-27-10"></a>
+<a id="__codelineno-27-11" name="__codelineno-27-11"></a><span class="hll"><span class="w">    </span><span class="c1">// transform 워크플로우 실행</span>
+</span><a id="__codelineno-27-12" name="__codelineno-27-12"></a><span class="hll"><span class="w">    </span><span class="n">TRANSFORM_WORKFLOW</span><span class="o">(</span><span class="n">GREETING_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">timestamped</span><span class="o">)</span>
+</span><a id="__codelineno-27-13" name="__codelineno-27-13"></a>
+<a id="__codelineno-27-14" name="__codelineno-27-14"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-27-15" name="__codelineno-27-15"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">greetings</span>
+<a id="__codelineno-27-16" name="__codelineno-27-16"></a><span class="hll"><span class="w">    </span><span class="n">upper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TRANSFORM_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">upper</span>
+</span><a id="__codelineno-27-17" name="__codelineno-27-17"></a><span class="hll"><span class="w">    </span><span class="n">reversed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TRANSFORM_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">reversed</span>
+</span><a id="__codelineno-27-18" name="__codelineno-27-18"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-28-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-28-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-28-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-28-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-28-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-28-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-28-10">10</a></span>
+<span class="normal"><a href="#__codelineno-28-11">11</a></span>
+<span class="normal"><a href="#__codelineno-28-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./workflows/greeting&#39;</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2"></a>
+<a id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="w">    </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Alice&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Charlie&#39;</span><span class="o">)</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6"></a>
+<a id="__codelineno-28-7" name="__codelineno-28-7"></a><span class="w">    </span><span class="c1">// greeting 워크플로우 실행</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8"></a><span class="w">    </span><span class="n">GREETING_WORKFLOW</span><span class="o">(</span><span class="n">names</span><span class="o">)</span>
+<a id="__codelineno-28-9" name="__codelineno-28-9"></a>
+<a id="__codelineno-28-10" name="__codelineno-28-10"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-28-11" name="__codelineno-28-11"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">greetings</span>
+<a id="__codelineno-28-12" name="__codelineno-28-12"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>이렇게 하면 타임스탬프가 추가된 인사말에 transformation 워크플로우가 실행됩니다.</p>
+<h4 id="232-output">2.3.2. output 블록 업데이트<a class="headerlink" href="#232-output" title="Permanent link">&para;</a></h4>
+<p><code>output {}</code> 블록에 <code>upper</code>와 <code>reversed</code> 항목을 추가하고, 각각 하위 디렉토리를 위한 <code>path</code> 지시문을 설정합니다:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">후</label><label for="__tabbed_7_2">전</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-20">20</a></span>
+<span class="normal"><a href="#__codelineno-29-21">21</a></span>
+<span class="normal"><a href="#__codelineno-29-22">22</a></span>
+<span class="normal"><a href="#__codelineno-29-23">23</a></span>
+<span class="normal"><a href="#__codelineno-29-24">24</a></span>
+<span class="normal"><a href="#__codelineno-29-25">25</a></span>
+<span class="normal"><a href="#__codelineno-29-26">26</a></span>
+<span class="normal"><a href="#__codelineno-29-27">27</a></span>
+<span class="normal"><a href="#__codelineno-29-28">28</a></span>
+<span class="normal"><a href="#__codelineno-29-29">29</a></span>
+<span class="normal"><a href="#__codelineno-29-30">30</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-20" name="__codelineno-29-20"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-29-21" name="__codelineno-29-21"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-29-22" name="__codelineno-29-22"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;greetings&#39;</span>
+<a id="__codelineno-29-23" name="__codelineno-29-23"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-29-24" name="__codelineno-29-24"></a><span class="hll"><span class="w">    </span><span class="n">upper</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-29-25" name="__codelineno-29-25"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;upper&#39;</span>
+</span><a id="__codelineno-29-26" name="__codelineno-29-26"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
+</span><a id="__codelineno-29-27" name="__codelineno-29-27"></a><span class="hll"><span class="w">    </span><span class="n">reversed</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-29-28" name="__codelineno-29-28"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;reversed&#39;</span>
+</span><a id="__codelineno-29-29" name="__codelineno-29-29"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
+</span><a id="__codelineno-29-30" name="__codelineno-29-30"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-20">20</a></span>
+<span class="normal"><a href="#__codelineno-30-21">21</a></span>
+<span class="normal"><a href="#__codelineno-30-22">22</a></span>
+<span class="normal"><a href="#__codelineno-30-23">23</a></span>
+<span class="normal"><a href="#__codelineno-30-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-20" name="__codelineno-30-20"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-30-21" name="__codelineno-30-21"></a><span class="hll"><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-30-22" name="__codelineno-30-22"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;greetings&#39;</span>
+</span><a id="__codelineno-30-23" name="__codelineno-30-23"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
+</span><a id="__codelineno-30-24" name="__codelineno-30-24"></a><span class="hll"><span class="o">}</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>이렇게 하면 최종 출력이 적절한 디렉토리에 게시됩니다.</p>
+<h4 id="233">2.3.3. 전체 파이프라인 실행<a class="headerlink" href="#233" title="Permanent link">&para;</a></h4>
+<p>파이프라인을 실행하여 모든 것이 정상적으로 작동하는지 테스트합니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<div class="highlight"><span class="filename">Reversed file content</span><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">!ECILA ,OLLEH ]04:50:71 60-30-5202[</span>
+<details class="success">
+<summary>명령 출력</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="go">Launching `main.nf` [sick_kimura] DSL2 - revision: 8dc45fc6a8</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="go">executor &gt;  local (15)</span>
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="go">[83/1b51f4] process &gt; GREETING_WORKFLOW:VALIDATE_NAME (validating Alice)  [100%] 3 of 3 ✔</span>
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="go">[68/556150] process &gt; GREETING_WORKFLOW:SAY_HELLO (greeting Alice)        [100%] 3 of 3 ✔</span>
+<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="go">[de/511abd] process &gt; GREETING_WORKFLOW:TIMESTAMP_GREETING (adding tim... [100%] 3 of 3 ✔</span>
+<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="go">[cd/e6a7e0] process &gt; TRANSFORM_WORKFLOW:SAY_HELLO_UPPER (converting t... [100%] 3 of 3 ✔</span>
+<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="go">[f0/74ba4a] process &gt; TRANSFORM_WORKFLOW:REVERSE_TEXT (reversing UPPER... [100%] 3 of 3 ✔</span>
 </code></pre></div>
+</details>
+<details class="abstract">
+<summary>디렉토리 내용</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="go">results/</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="go">├── greetings</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="go">│   ├── Alice-output.txt</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="go">│   ├── Bob-output.txt</span>
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="go">│   └── Charlie-output.txt</span>
+<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a><span class="go">├── reversed</span>
+<a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a><span class="go">│   ├── REVERSED-UPPER-timestamped_Alice-output.txt</span>
+<a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a><span class="go">│   ├── REVERSED-UPPER-timestamped_Bob-output.txt</span>
+<a id="__codelineno-33-9" name="__codelineno-33-9" href="#__codelineno-33-9"></a><span class="go">│   └── REVERSED-UPPER-timestamped_Charlie-output.txt</span>
+<a id="__codelineno-33-10" name="__codelineno-33-10" href="#__codelineno-33-10"></a><span class="go">└── upper</span>
+<a id="__codelineno-33-11" name="__codelineno-33-11" href="#__codelineno-33-11"></a><span class="go">    ├── UPPER-timestamped_Alice-output.txt</span>
+<a id="__codelineno-33-12" name="__codelineno-33-12" href="#__codelineno-33-12"></a><span class="go">    ├── UPPER-timestamped_Bob-output.txt</span>
+<a id="__codelineno-33-13" name="__codelineno-33-13" href="#__codelineno-33-13"></a><span class="go">    └── UPPER-timestamped_Charlie-output.txt</span>
+</code></pre></div>
+</details>
+<details class="abstract">
+<summary>파일 내용</summary>
+<div class="highlight"><span class="filename">results/reversed/REVERSED-UPPER-timestamped_Alice-output.txt</span><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="go">!ECILA ,OLLEH ]04:50:71 60-30-5202[</span>
+</code></pre></div>
+</details>
+<p>파이프라인이 처음부터 끝까지 정상적으로 작동합니다: 인사말이 대문자로 변환되고 뒤집혔습니다.</p>
 <h3 id="_10">핵심 정리<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>이제 다음을 수행하는 완전한 파이프라인이 완성되었습니다:</p>
 <ul>
@@ -4671,20 +5243,20 @@
 <ol>
 <li>
 <p><strong>워크플로우 구조</strong>: <code>take:</code> 및 <code>emit:</code> 구문을 사용하여 각 워크플로우의 입력과 출력을 명확하게 정의하고, 구성 요소 간에 잘 정의된 인터페이스를 만들었으며, 워크플로우 로직을 <code>main:</code> 블록 안에 배치했습니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">workflow</span><span class="w"> </span><span class="n">EXAMPLE_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span><span class="nl">take:</span>
-<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">        </span><span class="c1">// 입력 채널은 여기에 선언합니다</span>
-<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="w">        </span><span class="n">input_ch</span>
-<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>
-<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="w">        </span><span class="c1">// 워크플로우 로직은 여기에 작성합니다</span>
-<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="w">        </span><span class="c1">// 프로세스를 실행하고 채널을 조작하는 곳입니다</span>
-<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="w">        </span><span class="n">result_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SOME_PROCESS</span><span class="o">(</span><span class="n">input_ch</span><span class="o">)</span>
-<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>
-<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="w">    </span><span class="nl">emit:</span>
-<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="w">        </span><span class="c1">// 출력 채널은 여기에 선언합니다</span>
-<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="w">        </span><span class="n">output_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result_ch</span>
-<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a><span class="o">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="n">workflow</span><span class="w"> </span><span class="n">EXAMPLE_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">    </span><span class="nl">take:</span>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="w">        </span><span class="c1">// 입력 채널은 여기에 선언합니다</span>
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="w">        </span><span class="n">input_ch</span>
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>
+<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="w">        </span><span class="c1">// 워크플로우 로직은 여기에 작성합니다</span>
+<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="w">        </span><span class="c1">// 프로세스를 실행하고 채널을 조작하는 곳입니다</span>
+<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="w">        </span><span class="n">result_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SOME_PROCESS</span><span class="o">(</span><span class="n">input_ch</span><span class="o">)</span>
+<a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a>
+<a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a><span class="w">    </span><span class="nl">emit:</span>
+<a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a><span class="w">        </span><span class="c1">// 출력 채널은 여기에 선언합니다</span>
+<a id="__codelineno-35-13" name="__codelineno-35-13" href="#__codelineno-35-13"></a><span class="w">        </span><span class="n">output_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result_ch</span>
+<a id="__codelineno-35-14" name="__codelineno-35-14" href="#__codelineno-35-14"></a><span class="o">}</span>
 </code></pre></div>
 </li>
 <li>
@@ -4692,17 +5264,17 @@
 <ul>
 <li>단일 워크플로우 가져오기</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">WORKFLOW_NAME</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./path/to/workflow&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">WORKFLOW_NAME</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./path/to/workflow&#39;</span>
 </code></pre></div>
 <ul>
 <li>여러 워크플로우 가져오기</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">WORKFLOW_A</span><span class="o">;</span><span class="w"> </span><span class="n">WORKFLOW_B</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./path/to/workflows&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">WORKFLOW_A</span><span class="o">;</span><span class="w"> </span><span class="n">WORKFLOW_B</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./path/to/workflows&#39;</span>
 </code></pre></div>
 <ul>
 <li>이름 충돌을 피하기 위한 별칭으로 가져오기</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">WORKFLOW_A</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">WORKFLOW_A_ALIAS</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./path/to/workflow&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">WORKFLOW_A</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">WORKFLOW_A_ALIAS</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./path/to/workflow&#39;</span>
 </code></pre></div>
 </li>
 <li>
@@ -4710,23 +5282,23 @@
 <ul>
 <li>이름 없는 워크플로우 (진입점)</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">    </span><span class="c1">// 스크립트가 실행될 때의 진입점입니다</span>
-<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">    </span><span class="n">NAMED_WORKFLOW</span><span class="o">(</span><span class="n">input_ch</span><span class="o">)</span>
-<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="o">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="w">    </span><span class="c1">// 스크립트가 실행될 때의 진입점입니다</span>
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="w">    </span><span class="n">NAMED_WORKFLOW</span><span class="o">(</span><span class="n">input_ch</span><span class="o">)</span>
+<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="o">}</span>
 </code></pre></div>
 <ul>
 <li>이름 있는 워크플로우 (진입 워크플로우에서 호출됨)</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">workflow</span><span class="w"> </span><span class="n">NAMED_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">    </span><span class="c1">// 진입 워크플로우에서 호출되어야 합니다</span>
-<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="o">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="n">workflow</span><span class="w"> </span><span class="n">NAMED_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="w">    </span><span class="c1">// 진입 워크플로우에서 호출되어야 합니다</span>
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="o">}</span>
 </code></pre></div>
 </li>
 <li>
 <p><strong>데이터 흐름 관리</strong>: 네임스페이스 표기법(<code>WORKFLOW_NAME.out.channel_name</code>)을 사용하여 워크플로우 출력에 접근하고 다른 워크플로우로 전달하는 방법을 학습했습니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>WORKFLOW_A(input_ch)
-<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>WORKFLOW_B(WORKFLOW_A.out.some_channel)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>WORKFLOW_A(input_ch)
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>WORKFLOW_B(WORKFLOW_A.out.some_channel)
 </code></pre></div>
 </li>
 </ol>
@@ -6478,7 +7050,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
         
           
-          <a href="../debugging/" class="md-footer__link md-footer__link--prev" aria-label="이전: 워크플로우 디버깅">
+          <a href="../debugging/" class="md-footer__link md-footer__link--prev" aria-label="이전: 워크플로우 문제 해결">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -6488,7 +7060,7 @@ window.mkdocsQuizConfig = {
                 이전
               </span>
               <div class="md-ellipsis">
-                워크플로우 디버깅
+                워크플로우 문제 해결
               </div>
             </div>
           </a>

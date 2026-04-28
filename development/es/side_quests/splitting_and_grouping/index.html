@@ -2348,7 +2348,7 @@
   <span class="md-ellipsis">
     
   
-    Orientación
+    Primeros pasos
   
 
     
@@ -2404,7 +2404,7 @@
   <span class="md-ellipsis">
     
   
-    Patrones Esenciales de Scripting en Nextflow
+    Patrones Esenciales de Scripting
   
 
     
@@ -2460,7 +2460,7 @@
   <span class="md-ellipsis">
     
   
-    Metadatos y meta maps
+    Metadatos y Meta Maps
   
 
     
@@ -3157,7 +3157,7 @@
   <span class="md-ellipsis">
     
   
-    Pruebas con nf-test
+    Index
   
 
     
@@ -3185,7 +3185,7 @@
   <span class="md-ellipsis">
     
   
-    Depuración de Workflows
+    Resolución de Problemas en Workflows
   
 
     
@@ -4631,7 +4631,7 @@ Comenzaremos con un archivo CSV que contiene información de muestras y archivos
 <h3 id="requisitos-previos">Requisitos previos<a class="headerlink" href="#requisitos-previos" title="Permanent link">&para;</a></h3>
 <p>Antes de comenzar esta misión secundaria, debes:</p>
 <ul>
-<li>Haber completado el tutorial <a href="../hello_nextflow/README.md">Hello Nextflow</a> o un curso equivalente para principiantes.</li>
+<li>Haber completado el tutorial <a href="../../hello_nextflow/">Hello Nextflow</a> o un curso equivalente para principiantes.</li>
 <li>Estar familiarizado con los conceptos y mecanismos básicos de Nextflow (procesos, canales, operadores, trabajo con archivos, metadatos)</li>
 </ul>
 <p><strong>Opcional:</strong> Recomendamos completar primero la misión secundaria <a href="../metadata/">Metadata in workflows</a>.
@@ -4639,7 +4639,7 @@ Esta cubre los fundamentos de lectura de archivos CSV con <code>splitCsv</code> 
 <hr />
 <h2 id="0-primeros-pasos">0. Primeros pasos<a class="headerlink" href="#0-primeros-pasos" title="Permanent link">&para;</a></h2>
 <h4 id="abrir-el-codespace-de-capacitacion">Abrir el codespace de capacitación<a class="headerlink" href="#abrir-el-codespace-de-capacitacion" title="Permanent link">&para;</a></h4>
-<p>Si aún no lo has hecho, asegúrate de abrir el entorno de capacitación como se describe en la <a href="../envsetup/index.md">Configuración del entorno</a>.</p>
+<p>Si aún no lo has hecho, asegúrate de abrir el entorno de capacitación como se describe en la <a href="../../envsetup/">Configuración del entorno</a>.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h4 id="moverse-al-directorio-del-proyecto">Moverse al directorio del proyecto<a class="headerlink" href="#moverse-al-directorio-del-proyecto" title="Permanent link">&para;</a></h4>
 <p>Vamos a movernos al directorio donde se encuentran los archivos de este tutorial.</p>
@@ -4648,6 +4648,7 @@ Esta cubre los fundamentos de lectura de archivos CSV con <code>splitCsv</code> 
 <p>Puedes configurar VSCode para que se enfoque en este directorio:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>code<span class="w"> </span>.
 </code></pre></div>
+<p>El editor se abre con el directorio del proyecto en foco.</p>
 <h4 id="revisar-los-materiales">Revisar los materiales<a class="headerlink" href="#revisar-los-materiales" title="Permanent link">&para;</a></h4>
 <p>Encontrarás un archivo de workflow principal y un directorio <code>data</code> que contiene una hoja de muestras llamada <code>samplesheet.csv</code>.</p>
 <div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">.</span>
@@ -4674,6 +4675,7 @@ Si no estás familiarizado con el análisis de cáncer, solo debes saber que est
 <p class="admonition-title">Nota</p>
 <p>No te preocupes si no estás familiarizado con este diseño experimental, no es fundamental para entender este tutorial.</p>
 </div>
+<p>Con el contenido de los datos comprendido, podemos ver qué necesita lograr el workflow.</p>
 <h4 id="revisar-la-tarea">Revisar la tarea<a class="headerlink" href="#revisar-la-tarea" title="Permanent link">&para;</a></h4>
 <p>Tu desafío es escribir un workflow de Nextflow que:</p>
 <ol>
@@ -4745,7 +4747,7 @@ Si no estás familiarizado con el análisis de cáncer, solo debes saber que est
 </code></pre></div>
 <details class="success">
 <summary>Salida del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
@@ -4803,7 +4805,7 @@ Si no estás familiarizado con el análisis de cáncer, solo debes saber que est
 </code></pre></div>
 <details class="success">
 <summary>Salida del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="go">Launching `main.nf` [admiring_brown] DSL2 - revision: 194d61704d</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
@@ -4819,6 +4821,7 @@ Si no estás familiarizado con el análisis de cáncer, solo debes saber que est
 <p>Esto se logra con el único closure que introdujimos anteriormente:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="w">    </span><span class="o">.</span><span class="na">filter</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
+<p>Este filtro se encadena directamente en la operación del canal.</p>
 <h3 id="22-crear-canales-filtrados-separados">2.2. Crear canales filtrados separados<a class="headerlink" href="#22-crear-canales-filtrados-separados" title="Permanent link">&para;</a></h3>
 <p>Actualmente estamos aplicando el filtro al canal creado directamente desde el CSV, pero queremos filtrar de más de una manera, así que reescribamos la lógica para crear un canal filtrado separado para las muestras normales:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Después</label><label for="__tabbed_3_2">Antes</label></div>
@@ -4866,7 +4869,7 @@ Si no estás familiarizado con el análisis de cáncer, solo debes saber que est
 </code></pre></div>
 <details class="success">
 <summary>Salida del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74</span>
 <a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
@@ -4914,7 +4917,7 @@ Si no estás familiarizado con el análisis de cáncer, solo debes saber que est
 </code></pre></div>
 <details class="success">
 <summary>Salida del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
@@ -4928,7 +4931,7 @@ Si no estás familiarizado con el análisis de cáncer, solo debes saber que est
 <a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="go">Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>Hemos separado las muestras normales y tumorales en dos canales diferentes, y usamos un closure proporcionado a <code>view()</code> para etiquetarlas de manera diferente en la salida: <code>ch_tumor_samples.view{'Tumor sample: ' + it}</code>.</p>
+<p>Hemos separado las muestras normales y tumorales en dos canales diferentes, y usamos un closure proporcionado a <code>view()</code> para etiquetarlas de manera diferente en la salida: <code class="highlight"><span class="n">ch_tumor_samples</span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Tumor sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span></code>.</p>
 <h3 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h3>
 <p>En esta sección, has aprendido:</p>
 <ul>
@@ -4949,7 +4952,7 @@ Si no estás familiarizado con el análisis de cáncer, solo debes saber que est
 </code></pre></div>
 <details class="success">
 <summary>Salida del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
@@ -5014,7 +5017,7 @@ Si no estás familiarizado con el análisis de cáncer, solo debes saber que est
 </code></pre></div>
 <details class="success">
 <summary>Salida del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
 <a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="go">Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d</span>
 <a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>
@@ -5082,7 +5085,7 @@ Si no estás familiarizado con el análisis de cáncer, solo debes saber que est
 </code></pre></div>
 <details class="success">
 <summary>Salida del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="go">Launching `main.nf` [soggy_wiles] DSL2 - revision: 3bc1979889</span>
 <a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>
@@ -5148,7 +5151,7 @@ Con este conocimiento, podemos combinar exitosamente canales basándonos en un c
 </code></pre></div>
 <details class="success">
 <summary>Salida del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">Launching `main.nf` [prickly_wing] DSL2 - revision: 3bebf22dee</span>
 <a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>
@@ -5199,7 +5202,7 @@ Con este conocimiento, podemos combinar exitosamente canales basándonos en un c
 </code></pre></div>
 <details class="success">
 <summary>Salida del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>
 <a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="go">Launching `main.nf` [reverent_wing] DSL2 - revision: 847016c3b7</span>
 <a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a>
@@ -5299,7 +5302,7 @@ Con este conocimiento, podemos combinar exitosamente canales basándonos en un c
 </code></pre></div>
 <details class="success">
 <summary>Salida del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>
 <a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="go">Launching `main.nf` [angry_meninsky] DSL2 - revision: 2edc226b1d</span>
 <a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a>
@@ -5378,7 +5381,7 @@ Con este conocimiento, podemos combinar exitosamente canales basándonos en un c
 </code></pre></div>
 <details class="success">
 <summary>Salida del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>
 <a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a><span class="go">Launching `main.nf` [confident_leavitt] DSL2 - revision: a2303895bd</span>
 <a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a>
@@ -5388,6 +5391,7 @@ Con este conocimiento, podemos combinar exitosamente canales basándonos en un c
 <a id="__codelineno-54-8" name="__codelineno-54-8" href="#__codelineno-54-8"></a><span class="go">[[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
+<p>Cada tupla ahora contiene solo la clave de agrupación y las dos rutas de archivos, sin campos repetidos.</p>
 <h3 id="conclusion_1">Conclusión<a class="headerlink" href="#conclusion_1" title="Permanent link">&para;</a></h3>
 <p>En esta sección, has aprendido:</p>
 <ul>
@@ -5447,7 +5451,7 @@ Con este conocimiento, podemos combinar exitosamente canales basándonos en un c
 </code></pre></div>
 <details class="success">
 <summary>Salida del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a>
 <a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="go">Launching `main.nf` [mighty_tesla] DSL2 - revision: ae013ab70b</span>
 <a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a>
@@ -5522,7 +5526,7 @@ Con este conocimiento, podemos combinar exitosamente canales basándonos en un c
 </code></pre></div>
 <details class="success">
 <summary>Salida del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>
 <a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a><span class="go">Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd</span>
 <a id="__codelineno-67-4" name="__codelineno-67-4" href="#__codelineno-67-4"></a>
@@ -5638,7 +5642,7 @@ Con este conocimiento, podemos combinar exitosamente canales basándonos en un c
 </code></pre></div>
 <details class="success">
 <summary>Salida del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-72-2" name="__codelineno-72-2" href="#__codelineno-72-2"></a>
 <a id="__codelineno-72-3" name="__codelineno-72-3" href="#__codelineno-72-3"></a><span class="go">Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76</span>
 <a id="__codelineno-72-4" name="__codelineno-72-4" href="#__codelineno-72-4"></a>
@@ -5713,7 +5717,7 @@ Con este conocimiento, podemos combinar exitosamente canales basándonos en un c
 </code></pre></div>
 <details class="success">
 <summary>Salida del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a>
 <a id="__codelineno-76-3" name="__codelineno-76-3" href="#__codelineno-76-3"></a><span class="go">Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d</span>
 <a id="__codelineno-76-4" name="__codelineno-76-4" href="#__codelineno-76-4"></a>
@@ -5733,6 +5737,7 @@ Con este conocimiento, podemos combinar exitosamente canales basándonos en un c
 <p class="admonition-title">Nota</p>
 <p><a href="https://www.nextflow.io/docs/latest/reference/operator.html#transpose"><code>transpose</code></a> es lo opuesto de groupTuple. Desempaqueta los elementos en un canal y los aplana. ¡Intenta agregar <code>transpose</code> y deshacer la agrupación que realizamos anteriormente!</p>
 </div>
+<p>Ambas direcciones de la operación — agrupar y desagrupar — están ahora en tu conjunto de herramientas.</p>
 <h3 id="conclusion_3">Conclusión<a class="headerlink" href="#conclusion_3" title="Permanent link">&para;</a></h3>
 <p>En esta sección, has aprendido:</p>
 <ul>
@@ -7568,7 +7573,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../metadata/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Metadatos y meta maps">
+          <a href="../metadata/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Metadatos y Meta Maps">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -7578,20 +7583,20 @@ window.mkdocsQuizConfig = {
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Metadatos y meta maps
+                Metadatos y Meta Maps
               </div>
             </div>
           </a>
         
         
           
-          <a href="../nf_test/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Pruebas con nf-test">
+          <a href="../nf_test/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Index">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                Pruebas con nf-test
+                Index
               </div>
             </div>
             <div class="md-footer__button md-icon">

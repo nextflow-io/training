@@ -2348,7 +2348,7 @@
   <span class="md-ellipsis">
     
   
-    Orientamento
+    Per iniziare
   
 
     
@@ -3340,7 +3340,7 @@
   <span class="md-ellipsis">
     
   
-    Pattern Essenziali di Scripting in Nextflow
+    Pattern Essenziali di Scripting
   
 
     
@@ -3452,7 +3452,7 @@
   <span class="md-ellipsis">
     
   
-    Test con nf-test
+    Index
   
 
     
@@ -3480,7 +3480,7 @@
   <span class="md-ellipsis">
     
   
-    Debug dei Workflow
+    Risoluzione dei Problemi nei Workflow
   
 
     
@@ -5208,7 +5208,7 @@
 <p>A differenza degli altri moduli di formazione, questa guida è organizzata come una raccolta di suggerimenti rapidi, consigli pratici ed esempi concreti, piuttosto che come un tutorial passo dopo passo. Ogni sezione può essere esplorata in modo indipendente in base ai vostri interessi e alle vostre esigenze di sviluppo attuali. Sentitevi liberi di saltare da una sezione all'altra e di concentrarvi sulle funzionalità che saranno più immediatamente utili per il vostro sviluppo di flussi di lavoro.</p>
 </div>
 <h2 id="cosa-dovreste-gia-sapere">Cosa dovreste già sapere<a class="headerlink" href="#cosa-dovreste-gia-sapere" title="Permanent link">&para;</a></h2>
-<p>Questa guida presuppone che abbiate completato il corso di formazione <a href="../hello_nextflow/">Hello Nextflow</a> e che abbiate familiarità con i concetti fondamentali di Nextflow, tra cui:</p>
+<p>Questa guida presuppone che abbiate completato il corso di formazione <a href="../../hello_nextflow/">Hello Nextflow</a> e che abbiate familiarità con i concetti fondamentali di Nextflow, tra cui:</p>
 <ul>
 <li><strong>Struttura di base del flusso di lavoro</strong>: Comprensione dei processi, dei flussi di lavoro e di come si collegano tra loro</li>
 <li><strong>Operazioni sui canali</strong>: Creazione di canali, passaggio di dati tra processi e utilizzo degli operatori di base</li>
@@ -5227,7 +5227,7 @@
 </ul>
 <div class="admonition info">
 <p class="admonition-title">Perché le funzionalità dell'IDE adesso?</p>
-<p>Probabilmente avete già utilizzato VS Code durante il corso <a href="../hello_nextflow/">Hello Nextflow</a>, ma abbiamo mantenuto il focus sull'apprendimento dei fondamentali di Nextflow piuttosto che sulle funzionalità dell'IDE. Ora che avete familiarità con i concetti di base di Nextflow come processi, flussi di lavoro, canali e moduli, siete pronti a sfruttare le sofisticate funzionalità dell'IDE che vi renderanno sviluppatori più efficienti.</p>
+<p>Probabilmente avete già utilizzato VS Code durante il corso <a href="../../hello_nextflow/">Hello Nextflow</a>, ma abbiamo mantenuto il focus sull'apprendimento dei fondamentali di Nextflow piuttosto che sulle funzionalità dell'IDE. Ora che avete familiarità con i concetti di base di Nextflow come processi, flussi di lavoro, canali e moduli, siete pronti a sfruttare le sofisticate funzionalità dell'IDE che vi renderanno sviluppatori più efficienti.</p>
 <p>Pensate a questo come a un "salto di livello" nel vostro ambiente di sviluppo: lo stesso editor che avete già utilizzato ha capacità molto più potenti che diventano davvero preziose una volta che capite cosa vi stanno aiutando a fare.</p>
 </div>
 <hr />
@@ -5279,16 +5279,16 @@
 <p>Per installare l'estensione manualmente:</p>
 <ol>
 <li>Aprite VS Code</li>
-<li>Andate alla vista Estensioni cliccando sull'icona delle estensioni a sinistra: <img alt="icona estensioni" src="img/extensions_icon.png" /> (scorciatoia <code>Ctrl/Cmd+Shift+X</code> se eseguite VSCode localmente)</li>
+<li>Andate alla vista Estensioni cliccando sull'icona delle estensioni a sinistra: <img alt="icona estensioni" src="../img/extensions_icon.png" /> (scorciatoia <code>Ctrl/Cmd+Shift+X</code> se eseguite VSCode localmente)</li>
 <li>Cercate "Nextflow"</li>
 <li>Installate l'estensione ufficiale Nextflow</li>
 </ol>
-<p><img alt="Installa l'estensione Nextflow" src="img/install_extension.png" /></p>
+<p><img alt="Installa l'estensione Nextflow" src="../img/install_extension.png" /></p>
 <h3 id="02-layout-del-workspace">0.2. Layout del Workspace<a class="headerlink" href="#02-layout-del-workspace" title="Permanent link">&para;</a></h3>
 <p>Poiché avete già utilizzato VS Code durante Hello Nextflow, avete già familiarità con le basi. Ecco come organizzare il vostro workspace in modo efficiente per questa sessione:</p>
 <ul>
 <li><strong>Area Editor</strong>: Per visualizzare e modificare i file. Potete dividerla in più pannelli per confrontare i file affiancati.</li>
-<li><strong>File Explorer</strong> (clic su <img alt="icona file explorer" src="img/files_icon.png" />) (<code>Ctrl/Cmd+Shift+E</code>): I file e le cartelle locali sul vostro sistema. Tenetelo aperto a sinistra per navigare tra i file</li>
+<li><strong>File Explorer</strong> (clic su <img alt="icona file explorer" src="../img/files_icon.png" />) (<code>Ctrl/Cmd+Shift+E</code>): I file e le cartelle locali sul vostro sistema. Tenetelo aperto a sinistra per navigare tra i file</li>
 <li><strong>Terminale Integrato</strong> (<code>Ctrl+Shift+</code> backtick sia per Windows che per MacOS): Un terminale per interagire con il computer in basso. Usatelo per eseguire Nextflow o altri comandi.</li>
 <li><strong>Pannello Problemi</strong> (<code>Ctrl+Shift+M</code>): VS Code mostrerà qui tutti gli errori e i problemi rilevati. È utile per evidenziare i problemi a colpo d'occhio.</li>
 </ul>
@@ -5302,7 +5302,7 @@
 <p>Ora che il vostro workspace è configurato, esploriamo come l'evidenziazione della sintassi di VS Code vi aiuta a leggere e scrivere codice Nextflow in modo più efficace.</p>
 <h3 id="11-elementi-di-sintassi-nextflow">1.1. Elementi di Sintassi Nextflow<a class="headerlink" href="#11-elementi-di-sintassi-nextflow" title="Permanent link">&para;</a></h3>
 <p>Aprite <code>basic_workflow.nf</code> per vedere l'evidenziazione della sintassi in azione:</p>
-<p><img alt="Presentazione della sintassi" src="img/syntax_showcase.png" /></p>
+<p><img alt="Presentazione della sintassi" src="../img/syntax_showcase.png" /></p>
 <p>Notate come VS Code evidenzia:</p>
 <ul>
 <li><strong>Parole chiave</strong> (<code>process</code>, <code>workflow</code>, <code>input</code>, <code>output</code>, <code>script</code>) con colori distinti</li>
@@ -5336,7 +5336,7 @@
 <p>Le opzioni di auto-completamento variano a seconda di dove vi trovate nel codice:</p>
 <h4 id="operazioni-sui-canali">Operazioni sui Canali<a class="headerlink" href="#operazioni-sui-canali" title="Permanent link">&para;</a></h4>
 <p>Aprite di nuovo <code>basic_workflow.nf</code> e provate a digitare <code>channel.</code> nel blocco workflow:</p>
-<p><img alt="Auto-completamento dei canali" src="img/autocomplete_channel.png" /></p>
+<p><img alt="Auto-completamento dei canali" src="../img/autocomplete_channel.png" /></p>
 <p>Vedrete suggerimenti per:</p>
 <ul>
 <li><code>fromPath()</code> - Crea un canale da percorsi di file</li>
@@ -5347,13 +5347,13 @@
 </ul>
 <p>Questo vi aiuta a trovare rapidamente la fabbrica di canali giusta da usare senza dover ricordare i nomi esatti dei metodi.</p>
 <p>Potete anche scoprire gli operatori disponibili da applicare ai canali. Ad esempio, digitate <code>FASTQC.out.html.</code> per vedere le operazioni disponibili:</p>
-<p><img alt="Auto-completamento degli operatori sui canali" src="img/autocomplete_operators.png" /></p>
+<p><img alt="Auto-completamento degli operatori sui canali" src="../img/autocomplete_operators.png" /></p>
 <h4 id="direttive-di-processo">Direttive di Processo<a class="headerlink" href="#direttive-di-processo" title="Permanent link">&para;</a></h4>
 <p>All'interno di un blocco script di un processo, digitate <code>task.</code> per vedere le proprietà di runtime disponibili:</p>
-<p><img alt="Auto-completamento delle proprietà task" src="img/autocomplete_task.png" /></p>
+<p><img alt="Auto-completamento delle proprietà task" src="../img/autocomplete_task.png" /></p>
 <h4 id="configurazione">Configurazione<a class="headerlink" href="#configurazione" title="Permanent link">&para;</a></h4>
 <p>Aprite nextflow.config e digitate <code>process.</code> in qualsiasi punto per vedere le direttive di processo disponibili:</p>
-<p><img alt="Auto-completamento della configurazione" src="img/autocomplete_config.png" /></p>
+<p><img alt="Auto-completamento della configurazione" src="../img/autocomplete_config.png" /></p>
 <p>Vedrete suggerimenti per:</p>
 <ul>
 <li><code>executor</code></li>
@@ -5369,12 +5369,12 @@
 <p>Il rilevamento degli errori in tempo reale di VS Code vi aiuta a individuare i problemi prima di eseguire il vostro flusso di lavoro.</p>
 <h3 id="31-rilevamento-degli-errori-di-sintassi">3.1. Rilevamento degli Errori di Sintassi<a class="headerlink" href="#31-rilevamento-degli-errori-di-sintassi" title="Permanent link">&para;</a></h3>
 <p>Creiamo un errore deliberato per vedere il rilevamento in azione. Aprite <code>basic_workflow.nf</code> e cambiate il nome del processo da <code>FASTQC</code> a <code>FASTQ</code> (o qualsiasi altro nome non valido). VS Code evidenzierà immediatamente l'errore nel blocco workflow con una sottolineatura ondulata rossa:</p>
-<p><img alt="Sottolineatura dell'errore" src="img/error_underline.png" /></p>
+<p><img alt="Sottolineatura dell'errore" src="../img/error_underline.png" /></p>
 <h3 id="32-pannello-problemi">3.2. Pannello Problemi<a class="headerlink" href="#32-pannello-problemi" title="Permanent link">&para;</a></h3>
 <p>Oltre all'evidenziazione dei singoli errori, VS Code fornisce un pannello Problemi centralizzato che aggrega tutti gli errori, gli avvisi e i messaggi informativi nel vostro workspace. Apritelo con <code>Ctrl/Cmd+Shift+M</code> e usate l'icona del filtro per mostrare solo gli errori relativi al file corrente:</p>
-<p><img alt="Filtra il pannello problemi" src="img/active_file.png" /></p>
+<p><img alt="Filtra il pannello problemi" src="../img/active_file.png" /></p>
 <p>Cliccate su qualsiasi problema per passare direttamente alla riga problematica</p>
-<p><img alt="Pannello Problemi" src="img/problems_panel.png" /></p>
+<p><img alt="Pannello Problemi" src="../img/problems_panel.png" /></p>
 <p>Correggete l'errore riportando il nome del processo a <code>FASTQC</code>.</p>
 <h3 id="33-pattern-di-errori-comuni">3.3. Pattern di Errori Comuni<a class="headerlink" href="#33-pattern-di-errori-comuni" title="Permanent link">&para;</a></h3>
 <p>Gli errori comuni nella sintassi Nextflow includono:</p>
@@ -5418,37 +5418,35 @@
 <span class="normal"><a href="#__codelineno-5-18">18</a></span>
 <span class="normal"><a href="#__codelineno-5-19">19</a></span>
 <span class="normal"><a href="#__codelineno-5-20">20</a></span>
-<span class="normal"><a href="#__codelineno-5-21">21</a></span>
-<span class="normal"><a href="#__codelineno-5-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTQC</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-5-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTQC</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="w">    </span><span class="n">tag</span><span class="w"> </span><span class="s2">&quot;${sample_id}&quot;</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s2">&quot;${params.output_dir}/fastqc&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6"></a>
-<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">sample_id</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">reads</span><span class="o">)</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9"></a>
-<a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">sample_id</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;*.html&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">html</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">sample_id</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;*.zip&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">zip</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13"></a>
-<a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="s2">    fastqc \\</span>
-<a id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="s2">        ${args} \\</span>
-<a id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="s2">        --threads ${task.cpus} \\</span>
-<a id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="s2">        ${reads}</span>
-<a id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="o">}</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">sample_id</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">reads</span><span class="o">)</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">sample_id</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;*.html&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">html</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">sample_id</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;*.zip&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">zip</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="s2">    fastqc \\</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="s2">        ${args} \\</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="s2">        --threads ${task.cpus} \\</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="s2">        ${reads}</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
 <h3 id="41-vai-alla-definizione">4.1. Vai alla Definizione<a class="headerlink" href="#41-vai-alla-definizione" title="Permanent link">&para;</a></h3>
 <p>Se passate il mouse sul nome di un processo come <code>FASTQC</code>, vedrete un popup con l'interfaccia del modulo (input e output):</p>
-<p><img alt="Vai alla definizione" src="img/syntax.png" /></p>
+<p><img alt="Vai alla definizione" src="../img/syntax.png" /></p>
 <p>Questa funzionalità è particolarmente preziosa quando si creano flussi di lavoro, poiché consente di comprendere l'interfaccia del modulo senza aprire direttamente il file del modulo.</p>
 <p>Potete navigare rapidamente verso qualsiasi definizione di processo, modulo o variabile usando <strong>Ctrl/Cmd-click</strong>. Passate il mouse sul link al file del modulo nella parte superiore dello script e seguite il link come suggerito:</p>
-<p><img alt="Segui il link" src="img/follow_link.png" /></p>
+<p><img alt="Segui il link" src="../img/follow_link.png" /></p>
 <p>Lo stesso vale per i nomi dei processi. Tornate a <code>basic_workflow.nf</code> e provate questo sul nome del processo <code>FASTQC</code> nel blocco workflow. Questo vi porta direttamente al nome del processo (che in questo esempio coincide con il file del modulo, ma potrebbe trovarsi a metà di un file molto più grande).</p>
 <p>Per tornare al punto precedente, usate <strong>Alt+←</strong> (o <strong>Ctrl+-</strong> su Mac). Questo è un modo potente per esplorare il codice senza perdere il proprio posto.</p>
 <p>Ora esploriamo la navigazione in un flusso di lavoro più complesso usando <code>complex_workflow.nf</code> (il file solo illustrativo menzionato in precedenza). Questo flusso di lavoro contiene più processi definiti in file di modulo separati, oltre ad alcuni inline. Sebbene le strutture multi-file complesse possano essere difficili da navigare manualmente, la possibilità di saltare alle definizioni rende l'esplorazione molto più gestibile.</p>
@@ -5462,7 +5460,7 @@
 </ol>
 <h3 id="42-navigazione-tra-simboli">4.2. Navigazione tra Simboli<a class="headerlink" href="#42-navigazione-tra-simboli" title="Permanent link">&para;</a></h3>
 <p>Con <code>complex_workflow.nf</code> ancora aperto, potete ottenere una panoramica di tutti i simboli nel file digitando <code>@</code> nella barra di ricerca in cima a VSCode (la scorciatoia da tastiera è <code>Ctrl/Cmd+Shift+O</code>, ma potrebbe non funzionare in Codespaces). Questo apre il pannello di navigazione dei simboli, che elenca tutti i simboli nel file corrente:</p>
-<p><img alt="Navigazione tra simboli" src="img/symbols.png" /></p>
+<p><img alt="Navigazione tra simboli" src="../img/symbols.png" /></p>
 <p>Questo mostra:</p>
 <ul>
 <li>Tutte le definizioni dei processi</li>
@@ -5472,17 +5470,17 @@
 <p>Iniziate a digitare per filtrare i risultati.</p>
 <h3 id="43-trova-tutti-i-riferimenti">4.3. Trova Tutti i Riferimenti<a class="headerlink" href="#43-trova-tutti-i-riferimenti" title="Permanent link">&para;</a></h3>
 <p>Capire dove un processo o una variabile viene utilizzato in tutto il codebase può essere molto utile. Ad esempio, se volete trovare tutti i riferimenti al processo <code>FASTQC</code>, iniziate navigando verso la sua definizione. Potete farlo aprendo direttamente <code>modules/fastqc.nf</code>, oppure usando la funzionalità di navigazione rapida di VS Code con <code>Ctrl/Cmd-click</code> come abbiamo fatto sopra. Una volta alla definizione del processo, fate clic destro sul nome del processo <code>FASTQC</code> e selezionate "Find All References" dal menu contestuale per vedere tutte le istanze in cui viene utilizzato.</p>
-<p><img alt="Trova riferimenti" src="img/references.png" /></p>
+<p><img alt="Trova riferimenti" src="../img/references.png" /></p>
 <p>Questa funzionalità mostra tutte le istanze in cui <code>FASTQC</code> è referenziato nel vostro workspace, incluso il suo utilizzo nei due flussi di lavoro distinti. Questa informazione è fondamentale per valutare il potenziale impatto delle modifiche al processo <code>FASTQC</code>.</p>
 <h3 id="44-pannello-outline">4.4. Pannello Outline<a class="headerlink" href="#44-pannello-outline" title="Permanent link">&para;</a></h3>
-<p>Il pannello Outline, situato nella barra laterale Explorer (clic su <img alt="icona Explorer" src="img/files_icon.png" />), fornisce una comoda panoramica di tutti i simboli nel file corrente. Questa funzionalità consente di navigare rapidamente e gestire la struttura del codice visualizzando funzioni, variabili e altri elementi chiave in una vista gerarchica.</p>
-<p><img alt="Pannello Outline" src="img/outline.png" /></p>
+<p>Il pannello Outline, situato nella barra laterale Explorer (clic su <img alt="icona Explorer" src="../img/files_icon.png" />), fornisce una comoda panoramica di tutti i simboli nel file corrente. Questa funzionalità consente di navigare rapidamente e gestire la struttura del codice visualizzando funzioni, variabili e altri elementi chiave in una vista gerarchica.</p>
+<p><img alt="Pannello Outline" src="../img/outline.png" /></p>
 <p>Usate il pannello Outline per navigare rapidamente verso diverse parti del codice senza usare il browser dei file.</p>
 <h3 id="45-visualizzazione-dag">4.5. Visualizzazione DAG<a class="headerlink" href="#45-visualizzazione-dag" title="Permanent link">&para;</a></h3>
 <p>L'estensione Nextflow di VS Code può visualizzare il vostro flusso di lavoro come un Grafo Aciclico Diretto (DAG). Questo vi aiuta a comprendere il flusso di dati e le dipendenze tra i processi. Aprite <code>complex_workflow.nf</code> e cliccate sul pulsante "Preview DAG" sopra <code>workflow {</code> (il secondo blocco <code>workflow</code> in questo file):</p>
-<p><img alt="Anteprima DAG" src="img/dag_preview.png" /></p>
+<p><img alt="Anteprima DAG" src="../img/dag_preview.png" /></p>
 <p>Questo è solo il flusso di lavoro 'entry', ma potete anche visualizzare in anteprima il DAG per i flussi di lavoro interni cliccando sul pulsante "Preview DAG" sopra il flusso di lavoro <code>RNASEQ_PIPELINE {</code> più in alto:</p>
-<p><img alt="Anteprima DAG flusso di lavoro interno" src="img/dag_preview_inner.png" /></p>
+<p><img alt="Anteprima DAG flusso di lavoro interno" src="../img/dag_preview_inner.png" /></p>
 <p>Per questo flusso di lavoro, potete usare i nodi nel DAG per navigare verso le corrispondenti definizioni di processo nel codice. Cliccate su un nodo e vi porterà alla definizione del processo rilevante nell'editor. Soprattutto quando un flusso di lavoro cresce fino a raggiungere grandi dimensioni, questo può davvero aiutarvi a navigare nel codice e a capire come i processi sono collegati.</p>
 <h3 id="takeaway_4">Takeaway<a class="headerlink" href="#takeaway_4" title="Permanent link">&para;</a></h3>
 <p>Potete navigare in flussi di lavoro complessi in modo efficiente usando vai-alla-definizione, ricerca di simboli, trova riferimenti e visualizzazione DAG per comprendere la struttura del codice e le dipendenze.</p>
@@ -5508,7 +5506,7 @@
 <li>Fate clic destro sulla scheda <code>modules/fastqc.nf</code> e selezionate "Split Right"</li>
 <li>Ora potete vedere entrambi i file affiancati</li>
 </ol>
-<p><img alt="Editor diviso" src="img/split_editor.png" /></p>
+<p><img alt="Editor diviso" src="../img/split_editor.png" /></p>
 <p>Questo è prezioso quando:</p>
 <ul>
 <li>Si controllano le interfacce dei moduli mentre si scrivono le chiamate al flusso di lavoro, e l'anteprima non è sufficiente</li>
@@ -5517,11 +5515,11 @@
 </ul>
 <h3 id="53-ricerca-nellintero-progetto">5.3. Ricerca nell'Intero Progetto<a class="headerlink" href="#53-ricerca-nellintero-progetto" title="Permanent link">&para;</a></h3>
 <p>A volte è necessario trovare dove vengono utilizzati pattern specifici in tutto il progetto. Premete <code>Ctrl/Cmd+Shift+F</code> per aprire il pannello di ricerca.</p>
-<p>Provate a cercare <code>publishDir</code> nell'intero workspace:</p>
-<p><img alt="Ricerca nel progetto" src="img/project_search.png" /></p>
-<p>Questo vi mostra ogni file che utilizza le directory di pubblicazione, aiutandovi a:</p>
+<p>Provate a cercare <code>container</code> nell'intero workspace:</p>
+<p><img alt="Ricerca nel progetto" src="../img/project_search.png" /></p>
+<p>Questo vi mostra ogni file che utilizza la direttiva container, aiutandovi a:</p>
 <ul>
-<li>Comprendere i pattern di organizzazione dell'output</li>
+<li>Capire quali processi utilizzano container</li>
 <li>Trovare esempi di direttive specifiche</li>
 <li>Garantire la coerenza tra i moduli</li>
 </ul>
@@ -5569,7 +5567,7 @@
 <p>Usate di nuovo <strong>Ctrl+/</strong> (o <strong>Cmd+/</strong>) per decommentare il codice.</p>
 <h4 id="piegatura-del-codice-per-una-panoramica">Piegatura del Codice per una Panoramica<a class="headerlink" href="#piegatura-del-codice-per-una-panoramica" title="Permanent link">&para;</a></h4>
 <p>In <code>complex_workflow.nf</code>, notate le piccole frecce accanto alle definizioni dei processi. Cliccatele per piegare (comprimere) i processi:</p>
-<p><img alt="Piegatura del codice" src="img/code_folding.png" /></p>
+<p><img alt="Piegatura del codice" src="../img/code_folding.png" /></p>
 <p>Questo vi dà una panoramica di alto livello della struttura del vostro flusso di lavoro senza perdervi nei dettagli implementativi.</p>
 <h4 id="corrispondenza-delle-parentesi">Corrispondenza delle Parentesi<a class="headerlink" href="#corrispondenza-delle-parentesi" title="Permanent link">&para;</a></h4>
 <p>Posizionate il cursore accanto a qualsiasi parentesi <code>{</code> o <code>}</code> e VS Code evidenzia la parentesi corrispondente. Usate <strong>Ctrl+Shift+\</strong> (o <strong>Cmd+Shift+\</strong>) per saltare tra le parentesi corrispondenti.</p>
@@ -5610,8 +5608,8 @@
 <li>Viste diff inline</li>
 <li>Capacità di commit e push</li>
 </ul>
-<p>Aprite il pannello Source Control usando il pulsante source control (<img alt="icona Source control" src="img/source_control_icon.png" />) (<code>Ctrl+Shift+G</code> o <code>Cmd+Shift+G</code> se lavorate con VSCode localmente) per vedere le modifiche git e preparare i commit direttamente nell'editor.</p>
-<p><img alt="Pannello Source Control" src="img/source_control.png" /></p>
+<p>Aprite il pannello Source Control usando il pulsante source control (<img alt="icona Source control" src="../img/source_control_icon.png" />) (<code>Ctrl+Shift+G</code> o <code>Cmd+Shift+G</code> se lavorate con VSCode localmente) per vedere le modifiche git e preparare i commit direttamente nell'editor.</p>
+<p><img alt="Pannello Source Control" src="../img/source_control.png" /></p>
 <h3 id="72-esecuzione-e-ispezione-dei-flussi-di-lavoro">7.2. Esecuzione e Ispezione dei Flussi di Lavoro<a class="headerlink" href="#72-esecuzione-e-ispezione-dei-flussi-di-lavoro" title="Permanent link">&para;</a></h3>
 <p>Eseguiamo un flusso di lavoro e poi ispezioniamo i risultati. Nel terminale integrato (<code>Ctrl+Shift+</code> backtick sia per Windows che per MacOS), eseguite il flusso di lavoro di base:</p>
 <div class="highlight"><span class="filename">Run the basic workflow</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>basic_workflow.nf<span class="w"> </span>--input<span class="w"> </span>data/sample_data.csv<span class="w"> </span>--output_dir<span class="w"> </span>results
@@ -5666,7 +5664,7 @@
 <h3 id="cosa-ce-dopo_8">Cosa c'è dopo?<a class="headerlink" href="#cosa-ce-dopo_8" title="Permanent link">&para;</a></h3>
 <p>Applicate queste competenze IDE mentre lavorate su altri moduli di formazione, ad esempio:</p>
 <ul>
-<li><strong><a href="nf-test.md">nf-test</a></strong>: Create suite di test complete per i vostri flussi di lavoro</li>
+<li><strong><a href="../nf_test/">nf-test</a></strong>: Create suite di test complete per i vostri flussi di lavoro</li>
 <li><strong><a href="../../hello_nf-core/">Hello nf-core</a></strong>: Costruite pipeline di qualità produttiva con gli standard della community</li>
 </ul>
 <p>Il vero potere di queste funzionalità IDE emerge quando si lavora su progetti più grandi e complessi. Iniziate a incorporarle gradualmente nel vostro flusso di lavoro: nel giro di poche sessioni, diventeranno una seconda natura e trasformeranno il vostro approccio allo sviluppo con Nextflow.</p>
@@ -7411,7 +7409,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Piede" >
         
           
-          <a href="../orientation/" class="md-footer__link md-footer__link--prev" aria-label="Precedente: Orientamento">
+          <a href="../orientation/" class="md-footer__link md-footer__link--prev" aria-label="Precedente: Per iniziare">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -7421,20 +7419,20 @@ window.mkdocsQuizConfig = {
                 Precedente
               </span>
               <div class="md-ellipsis">
-                Orientamento
+                Per iniziare
               </div>
             </div>
           </a>
         
         
           
-          <a href="../essential_scripting_patterns/" class="md-footer__link md-footer__link--next" aria-label="Successivo: Pattern Essenziali di Scripting in Nextflow">
+          <a href="../essential_scripting_patterns/" class="md-footer__link md-footer__link--next" aria-label="Successivo: Pattern Essenziali di Scripting">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Successivo
               </span>
               <div class="md-ellipsis">
-                Pattern Essenziali di Scripting in Nextflow
+                Pattern Essenziali di Scripting
               </div>
             </div>
             <div class="md-footer__button md-icon">

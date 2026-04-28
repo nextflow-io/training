@@ -491,7 +491,7 @@
   <span class="md-ellipsis">
     
   
-    Startseite
+    Home
   
 
     
@@ -2230,7 +2230,7 @@
   <span class="md-ellipsis">
     
   
-    Teil 2: Variantenerkennung pro Probe
+    02 per sample variant calling
   
 
     
@@ -2962,7 +2962,7 @@
   <span class="md-ellipsis">
     
   
-    Orientierung
+    Erste Schritte
   
 
     
@@ -3018,7 +3018,7 @@
   <span class="md-ellipsis">
     
   
-    Wesentliche Nextflow-Scripting-Muster
+    Wesentliche Scripting-Muster
   
 
     
@@ -3130,7 +3130,7 @@
   <span class="md-ellipsis">
     
   
-    Testen mit nf-test
+    Index
   
 
     
@@ -4628,7 +4628,7 @@ Es entspricht dem Skript, das durch die Bearbeitung von Teil 4 dieses Trainings 
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">Launching `hello-containers.nf` [nice_escher] DSL2 - revision: d5dfdc9872</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
@@ -4645,11 +4645,11 @@ Es entspricht dem Skript, das durch die Bearbeitung von Teil 4 dieses Trainings 
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">├── Bonjour-output.txt</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">├── COLLECTED-batch-output.txt</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">├── Hello-output.txt</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">├── Holà-output.txt</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">├── Hola-output.txt</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">├── batch-report.txt</span>
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="go">├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="go">└── UPPER-Holà-output.txt</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="go">└── UPPER-Hola-output.txt</span>
 </code></pre></div>
 </details>
 <p>Wenn das bei dir funktioniert hat, bist du bereit zu lernen, wie man Container verwendet.</p>
@@ -4826,7 +4826,7 @@ Aber da wir keinen Zugriff auf das Dateisystem haben, können wir das nicht.</p>
 <div class="highlight"><span class="filename">data/greetings.csv</span><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go"> ____________________</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="go">/ Hello,English,123  \</span>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">| Bonjour,French,456 |</span>
-<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="go">\ Holà,Spanish,789   /</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="go">\ Hola,Spanish,789   /</span>
 <a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="go">--------------------</span>
 <a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="go">  \                                  ,+*^^*+___+++_</span>
 <a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="go">  \                           ,*^^^^              )</span>
@@ -5201,12 +5201,12 @@ Das bedeutet, dass du jedes beliebige Container-Image verwenden kannst, um deine
 
 <p>Denkst du, es wird funktionieren?</p>
 <p>Lass uns die vorherigen veröffentlichten Ausgaben löschen, um einen sauberen Ausgangspunkt zu haben, und den Workflow mit dem <code>-resume</code>-Flag ausführen.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>rm<span class="w"> </span>-r<span class="w"> </span>hello_containers/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>rm<span class="w"> </span>-r<span class="w"> </span>results/hello_containers/
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-containers.nf<span class="w"> </span>-resume
 </code></pre></div>
 <details class="failure">
 <summary>Befehlsausgabe (zur Klarheit bearbeitet)</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>
 <a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="go">Launching `hello-containers.nf` [lonely_woese] DSL2 - revision: abf1dccf7f</span>
 <a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>
@@ -5353,7 +5353,7 @@ Dies ist besser für Modularität, Code-Wartung und Reproduzierbarkeit.</p>
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>
 <a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="go">Launching `hello-containers.nf` [drunk_perlman] DSL2 - revision: abf1dccf7f</span>
 <a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a>
@@ -5374,10 +5374,10 @@ Wie üblich findest du die Workflow-Ausgaben im entsprechenden Ergebnisverzeichn
 <a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a><span class="go">│   ├── Bonjour-output.txt</span>
 <a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a><span class="go">│   ├── COLLECTED-batch-output.txt</span>
 <a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a><span class="go">│   ├── Hello-output.txt</span>
-<a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a><span class="go">│   ├── Holà-output.txt</span>
+<a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a><span class="go">│   ├── Hola-output.txt</span>
 <a id="__codelineno-45-8" name="__codelineno-45-8" href="#__codelineno-45-8"></a><span class="go">│   ├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-45-9" name="__codelineno-45-9" href="#__codelineno-45-9"></a><span class="go">│   ├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-45-10" name="__codelineno-45-10" href="#__codelineno-45-10"></a><span class="go">│   └── UPPER-Holà-output.txt</span>
+<a id="__codelineno-45-10" name="__codelineno-45-10" href="#__codelineno-45-10"></a><span class="go">│   └── UPPER-Hola-output.txt</span>
 <a id="__codelineno-45-11" name="__codelineno-45-11" href="#__codelineno-45-11"></a><span class="go">└── batch-report.txt</span>
 </code></pre></div>
 </details>
@@ -5385,7 +5385,7 @@ Wie üblich findest du die Workflow-Ausgaben im entsprechenden Ergebnisverzeichn
 <details class="abstract">
 <summary>Dateiinhalt</summary>
 <div class="highlight"><span class="filename">results/hello_containers/cowpy-COLLECTED-batch-output.txt</span><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">_________</span>
-<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="go">/ HOLà    \</span>
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="go">/ HOLA    \</span>
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="go">| HELLO   |</span>
 <a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a><span class="go">\ BONJOUR /</span>
 <a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a><span class="go">---------</span>

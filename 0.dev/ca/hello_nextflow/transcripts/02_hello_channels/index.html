@@ -487,7 +487,7 @@
   <span class="md-ellipsis">
     
   
-    Home
+    Inici
   
 
     
@@ -2342,7 +2342,7 @@
   <span class="md-ellipsis">
     
   
-    Orientació
+    Primers passos
   
 
     
@@ -2398,7 +2398,7 @@
   <span class="md-ellipsis">
     
   
-    Patrons Essencials de Scripting en Nextflow
+    Patrons Essencials de Scripting
   
 
     
@@ -2538,7 +2538,7 @@
   <span class="md-ellipsis">
     
   
-    Depuració de Workflows
+    Resolució de Problemes en Workflows
   
 
     
@@ -3767,7 +3767,7 @@
 <p>Si esteu interessats en com fer això amb les millors pràctiques, hi ha una missió secundària a <em>training.nextflow.io</em>, que tracta específicament sobre metadades i mapes meta, així que podeu aprofundir allà per a més detalls.</p>
 <h2 id="3-proporcionar-multiples-entrades-mitjancant-un-array">3. Proporcionar múltiples entrades mitjançant un array<a class="headerlink" href="#3-proporcionar-multiples-entrades-mitjancant-un-array" title="Permanent link">&para;</a></h2>
 <p>D'acord. A continuació explorarem una mica sobre com s'estructuren els canals i com difereixen d'altres tipus d'estructures de dades en el llenguatge de codificació. I pensaré una mica sobre com podria potencialment utilitzar un array, que podria ser un concepte familiar si veniu d'altres llenguatges.</p>
-<p>Puc utilitzar un array en un canal? Provem-ho. Crearé un array, i he copiat això de la documentació, <em>"greetings_array"</em> i <em>"Hello", "Bonjour"</em> i <em>"Holà"</em>. I després posaré això aquí en lloc de les meves cadenes codificades. Així que diré "channel.of" <em>"greetings_array"</em>, passant aquest array a un canal. Provem-ho.</p>
+<p>Puc utilitzar un array en un canal? Provem-ho. Crearé un array, i he copiat això de la documentació, <em>"greetings_array"</em> i <em>"Hello", "Bonjour"</em> i <em>"Hola"</em>. I després posaré això aquí en lloc de les meves cadenes codificades. Així que diré "channel.of" <em>"greetings_array"</em>, passant aquest array a un canal. Provem-ho.</p>
 <p>Obrir el terminal, i executar el pipeline.</p>
 <p>D'acord. Podeu veure que la declaració view aquí va imprimir el nostre array com s'esperava, però després tot aquest text vermell, o no serà vermell si encara teniu <em>"-ansi-log"</em> desactivat, però tot aquest text vermell ens està dient que alguna cosa va malament.</p>
 <p>Ja no tenim una marca de verificació verda aquí. Tenim una creu vermella, i si només faig això una mica més ample perquè sigui més fàcil de llegir, Nextflow ens està dient què va malament.</p>
@@ -3805,24 +3805,24 @@
 <h2 id="42-utilitzar-loperador-splitcsv-per-analitzar-el-fitxer">4.2. Utilitzar l'operador splitCsv() per analitzar el fitxer<a class="headerlink" href="#42-utilitzar-loperador-splitcsv-per-analitzar-el-fitxer" title="Permanent link">&para;</a></h2>
 <p>D'acord, donem una ullada a aquest canal i vegem com es veu. Podem fer <em>".view",</em> i he copiat això del lloc web. Així que <em>.view</em>, i tenim una closure dinàmica aquí i diem un nom de variable "<em>csv"</em> com a entrada. Així que això són els continguts del canal, i diem abans de splitCsv, i així és com es veu.</p>
 <p>Si l'executo de nou, encara fallarà, però ens mostrarà què hi ha dins d'aquest canal. No és particularment emocionant. És aquesta variable <em>path</em>. Així que podeu veure que només és una cadena aquí perquè s'està imprimint a un terminal, però és un objecte <em>path</em>, que conté la informació i les metadades sobre aquest fitxer.</p>
-<p>No volem passar les metadades del fitxer a l'entrada. Volem passar els continguts d'aquest fitxer. Si mirem el fitxer <em>greetings.csv</em>, podeu veure aquí que té aquestes variables diferents aquí. <em>Hello, Bonjour, Holà</em> de nou. I aquestes són les coses que realment volem passar al nostre procés, no només el fitxer mateix com un únic objecte.</p>
+<p>No volem passar les metadades del fitxer a l'entrada. Volem passar els continguts d'aquest fitxer. Si mirem el fitxer <em>greetings.csv</em>, podeu veure aquí que té aquestes variables diferents. <em>Hello, Bonjour, Hola</em> de nou. I aquestes són les coses que realment volem passar al nostre procés, no només el fitxer mateix com un únic objecte.</p>
 <p>Així que necessitem analitzar aquest fitxer CSV. Necessitem desempaquetar-lo, arribar als continguts del fitxer CSV, i després passar els continguts dins del canal al procés.</p>
 <p>Com probablement podeu dir pel missatge de registre, volem utilitzar el <em>splitCsv</em>, que és un altre operador, un altre operador de canal. Així que si faig "<em>dot" "s"</em>, i després podeu veure que està auto-suggerit. Ups, <em>splitCsv</em> i uns parèntesis.</p>
-<p>I després després de <em>splitCsv</em>, posaré una altra declaració <em>view</em> només perquè puguem veure com es veu després. Executem el pipeline i vegem què tenim.</p>
+<p>I després de <em>splitCsv</em>, posaré una altra declaració <em>view</em> només perquè puguem veure com es veu després. Executem el pipeline i vegem què tenim.</p>
 <p>D'acord. Encara ha fallat, però d'una manera nova i emocionant, que és progrés.</p>
 <p>Aquesta vegada de nou, tenim algun problema amb el nostre script, que s'ha renderitzat. Ara. Ja no tenim el path final, però tenim un array de variables, que sembla molt l'error que teníem abans quan estàvem passant un array com a entrada fixa.</p>
-<p>Amb el nostre registre de l'operador view, podem veure abans que <em>splitCsv</em> era el path. I efectivament, després de <em>splitCsv</em>, tenim tres sortides diferents i cadascuna d'aquestes sortides sembla molt cada una de les files del fitxer <em>greetings.csv</em>, que té sentit.</p>
+<p>Amb el nostre registre de l'operador view, podem veure que abans de <em>splitCsv</em> era el path. I efectivament, després de <em>splitCsv</em>, tenim tres sortides diferents i cadascuna d'aquestes sortides s'assembla molt a cada una de les files del fitxer <em>greetings.csv</em>, que té sentit.</p>
 <p>Així que el que ha passat aquí és que Nextflow ha analitzat aquest fitxer CSV donant-nos tres objectes, un array per a cada línia del fitxer CSV. Així que després tres vegades hem passat un array de variables al canal en lloc d'un únic valor de cadena.</p>
-<p>D'acord, així que l'última vegada que vam tenir aquest problema, vam utilitzar <em>flatten</em>. Només molt ràpidament. Provem flatten i vegem què passa.</p>
-<p>Puc anomenar aquestes variables, el que sigui. Així que l'anomenaré <em>myarray</em> perquè ja no és realment un CSV. Provem d'executar-lo de nou i vegem què passa amb <em>flatten</em>.</p>
-<p>Així que aquesta vegada executarem, vam analitzar el CSV en tres objectes array, i després el vam aplanar. I aquesta vegada va passar. I el pipeline de Nextflow s'ha executat. No obstant això podeu veure que <em>flatten</em> realment va a fons i aplana tot. I així obtenim tres entrades d'array independents per a cada fila. I així va executar el procés tres vegades cada fila d'un CSV. I ara tenim un munt de fitxers de resultats, i 123, 456, i tot tipus de coses, no només aquesta primera columna del CSV, que és el que realment volíem.</p>
+<p>D'acord, així que l'última vegada que vam tenir aquest problema, vam utilitzar <em>flatten</em>. Molt ràpidament. Provem flatten i vegem què passa.</p>
+<p>Puc anomenar aquestes variables com vulgui. Així que l'anomenaré <em>myarray</em> perquè ja no és realment un CSV. Provem d'executar-lo de nou i vegem què passa amb <em>flatten</em>.</p>
+<p>Així que aquesta vegada executarem, vam analitzar el CSV en tres objectes array, i després el vam aplanar. I aquesta vegada va passar. I el pipeline de Nextflow s'ha executat. No obstant això, podeu veure que <em>flatten</em> realment va a fons i aplana tot. I així obtenim tres entrades d'array independents per a cada fila. I per tant va executar el procés tres vegades per cada fila del CSV. I ara tenim un munt de fitxers de resultats, 123, 456, i tot tipus de coses, no només aquesta primera columna del CSV, que és el que realment volíem.</p>
 <h2 id="43-utilitzar-loperador-map-per-extreure-les-salutacions">4.3. Utilitzar l'operador map() per extreure les salutacions<a class="headerlink" href="#43-utilitzar-loperador-map-per-extreure-les-salutacions" title="Permanent link">&para;</a></h2>
 <p>Així que com arribem només a la primera columna? Si flatten és massa simplista aquí, necessitem un operador més complex on puguem realment personalitzar i dir-li què volem del CSV.</p>
 <p>Per fer això, utilitzarem <em>map</em>. Bàsicament <em>map</em> només diu, executa algun codi, alguna funció sobre cada element que em donin i fes algun tipus de transformació sobre ell. I perquè és tan flexible, el veureu aparèixer en el codi de Nextflow tot el temps.</p>
 <p>Per si mateix, no fa res. Així que no volem parèntesis regulars, volem una closure aquí i necessitem dir-li què fer. Així que diré <em>"row"</em>, perquè se li estan donant files del CSV, així que és un nom de variable lògic. És l'entrada. I vull retornar només el primer element d'aquest array.</p>
 <p>Els arrays a Nextflow es basen en zero, així que direm només el primer element, que és la fila zero. Si volguéssim la segona columna, podria ser un o la tercera columna ser dos, i així successivament. Podem retornar el que vulguem aquí, però retornaré només el primer valor.</p>
 <p>I ara, podem executar el pipeline de nou i veure si fa el que esperem.</p>
-<p>Efectivament, després de <em>splitCsv</em> tenim els nostres arrays, i després després del <em>map,</em> tenim les nostres cadenes netes i agradables, només <em>"Hello", "Bonjour"</em> i <em>"Holà"</em>. I el pipeline ara està fent el que volem. Fantàstic.</p>
+<p>Efectivament, després de <em>splitCsv</em> tenim els nostres arrays, i després després del <em>map,</em> tenim les nostres cadenes netes i agradables, només <em>"Hello", "Bonjour"</em> i <em>"Hola"</em>. I el pipeline ara està fent el que volem. Fantàstic.</p>
 <p>Així que podem desfer-nos de totes aquestes comandes view ara. Ja no les necessitem.</p>
 <h2 id="resum">Resum<a class="headerlink" href="#resum" title="Permanent link">&para;</a></h2>
 <p>Hem acabat el nostre tipus de depuració i aquest és el codi amb què acabem. Prenent el nostre paràmetre CLI anomenat <em>input</em>, que està classificat com un <em>Path</em>. Nextflow troba el path, el carrega, i entén el fitxer CSV. Retorna totes les diferents files. I després mapegem només el primer element d'aquesta fila al canal que tipus de dóna els continguts del canal, que es passa al procés.</p>

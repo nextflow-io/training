@@ -487,7 +487,7 @@
   <span class="md-ellipsis">
     
   
-    Startseite
+    Home
   
 
     
@@ -1610,7 +1610,7 @@
   <span class="md-ellipsis">
     
   
-    Teil 2: Variantenerkennung pro Probe
+    02 per sample variant calling
   
 
     
@@ -2342,7 +2342,7 @@
   <span class="md-ellipsis">
     
   
-    Orientierung
+    Erste Schritte
   
 
     
@@ -2398,7 +2398,7 @@
   <span class="md-ellipsis">
     
   
-    Wesentliche Nextflow-Scripting-Muster
+    Wesentliche Scripting-Muster
   
 
     
@@ -2510,7 +2510,7 @@
   <span class="md-ellipsis">
     
   
-    Testen mit nf-test
+    Index
   
 
     
@@ -3767,7 +3767,7 @@
 <p>Wenn du daran interessiert bist, wie man das mit Best Practices macht, gibt es eine Nebenquest auf <em>training.nextflow.io</em>, die sich speziell mit Metadaten und Meta-Maps befasst, also kannst du dort für mehr Details eintauchen.</p>
 <h2 id="3-mehrere-eingaben-uber-ein-array-bereitstellen">3. Mehrere Eingaben über ein Array bereitstellen<a class="headerlink" href="#3-mehrere-eingaben-uber-ein-array-bereitstellen" title="Permanent link">&para;</a></h2>
 <p>Okay. Als Nächstes werden wir ein bisschen darüber erkunden, wie Kanäle strukturiert sind und wie sie sich von anderen Arten von Datenstrukturen in der Programmiersprache unterscheiden. Und ich werde ein bisschen darüber nachdenken, wie ich potenziell ein Array verwenden könnte, was ein vertrautes Konzept sein könnte, wenn du von anderen Sprachen kommst.</p>
-<p>Kann ich ein Array in einem Kanal verwenden? Lass es uns versuchen. Ich werde ein Array erstellen, und ich habe das aus den Docs kopiert, <em>"greetings_array"</em> und <em>"Hello", "Bonjour"</em> und <em>"Holà"</em>. Und dann werde ich das hier anstelle meiner fest codierten Strings einfügen. Also sage ich "channel.of" <em>"greetings_array"</em>, dieses Array in einen Kanal übergeben. Lass es uns versuchen.</p>
+<p>Kann ich ein Array in einem Kanal verwenden? Lass es uns versuchen. Ich werde ein Array erstellen, und ich habe das aus den Docs kopiert, <em>"greetings_array"</em> und <em>"Hello", "Bonjour"</em> und <em>"Hola"</em>. Und dann werde ich das hier anstelle meiner fest codierten Strings einfügen. Also sage ich "channel.of" <em>"greetings_array"</em>, dieses Array in einen Kanal übergeben. Lass es uns versuchen.</p>
 <p>Terminal hochbringen und die Pipeline ausführen.</p>
 <p>Okay. Du kannst sehen, dass die view-Anweisung hier unser Array wie erwartet ausgegeben hat, aber dann all dieser rote Text, oder er wird nicht rot sein, wenn du immer noch <em>"-ansi-log"</em> aus hast, aber all dieser rote Text sagt uns, dass etwas schief gelaufen ist.</p>
 <p>Wir haben hier kein schönes grünes Häkchen mehr. Wir haben ein rotes Kreuz, und wenn ich das nur ein bisschen breiter mache, damit es leichter zu lesen ist, sagt uns Nextflow, was schief gelaufen ist.</p>
@@ -3805,7 +3805,7 @@
 <h2 id="42-den-splitcsv-operator-verwenden-um-die-datei-zu-parsen">4.2. Den splitCsv()-Operator verwenden, um die Datei zu parsen<a class="headerlink" href="#42-den-splitcsv-operator-verwenden-um-die-datei-zu-parsen" title="Permanent link">&para;</a></h2>
 <p>Okay, lass uns einen Blick auf diesen Kanal werfen und sehen, wie er aussieht. Wir können <em>".view"</em> machen, und ich habe das von der Website kopiert. Also <em>.view</em>, und wir haben eine dynamische Closure hier und wir sagen einen Variablennamen "<em>csv"</em> als Eingabe. Das sind also die Kanalinhalte, und wir sagen vor splitCsv, und so sieht es aus.</p>
 <p>Wenn ich es nochmal ausführe, wird es immer noch fehlschlagen, aber es wird uns zeigen, was in diesem Kanal ist. Es ist nicht besonders aufregend. Es ist diese <em>path</em>-Variable. Du kannst also sehen, es ist nur ein String hier, weil es ins Terminal ausgegeben wird, aber es ist ein <em>path</em>-Objekt, das die Informationen und Metadaten über diese Datei enthält.</p>
-<p>Wir wollen nicht die Metadaten der Datei an die Eingabe übergeben. Wir wollen den Inhalt dieser Datei übergeben. Wenn wir uns die <em>greetings.csv</em>-Datei ansehen, kannst du hier sehen, dass sie diese verschiedenen Variablen hier hat. <em>Hello, Bonjour, Holà</em> wieder. Und das sind die Dinge, die wir wirklich an unseren Prozess übergeben wollen, nicht nur die Datei selbst als einzelnes Objekt.</p>
+<p>Wir wollen nicht die Metadaten der Datei an die Eingabe übergeben. Wir wollen den Inhalt dieser Datei übergeben. Wenn wir uns die <em>greetings.csv</em>-Datei ansehen, kannst du hier sehen, dass sie diese verschiedenen Variablen hat. <em>Hello, Bonjour, Hola</em> wieder. Und das sind die Dinge, die wir wirklich an unseren Prozess übergeben wollen, nicht nur die Datei selbst als einzelnes Objekt.</p>
 <p>Wir müssen also diese CSV-Datei parsen. Wir müssen sie auspacken, an den Inhalt der CSV-Datei kommen und dann den Inhalt innerhalb des Kanals an den Prozess übergeben.</p>
 <p>Wie du wahrscheinlich aus der Log-Nachricht erkennen kannst, wollen wir <em>splitCsv</em> verwenden, was ein weiterer Operator ist, ein weiterer Kanaloperator. Also wenn ich "<em>dot" "s"</em> mache, und dann kannst du sehen, es wird automatisch vorgeschlagen. Ups, <em>splitCsv</em> und ein paar Klammern.</p>
 <p>Und dann nach <em>splitCsv</em> werde ich eine weitere <em>view</em>-Anweisung einfügen, nur damit wir sehen können, wie es danach aussieht. Lass uns die Pipeline ausführen und sehen, was wir haben.</p>
@@ -3813,7 +3813,7 @@
 <p>Dieses Mal haben wir wieder ein Problem mit unserem Skript, das gerendert wurde. Jetzt. Wir haben nicht mehr den finalen Pfad, aber wir haben ein Array von Variablen, was sehr nach dem Fehler aussieht, den wir früher hatten, als wir ein Array als feste Eingabe übergeben haben.</p>
 <p>Mit unserem Logging vom view-Operator können wir sehen, vor <em>splitCsv</em> war der Pfad. Und tatsächlich, nach <em>splitCsv</em>, haben wir drei verschiedene Ausgaben und jede dieser Ausgaben sieht sehr nach jeder der Zeilen aus der <em>greetings.csv</em>-Datei aus, was Sinn macht.</p>
 <p>Was also hier passiert ist, ist, dass Nextflow diese CSV-Datei geparst hat, uns drei Objekte gegeben hat, ein Array für jede Zeile der CSV-Datei. Also haben wir dann dreimal ein Array von Variablen an den Kanal übergeben anstelle eines einzelnen String-Werts.</p>
-<p>Okay, also das letzte Mal, als wir dieses Problem hatten, haben wir <em>flatten</em> verwendet. Lass uns ganz schnell. Flatten ausprobieren und sehen, was passiert.</p>
+<p>Okay, also das letzte Mal, als wir dieses Problem hatten, haben wir <em>flatten</em> verwendet. Lass uns ganz schnell flatten ausprobieren und sehen, was passiert.</p>
 <p>Ich kann diese Variablen nennen, wie auch immer. Also werde ich es <em>myarray</em> nennen, weil es nicht mehr wirklich ein CSV ist. Lass uns versuchen, es nochmal auszuführen und sehen, was mit <em>flatten</em> passiert.</p>
 <p>Also dieses Mal werden wir laufen, wir haben das CSV in drei Array-Objekte geparst, und dann haben wir es geflattened. Und dieses Mal ist es durchgegangen. Und die Nextflow-Pipeline ist gelaufen. Allerdings kannst du sehen, dass <em>flatten</em> wirklich zur Sache geht und alles flattened. Und so bekommen wir drei unabhängige Array-Einträge für jede Zeile. Und so lief der Prozess dreimal für jede Zeile eines CSV. Und jetzt haben wir eine ganze Menge Ergebnisdateien, und 123, 456, und alle möglichen Dinge, nicht nur diese erste Spalte des CSV, was wir wirklich wollten.</p>
 <h2 id="43-den-map-operator-verwenden-um-die-begruungen-zu-extrahieren">4.3. Den map()-Operator verwenden, um die Begrüßungen zu extrahieren<a class="headerlink" href="#43-den-map-operator-verwenden-um-die-begruungen-zu-extrahieren" title="Permanent link">&para;</a></h2>
@@ -3822,7 +3822,7 @@
 <p>Für sich allein macht es nichts. Also wollen wir keine regulären Klammern, wir wollen hier eine Closure und wir müssen ihm sagen, was zu tun ist. Also sage ich <em>"row"</em>, weil das Zeilen vom CSV bekommt, also ist es ein logischer Variablenname. Ist die Eingabe. Und ich möchte nur das erste Element dieses Arrays zurückgeben.</p>
 <p>Arrays in Nextflow sind nullbasiert, also werden wir nur das erste Element sagen, was Zeile null ist. Wenn wir die zweite Spalte wollten, könnte ich eins sein oder die dritte Spalte zwei sein, und so weiter. Wir können hier zurückgeben, was wir wollen, aber ich werde nur den ersten Wert zurückgeben.</p>
 <p>Und jetzt können wir die Pipeline nochmal ausführen und sehen, ob sie das macht, was wir erwarten.</p>
-<p>Tatsächlich, nach <em>splitCsv</em> haben wir unsere Arrays, und dann nach dem <em>map</em> haben wir unsere schönen sauberen Strings, nur <em>"Hello", "Bonjour"</em> und <em>"Holà"</em>. Und die Pipeline macht jetzt das, was wir wollen. Fantastisch.</p>
+<p>Tatsächlich, nach <em>splitCsv</em> haben wir unsere Arrays, und dann nach dem <em>map</em> haben wir unsere schönen sauberen Strings, nur <em>"Hello", "Bonjour"</em> und <em>"Hola"</em>. Und die Pipeline macht jetzt das, was wir wollen. Fantastisch.</p>
 <p>Wir können jetzt all diese view-Befehle loswerden. Wir brauchen sie nicht mehr.</p>
 <h2 id="zusammenfassung">Zusammenfassung<a class="headerlink" href="#zusammenfassung" title="Permanent link">&para;</a></h2>
 <p>Wir haben unser Debugging beendet und das ist der Code, mit dem wir enden. Wir nehmen unseren CLI-Parameter namens <em>input</em>, der als <em>Path</em> klassifiziert ist. Nextflow findet den Pfad, lädt ihn und versteht die CSV-Datei. Gibt alle verschiedenen Zeilen zurück. Und dann mappen wir nur das erste Element dieser Zeile in den Kanal, der uns sozusagen die Kanalinhalte gibt, die an den Prozess übergeben werden.</p>

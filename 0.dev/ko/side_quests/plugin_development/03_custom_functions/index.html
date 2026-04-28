@@ -2348,7 +2348,7 @@
   <span class="md-ellipsis">
     
   
-    오리엔테이션
+    시작하기
   
 
     
@@ -2404,7 +2404,7 @@
   <span class="md-ellipsis">
     
   
-    필수 Nextflow 스크립팅 패턴
+    필수 스크립팅 패턴
   
 
     
@@ -2544,7 +2544,7 @@
   <span class="md-ellipsis">
     
   
-    워크플로우 디버깅
+    워크플로우 문제 해결
   
 
     
@@ -4230,7 +4230,7 @@
 </code></pre></div>
 <details class="example">
 <summary>출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">Launching `greet.nf` [elated_marconi] DSL2 - revision: cd8d52c97c</span>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
@@ -4244,7 +4244,7 @@
 <a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="go">Reversed: ollaH</span>
 <a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="go">Output: Hello</span>
 <a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="go">Output: Bonjour</span>
-<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="go">Output: Holà</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="go">Output: Hola</span>
 <a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="go">Output: Ciao</span>
 <a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="go">Output: Hallo</span>
 <a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="go">Pipeline complete! 👋</span>
@@ -4348,7 +4348,7 @@
 </div>
 </div>
 </div>
-<p>이 함수는 Groovy 문자열 보간(<code>"*** ${greeting} ***"</code>)을 사용하여 인사말 변수를 문자열 안에 삽입합니다.</p>
+<p>이 함수는 Groovy 문자열 보간(<code class="highlight"><span class="s2">&quot;*** ${greeting} ***&quot;</span></code>)을 사용하여 인사말 변수를 문자열 안에 삽입합니다.</p>
 <p>빌드, 설치 후 워크플로우를 업데이트합니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nb">cd</span><span class="w"> </span>nf-greeting<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>..
 </code></pre></div>
@@ -4495,7 +4495,7 @@
 </code></pre></div>
 <details class="example">
 <summary>출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
 <a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="go">Launching `greet.nf` [elated_marconi] DSL2 - revision: cd8d52c97c</span>
 <a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
@@ -4509,7 +4509,7 @@
 <a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="go">Reversed: ollaH</span>
 <a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="go">Decorated: *** Hello ***</span>
 <a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="go">Decorated: *** Bonjour ***</span>
-<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="go">Decorated: *** Holà ***</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="go">Decorated: *** Hola ***</span>
 <a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="go">Decorated: *** Ciao ***</span>
 <a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="go">Decorated: *** Hallo ***</span>
 <a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a><span class="go">Pipeline complete! 👋</span>

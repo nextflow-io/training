@@ -2348,7 +2348,7 @@
   <span class="md-ellipsis">
     
   
-    Orientamento
+    Per iniziare
   
 
     
@@ -2404,7 +2404,7 @@
   <span class="md-ellipsis">
     
   
-    Pattern Essenziali di Scripting in Nextflow
+    Pattern Essenziali di Scripting
   
 
     
@@ -3327,7 +3327,7 @@
   <span class="md-ellipsis">
     
   
-    Test con nf-test
+    Index
   
 
     
@@ -3355,7 +3355,7 @@
   <span class="md-ellipsis">
     
   
-    Debug dei Workflow
+    Risoluzione dei Problemi nei Workflow
   
 
     
@@ -4975,12 +4975,10 @@ Imparerete come estrarre metadati dai nomi dei file, un requisito comune nelle p
 <li>Aver completato il tutorial <a href="../../hello_nextflow/">Hello Nextflow</a> o un corso equivalente per principianti.</li>
 <li>Essere a proprio agio con i concetti e i meccanismi di base di Nextflow (processi, canali, operatori)</li>
 </ul>
-<!-- I removed the suggestion to do the metamaps SQ first because that works more naturally after -->
-
 <hr />
 <h2 id="0-per-iniziare">0. Per iniziare<a class="headerlink" href="#0-per-iniziare" title="Permanent link">&para;</a></h2>
 <h4 id="aprire-il-codespace-di-formazione">Aprire il codespace di formazione<a class="headerlink" href="#aprire-il-codespace-di-formazione" title="Permanent link">&para;</a></h4>
-<p>Se non lo avete ancora fatto, assicuratevi di aprire l'ambiente di formazione come descritto in <a href="../envsetup/index.md">Configurazione dell'ambiente</a>.</p>
+<p>Se non lo avete ancora fatto, assicuratevi di aprire l'ambiente di formazione come descritto in <a href="../../envsetup/">Configurazione dell'ambiente</a>.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h4 id="spostarsi-nella-directory-del-progetto">Spostarsi nella directory del progetto<a class="headerlink" href="#spostarsi-nella-directory-del-progetto" title="Permanent link">&para;</a></h4>
 <p>Spostiamoci nella directory in cui si trovano i file per questo tutorial.</p>
@@ -4989,6 +4987,7 @@ Imparerete come estrarre metadati dai nomi dei file, un requisito comune nelle p
 <p>Potete impostare VSCode per concentrarsi su questa directory:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>code<span class="w"> </span>.
 </code></pre></div>
+<p>L'editor si apre con la directory del progetto in primo piano.</p>
 <h4 id="esaminare-i-materiali">Esaminare i materiali<a class="headerlink" href="#esaminare-i-materiali" title="Permanent link">&para;</a></h4>
 <p>Troverete un semplice file di flusso di lavoro chiamato <code>main.nf</code>, una directory <code>modules</code> contenente due file di modulo e una directory <code>data</code> contenente alcuni file di dati di esempio.</p>
 <details class="abstract">
@@ -5045,23 +5044,39 @@ Se non avete familiarità con l'analisi del cancro, sappiate semplicemente che q
 <h2 id="1-operazioni-di-base-sui-file">1. Operazioni di base sui file<a class="headerlink" href="#1-operazioni-di-base-sui-file" title="Permanent link">&para;</a></h2>
 <h3 id="11-identificare-il-tipo-di-un-oggetto-con-class">1.1. Identificare il tipo di un oggetto con <code>.class</code><a class="headerlink" href="#11-identificare-il-tipo-di-un-oggetto-con-class" title="Permanent link">&para;</a></h3>
 <p>Date un'occhiata al file di flusso di lavoro <code>main.nf</code>:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
-<span class="normal"><a href="#__codelineno-3-2">2</a></span>
-<span class="normal"><a href="#__codelineno-3-3">3</a></span>
-<span class="normal"><a href="#__codelineno-3-4">4</a></span>
-<span class="normal"><a href="#__codelineno-3-5">5</a></span>
-<span class="normal"><a href="#__codelineno-3-6">6</a></span>
-<span class="normal"><a href="#__codelineno-3-7">7</a></span>
-<span class="normal"><a href="#__codelineno-3-8">8</a></span>
-<span class="normal"><a href="#__codelineno-3-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span>
+<span class="normal"><a href="#__codelineno-3-14">14</a></span>
+<span class="normal"><a href="#__codelineno-3-15">15</a></span>
+<span class="normal"><a href="#__codelineno-3-16">16</a></span>
+<span class="normal"><a href="#__codelineno-3-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">    </span><span class="c1">// Crea un oggetto Path da un percorso stringa</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7"></a>
 <a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;${myFile} is of class ${myFile.class}&quot;</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="o">}</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">    </span><span class="n">analysis_results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">empty</span><span class="o">()</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="o">}</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a>
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">    </span><span class="n">analysis_results</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Questo è un mini-flusso di lavoro (senza alcun processo) che fa riferimento a un singolo percorso di file nel suo flusso di lavoro, poi lo stampa sulla console, insieme alla sua classe.</p>
 <details class="info">
@@ -5074,11 +5089,11 @@ Questo ci aiuterà a illustrare la differenza tra una semplice stringa e un ogge
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go">Launching `main.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="go">data/patientA_rep1_normal_R1_001.fastq.gz is of class java.lang.String</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="go">data/patientA_rep1_normal_R1_001.fastq.gz is of class class java.lang.String</span>
 </code></pre></div>
 </details>
 <p>Come potete vedere, Nextflow ha stampato il percorso stringa esattamente come lo abbiamo scritto.</p>
@@ -5118,7 +5133,7 @@ Ha senso, poiché non abbiamo ancora detto a Nextflow che corrisponde a un file.
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">Launching `main.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
@@ -5139,6 +5154,7 @@ Come vedremo più avanti, i file remoti avranno nomi di classe diversi (come <co
 </ul>
 <p>Pensateci così: una stringa path è come scrivere un indirizzo su carta, mentre un oggetto Path è come avere l'indirizzo caricato in un dispositivo GPS che sa come navigare fino a lì e può dirvi i dettagli del percorso.</p>
 </div>
+<p>Comprendere questa differenza è fondamentale per usare correttamente le operazioni sui file in Nextflow.</p>
 <h3 id="13-accedere-agli-attributi-dei-file">1.3. Accedere agli attributi dei file<a class="headerlink" href="#13-accedere-agli-attributi-dei-file" title="Permanent link">&para;</a></h3>
 <p>Perché è utile? Bene, ora che Nextflow capisce che <code>myFile</code> è un oggetto Path e non solo una stringa, possiamo accedere ai vari attributi dell'oggetto Path.</p>
 <p>Aggiorniamo il nostro flusso di lavoro per stampare gli attributi dei file integrati:</p>
@@ -5181,11 +5197,11 @@ Come vedremo più avanti, i file remoti avranno nomi di classe diversi (come <co
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Launching `main.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="go">File object class: sun.nio.fs.UnixPath</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="go">File object class: class sun.nio.fs.UnixPath</span>
 <a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">File name: patientA_rep1_normal_R1_001.fastq.gz</span>
 <a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="go">Simple name: patientA_rep1_normal_R1_001</span>
 <a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="go">Extension: gz</span>
@@ -5236,31 +5252,28 @@ Finora abbiamo verificato che Nextflow sta ora trattando il nostro file di input
 <span class="normal"><a href="#__codelineno-16-10">10</a></span>
 <span class="normal"><a href="#__codelineno-16-11">11</a></span>
 <span class="normal"><a href="#__codelineno-16-12">12</a></span>
-<span class="normal"><a href="#__codelineno-16-13">13</a></span>
-<span class="normal"><a href="#__codelineno-16-14">14</a></span>
-<span class="normal"><a href="#__codelineno-16-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2"></a>
-<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="n">process</span><span class="w"> </span><span class="n">COUNT_LINES</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="w">    </span><span class="n">debug</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5"></a>
-<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
-<a id="__codelineno-16-8" name="__codelineno-16-8"></a>
-<a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="s2">    set -o pipefail</span>
-<a id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="s2">    echo &quot;Processing file: $input_file&quot;</span>
-<a id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="s2">    gzip -dc $input_file | wc -l</span>
-<a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-16-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="n">process</span><span class="w"> </span><span class="n">COUNT_LINES</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="w">    </span><span class="n">debug</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6"></a>
+<a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="s2">    set -o pipefail</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="s2">    echo &quot;Processing file: $input_file&quot;</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="s2">    gzip -dc $input_file | wc -l</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Come potete vedere, è uno script abbastanza semplice che decomprime il file e conta quante righe contiene.</p>
 <details class="info">
 <summary>Cosa fa <code>debug true</code>?</summary>
 <p>La direttiva <code>debug true</code> nella definizione del processo fa sì che Nextflow stampi l'output del vostro script (come il conteggio delle righe "40") direttamente nel registro di esecuzione.
 Senza questo, vedreste solo lo stato di esecuzione del processo ma non l'output effettivo del vostro script.</p>
-<p>Per ulteriori informazioni sul debug dei processi Nextflow, consultate la side quest <a href="debugging.md">Debugging Nextflow Workflows</a>.</p>
+<p>Per ulteriori informazioni sul debug dei processi Nextflow, consultate la side quest <a href="../debugging/">Debugging Nextflow Workflows</a>.</p>
 </details>
+<p>Con il modulo importato e il suo codice esaminato, possiamo chiamare il processo dal flusso di lavoro.</p>
 <h4 id="142-aggiungere-una-chiamata-a-count_lines">1.4.2. Aggiungere una chiamata a <code>COUNT_LINES</code><a class="headerlink" href="#142-aggiungere-una-chiamata-a-count_lines" title="Permanent link">&para;</a></h4>
 <p>Ora che il processo è disponibile per il flusso di lavoro, possiamo aggiungere una chiamata al processo <code>COUNT_LINES</code> per eseguirlo sul file di input.</p>
 <p>Apportate le seguenti modifiche al flusso di lavoro:</p>
@@ -5319,7 +5332,7 @@ Senza questo, vedreste solo lo stato di esecuzione del processo ma non l'output 
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="go">Launching `main.nf` [cheeky_hypatia] DSL2 - revision: 281d13c414</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>
@@ -5414,7 +5427,7 @@ Senza questo, vedreste solo lo stato di esecuzione del processo ma non l'output 
 </code></pre></div>
 <details class="failure">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>
 <a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="go">Launching `main.nf` [friendly_goodall] DSL2 - revision: ae50609b20</span>
 <a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>
@@ -5449,27 +5462,27 @@ Combinato con <code>val</code> nel processo, questo produce l'errore mostrato di
 <div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Dopo</label><label for="__tabbed_6_2">Prima</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/count_lines.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-3">3</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/count_lines.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1">1</a></span>
+<span class="normal"><a href="#__codelineno-26-2">2</a></span>
+<span class="normal"><a href="#__codelineno-26-3">3</a></span>
 <span class="normal"><a href="#__codelineno-26-4">4</a></span>
-<span class="normal"><a href="#__codelineno-26-5">5</a></span>
-<span class="normal"><a href="#__codelineno-26-6">6</a></span>
-<span class="normal"><a href="#__codelineno-26-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-3" name="__codelineno-26-3"></a><span class="n">process</span><span class="w"> </span><span class="n">COUNT_LINES</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="w">    </span><span class="n">debug</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-26-5" name="__codelineno-26-5"></a>
-<a id="__codelineno-26-6" name="__codelineno-26-6"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-26-7" name="__codelineno-26-7"></a><span class="hll"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">input_file</span>
+<span class="normal"><a href="#__codelineno-26-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="n">process</span><span class="w"> </span><span class="n">COUNT_LINES</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2"></a><span class="w">    </span><span class="n">debug</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3"></a>
+<a id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="hll"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">input_file</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/count_lines.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-3">3</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/count_lines.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1">1</a></span>
+<span class="normal"><a href="#__codelineno-27-2">2</a></span>
+<span class="normal"><a href="#__codelineno-27-3">3</a></span>
 <span class="normal"><a href="#__codelineno-27-4">4</a></span>
-<span class="normal"><a href="#__codelineno-27-5">5</a></span>
-<span class="normal"><a href="#__codelineno-27-6">6</a></span>
-<span class="normal"><a href="#__codelineno-27-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-3" name="__codelineno-27-3"></a><span class="n">process</span><span class="w"> </span><span class="n">COUNT_LINES</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="w">    </span><span class="n">debug</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-27-5" name="__codelineno-27-5"></a>
-<a id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-27-7" name="__codelineno-27-7"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
+<span class="normal"><a href="#__codelineno-27-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="n">process</span><span class="w"> </span><span class="n">COUNT_LINES</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="w">    </span><span class="n">debug</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3"></a>
+<a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5479,7 +5492,7 @@ Combinato con <code>val</code> nel processo, questo produce l'errore mostrato di
 </code></pre></div>
 <details class="failure">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>
 <a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="go">Launching `main.nf` [soggy_golick] DSL2 - revision: ae50609b20</span>
 <a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>
@@ -5538,6 +5551,7 @@ Quindi il processo ha cercato di usare la stringa relativa, <code>data/patientA_
 <p class="admonition-title">Nota</p>
 <p>Assicuratevi di tornare indietro e correggere entrambi gli errori intenzionali prima di continuare alla sezione successiva.</p>
 </div>
+<p>Con entrambe le correzioni applicate, il flusso di lavoro mette correttamente in staging ed elabora il file di input.</p>
 <h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Stringhe Path vs oggetti Path: le stringhe sono solo testo, gli oggetti Path sono riferimenti a file intelligenti</li>
@@ -5619,7 +5633,7 @@ Ad esempio, potete sviluppare con un piccolo set di test locale prima di passare
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">Launching `main.nf` [insane_swartz] DSL2 - revision: fff18abe6d</span>
 <a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>
@@ -5719,6 +5733,7 @@ Tuttavia, altri protocolli di storage come il blob storage (<code>s3://</code>, 
 </div>
 </div>
 </div>
+<p>Il flusso di lavoro è ora tornato a usare il file di input locale.</p>
 <h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>I dati remoti sono accessibili usando un URI (HTTP, FTP, S3, Azure, Google Cloud)</li>
@@ -5815,7 +5830,7 @@ Tuttavia, altri protocolli di storage come il blob storage (<code>s3://</code>, 
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>
 <a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="go">Launching `main.nf` [grave_meucci] DSL2 - revision: b09964a583</span>
 <a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a>
@@ -5878,13 +5893,13 @@ Questo è simile a ciò che avrebbe fatto <code>file()</code>, tranne che ora ab
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>
 <a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a><span class="go">Launching `main.nf` [furious_swanson] DSL2 - revision: c35c34950d</span>
 <a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a>
 <a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a><span class="go">executor &gt;  local (1)</span>
 <a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a><span class="go">[9d/6701a6] COUNT_LINES (1) [100%] 1 of 1 ✔</span>
-<a id="__codelineno-48-7" name="__codelineno-48-7" href="#__codelineno-48-7"></a><span class="go">File object class: sun.nio.fs.UnixPath</span>
+<a id="__codelineno-48-7" name="__codelineno-48-7" href="#__codelineno-48-7"></a><span class="go">File object class: class sun.nio.fs.UnixPath</span>
 <a id="__codelineno-48-8" name="__codelineno-48-8" href="#__codelineno-48-8"></a><span class="go">File name: patientA_rep1_normal_R1_001.fastq.gz</span>
 <a id="__codelineno-48-9" name="__codelineno-48-9" href="#__codelineno-48-9"></a><span class="go">Simple name: patientA_rep1_normal_R1_001</span>
 <a id="__codelineno-48-10" name="__codelineno-48-10" href="#__codelineno-48-10"></a><span class="go">Extension: gz</span>
@@ -5933,7 +5948,7 @@ Il processo di corrispondenza di questi pattern è chiamato "globbing" o "filena
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>
 <a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a><span class="go">Launching `main.nf` [boring_sammet] DSL2 - revision: d2aa789c9a</span>
 <a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a>
@@ -6037,7 +6052,7 @@ Ad esempio, il nome del file <code>patientA_rep1_normal_R2_001</code> codifica l
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a>
 <a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a><span class="go">Launching `main.nf` [suspicious_mahavira] DSL2 - revision: ae8edc4e48</span>
 <a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a>
@@ -6092,7 +6107,7 @@ Fortunatamente, quei componenti sono semplicemente separati da underscore nel no
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a>
 <a id="__codelineno-62-3" name="__codelineno-62-3" href="#__codelineno-62-3"></a><span class="go">Launching `main.nf` [gigantic_gauss] DSL2 - revision: a39baabb57</span>
 <a id="__codelineno-62-4" name="__codelineno-62-4" href="#__codelineno-62-4"></a>
@@ -6189,7 +6204,7 @@ Apportate le seguenti modifiche al flusso di lavoro:</p>
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-69-2" name="__codelineno-69-2" href="#__codelineno-69-2"></a>
 <a id="__codelineno-69-3" name="__codelineno-69-3" href="#__codelineno-69-3"></a><span class="go">Launching `main.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb</span>
 <a id="__codelineno-69-4" name="__codelineno-69-4" href="#__codelineno-69-4"></a>
@@ -6316,7 +6331,7 @@ La aggiungeremo di nuovo più tardi, con alcune modifiche.</p>
 </code></pre></div>
 <details class="failure">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-75-2" name="__codelineno-75-2" href="#__codelineno-75-2"></a>
 <a id="__codelineno-75-3" name="__codelineno-75-3" href="#__codelineno-75-3"></a><span class="go">Launching `main.nf` [angry_koch] DSL2 - revision: 44fdf66105</span>
 <a id="__codelineno-75-4" name="__codelineno-75-4" href="#__codelineno-75-4"></a>
@@ -6371,7 +6386,7 @@ Ma non lo faremo, perché il nostro obiettivo finale è usare un processo divers
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-80-1" name="__codelineno-80-1" href="#__codelineno-80-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-80-1" name="__codelineno-80-1" href="#__codelineno-80-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-80-2" name="__codelineno-80-2" href="#__codelineno-80-2"></a>
 <a id="__codelineno-80-3" name="__codelineno-80-3" href="#__codelineno-80-3"></a><span class="go">Launching `main.nf` [fabulous_davinci] DSL2 - revision: 22b53268dc</span>
 <a id="__codelineno-80-4" name="__codelineno-80-4" href="#__codelineno-80-4"></a>
@@ -6462,7 +6477,7 @@ Possiamo farlo perché i file accoppiati sono ora strettamente associati, quindi
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-84-2" name="__codelineno-84-2" href="#__codelineno-84-2"></a>
 <a id="__codelineno-84-3" name="__codelineno-84-3" href="#__codelineno-84-3"></a><span class="go">Launching `main.nf` [prickly_stonebraker] DSL2 - revision: f62ab10a3f</span>
 <a id="__codelineno-84-4" name="__codelineno-84-4" href="#__codelineno-84-4"></a>
@@ -6533,46 +6548,38 @@ Potremmo immaginare che stia eseguendo l'allineamento delle sequenze, o il varia
 <span class="normal"><a href="#__codelineno-87-17">17</a></span>
 <span class="normal"><a href="#__codelineno-87-18">18</a></span>
 <span class="normal"><a href="#__codelineno-87-19">19</a></span>
-<span class="normal"><a href="#__codelineno-87-20">20</a></span>
-<span class="normal"><a href="#__codelineno-87-21">21</a></span>
-<span class="normal"><a href="#__codelineno-87-22">22</a></span>
-<span class="normal"><a href="#__codelineno-87-23">23</a></span>
-<span class="normal"><a href="#__codelineno-87-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-87-1" name="__codelineno-87-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-87-2" name="__codelineno-87-2"></a>
-<a id="__codelineno-87-3" name="__codelineno-87-3"></a><span class="n">process</span><span class="w"> </span><span class="n">ANALYZE_READS</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-87-4" name="__codelineno-87-4"></a><span class="w">    </span><span class="n">tag</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">id</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-87-5" name="__codelineno-87-5"></a>
-<a id="__codelineno-87-6" name="__codelineno-87-6"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;results/${meta.id}&quot;</span><span class="w"> </span><span class="o">},</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-87-7" name="__codelineno-87-7"></a>
-<a id="__codelineno-87-8" name="__codelineno-87-8"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-87-9" name="__codelineno-87-9"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">files</span><span class="o">)</span>
-<a id="__codelineno-87-10" name="__codelineno-87-10"></a>
-<a id="__codelineno-87-11" name="__codelineno-87-11"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-87-12" name="__codelineno-87-12"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">id</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;${meta.id}_stats.txt&quot;</span><span class="o">)</span>
-<a id="__codelineno-87-13" name="__codelineno-87-13"></a>
-<a id="__codelineno-87-14" name="__codelineno-87-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-87-15" name="__codelineno-87-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-87-16" name="__codelineno-87-16"></a><span class="s2">    echo &quot;Sample metadata: ${meta.id}&quot; &gt; ${meta.id}_stats.txt</span>
-<a id="__codelineno-87-17" name="__codelineno-87-17"></a><span class="s2">    echo &quot;Replicate: ${meta.replicate}&quot; &gt;&gt; ${meta.id}_stats.txt</span>
-<a id="__codelineno-87-18" name="__codelineno-87-18"></a><span class="s2">    echo &quot;Type: ${meta.type}&quot; &gt;&gt; ${meta.id}_stats.txt</span>
-<a id="__codelineno-87-19" name="__codelineno-87-19"></a><span class="s2">    echo &quot;Read 1: ${files[0]}&quot; &gt;&gt; ${meta.id}_stats.txt</span>
-<a id="__codelineno-87-20" name="__codelineno-87-20"></a><span class="s2">    echo &quot;Read 2: ${files[1]}&quot; &gt;&gt; ${meta.id}_stats.txt</span>
-<a id="__codelineno-87-21" name="__codelineno-87-21"></a><span class="s2">    echo &quot;Read 1 size: \$(gunzip -dc ${files[0]} | wc -l | awk &#39;{print \$1/4}&#39;) reads&quot; &gt;&gt; ${meta.id}_stats.txt</span>
-<a id="__codelineno-87-22" name="__codelineno-87-22"></a><span class="s2">    echo &quot;Read 2 size: \$(gunzip -dc ${files[1]} | wc -l | awk &#39;{print \$1/4}&#39;) reads&quot; &gt;&gt; ${meta.id}_stats.txt</span>
-<a id="__codelineno-87-23" name="__codelineno-87-23"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-87-24" name="__codelineno-87-24"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-87-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-87-1" name="__codelineno-87-1"></a><span class="n">process</span><span class="w"> </span><span class="n">ANALYZE_READS</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-87-2" name="__codelineno-87-2"></a><span class="w">    </span><span class="n">tag</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">id</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-87-3" name="__codelineno-87-3"></a>
+<a id="__codelineno-87-4" name="__codelineno-87-4"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-87-5" name="__codelineno-87-5"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">files</span><span class="o">)</span>
+<a id="__codelineno-87-6" name="__codelineno-87-6"></a>
+<a id="__codelineno-87-7" name="__codelineno-87-7"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-87-8" name="__codelineno-87-8"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;${meta.id}_stats.txt&quot;</span><span class="o">)</span>
+<a id="__codelineno-87-9" name="__codelineno-87-9"></a>
+<a id="__codelineno-87-10" name="__codelineno-87-10"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-87-11" name="__codelineno-87-11"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-87-12" name="__codelineno-87-12"></a><span class="s2">    echo &quot;Sample metadata: ${meta.id}&quot; &gt; ${meta.id}_stats.txt</span>
+<a id="__codelineno-87-13" name="__codelineno-87-13"></a><span class="s2">    echo &quot;Replicate: ${meta.replicate}&quot; &gt;&gt; ${meta.id}_stats.txt</span>
+<a id="__codelineno-87-14" name="__codelineno-87-14"></a><span class="s2">    echo &quot;Type: ${meta.type}&quot; &gt;&gt; ${meta.id}_stats.txt</span>
+<a id="__codelineno-87-15" name="__codelineno-87-15"></a><span class="s2">    echo &quot;Read 1: ${files[0]}&quot; &gt;&gt; ${meta.id}_stats.txt</span>
+<a id="__codelineno-87-16" name="__codelineno-87-16"></a><span class="s2">    echo &quot;Read 2: ${files[1]}&quot; &gt;&gt; ${meta.id}_stats.txt</span>
+<a id="__codelineno-87-17" name="__codelineno-87-17"></a><span class="s2">    echo &quot;Read 1 size: \$(gunzip -dc ${files[0]} | wc -l | awk &#39;{print \$1/4}&#39;) reads&quot; &gt;&gt; ${meta.id}_stats.txt</span>
+<a id="__codelineno-87-18" name="__codelineno-87-18"></a><span class="s2">    echo &quot;Read 2 size: \$(gunzip -dc ${files[1]} | wc -l | awk &#39;{print \$1/4}&#39;) reads&quot; &gt;&gt; ${meta.id}_stats.txt</span>
+<a id="__codelineno-87-19" name="__codelineno-87-19"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-87-20" name="__codelineno-87-20"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>Le direttive <code>tag</code> e <code>publishDir</code> usano la sintassi closure (<code>{ ... }</code>) invece dell'interpolazione di stringhe (<code>"${...}"</code>).
-Questo perché queste direttive fanno riferimento a variabili di input (<code>meta</code>) che non sono disponibili fino al runtime.
-La sintassi closure rinvia la valutazione fino a quando il processo viene effettivamente eseguito.</p>
+<p>La direttiva <code>tag</code> usa la sintassi closure (<code>{ ... }</code>) perché fa riferimento a variabili di input (<code>meta</code>) che non sono disponibili fino a quando il processo non viene eseguito.
+La closure rinvia la valutazione fino al runtime.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
 <p>Chiamiamo la nostra map di metadati <code>meta</code> per convenzione.
 Per un approfondimento sulle meta map, consultate la side quest <a href="../metadata/">Metadata e meta map</a>.</p>
 </div>
+<p>Con il processo <code>ANALYZE_READS</code> importato e il suo codice esaminato, possiamo aggiungere una chiamata ad esso nel flusso di lavoro.</p>
 <h3 id="62-chiamare-il-processo-nel-flusso-di-lavoro">6.2. Chiamare il processo nel flusso di lavoro<a class="headerlink" href="#62-chiamare-il-processo-nel-flusso-di-lavoro" title="Permanent link">&para;</a></h3>
 <p>Ora che il processo è disponibile per il flusso di lavoro, possiamo aggiungere una chiamata al processo <code>ANALYZE_READS</code> per eseguirlo.</p>
 <p>Per eseguirlo sui nostri dati di esempio, dovremo fare due cose:</p>
@@ -6584,7 +6591,7 @@ Per un approfondimento sulle meta map, consultate la side quest <a href="../meta
 <p>In precedenza abbiamo applicato le manipolazioni di mappatura direttamente al canale di input.
 Per alimentare il contenuto rimappato al processo <code>ANALYZE_READS</code> (e farlo in modo chiaro e facile da leggere) vogliamo creare un nuovo canale chiamato <code>ch_samples</code>.</p>
 <p>Possiamo farlo usando l'operatore <a href="https://www.nextflow.io/docs/latest/reference/operator.html#set"><code>set</code></a>.</p>
-<p>Nel flusso di lavoro principale, sostituite l'operatore <code>.view()</code> con <code>.set { ch_samples }</code>, e aggiungete una riga per verificare che possiamo fare riferimento al canale per nome.</p>
+<p>Nel flusso di lavoro principale, sostituite l'operatore <code>.view()</code> con <code class="highlight"><span class="o">.</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_samples</span><span class="w"> </span><span class="o">}</span></code>, e aggiungete una riga per verificare che possiamo fare riferimento al canale per nome.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="19:2"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><input id="__tabbed_19_2" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">Dopo</label><label for="__tabbed_19_2">Prima</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -6637,8 +6644,7 @@ Per alimentare il contenuto rimappato al processo <code>ANALYZE_READS</code> (e 
 <span class="normal"><a href="#__codelineno-89-17">17</a></span>
 <span class="normal"><a href="#__codelineno-89-18">18</a></span>
 <span class="normal"><a href="#__codelineno-89-19">19</a></span>
-<span class="normal"><a href="#__codelineno-89-20">20</a></span>
-<span class="normal"><a href="#__codelineno-89-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-89-7" name="__codelineno-89-7"></a><span class="w">    </span><span class="c1">// Carica i file con channel.fromFilePairs</span>
+<span class="normal"><a href="#__codelineno-89-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-89-7" name="__codelineno-89-7"></a><span class="w">    </span><span class="c1">// Carica i file con channel.fromFilePairs</span>
 <a id="__codelineno-89-8" name="__codelineno-89-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
 <a id="__codelineno-89-9" name="__codelineno-89-9"></a><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">id</span><span class="o">,</span><span class="w">  </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-89-10" name="__codelineno-89-10"></a><span class="w">       </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">sample</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">,</span><span class="w"> </span><span class="n">readNum</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">)</span>
@@ -6652,8 +6658,7 @@ Per alimentare il contenuto rimappato al processo <code>ANALYZE_READS</code> (e 
 <a id="__codelineno-89-18" name="__codelineno-89-18"></a><span class="w">       </span><span class="o">]</span>
 <a id="__codelineno-89-19" name="__codelineno-89-19"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-89-20" name="__codelineno-89-20"></a><span class="hll"><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
-</span><a id="__codelineno-89-21" name="__codelineno-89-21"></a><span class="o">}</span>
-</code></pre></div></td></tr></table></div>
+</span></code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
@@ -6662,7 +6667,7 @@ Per alimentare il contenuto rimappato al processo <code>ANALYZE_READS</code> (e 
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-91-1" name="__codelineno-91-1" href="#__codelineno-91-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-91-1" name="__codelineno-91-1" href="#__codelineno-91-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-91-2" name="__codelineno-91-2" href="#__codelineno-91-2"></a>
 <a id="__codelineno-91-3" name="__codelineno-91-3" href="#__codelineno-91-3"></a><span class="go">Launching `main.nf` [goofy_kirch] DSL2 - revision: 3313283e42</span>
 <a id="__codelineno-91-4" name="__codelineno-91-4" href="#__codelineno-91-4"></a>
@@ -6673,28 +6678,140 @@ Per alimentare il contenuto rimappato al processo <code>ANALYZE_READS</code> (e 
 <h4 id="622-chiamare-il-processo-sui-dati">6.2.2. Chiamare il processo sui dati<a class="headerlink" href="#622-chiamare-il-processo-sui-dati" title="Permanent link">&para;</a></h4>
 <p>Ora chiamiamo effettivamente il processo <code>ANALYZE_READS</code> sul canale <code>ch_samples</code>.</p>
 <p>Nel flusso di lavoro principale, apportate le seguenti modifiche al codice:</p>
+<ol>
+<li>Rifattorizzare la configurazione del canale: cambiare <code>ch_files.map {}</code> in <code>ch_samples = ch_files.map {}</code> (assegnazione diretta, rimuovendo l'operatore <code>.set</code>) e usare <code>tuple()</code> invece di <code>[]</code></li>
+<li>Sostituire la chiamata <code>.view()</code> con una chiamata a <code>ANALYZE_READS(ch_samples)</code></li>
+<li>Sostituire <code>channel.empty()</code> con <code>ANALYZE_READS.out</code> nella sezione <code>publish:</code></li>
+<li>Aggiungere una closure <code>path</code> al blocco <code>output {}</code></li>
+</ol>
 <div class="tabbed-set tabbed-alternate" data-tabs="20:2"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">Dopo</label><label for="__tabbed_20_2">Prima</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-92-23">23</a></span>
-<span class="normal"><a href="#__codelineno-92-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-92-23" name="__codelineno-92-23"></a><span class="w">    </span><span class="c1">// Esegui l&#39;analisi</span>
-<a id="__codelineno-92-24" name="__codelineno-92-24"></a><span class="w">    </span><span class="n">ANALYZE_READS</span><span class="o">(</span><span class="n">ch_samples</span><span class="o">)</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-92-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-92-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-92-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-92-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-92-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-92-10">10</a></span>
+<span class="normal"><a href="#__codelineno-92-11">11</a></span>
+<span class="normal"><a href="#__codelineno-92-12">12</a></span>
+<span class="normal"><a href="#__codelineno-92-13">13</a></span>
+<span class="normal"><a href="#__codelineno-92-14">14</a></span>
+<span class="normal"><a href="#__codelineno-92-15">15</a></span>
+<span class="normal"><a href="#__codelineno-92-16">16</a></span>
+<span class="normal"><a href="#__codelineno-92-17">17</a></span>
+<span class="normal"><a href="#__codelineno-92-18">18</a></span>
+<span class="normal"><a href="#__codelineno-92-19">19</a></span>
+<span class="normal"><a href="#__codelineno-92-20">20</a></span>
+<span class="normal"><a href="#__codelineno-92-21">21</a></span>
+<span class="normal"><a href="#__codelineno-92-22">22</a></span>
+<span class="normal"><a href="#__codelineno-92-23">23</a></span>
+<span class="normal"><a href="#__codelineno-92-24">24</a></span>
+<span class="normal"><a href="#__codelineno-92-25">25</a></span>
+<span class="normal"><a href="#__codelineno-92-26">26</a></span>
+<span class="normal"><a href="#__codelineno-92-27">27</a></span>
+<span class="normal"><a href="#__codelineno-92-28">28</a></span>
+<span class="normal"><a href="#__codelineno-92-29">29</a></span>
+<span class="normal"><a href="#__codelineno-92-30">30</a></span>
+<span class="normal"><a href="#__codelineno-92-31">31</a></span>
+<span class="normal"><a href="#__codelineno-92-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-92-5" name="__codelineno-92-5"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-92-6" name="__codelineno-92-6"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-92-7" name="__codelineno-92-7"></a><span class="w">    </span><span class="c1">// Carica i file con channel.fromFilePairs</span>
+<a id="__codelineno-92-8" name="__codelineno-92-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-92-9" name="__codelineno-92-9"></a><span class="hll"><span class="w">    </span><span class="n">ch_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_files</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">id</span><span class="o">,</span><span class="w">  </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span>
+</span><a id="__codelineno-92-10" name="__codelineno-92-10"></a><span class="w">       </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">sample</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">,</span><span class="w"> </span><span class="n">readNum</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">)</span>
+<a id="__codelineno-92-11" name="__codelineno-92-11"></a><span class="hll"><span class="w">       </span><span class="n">tuple</span><span class="o">(</span>
+</span><a id="__codelineno-92-12" name="__codelineno-92-12"></a><span class="w">           </span><span class="o">[</span>
+<a id="__codelineno-92-13" name="__codelineno-92-13"></a><span class="w">               </span><span class="nl">id:</span><span class="w"> </span><span class="n">sample</span><span class="o">,</span>
+<a id="__codelineno-92-14" name="__codelineno-92-14"></a><span class="w">               </span><span class="nl">replicate:</span><span class="w"> </span><span class="n">replicate</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">&#39;rep&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">),</span>
+<a id="__codelineno-92-15" name="__codelineno-92-15"></a><span class="w">               </span><span class="nl">type:</span><span class="w"> </span><span class="n">type</span>
+<a id="__codelineno-92-16" name="__codelineno-92-16"></a><span class="w">           </span><span class="o">],</span>
+<a id="__codelineno-92-17" name="__codelineno-92-17"></a><span class="w">           </span><span class="n">files</span>
+<a id="__codelineno-92-18" name="__codelineno-92-18"></a><span class="hll"><span class="w">       </span><span class="o">)</span>
+</span><a id="__codelineno-92-19" name="__codelineno-92-19"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-92-20" name="__codelineno-92-20"></a>
+<a id="__codelineno-92-21" name="__codelineno-92-21"></a><span class="hll"><span class="w">    </span><span class="c1">// Esegui l&#39;analisi</span>
+</span><a id="__codelineno-92-22" name="__codelineno-92-22"></a><span class="hll"><span class="w">    </span><span class="n">ANALYZE_READS</span><span class="o">(</span><span class="n">ch_samples</span><span class="o">)</span>
+</span><a id="__codelineno-92-23" name="__codelineno-92-23"></a>
+<a id="__codelineno-92-24" name="__codelineno-92-24"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-92-25" name="__codelineno-92-25"></a><span class="hll"><span class="w">    </span><span class="n">analysis_results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ANALYZE_READS</span><span class="o">.</span><span class="na">out</span>
+</span><a id="__codelineno-92-26" name="__codelineno-92-26"></a><span class="o">}</span>
+<a id="__codelineno-92-27" name="__codelineno-92-27"></a>
+<a id="__codelineno-92-28" name="__codelineno-92-28"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-92-29" name="__codelineno-92-29"></a><span class="w">    </span><span class="n">analysis_results</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-92-30" name="__codelineno-92-30"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;${meta.id}&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-92-31" name="__codelineno-92-31"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-92-32" name="__codelineno-92-32"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-93-23">23</a></span>
-<span class="normal"><a href="#__codelineno-93-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-93-23" name="__codelineno-93-23"></a><span class="w">    </span><span class="c1">// Temporaneo: sbirciamo in ch_samples</span>
-<a id="__codelineno-93-24" name="__codelineno-93-24"></a><span class="w">    </span><span class="n">ch_samples</span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-93-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-93-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-93-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-93-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-93-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-93-10">10</a></span>
+<span class="normal"><a href="#__codelineno-93-11">11</a></span>
+<span class="normal"><a href="#__codelineno-93-12">12</a></span>
+<span class="normal"><a href="#__codelineno-93-13">13</a></span>
+<span class="normal"><a href="#__codelineno-93-14">14</a></span>
+<span class="normal"><a href="#__codelineno-93-15">15</a></span>
+<span class="normal"><a href="#__codelineno-93-16">16</a></span>
+<span class="normal"><a href="#__codelineno-93-17">17</a></span>
+<span class="normal"><a href="#__codelineno-93-18">18</a></span>
+<span class="normal"><a href="#__codelineno-93-19">19</a></span>
+<span class="normal"><a href="#__codelineno-93-20">20</a></span>
+<span class="normal"><a href="#__codelineno-93-21">21</a></span>
+<span class="normal"><a href="#__codelineno-93-22">22</a></span>
+<span class="normal"><a href="#__codelineno-93-23">23</a></span>
+<span class="normal"><a href="#__codelineno-93-24">24</a></span>
+<span class="normal"><a href="#__codelineno-93-25">25</a></span>
+<span class="normal"><a href="#__codelineno-93-26">26</a></span>
+<span class="normal"><a href="#__codelineno-93-27">27</a></span>
+<span class="normal"><a href="#__codelineno-93-28">28</a></span>
+<span class="normal"><a href="#__codelineno-93-29">29</a></span>
+<span class="normal"><a href="#__codelineno-93-30">30</a></span>
+<span class="normal"><a href="#__codelineno-93-31">31</a></span>
+<span class="normal"><a href="#__codelineno-93-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-93-5" name="__codelineno-93-5"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-93-6" name="__codelineno-93-6"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-93-7" name="__codelineno-93-7"></a><span class="w">    </span><span class="c1">// Carica i file con channel.fromFilePairs</span>
+<a id="__codelineno-93-8" name="__codelineno-93-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-93-9" name="__codelineno-93-9"></a><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">id</span><span class="o">,</span><span class="w">  </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-93-10" name="__codelineno-93-10"></a><span class="w">       </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">sample</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">,</span><span class="w"> </span><span class="n">readNum</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">)</span>
+<a id="__codelineno-93-11" name="__codelineno-93-11"></a><span class="w">       </span><span class="o">[</span>
+<a id="__codelineno-93-12" name="__codelineno-93-12"></a><span class="w">           </span><span class="o">[</span>
+<a id="__codelineno-93-13" name="__codelineno-93-13"></a><span class="w">               </span><span class="nl">id:</span><span class="w"> </span><span class="n">sample</span><span class="o">,</span>
+<a id="__codelineno-93-14" name="__codelineno-93-14"></a><span class="w">               </span><span class="nl">replicate:</span><span class="w"> </span><span class="n">replicate</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">&#39;rep&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">),</span>
+<a id="__codelineno-93-15" name="__codelineno-93-15"></a><span class="w">               </span><span class="nl">type:</span><span class="w"> </span><span class="n">type</span>
+<a id="__codelineno-93-16" name="__codelineno-93-16"></a><span class="w">           </span><span class="o">],</span>
+<a id="__codelineno-93-17" name="__codelineno-93-17"></a><span class="w">           </span><span class="n">files</span>
+<a id="__codelineno-93-18" name="__codelineno-93-18"></a><span class="w">       </span><span class="o">]</span>
+<a id="__codelineno-93-19" name="__codelineno-93-19"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-93-20" name="__codelineno-93-20"></a><span class="w">        </span><span class="o">.</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_samples</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-93-21" name="__codelineno-93-21"></a>
+<a id="__codelineno-93-22" name="__codelineno-93-22"></a><span class="w">    </span><span class="c1">// Temporaneo: sbirciamo in ch_samples</span>
+<a id="__codelineno-93-23" name="__codelineno-93-23"></a><span class="w">    </span><span class="n">ch_samples</span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+<a id="__codelineno-93-24" name="__codelineno-93-24"></a>
+<a id="__codelineno-93-25" name="__codelineno-93-25"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-93-26" name="__codelineno-93-26"></a><span class="w">    </span><span class="n">analysis_results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">empty</span><span class="o">()</span>
+<a id="__codelineno-93-27" name="__codelineno-93-27"></a><span class="o">}</span>
+<a id="__codelineno-93-28" name="__codelineno-93-28"></a>
+<a id="__codelineno-93-29" name="__codelineno-93-29"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-93-30" name="__codelineno-93-30"></a><span class="w">    </span><span class="n">analysis_results</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-93-31" name="__codelineno-93-31"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-93-32" name="__codelineno-93-32"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
+<p>La closure <code>path</code> nel blocco <code>output {}</code> riceve ogni elemento di output e determina la struttura delle sottodirectory.
+Qui usiamo <code>meta.id</code> per organizzare i risultati per paziente.</p>
 <p>Eseguiamo questo:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-95-1" name="__codelineno-95-1" href="#__codelineno-95-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-95-1" name="__codelineno-95-1" href="#__codelineno-95-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-95-2" name="__codelineno-95-2" href="#__codelineno-95-2"></a>
 <a id="__codelineno-95-3" name="__codelineno-95-3" href="#__codelineno-95-3"></a><span class="go">Launching `./main.nf` [shrivelled_cori] DSL2 - revision: b546a31769</span>
 <a id="__codelineno-95-4" name="__codelineno-95-4" href="#__codelineno-95-4"></a>
@@ -6702,7 +6819,7 @@ Per alimentare il contenuto rimappato al processo <code>ANALYZE_READS</code> (e 
 <a id="__codelineno-95-6" name="__codelineno-95-6" href="#__codelineno-95-6"></a><span class="go">[b5/110360] process &gt; ANALYZE_READS (patientA) [100%] 1 of 1 ✔</span>
 </code></pre></div>
 </details>
-<p>Questo processo è configurato per pubblicare i suoi output in una directory <code>results</code>, quindi date un'occhiata lì.</p>
+<p>Gli output vengono pubblicati in una directory <code>results</code>, quindi date un'occhiata lì.</p>
 <details class="abstract">
 <summary>Contenuti di directory e file</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-96-1" name="__codelineno-96-1" href="#__codelineno-96-1"></a><span class="go">results</span>
@@ -6748,7 +6865,7 @@ Apportate le seguenti modifiche al flusso di lavoro:</p>
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-101-1" name="__codelineno-101-1" href="#__codelineno-101-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-101-1" name="__codelineno-101-1" href="#__codelineno-101-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-101-2" name="__codelineno-101-2" href="#__codelineno-101-2"></a>
 <a id="__codelineno-101-3" name="__codelineno-101-3" href="#__codelineno-101-3"></a><span class="go">Launching `./main.nf` [big_stonebraker] DSL2 - revision: f7f9b8a76c</span>
 <a id="__codelineno-101-4" name="__codelineno-101-4" href="#__codelineno-101-4"></a>
@@ -6774,16 +6891,20 @@ Se guardate più da vicino, abbiamo un problema: abbiamo due repliche per patien
 Stiamo sovrascrivendo il file di output ogni volta.</p>
 <h3 id="64-rendere-unici-i-file-pubblicati">6.4. Rendere unici i file pubblicati<a class="headerlink" href="#64-rendere-unici-i-file-pubblicati" title="Permanent link">&para;</a></h3>
 <p>Poiché abbiamo accesso ai metadati del paziente, possiamo usarli per rendere unici i file pubblicati includendo metadati differenzianti, sia nella struttura della directory che nei nomi dei file stessi.</p>
-<p>Apportate la seguente modifica al flusso di lavoro:</p>
+<p>Apportate la seguente modifica al blocco <code>output {}</code>:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="22:2"><input checked="checked" id="__tabbed_22_1" name="__tabbed_22" type="radio" /><input id="__tabbed_22_2" name="__tabbed_22" type="radio" /><div class="tabbed-labels"><label for="__tabbed_22_1">Dopo</label><label for="__tabbed_22_2">Prima</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/analyze_reads.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-103-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-103-6" name="__codelineno-103-6"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;results/${meta.type}/${meta.id}/${meta.replicate}&quot;</span><span class="w"> </span><span class="o">},</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">main.nf</span><pre><span></span><code><a id="__codelineno-103-1" name="__codelineno-103-1" href="#__codelineno-103-1"></a><span class="n">analysis_results</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-103-2" name="__codelineno-103-2" href="#__codelineno-103-2"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;${meta.type}/${meta.id}/${meta.replicate}&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-103-3" name="__codelineno-103-3" href="#__codelineno-103-3"></a><span class="hll"><span class="o">}</span>
+</span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/analyze_reads.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-104-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-104-6" name="__codelineno-104-6"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;results/${meta.id}&quot;</span><span class="w"> </span><span class="o">},</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">main.nf</span><pre><span></span><code><a id="__codelineno-104-1" name="__codelineno-104-1" href="#__codelineno-104-1"></a><span class="n">analysis_results</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-104-2" name="__codelineno-104-2" href="#__codelineno-104-2"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;${meta.id}&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-104-3" name="__codelineno-104-3" href="#__codelineno-104-3"></a><span class="hll"><span class="o">}</span>
+</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -6794,7 +6915,7 @@ Stiamo sovrascrivendo il file di output ogni volta.</p>
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-106-1" name="__codelineno-106-1" href="#__codelineno-106-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-106-1" name="__codelineno-106-1" href="#__codelineno-106-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-106-2" name="__codelineno-106-2" href="#__codelineno-106-2"></a>
 <a id="__codelineno-106-3" name="__codelineno-106-3" href="#__codelineno-106-3"></a><span class="go">Launching `./main.nf` [insane_swartz] DSL2 - revision: fff18abe6d</span>
 <a id="__codelineno-106-4" name="__codelineno-106-4" href="#__codelineno-106-4"></a>
@@ -6843,7 +6964,7 @@ Stiamo sovrascrivendo il file di output ogni volta.</p>
 Potete saperne di più nella side quest <a href="../metadata/">Metadata e meta map</a>.</p>
 <h3 id="takeaway_5">Takeaway<a class="headerlink" href="#takeaway_5" title="Permanent link">&para;</a></h3>
 <ul>
-<li>La direttiva <code>publishDir</code> può organizzare gli output in base ai valori dei metadati</li>
+<li>Il blocco <code>output {}</code> può organizzare gli output in base ai valori dei metadati usando closure di path dinamiche</li>
 <li>I metadati nelle tuple consentono un'organizzazione strutturata dei risultati</li>
 <li>Questo approccio crea flussi di lavoro manutenibili con una chiara provenienza dei dati</li>
 <li>I processi possono prendere tuple di metadati e file come input</li>
@@ -6939,30 +7060,33 @@ Potete saperne di più nella side quest <a href="../metadata/">Metadata e meta m
 </code></pre></div>
 </li>
 <li>
-<p><strong>Utilizzo delle operazioni sui file nei processi:</strong> Abbiamo integrato le operazioni sui file nei processi Nextflow con una corretta gestione dell'input, usando <code>publishDir</code> per organizzare gli output in base ai metadati.</p>
+<p><strong>Utilizzo delle operazioni sui file nei processi:</strong> Abbiamo integrato le operazioni sui file nei processi Nextflow con una corretta gestione dell'input, usando il blocco <code>output {}</code> per organizzare gli output in base ai metadati.</p>
 <ul>
 <li>Associare una meta map agli input del processo</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-120-1" name="__codelineno-120-1" href="#__codelineno-120-1"></a><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
-<a id="__codelineno-120-2" name="__codelineno-120-2" href="#__codelineno-120-2"></a><span class="n">ch_files</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">id</span><span class="o">,</span><span class="w">  </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-120-2" name="__codelineno-120-2" href="#__codelineno-120-2"></a><span class="n">ch_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_files</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">id</span><span class="o">,</span><span class="w">  </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-120-3" name="__codelineno-120-3" href="#__codelineno-120-3"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">sample</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">,</span><span class="w"> </span><span class="n">readNum</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">)</span>
-<a id="__codelineno-120-4" name="__codelineno-120-4" href="#__codelineno-120-4"></a><span class="w">    </span><span class="o">[</span>
+<a id="__codelineno-120-4" name="__codelineno-120-4" href="#__codelineno-120-4"></a><span class="w">    </span><span class="n">tuple</span><span class="o">(</span>
 <a id="__codelineno-120-5" name="__codelineno-120-5" href="#__codelineno-120-5"></a><span class="w">        </span><span class="o">[</span>
 <a id="__codelineno-120-6" name="__codelineno-120-6" href="#__codelineno-120-6"></a><span class="w">            </span><span class="nl">id:</span><span class="w"> </span><span class="n">sample</span><span class="o">,</span>
 <a id="__codelineno-120-7" name="__codelineno-120-7" href="#__codelineno-120-7"></a><span class="w">            </span><span class="nl">replicate:</span><span class="w"> </span><span class="n">replicate</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">&#39;rep&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">),</span>
 <a id="__codelineno-120-8" name="__codelineno-120-8" href="#__codelineno-120-8"></a><span class="w">            </span><span class="nl">type:</span><span class="w"> </span><span class="n">type</span>
 <a id="__codelineno-120-9" name="__codelineno-120-9" href="#__codelineno-120-9"></a><span class="w">        </span><span class="o">],</span>
-<a id="__codelineno-120-10" name="__codelineno-120-10" href="#__codelineno-120-10"></a><span class="w">         </span><span class="n">files</span>
-<a id="__codelineno-120-11" name="__codelineno-120-11" href="#__codelineno-120-11"></a><span class="w">    </span><span class="o">]</span>
+<a id="__codelineno-120-10" name="__codelineno-120-10" href="#__codelineno-120-10"></a><span class="w">        </span><span class="n">files</span>
+<a id="__codelineno-120-11" name="__codelineno-120-11" href="#__codelineno-120-11"></a><span class="w">    </span><span class="o">)</span>
 <a id="__codelineno-120-12" name="__codelineno-120-12" href="#__codelineno-120-12"></a><span class="o">}</span>
-<a id="__codelineno-120-13" name="__codelineno-120-13" href="#__codelineno-120-13"></a><span class="w">    </span><span class="o">.</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_samples</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-120-14" name="__codelineno-120-14" href="#__codelineno-120-14"></a>
-<a id="__codelineno-120-15" name="__codelineno-120-15" href="#__codelineno-120-15"></a><span class="n">ANALYZE_READS</span><span class="o">(</span><span class="n">ch_samples</span><span class="o">)</span>
+<a id="__codelineno-120-13" name="__codelineno-120-13" href="#__codelineno-120-13"></a>
+<a id="__codelineno-120-14" name="__codelineno-120-14" href="#__codelineno-120-14"></a><span class="n">ANALYZE_READS</span><span class="o">(</span><span class="n">ch_samples</span><span class="o">)</span>
 </code></pre></div>
 <ul>
 <li>Organizzare gli output in base ai metadati</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-121-1" name="__codelineno-121-1" href="#__codelineno-121-1"></a><span class="n">publishDir</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;results/${meta.type}/${meta.id}/${meta.replicate}&quot;</span><span class="w"> </span><span class="o">},</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-121-1" name="__codelineno-121-1" href="#__codelineno-121-1"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-121-2" name="__codelineno-121-2" href="#__codelineno-121-2"></a><span class="w">    </span><span class="n">analysis_results</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-121-3" name="__codelineno-121-3" href="#__codelineno-121-3"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;${meta.type}/${meta.id}/${meta.replicate}&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-121-4" name="__codelineno-121-4" href="#__codelineno-121-4"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-121-5" name="__codelineno-121-5" href="#__codelineno-121-5"></a><span class="o">}</span>
 </code></pre></div>
 </li>
 </ol>
@@ -8714,7 +8838,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Piede" >
         
           
-          <a href="../essential_scripting_patterns/" class="md-footer__link md-footer__link--prev" aria-label="Precedente: Pattern Essenziali di Scripting in Nextflow">
+          <a href="../essential_scripting_patterns/" class="md-footer__link md-footer__link--prev" aria-label="Precedente: Pattern Essenziali di Scripting">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -8724,7 +8848,7 @@ window.mkdocsQuizConfig = {
                 Precedente
               </span>
               <div class="md-ellipsis">
-                Pattern Essenziali di Scripting in Nextflow
+                Pattern Essenziali di Scripting
               </div>
             </div>
           </a>

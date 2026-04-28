@@ -3096,7 +3096,7 @@
   <span class="md-ellipsis">
     
   
-    अभिविन्यास
+    शुरू करना
   
 
     
@@ -3152,7 +3152,7 @@
   <span class="md-ellipsis">
     
   
-    आवश्यक Nextflow स्क्रिप्टिंग पैटर्न
+    आवश्यक स्क्रिप्टिंग पैटर्न
   
 
     
@@ -3292,7 +3292,7 @@
   <span class="md-ellipsis">
     
   
-    वर्कफ़्लो डीबगिंग
+    वर्कफ़्लो की समस्या निवारण
   
 
     
@@ -4984,7 +4984,7 @@ Container URI था <code>community.wave.seqera.io/library/trim-galore:0.6.10--
 <h3 id="11">1.1. इनपुट को सेट करें<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
 <p>हमें एक इनपुट पैरामीटर declare करना होगा, एक सुविधाजनक default value प्रदान करने के लिए एक test profile बनाना होगा, और एक इनपुट channel बनाना होगा।</p>
 <h4 id="111-declaration">1.1.1. एक इनपुट पैरामीटर declaration जोड़ें<a class="headerlink" href="#111-declaration" title="Permanent link">&para;</a></h4>
-<p><code>rnaseq.nf</code> में, <code>Pipeline parameters</code> section के तहत, <code>input</code> नाम का एक पैरामीटर <code>Path</code> type के साथ declare करो।</p>
+<p><code>rnaseq.nf</code> में, <code>Pipeline parameters</code> section के तहत, <code>reads</code> नाम का एक पैरामीटर <code>Path</code> type के साथ declare करो।</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">बाद में</label><label for="__tabbed_1_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5022,7 +5022,7 @@ Default value प्रदान करने के लिए कई विक�
 <h4 id="112-nextflowconfig-default-value-test-profile">1.1.2. <code>nextflow.config</code> में default value के साथ एक test profile बनाएं<a class="headerlink" href="#112-nextflowconfig-default-value-test-profile" title="Permanent link">&para;</a></h4>
 <p>एक test profile command line पर इनपुट specify किए बिना workflow को try करने के लिए सुविधाजनक default values प्रदान करता है।
 यह Nextflow ecosystem में एक सामान्य convention है (अधिक विवरण के लिए <a href="../../../hello_nextflow/06_hello_config/">Hello Config</a> देखें)।</p>
-<p><code>nextflow.config</code> में एक <code>profiles</code> block जोड़ें जिसमें एक <code>test</code> profile हो जो <code>input</code> पैरामीटर को test FASTQ फ़ाइलों में से एक पर सेट करता है।</p>
+<p><code>nextflow.config</code> में एक <code>profiles</code> block जोड़ें जिसमें एक <code>test</code> profile हो जो <code>reads</code> पैरामीटर को test FASTQ फ़ाइलों में से एक पर सेट करता है।</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">बाद में</label><label for="__tabbed_2_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5091,9 +5091,9 @@ Default value प्रदान करने के लिए कई विक�
 <span class="normal"><a href="#__codelineno-11-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-11-14" name="__codelineno-11-14"></a>
 <a id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="w">    </span><span class="c1">// Create input channel</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="w">    </span><span class="c1">// इनपुट channel बनाएं</span>
 <a id="__codelineno-11-17" name="__codelineno-11-17"></a>
-<a id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="w">    </span><span class="c1">// Call processes</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="w">    </span><span class="c1">// Processes को call करें</span>
 <a id="__codelineno-11-19" name="__codelineno-11-19"></a>
 <a id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="w">    </span><span class="nl">publish:</span>
 <a id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="w">    </span><span class="c1">// Declare outputs to publish</span>
@@ -5263,7 +5263,7 @@ Default value प्रदान करने के लिए कई विक�
 <a id="__codelineno-17-17" name="__codelineno-17-17"></a><span class="w">    </span><span class="c1">// एक फ़ाइल path से इनपुट channel बनाएं</span>
 <a id="__codelineno-17-18" name="__codelineno-17-18"></a><span class="w">    </span><span class="n">read_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 <a id="__codelineno-17-19" name="__codelineno-17-19"></a>
-<a id="__codelineno-17-20" name="__codelineno-17-20"></a><span class="w">    </span><span class="c1">// Call processes</span>
+<a id="__codelineno-17-20" name="__codelineno-17-20"></a><span class="w">    </span><span class="c1">// Processes को call करें</span>
 <a id="__codelineno-17-21" name="__codelineno-17-21"></a>
 <a id="__codelineno-17-22" name="__codelineno-17-22"></a><span class="w">    </span><span class="nl">publish:</span>
 <a id="__codelineno-17-23" name="__codelineno-17-23"></a><span class="w">    </span><span class="c1">// Declare outputs to publish</span>
@@ -5348,7 +5348,7 @@ Symlinks टूट जाएंगे जब तुम अपनी <code>work</
 </code></pre></div>
 <details class="success">
 <summary>कमांड आउटपुट</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `rnaseq.nf` [mad_lorenz] DSL2 - revision: 5846a164d2</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
@@ -5665,7 +5665,7 @@ Container URI था <code>community.wave.seqera.io/library/trim-galore:0.6.10--
 </code></pre></div>
 <details class="success">
 <summary>कमांड आउटपुट</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>
 <a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="go">Launching `rnaseq.nf` [gloomy_becquerel] DSL2 - revision: bb11055736</span>
 <a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>
@@ -6104,7 +6104,7 @@ Script block पहले archive से index को extract करता ह�
 </code></pre></div>
 <details class="success">
 <summary>कमांड आउटपुट</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a>
 <a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a><span class="go">Launching `rnaseq.nf` [elated_stonebraker] DSL2 - revision: e8e57d0cdd</span>
 <a id="__codelineno-57-4" name="__codelineno-57-4" href="#__codelineno-57-4"></a>

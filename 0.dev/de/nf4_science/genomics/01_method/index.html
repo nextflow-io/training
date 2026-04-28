@@ -491,7 +491,7 @@
   <span class="md-ellipsis">
     
   
-    Startseite
+    Home
   
 
     
@@ -2219,7 +2219,7 @@
   <span class="md-ellipsis">
     
   
-    Teil 2: Variantenerkennung pro Probe
+    02 per sample variant calling
   
 
     
@@ -2951,7 +2951,7 @@
   <span class="md-ellipsis">
     
   
-    Orientierung
+    Erste Schritte
   
 
     
@@ -3007,7 +3007,7 @@
   <span class="md-ellipsis">
     
   
-    Wesentliche Nextflow-Scripting-Muster
+    Wesentliche Scripting-Muster
   
 
     
@@ -3119,7 +3119,7 @@
   <span class="md-ellipsis">
     
   
-    Testen mit nf-test
+    Index
   
 
     
@@ -4703,7 +4703,7 @@ Dasselbe gilt für die Hilfsdateien des Referenzgenoms (Index- und Sequenzwörte
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>gatk<span class="w"> </span>HaplotypeCaller<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">        </span>-R<span class="w"> </span>/data/ref/ref.fasta<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">        </span>-I<span class="w"> </span>/data/bam/reads_mother.bam<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">        </span>-O<span class="w"> </span>/data/vcf/reads_mother.vcf<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">        </span>-O<span class="w"> </span>reads_mother.vcf<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">        </span>-L<span class="w"> </span>/data/ref/intervals.bed
 </code></pre></div>
 <details class="success">
@@ -4824,7 +4824,7 @@ Wenn du zum Anfang der Datei hochscrollst, findest du einen Header, der aus viel
 <a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=GQ,Number=1,Type=Integer,Description=&quot;Genotype Quality&quot;&gt;</span>
 <a id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=GT,Number=1,Type=String,Description=&quot;Genotype&quot;&gt;</span>
 <a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PL,Number=G,Type=Integer,Description=&quot;Normalized, Phred-scaled likelihoods for genotypes as defined in the VCF specification&quot;&gt;</span>
-<a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=HaplotypeCaller,CommandLine=&quot;HaplotypeCaller --output reads_mother.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [gekürzt]&quot;,Version=&quot;4.5.0.0&quot;,Date=&quot;February 11, 2026 at 4:23:43 PM GMT&quot;&gt;</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=HaplotypeCaller,CommandLine=&quot;HaplotypeCaller --output reads_mother.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abridged]&quot;,Version=&quot;4.5.0.0&quot;,Date=&quot;February 11, 2026 at 4:23:43 PM GMT&quot;&gt;</span>
 <a id="__codelineno-15-9" name="__codelineno-15-9"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=AC,Number=A,Type=Integer,Description=&quot;Allele count in genotypes, for each ALT allele, in the same order as listed&quot;&gt;</span>
 <a id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=AF,Number=A,Type=Float,Description=&quot;Allele Frequency, for each ALT allele, in the same order as listed&quot;&gt;</span>
 <a id="__codelineno-15-11" name="__codelineno-15-11"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=AN,Number=1,Type=Integer,Description=&quot;Total number of alleles in called genotypes&quot;&gt;</span>
@@ -5272,7 +5272,7 @@ Dies ist technisch keine Anforderung, aber eine dringend empfohlene Konvention.<
 <a id="__codelineno-27-11" name="__codelineno-27-11"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PL,Number=G,Type=Integer,Description=&quot;Normalized, Phred-scaled likelihoods for genotypes as defined in the VCF specification&quot;&gt;</span>
 <a id="__codelineno-27-12" name="__codelineno-27-12"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PS,Number=1,Type=Integer,Description=&quot;Phasing set (typically the position of the first variant in the set)&quot;&gt;</span>
 <a id="__codelineno-27-13" name="__codelineno-27-13"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=SB,Number=4,Type=Integer,Description=&quot;Per-sample component statistics which comprise the Fisher&#39;s Exact Test to detect strand bias.&quot;&gt;</span>
-<a id="__codelineno-27-14" name="__codelineno-27-14"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=HaplotypeCaller,CommandLine=&quot;HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [gekürzt]&quot;,Version=&quot;4.5.0.0&quot;,Date=&quot;February 11, 2026 at 4:51:00 PM GMT&quot;&gt;</span>
+<a id="__codelineno-27-14" name="__codelineno-27-14"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=HaplotypeCaller,CommandLine=&quot;HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abridged]&quot;,Version=&quot;4.5.0.0&quot;,Date=&quot;February 11, 2026 at 4:51:00 PM GMT&quot;&gt;</span>
 <a id="__codelineno-27-15" name="__codelineno-27-15"></a><span class="gp">#</span><span class="c1">#GVCFBlock0-1=minGQ=0(inclusive),maxGQ=1(exclusive)</span>
 <a id="__codelineno-27-16" name="__codelineno-27-16"></a><span class="gp">#</span><span class="c1">#GVCFBlock1-2=minGQ=1(inclusive),maxGQ=2(exclusive)</span>
 <a id="__codelineno-27-17" name="__codelineno-27-17"></a><span class="gp">#</span><span class="c1">#GVCFBlock10-11=minGQ=10(inclusive),maxGQ=11(exclusive)</span>
@@ -5809,9 +5809,9 @@ Es ist eine weitere relativ kleine Datei, sodass du <code>cat family_trio.vcf</c
 <a id="__codelineno-37-13" name="__codelineno-37-13"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PS,Number=1,Type=Integer,Description=&quot;Phasing set (typically the position of the first variant in the set)&quot;&gt;</span>
 <a id="__codelineno-37-14" name="__codelineno-37-14"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=RGQ,Number=1,Type=Integer,Description=&quot;Unconditional reference genotype confidence, encoded as a phred quality -10*log10 p(genotype call is wrong)&quot;&gt;</span>
 <a id="__codelineno-37-15" name="__codelineno-37-15"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=SB,Number=4,Type=Integer,Description=&quot;Per-sample component statistics which comprise the Fisher&#39;s Exact Test to detect strand bias.&quot;&gt;</span>
-<a id="__codelineno-37-16" name="__codelineno-37-16"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=GenomicsDBImport,CommandLine=&quot;GenomicsDBImport --genomicsdb-workspace-path family_trio_gdb --variant reads_mother.g.vcf --variant reads_father.g.vcf --variant reads_son.g.vcf --intervals /data/ref/intervals.bed [gekürzt]&quot;,Version=&quot;4.5.0.0&quot;,Date=&quot;February 11, 2026 at 5:37:07 PM GMT&quot;&gt;</span>
-<a id="__codelineno-37-17" name="__codelineno-37-17"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=GenotypeGVCFs,CommandLine=&quot;GenotypeGVCFs --output family_trio.vcf --variant gendb://family_trio_gdb --reference /data/ref/ref.fasta --include-non-variant-sites false [gekürzt]&quot;,Version=&quot;4.5.0.0&quot;,Date=&quot;February 11, 2026 at 5:38:45 PM GMT&quot;&gt;</span>
-<a id="__codelineno-37-18" name="__codelineno-37-18"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=HaplotypeCaller,CommandLine=&quot;HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [gekürzt]&quot;,Version=&quot;4.5.0.0&quot;,Date=&quot;February 11, 2026 at 4:51:00 PM GMT&quot;&gt;</span>
+<a id="__codelineno-37-16" name="__codelineno-37-16"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=GenomicsDBImport,CommandLine=&quot;GenomicsDBImport --genomicsdb-workspace-path family_trio_gdb --variant reads_mother.g.vcf --variant reads_father.g.vcf --variant reads_son.g.vcf --intervals /data/ref/intervals.bed [abridged]&quot;,Version=&quot;4.5.0.0&quot;,Date=&quot;February 11, 2026 at 5:37:07 PM GMT&quot;&gt;</span>
+<a id="__codelineno-37-17" name="__codelineno-37-17"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=GenotypeGVCFs,CommandLine=&quot;GenotypeGVCFs --output family_trio.vcf --variant gendb://family_trio_gdb --reference /data/ref/ref.fasta --include-non-variant-sites false [abridged]&quot;,Version=&quot;4.5.0.0&quot;,Date=&quot;February 11, 2026 at 5:38:45 PM GMT&quot;&gt;</span>
+<a id="__codelineno-37-18" name="__codelineno-37-18"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=HaplotypeCaller,CommandLine=&quot;HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abridged]&quot;,Version=&quot;4.5.0.0&quot;,Date=&quot;February 11, 2026 at 4:51:00 PM GMT&quot;&gt;</span>
 <a id="__codelineno-37-19" name="__codelineno-37-19"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=AC,Number=A,Type=Integer,Description=&quot;Allele count in genotypes, for each ALT allele, in the same order as listed&quot;&gt;</span>
 <a id="__codelineno-37-20" name="__codelineno-37-20"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=AF,Number=A,Type=Float,Description=&quot;Allele Frequency, for each ALT allele, in the same order as listed&quot;&gt;</span>
 <a id="__codelineno-37-21" name="__codelineno-37-21"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=AN,Number=1,Type=Integer,Description=&quot;Total number of alleles in called genotypes&quot;&gt;</span>
@@ -7662,13 +7662,13 @@ window.mkdocsQuizConfig = {
         
         
           
-          <a href="../02_per_sample_variant_calling/" class="md-footer__link md-footer__link--next" aria-label="Weiter: Teil 2: Variantenerkennung pro Probe">
+          <a href="../02_per_sample_variant_calling/" class="md-footer__link md-footer__link--next" aria-label="Weiter: 02 per sample variant calling">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Weiter
               </span>
               <div class="md-ellipsis">
-                Teil 2: Variantenerkennung pro Probe
+                02 per sample variant calling
               </div>
             </div>
             <div class="md-footer__button md-icon">

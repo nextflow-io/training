@@ -2348,7 +2348,7 @@
   <span class="md-ellipsis">
     
   
-    Orientacja
+    Pierwsze kroki
   
 
     
@@ -2376,7 +2376,7 @@
   <span class="md-ellipsis">
     
   
-    Środowisko programistyczne
+    Index
   
 
     
@@ -2404,7 +2404,7 @@
   <span class="md-ellipsis">
     
   
-    Podstawowe Wzorce Skryptowania w Nextflow
+    Podstawowe Wzorce Skryptowania
   
 
     
@@ -2516,7 +2516,7 @@
   <span class="md-ellipsis">
     
   
-    Testowanie z nf-test
+    Index
   
 
     
@@ -2544,7 +2544,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow'ów
+    Rozwiązywanie problemów z Workflow'ami
   
 
     
@@ -4285,7 +4285,7 @@ Przyjrzyj się jej:</p>
 </div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">Uwaga</p>
+<p class="admonition-title">Składnia list w Groovy</p>
 <p>Zastąpiliśmy javowy zapis <code>List.&lt;TraceObserver&gt;of(...)</code> prostszym literałem listy Groovy <code>[...]</code>.
 Oba zwracają <code>Collection</code>, ale składnia Groovy jest bardziej czytelna przy dodawaniu wielu elementów.</p>
 </div>
@@ -4294,7 +4294,7 @@ Oba zwracają <code>Collection</code>, ale składnia Groovy jest bardziej czytel
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>nextflow<span class="w"> </span>run<span class="w"> </span>greet.nf<span class="w"> </span>-ansi-log<span class="w"> </span><span class="nb">false</span>
 </code></pre></div>
 <div class="admonition tip">
-<p class="admonition-title">Wskazówka</p>
+<p class="admonition-title">Po co <code>-ansi-log false</code>?</p>
 <p>Domyślnie wyświetlanie postępu ANSI w Nextflow'ie nadpisuje poprzednie linie, pokazując przejrzysty, aktualizowany widok postępu.
 Oznacza to, że widoczna byłaby tylko <em>ostateczna</em> liczba zadań, a nie komunikaty pośrednie.</p>
 <p>Użycie <code>-ansi-log false</code> wyłącza to zachowanie i pokazuje wszystkie wyjścia sekwencyjnie, co jest niezbędne przy testowaniu obserwatorów wyświetlających komunikaty podczas wykonania.</p>
@@ -4305,7 +4305,7 @@ Oznacza to, że widoczna byłaby tylko <em>ostateczna</em> liczba zadań, a nie 
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="go">Decorated: *** Hello ***</span>
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="go">✓ Task completed!</span>
 <a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="go">✓ Task completed!</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="go">Decorated: *** Holà ***</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="go">Decorated: *** Hola ***</span>
 <a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="go">✓ Task completed!</span>
 <a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="go">...</span>
 <a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="go">Pipeline complete! 👋</span>
@@ -4394,7 +4394,7 @@ Po zakończeniu całego workflow'u obserwator wyświetla końcowy wynik.</p>
 </code></pre></div>
 <details class="example">
 <summary>Przykład</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W  ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W  ~  version 25.10.4</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="go">Launching `greet.nf` [pensive_engelbart] DSL2 - revision: 85fefd90d0</span>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Pipeline is starting! 🚀</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="go">Reversed: olleH</span>
@@ -4410,7 +4410,7 @@ Po zakończeniu całego workflow'u obserwator wyświetla końcowy wynik.</p>
 <a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="go">[85/a6b3ad] Submitted process &gt; SAY_HELLO (4)</span>
 <a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="go">📊 Tasks completed so far: 1</span>
 <a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="go">📊 Tasks completed so far: 2</span>
-<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="go">Decorated: *** Holà ***</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="go">Decorated: *** Hola ***</span>
 <a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="go">📊 Tasks completed so far: 3</span>
 <a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="go">Decorated: *** Ciao ***</span>
 <a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="go">[3c/be6686] Submitted process &gt; SAY_HELLO (5)</span>

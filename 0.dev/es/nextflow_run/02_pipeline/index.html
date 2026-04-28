@@ -3093,7 +3093,7 @@
   <span class="md-ellipsis">
     
   
-    Orientación
+    Primeros pasos
   
 
     
@@ -3149,7 +3149,7 @@
   <span class="md-ellipsis">
     
   
-    Patrones Esenciales de Scripting en Nextflow
+    Patrones Esenciales de Scripting
   
 
     
@@ -3205,7 +3205,7 @@
   <span class="md-ellipsis">
     
   
-    Metadatos y meta maps
+    Metadatos y Meta Maps
   
 
     
@@ -3261,7 +3261,7 @@
   <span class="md-ellipsis">
     
   
-    Pruebas con nf-test
+    Index
   
 
     
@@ -3289,7 +3289,7 @@
   <span class="md-ellipsis">
     
   
-    Depuración de Workflows
+    Resolución de Problemas en Workflows
   
 
     
@@ -4833,7 +4833,7 @@ Note que los números no tienen significado, están ahí solo con propósitos il
 <span class="normal"><a href="#__codelineno-0-2">2</a></span>
 <span class="normal"><a href="#__codelineno-0-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>Hello,English,123
 <a id="__codelineno-0-2" name="__codelineno-0-2"></a>Bonjour,French,456
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a>Holà,Spanish,789
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>Hola,Spanish,789
 </code></pre></div></td></tr></table></div>
 <p>También hemos escrito una versión mejorada del workflow original, ahora llamada <code>2a-inputs.nf</code>, que leerá el archivo CSV, extraerá los saludos y escribirá cada uno de ellos en un archivo separado.</p>
 <figure class="excalidraw">
@@ -4850,7 +4850,7 @@ Note que los números no tienen significado, están ahí solo con propósitos il
 </code></pre></div>
 <details class="success">
 <summary>Salida del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">Launching `2a-inputs.nf` [mighty_sammet] DSL2 - revision: 29fb5352b3</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
@@ -4863,7 +4863,7 @@ Esto sugiere que el process <code>sayHello()</code> fue llamado tres veces, una 
 <h3 id="12-encontrar-las-salidas-publicadas-en-el-directorio-results">1.2. Encontrar las salidas publicadas en el directorio <code>results</code><a class="headerlink" href="#12-encontrar-las-salidas-publicadas-en-el-directorio-results" title="Permanent link">&para;</a></h3>
 <p>Veamos el directorio 'results' para ver si nuestro workflow todavía está escribiendo una copia de nuestras salidas allí.</p>
 <details class="abstract">
-<summary>Contenidos del directorio</summary>
+<summary>Contenido del directorio</summary>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span>
 <span class="normal"><a href="#__codelineno-3-3">3</a></span>
@@ -4876,18 +4876,18 @@ Esto sugiere que el process <code>sayHello()</code> fue llamado tres veces, una 
 <a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="hll"><span class="go">└── 2a-inputs</span>
 </span><a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="hll"><span class="go">    ├── Bonjour-output.txt</span>
 </span><a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="hll"><span class="go">    ├── Hello-output.txt</span>
-</span><a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="hll"><span class="go">    └── Holà-output.txt</span>
+</span><a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="hll"><span class="go">    └── Hola-output.txt</span>
 </span></code></pre></div></td></tr></table></div>
 </details>
 <p>¡Sí! Vemos un nuevo directorio llamado <code>2a-inputs</code> con tres archivos de salida con diferentes nombres, convenientemente.</p>
 <p>Puede abrir cada uno de ellos para asegurarse de que contienen la cadena de saludo apropiada.</p>
 <details class="abstract">
-<summary>Contenido de los archivos</summary>
+<summary>Contenido del archivo</summary>
 <div class="highlight"><span class="filename">results/2a-inputs/Hello-output.txt</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">Hello</span>
 </code></pre></div>
 <div class="highlight"><span class="filename">results/2a-inputs/Bonjour-output.txt</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">Bonjour</span>
 </code></pre></div>
-<div class="highlight"><span class="filename">results/2a-inputs/Holà-output.txt</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">Holà</span>
+<div class="highlight"><span class="filename">results/2a-inputs/Hola-output.txt</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">Hola</span>
 </code></pre></div>
 </details>
 <p>Esto confirma que cada saludo en el archivo de entrada ha sido procesado apropiadamente.</p>
@@ -4897,7 +4897,7 @@ Esto sugiere que el process <code>sayHello()</code> fue llamado tres veces, una 
 <h4 id="131-examinar-el-directorio-de-tarea-dado-en-la-terminal">1.3.1. Examinar el directorio de tarea dado en la terminal<a class="headerlink" href="#131-examinar-el-directorio-de-tarea-dado-en-la-terminal" title="Permanent link">&para;</a></h4>
 <p>Echemos un vistazo dentro de ese directorio de tarea <code>8e/0eb066</code>.</p>
 <details class="abstract">
-<summary>Contenidos del directorio</summary>
+<summary>Contenido del directorio</summary>
 <div class="highlight"><span class="filename">8e/0eb066</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="go">work/8e/0eb066071cdb4123906b7b4ea8b047/</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="go">└── Bonjour-output.txt</span>
 </code></pre></div>
@@ -4917,7 +4917,7 @@ Hay otras dos que no están listadas allí.</p>
 <span class="normal"><a href="#__codelineno-9-2">2</a></span>
 <span class="normal"><a href="#__codelineno-9-3">3</a></span>
 <span class="normal"><a href="#__codelineno-9-4">4</a></span>
-<span class="normal"><a href="#__codelineno-9-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">N E X T F L O W  ~  version 25.10.2</span>
+<span class="normal"><a href="#__codelineno-9-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">N E X T F L O W  ~  version 25.10.4</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="go">Launching `2a-inputs.nf` [pedantic_hamilton] DSL2 - revision: 6bbc42e49f</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="go">[ab/1a8ece] Submitted process &gt; sayHello (1)</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="go">[0d/2cae24] Submitted process &gt; sayHello (2)</span>
@@ -4932,7 +4932,7 @@ En este modo expandido, solo reporta que fueron enviadas.</p>
 <p>Esto confirma que el process <code>sayHello()</code> es llamado tres veces, y se crea un directorio de tarea separado para cada uno.</p>
 <p>Si miramos dentro de cada uno de los directorios de tarea listados allí, podemos verificar que cada uno corresponde a uno de los saludos.</p>
 <details class="abstract">
-<summary>Contenidos del directorio</summary>
+<summary>Contenido del directorio</summary>
 <div class="highlight"><span class="filename">ab/1a8ece</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">work/ab/1a8ece307e53f03fce689dde904b64/</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="go">└── Hello-output.txt</span>
 </code></pre></div>
@@ -4940,7 +4940,7 @@ En este modo expandido, solo reporta que fueron enviadas.</p>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="go">└── Bonjour-output.txt</span>
 </code></pre></div>
 <div class="highlight"><span class="filename">b5/0df1d6</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">work/b5/0df1d642353269909c2ce23fc2a8fa/</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="go">└── Holà-output.txt</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="go">└── Hola-output.txt</span>
 </code></pre></div>
 </details>
 <p>Esto confirma que cada llamada de process se ejecuta aislada de todas las demás.
@@ -5067,7 +5067,7 @@ Eso tiene muchas ventajas, incluyendo evitar colisiones si el process produce al
 <a id="__codelineno-14-35" name="__codelineno-14-35"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Este código crea un channel llamado <code>greeting_ch</code> que lee el archivo CSV, lo analiza y extrae la primera columna de cada fila.
-El resultado es un channel que contiene <code>Hello</code>, <code>Bonjour</code> y <code>Holà</code>.</p>
+El resultado es un channel que contiene <code>Hello</code>, <code>Bonjour</code> y <code>Hola</code>.</p>
 <details class="tip">
 <summary>¿Cómo funciona esto?</summary>
 <p>Esto es lo que significa esa línea en español sencillo:</p>
@@ -5086,12 +5086,12 @@ El resultado es un channel que contiene <code>Hello</code>, <code>Bonjour</code>
 <span class="normal"><a href="#__codelineno-15-2">2</a></span>
 <span class="normal"><a href="#__codelineno-15-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a>Hello,English,123
 <a id="__codelineno-15-2" name="__codelineno-15-2"></a>Bonjour,French,456
-<a id="__codelineno-15-3" name="__codelineno-15-3"></a>Holà,Spanish,789
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a>Hola,Spanish,789
 </code></pre></div></td></tr></table></div>
 <p>Hemos transformado eso en un array que se ve así:</p>
-<div class="highlight"><span class="filename">Contenido del array</span><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>[[Hello,English,123],[Bonjour,French,456],[Holà,Spanish,789]]
+<div class="highlight"><span class="filename">Contenido del array</span><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>[[Hello,English,123],[Bonjour,French,456],[Hola,Spanish,789]]
 </code></pre></div>
-<p>Y luego hemos tomado el primer elemento de cada una de las tres filas y los hemos cargado en un channel de Nextflow que ahora contiene: <code>Hello</code>, <code>Bonjour</code> y <code>Holà</code>.</p>
+<p>Y luego hemos tomado el primer elemento de cada una de las tres filas y los hemos cargado en un channel de Nextflow que ahora contiene: <code>Hello</code>, <code>Bonjour</code> y <code>Hola</code>.</p>
 <p>Si quiere entender los channels y operadores en profundidad, incluyendo cómo escribirlos usted mismo, vea <a href="../../hello_nextflow/02_hello_channels/#4-read-input-values-from-a-csv-file">Hello Nextflow Part 2: Hello Channels</a>.</p>
 </details>
 <h4 id="142-llamar-al-process-en-cada-saludo">1.4.2. Llamar al process en cada saludo<a class="headerlink" href="#142-llamar-al-process-en-cada-saludo" title="Permanent link">&para;</a></h4>
@@ -5178,7 +5178,7 @@ Construyamos sobre lo que acabamos de aprender sobre channels, y veamos cómo Ne
 <span class="normal"><a href="#__codelineno-20-4">4</a></span>
 <span class="normal"><a href="#__codelineno-20-5">5</a></span>
 <span class="normal"><a href="#__codelineno-20-6">6</a></span>
-<span class="normal"><a href="#__codelineno-20-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<span class="normal"><a href="#__codelineno-20-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2"></a>
 <a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="go">Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4"></a>
@@ -5191,7 +5191,7 @@ Construyamos sobre lo que acabamos de aprender sobre channels, y veamos cómo Ne
 <h3 id="22-encontrar-las-salidas">2.2. Encontrar las salidas<a class="headerlink" href="#22-encontrar-las-salidas" title="Permanent link">&para;</a></h3>
 <p>Verifiquemos que eso es de hecho lo que sucedió echando un vistazo en el directorio <code>results</code>.</p>
 <details class="abstract">
-<summary>Contenidos del directorio</summary>
+<summary>Contenido del directorio</summary>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
@@ -5214,17 +5214,17 @@ Construyamos sobre lo que acabamos de aprender sobre channels, y veamos cómo Ne
 <a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="go">├── 2a-inputs</span>
 <a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="go">|   ├── Bonjour-output.txt</span>
 <a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="go">|   ├── Hello-output.txt</span>
-<a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="go">|   └── Holà-output.txt</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="go">|   └── Hola-output.txt</span>
 <a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="hll"><span class="go">└── 2b-multistep</span>
 </span><a id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="hll"><span class="go">    ├── COLLECTED-batch-output.txt</span>
 </span><a id="__codelineno-21-10" name="__codelineno-21-10"></a><span class="hll"><span class="go">    ├── batch-report.txt</span>
 </span><a id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="hll"><span class="go">    └── intermediates</span>
 </span><a id="__codelineno-21-12" name="__codelineno-21-12"></a><span class="hll"><span class="go">        ├── Bonjour-output.txt</span>
 </span><a id="__codelineno-21-13" name="__codelineno-21-13"></a><span class="hll"><span class="go">        ├── Hello-output.txt</span>
-</span><a id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="hll"><span class="go">        ├── Holà-output.txt</span>
+</span><a id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="hll"><span class="go">        ├── Hola-output.txt</span>
 </span><a id="__codelineno-21-15" name="__codelineno-21-15"></a><span class="hll"><span class="go">        ├── UPPER-Bonjour-output.txt</span>
 </span><a id="__codelineno-21-16" name="__codelineno-21-16"></a><span class="hll"><span class="go">        ├── UPPER-Hello-output.txt</span>
-</span><a id="__codelineno-21-17" name="__codelineno-21-17"></a><span class="go">        └── UPPER-Holà-output.txt</span>
+</span><a id="__codelineno-21-17" name="__codelineno-21-17"></a><span class="go">        └── UPPER-Hola-output.txt</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>Como puede ver, tenemos un nuevo directorio llamado <code>2b-multistep</code>, y contiene bastantes más archivos que antes.
@@ -5232,10 +5232,10 @@ Algunos de los archivos han sido agrupados en un subdirectorio llamado <code>int
 <p>Esos dos son los resultados finales del workflow de múltiples pasos.
 Tómese un minuto para mirar los nombres de los archivos y verificar su contenido para confirmar que son lo que espera.</p>
 <details class="abstract">
-<summary>Contenido de los archivos</summary>
+<summary>Contenido del archivo</summary>
 <div class="highlight"><span class="filename">results/2b-multistep/COLLECTED-batch-output.txt</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>HELLO
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>BONJOUR
-<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>HOLà
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>HOLA
 </code></pre></div>
 <div class="highlight"><span class="filename">results/2b-multistep/batch-report.txt</span><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>There were 3 greetings in this batch.
 </code></pre></div>
@@ -5498,9 +5498,9 @@ Luego la siguiente llamada de process, a <code>convertToUpper</code>, se refiere
 Así es como transportamos datos de un paso al siguiente en Nextflow.</p>
 <h4 id="233-un-process-puede-tomar-multiples-entradas">2.3.3. Un process puede tomar múltiples entradas<a class="headerlink" href="#233-un-process-puede-tomar-multiples-entradas" title="Permanent link">&para;</a></h4>
 <p>La tercera llamada de process, a <code>collectGreetings</code>, es un poco diferente.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2b-multistep.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-78">78</a></span>
-<span class="normal"><a href="#__codelineno-26-79">79</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-78" name="__codelineno-26-78"></a><span class="w">    </span><span class="c1">// recopilar todos los saludos en un archivo</span>
-<a id="__codelineno-26-79" name="__codelineno-26-79"></a><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">(),</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">)</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2b-multistep.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-77">77</a></span>
+<span class="normal"><a href="#__codelineno-26-78">78</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-77" name="__codelineno-26-77"></a><span class="w">    </span><span class="c1">// recopilar todos los saludos en un archivo</span>
+<a id="__codelineno-26-78" name="__codelineno-26-78"></a><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">(),</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Puede ver que esta llamada recibe dos entradas, <code>convertToUpper.out.collect()</code> y <code>params.batch</code>.
 Ignorando la parte <code>.collect()</code> por ahora, podemos generalizar esto como <code>collectGreetings(input1, input2)</code>.</p>
@@ -5546,9 +5546,9 @@ Así es como obtenemos todos los saludos de vuelta en el mismo archivo.</p>
 La desventaja es que a veces puede hacer más difícil descifrar lo que está haciendo el pipeline.</p>
 <h4 id="235-un-parametro-de-entrada-puede-tener-un-valor-predeterminado">2.3.5. Un parámetro de entrada puede tener un valor predeterminado<a class="headerlink" href="#235-un-parametro-de-entrada-puede-tener-un-valor-predeterminado" title="Permanent link">&para;</a></h4>
 <p>Puede haber notado que <code>collectGreetings</code> toma una segunda entrada, <code>params.batch</code>:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2b-multistep.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-78">78</a></span>
-<span class="normal"><a href="#__codelineno-28-79">79</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-78" name="__codelineno-28-78"></a><span class="w">    </span><span class="c1">// recopilar todos los saludos en un archivo</span>
-<a id="__codelineno-28-79" name="__codelineno-28-79"></a><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">(),</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">)</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2b-multistep.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-77">77</a></span>
+<span class="normal"><a href="#__codelineno-28-78">78</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-77" name="__codelineno-28-77"></a><span class="w">    </span><span class="c1">// recopilar todos los saludos en un archivo</span>
+<a id="__codelineno-28-78" name="__codelineno-28-78"></a><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">(),</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Esto pasa un parámetro CLI llamado <code>--batch</code> al workflow.
 Sin embargo, cuando lanzamos el workflow antes, no especificamos un parámetro <code>--batch</code>.</p>
@@ -5575,7 +5575,7 @@ Pero si proporcionamos uno en la línea de comandos, el valor que especificamos 
 <span class="normal"><a href="#__codelineno-31-4">4</a></span>
 <span class="normal"><a href="#__codelineno-31-5">5</a></span>
 <span class="normal"><a href="#__codelineno-31-6">6</a></span>
-<span class="normal"><a href="#__codelineno-31-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<span class="normal"><a href="#__codelineno-31-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2"></a>
 <a id="__codelineno-31-3" name="__codelineno-31-3"></a><span class="go">Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726</span>
 <a id="__codelineno-31-4" name="__codelineno-31-4"></a>
@@ -5586,7 +5586,7 @@ Pero si proporcionamos uno en la línea de comandos, el valor que especificamos 
 </details>
 <p>Debería ver nuevas salidas finales nombradas con su nombre de lote personalizado.</p>
 <details class="abstract">
-<summary>Contenidos del directorio</summary>
+<summary>Contenido del directorio</summary>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
@@ -5611,7 +5611,7 @@ Pero si proporcionamos uno en la línea de comandos, el valor que especificamos 
 <a id="__codelineno-32-4" name="__codelineno-32-4"></a><span class="go">├── 2a-inputs</span>
 <a id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="go">|   ├── Bonjour-output.txt</span>
 <a id="__codelineno-32-6" name="__codelineno-32-6"></a><span class="go">|   ├── Hello-output.txt</span>
-<a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="go">|   └── Holà-output.txt</span>
+<a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="go">|   └── Hola-output.txt</span>
 <a id="__codelineno-32-8" name="__codelineno-32-8"></a><span class="go">└── 2b-multistep</span>
 <a id="__codelineno-32-9" name="__codelineno-32-9"></a><span class="go">    ├── COLLECTED-batch-output.txt</span>
 <a id="__codelineno-32-10" name="__codelineno-32-10"></a><span class="hll"><span class="go">    ├── COLLECTED-test-output.txt</span>
@@ -5620,10 +5620,10 @@ Pero si proporcionamos uno en la línea de comandos, el valor que especificamos 
 </span><a id="__codelineno-32-13" name="__codelineno-32-13"></a><span class="go">    └── intermediates</span>
 <a id="__codelineno-32-14" name="__codelineno-32-14"></a><span class="go">        ├── Bonjour-output.txt</span>
 <a id="__codelineno-32-15" name="__codelineno-32-15"></a><span class="go">        ├── Hello-output.txt</span>
-<a id="__codelineno-32-16" name="__codelineno-32-16"></a><span class="go">        ├── Holà-output.txt</span>
+<a id="__codelineno-32-16" name="__codelineno-32-16"></a><span class="go">        ├── Hola-output.txt</span>
 <a id="__codelineno-32-17" name="__codelineno-32-17"></a><span class="go">        ├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-32-18" name="__codelineno-32-18"></a><span class="go">        ├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-32-19" name="__codelineno-32-19"></a><span class="go">        └── UPPER-Holà-output.txt</span>
+<a id="__codelineno-32-19" name="__codelineno-32-19"></a><span class="go">        └── UPPER-Hola-output.txt</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>Este es un aspecto de la configuración de entrada, que cubriremos con más detalle en la Parte 3, pero por ahora lo importante es saber que los parámetros de entrada pueden tener valores predeterminados.</p>
@@ -5716,7 +5716,7 @@ Ahora vamos a ver cómo se ve cuando los processes se almacenan en módulos indi
 </figure>
 
 <details class="abstract">
-<summary>Contenidos del directorio</summary>
+<summary>Contenido del directorio</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="go">modules/</span>
 <a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="go">├── collectGreetings.nf</span>
 <a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="go">├── convertToUpper.nf</span>
@@ -5842,7 +5842,7 @@ Comience abriendo el archivo de workflow <code>2c-modules.nf</code>.</p>
 </details>
 <p>Puede ver que la lógica del workflow es exactamente la misma que en la versión anterior del workflow.
 Sin embargo, el código del process ya no está en el archivo del workflow, y en su lugar hay declaraciones <code>include</code> que apuntan a archivos separados bajo <code>modules</code>.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2c-modules.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-3">3</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-modules.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-3">3</a></span>
 <span class="normal"><a href="#__codelineno-38-4">4</a></span>
 <span class="normal"><a href="#__codelineno-38-5">5</a></span>
 <span class="normal"><a href="#__codelineno-38-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-3" name="__codelineno-38-3"></a><span class="c1">// Incluir módulos</span>
@@ -5899,7 +5899,7 @@ Lo mismo aplica a los otros dos processes.</p>
 </code></pre></div>
 <details class="success">
 <summary>Salida del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>
 <a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="go">Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726</span>
 <a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>
@@ -6279,7 +6279,7 @@ Este último es mucho mejor para modularidad, mantenimiento de código y reprodu
 </code></pre></div>
 <details class="success">
 <summary>Salida del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a>
 <a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="go">Launching `2d-container.nf` [elegant_brattain] DSL2 - revision: 028a841db1</span>
 <a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a>
@@ -6295,7 +6295,7 @@ Este último es mucho mejor para modularidad, mantenimiento de código y reprodu
 <details class="abstract">
 <summary>Contenido del archivo</summary>
 <div class="highlight"><span class="filename">results/2d-container/cowpy-COLLECTED-batch-output.txt</span><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="go">_________</span>
-<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="go">/ HOLà    \</span>
+<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="go">/ HOLA    \</span>
 <a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a><span class="go">| HELLO   |</span>
 <a id="__codelineno-61-4" name="__codelineno-61-4" href="#__codelineno-61-4"></a><span class="go">\ BONJOUR /</span>
 <a id="__codelineno-61-5" name="__codelineno-61-5" href="#__codelineno-61-5"></a><span class="go">---------</span>

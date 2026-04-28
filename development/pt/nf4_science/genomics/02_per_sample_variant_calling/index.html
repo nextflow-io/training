@@ -3221,7 +3221,7 @@
   <span class="md-ellipsis">
     
   
-    Orientação
+    Primeiros passos
   
 
     
@@ -3277,7 +3277,7 @@
   <span class="md-ellipsis">
     
   
-    Padrões Essenciais de Scripting em Nextflow
+    Padrões Essenciais de Scripting
   
 
     
@@ -3305,7 +3305,7 @@
   <span class="md-ellipsis">
     
   
-    Processamento de entrada de arquivos
+    Processamento de Entrada de Arquivos
   
 
     
@@ -3333,7 +3333,7 @@
   <span class="md-ellipsis">
     
   
-    Metadados e meta maps
+    Metadados e Meta Maps
   
 
     
@@ -3389,7 +3389,7 @@
   <span class="md-ellipsis">
     
   
-    Testando com nf-test
+    Index
   
 
     
@@ -3417,7 +3417,7 @@
   <span class="md-ellipsis">
     
   
-    Depurando Fluxos de Trabalho
+    Solução de Problemas em Fluxos de Trabalho
   
 
     
@@ -5513,7 +5513,7 @@ Os links simbólicos serão quebrados quando você limpar seu diretório <code>w
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">┃ Launching `genomics.nf` [reverent_sinoussi] DSL2 - revision: 41d43ad7fe</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
@@ -5688,7 +5688,7 @@ Precisamos declarar parâmetros para eles, adicionar valores padrão ao perfil d
 </div>
 </div>
 <p>A sintaxe <code>file()</code> diz explicitamente ao Nextflow para tratar essas entradas como caminhos de arquivo.
-Você pode aprender mais sobre isso na Side Quest <a href="../../side_quests/working_with_files.md">Working with files</a>.</p>
+Você pode aprender mais sobre isso na Side Quest <a href="../../../side_quests/working_with_files/">Working with files</a>.</p>
 <h3 id="22-escrever-o-processo-de-chamada-de-variantes-e-chama-lo-no-fluxo-de-trabalho">2.2. Escrever o processo de chamada de variantes e chamá-lo no fluxo de trabalho<a class="headerlink" href="#22-escrever-o-processo-de-chamada-de-variantes-e-chama-lo-no-fluxo-de-trabalho" title="Permanent link">&para;</a></h3>
 <p>Precisamos escrever a definição do processo no arquivo do módulo, importá-lo para o fluxo de trabalho usando uma instrução include e chamá-lo nas leituras de entrada mais a saída da etapa de indexação e os arquivos acessórios.</p>
 <h4 id="221-preencher-o-modulo-para-o-processo-de-chamada-de-variantes">2.2.1. Preencher o módulo para o processo de chamada de variantes<a class="headerlink" href="#221-preencher-o-modulo-para-o-processo-de-chamada-de-variantes" title="Permanent link">&para;</a></h4>
@@ -5948,7 +5948,7 @@ No Nextflow, as entradas são posicionais, o que significa que você <em>deve</e
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>
 <a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="go">┃ Launching `genomics.nf` [grave_volta] DSL2 - revision: 4790abc96a</span>
 <a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a>
@@ -6065,7 +6065,7 @@ Esta é uma maneira rápida de testar a execução de várias amostras; na próx
 <p>Coisa engraçada: isso <em>pode funcionar</em>, OU <em>pode falhar</em>. Por exemplo, aqui está uma execução que teve sucesso:</p>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>
 <a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="go">┃ Launching `genomics.nf` [peaceful_yalow] DSL2 - revision: a256d113ad</span>
 <a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>
@@ -6077,7 +6077,7 @@ Esta é uma maneira rápida de testar a execução de várias amostras; na próx
 <p>Se a execução do seu fluxo de trabalho teve sucesso, execute-o novamente até obter um erro como este:</p>
 <details class="failure">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>
 <a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a><span class="go">┃ Launching `genomics.nf` [loving_pasteur] DSL2 - revision: d2a8e63076</span>
 <a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a>
@@ -6341,7 +6341,7 @@ No entanto, elas vão poluir sua saída do console, então recomendamos removê-
 <p>Desta vez (e todas as vezes) tudo deve executar corretamente:</p>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>
 <a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a><span class="go">┃ Launching `genomics.nf` [special_goldstine] DSL2 - revision: 4cbbf6ea3e</span>
 <a id="__codelineno-67-4" name="__codelineno-67-4" href="#__codelineno-67-4"></a>
@@ -6496,7 +6496,7 @@ Isso nos permite referenciar colunas por nome na operação <code>map</code>: <c
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a>
 <a id="__codelineno-77-3" name="__codelineno-77-3" href="#__codelineno-77-3"></a><span class="go">┃ Launching `genomics.nf` [sick_albattani] DSL2 - revision: 46d84642f6</span>
 <a id="__codelineno-77-4" name="__codelineno-77-4" href="#__codelineno-77-4"></a>

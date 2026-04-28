@@ -2348,7 +2348,7 @@
   <span class="md-ellipsis">
     
   
-    Yönlendirme
+    Başlarken
   
 
     
@@ -2404,7 +2404,7 @@
   <span class="md-ellipsis">
     
   
-    Temel Nextflow Betik Kalıpları
+    Temel Betik Kalıpları
   
 
     
@@ -3185,7 +3185,7 @@
   <span class="md-ellipsis">
     
   
-    İş Akışlarında Hata Ayıklama
+    İş Akışlarında Sorun Giderme
   
 
     
@@ -4631,7 +4631,7 @@
 <h3 id="on-kosullar">Ön koşullar<a class="headerlink" href="#on-kosullar" title="Permanent link">&para;</a></h3>
 <p>Bu yan göreve başlamadan önce:</p>
 <ul>
-<li><a href="../hello_nextflow/README.md">Hello Nextflow</a> eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmalısınız.</li>
+<li><a href="../../hello_nextflow/">Hello Nextflow</a> eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmalısınız.</li>
 <li>Temel Nextflow kavramları ve mekanizmalarını (süreçler, kanallar, operatörler, dosyalarla çalışma, meta veri) rahatça kullanabiliyor olmalısınız.</li>
 </ul>
 <p><strong>İsteğe bağlı:</strong> Önce <a href="../metadata/">İş akışlarında meta veri</a> yan görevini tamamlamanızı öneririz.
@@ -4639,7 +4639,7 @@ Bu görev, <code>splitCsv</code> ile CSV dosyalarını okuma ve burada yoğun bi
 <hr />
 <h2 id="0-baslarken">0. Başlarken<a class="headerlink" href="#0-baslarken" title="Permanent link">&para;</a></h2>
 <h4 id="egitim-kod-alann-acn">Eğitim kod alanını açın<a class="headerlink" href="#egitim-kod-alann-acn" title="Permanent link">&para;</a></h4>
-<p>Henüz yapmadıysanız, <a href="../envsetup/index.md">Ortam Kurulumu</a> bölümünde açıklandığı şekilde eğitim ortamını açtığınızdan emin olun.</p>
+<p>Henüz yapmadıysanız, <a href="../../envsetup/">Ortam Kurulumu</a> bölümünde açıklandığı şekilde eğitim ortamını açtığınızdan emin olun.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h4 id="proje-dizinine-gecin">Proje dizinine geçin<a class="headerlink" href="#proje-dizinine-gecin" title="Permanent link">&para;</a></h4>
 <p>Bu eğitime ait dosyaların bulunduğu dizine geçelim.</p>
@@ -4648,6 +4648,7 @@ Bu görev, <code>splitCsv</code> ile CSV dosyalarını okuma ve burada yoğun bi
 <p>VSCode'u bu dizine odaklanacak şekilde ayarlayabilirsiniz:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>code<span class="w"> </span>.
 </code></pre></div>
+<p>Düzenleyici, proje dizinine odaklanmış şekilde açılır.</p>
 <h4 id="materyalleri-inceleyin">Materyalleri inceleyin<a class="headerlink" href="#materyalleri-inceleyin" title="Permanent link">&para;</a></h4>
 <p>Bir ana iş akışı dosyası ve <code>samplesheet.csv</code> adlı bir örnek sayfası içeren <code>data</code> dizini bulacaksınız.</p>
 <div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">.</span>
@@ -4674,6 +4675,7 @@ Kanser analiziyle tanışık değilseniz, bunun eşleştirilmiş tümör/normal 
 <p class="admonition-title">Not</p>
 <p>Bu deneysel tasarıma aşina değilseniz endişelenmeyin; bu eğitimi anlamak için kritik değildir.</p>
 </div>
+<p>Veri içerikleri anlaşıldıktan sonra, iş akışının ne yapması gerektiğine bakabiliriz.</p>
 <h4 id="gorevi-inceleyin">Görevi inceleyin<a class="headerlink" href="#gorevi-inceleyin" title="Permanent link">&para;</a></h4>
 <p>Göreviniz, aşağıdakileri gerçekleştirecek bir Nextflow iş akışı yazmaktır:</p>
 <ol>
@@ -4745,7 +4747,7 @@ Kanser analiziyle tanışık değilseniz, bunun eşleştirilmiş tümör/normal 
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
@@ -4803,7 +4805,7 @@ Kanser analiziyle tanışık değilseniz, bunun eşleştirilmiş tümör/normal 
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="go">Launching `main.nf` [admiring_brown] DSL2 - revision: 194d61704d</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
@@ -4819,6 +4821,7 @@ Kanser analiziyle tanışık değilseniz, bunun eşleştirilmiş tümör/normal 
 <p>Bu, yukarıda tanıttığımız tek closure ile gerçekleştirilir:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="w">    </span><span class="o">.</span><span class="na">filter</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
+<p>Bu filter, kanal işlemine doğrudan zincirlenmiştir.</p>
 <h3 id="22-ayr-filtrelenmis-kanallar-olusturma">2.2. Ayrı filtrelenmiş kanallar oluşturma<a class="headerlink" href="#22-ayr-filtrelenmis-kanallar-olusturma" title="Permanent link">&para;</a></h3>
 <p>Şu anda filtreyi doğrudan CSV'den oluşturulan kanala uyguluyoruz; ancak bunu birden fazla şekilde filtrelemek istiyoruz, bu nedenle normal örnekler için ayrı bir filtrelenmiş kanal oluşturmak üzere mantığı yeniden yazalım:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Sonra</label><label for="__tabbed_3_2">Önce</label></div>
@@ -4866,7 +4869,7 @@ Kanser analiziyle tanışık değilseniz, bunun eşleştirilmiş tümör/normal 
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74</span>
 <a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
@@ -4914,7 +4917,7 @@ Kanser analiziyle tanışık değilseniz, bunun eşleştirilmiş tümör/normal 
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
@@ -4928,7 +4931,7 @@ Kanser analiziyle tanışık değilseniz, bunun eşleştirilmiş tümör/normal 
 <a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="go">Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>Normal ve tümör örneklerini iki farklı kanala ayırdık ve çıktıda farklı şekilde etiketlemek için <code>view()</code> fonksiyonuna bir closure sağladık: <code>ch_tumor_samples.view{'Tumor sample: ' + it}</code>.</p>
+<p>Normal ve tümör örneklerini iki farklı kanala ayırdık ve çıktıda farklı şekilde etiketlemek için <code>view()</code> fonksiyonuna bir closure sağladık: <code class="highlight"><span class="n">ch_tumor_samples</span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Tumor sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span></code>.</p>
 <h3 id="ozetle">Özetle<a class="headerlink" href="#ozetle" title="Permanent link">&para;</a></h3>
 <p>Bu bölümde şunları öğrendiniz:</p>
 <ul>
@@ -4949,7 +4952,7 @@ Kanser analiziyle tanışık değilseniz, bunun eşleştirilmiş tümör/normal 
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
@@ -5014,7 +5017,7 @@ Kanser analiziyle tanışık değilseniz, bunun eşleştirilmiş tümör/normal 
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
 <a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="go">Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d</span>
 <a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>
@@ -5082,7 +5085,7 @@ Kanser analiziyle tanışık değilseniz, bunun eşleştirilmiş tümör/normal 
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="go">Launching `main.nf` [soggy_wiles] DSL2 - revision: 3bc1979889</span>
 <a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>
@@ -5148,7 +5151,7 @@ Bu bilgiyle, kanalları paylaşılan bir alana göre başarıyla birleştirebili
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">Launching `main.nf` [prickly_wing] DSL2 - revision: 3bebf22dee</span>
 <a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>
@@ -5199,7 +5202,7 @@ Bu bilgiyle, kanalları paylaşılan bir alana göre başarıyla birleştirebili
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>
 <a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="go">Launching `main.nf` [reverent_wing] DSL2 - revision: 847016c3b7</span>
 <a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a>
@@ -5299,7 +5302,7 @@ Bu bilgiyle, kanalları paylaşılan bir alana göre başarıyla birleştirebili
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>
 <a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="go">Launching `main.nf` [angry_meninsky] DSL2 - revision: 2edc226b1d</span>
 <a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a>
@@ -5378,7 +5381,7 @@ Bu bilgiyle, kanalları paylaşılan bir alana göre başarıyla birleştirebili
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>
 <a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a><span class="go">Launching `main.nf` [confident_leavitt] DSL2 - revision: a2303895bd</span>
 <a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a>
@@ -5388,6 +5391,7 @@ Bu bilgiyle, kanalları paylaşılan bir alana göre başarıyla birleştirebili
 <a id="__codelineno-54-8" name="__codelineno-54-8" href="#__codelineno-54-8"></a><span class="go">[[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
+<p>Her demet artık yalnızca gruplama anahtarını ve iki dosya yolunu içermektedir; tekrarlanan alan bulunmamaktadır.</p>
 <h3 id="ozetle_1">Özetle<a class="headerlink" href="#ozetle_1" title="Permanent link">&para;</a></h3>
 <p>Bu bölümde şunları öğrendiniz:</p>
 <ul>
@@ -5447,7 +5451,7 @@ Bu bilgiyle, kanalları paylaşılan bir alana göre başarıyla birleştirebili
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a>
 <a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="go">Launching `main.nf` [mighty_tesla] DSL2 - revision: ae013ab70b</span>
 <a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a>
@@ -5522,7 +5526,7 @@ Bu bilgiyle, kanalları paylaşılan bir alana göre başarıyla birleştirebili
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>
 <a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a><span class="go">Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd</span>
 <a id="__codelineno-67-4" name="__codelineno-67-4" href="#__codelineno-67-4"></a>
@@ -5638,7 +5642,7 @@ Bu bilgiyle, kanalları paylaşılan bir alana göre başarıyla birleştirebili
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-72-2" name="__codelineno-72-2" href="#__codelineno-72-2"></a>
 <a id="__codelineno-72-3" name="__codelineno-72-3" href="#__codelineno-72-3"></a><span class="go">Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76</span>
 <a id="__codelineno-72-4" name="__codelineno-72-4" href="#__codelineno-72-4"></a>
@@ -5713,7 +5717,7 @@ Bu bilgiyle, kanalları paylaşılan bir alana göre başarıyla birleştirebili
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a>
 <a id="__codelineno-76-3" name="__codelineno-76-3" href="#__codelineno-76-3"></a><span class="go">Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d</span>
 <a id="__codelineno-76-4" name="__codelineno-76-4" href="#__codelineno-76-4"></a>
@@ -5733,6 +5737,7 @@ Bu bilgiyle, kanalları paylaşılan bir alana göre başarıyla birleştirebili
 <p class="admonition-title">Not</p>
 <p><a href="https://www.nextflow.io/docs/latest/reference/operator.html#transpose"><code>transpose</code></a>, groupTuple'ın tersidir. Bir kanaldaki öğeleri açar ve düzleştirir. <code>transpose</code> ekleyerek yukarıda gerçekleştirdiğimiz gruplamayı geri almayı deneyin!</p>
 </div>
+<p>İşlemin her iki yönü — gruplama ve gruplama geri alma — artık araç setinizde yer almaktadır.</p>
 <h3 id="ozetle_3">Özetle<a class="headerlink" href="#ozetle_3" title="Permanent link">&para;</a></h3>
 <p>Bu bölümde şunları öğrendiniz:</p>
 <ul>

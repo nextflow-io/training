@@ -3093,7 +3093,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Premiers pas
   
 
     
@@ -3121,7 +3121,7 @@
   <span class="md-ellipsis">
     
   
-    Environnement de développement
+    Index
   
 
     
@@ -3149,7 +3149,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Modèles de Scripting Essentiels
   
 
     
@@ -3289,7 +3289,7 @@
   <span class="md-ellipsis">
     
   
-    Débogage des Workflows
+    Résolution des problèmes dans les Workflows
   
 
     
@@ -4833,7 +4833,7 @@ Notez que les nombres ne sont pas significatifs, ils sont juste là à des fins 
 <span class="normal"><a href="#__codelineno-0-2">2</a></span>
 <span class="normal"><a href="#__codelineno-0-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>Hello,English,123
 <a id="__codelineno-0-2" name="__codelineno-0-2"></a>Bonjour,French,456
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a>Holà,Spanish,789
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>Hola,Spanish,789
 </code></pre></div></td></tr></table></div>
 <p>Nous avons également écrit une version améliorée du workflow original, maintenant appelée <code>2a-inputs.nf</code>, qui lira le fichier CSV, extraira les salutations et écrira chacune d'elles dans un fichier séparé.</p>
 <figure class="excalidraw">
@@ -4850,7 +4850,7 @@ Notez que les nombres ne sont pas significatifs, ils sont juste là à des fins 
 </code></pre></div>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">Launching `2a-inputs.nf` [mighty_sammet] DSL2 - revision: 29fb5352b3</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
@@ -4876,18 +4876,18 @@ Cela suggère que le process <code>sayHello()</code> a été appelé trois fois,
 <a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="hll"><span class="go">└── 2a-inputs</span>
 </span><a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="hll"><span class="go">    ├── Bonjour-output.txt</span>
 </span><a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="hll"><span class="go">    ├── Hello-output.txt</span>
-</span><a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="hll"><span class="go">    └── Holà-output.txt</span>
+</span><a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="hll"><span class="go">    └── Hola-output.txt</span>
 </span></code></pre></div></td></tr></table></div>
 </details>
 <p>Oui ! Nous voyons un nouveau répertoire appelé <code>2a-inputs</code> avec trois fichiers de sortie avec des noms différents, très pratique.</p>
 <p>Vous pouvez ouvrir chacun d'eux pour vous assurer qu'ils contiennent la chaîne de salutation appropriée.</p>
 <details class="abstract">
-<summary>Contenu des fichiers</summary>
+<summary>Contenu du fichier</summary>
 <div class="highlight"><span class="filename">results/2a-inputs/Hello-output.txt</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">Hello</span>
 </code></pre></div>
 <div class="highlight"><span class="filename">results/2a-inputs/Bonjour-output.txt</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">Bonjour</span>
 </code></pre></div>
-<div class="highlight"><span class="filename">results/2a-inputs/Holà-output.txt</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">Holà</span>
+<div class="highlight"><span class="filename">results/2a-inputs/Hola-output.txt</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">Hola</span>
 </code></pre></div>
 </details>
 <p>Cela confirme que chaque salutation dans le fichier d'entrée a été traitée de manière appropriée.</p>
@@ -4917,7 +4917,7 @@ Il y en a deux autres qui ne sont pas listés là.</p>
 <span class="normal"><a href="#__codelineno-9-2">2</a></span>
 <span class="normal"><a href="#__codelineno-9-3">3</a></span>
 <span class="normal"><a href="#__codelineno-9-4">4</a></span>
-<span class="normal"><a href="#__codelineno-9-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">N E X T F L O W  ~  version 25.10.2</span>
+<span class="normal"><a href="#__codelineno-9-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">N E X T F L O W  ~  version 25.10.4</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="go">Launching `2a-inputs.nf` [pedantic_hamilton] DSL2 - revision: 6bbc42e49f</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="go">[ab/1a8ece] Submitted process &gt; sayHello (1)</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="go">[0d/2cae24] Submitted process &gt; sayHello (2)</span>
@@ -4940,7 +4940,7 @@ Dans ce mode étendu, il rapporte seulement qu'ils ont été soumis.</p>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="go">└── Bonjour-output.txt</span>
 </code></pre></div>
 <div class="highlight"><span class="filename">b5/0df1d6</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">work/b5/0df1d642353269909c2ce23fc2a8fa/</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="go">└── Holà-output.txt</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="go">└── Hola-output.txt</span>
 </code></pre></div>
 </details>
 <p>Cela confirme que chaque appel de process est exécuté isolément de tous les autres.
@@ -5067,7 +5067,7 @@ Cela a de nombreux avantages, y compris éviter les collisions si le process pro
 <a id="__codelineno-14-35" name="__codelineno-14-35"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Ce code crée un canal appelé <code>greeting_ch</code> qui lit le fichier CSV, l'analyse, et extrait la première colonne de chaque ligne.
-Le résultat est un canal contenant <code>Hello</code>, <code>Bonjour</code>, et <code>Holà</code>.</p>
+Le résultat est un canal contenant <code>Hello</code>, <code>Bonjour</code>, et <code>Hola</code>.</p>
 <details class="tip">
 <summary>Comment cela fonctionne-t-il ?</summary>
 <p>Voici ce que cette ligne signifie en langage courant :</p>
@@ -5086,12 +5086,12 @@ Le résultat est un canal contenant <code>Hello</code>, <code>Bonjour</code>, et
 <span class="normal"><a href="#__codelineno-15-2">2</a></span>
 <span class="normal"><a href="#__codelineno-15-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a>Hello,English,123
 <a id="__codelineno-15-2" name="__codelineno-15-2"></a>Bonjour,French,456
-<a id="__codelineno-15-3" name="__codelineno-15-3"></a>Holà,Spanish,789
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a>Hola,Spanish,789
 </code></pre></div></td></tr></table></div>
 <p>Nous avons transformé cela en un tableau qui ressemble à ceci :</p>
-<div class="highlight"><span class="filename">Contenu du tableau</span><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>[[Hello,English,123],[Bonjour,French,456],[Holà,Spanish,789]]
+<div class="highlight"><span class="filename">Contenu du tableau</span><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>[[Hello,English,123],[Bonjour,French,456],[Hola,Spanish,789]]
 </code></pre></div>
-<p>Et ensuite nous avons pris le premier élément de chacune des trois lignes et les avons chargés dans un canal Nextflow qui contient maintenant : <code>Hello</code>, <code>Bonjour</code>, et <code>Holà</code>.</p>
+<p>Et ensuite nous avons pris le premier élément de chacune des trois lignes et les avons chargés dans un canal Nextflow qui contient maintenant : <code>Hello</code>, <code>Bonjour</code>, et <code>Hola</code>.</p>
 <p>Si vous voulez comprendre les canaux et les opérateurs en profondeur, y compris comment les écrire vous-même, consultez <a href="../../hello_nextflow/02_hello_channels/#4-read-input-values-from-a-csv-file">Hello Nextflow Partie 2 : Hello Channels</a>.</p>
 </details>
 <h4 id="142-appeler-le-process-sur-chaque-salutation">1.4.2. Appeler le process sur chaque salutation<a class="headerlink" href="#142-appeler-le-process-sur-chaque-salutation" title="Permanent link">&para;</a></h4>
@@ -5178,7 +5178,7 @@ Construisons sur ce que nous venons d'apprendre sur les canaux, et regardons com
 <span class="normal"><a href="#__codelineno-20-4">4</a></span>
 <span class="normal"><a href="#__codelineno-20-5">5</a></span>
 <span class="normal"><a href="#__codelineno-20-6">6</a></span>
-<span class="normal"><a href="#__codelineno-20-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<span class="normal"><a href="#__codelineno-20-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2"></a>
 <a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="go">Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4"></a>
@@ -5214,17 +5214,17 @@ Construisons sur ce que nous venons d'apprendre sur les canaux, et regardons com
 <a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="go">├── 2a-inputs</span>
 <a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="go">|   ├── Bonjour-output.txt</span>
 <a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="go">|   ├── Hello-output.txt</span>
-<a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="go">|   └── Holà-output.txt</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="go">|   └── Hola-output.txt</span>
 <a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="hll"><span class="go">└── 2b-multistep</span>
 </span><a id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="hll"><span class="go">    ├── COLLECTED-batch-output.txt</span>
 </span><a id="__codelineno-21-10" name="__codelineno-21-10"></a><span class="hll"><span class="go">    ├── batch-report.txt</span>
 </span><a id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="hll"><span class="go">    └── intermediates</span>
 </span><a id="__codelineno-21-12" name="__codelineno-21-12"></a><span class="hll"><span class="go">        ├── Bonjour-output.txt</span>
 </span><a id="__codelineno-21-13" name="__codelineno-21-13"></a><span class="hll"><span class="go">        ├── Hello-output.txt</span>
-</span><a id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="hll"><span class="go">        ├── Holà-output.txt</span>
+</span><a id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="hll"><span class="go">        ├── Hola-output.txt</span>
 </span><a id="__codelineno-21-15" name="__codelineno-21-15"></a><span class="hll"><span class="go">        ├── UPPER-Bonjour-output.txt</span>
 </span><a id="__codelineno-21-16" name="__codelineno-21-16"></a><span class="hll"><span class="go">        ├── UPPER-Hello-output.txt</span>
-</span><a id="__codelineno-21-17" name="__codelineno-21-17"></a><span class="go">        └── UPPER-Holà-output.txt</span>
+</span><a id="__codelineno-21-17" name="__codelineno-21-17"></a><span class="go">        └── UPPER-Hola-output.txt</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>Comme vous pouvez le voir, nous avons un nouveau répertoire appelé <code>2b-multistep</code>, et il contient bien plus de fichiers qu'avant.
@@ -5232,10 +5232,10 @@ Certains des fichiers ont été regroupés dans un sous-répertoire appelé <cod
 <p>Ces deux-là sont les résultats finaux du workflow multi-étapes.
 Prenez une minute pour regarder les noms de fichiers et vérifier leur contenu pour confirmer qu'ils sont ce que vous attendez.</p>
 <details class="abstract">
-<summary>Contenu des fichiers</summary>
+<summary>Contenu du fichier</summary>
 <div class="highlight"><span class="filename">results/2b-multistep/COLLECTED-batch-output.txt</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>HELLO
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>BONJOUR
-<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>HOLà
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>HOLA
 </code></pre></div>
 <div class="highlight"><span class="filename">results/2b-multistep/batch-report.txt</span><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>There were 3 greetings in this batch.
 </code></pre></div>
@@ -5575,7 +5575,7 @@ Mais si nous en fournissons une sur la ligne de commande, la valeur que nous sp�
 <span class="normal"><a href="#__codelineno-31-4">4</a></span>
 <span class="normal"><a href="#__codelineno-31-5">5</a></span>
 <span class="normal"><a href="#__codelineno-31-6">6</a></span>
-<span class="normal"><a href="#__codelineno-31-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<span class="normal"><a href="#__codelineno-31-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2"></a>
 <a id="__codelineno-31-3" name="__codelineno-31-3"></a><span class="go">Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726</span>
 <a id="__codelineno-31-4" name="__codelineno-31-4"></a>
@@ -5611,7 +5611,7 @@ Mais si nous en fournissons une sur la ligne de commande, la valeur que nous sp�
 <a id="__codelineno-32-4" name="__codelineno-32-4"></a><span class="go">├── 2a-inputs</span>
 <a id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="go">|   ├── Bonjour-output.txt</span>
 <a id="__codelineno-32-6" name="__codelineno-32-6"></a><span class="go">|   ├── Hello-output.txt</span>
-<a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="go">|   └── Holà-output.txt</span>
+<a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="go">|   └── Hola-output.txt</span>
 <a id="__codelineno-32-8" name="__codelineno-32-8"></a><span class="go">└── 2b-multistep</span>
 <a id="__codelineno-32-9" name="__codelineno-32-9"></a><span class="go">    ├── COLLECTED-batch-output.txt</span>
 <a id="__codelineno-32-10" name="__codelineno-32-10"></a><span class="hll"><span class="go">    ├── COLLECTED-test-output.txt</span>
@@ -5620,10 +5620,10 @@ Mais si nous en fournissons une sur la ligne de commande, la valeur que nous sp�
 </span><a id="__codelineno-32-13" name="__codelineno-32-13"></a><span class="go">    └── intermediates</span>
 <a id="__codelineno-32-14" name="__codelineno-32-14"></a><span class="go">        ├── Bonjour-output.txt</span>
 <a id="__codelineno-32-15" name="__codelineno-32-15"></a><span class="go">        ├── Hello-output.txt</span>
-<a id="__codelineno-32-16" name="__codelineno-32-16"></a><span class="go">        ├── Holà-output.txt</span>
+<a id="__codelineno-32-16" name="__codelineno-32-16"></a><span class="go">        ├── Hola-output.txt</span>
 <a id="__codelineno-32-17" name="__codelineno-32-17"></a><span class="go">        ├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-32-18" name="__codelineno-32-18"></a><span class="go">        ├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-32-19" name="__codelineno-32-19"></a><span class="go">        └── UPPER-Holà-output.txt</span>
+<a id="__codelineno-32-19" name="__codelineno-32-19"></a><span class="go">        └── UPPER-Hola-output.txt</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>C'est un aspect de la configuration des entrées, que nous couvrirons plus en détail dans la Partie 3, mais pour l'instant l'important est de savoir que les paramètres d'entrée peuvent recevoir des valeurs par défaut.</p>
@@ -5899,7 +5899,7 @@ La même chose s'applique aux deux autres processes.</p>
 </code></pre></div>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>
 <a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="go">Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726</span>
 <a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>
@@ -6279,7 +6279,7 @@ Cette dernière est bien meilleure pour la modularité, la maintenance du code e
 </code></pre></div>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a>
 <a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="go">Launching `2d-container.nf` [elegant_brattain] DSL2 - revision: 028a841db1</span>
 <a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a>
@@ -6295,7 +6295,7 @@ Cette dernière est bien meilleure pour la modularité, la maintenance du code e
 <details class="abstract">
 <summary>Contenu du fichier</summary>
 <div class="highlight"><span class="filename">results/2d-container/cowpy-COLLECTED-batch-output.txt</span><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="go">_________</span>
-<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="go">/ HOLà    \</span>
+<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="go">/ HOLA    \</span>
 <a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a><span class="go">| HELLO   |</span>
 <a id="__codelineno-61-4" name="__codelineno-61-4" href="#__codelineno-61-4"></a><span class="go">\ BONJOUR /</span>
 <a id="__codelineno-61-5" name="__codelineno-61-5" href="#__codelineno-61-5"></a><span class="go">---------</span>

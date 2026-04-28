@@ -2824,7 +2824,7 @@
   <span class="md-ellipsis">
     
   
-    Orientacja
+    Pierwsze kroki
   
 
     
@@ -2852,7 +2852,7 @@
   <span class="md-ellipsis">
     
   
-    Środowisko programistyczne
+    Index
   
 
     
@@ -2880,7 +2880,7 @@
   <span class="md-ellipsis">
     
   
-    Podstawowe Wzorce Skryptowania w Nextflow
+    Podstawowe Wzorce Skryptowania
   
 
     
@@ -2992,7 +2992,7 @@
   <span class="md-ellipsis">
     
   
-    Testowanie z nf-test
+    Index
   
 
     
@@ -3020,7 +3020,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow'ów
+    Rozwiązywanie problemów z Workflow'ami
   
 
     
@@ -4356,8 +4356,8 @@ Jest on równoważny skryptowi utworzonemu podczas pracy nad Częścią 3 tego s
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-modules.nf
 </code></pre></div>
 <details class="success">
-<summary>Wynik polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<summary>Wyjście polecenia</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">Launching `hello-modules.nf` [hopeful_avogadro] DSL2 - revision: b09af1237d</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
@@ -4374,11 +4374,11 @@ Jest on równoważny skryptowi utworzonemu podczas pracy nad Częścią 3 tego s
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="go">├── Bonjour-output.txt</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">├── COLLECTED-batch-output.txt</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="go">├── Hello-output.txt</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="go">├── Holà-output.txt</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="go">├── Hola-output.txt</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="go">├── batch-report.txt</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="go">├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="go">├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="go">└── UPPER-Holà-output.txt</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="go">└── UPPER-Hola-output.txt</span>
 </code></pre></div>
 </details>
 <p>Jeśli to zadziałało, jesteś gotowy do nauki modularyzacji kodu workflow'u.</p>
@@ -4435,7 +4435,7 @@ Utworzymy plik dla modułu, skopiujemy odpowiedni kod, a następnie usuniemy go 
 <p>Po wykonaniu tego usuń definicję procesu z pliku workflow'u.</p>
 <h3 id="23-dodaj-deklaracje-importu-przed-blokiem-workflow">2.3. Dodaj deklarację importu przed blokiem workflow<a class="headerlink" href="#23-dodaj-deklaracje-importu-przed-blokiem-workflow" title="Permanent link">&para;</a></h3>
 <p>Składnia importowania procesu z modułu jest dość prosta:</p>
-<div class="highlight"><span class="filename">Składnia: Deklaracja importu</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">&lt;</span><span class="n">NAZWA_PROCESU</span><span class="o">&gt;</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;&lt;ścieżka_do_modułu&gt;&#39;</span>
+<div class="highlight"><span class="filename">Syntax: include declaration</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">&lt;</span><span class="n">PROCESS_NAME</span><span class="o">&gt;</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;&lt;path_to_module&gt;&#39;</span>
 </code></pre></div>
 <p>Wstawmy ją powyżej bloku <code>params</code> i wypełnijmy odpowiednio.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Po</label><label for="__tabbed_1_2">Przed</label></div>
@@ -4486,8 +4486,8 @@ Utworzymy plik dla modułu, skopiujemy odpowiedni kod, a następnie usuniemy go 
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-modules.nf<span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
-<summary>Wynik polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<summary>Wyjście polecenia</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">Launching `hello-modules.nf` [romantic_poisson] DSL2 - revision: 96edfa9ad3</span>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
@@ -4604,8 +4604,8 @@ Ale na razie zróbmy jeszcze tylko dwa.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-modules.nf<span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
-<summary>Wynik polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<summary>Wyjście polecenia</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">Launching `hello-modules.nf` [nauseous_heisenberg] DSL2 - revision: a04a9f2da0</span>
 <a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
@@ -4727,8 +4727,8 @@ Ale na razie zróbmy jeszcze tylko dwa.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-modules.nf<span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
-<summary>Wynik polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<summary>Wyjście polecenia</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `hello-modules.nf` [friendly_coulomb] DSL2 - revision: 7aa2b9bc0f</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
@@ -4756,7 +4756,7 @@ Czym jest moduł w Nextflow?
 - [ ] Definicja workflow'u
 - [ ] Operator kanału
 
-Dowiedz się więcej: [2. Utwórz moduł dla `sayHello()`](#2-utworz-modul-dla-sayhello)
+Dowiedz się więcej: [2. Utwórz moduł dla `sayHello()`](#2-create-a-module-for-sayhello)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
@@ -4770,7 +4770,7 @@ Dowiedz się więcej: [2. Utwórz moduł dla `sayHello()`](#2-utworz-modul-dla-s
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#2-utworz-modul-dla-sayhello">2. Utwórz moduł dla <code>sayHello()</code></a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#2-create-a-module-for-sayhello">2. Utwórz moduł dla <code>sayHello()</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -4781,7 +4781,7 @@ Jaka konwencja jest zwykle stosowana do przechowywania plików modułów?
 - [x] W katalogu `modules/`
 - [ ] W katalogu `lib/`
 
-Dowiedz się więcej: [1. Utwórz katalog do przechowywania modułów](#1-utworz-katalog-do-przechowywania-modulow)
+Dowiedz się więcej: [1. Utwórz katalog do przechowywania modułów](#1-create-a-directory-to-store-modules)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -4795,7 +4795,7 @@ Dowiedz się więcej: [1. Utwórz katalog do przechowywania modułów](#1-utworz
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#1-utworz-katalog-do-przechowywania-modulow">1. Utwórz katalog do przechowywania modułów</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#1-create-a-directory-to-store-modules">1. Utwórz katalog do przechowywania modułów</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -4807,7 +4807,7 @@ Jaka jest poprawna składnia do użycia modułu?
 - [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
-Dowiedz się więcej: [2.3. Dodaj deklarację importu](#23-dodaj-deklaracje-importu-przed-blokiem-workflow)
+Dowiedz się więcej: [2.3. Dodaj deklarację importu](#23-add-an-include-declaration-before-the-workflow-block)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
@@ -4821,7 +4821,7 @@ Dowiedz się więcej: [2.3. Dodaj deklarację importu](#23-dodaj-deklaracje-impo
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#23-dodaj-deklaracje-importu-przed-blokiem-workflow">2.3. Dodaj deklarację importu</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#23-add-an-include-declaration-before-the-workflow-block">2.3. Dodaj deklarację importu</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source

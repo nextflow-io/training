@@ -2951,7 +2951,7 @@
   <span class="md-ellipsis">
     
   
-    Orientamento
+    Per iniziare
   
 
     
@@ -3007,7 +3007,7 @@
   <span class="md-ellipsis">
     
   
-    Pattern Essenziali di Scripting in Nextflow
+    Pattern Essenziali di Scripting
   
 
     
@@ -3119,7 +3119,7 @@
   <span class="md-ellipsis">
     
   
-    Test con nf-test
+    Index
   
 
     
@@ -3147,7 +3147,7 @@
   <span class="md-ellipsis">
     
   
-    Debug dei Workflow
+    Risoluzione dei Problemi nei Workflow
   
 
     
@@ -4703,7 +4703,7 @@ Lo stesso vale per i file accessori del genoma di riferimento (file indice e diz
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>gatk<span class="w"> </span>HaplotypeCaller<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">        </span>-R<span class="w"> </span>/data/ref/ref.fasta<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">        </span>-I<span class="w"> </span>/data/bam/reads_mother.bam<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">        </span>-O<span class="w"> </span>/data/vcf/reads_mother.vcf<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">        </span>-O<span class="w"> </span>reads_mother.vcf<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">        </span>-L<span class="w"> </span>/data/ref/intervals.bed
 </code></pre></div>
 <details class="success">
@@ -4774,7 +4774,7 @@ Lo stesso vale per i file accessori del genoma di riferimento (file indice e diz
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="go">conda.yml  hsperfdata_root  reads_mother.vcf  reads_mother.vcf.idx</span>
 </code></pre></div>
 </details>
-<p>Il file VCF contiene le varianti identificate, come vedremo tra un momento, e il file indice ha la stessa funzione del file indice BAM, permettere agli strumenti di cercare e recuperare sottoinsiemi di dati senza caricare l'intero file.</p>
+<p>Il file VCF contiene le varianti identificate, come vedremo tra un momento, e il file indice ha la stessa funzione del file indice BAM: permettere agli strumenti di cercare e recuperare sottoinsiemi di dati senza caricare l'intero file.</p>
 <p>Poiché VCF è un formato di testo e questo è un file di test piccolo, potete eseguire <code>cat reads_mother.vcf</code> per aprirlo e visualizzarne il contenuto.
 Se scorrete verso l'inizio del file, troverete un'intestazione composta da molte righe di metadati, seguita da una lista di varianti identificate, una per riga.</p>
 <details class="abstract">

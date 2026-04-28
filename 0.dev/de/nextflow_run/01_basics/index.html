@@ -491,7 +491,7 @@
   <span class="md-ellipsis">
     
   
-    Startseite
+    Home
   
 
     
@@ -2216,7 +2216,7 @@
   <span class="md-ellipsis">
     
   
-    Teil 2: Variantenerkennung pro Probe
+    02 per sample variant calling
   
 
     
@@ -2948,7 +2948,7 @@
   <span class="md-ellipsis">
     
   
-    Orientierung
+    Erste Schritte
   
 
     
@@ -3004,7 +3004,7 @@
   <span class="md-ellipsis">
     
   
-    Wesentliche Nextflow-Scripting-Muster
+    Wesentliche Scripting-Muster
   
 
     
@@ -3116,7 +3116,7 @@
   <span class="md-ellipsis">
     
   
-    Testen mit nf-test
+    Index
   
 
     
@@ -4586,7 +4586,7 @@ Du kannst sie im Datei-Explorer öffnen oder von der Befehlszeile aus mit dem <c
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
@@ -4638,7 +4638,7 @@ Mehr dazu später.</p>
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
@@ -5025,7 +5025,7 @@ Du wirst auch sehen, dass wenn ein Workflow mehrere Ausgaben generiert, jede auf
 <p>Bis vor kurzem war die etablierte Methode zum Veröffentlichen von Ausgaben, es auf der Ebene jedes einzelnen Prozesses mit einer <code>publishDir</code>-Direktive zu tun.</p>
 <p>Du wirst dieses Code-Muster überall in älteren Nextflow-Pipelines und Prozessmodulen finden, daher ist es wichtig, davon zu wissen.</p>
 <p>Anstatt einen <code>publish:</code>-Block im Workflow und einen <code>output</code>-Block auf oberster Ebene zu haben, würdest du eine <code>publishDir</code>-Zeile in der <code>sayHello</code>-Prozessdefinition sehen:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Syntax-Beispiel</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Syntax example</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-28-4"> 4</a></span>
@@ -5078,7 +5078,7 @@ Das bedeutet, Nextflow wird nur Prozesse ausführen, die du seit dem letzten Lau
 <span class="normal"><a href="#__codelineno-30-2">2</a></span>
 <span class="normal"><a href="#__codelineno-30-3">3</a></span>
 <span class="normal"><a href="#__codelineno-30-4">4</a></span>
-<span class="normal"><a href="#__codelineno-30-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<span class="normal"><a href="#__codelineno-30-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2"></a>
 <a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="go">Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479</span>
 <a id="__codelineno-30-4" name="__codelineno-30-4"></a>
@@ -5189,7 +5189,7 @@ Was repräsentiert `[a3/7be2fa]` in der Konsolenausgabezeile `[a3/7be2fa] SAYHEL
 - [x] Der abgekürzte Pfad zum Work-Verzeichnis der Aufgabe
 - [ ] Die Prüfsumme der Ausgabedatei
 
-Mehr erfahren: [2.4. Die ursprüngliche Ausgabe und Protokolle im `work/`-Verzeichnis finden](#24-die-ursprungliche-ausgabe-und-protokolle-im-work-verzeichnis-finden)
+Mehr erfahren: [2.4. Die ursprüngliche Ausgabe und Protokolle im `work/`-Verzeichnis finden](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
@@ -5203,7 +5203,7 @@ Mehr erfahren: [2.4. Die ursprüngliche Ausgabe und Protokolle im `work/`-Verzei
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Mehr erfahren: <a href="#24-die-ursprungliche-ausgabe-und-protokolle-im-work-verzeichnis-finden">2.4. Die ursprüngliche Ausgabe und Protokolle im <code>work/</code>-Verzeichnis finden</a></p></section>
+    <section class="content hidden"><p>Mehr erfahren: <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.4. Die ursprüngliche Ausgabe und Protokolle im <code>work/</code>-Verzeichnis finden</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5214,7 +5214,7 @@ Was ist der Zweck der `.command.sh`-Datei in einem Aufgabenverzeichnis?
 - [ ] Sie enthält Fehlermeldungen von fehlgeschlagenen Aufgaben
 - [ ] Sie listet Eingabedateien auf, die für die Aufgabe bereitgestellt wurden
 
-Mehr erfahren: [2.4. Die ursprüngliche Ausgabe und Protokolle im `work/`-Verzeichnis finden](#24-die-ursprungliche-ausgabe-und-protokolle-im-work-verzeichnis-finden)
+Mehr erfahren: [2.4. Die ursprüngliche Ausgabe und Protokolle im `work/`-Verzeichnis finden](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -5228,7 +5228,7 @@ Mehr erfahren: [2.4. Die ursprüngliche Ausgabe und Protokolle im `work/`-Verzei
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Mehr erfahren: <a href="#24-die-ursprungliche-ausgabe-und-protokolle-im-work-verzeichnis-finden">2.4. Die ursprüngliche Ausgabe und Protokolle im <code>work/</code>-Verzeichnis finden</a></p></section>
+    <section class="content hidden"><p>Mehr erfahren: <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.4. Die ursprüngliche Ausgabe und Protokolle im <code>work/</code>-Verzeichnis finden</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5239,7 +5239,7 @@ Was passiert mit veröffentlichten Ergebnissen, wenn du einen Workflow ohne `-re
 - [ ] Nextflow verhindert das Überschreiben und schlägt fehl
 - [ ] Sie werden automatisch gesichert
 
-Mehr erfahren: [2.5. Den Workflow mit verschiedenen Grüßen erneut ausführen](#25-den-workflow-mit-verschiedenen-grussen-erneut-ausfuhren)
+Mehr erfahren: [2.5. Den Workflow mit verschiedenen Grüßen erneut ausführen](#24-re-run-the-workflow-with-different-greetings)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
@@ -5253,7 +5253,7 @@ Mehr erfahren: [2.5. Den Workflow mit verschiedenen Grüßen erneut ausführen](
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Mehr erfahren: <a href="#25-den-workflow-mit-verschiedenen-grussen-erneut-ausfuhren">2.5. Den Workflow mit verschiedenen Grüßen erneut ausführen</a></p></section>
+    <section class="content hidden"><p>Mehr erfahren: <a href="#24-re-run-the-workflow-with-different-greetings">2.5. Den Workflow mit verschiedenen Grüßen erneut ausführen</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5269,7 +5269,7 @@ Was zeigt diese Konsolenausgabe an?
 - [x] Nextflow hat Ergebnisse von einer vorherigen identischen Ausführung wiederverwendet
 - [ ] Die Aufgabe wurde manuell abgebrochen
 
-Mehr erfahren: [4.1. Einen Workflow mit `-resume` neu starten](#41-einen-workflow-mit--resume-neu-starten)
+Mehr erfahren: [4.1. Einen Workflow mit `-resume` neu starten](#41-re-launch-a-workflow-with--resume)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
@@ -5285,7 +5285,7 @@ Mehr erfahren: [4.1. Einen Workflow mit `-resume` neu starten](#41-einen-workflo
                     <div class="quiz-feedback hidden"></div>
 
                 </form>
-                <section class="content hidden"><p>Mehr erfahren: <a href="#41-einen-workflow-mit--resume-neu-starten">4.1. Einen Workflow mit <code>-resume</code> neu starten</a></p></section>
+                <section class="content hidden"><p>Mehr erfahren: <a href="#41-re-launch-a-workflow-with--resume">4.1. Einen Workflow mit <code>-resume</code> neu starten</a></p></section>
             </div>
 
 <!-- mkdocs-quiz-source
@@ -5296,7 +5296,7 @@ Wo speichert Nextflow den Ausführungsverlauf, den der Befehl `nextflow log` anz
 - [x] In der `.nextflow/history`-Datei
 - [ ] In `nextflow.config`
 
-Mehr erfahren: [4.2. Das Protokoll vergangener Ausführungen überprüfen](#42-das-protokoll-vergangener-ausfuhrungen-uberprufen)
+Mehr erfahren: [4.2. Das Protokoll vergangener Ausführungen überprüfen](#42-inspect-the-log-of-past-executions)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
@@ -5310,7 +5310,7 @@ Mehr erfahren: [4.2. Das Protokoll vergangener Ausführungen überprüfen](#42-d
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Mehr erfahren: <a href="#42-das-protokoll-vergangener-ausfuhrungen-uberprufen">4.2. Das Protokoll vergangener Ausführungen überprüfen</a></p></section>
+    <section class="content hidden"><p>Mehr erfahren: <a href="#42-inspect-the-log-of-past-executions">4.2. Das Protokoll vergangener Ausführungen überprüfen</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5321,7 +5321,7 @@ Was ist der Zweck des `params`-Blocks in einer Workflow-Datei?
 - [x] Um Workflow-Eingabeparameter zu deklarieren und zu typisieren
 - [ ] Um Ausgabe-Veröffentlichungsoptionen anzugeben
 
-Mehr erfahren: [3.4. Das params-System der Befehlszeilenparameter](#34-das-params-system-der-befehlszeilenparameter)
+Mehr erfahren: [3.4. Das params-System der Befehlszeilenparameter](#34-the-params-system-of-command-line-parameters)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
@@ -5335,7 +5335,7 @@ Mehr erfahren: [3.4. Das params-System der Befehlszeilenparameter](#34-das-param
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Mehr erfahren: <a href="#34-das-params-system-der-befehlszeilenparameter">3.4. Das params-System der Befehlszeilenparameter</a></p></section>
+    <section class="content hidden"><p>Mehr erfahren: <a href="#34-the-params-system-of-command-line-parameters">3.4. Das params-System der Befehlszeilenparameter</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5346,7 +5346,7 @@ Was macht `mode 'copy'` im `output`-Block des Workflows?
 - [ ] Kopiert das Workflow-Script zu results
 - [ ] Aktiviert inkrementelles Datei-Kopieren
 
-Mehr erfahren: [3.5. Die publish-Direktive](#35-die-publish-direktive)
+Mehr erfahren: [3.5. Die publish-Direktive](#35-the-publish-directive)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -5360,7 +5360,7 @@ Mehr erfahren: [3.5. Die publish-Direktive](#35-die-publish-direktive)
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Mehr erfahren: <a href="#35-die-publish-direktive">3.5. Die publish-Direktive</a></p></section>
+    <section class="content hidden"><p>Mehr erfahren: <a href="#35-the-publish-directive">3.5. Die publish-Direktive</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5371,7 +5371,7 @@ Was ist das empfohlene Flag für den `nextflow clean`-Befehl, bevor tatsächlich
 - [ ] `-a` (all), um alle Verzeichnisse auszuwählen
 - [ ] `-q` (quiet), um Warnungen zu unterdrücken
 
-Mehr erfahren: [4.3. Ältere Work-Verzeichnisse löschen](#43-altere-work-verzeichnisse-loschen)
+Mehr erfahren: [4.3. Ältere Work-Verzeichnisse löschen](#43-delete-older-work-directories)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-7">
@@ -5385,7 +5385,7 @@ Mehr erfahren: [4.3. Ältere Work-Verzeichnisse löschen](#43-altere-work-verzei
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Mehr erfahren: <a href="#43-altere-work-verzeichnisse-loschen">4.3. Ältere Work-Verzeichnisse löschen</a></p></section>
+    <section class="content hidden"><p>Mehr erfahren: <a href="#43-delete-older-work-directories">4.3. Ältere Work-Verzeichnisse löschen</a></p></section>
 </div><div id="quiz-progress-sidebar" aria-label="Quiz-Fortschritt" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">

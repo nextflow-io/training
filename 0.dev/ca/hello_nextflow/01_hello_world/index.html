@@ -491,7 +491,7 @@
   <span class="md-ellipsis">
     
   
-    Home
+    Inici
   
 
     
@@ -3214,7 +3214,7 @@
   <span class="md-ellipsis">
     
   
-    Orientació
+    Primers passos
   
 
     
@@ -3270,7 +3270,7 @@
   <span class="md-ellipsis">
     
   
-    Patrons Essencials de Scripting en Nextflow
+    Patrons Essencials de Scripting
   
 
     
@@ -3410,7 +3410,7 @@
   <span class="md-ellipsis">
     
   
-    Depuració de Workflows
+    Resolució de Problemes en Workflows
   
 
     
@@ -5258,13 +5258,13 @@ Però la necessitarem per aprofitar les sortides a nivell de workflow, així que
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="go">[65/7be2fa] sayHello | 1 of 1 ✔</span>
-</code></pre></div>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="hll"><span class="go">[65/7be2fa] sayHello | 1 of 1 ✔</span>
+</span></code></pre></div>
 </details>
 <p>Si la sortida de la vostra consola s'assembla a això, felicitats, acabeu d'executar el vostre primer workflow de Nextflow!</p>
 <p>La sortida més important aquí és l'última línia, que està ressaltada a la sortida anterior:</p>
@@ -5278,7 +5278,7 @@ Mirem-ho ara.</p>
 <p>Dins del directori <code>work</code>, Nextflow organitza les sortides i els registres per crida de procés.
 Per a cada crida de procés, Nextflow crea un subdirectori imbricat, anomenat amb un hash per fer-lo únic, on prepararà totes les entrades necessàries (utilitzant enllaços simbòlics per defecte), escriurà fitxers auxiliars i escriurà registres i qualsevol sortida del procés.</p>
 <p>El camí a aquest subdirectori es mostra en forma truncada entre claudàtors a la sortida de la consola.
-Mirant el que hem obtingut per a l'execució mostrada anteriorment, la línia de registre de la consola per al procés sayHello comença amb <code>[65/7be2fa]</code>. Això correspon al camí de directori següent: <code>work/65/7be2fad5e71e5f49998f795677fd68</code></p>
+Mirant el que hem obtingut per a l'execució mostrada anteriorment, la línia de registre de la consola per al procés sayHello comença amb <code>[65/7be2fa]</code>. Això correspon al camí de directori següent: <code>work/65/7be2fa7be2fad5e71e5f49998f795677fd68</code></p>
 <p>Vegem què hi ha allà.</p>
 <details class="abstract">
 <summary>Contingut del directori</summary>
@@ -5515,7 +5515,7 @@ Més endavant, aprendreu maneres de generar estructures de directoris de sortida
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
@@ -5595,7 +5595,7 @@ Per establir una ubicació personalitzada, només cal editar el <code>path</code
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>
 <a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="go">Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1</span>
 <a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
@@ -5670,7 +5670,7 @@ Només cal afegir <code>mode 'copy'</code> a la definició de sortida a nivell d
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="go">Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1</span>
 <a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>
@@ -5843,7 +5843,7 @@ En principi podem escriure-ho a qualsevol lloc; però com que el volem donar a l
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>
 <a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="go">Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea</span>
 <a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>
@@ -5882,7 +5882,7 @@ No obstant això, els resultats de les execucions anteriors encara es conserven 
 <a id="__codelineno-43-21" name="__codelineno-43-21"></a><span class="cm"> * Paràmetres del pipeline</span>
 <a id="__codelineno-43-22" name="__codelineno-43-22"></a><span class="cm"> */</span>
 <a id="__codelineno-43-23" name="__codelineno-43-23"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-43-24" name="__codelineno-43-24"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Holà mundo!&#39;</span>
+<a id="__codelineno-43-24" name="__codelineno-43-24"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Hola mundo!&#39;</span>
 <a id="__codelineno-43-25" name="__codelineno-43-25"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Com veieu, podem especificar el tipus d'entrada que el workflow espera (Nextflow 25.10.2 i posteriors).
@@ -5890,7 +5890,7 @@ La sintaxi és <code>nom: Tipus = valor_per_defecte</code>.
 Els tipus suportats inclouen <code>String</code>, <code>Integer</code>, <code>Float</code>, <code>Boolean</code> i <code>Path</code>.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>En workflows més antics, podeu veure que tot aquest bloc <code>params</code> s'escriu simplement com <code>input = 'Holà mundo!'</code>.</p>
+<p>En workflows més antics, podeu veure que tot aquest bloc <code>params</code> s'escriu simplement com <code>input = 'Hola mundo!'</code>.</p>
 </div>
 <p>A mesura que afegiu més paràmetres al vostre pipeline, hauríeu d'afegir-los tots a aquest bloc, tant si necessiteu donar-los un valor per defecte com si no.
 Això facilitarà trobar tots els paràmetres configurables d'una ullada.</p>
@@ -5900,7 +5900,7 @@ Això facilitarà trobar tots els paràmetres configurables d'una ullada.</p>
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>
 <a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="go">Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582</span>
 <a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a>
@@ -5915,7 +5915,7 @@ Això facilitarà trobar tots els paràmetres configurables d'una ullada.</p>
 <a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>- file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>- cause: you tried to assign a value to the class &#39;java.lang.String&#39;
 <a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a>@ line 24, column 12.
-<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>      input: String = &#39;Holà mundo!&#39;
+<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>      input: String = &#39;Hola mundo!&#39;
 <a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a>              ^
 <a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a>
 <a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a>1 error
@@ -5933,7 +5933,7 @@ Consulteu el material d'ajuda sobre <a href="../../info/nxf_versions/">versions 
 <p>La sortida estarà al mateix lloc que anteriorment, però el contingut hauria d'estar actualitzat amb el nou text.</p>
 <details class="abstract">
 <summary>Contingut del fitxer</summary>
-<div class="highlight"><span class="filename">results/hello_world/output.txt</span><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go">Holà mundo!</span>
+<div class="highlight"><span class="filename">results/hello_world/output.txt</span><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go">Hola mundo!</span>
 </code></pre></div>
 </details>
 <p>Nextflow va utilitzar el valor per defecte del paràmetre de salutació per crear la sortida.</p>
@@ -5944,7 +5944,7 @@ Consulteu el material d'ajuda sobre <a href="../../info/nxf_versions/">versions 
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>
 <a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="go">Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582</span>
 <a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>
@@ -5987,7 +5987,7 @@ Això significa que Nextflow només executarà processos que hàgiu afegit o mod
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>
 <a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a><span class="go">Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5</span>
 <a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a>

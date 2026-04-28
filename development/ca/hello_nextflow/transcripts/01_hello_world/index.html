@@ -487,7 +487,7 @@
   <span class="md-ellipsis">
     
   
-    Home
+    Inici
   
 
     
@@ -2342,7 +2342,7 @@
   <span class="md-ellipsis">
     
   
-    Orientació
+    Primers passos
   
 
     
@@ -2398,7 +2398,7 @@
   <span class="md-ellipsis">
     
   
-    Patrons Essencials de Scripting en Nextflow
+    Patrons Essencials de Scripting
   
 
     
@@ -2538,7 +2538,7 @@
   <span class="md-ellipsis">
     
   
-    Depuració de Workflows
+    Resolució de Problemes en Workflows
   
 
     
@@ -3882,16 +3882,16 @@
 <p>Lògica bastant complexa amb molt poca sintaxi aquí. I esperem que pugueu veure com això ara comença a escalar. I així és com realment construïm la lògica i la personalització dels nostres pipelines a l'script de Nextflow.</p>
 <h2 id="34-utilitzar-valors-per-defecte-per-als-parametres-de-linia-de-comandes">3.4. Utilitzar valors per defecte per als paràmetres de línia de comandes<a class="headerlink" href="#34-utilitzar-valors-per-defecte-per-als-parametres-de-linia-de-comandes" title="Permanent link">&para;</a></h2>
 <p>D'acord, això és genial. El problema però ara és, cada vegada que executo aquest pipeline, necessito fer guió, input perquè s'executi.</p>
-<p>Si intento executar sense aquest paràmetre, ara Nextflow llançarà un error dient que necessitava aquest paràmetre i no estava establert. i així que no sabia què fer.</p>
+<p>Si intento executar sense aquest paràmetre, ara Nextflow llançarà un error dient que necessitava aquest paràmetre i no estava establert. I per tant no sabia què fer.</p>
 <p>Això és una cosa nova interessant, per cert. En el passat, Nextflow simplement s'hauria executat amb una cadena buida, i hauríeu tingut tot tipus d'errors estranys, que haurien estat difícils d'entendre. Però en el nou analitzador de sintaxi de Nextflow, és una mica més acurat i us ho diu immediatament.</p>
 <p>Així que no sempre volem especificar cada opció individual. És una bona pràctica especificar valors per defecte sensats. Així que com ho fem al nostre script?</p>
 <p>Notareu que quan vam escriure això, només vam posar <em>params.input</em> directament on l'estem utilitzant. Així que la solució òbvia és que definim un valor per defecte, i ho fem a la part superior de l'script aquí en un bloc params especial al workflow. Això està al script del workflow aquí.</p>
 <p>De nou, alguna sintaxi nova aquí, així que pareu atenció. Això és realment interessant. Tenim el nom del paràmetre, que s'esperarà aquí.</p>
-<p>I després després d'aquest caràcter de dos punts, estem definint un tipus de la variable. No heu de fer això, podeu deixar-ho en blanc, però és realment agradable. Diu a Nextflow que esperem una cadena i tractar-la com a tal.</p>
+<p>I després d'aquest caràcter de dos punts, estem definint un tipus de la variable. No heu de fer això, podeu deixar-ho en blanc, però és realment agradable. Diu a Nextflow que esperem una cadena i tractar-la com a tal.</p>
 <p>Si volem un número en lloc d'això, per exemple, podríem escriure float, i això diria que volem un número de coma flotant. I si intentem executar amb això, llavors llançarà un error. Si li donem una cadena, que no és un float. I també el passarà com a tal. Com si fem string, llavors sap que és una cadena. I fins i tot si té zeros inicials i és tot numèric, encara el passarà com una cadena real.</p>
 <p>Així que aquesta seguretat de tipus és una característica molt nova de Nextflow, però realment potent per fer el vostre codi més segur d'escriure i executar.</p>
-<p>Després d'això tenim un símbol igual i després el valor per defecte aquí. Nextflow es va escriure a Barcelona originalment, així que sembla apropiat que tinguem una mica d'espanyol aquí, <em>"Holà mundo!"</em> com a valor per defecte.</p>
-<p>D'acord, desaré aquest script, tornaré, executaré l'script de nou sense <em>--input</em>. I aquesta vegada hauria d'executar-se i crearà el nostre nou fitxer a <em>results</em>. I en aquest fitxer ara diu <em>"Holà mundo!"</em>.</p>
+<p>Després d'això tenim un símbol igual i després el valor per defecte aquí. Nextflow es va escriure a Barcelona originalment, així que sembla apropiat que tinguem una mica d'espanyol aquí, <em>"Hola mundo!"</em> com a valor per defecte.</p>
+<p>D'acord, desaré aquest script, tornaré, executaré l'script de nou sense <em>--input</em>. I aquesta vegada hauria d'executar-se i crearà el nostre nou fitxer a <em>results</em>. I en aquest fitxer ara diu <em>"Hola mundo!"</em>.</p>
 <p>Això és només un valor per defecte però, així que no significa que no puguem fer encara el mateix que abans. Si torno i trobo el meu antic script aquí, <em>"Hej Världen"</em>, perquè faig <em>--input</em> a la línia de comandes, això sobreescriurà aquest valor per defecte i utilitzarà això de nou al fitxer output.txt.</p>
 <p>Així que això a l'script és només el valor per defecte que estic establint.</p>
 <p>A mesura que construïm el nostre workflow per ser més complex i incloure més paràmetres, aquest bloc params a la part superior de l'script començarà a recollir-los tots en un sol lloc.</p>

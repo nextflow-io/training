@@ -491,7 +491,7 @@
   <span class="md-ellipsis">
     
   
-    Startseite
+    Home
   
 
     
@@ -1614,7 +1614,7 @@
   <span class="md-ellipsis">
     
   
-    Teil 2: Variantenerkennung pro Probe
+    02 per sample variant calling
   
 
     
@@ -2348,7 +2348,7 @@
   <span class="md-ellipsis">
     
   
-    Orientierung
+    Erste Schritte
   
 
     
@@ -2404,7 +2404,7 @@
   <span class="md-ellipsis">
     
   
-    Wesentliche Nextflow-Scripting-Muster
+    Wesentliche Scripting-Muster
   
 
     
@@ -2516,7 +2516,7 @@
   <span class="md-ellipsis">
     
   
-    Testen mit nf-test
+    Index
   
 
     
@@ -6318,7 +6318,7 @@
 <h3 id="voraussetzungen">Voraussetzungen<a class="headerlink" href="#voraussetzungen" title="Permanent link">&para;</a></h3>
 <p>Bevor du diese Side Quest angehst, solltest du:</p>
 <ul>
-<li>Das Tutorial <a href="../hello_nextflow/README.md">Hello Nextflow</a> oder einen gleichwertigen Einsteigerkurs abgeschlossen haben.</li>
+<li>Das Tutorial <a href="../../hello_nextflow/">Hello Nextflow</a> oder einen gleichwertigen Einsteigerkurs abgeschlossen haben.</li>
 <li>Mit grundlegenden Nextflow-Konzepten und -Mechanismen (Prozesse, Kanäle, Operatoren) vertraut sein.</li>
 </ul>
 <p><strong>Optional:</strong> Wir empfehlen, zuerst die Side Quest <a href="../dev_environment/">IDE Features for Nextflow Development</a> abzuschließen.
@@ -6326,7 +6326,7 @@ Diese behandelt umfassend IDE-Funktionen, die das Debugging unterstützen (Synta
 <hr />
 <h2 id="0-erste-schritte">0. Erste Schritte<a class="headerlink" href="#0-erste-schritte" title="Permanent link">&para;</a></h2>
 <h4 id="trainings-codespace-offnen">Trainings-Codespace öffnen<a class="headerlink" href="#trainings-codespace-offnen" title="Permanent link">&para;</a></h4>
-<p>Falls noch nicht geschehen, öffne die Trainingsumgebung wie in der <a href="../envsetup/index.md">Umgebung einrichten</a> beschrieben.</p>
+<p>Falls noch nicht geschehen, öffne die Trainingsumgebung wie in der <a href="../../envsetup/">Umgebung einrichten</a> beschrieben.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h4 id="in-das-projektverzeichnis-wechseln">In das Projektverzeichnis wechseln<a class="headerlink" href="#in-das-projektverzeichnis-wechseln" title="Permanent link">&para;</a></h4>
 <p>Wechsle in das Verzeichnis, in dem sich die Dateien für dieses Tutorial befinden.</p>
@@ -6398,7 +6398,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="failure">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">Launching `bad_syntax.nf` [stupefied_bhabha] DSL2 - revision: ca6327fad2</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
@@ -6464,7 +6464,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 <a id="__codelineno-5-23" name="__codelineno-5-23"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Für dieses Beispiel haben wir einen Kommentar hinterlassen, der zeigt, wo der Fehler liegt. Die Nextflow-VSCode-Erweiterung sollte dir ebenfalls Hinweise geben, indem sie die nicht übereinstimmende geschweifte Klammer rot markiert und das vorzeitige Dateiende hervorhebt:</p>
-<p><img alt="Bad syntax" src="img/bad_syntax.png" /></p>
+<p><img alt="Bad syntax" src="../img/bad_syntax.png" /></p>
 <p><strong>Debugging-Strategie für Klammerfehler:</strong></p>
 <ol>
 <li>VS Codes Klammerabgleich verwenden (Cursor neben eine Klammer setzen)</li>
@@ -6579,7 +6579,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">Launching `bad_syntax.nf` [insane_faggin] DSL2 - revision: 961938ee2b</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
@@ -6594,7 +6594,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="failure">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">Launching `invalid_process.nf` [nasty_jepsen] DSL2 - revision: da9758d614</span>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
@@ -6660,7 +6660,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 <a id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>In Zeile 4 des Fehlerkontexts sehen wir das Problem: Wir verwenden <code>inputs</code> statt der korrekten <code>input</code>-Direktive. Die Nextflow-VSCode-Erweiterung wird das ebenfalls markieren:</p>
-<p><img alt="Invalid process message" src="img/invalid_process_message.png" /></p>
+<p><img alt="Invalid process message" src="../img/invalid_process_message.png" /></p>
 <h4 id="den-code-korrigieren_1">Den Code korrigieren<a class="headerlink" href="#den-code-korrigieren_1" title="Permanent link">&para;</a></h4>
 <p>Ersetze das falsche Keyword durch das richtige, indem du <a href="https://www.nextflow.io/docs/latest/process.html#">die Dokumentation</a> zu Rate ziehst:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Danach</label><label for="__tabbed_2_2">Vorher</label></div>
@@ -6769,7 +6769,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="go">Launching `invalid_process.nf` [silly_fermi] DSL2 - revision: 961938ee2b</span>
 <a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
@@ -6784,7 +6784,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="failure">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
 <a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="go">Launching `no_such_var.nf` [gloomy_meninsky] DSL2 - revision: 0c4d3bc28c</span>
 <a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
@@ -6848,7 +6848,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 <a id="__codelineno-19-23" name="__codelineno-19-23"></a><span class="w">    </span><span class="n">PROCESS_FILES</span><span class="o">(</span><span class="n">input_ch</span><span class="o">)</span>
 <a id="__codelineno-19-24" name="__codelineno-19-24"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Die Fehlermeldung zeigt an, dass die Variable im Skript-Template nicht erkannt wird – und tatsächlich siehst du <code>${undefined_var}</code> im script-Block, aber nirgendwo definiert.</p>
+<p>Die Fehlermeldung zeigt an, dass die Variable im Skript-Template nicht erkannt wird – und tatsächlich siehst du <code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">undefined_var</span><span class="o">}</span></code> im script-Block, aber nirgendwo definiert.</p>
 <h4 id="den-code-korrigieren_2">Den Code korrigieren<a class="headerlink" href="#den-code-korrigieren_2" title="Permanent link">&para;</a></h4>
 <p>Bei einem 'No such variable'-Fehler kannst du ihn beheben, indem du die Variable definierst (durch Korrektur der Eingabevariablennamen oder Bearbeitung des Groovy-Codes vor dem Skript), oder indem du sie aus dem script-Block entfernst, wenn sie nicht benötigt wird:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Danach</label><label for="__tabbed_3_2">Vorher</label></div>
@@ -6883,7 +6883,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 <a id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">sample_name</span>
 <a id="__codelineno-20-6" name="__codelineno-20-6"></a>
 <a id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${sample_name}_output.txt&quot;</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${sample_name}_processed.txt&quot;</span>
 <a id="__codelineno-20-9" name="__codelineno-20-9"></a>
 <a id="__codelineno-20-10" name="__codelineno-20-10"></a><span class="w">    </span><span class="nl">script:</span>
 <a id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="w">    </span><span class="c1">// Variablen in Groovy-Code vor dem Skript definieren</span>
@@ -6959,7 +6959,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `no_such_var.nf` [suspicious_venter] DSL2 - revision: 6ba490f7c5</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
@@ -6974,7 +6974,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="failure">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>
 <a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="go">Launching `bad_bash_var.nf` [infallible_mandelbrot] DSL2 - revision: 0853c11080</span>
 <a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>
@@ -6988,7 +6988,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 </details>
 <h4 id="den-code-prufen_3">Den Code prüfen<a class="headerlink" href="#den-code-prufen_3" title="Permanent link">&para;</a></h4>
-<p>Der Fehler zeigt auf Zeile 13, wo <code>${prefix}</code> verwendet wird. Schauen wir uns <code>bad_bash_var.nf</code> an, um zu sehen, was das Problem verursacht:</p>
+<p>Der Fehler zeigt auf Zeile 13, wo <code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">prefix</span><span class="o">}</span></code> verwendet wird. Schauen wir uns <code>bad_bash_var.nf</code> an, um zu sehen, was das Problem verursacht:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">bad_bash_var.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
@@ -7019,7 +7019,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </span><a id="__codelineno-26-14" name="__codelineno-26-14"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-26-15" name="__codelineno-26-15"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>In diesem Beispiel definieren wir die Variable <code>prefix</code> in Bash, aber in einem Nextflow-Prozess wird die <code>$</code>-Syntax, die wir verwenden, um darauf zu verweisen (<code>${prefix}</code>), als Groovy-Variable interpretiert, nicht als Bash. Die Variable existiert nicht im Groovy-Kontext, daher erhalten wir einen 'no such variable'-Fehler.</p>
+<p>In diesem Beispiel definieren wir die Variable <code>prefix</code> in Bash, aber in einem Nextflow-Prozess wird die <code>$</code>-Syntax, die wir verwenden, um darauf zu verweisen (<code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">prefix</span><span class="o">}</span></code>), als Groovy-Variable interpretiert, nicht als Bash. Die Variable existiert nicht im Groovy-Kontext, daher erhalten wir einen 'no such variable'-Fehler.</p>
 <h4 id="den-code-korrigieren_3">Den Code korrigieren<a class="headerlink" href="#den-code-korrigieren_3" title="Permanent link">&para;</a></h4>
 <p>Wenn du eine Bash-Variable verwenden möchtest, musst du das Dollarzeichen so escapen:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Danach</label><label for="__tabbed_4_2">Vorher</label></div>
@@ -7107,7 +7107,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>
 <a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="go">Launching `bad_bash_var.nf` [naughty_franklin] DSL2 - revision: 58c1c83709</span>
 <a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>
@@ -7139,7 +7139,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="failure">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>
 <a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="go">Launching `badpractice_syntax.nf` [intergalactic_colden] DSL2 - revision: 5e4b291bde</span>
 <a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>
@@ -7204,7 +7204,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 <a id="__codelineno-34-24" name="__codelineno-34-24"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Die VSCode-Erweiterung hebt die Variable <code>input_ch</code> ebenfalls hervor, da sie außerhalb des workflow-Blocks definiert ist:</p>
-<p><img alt="Non-lethal syntax error" src="img/nonlethal.png" /></p>
+<p><img alt="Non-lethal syntax error" src="../img/nonlethal.png" /></p>
 <h4 id="den-code-korrigieren_4">Den Code korrigieren<a class="headerlink" href="#den-code-korrigieren_4" title="Permanent link">&para;</a></h4>
 <p>Verschiebe die Kanaldefinition in den workflow-Block:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Danach</label><label for="__tabbed_5_2">Vorher</label></div>
@@ -7315,7 +7315,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>
 <a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="go">Launching `badpractice_syntax.nf` [naughty_ochoa] DSL2 - revision: 5e4b291bde</span>
 <a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>
@@ -7344,7 +7344,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="failure">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>
 <a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="go">Launching `bad_number_inputs.nf` [happy_swartz] DSL2 - revision: d83e58dcd3</span>
 <a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>
@@ -7408,7 +7408,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </span><a id="__codelineno-42-24" name="__codelineno-42-24"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Du siehst den nicht übereinstimmenden <code>PROCESS_FILES</code>-Aufruf, der mehrere Eingabekanäle liefert, obwohl der Prozess nur einen definiert. Die VSCode-Erweiterung unterstreicht den Prozessaufruf ebenfalls rot und zeigt eine Diagnosemeldung beim Darüberfahren mit der Maus:</p>
-<p><img alt="Incorrect number of args message" src="img/incorrect_num_args.png" /></p>
+<p><img alt="Incorrect number of args message" src="../img/incorrect_num_args.png" /></p>
 <h4 id="den-code-korrigieren_5">Den Code korrigieren<a class="headerlink" href="#den-code-korrigieren_5" title="Permanent link">&para;</a></h4>
 <p>Für dieses spezifische Beispiel erwartet der Prozess einen einzelnen Kanal und benötigt den zweiten Kanal nicht, daher können wir es beheben, indem wir nur den <code>samples_ch</code>-Kanal übergeben:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Danach</label><label for="__tabbed_6_2">Vorher</label></div>
@@ -7520,7 +7520,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="go">Launching `bad_number_inputs.nf` [big_euler] DSL2 - revision: e302bd87be</span>
 <a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a>
@@ -7537,7 +7537,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 <details class="success">
 <summary>Befehlsausgabe</summary>
 </details>
-<div class="highlight"><span class="filename">Exhausted channel output</span><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><span class="filename">Exhausted channel output</span><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>
 <a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a><span class="go">Launching `exhausted.nf` [extravagant_gauss] DSL2 - revision: 08cff7ba2a</span>
 <a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a>
@@ -7679,7 +7679,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a>
 <a id="__codelineno-56-3" name="__codelineno-56-3" href="#__codelineno-56-3"></a><span class="go">Launching `exhausted.nf` [maniac_leavitt] DSL2 - revision: f372a56a7d</span>
 <a id="__codelineno-56-4" name="__codelineno-56-4" href="#__codelineno-56-4"></a>
@@ -7949,7 +7949,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a>
 <a id="__codelineno-65-3" name="__codelineno-65-3" href="#__codelineno-65-3"></a><span class="go">Launching `bad_channel_shape.nf` [clever_thompson] DSL2 - revision: 8cbcae3746</span>
 <a id="__codelineno-65-4" name="__codelineno-65-4" href="#__codelineno-65-4"></a>
@@ -7966,7 +7966,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>
 <a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a><span class="go">Launching `bad_channel_shape_viewed.nf` [maniac_poisson] DSL2 - revision: b4f24dc9da</span>
 <a id="__codelineno-67-4" name="__codelineno-67-4" href="#__codelineno-67-4"></a>
@@ -8042,7 +8042,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-71-2" name="__codelineno-71-2" href="#__codelineno-71-2"></a>
 <a id="__codelineno-71-3" name="__codelineno-71-3" href="#__codelineno-71-3"></a><span class="go">Launching `bad_channel_shape_viewed.nf` [marvelous_koch] DSL2 - revision: 03e79cdbad</span>
 <a id="__codelineno-71-4" name="__codelineno-71-4" href="#__codelineno-71-4"></a>
@@ -8070,7 +8070,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="failure">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-73-2" name="__codelineno-73-2" href="#__codelineno-73-2"></a>
 <a id="__codelineno-73-3" name="__codelineno-73-3" href="#__codelineno-73-3"></a><span class="go">Launching `missing_output.nf` [zen_stone] DSL2 - revision: 37ff61f926</span>
 <a id="__codelineno-73-4" name="__codelineno-73-4" href="#__codelineno-73-4"></a>
@@ -8196,7 +8196,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-79-2" name="__codelineno-79-2" href="#__codelineno-79-2"></a>
 <a id="__codelineno-79-3" name="__codelineno-79-3" href="#__codelineno-79-3"></a><span class="go">Launching `missing_output.nf` [elated_hamilton] DSL2 - revision: 961938ee2b</span>
 <a id="__codelineno-79-4" name="__codelineno-79-4" href="#__codelineno-79-4"></a>
@@ -8279,7 +8279,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-84-2" name="__codelineno-84-2" href="#__codelineno-84-2"></a>
 <a id="__codelineno-84-3" name="__codelineno-84-3" href="#__codelineno-84-3"></a><span class="go">Launching `missing_software.nf` [awesome_stonebraker] DSL2 - revision: 0296d12839</span>
 <a id="__codelineno-84-4" name="__codelineno-84-4" href="#__codelineno-84-4"></a>
@@ -8289,7 +8289,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </details>
 <div class="admonition note">
 <p class="admonition-title">Hinweis</p>
-<p>Um mehr darüber zu erfahren, wie Nextflow Container verwendet, siehe <a href="../hello_nextflow/05_hello_containers.md">Hello Nextflow</a></p>
+<p>Um mehr darüber zu erfahren, wie Nextflow Container verwendet, siehe <a href="../../hello_nextflow/05_hello_containers/">Hello Nextflow</a></p>
 </div>
 <h3 id="33-fehlerhafte-ressourcenkonfiguration">3.3. Fehlerhafte Ressourcenkonfiguration<a class="headerlink" href="#33-fehlerhafte-ressourcenkonfiguration" title="Permanent link">&para;</a></h3>
 <p>Im Produktionsbetrieb wirst du Ressourcen für deine Prozesse konfigurieren. Zum Beispiel definiert <code>memory</code> die maximale Speichermenge, die deinem Prozess zur Verfügung steht. Wenn der Prozess diese überschreitet, beendet dein Scheduler den Prozess typischerweise und gibt einen Exit-Code von <code>137</code> zurück. Das können wir hier nicht demonstrieren, weil wir den <code>local</code>-Executor verwenden, aber wir können etwas Ähnliches mit <code>time</code> zeigen.</p>
@@ -8299,7 +8299,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="failure">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-86-1" name="__codelineno-86-1" href="#__codelineno-86-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-86-1" name="__codelineno-86-1" href="#__codelineno-86-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-86-2" name="__codelineno-86-2" href="#__codelineno-86-2"></a>
 <a id="__codelineno-86-3" name="__codelineno-86-3" href="#__codelineno-86-3"></a><span class="go">Launching `bad_resources.nf` [disturbed_elion] DSL2 - revision: 27d2066e86</span>
 <a id="__codelineno-86-4" name="__codelineno-86-4" href="#__codelineno-86-4"></a>
@@ -8360,7 +8360,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 <a id="__codelineno-87-12" name="__codelineno-87-12"></a>
 <a id="__codelineno-87-13" name="__codelineno-87-13"></a><span class="w">    </span><span class="nl">script:</span>
 <a id="__codelineno-87-14" name="__codelineno-87-14"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-87-15" name="__codelineno-87-15"></a><span class="s2">    sleep 1  // Dauert 1 Sekunde, aber Zeitlimit ist 1ms</span>
+<a id="__codelineno-87-15" name="__codelineno-87-15"></a><span class="s2">    sleep 1  # Dauert 1 Sekunde, aber Zeitlimit ist 1ms</span>
 <a id="__codelineno-87-16" name="__codelineno-87-16"></a><span class="s2">    cowpy ${sample_name} &gt; ${sample_name}_output.txt</span>
 <a id="__codelineno-87-17" name="__codelineno-87-17"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-87-18" name="__codelineno-87-18"></a><span class="o">}</span>
@@ -8432,7 +8432,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 <a id="__codelineno-89-12" name="__codelineno-89-12"></a>
 <a id="__codelineno-89-13" name="__codelineno-89-13"></a><span class="w">    </span><span class="nl">script:</span>
 <a id="__codelineno-89-14" name="__codelineno-89-14"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-89-15" name="__codelineno-89-15"></a><span class="s2">    sleep 1  // Dauert 1 Sekunde, aber Zeitlimit ist 1ms</span>
+<a id="__codelineno-89-15" name="__codelineno-89-15"></a><span class="s2">    sleep 1  # Dauert 1 Sekunde, aber Zeitlimit ist 1ms</span>
 <a id="__codelineno-89-16" name="__codelineno-89-16"></a><span class="s2">    cowpy ${sample_name} &gt; ${sample_name}_output.txt</span>
 <a id="__codelineno-89-17" name="__codelineno-89-17"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-89-18" name="__codelineno-89-18"></a><span class="o">}</span>
@@ -8445,7 +8445,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-91-1" name="__codelineno-91-1" href="#__codelineno-91-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-91-1" name="__codelineno-91-1" href="#__codelineno-91-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-91-2" name="__codelineno-91-2" href="#__codelineno-91-2"></a>
 <a id="__codelineno-91-3" name="__codelineno-91-3" href="#__codelineno-91-3"></a><span class="go">Launching `bad_resources.nf` [friendly_mcclintock] DSL2 - revision: 381567d2c1</span>
 <a id="__codelineno-91-4" name="__codelineno-91-4" href="#__codelineno-91-4"></a>
@@ -8464,7 +8464,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="failure">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-93-1" name="__codelineno-93-1" href="#__codelineno-93-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-93-1" name="__codelineno-93-1" href="#__codelineno-93-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-93-2" name="__codelineno-93-2" href="#__codelineno-93-2"></a>
 <a id="__codelineno-93-3" name="__codelineno-93-3" href="#__codelineno-93-3"></a><span class="go">Launching `missing_output.nf` [irreverent_payne] DSL2 - revision: 3d5117f7e2</span>
 <a id="__codelineno-93-4" name="__codelineno-93-4" href="#__codelineno-93-4"></a>
@@ -8580,7 +8580,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-102-1" name="__codelineno-102-1" href="#__codelineno-102-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-102-1" name="__codelineno-102-1" href="#__codelineno-102-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-102-2" name="__codelineno-102-2" href="#__codelineno-102-2"></a>
 <a id="__codelineno-102-3" name="__codelineno-102-3" href="#__codelineno-102-3"></a><span class="go">Launching `bad_channel_shape_viewed_debug.nf` [agitated_crick] DSL2 - revision: ea3676d9ec</span>
 <a id="__codelineno-102-4" name="__codelineno-102-4" href="#__codelineno-102-4"></a>
@@ -8645,7 +8645,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="failure">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-105-1" name="__codelineno-105-1" href="#__codelineno-105-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-105-1" name="__codelineno-105-1" href="#__codelineno-105-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-105-2" name="__codelineno-105-2" href="#__codelineno-105-2"></a>
 <a id="__codelineno-105-3" name="__codelineno-105-3" href="#__codelineno-105-3"></a><span class="go">Launching `bad_syntax.nf` [magical_mercator] DSL2 - revision: 550b9a8873</span>
 <a id="__codelineno-105-4" name="__codelineno-105-4" href="#__codelineno-105-4"></a>
@@ -8698,7 +8698,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-109-1" name="__codelineno-109-1" href="#__codelineno-109-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-109-1" name="__codelineno-109-1" href="#__codelineno-109-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-109-2" name="__codelineno-109-2" href="#__codelineno-109-2"></a>
 <a id="__codelineno-109-3" name="__codelineno-109-3" href="#__codelineno-109-3"></a><span class="go">Launching `missing_software_with_stub.nf` [astonishing_shockley] DSL2 - revision: f1f4f05d7d</span>
 <a id="__codelineno-109-4" name="__codelineno-109-4" href="#__codelineno-109-4"></a>
@@ -8790,7 +8790,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 <div class="admonition tip">
 <p class="admonition-title">Resume für effizientes Debugging nutzen</p>
 <p>Sobald du ein Problem identifiziert hast, brauchst du eine effiziente Möglichkeit, deine Korrekturen zu testen, ohne Zeit damit zu verschwenden, erfolgreiche Teile deines Workflows erneut auszuführen. Nextflows <code>-resume</code>-Funktionalität ist beim Debugging unverzichtbar.</p>
-<p>Du bist <code>-resume</code> begegnet, wenn du <a href="../hello_nextflow/">Hello Nextflow</a> durchgearbeitet hast, und es ist wichtig, dass du es beim Debugging gut nutzt, um nicht warten zu müssen, während die Prozesse vor deinem Problemprozess erneut ausgeführt werden.</p>
+<p>Du bist <code>-resume</code> begegnet, wenn du <a href="../../hello_nextflow/">Hello Nextflow</a> durchgearbeitet hast, und es ist wichtig, dass du es beim Debugging gut nutzt, um nicht warten zu müssen, während die Prozesse vor deinem Problemprozess erneut ausgeführt werden.</p>
 <p><strong>Resume-Debugging-Strategie:</strong></p>
 <ol>
 <li>Workflow bis zum Fehler ausführen</li>
@@ -8842,7 +8842,7 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 </code></pre></div>
 <details class="failure">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-114-1" name="__codelineno-114-1" href="#__codelineno-114-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-114-1" name="__codelineno-114-1" href="#__codelineno-114-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-114-2" name="__codelineno-114-2" href="#__codelineno-114-2"></a>
 <a id="__codelineno-114-3" name="__codelineno-114-3" href="#__codelineno-114-3"></a><span class="go">Launching `buggy_workflow.nf` [wise_ramanujan] DSL2 - revision: d51a8e83fd</span>
 <a id="__codelineno-114-4" name="__codelineno-114-4" href="#__codelineno-114-4"></a>
@@ -8980,102 +8980,116 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 <a id="__codelineno-134-89" name="__codelineno-134-89"></a><span class="n">handleFiles</span><span class="o">(</span><span class="n">file_ch</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <strong>Korrektur:</strong> Die Ausgabe des vorherigen Prozesses verwenden
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-135-88">88</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-135-88" name="__codelineno-135-88"></a><span class="n">handleFiles</span><span class="o">(</span><span class="n">heavyProcess</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-135-88">88</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-135-88" name="__codelineno-135-88"></a><span class="n">file_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">handleFiles</span><span class="o">(</span><span class="n">heavy_ch</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div></p>
 <p>Damit sollte der gesamte Workflow ausgeführt werden.</p>
 <p><strong>Vollständig korrigierter Workflow:</strong>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-136-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-136-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-136-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-136-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-136-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-136-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-136-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-136-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-136-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-136-10">10</a></span>
-<span class="normal"><a href="#__codelineno-136-11">11</a></span>
-<span class="normal"><a href="#__codelineno-136-12">12</a></span>
-<span class="normal"><a href="#__codelineno-136-13">13</a></span>
-<span class="normal"><a href="#__codelineno-136-14">14</a></span>
-<span class="normal"><a href="#__codelineno-136-15">15</a></span>
-<span class="normal"><a href="#__codelineno-136-16">16</a></span>
-<span class="normal"><a href="#__codelineno-136-17">17</a></span>
-<span class="normal"><a href="#__codelineno-136-18">18</a></span>
-<span class="normal"><a href="#__codelineno-136-19">19</a></span>
-<span class="normal"><a href="#__codelineno-136-20">20</a></span>
-<span class="normal"><a href="#__codelineno-136-21">21</a></span>
-<span class="normal"><a href="#__codelineno-136-22">22</a></span>
-<span class="normal"><a href="#__codelineno-136-23">23</a></span>
-<span class="normal"><a href="#__codelineno-136-24">24</a></span>
-<span class="normal"><a href="#__codelineno-136-25">25</a></span>
-<span class="normal"><a href="#__codelineno-136-26">26</a></span>
-<span class="normal"><a href="#__codelineno-136-27">27</a></span>
-<span class="normal"><a href="#__codelineno-136-28">28</a></span>
-<span class="normal"><a href="#__codelineno-136-29">29</a></span>
-<span class="normal"><a href="#__codelineno-136-30">30</a></span>
-<span class="normal"><a href="#__codelineno-136-31">31</a></span>
-<span class="normal"><a href="#__codelineno-136-32">32</a></span>
-<span class="normal"><a href="#__codelineno-136-33">33</a></span>
-<span class="normal"><a href="#__codelineno-136-34">34</a></span>
-<span class="normal"><a href="#__codelineno-136-35">35</a></span>
-<span class="normal"><a href="#__codelineno-136-36">36</a></span>
-<span class="normal"><a href="#__codelineno-136-37">37</a></span>
-<span class="normal"><a href="#__codelineno-136-38">38</a></span>
-<span class="normal"><a href="#__codelineno-136-39">39</a></span>
-<span class="normal"><a href="#__codelineno-136-40">40</a></span>
-<span class="normal"><a href="#__codelineno-136-41">41</a></span>
-<span class="normal"><a href="#__codelineno-136-42">42</a></span>
-<span class="normal"><a href="#__codelineno-136-43">43</a></span>
-<span class="normal"><a href="#__codelineno-136-44">44</a></span>
-<span class="normal"><a href="#__codelineno-136-45">45</a></span>
-<span class="normal"><a href="#__codelineno-136-46">46</a></span>
-<span class="normal"><a href="#__codelineno-136-47">47</a></span>
-<span class="normal"><a href="#__codelineno-136-48">48</a></span>
-<span class="normal"><a href="#__codelineno-136-49">49</a></span>
-<span class="normal"><a href="#__codelineno-136-50">50</a></span>
-<span class="normal"><a href="#__codelineno-136-51">51</a></span>
-<span class="normal"><a href="#__codelineno-136-52">52</a></span>
-<span class="normal"><a href="#__codelineno-136-53">53</a></span>
-<span class="normal"><a href="#__codelineno-136-54">54</a></span>
-<span class="normal"><a href="#__codelineno-136-55">55</a></span>
-<span class="normal"><a href="#__codelineno-136-56">56</a></span>
-<span class="normal"><a href="#__codelineno-136-57">57</a></span>
-<span class="normal"><a href="#__codelineno-136-58">58</a></span>
-<span class="normal"><a href="#__codelineno-136-59">59</a></span>
-<span class="normal"><a href="#__codelineno-136-60">60</a></span>
-<span class="normal"><a href="#__codelineno-136-61">61</a></span>
-<span class="normal"><a href="#__codelineno-136-62">62</a></span>
-<span class="normal"><a href="#__codelineno-136-63">63</a></span>
-<span class="normal"><a href="#__codelineno-136-64">64</a></span>
-<span class="normal"><a href="#__codelineno-136-65">65</a></span>
-<span class="normal"><a href="#__codelineno-136-66">66</a></span>
-<span class="normal"><a href="#__codelineno-136-67">67</a></span>
-<span class="normal"><a href="#__codelineno-136-68">68</a></span>
-<span class="normal"><a href="#__codelineno-136-69">69</a></span>
-<span class="normal"><a href="#__codelineno-136-70">70</a></span>
-<span class="normal"><a href="#__codelineno-136-71">71</a></span>
-<span class="normal"><a href="#__codelineno-136-72">72</a></span>
-<span class="normal"><a href="#__codelineno-136-73">73</a></span>
-<span class="normal"><a href="#__codelineno-136-74">74</a></span>
-<span class="normal"><a href="#__codelineno-136-75">75</a></span>
-<span class="normal"><a href="#__codelineno-136-76">76</a></span>
-<span class="normal"><a href="#__codelineno-136-77">77</a></span>
-<span class="normal"><a href="#__codelineno-136-78">78</a></span>
-<span class="normal"><a href="#__codelineno-136-79">79</a></span>
-<span class="normal"><a href="#__codelineno-136-80">80</a></span>
-<span class="normal"><a href="#__codelineno-136-81">81</a></span>
-<span class="normal"><a href="#__codelineno-136-82">82</a></span>
-<span class="normal"><a href="#__codelineno-136-83">83</a></span>
-<span class="normal"><a href="#__codelineno-136-84">84</a></span>
-<span class="normal"><a href="#__codelineno-136-85">85</a></span>
-<span class="normal"><a href="#__codelineno-136-86">86</a></span>
-<span class="normal"><a href="#__codelineno-136-87">87</a></span>
-<span class="normal"><a href="#__codelineno-136-88">88</a></span>
-<span class="normal"><a href="#__codelineno-136-89">89</a></span>
-<span class="normal"><a href="#__codelineno-136-90">90</a></span>
-<span class="normal"><a href="#__codelineno-136-91">91</a></span>
-<span class="normal"><a href="#__codelineno-136-92">92</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-136-1" name="__codelineno-136-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-136-1">  1</a></span>
+<span class="normal"><a href="#__codelineno-136-2">  2</a></span>
+<span class="normal"><a href="#__codelineno-136-3">  3</a></span>
+<span class="normal"><a href="#__codelineno-136-4">  4</a></span>
+<span class="normal"><a href="#__codelineno-136-5">  5</a></span>
+<span class="normal"><a href="#__codelineno-136-6">  6</a></span>
+<span class="normal"><a href="#__codelineno-136-7">  7</a></span>
+<span class="normal"><a href="#__codelineno-136-8">  8</a></span>
+<span class="normal"><a href="#__codelineno-136-9">  9</a></span>
+<span class="normal"><a href="#__codelineno-136-10"> 10</a></span>
+<span class="normal"><a href="#__codelineno-136-11"> 11</a></span>
+<span class="normal"><a href="#__codelineno-136-12"> 12</a></span>
+<span class="normal"><a href="#__codelineno-136-13"> 13</a></span>
+<span class="normal"><a href="#__codelineno-136-14"> 14</a></span>
+<span class="normal"><a href="#__codelineno-136-15"> 15</a></span>
+<span class="normal"><a href="#__codelineno-136-16"> 16</a></span>
+<span class="normal"><a href="#__codelineno-136-17"> 17</a></span>
+<span class="normal"><a href="#__codelineno-136-18"> 18</a></span>
+<span class="normal"><a href="#__codelineno-136-19"> 19</a></span>
+<span class="normal"><a href="#__codelineno-136-20"> 20</a></span>
+<span class="normal"><a href="#__codelineno-136-21"> 21</a></span>
+<span class="normal"><a href="#__codelineno-136-22"> 22</a></span>
+<span class="normal"><a href="#__codelineno-136-23"> 23</a></span>
+<span class="normal"><a href="#__codelineno-136-24"> 24</a></span>
+<span class="normal"><a href="#__codelineno-136-25"> 25</a></span>
+<span class="normal"><a href="#__codelineno-136-26"> 26</a></span>
+<span class="normal"><a href="#__codelineno-136-27"> 27</a></span>
+<span class="normal"><a href="#__codelineno-136-28"> 28</a></span>
+<span class="normal"><a href="#__codelineno-136-29"> 29</a></span>
+<span class="normal"><a href="#__codelineno-136-30"> 30</a></span>
+<span class="normal"><a href="#__codelineno-136-31"> 31</a></span>
+<span class="normal"><a href="#__codelineno-136-32"> 32</a></span>
+<span class="normal"><a href="#__codelineno-136-33"> 33</a></span>
+<span class="normal"><a href="#__codelineno-136-34"> 34</a></span>
+<span class="normal"><a href="#__codelineno-136-35"> 35</a></span>
+<span class="normal"><a href="#__codelineno-136-36"> 36</a></span>
+<span class="normal"><a href="#__codelineno-136-37"> 37</a></span>
+<span class="normal"><a href="#__codelineno-136-38"> 38</a></span>
+<span class="normal"><a href="#__codelineno-136-39"> 39</a></span>
+<span class="normal"><a href="#__codelineno-136-40"> 40</a></span>
+<span class="normal"><a href="#__codelineno-136-41"> 41</a></span>
+<span class="normal"><a href="#__codelineno-136-42"> 42</a></span>
+<span class="normal"><a href="#__codelineno-136-43"> 43</a></span>
+<span class="normal"><a href="#__codelineno-136-44"> 44</a></span>
+<span class="normal"><a href="#__codelineno-136-45"> 45</a></span>
+<span class="normal"><a href="#__codelineno-136-46"> 46</a></span>
+<span class="normal"><a href="#__codelineno-136-47"> 47</a></span>
+<span class="normal"><a href="#__codelineno-136-48"> 48</a></span>
+<span class="normal"><a href="#__codelineno-136-49"> 49</a></span>
+<span class="normal"><a href="#__codelineno-136-50"> 50</a></span>
+<span class="normal"><a href="#__codelineno-136-51"> 51</a></span>
+<span class="normal"><a href="#__codelineno-136-52"> 52</a></span>
+<span class="normal"><a href="#__codelineno-136-53"> 53</a></span>
+<span class="normal"><a href="#__codelineno-136-54"> 54</a></span>
+<span class="normal"><a href="#__codelineno-136-55"> 55</a></span>
+<span class="normal"><a href="#__codelineno-136-56"> 56</a></span>
+<span class="normal"><a href="#__codelineno-136-57"> 57</a></span>
+<span class="normal"><a href="#__codelineno-136-58"> 58</a></span>
+<span class="normal"><a href="#__codelineno-136-59"> 59</a></span>
+<span class="normal"><a href="#__codelineno-136-60"> 60</a></span>
+<span class="normal"><a href="#__codelineno-136-61"> 61</a></span>
+<span class="normal"><a href="#__codelineno-136-62"> 62</a></span>
+<span class="normal"><a href="#__codelineno-136-63"> 63</a></span>
+<span class="normal"><a href="#__codelineno-136-64"> 64</a></span>
+<span class="normal"><a href="#__codelineno-136-65"> 65</a></span>
+<span class="normal"><a href="#__codelineno-136-66"> 66</a></span>
+<span class="normal"><a href="#__codelineno-136-67"> 67</a></span>
+<span class="normal"><a href="#__codelineno-136-68"> 68</a></span>
+<span class="normal"><a href="#__codelineno-136-69"> 69</a></span>
+<span class="normal"><a href="#__codelineno-136-70"> 70</a></span>
+<span class="normal"><a href="#__codelineno-136-71"> 71</a></span>
+<span class="normal"><a href="#__codelineno-136-72"> 72</a></span>
+<span class="normal"><a href="#__codelineno-136-73"> 73</a></span>
+<span class="normal"><a href="#__codelineno-136-74"> 74</a></span>
+<span class="normal"><a href="#__codelineno-136-75"> 75</a></span>
+<span class="normal"><a href="#__codelineno-136-76"> 76</a></span>
+<span class="normal"><a href="#__codelineno-136-77"> 77</a></span>
+<span class="normal"><a href="#__codelineno-136-78"> 78</a></span>
+<span class="normal"><a href="#__codelineno-136-79"> 79</a></span>
+<span class="normal"><a href="#__codelineno-136-80"> 80</a></span>
+<span class="normal"><a href="#__codelineno-136-81"> 81</a></span>
+<span class="normal"><a href="#__codelineno-136-82"> 82</a></span>
+<span class="normal"><a href="#__codelineno-136-83"> 83</a></span>
+<span class="normal"><a href="#__codelineno-136-84"> 84</a></span>
+<span class="normal"><a href="#__codelineno-136-85"> 85</a></span>
+<span class="normal"><a href="#__codelineno-136-86"> 86</a></span>
+<span class="normal"><a href="#__codelineno-136-87"> 87</a></span>
+<span class="normal"><a href="#__codelineno-136-88"> 88</a></span>
+<span class="normal"><a href="#__codelineno-136-89"> 89</a></span>
+<span class="normal"><a href="#__codelineno-136-90"> 90</a></span>
+<span class="normal"><a href="#__codelineno-136-91"> 91</a></span>
+<span class="normal"><a href="#__codelineno-136-92"> 92</a></span>
+<span class="normal"><a href="#__codelineno-136-93"> 93</a></span>
+<span class="normal"><a href="#__codelineno-136-94"> 94</a></span>
+<span class="normal"><a href="#__codelineno-136-95"> 95</a></span>
+<span class="normal"><a href="#__codelineno-136-96"> 96</a></span>
+<span class="normal"><a href="#__codelineno-136-97"> 97</a></span>
+<span class="normal"><a href="#__codelineno-136-98"> 98</a></span>
+<span class="normal"><a href="#__codelineno-136-99"> 99</a></span>
+<span class="normal"><a href="#__codelineno-136-100">100</a></span>
+<span class="normal"><a href="#__codelineno-136-101">101</a></span>
+<span class="normal"><a href="#__codelineno-136-102">102</a></span>
+<span class="normal"><a href="#__codelineno-136-103">103</a></span>
+<span class="normal"><a href="#__codelineno-136-104">104</a></span>
+<span class="normal"><a href="#__codelineno-136-105">105</a></span>
+<span class="normal"><a href="#__codelineno-136-106">106</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-136-1" name="__codelineno-136-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-136-2" name="__codelineno-136-2"></a>
 <a id="__codelineno-136-3" name="__codelineno-136-3"></a><span class="cm">/*</span>
 <a id="__codelineno-136-4" name="__codelineno-136-4"></a><span class="cm">* Fehlerhafter Workflow für Debugging-Übungen</span>
@@ -9092,81 +9106,95 @@ Die Lösungen werden direkt im Text besprochen, aber versuche, jede Aufgabe selb
 <a id="__codelineno-136-15" name="__codelineno-136-15"></a><span class="cm">* Prozess mit Eingabe-/Ausgabe-Diskrepanz</span>
 <a id="__codelineno-136-16" name="__codelineno-136-16"></a><span class="cm">*/</span>
 <a id="__codelineno-136-17" name="__codelineno-136-17"></a><span class="n">process</span><span class="w"> </span><span class="n">processFiles</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-136-18" name="__codelineno-136-18"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s2">&quot;${params.output}/processed&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-136-19" name="__codelineno-136-19"></a>
-<a id="__codelineno-136-20" name="__codelineno-136-20"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-136-21" name="__codelineno-136-21"></a><span class="w">        </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">sample_id</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">input_file</span><span class="o">)</span>
-<a id="__codelineno-136-22" name="__codelineno-136-22"></a>
-<a id="__codelineno-136-23" name="__codelineno-136-23"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-136-24" name="__codelineno-136-24"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${sample_id}_result.txt&quot;</span>
-<a id="__codelineno-136-25" name="__codelineno-136-25"></a>
-<a id="__codelineno-136-26" name="__codelineno-136-26"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-136-27" name="__codelineno-136-27"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-136-28" name="__codelineno-136-28"></a><span class="s2">    echo &quot;Processing: ${sample_id}&quot;</span>
-<a id="__codelineno-136-29" name="__codelineno-136-29"></a><span class="s2">    cat ${input_file} &gt; ${sample_id}_result.txt</span>
-<a id="__codelineno-136-30" name="__codelineno-136-30"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-136-31" name="__codelineno-136-31"></a><span class="o">}</span>
-<a id="__codelineno-136-32" name="__codelineno-136-32"></a>
-<a id="__codelineno-136-33" name="__codelineno-136-33"></a><span class="cm">/*</span>
-<a id="__codelineno-136-34" name="__codelineno-136-34"></a><span class="cm">* Prozess mit Ressourcenproblemen</span>
-<a id="__codelineno-136-35" name="__codelineno-136-35"></a><span class="cm">*/</span>
-<a id="__codelineno-136-36" name="__codelineno-136-36"></a><span class="n">process</span><span class="w"> </span><span class="n">heavyProcess</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-136-37" name="__codelineno-136-37"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s2">&quot;${params.output}/heavy&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-136-18" name="__codelineno-136-18"></a>
+<a id="__codelineno-136-19" name="__codelineno-136-19"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-136-20" name="__codelineno-136-20"></a><span class="w">        </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">sample_id</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">input_file</span><span class="o">)</span>
+<a id="__codelineno-136-21" name="__codelineno-136-21"></a>
+<a id="__codelineno-136-22" name="__codelineno-136-22"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-136-23" name="__codelineno-136-23"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${sample_id}_result.txt&quot;</span>
+<a id="__codelineno-136-24" name="__codelineno-136-24"></a>
+<a id="__codelineno-136-25" name="__codelineno-136-25"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-136-26" name="__codelineno-136-26"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-136-27" name="__codelineno-136-27"></a><span class="s2">    echo &quot;Processing: ${sample_id}&quot;</span>
+<a id="__codelineno-136-28" name="__codelineno-136-28"></a><span class="s2">    cat ${input_file} &gt; ${sample_id}_result.txt</span>
+<a id="__codelineno-136-29" name="__codelineno-136-29"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-136-30" name="__codelineno-136-30"></a><span class="o">}</span>
+<a id="__codelineno-136-31" name="__codelineno-136-31"></a>
+<a id="__codelineno-136-32" name="__codelineno-136-32"></a><span class="cm">/*</span>
+<a id="__codelineno-136-33" name="__codelineno-136-33"></a><span class="cm">* Prozess mit Ressourcenproblemen</span>
+<a id="__codelineno-136-34" name="__codelineno-136-34"></a><span class="cm">*/</span>
+<a id="__codelineno-136-35" name="__codelineno-136-35"></a><span class="n">process</span><span class="w"> </span><span class="n">heavyProcess</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-136-36" name="__codelineno-136-36"></a>
+<a id="__codelineno-136-37" name="__codelineno-136-37"></a><span class="w">    </span><span class="n">time</span><span class="w"> </span><span class="s1">&#39;100 s&#39;</span>
 <a id="__codelineno-136-38" name="__codelineno-136-38"></a>
-<a id="__codelineno-136-39" name="__codelineno-136-39"></a><span class="w">    </span><span class="n">time</span><span class="w"> </span><span class="s1">&#39;100 s&#39;</span>
-<a id="__codelineno-136-40" name="__codelineno-136-40"></a>
-<a id="__codelineno-136-41" name="__codelineno-136-41"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-136-42" name="__codelineno-136-42"></a><span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="n">sample_id</span>
-<a id="__codelineno-136-43" name="__codelineno-136-43"></a>
-<a id="__codelineno-136-44" name="__codelineno-136-44"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-136-45" name="__codelineno-136-45"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${sample_id}_heavy.txt&quot;</span>
-<a id="__codelineno-136-46" name="__codelineno-136-46"></a>
-<a id="__codelineno-136-47" name="__codelineno-136-47"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-136-48" name="__codelineno-136-48"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-136-49" name="__codelineno-136-49"></a><span class="s2">    # Schwere Berechnung simulieren</span>
-<a id="__codelineno-136-50" name="__codelineno-136-50"></a><span class="s2">    for i in {1..1000000}; do</span>
-<a id="__codelineno-136-51" name="__codelineno-136-51"></a><span class="s2">        echo &quot;Heavy computation \$i for ${sample_id}&quot;</span>
-<a id="__codelineno-136-52" name="__codelineno-136-52"></a><span class="s2">    done &gt; ${sample_id}_heavy.txt</span>
-<a id="__codelineno-136-53" name="__codelineno-136-53"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-136-54" name="__codelineno-136-54"></a><span class="o">}</span>
-<a id="__codelineno-136-55" name="__codelineno-136-55"></a>
-<a id="__codelineno-136-56" name="__codelineno-136-56"></a><span class="cm">/*</span>
-<a id="__codelineno-136-57" name="__codelineno-136-57"></a><span class="cm">* Prozess mit Dateiverarbeitungsproblemen</span>
-<a id="__codelineno-136-58" name="__codelineno-136-58"></a><span class="cm">*/</span>
-<a id="__codelineno-136-59" name="__codelineno-136-59"></a><span class="n">process</span><span class="w"> </span><span class="n">handleFiles</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-136-60" name="__codelineno-136-60"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s2">&quot;${params.output}/files&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-136-39" name="__codelineno-136-39"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-136-40" name="__codelineno-136-40"></a><span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="n">sample_id</span>
+<a id="__codelineno-136-41" name="__codelineno-136-41"></a>
+<a id="__codelineno-136-42" name="__codelineno-136-42"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-136-43" name="__codelineno-136-43"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${sample_id}_heavy.txt&quot;</span>
+<a id="__codelineno-136-44" name="__codelineno-136-44"></a>
+<a id="__codelineno-136-45" name="__codelineno-136-45"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-136-46" name="__codelineno-136-46"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-136-47" name="__codelineno-136-47"></a><span class="s2">    # Schwere Berechnung simulieren</span>
+<a id="__codelineno-136-48" name="__codelineno-136-48"></a><span class="s2">    for i in {1..1000000}; do</span>
+<a id="__codelineno-136-49" name="__codelineno-136-49"></a><span class="s2">        echo &quot;Heavy computation \$i for ${sample_id}&quot;</span>
+<a id="__codelineno-136-50" name="__codelineno-136-50"></a><span class="s2">    done &gt; ${sample_id}_heavy.txt</span>
+<a id="__codelineno-136-51" name="__codelineno-136-51"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-136-52" name="__codelineno-136-52"></a><span class="o">}</span>
+<a id="__codelineno-136-53" name="__codelineno-136-53"></a>
+<a id="__codelineno-136-54" name="__codelineno-136-54"></a><span class="cm">/*</span>
+<a id="__codelineno-136-55" name="__codelineno-136-55"></a><span class="cm">* Prozess mit Dateiverarbeitungsproblemen</span>
+<a id="__codelineno-136-56" name="__codelineno-136-56"></a><span class="cm">*/</span>
+<a id="__codelineno-136-57" name="__codelineno-136-57"></a><span class="n">process</span><span class="w"> </span><span class="n">handleFiles</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-136-58" name="__codelineno-136-58"></a>
+<a id="__codelineno-136-59" name="__codelineno-136-59"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-136-60" name="__codelineno-136-60"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
 <a id="__codelineno-136-61" name="__codelineno-136-61"></a>
-<a id="__codelineno-136-62" name="__codelineno-136-62"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-136-63" name="__codelineno-136-63"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
+<a id="__codelineno-136-62" name="__codelineno-136-62"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-136-63" name="__codelineno-136-63"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;processed_${input_file}&quot;</span>
 <a id="__codelineno-136-64" name="__codelineno-136-64"></a>
-<a id="__codelineno-136-65" name="__codelineno-136-65"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-136-66" name="__codelineno-136-66"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;processed_${input_file}&quot;</span>
-<a id="__codelineno-136-67" name="__codelineno-136-67"></a>
-<a id="__codelineno-136-68" name="__codelineno-136-68"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-136-69" name="__codelineno-136-69"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-136-70" name="__codelineno-136-70"></a><span class="s2">    if [ -f &quot;${input_file}&quot; ]; then</span>
-<a id="__codelineno-136-71" name="__codelineno-136-71"></a><span class="s2">        cp ${input_file} processed_${input_file}</span>
-<a id="__codelineno-136-72" name="__codelineno-136-72"></a><span class="s2">    fi</span>
-<a id="__codelineno-136-73" name="__codelineno-136-73"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-136-74" name="__codelineno-136-74"></a><span class="o">}</span>
-<a id="__codelineno-136-75" name="__codelineno-136-75"></a>
-<a id="__codelineno-136-76" name="__codelineno-136-76"></a><span class="cm">/*</span>
-<a id="__codelineno-136-77" name="__codelineno-136-77"></a><span class="cm">* Haupt-Workflow mit Kanalproblemen</span>
-<a id="__codelineno-136-78" name="__codelineno-136-78"></a><span class="cm">*/</span>
-<a id="__codelineno-136-79" name="__codelineno-136-79"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-136-80" name="__codelineno-136-80"></a>
-<a id="__codelineno-136-81" name="__codelineno-136-81"></a><span class="w">    </span><span class="c1">// Kanal mit falscher Verwendung</span>
-<a id="__codelineno-136-82" name="__codelineno-136-82"></a><span class="w">    </span><span class="n">input_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span>
-<a id="__codelineno-136-83" name="__codelineno-136-83"></a><span class="w">        </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-<a id="__codelineno-136-84" name="__codelineno-136-84"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
-<a id="__codelineno-136-85" name="__codelineno-136-85"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">row</span><span class="o">.</span><span class="na">sample_id</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq_path</span><span class="o">)]</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-136-86" name="__codelineno-136-86"></a>
-<a id="__codelineno-136-87" name="__codelineno-136-87"></a><span class="w">    </span><span class="n">processed_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">processFiles</span><span class="o">(</span><span class="n">input_ch</span><span class="o">)</span>
-<a id="__codelineno-136-88" name="__codelineno-136-88"></a>
-<a id="__codelineno-136-89" name="__codelineno-136-89"></a><span class="w">    </span><span class="n">heavy_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">heavyProcess</span><span class="o">(</span><span class="n">input_ch</span><span class="o">.</span><span class="na">map</span><span class="o">{</span><span class="n">it</span><span class="o">[</span><span class="mi">0</span><span class="o">]})</span>
-<a id="__codelineno-136-90" name="__codelineno-136-90"></a>
-<a id="__codelineno-136-91" name="__codelineno-136-91"></a><span class="w">    </span><span class="n">handleFiles</span><span class="o">(</span><span class="n">heavyProcess</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
-<a id="__codelineno-136-92" name="__codelineno-136-92"></a><span class="o">}</span>
+<a id="__codelineno-136-65" name="__codelineno-136-65"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-136-66" name="__codelineno-136-66"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-136-67" name="__codelineno-136-67"></a><span class="s2">    if [ -f &quot;${input_file}&quot; ]; then</span>
+<a id="__codelineno-136-68" name="__codelineno-136-68"></a><span class="s2">        cp ${input_file} processed_${input_file}</span>
+<a id="__codelineno-136-69" name="__codelineno-136-69"></a><span class="s2">    fi</span>
+<a id="__codelineno-136-70" name="__codelineno-136-70"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-136-71" name="__codelineno-136-71"></a><span class="o">}</span>
+<a id="__codelineno-136-72" name="__codelineno-136-72"></a>
+<a id="__codelineno-136-73" name="__codelineno-136-73"></a><span class="cm">/*</span>
+<a id="__codelineno-136-74" name="__codelineno-136-74"></a><span class="cm">* Haupt-Workflow mit Kanalproblemen</span>
+<a id="__codelineno-136-75" name="__codelineno-136-75"></a><span class="cm">*/</span>
+<a id="__codelineno-136-76" name="__codelineno-136-76"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-136-77" name="__codelineno-136-77"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-136-78" name="__codelineno-136-78"></a><span class="w">    </span><span class="c1">// Kanal mit falscher Verwendung</span>
+<a id="__codelineno-136-79" name="__codelineno-136-79"></a><span class="w">    </span><span class="n">input_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span>
+<a id="__codelineno-136-80" name="__codelineno-136-80"></a><span class="w">        </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
+<a id="__codelineno-136-81" name="__codelineno-136-81"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+<a id="__codelineno-136-82" name="__codelineno-136-82"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">row</span><span class="o">.</span><span class="na">sample_id</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq_path</span><span class="o">)]</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-136-83" name="__codelineno-136-83"></a>
+<a id="__codelineno-136-84" name="__codelineno-136-84"></a><span class="w">    </span><span class="n">processed_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">processFiles</span><span class="o">(</span><span class="n">input_ch</span><span class="o">)</span>
+<a id="__codelineno-136-85" name="__codelineno-136-85"></a>
+<a id="__codelineno-136-86" name="__codelineno-136-86"></a><span class="w">    </span><span class="n">heavy_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">heavyProcess</span><span class="o">(</span><span class="n">input_ch</span><span class="o">.</span><span class="na">map</span><span class="o">{</span><span class="n">it</span><span class="o">[</span><span class="mi">0</span><span class="o">]})</span>
+<a id="__codelineno-136-87" name="__codelineno-136-87"></a>
+<a id="__codelineno-136-88" name="__codelineno-136-88"></a><span class="w">    </span><span class="n">file_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">handleFiles</span><span class="o">(</span><span class="n">heavy_ch</span><span class="o">)</span>
+<a id="__codelineno-136-89" name="__codelineno-136-89"></a>
+<a id="__codelineno-136-90" name="__codelineno-136-90"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-136-91" name="__codelineno-136-91"></a><span class="w">    </span><span class="n">processed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">processed_ch</span>
+<a id="__codelineno-136-92" name="__codelineno-136-92"></a><span class="w">    </span><span class="n">heavy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">heavy_ch</span>
+<a id="__codelineno-136-93" name="__codelineno-136-93"></a><span class="w">    </span><span class="n">files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file_ch</span>
+<a id="__codelineno-136-94" name="__codelineno-136-94"></a><span class="o">}</span>
+<a id="__codelineno-136-95" name="__codelineno-136-95"></a>
+<a id="__codelineno-136-96" name="__codelineno-136-96"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-136-97" name="__codelineno-136-97"></a><span class="w">    </span><span class="n">processed</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-136-98" name="__codelineno-136-98"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;processed&#39;</span>
+<a id="__codelineno-136-99" name="__codelineno-136-99"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-136-100" name="__codelineno-136-100"></a><span class="w">    </span><span class="n">heavy</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-136-101" name="__codelineno-136-101"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;heavy&#39;</span>
+<a id="__codelineno-136-102" name="__codelineno-136-102"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-136-103" name="__codelineno-136-103"></a><span class="w">    </span><span class="n">files</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-136-104" name="__codelineno-136-104"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;files&#39;</span>
+<a id="__codelineno-136-105" name="__codelineno-136-105"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-136-106" name="__codelineno-136-106"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div></p>
 </details>
 </div>
@@ -9226,7 +9254,7 @@ Wenn du diese Techniken in deiner eigenen Arbeit anwendest, wirst du weniger Zei
 <a id="__codelineno-138-6" name="__codelineno-138-6" href="#__codelineno-138-6"></a><span class="c1">// oder</span>
 <a id="__codelineno-138-7" name="__codelineno-138-7" href="#__codelineno-138-7"></a><span class="n">reference_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;ref.fa&#39;</span><span class="o">).</span><span class="na">first</span><span class="o">()</span>
 </code></pre></div>
-<p><strong>3. Prozessausführungsprobleme beheben</strong>:</p>
+<p><strong>3. Prozess-Ausführungsprobleme beheben</strong>:</p>
 <ul>
 <li>Fehlende Ausgabedatei-Fehler diagnostizieren</li>
 <li>Exit-Codes verstehen (127 für fehlende Software, 137 für Speicherprobleme)</li>
@@ -11019,7 +11047,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Fußzeile" >
         
           
-          <a href="../nf_test/" class="md-footer__link md-footer__link--prev" aria-label="Zurück: Testen mit nf-test">
+          <a href="../nf_test/" class="md-footer__link md-footer__link--prev" aria-label="Zurück: Index">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -11029,7 +11057,7 @@ window.mkdocsQuizConfig = {
                 Zurück
               </span>
               <div class="md-ellipsis">
-                Testen mit nf-test
+                Index
               </div>
             </div>
           </a>

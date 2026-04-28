@@ -3103,7 +3103,7 @@
   <span class="md-ellipsis">
     
   
-    Orientação
+    Primeiros passos
   
 
     
@@ -3159,7 +3159,7 @@
   <span class="md-ellipsis">
     
   
-    Padrões Essenciais de Scripting em Nextflow
+    Padrões Essenciais de Scripting
   
 
     
@@ -3187,7 +3187,7 @@
   <span class="md-ellipsis">
     
   
-    Processamento de entrada de arquivos
+    Processamento de Entrada de Arquivos
   
 
     
@@ -3215,7 +3215,7 @@
   <span class="md-ellipsis">
     
   
-    Metadados e meta maps
+    Metadados e Meta Maps
   
 
     
@@ -3271,7 +3271,7 @@
   <span class="md-ellipsis">
     
   
-    Testando com nf-test
+    Index
   
 
     
@@ -3299,7 +3299,7 @@
   <span class="md-ellipsis">
     
   
-    Depurando Fluxos de Trabalho
+    Solução de Problemas em Fluxos de Trabalho
   
 
     
@@ -4883,7 +4883,7 @@ Ele é equivalente ao script produzido ao trabalhar na Parte 1 deste curso de tr
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">Launching `hello-channels.nf` [wise_jennings] DSL2 - revision: b24f4902d6</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
@@ -4916,7 +4916,7 @@ Ele é equivalente ao script produzido ao trabalhar na Parte 1 deste curso de tr
 Para manter as coisas simples por enquanto, vamos usar a fábrica de canais mais básica, chamada <a href="https://nextflow.io/docs/latest/reference/channel.html#of"><code>channel.of</code></a>, que criará um canal contendo um único valor.
 Funcionalmente, isso será semelhante a como tínhamos configurado antes, mas em vez de ter o Nextflow criando um canal implicitamente, estamos fazendo isso explicitamente agora.</p>
 <p>Esta é a linha de código que vamos usar:</p>
-<div class="highlight"><span class="filename">Sintaxe</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">greeting_ch = channel.of(&#39;Hello Channels!&#39;)</span>
+<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">greeting_ch = channel.of(&#39;Hello Channels!&#39;)</span>
 </code></pre></div>
 <p>Isso cria um canal chamado <code>greeting_ch</code> usando a fábrica de canais <code>channel.of()</code>, que configura um canal de fila simples, e carrega a string <code>'Hello Channels!'</code> para usar como o valor da saudação.</p>
 <figure class="excalidraw">
@@ -5043,7 +5043,7 @@ Funcionalmente, isso será semelhante a como tínhamos configurado antes, mas em
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">Launching `hello-channels.nf` [fabulous_crick] DSL2 - revision: 23e20f76e8</span>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
@@ -5085,9 +5085,9 @@ Você pode pensar em <code>view()</code> como uma ferramenta de depuração, com
 <a id="__codelineno-13-29" name="__codelineno-13-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-13-30" name="__codelineno-13-30"></a><span class="w">    </span><span class="c1">// cria um canal para entradas</span>
 <a id="__codelineno-13-31" name="__codelineno-13-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello Channels!&#39;</span><span class="o">)</span>
-<a id="__codelineno-13-32" name="__codelineno-13-32"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
-<a id="__codelineno-13-33" name="__codelineno-13-33"></a><span class="hll"><span class="w">    </span><span class="c1">// emite uma saudação</span>
-</span><a id="__codelineno-13-34" name="__codelineno-13-34"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
+<a id="__codelineno-13-32" name="__codelineno-13-32"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</span><a id="__codelineno-13-33" name="__codelineno-13-33"></a><span class="w">    </span><span class="c1">// emite uma saudação</span>
+<a id="__codelineno-13-34" name="__codelineno-13-34"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-13-35" name="__codelineno-13-35"></a>
 <a id="__codelineno-13-36" name="__codelineno-13-36"></a><span class="w">    </span><span class="nl">publish:</span>
 <a id="__codelineno-13-37" name="__codelineno-13-37"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span>
@@ -5126,7 +5126,7 @@ Você pode pensar em <code>view()</code> como uma ferramenta de depuração, com
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="go">Launching `hello-channels.nf` [scruffy_shaw] DSL2 - revision: 2ede41e14a</span>
 <a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
@@ -5147,7 +5147,7 @@ Aqui temos apenas um elemento, mas quando começarmos a carregar múltiplos valo
 <h3 id="21-carregue-multiplas-saudacoes-no-canal-de-entrada">2.1. Carregue múltiplas saudações no canal de entrada<a class="headerlink" href="#21-carregue-multiplas-saudacoes-no-canal-de-entrada" title="Permanent link">&para;</a></h3>
 <p>Convenientemente, a fábrica de canais <code>channel.of()</code> que estivemos usando está bastante feliz em aceitar mais de um valor, então não precisamos modificar isso de jeito nenhum.
 Podemos apenas carregar múltiplos valores no canal.</p>
-<p>Vamos fazê-los <code>'Hello'</code>, <code>'Bonjour'</code> e <code>'Holà'</code>.</p>
+<p>Vamos fazê-los <code>'Hello'</code>, <code>'Bonjour'</code> e <code>'Hola'</code>.</p>
 <h4 id="211-adicione-mais-saudacoes">2.1.1. Adicione mais saudações<a class="headerlink" href="#211-adicione-mais-saudacoes" title="Permanent link">&para;</a></h4>
 <p>Antes do bloco workflow, faça a seguinte alteração de código:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Depois</label><label for="__tabbed_4_2">Antes</label></div>
@@ -5156,7 +5156,7 @@ Podemos apenas carregar múltiplos valores no canal.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-30">30</a></span>
 <span class="normal"><a href="#__codelineno-17-31">31</a></span>
 <span class="normal"><a href="#__codelineno-17-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-30" name="__codelineno-17-30"></a><span class="c1">// cria um canal para entradas</span>
-<a id="__codelineno-17-31" name="__codelineno-17-31"></a><span class="hll"><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">)</span>
+<a id="__codelineno-17-31" name="__codelineno-17-31"></a><span class="hll"><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">)</span>
 </span><a id="__codelineno-17-32" name="__codelineno-17-32"></a><span class="w">                     </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5177,7 +5177,7 @@ Podemos apenas carregar múltiplos valores no canal.</p>
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="go">Launching `hello-channels.nf` [amazing_crick] DSL2 - revision: 59a9a5888a</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>
@@ -5185,7 +5185,7 @@ Podemos apenas carregar múltiplos valores no canal.</p>
 <a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="hll"><span class="go">[f4/c9962c] process &gt; sayHello (1) [100%] 3 of 3 ✔</span>
 </span><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="go">Hello</span>
 <a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="go">Bonjour</span>
-<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="go">Holà</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="go">Hola</span>
 </code></pre></div>
 </details>
 <p>Certamente parece ter executado bem.
@@ -5203,7 +5203,7 @@ O monitor de execução mostra que <code>3 of 3</code> chamadas foram feitas par
 </details>
 <details class="abstract">
 <summary>Conteúdo do arquivo</summary>
-<div class="highlight"><span class="filename">results/hello_channels/output.txt</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">Holà</span>
+<div class="highlight"><span class="filename">results/hello_channels/output.txt</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">Hola</span>
 </code></pre></div>
 </details>
 <p>Você deve ver uma das três saudações lá, mas a que você obteve pode ser diferente do que é mostrado aqui.
@@ -5246,11 +5246,11 @@ Então o status de todas as três chamadas ao processo sayHello() estão chegand
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go"> N E X T F L O W  ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go"> N E X T F L O W  ~  version 25.10.4</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="go">Launching `hello-channels.nf` [desperate_monod] DSL2 - revision: 59a9a5888a</span>
 <a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="go">Hello</span>
 <a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="go">Bonjour</span>
-<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="go">Holà</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="go">Hola</span>
 <a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="go">[23/871c7e] Submitted process &gt; sayHello (2)</span>
 <a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="go">[7f/21e2c2] Submitted process &gt; sayHello (1)</span>
 <a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="go">[f4/ea10a6] Submitted process &gt; sayHello (3)</span>
@@ -5306,7 +5306,7 @@ Neste modo expandido, ele apenas relata que foram submetidas.</p>
 </code></pre></div>
 <div class="highlight"><span class="filename">work/7f/21e2c2f3cc8833ef3858b236e5575c/output.txt</span><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>Hello
 </code></pre></div>
-<div class="highlight"><span class="filename">work/f4/ea10a680d5687596d3eaa3fcf69272/output.txt</span><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>Holà
+<div class="highlight"><span class="filename">work/f4/ea10a680d5687596d3eaa3fcf69272/output.txt</span><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>Hola
 </code></pre></div>
 </details>
 <p>Isso mostra que todos os três processos foram executados com sucesso (eba).</p>
@@ -5408,7 +5408,7 @@ Aqui, por conveniência, vamos apenas usar a própria saudação, já que é ape
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>
 <a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="go">Launching `hello-channels.nf` [sharp_minsky] DSL2 - revision: 16a291febe</span>
 <a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a>
@@ -5416,7 +5416,7 @@ Aqui, por conveniência, vamos apenas usar a própria saudação, já que é ape
 <a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a><span class="go">[e8/33ee64] sayHello (2) [100%] 3 of 3 ✔</span>
 <a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a><span class="go">Hello</span>
 <a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a><span class="go">Bonjour</span>
-<a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a><span class="go">Holà</span>
+<a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a><span class="go">Hola</span>
 </code></pre></div>
 </details>
 <p>Voltando à visualização de resumo, a saída é resumida em uma linha novamente.
@@ -5426,7 +5426,7 @@ Dê uma olhada no diretório <code>results</code> para ver se todas as saudaçõ
 <div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="go">results/hello_channels/</span>
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="go">├── Bonjour-output.txt</span>
 <a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="go">├── Hello-output.txt</span>
-<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="go">├── Holà-output.txt</span>
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="go">├── Hola-output.txt</span>
 <a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="go">└── output.txt</span>
 </code></pre></div>
 </details>
@@ -5437,7 +5437,7 @@ Dê uma olhada no diretório <code>results</code> para ver se todas as saudaçõ
 </code></pre></div>
 <div class="highlight"><span class="filename">Hello-output.txt</span><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="go">Hello</span>
 </code></pre></div>
-<div class="highlight"><span class="filename">Holà-output.txt</span><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="go">Holà</span>
+<div class="highlight"><span class="filename">Hola-output.txt</span><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="go">Hola</span>
 </code></pre></div>
 </details>
 <p>Sucesso! Agora podemos adicionar quantas saudações quisermos sem nos preocupar com arquivos de saída sendo sobrescritos.</p>
@@ -5446,7 +5446,7 @@ Dê uma olhada no diretório <code>results</code> para ver se todas as saudaçõ
 <p>Na prática, nomear arquivos com base nos dados de entrada em si é quase sempre impraticável.
 A melhor maneira de gerar nomes de arquivo dinâmicos é passar metadados para um processo junto com os arquivos de entrada.
 Os metadados são normalmente fornecidos através de uma 'planilha de amostras' ou equivalentes.
-Você aprenderá como fazer isso mais tarde no seu treinamento de Nextflow (veja <a href="../side_quests/metadata.md">Missão secundária de metadados</a>).</p>
+Você aprenderá como fazer isso mais tarde no seu treinamento de Nextflow (veja <a href="../../side_quests/metadata/">Missão secundária de metadados</a>).</p>
 </div>
 <h3 id="conclusao_1">Conclusão<a class="headerlink" href="#conclusao_1" title="Permanent link">&para;</a></h3>
 <p>Você sabe como alimentar múltiplos elementos de entrada através de um canal.</p>
@@ -5457,7 +5457,7 @@ Você aprenderá como fazer isso mais tarde no seu treinamento de Nextflow (veja
 <p>Acabamos de mostrar como lidar com múltiplos elementos de entrada que foram codificados diretamente na fábrica de canais.
 E se quisermos fornecer essas múltiplas entradas de uma maneira diferente?</p>
 <p>Por exemplo, imagine que configuramos uma variável de entrada contendo um array de elementos assim:</p>
-<p><code>greetings_array = ['Hello','Bonjour','Holà']</code></p>
+<p><code>greetings_array = ['Hello','Bonjour','Hola']</code></p>
 <p>Podemos carregar isso em nosso canal de saída e esperar que funcione?</p>
 <figure class="excalidraw">
 <?xml version="1.0" standalone="no"?>
@@ -5492,9 +5492,9 @@ Vamos tentar; precisaremos configurar a variável de entrada e carregá-la na f�
 <a id="__codelineno-41-28" name="__codelineno-41-28"></a>
 <a id="__codelineno-41-29" name="__codelineno-41-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-41-30" name="__codelineno-41-30"></a><span class="hll"><span class="w">    </span><span class="c1">// declara um array de saudações de entrada</span>
-</span><a id="__codelineno-41-31" name="__codelineno-41-31"></a><span class="hll"><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">]</span>
+</span><a id="__codelineno-41-31" name="__codelineno-41-31"></a><span class="hll"><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
 </span><a id="__codelineno-41-32" name="__codelineno-41-32"></a><span class="w">    </span><span class="c1">// cria um canal para entradas</span>
-<a id="__codelineno-41-33" name="__codelineno-41-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">)</span>
+<a id="__codelineno-41-33" name="__codelineno-41-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">)</span>
 <a id="__codelineno-41-34" name="__codelineno-41-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 <a id="__codelineno-41-35" name="__codelineno-41-35"></a><span class="w">    </span><span class="c1">// emite uma saudação</span>
 <a id="__codelineno-41-36" name="__codelineno-41-36"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
@@ -5520,7 +5520,7 @@ Vamos tentar; precisaremos configurar a variável de entrada e carregá-la na f�
 <a id="__codelineno-42-28" name="__codelineno-42-28"></a>
 <a id="__codelineno-42-29" name="__codelineno-42-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-42-30" name="__codelineno-42-30"></a><span class="w">    </span><span class="c1">// cria um canal para entradas</span>
-<a id="__codelineno-42-31" name="__codelineno-42-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">)</span>
+<a id="__codelineno-42-31" name="__codelineno-42-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">)</span>
 <a id="__codelineno-42-32" name="__codelineno-42-32"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 <a id="__codelineno-42-33" name="__codelineno-42-33"></a><span class="w">    </span><span class="c1">// emite uma saudação</span>
 <a id="__codelineno-42-34" name="__codelineno-42-34"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
@@ -5534,7 +5534,7 @@ Vamos tentar; precisaremos configurar a variável de entrada e carregá-la na f�
 </div>
 <p>Isso ainda não está funcional, apenas adicionamos uma declaração para o array.</p>
 <h4 id="312-defina-o-array-de-saudacoes-como-entrada-para-a-fabrica-de-canais">3.1.2. Defina o array de saudações como entrada para a fábrica de canais<a class="headerlink" href="#312-defina-o-array-de-saudacoes-como-entrada-para-a-fabrica-de-canais" title="Permanent link">&para;</a></h4>
-<p>Agora vamos substituir os valores <code>'Hello','Bonjour','Holà'</code> atualmente codificados na fábrica de canais pelo <code>greetings_array</code> que acabamos de criar.</p>
+<p>Agora vamos substituir os valores <code>'Hello','Bonjour','Hola'</code> atualmente codificados na fábrica de canais pelo <code>greetings_array</code> que acabamos de criar.</p>
 <p>No bloco workflow, faça a seguinte alteração:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Depois</label><label for="__tabbed_7_2">Antes</label></div>
 <div class="tabbed-content">
@@ -5556,7 +5556,7 @@ Vamos tentar; precisaremos configurar a variável de entrada e carregá-la na f�
 <a id="__codelineno-43-28" name="__codelineno-43-28"></a>
 <a id="__codelineno-43-29" name="__codelineno-43-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-43-30" name="__codelineno-43-30"></a><span class="w">    </span><span class="c1">// declara um array de saudações de entrada</span>
-<a id="__codelineno-43-31" name="__codelineno-43-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">]</span>
+<a id="__codelineno-43-31" name="__codelineno-43-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
 <a id="__codelineno-43-32" name="__codelineno-43-32"></a><span class="w">    </span><span class="c1">// cria um canal para entradas</span>
 <a id="__codelineno-43-33" name="__codelineno-43-33"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 </span><a id="__codelineno-43-34" name="__codelineno-43-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
@@ -5586,9 +5586,9 @@ Vamos tentar; precisaremos configurar a variável de entrada e carregá-la na f�
 <a id="__codelineno-44-28" name="__codelineno-44-28"></a>
 <a id="__codelineno-44-29" name="__codelineno-44-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-44-30" name="__codelineno-44-30"></a><span class="w">    </span><span class="c1">// declara um array de saudações de entrada</span>
-<a id="__codelineno-44-31" name="__codelineno-44-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">]</span>
+<a id="__codelineno-44-31" name="__codelineno-44-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
 <a id="__codelineno-44-32" name="__codelineno-44-32"></a><span class="w">    </span><span class="c1">// cria um canal para entradas</span>
-<a id="__codelineno-44-33" name="__codelineno-44-33"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">)</span>
+<a id="__codelineno-44-33" name="__codelineno-44-33"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">)</span>
 </span><a id="__codelineno-44-34" name="__codelineno-44-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 <a id="__codelineno-44-35" name="__codelineno-44-35"></a><span class="w">    </span><span class="c1">// emite uma saudação</span>
 <a id="__codelineno-44-36" name="__codelineno-44-36"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
@@ -5607,22 +5607,22 @@ Vamos tentar; precisaremos configurar a variável de entrada e carregá-la na f�
 </code></pre></div>
 <details class="failure">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="go">Launching `hello-channels.nf` [friendly_koch] DSL2 - revision: 97256837a7</span>
 <a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a>
 <a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a><span class="go">executor &gt;  local (1)</span>
 <a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a><span class="go">[a8/1f6ead] sayHello (1) | 0 of 1</span>
-<a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a><span class="hll"><span class="go">[Hello, Bonjour, Holà]</span>
+<a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a><span class="hll"><span class="go">[Hello, Bonjour, Hola]</span>
 </span><a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a><span class="go">ERROR ~ Error executing process &gt; &#39;sayHello (1)&#39;</span>
 <a id="__codelineno-46-9" name="__codelineno-46-9" href="#__codelineno-46-9"></a>
 <a id="__codelineno-46-10" name="__codelineno-46-10" href="#__codelineno-46-10"></a><span class="go">Caused by:</span>
-<a id="__codelineno-46-11" name="__codelineno-46-11" href="#__codelineno-46-11"></a><span class="hll"><span class="go">  Missing output file(s) `[Hello, Bonjour, Holà]-output.txt` expected by process `sayHello (1)`</span>
+<a id="__codelineno-46-11" name="__codelineno-46-11" href="#__codelineno-46-11"></a><span class="hll"><span class="go">  Missing output file(s) `[Hello, Bonjour, Hola]-output.txt` expected by process `sayHello (1)`</span>
 </span><a id="__codelineno-46-12" name="__codelineno-46-12" href="#__codelineno-46-12"></a>
 <a id="__codelineno-46-13" name="__codelineno-46-13" href="#__codelineno-46-13"></a>
 <a id="__codelineno-46-14" name="__codelineno-46-14" href="#__codelineno-46-14"></a><span class="go">Command executed:</span>
 <a id="__codelineno-46-15" name="__codelineno-46-15" href="#__codelineno-46-15"></a>
-<a id="__codelineno-46-16" name="__codelineno-46-16" href="#__codelineno-46-16"></a><span class="hll"><span class="go">  echo &#39;[Hello, Bonjour, Holà]&#39; &gt; &#39;[Hello, Bonjour, Holà]-output.txt&#39;</span>
+<a id="__codelineno-46-16" name="__codelineno-46-16" href="#__codelineno-46-16"></a><span class="hll"><span class="go">  echo &#39;[Hello, Bonjour, Hola]&#39; &gt; &#39;[Hello, Bonjour, Hola]-output.txt&#39;</span>
 </span><a id="__codelineno-46-17" name="__codelineno-46-17" href="#__codelineno-46-17"></a>
 <a id="__codelineno-46-18" name="__codelineno-46-18" href="#__codelineno-46-18"></a><span class="go">Command exit status:</span>
 <a id="__codelineno-46-19" name="__codelineno-46-19" href="#__codelineno-46-19"></a><span class="go">  0</span>
@@ -5640,7 +5640,7 @@ Vamos tentar; precisaremos configurar a variável de entrada e carregá-la na f�
 </details>
 <p>Oh não! Há um erro!</p>
 <p>Observe a saída de <code>view()</code> e as mensagens de erro.</p>
-<p>Parece que o Nextflow tentou executar uma única chamada de processo, usando <code>[Hello, Bonjour, Holà]</code> como um valor de string, em vez de usar as três strings no array como valores separados.</p>
+<p>Parece que o Nextflow tentou executar uma única chamada de processo, usando <code>[Hello, Bonjour, Hola]</code> como um valor de string, em vez de usar as três strings no array como valores separados.</p>
 <figure class="excalidraw">
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -5651,10 +5651,10 @@ Vamos tentar; precisaremos configurar a variável de entrada e carregá-la na f�
 <p>Então é o 'empacotamento' que está causando o problema.
 Como fazemos o Nextflow desempacotar o array e carregar as strings individuais no canal?</p>
 <h3 id="32-use-um-operador-para-transformar-o-conteudo-do-canal">3.2. Use um operador para transformar o conteúdo do canal<a class="headerlink" href="#32-use-um-operador-para-transformar-o-conteudo-do-canal" title="Permanent link">&para;</a></h3>
-<p>É aqui que os <a href="https://www.nextflow.io/docs/latest/reference/operator.html"><strong>operadores</strong></a> entram em jogo.
+<p>É aqui que os <a href="https://nextflow.io/docs/latest/reference/operator.html"><strong>operadores</strong></a> entram em jogo.
 Você já usou o operador <code>.view()</code>, que apenas observa o que está lá.
 Agora vamos olhar para operadores que nos permitem agir sobre o conteúdo de um canal.</p>
-<p>Se você examinar a <a href="https://www.nextflow.io/docs/latest/reference/operator.html">lista de operadores</a> na documentação do Nextflow, encontrará <a href="https://www.nextflow.io/docs/latest/reference/operator.html#flatten"><code>flatten()</code></a>, que faz exatamente o que precisamos: desempacotar o conteúdo de um array e emiti-los como itens individuais.</p>
+<p>Se você examinar a <a href="https://nextflow.io/docs/latest/reference/operator.html">lista de operadores</a> na documentação do Nextflow, encontrará <a href="https://nextflow.io/docs/latest/reference/operator.html#flatten"><code>flatten()</code></a>, que faz exatamente o que precisamos: desempacotar o conteúdo de um array e emiti-los como itens individuais.</p>
 <h4 id="321-adicione-o-operador-flatten">3.2.1. Adicione o operador <code>flatten()</code><a class="headerlink" href="#321-adicione-o-operador-flatten" title="Permanent link">&para;</a></h4>
 <p>Para aplicar o operador <code>flatten()</code> ao nosso canal de entrada, anexamos ele à declaração da fábrica de canais.</p>
 <p>No bloco workflow, faça a seguinte alteração de código:</p>
@@ -5679,7 +5679,7 @@ Agora vamos olhar para operadores que nos permitem agir sobre o conteúdo de um 
 <a id="__codelineno-47-28" name="__codelineno-47-28"></a>
 <a id="__codelineno-47-29" name="__codelineno-47-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-47-30" name="__codelineno-47-30"></a><span class="w">    </span><span class="c1">// declara um array de saudações de entrada</span>
-<a id="__codelineno-47-31" name="__codelineno-47-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">]</span>
+<a id="__codelineno-47-31" name="__codelineno-47-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
 <a id="__codelineno-47-32" name="__codelineno-47-32"></a><span class="w">    </span><span class="c1">// cria um canal para entradas</span>
 <a id="__codelineno-47-33" name="__codelineno-47-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 <a id="__codelineno-47-34" name="__codelineno-47-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
@@ -5710,7 +5710,7 @@ Agora vamos olhar para operadores que nos permitem agir sobre o conteúdo de um 
 <a id="__codelineno-48-28" name="__codelineno-48-28"></a>
 <a id="__codelineno-48-29" name="__codelineno-48-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-48-30" name="__codelineno-48-30"></a><span class="w">    </span><span class="c1">// declara um array de saudações de entrada</span>
-<a id="__codelineno-48-31" name="__codelineno-48-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">]</span>
+<a id="__codelineno-48-31" name="__codelineno-48-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
 <a id="__codelineno-48-32" name="__codelineno-48-32"></a><span class="w">    </span><span class="c1">// cria um canal para entradas</span>
 <a id="__codelineno-48-33" name="__codelineno-48-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 <a id="__codelineno-48-34" name="__codelineno-48-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
@@ -5759,7 +5759,7 @@ Agora vamos olhar para operadores que nos permitem agir sobre o conteúdo de um 
 <a id="__codelineno-49-28" name="__codelineno-49-28"></a>
 <a id="__codelineno-49-29" name="__codelineno-49-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-49-30" name="__codelineno-49-30"></a><span class="w">    </span><span class="c1">// declara um array de saudações de entrada</span>
-<a id="__codelineno-49-31" name="__codelineno-49-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">]</span>
+<a id="__codelineno-49-31" name="__codelineno-49-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
 <a id="__codelineno-49-32" name="__codelineno-49-32"></a><span class="w">    </span><span class="c1">// cria um canal para entradas</span>
 <a id="__codelineno-49-33" name="__codelineno-49-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 <a id="__codelineno-49-34" name="__codelineno-49-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
@@ -5792,7 +5792,7 @@ Agora vamos olhar para operadores que nos permitem agir sobre o conteúdo de um 
 <a id="__codelineno-50-28" name="__codelineno-50-28"></a>
 <a id="__codelineno-50-29" name="__codelineno-50-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-50-30" name="__codelineno-50-30"></a><span class="w">    </span><span class="c1">// declara um array de saudações de entrada</span>
-<a id="__codelineno-50-31" name="__codelineno-50-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">]</span>
+<a id="__codelineno-50-31" name="__codelineno-50-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
 <a id="__codelineno-50-32" name="__codelineno-50-32"></a><span class="w">    </span><span class="c1">// cria um canal para entradas</span>
 <a id="__codelineno-50-33" name="__codelineno-50-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 <a id="__codelineno-50-34" name="__codelineno-50-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
@@ -5807,7 +5807,7 @@ Agora vamos olhar para operadores que nos permitem agir sobre o conteúdo de um 
 </div>
 </div>
 </div>
-<p>Você vê que adicionamos uma segunda instrução <code>.view</code>, e para cada uma delas, substituímos os parênteses vazios (<code>()</code>) por chaves contendo algum código, como <code>{ greeting -&gt; "Before flatten: $greeting" }</code>.</p>
+<p>Você vê que adicionamos uma segunda instrução <code>.view</code>, e para cada uma delas, substituímos os parênteses vazios (<code>()</code>) por chaves contendo algum código, como <code class="highlight"><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span></code>.</p>
 <p>Essas são chamadas <em>closures</em>. O código que elas contêm será executado para cada item no canal.
 Definimos uma variável temporária para o valor interno, aqui chamada <code>greeting</code> (mas poderia ser qualquer nome arbitrário), que é usada apenas dentro do escopo dessa closure.</p>
 <p>Neste exemplo, <code>$greeting</code> representa cada item individual carregado no canal.
@@ -5825,16 +5825,16 @@ sem precisar defini-la com um <code>-&gt;</code>.</p>
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a>
 <a id="__codelineno-52-3" name="__codelineno-52-3" href="#__codelineno-52-3"></a><span class="go">Launching `hello-channels.nf` [sleepy_gutenberg] DSL2 - revision: 1db4f760ee</span>
 <a id="__codelineno-52-4" name="__codelineno-52-4" href="#__codelineno-52-4"></a>
 <a id="__codelineno-52-5" name="__codelineno-52-5" href="#__codelineno-52-5"></a><span class="go">executor &gt;  local (3)</span>
 <a id="__codelineno-52-6" name="__codelineno-52-6" href="#__codelineno-52-6"></a><span class="go">[b1/6a1e15] sayHello (2) [100%] 3 of 3 ✔</span>
-<a id="__codelineno-52-7" name="__codelineno-52-7" href="#__codelineno-52-7"></a><span class="hll"><span class="go">Before flatten: [Hello, Bonjour, Holà]</span>
+<a id="__codelineno-52-7" name="__codelineno-52-7" href="#__codelineno-52-7"></a><span class="hll"><span class="go">Before flatten: [Hello, Bonjour, Hola]</span>
 </span><a id="__codelineno-52-8" name="__codelineno-52-8" href="#__codelineno-52-8"></a><span class="hll"><span class="go">After flatten: Hello</span>
 </span><a id="__codelineno-52-9" name="__codelineno-52-9" href="#__codelineno-52-9"></a><span class="hll"><span class="go">After flatten: Bonjour</span>
-</span><a id="__codelineno-52-10" name="__codelineno-52-10" href="#__codelineno-52-10"></a><span class="hll"><span class="go">After flatten: Holà</span>
+</span><a id="__codelineno-52-10" name="__codelineno-52-10" href="#__codelineno-52-10"></a><span class="hll"><span class="go">After flatten: Hola</span>
 </span></code></pre></div>
 </details>
 <p>Desta vez funciona E nos dá a percepção adicional do que o conteúdo do canal parece antes e depois de executarmos o operador <code>flatten()</code>.</p>
@@ -5862,7 +5862,7 @@ Muito provavelmente, teremos um ou mais arquivos contendo os dados que precisam 
 <span class="normal"><a href="#__codelineno-53-2">2</a></span>
 <span class="normal"><a href="#__codelineno-53-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1"></a>Hello,English,123
 <a id="__codelineno-53-2" name="__codelineno-53-2"></a>Bonjour,French,456
-<a id="__codelineno-53-3" name="__codelineno-53-3"></a>Holà,Spanish,789
+<a id="__codelineno-53-3" name="__codelineno-53-3"></a>Hola,Spanish,789
 </code></pre></div></td></tr></table></div>
 <p>Nossa próxima tarefa é adaptar nosso fluxo de trabalho para ler os valores deste arquivo.</p>
 <figure class="excalidraw">
@@ -5906,8 +5906,8 @@ Vamos atualizá-lo para apontar para o arquivo CSV contendo nossas saudações.<
 <span class="normal"><a href="#__codelineno-55-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-55-20" name="__codelineno-55-20"></a><span class="cm">/*</span>
 <a id="__codelineno-55-21" name="__codelineno-55-21"></a><span class="cm"> * Pipeline parameters</span>
 <a id="__codelineno-55-22" name="__codelineno-55-22"></a><span class="cm"> */</span>
-<a id="__codelineno-55-23" name="__codelineno-55-23"></a><span class="nl">input:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Holà mundo!&#39;</span>
-</code></pre></div></td></tr></table></div>
+<a id="__codelineno-55-23" name="__codelineno-55-23"></a><span class="hll"><span class="nl">input:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Hola mundo!&#39;</span>
+</span></code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
@@ -5969,7 +5969,7 @@ Precisamos mudar para usar uma nova fábrica de canais, <a href="https://nextflo
 <a id="__codelineno-57-28" name="__codelineno-57-28"></a>
 <a id="__codelineno-57-29" name="__codelineno-57-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-57-30" name="__codelineno-57-30"></a><span class="hll"><span class="w">    </span><span class="c1">// declara um array de saudações de entrada</span>
-</span><a id="__codelineno-57-31" name="__codelineno-57-31"></a><span class="hll"><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">]</span>
+</span><a id="__codelineno-57-31" name="__codelineno-57-31"></a><span class="hll"><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
 </span><a id="__codelineno-57-32" name="__codelineno-57-32"></a><span class="hll"><span class="w">    </span><span class="c1">// cria um canal para entradas</span>
 </span><a id="__codelineno-57-33" name="__codelineno-57-33"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 </span><a id="__codelineno-57-34" name="__codelineno-57-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
@@ -5993,7 +5993,7 @@ Também comentamos o <code>flatten()</code> e a segunda instrução <code>view()
 </code></pre></div>
 <details class="failure">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a>
 <a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a><span class="go">Launching `hello-channels.nf` [peaceful_poisson] DSL2 - revision: a286c08ad5</span>
 <a id="__codelineno-59-4" name="__codelineno-59-4" href="#__codelineno-59-4"></a>
@@ -6006,9 +6006,9 @@ Também comentamos o <code>flatten()</code> e a segunda instrução <code>view()
 <a id="__codelineno-59-11" name="__codelineno-59-11" href="#__codelineno-59-11"></a>
 <a id="__codelineno-59-12" name="__codelineno-59-12" href="#__codelineno-59-12"></a>
 <a id="__codelineno-59-13" name="__codelineno-59-13" href="#__codelineno-59-13"></a><span class="go">Command executed:</span>
-<a id="__codelineno-59-14" name="__codelineno-59-14" href="#__codelineno-59-14"></a><span class="hll">
-</span><a id="__codelineno-59-15" name="__codelineno-59-15" href="#__codelineno-59-15"></a><span class="go">  echo &#39;/workspaces/training/hello-nextflow/data/greetings.csv&#39; &gt; &#39;/workspaces/training/hello-nextflow/data/greetings.csv-output.txt&#39;</span>
-<a id="__codelineno-59-16" name="__codelineno-59-16" href="#__codelineno-59-16"></a>
+<a id="__codelineno-59-14" name="__codelineno-59-14" href="#__codelineno-59-14"></a>
+<a id="__codelineno-59-15" name="__codelineno-59-15" href="#__codelineno-59-15"></a><span class="hll"><span class="go">  echo &#39;/workspaces/training/hello-nextflow/data/greetings.csv&#39; &gt; &#39;/workspaces/training/hello-nextflow/data/greetings.csv-output.txt&#39;</span>
+</span><a id="__codelineno-59-16" name="__codelineno-59-16" href="#__codelineno-59-16"></a>
 <a id="__codelineno-59-17" name="__codelineno-59-17" href="#__codelineno-59-17"></a><span class="go">Command exit status:</span>
 <a id="__codelineno-59-18" name="__codelineno-59-18" href="#__codelineno-59-18"></a><span class="go">  -</span>
 <a id="__codelineno-59-19" name="__codelineno-59-19" href="#__codelineno-59-19"></a>
@@ -6029,9 +6029,9 @@ A parte <code>Command executed:</code> é especialmente útil aqui.</p>
 Parece que o Nextflow tentou executar uma única chamada de processo usando o próprio caminho do arquivo como um valor de string.
 Então ele resolveu o caminho do arquivo corretamente, mas não analisou realmente seu conteúdo, que é o que queríamos.</p>
 <p>Como fazemos o Nextflow abrir o arquivo e carregar seu conteúdo no canal?</p>
-<p>Parece que precisamos de outro <a href="https://www.nextflow.io/docs/latest/reference/operator.html">operador</a>!</p>
+<p>Parece que precisamos de outro <a href="https://nextflow.io/docs/latest/reference/operator.html">operador</a>!</p>
 <h3 id="42-use-o-operador-splitcsv-para-analisar-o-arquivo">4.2. Use o operador <code>splitCsv()</code> para analisar o arquivo<a class="headerlink" href="#42-use-o-operador-splitcsv-para-analisar-o-arquivo" title="Permanent link">&para;</a></h3>
-<p>Olhando através da lista de operadores novamente, encontramos <a href="https://www.nextflow.io/docs/latest/reference/operator.html#splitcsv"><code>splitCsv()</code></a>, que é projetado para analisar e dividir texto formatado em CSV.</p>
+<p>Olhando através da lista de operadores novamente, encontramos <a href="https://nextflow.io/docs/latest/reference/operator.html#splitcsv"><code>splitCsv()</code></a>, que é projetado para analisar e dividir texto formatado em CSV.</p>
 <h4 id="421-aplique-splitcsv-ao-canal">4.2.1. Aplique <code>splitCsv()</code> ao canal<a class="headerlink" href="#421-aplique-splitcsv-ao-canal" title="Permanent link">&para;</a></h4>
 <p>Para aplicar o operador, anexamos ele à linha da fábrica de canais como anteriormente.</p>
 <p>No bloco workflow, faça a seguinte alteração de código para substituir <code>flatten()</code> por <code>splitCsv()</code> (descomentado):</p>
@@ -6107,7 +6107,7 @@ Tecnicamente poderíamos ter usado o mesmo nome de variável (<code>greeting</co
 </code></pre></div>
 <details class="failure">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-63-2" name="__codelineno-63-2" href="#__codelineno-63-2"></a>
 <a id="__codelineno-63-3" name="__codelineno-63-3" href="#__codelineno-63-3"></a><span class="go">Launching `hello-channels.nf` [insane_fermat] DSL2 - revision: 8e62fcbeb1</span>
 <a id="__codelineno-63-4" name="__codelineno-63-4" href="#__codelineno-63-4"></a>
@@ -6116,7 +6116,7 @@ Tecnicamente poderíamos ter usado o mesmo nome de variável (<code>greeting</co
 <a id="__codelineno-63-7" name="__codelineno-63-7" href="#__codelineno-63-7"></a><span class="hll"><span class="go">Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv</span>
 </span><a id="__codelineno-63-8" name="__codelineno-63-8" href="#__codelineno-63-8"></a><span class="hll"><span class="go">After splitCsv: [Hello, English, 123]</span>
 </span><a id="__codelineno-63-9" name="__codelineno-63-9" href="#__codelineno-63-9"></a><span class="hll"><span class="go">After splitCsv: [Bonjour, French, 456]</span>
-</span><a id="__codelineno-63-10" name="__codelineno-63-10" href="#__codelineno-63-10"></a><span class="hll"><span class="go">After splitCsv: [Holà, Spanish, 789]</span>
+</span><a id="__codelineno-63-10" name="__codelineno-63-10" href="#__codelineno-63-10"></a><span class="hll"><span class="go">After splitCsv: [Hola, Spanish, 789]</span>
 </span><a id="__codelineno-63-11" name="__codelineno-63-11" href="#__codelineno-63-11"></a><span class="hll"><span class="go">ERROR ~ Error executing process &gt; &#39;sayHello (2)&#39;</span>
 </span><a id="__codelineno-63-12" name="__codelineno-63-12" href="#__codelineno-63-12"></a>
 <a id="__codelineno-63-13" name="__codelineno-63-13" href="#__codelineno-63-13"></a><span class="go">Caused by:</span>
@@ -6155,10 +6155,10 @@ Então como desempacotamos isso?</p>
 <p>Usamos anteriormente <code>flatten()</code> para desempacotar o conteúdo de um canal, mas isso não funcionaria aqui porque flatten desempacota <em>tudo</em> (sinta-se livre para tentar se quiser ver por si mesmo).</p>
 <p>Em vez disso, usaremos outro operador chamado <code>map()</code> que é realmente útil e aparece muito em pipelines Nextflow.</p>
 <h3 id="43-use-o-operador-map-para-extrair-as-saudacoes">4.3. Use o operador <code>map()</code> para extrair as saudações<a class="headerlink" href="#43-use-o-operador-map-para-extrair-as-saudacoes" title="Permanent link">&para;</a></h3>
-<p>O operador <a href="https://www.nextflow.io/docs/latest/reference/operator.html#map"><code>map()</code></a> é uma ferramenta muito útil que nos permite fazer todos os tipos de mapeamentos para o conteúdo de um canal.</p>
+<p>O operador <a href="https://nextflow.io/docs/latest/reference/operator.html#map"><code>map()</code></a> é uma ferramenta muito útil que nos permite fazer todos os tipos de mapeamentos para o conteúdo de um canal.</p>
 <p>Neste caso, vamos usá-lo para extrair aquele único elemento que queremos de cada linha em nosso arquivo de dados.
 Esta é a aparência da sintaxe:</p>
-<div class="highlight"><span class="filename">Sintaxe</span><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">row</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
+<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">row</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div>
 <p>Isso significa 'para cada linha no canal, pegue o 0º (primeiro) item que ela contém'.</p>
 <p>Então vamos aplicar isso à nossa análise de CSV.</p>
@@ -6239,7 +6239,7 @@ Esta é a aparência da sintaxe:</p>
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a>
 <a id="__codelineno-68-3" name="__codelineno-68-3" href="#__codelineno-68-3"></a><span class="go">Launching `hello-channels.nf` [focused_volhard] DSL2 - revision: de435e45be</span>
 <a id="__codelineno-68-4" name="__codelineno-68-4" href="#__codelineno-68-4"></a>
@@ -6248,10 +6248,10 @@ Esta é a aparência da sintaxe:</p>
 <a id="__codelineno-68-7" name="__codelineno-68-7" href="#__codelineno-68-7"></a><span class="go">Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv</span>
 <a id="__codelineno-68-8" name="__codelineno-68-8" href="#__codelineno-68-8"></a><span class="go">After splitCsv: [Hello, English, 123]</span>
 <a id="__codelineno-68-9" name="__codelineno-68-9" href="#__codelineno-68-9"></a><span class="go">After splitCsv: [Bonjour, French, 456]</span>
-<a id="__codelineno-68-10" name="__codelineno-68-10" href="#__codelineno-68-10"></a><span class="go">After splitCsv: [Holà, Spanish, 789]</span>
+<a id="__codelineno-68-10" name="__codelineno-68-10" href="#__codelineno-68-10"></a><span class="go">After splitCsv: [Hola, Spanish, 789]</span>
 <a id="__codelineno-68-11" name="__codelineno-68-11" href="#__codelineno-68-11"></a><span class="go">After map: Hello</span>
 <a id="__codelineno-68-12" name="__codelineno-68-12" href="#__codelineno-68-12"></a><span class="go">After map: Bonjour</span>
-<a id="__codelineno-68-13" name="__codelineno-68-13" href="#__codelineno-68-13"></a><span class="go">After map: Holà</span>
+<a id="__codelineno-68-13" name="__codelineno-68-13" href="#__codelineno-68-13"></a><span class="go">After map: Hola</span>
 </code></pre></div>
 </details>
 <p>Desta vez deve executar sem erros.</p>
@@ -6296,7 +6296,7 @@ O que é um canal no Nextflow?
 - [x] Uma estrutura tipo fila para passar dados entre processos
 - [ ] Uma configuração de definição
 
-Saiba mais: [1.1. Crie um canal de entrada](#11-crie-um-canal-de-entrada)
+Saiba mais: [1.1. Crie um canal de entrada](#11-create-an-input-channel)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
@@ -6310,7 +6310,7 @@ Saiba mais: [1.1. Crie um canal de entrada](#11-crie-um-canal-de-entrada)
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Saiba mais: <a href="#11-crie-um-canal-de-entrada">1.1. Crie um canal de entrada</a></p></section>
+    <section class="content hidden"><p>Saiba mais: <a href="#11-create-an-input-channel">1.1. Crie um canal de entrada</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6327,7 +6327,7 @@ channel.of('Hello', 'Bonjour', 'Hola')
 - [ ] Nada (canais não imprimem por padrão)
 - [ ] Um erro (sintaxe inválida)
 
-Saiba mais: [1.1. Crie um canal de entrada](#11-crie-um-canal-de-entrada)
+Saiba mais: [1.1. Crie um canal de entrada](#11-create-an-input-channel)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -6344,7 +6344,7 @@ Saiba mais: [1.1. Crie um canal de entrada](#11-crie-um-canal-de-entrada)
                     <div class="quiz-feedback hidden"></div>
 
                 </form>
-                <section class="content hidden"><p>Saiba mais: <a href="#11-crie-um-canal-de-entrada">1.1. Crie um canal de entrada</a></p></section>
+                <section class="content hidden"><p>Saiba mais: <a href="#11-create-an-input-channel">1.1. Crie um canal de entrada</a></p></section>
             </div>
 
 <!-- mkdocs-quiz-source
@@ -6355,7 +6355,7 @@ Quando um canal contém múltiplos valores, como o Nextflow lida com a execuçã
 - [ ] O processo executa apenas com o primeiro valor
 - [ ] O processo executa apenas com o último valor
 
-Saiba mais: [2. Modifique o fluxo de trabalho para executar em múltiplos valores de entrada](#2-modifique-o-fluxo-de-trabalho-para-executar-em-multiplos-valores-de-entrada)
+Saiba mais: [2. Modifique o fluxo de trabalho para executar em múltiplos valores de entrada](#2-modify-the-workflow-to-run-on-multiple-input-values)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
@@ -6369,7 +6369,7 @@ Saiba mais: [2. Modifique o fluxo de trabalho para executar em múltiplos valore
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Saiba mais: <a href="#2-modifique-o-fluxo-de-trabalho-para-executar-em-multiplos-valores-de-entrada">2. Modifique o fluxo de trabalho para executar em múltiplos valores de entrada</a></p></section>
+    <section class="content hidden"><p>Saiba mais: <a href="#2-modify-the-workflow-to-run-on-multiple-input-values">2. Modifique o fluxo de trabalho para executar em múltiplos valores de entrada</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6380,7 +6380,7 @@ O que o operador `flatten()` faz?
 - [x] Desempacota arrays em elementos individuais
 - [ ] Remove elementos duplicados
 
-Saiba mais: [3.2.1. Adicione o operador `flatten()`](#321-adicione-o-operador-flatten)
+Saiba mais: [3.2.1. Adicione o operador `flatten()`](#321-add-the-flatten-operator)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
@@ -6394,7 +6394,7 @@ Saiba mais: [3.2.1. Adicione o operador `flatten()`](#321-adicione-o-operador-fl
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Saiba mais: <a href="#321-adicione-o-operador-flatten">3.2.1. Adicione o operador <code>flatten()</code></a></p></section>
+    <section class="content hidden"><p>Saiba mais: <a href="#321-add-the-flatten-operator">3.2.1. Adicione o operador <code>flatten()</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6405,7 +6405,7 @@ Qual é o propósito do operador `view()`?
 - [x] Para inspecionar e depurar o conteúdo do canal
 - [ ] Para salvar o conteúdo do canal em um arquivo
 
-Saiba mais: [1.4. Use `view()` para inspecionar o conteúdo do canal](#14-use-view-para-inspecionar-o-conteudo-do-canal)
+Saiba mais: [1.4. Use `view()` para inspecionar o conteúdo do canal](#14-use-view-to-inspect-the-channel-contents)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
@@ -6419,7 +6419,7 @@ Saiba mais: [1.4. Use `view()` para inspecionar o conteúdo do canal](#14-use-vi
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Saiba mais: <a href="#14-use-view-para-inspecionar-o-conteudo-do-canal">1.4. Use <code>view()</code> para inspecionar o conteúdo do canal</a></p></section>
+    <section class="content hidden"><p>Saiba mais: <a href="#14-use-view-to-inspect-the-channel-contents">1.4. Use <code>view()</code> para inspecionar o conteúdo do canal</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6430,7 +6430,7 @@ O que `splitCsv()` faz?
 - [x] Analisa um arquivo CSV em arrays representando cada linha
 - [ ] Mescla múltiplos arquivos CSV
 
-Saiba mais: [4.2. Use o operador `splitCsv()` para analisar o arquivo](#42-use-o-operador-splitcsv-para-analisar-o-arquivo)
+Saiba mais: [4.2. Use o operador `splitCsv()` para analisar o arquivo](#42-use-the-splitcsv-operator-to-parse-the-file)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
@@ -6444,7 +6444,7 @@ Saiba mais: [4.2. Use o operador `splitCsv()` para analisar o arquivo](#42-use-o
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Saiba mais: <a href="#42-use-o-operador-splitcsv-para-analisar-o-arquivo">4.2. Use o operador <code>splitCsv()</code> para analisar o arquivo</a></p></section>
+    <section class="content hidden"><p>Saiba mais: <a href="#42-use-the-splitcsv-operator-to-parse-the-file">4.2. Use o operador <code>splitCsv()</code> para analisar o arquivo</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6455,7 +6455,7 @@ Qual é o propósito do operador `map()`?
 - [x] Para transformar cada elemento em um canal
 - [ ] Para contar elementos em um canal
 
-Saiba mais: [4.3. Use o operador `map()` para extrair as saudações](#43-use-o-operador-map-para-extrair-as-saudacoes)
+Saiba mais: [4.3. Use o operador `map()` para extrair as saudações](#43-use-the-map-operator-to-extract-the-greetings)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -6469,7 +6469,7 @@ Saiba mais: [4.3. Use o operador `map()` para extrair as saudações](#43-use-o-
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Saiba mais: <a href="#43-use-o-operador-map-para-extrair-as-saudacoes">4.3. Use o operador <code>map()</code> para extrair as saudações</a></p></section>
+    <section class="content hidden"><p>Saiba mais: <a href="#43-use-the-map-operator-to-extract-the-greetings">4.3. Use o operador <code>map()</code> para extrair as saudações</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6480,7 +6480,7 @@ Por que é importante usar nomes de arquivo de saída dinâmicos ao processar m�
 - [x] Para evitar que arquivos de saída se sobrescrevam
 - [ ] Para habilitar a funcionalidade de resume
 
-Saiba mais: [2.2. Garanta que os nomes dos arquivos de saída sejam únicos](#22-garanta-que-os-nomes-dos-arquivos-de-saida-sejam-unicos)
+Saiba mais: [2.2. Garanta que os nomes dos arquivos de saída sejam únicos](#22-ensure-the-output-file-names-will-be-unique)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-7">
@@ -6494,7 +6494,7 @@ Saiba mais: [2.2. Garanta que os nomes dos arquivos de saída sejam únicos](#22
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Saiba mais: <a href="#22-garanta-que-os-nomes-dos-arquivos-de-saida-sejam-unicos">2.2. Garanta que os nomes dos arquivos de saída sejam únicos</a></p></section>
+    <section class="content hidden"><p>Saiba mais: <a href="#22-ensure-the-output-file-names-will-be-unique">2.2. Garanta que os nomes dos arquivos de saída sejam únicos</a></p></section>
 </div><div id="quiz-progress-sidebar" aria-label="Quiz Progress" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">

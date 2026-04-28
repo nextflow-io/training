@@ -3221,7 +3221,7 @@
   <span class="md-ellipsis">
     
   
-    Orientacja
+    Pierwsze kroki
   
 
     
@@ -3249,7 +3249,7 @@
   <span class="md-ellipsis">
     
   
-    Środowisko programistyczne
+    Index
   
 
     
@@ -3277,7 +3277,7 @@
   <span class="md-ellipsis">
     
   
-    Podstawowe Wzorce Skryptowania w Nextflow
+    Podstawowe Wzorce Skryptowania
   
 
     
@@ -3389,7 +3389,7 @@
   <span class="md-ellipsis">
     
   
-    Testowanie z nf-test
+    Index
   
 
     
@@ -3417,7 +3417,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow'ów
+    Rozwiązywanie problemów z Workflow'ami
   
 
     
@@ -5513,7 +5513,7 @@ Dowiązania symboliczne przestaną działać po wyczyszczeniu katalogu <code>wor
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">┃ Launching `genomics.nf` [reverent_sinoussi] DSL2 - revision: 41d43ad7fe</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
@@ -5688,7 +5688,7 @@ Musimy zadeklarować dla nich parametry, dodać wartości domyślne do profilu t
 </div>
 </div>
 <p>Składnia <code>file()</code> mówi Nextflow'owi jawnie, aby obsługiwał te wejścia jako ścieżki plików.
-Możesz dowiedzieć się więcej na ten temat w Side Quest <a href="../../side_quests/working_with_files.md">Working with files</a>.</p>
+Możesz dowiedzieć się więcej na ten temat w Side Quest <a href="../../../side_quests/working_with_files/">Working with files</a>.</p>
 <h3 id="22-napisz-proces-wywoywania-wariantow-i-wywoaj-go-w-workflow">2.2. Napisz proces wywoływania wariantów i wywołaj go w workflow<a class="headerlink" href="#22-napisz-proces-wywoywania-wariantow-i-wywoaj-go-w-workflow" title="Permanent link">&para;</a></h3>
 <p>Musimy napisać definicję procesu w pliku modułu, zaimportować go do workflow'a za pomocą instrukcji include oraz wywołać go na wejściowych odczytach plus wyjściu kroku indeksowania i plikach pomocniczych.</p>
 <h4 id="221-wypenij-modu-dla-procesu-wywoywania-wariantow">2.2.1. Wypełnij moduł dla procesu wywoływania wariantów<a class="headerlink" href="#221-wypenij-modu-dla-procesu-wywoywania-wariantow" title="Permanent link">&para;</a></h4>
@@ -5948,7 +5948,7 @@ W Nextflow'ie wejścia są pozycyjne, co oznacza, że <em>musisz</em> zachować 
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>
 <a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="go">┃ Launching `genomics.nf` [grave_volta] DSL2 - revision: 4790abc96a</span>
 <a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a>
@@ -6065,7 +6065,7 @@ To szybki sposób na przetestowanie wykonywania wielopróbkowego; w następnym k
 <p>Zabawna rzecz: to <em>może zadziałać</em> LUB <em>może się nie udać</em>. Na przykład, oto uruchomienie, które się powiodło:</p>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>
 <a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="go">┃ Launching `genomics.nf` [peaceful_yalow] DSL2 - revision: a256d113ad</span>
 <a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>
@@ -6077,7 +6077,7 @@ To szybki sposób na przetestowanie wykonywania wielopróbkowego; w następnym k
 <p>Jeśli Twoje uruchomienie workflow'a się powiodło, uruchom je ponownie, aż otrzymasz błąd taki jak ten:</p>
 <details class="failure">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>
 <a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a><span class="go">┃ Launching `genomics.nf` [loving_pasteur] DSL2 - revision: d2a8e63076</span>
 <a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a>
@@ -6341,7 +6341,7 @@ Jednak będą zaśmiecać Twoje wyjście konsoli, więc zalecamy ich usunięcie,
 <p>Tym razem (i za każdym razem) wszystko powinno działać poprawnie:</p>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>
 <a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a><span class="go">┃ Launching `genomics.nf` [special_goldstine] DSL2 - revision: 4cbbf6ea3e</span>
 <a id="__codelineno-67-4" name="__codelineno-67-4" href="#__codelineno-67-4"></a>
@@ -6496,7 +6496,7 @@ To pozwala nam odwoływać się do kolumn po nazwie w operacji <code>map</code>:
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a>
 <a id="__codelineno-77-3" name="__codelineno-77-3" href="#__codelineno-77-3"></a><span class="go">┃ Launching `genomics.nf` [sick_albattani] DSL2 - revision: 46d84642f6</span>
 <a id="__codelineno-77-4" name="__codelineno-77-4" href="#__codelineno-77-4"></a>

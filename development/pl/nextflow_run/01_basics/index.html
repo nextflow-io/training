@@ -2948,7 +2948,7 @@
   <span class="md-ellipsis">
     
   
-    Orientacja
+    Pierwsze kroki
   
 
     
@@ -2976,7 +2976,7 @@
   <span class="md-ellipsis">
     
   
-    Środowisko programistyczne
+    Index
   
 
     
@@ -3004,7 +3004,7 @@
   <span class="md-ellipsis">
     
   
-    Podstawowe Wzorce Skryptowania w Nextflow
+    Podstawowe Wzorce Skryptowania
   
 
     
@@ -3116,7 +3116,7 @@
   <span class="md-ellipsis">
     
   
-    Testowanie z nf-test
+    Index
   
 
     
@@ -3144,7 +3144,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow'ów
+    Rozwiązywanie problemów z Workflow'ami
   
 
     
@@ -4586,7 +4586,7 @@ Możesz go otworzyć w eksploratorze plików lub z wiersza poleceń, używając 
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
@@ -4627,7 +4627,7 @@ Jeśli spojrzysz na Swój bieżący katalog, zobaczysz, że gdy uruchomiłeś wo
 <p>Świetnie, nasz workflow zrobił to, co miał zrobić!</p>
 <h3 id="23-zapisz-wyniki-do-innego-katalogu">2.3. Zapisz wyniki do innego katalogu<a class="headerlink" href="#23-zapisz-wyniki-do-innego-katalogu" title="Permanent link">&para;</a></h3>
 <p>Domyślnie Nextflow zapisze wyjścia pipeline'u do katalogu o nazwie <code>results</code> w Twojej bieżącej ścieżce.
-Aby zmienić miejsce, w którym Twoje pliki są publikowane, użyj flagi CLI <code>-output-dir</code> (lub <code>-o</code> w skrócie)</p>
+Aby zmienić miejsce, w którym Twoje pliki są publikowane, użyj flagi CLI <code>-output-dir</code> (lub <code>-o</code> w skrócie).</p>
 <div class="admonition danger">
 <p class="admonition-title">Niebezpieczeństwo</p>
 <p>Zauważ, że <code>--input</code> ma dwa myślniki, a <code>-output-dir</code> ma jeden!
@@ -4638,7 +4638,7 @@ Więcej na ten temat później.</p>
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
@@ -4653,7 +4653,7 @@ Więcej na ten temat później.</p>
 </code></pre></div>
 <p>Pliki w tym katalogu są takie same jak wcześniej, to tylko katalog najwyższego poziomu jest inny.
 Jednak pamiętaj, że w obu przypadkach 'opublikowany' wynik jest kopią (lub w niektórych przypadkach dowiązaniem symbolicznym) rzeczywistego wyjścia wyprodukowanego przez Nextflow podczas wykonywania workflow'u.</p>
-<p>Więc teraz zajrzymy pod maskę, aby zobaczyć, gdzie Nextflow faktycznie wykonał pracę.</p>
+<p>Teraz zajrzymy pod maskę, aby zobaczyć, gdzie Nextflow faktycznie wykonał pracę.</p>
 <div class="admonition warning">
 <p class="admonition-title">Ostrzeżenie</p>
 <p>Nie wszystkie workflow'y będą skonfigurowane do publikowania wyjść do katalogu results, i/lub nazwy katalogów i struktura mogą być inne.
@@ -4709,7 +4709,7 @@ Jednak pliki dziennika są ustawione jako niewidoczne w terminalu, więc jeśli 
 </details>
 <p>W <code>work/</code> znajdują się dwa zestawy katalogów, z dwóch różnych uruchomień pipeline'u, które wykonaliśmy.
 Każde wykonanie zadania otrzymuje swój własny, odizolowany katalog do pracy.
-W tym przypadku pipeline zrobił to samo za każdym razem, więc zawartość każdego katalogu zadania jest identyczna</p>
+W tym przypadku pipeline zrobił to samo za każdym razem, więc zawartość każdego katalogu zadania jest identyczna.</p>
 <p>Powinieneś natychmiast rozpoznać plik <code>output.txt</code>, który jest w rzeczywistości oryginalnym wyjściem <strong>procesu</strong> <code>sayHello</code>, które zostało opublikowane do katalogu <code>results</code>.
 Jeśli go otworzysz, znajdziesz ponownie powitanie <code>Hello World!</code>.</p>
 <div class="highlight"><span class="filename">work/a3/1e153543b0a7f9d2c4735ddb4ab231/output.txt</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="go">Hello World!</span>
@@ -5025,7 +5025,7 @@ Zobaczysz również, że gdy workflow generuje wiele wyjść, każde z nich jest
 <p>Aż do niedawna ustaloną metodą publikowania wyjść było robienie tego na poziomie każdego indywidualnego <strong>procesu</strong> przy użyciu dyrektywy <code>publishDir</code>.</p>
 <p>Nadal znajdziesz ten wzorzec kodu wszędzie w starszych pipeline'ach Nextflow i modułach procesów, więc ważne jest, aby o nim wiedzieć.</p>
 <p>Zamiast mieć blok <code>publish:</code> w workflow'ie i blok <code>output</code> na najwyższym poziomie, zobaczyłbyś linię <code>publishDir</code> w definicji <strong>procesu</strong> <code>sayHello</code>:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Przykład składni</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Syntax example</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-28-4"> 4</a></span>
@@ -5078,7 +5078,7 @@ To oznacza, że Nextflow uruchomi tylko te, które dodałeś lub zmodyfikowałe�
 <span class="normal"><a href="#__codelineno-30-2">2</a></span>
 <span class="normal"><a href="#__codelineno-30-3">3</a></span>
 <span class="normal"><a href="#__codelineno-30-4">4</a></span>
-<span class="normal"><a href="#__codelineno-30-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<span class="normal"><a href="#__codelineno-30-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2"></a>
 <a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="go">Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479</span>
 <a id="__codelineno-30-4" name="__codelineno-30-4"></a>
@@ -5189,7 +5189,7 @@ W linii wyjścia konsoli `[a3/7be2fa] SAYHELLO | 1 of 1 ✔`, co reprezentuje `[
 - [x] Skróconą ścieżkę do katalogu roboczego zadania
 - [ ] Sumę kontrolną pliku wyjściowego
 
-Dowiedz się więcej: [2.4. Znajdź oryginalne wyjście i logi w katalogu `work/`](#24-znajdz-oryginalne-wyjscie-i-logi-w-katalogu-work)
+Dowiedz się więcej: [2.4. Znajdź oryginalne wyjście i logi w katalogu `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
@@ -5203,7 +5203,7 @@ Dowiedz się więcej: [2.4. Znajdź oryginalne wyjście i logi w katalogu `work/
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#24-znajdz-oryginalne-wyjscie-i-logi-w-katalogu-work">2.4. Znajdź oryginalne wyjście i logi w katalogu <code>work/</code></a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.4. Znajdź oryginalne wyjście i logi w katalogu <code>work/</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5214,7 +5214,7 @@ Jaki jest cel pliku `.command.sh` w katalogu zadania?
 - [ ] Zawiera komunikaty o błędach z nieudanych zadań
 - [ ] Wymienia pliki wejściowe przygotowane dla zadania
 
-Dowiedz się więcej: [2.4. Znajdź oryginalne wyjście i logi w katalogu `work/`](#24-znajdz-oryginalne-wyjscie-i-logi-w-katalogu-work)
+Dowiedz się więcej: [2.4. Znajdź oryginalne wyjście i logi w katalogu `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -5228,7 +5228,7 @@ Dowiedz się więcej: [2.4. Znajdź oryginalne wyjście i logi w katalogu `work/
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#24-znajdz-oryginalne-wyjscie-i-logi-w-katalogu-work">2.4. Znajdź oryginalne wyjście i logi w katalogu <code>work/</code></a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.4. Znajdź oryginalne wyjście i logi w katalogu <code>work/</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5239,7 +5239,7 @@ Co dzieje się z opublikowanymi wynikami, gdy ponownie uruchamiasz workflow bez 
 - [ ] Nextflow zapobiega nadpisywaniu i kończy się niepowodzeniem
 - [ ] Są automatycznie archiwizowane
 
-Dowiedz się więcej: [2.5. Uruchom ponownie workflow z różnymi powitaniami](#25-uruchom-ponownie-workflow-z-roznymi-powitaniami)
+Dowiedz się więcej: [2.5. Uruchom ponownie workflow z różnymi powitaniami](#24-re-run-the-workflow-with-different-greetings)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
@@ -5253,7 +5253,7 @@ Dowiedz się więcej: [2.5. Uruchom ponownie workflow z różnymi powitaniami](#
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#25-uruchom-ponownie-workflow-z-roznymi-powitaniami">2.5. Uruchom ponownie workflow z różnymi powitaniami</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#24-re-run-the-workflow-with-different-greetings">2.5. Uruchom ponownie workflow z różnymi powitaniami</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5269,7 +5269,7 @@ Co wskazuje to wyjście konsoli?
 - [x] Nextflow ponownie użył wyników z poprzedniego identycznego wykonania
 - [ ] Zadanie zostało ręcznie anulowane
 
-Dowiedz się więcej: [4.1. Ponownie uruchom workflow z `-resume`](#41-ponownie-uruchom-workflow-z--resume)
+Dowiedz się więcej: [4.1. Ponownie uruchom workflow z `-resume`](#41-re-launch-a-workflow-with--resume)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
@@ -5285,7 +5285,7 @@ Dowiedz się więcej: [4.1. Ponownie uruchom workflow z `-resume`](#41-ponownie-
                     <div class="quiz-feedback hidden"></div>
 
                 </form>
-                <section class="content hidden"><p>Dowiedz się więcej: <a href="#41-ponownie-uruchom-workflow-z--resume">4.1. Ponownie uruchom workflow z <code>-resume</code></a></p></section>
+                <section class="content hidden"><p>Dowiedz się więcej: <a href="#41-re-launch-a-workflow-with--resume">4.1. Ponownie uruchom workflow z <code>-resume</code></a></p></section>
             </div>
 
 <!-- mkdocs-quiz-source
@@ -5296,7 +5296,7 @@ Gdzie Nextflow przechowuje historię wykonania, którą wyświetla polecenie `ne
 - [x] W pliku `.nextflow/history`
 - [ ] W `nextflow.config`
 
-Dowiedz się więcej: [4.2. Sprawdź dziennik poprzednich wykonań](#42-sprawdz-dziennik-poprzednich-wykonan)
+Dowiedz się więcej: [4.2. Sprawdź dziennik poprzednich wykonań](#42-inspect-the-log-of-past-executions)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
@@ -5310,7 +5310,7 @@ Dowiedz się więcej: [4.2. Sprawdź dziennik poprzednich wykonań](#42-sprawdz-
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#42-sprawdz-dziennik-poprzednich-wykonan">4.2. Sprawdź dziennik poprzednich wykonań</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#42-inspect-the-log-of-past-executions">4.2. Sprawdź dziennik poprzednich wykonań</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5321,7 +5321,7 @@ Jaki jest cel bloku `params` w pliku workflow'u?
 - [x] Deklarowanie i typowanie parametrów wejściowych workflow'u
 - [ ] Określanie opcji publikowania wyjść
 
-Dowiedz się więcej: [3.4. System parametrów wiersza poleceń `params`](#34-system-parametrow-wiersza-polecen-params)
+Dowiedz się więcej: [3.4. System parametrów wiersza poleceń `params`](#34-the-params-system-of-command-line-parameters)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
@@ -5335,7 +5335,7 @@ Dowiedz się więcej: [3.4. System parametrów wiersza poleceń `params`](#34-sy
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#34-system-parametrow-wiersza-polecen-params">3.4. System parametrów wiersza poleceń <code>params</code></a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#34-the-params-system-of-command-line-parameters">3.4. System parametrów wiersza poleceń <code>params</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5346,7 +5346,7 @@ Co robi `mode 'copy'` w bloku `output` workflow'u?
 - [ ] Kopiuje skrypt workflow'u do results
 - [ ] Włącza przyrostowe kopiowanie plików
 
-Dowiedz się więcej: [3.5. Dyrektywa `publish`](#35-dyrektywa-publish)
+Dowiedz się więcej: [3.5. Dyrektywa `publish`](#35-the-publish-directive)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -5360,7 +5360,7 @@ Dowiedz się więcej: [3.5. Dyrektywa `publish`](#35-dyrektywa-publish)
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#35-dyrektywa-publish">3.5. Dyrektywa <code>publish</code></a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#35-the-publish-directive">3.5. Dyrektywa <code>publish</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5371,7 +5371,7 @@ Jaka jest zalecana flaga do użycia z poleceniem `nextflow clean` przed faktyczn
 - [ ] `-a` (wszystko) aby wybrać wszystkie katalogi
 - [ ] `-q` (cicho) aby pominąć ostrzeżenia
 
-Dowiedz się więcej: [4.3. Usuń starsze katalogi robocze](#43-usun-starsze-katalogi-robocze)
+Dowiedz się więcej: [4.3. Usuń starsze katalogi robocze](#43-delete-older-work-directories)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-7">
@@ -5385,7 +5385,7 @@ Dowiedz się więcej: [4.3. Usuń starsze katalogi robocze](#43-usun-starsze-kat
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#43-usun-starsze-katalogi-robocze">4.3. Usuń starsze katalogi robocze</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#43-delete-older-work-directories">4.3. Usuń starsze katalogi robocze</a></p></section>
 </div><div id="quiz-progress-sidebar" aria-label="Quiz Progress" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">

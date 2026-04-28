@@ -3221,7 +3221,7 @@
   <span class="md-ellipsis">
     
   
-    Orientamento
+    Per iniziare
   
 
     
@@ -3277,7 +3277,7 @@
   <span class="md-ellipsis">
     
   
-    Pattern Essenziali di Scripting in Nextflow
+    Pattern Essenziali di Scripting
   
 
     
@@ -3389,7 +3389,7 @@
   <span class="md-ellipsis">
     
   
-    Test con nf-test
+    Index
   
 
     
@@ -3417,7 +3417,7 @@
   <span class="md-ellipsis">
     
   
-    Debug dei Workflow
+    Risoluzione dei Problemi nei Workflow
   
 
     
@@ -5513,7 +5513,7 @@ I link simbolici si romperanno quando pulite la vostra directory <code>work</cod
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">┃ Launching `genomics.nf` [reverent_sinoussi] DSL2 - revision: 41d43ad7fe</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
@@ -5688,7 +5688,7 @@ Dobbiamo dichiarare parametri per essi, aggiungere valori predefiniti al profilo
 </div>
 </div>
 <p>La sintassi <code>file()</code> dice esplicitamente a Nextflow di gestire questi input come percorsi di file.
-Potete saperne di più su questo nella Side Quest <a href="../../side_quests/working_with_files.md">Working with files</a>.</p>
+Potete saperne di più su questo nella Side Quest <a href="../../../side_quests/working_with_files/">Working with files</a>.</p>
 <h3 id="22-scrivere-il-processo-di-variant-calling-e-chiamarlo-nel-flusso-di-lavoro">2.2. Scrivere il processo di variant calling e chiamarlo nel flusso di lavoro<a class="headerlink" href="#22-scrivere-il-processo-di-variant-calling-e-chiamarlo-nel-flusso-di-lavoro" title="Permanent link">&para;</a></h3>
 <p>Dobbiamo scrivere la definizione del processo nel file modulo, importarlo nel flusso di lavoro usando un'istruzione include e chiamarlo sull'input reads più l'output del passaggio di indicizzazione e i file accessori.</p>
 <h4 id="221-completare-il-modulo-per-il-processo-di-variant-calling">2.2.1. Completare il modulo per il processo di variant calling<a class="headerlink" href="#221-completare-il-modulo-per-il-processo-di-variant-calling" title="Permanent link">&para;</a></h4>
@@ -5948,7 +5948,7 @@ In Nextflow, gli input sono posizionali, il che significa che <em>dovete</em> se
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>
 <a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="go">┃ Launching `genomics.nf` [grave_volta] DSL2 - revision: 4790abc96a</span>
 <a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a>
@@ -6065,7 +6065,7 @@ Questo è un modo rapido per testare l'esecuzione multi-campione; nel prossimo p
 <p>Cosa curiosa: questo <em>potrebbe funzionare</em>, OPPURE <em>potrebbe fallire</em>. Ad esempio, ecco un'esecuzione che ha avuto successo:</p>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>
 <a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="go">┃ Launching `genomics.nf` [peaceful_yalow] DSL2 - revision: a256d113ad</span>
 <a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>
@@ -6077,7 +6077,7 @@ Questo è un modo rapido per testare l'esecuzione multi-campione; nel prossimo p
 <p>Se l'esecuzione del vostro flusso di lavoro ha avuto successo, eseguitelo di nuovo finché non ottenete un errore come questo:</p>
 <details class="failure">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>
 <a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a><span class="go">┃ Launching `genomics.nf` [loving_pasteur] DSL2 - revision: d2a8e63076</span>
 <a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a>
@@ -6341,7 +6341,7 @@ Tuttavia ingombreranno l'output della console, quindi raccomandiamo di rimuoverl
 <p>Questa volta (e ogni volta) tutto dovrebbe funzionare correttamente:</p>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>
 <a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a><span class="go">┃ Launching `genomics.nf` [special_goldstine] DSL2 - revision: 4cbbf6ea3e</span>
 <a id="__codelineno-67-4" name="__codelineno-67-4" href="#__codelineno-67-4"></a>
@@ -6496,7 +6496,7 @@ Questo ci permette di fare riferimento alle colonne per nome nell'operazione <co
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a>
 <a id="__codelineno-77-3" name="__codelineno-77-3" href="#__codelineno-77-3"></a><span class="go">┃ Launching `genomics.nf` [sick_albattani] DSL2 - revision: 46d84642f6</span>
 <a id="__codelineno-77-4" name="__codelineno-77-4" href="#__codelineno-77-4"></a>

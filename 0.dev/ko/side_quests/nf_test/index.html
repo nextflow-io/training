@@ -2348,7 +2348,7 @@
   <span class="md-ellipsis">
     
   
-    오리엔테이션
+    시작하기
   
 
     
@@ -2404,7 +2404,7 @@
   <span class="md-ellipsis">
     
   
-    필수 Nextflow 스크립팅 패턴
+    필수 스크립팅 패턴
   
 
     
@@ -3116,7 +3116,7 @@
   <span class="md-ellipsis">
     
   
-    워크플로우 디버깅
+    워크플로우 문제 해결
   
 
     
@@ -4509,13 +4509,13 @@
 <h3 id="_2">사전 요구사항<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>이 사이드 퀘스트를 시작하기 전에 다음을 완료해야 합니다:</p>
 <ul>
-<li><a href="../hello_nextflow/README.md">Hello Nextflow</a> 튜토리얼 또는 동급의 입문 과정을 완료해야 합니다.</li>
+<li><a href="../../hello_nextflow/">Hello Nextflow</a> 튜토리얼 또는 동급의 입문 과정을 완료해야 합니다.</li>
 <li>기본적인 Nextflow 개념과 메커니즘(process, 채널, 연산자, 파일 작업, 메타데이터)에 익숙해야 합니다.</li>
 </ul>
 <hr />
 <h2 id="0">0. 시작하기<a class="headerlink" href="#0" title="Permanent link">&para;</a></h2>
 <h4 id="_3">교육 코드스페이스 열기<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
-<p>아직 열지 않았다면 <a href="../envsetup/index.md">환경 설정</a>에 설명된 대로 교육 환경을 열어 주세요.</p>
+<p>아직 열지 않았다면 <a href="../../envsetup/">환경 설정</a>에 설명된 대로 교육 환경을 열어 주세요.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h4 id="_4">프로젝트 디렉토리로 이동<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
 <p>이 튜토리얼의 파일이 있는 디렉토리로 이동합니다.</p>
@@ -4530,11 +4530,11 @@
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">├── greetings.csv</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">└── main.nf</span>
 </code></pre></div>
-<p>파일에 대한 자세한 설명은 <a href="../hello_nextflow/00_orientation.md">Hello Nextflow의 준비 운동</a>을 참조하세요.</p>
-<p>테스트할 워크플로우는 <a href="../hello_nextflow/03_hello_workflow.md">Hello Workflow</a>에서 구축한 Hello 워크플로우의 일부입니다.</p>
+<p>파일에 대한 자세한 설명은 <a href="../../hello_nextflow/00_orientation/">Hello Nextflow의 준비 운동</a>을 참조하세요.</p>
+<p>테스트할 워크플로우는 <a href="../../hello_nextflow/03_hello_workflow/">Hello Workflow</a>에서 구축한 Hello 워크플로우의 일부입니다.</p>
 <details class="example">
 <summary>Hello Nextflow 워크플로우는 무엇을 하나요?</summary>
-<p><a href="../hello_nextflow/index.md">Hello Nextflow</a> 교육을 수행하지 않은 경우, 이 간단한 워크플로우가 무엇을 하는지 간략히 설명합니다.</p>
+<p><a href="../../hello_nextflow/">Hello Nextflow</a> 교육을 수행하지 않은 경우, 이 간단한 워크플로우가 무엇을 하는지 간략히 설명합니다.</p>
 <p>워크플로우는 인사말이 담긴 CSV 파일을 받아 네 가지 연속적인 변환 단계를 실행하고, 재미있는 캐릭터가 인사말을 말하는 ASCII 그림이 담긴 단일 텍스트 파일을 출력합니다.</p>
 <p>네 단계는 별도의 모듈 파일에 저장된 Nextflow process(<code>sayHello</code>, <code>convertToUpper</code>, <code>collectGreetings</code>, <code>cowpy</code>)로 구현됩니다.</p>
 <ol>
@@ -4560,50 +4560,57 @@
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="cm">*/</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${greeting}-output.txt&quot;</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="s2">    echo &#39;$greeting&#39; &gt; &#39;$greeting-output.txt&#39;</span>
-<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="o">}</span>
-<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>
-<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="cm">/*</span>
-<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="cm">* 텍스트 변환 유틸리티를 사용하여 인사말을 대문자로 변환</span>
-<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="cm">*/</span>
-<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="n">process</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>
-<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>
-<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
-<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>
-<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;UPPER-${input_file}&quot;</span>
-<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>
-<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="s2">    cat &#39;$input_file&#39; | tr &#39;[a-z]&#39; &#39;[A-Z]&#39; &gt; UPPER-${input_file}</span>
-<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a><span class="o">}</span>
-<a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>
-<a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>
-<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a><span class="w">    </span><span class="c1">// CSV 파일에서 입력 채널 생성</span>
-<a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input_file</span><span class="o">).</span><span class="na">splitCsv</span><span class="o">().</span><span class="na">flatten</span><span class="o">()</span>
-<a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a>
-<a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a><span class="w">    </span><span class="c1">// 인사말 출력</span>
-<a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
-<a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a>
-<a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a><span class="w">    </span><span class="c1">// 인사말을 대문자로 변환</span>
-<a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${greeting}-output.txt&quot;</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="s2">    echo &#39;$greeting&#39; &gt; &#39;$greeting-output.txt&#39;</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="o">}</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="cm">/*</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="cm">* 텍스트 변환 유틸리티를 사용하여 인사말을 대문자로 변환</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="cm">*/</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="n">process</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;UPPER-${input_file}&quot;</span>
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="s2">    cat &#39;$input_file&#39; | tr &#39;[a-z]&#39; &#39;[A-Z]&#39; &gt; UPPER-${input_file}</span>
+<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="o">}</span>
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>
+<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a><span class="w">    </span><span class="c1">// CSV 파일에서 입력 채널 생성</span>
+<a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input_file</span><span class="o">).</span><span class="na">splitCsv</span><span class="o">().</span><span class="na">flatten</span><span class="o">()</span>
+<a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>
+<a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a><span class="w">    </span><span class="c1">// 인사말 출력</span>
+<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
+<a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a>
+<a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a><span class="w">    </span><span class="c1">// 인사말을 대문자로 변환</span>
+<a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
+<a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a>
+<a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span>
+<a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a><span class="w">    </span><span class="n">upper_greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span>
 <a id="__codelineno-3-54" name="__codelineno-3-54" href="#__codelineno-3-54"></a><span class="o">}</span>
+<a id="__codelineno-3-55" name="__codelineno-3-55" href="#__codelineno-3-55"></a>
+<a id="__codelineno-3-56" name="__codelineno-3-56" href="#__codelineno-3-56"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-57" name="__codelineno-3-57" href="#__codelineno-3-57"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-58" name="__codelineno-3-58" href="#__codelineno-3-58"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-3-59" name="__codelineno-3-59" href="#__codelineno-3-59"></a><span class="w">    </span><span class="n">upper_greetings</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-60" name="__codelineno-3-60" href="#__codelineno-3-60"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-3-61" name="__codelineno-3-61" href="#__codelineno-3-61"></a><span class="o">}</span>
 </code></pre></div>
 </details>
 <h4 id="_6">워크플로우 실행<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
@@ -4993,10 +5000,10 @@
 </span><a id="__codelineno-27-24" name="__codelineno-27-24"></a><span class="hll"><span class="w">        </span><span class="n">then</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-27-25" name="__codelineno-27-25"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/Bonjour-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
 </span><a id="__codelineno-27-26" name="__codelineno-27-26"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/Hello-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
-</span><a id="__codelineno-27-27" name="__codelineno-27-27"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/Holà-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
+</span><a id="__codelineno-27-27" name="__codelineno-27-27"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/Hola-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
 </span><a id="__codelineno-27-28" name="__codelineno-27-28"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/UPPER-Bonjour-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
 </span><a id="__codelineno-27-29" name="__codelineno-27-29"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/UPPER-Hello-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
-</span><a id="__codelineno-27-30" name="__codelineno-27-30"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/UPPER-Holà-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
+</span><a id="__codelineno-27-30" name="__codelineno-27-30"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/UPPER-Hola-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
 </span><a id="__codelineno-27-31" name="__codelineno-27-31"></a><span class="hll"><span class="w">        </span><span class="o">}</span>
 </span><a id="__codelineno-27-32" name="__codelineno-27-32"></a><span class="hll">
 </span><a id="__codelineno-27-33" name="__codelineno-27-33"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
@@ -5135,7 +5142,7 @@
 <a id="__codelineno-35-23" name="__codelineno-35-23" href="#__codelineno-35-23"></a>
 <a id="__codelineno-35-24" name="__codelineno-35-24" href="#__codelineno-35-24"></a><span class="go">FAILURE: Executed 1 tests in 4.884s (1 failed)</span>
 </code></pre></div>
-<p><code>sayHello</code> process가 1개의 입력을 선언했지만 0개의 인자로 호출되었기 때문에 테스트가 실패합니다. process에 입력을 추가하여 이를 수정합니다. <a href="../hello_nextflow/03_hello_workflow.md">Hello Workflow</a>(및 위의 준비 운동 섹션)에서 <code>sayHello</code> process가 단일 값 입력을 받는다는 것을 기억하세요. 이를 제공해야 합니다. 또한 테스트 이름을 테스트하는 내용을 더 잘 반영하도록 수정합니다.</p>
+<p><code>sayHello</code> process가 1개의 입력을 선언했지만 0개의 인자로 호출되었기 때문에 테스트가 실패합니다. process에 입력을 추가하여 이를 수정합니다. <a href="../../hello_nextflow/03_hello_workflow/">Hello Workflow</a>(및 위의 준비 운동 섹션)에서 <code>sayHello</code> process가 단일 값 입력을 받는다는 것을 기억하세요. 이를 제공해야 합니다. 또한 테스트 이름을 테스트하는 내용을 더 잘 반영하도록 수정합니다.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">후</label><label for="__tabbed_4_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -7408,13 +7415,13 @@ window.mkdocsQuizConfig = {
         
         
           
-          <a href="../debugging/" class="md-footer__link md-footer__link--next" aria-label="다음: 워크플로우 디버깅">
+          <a href="../debugging/" class="md-footer__link md-footer__link--next" aria-label="다음: 워크플로우 문제 해결">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
               </span>
               <div class="md-ellipsis">
-                워크플로우 디버깅
+                워크플로우 문제 해결
               </div>
             </div>
             <div class="md-footer__button md-icon">

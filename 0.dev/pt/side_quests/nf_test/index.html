@@ -47,7 +47,7 @@
     
     
       
-        <title>Testando com nf-test - training.nextflow.io</title>
+        <title>Index - training.nextflow.io</title>
       
     
     
@@ -254,7 +254,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Testando com nf-test
+              Index
             
           </span>
         </div>
@@ -2348,7 +2348,7 @@
   <span class="md-ellipsis">
     
   
-    Orientação
+    Primeiros passos
   
 
     
@@ -2404,7 +2404,7 @@
   <span class="md-ellipsis">
     
   
-    Padrões Essenciais de Scripting em Nextflow
+    Padrões Essenciais de Scripting
   
 
     
@@ -2432,7 +2432,7 @@
   <span class="md-ellipsis">
     
   
-    Processamento de entrada de arquivos
+    Processamento de Entrada de Arquivos
   
 
     
@@ -2460,7 +2460,7 @@
   <span class="md-ellipsis">
     
   
-    Metadados e meta maps
+    Metadados e Meta Maps
   
 
     
@@ -2525,7 +2525,7 @@
   <span class="md-ellipsis">
     
   
-    Testando com nf-test
+    Index
   
 
     
@@ -2543,7 +2543,7 @@
   <span class="md-ellipsis">
     
   
-    Testando com nf-test
+    Index
   
 
     
@@ -3116,7 +3116,7 @@
   <span class="md-ellipsis">
     
   
-    Depurando Fluxos de Trabalho
+    Solução de Problemas em Fluxos de Trabalho
   
 
     
@@ -4472,6 +4472,20 @@
 </a>
  
 
+<p>I'll analyze the diff and update only the specific sections that changed in the existing translation.</p>
+<p>The changes are:</p>
+<ol>
+<li>Link URL: <code>../hello_nextflow/README.md</code> → <code>../../hello_nextflow/index.md</code> (Prerequisites section)</li>
+<li>Link URL: <code>../envsetup/index.md</code> → <code>../../envsetup/index.md</code> (Open training codespace section)</li>
+<li>Link URLs in "Revise os materiais" section: <code>../hello_nextflow/00_orientation.md</code> → <code>../../hello_nextflow/00_orientation.md</code> and <code>../hello_nextflow/03_hello_workflow.md</code> → <code>../../hello_nextflow/03_hello_workflow.md</code></li>
+<li>Link URL in the example block: <code>../hello_nextflow/index.md</code> → <code>../../hello_nextflow/index.md</code></li>
+<li>Workflow code block: removed <code>publishDir</code> directives, added <code>main:</code>, <code>publish:</code>, and <code>output {}</code> block</li>
+<li>File assertions: <code>Holà</code> → <code>Hola</code> (two occurrences)</li>
+<li>Link URL in section 2.1: <code>../hello_nextflow/03_hello_workflow.md</code> → <code>../../hello_nextflow/03_hello_workflow.md</code></li>
+<li>Warning admonition: <code>!!!warning</code> → <code>!!! warning</code></li>
+<li>Final link: <code>../</code> → <code>../index.md</code></li>
+</ol>
+<p>%%%</p>
 <h1 id="testando-com-nf-test">Testando com nf-test<a class="headerlink" href="#testando-com-nf-test" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tradução assistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">saiba mais e sugira melhorias</a></span></p>
 <p>Ser capaz de testar sistematicamente cada parte do seu fluxo de trabalho para garantir que está funcionando como esperado é fundamental para a reprodutibilidade e manutenção a longo prazo, e pode ser uma grande ajuda durante o processo de desenvolvimento.</p>
@@ -4509,13 +4523,13 @@
 <h3 id="pre-requisitos">Pré-requisitos<a class="headerlink" href="#pre-requisitos" title="Permanent link">&para;</a></h3>
 <p>Antes de embarcar nesta missão secundária, você deve:</p>
 <ul>
-<li>Ter concluído o tutorial <a href="../hello_nextflow/README.md">Hello Nextflow</a> ou um curso equivalente para iniciantes.</li>
+<li>Ter concluído o tutorial <a href="../../hello_nextflow/">Hello Nextflow</a> ou um curso equivalente para iniciantes.</li>
 <li>Estar confortável usando conceitos e mecanismos básicos do Nextflow (processos, canais, operadores, trabalhando com arquivos, metadados)</li>
 </ul>
 <hr />
 <h2 id="0-primeiros-passos">0. Primeiros passos<a class="headerlink" href="#0-primeiros-passos" title="Permanent link">&para;</a></h2>
 <h4 id="abra-o-codespace-de-treinamento">Abra o codespace de treinamento<a class="headerlink" href="#abra-o-codespace-de-treinamento" title="Permanent link">&para;</a></h4>
-<p>Se ainda não o fez, certifique-se de abrir o ambiente de treinamento conforme descrito em <a href="../envsetup/index.md">Configuração do Ambiente</a>.</p>
+<p>Se ainda não o fez, certifique-se de abrir o ambiente de treinamento conforme descrito em <a href="../../envsetup/">Configuração do Ambiente</a>.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h4 id="acesse-o-diretorio-do-projeto">Acesse o diretório do projeto<a class="headerlink" href="#acesse-o-diretorio-do-projeto" title="Permanent link">&para;</a></h4>
 <p>Vamos acessar o diretório onde os arquivos deste tutorial estão localizados.</p>
@@ -4530,11 +4544,11 @@
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">├── greetings.csv</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">└── main.nf</span>
 </code></pre></div>
-<p>Para uma descrição detalhada dos arquivos, consulte o <a href="../hello_nextflow/00_orientation.md">aquecimento do Hello Nextflow</a>.</p>
-<p>O fluxo de trabalho que vamos testar é um subconjunto do fluxo de trabalho Hello construído em <a href="../hello_nextflow/03_hello_workflow.md">Hello Workflow</a>.</p>
+<p>Para uma descrição detalhada dos arquivos, consulte o <a href="../../hello_nextflow/00_orientation/">aquecimento do Hello Nextflow</a>.</p>
+<p>O fluxo de trabalho que vamos testar é um subconjunto do fluxo de trabalho Hello construído em <a href="../../hello_nextflow/03_hello_workflow/">Hello Workflow</a>.</p>
 <details class="example">
 <summary>O que o fluxo de trabalho Hello Nextflow faz?</summary>
-<p>Se você não fez o treinamento <a href="../hello_nextflow/index.md">Hello Nextflow</a>, aqui está uma visão geral rápida do que este fluxo de trabalho simples faz.</p>
+<p>Se você não fez o treinamento <a href="../../hello_nextflow/">Hello Nextflow</a>, aqui está uma visão geral rápida do que este fluxo de trabalho simples faz.</p>
 <p>O fluxo de trabalho recebe um arquivo CSV contendo saudações, executa quatro etapas consecutivas de transformação nelas e gera um único arquivo de texto contendo uma imagem ASCII de um personagem divertido dizendo as saudações.</p>
 <p>As quatro etapas são implementadas como processos Nextflow (<code>sayHello</code>, <code>convertToUpper</code>, <code>collectGreetings</code> e <code>cowpy</code>) armazenados em arquivos de módulo separados.</p>
 <ol>
@@ -4560,50 +4574,57 @@ Você pode ver o código completo do fluxo de trabalho abaixo.</p>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="cm">*/</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${greeting}-output.txt&quot;</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="s2">    echo &#39;$greeting&#39; &gt; &#39;$greeting-output.txt&#39;</span>
-<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="o">}</span>
-<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>
-<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="cm">/*</span>
-<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="cm">* Usa um utilitário de substituição de texto para converter a saudação para maiúsculas</span>
-<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="cm">*/</span>
-<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="n">process</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>
-<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>
-<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
-<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>
-<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;UPPER-${input_file}&quot;</span>
-<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>
-<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="s2">    cat &#39;$input_file&#39; | tr &#39;[a-z]&#39; &#39;[A-Z]&#39; &gt; UPPER-${input_file}</span>
-<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a><span class="o">}</span>
-<a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>
-<a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>
-<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a><span class="w">    </span><span class="c1">// cria um canal para entradas a partir de um arquivo CSV</span>
-<a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input_file</span><span class="o">).</span><span class="na">splitCsv</span><span class="o">().</span><span class="na">flatten</span><span class="o">()</span>
-<a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a>
-<a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a><span class="w">    </span><span class="c1">// emite uma saudação</span>
-<a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
-<a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a>
-<a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a><span class="w">    </span><span class="c1">// converte a saudação para maiúsculas</span>
-<a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${greeting}-output.txt&quot;</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="s2">    echo &#39;$greeting&#39; &gt; &#39;$greeting-output.txt&#39;</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="o">}</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="cm">/*</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="cm">* Usa um utilitário de substituição de texto para converter a saudação para maiúsculas</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="cm">*/</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="n">process</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;UPPER-${input_file}&quot;</span>
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="s2">    cat &#39;$input_file&#39; | tr &#39;[a-z]&#39; &#39;[A-Z]&#39; &gt; UPPER-${input_file}</span>
+<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="o">}</span>
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>
+<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a><span class="w">    </span><span class="c1">// cria um canal para entradas a partir de um arquivo CSV</span>
+<a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input_file</span><span class="o">).</span><span class="na">splitCsv</span><span class="o">().</span><span class="na">flatten</span><span class="o">()</span>
+<a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>
+<a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a><span class="w">    </span><span class="c1">// emite uma saudação</span>
+<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
+<a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a>
+<a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a><span class="w">    </span><span class="c1">// converte a saudação para maiúsculas</span>
+<a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
+<a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a>
+<a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span>
+<a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a><span class="w">    </span><span class="n">upper_greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span>
 <a id="__codelineno-3-54" name="__codelineno-3-54" href="#__codelineno-3-54"></a><span class="o">}</span>
+<a id="__codelineno-3-55" name="__codelineno-3-55" href="#__codelineno-3-55"></a>
+<a id="__codelineno-3-56" name="__codelineno-3-56" href="#__codelineno-3-56"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-57" name="__codelineno-3-57" href="#__codelineno-3-57"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-58" name="__codelineno-3-58" href="#__codelineno-3-58"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-3-59" name="__codelineno-3-59" href="#__codelineno-3-59"></a><span class="w">    </span><span class="n">upper_greetings</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-60" name="__codelineno-3-60" href="#__codelineno-3-60"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-3-61" name="__codelineno-3-61" href="#__codelineno-3-61"></a><span class="o">}</span>
 </code></pre></div>
 </details>
 <h4 id="execute-o-fluxo-de-trabalho">Execute o fluxo de trabalho<a class="headerlink" href="#execute-o-fluxo-de-trabalho" title="Permanent link">&para;</a></h4>
@@ -4993,10 +5014,10 @@ Você pode ver o código completo do fluxo de trabalho abaixo.</p>
 </span><a id="__codelineno-27-24" name="__codelineno-27-24"></a><span class="hll"><span class="w">        </span><span class="n">then</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-27-25" name="__codelineno-27-25"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/Bonjour-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
 </span><a id="__codelineno-27-26" name="__codelineno-27-26"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/Hello-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
-</span><a id="__codelineno-27-27" name="__codelineno-27-27"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/Holà-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
+</span><a id="__codelineno-27-27" name="__codelineno-27-27"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/Hola-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
 </span><a id="__codelineno-27-28" name="__codelineno-27-28"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/UPPER-Bonjour-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
 </span><a id="__codelineno-27-29" name="__codelineno-27-29"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/UPPER-Hello-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
-</span><a id="__codelineno-27-30" name="__codelineno-27-30"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/UPPER-Holà-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
+</span><a id="__codelineno-27-30" name="__codelineno-27-30"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/UPPER-Hola-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
 </span><a id="__codelineno-27-31" name="__codelineno-27-31"></a><span class="hll"><span class="w">        </span><span class="o">}</span>
 </span><a id="__codelineno-27-32" name="__codelineno-27-32"></a><span class="hll">
 </span><a id="__codelineno-27-33" name="__codelineno-27-33"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
@@ -5135,7 +5156,7 @@ Você pode ver o código completo do fluxo de trabalho abaixo.</p>
 <a id="__codelineno-35-23" name="__codelineno-35-23" href="#__codelineno-35-23"></a>
 <a id="__codelineno-35-24" name="__codelineno-35-24" href="#__codelineno-35-24"></a><span class="go">FAILURE: Executed 1 tests in 4.884s (1 failed)</span>
 </code></pre></div>
-<p>O teste falha porque o processo <code>sayHello</code> declara 1 entrada, mas foi chamado com 0 argumentos. Vamos corrigir isso adicionando uma entrada ao processo. Lembre-se de <a href="../hello_nextflow/03_hello_workflow.md">Hello Workflow</a> (e da seção de aquecimento acima) que nosso processo <code>sayHello</code> recebe uma única entrada de valor, que precisaremos fornecer. Também devemos corrigir o nome do teste para refletir melhor o que estamos testando.</p>
+<p>O teste falha porque o processo <code>sayHello</code> declara 1 entrada, mas foi chamado com 0 argumentos. Vamos corrigir isso adicionando uma entrada ao processo. Lembre-se de <a href="../../hello_nextflow/03_hello_workflow/">Hello Workflow</a> (e da seção de aquecimento acima) que nosso processo <code>sayHello</code> recebe uma única entrada de valor, que precisaremos fornecer. Também devemos corrigir o nome do teste para refletir melhor o que estamos testando.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Depois</label><label for="__tabbed_4_2">Antes</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5651,7 +5672,8 @@ Você também sabe como executar testes um por um ou para um projeto inteiro.</p
 <p><strong>Lembre-se:</strong> Os testes são documentação viva de como seu código deve se comportar. Quanto mais testes você escrever, e quanto mais específicas forem suas asserções, mais confiante você pode estar na confiabilidade do seu pipeline.</p>
 <hr />
 <h2 id="o-que-vem-a-seguir_2">O que vem a seguir?<a class="headerlink" href="#o-que-vem-a-seguir_2" title="Permanent link">&para;</a></h2>
-<p>Retorne ao <a href="../">menu de Missões Secundárias</a> ou clique no botão no canto inferior direito da página para avançar para o próximo tópico da lista.</p><div id="quiz-progress-sidebar" aria-label="Quiz Progress" style="display: none;">
+<p>Retorne ao <a href="../">menu de Missões Secundárias</a> ou clique no botão no canto inferior direito da página para avançar para o próximo tópico da lista.
+%%%</p><div id="quiz-progress-sidebar" aria-label="Quiz Progress" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">
     <span class="md-nav__icon md-icon"></span>
@@ -7408,13 +7430,13 @@ window.mkdocsQuizConfig = {
         
         
           
-          <a href="../debugging/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Depurando Fluxos de Trabalho">
+          <a href="../debugging/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Solução de Problemas em Fluxos de Trabalho">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Próximo
               </span>
               <div class="md-ellipsis">
-                Depurando Fluxos de Trabalho
+                Solução de Problemas em Fluxos de Trabalho
               </div>
             </div>
             <div class="md-footer__button md-icon">

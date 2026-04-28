@@ -2342,7 +2342,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Premiers pas
   
 
     
@@ -2370,7 +2370,7 @@
   <span class="md-ellipsis">
     
   
-    Environnement de développement
+    Index
   
 
     
@@ -2398,7 +2398,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Modèles de Scripting Essentiels
   
 
     
@@ -2538,7 +2538,7 @@
   <span class="md-ellipsis">
     
   
-    Débogage des Workflows
+    Résolution des problèmes dans les Workflows
   
 
     
@@ -3767,7 +3767,7 @@
 <p>Si vous êtes intéressé·e par comment faire ceci avec les meilleures pratiques, il y a une quête secondaire sur <em>training.nextflow.io</em>, qui concerne spécifiquement les métadonnées et les meta maps, donc vous pouvez creuser là pour plus de détails.</p>
 <h2 id="3-fournir-plusieurs-entrees-via-un-tableau">3. Fournir plusieurs entrées via un tableau<a class="headerlink" href="#3-fournir-plusieurs-entrees-via-un-tableau" title="Permanent link">&para;</a></h2>
 <p>D'accord. Ensuite nous allons explorer un peu comment les canaux sont structurés et comment ils diffèrent d'autres types de structures de données dans le langage de codage. Et je vais réfléchir un peu à comment je pourrais potentiellement utiliser un tableau, qui pourrait être un concept familier si vous venez d'autres langages.</p>
-<p>Puis-je utiliser un tableau dans un canal ? Essayons. Je vais créer un tableau, et j'ai copié ceci de la documentation, <em>"greetings_array"</em> et <em>"Hello", "Bonjour"</em> et <em>"Holà"</em>. Et ensuite je vais mettre ça ici au lieu de mes chaînes codées en dur. Donc je vais dire "channel.of" <em>"greetings_array"</em>, passant ce tableau dans un canal. Essayons.</p>
+<p>Puis-je utiliser un tableau dans un canal ? Essayons. Je vais créer un tableau, et j'ai copié ceci de la documentation, <em>"greetings_array"</em> et <em>"Hello", "Bonjour"</em> et <em>"Hola"</em>. Et ensuite je vais mettre ça ici au lieu de mes chaînes codées en dur. Donc je vais dire "channel.of" <em>"greetings_array"</em>, passant ce tableau dans un canal. Essayons.</p>
 <p>Ouvrir le terminal, et exécuter le pipeline.</p>
 <p>D'accord. Vous pouvez voir que l'instruction view ici a bien affiché notre tableau comme prévu, mais ensuite tout ce texte rouge, ou il ne sera pas rouge si vous avez toujours <em>"-ansi-log"</em> désactivé, mais tout ce texte rouge nous dit que quelque chose s'est mal passé.</p>
 <p>Nous n'avons plus une belle coche verte ici. Nous avons une croix rouge, et si je rends juste ceci un peu plus large pour que ce soit plus facile à lire, Nextflow nous dit ce qui s'est mal passé.</p>
@@ -3805,24 +3805,24 @@
 <h2 id="42-utiliser-loperateur-splitcsv-pour-analyser-le-fichier">4.2. Utiliser l'opérateur splitCsv() pour analyser le fichier<a class="headerlink" href="#42-utiliser-loperateur-splitcsv-pour-analyser-le-fichier" title="Permanent link">&para;</a></h2>
 <p>D'accord, jetons un œil à ce canal et voyons à quoi il ressemble. Nous pouvons faire <em>".view"</em>, et j'ai copié ceci du site web. Donc <em>.view</em>, et nous avons une closure dynamique ici et nous disons un nom de variable "<em>csv"</em> comme entrée. Donc c'est le contenu du canal, et nous disons avant splitCsv, et voici à quoi il ressemble.</p>
 <p>Si je l'exécute à nouveau, il échouera toujours, mais il nous montrera ce qui est à l'intérieur de ce canal. Ce n'est pas particulièrement excitant. C'est cette variable <em>path</em>. Donc vous pouvez voir que c'est juste une chaîne ici parce qu'elle est affichée dans un terminal, mais c'est un objet <em>path</em>, qui contient les informations et les métadonnées sur ce fichier.</p>
-<p>Nous ne voulons pas passer les métadonnées du fichier à l'entrée. Nous voulons passer le contenu de ce fichier. Si nous regardons le fichier <em>greetings.csv</em>, vous pouvez voir ici qu'il a ces différentes variables ici. <em>Hello, Bonjour, Holà</em> à nouveau. Et ce sont les choses que nous voulons vraiment passer à notre processus, pas juste le fichier lui-même comme un seul objet.</p>
+<p>Nous ne voulons pas passer les métadonnées du fichier à l'entrée. Nous voulons passer le contenu de ce fichier. Si nous regardons le fichier <em>greetings.csv</em>, vous pouvez voir ici qu'il a ces différentes variables. <em>Hello, Bonjour, Hola</em> à nouveau. Et ce sont les choses que nous voulons vraiment passer à notre processus, pas juste le fichier lui-même comme un seul objet.</p>
 <p>Donc nous devons analyser ce fichier CSV. Nous devons le déballer, accéder au contenu du fichier CSV, et ensuite passer le contenu dans le canal au processus.</p>
 <p>Comme vous pouvez probablement le dire d'après le message de journal, nous voulons utiliser <em>splitCsv</em>, qui est un autre opérateur, un autre opérateur de canal. Donc si je fais "<em>dot" "s"</em>, et ensuite vous pouvez voir qu'il est auto-suggéré. Oups, <em>splitCsv</em> et des parenthèses.</p>
 <p>Et ensuite après <em>splitCsv</em>, je vais mettre une autre instruction <em>view</em> juste pour que nous puissions voir à quoi ça ressemble après. Exécutons le pipeline et voyons ce que nous avons.</p>
 <p>D'accord. Il a toujours échoué, mais d'une manière nouvelle et excitante, ce qui est un progrès.</p>
 <p>Cette fois encore, nous avons un problème avec notre script, qui a été rendu. Maintenant. Nous n'avons plus le chemin final, mais nous avons un tableau de variables, qui ressemble beaucoup à l'erreur que nous avons eue plus tôt quand nous passions un tableau comme entrée fixe.</p>
-<p>Avec notre journalisation de l'opérateur view, nous pouvons voir avant <em>splitCsv</em> c'était le path. Et effectivement, après <em>splitCsv</em>, nous avons trois sorties différentes et chacune de ces sorties ressemble énormément à chacune des lignes du fichier <em>greetings.csv</em>, ce qui a du sens.</p>
-<p>Donc ce qui s'est passé ici est que Nextflow a analysé ce fichier CSV nous donnant trois objets, un tableau pour chaque ligne du fichier CSV. Donc ensuite trois fois nous avons passé un tableau de variables au canal au lieu d'une seule valeur de chaîne.</p>
+<p>Avec notre journalisation de l'opérateur view, nous pouvons voir qu'avant <em>splitCsv</em> c'était le path. Et effectivement, après <em>splitCsv</em>, nous avons trois sorties différentes et chacune de ces sorties ressemble énormément à chacune des lignes du fichier <em>greetings.csv</em>, ce qui a du sens.</p>
+<p>Donc ce qui s'est passé ici est que Nextflow a analysé ce fichier CSV en nous donnant trois objets, un tableau pour chaque ligne du fichier CSV. Donc ensuite trois fois nous avons passé un tableau de variables au canal au lieu d'une seule valeur de chaîne.</p>
 <p>D'accord, donc la dernière fois que nous avons eu ce problème, nous avons utilisé <em>flatten</em>. Essayons juste très rapidement. Essayer flatten et voir ce qui se passe.</p>
 <p>Je peux appeler ces variables comme je veux. Donc je vais l'appeler <em>myarray</em> parce que ce n'est plus vraiment un CSV. Essayons de l'exécuter à nouveau et voyons ce qui se passe avec <em>flatten</em>.</p>
 <p>Donc cette fois nous allons exécuter, nous avons analysé le CSV en trois objets tableau, et ensuite nous l'avons aplati. Et cette fois il a réussi. Et le pipeline Nextflow s'est exécuté. Cependant vous pouvez voir que <em>flatten</em> va vraiment à fond et aplatit tout. Et donc nous obtenons trois entrées de tableau indépendantes pour chaque ligne. Et donc il a exécuté le processus trois fois pour chaque ligne d'un CSV. Et maintenant nous avons tout un tas de fichiers de résultats, et 123, 456, et toutes sortes de choses, pas juste cette première colonne du CSV, qui est ce que nous voulions vraiment.</p>
 <h2 id="43-utiliser-loperateur-map-pour-extraire-les-messages-daccueil">4.3. Utiliser l'opérateur map() pour extraire les messages d'accueil<a class="headerlink" href="#43-utiliser-loperateur-map-pour-extraire-les-messages-daccueil" title="Permanent link">&para;</a></h2>
 <p>Donc comment accédons-nous juste à la première colonne ? Si flatten est trop simpliste ici, nous avons besoin d'un opérateur plus complexe où nous pouvons réellement personnaliser et lui dire ce que nous voulons du CSV.</p>
-<p>Pour faire ça, nous allons utiliser <em>map</em>. Essentiellement <em>map</em> dit juste, exécuter du code, une fonction sur chaque élément que je reçois et faire une sorte de transformation dessus. Et parce que c'est si flexible, vous le verrez apparaître dans le code Nextflow tout le temps.</p>
-<p>Par lui-même, il ne fait rien. Donc nous ne voulons pas de parenthèses régulières, nous voulons une closure ici et nous devons lui dire quoi faire. Donc je vais dire <em>"row"</em>, parce qu'on lui donne des lignes du CSV, donc c'est un nom de variable logique. C'est l'entrée. Et je veux retourner juste le premier élément de ce tableau.</p>
-<p>Les tableaux dans Nextflow sont basés sur zéro, donc nous allons dire juste le premier élément, qui est row zéro. Si nous voulions la deuxième colonne, je pourrais être un ou la troisième colonne être deux, et ainsi de suite. Nous pouvons retourner ce que nous voulons ici, mais je vais retourner juste la première valeur.</p>
+<p>Pour faire ça, nous allons utiliser <em>map</em>. Essentiellement <em>map</em> dit juste, exécuter du code, une fonction sur chaque élément qui m'est donné et effectuer une sorte de transformation dessus. Et parce qu'il est si flexible, vous le verrez apparaître dans le code Nextflow tout le temps.</p>
+<p>Par lui-même, il ne fait rien. Donc nous ne voulons pas de parenthèses régulières, nous voulons une closure ici et nous devons lui dire quoi faire. Donc je vais dire <em>"row"</em>, parce qu'on lui donne des lignes du CSV, c'est donc un nom de variable logique. C'est l'entrée. Et je veux retourner juste le premier élément de ce tableau.</p>
+<p>Les tableaux dans Nextflow sont basés sur zéro, donc nous allons dire juste le premier élément, qui est row zéro. Si nous voulions la deuxième colonne, ce serait un, ou la troisième colonne ce serait deux, et ainsi de suite. Nous pouvons retourner ce que nous voulons ici, mais je vais retourner juste la première valeur.</p>
 <p>Et maintenant, nous pouvons exécuter le pipeline à nouveau et voir s'il fait ce que nous attendons.</p>
-<p>Effectivement, après <em>splitCsv</em> nous avons nos tableaux, et ensuite après le <em>map</em>, nous avons nos belles chaînes propres, juste <em>"Hello", "Bonjour"</em> et <em>"Holà"</em>. Et le pipeline fait maintenant ce que nous voulons qu'il fasse. Fantastique.</p>
+<p>Effectivement, après <em>splitCsv</em> nous avons nos tableaux, et ensuite après le <em>map</em>, nous avons nos belles chaînes propres, juste <em>"Hello", "Bonjour"</em> et <em>"Hola"</em>. Et le pipeline fait maintenant ce que nous voulons qu'il fasse. Fantastique.</p>
 <p>Donc nous pouvons nous débarrasser de toutes ces commandes view maintenant. Nous n'en avons plus besoin.</p>
 <h2 id="recapitulatif">Récapitulatif<a class="headerlink" href="#recapitulatif" title="Permanent link">&para;</a></h2>
 <p>Nous avons terminé notre débogage et voici le code avec lequel nous finissons. Prenant notre paramètre CLI appelé <em>input</em>, qui est classé comme un <em>Path</em>. Nextflow trouve le path, le charge, et comprend le fichier CSV. Retourne toutes les différentes lignes. Et ensuite nous mappons juste le premier élément de cette ligne dans le canal qui donne en quelque sorte le contenu du canal, qui est passé au processus.</p>

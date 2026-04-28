@@ -47,7 +47,7 @@
     
     
       
-        <title>Pattern Essenziali di Scripting in Nextflow - training.nextflow.io</title>
+        <title>Pattern Essenziali di Scripting - training.nextflow.io</title>
       
     
     
@@ -157,7 +157,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#pattern-essenziali-di-scripting-in-nextflow" class="md-skip">
+        <a href="#pattern-essenziali-di-scripting" class="md-skip">
           Vai al contenuto
         </a>
       
@@ -254,7 +254,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Pattern Essenziali di Scripting in Nextflow
+              Pattern Essenziali di Scripting
             
           </span>
         </div>
@@ -2348,7 +2348,7 @@
   <span class="md-ellipsis">
     
   
-    Orientamento
+    Per iniziare
   
 
     
@@ -2413,7 +2413,7 @@
   <span class="md-ellipsis">
     
   
-    Pattern Essenziali di Scripting in Nextflow
+    Pattern Essenziali di Scripting
   
 
     
@@ -2431,7 +2431,7 @@
   <span class="md-ellipsis">
     
   
-    Pattern Essenziali di Scripting in Nextflow
+    Pattern Essenziali di Scripting
   
 
     
@@ -3312,7 +3312,7 @@
   <span class="md-ellipsis">
     
   
-    Test con nf-test
+    Index
   
 
     
@@ -3340,7 +3340,7 @@
   <span class="md-ellipsis">
     
   
-    Debug dei Workflow
+    Risoluzione dei Problemi nei Workflow
   
 
     
@@ -4920,7 +4920,7 @@
 </a>
  
 
-<h1 id="pattern-essenziali-di-scripting-in-nextflow">Pattern Essenziali di Scripting in Nextflow<a class="headerlink" href="#pattern-essenziali-di-scripting-in-nextflow" title="Permanent link">&para;</a></h1>
+<h1 id="pattern-essenziali-di-scripting">Pattern Essenziali di Scripting<a class="headerlink" href="#pattern-essenziali-di-scripting" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traduzione assistita da IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">scopri di più e suggerisci miglioramenti</a></span></p>
 <p>Nextflow è un linguaggio di programmazione che gira sulla Java Virtual Machine. Sebbene Nextflow sia costruito su <a href="http://groovy-lang.org/">Groovy</a> e ne condivida gran parte della sintassi, Nextflow è molto più di un semplice "Groovy con estensioni" -- è un linguaggio autonomo con una <a href="https://nextflow.io/docs/latest/reference/syntax.html">sintassi</a> e una <a href="https://nextflow.io/docs/latest/reference/stdlib.html">libreria standard</a> completamente specificate.</p>
 <p>Si può scrivere molto codice Nextflow senza andare oltre la sintassi di base per variabili, map e liste. La maggior parte dei tutorial Nextflow si concentra sull'orchestrazione del flusso di lavoro (canali, processi e flusso dei dati), e si può arrivare sorprendentemente lontano con solo quello.</p>
@@ -4941,7 +4941,7 @@ Trasformeremo un semplice flusso di lavoro di lettura CSV in una sofisticata pip
 <h3 id="prerequisiti">Prerequisiti<a class="headerlink" href="#prerequisiti" title="Permanent link">&para;</a></h3>
 <p>Prima di affrontare questa side quest, dovreste:</p>
 <ul>
-<li>Aver completato il tutorial <a href="../hello_nextflow/README.md">Hello Nextflow</a> o un corso equivalente per principianti.</li>
+<li>Aver completato il tutorial <a href="../../hello_nextflow/">Hello Nextflow</a> o un corso equivalente per principianti.</li>
 <li>Essere a proprio agio con i concetti e i meccanismi di base di Nextflow (processi, canali, operatori, lavorare con file e metadati)</li>
 <li>Avere una familiarità di base con i costrutti di programmazione comuni (variabili, map, liste)</li>
 </ul>
@@ -4950,7 +4950,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 <hr />
 <h2 id="0-iniziamo">0. Iniziamo<a class="headerlink" href="#0-iniziamo" title="Permanent link">&para;</a></h2>
 <h4 id="aprire-il-codespace-di-formazione">Aprire il codespace di formazione<a class="headerlink" href="#aprire-il-codespace-di-formazione" title="Permanent link">&para;</a></h4>
-<p>Se non lo avete ancora fatto, assicuratevi di aprire l'ambiente di formazione come descritto nella sezione <a href="../envsetup/index.md">Configurazione dell'ambiente</a>.</p>
+<p>Se non lo avete ancora fatto, assicuratevi di aprire l'ambiente di formazione come descritto nella sezione <a href="../../envsetup/">Configurazione dell'ambiente</a>.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h4 id="spostarsi-nella-directory-del-progetto">Spostarsi nella directory del progetto<a class="headerlink" href="#spostarsi-nella-directory-del-progetto" title="Permanent link">&para;</a></h4>
 <p>Spostiamoci nella directory dove si trovano i file per questo tutorial.</p>
@@ -5057,7 +5057,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 </div>
 </div>
 <p>Questa è la nostra prima <strong>closure</strong> - una funzione anonima che potete passare come argomento (simile alle lambda in Python o alle arrow function in JavaScript). Le closure sono essenziali per lavorare con gli operatori Nextflow.</p>
-<p>La closure <code>{ row -&gt; return row }</code> accetta un parametro <code>row</code> (potrebbe avere qualsiasi nome: <code>item</code>, <code>sample</code>, ecc.).</p>
+<p>La closure <code class="highlight"><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">}</span></code> accetta un parametro <code>row</code> (potrebbe avere qualsiasi nome: <code>item</code>, <code>sample</code>, ecc.).</p>
 <p>Quando l'operatore <code>.map()</code> elabora ogni elemento del canale, passa quell'elemento alla vostra closure. Qui, <code>row</code> contiene una riga CSV alla volta.</p>
 <p>Applicate questa modifica ed eseguite il flusso di lavoro:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
@@ -5289,7 +5289,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="go">Launching `main.nf` [peaceful_cori] DSL2 - revision: 4cc4a8340f</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>
@@ -5428,7 +5428,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
 <a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="go">Launching `collect.nf` [loving_mendel] DSL2 - revision: e8d054a46e</span>
 <a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>
@@ -5498,7 +5498,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="go">Launching `collect.nf` [cheeky_stonebraker] DSL2 - revision: 2d5039fb47</span>
 <a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>
@@ -5589,7 +5589,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">Launching `collect.nf` [cranky_galileo] DSL2 - revision: 5f3c8b2a91</span>
 <a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>
@@ -5615,7 +5615,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 <p class="admonition-title">Suggerimento: Quando Usare Spread vs Collect</p>
 <ul>
 <li><strong>Usate spread (<code>*.</code>)</strong> per l'accesso semplice alle proprietà: <code>samples*.id</code>, <code>files*.name</code></li>
-<li><strong>Usate collect</strong> per trasformazioni o logica complessa: <code>samples.collect { it.id.toUpperCase() }</code>, <code>samples.collect { [it.id, it.quality &gt; 40] }</code></li>
+<li><strong>Usate collect</strong> per trasformazioni o logica complessa: <code class="highlight"><span class="n">samples</span><span class="o">.</span><span class="na">collect</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">()</span><span class="w"> </span><span class="o">}</span></code>, <code class="highlight"><span class="n">samples</span><span class="o">.</span><span class="na">collect</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">[</span><span class="n">it</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="n">it</span><span class="o">.</span><span class="na">quality</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40</span><span class="o">]</span><span class="w"> </span><span class="o">}</span></code></li>
 </ul>
 </div>
 <h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
@@ -5764,7 +5764,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>
 <a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="go">Launching `main.nf` [clever_pauling] DSL2 - revision: 605d2058b4</span>
 <a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a>
@@ -6002,8 +6002,8 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 <span class="normal"><a href="#__codelineno-47-33">33</a></span>
 <span class="normal"><a href="#__codelineno-47-34">34</a></span>
 <span class="normal"><a href="#__codelineno-47-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-10" name="__codelineno-47-10"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-47-11" name="__codelineno-47-11"></a><span class="w">    </span><span class="c1">// Semplice rilevamento single-end vs paired-end</span>
-<a id="__codelineno-47-12" name="__codelineno-47-12"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">is_single</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">List</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">reads</span><span class="o">.</span><span class="na">size</span><span class="o">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-47-11" name="__codelineno-47-11"></a><span class="hll"><span class="w">    </span><span class="c1">// Semplice rilevamento single-end vs paired-end</span>
+</span><a id="__codelineno-47-12" name="__codelineno-47-12"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">is_single</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">List</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">reads</span><span class="o">.</span><span class="na">size</span><span class="o">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
 </span><a id="__codelineno-47-13" name="__codelineno-47-13"></a><span class="hll">
 </span><a id="__codelineno-47-14" name="__codelineno-47-14"></a><span class="hll"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">is_single</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-47-15" name="__codelineno-47-15"></a><span class="hll"><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">input_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">List</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">reads</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">reads</span>
@@ -6062,7 +6062,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>
 <a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="go">Launching `main.nf` [adoring_rosalind] DSL2 - revision: 04b1cd93e9</span>
 <a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>
@@ -6082,7 +6082,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 <a id="__codelineno-52-6" name="__codelineno-52-6" href="#__codelineno-52-6"></a><span class="w">    </span>--html<span class="w"> </span>sample_003.fastp.html<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-52-7" name="__codelineno-52-7" href="#__codelineno-52-7"></a><span class="w">    </span>--thread<span class="w"> </span><span class="m">2</span>
 </code></pre></div>
-<p>Un altro uso comune della logica di script dinamica si può vedere nel <a href="../../nf4science/genomics/02_joint_calling">modulo Genomics di Nextflow for Science</a>. In quel modulo, il processo GATK chiamato può accettare più file di input, ma ognuno deve essere preceduto da <code>-V</code> per formare una riga di comando corretta. Il processo usa lo scripting per trasformare una collezione di file di input (<code>all_gvcfs</code>) negli argomenti di comando corretti:</p>
+<p>Un altro uso comune della logica di script dinamica si può vedere nel <a href="../../nf4_science/genomics/03_joint_calling/">modulo Genomics di Nextflow for Science</a>. In quel modulo, il processo GATK chiamato può accettare più file di input, ma ognuno deve essere preceduto da <code>-V</code> per formare una riga di comando corretta. Il processo usa lo scripting per trasformare una collezione di file di input (<code>all_gvcfs</code>) negli argomenti di comando corretti:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">command line manipulation for GATK</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-53-1">1</a></span>
 <span class="normal"><a href="#__codelineno-53-2">2</a></span>
 <span class="normal"><a href="#__codelineno-53-3">3</a></span>
@@ -6116,24 +6116,20 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 <span class="normal"><a href="#__codelineno-54-11">11</a></span>
 <span class="normal"><a href="#__codelineno-54-12">12</a></span>
 <span class="normal"><a href="#__codelineno-54-13">13</a></span>
-<span class="normal"><a href="#__codelineno-54-14">14</a></span>
-<span class="normal"><a href="#__codelineno-54-15">15</a></span>
-<span class="normal"><a href="#__codelineno-54-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a><span class="n">process</span><span class="w"> </span><span class="n">GENERATE_REPORT</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-54-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a><span class="n">process</span><span class="w"> </span><span class="n">GENERATE_REPORT</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-54-2" name="__codelineno-54-2"></a>
-<a id="__codelineno-54-3" name="__codelineno-54-3"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results/reports&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-54-4" name="__codelineno-54-4"></a>
-<a id="__codelineno-54-5" name="__codelineno-54-5"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-54-6" name="__codelineno-54-6"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">reads</span><span class="o">)</span>
-<a id="__codelineno-54-7" name="__codelineno-54-7"></a>
-<a id="__codelineno-54-8" name="__codelineno-54-8"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-54-9" name="__codelineno-54-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${meta.id}_report.txt&quot;</span>
-<a id="__codelineno-54-10" name="__codelineno-54-10"></a>
-<a id="__codelineno-54-11" name="__codelineno-54-11"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-54-12" name="__codelineno-54-12"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-54-13" name="__codelineno-54-13"></a><span class="s2">    echo &quot;Processing ${reads}&quot; &gt; ${meta.id}_report.txt</span>
-<a id="__codelineno-54-14" name="__codelineno-54-14"></a><span class="s2">    echo &quot;Sample: ${meta.id}&quot; &gt;&gt; ${meta.id}_report.txt</span>
-<a id="__codelineno-54-15" name="__codelineno-54-15"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-54-16" name="__codelineno-54-16"></a><span class="o">}</span>
+<a id="__codelineno-54-3" name="__codelineno-54-3"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-54-4" name="__codelineno-54-4"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">reads</span><span class="o">)</span>
+<a id="__codelineno-54-5" name="__codelineno-54-5"></a>
+<a id="__codelineno-54-6" name="__codelineno-54-6"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-54-7" name="__codelineno-54-7"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${meta.id}_report.txt&quot;</span>
+<a id="__codelineno-54-8" name="__codelineno-54-8"></a>
+<a id="__codelineno-54-9" name="__codelineno-54-9"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-54-10" name="__codelineno-54-10"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-54-11" name="__codelineno-54-11"></a><span class="s2">    echo &quot;Processing ${reads}&quot; &gt; ${meta.id}_report.txt</span>
+<a id="__codelineno-54-12" name="__codelineno-54-12"></a><span class="s2">    echo &quot;Sample: ${meta.id}&quot; &gt;&gt; ${meta.id}_report.txt</span>
+<a id="__codelineno-54-13" name="__codelineno-54-13"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-54-14" name="__codelineno-54-14"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Questo processo scrive un semplice report con l'ID campione e il nome del file. Ora eseguiamolo per vedere cosa succede quando dobbiamo mescolare diversi tipi di variabili.</p>
 <p>Includete il processo nel vostro <code>main.nf</code> e aggiungetelo al flusso di lavoro:</p>
@@ -6241,27 +6237,27 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 <a id="__codelineno-56-7" name="__codelineno-56-7"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">sample_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
 <a id="__codelineno-56-8" name="__codelineno-56-8"></a><span class="w">                </span><span class="nl">id:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">sample_id</span><span class="o">.</span><span class="na">toLowerCase</span><span class="o">(),</span>
 <a id="__codelineno-56-9" name="__codelineno-56-9"></a><span class="w">                </span><span class="nl">organism:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">organism</span><span class="o">,</span>
-<a id="__codelineno-56-10" name="__codelineno-56-10"></a><span class="hll"><span class="w">                </span><span class="nl">tissue:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">tissue_type</span><span class="o">.</span><span class="na">replaceAll</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="o">).</span><span class="na">toLowerCase</span><span class="o">(),</span>
-</span><a id="__codelineno-56-11" name="__codelineno-56-11"></a><span class="hll"><span class="w">                </span><span class="nl">depth:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">sequencing_depth</span><span class="o">.</span><span class="na">toInteger</span><span class="o">(),</span>
-</span><a id="__codelineno-56-12" name="__codelineno-56-12"></a><span class="hll"><span class="w">                </span><span class="nl">quality:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">quality_score</span><span class="o">.</span><span class="na">toDouble</span><span class="o">()</span>
-</span><a id="__codelineno-56-13" name="__codelineno-56-13"></a><span class="hll"><span class="w">            </span><span class="o">]</span>
-</span><a id="__codelineno-56-14" name="__codelineno-56-14"></a><span class="hll"><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">fastq_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">file_path</span><span class="o">)</span>
-</span><a id="__codelineno-56-15" name="__codelineno-56-15"></a><span class="hll">
-</span><a id="__codelineno-56-16" name="__codelineno-56-16"></a><span class="hll"><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="n">fastq_path</span><span class="o">.</span><span class="na">name</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="s">/^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/</span><span class="o">)</span>
-</span><a id="__codelineno-56-17" name="__codelineno-56-17"></a><span class="hll"><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">file_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">[</span>
-</span><a id="__codelineno-56-18" name="__codelineno-56-18"></a><span class="hll"><span class="w">                </span><span class="nl">sample_num:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">2</span><span class="o">].</span><span class="na">toInteger</span><span class="o">(),</span>
-</span><a id="__codelineno-56-19" name="__codelineno-56-19"></a><span class="hll"><span class="w">                </span><span class="nl">lane:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">3</span><span class="o">],</span>
-</span><a id="__codelineno-56-20" name="__codelineno-56-20"></a><span class="hll"><span class="w">                </span><span class="nl">read:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">4</span><span class="o">],</span>
-</span><a id="__codelineno-56-21" name="__codelineno-56-21"></a><span class="hll"><span class="w">                </span><span class="nl">chunk:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">5</span><span class="o">]</span>
-</span><a id="__codelineno-56-22" name="__codelineno-56-22"></a><span class="hll"><span class="w">            </span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">[:]</span>
-</span><a id="__codelineno-56-23" name="__codelineno-56-23"></a><span class="hll">
-</span><a id="__codelineno-56-24" name="__codelineno-56-24"></a><span class="hll"><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_meta</span><span class="o">.</span><span class="na">quality</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;high&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span>
-</span><a id="__codelineno-56-25" name="__codelineno-56-25"></a><span class="hll"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">tuple</span><span class="o">(</span><span class="n">sample_meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">file_meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">priority:</span><span class="w"> </span><span class="n">priority</span><span class="o">],</span><span class="w"> </span><span class="n">fastq_path</span><span class="o">)</span>
-</span><a id="__codelineno-56-26" name="__codelineno-56-26"></a><span class="hll"><span class="w">        </span><span class="o">}</span>
-</span><a id="__codelineno-56-27" name="__codelineno-56-27"></a><span class="hll">
-</span><a id="__codelineno-56-28" name="__codelineno-56-28"></a><span class="hll"><span class="w">    </span><span class="n">ch_fastp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FASTP</span><span class="o">(</span><span class="n">ch_samples</span><span class="o">)</span>
-</span><a id="__codelineno-56-29" name="__codelineno-56-29"></a><span class="hll"><span class="o">}</span>
-</span></code></pre></div></td></tr></table></div>
+<a id="__codelineno-56-10" name="__codelineno-56-10"></a><span class="w">                </span><span class="nl">tissue:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">tissue_type</span><span class="o">.</span><span class="na">replaceAll</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="o">).</span><span class="na">toLowerCase</span><span class="o">(),</span>
+<a id="__codelineno-56-11" name="__codelineno-56-11"></a><span class="w">                </span><span class="nl">depth:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">sequencing_depth</span><span class="o">.</span><span class="na">toInteger</span><span class="o">(),</span>
+<a id="__codelineno-56-12" name="__codelineno-56-12"></a><span class="w">                </span><span class="nl">quality:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">quality_score</span><span class="o">.</span><span class="na">toDouble</span><span class="o">()</span>
+<a id="__codelineno-56-13" name="__codelineno-56-13"></a><span class="w">            </span><span class="o">]</span>
+<a id="__codelineno-56-14" name="__codelineno-56-14"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">fastq_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">file_path</span><span class="o">)</span>
+<a id="__codelineno-56-15" name="__codelineno-56-15"></a>
+<a id="__codelineno-56-16" name="__codelineno-56-16"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="n">fastq_path</span><span class="o">.</span><span class="na">name</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="s">/^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/</span><span class="o">)</span>
+<a id="__codelineno-56-17" name="__codelineno-56-17"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">file_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">[</span>
+<a id="__codelineno-56-18" name="__codelineno-56-18"></a><span class="w">                </span><span class="nl">sample_num:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">2</span><span class="o">].</span><span class="na">toInteger</span><span class="o">(),</span>
+<a id="__codelineno-56-19" name="__codelineno-56-19"></a><span class="w">                </span><span class="nl">lane:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">3</span><span class="o">],</span>
+<a id="__codelineno-56-20" name="__codelineno-56-20"></a><span class="w">                </span><span class="nl">read:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">4</span><span class="o">],</span>
+<a id="__codelineno-56-21" name="__codelineno-56-21"></a><span class="w">                </span><span class="nl">chunk:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">5</span><span class="o">]</span>
+<a id="__codelineno-56-22" name="__codelineno-56-22"></a><span class="w">            </span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">[:]</span>
+<a id="__codelineno-56-23" name="__codelineno-56-23"></a>
+<a id="__codelineno-56-24" name="__codelineno-56-24"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_meta</span><span class="o">.</span><span class="na">quality</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;high&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span>
+<a id="__codelineno-56-25" name="__codelineno-56-25"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">tuple</span><span class="o">(</span><span class="n">sample_meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">file_meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">priority:</span><span class="w"> </span><span class="n">priority</span><span class="o">],</span><span class="w"> </span><span class="n">fastq_path</span><span class="o">)</span>
+<a id="__codelineno-56-26" name="__codelineno-56-26"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-56-27" name="__codelineno-56-27"></a>
+<a id="__codelineno-56-28" name="__codelineno-56-28"></a><span class="hll"><span class="w">    </span><span class="n">ch_fastp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FASTP</span><span class="o">(</span><span class="n">ch_samples</span><span class="o">)</span>
+</span><a id="__codelineno-56-29" name="__codelineno-56-29"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
@@ -6308,7 +6304,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 </div>
 </div>
 </div>
-<p>Se eseguite questo, noterete un errore - Nextflow cerca di interpretare <code>${USER}</code> come una variabile Nextflow che non esiste.</p>
+<p>Se eseguite questo, noterete un errore - Nextflow cerca di interpretare <code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">USER</span><span class="o">}</span></code> come una variabile Nextflow che non esiste.</p>
 <details class="failure">
 <summary>Output del comando</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">Error modules/generate_report.nf:15:27: `USER` is not defined</span>
@@ -6367,9 +6363,9 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 <li><strong>Espressioni regolari per l'analisi dei file</strong>: Usare l'operatore <code>=~</code> e i pattern regex (<code>~/pattern/</code>) per estrarre metadati da convenzioni di denominazione di file complesse</li>
 <li><strong>Generazione dinamica di script</strong>: Usare logica condizionale (if/else, operatori ternari) per generare diverse stringhe di script in base alle caratteristiche dell'input</li>
 <li><strong>Interpolazione di variabili</strong>: Capire quando Nextflow interpreta le stringhe rispetto a quando lo fa la shell</li>
-<li><code>${var}</code> - Variabili Nextflow (interpolate da Nextflow al momento della compilazione del flusso di lavoro)</li>
-<li><code>\${var}</code> - Variabili d'ambiente shell (con escape, passate a bash a runtime)</li>
-<li><code>\$(cmd)</code> - Sostituzione di comandi shell (con escape, eseguita da bash a runtime)</li>
+<li><code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">var</span><span class="o">}</span></code> - Variabili Nextflow (interpolate da Nextflow al momento della compilazione del flusso di lavoro)</li>
+<li><code class="highlight"><span class="err">\</span><span class="n">$</span><span class="o">{</span><span class="n">var</span><span class="o">}</span></code> - Variabili d'ambiente shell (con escape, passate a bash a runtime)</li>
+<li><code class="highlight"><span class="err">\</span><span class="n">$</span><span class="o">(</span><span class="n">cmd</span><span class="o">)</span></code> - Sostituzione di comandi shell (con escape, eseguita da bash a runtime)</li>
 </ul>
 <p>Questi pattern di elaborazione e generazione di stringhe sono essenziali per gestire i diversi formati di file e le convenzioni di denominazione che incontrerete nei flussi di lavoro bioinformatici del mondo reale.</p>
 <hr />
@@ -6527,7 +6523,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>
 <a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a><span class="go">Launching `main.nf` [admiring_panini] DSL2 - revision: 8cc832e32f</span>
 <a id="__codelineno-67-4" name="__codelineno-67-4" href="#__codelineno-67-4"></a>
@@ -6585,7 +6581,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 </div>
 </div>
 </div>
-<p>La closure <code>{ meta.depth &gt; 40000000 ? 2 : 1 }</code> usa l'<strong>operatore ternario</strong> (trattato nella Sezione 1.1) e viene valutata per ogni attività, consentendo l'allocazione delle risorse per campione. I campioni ad alta profondità (&gt;40M letture) ottengono 2 CPU, mentre gli altri ottengono 1 CPU.</p>
+<p>La closure <code class="highlight"><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">}</span></code> usa l'<strong>operatore ternario</strong> (trattato nella Sezione 1.1) e viene valutata per ogni attività, consentendo l'allocazione delle risorse per campione. I campioni ad alta profondità (&gt;40M letture) ottengono 2 CPU, mentre gli altri ottengono 1 CPU.</p>
 <div class="admonition note">
 <p class="admonition-title">Nota: Accesso alle Variabili di Input nelle Direttive</p>
 <p>La closure può accedere a qualsiasi variabile di input (come <code>meta</code> qui) perché Nextflow valuta queste closure nel contesto dell'esecuzione di ogni attività.</p>
@@ -6595,7 +6591,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a><span class="go">N E X T F L O W  ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a><span class="go">N E X T F L O W  ~  version 25.10.4</span>
 <a id="__codelineno-71-2" name="__codelineno-71-2" href="#__codelineno-71-2"></a><span class="go">Launching `main.nf` [fervent_albattani] DSL2 - revision: fa8f249759</span>
 <a id="__codelineno-71-3" name="__codelineno-71-3" href="#__codelineno-71-3"></a><span class="go">[bd/ff3d41] Submitted process &gt; FASTP (2)</span>
 <a id="__codelineno-71-4" name="__codelineno-71-4" href="#__codelineno-71-4"></a><span class="go">[a4/a3aab2] Submitted process &gt; FASTP (1)</span>
@@ -6609,7 +6605,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 <div class="highlight"><span class="filename">Check docker command</span><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="go">cat work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.run | grep &quot;docker run&quot;</span>
 </code></pre></div>
 <p>Dovreste vedere qualcosa come:</p>
-<div class="highlight"><span class="filename">docker command</span><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a><span class="w">    </span>docker<span class="w"> </span>run<span class="w"> </span>-i<span class="w"> </span>--cpu-shares<span class="w"> </span><span class="m">4096</span><span class="w"> </span>--memory<span class="w"> </span>2048m<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;NXF_TASK_WORKDIR&quot;</span><span class="w"> </span>-v<span class="w"> </span>/workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$NXF_TASK_WORKDIR</span><span class="s2">&quot;</span><span class="w"> </span>--name<span class="w"> </span><span class="nv">$NXF_BOXID</span><span class="w"> </span>community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690<span class="w"> </span>/bin/bash<span class="w"> </span>-ue<span class="w"> </span>/workspaces/training/side-quests/essential_scripting_patterns/work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.sh
+<div class="highlight"><span class="filename">docker command</span><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a><span class="w">    </span>docker<span class="w"> </span>run<span class="w"> </span>-i<span class="w"> </span>--cpu-shares<span class="w"> </span><span class="m">2048</span><span class="w"> </span>--memory<span class="w"> </span>2048m<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;NXF_TASK_WORKDIR&quot;</span><span class="w"> </span>-v<span class="w"> </span>/workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$NXF_TASK_WORKDIR</span><span class="s2">&quot;</span><span class="w"> </span>--name<span class="w"> </span><span class="nv">$NXF_BOXID</span><span class="w"> </span>community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690<span class="w"> </span>/bin/bash<span class="w"> </span>-ue<span class="w"> </span>/workspaces/training/side-quests/essential_scripting_patterns/work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.sh
 </code></pre></div>
 <p>In questo esempio abbiamo scelto un esempio che ha richiesto 2 CPU (<code>--cpu-shares 2048</code>), perché era un campione ad alta profondità, ma dovreste vedere diverse allocazioni di CPU a seconda della profondità del campione. Provate anche per le altre attività.</p>
 <h3 id="42-strategie-di-retry">4.2. Strategie di retry<a class="headerlink" href="#42-strategie-di-retry" title="Permanent link">&para;</a></h3>
@@ -6627,7 +6623,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 <span class="normal"><a href="#__codelineno-74-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-74-1" name="__codelineno-74-1"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTP</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-74-2" name="__codelineno-74-2"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690&#39;</span>
 <a id="__codelineno-74-3" name="__codelineno-74-3"></a>
-<a id="__codelineno-74-4" name="__codelineno-74-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-74-4" name="__codelineno-74-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-74-5" name="__codelineno-74-5"></a><span class="hll"><span class="w">    </span><span class="n">memory</span><span class="w"> </span><span class="mi">1</span><span class="o">.</span><span class="na">GB</span>
 </span><a id="__codelineno-74-6" name="__codelineno-74-6"></a>
 <a id="__codelineno-74-7" name="__codelineno-74-7"></a><span class="w">    </span><span class="nl">input:</span>
@@ -6645,7 +6641,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 <span class="normal"><a href="#__codelineno-75-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTP</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-75-2" name="__codelineno-75-2"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690&#39;</span>
 <a id="__codelineno-75-3" name="__codelineno-75-3"></a>
-<a id="__codelineno-75-4" name="__codelineno-75-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-75-4" name="__codelineno-75-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-75-5" name="__codelineno-75-5"></a><span class="hll"><span class="w">    </span><span class="n">memory</span><span class="w"> </span><span class="mi">2</span><span class="o">.</span><span class="na">GB</span>
 </span><a id="__codelineno-75-6" name="__codelineno-75-6"></a>
 <a id="__codelineno-75-7" name="__codelineno-75-7"></a><span class="w">    </span><span class="nl">input:</span>
@@ -6669,7 +6665,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 <a id="__codelineno-77-8" name="__codelineno-77-8" href="#__codelineno-77-8"></a><span class="go">  Detecting adapter sequence for read1...</span>
 <a id="__codelineno-77-9" name="__codelineno-77-9" href="#__codelineno-77-9"></a><span class="go">  No adapter detected for read1</span>
 <a id="__codelineno-77-10" name="__codelineno-77-10" href="#__codelineno-77-10"></a>
-<a id="__codelineno-77-11" name="__codelineno-77-11" href="#__codelineno-77-11"></a><span class="hll"><span class="go">  .command.sh: line 7:   101 Killed                  fastp --in1 SAMPLE_002_S2_L001_R1_001.fastq --out1 sample_002_trimmed.fastq.gz --json sample_002.fastp.json --html sample_002.fastp.html --thread 2</span>
+<a id="__codelineno-77-11" name="__codelineno-77-11" href="#__codelineno-77-11"></a><span class="hll"><span class="go">  .command.sh: line 7:   101 Killed                  fastp --in1 SAMPLE_002_S2_L001_R1_001.fastq --out1 sample_002_trimmed.fastq.gz --json sample_002.fastp.json --html sample_002.fastp.html --thread 1</span>
 </span></code></pre></div>
 </details>
 <p>Questo indica che il processo è stato terminato per aver superato i limiti di memoria.</p>
@@ -6690,7 +6686,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 <span class="normal"><a href="#__codelineno-78-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTP</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-78-2" name="__codelineno-78-2"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690&#39;</span>
 <a id="__codelineno-78-3" name="__codelineno-78-3"></a>
-<a id="__codelineno-78-4" name="__codelineno-78-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-78-4" name="__codelineno-78-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-78-5" name="__codelineno-78-5"></a><span class="hll"><span class="w">    </span><span class="n">memory</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="mi">1</span><span class="o">.</span><span class="na">GB</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">attempt</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-78-6" name="__codelineno-78-6"></a><span class="hll"><span class="w">    </span><span class="n">errorStrategy</span><span class="w"> </span><span class="s1">&#39;retry&#39;</span>
 </span><a id="__codelineno-78-7" name="__codelineno-78-7"></a><span class="hll"><span class="w">    </span><span class="n">maxRetries</span><span class="w"> </span><span class="mi">2</span>
@@ -6710,7 +6706,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 <span class="normal"><a href="#__codelineno-79-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTP</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-79-2" name="__codelineno-79-2"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690&#39;</span>
 <a id="__codelineno-79-3" name="__codelineno-79-3"></a>
-<a id="__codelineno-79-4" name="__codelineno-79-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-79-4" name="__codelineno-79-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-79-5" name="__codelineno-79-5"></a><span class="hll"><span class="w">    </span><span class="n">memory</span><span class="w"> </span><span class="mi">2</span><span class="o">.</span><span class="na">GB</span>
 </span><a id="__codelineno-79-6" name="__codelineno-79-6"></a>
 <a id="__codelineno-79-7" name="__codelineno-79-7"></a><span class="w">    </span><span class="nl">input:</span>
@@ -6808,7 +6804,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-85-2" name="__codelineno-85-2" href="#__codelineno-85-2"></a>
 <a id="__codelineno-85-3" name="__codelineno-85-3" href="#__codelineno-85-3"></a><span class="go">Launching `main.nf` [adoring_galileo] DSL2 - revision: c9e83aaef1</span>
 <a id="__codelineno-85-4" name="__codelineno-85-4" href="#__codelineno-85-4"></a>
@@ -6889,7 +6885,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a><span class="go">N E X T F L O W  ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a><span class="go">N E X T F L O W  ~  version 25.10.4</span>
 <a id="__codelineno-89-2" name="__codelineno-89-2" href="#__codelineno-89-2"></a><span class="go">Launching `main.nf` [lonely_williams] DSL2 - revision: d0b3f121ec</span>
 <a id="__codelineno-89-3" name="__codelineno-89-3" href="#__codelineno-89-3"></a><span class="go">[94/b48eac] Submitted process &gt; FASTP (2)</span>
 <a id="__codelineno-89-4" name="__codelineno-89-4" href="#__codelineno-89-4"></a><span class="go">[2c/d2b28f] Submitted process &gt; GENERATE_REPORT (2)</span>
@@ -6972,7 +6968,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 </code></pre></div>
 <details class="failure">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-94-2" name="__codelineno-94-2" href="#__codelineno-94-2"></a>
 <a id="__codelineno-94-3" name="__codelineno-94-3" href="#__codelineno-94-3"></a><span class="go">Launching `main.nf` [trusting_torvalds] DSL2 - revision: b56fbfbce2</span>
 <a id="__codelineno-94-4" name="__codelineno-94-4" href="#__codelineno-94-4"></a>
@@ -7180,9 +7176,9 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 </span><a id="__codelineno-105-13" name="__codelineno-105-13"></a><span class="hll"><span class="w">        </span><span class="n">error</span><span class="o">(</span><span class="s2">&quot;Input CSV file not found: ${params.input}&quot;</span><span class="o">)</span>
 </span><a id="__codelineno-105-14" name="__codelineno-105-14"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span><a id="__codelineno-105-15" name="__codelineno-105-15"></a><span class="hll"><span class="o">}</span>
-</span><a id="__codelineno-105-16" name="__codelineno-105-16"></a><span class="hll"><span class="o">...</span>
-</span><a id="__codelineno-105-17" name="__codelineno-105-17"></a><span class="hll"><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-105-18" name="__codelineno-105-18"></a><span class="hll"><span class="w">    </span><span class="n">validateInputs</span><span class="o">()</span>
+</span><a id="__codelineno-105-16" name="__codelineno-105-16"></a><span class="o">...</span>
+<a id="__codelineno-105-17" name="__codelineno-105-17"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-105-18" name="__codelineno-105-18"></a><span class="hll"><span class="w">    </span><span class="n">validateInputs</span><span class="o">()</span>
 </span><a id="__codelineno-105-19" name="__codelineno-105-19"></a><span class="hll"><span class="w">    </span><span class="n">ch_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
@@ -7209,7 +7205,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 </code></pre></div>
 <details class="failure">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-108-1" name="__codelineno-108-1" href="#__codelineno-108-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-108-1" name="__codelineno-108-1" href="#__codelineno-108-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-108-2" name="__codelineno-108-2" href="#__codelineno-108-2"></a>
 <a id="__codelineno-108-3" name="__codelineno-108-3" href="#__codelineno-108-3"></a><span class="go">Launching `main.nf` [confident_coulomb] DSL2 - revision: 07059399ed</span>
 <a id="__codelineno-108-4" name="__codelineno-108-4" href="#__codelineno-108-4"></a>
@@ -7223,7 +7219,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 </code></pre></div>
 <details class="failure">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-110-1" name="__codelineno-110-1" href="#__codelineno-110-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-110-1" name="__codelineno-110-1" href="#__codelineno-110-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-110-2" name="__codelineno-110-2" href="#__codelineno-110-2"></a>
 <a id="__codelineno-110-3" name="__codelineno-110-3" href="#__codelineno-110-3"></a><span class="go">Launching `main.nf` [cranky_gates] DSL2 - revision: 26839ae3eb</span>
 <a id="__codelineno-110-4" name="__codelineno-110-4" href="#__codelineno-110-4"></a>
@@ -7279,7 +7275,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 </code></pre></div>
 <details class="warning">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-116-1" name="__codelineno-116-1" href="#__codelineno-116-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-116-1" name="__codelineno-116-1" href="#__codelineno-116-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-116-2" name="__codelineno-116-2" href="#__codelineno-116-2"></a>
 <a id="__codelineno-116-3" name="__codelineno-116-3" href="#__codelineno-116-3"></a><span class="go">Launching `main.nf` [awesome_goldwasser] DSL2 - revision: a31662a7c1</span>
 <a id="__codelineno-116-4" name="__codelineno-116-4" href="#__codelineno-116-4"></a>
@@ -7360,7 +7356,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-120-1" name="__codelineno-120-1" href="#__codelineno-120-1"></a><span class="go">N E X T F L O W  ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-120-1" name="__codelineno-120-1" href="#__codelineno-120-1"></a><span class="go">N E X T F L O W  ~  version 25.10.4</span>
 <a id="__codelineno-120-2" name="__codelineno-120-2" href="#__codelineno-120-2"></a><span class="go">Launching `main.nf` [marvelous_boltzmann] DSL2 - revision: a31662a7c1</span>
 <a id="__codelineno-120-3" name="__codelineno-120-3" href="#__codelineno-120-3"></a><span class="go">WARN: Low sequencing depth for sample_002: 25000000</span>
 <a id="__codelineno-120-4" name="__codelineno-120-4" href="#__codelineno-120-4"></a><span class="go">[9b/d48e40] Submitted process &gt; FASTP (2)</span>
@@ -7470,7 +7466,7 @@ Inizieremo con i concetti fondamentali e arriveremo ai pattern avanzati.</p>
 
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-123-1" name="__codelineno-123-1" href="#__codelineno-123-1"></a><span class="go">N E X T F L O W  ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-123-1" name="__codelineno-123-1" href="#__codelineno-123-1"></a><span class="go">N E X T F L O W  ~  version 25.10.4</span>
 <a id="__codelineno-123-2" name="__codelineno-123-2" href="#__codelineno-123-2"></a><span class="go">Launching `main.nf` [boring_linnaeus] DSL2 - revision: a31662a7c1</span>
 <a id="__codelineno-123-3" name="__codelineno-123-3" href="#__codelineno-123-3"></a><span class="go">WARN: Low sequencing depth for sample_002: 25000000</span>
 <a id="__codelineno-123-4" name="__codelineno-123-4" href="#__codelineno-123-4"></a><span class="go">[e5/242efc] Submitted process &gt; FASTP (2)</span>

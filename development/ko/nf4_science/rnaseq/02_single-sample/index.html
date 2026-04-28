@@ -2346,7 +2346,7 @@
   <a href="#323" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2.3. 정렬 프로세스 호출
+        3.2.3. 정렬 프로세스 실행
       
     </span>
   </a>
@@ -3096,7 +3096,7 @@
   <span class="md-ellipsis">
     
   
-    오리엔테이션
+    시작하기
   
 
     
@@ -3152,7 +3152,7 @@
   <span class="md-ellipsis">
     
   
-    필수 Nextflow 스크립팅 패턴
+    필수 스크립팅 패턴
   
 
     
@@ -3292,7 +3292,7 @@
   <span class="md-ellipsis">
     
   
-    워크플로우 디버깅
+    워크플로우 문제 해결
   
 
     
@@ -4514,7 +4514,7 @@
   <a href="#323" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2.3. 정렬 프로세스 호출
+        3.2.3. 정렬 프로세스 실행
       
     </span>
   </a>
@@ -5348,7 +5348,7 @@
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `rnaseq.nf` [mad_lorenz] DSL2 - revision: 5846a164d2</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
@@ -5665,7 +5665,7 @@
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>
 <a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="go">Launching `rnaseq.nf` [gloomy_becquerel] DSL2 - revision: bb11055736</span>
 <a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>
@@ -5774,7 +5774,7 @@
 </div>
 <p>매개변수가 준비되었습니다. 이제 정렬 프로세스를 생성할 수 있습니다.</p>
 <h3 id="32">3.2. 정렬 프로세스 작성 및 워크플로우에서 호출<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
-<p>이전과 마찬가지로 프로세스 정의를 채우고, 모듈을 가져오고, 프로세스 호출을 추가해야 합니다.</p>
+<p>이전과 마찬가지로 프로세스 정의를 채우고, 모듈을 가져오고, 프로세스 실행을 추가해야 합니다.</p>
 <h4 id="321">3.2.1. 정렬 프로세스용 모듈 채우기<a class="headerlink" href="#321" title="Permanent link">&para;</a></h4>
 <p><code>modules/hisat2_align.nf</code>를 열고 프로세스 정의의 개요를 살펴보세요.</p>
 <p>위에 제공된 정보를 사용하여 직접 프로세스 정의를 채운 다음, 아래 "후" 탭의 솔루션과 비교하여 작업을 확인하세요.</p>
@@ -5899,8 +5899,8 @@ script 블록은 먼저 아카이브에서 인덱스를 추출한 다음, HISAT2
 </div>
 </div>
 </div>
-<p>다음으로 워크플로우에 프로세스 호출을 추가합니다.</p>
-<h4 id="323">3.2.3. 정렬 프로세스 호출<a class="headerlink" href="#323" title="Permanent link">&para;</a></h4>
+<p>다음으로 워크플로우에 프로세스 실행을 추가합니다.</p>
+<h4 id="323">3.2.3. 정렬 프로세스 실행<a class="headerlink" href="#323" title="Permanent link">&para;</a></h4>
 <p>트리밍된 리드는 이전 단계에서 출력된 <code>TRIM_GALORE.out.trimmed_reads</code> 채널에 있습니다.
 <code class="highlight"><span class="n">file</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">hisat2_index_zip</span><span class="o">)</span></code>를 사용하여 게놈 인덱스 아카이브를 제공합니다.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="18:2"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">후</label><label for="__tabbed_18_2">전</label></div>
@@ -6104,7 +6104,7 @@ script 블록은 먼저 아카이브에서 인덱스를 추출한 다음, HISAT2
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a>
 <a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a><span class="go">Launching `rnaseq.nf` [elated_stonebraker] DSL2 - revision: e8e57d0cdd</span>
 <a id="__codelineno-57-4" name="__codelineno-57-4" href="#__codelineno-57-4"></a>

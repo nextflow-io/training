@@ -2962,7 +2962,7 @@
   <span class="md-ellipsis">
     
   
-    अभिविन्यास
+    शुरू करना
   
 
     
@@ -3018,7 +3018,7 @@
   <span class="md-ellipsis">
     
   
-    आवश्यक Nextflow स्क्रिप्टिंग पैटर्न
+    आवश्यक स्क्रिप्टिंग पैटर्न
   
 
     
@@ -3158,7 +3158,7 @@
   <span class="md-ellipsis">
     
   
-    वर्कफ़्लो डीबगिंग
+    वर्कफ़्लो की समस्या निवारण
   
 
     
@@ -4577,7 +4577,7 @@ Typically, तुम्हें इन tools को install करना हो
 जैसा तुम imagine कर सकते हो, यह तुम्हारी pipelines को अधिक reproducible बनाने में बहुत helpful होगा।</p>
 <p>Note करो कि हम यह <a href="https://www.docker.com/get-started/">Docker</a> का उपयोग करके teach करेंगे, लेकिन ध्यान रखो कि Nextflow <a href="https://nextflow.io/docs/latest/container.html">कई अन्य container technologies</a> को भी support करता है।</p>
 <details class="info">
-<summary>इस section से कैसे शुरू करें</summary>
+<summary>इस खंड से कैसे शुरू करें</summary>
 <p>Course का यह section मानता है कि तुमने <a href="../">Hello Nextflow</a> course के Parts 1-4 complete कर लिए हैं और एक complete working pipeline है।</p>
 <p>यदि तुम इस point से course शुरू कर रहे हो, तो तुम्हें solutions से <code>modules</code> directory copy करनी होगी:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cp<span class="w"> </span>-r<span class="w"> </span>solutions/4-hello-modules/modules<span class="w"> </span>.
@@ -4628,7 +4628,7 @@ Typically, तुम्हें इन tools को install करना हो
 </code></pre></div>
 <details class="success">
 <summary>कमांड आउटपुट</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">Launching `hello-containers.nf` [nice_escher] DSL2 - revision: d5dfdc9872</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
@@ -4640,16 +4640,16 @@ Typically, तुम्हें इन tools को install करना हो
 </details>
 <p>पहले की तरह, तुम्हें output files <code>output</code> block में specified directory (<code>results/hello_containers/</code>) में मिलेंगी।</p>
 <details class="abstract">
-<summary>डायरेक्टरी contents</summary>
+<summary>डायरेक्टरी सामग्री</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">results/hello_containers/</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">├── Bonjour-output.txt</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">├── COLLECTED-batch-output.txt</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">├── Hello-output.txt</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">├── Holà-output.txt</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">├── Hola-output.txt</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">├── batch-report.txt</span>
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="go">├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="go">└── UPPER-Holà-output.txt</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="go">└── UPPER-Hola-output.txt</span>
 </code></pre></div>
 </details>
 <p>यदि यह तुम्हारे लिए काम किया, तो तुम containers use करना सीखने के लिए ready हो।</p>
@@ -4665,7 +4665,7 @@ Typically, तुम्हें इन tools को install करना हो
 <p><code>docker pull</code> part container system को instruction है कि repository से container image pull करे।</p>
 <p><code>'&lt;container&gt;'</code> part container image का URI address है।</p>
 <p>एक example के रूप में, चलो एक container image pull करते हैं जिसमें <a href="https://github.com/jeffbuttars/cowpy">cowpy</a> है, <code>cowsay</code> नामक tool का python implementation जो arbitrary text inputs को fun तरीके से display करने के लिए ASCII art generate करता है।</p>
-<div class="highlight"><span class="filename">उदाहरण</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a> ________________________
+<div class="highlight"><span class="filename">Example</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a> ________________________
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>&lt; Are we having fun yet? &gt;
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a> ------------------------
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    \                                  ___-------___
@@ -4783,7 +4783,7 @@ Example के लिए, tool documentation कहता है कि हम <
 <p>अब output default cow के बजाय Linux penguin, Tux, दिखाता है, क्योंकि हमने <code>-c tux</code> parameter specify किया।</p>
 <p>क्योंकि तुम container के अंदर हो, तुम <code>cowpy</code> command जितनी बार चाहो उतनी बार run कर सकते हो, input parameters vary करते हुए, बिना Docker commands की परेशानी के।</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">सुझाव</p>
 <p>एक different character pick करने के लिए '-c' flag use करो, जिनमें शामिल हैं:
 <code>beavis</code>, <code>cheese</code>, <code>daemon</code>, <code>dragonandcow</code>, <code>ghostbusters</code>, <code>kitty</code>, <code>moose</code>, <code>milk</code>, <code>stegosaurus</code>, <code>turkey</code>, <code>turtle</code>, <code>tux</code></p>
 </div>
@@ -4826,7 +4826,7 @@ Example के लिए, tool documentation कहता है कि हम <
 <div class="highlight"><span class="filename">data/greetings.csv</span><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go"> ____________________</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="go">/ Hello,English,123  \</span>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">| Bonjour,French,456 |</span>
-<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="go">\ Holà,Spanish,789   /</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="go">\ Hola,Spanish,789   /</span>
 <a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="go">--------------------</span>
 <a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="go">  \                                  ,+*^^*+___+++_</span>
 <a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="go">  \                           ,*^^^^              )</span>
@@ -5201,12 +5201,12 @@ Example के लिए, tool documentation कहता है कि हम <
 
 <p>क्या तुम्हें लगता है यह काम करने वाला है?</p>
 <p>चलो पिछली published outputs delete करते हैं clean slate के लिए, और workflow को <code>-resume</code> flag के साथ run करते हैं।</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>rm<span class="w"> </span>-r<span class="w"> </span>hello_containers/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>rm<span class="w"> </span>-r<span class="w"> </span>results/hello_containers/
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-containers.nf<span class="w"> </span>-resume
 </code></pre></div>
 <details class="failure">
-<summary>कमांड आउटपुट (clarity के लिए edited)</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<summary>कमांड आउटपुट (स्पष्टता के लिए संपादित)</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>
 <a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="go">Launching `hello-containers.nf` [lonely_woese] DSL2 - revision: abf1dccf7f</span>
 <a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>
@@ -5342,7 +5342,7 @@ Example के लिए, tool documentation कहता है कि हम <
 </div>
 </div>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">सुझाव</p>
 <p>Command-line से, per-run basis पर, <code>-with-docker &lt;container&gt;</code> parameter use करके Docker execution enable करना possible है।
 हालाँकि, वह हमें केवल entire workflow के लिए एक container specify करने देता है, जबकि हमने अभी जो approach दिखाया वह हमें per process different container specify करने देता है।
 यह modularity, code maintenance और reproducibility के लिए better है।</p>
@@ -5353,7 +5353,7 @@ Example के लिए, tool documentation कहता है कि हम <
 </code></pre></div>
 <details class="success">
 <summary>कमांड आउटपुट</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>
 <a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="go">Launching `hello-containers.nf` [drunk_perlman] DSL2 - revision: abf1dccf7f</span>
 <a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a>
@@ -5367,25 +5367,25 @@ Example के लिए, tool documentation कहता है कि हम <
 <p>इस बार यह indeed काम करता है!
 Usual की तरह तुम corresponding results directory में workflow outputs पा सकते हो, हालाँकि इस बार वे थोड़ी अधिक neatly organized हैं, केवल report और final output top level पर, और सभी intermediate files एक subdirectory में out of the way shove किए गए।</p>
 <details class="abstract">
-<summary>डायरेक्टरी contents</summary>
+<summary>डायरेक्टरी सामग्री</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="go">results/hello_containers/</span>
 <a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a><span class="go">├── cowpy-COLLECTED-batch-output.txt</span>
 <a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="go">├── intermediates</span>
 <a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a><span class="go">│   ├── Bonjour-output.txt</span>
 <a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a><span class="go">│   ├── COLLECTED-batch-output.txt</span>
 <a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a><span class="go">│   ├── Hello-output.txt</span>
-<a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a><span class="go">│   ├── Holà-output.txt</span>
+<a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a><span class="go">│   ├── Hola-output.txt</span>
 <a id="__codelineno-45-8" name="__codelineno-45-8" href="#__codelineno-45-8"></a><span class="go">│   ├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-45-9" name="__codelineno-45-9" href="#__codelineno-45-9"></a><span class="go">│   ├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-45-10" name="__codelineno-45-10" href="#__codelineno-45-10"></a><span class="go">│   └── UPPER-Holà-output.txt</span>
+<a id="__codelineno-45-10" name="__codelineno-45-10" href="#__codelineno-45-10"></a><span class="go">│   └── UPPER-Hola-output.txt</span>
 <a id="__codelineno-45-11" name="__codelineno-45-11" href="#__codelineno-45-11"></a><span class="go">└── batch-report.txt</span>
 </code></pre></div>
 </details>
 <p>Final ASCII art output <code>results/hello_containers/</code> directory में है, <code>cowpy-COLLECTED-batch-output.txt</code> नाम के under।</p>
 <details class="abstract">
-<summary>फ़ाइल contents</summary>
+<summary>फ़ाइल सामग्री</summary>
 <div class="highlight"><span class="filename">results/hello_containers/cowpy-COLLECTED-batch-output.txt</span><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">_________</span>
-<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="go">/ HOLà    \</span>
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="go">/ HOLA    \</span>
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="go">| HELLO   |</span>
 <a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a><span class="go">\ BONJOUR /</span>
 <a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a><span class="go">---------</span>
@@ -5420,7 +5420,7 @@ Usual की तरह तुम corresponding results directory में workf
 यह निम्नलिखित truncated directory path से correspond करती है: <code>work/98/656c6c</code>।</p>
 <p>उस directory में, तुम्हें <code>.command.run</code> file मिलेगी जिसमें सभी commands हैं जो Nextflow ने pipeline execute करने के course में तुम्हारी behalf पर run कीं।</p>
 <details class="abstract">
-<summary>फ़ाइल contents</summary>
+<summary>फ़ाइल सामग्री</summary>
 <div class="highlight"><span class="filename">work/98/656c6c90cce1667c094d880f4b6dcc/.command.run</span><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="gp">#</span>!/bin/bash
 <a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="gp">#</span><span class="c1">## ---</span>
 <a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a><span class="gp">#</span><span class="c1">## name: &#39;cowpy&#39;</span>
@@ -5663,7 +5663,7 @@ Container image और container instance में क्या difference ह�
 - [x] Host system से container में volume mount करता है
 - [ ] Container का version specify करता है
 
-और जानें: [1.3.4. Container में data mount करें](#134-container-में-data-mount-करें)
+और जानें: [1.3.4. Container में data mount करें](#134-mount-data-into-the-container)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
@@ -5677,7 +5677,7 @@ Container image और container instance में क्या difference ह�
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>और जानें: <a href="#134-container-में-data-mount-करें">1.3.4. Container में data mount करें</a></p></section>
+    <section class="content hidden"><p>और जानें: <a href="#134-mount-data-into-the-container">1.3.4. Container में data mount करें</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5688,7 +5688,7 @@ Containers use करते समय volumes mount करने की need क
 - [x] क्योंकि containers default रूप से host filesystem से isolated हैं
 - [ ] Networking enable करने के लिए
 
-और जानें: [1.3.4. Container में data mount करें](#134-container-में-data-mount-करें)
+और जानें: [1.3.4. Container में data mount करें](#134-mount-data-into-the-container)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
@@ -5702,7 +5702,7 @@ Containers use करते समय volumes mount करने की need क
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>और जानें: <a href="#134-container-में-data-mount-करें">1.3.4. Container में data mount करें</a></p></section>
+    <section class="content hidden"><p>और जानें: <a href="#134-mount-data-into-the-container">1.3.4. Container में data mount करें</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5713,7 +5713,7 @@ Nextflow process के लिए container कैसे specify करते �
 - [x] `container 'container-uri'`
 - [ ] `use 'container-uri'`
 
-और जानें: [2.3.1. `cowpy` के लिए container specify करें](#231-cowpy-के-लिए-container-specify-करें)
+और जानें: [2.3.1. `cowpy` के लिए container specify करें](#231-specify-a-container-for-cowpy)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
@@ -5727,7 +5727,7 @@ Nextflow process के लिए container कैसे specify करते �
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>और जानें: <a href="#231-cowpy-के-लिए-container-specify-करें">2.3.1. <code>cowpy</code> के लिए container specify करें</a></p></section>
+    <section class="content hidden"><p>और जानें: <a href="#231-specify-a-container-for-cowpy">2.3.1. <code>cowpy</code> के लिए container specify करें</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5738,7 +5738,7 @@ Nextflow process के लिए container कैसे specify करते �
 - [ ] `#!groovy container.engine = 'docker'`
 - [ ] `#!groovy docker.activate = true`
 
-और जानें: [2.3.2. `nextflow.config` file के माध्यम से Docker use enable करें](#232-nextflowconfig-file-के-माध्यम-से-docker-use-enable-करें)
+और जानें: [2.3.2. `nextflow.config` file के माध्यम से Docker use enable करें](#232-enable-use-of-docker-via-the-nextflowconfig-file)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
@@ -5752,7 +5752,7 @@ Nextflow process के लिए container कैसे specify करते �
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>और जानें: <a href="#232-nextflowconfig-file-के-माध्यम-से-docker-use-enable-करें">2.3.2. <code>nextflow.config</code> file के माध्यम से Docker use enable करें</a></p></section>
+    <section class="content hidden"><p>और जानें: <a href="#232-enable-use-of-docker-via-the-nextflowconfig-file">2.3.2. <code>nextflow.config</code> file के माध्यम से Docker use enable करें</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5763,7 +5763,7 @@ Container में process run करते समय Nextflow automatically �
 - [x] Container के अंदर process script run करना
 - [x] Execution के बाद container instance clean up करना
 
-और जानें: [2.3.4. Inspect करें कि Nextflow ने containerized task कैसे launch की](#234-inspect-करें-कि-nextflow-ने-containerized-task-कैसे-launch-की)
+और जानें: [2.3.4. Inspect करें कि Nextflow ने containerized task कैसे launch की](#234-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -5777,7 +5777,7 @@ Container में process run करते समय Nextflow automatically �
         <div class="quiz-feedback hidden"></div>
         <button type="submit" class="quiz-button">जमा करें</button>
     </form>
-    <section class="content hidden"><p>और जानें: <a href="#234-inspect-करें-कि-nextflow-ने-containerized-task-कैसे-launch-की">2.3.4. Inspect करें कि Nextflow ने containerized task कैसे launch की</a></p></section>
+    <section class="content hidden"><p>और जानें: <a href="#234-inspect-how-nextflow-launched-the-containerized-task">2.3.4. Inspect करें कि Nextflow ने containerized task कैसे launch की</a></p></section>
 </div><div id="quiz-progress-sidebar" aria-label="क्विज़ प्रगति" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">

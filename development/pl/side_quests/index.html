@@ -157,7 +157,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#side-quests" class="md-skip">
+        <a href="#side-questscourse" class="md-skip">
           Przejdź do treści
         </a>
       
@@ -2369,16 +2369,19 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#wymagania-wstepne" class="md-nav__link">
+  <a href="#przeglad-kursu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Wymagania wstępne
+        Przegląd kursu
       
     </span>
   </a>
   
-</li>  <li class="md-nav__item">
-  <a href="#side-quests_1" class="md-nav__link">
+    <nav class="md-nav" aria-label="Przegląd kursu">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#side-quests" class="md-nav__link">
     <span class="md-ellipsis">
       
         Side Quests
@@ -2386,14 +2389,10 @@
     </span>
   </a>
   
-</li>  <li class="md-nav__item">
-  <a href="#kursy-wieloczesciowe" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Kursy wieloczęściowe
-      
-    </span>
-  </a>
+</li>
+        
+      </ul>
+    </nav>
   
 </li> 
   </ul>
@@ -2605,7 +2604,7 @@
   <span class="md-ellipsis">
     
   
-    Orientacja
+    Pierwsze kroki
   
 
     
@@ -2633,7 +2632,7 @@
   <span class="md-ellipsis">
     
   
-    Środowisko programistyczne
+    Index
   
 
     
@@ -2661,7 +2660,7 @@
   <span class="md-ellipsis">
     
   
-    Podstawowe Wzorce Skryptowania w Nextflow
+    Podstawowe Wzorce Skryptowania
   
 
     
@@ -2773,7 +2772,7 @@
   <span class="md-ellipsis">
     
   
-    Testowanie z nf-test
+    Index
   
 
     
@@ -2801,7 +2800,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow'ów
+    Rozwiązywanie problemów z Workflow'ami
   
 
     
@@ -3595,16 +3594,19 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#wymagania-wstepne" class="md-nav__link">
+  <a href="#przeglad-kursu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Wymagania wstępne
+        Przegląd kursu
       
     </span>
   </a>
   
-</li>  <li class="md-nav__item">
-  <a href="#side-quests_1" class="md-nav__link">
+    <nav class="md-nav" aria-label="Przegląd kursu">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#side-quests" class="md-nav__link">
     <span class="md-ellipsis">
       
         Side Quests
@@ -3612,14 +3614,10 @@
     </span>
   </a>
   
-</li>  <li class="md-nav__item">
-  <a href="#kursy-wieloczesciowe" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Kursy wieloczęściowe
-      
-    </span>
-  </a>
+</li>
+        
+      </ul>
+    </nav>
   
 </li> 
   </ul>
@@ -3844,74 +3842,112 @@
 </a>
  
 
-<h1 id="side-quests">Side Quests<a class="headerlink" href="#side-quests" title="Permanent link">&para;</a></h1>
-<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
-<p>To jest zbiór samodzielnych mini-kursów szkoleniowych, które zgłębiają konkretne tematy. Możesz przejść przez nie w dowolnej kolejności.</p>
-<p>Zaczynajmy! Kliknij poniższy przycisk "Open in GitHub Codespaces", aby uruchomić środowisko szkoleniowe (najlepiej w osobnej karcie), a następnie czytaj dalej, podczas gdy się ładuje.</p>
-<p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
-<h2 id="wymagania-wstepne">Wymagania wstępne<a class="headerlink" href="#wymagania-wstepne" title="Permanent link">&para;</a></h2>
-<p>Konkretne wymagania wstępne każdego mini-kursu są różne i zostały udokumentowane na odpowiednich stronach.
-Niemniej jednak wszystkie zakładają pewną minimalną znajomość następujących zagadnień:</p>
+<h1 id="side-questscourse">Side Quests<span class="index-type-badge">course</span><a class="headerlink" href="#side-questscourse" title="Permanent link">&para;</a></h1>
+<div class="grid cards">
 <ul>
-<li>Doświadczenie z linią poleceń</li>
-<li>Podstawowe koncepcje i narzędzia Nextflow'a omówione w kursie szkoleniowym dla początkujących <a href="../../hello_nextflow/">Hello Nextflow</a>.</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg></span> <strong>Podsumowanie kursu</strong></p>
+<hr />
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
+<p><strong>Side Quests to samodzielne mini-kursy szkoleniowe, które zgłębiają konkretne tematy związane z Nextflow'em.</strong></p>
+<p>Każdy side quest można przejść niezależnie, w dowolnej kolejności, zgodnie z własnymi zainteresowaniami i potrzebami.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> <strong>Dodatkowe informacje</strong></p>
+<hr />
+<details class="terminal">
+<summary>Wymagania techniczne</summary>
+<p>Będziesz potrzebować konta GitHub LUB lokalnej instalacji Nextflow'a. Szczegóły znajdziesz w <a href="../envsetup/">Opcjach środowiska</a>.</p>
+</details>
+<details class="learning">
+<summary>Cele szkoleniowe</summary>
+<ul>
+<li>Skonfiguruj produktywne środowisko programistyczne Nextflow'a</li>
+<li>Stosuj zaawansowane wzorce skryptowe do złożonych transformacji danych</li>
+<li>Obsługuj i propaguj metadane przez wieloetapowe workflow'y</li>
+<li>Dziel i grupuj kanały danych do przetwarzania równoległego i szeregowego</li>
+<li>Testuj workflow'y Nextflow'a przy użyciu nf-test</li>
+<li>Twórz złożone pipeline'y z wielokrotnie używanych, nazwanych modułów workflow'ów</li>
+<li>Efektywnie pracuj z plikami przy użyciu operacji na plikach w Nextflow</li>
+<li>Systematycznie debuguj typowe problemy z workflow'ami</li>
+<li>Używaj i twórz wtyczki do Nextflow'a</li>
 </ul>
-<p>Wymagania techniczne i konfigurację środowiska znajdziesz w mini-kursie <a href="../../envsetup/">Konfiguracja środowiska</a>.</p>
-<p><strong>Jeśli po raz pierwszy zagłębiasz się w Side Quests, upewnij się, że najpierw zapoznasz się ze stroną <a href="orientation/">Orientacja</a>!</strong></p>
-<p>W przeciwnym razie wybierz side quest z poniższej tabeli.</p>
-<h2 id="side-quests_1">Side Quests<a class="headerlink" href="#side-quests_1" title="Permanent link">&para;</a></h2>
+</details>
+<details class="people">
+<summary>Odbiorcy i wymagania wstępne</summary>
+<ul>
+<li><strong>Odbiorcy:</strong> Ten zbiór jest przeznaczony dla osób, które ukończyły kurs dla początkujących Hello Nextflow i chcą zgłębić konkretne tematy.</li>
+<li><strong>Umiejętności:</strong> Zakładamy doświadczenie z linią poleceń oraz znajomość podstawowych koncepcji i narzędzi Nextflow'a.</li>
+<li><strong>Kursy:</strong> Wymagane ukończenie kursu <a href="../hello_nextflow/">Hello Nextflow</a> lub równoważnego.</li>
+</ul>
+</details>
+</li>
+</ul>
+</div>
+<h2 id="przeglad-kursu">Przegląd kursu<a class="headerlink" href="#przeglad-kursu" title="Permanent link">&para;</a></h2>
+<p>Jeśli po raz pierwszy zagłębiasz się w Side Quests, zacznij od strony <a href="orientation/">Orientacja</a>, gdzie znajdziesz omówienie środowiska szkoleniowego i materiałów.</p>
+<h3 id="side-quests">Side Quests<a class="headerlink" href="#side-quests" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
 <th>Side Quest</th>
-<th>Szacowany czas nauczania</th>
+<th>Opis</th>
+<th>Szacowany czas</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="./dev_environment/">Przewodnik po środowisku programistycznym Nextflow'a</a></td>
+<td><a href="dev_environment/">Środowisko programistyczne</a></td>
+<td>Skonfiguruj produktywne lokalne środowisko programistyczne Nextflow'a</td>
 <td>45 min</td>
 </tr>
 <tr>
-<td><a href="./essential_scripting_patterns/">Podstawowe wzorce skryptowe Nextflow'a</a></td>
+<td><a href="essential_scripting_patterns/">Podstawowe wzorce skryptowe</a></td>
+<td>Zaawansowane techniki skryptowe dla typowych wyzwań w workflow'ach</td>
 <td>90 min</td>
 </tr>
 <tr>
-<td><a href="./metadata/">Metadane w workflow'ach</a></td>
+<td><a href="working_with_files/">Przetwarzanie plików wejściowych</a></td>
+<td>Obsługa plików, operacje na ścieżkach i organizacja wyników</td>
 <td>45 min</td>
 </tr>
 <tr>
-<td><a href="./splitting_and_grouping/">Dzielenie i grupowanie</a></td>
+<td><a href="metadata/">Metadane i mapy metadanych</a></td>
+<td>Używanie map metadanych do śledzenia i propagowania informacji o próbkach</td>
 <td>45 min</td>
 </tr>
 <tr>
-<td><a href="./nf_test/">Testowanie za pomocą nf-test</a></td>
+<td><a href="splitting_and_grouping/">Dzielenie i grupowanie</a></td>
+<td>Techniki dzielenia i ponownego grupowania kanałów danych</td>
+<td>45 min</td>
+</tr>
+<tr>
+<td><a href="nf_test/">Testowanie za pomocą nf-test</a></td>
+<td>Pisanie i uruchamianie testów dla workflow'ów Nextflow'a</td>
 <td>1 godzina</td>
 </tr>
 <tr>
-<td><a href="./workflows_of_workflows/">Workflow'y złożone z workflow'ów</a></td>
+<td><a href="debugging/">Rozwiązywanie problemów z workflow'ami</a></td>
+<td>Identyfikowanie i naprawianie typowych błędów w workflow'ach</td>
+<td>1 godzina</td>
+</tr>
+<tr>
+<td><a href="workflows_of_workflows/">Workflow'y złożone z workflow'ów</a></td>
+<td>Tworzenie złożonych pipeline'ów z wielokrotnie używanych, nazwanych modułów</td>
 <td>30 min</td>
 </tr>
 <tr>
-<td><a href="./working_with_files/">Praca z plikami</a></td>
-<td>45 min</td>
-</tr>
-<tr>
-<td><a href="./debugging/">Debugowanie workflow'ów</a></td>
-<td>1 godzina</td>
+<td><a href="plugin_development/">Tworzenie wtyczek</a></td>
+<td>Używanie i tworzenie wtyczek do Nextflow'a</td>
+<td>3 godziny</td>
 </tr>
 </tbody>
 </table>
-<h2 id="kursy-wieloczesciowe">Kursy wieloczęściowe<a class="headerlink" href="#kursy-wieloczesciowe" title="Permanent link">&para;</a></h2>
-<div class="admonition exercise">
-<p class="admonition-title">Tworzenie wtyczek</p>
-<div class="admonition tip inline end">
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.5 5.5a2 2 0 0 0 2-2 2 2 0 0 0-2-2 2 2 0 0 0-2 2 2 2 0 0 0 2 2m-3.6 13.9 1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3A7.3 7.3 0 0 0 22 13v-2c-1.76.03-3.4-.89-4.3-2.4l-1-1.6c-.36-.6-1-1-1.7-1-.3 0-.5.1-.8.1L9 8.3V13h2V9.6l1.8-.7-1.6 8.1-4.9-1-.4 2zM4 9a1 1 0 0 1-1-1 1 1 0 0 1 1-1h3v2zm1-4a1 1 0 0 1-1-1 1 1 0 0 1 1-1h5v2zm-2 8a1 1 0 0 1-1-1 1 1 0 0 1 1-1h4v2z"/></svg></span> Naucz się używać i tworzyć wtyczki do Nextflow'a.</p>
-</div>
-<p>Ten kurs omawia korzystanie z istniejących wtyczek w Twoich workflow'ach oraz budowanie własnych od podstaw — w tym niestandardowe funkcje, monitorowanie workflow'ów, konfigurację i dystrybucję.</p>
-<p><a class="md-button md-button--primary" href="plugin_development/">Rozpocznij szkolenie z tworzenia wtyczek <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span></a></p>
-</div>
-<p>Daj nam znać, jakie inne dziedziny i przypadki użycia chciałbyś tutaj zobaczyć, publikując wpis w <a href="https://community.seqera.io/c/training/">sekcji Training</a> na forum społeczności.</p><div id="quiz-progress-sidebar" aria-label="Quiz Progress" style="display: none;">
+<p><a class="md-button md-button--primary" href="orientation/">Rozpocznij <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span></a></p>
+<!-- Clearfix for float -->
+<div style="content: ''; clear: both; display: table;"></div>
+
+<p>Daj nam znać, jakie inne tematy chciałbyś tutaj zobaczyć, publikując wpis w <a href="https://community.seqera.io/c/training/">sekcji Training</a> na forum społeczności.</p><div id="quiz-progress-sidebar" aria-label="Quiz Progress" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">
     <span class="md-nav__icon md-icon"></span>
@@ -5672,13 +5708,13 @@ window.mkdocsQuizConfig = {
         
         
           
-          <a href="orientation/" class="md-footer__link md-footer__link--next" aria-label="Następna strona: Orientacja">
+          <a href="orientation/" class="md-footer__link md-footer__link--next" aria-label="Następna strona: Pierwsze kroki">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Następna strona
               </span>
               <div class="md-ellipsis">
-                Orientacja
+                Pierwsze kroki
               </div>
             </div>
             <div class="md-footer__button md-icon">

@@ -3214,7 +3214,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Premiers pas
   
 
     
@@ -3242,7 +3242,7 @@
   <span class="md-ellipsis">
     
   
-    Environnement de développement
+    Index
   
 
     
@@ -3270,7 +3270,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Modèles de Scripting Essentiels
   
 
     
@@ -3410,7 +3410,7 @@
   <span class="md-ellipsis">
     
   
-    Débogage des Workflows
+    Résolution des problèmes dans les Workflows
   
 
     
@@ -5258,13 +5258,13 @@ Mais nous en aurons besoin pour profiter des sorties au niveau du workflow, donc
 </code></pre></div>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="go">[65/7be2fa] sayHello | 1 of 1 ✔</span>
-</code></pre></div>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="hll"><span class="go">[65/7be2fa] sayHello | 1 of 1 ✔</span>
+</span></code></pre></div>
 </details>
 <p>Si votre sortie console ressemble à cela, alors félicitations, vous venez d'exécuter votre premier workflow Nextflow !</p>
 <p>La sortie la plus importante ici est la dernière ligne, qui est mise en évidence dans la sortie ci-dessus :</p>
@@ -5278,7 +5278,7 @@ Examinons cela maintenant.</p>
 <p>Dans le répertoire <code>work</code>, Nextflow organise les sorties et les logs par appel de <strong>process</strong>.
 Pour chaque appel de <strong>process</strong>, Nextflow crée un sous-répertoire imbriqué, nommé avec un hash pour le rendre unique, où il préparera toutes les entrées nécessaires (en utilisant des liens symboliques par défaut), écrira les fichiers d'aide, et écrira les logs et toutes les sorties du <strong>process</strong>.</p>
 <p>Le chemin vers ce sous-répertoire est affiché sous forme tronquée entre crochets dans la sortie console.
-En regardant ce que nous avons obtenu pour l'exécution montrée ci-dessus, la ligne de log console pour le <strong>process</strong> sayHello commence par <code>[65/7be2fa]</code>. Cela correspond au chemin de répertoire suivant : <code>work/65/7be2fad5e71e5f49998f795677fd68</code></p>
+En regardant ce que nous avons obtenu pour l'exécution montrée ci-dessus, la ligne de log console pour le <strong>process</strong> sayHello commence par <code>[65/7be2fa]</code>. Cela correspond au chemin de répertoire suivant : <code>work/65/7be2fa7be2fad5e71e5f49998f795677fd68</code></p>
 <p>Voyons ce qu'il y a dedans.</p>
 <details class="abstract">
 <summary>Contenu du répertoire</summary>
@@ -5399,7 +5399,7 @@ Cela vous montre que l'exécution du même workflow plusieurs fois n'écrasera p
 <p>Comme vous venez de l'apprendre, la sortie produite par notre pipeline est enfouie dans un répertoire de travail situé plusieurs niveaux plus bas.
 Ceci est fait exprès ; Nextflow contrôle ce répertoire et nous ne sommes pas censés interagir avec lui.
 Cependant, cela rend peu pratique la récupération des sorties qui nous importent.</p>
-<p>Heureusement, Nextflow fournit un moyen de publier les sorties dans un répertoire désigné en utilisant des <a href="https://www.nextflow.io/docs/latest/workflow.html#workflow-outputs">définitions de sortie au niveau du workflow</a>.</p>
+<p>Heureusement, Nextflow fournit un moyen de publier les sorties dans un répertoire désigné en utilisant des <a href="https://nextflow.io/docs/latest/workflow.html#workflow-outputs">définitions de sortie au niveau du workflow</a>.</p>
 <h3 id="21-utilisation-de-base">2.1. Utilisation de base<a class="headerlink" href="#21-utilisation-de-base" title="Permanent link">&para;</a></h3>
 <p>Cela va impliquer deux nouveaux morceaux de code :</p>
 <ol>
@@ -5515,7 +5515,7 @@ Plus tard, vous apprendrez des moyens de générer des structures de répertoire
 </code></pre></div>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
@@ -5595,7 +5595,7 @@ Pour définir un emplacement personnalisé, modifiez simplement le <code>path</c
 </code></pre></div>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>
 <a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="go">Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1</span>
 <a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
@@ -5670,7 +5670,7 @@ Ajoutez simplement <code>mode 'copy'</code> à la définition de sortie au nivea
 </code></pre></div>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="go">Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1</span>
 <a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>
@@ -5843,7 +5843,7 @@ En principe, nous pouvons l'écrire n'importe où ; mais puisque nous allons vou
 </code></pre></div>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>
 <a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="go">Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea</span>
 <a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>
@@ -5882,7 +5882,7 @@ Cependant, les résultats des exécutions précédentes sont toujours préservé
 <a id="__codelineno-43-21" name="__codelineno-43-21"></a><span class="cm"> * Paramètres du pipeline</span>
 <a id="__codelineno-43-22" name="__codelineno-43-22"></a><span class="cm"> */</span>
 <a id="__codelineno-43-23" name="__codelineno-43-23"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-43-24" name="__codelineno-43-24"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Holà mundo!&#39;</span>
+<a id="__codelineno-43-24" name="__codelineno-43-24"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Hola mundo!&#39;</span>
 <a id="__codelineno-43-25" name="__codelineno-43-25"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Comme vous pouvez le voir, nous pouvons spécifier le type d'entrée que le workflow attend (Nextflow 25.10.2 et ultérieur).
@@ -5890,7 +5890,7 @@ La syntaxe est <code>nom: Type = valeur_par_defaut</code>.
 Les types supportés incluent <code>String</code>, <code>Integer</code>, <code>Float</code>, <code>Boolean</code> et <code>Path</code>.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>Dans les anciens workflows, vous pouvez voir que tout ce bloc <code>params</code> est écrit simplement comme <code>input = 'Holà mundo!'</code>.</p>
+<p>Dans les anciens workflows, vous pouvez voir que tout ce bloc <code>params</code> est écrit simplement comme <code>input = 'Hola mundo!'</code>.</p>
 </div>
 <p>À mesure que vous ajoutez plus de paramètres à votre pipeline, vous devriez tous les ajouter à ce bloc, que vous ayez besoin de leur donner une valeur par défaut ou non.
 Cela facilitera la recherche de tous les paramètres configurables en un coup d'œil.</p>
@@ -5900,7 +5900,7 @@ Cela facilitera la recherche de tous les paramètres configurables en un coup d'
 </code></pre></div>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>
 <a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="go">Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582</span>
 <a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a>
@@ -5915,7 +5915,7 @@ Cela facilitera la recherche de tous les paramètres configurables en un coup d'
 <a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>- file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>- cause: you tried to assign a value to the class &#39;java.lang.String&#39;
 <a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a>@ line 24, column 12.
-<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>      input: String = &#39;Holà mundo!&#39;
+<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>      input: String = &#39;Hola mundo!&#39;
 <a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a>              ^
 <a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a>
 <a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a>1 error
@@ -5933,7 +5933,7 @@ Consultez le matériel d'aide sur les <a href="../../info/nxf_versions/">version
 <p>La sortie sera au même endroit que précédemment, mais le contenu devrait être mis à jour avec le nouveau texte.</p>
 <details class="abstract">
 <summary>Contenu du fichier</summary>
-<div class="highlight"><span class="filename">results/hello_world/output.txt</span><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go">Holà mundo!</span>
+<div class="highlight"><span class="filename">results/hello_world/output.txt</span><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go">Hola mundo!</span>
 </code></pre></div>
 </details>
 <p>Nextflow a utilisé la valeur par défaut du paramètre greeting pour créer la sortie.</p>
@@ -5944,7 +5944,7 @@ Consultez le matériel d'aide sur les <a href="../../info/nxf_versions/">version
 </code></pre></div>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>
 <a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="go">Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582</span>
 <a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>
@@ -5989,7 +5989,7 @@ Cela signifie que Nextflow n'exécutera que les <strong>processus</strong> que v
 </code></pre></div>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>
 <a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a><span class="go">Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5</span>
 <a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a>
@@ -6097,7 +6097,7 @@ Quels sont les composants minimaux requis d'un processus Nextflow ?
 - [ ] Blocs input, output et script
 - [ ] Uniquement un bloc script
 
-En savoir plus : [1.1.1. La définition du processus](#111-la-definition-du-process)
+En savoir plus : [1.1.1. La définition du processus](#111-the-process-definition)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
@@ -6111,7 +6111,7 @@ En savoir plus : [1.1.1. La définition du processus](#111-la-definition-du-proc
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>En savoir plus : <a href="#111-la-definition-du-process">1.1.1. La définition du processus</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#111-the-process-definition">1.1.1. La définition du processus</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6122,7 +6122,7 @@ Quel est le but du bloc output dans un processus ?
 - [x] Déclarer les sorties attendues du processus
 - [ ] Définir les variables d'environnement
 
-En savoir plus : [1.1.1. La définition du processus](#111-la-definition-du-process)
+En savoir plus : [1.1.1. La définition du processus](#111-the-process-definition)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -6136,7 +6136,7 @@ En savoir plus : [1.1.1. La définition du processus](#111-la-definition-du-proc
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>En savoir plus : <a href="#111-la-definition-du-process">1.1.1. La définition du processus</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#111-the-process-definition">1.1.1. La définition du processus</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6183,7 +6183,7 @@ work/a3/7be2fa.../
 - [ ] `.command.log`
 - [ ] `.command.out`
 
-En savoir plus : [1.2.2. Trouver la sortie et les logs dans le répertoire `work`](#122-trouver-la-sortie-et-les-logs-dans-le-repertoire-work)
+En savoir plus : [1.2.2. Trouver la sortie et les logs dans le répertoire `work`](#122-find-the-output-and-logs-in-the-work-directory)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
@@ -6207,7 +6207,7 @@ En savoir plus : [1.2.2. Trouver la sortie et les logs dans le répertoire `work
                     <div class="quiz-feedback hidden"></div>
 
                 </form>
-                <section class="content hidden"><p>En savoir plus : <a href="#122-trouver-la-sortie-et-les-logs-dans-le-repertoire-work">1.2.2. Trouver la sortie et les logs dans le répertoire <code>work</code></a></p></section>
+                <section class="content hidden"><p>En savoir plus : <a href="#122-find-the-output-and-logs-in-the-work-directory">1.2.2. Trouver la sortie et les logs dans le répertoire <code>work</code></a></p></section>
             </div>
 
 <!-- mkdocs-quiz-source
@@ -6218,7 +6218,7 @@ Que fait le drapeau `-resume` ?
 - [x] Ignore les processus qui se sont déjà terminés avec succès
 - [ ] Crée une sauvegarde du workflow
 
-En savoir plus : [4.1. Relancer un workflow avec `-resume`](#41-relancer-un-workflow-avec--resume)
+En savoir plus : [4.1. Relancer un workflow avec `-resume`](#41-re-launch-a-workflow-with--resume)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
@@ -6232,7 +6232,7 @@ En savoir plus : [4.1. Relancer un workflow avec `-resume`](#41-relancer-un-work
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>En savoir plus : <a href="#41-relancer-un-workflow-avec--resume">4.1. Relancer un workflow avec <code>-resume</code></a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#41-re-launch-a-workflow-with--resume">4.1. Relancer un workflow avec <code>-resume</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6243,7 +6243,7 @@ Quel est le mode par défaut pour publier les sorties du workflow ?
 - [ ] Déplacer les fichiers dans le répertoire de sortie
 - [ ] Compresser les fichiers dans le répertoire de sortie
 
-En savoir plus : [2.3. Définir le mode de publication sur copy](#23-definir-le-mode-de-publication-sur-copy)
+En savoir plus : [2.3. Définir le mode de publication sur copy](#23-set-the-publish-mode-to-copy)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
@@ -6257,7 +6257,7 @@ En savoir plus : [2.3. Définir le mode de publication sur copy](#23-definir-le-
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>En savoir plus : <a href="#23-definir-le-mode-de-publication-sur-copy">2.3. Définir le mode de publication sur copy</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#23-set-the-publish-mode-to-copy">2.3. Définir le mode de publication sur copy</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6268,7 +6268,7 @@ Comment passez-vous une valeur de paramètre à un workflow Nextflow depuis la l
 - [x] `--parameter value`
 - [ ] `-p parameter=value`
 
-En savoir plus : [3.2. Configurer un paramètre de ligne de commande pour capturer l'entrée utilisateur](#32-configurer-un-parametre-de-ligne-de-commande-pour-capturer-lentree-utilisateur)
+En savoir plus : [3.2. Configurer un paramètre de ligne de commande pour capturer l'entrée utilisateur](#32-set-up-a-command-line-parameter-to-capture-user-input)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -6282,7 +6282,7 @@ En savoir plus : [3.2. Configurer un paramètre de ligne de commande pour captur
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>En savoir plus : <a href="#32-configurer-un-parametre-de-ligne-de-commande-pour-capturer-lentree-utilisateur">3.2. Configurer un paramètre de ligne de commande pour capturer l'entrée utilisateur</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#32-set-up-a-command-line-parameter-to-capture-user-input">3.2. Configurer un paramètre de ligne de commande pour capturer l'entrée utilisateur</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source

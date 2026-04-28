@@ -2342,7 +2342,7 @@
   <span class="md-ellipsis">
     
   
-    Yönlendirme
+    Başlarken
   
 
     
@@ -2398,7 +2398,7 @@
   <span class="md-ellipsis">
     
   
-    Temel Nextflow Betik Kalıpları
+    Temel Betik Kalıpları
   
 
     
@@ -2538,7 +2538,7 @@
   <span class="md-ellipsis">
     
   
-    İş Akışlarında Hata Ayıklama
+    İş Akışlarında Sorun Giderme
   
 
     
@@ -3766,8 +3766,8 @@
 <p>Yani gerçek, daha olgun Nextflow pipeline'larında, genellikle belirli bir örnekle ilişkili tüm meta verileri içeren bir meta nesnesi geçirirsiniz. Daha sonra buna dayalı olarak dinamik dosya adları oluşturabilirsiniz; bu çok daha pratiktir.</p>
 <p>Bunu en iyi uygulamalarla nasıl yapacağınızla ilgileniyorsanız, <em>training.nextflow.io</em>'da özellikle meta veriler ve meta haritalar hakkında bir yan görev var; daha fazla ayrıntı için oraya bakabilirsiniz.</p>
 <h2 id="3-bir-dizi-araclgyla-birden-fazla-girdi-saglayn">3. Bir dizi aracılığıyla birden fazla girdi sağlayın<a class="headerlink" href="#3-bir-dizi-araclgyla-birden-fazla-girdi-saglayn" title="Permanent link">&para;</a></h2>
-<p>Tamam. Şimdi kanalların nasıl yapılandırıldığı ve kodlama dilindeki diğer veri yapılarından nasıl farklı olduğu hakkında biraz keşfedeceğiz. Diğer dillerden geldiyseniz tanıdık bir kavram olabilecek bir diziyi potansiyel olarak nasıl kullanabileceğimi düşüneceğim.</p>
-<p>Bir kanalda dizi kullanabilir miyim? Deneyelim. Bir dizi oluşturacağım; bunu dokümanlardan kopyaladım: <em>"greetings_array"</em> ve <em>"Hello"</em>, <em>"Bonjour"</em> ve <em>"Holà"</em>. Sonra bunu sabit kodlanmış string'lerimin yerine buraya koyacağım. Yani "channel.of" <em>"greetings_array"</em> diyeceğim; bu diziyi bir kanala geçireceğim. Deneyelim.</p>
+<p>Tamam. Şimdi kanalların nasıl yapılandırıldığı ve kodlama dilindeki diğer veri yapılarından nasıl farklı olduğu hakkında biraz keşfedeceğiz. Başka dillerden geldiyseniz tanıdık bir kavram olabilecek bir diziyi potansiyel olarak nasıl kullanabileceğimi düşüneceğim.</p>
+<p>Bir kanalda dizi kullanabilir miyim? Deneyelim. Bir dizi oluşturacağım; bunu dokümanlardan kopyaladım: <em>"greetings_array"</em> ve <em>"Hello"</em>, <em>"Bonjour"</em> ve <em>"Hola"</em>. Sonra bunu sabit kodlanmış string'lerimin yerine buraya koyacağım. Yani "channel.of" <em>"greetings_array"</em> diyeceğim; bu diziyi bir kanala geçireceğim. Deneyelim.</p>
 <p>Terminali açın ve pipeline'ı çalıştırın.</p>
 <p>Tamam. View ifadesinin burada beklediğimiz gibi dizimizi yazdırdığını görebilirsiniz; ama sonra tüm bu kırmızı metin — ya da hâlâ <em>"-ansi-log"</em> kapalıysa kırmızı olmayacak — bize bir şeylerin yanlış gittiğini söylüyor.</p>
 <p>Artık burada güzel bir yeşil onay işaretimiz yok. Kırmızı bir çarpımız var ve bunu biraz daha geniş yaparsam okumak daha kolay olur; Nextflow bize neyin yanlış gittiğini söylüyor.</p>
@@ -3805,7 +3805,7 @@
 <h2 id="42-dosyay-ayrstrmak-icin-splitcsv-operatorunu-kullann">4.2. Dosyayı ayrıştırmak için splitCsv() operatörünü kullanın<a class="headerlink" href="#42-dosyay-ayrstrmak-icin-splitcsv-operatorunu-kullann" title="Permanent link">&para;</a></h2>
 <p>Tamam, bu kanala bir bakalım ve nasıl göründüğünü görelim. <em>".view"</em> yapabiliriz; bunu web sitesinden kopyaladım. Yani <em>.view</em>, ve burada dinamik bir closure'ımız var; girdi olarak "<em>csv"</em> değişken adını söylüyoruz. Yani bu kanal içeriği ve splitCsv'den önce diyoruz; nasıl göründüğü bu.</p>
 <p>Tekrar çalıştırırsam, yine başarısız olacak; ama bu kanalın içinde ne olduğunu bize gösterecek. Özellikle heyecan verici değil. O <em>path</em> değişkeni. Yani görebilirsiniz ki terminale yazdırıldığı için burada sadece bir string; ama bu dosya hakkındaki bilgileri ve meta verileri içeren bir <em>path</em> nesnesi.</p>
-<p>Dosyanın meta verilerini girdiye geçirmek istemiyoruz. O dosyanın içeriğini geçirmek istiyoruz. <em>greetings.csv</em> dosyasına bakarsak, burada bu farklı değişkenlerin olduğunu görebilirsiniz. Yine <em>Hello, Bonjour, Holà</em>. Ve bunlar gerçekten sürece geçirmek istediğimiz şeyler; sadece dosyanın kendisi tek bir nesne olarak değil.</p>
+<p>Dosyanın meta verilerini girdiye geçirmek istemiyoruz. O dosyanın içeriğini geçirmek istiyoruz. <em>greetings.csv</em> dosyasına bakarsak, burada bu farklı değişkenlerin olduğunu görebilirsiniz. Yine <em>Hello, Bonjour, Hola</em>. Ve bunlar gerçekten sürece geçirmek istediğimiz şeyler; sadece dosyanın kendisi tek bir nesne olarak değil.</p>
 <p>Bu yüzden bu CSV dosyasını ayrıştırmamız gerekiyor. Onu açmamız, CSV dosyasının içeriğine ulaşmamız ve sonra içerikleri kanal içinde sürece geçirmemiz gerekiyor.</p>
 <p>Log mesajından muhtemelen anlayabilirsiniz; başka bir kanal operatörü olan <em>splitCsv</em>'yi kullanmak istiyoruz. Yani "<em>dot" "s"</em> yaparsam, otomatik önerildiğini görebilirsiniz. Oops, <em>splitCsv</em> ve bazı parantezler.</p>
 <p>Ve sonra <em>splitCsv</em>'den sonra, nasıl göründüğünü görebilmemiz için başka bir <em>view</em> ifadesi koyacağım. Pipeline'ı çalıştıralım ve ne elde ettiğimize bakalım.</p>
@@ -3818,11 +3818,11 @@
 <p>Yani bu sefer çalışacağız; CSV'yi üç dizi nesnesine ayrıştırdık ve sonra düzleştirdik. Ve bu sefer geçti. Nextflow pipeline'ı çalıştı. Ancak <em>flatten</em>'ın gerçekten işe koyulduğunu ve her şeyi düzleştirdiğini görebilirsiniz. Ve böylece her satır için üç bağımsız dizi girişi alıyoruz. Bu yüzden süreci her CSV satırı için üç kez çalıştırdı. Ve şimdi bir sürü sonuç dosyamız var; 123, 456 ve her türlü şey; sadece gerçekten istediğimiz CSV'nin ilk sütunu değil.</p>
 <h2 id="43-selamlamalar-ckarmak-icin-map-operatorunu-kullann">4.3. Selamlamaları çıkarmak için map() operatörünü kullanın<a class="headerlink" href="#43-selamlamalar-ckarmak-icin-map-operatorunu-kullann" title="Permanent link">&para;</a></h2>
 <p>Peki sadece ilk sütuna nasıl ulaşırız? Flatten burada çok basitse, aslında özelleştirebileceğimiz ve CSV'den ne istediğimizi söyleyebileceğimiz daha karmaşık bir operatöre ihtiyacımız var.</p>
-<p>Bunu yapmak için <em>map</em> kullanacağız. Temelde <em>map</em> sadece diyor ki: bana verilen her öğe üzerinde bir kod, bir fonksiyon çalıştır ve üzerinde bir tür dönüşüm yap. Ve çok esnek olduğu için, Nextflow kodunda her zaman karşınıza çıktığını göreceksiniz.</p>
+<p>Bunu yapmak için <em>map</em> kullanacağız. Temelde <em>map</em> sadece şunu söyler: bana verilen her öğe üzerinde bir kod, bir fonksiyon çalıştır ve üzerinde bir tür dönüşüm yap. Ve çok esnek olduğu için, Nextflow kodunda her zaman karşınıza çıktığını göreceksiniz.</p>
 <p>Kendi başına hiçbir şey yapmaz. Yani normal parantez istemiyoruz; burada bir closure istiyoruz ve ne yapacağını söylememiz gerekiyor. Yani <em>"row"</em> diyeceğim; çünkü CSV'den satırlar veriliyor, bu yüzden mantıklı bir değişken adı. Girdi. Ve sadece o dizinin ilk öğesini döndürmek istiyorum.</p>
 <p>Nextflow'daki diziler sıfır tabanlıdır; bu yüzden sadece ilk öğe olduğunu söyleyeceğiz; bu sıfır satırı. İkinci sütunu isteseydik, bir; üçüncü sütun iki olabilir ve böyle devam eder. Burada istediğimizi döndürebiliriz; ama sadece ilk değeri döndüreceğim.</p>
 <p>Ve şimdi, pipeline'ı tekrar çalıştırabiliriz ve beklediğimizi yapıp yapmadığını görebiliriz.</p>
-<p>Nitekim, <em>splitCsv</em>'den sonra dizilerimiz var ve sonra <em>map</em>'ten sonra güzel temiz string'lerimiz var; sadece <em>"Hello"</em>, <em>"Bonjour"</em> ve <em>"Holà"</em>. Ve pipeline şimdi istediğimizi yapıyor. Fantastik.</p>
+<p>Nitekim, <em>splitCsv</em>'den sonra dizilerimiz var ve sonra <em>map</em>'ten sonra güzel temiz string'lerimiz var; sadece <em>"Hello"</em>, <em>"Bonjour"</em> ve <em>"Hola"</em>. Ve pipeline şimdi istediğimizi yapıyor. Harika.</p>
 <p>Artık tüm bu view komutlarından kurtulabiliriz. Artık onlara ihtiyacımız yok.</p>
 <h2 id="ozet">Özet<a class="headerlink" href="#ozet" title="Permanent link">&para;</a></h2>
 <p>Hata ayıklamamızı bitirdik ve sonunda elde ettiğimiz kod bu. <em>input</em> adlı CLI parametremizi alıyoruz; bu bir <em>Path</em> olarak sınıflandırılmış. Nextflow yolu bulur, yükler ve CSV dosyasını anlar. Tüm farklı satırları döndürür. Ve sonra o satırın sadece ilk öğesini kanala eşleriz; bu bize kanal içeriğini veren bir tür; bu sürece geçirilir.</p>

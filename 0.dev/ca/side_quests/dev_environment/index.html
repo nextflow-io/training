@@ -491,7 +491,7 @@
   <span class="md-ellipsis">
     
   
-    Home
+    Inici
   
 
     
@@ -2348,7 +2348,7 @@
   <span class="md-ellipsis">
     
   
-    Orientació
+    Primers passos
   
 
     
@@ -3340,7 +3340,7 @@
   <span class="md-ellipsis">
     
   
-    Patrons Essencials de Scripting en Nextflow
+    Patrons Essencials de Scripting
   
 
     
@@ -3480,7 +3480,7 @@
   <span class="md-ellipsis">
     
   
-    Depuració de Workflows
+    Resolució de Problemes en Workflows
   
 
     
@@ -5209,7 +5209,7 @@
 <p>A diferència d'altres mòduls de formació, aquesta guia està organitzada com una col·lecció de consells ràpids, suggeriments i exemples pràctics en lloc d'un tutorial pas a pas. Cada secció es pot explorar de manera independent segons els vostres interessos i les vostres necessitats de desenvolupament actuals. Sentiu-vos lliures de saltar entre seccions i centrar-vos en les funcionalitats que siguin més útils immediatament per al vostre desenvolupament de workflows.</p>
 </div>
 <h2 id="que-haurieu-de-saber-primer">Què hauríeu de saber primer<a class="headerlink" href="#que-haurieu-de-saber-primer" title="Permanent link">&para;</a></h2>
-<p>Aquesta guia assumeix que heu completat el curs de formació <a href="../hello_nextflow/">Hello Nextflow</a> i que esteu familiaritzats amb els conceptes fonamentals de Nextflow, incloent-hi:</p>
+<p>Aquesta guia assumeix que heu completat el curs de formació <a href="../../hello_nextflow/">Hello Nextflow</a> i que esteu familiaritzats amb els conceptes fonamentals de Nextflow, incloent-hi:</p>
 <ul>
 <li><strong>Estructura bàsica del workflow</strong>: Comprensió dels processos, workflows i com es connecten entre si</li>
 <li><strong>Operacions amb canals</strong>: Creació de canals, pas de dades entre processos i ús d'operadors bàsics</li>
@@ -5228,7 +5228,7 @@
 </ul>
 <div class="admonition info">
 <p class="admonition-title">Per què les funcionalitats de l'IDE ara?</p>
-<p>Probablement ja heu estat utilitzant VS Code durant el curs <a href="../hello_nextflow/">Hello Nextflow</a>, però hem mantingut el focus en aprendre els fonaments de Nextflow en lloc de les funcionalitats de l'IDE. Ara que esteu familiaritzats amb els conceptes bàsics de Nextflow com processos, workflows, canals i mòduls, esteu preparats per aprofitar les sofisticades funcionalitats de l'IDE que us convertiran en un desenvolupador més eficient.</p>
+<p>Probablement ja heu estat utilitzant VS Code durant el curs <a href="../../hello_nextflow/">Hello Nextflow</a>, però hem mantingut el focus en aprendre els fonaments de Nextflow en lloc de les funcionalitats de l'IDE. Ara que esteu familiaritzats amb els conceptes bàsics de Nextflow com processos, workflows, canals i mòduls, esteu preparats per aprofitar les sofisticades funcionalitats de l'IDE que us convertiran en un desenvolupador més eficient.</p>
 <p>Penseu en això com a "pujar de nivell" el vostre entorn de desenvolupament: el mateix editor que heu estat utilitzant té capacitats molt més potents que es tornen veritablement valuoses un cop enteneu per a què us estan ajudant.</p>
 </div>
 <hr />
@@ -5280,16 +5280,16 @@
 <p>Per instal·lar l'extensió manualment:</p>
 <ol>
 <li>Obriu VS Code</li>
-<li>Aneu a la vista d'Extensions fent clic a la icona d'extensions a l'esquerra: <img alt="icona d'extensions" src="img/extensions_icon.png" /> (drecera <code>Ctrl/Cmd+Shift+X</code> si executeu VSCode localment)</li>
+<li>Aneu a la vista d'Extensions fent clic a la icona d'extensions a l'esquerra: <img alt="icona d'extensions" src="../img/extensions_icon.png" /> (drecera <code>Ctrl/Cmd+Shift+X</code> si executeu VSCode localment)</li>
 <li>Cerqueu "Nextflow"</li>
 <li>Instal·leu l'extensió oficial de Nextflow</li>
 </ol>
-<p><img alt="Instal·la l'extensió de Nextflow" src="img/install_extension.png" /></p>
+<p><img alt="Instal·la l'extensió de Nextflow" src="../img/install_extension.png" /></p>
 <h3 id="02-disposicio-de-lespai-de-treball">0.2. Disposició de l'espai de treball<a class="headerlink" href="#02-disposicio-de-lespai-de-treball" title="Permanent link">&para;</a></h3>
 <p>Com que heu estat utilitzant VS Code durant tot Hello Nextflow, ja esteu familiaritzats amb els conceptes bàsics. Aquí teniu com organitzar el vostre espai de treball de manera eficient per a aquesta sessió:</p>
 <ul>
 <li><strong>Àrea de l'editor</strong>: Per visualitzar i editar fitxers. Podeu dividir-la en múltiples panells per comparar fitxers un al costat de l'altre.</li>
-<li><strong>Explorador de fitxers</strong> feu clic a (<img alt="icona de l'explorador de fitxers" src="img/files_icon.png" />) (<code>Ctrl/Cmd+Shift+E</code>): Els fitxers i carpetes locals del vostre sistema. Manteniu-lo obert a l'esquerra per navegar entre fitxers.</li>
+<li><strong>Explorador de fitxers</strong> feu clic a (<img alt="icona de l'explorador de fitxers" src="../img/files_icon.png" />) (<code>Ctrl/Cmd+Shift+E</code>): Els fitxers i carpetes locals del vostre sistema. Manteniu-lo obert a l'esquerra per navegar entre fitxers.</li>
 <li><strong>Terminal integrat</strong> (<code>Ctrl+Shift+</code> accent greu tant per a Windows com per a MacOS): Un terminal per interactuar amb l'ordinador a la part inferior. Utilitzeu-lo per executar Nextflow o altres comandes.</li>
 <li><strong>Panell de problemes</strong> (<code>Ctrl+Shift+M</code>): VS Code mostrarà aquí qualsevol error i problema que detecti. Això és útil per destacar problemes d'un cop d'ull.</li>
 </ul>
@@ -5303,7 +5303,7 @@
 <p>Ara que el vostre espai de treball està configurat, explorem com el ressaltat de sintaxi de VS Code us ajuda a llegir i escriure codi Nextflow de manera més efectiva.</p>
 <h3 id="11-elements-de-sintaxi-de-nextflow">1.1. Elements de sintaxi de Nextflow<a class="headerlink" href="#11-elements-de-sintaxi-de-nextflow" title="Permanent link">&para;</a></h3>
 <p>Obriu <code>basic_workflow.nf</code> per veure el ressaltat de sintaxi en acció:</p>
-<p><img alt="Mostra de sintaxi" src="img/syntax_showcase.png" /></p>
+<p><img alt="Mostra de sintaxi" src="../img/syntax_showcase.png" /></p>
 <p>Observeu com VS Code ressalta:</p>
 <ul>
 <li><strong>Paraules clau</strong> (<code>process</code>, <code>workflow</code>, <code>input</code>, <code>output</code>, <code>script</code>) amb colors distintius</li>
@@ -5337,7 +5337,7 @@
 <p>Les opcions d'autocompleció varien depenent d'on us trobeu al vostre codi:</p>
 <h4 id="operacions-amb-canals">Operacions amb canals<a class="headerlink" href="#operacions-amb-canals" title="Permanent link">&para;</a></h4>
 <p>Obriu <code>basic_workflow.nf</code> de nou i proveu d'escriure <code>channel.</code> al bloc del workflow:</p>
-<p><img alt="Autocompleció de canal" src="img/autocomplete_channel.png" /></p>
+<p><img alt="Autocompleció de canal" src="../img/autocomplete_channel.png" /></p>
 <p>Veureu suggeriments per a:</p>
 <ul>
 <li><code>fromPath()</code> - Crea un canal a partir de rutes de fitxers</li>
@@ -5348,13 +5348,13 @@
 </ul>
 <p>Això us ajuda a trobar ràpidament la fàbrica de canals adequada sense necessitat de recordar els noms exactes dels mètodes.</p>
 <p>També podeu descobrir els operadors disponibles per aplicar als canals. Per exemple, escriviu <code>FASTQC.out.html.</code> per veure les operacions disponibles:</p>
-<p><img alt="Autocompleció d'operadors de canal" src="img/autocomplete_operators.png" /></p>
+<p><img alt="Autocompleció d'operadors de canal" src="../img/autocomplete_operators.png" /></p>
 <h4 id="directives-de-proces">Directives de procés<a class="headerlink" href="#directives-de-proces" title="Permanent link">&para;</a></h4>
 <p>Dins d'un bloc script d'un procés, escriviu <code>task.</code> per veure les propietats d'execució disponibles:</p>
-<p><img alt="Autocompleció de propietats de tasca" src="img/autocomplete_task.png" /></p>
+<p><img alt="Autocompleció de propietats de tasca" src="../img/autocomplete_task.png" /></p>
 <h4 id="configuracio">Configuració<a class="headerlink" href="#configuracio" title="Permanent link">&para;</a></h4>
 <p>Obriu nextflow.config i escriviu <code>process.</code> en qualsevol lloc per veure les directives de procés disponibles:</p>
-<p><img alt="Autocompleció de configuració" src="img/autocomplete_config.png" /></p>
+<p><img alt="Autocompleció de configuració" src="../img/autocomplete_config.png" /></p>
 <p>Veureu suggeriments per a:</p>
 <ul>
 <li><code>executor</code></li>
@@ -5370,12 +5370,12 @@
 <p>La detecció d'errors en temps real de VS Code us ajuda a detectar problemes abans d'executar el vostre workflow.</p>
 <h3 id="31-deteccio-derrors-de-sintaxi">3.1. Detecció d'errors de sintaxi<a class="headerlink" href="#31-deteccio-derrors-de-sintaxi" title="Permanent link">&para;</a></h3>
 <p>Creem un error deliberat per veure la detecció en acció. Obriu <code>basic_workflow.nf</code> i canvieu el nom del procés de <code>FASTQC</code> a <code>FASTQ</code> (o qualsevol altre nom no vàlid). VS Code ressaltarà immediatament l'error al bloc del workflow amb un subratllat vermell ondulat:</p>
-<p><img alt="Subratllat d'error" src="img/error_underline.png" /></p>
+<p><img alt="Subratllat d'error" src="../img/error_underline.png" /></p>
 <h3 id="32-panell-de-problemes">3.2. Panell de problemes<a class="headerlink" href="#32-panell-de-problemes" title="Permanent link">&para;</a></h3>
 <p>Més enllà del ressaltat individual d'errors, VS Code proporciona un panell de Problemes centralitzat que agrega tots els errors, advertències i missatges d'informació de tot el vostre espai de treball. Obriu-lo amb <code>Ctrl/Cmd+Shift+M</code> i utilitzeu la icona de filtre per mostrar només els errors rellevants per al fitxer actual:</p>
-<p><img alt="Filtra el panell de problemes" src="img/active_file.png" /></p>
+<p><img alt="Filtra el panell de problemes" src="../img/active_file.png" /></p>
 <p>Feu clic en qualsevol problema per saltar directament a la línia problemàtica</p>
-<p><img alt="Panell de problemes" src="img/problems_panel.png" /></p>
+<p><img alt="Panell de problemes" src="../img/problems_panel.png" /></p>
 <p>Corregiu l'error canviant el nom del procés de nou a <code>FASTQC</code>.</p>
 <h3 id="33-patrons-derrors-comuns">3.3. Patrons d'errors comuns<a class="headerlink" href="#33-patrons-derrors-comuns" title="Permanent link">&para;</a></h3>
 <p>Els errors comuns en la sintaxi de Nextflow inclouen:</p>
@@ -5419,37 +5419,35 @@
 <span class="normal"><a href="#__codelineno-5-18">18</a></span>
 <span class="normal"><a href="#__codelineno-5-19">19</a></span>
 <span class="normal"><a href="#__codelineno-5-20">20</a></span>
-<span class="normal"><a href="#__codelineno-5-21">21</a></span>
-<span class="normal"><a href="#__codelineno-5-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTQC</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-5-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTQC</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="w">    </span><span class="n">tag</span><span class="w"> </span><span class="s2">&quot;${sample_id}&quot;</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s2">&quot;${params.output_dir}/fastqc&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6"></a>
-<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">sample_id</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">reads</span><span class="o">)</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9"></a>
-<a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">sample_id</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;*.html&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">html</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">sample_id</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;*.zip&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">zip</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13"></a>
-<a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="s2">    fastqc \\</span>
-<a id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="s2">        ${args} \\</span>
-<a id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="s2">        --threads ${task.cpus} \\</span>
-<a id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="s2">        ${reads}</span>
-<a id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="o">}</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">sample_id</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">reads</span><span class="o">)</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">sample_id</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;*.html&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">html</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">sample_id</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;*.zip&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">zip</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="s2">    fastqc \\</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="s2">        ${args} \\</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="s2">        --threads ${task.cpus} \\</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="s2">        ${reads}</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
 <h3 id="41-anar-a-la-definicio">4.1. Anar a la definició<a class="headerlink" href="#41-anar-a-la-definicio" title="Permanent link">&para;</a></h3>
 <p>Si passeu el ratolí per sobre del nom d'un procés com <code>FASTQC</code>, veureu una finestra emergent amb la interfície del mòdul (entrades i sortides):</p>
-<p><img alt="Anar a la definició" src="img/syntax.png" /></p>
+<p><img alt="Anar a la definició" src="../img/syntax.png" /></p>
 <p>Aquesta funcionalitat és particularment valuosa quan s'escriuen workflows, ja que us permet entendre la interfície del mòdul sense obrir el fitxer del mòdul directament.</p>
 <p>Podeu navegar ràpidament a qualsevol definició de procés, mòdul o variable utilitzant <strong>Ctrl/Cmd-clic</strong>. Passeu el ratolí per sobre de l'enllaç al fitxer del mòdul a la part superior del script i seguiu l'enllaç tal com se suggereix:</p>
-<p><img alt="Segueix l'enllaç" src="img/follow_link.png" /></p>
+<p><img alt="Segueix l'enllaç" src="../img/follow_link.png" /></p>
 <p>El mateix funciona per als noms de processos. Torneu a <code>basic_workflow.nf</code> i proveu-ho amb el nom del procés <code>FASTQC</code> al bloc del workflow. Això us porta directament al nom del procés (que és el mateix que el fitxer del mòdul en aquest exemple, però podria estar a mig camí d'un fitxer molt més gran).</p>
 <p>Per tornar on éreu, utilitzeu <strong>Alt+←</strong> (o <strong>Ctrl+-</strong> al Mac). Aquesta és una manera potent d'explorar el codi sense perdre el vostre lloc.</p>
 <p>Ara explorem la navegació en un workflow més complex utilitzant <code>complex_workflow.nf</code> (el fitxer només per a il·lustració esmentat anteriorment). Aquest workflow conté múltiples processos definits en fitxers de mòdul separats, així com alguns en línia. Tot i que les estructures multifitxer complexes poden ser difícils de navegar manualment, la capacitat de saltar a les definicions fa que l'exploració sigui molt més manejable.</p>
@@ -5463,7 +5461,7 @@
 </ol>
 <h3 id="42-navegacio-per-simbols">4.2. Navegació per símbols<a class="headerlink" href="#42-navegacio-per-simbols" title="Permanent link">&para;</a></h3>
 <p>Amb <code>complex_workflow.nf</code> encara obert, podeu obtenir una visió general de tots els símbols del fitxer escrivint <code>@</code> a la barra de cerca a la part superior de VSCode (la drecera de teclat és <code>Ctrl/Cmd+Shift+O</code>, però pot no funcionar a Codespaces). Això obre el panell de navegació per símbols, que llista tots els símbols del fitxer actual:</p>
-<p><img alt="Navegació per símbols" src="img/symbols.png" /></p>
+<p><img alt="Navegació per símbols" src="../img/symbols.png" /></p>
 <p>Això mostra:</p>
 <ul>
 <li>Totes les definicions de processos</li>
@@ -5473,17 +5471,17 @@
 <p>Comenceu a escriure per filtrar els resultats.</p>
 <h3 id="43-trobar-totes-les-referencies">4.3. Trobar totes les referències<a class="headerlink" href="#43-trobar-totes-les-referencies" title="Permanent link">&para;</a></h3>
 <p>Entendre on s'utilitza un procés o variable a tot el vostre codi pot ser molt útil. Per exemple, si voleu trobar totes les referències al procés <code>FASTQC</code>, comenceu navegant a la seva definició. Podeu fer-ho obrint <code>modules/fastqc.nf</code> directament, o utilitzant la funcionalitat de navegació ràpida de VS Code amb <code>Ctrl/Cmd-clic</code> com hem fet anteriorment. Un cop a la definició del procés, feu clic dret sobre el nom del procés <code>FASTQC</code> i seleccioneu "Find All References" del menú contextual per veure totes les instàncies on s'utilitza.</p>
-<p><img alt="Trobar referències" src="img/references.png" /></p>
+<p><img alt="Trobar referències" src="../img/references.png" /></p>
 <p>Aquesta funcionalitat mostra totes les instàncies on es fa referència a <code>FASTQC</code> dins del vostre espai de treball, incloent-hi el seu ús als dos workflows diferents. Aquesta informació és crucial per avaluar l'impacte potencial de les modificacions al procés <code>FASTQC</code>.</p>
 <h3 id="44-panell-desquema">4.4. Panell d'esquema<a class="headerlink" href="#44-panell-desquema" title="Permanent link">&para;</a></h3>
-<p>El panell d'Esquema, situat a la barra lateral de l'Explorador (feu clic a <img alt="Icona de l'Explorador" src="img/files_icon.png" />), proporciona una visió general convenient de tots els símbols del vostre fitxer actual. Aquesta funcionalitat us permet navegar ràpidament i gestionar l'estructura del vostre codi mostrant funcions, variables i altres elements clau en una vista jeràrquica.</p>
-<p><img alt="Panell d'esquema" src="img/outline.png" /></p>
+<p>El panell d'Esquema, situat a la barra lateral de l'Explorador (feu clic a <img alt="Icona de l'Explorador" src="../img/files_icon.png" />), proporciona una visió general convenient de tots els símbols del vostre fitxer actual. Aquesta funcionalitat us permet navegar ràpidament i gestionar l'estructura del vostre codi mostrant funcions, variables i altres elements clau en una vista jeràrquica.</p>
+<p><img alt="Panell d'esquema" src="../img/outline.png" /></p>
 <p>Utilitzeu el panell d'Esquema per navegar ràpidament a diferents parts del vostre codi sense utilitzar el navegador de fitxers.</p>
 <h3 id="45-visualitzacio-del-dag">4.5. Visualització del DAG<a class="headerlink" href="#45-visualitzacio-del-dag" title="Permanent link">&para;</a></h3>
 <p>L'extensió de Nextflow de VS Code pot visualitzar el vostre workflow com un Graf Acíclic Dirigit (DAG). Això us ajuda a entendre el flux de dades i les dependències entre processos. Obriu <code>complex_workflow.nf</code> i feu clic al botó "Preview DAG" que apareix sobre <code>workflow {</code> (el segon bloc <code>workflow</code> d'aquest fitxer):</p>
-<p><img alt="Previsualització del DAG" src="img/dag_preview.png" /></p>
+<p><img alt="Previsualització del DAG" src="../img/dag_preview.png" /></p>
 <p>Això és només el workflow d'entrada, però també podeu previsualitzar el DAG per als workflows interns fent clic al botó "Preview DAG" sobre el workflow <code>RNASEQ_PIPELINE {</code> més amunt:</p>
-<p><img alt="Previsualització del DAG del workflow intern" src="img/dag_preview_inner.png" /></p>
+<p><img alt="Previsualització del DAG del workflow intern" src="../img/dag_preview_inner.png" /></p>
 <p>Per a aquest workflow, podeu utilitzar els nodes del DAG per navegar a les definicions de processos corresponents al codi. Feu clic en un node i us portarà a la definició del procés rellevant a l'editor. Especialment quan un workflow creix fins a una mida gran, això pot ajudar-vos realment a navegar pel codi i entendre com estan connectats els processos.</p>
 <h3 id="conclusio_4">Conclusió<a class="headerlink" href="#conclusio_4" title="Permanent link">&para;</a></h3>
 <p>Podeu navegar per workflows complexos de manera eficient utilitzant anar a la definició, cerca de símbols, trobar referències i visualització del DAG per entendre l'estructura del codi i les dependències.</p>
@@ -5509,7 +5507,7 @@
 <li>Feu clic dret a la pestanya <code>modules/fastqc.nf</code> i seleccioneu "Split Right"</li>
 <li>Ara podeu veure els dos fitxers un al costat de l'altre</li>
 </ol>
-<p><img alt="Editor dividit" src="img/split_editor.png" /></p>
+<p><img alt="Editor dividit" src="../img/split_editor.png" /></p>
 <p>Això és inestimable quan:</p>
 <ul>
 <li>Comproveu les interfícies dels mòduls mentre escriviu crides al workflow, i la previsualització no és suficient</li>
@@ -5518,11 +5516,11 @@
 </ul>
 <h3 id="53-cerca-a-tot-el-projecte">5.3. Cerca a tot el projecte<a class="headerlink" href="#53-cerca-a-tot-el-projecte" title="Permanent link">&para;</a></h3>
 <p>De vegades necessiteu trobar on s'utilitzen patrons específics a tot el vostre projecte. Premeu <code>Ctrl/Cmd+Shift+F</code> per obrir el panell de cerca.</p>
-<p>Proveu de cercar <code>publishDir</code> a tot l'espai de treball:</p>
-<p><img alt="Cerca al projecte" src="img/project_search.png" /></p>
-<p>Això us mostra tots els fitxers que utilitzen directoris de publicació, ajudant-vos a:</p>
+<p>Proveu de cercar <code>container</code> a tot l'espai de treball:</p>
+<p><img alt="Cerca al projecte" src="../img/project_search.png" /></p>
+<p>Això us mostra tots els fitxers que utilitzen la directiva container, ajudant-vos a:</p>
 <ul>
-<li>Entendre els patrons d'organització de sortides</li>
+<li>Entendre quins processos utilitzen contenidors</li>
 <li>Trobar exemples de directives específiques</li>
 <li>Garantir la consistència entre mòduls</li>
 </ul>
@@ -5570,7 +5568,7 @@
 <p>Utilitzeu <strong>Ctrl+/</strong> (o <strong>Cmd+/</strong>) de nou per descomentar el codi.</p>
 <h4 id="plegament-de-codi-per-a-una-visio-general">Plegament de codi per a una visió general<a class="headerlink" href="#plegament-de-codi-per-a-una-visio-general" title="Permanent link">&para;</a></h4>
 <p>A <code>complex_workflow.nf</code>, observeu les petites fletxes al costat de les definicions de processos. Feu-hi clic per plegar (col·lapsar) els processos:</p>
-<p><img alt="Plegament de codi" src="img/code_folding.png" /></p>
+<p><img alt="Plegament de codi" src="../img/code_folding.png" /></p>
 <p>Això us dóna una visió general d'alt nivell de l'estructura del vostre workflow sense perdre-us en els detalls d'implementació.</p>
 <h4 id="coincidencia-de-claudators">Coincidència de claudàtors<a class="headerlink" href="#coincidencia-de-claudators" title="Permanent link">&para;</a></h4>
 <p>Col·loqueu el cursor al costat de qualsevol claudàtor <code>{</code> o <code>}</code> i VS Code ressaltarà el claudàtor coincident. Utilitzeu <strong>Ctrl+Shift+\</strong> (o <strong>Cmd+Shift+\</strong>) per saltar entre claudàtors coincidents.</p>
@@ -5611,8 +5609,8 @@
 <li>Vistes de diferències en línia</li>
 <li>Capacitats de commit i push</li>
 </ul>
-<p>Obriu el panell de Control de Codi Font utilitzant el botó de control de codi font (<img alt="Icona de control de codi font" src="img/source_control_icon.png" />) (<code>Ctrl+Shift+G</code> o <code>Cmd+Shift+G</code> si esteu treballant amb VSCode localment) per veure els canvis de git i fer commits directament a l'editor.</p>
-<p><img alt="Panell de Control de Codi Font" src="img/source_control.png" /></p>
+<p>Obriu el panell de Control de Codi Font utilitzant el botó de control de codi font (<img alt="Icona de control de codi font" src="../img/source_control_icon.png" />) (<code>Ctrl+Shift+G</code> o <code>Cmd+Shift+G</code> si esteu treballant amb VSCode localment) per veure els canvis de git i fer commits directament a l'editor.</p>
+<p><img alt="Panell de Control de Codi Font" src="../img/source_control.png" /></p>
 <h3 id="72-execucio-i-inspeccio-de-workflows">7.2. Execució i inspecció de workflows<a class="headerlink" href="#72-execucio-i-inspeccio-de-workflows" title="Permanent link">&para;</a></h3>
 <p>Executem un workflow i després inspeccionem els resultats. Al terminal integrat (<code>Ctrl+Shift+</code> accent greu tant per a Windows com per a MacOS), executeu el workflow bàsic:</p>
 <div class="highlight"><span class="filename">Run the basic workflow</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>basic_workflow.nf<span class="w"> </span>--input<span class="w"> </span>data/sample_data.csv<span class="w"> </span>--output_dir<span class="w"> </span>results
@@ -5667,7 +5665,7 @@
 <h3 id="que-segueix_8">Què segueix?<a class="headerlink" href="#que-segueix_8" title="Permanent link">&para;</a></h3>
 <p>Apliqueu aquestes habilitats de l'IDE mentre treballeu en altres mòduls de formació, per exemple:</p>
 <ul>
-<li><strong><a href="nf-test.md">nf-test</a></strong>: Creeu suites de proves exhaustives per als vostres workflows</li>
+<li><strong><a href="../nf_test/">nf-test</a></strong>: Creeu suites de proves exhaustives per als vostres workflows</li>
 <li><strong><a href="../../hello_nf-core/">Hello nf-core</a></strong>: Construïu pipelines de qualitat de producció amb estàndards de la comunitat</li>
 </ul>
 <p>El veritable poder d'aquestes funcionalitats de l'IDE emergeix quan treballeu en projectes més grans i complexos. Comenceu a incorporar-les al vostre flux de treball gradualment: en poques sessions, es tornaran una segona naturalesa i transformaran la manera com abordeu el desenvolupament amb Nextflow.</p>
@@ -7412,7 +7410,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Peu de pàgina" >
         
           
-          <a href="../orientation/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Orientació">
+          <a href="../orientation/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Primers passos">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -7422,20 +7420,20 @@ window.mkdocsQuizConfig = {
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Orientació
+                Primers passos
               </div>
             </div>
           </a>
         
         
           
-          <a href="../essential_scripting_patterns/" class="md-footer__link md-footer__link--next" aria-label="Següent: Patrons Essencials de Scripting en Nextflow">
+          <a href="../essential_scripting_patterns/" class="md-footer__link md-footer__link--next" aria-label="Següent: Patrons Essencials de Scripting">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Següent
               </span>
               <div class="md-ellipsis">
-                Patrons Essencials de Scripting en Nextflow
+                Patrons Essencials de Scripting
               </div>
             </div>
             <div class="md-footer__button md-icon">

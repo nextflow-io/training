@@ -491,7 +491,7 @@
   <span class="md-ellipsis">
     
   
-    Home
+    Inici
   
 
     
@@ -3093,7 +3093,7 @@
   <span class="md-ellipsis">
     
   
-    Orientació
+    Primers passos
   
 
     
@@ -3149,7 +3149,7 @@
   <span class="md-ellipsis">
     
   
-    Patrons Essencials de Scripting en Nextflow
+    Patrons Essencials de Scripting
   
 
     
@@ -3289,7 +3289,7 @@
   <span class="md-ellipsis">
     
   
-    Depuració de Workflows
+    Resolució de Problemes en Workflows
   
 
     
@@ -4833,7 +4833,7 @@ Tingues en compte que els números no són significatius, només hi són amb fin
 <span class="normal"><a href="#__codelineno-0-2">2</a></span>
 <span class="normal"><a href="#__codelineno-0-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>Hello,English,123
 <a id="__codelineno-0-2" name="__codelineno-0-2"></a>Bonjour,French,456
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a>Holà,Spanish,789
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>Hola,Spanish,789
 </code></pre></div></td></tr></table></div>
 <p>També hem escrit una versió millorada del workflow original, ara anomenada <code>2a-inputs.nf</code>, que llegirà el fitxer CSV, extraurà les salutacions i escriurà cadascuna d'elles en un fitxer separat.</p>
 <figure class="excalidraw">
@@ -4850,7 +4850,7 @@ Tingues en compte que els números no són significatius, només hi són amb fin
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">Launching `2a-inputs.nf` [mighty_sammet] DSL2 - revision: 29fb5352b3</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
@@ -4876,7 +4876,7 @@ Això suggereix que el procés <code>sayHello()</code> es va cridar tres vegades
 <a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="hll"><span class="go">└── 2a-inputs</span>
 </span><a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="hll"><span class="go">    ├── Bonjour-output.txt</span>
 </span><a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="hll"><span class="go">    ├── Hello-output.txt</span>
-</span><a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="hll"><span class="go">    └── Holà-output.txt</span>
+</span><a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="hll"><span class="go">    └── Hola-output.txt</span>
 </span></code></pre></div></td></tr></table></div>
 </details>
 <p>Sí! Veiem un nou directori anomenat <code>2a-inputs</code> amb tres fitxers de sortida amb noms diferents, prou convenientment.</p>
@@ -4887,7 +4887,7 @@ Això suggereix que el procés <code>sayHello()</code> es va cridar tres vegades
 </code></pre></div>
 <div class="highlight"><span class="filename">results/2a-inputs/Bonjour-output.txt</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">Bonjour</span>
 </code></pre></div>
-<div class="highlight"><span class="filename">results/2a-inputs/Holà-output.txt</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">Holà</span>
+<div class="highlight"><span class="filename">results/2a-inputs/Hola-output.txt</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">Hola</span>
 </code></pre></div>
 </details>
 <p>Això confirma que cada salutació del fitxer d'entrada s'ha processat adequadament.</p>
@@ -4917,7 +4917,7 @@ Hi ha dos altres que no es llisten allà.</p>
 <span class="normal"><a href="#__codelineno-9-2">2</a></span>
 <span class="normal"><a href="#__codelineno-9-3">3</a></span>
 <span class="normal"><a href="#__codelineno-9-4">4</a></span>
-<span class="normal"><a href="#__codelineno-9-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">N E X T F L O W  ~  version 25.10.2</span>
+<span class="normal"><a href="#__codelineno-9-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">N E X T F L O W  ~  version 25.10.4</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="go">Launching `2a-inputs.nf` [pedantic_hamilton] DSL2 - revision: 6bbc42e49f</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="go">[ab/1a8ece] Submitted process &gt; sayHello (1)</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="go">[0d/2cae24] Submitted process &gt; sayHello (2)</span>
@@ -4940,7 +4940,7 @@ En aquest mode ampliat, només informa que es van enviar.</p>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="go">└── Bonjour-output.txt</span>
 </code></pre></div>
 <div class="highlight"><span class="filename">b5/0df1d6</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">work/b5/0df1d642353269909c2ce23fc2a8fa/</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="go">└── Holà-output.txt</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="go">└── Hola-output.txt</span>
 </code></pre></div>
 </details>
 <p>Això confirma que cada crida de procés s'executa de manera aïllada de totes les altres.
@@ -5067,7 +5067,7 @@ Això té molts avantatges, incloent evitar col·lisions si el procés produeix 
 <a id="__codelineno-14-35" name="__codelineno-14-35"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Aquest codi crea un canal anomenat <code>greeting_ch</code> que llegeix el fitxer CSV, l'analitza i extreu la primera columna de cada fila.
-El resultat és un canal que conté <code>Hello</code>, <code>Bonjour</code> i <code>Holà</code>.</p>
+El resultat és un canal que conté <code>Hello</code>, <code>Bonjour</code> i <code>Hola</code>.</p>
 <details class="tip">
 <summary>Com funciona això?</summary>
 <p>Això és el que significa aquesta línia en llenguatge plà:</p>
@@ -5086,12 +5086,12 @@ El resultat és un canal que conté <code>Hello</code>, <code>Bonjour</code> i <
 <span class="normal"><a href="#__codelineno-15-2">2</a></span>
 <span class="normal"><a href="#__codelineno-15-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a>Hello,English,123
 <a id="__codelineno-15-2" name="__codelineno-15-2"></a>Bonjour,French,456
-<a id="__codelineno-15-3" name="__codelineno-15-3"></a>Holà,Spanish,789
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a>Hola,Spanish,789
 </code></pre></div></td></tr></table></div>
 <p>Hem transformat això en una matriu que es veu així:</p>
-<div class="highlight"><span class="filename">Array contents</span><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>[[Hello,English,123],[Bonjour,French,456],[Holà,Spanish,789]]
+<div class="highlight"><span class="filename">Array contents</span><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>[[Hello,English,123],[Bonjour,French,456],[Hola,Spanish,789]]
 </code></pre></div>
-<p>I després hem pres el primer element de cadascuna de les tres files i els hem carregat en un canal Nextflow que ara conté: <code>Hello</code>, <code>Bonjour</code> i <code>Holà</code>.</p>
+<p>I després hem pres el primer element de cadascuna de les tres files i els hem carregat en un canal Nextflow que ara conté: <code>Hello</code>, <code>Bonjour</code> i <code>Hola</code>.</p>
 <p>Si vols entendre els canals i operadors en profunditat, incloent com escriure'ls tu mateix, consulta <a href="../../hello_nextflow/02_hello_channels/#4-read-input-values-from-a-csv-file">Hello Nextflow Part 2: Hello Channels</a>.</p>
 </details>
 <h4 id="142-cridar-el-proces-a-cada-salutacio">1.4.2. Cridar el procés a cada salutació<a class="headerlink" href="#142-cridar-el-proces-a-cada-salutacio" title="Permanent link">&para;</a></h4>
@@ -5178,7 +5178,7 @@ Construïm sobre el que acabem d'aprendre sobre canals, i mirem com Nextflow uti
 <span class="normal"><a href="#__codelineno-20-4">4</a></span>
 <span class="normal"><a href="#__codelineno-20-5">5</a></span>
 <span class="normal"><a href="#__codelineno-20-6">6</a></span>
-<span class="normal"><a href="#__codelineno-20-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<span class="normal"><a href="#__codelineno-20-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2"></a>
 <a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="go">Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4"></a>
@@ -5214,17 +5214,17 @@ Construïm sobre el que acabem d'aprendre sobre canals, i mirem com Nextflow uti
 <a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="go">├── 2a-inputs</span>
 <a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="go">|   ├── Bonjour-output.txt</span>
 <a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="go">|   ├── Hello-output.txt</span>
-<a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="go">|   └── Holà-output.txt</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="go">|   └── Hola-output.txt</span>
 <a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="hll"><span class="go">└── 2b-multistep</span>
 </span><a id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="hll"><span class="go">    ├── COLLECTED-batch-output.txt</span>
 </span><a id="__codelineno-21-10" name="__codelineno-21-10"></a><span class="hll"><span class="go">    ├── batch-report.txt</span>
 </span><a id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="hll"><span class="go">    └── intermediates</span>
 </span><a id="__codelineno-21-12" name="__codelineno-21-12"></a><span class="hll"><span class="go">        ├── Bonjour-output.txt</span>
 </span><a id="__codelineno-21-13" name="__codelineno-21-13"></a><span class="hll"><span class="go">        ├── Hello-output.txt</span>
-</span><a id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="hll"><span class="go">        ├── Holà-output.txt</span>
+</span><a id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="hll"><span class="go">        ├── Hola-output.txt</span>
 </span><a id="__codelineno-21-15" name="__codelineno-21-15"></a><span class="hll"><span class="go">        ├── UPPER-Bonjour-output.txt</span>
 </span><a id="__codelineno-21-16" name="__codelineno-21-16"></a><span class="hll"><span class="go">        ├── UPPER-Hello-output.txt</span>
-</span><a id="__codelineno-21-17" name="__codelineno-21-17"></a><span class="go">        └── UPPER-Holà-output.txt</span>
+</span><a id="__codelineno-21-17" name="__codelineno-21-17"></a><span class="go">        └── UPPER-Hola-output.txt</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>Com pots veure, tenim un nou directori anomenat <code>2b-multistep</code>, i conté bastants més fitxers que abans.
@@ -5235,7 +5235,7 @@ Pren-te un minut per mirar els noms dels fitxers i comprovar el seu contingut pe
 <summary>Contingut del fitxer</summary>
 <div class="highlight"><span class="filename">results/2b-multistep/COLLECTED-batch-output.txt</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>HELLO
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>BONJOUR
-<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>HOLà
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>HOLA
 </code></pre></div>
 <div class="highlight"><span class="filename">results/2b-multistep/batch-report.txt</span><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>There were 3 greetings in this batch.
 </code></pre></div>
@@ -5575,7 +5575,7 @@ Però si en proporcionem un a la línia de comandes, el valor que especifiquem s
 <span class="normal"><a href="#__codelineno-31-4">4</a></span>
 <span class="normal"><a href="#__codelineno-31-5">5</a></span>
 <span class="normal"><a href="#__codelineno-31-6">6</a></span>
-<span class="normal"><a href="#__codelineno-31-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<span class="normal"><a href="#__codelineno-31-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2"></a>
 <a id="__codelineno-31-3" name="__codelineno-31-3"></a><span class="go">Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726</span>
 <a id="__codelineno-31-4" name="__codelineno-31-4"></a>
@@ -5611,7 +5611,7 @@ Però si en proporcionem un a la línia de comandes, el valor que especifiquem s
 <a id="__codelineno-32-4" name="__codelineno-32-4"></a><span class="go">├── 2a-inputs</span>
 <a id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="go">|   ├── Bonjour-output.txt</span>
 <a id="__codelineno-32-6" name="__codelineno-32-6"></a><span class="go">|   ├── Hello-output.txt</span>
-<a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="go">|   └── Holà-output.txt</span>
+<a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="go">|   └── Hola-output.txt</span>
 <a id="__codelineno-32-8" name="__codelineno-32-8"></a><span class="go">└── 2b-multistep</span>
 <a id="__codelineno-32-9" name="__codelineno-32-9"></a><span class="go">    ├── COLLECTED-batch-output.txt</span>
 <a id="__codelineno-32-10" name="__codelineno-32-10"></a><span class="hll"><span class="go">    ├── COLLECTED-test-output.txt</span>
@@ -5620,10 +5620,10 @@ Però si en proporcionem un a la línia de comandes, el valor que especifiquem s
 </span><a id="__codelineno-32-13" name="__codelineno-32-13"></a><span class="go">    └── intermediates</span>
 <a id="__codelineno-32-14" name="__codelineno-32-14"></a><span class="go">        ├── Bonjour-output.txt</span>
 <a id="__codelineno-32-15" name="__codelineno-32-15"></a><span class="go">        ├── Hello-output.txt</span>
-<a id="__codelineno-32-16" name="__codelineno-32-16"></a><span class="go">        ├── Holà-output.txt</span>
+<a id="__codelineno-32-16" name="__codelineno-32-16"></a><span class="go">        ├── Hola-output.txt</span>
 <a id="__codelineno-32-17" name="__codelineno-32-17"></a><span class="go">        ├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-32-18" name="__codelineno-32-18"></a><span class="go">        ├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-32-19" name="__codelineno-32-19"></a><span class="go">        └── UPPER-Holà-output.txt</span>
+<a id="__codelineno-32-19" name="__codelineno-32-19"></a><span class="go">        └── UPPER-Hola-output.txt</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>Aquest és un aspecte de la configuració d'entrada, que cobrirem amb més detall a la Part 3, però per ara el que és important és saber que els paràmetres d'entrada poden tenir valors per defecte.</p>
@@ -5899,7 +5899,7 @@ El mateix s'aplica als altres dos processos.</p>
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>
 <a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="go">Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726</span>
 <a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>
@@ -6279,7 +6279,7 @@ Aquest últim és molt millor per a la modularitat, el manteniment del codi i la
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a>
 <a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="go">Launching `2d-container.nf` [elegant_brattain] DSL2 - revision: 028a841db1</span>
 <a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a>
@@ -6295,7 +6295,7 @@ Aquest últim és molt millor per a la modularitat, el manteniment del codi i la
 <details class="abstract">
 <summary>Contingut del fitxer</summary>
 <div class="highlight"><span class="filename">results/2d-container/cowpy-COLLECTED-batch-output.txt</span><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="go">_________</span>
-<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="go">/ HOLà    \</span>
+<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="go">/ HOLA    \</span>
 <a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a><span class="go">| HELLO   |</span>
 <a id="__codelineno-61-4" name="__codelineno-61-4" href="#__codelineno-61-4"></a><span class="go">\ BONJOUR /</span>
 <a id="__codelineno-61-5" name="__codelineno-61-5" href="#__codelineno-61-5"></a><span class="go">---------</span>

@@ -1327,10 +1327,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#312-edytuj-polecenie-procesu-aby-uzywac-zmiennej-wejsciowej" class="md-nav__link">
+  <a href="#312-edytuj-polecenie-procesu-aby-uzywao-zmiennej-wejsciowej" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.2. Edytuj polecenie procesu, aby używać zmiennej wejściowej
+        3.1.2. Edytuj polecenie procesu, aby używało zmiennej wejściowej
       
     </span>
   </a>
@@ -3214,7 +3214,7 @@
   <span class="md-ellipsis">
     
   
-    Orientacja
+    Pierwsze kroki
   
 
     
@@ -3242,7 +3242,7 @@
   <span class="md-ellipsis">
     
   
-    Środowisko programistyczne
+    Index
   
 
     
@@ -3270,7 +3270,7 @@
   <span class="md-ellipsis">
     
   
-    Podstawowe Wzorce Skryptowania w Nextflow
+    Podstawowe Wzorce Skryptowania
   
 
     
@@ -3382,7 +3382,7 @@
   <span class="md-ellipsis">
     
   
-    Testowanie z nf-test
+    Index
   
 
     
@@ -3410,7 +3410,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow'ów
+    Rozwiązywanie problemów z Workflow'ami
   
 
     
@@ -4609,10 +4609,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#312-edytuj-polecenie-procesu-aby-uzywac-zmiennej-wejsciowej" class="md-nav__link">
+  <a href="#312-edytuj-polecenie-procesu-aby-uzywao-zmiennej-wejsciowej" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.2. Edytuj polecenie procesu, aby używać zmiennej wejściowej
+        3.1.2. Edytuj polecenie procesu, aby używało zmiennej wejściowej
       
     </span>
   </a>
@@ -5258,13 +5258,13 @@ Ale będziemy jej potrzebować, aby skorzystać z wyjść na poziomie workflow'u
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="go">[65/7be2fa] sayHello | 1 of 1 ✔</span>
-</code></pre></div>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="hll"><span class="go">[65/7be2fa] sayHello | 1 of 1 ✔</span>
+</span></code></pre></div>
 </details>
 <p>Jeśli Twoje wyjście konsoli wygląda mniej więcej tak, to gratulacje, właśnie uruchomiłeś Swój pierwszy workflow Nextflow'a!</p>
 <p>Najważniejszym wyjściem tutaj jest ostatnia linia, która jest podświetlona w wyjściu powyżej:</p>
@@ -5399,7 +5399,7 @@ To pokazuje, że uruchomienie tego samego workflow'u kilka razy nie nadpisze wyn
 <p>Jak właśnie się dowiedziałeś, wyjście utworzone przez nasz pipeline jest zakopane w katalogu roboczym kilka poziomów w głąb.
 Jest to zrobione celowo; Nextflow kontroluje ten katalog i nie powinniśmy z nim wchodzić w interakcję.
 Jednak to sprawia, że jest niewygodne pobieranie wyjść, na których nam zależy.</p>
-<p>Na szczęście Nextflow zapewnia sposób publikowania wyjść do wyznaczonego katalogu za pomocą <a href="https://www.nextflow.io/docs/latest/workflow.html#workflow-outputs">definicji wyjść na poziomie workflow'u</a>.</p>
+<p>Na szczęście Nextflow zapewnia sposób publikowania wyjść do wyznaczonego katalogu za pomocą <a href="https://nextflow.io/docs/latest/workflow.html#workflow-outputs">definicji wyjść na poziomie workflow'u</a>.</p>
 <h3 id="21-podstawowe-uzycie">2.1. Podstawowe użycie<a class="headerlink" href="#21-podstawowe-uzycie" title="Permanent link">&para;</a></h3>
 <p>To będzie wymagało dwóch nowych fragmentów kodu:</p>
 <ol>
@@ -5515,7 +5515,7 @@ Później nauczysz się sposobów generowania zaawansowanych struktur katalogów
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
@@ -5595,7 +5595,7 @@ Aby ustawić niestandardową lokalizację, po prostu edytuj <code>path</code> od
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>
 <a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="go">Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1</span>
 <a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
@@ -5670,7 +5670,7 @@ Po prostu dodaj <code>mode 'copy'</code> do odpowiedniej definicji wyjścia na p
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="go">Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1</span>
 <a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>
@@ -5771,7 +5771,7 @@ Chcemy dodać elastyczność za pomocą zmiennej wejściowej, co ułatwi zmianę
 </div>
 </div>
 <p>Zmienna <code>greeting</code> jest poprzedzona <code>val</code>, aby powiedzieć Nextflow'owi, że to wartość (nie ścieżka).</p>
-<h4 id="312-edytuj-polecenie-procesu-aby-uzywac-zmiennej-wejsciowej">3.1.2. Edytuj polecenie procesu, aby używać zmiennej wejściowej<a class="headerlink" href="#312-edytuj-polecenie-procesu-aby-uzywac-zmiennej-wejsciowej" title="Permanent link">&para;</a></h4>
+<h4 id="312-edytuj-polecenie-procesu-aby-uzywao-zmiennej-wejsciowej">3.1.2. Edytuj polecenie procesu, aby używało zmiennej wejściowej<a class="headerlink" href="#312-edytuj-polecenie-procesu-aby-uzywao-zmiennej-wejsciowej" title="Permanent link">&para;</a></h4>
 <p>Teraz zamieniamy oryginalną wartość zakodowaną na sztywno na wartość zmiennej wejściowej, którą oczekujemy otrzymać.</p>
 <p>W bloku procesu wprowadź następującą zmianę kodu:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Po</label><label for="__tabbed_6_2">Przed</label></div>
@@ -5843,7 +5843,7 @@ Zasadniczo możemy to napisać gdziekolwiek; ale ponieważ zamierzamy przekazać
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>
 <a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="go">Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea</span>
 <a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>
@@ -5882,7 +5882,7 @@ Jednak wyniki poprzednich uruchomień są nadal zachowane w katalogach zadań w 
 <a id="__codelineno-43-21" name="__codelineno-43-21"></a><span class="cm"> * Parametry pipeline&#39;u</span>
 <a id="__codelineno-43-22" name="__codelineno-43-22"></a><span class="cm"> */</span>
 <a id="__codelineno-43-23" name="__codelineno-43-23"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-43-24" name="__codelineno-43-24"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Holà mundo!&#39;</span>
+<a id="__codelineno-43-24" name="__codelineno-43-24"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Hola mundo!&#39;</span>
 <a id="__codelineno-43-25" name="__codelineno-43-25"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Jak widzisz, możemy określić typ wejścia, którego oczekuje workflow (Nextflow 25.10.2 i nowsze).
@@ -5890,7 +5890,7 @@ Składnia to <code>nazwa: Typ = wartość_domyślna</code>.
 Obsługiwane typy to <code>String</code>, <code>Integer</code>, <code>Float</code>, <code>Boolean</code> i <code>Path</code>.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>W starszych workflow'ach możesz zobaczyć, że cały blok <code>params</code> jest zapisany po prostu jako <code>input = 'Holà mundo!'</code>.</p>
+<p>W starszych workflow'ach możesz zobaczyć, że cały blok <code>params</code> jest zapisany po prostu jako <code>input = 'Hola mundo!'</code>.</p>
 </div>
 <p>Gdy dodajesz więcej parametrów do Swojego pipeline'u, powinieneś dodawać je wszystkie do tego bloku, niezależnie od tego, czy musisz nadać im wartość domyślną.
 To ułatwi znalezienie wszystkich konfigurowalnych parametrów na pierwszy rzut oka.</p>
@@ -5900,7 +5900,7 @@ To ułatwi znalezienie wszystkich konfigurowalnych parametrów na pierwszy rzut 
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>
 <a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="go">Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582</span>
 <a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a>
@@ -5915,7 +5915,7 @@ To ułatwi znalezienie wszystkich konfigurowalnych parametrów na pierwszy rzut 
 <a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>- file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>- cause: you tried to assign a value to the class &#39;java.lang.String&#39;
 <a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a>@ line 24, column 12.
-<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>      input: String = &#39;Holà mundo!&#39;
+<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>      input: String = &#39;Hola mundo!&#39;
 <a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a>              ^
 <a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a>
 <a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a>1 error
@@ -5933,7 +5933,7 @@ Sprawdź materiały pomocnicze <a href="../../info/nxf_versions/">Wersje Nextflo
 <p>Wyjście będzie w tym samym miejscu co poprzednio, ale zawartość powinna być zaktualizowana o nowy tekst.</p>
 <details class="abstract">
 <summary>Zawartość pliku</summary>
-<div class="highlight"><span class="filename">results/hello_world/output.txt</span><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go">Holà mundo!</span>
+<div class="highlight"><span class="filename">results/hello_world/output.txt</span><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go">Hola mundo!</span>
 </code></pre></div>
 </details>
 <p>Nextflow użył domyślnej wartości parametru greeting do utworzenia wyjścia.</p>
@@ -5944,7 +5944,7 @@ Sprawdź materiały pomocnicze <a href="../../info/nxf_versions/">Wersje Nextflo
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>
 <a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="go">Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582</span>
 <a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>
@@ -5989,7 +5989,7 @@ Oznacza to, że Nextflow uruchomi tylko procesy dodane lub zmodyfikowane od osta
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>
 <a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a><span class="go">Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5</span>
 <a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a>
@@ -6097,7 +6097,7 @@ Jakie są minimalne wymagane komponenty procesu Nextflow'a?
 - [ ] Bloki wejścia, wyjścia i skryptu
 - [ ] Tylko blok skryptu
 
-Dowiedz się więcej: [1.1.1. Definicja process](#111-definicja-process)
+Dowiedz się więcej: [1.1.1. Definicja process](#111-the-process-definition)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
@@ -6111,7 +6111,7 @@ Dowiedz się więcej: [1.1.1. Definicja process](#111-definicja-process)
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#111-definicja-process">1.1.1. Definicja process</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#111-the-process-definition">1.1.1. Definicja process</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6122,7 +6122,7 @@ Jaki jest cel bloku output w procesie?
 - [x] Deklarowanie oczekiwanych wyjść z procesu
 - [ ] Definiowanie zmiennych środowiskowych
 
-Dowiedz się więcej: [1.1.1. Definicja process](#111-definicja-process)
+Dowiedz się więcej: [1.1.1. Definicja process](#111-the-process-definition)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -6136,7 +6136,7 @@ Dowiedz się więcej: [1.1.1. Definicja process](#111-definicja-process)
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#111-definicja-process">1.1.1. Definicja process</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#111-the-process-definition">1.1.1. Definicja process</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6183,7 +6183,7 @@ work/a3/7be2fa.../
 - [ ] `.command.log`
 - [ ] `.command.out`
 
-Dowiedz się więcej: [1.2.2. Znajdź wyjście i dzienniki w katalogu `work`](#122-znajdz-wyjscie-i-dzienniki-w-katalogu-work)
+Dowiedz się więcej: [1.2.2. Znajdź wyjście i dzienniki w katalogu `work`](#122-find-the-output-and-logs-in-the-work-directory)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
@@ -6207,7 +6207,7 @@ Dowiedz się więcej: [1.2.2. Znajdź wyjście i dzienniki w katalogu `work`](#1
                     <div class="quiz-feedback hidden"></div>
 
                 </form>
-                <section class="content hidden"><p>Dowiedz się więcej: <a href="#122-znajdz-wyjscie-i-dzienniki-w-katalogu-work">1.2.2. Znajdź wyjście i dzienniki w katalogu <code>work</code></a></p></section>
+                <section class="content hidden"><p>Dowiedz się więcej: <a href="#122-find-the-output-and-logs-in-the-work-directory">1.2.2. Znajdź wyjście i dzienniki w katalogu <code>work</code></a></p></section>
             </div>
 
 <!-- mkdocs-quiz-source
@@ -6218,7 +6218,7 @@ Co robi flaga `-resume`?
 - [x] Pomija procesy, które już zakończyły się pomyślnie
 - [ ] Tworzy kopię zapasową workflow'u
 
-Dowiedz się więcej: [4.1. Uruchom ponownie workflow z `-resume`](#41-uruchom-ponownie-workflow-z--resume)
+Dowiedz się więcej: [4.1. Uruchom ponownie workflow z `-resume`](#41-re-launch-a-workflow-with--resume)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
@@ -6232,7 +6232,7 @@ Dowiedz się więcej: [4.1. Uruchom ponownie workflow z `-resume`](#41-uruchom-p
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#41-uruchom-ponownie-workflow-z--resume">4.1. Uruchom ponownie workflow z <code>-resume</code></a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#41-re-launch-a-workflow-with--resume">4.1. Uruchom ponownie workflow z <code>-resume</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6243,7 +6243,7 @@ Jaki jest domyślny tryb publikowania wyjść workflow'u?
 - [ ] Przenoszenie plików do katalogu wyjściowego
 - [ ] Kompresowanie plików w katalogu wyjściowym
 
-Dowiedz się więcej: [2.3. Ustaw tryb publikowania na kopiowanie](#23-ustaw-tryb-publikowania-na-kopiowanie)
+Dowiedz się więcej: [2.3. Ustaw tryb publikowania na kopiowanie](#23-set-the-publish-mode-to-copy)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
@@ -6257,7 +6257,7 @@ Dowiedz się więcej: [2.3. Ustaw tryb publikowania na kopiowanie](#23-ustaw-try
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#23-ustaw-tryb-publikowania-na-kopiowanie">2.3. Ustaw tryb publikowania na kopiowanie</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#23-set-the-publish-mode-to-copy">2.3. Ustaw tryb publikowania na kopiowanie</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6268,7 +6268,7 @@ Jak przekazujesz wartość parametru do workflow'u Nextflow'a z wiersza poleceń
 - [x] `--parameter value`
 - [ ] `-p parameter=value`
 
-Dowiedz się więcej: [3.2. Skonfiguruj parametr wiersza poleceń do przechwytywania danych wejściowych użytkownika](#32-skonfiguruj-parametr-wiersza-polecen-do-przechwytywania-danych-wejsciowych-uzytkownika)
+Dowiedz się więcej: [3.2. Skonfiguruj parametr wiersza poleceń do przechwytywania danych wejściowych użytkownika](#32-set-up-a-command-line-parameter-to-capture-user-input)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -6282,7 +6282,7 @@ Dowiedz się więcej: [3.2. Skonfiguruj parametr wiersza poleceń do przechwytyw
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#32-skonfiguruj-parametr-wiersza-polecen-do-przechwytywania-danych-wejsciowych-uzytkownika">3.2. Skonfiguruj parametr wiersza poleceń do przechwytywania danych wejściowych użytkownika</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#32-set-up-a-command-line-parameter-to-capture-user-input">3.2. Skonfiguruj parametr wiersza poleceń do przechwytywania danych wejściowych użytkownika</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source

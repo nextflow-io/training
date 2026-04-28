@@ -3321,7 +3321,7 @@
   <span class="md-ellipsis">
     
   
-    Orientação
+    Primeiros passos
   
 
     
@@ -3377,7 +3377,7 @@
   <span class="md-ellipsis">
     
   
-    Padrões Essenciais de Scripting em Nextflow
+    Padrões Essenciais de Scripting
   
 
     
@@ -3405,7 +3405,7 @@
   <span class="md-ellipsis">
     
   
-    Processamento de entrada de arquivos
+    Processamento de Entrada de Arquivos
   
 
     
@@ -3433,7 +3433,7 @@
   <span class="md-ellipsis">
     
   
-    Metadados e meta maps
+    Metadados e Meta Maps
   
 
     
@@ -3489,7 +3489,7 @@
   <span class="md-ellipsis">
     
   
-    Testando com nf-test
+    Index
   
 
     
@@ -3517,7 +3517,7 @@
   <span class="md-ellipsis">
     
   
-    Depurando Fluxos de Trabalho
+    Solução de Problemas em Fluxos de Trabalho
   
 
     
@@ -5344,8 +5344,8 @@ Ele é equivalente ao script produzido ao trabalhar na Parte 5 deste curso de tr
 </span><a id="__codelineno-1-52" name="__codelineno-1-52"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
 <a id="__codelineno-1-53" name="__codelineno-1-53"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-1-54" name="__codelineno-1-54"></a><span class="w">    </span><span class="n">cowpy_art</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-1-55" name="__codelineno-1-55"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_config&#39;</span>
-<a id="__codelineno-1-56" name="__codelineno-1-56"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-1-55" name="__codelineno-1-55"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_config&#39;</span>
+</span><a id="__codelineno-1-56" name="__codelineno-1-56"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
 <a id="__codelineno-1-57" name="__codelineno-1-57"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-1-58" name="__codelineno-1-58"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5354,7 +5354,7 @@ Ele é equivalente ao script produzido ao trabalhar na Parte 5 deste curso de tr
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">Launching `hello-config.nf` [nice_escher] DSL2 - revision: d5dfdc9872</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
@@ -5374,10 +5374,10 @@ Ele é equivalente ao script produzido ao trabalhar na Parte 5 deste curso de tr
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">│   ├── Bonjour-output.txt</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">│   ├── COLLECTED-batch-output.txt</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">│   ├── Hello-output.txt</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">│   ├── Holà-output.txt</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">│   ├── Hola-output.txt</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="go">│   ├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="go">│   ├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="go">│   └── UPPER-Holà-output.txt</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="go">│   └── UPPER-Hola-output.txt</span>
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="go">└── batch-report.txt</span>
 </code></pre></div>
 </details>
@@ -5385,7 +5385,7 @@ Ele é equivalente ao script produzido ao trabalhar na Parte 5 deste curso de tr
 <details class="abstract">
 <summary>Conteúdo do arquivo</summary>
 <div class="highlight"><span class="filename">results/hello_config/cowpy-COLLECTED-batch-output.txt</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">_________</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="go">/ HOLà    \</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="go">/ HOLA    \</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go">| HELLO   |</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="go">\ BONJOUR /</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="go">---------</span>
@@ -5511,7 +5511,7 @@ Você poderia modificar o caractere, por exemplo, e executar o fluxo de trabalho
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">Launching `hello-config.nf` [disturbed_einstein] DSL2 - revision: ede9037d02</span>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
@@ -5527,7 +5527,7 @@ Você poderia modificar o caractere, por exemplo, e executar o fluxo de trabalho
 <details class="abstract">
 <summary>Conteúdo do arquivo</summary>
 <div class="highlight"><span class="filename">results/hello_config/cowpy-COLLECTED-batch-output.txt</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">_________</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="go">/ HOLà    \</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="go">/ HOLA    \</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="go">| HELLO   |</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="go">\ BONJOUR /</span>
 <a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="go">---------</span>
@@ -5587,7 +5587,7 @@ Certifique-se de adaptar o caminho adequadamente!</p>
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">Launching `../hello-config.nf` [trusting_escher] DSL2 - revision: 356df0818d</span>
 <a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
@@ -5606,7 +5606,7 @@ Certifique-se de adaptar o caminho adequadamente!</p>
 <div class="highlight"><span class="filename">tux-run/results/hello_config/cowpy-COLLECTED-experiment-output.txt</span><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="go">_________</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="go">/ HELLO   \</span>
 <a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="go">| BONJOUR |</span>
-<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="go">\ HOLà    /</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="go">\ HOLA    /</span>
 <a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="go">---------</span>
 <a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="go">  \</span>
 <a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="go">    \</span>
@@ -5621,7 +5621,7 @@ Certifique-se de adaptar o caminho adequadamente!</p>
 </details>
 <p>É isso; agora você tem um espaço para experimentar sem modificar sua configuração 'normal'.</p>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<p class="admonition-title">Aviso</p>
 <p>Certifique-se de voltar ao diretório anterior antes de passar para a próxima seção!</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nb">cd</span><span class="w"> </span>..
 </code></pre></div>
@@ -5653,7 +5653,7 @@ Sinta-se livre para tentar essa por conta própria.</p>
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>
 <a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="go">Launching `hello-config.nf` [disturbed_sammet] DSL2 - revision: ede9037d02</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>
@@ -5669,7 +5669,7 @@ Sinta-se livre para tentar essa por conta própria.</p>
 <summary>Conteúdo do arquivo</summary>
 <div class="highlight"><span class="filename">results/hello_config/cowpy-COLLECTED-yaml-output.txt</span><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">_________</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="go">/ HELLO   \</span>
-<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">| HOLà    |</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">| HOLA    |</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="go">\ BONJOUR /</span>
 <a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="go">---------</span>
 <a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="go">\                             .       .</span>
@@ -5715,7 +5715,7 @@ Esta é a maneira recomendada de controlar o caminho raiz onde as saídas são p
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>
 <a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="go">Launching `hello-config.nf` [prickly_kay] DSL2 - revision: 32ecc4fba2</span>
 <a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>
@@ -5737,10 +5737,10 @@ Esta é a maneira recomendada de controlar o caminho raiz onde as saídas são p
 <a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="go">        ├── Bonjour-output.txt</span>
 <a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="go">        ├── COLLECTED-batch-output.txt</span>
 <a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="go">        ├── Hello-output.txt</span>
-<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="go">        ├── Holà-output.txt</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="go">        ├── Hola-output.txt</span>
 <a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="go">        ├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="go">        ├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="go">        └── UPPER-Holà-output.txt</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="go">        └── UPPER-Hola-output.txt</span>
 </code></pre></div>
 </details>
 <p>Note que ainda temos o subdiretório <code>hello_config</code> das declarações <code>path</code> no bloco de saída.
@@ -5858,14 +5858,14 @@ Para saídas que não precisam de um subdiretório, podemos definir a diretiva <
 <a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="go">    ├── Bonjour-output.txt</span>
 <a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="go">    ├── COLLECTED-batch-output.txt</span>
 <a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="go">    ├── Hello-output.txt</span>
-<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="go">    ├── Holà-output.txt</span>
+<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="go">    ├── Hola-output.txt</span>
 <a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a><span class="go">    ├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a><span class="go">    ├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a><span class="go">    └── UPPER-Holà-output.txt</span>
+<a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a><span class="go">    └── UPPER-Hola-output.txt</span>
 </code></pre></div>
 </details>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">Dica</p>
 <p>A opção <code>-output-dir</code> é usada para controlar <em>onde</em> as saídas vão, enquanto a diretiva <code>path</code> no bloco de saída controla a <em>estrutura de subdiretórios</em>.</p>
 </div>
 <h3 id="22-caminhos-de-saida-dinamicos">2.2. Caminhos de saída dinâmicos<a class="headerlink" href="#22-caminhos-de-saida-dinamicos" title="Permanent link">&para;</a></h3>
@@ -5929,7 +5929,7 @@ Agora você pode mudar o local de saída definindo o parâmetro <code>--batch</c
 </code></pre></div>
 <p>Isso publica saídas em <code>custom-outdir-config/my_run/</code>.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
+<p class="admonition-title">Nota</p>
 <p>A opção CLI <code>-output-dir</code> tem precedência sobre a configuração <code>outputDir</code>.
 Se estiver definida, a opção de configuração será ignorada completamente.</p>
 </div>
@@ -6036,10 +6036,10 @@ Se estiver definida, a opção de configuração será ignorada completamente.</
 <p>Na edição acima, apagamos a distinção entre <code>intermediates</code> versus saídas finais estando no nível superior.
 Vamos colocar isso de volta, e também colocar os arquivos em um subdiretório <code>params.batch</code>.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">Dica</p>
 <p>Incluir <code>params.batch</code> no <code>path</code> do bloco de saída, em vez do <code>outputDir</code> de configuração, significa que não será sobrescrito com <code>-output-dir</code> no CLI.</p>
 </div>
-<p>Primeiro, atualize o arquivo de configuração para remover <code>${params.batch}</code> do <code>outputDir</code> (já que estamos movendo-o para as declarações de caminho):</p>
+<p>Primeiro, atualize o arquivo de configuração para remover <code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">}</span></code> do <code>outputDir</code> (já que estamos movendo-o para as declarações de caminho):</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Depois</label><label for="__tabbed_6_2">Antes</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -6167,7 +6167,7 @@ Vamos colocar isso de volta, e também colocar os arquivos em um subdiretório <
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>
 <a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="go">Launching `hello-config.nf` [mad_curry] DSL2 - revision: 668a98ccb9</span>
 <a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>
@@ -6193,11 +6193,11 @@ Vamos colocar isso de volta, e também colocar os arquivos em um subdiretório <
 <a id="__codelineno-42-10" name="__codelineno-42-10" href="#__codelineno-42-10"></a><span class="go">        ├── convertToUpper</span>
 <a id="__codelineno-42-11" name="__codelineno-42-11" href="#__codelineno-42-11"></a><span class="go">        │   ├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-42-12" name="__codelineno-42-12" href="#__codelineno-42-12"></a><span class="go">        │   ├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-42-13" name="__codelineno-42-13" href="#__codelineno-42-13"></a><span class="go">        │   └── UPPER-Holà-output.txt</span>
+<a id="__codelineno-42-13" name="__codelineno-42-13" href="#__codelineno-42-13"></a><span class="go">        │   └── UPPER-Hola-output.txt</span>
 <a id="__codelineno-42-14" name="__codelineno-42-14" href="#__codelineno-42-14"></a><span class="go">        └── sayHello</span>
 <a id="__codelineno-42-15" name="__codelineno-42-15" href="#__codelineno-42-15"></a><span class="go">            ├── Bonjour-output.txt</span>
 <a id="__codelineno-42-16" name="__codelineno-42-16" href="#__codelineno-42-16"></a><span class="go">            ├── Hello-output.txt</span>
-<a id="__codelineno-42-17" name="__codelineno-42-17" href="#__codelineno-42-17"></a><span class="go">            └── Holà-output.txt</span>
+<a id="__codelineno-42-17" name="__codelineno-42-17" href="#__codelineno-42-17"></a><span class="go">            └── Hola-output.txt</span>
 </code></pre></div>
 </details>
 <h3 id="23-defina-o-modo-de-publicacao-no-nivel-do-fluxo-de-trabalho">2.3. Defina o modo de publicação no nível do fluxo de trabalho<a class="headerlink" href="#23-defina-o-modo-de-publicacao-no-nivel-do-fluxo-de-trabalho" title="Permanent link">&para;</a></h3>
@@ -6326,7 +6326,7 @@ Vamos colocar isso de volta, e também colocar os arquivos em um subdiretório <
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>
 <a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a><span class="go">Launching `hello-config.nf` [small_stone] DSL2 - revision: 024d6361b5</span>
 <a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a>
@@ -6352,11 +6352,11 @@ Vamos colocar isso de volta, e também colocar os arquivos em um subdiretório <
 <a id="__codelineno-49-10" name="__codelineno-49-10" href="#__codelineno-49-10"></a><span class="go">        ├── convertToUpper</span>
 <a id="__codelineno-49-11" name="__codelineno-49-11" href="#__codelineno-49-11"></a><span class="go">        │   ├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-49-12" name="__codelineno-49-12" href="#__codelineno-49-12"></a><span class="go">        │   ├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-49-13" name="__codelineno-49-13" href="#__codelineno-49-13"></a><span class="go">        │   └── UPPER-Holà-output.txt</span>
+<a id="__codelineno-49-13" name="__codelineno-49-13" href="#__codelineno-49-13"></a><span class="go">        │   └── UPPER-Hola-output.txt</span>
 <a id="__codelineno-49-14" name="__codelineno-49-14" href="#__codelineno-49-14"></a><span class="go">        └── sayHello</span>
 <a id="__codelineno-49-15" name="__codelineno-49-15" href="#__codelineno-49-15"></a><span class="go">            ├── Bonjour-output.txt</span>
 <a id="__codelineno-49-16" name="__codelineno-49-16" href="#__codelineno-49-16"></a><span class="go">            ├── Hello-output.txt</span>
-<a id="__codelineno-49-17" name="__codelineno-49-17" href="#__codelineno-49-17"></a><span class="go">            └── Holà-output.txt</span>
+<a id="__codelineno-49-17" name="__codelineno-49-17" href="#__codelineno-49-17"></a><span class="go">            └── Hola-output.txt</span>
 </code></pre></div>
 </details>
 <p>A principal razão pela qual você ainda pode querer usar a maneira por saída de definir o modo é se você quiser misturar e combinar dentro do mesmo fluxo de trabalho, <em>ou seja</em>, ter algumas saídas sendo copiadas e algumas sendo symlinkadas.</p>
@@ -6431,7 +6431,7 @@ O que significa que agora precisamos adicionar um desses ao nosso processo <code
 </div>
 <p>Para ser claro, não estamos <em>substituindo</em> a diretiva <code>docker</code>, estamos <em>adicionando</em> uma opção alternativa.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">Dica</p>
 <p>Existem algumas maneiras diferentes de obter o URI para um determinado pacote conda.
 Recomendamos usar a consulta de busca <a href="https://seqera.io/containers/">Seqera Containers</a>, que lhe dará um URI que você pode copiar e colar, mesmo que você não esteja planejando criar um contêiner a partir dele.</p>
 </div>
@@ -6441,7 +6441,7 @@ Recomendamos usar a consulta de busca <a href="https://seqera.io/containers/">Se
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><span class="filename">Saída</span><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a>
 <a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a><span class="go">Launching `hello-config.nf` [friendly_lamport] DSL2 - revision: 024d6361b5</span>
 <a id="__codelineno-55-4" name="__codelineno-55-4" href="#__codelineno-55-4"></a>
@@ -6455,7 +6455,7 @@ Recomendamos usar a consulta de busca <a href="https://seqera.io/containers/">Se
 <p>Isso deve funcionar sem problemas e produzir as mesmas saídas de antes em <code>custom-outdir-config/conda</code>.</p>
 <p>Nos bastidores, o Nextflow recuperou os pacotes Conda e criou o ambiente, o que normalmente requer um pouco de trabalho; então é bom que não tenhamos que fazer nada disso nós mesmos!</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
+<p class="admonition-title">Nota</p>
 <p>Isso executa rapidamente porque o pacote <code>cowpy</code> é bastante pequeno, mas se você estiver trabalhando com pacotes grandes, pode levar um pouco mais de tempo do que o normal na primeira vez, e você pode ver a saída do console ficar 'presa' por um minuto ou mais antes de completar.
 Isso é normal e se deve ao trabalho extra que o Nextflow faz na primeira vez que você usa um novo pacote.</p>
 </div>
@@ -6483,7 +6483,7 @@ Se os recursos das tarefas prontas para executar excedem os recursos disponívei
 <h3 id="41-direcionando-um-backend-diferente">4.1. Direcionando um backend diferente<a class="headerlink" href="#41-direcionando-um-backend-diferente" title="Permanent link">&para;</a></h3>
 <p>A escolha do executor é definida por uma diretiva de processo chamada <code>executor</code>.
 Por padrão, é definido como <code>local</code>, então a seguinte configuração está implícita:</p>
-<div class="highlight"><span class="filename">Configuração integrada</span><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<div class="highlight"><span class="filename">Built-in configuration</span><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a><span class="w">    </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;local&#39;</span>
 <a id="__codelineno-56-3" name="__codelineno-56-3" href="#__codelineno-56-3"></a><span class="o">}</span>
 </code></pre></div>
@@ -6493,7 +6493,7 @@ Por padrão, é definido como <code>local</code>, então a seguinte configuraç�
 <a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a><span class="o">}</span>
 </code></pre></div>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<p class="admonition-title">Aviso</p>
 <p>Não podemos realmente testar isso no ambiente de treinamento porque não está configurado para se conectar a um HPC.</p>
 </div>
 <h3 id="42-lidando-com-sintaxe-especifica-do-backend-para-parametros-de-execucao">4.2. Lidando com sintaxe específica do backend para parâmetros de execução<a class="headerlink" href="#42-lidando-com-sintaxe-especifica-do-backend-para-parametros-de-execucao" title="Permanent link">&para;</a></h3>
@@ -6502,19 +6502,19 @@ Por padrão, é definido como <code>local</code>, então a seguinte configuraç�
 <details class="abstract">
 <summary>Exemplos</summary>
 <p>Por exemplo, o mesmo trabalho requerendo 8 CPUs e 4GB de RAM para ser executado na fila "my-science-work" precisa ser expresso das seguintes maneiras diferentes dependendo do backend.</p>
-<div class="highlight"><span class="filename">Config para SLURM / submeter usando sbatch</span><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="c1">#SBATCH -o /path/to/my/task/directory/my-task-1.log</span>
+<div class="highlight"><span class="filename">Config for SLURM / submit using sbatch</span><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="c1">#SBATCH -o /path/to/my/task/directory/my-task-1.log</span>
 <a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a><span class="c1">#SBATCH --no-requeue</span>
 <a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a><span class="c1">#SBATCH -c 8</span>
 <a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a><span class="c1">#SBATCH --mem 4096M</span>
 <a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a><span class="c1">#SBATCH -p my-science-work</span>
 </code></pre></div>
-<div class="highlight"><span class="filename">Config para PBS / submeter usando qsub</span><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="c1">#PBS -o /path/to/my/task/directory/my-task-1.log</span>
+<div class="highlight"><span class="filename">Config for PBS / submit using qsub</span><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="c1">#PBS -o /path/to/my/task/directory/my-task-1.log</span>
 <a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a><span class="c1">#PBS -j oe</span>
 <a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a><span class="c1">#PBS -q my-science-work</span>
 <a id="__codelineno-59-4" name="__codelineno-59-4" href="#__codelineno-59-4"></a><span class="c1">#PBS -l nodes=1:ppn=5</span>
 <a id="__codelineno-59-5" name="__codelineno-59-5" href="#__codelineno-59-5"></a><span class="c1">#PBS -l mem=4gb</span>
 </code></pre></div>
-<div class="highlight"><span class="filename">Config para SGE / submeter usando qsub</span><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="c1">#$ -o /path/to/my/task/directory/my-task-1.log</span>
+<div class="highlight"><span class="filename">Config for SGE / submit using qsub</span><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="c1">#$ -o /path/to/my/task/directory/my-task-1.log</span>
 <a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a><span class="c1">#$ -j y</span>
 <a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="c1">#$ -terse</span>
 <a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a><span class="c1">#$ -notify</span>
@@ -6536,7 +6536,7 @@ Então, no tempo de execução, o Nextflow usará essas configurações para ger
 <p>A maioria das plataformas de computação de alto desempenho permite (e às vezes exige) que você especifique certos parâmetros de alocação de recursos, como número de CPUs e memória.</p>
 <p>Por padrão, o Nextflow usará uma única CPU e 2GB de memória para cada processo.
 As diretivas de processo correspondentes são chamadas <code>cpus</code> e <code>memory</code>, então a seguinte configuração está implícita:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Configuração integrada</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-61-1">1</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Built-in configuration</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-61-1">1</a></span>
 <span class="normal"><a href="#__codelineno-61-2">2</a></span>
 <span class="normal"><a href="#__codelineno-61-3">3</a></span>
 <span class="normal"><a href="#__codelineno-61-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
@@ -6671,7 +6671,7 @@ Certifique-se de clicar nas abas que mostram os resultados de utilização como 
 </div>
 <p>Com esta configuração, todos os processos solicitarão 1GB de memória e uma única CPU (o padrão implícito), exceto o processo <code>cowpy</code>, que solicitará 2GB e 2 CPUs.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">Dica</p>
 <p>Se você tiver uma máquina com poucas CPUs e alocar um número alto por processo, poderá ver chamadas de processo sendo enfileiradas uma atrás da outra.
 Isso ocorre porque o Nextflow garante que não solicitemos mais CPUs do que as disponíveis.</p>
 </div>
@@ -6682,7 +6682,7 @@ Isso ocorre porque o Nextflow garante que não solicitemos mais CPUs do que as d
 <p>Você provavelmente não notará nenhuma diferença real, pois esta é uma carga de trabalho tão pequena, mas esta é a abordagem que você usaria para analisar o desempenho e os requisitos de recursos de um fluxo de trabalho do mundo real.</p>
 <p>É muito útil quando seus processos têm requisitos de recursos diferentes. Ele o capacita a dimensionar corretamente as alocações de recursos que você configura para cada processo com base em dados reais, não em suposições.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">Dica</p>
 <p>Este é apenas um pequeno aperitivo do que você pode fazer para otimizar seu uso de recursos.
 O próprio Nextflow tem uma <a href="https://nextflow.io/docs/latest/process.html#dynamic-task-resources">lógica de repetição dinâmica</a> realmente interessante embutida para repetir trabalhos que falham devido a limitações de recursos.
 Além disso, a Seqera Platform oferece ferramentas orientadas por IA para otimizar suas alocações de recursos automaticamente também.</p>
@@ -6691,7 +6691,7 @@ Além disso, a Seqera Platform oferece ferramentas orientadas por IA para otimiz
 <p>Dependendo de qual executor de computação e infraestrutura de computação você está usando, pode haver algumas restrições sobre o que você pode (ou deve) alocar.
 Por exemplo, seu cluster pode exigir que você permaneça dentro de certos limites.</p>
 <p>Você pode usar a diretiva <code>resourceLimits</code> para definir as limitações relevantes. A sintaxe se parece com isso quando está sozinha em um bloco de processo:</p>
-<div class="highlight"><span class="filename">Exemplo de sintaxe</span><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<div class="highlight"><span class="filename">Syntax example</span><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a><span class="w">    </span><span class="n">resourceLimits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
 <a id="__codelineno-68-3" name="__codelineno-68-3" href="#__codelineno-68-3"></a><span class="w">        </span><span class="nl">memory:</span><span class="w"> </span><span class="mi">750</span><span class="o">.</span><span class="na">GB</span><span class="o">,</span>
 <a id="__codelineno-68-4" name="__codelineno-68-4" href="#__codelineno-68-4"></a><span class="w">        </span><span class="nl">cpus:</span><span class="w"> </span><span class="mi">200</span><span class="o">,</span>
@@ -6830,7 +6830,7 @@ No entanto, se você tentasse executar o fluxo de trabalho com alocações de re
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-72-2" name="__codelineno-72-2" href="#__codelineno-72-2"></a>
 <a id="__codelineno-72-3" name="__codelineno-72-3" href="#__codelineno-72-3"></a><span class="go">Launching `hello-config.nf` [hungry_sanger] DSL2 - revision: 024d6361b5</span>
 <a id="__codelineno-72-4" name="__codelineno-72-4" href="#__codelineno-72-4"></a>
@@ -6843,7 +6843,7 @@ No entanto, se você tentasse executar o fluxo de trabalho com alocações de re
 </details>
 <p>Como você pode ver, isso nos permite alternar entre configurações muito convenientemente no tempo de execução.</p>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<p class="admonition-title">Aviso</p>
 <p>O perfil <code>univ_hpc</code> não será executado corretamente no ambiente de treinamento, pois não temos acesso a um agendador Slurm.</p>
 </div>
 <p>Se no futuro encontrarmos outros elementos de configuração que estão sempre co-ocorrendo com esses, podemos simplesmente adicioná-los ao(s) perfil(is) correspondente(s).
@@ -6854,7 +6854,7 @@ Também podemos usá-los para definir valores padrão para parâmetros de fluxo 
 Você pode considerar isso uma alternativa ao uso de um arquivo de parâmetros.</p>
 <h4 id="621-configure-o-perfil">6.2.1. Configure o perfil<a class="headerlink" href="#621-configure-o-perfil" title="Permanent link">&para;</a></h4>
 <p>A sintaxe para expressar valores padrão neste contexto se parece com isso, para um perfil que nomeamos <code>test</code>:</p>
-<div class="highlight"><span class="filename">Exemplo de sintaxe</span><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a><span class="w">    </span><span class="n">test</span><span class="w"> </span><span class="o">{</span>
+<div class="highlight"><span class="filename">Syntax example</span><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a><span class="w">    </span><span class="n">test</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-73-2" name="__codelineno-73-2" href="#__codelineno-73-2"></a><span class="w">        </span><span class="n">params</span><span class="o">.&lt;</span><span class="n">parameter1</span><span class="o">&gt;</span>
 <a id="__codelineno-73-3" name="__codelineno-73-3" href="#__codelineno-73-3"></a><span class="w">        </span><span class="n">params</span><span class="o">.&lt;</span><span class="n">parameter2</span><span class="o">&gt;</span>
 <a id="__codelineno-73-4" name="__codelineno-73-4" href="#__codelineno-73-4"></a><span class="w">        </span><span class="o">...</span>
@@ -6917,7 +6917,7 @@ Se as configurações conflitantes são definidas em diferentes fontes de config
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a>
 <a id="__codelineno-76-3" name="__codelineno-76-3" href="#__codelineno-76-3"></a><span class="go">Launching `hello-config.nf` [modest_becquerel] DSL2 - revision: 024d6361b5</span>
 <a id="__codelineno-76-4" name="__codelineno-76-4" href="#__codelineno-76-4"></a>
@@ -6932,7 +6932,7 @@ Se as configurações conflitantes são definidas em diferentes fontes de config
 <details class="abstract">
 <summary>Conteúdo do arquivo</summary>
 <div class="highlight"><span class="filename">custom-outdir-config/test/cowpy/cowpy-COLLECTED-test-output.txt</span><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="go"> _________</span>
-<a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a><span class="go">/ HOLà    \</span>
+<a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a><span class="go">/ HOLA    \</span>
 <a id="__codelineno-77-3" name="__codelineno-77-3" href="#__codelineno-77-3"></a><span class="go">| HELLO   |</span>
 <a id="__codelineno-77-4" name="__codelineno-77-4" href="#__codelineno-77-4"></a><span class="go">\ BONJOUR /</span>
 <a id="__codelineno-77-5" name="__codelineno-77-5" href="#__codelineno-77-5"></a><span class="go">---------</span>
@@ -6956,10 +6956,10 @@ Se as configurações conflitantes são definidas em diferentes fontes de config
 </details>
 <p>Isso significa que, desde que distribuamos quaisquer arquivos de dados de teste com o código do fluxo de trabalho, qualquer pessoa pode rapidamente experimentar o fluxo de trabalho sem ter que fornecer suas próprias entradas via linha de comando ou arquivo de parâmetros.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">Dica</p>
 <p>Podemos apontar para URLs para arquivos maiores que são armazenados externamente.
 O Nextflow os baixará automaticamente desde que haja uma conexão aberta.</p>
-<p>Para mais detalhes, veja a Side Quest <a href="../side_quests/working_with_files.md">Trabalhando com Arquivos</a></p>
+<p>Para mais detalhes, veja a Side Quest <a href="../../side_quests/working_with_files/">Trabalhando com Arquivos</a></p>
 </div>
 <h3 id="63-use-nextflow-config-para-ver-a-configuracao-resolvida">6.3. Use <code>nextflow config</code> para ver a configuração resolvida<a class="headerlink" href="#63-use-nextflow-config-para-ver-a-configuracao-resolvida" title="Permanent link">&para;</a></h3>
 <p>Como observado acima, às vezes o mesmo parâmetro pode ser definido com valores diferentes em perfis que você deseja combinar.
@@ -7085,7 +7085,7 @@ O que tem precedência quando o mesmo parâmetro é definido tanto no arquivo de
 - [ ] O primeiro valor encontrado
 - [ ] Nenhum; causa um erro
 
-Saiba mais: [1.1. Mova os valores padrão para o `nextflow.config`](#11-mova-os-valores-padrão-para-o-nextflowconfig)
+Saiba mais: [1.1. Mova os valores padrão para o `nextflow.config`](#11-move-default-values-to-nextflowconfig)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -7099,7 +7099,7 @@ Saiba mais: [1.1. Mova os valores padrão para o `nextflow.config`](#11-mova-os-
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Saiba mais: <a href="#11-mova-os-valores-padrão-para-o-nextflowconfig">1.1. Mova os valores padrão para o <code>nextflow.config</code></a></p></section>
+    <section class="content hidden"><p>Saiba mais: <a href="#11-move-default-values-to-nextflowconfig">1.1. Mova os valores padrão para o <code>nextflow.config</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -7133,7 +7133,7 @@ Se tanto Docker quanto Conda estão habilitados e um processo tem ambas as diret
 - [ ] O primeiro definido
 - [ ] Causa um erro
 
-Saiba mais: [3. Selecione uma tecnologia de empacotamento de software](#3-selecione-uma-tecnologia-de-empacotamento-de-software)
+Saiba mais: [3. Selecione uma tecnologia de empacotamento de software](#3-select-a-software-packaging-technology)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
@@ -7147,7 +7147,7 @@ Saiba mais: [3. Selecione uma tecnologia de empacotamento de software](#3-seleci
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Saiba mais: <a href="#3-selecione-uma-tecnologia-de-empacotamento-de-software">3. Selecione uma tecnologia de empacotamento de software</a></p></section>
+    <section class="content hidden"><p>Saiba mais: <a href="#3-select-a-software-packaging-technology">3. Selecione uma tecnologia de empacotamento de software</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -7181,7 +7181,7 @@ Como você define requisitos de recursos para um processo específico no arquivo
 - [x] `#!groovy process { withName: 'processName' { memory = '4 GB' } }`
 - [ ] `#!groovy resources.processName.memory = '4 GB'`
 
-Saiba mais: [5.3. Defina alocações de recursos para um processo específico](#53-defina-alocações-de-recursos-para-um-processo-específico)
+Saiba mais: [5.3. Defina alocações de recursos para um processo específico](#53-set-resource-allocations-for-a-specific-process)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
@@ -7195,7 +7195,7 @@ Saiba mais: [5.3. Defina alocações de recursos para um processo específico](#
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Saiba mais: <a href="#53-defina-alocações-de-recursos-para-um-processo-específico">5.3. Defina alocações de recursos para um processo específico</a></p></section>
+    <section class="content hidden"><p>Saiba mais: <a href="#53-set-resource-allocations-for-a-specific-process">5.3. Defina alocações de recursos para um processo específico</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -7206,7 +7206,7 @@ Qual opção de linha de comando gera um relatório de utilização de recursos?
 - [x] `-with-report`
 - [ ] `-with-profile`
 
-Saiba mais: [5.1. Execute o fluxo de trabalho para gerar um relatório de utilização de recursos](#51-execute-o-fluxo-de-trabalho-para-gerar-um-relatório-de-utilização-de-recursos)
+Saiba mais: [5.1. Execute o fluxo de trabalho para gerar um relatório de utilização de recursos](#51-run-the-workflow-to-generate-a-resource-utilization-report)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -7220,7 +7220,7 @@ Saiba mais: [5.1. Execute o fluxo de trabalho para gerar um relatório de utiliz
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Saiba mais: <a href="#51-execute-o-fluxo-de-trabalho-para-gerar-um-relatório-de-utilização-de-recursos">5.1. Execute o fluxo de trabalho para gerar um relatório de utilização de recursos</a></p></section>
+    <section class="content hidden"><p>Saiba mais: <a href="#51-run-the-workflow-to-generate-a-resource-utilization-report">5.1. Execute o fluxo de trabalho para gerar um relatório de utilização de recursos</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -7231,7 +7231,7 @@ O que a diretiva `resourceLimits` faz?
 - [x] Limita os recursos máximos que podem ser solicitados
 - [ ] Monitora o uso de recursos
 
-Saiba mais: [5.5. Adicione limites de recursos](#55-adicione-limites-de-recursos)
+Saiba mais: [5.5. Adicione limites de recursos](#55-add-resource-limits)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-7">
@@ -7245,7 +7245,7 @@ Saiba mais: [5.5. Adicione limites de recursos](#55-adicione-limites-de-recursos
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Saiba mais: <a href="#55-adicione-limites-de-recursos">5.5. Adicione limites de recursos</a></p></section>
+    <section class="content hidden"><p>Saiba mais: <a href="#55-add-resource-limits">5.5. Adicione limites de recursos</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -7256,7 +7256,7 @@ Qual é o executor padrão no Nextflow?
 - [ ] `kubernetes`
 - [ ] `aws`
 
-Saiba mais: [4. Selecione uma plataforma de execução](#4-selecione-uma-plataforma-de-execução)
+Saiba mais: [4. Selecione uma plataforma de execução](#4-select-an-execution-platform)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-8">
@@ -7270,7 +7270,7 @@ Saiba mais: [4. Selecione uma plataforma de execução](#4-selecione-uma-platafo
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Saiba mais: <a href="#4-selecione-uma-plataforma-de-execução">4. Selecione uma plataforma de execução</a></p></section>
+    <section class="content hidden"><p>Saiba mais: <a href="#4-select-an-execution-platform">4. Selecione uma plataforma de execução</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -7281,7 +7281,7 @@ Como você especifica um arquivo de parâmetros ao executar o Nextflow?
 - [x] `-params-file params.json`
 - [ ] `--input params.json`
 
-Saiba mais: [1.3. Use um arquivo de parâmetros](#13-use-um-arquivo-de-parâmetros)
+Saiba mais: [1.3. Use um arquivo de parâmetros](#13-use-a-parameter-file)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-9">
@@ -7295,7 +7295,7 @@ Saiba mais: [1.3. Use um arquivo de parâmetros](#13-use-um-arquivo-de-parâmetr
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Saiba mais: <a href="#13-use-um-arquivo-de-parâmetros">1.3. Use um arquivo de parâmetros</a></p></section>
+    <section class="content hidden"><p>Saiba mais: <a href="#13-use-a-parameter-file">1.3. Use um arquivo de parâmetros</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -7306,7 +7306,7 @@ Para que os perfis podem ser usados? (Selecione todas as opções que se aplicam
 - [x] Fornecer parâmetros de teste
 - [ ] Definir novos processos
 
-Saiba mais: [6. Use perfis para alternar entre configurações predefinidas](#6-use-perfis-para-alternar-entre-configurações-predefinidas)
+Saiba mais: [6. Use perfis para alternar entre configurações predefinidas](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-10">
@@ -7320,7 +7320,7 @@ Saiba mais: [6. Use perfis para alternar entre configurações predefinidas](#6-
         <div class="quiz-feedback hidden"></div>
         <button type="submit" class="quiz-button">Submit</button>
     </form>
-    <section class="content hidden"><p>Saiba mais: <a href="#6-use-perfis-para-alternar-entre-configurações-predefinidas">6. Use perfis para alternar entre configurações predefinidas</a></p></section>
+    <section class="content hidden"><p>Saiba mais: <a href="#6-use-profiles-to-switch-between-preset-configurations">6. Use perfis para alternar entre configurações predefinidas</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -7331,7 +7331,7 @@ Como você especifica múltiplos perfis em um único comando?
 - [x] `-profile profile1,profile2`
 - [ ] `--profile profile1 --profile profile2`
 
-Saiba mais: [6. Use perfis para alternar entre configurações predefinidas](#6-use-perfis-para-alternar-entre-configurações-predefinidas)
+Saiba mais: [6. Use perfis para alternar entre configurações predefinidas](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-11">
@@ -7345,7 +7345,7 @@ Saiba mais: [6. Use perfis para alternar entre configurações predefinidas](#6-
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Saiba mais: <a href="#6-use-perfis-para-alternar-entre-configurações-predefinidas">6. Use perfis para alternar entre configurações predefinidas</a></p></section>
+    <section class="content hidden"><p>Saiba mais: <a href="#6-use-profiles-to-switch-between-preset-configurations">6. Use perfis para alternar entre configurações predefinidas</a></p></section>
 </div><div id="quiz-progress-sidebar" aria-label="Quiz Progress" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">

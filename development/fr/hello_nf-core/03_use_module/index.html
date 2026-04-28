@@ -1355,10 +1355,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-installer-le-module-catcat" class="md-nav__link">
+  <a href="#14-installer-le-module-findconcatenate" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Installer le module cat/cat
+        1.4. Installer le module find/concatenate
       
     </span>
   </a>
@@ -1472,15 +1472,15 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-integrer-cat_cat-dans-le-workflow-hellonf" class="md-nav__link">
+  <a href="#3-integrer-find_concatenate-dans-le-workflow-hellonf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Intégrer CAT_CAT dans le workflow hello.nf
+        3. Intégrer FIND_CONCATENATE dans le workflow hello.nf
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Intégrer CAT_CAT dans le workflow hello.nf">
+    <nav class="md-nav" aria-label="3. Intégrer FIND_CONCATENATE dans le workflow hello.nf">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1506,10 +1506,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-appeler-le-module-cat_cat" class="md-nav__link">
+  <a href="#33-appeler-le-module-find_concatenate" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. Appeler le module CAT_CAT
+        3.3. Appeler le module FIND_CONCATENATE
       
     </span>
   </a>
@@ -2830,7 +2830,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Premiers pas
   
 
     
@@ -2858,7 +2858,7 @@
   <span class="md-ellipsis">
     
   
-    Environnement de développement
+    Index
   
 
     
@@ -2886,7 +2886,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Modèles de Scripting Essentiels
   
 
     
@@ -3026,7 +3026,7 @@
   <span class="md-ellipsis">
     
   
-    Débogage des Workflows
+    Résolution des problèmes dans les Workflows
   
 
     
@@ -3863,10 +3863,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-installer-le-module-catcat" class="md-nav__link">
+  <a href="#14-installer-le-module-findconcatenate" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Installer le module cat/cat
+        1.4. Installer le module find/concatenate
       
     </span>
   </a>
@@ -3980,15 +3980,15 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-integrer-cat_cat-dans-le-workflow-hellonf" class="md-nav__link">
+  <a href="#3-integrer-find_concatenate-dans-le-workflow-hellonf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Intégrer CAT_CAT dans le workflow hello.nf
+        3. Intégrer FIND_CONCATENATE dans le workflow hello.nf
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Intégrer CAT_CAT dans le workflow hello.nf">
+    <nav class="md-nav" aria-label="3. Intégrer FIND_CONCATENATE dans le workflow hello.nf">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4014,10 +4014,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-appeler-le-module-cat_cat" class="md-nav__link">
+  <a href="#33-appeler-le-module-find_concatenate" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. Appeler le module CAT_CAT
+        3.3. Appeler le module FIND_CONCATENATE
       
     </span>
   </a>
@@ -4297,7 +4297,7 @@
 <p>Dans cette troisième partie du cours de formation Hello nf-core, nous vous montrons comment trouver, installer et utiliser un module nf-core existant dans votre pipeline.</p>
 <p>L'un des grands avantages de travailler avec nf-core est la possibilité de tirer parti de modules pré-construits et testés du dépôt <a href="https://github.com/nf-core/modules">nf-core/modules</a>.
 Plutôt que d'écrire chaque processus à partir de zéro, vous pouvez installer et utiliser des modules maintenus par la communauté qui suivent les meilleures pratiques.</p>
-<p>Pour démontrer comment cela fonctionne, nous remplacerons le module personnalisé <code>collectGreetings</code> par le module <code>cat/cat</code> de nf-core/modules dans le pipeline <code>core-hello</code>.</p>
+<p>Pour démontrer comment cela fonctionne, nous remplacerons le module personnalisé <code>collectGreetings</code> par le module <code>find/concatenate</code> de nf-core/modules dans le pipeline <code>core-hello</code>.</p>
 <details class="info">
 <summary>Comment commencer à partir de cette section</summary>
 <p>Cette section du cours suppose que vous avez terminé la <a href="../02_rewrite_hello/">Partie 2 : Réécrire Hello pour nf-core</a> et que vous disposez d'un pipeline <code>core-hello</code> fonctionnel.</p>
@@ -4322,18 +4322,18 @@ La concaténation de fichiers est une opération très courante, il est donc rai
 <p>Accédez à la page des modules dans votre navigateur web et utilisez la barre de recherche pour rechercher 'concatenate'.</p>
 <p><img alt="résultats de recherche de module" src="../img/module-search-results.png" /></p>
 <p>Comme vous pouvez le voir, il y a pas mal de résultats, dont beaucoup sont des modules conçus pour concaténer des types de fichiers très spécifiques.
-Parmi eux, vous devriez voir un module appelé <code>cat_cat</code> qui est générique.</p>
+Parmi eux, vous devriez voir un module appelé <code>find_concatenate</code> qui est générique.</p>
 <div class="admonition note">
 <p class="admonition-title">Convention de nommage des modules</p>
 <p>Le caractère de soulignement (<code>_</code>) est utilisé comme substitut du caractère barre oblique (<code>/</code>) dans les noms de modules.</p>
 <p>Les modules nf-core suivent la convention de nommage <code>logiciel/commande</code> lorsqu'un outil fournit plusieurs commandes, comme <code>samtools/view</code> (package samtools, commande view) ou <code>gatk/haplotypecaller</code> (package GATK, commande HaplotypeCaller).
 Pour les outils qui ne fournissent qu'une seule commande principale, les modules utilisent un seul niveau comme <code>fastqc</code> ou <code>multiqc</code>.</p>
 </div>
-<p>Cliquez sur la boîte du module <code>cat_cat</code> pour voir la documentation du module.</p>
+<p>Cliquez sur la boîte du module <code>find_concatenate</code> pour voir la documentation du module.</p>
 <p>La page du module affiche :</p>
 <ul>
-<li>Une brève description : "A module for concatenation of gzipped or uncompressed files"</li>
-<li>La commande d'installation : <code>nf-core modules install cat/cat</code></li>
+<li>Une brève description : "A module for concatenation of gzipped or uncompressed files getting around UNIX terminal argument size"</li>
+<li>La commande d'installation : <code>nf-core modules install find/concatenate</code></li>
 <li>La structure des canaux d'entrée et de sortie</li>
 <li>Les paramètres disponibles</li>
 </ul>
@@ -4341,98 +4341,132 @@ Pour les outils qui ne fournissent qu'une seule commande principale, les modules
 <p>Alternativement, vous pouvez également rechercher des modules directement depuis la ligne de commande en utilisant les outils nf-core.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nf-core<span class="w"> </span>modules<span class="w"> </span>list<span class="w"> </span>remote
 </code></pre></div>
+<details class="success">
+<summary>Sortie de la commande (tronquée)</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">...</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="go">│ fastqc                                                │</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">│ find/concatenate                                      │</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="go">│ gatk4/applybqsr                                       │</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="go">│ gatk4/baserecalibrator                                │</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="go">...</span>
+</code></pre></div>
+</details>
 <p>Cela affichera une liste de tous les modules disponibles dans le dépôt nf-core/modules, bien que ce soit un peu moins pratique si vous ne connaissez pas déjà le nom du module que vous recherchez.
 Cependant, si vous le connaissez, vous pouvez rediriger la liste vers <code>grep</code> pour trouver des modules spécifiques :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>nf-core<span class="w"> </span>modules<span class="w"> </span>list<span class="w"> </span>remote<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">&#39;cat/cat&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nf-core<span class="w"> </span>modules<span class="w"> </span>list<span class="w"> </span>remote<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">&#39;find/concatenate&#39;</span>
 </code></pre></div>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">│ cat/cat</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">│ find/concatenate                                      │</span>
 </code></pre></div>
 </details>
-<p>Gardez simplement à l'esprit que l'approche <code>grep</code> ne récupérera que les résultats avec le terme de recherche dans leur nom, ce qui ne fonctionnerait pas pour <code>cat_cat</code>.</p>
+<p>Gardez simplement à l'esprit que l'approche <code>grep</code> ne récupérera que les résultats avec le terme de recherche dans leur nom.</p>
 <h3 id="13-obtenir-des-informations-detaillees-sur-le-module">1.3. Obtenir des informations détaillées sur le module<a class="headerlink" href="#13-obtenir-des-informations-detaillees-sur-le-module" title="Permanent link">&para;</a></h3>
 <p>Pour voir des informations détaillées sur un module spécifique depuis la ligne de commande, utilisez la commande <code>info</code> :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>nf-core<span class="w"> </span>modules<span class="w"> </span>info<span class="w"> </span>cat/cat
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>nf-core<span class="w"> </span>modules<span class="w"> </span>info<span class="w"> </span>find/concatenate
 </code></pre></div>
 <p>Cela affiche la documentation sur le module, y compris ses entrées, ses sorties et des informations d'utilisation de base.</p>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">                                          ,--./,-.</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="go">          ___     __   __   __   ___     /,-._.--~\</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">    |\ | |__  __ /  ` /  \ |__) |__         }  {</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="go">    | \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="go">                                          `._,._,&#39;</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="go">    nf-core/tools version 3.5.2 - https://nf-co.re</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="go">╭─ Module: cat/cat  ─────────────────────────────────────────────────╮</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="go">│ 🌐 Repository: https://github.com/nf-core/modules.git              │</span>
-<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="go">│ 🔧 Tools: cat                                                      │</span>
-<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="go">│ 📖 Description: A module for concatenation of gzipped or           │</span>
-<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="go">│ uncompressed files                                                 │</span>
-<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="go">╰────────────────────────────────────────────────────────────────────╯</span>
-<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="go">                  ╷                                          ╷</span>
-<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="go">📥 Inputs        │Description                               │Pattern</span>
-<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="go">╺━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━╸</span>
-<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="go">input[0]         │                                          │</span>
-<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="go">╶─────────────────┼──────────────────────────────────────────┼───────╴</span>
-<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="go">  meta  (map)     │Groovy Map containing sample information  │</span>
-<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="go">                  │e.g. [ id:&#39;test&#39;, single_end:false ]      │</span>
-<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="go">╶─────────────────┼──────────────────────────────────────────┼───────╴</span>
-<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="go">  files_in  (file)│List of compressed / uncompressed files   │      *</span>
-<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="go">                  ╵                                          ╵</span>
-<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a><span class="go">                      ╷                                 ╷</span>
-<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a><span class="go">📥 Outputs           │Description                      │     Pattern</span>
-<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a><span class="go">╺━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━╸</span>
-<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a><span class="go">file_out             │                                 │</span>
-<a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a><span class="go">╶─────────────────────┼─────────────────────────────────┼────────────╴</span>
-<a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a><span class="go">  meta  (map)         │Groovy Map containing sample     │</span>
-<a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a><span class="go">                      │information                      │</span>
-<a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a><span class="go">╶─────────────────────┼─────────────────────────────────┼────────────╴</span>
-<a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a><span class="gp">  $</span><span class="o">{</span>prefix<span class="o">}</span><span class="w">  </span><span class="o">(</span>file<span class="o">)</span><span class="w">   </span>│Concatenated<span class="w"> </span>file.<span class="w"> </span>Will<span class="w"> </span>be<span class="w">       </span>│<span class="w"> </span><span class="si">${</span><span class="nv">file_out</span><span class="si">}</span>
-<a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a><span class="go">                      │gzipped if file_out ends with    │</span>
-<a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a><span class="go">                      │&quot;.gz&quot;                            │</span>
-<a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a><span class="go">╶─────────────────────┼─────────────────────────────────┼────────────╴</span>
-<a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a><span class="go">versions_cat         │                                 │</span>
-<a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a><span class="go">╶─────────────────────┼─────────────────────────────────┼────────────╴</span>
-<a id="__codelineno-6-40" name="__codelineno-6-40" href="#__codelineno-6-40"></a><span class="go">  versions_cat (tuple)│Software version information     │</span>
-<a id="__codelineno-6-41" name="__codelineno-6-41" href="#__codelineno-6-41"></a><span class="go">                      ╵                                 ╵</span>
-<a id="__codelineno-6-42" name="__codelineno-6-42" href="#__codelineno-6-42"></a>
-<a id="__codelineno-6-43" name="__codelineno-6-43" href="#__codelineno-6-43"></a><span class="go">💻  Installation command: nf-core modules install cat/cat</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="go">                                          ,--./,-.</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="go">          ___     __   __   __   ___     /,-._.--~\</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="go">    |\ | |__  __ /  ` /  \ |__) |__         }  {</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="go">    | \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="go">                                          `._,._,&#39;</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="go">    nf-core/tools version 3.5.2 - https://nf-co.re</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="go">╭─ Module: find/concatenate  ──────────────────────────────────────────────────╮</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="go">│ 🌐 Repository: https://github.com/nf-core/modules.git                        │</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="go">│ 🔧 Tools: find, pigz                                                         │</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="go">│ 📖 Description: A module for concatenation of gzipped or uncompressed files  │</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="go">│ getting around UNIX terminal argument size                                   │</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="go">╰──────────────────────────────────────────────────────────────────────────────╯</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="go">                  ╷                                                    ╷</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="go"> 📥 Inputs        │Description                                         │Pattern</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="go">╺━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━╸</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="go"> input[0]         │                                                    │</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="go">╶─────────────────┼────────────────────────────────────────────────────┼───────╴</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="go">  meta  (map)     │Groovy Map containing sample information e.g. [     │</span>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="go">                  │id:&#39;test&#39; ]                                         │</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="go">╶─────────────────┼────────────────────────────────────────────────────┼───────╴</span>
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="go">  files_in  (file)│List of either compressed or uncompressed files     │      *</span>
+<a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a><span class="go">                  ╵                                                    ╵</span>
+<a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="go">                                  ╷                                ╷</span>
+<a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a><span class="go"> 📥 Outputs                       │Description                     │    Pattern</span>
+<a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a><span class="go">╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━╸</span>
+<a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a><span class="go"> file_out                         │                                │</span>
+<a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a><span class="go">╶─────────────────────────────────┼────────────────────────────────┼───────────╴</span>
+<a id="__codelineno-7-31" name="__codelineno-7-31" href="#__codelineno-7-31"></a><span class="go">  meta  (map)                     │Groovy Map containing sample    │</span>
+<a id="__codelineno-7-32" name="__codelineno-7-32" href="#__codelineno-7-32"></a><span class="go">                                  │information e.g. [ id:&#39;test&#39; ]  │</span>
+<a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a><span class="go">╶─────────────────────────────────┼────────────────────────────────┼───────────╴</span>
+<a id="__codelineno-7-34" name="__codelineno-7-34" href="#__codelineno-7-34"></a><span class="gp">  $</span><span class="o">{</span>prefix<span class="o">}</span><span class="w">  </span><span class="o">(</span>file<span class="o">)</span><span class="w">               </span>│Concatenated<span class="w"> </span>file.<span class="w"> </span>Will<span class="w"> </span>be<span class="w">      </span>│<span class="si">${</span><span class="nv">file_out</span><span class="si">}</span>
+<a id="__codelineno-7-35" name="__codelineno-7-35" href="#__codelineno-7-35"></a><span class="go">                                  │gzipped if ${prefix} ends with  │</span>
+<a id="__codelineno-7-36" name="__codelineno-7-36" href="#__codelineno-7-36"></a><span class="go">                                  │&quot;.gz&quot; or inputs are gzipped,    │</span>
+<a id="__codelineno-7-37" name="__codelineno-7-37" href="#__codelineno-7-37"></a><span class="go">                                  │will be uncompressed otherwise. │</span>
+<a id="__codelineno-7-38" name="__codelineno-7-38" href="#__codelineno-7-38"></a><span class="go">╶─────────────────────────────────┼────────────────────────────────┼───────────╴</span>
+<a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a><span class="go"> versions_find                    │                                │</span>
+<a id="__codelineno-7-40" name="__codelineno-7-40" href="#__codelineno-7-40"></a><span class="go">╶─────────────────────────────────┼────────────────────────────────┼───────────╴</span>
+<a id="__codelineno-7-41" name="__codelineno-7-41" href="#__codelineno-7-41"></a><span class="gp">  $</span><span class="o">{</span>task.process<span class="o">}</span><span class="w">  </span><span class="o">(</span>string<span class="o">)</span><span class="w">       </span>│The<span class="w"> </span>name<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>process<span class="w">         </span>│
+<a id="__codelineno-7-42" name="__codelineno-7-42" href="#__codelineno-7-42"></a><span class="go">╶─────────────────────────────────┼────────────────────────────────┼───────────╴</span>
+<a id="__codelineno-7-43" name="__codelineno-7-43" href="#__codelineno-7-43"></a><span class="go">  find  (string)                  │The name of the tool            │</span>
+<a id="__codelineno-7-44" name="__codelineno-7-44" href="#__codelineno-7-44"></a><span class="go">╶─────────────────────────────────┼────────────────────────────────┼───────────╴</span>
+<a id="__codelineno-7-45" name="__codelineno-7-45" href="#__codelineno-7-45"></a><span class="go">  find --version | sed &#39;1!d; s/.* │The expression to obtain the    │</span>
+<a id="__codelineno-7-46" name="__codelineno-7-46" href="#__codelineno-7-46"></a><span class="go"> //&#39;  (eval)                      │version of the tool             │</span>
+<a id="__codelineno-7-47" name="__codelineno-7-47" href="#__codelineno-7-47"></a><span class="go">╶─────────────────────────────────┼────────────────────────────────┼───────────╴</span>
+<a id="__codelineno-7-48" name="__codelineno-7-48" href="#__codelineno-7-48"></a><span class="go"> versions_pigz                    │                                │</span>
+<a id="__codelineno-7-49" name="__codelineno-7-49" href="#__codelineno-7-49"></a><span class="go">╶─────────────────────────────────┼────────────────────────────────┼───────────╴</span>
+<a id="__codelineno-7-50" name="__codelineno-7-50" href="#__codelineno-7-50"></a><span class="gp">  $</span><span class="o">{</span>task.process<span class="o">}</span><span class="w">  </span><span class="o">(</span>string<span class="o">)</span><span class="w">       </span>│The<span class="w"> </span>name<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>process<span class="w">         </span>│
+<a id="__codelineno-7-51" name="__codelineno-7-51" href="#__codelineno-7-51"></a><span class="go">╶─────────────────────────────────┼────────────────────────────────┼───────────╴</span>
+<a id="__codelineno-7-52" name="__codelineno-7-52" href="#__codelineno-7-52"></a><span class="go">  pigz  (string)                  │The name of the tool            │</span>
+<a id="__codelineno-7-53" name="__codelineno-7-53" href="#__codelineno-7-53"></a><span class="go">╶─────────────────────────────────┼────────────────────────────────┼───────────╴</span>
+<a id="__codelineno-7-54" name="__codelineno-7-54" href="#__codelineno-7-54"></a><span class="go">  pigz --version 2&gt;&amp;1 | sed       │The expression to obtain the    │</span>
+<a id="__codelineno-7-55" name="__codelineno-7-55" href="#__codelineno-7-55"></a><span class="go"> &#39;s/pigz //g&#39;  (eval)             │version of the tool             │</span>
+<a id="__codelineno-7-56" name="__codelineno-7-56" href="#__codelineno-7-56"></a><span class="go">╶─────────────────────────────────┼────────────────────────────────┼───────────╴</span>
+<a id="__codelineno-7-57" name="__codelineno-7-57" href="#__codelineno-7-57"></a><span class="go"> versions_coreutils               │                                │</span>
+<a id="__codelineno-7-58" name="__codelineno-7-58" href="#__codelineno-7-58"></a><span class="go">╶─────────────────────────────────┼────────────────────────────────┼───────────╴</span>
+<a id="__codelineno-7-59" name="__codelineno-7-59" href="#__codelineno-7-59"></a><span class="gp">  $</span><span class="o">{</span>task.process<span class="o">}</span><span class="w">  </span><span class="o">(</span>string<span class="o">)</span><span class="w">       </span>│The<span class="w"> </span>name<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>process<span class="w">         </span>│
+<a id="__codelineno-7-60" name="__codelineno-7-60" href="#__codelineno-7-60"></a><span class="go">╶─────────────────────────────────┼────────────────────────────────┼───────────╴</span>
+<a id="__codelineno-7-61" name="__codelineno-7-61" href="#__codelineno-7-61"></a><span class="go">  coreutils  (string)             │The name of the tool            │</span>
+<a id="__codelineno-7-62" name="__codelineno-7-62" href="#__codelineno-7-62"></a><span class="go">╶─────────────────────────────────┼────────────────────────────────┼───────────╴</span>
+<a id="__codelineno-7-63" name="__codelineno-7-63" href="#__codelineno-7-63"></a><span class="go">  cat --version | sed &#39;1!d; s/.*  │The expression to obtain the    │</span>
+<a id="__codelineno-7-64" name="__codelineno-7-64" href="#__codelineno-7-64"></a><span class="go"> //&#39;  (eval)                      │version of the tool             │</span>
+<a id="__codelineno-7-65" name="__codelineno-7-65" href="#__codelineno-7-65"></a><span class="go">                                  ╵                                ╵</span>
+<a id="__codelineno-7-66" name="__codelineno-7-66" href="#__codelineno-7-66"></a>
+<a id="__codelineno-7-67" name="__codelineno-7-67" href="#__codelineno-7-67"></a><span class="go"> 💻  Installation command: nf-core modules install find/concatenate</span>
 </code></pre></div>
 </details>
 <p>Ce sont exactement les mêmes informations que vous pouvez trouver sur le site web.</p>
-<h3 id="14-installer-le-module-catcat">1.4. Installer le module cat/cat<a class="headerlink" href="#14-installer-le-module-catcat" title="Permanent link">&para;</a></h3>
+<h3 id="14-installer-le-module-findconcatenate">1.4. Installer le module find/concatenate<a class="headerlink" href="#14-installer-le-module-findconcatenate" title="Permanent link">&para;</a></h3>
 <p>Maintenant que nous avons trouvé le module que nous voulons, nous devons l'ajouter au code source de notre pipeline.</p>
 <p>La bonne nouvelle est que le projet nf-core inclut des outils pour faciliter cette partie.
 Plus précisément, la commande <code>nf-core modules install</code> permet d'automatiser la récupération du code et de le rendre disponible à votre projet en une seule étape.</p>
 <p>Accédez au répertoire de votre pipeline et exécutez la commande d'installation :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">cd</span><span class="w"> </span>core-hello
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>nf-core<span class="w"> </span>modules<span class="w"> </span>install<span class="w"> </span>cat/cat
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">cd</span><span class="w"> </span>core-hello
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>nf-core<span class="w"> </span>modules<span class="w"> </span>install<span class="w"> </span>find/concatenate
 </code></pre></div>
 <p>L'outil procédera à l'installation du module.</p>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">                                      ,--./,-.</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="go">      ___     __   __   __   ___     /,-._.--~\</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">|\ | |__  __ /  ` /  \ |__) |__         }  {</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="go">| \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="go">                                      `._,._,&#39;</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="go">nf-core/tools version 3.5.2 - https://nf-co.re</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="go">INFO Installing &#39;cat/cat&#39;</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="go">INFO Use the following statement to include this module:</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="go">    include { CAT_CAT } from &#39;../modules/nf-core/cat/cat/main&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">                                      ,--./,-.</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="go">      ___     __   __   __   ___     /,-._.--~\</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">|\ | |__  __ /  ` /  \ |__) |__         }  {</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="go">| \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="go">                                      `._,._,&#39;</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="go">nf-core/tools version 3.5.2 - https://nf-co.re</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="go">INFO     Installing &#39;find/concatenate&#39;</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="go">INFO     Use the following statement to include this module:</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="go"> include { FIND_CONCATENATE } from &#39;../modules/nf-core/find/concatenate/main&#39;</span>
 </code></pre></div>
 </details>
 <p>La commande effectue automatiquement :</p>
 <ul>
-<li>Le téléchargement des fichiers du module dans <code>modules/nf-core/cat/cat/</code></li>
+<li>Le téléchargement des fichiers du module dans <code>modules/nf-core/find/concatenate/</code></li>
 <li>La mise à jour de <code>modules.json</code> pour suivre le module installé</li>
 <li>La fourniture de l'instruction <code>include</code> correcte à utiliser dans votre workflow</li>
 </ul>
@@ -4441,77 +4475,59 @@ Plus précisément, la commande <code>nf-core modules install</code> permet d'au
 <p>Assurez-vous toujours que votre répertoire de travail actuel est la racine de votre projet de pipeline avant d'exécuter la commande d'installation de module.</p>
 </div>
 <p>Vérifions que le module a été installé correctement :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>tree<span class="w"> </span>-L<span class="w"> </span><span class="m">4</span><span class="w"> </span>modules
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>tree<span class="w"> </span>-L<span class="w"> </span><span class="m">4</span><span class="w"> </span>modules
 </code></pre></div>
 <details class="abstract">
 <summary>Contenu du répertoire</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">modules</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="go">├── local</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="go">│   ├── collectGreetings.nf</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="go">│   ├── convertToUpper.nf</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="go">│   ├── cowpy.nf</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="go">│   └── sayHello.nf</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="go">└── nf-core</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="go">    └── cat</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="go">        └── cat</span>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="go">            ├── environment.yml</span>
-<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="go">            ├── main.nf</span>
-<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="go">            ├── meta.yml</span>
-<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="go">            └── tests</span>
-<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>
-<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="go">5 directories, 7 files</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">modules</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="go">├── local</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">│   ├── collectGreetings.nf</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="go">│   ├── convertToUpper.nf</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="go">│   ├── cowpy.nf</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="go">│   └── sayHello.nf</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="go">└── nf-core</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="go">    └── find</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="go">        └── concatenate</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="go">            ├── environment.yml</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="go">            ├── main.nf</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="go">            ├── meta.yml</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="go">            └── tests</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="go">5 directories, 7 files</span>
 </code></pre></div>
 </details>
 <p>Vous pouvez également vérifier l'installation en demandant à l'utilitaire nf-core de lister les modules installés localement :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>nf-core<span class="w"> </span>modules<span class="w"> </span>list<span class="w"> </span><span class="nb">local</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>nf-core<span class="w"> </span>modules<span class="w"> </span>list<span class="w"> </span><span class="nb">local</span>
 </code></pre></div>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">INFO     Repository type: pipeline</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="go">INFO     Modules installed in &#39;.&#39;:</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="go">┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="go">┃ Module Name ┃ Repository      ┃ Version SHA ┃ Message                                ┃ Date       ┃</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="go">┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="go">│ cat/cat     │ nf-core/modules │ 41dfa3f     │ update meta.yml of all modules (#8747) │ 2025-07-07 │</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="go">└─────────────┴─────────────────┴─────────────┴────────────────────────────────────────┴────────────┘</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">INFO     Repository type: pipeline</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="go">INFO     Modules installed in &#39;.&#39;:</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="go">┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="go">┃ Module Name    ┃ Repository      ┃ Version SHA ┃ Message        ┃ Date       ┃</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="go">│ find/concaten… │ nf-core/modules │ 6d46786     │ Support for    │ 2026-04-23 │</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="go">│                │                 │             │ apptainer as   │            │</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="go">│                │                 │             │ well as        │            │</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="go">│                │                 │             │ singularity    │            │</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="go">│                │                 │             │ for .sif in    │            │</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="go">│                │                 │             │ `container`    │            │</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="go">│                │                 │             │ (#11260)       │            │</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="go">└────────────────┴─────────────────┴─────────────┴────────────────┴────────────┘</span>
 </code></pre></div>
 </details>
-<p>Cela confirme que le module <code>cat/cat</code> fait maintenant partie du code source de votre projet.</p>
+<p>Cela confirme que le module <code>find/concatenate</code> fait maintenant partie du code source de votre projet.</p>
 <p>Cependant, pour utiliser réellement le nouveau module, nous devons l'importer dans notre pipeline.</p>
 <h3 id="15-mettre-a-jour-les-importations-de-module">1.5. Mettre à jour les importations de module<a class="headerlink" href="#15-mettre-a-jour-les-importations-de-module" title="Permanent link">&para;</a></h3>
-<p>Remplaçons l'instruction <code>include</code> pour le module <code>collectGreetings</code> par celle pour <code>CAT_CAT</code> dans la section des importations du workflow <code>workflows/hello.nf</code>.</p>
+<p>Remplaçons l'instruction <code>include</code> pour le module <code>collectGreetings</code> par celle pour <code>FIND_CONCATENATE</code> dans la section des importations du workflow <code>workflows/hello.nf</code>.</p>
 <p>Pour rappel, l'outil d'installation de module nous a donné l'instruction exacte à utiliser :</p>
-<div class="highlight"><span class="filename">Instruction d&#x27;importation produite par la commande d&#x27;installation</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">CAT_CAT</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/nf-core/cat/cat/main&#39;</span>
+<div class="highlight"><span class="filename">Import statement produced by install command</span><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">FIND_CONCATENATE</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/nf-core/find/concatenate/main&#39;</span>
 </code></pre></div>
 <p>Notez que la convention nf-core est d'utiliser des majuscules pour les noms de modules lors de leur importation.</p>
-<p>Ouvrez <a href="core-hello/workflows/hello.nf">core-hello/workflows/hello.nf</a> et effectuez la substitution suivante :</p>
+<p>Ouvrez <code>core-hello/workflows/hello.nf</code> et effectuez la substitution suivante :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Après</label><label for="__tabbed_1_2">Avant</label></div>
 <div class="tabbed-content">
-<div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/workflows/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-14-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-14-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-14-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-14-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-14-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-14-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-14-10">10</a></span>
-<span class="normal"><a href="#__codelineno-14-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="cm">/*</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="cm">    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-<a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="cm">*/</span>
-<a id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">paramsSummaryMap</span><span class="w">       </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;plugin/nf-schema&#39;</span>
-<a id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../subworkflows/nf-core/utils_nfcore_pipeline&#39;</span>
-<a id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w">               </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/sayHello.nf&#39;</span>
-<a id="__codelineno-14-9" name="__codelineno-14-9"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w">         </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/convertToUpper.nf&#39;</span>
-<a id="__codelineno-14-10" name="__codelineno-14-10"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">cowpy</span><span class="w">                  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/cowpy.nf&#39;</span>
-<a id="__codelineno-14-11" name="__codelineno-14-11"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">CAT_CAT</span><span class="w">                </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/nf-core/cat/cat/main&#39;</span>
-</span></code></pre></div></td></tr></table></div>
-</div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/workflows/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
@@ -4532,25 +4548,49 @@ Plus précisément, la commande <code>nf-core modules install</code> permet d'au
 <a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../subworkflows/nf-core/utils_nfcore_pipeline&#39;</span>
 <a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w">               </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/sayHello.nf&#39;</span>
 <a id="__codelineno-15-9" name="__codelineno-15-9"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w">         </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/convertToUpper.nf&#39;</span>
-<a id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w">       </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/collectGreetings.nf&#39;</span>
-</span><a id="__codelineno-15-11" name="__codelineno-15-11"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">cowpy</span><span class="w">                  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/cowpy.nf&#39;</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">cowpy</span><span class="w">                  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/cowpy.nf&#39;</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">FIND_CONCATENATE</span><span class="w">                </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/nf-core/find/concatenate/main&#39;</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/workflows/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-16-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-16-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-16-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-16-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-16-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-16-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-16-10">10</a></span>
+<span class="normal"><a href="#__codelineno-16-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="cm">/*</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="cm">    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="cm">*/</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">paramsSummaryMap</span><span class="w">       </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;plugin/nf-schema&#39;</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../subworkflows/nf-core/utils_nfcore_pipeline&#39;</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w">               </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/sayHello.nf&#39;</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w">         </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/convertToUpper.nf&#39;</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w">       </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/collectGreetings.nf&#39;</span>
+</span><a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">cowpy</span><span class="w">                  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/cowpy.nf&#39;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
 <p>Remarquez comment le chemin pour le module nf-core diffère des modules locaux :</p>
 <ul>
-<li><strong>Module nf-core</strong> : <code>'../modules/nf-core/cat/cat/main'</code> (référence à <code>main.nf</code>)</li>
+<li><strong>Module nf-core</strong> : <code>'../modules/nf-core/find/concatenate/main'</code> (référence à <code>main.nf</code>)</li>
 <li><strong>Module local</strong> : <code>'../modules/local/collectGreetings.nf'</code> (référence à un fichier unique)</li>
 </ul>
-<p>Le module est maintenant disponible pour le workflow, donc tout ce que nous devons faire est de remplacer l'appel à <code>collectGreetings</code> pour utiliser <code>CAT_CAT</code>. N'est-ce pas ?</p>
+<p>Le module est maintenant disponible pour le workflow, donc tout ce que nous devons faire est de remplacer l'appel à <code>collectGreetings</code> pour utiliser <code>FIND_CONCATENATE</code>. N'est-ce pas ?</p>
 <p>Pas si vite.</p>
-<p>À ce stade, vous pourriez être tenté de vous lancer et de commencer à éditer le code, mais il vaut la peine de prendre un moment pour examiner attentivement ce que le nouveau module attend et ce qu'il produit.</p>
+<p>À ce stade, vous pourriez être tenté·e de vous lancer et de commencer à éditer le code, mais il vaut la peine de prendre un moment pour examiner attentivement ce que le nouveau module attend et ce qu'il produit.</p>
 <p>Nous allons traiter cela comme une section séparée car cela implique un nouveau mécanisme que nous n'avons pas encore couvert : les métadonnées sous forme de map.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Vous pouvez éventuellement supprimer le fichier <code>collectGreetings.nf</code> :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>rm<span class="w"> </span>modules/local/collectGreetings.nf
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>rm<span class="w"> </span>modules/local/collectGreetings.nf
 </code></pre></div>
 <p>Cependant, vous pourriez vouloir le conserver comme référence pour comprendre les différences entre les modules locaux et nf-core.</p>
 </div>
@@ -4566,38 +4606,11 @@ Cela nous permettra de déterminer si nous pouvons simplement traiter le nouveau
 (Pour information, il existe une commande <code>uninstall</code> pour se débarrasser des modules que vous décidez de ne plus vouloir.)</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Le processus CAT_CAT inclut une gestion assez intelligente de différents types de compression, d'extensions de fichiers, etc. qui ne sont pas strictement pertinents pour ce que nous essayons de vous montrer ici, donc nous ignorerons la plupart de ces éléments et nous concentrerons uniquement sur les parties importantes.</p>
+<p>Le processus FIND_CONCATENATE inclut une gestion assez intelligente de différents types de compression, d'extensions de fichiers, etc. qui ne sont pas strictement pertinents pour ce que nous essayons de vous montrer ici, donc nous ignorerons la plupart de ces éléments et nous concentrerons uniquement sur les parties importantes.</p>
 </div>
 <h3 id="21-comparer-les-interfaces-des-deux-modules">2.1. Comparer les interfaces des deux modules<a class="headerlink" href="#21-comparer-les-interfaces-des-deux-modules" title="Permanent link">&para;</a></h3>
 <p>Pour rappel, voici à quoi ressemble l'interface de notre module <code>collectGreetings</code> :</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/collectGreetings.nf (extrait)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-17-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-17-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-17-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-17-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-17-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-17-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-17-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="n">process</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2"></a>
-<a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-17-4" name="__codelineno-17-4"></a>
-<a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="n">input_files</span>
-</span><a id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="hll"><span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="n">batch_name</span>
-</span><a id="__codelineno-17-8" name="__codelineno-17-8"></a>
-<a id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;COLLECTED-${batch_name}-output.txt&quot;</span><span class="w"> </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">outfile</span>
-</span></code></pre></div></td></tr></table></div>
-<p>Le module <code>collectGreetings</code> prend deux entrées :</p>
-<ul>
-<li><code>input_files</code> contient un ou plusieurs fichiers d'entrée à traiter ;</li>
-<li><code>batch_name</code> est une valeur que nous utilisons pour attribuer un nom spécifique à l'exécution au fichier de sortie, qui est une forme de métadonnées.</li>
-</ul>
-<p>Une fois terminé, <code>collectGreetings</code> produit un seul chemin de fichier, émis avec l'étiquette <code>outfile</code>.</p>
-<p>En comparaison, l'interface du module <code>cat/cat</code> est plus complexe :</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/nf-core/cat/cat/main.nf (extrait)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/collectGreetings.nf (excerpt)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-18-4"> 4</a></span>
@@ -4606,36 +4619,67 @@ Cela nous permettra de déterminer si nous pouvons simplement traiter le nouveau
 <span class="normal"><a href="#__codelineno-18-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-18-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-18-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-18-10">10</a></span>
-<span class="normal"><a href="#__codelineno-18-11">11</a></span>
-<span class="normal"><a href="#__codelineno-18-12">12</a></span>
-<span class="normal"><a href="#__codelineno-18-13">13</a></span>
-<span class="normal"><a href="#__codelineno-18-14">14</a></span>
-<span class="normal"><a href="#__codelineno-18-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="n">process</span><span class="w"> </span><span class="n">CAT_CAT</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="w">    </span><span class="n">tag</span><span class="w"> </span><span class="s2">&quot;$meta.id&quot;</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="w">    </span><span class="n">label</span><span class="w"> </span><span class="s1">&#39;process_low&#39;</span>
+<span class="normal"><a href="#__codelineno-18-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="n">process</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2"></a>
+<a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
 <a id="__codelineno-18-4" name="__codelineno-18-4"></a>
-<a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="w">    </span><span class="n">conda</span><span class="w"> </span><span class="s2">&quot;${moduleDir}/environment.yml&quot;</span>
-<a id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">&quot;${ workflow.containerEngine == &#39;singularity&#39; &amp;&amp; !task.ext.singularity_pull_docker_container ?</span>
-<a id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="s2">        &#39;https://depot.galaxyproject.org/singularity/pigz:2.8&#39; :</span>
-<a id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="s2">        &#39;biocontainers/pigz:2.8&#39; }&quot;</span>
-<a id="__codelineno-18-9" name="__codelineno-18-9"></a>
-<a id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">files_in</span><span class="o">)</span>
-</span><a id="__codelineno-18-12" name="__codelineno-18-12"></a>
-<a id="__codelineno-18-13" name="__codelineno-18-13"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;${prefix}&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">file_out</span>
-</span><a id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="s2">&quot;${task.process}&quot;</span><span class="o">),</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="s2">&quot;pigz&quot;</span><span class="o">),</span><span class="w"> </span><span class="n">eval</span><span class="o">(</span><span class="s2">&quot;pigz --version 2&gt;&amp;1 | sed &#39;s/pigz //g&#39;&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">topic:</span><span class="w"> </span><span class="n">versions</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">versions_cat</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="n">input_files</span>
+</span><a id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="hll"><span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="n">batch_name</span>
+</span><a id="__codelineno-18-8" name="__codelineno-18-8"></a>
+<a id="__codelineno-18-9" name="__codelineno-18-9"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;COLLECTED-${batch_name}-output.txt&quot;</span><span class="w"> </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">outfile</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Le module <code>collectGreetings</code> prend deux entrées :</p>
+<ul>
+<li><code>input_files</code> contient un ou plusieurs fichiers d'entrée à traiter ;</li>
+<li><code>batch_name</code> est une valeur que nous utilisons pour attribuer un nom spécifique à l'exécution au fichier de sortie, qui est une forme de métadonnées.</li>
+</ul>
+<p>Une fois terminé, <code>collectGreetings</code> produit un seul chemin de fichier, émis avec l'étiquette <code>outfile</code>.</p>
+<p>En comparaison, l'interface du module <code>find/concatenate</code> est plus complexe :</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/nf-core/find/concatenate/main.nf (excerpt)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-19-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-19-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-19-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-19-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-19-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-19-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-19-10">10</a></span>
+<span class="normal"><a href="#__codelineno-19-11">11</a></span>
+<span class="normal"><a href="#__codelineno-19-12">12</a></span>
+<span class="normal"><a href="#__codelineno-19-13">13</a></span>
+<span class="normal"><a href="#__codelineno-19-14">14</a></span>
+<span class="normal"><a href="#__codelineno-19-15">15</a></span>
+<span class="normal"><a href="#__codelineno-19-16">16</a></span>
+<span class="normal"><a href="#__codelineno-19-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="n">process</span><span class="w"> </span><span class="n">FIND_CONCATENATE</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="w">    </span><span class="n">tag</span><span class="w"> </span><span class="s2">&quot;${meta.id}&quot;</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="w">    </span><span class="n">label</span><span class="w"> </span><span class="s1">&#39;process_low&#39;</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4"></a>
+<a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="w">    </span><span class="n">conda</span><span class="w"> </span><span class="s2">&quot;${moduleDir}/environment.yml&quot;</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">&quot;${workflow.containerEngine in [&#39;singularity&#39;, &#39;apptainer&#39;] &amp;&amp; !task.ext.singularity_pull_docker_container</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="s2">        ? &#39;https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/7f/7fd226561e12b32bcacdf4f5ff74577e76233adf52ae5cbc499a2cdfe0e27d82/data&#39;</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="s2">        : &#39;community.wave.seqera.io/library/findutils_pigz:c4dd5edc44402661&#39;}&quot;</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9"></a>
+<a id="__codelineno-19-10" name="__codelineno-19-10"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">files_in</span><span class="o">)</span>
+</span><a id="__codelineno-19-12" name="__codelineno-19-12"></a>
+<a id="__codelineno-19-13" name="__codelineno-19-13"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-19-14" name="__codelineno-19-14"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;${prefix}&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">file_out</span>
+</span><a id="__codelineno-19-15" name="__codelineno-19-15"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="s2">&quot;${task.process}&quot;</span><span class="o">),</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="s2">&quot;find&quot;</span><span class="o">),</span><span class="w"> </span><span class="n">eval</span><span class="o">(</span><span class="s2">&quot;find --version | sed &#39;1!d; s/.* //&#39;&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">topic:</span><span class="w"> </span><span class="n">versions</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">versions_find</span>
+<a id="__codelineno-19-16" name="__codelineno-19-16"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="s2">&quot;${task.process}&quot;</span><span class="o">),</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="s2">&quot;pigz&quot;</span><span class="o">),</span><span class="w"> </span><span class="n">eval</span><span class="o">(</span><span class="s2">&quot;pigz --version 2&gt;&amp;1 | sed &#39;s/pigz //g&#39;&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">topic:</span><span class="w"> </span><span class="n">versions</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">versions_pigz</span>
+<a id="__codelineno-19-17" name="__codelineno-19-17"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="s2">&quot;${task.process}&quot;</span><span class="o">),</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="s2">&quot;coreutils&quot;</span><span class="o">),</span><span class="w"> </span><span class="n">eval</span><span class="o">(</span><span class="s2">&quot;cat --version | sed &#39;1!d; s/.* //&#39;&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">topic:</span><span class="w"> </span><span class="n">versions</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">versions_coreutils</span>
 </code></pre></div></td></tr></table></div>
-<p>Le module CAT_CAT prend une seule entrée, mais cette entrée est un tuple contenant deux choses :</p>
+<p>Le module FIND_CONCATENATE prend une seule entrée, mais cette entrée est un tuple contenant deux choses :</p>
 <ul>
 <li><code>meta</code> est une structure contenant des métadonnées, appelée metamap ;</li>
 <li><code>files_in</code> contient un ou plusieurs fichiers d'entrée à traiter, équivalent à <code>input_files</code> de <code>collectGreetings</code>.</li>
 </ul>
-<p>Une fois terminé, CAT_CAT livre ses sorties en deux parties :</p>
+<p>Une fois terminé, FIND_CONCATENATE livre ses sorties en deux parties :</p>
 <ul>
-<li>Un autre tuple contenant le metamap et le fichier de sortie concaténé, émis avec l'étiquette <code>file_out</code> ;</li>
-<li>Un tuple de version publié dans le canal topic <code>versions</code> pour le suivi des versions de logiciels.</li>
+<li>Un tuple contenant le metamap et le fichier de sortie concaténé, émis avec l'étiquette <code>file_out</code> ;</li>
+<li>Trois tuples de version (un par outil utilisé) publiés dans le canal topic <code>versions</code> pour le suivi des versions de logiciels.</li>
 </ul>
 <p>Notez également que par défaut, le fichier de sortie sera nommé en fonction d'un identifiant qui fait partie des métadonnées (code non montré ici).</p>
 <p>Cela peut sembler beaucoup à retenir en regardant simplement le code, voici donc un diagramme pour vous aider à visualiser comment tout s'articule.</p>
@@ -4647,71 +4691,71 @@ Cela nous permettra de déterminer si nous pouvons simplement traiter le nouveau
 </figure>
 
 <p>Vous pouvez voir que les deux modules ont des exigences d'entrée similaires en termes de contenu (un ensemble de fichiers d'entrée plus quelques métadonnées) mais des attentes très différentes quant à la façon dont ce contenu est empaqueté.
-En ignorant la sortie versions pour l'instant, leur sortie principale est également équivalente (un fichier concaténé), sauf que CAT_CAT émet également le metamap conjointement avec le fichier de sortie.</p>
+En ignorant la sortie versions pour l'instant, leur sortie principale est également équivalente (un fichier concaténé), sauf que FIND_CONCATENATE émet également le metamap conjointement avec le fichier de sortie.</p>
 <p>Les différences d'empaquetage seront assez faciles à gérer, comme vous le verrez dans un instant.
 Cependant, pour comprendre la partie metamap, nous devons vous présenter un contexte supplémentaire.</p>
 <h3 id="22-comprendre-les-metamaps">2.2. Comprendre les metamaps<a class="headerlink" href="#22-comprendre-les-metamaps" title="Permanent link">&para;</a></h3>
-<p>Nous venons de vous dire que le module CAT_CAT attend une map de métadonnées comme partie de son tuple d'entrée.
+<p>Nous venons de vous dire que le module FIND_CONCATENATE attend une map de métadonnées comme partie de son tuple d'entrée.
 Prenons quelques minutes pour examiner de plus près ce que c'est.</p>
 <p>La <strong>map de métadonnées</strong>, souvent appelée <strong>metamap</strong> en abrégé, est une map de style Groovy contenant des informations sur des unités de données.
 Dans le contexte des pipelines Nextflow, les unités de données peuvent être tout ce que vous voulez : des échantillons individuels, des lots d'échantillons ou des ensembles de données entiers.</p>
 <p>Par convention, un metamap nf-core est nommé <code>meta</code> et contient le champ requis <code>id</code>, qui est utilisé pour nommer les sorties et suivre les unités de données.</p>
 <p>Par exemple, une map de métadonnées typique pourrait ressembler à ceci :</p>
-<div class="highlight"><span class="filename">Exemple de metamap au niveau de l&#x27;échantillon</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;sample1&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">single_end:</span><span class="w"> </span><span class="kc">false</span><span class="o">,</span><span class="w"> </span><span class="nl">strandedness:</span><span class="w"> </span><span class="s1">&#39;forward&#39;</span><span class="o">]</span>
+<div class="highlight"><span class="filename">Example of sample-level metamap</span><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;sample1&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">single_end:</span><span class="w"> </span><span class="kc">false</span><span class="o">,</span><span class="w"> </span><span class="nl">strandedness:</span><span class="w"> </span><span class="s1">&#39;forward&#39;</span><span class="o">]</span>
 </code></pre></div>
 <p>Ou dans un cas où les métadonnées sont attachées au niveau du lot :</p>
-<div class="highlight"><span class="filename">Exemple de metamap au niveau du lot</span><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;batch1&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">date:</span><span class="w"> </span><span class="s1">&#39;25.10.01&#39;</span><span class="o">]</span>
+<div class="highlight"><span class="filename">Example of batch-level metamap</span><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;batch1&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">date:</span><span class="w"> </span><span class="s1">&#39;25.10.01&#39;</span><span class="o">]</span>
 </code></pre></div>
-<p>Maintenant, plaçons cela dans le contexte du processus <code>CAT_CAT</code>, qui attend que les fichiers d'entrée soient empaquetés dans un tuple avec un metamap, et produit également le metamap comme partie du tuple de sortie.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/nf-core/cat/cat/main.nf (extrait)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
-<span class="normal"><a href="#__codelineno-21-2">2</a></span>
-<span class="normal"><a href="#__codelineno-21-3">3</a></span>
-<span class="normal"><a href="#__codelineno-21-4">4</a></span>
-<span class="normal"><a href="#__codelineno-21-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="nl">input:</span>
-<a id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="hll"><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">files_in</span><span class="o">)</span>
-</span><a id="__codelineno-21-3" name="__codelineno-21-3"></a>
-<a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="nl">output:</span>
-<a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="hll"><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;${prefix}&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">file_out</span>
+<p>Maintenant, plaçons cela dans le contexte du processus <code>FIND_CONCATENATE</code>, qui attend que les fichiers d'entrée soient empaquetés dans un tuple avec un metamap, et produit également le metamap comme partie du tuple de sortie.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/nf-core/find/concatenate/main.nf (excerpt)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-10">10</a></span>
+<span class="normal"><a href="#__codelineno-22-11">11</a></span>
+<span class="normal"><a href="#__codelineno-22-12">12</a></span>
+<span class="normal"><a href="#__codelineno-22-13">13</a></span>
+<span class="normal"><a href="#__codelineno-22-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-10" name="__codelineno-22-10"></a><span class="nl">input:</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11"></a><span class="hll"><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">files_in</span><span class="o">)</span>
+</span><a id="__codelineno-22-12" name="__codelineno-22-12"></a>
+<a id="__codelineno-22-13" name="__codelineno-22-13"></a><span class="nl">output:</span>
+<a id="__codelineno-22-14" name="__codelineno-22-14"></a><span class="hll"><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;${prefix}&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">file_out</span>
 </span></code></pre></div></td></tr></table></div>
 <p>En conséquence, chaque unité de données circule dans le pipeline avec les métadonnées pertinentes attachées.
 Les processus suivants peuvent alors facilement accéder à ces métadonnées également.</p>
-<p>Vous vous souvenez que nous vous avons dit que le fichier produit par <code>CAT_CAT</code> sera nommé en fonction d'un identifiant qui fait partie des métadonnées ?
+<p>Vous vous souvenez que nous vous avons dit que le fichier produit par <code>FIND_CONCATENATE</code> sera nommé en fonction d'un identifiant qui fait partie des métadonnées ?
 Voici le code pertinent :</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/nf-core/cat/cat/main.nf (extrait)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-35" name="__codelineno-22-35"></a><span class="n">prefix</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">prefix</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s2">&quot;${meta.id}${getFileSuffix(file_list[0])}&quot;</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/nf-core/find/concatenate/main.nf (excerpt)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-37">37</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-37" name="__codelineno-23-37"></a><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">prefix</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s2">&quot;${meta.id}${file_extensions[0]}&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p>Cela se traduit approximativement comme suit : si un <code>prefix</code> est fourni via le système de paramètres de tâche externes (<code>task.ext</code>), utilisez-le pour nommer le fichier de sortie ; sinon créez-en un en utilisant <code>${meta.id}</code>, qui correspond au champ <code>id</code> dans le metamap.</p>
 <p>Vous pouvez imaginer le canal d'entrée entrant dans ce module avec un contenu comme ceci :</p>
-<div class="highlight"><span class="filename">Exemple de contenu de canal d&#x27;entrée</span><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">ch_input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[[[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;batch1&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">date:</span><span class="w"> </span><span class="s1">&#39;25.10.01&#39;</span><span class="o">],</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;file1A.txt&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;file1B.txt&#39;</span><span class="o">]],</span>
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">            </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;batch2&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">date:</span><span class="w"> </span><span class="s1">&#39;25.10.26&#39;</span><span class="o">],</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;file2A.txt&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;file2B.txt&#39;</span><span class="o">]],</span>
-<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">            </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;batch3&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">date:</span><span class="w"> </span><span class="s1">&#39;25.11.14&#39;</span><span class="o">],</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;file3A.txt&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;file3B.txt&#39;</span><span class="o">]]]</span>
+<div class="highlight"><span class="filename">Example input channel contents</span><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">ch_input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[[[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;batch1&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">date:</span><span class="w"> </span><span class="s1">&#39;25.10.01&#39;</span><span class="o">],</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;file1A.txt&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;file1B.txt&#39;</span><span class="o">]],</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">            </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;batch2&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">date:</span><span class="w"> </span><span class="s1">&#39;25.10.26&#39;</span><span class="o">],</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;file2A.txt&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;file2B.txt&#39;</span><span class="o">]],</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">            </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;batch3&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">date:</span><span class="w"> </span><span class="s1">&#39;25.11.14&#39;</span><span class="o">],</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;file3A.txt&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;file3B.txt&#39;</span><span class="o">]]]</span>
 </code></pre></div>
 <p>Puis le contenu du canal de sortie sortant comme ceci :</p>
-<div class="highlight"><span class="filename">Exemple de contenu de canal de sortie</span><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">ch_input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[[[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;batch1&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">date:</span><span class="w"> </span><span class="s1">&#39;25.10.01&#39;</span><span class="o">],</span><span class="w"> </span><span class="s1">&#39;batch1.txt&#39;</span><span class="o">],</span>
-<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">            </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;batch2&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">date:</span><span class="w"> </span><span class="s1">&#39;25.10.26&#39;</span><span class="o">],</span><span class="w"> </span><span class="s1">&#39;batch2.txt&#39;</span><span class="o">],</span>
-<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">            </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;batch3&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">date:</span><span class="w"> </span><span class="s1">&#39;25.11.14&#39;</span><span class="o">],</span><span class="w"> </span><span class="s1">&#39;batch3.txt&#39;</span><span class="o">]]</span>
+<div class="highlight"><span class="filename">Example output channel contents</span><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">ch_input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[[[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;batch1&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">date:</span><span class="w"> </span><span class="s1">&#39;25.10.01&#39;</span><span class="o">],</span><span class="w"> </span><span class="s1">&#39;batch1.txt&#39;</span><span class="o">],</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">            </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;batch2&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">date:</span><span class="w"> </span><span class="s1">&#39;25.10.26&#39;</span><span class="o">],</span><span class="w"> </span><span class="s1">&#39;batch2.txt&#39;</span><span class="o">],</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">            </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;batch3&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">date:</span><span class="w"> </span><span class="s1">&#39;25.11.14&#39;</span><span class="o">],</span><span class="w"> </span><span class="s1">&#39;batch3.txt&#39;</span><span class="o">]]</span>
 </code></pre></div>
 <p>Comme mentionné précédemment, la configuration d'entrée <code>tuple val(meta), path(files_in)</code> est un modèle standard utilisé dans tous les modules nf-core.</p>
 <p>Nous espérons que vous commencez à voir à quel point cela peut être utile.
 Non seulement cela vous permet de nommer les sorties en fonction des métadonnées, mais vous pouvez également faire des choses comme l'utiliser pour appliquer différentes valeurs de paramètres, et en combinaison avec des opérateurs spécifiques, vous pouvez même regrouper, trier ou filtrer les données au fur et à mesure qu'elles circulent dans le pipeline.</p>
 <div class="admonition note">
 <p class="admonition-title">En savoir plus sur les métadonnées</p>
-<p>Pour une introduction complète au travail avec les métadonnées dans les workflows Nextflow, y compris comment lire les métadonnées à partir de samplesheets et les utiliser pour personnaliser le traitement, consultez la quête secondaire <a href="../side_quests/metadata">Métadonnées dans les workflows</a>.</p>
+<p>Pour une introduction complète au travail avec les métadonnées dans les workflows Nextflow, y compris comment lire les métadonnées à partir de samplesheets et les utiliser pour personnaliser le traitement, consultez la quête secondaire <a href="../../side_quests/metadata/">Métadonnées dans les workflows</a>.</p>
 </div>
 <h3 id="23-resumer-les-changements-a-effectuer">2.3. Résumer les changements à effectuer<a class="headerlink" href="#23-resumer-les-changements-a-effectuer" title="Permanent link">&para;</a></h3>
-<p>Sur la base de ce que nous avons examiné, voici les changements majeurs que nous devons apporter à notre pipeline pour utiliser le module <code>cat/cat</code> :</p>
+<p>Sur la base de ce que nous avons examiné, voici les changements majeurs que nous devons apporter à notre pipeline pour utiliser le module <code>find/concatenate</code> :</p>
 <ul>
 <li>Créer un metamap contenant le nom du lot ;</li>
 <li>Empaqueter le metamap dans un tuple avec l'ensemble des fichiers d'entrée à concaténer (provenant de <code>convertToUpper</code>) ;</li>
-<li>Changer l'appel de <code>collectGreetings()</code> à <code>CAT_CAT</code> ;</li>
-<li>Extraire le fichier de sortie du tuple produit par le processus <code>CAT_CAT</code> avant de le passer à <code>cowpy</code>.</li>
+<li>Changer l'appel de <code>collectGreetings()</code> à <code>FIND_CONCATENATE</code> ;</li>
+<li>Extraire le fichier de sortie du tuple produit par le processus <code>FIND_CONCATENATE</code> avant de le passer à <code>cowpy</code>.</li>
 </ul>
-<p>Cela devrait faire l'affaire ! Maintenant que nous avons un plan, nous sommes prêts à nous lancer.</p>
+<p>Cela devrait faire l'affaire ! Maintenant que nous avons un plan, nous sommes prêt·es à nous lancer.</p>
 <h3 id="a-retenir_1">À retenir<a class="headerlink" href="#a-retenir_1" title="Permanent link">&para;</a></h3>
 <p>Vous savez comment évaluer l'interface d'entrée et de sortie d'un nouveau module pour identifier ses exigences, et vous avez appris comment les metamaps sont utilisés par les pipelines nf-core pour garder les métadonnées étroitement associées aux données au fur et à mesure qu'elles circulent dans un pipeline.</p>
 <h3 id="et-ensuite_1">Et ensuite ?<a class="headerlink" href="#et-ensuite_1" title="Permanent link">&para;</a></h3>
 <p>Intégrer le nouveau module dans un workflow.</p>
 <hr />
-<h2 id="3-integrer-cat_cat-dans-le-workflow-hellonf">3. Intégrer CAT_CAT dans le workflow <code>hello.nf</code><a class="headerlink" href="#3-integrer-cat_cat-dans-le-workflow-hellonf" title="Permanent link">&para;</a></h2>
+<h2 id="3-integrer-find_concatenate-dans-le-workflow-hellonf">3. Intégrer FIND_CONCATENATE dans le workflow <code>hello.nf</code><a class="headerlink" href="#3-integrer-find_concatenate-dans-le-workflow-hellonf" title="Permanent link">&para;</a></h2>
 <p>Maintenant que vous savez tout sur les metamaps (ou suffisamment pour les besoins de ce cours, en tout cas), il est temps de réellement implémenter les changements que nous avons décrits ci-dessus.</p>
 <p>Par souci de clarté, nous allons décomposer cela et couvrir chaque étape séparément.</p>
 <div class="admonition note">
@@ -4719,42 +4763,18 @@ Non seulement cela vous permet de nommer les sorties en fonction des métadonné
 <p>Tous les changements montrés ci-dessous sont apportés à la logique du workflow dans le bloc <code>main</code> dans le fichier de workflow <code>core-hello/workflows/hello.nf</code>.</p>
 </div>
 <h3 id="31-creer-une-map-de-metadonnees">3.1. Créer une map de métadonnées<a class="headerlink" href="#31-creer-une-map-de-metadonnees" title="Permanent link">&para;</a></h3>
-<p>Tout d'abord, nous devons créer une map de métadonnées pour <code>CAT_CAT</code>, en gardant à l'esprit que les modules nf-core exigent que le metamap contienne au moins un champ <code>id</code>.</p>
+<p>Tout d'abord, nous devons créer une map de métadonnées pour <code>FIND_CONCATENATE</code>, en gardant à l'esprit que les modules nf-core exigent que le metamap contienne au moins un champ <code>id</code>.</p>
 <p>Puisque nous n'avons besoin d'aucune autre métadonnée, nous pouvons rester simple et utiliser quelque chose comme ceci :</p>
-<div class="highlight"><span class="filename">Exemple de syntaxe</span><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="kt">def</span><span class="w"> </span><span class="n">cat_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;test&#39;</span><span class="o">]</span>
+<div class="highlight"><span class="filename">Syntax example</span><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="kt">def</span><span class="w"> </span><span class="n">cat_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;test&#39;</span><span class="o">]</span>
 </code></pre></div>
 <p>Sauf que nous ne voulons pas coder en dur la valeur <code>id</code> ; nous voulons utiliser la valeur du paramètre <code>params.batch</code>.
 Donc le code devient :</p>
-<div class="highlight"><span class="filename">Exemple de syntaxe</span><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="kt">def</span><span class="w"> </span><span class="n">cat_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">]</span>
+<div class="highlight"><span class="filename">Syntax example</span><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="kt">def</span><span class="w"> </span><span class="n">cat_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">]</span>
 </code></pre></div>
 <p>Oui, c'est littéralement aussi simple que cela de créer un metamap de base.</p>
 <p>Ajoutons ces lignes après l'appel à <code>convertToUpper</code>, en supprimant l'appel à <code>collectGreetings</code> :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Après</label><label for="__tabbed_2_2">Avant</label></div>
 <div class="tabbed-content">
-<div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/workflows/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-26">26</a></span>
-<span class="normal"><a href="#__codelineno-27-27">27</a></span>
-<span class="normal"><a href="#__codelineno-27-28">28</a></span>
-<span class="normal"><a href="#__codelineno-27-29">29</a></span>
-<span class="normal"><a href="#__codelineno-27-30">30</a></span>
-<span class="normal"><a href="#__codelineno-27-31">31</a></span>
-<span class="normal"><a href="#__codelineno-27-32">32</a></span>
-<span class="normal"><a href="#__codelineno-27-33">33</a></span>
-<span class="normal"><a href="#__codelineno-27-34">34</a></span>
-<span class="normal"><a href="#__codelineno-27-35">35</a></span>
-<span class="normal"><a href="#__codelineno-27-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-26" name="__codelineno-27-26"></a><span class="w">    </span><span class="c1">// émettre une salutation</span>
-<a id="__codelineno-27-27" name="__codelineno-27-27"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">ch_samplesheet</span><span class="o">)</span>
-<a id="__codelineno-27-28" name="__codelineno-27-28"></a>
-<a id="__codelineno-27-29" name="__codelineno-27-29"></a><span class="w">    </span><span class="c1">// convertir la salutation en majuscules</span>
-<a id="__codelineno-27-30" name="__codelineno-27-30"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
-<a id="__codelineno-27-31" name="__codelineno-27-31"></a>
-<a id="__codelineno-27-32" name="__codelineno-27-32"></a><span class="hll"><span class="w">    </span><span class="c1">// créer une map de métadonnées avec le nom du lot comme ID</span>
-</span><a id="__codelineno-27-33" name="__codelineno-27-33"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">cat_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nl">id:</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="w"> </span><span class="o">]</span>
-</span><a id="__codelineno-27-34" name="__codelineno-27-34"></a>
-<a id="__codelineno-27-35" name="__codelineno-27-35"></a><span class="w">    </span><span class="c1">// générer de l&#39;art ASCII des salutations avec cowpy</span>
-<a id="__codelineno-27-36" name="__codelineno-27-36"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
-</code></pre></div></td></tr></table></div>
-</div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/workflows/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-26">26</a></span>
 <span class="normal"><a href="#__codelineno-28-27">27</a></span>
@@ -4772,20 +4792,13 @@ Donc le code devient :</p>
 <a id="__codelineno-28-29" name="__codelineno-28-29"></a><span class="w">    </span><span class="c1">// convertir la salutation en majuscules</span>
 <a id="__codelineno-28-30" name="__codelineno-28-30"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 <a id="__codelineno-28-31" name="__codelineno-28-31"></a>
-<a id="__codelineno-28-32" name="__codelineno-28-32"></a><span class="hll"><span class="w">    </span><span class="c1">// rassembler toutes les salutations dans un seul fichier</span>
-</span><a id="__codelineno-28-33" name="__codelineno-28-33"></a><span class="hll"><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">(),</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">)</span>
+<a id="__codelineno-28-32" name="__codelineno-28-32"></a><span class="hll"><span class="w">    </span><span class="c1">// créer une map de métadonnées avec le nom du lot comme ID</span>
+</span><a id="__codelineno-28-33" name="__codelineno-28-33"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">cat_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nl">id:</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="w"> </span><span class="o">]</span>
 </span><a id="__codelineno-28-34" name="__codelineno-28-34"></a>
 <a id="__codelineno-28-35" name="__codelineno-28-35"></a><span class="w">    </span><span class="c1">// générer de l&#39;art ASCII des salutations avec cowpy</span>
 <a id="__codelineno-28-36" name="__codelineno-28-36"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
-</div>
-</div>
-<p>Cela crée une map de métadonnées simple où l'<code>id</code> est défini sur le nom de notre lot (qui sera <code>test</code> lors de l'utilisation du profil test).</p>
-<h3 id="32-creer-un-canal-avec-des-tuples-de-metadonnees">3.2. Créer un canal avec des tuples de métadonnées<a class="headerlink" href="#32-creer-un-canal-avec-des-tuples-de-metadonnees" title="Permanent link">&para;</a></h3>
-<p>Ensuite, transformez le canal de fichiers en un canal de tuples contenant des métadonnées et des fichiers :</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Après</label><label for="__tabbed_3_2">Avant</label></div>
-<div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/workflows/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-26">26</a></span>
 <span class="normal"><a href="#__codelineno-29-27">27</a></span>
@@ -4797,25 +4810,26 @@ Donc le code devient :</p>
 <span class="normal"><a href="#__codelineno-29-33">33</a></span>
 <span class="normal"><a href="#__codelineno-29-34">34</a></span>
 <span class="normal"><a href="#__codelineno-29-35">35</a></span>
-<span class="normal"><a href="#__codelineno-29-36">36</a></span>
-<span class="normal"><a href="#__codelineno-29-37">37</a></span>
-<span class="normal"><a href="#__codelineno-29-38">38</a></span>
-<span class="normal"><a href="#__codelineno-29-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-26" name="__codelineno-29-26"></a><span class="w">    </span><span class="c1">// émettre une salutation</span>
+<span class="normal"><a href="#__codelineno-29-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-26" name="__codelineno-29-26"></a><span class="w">    </span><span class="c1">// émettre une salutation</span>
 <a id="__codelineno-29-27" name="__codelineno-29-27"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">ch_samplesheet</span><span class="o">)</span>
 <a id="__codelineno-29-28" name="__codelineno-29-28"></a>
 <a id="__codelineno-29-29" name="__codelineno-29-29"></a><span class="w">    </span><span class="c1">// convertir la salutation en majuscules</span>
 <a id="__codelineno-29-30" name="__codelineno-29-30"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 <a id="__codelineno-29-31" name="__codelineno-29-31"></a>
-<a id="__codelineno-29-32" name="__codelineno-29-32"></a><span class="w">    </span><span class="c1">// créer une map de métadonnées avec le nom du lot comme ID</span>
-<a id="__codelineno-29-33" name="__codelineno-29-33"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">cat_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nl">id:</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="w"> </span><span class="o">]</span>
-<a id="__codelineno-29-34" name="__codelineno-29-34"></a>
-<a id="__codelineno-29-35" name="__codelineno-29-35"></a><span class="hll"><span class="w">    </span><span class="c1">// créer un canal avec des métadonnées et des fichiers au format tuple</span>
-</span><a id="__codelineno-29-36" name="__codelineno-29-36"></a><span class="hll"><span class="w">    </span><span class="n">ch_for_cat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">().</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">tuple</span><span class="o">(</span><span class="n">cat_meta</span><span class="o">,</span><span class="w"> </span><span class="n">files</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
-</span><a id="__codelineno-29-37" name="__codelineno-29-37"></a>
-<a id="__codelineno-29-38" name="__codelineno-29-38"></a><span class="w">    </span><span class="c1">// générer de l&#39;art ASCII des salutations avec cowpy</span>
-<a id="__codelineno-29-39" name="__codelineno-29-39"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
+<a id="__codelineno-29-32" name="__codelineno-29-32"></a><span class="hll"><span class="w">    </span><span class="c1">// rassembler toutes les salutations dans un seul fichier</span>
+</span><a id="__codelineno-29-33" name="__codelineno-29-33"></a><span class="hll"><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">(),</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">)</span>
+</span><a id="__codelineno-29-34" name="__codelineno-29-34"></a>
+<a id="__codelineno-29-35" name="__codelineno-29-35"></a><span class="w">    </span><span class="c1">// générer de l&#39;art ASCII des salutations avec cowpy</span>
+<a id="__codelineno-29-36" name="__codelineno-29-36"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
+</div>
+</div>
+<p>Cela crée une map de métadonnées simple où l'<code>id</code> est défini sur le nom de notre lot (qui sera <code>test</code> lors de l'utilisation du profil test).</p>
+<h3 id="32-creer-un-canal-avec-des-tuples-de-metadonnees">3.2. Créer un canal avec des tuples de métadonnées<a class="headerlink" href="#32-creer-un-canal-avec-des-tuples-de-metadonnees" title="Permanent link">&para;</a></h3>
+<p>Ensuite, transformez le canal de fichiers en un canal de tuples contenant des métadonnées et des fichiers :</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Après</label><label for="__tabbed_3_2">Avant</label></div>
+<div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/workflows/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-26">26</a></span>
 <span class="normal"><a href="#__codelineno-30-27">27</a></span>
@@ -4827,7 +4841,10 @@ Donc le code devient :</p>
 <span class="normal"><a href="#__codelineno-30-33">33</a></span>
 <span class="normal"><a href="#__codelineno-30-34">34</a></span>
 <span class="normal"><a href="#__codelineno-30-35">35</a></span>
-<span class="normal"><a href="#__codelineno-30-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-26" name="__codelineno-30-26"></a><span class="w">    </span><span class="c1">// émettre une salutation</span>
+<span class="normal"><a href="#__codelineno-30-36">36</a></span>
+<span class="normal"><a href="#__codelineno-30-37">37</a></span>
+<span class="normal"><a href="#__codelineno-30-38">38</a></span>
+<span class="normal"><a href="#__codelineno-30-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-26" name="__codelineno-30-26"></a><span class="w">    </span><span class="c1">// émettre une salutation</span>
 <a id="__codelineno-30-27" name="__codelineno-30-27"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">ch_samplesheet</span><span class="o">)</span>
 <a id="__codelineno-30-28" name="__codelineno-30-28"></a>
 <a id="__codelineno-30-29" name="__codelineno-30-29"></a><span class="w">    </span><span class="c1">// convertir la salutation en majuscules</span>
@@ -4836,22 +4853,13 @@ Donc le code devient :</p>
 <a id="__codelineno-30-32" name="__codelineno-30-32"></a><span class="w">    </span><span class="c1">// créer une map de métadonnées avec le nom du lot comme ID</span>
 <a id="__codelineno-30-33" name="__codelineno-30-33"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">cat_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nl">id:</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="w"> </span><span class="o">]</span>
 <a id="__codelineno-30-34" name="__codelineno-30-34"></a>
-<a id="__codelineno-30-35" name="__codelineno-30-35"></a><span class="w">    </span><span class="c1">// générer de l&#39;art ASCII des salutations avec cowpy</span>
-<a id="__codelineno-30-36" name="__codelineno-30-36"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
+<a id="__codelineno-30-35" name="__codelineno-30-35"></a><span class="hll"><span class="w">    </span><span class="c1">// créer un canal avec des métadonnées et des fichiers au format tuple</span>
+</span><a id="__codelineno-30-36" name="__codelineno-30-36"></a><span class="hll"><span class="w">    </span><span class="n">ch_for_cat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">().</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">tuple</span><span class="o">(</span><span class="n">cat_meta</span><span class="o">,</span><span class="w"> </span><span class="n">files</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-30-37" name="__codelineno-30-37"></a>
+<a id="__codelineno-30-38" name="__codelineno-30-38"></a><span class="w">    </span><span class="c1">// générer de l&#39;art ASCII des salutations avec cowpy</span>
+<a id="__codelineno-30-39" name="__codelineno-30-39"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
-</div>
-</div>
-<p>La ligne que nous avons ajoutée accomplit deux choses :</p>
-<ul>
-<li><code>.collect()</code> rassemble tous les fichiers de la sortie <code>convertToUpper</code> dans une seule liste</li>
-<li><code class="highlight"><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">tuple</span><span class="o">(</span><span class="n">cat_meta</span><span class="o">,</span><span class="w"> </span><span class="n">files</span><span class="o">)</span><span class="w"> </span><span class="o">}</span></code> crée un tuple de <code>[métadonnées, fichiers]</code> dans le format attendu par <code>CAT_CAT</code></li>
-</ul>
-<p>C'est tout ce que nous devons faire pour configurer le tuple d'entrée pour <code>CAT_CAT</code>.</p>
-<h3 id="33-appeler-le-module-cat_cat">3.3. Appeler le module CAT_CAT<a class="headerlink" href="#33-appeler-le-module-cat_cat" title="Permanent link">&para;</a></h3>
-<p>Maintenant, appelez <code>CAT_CAT</code> sur le canal nouvellement créé :</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Après</label><label for="__tabbed_4_2">Avant</label></div>
-<div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/workflows/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-26">26</a></span>
 <span class="normal"><a href="#__codelineno-31-27">27</a></span>
@@ -4863,13 +4871,7 @@ Donc le code devient :</p>
 <span class="normal"><a href="#__codelineno-31-33">33</a></span>
 <span class="normal"><a href="#__codelineno-31-34">34</a></span>
 <span class="normal"><a href="#__codelineno-31-35">35</a></span>
-<span class="normal"><a href="#__codelineno-31-36">36</a></span>
-<span class="normal"><a href="#__codelineno-31-37">37</a></span>
-<span class="normal"><a href="#__codelineno-31-38">38</a></span>
-<span class="normal"><a href="#__codelineno-31-39">39</a></span>
-<span class="normal"><a href="#__codelineno-31-40">40</a></span>
-<span class="normal"><a href="#__codelineno-31-41">41</a></span>
-<span class="normal"><a href="#__codelineno-31-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-26" name="__codelineno-31-26"></a><span class="w">    </span><span class="c1">// émettre une salutation</span>
+<span class="normal"><a href="#__codelineno-31-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-26" name="__codelineno-31-26"></a><span class="w">    </span><span class="c1">// émettre une salutation</span>
 <a id="__codelineno-31-27" name="__codelineno-31-27"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">ch_samplesheet</span><span class="o">)</span>
 <a id="__codelineno-31-28" name="__codelineno-31-28"></a>
 <a id="__codelineno-31-29" name="__codelineno-31-29"></a><span class="w">    </span><span class="c1">// convertir la salutation en majuscules</span>
@@ -4878,16 +4880,22 @@ Donc le code devient :</p>
 <a id="__codelineno-31-32" name="__codelineno-31-32"></a><span class="w">    </span><span class="c1">// créer une map de métadonnées avec le nom du lot comme ID</span>
 <a id="__codelineno-31-33" name="__codelineno-31-33"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">cat_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nl">id:</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="w"> </span><span class="o">]</span>
 <a id="__codelineno-31-34" name="__codelineno-31-34"></a>
-<a id="__codelineno-31-35" name="__codelineno-31-35"></a><span class="w">    </span><span class="c1">// créer un canal avec des métadonnées et des fichiers au format tuple</span>
-<a id="__codelineno-31-36" name="__codelineno-31-36"></a><span class="w">    </span><span class="n">ch_for_cat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">().</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">tuple</span><span class="o">(</span><span class="n">cat_meta</span><span class="o">,</span><span class="w"> </span><span class="n">files</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-31-37" name="__codelineno-31-37"></a>
-<a id="__codelineno-31-38" name="__codelineno-31-38"></a><span class="hll"><span class="w">    </span><span class="c1">// concaténer les salutations</span>
-</span><a id="__codelineno-31-39" name="__codelineno-31-39"></a><span class="hll"><span class="w">    </span><span class="n">CAT_CAT</span><span class="o">(</span><span class="n">ch_for_cat</span><span class="o">)</span>
-</span><a id="__codelineno-31-40" name="__codelineno-31-40"></a>
-<a id="__codelineno-31-41" name="__codelineno-31-41"></a><span class="w">    </span><span class="c1">// générer de l&#39;art ASCII des salutations avec cowpy</span>
-<a id="__codelineno-31-42" name="__codelineno-31-42"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
+<a id="__codelineno-31-35" name="__codelineno-31-35"></a><span class="w">    </span><span class="c1">// générer de l&#39;art ASCII des salutations avec cowpy</span>
+<a id="__codelineno-31-36" name="__codelineno-31-36"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
+</div>
+</div>
+<p>La ligne que nous avons ajoutée accomplit deux choses :</p>
+<ul>
+<li><code>.collect()</code> rassemble tous les fichiers de la sortie <code>convertToUpper</code> dans une seule liste</li>
+<li><code class="highlight"><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">tuple</span><span class="o">(</span><span class="n">cat_meta</span><span class="o">,</span><span class="w"> </span><span class="n">files</span><span class="o">)</span><span class="w"> </span><span class="o">}</span></code> crée un tuple de <code>[métadonnées, fichiers]</code> dans le format attendu par <code>FIND_CONCATENATE</code></li>
+</ul>
+<p>C'est tout ce que nous devons faire pour configurer le tuple d'entrée pour <code>FIND_CONCATENATE</code>.</p>
+<h3 id="33-appeler-le-module-find_concatenate">3.3. Appeler le module FIND_CONCATENATE<a class="headerlink" href="#33-appeler-le-module-find_concatenate" title="Permanent link">&para;</a></h3>
+<p>Maintenant, appelez <code>FIND_CONCATENATE</code> sur le canal nouvellement créé :</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Après</label><label for="__tabbed_4_2">Avant</label></div>
+<div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/workflows/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-26">26</a></span>
 <span class="normal"><a href="#__codelineno-32-27">27</a></span>
@@ -4902,7 +4910,10 @@ Donc le code devient :</p>
 <span class="normal"><a href="#__codelineno-32-36">36</a></span>
 <span class="normal"><a href="#__codelineno-32-37">37</a></span>
 <span class="normal"><a href="#__codelineno-32-38">38</a></span>
-<span class="normal"><a href="#__codelineno-32-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-26" name="__codelineno-32-26"></a><span class="w">    </span><span class="c1">// émettre une salutation</span>
+<span class="normal"><a href="#__codelineno-32-39">39</a></span>
+<span class="normal"><a href="#__codelineno-32-40">40</a></span>
+<span class="normal"><a href="#__codelineno-32-41">41</a></span>
+<span class="normal"><a href="#__codelineno-32-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-26" name="__codelineno-32-26"></a><span class="w">    </span><span class="c1">// émettre une salutation</span>
 <a id="__codelineno-32-27" name="__codelineno-32-27"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">ch_samplesheet</span><span class="o">)</span>
 <a id="__codelineno-32-28" name="__codelineno-32-28"></a>
 <a id="__codelineno-32-29" name="__codelineno-32-29"></a><span class="w">    </span><span class="c1">// convertir la salutation en majuscules</span>
@@ -4914,19 +4925,13 @@ Donc le code devient :</p>
 <a id="__codelineno-32-35" name="__codelineno-32-35"></a><span class="w">    </span><span class="c1">// créer un canal avec des métadonnées et des fichiers au format tuple</span>
 <a id="__codelineno-32-36" name="__codelineno-32-36"></a><span class="w">    </span><span class="n">ch_for_cat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">().</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">tuple</span><span class="o">(</span><span class="n">cat_meta</span><span class="o">,</span><span class="w"> </span><span class="n">files</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-32-37" name="__codelineno-32-37"></a>
-<a id="__codelineno-32-38" name="__codelineno-32-38"></a><span class="w">    </span><span class="c1">// générer de l&#39;art ASCII des salutations avec cowpy</span>
-<a id="__codelineno-32-39" name="__codelineno-32-39"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
+<a id="__codelineno-32-38" name="__codelineno-32-38"></a><span class="hll"><span class="w">    </span><span class="c1">// concaténer les salutations</span>
+</span><a id="__codelineno-32-39" name="__codelineno-32-39"></a><span class="hll"><span class="w">    </span><span class="n">FIND_CONCATENATE</span><span class="o">(</span><span class="n">ch_for_cat</span><span class="o">)</span>
+</span><a id="__codelineno-32-40" name="__codelineno-32-40"></a>
+<a id="__codelineno-32-41" name="__codelineno-32-41"></a><span class="w">    </span><span class="c1">// générer de l&#39;art ASCII des salutations avec cowpy</span>
+<a id="__codelineno-32-42" name="__codelineno-32-42"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
-</div>
-</div>
-<p>Cela complète la partie la plus délicate de cette substitution, mais nous n'avons pas tout à fait terminé : nous devons encore mettre à jour la façon dont nous passons la sortie concaténée au processus <code>cowpy</code>.</p>
-<h3 id="34-extraire-le-fichier-de-sortie-du-tuple-pour-cowpy">3.4. Extraire le fichier de sortie du tuple pour <code>cowpy</code><a class="headerlink" href="#34-extraire-le-fichier-de-sortie-du-tuple-pour-cowpy" title="Permanent link">&para;</a></h3>
-<p>Auparavant, le processus <code>collectGreetings</code> produisait simplement un fichier que nous pouvions passer directement à <code>cowpy</code>.
-Cependant, le processus <code>CAT_CAT</code> produit un tuple qui inclut le metamap en plus du fichier de sortie.</p>
-<p>Puisque <code>cowpy</code> n'accepte pas encore les tuples de métadonnées (nous corrigerons cela dans la prochaine partie du cours), nous devons extraire le fichier de sortie du tuple produit par <code>CAT_CAT</code> avant de le transmettre à <code>cowpy</code> :</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Après</label><label for="__tabbed_5_2">Avant</label></div>
-<div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/workflows/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-26">26</a></span>
 <span class="normal"><a href="#__codelineno-33-27">27</a></span>
@@ -4941,13 +4946,7 @@ Cependant, le processus <code>CAT_CAT</code> produit un tuple qui inclut le meta
 <span class="normal"><a href="#__codelineno-33-36">36</a></span>
 <span class="normal"><a href="#__codelineno-33-37">37</a></span>
 <span class="normal"><a href="#__codelineno-33-38">38</a></span>
-<span class="normal"><a href="#__codelineno-33-39">39</a></span>
-<span class="normal"><a href="#__codelineno-33-40">40</a></span>
-<span class="normal"><a href="#__codelineno-33-41">41</a></span>
-<span class="normal"><a href="#__codelineno-33-42">42</a></span>
-<span class="normal"><a href="#__codelineno-33-43">43</a></span>
-<span class="normal"><a href="#__codelineno-33-44">44</a></span>
-<span class="normal"><a href="#__codelineno-33-45">45</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-26" name="__codelineno-33-26"></a><span class="w">    </span><span class="c1">// émettre une salutation</span>
+<span class="normal"><a href="#__codelineno-33-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-26" name="__codelineno-33-26"></a><span class="w">    </span><span class="c1">// émettre une salutation</span>
 <a id="__codelineno-33-27" name="__codelineno-33-27"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">ch_samplesheet</span><span class="o">)</span>
 <a id="__codelineno-33-28" name="__codelineno-33-28"></a>
 <a id="__codelineno-33-29" name="__codelineno-33-29"></a><span class="w">    </span><span class="c1">// convertir la salutation en majuscules</span>
@@ -4959,16 +4958,19 @@ Cependant, le processus <code>CAT_CAT</code> produit un tuple qui inclut le meta
 <a id="__codelineno-33-35" name="__codelineno-33-35"></a><span class="w">    </span><span class="c1">// créer un canal avec des métadonnées et des fichiers au format tuple</span>
 <a id="__codelineno-33-36" name="__codelineno-33-36"></a><span class="w">    </span><span class="n">ch_for_cat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">().</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">tuple</span><span class="o">(</span><span class="n">cat_meta</span><span class="o">,</span><span class="w"> </span><span class="n">files</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-33-37" name="__codelineno-33-37"></a>
-<a id="__codelineno-33-38" name="__codelineno-33-38"></a><span class="w">    </span><span class="c1">// concaténer les salutations</span>
-<a id="__codelineno-33-39" name="__codelineno-33-39"></a><span class="w">    </span><span class="n">CAT_CAT</span><span class="o">(</span><span class="n">ch_for_cat</span><span class="o">)</span>
-<a id="__codelineno-33-40" name="__codelineno-33-40"></a>
-<a id="__codelineno-33-41" name="__codelineno-33-41"></a><span class="hll"><span class="w">    </span><span class="c1">// extraire le fichier du tuple puisque cowpy n&#39;utilise pas encore les métadonnées</span>
-</span><a id="__codelineno-33-42" name="__codelineno-33-42"></a><span class="hll"><span class="w">    </span><span class="n">ch_for_cowpy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CAT_CAT</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">file_out</span><span class="o">.</span><span class="na">map</span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">}</span>
-</span><a id="__codelineno-33-43" name="__codelineno-33-43"></a>
-<a id="__codelineno-33-44" name="__codelineno-33-44"></a><span class="w">    </span><span class="c1">// générer de l&#39;art ASCII des salutations avec cowpy</span>
-<a id="__codelineno-33-45" name="__codelineno-33-45"></a><span class="hll"><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">ch_for_cowpy</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
-</span></code></pre></div></td></tr></table></div>
+<a id="__codelineno-33-38" name="__codelineno-33-38"></a><span class="w">    </span><span class="c1">// générer de l&#39;art ASCII des salutations avec cowpy</span>
+<a id="__codelineno-33-39" name="__codelineno-33-39"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
+</code></pre></div></td></tr></table></div>
 </div>
+</div>
+</div>
+<p>Cela complète la partie la plus délicate de cette substitution, mais nous n'avons pas tout à fait terminé : nous devons encore mettre à jour la façon dont nous passons la sortie concaténée au processus <code>cowpy</code>.</p>
+<h3 id="34-extraire-le-fichier-de-sortie-du-tuple-pour-cowpy">3.4. Extraire le fichier de sortie du tuple pour <code>cowpy</code><a class="headerlink" href="#34-extraire-le-fichier-de-sortie-du-tuple-pour-cowpy" title="Permanent link">&para;</a></h3>
+<p>Auparavant, le processus <code>collectGreetings</code> produisait simplement un fichier que nous pouvions passer directement à <code>cowpy</code>.
+Cependant, le processus <code>FIND_CONCATENATE</code> produit un tuple qui inclut le metamap en plus du fichier de sortie.</p>
+<p>Puisque <code>cowpy</code> n'accepte pas encore les tuples de métadonnées (nous corrigerons cela dans la prochaine partie du cours), nous devons extraire le fichier de sortie du tuple produit par <code>FIND_CONCATENATE</code> avant de le transmettre à <code>cowpy</code> :</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Après</label><label for="__tabbed_5_2">Avant</label></div>
+<div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/workflows/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-26">26</a></span>
 <span class="normal"><a href="#__codelineno-34-27">27</a></span>
@@ -4986,7 +4988,10 @@ Cependant, le processus <code>CAT_CAT</code> produit un tuple qui inclut le meta
 <span class="normal"><a href="#__codelineno-34-39">39</a></span>
 <span class="normal"><a href="#__codelineno-34-40">40</a></span>
 <span class="normal"><a href="#__codelineno-34-41">41</a></span>
-<span class="normal"><a href="#__codelineno-34-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-26" name="__codelineno-34-26"></a><span class="w">    </span><span class="c1">// émettre une salutation</span>
+<span class="normal"><a href="#__codelineno-34-42">42</a></span>
+<span class="normal"><a href="#__codelineno-34-43">43</a></span>
+<span class="normal"><a href="#__codelineno-34-44">44</a></span>
+<span class="normal"><a href="#__codelineno-34-45">45</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-26" name="__codelineno-34-26"></a><span class="w">    </span><span class="c1">// émettre une salutation</span>
 <a id="__codelineno-34-27" name="__codelineno-34-27"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">ch_samplesheet</span><span class="o">)</span>
 <a id="__codelineno-34-28" name="__codelineno-34-28"></a>
 <a id="__codelineno-34-29" name="__codelineno-34-29"></a><span class="w">    </span><span class="c1">// convertir la salutation en majuscules</span>
@@ -4999,64 +5004,103 @@ Cependant, le processus <code>CAT_CAT</code> produit un tuple qui inclut le meta
 <a id="__codelineno-34-36" name="__codelineno-34-36"></a><span class="w">    </span><span class="n">ch_for_cat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">().</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">tuple</span><span class="o">(</span><span class="n">cat_meta</span><span class="o">,</span><span class="w"> </span><span class="n">files</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-34-37" name="__codelineno-34-37"></a>
 <a id="__codelineno-34-38" name="__codelineno-34-38"></a><span class="w">    </span><span class="c1">// concaténer les salutations</span>
-<a id="__codelineno-34-39" name="__codelineno-34-39"></a><span class="w">    </span><span class="n">CAT_CAT</span><span class="o">(</span><span class="n">ch_for_cat</span><span class="o">)</span>
+<a id="__codelineno-34-39" name="__codelineno-34-39"></a><span class="w">    </span><span class="n">FIND_CONCATENATE</span><span class="o">(</span><span class="n">ch_for_cat</span><span class="o">)</span>
 <a id="__codelineno-34-40" name="__codelineno-34-40"></a>
-<a id="__codelineno-34-41" name="__codelineno-34-41"></a><span class="w">    </span><span class="c1">// générer de l&#39;art ASCII des salutations avec cowpy</span>
-<a id="__codelineno-34-42" name="__codelineno-34-42"></a><span class="hll"><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
+<a id="__codelineno-34-41" name="__codelineno-34-41"></a><span class="hll"><span class="w">    </span><span class="c1">// extraire le fichier du tuple puisque cowpy n&#39;utilise pas encore les métadonnées</span>
+</span><a id="__codelineno-34-42" name="__codelineno-34-42"></a><span class="hll"><span class="w">    </span><span class="n">ch_for_cowpy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FIND_CONCATENATE</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">file_out</span><span class="o">.</span><span class="na">map</span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-34-43" name="__codelineno-34-43"></a>
+<a id="__codelineno-34-44" name="__codelineno-34-44"></a><span class="w">    </span><span class="c1">// générer de l&#39;art ASCII des salutations avec cowpy</span>
+<a id="__codelineno-34-45" name="__codelineno-34-45"></a><span class="hll"><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">ch_for_cowpy</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/workflows/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-26">26</a></span>
+<span class="normal"><a href="#__codelineno-35-27">27</a></span>
+<span class="normal"><a href="#__codelineno-35-28">28</a></span>
+<span class="normal"><a href="#__codelineno-35-29">29</a></span>
+<span class="normal"><a href="#__codelineno-35-30">30</a></span>
+<span class="normal"><a href="#__codelineno-35-31">31</a></span>
+<span class="normal"><a href="#__codelineno-35-32">32</a></span>
+<span class="normal"><a href="#__codelineno-35-33">33</a></span>
+<span class="normal"><a href="#__codelineno-35-34">34</a></span>
+<span class="normal"><a href="#__codelineno-35-35">35</a></span>
+<span class="normal"><a href="#__codelineno-35-36">36</a></span>
+<span class="normal"><a href="#__codelineno-35-37">37</a></span>
+<span class="normal"><a href="#__codelineno-35-38">38</a></span>
+<span class="normal"><a href="#__codelineno-35-39">39</a></span>
+<span class="normal"><a href="#__codelineno-35-40">40</a></span>
+<span class="normal"><a href="#__codelineno-35-41">41</a></span>
+<span class="normal"><a href="#__codelineno-35-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-35-26" name="__codelineno-35-26"></a><span class="w">    </span><span class="c1">// émettre une salutation</span>
+<a id="__codelineno-35-27" name="__codelineno-35-27"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">ch_samplesheet</span><span class="o">)</span>
+<a id="__codelineno-35-28" name="__codelineno-35-28"></a>
+<a id="__codelineno-35-29" name="__codelineno-35-29"></a><span class="w">    </span><span class="c1">// convertir la salutation en majuscules</span>
+<a id="__codelineno-35-30" name="__codelineno-35-30"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
+<a id="__codelineno-35-31" name="__codelineno-35-31"></a>
+<a id="__codelineno-35-32" name="__codelineno-35-32"></a><span class="w">    </span><span class="c1">// créer une map de métadonnées avec le nom du lot comme ID</span>
+<a id="__codelineno-35-33" name="__codelineno-35-33"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">cat_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nl">id:</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="w"> </span><span class="o">]</span>
+<a id="__codelineno-35-34" name="__codelineno-35-34"></a>
+<a id="__codelineno-35-35" name="__codelineno-35-35"></a><span class="w">    </span><span class="c1">// créer un canal avec des métadonnées et des fichiers au format tuple</span>
+<a id="__codelineno-35-36" name="__codelineno-35-36"></a><span class="w">    </span><span class="n">ch_for_cat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">().</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">tuple</span><span class="o">(</span><span class="n">cat_meta</span><span class="o">,</span><span class="w"> </span><span class="n">files</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-35-37" name="__codelineno-35-37"></a>
+<a id="__codelineno-35-38" name="__codelineno-35-38"></a><span class="w">    </span><span class="c1">// concaténer les salutations</span>
+<a id="__codelineno-35-39" name="__codelineno-35-39"></a><span class="w">    </span><span class="n">FIND_CONCATENATE</span><span class="o">(</span><span class="n">ch_for_cat</span><span class="o">)</span>
+<a id="__codelineno-35-40" name="__codelineno-35-40"></a>
+<a id="__codelineno-35-41" name="__codelineno-35-41"></a><span class="w">    </span><span class="c1">// générer de l&#39;art ASCII des salutations avec cowpy</span>
+<a id="__codelineno-35-42" name="__codelineno-35-42"></a><span class="hll"><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
-<p>L'opération <code class="highlight"><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">}</span></code> extrait le fichier du tuple <code>[métadonnées, fichier]</code> produit par <code>CAT_CAT</code> dans un nouveau canal, <code>ch_for_cowpy</code>.</p>
+<p>L'opération <code class="highlight"><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">}</span></code> extrait le fichier du tuple <code>[métadonnées, fichier]</code> produit par <code>FIND_CONCATENATE</code> dans un nouveau canal, <code>ch_for_cowpy</code>.</p>
 <p>Ensuite, il suffit de passer <code>ch_for_cowpy</code> à <code>cowpy</code> au lieu de <code>collectGreetings.out.outfile</code> dans cette dernière ligne.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Dans la prochaine partie du cours, nous mettrons à jour <code>cowpy</code> pour qu'il fonctionne directement avec les tuples de métadonnées, donc cette étape d'extraction ne sera plus nécessaire.</p>
 </div>
 <h3 id="35-tester-le-workflow">3.5. Tester le workflow<a class="headerlink" href="#35-tester-le-workflow" title="Permanent link">&para;</a></h3>
-<p>Testons que le workflow fonctionne avec le module <code>cat/cat</code> nouvellement intégré :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--outdir<span class="w"> </span>core-hello-results<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--validate_params<span class="w"> </span><span class="nb">false</span>
+<p>Testons que le workflow fonctionne avec le module <code>find/concatenate</code> nouvellement intégré :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--outdir<span class="w"> </span>core-hello-results<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--validate_params<span class="w"> </span><span class="nb">false</span>
 </code></pre></div>
 <p>Cela devrait s'exécuter assez rapidement.</p>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="go">N E X T F L O W ~ version 25.04.3</span>
-<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>
-<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="go">    Launching `./main.nf` [evil_pike] DSL2 - revision: b9e9b3b8de</span>
-<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a>
-<a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a><span class="go">    Input/output options</span>
-<a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a><span class="go">      input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv</span>
-<a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a><span class="go">      outdir                    : core-hello-results</span>
-<a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a>
-<a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a><span class="go">    Institutional config options</span>
-<a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a><span class="go">      config_profile_name       : Test profile</span>
-<a id="__codelineno-36-11" name="__codelineno-36-11" href="#__codelineno-36-11"></a><span class="go">      config_profile_description: Minimal test dataset to check pipeline function</span>
-<a id="__codelineno-36-12" name="__codelineno-36-12" href="#__codelineno-36-12"></a>
-<a id="__codelineno-36-13" name="__codelineno-36-13" href="#__codelineno-36-13"></a><span class="go">    Generic options</span>
-<a id="__codelineno-36-14" name="__codelineno-36-14" href="#__codelineno-36-14"></a><span class="go">      validate_params           : false</span>
-<a id="__codelineno-36-15" name="__codelineno-36-15" href="#__codelineno-36-15"></a><span class="go">      trace_report_suffix       : 2025-10-30_18-50-58</span>
-<a id="__codelineno-36-16" name="__codelineno-36-16" href="#__codelineno-36-16"></a>
-<a id="__codelineno-36-17" name="__codelineno-36-17" href="#__codelineno-36-17"></a><span class="go">    Core Nextflow options</span>
-<a id="__codelineno-36-18" name="__codelineno-36-18" href="#__codelineno-36-18"></a><span class="go">      runName                   : evil_pike</span>
-<a id="__codelineno-36-19" name="__codelineno-36-19" href="#__codelineno-36-19"></a><span class="go">      containerEngine           : docker</span>
-<a id="__codelineno-36-20" name="__codelineno-36-20" href="#__codelineno-36-20"></a><span class="go">      launchDir                 : /workspaces/training/hello-nf-core/core-hello</span>
-<a id="__codelineno-36-21" name="__codelineno-36-21" href="#__codelineno-36-21"></a><span class="go">      workDir                   : /workspaces/training/hello-nf-core/core-hello/work</span>
-<a id="__codelineno-36-22" name="__codelineno-36-22" href="#__codelineno-36-22"></a><span class="go">      projectDir                : /workspaces/training/hello-nf-core/core-hello</span>
-<a id="__codelineno-36-23" name="__codelineno-36-23" href="#__codelineno-36-23"></a><span class="go">      userName                  : root</span>
-<a id="__codelineno-36-24" name="__codelineno-36-24" href="#__codelineno-36-24"></a><span class="go">      profile                   : test,docker</span>
-<a id="__codelineno-36-25" name="__codelineno-36-25" href="#__codelineno-36-25"></a><span class="go">      configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config</span>
-<a id="__codelineno-36-26" name="__codelineno-36-26" href="#__codelineno-36-26"></a>
-<a id="__codelineno-36-27" name="__codelineno-36-27" href="#__codelineno-36-27"></a><span class="go">    !! Only displaying parameters that differ from the pipeline defaults !!</span>
-<a id="__codelineno-36-28" name="__codelineno-36-28" href="#__codelineno-36-28"></a><span class="go">    ------------------------------------------------------</span>
-<a id="__codelineno-36-29" name="__codelineno-36-29" href="#__codelineno-36-29"></a><span class="go">    executor &gt;  local (8)</span>
-<a id="__codelineno-36-30" name="__codelineno-36-30" href="#__codelineno-36-30"></a><span class="go">    [b3/f005fd] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔</span>
-<a id="__codelineno-36-31" name="__codelineno-36-31" href="#__codelineno-36-31"></a><span class="go">    [08/f923d0] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔</span>
-<a id="__codelineno-36-32" name="__codelineno-36-32" href="#__codelineno-36-32"></a><span class="go">    [34/3729a9] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔</span>
-<a id="__codelineno-36-33" name="__codelineno-36-33" href="#__codelineno-36-33"></a><span class="go">    [24/df918a] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔</span>
-<a id="__codelineno-36-34" name="__codelineno-36-34" href="#__codelineno-36-34"></a><span class="go">    -[core/hello] Pipeline completed successfully-</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="go">N E X T F L O W ~ version 25.10.4</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="go">    Launching `./main.nf` [evil_pike] DSL2 - revision: b9e9b3b8de</span>
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>
+<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="go">    Input/output options</span>
+<a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a><span class="go">      input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv</span>
+<a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a><span class="go">      outdir                    : core-hello-results</span>
+<a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a>
+<a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a><span class="go">    Institutional config options</span>
+<a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a><span class="go">      config_profile_name       : Test profile</span>
+<a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a><span class="go">      config_profile_description: Minimal test dataset to check pipeline function</span>
+<a id="__codelineno-37-12" name="__codelineno-37-12" href="#__codelineno-37-12"></a>
+<a id="__codelineno-37-13" name="__codelineno-37-13" href="#__codelineno-37-13"></a><span class="go">    Generic options</span>
+<a id="__codelineno-37-14" name="__codelineno-37-14" href="#__codelineno-37-14"></a><span class="go">      validate_params           : false</span>
+<a id="__codelineno-37-15" name="__codelineno-37-15" href="#__codelineno-37-15"></a><span class="go">      trace_report_suffix       : 2025-10-30_18-50-58</span>
+<a id="__codelineno-37-16" name="__codelineno-37-16" href="#__codelineno-37-16"></a>
+<a id="__codelineno-37-17" name="__codelineno-37-17" href="#__codelineno-37-17"></a><span class="go">    Core Nextflow options</span>
+<a id="__codelineno-37-18" name="__codelineno-37-18" href="#__codelineno-37-18"></a><span class="go">      runName                   : evil_pike</span>
+<a id="__codelineno-37-19" name="__codelineno-37-19" href="#__codelineno-37-19"></a><span class="go">      containerEngine           : docker</span>
+<a id="__codelineno-37-20" name="__codelineno-37-20" href="#__codelineno-37-20"></a><span class="go">      launchDir                 : /workspaces/training/hello-nf-core/core-hello</span>
+<a id="__codelineno-37-21" name="__codelineno-37-21" href="#__codelineno-37-21"></a><span class="go">      workDir                   : /workspaces/training/hello-nf-core/core-hello/work</span>
+<a id="__codelineno-37-22" name="__codelineno-37-22" href="#__codelineno-37-22"></a><span class="go">      projectDir                : /workspaces/training/hello-nf-core/core-hello</span>
+<a id="__codelineno-37-23" name="__codelineno-37-23" href="#__codelineno-37-23"></a><span class="go">      userName                  : root</span>
+<a id="__codelineno-37-24" name="__codelineno-37-24" href="#__codelineno-37-24"></a><span class="go">      profile                   : test,docker</span>
+<a id="__codelineno-37-25" name="__codelineno-37-25" href="#__codelineno-37-25"></a><span class="go">      configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config</span>
+<a id="__codelineno-37-26" name="__codelineno-37-26" href="#__codelineno-37-26"></a>
+<a id="__codelineno-37-27" name="__codelineno-37-27" href="#__codelineno-37-27"></a><span class="go">    !! Only displaying parameters that differ from the pipeline defaults !!</span>
+<a id="__codelineno-37-28" name="__codelineno-37-28" href="#__codelineno-37-28"></a><span class="go">    ------------------------------------------------------</span>
+<a id="__codelineno-37-29" name="__codelineno-37-29" href="#__codelineno-37-29"></a><span class="go">    executor &gt;  local (8)</span>
+<a id="__codelineno-37-30" name="__codelineno-37-30" href="#__codelineno-37-30"></a><span class="go">    [b3/f005fd] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔</span>
+<a id="__codelineno-37-31" name="__codelineno-37-31" href="#__codelineno-37-31"></a><span class="go">    [08/f923d0] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔</span>
+<a id="__codelineno-37-32" name="__codelineno-37-32" href="#__codelineno-37-32"></a><span class="go">    [34/3729a9] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔</span>
+<a id="__codelineno-37-33" name="__codelineno-37-33" href="#__codelineno-37-33"></a><span class="go">    [24/df918a] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔</span>
+<a id="__codelineno-37-34" name="__codelineno-37-34" href="#__codelineno-37-34"></a><span class="go">    -[core/hello] Pipeline completed successfully-</span>
 </code></pre></div>
 </details>
-<p>Remarquez que <code>CAT_CAT</code> apparaît maintenant dans la liste d'exécution des processus au lieu de <code>collectGreetings</code>.</p>
+<p>Remarquez que <code>FIND_CONCATENATE</code> apparaît maintenant dans la liste d'exécution des processus au lieu de <code>collectGreetings</code>.</p>
 <p>Et voilà ! Nous utilisons maintenant un module robuste et maintenu par la communauté au lieu d'un code personnalisé de qualité prototype pour cette étape du pipeline.</p>
 <h3 id="a-retenir_2">À retenir<a class="headerlink" href="#a-retenir_2" title="Permanent link">&para;</a></h3>
 <p>Vous savez maintenant comment :</p>

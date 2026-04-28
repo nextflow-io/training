@@ -2549,22 +2549,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#takeaway_4" class="md-nav__link">
+  <a href="#conclusione" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusione
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Takeaway">
+    <nav class="md-nav" aria-label="Conclusione">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prossimi-passi_4" class="md-nav__link">
+  <a href="#cosa-ce-dopo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Prossimi passi
+        Cosa c'è dopo?
       
     </span>
   </a>
@@ -2930,7 +2930,7 @@
   <span class="md-ellipsis">
     
   
-    Orientamento
+    Per iniziare
   
 
     
@@ -2986,7 +2986,7 @@
   <span class="md-ellipsis">
     
   
-    Pattern Essenziali di Scripting in Nextflow
+    Pattern Essenziali di Scripting
   
 
     
@@ -3098,7 +3098,7 @@
   <span class="md-ellipsis">
     
   
-    Test con nf-test
+    Index
   
 
     
@@ -3126,7 +3126,7 @@
   <span class="md-ellipsis">
     
   
-    Debug dei Workflow
+    Risoluzione dei Problemi nei Workflow
   
 
     
@@ -4244,22 +4244,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#takeaway_4" class="md-nav__link">
+  <a href="#conclusione" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Conclusione
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Takeaway">
+    <nav class="md-nav" aria-label="Conclusione">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prossimi-passi_4" class="md-nav__link">
+  <a href="#cosa-ce-dopo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Prossimi passi
+        Cosa c'è dopo?
       
     </span>
   </a>
@@ -4546,7 +4546,7 @@ Facilitano il passaggio tra diversi scenari di calcolo senza modificare i file d
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>code<span class="w"> </span>molkart/nextflow.config
 </code></pre></div>
 <p>Cercare il blocco <code>profiles</code>:</p>
-<div class="highlight"><span class="filename">molkart/nextflow.config (estratto)</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">profiles</span><span class="w"> </span><span class="o">{</span>
+<div class="highlight"><span class="filename">molkart/nextflow.config (excerpt)</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">profiles</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">docker</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="n">docker</span><span class="o">.</span><span class="na">enabled</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">        </span><span class="n">singularity</span><span class="o">.</span><span class="na">enabled</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
@@ -4588,7 +4588,7 @@ Possiamo ora combinarlo con il profilo Docker integrato:</p>
 </ul>
 <p>Poiché stiamo utilizzando <code>-resume</code>, Nextflow verificherà se qualcosa è cambiato dall'ultima esecuzione.
 Se i parametri, gli input e il codice sono gli stessi, tutte le attività verranno recuperate dalla cache e la pipeline si completerà quasi istantaneamente.</p>
-<div class="highlight"><span class="filename">Output (estratto)</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">executor &gt;  local (12)</span>
+<div class="highlight"><span class="filename">Output (excerpt)</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">executor &gt;  local (12)</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">...</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)               [100%] 2 of 2, cached: 2 ✔</span>
@@ -4604,13 +4604,13 @@ Le pipeline nf-core includeranno sempre almeno due profili di test:</p>
 <li><code>test_full</code>: Test più completo con dati più grandi</li>
 </ul>
 <p>Diamo un'occhiata più da vicino al profilo <code>test</code> in molkart che è incluso utilizzando la direttiva <code>includeConfig</code>:</p>
-<div class="highlight"><span class="filename">molkart/nextflow.config (estratto)</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">profiles</span><span class="w"> </span><span class="o">{</span>
+<div class="highlight"><span class="filename">molkart/nextflow.config (excerpt)</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">profiles</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="o">...</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="n">test</span><span class="w">      </span><span class="o">{</span><span class="w"> </span><span class="n">includeConfig</span><span class="w"> </span><span class="s1">&#39;conf/test.config&#39;</span><span class="w">      </span><span class="o">}</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="o">}</span>
 </code></pre></div>
 <p>Questo significa che ogni volta che eseguiamo la pipeline con <code>-profile test</code>, Nextflow caricherà la configurazione da <code>conf/test.config</code>.</p>
-<div class="highlight"><span class="filename">molkart/conf/test.config (estratto)</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
+<div class="highlight"><span class="filename">molkart/conf/test.config (excerpt)</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="n">config_profile_name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Test profile&#39;</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">config_profile_description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Minimal test dataset to check pipeline function&#39;</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
@@ -4706,7 +4706,7 @@ Utilizzare <code>nextflow config</code> per ispezionare la configurazione risolt
 <p>Per semplicità, le pipeline nf-core utilizzano <a href="https://www.nextflow.io/docs/latest/reference/process.html#process-label"><strong>etichette dei processi</strong></a> per standardizzare l'allocazione delle risorse in tutte le pipeline.
 Ogni processo è etichettato con un'etichetta come <code>process_low</code>, <code>process_medium</code> o <code>process_high</code> per descrivere rispettivamente requisiti di risorse di calcolo bassi, medi o alti.
 Queste etichette vengono convertite in richieste di risorse specifiche in uno dei file di configurazione situati nella directory <code>conf/</code> della pipeline.</p>
-<div class="highlight"><span class="filename">molkart/conf/base.config (estratto)</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<div class="highlight"><span class="filename">molkart/conf/base.config (excerpt)</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="n">cpus</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="mi">1</span><span class="w">      </span><span class="o">*</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">attempt</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="mi">6</span><span class="o">.</span><span class="na">GB</span><span class="w">   </span><span class="o">*</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">attempt</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="n">time</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="mi">4</span><span class="o">.</span><span class="na">h</span><span class="w">    </span><span class="o">*</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">attempt</span><span class="w"> </span><span class="o">}</span>
@@ -4808,7 +4808,7 @@ Profili diversi possono avere limiti diversi appropriati per il loro ambiente.</
 <h3 id="prossimi-passi_3">Prossimi passi<a class="headerlink" href="#prossimi-passi_3" title="Permanent link">&para;</a></h3>
 <p>Hai completato la formazione principale su Nextflow per Bioimaging!</p>
 <hr />
-<h2 id="takeaway_4">Takeaway<a class="headerlink" href="#takeaway_4" title="Permanent link">&para;</a></h2>
+<h2 id="conclusione">Conclusione<a class="headerlink" href="#conclusione" title="Permanent link">&para;</a></h2>
 <p>Ora comprendi come configurare le pipeline Nextflow per diversi ambienti di calcolo.</p>
 <p>Competenze chiave che hai appreso:</p>
 <ul>
@@ -4820,14 +4820,14 @@ Profili diversi possono avere limiti diversi appropriati per il loro ambiente.</
 <li><strong>Ispezione della configurazione</strong>: Utilizzo di <code>nextflow config</code> per debug e verifica delle impostazioni</li>
 </ul>
 <p>Queste competenze di configurazione sono trasferibili a qualsiasi pipeline Nextflow e ti aiuteranno a eseguire workflow in modo efficiente su macchine locali, cluster HPC e piattaforme cloud.</p>
-<h3 id="prossimi-passi_4">Prossimi passi<a class="headerlink" href="#prossimi-passi_4" title="Permanent link">&para;</a></h3>
+<h3 id="cosa-ce-dopo">Cosa c'è dopo?<a class="headerlink" href="#cosa-ce-dopo" title="Permanent link">&para;</a></h3>
 <p>Congratulazioni per aver completato il corso Nextflow per Bioimaging!</p>
 <p>Prossimi passi:</p>
 <ul>
 <li>Compilare il sondaggio del corso per fornire feedback</li>
-<li>Consultare <a href="../hello_nextflow/index.md">Hello Nextflow</a> per saperne di più sullo sviluppo di workflow</li>
-<li>Esplorare <a href="../hello_nf-core/index.md">Hello nf-core</a> per approfondire gli strumenti nf-core</li>
-<li>Sfogliare altri corsi nelle <a href="../training_collections/index.md">collezioni di formazione</a></li>
+<li>Consultare <a href="../../../hello_nextflow/">Hello Nextflow</a> per saperne di più sullo sviluppo di workflow</li>
+<li>Esplorare <a href="../../../hello_nf-core/">Hello nf-core</a> per approfondire gli strumenti nf-core</li>
+<li>Sfogliare altri corsi nelle <a href="../../../training_collections/">collezioni di formazione</a></li>
 </ul><div id="quiz-progress-sidebar" aria-label="Quiz Progress" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">

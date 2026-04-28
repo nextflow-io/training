@@ -2995,7 +2995,7 @@
   <span class="md-ellipsis">
     
   
-    오리엔테이션
+    시작하기
   
 
     
@@ -3051,7 +3051,7 @@
   <span class="md-ellipsis">
     
   
-    필수 Nextflow 스크립팅 패턴
+    필수 스크립팅 패턴
   
 
     
@@ -3191,7 +3191,7 @@
   <span class="md-ellipsis">
     
   
-    워크플로우 디버깅
+    워크플로우 문제 해결
   
 
     
@@ -4915,7 +4915,7 @@ Nextflow가 모든 병렬 처리를 자동으로 처리합니다.</p>
 <li><code>HISAT2_ALIGN.out.log</code></li>
 </ul>
 <p>이들을 단일 채널로 혼합한 다음 <code>.collect()</code>를 사용하여 모든 샘플의 보고서를 단일 리스트로 집계합니다.</p>
-<p><code>HISAT2_ALIGN</code> 호출 후 워크플로우 본문에 다음 줄을 추가합니다:</p>
+<p><code>HISAT2_ALIGN</code> 실행 후 워크플로우 본문에 다음 줄을 추가합니다:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">후</label><label for="__tabbed_5_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5167,14 +5167,14 @@ Nextflow가 모든 병렬 처리를 자동으로 처리합니다.</p>
 <span class="normal"><a href="#__codelineno-24-91">91</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-82" name="__codelineno-24-82"></a><span class="w">    </span><span class="n">align_log</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-24-83" name="__codelineno-24-83"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;align&#39;</span>
 <a id="__codelineno-24-84" name="__codelineno-24-84"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-24-85" name="__codelineno-24-85"></a><span class="w">    </span><span class="n">multiqc_report</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-24-86" name="__codelineno-24-86"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;multiqc&#39;</span>
-<a id="__codelineno-24-87" name="__codelineno-24-87"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-24-88" name="__codelineno-24-88"></a><span class="hll"><span class="w">    </span><span class="n">multiqc_data</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-24-85" name="__codelineno-24-85"></a><span class="hll"><span class="w">    </span><span class="n">multiqc_report</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-24-86" name="__codelineno-24-86"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;multiqc&#39;</span>
+</span><a id="__codelineno-24-87" name="__codelineno-24-87"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
+</span><a id="__codelineno-24-88" name="__codelineno-24-88"></a><span class="hll"><span class="w">    </span><span class="n">multiqc_data</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-24-89" name="__codelineno-24-89"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;multiqc&#39;</span>
 </span><a id="__codelineno-24-90" name="__codelineno-24-90"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
-</span><a id="__codelineno-24-91" name="__codelineno-24-91"></a><span class="hll"><span class="o">}</span>
-</span></code></pre></div></td></tr></table></div>
+</span><a id="__codelineno-24-91" name="__codelineno-24-91"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">rnaseq.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-82">82</a></span>
@@ -5206,11 +5206,13 @@ Nextflow가 모든 병렬 처리를 자동으로 처리합니다.</p>
 <a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="go">[56/e1f102] MULTIQC          [100%] 1 of 1 ✔</span>
 </code></pre></div>
 </details>
-<p>캐시된 프로세스 호출 후에 단일 MULTIQC 호출이 추가되었습니다.</p>
+<p>캐시된 프로세스 실행 후에 단일 MULTIQC 실행이 추가되었습니다.</p>
 <p>결과 디렉토리에서 MultiQC 출력을 찾을 수 있습니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>tree<span class="w"> </span>-L<span class="w"> </span><span class="m">2</span><span class="w"> </span>results/multiqc
 </code></pre></div>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="go">results/multiqc</span>
+<details class="abstract">
+<summary>디렉토리 내용</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="go">results/multiqc</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="go">├── all_single-end_data</span>
 <a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="go">│   ├── cutadapt_filtered_reads_plot.txt</span>
 <a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="go">│   ├── cutadapt_trimmed_sequences_plot_3_Counts.txt</span>
@@ -5239,6 +5241,7 @@ Nextflow가 모든 병렬 처리를 자동으로 처리합니다.</p>
 <a id="__codelineno-29-27" name="__codelineno-29-27" href="#__codelineno-29-27"></a><span class="go">│   └── multiqc_sources.txt</span>
 <a id="__codelineno-29-28" name="__codelineno-29-28" href="#__codelineno-29-28"></a><span class="go">└── all_single-end.html</span>
 </code></pre></div>
+</details>
 <p>마지막 <code>all_single-end.html</code> 파일은 하나의 쉽게 탐색할 수 있는 HTML 파일로 편리하게 패키징된 전체 집계 보고서입니다.</p>
 <h3 id="_5">핵심 정리<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>여러 채널에서 출력을 수집하고, <code>.mix()</code>와 <code>.collect()</code>로 번들로 묶고, 집계 프로세스에 전달하는 방법을 알게 되었습니다.</p>

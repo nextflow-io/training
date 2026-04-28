@@ -2348,7 +2348,7 @@
   <span class="md-ellipsis">
     
   
-    Orientação
+    Primeiros passos
   
 
     
@@ -2404,7 +2404,7 @@
   <span class="md-ellipsis">
     
   
-    Padrões Essenciais de Scripting em Nextflow
+    Padrões Essenciais de Scripting
   
 
     
@@ -2432,7 +2432,7 @@
   <span class="md-ellipsis">
     
   
-    Processamento de entrada de arquivos
+    Processamento de Entrada de Arquivos
   
 
     
@@ -2460,7 +2460,7 @@
   <span class="md-ellipsis">
     
   
-    Metadados e meta maps
+    Metadados e Meta Maps
   
 
     
@@ -2516,7 +2516,7 @@
   <span class="md-ellipsis">
     
   
-    Testando com nf-test
+    Index
   
 
     
@@ -2544,7 +2544,7 @@
   <span class="md-ellipsis">
     
   
-    Depurando Fluxos de Trabalho
+    Solução de Problemas em Fluxos de Trabalho
   
 
     
@@ -2707,22 +2707,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-criar-o-fluxo-de-trabalho-de-saudacao" class="md-nav__link">
+  <a href="#1-adicionar-o-fluxo-de-trabalho-de-saudacao-ao-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Criar o Fluxo de Trabalho de Saudação
+        1. Adicionar o fluxo de trabalho de saudação ao pipeline
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Criar o Fluxo de Trabalho de Saudação">
+    <nav class="md-nav" aria-label="1. Adicionar o fluxo de trabalho de saudação ao pipeline">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-criar-a-estrutura-do-fluxo-de-trabalho" class="md-nav__link">
+  <a href="#11-revisar-e-executar-o-fluxo-de-trabalho-de-saudacao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Criar a estrutura do fluxo de trabalho
+        1.1. Revisar e executar o fluxo de trabalho de saudação
       
     </span>
   </a>
@@ -2730,10 +2730,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-adicionar-o-codigo-do-primeiro-subfluxo-de-trabalho" class="md-nav__link">
+  <a href="#12-tornar-o-fluxo-de-trabalho-composavel" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Adicionar o código do primeiro (sub)fluxo de trabalho
+        1.2. Tornar o fluxo de trabalho composável
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2. Tornar o fluxo de trabalho composável">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-nomear-o-fluxo-de-trabalho" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.1. Nomear o fluxo de trabalho
       
     </span>
   </a>
@@ -2741,10 +2753,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-tornar-o-fluxo-de-trabalho-composavel" class="md-nav__link">
+  <a href="#122-declarar-entradas-com-take" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Tornar o fluxo de trabalho composável
+        1.2.2. Declarar entradas com take:
       
     </span>
   </a>
@@ -2752,13 +2764,79 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-criar-e-testar-o-fluxo-de-trabalho-principal" class="md-nav__link">
+  <a href="#123-declarar-saidas-com-emit" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Criar e testar o fluxo de trabalho principal
+        1.2.3. Declarar saídas com emit:
       
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124-verificar-o-resultado-e-testa-lo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.4. Verificar o resultado e testá-lo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-atualizar-e-testar-o-fluxo-de-trabalho-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Atualizar e testar o fluxo de trabalho principal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3. Atualizar e testar o fluxo de trabalho principal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-incluir-o-fluxo-de-trabalho-de-saudacao-e-chama-lo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.1. Incluir o fluxo de trabalho de saudação e chamá-lo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-atualizar-o-bloco-de-saida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.2. Atualizar o bloco de saída
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-executar-o-fluxo-de-trabalho" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.3. Executar o fluxo de trabalho
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2777,22 +2855,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-adicionar-o-fluxo-de-trabalho-de-transformacao" class="md-nav__link">
+  <a href="#2-adicionar-o-fluxo-de-trabalho-de-transformacao-ao-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Adicionar o Fluxo de Trabalho de Transformação
+        2. Adicionar o fluxo de trabalho de transformação ao pipeline
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Adicionar o Fluxo de Trabalho de Transformação">
+    <nav class="md-nav" aria-label="2. Adicionar o fluxo de trabalho de transformação ao pipeline">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-criar-o-arquivo-do-fluxo-de-trabalho" class="md-nav__link">
+  <a href="#21-revisar-e-executar-o-fluxo-de-trabalho" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Criar o arquivo do fluxo de trabalho
+        2.1. Revisar e executar o fluxo de trabalho
       
     </span>
   </a>
@@ -2800,10 +2878,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-adicionar-o-codigo-do-fluxo-de-trabalho" class="md-nav__link">
+  <a href="#22-torna-lo-composavel" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Adicionar o código do fluxo de trabalho
+        2.2. Torná-lo composável
       
     </span>
   </a>
@@ -2811,13 +2889,52 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-atualizar-o-fluxo-de-trabalho-principal" class="md-nav__link">
+  <a href="#23-atualizar-e-testar-o-fluxo-de-trabalho-principal" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Atualizar o fluxo de trabalho principal
+        2.3. Atualizar e testar o fluxo de trabalho principal
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="2.3. Atualizar e testar o fluxo de trabalho principal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-incluir-o-fluxo-de-trabalho-de-transformacao-e-chama-lo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1. Incluir o fluxo de trabalho de transformação e chamá-lo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232-atualizar-o-bloco-de-saida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.2. Atualizar o bloco de saída
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#233-executar-o-pipeline-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.3. Executar o pipeline completo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -3915,22 +4032,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-criar-o-fluxo-de-trabalho-de-saudacao" class="md-nav__link">
+  <a href="#1-adicionar-o-fluxo-de-trabalho-de-saudacao-ao-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Criar o Fluxo de Trabalho de Saudação
+        1. Adicionar o fluxo de trabalho de saudação ao pipeline
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Criar o Fluxo de Trabalho de Saudação">
+    <nav class="md-nav" aria-label="1. Adicionar o fluxo de trabalho de saudação ao pipeline">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-criar-a-estrutura-do-fluxo-de-trabalho" class="md-nav__link">
+  <a href="#11-revisar-e-executar-o-fluxo-de-trabalho-de-saudacao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Criar a estrutura do fluxo de trabalho
+        1.1. Revisar e executar o fluxo de trabalho de saudação
       
     </span>
   </a>
@@ -3938,10 +4055,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-adicionar-o-codigo-do-primeiro-subfluxo-de-trabalho" class="md-nav__link">
+  <a href="#12-tornar-o-fluxo-de-trabalho-composavel" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Adicionar o código do primeiro (sub)fluxo de trabalho
+        1.2. Tornar o fluxo de trabalho composável
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2. Tornar o fluxo de trabalho composável">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-nomear-o-fluxo-de-trabalho" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.1. Nomear o fluxo de trabalho
       
     </span>
   </a>
@@ -3949,10 +4078,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-tornar-o-fluxo-de-trabalho-composavel" class="md-nav__link">
+  <a href="#122-declarar-entradas-com-take" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Tornar o fluxo de trabalho composável
+        1.2.2. Declarar entradas com take:
       
     </span>
   </a>
@@ -3960,13 +4089,79 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-criar-e-testar-o-fluxo-de-trabalho-principal" class="md-nav__link">
+  <a href="#123-declarar-saidas-com-emit" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Criar e testar o fluxo de trabalho principal
+        1.2.3. Declarar saídas com emit:
       
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124-verificar-o-resultado-e-testa-lo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.4. Verificar o resultado e testá-lo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-atualizar-e-testar-o-fluxo-de-trabalho-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Atualizar e testar o fluxo de trabalho principal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3. Atualizar e testar o fluxo de trabalho principal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-incluir-o-fluxo-de-trabalho-de-saudacao-e-chama-lo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.1. Incluir o fluxo de trabalho de saudação e chamá-lo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-atualizar-o-bloco-de-saida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.2. Atualizar o bloco de saída
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-executar-o-fluxo-de-trabalho" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.3. Executar o fluxo de trabalho
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -3985,22 +4180,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-adicionar-o-fluxo-de-trabalho-de-transformacao" class="md-nav__link">
+  <a href="#2-adicionar-o-fluxo-de-trabalho-de-transformacao-ao-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Adicionar o Fluxo de Trabalho de Transformação
+        2. Adicionar o fluxo de trabalho de transformação ao pipeline
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Adicionar o Fluxo de Trabalho de Transformação">
+    <nav class="md-nav" aria-label="2. Adicionar o fluxo de trabalho de transformação ao pipeline">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-criar-o-arquivo-do-fluxo-de-trabalho" class="md-nav__link">
+  <a href="#21-revisar-e-executar-o-fluxo-de-trabalho" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Criar o arquivo do fluxo de trabalho
+        2.1. Revisar e executar o fluxo de trabalho
       
     </span>
   </a>
@@ -4008,10 +4203,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-adicionar-o-codigo-do-fluxo-de-trabalho" class="md-nav__link">
+  <a href="#22-torna-lo-composavel" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Adicionar o código do fluxo de trabalho
+        2.2. Torná-lo composável
       
     </span>
   </a>
@@ -4019,13 +4214,52 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-atualizar-o-fluxo-de-trabalho-principal" class="md-nav__link">
+  <a href="#23-atualizar-e-testar-o-fluxo-de-trabalho-principal" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Atualizar o fluxo de trabalho principal
+        2.3. Atualizar e testar o fluxo de trabalho principal
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="2.3. Atualizar e testar o fluxo de trabalho principal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-incluir-o-fluxo-de-trabalho-de-transformacao-e-chama-lo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1. Incluir o fluxo de trabalho de transformação e chamá-lo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232-atualizar-o-bloco-de-saida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.2. Atualizar o bloco de saída
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#233-executar-o-pipeline-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.3. Executar o pipeline completo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4328,13 +4562,13 @@
 <h3 id="pre-requisitos">Pré-requisitos<a class="headerlink" href="#pre-requisitos" title="Permanent link">&para;</a></h3>
 <p>Antes de embarcar nesta side quest, você deve:</p>
 <ul>
-<li>Ter concluído o tutorial <a href="../hello_nextflow/README.md">Hello Nextflow</a> ou um curso equivalente para iniciantes.</li>
+<li>Ter concluído o tutorial <a href="../../hello_nextflow/">Hello Nextflow</a> ou um curso equivalente para iniciantes.</li>
 <li>Estar confortável com os conceitos e mecanismos básicos do Nextflow (processos, canais, operadores, módulos)</li>
 </ul>
 <hr />
 <h2 id="0-primeiros-passos">0. Primeiros passos<a class="headerlink" href="#0-primeiros-passos" title="Permanent link">&para;</a></h2>
 <h4 id="abra-o-codespace-de-treinamento">Abra o codespace de treinamento<a class="headerlink" href="#abra-o-codespace-de-treinamento" title="Permanent link">&para;</a></h4>
-<p>Se ainda não tiver feito isso, certifique-se de abrir o ambiente de treinamento conforme descrito em <a href="../envsetup/index.md">Configuração do Ambiente</a>.</p>
+<p>Se ainda não tiver feito isso, certifique-se de abrir o ambiente de treinamento conforme descrito em <a href="../../envsetup/">Configuração do Ambiente</a>.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h4 id="acesse-o-diretorio-do-projeto">Acesse o diretório do projeto<a class="headerlink" href="#acesse-o-diretorio-do-projeto" title="Permanent link">&para;</a></h4>
 <p>Vamos acessar o diretório onde estão os arquivos deste tutorial.</p>
@@ -4343,15 +4577,21 @@
 <p>Você pode configurar o VSCode para focar neste diretório:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>code<span class="w"> </span>.
 </code></pre></div>
+<p>O editor abre com o diretório do projeto em foco.</p>
 <h4 id="revise-os-materiais">Revise os materiais<a class="headerlink" href="#revise-os-materiais" title="Permanent link">&para;</a></h4>
-<p>Você encontrará um diretório <code>modules</code> contendo várias definições de processos que se baseiam no que você aprendeu em 'Hello Nextflow':</p>
-<div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">modules/</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">├── say_hello.nf             # Creates a greeting (from Hello Nextflow)</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">├── say_hello_upper.nf       # Converts to uppercase (from Hello Nextflow)</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="go">├── timestamp_greeting.nf    # Adds timestamps to greetings</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="go">├── validate_name.nf         # Validates input names</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="go">└── reverse_text.nf          # Reverses text content</span>
+<p>Você encontrará um diretório <code>modules</code> com definições de processos, um diretório <code>workflows</code> com dois scripts de fluxo de trabalho pré-escritos e um arquivo <code>main.nf</code> que você irá atualizar progressivamente:</p>
+<div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">├── main.nf</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">├── workflows/</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">│   ├── greeting.nf              # Standalone greeting workflow (to be made composable)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="go">│   └── transform.nf             # Standalone transform workflow (to be made composable)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="go">└── modules/</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="go">    ├── say_hello.nf             # Creates a greeting (from Hello Nextflow)</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="go">    ├── say_hello_upper.nf       # Converts to uppercase (from Hello Nextflow)</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="go">    ├── timestamp_greeting.nf    # Adds timestamps to greetings</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="go">    ├── validate_name.nf         # Validates input names</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="go">    └── reverse_text.nf          # Reverses text content</span>
 </code></pre></div>
+<p>O diretório <code>modules/</code> contém as definições individuais de processos, e o diretório <code>workflows/</code> contém os dois scripts de fluxo de trabalho pré-escritos com os quais você trabalhará nesta side quest.</p>
 <h4 id="revise-a-tarefa">Revise a tarefa<a class="headerlink" href="#revise-a-tarefa" title="Permanent link">&para;</a></h4>
 <p>Seu desafio é montar esses módulos em dois fluxos de trabalho separados que serão compostos em um fluxo de trabalho principal:</p>
 <ul>
@@ -4370,163 +4610,343 @@
 </ul>
 <p>Se você conseguir marcar todas as caixas, pode começar.</p>
 <hr />
-<h2 id="1-criar-o-fluxo-de-trabalho-de-saudacao">1. Criar o Fluxo de Trabalho de Saudação<a class="headerlink" href="#1-criar-o-fluxo-de-trabalho-de-saudacao" title="Permanent link">&para;</a></h2>
-<p>Vamos começar criando um fluxo de trabalho que valida nomes e gera saudações com timestamp.</p>
-<h3 id="11-criar-a-estrutura-do-fluxo-de-trabalho">1.1. Criar a estrutura do fluxo de trabalho<a class="headerlink" href="#11-criar-a-estrutura-do-fluxo-de-trabalho" title="Permanent link">&para;</a></h3>
-<div class="highlight"><span class="filename">Create workflow directory and file</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>workflows
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>touch<span class="w"> </span>workflows/greeting.nf
-</code></pre></div>
-<h3 id="12-adicionar-o-codigo-do-primeiro-subfluxo-de-trabalho">1.2. Adicionar o código do primeiro (sub)fluxo de trabalho<a class="headerlink" href="#12-adicionar-o-codigo-do-primeiro-subfluxo-de-trabalho" title="Permanent link">&para;</a></h3>
-<p>Adicione este código em <code>workflows/greeting.nf</code>:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-4-10">10</a></span>
-<span class="normal"><a href="#__codelineno-4-11">11</a></span>
-<span class="normal"><a href="#__codelineno-4-12">12</a></span>
-<span class="normal"><a href="#__codelineno-4-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/validate_name&#39;</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/say_hello&#39;</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/timestamp_greeting&#39;</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4"></a>
-<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6"></a>
-<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">    </span><span class="n">names_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Alice&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Charlie&#39;</span><span class="o">)</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8"></a>
-<a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">    </span><span class="c1">// Encadeia os processos: validar -&gt; criar saudação -&gt; adicionar timestamp</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="w">    </span><span class="n">validated_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="o">(</span><span class="n">names_ch</span><span class="o">)</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="w">    </span><span class="n">greetings_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="o">(</span><span class="n">validated_ch</span><span class="o">)</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="w">    </span><span class="n">timestamped_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="o">(</span><span class="n">greetings_ch</span><span class="o">)</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="o">}</span>
+<h2 id="1-adicionar-o-fluxo-de-trabalho-de-saudacao-ao-pipeline">1. Adicionar o fluxo de trabalho de saudação ao pipeline<a class="headerlink" href="#1-adicionar-o-fluxo-de-trabalho-de-saudacao-ao-pipeline" title="Permanent link">&para;</a></h2>
+<p>O fluxo de trabalho de saudação valida nomes e gera saudações com timestamp.</p>
+<h3 id="11-revisar-e-executar-o-fluxo-de-trabalho-de-saudacao">1.1. Revisar e executar o fluxo de trabalho de saudação<a class="headerlink" href="#11-revisar-e-executar-o-fluxo-de-trabalho-de-saudacao" title="Permanent link">&para;</a></h3>
+<p>Abra <code>workflows/greeting.nf</code> e examine o código:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span>
+<span class="normal"><a href="#__codelineno-3-14">14</a></span>
+<span class="normal"><a href="#__codelineno-3-15">15</a></span>
+<span class="normal"><a href="#__codelineno-3-16">16</a></span>
+<span class="normal"><a href="#__codelineno-3-17">17</a></span>
+<span class="normal"><a href="#__codelineno-3-18">18</a></span>
+<span class="normal"><a href="#__codelineno-3-19">19</a></span>
+<span class="normal"><a href="#__codelineno-3-20">20</a></span>
+<span class="normal"><a href="#__codelineno-3-21">21</a></span>
+<span class="normal"><a href="#__codelineno-3-22">22</a></span>
+<span class="normal"><a href="#__codelineno-3-23">23</a></span>
+<span class="normal"><a href="#__codelineno-3-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/validate_name&#39;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/say_hello&#39;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/timestamp_greeting&#39;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">    </span><span class="n">names_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Alice&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Charlie&#39;</span><span class="o">)</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">    </span><span class="c1">// Encadeia os processos: validar -&gt; criar saudação -&gt; adicionar timestamp</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">    </span><span class="n">validated_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="o">(</span><span class="n">names_ch</span><span class="o">)</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">    </span><span class="n">greetings_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="o">(</span><span class="n">validated_ch</span><span class="o">)</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">    </span><span class="n">timestamped_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="o">(</span><span class="n">greetings_ch</span><span class="o">)</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a>
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">greetings_ch</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="w">    </span><span class="n">timestamped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timestamped_ch</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="o">}</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18"></a>
+<a id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22"></a><span class="w">    </span><span class="n">timestamped</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Este é um fluxo de trabalho completo, com uma estrutura similar às que você viu no tutorial 'Hello Nextflow', que podemos testar de forma independente. Vamos fazer isso agora:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>workflows/greeting.nf
+<p>Este é um fluxo de trabalho completo e independente com a mesma estrutura que você viu no tutorial 'Hello Nextflow'.
+Ele define os nomes de entrada diretamente no código, encadeia três processos e publica duas saídas.</p>
+<p>Execute-o para verificar que tudo funciona:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>workflows/greeting.nf
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="go">Launching `workflows/greeting.nf` [peaceful_montalcini] DSL2 - revision: 90f61b7093</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">executor &gt;  local (9)</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="go">[51/4f980f] process &gt; VALIDATE_NAME (validating Bob)                    [100%] 3 of 3 ✔</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="go">[2b/dd8dc2] process &gt; SAY_HELLO (greeting Bob)                          [100%] 3 of 3 ✔</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="go">[8e/882565] process &gt; TIMESTAMP_GREETING (adding timestamp to greeting) [100%] 3 of 3 ✔</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="go">Launching `workflows/greeting.nf` [peaceful_montalcini] DSL2 - revision: 90f61b7093</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go">executor &gt;  local (9)</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="go">[51/4f980f] process &gt; VALIDATE_NAME (validating Bob)                    [100%] 3 of 3 ✔</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="go">[2b/dd8dc2] process &gt; SAY_HELLO (greeting Bob)                          [100%] 3 of 3 ✔</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="go">[8e/882565] process &gt; TIMESTAMP_GREETING (adding timestamp to greeting) [100%] 3 of 3 ✔</span>
 </code></pre></div>
 </details>
-<p>Isso funciona como esperado, mas para torná-lo composável há algumas coisas que precisamos mudar.</p>
-<h3 id="13-tornar-o-fluxo-de-trabalho-composavel">1.3. Tornar o fluxo de trabalho composável<a class="headerlink" href="#13-tornar-o-fluxo-de-trabalho-composavel" title="Permanent link">&para;</a></h3>
-<p>Fluxos de trabalho composáveis têm algumas diferenças em relação aos que você viu no tutorial 'Hello Nextflow':</p>
-<ul>
-<li>O bloco workflow precisa ter um nome</li>
-<li>As entradas são declaradas usando a palavra-chave <code>take:</code></li>
-<li>O conteúdo do fluxo de trabalho é colocado dentro do bloco <code>main:</code></li>
-<li>As saídas são declaradas usando a palavra-chave <code>emit:</code></li>
-</ul>
-<p>Vamos atualizar o fluxo de trabalho de saudação para corresponder a essa estrutura. Altere o código para o seguinte:</p>
-<!-- TODO: switch to before/after tabs -->
-
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-7-10">10</a></span>
-<span class="normal"><a href="#__codelineno-7-11">11</a></span>
-<span class="normal"><a href="#__codelineno-7-12">12</a></span>
-<span class="normal"><a href="#__codelineno-7-13">13</a></span>
-<span class="normal"><a href="#__codelineno-7-14">14</a></span>
-<span class="normal"><a href="#__codelineno-7-15">15</a></span>
-<span class="normal"><a href="#__codelineno-7-16">16</a></span>
-<span class="normal"><a href="#__codelineno-7-17">17</a></span>
-<span class="normal"><a href="#__codelineno-7-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/validate_name&#39;</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/say_hello&#39;</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/timestamp_greeting&#39;</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4"></a>
-<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="n">workflow</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="hll"><span class="w">    </span><span class="nl">take:</span>
-</span><a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="hll"><span class="w">        </span><span class="n">names_ch</span><span class="w">        </span><span class="c1">// Canal de entrada com nomes</span>
-</span><a id="__codelineno-7-8" name="__codelineno-7-8"></a>
-<a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="hll"><span class="w">    </span><span class="nl">main:</span>
-</span><a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="w">        </span><span class="c1">// Encadeia os processos: validar -&gt; criar saudação -&gt; adicionar timestamp</span>
-<a id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="w">        </span><span class="n">validated_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="o">(</span><span class="n">names_ch</span><span class="o">)</span>
-<a id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="w">        </span><span class="n">greetings_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="o">(</span><span class="n">validated_ch</span><span class="o">)</span>
-<a id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="w">        </span><span class="n">timestamped_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="o">(</span><span class="n">greetings_ch</span><span class="o">)</span>
-<a id="__codelineno-7-14" name="__codelineno-7-14"></a>
-<a id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="hll"><span class="w">    </span><span class="nl">emit:</span>
-</span><a id="__codelineno-7-16" name="__codelineno-7-16"></a><span class="hll"><span class="w">        </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">greetings_ch</span><span class="w">      </span><span class="c1">// Saudações originais</span>
-</span><a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="hll"><span class="w">        </span><span class="n">timestamped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timestamped_ch</span><span class="w">  </span><span class="c1">// Saudações com timestamp</span>
-</span><a id="__codelineno-7-18" name="__codelineno-7-18"></a><span class="o">}</span>
+<p>Para torná-lo composável com outros fluxos de trabalho, algumas coisas precisam mudar.</p>
+<h3 id="12-tornar-o-fluxo-de-trabalho-composavel">1.2. Tornar o fluxo de trabalho composável<a class="headerlink" href="#12-tornar-o-fluxo-de-trabalho-composavel" title="Permanent link">&para;</a></h3>
+<p>Para tornar um fluxo de trabalho composável, quatro coisas precisam mudar:
+o fluxo de trabalho recebe um nome, as entradas são movidas para um bloco <code>take:</code>, as saídas são movidas para um bloco <code>emit:</code>,
+e os blocos independentes <code>publish:</code>/<code>output {}</code> são removidos (eles pertencem ao entry workflow).</p>
+<p>Vamos percorrer essas mudanças uma a uma.</p>
+<h4 id="121-nomear-o-fluxo-de-trabalho">1.2.1. Nomear o fluxo de trabalho<a class="headerlink" href="#121-nomear-o-fluxo-de-trabalho" title="Permanent link">&para;</a></h4>
+<p>Dê um nome ao fluxo de trabalho para que ele possa ser importado por um fluxo de trabalho pai.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Depois</label><label for="__tabbed_1_2">Antes</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="hll"><span class="n">workflow</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="hll"><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>Com um nome, o fluxo de trabalho pode ser importado em outros scripts.</p>
+<h4 id="122-declarar-entradas-com-take">1.2.2. Declarar entradas com <code>take:</code><a class="headerlink" href="#122-declarar-entradas-com-take" title="Permanent link">&para;</a></h4>
+<p>Substitua a declaração de canal direta no código por um bloco <code>take:</code> que declara quais entradas o fluxo de trabalho espera.
+O bloco <code>take:</code> vai antes de <code>main:</code>, e a linha <code>names_ch = channel.of(...)</code> é removida.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Depois</label><label for="__tabbed_2_2">Antes</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="n">workflow</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="hll"><span class="w">    </span><span class="nl">take:</span>
+</span><a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="hll"><span class="w">    </span><span class="n">names_ch</span><span class="w"> </span><span class="c1">// Canal de entrada com nomes</span>
+</span><a id="__codelineno-8-8" name="__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="hll"><span class="w">    </span><span class="nl">main:</span>
+</span><a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">    </span><span class="c1">// Encadeia os processos: validar -&gt; criar saudação -&gt; adicionar timestamp</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="w">    </span><span class="n">validated_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="o">(</span><span class="n">names_ch</span><span class="o">)</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="w">    </span><span class="n">greetings_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="o">(</span><span class="n">validated_ch</span><span class="o">)</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="w">    </span><span class="n">timestamped_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="o">(</span><span class="n">greetings_ch</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
-<p>Você pode ver que o fluxo de trabalho agora tem um nome e possui um bloco <code>take:</code> e <code>emit:</code>, e essas são as conexões que usaremos para compor um fluxo de trabalho de nível superior.
-O conteúdo do fluxo de trabalho também é colocado dentro do bloco <code>main:</code>. Note também que removemos a declaração do canal de entrada <code>names_ch</code>, pois ele agora é passado como argumento para o fluxo de trabalho.</p>
-<p>Vamos testar o fluxo de trabalho novamente para ver se funciona como esperado:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>workflows/greeting.nf
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-9-10">10</a></span>
+<span class="normal"><a href="#__codelineno-9-11">11</a></span>
+<span class="normal"><a href="#__codelineno-9-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="n">workflow</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="w">    </span><span class="n">names_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Alice&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Charlie&#39;</span><span class="o">)</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="w">    </span><span class="c1">// Encadeia os processos: validar -&gt; criar saudação -&gt; adicionar timestamp</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="w">    </span><span class="n">validated_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="o">(</span><span class="n">names_ch</span><span class="o">)</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="w">    </span><span class="n">greetings_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="o">(</span><span class="n">validated_ch</span><span class="o">)</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="w">    </span><span class="n">timestamped_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="o">(</span><span class="n">greetings_ch</span><span class="o">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>O bloco <code>take:</code> declara o canal apenas pelo nome — os detalhes do que entra nele serão definidos pelo fluxo de trabalho pai.</p>
+<h4 id="123-declarar-saidas-com-emit">1.2.3. Declarar saídas com <code>emit:</code><a class="headerlink" href="#123-declarar-saidas-com-emit" title="Permanent link">&para;</a></h4>
+<p>Substitua a seção <code>publish:</code> e remova o bloco <code>output {}</code>, substituindo-os por um bloco <code>emit:</code> que nomeia as saídas.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Depois</label><label for="__tabbed_3_2">Antes</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-14">14</a></span>
+<span class="normal"><a href="#__codelineno-10-15">15</a></span>
+<span class="normal"><a href="#__codelineno-10-16">16</a></span>
+<span class="normal"><a href="#__codelineno-10-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="w">    </span><span class="nl">emit:</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="hll"><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">greetings_ch</span><span class="w"> </span><span class="c1">// Saudações originais</span>
+</span><a id="__codelineno-10-16" name="__codelineno-10-16"></a><span class="hll"><span class="w">    </span><span class="n">timestamped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timestamped_ch</span><span class="w"> </span><span class="c1">// Saudações com timestamp</span>
+</span><a id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="hll"><span class="o">}</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-14">14</a></span>
+<span class="normal"><a href="#__codelineno-11-15">15</a></span>
+<span class="normal"><a href="#__codelineno-11-16">16</a></span>
+<span class="normal"><a href="#__codelineno-11-17">17</a></span>
+<span class="normal"><a href="#__codelineno-11-18">18</a></span>
+<span class="normal"><a href="#__codelineno-11-19">19</a></span>
+<span class="normal"><a href="#__codelineno-11-20">20</a></span>
+<span class="normal"><a href="#__codelineno-11-21">21</a></span>
+<span class="normal"><a href="#__codelineno-11-22">22</a></span>
+<span class="normal"><a href="#__codelineno-11-23">23</a></span>
+<span class="normal"><a href="#__codelineno-11-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">greetings_ch</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="w">    </span><span class="n">timestamped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timestamped_ch</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="o">}</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18"></a>
+<a id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-11-22" name="__codelineno-11-22"></a><span class="w">    </span><span class="n">timestamped</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-11-23" name="__codelineno-11-23"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>O bloco <code>emit:</code> expõe saídas nomeadas que os fluxos de trabalho pai podem acessar via <code>GREETING_WORKFLOW.out.greetings</code> e <code>GREETING_WORKFLOW.out.timestamped</code>.</p>
+<h4 id="124-verificar-o-resultado-e-testa-lo">1.2.4. Verificar o resultado e testá-lo<a class="headerlink" href="#124-verificar-o-resultado-e-testa-lo" title="Permanent link">&para;</a></h4>
+<p>Após as três mudanças, o arquivo completo deve ficar assim:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span>
+<span class="normal"><a href="#__codelineno-12-14">14</a></span>
+<span class="normal"><a href="#__codelineno-12-15">15</a></span>
+<span class="normal"><a href="#__codelineno-12-16">16</a></span>
+<span class="normal"><a href="#__codelineno-12-17">17</a></span>
+<span class="normal"><a href="#__codelineno-12-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/validate_name&#39;</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/say_hello&#39;</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/timestamp_greeting&#39;</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="hll"><span class="n">workflow</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="hll"><span class="w">    </span><span class="nl">take:</span>
+</span><a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="hll"><span class="w">    </span><span class="n">names_ch</span><span class="w"> </span><span class="c1">// Canal de entrada com nomes</span>
+</span><a id="__codelineno-12-8" name="__codelineno-12-8"></a>
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="hll"><span class="w">    </span><span class="nl">main:</span>
+</span><a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="w">    </span><span class="c1">// Encadeia os processos: validar -&gt; criar saudação -&gt; adicionar timestamp</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="w">    </span><span class="n">validated_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="o">(</span><span class="n">names_ch</span><span class="o">)</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="w">    </span><span class="n">greetings_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="o">(</span><span class="n">validated_ch</span><span class="o">)</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="w">    </span><span class="n">timestamped_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="o">(</span><span class="n">greetings_ch</span><span class="o">)</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14"></a>
+<a id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="hll"><span class="w">    </span><span class="nl">emit:</span>
+</span><a id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="hll"><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">greetings_ch</span><span class="w"> </span><span class="c1">// Saudações originais</span>
+</span><a id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="hll"><span class="w">    </span><span class="n">timestamped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timestamped_ch</span><span class="w"> </span><span class="c1">// Saudações com timestamp</span>
+</span><a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Agora tente executá-lo diretamente:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>workflows/greeting.nf
 </code></pre></div>
 <details class="failure">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="go">Launching `workflows/greeting.nf` [high_brahmagupta] DSL2 - revision: 8f5857af25</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">No entry workflow specified</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="go">Launching `workflows/greeting.nf` [high_brahmagupta] DSL2 - revision: 8f5857af25</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="go">No entry workflow specified</span>
 </code></pre></div>
 </details>
-<p>Isso indica um novo conceito: o 'entry workflow' (fluxo de trabalho de entrada). O entry workflow é o fluxo de trabalho que é chamado quando você executa um script Nextflow. Por padrão, o Nextflow usará um fluxo de trabalho sem nome como entry workflow, quando presente, e é isso que você tem feito até agora, com blocos workflow começando assim:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<p>Isso introduz um conceito importante: o <strong>entry workflow</strong>.
+O Nextflow usa um bloco <code>workflow {}</code> sem nome como ponto de entrada quando você executa um script diretamente.
+<code>GREETING_WORKFLOW</code> tem um nome, então o Nextflow não sabe como executá-lo por conta própria.</p>
+<p>Isso é intencional — fluxos de trabalho composáveis são projetados para serem chamados a partir de um entry workflow, não executados diretamente.
+A solução é um entry workflow em <code>main.nf</code> que importa e chama o <code>GREETING_WORKFLOW</code>.</p>
+<h3 id="13-atualizar-e-testar-o-fluxo-de-trabalho-principal">1.3. Atualizar e testar o fluxo de trabalho principal<a class="headerlink" href="#13-atualizar-e-testar-o-fluxo-de-trabalho-principal" title="Permanent link">&para;</a></h3>
+<p>Agora vamos atualizar o fluxo de trabalho principal para chamar o fluxo de trabalho de saudação.</p>
+<h4 id="131-incluir-o-fluxo-de-trabalho-de-saudacao-e-chama-lo">1.3.1. Incluir o fluxo de trabalho de saudação e chamá-lo<a class="headerlink" href="#131-incluir-o-fluxo-de-trabalho-de-saudacao-e-chama-lo" title="Permanent link">&para;</a></h4>
+<p>Adicione a instrução <code>include</code>, atualize o corpo do fluxo de trabalho para chamar <code>GREETING_WORKFLOW</code> e substitua o placeholder <code>channel.empty()</code> em <code>publish:</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Depois</label><label for="__tabbed_4_2">Antes</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-15-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-15-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-15-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-15-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-15-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-15-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-15-10">10</a></span>
+<span class="normal"><a href="#__codelineno-15-11">11</a></span>
+<span class="normal"><a href="#__codelineno-15-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./workflows/greeting&#39;</span>
+</span><a id="__codelineno-15-2" name="__codelineno-15-2"></a>
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="w">    </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Alice&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Charlie&#39;</span><span class="o">)</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6"></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="hll"><span class="w">    </span><span class="c1">// Executa o fluxo de trabalho de saudação</span>
+</span><a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="hll"><span class="w">    </span><span class="n">GREETING_WORKFLOW</span><span class="o">(</span><span class="n">names</span><span class="o">)</span>
+</span><a id="__codelineno-15-9" name="__codelineno-15-9"></a>
+<a id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11"></a><span class="hll"><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">greetings</span>
+</span><a id="__codelineno-15-12" name="__codelineno-15-12"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Mas nosso fluxo de trabalho de saudação não tem um fluxo de trabalho sem nome — em vez disso, temos um fluxo de trabalho nomeado:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/greeting.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="n">workflow</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span>
+<span class="normal"><a href="#__codelineno-16-2">2</a></span>
+<span class="normal"><a href="#__codelineno-16-3">3</a></span>
+<span class="normal"><a href="#__codelineno-16-4">4</a></span>
+<span class="normal"><a href="#__codelineno-16-5">5</a></span>
+<span class="normal"><a href="#__codelineno-16-6">6</a></span>
+<span class="normal"><a href="#__codelineno-16-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="w">    </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Alice&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Charlie&#39;</span><span class="o">)</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4"></a>
+<a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">empty</span><span class="o">()</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>É por isso que o Nextflow gerou um erro e não fez o que queríamos.</p>
-<p>Não adicionamos a sintaxe <code>take:</code>/<code>emit:</code> para poder chamar o fluxo de trabalho diretamente — fizemos isso para poder compô-lo com outros fluxos de trabalho. A solução é criar um script principal com um entry workflow sem nome que importa e chama nosso fluxo de trabalho nomeado.</p>
-<h3 id="14-criar-e-testar-o-fluxo-de-trabalho-principal">1.4. Criar e testar o fluxo de trabalho principal<a class="headerlink" href="#14-criar-e-testar-o-fluxo-de-trabalho-principal" title="Permanent link">&para;</a></h3>
-<p>Agora vamos criar um fluxo de trabalho principal que importa e usa o fluxo de trabalho <code>greeting</code>.</p>
-<p>Crie o <code>main.nf</code>:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
-<span class="normal"><a href="#__codelineno-12-2">2</a></span>
-<span class="normal"><a href="#__codelineno-12-3">3</a></span>
-<span class="normal"><a href="#__codelineno-12-4">4</a></span>
-<span class="normal"><a href="#__codelineno-12-5">5</a></span>
-<span class="normal"><a href="#__codelineno-12-6">6</a></span>
-<span class="normal"><a href="#__codelineno-12-7">7</a></span>
-<span class="normal"><a href="#__codelineno-12-8">8</a></span>
-<span class="normal"><a href="#__codelineno-12-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./workflows/greeting&#39;</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2"></a>
-<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="w">    </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Alice&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Charlie&#39;</span><span class="o">)</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">    </span><span class="n">GREETING_WORKFLOW</span><span class="o">(</span><span class="n">names</span><span class="o">)</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6"></a>
-<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="w">    </span><span class="n">GREETING_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">greetings</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;Original: $it&quot;</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">    </span><span class="n">GREETING_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">timestamped</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;Timestamped: $it&quot;</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="o">}</span>
+</div>
+</div>
+</div>
+<p>O entry workflow permanece sem nome para que o Nextflow o use como ponto de entrada do pipeline.</p>
+<h4 id="132-atualizar-o-bloco-de-saida">1.3.2. Atualizar o bloco de saída<a class="headerlink" href="#132-atualizar-o-bloco-de-saida" title="Permanent link">&para;</a></h4>
+<p>Adicione uma diretiva <code>path</code> para direcionar as saudações publicadas para um subdiretório <code>greetings/</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Depois</label><label for="__tabbed_5_2">Antes</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-14">14</a></span>
+<span class="normal"><a href="#__codelineno-17-15">15</a></span>
+<span class="normal"><a href="#__codelineno-17-16">16</a></span>
+<span class="normal"><a href="#__codelineno-17-17">17</a></span>
+<span class="normal"><a href="#__codelineno-17-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-17-16" name="__codelineno-17-16"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;greetings&#39;</span>
+</span><a id="__codelineno-17-17" name="__codelineno-17-17"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-17-18" name="__codelineno-17-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Note que o entry workflow neste arquivo não tem nome, e isso ocorre porque vamos usá-lo como entry workflow.</p>
-<p>Execute e veja a saída:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-14">14</a></span>
+<span class="normal"><a href="#__codelineno-18-15">15</a></span>
+<span class="normal"><a href="#__codelineno-18-16">16</a></span>
+<span class="normal"><a href="#__codelineno-18-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="hll"><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-18-16" name="__codelineno-18-16"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
+</span><a id="__codelineno-18-17" name="__codelineno-18-17"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<h4 id="133-executar-o-fluxo-de-trabalho">1.3.3. Executar o fluxo de trabalho<a class="headerlink" href="#133-executar-o-fluxo-de-trabalho" title="Permanent link">&para;</a></h4>
+<p>Execute o fluxo de trabalho para testar que funciona:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="go">Launching `main.nf` [goofy_mayer] DSL2 - revision: 543f8742fe</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="go">executor &gt;  local (9)</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="go">[05/3cc752] process &gt; GREETING_WORKFLOW:VALIDATE_NAME (validating Char... [100%] 3 of 3 ✔</span>
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="go">[b1/b56ecf] process &gt; GREETING_WORKFLOW:SAY_HELLO (greeting Charlie)      [100%] 3 of 3 ✔</span>
-<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="go">[ea/342168] process &gt; GREETING_WORKFLOW:TIMESTAMP_GREETING (adding tim... [100%] 3 of 3 ✔</span>
-<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="go">Original: /workspaces/training/side_quests/workflows_of_workflows/work/bb/c8aff3df0ebc15a4d7d35f736db44c/Alice-output.txt</span>
-<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="go">Original: /workspaces/training/side_quests/workflows_of_workflows/work/fb/fa877776e8a5d90b537b1bcd3b6f5b/Bob-output.txt</span>
-<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="go">Original: /workspaces/training/side_quests/workflows_of_workflows/work/b1/b56ecf938fda8bcbec211847c8f0be/Charlie-output.txt</span>
-<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="go">Timestamped: /workspaces/training/side_quests/workflows_of_workflows/work/06/877bc909f140bbf8223343450cea36/timestamped_Alice-output.txt</span>
-<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="go">Timestamped: /workspaces/training/side_quests/workflows_of_workflows/work/aa/bd31b71cdb745b7c155ca7f8837b8a/timestamped_Bob-output.txt</span>
-<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="go">Timestamped: /workspaces/training/side_quests/workflows_of_workflows/work/ea/342168d4ba04cc899a89c56cbfd9b0/timestamped_Charlie-output.txt</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="go">Launching `main.nf` [goofy_mayer] DSL2 - revision: 543f8742fe</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="go">executor &gt;  local (9)</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="go">[05/3cc752] process &gt; GREETING_WORKFLOW:VALIDATE_NAME (validating Char... [100%] 3 of 3 ✔</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="go">[b1/b56ecf] process &gt; GREETING_WORKFLOW:SAY_HELLO (greeting Charlie)      [100%] 3 of 3 ✔</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="go">[ea/342168] process &gt; GREETING_WORKFLOW:TIMESTAMP_GREETING (adding tim... [100%] 3 of 3 ✔</span>
 </code></pre></div>
 </details>
-<p>Funcionou! Envolvemos o fluxo de trabalho de saudação nomeado em um fluxo de trabalho principal com um bloco <code>workflow</code> de entrada sem nome. O fluxo de trabalho principal está usando o <code>GREETING_WORKFLOW</code> quase (mas não exatamente) como um processo, e passando o canal <code>names</code> como argumento.</p>
+<details class="abstract">
+<summary>Conteúdo do diretório</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">results/</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="go">└── greetings</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">    ├── Alice-output.txt</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="go">    ├── Bob-output.txt</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="go">    └── Charlie-output.txt</span>
+</code></pre></div>
+</details>
+<details class="abstract">
+<summary>Conteúdo do arquivo</summary>
+<div class="highlight"><span class="filename">results/greetings/Alice-output.txt</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">Hello, Alice!</span>
+</code></pre></div>
+</details>
+<p>Os arquivos de saudação são publicados em <code>results/greetings/</code>.
+O fluxo de trabalho principal chama <code>GREETING_WORKFLOW</code> e conecta sua saída diretamente à seção <code>publish:</code>.</p>
 <h3 id="conclusao">Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h3>
 <p>Nesta seção, você aprendeu vários conceitos importantes:</p>
 <ul>
@@ -4546,107 +4966,259 @@ O conteúdo do fluxo de trabalho também é colocado dentro do bloco <code>main:
 </ul>
 <p>Essa abordagem modular permite que você teste o fluxo de trabalho de saudação de forma independente ou o use como componente em pipelines maiores.</p>
 <hr />
-<h2 id="2-adicionar-o-fluxo-de-trabalho-de-transformacao">2. Adicionar o Fluxo de Trabalho de Transformação<a class="headerlink" href="#2-adicionar-o-fluxo-de-trabalho-de-transformacao" title="Permanent link">&para;</a></h2>
-<p>Agora vamos criar um fluxo de trabalho que aplica transformações de texto às saudações.</p>
-<h3 id="21-criar-o-arquivo-do-fluxo-de-trabalho">2.1. Criar o arquivo do fluxo de trabalho<a class="headerlink" href="#21-criar-o-arquivo-do-fluxo-de-trabalho" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>touch<span class="w"> </span>workflows/transform.nf
-</code></pre></div>
-<h3 id="22-adicionar-o-codigo-do-fluxo-de-trabalho">2.2. Adicionar o código do fluxo de trabalho<a class="headerlink" href="#22-adicionar-o-codigo-do-fluxo-de-trabalho" title="Permanent link">&para;</a></h3>
-<p>Adicione este código em <code>workflows/transform.nf</code>:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/transform.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-16-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-16-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-16-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-16-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-16-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-16-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-16-10">10</a></span>
-<span class="normal"><a href="#__codelineno-16-11">11</a></span>
-<span class="normal"><a href="#__codelineno-16-12">12</a></span>
-<span class="normal"><a href="#__codelineno-16-13">13</a></span>
-<span class="normal"><a href="#__codelineno-16-14">14</a></span>
-<span class="normal"><a href="#__codelineno-16-15">15</a></span>
-<span class="normal"><a href="#__codelineno-16-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAY_HELLO_UPPER</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/say_hello_upper&#39;</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">REVERSE_TEXT</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/reverse_text&#39;</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3"></a>
-<a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="n">workflow</span><span class="w"> </span><span class="n">TRANSFORM_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">    </span><span class="nl">take:</span>
-<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="w">        </span><span class="n">input_ch</span><span class="w">         </span><span class="c1">// Canal de entrada com mensagens</span>
-<a id="__codelineno-16-7" name="__codelineno-16-7"></a>
-<a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="w">        </span><span class="c1">// Aplica as transformações em sequência</span>
-<a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="w">        </span><span class="n">upper_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO_UPPER</span><span class="o">(</span><span class="n">input_ch</span><span class="o">)</span>
-<a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="w">        </span><span class="n">reversed_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REVERSE_TEXT</span><span class="o">(</span><span class="n">upper_ch</span><span class="o">)</span>
-<a id="__codelineno-16-12" name="__codelineno-16-12"></a>
-<a id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="w">    </span><span class="nl">emit:</span>
-<a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="w">        </span><span class="n">upper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">upper_ch</span><span class="w">        </span><span class="c1">// Saudações em maiúsculas</span>
-<a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="w">        </span><span class="n">reversed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reversed_ch</span><span class="w">  </span><span class="c1">// Saudações em maiúsculas invertidas</span>
-<a id="__codelineno-16-16" name="__codelineno-16-16"></a><span class="o">}</span>
+<h2 id="2-adicionar-o-fluxo-de-trabalho-de-transformacao-ao-pipeline">2. Adicionar o fluxo de trabalho de transformação ao pipeline<a class="headerlink" href="#2-adicionar-o-fluxo-de-trabalho-de-transformacao-ao-pipeline" title="Permanent link">&para;</a></h2>
+<p>O fluxo de trabalho de transformação aplica transformações de texto às saudações com timestamp.</p>
+<h3 id="21-revisar-e-executar-o-fluxo-de-trabalho">2.1. Revisar e executar o fluxo de trabalho<a class="headerlink" href="#21-revisar-e-executar-o-fluxo-de-trabalho" title="Permanent link">&para;</a></h3>
+<p>Abra <code>workflows/transform.nf</code> e examine o código:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/transform.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-23-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-23-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-23-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-23-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-23-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-23-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-23-10">10</a></span>
+<span class="normal"><a href="#__codelineno-23-11">11</a></span>
+<span class="normal"><a href="#__codelineno-23-12">12</a></span>
+<span class="normal"><a href="#__codelineno-23-13">13</a></span>
+<span class="normal"><a href="#__codelineno-23-14">14</a></span>
+<span class="normal"><a href="#__codelineno-23-15">15</a></span>
+<span class="normal"><a href="#__codelineno-23-16">16</a></span>
+<span class="normal"><a href="#__codelineno-23-17">17</a></span>
+<span class="normal"><a href="#__codelineno-23-18">18</a></span>
+<span class="normal"><a href="#__codelineno-23-19">19</a></span>
+<span class="normal"><a href="#__codelineno-23-20">20</a></span>
+<span class="normal"><a href="#__codelineno-23-21">21</a></span>
+<span class="normal"><a href="#__codelineno-23-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAY_HELLO_UPPER</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/say_hello_upper&#39;</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">REVERSE_TEXT</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/reverse_text&#39;</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3"></a>
+<a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6"></a><span class="w">    </span><span class="n">input_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;results/timestamped_*.txt&#39;</span><span class="o">)</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7"></a>
+<a id="__codelineno-23-8" name="__codelineno-23-8"></a><span class="w">    </span><span class="c1">// Aplica as transformações em sequência</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="w">    </span><span class="n">upper_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO_UPPER</span><span class="o">(</span><span class="n">input_ch</span><span class="o">)</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10"></a><span class="w">    </span><span class="n">reversed_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REVERSE_TEXT</span><span class="o">(</span><span class="n">upper_ch</span><span class="o">)</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11"></a>
+<a id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-23-13" name="__codelineno-23-13"></a><span class="w">    </span><span class="n">upper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">upper_ch</span>
+<a id="__codelineno-23-14" name="__codelineno-23-14"></a><span class="w">    </span><span class="n">reversed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reversed_ch</span>
+<a id="__codelineno-23-15" name="__codelineno-23-15"></a><span class="o">}</span>
+<a id="__codelineno-23-16" name="__codelineno-23-16"></a>
+<a id="__codelineno-23-17" name="__codelineno-23-17"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-23-18" name="__codelineno-23-18"></a><span class="w">    </span><span class="n">upper</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-23-19" name="__codelineno-23-19"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-23-20" name="__codelineno-23-20"></a><span class="w">    </span><span class="n">reversed</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-23-21" name="__codelineno-23-21"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-23-22" name="__codelineno-23-22"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Não vamos repetir a explicação da sintaxe composável aqui, mas note que o fluxo de trabalho nomeado é novamente declarado com um bloco <code>take:</code> e <code>emit:</code>, e o conteúdo do fluxo de trabalho é colocado dentro do bloco <code>main:</code>.</p>
-<h3 id="23-atualizar-o-fluxo-de-trabalho-principal">2.3. Atualizar o fluxo de trabalho principal<a class="headerlink" href="#23-atualizar-o-fluxo-de-trabalho-principal" title="Permanent link">&para;</a></h3>
-<p>Atualize o <code>main.nf</code> para usar ambos os fluxos de trabalho:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-17-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-17-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-17-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-17-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-17-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-17-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-17-10">10</a></span>
-<span class="normal"><a href="#__codelineno-17-11">11</a></span>
-<span class="normal"><a href="#__codelineno-17-12">12</a></span>
-<span class="normal"><a href="#__codelineno-17-13">13</a></span>
-<span class="normal"><a href="#__codelineno-17-14">14</a></span>
-<span class="normal"><a href="#__codelineno-17-15">15</a></span>
-<span class="normal"><a href="#__codelineno-17-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./workflows/greeting&#39;</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">TRANSFORM_WORKFLOW</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./workflows/transform&#39;</span>
-<a id="__codelineno-17-3" name="__codelineno-17-3"></a>
-<a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="w">    </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Alice&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Charlie&#39;</span><span class="o">)</span>
-<a id="__codelineno-17-6" name="__codelineno-17-6"></a>
-<a id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="w">    </span><span class="c1">// Executa o fluxo de trabalho de saudação</span>
-<a id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="w">    </span><span class="n">GREETING_WORKFLOW</span><span class="o">(</span><span class="n">names</span><span class="o">)</span>
-<a id="__codelineno-17-9" name="__codelineno-17-9"></a>
-<a id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="w">    </span><span class="c1">// Executa o fluxo de trabalho de transformação</span>
-<a id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="w">    </span><span class="n">TRANSFORM_WORKFLOW</span><span class="o">(</span><span class="n">GREETING_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">timestamped</span><span class="o">)</span>
-<a id="__codelineno-17-12" name="__codelineno-17-12"></a>
-<a id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="w">    </span><span class="c1">// Exibe os resultados</span>
-<a id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="w">    </span><span class="n">TRANSFORM_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">upper</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;Uppercase: $it&quot;</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="w">    </span><span class="n">TRANSFORM_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">reversed</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;Reversed: $it&quot;</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-17-16" name="__codelineno-17-16"></a><span class="o">}</span>
-</code></pre></div></td></tr></table></div>
-<p>Execute o pipeline completo:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
+<p>Este fluxo de trabalho independente lê os arquivos de saudação com timestamp do diretório <code>results/</code> produzido por <code>greeting.nf</code>, converte-os para maiúsculas e depois inverte o texto.</p>
+<p>Execute-o para verificar que funciona com os resultados de saudação da seção 1.1:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>workflows/transform.nf
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="go">Launching `main.nf` [sick_kimura] DSL2 - revision: 8dc45fc6a8</span>
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="go">executor &gt;  local (13)</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="go">executor &gt;  local (15)</span>
-<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="go">[83/1b51f4] process &gt; GREETING_WORKFLOW:VALIDATE_NAME (validating Alice)  [100%] 3 of 3 ✔</span>
-<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="go">[68/556150] process &gt; GREETING_WORKFLOW:SAY_HELLO (greeting Alice)        [100%] 3 of 3 ✔</span>
-<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="go">[de/511abd] process &gt; GREETING_WORKFLOW:TIMESTAMP_GREETING (adding tim... [100%] 3 of 3 ✔</span>
-<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="go">[cd/e6a7e0] process &gt; TRANSFORM_WORKFLOW:SAY_HELLO_UPPER (converting t... [100%] 3 of 3 ✔</span>
-<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="go">[f0/74ba4a] process &gt; TRANSFORM_WORKFLOW:REVERSE_TEXT (reversing UPPER... [100%] 3 of 3 ✔</span>
-<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="go">Uppercase: /workspaces/training/side_quests/workflows_of_workflows/work/a0/d4f5df4d6344604498fa47a6084a11/UPPER-timestamped_Bob-output.txt</span>
-<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="go">Uppercase: /workspaces/training/side_quests/workflows_of_workflows/work/69/b5e37f6c79c2fd38adb75d0eca8f87/UPPER-timestamped_Charlie-output.txt</span>
-<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="go">Uppercase: /workspaces/training/side_quests/workflows_of_workflows/work/cd/e6a7e0b17e7d5a2f71bb8123cd53a7/UPPER-timestamped_Alice-output.txt</span>
-<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="go">Reversed: /workspaces/training/side_quests/workflows_of_workflows/work/7a/7a222f7957b35d1d121338566a24ac/REVERSED-UPPER-timestamped_Bob-output.txt</span>
-<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="go">Reversed: /workspaces/training/side_quests/workflows_of_workflows/work/46/8d19af62e33a5a6417c773496e0f90/REVERSED-UPPER-timestamped_Charlie-output.txt</span>
-<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="go">Reversed: /workspaces/training/side_quests/workflows_of_workflows/work/f0/74ba4a10d9ef5c82f829d1c154d0f6/REVERSED-UPPER-timestamped_Alice-output.txt</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="go">Launching `workflows/transform.nf` [blissful_curie] DSL2 - revision: 4e7b1c9f02</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="go">executor &gt;  local (6)</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="go">[3e/a14c29] process &gt; SAY_HELLO_UPPER (converting t... [100%] 3 of 3 ✔</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="go">[c8/51b9e3] process &gt; REVERSE_TEXT (reversing UPPER... [100%] 3 of 3 ✔</span>
 </code></pre></div>
 </details>
-<p>Se você abrir um desses arquivos invertidos, verá que é a versão em maiúsculas da saudação invertida:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>cat<span class="w"> </span>/workspaces/training/side_quests/workflows_of_workflows/work/f0/74ba4a10d9ef5c82f829d1c154d0f6/REVERSED-UPPER-timestamped_Alice-output.txt
+<p>Para torná-lo composável com o <code>GREETING_WORKFLOW</code>, as mesmas três mudanças da seção 1.2 se aplicam.</p>
+<h3 id="22-torna-lo-composavel">2.2. Torná-lo composável<a class="headerlink" href="#22-torna-lo-composavel" title="Permanent link">&para;</a></h3>
+<p>Aplique as mesmas três mudanças da seção 1.2: nomeie o fluxo de trabalho, substitua a entrada direta no código por <code>take:</code>, e substitua <code>publish:</code>/<code>output {}</code> por <code>emit:</code>.</p>
+<p>O arquivo finalizado deve ficar assim:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/transform.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-26-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-26-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-26-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-26-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-26-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-26-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-26-10">10</a></span>
+<span class="normal"><a href="#__codelineno-26-11">11</a></span>
+<span class="normal"><a href="#__codelineno-26-12">12</a></span>
+<span class="normal"><a href="#__codelineno-26-13">13</a></span>
+<span class="normal"><a href="#__codelineno-26-14">14</a></span>
+<span class="normal"><a href="#__codelineno-26-15">15</a></span>
+<span class="normal"><a href="#__codelineno-26-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAY_HELLO_UPPER</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/say_hello_upper&#39;</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">REVERSE_TEXT</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/reverse_text&#39;</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3"></a>
+<a id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="hll"><span class="n">workflow</span><span class="w"> </span><span class="n">TRANSFORM_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="hll"><span class="w">    </span><span class="nl">take:</span>
+</span><a id="__codelineno-26-6" name="__codelineno-26-6"></a><span class="hll"><span class="w">    </span><span class="n">input_ch</span><span class="w"> </span><span class="c1">// Canal de entrada com mensagens</span>
+</span><a id="__codelineno-26-7" name="__codelineno-26-7"></a>
+<a id="__codelineno-26-8" name="__codelineno-26-8"></a><span class="hll"><span class="w">    </span><span class="nl">main:</span>
+</span><a id="__codelineno-26-9" name="__codelineno-26-9"></a><span class="w">    </span><span class="c1">// Aplica as transformações em sequência</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10"></a><span class="w">    </span><span class="n">upper_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO_UPPER</span><span class="o">(</span><span class="n">input_ch</span><span class="o">)</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11"></a><span class="w">    </span><span class="n">reversed_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REVERSE_TEXT</span><span class="o">(</span><span class="n">upper_ch</span><span class="o">)</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12"></a>
+<a id="__codelineno-26-13" name="__codelineno-26-13"></a><span class="hll"><span class="w">    </span><span class="nl">emit:</span>
+</span><a id="__codelineno-26-14" name="__codelineno-26-14"></a><span class="hll"><span class="w">    </span><span class="n">upper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">upper_ch</span><span class="w"> </span><span class="c1">// Saudações em maiúsculas</span>
+</span><a id="__codelineno-26-15" name="__codelineno-26-15"></a><span class="hll"><span class="w">    </span><span class="n">reversed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reversed_ch</span><span class="w"> </span><span class="c1">// Saudações em maiúsculas invertidas</span>
+</span><a id="__codelineno-26-16" name="__codelineno-26-16"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>O fluxo de trabalho de transformação agora é composável e está pronto para ser importado no fluxo de trabalho principal.</p>
+<h3 id="23-atualizar-e-testar-o-fluxo-de-trabalho-principal">2.3. Atualizar e testar o fluxo de trabalho principal<a class="headerlink" href="#23-atualizar-e-testar-o-fluxo-de-trabalho-principal" title="Permanent link">&para;</a></h3>
+<p>Agora vamos atualizar o fluxo de trabalho principal para chamar o fluxo de trabalho de transformação.</p>
+<h4 id="231-incluir-o-fluxo-de-trabalho-de-transformacao-e-chama-lo">2.3.1. Incluir o fluxo de trabalho de transformação e chamá-lo<a class="headerlink" href="#231-incluir-o-fluxo-de-trabalho-de-transformacao-e-chama-lo" title="Permanent link">&para;</a></h4>
+<p>Adicione a instrução include, uma chamada ao <code>TRANSFORM_WORKFLOW</code> encadeada nas saudações com timestamp e as duas novas entradas em <code>publish:</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Depois</label><label for="__tabbed_6_2">Antes</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-27-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-27-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-27-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-27-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-27-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-27-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-27-10">10</a></span>
+<span class="normal"><a href="#__codelineno-27-11">11</a></span>
+<span class="normal"><a href="#__codelineno-27-12">12</a></span>
+<span class="normal"><a href="#__codelineno-27-13">13</a></span>
+<span class="normal"><a href="#__codelineno-27-14">14</a></span>
+<span class="normal"><a href="#__codelineno-27-15">15</a></span>
+<span class="normal"><a href="#__codelineno-27-16">16</a></span>
+<span class="normal"><a href="#__codelineno-27-17">17</a></span>
+<span class="normal"><a href="#__codelineno-27-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./workflows/greeting&#39;</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">TRANSFORM_WORKFLOW</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./workflows/transform&#39;</span>
+</span><a id="__codelineno-27-3" name="__codelineno-27-3"></a>
+<a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="w">    </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Alice&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Charlie&#39;</span><span class="o">)</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7"></a>
+<a id="__codelineno-27-8" name="__codelineno-27-8"></a><span class="w">    </span><span class="c1">// Executa o fluxo de trabalho de saudação</span>
+<a id="__codelineno-27-9" name="__codelineno-27-9"></a><span class="w">    </span><span class="n">GREETING_WORKFLOW</span><span class="o">(</span><span class="n">names</span><span class="o">)</span>
+<a id="__codelineno-27-10" name="__codelineno-27-10"></a>
+<a id="__codelineno-27-11" name="__codelineno-27-11"></a><span class="hll"><span class="w">    </span><span class="c1">// Executa o fluxo de trabalho de transformação</span>
+</span><a id="__codelineno-27-12" name="__codelineno-27-12"></a><span class="hll"><span class="w">    </span><span class="n">TRANSFORM_WORKFLOW</span><span class="o">(</span><span class="n">GREETING_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">timestamped</span><span class="o">)</span>
+</span><a id="__codelineno-27-13" name="__codelineno-27-13"></a>
+<a id="__codelineno-27-14" name="__codelineno-27-14"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-27-15" name="__codelineno-27-15"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">greetings</span>
+<a id="__codelineno-27-16" name="__codelineno-27-16"></a><span class="hll"><span class="w">    </span><span class="n">upper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TRANSFORM_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">upper</span>
+</span><a id="__codelineno-27-17" name="__codelineno-27-17"></a><span class="hll"><span class="w">    </span><span class="n">reversed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TRANSFORM_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">reversed</span>
+</span><a id="__codelineno-27-18" name="__codelineno-27-18"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-28-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-28-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-28-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-28-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-28-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-28-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-28-10">10</a></span>
+<span class="normal"><a href="#__codelineno-28-11">11</a></span>
+<span class="normal"><a href="#__codelineno-28-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./workflows/greeting&#39;</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2"></a>
+<a id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="w">    </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Alice&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Charlie&#39;</span><span class="o">)</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6"></a>
+<a id="__codelineno-28-7" name="__codelineno-28-7"></a><span class="w">    </span><span class="c1">// Executa o fluxo de trabalho de saudação</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8"></a><span class="w">    </span><span class="n">GREETING_WORKFLOW</span><span class="o">(</span><span class="n">names</span><span class="o">)</span>
+<a id="__codelineno-28-9" name="__codelineno-28-9"></a>
+<a id="__codelineno-28-10" name="__codelineno-28-10"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-28-11" name="__codelineno-28-11"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">greetings</span>
+<a id="__codelineno-28-12" name="__codelineno-28-12"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>Isso executará o fluxo de trabalho de transformação nas saudações com timestamp.</p>
+<h4 id="232-atualizar-o-bloco-de-saida">2.3.2. Atualizar o bloco de saída<a class="headerlink" href="#232-atualizar-o-bloco-de-saida" title="Permanent link">&para;</a></h4>
+<p>Adicione as entradas <code>upper</code> e <code>reversed</code> ao bloco <code>output {}</code>, cada uma com uma diretiva <code>path</code> para seu subdiretório:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Depois</label><label for="__tabbed_7_2">Antes</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-20">20</a></span>
+<span class="normal"><a href="#__codelineno-29-21">21</a></span>
+<span class="normal"><a href="#__codelineno-29-22">22</a></span>
+<span class="normal"><a href="#__codelineno-29-23">23</a></span>
+<span class="normal"><a href="#__codelineno-29-24">24</a></span>
+<span class="normal"><a href="#__codelineno-29-25">25</a></span>
+<span class="normal"><a href="#__codelineno-29-26">26</a></span>
+<span class="normal"><a href="#__codelineno-29-27">27</a></span>
+<span class="normal"><a href="#__codelineno-29-28">28</a></span>
+<span class="normal"><a href="#__codelineno-29-29">29</a></span>
+<span class="normal"><a href="#__codelineno-29-30">30</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-20" name="__codelineno-29-20"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-29-21" name="__codelineno-29-21"></a><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-29-22" name="__codelineno-29-22"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;greetings&#39;</span>
+<a id="__codelineno-29-23" name="__codelineno-29-23"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-29-24" name="__codelineno-29-24"></a><span class="hll"><span class="w">    </span><span class="n">upper</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-29-25" name="__codelineno-29-25"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;upper&#39;</span>
+</span><a id="__codelineno-29-26" name="__codelineno-29-26"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
+</span><a id="__codelineno-29-27" name="__codelineno-29-27"></a><span class="hll"><span class="w">    </span><span class="n">reversed</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-29-28" name="__codelineno-29-28"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;reversed&#39;</span>
+</span><a id="__codelineno-29-29" name="__codelineno-29-29"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
+</span><a id="__codelineno-29-30" name="__codelineno-29-30"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-20">20</a></span>
+<span class="normal"><a href="#__codelineno-30-21">21</a></span>
+<span class="normal"><a href="#__codelineno-30-22">22</a></span>
+<span class="normal"><a href="#__codelineno-30-23">23</a></span>
+<span class="normal"><a href="#__codelineno-30-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-20" name="__codelineno-30-20"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-30-21" name="__codelineno-30-21"></a><span class="hll"><span class="w">    </span><span class="n">greetings</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-30-22" name="__codelineno-30-22"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;greetings&#39;</span>
+</span><a id="__codelineno-30-23" name="__codelineno-30-23"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
+</span><a id="__codelineno-30-24" name="__codelineno-30-24"></a><span class="hll"><span class="o">}</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>Isso publicará as saídas finais nos diretórios apropriados.</p>
+<h4 id="233-executar-o-pipeline-completo">2.3.3. Executar o pipeline completo<a class="headerlink" href="#233-executar-o-pipeline-completo" title="Permanent link">&para;</a></h4>
+<p>Execute o pipeline para testar que tudo funciona:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<div class="highlight"><span class="filename">Reversed file content</span><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">!ECILA ,OLLEH ]04:50:71 60-30-5202[</span>
+<details class="success">
+<summary>Saída do comando</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="go">N E X T F L O W  ~  version 24.10.0</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="go">Launching `main.nf` [sick_kimura] DSL2 - revision: 8dc45fc6a8</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="go">executor &gt;  local (15)</span>
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="go">[83/1b51f4] process &gt; GREETING_WORKFLOW:VALIDATE_NAME (validating Alice)  [100%] 3 of 3 ✔</span>
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="go">[68/556150] process &gt; GREETING_WORKFLOW:SAY_HELLO (greeting Alice)        [100%] 3 of 3 ✔</span>
+<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="go">[de/511abd] process &gt; GREETING_WORKFLOW:TIMESTAMP_GREETING (adding tim... [100%] 3 of 3 ✔</span>
+<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="go">[cd/e6a7e0] process &gt; TRANSFORM_WORKFLOW:SAY_HELLO_UPPER (converting t... [100%] 3 of 3 ✔</span>
+<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="go">[f0/74ba4a] process &gt; TRANSFORM_WORKFLOW:REVERSE_TEXT (reversing UPPER... [100%] 3 of 3 ✔</span>
 </code></pre></div>
+</details>
+<details class="abstract">
+<summary>Conteúdo do diretório</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="go">results/</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="go">├── greetings</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="go">│   ├── Alice-output.txt</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="go">│   ├── Bob-output.txt</span>
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="go">│   └── Charlie-output.txt</span>
+<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a><span class="go">├── reversed</span>
+<a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a><span class="go">│   ├── REVERSED-UPPER-timestamped_Alice-output.txt</span>
+<a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a><span class="go">│   ├── REVERSED-UPPER-timestamped_Bob-output.txt</span>
+<a id="__codelineno-33-9" name="__codelineno-33-9" href="#__codelineno-33-9"></a><span class="go">│   └── REVERSED-UPPER-timestamped_Charlie-output.txt</span>
+<a id="__codelineno-33-10" name="__codelineno-33-10" href="#__codelineno-33-10"></a><span class="go">└── upper</span>
+<a id="__codelineno-33-11" name="__codelineno-33-11" href="#__codelineno-33-11"></a><span class="go">    ├── UPPER-timestamped_Alice-output.txt</span>
+<a id="__codelineno-33-12" name="__codelineno-33-12" href="#__codelineno-33-12"></a><span class="go">    ├── UPPER-timestamped_Bob-output.txt</span>
+<a id="__codelineno-33-13" name="__codelineno-33-13" href="#__codelineno-33-13"></a><span class="go">    └── UPPER-timestamped_Charlie-output.txt</span>
+</code></pre></div>
+</details>
+<details class="abstract">
+<summary>Conteúdo do arquivo</summary>
+<div class="highlight"><span class="filename">results/reversed/REVERSED-UPPER-timestamped_Alice-output.txt</span><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="go">!ECILA ,OLLEH ]04:50:71 60-30-5202[</span>
+</code></pre></div>
+</details>
+<p>O pipeline está funcionando de ponta a ponta: a saudação foi convertida para maiúsculas e invertida.</p>
 <h3 id="conclusao_1">Conclusão<a class="headerlink" href="#conclusao_1" title="Permanent link">&para;</a></h3>
 <p>Agora você deve ter um pipeline completo que:</p>
 <ul>
@@ -4666,43 +5238,43 @@ O conteúdo do fluxo de trabalho também é colocado dentro do bloco <code>main:
 <li>Os entry points podem ser configurados para executar diferentes partes do seu pipeline conforme necessário</li>
 </ul>
 <p><em>É importante notar, no entanto, que embora chamar fluxos de trabalho seja um pouco parecido com chamar processos, não é exatamente a mesma coisa. Você não pode, por exemplo, executar um fluxo de trabalho N vezes chamando-o com um canal de tamanho N — você precisaria passar um canal de tamanho N para o fluxo de trabalho e iterar internamente.</em></p>
-<p>Aplicar essas técnicas no seu próprio trabalho permitirá que você construa pipelines Nextflow mais sofisticados, capazes de lidar com tarefas complexas de bioinformática, mantendo-os fáceis de manter e escaláveis.</p>
+<p>Aplicar essas técnicas no seu próprio trabalho permitirá que você construa pipelines Nextflow mais sofisticados, capazes de lidar com tarefas complexas de processamento de dados, mantendo-os fáceis de manter e escaláveis.</p>
 <h3 id="padroes-principais">Padrões principais<a class="headerlink" href="#padroes-principais" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
 <p><strong>Estrutura do fluxo de trabalho</strong>: Definimos entradas e saídas claras para cada fluxo de trabalho usando a sintaxe <code>take:</code> e <code>emit:</code>, criando interfaces bem definidas entre os componentes, e envolvemos a lógica do fluxo de trabalho dentro do bloco <code>main:</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">workflow</span><span class="w"> </span><span class="n">EXAMPLE_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span><span class="nl">take:</span>
-<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">        </span><span class="c1">// Os canais de entrada são declarados aqui</span>
-<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="w">        </span><span class="n">input_ch</span>
-<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>
-<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="w">        </span><span class="c1">// A lógica do fluxo de trabalho vai aqui</span>
-<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="w">        </span><span class="c1">// É aqui que os processos são chamados e os canais são manipulados</span>
-<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="w">        </span><span class="n">result_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SOME_PROCESS</span><span class="o">(</span><span class="n">input_ch</span><span class="o">)</span>
-<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>
-<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="w">    </span><span class="nl">emit:</span>
-<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="w">        </span><span class="c1">// Os canais de saída são declarados aqui</span>
-<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="w">        </span><span class="n">output_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result_ch</span>
-<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a><span class="o">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="n">workflow</span><span class="w"> </span><span class="n">EXAMPLE_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">    </span><span class="nl">take:</span>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="w">        </span><span class="c1">// Os canais de entrada são declarados aqui</span>
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="w">        </span><span class="n">input_ch</span>
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>
+<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="w">        </span><span class="c1">// A lógica do fluxo de trabalho vai aqui</span>
+<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="w">        </span><span class="c1">// É aqui que os processos são chamados e os canais são manipulados</span>
+<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="w">        </span><span class="n">result_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SOME_PROCESS</span><span class="o">(</span><span class="n">input_ch</span><span class="o">)</span>
+<a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a>
+<a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a><span class="w">    </span><span class="nl">emit:</span>
+<a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a><span class="w">        </span><span class="c1">// Os canais de saída são declarados aqui</span>
+<a id="__codelineno-35-13" name="__codelineno-35-13" href="#__codelineno-35-13"></a><span class="w">        </span><span class="n">output_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result_ch</span>
+<a id="__codelineno-35-14" name="__codelineno-35-14" href="#__codelineno-35-14"></a><span class="o">}</span>
 </code></pre></div>
 </li>
 <li>
-<p><strong>Importações de fluxo de trabalho:</strong> Construímos dois módulos de fluxo de trabalho independentes e os importamos em um pipeline principal com instruções include.</p>
+<p><strong>Importações de fluxo de trabalho:</strong> Construímos dois módulos de fluxo de trabalho independentes e os importamos em um pipeline principal com instruções <code>include</code>.</p>
 <ul>
 <li>Incluir um único fluxo de trabalho</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">WORKFLOW_NAME</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./path/to/workflow&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">WORKFLOW_NAME</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./path/to/workflow&#39;</span>
 </code></pre></div>
 <ul>
 <li>Incluir múltiplos fluxos de trabalho</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">WORKFLOW_A</span><span class="o">;</span><span class="w"> </span><span class="n">WORKFLOW_B</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./path/to/workflows&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">WORKFLOW_A</span><span class="o">;</span><span class="w"> </span><span class="n">WORKFLOW_B</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./path/to/workflows&#39;</span>
 </code></pre></div>
 <ul>
 <li>Incluir com alias para evitar conflitos de nomes</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">WORKFLOW_A</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">WORKFLOW_A_ALIAS</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./path/to/workflow&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">WORKFLOW_A</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">WORKFLOW_A_ALIAS</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./path/to/workflow&#39;</span>
 </code></pre></div>
 </li>
 <li>
@@ -4710,23 +5282,23 @@ O conteúdo do fluxo de trabalho também é colocado dentro do bloco <code>main:
 <ul>
 <li>Fluxo de trabalho sem nome (entry point)</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">    </span><span class="c1">// Este é o entry point quando o script é executado</span>
-<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">    </span><span class="n">NAMED_WORKFLOW</span><span class="o">(</span><span class="n">input_ch</span><span class="o">)</span>
-<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="o">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="w">    </span><span class="c1">// Este é o entry point quando o script é executado</span>
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="w">    </span><span class="n">NAMED_WORKFLOW</span><span class="o">(</span><span class="n">input_ch</span><span class="o">)</span>
+<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="o">}</span>
 </code></pre></div>
 <ul>
 <li>Fluxo de trabalho nomeado (chamado a partir do entry workflow)</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">workflow</span><span class="w"> </span><span class="n">NAMED_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">    </span><span class="c1">// Deve ser chamado a partir do entry workflow</span>
-<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="o">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="n">workflow</span><span class="w"> </span><span class="n">NAMED_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="w">    </span><span class="c1">// Deve ser chamado a partir do entry workflow</span>
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="o">}</span>
 </code></pre></div>
 </li>
 <li>
 <p><strong>Gerenciamento do fluxo de dados:</strong> Aprendemos como acessar as saídas do fluxo de trabalho usando a notação de namespace (<code>WORKFLOW_NAME.out.channel_name</code>) e passá-las para outros fluxos de trabalho.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>WORKFLOW_A(input_ch)
-<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>WORKFLOW_B(WORKFLOW_A.out.some_channel)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>WORKFLOW_A(input_ch)
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>WORKFLOW_B(WORKFLOW_A.out.some_channel)
 </code></pre></div>
 </li>
 </ol>
@@ -6478,7 +7050,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
         
           
-          <a href="../debugging/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Depurando Fluxos de Trabalho">
+          <a href="../debugging/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Solução de Problemas em Fluxos de Trabalho">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -6488,7 +7060,7 @@ window.mkdocsQuizConfig = {
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Depurando Fluxos de Trabalho
+                Solução de Problemas em Fluxos de Trabalho
               </div>
             </div>
           </a>

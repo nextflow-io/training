@@ -47,7 +47,7 @@
     
     
       
-        <title>Patrons Essencials de Scripting en Nextflow - training.nextflow.io</title>
+        <title>Patrons Essencials de Scripting - training.nextflow.io</title>
       
     
     
@@ -157,7 +157,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#patrons-essencials-de-scripting-en-nextflow" class="md-skip">
+        <a href="#patrons-essencials-de-scripting" class="md-skip">
           Salta el contingut
         </a>
       
@@ -254,7 +254,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Patrons Essencials de Scripting en Nextflow
+              Patrons Essencials de Scripting
             
           </span>
         </div>
@@ -491,7 +491,7 @@
   <span class="md-ellipsis">
     
   
-    Home
+    Inici
   
 
     
@@ -2348,7 +2348,7 @@
   <span class="md-ellipsis">
     
   
-    Orientació
+    Primers passos
   
 
     
@@ -2413,7 +2413,7 @@
   <span class="md-ellipsis">
     
   
-    Patrons Essencials de Scripting en Nextflow
+    Patrons Essencials de Scripting
   
 
     
@@ -2431,7 +2431,7 @@
   <span class="md-ellipsis">
     
   
-    Patrons Essencials de Scripting en Nextflow
+    Patrons Essencials de Scripting
   
 
     
@@ -3340,7 +3340,7 @@
   <span class="md-ellipsis">
     
   
-    Depuració de Workflows
+    Resolució de Problemes en Workflows
   
 
     
@@ -4920,7 +4920,7 @@
 </a>
  
 
-<h1 id="patrons-essencials-de-scripting-en-nextflow">Patrons Essencials de Scripting en Nextflow<a class="headerlink" href="#patrons-essencials-de-scripting-en-nextflow" title="Permanent link">&para;</a></h1>
+<h1 id="patrons-essencials-de-scripting">Patrons Essencials de Scripting<a class="headerlink" href="#patrons-essencials-de-scripting" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traducció assistida per IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">més informació i suggeriments</a></span></p>
 <p>Nextflow és un llenguatge de programació que s'executa sobre la Java Virtual Machine. Tot i que Nextflow està construït sobre <a href="http://groovy-lang.org/">Groovy</a> i comparteix gran part de la seva sintaxi, Nextflow és molt més que "Groovy amb extensions" -- és un llenguatge independent amb una <a href="https://nextflow.io/docs/latest/reference/syntax.html">sintaxi</a> i una <a href="https://nextflow.io/docs/latest/reference/stdlib.html">biblioteca estàndard</a> completament especificades.</p>
 <p>Podeu escriure molt de Nextflow sense anar més enllà de la sintaxi bàsica per a variables, maps i llistes. La majoria de tutorials de Nextflow se centren en l'orquestració del workflow (canals, processos i flux de dades), i podeu arribar sorprenentment lluny amb només això.</p>
@@ -4941,7 +4941,7 @@ Transformarem un workflow senzill de lectura de CSV en un pipeline de bioinform�
 <h3 id="prerequisits">Prerequisits<a class="headerlink" href="#prerequisits" title="Permanent link">&para;</a></h3>
 <p>Abans d'emprendre aquesta missió secundària, hauríeu de:</p>
 <ul>
-<li>Haver completat el tutorial <a href="../hello_nextflow/README.md">Hello Nextflow</a> o un curs equivalent per a principiants.</li>
+<li>Haver completat el tutorial <a href="../../hello_nextflow/">Hello Nextflow</a> o un curs equivalent per a principiants.</li>
 <li>Estar còmodes usant conceptes i mecanismes bàsics de Nextflow (processos, canals, operadors, treballar amb fitxers, metadades)</li>
 <li>Tenir familiaritat bàsica amb construccions de programació comunes (variables, maps, llistes)</li>
 </ul>
@@ -4950,7 +4950,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 <hr />
 <h2 id="0-primers-passos">0. Primers passos<a class="headerlink" href="#0-primers-passos" title="Permanent link">&para;</a></h2>
 <h4 id="obriu-lespai-de-treball-de-formacio">Obriu l'espai de treball de formació<a class="headerlink" href="#obriu-lespai-de-treball-de-formacio" title="Permanent link">&para;</a></h4>
-<p>Si encara no ho heu fet, assegureu-vos d'obrir l'entorn de formació tal com es descriu a la <a href="../envsetup/index.md">Configuració de l'entorn</a>.</p>
+<p>Si encara no ho heu fet, assegureu-vos d'obrir l'entorn de formació tal com es descriu a la <a href="../../envsetup/">Configuració de l'entorn</a>.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h4 id="moveu-vos-al-directori-del-projecte">Moveu-vos al directori del projecte<a class="headerlink" href="#moveu-vos-al-directori-del-projecte" title="Permanent link">&para;</a></h4>
 <p>Movem-nos al directori on es troben els fitxers d'aquest tutorial.</p>
@@ -5057,7 +5057,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 </div>
 </div>
 <p>Aquesta és la nostra primera <strong>closure</strong> -- una funció anònima que podeu passar com a argument (similar a les lambdes en Python o les funcions fletxa en JavaScript). Les closures són essencials per treballar amb operadors de Nextflow.</p>
-<p>La closure <code>{ row -&gt; return row }</code> pren un paràmetre <code>row</code> (podria tenir qualsevol nom: <code>item</code>, <code>sample</code>, etc.).</p>
+<p>La closure <code class="highlight"><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">}</span></code> pren un paràmetre <code>row</code> (podria tenir qualsevol nom: <code>item</code>, <code>sample</code>, etc.).</p>
 <p>Quan l'operador <code>.map()</code> processa cada element del canal, passa aquell element a la vostra closure. Aquí, <code>row</code> conté una fila del CSV cada vegada.</p>
 <p>Apliqueu aquest canvi i executeu el workflow:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
@@ -5289,7 +5289,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="go">Launching `main.nf` [peaceful_cori] DSL2 - revision: 4cc4a8340f</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>
@@ -5429,7 +5429,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
 <a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="go">Launching `collect.nf` [loving_mendel] DSL2 - revision: e8d054a46e</span>
 <a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>
@@ -5499,7 +5499,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="go">Launching `collect.nf` [cheeky_stonebraker] DSL2 - revision: 2d5039fb47</span>
 <a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>
@@ -5590,7 +5590,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">Launching `collect.nf` [cranky_galileo] DSL2 - revision: 5f3c8b2a91</span>
 <a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>
@@ -5616,7 +5616,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 <p class="admonition-title">Consell: Quan Usar Spread vs Collect</p>
 <ul>
 <li><strong>Useu spread (<code>*.</code>)</strong> per a l'accés simple a propietats: <code>samples*.id</code>, <code>files*.name</code></li>
-<li><strong>Useu collect</strong> per a transformacions o lògica complexa: <code>samples.collect { it.id.toUpperCase() }</code>, <code>samples.collect { [it.id, it.quality &gt; 40] }</code></li>
+<li><strong>Useu collect</strong> per a transformacions o lògica complexa: <code class="highlight"><span class="n">samples</span><span class="o">.</span><span class="na">collect</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">()</span><span class="w"> </span><span class="o">}</span></code>, <code class="highlight"><span class="n">samples</span><span class="o">.</span><span class="na">collect</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">[</span><span class="n">it</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="n">it</span><span class="o">.</span><span class="na">quality</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40</span><span class="o">]</span><span class="w"> </span><span class="o">}</span></code></li>
 </ul>
 </div>
 <h3 id="conclusio">Conclusió<a class="headerlink" href="#conclusio" title="Permanent link">&para;</a></h3>
@@ -5765,7 +5765,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>
 <a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="go">Launching `main.nf` [clever_pauling] DSL2 - revision: 605d2058b4</span>
 <a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a>
@@ -6003,8 +6003,8 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 <span class="normal"><a href="#__codelineno-47-33">33</a></span>
 <span class="normal"><a href="#__codelineno-47-34">34</a></span>
 <span class="normal"><a href="#__codelineno-47-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-10" name="__codelineno-47-10"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-47-11" name="__codelineno-47-11"></a><span class="w">    </span><span class="c1">// Detecció simple de lectura d&#39;un sol extrem vs dos extrems</span>
-<a id="__codelineno-47-12" name="__codelineno-47-12"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">is_single</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">List</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">reads</span><span class="o">.</span><span class="na">size</span><span class="o">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-47-11" name="__codelineno-47-11"></a><span class="hll"><span class="w">    </span><span class="c1">// Detecció simple de lectura d&#39;un sol extrem vs dos extrems</span>
+</span><a id="__codelineno-47-12" name="__codelineno-47-12"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">is_single</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">List</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">reads</span><span class="o">.</span><span class="na">size</span><span class="o">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
 </span><a id="__codelineno-47-13" name="__codelineno-47-13"></a><span class="hll">
 </span><a id="__codelineno-47-14" name="__codelineno-47-14"></a><span class="hll"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">is_single</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-47-15" name="__codelineno-47-15"></a><span class="hll"><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">input_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">List</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">reads</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">reads</span>
@@ -6063,7 +6063,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>
 <a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="go">Launching `main.nf` [adoring_rosalind] DSL2 - revision: 04b1cd93e9</span>
 <a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>
@@ -6083,7 +6083,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 <a id="__codelineno-52-6" name="__codelineno-52-6" href="#__codelineno-52-6"></a><span class="w">    </span>--html<span class="w"> </span>sample_003.fastp.html<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-52-7" name="__codelineno-52-7" href="#__codelineno-52-7"></a><span class="w">    </span>--thread<span class="w"> </span><span class="m">2</span>
 </code></pre></div>
-<p>Un altre ús comú de la lògica de script dinàmica es pot veure al <a href="../../nf4science/genomics/02_joint_calling">mòdul de Genòmica de Nextflow for Science</a>. En aquell mòdul, el procés GATK que s'invoca pot prendre múltiples fitxers d'entrada, però cadascun ha d'anar prefixat amb <code>-V</code> per formar una línia de comanda correcta. El procés usa scripting per transformar una col·lecció de fitxers d'entrada (<code>all_gvcfs</code>) en els arguments de comanda correctes:</p>
+<p>Un altre ús comú de la lògica de script dinàmica es pot veure al <a href="../../nf4_science/genomics/03_joint_calling/">mòdul de Genòmica de Nextflow for Science</a>. En aquell mòdul, el procés GATK que s'invoca pot prendre múltiples fitxers d'entrada, però cadascun ha d'anar prefixat amb <code>-V</code> per formar una línia de comanda correcta. El procés usa scripting per transformar una col·lecció de fitxers d'entrada (<code>all_gvcfs</code>) en els arguments de comanda correctes:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">command line manipulation for GATK</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-53-1">1</a></span>
 <span class="normal"><a href="#__codelineno-53-2">2</a></span>
 <span class="normal"><a href="#__codelineno-53-3">3</a></span>
@@ -6117,24 +6117,20 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 <span class="normal"><a href="#__codelineno-54-11">11</a></span>
 <span class="normal"><a href="#__codelineno-54-12">12</a></span>
 <span class="normal"><a href="#__codelineno-54-13">13</a></span>
-<span class="normal"><a href="#__codelineno-54-14">14</a></span>
-<span class="normal"><a href="#__codelineno-54-15">15</a></span>
-<span class="normal"><a href="#__codelineno-54-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a><span class="n">process</span><span class="w"> </span><span class="n">GENERATE_REPORT</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-54-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a><span class="n">process</span><span class="w"> </span><span class="n">GENERATE_REPORT</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-54-2" name="__codelineno-54-2"></a>
-<a id="__codelineno-54-3" name="__codelineno-54-3"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results/reports&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-54-4" name="__codelineno-54-4"></a>
-<a id="__codelineno-54-5" name="__codelineno-54-5"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-54-6" name="__codelineno-54-6"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">reads</span><span class="o">)</span>
-<a id="__codelineno-54-7" name="__codelineno-54-7"></a>
-<a id="__codelineno-54-8" name="__codelineno-54-8"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-54-9" name="__codelineno-54-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${meta.id}_report.txt&quot;</span>
-<a id="__codelineno-54-10" name="__codelineno-54-10"></a>
-<a id="__codelineno-54-11" name="__codelineno-54-11"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-54-12" name="__codelineno-54-12"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-54-13" name="__codelineno-54-13"></a><span class="s2">    echo &quot;Processing ${reads}&quot; &gt; ${meta.id}_report.txt</span>
-<a id="__codelineno-54-14" name="__codelineno-54-14"></a><span class="s2">    echo &quot;Sample: ${meta.id}&quot; &gt;&gt; ${meta.id}_report.txt</span>
-<a id="__codelineno-54-15" name="__codelineno-54-15"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-54-16" name="__codelineno-54-16"></a><span class="o">}</span>
+<a id="__codelineno-54-3" name="__codelineno-54-3"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-54-4" name="__codelineno-54-4"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">reads</span><span class="o">)</span>
+<a id="__codelineno-54-5" name="__codelineno-54-5"></a>
+<a id="__codelineno-54-6" name="__codelineno-54-6"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-54-7" name="__codelineno-54-7"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${meta.id}_report.txt&quot;</span>
+<a id="__codelineno-54-8" name="__codelineno-54-8"></a>
+<a id="__codelineno-54-9" name="__codelineno-54-9"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-54-10" name="__codelineno-54-10"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-54-11" name="__codelineno-54-11"></a><span class="s2">    echo &quot;Processing ${reads}&quot; &gt; ${meta.id}_report.txt</span>
+<a id="__codelineno-54-12" name="__codelineno-54-12"></a><span class="s2">    echo &quot;Sample: ${meta.id}&quot; &gt;&gt; ${meta.id}_report.txt</span>
+<a id="__codelineno-54-13" name="__codelineno-54-13"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-54-14" name="__codelineno-54-14"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Aquest procés escriu un informe senzill amb l'ID de mostra i el nom del fitxer. Ara executem-lo per veure què passa quan necessitem barrejar diferents tipus de variables.</p>
 <p>Incloeu el procés al vostre <code>main.nf</code> i afegiu-lo al workflow:</p>
@@ -6242,27 +6238,27 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 <a id="__codelineno-56-7" name="__codelineno-56-7"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">sample_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
 <a id="__codelineno-56-8" name="__codelineno-56-8"></a><span class="w">                </span><span class="nl">id:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">sample_id</span><span class="o">.</span><span class="na">toLowerCase</span><span class="o">(),</span>
 <a id="__codelineno-56-9" name="__codelineno-56-9"></a><span class="w">                </span><span class="nl">organism:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">organism</span><span class="o">,</span>
-<a id="__codelineno-56-10" name="__codelineno-56-10"></a><span class="hll"><span class="w">                </span><span class="nl">tissue:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">tissue_type</span><span class="o">.</span><span class="na">replaceAll</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="o">).</span><span class="na">toLowerCase</span><span class="o">(),</span>
-</span><a id="__codelineno-56-11" name="__codelineno-56-11"></a><span class="hll"><span class="w">                </span><span class="nl">depth:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">sequencing_depth</span><span class="o">.</span><span class="na">toInteger</span><span class="o">(),</span>
-</span><a id="__codelineno-56-12" name="__codelineno-56-12"></a><span class="hll"><span class="w">                </span><span class="nl">quality:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">quality_score</span><span class="o">.</span><span class="na">toDouble</span><span class="o">()</span>
-</span><a id="__codelineno-56-13" name="__codelineno-56-13"></a><span class="hll"><span class="w">            </span><span class="o">]</span>
-</span><a id="__codelineno-56-14" name="__codelineno-56-14"></a><span class="hll"><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">fastq_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">file_path</span><span class="o">)</span>
-</span><a id="__codelineno-56-15" name="__codelineno-56-15"></a><span class="hll">
-</span><a id="__codelineno-56-16" name="__codelineno-56-16"></a><span class="hll"><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="n">fastq_path</span><span class="o">.</span><span class="na">name</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="s">/^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/</span><span class="o">)</span>
-</span><a id="__codelineno-56-17" name="__codelineno-56-17"></a><span class="hll"><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">file_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">[</span>
-</span><a id="__codelineno-56-18" name="__codelineno-56-18"></a><span class="hll"><span class="w">                </span><span class="nl">sample_num:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">2</span><span class="o">].</span><span class="na">toInteger</span><span class="o">(),</span>
-</span><a id="__codelineno-56-19" name="__codelineno-56-19"></a><span class="hll"><span class="w">                </span><span class="nl">lane:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">3</span><span class="o">],</span>
-</span><a id="__codelineno-56-20" name="__codelineno-56-20"></a><span class="hll"><span class="w">                </span><span class="nl">read:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">4</span><span class="o">],</span>
-</span><a id="__codelineno-56-21" name="__codelineno-56-21"></a><span class="hll"><span class="w">                </span><span class="nl">chunk:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">5</span><span class="o">]</span>
-</span><a id="__codelineno-56-22" name="__codelineno-56-22"></a><span class="hll"><span class="w">            </span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">[:]</span>
-</span><a id="__codelineno-56-23" name="__codelineno-56-23"></a><span class="hll">
-</span><a id="__codelineno-56-24" name="__codelineno-56-24"></a><span class="hll"><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_meta</span><span class="o">.</span><span class="na">quality</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;high&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span>
-</span><a id="__codelineno-56-25" name="__codelineno-56-25"></a><span class="hll"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">tuple</span><span class="o">(</span><span class="n">sample_meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">file_meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">priority:</span><span class="w"> </span><span class="n">priority</span><span class="o">],</span><span class="w"> </span><span class="n">fastq_path</span><span class="o">)</span>
-</span><a id="__codelineno-56-26" name="__codelineno-56-26"></a><span class="hll"><span class="w">        </span><span class="o">}</span>
-</span><a id="__codelineno-56-27" name="__codelineno-56-27"></a><span class="hll">
-</span><a id="__codelineno-56-28" name="__codelineno-56-28"></a><span class="hll"><span class="w">    </span><span class="n">ch_fastp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FASTP</span><span class="o">(</span><span class="n">ch_samples</span><span class="o">)</span>
-</span><a id="__codelineno-56-29" name="__codelineno-56-29"></a><span class="hll"><span class="o">}</span>
-</span></code></pre></div></td></tr></table></div>
+<a id="__codelineno-56-10" name="__codelineno-56-10"></a><span class="w">                </span><span class="nl">tissue:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">tissue_type</span><span class="o">.</span><span class="na">replaceAll</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="o">).</span><span class="na">toLowerCase</span><span class="o">(),</span>
+<a id="__codelineno-56-11" name="__codelineno-56-11"></a><span class="w">                </span><span class="nl">depth:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">sequencing_depth</span><span class="o">.</span><span class="na">toInteger</span><span class="o">(),</span>
+<a id="__codelineno-56-12" name="__codelineno-56-12"></a><span class="w">                </span><span class="nl">quality:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">quality_score</span><span class="o">.</span><span class="na">toDouble</span><span class="o">()</span>
+<a id="__codelineno-56-13" name="__codelineno-56-13"></a><span class="w">            </span><span class="o">]</span>
+<a id="__codelineno-56-14" name="__codelineno-56-14"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">fastq_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">file_path</span><span class="o">)</span>
+<a id="__codelineno-56-15" name="__codelineno-56-15"></a>
+<a id="__codelineno-56-16" name="__codelineno-56-16"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="n">fastq_path</span><span class="o">.</span><span class="na">name</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="s">/^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/</span><span class="o">)</span>
+<a id="__codelineno-56-17" name="__codelineno-56-17"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">file_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">[</span>
+<a id="__codelineno-56-18" name="__codelineno-56-18"></a><span class="w">                </span><span class="nl">sample_num:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">2</span><span class="o">].</span><span class="na">toInteger</span><span class="o">(),</span>
+<a id="__codelineno-56-19" name="__codelineno-56-19"></a><span class="w">                </span><span class="nl">lane:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">3</span><span class="o">],</span>
+<a id="__codelineno-56-20" name="__codelineno-56-20"></a><span class="w">                </span><span class="nl">read:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">4</span><span class="o">],</span>
+<a id="__codelineno-56-21" name="__codelineno-56-21"></a><span class="w">                </span><span class="nl">chunk:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">5</span><span class="o">]</span>
+<a id="__codelineno-56-22" name="__codelineno-56-22"></a><span class="w">            </span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">[:]</span>
+<a id="__codelineno-56-23" name="__codelineno-56-23"></a>
+<a id="__codelineno-56-24" name="__codelineno-56-24"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_meta</span><span class="o">.</span><span class="na">quality</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;high&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span>
+<a id="__codelineno-56-25" name="__codelineno-56-25"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">tuple</span><span class="o">(</span><span class="n">sample_meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">file_meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">priority:</span><span class="w"> </span><span class="n">priority</span><span class="o">],</span><span class="w"> </span><span class="n">fastq_path</span><span class="o">)</span>
+<a id="__codelineno-56-26" name="__codelineno-56-26"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-56-27" name="__codelineno-56-27"></a>
+<a id="__codelineno-56-28" name="__codelineno-56-28"></a><span class="hll"><span class="w">    </span><span class="n">ch_fastp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FASTP</span><span class="o">(</span><span class="n">ch_samples</span><span class="o">)</span>
+</span><a id="__codelineno-56-29" name="__codelineno-56-29"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
@@ -6309,7 +6305,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 </div>
 </div>
 </div>
-<p>Si executeu això, notareu un error -- Nextflow intenta interpretar <code>${USER}</code> com una variable de Nextflow que no existeix.</p>
+<p>Si executeu això, notareu un error -- Nextflow intenta interpretar <code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">USER</span><span class="o">}</span></code> com una variable de Nextflow que no existeix.</p>
 <details class="failure">
 <summary>Sortida de la comanda</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">Error modules/generate_report.nf:15:27: `USER` is not defined</span>
@@ -6368,9 +6364,9 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 <li><strong>Expressions regulars per a l'anàlisi de fitxers</strong>: Usar l'operador <code>=~</code> i patrons regex (<code>~/patró/</code>) per extreure metadades de convencions de nomenclatura de fitxers complexes</li>
 <li><strong>Generació dinàmica de scripts</strong>: Usar lògica condicional (if/else, operadors ternaris) per generar strings de script diferents basant-se en les característiques de l'entrada</li>
 <li><strong>Interpolació de variables</strong>: Comprendre quan Nextflow interpreta strings vs quan ho fa la shell</li>
-<li><code>${var}</code> - Variables de Nextflow (interpolades per Nextflow en temps de compilació del workflow)</li>
-<li><code>\${var}</code> - Variables d'entorn de la shell (escapades, passades a bash en temps d'execució)</li>
-<li><code>\$(cmd)</code> - Substitució de comandes de la shell (escapada, executada per bash en temps d'execució)</li>
+<li><code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">var</span><span class="o">}</span></code> - Variables de Nextflow (interpolades per Nextflow en temps de compilació del workflow)</li>
+<li><code class="highlight"><span class="err">\</span><span class="n">$</span><span class="o">{</span><span class="n">var</span><span class="o">}</span></code> - Variables d'entorn de la shell (escapades, passades a bash en temps d'execució)</li>
+<li><code class="highlight"><span class="err">\</span><span class="n">$</span><span class="o">(</span><span class="n">cmd</span><span class="o">)</span></code> - Substitució de comandes de la shell (escapada, executada per bash en temps d'execució)</li>
 </ul>
 <p>Aquests patrons de processament i generació de strings són essencials per gestionar els formats de fitxers i les convencions de nomenclatura diverses que trobareu en workflows de bioinformàtica del món real.</p>
 <hr />
@@ -6528,7 +6524,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>
 <a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a><span class="go">Launching `main.nf` [admiring_panini] DSL2 - revision: 8cc832e32f</span>
 <a id="__codelineno-67-4" name="__codelineno-67-4" href="#__codelineno-67-4"></a>
@@ -6586,7 +6582,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 </div>
 </div>
 </div>
-<p>La closure <code>{ meta.depth &gt; 40000000 ? 2 : 1 }</code> usa l'<strong>operador ternari</strong> (cobert a la Secció 1.1) i s'avalua per a cada tasca, permetent l'assignació de recursos per mostra. Les mostres d'alta profunditat (&gt;40M lectures) obtenen 2 CPUs, mentre que les altres obtenen 1 CPU.</p>
+<p>La closure <code class="highlight"><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">}</span></code> usa l'<strong>operador ternari</strong> (cobert a la Secció 1.1) i s'avalua per a cada tasca, permetent l'assignació de recursos per mostra. Les mostres d'alta profunditat (&gt;40M lectures) obtenen 2 CPUs, mentre que les altres obtenen 1 CPU.</p>
 <div class="admonition note">
 <p class="admonition-title">Nota: Accedir a Variables d'Entrada en Directives</p>
 <p>La closure pot accedir a qualsevol variable d'entrada (com <code>meta</code> aquí) perquè Nextflow avalua aquestes closures en el context de l'execució de cada tasca.</p>
@@ -6596,7 +6592,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a><span class="go">N E X T F L O W  ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a><span class="go">N E X T F L O W  ~  version 25.10.4</span>
 <a id="__codelineno-71-2" name="__codelineno-71-2" href="#__codelineno-71-2"></a><span class="go">Launching `main.nf` [fervent_albattani] DSL2 - revision: fa8f249759</span>
 <a id="__codelineno-71-3" name="__codelineno-71-3" href="#__codelineno-71-3"></a><span class="go">[bd/ff3d41] Submitted process &gt; FASTP (2)</span>
 <a id="__codelineno-71-4" name="__codelineno-71-4" href="#__codelineno-71-4"></a><span class="go">[a4/a3aab2] Submitted process &gt; FASTP (1)</span>
@@ -6610,7 +6606,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 <div class="highlight"><span class="filename">Check docker command</span><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="go">cat work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.run | grep &quot;docker run&quot;</span>
 </code></pre></div>
 <p>Hauríeu de veure alguna cosa com:</p>
-<div class="highlight"><span class="filename">docker command</span><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a><span class="w">    </span>docker<span class="w"> </span>run<span class="w"> </span>-i<span class="w"> </span>--cpu-shares<span class="w"> </span><span class="m">4096</span><span class="w"> </span>--memory<span class="w"> </span>2048m<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;NXF_TASK_WORKDIR&quot;</span><span class="w"> </span>-v<span class="w"> </span>/workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$NXF_TASK_WORKDIR</span><span class="s2">&quot;</span><span class="w"> </span>--name<span class="w"> </span><span class="nv">$NXF_BOXID</span><span class="w"> </span>community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690<span class="w"> </span>/bin/bash<span class="w"> </span>-ue<span class="w"> </span>/workspaces/training/side-quests/essential_scripting_patterns/work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.sh
+<div class="highlight"><span class="filename">docker command</span><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a><span class="w">    </span>docker<span class="w"> </span>run<span class="w"> </span>-i<span class="w"> </span>--cpu-shares<span class="w"> </span><span class="m">2048</span><span class="w"> </span>--memory<span class="w"> </span>2048m<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;NXF_TASK_WORKDIR&quot;</span><span class="w"> </span>-v<span class="w"> </span>/workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$NXF_TASK_WORKDIR</span><span class="s2">&quot;</span><span class="w"> </span>--name<span class="w"> </span><span class="nv">$NXF_BOXID</span><span class="w"> </span>community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690<span class="w"> </span>/bin/bash<span class="w"> </span>-ue<span class="w"> </span>/workspaces/training/side-quests/essential_scripting_patterns/work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.sh
 </code></pre></div>
 <p>En aquest exemple hem triat un exemple que ha sol·licitat 2 CPUs (<code>--cpu-shares 2048</code>), perquè era una mostra d'alta profunditat, però hauríeu de veure assignacions de CPUs diferents depenent de la profunditat de la mostra. Proveu-ho també per a les altres tasques.</p>
 <h3 id="42-estrategies-de-reintent">4.2. Estratègies de reintent<a class="headerlink" href="#42-estrategies-de-reintent" title="Permanent link">&para;</a></h3>
@@ -6628,7 +6624,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 <span class="normal"><a href="#__codelineno-74-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-74-1" name="__codelineno-74-1"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTP</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-74-2" name="__codelineno-74-2"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690&#39;</span>
 <a id="__codelineno-74-3" name="__codelineno-74-3"></a>
-<a id="__codelineno-74-4" name="__codelineno-74-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-74-4" name="__codelineno-74-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-74-5" name="__codelineno-74-5"></a><span class="hll"><span class="w">    </span><span class="n">memory</span><span class="w"> </span><span class="mi">1</span><span class="o">.</span><span class="na">GB</span>
 </span><a id="__codelineno-74-6" name="__codelineno-74-6"></a>
 <a id="__codelineno-74-7" name="__codelineno-74-7"></a><span class="w">    </span><span class="nl">input:</span>
@@ -6646,7 +6642,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 <span class="normal"><a href="#__codelineno-75-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTP</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-75-2" name="__codelineno-75-2"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690&#39;</span>
 <a id="__codelineno-75-3" name="__codelineno-75-3"></a>
-<a id="__codelineno-75-4" name="__codelineno-75-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-75-4" name="__codelineno-75-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-75-5" name="__codelineno-75-5"></a><span class="hll"><span class="w">    </span><span class="n">memory</span><span class="w"> </span><span class="mi">2</span><span class="o">.</span><span class="na">GB</span>
 </span><a id="__codelineno-75-6" name="__codelineno-75-6"></a>
 <a id="__codelineno-75-7" name="__codelineno-75-7"></a><span class="w">    </span><span class="nl">input:</span>
@@ -6670,7 +6666,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 <a id="__codelineno-77-8" name="__codelineno-77-8" href="#__codelineno-77-8"></a><span class="go">  Detecting adapter sequence for read1...</span>
 <a id="__codelineno-77-9" name="__codelineno-77-9" href="#__codelineno-77-9"></a><span class="go">  No adapter detected for read1</span>
 <a id="__codelineno-77-10" name="__codelineno-77-10" href="#__codelineno-77-10"></a>
-<a id="__codelineno-77-11" name="__codelineno-77-11" href="#__codelineno-77-11"></a><span class="hll"><span class="go">  .command.sh: line 7:   101 Killed                  fastp --in1 SAMPLE_002_S2_L001_R1_001.fastq --out1 sample_002_trimmed.fastq.gz --json sample_002.fastp.json --html sample_002.fastp.html --thread 2</span>
+<a id="__codelineno-77-11" name="__codelineno-77-11" href="#__codelineno-77-11"></a><span class="hll"><span class="go">  .command.sh: line 7:   101 Killed                  fastp --in1 SAMPLE_002_S2_L001_R1_001.fastq --out1 sample_002_trimmed.fastq.gz --json sample_002.fastp.json --html sample_002.fastp.html --thread 1</span>
 </span></code></pre></div>
 </details>
 <p>Això indica que el procés ha estat eliminat per superar els límits de memòria.</p>
@@ -6691,7 +6687,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 <span class="normal"><a href="#__codelineno-78-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTP</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-78-2" name="__codelineno-78-2"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690&#39;</span>
 <a id="__codelineno-78-3" name="__codelineno-78-3"></a>
-<a id="__codelineno-78-4" name="__codelineno-78-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-78-4" name="__codelineno-78-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-78-5" name="__codelineno-78-5"></a><span class="hll"><span class="w">    </span><span class="n">memory</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="mi">1</span><span class="o">.</span><span class="na">GB</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">attempt</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-78-6" name="__codelineno-78-6"></a><span class="hll"><span class="w">    </span><span class="n">errorStrategy</span><span class="w"> </span><span class="s1">&#39;retry&#39;</span>
 </span><a id="__codelineno-78-7" name="__codelineno-78-7"></a><span class="hll"><span class="w">    </span><span class="n">maxRetries</span><span class="w"> </span><span class="mi">2</span>
@@ -6711,7 +6707,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 <span class="normal"><a href="#__codelineno-79-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTP</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-79-2" name="__codelineno-79-2"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690&#39;</span>
 <a id="__codelineno-79-3" name="__codelineno-79-3"></a>
-<a id="__codelineno-79-4" name="__codelineno-79-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-79-4" name="__codelineno-79-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-79-5" name="__codelineno-79-5"></a><span class="hll"><span class="w">    </span><span class="n">memory</span><span class="w"> </span><span class="mi">2</span><span class="o">.</span><span class="na">GB</span>
 </span><a id="__codelineno-79-6" name="__codelineno-79-6"></a>
 <a id="__codelineno-79-7" name="__codelineno-79-7"></a><span class="w">    </span><span class="nl">input:</span>
@@ -6809,7 +6805,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-85-2" name="__codelineno-85-2" href="#__codelineno-85-2"></a>
 <a id="__codelineno-85-3" name="__codelineno-85-3" href="#__codelineno-85-3"></a><span class="go">Launching `main.nf` [adoring_galileo] DSL2 - revision: c9e83aaef1</span>
 <a id="__codelineno-85-4" name="__codelineno-85-4" href="#__codelineno-85-4"></a>
@@ -6890,7 +6886,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a><span class="go">N E X T F L O W  ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a><span class="go">N E X T F L O W  ~  version 25.10.4</span>
 <a id="__codelineno-89-2" name="__codelineno-89-2" href="#__codelineno-89-2"></a><span class="go">Launching `main.nf` [lonely_williams] DSL2 - revision: d0b3f121ec</span>
 <a id="__codelineno-89-3" name="__codelineno-89-3" href="#__codelineno-89-3"></a><span class="go">[94/b48eac] Submitted process &gt; FASTP (2)</span>
 <a id="__codelineno-89-4" name="__codelineno-89-4" href="#__codelineno-89-4"></a><span class="go">[2c/d2b28f] Submitted process &gt; GENERATE_REPORT (2)</span>
@@ -6973,7 +6969,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 </code></pre></div>
 <details class="failure">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-94-2" name="__codelineno-94-2" href="#__codelineno-94-2"></a>
 <a id="__codelineno-94-3" name="__codelineno-94-3" href="#__codelineno-94-3"></a><span class="go">Launching `main.nf` [trusting_torvalds] DSL2 - revision: b56fbfbce2</span>
 <a id="__codelineno-94-4" name="__codelineno-94-4" href="#__codelineno-94-4"></a>
@@ -7181,9 +7177,9 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 </span><a id="__codelineno-105-13" name="__codelineno-105-13"></a><span class="hll"><span class="w">        </span><span class="n">error</span><span class="o">(</span><span class="s2">&quot;Input CSV file not found: ${params.input}&quot;</span><span class="o">)</span>
 </span><a id="__codelineno-105-14" name="__codelineno-105-14"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span><a id="__codelineno-105-15" name="__codelineno-105-15"></a><span class="hll"><span class="o">}</span>
-</span><a id="__codelineno-105-16" name="__codelineno-105-16"></a><span class="hll"><span class="o">...</span>
-</span><a id="__codelineno-105-17" name="__codelineno-105-17"></a><span class="hll"><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-105-18" name="__codelineno-105-18"></a><span class="hll"><span class="w">    </span><span class="n">validateInputs</span><span class="o">()</span>
+</span><a id="__codelineno-105-16" name="__codelineno-105-16"></a><span class="o">...</span>
+<a id="__codelineno-105-17" name="__codelineno-105-17"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-105-18" name="__codelineno-105-18"></a><span class="hll"><span class="w">    </span><span class="n">validateInputs</span><span class="o">()</span>
 </span><a id="__codelineno-105-19" name="__codelineno-105-19"></a><span class="hll"><span class="w">    </span><span class="n">ch_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
@@ -7210,7 +7206,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 </code></pre></div>
 <details class="failure">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-108-1" name="__codelineno-108-1" href="#__codelineno-108-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-108-1" name="__codelineno-108-1" href="#__codelineno-108-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-108-2" name="__codelineno-108-2" href="#__codelineno-108-2"></a>
 <a id="__codelineno-108-3" name="__codelineno-108-3" href="#__codelineno-108-3"></a><span class="go">Launching `main.nf` [confident_coulomb] DSL2 - revision: 07059399ed</span>
 <a id="__codelineno-108-4" name="__codelineno-108-4" href="#__codelineno-108-4"></a>
@@ -7224,7 +7220,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 </code></pre></div>
 <details class="failure">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-110-1" name="__codelineno-110-1" href="#__codelineno-110-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-110-1" name="__codelineno-110-1" href="#__codelineno-110-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-110-2" name="__codelineno-110-2" href="#__codelineno-110-2"></a>
 <a id="__codelineno-110-3" name="__codelineno-110-3" href="#__codelineno-110-3"></a><span class="go">Launching `main.nf` [cranky_gates] DSL2 - revision: 26839ae3eb</span>
 <a id="__codelineno-110-4" name="__codelineno-110-4" href="#__codelineno-110-4"></a>
@@ -7280,7 +7276,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 </code></pre></div>
 <details class="warning">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-116-1" name="__codelineno-116-1" href="#__codelineno-116-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-116-1" name="__codelineno-116-1" href="#__codelineno-116-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-116-2" name="__codelineno-116-2" href="#__codelineno-116-2"></a>
 <a id="__codelineno-116-3" name="__codelineno-116-3" href="#__codelineno-116-3"></a><span class="go">Launching `main.nf` [awesome_goldwasser] DSL2 - revision: a31662a7c1</span>
 <a id="__codelineno-116-4" name="__codelineno-116-4" href="#__codelineno-116-4"></a>
@@ -7361,7 +7357,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-120-1" name="__codelineno-120-1" href="#__codelineno-120-1"></a><span class="go">N E X T F L O W  ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-120-1" name="__codelineno-120-1" href="#__codelineno-120-1"></a><span class="go">N E X T F L O W  ~  version 25.10.4</span>
 <a id="__codelineno-120-2" name="__codelineno-120-2" href="#__codelineno-120-2"></a><span class="go">Launching `main.nf` [marvelous_boltzmann] DSL2 - revision: a31662a7c1</span>
 <a id="__codelineno-120-3" name="__codelineno-120-3" href="#__codelineno-120-3"></a><span class="go">WARN: Low sequencing depth for sample_002: 25000000</span>
 <a id="__codelineno-120-4" name="__codelineno-120-4" href="#__codelineno-120-4"></a><span class="go">[9b/d48e40] Submitted process &gt; FASTP (2)</span>
@@ -7471,7 +7467,7 @@ Començarem amb conceptes fonamentals i anirem construint fins a patrons avança
 
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-123-1" name="__codelineno-123-1" href="#__codelineno-123-1"></a><span class="go">N E X T F L O W  ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-123-1" name="__codelineno-123-1" href="#__codelineno-123-1"></a><span class="go">N E X T F L O W  ~  version 25.10.4</span>
 <a id="__codelineno-123-2" name="__codelineno-123-2" href="#__codelineno-123-2"></a><span class="go">Launching `main.nf` [boring_linnaeus] DSL2 - revision: a31662a7c1</span>
 <a id="__codelineno-123-3" name="__codelineno-123-3" href="#__codelineno-123-3"></a><span class="go">WARN: Low sequencing depth for sample_002: 25000000</span>
 <a id="__codelineno-123-4" name="__codelineno-123-4" href="#__codelineno-123-4"></a><span class="go">[e5/242efc] Submitted process &gt; FASTP (2)</span>

@@ -2962,7 +2962,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Premiers pas
   
 
     
@@ -2990,7 +2990,7 @@
   <span class="md-ellipsis">
     
   
-    Environnement de développement
+    Index
   
 
     
@@ -3018,7 +3018,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Modèles de Scripting Essentiels
   
 
     
@@ -3158,7 +3158,7 @@
   <span class="md-ellipsis">
     
   
-    Débogage des Workflows
+    Résolution des problèmes dans les Workflows
   
 
     
@@ -4575,7 +4575,7 @@ Typiquement, vous auriez besoin d'installer ces outils, de gérer leurs dépenda
 <p>Tout cela est très fastidieux et ennuyeux, donc nous allons vous montrer comment utiliser des <strong>conteneurs</strong> pour résoudre ce problème de manière beaucoup plus pratique.</p>
 <p>Un <strong>conteneur</strong> est une unité logicielle légère, autonome et exécutable créée à partir d'une <strong>image</strong> de conteneur qui inclut tout ce qui est nécessaire pour exécuter une application, y compris le code, les bibliothèques système et les paramètres.
 Comme vous pouvez l'imaginer, cela va être très utile pour rendre vos pipelines plus reproductibles.</p>
-<p>Notez que nous enseignerons ceci en utilisant <a href="https://www.docker.com/get-started/">Docker</a>, mais gardez à l'esprit que Nextflow prend en charge <a href="https://www.nextflow.io/docs/latest/container.html#">plusieurs autres technologies de conteneurs</a> également.</p>
+<p>Notez que nous enseignerons ceci en utilisant <a href="https://www.docker.com/get-started/">Docker</a>, mais gardez à l'esprit que Nextflow prend en charge <a href="https://nextflow.io/docs/latest/container.html">plusieurs autres technologies de conteneurs</a> également.</p>
 <details class="info">
 <summary>Comment commencer à partir de cette section</summary>
 <p>Cette section du cours suppose que vous avez complété les Parties 1-4 du cours <a href="../">Hello Nextflow</a> et que vous avez un pipeline fonctionnel complet.</p>
@@ -4628,7 +4628,7 @@ Il est équivalent au script produit en travaillant à travers la Partie 4 de ce
 </code></pre></div>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">Launching `hello-containers.nf` [nice_escher] DSL2 - revision: d5dfdc9872</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
@@ -4645,11 +4645,11 @@ Il est équivalent au script produit en travaillant à travers la Partie 4 de ce
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">├── Bonjour-output.txt</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">├── COLLECTED-batch-output.txt</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">├── Hello-output.txt</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">├── Holà-output.txt</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">├── Hola-output.txt</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">├── batch-report.txt</span>
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="go">├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="go">└── UPPER-Holà-output.txt</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="go">└── UPPER-Hola-output.txt</span>
 </code></pre></div>
 </details>
 <p>Si cela a fonctionné pour vous, vous êtes prêt·e à apprendre comment utiliser les conteneurs.</p>
@@ -4660,12 +4660,12 @@ Il est équivalent au script produit en travaillant à travers la Partie 4 de ce
 <h3 id="11-telecharger-limage-de-conteneur">1.1. Télécharger l'image de conteneur<a class="headerlink" href="#11-telecharger-limage-de-conteneur" title="Permanent link">&para;</a></h3>
 <p>Pour utiliser un conteneur, vous téléchargez généralement ou <em>tirez</em> une image de conteneur depuis un registre de conteneurs, puis exécutez l'image de conteneur pour créer une instance de conteneur.</p>
 <p>La syntaxe générale est la suivante :</p>
-<div class="highlight"><span class="filename">Syntaxe</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>pull<span class="w"> </span><span class="s1">&#39;&lt;container&gt;&#39;</span>
+<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>pull<span class="w"> </span><span class="s1">&#39;&lt;container&gt;&#39;</span>
 </code></pre></div>
 <p>La partie <code>docker pull</code> est l'instruction au système de conteneur pour tirer une image de conteneur depuis un dépôt.</p>
 <p>La partie <code>'&lt;container&gt;'</code> est l'adresse URI de l'image de conteneur.</p>
 <p>À titre d'exemple, tirons une image de conteneur qui contient <a href="https://github.com/jeffbuttars/cowpy">cowpy</a>, une implémentation Python d'un outil appelé <code>cowsay</code> qui génère de l'art ASCII pour afficher des entrées de texte arbitraires de manière amusante.</p>
-<div class="highlight"><span class="filename">Exemple</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a> ________________________
+<div class="highlight"><span class="filename">Example</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a> ________________________
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>&lt; Are we having fun yet? &gt;
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a> ------------------------
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    \                                  ___-------___
@@ -4716,7 +4716,7 @@ Une fois terminé, vous avez une copie locale de l'image de conteneur.</p>
 <p>Une façon très courante d'utiliser les conteneurs est de les exécuter directement, <em>c.-à-d.</em> de manière non interactive.
 C'est idéal pour exécuter des commandes ponctuelles.</p>
 <p>La syntaxe générale est la suivante :</p>
-<div class="highlight"><span class="filename">Syntaxe</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="s1">&#39;&lt;container&gt;&#39;</span><span class="w"> </span><span class="o">[</span>commande<span class="w"> </span>de<span class="w"> </span>l<span class="err">&#39;</span>outil<span class="o">]</span>
+<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="s1">&#39;&lt;container&gt;&#39;</span><span class="w"> </span><span class="o">[</span>tool<span class="w"> </span>command<span class="o">]</span>
 </code></pre></div>
 <p>La partie <code>docker run --rm '&lt;container&gt;'</code> est l'instruction au système de conteneur pour démarrer une instance de conteneur à partir d'une image de conteneur et exécuter une commande à l'intérieur.
 Le flag <code>--rm</code> indique au système d'arrêter l'instance du conteneur après que la commande soit terminée.</p>
@@ -4798,7 +4798,7 @@ Mais puisque nous n'avons pas accès au système de fichiers, nous ne pouvons pa
 <h4 id="134-monter-des-donnees-dans-le-conteneur">1.3.4. Monter des données dans le conteneur<a class="headerlink" href="#134-monter-des-donnees-dans-le-conteneur" title="Permanent link">&para;</a></h4>
 <p>Comme noté précédemment, le conteneur est isolé du système hôte par défaut.</p>
 <p>Pour permettre au conteneur d'accéder au système de fichiers hôte, vous pouvez <strong>monter</strong> un <strong>volume</strong> depuis le système hôte dans le conteneur en utilisant la syntaxe suivante :</p>
-<div class="highlight"><span class="filename">Syntaxe</span><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>-v<span class="w"> </span>&lt;chemin_extérieur&gt;:&lt;chemin_intérieur&gt;
+<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>-v<span class="w"> </span>&lt;outside_path&gt;:&lt;inside_path&gt;
 </code></pre></div>
 <p>Dans notre cas, <code>&lt;chemin_extérieur&gt;</code> sera le répertoire de travail actuel, donc nous pouvons simplement utiliser un point (<code>.</code>), et <code>&lt;chemin_intérieur&gt;</code> est juste un alias que nous inventons ; appelons-le <code>/my_project</code> (le chemin intérieur doit être absolu).</p>
 <p>Pour monter un volume, nous remplaçons les chemins et ajoutons l'argument de montage de volume à la commande docker run comme suit :</p>
@@ -4826,7 +4826,7 @@ Mais puisque nous n'avons pas accès au système de fichiers, nous ne pouvons pa
 <div class="highlight"><span class="filename">data/greetings.csv</span><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go"> ____________________</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="go">/ Hello,English,123  \</span>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">| Bonjour,French,456 |</span>
-<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="go">\ Holà,Spanish,789   /</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="go">\ Hola,Spanish,789   /</span>
 <a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="go">--------------------</span>
 <a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="go">  \                                  ,+*^^*+___+++_</span>
 <a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="go">  \                           ,*^^^^              )</span>
@@ -5201,12 +5201,12 @@ Cela signifie que vous pouvez utiliser n'importe quelle image de conteneur que v
 
 <p>Pensez-vous que ça va fonctionner ?</p>
 <p>Supprimons les sorties publiées précédentes pour avoir une page blanche, et exécutons le workflow avec le flag <code>-resume</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>rm<span class="w"> </span>-r<span class="w"> </span>hello_containers/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>rm<span class="w"> </span>-r<span class="w"> </span>results/hello_containers/
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-containers.nf<span class="w"> </span>-resume
 </code></pre></div>
 <details class="failure">
 <summary>Sortie de la commande (éditée pour la clarté)</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>
 <a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="go">Launching `hello-containers.nf` [lonely_woese] DSL2 - revision: abf1dccf7f</span>
 <a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>
@@ -5353,7 +5353,7 @@ C'est mieux pour la modularité, la maintenance du code et la reproductibilité.
 </code></pre></div>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>
 <a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="go">Launching `hello-containers.nf` [drunk_perlman] DSL2 - revision: abf1dccf7f</span>
 <a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a>
@@ -5374,10 +5374,10 @@ Comme d'habitude, vous pouvez trouver les sorties du workflow dans le répertoir
 <a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a><span class="go">│   ├── Bonjour-output.txt</span>
 <a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a><span class="go">│   ├── COLLECTED-batch-output.txt</span>
 <a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a><span class="go">│   ├── Hello-output.txt</span>
-<a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a><span class="go">│   ├── Holà-output.txt</span>
+<a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a><span class="go">│   ├── Hola-output.txt</span>
 <a id="__codelineno-45-8" name="__codelineno-45-8" href="#__codelineno-45-8"></a><span class="go">│   ├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-45-9" name="__codelineno-45-9" href="#__codelineno-45-9"></a><span class="go">│   ├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-45-10" name="__codelineno-45-10" href="#__codelineno-45-10"></a><span class="go">│   └── UPPER-Holà-output.txt</span>
+<a id="__codelineno-45-10" name="__codelineno-45-10" href="#__codelineno-45-10"></a><span class="go">│   └── UPPER-Hola-output.txt</span>
 <a id="__codelineno-45-11" name="__codelineno-45-11" href="#__codelineno-45-11"></a><span class="go">└── batch-report.txt</span>
 </code></pre></div>
 </details>
@@ -5385,7 +5385,7 @@ Comme d'habitude, vous pouvez trouver les sorties du workflow dans le répertoir
 <details class="abstract">
 <summary>Contenu du fichier</summary>
 <div class="highlight"><span class="filename">results/hello_containers/cowpy-COLLECTED-batch-output.txt</span><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">_________</span>
-<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="go">/ HOLà    \</span>
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="go">/ HOLA    \</span>
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="go">| HELLO   |</span>
 <a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a><span class="go">\ BONJOUR /</span>
 <a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a><span class="go">---------</span>
@@ -5582,7 +5582,7 @@ Cela correspond au chemin de répertoire tronqué suivant : <code>work/98/656c6c
 Il monte également le sous-répertoire de travail correspondant dans le conteneur, définit le répertoire de travail à l'intérieur du conteneur en conséquence, et exécute notre script bash modélisé dans le fichier <code>.command.sh</code>.</p>
 <p>Tout le travail difficile que nous avons dû faire manuellement dans la première section ? Nextflow le fait pour nous en coulisses !</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a> _______________________
-<a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a>&lt; Hourra pour les robots...! &gt;
+<a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a>&lt; Hurray for robots...! &gt;
 <a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a> -----------------------
 <a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a>                                   ,-----.
 <a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a>                                   |     |
@@ -5663,7 +5663,7 @@ Que fait le flag `-v` dans une commande `docker run` ?
 - [x] Monte un volume depuis le système hôte dans le conteneur
 - [ ] Spécifie la version du conteneur
 
-En savoir plus : [1.3.4. Monter des données dans le conteneur](#134-monter-des-donnees-dans-le-conteneur)
+En savoir plus : [1.3.4. Monter des données dans le conteneur](#134-mount-data-into-the-container)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
@@ -5677,7 +5677,7 @@ En savoir plus : [1.3.4. Monter des données dans le conteneur](#134-monter-des-
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>En savoir plus : <a href="#134-monter-des-donnees-dans-le-conteneur">1.3.4. Monter des données dans le conteneur</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#134-mount-data-into-the-container">1.3.4. Monter des données dans le conteneur</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5688,7 +5688,7 @@ Pourquoi avez-vous besoin de monter des volumes lors de l'utilisation de contene
 - [x] Parce que les conteneurs sont isolés du système de fichiers hôte par défaut
 - [ ] Pour activer le réseau
 
-En savoir plus : [1.3.4. Monter des données dans le conteneur](#134-monter-des-donnees-dans-le-conteneur)
+En savoir plus : [1.3.4. Monter des données dans le conteneur](#134-mount-data-into-the-container)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
@@ -5702,7 +5702,7 @@ En savoir plus : [1.3.4. Monter des données dans le conteneur](#134-monter-des-
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>En savoir plus : <a href="#134-monter-des-donnees-dans-le-conteneur">1.3.4. Monter des données dans le conteneur</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#134-mount-data-into-the-container">1.3.4. Monter des données dans le conteneur</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5713,7 +5713,7 @@ Comment spécifiez-vous un conteneur pour un processus Nextflow ?
 - [x] `container 'container-uri'`
 - [ ] `use 'container-uri'`
 
-En savoir plus : [2.3.1. Spécifier un conteneur pour cowpy](#231-specifier-un-conteneur-pour-cowpy)
+En savoir plus : [2.3.1. Spécifier un conteneur pour cowpy](#231-specify-a-container-for-cowpy)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
@@ -5727,7 +5727,7 @@ En savoir plus : [2.3.1. Spécifier un conteneur pour cowpy](#231-specifier-un-c
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>En savoir plus : <a href="#231-specifier-un-conteneur-pour-cowpy">2.3.1. Spécifier un conteneur pour cowpy</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#231-specify-a-container-for-cowpy">2.3.1. Spécifier un conteneur pour cowpy</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5738,7 +5738,7 @@ Quel paramètre `nextflow.config` active Docker pour votre workflow ?
 - [ ] `#!groovy container.engine = 'docker'`
 - [ ] `#!groovy docker.activate = true`
 
-En savoir plus : [2.3.2. Activer l'utilisation de Docker via le fichier `nextflow.config`](#232-activer-lutilisation-de-docker-via-le-fichier-nextflowconfig)
+En savoir plus : [2.3.2. Activer l'utilisation de Docker via le fichier `nextflow.config`](#232-enable-use-of-docker-via-the-nextflowconfig-file)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
@@ -5752,7 +5752,7 @@ En savoir plus : [2.3.2. Activer l'utilisation de Docker via le fichier `nextflo
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>En savoir plus : <a href="#232-activer-lutilisation-de-docker-via-le-fichier-nextflowconfig">2.3.2. Activer l'utilisation de Docker via le fichier <code>nextflow.config</code></a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#232-enable-use-of-docker-via-the-nextflowconfig-file">2.3.2. Activer l'utilisation de Docker via le fichier <code>nextflow.config</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5763,7 +5763,7 @@ Que gère automatiquement Nextflow lors de l'exécution d'un processus dans un c
 - [x] Exécuter le script du processus à l'intérieur du conteneur
 - [x] Nettoyer l'instance du conteneur après l'exécution
 
-En savoir plus : [2.3.4. Inspecter comment Nextflow a lancé la tâche conteneurisée](#234-inspecter-comment-nextflow-a-lance-la-tache-contenerisee)
+En savoir plus : [2.3.4. Inspecter comment Nextflow a lancé la tâche conteneurisée](#234-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -5777,7 +5777,7 @@ En savoir plus : [2.3.4. Inspecter comment Nextflow a lancé la tâche conteneur
         <div class="quiz-feedback hidden"></div>
         <button type="submit" class="quiz-button">Soumettre</button>
     </form>
-    <section class="content hidden"><p>En savoir plus : <a href="#234-inspecter-comment-nextflow-a-lance-la-tache-contenerisee">2.3.4. Inspecter comment Nextflow a lancé la tâche conteneurisée</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#234-inspect-how-nextflow-launched-the-containerized-task">2.3.4. Inspecter comment Nextflow a lancé la tâche conteneurisée</a></p></section>
 </div><div id="quiz-progress-sidebar" aria-label="Progression du quiz" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">

@@ -2342,7 +2342,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Premiers pas
   
 
     
@@ -2370,7 +2370,7 @@
   <span class="md-ellipsis">
     
   
-    Environnement de développement
+    Index
   
 
     
@@ -2398,7 +2398,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Modèles de Scripting Essentiels
   
 
     
@@ -2538,7 +2538,7 @@
   <span class="md-ellipsis">
     
   
-    Débogage des Workflows
+    Résolution des problèmes dans les Workflows
   
 
     
@@ -3882,7 +3882,7 @@
 <p>Une logique assez complexe avec très peu de syntaxe ici. Et vous pouvez espérons-le voir comment cela commence maintenant à évoluer. Et c'est comme ça que nous construisons vraiment la logique et la personnalisabilité de nos pipelines dans le script Nextflow.</p>
 <h2 id="34-utiliser-des-valeurs-par-defaut-pour-les-parametres-de-ligne-de-commande">3.4. Utiliser des valeurs par défaut pour les paramètres de ligne de commande<a class="headerlink" href="#34-utiliser-des-valeurs-par-defaut-pour-les-parametres-de-ligne-de-commande" title="Permanent link">&para;</a></h2>
 <p>D'accord, c'est génial. Le problème maintenant cependant est que chaque fois que j'exécute ce pipeline, je dois faire dash, input pour qu'il s'exécute.</p>
-<p>Si j'essaie d'exécuter sans ce paramètre, maintenant Nextflow va générer une erreur disant qu'il avait besoin de ce paramètre et qu'il n'a pas été défini. et donc il ne savait pas quoi faire.</p>
+<p>Si j'essaie d'exécuter sans ce paramètre, maintenant Nextflow va générer une erreur disant qu'il avait besoin de ce paramètre et qu'il n'a pas été défini. Et donc il ne savait pas quoi faire.</p>
 <p>C'est une nouvelle chose cool, au fait. Dans le passé, Nextflow aurait juste exécuté avec une chaîne vide, et vous auriez eu toutes sortes d'erreurs bizarres, qui auraient été difficiles à comprendre. Mais dans le nouvel analyseur syntaxique Nextflow, il est un peu plus prudent et il vous le dit tout de suite.</p>
 <p>Donc nous ne voulons pas toujours spécifier chaque option. C'est une bonne pratique de spécifier des valeurs par défaut sensées. Alors comment faisons-nous cela dans notre script ?</p>
 <p>Vous remarquerez que lorsque nous avons écrit cela, nous avons juste mis <em>params.input</em> directement là où nous l'utilisons. Donc la solution évidente est que nous définissons une valeur par défaut, et nous faisons cela en haut du script ici dans un bloc params spécial dans le workflow. C'est dans le script workflow ici.</p>
@@ -3890,8 +3890,8 @@
 <p>Et ensuite après ce caractère deux-points, nous définissons un type de la variable. Vous n'êtes pas obligé·e de faire cela, vous pouvez juste le laisser vide, mais c'est vraiment bien. Cela dit à Nextflow que nous attendons une chaîne de caractères et de la traiter comme telle.</p>
 <p>Si nous voulons un nombre à la place, par exemple, nous pourrions écrire float, et cela dirait que nous voulons un nombre à virgule flottante. Et si nous essayons d'exécuter avec cela, alors il générera une erreur. Si nous lui donnons une chaîne, qui n'est pas un float. Et il le passera également comme tel. Comme si nous faisons string, alors il sait que c'est une chaîne. Et même s'il a des zéros en tête et est entièrement numérique, il le passera quand même comme une vraie chaîne.</p>
 <p>Donc cette sécurité de type est une fonctionnalité très nouvelle de Nextflow, mais vraiment puissante pour rendre votre code plus sûr à écrire et à exécuter.</p>
-<p>Ensuite après cela nous avons un symbole égal puis la valeur par défaut ici. Nextflow a été écrit à Barcelone à l'origine, donc il semble approprié que nous ayons un peu d'espagnol ici, <em>« Holà mundo ! »</em> comme valeur par défaut.</p>
-<p>Bon je vais enregistrer ce script, retourner, exécuter le script à nouveau sans <em>--input</em>. Et cette fois il devrait s'exécuter et il créera notre nouveau fichier dans <em>results</em>. Et dans ce fichier maintenant il dit <em>« Holà mundo ! »</em>.</p>
+<p>Ensuite après cela nous avons un symbole égal puis la valeur par défaut ici. Nextflow a été écrit à Barcelone à l'origine, donc il semble approprié que nous ayons un peu d'espagnol ici, <em>« Hola mundo ! »</em> comme valeur par défaut.</p>
+<p>Bon je vais enregistrer ce script, retourner, exécuter le script à nouveau sans <em>--input</em>. Et cette fois il devrait s'exécuter et il créera notre nouveau fichier dans <em>results</em>. Et dans ce fichier maintenant il dit <em>« Hola mundo ! »</em>.</p>
 <p>Ce n'est qu'une valeur par défaut cependant, donc cela ne signifie pas que nous ne pouvons toujours pas faire la même chose qu'avant. Si je retourne et trouve mon ancien script ici, <em>« Hej Världen »</em>, parce que je fais <em>--input</em> sur la ligne de commande, cela écrasera cette valeur par défaut et utilisera cela à nouveau dans le fichier output.txt.</p>
 <p>Donc cela dans le script n'est que la valeur par défaut que je définis.</p>
 <p>Au fur et à mesure que nous construisons notre workflow pour qu'il soit plus complexe et inclue plus de paramètres, ce bloc params en haut du script commencera à tous les collecter en un seul endroit.</p>

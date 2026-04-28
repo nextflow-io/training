@@ -491,7 +491,7 @@
   <span class="md-ellipsis">
     
   
-    Startseite
+    Home
   
 
     
@@ -1614,7 +1614,7 @@
   <span class="md-ellipsis">
     
   
-    Teil 2: Variantenerkennung pro Probe
+    02 per sample variant calling
   
 
     
@@ -2348,7 +2348,7 @@
   <span class="md-ellipsis">
     
   
-    Orientierung
+    Erste Schritte
   
 
     
@@ -2404,7 +2404,7 @@
   <span class="md-ellipsis">
     
   
-    Wesentliche Nextflow-Scripting-Muster
+    Wesentliche Scripting-Muster
   
 
     
@@ -3157,7 +3157,7 @@
   <span class="md-ellipsis">
     
   
-    Testen mit nf-test
+    Index
   
 
     
@@ -4631,7 +4631,7 @@ Wir beginnen mit einer CSV-Datei, die Probeninformationen und zugehörige Datend
 <h3 id="voraussetzungen">Voraussetzungen<a class="headerlink" href="#voraussetzungen" title="Permanent link">&para;</a></h3>
 <p>Bevor du diese Side Quest in Angriff nimmst, solltest du:</p>
 <ul>
-<li>Das Tutorial <a href="../hello_nextflow/README.md">Hello Nextflow</a> oder einen gleichwertigen Einsteigerkurs abgeschlossen haben.</li>
+<li>Das Tutorial <a href="../../hello_nextflow/">Hello Nextflow</a> oder einen gleichwertigen Einsteigerkurs abgeschlossen haben.</li>
 <li>Mit grundlegenden Nextflow-Konzepten und -Mechanismen vertraut sein (Prozesse, Kanäle, Operatoren, Arbeiten mit Dateien, Metadaten)</li>
 </ul>
 <p><strong>Optional:</strong> Wir empfehlen, zuerst die Side Quest <a href="../metadata/">Metadata in workflows</a> abzuschließen.
@@ -4639,7 +4639,7 @@ Diese behandelt die Grundlagen des Lesens von CSV-Dateien mit <code>splitCsv</co
 <hr />
 <h2 id="0-erste-schritte">0. Erste Schritte<a class="headerlink" href="#0-erste-schritte" title="Permanent link">&para;</a></h2>
 <h4 id="trainings-codespace-offnen">Trainings-Codespace öffnen<a class="headerlink" href="#trainings-codespace-offnen" title="Permanent link">&para;</a></h4>
-<p>Falls du das noch nicht getan hast, öffne die Trainingsumgebung wie in der <a href="../envsetup/index.md">Umgebung einrichten</a> beschrieben.</p>
+<p>Falls du das noch nicht getan hast, öffne die Trainingsumgebung wie in der <a href="../../envsetup/">Umgebung einrichten</a> beschrieben.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h4 id="in-das-projektverzeichnis-wechseln">In das Projektverzeichnis wechseln<a class="headerlink" href="#in-das-projektverzeichnis-wechseln" title="Permanent link">&para;</a></h4>
 <p>Wechseln wir in das Verzeichnis, in dem sich die Dateien für dieses Tutorial befinden.</p>
@@ -4648,6 +4648,7 @@ Diese behandelt die Grundlagen des Lesens von CSV-Dateien mit <code>splitCsv</co
 <p>Du kannst VSCode so einstellen, dass es sich auf dieses Verzeichnis konzentriert:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>code<span class="w"> </span>.
 </code></pre></div>
+<p>Der Editor öffnet sich mit dem Projektverzeichnis im Fokus.</p>
 <h4 id="die-materialien-ansehen">Die Materialien ansehen<a class="headerlink" href="#die-materialien-ansehen" title="Permanent link">&para;</a></h4>
 <p>Du findest eine Haupt-Workflow-Datei und ein <code>data</code>-Verzeichnis mit einem Samplesheet namens <code>samplesheet.csv</code>.</p>
 <div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">.</span>
@@ -4674,6 +4675,7 @@ Falls du nicht mit der Krebsanalyse vertraut bist: Dies entspricht einem experim
 <p class="admonition-title">Hinweis</p>
 <p>Mach dir keine Sorgen, wenn du mit diesem experimentellen Design nicht vertraut bist – es ist nicht entscheidend für das Verständnis dieses Tutorials.</p>
 </div>
+<p>Nachdem wir den Inhalt der Daten verstanden haben, können wir uns ansehen, was der Workflow leisten soll.</p>
 <h4 id="die-aufgabe-ansehen">Die Aufgabe ansehen<a class="headerlink" href="#die-aufgabe-ansehen" title="Permanent link">&para;</a></h4>
 <p>Deine Aufgabe ist es, einen Nextflow-Workflow zu schreiben, der:</p>
 <ol>
@@ -4745,7 +4747,7 @@ Falls du nicht mit der Krebsanalyse vertraut bist: Dies entspricht einem experim
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
@@ -4803,7 +4805,7 @@ Falls du nicht mit der Krebsanalyse vertraut bist: Dies entspricht einem experim
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="go">Launching `main.nf` [admiring_brown] DSL2 - revision: 194d61704d</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
@@ -4819,6 +4821,7 @@ Falls du nicht mit der Krebsanalyse vertraut bist: Dies entspricht einem experim
 <p>Dies wird mit der einzelnen Closure erreicht, die wir oben eingeführt haben:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="w">    </span><span class="o">.</span><span class="na">filter</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
+<p>Dieser Filter wird direkt in der Kanaloperation verkettet.</p>
 <h3 id="22-separate-gefilterte-kanale-erstellen">2.2. Separate gefilterte Kanäle erstellen<a class="headerlink" href="#22-separate-gefilterte-kanale-erstellen" title="Permanent link">&para;</a></h3>
 <p>Derzeit wenden wir den Filter auf den direkt aus der CSV erstellten Kanal an, aber wir möchten diesen auf mehr als eine Weise filtern. Schreiben wir die Logik also um, um einen separaten gefilterten Kanal für normale Proben zu erstellen:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Danach</label><label for="__tabbed_3_2">Vorher</label></div>
@@ -4866,7 +4869,7 @@ Falls du nicht mit der Krebsanalyse vertraut bist: Dies entspricht einem experim
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74</span>
 <a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
@@ -4914,7 +4917,7 @@ Falls du nicht mit der Krebsanalyse vertraut bist: Dies entspricht einem experim
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
@@ -4928,7 +4931,7 @@ Falls du nicht mit der Krebsanalyse vertraut bist: Dies entspricht einem experim
 <a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="go">Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<p>Wir haben die normalen und Tumorproben in zwei verschiedene Kanäle getrennt und eine Closure verwendet, die an <code>view()</code> übergeben wird, um sie in der Ausgabe unterschiedlich zu kennzeichnen: <code>ch_tumor_samples.view{'Tumor sample: ' + it}</code>.</p>
+<p>Wir haben die normalen und Tumorproben in zwei verschiedene Kanäle getrennt und eine Closure verwendet, die an <code>view()</code> übergeben wird, um sie in der Ausgabe unterschiedlich zu kennzeichnen: <code class="highlight"><span class="n">ch_tumor_samples</span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Tumor sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span></code>.</p>
 <h3 id="fazit">Fazit<a class="headerlink" href="#fazit" title="Permanent link">&para;</a></h3>
 <p>In diesem Abschnitt hast du gelernt:</p>
 <ul>
@@ -4949,7 +4952,7 @@ Falls du nicht mit der Krebsanalyse vertraut bist: Dies entspricht einem experim
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
@@ -5014,7 +5017,7 @@ Falls du nicht mit der Krebsanalyse vertraut bist: Dies entspricht einem experim
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
 <a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="go">Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d</span>
 <a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>
@@ -5082,7 +5085,7 @@ Falls du nicht mit der Krebsanalyse vertraut bist: Dies entspricht einem experim
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="go">Launching `main.nf` [soggy_wiles] DSL2 - revision: 3bc1979889</span>
 <a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>
@@ -5148,7 +5151,7 @@ Mit diesem Wissen können wir Kanäle erfolgreich basierend auf einem gemeinsame
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">Launching `main.nf` [prickly_wing] DSL2 - revision: 3bebf22dee</span>
 <a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>
@@ -5199,7 +5202,7 @@ Mit diesem Wissen können wir Kanäle erfolgreich basierend auf einem gemeinsame
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>
 <a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="go">Launching `main.nf` [reverent_wing] DSL2 - revision: 847016c3b7</span>
 <a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a>
@@ -5299,7 +5302,7 @@ Mit diesem Wissen können wir Kanäle erfolgreich basierend auf einem gemeinsame
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>
 <a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="go">Launching `main.nf` [angry_meninsky] DSL2 - revision: 2edc226b1d</span>
 <a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a>
@@ -5378,7 +5381,7 @@ Mit diesem Wissen können wir Kanäle erfolgreich basierend auf einem gemeinsame
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>
 <a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a><span class="go">Launching `main.nf` [confident_leavitt] DSL2 - revision: a2303895bd</span>
 <a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a>
@@ -5388,6 +5391,7 @@ Mit diesem Wissen können wir Kanäle erfolgreich basierend auf einem gemeinsame
 <a id="__codelineno-54-8" name="__codelineno-54-8" href="#__codelineno-54-8"></a><span class="go">[[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
+<p>Jedes Tupel enthält jetzt nur noch den Gruppierungsschlüssel und die beiden Dateipfade, ohne wiederholte Felder.</p>
 <h3 id="fazit_1">Fazit<a class="headerlink" href="#fazit_1" title="Permanent link">&para;</a></h3>
 <p>In diesem Abschnitt hast du gelernt:</p>
 <ul>
@@ -5447,7 +5451,7 @@ Mit diesem Wissen können wir Kanäle erfolgreich basierend auf einem gemeinsame
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a>
 <a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="go">Launching `main.nf` [mighty_tesla] DSL2 - revision: ae013ab70b</span>
 <a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a>
@@ -5522,7 +5526,7 @@ Mit diesem Wissen können wir Kanäle erfolgreich basierend auf einem gemeinsame
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>
 <a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a><span class="go">Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd</span>
 <a id="__codelineno-67-4" name="__codelineno-67-4" href="#__codelineno-67-4"></a>
@@ -5638,7 +5642,7 @@ Mit diesem Wissen können wir Kanäle erfolgreich basierend auf einem gemeinsame
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-72-2" name="__codelineno-72-2" href="#__codelineno-72-2"></a>
 <a id="__codelineno-72-3" name="__codelineno-72-3" href="#__codelineno-72-3"></a><span class="go">Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76</span>
 <a id="__codelineno-72-4" name="__codelineno-72-4" href="#__codelineno-72-4"></a>
@@ -5713,7 +5717,7 @@ Mit diesem Wissen können wir Kanäle erfolgreich basierend auf einem gemeinsame
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a>
 <a id="__codelineno-76-3" name="__codelineno-76-3" href="#__codelineno-76-3"></a><span class="go">Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d</span>
 <a id="__codelineno-76-4" name="__codelineno-76-4" href="#__codelineno-76-4"></a>
@@ -5733,6 +5737,7 @@ Mit diesem Wissen können wir Kanäle erfolgreich basierend auf einem gemeinsame
 <p class="admonition-title">Hinweis</p>
 <p><a href="https://www.nextflow.io/docs/latest/reference/operator.html#transpose"><code>transpose</code></a> ist das Gegenteil von groupTuple. Es entpackt die Elemente in einem Kanal und flacht sie ab. Versuche, <code>transpose</code> hinzuzufügen und die oben durchgeführte Gruppierung rückgängig zu machen!</p>
 </div>
+<p>Beide Richtungen der Operation – Gruppieren und Aufheben der Gruppierung – stehen dir jetzt zur Verfügung.</p>
 <h3 id="fazit_3">Fazit<a class="headerlink" href="#fazit_3" title="Permanent link">&para;</a></h3>
 <p>In diesem Abschnitt hast du gelernt:</p>
 <ul>
@@ -7585,13 +7590,13 @@ window.mkdocsQuizConfig = {
         
         
           
-          <a href="../nf_test/" class="md-footer__link md-footer__link--next" aria-label="Weiter: Testen mit nf-test">
+          <a href="../nf_test/" class="md-footer__link md-footer__link--next" aria-label="Weiter: Index">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Weiter
               </span>
               <div class="md-ellipsis">
-                Testen mit nf-test
+                Index
               </div>
             </div>
             <div class="md-footer__button md-icon">

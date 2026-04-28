@@ -47,7 +47,7 @@
     
     
       
-        <title>Teil 2: Variantenerkennung pro Probe - training.nextflow.io</title>
+        <title>02 per sample variant calling - training.nextflow.io</title>
       
     
     
@@ -254,7 +254,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Teil 2: Variantenerkennung pro Probe
+              02 per sample variant calling
             
           </span>
         </div>
@@ -491,7 +491,7 @@
   <span class="md-ellipsis">
     
   
-    Startseite
+    Home
   
 
     
@@ -1627,7 +1627,7 @@
   <span class="md-ellipsis">
     
   
-    Teil 2: Variantenerkennung pro Probe
+    02 per sample variant calling
   
 
     
@@ -1645,7 +1645,7 @@
   <span class="md-ellipsis">
     
   
-    Teil 2: Variantenerkennung pro Probe
+    02 per sample variant calling
   
 
     
@@ -3221,7 +3221,7 @@
   <span class="md-ellipsis">
     
   
-    Orientierung
+    Erste Schritte
   
 
     
@@ -3277,7 +3277,7 @@
   <span class="md-ellipsis">
     
   
-    Wesentliche Nextflow-Scripting-Muster
+    Wesentliche Scripting-Muster
   
 
     
@@ -3389,7 +3389,7 @@
   <span class="md-ellipsis">
     
   
-    Testen mit nf-test
+    Index
   
 
     
@@ -5072,6 +5072,7 @@
 </a>
  
 
+<p>I need to update only the sections affected by the diff - specifically, changing <code>version 25.10.2</code> to <code>version 25.10.4</code> in console output blocks, and updating one link from <code>../../side_quests/working_with_files.md</code> to <code>../../side_quests/working_with_files/index.md</code>.</p>
 <h1 id="teil-2-variantenerkennung-pro-probe">Teil 2: Variantenerkennung pro Probe<a class="headerlink" href="#teil-2-variantenerkennung-pro-probe" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> KI-gestützte Übersetzung - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">mehr erfahren &amp; Verbesserungen vorschlagen</a></span></p>
 <p>In Teil 1 hast du die Samtools- und GATK-Befehle manuell in ihren jeweiligen Containern getestet.
@@ -5513,7 +5514,7 @@ Symlinks funktionieren nicht mehr, wenn du dein <code>work</code>-Verzeichnis au
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">┃ Launching `genomics.nf` [reverent_sinoussi] DSL2 - revision: 41d43ad7fe</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
@@ -5688,7 +5689,7 @@ Wir müssen Parameter dafür deklarieren, Standardwerte zum Testprofil hinzufüg
 </div>
 </div>
 <p>Die <code>file()</code>-Syntax teilt Nextflow explizit mit, diese Eingaben als Dateipfade zu behandeln.
-Mehr darüber erfährst du in der Side Quest <a href="../../side_quests/working_with_files.md">Working with files</a>.</p>
+Mehr darüber erfährst du in der Side Quest <a href="../../../side_quests/working_with_files/">Working with files</a>.</p>
 <h3 id="22-den-variantenerkennungsprozess-schreiben-und-im-workflow-aufrufen">2.2. Den Variantenerkennungsprozess schreiben und im Workflow aufrufen<a class="headerlink" href="#22-den-variantenerkennungsprozess-schreiben-und-im-workflow-aufrufen" title="Permanent link">&para;</a></h3>
 <p>Wir müssen die Prozessdefinition in der Moduldatei schreiben, sie mit einer Include-Anweisung in den Workflow importieren und sie auf die Eingabe-Reads plus die Ausgabe des Indizierungsschritts und die Hilfsdateien anwenden.</p>
 <h4 id="221-das-modul-fur-den-variantenerkennungsprozess-ausfullen">2.2.1. Das Modul für den Variantenerkennungsprozess ausfüllen<a class="headerlink" href="#221-das-modul-fur-den-variantenerkennungsprozess-ausfullen" title="Permanent link">&para;</a></h4>
@@ -5948,7 +5949,7 @@ In Nextflow sind Eingaben positionsabhängig, was bedeutet, dass du <em>dieselbe
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>
 <a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="go">┃ Launching `genomics.nf` [grave_volta] DSL2 - revision: 4790abc96a</span>
 <a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a>
@@ -6065,7 +6066,7 @@ Dies ist eine schnelle Möglichkeit, die Multi-Proben-Ausführung zu testen; im 
 <p>Lustige Sache: Dies <em>könnte funktionieren</em>, ODER es <em>könnte fehlschlagen</em>. Hier ist zum Beispiel ein Lauf, der erfolgreich war:</p>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>
 <a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="go">┃ Launching `genomics.nf` [peaceful_yalow] DSL2 - revision: a256d113ad</span>
 <a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>
@@ -6077,7 +6078,7 @@ Dies ist eine schnelle Möglichkeit, die Multi-Proben-Ausführung zu testen; im 
 <p>Wenn dein Workflow-Lauf erfolgreich war, führe ihn erneut aus, bis du einen Fehler wie diesen erhältst:</p>
 <details class="failure">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>
 <a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a><span class="go">┃ Launching `genomics.nf` [loving_pasteur] DSL2 - revision: d2a8e63076</span>
 <a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a>
@@ -6341,7 +6342,7 @@ Sie werden jedoch deine Konsolenausgabe überladen, daher empfehlen wir, sie zu 
 <p>Diesmal (und jedes Mal) sollte alles korrekt laufen:</p>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>
 <a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a><span class="go">┃ Launching `genomics.nf` [special_goldstine] DSL2 - revision: 4cbbf6ea3e</span>
 <a id="__codelineno-67-4" name="__codelineno-67-4" href="#__codelineno-67-4"></a>
@@ -6496,7 +6497,7 @@ Das ermöglicht es uns, Spalten in der <code>map</code>-Operation nach Namen zu 
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a>
 <a id="__codelineno-77-3" name="__codelineno-77-3" href="#__codelineno-77-3"></a><span class="go">┃ Launching `genomics.nf` [sick_albattani] DSL2 - revision: 46d84642f6</span>
 <a id="__codelineno-77-4" name="__codelineno-77-4" href="#__codelineno-77-4"></a>

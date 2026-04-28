@@ -3096,7 +3096,7 @@
   <span class="md-ellipsis">
     
   
-    Orientação
+    Primeiros passos
   
 
     
@@ -3152,7 +3152,7 @@
   <span class="md-ellipsis">
     
   
-    Padrões Essenciais de Scripting em Nextflow
+    Padrões Essenciais de Scripting
   
 
     
@@ -3180,7 +3180,7 @@
   <span class="md-ellipsis">
     
   
-    Processamento de entrada de arquivos
+    Processamento de Entrada de Arquivos
   
 
     
@@ -3208,7 +3208,7 @@
   <span class="md-ellipsis">
     
   
-    Metadados e meta maps
+    Metadados e Meta Maps
   
 
     
@@ -3264,7 +3264,7 @@
   <span class="md-ellipsis">
     
   
-    Testando com nf-test
+    Index
   
 
     
@@ -3292,7 +3292,7 @@
   <span class="md-ellipsis">
     
   
-    Depurando Fluxos de Trabalho
+    Solução de Problemas em Fluxos de Trabalho
   
 
     
@@ -4984,7 +4984,7 @@ O URI do contêiner era <code>community.wave.seqera.io/library/trim-galore:0.6.1
 <h3 id="11-configurar-a-entrada">1.1. Configurar a entrada<a class="headerlink" href="#11-configurar-a-entrada" title="Permanent link">&para;</a></h3>
 <p>Precisamos declarar um parâmetro de entrada, criar um perfil de teste para fornecer um valor padrão conveniente e criar um canal de entrada.</p>
 <h4 id="111-adicionar-uma-declaracao-de-parametro-de-entrada">1.1.1. Adicionar uma declaração de parâmetro de entrada<a class="headerlink" href="#111-adicionar-uma-declaracao-de-parametro-de-entrada" title="Permanent link">&para;</a></h4>
-<p>Em <code>rnaseq.nf</code>, na seção <code>Pipeline parameters</code>, declare um parâmetro chamado <code>input</code> com o tipo <code>Path</code>.</p>
+<p>Em <code>rnaseq.nf</code>, na seção <code>Pipeline parameters</code>, declare um parâmetro chamado <code>reads</code> com o tipo <code>Path</code>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Depois</label><label for="__tabbed_1_2">Antes</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5022,7 +5022,7 @@ Existem várias opções para fornecer um valor padrão; aqui usamos um perfil d
 <h4 id="112-criar-um-perfil-de-teste-com-um-valor-padrao-em-nextflowconfig">1.1.2. Criar um perfil de teste com um valor padrão em <code>nextflow.config</code><a class="headerlink" href="#112-criar-um-perfil-de-teste-com-um-valor-padrao-em-nextflowconfig" title="Permanent link">&para;</a></h4>
 <p>Um perfil de teste fornece valores padrão convenientes para experimentar um fluxo de trabalho sem especificar entradas na linha de comando.
 Esta é uma convenção comum no ecossistema Nextflow (veja <a href="../../../hello_nextflow/06_hello_config/">Hello Config</a> para mais detalhes).</p>
-<p>Adicione um bloco <code>profiles</code> ao <code>nextflow.config</code> com um perfil <code>test</code> que define o parâmetro <code>input</code> para um dos arquivos FASTQ de teste.</p>
+<p>Adicione um bloco <code>profiles</code> ao <code>nextflow.config</code> com um perfil <code>test</code> que define o parâmetro <code>reads</code> para um dos arquivos FASTQ de teste.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Depois</label><label for="__tabbed_2_2">Antes</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5348,7 +5348,7 @@ Links simbólicos quebrarão quando você limpar seu diretório <code>work</code
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `rnaseq.nf` [mad_lorenz] DSL2 - revision: 5846a164d2</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
@@ -5361,7 +5361,7 @@ Se você pulou essa parte, o Nextflow baixará o contêiner para você; você n�
 <p>Você pode verificar as saídas no diretório results.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>ls<span class="w"> </span>results/fastqc
 </code></pre></div>
-<div class="highlight"><span class="filename">Saída</span><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="go">ENCSR000COQ1_1_fastqc.html  ENCSR000COQ1_1_fastqc.zip</span>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="go">ENCSR000COQ1_1_fastqc.html  ENCSR000COQ1_1_fastqc.zip</span>
 </code></pre></div>
 <p>Os relatórios de QC para a amostra agora estão publicados no subdiretório <code>fastqc/</code>.</p>
 <h3 id="conclusao">Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h3>
@@ -5665,7 +5665,7 @@ A flag <code>--fastqc</code> diz ao Trim Galore para executar automaticamente o 
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>
 <a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="go">Launching `rnaseq.nf` [gloomy_becquerel] DSL2 - revision: bb11055736</span>
 <a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>
@@ -5678,7 +5678,7 @@ A flag <code>--fastqc</code> diz ao Trim Galore para executar automaticamente o 
 <p>Você pode encontrar as saídas de corte no diretório results.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>ls<span class="w"> </span>results/trimming
 </code></pre></div>
-<div class="highlight"><span class="filename">Saída</span><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="go">ENCSR000COQ1_1.fastq.gz_trimming_report.txt  ENCSR000COQ1_1_trimmed_fastqc.zip</span>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="go">ENCSR000COQ1_1.fastq.gz_trimming_report.txt  ENCSR000COQ1_1_trimmed_fastqc.zip</span>
 <a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="go">ENCSR000COQ1_1_trimmed_fastqc.html           ENCSR000COQ1_1_trimmed.fq.gz</span>
 </code></pre></div>
 <p>As saídas de corte e relatórios de QC pós-corte agora estão no subdiretório <code>trimming/</code>.</p>
@@ -5733,7 +5733,7 @@ O URI do contêiner era <code>community.wave.seqera.io/library/hisat2_samtools:5
 </div>
 </div>
 <h4 id="312-adicionar-o-padrao-do-indice-do-genoma-ao-perfil-de-teste">3.1.2. Adicionar o padrão do índice do genoma ao perfil de teste<a class="headerlink" href="#312-adicionar-o-padrao-do-indice-do-genoma-ao-perfil-de-teste" title="Permanent link">&para;</a></h4>
-<p>Assim como fizemos para <code>input</code> na seção 1.1.2, adicione um valor padrão para o índice do genoma ao perfil de teste em <code>nextflow.config</code>:</p>
+<p>Assim como fizemos para <code>reads</code> na seção 1.1.2, adicione um valor padrão para o índice do genoma ao perfil de teste em <code>nextflow.config</code>:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">Depois</label><label for="__tabbed_15_2">Antes</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -6104,7 +6104,7 @@ Usamos <code class="highlight"><span class="n">file</span><span class="o">(</spa
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a>
 <a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a><span class="go">Launching `rnaseq.nf` [elated_stonebraker] DSL2 - revision: e8e57d0cdd</span>
 <a id="__codelineno-57-4" name="__codelineno-57-4" href="#__codelineno-57-4"></a>
@@ -6117,7 +6117,7 @@ Usamos <code class="highlight"><span class="n">file</span><span class="o">(</spa
 <p>Você pode encontrar as saídas de alinhamento no diretório results.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>ls<span class="w"> </span>results/align
 </code></pre></div>
-<div class="highlight"><span class="filename">Saída</span><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="go">ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log</span>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="go">ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log</span>
 </code></pre></div>
 <p>Isso completa o processamento básico que precisamos aplicar a cada amostra.</p>
 <p><em>Vamos adicionar a agregação de relatórios MultiQC na Parte 3, depois de fazer o fluxo de trabalho aceitar várias amostras de uma vez.</em></p>

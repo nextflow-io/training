@@ -807,10 +807,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#riepilogo_1" class="md-nav__link">
+  <a href="#takeaway" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Riepilogo
+        Takeaway
       
     </span>
   </a>
@@ -899,7 +899,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#riepilogo_2" class="md-nav__link">
+  <a href="#riepilogo_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Riepilogo
@@ -1008,10 +1008,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#riepilogo_3" class="md-nav__link">
+  <a href="#takeaway_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Riepilogo
+        Takeaway
       
     </span>
   </a>
@@ -2948,7 +2948,7 @@
   <span class="md-ellipsis">
     
   
-    Orientamento
+    Per iniziare
   
 
     
@@ -3004,7 +3004,7 @@
   <span class="md-ellipsis">
     
   
-    Pattern Essenziali di Scripting in Nextflow
+    Pattern Essenziali di Scripting
   
 
     
@@ -3116,7 +3116,7 @@
   <span class="md-ellipsis">
     
   
-    Test con nf-test
+    Index
   
 
     
@@ -3144,7 +3144,7 @@
   <span class="md-ellipsis">
     
   
-    Debug dei Workflow
+    Risoluzione dei Problemi nei Workflow
   
 
     
@@ -4073,10 +4073,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#riepilogo_1" class="md-nav__link">
+  <a href="#takeaway" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Riepilogo
+        Takeaway
       
     </span>
   </a>
@@ -4165,7 +4165,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#riepilogo_2" class="md-nav__link">
+  <a href="#riepilogo_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Riepilogo
@@ -4274,10 +4274,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#riepilogo_3" class="md-nav__link">
+  <a href="#takeaway_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Riepilogo
+        Takeaway
       
     </span>
   </a>
@@ -4581,12 +4581,12 @@ Puoi aprirlo nell'esploratore file o dalla riga di comando usando l'utility <cod
 <p>Ti forniamo uno script di workflow chiamato <code>1-hello.nf</code> che prende un saluto in input tramite un argomento da riga di comando chiamato <code>--input</code> e produce un file di testo contenente quel saluto.</p>
 <p>Non guarderemo ancora il codice; prima vediamo come appare eseguirlo.</p>
 <h3 id="21-avvia-il-workflow-e-monitora-lesecuzione">2.1. Avvia il workflow e monitora l'esecuzione<a class="headerlink" href="#21-avvia-il-workflow-e-monitora-lesecuzione" title="Permanent link">&para;</a></h3>
-<p>Nel terminale, esegui il seguente comando:</p>
+<p>Nel terminale, esegui il seguente comando.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="m">1</span>-hello.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span>
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
@@ -4638,7 +4638,7 @@ Approfondiremo questo più avanti.</p>
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
@@ -4798,7 +4798,7 @@ Se lo apri, troverai di nuovo il saluto <code>Hello World!</code>.</p>
 </code></pre></div>
 </details>
 <p>Questo ti mostra che i risultati pubblicati verranno sovrascritti dalle esecuzioni successive, mentre le directory di attività sotto <code>work/</code> vengono preservate.</p>
-<h3 id="riepilogo_1">Riepilogo<a class="headerlink" href="#riepilogo_1" title="Permanent link">&para;</a></h3>
+<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
 <p>Sai come eseguire un semplice script Nextflow, monitorare la sua esecuzione e trovare i suoi output.</p>
 <h3 id="cosa-ce-dopo_1">Cosa c'è dopo?<a class="headerlink" href="#cosa-ce-dopo_1" title="Permanent link">&para;</a></h3>
 <p>Impara a leggere uno script Nextflow base e identificare come i suoi componenti si relazionano alla sua funzionalità.</p>
@@ -5025,7 +5025,7 @@ Vedrai anche che quando un workflow genera output multipli, ognuno viene elencat
 <p>Fino a molto recentemente, il modo stabilito per pubblicare gli output era farlo a livello di ogni singolo process usando una direttiva <code>publishDir</code>.</p>
 <p>Troverai ancora questo pattern di codice ovunque nelle pipeline Nextflow più vecchie e nei moduli di process, quindi è importante esserne consapevoli.</p>
 <p>Invece di avere un blocco <code>publish:</code> nel workflow e un blocco <code>output</code> al livello superiore, vedresti una riga <code>publishDir</code> nella definizione del process <code>sayHello</code>:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Esempio di sintassi</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Syntax example</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-28-4"> 4</a></span>
@@ -5051,7 +5051,7 @@ Vedrai anche che quando un workflow genera output multipli, ognuno viene elencat
 </code></pre></div></td></tr></table></div>
 <p>Tuttavia, non raccomandiamo di usarlo in nessun nuovo lavoro poiché verrà eventualmente vietato nelle future versioni del linguaggio Nextflow.</p>
 </details>
-<h3 id="riepilogo_2">Riepilogo<a class="headerlink" href="#riepilogo_2" title="Permanent link">&para;</a></h3>
+<h3 id="riepilogo_1">Riepilogo<a class="headerlink" href="#riepilogo_1" title="Permanent link">&para;</a></h3>
 <p>Ora sai come è strutturato un semplice workflow Nextflow, e come i componenti base si relazionano alla sua funzionalità.</p>
 <h3 id="cosa-ce-dopo_2">Cosa c'è dopo?<a class="headerlink" href="#cosa-ce-dopo_2" title="Permanent link">&para;</a></h3>
 <p>Impara a gestire le esecuzioni del tuo workflow in modo conveniente.</p>
@@ -5078,7 +5078,7 @@ Questo significa che Nextflow eseguirà solo i process che hai aggiunto o modifi
 <span class="normal"><a href="#__codelineno-30-2">2</a></span>
 <span class="normal"><a href="#__codelineno-30-3">3</a></span>
 <span class="normal"><a href="#__codelineno-30-4">4</a></span>
-<span class="normal"><a href="#__codelineno-30-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<span class="normal"><a href="#__codelineno-30-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2"></a>
 <a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="go">Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479</span>
 <a id="__codelineno-30-4" name="__codelineno-30-4"></a>
@@ -5174,7 +5174,7 @@ Nota che questo non rimuove le sottodirectory di due caratteri (come <code>eb/</
 Questo significa che rompe la capacità di Nextflow di riprendere l'esecuzione senza rieseguire i process corrispondenti.</p>
 <p>Sei responsabile di salvare tutti gli output a cui tieni! Questo è il motivo principale per cui preferiamo usare la modalità <code>copy</code> piuttosto che la modalità <code>symlink</code> per la direttiva <code>publish</code>.</p>
 </div>
-<h3 id="riepilogo_3">Riepilogo<a class="headerlink" href="#riepilogo_3" title="Permanent link">&para;</a></h3>
+<h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
 <p>Sai come rilanciare una pipeline senza ripetere step che sono già stati eseguiti in modo identico, ispezionare il log di esecuzione, e usare il comando <code>nextflow clean</code> per pulire le vecchie directory di lavoro.</p>
 <h3 id="cosa-ce-dopo_3">Cosa c'è dopo?<a class="headerlink" href="#cosa-ce-dopo_3" title="Permanent link">&para;</a></h3>
 <p>Prenditi una piccola pausa! Hai appena assorbito i blocchi costitutivi della sintassi Nextflow e le istruzioni di utilizzo base.</p>
@@ -5189,7 +5189,7 @@ Nella riga di output della console `[a3/7be2fa] SAYHELLO | 1 of 1 ✔`, cosa rap
 - [x] Il percorso troncato alla directory di lavoro dell'attività
 - [ ] Il checksum del file di output
 
-Approfondisci: [2.4. Trova l'output originale e i log nella directory `work/`](#24-trova-loutput-originale-e-i-log-nella-directory-work)
+Approfondisci: [2.4. Trova l'output originale e i log nella directory `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
@@ -5203,7 +5203,7 @@ Approfondisci: [2.4. Trova l'output originale e i log nella directory `work/`](#
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Approfondisci: <a href="#24-trova-loutput-originale-e-i-log-nella-directory-work">2.4. Trova l'output originale e i log nella directory <code>work/</code></a></p></section>
+    <section class="content hidden"><p>Approfondisci: <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.4. Trova l'output originale e i log nella directory <code>work/</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5214,7 +5214,7 @@ Qual è lo scopo del file `.command.sh` in una directory di attività?
 - [ ] Contiene messaggi di errore dalle attività fallite
 - [ ] Elenca i file di input messi in staging per l'attività
 
-Approfondisci: [2.4. Trova l'output originale e i log nella directory `work/`](#24-trova-loutput-originale-e-i-log-nella-directory-work)
+Approfondisci: [2.4. Trova l'output originale e i log nella directory `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -5228,7 +5228,7 @@ Approfondisci: [2.4. Trova l'output originale e i log nella directory `work/`](#
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Approfondisci: <a href="#24-trova-loutput-originale-e-i-log-nella-directory-work">2.4. Trova l'output originale e i log nella directory <code>work/</code></a></p></section>
+    <section class="content hidden"><p>Approfondisci: <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.4. Trova l'output originale e i log nella directory <code>work/</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5239,7 +5239,7 @@ Cosa succede ai risultati pubblicati quando riesegui un workflow senza `-resume`
 - [ ] Nextflow previene la sovrascrittura e fallisce
 - [ ] Vengono automaticamente backed up
 
-Approfondisci: [2.5. Riesegui il workflow con saluti diversi](#25-riesegui-il-workflow-con-saluti-diversi)
+Approfondisci: [2.5. Riesegui il workflow con saluti diversi](#24-re-run-the-workflow-with-different-greetings)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
@@ -5253,7 +5253,7 @@ Approfondisci: [2.5. Riesegui il workflow con saluti diversi](#25-riesegui-il-wo
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Approfondisci: <a href="#25-riesegui-il-workflow-con-saluti-diversi">2.5. Riesegui il workflow con saluti diversi</a></p></section>
+    <section class="content hidden"><p>Approfondisci: <a href="#24-re-run-the-workflow-with-different-greetings">2.5. Riesegui il workflow con saluti diversi</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5269,7 +5269,7 @@ Cosa indica questo output della console?
 - [x] Nextflow ha riutilizzato i risultati di una precedente esecuzione identica
 - [ ] L'attività è stata cancellata manualmente
 
-Approfondisci: [4.1. Rilancia un workflow con `-resume`](#41-rilancia-un-workflow-con--resume)
+Approfondisci: [4.1. Rilancia un workflow con `-resume`](#41-re-launch-a-workflow-with--resume)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
@@ -5285,7 +5285,7 @@ Approfondisci: [4.1. Rilancia un workflow con `-resume`](#41-rilancia-un-workflo
                     <div class="quiz-feedback hidden"></div>
 
                 </form>
-                <section class="content hidden"><p>Approfondisci: <a href="#41-rilancia-un-workflow-con--resume">4.1. Rilancia un workflow con <code>-resume</code></a></p></section>
+                <section class="content hidden"><p>Approfondisci: <a href="#41-re-launch-a-workflow-with--resume">4.1. Rilancia un workflow con <code>-resume</code></a></p></section>
             </div>
 
 <!-- mkdocs-quiz-source
@@ -5296,7 +5296,7 @@ Dove memorizza Nextflow la cronologia delle esecuzioni che il comando `nextflow 
 - [x] Nel file `.nextflow/history`
 - [ ] In `nextflow.config`
 
-Approfondisci: [4.2. Ispeziona il log delle esecuzioni passate](#42-ispeziona-il-log-delle-esecuzioni-passate)
+Approfondisci: [4.2. Ispeziona il log delle esecuzioni passate](#42-inspect-the-log-of-past-executions)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
@@ -5310,7 +5310,7 @@ Approfondisci: [4.2. Ispeziona il log delle esecuzioni passate](#42-ispeziona-il
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Approfondisci: <a href="#42-ispeziona-il-log-delle-esecuzioni-passate">4.2. Ispeziona il log delle esecuzioni passate</a></p></section>
+    <section class="content hidden"><p>Approfondisci: <a href="#42-inspect-the-log-of-past-executions">4.2. Ispeziona il log delle esecuzioni passate</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5321,7 +5321,7 @@ Qual è lo scopo del blocco `params` in un file di workflow?
 - [x] Dichiarare e tipizzare i parametri di input del workflow
 - [ ] Specificare le opzioni di pubblicazione dell'output
 
-Approfondisci: [3.4. Il sistema params per i parametri da riga di comando](#34-il-sistema-params-per-i-parametri-da-riga-di-comando)
+Approfondisci: [3.4. Il sistema params per i parametri da riga di comando](#34-the-params-system-of-command-line-parameters)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
@@ -5335,7 +5335,7 @@ Approfondisci: [3.4. Il sistema params per i parametri da riga di comando](#34-i
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Approfondisci: <a href="#34-il-sistema-params-per-i-parametri-da-riga-di-comando">3.4. Il sistema params per i parametri da riga di comando</a></p></section>
+    <section class="content hidden"><p>Approfondisci: <a href="#34-the-params-system-of-command-line-parameters">3.4. Il sistema params per i parametri da riga di comando</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5346,7 +5346,7 @@ Nel blocco `output` del workflow, cosa fa `mode 'copy'`?
 - [ ] Copia lo script del workflow nei risultati
 - [ ] Abilita la copia incrementale dei file
 
-Approfondisci: [3.5. La direttiva publish](#35-la-direttiva-publish)
+Approfondisci: [3.5. La direttiva publish](#35-the-publish-directive)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -5360,7 +5360,7 @@ Approfondisci: [3.5. La direttiva publish](#35-la-direttiva-publish)
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Approfondisci: <a href="#35-la-direttiva-publish">3.5. La direttiva publish</a></p></section>
+    <section class="content hidden"><p>Approfondisci: <a href="#35-the-publish-directive">3.5. La direttiva publish</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5371,7 +5371,7 @@ Qual è il flag raccomandato da usare con il comando `nextflow clean` prima di e
 - [ ] `-a` (all) per selezionare tutte le directory
 - [ ] `-q` (quiet) per sopprimere gli avvisi
 
-Approfondisci: [4.3. Elimina le vecchie directory di lavoro](#43-elimina-le-vecchie-directory-di-lavoro)
+Approfondisci: [4.3. Elimina le vecchie directory di lavoro](#43-delete-older-work-directories)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-7">
@@ -5385,7 +5385,7 @@ Approfondisci: [4.3. Elimina le vecchie directory di lavoro](#43-elimina-le-vecc
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Approfondisci: <a href="#43-elimina-le-vecchie-directory-di-lavoro">4.3. Elimina le vecchie directory di lavoro</a></p></section>
+    <section class="content hidden"><p>Approfondisci: <a href="#43-delete-older-work-directories">4.3. Elimina le vecchie directory di lavoro</a></p></section>
 </div><div id="quiz-progress-sidebar" aria-label="Quiz Progress" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">

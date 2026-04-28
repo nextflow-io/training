@@ -1495,7 +1495,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        निष्कर्ष
+        सारांश
       
     </span>
   </a>
@@ -1506,7 +1506,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        आगे क्या?
+        आगे क्या है?
       
     </span>
   </a>
@@ -1637,7 +1637,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        निष्कर्ष
+        सारांश
       
     </span>
   </a>
@@ -1648,7 +1648,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        आगे क्या?
+        आगे क्या है?
       
     </span>
   </a>
@@ -2869,7 +2869,7 @@
   <span class="md-ellipsis">
     
   
-    अभिविन्यास
+    शुरू करना
   
 
     
@@ -2925,7 +2925,7 @@
   <span class="md-ellipsis">
     
   
-    आवश्यक Nextflow स्क्रिप्टिंग पैटर्न
+    आवश्यक स्क्रिप्टिंग पैटर्न
   
 
     
@@ -3065,7 +3065,7 @@
   <span class="md-ellipsis">
     
   
-    वर्कफ़्लो डीबगिंग
+    वर्कफ़्लो की समस्या निवारण
   
 
     
@@ -3986,7 +3986,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        निष्कर्ष
+        सारांश
       
     </span>
   </a>
@@ -3997,7 +3997,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        आगे क्या?
+        आगे क्या है?
       
     </span>
   </a>
@@ -4128,7 +4128,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        निष्कर्ष
+        सारांश
       
     </span>
   </a>
@@ -4139,7 +4139,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        आगे क्या?
+        आगे क्या है?
       
     </span>
   </a>
@@ -4391,15 +4391,15 @@
 <h3 id="01">0.1. सत्यापन क्यों महत्वपूर्ण है<a class="headerlink" href="#01" title="Permanent link">&para;</a></h3>
 <p>कल्पना कीजिए कि आपका pipeline दो घंटे तक चल रहा है, केवल इसलिए क्रैश हो जाता है क्योंकि किसी उपयोगकर्ता ने गलत एक्सटेंशन वाली फ़ाइल प्रदान की थी। या घंटों तक रहस्यमय त्रुटियों को डीबग करने में बिताते हैं, केवल यह पता लगाने के लिए कि किसी पैरामीटर की स्पेलिंग गलत थी। इनपुट सत्यापन के बिना, ये परिदृश्य आम हैं।</p>
 <p>इस उदाहरण पर विचार करें:</p>
-<div class="highlight"><span class="filename">सत्यापन के बिना</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="gp">$ </span>nextflow<span class="w"> </span>run<span class="w"> </span>my-pipeline<span class="w"> </span>--input<span class="w"> </span>data.txt<span class="w"> </span>--output<span class="w"> </span>results
+<div class="highlight"><span class="filename">Without validation</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="gp">$ </span>nextflow<span class="w"> </span>run<span class="w"> </span>my-pipeline<span class="w"> </span>--input<span class="w"> </span>data.txt<span class="w"> </span>--output<span class="w"> </span>results
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">...2 घंटे बाद...</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">...2 hours later...</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="go">ERROR ~ No such file: &#39;data.fq.gz&#39;</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="go">  Expected FASTQ format but received TXT</span>
 </code></pre></div>
 <p>Pipeline ने अमान्य इनपुट स्वीकार किए और विफल होने से पहले घंटों चला। उचित सत्यापन के साथ:</p>
-<div class="highlight"><span class="filename">सत्यापन के साथ</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gp">$ </span>nextflow<span class="w"> </span>run<span class="w"> </span>my-pipeline<span class="w"> </span>--input<span class="w"> </span>data.txt<span class="w"> </span>--output<span class="w"> </span>results
+<div class="highlight"><span class="filename">With validation</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gp">$ </span>nextflow<span class="w"> </span>run<span class="w"> </span>my-pipeline<span class="w"> </span>--input<span class="w"> </span>data.txt<span class="w"> </span>--output<span class="w"> </span>results
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">ERROR ~ Validation of pipeline parameters failed!</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
@@ -4481,11 +4481,11 @@
 </div>
 <h3 id="04">0.4. सत्यापन कब होना चाहिए?<a class="headerlink" href="#04" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>graph LR
-    A[उपयोगकर्ता pipeline चलाता है] --&gt; B[पैरामीटर सत्यापन]
-    B --&gt;|✓ मान्य| C[इनपुट डेटा सत्यापन]
-    B --&gt;|✗ अमान्य| D[त्रुटि: पैरामीटर ठीक करें]
-    C --&gt;|✓ मान्य| E[Pipeline निष्पादित होता है]
-    C --&gt;|✗ अमान्य| F[त्रुटि: इनपुट डेटा ठीक करें]</code></pre>
+    A[User runs pipeline] --&gt; B[Parameter validation]
+    B --&gt;|✓ Valid| C[Input data validation]
+    B --&gt;|✗ Invalid| D[Error: Fix parameters]
+    C --&gt;|✓ Valid| E[Pipeline executes]
+    C --&gt;|✗ Invalid| F[Error: Fix input data]</code></pre>
 <p>किसी भी pipeline processes के चलने से <strong>पहले</strong> सत्यापन होना चाहिए, ताकि तेज़ फीडबैक मिल सके और कंप्यूट समय की बर्बादी से बचा जा सके।</p>
 <p>अब आइए इन सिद्धांतों को व्यावहारिक रूप से लागू करें, पैरामीटर सत्यापन से शुरू करते हुए।</p>
 <hr />
@@ -4500,29 +4500,29 @@
 </ul>
 <p>सत्यापन व्यवहार <code>nextflow.config</code> में <code>validation{}</code> स्कोप के माध्यम से नियंत्रित किया जाता है।</p>
 <p>चूंकि हम पहले पैरामीटर सत्यापन पर काम करेंगे (यह खंड) और खंड 2 तक इनपुट डेटा स्कीमा कॉन्फ़िगर नहीं करेंगे, हमें अस्थायी रूप से nf-schema को <code>input</code> पैरामीटर की फ़ाइल सामग्री को सत्यापित करने से छोड़ने के लिए कहना होगा।</p>
-<p><code>nextflow.config</code> खोलें और <code>validation</code> ब्लॉक खोजें (लगभग लाइन 246)। इनपुट फ़ाइल सत्यापन को छोड़ने के लिए <code>ignoreParams</code> जोड़ें:</p>
+<p><code>nextflow.config</code> खोलें और <code>validation</code> ब्लॉक खोजें (लगभग लाइन 247)। इनपुट फ़ाइल सत्यापन को छोड़ने के लिए <code>ignoreParams</code> जोड़ें:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">बाद में</label><label for="__tabbed_1_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-246">246</a></span>
-<span class="normal"><a href="#__codelineno-5-247">247</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-247">247</a></span>
 <span class="normal"><a href="#__codelineno-5-248">248</a></span>
 <span class="normal"><a href="#__codelineno-5-249">249</a></span>
-<span class="normal"><a href="#__codelineno-5-250">250</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-246" name="__codelineno-5-246"></a><span class="n">validation</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-5-247" name="__codelineno-5-247"></a><span class="w">    </span><span class="n">defaultIgnoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;genomes&quot;</span><span class="o">]</span>
-<a id="__codelineno-5-248" name="__codelineno-5-248"></a><span class="hll"><span class="w">    </span><span class="n">ignoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;input&#39;</span><span class="o">]</span>
-</span><a id="__codelineno-5-249" name="__codelineno-5-249"></a><span class="w">    </span><span class="n">monochromeLogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">monochrome_logs</span>
-<a id="__codelineno-5-250" name="__codelineno-5-250"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-5-250">250</a></span>
+<span class="normal"><a href="#__codelineno-5-251">251</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-247" name="__codelineno-5-247"></a><span class="n">validation</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-5-248" name="__codelineno-5-248"></a><span class="w">    </span><span class="n">defaultIgnoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;genomes&quot;</span><span class="o">]</span>
+<a id="__codelineno-5-249" name="__codelineno-5-249"></a><span class="hll"><span class="w">    </span><span class="n">ignoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;input&#39;</span><span class="o">]</span>
+</span><a id="__codelineno-5-250" name="__codelineno-5-250"></a><span class="w">    </span><span class="n">monochromeLogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">monochrome_logs</span>
+<a id="__codelineno-5-251" name="__codelineno-5-251"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-246">246</a></span>
-<span class="normal"><a href="#__codelineno-6-247">247</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-247">247</a></span>
 <span class="normal"><a href="#__codelineno-6-248">248</a></span>
-<span class="normal"><a href="#__codelineno-6-249">249</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-246" name="__codelineno-6-246"></a><span class="n">validation</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-6-247" name="__codelineno-6-247"></a><span class="w">    </span><span class="n">defaultIgnoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;genomes&quot;</span><span class="o">]</span>
-<a id="__codelineno-6-248" name="__codelineno-6-248"></a><span class="w">    </span><span class="n">monochromeLogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">monochrome_logs</span>
-<a id="__codelineno-6-249" name="__codelineno-6-249"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-6-249">249</a></span>
+<span class="normal"><a href="#__codelineno-6-250">250</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-247" name="__codelineno-6-247"></a><span class="n">validation</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-6-248" name="__codelineno-6-248"></a><span class="w">    </span><span class="n">defaultIgnoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;genomes&quot;</span><span class="o">]</span>
+<a id="__codelineno-6-249" name="__codelineno-6-249"></a><span class="w">    </span><span class="n">monochromeLogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">monochrome_logs</span>
+<a id="__codelineno-6-250" name="__codelineno-6-250"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -4544,7 +4544,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">25</span><span class="w"> </span><span class="s1">&#39;&quot;input_output_options&quot;&#39;</span><span class="w"> </span>nextflow_schema.json
 </code></pre></div>
 <p>पैरामीटर स्कीमा समूहों में व्यवस्थित है। यहां <code>input_output_options</code> समूह है:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/nextflow_schema.json (अंश)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/nextflow_schema.json (excerpt)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-8-10">10</a></span>
 <span class="normal"><a href="#__codelineno-8-11">11</a></span>
@@ -4605,27 +4605,27 @@
 <li><strong><code>required</code></strong>: पैरामीटर नामों की सरणी जो प्रदान की जानी चाहिए</li>
 <li><strong><code>mimetype</code></strong>: सत्यापन के लिए अपेक्षित फ़ाइल mimetype</li>
 </ul>
-<p>यदि आपकी नज़र तेज़ है, तो आप देख सकते हैं कि जिस <code>batch</code> इनपुट पैरामीटर का हम उपयोग कर रहे हैं वह अभी तक स्कीमा में परिभाषित नहीं है।
+<p>यदि तुम्हारी नज़र तेज़ है, तो तुम देख सकते हो कि जिस <code>batch</code> इनपुट पैरामीटर का हम उपयोग कर रहे हैं वह अभी तक स्कीमा में परिभाषित नहीं है।
 हम इसे अगले खंड में जोड़ने वाले हैं।</p>
 <details class="info">
 <summary>स्कीमा पैरामीटर कहां से आते हैं?</summary>
 <p>स्कीमा सत्यापन पैरामीटर परिभाषाओं के लिए आधार के रूप में <code>nextflow.config</code> का उपयोग करता है।
-आपकी workflow स्क्रिप्ट में कहीं और घोषित पैरामीटर (जैसे <code>main.nf</code> या मॉड्यूल फ़ाइलों में) स्कीमा validator द्वारा स्वचालित रूप से <strong>नहीं</strong> उठाए जाते हैं।</p>
-<p>इसका मतलब है कि आपको हमेशा अपने pipeline पैरामीटर <code>nextflow.config</code> में घोषित करने चाहिए, और फिर उनके सत्यापन नियम <code>nextflow_schema.json</code> में परिभाषित करने चाहिए।</p>
+तुम्हारी workflow स्क्रिप्ट में कहीं और घोषित पैरामीटर (जैसे <code>main.nf</code> या मॉड्यूल फ़ाइलों में) स्कीमा validator द्वारा स्वचालित रूप से <strong>नहीं</strong> उठाए जाते हैं।</p>
+<p>इसका मतलब है कि तुम्हें हमेशा अपने pipeline पैरामीटर <code>nextflow.config</code> में घोषित करने चाहिए, और फिर उनके सत्यापन नियम <code>nextflow_schema.json</code> में परिभाषित करने चाहिए।</p>
 </details>
 <h3 id="13-batch">1.3. batch पैरामीटर जोड़ें<a class="headerlink" href="#13-batch" title="Permanent link">&para;</a></h3>
 <p>जबकि स्कीमा एक JSON फ़ाइल है जिसे मैन्युअल रूप से संपादित किया जा सकता है, <strong>मैन्युअल संपादन त्रुटि-प्रवण है और अनुशंसित नहीं है</strong>।
-इसके बजाय, nf-core एक इंटरैक्टिव GUI टूल प्रदान करता है जो आपके लिए JSON Schema सिंटैक्स को संभालता है और आपके परिवर्तनों को सत्यापित करता है:</p>
+इसके बजाय, nf-core एक इंटरैक्टिव GUI टूल प्रदान करता है जो तुम्हारे लिए JSON Schema सिंटैक्स को संभालता है और तुम्हारे परिवर्तनों को सत्यापित करता है:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>nf-core<span class="w"> </span>pipelines<span class="w"> </span>schema<span class="w"> </span>build
 </code></pre></div>
-<p>आपको कुछ इस तरह दिखना चाहिए:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">                                      ,--./,-.</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="go">      ___     __   __   __   ___     /,-._.--\</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="go">|\ | |__  __ /  ` /  \ |__) |__         }  {</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="go">| \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="go">                                      `._,._,&#39;</span>
+<p>तुम्हें कुछ इस तरह दिखना चाहिए:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">                                          ,--./,-.</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="go">          ___     __   __   __   ___     /,-._.--~\</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="go">    |\ | |__  __ /  ` /  \ |__) |__         }  {</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="go">    | \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="go">                                          `._,._,&#39;</span>
 <a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="go">nf-core/tools version 3.5.2 - https://nf-co.re</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="go">    nf-core/tools version 3.5.2 - https://nf-co.re</span>
 <a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
 <a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="go">INFO     [✓] Default parameters match schema validation</span>
 <a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="go">INFO     [✓] Pipeline schema looks valid (found 17 params)</span>
@@ -4633,7 +4633,7 @@
 <a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="go">🚀  Launch web builder for customisation and editing? [y/n]:</span>
 </code></pre></div>
 <p><code>y</code> टाइप करें और Enter दबाएं ताकि इंटरैक्टिव वेब इंटरफ़ेस लॉन्च हो सके।</p>
-<p>आपका ब्राउज़र Parameter schema builder दिखाते हुए खुलेगा:</p>
+<p>तुम्हारा ब्राउज़र Parameter schema builder दिखाते हुए खुलेगा:</p>
 <p><img alt="Schema builder इंटरफ़ेस" src="../img/schema_build.png" /></p>
 <p><code>batch</code> पैरामीटर जोड़ने के लिए:</p>
 <ol>
@@ -4647,17 +4647,17 @@
 <li>वैकल्पिक रूप से, icon picker से एक आइकन चुनें (जैसे, <code>fas fa-layer-group</code>)</li>
 </ol>
 <p><img alt="batch पैरामीटर जोड़ना" src="../img/schema_add.png" /></p>
-<p>जब आप समाप्त कर लें, तो शीर्ष दाएं कोने में <strong>"Finished"</strong> बटन पर क्लिक करें।</p>
-<p>अपने टर्मिनल में वापस, आप देखेंगे:</p>
+<p>जब तुम समाप्त कर लो, तो शीर्ष दाएं कोने में <strong>"Finished"</strong> बटन पर क्लिक करें।</p>
+<p>अपने टर्मिनल में वापस, तुम देखोगे:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">INFO     Writing schema with 18 params: &#39;nextflow_schema.json&#39;</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="go">⣾ Use ctrl+c to stop waiting and force exit.</span>
 </code></pre></div>
 <p>schema builder से बाहर निकलने के लिए <code>Ctrl+C</code> दबाएं।</p>
-<p>टूल ने अब आपकी <code>nextflow_schema.json</code> फ़ाइल को नए <code>batch</code> पैरामीटर के साथ अपडेट कर दिया है, सभी JSON Schema सिंटैक्स को सही तरीके से संभालते हुए।</p>
+<p>टूल ने अब तुम्हारी <code>nextflow_schema.json</code> फ़ाइल को नए <code>batch</code> पैरामीटर के साथ अपडेट कर दिया है, सभी JSON Schema सिंटैक्स को सही तरीके से संभालते हुए।</p>
 <h3 id="14">1.4. परिवर्तनों की पुष्टि करें<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">25</span><span class="w"> </span><span class="s1">&#39;&quot;input_output_options&quot;&#39;</span><span class="w"> </span>nextflow_schema.json
 </code></pre></div>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/nextflow_schema.json (अंश)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-8"> 8</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/nextflow_schema.json (excerpt)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-13-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-13-10">10</a></span>
 <span class="normal"><a href="#__codelineno-13-11">11</a></span>
@@ -4703,7 +4703,7 @@
 </span><a id="__codelineno-13-29" name="__codelineno-13-29"></a><span class="hll"><span class="w">          </span><span class="nt">&quot;fa_icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fas fa-layer-group&quot;</span>
 </span><a id="__codelineno-13-30" name="__codelineno-13-30"></a><span class="hll"><span class="w">        </span><span class="p">},</span>
 </span></code></pre></div></td></tr></table></div>
-<p>आपको दिखना चाहिए कि <code>batch</code> पैरामीटर स्कीमा में जोड़ा गया है, "required" फ़ील्ड अब <code>["input", "outdir", "batch"]</code> दिखा रहा है।</p>
+<p>तुम्हें दिखना चाहिए कि <code>batch</code> पैरामीटर स्कीमा में जोड़ा गया है, "required" फ़ील्ड अब <code>["input", "outdir", "batch"]</code> दिखा रहा है।</p>
 <h3 id="15">1.5. पैरामीटर सत्यापन का परीक्षण करें<a class="headerlink" href="#15" title="Permanent link">&para;</a></h3>
 <p>अब आइए परीक्षण करें कि पैरामीटर सत्यापन सही तरीके से काम करता है।</p>
 <p>सबसे पहले, आवश्यक <code>input</code> पैरामीटर के बिना चलाने का प्रयास करें:</p>
@@ -4725,23 +4725,23 @@
 </code></pre></div>
 <details class="success">
 <summary>कमांड आउटपुट</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">Launching `./main.nf` [peaceful_wozniak] DSL2 - revision: b9e9b3b8de</span>
 <a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
 <a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="go">executor &gt;  local (8)</span>
 <a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="go">[de/a1b2c3] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔</span>
 <a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="go">[4f/d5e6f7] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔</span>
-<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="go">[8a/b9c0d1] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="go">[8a/b9c0d1] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔</span>
 <a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="go">[e2/f3a4b5] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔</span>
 <a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="go">-[core/hello] Pipeline completed successfully-</span>
 </code></pre></div>
 </details>
 <p>Pipeline सफलतापूर्वक चलना चाहिए, और <code>batch</code> पैरामीटर अब सत्यापित है।</p>
-<h3 id="_1">निष्कर्ष<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<p>आपने सीखा है कि <code>nextflow_schema.json</code> में पैरामीटर जोड़ने के लिए इंटरैक्टिव <code>nf-core pipelines schema build</code> टूल का उपयोग कैसे करें और पैरामीटर सत्यापन को क्रिया में देखा है।
-वेब इंटरफ़ेस आपके लिए सभी JSON Schema सिंटैक्स को संभालता है, जिससे त्रुटि-प्रवण मैन्युअल JSON संपादन के बिना जटिल पैरामीटर स्कीमा को प्रबंधित करना आसान हो जाता है।</p>
-<h3 id="_2">आगे क्या?<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<h3 id="_1">सारांश<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>तुमने सीखा है कि <code>nextflow_schema.json</code> में पैरामीटर जोड़ने के लिए इंटरैक्टिव <code>nf-core pipelines schema build</code> टूल का उपयोग कैसे करें और पैरामीटर सत्यापन को क्रिया में देखा है।
+वेब इंटरफ़ेस तुम्हारे लिए सभी JSON Schema सिंटैक्स को संभालता है, जिससे त्रुटि-प्रवण मैन्युअल JSON संपादन के बिना जटिल पैरामीटर स्कीमा को प्रबंधित करना आसान हो जाता है।</p>
+<h3 id="_2">आगे क्या है?<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>अब जब पैरामीटर सत्यापन काम कर रहा है, आइए इनपुट डेटा फ़ाइल सामग्री के लिए सत्यापन जोड़ें।</p>
 <hr />
 <h2 id="2-schema_inputjson">2. इनपुट डेटा सत्यापन (schema_input.json)<a class="headerlink" href="#2-schema_inputjson" title="Permanent link">&para;</a></h2>
@@ -4753,7 +4753,7 @@
 </code></pre></div>
 <div class="highlight"><span class="filename">assets/greetings.csv</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>Hello,en,87
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>Bonjour,fr,96
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>Holà,es,98
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>Hola,es,98
 </code></pre></div>
 <p>यह एक सरल CSV है जिसमें:</p>
 <ul>
@@ -4810,7 +4810,7 @@
 <span class="normal"><a href="#__codelineno-20-28">28</a></span>
 <span class="normal"><a href="#__codelineno-20-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="p">{</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="w">    </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://json-schema.org/draft/2020-12/schema&quot;</span><span class="p">,</span>
-<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="w">    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/core/hello/main/assets/schema_input.json&quot;</span><span class="p">,</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="w">    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json&quot;</span><span class="p">,</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;core/hello pipeline - params.input schema&quot;</span><span class="p">,</span>
 <a id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Schema for the greetings file provided with params.input&quot;</span><span class="p">,</span>
 <a id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
@@ -4874,7 +4874,7 @@
 <span class="normal"><a href="#__codelineno-21-32">32</a></span>
 <span class="normal"><a href="#__codelineno-21-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="p">{</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="w">    </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://json-schema.org/draft/2020-12/schema&quot;</span><span class="p">,</span>
-<a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="w">    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/core/hello/main/assets/schema_input.json&quot;</span><span class="p">,</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="w">    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json&quot;</span><span class="p">,</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;core/hello pipeline - params.input schema&quot;</span><span class="p">,</span>
 <a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Schema for the file provided with params.input&quot;</span><span class="p">,</span>
 <a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
@@ -4932,7 +4932,7 @@
 <span class="normal"><a href="#__codelineno-22-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="hll">greeting,language,score
 </span><a id="__codelineno-22-2" name="__codelineno-22-2"></a>Hello,en,87
 <a id="__codelineno-22-3" name="__codelineno-22-3"></a>Bonjour,fr,96
-<a id="__codelineno-22-4" name="__codelineno-22-4"></a>Holà,es,98
+<a id="__codelineno-22-4" name="__codelineno-22-4"></a>Hola,es,98
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -4940,7 +4940,7 @@
 <span class="normal"><a href="#__codelineno-23-2">2</a></span>
 <span class="normal"><a href="#__codelineno-23-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a>Hello,en,87
 <a id="__codelineno-23-2" name="__codelineno-23-2"></a>Bonjour,fr,96
-<a id="__codelineno-23-3" name="__codelineno-23-3"></a>Holà,es,98
+<a id="__codelineno-23-3" name="__codelineno-23-3"></a>Hola,es,98
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5048,8 +5048,8 @@
 </div>
 <p>आइए जानें कि क्या बदला:</p>
 <ol>
-<li><strong><code>samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")</code></strong>: इनपुट फ़ाइल को हमारी स्कीमा के विरुद्ध सत्यापित करता है और एक list लौटाता है</li>
-<li><strong><code>Channel.fromList(...)</code></strong>: list को Nextflow चैनल में परिवर्तित करता है</li>
+<li><strong><code class="highlight"><span class="n">samplesheetToList</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;${projectDir}/assets/schema_input.json&quot;</span><span class="o">)</span></code></strong>: इनपुट फ़ाइल को हमारी स्कीमा के विरुद्ध सत्यापित करता है और एक list लौटाता है</li>
+<li><strong><code>channel.fromList(...)</code></strong>: list को Nextflow चैनल में परिवर्तित करता है</li>
 </ol>
 <p>यह <code>samplesheetToList</code> और JSON schemas का उपयोग करके इनपुट डेटा सत्यापन के कार्यान्वयन को पूरा करता है।</p>
 <p>अब जब हमने इनपुट डेटा स्कीमा को कॉन्फ़िगर कर लिया है, तो हम पहले जोड़ी गई अस्थायी ignore सेटिंग को हटा सकते हैं।</p>
@@ -5058,25 +5058,25 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">बाद में</label><label for="__tabbed_5_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-246">246</a></span>
-<span class="normal"><a href="#__codelineno-27-247">247</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-247">247</a></span>
 <span class="normal"><a href="#__codelineno-27-248">248</a></span>
-<span class="normal"><a href="#__codelineno-27-249">249</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-246" name="__codelineno-27-246"></a><span class="n">validation</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-27-247" name="__codelineno-27-247"></a><span class="w">    </span><span class="n">defaultIgnoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;genomes&quot;</span><span class="o">]</span>
-<a id="__codelineno-27-248" name="__codelineno-27-248"></a><span class="w">    </span><span class="n">monochromeLogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">monochrome_logs</span>
-<a id="__codelineno-27-249" name="__codelineno-27-249"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-27-249">249</a></span>
+<span class="normal"><a href="#__codelineno-27-250">250</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-247" name="__codelineno-27-247"></a><span class="n">validation</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-27-248" name="__codelineno-27-248"></a><span class="w">    </span><span class="n">defaultIgnoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;genomes&quot;</span><span class="o">]</span>
+<a id="__codelineno-27-249" name="__codelineno-27-249"></a><span class="w">    </span><span class="n">monochromeLogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">monochrome_logs</span>
+<a id="__codelineno-27-250" name="__codelineno-27-250"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-246">246</a></span>
-<span class="normal"><a href="#__codelineno-28-247">247</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-247">247</a></span>
 <span class="normal"><a href="#__codelineno-28-248">248</a></span>
 <span class="normal"><a href="#__codelineno-28-249">249</a></span>
-<span class="normal"><a href="#__codelineno-28-250">250</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-246" name="__codelineno-28-246"></a><span class="n">validation</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-28-247" name="__codelineno-28-247"></a><span class="w">    </span><span class="n">defaultIgnoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;genomes&quot;</span><span class="o">]</span>
-<a id="__codelineno-28-248" name="__codelineno-28-248"></a><span class="hll"><span class="w">    </span><span class="n">ignoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;input&#39;</span><span class="o">]</span>
-</span><a id="__codelineno-28-249" name="__codelineno-28-249"></a><span class="w">    </span><span class="n">monochromeLogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">monochrome_logs</span>
-<a id="__codelineno-28-250" name="__codelineno-28-250"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-28-250">250</a></span>
+<span class="normal"><a href="#__codelineno-28-251">251</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-247" name="__codelineno-28-247"></a><span class="n">validation</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-28-248" name="__codelineno-28-248"></a><span class="w">    </span><span class="n">defaultIgnoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;genomes&quot;</span><span class="o">]</span>
+<a id="__codelineno-28-249" name="__codelineno-28-249"></a><span class="hll"><span class="w">    </span><span class="n">ignoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;input&#39;</span><span class="o">]</span>
+</span><a id="__codelineno-28-250" name="__codelineno-28-250"></a><span class="w">    </span><span class="n">monochromeLogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">monochrome_logs</span>
+<a id="__codelineno-28-251" name="__codelineno-28-251"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5100,7 +5100,7 @@
 <a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="go">executor &gt;  local (8)</span>
 <a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="go">[c1/39f64a] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔</span>
 <a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a><span class="go">[44/c3fb82] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔</span>
-<a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a><span class="go">[62/80fab2] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔</span>
+<a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a><span class="go">[62/80fab2] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔</span>
 <a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a><span class="go">[e1/4db4fd] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔</span>
 <a id="__codelineno-30-12" name="__codelineno-30-12" href="#__codelineno-30-12"></a><span class="go">-[core/hello] Pipeline completed successfully-</span>
 </code></pre></div>
@@ -5123,7 +5123,7 @@
 <span class="normal"><a href="#__codelineno-32-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1"></a><span class="hll">message,language,score
 </span><a id="__codelineno-32-2" name="__codelineno-32-2"></a>Hello,en,87
 <a id="__codelineno-32-3" name="__codelineno-32-3"></a>Bonjour,fr,96
-<a id="__codelineno-32-4" name="__codelineno-32-4"></a>Holà,es,98
+<a id="__codelineno-32-4" name="__codelineno-32-4"></a>Hola,es,98
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -5133,7 +5133,7 @@
 <span class="normal"><a href="#__codelineno-33-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="hll">greeting,language,score
 </span><a id="__codelineno-33-2" name="__codelineno-33-2"></a>Hello,en,87
 <a id="__codelineno-33-3" name="__codelineno-33-3"></a>Bonjour,fr,96
-<a id="__codelineno-33-4" name="__codelineno-33-4"></a>Holà,es,98
+<a id="__codelineno-33-4" name="__codelineno-33-4"></a>Hola,es,98
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5144,7 +5144,7 @@
 </code></pre></div>
 <details class="failure">
 <summary>कमांड आउटपुट</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 24.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">Launching `./main.nf` [trusting_ochoa] DSL2 - revision: b9e9b3b8de</span>
 <a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>
@@ -5153,17 +5153,17 @@
 <a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="go">  outdir             : test-results</span>
 <a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a>
 <a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="go">Generic options</span>
-<a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a><span class="go">  trace_report_suffix: 2025-01-27_03-16-04</span>
+<a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a><span class="go">  trace_report_suffix: 2025-11-21_07-35-12</span>
 <a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a>
 <a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a><span class="go">Core Nextflow options</span>
 <a id="__codelineno-35-13" name="__codelineno-35-13" href="#__codelineno-35-13"></a><span class="go">  runName            : trusting_ochoa</span>
 <a id="__codelineno-35-14" name="__codelineno-35-14" href="#__codelineno-35-14"></a><span class="go">  containerEngine    : docker</span>
-<a id="__codelineno-35-15" name="__codelineno-35-15" href="#__codelineno-35-15"></a><span class="go">  launchDir          : /workspace/hello-nf-core</span>
-<a id="__codelineno-35-16" name="__codelineno-35-16" href="#__codelineno-35-16"></a><span class="go">  workDir            : /workspace/hello-nf-core/work</span>
-<a id="__codelineno-35-17" name="__codelineno-35-17" href="#__codelineno-35-17"></a><span class="go">  projectDir         : /workspace/hello-nf-core</span>
-<a id="__codelineno-35-18" name="__codelineno-35-18" href="#__codelineno-35-18"></a><span class="go">  userName           : user</span>
+<a id="__codelineno-35-15" name="__codelineno-35-15" href="#__codelineno-35-15"></a><span class="go">  launchDir          : /workspaces/training/hello-nf-core/core-hello</span>
+<a id="__codelineno-35-16" name="__codelineno-35-16" href="#__codelineno-35-16"></a><span class="go">  workDir            : /workspaces/training/hello-nf-core/core-hello/work</span>
+<a id="__codelineno-35-17" name="__codelineno-35-17" href="#__codelineno-35-17"></a><span class="go">  projectDir         : /workspaces/training/hello-nf-core/core-hello</span>
+<a id="__codelineno-35-18" name="__codelineno-35-18" href="#__codelineno-35-18"></a><span class="go">  userName           : root</span>
 <a id="__codelineno-35-19" name="__codelineno-35-19" href="#__codelineno-35-19"></a><span class="go">  profile            : docker</span>
-<a id="__codelineno-35-20" name="__codelineno-35-20" href="#__codelineno-35-20"></a><span class="go">  configFiles        : /workspace/hello-nf-core/nextflow.config</span>
+<a id="__codelineno-35-20" name="__codelineno-35-20" href="#__codelineno-35-20"></a><span class="go">  configFiles        : /workspaces/training/hello-nf-core/core-hello/nextflow.config</span>
 <a id="__codelineno-35-21" name="__codelineno-35-21" href="#__codelineno-35-21"></a>
 <a id="__codelineno-35-22" name="__codelineno-35-22" href="#__codelineno-35-22"></a><span class="go">!! Only displaying parameters that differ from the pipeline defaults !!</span>
 <a id="__codelineno-35-23" name="__codelineno-35-23" href="#__codelineno-35-23"></a><span class="go">------------------------------------------------------</span>
@@ -5189,15 +5189,15 @@
 </ul>
 <p>स्कीमा सत्यापन यह सुनिश्चित करता है कि pipeline चलने से पहले इनपुट फ़ाइलों में सही संरचना हो, समय की बचत होती है और निष्पादन में बाद में भ्रमित करने वाली त्रुटियों को रोकता है।</p>
 <p>यदि आप इसका अभ्यास करना चाहते हैं, तो अन्य greetings इनपुट फ़ाइलें बनाने के लिए स्वतंत्र महसूस करें जो स्कीमा का अन्य मज़ेदार तरीकों से उल्लंघन करती हैं।</p>
-<h3 id="_3">निष्कर्ष<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h3 id="_3">सारांश<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>आपने पैरामीटर सत्यापन और इनपुट डेटा सत्यापन दोनों को लागू और परीक्षण किया है। आपका pipeline अब निष्पादन से पहले इनपुट को सत्यापित करता है, त्वरित फीडबैक और स्पष्ट त्रुटि संदेश प्रदान करता है।</p>
 <div class="admonition tip">
 <p class="admonition-title">आगे पढ़ना</p>
 <p>उन्नत सत्यापन सुविधाओं और पैटर्न के बारे में अधिक जानने के लिए, <a href="https://nextflow-io.github.io/nf-schema/latest/">nf-schema दस्तावेज़ीकरण</a> देखें। <code>nf-core pipelines schema build</code> कमांड जटिल schemas को प्रबंधित करने के लिए एक इंटरैक्टिव GUI प्रदान करता है।</p>
 </div>
-<h3 id="_4">आगे क्या?<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<h3 id="_4">आगे क्या है?<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>आपने Hello nf-core प्रशिक्षण कोर्स के सभी पांच भाग पूरे कर लिए हैं!</p>
-<p>आपने क्या बनाया है और सीखा है, इस पर विचार करने के लिए <a href="summary.md">सारांश</a> पर जारी रखें।</p><div id="quiz-progress-sidebar" aria-label="क्विज़ प्रगति" style="display: none;">
+<p>आपने क्या बनाया है और सीखा है, इस पर विचार करने के लिए <a href="../next_steps/">सारांश</a> पर जारी रखें।</p><div id="quiz-progress-sidebar" aria-label="क्विज़ प्रगति" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">
     <span class="md-nav__icon md-icon"></span>

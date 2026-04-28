@@ -47,7 +47,7 @@
     
     
       
-        <title>Temel Nextflow Betik Kalıpları - training.nextflow.io</title>
+        <title>Temel Betik Kalıpları - training.nextflow.io</title>
       
     
     
@@ -157,7 +157,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#temel-nextflow-betik-kalplar" class="md-skip">
+        <a href="#temel-betik-kalplar" class="md-skip">
           Ana içeriğe geç
         </a>
       
@@ -254,7 +254,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Temel Nextflow Betik Kalıpları
+              Temel Betik Kalıpları
             
           </span>
         </div>
@@ -2348,7 +2348,7 @@
   <span class="md-ellipsis">
     
   
-    Yönlendirme
+    Başlarken
   
 
     
@@ -2413,7 +2413,7 @@
   <span class="md-ellipsis">
     
   
-    Temel Nextflow Betik Kalıpları
+    Temel Betik Kalıpları
   
 
     
@@ -2431,7 +2431,7 @@
   <span class="md-ellipsis">
     
   
-    Temel Nextflow Betik Kalıpları
+    Temel Betik Kalıpları
   
 
     
@@ -3340,7 +3340,7 @@
   <span class="md-ellipsis">
     
   
-    İş Akışlarında Hata Ayıklama
+    İş Akışlarında Sorun Giderme
   
 
     
@@ -4920,7 +4920,7 @@
 </a>
  
 
-<h1 id="temel-nextflow-betik-kalplar">Temel Nextflow Betik Kalıpları<a class="headerlink" href="#temel-nextflow-betik-kalplar" title="Permanent link">&para;</a></h1>
+<h1 id="temel-betik-kalplar">Temel Betik Kalıpları<a class="headerlink" href="#temel-betik-kalplar" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Yapay zeka destekli çeviri - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">daha fazla bilgi ve iyileştirme önerileri</a></span></p>
 <p>Nextflow, Java Sanal Makinesi üzerinde çalışan bir programlama dilidir. Nextflow, <a href="http://groovy-lang.org/">Groovy</a> üzerine inşa edilmiş olup sözdiziminin büyük bölümünü Groovy ile paylaşsa da yalnızca "uzantılı Groovy" değildir; tam olarak belirlenmiş bir <a href="https://nextflow.io/docs/latest/reference/syntax.html">sözdizimine</a> ve <a href="https://nextflow.io/docs/latest/reference/stdlib.html">standart kütüphaneye</a> sahip bağımsız bir dildir.</p>
 <p>Değişkenler, map'ler ve listeler için temel sözdiziminin ötesine geçmeden Nextflow ile çok şey yazabilirsiniz. Nextflow eğitimlerinin büyük çoğunluğu iş akışı orkestrasyonuna (kanallar, süreçler ve veri akışı) odaklanır; yalnızca bunlarla da şaşırtıcı ölçüde ilerleyebilirsiniz.</p>
@@ -4941,7 +4941,7 @@ Basit bir CSV okuma iş akışını, gerçekçi zorluklarla adım adım gelişti
 <h3 id="on-kosullar">Ön koşullar<a class="headerlink" href="#on-kosullar" title="Permanent link">&para;</a></h3>
 <p>Bu yan göreve başlamadan önce şunları yapmanız gerekir:</p>
 <ul>
-<li><a href="../hello_nextflow/README.md">Hello Nextflow</a> eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmak.</li>
+<li><a href="../../hello_nextflow/">Hello Nextflow</a> eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmak.</li>
 <li>Temel Nextflow kavramları ve mekanizmalarını (süreçler, kanallar, operatörler, dosyalarla çalışma, meta veri) rahatça kullanabilmek</li>
 <li>Yaygın programlama yapılarına (değişkenler, map'ler, listeler) temel düzeyde aşinalık</li>
 </ul>
@@ -4950,7 +4950,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 <hr />
 <h2 id="0-baslarken">0. Başlarken<a class="headerlink" href="#0-baslarken" title="Permanent link">&para;</a></h2>
 <h4 id="egitim-kod-alann-acn">Eğitim kod alanını açın<a class="headerlink" href="#egitim-kod-alann-acn" title="Permanent link">&para;</a></h4>
-<p>Henüz yapmadıysanız, eğitim ortamını <a href="../envsetup/index.md">Ortam Kurulumu</a> bölümünde açıklandığı şekilde açtığınızdan emin olun.</p>
+<p>Henüz yapmadıysanız, eğitim ortamını <a href="../../envsetup/">Ortam Kurulumu</a> bölümünde açıklandığı şekilde açtığınızdan emin olun.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="GitHub Codespaces'te Aç" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h4 id="proje-dizinine-gecin">Proje dizinine geçin<a class="headerlink" href="#proje-dizinine-gecin" title="Permanent link">&para;</a></h4>
 <p>Bu eğitime ait dosyaların bulunduğu dizine geçelim.</p>
@@ -5057,7 +5057,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 </div>
 </div>
 <p>Bu, ilk <strong>closure</strong>'ımızdır; argüman olarak geçirebileceğiniz anonim bir fonksiyondur (Python'daki lambda'lara veya JavaScript'teki ok fonksiyonlarına benzer). Closure'lar, Nextflow operatörleriyle çalışmak için vazgeçilmezdir.</p>
-<p><code>{ row -&gt; return row }</code> closure'ı bir <code>row</code> parametresi alır (herhangi bir isim olabilir: <code>item</code>, <code>sample</code> vb.).</p>
+<p><code class="highlight"><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">}</span></code> closure'ı bir <code>row</code> parametresi alır (herhangi bir isim olabilir: <code>item</code>, <code>sample</code> vb.).</p>
 <p><code>.map()</code> operatörü her kanal öğesini işlerken onu closure'ınıza iletir. Burada <code>row</code>, her seferinde bir CSV satırını tutar.</p>
 <p>Bu değişikliği uygulayın ve iş akışını çalıştırın:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
@@ -5289,7 +5289,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="go">Launching `main.nf` [peaceful_cori] DSL2 - revision: 4cc4a8340f</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>
@@ -5428,7 +5428,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
 <a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="go">Launching `collect.nf` [loving_mendel] DSL2 - revision: e8d054a46e</span>
 <a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>
@@ -5498,7 +5498,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="go">Launching `collect.nf` [cheeky_stonebraker] DSL2 - revision: 2d5039fb47</span>
 <a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>
@@ -5589,7 +5589,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">Launching `collect.nf` [cranky_galileo] DSL2 - revision: 5f3c8b2a91</span>
 <a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>
@@ -5615,7 +5615,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 <p class="admonition-title">İpucu: Spread ve Collect'i Ne Zaman Kullanmalı</p>
 <ul>
 <li><strong>Spread (<code>*.</code>) kullanın</strong> basit özellik erişimi için: <code>samples*.id</code>, <code>files*.name</code></li>
-<li><strong>Collect kullanın</strong> dönüşümler veya karmaşık mantık için: <code>samples.collect { it.id.toUpperCase() }</code>, <code>samples.collect { [it.id, it.quality &gt; 40] }</code></li>
+<li><strong>Collect kullanın</strong> dönüşümler veya karmaşık mantık için: <code class="highlight"><span class="n">samples</span><span class="o">.</span><span class="na">collect</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">()</span><span class="w"> </span><span class="o">}</span></code>, <code class="highlight"><span class="n">samples</span><span class="o">.</span><span class="na">collect</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">[</span><span class="n">it</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="n">it</span><span class="o">.</span><span class="na">quality</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40</span><span class="o">]</span><span class="w"> </span><span class="o">}</span></code></li>
 </ul>
 </div>
 <h3 id="ozetle">Özetle<a class="headerlink" href="#ozetle" title="Permanent link">&para;</a></h3>
@@ -5764,7 +5764,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>
 <a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="go">Launching `main.nf` [clever_pauling] DSL2 - revision: 605d2058b4</span>
 <a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a>
@@ -6002,8 +6002,8 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 <span class="normal"><a href="#__codelineno-47-33">33</a></span>
 <span class="normal"><a href="#__codelineno-47-34">34</a></span>
 <span class="normal"><a href="#__codelineno-47-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-10" name="__codelineno-47-10"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-47-11" name="__codelineno-47-11"></a><span class="w">    </span><span class="c1">// Basit tek uçlu ve çift uçlu algılama</span>
-<a id="__codelineno-47-12" name="__codelineno-47-12"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">is_single</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">List</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">reads</span><span class="o">.</span><span class="na">size</span><span class="o">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-47-11" name="__codelineno-47-11"></a><span class="hll"><span class="w">    </span><span class="c1">// Basit tek uçlu ve çift uçlu algılama</span>
+</span><a id="__codelineno-47-12" name="__codelineno-47-12"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">is_single</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">List</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">reads</span><span class="o">.</span><span class="na">size</span><span class="o">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
 </span><a id="__codelineno-47-13" name="__codelineno-47-13"></a><span class="hll">
 </span><a id="__codelineno-47-14" name="__codelineno-47-14"></a><span class="hll"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">is_single</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-47-15" name="__codelineno-47-15"></a><span class="hll"><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">input_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">List</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">reads</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">reads</span>
@@ -6062,7 +6062,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>
 <a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="go">Launching `main.nf` [adoring_rosalind] DSL2 - revision: 04b1cd93e9</span>
 <a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>
@@ -6082,7 +6082,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 <a id="__codelineno-52-6" name="__codelineno-52-6" href="#__codelineno-52-6"></a><span class="w">    </span>--html<span class="w"> </span>sample_003.fastp.html<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-52-7" name="__codelineno-52-7" href="#__codelineno-52-7"></a><span class="w">    </span>--thread<span class="w"> </span><span class="m">2</span>
 </code></pre></div>
-<p>Dinamik betik mantığının başka bir yaygın kullanımı <a href="../../nf4science/genomics/02_joint_calling">Nextflow for Science Genomics modülünde</a> görülebilir. O modülde çağrılan GATK süreci birden fazla girdi dosyası alabilir, ancak doğru bir komut satırı oluşturmak için her birinin başına <code>-V</code> eklenmelidir. Süreç, bir girdi dosyaları koleksiyonunu (<code>all_gvcfs</code>) doğru komut argümanlarına dönüştürmek için betik yazımını kullanır:</p>
+<p>Dinamik betik mantığının başka bir yaygın kullanımı <a href="../../nf4_science/genomics/03_joint_calling/">Nextflow for Science Genomics modülünde</a> görülebilir. O modülde çağrılan GATK süreci birden fazla girdi dosyası alabilir, ancak doğru bir komut satırı oluşturmak için her birinin başına <code>-V</code> eklenmelidir. Süreç, bir girdi dosyaları koleksiyonunu (<code>all_gvcfs</code>) doğru komut argümanlarına dönüştürmek için betik yazımını kullanır:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GATK için komut satırı işleme</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-53-1">1</a></span>
 <span class="normal"><a href="#__codelineno-53-2">2</a></span>
 <span class="normal"><a href="#__codelineno-53-3">3</a></span>
@@ -6116,24 +6116,20 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 <span class="normal"><a href="#__codelineno-54-11">11</a></span>
 <span class="normal"><a href="#__codelineno-54-12">12</a></span>
 <span class="normal"><a href="#__codelineno-54-13">13</a></span>
-<span class="normal"><a href="#__codelineno-54-14">14</a></span>
-<span class="normal"><a href="#__codelineno-54-15">15</a></span>
-<span class="normal"><a href="#__codelineno-54-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a><span class="n">process</span><span class="w"> </span><span class="n">GENERATE_REPORT</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-54-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a><span class="n">process</span><span class="w"> </span><span class="n">GENERATE_REPORT</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-54-2" name="__codelineno-54-2"></a>
-<a id="__codelineno-54-3" name="__codelineno-54-3"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results/reports&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-54-4" name="__codelineno-54-4"></a>
-<a id="__codelineno-54-5" name="__codelineno-54-5"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-54-6" name="__codelineno-54-6"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">reads</span><span class="o">)</span>
-<a id="__codelineno-54-7" name="__codelineno-54-7"></a>
-<a id="__codelineno-54-8" name="__codelineno-54-8"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-54-9" name="__codelineno-54-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${meta.id}_report.txt&quot;</span>
-<a id="__codelineno-54-10" name="__codelineno-54-10"></a>
-<a id="__codelineno-54-11" name="__codelineno-54-11"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-54-12" name="__codelineno-54-12"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-54-13" name="__codelineno-54-13"></a><span class="s2">    echo &quot;İşleniyor: ${reads}&quot; &gt; ${meta.id}_report.txt</span>
-<a id="__codelineno-54-14" name="__codelineno-54-14"></a><span class="s2">    echo &quot;Örnek: ${meta.id}&quot; &gt;&gt; ${meta.id}_report.txt</span>
-<a id="__codelineno-54-15" name="__codelineno-54-15"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-54-16" name="__codelineno-54-16"></a><span class="o">}</span>
+<a id="__codelineno-54-3" name="__codelineno-54-3"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-54-4" name="__codelineno-54-4"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">reads</span><span class="o">)</span>
+<a id="__codelineno-54-5" name="__codelineno-54-5"></a>
+<a id="__codelineno-54-6" name="__codelineno-54-6"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-54-7" name="__codelineno-54-7"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${meta.id}_report.txt&quot;</span>
+<a id="__codelineno-54-8" name="__codelineno-54-8"></a>
+<a id="__codelineno-54-9" name="__codelineno-54-9"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-54-10" name="__codelineno-54-10"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-54-11" name="__codelineno-54-11"></a><span class="s2">    echo &quot;İşleniyor: ${reads}&quot; &gt; ${meta.id}_report.txt</span>
+<a id="__codelineno-54-12" name="__codelineno-54-12"></a><span class="s2">    echo &quot;Örnek: ${meta.id}&quot; &gt;&gt; ${meta.id}_report.txt</span>
+<a id="__codelineno-54-13" name="__codelineno-54-13"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-54-14" name="__codelineno-54-14"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Bu süreç, örnek kimliği ve dosya adıyla basit bir rapor yazar. Şimdi farklı türde değişkenleri bir arada kullanmamız gerektiğinde ne olduğunu görmek için çalıştıralım.</p>
 <p>Süreci <code>main.nf</code> dosyanıza dahil edin ve iş akışına ekleyin:</p>
@@ -6241,27 +6237,27 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 <a id="__codelineno-56-7" name="__codelineno-56-7"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">sample_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
 <a id="__codelineno-56-8" name="__codelineno-56-8"></a><span class="w">                </span><span class="nl">id:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">sample_id</span><span class="o">.</span><span class="na">toLowerCase</span><span class="o">(),</span>
 <a id="__codelineno-56-9" name="__codelineno-56-9"></a><span class="w">                </span><span class="nl">organism:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">organism</span><span class="o">,</span>
-<a id="__codelineno-56-10" name="__codelineno-56-10"></a><span class="hll"><span class="w">                </span><span class="nl">tissue:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">tissue_type</span><span class="o">.</span><span class="na">replaceAll</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="o">).</span><span class="na">toLowerCase</span><span class="o">(),</span>
-</span><a id="__codelineno-56-11" name="__codelineno-56-11"></a><span class="hll"><span class="w">                </span><span class="nl">depth:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">sequencing_depth</span><span class="o">.</span><span class="na">toInteger</span><span class="o">(),</span>
-</span><a id="__codelineno-56-12" name="__codelineno-56-12"></a><span class="hll"><span class="w">                </span><span class="nl">quality:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">quality_score</span><span class="o">.</span><span class="na">toDouble</span><span class="o">()</span>
-</span><a id="__codelineno-56-13" name="__codelineno-56-13"></a><span class="hll"><span class="w">            </span><span class="o">]</span>
-</span><a id="__codelineno-56-14" name="__codelineno-56-14"></a><span class="hll"><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">fastq_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">file_path</span><span class="o">)</span>
-</span><a id="__codelineno-56-15" name="__codelineno-56-15"></a><span class="hll">
-</span><a id="__codelineno-56-16" name="__codelineno-56-16"></a><span class="hll"><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="n">fastq_path</span><span class="o">.</span><span class="na">name</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="s">/^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/</span><span class="o">)</span>
-</span><a id="__codelineno-56-17" name="__codelineno-56-17"></a><span class="hll"><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">file_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">[</span>
-</span><a id="__codelineno-56-18" name="__codelineno-56-18"></a><span class="hll"><span class="w">                </span><span class="nl">sample_num:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">2</span><span class="o">].</span><span class="na">toInteger</span><span class="o">(),</span>
-</span><a id="__codelineno-56-19" name="__codelineno-56-19"></a><span class="hll"><span class="w">                </span><span class="nl">lane:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">3</span><span class="o">],</span>
-</span><a id="__codelineno-56-20" name="__codelineno-56-20"></a><span class="hll"><span class="w">                </span><span class="nl">read:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">4</span><span class="o">],</span>
-</span><a id="__codelineno-56-21" name="__codelineno-56-21"></a><span class="hll"><span class="w">                </span><span class="nl">chunk:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">5</span><span class="o">]</span>
-</span><a id="__codelineno-56-22" name="__codelineno-56-22"></a><span class="hll"><span class="w">            </span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">[:]</span>
-</span><a id="__codelineno-56-23" name="__codelineno-56-23"></a><span class="hll">
-</span><a id="__codelineno-56-24" name="__codelineno-56-24"></a><span class="hll"><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_meta</span><span class="o">.</span><span class="na">quality</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;high&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span>
-</span><a id="__codelineno-56-25" name="__codelineno-56-25"></a><span class="hll"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">tuple</span><span class="o">(</span><span class="n">sample_meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">file_meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">priority:</span><span class="w"> </span><span class="n">priority</span><span class="o">],</span><span class="w"> </span><span class="n">fastq_path</span><span class="o">)</span>
-</span><a id="__codelineno-56-26" name="__codelineno-56-26"></a><span class="hll"><span class="w">        </span><span class="o">}</span>
-</span><a id="__codelineno-56-27" name="__codelineno-56-27"></a><span class="hll">
-</span><a id="__codelineno-56-28" name="__codelineno-56-28"></a><span class="hll"><span class="w">    </span><span class="n">ch_fastp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FASTP</span><span class="o">(</span><span class="n">ch_samples</span><span class="o">)</span>
-</span><a id="__codelineno-56-29" name="__codelineno-56-29"></a><span class="hll"><span class="o">}</span>
-</span></code></pre></div></td></tr></table></div>
+<a id="__codelineno-56-10" name="__codelineno-56-10"></a><span class="w">                </span><span class="nl">tissue:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">tissue_type</span><span class="o">.</span><span class="na">replaceAll</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="o">).</span><span class="na">toLowerCase</span><span class="o">(),</span>
+<a id="__codelineno-56-11" name="__codelineno-56-11"></a><span class="w">                </span><span class="nl">depth:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">sequencing_depth</span><span class="o">.</span><span class="na">toInteger</span><span class="o">(),</span>
+<a id="__codelineno-56-12" name="__codelineno-56-12"></a><span class="w">                </span><span class="nl">quality:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">quality_score</span><span class="o">.</span><span class="na">toDouble</span><span class="o">()</span>
+<a id="__codelineno-56-13" name="__codelineno-56-13"></a><span class="w">            </span><span class="o">]</span>
+<a id="__codelineno-56-14" name="__codelineno-56-14"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">fastq_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">file_path</span><span class="o">)</span>
+<a id="__codelineno-56-15" name="__codelineno-56-15"></a>
+<a id="__codelineno-56-16" name="__codelineno-56-16"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="n">fastq_path</span><span class="o">.</span><span class="na">name</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="s">/^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/</span><span class="o">)</span>
+<a id="__codelineno-56-17" name="__codelineno-56-17"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">file_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">[</span>
+<a id="__codelineno-56-18" name="__codelineno-56-18"></a><span class="w">                </span><span class="nl">sample_num:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">2</span><span class="o">].</span><span class="na">toInteger</span><span class="o">(),</span>
+<a id="__codelineno-56-19" name="__codelineno-56-19"></a><span class="w">                </span><span class="nl">lane:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">3</span><span class="o">],</span>
+<a id="__codelineno-56-20" name="__codelineno-56-20"></a><span class="w">                </span><span class="nl">read:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">4</span><span class="o">],</span>
+<a id="__codelineno-56-21" name="__codelineno-56-21"></a><span class="w">                </span><span class="nl">chunk:</span><span class="w"> </span><span class="n">m</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">5</span><span class="o">]</span>
+<a id="__codelineno-56-22" name="__codelineno-56-22"></a><span class="w">            </span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">[:]</span>
+<a id="__codelineno-56-23" name="__codelineno-56-23"></a>
+<a id="__codelineno-56-24" name="__codelineno-56-24"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_meta</span><span class="o">.</span><span class="na">quality</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;high&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span>
+<a id="__codelineno-56-25" name="__codelineno-56-25"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">tuple</span><span class="o">(</span><span class="n">sample_meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">file_meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">priority:</span><span class="w"> </span><span class="n">priority</span><span class="o">],</span><span class="w"> </span><span class="n">fastq_path</span><span class="o">)</span>
+<a id="__codelineno-56-26" name="__codelineno-56-26"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-56-27" name="__codelineno-56-27"></a>
+<a id="__codelineno-56-28" name="__codelineno-56-28"></a><span class="hll"><span class="w">    </span><span class="n">ch_fastp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FASTP</span><span class="o">(</span><span class="n">ch_samples</span><span class="o">)</span>
+</span><a id="__codelineno-56-29" name="__codelineno-56-29"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
@@ -6308,7 +6304,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 </div>
 </div>
 </div>
-<p>Bunu çalıştırırsanız bir hata fark edeceksiniz; Nextflow, <code>${USER}</code>'ı mevcut olmayan bir Nextflow değişkeni olarak yorumlamaya çalışır.</p>
+<p>Bunu çalıştırırsanız bir hata fark edeceksiniz; Nextflow, <code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">USER</span><span class="o">}</span></code>'ı mevcut olmayan bir Nextflow değişkeni olarak yorumlamaya çalışır.</p>
 <details class="failure">
 <summary>Komut çıktısı</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">Error modules/generate_report.nf:15:27: `USER` is not defined</span>
@@ -6367,9 +6363,9 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 <li><strong>Dosya ayrıştırma için düzenli ifadeler</strong>: Karmaşık dosya adlandırma kurallarından meta veri çıkarmak için <code>=~</code> operatörünü ve regex kalıplarını (<code>~/pattern/</code>) kullanmak</li>
 <li><strong>Dinamik betik oluşturma</strong>: Girdi özelliklerine göre farklı betik dizeleri oluşturmak için koşullu mantık (if/else, üçlü operatörler) kullanmak</li>
 <li><strong>Değişken enterpolasyonu</strong>: Nextflow'un dizeleri ne zaman yorumladığını, kabuğun ne zaman yorumladığını anlamak</li>
-<li><code>${var}</code> - Nextflow değişkenleri (iş akışı derleme zamanında Nextflow tarafından enterpolasyon yapılır)</li>
-<li><code>\${var}</code> - Kabuk ortam değişkenleri (kaçırılmış, çalışma zamanında bash'e iletilir)</li>
-<li><code>\$(cmd)</code> - Kabuk komut ikamesi (kaçırılmış, çalışma zamanında bash tarafından çalıştırılır)</li>
+<li><code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">var</span><span class="o">}</span></code> - Nextflow değişkenleri (iş akışı derleme zamanında Nextflow tarafından enterpolasyon yapılır)</li>
+<li><code class="highlight"><span class="err">\</span><span class="n">$</span><span class="o">{</span><span class="n">var</span><span class="o">}</span></code> - Kabuk ortam değişkenleri (kaçırılmış, çalışma zamanında bash'e iletilir)</li>
+<li><code class="highlight"><span class="err">\</span><span class="n">$</span><span class="o">(</span><span class="n">cmd</span><span class="o">)</span></code> - Kabuk komut ikamesi (kaçırılmış, çalışma zamanında bash tarafından çalıştırılır)</li>
 </ul>
 <p>Bu dize işleme ve oluşturma kalıpları, gerçek dünya biyoinformatik iş akışlarında karşılaşacağınız çeşitli dosya formatlarını ve adlandırma kurallarını işlemek için vazgeçilmezdir.</p>
 <hr />
@@ -6527,7 +6523,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>
 <a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a><span class="go">Launching `main.nf` [admiring_panini] DSL2 - revision: 8cc832e32f</span>
 <a id="__codelineno-67-4" name="__codelineno-67-4" href="#__codelineno-67-4"></a>
@@ -6585,7 +6581,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 </div>
 </div>
 </div>
-<p><code>{ meta.depth &gt; 40000000 ? 2 : 1 }</code> closure'ı <strong>üçlü operatörü</strong> (Bölüm 1.1'de ele alındı) kullanır ve her görev için değerlendirilerek örnek başına kaynak tahsisine olanak tanır. Yüksek derinlikli örnekler (&gt;40M okuma) 2 CPU alırken diğerleri 1 CPU alır.</p>
+<p><code class="highlight"><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">}</span></code> closure'ı <strong>üçlü operatörü</strong> (Bölüm 1.1'de ele alındı) kullanır ve her görev için değerlendirilerek örnek başına kaynak tahsisine olanak tanır. Yüksek derinlikli örnekler (&gt;40M okuma) 2 CPU alırken diğerleri 1 CPU alır.</p>
 <div class="admonition note">
 <p class="admonition-title">Not: Yönergelerde Girdi Değişkenlerine Erişim</p>
 <p>Closure, Nextflow bu closure'ları her görev yürütme bağlamında değerlendirdiğinden, herhangi bir girdi değişkenine (burada <code>meta</code> gibi) erişebilir.</p>
@@ -6595,7 +6591,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a><span class="go">N E X T F L O W  ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a><span class="go">N E X T F L O W  ~  version 25.10.4</span>
 <a id="__codelineno-71-2" name="__codelineno-71-2" href="#__codelineno-71-2"></a><span class="go">Launching `main.nf` [fervent_albattani] DSL2 - revision: fa8f249759</span>
 <a id="__codelineno-71-3" name="__codelineno-71-3" href="#__codelineno-71-3"></a><span class="go">[bd/ff3d41] Submitted process &gt; FASTP (2)</span>
 <a id="__codelineno-71-4" name="__codelineno-71-4" href="#__codelineno-71-4"></a><span class="go">[a4/a3aab2] Submitted process &gt; FASTP (1)</span>
@@ -6609,7 +6605,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 <div class="highlight"><span class="filename">Docker komutunu kontrol edin</span><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="go">cat work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.run | grep &quot;docker run&quot;</span>
 </code></pre></div>
 <p>Şuna benzer bir şey görmelisiniz:</p>
-<div class="highlight"><span class="filename">docker komutu</span><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a><span class="w">    </span>docker<span class="w"> </span>run<span class="w"> </span>-i<span class="w"> </span>--cpu-shares<span class="w"> </span><span class="m">4096</span><span class="w"> </span>--memory<span class="w"> </span>2048m<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;NXF_TASK_WORKDIR&quot;</span><span class="w"> </span>-v<span class="w"> </span>/workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$NXF_TASK_WORKDIR</span><span class="s2">&quot;</span><span class="w"> </span>--name<span class="w"> </span><span class="nv">$NXF_BOXID</span><span class="w"> </span>community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690<span class="w"> </span>/bin/bash<span class="w"> </span>-ue<span class="w"> </span>/workspaces/training/side-quests/essential_scripting_patterns/work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.sh
+<div class="highlight"><span class="filename">docker komutu</span><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a><span class="w">    </span>docker<span class="w"> </span>run<span class="w"> </span>-i<span class="w"> </span>--cpu-shares<span class="w"> </span><span class="m">2048</span><span class="w"> </span>--memory<span class="w"> </span>2048m<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;NXF_TASK_WORKDIR&quot;</span><span class="w"> </span>-v<span class="w"> </span>/workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$NXF_TASK_WORKDIR</span><span class="s2">&quot;</span><span class="w"> </span>--name<span class="w"> </span><span class="nv">$NXF_BOXID</span><span class="w"> </span>community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690<span class="w"> </span>/bin/bash<span class="w"> </span>-ue<span class="w"> </span>/workspaces/training/side-quests/essential_scripting_patterns/work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.sh
 </code></pre></div>
 <p>Bu örnekte yüksek derinlikli bir örnek olduğu için 2 CPU talep eden bir örnek seçtik (<code>--cpu-shares 2048</code>); ancak örnek derinliğine bağlı olarak farklı CPU tahsisleri görmelisiniz. Diğer görevler için de bunu deneyin.</p>
 <h3 id="42-yeniden-deneme-stratejileri">4.2. Yeniden Deneme Stratejileri<a class="headerlink" href="#42-yeniden-deneme-stratejileri" title="Permanent link">&para;</a></h3>
@@ -6627,7 +6623,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 <span class="normal"><a href="#__codelineno-74-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-74-1" name="__codelineno-74-1"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTP</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-74-2" name="__codelineno-74-2"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690&#39;</span>
 <a id="__codelineno-74-3" name="__codelineno-74-3"></a>
-<a id="__codelineno-74-4" name="__codelineno-74-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-74-4" name="__codelineno-74-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-74-5" name="__codelineno-74-5"></a><span class="hll"><span class="w">    </span><span class="n">memory</span><span class="w"> </span><span class="mi">1</span><span class="o">.</span><span class="na">GB</span>
 </span><a id="__codelineno-74-6" name="__codelineno-74-6"></a>
 <a id="__codelineno-74-7" name="__codelineno-74-7"></a><span class="w">    </span><span class="nl">input:</span>
@@ -6645,7 +6641,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 <span class="normal"><a href="#__codelineno-75-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTP</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-75-2" name="__codelineno-75-2"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690&#39;</span>
 <a id="__codelineno-75-3" name="__codelineno-75-3"></a>
-<a id="__codelineno-75-4" name="__codelineno-75-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-75-4" name="__codelineno-75-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-75-5" name="__codelineno-75-5"></a><span class="hll"><span class="w">    </span><span class="n">memory</span><span class="w"> </span><span class="mi">2</span><span class="o">.</span><span class="na">GB</span>
 </span><a id="__codelineno-75-6" name="__codelineno-75-6"></a>
 <a id="__codelineno-75-7" name="__codelineno-75-7"></a><span class="w">    </span><span class="nl">input:</span>
@@ -6669,7 +6665,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 <a id="__codelineno-77-8" name="__codelineno-77-8" href="#__codelineno-77-8"></a><span class="go">  Detecting adapter sequence for read1...</span>
 <a id="__codelineno-77-9" name="__codelineno-77-9" href="#__codelineno-77-9"></a><span class="go">  No adapter detected for read1</span>
 <a id="__codelineno-77-10" name="__codelineno-77-10" href="#__codelineno-77-10"></a>
-<a id="__codelineno-77-11" name="__codelineno-77-11" href="#__codelineno-77-11"></a><span class="hll"><span class="go">  .command.sh: line 7:   101 Killed                  fastp --in1 SAMPLE_002_S2_L001_R1_001.fastq --out1 sample_002_trimmed.fastq.gz --json sample_002.fastp.json --html sample_002.fastp.html --thread 2</span>
+<a id="__codelineno-77-11" name="__codelineno-77-11" href="#__codelineno-77-11"></a><span class="hll"><span class="go">  .command.sh: line 7:   101 Killed                  fastp --in1 SAMPLE_002_S2_L001_R1_001.fastq --out1 sample_002_trimmed.fastq.gz --json sample_002.fastp.json --html sample_002.fastp.html --thread 1</span>
 </span></code></pre></div>
 </details>
 <p>Bu, sürecin bellek sınırını aştığı için sonlandırıldığını göstermektedir.</p>
@@ -6690,7 +6686,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 <span class="normal"><a href="#__codelineno-78-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTP</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-78-2" name="__codelineno-78-2"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690&#39;</span>
 <a id="__codelineno-78-3" name="__codelineno-78-3"></a>
-<a id="__codelineno-78-4" name="__codelineno-78-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-78-4" name="__codelineno-78-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-78-5" name="__codelineno-78-5"></a><span class="hll"><span class="w">    </span><span class="n">memory</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="mi">1</span><span class="o">.</span><span class="na">GB</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">attempt</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-78-6" name="__codelineno-78-6"></a><span class="hll"><span class="w">    </span><span class="n">errorStrategy</span><span class="w"> </span><span class="s1">&#39;retry&#39;</span>
 </span><a id="__codelineno-78-7" name="__codelineno-78-7"></a><span class="hll"><span class="w">    </span><span class="n">maxRetries</span><span class="w"> </span><span class="mi">2</span>
@@ -6710,7 +6706,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 <span class="normal"><a href="#__codelineno-79-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTP</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-79-2" name="__codelineno-79-2"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690&#39;</span>
 <a id="__codelineno-79-3" name="__codelineno-79-3"></a>
-<a id="__codelineno-79-4" name="__codelineno-79-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-79-4" name="__codelineno-79-4"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">40000000</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-79-5" name="__codelineno-79-5"></a><span class="hll"><span class="w">    </span><span class="n">memory</span><span class="w"> </span><span class="mi">2</span><span class="o">.</span><span class="na">GB</span>
 </span><a id="__codelineno-79-6" name="__codelineno-79-6"></a>
 <a id="__codelineno-79-7" name="__codelineno-79-7"></a><span class="w">    </span><span class="nl">input:</span>
@@ -6808,7 +6804,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-85-2" name="__codelineno-85-2" href="#__codelineno-85-2"></a>
 <a id="__codelineno-85-3" name="__codelineno-85-3" href="#__codelineno-85-3"></a><span class="go">Launching `main.nf` [adoring_galileo] DSL2 - revision: c9e83aaef1</span>
 <a id="__codelineno-85-4" name="__codelineno-85-4" href="#__codelineno-85-4"></a>
@@ -6889,7 +6885,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a><span class="go">N E X T F L O W  ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a><span class="go">N E X T F L O W  ~  version 25.10.4</span>
 <a id="__codelineno-89-2" name="__codelineno-89-2" href="#__codelineno-89-2"></a><span class="go">Launching `main.nf` [lonely_williams] DSL2 - revision: d0b3f121ec</span>
 <a id="__codelineno-89-3" name="__codelineno-89-3" href="#__codelineno-89-3"></a><span class="go">[94/b48eac] Submitted process &gt; FASTP (2)</span>
 <a id="__codelineno-89-4" name="__codelineno-89-4" href="#__codelineno-89-4"></a><span class="go">[2c/d2b28f] Submitted process &gt; GENERATE_REPORT (2)</span>
@@ -6972,7 +6968,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 </code></pre></div>
 <details class="failure">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-94-2" name="__codelineno-94-2" href="#__codelineno-94-2"></a>
 <a id="__codelineno-94-3" name="__codelineno-94-3" href="#__codelineno-94-3"></a><span class="go">Launching `main.nf` [trusting_torvalds] DSL2 - revision: b56fbfbce2</span>
 <a id="__codelineno-94-4" name="__codelineno-94-4" href="#__codelineno-94-4"></a>
@@ -7180,9 +7176,9 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 </span><a id="__codelineno-105-13" name="__codelineno-105-13"></a><span class="hll"><span class="w">        </span><span class="n">error</span><span class="o">(</span><span class="s2">&quot;Girdi CSV dosyası bulunamadı: ${params.input}&quot;</span><span class="o">)</span>
 </span><a id="__codelineno-105-14" name="__codelineno-105-14"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span><a id="__codelineno-105-15" name="__codelineno-105-15"></a><span class="hll"><span class="o">}</span>
-</span><a id="__codelineno-105-16" name="__codelineno-105-16"></a><span class="hll"><span class="o">...</span>
-</span><a id="__codelineno-105-17" name="__codelineno-105-17"></a><span class="hll"><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-105-18" name="__codelineno-105-18"></a><span class="hll"><span class="w">    </span><span class="n">validateInputs</span><span class="o">()</span>
+</span><a id="__codelineno-105-16" name="__codelineno-105-16"></a><span class="o">...</span>
+<a id="__codelineno-105-17" name="__codelineno-105-17"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-105-18" name="__codelineno-105-18"></a><span class="hll"><span class="w">    </span><span class="n">validateInputs</span><span class="o">()</span>
 </span><a id="__codelineno-105-19" name="__codelineno-105-19"></a><span class="hll"><span class="w">    </span><span class="n">ch_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
@@ -7209,7 +7205,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 </code></pre></div>
 <details class="failure">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-108-1" name="__codelineno-108-1" href="#__codelineno-108-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-108-1" name="__codelineno-108-1" href="#__codelineno-108-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-108-2" name="__codelineno-108-2" href="#__codelineno-108-2"></a>
 <a id="__codelineno-108-3" name="__codelineno-108-3" href="#__codelineno-108-3"></a><span class="go">Launching `main.nf` [confident_coulomb] DSL2 - revision: 07059399ed</span>
 <a id="__codelineno-108-4" name="__codelineno-108-4" href="#__codelineno-108-4"></a>
@@ -7223,7 +7219,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 </code></pre></div>
 <details class="failure">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-110-1" name="__codelineno-110-1" href="#__codelineno-110-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-110-1" name="__codelineno-110-1" href="#__codelineno-110-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-110-2" name="__codelineno-110-2" href="#__codelineno-110-2"></a>
 <a id="__codelineno-110-3" name="__codelineno-110-3" href="#__codelineno-110-3"></a><span class="go">Launching `main.nf` [cranky_gates] DSL2 - revision: 26839ae3eb</span>
 <a id="__codelineno-110-4" name="__codelineno-110-4" href="#__codelineno-110-4"></a>
@@ -7279,7 +7275,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 </code></pre></div>
 <details class="warning">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-116-1" name="__codelineno-116-1" href="#__codelineno-116-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-116-1" name="__codelineno-116-1" href="#__codelineno-116-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-116-2" name="__codelineno-116-2" href="#__codelineno-116-2"></a>
 <a id="__codelineno-116-3" name="__codelineno-116-3" href="#__codelineno-116-3"></a><span class="go">Launching `main.nf` [awesome_goldwasser] DSL2 - revision: a31662a7c1</span>
 <a id="__codelineno-116-4" name="__codelineno-116-4" href="#__codelineno-116-4"></a>
@@ -7287,7 +7283,7 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 <a id="__codelineno-116-6" name="__codelineno-116-6" href="#__codelineno-116-6"></a><span class="go">[ce/df5eeb] process &gt; FASTP (2)           [100%] 2 of 2 ✔</span>
 <a id="__codelineno-116-7" name="__codelineno-116-7" href="#__codelineno-116-7"></a><span class="go">[-        ] process &gt; TRIMGALORE          -</span>
 <a id="__codelineno-116-8" name="__codelineno-116-8" href="#__codelineno-116-8"></a><span class="go">[d1/7d2b4b] process &gt; GENERATE_REPORT (3) [100%] 3 of 3 ✔</span>
-<a id="__codelineno-116-9" name="__codelineno-116-9" href="#__codelineno-116-9"></a><span class="go">WARN: Düşük dizileme derinliği sample_002 için: 25000000</span>
+<a id="__codelineno-116-9" name="__codelineno-116-9" href="#__codelineno-116-9"></a><span class="go">WARN: Low sequencing depth for sample_002: 25000000</span>
 </code></pre></div>
 </details>
 <p>Örneklerden biri için düşük dizileme derinliği uyarısı görüyoruz.</p>
@@ -7360,9 +7356,9 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-120-1" name="__codelineno-120-1" href="#__codelineno-120-1"></a><span class="go">N E X T F L O W  ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-120-1" name="__codelineno-120-1" href="#__codelineno-120-1"></a><span class="go">N E X T F L O W  ~  version 25.10.4</span>
 <a id="__codelineno-120-2" name="__codelineno-120-2" href="#__codelineno-120-2"></a><span class="go">Launching `main.nf` [marvelous_boltzmann] DSL2 - revision: a31662a7c1</span>
-<a id="__codelineno-120-3" name="__codelineno-120-3" href="#__codelineno-120-3"></a><span class="go">WARN: Düşük dizileme derinliği sample_002 için: 25000000</span>
+<a id="__codelineno-120-3" name="__codelineno-120-3" href="#__codelineno-120-3"></a><span class="go">WARN: Low sequencing depth for sample_002: 25000000</span>
 <a id="__codelineno-120-4" name="__codelineno-120-4" href="#__codelineno-120-4"></a><span class="go">[9b/d48e40] Submitted process &gt; FASTP (2)</span>
 <a id="__codelineno-120-5" name="__codelineno-120-5" href="#__codelineno-120-5"></a><span class="go">[6a/73867a] Submitted process &gt; GENERATE_REPORT (2)</span>
 <a id="__codelineno-120-6" name="__codelineno-120-6" href="#__codelineno-120-6"></a><span class="go">[79/ad0ac5] Submitted process &gt; GENERATE_REPORT (1)</span>
@@ -7403,53 +7399,29 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 <span class="normal"><a href="#__codelineno-121-84">84</a></span>
 <span class="normal"><a href="#__codelineno-121-85">85</a></span>
 <span class="normal"><a href="#__codelineno-121-86">86</a></span>
-<span class="normal"><a href="#__codelineno-121-87">87</a></span>
-<span class="normal"><a href="#__codelineno-121-88">88</a></span>
-<span class="normal"><a href="#__codelineno-121-89">89</a></span>
-<span class="normal"><a href="#__codelineno-121-90">90</a></span>
-<span class="normal"><a href="#__codelineno-121-91">91</a></span>
-<span class="normal"><a href="#__codelineno-121-92">92</a></span>
-<span class="normal"><a href="#__codelineno-121-93">93</a></span>
-<span class="normal"><a href="#__codelineno-121-94">94</a></span>
-<span class="normal"><a href="#__codelineno-121-95">95</a></span>
-<span class="normal"><a href="#__codelineno-121-96">96</a></span>
-<span class="normal"><a href="#__codelineno-121-97">97</a></span>
-<span class="normal"><a href="#__codelineno-121-98">98</a></span>
-<span class="normal"><a href="#__codelineno-121-99">99</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-121-66" name="__codelineno-121-66"></a><span class="w">    </span><span class="n">ch_fastp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FASTP</span><span class="o">(</span><span class="n">trim_branches</span><span class="o">.</span><span class="na">fastp</span><span class="o">)</span>
-<a id="__codelineno-121-67" name="__codelineno-121-67"></a><span class="w">    </span><span class="n">ch_trimgalore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TRIMGALORE</span><span class="o">(</span><span class="n">trim_branches</span><span class="o">.</span><span class="na">trimgalore</span><span class="o">)</span>
-<a id="__codelineno-121-68" name="__codelineno-121-68"></a><span class="w">    </span><span class="n">GENERATE_REPORT</span><span class="o">(</span><span class="n">ch_samples</span><span class="o">)</span>
-<a id="__codelineno-121-69" name="__codelineno-121-69"></a>
-<a id="__codelineno-121-70" name="__codelineno-121-70"></a><span class="hll"><span class="w">    </span><span class="n">workflow</span><span class="o">.</span><span class="na">onComplete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-121-71" name="__codelineno-121-71"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
-</span><a id="__codelineno-121-72" name="__codelineno-121-72"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Pipeline yürütme özeti:&quot;</span>
-</span><a id="__codelineno-121-73" name="__codelineno-121-73"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;==========================&quot;</span>
-</span><a id="__codelineno-121-74" name="__codelineno-121-74"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Tamamlandı: ${workflow.complete}&quot;</span>
-</span><a id="__codelineno-121-75" name="__codelineno-121-75"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Süre       : ${workflow.duration}&quot;</span>
-</span><a id="__codelineno-121-76" name="__codelineno-121-76"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Başarı     :```groovy title=&quot;</span><span class="n">main</span><span class="o">.</span><span class="na">nf</span><span class="s2">&quot; linenums=&quot;</span><span class="mi">66</span><span class="s2">&quot; hl_lines=&quot;</span><span class="mi">5</span><span class="o">-</span><span class="mi">22</span><span class="s2">&quot;</span>
-</span><a id="__codelineno-121-77" name="__codelineno-121-77"></a><span class="hll"><span class="s2">    ch_fastp = FASTP(trim_branches.fastp)</span>
-</span><a id="__codelineno-121-78" name="__codelineno-121-78"></a><span class="hll"><span class="s2">    ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)</span>
-</span><a id="__codelineno-121-79" name="__codelineno-121-79"></a><span class="hll"><span class="s2">    GENERATE_REPORT(ch_samples)</span>
-</span><a id="__codelineno-121-80" name="__codelineno-121-80"></a><span class="hll">
-</span><a id="__codelineno-121-81" name="__codelineno-121-81"></a><span class="hll"><span class="s2">    workflow.onComplete = {</span>
-</span><a id="__codelineno-121-82" name="__codelineno-121-82"></a><span class="hll"><span class="s2">        println &quot;&quot;</span>
-</span><a id="__codelineno-121-83" name="__codelineno-121-83"></a><span class="hll"><span class="s2">        println &quot;</span><span class="n">Pipeline</span><span class="w"> </span><span class="n">yürütme</span><span class="w"> </span><span class="err">ö</span><span class="nl">zeti:</span><span class="s2">&quot;</span>
-</span><a id="__codelineno-121-84" name="__codelineno-121-84"></a><span class="hll"><span class="s2">        println &quot;</span><span class="o">==========================</span><span class="s2">&quot;</span>
-</span><a id="__codelineno-121-85" name="__codelineno-121-85"></a><span class="hll"><span class="s2">        println &quot;</span><span class="nl">Tamamlandı:</span><span class="w"> </span><span class="n">$</span><span class="o">{</span><span class="n">workflow</span><span class="o">.</span><span class="na">complete</span><span class="o">}</span><span class="s2">&quot;</span>
-</span><a id="__codelineno-121-86" name="__codelineno-121-86"></a><span class="hll"><span class="s2">        println &quot;</span><span class="n">Süre</span><span class="w">       </span><span class="o">:</span><span class="w"> </span><span class="n">$</span><span class="o">{</span><span class="n">workflow</span><span class="o">.</span><span class="na">duration</span><span class="o">}</span><span class="s2">&quot;</span>
-</span><a id="__codelineno-121-87" name="__codelineno-121-87"></a><span class="hll"><span class="s2">        println &quot;</span><span class="n">Başarı</span><span class="w">     </span><span class="o">:</span><span class="w"> </span><span class="n">$</span><span class="o">{</span><span class="n">workflow</span><span class="o">.</span><span class="na">success</span><span class="o">}</span><span class="s2">&quot;</span>
-</span><a id="__codelineno-121-88" name="__codelineno-121-88"></a><span class="s2">        println &quot;</span><span class="n">workDir</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="n">$</span><span class="o">{</span><span class="n">workflow</span><span class="o">.</span><span class="na">workDir</span><span class="o">}</span><span class="s2">&quot;</span>
-<a id="__codelineno-121-89" name="__codelineno-121-89"></a><span class="s2">        println &quot;</span><span class="err">Çı</span><span class="n">kış</span><span class="w"> </span><span class="n">kodu</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">$</span><span class="o">{</span><span class="n">workflow</span><span class="o">.</span><span class="na">exitStatus</span><span class="o">}</span><span class="s2">&quot;</span>
-<a id="__codelineno-121-90" name="__codelineno-121-90"></a><span class="s2">        println &quot;&quot;</span>
-<a id="__codelineno-121-91" name="__codelineno-121-91"></a>
-<a id="__codelineno-121-92" name="__codelineno-121-92"></a><span class="s2">        if (workflow.success) {</span>
-<a id="__codelineno-121-93" name="__codelineno-121-93"></a><span class="s2">            println &quot;</span><span class="err">✅</span><span class="w"> </span><span class="n">Pipeline</span><span class="w"> </span><span class="n">başarıyla</span><span class="w"> </span><span class="n">tamamlandı</span><span class="o">!</span><span class="s2">&quot;</span>
-<a id="__codelineno-121-94" name="__codelineno-121-94"></a><span class="s2">        } else {</span>
-<a id="__codelineno-121-95" name="__codelineno-121-95"></a><span class="s2">            println &quot;</span><span class="err">❌</span><span class="w"> </span><span class="n">Pipeline</span><span class="w"> </span><span class="n">başarısız</span><span class="w"> </span><span class="n">oldu</span><span class="o">!</span><span class="s2">&quot;</span>
-<a id="__codelineno-121-96" name="__codelineno-121-96"></a><span class="s2">            println &quot;</span><span class="nl">Hata:</span><span class="w"> </span><span class="n">$</span><span class="o">{</span><span class="n">workflow</span><span class="o">.</span><span class="na">errorMessage</span><span class="o">}</span><span class="err">&quot;</span>
-<a id="__codelineno-121-97" name="__codelineno-121-97"></a><span class="w">        </span><span class="o">}</span>
-<a id="__codelineno-121-98" name="__codelineno-121-98"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-121-99" name="__codelineno-121-99"></a><span class="o">}</span>
-</code></pre></div></td></tr></table></div>
+<span class="normal"><a href="#__codelineno-121-87">87</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-121-66" name="__codelineno-121-66"></a><span class="w">    </span><span class="n">ch_fastp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FASTP</span><span class="o">(</span><span class="n">trim_branches</span><span class="o">.</span><span class="na">fastp</span><span class="o">)</span>
+<a id="__codelineno-121-67" name="__codelineno-121-67"></a><span class="w">    </span><span class="n">ch_trimgalore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TRIMGALORE</span><span class="o">(</span><span class="n">trim_branches</span><span class="o">.</span><span class="na">trimgalore</span><span class="o">)</span><span class="w">       </span><span class="n">GENERATE_REPORT</span><span class="o">(</span><span class="n">ch_samples</span><span class="o">)</span>
+<a id="__codelineno-121-68" name="__codelineno-121-68"></a>
+<a id="__codelineno-121-69" name="__codelineno-121-69"></a><span class="w">    </span><span class="n">workflow</span><span class="o">.</span><span class="na">onComplete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-121-70" name="__codelineno-121-70"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+</span><a id="__codelineno-121-71" name="__codelineno-121-71"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Pipeline yürütme özeti:&quot;</span>
+</span><a id="__codelineno-121-72" name="__codelineno-121-72"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;==========================&quot;</span>
+</span><a id="__codelineno-121-73" name="__codelineno-121-73"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Tamamlandı: ${workflow.complete}&quot;</span>
+</span><a id="__codelineno-121-74" name="__codelineno-121-74"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Süre       : ${workflow.duration}&quot;</span>
+</span><a id="__codelineno-121-75" name="__codelineno-121-75"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Başarı     : ${workflow.success}&quot;</span>
+</span><a id="__codelineno-121-76" name="__codelineno-121-76"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;workDir    : ${workflow.workDir}&quot;</span>
+</span><a id="__codelineno-121-77" name="__codelineno-121-77"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Çıkış kodu : ${workflow.exitStatus}&quot;</span>
+</span><a id="__codelineno-121-78" name="__codelineno-121-78"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+</span><a id="__codelineno-121-79" name="__codelineno-121-79"></a><span class="hll">
+</span><a id="__codelineno-121-80" name="__codelineno-121-80"></a><span class="hll"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">workflow</span><span class="o">.</span><span class="na">success</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-121-81" name="__codelineno-121-81"></a><span class="hll"><span class="w">            </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;✅ Pipeline başarıyla tamamlandı!&quot;</span>
+</span><a id="__codelineno-121-82" name="__codelineno-121-82"></a><span class="hll"><span class="w">        </span><span class="o">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-121-83" name="__codelineno-121-83"></a><span class="hll"><span class="w">            </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;❌ Pipeline başarısız oldu!&quot;</span>
+</span><a id="__codelineno-121-84" name="__codelineno-121-84"></a><span class="hll"><span class="w">            </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Hata: ${workflow.errorMessage}&quot;</span>
+</span><a id="__codelineno-121-85" name="__codelineno-121-85"></a><span class="hll"><span class="w">        </span><span class="o">}</span>
+</span><a id="__codelineno-121-86" name="__codelineno-121-86"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
+</span><a id="__codelineno-121-87" name="__codelineno-121-87"></a><span class="hll"><span class="o">}</span>
+</span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-122-66">66</a></span>
@@ -7492,9 +7464,9 @@ Temel kavramlardan başlayarak ileri düzey kalıplara doğru ilerleyeceğiz.</p
 
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-123-1" name="__codelineno-123-1" href="#__codelineno-123-1"></a><span class="go">N E X T F L O W  ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-123-1" name="__codelineno-123-1" href="#__codelineno-123-1"></a><span class="go">N E X T F L O W  ~  version 25.10.4</span>
 <a id="__codelineno-123-2" name="__codelineno-123-2" href="#__codelineno-123-2"></a><span class="go">Launching `main.nf` [boring_linnaeus] DSL2 - revision: a31662a7c1</span>
-<a id="__codelineno-123-3" name="__codelineno-123-3" href="#__codelineno-123-3"></a><span class="go">WARN: Düşük dizileme derinliği sample_002 için: 25000000</span>
+<a id="__codelineno-123-3" name="__codelineno-123-3" href="#__codelineno-123-3"></a><span class="go">WARN: Low sequencing depth for sample_002: 25000000</span>
 <a id="__codelineno-123-4" name="__codelineno-123-4" href="#__codelineno-123-4"></a><span class="go">[e5/242efc] Submitted process &gt; FASTP (2)</span>
 <a id="__codelineno-123-5" name="__codelineno-123-5" href="#__codelineno-123-5"></a><span class="go">[3b/74047c] Submitted process &gt; GENERATE_REPORT (3)</span>
 <a id="__codelineno-123-6" name="__codelineno-123-6" href="#__codelineno-123-6"></a><span class="go">[8a/7a57e6] Submitted process &gt; GENERATE_REPORT (1)</span>

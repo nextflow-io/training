@@ -491,7 +491,7 @@
   <span class="md-ellipsis">
     
   
-    Startseite
+    Home
   
 
     
@@ -2361,7 +2361,7 @@
   <span class="md-ellipsis">
     
   
-    Teil 2: Variantenerkennung pro Probe
+    02 per sample variant calling
   
 
     
@@ -3093,7 +3093,7 @@
   <span class="md-ellipsis">
     
   
-    Orientierung
+    Erste Schritte
   
 
     
@@ -3149,7 +3149,7 @@
   <span class="md-ellipsis">
     
   
-    Wesentliche Nextflow-Scripting-Muster
+    Wesentliche Scripting-Muster
   
 
     
@@ -3261,7 +3261,7 @@
   <span class="md-ellipsis">
     
   
-    Testen mit nf-test
+    Index
   
 
     
@@ -4833,7 +4833,7 @@ Beachte, dass die Zahlen keine Bedeutung haben; sie dienen nur zur Veranschaulic
 <span class="normal"><a href="#__codelineno-0-2">2</a></span>
 <span class="normal"><a href="#__codelineno-0-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>Hello,English,123
 <a id="__codelineno-0-2" name="__codelineno-0-2"></a>Bonjour,French,456
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a>Holà,Spanish,789
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>Hola,Spanish,789
 </code></pre></div></td></tr></table></div>
 <p>Wir haben auch eine verbesserte Version des ursprünglichen Workflows geschrieben, jetzt <code>2a-inputs.nf</code> genannt, die die CSV-Datei einliest, die Grüße extrahiert und jeden davon in eine separate Datei schreibt.</p>
 <figure class="excalidraw">
@@ -4850,7 +4850,7 @@ Beachte, dass die Zahlen keine Bedeutung haben; sie dienen nur zur Veranschaulic
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">Launching `2a-inputs.nf` [mighty_sammet] DSL2 - revision: 29fb5352b3</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
@@ -4863,7 +4863,7 @@ Dies deutet darauf hin, dass der <code>sayHello()</code> process dreimal aufgeru
 <h3 id="12-die-veroffentlichten-ausgaben-im-results-verzeichnis-finden">1.2. Die veröffentlichten Ausgaben im <code>results</code>-Verzeichnis finden<a class="headerlink" href="#12-die-veroffentlichten-ausgaben-im-results-verzeichnis-finden" title="Permanent link">&para;</a></h3>
 <p>Schauen wir uns das 'results'-Verzeichnis an, um zu sehen, ob unser Workflow immer noch eine Kopie unserer Ausgaben dorthin schreibt.</p>
 <details class="abstract">
-<summary>Verzeichnisinhalte</summary>
+<summary>Verzeichnisinhalt</summary>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span>
 <span class="normal"><a href="#__codelineno-3-3">3</a></span>
@@ -4876,18 +4876,18 @@ Dies deutet darauf hin, dass der <code>sayHello()</code> process dreimal aufgeru
 <a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="hll"><span class="go">└── 2a-inputs</span>
 </span><a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="hll"><span class="go">    ├── Bonjour-output.txt</span>
 </span><a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="hll"><span class="go">    ├── Hello-output.txt</span>
-</span><a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="hll"><span class="go">    └── Holà-output.txt</span>
+</span><a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="hll"><span class="go">    └── Hola-output.txt</span>
 </span></code></pre></div></td></tr></table></div>
 </details>
 <p>Ja! Wir sehen ein neues Verzeichnis namens <code>2a-inputs</code> mit drei Ausgabedateien mit unterschiedlichen Namen, praktischerweise.</p>
 <p>Du kannst jede davon öffnen, um dich zu vergewissern, dass sie den entsprechenden Gruß-String enthält.</p>
 <details class="abstract">
-<summary>Dateiinhalte</summary>
+<summary>Dateiinhalt</summary>
 <div class="highlight"><span class="filename">results/2a-inputs/Hello-output.txt</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">Hello</span>
 </code></pre></div>
 <div class="highlight"><span class="filename">results/2a-inputs/Bonjour-output.txt</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">Bonjour</span>
 </code></pre></div>
-<div class="highlight"><span class="filename">results/2a-inputs/Holà-output.txt</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">Holà</span>
+<div class="highlight"><span class="filename">results/2a-inputs/Hola-output.txt</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">Hola</span>
 </code></pre></div>
 </details>
 <p>Dies bestätigt, dass jeder Gruß in der Eingabedatei entsprechend verarbeitet wurde.</p>
@@ -4897,7 +4897,7 @@ Bedeutet das, dass alle drei Aufrufe von <code>sayHello()</code> innerhalb diese
 <h4 id="131-das-im-terminal-angegebene-task-verzeichnis-untersuchen">1.3.1. Das im Terminal angegebene task-Verzeichnis untersuchen<a class="headerlink" href="#131-das-im-terminal-angegebene-task-verzeichnis-untersuchen" title="Permanent link">&para;</a></h4>
 <p>Schauen wir uns dieses <code>8e/0eb066</code> task-Verzeichnis an.</p>
 <details class="abstract">
-<summary>Verzeichnisinhalte</summary>
+<summary>Verzeichnisinhalt</summary>
 <div class="highlight"><span class="filename">8e/0eb066</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="go">work/8e/0eb066071cdb4123906b7b4ea8b047/</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="go">└── Bonjour-output.txt</span>
 </code></pre></div>
@@ -4917,7 +4917,7 @@ Es gibt zwei weitere, die dort nicht aufgeführt sind.</p>
 <span class="normal"><a href="#__codelineno-9-2">2</a></span>
 <span class="normal"><a href="#__codelineno-9-3">3</a></span>
 <span class="normal"><a href="#__codelineno-9-4">4</a></span>
-<span class="normal"><a href="#__codelineno-9-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">N E X T F L O W  ~  version 25.10.2</span>
+<span class="normal"><a href="#__codelineno-9-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">N E X T F L O W  ~  version 25.10.4</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="go">Launching `2a-inputs.nf` [pedantic_hamilton] DSL2 - revision: 6bbc42e49f</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="go">[ab/1a8ece] Submitted process &gt; sayHello (1)</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="go">[0d/2cae24] Submitted process &gt; sayHello (2)</span>
@@ -4932,7 +4932,7 @@ In diesem erweiterten Modus meldet es nur, dass sie übermittelt wurden.</p>
 <p>Dies bestätigt, dass der <code>sayHello()</code> process dreimal aufgerufen wird, und für jeden wird ein separates task-Verzeichnis erstellt.</p>
 <p>Wenn wir in jedes der dort aufgelisteten task-Verzeichnisse schauen, können wir überprüfen, dass jedes einem der Grüße entspricht.</p>
 <details class="abstract">
-<summary>Verzeichnisinhalte</summary>
+<summary>Verzeichnisinhalt</summary>
 <div class="highlight"><span class="filename">ab/1a8ece</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">work/ab/1a8ece307e53f03fce689dde904b64/</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="go">└── Hello-output.txt</span>
 </code></pre></div>
@@ -4940,7 +4940,7 @@ In diesem erweiterten Modus meldet es nur, dass sie übermittelt wurden.</p>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="go">└── Bonjour-output.txt</span>
 </code></pre></div>
 <div class="highlight"><span class="filename">b5/0df1d6</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">work/b5/0df1d642353269909c2ce23fc2a8fa/</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="go">└── Holà-output.txt</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="go">└── Hola-output.txt</span>
 </code></pre></div>
 </details>
 <p>Dies bestätigt, dass jeder process-Aufruf isoliert von allen anderen ausgeführt wird.
@@ -5067,7 +5067,7 @@ Das hat viele Vorteile, einschließlich der Vermeidung von Kollisionen, wenn der
 <a id="__codelineno-14-35" name="__codelineno-14-35"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Dieser Code erstellt einen Kanal namens <code>greeting_ch</code>, der die CSV-Datei liest, sie parst und die erste Spalte aus jeder Zeile extrahiert.
-Das Ergebnis ist ein Kanal, der <code>Hello</code>, <code>Bonjour</code> und <code>Holà</code> enthält.</p>
+Das Ergebnis ist ein Kanal, der <code>Hello</code>, <code>Bonjour</code> und <code>Hola</code> enthält.</p>
 <details class="tip">
 <summary>Wie funktioniert das?</summary>
 <p>Hier ist, was diese Zeile auf Deutsch bedeutet:</p>
@@ -5086,12 +5086,12 @@ Das Ergebnis ist ein Kanal, der <code>Hello</code>, <code>Bonjour</code> und <co
 <span class="normal"><a href="#__codelineno-15-2">2</a></span>
 <span class="normal"><a href="#__codelineno-15-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a>Hello,English,123
 <a id="__codelineno-15-2" name="__codelineno-15-2"></a>Bonjour,French,456
-<a id="__codelineno-15-3" name="__codelineno-15-3"></a>Holà,Spanish,789
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a>Hola,Spanish,789
 </code></pre></div></td></tr></table></div>
 <p>Haben wir das in ein Array transformiert, das so aussieht:</p>
-<div class="highlight"><span class="filename">Array-Inhalte</span><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>[[Hello,English,123],[Bonjour,French,456],[Holà,Spanish,789]]
+<div class="highlight"><span class="filename">Array contents</span><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>[[Hello,English,123],[Bonjour,French,456],[Hola,Spanish,789]]
 </code></pre></div>
-<p>Und dann haben wir das erste Element aus jeder der drei Zeilen genommen und sie in einen Nextflow Kanal geladen, der jetzt enthält: <code>Hello</code>, <code>Bonjour</code> und <code>Holà</code>.</p>
+<p>Und dann haben wir das erste Element aus jeder der drei Zeilen genommen und sie in einen Nextflow Kanal geladen, der jetzt enthält: <code>Hello</code>, <code>Bonjour</code> und <code>Hola</code>.</p>
 <p>Wenn du Kanäle und Operatoren im Detail verstehen möchtest, einschließlich wie du sie selbst schreibst, siehe <a href="../../hello_nextflow/02_hello_channels/#4-read-input-values-from-a-csv-file">Hello Nextflow Teil 2: Hello Channels</a>.</p>
 </details>
 <h4 id="142-den-process-fur-jeden-gru-aufrufen">1.4.2. Den process für jeden Gruß aufrufen<a class="headerlink" href="#142-den-process-fur-jeden-gru-aufrufen" title="Permanent link">&para;</a></h4>
@@ -5178,7 +5178,7 @@ Lass uns auf dem aufbauen, was wir gerade über Kanäle gelernt haben, und schau
 <span class="normal"><a href="#__codelineno-20-4">4</a></span>
 <span class="normal"><a href="#__codelineno-20-5">5</a></span>
 <span class="normal"><a href="#__codelineno-20-6">6</a></span>
-<span class="normal"><a href="#__codelineno-20-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<span class="normal"><a href="#__codelineno-20-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2"></a>
 <a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="go">Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4"></a>
@@ -5191,7 +5191,7 @@ Lass uns auf dem aufbauen, was wir gerade über Kanäle gelernt haben, und schau
 <h3 id="22-die-ausgaben-finden">2.2. Die Ausgaben finden<a class="headerlink" href="#22-die-ausgaben-finden" title="Permanent link">&para;</a></h3>
 <p>Lass uns überprüfen, dass das tatsächlich passiert ist, indem wir einen Blick in das <code>results</code>-Verzeichnis werfen.</p>
 <details class="abstract">
-<summary>Verzeichnisinhalte</summary>
+<summary>Verzeichnisinhalt</summary>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
@@ -5214,17 +5214,17 @@ Lass uns auf dem aufbauen, was wir gerade über Kanäle gelernt haben, und schau
 <a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="go">├── 2a-inputs</span>
 <a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="go">|   ├── Bonjour-output.txt</span>
 <a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="go">|   ├── Hello-output.txt</span>
-<a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="go">|   └── Holà-output.txt</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="go">|   └── Hola-output.txt</span>
 <a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="hll"><span class="go">└── 2b-multistep</span>
 </span><a id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="hll"><span class="go">    ├── COLLECTED-batch-output.txt</span>
 </span><a id="__codelineno-21-10" name="__codelineno-21-10"></a><span class="hll"><span class="go">    ├── batch-report.txt</span>
 </span><a id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="hll"><span class="go">    └── intermediates</span>
 </span><a id="__codelineno-21-12" name="__codelineno-21-12"></a><span class="hll"><span class="go">        ├── Bonjour-output.txt</span>
 </span><a id="__codelineno-21-13" name="__codelineno-21-13"></a><span class="hll"><span class="go">        ├── Hello-output.txt</span>
-</span><a id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="hll"><span class="go">        ├── Holà-output.txt</span>
+</span><a id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="hll"><span class="go">        ├── Hola-output.txt</span>
 </span><a id="__codelineno-21-15" name="__codelineno-21-15"></a><span class="hll"><span class="go">        ├── UPPER-Bonjour-output.txt</span>
 </span><a id="__codelineno-21-16" name="__codelineno-21-16"></a><span class="hll"><span class="go">        ├── UPPER-Hello-output.txt</span>
-</span><a id="__codelineno-21-17" name="__codelineno-21-17"></a><span class="go">        └── UPPER-Holà-output.txt</span>
+</span><a id="__codelineno-21-17" name="__codelineno-21-17"></a><span class="go">        └── UPPER-Hola-output.txt</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>Wie du sehen kannst, haben wir ein neues Verzeichnis namens <code>2b-multistep</code>, und es enthält einiges mehr Dateien als zuvor.
@@ -5232,10 +5232,10 @@ Einige der Dateien wurden in einem Unterverzeichnis namens <code>intermediates</
 <p>Diese beiden sind die Endergebnisse des mehrstufigen Workflows.
 Nimm dir eine Minute Zeit, um die Dateinamen anzusehen und ihren Inhalt zu überprüfen, um zu bestätigen, dass sie das sind, was du erwartest.</p>
 <details class="abstract">
-<summary>Dateiinhalte</summary>
+<summary>Dateiinhalt</summary>
 <div class="highlight"><span class="filename">results/2b-multistep/COLLECTED-batch-output.txt</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>HELLO
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>BONJOUR
-<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>HOLà
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>HOLA
 </code></pre></div>
 <div class="highlight"><span class="filename">results/2b-multistep/batch-report.txt</span><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>There were 3 greetings in this batch.
 </code></pre></div>
@@ -5541,7 +5541,7 @@ Diesmal heißt der Operator <code>collect</code> und wird auf den Ausgabe-Kanal 
 </figure>
 
 <p>So bekommen wir alle Grüße zurück in dieselbe Datei.</p>
-<p>Es gibt viele andere <a href="https://www.nextflow.io/docs/latest/reference/operator.html#operator-page">Operatoren</a>, die verfügbar sind, um Transformationen auf den Inhalt von Kanälen zwischen process-Aufrufen anzuwenden.</p>
+<p>Es gibt viele andere <a href="https://nextflow.io/docs/latest/reference/operator.html">Operatoren</a>, die verfügbar sind, um Transformationen auf den Inhalt von Kanälen zwischen process-Aufrufen anzuwenden.</p>
 <p>Das gibt bei der Pipeline-Entwicklung viel Flexibilität für die Anpassung der Flusslogik.
 Der Nachteil ist, dass es manchmal schwieriger machen kann, zu entziffern, was die Pipeline tut.</p>
 <h4 id="235-ein-eingabe-parameter-kann-einen-standardwert-haben">2.3.5. Ein Eingabe-Parameter kann einen Standardwert haben<a class="headerlink" href="#235-ein-eingabe-parameter-kann-einen-standardwert-haben" title="Permanent link">&para;</a></h4>
@@ -5575,7 +5575,7 @@ Aber wenn wir einen auf der Kommandozeile angeben, wird der von uns angegebene W
 <span class="normal"><a href="#__codelineno-31-4">4</a></span>
 <span class="normal"><a href="#__codelineno-31-5">5</a></span>
 <span class="normal"><a href="#__codelineno-31-6">6</a></span>
-<span class="normal"><a href="#__codelineno-31-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<span class="normal"><a href="#__codelineno-31-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2"></a>
 <a id="__codelineno-31-3" name="__codelineno-31-3"></a><span class="go">Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726</span>
 <a id="__codelineno-31-4" name="__codelineno-31-4"></a>
@@ -5586,7 +5586,7 @@ Aber wenn wir einen auf der Kommandozeile angeben, wird der von uns angegebene W
 </details>
 <p>Du solltest neue Endausgaben sehen, die mit deinem benutzerdefinierten Batch-Namen benannt sind.</p>
 <details class="abstract">
-<summary>Verzeichnisinhalte</summary>
+<summary>Verzeichnisinhalt</summary>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
@@ -5611,7 +5611,7 @@ Aber wenn wir einen auf der Kommandozeile angeben, wird der von uns angegebene W
 <a id="__codelineno-32-4" name="__codelineno-32-4"></a><span class="go">├── 2a-inputs</span>
 <a id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="go">|   ├── Bonjour-output.txt</span>
 <a id="__codelineno-32-6" name="__codelineno-32-6"></a><span class="go">|   ├── Hello-output.txt</span>
-<a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="go">|   └── Holà-output.txt</span>
+<a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="go">|   └── Hola-output.txt</span>
 <a id="__codelineno-32-8" name="__codelineno-32-8"></a><span class="go">└── 2b-multistep</span>
 <a id="__codelineno-32-9" name="__codelineno-32-9"></a><span class="go">    ├── COLLECTED-batch-output.txt</span>
 <a id="__codelineno-32-10" name="__codelineno-32-10"></a><span class="hll"><span class="go">    ├── COLLECTED-test-output.txt</span>
@@ -5620,10 +5620,10 @@ Aber wenn wir einen auf der Kommandozeile angeben, wird der von uns angegebene W
 </span><a id="__codelineno-32-13" name="__codelineno-32-13"></a><span class="go">    └── intermediates</span>
 <a id="__codelineno-32-14" name="__codelineno-32-14"></a><span class="go">        ├── Bonjour-output.txt</span>
 <a id="__codelineno-32-15" name="__codelineno-32-15"></a><span class="go">        ├── Hello-output.txt</span>
-<a id="__codelineno-32-16" name="__codelineno-32-16"></a><span class="go">        ├── Holà-output.txt</span>
+<a id="__codelineno-32-16" name="__codelineno-32-16"></a><span class="go">        ├── Hola-output.txt</span>
 <a id="__codelineno-32-17" name="__codelineno-32-17"></a><span class="go">        ├── UPPER-Bonjour-output.txt</span>
 <a id="__codelineno-32-18" name="__codelineno-32-18"></a><span class="go">        ├── UPPER-Hello-output.txt</span>
-<a id="__codelineno-32-19" name="__codelineno-32-19"></a><span class="go">        └── UPPER-Holà-output.txt</span>
+<a id="__codelineno-32-19" name="__codelineno-32-19"></a><span class="go">        └── UPPER-Hola-output.txt</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>Dies ist ein Aspekt der Eingabe-Konfiguration, den wir in Teil 3 ausführlicher behandeln werden, aber für jetzt ist das Wichtige zu wissen, dass Eingabe-Parameter Standardwerte haben können.</p>
@@ -5716,7 +5716,7 @@ Jetzt werden wir sehen, wie es aussieht, wenn die processes in einzelnen Modulen
 </figure>
 
 <details class="abstract">
-<summary>Verzeichnisinhalte</summary>
+<summary>Verzeichnisinhalt</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="go">modules/</span>
 <a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="go">├── collectGreetings.nf</span>
 <a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="go">├── convertToUpper.nf</span>
@@ -5842,7 +5842,7 @@ Beginne damit, die <code>2c-modules.nf</code> Workflow-Datei zu öffnen.</p>
 </details>
 <p>Du siehst, dass die Workflow-Logik genau dieselbe ist wie in der vorherigen Version des Workflows.
 Allerdings ist der process-Code aus der Workflow-Datei verschwunden, und stattdessen gibt es <code>include</code>-Anweisungen, die auf separate Dateien unter <code>modules</code> verweisen.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2c-modules.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-3">3</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-modules.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-3">3</a></span>
 <span class="normal"><a href="#__codelineno-38-4">4</a></span>
 <span class="normal"><a href="#__codelineno-38-5">5</a></span>
 <span class="normal"><a href="#__codelineno-38-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-3" name="__codelineno-38-3"></a><span class="c1">// Module einbinden</span>
@@ -5899,12 +5899,12 @@ Das Gleiche gilt für die anderen beiden processes.</p>
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>
 <a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="go">Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726</span>
 <a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>
 <a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="go">[d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔</span>
-<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a><span class="go">[99/79484f] convertToUpper (2) | 3 of 3, cached: 3 ✔</span>
+<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a><span class="go">[99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔</span>
 <a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a><span class="go">[1e/83586c] collectGreetings   | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
 </details>
@@ -6000,7 +6000,7 @@ Sobald der Download abgeschlossen ist, hast du eine lokale Kopie des Container-I
 <p class="admonition-title">Tipp</p>
 <p>Wenn du einen Container ausführst, ist er standardmäßig vom Host-System isoliert.
 Das bedeutet, dass der Container auf keine Dateien auf dem Host-System zugreifen kann, es sei denn, du erlaubst es ihm ausdrücklich, indem du angibst, dass du ein Volume als Teil des <code>docker run</code>-Befehls mounten möchtest, mit der folgenden Syntax:</p>
-<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>-v<span class="w"> </span>&lt;außerhalb_pfad&gt;:&lt;innerhalb_pfad&gt;
+<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>-v<span class="w"> </span>&lt;outside_path&gt;:&lt;inside_path&gt;
 </code></pre></div>
 <p>Das etabliert effektiv einen Tunnel durch die Container-Wand, den du verwenden kannst, um auf diesen Teil deines Dateisystems zuzugreifen.</p>
 <p>Das wird ausführlicher in <a href="../../hello_nextflow/05_hello_containers/">Teil 5 von Hello Nextflow</a> behandelt.</p>
@@ -6279,7 +6279,7 @@ Letzteres ist viel besser für Modularität, Code-Wartung und Reproduzierbarkeit
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
 <a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a>
 <a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="go">Launching `2d-container.nf` [elegant_brattain] DSL2 - revision: 028a841db1</span>
 <a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a>
@@ -6293,9 +6293,9 @@ Letzteres ist viel besser für Modularität, Code-Wartung und Reproduzierbarkeit
 <p>Die ersten drei Schritte wurden aus dem cache geladen, da wir sie zuvor schon ausgeführt haben, aber der <code>cowpy</code> process ist neu, also wird der tatsächlich ausgeführt.</p>
 <p>Du kannst die Ausgabe des <code>cowpy</code>-Schritts im <code>results</code>-Verzeichnis finden.</p>
 <details class="abstract">
-<summary>Dateiinhalte</summary>
+<summary>Dateiinhalt</summary>
 <div class="highlight"><span class="filename">results/2d-container/cowpy-COLLECTED-batch-output.txt</span><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="go">_________</span>
-<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="go">/ HOLà    \</span>
+<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="go">/ HOLA    \</span>
 <a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a><span class="go">| HELLO   |</span>
 <a id="__codelineno-61-4" name="__codelineno-61-4" href="#__codelineno-61-4"></a><span class="go">\ BONJOUR /</span>
 <a id="__codelineno-61-5" name="__codelineno-61-5" href="#__codelineno-61-5"></a><span class="go">---------</span>
@@ -6332,7 +6332,7 @@ Wenn wir uns ansehen, was wir für den oben gezeigten Lauf bekommen haben, begin
 Das entspricht dem folgenden abgekürzten Verzeichnispfad: <code>work/7f/caf718</code>.</p>
 <p>In diesem Verzeichnis findest du die <code>.command.run</code>-Datei, die alle Befehle enthält, die Nextflow in deinem Namen im Verlauf der Pipeline-Ausführung ausgeführt hat.</p>
 <details class="abstract">
-<summary>Dateiinhalte</summary>
+<summary>Dateiinhalt</summary>
 <div class="highlight"><span class="filename">work/7f/caf71890cce1667c094d880f4b6dcc/.command.run</span><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="gp">#</span>!/bin/bash
 <a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a><span class="gp">#</span><span class="c1">## ---</span>
 <a id="__codelineno-62-3" name="__codelineno-62-3" href="#__codelineno-62-3"></a><span class="gp">#</span><span class="c1">## name: &#39;cowpy&#39;</span>
@@ -6438,7 +6438,7 @@ Das entspricht dem folgenden abgekürzten Verzeichnispfad: <code>work/7f/caf718<
 <a id="__codelineno-62-103" name="__codelineno-62-103" href="#__codelineno-62-103"></a>
 <a id="__codelineno-62-104" name="__codelineno-62-104" href="#__codelineno-62-104"></a><span class="go">nxf_stage() {</span>
 <a id="__codelineno-62-105" name="__codelineno-62-105" href="#__codelineno-62-105"></a><span class="go">    true</span>
-<a id="__codelineno-62-106" name="__codelineno-62-106" href="#__codelineno-62-106"></a><span class="gp">    # </span>Eingabedateien<span class="w"> </span>staging
+<a id="__codelineno-62-106" name="__codelineno-62-106" href="#__codelineno-62-106"></a><span class="gp">    # </span>stage<span class="w"> </span>input<span class="w"> </span>files
 <a id="__codelineno-62-107" name="__codelineno-62-107" href="#__codelineno-62-107"></a><span class="go">    rm -f COLLECTED-batch-output.txt</span>
 <a id="__codelineno-62-108" name="__codelineno-62-108" href="#__codelineno-62-108"></a><span class="go">    ln -s /workspaces/training/nextflow-run/work/7f/f435e3f2cf95979b5f3d7647ae6696/COLLECTED-batch-output.txt COLLECTED-batch-output.txt</span>
 <a id="__codelineno-62-109" name="__codelineno-62-109" href="#__codelineno-62-109"></a><span class="go">}</span>
@@ -6511,7 +6511,7 @@ Warum erstellt Nextflow für jeden process-Aufruf ein separates task-Verzeichnis
 - [x] Um Ausführungen zu isolieren und Kollisionen zwischen Ausgaben zu vermeiden
 - [ ] Um parallele Dateikompression zu ermöglichen
 
-Mehr erfahren: [1.3. Die ursprünglichen Ausgaben und Logs finden](#13-die-ursprunglichen-ausgaben-und-logs-finden)
+Mehr erfahren: [1.3. Die ursprünglichen Ausgaben und Logs finden](#13-find-the-original-outputs-and-logs)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
@@ -6525,7 +6525,7 @@ Mehr erfahren: [1.3. Die ursprünglichen Ausgaben und Logs finden](#13-die-urspr
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Mehr erfahren: <a href="#13-die-ursprunglichen-ausgaben-und-logs-finden">1.3. Die ursprünglichen Ausgaben und Logs finden</a></p></section>
+    <section class="content hidden"><p>Mehr erfahren: <a href="#13-find-the-original-outputs-and-logs">1.3. Die ursprünglichen Ausgaben und Logs finden</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6536,7 +6536,7 @@ Was bewirkt die Option `-ansi-log false` beim Ausführen eines Workflows?
 - [x] Zeigt alle task-Verzeichnispfade anstatt sie auf einer Zeile zu komprimieren
 - [ ] Aktiviert den ausführlichen Debug-Modus
 
-Mehr erfahren: [1.3.2. Das Terminal mehr Details anzeigen lassen](#132-das-terminal-mehr-details-anzeigen-lassen)
+Mehr erfahren: [1.3.2. Das Terminal mehr Details anzeigen lassen](#132-make-the-terminal-show-more-details)
 
 Du kannst auch eine der folgenden Umgebungsvariablen verwenden, wenn du diesen Stil bevorzugst:
 
@@ -6559,7 +6559,7 @@ export NO_COLOR=1
                     <div class="quiz-feedback hidden"></div>
                     <button type="submit" class="quiz-button">Absenden</button>
                 </form>
-                <section class="content hidden"><p>Mehr erfahren: <a href="#132-das-terminal-mehr-details-anzeigen-lassen">1.3.2. Das Terminal mehr Details anzeigen lassen</a></p>
+                <section class="content hidden"><p>Mehr erfahren: <a href="#132-make-the-terminal-show-more-details">1.3.2. Das Terminal mehr Details anzeigen lassen</a></p>
 <p>Du kannst auch eine der folgenden Umgebungsvariablen verwenden, wenn du diesen Stil bevorzugst:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_ANSI_LOG</span><span class="o">=</span><span class="m">0</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># oder</span>
@@ -6575,7 +6575,7 @@ Was macht im Code `#!groovy channel.fromPath(params.input).splitCsv().map { line
 - [x] Extrahiert die erste Spalte aus jeder CSV-Zeile
 - [ ] Zählt die Anzahl der Zeilen
 
-Mehr erfahren: [1.4.1. Die Eingabedaten aus der CSV laden](#141-die-eingabedaten-aus-der-csv-laden)
+Mehr erfahren: [1.4.1. Die Eingabedaten aus der CSV laden](#141-loading-the-input-data-from-the-csv)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
@@ -6589,7 +6589,7 @@ Mehr erfahren: [1.4.1. Die Eingabedaten aus der CSV laden](#141-die-eingabedaten
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Mehr erfahren: <a href="#141-die-eingabedaten-aus-der-csv-laden">1.4.1. Die Eingabedaten aus der CSV laden</a></p></section>
+    <section class="content hidden"><p>Mehr erfahren: <a href="#141-loading-the-input-data-from-the-csv">1.4.1. Die Eingabedaten aus der CSV laden</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6600,7 +6600,7 @@ Warum ist es wichtig, den Eingabewert in Ausgabedateinamen aufzunehmen (z.B. `#!
 - [x] Um zu verhindern, dass sich Ausgabedateien beim Verarbeiten mehrerer Eingaben gegenseitig überschreiben
 - [ ] Um Dateien einfacher komprimieren zu können
 
-Mehr erfahren: [1.4.3. Wie die Ausgaben benannt werden](#143-wie-die-ausgaben-benannt-werden)
+Mehr erfahren: [1.4.3. Wie die Ausgaben benannt werden](#143-how-the-outputs-are-named)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
@@ -6614,7 +6614,7 @@ Mehr erfahren: [1.4.3. Wie die Ausgaben benannt werden](#143-wie-die-ausgaben-be
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Mehr erfahren: <a href="#143-wie-die-ausgaben-benannt-werden">1.4.3. Wie die Ausgaben benannt werden</a></p></section>
+    <section class="content hidden"><p>Mehr erfahren: <a href="#143-how-the-outputs-are-named">1.4.3. Wie die Ausgaben benannt werden</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6625,7 +6625,7 @@ Was ist der Zweck der `include`-Anweisung in einem modularisierten Workflow?
 - [ ] Konfigurationseinstellungen einzubinden
 - [ ] Dokumentationskommentare hinzuzufügen
 
-Mehr erfahren: [3. Modularisierte Pipelines ausführen](#3-modularisierte-pipelines-ausfuhren)
+Mehr erfahren: [3. Modularisierte Pipelines ausführen](#3-running-modularized-pipelines)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
@@ -6639,7 +6639,7 @@ Mehr erfahren: [3. Modularisierte Pipelines ausführen](#3-modularisierte-pipeli
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Mehr erfahren: <a href="#3-modularisierte-pipelines-ausfuhren">3. Modularisierte Pipelines ausführen</a></p></section>
+    <section class="content hidden"><p>Mehr erfahren: <a href="#3-running-modularized-pipelines">3. Modularisierte Pipelines ausführen</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6650,7 +6650,7 @@ Was passiert, wenn du einen modularisierten Workflow mit `-resume` ausführst?
 - [x] Caching funktioniert normal basierend auf den generierten Job-Scripts
 - [ ] Nur die Haupt-Workflow-Datei wird gecacht
 
-Mehr erfahren: [3.2. Den Workflow ausführen](#32-den-workflow-ausfuhren)
+Mehr erfahren: [3.2. Den Workflow ausführen](#32-run-the-workflow)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
@@ -6664,7 +6664,7 @@ Mehr erfahren: [3.2. Den Workflow ausführen](#32-den-workflow-ausfuhren)
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Mehr erfahren: <a href="#32-den-workflow-ausfuhren">3.2. Den Workflow ausführen</a></p></section>
+    <section class="content hidden"><p>Mehr erfahren: <a href="#32-run-the-workflow">3.2. Den Workflow ausführen</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6675,7 +6675,7 @@ Was gibt die `container`-Direktive in einer process-Definition an?
 - [x] Die Container-Image-URI, die für die Ausführung des process verwendet werden soll
 - [ ] Das Ausgabedateiformat
 
-Mehr erfahren: [4.2. Einen Container in einem Workflow verwenden](#42-einen-container-in-einem-workflow-verwenden)
+Mehr erfahren: [4.2. Einen Container in einem Workflow verwenden](#42-use-a-container-in-a-workflow)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -6689,7 +6689,7 @@ Mehr erfahren: [4.2. Einen Container in einem Workflow verwenden](#42-einen-cont
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Mehr erfahren: <a href="#42-einen-container-in-einem-workflow-verwenden">4.2. Einen Container in einem Workflow verwenden</a></p></section>
+    <section class="content hidden"><p>Mehr erfahren: <a href="#42-use-a-container-in-a-workflow">4.2. Einen Container in einem Workflow verwenden</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6700,7 +6700,7 @@ Was enthält die Funktion `nxf_launch` in der `.command.run`-Datei?
 - [x] Den `docker run`-Befehl mit Volume-Mounts und Container-Einstellungen
 - [ ] Die process-Eingabe-Deklarationen
 
-Mehr erfahren: [4.2.4. Untersuchen, wie Nextflow die containerisierte Aufgabe gestartet hat](#424-untersuchen-wie-nextflow-die-containerisierte-aufgabe-gestartet-hat)
+Mehr erfahren: [4.2.4. Untersuchen, wie Nextflow die containerisierte Aufgabe gestartet hat](#424-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-7">
@@ -6714,7 +6714,7 @@ Mehr erfahren: [4.2.4. Untersuchen, wie Nextflow die containerisierte Aufgabe ge
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Mehr erfahren: <a href="#424-untersuchen-wie-nextflow-die-containerisierte-aufgabe-gestartet-hat">4.2.4. Untersuchen, wie Nextflow die containerisierte Aufgabe gestartet hat</a></p></section>
+    <section class="content hidden"><p>Mehr erfahren: <a href="#424-inspect-how-nextflow-launched-the-containerized-task">4.2.4. Untersuchen, wie Nextflow die containerisierte Aufgabe gestartet hat</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6725,7 +6725,7 @@ Was handhabt Nextflow automatisch beim Ausführen eines containerisierten proces
 - [x] Das process-Script innerhalb des Containers ausführen
 - [x] Die Container-Instanz nach der Ausführung aufräumen
 
-Mehr erfahren: [4. Containerisierte Software verwenden](#4-containerisierte-software-verwenden)
+Mehr erfahren: [4. Containerisierte Software verwenden](#4-using-containerized-software)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-8">
@@ -6739,7 +6739,7 @@ Mehr erfahren: [4. Containerisierte Software verwenden](#4-containerisierte-soft
         <div class="quiz-feedback hidden"></div>
         <button type="submit" class="quiz-button">Absenden</button>
     </form>
-    <section class="content hidden"><p>Mehr erfahren: <a href="#4-containerisierte-software-verwenden">4. Containerisierte Software verwenden</a></p></section>
+    <section class="content hidden"><p>Mehr erfahren: <a href="#4-using-containerized-software">4. Containerisierte Software verwenden</a></p></section>
 </div><div id="quiz-progress-sidebar" aria-label="Quiz-Fortschritt" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">
