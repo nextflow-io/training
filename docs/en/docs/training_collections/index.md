@@ -13,9 +13,9 @@ This section contains curated collections of training modules called [Side Quest
 Each collection has specific prerequisites documented on its index page. However, most collections assume:
 
 - Experience with the command line
-- Foundational Nextflow concepts and tooling covered in the [Hello Nextflow](../../hello_nextflow/index.md) beginner training course
+- Foundational Nextflow concepts and tooling covered in the [Hello Nextflow](../hello_nextflow/index.md) beginner training course
 
-For technical requirements and environment setup, see the [Environment Setup](../../envsetup/index.md) mini-course.
+For technical requirements and environment setup, see the [Environment Setup](../envsetup/index.md) mini-course.
 
 ## Available collections
 

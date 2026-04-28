@@ -45,7 +45,7 @@ These skills will help you implement a comprehensive testing strategy in your pi
 
 Before taking on this side quest, you should:
 
-- Have completed the [Hello Nextflow](../hello_nextflow/README.md) tutorial or equivalent beginner's course.
+- Have completed the [Hello Nextflow](../../hello_nextflow/index.md) tutorial or equivalent beginner's course.
 - Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators, working with files, meta data)
 
 ---
@@ -54,7 +54,7 @@ Before taking on this side quest, you should:
 
 #### Open the training codespace
 
-If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../envsetup/index.md).
+If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -82,13 +82,13 @@ You'll find a main workflow file and a CSV file called `greetings.csv` that cont
 └── main.nf
 ```
 
-For a detailed description of the files, see the [warmup from Hello Nextflow](../hello_nextflow/00_orientation.md).
+For a detailed description of the files, see the [warmup from Hello Nextflow](../../hello_nextflow/00_orientation.md).
 
-The workflow we'll be testing is a subset of the Hello workflow built in [Hello Workflow](../hello_nextflow/03_hello_workflow.md).
+The workflow we'll be testing is a subset of the Hello workflow built in [Hello Workflow](../../hello_nextflow/03_hello_workflow.md).
 
 ??? example "What does the Hello Nextflow workflow do?"
 
-    If you haven't done the [Hello Nextflow](../hello_nextflow/index.md) training, here's a quick overview of what this simple workflow does.
+    If you haven't done the [Hello Nextflow](../../hello_nextflow/index.md) training, here's a quick overview of what this simple workflow does.
 
     The workflow takes a CSV file containing greetings, runs four consecutive transformation steps on them, and outputs a single text file containing an ASCII picture of a fun character saying the greetings.
 
@@ -733,7 +733,7 @@ Test Process sayHello
 FAILURE: Executed 1 tests in 4.884s (1 failed)
 ```
 
-The test fails because the `sayHello` process declares 1 input but was called with 0 arguments. Let's fix that by adding an input to the process. Remember from [Hello Workflow](../hello_nextflow/03_hello_workflow.md) (and the warmup section above) that our `sayHello` process takes a single value input, which we will need to provide. We should also fix the test name to better reflect what we're testing.
+The test fails because the `sayHello` process declares 1 input but was called with 0 arguments. Let's fix that by adding an input to the process. Remember from [Hello Workflow](../../hello_nextflow/03_hello_workflow.md) (and the warmup section above) that our `sayHello` process takes a single value input, which we will need to provide. We should also fix the test name to better reflect what we're testing.
 
 === "After"
 
@@ -1200,4 +1200,4 @@ Check out the [nf-test documentation](https://www.nf-test.com/) for more advance
 
 ## What's next?
 
-Return to the [menu of Side Quests](../) or click the button in the bottom right of the page to move on to the next topic in the list.
+Return to the [menu of Side Quests](../index.md) or click the button in the bottom right of the page to move on to the next topic in the list.

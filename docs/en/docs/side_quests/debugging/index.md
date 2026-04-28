@@ -30,7 +30,7 @@ That covers comprehensive coverage of IDE features that support debugging (synta
 
 #### Open the training codespace
 
-If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../envsetup/index.md).
+If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -2656,4 +2656,4 @@ For production workflows, consider:
 
 ## What's next?
 
-Return to the [menu of Side Quests](../) or click the button in the bottom right of the page to move on to the next topic in the list.
+Return to the [menu of Side Quests](../index.md) or click the button in the bottom right of the page to move on to the next topic in the list.

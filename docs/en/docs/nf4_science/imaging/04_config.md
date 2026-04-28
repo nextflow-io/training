@@ -445,6 +445,6 @@ Congratulations on completing the Nextflow for Bioimaging course!
 Next steps:
 
 - Fill out the course survey to provide feedback
-- Check out [Hello Nextflow](../hello_nextflow/index.md) to learn more about developing workflows
-- Explore [Hello nf-core](../hello_nf-core/index.md) to dive deeper into nf-core tooling
-- Browse other courses in the [training collections](../training_collections/index.md)
+- Check out [Hello Nextflow](../../hello_nextflow/index.md) to learn more about developing workflows
+- Explore [Hello nf-core](../../hello_nf-core/index.md) to dive deeper into nf-core tooling
+- Browse other courses in the [training collections](../../training_collections/index.md)

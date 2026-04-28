@@ -8,7 +8,7 @@ Modern Integrated Development Environments (IDEs) can dramatically transform you
 
 ## What you should know first
 
-This guide assumes you've completed the [Hello Nextflow](../hello_nextflow/index.md) training course and are comfortable with foundational Nextflow concepts including:
+This guide assumes you've completed the [Hello Nextflow](../../hello_nextflow/index.md) training course and are comfortable with foundational Nextflow concepts including:
 
 - **Basic workflow structure**: Understanding processes, workflows, and how they connect together
 - **Channel operations**: Creating channels, passing data between processes, and using basic operators
@@ -28,7 +28,7 @@ This guide focuses on **IDE productivity features** that will make you a more ef
 
 !!! info "Why IDE features now?"
 
-    You've likely already been using VS Code during the [Hello Nextflow](../hello_nextflow/index.md) course, but we kept the focus on learning Nextflow fundamentals rather than IDE features. Now that you're comfortable with basic Nextflow concepts like processes, workflows, channels, and modules, you're ready to leverage the sophisticated IDE features that will make you a more efficient developer.
+    You've likely already been using VS Code during the [Hello Nextflow](../../hello_nextflow/index.md) course, but we kept the focus on learning Nextflow fundamentals rather than IDE features. Now that you're comfortable with basic Nextflow concepts like processes, workflows, channels, and modules, you're ready to leverage the sophisticated IDE features that will make you a more efficient developer.
 
     Think of this as "leveling up" your development environment - the same editor you've been using has much more powerful capabilities that become truly valuable once you understand what they're helping you with.
 

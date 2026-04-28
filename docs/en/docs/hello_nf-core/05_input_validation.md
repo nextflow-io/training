@@ -791,4 +791,4 @@ You've implemented and tested both parameter validation and input data validatio
 
 You've completed all five parts of the Hello nf-core training course!
 
-Continue to the [Summary](summary.md) to reflect on what you've built and learned.
+Continue to the [Summary](next_steps.md) to reflect on what you've built and learned.
