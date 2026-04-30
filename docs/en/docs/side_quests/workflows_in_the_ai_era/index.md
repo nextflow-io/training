@@ -187,7 +187,7 @@ FastQC analyzes sequencing data and generates quality reports. We run it on both
 
 === "After"
 
-    ```bash title="bash/process_sample.sh" linenums="22" hl_lines="3-5"
+    ```bash title="bash/process_sample.sh" linenums="22" hl_lines="2-5"
     # Step 2: Run FastQC
     echo "  Running FastQC..."
     fastqc -q -o results/fastqc \
@@ -208,7 +208,7 @@ fastp trims adapter sequences and filters out low-quality reads. It takes paired
 
 === "After"
 
-    ```bash title="bash/process_sample.sh" linenums="28" hl_lines="3-10"
+    ```bash title="bash/process_sample.sh" linenums="28" hl_lines="2-10"
     # Step 3: Run fastp
     echo "  Running fastp..."
     fastp \
@@ -887,7 +887,7 @@ Now connect the processes. SALMON_QUANT needs two arguments. Then add `publish:`
 
 === "After"
 
-    ```groovy title="nextflow/main.nf" linenums="30" hl_lines="1 3-9 12-18"
+    ```groovy title="nextflow/main.nf" linenums="30" hl_lines="1 4-9 13-18"
     SALMON_QUANT(FASTP.out.reads, UNTAR.out.index.first())
 
     publish:
@@ -931,6 +931,10 @@ Two things to notice:
 
 The `publish:` block names the channels you want kept; the top-level `output {}` block tells Nextflow what subdirectory to put each one in. The actual root directory comes from `-output-dir` on the command line.
 
+!!! note "Why `main:`?"
+
+    The `main:` label is required when a `publish:` block follows in the same workflow; it separates the workflow logic from the output declarations. Workflows without a `publish:` block can drop the `main:` label.
+
 #### 2.4.3. Run and watch
 
 Run the complete pipeline:
@@ -962,7 +966,7 @@ In bash, aggregation is awkward. You'd need to:
 3. Handle the case where some samples failed
 4. Construct file lists for the aggregation tool
 
-With channels, this is straightforward. Add a MULTIQC process:
+With channels, this is straightforward. Below is a MULTIQC process and the wiring that drives it; the focus here is the channel pattern, not the process itself, so this section walks through code that's already been written for you.
 
 ```groovy title="nextflow/modules/multiqc.nf"
 process MULTIQC {
@@ -982,10 +986,11 @@ process MULTIQC {
 }
 ```
 
-Then wire it up to collect outputs from all processes:
+The wiring in `main.nf`:
 
 ```groovy title="nextflow/main.nf"
-// Collect all QC outputs for MultiQC
+// Collect all QC outputs for MultiQC. _id discards the per-sample id;
+// MultiQC only needs the files themselves.
 ch_multiqc = FASTQC.out.zip
     .map { _id, files -> files }
     .mix(FASTP.out.json.map { _id, files -> files })
@@ -997,7 +1002,7 @@ MULTIQC(ch_multiqc)
 
 Add `multiqc_report = MULTIQC.out.report` to the workflow's `publish:` block and `multiqc_report { path 'multiqc' }` to the `output {}` block.
 
-The `.collect()` operator waits for all upstream processes to complete, then passes everything to MultiQC as a single batch. Nextflow tracks which files to collect automatically.
+The `.collect()` operator waits for all upstream processes to complete, then passes everything to MultiQC as a single batch. The `_id` underscore prefix is the Groovy/Nextflow convention for "this destructured value is intentionally discarded"; MultiQC takes file paths only, so we drop the sample ID. Nextflow tracks which files to collect automatically.
 
 !!! tip "Contrast with the script form"
 
@@ -1019,7 +1024,8 @@ nextflow run main.nf -output-dir results -resume
 [a1/b2c3d4] UNTAR              [100%] 1 of 1, cached: 1 ✔
 [e5/f6g7h8] FASTQC (WT_REP1)   [100%] 3 of 3, cached: 3 ✔
 [i9/j0k1l2] FASTP (WT_REP1)    [100%] 3 of 3, cached: 3 ✔
-[m3/n4o5p6] SALMON_QUANT       [100%] 3 of 3 ✔  <- Only this re-ran
+[m3/n4o5p6] SALMON_QUANT       [100%] 3 of 3 ✔  <- This re-ran
+[q7/r8s9t0] MULTIQC            [100%] 1 of 1 ✔  <- And anything downstream
 ```
 
 Nextflow automatically tracks what completed successfully. Failed tasks can be fixed and re-run without repeating successful work. One flag (`-resume`) replaces 40+ lines of bash checkpoint logic you'd have to write and debug, whether you wrote it or asked an agent to.
@@ -1061,11 +1067,11 @@ Checking progress against the same properties:
 
 Every property we struggled with in Part 1 is supplied by the workflow boundary itself, not by the author. The artefact you produced is the same one an agent would produce from the same paragraph of intent, and a maintainer reading it can see at a glance which container ran each step, where outputs land, what gets parallelised, where the cache lives. Each engineering decision is one line, in a known place, easy to vet and easy to change.
 
-The form did the work that Part 1 left to the author.
+The form did the work that Part 1 left to the author. That 50-sample run next week your PI mentioned in section 1.1.1? Same `nextflow run` command, no changes to `main.nf`, swap `-profile docker` for `-profile slurm` if you want it on the cluster.
 
 ---
 
-## 3. Why workflows still matter when AI does the writing
+## 3. Workflows when AI writes the code
 
 An agent producing bash and the same agent producing Nextflow take roughly the same number of seconds. The bottleneck has moved. It is no longer how long it takes to write the code; it is how long it takes a team to verify, ship, and maintain what was written. The artefact's role has not changed.
 
