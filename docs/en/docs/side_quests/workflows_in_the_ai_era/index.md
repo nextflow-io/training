@@ -1,17 +1,18 @@
 # Workflows in the AI era
 
-If an AI agent can run your analysis on demand, or generate a complete pipeline for you in seconds, why do you still need to learn a workflow tool?
+If an AI agent can run your analysis on demand, or write the code for you in seconds, why do you still need to learn a workflow tool?
 
-Because the pipeline is the durable artefact.
-Without one, the analysis the agent just ran cannot be re-run, audited, ported, scaled, or trusted.
-With one, those properties come from the workflow boundary, no matter who or what wrote the code inside it.
+The agent will happily produce either a bash script or a Nextflow pipeline; the question is which artefact is worth keeping.
+A script is only as good as the engineering work the agent (or you) remembered to bake into it: software pinning, parallelism limits, resume logic, scale handling, provenance.
+A workflow is different.
+The same agent producing Nextflow gets reproducibility, software tracking, parallelisation, resume, and portability for free, because the workflow boundary makes them part of the artefact's structure rather than something extra to write.
 
 This side quest answers the question by experience.
-You will build a real RNA-seq analysis the way an agent might run it for you, find the limits of what that gets you, then rebuild it as a Nextflow workflow and watch each limit disappear.
+You'll see the same RNA-seq analysis as a bash script (the kind an agent might hand you), find the engineering limits of that form, then see it as a Nextflow workflow (which the same agent could just as easily produce) and watch each limit disappear.
 
 !!! note "Why bash?"
 
-    Part 1 uses bash to stand in for the kind of ad-hoc invocation an agent would produce on demand. The limitations are the same whether the script is bash, Python, R, or output from a chat session. The issue is not the language; it is running tools without a workflow boundary.
+    Part 1 uses bash to stand in for any ad-hoc form: a chat-generated script, a quick Python equivalent, an R one-liner, a sequence of commands an agent ran for you. The limitations apply to all of them. The issue is not the language; it is running tools without a workflow boundary, regardless of who or what authored the code.
 
 ### Learning goals
 
@@ -35,7 +36,7 @@ You'll need:
 
 ## 1. What a production-grade analysis needs
 
-These are the properties an AI assistant does not give you for free, and that a workflow manager does:
+These are the properties any agent producing bash has to remember to write, every time, and the properties a workflow tool supplies structurally:
 
 - **Reproducibility**: Same inputs produce identical outputs, every time. Results can be verified and published with confidence.
 - **Software management**: Each task gets its own isolated environment. No dependency conflicts between tools, and a standardised approach across your whole pipeline.
@@ -362,7 +363,7 @@ This works for one sample, but you have 3 samples and 50 more coming. Running th
 
 #### 3.3.9. Takeaway
 
-You now have a runnable script. There is no record of which conda environment solved for which tool versions, no resume on failure, no way to scale up without rewriting the loop, no provenance trace beyond your shell history. The script is what an agent hands you when you ask it to run an analysis; the rest is on you.
+You now have a runnable script. There is no record of which conda environment solved for which tool versions, no resume on failure, no way to scale up without rewriting the loop, no provenance trace beyond your shell history. A bash script is what an agent might hand you for a quick analysis; everything past "it ran once on my laptop" is something the agent has to remember to write separately, and probably won't get right. Asking the same agent for a workflow instead is what fixes that, as Part 2 will show.
 
 ---
 
@@ -533,7 +534,7 @@ What happens with 50 samples, or 500?
 # That's 500 x 4GB = 2TB RAM required
 ```
 
-Your machine would crash from memory exhaustion. Bash's `&` has no concept of resource limits; it just launches everything at once. The agent didn't write a job-throttling layer; you'd need to track running jobs, wait when at the limit, and start new jobs as others complete. That's 20-30 lines of infrastructure code that has nothing to do with your science.
+Your machine would crash from memory exhaustion. Bash's `&` has no concept of resource limits; it just launches everything at once. An agent producing bash here would need to add a job-throttling layer: 20-30 lines tracking running jobs, waiting at the limit, and starting new jobs as others complete. The same agent producing Nextflow doesn't have to write any of it; the executor handles throttling from the resource declarations on each process.
 
 ---
 
@@ -985,7 +986,7 @@ Watch what happens. Nextflow automatically determines the execution order from t
 
 !!! tip "Contrast with the agent's script"
 
-    In Part 1, you implemented `&` and `wait`, then worried about memory limits with 500 samples. Nextflow infers parallelisation from the data flow and respects resource declarations. The agent on its own would have hit the same wall.
+    In Part 1, the bash version needed `&` and `wait` and worried about memory limits at 500 samples. The same agent producing this Nextflow process gets parallelisation and resource-aware throttling for free; producing the bash version, it has to remember to write the throttling itself, and probably won't.
 
 ---
 
@@ -1103,13 +1104,15 @@ The fundamental difference: scripts mix _what_ to compute with _how_ to compute 
 
 ---
 
-## 5. But what if the AI writes the Nextflow?
+## 5. Why this matters more, not less, when AI is writing the code
 
-The other half of the question still stands. If an AI can write Nextflow for you, why do you still need to learn it?
+The bash and Nextflow versions you just compared could both have been generated by the same agent from the same paragraph of intent. The difference between them is not who wrote them, it is what abstraction the agent had to write into.
 
-AI-assisted authoring of Nextflow is genuinely useful. Tools like [Seqera AI](https://seqera.io/ask-ai/) and the [`nf-core` Claude Code skills](https://nf-co.re/docs/tutorials/llm/claude_code) can scaffold processes, draft modules, and produce whole pipelines from a paragraph of intent. The case for using a workflow tool does not weaken when AI authors the code; it strengthens. Every line the AI writes lands inside a system that supplies the seven properties you saw in Part 2.
+When the agent writes bash, it has to remember to add: container pins, parallelism with throttling, resume logic, structured outputs, a SLURM-friendly fallback, a way to reproduce the conda solve six months from now. It might do some of that. It will not do all of it. Each property it forgets is a silent failure that surfaces on file four, on a different laptop, six months later.
 
-What that means in practice: you still operate, debug, audit, scale, and lock with tests what the AI produced. Reading Nextflow, verifying container pins, validating cache behaviour, running tests; these are the durable skills. AI accelerates authoring; the workflow tool makes the operate-debug-maintain loop tractable. The [`nf-test` side quest](../nf_test/index.md) is the right next step for locking that contract.
+When the agent writes Nextflow, those properties come from the workflow boundary regardless of how careful the agent was. The case for the workflow tool gets stronger, not weaker, the more code the agent writes, because the agent's mistakes have somewhere safe to land.
+
+You still read what the agent produced. You still verify container pins, validate cache behaviour, lock the contract with tests; these are the durable skills. AI accelerates the authoring. The workflow tool makes the operate-debug-maintain loop tractable. Tools like [Seqera AI](https://seqera.io/ask-ai/) and the [`nf-core` Claude Code skills](https://nf-co.re/docs/tutorials/llm/claude_code) help with the authoring; the [`nf-test` side quest](../nf_test/index.md) is the right next step for locking what got authored.
 
 The answer to "why workflows when I have Claude" is "because Claude needs them too."
 
@@ -1119,9 +1122,9 @@ The answer to "why workflows when I have Claude" is "because Claude needs them t
 
 You started with a question: _why learn a whole new framework when an AI agent can do my analysis or build my pipeline for me?_
 
-You then built the same RNA-seq analysis twice. Once as a script of the kind an agent produces on demand, where every production-quality property you tried to add cost more infrastructure code than science. Once as a Nextflow workflow, where reproducibility, software tracking, scalability, parallelisation, resource awareness, failure recovery, and portability came from the workflow boundary itself.
+You then built the same RNA-seq analysis twice. Once as a bash script of the kind an agent might produce on demand, where every production-quality property cost extra infrastructure code that the agent had to remember to write. Once as a Nextflow workflow (which the same agent could just as easily produce), where reproducibility, software tracking, scalability, parallelisation, resource awareness, failure recovery, and portability came from the workflow boundary itself.
 
-The pipeline is the durable artefact. It captures the analysis in a way that survives the agent that ran it.
+The pipeline is the durable artefact. The agent will write either form for you on demand. The form that makes the agent's output trustworthy is the one with a workflow boundary baked in.
 
 ### Key patterns
 
