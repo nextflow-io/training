@@ -4,9 +4,11 @@ If an AI agent can run your analysis on demand, or write the code for you in sec
 
 Bioinformatics has been through three eras of how analyses get expressed: commands typed into a terminal, scripts that captured those commands, and workflows that captured the scripts plus the engineering work needed to make them reproducible, portable, and maintainable. Each step happened because the previous form's limits started costing real time.
 
-We're in a fourth era now, where an agent will produce any of those forms in seconds. So the question is no longer "should I bother learning Nextflow when an agent could write it for me?" The question is what artefact you want to live with after the agent is done.
+We're in a fourth era now, where an agent will produce any of those forms in seconds. So the question is what artefact you want to live with after the agent is done: the thing that goes into version control, gets reviewed, tested, and maintained as tools change.
 
-This side quest answers the question by experience. You'll see the same RNA-seq analysis as a bash script (the kind an agent might hand you), find the engineering limits of that form, then see it as a Nextflow workflow (which the same agent could just as easily produce) and watch each limit disappear.
+Whether human-written or agent-generated, a serious pipeline needs reproducibility, isolated software environments, scalability, efficient parallelisation, resource awareness, failure recovery, and portability. Two artefacts can supply those properties very differently: by the author writing each one as inline infrastructure code, or by the artefact's structure providing them automatically. The first is what an ad-hoc script ends up as; the second is what a workflow tool gives you.
+
+This side quest answers the question by experience. You'll build the same RNA-seq analysis (FastQC, fastp, Salmon) twice: once as a bash script, finding the engineering limits of that form, then once as a Nextflow workflow, watching each limit disappear.
 
 !!! note "Why bash?"
 
@@ -32,72 +34,26 @@ You'll need:
 
 ---
 
-## 1. What a production-grade analysis needs
+## 1. Building a bash pipeline
 
-These are the properties any agent producing bash has to remember to write, every time, and the properties a workflow tool supplies structurally:
-
-- **Reproducibility**: Same inputs produce identical outputs, every time. Results can be verified and published with confidence.
-- **Software management**: Each task gets its own isolated environment. No dependency conflicts between tools, and a standardised approach across your whole pipeline.
-- **Scalability**: Handles 3 samples or 3,000 without code changes.
-- **Efficient parallelisation**: Independent tasks run simultaneously, so analysis completes in hours, not days.
-- **Resource awareness**: Respects memory and CPU limits. No crashed jobs or killed processes.
-- **Failure recovery**: Can resume from where it stopped. A single failure doesn't waste hours of completed work.
-- **Portability**: Runs on laptop, cluster, or cloud with the same code.
-
-These aren't nice-to-haves; they're requirements for serious computational research.
+You'll build an RNA-seq analysis pipeline in bash (FastQC, fastp, Salmon). This is the kind of script an agent would produce from a paragraph of intent: it works on three samples on the laptop where it ran. Each property listed in the introduction (reproducibility, software pinning, parallelism, resume, scale, portability) is something the author, agent or human, has to remember to write into the script. We'll see how far that gets us, and what's left over for someone else to maintain.
 
 ---
 
-## 2. The artefact those properties live in
+### 1.1. Setup
 
-Whatever code achieves those properties, the code itself ends up somewhere: a script in your home directory, a Nextflow workflow in a repo, a chat session nobody saved. That somewhere is the artefact, and it has to outlive the conversation that produced it. It goes into version control. Someone reads it at code review. Someone tests it. When a tool ships a new version, when the lab adds a new sample type, when the pipeline starts producing slightly different numbers and you have to figure out why, you go back to the artefact.
-
-Two artefacts can do exactly the same analysis but be very different to live with. One can have its parallelism, software pinning, and resume logic written into individual lines that someone has to find and update by hand. Another can have those same properties supplied by the artefact's structure, visible at a glance to anyone who reads it. The second is what a workflow tool gives you. The first is what most ad-hoc analyses, whether human-written or agent-generated, end up as.
-
-The rest of this side quest builds the same RNA-seq analysis as both forms, so you can see the difference where it counts: in the artefact, not in the runtime.
-
----
-
-## 3. What you'll build
-
-An RNA-seq analysis pipeline that runs:
-
-1. Quality control (FastQC)
-2. Adapter trimming (fastp)
-3. Transcript quantification (Salmon)
-
-How this tutorial works:
-
-| Part | Software | What you'll do                                       | What you'll learn                                    |
-| ---- | -------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| 1    | Bash     | Build a pipeline, try to hit those quality standards | How much infrastructure code it takes                |
-| 2    | Nextflow | Rebuild with a workflow manager                      | How the same standards are achieved with less effort |
-
-By the end, you'll understand _why_ workflow managers exist, not from explanation but from hitting the limitations yourself.
-
----
-
-## 4. Building a bash pipeline
-
-In this part, you'll build an RNA-seq analysis pipeline using bash, aiming for the production-quality properties listed above.
-We'll see how far we can get and where things get difficult.
-
----
-
-### 4.1. Setup
-
-#### 4.1.1. The scenario
+#### 1.1.1. The scenario
 
 You're a bioinformatician analysing RNA-seq data from a yeast gene expression study.
 You have 3 samples today. Your PI mentions that 50 more samples are coming next week.
 
-#### 4.1.2. Navigate to the working directory
+#### 1.1.2. Navigate to the working directory
 
 ```bash
 cd side-quests/workflows_in_the_ai_era
 ```
 
-#### 4.1.3. Explore the starter files
+#### 1.1.3. Explore the starter files
 
 ```bash
 ls bash/
@@ -115,7 +71,7 @@ Three scripts, each with TODOs you'll fill in as you progress:
 
 You'll fill in these starter files as you progress through the tutorial.
 
-#### 4.1.4. Examine the sample data
+#### 1.1.4. Examine the sample data
 
 ```bash
 cat data/samples.csv
@@ -132,7 +88,7 @@ Each row is a sample with URLs to paired-end FASTQ files.
 
 ---
 
-### 4.2. Kick off the tool install
+### 1.2. Kick off the tool install
 
 Part 1 needs FastQC, fastp, and Salmon installed locally so the bash scripts can call them from `PATH`. Conda solves environments slowly, so kick off the install now and let it run in the background while you keep reading. We'll check on it before you actually need to run anything.
 
@@ -152,7 +108,7 @@ This typically takes about 3 minutes. While it runs, work through the next secti
 
 ---
 
-### 4.3. Building your first script
+### 1.3. Building your first script
 
 Open the starter file `bash/process_sample.sh`. It has the structure ready; you just need to add the tool commands.
 
@@ -192,7 +148,7 @@ mkdir -p data/fastq results/fastqc results/fastp results/salmon data/salmon_inde
 echo "Completed: $SAMPLE_ID"
 ```
 
-#### 4.3.1. Understanding the starter script
+#### 1.3.1. Understanding the starter script
 
 The script accepts three arguments: a sample ID and two URLs for paired-end FASTQ files. The `set -e` line means the script will stop immediately if any command fails.
 
@@ -205,7 +161,7 @@ The TODO comments mark where you'll add each analysis step:
 
 This is a typical RNA-seq preprocessing workflow. Fill in each step below.
 
-#### 4.3.2. Add the download step
+#### 1.3.2. Add the download step
 
 First, we need to download the FASTQ files from their URLs. We'll use `curl` with `-sL` (silent mode, follow redirects) to fetch each file and save it with a consistent naming pattern.
 
@@ -225,7 +181,7 @@ First, we need to download the FASTQ files from their URLs. We'll use `curl` wit
     # TODO: Add curl commands to download R1 and R2 files
     ```
 
-#### 4.3.3. Add FastQC
+#### 1.3.3. Add FastQC
 
 FastQC analyzes sequencing data and generates quality reports. We run it on both read files (`R1` and `R2`) and save the output to our results directory. The `-q` flag suppresses progress output.
 
@@ -246,7 +202,7 @@ FastQC analyzes sequencing data and generates quality reports. We run it on both
     # TODO: Add fastqc command
     ```
 
-#### 4.3.4. Add fastp
+#### 1.3.4. Add fastp
 
 fastp trims adapter sequences and filters out low-quality reads. It takes paired input files (`-i`, `-I`) and produces trimmed output files (`-o`, `-O`), plus JSON and HTML reports for quality metrics.
 
@@ -272,7 +228,7 @@ fastp trims adapter sequences and filters out low-quality reads. It takes paired
     # TODO: Add fastp command
     ```
 
-#### 4.3.5. Add the Salmon index download
+#### 1.3.5. Add the Salmon index download
 
 Salmon needs a pre-built index of the reference transcriptome. We'll download a pre-built index (to save time) only if it doesn't already exist. This avoids re-downloading for every sample.
 
@@ -300,7 +256,7 @@ Salmon needs a pre-built index of the reference transcriptome. We'll download a 
 
     This `if [ ! -d ... ]` check is a common pattern in scripts: "only do this if it hasn't been done already." While conceptually simple, it's fragile, because it detects whether the directory exists rather than whether the download actually succeeded or the files are valid. Workflow managers handle this more robustly by tracking actual task outputs rather than checking for file or directory existence.
 
-#### 4.3.6. Add Salmon quantification
+#### 1.3.6. Add Salmon quantification
 
 Salmon quantifies transcript expression by pseudo-aligning reads to the index. It takes the **trimmed** reads from fastp (not the raw reads) and outputs expression counts per transcript.
 
@@ -326,9 +282,9 @@ Salmon quantifies transcript expression by pseudo-aligning reads to the index. I
     # TODO: Add salmon quant command
     ```
 
-#### 4.3.7. Activate the env and verify it's ready
+#### 1.3.7. Activate the env and verify it's ready
 
-The conda install you started in section 4.2 should be done by now. Switch back to that terminal (or the same one if you ran the install in this shell) and activate the environment:
+The conda install you started in section 1.2 should be done by now. Switch back to that terminal (or the same one if you ran the install in this shell) and activate the environment:
 
 ```bash
 mamba activate rnaseq-bash
@@ -348,7 +304,7 @@ salmon --version
 
 If any of those errors out, give the install another minute and try again. Once all three respond with versions, you are ready to run the script.
 
-#### 4.3.8. Test your script
+#### 1.3.8. Test your script
 
 Make it executable and run on one sample:
 
@@ -367,13 +323,13 @@ ls results/
 
 This works for one sample, but you have 3 samples and 50 more coming. Running this command manually for each one isn't practical.
 
-#### 4.3.9. Takeaway
+#### 1.3.9. Takeaway
 
 You now have a runnable script. There is no record of which conda environment solved for which tool versions, no resume on failure, no way to scale up without rewriting the loop, no provenance trace beyond your shell history. A bash script is what an agent might hand you for a quick analysis; everything past "it ran once on my laptop" is something the agent has to remember to write separately, and probably won't get right. Asking the same agent for a workflow instead is what fixes that, as Part 2 will show.
 
 ---
 
-### 4.4. Processing multiple samples
+### 1.4. Processing multiple samples
 
 Now that we can process one sample, we need to handle all samples from our CSV file. Open `bash/pipeline_sequential.sh`; it already has the loop structure that reads the CSV and iterates over each sample.
 
@@ -385,7 +341,7 @@ The starter script handles:
 
 Your task is to add the actual processing commands inside the loop, the same steps you just wrote, but using the loop variables (`$sample_id`, `$fastq_r1`, `$fastq_r2`) instead of the script arguments.
 
-#### 4.4.1. Add processing logic to the loop
+#### 1.4.1. Add processing logic to the loop
 
 === "After"
 
@@ -436,7 +392,7 @@ Your task is to add the actual processing commands inside the loop, the same ste
     done
     ```
 
-#### 4.4.2. Run and time it
+#### 1.4.2. Run and time it
 
 ```bash
 chmod +x bash/pipeline_sequential.sh
@@ -455,7 +411,7 @@ Processing: WT_REP1
 Processing: WT_REP2      <- Starts only after WT_REP1 is completely done
 ```
 
-#### 4.4.3. The problem: sequential execution
+#### 1.4.3. The problem: sequential execution
 
 ```
 Timeline (sequential):
@@ -467,7 +423,7 @@ These samples are completely independent. WT_REP2's analysis doesn't depend on W
 
 ---
 
-### 4.5. Adding parallelisation
+### 1.5. Adding parallelisation
 
 The sequential script works, but it's slow; each sample waits for the previous one to finish completely. Since samples are independent, they could run simultaneously.
 
@@ -478,7 +434,7 @@ Your task is to make the loop run samples in parallel by:
 1. Adding `&` after each function call to run it in the background
 2. Adding `wait` after the loop to pause until all background jobs complete
 
-#### 4.5.1. Add background execution
+#### 1.5.1. Add background execution
 
 === "After"
 
@@ -510,7 +466,7 @@ The key changes:
 - `&` at the end of the function call runs it in the background.
 - `wait` pauses until all background jobs complete.
 
-#### 4.5.2. Run and compare
+#### 1.5.2. Run and compare
 
 ```bash
 chmod +x bash/pipeline_parallel.sh
@@ -530,7 +486,7 @@ Notice the interleaved output, all samples running at once:
 
 Faster, because all samples run concurrently.
 
-#### 4.5.3. The hidden problem
+#### 1.5.3. The hidden problem
 
 What happens with 50 samples, or 500?
 
@@ -544,11 +500,11 @@ Your machine would crash from memory exhaustion. Bash's `&` has no concept of re
 
 ---
 
-### 4.6. Adding aggregation
+### 1.6. Adding aggregation
 
 Real pipelines need a final aggregation step that collects QC metrics from all samples into a summary report. MultiQC does this, but integrating it with parallel bash processing is tricky.
 
-#### 4.6.1. The problem
+#### 1.6.1. The problem
 
 Your parallel script launches all samples with `&` and waits for completion with `wait`. But `wait` only tells you when jobs finish, not which ones succeeded. To run MultiQC, you need to:
 
@@ -556,7 +512,7 @@ Your parallel script launches all samples with `&` and waits for completion with
 2. Collect the right output files from each tool
 3. Handle partial failures gracefully
 
-#### 4.6.2. A simple (fragile) approach
+#### 1.6.2. A simple (fragile) approach
 
 Add MultiQC after the `wait`:
 
@@ -570,7 +526,7 @@ multiqc results/fastqc results/fastp results/salmon -o results/multiqc
 
 This works if everything succeeds, but breaks silently on partial failures: MultiQC runs on whatever files exist, potentially giving you an incomplete report without warning.
 
-#### 4.6.3. A robust approach (more code)
+#### 1.6.3. A robust approach (more code)
 
 Proper aggregation requires tracking job status:
 
@@ -606,11 +562,11 @@ That's another 20+ lines of infrastructure code for something that should be sim
 
 ---
 
-### 4.7. The pain points
+### 1.7. The pain points
 
 We won't implement these, but consider what you'd need for a production-ready pipeline:
 
-#### 4.7.1. Failure recovery
+#### 1.7.1. Failure recovery
 
 If Salmon fails on sample 47 of 50, what happens?
 
@@ -619,7 +575,7 @@ If Salmon fails on sample 47 of 50, what happens?
 - To resume, you'd need to manually figure out what finished and what didn't.
 - Implementing proper checkpoint logic would add 40+ lines of file-based state tracking.
 
-#### 4.7.2. Reproducibility
+#### 1.7.2. Reproducibility
 
 When your colleague tries to run your script:
 
@@ -631,7 +587,7 @@ They need to replicate your exact conda environment, same tool versions, same de
 
 Or worse, they have salmon 1.4.0 but you used 1.10.3. The script runs fine, but results differ silently. Months later, you can't reproduce your own analysis because conda updated something.
 
-#### 4.7.3. Scaling to cluster
+#### 1.7.3. Scaling to cluster
 
 Your laptop worked fine for 3 samples. For 500 samples, you need the SLURM cluster:
 
@@ -644,7 +600,7 @@ Now you're rewriting the entire script with job arrays, dependency tracking, and
 
 ---
 
-### 4.8. Takeaway
+### 1.8. Takeaway
 
 Checking progress against the production-quality properties:
 
@@ -656,28 +612,27 @@ Checking progress against the production-quality properties:
 - :x: **Failure recovery**: Missing. Would need 40+ lines of checkpoint logic.
 - :x: **Portability**: Missing. Complete rewrite for each cluster type.
 
-We achieved the basics, but the production-quality properties require significant infrastructure code that has nothing to do with our science.
-
-The fundamental problem: scripts mix _what_ to compute with _how_ to compute it. Every quality requirement adds more infrastructure code, and this would be true whether the script came from bash, Python, or a chat session with an agent. This is where workflow managers come in.
+Every warning and :x: above is more bash someone has to write to fill the gap, and more bash a maintainer has to read to verify it was filled correctly. The author of this script (whether a person or an agent) could be asked to add each one. That's another 100+ lines of inline infrastructure code, increasingly tangled with the science, increasing the surface a reviewer has to vet and a test suite has to cover. The form itself is the problem, not who wrote it. This is where workflow managers come in.
 
 ---
 
-## 5. Building a Nextflow pipeline
+## 2. Building a Nextflow pipeline
 
-Now you'll rebuild the same pipeline using Nextflow.
-At each step, we'll contrast with the scripting approach from Part 1.
+Now you'll rebuild the same pipeline as a Nextflow workflow. The same paragraph of intent that produced Part 1's bash, given to the same agent, would produce something close to what you write here. The difference isn't authorship, and it isn't speed. The difference is the artefact's shape: every property Part 1 left to the author is now supplied by the workflow boundary.
+
+At each step, we'll contrast with the form of Part 1, not with its author.
 
 !!! note "This isn't a Nextflow tutorial"
 
-    We're skipping over a lot of Nextflow detail here to focus on illustrating how workflow managers solve the problems from Part 1. If you're sold on the idea and want to learn Nextflow properly, head to [Hello Nextflow](../../hello_nextflow/index.md) for a thorough introduction.
+    We're skipping over a lot of Nextflow detail here to focus on how the workflow form changes what the artefact has to encode. If you want to learn Nextflow properly, head to [Hello Nextflow](../../hello_nextflow/index.md) for a thorough introduction.
 
 ---
 
-### 5.1. What is Nextflow?
+### 2.1. What is Nextflow?
 
 Nextflow is a workflow manager. Instead of writing imperative scripts that say "do this, then do that," you _declare_ what processes exist and how data flows between them. Nextflow handles everything else: the parallelisation, scheduling, error handling, and resource management you'd otherwise write yourself.
 
-#### 5.1.1. Key concepts
+#### 2.1.1. Key concepts
 
 | Concept    | What it is                                         | Bash equivalent                      |
 | ---------- | -------------------------------------------------- | ------------------------------------ |
@@ -687,7 +642,7 @@ Nextflow is a workflow manager. Instead of writing imperative scripts that say "
 
 The key difference: in bash, you explicitly manage data flow with variables and file paths. In Nextflow, you declare what each process needs, and Nextflow figures out the execution order automatically.
 
-#### 5.1.2. Software management
+#### 2.1.2. Software management
 
 In Part 1, you installed FastQC, fastp, and Salmon with conda, hoping dependencies wouldn't conflict and documenting versions manually.
 
@@ -695,7 +650,7 @@ With Nextflow, each process declares its own software requirements. The tools ar
 
 ---
 
-### 5.2. Your first process: FastQC
+### 2.2. Your first process: FastQC
 
 In bash, you wrote FastQC commands inside loops, managed file paths with variables, and handled parallelisation with `&`. In Nextflow, each tool runs inside a `process`, a self-contained unit that declares its inputs, outputs, and command. You don't write loops; Nextflow runs the process once per input item automatically.
 
@@ -720,7 +675,7 @@ process FASTQC {
 }
 ```
 
-#### 5.2.1. Understanding the process
+#### 2.2.1. Understanding the process
 
 Each part has a purpose:
 
@@ -732,11 +687,11 @@ Each part has a purpose:
 
 You're not writing any loop logic, file existence checks, or error handling.
 
-!!! tip "Contrast with the agent's script"
+!!! tip "Contrast with the script form"
 
-    The one line `container 'quay.io/biocontainers/fastqc:0.12.1--hdfd78af_0'` handles all software dependencies. The version is locked forever. Your colleague, your cluster, and your cloud all get the exact same FastQC, whether the agent generated this process for you or you wrote it by hand.
+    The one line `container 'quay.io/biocontainers/fastqc:0.12.1--hdfd78af_0'` handles all software dependencies, and the version is locked forever. In Part 1 the same property required a conda environment that someone had to set up and replicate. Here it lives in the artefact, where a reviewer or a future maintainer can see exactly which version ran.
 
-#### 5.2.2. Call FASTQC in main.nf
+#### 2.2.2. Call FASTQC in main.nf
 
 Open `nextflow/main.nf` and add the FASTQC call:
 
@@ -752,7 +707,7 @@ Open `nextflow/main.nf` and add the FASTQC call:
     // TODO: Call FASTQC with ch_samples
     ```
 
-#### 5.2.3. Test it
+#### 2.2.3. Test it
 
 ```bash
 cd nextflow
@@ -770,13 +725,13 @@ All 3 samples ran in parallel automatically. In Part 1, you wrote `&` and `wait`
 
 ---
 
-### 5.3. Adding fastp
+### 2.3. Adding fastp
 
 Now add fastp following the same pattern. The key difference: fastp's output (trimmed reads) needs to flow to Salmon. In bash, you managed this with file paths like `results/fastp/${sample_id}_trimmed_R1.fastq.gz`. In Nextflow, you declare the output and let channels handle the data flow.
 
 Open `nextflow/modules/fastp.nf` and fill in the input, output, and script blocks.
 
-#### 5.3.1. Complete fastp.nf
+#### 2.3.1. Complete fastp.nf
 
 Pay attention to the `emit: reads` on the trimmed reads output. This names the output channel so Salmon can consume it.
 
@@ -831,7 +786,7 @@ Pay attention to the `emit: reads` on the trimmed reads output. This names the o
 
 The key line is `emit: reads` on the trimmed read files output. This creates a named output channel that Salmon will consume. When you later write `FASTP.out.reads`, you're accessing this specific output.
 
-#### 5.3.2. Call FASTP in main.nf
+#### 2.3.2. Call FASTP in main.nf
 
 Now connect FASTP to the sample channel in the workflow:
 
@@ -847,13 +802,13 @@ Now connect FASTP to the sample channel in the workflow:
     // TODO: Call FASTP with ch_samples
     ```
 
-!!! tip "Contrast with the agent's script"
+!!! tip "Contrast with the script form"
 
-    In Part 1, all tools shared one conda environment and conflicts were a constant risk. Here, fastp uses a completely different container than FastQC. They could require incompatible Python versions or conflicting libraries; doesn't matter. Each process gets its own isolated environment, regardless of what the agent picked when it set up your conda env.
+    In Part 1, all tools shared one conda environment and conflicts were a constant risk; the script's behaviour depended on whatever the solver picked. Here, fastp uses a completely different container than FastQC. They could require incompatible Python versions or conflicting libraries and it would not matter. Each process declares its own isolated environment in the artefact, where a reader can see it.
 
 ---
 
-### 5.4. Connecting to Salmon
+### 2.4. Connecting to Salmon
 
 This is where Nextflow's data flow model pays off. In bash, you manually coordinated file paths; Salmon needed to know where fastp wrote its output. In Nextflow, you declare that Salmon needs fastp's output, and the framework handles the rest.
 
@@ -864,7 +819,7 @@ Salmon needs two inputs:
 
 This is a common pattern: per-sample data combined with a shared reference. In bash, you'd check if the index exists with `if [ ! -d ... ]`. In Nextflow, the channel system handles this automatically.
 
-#### 5.4.1. Complete salmon.nf
+#### 2.4.1. Complete salmon.nf
 
 The UNTAR process (which extracts the pre-built Salmon index) is already complete. Your task is to fill in SALMON_QUANT, which has two input declarations:
 
@@ -926,7 +881,7 @@ Notice two things in the script:
 - `${task.cpus}`: Nextflow makes declared resources available as variables. In bash, you hardcoded `--threads 2`. Here, you declare resources once (`cpus 4`) and reference them in the script. Change the declaration, and the script adapts automatically.
 - Two inputs: the process receives the trimmed reads tuple and the index path separately. In bash, you coordinated these with file paths. Here, the data flow is explicit.
 
-#### 5.4.2. Wire it up in main.nf
+#### 2.4.2. Wire it up in main.nf
 
 Now connect the processes. SALMON_QUANT needs two arguments. Then add `publish:` and `output {}` blocks so each tool's results land in a predictable layout.
 
@@ -976,7 +931,7 @@ Two things to notice:
 
 The `publish:` block names the channels you want kept; the top-level `output {}` block tells Nextflow what subdirectory to put each one in. The actual root directory comes from `-output-dir` on the command line.
 
-#### 5.4.3. Run and watch
+#### 2.4.3. Run and watch
 
 Run the complete pipeline:
 
@@ -990,13 +945,13 @@ Watch what happens. Nextflow automatically determines the execution order from t
 - SALMON_QUANT must wait for FASTP; it needs the trimmed reads output.
 - Each sample runs independently; sample 2's Salmon can start as soon as sample 2's fastp finishes, even if sample 1 is still running.
 
-!!! tip "Contrast with the agent's script"
+!!! tip "Contrast with the script form"
 
-    In Part 1, the bash version needed `&` and `wait` and worried about memory limits at 500 samples. The same agent producing this Nextflow process gets parallelisation and resource-aware throttling for free; producing the bash version, it has to remember to write the throttling itself, and probably won't.
+    In Part 1, the script needed `&` and `wait` and worried about memory limits at 500 samples; resource-aware throttling was 20-30 lines that someone had to write and a reviewer had to check. Here parallelisation comes from the data flow declaration and throttling comes from the per-process `cpus` directive. Both are visible at a glance, neither has to be re-derived to verify, and changing one doesn't risk breaking the other.
 
 ---
 
-### 5.5. Aggregation with MultiQC
+### 2.5. Aggregation with MultiQC
 
 Real pipelines don't just run processes per sample; they often need to aggregate results across all samples. MultiQC collects QC metrics from FastQC, fastp, Salmon, and other tools into a single summary report.
 
@@ -1044,13 +999,13 @@ Add `multiqc_report = MULTIQC.out.report` to the workflow's `publish:` block and
 
 The `.collect()` operator waits for all upstream processes to complete, then passes everything to MultiQC as a single batch. Nextflow tracks which files to collect automatically.
 
-!!! tip "Contrast with the agent's script"
+!!! tip "Contrast with the script form"
 
-    In Part 1, you'd need to track job completion status, build file lists manually, and handle partial failures. Here, the channel operators handle all of that. The `.collect()` naturally waits for all inputs, and `.mix()` combines outputs from different processes; an agent generating bash from scratch would have to reinvent each of these every time.
+    In Part 1, this aggregation needed job-completion tracking, manual file-list assembly, and partial-failure handling: tens of lines of inline bookkeeping a reader has to follow. Here, `.collect()` naturally waits for all inputs and `.mix()` combines outputs from different processes. The reader sees the data flow, not the bookkeeping.
 
 ---
 
-### 5.6. Resume and caching
+### 2.6. Resume and caching
 
 In Part 1, failure recovery was a pain point. If sample 47 failed, you had no record of what completed, and implementing checkpoint logic would take 40+ lines of state tracking.
 
@@ -1071,7 +1026,7 @@ Nextflow automatically tracks what completed successfully. Failed tasks can be f
 
 ---
 
-### 5.7. Configuration profiles
+### 2.7. Configuration profiles
 
 In Part 1, scaling to clusters required rewriting the entire script with SLURM job arrays and cluster-specific syntax. Your collaborator on PBS would need yet another version.
 
@@ -1092,7 +1047,7 @@ Same workflow code. Same scientific results. Different infrastructure. You write
 
 ---
 
-### 5.8. Takeaway
+### 2.8. Takeaway
 
 Checking progress against the same properties:
 
@@ -1104,21 +1059,17 @@ Checking progress against the same properties:
 - :white_check_mark: **Failure recovery**: `-resume`. One flag.
 - :white_check_mark: **Portability**: Same code, different `-profile`.
 
-Every property we struggled with in Part 1 is built into Nextflow. You didn't write any infrastructure code; you just declared what each process needs and produces.
+Every property we struggled with in Part 1 is supplied by the workflow boundary itself, not by the author. The artefact you produced is the same one an agent would produce from the same paragraph of intent, and a maintainer reading it can see at a glance which container ran each step, where outputs land, what gets parallelised, where the cache lives. Each engineering decision is one line, in a known place, easy to vet and easy to change.
 
-The fundamental difference: scripts mix _what_ to compute with _how_ to compute it. Workflow managers separate these concerns. You (or your agent) declare the science, the framework handles the infrastructure.
+The form did the work that Part 1 left to the author.
 
 ---
 
-## 6. Why workflows still matter when AI does the writing
+## 3. Why workflows still matter when AI does the writing
 
-Look back at the four eras the introduction named. Commands gave way to scripts, and scripts gave way to workflows, because each step was a better artefact for a team to live with: easier to vet, easier to validate, easier to maintain when tools changed and labs grew. The workflow form did not appear because writing scripts was hard. It appeared because keeping scripts around was.
+An agent producing bash and the same agent producing Nextflow take roughly the same number of seconds. The bottleneck has moved. It is no longer how long it takes to write the code; it is how long it takes a team to verify, ship, and maintain what was written. The artefact's role has not changed.
 
-We are in the fourth era now. An agent producing bash and the same agent producing Nextflow take roughly the same number of seconds. The bottleneck has moved. It is no longer how long it takes to write code; it is how long it takes a team to verify, ship, and maintain what was written. The artefact's role has not changed.
-
-The case for the workflow tool gets stronger, not weaker, the more code AI is producing. Volumes of generated code that nobody can read or vet are a liability. A workflow puts the engineering structure where humans can see it: container pins as one-line declarations, parallelism as data flow, resume as a property of the cache rather than a property the author remembered to write. That is what makes review tractable, tests writable, and maintenance possible. AI accelerates the authoring; the workflow tool makes the operate-debug-maintain loop tractable.
-
-You still read what the AI produced. You still verify container pins, validate cache behaviour, lock the contract with tests; these are the durable skills. The [`nf-test` side quest](../nf_test/index.md) is the right next step for locking what got authored.
+The case for the workflow tool gets stronger, not weaker, the more code AI is producing. Volumes of generated code nobody can read or vet are a liability; the script form Part 1 produced is exactly that kind of liability at scale. The workflow form Part 2 produced puts the engineering structure where a reader can see it, where tests can lock it, and where maintenance does not require re-deriving correctness. AI accelerates the authoring; the workflow tool makes the operate-debug-maintain loop tractable. The [`nf-test` side quest](../nf_test/index.md) is the right next step for locking what got authored.
 
 The answer to "why workflows when AI can write the code for me" is that the artefact has to outlive the conversation that made it.
 
