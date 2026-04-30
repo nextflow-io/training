@@ -194,12 +194,12 @@ Course and module `index.md` pages opt into a templated layout via frontmatter. 
 title: Course Title
 hide: [toc]
 page_type: index_page
-index_type: course        # or "module"; renders as a badge
+index_type: course # or "module"; renders as a badge
 additional_information:
   technical_requirements: true
   learning_objectives: [...]
   audience_prerequisites: [...]
-  videos_playlist: <url>  # mutually exclusive with `videos`
+  videos_playlist: <url> # mutually exclusive with `videos`
 ---
 ```
 
