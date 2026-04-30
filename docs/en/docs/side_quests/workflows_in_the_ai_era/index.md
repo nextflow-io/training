@@ -2,13 +2,11 @@
 
 If an AI agent can run your analysis on demand, or write the code for you in seconds, why do you still need to learn a workflow tool?
 
-Bioinformatics has been through three eras of how analyses get expressed: commands typed into a terminal, scripts that captured those commands, and workflows that captured the scripts plus the engineering work needed to make them reproducible, portable, and maintainable. Each step was a better artefact for a team to live with, and each step happened because the previous form's limits started costing real time.
+Bioinformatics has been through three eras of how analyses get expressed: commands typed into a terminal, scripts that captured those commands, and workflows that captured the scripts plus the engineering work needed to make them reproducible, portable, and maintainable. Each step happened because the previous form's limits started costing real time.
 
-We are in a fourth era now, where an agent will produce any of those forms in seconds. The agent will write bash, Python, Nextflow, all of it. So the question is not "should I bother learning Nextflow when the agent could write it for me?" The question is what artefact you want to live with after the agent is done; what gets vetted at code review, tested, updated when a tool releases a new version, extended when the lab adds a new sample type, read by the colleague who inherits it next quarter.
+We're in a fourth era now, where an agent will produce any of those forms in seconds. So the question is no longer "should I bother learning Nextflow when an agent could write it for me?" The question is what artefact you want to live with after the agent is done.
 
-A bash script can be that artefact, but it is the wrong shape for the job: every engineering property is buried inline, every change requires re-deriving correctness, and a maintainer six months from now has to reconstruct what the original author (human or otherwise) was thinking. A Nextflow workflow encodes the same logic in a form built for that maintenance role, with declarative containers and resources, explicit data flow, and the engineering properties supplied by the workflow boundary rather than by individual lines an author had to remember to write.
-
-This side quest answers the question by experience. You will see the same RNA-seq analysis as a bash script (the kind an agent might hand you), find the engineering limits of that form, then see it as a Nextflow workflow (which the same agent could just as easily produce) and watch each limit disappear. By the end you should have an artefact you would be willing to put your name on and maintain.
+This side quest answers the question by experience. You'll see the same RNA-seq analysis as a bash script (the kind an agent might hand you), find the engineering limits of that form, then see it as a Nextflow workflow (which the same agent could just as easily produce) and watch each limit disappear.
 
 !!! note "Why bash?"
 
