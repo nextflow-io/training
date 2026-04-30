@@ -737,7 +737,7 @@ Pay attention to the `emit: reads` on the trimmed reads output. This names the o
 
 === "After"
 
-    ```groovy title="nextflow/modules/fastp.nf" hl_lines="6 9-11 15-21"
+    ```groovy title="nextflow/modules/fastp.nf" hl_lines="6 9-11 15-22"
     process FASTP {
         tag "$id"
         container 'quay.io/biocontainers/fastp:0.23.4--hadf994f_2'
@@ -977,7 +977,7 @@ process MULTIQC {
 
     script:
     """
-    multiqc . --filename multiqc_report
+    multiqc .
     """
 }
 ```
@@ -987,9 +987,9 @@ Then wire it up to collect outputs from all processes:
 ```groovy title="nextflow/main.nf"
 // Collect all QC outputs for MultiQC
 ch_multiqc = FASTQC.out.zip
-    .map { id, files -> files }
-    .mix(FASTP.out.json.map { id, files -> files })
-    .mix(SALMON_QUANT.out.results.map { id, files -> files })
+    .map { _id, files -> files }
+    .mix(FASTP.out.json.map { _id, files -> files })
+    .mix(SALMON_QUANT.out.results.map { _id, files -> files })
     .collect()
 
 MULTIQC(ch_multiqc)
@@ -1082,8 +1082,6 @@ You started with a question: _why learn a whole new framework when an AI agent c
 You then built the same RNA-seq analysis twice. Once as a bash script of the kind an agent might produce on demand, where every production-quality property cost extra infrastructure code that someone, human or otherwise, had to remember to write. Once as a Nextflow workflow (which the same agent could just as easily produce), where reproducibility, software tracking, scalability, parallelisation, resource awareness, failure recovery, and portability came from the workflow boundary itself.
 
 The pipeline is the durable artefact. The agent will write either form for you on demand. The form that makes the result trustworthy across time and across team members is the one shaped for the maintenance role: vetted at code review, validated by tests, updated when tools change, read by the next person who has to live with it.
-
-The artefact has to outlive the conversation that made it.
 
 ### Key patterns
 

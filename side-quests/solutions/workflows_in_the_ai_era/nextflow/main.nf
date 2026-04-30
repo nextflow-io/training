@@ -3,13 +3,15 @@
 /*
  * RNA-seq analysis pipeline.
  *
- * Quality control, adapter trimming, and transcript quantification
- * for paired-end RNA-seq samples listed in a CSV sample sheet.
+ * Quality control, adapter trimming, transcript quantification, and
+ * MultiQC aggregation for paired-end RNA-seq samples listed in a CSV
+ * sample sheet.
  */
 
 include { FASTQC } from './modules/fastqc'
 include { FASTP } from './modules/fastp'
 include { UNTAR; SALMON_QUANT } from './modules/salmon'
+include { MULTIQC } from './modules/multiqc'
 
 params.samples = '../data/samples.csv'
 params.salmon_index = 'https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/reference/salmon.tar.gz'
@@ -29,6 +31,14 @@ workflow {
     FASTP(ch_samples)
     SALMON_QUANT(FASTP.out.reads, UNTAR.out.index.first())
 
+    ch_multiqc = FASTQC.out.zip
+        .map { _id, files -> files }
+        .mix(FASTP.out.json.map { _id, files -> files })
+        .mix(SALMON_QUANT.out.results.map { _id, files -> files })
+        .collect()
+
+    MULTIQC(ch_multiqc)
+
     publish:
     fastqc_html = FASTQC.out.html
     fastqc_zip = FASTQC.out.zip
@@ -36,6 +46,7 @@ workflow {
     fastp_json = FASTP.out.json
     fastp_html = FASTP.out.html
     salmon_quant = SALMON_QUANT.out.results
+    multiqc_report = MULTIQC.out.report
 }
 
 output {
@@ -56,5 +67,8 @@ output {
     }
     salmon_quant {
         path 'salmon'
+    }
+    multiqc_report {
+        path 'multiqc'
     }
 }

@@ -5,9 +5,6 @@ process FASTP {
     tag "$id"
     container 'quay.io/biocontainers/fastp:0.23.4--hadf994f_2'
 
-    cpus 4
-    memory '4.GB'
-
     input:
     tuple val(id), path(reads)
 
@@ -25,6 +22,6 @@ process FASTP {
         --out2 ${id}_trimmed_R2.fastq.gz \\
         --json ${id}.fastp.json \\
         --html ${id}.fastp.html \\
-        --thread ${task.cpus}
+        --thread 4
     """
 }

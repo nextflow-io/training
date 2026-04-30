@@ -5,9 +5,6 @@ process FASTQC {
     tag "$id"
     container 'quay.io/biocontainers/fastqc:0.12.1--hdfd78af_0'
 
-    cpus 2
-    memory '2.GB'
-
     input:
     tuple val(id), path(reads)
 
@@ -17,6 +14,6 @@ process FASTQC {
 
     script:
     """
-    fastqc --quiet --threads ${task.cpus} ${reads}
+    fastqc --quiet --threads 2 ${reads}
     """
 }
