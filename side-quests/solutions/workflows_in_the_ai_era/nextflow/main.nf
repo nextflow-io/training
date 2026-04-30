@@ -1,52 +1,60 @@
 #!/usr/bin/env nextflow
 
 /*
- * RNA-seq Analysis Pipeline - Nextflow Version
+ * RNA-seq analysis pipeline.
  *
- * This workflow demonstrates the benefits of workflow management:
- * - Automatic parallelization based on data dependencies
- * - Built-in resume/caching after failures
- * - Per-process container isolation
- * - Declarative resource management
- * - Automatic provenance tracking
+ * Quality control, adapter trimming, and transcript quantification
+ * for paired-end RNA-seq samples listed in a CSV sample sheet.
  */
 
-// Include process definitions
 include { FASTQC } from './modules/fastqc'
 include { FASTP } from './modules/fastp'
 include { UNTAR; SALMON_QUANT } from './modules/salmon'
 
-// Pipeline parameters
 params.samples = '../data/samples.csv'
 params.salmon_index = 'https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/reference/salmon.tar.gz'
-params.outdir = '../results'
 
-// Main workflow
 workflow {
 
-    // Read sample sheet and create channel
-    // Each sample becomes an independent item that can be processed in parallel
-    ch_samples = Channel
+    main:
+    ch_samples = channel
         .fromPath(params.samples)
         .splitCsv(header: true)
-        .map { row ->
-            def meta = [id: row.sample]
-            def reads = [file(row.fastq_1), file(row.fastq_2)]
-            return [meta, reads]
-        }
+        .map { row -> [row.sample, [file(row.fastq_1), file(row.fastq_2)]] }
 
-    // Download and extract pre-built salmon index
-    ch_salmon_index = Channel.fromPath(params.salmon_index)
+    ch_salmon_index = channel.fromPath(params.salmon_index)
     UNTAR(ch_salmon_index)
 
-    // Run the pipeline
-    // Nextflow automatically determines what can run in parallel
-
-    // FastQC and FASTP both need only the raw reads - they run in PARALLEL
     FASTQC(ch_samples)
     FASTP(ch_samples)
-
-    // SALMON needs FASTP output - it WAITS for FASTP, but runs samples in PARALLEL
-    // .first() converts the index to a value channel so it's reused for all samples
     SALMON_QUANT(FASTP.out.reads, UNTAR.out.index.first())
+
+    publish:
+    fastqc_html = FASTQC.out.html
+    fastqc_zip = FASTQC.out.zip
+    fastp_reads = FASTP.out.reads
+    fastp_json = FASTP.out.json
+    fastp_html = FASTP.out.html
+    salmon_quant = SALMON_QUANT.out.results
+}
+
+output {
+    fastqc_html {
+        path 'fastqc'
+    }
+    fastqc_zip {
+        path 'fastqc'
+    }
+    fastp_reads {
+        path 'fastp'
+    }
+    fastp_json {
+        path 'fastp'
+    }
+    fastp_html {
+        path 'fastp'
+    }
+    salmon_quant {
+        path 'salmon'
+    }
 }

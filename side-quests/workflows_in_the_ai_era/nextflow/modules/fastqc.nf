@@ -1,10 +1,9 @@
 process FASTQC {
-    tag "$meta.id"
+    tag "$id"
     container 'quay.io/biocontainers/fastqc:0.12.1--hdfd78af_0'
-    publishDir "${params.outdir}/fastqc", mode: 'copy'
 
     input:
-    // TODO: Define input - a tuple with sample metadata and read files
+    // TODO: Define input - a tuple with sample id and the read files
     ???
 
     output:

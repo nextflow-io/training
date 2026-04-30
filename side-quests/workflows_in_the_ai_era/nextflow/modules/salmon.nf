@@ -10,14 +10,13 @@ process UNTAR {
 
     script:
     """
-    tar -xzf $archive
+    tar -xzf ${archive}
     """
 }
 
 process SALMON_QUANT {
-    tag "$meta.id"
+    tag "$id"
     container 'quay.io/biocontainers/salmon:1.10.3--h6dccd9a_2'
-    publishDir "${params.outdir}/salmon", mode: 'copy'
 
     cpus 4
     memory '8.GB'
@@ -33,9 +32,9 @@ process SALMON_QUANT {
 
     script:
     // TODO: Add the salmon quant command
-    // Hint: Use $index for the index path
+    // Hint: Use ${index} for the index path
     // Hint: Use ${reads[0]} and ${reads[1]} for input reads
-    // Hint: Use $task.cpus for thread count
+    // Hint: Use ${task.cpus} for thread count
     """
     ???
     """

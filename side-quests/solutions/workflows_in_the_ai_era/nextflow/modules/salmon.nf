@@ -14,39 +14,35 @@ process UNTAR {
 
     script:
     """
-    tar -xzf $archive
+    tar -xzf ${archive}
     """
 }
 
 /*
- * SALMON - Fast transcript quantification
- *
- * Salmon uses pseudo-alignment for rapid quantification.
- * We use a pre-built index to keep the tutorial fast.
+ * SALMON_QUANT - Fast transcript quantification
  */
 process SALMON_QUANT {
-    tag "$meta.id"
+    tag "$id"
     container 'quay.io/biocontainers/salmon:1.10.3--h6dccd9a_2'
-    publishDir "${params.outdir}/salmon", mode: 'copy'
 
     cpus 4
     memory '8.GB'
 
     input:
-    tuple val(meta), path(reads)
+    tuple val(id), path(reads)
     path index
 
     output:
-    tuple val(meta), path("${meta.id}"), emit: results
+    tuple val(id), path("${id}"), emit: results
 
     script:
     """
     salmon quant \\
-        --index $index \\
+        --index ${index} \\
         --libType A \\
         --mates1 ${reads[0]} \\
         --mates2 ${reads[1]} \\
-        --output ${meta.id} \\
-        --threads $task.cpus
+        --output ${id} \\
+        --threads ${task.cpus}
     """
 }
