@@ -1,62 +1,61 @@
-# Workflow Management Fundamentals
+# Workflows in the AI era
 
-This side quest teaches why workflow managers exist by having you experience the pain points firsthand.
+This side quest teaches why workflow managers still matter when an AI agent can run your analysis or generate the pipeline for you.
 
 ## Structure
 
 ```
-workflow_management_fundamentals/
-├── bash/                    # Part 1: Build scripts here
+workflows_in_the_ai_era/
+├── bash/                    # Part 1: build scripts here
 ├── data/
-│   └── samples.csv          # Sample metadata (real RNA-seq data URLs)
-└── nextflow/                # Part 2: Build workflow here
-    ├── main.nf              # Starter template
-    ├── modules/             # Add process modules here
-    └── nextflow.config      # Starter configuration
+│   └── samples.csv          # sample metadata (real RNA-seq data URLs)
+└── nextflow/                # Part 2: build workflow here
+    ├── main.nf              # starter template
+    ├── modules/             # add process modules here
+    └── nextflow.config      # starter configuration
 ```
 
-## Tutorial Parts
+## Tutorial parts
 
-### Part 1: Building a Bash Pipeline
+### Part 1: Building a bash pipeline
 
 You'll build an RNA-seq pipeline from scratch in bash, experiencing:
 
 - Tool installation friction (conda/mamba setup)
 - Sequential processing limitations
-- Parallelization complexity (& and wait)
+- Parallelisation complexity (`&` and `wait`)
 - Failure recovery challenges
 - Reproducibility problems
 - Portability issues
 
-### Part 2: Building a Nextflow Pipeline
+### Part 2: Building a Nextflow pipeline
 
 You'll rebuild the same pipeline in Nextflow, seeing how each problem is solved:
 
 - Container-based tool management
-- Automatic parallelization from data flow
+- Automatic parallelisation from data flow
 - Built-in resume capability
 - Declarative resource management
 - Configuration profiles for any platform
-- Automatic provenance tracking
+- The workflow output system for stable result layouts
 
 ## Solutions
 
-Complete solutions are in `../solutions/workflow_management_fundamentals/`:
+Complete solutions are in `../solutions/workflows_in_the_ai_era/`:
 
-- `bash/` - Final bash scripts (process_sample.sh, pipeline_sequential.sh, pipeline_parallel.sh)
-- `nextflow/` - Final Nextflow workflow with all modules
+- `bash/`: final bash scripts (`process_sample.sh`, `pipeline_sequential.sh`, `pipeline_parallel.sh`)
+- `nextflow/`: final Nextflow workflow with all modules
 
 ## Prerequisites
 
 - Docker (for Nextflow containers)
-- Conda/Mamba (for Part 1 bash tools)
-- Basic command line familiarity
+- Conda or mamba (for Part 1 bash tools)
+- Basic command-line familiarity
 
 ## Data
 
-This tutorial uses real RNA-seq data from the nf-core test-datasets repository.
-The FASTQ files are small (~30 seconds per sample) to keep execution fast while using actual bioinformatics tools.
+This tutorial uses real RNA-seq data from the nf-core test-datasets repository. The FASTQ files are small (about 30 seconds per sample) to keep execution fast while using actual bioinformatics tools.
 
-## Getting Started
+## Getting started
 
-See the full tutorial: [Workflow Management Fundamentals](https://training.nextflow.io/side_quests/workflow_management_fundamentals/)
+See the full tutorial: [Workflows in the AI era](https://training.nextflow.io/side_quests/workflows_in_the_ai_era/).

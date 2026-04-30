@@ -452,7 +452,7 @@ Processing: WT_REP1
 Processing: WT_REP2      <- Starts only after WT_REP1 is completely done
 ```
 
-#### 3.4.3. Takeaway
+#### 3.4.3. The problem: sequential execution
 
 ```
 Timeline (sequential):
@@ -527,7 +527,7 @@ Notice the interleaved output, all samples running at once:
 
 Faster, because all samples run concurrently.
 
-#### 3.5.3. Takeaway
+#### 3.5.3. The hidden problem
 
 What happens with 50 samples, or 500?
 
@@ -779,7 +779,7 @@ Pay attention to the `emit: reads` on the trimmed reads output. This names the o
 
 === "After"
 
-    ```groovy title="nextflow/modules/fastp.nf" hl_lines="5 8-10 13-21"
+    ```groovy title="nextflow/modules/fastp.nf" hl_lines="6 9-11 15-21"
     process FASTP {
         tag "$id"
         container 'quay.io/biocontainers/fastp:0.23.4--hadf994f_2'
@@ -867,7 +867,7 @@ The UNTAR process (which extracts the pre-built Salmon index) is already complet
 
 === "After"
 
-    ```groovy title="nextflow/modules/salmon.nf" linenums="17" hl_lines="8-9 12 16-22"
+    ```groovy title="nextflow/modules/salmon.nf" linenums="17" hl_lines="9-10 13 17-23"
     process SALMON_QUANT {
         tag "$id"
         container 'quay.io/biocontainers/salmon:1.10.3--h6dccd9a_2'
@@ -929,7 +929,7 @@ Now connect the processes. SALMON_QUANT needs two arguments. Then add `publish:`
 
 === "After"
 
-    ```groovy title="nextflow/main.nf" linenums="30" hl_lines="1 4-10 13-30"
+    ```groovy title="nextflow/main.nf" linenums="30" hl_lines="1 3-9 12-18"
     SALMON_QUANT(FASTP.out.reads, UNTAR.out.index.first())
 
     publish:
