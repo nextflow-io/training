@@ -93,15 +93,18 @@ cd side-quests/workflows_in_the_ai_era
 #### 3.1.3. Explore the starter files
 
 ```bash
-ls -la bash/
+ls bash/
 ```
 
 ```console title="Output"
-bash/
-├── process_sample.sh      # Single sample script (has TODOs)
-├── pipeline_sequential.sh # Multi-sample loop (has TODOs)
-└── pipeline_parallel.sh   # Parallel version (has TODOs)
+pipeline_parallel.sh    pipeline_sequential.sh  process_sample.sh
 ```
+
+Three scripts, each with TODOs you'll fill in as you progress:
+
+- `process_sample.sh`: single sample script
+- `pipeline_sequential.sh`: multi-sample loop
+- `pipeline_parallel.sh`: parallel version
 
 You'll fill in these starter files as you progress through the tutorial.
 
@@ -122,13 +125,11 @@ Each row is a sample with URLs to paired-end FASTQ files.
 
 ---
 
-### 3.2. Installing your tools
+### 3.2. Kick off the tool install
 
-Before you can run any analysis, you need to install the bioinformatics tools.
+Part 1 needs FastQC, fastp, and Salmon installed locally so the bash scripts can call them from `PATH`. Conda solves environments slowly, so kick off the install now and let it run in the background while you keep reading. We'll check on it before you actually need to run anything.
 
-#### 3.2.1. Create a conda environment
-
-=== "Mamba (Recommended)"
+=== "Mamba (recommended)"
 
     ```bash
     mamba create -n rnaseq-bash fastqc fastp salmon -c bioconda -c conda-forge -y
@@ -140,34 +141,7 @@ Before you can run any analysis, you need to install the bioinformatics tools.
     conda create -n rnaseq-bash fastqc fastp salmon -c bioconda -c conda-forge -y
     ```
 
-Watch the output. Notice:
-
-- Dependencies being resolved (sometimes this takes minutes)
-- Packages being downloaded
-- Hope that there are no conflicts...
-
-#### 3.2.2. Activate the environment
-
-```bash
-mamba activate rnaseq-bash
-```
-
-!!! warning "Remember this step"
-
-    Every time you open a new terminal, you must activate this environment again.
-    Forget, and your script fails with `command not found`.
-
-#### 3.2.3. Verify installation
-
-```bash
-fastqc --version
-fastp --version
-salmon --version
-```
-
-#### 3.2.4. Takeaway
-
-The agent that ran this for you didn't record which versions of FastQC, fastp, or Salmon ended up in the environment, didn't pin a channel, and didn't write down what to do when conda's solver picks up a different combination next month. That documentation is your problem.
+This typically takes about 3 minutes. While it runs, work through the next section. The activation and version check come later, once you actually have a script to test.
 
 ---
 
@@ -345,7 +319,29 @@ Salmon quantifies transcript expression by pseudo-aligning reads to the index. I
     # TODO: Add salmon quant command
     ```
 
-#### 3.3.7. Test your script
+#### 3.3.7. Activate the env and verify it's ready
+
+The conda install you started in section 3.2 should be done by now. Switch back to that terminal (or the same one if you ran the install in this shell) and activate the environment:
+
+```bash
+mamba activate rnaseq-bash
+```
+
+!!! warning "Remember this step"
+
+    Every time you open a new terminal, you must activate this environment again. Forget, and your script fails with `command not found`.
+
+Verify the three tools are on your `PATH`:
+
+```bash
+fastqc --version
+fastp --version
+salmon --version
+```
+
+If any of those errors out, give the install another minute and try again. Once all three respond with versions, you are ready to run the script.
+
+#### 3.3.8. Test your script
 
 Make it executable and run on one sample:
 
@@ -364,9 +360,9 @@ ls results/
 
 This works for one sample, but you have 3 samples and 50 more coming. Running this command manually for each one isn't practical.
 
-#### 3.3.8. Takeaway
+#### 3.3.9. Takeaway
 
-You now have a runnable script. There is no record of which container or environment ran it, no resume on failure, no way to scale up without rewriting the loop. The script is what an agent hands you when you ask it to run an analysis; the rest is on you.
+You now have a runnable script. There is no record of which conda environment solved for which tool versions, no resume on failure, no way to scale up without rewriting the loop, no provenance trace beyond your shell history. The script is what an agent hands you when you ask it to run an analysis; the rest is on you.
 
 ---
 
