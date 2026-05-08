@@ -29,6 +29,16 @@ You will take away the confidence to run workflows at scale using Nextflow and S
 
 <!-- additional_information -->
 
+## See where you're headed
+
+Before diving in, watch this short demo to see what you'll be able to do by the end of the course.
+
+<!-- TODO: Embed intro video here — should show a Seqera Platform demo walk-through (~2-3 min):
+     running a pipeline, monitoring execution, and reviewing results.
+     Use the MkDocs video embed pattern:
+     ![type:video](url-to-video)
+     or an iframe for YouTube/Vimeo as appropriate. -->
+
 ## Course overview
 
 This course is hands-on, with goal-oriented exercises structured to introduce information gradually.
