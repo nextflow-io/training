@@ -17,7 +17,7 @@ session:
       memory: 32768
   environmentVariables:
     - name: NXF_HOME
-      value: "/workspace/.nextflow"
+      value: "/workspace/training/.seqera/nxf"
     - name: NXF_EDGE
       value: "0"
     - name: NXF_VER
