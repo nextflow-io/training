@@ -1,6 +1,0 @@
-// Loaded by Nextflow when NXF_HOME points at this directory (set in studio-config.yaml).
-// Outside the Studios session, NXF_HOME points elsewhere and this file is ignored.
-
-// Use the micromamba binary that ships with the base Studios image for conda env
-// resolution, since the Studios image does not include the `conda` CLI.
-conda.useMicromamba = true
