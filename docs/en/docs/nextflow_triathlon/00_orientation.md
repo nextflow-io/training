@@ -35,21 +35,24 @@ To see parallelism in action, you need a machine with multiple cores.
 
 ### Version requirements
 
-**Part 1** works with Nextflow 25.10.2 or later **with the v2 syntax parser ENABLED**.
+This course requires Nextflow 25.10.2 or later and nf-core tools 3.5.2 or later.
 
-**Part 2** requires Nextflow 25.10.2 or later **with the v2 syntax parser DISABLED** and nf-core tools 3.5.2 or later.
+- **Part 1** runs with the **v2 syntax parser enabled** (the default in 25.10+)
+- **Part 2** requires the **v1 syntax parser** — the lesson will tell you when to switch
 
 If you are using a local or custom environment, please make sure you are using the correct settings as documented [here](../info/nxf_versions.md).
 
 ## Course structure
 
-This course covers three disciplines in sequence, each using a different working directory.
+This course covers three disciplines in sequence.
+Parts 1 and 2 are run from the command line in the `nextflow-triathlon/` directory.
+Part 3 uses the Seqera Platform web interface.
 
-- **Part 1** uses the `nextflow-run/` directory
-- **Part 2** uses the `hello-nf-core/` directory
-- **Part 3** uses the Seqera Platform web interface
+Set your working directory now and keep it for Parts 1 and 2:
 
-Each lesson will tell you when to change directories.
+```bash
+cd /workspaces/training/nextflow-triathlon
+```
 
 ## Readiness checklist
 

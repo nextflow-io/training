@@ -6,10 +6,9 @@ We are going to use a pipeline called nf-core/demo that is maintained by the nf-
 
 !!! tip
 
-    Before starting this part, switch to the `hello-nf-core/` working directory and enable the v1 syntax parser:
+    Before starting this part, enable the v1 syntax parser (required for nf-core pipelines on Nextflow 25.10 and later):
 
     ```bash
-    cd /workspaces/training/hello-nf-core
     export NXF_SYNTAX_PARSER=v1
     ```
 

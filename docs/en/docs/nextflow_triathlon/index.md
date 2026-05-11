@@ -45,11 +45,11 @@ This course is hands-on, with goal-oriented exercises structured to introduce in
 
 ### Lesson plan
 
-| Course chapter                                            | Summary                                                                                                                  | Estimated duration |
-| --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------ |
-| [Part 1: Run Nextflow](./01_run_basics.md)                | Launch and manage Nextflow pipelines, understand execution fundamentals, and run real multi-step containerized workflows | 45 mins            |
-| [Part 2: Run nf-core](./02_run_nfcore.md)                 | Find, retrieve, and run an nf-core pipeline using its test profile; configure and customize its execution                | 30 mins            |
-| [Part 3: Run on Seqera Platform](./03_seqera_platform.md) | Launch pipelines on Seqera Platform, scale up to a production workflow, and set up a pipeline from a GitHub repository   | 45 mins            |
+| Course chapter                                   | Summary                                                                                                                  | Estimated duration |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------ |
+| [Part 1: Run Nextflow](./01_run_basics.md)       | Launch and manage Nextflow pipelines, understand execution fundamentals, and run real multi-step containerized workflows | 45 mins            |
+| [Part 2: Run nf-core](./02_run_nfcore.md)        | Find, retrieve, and run an nf-core pipeline using its test profile; configure and customize its execution                | 30 mins            |
+| [Part 3: Run on Seqera](./03_seqera_platform.md) | Launch pipelines on Seqera Platform, scale up to a production workflow, and set up a pipeline from a GitHub repository   | 45 mins            |
 
 Ready to take the course?
 
