@@ -16,6 +16,7 @@
             "version": "3.13"
         },
         "ghcr.io/devcontainers/features/java:1": { "version": "21.0.6-ms" },
+        "ghcr.io/devcontainers/features/node:1": { "version": "20" },
         "ghcr.io/rocker-org/devcontainer-features/miniforge:2": {
             "version": "latest"
         },
@@ -24,7 +25,8 @@
         "../local-features/tower-agent": {},
         "../local-features/nextflow": {},
         "../local-features/conda-channels": {},
-        "../local-features/uv-tools": {}
+        "../local-features/uv-tools": {},
+        "../local-features/seqera-ai": {}
     },
     "workspaceFolder": "/workspaces/training",
     "remoteUser": "root",
