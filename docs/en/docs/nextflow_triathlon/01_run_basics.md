@@ -62,7 +62,7 @@ results
 
 Open the file to confirm it contains `Hello`.
 
-### 1.3. Understand the work/ directory
+### 1.3. Understand the `work/` directory
 
 Behind the scenes, Nextflow creates a unique task directory for every process call inside a directory named `work/`.
 The hash shown in the console output (`[a3/7be2fa]`) is the path to that directory.
@@ -126,7 +126,7 @@ include { sayHello } from './modules/sayHello.nf'
 
 The module file defines the process:
 
-```groovy title="modules/sayHello.nf" linenums="1"
+```groovy title="modules/sayHello.nf" linenums="4"
 process sayHello {
 
     input:
@@ -260,7 +260,7 @@ The key change in `2-inputs.nf` is in the `main:` section of the workflow:
 The result is a channel containing `Hello`, `Bonjour`, and `Hola`.
 When passed to `sayHello(greeting_ch)`, Nextflow automatically calls the process once per item, running them in parallel when resources allow.
 
-### 2.3. Use -resume to skip completed work
+### 2.3. Use `-resume` to skip completed work
 
 Now switch to the extended input file, which adds two more greetings:
 
@@ -410,10 +410,10 @@ docker.enabled = true
  */
 process {
     memory = 1.GB
-    withName: 'cowpy' {
-        memory = 2.GB
-        cpus = 2
-    }
+    // withName: 'cowpy' {
+    //     memory = 2.GB
+    //     cpus = 2
+    // }
 }
 
 /*
@@ -445,8 +445,10 @@ profiles {
 Any process that declares a `container` directive runs inside the specified image.
 To use Conda instead, activate the `conda` profile.
 
-**Process settings**: set resource limits for all processes, with overrides for specific ones using `withName`.
-All processes get 1 GB of memory; `cowpy` gets 2 GB and 2 CPU cores.
+**Process settings**: sets a 1 GB memory limit for all processes.
+The commented `withName: 'cowpy'` block is included as a syntax example showing how to apply separate limits to a specific process.
+It is commented out because `cowpy` only appears in `main.nf`, and an unmatched selector produces a warning when running the other scripts.
+Feel free to uncomment it, run `main.nf` again, and experiment with different resource values.
 
 **Parameter defaults**: provide fallback values for parameters not supplied on the command line.
 Running `nextflow run main.nf` with no flags uses these values.
@@ -455,7 +457,40 @@ Running `nextflow run main.nf` with no flags uses these values.
 The `test` profile overrides three parameters to run the pipeline with a small, well-defined input set.
 The `conda` profile switches software packaging from Docker to Conda.
 
-### 4.2. Run with a profile
+!!! note
+
+    This config covers local execution on a single machine.
+    Nextflow also supports HPC schedulers (SLURM, PBS, LSF) and cloud executors (AWS Batch, Google Cloud Batch, Azure Batch), all configured through the same `nextflow.config` mechanism.
+    See the [Nextflow Run: Configuration](../nextflow_run/03_config.md) tutorial for a full walkthrough.
+
+### 4.2. Generate an execution report
+
+Add `-with-report` to any `nextflow run` command to generate an HTML report after the pipeline completes:
+
+```bash
+nextflow run main.nf --input data/greetings.csv --character turkey -with-report
+```
+
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.4
+
+    Launching `main.nf` [shrivelled_lamarck] DSL2 - revision: c6622ba0d3
+
+    executor >  local (8)
+    [c6/a04d91] sayHello (3)       | 3 of 3 ✔
+    [1e/7c085e] convertToUpper (1) | 3 of 3 ✔
+    [55/24f000] collectGreetings   | 1 of 1 ✔
+    [b9/d326ca] cowpy              | 1 of 1 ✔
+    ```
+
+Nextflow writes the report to a file named `report-<timestamp>.html` in the working directory.
+Open it in a browser to see an execution summary, a table of every task with its status and runtime, and resource usage charts broken down by process.
+
+The report is especially useful when a pipeline takes longer than expected or a task fails — the task table shows exactly where time was spent and which tasks succeeded or failed.
+
+### 4.3. Run with a profile
 
 Run the pipeline using the `test` profile:
 
@@ -501,10 +536,6 @@ nextflow config -profile test
 
     process {
        memory = '1 GB'
-       withName:cowpy {
-          memory = '2 GB'
-          cpus = 2
-       }
     }
     ```
 
@@ -513,7 +544,7 @@ Use it to confirm settings are active before running a pipeline.
 
 ### Takeaway
 
-You know how to configure pipeline behavior using `nextflow.config` and how profiles bundle related settings that activate together with a single flag.
+You know how to configure pipeline behavior using `nextflow.config`, how to generate an HTML execution report with `-with-report`, and how profiles bundle related settings that activate together with a single flag.
 The `test` profile is a standard nf-core convention. Every nf-core pipeline ships with one for quick validation.
 
 ### What's next?
@@ -532,4 +563,5 @@ In this part you learned to:
 - Process multiple inputs from a CSV file using channels
 - Use `-resume` to skip completed work when adding new inputs
 - Connect processes in a multi-step pipeline with containerized software
+- Generate an HTML execution report with `-with-report`
 - Configure pipeline behavior using `nextflow.config` and profiles

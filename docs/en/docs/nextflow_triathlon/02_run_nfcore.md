@@ -2,7 +2,7 @@
 
 In this second part of the Nextflow Triathlon, we show you how to find and try out an nf-core pipeline, configure and customize its execution, and understand how input validation protects against common errors.
 
-We are going to use a pipeline called nf-core/demo that is maintained by the nf-core project as part of its inventory of pipelines for demonstration and training purposes.
+We are going to use a pipeline called `nf-core/demo` that is maintained by the nf-core project as part of its inventory of pipelines for demonstration and training purposes.
 
 !!! tip
 
@@ -22,7 +22,7 @@ We are going to use a pipeline called nf-core/demo that is maintained by the nf-
 
 ## 1. Find and retrieve the nf-core/demo pipeline
 
-Let's start by locating the nf-core/demo pipeline on the project website at [nf-co.re](https://nf-co.re), which centralizes all information such as: general documentation and help articles, documentation for each of the pipelines, blog posts, event announcements and so forth.
+Let's start by locating the `nf-core/demo` pipeline on the project website at [nf-co.re](https://nf-co.re), which centralizes all information such as: general documentation and help articles, documentation for each of the pipelines, blog posts, event announcements and so forth.
 
 ### 1.1. Find the pipeline on the website
 
@@ -84,7 +84,7 @@ nextflow pull nf-core/demo
 
     ```console
     Checking nf-core/demo ...
-    downloaded from https://github.com/nf-core/demo.git - revision: 04060b4644 [master]
+    downloaded from https://github.com/nf-core/demo.git - revision: 45904cb9d1 [master]
     ```
 
 Nextflow downloads the full repository to your local drive.
@@ -133,8 +133,10 @@ tree -L 1 $NXF_HOME/assets/nf-core/demo
     ├── nextflow_schema.json
     ├── nf-test.config
     ├── README.md
+    ├── ro-crate-metadata.json
     ├── subworkflows
     ├── tests
+    ├── tower.yml
     └── workflows
     ```
 
@@ -394,8 +396,7 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results --input mal
 ERROR ~ Validation of pipeline parameters failed!
 
 * --input (malformed_samplesheet.csv): Validation of file failed:
-    -> Entry 1: Error for field 'fastq_2' (/not/a/real/file.fastq.gz): the file or directory
-       '/not/a/real/file.fastq.gz' does not exist
+    -> Entry 1: Error for field 'fastq_2' (/not/a/real/file.fastq.gz): the file or directory '/not/a/real/file.fastq.gz' does not exist (FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz')
     -> Entry 1: Missing required field(s): fastq_1
 ```
 
@@ -480,11 +481,11 @@ Try a real production pipeline before moving to Seqera Platform.
 
 ## 4. Pull and run nf-core/rnaseq
 
-So far we have used nf-core/demo, which is a minimal pipeline designed for training.
-Now we pull a real production pipeline — nf-core/rnaseq — and run it with its test profile.
+So far we have used `nf-core/demo`, which is a minimal pipeline designed for training.
+Now we pull a real production pipeline — `nf-core/rnaseq` — and run it with its test profile.
 This gives you a baseline to compare against when you launch it at scale on Seqera Platform.
 
-nf-core/rnaseq performs the core steps of bulk RNA sequencing analysis: quality control, adapter trimming, read alignment, and gene-level quantification.
+`nf-core/rnaseq` performs the core steps of bulk RNA sequencing analysis: quality control, adapter trimming, read alignment, and gene-level quantification.
 
 ### 4.1. Pull the pipeline
 
@@ -631,9 +632,9 @@ Academic researchers can access it free of charge through the [Seqera academic p
 
 ### Takeaway
 
-You have pulled nf-core/rnaseq, seen how nf-core resource labels work, and learned to override them with a custom config file.
+You have pulled `nf-core/rnaseq`, seen how nf-core resource labels work, and learned to override them with a custom config file.
 More importantly, you have seen why local execution is a starting point rather than a destination for real-scale analysis.
 
 ### What's next?
 
-Move on to Part 3, where you will run nf-core/rnaseq at scale on Seqera Platform.
+Move on to Part 3, where you will run `nf-core/rnaseq` at scale on Seqera Platform.
