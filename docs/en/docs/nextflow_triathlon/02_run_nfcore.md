@@ -6,7 +6,13 @@ We are going to use a pipeline called nf-core/demo that is maintained by the nf-
 
 !!! tip
 
-    Before starting this part, enable the v1 syntax parser (required for nf-core pipelines on Nextflow 25.10 and later):
+    Switch to the `nextflow-triathlon/nf-core/` directory for this part:
+
+    ```bash
+    cd /workspaces/training/nextflow-triathlon/nf-core
+    ```
+
+    Then enable the v1 syntax parser (required for nf-core pipelines on Nextflow 25.10 and later):
 
     ```bash
     export NXF_SYNTAX_PARSER=v1
@@ -45,9 +51,9 @@ Have a look now and see if you can find out:
 
 The `Introduction` tab provides an overview of the pipeline, including a visual representation (called a subway map) and a list of tools that are run as part of the pipeline.
 
-1. Read QC (FASTQC)
-2. Adapter and quality trimming (SEQTK_TRIM)
-3. Present QC for raw reads (MULTIQC)
+1. Read QC (`FASTQC`)
+2. Adapter and quality trimming (`SEQTK_TRIM`)
+3. Present QC for raw reads (`MULTIQC`)
 
 #### 1.1.2. Example command line
 
@@ -67,6 +73,8 @@ Let's retrieve the code to examine it.
 ### 1.2. Retrieve the pipeline code
 
 #### 1.2.1. Use `nextflow pull`
+
+Run the following command to download a local copy of the pipeline code.
 
 ```bash
 nextflow pull nf-core/demo
@@ -97,7 +105,11 @@ tree -L 2 $NXF_HOME/assets/
     └── demo
 ```
 
+Each pipeline is stored in its own subdirectory, named after the GitHub organisation and repository.
+
 #### 1.2.3. Overview of the code organization
+
+Run the following command to see the top-level layout of the pipeline code.
 
 ```bash
 tree -L 1 $NXF_HOME/assets/nf-core/demo
@@ -232,6 +244,8 @@ nextflow run nf-core/demo -r 1.1.0 -profile docker,test --outdir demo-results
 
 ### 2.3. Examine the pipeline's outputs
 
+Run the following command to see the output structure.
+
 ```bash
 tree -L 2 demo-results
 ```
@@ -306,6 +320,8 @@ nextflow run nf-core/demo --help
       --skip_trim                   [boolean]          Skip trimming fastq files with seqtk
     ...
     ```
+
+Use `--help` whenever you want a quick reference to a pipeline's available parameters and their types.
 
 #### 3.1.2. Set parameter values
 
@@ -426,7 +442,7 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results-custom -c c
 
 #### 3.2.2. Set tool arguments with `ext.args`
 
-Many nf-core modules accept additional tool arguments through a `ext.args` configuration convention.
+Many nf-core modules accept additional tool arguments through an `ext.args` configuration convention.
 For example, to trim 5 bases from the start of each read during the `SEQTK_TRIM` step:
 
 ```groovy title="custom.config" linenums="1" hl_lines="6 7 8"
@@ -471,6 +487,8 @@ nf-core/rnaseq performs the core steps of bulk RNA sequencing analysis: quality 
 
 ### 4.1. Pull the pipeline
 
+Run the following command to download it.
+
 ```bash
 nextflow pull nf-core/rnaseq
 ```
@@ -479,10 +497,14 @@ nextflow pull nf-core/rnaseq
 
     ```console
     Checking nf-core/rnaseq ...
-    downloaded from https://github.com/nf-core/rnaseq.git - revision: 3.18.0 [master]
+    downloaded from https://github.com/nf-core/rnaseq.git - revision: e7ca46272c [master]
     ```
 
+The pipeline is now cached locally and ready to run.
+
 ### 4.2. Run the test profile
+
+Run it with the test profile and Docker:
 
 ```bash
 nextflow run nf-core/rnaseq -profile docker,test --outdir rnaseq-results
@@ -493,7 +515,7 @@ nextflow run nf-core/rnaseq -profile docker,test --outdir rnaseq-results
     ```console
      N E X T F L O W   ~  version 25.10.4
 
-    Launching `https://github.com/nf-core/rnaseq` [happy_curie] DSL2 - revision: 3.18.0 [master]
+    Launching `https://github.com/nf-core/rnaseq` [happy_curie] DSL2 - revision: e7ca46272c [master]
 
     ------------------------------------------------------
                                             ,--./,-.
@@ -501,13 +523,13 @@ nextflow run nf-core/rnaseq -profile docker,test --outdir rnaseq-results
       |\ | |__  __ /  ` /  \ |__) |__         }  {
       | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                             `._,._,'
-      nf-core/rnaseq 3.18.0
+      nf-core/rnaseq 3.26.0
     ------------------------------------------------------
     ...
-    executor >  local (...)
-    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FASTQC (...)            | ... ✔
-    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:TRIMGALORE (...)        | ... ✔
-    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:STAR_SALMON:STAR_ALIGN  | ... ✔
+    executor >  local (234)
+    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FASTQC (...)            | 5 of 5 ✔
+    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:TRIMGALORE (...)        | 5 of 5 ✔
+    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:STAR_SALMON:STAR_ALIGN  | 5 of 5 ✔
     [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:MULTIQC                 | 1 of 1 ✔
     -[nf-core/rnaseq] Pipeline completed successfully-
     ```
@@ -517,6 +539,8 @@ Even with the minimal test dataset, nf-core/rnaseq performs substantially more w
 
 ### 4.3. Examine the outputs
 
+Run the following command to see the output structure.
+
 ```bash
 tree -L 2 rnaseq-results
 ```
@@ -525,13 +549,17 @@ tree -L 2 rnaseq-results
 
     ```console
     rnaseq-results
+    ├── bbsplit
     ├── fastqc
+    ├── fq_lint
     ├── multiqc
-    │   └── multiqc_report.html
+    │   └── star_salmon
     ├── pipeline_info
     │   ├── execution_report_*.html
     │   ├── execution_timeline_*.html
-    │   └── execution_trace_*.txt
+    │   ├── execution_trace_*.txt
+    │   └── pipeline_dag_*.html
+    ├── salmon
     ├── star_salmon
     │   ├── <sample_id>
     │   └── ...

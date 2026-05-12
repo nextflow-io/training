@@ -45,14 +45,13 @@ If you are using a local or custom environment, please make sure you are using t
 ## Course structure
 
 This course covers three disciplines in sequence.
-Parts 1 and 2 are run from the command line in the `nextflow-triathlon/` directory.
 Part 3 uses the Seqera Platform web interface.
+Parts 1 and 2 are run from the command line, each from its own subdirectory:
 
-Set your working directory now and keep it for Parts 1 and 2:
+- **Part 1** uses `nextflow-triathlon/basics/`
+- **Parts 2 and 3** use `nextflow-triathlon/nf-core/`
 
-```bash
-cd /workspaces/training/nextflow-triathlon
-```
+Each part begins with a tip reminding you which directory to use.
 
 ## Readiness checklist
 
