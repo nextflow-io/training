@@ -481,7 +481,8 @@ Try a real production pipeline before moving to Seqera Platform.
 ## 4. Pull and run nf-core/rnaseq
 
 So far we have used nf-core/demo, which is a minimal pipeline designed for training.
-Before moving to Part 3, let's pull a real production pipeline — nf-core/rnaseq — and run it with its test profile, so you have a baseline to compare against when you launch it at scale on Seqera Platform.
+Now we pull a real production pipeline — nf-core/rnaseq — and run it with its test profile.
+This gives you a baseline to compare against when you launch it at scale on Seqera Platform.
 
 nf-core/rnaseq performs the core steps of bulk RNA sequencing analysis: quality control, adapter trimming, read alignment, and gene-level quantification.
 
@@ -510,12 +511,12 @@ Run it with the test profile and Docker:
 nextflow run nf-core/rnaseq -profile docker,test --outdir rnaseq-results
 ```
 
-??? success "Command output"
+??? failure "Command output"
 
     ```console
      N E X T F L O W   ~  version 25.10.4
 
-    Launching `https://github.com/nf-core/rnaseq` [happy_curie] DSL2 - revision: e7ca46272c [master]
+    Launching `https://github.com/nf-core/rnaseq` [suspicious_dijkstra] DSL2 - revision: e7ca46272c [master]
 
     ------------------------------------------------------
                                             ,--./,-.
@@ -526,53 +527,112 @@ nextflow run nf-core/rnaseq -profile docker,test --outdir rnaseq-results
       nf-core/rnaseq 3.26.0
     ------------------------------------------------------
     ...
-    executor >  local (234)
-    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FASTQC (...)            | 5 of 5 ✔
-    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:TRIMGALORE (...)        | 5 of 5 ✔
-    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:STAR_SALMON:STAR_ALIGN  | 5 of 5 ✔
-    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:MULTIQC                 | 1 of 1 ✔
-    -[nf-core/rnaseq] Pipeline completed successfully-
+    [-        ] NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FQ_LINT  -
+    Plus 47 more processes waiting for tasks…
+
+    Execution cancelled -- Finishing pending tasks before exit
+    -[nf-core/rnaseq] Pipeline completed with errors-
+    ERROR ~ Error executing process > 'NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FQ_LINT (WT_REP2)'
+
+    Caused by:
+      Process requirement exceeds available memory -- req: 12 GB; avail: 7.7 GB
+
+    Command executed:
+      fq lint \
+          --disable-validator P001 \
+          SRR6357072_1.fastq.gz SRR6357072_2.fastq.gz > WT_REP2.fq_lint.txt
+
+    Command exit status:
+      -
+
+    Command output:
+      (empty)
+
+    Work dir:
+      /workspaces/training/nextflow-triathlon/nf-core/work/xx/xxxxxxxxxxxxxxxxxxxxxx
+
+    Container:
+      quay.io/biocontainers/fq:0.12.0--h9ee0642_0
+
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+     -- Check '.nextflow.log' file for details
+    ERROR ~ Pipeline failed. Please refer to troubleshooting docs for common issues: https://nf-co.re/docs/running/troubleshooting
+     -- Check '.nextflow.log' file for details
     ```
 
-Notice how many more processes this pipeline runs compared to nf-core/demo.
-Even with the minimal test dataset, nf-core/rnaseq performs substantially more work.
+The pipeline fails immediately.
+nf-core pipelines assign resources using process labels defined in `conf/base.config`.
+The `FQ_LINT` process carries the `process_low` label, which requests 12 GB of memory by default — more than Docker Desktop allocates on most machines.
 
-### 4.3. Examine the outputs
+### 4.3. Configure resource limits
 
-Run the following command to see the output structure.
+The fix is a custom config file that overrides the label-based resource defaults.
+Section 3.2 introduced `withName:` to target a single process by name.
+Here we use `withLabel:` to target all processes that share a label at once.
+This file is already present in your working directory:
 
-```bash
-tree -L 2 rnaseq-results
+```groovy title="laptop.config"
+process {
+    withLabel: 'process_low' {
+        cpus   = 2
+        memory = 6.GB
+    }
+    withLabel: 'process_medium' {
+        cpus   = 4
+        memory = 6.GB
+    }
+    withLabel: 'process_high' {
+        cpus   = 6
+        memory = 6.GB
+    }
+    withLabel: 'process_high_memory' {
+        memory = 6.GB
+    }
+}
 ```
 
-??? abstract "Directory contents"
+Pass it with `-c` to apply the overrides:
+
+```bash
+nextflow run nf-core/rnaseq -profile docker,test -c laptop.config --outdir rnaseq-results
+```
+
+??? success "Command output (pipeline launching)"
 
     ```console
-    rnaseq-results
-    ├── bbsplit
-    ├── fastqc
-    ├── fq_lint
-    ├── multiqc
-    │   └── star_salmon
-    ├── pipeline_info
-    │   ├── execution_report_*.html
-    │   ├── execution_timeline_*.html
-    │   ├── execution_trace_*.txt
-    │   └── pipeline_dag_*.html
-    ├── salmon
-    ├── star_salmon
-    │   ├── <sample_id>
-    │   └── ...
-    └── trimgalore
+     N E X T F L O W   ~  version 25.10.4
+
+    Launching `https://github.com/nf-core/rnaseq` [romantic_faraday] DSL2 - revision: e7ca46272c [master]
+
+    ------------------------------------------------------
+                                            ,--./,-.
+            ___     __   __   __   ___     /,-._.--~'
+      |\ | |__  __ /  ` /  \ |__) |__         }  {
+      | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                            `._,._,'
+      nf-core/rnaseq 3.26.0
+    ------------------------------------------------------
+    ...
+    executor >  local
+    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FQ_LINT (RAP1_IAA_30M_REP1)   | 3 of 5, running
+    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FASTQC (RAP1_IAA_30M_REP1)    | 2 of 5, running
+    ...
     ```
 
-Open the `pipeline_info/execution_timeline_*.html` file in your browser to see the full sequence and duration of every task.
-This gives you a concrete picture of the computational work involved — even at test scale.
+The pipeline is now running, and you can watch tasks completing one by one.
+On this minimal test dataset it will complete in 15–20 minutes, executing over 200 tasks in total.
+
+Real RNA-seq experiments typically involve dozens of samples and run for hours or days.
+Nextflow supports HPC schedulers (SLURM, PBS, LSF) and cloud platforms (AWS, Google Cloud, Azure), which can dramatically reduce wall-clock time by distributing work across many nodes.
+Setting up those environments, however, adds significant complexity.
+
+Seqera Platform provides a web-based interface for launching Nextflow pipelines on HPC or cloud infrastructure, with compute management and real-time monitoring handled for you.
+Academic researchers can access it free of charge through the [Seqera academic program](https://seqera.io/academic-program/).
 
 ### Takeaway
 
-You have run nf-core/rnaseq locally with the test profile and seen the shape of a real production pipeline.
-In Part 3, you will run it again on Seqera Platform with a full-scale dataset, and see how Platform handles the monitoring and infrastructure management.
+You have pulled nf-core/rnaseq, seen how nf-core resource labels work, and learned to override them with a custom config file.
+More importantly, you have seen why local execution is a starting point rather than a destination for real-scale analysis.
 
 ### What's next?
 
