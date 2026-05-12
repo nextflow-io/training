@@ -564,7 +564,7 @@ The pipeline fails immediately.
 nf-core pipelines assign resources using process labels defined in `conf/base.config`.
 The `FQ_LINT` process carries the `process_low` label, which requests 12 GB of memory by default — more than Docker Desktop allocates on most machines.
 
-### 4.3. Configure resource limits
+### 4.3. Re-run with a custom configuration
 
 The fix is a custom config file that overrides the label-based resource defaults.
 Section 3.2 introduced `withName:` to target a single process by name.
