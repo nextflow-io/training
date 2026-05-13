@@ -10,7 +10,7 @@ nav:
       - nextflow_triathlon/00_orientation.md
       - nextflow_triathlon/01_run_nextflow.md
       - nextflow_triathlon/02_run_nfcore.md
-      - nextflow_triathlon/03_seqera_platform.md
+      - nextflow_triathlon/03_run_seqera.md
       - nextflow_triathlon/next_steps.md
       - nextflow_triathlon/survey.md
   - Nextflow Run:
