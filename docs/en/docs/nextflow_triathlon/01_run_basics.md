@@ -5,10 +5,10 @@ We start with a simple Hello World workflow, then progress to a complete multi-s
 
 !!! tip
 
-    Make sure your working directory is set to `nextflow-triathlon/basics/` as instructed on the [Getting started](00_orientation.md) page.
+    Make sure your working directory is set to `triathlon/basics/` as instructed on the [Getting started](00_orientation.md) page.
 
     ```bash
-    cd /workspaces/training/nextflow-triathlon/basics
+    cd /workspaces/training/triathlon/basics
     ```
 
 ---

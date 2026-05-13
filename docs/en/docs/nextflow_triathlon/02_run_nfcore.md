@@ -6,10 +6,10 @@ We are going to use a pipeline called `nf-core/demo` that is maintained by the n
 
 !!! tip
 
-    Switch to the `nextflow-triathlon/nf-core/` directory for this part:
+    Switch to the `triathlon/nf-core/` directory for this part:
 
     ```bash
-    cd /workspaces/training/nextflow-triathlon/nf-core
+    cd /workspaces/training/triathlon/nf-core
     ```
 
     Then enable the v1 syntax parser (required for nf-core pipelines on Nextflow 25.10 and later):
@@ -550,7 +550,7 @@ nextflow run nf-core/rnaseq -profile docker,test --outdir rnaseq-results
       (empty)
 
     Work dir:
-      /workspaces/training/nextflow-triathlon/nf-core/work/xx/xxxxxxxxxxxxxxxxxxxxxx
+      /workspaces/training/triathlon/nf-core/work/xx/xxxxxxxxxxxxxxxxxxxxxx
 
     Container:
       quay.io/biocontainers/fq:0.12.0--h9ee0642_0

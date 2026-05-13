@@ -48,8 +48,8 @@ This course covers three disciplines in sequence.
 Part 3 uses the Seqera Platform web interface.
 Parts 1 and 2 are run from the command line, each from its own subdirectory:
 
-- **Part 1** uses `nextflow-triathlon/basics/`
-- **Parts 2 and 3** use `nextflow-triathlon/nf-core/`
+- **Part 1** uses `triathlon/basics/`
+- **Parts 2 and 3** use `triathlon/nf-core/`
 
 Each part begins with a tip reminding you which directory to use.
 
