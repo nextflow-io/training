@@ -18,6 +18,9 @@ on:
         type: string
         required: true
 
+permissions:
+  contents: read
+
 jobs:
   build_push:
     runs-on: ubuntu-22.04
@@ -26,17 +29,22 @@ jobs:
       packages: write
     steps:
       - name: Set tag variable
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          DISPATCH_TAG: ${{ inputs.tag_name }}
         run: |
-          if [[ '${{ github.event_name }}' == 'release' ]]; then
-            echo "IMAGE_TAG=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
-          elif [[ '${{ github.event_name }}' == 'workflow_dispatch' ]]; then
-            echo "IMAGE_TAG=${{ inputs.tag_name }}" >> $GITHUB_ENV
+          if [[ "$GITHUB_EVENT_NAME" == 'release' ]]; then
+            echo "IMAGE_TAG=$RELEASE_TAG" >> "$GITHUB_ENV"
+          elif [[ "$GITHUB_EVENT_NAME" == 'workflow_dispatch' ]]; then
+            echo "IMAGE_TAG=$DISPATCH_TAG" >> "$GITHUB_ENV"
           else
-            echo "IMAGE_TAG=latest" >> $GITHUB_ENV
+            echo "IMAGE_TAG=latest" >> "$GITHUB_ENV"
           fi
 
       - name: Check out the repo
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
 
       - name: Set up QEMU for multi-architecture builds
         uses: docker/setup-qemu-action@ce360397dd3f832beb865e1373c09c0e9f86d70a # v4.0.0

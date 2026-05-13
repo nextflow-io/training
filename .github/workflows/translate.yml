@@ -38,6 +38,8 @@ permissions:
 jobs:
   detect:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     outputs:
       languages: ${{ steps.detect.outputs.languages }}
       has_work: ${{ steps.detect.outputs.has_work }}
@@ -45,6 +47,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
 
@@ -55,17 +58,22 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          INPUT_LANGUAGE: ${{ inputs.language }}
+          INPUT_SINCE: ${{ inputs.since }}
+          INPUT_MODE: ${{ inputs.mode }}
         run: |
-          uv run -q python -m translate ci-detect \
-            ${{ inputs.language && format('--language "{0}"', inputs.language) || '' }} \
-            ${{ inputs.since && format('--since "{0}"', inputs.since) || '' }} \
-            ${{ inputs.mode == 'fix' && '--fix' || '' }} \
-            >> $GITHUB_OUTPUT
+          args=()
+          [ -n "$INPUT_LANGUAGE" ] && args+=(--language "$INPUT_LANGUAGE")
+          [ -n "$INPUT_SINCE" ] && args+=(--since "$INPUT_SINCE")
+          [ "$INPUT_MODE" = "fix" ] && args+=(--fix)
+          uv run -q python -m translate ci-detect "${args[@]}" >> "$GITHUB_OUTPUT"
 
   translate:
     needs: detect
     if: needs.detect.outputs.has_work == 'true'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     strategy:
       fail-fast: false # Continue other languages if one fails
       max-parallel: 5 # Limit concurrent languages to avoid API rate limits
@@ -75,6 +83,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
 
@@ -83,11 +92,13 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          LANGUAGE: ${{ matrix.language }}
+          INPUT_MODE: ${{ inputs.mode }}
         working-directory: _scripts
-        run: >
-          uv run -q python -m translate sync ${{ matrix.language }}
-          --log translate-${{ matrix.language }}.json
-          ${{ inputs.mode == 'fix' && '--fix' || '' }}
+        run: |
+          args=(sync "$LANGUAGE" --log "translate-$LANGUAGE.json")
+          [ "$INPUT_MODE" = "fix" ] && args+=(--fix)
+          uv run -q python -m translate "${args[@]}"
 
       - name: Upload translation artifacts
         if: success()
@@ -111,8 +122,13 @@ jobs:
     needs: [detect, translate]
     if: always() && needs.detect.outputs.has_work == 'true' && !cancelled()
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      # Intentionally persists credentials: ci-pr (in _scripts/translate/cli.py)
+      # runs `git push origin <branch>` to create the translation PR.
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 # zizmor: ignore[artipacked]
         with:
           fetch-depth: 0
           ref: ${{ github.sha }} # Use trigger SHA, not latest master (avoids workflow file conflicts)

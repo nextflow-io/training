@@ -1,7 +1,10 @@
 name: Nextflow Lint Comment
 
 on:
-  workflow_run:
+  # workflow_run is intentional: the lint workflow runs in the unprivileged
+  # PR context and uploads results as an artifact; this workflow consumes
+  # them from the privileged base-repo context to post the comment.
+  workflow_run: # zizmor: ignore[dangerous-triggers]
     workflows: ["Nextflow Lint"]
     types:
       - completed
