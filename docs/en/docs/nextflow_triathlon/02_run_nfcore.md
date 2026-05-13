@@ -118,7 +118,7 @@ tree -L 1 $NXF_HOME/assets/nf-core/demo
 ??? abstract "Directory contents"
 
     ```console
-    pipelines/nf-core/demo
+    /workspaces/.nextflow/assets/nf-core/demo
     ├── assets
     ├── CHANGELOG.md
     ├── CITATIONS.md

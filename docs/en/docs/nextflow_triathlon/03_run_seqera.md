@@ -4,7 +4,7 @@ In this third and final part of the Nextflow Triathlon, you will use Seqera to l
 
 We will start by setting up access to Seqera and exploring what's available in the platform out of the box.
 We will then launch the same nf-core/rnaseq pipeline we ran in Part 2, first from the web interface, then again from the terminal.
-Finally, we will add the nf-core/demo pipeline directly from its GitHub repository, demonstrating how to bring any correctly-configured pipeline into a Seqera workspace.
+Finally, we will add the nf-core/demo pipeline directly from its GitHub repository and launch it two ways: from the web interface by filling in parameters manually, and from the CLI using a parameter file.
 
 ---
 
@@ -363,28 +363,75 @@ Open your workspace in the browser and click **Launchpad** to confirm nf-core/de
 
     You can also add pipelines via the web interface: in the left sidebar, click **Launchpad**, then **Add pipeline**, and fill out the form accordingly.
 
-### 4.3. Launch nf-core/demo
+Click the **Launch** button on the nf-core/demo entry to open its launch form.
+You will see that the `input` and `outdir` parameters are highlighted in red — they are required fields with no default values, because `tw pipelines add` registers only the pipeline source without pre-configuring any parameters.
+The next two sections walk through how to provide those values: first through the web form, then from the command line.
 
-Launch the pipeline with the `test` profile:
+### 4.3. Launch nf-core/demo from the web interface
+
+With the launch form open, fill in the two required parameters.
+
+For `input`, enter the test samplesheet URL from the nf-core/demo test profile.
+You can find it in `conf/test.config` inside the pipeline repository, which you examined in Part 2, section 2.1:
+
+```
+https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
+```
+
+For `outdir`, enter a cloud storage path where the pipeline can write its results.
+Use the bucket configured for your workspace, with a subdirectory to keep runs organized:
+
+```
+s3://my-bucket/demo-results
+```
+
+Once both fields are filled, click the blue **Launch** button.
+
+The run appears in the **Runs** panel and should complete in a few minutes on the test dataset.
+Click into the run to explore the task table and any execution reports.
+
+### 4.4. Launch nf-core/demo from the CLI
+
+Unlike `nextflow run`, the `tw launch` command does not accept individual parameter flags like `--input` or `--outdir`.
+Parameters must be provided through a file in YAML or JSON format, passed with `--params-file`.
+This encourages reproducibility: a saved parameter file documents exactly what values were used for a run, making it easy to repeat or share a run configuration.
+
+Create a parameters file in your working directory:
 
 ```bash
-tw launch nf-core-demo -p test
+touch params.yaml
+```
+
+Open it in the editor and add the output path:
+
+```yaml title="params.yaml"
+outdir: "s3://my-bucket/demo-results-cli"
+```
+
+Now you can launch the pipeline using the `test` profile (which provides the `input` samplesheet) and the params file (which provides `outdir`):
+
+```bash
+tw launch nf-core-demo -p test --params-file params.yaml
 ```
 
 ??? success "Command output"
 
     ```console
     Launching pipeline nf-core-demo
-    Run name: compassionate_darwin
+    Run name: focused_feynman
     https://cloud.seqera.io/orgs/my-org/workspaces/my-workspace/watch/<run-id>
     ```
 
-Because you are using the `test` profile, this run should complete quickly.
-Once it finishes, click into the run to explore the task table and execution reports, which are equivalent to the views you saw for the rnaseq run, at a smaller scale.
+Open the link to confirm the run appears in the **Runs** panel.
+
+!!! tip
+
+    The `test` profile sets `params.input` to the hosted test samplesheet, so you do not need to include it in the params file.
+    Add `input` to the params file if you want to override the test dataset with your own samplesheet.
 
 ### Takeaway
 
-You know how to add any GitHub-hosted Nextflow pipeline to your workspace using the CLI and launch it.
+You know how to add any GitHub-hosted Nextflow pipeline to your workspace and launch it, both from the web interface by filling in parameters manually, and from the `tw` CLI by combining a profile with a parameter file.
 
 ---
 
@@ -396,3 +443,5 @@ In this part you learned to:
 - Add a pipeline from the curated catalog, launch a production-scale run, and monitor execution
 - Authenticate the `tw` CLI and launch a saved pipeline from the terminal
 - Add a new pipeline from GitHub using the CLI and verify it appears in the Launchpad
+- Launch a pipeline from the Seqera web interface by filling in required parameters manually
+- Launch a pipeline from the CLI using a Nextflow profile and a parameter file

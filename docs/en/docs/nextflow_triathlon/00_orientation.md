@@ -18,21 +18,6 @@ All instructions given during the course (e.g. 'open the file', 'edit the code' 
 
 If you are working through this course by yourself, please acquaint yourself with the [environment basics](../envsetup/01_setup.md) for further details.
 
-### Machine size
-
-This course demonstrates parallel execution of multiple pipeline tasks.
-To see parallelism in action, you need a machine with multiple cores.
-
-!!! tip "Use an 8-core machine"
-
-    The default Codespaces machine (2 cores) will serialize task execution and prevent you from observing parallel runs.
-    Before starting, upgrade your codespace to an **8-core** machine:
-
-    1. At [github.com/codespaces](https://github.com/codespaces), find your codespace and click the **...** menu.
-    2. Select **Change machine type**.
-    3. Choose **8-core** and click **Update codespace**.
-    4. Restart the codespace for the change to take effect.
-
 ### Version requirements
 
 This course requires Nextflow 25.10.2 or later and nf-core tools 3.5.2 or later.
@@ -44,14 +29,13 @@ If you are using a local or custom environment, please make sure you are using t
 
 ## Course structure
 
-This course covers three disciplines in sequence.
-Part 3 uses the Seqera Platform web interface.
+This course covers three connected topics in sequence.
 Parts 1 and 2 are run from the command line, each from its own subdirectory:
 
 - **Part 1** uses `triathlon/basics/`
 - **Parts 2 and 3** use `triathlon/nf-core/`
 
-Each part begins with a tip reminding you which directory to use.
+Part 3 uses the Seqera web interface as well as the Seqera CLI.
 
 ## Readiness checklist
 

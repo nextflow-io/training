@@ -34,20 +34,20 @@ nextflow run 1-hello.nf --input 'Hello World!'
     ```console hl_lines="6"
     N E X T F L O W   ~  version 25.10.4
 
-    Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+    Launching `1-hello.nf` [infallible_volhard] DSL2 - revision: 82d40dbf94
 
     executor >  local (1)
-    [a3/7be2fa] sayHello | 1 of 1 ✔
+    [6d/740edd] sayHello | 1 of 1 ✔
     ```
 
 The most important line in the output is the last one:
 
 ```console
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[6d/740edd] sayHello | 1 of 1 ✔
 ```
 
 This tells us that the `sayHello` process ran successfully once.
-The `[a3/7be2fa]` prefix is a truncated path to the task's working directory — more on that below.
+The `[6d/740edd]` prefix is a truncated path to the task's working directory — more on that below.
 
 ### 1.2. Find the output
 
@@ -57,18 +57,18 @@ After running, you should find the output there:
 ```console title="results/"
 results
 └── 1-hello
-    └── Hello-output.txt
+    └── Hello World!-output.txt
 ```
 
-Open the file to confirm it contains `Hello`.
+Open the file to confirm it contains `Hello World!`.
 
 ### 1.3. Explore the `work/` directory
 
 Behind the scenes, Nextflow creates a unique task directory for every process call inside a directory named `work/`.
-The hash shown in the console output (`[a3/7be2fa]`) is the path to that directory.
+The hash shown in the console output (`[6d/740edd]`) is the path to that directory.
 
 ```bash
-ls work/a3/7be2fa*
+ls work/6d/740edd*
 ```
 
 Inside you will find the output file along with several hidden log files:
@@ -200,26 +200,10 @@ The `publish:` section lists which outputs should be copied to the results direc
 
 The `output` block at the bottom of the file specifies the destination path and copy mode.
 
-```groovy title="main.nf"
+```groovy title="1-hello.nf" linenums="22"
 output {
     first_output {
-        path 'full_pipeline/intermediates'
-        mode 'copy'
-    }
-    uppercased {
-        path 'full_pipeline/intermediates'
-        mode 'copy'
-    }
-    collected {
-        path 'full_pipeline/intermediates'
-        mode 'copy'
-    }
-    batch_report {
-        path 'full_pipeline'
-        mode 'copy'
-    }
-    cowpy_art {
-        path 'full_pipeline'
+        path '1-hello'
         mode 'copy'
     }
 }
@@ -261,10 +245,10 @@ nextflow run 2-inputs.nf --input data/greetings.csv
     ```console hl_lines="6"
     N E X T F L O W   ~  version 25.10.4
 
-    Launching `2-inputs.nf` [mighty_sammet] DSL2 - revision: 29fb5352b3
+    Launching `2-inputs.nf` [nauseous_babbage] DSL2 - revision: b90778224d
 
     executor >  local (3)
-    [8e/0eb066] sayHello (3) | 3 of 3 ✔
+    [66/de7844] sayHello (3) | 3 of 3 ✔
     ```
 
 The `3 of 3` tells us the `sayHello` process was called three times, once per row in the CSV.
@@ -280,7 +264,7 @@ In the `results` directory, you should now see three output files, one per greet
 
 Open any of the output files to confirm each one contains a greeting.
 
-### 2.1. Run the workflow again with `-ansi-log false`
+### 2.2. Run the workflow again with `-ansi-log false`
 
 By default, Nextflow condenses the output to a single summary line per process.
 To see each process call listed individually, add `-ansi-log false`:
@@ -294,19 +278,19 @@ nextflow run 2-inputs.nf --input data/greetings.csv -ansi-log false
     ```console
     N E X T F L O W   ~  version 25.10.4
 
-    Launching `2-inputs.nf` [mighty_sammet] DSL2 - revision: 29fb5352b3
-    [8e/0eb066] Submitted process > sayHello (1)
-    [ab/3c1f22] Submitted process > sayHello (2)
-    [f4/9d7e81] Submitted process > sayHello (3)
+    Launching `2-inputs.nf` [extravagant_bardeen] DSL2 - revision: b90778224d
+    [43/0bac1c] Submitted process > sayHello (1)
+    [2d/99f604] Submitted process > sayHello (2)
+    [6d/7578d7] Submitted process > sayHello (3)
     ```
 
 This shows all three process calls and the unique work subdirectory created for each one.
 
-### 2.2. How the multiple inputs are handled
+### 2.3. How the multiple inputs are handled
 
 The key change in `2-inputs.nf` is in the `main:` section of the workflow:
 
-```groovy title="2-inputs.nf" linenums="14"
+```groovy title="2-inputs.nf" linenums="14" hl_lines="3 4 5"
     main:
     // create a channel for inputs from a CSV file
     greeting_ch = channel.fromPath(params.input)
@@ -325,12 +309,12 @@ What you see here is called a **channel**: a queue construct that handles input 
 The result is a channel containing `Hello`, `Bonjour`, and `Hola`.
 When passed to `sayHello(greeting_ch)`, Nextflow automatically calls the process once per item, running them in parallel when resources allow.
 
-### 2.3. Use `-resume` to skip completed work
+### 2.4. Use `-resume` to skip completed work
 
-Now switch to the extended input file, which adds two more greetings, and add `resume` to the command line:
+Now switch to the extended input file, which adds two more greetings, and add `-resume` to the command line:
 
 ```bash
-nextflow run 2-inputs.nf --input data/greetings-extended.csv-resume -ansi-log false -resume
+nextflow run 2-inputs.nf --input data/greetings-extended.csv -resume
 ```
 
 ??? success "Command output"
@@ -338,10 +322,10 @@ nextflow run 2-inputs.nf --input data/greetings-extended.csv-resume -ansi-log fa
     ```console hl_lines="6"
     N E X T F L O W   ~  version 25.10.4
 
-    Launching `2-inputs.nf` [clever_pasteur] DSL2 - revision: 29fb5352b3
+    Launching `2-inputs.nf` [adoring_mayer] DSL2 - revision: b90778224d
 
     executor >  local (2)
-    [4a/c9f2d1] sayHello (5) | 5 of 5, cached: 3 ✔
+    [84/2f3067] sayHello (5) | 5 of 5, cached: 3 ✔
     ```
 
 Nextflow ran only the two new inputs.
@@ -382,16 +366,16 @@ nextflow run main.nf --input data/greetings.csv --character turkey
 
 ??? success "Command output"
 
-    ```console
+    ```console hl_lines="6 7 8 9"
     N E X T F L O W   ~  version 25.10.4
 
-    Launching `main.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
+    Launching `main.nf` [reverent_jepsen] DSL2 - revision: c3c85dec78
 
     executor >  local (8)
-    [d6/cdf466] sayHello (1)       | 3 of 3 ✔
-    [99/79394f] convertToUpper (2) | 3 of 3 ✔
-    [1e/83586c] collectGreetings   | 1 of 1 ✔
-    [7f/caf718] cowpy              | 1 of 1 ✔
+    [87/35824b] sayHello (3)       | 3 of 3 ✔
+    [0f/31c37e] convertToUpper (1) | 3 of 3 ✔
+    [49/c25ca1] collectGreetings   | 1 of 1 ✔
+    [a5/29e13f] cowpy              | 1 of 1 ✔
     ```
 
 Four processes ran: `sayHello` and `convertToUpper` each ran once per input (3 of 3), `collectGreetings` gathered all outputs into one file (1 of 1), and `cowpy` generated the ASCII art (1 of 1).
@@ -402,7 +386,7 @@ Check `results/full_pipeline/` for the ASCII art file.
 
 Each process passes its output channel to the next:
 
-```groovy title="main.nf" linenums="19"
+```groovy title="main.nf" linenums="19" hl_lines="7 8 9"
     main:
     // create a channel for inputs from a CSV file
     greeting_ch = channel.fromPath(params.input)
@@ -422,7 +406,7 @@ The `.collect()` operator gathers all individual outputs from `convertToUpper` i
 
 The `cowpy` process runs inside a Docker container specified in its module file:
 
-```groovy title="modules/cowpy.nf" linenums="2"
+```groovy title="modules/cowpy.nf" linenums="2" hl_lines="3"
 process cowpy {
 
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -468,6 +452,8 @@ We provide you with a configuration file that covers four areas: software packag
 We'll review each briefly then zoom in on two points of special interest: how to generate an execution report, and how to use a test profile.
 
 ### 4.1. The configuration file
+
+<!-- need to rework this to flow better and probably include the parameter file too since that's needed for the Seqera tw CLI section -->
 
 The full file contains four configuration sections.
 
@@ -547,16 +533,16 @@ nextflow run main.nf --input data/greetings.csv --character turkey -with-report
 
 ??? success "Command output"
 
-    ```console
+    ```console hl_lines="6 7 8 9"
     N E X T F L O W   ~  version 25.10.4
 
-    Launching `main.nf` [shrivelled_lamarck] DSL2 - revision: c6622ba0d3
+    Launching `main.nf` [lonely_aryabhata] DSL2 - revision: c3c85dec78
 
     executor >  local (8)
-    [c6/a04d91] sayHello (3)       | 3 of 3 ✔
-    [1e/7c085e] convertToUpper (1) | 3 of 3 ✔
-    [55/24f000] collectGreetings   | 1 of 1 ✔
-    [b9/d326ca] cowpy              | 1 of 1 ✔
+    [9e/f3fa5e] sayHello (3)       | 3 of 3 ✔
+    [08/4a93d7] convertToUpper (2) | 3 of 3 ✔
+    [c5/c8595a] collectGreetings   | 1 of 1 ✔
+    [2a/1e5abe] cowpy              | 1 of 1 ✔
     ```
 
 Nextflow writes the report to a file named `report-<timestamp>.html` in the working directory.
@@ -576,16 +562,16 @@ nextflow run main.nf -profile test
 
 ??? success "Command output"
 
-    ```console
+    ```console hl_lines="6 7 8 9"
     N E X T F L O W   ~  version 25.10.4
 
-    Launching `main.nf` [peaceful_hugle] DSL2 - revision: 511efcfbd7
+    Launching `main.nf` [silly_goodall] DSL2 - revision: c3c85dec78
 
     executor >  local (8)
-    [56/71be88] sayHello (1)       | 3 of 3 ✔
-    [3b/b0a08c] convertToUpper (1) | 3 of 3 ✔
-    [f1/36581b] collectGreetings   | 1 of 1 ✔
-    [60/c83e18] cowpy              | 1 of 1 ✔
+    [06/9614da] sayHello (2)       | 3 of 3 ✔
+    [8d/5f1b8a] convertToUpper (3) | 3 of 3 ✔
+    [1e/cd52db] collectGreetings   | 1 of 1 ✔
+    [2c/5f41d8] cowpy              | 1 of 1 ✔
     ```
 
 The pipeline runs with `batch = 'test'` and `character = 'tux'`.
@@ -599,7 +585,7 @@ nextflow config -profile test
 
 ??? success "Command output"
 
-    ```console
+    ```console hl_lines="3 4"
     params {
        input = 'data/greetings.csv'
        batch = 'test'
