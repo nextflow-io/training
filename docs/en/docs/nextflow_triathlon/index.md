@@ -33,6 +33,8 @@ You will take away the confidence to run workflows at scale using Nextflow and S
      ![type:video](url-to-video)
      or an iframe for YouTube/Vimeo as appropriate. -->
 
+<!-- additional_information -->
+
 ## Course overview
 
 This course is hands-on, with goal-oriented exercises structured to introduce information gradually.
