@@ -26,7 +26,7 @@ The workflow `1-hello.nf` takes a greeting via a command-line argument and write
 Run the following command in your terminal.
 
 ```bash
-nextflow run 1-hello.nf --input 'Hello'
+nextflow run 1-hello.nf --input 'Hello World!'
 ```
 
 ??? success "Command output"
@@ -203,23 +203,23 @@ The `output` block at the bottom of the file specifies the destination path and 
 ```groovy title="main.nf"
 output {
     first_output {
-        path 'main/intermediates'
+        path 'full_pipeline/intermediates'
         mode 'copy'
     }
     uppercased {
-        path 'main/intermediates'
+        path 'full_pipeline/intermediates'
         mode 'copy'
     }
     collected {
-        path 'main/intermediates'
+        path 'full_pipeline/intermediates'
         mode 'copy'
     }
     batch_report {
-        path 'main'
+        path 'full_pipeline'
         mode 'copy'
     }
     cowpy_art {
-        path 'main'
+        path 'full_pipeline'
         mode 'copy'
     }
 }
@@ -280,7 +280,29 @@ In the `results` directory, you should now see three output files, one per greet
 
 Open any of the output files to confirm each one contains a greeting.
 
-### 2.2. How the channel works
+### 2.1. Run the workflow again with `-ansi-log false`
+
+By default, Nextflow condenses the output to a single summary line per process.
+To see each process call listed individually, add `-ansi-log false`:
+
+```bash
+nextflow run 2-inputs.nf --input data/greetings.csv -ansi-log false
+```
+
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.4
+
+    Launching `2-inputs.nf` [mighty_sammet] DSL2 - revision: 29fb5352b3
+    [8e/0eb066] Submitted process > sayHello (1)
+    [ab/3c1f22] Submitted process > sayHello (2)
+    [f4/9d7e81] Submitted process > sayHello (3)
+    ```
+
+This shows all three process calls and the unique work subdirectory created for each one.
+
+### 2.2. How the multiple inputs are handled
 
 The key change in `2-inputs.nf` is in the `main:` section of the workflow:
 
@@ -308,7 +330,7 @@ When passed to `sayHello(greeting_ch)`, Nextflow automatically calls the process
 Now switch to the extended input file, which adds two more greetings, and add `resume` to the command line:
 
 ```bash
-nextflow run 2-inputs.nf --input data/greetings-extended.csv -resume
+nextflow run 2-inputs.nf --input data/greetings-extended.csv-resume -ansi-log false -resume
 ```
 
 ??? success "Command output"
@@ -374,7 +396,7 @@ nextflow run main.nf --input data/greetings.csv --character turkey
 
 Four processes ran: `sayHello` and `convertToUpper` each ran once per input (3 of 3), `collectGreetings` gathered all outputs into one file (1 of 1), and `cowpy` generated the ASCII art (1 of 1).
 
-Check `results/main/` for the ASCII art file.
+Check `results/full_pipeline/` for the ASCII art file.
 
 ### 3.2. How the processes connect
 
@@ -449,7 +471,7 @@ We'll review each briefly then zoom in on two points of special interest: how to
 
 The full file contains four configuration sections.
 
-??? note "nextflow.config"
+??? full-code "nextflow.config"
 
     ```groovy title="nextflow.config" linenums="1"
     /*
@@ -567,7 +589,7 @@ nextflow run main.nf -profile test
     ```
 
 The pipeline runs with `batch = 'test'` and `character = 'tux'`.
-Check `results/main/`. The batch name appears in the output file names, and the ASCII art features the tux penguin instead of a turkey.
+Check `results/full_pipeline/`. The batch name appears in the output file names, and the ASCII art features the tux penguin instead of a turkey.
 
 To inspect the fully resolved settings for any profile combination, run `nextflow config` with the relevant profiles:
 

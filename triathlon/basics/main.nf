@@ -36,23 +36,23 @@ workflow {
 
 output {
     first_output {
-        path 'main/intermediates'
+        path 'full_pipeline/intermediates'
         mode 'copy'
     }
     uppercased {
-        path 'main/intermediates'
+        path 'full_pipeline/intermediates'
         mode 'copy'
     }
     collected {
-        path 'main/intermediates'
+        path 'full_pipeline/intermediates'
         mode 'copy'
     }
     batch_report {
-        path 'main'
+        path 'full_pipeline'
         mode 'copy'
     }
     cowpy_art {
-        path 'main'
+        path 'full_pipeline'
         mode 'copy'
     }
 }

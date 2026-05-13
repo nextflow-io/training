@@ -360,11 +360,19 @@ Configuration in the strict sense controls how the pipeline runs: resource alloc
 List the available config files:
 
 ```bash
-ls $NXF_HOME/assets/nf-core/demo/conf/
+tree $NXF_HOME/assets/nf-core/demo/conf/
 ```
 
 ```console
-base.config  igenomes.config  igenomes_ignored.config  modules.config  test.config  test_full.config
+.nextflow/assets/nf-core/demo/conf/
+├── base.config
+├── igenomes.config
+├── igenomes_ignored.config
+├── modules.config
+├── test.config
+└── test_full.config
+
+1 directory, 6 files
 ```
 
 The key files are:
@@ -377,7 +385,13 @@ Instead, create your own config file and pass it with `-c` to override only what
 
 #### 3.2.1. Change resource allocation for a process
 
-Create a file called `custom.config`:
+Create an empty config file:
+
+```bash
+touch custom.config
+```
+
+Open it and add the following:
 
 ```groovy title="custom.config" linenums="1"
 process {
@@ -388,14 +402,36 @@ process {
 }
 ```
 
+Run the pipeline with the custom config:
+
 ```bash
-nextflow run nf-core/demo -profile docker,test --outdir demo-results-custom -c custom.config
+nextflow run nf-core/demo -profile docker,test --outdir demo-results-custom -c custom.config -resume
 ```
+
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.4
+
+    Launching `https://github.com/nf-core/demo` [jolly_curie] DSL2 - revision: 45904cb9d1 [master]
+
+    ...
+
+    executor >  local (7)
+    [ff/a6976b] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
+    [39/731ab7] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
+    [7c/78d96e] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+    -[nf-core/demo] Pipeline completed successfully-
+    ```
+
+To verify the resource override took effect, open the execution report that nf-core generates automatically for every run.
+It is saved to `demo-results-custom/pipeline_info/execution_report_<timestamp>.html`.
+Open it in a browser and check the `FASTQC` process — it will show the CPU and memory limits you set.
 
 #### 3.2.2. Set tool arguments with `ext.args`
 
 Many nf-core modules accept additional tool arguments through an `ext.args` configuration convention.
-For example, to trim 5 bases from the start of each read during the `SEQTK_TRIM` step:
+For example, to trim 5 bases from the start of each read during the `SEQTK_TRIM` step, update `custom.config` to add a second `withName` block:
 
 ```groovy title="custom.config" linenums="1" hl_lines="6 7 8"
 process {
@@ -409,11 +445,44 @@ process {
 }
 ```
 
+Run the pipeline again with the updated config:
+
 ```bash
-nextflow run nf-core/demo -profile docker,test --outdir demo-results-extargs -c custom.config
+nextflow run nf-core/demo -profile docker,test --outdir demo-results-extargs -c custom.config -resume
 ```
 
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.4
+
+    Launching `https://github.com/nf-core/demo` [sharp_volta] DSL2 - revision: 45904cb9d1 [master]
+
+    ...
+
+    executor >  local (7)
+    [ff/a6976b] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
+    [39/731ab7] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
+    [7c/78d96e] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+    -[nf-core/demo] Pipeline completed successfully-
+    ```
+
 To verify the argument was applied, find the `SEQTK_TRIM` work directory from the run output and inspect the `.command.sh` file.
+
+??? abstract ".command.sh"
+
+    ```bash
+    printf "%s\n" SAMPLE1_PE_R1.fastq.gz SAMPLE1_PE_R2.fastq.gz | while read f;
+    do
+        seqtk \
+            trimfq \
+            -b 5 \
+            $f \
+            | gzip --no-name > SAMPLE1_PE_$(basename $f)
+    done
+    ```
+
+    The `-b 5` argument from `ext.args` is injected directly into the `seqtk trimfq` call.
 
 !!! note
 
@@ -426,17 +495,17 @@ You know how to get help from an nf-core pipeline, set and validate parameters, 
 
 ### What's next?
 
-Try a real production pipeline before moving to Seqera Platform.
+Try a real analysis pipeline!
 
 ---
 
 ## 4. Pull and run nf-core/rnaseq
 
 So far we have used `nf-core/demo`, which is a minimal pipeline designed for training.
-Now we pull a real production pipeline — `nf-core/rnaseq` — and run it with its test profile.
-This gives you a baseline to compare against when you launch it at scale on Seqera Platform.
+Now we pull a real production pipeline and run it with its test profile.
 
-`nf-core/rnaseq` performs the core steps of bulk RNA sequencing analysis: quality control, adapter trimming, read alignment, and gene-level quantification.
+The `nf-core/rnaseq` pipeline performs the core steps of bulk RNA sequencing analysis: quality control, adapter trimming, read alignment, and gene-level quantification.
+It is probably the most widely used nf-core pipeline to date.
 
 ### 4.1. Pull the pipeline
 
@@ -512,19 +581,33 @@ nextflow run nf-core/rnaseq -profile docker,test --outdir rnaseq-results
      -- Check '.nextflow.log' file for details
     ```
 
-The pipeline fails immediately.
-nf-core pipelines assign resources using process labels defined in `conf/base.config`.
-The `FQ_LINT` process carries the `process_low` label, which requests 12 GB of memory by default — more than Docker Desktop allocates on most machines.
+The key line in that error is:
+
+```console
+Process requirement exceeds available memory -- req: 12 GB; avail: 7.7 GB
+```
+
+The default Codespaces machine has 8 GB of RAM, which is also the typical default for Docker Desktop.
+The pipeline is requesting 12 GB for the `FQ_LINT` process — more than the machine can provide.
+
+That 12 GB comes from the `process_low` resource label defined in `conf/base.config`:
+
+```groovy title="conf/base.config"
+withLabel:process_low {
+    cpus   = { 2     * task.attempt }
+    memory = { 12.GB * task.attempt }
+    time   = { 4.h   * task.attempt }
+}
+```
+
+One option would be to use a larger machine type, but for testing purposes we want to be able to run on whatever hardware is available.
+The better approach is to override the resource defaults in a custom config file.
 
 ### 4.3. Re-run with a custom configuration
 
-The fix is a custom config file that overrides the label-based resource defaults.
-Section 3.2 introduced `withName:` to target a single process by name.
-Here we use `withLabel:` to target all processes that share a label at once.
-This file is already present in your working directory.
-Pass it with `-c` to apply the overrides:
+We provide you with a custom config file that overrides the label-based resource defaults.
 
-??? note "laptop.config"
+??? full-code "laptop.config"
 
     ```groovy title="laptop.config"
     process {
@@ -545,6 +628,12 @@ Pass it with `-c` to apply the overrides:
         }
     }
     ```
+
+Section 3.2 introduced `withName:` to target a single process by name.
+Here we use `withLabel:` to target all processes that share a label at once.
+
+This file is already present in your working directory.
+Pass it with `-c` to apply the overrides:
 
 ```bash
 nextflow run nf-core/rnaseq -profile docker,test -c laptop.config --outdir rnaseq-results
@@ -579,8 +668,11 @@ Real RNA-seq experiments typically involve dozens of samples and run for hours o
 Nextflow supports HPC schedulers (SLURM, PBS, LSF) and cloud platforms (AWS, Google Cloud, Azure), which can dramatically reduce wall-clock time by distributing work across many nodes.
 Setting up those environments, however, adds significant complexity.
 
-Seqera (developed by the creators of Nextflow) provides a web-based interface for launching Nextflow pipelines on HPC or cloud infrastructure (either your own or one managed for you), with compute and data management capabilities that streamline the process of running pipelines at scale.
-Academic researchers can access it free of charge through the [Seqera academic program](https://seqera.io/academic-program/).
+The Seqera platform (developed by the creators of Nextflow) provides a web-based interface for launching Nextflow pipelines on HPC or cloud infrastructure (either your own or one managed for you), with compute and data management capabilities that streamline the process of running pipelines at scale.
+
+!!! tip
+
+    Academic researchers can access Seqera Platform free of charge through the [Seqera academic program](https://seqera.io/academic-program/).
 
 ### Takeaway
 
