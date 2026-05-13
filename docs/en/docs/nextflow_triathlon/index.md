@@ -27,12 +27,6 @@ Working through three successive disciplines, you will learn the essentials of r
 
 You will take away the confidence to run workflows at scale using Nextflow and Seqera Platform.
 
-<!-- additional_information
-
-## See where you're headed
-
-Before diving in, watch this short demo to see what you'll be able to do by the end of the course.
--->
 <!-- TODO: Embed intro video here — should show a Seqera Platform demo walk-through (~2-3 min):
      running a pipeline, monitoring execution, and reviewing results.
      Use the MkDocs video embed pattern:
@@ -47,7 +41,7 @@ This course is hands-on, with goal-oriented exercises structured to introduce in
 
 | Course chapter                                   | Summary                                                                                                                  | Estimated duration |
 | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------ |
-| [Part 1: Run Nextflow](./01_run_basics.md)       | Launch and manage Nextflow pipelines, understand execution fundamentals, and run real multi-step containerized workflows | 45 mins            |
+| [Part 1: Run Nextflow](./01_run_nextflow.md)     | Launch and manage Nextflow pipelines, understand execution fundamentals, and run real multi-step containerized workflows | 45 mins            |
 | [Part 2: Run nf-core](./02_run_nfcore.md)        | Find, retrieve, and run an nf-core pipeline using its test profile; configure and customize its execution                | 30 mins            |
 | [Part 3: Run on Seqera](./03_seqera_platform.md) | Launch pipelines on Seqera Platform, scale up to a production workflow, and set up a pipeline from a GitHub repository   | 45 mins            |
 
