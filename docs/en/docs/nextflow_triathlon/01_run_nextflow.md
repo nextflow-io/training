@@ -62,7 +62,7 @@ results
 
 Open the file to confirm it contains `Hello`.
 
-### 1.3. Understand the `work/` directory
+### 1.3. Explore the `work/` directory
 
 Behind the scenes, Nextflow creates a unique task directory for every process call inside a directory named `work/`.
 The hash shown in the console output (`[a3/7be2fa]`) is the path to that directory.
@@ -82,7 +82,7 @@ The `.command.sh` file is especially useful when debugging — it shows precisel
 
 ### 1.4. Understand the workflow code
 
-Let's open `1-hello.nf` and look at its three main components.
+Let's open `1-hello.nf` and look at its main components.
 
 ??? full-code "Full code file"
 
@@ -116,15 +116,24 @@ Let's open `1-hello.nf` and look at its three main components.
     }
     ```
 
-#### The process module
+We see the following:
 
-Instead of defining the process inline, `1-hello.nf` imports it from a separate file using an `include` statement:
+- an `include` statement pointing to a `process` module
+- a `params` block defining pipeline parameters
+- a `workflow` block describing the work to be done
+- an `output` block describing what to do with the outputs
+
+Let's take a look at each in turn.
+
+#### 1.4.1. The `process` module
+
+The `include` statement tells Nextflow to load something called `sayHello` from a separate code file.
 
 ```groovy title="1-hello.nf" linenums="3"
 include { sayHello } from './modules/sayHello.nf'
 ```
 
-The module file defines the process:
+In that file, we find the definition for a process called `sayHello`:
 
 ```groovy title="modules/sayHello.nf" linenums="4"
 process sayHello {
@@ -147,9 +156,9 @@ It declares its inputs, outputs, and the script to execute.
 The `val` qualifier means the input is a plain value (string, number, etc.).
 The `path` qualifier means the output is a file path.
 
-Keeping processes in module files makes them reusable — the same module can be imported by multiple workflow scripts.
+It is possible to write the process definition in the main workflow file, but keeping them in separate module files makes them reusable:the same module can be imported by multiple workflow scripts.
 
-#### The params block
+#### 1.4.2. The `params` block
 
 The `params` block declares the command-line parameters the workflow accepts:
 
@@ -166,9 +175,9 @@ Supported types include `String`, `Integer`, `Float`, `Boolean`, and `Path`.
 
     Workflow parameters always use two dashes (`--input`) to distinguish them from Nextflow's own CLI flags, which use one dash (e.g. `-resume`).
 
-#### The workflow block
+#### 1.4.3. The `workflow` block
 
-The **workflow** block defines the dataflow logic — which processes to run and in what order:
+The **workflow** block defines the dataflow logic: which processes to run and in what order.
 
 ```groovy title="1-hello.nf" linenums="12"
 workflow {
@@ -182,30 +191,62 @@ workflow {
 }
 ```
 
+Here there is only one process being called so it's very simple; we will cover more realistic examples later.
+
 The `main:` section calls the `sayHello` process with the `--input` value.
 The `publish:` section lists which outputs should be copied to the results directory.
+
+#### 1.4.4. The `output` block
+
 The `output` block at the bottom of the file specifies the destination path and copy mode.
+
+```groovy title="main.nf"
+output {
+    first_output {
+        path 'main/intermediates'
+        mode 'copy'
+    }
+    uppercased {
+        path 'main/intermediates'
+        mode 'copy'
+    }
+    collected {
+        path 'main/intermediates'
+        mode 'copy'
+    }
+    batch_report {
+        path 'main'
+        mode 'copy'
+    }
+    cowpy_art {
+        path 'main'
+        mode 'copy'
+    }
+}
+```
+
+Each named entry corresponds to a `publish:` label in the workflow and maps it to a subdirectory under `results/`.
 
 ### Takeaway
 
-You know how to run a Nextflow pipeline, find its outputs, and understand its three main components: the `include` statement, `params` block, and `workflow` block.
+You know how to run a Nextflow pipeline, find its outputs, and understand its main components: the `process` modules imported using `include` statements, and the `params`, `workflow` and `output` blocks.
 
 ### What's next?
 
-Discover how Nextflow handles multiple inputs efficiently.
+Find out how Nextflow handles multiple inputs efficiently.
 
 ---
 
 ## 2. Process multiple inputs
 
-Real-world pipelines process many samples, not just one.
+Real-world pipelines typically process many pieces of data, not just one.
 The workflow `2-inputs.nf` reads from a CSV file and runs `sayHello` once per row, in parallel.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-multi-inputs-csv.svg"
 </figure>
 
-Nextflow uses **channels** — queue constructs that shuttle data between steps — to handle this automatically.
+Let's run the workflow first, then we'll take a look at what mechanism Nextflow uses to handle these multiple inputs.
 
 ### 2.1. Run the workflow
 
@@ -226,7 +267,7 @@ nextflow run 2-inputs.nf --input data/greetings.csv
     [8e/0eb066] sayHello (3) | 3 of 3 ✔
     ```
 
-The `3 of 3` tells us the `sayHello` process was called three times — once per row in the CSV.
+The `3 of 3` tells us the `sayHello` process was called three times, once per row in the CSV.
 
 In the `results` directory, you should now see three output files, one per greeting:
 
@@ -253,6 +294,8 @@ The key change in `2-inputs.nf` is in the `main:` section of the workflow:
     sayHello(greeting_ch)
 ```
 
+What you see here is called a **channel**: a queue construct that handles input data in a way that makes it easy to parallelize operations.
+
 - `channel.fromPath(params.input)` creates a channel from the file path given with `--input`
 - `.splitCsv()` parses the CSV into rows
 - `#!groovy .map { line -> line[0] }` extracts the first column from each row
@@ -262,7 +305,7 @@ When passed to `sayHello(greeting_ch)`, Nextflow automatically calls the process
 
 ### 2.3. Use `-resume` to skip completed work
 
-Now switch to the extended input file, which adds two more greetings:
+Now switch to the extended input file, which adds two more greetings, and add `resume` to the command line:
 
 ```bash
 nextflow run 2-inputs.nf --input data/greetings-extended.csv -resume
@@ -281,15 +324,19 @@ nextflow run 2-inputs.nf --input data/greetings-extended.csv -resume
 
 Nextflow ran only the two new inputs.
 The three greetings processed in the previous run were cached and reused automatically.
-`-resume` is especially valuable in long pipelines where reprocessing completed samples wastes time and compute.
+
+This also works to skip executing processes for steps that have already been run successfully in a multi-step pipeline.
+For example, if a pipeline run was interrupted by a system error, or if you added new steps to a pipeline in development.
+
+The `-resume` capability is especially valuable in long pipelines where recovering from failure can save critical time and resources.
 
 ### Takeaway
 
-You understand how channels load data from files and enable automatic parallelism, and how `-resume` avoids repeating completed work when inputs are added.
+You understand how channels load data from files and enable automatic parallelism, and how to use `-resume` to avoids repeating completed work.
 
 ### What's next?
 
-Learn how a complete multi-step pipeline chains processes together using containers.
+Learn how a complete multi-step pipeline chains processes together using channels, and how to use containers to manage analysis tools and their dependencies.
 
 ---
 
@@ -346,6 +393,7 @@ Each process passes its output channel to the next:
 ```
 
 The pattern `processName.out` refers to a process's output channel.
+
 The `.collect()` operator gathers all individual outputs from `convertToUpper` into a single channel item before passing them to `collectGreetings`.
 
 ### 3.3. The container directive
@@ -378,7 +426,7 @@ Docker is enabled for this project in `nextflow.config`:
 docker.enabled = true
 ```
 
-This single line enables Docker for every process in the pipeline.
+This single line enables Docker for any process in the pipeline that has a container specified.
 
 ### Takeaway
 
@@ -393,53 +441,57 @@ Learn how to configure pipeline behavior using `nextflow.config`.
 ## 4. Configure the pipeline
 
 Nextflow automatically picks up `nextflow.config` from the working directory and applies its settings to every run.
-The triathlon pipeline ships with a configuration file that covers four areas.
+
+We provide you with a configuration file that covers four areas: software packaging, process settings, pipeline parameters and execution profiles.
+We'll review each briefly then zoom in on two points of special interest: how to generate an execution report, and how to use a test profile.
 
 ### 4.1. The configuration file
 
 The full file contains four configuration sections.
 
-```groovy title="nextflow.config" linenums="1"
-/*
- * Software packaging
- */
-docker.enabled = true
+??? note "nextflow.config"
 
-/*
- * Process settings
- */
-process {
-    memory = 1.GB
-    // withName: 'cowpy' {
-    //     memory = 2.GB
-    //     cpus = 2
-    // }
-}
+    ```groovy title="nextflow.config" linenums="1"
+    /*
+     * Software packaging
+     */
+    docker.enabled = true
 
-/*
- * Pipeline parameters
- */
-params {
-    input = 'data/greetings.csv'
-    batch = 'batch'
-    character = 'turkey'
-}
-
-/*
- * Profiles
- */
-profiles {
-    test {
-        params.input = 'data/greetings.csv'
-        params.batch = 'test'
-        params.character = 'tux'
+    /*
+     * Process settings
+     */
+    process {
+        memory = 1.GB
+        // withName: 'cowpy' {
+        //     memory = 2.GB
+        //     cpus = 2
+        // }
     }
-    conda {
-        docker.enabled = false
-        conda.enabled = true
+
+    /*
+     * Pipeline parameters
+     */
+    params {
+        input = 'data/greetings.csv'
+        batch = 'batch'
+        character = 'turkey'
     }
-}
-```
+
+    /*
+     * Profiles
+     */
+    profiles {
+        test {
+            params.input = 'data/greetings.csv'
+            params.batch = 'test'
+            params.character = 'tux'
+        }
+        conda {
+            docker.enabled = false
+            conda.enabled = true
+        }
+    }
+    ```
 
 **Software packaging** (`docker.enabled = true`): enables Docker for all processes.
 Any process that declares a `container` directive runs inside the specified image.
@@ -492,6 +544,8 @@ The report is especially useful when a pipeline takes longer than expected or a 
 
 ### 4.3. Run with a profile
 
+The `test` profile is a standard nf-core convention. Every nf-core pipeline ships with one for quick validation.
+
 Run the pipeline using the `test` profile:
 
 ```bash
@@ -515,7 +569,7 @@ nextflow run main.nf -profile test
 The pipeline runs with `batch = 'test'` and `character = 'tux'`.
 Check `results/main/`. The batch name appears in the output file names, and the ASCII art features the tux penguin instead of a turkey.
 
-To inspect the fully resolved settings for any profile combination, run `nextflow config`:
+To inspect the fully resolved settings for any profile combination, run `nextflow config` with the relevant profiles:
 
 ```bash
 nextflow config -profile test
@@ -540,12 +594,11 @@ nextflow config -profile test
     ```
 
 This shows the merged result: the `test` profile's overrides applied on top of the base config.
-Use it to confirm settings are active before running a pipeline.
+Use it to confirm what settings will be active before running a pipeline.
 
 ### Takeaway
 
 You know how to configure pipeline behavior using `nextflow.config`, how to generate an HTML execution report with `-with-report`, and how profiles bundle related settings that activate together with a single flag.
-The `test` profile is a standard nf-core convention. Every nf-core pipeline ships with one for quick validation.
 
 ### What's next?
 

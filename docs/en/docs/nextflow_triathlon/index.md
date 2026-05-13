@@ -39,11 +39,11 @@ This course is hands-on, with goal-oriented exercises structured to introduce in
 
 ### Lesson plan
 
-| Course chapter                               | Summary                                                                                                                  | Estimated duration |
-| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------ |
-| [Part 1: Run Nextflow](./01_run_nextflow.md) | Launch and manage Nextflow pipelines, understand execution fundamentals, and run real multi-step containerized workflows | 45 mins            |
-| [Part 2: Run nf-core](./02_run_nfcore.md)    | Find, retrieve, and run an nf-core pipeline using its test profile; configure and customize its execution                | 30 mins            |
-| [Part 3: Run on Seqera](./03_run_seqera.md)  | Launch pipelines on Seqera Platform, scale up to a production workflow, and set up a pipeline from a GitHub repository   | 45 mins            |
+| Course chapter                               | Summary                                                                                                                     | Estimated duration |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| [Part 1: Run Nextflow](./01_run_nextflow.md) | Launch and manage Nextflow pipelines, understand essential workflow mechanics, and configure execution                      | 45 mins            |
+| [Part 2: Run nf-core](./02_run_nfcore.md)    | Find an nf-core pipeline, run it using its test profile, and configure its execution                                        | 45 mins            |
+| [Part 3: Run on Seqera](./03_run_seqera.md)  | Launch and manage Nextflow pipelines with Seqera (web interface and CLI) and import a new pipeline from a GitHub repository | 45 mins            |
 
 Ready to take the course?
 

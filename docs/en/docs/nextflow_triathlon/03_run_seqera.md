@@ -2,7 +2,7 @@
 
 In this third and final part of the Nextflow Triathlon, you will use Seqera to launch, monitor, and manage Nextflow pipelines through a web interface.
 
-We will start by setting up access to Seqera and exploring what's available.
+We will start by setting up access to Seqera and exploring what's available in the platform out of the box.
 We will then launch the same nf-core/rnaseq pipeline we ran in Part 2, first from the web interface, then again from the terminal.
 Finally, we will add the nf-core/demo pipeline directly from its GitHub repository, demonstrating how to bring any correctly-configured pipeline into a Seqera workspace.
 
@@ -94,7 +94,7 @@ _We'll show you how to add your own pipelines later in this lesson._
 A box will appear showing the message: **Pipeline added: View Pipeline**.
 Clicking the link will take you to the pipeline entry in your launchpad.
 
-The pipeline is now listed in your workspace's **Pipelines** panel and is ready to launch.
+The pipeline is now listed in your workspace's **Launchpad** panel and is ready to launch.
 
 ### 2.2. Launch the pipeline
 
@@ -129,7 +129,7 @@ This will take a while to run, so we'll continue on for now and we'll circle bac
 
 ### Takeaway
 
-You know how to add a pipeline to a Seqera Cloud workspace, configure and launch a run, and monitor execution at scale.
+You know how to add a pipeline to a Seqera workspace, configure and launch a run, and monitor execution at scale.
 
 ### What's next?
 
@@ -228,7 +228,7 @@ Run `source ../.seqera_config` at the start of each Codespace session to reload 
 
 !!! tip
 
-    If your workspace has no primary compute environment set, you can add `export TOWER_COMPUTE_ENV=<compute-env-name>` to your config file.
+    If your workspace does not have a primary compute environment set, you can add `export TOWER_COMPUTE_ENV=<compute-env-name>` to your config file to set a default.
     Any config value can be overridden on the command line by passing the flag explicitly (e.g. `--compute-env other-env`).
     See the [tw CLI reference](https://docs.seqera.io/platform/latest/cli/reference) for the full list of options and environment variables.
 

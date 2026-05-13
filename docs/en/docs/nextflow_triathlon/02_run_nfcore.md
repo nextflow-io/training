@@ -346,61 +346,12 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results-notrim --sk
 
 The `SEQTK_TRIM` step no longer appears in the output.
 
-#### 3.1.3. Parameter validation
+#### 3.1.3. Validation
 
-Because parameters are defined in a schema, nf-core pipelines validate them at launch time.
+Because parameters are defined in a schema, nf-core pipelines are able to validate parameters and input files at launch time.
+If you pass an unknown parameter, a value of the wrong type, or a malformed samplesheet, the pipeline reports all errors upfront and stops before any work is done, saving you from wasted compute time.
 
-Try passing a parameter that does not exist:
-
-```bash
-nextflow run nf-core/demo -profile docker,test --outdir demo-results --foobar "invalid"
-```
-
-```console
-WARN: The following invalid input values have been detected:
-
-* --foobar: invalid
-```
-
-Try passing the wrong type for `--skip_trim` (boolean flag):
-
-```bash
-nextflow run nf-core/demo -profile docker,test --outdir demo-results --skip_trim yes
-```
-
-```console
-ERROR ~ Validation of pipeline parameters failed!
-
-* --skip_trim (yes): Value is [string] but should be [boolean]
-```
-
-The pipeline stops before any work is done, saving you from wasted compute time.
-
-#### 3.1.4. Input validation
-
-The same validation logic applies to input files.
-The `nf-core/demo` pipeline expects a CSV samplesheet with columns `sample`, `fastq_1`, and `fastq_2`, defined in `assets/schema_input.json`.
-
-Create a malformed samplesheet to see this in action:
-
-```csv title="malformed_samplesheet.csv"
-sample,fastq_2
-SAMPLE1,/not/a/real/file.fastq.gz
-```
-
-```bash
-nextflow run nf-core/demo -profile docker,test --outdir demo-results --input malformed_samplesheet.csv
-```
-
-```console
-ERROR ~ Validation of pipeline parameters failed!
-
-* --input (malformed_samplesheet.csv): Validation of file failed:
-    -> Entry 1: Error for field 'fastq_2' (/not/a/real/file.fastq.gz): the file or directory '/not/a/real/file.fastq.gz' does not exist (FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz')
-    -> Entry 1: Missing required field(s): fastq_1
-```
-
-All validation errors are reported at once so you can fix everything before relaunching.
+For more details, see the more detailed sections on [Parameter validation](../hello_nf-core/01_run_demo.md#313-parameter-validation) and [Input validation](../hello_nf-core/01_run_demo.md#314-input-validation) in the [Hello nf-core](../hello_nf-core/index.md) course.
 
 ### 3.2. Configuration
 
@@ -570,29 +521,30 @@ The `FQ_LINT` process carries the `process_low` label, which requests 12 GB of m
 The fix is a custom config file that overrides the label-based resource defaults.
 Section 3.2 introduced `withName:` to target a single process by name.
 Here we use `withLabel:` to target all processes that share a label at once.
-This file is already present in your working directory:
-
-```groovy title="laptop.config"
-process {
-    withLabel: 'process_low' {
-        cpus   = 2
-        memory = 6.GB
-    }
-    withLabel: 'process_medium' {
-        cpus   = 4
-        memory = 6.GB
-    }
-    withLabel: 'process_high' {
-        cpus   = 6
-        memory = 6.GB
-    }
-    withLabel: 'process_high_memory' {
-        memory = 6.GB
-    }
-}
-```
-
+This file is already present in your working directory.
 Pass it with `-c` to apply the overrides:
+
+??? note "laptop.config"
+
+    ```groovy title="laptop.config"
+    process {
+        withLabel: 'process_low' {
+            cpus   = 2
+            memory = 6.GB
+        }
+        withLabel: 'process_medium' {
+            cpus   = 4
+            memory = 6.GB
+        }
+        withLabel: 'process_high' {
+            cpus   = 6
+            memory = 6.GB
+        }
+        withLabel: 'process_high_memory' {
+            memory = 6.GB
+        }
+    }
+    ```
 
 ```bash
 nextflow run nf-core/rnaseq -profile docker,test -c laptop.config --outdir rnaseq-results
@@ -627,7 +579,7 @@ Real RNA-seq experiments typically involve dozens of samples and run for hours o
 Nextflow supports HPC schedulers (SLURM, PBS, LSF) and cloud platforms (AWS, Google Cloud, Azure), which can dramatically reduce wall-clock time by distributing work across many nodes.
 Setting up those environments, however, adds significant complexity.
 
-Seqera Platform provides a web-based interface for launching Nextflow pipelines on HPC or cloud infrastructure, with compute management and real-time monitoring handled for you.
+Seqera (developed by the creators of Nextflow) provides a web-based interface for launching Nextflow pipelines on HPC or cloud infrastructure (either your own or one managed for you), with compute and data management capabilities that streamline the process of running pipelines at scale.
 Academic researchers can access it free of charge through the [Seqera academic program](https://seqera.io/academic-program/).
 
 ### Takeaway
@@ -637,4 +589,4 @@ More importantly, you have seen why local execution is a starting point rather t
 
 ### What's next?
 
-Move on to Part 3, where you will run `nf-core/rnaseq` at scale on Seqera Platform.
+Move on to Part 3, where you will run `nf-core/rnaseq` at scale with Seqera.
