@@ -426,8 +426,16 @@ Open the link to confirm the run appears in the **Runs** panel.
 
 !!! tip
 
-    The `test` profile sets `params.input` to the hosted test samplesheet, so you do not need to include it in the params file.
-    Add `input` to the params file if you want to override the test dataset with your own samplesheet.
+    You can include the parameter file during the initial setup step if you would like to set some defaults, as well as some additional properties to match what we did earlier through the web form:
+
+    ```bash
+    tw pipelines add \
+      --name nf-core-demo-gg \
+      --description "Demo pipeline with defaults for testing" \
+      --params-file params.yaml \
+      --profile test \
+      https://github.com/nf-core/demo
+    ```
 
 ### Takeaway
 
