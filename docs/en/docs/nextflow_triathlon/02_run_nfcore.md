@@ -12,6 +12,12 @@ We are going to use a pipeline called `nf-core/demo` that is maintained by the n
     cd /workspaces/training/triathlon/nf-core
     ```
 
+    If you are coming directly from Part 1, you can use the relative path instead:
+
+    ```bash
+    cd ../nf-core
+    ```
+
     Then enable the v1 syntax parser (required for nf-core pipelines on Nextflow 25.10 and later):
 
     ```bash

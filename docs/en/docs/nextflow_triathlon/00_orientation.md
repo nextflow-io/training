@@ -27,15 +27,66 @@ This course requires Nextflow 25.10.2 or later and nf-core tools 3.5.2 or later.
 
 If you are using a local or custom environment, please make sure you are using the correct settings as documented [here](../info/nxf_versions.md).
 
-## Course structure
+## Get ready to work
 
-This course covers three connected topics in sequence.
-Parts 1 and 2 are run from the command line, each from its own subdirectory:
+Once your codespace is running, there are two things to do before diving in: set your working directory, and take a look at the materials provided.
 
-- **Part 1** uses `triathlon/basics/`
-- **Parts 2 and 3** use `triathlon/nf-core/`
+### Set the working directory
 
-Part 3 uses the Seqera web interface as well as the Seqera CLI.
+By default, the codespace opens at the root of all training courses.
+For this course, change to the `triathlon/` directory:
+
+```bash
+cd /workspaces/training/triathlon
+```
+
+Then set VSCode to focus on this directory, so only the relevant files appear in the file explorer sidebar:
+
+```bash
+code .
+```
+
+!!! tip
+
+    Each part of the course runs from its own subdirectory.
+    The first step of each part will tell you which one to use.
+
+### Explore the materials provided
+
+You can explore the course materials using the file explorer on the left, or with the `tree` command.
+Run the following from the terminal to see the full structure:
+
+```bash
+tree . -L 3
+```
+
+??? abstract "Directory contents"
+
+    ```console
+    triathlon
+    ├── .seqera_config
+    ├── basics
+    │   ├── 1-hello.nf
+    │   ├── 2-inputs.nf
+    │   ├── data
+    │   │   ├── greetings-extended.csv
+    │   │   └── greetings.csv
+    │   ├── main.nf
+    │   ├── modules
+    │   │   ├── collectGreetings.nf
+    │   │   ├── convertToUpper.nf
+    │   │   ├── cowpy.nf
+    │   │   └── sayHello.nf
+    │   └── nextflow.config
+    └── nf-core
+        └── laptop.config
+    ```
+
+The **`basics/`** directory contains everything for Part 1: three workflow scripts of increasing complexity, input data, process modules, and a configuration file.
+
+The **`nf-core/`** directory contains a `laptop.config` file used in Parts 2 and 3 to cap resource usage when running nf-core pipelines locally.
+
+The **`.seqera_config`** file is a stub you will fill in during Part 3 to configure the `tw` CLI with your Seqera access token and workspace.
 
 ## Readiness checklist
 
