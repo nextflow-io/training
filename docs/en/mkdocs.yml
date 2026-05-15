@@ -70,7 +70,10 @@ nav:
       - side_quests/metadata/index.md
       - side_quests/splitting_and_grouping/index.md
       - side_quests/nf_test/index.md
-      - side_quests/debugging/index.md
+      - Troubleshooting Workflows:
+          - side_quests/debugging/index.md
+          - side_quests/debugging/01_common_errors.md
+          - side_quests/debugging/02_debugging_toolkit.md
       - side_quests/workflows_of_workflows/index.md
       - Plugin Development:
           - side_quests/plugin_development/index.md
