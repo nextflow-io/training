@@ -74,6 +74,8 @@ nav:
           - side_quests/debugging/index.md
           - side_quests/debugging/01_common_errors.md
           - side_quests/debugging/02_debugging_toolkit.md
+          - side_quests/debugging/summary.md
+          - side_quests/debugging/next_steps.md
       - side_quests/workflows_of_workflows/index.md
       - Plugin Development:
           - side_quests/plugin_development/index.md

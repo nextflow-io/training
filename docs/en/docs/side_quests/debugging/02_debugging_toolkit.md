@@ -228,7 +228,7 @@ Fix the script and the stub block:
 
 === "After"
 
-    ```groovy title="sample_processing.nf" hl_lines="11 16 21" linenums="6"
+    ```groovy title="sample_processing.nf" hl_lines="10 15 20" linenums="6"
     process COUNT_LINES {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -255,7 +255,7 @@ Fix the script and the stub block:
 
 === "Before"
 
-    ```groovy title="sample_processing.nf" hl_lines="11 16 21" linenums="6"
+    ```groovy title="sample_processing.nf" hl_lines="10 15 20" linenums="6"
     process COUNT_LINES {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -344,7 +344,7 @@ Open `sample_processing.nf` and delete the closing brace at the end of the workf
 
 === "Broken"
 
-    ```groovy title="sample_processing.nf" hl_lines="10" linenums="45"
+    ```groovy title="sample_processing.nf" hl_lines="11" linenums="45"
     workflow {
 
         samples_ch = channel
@@ -355,11 +355,12 @@ Open `sample_processing.nf` and delete the closing brace at the end of the workf
         counts_ch = COUNT_LINES(samples_ch)
 
         REPORT(counts_ch.collect())
+    // missing closing brace
     ```
 
 === "Working"
 
-    ```groovy title="sample_processing.nf" hl_lines="10" linenums="45"
+    ```groovy title="sample_processing.nf" hl_lines="11" linenums="45"
     workflow {
 
         samples_ch = channel
@@ -386,13 +387,11 @@ nextflow run sample_processing.nf -preview
 
     Launching `sample_processing.nf` [...] DSL2 - revision: ...
 
-    ERROR ~ Script compilation error
-    - file : /workspaces/training/side-quests/debugging/sample_processing.nf
-    - cause: Unexpected input: '{' @ line 45, column 10.
-       workflow {
-                ^
+    Error sample_processing.nf:53:1: Unexpected input: '<EOF>'
 
-    1 error
+    ERROR ~ Script compilation failed
+
+     -- Check '.nextflow.log' file for details
     ```
 
 The error is identical to what you'd see if you ran the workflow normally, but it took milliseconds and didn't pull a container or run any tasks.
@@ -424,11 +423,11 @@ Combined with a strategic `echo`, this gives you the same kind of visibility you
 
 ### 3.1. Add `debug true` and an `echo`
 
-Edit `sample_processing.nf` and add two lines to the COUNT_LINES process:
+Edit `sample_processing.nf` and add two lines to the `COUNT_LINES` process:
 
 === "After"
 
-    ```groovy title="sample_processing.nf" hl_lines="5 18" linenums="6"
+    ```groovy title="sample_processing.nf" hl_lines="5 17" linenums="6"
     process COUNT_LINES {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -530,7 +529,7 @@ This is invaluable when you're iterating on downstream logic and don't want to w
 
 ### 4.1. Look at the stub directive
 
-The COUNT_LINES process in our pipeline already has one:
+The `COUNT_LINES` process in our pipeline already has one:
 
 ```groovy title="sample_processing.nf" hl_lines="1-4" linenums="23"
     stub:
@@ -558,7 +557,7 @@ nextflow run sample_processing.nf -stub-run
     ```
 
 The pipeline runs end-to-end in seconds, producing the same output shape as the real run.
-You can now iterate on REPORT (or any downstream change) without waiting on `cowpy`.
+You can now iterate on `REPORT` (or any downstream change) without waiting on `cowpy`.
 
 ### Takeaway
 
@@ -639,7 +638,7 @@ Any change to that text - including comments and whitespace - will produce a dif
 
 ### 5.2. Experiment 1 — a "harmless" comment
 
-Add a single-line comment inside the COUNT_LINES script:
+Add a single-line comment inside the `COUNT_LINES` script:
 
 === "After"
 
@@ -668,7 +667,7 @@ Re-run with `-resume`:
 nextflow run sample_processing.nf -profile docker -resume -dump-hashes
 ```
 
-??? "Command output"
+??? success "Command output"
 
     ```console
     executor >  local (6)
@@ -676,9 +675,9 @@ nextflow run sample_processing.nf -profile docker -resume -dump-hashes
     [43/4659bf] REPORT          | 1 of 1 ✔
     ```
 
-Despite using `-resume`, every COUNT_LINES task ran again. REPORT ran too, because its inputs depend on COUNT_LINES outputs.
+Despite using `-resume`, every `COUNT_LINES` task ran again. `REPORT` ran too, because its inputs depend on `COUNT_LINES` outputs.
 
-Look at the new hash for COUNT_LINES (1):
+Look at the new hash for `COUNT_LINES (1)`:
 
 ```bash
 grep -A 18 "COUNT_LINES (1)" .nextflow.log
@@ -704,7 +703,7 @@ Remove the comment before the next experiment.
 
 ### 5.3. Experiment 2 — a resource directive
 
-Add a `memory` directive to COUNT_LINES:
+Add a `memory` directive to `COUNT_LINES`:
 
 === "After"
 
@@ -741,7 +740,7 @@ nextflow run sample_processing.nf -profile docker -resume
 Everything cached. The hashes are unchanged because resource directives like `memory`, `cpus`, and `time` are not part of the cache key.
 
 **Lesson:** tuning resources never busts the cache.
-That makes resource adjustment cheap, but it also means you can't force a re-run by changing memory or CPUs - you'd need to touch something that _is_ hashed (such as the script body) or pass `-resume <session_id>` from an earlier session.
+That makes resource adjustment cheap, but it also means you can't force a re-run by changing `memory` or `cpus` - you'd need to touch something that _is_ hashed (such as the script body) or pass `-resume <session_id>` from an earlier session.
 
 Remove the `memory` directive before the next experiment.
 
@@ -751,7 +750,7 @@ Change the workflow's `.map { }` to upper-case the sample ID:
 
 === "After"
 
-    ```groovy title="sample_processing.nf" hl_lines="4" linenums="45"
+    ```groovy title="sample_processing.nf" hl_lines="6" linenums="45"
     workflow {
 
         samples_ch = channel
@@ -767,7 +766,7 @@ Change the workflow's `.map { }` to upper-case the sample ID:
 
 === "Before"
 
-    ```groovy title="sample_processing.nf" hl_lines="4" linenums="45"
+    ```groovy title="sample_processing.nf" hl_lines="6" linenums="45"
     workflow {
 
         samples_ch = channel
@@ -787,7 +786,7 @@ Re-run with `-resume`:
 nextflow run sample_processing.nf -profile docker -resume -dump-hashes
 ```
 
-??? "Command output"
+??? success "Command output"
 
     ```console
     executor >  local (6)
@@ -796,7 +795,7 @@ nextflow run sample_processing.nf -profile docker -resume -dump-hashes
     ```
 
 Every task ran again - including REPORT, which we didn't touch.
-Look at one of the new COUNT_LINES hash entries:
+Look at one of the new `COUNT_LINES` hash entries:
 
 ```console title="Excerpt"
 ... [java.lang.String] sample_id
@@ -805,9 +804,9 @@ Look at one of the new COUNT_LINES hash entries:
 ... [nextflow.util.ArrayBag] [FileHolder(...sample_001.fastq.gz...)]
 ```
 
-The input value for `sample_id` is now `SAMPLE_001` rather than `sample_001`, so the COUNT_LINES task hash changed.
-But why did REPORT re-run?
-Because REPORT's input is the _files_ COUNT_LINES produced - and those files now live in different work directories (the new COUNT_LINES tasks).
+The input value for `sample_id` is now `SAMPLE_001` rather than `sample_001`, so the `COUNT_LINES` task hash changed.
+But why did `REPORT` re-run?
+Because `REPORT`'s input is the _files_ `COUNT_LINES` produced - and those files now live in different work directories (the new `COUNT_LINES` tasks).
 A change upstream cascaded into a cache miss downstream, even though REPORT's own script and directives were untouched.
 
 **Lesson:** when you trace a cache miss, look upstream too.
@@ -996,24 +995,7 @@ The four-phase method scales: start with cheap checks (`-preview`), let error me
 
 ---
 
-## Summary
+You've reached the end of Part 2.
+For a recap and quick-reference cheat sheet, continue to the summary.
 
-You learned a sequence of debugging tools, each applied to the same small pipeline.
-
-| Tool              | Best for                                                    |
-| ----------------- | ----------------------------------------------------------- |
-| Work directory    | Any process failure - the complete record of what ran       |
-| `-preview`        | Catching syntax and structural issues without running tasks |
-| `debug true`      | Seeing what a process actually receives at runtime          |
-| `-stub-run`       | Iterating on workflow logic without real commands           |
-| `-dump-hashes`    | Diagnosing unexpected cache invalidation                    |
-| Four-phase method | A repeatable order in which to apply the tools              |
-
-The single biggest debugging skill is matching the tool to the problem.
-Most failures don't need every tool - they need the right one.
-
----
-
-## What's next?
-
-Return to the [menu of Side Quests](../index.md) or click the button in the bottom right of the page to move on to the next topic in the list.
+[Continue to the summary :material-arrow-right:](summary.md){ .md-button .md-button--primary }
