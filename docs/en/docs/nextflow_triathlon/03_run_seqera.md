@@ -151,13 +151,6 @@ You will use two commands:
 
 This is the same mental model as Part 2: you stay in the `nextflow` CLI you already know.
 
-!!! note "Why not `tw`?"
-
-    Earlier versions of this training used the legacy `tw` CLI (Tower CLI).
-    It is being replaced by the `seqera` CLI for authentication and by `nextflow launch` for pipeline submission.
-    The new flow removes manual token handling and a parallel launch command.
-    The same flags you learned for `nextflow run` work for `nextflow launch`.
-
 We will run these commands in the GitHub Codespace we used for the first two parts of this training.
 
 ### 3.1. Install the `seqera` CLI
