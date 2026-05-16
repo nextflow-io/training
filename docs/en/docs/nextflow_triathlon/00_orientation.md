@@ -64,7 +64,6 @@ tree . -L 3
 
     ```console
     triathlon
-    ├── .seqera_config
     ├── basics
     │   ├── 1-hello.nf
     │   ├── 2-inputs.nf
@@ -86,7 +85,7 @@ The **`basics/`** directory contains everything for Part 1: three workflow scrip
 
 The **`nf-core/`** directory contains a `laptop.config` file used in Parts 2 and 3 to cap resource usage when running nf-core pipelines locally.
 
-The **`.seqera_config`** file is a stub you will fill in during Part 3 to configure the `tw` CLI with your Seqera access token and workspace.
+In Part 3 you will install the `seqera` CLI and log in with `seqera login`; no config file is needed in the working directory.
 
 ## Readiness checklist
 
