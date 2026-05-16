@@ -133,7 +133,7 @@ You know how to add a pipeline to a Seqera workspace, configure and launch a run
 
 ### What's next?
 
-Learn how to do all of this from the command line using the `tw` CLI.
+Drive the same workspace from the command line using the `seqera` CLI and `nextflow launch`.
 
 ---
 
@@ -143,190 +143,196 @@ In the run view, click the **Command line** tab.
 You will see the exact `nextflow run` command that Platform constructed and submitted on your behalf — the same kind of command you have been running manually throughout this course.
 
 Platform does not replace Nextflow; it orchestrates it.
-Everything you can do through the web interface, you can also do from a terminal using the `tw` CLI, the command-line tool for interacting with the Platform API.
-This is useful for automating launches from scripts or CI/CD pipelines.
+Everything you can do through the web interface, you can also do from a terminal.
+You will use two commands:
 
-We're going to do this now from the Github codespace we used for the first two parts of this training.
+- `seqera` for authentication and workspace context. It logs you in via your browser and remembers your default org and workspace.
+- `nextflow launch` for actually submitting pipelines to Platform. It is the same `nextflow` binary you used in Part 2, with `launch` swapped in for `run` to push the workload to your workspace instead of running it locally.
 
-### 3.1. Install the tw CLI
+This is the same mental model as Part 2: you stay in the `nextflow` CLI you already know.
 
-Run the following commands in your Codespace terminal to download and install the `tw` binary:
+!!! note "Why not `tw`?"
+
+    Earlier versions of this training used the legacy `tw` CLI (Tower CLI).
+    It is being replaced by the `seqera` CLI for authentication and by `nextflow launch` for pipeline submission.
+    The new flow removes manual token handling and a parallel launch command.
+    The same flags you learned for `nextflow run` work for `nextflow launch`.
+
+We will run these commands in the GitHub Codespace we used for the first two parts of this training.
+
+### 3.1. Install the `seqera` CLI
+
+Run the install script in your Codespace terminal:
 
 ```bash
-curl -fsSL https://github.com/seqeralabs/tower-cli/releases/latest/download/tw-linux-x86_64 -o tw
-chmod +x tw
-sudo mv tw /usr/local/bin/
+curl -fsSL https://ai.seqera.io/install | bash
 ```
 
 Verify the installation:
 
 ```bash
-tw --version
+seqera version
+```
+
+The `seqera` CLI is installed and ready to authenticate.
+
+### 3.2. Log in
+
+Run:
+
+```bash
+seqera login
+```
+
+The command opens your browser and walks you through Seqera's OAuth flow.
+After you approve, the CLI receives a refresh token and stores it in your operating system's keychain (or a file fallback on headless systems).
+You do not have to copy or paste anything.
+
+This persists across Codespace sessions; you only need to log in once per environment.
+
+!!! tip "Headless or scripted environments"
+
+    If you need to authenticate non-interactively (CI, automation, scripts that can't open a browser), set `SEQERA_ACCESS_TOKEN` instead.
+    Generate a personal access token from your avatar menu → **Your tokens** in the web interface and export it:
+
+    ```bash
+    export SEQERA_ACCESS_TOKEN=<your-token>
+    ```
+
+### 3.3. Select your org and workspace
+
+`seqera login` authenticates you, but you also need to tell the CLI which organization and workspace to operate on.
+
+List the organizations you have access to:
+
+```bash
+seqera org list
+```
+
+Pick the one you're using for the training and set it as the default:
+
+```bash
+seqera org select <org-name>
+```
+
+Set the workspace within that org:
+
+```bash
+seqera workspace select <workspace-name>
+```
+
+Verify everything is wired up:
+
+```bash
+seqera info
 ```
 
 ??? success "Command output"
 
     ```console
-    tw version 0.30.0 (fde9dec)
+     Platform API     | https://api.cloud.seqera.io
+     Authenticated as | <your-name>
+     Organization     | <org-name>
+     Workspace        | <workspace-name>
+     Default compute  | <compute-env-name>
+     Status           | OK
     ```
 
-The `tw` CLI is installed and ready to configure.
+Once your org and workspace are set, every `seqera` and `nextflow launch` command operates against that workspace.
+You can always override per command with `--workspace <org>/<workspace>` if you need to.
 
-### 3.2. Get an access token
+!!! tip "Machine-readable output"
 
-The `tw` CLI authenticates with Seqera using a personal access token.
+    Pass `-o json` (or `--output json`) to get a structured response.
+    Useful if you're driving the CLI from a script or a coding agent:
 
-1. In the Seqera web interface, click your avatar in the top-right corner and select **Your tokens**.
-2. Click **Add token**, give it a name (e.g. `training`), and click **Add**.
-3. Copy the token value — it will only be shown once.
-   If you don't save it somewhere right away, you will need to generate another one.
-
-### 3.3. Configure the CLI
-
-For convenience, we're going to set up a configuration file containing the
-access token you just generated and the workspace identifier.
-
-We made a stub for you called `.seqera_config` under the `triathlon` directory in your training environment (in Codespaces).
-Open the file in the editor and set the two variables:
-
-- **`TOWER_ACCESS_TOKEN`**: the token you generated in section 3.2
-- **`TOWER_WORKSPACE_ID`**: your workspace in `org-name/workspace-name` format
-
-Once the values are filled in, load the config:
-
-```bash
-source ../.seqera_config
-```
-
-Verify the connection:
-
-```bash
-tw info
-```
-
-??? success "Command output"
-
-    ```console
-        Details
-    -------------------------+-----------------------------
-     Tower API endpoint      | https://api.cloud.seqera.io
-     Tower API version       | 1.150.0
-     Tower version           | 26.1.0-cycle54
-     CLI version             | 0.30.0 (fde9dec)
-     CLI minimum API version | 1.148.0
-     Authenticated user      | <your-name>
-
-    System health status
-    ---------------------------------------+----
-     Remote API server connection check    | OK
-     Tower API version check               | OK
-     Authentication API credential's token | OK
+    ```bash
+    seqera info -o json
     ```
-
-The `tw` CLI is now authenticated and connected to your Seqera account.
-Run `source ../.seqera_config` at the start of each Codespace session to reload the config.
-
-!!! tip
-
-    If your workspace does not have a primary compute environment set, you can add `export TOWER_COMPUTE_ENV=<compute-env-name>` to your config file to set a default.
-    Any config value can be overridden on the command line by passing the flag explicitly (e.g. `--compute-env other-env`).
-    See the [tw CLI reference](https://docs.seqera.io/platform/latest/cli/reference) for the full list of options and environment variables.
 
 ### 3.4. Explore your workspace from the CLI
 
-List the workspaces you have access to:
+List the runs in your workspace, including the nf-core/rnaseq run you launched from the web interface in section 2:
 
 ```bash
-tw workspaces list
+seqera runs list
 ```
 
 ??? success "Command output"
 
     ```console
-    Available workspaces:
-    ID              | Name            | Full Name                | Visibility
-    --------------- | --------------- | ------------------------ | ----------
-    <workspace-id>  | my-workspace    | my-org/my-workspace      | PRIVATE
+    Pipeline runs in <org>/<workspace>:
+    ID        | Status   | Pipeline               | Run name
+    --------- | -------- | ---------------------- | --------------
+    <run-id>  | RUNNING  | nf-core/rnaseq         | happy_curie
     ```
 
-View the runs in your workspace, including the nf-core/rnaseq run you just launched:
+You can filter the listing:
 
 ```bash
-tw runs list
+seqera runs list --status RUNNING --limit 5
 ```
 
-??? success "Command output"
+Dig into a specific run by ID:
 
-    ```console
-    Pipeline runs for my-org/my-workspace workspace:
-    ID        | Status   | Name          | Pipeline               | Run name
-    --------- | -------- | ------------- | ---------------------- | --------
-    <run-id>  | RUNNING  | ...           | nf-core/rnaseq         | happy_curie
-    ```
+```bash
+seqera runs show <run-id>
+```
 
-The same run you are monitoring in the web interface is visible here.
-
-!!! note
-
-    Because `TOWER_WORKSPACE_ID` is set in `.seqera_config`, you can omit `--workspace` from all `tw` commands.
-    Without the config, you would pass it explicitly:
-
-    ```bash
-    tw runs list --workspace <org>/<workspace>
-    ```
-
-Everything visible in the web interface is accessible from the CLI.
+Everything visible in the web interface's **Runs** panel is also reachable from the CLI.
 
 ### 3.5. Launch nf-core/rnaseq from the CLI
 
-The pipeline you added to your workspace in section 2.1 is available by name in the CLI.
-Launch it with the `test` profile:
+You don't need to do anything special to launch a pipeline that's already in your Launchpad.
+You can refer to it by its short name, exactly the way `nextflow run` accepts an nf-core pipeline name:
 
 ```bash
-tw launch nf-core-rnaseq -p test
+nextflow launch nf-core/rnaseq -profile test
 ```
 
 ??? success "Command output"
 
     ```console
-    Launching pipeline nf-core-rnaseq
+    Launching `nf-core/rnaseq` on Seqera Platform
     Run name: focused_einstein
-    https://cloud.seqera.io/orgs/my-org/workspaces/my-workspace/watch/<run-id>
+    https://cloud.seqera.io/orgs/<org>/workspaces/<workspace>/watch/<run-id>
     ```
 
 Open the link in your browser and confirm the run appears in the **Runs** panel.
 
 Once you can see it running, you have confirmed that the CLI and the web interface are two views onto the same workspace.
 
-!!! note
+!!! tip "Same flags as `nextflow run`"
 
-    You can also pass a full GitHub URL directly to `tw launch` without adding the pipeline to a workspace first.
-    However, adding the pipeline explicitly before launching it is generally better: it saves the pipeline configuration for future runs, makes it available by name, and makes it visible to all workspace members in the Launchpad.
-
-    It is possible to add a pipeline to a workspace directly from the command line using `tw`.
-    Section 4 shows how to do this with the nf-core/demo pipeline.
+    `nextflow launch` uses the same flag grammar as `nextflow run`: `-profile`, `-revision`, `-params-file`, `-resume`, `-w`, plus `--<param>=<value>` for arbitrary pipeline parameters.
+    The only difference is that `launch` submits to Seqera Platform instead of running locally.
+    Useful Platform-specific flags: `-workspace <org>/<ws>`, `-compute-env <name>`, `-name <mnemonic>`.
 
 ### Takeaway
 
-You know how to authenticate the `tw` CLI, inspect your workspace, and launch a saved pipeline from the terminal.
+You know how to log in with `seqera`, pin your default org and workspace, list runs, and launch a saved pipeline from the terminal with `nextflow launch`.
 
 ### What's next?
 
-Add a new pipeline to your workspace from the command line and launch it.
+Add a new pipeline to your workspace from the command line and launch it with inline parameters.
 
 ---
 
 ## 4. Add a new pipeline and run it
 
-Any Nextflow pipeline on GitHub can be added to your workspace with `tw pipelines add`, as long as it has a `main.nf` entry point and a `nextflow.config` at its root.
+Any Nextflow pipeline on GitHub can be launched from your workspace, as long as it has a `main.nf` entry point and a `nextflow.config` at its root.
 nf-core/demo is a good example to practice with: you already ran it in Part 2, so you know what it does and what to expect.
+
+You don't actually need to register a pipeline to launch it — `nextflow launch` accepts a pipeline name or URL directly.
+Registering is still useful when you want the pipeline to appear in the **Launchpad** so other workspace members can find and run it.
+We'll do both: register it (section 4.1), then launch it from the web (4.3) and from the CLI (4.4).
 
 ### 4.1. Add nf-core/demo to your workspace
 
-Run the following command to register the pipeline in your workspace:
+Register the pipeline in your workspace:
 
 ```bash
-tw pipelines add \
+seqera pipelines add \
     --name nf-core-demo \
     https://github.com/nf-core/demo
 ```
@@ -334,7 +340,7 @@ tw pipelines add \
 ??? success "Command output"
 
     ```console
-    New pipeline 'nf-core-demo' added at my-org/my-workspace workspace
+    Pipeline 'nf-core-demo' added to <org>/<workspace>
     ```
 
 The pipeline is now registered and will appear in the Launchpad.
@@ -344,17 +350,17 @@ The pipeline is now registered and will appear in the Launchpad.
 List the pipelines in your workspace to confirm it was added:
 
 ```bash
-tw pipelines list
+seqera pipelines list
 ```
 
 ??? success "Command output"
 
     ```console
-    Pipelines at my-org/my-workspace:
-    ID   | Name            | Repository
-    ---- | --------------- | -----------------------------------------
-    ...  | nf-core-demo    | https://github.com/nf-core/demo
-    ...  | nf-core-rnaseq  | ...
+    Pipelines in <org>/<workspace>:
+    Name            | Repository
+    --------------- | -----------------------------------------
+    nf-core-demo    | https://github.com/nf-core/demo
+    nf-core-rnaseq  | ...
     ```
 
 Open your workspace in the browser and click **Launchpad** to confirm nf-core/demo now appears alongside nf-core/rnaseq.
@@ -364,7 +370,7 @@ Open your workspace in the browser and click **Launchpad** to confirm nf-core/de
     You can also add pipelines via the web interface: in the left sidebar, click **Launchpad**, then **Add pipeline**, and fill out the form accordingly.
 
 Click the **Launch** button on the nf-core/demo entry to open its launch form.
-You will see that the `input` and `outdir` parameters are highlighted in red — they are required fields with no default values, because `tw pipelines add` registers only the pipeline source without pre-configuring any parameters.
+You will see that the `input` and `outdir` parameters are highlighted in red — they are required fields with no default values, because `seqera pipelines add` registered only the pipeline source without pre-configuring any parameters.
 The next two sections walk through how to provide those values: first through the web form, then from the command line.
 
 ### 4.3. Launch nf-core/demo from the web interface
@@ -392,45 +398,45 @@ Click into the run to explore the task table and any execution reports.
 
 ### 4.4. Launch nf-core/demo from the CLI
 
-Unlike `nextflow run`, the `tw launch` command does not accept individual parameter flags like `--input` or `--outdir`.
-Parameters must be provided through a file in YAML or JSON format, passed with `--params-file`.
-This encourages reproducibility: a saved parameter file documents exactly what values were used for a run, making it easy to repeat or share a run configuration.
-
-Create a parameters file in your working directory:
+`nextflow launch` accepts pipeline parameters the same way `nextflow run` does: as `--<param>=<value>` flags directly on the command line.
+You don't need to create a parameter file just to set one or two values.
 
 ```bash
-touch params.yaml
-```
-
-Open it in the editor and add the output path:
-
-```yaml title="params.yaml"
-outdir: "s3://my-bucket/demo-results-cli"
-```
-
-Now you can launch the pipeline using the `test` profile (which provides the `input` samplesheet) and the params file (which provides `outdir`):
-
-```bash
-tw launch nf-core-demo -p test --params-file params.yaml
+nextflow launch nf-core/demo \
+    -profile test \
+    --outdir s3://my-bucket/demo-results-cli
 ```
 
 ??? success "Command output"
 
     ```console
-    Launching pipeline nf-core-demo
+    Launching `nf-core/demo` on Seqera Platform
     Run name: focused_feynman
-    https://cloud.seqera.io/orgs/my-org/workspaces/my-workspace/watch/<run-id>
+    https://cloud.seqera.io/orgs/<org>/workspaces/<workspace>/watch/<run-id>
     ```
 
 Open the link to confirm the run appears in the **Runs** panel.
 
-!!! tip
+The `test` profile provides the `input` samplesheet, and the `--outdir` flag supplies the output path.
 
-    You can include the parameter file during the initial setup step if you would like to set some defaults, as well as some additional properties to match what we did earlier through the web form:
+!!! tip "When to use a parameter file"
+
+    Inline `--<param>` flags work well for one or two values.
+    For pipelines with many parameters, or when you want a reproducible record of exactly what was launched, put them in a YAML or JSON file and pass it with `-params-file`:
+
+    ```yaml title="params.yaml"
+    outdir: "s3://my-bucket/demo-results-cli"
+    ```
 
     ```bash
-    tw pipelines add \
-      --name nf-core-demo-gg \
+    nextflow launch nf-core/demo -profile test -params-file params.yaml
+    ```
+
+    You can also bake defaults into the registered pipeline so they're applied to every launch:
+
+    ```bash
+    seqera pipelines add \
+      --name nf-core-demo-defaults \
       --description "Demo pipeline with defaults for testing" \
       --params-file params.yaml \
       --profile test \
@@ -439,7 +445,7 @@ Open the link to confirm the run appears in the **Runs** panel.
 
 ### Takeaway
 
-You know how to add any GitHub-hosted Nextflow pipeline to your workspace and launch it, both from the web interface by filling in parameters manually, and from the `tw` CLI by combining a profile with a parameter file.
+You know how to add any GitHub-hosted Nextflow pipeline to your workspace and launch it, both from the web interface by filling in parameters manually, and from the CLI with `nextflow launch` using inline parameter flags or a parameter file.
 
 ---
 
@@ -449,7 +455,9 @@ In this part you learned to:
 
 - Sign up for a Seqera account and explore the Community Showcase
 - Add a pipeline from the curated catalog, launch a production-scale run, and monitor execution
-- Authenticate the `tw` CLI and launch a saved pipeline from the terminal
-- Add a new pipeline from GitHub using the CLI and verify it appears in the Launchpad
-- Launch a pipeline from the Seqera web interface by filling in required parameters manually
-- Launch a pipeline from the CLI using a Nextflow profile and a parameter file
+- Authenticate the `seqera` CLI with `seqera login` and pin a default org and workspace
+- List and inspect runs from the terminal with `seqera runs list` / `seqera runs show`
+- Launch a saved pipeline on Platform with `nextflow launch`, using the same flag grammar as `nextflow run`
+- Add a new pipeline from GitHub with `seqera pipelines add` and verify it appears in the Launchpad
+- Launch a pipeline from the web interface by filling in required parameters manually
+- Launch a pipeline from the CLI with inline `--<param>` flags or a parameter file
