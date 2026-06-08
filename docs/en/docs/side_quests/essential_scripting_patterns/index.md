@@ -81,10 +81,6 @@ SAMPLE_003,human,kidney,45000000,data/sequences/SAMPLE_003_S3_L001_R1_001.fastq,
 
 We'll use this realistic dataset to explore practical programming techniques that you'll encounter in real bioinformatics workflows.
 
-<!-- TODO: Can we make this more domain-agnostic? -->
-
-<!-- TODO: add an assignment statement? #### Review the assignment -->
-
 #### Readiness checklist
 
 Think you're ready to dive in?
@@ -499,7 +495,7 @@ Now let's see the `collect` method on a List in action. Modify `collect.nf` to a
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="9-13"
+    ```groovy title="collect.nf" linenums="1" hl_lines="9-13"
     def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
     // channel.collect() - groups multiple channel emissions into one
@@ -517,7 +513,7 @@ Now let's see the `collect` method on a List in action. Modify `collect.nf` to a
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="1"
+    ```groovy title="collect.nf" linenums="1"
     def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
     // channel.collect() - groups multiple channel emissions into one
@@ -851,7 +847,7 @@ Then modify the `workflow` block to connect the `ch_samples` channel to the `FAS
                 ] : [:]
 
                 def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return [sample_meta + file_meta + [priority: priority], file(row.file_path)]
+                return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
             }
             .view()
     }
@@ -1091,12 +1087,21 @@ Include the process in your `main.nf` and add it to the workflow:
 
 Now run the workflow and check the generated reports in `results/reports/`. They should contain basic information about each sample.
 
-<!-- TODO: add the run command -->
+```bash
+nextflow run main.nf
+```
 
 ??? success "Command output"
 
     ```console
-    <!-- TODO: output -->
+    N E X T F L O W  ~  version 25.10.4
+    Launching `main.nf` [dreamy_stonebraker] DSL2 - revision: 8ba7d0c7eb
+    [44/717c58] Submitted process > FASTP (1)
+    [16/426f16] Submitted process > FASTP (2)
+    [7b/846764] Submitted process > GENERATE_REPORT (1)
+    [20/54a02e] Submitted process > FASTP (3)
+    [59/cdba3d] Submitted process > GENERATE_REPORT (2)
+    [33/a0e0da] Submitted process > GENERATE_REPORT (3)
     ```
 
 But what if we want to add information about when and where the processing occurred? Let's modify the process to use **shell** variables and a bit of command substitution to include the current user, hostname, and date in the report:
@@ -1129,8 +1134,8 @@ If you run this, you'll notice an error - Nextflow tries to interpret `#!groovy 
 ??? failure "Command output"
 
     ```console
-    Error modules/generate_report.nf:15:27: `USER` is not defined
-    │  15 |     echo "Processed by: ${USER}" >> ${meta.id}_report.txt
+    Error modules/generate_report.nf:13:27: `USER` is not defined
+    │  13 |     echo "Processed by: ${USER}" >> ${meta.id}_report.txt
     ╰     |                           ^^^^
 
     ERROR ~ Script compilation failed
@@ -1636,7 +1641,8 @@ nextflow run main.nf
     [1f/a1a4ca] Re-submitted process > FASTP (2)
     ```
 
-Because we've chosen a filter that excludes some samples, fewer tasks were executed.
+In this case all three samples satisfy the filter, so every sample continues down the pipeline.
+A stricter threshold would exclude low-depth samples and reduce the number of tasks that run.
 
 The filter expression `meta.id && meta.organism && meta.depth >= 25000000` combines truthiness with explicit comparisons:
 
@@ -1762,7 +1768,18 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    <!-- TODO: output -->
+    N E X T F L O W  ~  version 25.10.4
+    Launching `main.nf` [lonely_torricelli] DSL2 - revision: 309f496f9a
+    [85/8117bf] Submitted process > TRIMGALORE (1)
+    [20/714ab9] Submitted process > FASTP (1)
+    [ca/de6fd3] Submitted process > GENERATE_REPORT (1)
+    [ca/ff5356] Submitted process > FASTP (2)
+    [10/aa6ea8] Submitted process > GENERATE_REPORT (2)
+    [9f/baa7fb] Submitted process > GENERATE_REPORT (3)
+    [20/714ab9] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+    [ca/ff5356] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+    [f2/2a5d19] Re-submitted process > FASTP (1)
+    [44/b23306] Re-submitted process > FASTP (2)
     ```
 
 No crash! The workflow now handles the missing field gracefully. When `row.run_id` is `null`, the `?.` operator prevents the `.toUpperCase()` call, and `run_id` becomes `null` instead of causing an exception.
@@ -1946,7 +1963,18 @@ nextflow run main.nf --input ./data/samples.csv
 ??? success "Command output"
 
     ```console
-    <!-- TODO: output -->
+    N E X T F L O W  ~  version 25.10.4
+    Launching `main.nf` [dreamy_archimedes] DSL2 - revision: dc24727993
+    [bc/0527b6] Submitted process > FASTP (2)
+    [65/5bb40c] Submitted process > GENERATE_REPORT (1)
+    [b3/aa7df2] Submitted process > GENERATE_REPORT (2)
+    [39/9d740f] Submitted process > GENERATE_REPORT (3)
+    [06/1c0d94] Submitted process > TRIMGALORE (1)
+    [0e/23c643] Submitted process > FASTP (1)
+    [0e/23c643] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+    [bc/0527b6] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+    [12/aa9122] Re-submitted process > FASTP (1)
+    [b5/1eba3b] Re-submitted process > FASTP (2)
     ```
 
 This time it runs successfully.
@@ -2133,7 +2161,9 @@ Let's make it more useful by adding conditional logic:
 
 Now we get an even more informative summary, including a success/failure message and the output directory if specified:
 
-<!-- TODO: add run command -->
+```bash
+nextflow run main.nf
+```
 
 ??? success "Command output"
 
