@@ -106,9 +106,19 @@ Start with a simple workflow that just reads the CSV file (we've already done th
 
 ```groovy title="main.nf" linenums="1"
 workflow {
+    main:
     ch_samples = channel.fromPath("./data/samples.csv")
         .splitCsv(header: true)
         .view()
+
+    publish:
+    reports = channel.empty()
+}
+
+output {
+    reports {
+        path 'reports'
+    }
 }
 ```
 
@@ -142,7 +152,7 @@ Here's what that map operation looks like:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="3-6"
+    ```groovy title="main.nf" linenums="3" hl_lines="3-6"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -153,7 +163,7 @@ Here's what that map operation looks like:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="3"
+    ```groovy title="main.nf" linenums="3" hl_lines="3"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .view()
@@ -179,7 +189,7 @@ Now we're going to write **scripting** logic inside our closure to transform eac
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="4-12"
+    ```groovy title="main.nf" linenums="3" hl_lines="4-12"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -198,7 +208,7 @@ Now we're going to write **scripting** logic inside our closure to transform eac
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="4"
+    ```groovy title="main.nf" linenums="3" hl_lines="4"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -233,7 +243,7 @@ Make the following change:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="11-12"
+    ```groovy title="main.nf" linenums="3" hl_lines="11-12"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -252,7 +262,7 @@ Make the following change:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="11"
+    ```groovy title="main.nf" linenums="3" hl_lines="11"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -300,7 +310,7 @@ Let's add a line to create a simplified version of our metadata that only contai
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="12-15"
+    ```groovy title="main.nf" linenums="3" hl_lines="12-13"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -323,7 +333,7 @@ Let's add a line to create a simplified version of our metadata that only contai
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="12"
+    ```groovy title="main.nf" linenums="3" hl_lines="12"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -384,7 +394,7 @@ Let's output a channel structure comprising a tuple of 2 elements: the enriched 
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="12"
+    ```groovy title="main.nf" linenums="3" hl_lines="12"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -403,7 +413,7 @@ Let's output a channel structure comprising a tuple of 2 elements: the enriched 
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="12"
+    ```groovy title="main.nf" linenums="3" hl_lines="12"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -667,7 +677,7 @@ Make the following change to your existing `main.nf` workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="10-21"
+    ```groovy title="main.nf" linenums="5" hl_lines="10-21"
             .map { row ->
                 // Scripting for data transformation
                 def sample_meta = [
@@ -694,7 +704,7 @@ Make the following change to your existing `main.nf` workflow:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="10-11"
+    ```groovy title="main.nf" linenums="5" hl_lines="10-11"
             .map { row ->
                 // Scripting for data transformation
                 def sample_meta = [
@@ -790,8 +800,9 @@ Then modify the `workflow` block to connect the `ch_samples` channel to the `FAS
 
 === "After"
 
-    ```groovy title="main.nf" linenums="25" hl_lines="27"
+    ```groovy title="main.nf" linenums="25" hl_lines="28"
     workflow {
+        main:
 
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
@@ -818,13 +829,23 @@ Then modify the `workflow` block to connect the `ch_samples` channel to the `FAS
             }
 
         ch_fastp = FASTP(ch_samples)
+
+        publish:
+        reports = channel.empty()
+    }
+
+    output {
+        reports {
+            path 'reports'
+        }
     }
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="25" hl_lines="26"
+    ```groovy title="main.nf" linenums="25" hl_lines="27"
     workflow {
+        main:
 
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
@@ -850,6 +871,15 @@ Then modify the `workflow` block to connect the `ch_samples` channel to the `FAS
                 return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
             }
             .view()
+
+        publish:
+        reports = channel.empty()
+    }
+
+    output {
+        reports {
+            path 'reports'
+        }
     }
     ```
 
@@ -1017,11 +1047,12 @@ Include the process in your `main.nf` and add it to the workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="2 30"
+    ```groovy title="main.nf" linenums="1" hl_lines="2 31"
     include { FASTP } from './modules/fastp.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
 
     workflow {
+        main:
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -1048,15 +1079,25 @@ Include the process in your `main.nf` and add it to the workflow:
 
         ch_fastp = FASTP(ch_samples)
         GENERATE_REPORT(ch_samples)
+
+        publish:
+        reports = GENERATE_REPORT.out
+    }
+
+    output {
+        reports {
+            path 'reports'
+        }
     }
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="1 28"
+    ```groovy title="main.nf" linenums="1" hl_lines="1 29"
     include { FASTP } from './modules/fastp.nf'
 
     workflow {
+        main:
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -1082,6 +1123,15 @@ Include the process in your `main.nf` and add it to the workflow:
             }
 
         ch_fastp = FASTP(ch_samples)
+
+        publish:
+        reports = channel.empty()
+    }
+
+    output {
+        reports {
+            path 'reports'
+        }
     }
     ```
 
@@ -1198,7 +1248,7 @@ To illustrate what that looks like with our existing workflow, make the modifica
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="4-24 29"
+    ```groovy title="main.nf" linenums="1" hl_lines="4-24 30"
     include { FASTP } from './modules/fastp.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
 
@@ -1225,22 +1275,33 @@ To illustrate what that looks like with our existing workflow, make the modifica
     }
 
     workflow {
+        main:
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map{ row -> separateMetadata(row) }
 
         ch_fastp = FASTP(ch_samples)
         GENERATE_REPORT(ch_samples)
+
+        publish:
+        reports = GENERATE_REPORT.out
+    }
+
+    output {
+        reports {
+            path 'reports'
+        }
     }
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="7-27"
+    ```groovy title="main.nf" linenums="1" hl_lines="8-28"
     include { FASTP } from './modules/fastp.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
 
     workflow {
+        main:
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -1267,6 +1328,15 @@ To illustrate what that looks like with our existing workflow, make the modifica
 
         ch_fastp = FASTP(ch_samples)
         GENERATE_REPORT(ch_samples)
+
+        publish:
+        reports = GENERATE_REPORT.out
+    }
+
+    output {
+        reports {
+            path 'reports'
+        }
     }
     ```
 
@@ -1523,7 +1593,7 @@ Include the new from in `modules/trimgalore.nf`:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="28" hl_lines="5-12"
+    ```groovy title="main.nf" linenums="29" hl_lines="5-12"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row -> separateMetadata(row) }
@@ -1541,7 +1611,7 @@ Include the new from in `modules/trimgalore.nf`:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="28" hl_lines="5"
+    ```groovy title="main.nf" linenums="29" hl_lines="5"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row -> separateMetadata(row) }
@@ -1586,7 +1656,7 @@ Add the following before the branch operation:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="28" hl_lines="5-11"
+    ```groovy title="main.nf" linenums="29" hl_lines="5-11"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row -> separateMetadata(row) }
@@ -1606,7 +1676,7 @@ Add the following before the branch operation:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="28" hl_lines="5"
+    ```groovy title="main.nf" linenums="29" hl_lines="5"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row -> separateMetadata(row) }
@@ -1823,7 +1893,7 @@ Also add a `view()` operator in the workflow to see the results:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="30" hl_lines="4"
+    ```groovy title="main.nf" linenums="31" hl_lines="4"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map{ row -> separateMetadata(row) }
@@ -1832,7 +1902,7 @@ Also add a `view()` operator in the workflow to see the results:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="30"
+    ```groovy title="main.nf" linenums="31"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map{ row -> separateMetadata(row) }
@@ -1885,7 +1955,7 @@ Create a validation function before your workflow block, call it from the workfl
 
 === "After"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="5-15 18-19"
+    ```groovy title="main.nf" linenums="1" hl_lines="5-15 19-20"
     include { FASTP } from './modules/fastp.nf'
     include { TRIMGALORE } from './modules/trimgalore.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
@@ -1903,6 +1973,7 @@ Create a validation function before your workflow block, call it from the workfl
     }
     ...
     workflow {
+        main:
         validateInputs()
         ch_samples = channel.fromPath(params.input)
     ```
@@ -1916,6 +1987,7 @@ Create a validation function before your workflow block, call it from the workfl
 
     ...
     workflow {
+        main:
         ch_samples = channel.fromPath("./data/samples.csv")
     ```
 
@@ -2051,7 +2123,7 @@ Add the event handler to your `main.nf` file, inside your workflow definition:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="66" hl_lines="5-16"
+    ```groovy title="main.nf" linenums="67" hl_lines="5-16"
         ch_fastp = FASTP(trim_branches.fastp)
         ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
         GENERATE_REPORT(ch_samples)
@@ -2067,15 +2139,21 @@ Add the event handler to your `main.nf` file, inside your workflow definition:
             println "exit status : ${workflow.exitStatus}"
             println ""
         }
+
+        publish:
+        reports = GENERATE_REPORT.out
     }
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="66" hl_lines="4"
+    ```groovy title="main.nf" linenums="67" hl_lines="7"
         ch_fastp = FASTP(trim_branches.fastp)
         ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
         GENERATE_REPORT(ch_samples)
+
+        publish:
+        reports = GENERATE_REPORT.out
     }
     ```
 
@@ -2112,7 +2190,7 @@ Let's make it more useful by adding conditional logic:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="66" hl_lines="5-22"
+    ```groovy title="main.nf" linenums="67" hl_lines="5-22"
         ch_fastp = FASTP(trim_branches.fastp)
         ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
         GENERATE_REPORT(ch_samples)
@@ -2135,12 +2213,15 @@ Let's make it more useful by adding conditional logic:
                 println "Error: ${workflow.errorMessage}"
             }
         }
+
+        publish:
+        reports = GENERATE_REPORT.out
     }
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="66" hl_lines="5-16"
+    ```groovy title="main.nf" linenums="67" hl_lines="5-16"
         ch_fastp = FASTP(trim_branches.fastp)
         ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
         GENERATE_REPORT(ch_samples)
@@ -2156,6 +2237,9 @@ Let's make it more useful by adding conditional logic:
             println "exit status : ${workflow.exitStatus}"
             println ""
         }
+
+        publish:
+        reports = GENERATE_REPORT.out
     }
     ```
 
