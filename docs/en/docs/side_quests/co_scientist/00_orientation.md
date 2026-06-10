@@ -27,12 +27,14 @@ Which Seqera workspace am I connected to, and what compute environments are avai
 ```
 
 ??? example "What CoScientist typically does"
-It names the connected workspace and lists the available compute environment(s).
-The exact wording will differ from run to run.
+
+    It names the connected workspace and lists the available compute environment(s).
+    The exact wording will differ from run to run.
 
 !!! note "Checkpoint"
-CoScientist correctly names the **training workspace** and lists at least one compute environment.
-If it cannot, the workspace connection is not set up; revisit step 2.
+
+    CoScientist correctly names the **training workspace** and lists at least one compute environment.
+    If it cannot, the workspace connection is not set up; revisit step 2.
 
 ### Takeaway
 
