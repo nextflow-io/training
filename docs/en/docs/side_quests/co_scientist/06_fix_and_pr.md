@@ -36,6 +36,9 @@ CoScientist updates the memory directive for the `QUANT` process and commits the
 
     A new commit with the fix is on your fork.
 
+Read the diff before re-running and confirm CoScientist changed only the memory value.
+Verifying the change yourself, rather than trusting the summary, is the habit from [Working with the agent](03_working_with_the_agent.md).
+
 ## 2. Re-run to green.
 
 Ask CoScientist to submit a new run with the corrected configuration:
@@ -71,6 +74,9 @@ Open a pull request from my fork back to nextflow-io/rnaseq-nf describing the fi
     A pull request is open and visible on GitHub.
 
 <!-- TODO: screenshot: the open PR on GitHub -->
+
+Open the pull request and confirm two things yourself: the diff contains only the fix, and it targets the branch you intend.
+An agent can open a PR that reads correctly in its summary but targets the wrong base branch.
 
 ### Takeaway
 

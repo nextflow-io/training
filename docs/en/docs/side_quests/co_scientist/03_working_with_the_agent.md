@@ -25,7 +25,8 @@ An underspecified prompt forces the agent to guess, and the guess is often wrong
     Fix the pipeline.
     ```
 
-The better prompt works because it gives the agent the symptom, names the source of truth (the run log), and asks it to explain before acting — limiting scope and keeping you in the loop before any change is made.
+The better prompt works because it gives the agent the symptom, names the source of truth (the run log), and asks it to explain before acting.
+That limits scope and keeps you in the loop before any change is made.
 
 ## 2. Verify what the agent did.
 
@@ -65,7 +66,7 @@ You assumed the compute environment is AWS Batch. Confirm that before proceeding
 
 ## 4. Keep the agent grounded.
 
-Give it the real source of truth — the failing log, the actual error message, the exact file path — rather than letting it reason from your paraphrase.
+Give it the real source of truth (the failing log, the actual error message, the exact file path) rather than letting it reason from your paraphrase.
 An agent working from the actual run log is far more reliable than one working from your description of it.
 Because CoScientist can read logs and configs directly over MCP (as covered in the previous lesson), prefer pointing it at the real artifact over summarizing what you saw.
 

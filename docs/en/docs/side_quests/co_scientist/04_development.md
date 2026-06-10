@@ -52,6 +52,9 @@ In my fork, lower the memory available to the QUANT process to something very sm
 
     The change is committed to your fork and visible in the commit history.
 
+Apply the habit from [Working with the agent](03_working_with_the_agent.md): open the commit and read the actual change rather than trusting the agent's summary.
+Confirm it lowered the `QUANT` memory and left the rest of the configuration untouched.
+
 ## 4. Launch the pipeline.
 
 Ask CoScientist to submit a run for your fork using the training compute environment:
