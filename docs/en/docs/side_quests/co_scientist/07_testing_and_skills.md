@@ -71,14 +71,14 @@ Failures caused by unstable output (timestamps, paths) are resolved by narrowing
 
 ## 4. Why turn this into a skill.
 
-You just walked CoScientist through the same reasoning a careful tester applies every time: assert on stable output, exclude timestamps, version strings, and work-directory paths.
-A reusable **skill** captures that reasoning once and exposes it as a slash command, so you or a teammate get the same disciplined `nf-test` every time without re-explaining the rules.
+A reusable **skill** captures the testing rules once and exposes them as a slash command, so you or a teammate get the same disciplined `nf-test` every time without re-explaining them.
 CoScientist exposes reusable skills as slash commands.
 
 ## 5. Author the skill.
 
 A skill is a small file with a name, a description, and instructions the agent follows when the skill is invoked.
 The file below defines the `write-nf-test` skill; save it as `write-nf-test.md` in your skills directory.
+Copy the content between the fences into the file; do not include the fence delimiters themselves.
 
 ```markdown
 ---

@@ -37,7 +37,6 @@ CoScientist updates the memory directive for the `QUANT` process and commits the
     A new commit with the fix is on your fork.
 
 Read the diff before re-running and confirm CoScientist changed only the memory value.
-Verifying the change yourself, rather than trusting the summary, is the habit from [Working with the agent](03_working_with_the_agent.md).
 
 ## 2. Re-run to green.
 

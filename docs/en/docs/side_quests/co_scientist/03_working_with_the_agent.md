@@ -66,13 +66,16 @@ You assumed the compute environment is AWS Batch. Confirm that before proceeding
 
 ## 4. Keep the agent grounded.
 
+Section 1 covered what to ask; this covers what evidence to hand the agent.
 Give it the real source of truth (the failing log, the actual error message, the exact file path) rather than letting it reason from your paraphrase.
-An agent working from the actual run log is far more reliable than one working from your description of it.
-Because CoScientist can read logs and configs directly over MCP (as covered in the previous lesson), prefer pointing it at the real artifact over summarizing what you saw.
+An agent working from the actual artifact is far more reliable than one working from your description of it.
+Because CoScientist reaches Platform and repository assets over MCP, prefer pointing it at the real artifact over summarizing what you saw.
+
+<!-- TODO: verify CoScientist can read raw run logs over MCP, not just Platform metadata -->
 
 !!! note "Checkpoint"
 
-    You can describe the three habits you will use in the rest of this side quest: prompt for intent, verify the agent's actions against real state, and course-correct when it drifts.
+    You can describe the three habits from this lesson: prompt for intent, verify the agent's actions against real state, and course-correct when it drifts.
 
 ### Takeaway
 
