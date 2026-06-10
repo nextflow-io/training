@@ -52,4 +52,4 @@ Responses that modify state (launching a run, opening a PR, registering a pipeli
 
 ### What's next?
 
-In the next lesson, you will put MCP to work on real Platform assets in `02_explore_platform.md`.
+In the next lesson, [put MCP to work on real Platform assets](02_explore_platform.md).

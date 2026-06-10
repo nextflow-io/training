@@ -42,4 +42,4 @@ You have a working CoScientist chat session bound to the training workspace and 
 
 ### What's next?
 
-In the next lesson, you will meet the agent and learn how it reaches Platform assets.
+In the next lesson, [meet the agent and learn how it reaches Platform assets](01_meet_coscientist.md).
