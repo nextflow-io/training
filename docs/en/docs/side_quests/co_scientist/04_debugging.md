@@ -8,11 +8,11 @@ Use CoScientist to find out why.
 ## 1. Find the failed run.
 
 In the Platform **Runs** list, locate the run for your fork.
-It now shows a `FAILED` status.
+It now shows a `failed` status.
 
 !!! note "Checkpoint"
 
-    A run with status `FAILED` is visible in the Platform **Runs** list.
+    A run with status `failed` is visible in the Platform **Runs** list.
 
 <!-- TODO: screenshot: Runs list with a FAILED rnaseq-nf run -->
 
@@ -50,7 +50,7 @@ The failure you set up intentionally in the previous lesson, constraining the `Q
 
 ### Takeaway
 
-CoScientist reads a failed run's logs over MCP and diagnoses the cause, turning a red `FAILED` status into an actionable explanation without requiring manual navigation of the work directory.
+CoScientist reads a failed run's logs over MCP and diagnoses the cause, turning a red `failed` status into an actionable explanation without requiring manual navigation of the work directory.
 
 ### What's next?
 

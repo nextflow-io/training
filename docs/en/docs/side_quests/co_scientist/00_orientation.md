@@ -8,6 +8,8 @@ Before starting the exercises, open the CoScientist chat interface and confirm i
 
 Navigate to [https://ai.seqera.io/chat](https://ai.seqera.io/chat) and sign in with your Seqera credentials.
 
+<!-- TODO: verify the CoScientist chat URL is stable and publicly correct before publishing -->
+
 <!-- TODO: screenshot: the CoScientist chat landing view after login -->
 
 ## 2. Connect to the training workspace.

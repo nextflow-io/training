@@ -50,7 +50,15 @@ CoScientist reads the compute-environment configuration over MCP and returns the
 ## 4. Reach all workspace assets.
 
 The same MCP access that covers pipelines also covers datasets, reference genomes, and data links.
-Ask CoScientist to list the datasets in the workspace to confirm the breadth of its read access.
+Ask CoScientist to list the datasets to confirm the breadth of its read access:
+
+```text
+List the datasets available in this workspace.
+```
+
+!!! note "Checkpoint"
+
+    CoScientist returns the datasets registered in the workspace, or reports that none exist yet.
 
 ### Takeaway
 

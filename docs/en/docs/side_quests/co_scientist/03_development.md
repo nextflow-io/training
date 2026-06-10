@@ -67,6 +67,8 @@ The next lesson uses that failure as the starting point for debugging with CoSci
 
     A run for your fork appears in the Platform **Runs** list with status `submitted` or `running`.
 
+<!-- TODO: verify the exact casing the Platform uses for run statuses (submitted / running / succeeded / failed) and make all pages consistent with it -->
+
 ---
 
 > **Break point for live sessions:** this is a natural place to pause.
