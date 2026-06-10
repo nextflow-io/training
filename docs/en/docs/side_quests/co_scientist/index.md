@@ -35,7 +35,7 @@ By the end of this side quest, you will be able to:
 
 ## The example pipeline
 
-[`nextflow-io/rnaseq-nf`](https://github.com/nextflow-io/rnaseq-nf) is a minimal RNA-seq pipeline that runs INDEX and FASTQC in parallel, followed by QUANT (Salmon) and MULTIQC.
+[`nextflow-io/rnaseq-nf`](https://github.com/nextflow-io/rnaseq-nf) is a minimal RNA-seq pipeline that runs `INDEX` and `FASTQC` in parallel, followed by `QUANT` (Salmon) and `MULTIQC`.
 It ships test data in `data/ggal/` and has no nf-test suite yet. That makes it a good target for adding one.
 
 **Time estimate:** ~2 hours

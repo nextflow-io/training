@@ -54,7 +54,7 @@ Ask CoScientist to list the datasets in the workspace to confirm the breadth of 
 
 ### Takeaway
 
-CoScientist can read and modify Platform assets — Launchpad pipelines, compute environments, and datasets — directly through MCP tool calls.
+CoScientist can read and modify Platform assets (Launchpad pipelines, compute environments, and datasets) directly through MCP tool calls.
 
 ### What's next?
 

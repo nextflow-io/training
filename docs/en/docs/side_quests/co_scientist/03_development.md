@@ -73,7 +73,8 @@ The next lesson uses that failure as the starting point for debugging with CoSci
 
 ### Takeaway
 
-You forked rnaseq-nf, committed a change, and launched the pipeline entirely through CoScientist — the run is now executing on the Platform.
+You forked rnaseq-nf, committed a change, and launched the pipeline entirely through CoScientist.
+The run is now executing on the Platform.
 
 ### What's next?
 

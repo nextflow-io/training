@@ -74,7 +74,8 @@ Open a pull request from my fork back to nextflow-io/rnaseq-nf describing the fi
 
 ### Takeaway
 
-CoScientist diagnosed the failure, committed a fix, verified the pipeline completed successfully, and proposed the change as a pull request — the full loop from failure to contribution.
+CoScientist diagnosed the failure, committed a fix, verified the pipeline completed successfully, and proposed the change as a pull request.
+That is the full loop from failure to contribution.
 
 ### What's next?
 

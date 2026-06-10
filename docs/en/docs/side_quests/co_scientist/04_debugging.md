@@ -39,9 +39,10 @@ This run failed. What caused the failure, and which process and exit code are in
 
 ## 4. What just happened.
 
-CoScientist pulled the failing task's `.command.log` and exit code through MCP and reasoned over them — the same information you would read by hand from the work directory.
+CoScientist pulled the failing task's `.command.log` and exit code through MCP and reasoned over them.
+This is the same information you would read by hand from the work directory.
 This is the same workflow described in [Troubleshooting Workflows](../debugging/index.md), performed through a conversational interface instead of manual inspection.
-The failure you set up intentionally in the previous lesson — constraining the `QUANT` process to an unrealistically small memory allocation — produced exactly the kind of exit code and log output that CoScientist can interpret.
+The failure you set up intentionally in the previous lesson, constraining the `QUANT` process to an unrealistically small memory allocation, produced exactly the kind of exit code and log output that CoScientist can interpret.
 
 !!! note "Checkpoint"
 
