@@ -72,6 +72,17 @@ nav:
       - side_quests/nf_test/index.md
       - side_quests/debugging/index.md
       - side_quests/workflows_of_workflows/index.md
+      - Building with Seqera AI:
+          - side_quests/co_scientist/index.md
+          - side_quests/co_scientist/00_orientation.md
+          - side_quests/co_scientist/01_meet_coscientist.md
+          - side_quests/co_scientist/02_explore_platform.md
+          - side_quests/co_scientist/03_development.md
+          - side_quests/co_scientist/04_debugging.md
+          - side_quests/co_scientist/05_fix_and_pr.md
+          - side_quests/co_scientist/06_feature_nf_test.md
+          - side_quests/co_scientist/survey.md
+          - side_quests/co_scientist/next_steps.md
       - Plugin Development:
           - side_quests/plugin_development/index.md
           - side_quests/plugin_development/01_plugin_basics.md
