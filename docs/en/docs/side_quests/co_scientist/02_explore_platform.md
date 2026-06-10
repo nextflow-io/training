@@ -66,4 +66,4 @@ CoScientist can read and modify Platform assets (Launchpad pipelines, compute en
 
 ### What's next?
 
-In the next lesson, [start developing against rnaseq-nf](03_development.md).
+In the next lesson, [learn how to work effectively with the agent](03_working_with_the_agent.md) before you start changing code.

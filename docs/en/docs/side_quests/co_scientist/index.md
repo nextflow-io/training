@@ -8,7 +8,7 @@ hide:
 
 CoScientist is Seqera's AI assistant for bioinformatics, integrated directly into the Seqera Platform.
 This side quest drives it hands-on against the [`nextflow-io/rnaseq-nf`](https://github.com/nextflow-io/rnaseq-nf) demo pipeline.
-It takes you from a first conversation through development, debugging, opening a pull request, and writing a test.
+It takes you from a first conversation through development, debugging, opening a pull request, writing a test, and packaging your own reusable agent skill.
 
 ## Audience & prerequisites
 
@@ -28,16 +28,18 @@ By the end of this side quest, you will be able to:
 - Converse with CoScientist in the web chat UI to explore and plan pipeline work.
 - Understand how MCP connects CoScientist to the Seqera Platform and GitHub.
 - Register a pipeline on the Launchpad and inspect compute and data assets.
+- Work effectively with the agent: prompt for intent, verify what it does, and course-correct when it goes wrong.
 - Fork and run `rnaseq-nf` from the Launchpad.
 - Debug a failed run using CoScientist.
 - Open a pull request from a CoScientist conversation.
 - Write an nf-test and run it to green from the CLI.
+- Package the nf-test workflow into a reusable CoScientist skill and invoke it as a slash command.
 
 ## The example pipeline
 
 [`nextflow-io/rnaseq-nf`](https://github.com/nextflow-io/rnaseq-nf) is a minimal RNA-seq pipeline that runs `INDEX` and `FASTQC` in parallel, followed by `QUANT` (Salmon) and `MULTIQC`.
 It ships test data in `data/ggal/` and has no nf-test suite yet. That makes it a good target for adding one.
 
-**Time estimate:** ~2 hours
+**Time estimate:** ~3 hours
 
 [Get started :material-arrow-right:](00_orientation.md){ .md-button .md-button--primary }

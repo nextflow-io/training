@@ -80,4 +80,4 @@ The run is now executing on the Platform.
 
 ### What's next?
 
-In the next lesson, [debug the failed run](04_debugging.md).
+In the next lesson, [debug the failed run](05_debugging.md).

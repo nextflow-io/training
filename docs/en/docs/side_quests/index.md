@@ -48,7 +48,7 @@ If this is your first time exploring the Side Quests, start with the [Orientatio
 | [Troubleshooting Workflows](./debugging/index.md)                       | Identifying and fixing common workflow errors                            | 1 hour        |
 | [Workflows of Workflows](./workflows_of_workflows/index.md)             | Composing complex pipelines from reusable named workflow modules         | 30 mins       |
 | [Plugin Development](./plugin_development/index.md)                     | Using and building Nextflow plugins                                      | 3 hours       |
-| [Building with Seqera AI](./co_scientist/index.md)                      | Use Seqera AI (CoScientist) to develop, run, debug, and test pipelines   | 2 hours       |
+| [Building with Seqera AI](./co_scientist/index.md)                      | Use Seqera AI (CoScientist) to develop, run, debug, and test pipelines   | 3 hours       |
 
 [Get started :material-arrow-right:](orientation.md){ .md-button .md-button--primary }
 
