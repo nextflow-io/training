@@ -31,7 +31,6 @@ That limits scope and keeps you in the loop before any change is made.
 ## 2. Verify what the agent did.
 
 The agent reports success confidently even when it is wrong, so confirm the real-world state yourself rather than trusting the summary.
-An agent's natural tendency is to sound certain; your job is to check that certainty against actual artifacts.
 
 Things to verify after an action:
 
@@ -49,7 +48,6 @@ Things to verify after an action:
 ## 3. Course-correct when it drifts.
 
 When the agent proposes something wrong, over-broad, or based on a false assumption, redirect it immediately rather than accepting the change and cleaning up afterward.
-Corrections are cheap before a commit; they are expensive after one.
 Giving the agent explicit scope and an explicit pause point before it acts keeps you in control of something that moves quickly.
 
 ```text
