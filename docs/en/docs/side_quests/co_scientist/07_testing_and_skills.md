@@ -1,7 +1,7 @@
-# Adding a test
+# Testing, and building a reusable skill
 
-`rnaseq-nf` has no `nf-test` coverage.
-Ask CoScientist to add a test, make a deliberate choice about what is safe to snapshot, then switch to the `seqera ai` CLI to run the test to green.
+First, write an `nf-test` for `rnaseq-nf` and learn what is safe to snapshot.
+Then, package that testing workflow into a reusable skill you can invoke as a slash command any time.
 
 ---
 
@@ -69,9 +69,74 @@ Failures caused by unstable output (timestamps, paths) are resolved by narrowing
 
     `nf-test test` for the `QUANT` test reports a passing test.
 
+## 4. Why turn this into a skill.
+
+You just walked CoScientist through the same reasoning a careful tester applies every time: assert on stable output, exclude timestamps, version strings, and work-directory paths.
+A reusable **skill** captures that reasoning once and exposes it as a slash command, so you or a teammate get the same disciplined `nf-test` every time without re-explaining the rules.
+CoScientist exposes reusable skills as slash commands.
+
+## 5. Author the skill.
+
+A skill is a small file with a name, a description, and instructions the agent follows when the skill is invoked.
+The file below defines the `write-nf-test` skill; save it as `write-nf-test.md` in your skills directory.
+
+```markdown
+---
+name: write-nf-test
+description: Generate an nf-test for a Nextflow process that asserts on stable output and excludes unstable content.
+---
+
+<!-- NOTE: illustrative skill file; verify CoScientist's actual skill format/location before use -->
+
+# Write nf-test
+
+When this skill is invoked with a process name, generate an `nf-test` for that process following the rules below.
+
+## Steps
+
+1. Scaffold an `nf-test` for the named process in the `tests/` directory.
+   Use the `nextflow_process` block with `name`, `script`, and `process` fields.
+   Provide a representative `input` in the `when` block.
+
+2. Assert on deterministic output only:
+
+   - `Salmon` per-transcript count columns (stable given fixed inputs)
+   - `FASTQC` pass/fail status (stable for fixed data)
+   - File existence and line counts (structural, stable)
+
+3. Do NOT snapshot unstable content:
+
+   - `MultiQC` HTML reports (embed timestamps and software versions)
+   - `Salmon` `cmd_info.json` and log files (contain timestamps and absolute paths)
+   - Any path or value containing the work-directory hash (changes every run)
+   - Version strings (change with tool and container updates)
+
+4. Run `nf-test test` on the generated file.
+   If the test fails, read the failure message and narrow the assertion rather than updating the snapshot when the cause is unstable content.
+   Repeat until the test reports a pass.
+```
+
+<!-- TODO: verify the exact CoScientist skill file format, frontmatter fields, and on-disk/in-workspace location against the product; this example mirrors the Claude Code skill shape -->
+
+## 6. Install and invoke the skill.
+
+Place the skill file in the location CoScientist reads for registered skills, then restart or reload the agent session so it picks up the new command.
+
+<!-- TODO: verify how a skill is installed/registered and the exact slash-command invocation syntax -->
+
+Invoke the skill as a slash command:
+
+```text
+/write-nf-test for the FASTQC process
+```
+
+!!! note "Checkpoint"
+
+    Invoking the skill produces an nf-test that asserts on stable output and excludes unstable content, without you re-explaining the rules.
+
 ### Takeaway
 
-You used CoScientist to add `nf-test` coverage to a pipeline that had none, made a deliberate choice about what is safe to snapshot, and drove the test to green from the CLI.
+You added `nf-test` coverage to a pipeline that had none, made a deliberate choice about what is safe to snapshot, and captured that testing discipline as a reusable skill exposed as a slash command.
 
 ### What's next?
 
