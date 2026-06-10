@@ -1,7 +1,8 @@
 # Meet CoScientist
 
 This is your first real conversation with the agent.
-The one concept that explains everything else is how CoScientist reaches your tools. That mechanism is covered in section 2.
+CoScientist does not just answer questions; it takes real actions on your Platform and GitHub on your behalf.
+This lesson shows what it can do, and introduces the Seqera MCP Server that exposes the Platform to AI tools.
 
 ---
 
@@ -21,14 +22,16 @@ What can you help me with in this workspace? What can you see and what actions c
 ## 2. How CoScientist reaches your assets.
 
 CoScientist does not generate text and hand it back for you to act on.
-It calls real tools on your behalf.
-The mechanism that makes this possible is MCP.
+It takes real actions on your behalf, using your authenticated access to the workspace and your connected GitHub account.
+It can list compute environments, launch a run, read run logs, and open a pull request.
 
-!!! info
+!!! info "MCP and the Seqera Platform"
 
-    CoScientist talks to the Seqera Platform and GitHub through **MCP** (Model Context Protocol).
-    MCP is the standard interface that lets the agent call real tools: list compute environments, launch a run, read run logs, open a pull request, rather than only generating text.
-    When you ask it to register a pipeline on the Launchpad, it is calling a Platform tool over MCP on your behalf.
+    Seqera exposes Platform operations to AI assistants through the **Seqera MCP Server** (Model Context Protocol).
+    MCP is an open standard that lets an assistant call real tools rather than only describing them.
+    It is what lets assistants such as Claude Code reach your Platform, and you can connect it to your own tools as well.
+
+<!-- TODO: verify how CoScientist itself accesses the Platform internally. The Seqera MCP Server is documented as the interface for external AI assistants; the CoScientist docs do not state CoScientist uses it as its own transport. Confirm with engineering before asserting a mechanism. -->
 
 ## 3. Running on your own foundational model (enterprise).
 
@@ -43,13 +46,13 @@ On enterprise deployments, the foundational model can be swapped for one inside 
 
 !!! note "Checkpoint"
 
-    You can state, in one sentence, that CoScientist acts on the Platform through MCP tool calls rather than only producing text.
+    You can state, in one sentence, that CoScientist takes real actions on your Platform and GitHub assets rather than only producing text.
 
 ### Takeaway
 
-CoScientist is an agent that takes real actions on your Platform and GitHub assets via MCP.
-Responses that modify state (launching a run, opening a PR, registering a pipeline) are the result of tool calls, not generated text alone.
+CoScientist is an agent that takes real actions on your Platform and GitHub assets.
+Responses that modify state (launching a run, opening a PR, registering a pipeline) are the result of real tool calls, not generated text alone.
 
 ### What's next?
 
-In the next lesson, [put MCP to work on real Platform assets](02_explore_platform.md).
+In the next lesson, [put CoScientist to work on real Platform assets](02_explore_platform.md).

@@ -1,6 +1,6 @@
 # Exploring the Platform
 
-Use CoScientist to inspect and add Platform assets so you can see MCP doing real work against your workspace.
+Use CoScientist to inspect and add Platform assets so you can see it act on your workspace.
 
 ---
 
@@ -14,7 +14,7 @@ List the pipelines on the Launchpad and the datasets in this workspace.
 
 ??? example "What CoScientist typically does"
 
-    It returns the current Launchpad pipelines and datasets it can see over MCP.
+    It returns the current Launchpad pipelines and datasets it can see in the workspace.
     The exact wording and the number of items listed will differ depending on the workspace state.
 
 ## 2. Add rnaseq-nf to the Launchpad.
@@ -41,7 +41,7 @@ Ask CoScientist to read the configuration for the compute environment attached t
 Show me the details of the compute environment this pipeline will run on.
 ```
 
-CoScientist reads the compute-environment configuration over MCP and returns the key fields.
+CoScientist reads the compute-environment configuration and returns the key fields.
 
 !!! note "Checkpoint"
 
@@ -49,7 +49,7 @@ CoScientist reads the compute-environment configuration over MCP and returns the
 
 ## 4. Reach all workspace assets.
 
-The same MCP access that covers pipelines also covers datasets, reference genomes, and data links.
+The same access that covers pipelines also covers datasets, reference genomes, and data links.
 Ask CoScientist to list the datasets to confirm the breadth of its read access:
 
 ```text
@@ -62,7 +62,7 @@ List the datasets available in this workspace.
 
 ### Takeaway
 
-CoScientist can read and modify Platform assets (Launchpad pipelines, compute environments, and datasets) directly through MCP tool calls.
+CoScientist can read and modify Platform assets (Launchpad pipelines, compute environments, and datasets) directly on your behalf.
 
 ### What's next?
 

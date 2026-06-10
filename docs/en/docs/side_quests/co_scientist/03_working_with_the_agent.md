@@ -69,9 +69,9 @@ You assumed the compute environment is AWS Batch. Confirm that before proceeding
 Section 1 covered what to ask; this covers what evidence to hand the agent.
 Give it the real source of truth (the failing log, the actual error message, the exact file path) rather than letting it reason from your paraphrase.
 An agent working from the actual artifact is far more reliable than one working from your description of it.
-Because CoScientist reaches Platform and repository assets over MCP, prefer pointing it at the real artifact over summarizing what you saw.
+Because CoScientist can reach Platform and repository assets directly, prefer pointing it at the real artifact over summarizing what you saw.
 
-<!-- TODO: verify CoScientist can read raw run logs over MCP, not just Platform metadata -->
+<!-- TODO: verify CoScientist can read raw run logs directly, not just Platform metadata -->
 
 !!! note "Checkpoint"
 

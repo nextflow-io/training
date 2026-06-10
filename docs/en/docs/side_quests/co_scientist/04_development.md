@@ -25,7 +25,7 @@ Ask CoScientist to create a personal fork of the upstream pipeline:
 Fork nextflow-io/rnaseq-nf into my GitHub account.
 ```
 
-CoScientist calls the GitHub API over MCP and creates the fork in your account.
+CoScientist calls the GitHub API and creates the fork in your account.
 
 !!! note "Checkpoint"
 

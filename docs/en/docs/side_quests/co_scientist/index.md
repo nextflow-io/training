@@ -26,7 +26,7 @@ This side quest is designed for learners who have completed the [Hello Nextflow]
 By the end of this side quest, you will be able to:
 
 - Converse with CoScientist in the web chat UI to explore and plan pipeline work.
-- Understand how MCP connects CoScientist to the Seqera Platform and GitHub.
+- Understand how CoScientist takes real actions on the Seqera Platform and GitHub on your behalf.
 - Register a pipeline on the Launchpad and inspect compute and data assets.
 - Work effectively with the agent: prompt for intent, verify what it does, and course-correct when it goes wrong.
 - Fork and run `rnaseq-nf` from the Launchpad.

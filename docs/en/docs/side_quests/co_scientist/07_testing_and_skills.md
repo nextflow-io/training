@@ -69,10 +69,11 @@ Failures caused by unstable output (timestamps, paths) are resolved by narrowing
 
     `nf-test test` for the `QUANT` test reports a passing test.
 
-## 4. Why turn this into a skill.
+## 4. Enhance CoScientist with your own skills.
 
-A reusable **skill** captures the testing rules once and exposes them as a slash command, so you or a teammate get the same disciplined `nf-test` every time without re-explaining them.
-CoScientist exposes reusable skills as slash commands.
+CoScientist ships with built-in skills, and you can add your own to extend what it does.
+A reusable **skill** captures a workflow once and exposes it as a slash command, so you or a teammate get the same result every time without re-explaining the steps.
+Packaging the testing rules you just applied makes a good first skill: it produces a disciplined `nf-test` on demand.
 
 ## 5. Author the skill.
 

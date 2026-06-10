@@ -34,12 +34,12 @@ This run failed. What caused the failure, and which process and exit code are in
 
 ??? example "What CoScientist typically does"
 
-    It reads the run logs over MCP, identifies the `QUANT` process as the point of failure, reports the non-zero exit code, and explains that the process ran out of the memory it was allocated.
+    It reads the run logs, identifies the `QUANT` process as the point of failure, reports the non-zero exit code, and explains that the process ran out of the memory it was allocated.
     The exact wording will differ from run to run.
 
 ## 4. What just happened.
 
-CoScientist pulled the failing task's `.command.log` and exit code through MCP and reasoned over them.
+CoScientist read the failing task's `.command.log` and exit code and reasoned over them.
 This is the same information you would read by hand from the work directory.
 This is the same workflow described in [Troubleshooting Workflows](../debugging/index.md), performed through a conversational interface instead of manual inspection.
 The failure you set up intentionally in the previous lesson, constraining the `QUANT` process to an unrealistically small memory allocation, produced exactly the kind of exit code and log output that CoScientist can interpret.
@@ -50,7 +50,7 @@ The failure you set up intentionally in the previous lesson, constraining the `Q
 
 ### Takeaway
 
-CoScientist reads a failed run's logs over MCP and diagnoses the cause, turning a red `failed` status into an actionable explanation without requiring manual navigation of the work directory.
+CoScientist reads a failed run's logs and diagnoses the cause, turning a red `failed` status into an actionable explanation without requiring manual navigation of the work directory.
 
 ### What's next?
 
