@@ -28,7 +28,7 @@ By the end of this side quest, you will be able to:
 - Converse with CoScientist in the web chat UI to explore and plan pipeline work.
 - Understand how CoScientist takes real actions on the Seqera Platform and GitHub on your behalf.
 - Register a pipeline on the Launchpad and inspect compute and data assets.
-- Work effectively with the agent: prompt for intent, verify what it does, and course-correct when it goes wrong.
+- Work effectively with the agent: prompt for intent, verify what it did, and redirect it when it goes wrong.
 - Fork and run `rnaseq-nf` from the Launchpad.
 - Debug a failed run using CoScientist.
 - Open a pull request from a CoScientist conversation.
