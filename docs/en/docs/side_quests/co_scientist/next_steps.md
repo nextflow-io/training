@@ -19,6 +19,11 @@ This side quest followed one end-to-end flow, but CoScientist does considerably 
 
 See the [CoScientist documentation](https://docs.seqera.io/platform-cloud/co-scientist/) for the full feature set.
 
+!!! info "Cloud and Enterprise"
+
+    This training runs on Seqera Cloud, which uses Seqera's hosted model and meters usage through credits.
+    On Seqera Enterprise (currently AWS only), CoScientist can run Claude inference inside your own AWS account through Amazon Bedrock, so prompts and data stay within that account.
+
 ---
 
 ## 2. Keep building with CoScientist.

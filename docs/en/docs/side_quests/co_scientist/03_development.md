@@ -46,13 +46,13 @@ In my fork, add a config setting that gives the QUANT process only 10 MB of memo
     A resource constraint that is too low passes parsing but causes the process to fail mid-execution, producing a run record you can open, inspect, and debug.
     That failed run record is what the next lesson works with.
 
-<!-- TODO: verify the 10 MB QUANT limit reliably fails on the training compute environment (expected: salmon quant killed for exceeding memory, exit code 137). CoScientist should add `process { withName: QUANT { memory = '10.MB' } }` to nextflow.config; confirm the exact committed config and that the run reaches a failed status. -->
+<!-- TODO: verify the 10 MB QUANT limit reliably fails on the training compute environment (expected: salmon quant killed for exceeding memory, exit code 137). CoScientist should add `process { withName: QUANT { memory = 10.MB } }` to nextflow.config; confirm the exact committed config and that the run reaches a failed status. -->
 
 !!! note "Checkpoint"
 
     The change is committed to your fork and visible in the commit history.
 
-Apply the habit from [Working with the agent](03_working_with_the_agent.md): open the commit and read the actual change rather than trusting the agent's summary.
+Apply the habit from [Working with the agent](02_working_with_the_agent.md): open the commit and read the actual change rather than trusting the agent's summary.
 Confirm it lowered the `QUANT` memory and left the rest of the configuration untouched.
 
 ## 4. Launch the pipeline.
@@ -83,4 +83,4 @@ The run is now executing on the Platform.
 
 ### What's next?
 
-In the next lesson, [debug the failed run](05_debugging.md).
+In the next lesson, [debug the failed run](04_debugging.md).

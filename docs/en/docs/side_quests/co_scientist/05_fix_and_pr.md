@@ -30,7 +30,7 @@ CoScientist updates the memory directive for the `QUANT` process and commits the
     }
     ```
 
-<!-- TODO: confirm the exact config directive matches the break recorded in 04_development.md -->
+<!-- TODO: confirm the exact config directive matches the break recorded in 03_development.md -->
 
 !!! note "Checkpoint"
 
@@ -84,4 +84,4 @@ That is the full loop from failure to contribution.
 
 ### What's next?
 
-[Add a test, and build a reusable skill](07_testing_and_skills.md).
+[Add a test, and build a reusable skill](06_testing_and_skills.md).

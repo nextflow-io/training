@@ -14,7 +14,7 @@ It now shows a `failed` status.
 
     A run with status `failed` is visible in the Platform **Runs** list.
 
-<!-- TODO: screenshot: Runs list with a FAILED rnaseq-nf run -->
+<!-- TODO: screenshot: Runs list with a failed rnaseq-nf run -->
 
 ## 2. Link from the Platform back to CoScientist.
 
@@ -54,4 +54,4 @@ CoScientist reads a failed run's logs and diagnoses the cause, turning a red `fa
 
 ### What's next?
 
-[Apply the fix and open a pull request](06_fix_and_pr.md).
+[Apply the fix and open a pull request](05_fix_and_pr.md).

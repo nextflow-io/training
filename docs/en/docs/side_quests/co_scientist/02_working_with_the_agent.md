@@ -82,4 +82,4 @@ You stay responsible for correctness, and the agent accelerates the work.
 
 ### What's next?
 
-[Start developing against rnaseq-nf](04_development.md).
+[Start developing against rnaseq-nf](03_development.md).

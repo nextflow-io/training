@@ -42,4 +42,4 @@ It ships test data in `data/ggal/` and has no nf-test suite yet. That makes it a
 
 **Time estimate:** ~3 hours
 
-[Get started :material-arrow-right:](00_orientation.md){ .md-button .md-button--primary }
+[Get started :material-arrow-right:](01_meet_coscientist.md){ .md-button .md-button--primary }
