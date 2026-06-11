@@ -8,16 +8,16 @@ Congratulations on completing the **Building with Seqera AI** training course.
 
 This side quest followed one end-to-end flow, but CoScientist does considerably more.
 
-- **Build, plan, and goal modes**: different interaction modes for quick edits, planning a change before acting, or pursuing a higher-level goal end to end.
-- **Session resumption**: continue a previous conversation from the CLI with `seqera ai -c`, so long-running work survives across sessions.
-- **Code intelligence (LSP)**: real-time error detection on Nextflow code as it is written, catching problems before a run starts.
-- **Script conversion**: convert existing WDL and R scripts toward Nextflow.
-- **Wave container building**: build containers on the fly from `conda` or `pip` packages for pipeline processes.
-- **nf-core module discovery**: search and reuse from the 1,000+ standardized nf-core modules.
+- **Build, plan, and goal modes**: make changes directly, plan read-only before acting, or let goal mode keep working until an objective is met.
+- **Built-in slash commands**: ready-made workflows in the CLI such as `/debug-last-run-on-seqera`, `/nextflow-config`, and `/nextflow-schema`.
+- **Session resumption**: continue your most recent session from the CLI with `seqera ai -c`.
+- **Command approval**: choose how much the agent runs automatically (`basic`, `default`, or `full`) so you stay in control of what executes.
+- **Code intelligence**: language-server support for Nextflow, Python, and R that flags errors as code is written.
+- **Script conversion**: convert R and Python scripts and Jupyter notebooks toward Nextflow.
+- **Wave containers**: build containers from `conda` or `pip` packages without writing a Dockerfile.
+- **nf-core modules**: discover and reuse from over 1,000 standardized nf-core modules.
 
 See the [CoScientist documentation](https://docs.seqera.io/platform-cloud/co-scientist/) for the full feature set.
-
-<!-- TODO: verify each listed capability exists and is named correctly against current product docs; trim or adjust any that do not -->
 
 ---
 

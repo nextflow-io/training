@@ -34,7 +34,7 @@ This run failed. What caused the failure, and which process and exit code are in
 
 ??? example "What CoScientist typically does"
 
-    It reads the run logs, identifies the `QUANT` process as the point of failure, reports the non-zero exit code, and explains that the process ran out of the memory it was allocated.
+    It reads the run logs, identifies the `QUANT` process as the point of failure, reports that the task was killed for exceeding its memory limit (exit code 137), and points to the `withName: QUANT` memory setting as the cause.
     The exact wording will differ from run to run.
 
 ## 4. What just happened.

@@ -26,7 +26,7 @@ CoScientist updates the memory directive for the `QUANT` process and commits the
 
     ```groovy title="nextflow.config" hl_lines="2"
     process {
-        withName: QUANT { memory = 1.MB }
+        withName: QUANT { memory = 10.MB }
     }
     ```
 

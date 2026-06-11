@@ -22,27 +22,25 @@ What can you help me with in this workspace? What can you see and what actions c
 ## 2. How CoScientist reaches your assets.
 
 CoScientist does not generate text and hand it back for you to act on.
-It takes real actions on your behalf, using your authenticated access to the workspace and your connected GitHub account.
+It takes real actions on your behalf, using your authenticated Platform access and your connected GitHub account.
 It can list compute environments, launch a run, read run logs, and open a pull request.
 
 !!! info "MCP and the Seqera Platform"
 
-    Seqera exposes Platform operations to AI assistants through the **Seqera MCP Server** (Model Context Protocol).
-    MCP is an open standard that lets an assistant call real tools rather than only describing them.
-    It is what lets assistants such as Claude Code reach your Platform, and you can connect it to your own tools as well.
-
-<!-- TODO: verify how CoScientist itself accesses the Platform internally. The Seqera MCP Server is documented as the interface for external AI assistants; the CoScientist docs do not state CoScientist uses it as its own transport. Confirm with engineering before asserting a mechanism. -->
+    CoScientist reaches the Platform through the **Seqera MCP server** (Model Context Protocol).
+    MCP is the interface that exposes Platform operations as tools the agent can call: list compute environments, launch a run, read run logs, query datasets.
+    The agent calls these tools with your own Platform token, so it acts with your permissions rather than a shared account.
+    The same MCP server is available to other assistants, and in the CLI you can reach it directly through the `/seqera-mcp` skill.
 
 ## 3. Running on your own foundational model (enterprise).
 
-On enterprise deployments, the foundational model can be swapped for one inside the customer's own cloud account.
+On Seqera Enterprise deployments, the model that powers CoScientist can run inside the customer's own cloud account.
 
 !!! info
 
-    On Seqera Enterprise (AWS only), CoScientist can run against a customer's own foundational model via Amazon Bedrock, so prompts and data stay within the customer's AWS account.
-    The training environment uses the default hosted model.
-
-<!-- TODO: verify the Bedrock / AWS-only enterprise foundational-model detail against current Seqera product docs before publishing -->
+    Seqera Enterprise CoScientist is currently available on AWS only.
+    It can run Claude inference inside the customer's own AWS account through Amazon Bedrock, so prompts and data stay within that account.
+    Seqera Cloud, including this training environment, uses Seqera's hosted model and meters usage through credits.
 
 !!! note "Checkpoint"
 

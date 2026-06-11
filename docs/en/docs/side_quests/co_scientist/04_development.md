@@ -7,11 +7,11 @@ The failure you create here is what you will diagnose in the next lesson.
 
 ## 1. Connect GitHub access.
 
-CoScientist can act on GitHub repositories on your behalf once you have authorized the GitHub App integration.
-Follow the authorization flow in the CoScientist interface to grant it access to your GitHub account.
+CoScientist can work with GitHub repositories on your behalf once it has access to your GitHub account.
+In the web interface, connect your GitHub account so the agent can fork the pipeline, commit changes, and open pull requests.
 
 <!-- TODO: screenshot: GitHub connection / authorization flow -->
-<!-- TODO: verify the exact GitHub connection UI flow and labels -->
+<!-- TODO: verify the exact GitHub connection flow for the web interface. The Cloud docs do not document a GitHub connection mechanism; confirm whether it is a GitHub App, a token, or the agent running git/gh in the workspace. -->
 
 !!! note "Checkpoint"
 
@@ -36,7 +36,7 @@ CoScientist calls the GitHub API and creates the fork in your account.
 Ask CoScientist to introduce a small configuration change that will cause the pipeline to fail at runtime:
 
 ```text
-In my fork, lower the memory available to the QUANT process to something very small (for example 1 MB) so we can see how the pipeline behaves under tight resources, and commit it.
+In my fork, add a config setting that gives the QUANT process only 10 MB of memory, so it fails at runtime under tight resources, and commit the change.
 ```
 
 !!! warning
@@ -46,7 +46,7 @@ In my fork, lower the memory available to the QUANT process to something very sm
     A resource constraint that is too low passes parsing but causes the process to fail mid-execution, producing a run record you can open, inspect, and debug.
     That failed run record is what the next lesson works with.
 
-<!-- TODO: verify the exact break reproduces a FAILED run on the training compute environment, and record the precise resulting config (e.g. a withName: QUANT { memory = ... } directive) here -->
+<!-- TODO: verify the 10 MB QUANT limit reliably fails on the training compute environment (expected: salmon quant killed for exceeding memory, exit code 137). CoScientist should add `process { withName: QUANT { memory = '10.MB' } }` to nextflow.config; confirm the exact committed config and that the run reaches a failed status. -->
 
 !!! note "Checkpoint"
 
@@ -60,7 +60,7 @@ Confirm it lowered the `QUANT` memory and left the rest of the configuration unt
 Ask CoScientist to submit a run for your fork using the training compute environment:
 
 ```text
-Launch my fork of rnaseq-nf on the Launchpad using the test profile and the available compute environment.
+Launch my fork of rnaseq-nf on the Launchpad using the available compute environment.
 ```
 
 The run is expected to fail.

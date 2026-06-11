@@ -1,0 +1,53 @@
+// Illustrative nf-test for the rnaseq-nf QUANT process.
+//
+// This is a reference example for the side quest, not a validated test.
+// QUANT takes a reads tuple AND a Salmon index, so the index is built first
+// in a setup block. Run `nf-test test` against your fork and adjust the
+// output accessors and snapshot to match what nf-test actually produces
+// before relying on it.
+
+nextflow_process {
+
+    name "Test process QUANT"
+    script "modules/quant/main.nf"
+    process "QUANT"
+
+    setup {
+        run("INDEX") {
+            script "modules/index/main.nf"
+            process {
+                """
+                input[0] = file("\${projectDir}/data/ggal/ggal_1_48850000_49020000.Ggal71.500bpflank.fa")
+                """
+            }
+        }
+    }
+
+    test("Quantify ggal_gut against the Salmon index") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    'ggal_gut',
+                    file("\${projectDir}/data/ggal/ggal_gut_1.fq"),
+                    file("\${projectDir}/data/ggal/ggal_gut_2.fq")
+                ]
+                input[1] = INDEX.out
+                """
+            }
+        }
+
+        then {
+            // Stable: the process completes and produces quant.sf.
+            assert process.success
+
+            // Stable: snapshot the per-transcript count table only.
+            // Do NOT snapshot cmd_info.json, meta_info.json, logs/, or the
+            // MultiQC report; those embed timestamps, versions, and paths.
+            assert snapshot(
+                process.out.get(0).get(1).find { it.endsWith("quant.sf") }
+            ).match()
+        }
+    }
+}

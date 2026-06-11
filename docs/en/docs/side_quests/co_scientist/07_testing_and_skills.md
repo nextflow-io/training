@@ -21,49 +21,64 @@ rnaseq-nf has no nf-test coverage. Add an nf-test for the QUANT process.
     It scaffolds a `tests/` directory and a `.nf.test` file for the `QUANT` process, with a first assertion on the process output.
     The exact wording will differ from run to run.
 
+For a reference of what the generated test looks like, see [`solutions/quant.nf.test`](solutions/quant.nf.test).
+Because `QUANT` needs a Salmon index, the test builds one in a `setup` block before running the process.
+
 ## 2. Snapshot-stable versus unstable output.
 
 Not all output is safe to snapshot.
 Snapshotting unstable output causes tests to fail on every run for reasons unrelated to correctness.
 Use the table below to decide what to assert on.
 
-| Output                                      | Snapshot? | Why                                     |
-| ------------------------------------------- | --------- | --------------------------------------- |
-| `Salmon` per-transcript count columns       | Yes       | Deterministic given fixed inputs        |
-| `FASTQC` pass/fail status                   | Yes       | Stable for fixed data                   |
-| File existence and line counts              | Yes       | Structural, stable                      |
-| `MultiQC` HTML report                       | No        | Embeds timestamps and software versions |
-| `Salmon` `cmd_info.json` and log files      | No        | Contain timestamps and absolute paths   |
-| Any path containing the work-directory hash | No        | Changes every run                       |
-| Version strings                             | No        | Change with tool and container updates  |
+| Output                                                | Snapshot? | Why                                                     |
+| ----------------------------------------------------- | --------- | ------------------------------------------------------- |
+| `quant_<id>/quant.sf` (Salmon per-transcript counts)  | Yes       | Deterministic counts for fixed inputs and version       |
+| Output file and directory existence                   | Yes       | Structural, stable                                      |
+| `quant_<id>/cmd_info.json`, `aux_info/meta_info.json` | No        | Embed the command line, Salmon version, and metadata    |
+| `quant_<id>/logs/salmon_quant.log`                    | No        | Contains timestamps and runtimes                        |
+| `multiqc_report.html`                                 | No        | Embeds a timestamp, tool versions, and an absolute path |
+| FastQC `*_fastqc.zip` / `*_fastqc.html`               | No        | Zips embed timestamps and the FastQC version            |
+| Any path containing the work-directory hash           | No        | Changes every run                                       |
+
+!!! tip
+
+    Salmon can introduce tiny nondeterminism across threads.
+    Run it single-threaded (`--threads 1`) when you want a byte-stable `quant.sf` to snapshot.
 
 Send CoScientist the following prompt to steer the assertion:
 
 ```text
-Assert on the Salmon quantification columns and that the expected output files exist. Do not snapshot the MultiQC HTML or anything containing timestamps, versions, or work directory paths.
+Assert on the columns in quant.sf and that the expected output files exist. Do not snapshot the MultiQC HTML, the Salmon logs, cmd_info.json, or anything containing timestamps, versions, or work directory paths.
 ```
 
 ## 3. Switch to the CLI and run the test to green.
 
-The same agent is available from the command line via `seqera ai`, which is useful for running and iterating on tests locally.
-Install and authenticate:
+This is the point where you leave the web chat and move to the `seqera ai` command-line agent.
+The CLI runs in your own terminal and can execute `nf-test` directly against your files.
+
+Install the CLI (it needs Node.js 18 or later) and sign in:
 
 ```bash
 npm install -g seqera
 seqera login
 ```
 
-<!-- TODO: verify the exact seqera ai CLI install, login, and invocation commands against the current product -->
+`seqera login` opens a browser to authenticate against your Seqera account.
+Then start an interactive session from your pipeline directory:
 
-Send the agent the following prompt from the CLI to drive the test to green:
-
-```text
-Run the nf-test for QUANT and fix it until it passes.
+```bash
+seqera ai
 ```
 
-The agent runs `nf-test`, reads any failures, adjusts the assertions or snapshot, and re-runs.
-It repeats this loop until the test reports a pass.
-Failures caused by unstable output (timestamps, paths) are resolved by narrowing the assertion rather than updating the snapshot.
+To run the test repeatedly until it passes, use **goal mode**.
+Goal mode keeps working toward an objective across several attempts and stops once the goal is met:
+
+```text
+/goal run the nf-test for the QUANT process and fix it until it passes
+```
+
+The agent runs `nf-test`, reads any failure, narrows the assertion or updates the snapshot, and re-runs, repeating until the test passes.
+By default the CLI asks for your approval before it runs a command, so you see each `nf-test` invocation before it executes.
 
 !!! note "Checkpoint"
 
@@ -77,9 +92,11 @@ Packaging the testing rules you just applied makes a good first skill: it produc
 
 ## 5. Author the skill.
 
-A skill is a small file with a name, a description, and instructions the agent follows when the skill is invoked.
-The file below defines the `write-nf-test` skill; save it as `write-nf-test.md` in your skills directory.
-Copy the content between the fences into the file; do not include the fence delimiters themselves.
+A CoScientist skill is a directory containing a `SKILL.md` file.
+The file has YAML frontmatter with a `name` and a `description`, followed by a markdown body of instructions the agent reads when the skill runs.
+CoScientist discovers skills from your project and user skill directories and surfaces each one as a slash command.
+
+Create the skill in your project at `.agents/skills/write-nf-test/SKILL.md` with this content:
 
 ```markdown
 ---
@@ -87,49 +104,46 @@ name: write-nf-test
 description: Generate an nf-test for a Nextflow process that asserts on stable output and excludes unstable content.
 ---
 
-<!-- NOTE: illustrative skill file; verify CoScientist's actual skill format/location before use -->
-
 # Write nf-test
 
 When this skill is invoked with a process name, generate an `nf-test` for that process following the rules below.
 
 ## Steps
 
-1. Scaffold an `nf-test` for the named process in the `tests/` directory.
-   Use the `nextflow_process` block with `name`, `script`, and `process` fields.
-   Provide a representative `input` in the `when` block.
+1. Scaffold an `nf-test` for the named process under `tests/`.
+   Use a `nextflow_process` block with the process `name`, `script`, and `process` fields, and provide a representative `input` in the `when` block.
 
 2. Assert on deterministic output only:
 
-   - `Salmon` per-transcript count columns (stable given fixed inputs)
-   - `FASTQC` pass/fail status (stable for fixed data)
-   - File existence and line counts (structural, stable)
+   - The per-transcript count columns in `quant.sf`
+   - The existence of the expected output files and directories
 
 3. Do NOT snapshot unstable content:
 
-   - `MultiQC` HTML reports (embed timestamps and software versions)
-   - `Salmon` `cmd_info.json` and log files (contain timestamps and absolute paths)
-   - Any path or value containing the work-directory hash (changes every run)
-   - Version strings (change with tool and container updates)
+   - MultiQC HTML reports (embedded timestamps and versions)
+   - Salmon `cmd_info.json`, `meta_info.json`, and log files (timestamps, command line, version)
+   - Any path or value containing the work-directory hash
+   - Version strings
 
 4. Run `nf-test test` on the generated file.
-   If the test fails, read the failure message and narrow the assertion rather than updating the snapshot when the cause is unstable content.
-   Repeat until the test reports a pass.
+   When it fails, narrow the assertion rather than snapshotting unstable content, and re-run until it passes.
 ```
 
-<!-- TODO: verify the exact CoScientist skill file format, frontmatter fields, and on-disk/in-workspace location against the product; this example mirrors the Claude Code skill shape -->
+Keep skills small: CoScientist caps each discovered skill's context at 5 KB.
+The `.agents/skills/` location follows the cross-agent Agent Skills convention, so the same skill works in other compatible agents.
 
 ## 6. Install and invoke the skill.
 
-Place the skill file in the location CoScientist reads for registered skills, then restart or reload the agent session so it picks up the new command.
+CoScientist reads the `.agents/skills/` directory in your project automatically.
+Restart `seqera ai` so it discovers the new skill, then type `/` and confirm `write-nf-test` appears in the command palette.
 
-<!-- TODO: verify how a skill is installed/registered and the exact slash-command invocation syntax -->
-
-Invoke the skill as a slash command:
+Invoke it as a slash command, naming a different process:
 
 ```text
 /write-nf-test for the FASTQC process
 ```
+
+To make the skill available across all your projects rather than one, place the same directory under `~/.agents/skills/` instead.
 
 !!! note "Checkpoint"
 
