@@ -1,21 +1,35 @@
 # Working with the agent
 
 CoScientist takes real actions on your workspace, so how you prompt and check it matters.
-The next lessons let it change real code, where a careless prompt can do work you then have to undo.
-This lesson covers the habits that keep you in control.
+In this lesson you launch a run that fails on a simple mistake, then drive the agent to fix it from the user side, without editing any pipeline code.
+Along the way you practise the habits that keep you in control: prompt for intent, verify what the agent did, and redirect it when it goes wrong.
 
 ---
 
-## 1. Prompt for intent.
+## 1. Launch a run that will fail.
 
-Describe the goal and any constraints, then let the agent work out the steps.
-An underspecified prompt forces it to guess, and the guess is often wrong.
+To have something to fix, launch `rnaseq-nf` with a transcriptome path that does not exist:
+
+```text
+Launch rnaseq-nf on the Launchpad, but set the transcriptome parameter to /tmp/missing.fa so we have a failed run to work with.
+```
+
+The run fails almost immediately at the indexing step, because the input file is not there.
+
+!!! note "Checkpoint"
+
+    A run for rnaseq-nf appears in the Runs list and fails quickly with a file-not-found error.
+
+<!-- TODO: verify a non-existent transcriptome fails fast at the INDEX step on the training compute environment, and that CoScientist will launch with an overridden parameter from the web chat -->
+
+## 2. Prompt for intent.
+
+Ask the agent to work the problem, giving it the symptom and a clear goal rather than a vague instruction.
 
 === "Better"
 
     ```text
-    The QUANT process fails with a non-zero exit.
-    Read the run log, tell me the cause, and propose a fix before changing anything.
+    This rnaseq-nf run failed. Read the run log, tell me the cause, and propose how to fix the launch settings before changing anything.
     ```
 
 === "Vague"
@@ -24,60 +38,54 @@ An underspecified prompt forces it to guess, and the guess is often wrong.
     Fix the pipeline.
     ```
 
-The better prompt gives the agent the symptom, points it at the run log, and asks it to explain before acting.
-That keeps the change small and lets you see the reasoning before anything happens.
+The better prompt points the agent at the run log, asks it to explain before acting, and limits it to the launch settings.
+The vague one invites it to guess, and the guess is often wrong.
 
-## 2. Verify what the agent did.
+??? example "What CoScientist typically does"
 
-The agent often reports success even when it is wrong, so check the real state yourself instead of trusting its summary.
+    It reads the run log, reports that the transcriptome file could not be found, and proposes correcting the parameter to the default path.
+    The exact wording will differ from run to run.
 
-Things to check after an action:
+## 3. Verify what the agent says.
 
-- The diff: read the actual change, not the agent's description of it.
-- The Platform state: confirm a run reached the expected status, or a pipeline appears on the Launchpad.
-- The artifact: confirm the pull request exists, targets the right branch, and contains what you expect.
-
-<!-- TODO: verify how CoScientist surfaces diffs/changes in the UI -->
+Do not take the agent's diagnosis, or its "Done", at face value.
+Check its explanation against the actual run error, and confirm the cause is the parameter you set, not a problem in the pipeline.
 
 !!! warning
 
     Treat the agent's "Done" as a claim to check, not a fact.
-    The Checkpoints in this side quest exist for this reason: each one is a real Platform or GitHub state you confirm yourself, whatever the agent says it did.
-
-## 3. Redirect the agent when it goes wrong.
-
-When the agent proposes something wrong, too broad, or based on a false assumption, correct it straight away instead of accepting the change and cleaning up later.
-Telling it exactly what to touch, and asking it to pause before it commits, keeps you in control of an agent that acts quickly.
-
-```text
-That changes more than I asked for. Only modify the QUANT process and leave the rest untouched.
-```
-
-```text
-Before you commit, show me the diff and wait for my confirmation.
-```
-
-```text
-You assumed the compute environment is AWS Batch. Confirm that before proceeding.
-```
-
-## 4. Give the agent the real source of truth.
-
-Hand the agent the failing log, the actual error message, or the exact file path rather than your paraphrase of them.
-It reasons far better from the real artifact than from a description of it.
-Because CoScientist can reach your Platform and repository assets directly, point it at the artifact instead of summarizing what you saw.
-
-<!-- TODO: verify CoScientist can read raw run logs directly, not just Platform metadata -->
+    The Checkpoints in this side quest exist for this reason: each one is a real Platform state you confirm yourself, whatever the agent says it did.
 
 !!! note "Checkpoint"
 
-    You can describe how to stay in control of the agent: ask for the outcome you want, give it the real inputs, and check what it actually did before moving on.
+    From the run's own error, you have confirmed the failure is the missing transcriptome file you set at launch.
+
+## 4. Redirect the agent when it goes too far.
+
+The fix here is a launch parameter, not a code change.
+If the agent offers to edit the pipeline, steer it back to the smallest fix:
+
+```text
+Don't change the pipeline code. Just set the transcriptome back to the default and relaunch.
+```
+
+!!! note "Checkpoint"
+
+    The agent corrects only the launch parameter and leaves the pipeline code untouched.
+
+## 5. Re-launch and confirm the fix.
+
+With the parameter corrected, the run gets past the step that failed.
+
+!!! note "Checkpoint"
+
+    The new run launches and proceeds past the indexing step instead of failing immediately.
 
 ### Takeaway
 
-You ask for an outcome, the agent acts, and you check the result.
-You stay responsible for whether the work is correct; the agent makes it faster.
+You fixed a failed run entirely from the user side, without touching pipeline code, by prompting for intent, verifying the agent's diagnosis against the real error, and redirecting it to the smallest fix.
+You stay responsible for whether the change is right; the agent does the work faster.
 
 ### What's next?
 
-[Start developing against rnaseq-nf](03_development.md).
+In the next lesson, [start developing against rnaseq-nf](03_development.md), where you change the pipeline itself.
