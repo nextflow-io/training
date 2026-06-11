@@ -8,13 +8,14 @@ Along the way you practise the habits that keep you in control: prompt for inten
 
 ## 1. Launch a run that will fail.
 
-To have something to fix, launch `rnaseq-nf` with a transcriptome path that does not exist:
+`rnaseq-nf` ships its own test transcriptome and uses it by default.
+To create a failure to work with, launch the pipeline but override that default with a path that does not exist:
 
 ```text
 Launch rnaseq-nf on the Launchpad, but set the transcriptome parameter to /tmp/missing.fa so we have a failed run to work with.
 ```
 
-The run fails almost immediately at the indexing step, because the input file is not there.
+The run fails almost immediately at the indexing step, because the file you pointed it at is not there.
 
 !!! note "Checkpoint"
 
@@ -63,10 +64,11 @@ Check its explanation against the actual run error, and confirm the cause is the
 ## 4. Redirect the agent when it goes too far.
 
 The fix here is a launch parameter, not a code change.
+The default transcriptome ships with the pipeline, so fixing the run means dropping your override, not finding new data.
 If the agent offers to edit the pipeline, steer it back to the smallest fix:
 
 ```text
-Don't change the pipeline code. Just set the transcriptome back to the default and relaunch.
+Don't change the pipeline code. Just remove the transcriptome override so the pipeline uses its default, and relaunch.
 ```
 
 !!! note "Checkpoint"
