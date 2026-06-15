@@ -1,7 +1,8 @@
 # Testing, and building a reusable skill
 
-First, write an `nf-test` for `rnaseq-nf` and learn what is safe to snapshot.
-Then, package that testing workflow into a reusable skill you can invoke as a slash command any time.
+This lesson moves you from the web chat to the `seqera ai` command-line agent.
+You start in the web chat to write an `nf-test` for `rnaseq-nf` and learn what is safe to snapshot.
+Then you switch to the CLI to run that test until it passes, and finally package the testing workflow into a reusable skill you can invoke as a slash command any time.
 
 ---
 
@@ -51,10 +52,17 @@ Send CoScientist the following prompt to steer the assertion:
 Assert on the columns in quant.sf and that the expected output files exist. Do not snapshot the MultiQC HTML, the Salmon logs, cmd_info.json, or anything containing timestamps, versions, or work directory paths.
 ```
 
-## 3. Switch to the CLI and run the test to green.
+## 3. Move to the Seqera AI CLI.
 
-This is the point where you leave the web chat and move to the `seqera ai` command-line agent.
-The CLI runs in your own terminal and can execute `nf-test` directly against your files.
+This is the milestone where you leave the web chat and move to the `seqera ai` command-line agent.
+Sections 1 and 2 happened in the browser; everything from here runs in your own terminal.
+
+You are about to run and iterate on a test, which is exactly what the CLI is built for:
+
+- Compute: the CLI uses your machine, which has more resources than the in-browser environment.
+- Docker: it is available locally, so containerized processes and `nf-test` runs work.
+- Local access: the agent works against your own files, repos, editor, and personal credentials and config.
+- Iteration: you edit, run, and see results in the same terminal, without round-tripping through the web chat.
 
 Install the CLI (it needs Node.js 18 or later) and sign in:
 
