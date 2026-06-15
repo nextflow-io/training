@@ -54,12 +54,7 @@ What can you help me with in this workspace? What can you see and what actions c
 CoScientist does not generate text and hand it back for you to act on.
 It takes real actions on your behalf, using your authenticated Platform access.
 It can list compute environments, launch a run, read run logs, and (once you connect GitHub in a later lesson) open a pull request.
-
-!!! info "MCP and the Seqera Platform"
-
-    CoScientist reaches the Platform through the **Seqera MCP server** (Model Context Protocol).
-    MCP is the interface that exposes Platform operations as tools the agent can call: list compute environments, launch a run, read run logs, query datasets.
-    The agent calls these tools with your own Platform token, so it acts with your permissions rather than a shared account.
+It acts with your own permissions, so it can only do what your account is allowed to do.
 
 ## 5. Survey the workspace.
 
@@ -112,7 +107,7 @@ CoScientist reads the compute-environment configuration and returns the key fiel
 
 ### Takeaway
 
-You connected CoScientist to your training workspace, had a first conversation, saw how it reaches the Platform through MCP, and used it to register and inspect a pipeline.
+You connected CoScientist to your training workspace, had a first conversation, and used it to register and inspect a pipeline.
 It acts on real Platform assets on your behalf, with your own permissions.
 
 ### What's next?

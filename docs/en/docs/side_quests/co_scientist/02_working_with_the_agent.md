@@ -1,8 +1,8 @@
 # Working with the agent
 
-CoScientist takes real actions on your workspace, so how you prompt and check it matters.
+CoScientist can carry out tasks for you, but you stay responsible for the result.
 In this lesson you launch a run that fails on a simple mistake, then drive the agent to fix it from the user side, without editing any pipeline code.
-Along the way you practise the habits that keep you in control: prompt for intent, verify what the agent did, and redirect it when it goes wrong.
+You practise three habits: prompt for intent, verify what the agent did, and redirect it when it goes wrong.
 
 ---
 
@@ -23,7 +23,20 @@ The run fails almost immediately at the indexing step, because the file you poin
 
 <!-- TODO: verify a non-existent transcriptome fails fast at the INDEX step on the training compute environment, and that CoScientist will launch with an overridden parameter from the web chat -->
 
-## 2. Prompt for intent.
+## 2. Open the failed run from the Platform.
+
+CoScientist works in both directions.
+You launched this run from the chat; you can also reach the agent from a run in the Platform.
+Open the **Runs** list, select the failed run, and choose **Explain with AI**.
+This starts a CoScientist conversation loaded with that run's context, so you do not have to describe the failure yourself.
+
+<!-- TODO: screenshot: the Explain with AI button on a failed run -->
+
+!!! note "Checkpoint"
+
+    Selecting **Explain with AI** opens a CoScientist conversation about the failed run.
+
+## 3. Prompt for intent.
 
 Ask the agent to work the problem, giving it the symptom and a clear goal rather than a vague instruction.
 
@@ -47,7 +60,7 @@ The vague one invites it to guess, and the guess is often wrong.
     It reads the run log, reports that the transcriptome file could not be found, and proposes correcting the parameter to the default path.
     The exact wording will differ from run to run.
 
-## 3. Verify what the agent says.
+## 4. Verify what the agent says.
 
 Do not take the agent's diagnosis, or its "Done", at face value.
 Check its explanation against the actual run error, and confirm the cause is the parameter you set, not a problem in the pipeline.
@@ -61,7 +74,7 @@ Check its explanation against the actual run error, and confirm the cause is the
 
     From the run's own error, you have confirmed the failure is the missing transcriptome file you set at launch.
 
-## 4. Redirect the agent when it goes too far.
+## 5. Redirect the agent when it goes too far.
 
 The fix here is a launch parameter, not a code change.
 The default transcriptome ships with the pipeline, so fixing the run means dropping your override, not finding new data.
@@ -75,7 +88,7 @@ Don't change the pipeline code. Just remove the transcriptome override so the pi
 
     The agent corrects only the launch parameter and leaves the pipeline code untouched.
 
-## 5. Re-launch and confirm the fix.
+## 6. Re-launch and confirm the fix.
 
 With the parameter corrected, the run gets past the step that failed.
 
@@ -90,4 +103,4 @@ You stay responsible for whether the change is right; the agent does the work fa
 
 ### What's next?
 
-In the next lesson, [start developing against rnaseq-nf](03_development.md), where you change the pipeline itself.
+In the next lesson, [move to the CLI and start developing](03_develop_on_the_cli.md), where you change the pipeline itself.

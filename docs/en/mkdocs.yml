@@ -76,10 +76,9 @@ nav:
           - side_quests/co_scientist/index.md
           - side_quests/co_scientist/01_meet_coscientist.md
           - side_quests/co_scientist/02_working_with_the_agent.md
-          - side_quests/co_scientist/03_development.md
-          - side_quests/co_scientist/04_debugging.md
-          - side_quests/co_scientist/05_fix_and_pr.md
-          - side_quests/co_scientist/06_testing_and_skills.md
+          - side_quests/co_scientist/03_develop_on_the_cli.md
+          - side_quests/co_scientist/04_test_ci_and_contribute.md
+          - side_quests/co_scientist/05_build_a_skill.md
           - side_quests/co_scientist/survey.md
           - side_quests/co_scientist/next_steps.md
       - Plugin Development:

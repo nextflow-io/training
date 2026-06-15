@@ -29,10 +29,10 @@ By the end of this side quest, you will be able to:
 - Understand how CoScientist takes real actions on the Seqera Platform and GitHub on your behalf.
 - Register a pipeline on the Launchpad and inspect compute and data assets.
 - Work effectively with the agent: prompt for intent, verify what it did, and redirect it when it goes wrong.
-- Fork and run `rnaseq-nf` from the Launchpad.
-- Debug a failed run using CoScientist.
-- Open a pull request from a CoScientist conversation.
-- Write an nf-test and run it to green from the CLI.
+- Fix a failed run from the user side, through launch parameters, without changing code.
+- Move to the `seqera ai` CLI, fork `rnaseq-nf`, and add a process by reusing an nf-core module.
+- Write an nf-test and run it to green with the CLI.
+- Add a GitHub Actions workflow that runs the tests, and open a pull request.
 - Package the nf-test workflow into a reusable CoScientist skill and invoke it as a slash command.
 
 ## The example pipeline
