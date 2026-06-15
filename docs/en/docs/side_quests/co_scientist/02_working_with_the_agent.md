@@ -21,7 +21,7 @@ The run fails almost immediately at the indexing step, because the file you poin
 
     A run for rnaseq-nf appears in the Runs list and fails quickly with a file-not-found error.
 
-<!-- TODO: verify a non-existent transcriptome fails fast at the INDEX step on the training compute environment, and that CoScientist will launch with an overridden parameter from the web chat -->
+<!-- TODO: verify CoScientist will launch with an overridden parameter (the bad transcriptome path) from the web chat. The non-existent transcriptome failing fast at INDEX is confirmed. -->
 
 ## 2. Open the failed run from the Platform.
 
@@ -30,7 +30,7 @@ You launched this run from the chat; you can also reach the agent from a run in 
 Open the **Runs** list, select the failed run, and choose **Explain with AI**.
 This starts a CoScientist conversation loaded with that run's context, so you do not have to describe the failure yourself.
 
-<!-- TODO: screenshot: the Explain with AI button on a failed run -->
+![The Explain with AI button on a failed run](img/explain-with-ai.png)
 
 !!! note "Checkpoint"
 

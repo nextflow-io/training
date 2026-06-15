@@ -10,13 +10,9 @@ In this lesson you open the chat, connect it to your training workspace, and hav
 
 Navigate to [https://ai.seqera.io/chat](https://ai.seqera.io/chat) and sign in with your Seqera credentials.
 
-<!-- TODO: verify the CoScientist chat URL is stable and publicly correct before publishing -->
-<!-- TODO: screenshot: the CoScientist chat landing view after login -->
+![The CoScientist chat after signing in](img/chat-landing.png)
 
-Use the workspace selector to choose the provided training workspace.
-
-<!-- TODO: verify exact label of the workspace selector control in the UI -->
-<!-- TODO: screenshot: workspace selector showing the training workspace -->
+Use the **Workspace** selector in the top navigation to choose the provided training workspace.
 
 ## 2. Confirm the connection.
 

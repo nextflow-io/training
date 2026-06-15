@@ -8,7 +8,7 @@ You connect your GitHub account, fork `rnaseq-nf`, and have CoScientist add a ne
 
 ## 1. Connect your GitHub account.
 
-So that CoScientist can fork the repository and open pull requests for you, give it access to your GitHub account by adding a key.
+Give CoScientist access to your GitHub account by adding a key, so it can commit changes and open pull requests on your behalf.
 
 <!-- TODO: verify the exact GitHub connection mechanism in the web interface (key/token vs app) and its labels -->
 <!-- TODO: screenshot: adding the GitHub key in CoScientist -->
@@ -19,15 +19,12 @@ So that CoScientist can fork the repository and open pull requests for you, give
 
 ## 2. Fork rnaseq-nf.
 
-Ask CoScientist to fork the pipeline into your own GitHub account:
-
-```text
-Fork nextflow-io/rnaseq-nf into my GitHub account.
-```
+Fork the pipeline into your own GitHub account so you have a copy to change.
+On GitHub, open [nextflow-io/rnaseq-nf](https://github.com/nextflow-io/rnaseq-nf) and select **Fork**.
 
 !!! note "Checkpoint"
 
-    The repository `your-user/rnaseq-nf` exists on GitHub.
+    The repository `your-user/rnaseq-nf` exists on your GitHub account.
 
 ## 3. Add a trimming step and open a pull request.
 
