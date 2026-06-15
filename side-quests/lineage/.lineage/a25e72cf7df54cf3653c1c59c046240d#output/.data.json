@@ -1,1 +1,0 @@
-{"version":"lineage/v1beta1","kind":"TaskOutput","spec":{"taskRun":"lid://a25e72cf7df54cf3653c1c59c046240d","workflowRun":"lid://139010997f21dc20a882653da07a7855","createdAt":"2026-06-15T11:09:38.252770+02:00","output":[{"type":"path","name":null,"value":"lid://a25e72cf7df54cf3653c1c59c046240d/Hola-output.txt"}],"labels":null}}

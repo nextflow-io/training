@@ -1,1 +1,0 @@
-{"version":"lineage/v1beta1","kind":"TaskOutput","spec":{"taskRun":"lid://d10752af16523c3c4fad3c9a0bc0c0c0","workflowRun":"lid://139010997f21dc20a882653da07a7855","createdAt":"2026-06-15T11:09:38.429872+02:00","output":[{"type":"path","name":null,"value":"lid://d10752af16523c3c4fad3c9a0bc0c0c0/UPPER-Bonjour-output.txt"}],"labels":null}}

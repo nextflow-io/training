@@ -1,1 +1,0 @@
-{"version":"lineage/v1beta1","kind":"TaskOutput","spec":{"taskRun":"lid://6764128034f4b7965feb45e09aaa3355","workflowRun":"lid://139010997f21dc20a882653da07a7855","createdAt":"2026-06-15T11:09:38.253303+02:00","output":[{"type":"path","name":null,"value":"lid://6764128034f4b7965feb45e09aaa3355/Bonjour-output.txt"}],"labels":null}}
