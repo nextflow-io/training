@@ -1,0 +1,1 @@
+{"version":"lineage/v1beta1","kind":"TaskOutput","spec":{"taskRun":"lid://d17e0349d0ea719adddcd306c58b547f","workflowRun":"lid://139010997f21dc20a882653da07a7855","createdAt":"2026-06-15T11:09:38.252732+02:00","output":[{"type":"path","name":null,"value":"lid://d17e0349d0ea719adddcd306c58b547f/Ciao-output.txt"}],"labels":null}}

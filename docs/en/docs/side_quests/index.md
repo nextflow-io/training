@@ -45,6 +45,7 @@ If this is your first time exploring the Side Quests, start with the [Orientatio
 | [Splitting and Grouping](./splitting_and_grouping/index.md)             | Techniques for splitting and regrouping data channels                    | 45 mins       |
 | [Testing with nf-test](./nf_test/index.md)                              | Writing and running tests for Nextflow workflows                         | 1 hour        |
 | [Troubleshooting Workflows](./debugging/index.md)                       | Identifying and fixing common workflow errors                            | 1 hour        |
+| [Data Lineage](./lineage/index.md)                                      | Track and query workflow provenance with the lineage feature             | 45 mins       |
 | [Workflows of Workflows](./workflows_of_workflows/index.md)             | Composing complex pipelines from reusable named workflow modules         | 30 mins       |
 | [Plugin Development](./plugin_development/index.md)                     | Using and building Nextflow plugins                                      | 3 hours       |
 

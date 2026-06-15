@@ -1,0 +1,1 @@
+{"version":"lineage/v1beta1","kind":"TaskOutput","spec":{"taskRun":"lid://e31bed72992e12649eb9ac6b9d7da55c","workflowRun":"lid://139010997f21dc20a882653da07a7855","createdAt":"2026-06-15T11:09:38.430736+02:00","output":[{"type":"path","name":null,"value":"lid://e31bed72992e12649eb9ac6b9d7da55c/UPPER-Hello-output.txt"}],"labels":null}}

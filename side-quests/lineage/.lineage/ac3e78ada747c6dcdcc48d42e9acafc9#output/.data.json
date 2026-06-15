@@ -1,0 +1,1 @@
+{"version":"lineage/v1beta1","kind":"TaskOutput","spec":{"taskRun":"lid://ac3e78ada747c6dcdcc48d42e9acafc9","workflowRun":"lid://139010997f21dc20a882653da07a7855","createdAt":"2026-06-15T11:09:38.429584+02:00","output":[{"type":"path","name":null,"value":"lid://ac3e78ada747c6dcdcc48d42e9acafc9/UPPER-Hola-output.txt"}],"labels":null}}

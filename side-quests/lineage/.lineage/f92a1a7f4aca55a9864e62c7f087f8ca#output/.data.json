@@ -1,0 +1,1 @@
+{"version":"lineage/v1beta1","kind":"TaskOutput","spec":{"taskRun":"lid://f92a1a7f4aca55a9864e62c7f087f8ca","workflowRun":"lid://139010997f21dc20a882653da07a7855","createdAt":"2026-06-15T11:09:38.252671+02:00","output":[{"type":"path","name":null,"value":"lid://f92a1a7f4aca55a9864e62c7f087f8ca/Hello-output.txt"}],"labels":null}}

@@ -1,0 +1,1 @@
+{"version":"lineage/v1beta1","kind":"TaskOutput","spec":{"taskRun":"lid://5f4fa3256b218126530cd02dc45dfd46","workflowRun":"lid://139010997f21dc20a882653da07a7855","createdAt":"2026-06-15T11:09:38.432342+02:00","output":[{"type":"path","name":null,"value":"lid://5f4fa3256b218126530cd02dc45dfd46/UPPER-Ciao-output.txt"}],"labels":null}}
