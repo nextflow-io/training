@@ -2,6 +2,8 @@
 
 Congratulations on completing the **Building with Seqera AI** training course.
 
+As you put CoScientist to work on your own pipelines, keep doing what you practised here: let the agent move fast, and stay the reviewer who checks its output before relying on it.
+
 ---
 
 ## 1. What else CoScientist can do.

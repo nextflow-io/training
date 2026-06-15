@@ -7,8 +7,8 @@ hide:
 # Building with Seqera AI
 
 CoScientist is Seqera's AI assistant for bioinformatics, integrated directly into the Seqera Platform.
-This side quest drives it hands-on against the [`nextflow-io/rnaseq-nf`](https://github.com/nextflow-io/rnaseq-nf) demo pipeline.
-It takes you from a first conversation through development, debugging, opening a pull request, writing a test, and packaging your own reusable agent skill.
+It can take on the repetitive parts of pipeline work, from finding modules and wiring processes to launching runs, debugging failures, and writing tests, so you spend less time on plumbing and more on the science.
+This side quest drives it hands-on against the [`nextflow-io/rnaseq-nf`](https://github.com/nextflow-io/rnaseq-nf) demo pipeline, taking you from a first conversation through development, debugging, a pull request, a test, and your own reusable agent skill.
 
 ## Audience & prerequisites
 
@@ -30,9 +30,9 @@ By the end of this side quest, you will be able to:
 - Register a pipeline on the Launchpad and inspect compute and data assets.
 - Work effectively with the agent: prompt for intent, verify what it did, and redirect it when it goes wrong.
 - Fix a failed run from the user side, through launch parameters, without changing code.
-- Move to the `seqera ai` CLI, fork `rnaseq-nf`, and add a process by reusing an nf-core module.
-- Write an nf-test and run it to green with the CLI.
-- Add a GitHub Actions workflow that runs the tests, and open a pull request.
+- Fork `rnaseq-nf`, add a process by reusing an nf-core module, and open a pull request, all from the web chat.
+- Move to the `seqera ai` CLI to write an nf-test and run it to green.
+- Add a GitHub Actions workflow that runs the tests on every change.
 - Package the nf-test workflow into a reusable CoScientist skill and invoke it as a slash command.
 
 ## The example pipeline

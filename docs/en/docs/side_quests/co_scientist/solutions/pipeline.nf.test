@@ -1,0 +1,27 @@
+// Illustrative pipeline-level nf-test for rnaseq-nf.
+//
+// This is a reference example for the side quest, not a validated test.
+// It runs the whole pipeline on the bundled ggal_gut test data and checks the
+// published outputs. Run `nf-test test` against your fork and adjust the output
+// paths and snapshot to match what nf-test actually produces before relying on it.
+
+nextflow_pipeline {
+
+    name "Test rnaseq-nf end to end"
+    script "main.nf"
+
+    test("Default ggal_gut run") {
+
+        then {
+            // The whole pipeline completes.
+            assert workflow.success
+
+            // Stable: snapshot the Salmon quantification table.
+            // Do NOT snapshot multiqc_report.html, the FastQC zips, or the Salmon
+            // logs and cmd_info.json; those embed timestamps, versions, and paths.
+            assert snapshot(
+                path("${launchDir}/results/quant/ggal_gut/quant.sf")
+            ).match()
+        }
+    }
+}

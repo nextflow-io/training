@@ -1,8 +1,8 @@
 # Working with the agent
 
-CoScientist can carry out tasks for you, but you stay responsible for the result.
+CoScientist takes real actions on your workspace, so how you prompt and check it matters.
 In this lesson you launch a run that fails on a simple mistake, then drive the agent to fix it from the user side, without editing any pipeline code.
-You practise three habits: prompt for intent, verify what the agent did, and redirect it when it goes wrong.
+Along the way you practise the habits that keep you in control: prompt for intent, verify what the agent did, and redirect it when it goes wrong.
 
 ---
 
@@ -99,8 +99,7 @@ With the parameter corrected, the run gets past the step that failed.
 ### Takeaway
 
 You fixed a failed run entirely from the user side, without touching pipeline code, by prompting for intent, verifying the agent's diagnosis against the real error, and redirecting it to the smallest fix.
-You stay responsible for whether the change is right; the agent does the work faster.
 
 ### What's next?
 
-In the next lesson, [move to the CLI and start developing](03_develop_on_the_cli.md), where you change the pipeline itself.
+In the next lesson, [start developing with CoScientist](03_develop_with_coscientist.md), where you change the pipeline itself.

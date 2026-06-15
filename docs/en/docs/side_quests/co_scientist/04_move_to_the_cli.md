@@ -1,31 +1,63 @@
-# Test, add CI, and open a PR
+# Move to the CLI
 
-`rnaseq-nf` has no tests.
-In this lesson you add `nf-test` coverage with the agent, decide what is safe to snapshot, wire the tests into CI, and open a pull request.
-You are already in an interactive `seqera ai` session in your forked pipeline directory from the previous lesson.
+You developed the change and opened the pull request in the web chat.
+You can keep working there, but running and iterating on tests is faster in your own terminal, so now you move to the `seqera ai` command-line agent.
 
 ---
 
-## 1. Ask for an nf-test.
+## 1. Why move to the CLI.
 
-`rnaseq-nf` currently has no `nf-test` coverage.
-If you are new to `nf-test`, see [Testing with nf-test](../nf_test/index.md) for background on snapshot assertions and process-level tests.
+Developing and testing a pipeline is better suited to your own terminal than the browser:
 
+- Compute: the CLI uses your machine, which has more resources than the in-browser environment.
+- Docker: it is available locally, so containerized processes and test runs work.
+- Local access: the agent works against your own files, repos, editor, and personal credentials and config.
+- Iteration: you edit, run, and see results in one terminal, without round-tripping through the web chat.
+
+## 2. Install the CLI and get your fork.
+
+Install the CLI (it needs Node.js 18 or later) and sign in:
+
+```bash
+npm install -g seqera
+seqera login
+```
+
+`seqera login` opens a browser to authenticate against your Seqera account.
+Start an interactive session, then bring the branch with your `fastp` change down to work on:
+
+```bash
+seqera ai
+```
+
+```text
+Clone my fork of rnaseq-nf locally, on the branch with the fastp pull request, so I can run and test it here.
+```
+
+!!! note "Checkpoint"
+
+    A local clone of your fork is on your machine, on the branch with the `fastp` change, and `seqera ai` is running in it.
+
+## 3. Ask for an nf-test.
+
+`rnaseq-nf` has no `nf-test` coverage.
+If you are new to `nf-test`, see [Testing with nf-test](../nf_test/index.md) for background on snapshot assertions.
+
+The simplest place to start is a pipeline-level test that runs the whole pipeline on its test data and checks the outputs.
 Send CoScientist the following prompt:
 
 ```text
-rnaseq-nf has no nf-test coverage. Add an nf-test for the QUANT process.
+rnaseq-nf has no nf-test coverage. Add a pipeline-level nf-test that runs the whole pipeline on its test data and checks the outputs.
 ```
 
 ??? example "What CoScientist typically does"
 
-    It scaffolds a `tests/` directory and a `.nf.test` file for the `QUANT` process, with a first assertion on the process output.
+    It scaffolds a `tests/` directory and a pipeline-level `.nf.test` that runs the pipeline end to end and asserts on the published outputs.
     The exact wording will differ from run to run.
 
-For a reference of what the generated test looks like, see [`solutions/quant.nf.test`](solutions/quant.nf.test).
-Because `QUANT` needs a Salmon index, the test builds one in a `setup` block before running the process.
+For a reference of what the generated test looks like, see [`solutions/pipeline.nf.test`](solutions/pipeline.nf.test).
 
-## 2. Snapshot-stable versus unstable output.
+## 4. Snapshot-stable versus unstable output.
 
 Not all output is safe to snapshot.
 Snapshotting unstable output causes tests to fail on every run for reasons unrelated to correctness.
@@ -52,12 +84,12 @@ Send CoScientist the following prompt to steer the assertion:
 Assert on the columns in quant.sf and that the expected output files exist. Do not snapshot the MultiQC HTML, the Salmon logs, cmd_info.json, or anything containing timestamps, versions, or work directory paths.
 ```
 
-## 3. Run the test to green.
+## 5. Run the test to green.
 
 To run the test repeatedly until it passes, use **goal mode**:
 
 ```text
-/goal run the nf-test for the QUANT process and fix it until it passes
+/goal run the pipeline nf-test and fix it until it passes
 ```
 
 Goal mode keeps working toward an objective across several attempts and stops once the goal is met.
@@ -66,9 +98,9 @@ By default the CLI asks for your approval before it runs a command, so you see e
 
 !!! note "Checkpoint"
 
-    `nf-test test` for the `QUANT` test reports a passing test.
+    `nf-test test` reports a passing test for the pipeline.
 
-## 4. Add a test workflow to CI.
+## 6. Add a test workflow to CI.
 
 Ask the agent to wire the test suite into continuous integration:
 
@@ -84,32 +116,27 @@ A CI workflow runs the tests automatically on every change, so a regression is c
 
 <!-- TODO: verify the exact generated GHA workflow (nf-test install action, Nextflow setup) against a real run -->
 
-## 5. Open a pull request.
+## 7. Add the tests and CI to your pull request.
 
-Ask the agent to propose the work upstream:
+The pull request you opened earlier contains the `fastp` step.
+Ask the agent to commit the tests and the workflow to the same branch so the pull request picks them up:
 
 ```text
-Open a pull request from my fork back to nextflow-io/rnaseq-nf describing the fastp step, the tests, and the CI workflow.
+Commit the nf-test and the CI workflow to the branch of my open pull request and push.
 ```
-
-!!! note
-
-    In a real contribution the pull request targets the upstream repository.
-    In a training setting, if upstream PRs are restricted, it is fine to open the PR against your own fork's default branch.
-    The trainer can adjust the target as appropriate for the environment.
 
 !!! note "Checkpoint"
 
-    A pull request is open and visible on GitHub.
+    The open pull request now also contains the tests and the CI workflow.
 
-Open the pull request and confirm the diff contains the fastp step, the tests, and the workflow, and that it targets the branch you intend.
+Open the pull request and confirm the diff contains the `fastp` step, the tests, and the workflow, and that it targets the branch you intend.
 
 <!-- TODO: screenshot: the open PR on GitHub -->
 
 ### Takeaway
 
-You added test coverage to a pipeline that had none, made a deliberate choice about what is safe to snapshot, and put the tests in CI.
-You then proposed it all as a pull request.
+You moved to the CLI, added test coverage the pipeline lacked, chose what was safe to snapshot, and wired the tests into CI.
+All of it joined the pull request you opened from the web chat.
 
 ### What's next?
 

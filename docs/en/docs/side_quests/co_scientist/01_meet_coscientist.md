@@ -1,8 +1,8 @@
 # Meet CoScientist
 
-CoScientist is Seqera's AI assistant for bioinformatics.
-Open the chat interface, connect it to your training workspace, and have a first conversation to see what it can do.
-Then use it to inspect and add Platform assets, so you see how it reaches your Platform and acts on it.
+Working on the Seqera Platform means moving between the Launchpad, compute environments, datasets, and runs.
+CoScientist can drive all of that from a conversation, once it is connected to your workspace.
+In this lesson you open the chat, connect it to your training workspace, and have it inspect and register real Platform assets, so the rest of the course has a working agent to build on.
 
 ---
 
@@ -49,14 +49,7 @@ What can you help me with in this workspace? What can you see and what actions c
     It describes that it can help develop pipelines, launch and monitor runs, browse data, and act on GitHub.
     The exact wording will differ from run to run.
 
-## 4. How CoScientist reaches your assets.
-
-CoScientist does not generate text and hand it back for you to act on.
-It takes real actions on your behalf, using your authenticated Platform access.
-It can list compute environments, launch a run, read run logs, and (once you connect GitHub in a later lesson) open a pull request.
-It acts with your own permissions, so it can only do what your account is allowed to do.
-
-## 5. Survey the workspace.
+## 4. Survey the workspace.
 
 Ask CoScientist for a snapshot of what is already in the workspace:
 
@@ -75,7 +68,7 @@ The same access also covers reference genomes and data links.
 
     CoScientist lists the workspace's pipelines and datasets, or reports that none exist yet.
 
-## 6. Add rnaseq-nf to the Launchpad.
+## 5. Add rnaseq-nf to the Launchpad.
 
 Ask CoScientist to register a pipeline on your behalf:
 
@@ -90,6 +83,23 @@ CoScientist will confirm the action or ask which compute environment to use if m
     In the Seqera Platform web app, open **Launchpad**: an entry for `rnaseq-nf` is now present.
 
 <!-- TODO: screenshot: Launchpad showing the new rnaseq-nf pipeline -->
+
+## 6. Understand what rnaseq-nf does.
+
+`rnaseq-nf` is a small RNA-seq quantification pipeline, a good size to develop and test against.
+It builds a Salmon index from a transcriptome (`INDEX`), runs quality control on the reads (`FASTQC`), quantifies transcript expression with Salmon (`QUANT`), and aggregates the results into a single report (`MULTIQC`).
+It ships a small chicken (`ggal`) test dataset, so a full run finishes in minutes.
+
+```mermaid
+graph LR
+    T[Transcriptome] --> INDEX[INDEX<br/>salmon index]
+    R[Reads] --> FASTQC[FASTQC<br/>quality control]
+    R --> QUANT[QUANT<br/>salmon quant]
+    INDEX --> QUANT
+    FASTQC --> MULTIQC[MULTIQC<br/>report]
+    QUANT --> MULTIQC
+    MULTIQC --> OUT[multiqc_report.html]
+```
 
 ## 7. Inspect the compute environment.
 

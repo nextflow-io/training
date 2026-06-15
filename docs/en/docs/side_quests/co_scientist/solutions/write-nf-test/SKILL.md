@@ -1,26 +1,27 @@
 ---
 name: write-nf-test
-description: Generate an nf-test for a Nextflow process that asserts on stable output and excludes unstable content.
+description: Generate an nf-test that asserts on stable output and excludes unstable content.
 ---
 
 # Write nf-test
 
-When this skill is invoked with a process name, generate an `nf-test` for that process following the rules below.
+When this skill is invoked for a process or a pipeline, generate the matching nf-test following the rules below.
 
 ## Steps
 
-1. Scaffold an `nf-test` for the named process under `tests/`.
-   Use a `nextflow_process` block with the process `name`, `script`, and `process` fields, and provide a representative `input` in the `when` block.
+1. Scaffold the test under `tests/`.
+   For a process use a `nextflow_process` block; for a pipeline use a `nextflow_pipeline` block.
+   Provide representative inputs or test data so the test runs end to end.
 
 2. Assert on deterministic output only:
 
-   - The per-transcript count columns in `quant.sf`
+   - Numeric or tabular result files, such as a Salmon `quant.sf` table
    - The existence of the expected output files and directories
 
 3. Do NOT snapshot unstable content:
 
-   - MultiQC HTML reports (embedded timestamps and versions)
-   - Salmon `cmd_info.json`, `meta_info.json`, and log files (timestamps, command line, version)
+   - Reports that embed timestamps or versions, such as MultiQC HTML
+   - Log files, and files that record the command line or tool version (for example Salmon `cmd_info.json` and `meta_info.json`)
    - Any path or value containing the work-directory hash
    - Version strings
 

@@ -1,7 +1,7 @@
 # Build a reusable skill
 
-You just walked the agent through writing a disciplined `nf-test`, steering it toward stable output and away from unstable content.
-Capture that workflow as a reusable skill so you get the same result every time without re-explaining the rules.
+In the last lesson you hand-wrote a pipeline-level `nf-test` and learned which output is safe to snapshot.
+Capture that discipline as a reusable skill, so you and your teammates get a disciplined `nf-test` for any process or pipeline without re-explaining the rules.
 
 ---
 
@@ -22,27 +22,28 @@ Create the skill in your project at `.agents/skills/write-nf-test/SKILL.md` with
 ```markdown
 ---
 name: write-nf-test
-description: Generate an nf-test for a Nextflow process that asserts on stable output and excludes unstable content.
+description: Generate an nf-test that asserts on stable output and excludes unstable content.
 ---
 
 # Write nf-test
 
-When this skill is invoked with a process name, generate an `nf-test` for that process following the rules below.
+When this skill is invoked for a process or a pipeline, generate the matching nf-test following the rules below.
 
 ## Steps
 
-1. Scaffold an `nf-test` for the named process under `tests/`.
-   Use a `nextflow_process` block with the process `name`, `script`, and `process` fields, and provide a representative `input` in the `when` block.
+1. Scaffold the test under `tests/`.
+   For a process use a `nextflow_process` block; for a pipeline use a `nextflow_pipeline` block.
+   Provide representative inputs or test data so the test runs end to end.
 
 2. Assert on deterministic output only:
 
-   - The per-transcript count columns in `quant.sf`
+   - Numeric or tabular result files, such as a Salmon `quant.sf` table
    - The existence of the expected output files and directories
 
 3. Do NOT snapshot unstable content:
 
-   - MultiQC HTML reports (embedded timestamps and versions)
-   - Salmon `cmd_info.json`, `meta_info.json`, and log files (timestamps, command line, version)
+   - Reports that embed timestamps or versions, such as MultiQC HTML
+   - Log files, and files that record the command line or tool version (for example Salmon `cmd_info.json` and `meta_info.json`)
    - Any path or value containing the work-directory hash
    - Version strings
 
@@ -58,13 +59,14 @@ The `.agents/skills/` location follows the cross-agent Agent Skills convention, 
 CoScientist reads the `.agents/skills/` directory in your project automatically.
 Restart `seqera ai` so it discovers the new skill, then type `/` and confirm `write-nf-test` appears in the command palette.
 
-Invoke it as a slash command, naming a different process:
+Invoke it as a slash command, pointing it at a process or pipeline to test:
 
 ```text
-/write-nf-test for the FASTQC process
+/write-nf-test for the QUANT process
 ```
 
-To make the skill available across all your projects rather than one, place the same directory under `~/.agents/skills/` instead.
+The skill applies the same stable-versus-unstable discipline whether you point it at a single process or the whole pipeline.
+To make it available across all your projects rather than one, place the same directory under `~/.agents/skills/` instead.
 
 !!! note "Checkpoint"
 
