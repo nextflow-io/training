@@ -1,0 +1,13 @@
+{
+    "id": "seqera-cli",
+    "name": "Install Seqera CLI (tw)",
+    "description": "Install the Seqera Platform CLI, tw",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": ["latest", "0.32.0"],
+            "default": "0.32.0",
+            "description": "Select or enter a tower-cli version (without the leading v), or 'latest'."
+        }
+    }
+}
