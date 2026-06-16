@@ -512,7 +512,7 @@ If you get a 'No such variable' error, you can fix it by either defining the var
         val sample_name
 
         output:
-        path "${sample_name}_output.txt"
+        path "${sample_name}_processed.txt"
 
         script:
         // Define variables in Groovy code before the script
@@ -887,7 +887,7 @@ The error message clearly states that the call expected 1 argument but received 
 
 process PROCESS_FILES {
     input:
-        val sample_name  // Process expects only 1 input
+        val sample_name  // Process expects only 1 input channel
 
     output:
         path "${sample_name}_output.txt"
@@ -924,7 +924,7 @@ For this specific example, the process expects a single channel and doesn't requ
 
     process PROCESS_FILES {
         input:
-            val sample_name  // Process expects only 1 input
+            val sample_name  // Process expects only 1 input channel
 
         output:
             path "${sample_name}_output.txt"
@@ -953,7 +953,7 @@ For this specific example, the process expects a single channel and doesn't requ
 
     process PROCESS_FILES {
         input:
-            val sample_name  // Process expects only 1 input
+            val sample_name  // Process expects only 1 input channel
 
         output:
             path "${sample_name}_output.txt"
@@ -1006,14 +1006,14 @@ nextflow run exhausted.nf
 
 ??? success "Command output"
 
-```console title="Exhausted channel output"
- N E X T F L O W   ~  version 25.10.4
+    ```console title="Exhausted channel output"
+     N E X T F L O W   ~  version 25.10.4
 
-Launching `exhausted.nf` [extravagant_gauss] DSL2 - revision: 08cff7ba2a
+    Launching `exhausted.nf` [extravagant_gauss] DSL2 - revision: 08cff7ba2a
 
-executor >  local (1)
-[bd/f61fff] PROCESS_FILES (1) [100%] 1 of 1 ✔
-```
+    executor >  local (1)
+    [bd/f61fff] PROCESS_FILES (1) [100%] 1 of 1 ✔
+    ```
 
 This workflow completes without error, but it only processes a single sample!
 
@@ -1715,8 +1715,10 @@ nextflow run bad_resources.nf -profile docker
 
 Let's examine `bad_resources.nf`:
 
-```groovy title="bad_resources.nf" linenums="3" hl_lines="3"
+```groovy title="bad_resources.nf" linenums="3" hl_lines="5"
 process PROCESS_FILES {
+
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
     time '1 ms'  // ERROR: Unrealistic time limit
 
@@ -2469,7 +2471,7 @@ Now it's time to put the systematic debugging approach into practice. The workfl
             script:
             """
             # Simulate heavy computation
-            for i in {1..1000000}; do
+            for i in {1..10000}; do
                 echo "Heavy computation \$i for ${sample_id}"
             done > ${sample_id}_heavy.txt
             """
