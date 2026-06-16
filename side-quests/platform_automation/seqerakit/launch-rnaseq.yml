@@ -1,0 +1,22 @@
+# Launch rnaseq-nf-$USERNAME against the shared compute environment.
+#
+# This LAUNCHES a pipeline that already exists on the Launchpad. Terraform
+# added it (see ../terraform/pipeline). seqerakit does not create it here.
+#
+# Declarative vs imperative:
+#   Terraform manages existence. apply twice = no second pipeline.
+#   seqerakit/tw do the thing, now. Run this twice = two runs. That is the
+#   point. Launching is an action, not a state.
+#
+# A bare `pipeline:` name (not a git URL) means "the saved Launchpad pipeline
+# with this name". seqerakit expands ${USERNAME} from the environment, so set
+# it first:
+#
+#   export USERNAME=$USER
+#
+# Set the workspace and compute-env names to match your workshop workspace.
+launch:
+  - name: "rnaseq-nf-${USERNAME}-run"
+    workspace: "my-org/platform-automation"
+    pipeline: "rnaseq-nf-${USERNAME}"
+    compute-env: "azure-batch-manual"

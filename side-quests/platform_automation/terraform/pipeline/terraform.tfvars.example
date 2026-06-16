@@ -1,0 +1,17 @@
+# Copy to terraform.tfvars and fill in. terraform.tfvars is gitignored.
+# Do NOT put your access token here. Export TOWER_ACCESS_TOKEN in the shell.
+
+# Your username. Or pass it on the command line: terraform apply -var="username=$USER"
+username = "your-username"
+
+# Shared workshop workspace ID (the presenter gives you this).
+workspace_id = 123456789
+
+# Shared compute environment ID (the presenter gives you this).
+compute_env_id = "REPLACE_ME"
+
+# Optional: defaults to az://nf-work/work
+# work_dir = "az://nf-work/work"
+
+# server_url defaults to Seqera Cloud; uncomment only for Enterprise.
+# server_url = "https://platform.example.com/api"
