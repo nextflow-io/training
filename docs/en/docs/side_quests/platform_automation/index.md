@@ -511,4 +511,4 @@ You drove the Seqera Platform programmatically across three roles, each handing 
 
 ## What's next?
 
-- The AI half of the workshop is the CoScientist side quest in [nextflow-io/training](https://github.com/nextflow-io/training), published at training.nextflow.io. It uses the same `rnaseq-nf` pipeline and API endpoints, but interacts with them via AI agents.
+- The AI half of the workshop is the [Building with Seqera AI (CoScientist)](../co_scientist/index.md) side quest. It uses the same `rnaseq-nf` pipeline and API endpoints, but drives them via AI agents.
