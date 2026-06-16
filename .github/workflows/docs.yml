@@ -22,32 +22,39 @@ permissions:
 jobs:
   discover-languages:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     outputs:
       languages: ${{ steps.find.outputs.languages }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           sparse-checkout: docs
+          persist-credentials: false
 
       - name: Find language directories
         id: find
         run: |
           # Find all directories under docs/ that contain mkdocs.yml
           langs=$(find docs -maxdepth 2 -name "mkdocs.yml" -exec dirname {} \; | xargs -n1 basename | sort | jq -R -s -c 'split("\n") | map(select(length > 0))')
-          echo "languages=$langs" >> $GITHUB_OUTPUT
+          echo "languages=$langs" >> "$GITHUB_OUTPUT"
           echo "Found languages: $langs"
 
   build:
     needs: discover-languages
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     strategy:
       fail-fast: false
       matrix:
         lang: ${{ fromJson(needs.discover-languages.outputs.languages) }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
 
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: "3.12"
 
@@ -55,9 +62,11 @@ jobs:
         run: pip install mkdocs-material mkdocs-enumerate-headings-plugin mkdocs-quiz
 
       - name: Build ${{ matrix.lang }} docs
-        run: mkdocs build -f docs/${{ matrix.lang }}/mkdocs.yml -d ${{ github.workspace }}/site-${{ matrix.lang }}
+        env:
+          LANG_DIR: ${{ matrix.lang }}
+        run: mkdocs build -f "docs/$LANG_DIR/mkdocs.yml" -d "$GITHUB_WORKSPACE/site-$LANG_DIR"
 
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: site-${{ matrix.lang }}
           path: site-${{ matrix.lang }}/
@@ -65,19 +74,25 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Set version and alias
         id: version
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          INPUT_VERSION: ${{ github.event.inputs.version }}
+          INPUT_LATEST: ${{ github.event.inputs.latest }}
         run: |
           # Determine version based on trigger
-          if [ "${{ github.event_name }}" = "release" ]; then
-            VERSION="${{ github.event.release.tag_name }}"
+          if [ "$GITHUB_EVENT_NAME" = "release" ]; then
+            VERSION="$RELEASE_TAG"
             ALIAS="latest"
             IS_RELEASE="true"
-          elif [ -n "${{ github.event.inputs.version }}" ]; then
-            VERSION="${{ github.event.inputs.version }}"
+          elif [ -n "$INPUT_VERSION" ]; then
+            VERSION="$INPUT_VERSION"
             # Check if this should be set as latest (default true for releases)
-            if [ "${{ github.event.inputs.latest }}" = "false" ]; then
+            if [ "$INPUT_LATEST" = "false" ]; then
               ALIAS=""
             else
               ALIAS="latest"
@@ -88,20 +103,23 @@ jobs:
             ALIAS="development"
             IS_RELEASE="false"
           fi
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "ALIAS=$ALIAS" >> $GITHUB_ENV
-          echo "IS_RELEASE=$IS_RELEASE" >> $GITHUB_ENV
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "ALIAS=$ALIAS" >> "$GITHUB_ENV"
+          echo "IS_RELEASE=$IS_RELEASE" >> "$GITHUB_ENV"
           echo "Building docs version: $VERSION (alias: $ALIAS, is_release: $IS_RELEASE)"
 
-      - uses: actions/checkout@v6
+      # Intentionally persists credentials: the deploy job pushes to gh-pages
+      # below via `git push origin gh-pages`, which needs the token persisted
+      # by checkout.
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 # zizmor: ignore[artipacked]
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: "3.12"
 
-      - uses: actions/download-artifact@v8
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           path: artifacts
 
