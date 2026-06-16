@@ -1,16 +1,16 @@
 {
-    "Should run without failures": {
+    "Should run without failures and produce correct output": {
         "content": [
             {
                 "0": [
-                    "UPPER-greetings.csv:md5,f36624b0e040fa880e61fb1304b4b6b9"
+                    "UPPER-greetings.csv:md5,2985c521c6b7ed5c97946d6356a5fe64"
                 ]
             }
         ],
+        "timestamp": "2026-06-08T10:35:50.126073832",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.4"
-        },
-        "timestamp": "2025-02-19T11:57:20.215132756"
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
     }
 }

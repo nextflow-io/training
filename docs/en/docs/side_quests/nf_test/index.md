@@ -79,7 +79,8 @@ You'll find a main workflow file and a CSV file called `greetings.csv` that cont
 ```console title="Directory contents"
 .
 ├── greetings.csv
-└── main.nf
+├── main.nf
+└── nextflow.config
 ```
 
 For a detailed description of the files, see the [warmup from Hello Nextflow](../../hello_nextflow/00_orientation.md).
@@ -109,21 +110,23 @@ You can see the full workflow code below.
 ??? example "Workflow code"
 
     ```groovy title="main.nf"
+    #!/usr/bin/env nextflow
+
     /*
-    * Pipeline parameters
-    */
+     * Pipeline parameters
+     */
     params.input_file = "greetings.csv"
 
     /*
-    * Use echo to print 'Hello World!' to standard out
-    */
+     * Use echo to print 'Hello World!' to standard out
+     */
     process sayHello {
 
         input:
-            val greeting
+        val greeting
 
         output:
-            path "${greeting}-output.txt"
+        path "${greeting}-output.txt"
 
         script:
         """
@@ -132,15 +135,15 @@ You can see the full workflow code below.
     }
 
     /*
-    * Use a text replace utility to convert the greeting to uppercase
-    */
+     * Use a text replace utility to convert the greeting to uppercase
+     */
     process convertToUpper {
 
         input:
-            path input_file
+        path input_file
 
         output:
-            path "UPPER-${input_file}"
+        path "UPPER-${input_file}"
 
         script:
         """
