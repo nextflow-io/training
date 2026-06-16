@@ -22,7 +22,7 @@ export SEQERA_ACCESS_TOKEN=$TOWER_ACCESS_TOKEN
 ## The flow
 
 ```bash
-cd side-quests/platform_automation/terraform/pipeline
+cd /workspaces/training/side-quests/platform_automation/terraform/pipeline
 
 # 1. Set your inputs. Either copy the example file:
 cp terraform.tfvars.example terraform.tfvars

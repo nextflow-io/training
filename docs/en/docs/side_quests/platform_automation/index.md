@@ -32,7 +32,8 @@ New to running pipelines on Seqera at all? Start with the gentler "Run pipelines
 ### Open the training codespace
 
 The Codespace contains all the tools you need (Terraform, `tw`, seqerakit); you
-install nothing yourself. Open it now and read on while it builds. It ends with "Toolchain ready" in the terminal.
+install nothing yourself. Open it now and read on while it builds; it is ready
+when the terminal returns to a prompt.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -312,7 +313,7 @@ Terraform reads those references and works out the order itself: credentials and
 
 ```bash
 az login
-cd side-quests/platform_automation/terraform/compute-env
+cd /workspaces/training/side-quests/platform_automation/terraform/compute-env
 terraform init
 terraform plan
 terraform apply
@@ -389,7 +390,7 @@ pipelines:
 `seqerakit` expands `${USERNAME}` from the environment, so set it first, then add the pipeline:
 
 ```bash
-cd side-quests/platform_automation/seqerakit
+cd /workspaces/training/side-quests/platform_automation/seqerakit
 export USERNAME=$USER
 seqerakit add-rnaseq.yml
 ```
@@ -407,7 +408,7 @@ You can force it through with `seqerakit add-rnaseq.yml --overwrite`, which dele
 `side-quests/platform_automation/terraform/pipeline` adds the same pipeline declaratively. You describe the pipeline that should exist; Terraform makes the workspace match:
 
 ```bash
-cd side-quests/platform_automation/terraform/pipeline
+cd /workspaces/training/side-quests/platform_automation/terraform/pipeline
 terraform init
 terraform plan  -var="username=$USER" -var="workspace_id=<ID>" -var="compute_env_id=<CE_ID>"
 terraform apply -var="username=$USER" -var="workspace_id=<ID>" -var="compute_env_id=<CE_ID>"
@@ -458,7 +459,7 @@ For an automated launch, pin the parameters in a version-controlled file and pas
 `seqerakit` launches a pipeline that already exists on the Launchpad, filling in the `tw launch` command from `seqerakit/launch-rnaseq.yml`. Set `USERNAME`, dry run first, then launch:
 
 ```bash
-cd side-quests/platform_automation/seqerakit
+cd /workspaces/training/side-quests/platform_automation/seqerakit
 export USERNAME=$USER
 
 seqerakit launch-rnaseq.yml --dryrun   # prints the tw command, changes nothing
