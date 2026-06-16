@@ -65,6 +65,7 @@ nav:
       - side_quests/index.md
       - side_quests/orientation.md
       - side_quests/dev_environment/index.md
+      - side_quests/workflows_in_the_ai_era/index.md
       - side_quests/essential_scripting_patterns/index.md
       - side_quests/working_with_files/index.md
       - side_quests/metadata/index.md
