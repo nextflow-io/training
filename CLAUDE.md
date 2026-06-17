@@ -13,9 +13,18 @@ This repository contains training materials for Nextflow, built with Material fo
 
 ### Preview locally
 
+Two equivalent options. Docker is fastest if you already use it:
+
 ```bash
 docker run --rm -it -p 8000:8000 -v ${PWD}:/docs -w /docs/docs/en ghcr.io/nextflow-io/training-mkdocs:latest
 # View at http://0.0.0.0:8000/
+```
+
+Or via [`uv`](https://docs.astral.sh/uv/), which auto-installs all mkdocs plugins:
+
+```bash
+uv run _scripts/docs.py live       # English-only preview at http://127.0.0.1:8008/
+uv run _scripts/docs.py build-all  # build every translated site (slow)
 ```
 
 ### Validate heading numbering
@@ -25,10 +34,24 @@ uv run .github/check_headings.py docs/**/*.md
 uv run .github/check_headings.py --fix docs/**/*.md  # auto-fix
 ```
 
+### Lint Nextflow scripts
+
+```bash
+nextflow lint .   # also runs in CI and posts results as a PR comment
+```
+
 ### Format markdown
 
 ```bash
 prettier --write docs/**/*.md
+```
+
+### Preview a release
+
+`preview_release.py` serves the current branch at `https://training.nextflow.io/` as if it were a published version (useful for recording videos before a release ships):
+
+```bash
+sudo uv run ./preview_release.py --version 3.0
 ```
 
 ## Repository Structure
@@ -44,7 +67,8 @@ prettier --write docs/**/*.md
   - `glossary.yml` - Per-language glossary for deterministic post-processing
   - `llm-prompt.md` - Language-specific translation instructions for the LLM
 - `_scripts/` - Translation package (`translate/`) and build scripts (`docs.py`)
-- `hello-nextflow/`, `nf4-science/`, etc. - Example Nextflow scripts for lessons
+- `hello-nextflow/`, `hello-nf-core/`, `nf4-science/`, `side-quests/` - Runnable Nextflow scripts paired with the matching `docs/en/docs/<module>/` lesson tree. Lesson markdown imports from these dirs via `--8<--` snippets, so changes to a script usually need a matching markdown edit (and vice versa).
+- `docs/en/hooks/index_page_hook.py` - mkdocs hook that renders the `index_page` frontmatter template (see Conventions)
 - `.github/check_headings.py` - Validates heading numbering
 
 ## Important Conventions
@@ -161,6 +185,26 @@ module_name/
 └── solutions/ (working code)
 ```
 
+### Index page template
+
+Course and module `index.md` pages opt into a templated layout via frontmatter. The `index_page_hook.py` mkdocs hook generates Material grid cards from structured fields:
+
+```yaml
+---
+title: Course Title
+hide: [toc]
+page_type: index_page
+index_type: course # or "module"; renders as a badge
+additional_information:
+  technical_requirements: true
+  learning_objectives: [...]
+  audience_prerequisites: [...]
+  videos_playlist: <url> # mutually exclusive with `videos`
+---
+```
+
+The page must include a `<!-- additional_information -->` marker where the cards should be inserted. The build fails with a descriptive error if requirements aren't met. Full spec in CONTRIBUTING.md.
+
 ## Gotchas
 
 1. **Multilingual builds**: Initial build takes minutes due to multiple languages
@@ -185,6 +229,14 @@ nextflow run example.nf -resume  # verify caching works
 3. Test locally with `/preview`
 4. Validate by asking Claude to check quality (uses skills automatically)
 5. Run heading check (happens automatically via hook)
+
+## Project-specific Claude skills
+
+This repo ships custom skills tailored to training authoring. Prefer them over generic edits when the task fits:
+
+- **Authoring**: `/new-module`, `/new-lesson`, `/add-exercise`
+- **Preview & test**: `/preview`, `/stop-preview`, `/test-example`, `/run-tutorial`
+- **Review**: `/validate`, `/check-highlights`, `/check-inline-code`, `/find-todos`
 
 ## DO NOT
 
