@@ -3,18 +3,37 @@
 You developed the change and opened the pull request in the web chat.
 You can keep working there, but running and iterating on tests is faster in your own terminal, so now you move to the `seqera ai` command-line agent.
 
----
+***
 
 ## 1. Why move to the CLI.
 
 Developing and testing a pipeline is better suited to your own terminal than the browser:
 
-- Compute: the CLI uses your machine, which has more resources than the in-browser environment.
-- Docker: it is available locally, so containerized processes and test runs work.
-- Local access: the agent works against your own files, repos, editor, and personal credentials and config.
-- Iteration: you edit, run, and see results in one terminal, without round-tripping through the web chat.
+* Compute: the CLI uses your machine, which has more resources than the in-browser environment.
 
-## 2. Install the CLI and get your fork.
+* Docker: it is available locally, so containerized processes and test runs work.
+
+* Local access: the agent works against your own files, repos, editor, and personal credentials and config.
+
+* Iteration: you edit, run, and see results in one terminal, without round-tripping through the web chat.
+
+## 2. Fork the repository.
+
+You forked `rnaseq-nf` in the previous lesson, and CoScientist opened a pull request with the `fastp` step.
+Clone that fork to your machine and check out the pull request's branch, so you can run and test it locally:
+
+```bash
+git clone https://github.com/your-user/rnaseq-nf
+cd rnaseq-nf
+```
+
+!!! note "Checkpoint"
+
+```
+A local clone of your fork is on your machine, on the branch with the `fastp` change.
+```
+
+## 3. Install the CLI.
 
 Install the CLI (it needs Node.js 18 or later) and sign in:
 
@@ -24,21 +43,19 @@ seqera login
 ```
 
 `seqera login` opens a browser to authenticate against your Seqera account.
-Start an interactive session, then bring the branch with your `fastp` change down to work on:
+Start an interactive session in the cloned directory:
 
 ```bash
 seqera ai
 ```
 
-```text
-Clone my fork of rnaseq-nf locally, on the branch with the fastp pull request, so I can run and test it here.
-```
-
 !!! note "Checkpoint"
 
-    A local clone of your fork is on your machine, on the branch with the `fastp` change, and `seqera ai` is running in it.
+```
+`seqera ai` is running in your local clone.
+```
 
-## 3. Ask for an nf-test.
+## 4. Ask for an nf-test.
 
 `rnaseq-nf` has no `nf-test` coverage.
 If you are new to `nf-test`, see [Testing with nf-test](../nf_test/index.md) for background on snapshot assertions.
@@ -52,12 +69,14 @@ rnaseq-nf has no nf-test coverage. Add a pipeline-level nf-test that runs the wh
 
 ??? example "What CoScientist typically does"
 
-    It scaffolds a `tests/` directory and a pipeline-level `.nf.test` that runs the pipeline end to end and asserts on the published outputs.
-    The exact wording will differ from run to run.
+```
+It scaffolds a `tests/` directory and a pipeline-level `.nf.test` that runs the pipeline end to end and asserts on the published outputs.
+The exact wording will differ from run to run.
+```
 
 For a reference of what the generated test looks like, see [`solutions/pipeline.nf.test`](solutions/pipeline.nf.test).
 
-## 4. Snapshot-stable versus unstable output.
+## 5. Snapshot-stable versus unstable output.
 
 Not all output is safe to snapshot.
 Snapshotting unstable output causes tests to fail on every run for reasons unrelated to correctness.
@@ -75,8 +94,10 @@ Use the table below to decide what to assert on.
 
 !!! tip
 
-    Salmon can introduce tiny nondeterminism across threads.
-    Run it single-threaded (`--threads 1`) when you want a byte-stable `quant.sf` to snapshot.
+```
+Salmon can introduce tiny nondeterminism across threads.
+Run it single-threaded (`--threads 1`) when you want a byte-stable `quant.sf` to snapshot.
+```
 
 Send CoScientist the following prompt to steer the assertion:
 
@@ -84,7 +105,7 @@ Send CoScientist the following prompt to steer the assertion:
 Assert on the columns in quant.sf and that the expected output files exist. Do not snapshot the MultiQC HTML, the Salmon logs, cmd_info.json, or anything containing timestamps, versions, or work directory paths.
 ```
 
-## 5. Run the test to green.
+## 6. Run the test to green.
 
 To run the test repeatedly until it passes, use **goal mode**:
 
@@ -98,9 +119,11 @@ By default the CLI asks for your approval before it runs a command, so you see e
 
 !!! note "Checkpoint"
 
-    `nf-test test` reports a passing test for the pipeline.
+```
+`nf-test test` reports a passing test for the pipeline.
+```
 
-## 6. Add a test workflow to CI.
+## 7. Add a test workflow to CI.
 
 Ask the agent to wire the test suite into continuous integration:
 
@@ -112,11 +135,13 @@ A CI workflow runs the tests automatically on every change, so a regression is c
 
 !!! note "Checkpoint"
 
-    A workflow file exists under `.github/workflows/` that runs `nf-test`.
+```
+A workflow file exists under `.github/workflows/` that runs `nf-test`.
+```
 
 <!-- TODO: verify the exact generated GHA workflow (nf-test install action, Nextflow setup) against a real run -->
 
-## 7. Add the tests and CI to your pull request.
+## 8. Add the tests and CI to your pull request.
 
 The pull request you opened earlier contains the `fastp` step.
 Ask the agent to commit the tests and the workflow to the same branch so the pull request picks them up:
@@ -127,11 +152,11 @@ Commit the nf-test and the CI workflow to the branch of my open pull request and
 
 !!! note "Checkpoint"
 
-    The open pull request now also contains the tests and the CI workflow.
+```
+The open pull request now also contains the tests and the CI workflow.
+```
 
 Open the pull request and confirm the diff contains the `fastp` step, the tests, and the workflow, and that it targets the branch you intend.
-
-<!-- TODO: screenshot: the open PR on GitHub -->
 
 ### Takeaway
 

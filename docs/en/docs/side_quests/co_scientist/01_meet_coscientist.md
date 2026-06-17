@@ -78,7 +78,7 @@ CoScientist will confirm the action or ask which compute environment to use if m
 
     In the Seqera Platform web app, open **Launchpad**: an entry for `rnaseq-nf` is now present.
 
-<!-- TODO: screenshot: Launchpad showing the new rnaseq-nf pipeline -->
+![rnaseq-nf on the Launchpad](img/launchpad-rnaseq-nf.png)
 
 ## 6. Understand what rnaseq-nf does.
 

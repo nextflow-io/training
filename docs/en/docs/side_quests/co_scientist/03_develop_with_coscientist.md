@@ -8,10 +8,7 @@ You connect your GitHub account, fork `rnaseq-nf`, and have CoScientist add a ne
 
 ## 1. Connect your GitHub account.
 
-Give CoScientist access to your GitHub account by adding a key, so it can commit changes and open pull requests on your behalf.
-
-<!-- TODO: verify the exact GitHub connection mechanism in the web interface (key/token vs app) and its labels -->
-<!-- TODO: screenshot: adding the GitHub key in CoScientist -->
+Give CoScientist access to your GitHub account by configuring a GitHub token, so it can commit changes and open pull requests on your behalf.
 
 !!! note "Checkpoint"
 
@@ -39,10 +36,8 @@ This exercises its nf-core module discovery.
 
 ??? example "What CoScientist typically does"
 
-    It finds the nf-core/fastp module, adds it to the pipeline, adapts the inputs and outputs to rnaseq-nf's channels, commits to your fork, and opens a pull request.
+    It finds the nf-core/fastp module, adds it under `modules/nf-core/fastp/`, wires the trimmed reads into the workflow, commits to a branch on your fork, and opens a pull request titled something like "add fastp trimming step before quantification".
     The exact wording will differ from run to run.
-
-<!-- TODO: verify nf-core fastp module integration into rnaseq-nf and the pull-request flow in the web interface -->
 
 ## 4. Let the agent work until it is done.
 
