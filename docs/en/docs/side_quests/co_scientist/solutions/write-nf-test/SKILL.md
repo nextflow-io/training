@@ -5,7 +5,7 @@ description: Generate an nf-test that asserts on stable output and excludes unst
 
 # Write nf-test
 
-When this skill is invoked for a process or a pipeline, generate the matching nf-test following the rules below.
+When asked to write an nf-test for a process or a pipeline, follow the rules below.
 
 ## Steps
 

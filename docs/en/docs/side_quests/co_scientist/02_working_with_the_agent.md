@@ -21,8 +21,6 @@ The run fails almost immediately at the indexing step, because the file you poin
 
     A run for rnaseq-nf appears in the Runs list and fails quickly with a file-not-found error.
 
-<!-- TODO: verify CoScientist will launch with an overridden parameter (the bad transcriptome path) from the web chat. The non-existent transcriptome failing fast at INDEX is confirmed. -->
-
 ## 2. Open the failed run from the Platform.
 
 CoScientist works in both directions.

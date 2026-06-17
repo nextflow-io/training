@@ -1,23 +1,30 @@
 # Build a reusable skill
 
 In the last lesson you hand-wrote a pipeline-level `nf-test` and learned which output is safe to snapshot.
-Capture that discipline as a reusable skill, so you and your teammates get a disciplined `nf-test` for any process or pipeline without re-explaining the rules.
+Capture that discipline as a reusable skill, so CoScientist applies the same rules in every session without you re-explaining them.
 
 ---
 
 ## 1. Enhance CoScientist with your own skills.
 
-CoScientist ships with built-in skills, and you can add your own to extend what it does.
-A reusable **skill** captures a workflow once and exposes it as a slash command, so you or a teammate get the same result every time without re-explaining the steps.
-Packaging the testing rules you just applied makes a good first skill: it produces a disciplined `nf-test` on demand.
+CoScientist ships with built-in skills, and you can add your own.
+A skill is a small instruction set that CoScientist loads as session context, so it follows your guidance automatically whenever you ask for related work.
+Packaging the testing rules you just applied makes a good first skill.
 
 ## 2. Author the skill.
 
-A CoScientist skill is a directory containing a `SKILL.md` file.
-The file has YAML frontmatter with a `name` and a `description`, followed by a markdown body of instructions the agent reads when the skill runs.
-CoScientist discovers skills from your project and user skill directories and surfaces each one as a slash command.
+A skill lives in its own directory with a `SKILL.md` file: YAML frontmatter with a `name` and a `description` (both required, or the skill is skipped), followed by a markdown body of instructions.
+CoScientist discovers skills from your project and user skill directories and sends them to the session as context.
+A project directory like `.agents/skills/` takes priority, so a repository can override a global skill.
 
-Create the skill in your project at `.agents/skills/write-nf-test/SKILL.md` with this content:
+Create the directory and the empty skill file:
+
+```bash
+mkdir -p .agents/skills/write-nf-test
+touch .agents/skills/write-nf-test/SKILL.md
+```
+
+Then open `.agents/skills/write-nf-test/SKILL.md` and add this content:
 
 ```markdown
 ---
@@ -27,7 +34,7 @@ description: Generate an nf-test that asserts on stable output and excludes unst
 
 # Write nf-test
 
-When this skill is invoked for a process or a pipeline, generate the matching nf-test following the rules below.
+When asked to write an nf-test for a process or a pipeline, follow the rules below.
 
 ## Steps
 
@@ -54,27 +61,26 @@ When this skill is invoked for a process or a pipeline, generate the matching nf
 Keep skills small: CoScientist caps each discovered skill's context at 5 KB.
 The `.agents/skills/` location follows the cross-agent Agent Skills convention, so the same skill works in other compatible agents.
 
-## 3. Install and invoke the skill.
+## 3. Use the skill.
 
-CoScientist reads the `.agents/skills/` directory in your project automatically.
-Restart `seqera ai` so it discovers the new skill, then type `/` and confirm `write-nf-test` appears in the command palette.
-
-Invoke it as a slash command, pointing it at a process or pipeline to test:
+Restart `seqera ai` so it discovers the new skill and loads it into the session context.
+Your own skills do not appear as slash commands; the `/` palette is reserved for built-in, backend-provided skills.
+Instead, CoScientist now follows your skill whenever you ask for a test:
 
 ```text
-/write-nf-test for the QUANT process
+Add an nf-test for the FASTQC process.
 ```
 
-The skill applies the same stable-versus-unstable discipline whether you point it at a single process or the whole pipeline.
-To make it available across all your projects rather than one, place the same directory under `~/.agents/skills/` instead.
+It applies the stable-versus-unstable rules from your skill automatically, without you restating them.
+To make the skill available across all your projects rather than one, place the same directory under `~/.agents/skills/` instead.
 
 !!! note "Checkpoint"
 
-    Invoking the skill produces an nf-test that asserts on stable output and excludes unstable content, without you re-explaining the rules.
+    With the skill in place, asking for a test produces one that asserts on stable output and excludes unstable content, without you re-explaining the rules.
 
 ### Takeaway
 
-You captured the testing discipline as a reusable skill exposed as a slash command.
+You captured the testing discipline as a reusable skill that CoScientist loads as session context.
 You and your teammates now get a consistent `nf-test` on demand, without re-explaining the rules each time.
 
 ### What's next?
