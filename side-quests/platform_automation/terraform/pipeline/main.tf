@@ -15,7 +15,7 @@ terraform {
   required_providers {
     seqera = {
       source  = "seqeralabs/seqera"
-      version = "0.30.5"
+      version = "0.40.1"
     }
   }
 }
@@ -30,7 +30,8 @@ resource "seqera_pipeline" "rnaseq_nf" {
   workspace_id = var.workspace_id
 
   launch = {
-    pipeline       = "https://github.com/nextflow-io/rnaseq-nf"
+    pipeline = "https://github.com/nextflow-io/rnaseq-nf"
+    # The master branch moves; pin a release tag (e.g. v2.4) for reproducible launches.
     revision       = "master"
     compute_env_id = var.compute_env_id
     work_dir       = var.work_dir

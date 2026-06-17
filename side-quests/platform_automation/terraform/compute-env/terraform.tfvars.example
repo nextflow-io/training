@@ -4,25 +4,17 @@
 
 subscription_id = "00000000-0000-0000-0000-000000000000"
 workspace_id    = 123456789
-region          = "uaenorth"
-work_dir        = "az://nf-work/work"
+region          = "eastus"
+work_dir        = "az://work"
 
-# Existing Azure resources (referenced, not created)
-batch_account_name    = "mybatch"
-batch_account_rg      = "batch-rg"
-managed_identity_name = "nextflow-identity"
-managed_identity_rg   = "identity-rg"
-vnet_name             = "nf-vnet"
-vnet_rg               = "network-rg"
-subnet_name           = "batch-subnet"
+# Existing Azure Batch account (referenced, not created).
+batch_account_name = "mybatch"
+batch_account_rg   = "batch-rg"
+
+# Azure credentials already stored in the Platform workspace, referenced by name.
+azure_credential_name = "my-azure-credentials"
 
 # Pool sizing lives in main.tf (locals), not here.
-
-# Seqera credential keys (sensitive). Prefer TF_VAR_azure_batch_key /
-# TF_VAR_azure_storage_key environment variables over this file.
-azure_storage_name = "mystorage"
-azure_batch_key    = "REPLACE_ME"
-azure_storage_key  = "REPLACE_ME"
 
 # server_url defaults to Seqera Cloud; uncomment only for Enterprise.
 # server_url = "https://platform.example.com/api"

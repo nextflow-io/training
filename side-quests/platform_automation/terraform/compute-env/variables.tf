@@ -1,6 +1,6 @@
 # Inputs for the Admin tier compute-environment config. The Platform token is
-# NOT here; it comes from TOWER_ACCESS_TOKEN. Sensitive Azure keys come from a
-# gitignored terraform.tfvars or TF_VAR_ environment variables.
+# NOT here; it comes from TOWER_ACCESS_TOKEN. The Azure credentials are not here
+# either: they are already stored in the Platform and referenced by name.
 
 variable "server_url" {
   description = "Seqera Platform API endpoint. Cloud by default."
@@ -18,7 +18,7 @@ variable "workspace_id" {
   type        = number
 }
 
-# Existing Azure resources (referenced via data sources, not created).
+# Existing Azure Batch account (referenced via a data source, not created).
 variable "batch_account_name" {
   description = "Name of the existing Azure Batch account."
   type        = string
@@ -29,28 +29,10 @@ variable "batch_account_rg" {
   type        = string
 }
 
-variable "managed_identity_name" {
-  description = "Name of the existing user-assigned managed identity for Batch nodes."
-  type        = string
-}
-
-variable "managed_identity_rg" {
-  description = "Resource group of the existing managed identity."
-  type        = string
-}
-
-variable "vnet_name" {
-  description = "Name of the existing virtual network the pools attach to."
-  type        = string
-}
-
-variable "vnet_rg" {
-  description = "Resource group of the existing virtual network."
-  type        = string
-}
-
-variable "subnet_name" {
-  description = "Name of the existing subnet the pool nodes join."
+# Azure credentials already stored in the Platform (added to the workspace
+# beforehand). Referenced by name; the keys never appear in this config.
+variable "azure_credential_name" {
+  description = "Name of the existing Azure credentials in the Platform workspace."
   type        = string
 }
 
@@ -60,24 +42,6 @@ variable "region" {
 }
 
 variable "work_dir" {
-  description = "Azure Blob Storage work directory, e.g. az://nf-work/work."
+  description = "Azure Blob Storage work directory, e.g. az://work."
   type        = string
-}
-
-# Seqera credential keys (sensitive).
-variable "azure_batch_key" {
-  description = "Azure Batch account access key."
-  type        = string
-  sensitive   = true
-}
-
-variable "azure_storage_name" {
-  description = "Azure Storage account name for the work directory."
-  type        = string
-}
-
-variable "azure_storage_key" {
-  description = "Azure Storage account access key."
-  type        = string
-  sensitive   = true
 }

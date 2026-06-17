@@ -30,9 +30,14 @@ hello-nf-core/core-hello/
 
 # Terraform (platform_automation side quest)
 **/.terraform/*
+.terraform.lock.hcl
 *.tfstate
 *.tfstate.*
 *.tfvars
 !*.tfvars.example
 crash.log
 crash.*.log
+
+# Agent/tooling local state
+.omc/
+**/.claude/.local/

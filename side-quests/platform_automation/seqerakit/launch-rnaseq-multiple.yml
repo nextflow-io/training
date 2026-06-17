@@ -14,7 +14,11 @@
 #
 # Set the workspace and compute-env names to match your workshop workspace.
 launch:
-  - name: "rnaseq-nf-${WORKSHOP_USER}-run"
+  - name: "rnaseq-nf-${WORKSHOP_USER}-run-1"
+    workspace: "${TOWER_WORKSPACE_ID}"
+    pipeline: "rnaseq-nf-${WORKSHOP_USER}"
+    compute-env: "${COMPUTE_ENVIRONMENT}"
+  - name: "rnaseq-nf-${WORKSHOP_USER}-run-2"
     workspace: "${TOWER_WORKSPACE_ID}"
     pipeline: "rnaseq-nf-${WORKSHOP_USER}"
     compute-env: "${COMPUTE_ENVIRONMENT}"

@@ -63,17 +63,15 @@ The directory holds the Terraform and `seqerakit` configurations for each role. 
     │   ├── compute-env        # section 1 (Admin): provision the cloud + compute environment
     │   │   ├── main.tf
     │   │   ├── variables.tf
-    │   │   ├── terraform.tfvars.example
-    │   │   └── README.md
+    │   │   └── terraform.tfvars.example
     │   └── pipeline           # section 2 (Maintain): add a pipeline to the Launchpad
     │       ├── main.tf
     │       ├── variables.tf
-    │       ├── terraform.tfvars.example
-    │       └── README.md
+    │       └── terraform.tfvars.example
     └── seqerakit              # sections 2 & 3: add and launch a pipeline
         ├── add-rnaseq.yml
         ├── launch-rnaseq.yml
-        └── README.md
+        └── launch-rnaseq-multiple.yml
     ```
 
 ### Create an access token
@@ -127,6 +125,16 @@ Two forms of the same workspace turn up in this module. Terraform and the API wa
 export TOWER_WORKSPACE_ID=<numeric-workspace-id>
 ```
 
+#### Pick a workshop handle
+
+In a shared workspace, every pipeline you add needs a name no one else is using. Pick a short handle and export it once; everything from section 2 onward reuses this one variable. Use only letters, numbers, and hyphens. Launchpad names cannot contain dots or spaces:
+
+```bash
+export WORKSHOP_USER=<your-handle>   # e.g. ada, jdoe, team-rocket
+```
+
+We set this by hand rather than reading `$USER`: in the Codespace everyone shares the same Linux user, so `$USER` is identical for all learners and would collide.
+
 #### Know your role
 
 The work is split by role, from most to least privileged. Start at the highest tier your access allows:
@@ -179,28 +187,92 @@ Watch your cloud console and you will see Forge create the resources: an identit
 
 That convenience is the trade-off: Forge owns those resources and gives you little control. A lab that already runs on managed infrastructure wants the opposite, to describe the resources itself and wire the Platform to them. That is the Terraform path.
 
-### 1.2. Provision the cloud with Terraform
+### 1.2. Read it back over the API with `tw`
+
+The form you just filled in did nothing special: it sent a configuration to the Platform API.
+Ask the API for what you made, from the terminal, with nothing retyped.
+
+`tw` reads the same workspace the UI does. List the compute environments and the one you created in 1.1 is there:
+
+```bash
+tw compute-envs list
+```
+
+Now export its full configuration to a file.
+Use the name you gave it in 1.1:
+
+```bash
+tw compute-envs export forge-ce.json --name="<the name you gave it in 1.1>"
+```
+
+`tw` reads the workspace from `TOWER_WORKSPACE_ID` (set in section 0), so no `--workspace` flag is needed.
+The file `forge-ce.json` is the compute environment as the API stores it:
+
+```json title="forge-ce.json"
+{
+  "computeEnv": {
+    "name": "azure-batch",
+    "platform": "azure-batch",
+    "config": {
+      "workDir": "az://work",
+      "region": "eastus",
+      "waveEnabled": true,
+      "fusion2Enabled": true,
+      "forge": {
+        "headPool": {
+          "vmType": "Standard_D2s_v3",
+          "vmCount": 1,
+          "autoScale": true
+        },
+        "workerPool": {
+          "vmType": "Standard_D4s_v3",
+          "vmCount": 4,
+          "autoScale": true
+        },
+        "disposeOnDeletion": true
+      }
+    }
+  }
+}
+```
+
+The `forge` block is exactly what the checkboxes set in 1.1. Its presence is what tells the Platform to create and scale the pools for you. In the next section, the absence of this block is what makes the Terraform compute environment manual.
+
+Close the loop: import the file to recreate the compute environment, with nothing retyped.
+
+```bash
+tw compute-envs import forge-ce.json --name="azure-batch-copy"
+```
+
+The UI sent this JSON to create the compute environment; `tw export` reads it back, and `tw import` sends it again. The GUI and the CLI are two clients of the same API.
+
+The exported JSON does not include a credentials ID. If your workspace has more than one credential for this cloud, `tw` cannot tell which to use and fails with `Multiple credentials match this compute environment`. Name one explicitly with `-c` (see `tw credentials list`):
+
+```bash
+tw compute-envs import forge-ce.json --name="azure-batch-copy" --credentials="<your-azure-credentials-name>"
+```
+
+### 1.3. Provision the cloud with Terraform
 
 Terraform manages cloud resources declaratively: you describe what should exist and Terraform makes it so. It does not run your work; it only creates the compute environment. `side-quests/platform_automation/terraform/compute-env/` does it in a single `main.tf`, two providers in one apply:
 
-- data sources: the existing Batch account, managed identity, and vnet/subnet,
-  referenced, not created.
-- `azurerm`: creates a head pool and a worker pool on that account and subnet,
-  as that identity.
-- `seqera`: stores the Azure credentials and creates the compute environment.
+- data sources: the existing Batch account and the Azure credentials already
+  stored in the Platform, referenced, not created.
+- `azurerm`: creates a head pool and a worker pool on that account.
+- `seqera`: creates the compute environment pointing at those pools.
 
 The manual marker: `head_pool` is set to the pool Terraform just made and there is **no `forge` block**. That one difference is what makes the compute environment manual instead of Forge. `nextflow_config` routes tasks to the worker pool.
 
-Let's walk `terraform/compute-env/main.tf` from top to bottom.
+Let's walk the key blocks of `terraform/compute-env/main.tf`.
 
-The first block declares the providers and pins their versions. The `seqera` provider is pinned to exactly `0.30.5`:
+The first block declares the providers and pins their versions. The `seqera` provider is pinned to exactly `0.40.1`:
 
 ```terraform
 terraform {
   required_version = ">= 1.9"
 
   required_providers {
-    seqera  = { source = "seqeralabs/seqera", version = "0.30.5" }
+    seqera  = { source = "seqeralabs/seqera", version = "0.40.1" }
     azurerm = { source = "hashicorp/azurerm", version = ">= 3.0" }
     random  = { source = "hashicorp/random", version = ">= 3.0" }
   }
@@ -220,47 +292,56 @@ provider "seqera" {
 }
 ```
 
-Pool sizing and the VM image live in a `locals` block, so you edit them in one place rather than wiring every value through as a variable:
+Next we can define some variables we can use throughout our deployment. In this case, we will set the node sizes and details once and reuse them throughout the configuration:
 
 ```terraform
 locals {
-  head_vm_size      = "Standard_D4ds_v5"
+  head_vm_size      = "Standard_E4ds_v5"
   worker_vm_size    = "Standard_E16ds_v5"
   worker_max_nodes  = 8
-  worker_max_tasks  = 16
-  node_agent_sku_id = "batch.node.ubuntu 22.04"
+  node_agent_sku_id = "batch.node.ubuntu 24.04"
+
+  # The Platform requires a pool's task slots to equal the node's vCPU count.
+  # Azure VM size names embed that count (Standard_E16ds_v5 -> 16), so derive it
+  # from the size rather than hardcoding a number that can drift out of sync.
+  head_vm_cores   = tonumber(regex("^Standard_[A-Z]+([0-9]+)", local.head_vm_size)[0])
+  worker_vm_cores = tonumber(regex("^Standard_[A-Z]+([0-9]+)", local.worker_vm_size)[0])
 }
 ```
 
-The cloud resources the lab already owns, the Batch account, the managed identity, and the subnet, are referenced with data sources. Terraform reads them; it does not create or manage them:
+Next we can refer to resources that already exist. These are called `data` in Terraform. Here we refer to the Azure Batch account:
 
 ```terraform
+# Existing Azure resources the customer owns. Referenced, not managed.
 data "azurerm_batch_account" "existing" {
   name                = var.batch_account_name
   resource_group_name = var.batch_account_rg
 }
+```
 
-data "azurerm_user_assigned_identity" "existing" {
-  name                = var.managed_identity_name
-  resource_group_name = var.managed_identity_rg
-}
+Now the resources Terraform does create. The pool names must stay unique across re-creates, so we first generate a short random suffix to append to them:
 
-data "azurerm_subnet" "existing" {
-  name                 = var.subnet_name
-  virtual_network_name = var.vnet_name
-  resource_group_name  = var.vnet_rg
+```terraform
+# Keeps pool names unique across re-creates.
+resource "random_string" "suffix" {
+  length  = 6
+  special = false
+  upper   = false
 }
 ```
 
-Now the resources Terraform does create. The head pool runs the Nextflow head job, so one fixed node is enough:
+Then the node pools themselves. Terraform creates two pools in Azure Batch with the `azurerm_batch_pool` resource. You can add as many as you like, but the details must match the values the Azure provider expects. Here we start a fixed-size head pool and a dynamically sized worker pool:
 
 ```terraform
+# Head pool: runs the Nextflow head job. One node is enough.
 resource "azurerm_batch_pool" "head" {
   name                = "rnaseq-head-${random_string.suffix.result}"
+  display_name        = "rnaseq head pool"
   resource_group_name = var.batch_account_rg
   account_name        = var.batch_account_name
   vm_size             = local.head_vm_size
   node_agent_sku_id   = local.node_agent_sku_id
+  max_tasks_per_node  = local.head_vm_cores
 
   fixed_scale {
     target_dedicated_nodes = 1
@@ -269,22 +350,24 @@ resource "azurerm_batch_pool" "head" {
   storage_image_reference {
     publisher = "microsoft-dsvm"
     offer     = "ubuntu-hpc"
-    sku       = "2204"
+    sku       = "2404"
     version   = "latest"
   }
-  # identity, container, and network_configuration omitted for brevity
+
+  container_configuration {
+    type = "DockerCompatible"
+  }
 }
-```
 
-The worker pool runs the pipeline tasks, so it autoscales from zero up to `worker_max_nodes` based on the number of pending tasks:
-
-```terraform
+# Worker pool: runs the pipeline tasks. Autoscales 0..worker_max_nodes.
 resource "azurerm_batch_pool" "worker" {
-  name               = "rnaseq-worker-${random_string.suffix.result}"
-  vm_size            = local.worker_vm_size
-  node_agent_sku_id  = local.node_agent_sku_id
-  max_tasks_per_node = local.worker_max_tasks
-  # ...same account, image, identity, and network as the head pool
+  name                = "rnaseq-worker-${random_string.suffix.result}"
+  display_name        = "rnaseq worker pool"
+  resource_group_name = var.batch_account_rg
+  account_name        = var.batch_account_name
+  vm_size             = local.worker_vm_size
+  node_agent_sku_id   = local.node_agent_sku_id
+  max_tasks_per_node  = local.worker_vm_cores
 
   auto_scale {
     evaluation_interval = "PT5M"
@@ -294,25 +377,44 @@ resource "azurerm_batch_pool" "worker" {
       $NodeDeallocationOption = taskcompletion;
     FORMULA
   }
+
+  storage_image_reference {
+    publisher = "microsoft-dsvm"
+    offer     = "ubuntu-hpc"
+    sku       = "2404"
+    version   = "latest"
+  }
+
+  container_configuration {
+    type = "DockerCompatible"
+  }
+
+  # Terraform manages the pool, not its live scale.
+  lifecycle {
+    ignore_changes = [auto_scale, fixed_scale]
+  }
 }
 ```
 
-Both pools run the same `ubuntu-hpc` `2204` image, which is why `node_agent_sku_id` is `batch.node.ubuntu 22.04` for both.
+Each pool in `main.tf` also carries a `start_task` (elided above) that runs once per node at startup. Forge adds an equivalent task to the pools it creates; manual pools get nothing, so we replicate the essential parts: install `azcopy` (Nextflow's Azure Batch executor uses it to stage data) and register the AppArmor profile Fusion needs on Ubuntu 24.04 nodes. See the `node_start_task_script` local in the file for the full script.
 
-The `seqera` provider stores the Azure credentials in the Platform:
+Once we've built the Azure Batch node pools, we add the Seqera Platform compute environment that points to them. The compute environment needs Azure credentials to talk to your cloud. We added those to the workspace earlier (see Prerequisites), so we look them up by name rather than storing keys here. The `seqera_credentials` data source lists the credentials in the workspace, and we pick out the one whose name matches:
 
 ```terraform
-resource "seqera_azure_credential" "main" {
-  name         = "azure-batch"
+# Azure credentials already stored in the Platform, looked up by name.
+data "seqera_credentials" "all" {
   workspace_id = var.workspace_id
-  batch_name   = var.batch_account_name
-  batch_key    = var.azure_batch_key
-  storage_name = var.azure_storage_name
-  storage_key  = var.azure_storage_key
+}
+
+locals {
+  azure_credentials_id = one([
+    for c in data.seqera_credentials.all.credentials : c.id
+    if c.name == var.azure_credential_name
+  ])
 }
 ```
 
-Finally, the compute environment itself. This is the manual marker in code: `head_pool` points at the pool we just created, there is no `forge` block, and `nextflow_config` routes tasks to the worker pool's queue. Because it references `azurerm_batch_pool.head.name` and `azurerm_batch_pool.worker.name`, Terraform knows to create the pools first:
+Finally, the compute environment itself. This is the manual marker in code: `head_pool` points at the pool we just created and `nextflow_config` routes tasks to the worker pool's queue. `enable_wave` and `enable_fusion` turn on Wave (container provisioning) and the Fusion file system, the same checkboxes you would tick in the UI; with Fusion enabled, Wave must be too. Because it references `azurerm_batch_pool.head.name` and `azurerm_batch_pool.worker.name`, Terraform knows to create the pools first:
 
 ```terraform
 resource "seqera_compute_env" "main" {
@@ -320,16 +422,18 @@ resource "seqera_compute_env" "main" {
 
   compute_env = {
     name           = "azure-batch-manual"
+    description    = "Azure Batch CE on Terraform-managed pools"
     platform       = "azure-batch"
-    credentials_id = seqera_azure_credential.main.credentials_id
+    credentials_id = local.azure_credentials_id
 
     config = {
       azure_batch = {
-        region                     = var.region
-        work_dir                   = var.work_dir
-        head_pool                  = azurerm_batch_pool.head.name
-        managed_identity_client_id = data.azurerm_user_assigned_identity.existing.client_id
-        nextflow_config            = "process.queue = '${azurerm_batch_pool.worker.name}'\n"
+        region          = var.region
+        work_dir        = var.work_dir
+        head_pool       = azurerm_batch_pool.head.name
+        enable_wave     = true
+        enable_fusion   = true
+        nextflow_config = "process.queue = '${azurerm_batch_pool.worker.name}'\n"
       }
     }
   }
@@ -344,19 +448,26 @@ output "compute_env_id" {
 }
 ```
 
-Terraform reads those references and works out the order itself: credentials and pools first, then the compute environment that depends on them. Run it:
+Terraform reads those references and works out the order itself: pools first, then the compute environment that depends on them.
+
+Now, we can run Terraform to apply these changes.
 
 ```bash
-az login
-cd /workspaces/training/side-quests/platform_automation/terraform/compute-env
+# you may need to log in to the cloud provider with `az login`
 terraform init
-terraform plan
 terraform apply
 ```
 
-See `side-quests/platform_automation/terraform/compute-env/README.md` for the full variable list and the `terraform.tfvars` setup.
+After you run `terraform apply`, it will ask you to fill in the details defined in `variables.tf`
 
-### 1.3. See both sides
+!!! tip "Tearing it down"
+
+    You can save them as a .tfvars file and Terraform will read them automatically, so you don't have to type them each time. See `terraform.tfvars.example` for the full variable reference.
+    Alternatively, you can save them as an environment variable preceded by `TF_VAR_`, for example `TF_VAR_subscription_id=00000000-0000-0000-0000-000000000000`.
+
+Terraform will show you a preview, if it looks accurate, type `yes` to apply the changes. It will create the pools and the compute environment, and print the `compute_env_id` you hand to the Maintain tier.
+
+### 1.4. See both sides
 
 The compute environment now exists in two places, and as an Admin with cloud access you can see both.
 
@@ -370,7 +481,11 @@ On the Azure side, open the Batch account in the portal. You will see the head a
 
 ### Takeaway
 
-One compute environment, two levels of control: Forge in the UI (easiest, the Platform owns the pool) and Terraform (you own the pools and the wiring, end to end). The artifact you hand to the Maintain tier is a `compute_env_id`.
+One compute environment, three levels of control: Forge in the UI (easiest, the Platform owns the pool), `tw` (export and import the same config over the API), and Terraform (you own the pools and the wiring, end to end). The artifact you hand to the Maintain tier is a `compute_env_id`.
+
+!!! note "Tearing it down"
+
+    Terraform manages the cloud resources it created, so it can remove them too. From `terraform/compute-env`, run `terraform apply -destroy` to delete the compute environment and the Batch pools in one step. The existing Batch account and credentials are referenced, not managed, so they are left untouched.
 
 ---
 
@@ -378,19 +493,21 @@ One compute environment, two levels of control: Forge in the UI (easiest, the Pl
 
 **Requires:** Maintain role, and a `compute_env_id` (from section 1 or an Admin on your team) plus the numeric `workspace_id`. Maintain manages pipelines, not compute environments. That split is deliberate: Admin owns the compute environment, you own your pipelines.
 
-You add the same pipeline, `rnaseq-nf-$USER`, four ways. The first three are imperative, you run a command and it acts. The last, Terraform, is declarative. Watch what happens when you run each one twice.
+You add the same pipeline, `rnaseq-nf-$WORKSHOP_USER`, four ways. The first three are imperative, you run a command and it acts. The last, Terraform, is declarative. Watch what happens when you run each one twice.
 
 ### 2.1. Add a pipeline via the UI
 
 In the workspace, open the **Launchpad** and click **Add pipeline**. Fill in the form:
 
-- **Name**: `rnaseq-nf-<your-username>` (unique in a shared workspace).
+- **Name**: `rnaseq-nf-` followed by your handle, e.g. `rnaseq-nf-ada` (the handle you exported as `WORKSHOP_USER` in section 0).
 - **Compute environment**: the one from section 1, e.g. `azure-batch-manual`.
 - **Pipeline to launch**: `https://github.com/nextflow-io/rnaseq-nf`.
 - **Revision**: `master`.
-- **Work directory**: your Azure Blob work dir, e.g. `az://nf-work/work`.
+- **Work directory**: your Azure Blob work dir, e.g. `az://work`.
 
 Click **Add**. The pipeline appears on the Launchpad with no run started. Adding a pipeline only saves a launch configuration; it does not run anything.
+
+To remove from the workspace, you can click the hamburger menu on the top right and click **Delete**.
 
 ### 2.2. Add a pipeline via `tw`
 
@@ -398,14 +515,20 @@ The CLI does the same thing in one command:
 
 ```bash
 tw pipelines add \
-  --name="rnaseq-nf-$USER" \
+  --name="rnaseq-nf-$WORKSHOP_USER" \
   --compute-env="azure-batch-manual" \
-  --work-dir="az://nf-work/work" \
+  --work-dir="az://work" \
   --revision="master" \
   https://github.com/nextflow-io/rnaseq-nf
 ```
 
 Run it again and `tw` errors: a pipeline with that name already exists. The command is imperative, so each invocation tries to add a pipeline; it has no notion of "already in the desired state".
+
+To remove the pipeline, you can use the `tw` command line again:
+
+```bash
+tw pipelines delete --name="rnaseq-nf-$WORKSHOP_USER"
+```
 
 ### 2.3. Add a pipeline with `seqerakit`
 
@@ -413,48 +536,48 @@ Run it again and `tw` errors: a pipeline with that name already exists. The comm
 
 ```yaml
 pipelines:
-  - name: "rnaseq-nf-${USERNAME}"
+  - name: "rnaseq-nf-${WORKSHOP_USER}"
     url: "https://github.com/nextflow-io/rnaseq-nf"
-    workspace: "my-org/platform-automation"
-    description: "rnaseq-nf for ${USERNAME}, added with seqerakit"
+    workspace: "${TOWER_WORKSPACE_ID}"
+    description: "Added with seqerakit"
     compute-env: "azure-batch-manual"
-    work-dir: "az://nf-work/work"
+    work-dir: "az://work"
     revision: "master"
 ```
 
-`seqerakit` expands `${USERNAME}` from the environment, so set it first, then add the pipeline:
+`seqerakit` expands variables like `${TOWER_WORKSPACE_ID}` and `${WORKSHOP_USER}` from the environment. Both were set in section 0, so just add the pipeline:
 
 ```bash
 cd /workspaces/training/side-quests/platform_automation/seqerakit
-export USERNAME=$USER
 seqerakit add-rnaseq.yml
 ```
 
 If you run it again, it errors, the same way `tw` did, because the pipeline already exists:
 
 ```console
-ERROR: A pipeline with name 'rnaseq-nf-<username>' already exists.
+The pipelines resource already exists and will not be created. Please set 'on_exists: overwrite' to replace the resource or set 'on_exists: ignore' to ignore this error.
 ```
 
 You can force it through with `seqerakit add-rnaseq.yml --overwrite`, which deletes and recreates the pipeline. But that is you telling it to repeat the action. By default, adding twice is an error. To make "add once, and leave it alone after that" the _default_ behaviour, we need a tool that manages existence rather than actions: Terraform.
 
 ### 2.4. Add a pipeline with Terraform
 
-`side-quests/platform_automation/terraform/pipeline` adds the same pipeline declaratively. You describe the pipeline that should exist; Terraform makes the workspace match:
+`side-quests/platform_automation/terraform/pipeline` adds the same pipeline declaratively. You describe the pipeline that should exist; Terraform makes the workspace match. Like the imperative methods above, the config tracks the `master` branch; you will pin it to a release tag below to see Terraform update the pipeline in place.
 
 ```bash
 cd /workspaces/training/side-quests/platform_automation/terraform/pipeline
 terraform init
-terraform plan  -var="username=$USER" -var="workspace_id=<ID>" -var="compute_env_id=<CE_ID>"
-terraform apply -var="username=$USER" -var="workspace_id=<ID>" -var="compute_env_id=<CE_ID>"
+terraform apply -var="username=$WORKSHOP_USER" -var="workspace_id=<ID>" -var="compute_env_id=<CE_ID>"
 ```
 
-Tip: copy `terraform.tfvars.example` to `terraform.tfvars` so you stop passing `-var` flags.
+!!! Tip
 
-Open the Launchpad: `rnaseq-nf-$USER` is there, with no run. Now apply again:
+    copy `terraform.tfvars.example` to `terraform.tfvars` and fill it in so you stop passing `-var` flags.
+
+Open the Launchpad: `rnaseq-nf-$WORKSHOP_USER` is there, with no run. Now apply again:
 
 ```bash
-terraform apply -var="username=$USER" -var="workspace_id=<ID>" -var="compute_env_id=<CE_ID>"
+terraform apply -var="username=$WORKSHOP_USER" -var="workspace_id=<ID>" -var="compute_env_id=<CE_ID>"
 ```
 
 ```console
@@ -463,9 +586,59 @@ No changes. Your infrastructure matches the configuration.
 
 That is the difference. `tw` and `seqerakit` errored on the second run because they perform an action every time. Terraform manages whether the pipeline **exists**: it is already there, so there is nothing to do. Apply ten times, still one pipeline. This is what keeps you from accumulating competing, half-duplicated resources in a shared workspace. To remove the pipeline, `terraform apply -destroy` with the same vars.
 
+**Update in place.** Terraform does more than create-or-skip; it reconciles the pipeline to whatever the config says. The config tracks the `master` branch, which moves as the pipeline gets new commits. Pin it to a fixed release tag instead, so every launch runs the same code. Edit one line: in `main.tf`, line 35 of the `launch` block, change the revision from the `master` branch to the `v2.4` release tag.
+
+=== "After"
+
+    ```hcl title="main.tf" hl_lines="4" linenums="32"
+      launch = {
+        pipeline = "https://github.com/nextflow-io/rnaseq-nf"
+        # The master branch moves; pin a release tag (e.g. v2.4) for reproducible launches.
+        revision       = "v2.4"
+        compute_env_id = var.compute_env_id
+        work_dir       = var.work_dir
+      }
+    ```
+
+=== "Before"
+
+    ```hcl title="main.tf" hl_lines="4" linenums="32"
+      launch = {
+        pipeline = "https://github.com/nextflow-io/rnaseq-nf"
+        # The master branch moves; pin a release tag (e.g. v2.4) for reproducible launches.
+        revision       = "master"
+        compute_env_id = var.compute_env_id
+        work_dir       = var.work_dir
+      }
+    ```
+
+Then apply:
+
+```console
+Terraform will perform the following actions:
+
+  # seqera_pipeline.rnaseq_nf will be updated in-place
+  ~ resource "seqera_pipeline" "rnaseq_nf" {
+      ~ launch = {
+          ~ revision = "master" -> "v2.4"
+            # (4 unchanged attributes hidden)
+        }
+    }
+
+Plan: 0 to add, 1 to change, 0 to destroy.
+```
+
+One pipeline, modified; not a second pipeline, and not an error. That is the third declarative behaviour, alongside create and no-op: update to match. Moving from a branch to a release tag is exactly the kind of change you want under version control: the pinned revision is now recorded in `main.tf`.
+
+!!! note "Pinning a revision vs. Launchpad versions"
+
+    The Platform also has a separate concept of **Launchpad pipeline versions**: several saved launch configurations on one pipeline, with one marked as the default (most recent). You can use this to maintain and control pipeline versions within one concept of a "pipeline".
+
+    The Terraform provider can also publish and promote those versions, and flag drift if someone changes the default in the UI. See the provider's [pipeline versioning guide](https://github.com/seqeralabs/terraform-provider-seqera/blob/master/docs/guides/pipeline-versioning.md).
+
 ### Takeaway
 
-Four ways to add one pipeline, two mental models. `tw` and `seqerakit` are imperative: each run is an action, and adding twice is an error. Terraform is declarative: it manages existence, so a second apply is a no-op. The artifact you hand to the Launch tier is the Launchpad pipeline `rnaseq-nf-$USER`.
+Four ways to add one pipeline, two mental models. `tw` and `seqerakit` are imperative: each run is an action, and adding twice is an error. Terraform is declarative: it manages existence, so a second apply is a no-op or an update-in-place. The artifact you hand to the Launch tier is the Launchpad pipeline `rnaseq-nf-$WORKSHOP_USER`.
 
 ---
 
@@ -477,35 +650,53 @@ Everything in this section runs the pipeline the Maintainer already configured. 
 
 ### 3.1. Use the GUI
 
-Open the **Launchpad**, select `rnaseq-nf-$USER`, and click **Launch**. The compute environment, revision, and work directory are already filled in by the Maintainer, so a Launch user just clicks the button. Submit it and the run appears under **Runs**.
+Open the **Launchpad**, select `rnaseq-nf-$WORKSHOP_USER`, and click **Launch**. The compute environment, revision, and work directory are already filled in by the Maintainer, so a Launch user just clicks the button. Submit it and the run appears under **Runs**.
 
 ### 3.2. Use the `tw` CLI
 
 ```bash
-tw launch rnaseq-nf-$USER
+tw launch rnaseq-nf-$WORKSHOP_USER
 ```
 
-One command, no flags: everything is pre-configured on the Launchpad entry. The CLI submits the run and prints its URL.
+It should show something like:
 
-For an automated launch, pin the parameters in a version-controlled file and pass it with `--params-file params.yaml`. That keeps each run reproducible, which is the whole reason to drive launches from code rather than the form.
+```console
+  Workflow 2ZXaU1AzEn7Onk submitted at [Organization / Workspace] workspace.
+
+    https://cloud.seqera.io/orgs/Organization/workspaces/Workspace/watch/2ZXaU1AzEn7Onk
+```
+
+You can monitor the run by clicking the provided URL.
+
+!!! Note Using a params.yml
+
+    If you wish to provide parameters to the pipeline, you can do so with the `--params-file` flag.
 
 ### 3.3. Use `seqerakit`
 
-`seqerakit` launches a pipeline that already exists on the Launchpad, filling in the `tw launch` command from `seqerakit/launch-rnaseq.yml`. Set `USERNAME`, dry run first, then launch:
+`seqerakit` launches a pipeline that already exists on the Launchpad, filling in the `tw launch` command from `seqerakit/launch-rnaseq.yml`. `WORKSHOP_USER` is set from section 0; set the compute environment name, dry run first, then launch:
 
 ```bash
 cd /workspaces/training/side-quests/platform_automation/seqerakit
-export USERNAME=$USER
+export COMPUTE_ENVIRONMENT=<compute environment name>
 
 seqerakit launch-rnaseq.yml --dryrun   # prints the tw command, changes nothing
 seqerakit launch-rnaseq.yml            # launches for real
 ```
 
-The dry run shows the underlying `tw` command. Run it twice and you get two runs. That is the imperative model: do the thing, now. It is the opposite of Terraform (section 2.4), which manages existence. See `side-quests/platform_automation/seqerakit/README.md`.
+The dry run shows the underlying `tw` command. Run it twice and you get two runs. That is the imperative model: do the thing, now.
 
-### 3.4. Examine the cloud resources
+One advantage of using Seqerakit is the YAML forms a template of actions to perform. Because of this we can do two more things: firstly, we can save it and re-use it later. Secondly, we can launch the same pipeline several times by adding more launch blocks to the YAML file. This is useful if you want to launch the same pipeline with different parameters or on different compute environments. Let's try and launch the pipeline now with
 
-A run does not create one neatly named cloud job. Nextflow submits **many** Batch jobs and tasks, one per process invocation, so you will not find a single resource named after the Platform run. Open the run on the Platform (**Runs** → your run), which mirrors the underlying Batch service: the task table here is the same work you can see in the cloud console.
+```bash
+seqerakit launch-rnaseq-multiple.yml
+```
+
+### 3.4. Side note: Examine the cloud resources
+
+It's worth taking a second to examine the cloud resources here.
+
+A run does not create one neatly named cloud job. The platform submits a single job to the compute environment who's only job is to configure and run Nextflow. The Nextflow running within this job submits **many** Batch jobs and tasks, one per process invocation. Overall, this means you will not find a single resource named after the Platform run. Open the run on the Platform (**Runs** → your run), which mirrors the underlying Batch service: the task table here is the same work you can see in the cloud console.
 
 If you have cloud access, the prefixes Nextflow uses in each Batch service are:
 
@@ -517,7 +708,7 @@ The relationship is the point: the Platform hands work to Batch, Batch runs it o
 
 ### 3.5. Side note: launch Actions
 
-There is one more way to launch, built for automation rather than people. An **Action** is a saved launch configuration behind a single URL: call that URL and the pipeline runs, with no Launchpad and no `tw`. A Maintainer creates one in the UI under **Actions** → **Add action**, picks the pipeline and compute environment, and saves it. The Platform then shows a ready-made `curl` command for the Action's endpoint.
+There is one more way to launch, built for automation rather than people. An **Action** is a saved launch configuration behind a single URL: call that URL and the pipeline runs, with no Launchpad and no `tw`. A Maintainer creates one in the UI under **Actions** → **Add action**, picks the pipeline, compute environment and other settings, and saves it as a configuration. The Platform then shows a ready-made `curl` command for the Action's endpoint.
 
 The split mirrors the roles: _creating_ an Action needs the Maintain role, but _triggering_ it needs only a Launch token. That is the point of the stratified launch: a Maintainer hands launchers (or an automation system) a URL they can call to run the pipeline, and nothing more.
 

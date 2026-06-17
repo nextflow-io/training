@@ -6,17 +6,18 @@ variable "server_url" {
   default     = "https://api.cloud.seqera.io"
 }
 
-# Your username makes the pipeline name unique in a shared workspace. No
+# Your workshop handle makes the pipeline name unique in a shared workspace. No
 # default on purpose, so you must set it. Set it with -var or in terraform.tfvars:
 #
-#   terraform apply -var="username=$USER"
+#   terraform apply -var="username=$WORKSHOP_USER"
 variable "username" {
-  description = "Your username. Makes the Launchpad pipeline name unique."
+  description = "Your workshop handle. Makes the Launchpad pipeline name unique."
   type        = string
 
+  # No dots: Launchpad pipeline names reject them.
   validation {
-    condition     = can(regex("^[a-zA-Z0-9._-]{2,80}$", var.username))
-    error_message = "username must be 2-80 chars: letters, numbers, dot, dash, underscore."
+    condition     = can(regex("^[a-zA-Z0-9_-]{2,80}$", var.username))
+    error_message = "username must be 2-80 chars: letters, numbers, dash, underscore (no dots)."
   }
 }
 
@@ -35,5 +36,5 @@ variable "compute_env_id" {
 variable "work_dir" {
   description = "Azure Blob Storage work directory for runs of this pipeline."
   type        = string
-  default     = "az://nf-work/work"
+  default     = "az://work"
 }
