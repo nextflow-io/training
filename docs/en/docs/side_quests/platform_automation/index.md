@@ -570,9 +570,9 @@ terraform init
 terraform apply -var="username=$WORKSHOP_USER" -var="workspace_id=<ID>" -var="compute_env_id=<CE_ID>"
 ```
 
-!!! Tip
+!!! tip
 
-    copy `terraform.tfvars.example` to `terraform.tfvars` and fill it in so you stop passing `-var` flags.
+    Copy `terraform.tfvars.example` to `terraform.tfvars` and fill it in so you stop passing `-var` flags.
 
 Open the Launchpad: `rnaseq-nf-$WORKSHOP_USER` is there, with no run. Now apply again:
 
@@ -668,7 +668,7 @@ It should show something like:
 
 You can monitor the run by clicking the provided URL.
 
-!!! Note Using a params.yml
+!!! note "Using a params file"
 
     If you wish to provide parameters to the pipeline, you can do so with the `--params-file` flag.
 
