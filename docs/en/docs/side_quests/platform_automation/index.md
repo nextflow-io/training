@@ -10,8 +10,8 @@ In this side quest, we'll drive the Platform across three workspace roles of dec
 
 - Create a compute environment two ways, with increasing control over the cloud: the UI (Batch Forge) and Terraform
 - Add a pipeline to the Launchpad declaratively with Terraform, and see idempotency
-- Launch a pipeline using the GUI, CLI and seqerakit.
-- Tell declarative existence (Terraform) apart from imperative actions (the UI, seqerakit, `tw`) and learn when to use each
+- Launch a pipeline using the GUI, CLI and `seqerakit`.
+- Tell declarative existence (Terraform) apart from imperative actions (the UI, `seqerakit`, `tw`) and learn when to use each
 
 ### Prerequisites
 
@@ -23,7 +23,7 @@ Before taking on this side quest, you should:
 - Ideally, a GitHub access token added too, to avoid GitHub rate limits
 - Be comfortable with the command line and basic Nextflow concepts
 
-New to running pipelines on Seqera at all? Start with the gentler "Run pipelines on Seqera" module in the [Nextflow Triathlon](https://training.nextflow.io/) (sign up, launch in the UI, the `tw` CLI). This side quest is the automation layer on top of it: roles, Terraform, seqerakit, and Actions.
+New to running pipelines on Seqera at all? Start with the gentler "Run pipelines on Seqera" module in the [Nextflow Triathlon](https://training.nextflow.io/) (sign up, launch in the UI, the `tw` CLI). This side quest is the automation layer on top of it: roles, Terraform, `seqerakit`, and Actions.
 
 ---
 
@@ -31,15 +31,50 @@ New to running pipelines on Seqera at all? Start with the gentler "Run pipelines
 
 ### Open the training codespace
 
-The Codespace contains all the tools you need (Terraform, `tw`, seqerakit); you
+The Codespace contains all the tools you need (Terraform, `tw`, `seqerakit`); you
 install nothing yourself. Open it now and read on while it builds; it is ready
 when the terminal returns to a prompt.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-The assets for this side quest live under `side-quests/platform_automation/`:
-`terraform/compute-env/`, `terraform/pipeline/`, and `seqerakit/`. Each section
-below tells you where to `cd`.
+### Move into the project directory
+
+The Codespace terminal opens at the repository root (`/workspaces/training`). All the assets for this side quest live under `side-quests/platform_automation/`, so move there now:
+
+```bash
+cd /workspaces/training/side-quests/platform_automation
+```
+
+Focus VSCode on this directory so the file explorer shows the assets you'll edit:
+
+```bash
+code .
+```
+
+### Review the materials
+
+The directory holds the Terraform and `seqerakit` configurations for each role. Each section below tells you which subdirectory to `cd` into:
+
+??? abstract "Directory contents"
+
+    ```console
+    .
+    ├── terraform
+    │   ├── compute-env        # section 1 (Admin): provision the cloud + compute environment
+    │   │   ├── main.tf
+    │   │   ├── variables.tf
+    │   │   ├── terraform.tfvars.example
+    │   │   └── README.md
+    │   └── pipeline           # section 2 (Maintain): add a pipeline to the Launchpad
+    │       ├── main.tf
+    │       ├── variables.tf
+    │       ├── terraform.tfvars.example
+    │       └── README.md
+    └── seqerakit              # sections 2 & 3: add and launch a pipeline
+        ├── add-rnaseq.yml
+        ├── launch-rnaseq.yml
+        └── README.md
+    ```
 
 ### Create an access token
 
@@ -55,7 +90,7 @@ export TOWER_ACCESS_TOKEN=<paste-token>
 export SEQERA_ACCESS_TOKEN=$TOWER_ACCESS_TOKEN
 ```
 
-Terraform, `tw`, and seqerakit all read the token from these variables. Check it worked:
+Terraform, `tw`, and `seqerakit` all read the token from these variables. Check it worked:
 
 ```bash
 tw info
@@ -86,7 +121,7 @@ tw workspaces list
 
 This prints a table with the workspace ID, the workspace name, and the organization name.
 
-Two forms of the same workspace turn up in this module. Terraform and the API want the **numeric** ID (`workspace_id`). `tw` and seqerakit accept either the numeric ID or the `Organization/Workspace` **name** (e.g. `my-org/platform-automation`). Export the numeric ID once so `tw` targets the shared workspace without a `--workspace` flag on every command:
+Two forms of the same workspace turn up in this module. Terraform and the API want the **numeric** ID (`workspace_id`). `tw` and `seqerakit` accept either the numeric ID or the `Organization/Workspace` **name** (e.g. `my-org/platform-automation`). Export the numeric ID once so `tw` targets the shared workspace without a `--workspace` flag on every command:
 
 ```bash
 export TOWER_WORKSPACE_ID=<numeric-workspace-id>
@@ -372,7 +407,7 @@ tw pipelines add \
 
 Run it again and `tw` errors: a pipeline with that name already exists. The command is imperative, so each invocation tries to add a pipeline; it has no notion of "already in the desired state".
 
-### 2.3. Add a pipeline with seqerakit
+### 2.3. Add a pipeline with `seqerakit`
 
 `seqerakit` is a wrapper over `tw` that reads a YAML file and runs the underlying `tw` commands. It keeps the configuration as code, so a teammate can reproduce the exact same pipeline. `seqerakit/add-rnaseq.yml` describes the pipeline:
 
@@ -498,14 +533,14 @@ You drove the Seqera Platform programmatically across three roles, each handing 
 
 ### Key patterns
 
-- **Everything is one API.** The GUI, Terraform, `tw`, and seqerakit all call the same Platform API. Anything you can click, you can automate.
+- **Everything is one API.** The GUI, Terraform, `tw`, and `seqerakit` all call the same Platform API. Anything you can click, you can automate.
 - **Use the right tool.** Terraform manages resources as state: what should exist, where. `tw` and `seqerakit` act on the Platform imperatively: they do the thing, now.
 
-|              | Terraform     | seqerakit / tw / Action |
-| ------------ | ------------- | ----------------------- |
-| Manages      | existence     | actions                 |
-| Run twice    | no-op         | two runs                |
-| Mental model | desired state | do the thing, now       |
+|              | Terraform     | `seqerakit` / `tw` / Action |
+| ------------ | ------------- | --------------------------- |
+| Manages      | existence     | actions                     |
+| Run twice    | no-op         | two runs                    |
+| Mental model | desired state | do the thing, now           |
 
 - **Roles stratify what each token can do.** A Maintain token defines pipelines and Actions; a Launch token can only trigger an Action and nothing else. The Action is the safe handoff from maintainers to launchers (and to automation).
 
