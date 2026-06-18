@@ -86,6 +86,8 @@ The directory holds the Terraform and `seqerakit` configurations for each role. 
         └── launch-rnaseq-multiple.yml
     ```
 
+We'll cover the content of these files in a moment.
+
 ### Check workspace access
 
 This training requires you to be in a workspace. Navigate to [Seqera Platform](https://cloud.seqera.io/) or your Enterprise install and check you can see the relevant workspace which should be under an organization. There should already be credentials pre-configured and if you have Maintain or lower permissions, a compute environment and/or pipeline should already exist. If you cannot see the workspace, please ask your workspace owner to add you to one.
