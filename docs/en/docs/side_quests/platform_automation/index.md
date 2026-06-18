@@ -174,7 +174,7 @@ The same compute environment can be created with increasing control over the clo
 
 Batch Forge is the hands-off option: the Platform reaches into your cloud and creates the resources for you. Most convenient, least control.
 
-In the side bar, open **Compute Environments** and click **Create compute environment**. Give it a name, pick your cloud platform, and select the credentials for that cloud. The rest of the form differs by provider; recommended settings:
+In the side bar, open **Compute Environments** and click **Create compute environment**. Give it a name, pick your cloud platform, and select the credentials for that cloud. The rest of the form differs by provider and your cloud setup; recommended settings:
 
 **AWS**
 
