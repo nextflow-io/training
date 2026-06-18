@@ -456,7 +456,7 @@ In the workspace, open the **Launchpad** and click **Add pipeline**. Fill in the
 
 Click **Add**. The pipeline appears on the Launchpad with no run started. Adding a pipeline only saves a launch configuration; it does not run anything.
 
-To remove from the workspace, you can click the hamburger menu on the top right and click **Delete**.
+To remove from the workspace, you can click the menu button on the top right and click **Delete**.
 
 ### 2.2. Add a pipeline via `tw`
 
