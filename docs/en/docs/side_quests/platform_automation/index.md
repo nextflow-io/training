@@ -164,7 +164,7 @@ We set this by hand rather than reading `$USER`: in the Codespace everyone share
 
 ## 1. Admin: compute environments and cloud
 
-**Requires:** Owner or Admin role, and permissions in the cloud environment. If you are using a Cloud provider, authenticate with them first via their CLI (e.g. `aws sso login`).
+**Requires:** Owner or Admin role, and permissions in the cloud environment. If you are using a Cloud provider, authenticate with them first via their CLI (e.g. `aws sso login`). There must be valid credentials in the workspace to perform the operations in the Cloud and build compute environments, please check the Seqera documentation for further details.
 
 The same compute environment can be created with increasing control over the cloud. We build it two ways.
 
