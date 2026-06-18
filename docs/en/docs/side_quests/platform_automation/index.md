@@ -113,7 +113,19 @@ This prints the API endpoint and the authenticated user. If it errors, the token
 
     This only exists in a single terminal session, if you open a new terminal you will need to export them again.
 
-For Seqera Enterprise, also set `SEQERA_API_URL` (and the `server_url` Terraform variable) to your install's API URL. Everything else is identical.
+For Seqera Enterprise, also set the environment variable `TOWER_API_ENDPOINT` to your install's API URL. Everything else is identical.
+
+```bash
+export TOWER_API_ENDPOINT=<your-api-url>
+```
+
+In Terraform, you must set the `server_url` variable to the same value.
+
+```hcl
+provider "seqera" {
+  server_url = "<your-api-url>"
+}
+```
 
 ### Find your organization and workspace IDs
 
