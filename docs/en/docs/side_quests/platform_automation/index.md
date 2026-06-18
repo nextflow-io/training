@@ -24,6 +24,18 @@ Before taking on this side quest, you should:
 - Be comfortable with the command line and basic Nextflow concepts
 
 
+### Know your role
+
+The work is split by role, from most to least privileged. Start at the highest tier your access allows:
+
+| Tier                                                    | Role          | Can change                               | Produces              |
+| ------------------------------------------------------- | ------------- | ---------------------------------------- | --------------------- |
+| [Admin](#1-admin-compute-environments-and-cloud)        | Owner / Admin | Compute environments and cloud resources | a Compute environment |
+| [Maintain](#2-maintain-add-a-pipeline-to-the-launchpad) | Maintain      | Pipelines on the Launchpad               | a Launchpad pipeline  |
+| [Launch](#3-launch-run-a-pipeline)                      | Launch        | Nothing; can only run                    | pipeline runs         |
+
+An Admin user will learn how to create compute environments. If you only have Maintain, your workspace must already include one valid compute environment; start at section 2. If you only have Launch, your workspace must have a pre-configured pipeline (and optionally an Action) to run; start at section 3. Each section opens with what it requires.
+
 ---
 
 ## 0. Get started
@@ -133,18 +145,6 @@ export WORKSHOP_USER=<your-handle>   # e.g. ada, jdoe, team-rocket
 ```
 
 We set this by hand rather than reading `$USER`: in the Codespace everyone shares the same Linux user, so `$USER` is identical for all learners and would collide.
-
-#### Know your role
-
-The work is split by role, from most to least privileged. Start at the highest tier your access allows:
-
-| Tier                                                    | Role          | Can change                               | Produces             |
-| ------------------------------------------------------- | ------------- | ---------------------------------------- | -------------------- |
-| [Admin](#1-admin-compute-environments-and-cloud)        | Owner / Admin | Compute environments and cloud resources | a `compute_env_id`   |
-| [Maintain](#2-maintain-add-a-pipeline-to-the-launchpad) | Maintain      | Pipelines on the Launchpad               | a Launchpad pipeline |
-| [Launch](#3-launch-run-a-pipeline)                      | Launch        | Nothing; can only run                    | pipeline runs        |
-
-Admin users create compute environments and assign roles to everyone else. If you only have Maintain, an Admin on your team hands you a `compute_env_id`; start at section 2. If you only have Launch, they hand you a Launchpad pipeline (and optionally an Action) to run; start at section 3. Each section opens with what it requires.
 
 ---
 
