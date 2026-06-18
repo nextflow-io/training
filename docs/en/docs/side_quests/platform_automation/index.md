@@ -253,7 +253,7 @@ The file `forge-ce.json` is the compute environment as the API stores it:
 
 The `forge` block is exactly what the checkboxes set in 1.1. Its presence is what tells the Platform to create and scale the pools for you. In the next section, the absence of this block is what makes the Terraform compute environment manual.
 
-Close the loop: import the file to recreate the compute environment, with nothing retyped.
+This file can be used to recreate the compute environment, with nothing retyped.
 
 ```bash
 tw compute-envs import forge-ce.json --name="azure-batch-copy"
