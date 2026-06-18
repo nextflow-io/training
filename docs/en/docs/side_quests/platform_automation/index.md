@@ -1,6 +1,8 @@
 # Seqera Platform Automation
 
-The Seqera Platform does not run your work. It is an API and a control plane over your cloud. It hands jobs to a compute environment, the compute environment runs them on cloud VMs, and the Platform reads back state, logs, and exit codes.
+The Seqera Platform does not run your work.
+It is an API and a control plane over your cloud.
+It hands jobs to a compute environment, the compute environment runs them on cloud VMs, and the Platform reads back state, logs, and exit codes.
 
 Everything the web UI does, it does by calling the Platform API. So everything is automatable: with the API, Terraform, and the CLI you can manage compute environments, pipelines, and runs as code, with no clicking. This side quest walks that programmatic surface from the most privileged role to the least.
 
