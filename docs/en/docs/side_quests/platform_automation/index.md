@@ -17,13 +17,12 @@ In this side quest, we'll drive the Platform across three workspace roles of dec
 
 Before taking on this side quest, you should:
 
-- Have a Seqera Platform account on Seqera Cloud (`https://cloud.seqera.io`), or an Enterprise install
+- Have a Seqera Platform account on Seqera Cloud [https://cloud.seqera.io](`https://cloud.seqera.io`), or an Enterprise install
 - Be a member of a workspace with a role: Admin, Maintain, or Launch
-- Have credentials for your cloud provider already added to that workspace (not covered here)
-- Ideally, a GitHub access token added too, to avoid GitHub rate limits
+- Have credentials for your cloud provider already added to that workspace (not covered here, see [credentials overview](https://docs.seqera.io/platform-cloud/credentials/overview))
+- Ideally, GitHub credentials are added to your workspace. This is optional, but it would help prevent incidents caused by GitHub rate limits.
 - Be comfortable with the command line and basic Nextflow concepts
 
-New to running pipelines on Seqera at all? Start with the gentler "Run pipelines on Seqera" module in the [Nextflow Triathlon](https://training.nextflow.io/) (sign up, launch in the UI, the `tw` CLI). This side quest is the automation layer on top of it: roles, Terraform, `seqerakit`, and Actions.
 
 ---
 
@@ -151,7 +150,7 @@ Admin users create compute environments and assign roles to everyone else. If yo
 
 ## 1. Admin: compute environments and cloud
 
-**Requires:** Owner or Admin role, and permissions in the cloud environment. If you are using a Cloud provider, authenticate with them first via their CLI.
+**Requires:** Owner or Admin role, and permissions in the cloud environment. If you are using a Cloud provider, authenticate with them first via their CLI (e.g. `aws sso login`).
 
 The same compute environment can be created with increasing control over the cloud. We build it two ways.
 
