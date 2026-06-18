@@ -23,7 +23,6 @@ Before taking on this side quest, you should:
 - Ideally, GitHub credentials are added to your workspace. This is optional, but it would help prevent incidents caused by GitHub rate limits.
 - Be comfortable with the command line and basic Nextflow concepts
 
-
 ### Know your role
 
 The work is split by role, from most to least privileged. Start at the highest tier your access allows:
@@ -100,7 +99,6 @@ We authenticate to the Platform to tell it who we are. That is what grants the p
 
 ```bash
 export TOWER_ACCESS_TOKEN=<paste-token>
-export SEQERA_ACCESS_TOKEN=$TOWER_ACCESS_TOKEN
 ```
 
 Terraform, `tw`, and `seqerakit` all read the token from these variables. Check it worked:
