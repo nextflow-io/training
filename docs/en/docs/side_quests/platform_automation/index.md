@@ -85,6 +85,10 @@ The directory holds the Terraform and `seqerakit` configurations for each role. 
         └── launch-rnaseq-multiple.yml
     ```
 
+### Check workspace access
+
+This training requires you to be in a workspace. Navigate to [Seqera Platform](https://cloud.seqera.io/) or your Enterprise install and check you can see the relevant workspace which should be under an organization. There should already be credentials pre-configured and if you have Maintain or lower permissions, a compute environment and/or pipeline should already exist. If you cannot see the workspace, please ask your workspace owner to add you to one.
+
 ### Create an access token
 
 We authenticate to the Platform to tell it who we are. That is what grants the permissions of our role. Seqera uses a **personal access token**: a bearer token you create once and send with every API call, in an `Authorization: Bearer <token>` header. The token carries your identity and role, so the Platform knows who you are and what you can do. Anyone with the token can act as you, so keep it secret. In this training we save it as an environment variable.
