@@ -176,7 +176,7 @@ The same compute environment can be created with increasing control over the clo
 
 Batch Forge is the hands-off option: the Platform reaches into your cloud and creates the resources for you. Most convenient, least control.
 
-In the side bar, open **Compute Environments** and click **Create compute environment**. Give it a name, pick your cloud platform, and select the credentials for that cloud. The rest of the form differs by provider and your cloud setup; recommended settings:
+In the side bar, open **Compute Environments** and click **Create compute environment**. Give it a name, pick your cloud platform, and select the credentials for that cloud. The rest of the form differs by provider; recommended settings:
 
 **AWS**
 
@@ -282,7 +282,7 @@ The manual marker: `head_pool` is set to the pool Terraform just made and there 
 
 Let's walk the key blocks of `terraform/compute-env/main.tf`.
 
-The first block declares the providers and pins their versions. The `seqera` provider is pinned to exactly `0.40.1`:
+The first block declares the providers, pins their versions and sets them up. The `seqera` provider is pinned to exactly `0.40.1`:
 
 ```terraform
 terraform {
@@ -294,11 +294,7 @@ terraform {
     random  = { source = "hashicorp/random", version = ">= 3.0" }
   }
 }
-```
 
-Next we configure the providers. The `seqera` provider reads `TOWER_ACCESS_TOKEN` from the environment, so there is no token argument here:
-
-```terraform
 provider "azurerm" {
   features {}
   subscription_id = var.subscription_id
@@ -308,6 +304,14 @@ provider "seqera" {
   server_url = var.server_url
 }
 ```
+
+Let's initialise the Terraform provider:
+
+```bash
+terraform init
+```
+
+You should see Terraform install the relevant providers and create a lockfile. This makes sure anyone using this Terraform is using the same provider versions. Terraform can and should be shared, so it is very important to make sure everyone uses the same versions!
 
 Next we can define some variables we can use throughout our deployment. In this case, we will set the node sizes and details once and reuse them throughout the configuration:
 
@@ -347,7 +351,7 @@ resource "random_string" "suffix" {
 }
 ```
 
-Then the node pools themselves. Terraform creates two pools in Azure Batch with the `azurerm_batch_pool` resource. You can add as many as you like, but the details must match the values the Azure provider expects. Here we start a fixed-size head pool and a dynamically sized worker pool:
+Then the node pools themselves. Terraform creates two pools in Azure Batch with the `azurerm_batch_pool` resource. You can add as many as you like, but the details must match the values the Azure provider expects. We won't go into the details of the resource here, you can check them yourself, but you can see how some details refer to variables and outputs of other steps:
 
 ```terraform
 # Head pool: runs the Nextflow head job. One node is enough.
@@ -359,79 +363,10 @@ resource "azurerm_batch_pool" "head" {
   vm_size             = local.head_vm_size
   node_agent_sku_id   = local.node_agent_sku_id
   max_tasks_per_node  = local.head_vm_cores
-
-  fixed_scale {
-    target_dedicated_nodes = 1
-  }
-
-  storage_image_reference {
-    publisher = "microsoft-dsvm"
-    offer     = "ubuntu-hpc"
-    sku       = "2404"
-    version   = "latest"
-  }
-
-  container_configuration {
-    type = "DockerCompatible"
-  }
-}
-
-# Worker pool: runs the pipeline tasks. Autoscales 0..worker_max_nodes.
-resource "azurerm_batch_pool" "worker" {
-  name                = "rnaseq-worker-${random_string.suffix.result}"
-  display_name        = "rnaseq worker pool"
-  resource_group_name = var.batch_account_rg
-  account_name        = var.batch_account_name
-  vm_size             = local.worker_vm_size
-  node_agent_sku_id   = local.node_agent_sku_id
-  max_tasks_per_node  = local.worker_vm_cores
-
-  auto_scale {
-    evaluation_interval = "PT5M"
-    formula             = <<-FORMULA
-      pending = avg($PendingTasks.GetSample(180 * TimeInterval_Second));
-      $TargetDedicatedNodes = min(${local.worker_max_nodes}, pending);
-      $NodeDeallocationOption = taskcompletion;
-    FORMULA
-  }
-
-  storage_image_reference {
-    publisher = "microsoft-dsvm"
-    offer     = "ubuntu-hpc"
-    sku       = "2404"
-    version   = "latest"
-  }
-
-  container_configuration {
-    type = "DockerCompatible"
-  }
-
-  # Terraform manages the pool, not its live scale.
-  lifecycle {
-    ignore_changes = [auto_scale, fixed_scale]
-  }
-}
+  # Etc...
 ```
 
-Each pool in `main.tf` also carries a `start_task` (elided above) that runs once per node at startup. Forge adds an equivalent task to the pools it creates; manual pools get nothing, so we replicate the essential parts: install `azcopy` (Nextflow's Azure Batch executor uses it to stage data) and register the AppArmor profile Fusion needs on Ubuntu 24.04 nodes. See the `node_start_task_script` local in the file for the full script.
-
-Once we've built the Azure Batch node pools, we add the Seqera Platform compute environment that points to them. The compute environment needs Azure credentials to talk to your cloud. We added those to the workspace earlier (see Prerequisites), so we look them up by name rather than storing keys here. The `seqera_credentials` data source lists the credentials in the workspace, and we pick out the one whose name matches:
-
-```terraform
-# Azure credentials already stored in the Platform, looked up by name.
-data "seqera_credentials" "all" {
-  workspace_id = var.workspace_id
-}
-
-locals {
-  azure_credentials_id = one([
-    for c in data.seqera_credentials.all.credentials : c.id
-    if c.name == var.azure_credential_name
-  ])
-}
-```
-
-Finally, the compute environment itself. This is the manual marker in code: `head_pool` points at the pool we just created and `nextflow_config` routes tasks to the worker pool's queue. `enable_wave` and `enable_fusion` turn on Wave (container provisioning) and the Fusion file system, the same checkboxes you would tick in the UI; with Fusion enabled, Wave must be too. Because it references `azurerm_batch_pool.head.name` and `azurerm_batch_pool.worker.name`, Terraform knows to create the pools first:
+Once we've built the Azure Batch node pools, we add the Seqera Platform compute environment that points to them. This is the manual marker in code: `head_pool` points at the pool we just created and `nextflow_config` routes tasks to the worker pool's queue. Because they reference `azurerm_batch_pool.head.name` and `azurerm_batch_pool.worker.name` respectively, Terraform knows to create the pools on Azure Batch first:
 
 ```terraform
 resource "seqera_compute_env" "main" {
@@ -457,27 +392,24 @@ resource "seqera_compute_env" "main" {
 }
 ```
 
-The last block is the output the next tier needs:
-
-```terraform
-output "compute_env_id" {
-  value = seqera_compute_env.main.compute_env_id
-}
-```
-
-Terraform reads those references and works out the order itself: pools first, then the compute environment that depends on them.
-
-Now, we can run Terraform to apply these changes.
+Now, we can run Terraform to apply these changes, where it will create our Azure Batch pools and then the Seqera Platform compute environment.
 
 ```bash
-# you may need to log in to the cloud provider with `az login`
-terraform init
 terraform apply
 ```
 
 After you run `terraform apply`, it will ask you to fill in the details defined in `variables.tf`
 
-!!! tip "Tearing it down"
+- `subscription_id` is the subscription of your Azure account, which you can find in the Azure Portal under **Subscriptions**.
+- `workspace_id` is the numeric workspace ID you exported in section 0.
+- `region` is the Azure region you want to deploy to, e.g. `eastus`.
+- `work_dir` is the Azure Blob work directory you want to use, e.g. `az://work`.
+- `batch_account_name` is the name of the Azure Batch account you want to use, which you can find in the Azure Portal under **Batch accounts**.
+- `batch_account_rg` is the resource group of the Azure Batch account you want to use, which you can find in the Azure Portal under **Batch accounts**.
+- `azure_credentials_name` is the ID of the Azure credentials you want to use, which you can find in the Platform under **Credentials**.
+- `server_url` is the URL of your Seqera Platform instance, which you can find in the Platform under **Settings**. This will default to the cloud instance of Seqera Platform by default.
+
+!!! tip "Re-using variables"
 
     You can save them as a .tfvars file and Terraform will read them automatically, so you don't have to type them each time. See `terraform.tfvars.example` for the full variable reference.
     Alternatively, you can save them as an environment variable preceded by `TF_VAR_`, for example `TF_VAR_subscription_id=00000000-0000-0000-0000-000000000000`.
@@ -494,7 +426,7 @@ On the Platform side, read the ID Terraform produced:
 terraform output compute_env_id
 ```
 
-On the Azure side, open the Batch account in the portal. You will see the head and worker pools Terraform created, sitting idle with no jobs yet. Once you launch a pipeline (sections 2 and 3), jobs and tasks stack onto these pools, and you can drill into a task's logs and exit code. That is the whole point of the Admin tier: the Platform submits to Azure Batch, and Azure Batch runs the work. Maintain- and Launch-role users see only the compute environment in the workspace, not the cloud behind it.
+If you have access to the Azure side, open the Batch account in the portal. You will see the head and worker pools Terraform created, sitting idle with no jobs yet. Once you launch a pipeline (sections 2 and 3), jobs and tasks stack onto these pools, and you can drill into a task's logs and exit code. That is the whole point of the Admin tier: to create cloud resources for other users to work on. Maintain- and Launch-role users see only the compute environment in the workspace, not the cloud behind it.
 
 ### Takeaway
 
