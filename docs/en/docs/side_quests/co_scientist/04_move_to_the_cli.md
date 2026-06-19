@@ -29,17 +29,16 @@ git checkout <branch>   # CoScientist names it like seqera-co-scientist/add-fast
 
     A local clone of your fork is on your machine, on the branch with the `fastp` change.
 
-## 3. Install the CLI.
+## 3. Start the CLI.
 
-Install the CLI (it needs Node.js 18 or later) and sign in:
+The training environment already has the `seqera` CLI installed, so you only need to sign in:
 
 ```bash
-npm install -g seqera
 seqera login
 ```
 
 `seqera login` opens a browser to authenticate against your Seqera account.
-Start an interactive session in the cloned directory:
+Then start an interactive session in the cloned directory:
 
 ```bash
 seqera ai
