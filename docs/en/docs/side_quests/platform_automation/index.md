@@ -230,7 +230,7 @@ tw compute-envs export forge-ce.json --name="<the name you gave it in 1.1>"
 `tw` reads the workspace from `TOWER_WORKSPACE_ID` (set in section 0), so no `--workspace` flag is needed.
 The file `forge-ce.json` is the compute environment as the API stores it:
 
-```json title="forge-ce.json" hl_lines="2 7"
+```json title="forge-ce.json"
 {
   "discriminator": "azure-batch",
   "region": "eastus",
@@ -307,9 +307,10 @@ provider "seqera" {
 }
 ```
 
-Let's initialise the Terraform provider:
+Let's move into the compute env directory and initialise the Terraform provider:
 
 ```bash
+cd terraform/compute-env
 terraform init
 ```
 
@@ -320,12 +321,12 @@ Next we can define some variables we can use throughout our deployment. In this 
 ```terraform title="terraform/compute-env/main.tf" hl_lines="2 3"
 locals {
   head_vm_size      = "Standard_E4ds_v5"
-  worker_vm_size    = "Standard_E16ds_v5"
+  worker_vm_size    = "Standard_E8ds_v5"
   worker_max_nodes  = 8
   node_agent_sku_id = "batch.node.ubuntu 24.04"
 
   # The Platform requires a pool's task slots to equal the node's vCPU count.
-  # Azure VM size names embed that count (Standard_E16ds_v5 -> 16), so derive it
+  # Azure VM size names embed that count (Standard_E8ds_v5 -> 8), so derive it
   # from the size rather than hardcoding a number that can drift out of sync.
   head_vm_cores   = tonumber(regex("^Standard_[A-Z]+([0-9]+)", local.head_vm_size)[0])
   worker_vm_cores = tonumber(regex("^Standard_[A-Z]+([0-9]+)", local.worker_vm_size)[0])
@@ -449,12 +450,15 @@ You add the same pipeline, `rnaseq-nf-$WORKSHOP_USER`, two ways. The first, `tw`
 ### 2.1. Add a pipeline via `tw`
 
 The CLI adds a pipeline in one command.
-Set `--compute-env` to a compute environment in your workspace (if you ran section 1, that is `azure-batch-manual`):
+
+!!! note
+
+    Set the compute-env name to the one you created in section 1.4, or the one your Admin provided. We've left it as `azure-batch-manual` to match the Terraform example above, assuming you won't delete the compute environment in between.
 
 ```bash
 tw pipelines add \
   --name="rnaseq-nf-$WORKSHOP_USER" \
-  --compute-env="<compute-env-name>" \
+  --compute-env="azure-batch-manual" \
   --work-dir="az://work" \
   --revision="master" \
   https://github.com/nextflow-io/rnaseq-nf
@@ -594,6 +598,9 @@ You can monitor the run by clicking the provided URL.
 
 ### 3.3. Use `seqerakit`
 
+`seqerakit` is a command-line tool that wraps `tw`, driving it from YAML instead of flags.
+Each YAML file declares the resources or actions to perform: here a `launch:` block lists the pipeline, workspace, and compute environment to run, with `${...}` values pulled from the environment.
+
 `seqerakit` launches a pipeline that already exists on the Launchpad, filling in the `tw launch` command from `seqerakit/launch-rnaseq.yml`. `WORKSHOP_USER` is set from section 0; set the compute environment name, dry run first, then launch:
 
 ```bash
@@ -606,11 +613,34 @@ seqerakit launch-rnaseq.yml            # launches for real
 
 The dry run shows the underlying `tw` command. Run it twice and you get two runs. That is the imperative model: do the thing, now.
 
+The file you just ran is a single `launch` block:
+
+```yaml title="seqerakit/launch-rnaseq.yml"
+launch:
+  - name: "rnaseq-nf-${WORKSHOP_USER}-run"
+    workspace: "${TOWER_WORKSPACE_ID}"
+    pipeline: "rnaseq-nf-${WORKSHOP_USER}"
+    compute-env: "${COMPUTE_ENVIRONMENT}"
+```
+
 One advantage of `seqerakit` is that the YAML forms a template of actions to perform.
 This buys you two things.
 First, you can save it and re-use it later.
-Second, you can launch the same pipeline several times by adding more launch blocks to the YAML file, which is useful for launching with different parameters or on different compute environments.
-Launch the pipeline now with:
+Second, you can launch the same pipeline several times by adding more launch blocks to the YAML file, which is useful for launching with different parameters or on different compute environments:
+
+```yaml title="seqerakit/launch-rnaseq-multiple.yml"
+launch:
+  - name: "rnaseq-nf-${WORKSHOP_USER}-run-1"
+    workspace: "${TOWER_WORKSPACE_ID}"
+    pipeline: "rnaseq-nf-${WORKSHOP_USER}"
+    compute-env: "${COMPUTE_ENVIRONMENT}"
+  - name: "rnaseq-nf-${WORKSHOP_USER}-run-2"
+    workspace: "${TOWER_WORKSPACE_ID}"
+    pipeline: "rnaseq-nf-${WORKSHOP_USER}"
+    compute-env: "${COMPUTE_ENVIRONMENT}"
+```
+
+Launch both runs now with:
 
 ```bash
 seqerakit launch-rnaseq-multiple.yml
@@ -661,4 +691,4 @@ You drove the Seqera Platform programmatically across three roles, each handing 
 
 ## What's next?
 
-- The AI half of the workshop is the [Building with Seqera AI (CoScientist)](../co_scientist/index.md) side quest. It uses the same `rnaseq-nf` pipeline and API endpoints, but drives them via AI agents.
+- [Building with Seqera AI (CoScientist)](../co_scientist/index.md) side quest uses the same `rnaseq-nf` pipeline and API endpoints, but drives them via AI agents instead of manually.

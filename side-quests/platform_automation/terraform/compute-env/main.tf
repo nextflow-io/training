@@ -29,12 +29,12 @@ provider "seqera" {
 # Pool sizing and image. Edit here rather than exposing every value as a knob.
 locals {
   head_vm_size      = "Standard_E4ds_v5"
-  worker_vm_size    = "Standard_E16ds_v5"
+  worker_vm_size    = "Standard_E8ds_v5"
   worker_max_nodes  = 8
   node_agent_sku_id = "batch.node.ubuntu 24.04"
 
   # The Platform requires a pool's task slots to equal the node's vCPU count.
-  # Azure VM size names embed that count (Standard_E16ds_v5 -> 16), so derive it
+  # Azure VM size names embed that count (Standard_E8ds_v5 -> 8), so derive it
   # from the size rather than hardcoding a number that can drift out of sync.
   head_vm_cores   = tonumber(regex("^Standard_[A-Z]+([0-9]+)", local.head_vm_size)[0])
   worker_vm_cores = tonumber(regex("^Standard_[A-Z]+([0-9]+)", local.worker_vm_size)[0])
