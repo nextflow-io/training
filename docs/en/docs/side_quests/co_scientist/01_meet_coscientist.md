@@ -14,23 +14,30 @@ Navigate to [https://ai.seqera.io/chat](https://ai.seqera.io/chat) and sign in w
 
 Use the **Workspace** selector in the top navigation to choose the provided training workspace.
 
-## 2. Confirm the connection.
+## 2. Confirm the connection and survey the workspace.
 
-Send the following prompt to confirm CoScientist can see your workspace:
+!!! tip "Writing good prompts"
+
+    Be specific and state the action or output you want.
+    [Working with the agent](02_working_with_the_agent.md) covers prompting for intent in depth.
+
+Send one prompt to confirm CoScientist can see your workspace and to get a snapshot of what is already in it:
 
 ```text
-Which Seqera workspace am I connected to, and what compute environments are available here?
+Which Seqera workspace am I connected to? List the compute environments, the pipelines on the Launchpad, and the datasets you can see.
 ```
 
 ??? example "What CoScientist typically does"
 
-    It names the connected workspace and lists the available compute environment(s).
-    The exact wording will differ from run to run.
+    It names the connected workspace and lists the compute environment(s), Launchpad pipelines, and datasets it can see.
+    The exact wording and the number of items will differ depending on the workspace state.
+
+The same access also covers reference genomes and data links.
 
 !!! note "Checkpoint"
 
-    CoScientist correctly names the **training workspace** and lists at least one compute environment.
-    If it cannot, the workspace connection is not set up; revisit step 1.
+    CoScientist correctly names the **training workspace** and lists at least one compute environment, along with any pipelines and datasets (or reports that none exist yet).
+    If it cannot name the workspace, the connection is not set up; revisit step 1.
 
 ## 3. Ask CoScientist what it can do.
 
@@ -45,26 +52,7 @@ What can you help me with in this workspace? What can you see and what actions c
     It describes that it can help develop pipelines, launch and monitor runs, browse data, and act on GitHub.
     The exact wording will differ from run to run.
 
-## 4. Survey the workspace.
-
-Ask CoScientist for a snapshot of what is already in the workspace:
-
-```text
-List the pipelines on the Launchpad and the datasets in this workspace.
-```
-
-??? example "What CoScientist typically does"
-
-    It returns the current Launchpad pipelines and datasets it can see in the workspace.
-    The exact wording and the number of items listed will differ depending on the workspace state.
-
-The same access also covers reference genomes and data links.
-
-!!! note "Checkpoint"
-
-    CoScientist lists the workspace's pipelines and datasets, or reports that none exist yet.
-
-## 5. Add rnaseq-nf to the Launchpad.
+## 4. Add rnaseq-nf to the Launchpad.
 
 Ask CoScientist to register a pipeline on your behalf:
 
@@ -80,7 +68,7 @@ CoScientist will confirm the action or ask which compute environment to use if m
 
 ![rnaseq-nf on the Launchpad](img/launchpad-rnaseq-nf.png)
 
-## 6. Understand what rnaseq-nf does.
+## 5. Understand what rnaseq-nf does.
 
 `rnaseq-nf` is a small RNA-seq quantification pipeline, a good size to develop and test against.
 It builds a Salmon index from a transcriptome (`INDEX`), runs quality control on the reads (`FASTQC`), quantifies transcript expression with Salmon (`QUANT`), and aggregates the results into a single report (`MULTIQC`).
@@ -97,7 +85,7 @@ graph LR
     MULTIQC --> OUT[multiqc_report.html]
 ```
 
-## 7. Inspect the compute environment.
+## 6. Inspect the compute environment.
 
 Ask CoScientist to read the configuration for the compute environment attached to the pipeline:
 

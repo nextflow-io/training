@@ -48,30 +48,13 @@ seqera ai
 
     `seqera ai` is running in your local clone.
 
-## 4. Ask for an nf-test.
+## 4. Ask for an nf-test and run it to green.
 
 `rnaseq-nf` has no `nf-test` coverage.
 If you are new to `nf-test`, see [Testing with nf-test](../nf_test/index.md) for background on snapshot assertions.
 
 The simplest place to start is a pipeline-level test that runs the whole pipeline on its test data and checks the outputs.
-Send CoScientist the following prompt:
-
-```text
-rnaseq-nf has no nf-test coverage. Add a pipeline-level nf-test that runs the whole pipeline on its test data and checks the outputs.
-```
-
-??? example "What CoScientist typically does"
-
-    It scaffolds a `tests/` directory and a pipeline-level `.nf.test` that runs the pipeline end to end and asserts on the published outputs.
-    The exact wording will differ from run to run.
-
-For a reference of what the generated test looks like, see [`solutions/pipeline.nf.test`](solutions/pipeline.nf.test).
-
-## 5. Snapshot-stable versus unstable output.
-
-Not all output is safe to snapshot.
-Snapshotting unstable output causes tests to fail on every run for reasons unrelated to correctness.
-Use the table below to decide what to assert on.
+Before writing the prompt, decide what is safe to assert on: not all output is stable, and snapshotting unstable output causes tests to fail on every run for reasons unrelated to correctness.
 
 | Output                                                | Snapshot? | Why                                                     |
 | ----------------------------------------------------- | --------- | ------------------------------------------------------- |
@@ -88,18 +71,23 @@ Use the table below to decide what to assert on.
     Salmon can introduce tiny nondeterminism across threads.
     Run it single-threaded (`--threads 1`) when you want a byte-stable `quant.sf` to snapshot.
 
-Send CoScientist the following prompt to steer the assertion:
+With those rules in mind, ask CoScientist to create the test, telling it what to snapshot and what to leave out:
 
 ```text
-Assert on the columns in quant.sf and that the expected output files exist. Do not snapshot the MultiQC HTML, the Salmon logs, cmd_info.json, or anything containing timestamps, versions, or work directory paths.
+Add a pipeline-level nf-test that runs the whole pipeline on its test data. Assert on the quant.sf columns and that the expected output files exist; do not snapshot the MultiQC HTML, Salmon logs, cmd_info.json, or anything containing timestamps, versions, or work directory paths.
 ```
 
-## 6. Run the test to green.
+??? example "What CoScientist typically does"
 
-To run the test repeatedly until it passes, use **goal mode**:
+    It scaffolds a `tests/` directory and a pipeline-level `.nf.test` that runs the pipeline end to end and asserts on the stable outputs.
+    The exact wording will differ from run to run.
+
+For a reference of what the generated test looks like, see [`solutions/pipeline.nf.test`](solutions/pipeline.nf.test).
+
+Then use **goal mode** to run the test repeatedly until it passes, fixing the test along the way:
 
 ```text
-/goal run the pipeline nf-test and fix it until it passes
+/goal run the nf-tests until they pass and fix any issues in the tests
 ```
 
 Goal mode keeps working toward an objective across several attempts and stops once the goal is met.
@@ -110,34 +98,21 @@ By default the CLI asks for your approval before it runs a command, so you see e
 
     `nf-test test` reports a passing test for the pipeline.
 
-## 7. Add a test workflow to CI.
-
-Ask the agent to wire the test suite into continuous integration:
-
-```text
-Add a GitHub Actions workflow that installs nf-test and runs the test suite on every push and pull request.
-```
+## 5. Add the tests and CI to your pull request.
 
 A CI workflow runs the tests automatically on every change, so a regression is caught before it merges.
+The pull request you opened earlier contains the `fastp` step.
+Ask the agent to create the workflow and commit it and the tests to the same branch, so the pull request picks them up, in one prompt:
 
-!!! note "Checkpoint"
-
-    A workflow file exists under `.github/workflows/` that runs `nf-test`.
+```text
+Add a GitHub Actions workflow that installs nf-test and runs the test suite on every push and pull request, then commit the workflow and the nf-test to the branch of my open pull request and push.
+```
 
 <!-- TODO: verify the exact generated GHA workflow (nf-test install action, Nextflow setup) against a real run -->
 
-## 8. Add the tests and CI to your pull request.
-
-The pull request you opened earlier contains the `fastp` step.
-Ask the agent to commit the tests and the workflow to the same branch so the pull request picks them up:
-
-```text
-Commit the nf-test and the CI workflow to the branch of my open pull request and push.
-```
-
 !!! note "Checkpoint"
 
-    The open pull request now also contains the tests and the CI workflow.
+    A workflow file exists under `.github/workflows/` that runs `nf-test`, and the open pull request now contains the `fastp` step, the tests, and the workflow.
 
 Open the pull request and confirm the diff contains the `fastp` step, the tests, and the workflow, and that it targets the branch you intend.
 
