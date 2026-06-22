@@ -25,7 +25,7 @@ On GitHub, go to **Settings → Developer settings → Personal access tokens �
 - **Repository access**: only your `rnaseq-nf` fork
 - **Permissions**: Contents (read and write) and Pull requests (read and write)
 
-Then add the token in CoScientist when it prompts you for GitHub access.
+Add the token to your CoScientist session by clicking your name at the bottom left and selecting **GitHub access token**.
 After adding the token, start a new session so CoScientist picks it up; an existing session keeps using the old token.
 
 !!! note "Checkpoint"
