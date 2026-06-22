@@ -29,7 +29,7 @@ On GitHub, open [nextflow-io/rnaseq-nf](https://github.com/nextflow-io/rnaseq-nf
 Ask CoScientist to add a `fastp` read-trimming step before quantification, reusing the nf-core fastp module, and to open a pull request with the change:
 
 ```text
-In my fork, add a fastp read-trimming step before quantification, reusing the nf-core fastp module, wire its trimmed reads into the QUANT process, and open a pull request.
+In my fork of rnaseq-nf, add a fastp read-trimming step before quantification, reusing the nf-core fastp module, wire its trimmed reads into the QUANT process, and open a pull request. My GitHub user is '<your github user>'.
 ```
 
 Reusing the nf-core module keeps the work small: CoScientist pulls in a tested process and mainly has to get the input and output wiring right, rather than reimplementing fastp.
