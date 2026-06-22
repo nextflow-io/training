@@ -47,7 +47,8 @@
         "vscode": {
             "extensions": [
                 "nf-core.nf-core-extensionpack",
-                "ms-vscode.live-server"
+                "ms-vscode.live-server",
+                "hashicorp.terraform"
             ],
             // Use Python from conda
             "settings": {
