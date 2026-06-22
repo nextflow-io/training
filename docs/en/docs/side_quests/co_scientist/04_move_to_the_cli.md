@@ -46,15 +46,26 @@ Create one at [cloud.seqera.io/tokens](https://cloud.seqera.io/tokens) and expor
 export TOWER_ACCESS_TOKEN=<your token>
 ```
 
-Then start an interactive session in the cloned directory:
+The Seqera AI credits are charged on a **per-organization** basis, so you must select the right organization before using the
 
 ```bash
-seqera ai
+seqera org switch
+```
+
+The interactive prompt will tell you which org to select
+
+```console
+Available organizations:
+
+  1. community (pro)
+  2. Your-Org
+
+Enter selection (1-2), or 'q' to cancel:
 ```
 
 !!! note "Checkpoint"
 
-    `seqera ai` is running in your local clone.
+    `seqera ai` is running in your local clone, configured to use your Seqera Platform workspace AI credits.
 
 ## 4. Ask for an nf-test and run it to green.
 
