@@ -20,14 +20,8 @@
             "version": "latest"
         },
         "ghcr.io/va-h/devcontainers-features/uv": {},
-        "ghcr.io/devcontainers/features/terraform:1": {
-            "version": "1.9.8",
-            "tflint": "none",
-            "terragrunt": "none"
-        },
         "../local-features/apptainer": {},
         "../local-features/tower-agent": {},
-        "../local-features/seqera-cli": {},
         "../local-features/nextflow": {},
         "../local-features/conda-channels": {},
         "../local-features/uv-tools": {}
