@@ -43,9 +43,13 @@ An Admin user will learn how to create compute environments. If you only have Ma
 
 ### Open the training codespace
 
-The Codespace contains all the tools you need (Terraform, `tw`, `seqerakit`); you
-install nothing yourself. Open it now and read on while it builds; it is ready
-when the terminal returns to a prompt.
+For this tutorial you will need the following tools:
+
+- [`tw`](https://github.com/seqeralabs/tower-cli/)
+- [`seqerakit`](https://github.com/seqeralabs/seqerakit)
+- [Terraform](https://www.terraform.io/)
+
+The Codespace should already contain all of these tools, but you can verify them by trying their respective CLI commands.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -54,7 +58,7 @@ when the terminal returns to a prompt.
 The Codespace terminal opens at the repository root (`/workspaces/training`). All the assets for this side quest live under `side-quests/platform_automation/`, so move there now:
 
 ```bash
-cd /workspaces/training/side-quests/platform_automation
+cd side-quests/platform_automation
 ```
 
 Focus VSCode on this directory so the file explorer shows the assets you'll edit:
@@ -174,38 +178,69 @@ You'll build it two ways.
 
 !!! note "This quest uses Azure Batch"
 
-    Section 1.1 covers both AWS and Azure, but everything after it (the `tw` export, the Terraform, and the `az://work` work directory used throughout) assumes an Azure Batch compute environment.
-    AWS and GCP users can follow the same pattern, but the provider-specific resources and work-directory paths will differ.
+    Section 1.1 covers AWS, Azure, GCP, on-prem HPC, and Kubernetes, but everything after it (the `tw` export, the Terraform, and the `az://work` work directory used throughout) assumes an Azure Batch compute environment.
+    Users on other providers can follow the same pattern, but the provider-specific resources and work-directory paths will differ.
 
-### 1.1. Click-ops a compute environment with Batch Forge
+### 1.1. Create a compute environment in the UI
 
-Batch Forge is the hands-off option: the Platform reaches into your cloud and creates the resources for you. Most convenient, least control.
+On the cloud Batch providers (AWS, Azure, GCP), the UI offers **Batch Forge**: the hands-off option where the Platform reaches into your cloud and creates the resources for you. Most convenient, least control. On-prem HPC clusters and Kubernetes use a different, non-Forge flow: the cluster already exists and you point the Platform at it.
 
-In the side bar, open **Compute Environments** and click **Create compute environment**. Give it a name, pick your cloud platform, and select the credentials for that cloud. The rest of the form differs by provider; recommended settings:
+In the side bar, open **Compute Environments** and click **Create compute environment**. Give it a name, pick your platform, and select the credentials for it. The rest of the form differs by provider. Select yours below for recommended settings:
 
-**AWS**
+=== "AWS"
 
-- Region
-- Work directory (S3 bucket)
-- Wave, Fusion, Fast Instance should all be enabled
-- Config mode should be Batch Forge
-- Provisioning model should be Spot, using Spot instances for nodes which run Nextflow tasks.
+    - Region
+    - Work directory (S3 bucket)
+    - Config mode should be Batch Forge
+    - Provisioning model should be Spot, using Spot instances for nodes which run Nextflow tasks.
 
-**Azure**
+=== "Azure"
 
-- Location
-- Work directory (Azure Storage container)
-- Wave and Fusion should be enabled.
-- Select "Separate head and worker pools" to create one pool for the Nextflow head job and a separate pool for the tasks.
-- For the head pool VM type, select a VM you have sufficient quota for. Standard_D2s_v3 (2 CPUs) is a good starting choice.
-- Set the head pool VM count to 1. The head pool runs a single Nextflow head job; it does not need more.
-- For the worker pool, select a VM type you have sufficient quota for. Standard_D4s_v3 (4 CPUs) is a good starting choice.
-- Set the worker pool VM count to 4
-- Leave autoscaling enabled for both pools
+    - Location
+    - Work directory (Azure Storage container)
+    - Select "Separate head and worker pools" to create one pool for the Nextflow head job and a separate pool for the tasks.
+    - For the head pool VM type, select a VM you have sufficient quota for. Standard_D2s_v3 (2 CPUs) is a good starting choice.
+    - Set the head pool VM count to 1. The head pool runs a single Nextflow head job; it does not need more.
+    - For the worker pool, select a VM type you have sufficient quota for. Standard_D4s_v3 (4 CPUs) is a good starting choice.
+    - Set the worker pool VM count to 4
+    - Leave autoscaling enabled for both pools
 
-Leave the other settings at their defaults. Keep **Dispose resources** enabled so the pool is torn down when you delete the compute environment. Click **Add** in the top right.
+=== "GCP"
 
-Watch your cloud console and you will see Forge create the resources: an identity and roles for Nextflow (access to blob storage and the Batch service), a more limited role for the worker tasks (storage only), the pools, and their networking. Many moving parts, all handled for you.
+    - Location (region)
+    - Work directory (Cloud Storage bucket, e.g. `gs://my-bucket`)
+    - Enable Spot instances under GCP Resources to reduce cost.
+    - Config mode should be Batch Forge
+
+=== "On-prem / HPC"
+
+    This is **not** Batch Forge: no pools are created for you. The cluster already exists and the Platform submits to it over SSH or the Tower Agent.
+
+    - Compute platform: your scheduler (Slurm, LSF, PBS Pro, Grid Engine, Moab)
+    - Credentials (SSH key or Tower Agent)
+    - Login hostname: the cluster's login node
+    - Work directory: an absolute path on the shared filesystem
+    - Launch directory (defaults to the work directory if omitted)
+    - Head queue name: the queue the Nextflow head job submits to
+    - Compute queue name: the queue Nextflow submits tasks to
+
+=== "Kubernetes"
+
+    Also **not** Batch Forge: a manual flow against a cluster you prepare first (apply a YAML manifest creating the service accounts and role bindings).
+
+    - Credentials (service-account token or X509 client certificate)
+    - Control-plane URL (from `kubectl cluster-info`)
+    - SSL certificate (from `~/.kube/config`)
+    - Namespace (default `tower-nf`)
+    - Head service account (default `tower-launcher-sa`)
+    - Storage claim name (default `tower-scratch`)
+    - Storage mount path (default `/scratch`)
+    - Work directory: the storage mount path or a subdirectory of it
+    - Head job CPUs and memory
+
+On the cloud Batch providers (AWS, Azure, GCP), leave the other settings at their defaults, keep **Dispose resources** enabled so the pool is torn down when you delete the compute environment, and click **Add** in the top right.
+
+Watch your cloud console and you will see Forge create the resources: an identity and roles for Nextflow (access to blob storage and the Batch service), a more limited role for the worker tasks (storage only), the pools, and their networking. Many moving parts, all handled for you. The on-prem and Kubernetes paths have nothing to forge; they submit to infrastructure you already run.
 
 That convenience is the trade-off: Forge owns those resources and gives you little control. A lab that already runs on managed infrastructure wants the opposite, to describe the resources itself and wire the Platform to them. That is the Terraform path.
 
@@ -333,28 +368,7 @@ locals {
 }
 ```
 
-Next we can refer to resources that already exist. These are called `data` in Terraform. Here we refer to the Azure Batch account:
-
-```terraform title="terraform/compute-env/main.tf"
-# Existing Azure resources the customer owns. Referenced, not managed.
-data "azurerm_batch_account" "existing" {
-  name                = var.batch_account_name
-  resource_group_name = var.batch_account_rg
-}
-```
-
-Now the resources Terraform does create. The pool names must stay unique across re-creates, so we first generate a short random suffix to append to them:
-
-```terraform title="terraform/compute-env/main.tf"
-# Keeps pool names unique across re-creates.
-resource "random_string" "suffix" {
-  length  = 6
-  special = false
-  upper   = false
-}
-```
-
-Then the node pools themselves. Terraform creates two pools in Azure Batch with the `azurerm_batch_pool` resource. You can add as many as you like, but the details must match the values the Azure provider expects. We won't go into the details of the resource here, you can check them yourself, but you can see how some details refer to variables and outputs of other steps:
+Now the resources Terraform does create. In this code, Terraform creates two pools in Azure Batch with the `azurerm_batch_pool` resource. You can add as many as you like, but the details must match the values the Azure provider expects. We won't go into the details of the resource here, you can check them yourself, but you can see how some details refer to variables and outputs of other steps:
 
 ```terraform title="terraform/compute-env/main.tf"
 # Head pool: runs the Nextflow head job. One node is enough.
@@ -386,9 +400,9 @@ resource "seqera_compute_env" "main" {
         region          = var.region
         work_dir        = var.work_dir
         head_pool       = azurerm_batch_pool.head.name
+        worker_pool     = azurerm_batch_pool.worker.name
         enable_wave     = true
         enable_fusion   = true
-        nextflow_config = "process.queue = '${azurerm_batch_pool.worker.name}'\n"
       }
     }
   }

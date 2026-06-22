@@ -12,14 +12,15 @@ terraform {
 
   required_providers {
     seqera  = { source = "seqeralabs/seqera", version = "0.40.1" }
-    azurerm = { source = "hashicorp/azurerm", version = ">= 3.0" }
+    azurerm = { source = "hashicorp/azurerm", version = ">= 4.0" }
     random  = { source = "hashicorp/random", version = ">= 3.0" }
   }
 }
 
 provider "azurerm" {
   features {}
-  subscription_id = var.subscription_id
+  subscription_id                 = var.subscription_id
+  resource_provider_registrations = "none"
 }
 
 provider "seqera" {
@@ -36,25 +37,8 @@ locals {
   # The Platform requires a pool's task slots to equal the node's vCPU count.
   # Azure VM size names embed that count (Standard_E8ds_v5 -> 8), so derive it
   # from the size rather than hardcoding a number that can drift out of sync.
-  head_vm_cores   = tonumber(regex("^Standard_[A-Z]+([0-9]+)", local.head_vm_size)[0])
-  worker_vm_cores = tonumber(regex("^Standard_[A-Z]+([0-9]+)", local.worker_vm_size)[0])
-}
-
-# Keeps pool names unique across re-creates.
-resource "random_string" "suffix" {
-  length  = 6
-  special = false
-  upper   = false
-}
-
-# Manual pools (head_pool set, no forge block) don't receive the node start task
-# that Forge adds to auto-created pools, so we replicate its essential parts:
-#   1. Install azcopy on the shared node path. Nextflow's Azure Batch executor
-#      uses it to stage data; manual pools must provide it.
-#   2. Register the AppArmor profile Fusion needs on Ubuntu 24.04+ nodes. Without
-#      it, container init fails with "unable to apply apparmor profile"
-#      (COMP-1248, moby/moby#50013, launchpad #2111105).
-locals {
+  head_vm_cores          = tonumber(regex("^Standard_[A-Z]+([0-9]+)", local.head_vm_size)[0])
+  worker_vm_cores        = tonumber(regex("^Standard_[A-Z]+([0-9]+)", local.worker_vm_size)[0])
   node_start_task_script = <<-SCRIPT
     set -euo pipefail
 
@@ -87,10 +71,11 @@ locals {
   pool_start_command = "/bin/bash -c 'echo ${base64encode(local.node_start_task_script)} | base64 -d | bash'"
 }
 
-# Existing Azure resources the customer owns. Referenced, not managed.
-data "azurerm_batch_account" "existing" {
-  name                = var.batch_account_name
-  resource_group_name = var.batch_account_rg
+# Keeps pool names unique across re-creates.
+resource "random_string" "suffix" {
+  length  = 6
+  special = false
+  upper   = false
 }
 
 # Head pool: runs the Nextflow head job. One node is enough.
@@ -207,14 +192,15 @@ resource "seqera_compute_env" "main" {
     platform       = "azure-batch"
     credentials_id = local.azure_credentials_id
 
+
     config = {
       azure_batch = {
-        region          = var.region
-        work_dir        = var.work_dir
-        head_pool       = azurerm_batch_pool.head.name
-        enable_wave     = true
-        enable_fusion   = true
-        nextflow_config = "process.queue = '${azurerm_batch_pool.worker.name}'\n"
+        region        = var.region
+        work_dir      = var.work_dir
+        head_pool     = azurerm_batch_pool.head.name
+        worker_pool   = azurerm_batch_pool.worker.name
+        enable_wave   = true
+        enable_fusion = true
       }
     }
   }
