@@ -12,7 +12,7 @@ Along the way you practise the habits that keep you in control: prompt for inten
 To create a failure to work with, launch the pipeline but override that default with a path that does not exist:
 
 ```text
-Launch rnaseq-nf on the Launchpad, but set the transcriptome parameter to /tmp/missing.fa so we have a failed run to work with.
+Launch my rnaseq-nf on the Launchpad, but set the transcriptome parameter to /tmp/missing.fa so we have a failed run to work with.
 ```
 
 The run fails almost immediately at the indexing step, because the file you pointed it at is not there.
