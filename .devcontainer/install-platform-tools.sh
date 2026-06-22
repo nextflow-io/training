@@ -3,6 +3,7 @@
 # Install the tooling used by the platform_automation side quest:
 #   - terraform : provision compute environments and pipelines declaratively
 #   - tw        : the Seqera Platform CLI (tower-cli)
+#   - seqerakit : YAML-driven wrapper around tw for declarative Platform setup
 #   - az        : the Azure CLI, used by Terraform's azurerm provider (az login)
 #
 # These run at container startup (via setup.sh -> onCreateCommand) rather than
@@ -74,6 +75,17 @@ EOF
             ;;
         *) echo "Unsupported architecture for tw: ${ARCH}" >&2; exit 1 ;;
     esac
+fi
+
+# --- seqerakit -------------------------------------------------------------
+# Pure-Python (arch-independent) wrapper that drives tw from YAML. Installed
+# with the conda pip (python.defaultInterpreterPath = /opt/conda/bin/python),
+# so no PEP 668 override is needed. Depends on tw being on PATH (installed above).
+if command -v seqerakit >/dev/null 2>&1; then
+    echo "seqerakit already installed: $(seqerakit --version 2>/dev/null | head -n1)"
+else
+    echo "Installing seqerakit..."
+    pip install --quiet seqerakit
 fi
 
 # --- Azure CLI (az) --------------------------------------------------------
