@@ -57,7 +57,7 @@ What can you help me with in this workspace? What can you see and what actions c
 Ask CoScientist to register a pipeline on your behalf:
 
 ```text
-Add the pipeline https://github.com/nextflow-io/rnaseq-nf to the Launchpad in this workspace, using the available compute environment.
+Add the pipeline https://github.com/nextflow-io/rnaseq-nf to the Launchpad in this workspace, using the available compute environment and a tag to identify it as created by me.
 ```
 
 CoScientist will confirm the action or ask which compute environment to use if more than one is available.
