@@ -8,7 +8,9 @@ You connect your GitHub account, fork `rnaseq-nf`, and have CoScientist add a ne
 
 ## 1. Connect your GitHub account.
 
-Give CoScientist access to your GitHub account by configuring a GitHub token, so it can commit changes and open pull requests on your behalf.
+Give CoScientist access to your GitHub account by configuring a GitHub token, so it can commit changes and open pull requests on your behalf. You can make this token via the Settings -> Developer settings, selecting 'only select repositories', selecting the fork, and assigning the token read/ write for both 'Contents' and 'Pull Requests'.
+
+Add it to your Co-scientist session by clicking your name at the bottom left and selecting 'GitHub access token'.
 After adding the token, start a new session so CoScientist picks it up; an existing session keeps using the old token.
 
 !!! note "Checkpoint"
