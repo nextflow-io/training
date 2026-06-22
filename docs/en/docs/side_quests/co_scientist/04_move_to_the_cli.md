@@ -14,30 +14,38 @@ Developing and testing a pipeline is better suited to your own terminal than the
 - Local access: the agent works against your own files, repos, editor, and personal credentials and config.
 - Iteration: you edit, run, and see results in one terminal, without round-tripping through the web chat.
 
-## 2. Fork the repository.
+## 2. Open your fork in the devcontainer.
 
 You forked `rnaseq-nf` in the previous lesson, and CoScientist opened a pull request with the `fastp` step.
-Clone that fork to your machine and check out the pull request's branch, so you can run and test it locally:
+Open your fork in the devcontainer, which comes with the tools you need already installed.
+Then switch to the pull request's branch so you can run and test the change:
 
 ```bash
-git clone https://github.com/your-user/rnaseq-nf
-cd rnaseq-nf
 git checkout <branch>   # CoScientist names it like seqera-co-scientist/add-fastp-trimming-...
 ```
 
+<!-- TODO: confirm the exact devcontainer entry (Codespaces vs local reopen-in-container) once the rnaseq-nf devcontainer PR is merged -->
+
 !!! note "Checkpoint"
 
-    A local clone of your fork is on your machine, on the branch with the `fastp` change.
+    You are in the devcontainer for your fork, on the branch with the `fastp` change.
 
-## 3. Start the CLI.
+## 3. Install and start the CLI.
 
-The training environment already has the `seqera` CLI installed, so you only need to sign in:
+The devcontainer already includes the `seqera` CLI.
+To install it yourself, or to work outside the devcontainer, run the install script:
 
 ```bash
-seqera login
+curl -fsSL https://ai.seqera.io/install | bash
 ```
 
-`seqera login` opens a browser to authenticate against your Seqera account.
+Then authenticate with a Seqera Platform access token.
+Create one at [cloud.seqera.io/tokens](https://cloud.seqera.io/tokens) and export it before starting the CLI:
+
+```bash
+export TOWER_ACCESS_TOKEN=<your token>
+```
+
 Then start an interactive session in the cloned directory:
 
 ```bash

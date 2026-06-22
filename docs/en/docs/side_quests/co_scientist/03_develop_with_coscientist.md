@@ -2,29 +2,35 @@
 
 Adding a step to a pipeline normally means finding a tool, writing a process, wiring its inputs and outputs, and getting the change reviewed.
 CoScientist can do that legwork for you, and the developer journey starts here, still in the web chat.
-You connect your GitHub account, fork `rnaseq-nf`, and have CoScientist add a new process by reusing an nf-core module and open a pull request, letting it work until the change is done.
+You fork `rnaseq-nf`, give CoScientist scoped access to your fork, and have it add a new process by reusing an nf-core module and open a pull request, letting it work until the change is done.
 
 ---
 
-## 1. Connect your GitHub account.
+## 1. Fork rnaseq-nf.
 
-Give CoScientist access to your GitHub account by configuring a GitHub token, so it can commit changes and open pull requests on your behalf. You can make this token via the Settings -> Developer settings, selecting 'only select repositories', selecting the fork, and assigning the token read/ write for both 'Contents' and 'Pull Requests'.
-
-Add it to your Co-scientist session by clicking your name at the bottom left and selecting 'GitHub access token'.
-After adding the token, start a new session so CoScientist picks it up; an existing session keeps using the old token.
-
-!!! note "Checkpoint"
-
-    CoScientist reports that it can access your GitHub account.
-
-## 2. Fork rnaseq-nf.
-
-Fork the pipeline into your own GitHub account so you have a copy to change.
+Fork the pipeline into your own GitHub account so you have a copy to change, and so you can scope CoScientist's access to just this repository.
 On GitHub, open [nextflow-io/rnaseq-nf](https://github.com/nextflow-io/rnaseq-nf) and select **Fork**.
 
 !!! note "Checkpoint"
 
     The repository `your-user/rnaseq-nf` exists on your GitHub account.
+
+## 2. Give CoScientist access to your fork.
+
+CoScientist commits changes and opens pull requests on your behalf using a GitHub token.
+Create a **fine-grained personal access token** scoped to only your fork, rather than a broad token, so the agent can touch nothing else.
+
+On GitHub, go to **Settings → Developer settings → Personal access tokens → Fine-grained tokens** and generate a token with:
+
+- **Repository access**: only your `rnaseq-nf` fork
+- **Permissions**: Contents (read and write) and Pull requests (read and write)
+
+Then add the token in CoScientist when it prompts you for GitHub access.
+After adding the token, start a new session so CoScientist picks it up; an existing session keeps using the old token.
+
+!!! note "Checkpoint"
+
+    CoScientist reports that it can access your fork.
 
 ## 3. Add a trimming step and open a pull request.
 
