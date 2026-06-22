@@ -6,6 +6,10 @@ It hands jobs to a compute environment, the compute environment runs them on clo
 
 Everything the web UI does, it does by calling the Platform API. So everything is automatable: with the API, Terraform, and the CLI you can manage compute environments, pipelines, and runs as code, with no clicking. This side quest walks that programmatic surface from the most privileged role to the least.
 
+<figure class="excalidraw">
+--8<-- "docs/en/docs/side_quests/platform_automation/img/one-api.excalidraw.svg"
+</figure>
+
 ### Learning goals
 
 In this side quest, we'll drive the Platform across three workspace roles of decreasing permission: **Admin**, **Maintain**, and **Launch**. Each role does one job and hands an artifact to the next. You'll learn how to:
