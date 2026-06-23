@@ -1786,7 +1786,7 @@ nextflow run bad_resources.nf -profile docker
     [96/b70b83] PROCESS_FILES (3) | 3 of 3 ✔
     ```
 
-If you make sure to read your error messages failures like this should not puzzle you for too long. But make sure you understand the resource requirements of the commands you are running so that you can configure your resource directives appropriately.
+On the `local` executor the error is less explicit than it would be on a scheduler: you get `process hasn't exited` and `WARN: Killing running tasks` rather than a message that names the time limit. The connection to make is that Nextflow kills a task when it overruns the resources you gave it, so when a process is terminated without a script-level error, check its resource directives. Here the culprit is the `time` directive, which is far too low for the work the process does. Make sure you understand the resource requirements of the commands you are running so that you can configure your resource directives appropriately.
 
 ### 3.4. Process Debugging Techniques
 
@@ -2290,7 +2290,7 @@ Now it's time to put the systematic debugging approach into practice. The workfl
     ```
 
     ??? solution
-        The `buggy_workflow.nf` contains 9 or 10 distinct errors (depending how you count) covering all major debugging categories. Here's a systematic breakdown of each error and how to fix it
+        The `buggy_workflow.nf` contains 10 distinct errors covering all major debugging categories. Here's a systematic breakdown of each error and how to fix it, in the order you actually encounter them on Nextflow 26.04. The compiler resolves the workflow in two passes: first it parses the syntax, then it statically checks that every variable is defined. So you clear the syntax errors first, then a batch of undefined-variable errors, before the workflow runs at all and the runtime errors begin.
 
         Let's start with those syntax errors:
 
@@ -2304,6 +2304,8 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         output:
             path "${sample_id}_result.txt"
         ```
+
+        With the comma gone, the parser runs to the end of the file looking for the brace that should close `processFiles` and reports `Unexpected input: '<EOF>'`.
 
         **Error 2: Syntax Error - Missing Closing Brace**
         ```groovy linenums="24"
@@ -2323,6 +2325,17 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         }  // Add missing closing brace
         ```
 
+        Now the syntax parses, so the static type checker runs. It reports every undefined variable at once, before the workflow runs:
+
+        ```console
+        Error buggy_workflow.nf:86:29: `sample_ids` is not defined
+        Error buggy_workflow.nf:27:25: `sample` is not defined
+        Error buggy_workflow.nf:28:27: `sample` is not defined
+        Error buggy_workflow.nf:49:33: `i` is not defined
+        ```
+
+        These four lines correspond to three distinct bugs, Errors 3, 4 and 5 below. The last of them, `i`, is a Bash variable that the type checker can't tell apart from a Nextflow variable, so it surfaces here at compile time rather than as a runtime failure. Fix all three before re-running.
+
         **Error 3: Variable Name Error**
         ```groovy linenums="26"
         echo "Processing: ${sample}"     // ERROR: should be sample_id
@@ -2338,14 +2351,23 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         ```groovy linenums="87"
         heavy_ch = heavyProcess(sample_ids)  // ERROR: sample_ids undefined
         ```
-        **Fix:** Use the correct channel and extract sample IDs
+        **Fix:** Use the correct channel
         ```groovy linenums="87"
         heavy_ch = heavyProcess(input_ch)
         ```
 
-        At this point the workflow will run, but we'll still be getting errors (e.g. `Path value cannot be null` in `processFiles`), caused by bad channel structure.
+        **Error 5: Bash Variable Escaping Error**
+        ```groovy linenums="48"
+        echo "Heavy computation $i for ${sample_id}"  // ERROR: $i looks like an undefined Nextflow variable
+        ```
+        **Fix:** Escape the bash variable so Nextflow leaves it for the shell
+        ```groovy linenums="48"
+        echo "Heavy computation \${i} for ${sample_id}"
+        ```
 
-        **Error 5: Channel Structure Error - Wrong Map Output**
+        With those resolved the workflow compiles and starts to run. The first runtime error comes from `processFiles`, which expects a tuple but is being fed a bare value: `Input tuple does not match tuple declaration in process 'processFiles' -- offending value: sample_003`.
+
+        **Error 6: Channel Structure Error - Wrong Map Output**
         ```groovy linenums="83"
         .map { row -> row.sample_id }  // ERROR: processFiles expects tuple
         ```
@@ -2354,29 +2376,18 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         .map { row -> [row.sample_id, file(row.fastq_path)] }
         ```
 
-        But this will break our for for running `heavyProcess()` above, so we'll need to use a map to pass just the sample IDs to that process:
+        That fixes `processFiles`, but `input_ch` now emits a two-element tuple, and `heavyProcess` is still being handed the whole tuple where it expects a single value. The tuple gets rendered into the script as `[sample_005, /path/sample_005.fastq.gz]`, which breaks the Bash command with a syntax error and an exit status of 2.
 
-        **Error 6: Bad channel structure for heavyProcess**
+        **Error 7: Bad channel structure for heavyProcess**
         ```groovy linenums="87"
-        heavy_ch = heavyProcess(input_ch)  // ERROR: input_ch now has 2 elements per emission- heavyProcess only needs 1 (the first)
+        heavy_ch = heavyProcess(input_ch)  // ERROR: input_ch now emits a 2-element tuple; heavyProcess needs only the first element
         ```
-        **Fix:** Use the correct channel and extract sample IDs
+        **Fix:** Pass just the sample IDs
         ```groovy linenums="87"
         heavy_ch = heavyProcess(input_ch.map{it[0]})
         ```
 
-        Now we get a but further but receive an error about `No such variable: i`, because we didn't escape a Bash variable.
-
-        **Error 7: Bash Variable Escaping Error**
-        ```groovy linenums="48"
-        echo "Heavy computation $i for ${sample_id}"  // ERROR: $i not escaped
-        ```
-        **Fix:** Escape the bash variable
-        ```groovy linenums="48"
-        echo "Heavy computation \${i} for ${sample_id}"
-        ```
-
-        Now `heavyProcess` hits its time limit and we get `process hasn't exited` (alongside a `WARN: Killing running tasks` message), so we fix the run time limit for the relevant process:
+        Now `heavyProcess` runs, but hits its time limit. On the `local` executor the message is `process hasn't exited` (alongside a `WARN: Killing running tasks` message) rather than an explicit timeout, so connect the killed task back to its `time` directive:
 
         **Error 8: Resource Configuration Error**
         ```groovy linenums="36"
@@ -2387,7 +2398,7 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         time '100 s'
         ```
 
-        Next we have a `Missing output file(s)` error to resolve:
+        Next we have a `Missing output file(s)` error to resolve, because the script writes `${sample_id}.txt` but the output declaration expects `${sample_id}_heavy.txt`:
 
         **Error 9: Output File Name Mismatch**
         ```groovy linenums="49"
@@ -2398,9 +2409,9 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         done > ${sample_id}_heavy.txt
         ```
 
-        The first two processes ran, but not the third.
+        The workflow now completes without an error, but the `files` output is empty: `handleFiles` never ran. Its input channel, `channel.fromPath("*.txt")`, matches no files in the launch directory, so the process is simply skipped rather than failing loudly.
 
-        **Error 10: Output File Name Mismatch**
+        **Error 10: Wrong Channel Source**
         ```groovy linenums="88"
         file_ch = channel.fromPath("*.txt") // Error: attempting to take input from the pwd rather than a process
         handleFiles(file_ch)
@@ -2410,7 +2421,7 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         file_ch = handleFiles(heavy_ch)
         ```
 
-        With that, the whole workflow should run.
+        With that, the whole workflow runs end to end and all three outputs are populated.
 
         **Complete Corrected Workflow:**
         ```groovy linenums="1"
