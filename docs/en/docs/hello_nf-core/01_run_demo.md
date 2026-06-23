@@ -80,7 +80,7 @@ nextflow pull nf-core/demo
 
     ```console
     Checking nf-core/demo ...
-    downloaded from https://github.com/nf-core/demo.git - revision: 04060b4644 [master]
+    downloaded from https://github.com/nf-core/demo.git - revision: 45904cb9d1 [master]
     ```
 
 Nextflow does a `pull` of the pipeline code, meaning it downloads the full repository to your local drive.
@@ -303,9 +303,9 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `https://github.com/nf-core/demo` [magical_pauling] DSL2 - revision: 45904cb9d1 [master]
+    Launching `https://github.com/nf-core/demo` [magical_pauling] revision: 45904cb9d1 [master]
 
 
     ------------------------------------------------------
@@ -369,7 +369,7 @@ There's a header that includes a summary of the pipeline's version, inputs and o
 Notice the line near the top of the output:
 
 ```console
-Launching `https://github.com/nf-core/demo` [magical_pauling] DSL2 - revision: 45904cb9d1 [master]
+Launching `https://github.com/nf-core/demo` [magical_pauling] revision: 45904cb9d1 [master]
 ```
 
 This tells you which revision of the pipeline was used.
@@ -489,9 +489,9 @@ nextflow run nf-core/demo --help
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `https://github.com/nf-core/demo` [run_name] DSL2 - revision: 45904cb9d1 [master]
+    Launching `https://github.com/nf-core/demo` [run_name] revision: 45904cb9d1 [master]
 
     ----------------------------------------------------
                                             ,--./,-.
