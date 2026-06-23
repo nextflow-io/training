@@ -755,6 +755,8 @@ Test Process sayHello
   Nextflow stdout:
 
   Process `sayHello` declares 1 input but was called with 0 arguments
+
+   -- Check script '/workspaces/training/side-quests/nf-test/.nf-test-1eaad1186e16d8d0a9292ed1cc8a9f12.nf' at line: 30 or see '/workspaces/training/side-quests/nf-test/.nf-test/tests/1eaad1186e16d8d0a9292ed1cc8a9f12/meta/nextflow.log' file for more details
   Nextflow stderr:
 
 FAILURE: Executed 1 tests in 4.884s (1 failed)
