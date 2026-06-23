@@ -964,7 +964,8 @@ nextflow run hello-world.nf
     This was mentioned at the start of the course, but maybe you missed it.
     Check the [Nextflow versions](../info/nxf_versions.md) help material.
 
-    In short, if you're using Nextflow `25.10` then you need to enable the v2 language parser:
+    The v2 parser is the default from Nextflow 26.04 onward, so you will only see this on earlier versions.
+    On a version before 26.04 you need to enable the v2 language parser:
 
     ```bash
     export NXF_SYNTAX_PARSER=v2
