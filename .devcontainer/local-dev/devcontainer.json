@@ -33,7 +33,7 @@
         // Nextflow installation version
         "NXF_HOME": "/workspaces/training/.nextflow",
         "NXF_EDGE": "0",
-        "NXF_VER": "25.10.4",
+        "NXF_VER": "26.04.4",
         "NXF_SYNTAX_PARSER": "v2",
         // Other env vars
         "HOST_PROJECT_PATH": "/workspaces/training",

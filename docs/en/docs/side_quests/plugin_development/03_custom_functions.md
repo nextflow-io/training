@@ -264,16 +264,16 @@ nextflow run greet.nf
 ??? example "Output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `greet.nf` [elated_marconi] DSL2 - revision: cd8d52c97c
+    Launching `greet.nf` [elated_marconi] revision: cd8d52c97c
 
     Pipeline is starting! 🚀
     executor >  local (5)
-    [fe/109754] process > SAY_HELLO (5) [100%] 5 of 5 ✔
+    [fe/109754] SAY_HELLO (5) | 5 of 5 ✔
     Reversed: olleH
     Reversed: ruojnoB
-    Reversed: àloH
+    Reversed: aloH
     Reversed: oaiC
     Reversed: ollaH
     Output: Hello
@@ -441,16 +441,16 @@ nextflow run greet.nf
 ??? example "Output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `greet.nf` [elated_marconi] DSL2 - revision: cd8d52c97c
+    Launching `greet.nf` [elated_marconi] revision: cd8d52c97c
 
     Pipeline is starting! 🚀
     executor >  local (5)
-    [fe/109754] process > SAY_HELLO (5) [100%] 5 of 5 ✔
+    [fe/109754] SAY_HELLO (5) | 5 of 5 ✔
     Reversed: olleH
     Reversed: ruojnoB
-    Reversed: àloH
+    Reversed: aloH
     Reversed: oaiC
     Reversed: ollaH
     Decorated: *** Hello ***

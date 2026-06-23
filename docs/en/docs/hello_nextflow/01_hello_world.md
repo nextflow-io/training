@@ -213,9 +213,9 @@ nextflow run hello-world.nf
 ??? success "Command output"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+    Launching `hello-world.nf` [goofy_torvalds] revision: c33d41f479
 
     executor >  local (1)
     [65/7be2fa] sayHello | 1 of 1 ✔
@@ -484,17 +484,23 @@ nextflow run hello-world.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5
+    Launching `hello-world.nf` [jovial_mayer] revision: 35bd3425e5
 
     executor >  local (1)
     [9f/48ef97] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: output.txt
     ```
 
-The terminal output should look familiar. Externally, nothing has changed.
+The terminal output now ends with an `Outputs:` summary listing the published outputs and the directory they were written to.
 
-However, check your file explorer: this time, Nextflow has created a new directory called `results/`.
+Check your file explorer: this time, Nextflow has also created a new directory called `results/`.
 
 ??? abstract "Directory contents"
 
@@ -572,12 +578,18 @@ nextflow run hello-world.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
+    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
 
     executor >  local (1)
-    [8c/79499c] process > sayHello [100%] 1 of 1 ✔
+    [8c/79499c] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 This time the result gets written under the specified subdirectory.
@@ -651,12 +663,18 @@ nextflow run hello-world.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
+    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
 
     executor >  local (1)
-    [df/521638] process > sayHello [100%] 1 of 1 ✔
+    [df/521638] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 This time, if you look at the results, the file is a proper copy instead of just a symlink.
@@ -835,12 +853,18 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea
+    Launching `hello-world.nf` [elated_lavoisier] revision: 7c031b42ea
 
     executor >  local (1)
     [4b/654319] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 If you made all these edits correctly, you should get another successful execution.
@@ -904,12 +928,18 @@ nextflow run hello-world.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582
+    Launching `hello-world.nf` [determined_edison] revision: 3539118582
 
     executor >  local (1)
     [72/394147] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 ??? question "If it didn't work"
@@ -934,7 +964,8 @@ nextflow run hello-world.nf
     This was mentioned at the start of the course, but maybe you missed it.
     Check the [Nextflow versions](../info/nxf_versions.md) help material.
 
-    In short, if you're using Nextflow `25.10` then you need to enable the v2 language parser:
+    The v2 parser is the default from Nextflow 26.04 onward, so you will only see this on earlier versions.
+    On a version before 26.04 you need to enable the v2 language parser:
 
     ```bash
     export NXF_SYNTAX_PARSER=v2
@@ -963,12 +994,18 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582
+    Launching `hello-world.nf` [elegant_faraday] revision: 3539118582
 
     executor >  local (1)
     [6f/a12a91] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 Once again, you should find the corresponding updated output in your results directory.
@@ -1026,11 +1063,17 @@ nextflow run hello-world.nf -resume
 ??? success "Command output"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
+    Launching `hello-world.nf` [golden_cantor] revision: 35bd3425e5
 
     [62/49a1f8] sayHello | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 The console output should look familiar, but there's one thing that's a little different compared to before.
