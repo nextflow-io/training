@@ -1,3 +1,8 @@
 # Example parameter file for nf-core/molkart
 input: "data/samplesheet.csv"
 outdir: "results"
+mindagap_tilesize: 90
+mindagap_boxsize: 7
+mindagap_loopnum: 100
+clahe_pyramid_tile: 368
+segmentation_method: "cellpose"
