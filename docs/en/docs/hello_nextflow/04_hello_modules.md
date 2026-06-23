@@ -185,7 +185,7 @@ Let's insert that above the `params` block and fill it out appropriately.
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -197,7 +197,7 @@ Let's insert that above the `params` block and fill it out appropriately.
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -291,7 +291,7 @@ Insert the include declaration above the `params` block and fill it out appropri
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -306,7 +306,7 @@ Insert the include declaration above the `params` block and fill it out appropri
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -394,7 +394,7 @@ Insert the include declaration above the `params` block and fill it out appropri
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -410,7 +410,7 @@ Insert the include declaration above the `params` block and fill it out appropri
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
