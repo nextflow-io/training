@@ -61,15 +61,15 @@ You should see:
 
 ```console
 .
-├── build.gradle
 ├── COPYING
+├── Makefile
+├── README.md
+├── build.gradle
 ├── gradle
 │   └── wrapper
 │       ├── gradle-wrapper.jar
 │       └── gradle-wrapper.properties
 ├── gradlew
-├── Makefile
-├── README.md
 ├── settings.gradle
 └── src
     ├── main
@@ -129,13 +129,13 @@ The most important is the `nextflowPlugin` block:
 
 ```groovy title="build.gradle"
 plugins {
-    id 'io.nextflow.nextflow-plugin' version '1.0.0-beta.10'
+    id 'io.nextflow.nextflow-plugin' version '1.0.0-beta.15'
 }
 
 version = '0.1.0'
 
 nextflowPlugin {
-    nextflowVersion = '24.10.0'       // (1)!
+    nextflowVersion = '25.10.0'       // (1)!
 
     provider = 'training'             // (2)!
     className = 'training.plugin.GreetingPlugin'  // (3)!
@@ -177,7 +177,7 @@ Update it to match your installed Nextflow version for full compatibility:
 
     ```groovy title="build.gradle" hl_lines="2"
     nextflowPlugin {
-        nextflowVersion = '24.10.0'
+        nextflowVersion = '25.10.0'
 
         provider = 'training'
     ```
@@ -246,7 +246,7 @@ make install
     Deprecated Gradle features were used in this build...
 
     BUILD SUCCESSFUL in 23s
-    5 actionable tasks: 5 executed
+    6 actionable tasks: 6 executed
     ```
 
     **The warnings are expected.**
