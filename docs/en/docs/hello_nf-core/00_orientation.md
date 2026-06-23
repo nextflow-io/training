@@ -20,24 +20,17 @@ If you are working through this course by yourself, please acquaint yourself wit
 
 ### Version requirements
 
-This training works with **Nextflow 25.10.2** or later and **requires the v1 syntax parser**, because the nf-core conventions used in this course are not yet compatible with the v2 parser.
-From Nextflow 26.04 the v2 parser is the default, so you must explicitly select v1 as shown below.
+This training works with Nextflow 25.10.2 or later **with the v2 syntax parser**, which is the default from Nextflow 26.04 onward.
+In our training environment you don't need to do anything: it runs Nextflow 26.04.4 with the v2 parser. If you are using a local or custom environment, see the [version notes](../info/nxf_versions.md).
 
-#### If you are using our training environment:
+!!! warning "Setting boolean parameters on the command line"
 
-You MUST run the following command before going any further:
+    With the v2 syntax parser, a value passed on the command line is always read as text.
+    A boolean parameter passed as a bare flag or as `--flag value` (for example `--skip_trim` or `--validate_params false`) is therefore read as the string `"true"` or `"false"` and will not behave as you expect.
+    Set boolean parameters in a `-params-file` or in the configuration instead, where they keep their real boolean type.
+    This course uses that pattern throughout.
 
-```bash
-export NXF_SYNTAX_PARSER=v1
-```
-
-On Nextflow 26.04 and later this is essential: it overrides the v2 parser that those versions enable by default (our training environment sets `NXF_SYNTAX_PARSER=v2` for the other courses).
-
-#### If you are using a local or custom environment:
-
-Please make sure you are using the correct settings as documented [here](../info/nxf_versions.md).
-
-The training additionally requires **nf-core tools 3.5.2**.
+This training additionally requires **nf-core tools 4.0.2**.
 If you use a different version of nf-core tooling, you may have difficulty following along.
 
 You can check what version is installed in your environment using the command `nf-core --version`.
@@ -113,7 +106,7 @@ Think you're ready to dive in?
 
 - [ ] I understand the goal of this course and its prerequisites
 - [ ] My environment is up and running
-- [ ] I've made certain that the syntax parser is set to **v1**
+- [ ] I'm using nf-core tools 4.0.2 (check with `nf-core --version`)
 - [ ] I've set my working directory appropriately
 
 If you can check all the boxes, you're good to go.
