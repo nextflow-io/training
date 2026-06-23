@@ -104,22 +104,26 @@ nextflow list
 
 You can try pulling a few other pipelines to see how they get listed when you have more than one.
 
-#### 1.2.3. Find your pipelines in `$NXF_HOME/assets/`
+#### 1.2.3. Find where the pipeline was downloaded
 
 You'll notice that the files are not in your current work directory.
-By default, Nextflow saves them to `$NXF_HOME/assets`.
+By default, Nextflow saves pulled pipelines under `$NXF_HOME/assets`.
+
+To find where a specific pipeline lives, ask Nextflow directly:
 
 ```bash
-tree -L 2 $NXF_HOME/assets/
+nextflow info nf-core/demo
 ```
 
-```console title="Directory contents"
-/workspaces/.nextflow/assets/
-└── nf-core
-    └── demo
+??? success "Command output"
 
-2 directories, 0 files
-```
+    ```console
+     project name: nf-core/demo
+     repository  : https://github.com/nf-core/demo
+     local path  : /workspaces/.nextflow/assets/.repos/nf-core/demo
+     main script : main.nf
+     description : An nf-core demo pipeline
+    ```
 
 !!! note
 
@@ -127,17 +131,21 @@ tree -L 2 $NXF_HOME/assets/
 
 Nextflow keeps the downloaded source code intentionally 'out of the way' on the principle that these pipelines should be used more like libraries than code that you would directly interact with.
 
+Under the hood, Nextflow stores each pulled pipeline as a git repository under `$NXF_HOME/assets/.repos/`, and checks out the code for each revision into a `clones/<commit>/` subdirectory.
+Because `.repos` is a hidden directory, a plain `tree -L 2 $NXF_HOME/assets/` will look empty.
+
 #### 1.2.4. Create a symlink to access the source code easily
 
 We're not going to look at the code in detail, but let's take a quick peek just to get a sense of what the overall organization looks like.
 
-To make it easier to browse the pipeline source code, create a symbolic link to the assets directory:
+To make it easier to browse the pipeline source code, create a symbolic link pointing at the checked-out copy of the pipeline:
 
 ```bash
-ln -s $NXF_HOME/assets pipelines
+mkdir -p pipelines/nf-core
+ln -s "$(echo $NXF_HOME/assets/.repos/nf-core/demo/clones/*/)" pipelines/nf-core/demo
 ```
 
-This creates a shortcut so you can explore the code with `tree -L 2 pipelines` or open files directly.
+This creates a shortcut so you can explore the code with `tree -L 2 pipelines/nf-core/demo` or open files directly.
 
 #### 1.2.5. Overview of the code organization
 
@@ -218,10 +226,10 @@ It's a great way to quickly try out a pipeline at small scale.
 
 It's good practice to check what a pipeline's test profile specifies before running it.
 The `test` profile for `nf-core/demo` lives in the configuration file `conf/test.config`.
-You can find it locally inside the pipeline source that `nextflow pull` downloaded:
+You can find it locally inside the pipeline source that `nextflow pull` downloaded, via the `pipelines` symlink created in section 1.2.4:
 
 ```bash
-code $NXF_HOME/assets/nf-core/demo/conf/test.config
+code pipelines/nf-core/demo/conf/test.config
 ```
 
 Here is the content of that file:
@@ -333,10 +341,10 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
       containerEngine           : docker
       launchDir                 : /workspaces/training/hello-nf-core
       workDir                   : /workspaces/training/hello-nf-core/work
-      projectDir                : /workspaces/.nextflow/assets/nf-core/demo
+      projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/45904cb9d12db3d89900e6c479fe604ef71b297b
       userName                  : root
       profile                   : docker,test
-      configFiles               : /workspaces/.nextflow/assets/nf-core/demo/nextflow.config
+      configFiles               : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/45904cb9d12db3d89900e6c479fe604ef71b297b/nextflow.config
 
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
@@ -493,38 +501,40 @@ nextflow run nf-core/demo --help
 
     Launching `https://github.com/nf-core/demo` [run_name] revision: 45904cb9d1 [master]
 
-    ----------------------------------------------------
+
+    ------------------------------------------------------
                                             ,--./,-.
             ___     __   __   __   ___     /,-._.--~'
       |\ | |__  __ /  ` /  \ |__) |__         }  {
       | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                             `._,._,'
       nf-core/demo 1.1.0
-    ----------------------------------------------------
+    ------------------------------------------------------
     Typical pipeline command:
 
       nextflow run nf-core/demo -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>
 
+
     Input/output options
-      --input                       [string]           Path to a metadata file containing information about the samples in the experiment.
-      --outdir                      [string]           The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.
-      --email                       [string]           Email address for completion summary.
-      --multiqc_title               [string]           MultiQC report title. Printed as page header, used for filename if not otherwise specified.
+      --input                       [string] Path to a metadata file containing information about the samples in the experiment.
+      --outdir                      [string] The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.
+      --email                       [string] Email address for completion summary.
+      --multiqc_title               [string] MultiQC report title. Printed as page header, used for filename if not otherwise specified.
 
     Reference genome options
-      --genome                      [string]           Name of iGenomes reference.
-      --fasta                       [string]           Path to FASTA genome file.
+      --genome                      [string] Name of iGenomes reference.
+      --fasta                       [string] Path to FASTA genome file.
 
     Process skipping options
-      --skip_trim                   [boolean]          Skip trimming fastq files with seqtk
+      --skip_trim                   [boolean] Skip trimming fastq files with seqtk
 
     Generic options
-      --multiqc_methods_description [string]           Custom MultiQC yaml file containing HTML including a methods description.
-      --help                        [boolean, string]  Display the help message.
-      --help_full                   [boolean]          Display the full detailed help message.
-      --show_hidden                 [boolean]          Display hidden parameters in the help message (only works when --help or --help_full are provided).
-     !! Hiding 20 param(s), use the `--show_hidden` parameter to show them !!
-    ----------------------------------------------------
+      --multiqc_methods_description [string]          Custom MultiQC yaml file containing HTML including a methods description.
+      --help                        [boolean, string] Display the help message.
+      --help_full                   [boolean]         Display the full detailed help message.
+      --show_hidden                 [boolean]         Display hidden parameters in the help message (only works when --help or --help_full are provided).
+     !! Hiding 20 param(s), use the `--showHidden` parameter to show them !!
+    ------------------------------------------------------
 
     * The pipeline
         https://doi.org/10.5281/zenodo.12192442
@@ -722,11 +732,11 @@ Configuration in the strict sense controls **how** the pipeline runs: resource a
 nf-core pipelines include default configuration in `nextflow.config` and the `conf/` directory.
 Before overriding anything, it helps to know where the defaults live.
 
-You already saw in section 2.1 that the pipeline source code lives in `$NXF_HOME/assets`.
-List the config files to see what's available:
+You already saw in section 2.1 that the pipeline source code lives under `$NXF_HOME/assets`.
+Using the `pipelines` symlink from section 1.2.4, list the config files to see what's available:
 
 ```bash
-ls $NXF_HOME/assets/nf-core/demo/conf/
+ls pipelines/nf-core/demo/conf/
 ```
 
 ```console
@@ -840,9 +850,16 @@ cat work/ab/cd1234/.command.sh
 ??? success "Command output"
 
     ```console
-    #!/usr/bin/env bash
+    #!/usr/bin/env bash -e -u -o pipefail
+    printf "%s\n" sample1_R1.fastq.gz sample1_R2.fastq.gz | while read f;
+    do
+        seqtk \
+            trimfq \
+            -b 5 \
+            $f \
+            | gzip --no-name > SAMPLE1_PE_$(basename $f)
+    done
     ...
-    seqtk trimfq -b 5 SAMPLE3_SE.fastq.gz | gzip -c > SAMPLE3_SE.trimmed.fastq.gz
     ```
 
 You should see `-b 5` in the `seqtk trimfq` command, confirming your `ext.args` override took effect.
