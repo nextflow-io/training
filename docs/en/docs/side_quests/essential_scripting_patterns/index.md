@@ -127,7 +127,7 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    Launching `main.nf` [marvelous_tuckerman] DSL2 - revision: 6113e05c17
+    Launching `main.nf` [marvelous_tuckerman] revision: 6113e05c17
 
     [sample_id:SAMPLE_001, organism:human, tissue_type:liver, sequencing_depth:30000000, file_path:data/sequences/SAMPLE_001_S1_L001_R1_001.fastq, quality_score:38.5]
     [sample_id:SAMPLE_002, organism:mouse, tissue_type:brain, sequencing_depth:25000000, file_path:data/sequences/SAMPLE_002_S2_L001_R1_001.fastq, quality_score:35.2]
@@ -354,9 +354,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [peaceful_cori] DSL2 - revision: 4cc4a8340f
+    Launching `main.nf` [spontaneous_noether] revision: 7d43085af6
 
     ID fields only: [id:sample_001, organism:human, tissue:liver]
     ID fields only: [id:sample_002, organism:mouse, tissue:brain]
@@ -483,9 +483,9 @@ nextflow run collect.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `collect.nf` [loving_mendel] DSL2 - revision: e8d054a46e
+    Launching `collect.nf` [evil_roentgen] revision: 5b2b07e824
 
     Individual channel item: sample_001
     Individual channel item: sample_002
@@ -541,9 +541,9 @@ nextflow run collect.nf
 ??? success "Command output"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `collect.nf` [cheeky_stonebraker] DSL2 - revision: 2d5039fb47
+    Launching `collect.nf` [deadly_waddington] revision: 48f3dcbb7b
 
     List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
     Individual channel item: sample_001
@@ -612,9 +612,9 @@ nextflow run collect.nf
 ??? success "Command output"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `collect.nf` [cranky_galileo] DSL2 - revision: 5f3c8b2a91
+    Launching `collect.nf` [cranky_galileo] revision: 5f3c8b2a91
 
     List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
     Spread operator result: [s1, s2, s3]
@@ -741,9 +741,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [clever_pauling] DSL2 - revision: 605d2058b4
+    Launching `main.nf` [clever_pauling] revision: 605d2058b4
 
     [[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, sample_num:1, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
     [[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, sample_num:2, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
@@ -881,13 +881,16 @@ nextflow run main.nf
           --out2 sample_003_trimmed_R2.fastq.gz \
           --json sample_003.fastp.json \
           --html sample_003.fastp.html \
-          --thread 2
+          --thread 1
 
     Command exit status:
       255
 
     Command output:
       (empty)
+
+    Command error:
+      ERROR: Failed to open file: null
     ```
 
 You can see that the process is trying to run `fastp` with a `null` value for the second input file, which is causing it to fail. This is because our dataset contains single-end reads, but the process is hardcoded to expect paired-end reads (two input files at a time).
@@ -951,12 +954,12 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [adoring_rosalind] DSL2 - revision: 04b1cd93e9
+    Launching `main.nf` [adoring_rosalind] revision: 04b1cd93e9
 
     executor >  local (3)
-    [31/a8ad4d] process > FASTP (3) [100%] 3 of 3 ✔
+    [31/a8ad4d] FASTP (3) | 3 of 3 ✔
     ```
 
 Looks good! If we check the actual commands that were run (customise for your task hash):
@@ -974,7 +977,7 @@ fastp \
     --out1 sample_003_trimmed.fastq.gz \
     --json sample_003.fastp.json \
     --html sample_003.fastp.html \
-    --thread 2
+    --thread 1
 ```
 
 Another common usage of dynamic script logic can be seen in [the Nextflow for Science Genomics module](../../nf4_science/genomics/03_joint_calling.md). In that module, the GATK process being called can take multiple input files, but each must be prefixed with `-V` to form a correct command line. The process uses scripting to transform a collection of input files (`all_gvcfs`) into the correct command arguments:
@@ -1089,14 +1092,22 @@ Include the process in your `main.nf` and add it to the workflow:
     }
     ```
 
-Now run the workflow and check the generated reports in `results/reports/`. They should contain basic information about each sample.
+Now run the workflow. The reports are generated in each process working directory and contain basic information about each sample.
 
-<!-- TODO: add the run command -->
+```bash
+nextflow run main.nf
+```
 
 ??? success "Command output"
 
     ```console
-    <!-- TODO: output -->
+    N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [gigantic_hodgkin] revision: 8ba7d0c7eb
+
+    executor >  local (6)
+    [d1/b520bb] FASTP (2)           | 3 of 3 ✔
+    [b6/6550d5] GENERATE_REPORT (3) | 3 of 3 ✔
     ```
 
 But what if we want to add information about when and where the processing occurred? Let's modify the process to use **shell** variables and a bit of command substitution to include the current user, hostname, and date in the report:
@@ -1129,8 +1140,8 @@ If you run this, you'll notice an error - Nextflow tries to interpret `#!groovy 
 ??? failure "Command output"
 
     ```console
-    Error modules/generate_report.nf:15:27: `USER` is not defined
-    │  15 |     echo "Processed by: ${USER}" >> ${meta.id}_report.txt
+    Error modules/generate_report.nf:13:27: `USER` is not defined
+    │  13 |     echo "Processed by: ${USER}" >> ${meta.id}_report.txt
     ╰     |                           ^^^^
 
     ERROR ~ Script compilation failed
@@ -1287,13 +1298,13 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [admiring_panini] DSL2 - revision: 8cc832e32f
+    Launching `main.nf` [admiring_panini] revision: 8cc832e32f
 
     executor >  local (6)
-    [8c/2e3f91] process > FASTP (3)           [100%] 3 of 3 ✔
-    [7a/1b4c92] process > GENERATE_REPORT (3) [100%] 3 of 3 ✔
+    [8c/2e3f91] FASTP (3)           | 3 of 3 ✔
+    [7a/1b4c92] GENERATE_REPORT (3) | 3 of 3 ✔
     ```
 
 The output should show both processes completing successfully. The workflow is now much cleaner and easier to maintain, with all the complex metadata processing logic encapsulated in the `separateMetadata` function.
@@ -1357,8 +1368,8 @@ nextflow run main.nf -ansi-log false
 ??? success "Command output"
 
     ```console
-    N E X T F L O W  ~  version 25.10.4
-    Launching `main.nf` [fervent_albattani] DSL2 - revision: fa8f249759
+    N E X T F L O W  ~  version 26.04.4
+    Launching `main.nf` [fervent_albattani] - revision: fa8f249759
     [bd/ff3d41] Submitted process > FASTP (2)
     [a4/a3aab2] Submitted process > FASTP (1)
     [48/6db0c9] Submitted process > FASTP (3)
@@ -1554,14 +1565,14 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [adoring_galileo] DSL2 - revision: c9e83aaef1
+    Launching `main.nf` [adoring_galileo] revision: c9e83aaef1
 
-    executor >  local (6)
-    [1d/0747ac] process > FASTP (2)           [100%] 2 of 2 ✔
-    [cc/c44caf] process > TRIMGALORE (1)      [100%] 1 of 1 ✔
-    [34/bd5a9f] process > GENERATE_REPORT (1) [100%] 3 of 3 ✔
+    executor >  local (8)
+    [1d/0747ac] FASTP (2)           | 2 of 2, retries: 2 ✔
+    [cc/c44caf] TRIMGALORE (1)      | 1 of 1 ✔
+    [34/bd5a9f] GENERATE_REPORT (1) | 3 of 3 ✔
     ```
 
 Here, we've used small but mighty conditional expressions inside the `.branch{}` operator to route samples based on their metadata. Human samples with high coverage go through `FASTP`, while all other samples go through `TRIMGALORE`.
@@ -1622,8 +1633,8 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W  ~  version 25.10.4
-    Launching `main.nf` [lonely_williams] DSL2 - revision: d0b3f121ec
+    N E X T F L O W  ~  version 26.04.4
+    Launching `main.nf` [lonely_williams] - revision: d0b3f121ec
     [94/b48eac] Submitted process > FASTP (2)
     [2c/d2b28f] Submitted process > GENERATE_REPORT (2)
     [65/2e3be4] Submitted process > GENERATE_REPORT (1)
@@ -1706,9 +1717,9 @@ nextflow run main.nf
 ??? failure "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [trusting_torvalds] DSL2 - revision: b56fbfbce2
+    Launching `main.nf` [trusting_torvalds] revision: b56fbfbce2
 
     ERROR ~ Cannot invoke method toUpperCase() on null object
 
@@ -1762,7 +1773,14 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    <!-- TODO: output -->
+    N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [jovial_mercator] revision: 8d3f21a0c4
+
+    executor >  local (8)
+    [10/4f3bfd] FASTP (1)           | 2 of 2, retries: 2 ✔
+    [e5/12deed] TRIMGALORE (1)      | 1 of 1 ✔
+    [c9/93a3e8] GENERATE_REPORT (1) | 3 of 3 ✔
     ```
 
 No crash! The workflow now handles the missing field gracefully. When `row.run_id` is `null`, the `?.` operator prevents the `.toUpperCase()` call, and `run_id` becomes `null` instead of causing an exception.
@@ -1911,9 +1929,9 @@ nextflow run main.nf
 ??? failure "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [confident_coulomb] DSL2 - revision: 07059399ed
+    Launching `main.nf` [confident_coulomb] revision: 07059399ed
 
     WARN: Access to undefined parameter `input` -- Initialise it to a default value eg. `params.input = some_value`
     Input CSV file path not provided. Please specify --input <file.csv>
@@ -1930,9 +1948,9 @@ nextflow run main.nf --input ./data/nonexistent.csv
 ??? failure "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [cranky_gates] DSL2 - revision: 26839ae3eb
+    Launching `main.nf` [cranky_gates] revision: 26839ae3eb
 
     Input CSV file not found: ./data/nonexistent.csv
     ```
@@ -1946,7 +1964,14 @@ nextflow run main.nf --input ./data/samples.csv
 ??? success "Command output"
 
     ```console
-    <!-- TODO: output -->
+    N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [magical_hopper] revision: 0a1b2c3d4e
+
+    executor >  local (8)
+    [10/4f3bfd] FASTP (1)           | 2 of 2, retries: 2 ✔
+    [e5/12deed] TRIMGALORE (1)      | 1 of 1 ✔
+    [c9/93a3e8] GENERATE_REPORT (1) | 3 of 3 ✔
     ```
 
 This time it runs successfully.
@@ -1985,14 +2010,14 @@ nextflow run main.nf --input ./data/samples.csv
 ??? warning "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [awesome_goldwasser] DSL2 - revision: a31662a7c1
+    Launching `main.nf` [awesome_goldwasser] revision: a31662a7c1
 
-    executor >  local (5)
-    [ce/df5eeb] process > FASTP (2)           [100%] 2 of 2 ✔
-    [-        ] process > TRIMGALORE          -
-    [d1/7d2b4b] process > GENERATE_REPORT (3) [100%] 3 of 3 ✔
+    executor >  local (8)
+    [ce/df5eeb] FASTP (2)           | 2 of 2, retries: 2 ✔
+    [3e/0d8664] TRIMGALORE (1)      | 1 of 1 ✔
+    [d1/7d2b4b] GENERATE_REPORT (3) | 3 of 3 ✔
     WARN: Low sequencing depth for sample_002: 25000000
     ```
 
@@ -2062,19 +2087,24 @@ nextflow run main.nf --input ./data/samples.csv -ansi-log false
 ??? success "Command output"
 
     ```console
-    N E X T F L O W  ~  version 25.10.4
-    Launching `main.nf` [marvelous_boltzmann] DSL2 - revision: a31662a7c1
+    N E X T F L O W  ~  version 26.04.4
+    Launching `main.nf` [marvelous_boltzmann] - revision: a31662a7c1
     WARN: Low sequencing depth for sample_002: 25000000
-    [9b/d48e40] Submitted process > FASTP (2)
-    [6a/73867a] Submitted process > GENERATE_REPORT (2)
+    [9b/d48e40] Submitted process > GENERATE_REPORT (2)
+    [6a/73867a] Submitted process > TRIMGALORE (1)
     [79/ad0ac5] Submitted process > GENERATE_REPORT (1)
-    [f3/bda6cb] Submitted process > FASTP (1)
-    [34/d5b52f] Submitted process > GENERATE_REPORT (3)
+    [f3/bda6cb] Submitted process > FASTP (2)
+    [34/d5b52f] Submitted process > FASTP (1)
+    [d2/4a4a82] Submitted process > GENERATE_REPORT (3)
+    [f3/bda6cb] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+    [34/d5b52f] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+    [cd/f86446] Re-submitted process > FASTP (2)
+    [f9/6af250] Re-submitted process > FASTP (1)
 
     Pipeline execution summary:
     ==========================
-    Completed at: 2025-10-10T12:14:24.885384+01:00
-    Duration    : 2.9s
+    Completed at: 2026-06-23T12:28:41.754817244Z
+    Duration    : 7.5s
     Success     : true
     workDir     : /workspaces/training/side-quests/essential_scripting_patterns/work
     exit status : 0
@@ -2133,24 +2163,31 @@ Let's make it more useful by adding conditional logic:
 
 Now we get an even more informative summary, including a success/failure message and the output directory if specified:
 
-<!-- TODO: add run command -->
+```bash
+nextflow run main.nf --input ./data/samples.csv -ansi-log false
+```
 
 ??? success "Command output"
 
     ```console
-    N E X T F L O W  ~  version 25.10.4
-    Launching `main.nf` [boring_linnaeus] DSL2 - revision: a31662a7c1
+    N E X T F L O W  ~  version 26.04.4
+    Launching `main.nf` [boring_linnaeus] - revision: a31662a7c1
     WARN: Low sequencing depth for sample_002: 25000000
-    [e5/242efc] Submitted process > FASTP (2)
-    [3b/74047c] Submitted process > GENERATE_REPORT (3)
-    [8a/7a57e6] Submitted process > GENERATE_REPORT (1)
-    [a8/b1a31f] Submitted process > GENERATE_REPORT (2)
-    [40/648429] Submitted process > FASTP (1)
+    [70/ba9e88] Submitted process > GENERATE_REPORT (3)
+    [ed/505613] Submitted process > TRIMGALORE (1)
+    [d5/3d2639] Submitted process > FASTP (2)
+    [51/185eb7] Submitted process > FASTP (1)
+    [1c/aad211] Submitted process > GENERATE_REPORT (2)
+    [88/1fcf7f] Submitted process > GENERATE_REPORT (1)
+    [51/185eb7] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+    [d5/3d2639] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+    [d0/865a28] Re-submitted process > FASTP (1)
+    [d7/709bed] Re-submitted process > FASTP (2)
 
     Pipeline execution summary:
     ==========================
-    Completed at: 2025-10-10T12:16:00.522569+01:00
-    Duration    : 3.6s
+    Completed at: 2026-06-23T12:28:41.754817244Z
+    Duration    : 7.5s
     Success     : true
     workDir     : /workspaces/training/side-quests/essential_scripting_patterns/work
     exit status : 0
