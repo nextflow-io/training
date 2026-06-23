@@ -168,7 +168,7 @@ Update it to match your installed Nextflow version for full compatibility:
 
     ```groovy title="build.gradle" hl_lines="2"
     nextflowPlugin {
-        nextflowVersion = '25.10.0'
+        nextflowVersion = '26.04.0'
 
         provider = 'training'
     ```
