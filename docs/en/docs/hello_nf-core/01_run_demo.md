@@ -123,6 +123,14 @@ nextflow info nf-core/demo
      local path  : /workspaces/.nextflow/assets/.repos/nf-core/demo
      main script : main.nf
      description : An nf-core demo pipeline
+     revisions   :
+       TEMPLATE
+       dev
+     > master (default)
+       1.0.0 [t]
+       1.0.1 [t]
+       1.0.2 [t]
+     > 1.1.0 [t]
     ```
 
 !!! note
@@ -159,25 +167,27 @@ tree -L 1 pipelines/nf-core/demo
 
     ```console
     pipelines/nf-core/demo
-    ├── assets
     ├── CHANGELOG.md
     ├── CITATIONS.md
     ├── CODE_OF_CONDUCT.md
+    ├── LICENSE
+    ├── README.md
+    ├── assets
     ├── conf
     ├── docs
-    ├── LICENSE
     ├── main.nf
     ├── modules
     ├── modules.json
     ├── nextflow.config
     ├── nextflow_schema.json
     ├── nf-test.config
-    ├── README.md
     ├── ro-crate-metadata.json
     ├── subworkflows
     ├── tests
     ├── tower.yml
     └── workflows
+
+    7 directories, 12 files
     ```
 
 As you can see, there's a lot going on in there, most of which you don't need to worry about.
@@ -313,7 +323,7 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `https://github.com/nf-core/demo` [magical_pauling] revision: 45904cb9d1 [master]
+    Launching `https://github.com/nf-core/demo` [scruffy_goldstine] revision: 45904cb9d1 [master]
 
 
     ------------------------------------------------------
@@ -333,11 +343,11 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
       config_profile_description: Minimal test dataset to check pipeline function
 
     Generic options
-      trace_report_suffix       : 2025-11-21_04-57-41
+      trace_report_suffix       : 2026-06-23_16-51-59
 
     Core Nextflow options
       revision                  : master
-      runName                   : magical_pauling
+      runName                   : scruffy_goldstine
       containerEngine           : docker
       launchDir                 : /workspaces/training/hello-nf-core
       workDir                   : /workspaces/training/hello-nf-core/work
@@ -359,9 +369,9 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
 
 
     executor >  local (7)
-    [ff/a6976b] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
-    [39/731ab7] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
-    [7c/78d96e] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+    [be/8d6f73] NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE)     | 3 of 3 ✔
+    [8a/75c637] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) | 3 of 3 ✔
+    [79/b859f7] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
@@ -377,7 +387,7 @@ There's a header that includes a summary of the pipeline's version, inputs and o
 Notice the line near the top of the output:
 
 ```console
-Launching `https://github.com/nf-core/demo` [magical_pauling] revision: 45904cb9d1 [master]
+Launching `https://github.com/nf-core/demo` [scruffy_goldstine] revision: 45904cb9d1 [master]
 ```
 
 This tells you which revision of the pipeline was used.
@@ -395,9 +405,9 @@ Moving on to the execution output, let's have a look at the lines that tell us w
 
 ```console
 executor >  local (7)
-[ff/a6976b] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
-[39/731ab7] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
-[7c/78d96e] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+[be/8d6f73] NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE)     | 3 of 3 ✔
+[8a/75c637] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) | 3 of 3 ✔
+[79/b859f7] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
 -[nf-core/demo] Pipeline completed successfully-
 ```
 
@@ -432,12 +442,12 @@ tree -L 2 demo-results
     │   ├── multiqc_plots
     │   └── multiqc_report.html
     └── pipeline_info
-        ├── execution_report_2025-11-21_04-57-41.html
-        ├── execution_timeline_2025-11-21_04-57-41.html
-        ├── execution_trace_2025-11-21_04-57-41.txt
+        ├── execution_report_2026-06-23_16-51-59.html
+        ├── execution_timeline_2026-06-23_16-51-59.html
+        ├── execution_trace_2026-06-23_16-51-59.txt
         ├── nf_core_demo_software_mqc_versions.yml
-        ├── params_2025-11-21_04-57-46.json
-        └── pipeline_dag_2025-11-21_04-57-41.html
+        ├── params_2026-06-23_16-52-02.json
+        └── pipeline_dag_2026-06-23_16-51-59.html
     ```
 
 That might seem like a lot.
@@ -560,22 +570,41 @@ In plain Nextflow pipelines, `--help` only works if the developer implemented it
 As covered in [Hello Config](../hello_nextflow/06_hello_config.md), you can set parameter values on the command line with `--param_name` or collect a set of parameters in a YAML file and pass it with `-params-file`.
 Both approaches work the same way with nf-core pipelines.
 
-For example, to skip the trimming step:
+For example, to skip the trimming step, we want to set the boolean parameter `skip_trim` to `true`.
+Create a parameter file called `skip_trim.yml`:
+
+```yaml title="skip_trim.yml"
+skip_trim: true
+```
+
+Then pass it with `-params-file`:
 
 ```bash
-nextflow run nf-core/demo -profile docker,test --outdir demo-results-notrim --skip_trim
+nextflow run nf-core/demo -profile docker,test --outdir demo-results-notrim -params-file skip_trim.yml
 ```
 
 ??? success "Command output"
 
     ```console
     executor >  local (4)
-    [3f/a82c91] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE) | 3 of 3 ✔
-    [7d/c5e014] NFCORE_DEMO:DEMO:MULTIQC             | 1 of 1 ✔
+    [80/17c104] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE) | 3 of 3 ✔
+    [a0/6ea0cf] NFCORE_DEMO:DEMO:MULTIQC             | 1 of 1 ✔
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
 The `SEQTK_TRIM` process no longer appears in the output.
+
+!!! warning
+
+    Nextflow types values supplied on the command line as strings.
+    For a boolean parameter like `skip_trim`, passing it as a bare flag (`--skip_trim`) or as `--skip_trim true` sends the **string** `"true"`, which fails schema validation:
+
+    ```console
+    * --skip_trim (true): Value is [string] but should be [boolean]
+    ```
+
+    To set a boolean parameter to a genuine `true`/`false` value, use a `-params-file` as shown above.
+    String, integer and file-path parameters are unaffected and can still be set directly on the command line.
 
 !!! info
 
@@ -631,7 +660,7 @@ The following invalid input values have been detected:
 ```
 
 The pipeline stops before any processes run, saving you from a failed or incorrect execution.
-Boolean parameters should be passed as flags (`--skip_trim`) without a value, or set to `true`/`false` in a params file.
+As shown in section 3.1.2, boolean parameters should be set to a genuine `true`/`false` value in a params file rather than passed on the command line, since command-line values are typed as strings.
 
 #### 3.1.4. Input validation
 
@@ -790,9 +819,9 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results-custom -c c
 
     ```console
     executor >  local (7)
-    [2a/f17b3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
-    [9c/e4d028] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
-    [5b/a93c71] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+    [ac/23f5aa] NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE)     | 3 of 3 ✔
+    [ff/eac89a] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) | 3 of 3 ✔
+    [3c/94a7a0] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
@@ -835,16 +864,16 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results-extargs -c 
 
     ```console
     executor >  local (7)
-    [1e/b7a392] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
-    [ab/cd1234] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
-    [4f/c8d105] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+    [95/b32876] NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE)     | 3 of 3 ✔
+    [17/428668] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) | 3 of 3 ✔
+    [cf/85991a] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
-To verify the argument was applied, find the `SEQTK_TRIM` work directory hash from the run output (e.g. `work/ab/cd1234...`) and check the `.command.sh` file inside it:
+To verify the argument was applied, find the `SEQTK_TRIM` work directory hash from the run output (e.g. `work/17/428668...`) and check the `.command.sh` file inside it:
 
 ```bash
-cat work/ab/cd1234/.command.sh
+cat work/17/428668/.command.sh
 ```
 
 ??? success "Command output"

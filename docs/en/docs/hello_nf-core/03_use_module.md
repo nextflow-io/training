@@ -23,7 +23,7 @@ To demonstrate how this works, we'll replace the custom `collectGreetings` modul
     You can test that it runs successfully by running the following command:
 
     ```bash
-    nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+    nextflow run . --outdir core-hello-results -profile test,docker
     ```
 
 ---
@@ -118,7 +118,8 @@ This displays documentation about the module, including its inputs, outputs, and
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 3.5.2 - https://nf-co.re
+        nf-core/tools version 4.0.2 - https://nf-co.re
+
 
 
     ╭─ Module: find/concatenate  ──────────────────────────────────────────────────╮
@@ -210,20 +211,25 @@ The tool will proceed to install the module.
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 3.5.2 - https://nf-co.re
+    nf-core/tools version 4.0.2 - https://nf-co.re
 
 
     INFO     Installing 'find/concatenate'
-    INFO     Use the following statement to include this module:
-
-     include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
+    NotADirectoryError: [Errno 20] Not a directory:
+    'modules/local/cowpy.nf/meta.yml'
     ```
 
 The command automatically:
 
 - Downloads the module files to `modules/nf-core/find/concatenate/`
 - Updates `modules.json` to track the installed module
-- Provides you with the correct `include` statement to use in your workflow
+
+!!! warning "Traceback with single-file local modules"
+
+    nf-core/tools 4.0.2 expects every local module to live in its own directory (`modules/local/<name>/main.nf`).
+    Because our `core-hello` pipeline still uses single-file local modules (`modules/local/cowpy.nf` and friends), the install command prints a `NotADirectoryError` traceback after installing.
+    The `find/concatenate` module is still installed correctly and `modules.json` is still updated; the traceback is cosmetic and can be ignored for this exercise.
+    (We convert `cowpy` to the directory layout in Part 4.)
 
 !!! tip
 
@@ -255,30 +261,13 @@ tree -L 4 modules
     5 directories, 7 files
     ```
 
-You can also verify the installation by asking the nf-core utility to list locally installed modules:
+You can confirm the installation by inspecting `modules.json`, which now lists `find/concatenate` under the nf-core/modules repository, alongside the directory contents shown above.
 
-```bash
-nf-core modules list local
-```
+!!! note "`nf-core modules list local` and single-file modules"
 
-??? success "Command output"
-
-    ```console
-    INFO     Repository type: pipeline
-    INFO     Modules installed in '.':
-
-    ┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
-    ┃ Module Name    ┃ Repository      ┃ Version SHA ┃ Message        ┃ Date       ┃
-    ┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
-    │ find/concaten… │ nf-core/modules │ 6d46786     │ Support for    │ 2026-04-23 │
-    │                │                 │             │ apptainer as   │            │
-    │                │                 │             │ well as        │            │
-    │                │                 │             │ singularity    │            │
-    │                │                 │             │ for .sif in    │            │
-    │                │                 │             │ `container`    │            │
-    │                │                 │             │ (#11260)       │            │
-    └────────────────┴─────────────────┴─────────────┴────────────────┴────────────┘
-    ```
+    You might expect `nf-core modules list local` to report the newly installed module.
+    In nf-core/tools 4.0.2, that command returns an empty table whenever the pipeline contains single-file local modules (as `core-hello` does at this stage), because the tool only recognizes the directory layout (`modules/local/<name>/main.nf`).
+    Inspecting `modules.json` and the `modules/nf-core/` directory is the reliable check here.
 
 This confirms that the `find/concatenate` module is now part of your project's source code.
 
@@ -760,7 +749,7 @@ Then it's just a matter of passing `ch_for_cowpy` to `cowpy` instead of `collect
 Let's test that the workflow works with the newly integrated `find/concatenate` module:
 
 ```bash
-nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
 This should run reasonably quickly.
@@ -768,40 +757,40 @@ This should run reasonably quickly.
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.04.4
 
-        Launching `./main.nf` [evil_pike] revision: b9e9b3b8de
+    Launching `./main.nf` [cheesy_bhabha] revision: d6bbba9521
 
-        Input/output options
-          input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
-          outdir                    : core-hello-results
+    Input/output options
+      input                     : /home/ubuntu/hnc-scratch/core-hello/assets/greetings.csv
+      outdir                    : core-hello-results
 
-        Institutional config options
-          config_profile_name       : Test profile
-          config_profile_description: Minimal test dataset to check pipeline function
+    Institutional config options
+      config_profile_name       : Test profile
+      config_profile_description: Minimal test dataset to check pipeline function
 
-        Generic options
-          validate_params           : false
-          trace_report_suffix       : 2025-10-30_18-50-58
+    Generic options
+      validate_params           : false
+      trace_report_suffix       : 2026-06-23_16-55-02
 
-        Core Nextflow options
-          runName                   : evil_pike
-          containerEngine           : docker
-          launchDir                 : /workspaces/training/hello-nf-core/core-hello
-          workDir                   : /workspaces/training/hello-nf-core/core-hello/work
-          projectDir                : /workspaces/training/hello-nf-core/core-hello
-          userName                  : root
-          profile                   : test,docker
-          configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
+    Core Nextflow options
+      runName                   : cheesy_bhabha
+      containerEngine           : docker
+      launchDir                 : /home/ubuntu/hnc-scratch/core-hello
+      workDir                   : /home/ubuntu/hnc-scratch/core-hello/work
+      projectDir                : /home/ubuntu/hnc-scratch/core-hello
+      userName                  : ubuntu
+      profile                   : test,docker
+      configFiles               : /home/ubuntu/hnc-scratch/core-hello/nextflow.config
 
-        !! Only displaying parameters that differ from the pipeline defaults !!
-        ------------------------------------------------------
-        executor >  local (8)
-        [b3/f005fd] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
-        [08/f923d0] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-        [34/3729a9] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
-        [24/df918a] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
-        -[core/hello] Pipeline completed successfully-
+    !! Only displaying parameters that differ from the pipeline defaults !!
+    ------------------------------------------------------
+    executor >  local (8)
+    [bf/aa86d7] CORE_HELLO:HELLO:sayHello (3)            | 3 of 3 ✔
+    [0a/df448e] CORE_HELLO:HELLO:convertToUpper (3)      | 3 of 3 ✔
+    [82/ded72f] CORE_HELLO:HELLO:FIND_CONCATENATE (test) | 1 of 1 ✔
+    [9d/0130bf] CORE_HELLO:HELLO:cowpy                   | 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
     ```
 
 Notice that `FIND_CONCATENATE` now appears in the process execution list instead of `collectGreetings`.

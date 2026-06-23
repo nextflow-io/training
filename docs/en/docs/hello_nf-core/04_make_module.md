@@ -22,7 +22,7 @@ After that, we'll show you how to use the template-based module creation to work
     You can test that it runs successfully by running the following command:
 
     ```bash
-    nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+    nextflow run . --outdir core-hello-results -profile test,docker
     ```
 
 ---
@@ -245,7 +245,7 @@ Be sure to make **both** changes, otherwise you will get an error when you run t
 Let's run the workflow to test that everything is working correctly after these changes.
 
 ```bash
-nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
 ??? success "Command output"
@@ -393,7 +393,7 @@ This is technically not required, but it's good practice to refer to named outpu
 Let's run the workflow to test that everything is working correctly after these changes.
 
 ```bash
-nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
 ??? success "Command output"
@@ -403,7 +403,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 
     Launching `./main.nf` [modest_saha] revision: b9e9b3b8de
 
-    Downloading plugin nf-schema@2.5.1
+    Downloading plugin nf-schema@2.7.2
     Input/output options
       input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
       outdir                    : core-hello-results
@@ -621,7 +621,7 @@ Let's test that the workflow still works as expected, specifying a different cha
 Run this command using `kosh`, one of the more... enigmatic options:
 
 ```bash
-nextflow run . --outdir core-hello-results -profile test,docker --validate_params false --character kosh
+nextflow run . --outdir core-hello-results -profile test,docker --character kosh
 ```
 
 ??? success "Command output"
@@ -675,16 +675,16 @@ cat work/38/eb29ea*/cowpy-test.txt
 ??? success "Command output"
 
     ```console
-    _________
-    / HELLO   \
-    | HOLA    |
-    \ BONJOUR /
-    ---------
+     _________
+    / BONJOUR \
+    | HELLO   |
+    \ HOLA    /
+     ---------
         \
-        \
+         \
           \
       ___       _____     ___
-    /   \     /    /|   /   \
+     /   \     /    /|   /   \
     |     |   /    / |  |     |
     |     |  /____/  |  |     |
     |     |  |    |  |  |     |
@@ -839,7 +839,7 @@ In case you're wondering, the `ext.prefix` closure has access to the correct pie
 Let's test that the workflow still works as expected.
 
 ```bash
-nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
 ??? success "Command output"
@@ -976,7 +976,7 @@ That's it!
 Let's have a look at what happens if we run the pipeline now.
 
 ```bash
-nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
 ??? success "Command output"
@@ -1160,7 +1160,7 @@ No changes to the script block are needed — the version is declared statically
 #### 1.6.2. Run the pipeline and inspect the versions report
 
 ```bash
-nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
 ??? success "Command output"
@@ -1189,6 +1189,9 @@ FIND_CONCATENATE:
   coreutils: 9.4
   find: 4.6.0
   pigz: 2.8
+Workflow:
+  core/hello: v1.0.0dev
+  Nextflow: 26.04.4
 ```
 
 The workflow-side collection — the `Channel.topic("versions")` block you saw in the placeholder workflow in Part 2 — subscribes to the topic and writes this combined report automatically.
@@ -1283,16 +1286,16 @@ process COWPY {
     label 'process_single'
 
     conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+    container "${ workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
-        'biocontainers/YOUR-TOOL-HERE' }"
+        'quay.io/biocontainers/YOUR-TOOL-HERE' }"
 
     input:
     tuple val(meta), path(input)        // Pattern 1: Metadata tuples ✓
 
     output:
     tuple val(meta), path("*"), emit: output
-    tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions, emit: versions_cowpy
+    tuple val("${task.process}"), val('cowpy'), eval("cowpy --version"), topic: versions, emit: versions_cowpy
 
     when:
     task.ext.when == null || task.ext.when
@@ -1367,9 +1370,9 @@ The default code offers to toggle between Docker and Singularity, but we're goin
         label 'process_single'
 
         conda "${moduleDir}/environment.yml"
-        container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        container "${ workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container ?
             'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
-            'biocontainers/YOUR-TOOL-HERE' }"
+            'quay.io/biocontainers/YOUR-TOOL-HERE' }"
     ```
 
 #### 2.2.2. Conda environment
@@ -1437,13 +1440,13 @@ Update the input and output blocks:
 
 === "Before"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5 6"
     input:
     tuple val(meta), path(input)
 
     output:
     tuple val(meta), path("*"), emit: output
-    tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions    , emit: versions_cowpy
+    tuple val("${task.process}"), val('cowpy'), eval("cowpy --version"), topic: versions    , emit: versions_cowpy
     ```
 
 This specifies:
@@ -1451,6 +1454,7 @@ This specifies:
 - The input file parameter name (`input_file` instead of generic `input`)
 - The output filename using the configurable prefix pattern (`#!groovy ${prefix}.txt` instead of wildcard `*`)
 - A descriptive emit name (`cowpy_output` instead of generic `output`)
+- A static version string (`#!groovy val("1.1.5")`) in place of the template's `#!groovy eval("cowpy --version")`, matching the manual module from section 1.6 (the `cowpy` tool does not expose a `--version` flag)
 
 If you're using the Nextflow language server to validate syntax, the `#!groovy ${prefix}` part will be flagged as an error at this stage because we haven't added it to the script block yet.
 Let's get to that now.
@@ -1574,7 +1578,7 @@ All we need to do to try out this new version of the `COWPY` module is to switch
 Let's run the pipeline to test it.
 
 ```bash
-nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
 ??? success "Command output"
