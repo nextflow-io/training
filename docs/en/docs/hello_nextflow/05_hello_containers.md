@@ -271,22 +271,22 @@ Now that you are inside the container, you can run the `cowpy` command directly 
 For example, the tool documentation says we can change the character ('cowacter') with `-c`.
 
 ```bash
-cowpy "Hello Containers" -c tux
+echo "Hello Containers" | cowpy -c tux
 ```
 
 ??? success "Command output"
 
     ```console
-    __________________
+     __________________
     < Hello Containers >
-    ------------------
-      \
+     ------------------
+       \
         \
             .--.
-          |o_o |
-          |:_/ |
+           |o_o |
+           |:_/ |
           //   \ \
-        (|     | )
+         (|     | )
         /'\_   _/`\
         \___)=(___/
     ```

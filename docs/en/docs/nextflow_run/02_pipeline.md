@@ -1145,20 +1145,20 @@ You see that the filesystem inside the container is different from the filesyste
 From inside the container, you can run the `cowpy` command directly.
 
 ```bash
-cowpy "Hello Containers"
+echo "Hello Containers" | cowpy
 ```
 
 ??? success "Command output"
 
     ```console
-    ______________________________________________________
+     __________________
     < Hello Containers >
-    ------------------------------------------------------
-        \   ^__^
+     ------------------
+         \   ^__^
           \  (oo)\_______
-            (__)\       )\/\
-              ||----w |
-              ||     ||
+             (__)\       )\/\
+               ||----w |
+               ||     ||
     ```
 
 This produces ASCII art of the default cow character (or 'cowacter') with a speech bubble containing the text we specified.
@@ -1167,22 +1167,22 @@ Now that you have tested the basic usage, you can try giving it some parameters.
 For example, the tool documentation says we can set the character with `-c`.
 
 ```bash
-cowpy "Hello Containers" -c tux
+echo "Hello Containers" | cowpy -c tux
 ```
 
 ??? success "Command output"
 
     ```console
-    __________________
+     __________________
     < Hello Containers >
-    ------------------
-      \
+     ------------------
+       \
         \
             .--.
-          |o_o |
-          |:_/ |
+           |o_o |
+           |:_/ |
           //   \ \
-        (|     | )
+         (|     | )
         /'\_   _/`\
         \___)=(___/
     ```
