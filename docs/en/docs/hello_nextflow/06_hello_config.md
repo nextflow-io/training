@@ -89,6 +89,15 @@ nextflow run hello-config.nf
 
       /workspaces/training/hello-nextflow/results
 
+      first_output:
+        - hello_config/intermediates/Bonjour-output.txt
+        - hello_config/intermediates/Hello-output.txt
+        - hello_config/intermediates/Hola-output.txt
+      uppercased:
+        - hello_config/intermediates/UPPER-Bonjour-output.txt
+        - hello_config/intermediates/UPPER-Hello-output.txt
+        - hello_config/intermediates/UPPER-Hola-output.txt
+      collected: hello_config/intermediates/COLLECTED-batch-output.txt
       batch_report: hello_config/batch-report.txt
       cowpy_art: hello_config/cowpy-COLLECTED-batch-output.txt
     ```
@@ -256,6 +265,15 @@ nextflow run hello-config.nf
 
       /workspaces/training/hello-nextflow/results
 
+      first_output:
+        - hello_config/intermediates/Hello-output.txt
+        - hello_config/intermediates/Hola-output.txt
+        - hello_config/intermediates/Bonjour-output.txt
+      uppercased:
+        - hello_config/intermediates/UPPER-Hola-output.txt
+        - hello_config/intermediates/UPPER-Hello-output.txt
+        - hello_config/intermediates/UPPER-Bonjour-output.txt
+      collected: hello_config/intermediates/COLLECTED-batch-output.txt
       batch_report: hello_config/batch-report.txt
       cowpy_art: hello_config/cowpy-COLLECTED-batch-output.txt
     ```
@@ -359,7 +377,16 @@ nextflow run ../hello-config.nf
 
       /workspaces/training/hello-nextflow/tux-run/results
 
-      batch_report: hello_config/batch-report.txt
+      first_output:
+        - hello_config/intermediates/Hola-output.txt
+        - hello_config/intermediates/Hello-output.txt
+        - hello_config/intermediates/Bonjour-output.txt
+      uppercased:
+        - hello_config/intermediates/UPPER-Bonjour-output.txt
+        - hello_config/intermediates/UPPER-Hello-output.txt
+        - hello_config/intermediates/UPPER-Hola-output.txt
+      collected: hello_config/intermediates/COLLECTED-experiment-output.txt
+      batch_report: hello_config/experiment-report.txt
       cowpy_art: hello_config/cowpy-COLLECTED-experiment-output.txt
     ```
 
@@ -452,6 +479,15 @@ nextflow run hello-config.nf -params-file test-params.yaml
 
       /workspaces/training/hello-nextflow/results
 
+      first_output:
+        - hello_config/intermediates/Hola-output.txt
+        - hello_config/intermediates/Bonjour-output.txt
+        - hello_config/intermediates/Hello-output.txt
+      uppercased:
+        - hello_config/intermediates/UPPER-Hello-output.txt
+        - hello_config/intermediates/UPPER-Hola-output.txt
+        - hello_config/intermediates/UPPER-Bonjour-output.txt
+      collected: hello_config/intermediates/COLLECTED-yaml-output.txt
       batch_report: hello_config/yaml-report.txt
       cowpy_art: hello_config/cowpy-COLLECTED-yaml-output.txt
     ```
@@ -540,6 +576,15 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli/
 
       /workspaces/training/hello-nextflow/custom-outdir-cli
 
+      first_output:
+        - hello_config/intermediates/Hola-output.txt
+        - hello_config/intermediates/Hello-output.txt
+        - hello_config/intermediates/Bonjour-output.txt
+      uppercased:
+        - hello_config/intermediates/UPPER-Bonjour-output.txt
+        - hello_config/intermediates/UPPER-Hello-output.txt
+        - hello_config/intermediates/UPPER-Hola-output.txt
+      collected: hello_config/intermediates/COLLECTED-batch-output.txt
       batch_report: hello_config/batch-report.txt
       cowpy_art: hello_config/cowpy-COLLECTED-batch-output.txt
     ```
@@ -879,6 +924,15 @@ nextflow run hello-config.nf -output-dir custom-outdir-config-2 --batch rep2
 
       /workspaces/training/hello-nextflow/custom-outdir-config-2
 
+      first_output:
+        - rep2/intermediates/sayHello/Bonjour-output.txt
+        - rep2/intermediates/sayHello/Hello-output.txt
+        - rep2/intermediates/sayHello/Hola-output.txt
+      uppercased:
+        - rep2/intermediates/convertToUpper/UPPER-Hello-output.txt
+        - rep2/intermediates/convertToUpper/UPPER-Bonjour-output.txt
+        - rep2/intermediates/convertToUpper/UPPER-Hola-output.txt
+      collected: rep2/intermediates/collectGreetings/COLLECTED-rep2-output.txt
       batch_report: rep2/collectGreetings/rep2-report.txt
       cowpy_art: rep2/cowpy/cowpy-COLLECTED-rep2-output.txt
     ```
@@ -1016,6 +1070,15 @@ nextflow run hello-config.nf -output-dir config-output-mode
 
       /workspaces/training/hello-nextflow/config-output-mode
 
+      first_output:
+        - batch/intermediates/sayHello/Hola-output.txt
+        - batch/intermediates/sayHello/Bonjour-output.txt
+        - batch/intermediates/sayHello/Hello-output.txt
+      uppercased:
+        - batch/intermediates/convertToUpper/UPPER-Bonjour-output.txt
+        - batch/intermediates/convertToUpper/UPPER-Hola-output.txt
+        - batch/intermediates/convertToUpper/UPPER-Hello-output.txt
+      collected: batch/intermediates/collectGreetings/COLLECTED-batch-output.txt
       batch_report: batch/collectGreetings/batch-report.txt
       cowpy_art: batch/cowpy/cowpy-COLLECTED-batch-output.txt
     ```
@@ -1150,11 +1213,21 @@ nextflow run hello-config.nf --batch conda
     [fe/6a70ce] convertToUpper (3) | 3 of 3 ✔
     [99/7cc493] collectGreetings   | 1 of 1 ✔
     [3c/09fb59] cowpy              | 1 of 1 ✔
+    Creating env using conda: conda-forge::cowpy==1.1.5 [cache /workspaces/training/hello-nextflow/work/conda/env-898314d566668b6587ad714ae06b8520]
 
     Outputs:
 
       /workspaces/training/hello-nextflow/custom-outdir-config
 
+      first_output:
+        - conda/intermediates/sayHello/Bonjour-output.txt
+        - conda/intermediates/sayHello/Hola-output.txt
+        - conda/intermediates/sayHello/Hello-output.txt
+      uppercased:
+        - conda/intermediates/convertToUpper/UPPER-Bonjour-output.txt
+        - conda/intermediates/convertToUpper/UPPER-Hola-output.txt
+        - conda/intermediates/convertToUpper/UPPER-Hello-output.txt
+      collected: conda/intermediates/collectGreetings/COLLECTED-conda-output.txt
       batch_report: conda/collectGreetings/conda-report.txt
       cowpy_art: conda/cowpy/cowpy-COLLECTED-conda-output.txt
     ```
@@ -1556,6 +1629,15 @@ nextflow run hello-config.nf -profile my_laptop
 
       /workspaces/training/hello-nextflow/custom-outdir-config
 
+      first_output:
+        - batch/intermediates/sayHello/Bonjour-output.txt
+        - batch/intermediates/sayHello/Hola-output.txt
+        - batch/intermediates/sayHello/Hello-output.txt
+      uppercased:
+        - batch/intermediates/convertToUpper/UPPER-Bonjour-output.txt
+        - batch/intermediates/convertToUpper/UPPER-Hola-output.txt
+        - batch/intermediates/convertToUpper/UPPER-Hello-output.txt
+      collected: batch/intermediates/collectGreetings/COLLECTED-batch-output.txt
       batch_report: batch/collectGreetings/batch-report.txt
       cowpy_art: batch/cowpy/cowpy-COLLECTED-batch-output.txt
     ```
@@ -1647,6 +1729,15 @@ nextflow run hello-config.nf -profile my_laptop,test
 
       /workspaces/training/hello-nextflow/custom-outdir-config
 
+      first_output:
+        - test/intermediates/sayHello/Hello-output.txt
+        - test/intermediates/sayHello/Hola-output.txt
+        - test/intermediates/sayHello/Bonjour-output.txt
+      uppercased:
+        - test/intermediates/convertToUpper/UPPER-Hola-output.txt
+        - test/intermediates/convertToUpper/UPPER-Hello-output.txt
+        - test/intermediates/convertToUpper/UPPER-Bonjour-output.txt
+      collected: test/intermediates/collectGreetings/COLLECTED-test-output.txt
       batch_report: test/collectGreetings/test-report.txt
       cowpy_art: test/cowpy/cowpy-COLLECTED-test-output.txt
     ```

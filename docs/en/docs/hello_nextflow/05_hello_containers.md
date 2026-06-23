@@ -837,6 +837,15 @@ nextflow run hello-containers.nf -resume
 
       /workspaces/training/hello-nextflow/results
 
+      first_output:
+        - hello_containers/intermediates/Bonjour-output.txt
+        - hello_containers/intermediates/Hola-output.txt
+        - hello_containers/intermediates/Hello-output.txt
+      uppercased:
+        - hello_containers/intermediates/UPPER-Hola-output.txt
+        - hello_containers/intermediates/UPPER-Bonjour-output.txt
+        - hello_containers/intermediates/UPPER-Hello-output.txt
+      collected: hello_containers/intermediates/COLLECTED-batch-output.txt
       batch_report: hello_containers/batch-report.txt
       cowpy_art: hello_containers/cowpy-COLLECTED-batch-output.txt
     ```
