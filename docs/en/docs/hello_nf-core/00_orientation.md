@@ -23,13 +23,6 @@ If you are working through this course by yourself, please acquaint yourself wit
 This training works with Nextflow 25.10.2 or later **with the v2 syntax parser**, which is the default from Nextflow 26.04 onward.
 In our training environment you don't need to do anything: it runs Nextflow 26.04.4 with the v2 parser. If you are using a local or custom environment, see the [version notes](../info/nxf_versions.md).
 
-!!! warning "Setting boolean parameters on the command line"
-
-    With the v2 syntax parser, a value passed on the command line is always read as text.
-    A boolean parameter passed as a bare flag or as `--flag value` (for example `--skip_trim` or `--validate_params false`) is therefore read as the string `"true"` or `"false"` and will not behave as you expect.
-    Set boolean parameters in a `-params-file` or in the configuration instead, where they keep their real boolean type.
-    This course uses that pattern throughout.
-
 This training additionally requires **nf-core tools 4.0.2**.
 If you use a different version of nf-core tooling, you may have difficulty following along.
 

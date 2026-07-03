@@ -1620,11 +1620,27 @@ Open `core-hello/nextflow.config` and set `validate_params` to `false`:
         validate_params            = true
     ```
 
-!!! warning
+We set this in the config file rather than on the command line because starting in Nextflow version 26.04, all values supplied on the command line are typed as strings.
+As a result, Boolean parameters must be set in a config file or a `-params-file` to take a genuine `true`/`false` value.
 
-    Set this in the config file rather than on the command line.
-    Nextflow types values supplied on the command line as strings, so `--validate_params false` sends the **string** `"false"`, which is truthy and leaves validation switched on.
-    Boolean parameters must be set in a config file or a `-params-file` to take a genuine `true`/`false` value.
+For example, using `--validate_params false` here would evaluate as the **string** `"false"`, which leaves validation switched on.
+
+!!! tip "v2 parser compatibility lines in `nextflow.config`"
+
+    Speaking of v2 syntax, you may notice these two lines just below the `params` block in the config file:
+
+    ```groovy
+    outputDir = params.outdir
+    workflow.output.mode = params.publish_dir_mode
+    ```
+
+    These are required for compatibility with the v2 syntax parser.
+
+    - With the v2 syntax, `params.*` variables cannot be referenced directly inside `publishDir` directives in process modules, so `outputDir` is defined here as a top-level config variable that those directives can access.
+
+    - `workflow.output.mode` sets the default publishing mode for the v2 workflow output block.
+
+    Both are generated automatically by the nf-core pipeline template and do not need to be modified.
 
 ### 5.5. Run the pipeline with the test profile
 

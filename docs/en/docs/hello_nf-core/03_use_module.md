@@ -192,14 +192,12 @@ Now that we've found the module we want, we need to add it to our pipeline's sou
 The good news is that the nf-core project includes some tooling to make this part easy.
 Specifically, the `nf-core modules install` command makes it possible to automate retrieving the code and making it available to your project in a single step.
 
-Navigate to your pipeline directory and run the installation command:
+Make sure your working directory is the root of the `core-hello` pipeline project, then run the installation command:
 
 ```bash
 cd core-hello
 nf-core modules install find/concatenate
 ```
-
-The tool will proceed to install the module.
 
 ??? success "Command output"
 
@@ -219,23 +217,12 @@ The tool will proceed to install the module.
     'modules/local/cowpy.nf/meta.yml'
     ```
 
-The command automatically:
+The command downloads the module files to `modules/nf-core/find/concatenate/` and updates `modules.json` to track the installed module.
+You can ignore the `NotADirectoryError` at the end; it happens because nf-core/tools 4.0.2 expects every local module to live in its own directory (`modules/local/<name>/main.nf`), while `core-hello` still uses single-file local modules at this stage.
+However, the `find/concatenate` module is installed correctly, and `modules.json` is updated as expected.
+We'll convert `cowpy` to the directory layout in Part 4.
 
-- Downloads the module files to `modules/nf-core/find/concatenate/`
-- Updates `modules.json` to track the installed module
-
-!!! warning "Traceback with single-file local modules"
-
-    nf-core/tools 4.0.2 expects every local module to live in its own directory (`modules/local/<name>/main.nf`).
-    Because our `core-hello` pipeline still uses single-file local modules (`modules/local/cowpy.nf` and friends), the install command prints a `NotADirectoryError` traceback after installing.
-    The `find/concatenate` module is still installed correctly and `modules.json` is still updated; the traceback is cosmetic and can be ignored for this exercise.
-    (We convert `cowpy` to the directory layout in Part 4.)
-
-!!! tip
-
-    Always make sure your current working directory is the root of your pipeline project before running the module installation command.
-
-Let's check that the module was installed correctly:
+Let's check that the module files are in place:
 
 ```bash
 tree -L 4 modules
@@ -261,17 +248,66 @@ tree -L 4 modules
     5 directories, 7 files
     ```
 
-You can confirm the installation by inspecting `modules.json`, which now lists `find/concatenate` under the nf-core/modules repository, alongside the directory contents shown above.
+You can also confirm the installation by inspecting `modules.json`, which now lists `find/concatenate` under the nf-core/modules repository.
 
-!!! note "`nf-core modules list local` and single-file modules"
+??? abstract "modules.json"
 
-    You might expect `nf-core modules list local` to report the newly installed module.
-    In nf-core/tools 4.0.2, that command returns an empty table whenever the pipeline contains single-file local modules (as `core-hello` does at this stage), because the tool only recognizes the directory layout (`modules/local/<name>/main.nf`).
-    Inspecting `modules.json` and the `modules/nf-core/` directory is the reliable check here.
+    ```json title="modules.json"
+    {
+        "name": "core/hello",
+        "homePage": "https://github.com/core/hello",
+        "repos": {
+            "https://github.com/nf-core/modules.git": {
+                "modules": {
+                    "nf-core": {
+                        "find/concatenate": {
+                            "branch": "master",
+                            "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                            "installed_by": [
+                                "modules"
+                            ]
+                        }
+                    }
+                },
+                "subworkflows": {
+                    "nf-core": {
+                        "utils_nextflow_pipeline": {
+                            "branch": "master",
+                            "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                            "installed_by": [
+                                "subworkflows"
+                            ]
+                        },
+                        "utils_nfcore_pipeline": {
+                            "branch": "master",
+                            "git_sha": "a3fb7351b1fdb2b1de282b765816bbea190e86a8",
+                            "installed_by": [
+                                "subworkflows"
+                            ]
+                        },
+                        "utils_nfschema_plugin": {
+                            "branch": "master",
+                            "git_sha": "fdc08b8b1ae74f56686ce21f7ea11ad11990ce57",
+                            "installed_by": [
+                                "subworkflows"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ```
 
 This confirms that the `find/concatenate` module is now part of your project's source code.
-
 However, to actually use the new module, we need to import it into our pipeline.
+
+!!! info "Checking installed modules with `nf-core modules list local`"
+
+    The nf-core tools provide a command to list all modules currently installed in a pipeline: `nf-core modules list local`.
+    Under normal circumstances this is a convenient way to verify an installation.
+    However, in nf-core/tools 4.0.2, this command returns an empty table when the pipeline contains any single-file local modules (such as `modules/local/cowpy.nf`), because the tool only recognizes the newer directory layout (`modules/local/<name>/main.nf`).
+    Since `core-hello` still uses single-file local modules at this stage, `modules.json` and the `modules/nf-core/` directory are the reliable checks — as shown above.
 
 ### 1.5. Update the module imports
 
@@ -762,7 +798,7 @@ This should run reasonably quickly.
     Launching `./main.nf` [cheesy_bhabha] revision: d6bbba9521
 
     Input/output options
-      input                     : /home/ubuntu/hnc-scratch/core-hello/assets/greetings.csv
+      input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
       outdir                    : core-hello-results
 
     Institutional config options
@@ -776,12 +812,12 @@ This should run reasonably quickly.
     Core Nextflow options
       runName                   : cheesy_bhabha
       containerEngine           : docker
-      launchDir                 : /home/ubuntu/hnc-scratch/core-hello
-      workDir                   : /home/ubuntu/hnc-scratch/core-hello/work
-      projectDir                : /home/ubuntu/hnc-scratch/core-hello
-      userName                  : ubuntu
+      launchDir                 : /workspaces/training/hello-nf-core/core-hello
+      workDir                   : /workspaces/training/hello-nf-core/core-hello/work
+      projectDir                : /workspaces/training/hello-nf-core/core-hello
+      userName                  : root
       profile                   : test,docker
-      configFiles               : /home/ubuntu/hnc-scratch/core-hello/nextflow.config
+      configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
 
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------

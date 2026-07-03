@@ -594,7 +594,7 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results-notrim -par
 
 The `SEQTK_TRIM` process no longer appears in the output.
 
-!!! warning
+!!! warning "Setting boolean parameters on the command line"
 
     Nextflow types values supplied on the command line as strings.
     For a boolean parameter like `skip_trim`, passing it as a bare flag (`--skip_trim`) or as `--skip_trim true` sends the **string** `"true"`, which fails schema validation:
@@ -603,8 +603,9 @@ The `SEQTK_TRIM` process no longer appears in the output.
     * --skip_trim (true): Value is [string] but should be [boolean]
     ```
 
-    To set a boolean parameter to a genuine `true`/`false` value, use a `-params-file` as shown above.
+    To set a boolean parameter to a genuine `true`/`false` value, use a `-params-file` as shown above, or set it in a config file.
     String, integer and file-path parameters are unaffected and can still be set directly on the command line.
+    This course uses this pattern throughout for boolean parameters.
 
 !!! info
 
