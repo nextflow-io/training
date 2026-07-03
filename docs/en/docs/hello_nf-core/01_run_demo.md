@@ -43,9 +43,10 @@ The `Introduction` tab provides an overview of the pipeline, including a visual 
 
 ![pipeline subway map](./img/nf-core-demo-subway-cropped.png)
 
-1. Read QC (FASTQC)
-2. Adapter and quality trimming (SEQTK_TRIM)
-3. Present QC for raw reads (MULTIQC)
+1. Read QC ([FASTQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
+2. Adapter and quality trimming ([SEQTK_TRIM](https://github.com/lh3/seqtk))
+3. Present QC for raw reads ([MULTIQC](http://multiqc.info/))
+4. Generate a lighthearted text message from a cow ([COWPY](https://github.com/jeffbuttars/cowpy))
 
 #### 1.1.2. Example command line
 
@@ -80,7 +81,7 @@ nextflow pull nf-core/demo
 
     ```console
     Checking nf-core/demo ...
-    downloaded from https://github.com/nf-core/demo.git - revision: 45904cb9d1 [master]
+    downloaded from https://github.com/nf-core/demo.git - revision: 32893afef8 [master]
     ```
 
 Nextflow does a `pull` of the pipeline code, meaning it downloads the full repository to your local drive.
@@ -118,22 +119,39 @@ nextflow info nf-core/demo
 ??? success "Command output"
 
     ```console
-     project name: nf-core/demo
-     repository  : https://github.com/nf-core/demo
-     local path  : /workspaces/.nextflow/assets/.repos/nf-core/demo
-     main script : main.nf
-     description : An nf-core demo pipeline
-     revisions   :
-       TEMPLATE
-       dev
-     > master (default)
-       1.0.0 [t]
-       1.0.1 [t]
-       1.0.2 [t]
-     > 1.1.0 [t]
+    project name: nf-core/demo
+    repository  : https://github.com/nf-core/demo
+    local path  : /workspaces/.nextflow/assets/.repos/nf-core/demo
+    main script : main.nf
+    description : An nf-core demo pipeline
+    revisions   :
+      TEMPLATE
+      bumper
+      dev
+      fix-nxfversion
+      manually-merge-3_0_2
+    > master (default)
+      nf-core-template-merge-2.13.2.dev0
+      nf-core-template-merge-2.14.0
+      nf-core-template-merge-2.14.1
+      nf-core-template-merge-3.0.0
+      nf-core-template-merge-3.0.1
+      nf-core-template-merge-3.0.2
+      nf-core-template-merge-3.1.0
+      nf-core-template-merge-3.1.2
+      nf-core-template-merge-3.2.0
+      nf-core-template-merge-3.2.1
+      nf-core-template-merge-3.3.1
+      nf-core-template-merge-3.3.2
+      nf-core-template-merge-4.0.0
+      1.0.0 [t]
+      1.0.1 [t]
+      1.0.2 [t]
+      1.1.0 [t]
+    > 1.2.0 [t]
     ```
 
-!!! note
+!!! info
 
     The full path may differ on your system if you're not using our training environment.
 
@@ -167,20 +185,20 @@ tree -L 1 pipelines/nf-core/demo
 
     ```console
     pipelines/nf-core/demo
+    ├── assets
     ├── CHANGELOG.md
     ├── CITATIONS.md
     ├── CODE_OF_CONDUCT.md
-    ├── LICENSE
-    ├── README.md
-    ├── assets
     ├── conf
     ├── docs
+    ├── LICENSE
     ├── main.nf
     ├── modules
     ├── modules.json
     ├── nextflow.config
     ├── nextflow_schema.json
     ├── nf-test.config
+    ├── README.md
     ├── ro-crate-metadata.json
     ├── subworkflows
     ├── tests
@@ -209,7 +227,7 @@ We won't go over the pipeline code components in this part of the course, but we
     You can also browse any nf-core pipeline's source code on GitHub, e.g. [github.com/nf-core/demo](https://github.com/nf-core/demo).
     Every nf-core pipeline follows the same directory layout, so once you know the structure, you can find configuration files, modules, and workflows for any pipeline the same way.
 
-But for now, on to running the pipeline!
+For now, on to running the pipeline!
 
 ### Takeaway
 
@@ -227,7 +245,7 @@ Conveniently, every nf-core pipeline comes with a test profile.
 This is a minimal set of configuration settings for the pipeline to run using a small test dataset hosted in the [nf-core/test-datasets](https://github.com/nf-core/test-datasets) repository.
 It's a great way to quickly try out a pipeline at small scale.
 
-!!! note
+!!! tip
 
     Nextflow's configuration profile system allows you to easily switch between different container engines or execution environments.
     For more details, see [Hello Nextflow Part 6: Configuration](../hello_nextflow/06_hello_config.md).
@@ -303,16 +321,16 @@ SAMPLE3_SE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/il
 ```
 
 This is called a samplesheet, and is the most common form of input to nf-core pipelines.
+Don't worry if you're not familiar with the data formats and types, it's not important for what follows.
 
-!!! note
-
-    Don't worry if you're not familiar with the data formats and types, it's not important for what follows.
-
-So this confirms that we have everything we need to try out the pipeline.
+We now have everything we need to try out the pipeline.
 
 ### 2.2. Run the pipeline
 
-Let's decide to use Docker for the container system and `demo-results` as the output directory, and we're ready to run the test command:
+As noted above, we can use the example testing command almost as-is; we just need to specify what software packaging to use, and what to name the output directory.
+Here we'll use Docker for the container system and `demo-results`, respectively.
+
+With that, we can run the test command:
 
 ```bash
 nextflow run nf-core/demo -profile docker,test --outdir demo-results
@@ -321,9 +339,10 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 26.04.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `https://github.com/nf-core/demo` [scruffy_goldstine] revision: 45904cb9d1 [master]
+    Downloading plugin nf-schema@2.7.2
+    Launching `https://github.com/nf-core/demo` [cranky_curry] revision: 32893afef8 [master]
 
 
     ------------------------------------------------------
@@ -332,8 +351,9 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
       |\ | |__  __ /  ` /  \ |__) |__         }  {
       | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                             `._,._,'
-      nf-core/demo 1.1.0
+      nf-core/demo 1.2.0
     ------------------------------------------------------
+
     Input/output options
       input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
       outdir                    : demo-results
@@ -343,21 +363,22 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
       config_profile_description: Minimal test dataset to check pipeline function
 
     Generic options
-      trace_report_suffix       : 2026-06-23_16-51-59
+      trace_report_suffix       : 2026-07-03_21-31-35
 
     Core Nextflow options
       revision                  : master
-      runName                   : scruffy_goldstine
+      runName                   : cranky_curry
       containerEngine           : docker
       launchDir                 : /workspaces/training/hello-nf-core
       workDir                   : /workspaces/training/hello-nf-core/work
-      projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/45904cb9d12db3d89900e6c479fe604ef71b297b
+      projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2
       userName                  : root
       profile                   : docker,test
-      configFiles               : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/45904cb9d12db3d89900e6c479fe604ef71b297b/nextflow.config
+      configFiles               : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/nextflow.config
 
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
+
     * The pipeline
         https://doi.org/10.5281/zenodo.12192442
 
@@ -367,11 +388,11 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
     * Software dependencies
         https://github.com/nf-core/demo/blob/master/CITATIONS.md
 
-
-    executor >  local (7)
-    [be/8d6f73] NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE)     | 3 of 3 ✔
-    [8a/75c637] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) | 3 of 3 ✔
-    [79/b859f7] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+    executor >  local (8)
+    [ca/5b0f3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     [100%] 3 of 3 ✔
+    [b7/cb6812] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) [100%] 3 of 3 ✔
+    [ff/6ebd98] NFCORE_DEMO:DEMO:COWPY                   [100%] 1 of 1 ✔
+    [09/bbd1b4] NFCORE_DEMO:DEMO:MULTIQC (demo)          [100%] 1 of 1 ✔
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
@@ -380,14 +401,14 @@ If your output matches that, congratulations! You've just run your first nf-core
 You'll notice that there is a lot more console output than when you run a basic Nextflow pipeline.
 There's a header that includes a summary of the pipeline's version, inputs and outputs, and a few elements of configuration.
 
-!!! note
+!!! info
 
     Your output will show different timestamps, execution names, and file paths, but the overall structure and process execution should be similar.
 
 Notice the line near the top of the output:
 
 ```console
-Launching `https://github.com/nf-core/demo` [scruffy_goldstine] revision: 45904cb9d1 [master]
+Launching `https://github.com/nf-core/demo` [cranky_curry] revision: 32893afef8 [master]
 ```
 
 This tells you which revision of the pipeline was used.
@@ -395,7 +416,7 @@ Because we did not specify a version, Nextflow used the latest commit on `master
 For reproducible runs, you should pin a specific release using the `-r` flag:
 
 ```bash
-nextflow run nf-core/demo -r 1.1.0 -profile docker,test --outdir demo-results
+nextflow run nf-core/demo -r 1.2.0 -profile docker,test --outdir demo-results
 ```
 
 This ensures that the same pipeline code is used every time, regardless of new commits or releases.
@@ -404,14 +425,15 @@ For this training we omit `-r` for simplicity, but in production you should alwa
 Moving on to the execution output, let's have a look at the lines that tell us what processes were run:
 
 ```console
-executor >  local (7)
-[be/8d6f73] NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE)     | 3 of 3 ✔
-[8a/75c637] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) | 3 of 3 ✔
-[79/b859f7] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+executor >  local (8)
+[ca/5b0f3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     [100%] 3 of 3 ✔
+[b7/cb6812] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) [100%] 3 of 3 ✔
+[ff/6ebd98] NFCORE_DEMO:DEMO:COWPY                   [100%] 1 of 1 ✔
+[09/bbd1b4] NFCORE_DEMO:DEMO:MULTIQC (demo)          [100%] 1 of 1 ✔
 -[nf-core/demo] Pipeline completed successfully-
 ```
 
-This tells us that three processes were run, corresponding to the three tools shown in the pipeline documentation page on the nf-core website: FASTQC, SEQTK_TRIM and MULTIQC.
+This tells us that four processes were run, corresponding to the three tools shown in the pipeline documentation page on the nf-core website: FASTQC, SEQTK_TRIM, MULTIQC and COWPY.
 
 The full process names as shown here, such as `NFCORE_DEMO:DEMO:MULTIQC`, are longer than what you may have seen in the introductory Hello Nextflow material.
 These include the names of their parent workflows and reflect the modularity of the pipeline code.
@@ -429,6 +451,8 @@ tree -L 2 demo-results
 
     ```console
     demo-results
+    ├── cowpy
+    │   └── cowpy.txt
     ├── fastqc
     │   ├── SAMPLE1_PE
     │   ├── SAMPLE2_PE
@@ -442,12 +466,14 @@ tree -L 2 demo-results
     │   ├── multiqc_plots
     │   └── multiqc_report.html
     └── pipeline_info
-        ├── execution_report_2026-06-23_16-51-59.html
-        ├── execution_timeline_2026-06-23_16-51-59.html
-        ├── execution_trace_2026-06-23_16-51-59.txt
+        ├── execution_report_2026-07-03_21-31-35.html
+        ├── execution_timeline_2026-07-03_21-31-35.html
+        ├── execution_trace_2026-07-03_21-31-35.txt
         ├── nf_core_demo_software_mqc_versions.yml
-        ├── params_2026-06-23_16-52-02.json
-        └── pipeline_dag_2026-06-23_16-51-59.html
+        ├── params_2026-07-03_21-31-43.json
+        └── pipeline_dag_2026-07-03_21-31-35.html
+
+    13 directories, 8 files
     ```
 
 That might seem like a lot.
@@ -459,7 +485,7 @@ For example, the `execution_timeline_*` file shows you what processes were run, 
 
 ![execution timeline report](./img/execution_timeline.png)
 
-!!! note
+!!! info
 
     Here the tasks were not run in parallel because we are running on a minimalist machine in Github Codespaces.
     To see these run in parallel, try increasing the CPU allocation of your codespace and the resource limits in the test configuration.
@@ -509,7 +535,7 @@ nextflow run nf-core/demo --help
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `https://github.com/nf-core/demo` [run_name] revision: 45904cb9d1 [master]
+    Launching `https://github.com/nf-core/demo` [adoring_meucci] revision: 32893afef8 [master]
 
 
     ------------------------------------------------------
@@ -518,16 +544,18 @@ nextflow run nf-core/demo --help
       |\ | |__  __ /  ` /  \ |__) |__         }  {
       | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                             `._,._,'
-      nf-core/demo 1.1.0
+      nf-core/demo 1.2.0
     ------------------------------------------------------
     Typical pipeline command:
 
       nextflow run nf-core/demo -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>
 
+    parameter will be printed.
 
     Input/output options
       --input                       [string] Path to a metadata file containing information about the samples in the experiment.
       --outdir                      [string] The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.
+
       --email                       [string] Email address for completion summary.
       --multiqc_title               [string] MultiQC report title. Printed as page header, used for filename if not otherwise specified.
 
@@ -543,7 +571,7 @@ nextflow run nf-core/demo --help
       --help                        [boolean, string] Display the help message.
       --help_full                   [boolean]         Display the full detailed help message.
       --show_hidden                 [boolean]         Display hidden parameters in the help message (only works when --help or --help_full are provided).
-     !! Hiding 20 param(s), use the `--showHidden` parameter to show them !!
+    !! Hiding 19 param(s), use the `--showHidden` parameter to show them !!
     ------------------------------------------------------
 
     * The pipeline
@@ -571,33 +599,87 @@ As covered in [Hello Config](../hello_nextflow/06_hello_config.md), you can set 
 Both approaches work the same way with nf-core pipelines.
 
 For example, to skip the trimming step, we want to set the boolean parameter `skip_trim` to `true`.
-Create a parameter file called `skip_trim.yml`:
+A params file called `my_params.yml` is provided in your working directory with that value already set:
 
-```yaml title="skip_trim.yml"
+```yaml title="my_params.yml"
 skip_trim: true
 ```
 
-Then pass it with `-params-file`:
+Pass it with `-params-file`:
 
 ```bash
-nextflow run nf-core/demo -profile docker,test --outdir demo-results-notrim -params-file skip_trim.yml
+nextflow run nf-core/demo -profile docker,test --outdir demo-results-notrim -params-file my_params.yml
 ```
 
 ??? success "Command output"
 
     ```console
-    executor >  local (4)
-    [80/17c104] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE) | 3 of 3 ✔
-    [a0/6ea0cf] NFCORE_DEMO:DEMO:MULTIQC             | 1 of 1 ✔
+     N E X T F L O W   ~  version 26.04.4
+
+    Launching `https://github.com/nf-core/demo` [focused_heisenberg] revision: 32893afef8 [master]
+
+
+    ------------------------------------------------------
+                                            ,--./,-.
+            ___     __   __   __   ___     /,-._.--~'
+      |\ | |__  __ /  ` /  \ |__) |__         }  {
+      | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                            `._,._,'
+      nf-core/demo 1.2.0
+    ------------------------------------------------------
+
+    Input/output options
+      input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
+      outdir                    : demo-results-notrim
+
+    Process skipping options
+      skip_trim                 : true
+
+    Institutional config options
+      config_profile_name       : Test profile
+      config_profile_description: Minimal test dataset to check pipeline function
+
+    Generic options
+      trace_report_suffix       : 2026-07-03_22-08-47
+
+    Core Nextflow options
+      revision                  : master
+      runName                   : focused_heisenberg
+      containerEngine           : docker
+      launchDir                 : /workspaces/training/hello-nf-core
+      workDir                   : /workspaces/training/hello-nf-core/work
+      projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2
+      userName                  : root
+      profile                   : docker,test
+      configFiles               : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/nextflow.config
+
+    !! Only displaying parameters that differ from the pipeline defaults !!
+    ------------------------------------------------------
+
+    * The pipeline
+        https://doi.org/10.5281/zenodo.12192442
+
+    * The nf-core framework
+        https://doi.org/10.1038/s41587-020-0439-x
+
+    * Software dependencies
+        https://github.com/nf-core/demo/blob/master/CITATIONS.md
+
+    executor >  local (5)
+    [7a/f3599e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE) [100%] 3 of 3 ✔
+    [b0/2f0bdc] NFCORE_DEMO:DEMO:COWPY               [100%] 1 of 1 ✔
+    [c3/3c2278] NFCORE_DEMO:DEMO:MULTIQC (demo)      [100%] 1 of 1 ✔
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
 The `SEQTK_TRIM` process no longer appears in the output.
 
-!!! warning "Setting boolean parameters on the command line"
+!!! warning "Important limitations about parameter inputs"
 
-    Nextflow types values supplied on the command line as strings.
-    For a boolean parameter like `skip_trim`, passing it as a bare flag (`--skip_trim`) or as `--skip_trim true` sends the **string** `"true"`, which fails schema validation:
+    **Setting boolean parameters on the command line**
+
+    Starting with Nextflow version 26.04, all values supplied on the command line are typed as strings.
+    For a boolean parameter like `skip_trim`, passing it as a bare flag (`--skip_trim`) or as `--skip_trim true` is evaluated as the **string** `"true"`, which fails schema validation:
 
     ```console
     * --skip_trim (true): Value is [string] but should be [boolean]
@@ -607,12 +689,12 @@ The `SEQTK_TRIM` process no longer appears in the output.
     String, integer and file-path parameters are unaffected and can still be set directly on the command line.
     This course uses this pattern throughout for boolean parameters.
 
-!!! info
+    **Using custom configuration files**
 
     Although it is technically possible to set pipeline parameters in a custom configuration file passed with `-c`, this may not override defaults already set in the pipeline's own `nextflow.config`, depending on Nextflow's configuration precedence rules.
     Using `--param_name` on the command line or `-params-file` is more reliable, as these always take precedence.
 
-    **As a rule of thumb:** if it appears in the `--help` output, set it via the command line or a params file rather than a config file.
+    As a rule of thumb: If it appears in the `--help` output, set it via the command line or a params file rather than a config file.
 
 #### 3.1.3. Parameter validation
 
@@ -641,7 +723,7 @@ WARN: The following invalid input values have been detected:
 ```
 
 The pipeline still runs, but the warning alerts you right away that `--foobar` is not a recognized parameter.
-This catches typos like `--outDir` instead of `--outdir` before you waste compute time wondering why the output went to the wrong place.
+This is meant to draw your attention to non-breaking typos, like `--outDir` being used instead of `--outdir`, which can help you avoid wasting time and compute.
 
 ##### 3.1.3.2. Invalid parameter values
 
@@ -661,7 +743,7 @@ The following invalid input values have been detected:
 ```
 
 The pipeline stops before any processes run, saving you from a failed or incorrect execution.
-As shown in section 3.1.2, boolean parameters should be set to a genuine `true`/`false` value in a params file rather than passed on the command line, since command-line values are typed as strings.
+As noted in section 3.1.2, boolean parameters should be set to a genuine `true`/`false` value in a params file rather than passed on the command line, since command-line values are typed as strings.
 
 #### 3.1.4. Input validation
 
@@ -716,9 +798,7 @@ This is defined in a schema file (`assets/schema_input.json`) that specifies the
 The schema specifies that `sample` and `fastq_1` are required, while `fastq_2` is optional (supporting both paired-end and single-end data).
 File paths are validated for existence and extension pattern.
 
-##### 3.1.4.1. Create an invalid samplesheet
-
-Create a samplesheet with a missing column and a non-existent file path:
+To demonstrate this, we provide a malformed samplesheet called `malformed_samplesheet.csv` in your working directory:
 
 ```csv title="malformed_samplesheet.csv"
 sample,fastq_2
@@ -726,11 +806,8 @@ SAMPLE1,/not/a/real/file.fastq.gz
 ```
 
 This samplesheet is missing the required `fastq_1` column and has a non-existent file path in `fastq_2`.
-Both issues will produce validation errors in the next step.
 
-##### 3.1.4.2. Run the demo pipeline with the invalid samplesheet
-
-Run the demo pipeline using `malformed_samplesheet.csv` as the input.
+Run the demo pipeline using `malformed_samplesheet.csv` as the input:
 
 ```bash
 nextflow run nf-core/demo -profile docker,test --outdir demo-results --input malformed_samplesheet.csv
