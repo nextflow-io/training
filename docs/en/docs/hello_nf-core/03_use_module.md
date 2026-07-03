@@ -250,7 +250,7 @@ tree -L 4 modules
 
 You can also confirm the installation by inspecting `modules.json`, which now lists `find/concatenate` under the nf-core/modules repository.
 
-??? abstract "modules.json"
+??? abstract File contents
 
     ```json title="modules.json"
     {
