@@ -161,11 +161,17 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
+    Launching `main.nf` [romantic_chandrasekhar] revision: 5a4a89bc3a
 
     data/patientA_rep1_normal_R1_001.fastq.gz is of class class java.lang.String
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 As you can see, Nextflow printed the string path exactly as we wrote it.
@@ -209,11 +215,17 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
+    Launching `main.nf` [kickass_coulomb] revision: 5af44b1b59
 
     /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz is of class class sun.nio.fs.UnixPath
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 This time, you see the full absolute path instead of the relative path we provided as input.
@@ -273,15 +285,21 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48
+    Launching `main.nf` [ecstatic_ampere] revision: f3fa3dcb48
 
     File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
     Simple name: patientA_rep1_normal_R1_001
     Extension: gz
     Parent directory: /workspaces/training/side-quests/working_with_files/data
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 You see the various file attributes printed to the console above.
@@ -390,9 +408,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [cheeky_hypatia] DSL2 - revision: 281d13c414
+    Launching `main.nf` [cheeky_hypatia] revision: 281d13c414
 
     File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
@@ -400,9 +418,15 @@ nextflow run main.nf
     Extension: gz
     Parent directory: /workspaces/training/side-quests/working_with_files/data
     executor >  local (1)
-    [e9/341c05] COUNT_LINES [100%] 1 of 1 ✔
-    Processing file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
+    [e9/341c05] COUNT_LINES | 1 of 1 ✔
+    Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 This shows we are able to operate on the file appropriately inside a process.
@@ -473,10 +497,11 @@ nextflow run main.nf
 ??? failure "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [friendly_goodall] DSL2 - revision: ae50609b20
+    Launching `main.nf` [friendly_goodall] revision: ae50609b20
 
+    File object class: class java.lang.String
     [-        ] COUNT_LINES -
     ERROR ~ Error executing process > 'COUNT_LINES'
 
@@ -485,9 +510,9 @@ nextflow run main.nf
 
 
 
-    Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 This is the important bit:
@@ -541,12 +566,13 @@ nextflow run main.nf
 ??? failure "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [soggy_golick] DSL2 - revision: ae50609b20
+    Launching `main.nf` [soggy_golick] revision: ae50609b20
 
+    File object class: class java.lang.String
     executor >  local (1)
-    [b3/b3023c] COUNT_LINES [  0%] 0 of 1 ✘
+    [b3/b3023c] COUNT_LINES | 0 of 1 ✘
     ERROR ~ Error executing process > 'COUNT_LINES'
 
     Caused by:
@@ -574,9 +600,9 @@ nextflow run main.nf
     Work dir:
       /workspaces/training/side-quests/working_with_files/work/b3/b3023cb2ccb986851301d8e369e79f
 
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 This shows a lot of details about the error because the process is set to output debugging information, as noted above.
@@ -690,9 +716,9 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
+    Launching `main.nf` [insane_swartz] revision: fff18abe6d
 
     File object class: class nextflow.file.http.XPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
@@ -700,9 +726,15 @@ nextflow run main.nf
     Extension: gz
     Parent directory: /nextflow-io/training/master/side-quests/working_with_files/data
     executor >  local (1)
-    [8a/2ab7ca] COUNT_LINES [100%] 1 of 1 ✔
+    [8a/2ab7ca] COUNT_LINES | 1 of 1 ✔
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 It works! You can see that very little has changed.
@@ -875,11 +907,17 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [grave_meucci] DSL2 - revision: b09964a583
+    Launching `main.nf` [grave_meucci] revision: b09964a583
 
     Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 As you can see, the file path is being loaded as a `Path` type object in the channel.
@@ -932,12 +970,12 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [furious_swanson] DSL2 - revision: c35c34950d
+    Launching `main.nf` [furious_swanson] revision: c35c34950d
 
     executor >  local (1)
-    [9d/6701a6] COUNT_LINES (1) [100%] 1 of 1 ✔
+    [9d/6701a6] COUNT_LINES (1) | 1 of 1 ✔
     File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
     Simple name: patientA_rep1_normal_R1_001
@@ -945,6 +983,12 @@ nextflow run main.nf
     Parent directory: /workspaces/training/side-quests/working_with_files/data
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 And there you are, same results as before but now we have the file in a channel, so we can add more.
@@ -1001,12 +1045,12 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [boring_sammet] DSL2 - revision: d2aa789c9a
+    Launching `main.nf` [boring_sammet] revision: d2aa789c9a
 
     executor >  local (2)
-    [3c/a65de5] COUNT_LINES (2) [100%] 2 of 2 ✔
+    [3c/a65de5] COUNT_LINES (2) | 2 of 2 ✔
     File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
     Simple name: patientA_rep1_normal_R1_001
@@ -1022,6 +1066,12 @@ nextflow run main.nf
 
     Processing file: patientA_rep1_normal_R2_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 As you can see, we now have two Path objects in our channel, which shows that Nextflow has done the filename expansion correctly, and has loaded and processed both files as expected.
@@ -1106,19 +1156,25 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console hl_lines="7-8"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [suspicious_mahavira] DSL2 - revision: ae8edc4e48
+    Launching `main.nf` [suspicious_mahavira] revision: ae8edc4e48
 
     executor >  local (2)
-    [e9/55774b] COUNT_LINES (2) [100%] 2 of 2 ✔
-    [patientA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [e9/55774b] COUNT_LINES (2) | 2 of 2 ✔
     [patientA_rep1_normal_R1_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    [patientA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    Processing file: patientA_rep1_normal_R2_001.fastq.gz
+    40
+
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
 
-    Processing file: patientA_rep1_normal_R2_001.fastq.gz
-    40
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Each element in the channel is now a tuple containing the `simpleName` and the original file object.
@@ -1162,19 +1218,25 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console hl_lines="7-8"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [gigantic_gauss] DSL2 - revision: a39baabb57
+    Launching `main.nf` [gigantic_gauss] revision: a39baabb57
 
     executor >  local (2)
-    [e7/da2f4b] COUNT_LINES (2) [100%] 2 of 2 ✔
-    [[patientA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [e7/da2f4b] COUNT_LINES (2) | 2 of 2 ✔
     [[patientA, rep1, normal, R1, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    [[patientA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
     Processing file: patientA_rep1_normal_R2_001.fastq.gz
     40
 
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Now the tuple for each element in our channel contains the list of metadata (_e.g._ `[patientA, rep1, normal, R1, 001]`) and the original file object.
@@ -1263,19 +1325,25 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console hl_lines="7-8"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
+    Launching `main.nf` [infallible_swartz] revision: 7f4e68c0cb
 
     executor >  local (2)
-    [1b/e7fb27] COUNT_LINES (1) [100%] 2 of 2 ✔
-    [[id:patientA, replicate:1, type:normal, readNum:2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [1b/e7fb27] COUNT_LINES (1) | 2 of 2 ✔
     [[id:patientA, replicate:1, type:normal, readNum:1], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    [[id:patientA, replicate:1, type:normal, readNum:2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
     Processing file: patientA_rep1_normal_R2_001.fastq.gz
     40
 
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Now the metadata is neatly labeled (_e.g._ `[id:patientA, replicate:1, type:normal, readNum:2]`) so it's a lot easier to tell what is what.
@@ -1381,12 +1449,11 @@ nextflow run main.nf
 
 ??? failure "Command output"
 
-    ```console hl_lines="7-8"
-     N E X T F L O W   ~  version 25.10.4
+    ```console hl_lines="6-7"
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [angry_koch] DSL2 - revision: 44fdf66105
+    Launching `main.nf` [angry_koch] revision: 44fdf66105
 
-    [-        ] COUNT_LINES -
     [-        ] COUNT_LINES -
     [patientA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
     ERROR ~ Error executing process > 'COUNT_LINES (1)'
@@ -1396,9 +1463,9 @@ nextflow run main.nf
 
 
 
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 Uh-oh, this time the run failed!
@@ -1449,11 +1516,17 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console hl_lines="5"
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [fabulous_davinci] DSL2 - revision: 22b53268dc
+    Launching `main.nf` [fabulous_davinci] revision: 22b53268dc
 
     [patientA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 Yay, this time the workflow succeeds!
@@ -1524,11 +1597,17 @@ nextflow run main.nf
 
     ```console
 
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [prickly_stonebraker] DSL2 - revision: f62ab10a3f
+    Launching `main.nf` [prickly_stonebraker] revision: f62ab10a3f
 
     [[id:patientA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 And there it is: we have the metadata map (`[id:patientA, replicate:1, type:normal]`) in the first position of the output tuple, followed by the tuple of paired files, as intended.
@@ -1684,11 +1763,17 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [goofy_kirch] DSL2 - revision: 3313283e42
+    Launching `main.nf` [goofy_kirch] revision: 3313283e42
 
     [[id:patientA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 This confirms we can now refer to the channel by name.
@@ -1782,12 +1867,19 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [shrivelled_cori] DSL2 - revision: b546a31769
+    Launching `main.nf` [shrivelled_cori] revision: b546a31769
 
     executor >  local (1)
-    [b5/110360] process > ANALYZE_READS (patientA) [100%] 1 of 1 ✔
+    [b5/110360] ANALYZE_READS (patientA) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
+        - [{id: patientA, replicate: '1', type: normal}, patientA/patientA_stats.txt]
     ```
 
 The outputs are published to a `results` directory, so have a look in there.
@@ -1847,12 +1939,26 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [big_stonebraker] DSL2 - revision: f7f9b8a76c
+    Launching `main.nf` [big_stonebraker] revision: f7f9b8a76c
 
     executor >  local (8)
-    [d5/441891] process > ANALYZE_READS (patientC) [100%] 8 of 8 ✔
+    [d5/441891] ANALYZE_READS (patientC) | 8 of 8 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
+        - [{id: patientB, replicate: '1', type: tumor}, patientB/patientB_stats.txt]
+        - [{id: patientA, replicate: '2', type: tumor}, patientA/patientA_stats.txt]
+        - [{id: patientC, replicate: '1', type: normal}, patientC/patientC_stats.txt]
+        - [{id: patientB, replicate: '1', type: normal}, patientB/patientB_stats.txt]
+        - [{id: patientA, replicate: '1', type: normal}, patientA/patientA_stats.txt]
+        - [{id: patientA, replicate: '1', type: tumor}, patientA/patientA_stats.txt]
+        - [{id: patientA, replicate: '2', type: normal}, patientA/patientA_stats.txt]
+        - [{id: patientC, replicate: '1', type: tumor}, patientC/patientC_stats.txt]
     ```
 
 The results directory should now contain results for all the available data.
@@ -1909,12 +2015,26 @@ nextflow run main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
+    Launching `main.nf` [insane_swartz] revision: fff18abe6d
 
     executor >  local (8)
-    [e3/449081] process > ANALYZE_READS (patientC) [100%] 8 of 8 ✔
+    [e3/449081] ANALYZE_READS (patientC) | 8 of 8 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
+        - [{id: patientB, replicate: '1', type: normal}, normal/patientB/1/patientB_stats.txt]
+        - [{id: patientB, replicate: '1', type: tumor}, tumor/patientB/1/patientB_stats.txt]
+        - [{id: patientC, replicate: '1', type: normal}, normal/patientC/1/patientC_stats.txt]
+        - [{id: patientA, replicate: '1', type: tumor}, tumor/patientA/1/patientA_stats.txt]
+        - [{id: patientA, replicate: '1', type: normal}, normal/patientA/1/patientA_stats.txt]
+        - [{id: patientA, replicate: '2', type: normal}, normal/patientA/2/patientA_stats.txt]
+        - [{id: patientC, replicate: '1', type: tumor}, tumor/patientC/1/patientC_stats.txt]
+        - [{id: patientA, replicate: '2', type: tumor}, tumor/patientA/2/patientA_stats.txt]
     ```
 
 Check the results directory now:

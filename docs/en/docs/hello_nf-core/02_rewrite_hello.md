@@ -350,9 +350,9 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./core-hello/main.nf` [scruffy_marconi] DSL2 - revision: b9e9b3b8de
+    Launching `./core-hello/main.nf` [scruffy_marconi] revision: b9e9b3b8de
 
     Downloading plugin nf-schema@2.5.1
     Input/output options
@@ -573,9 +573,9 @@ nextflow run original-hello/hello.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `original-hello/hello.nf` [goofy_babbage] DSL2 - revision: e9e72441e9
+    Launching `original-hello/hello.nf` [goofy_babbage] revision: e9e72441e9
 
     executor >  local (8)
     [a4/081cec] sayHello (1)       | 3 of 3 ✔
@@ -876,9 +876,9 @@ If you made all the changes correctly, this should run to completion.
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `original-hello/main.nf` [friendly_wright] DSL2 - revision: 1ecd2d9c0a
+    Launching `original-hello/main.nf` [friendly_wright] revision: 1ecd2d9c0a
 
     executor >  local (8)
     [24/c6c0d8] HELLO:sayHello (3)       | 3 of 3 ✔
@@ -1607,9 +1607,9 @@ If you've done all of the modifications correctly, it should run to completion.
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `core-hello/main.nf` [condescending_allen] DSL2 - revision: b9e9b3b8de
+    Launching `core-hello/main.nf` [condescending_allen] revision: b9e9b3b8de
 
     Input/output options
       input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
@@ -1636,10 +1636,10 @@ If you've done all of the modifications correctly, it should run to completion.
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
     executor >  local (1)
-    [ed/727b7e] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-    [45/bb6096] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [81/7e2e34] CORE_HELLO:HELLO:collectGreetings   [100%] 1 of 1 ✔
-    [96/9442a1] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
+    [ed/727b7e] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+    [45/bb6096] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+    [81/7e2e34] CORE_HELLO:HELLO:collectGreetings   | 1 of 1 ✔
+    [96/9442a1] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 

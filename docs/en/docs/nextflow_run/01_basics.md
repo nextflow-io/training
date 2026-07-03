@@ -89,12 +89,18 @@ nextflow run 1-hello.nf --input 'Hello World!'
 ??? success "Command output"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+    Launching `1-hello.nf` [goofy_torvalds] revision: c33d41f479
 
     executor >  local (1)
     [a3/7be2fa] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output: 1-hello/output.txt
     ```
 
 If your console output looks something like that, then congratulations, you just ran your first Nextflow workflow!
@@ -113,13 +119,14 @@ If your console output looks something like that, then congratulations, you just
     This was mentioned at the start of the course, but maybe you missed it.
     Check the [Nextflow versions](../info/nxf_versions.md) help material.
 
-    In short, if you're using Nextflow `25.10` then you need to enable the v2 language parser:
+    The v2 parser is the default from Nextflow 26.04 onward, so you will only see this on earlier versions.
+    On a version before 26.04 you need to enable the v2 language parser:
 
     ```bash
     export NXF_SYNTAX_PARSER=v2
     ```
 
-The most important output here is the last line, which is highlighted in the output above:
+The most important part here is the highlighted line:
 
 ```console
 [a3/7be2fa] sayHello | 1 of 1 ✔
@@ -166,12 +173,18 @@ nextflow run 1-hello.nf --input 'Hello World!' -output-dir hello_results
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78
+    Launching `1-hello.nf` [hungry_celsius] revision: f048d6ea78
 
     executor >  local (1)
-    [a3/1e1535] sayHello [100%] 1 of 1 ✔
+    [a3/1e1535] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/hello_results
+
+      first_output: 1-hello/output.txt
     ```
 
 You should see that your outputs are now published to a directory called `hello_results` instead of `results`:
@@ -204,7 +217,7 @@ That may sound confusing, so let's see what that looks like in practice.
 Going back to the console output for the workflow we ran earlier, we had this line:
 
 ```console
-[a3/1e1535] sayHello [100%] 1 of 1 ✔
+[a3/1e1535] sayHello | 1 of 1 ✔
 ```
 
 See how the line starts with `[a3/1e1535]`?
@@ -621,11 +634,17 @@ nextflow run 1-hello.nf --input 'Hello World!' -resume
 ??? success "Command output"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479
+    Launching `1-hello.nf` [tiny_noyce] revision: c33d41f479
 
     [a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output: 1-hello/output.txt
     ```
 
 The console output should look familiar, but there's one thing that's a little different compared to before.
@@ -792,7 +811,7 @@ Learn more: [2.4. Re-run the workflow with different greetings](#24-re-run-the-w
 What does this console output indicate?
 
 ```console
-[skipped  ] process > sayHello (1) [100%] 1 of 1, cached: 1 ✔
+[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
 ```
 
 - [ ] The task failed and was skipped

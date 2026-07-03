@@ -768,9 +768,9 @@ This should run reasonably quickly.
 ??? success "Command output"
 
     ```console
-    N E X T F L O W ~ version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-        Launching `./main.nf` [evil_pike] DSL2 - revision: b9e9b3b8de
+        Launching `./main.nf` [evil_pike] revision: b9e9b3b8de
 
         Input/output options
           input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
@@ -797,10 +797,10 @@ This should run reasonably quickly.
         !! Only displaying parameters that differ from the pipeline defaults !!
         ------------------------------------------------------
         executor >  local (8)
-        [b3/f005fd] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-        [08/f923d0] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-        [34/3729a9] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
-        [24/df918a] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
+        [b3/f005fd] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+        [08/f923d0] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+        [34/3729a9] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
+        [24/df918a] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
         -[core/hello] Pipeline completed successfully-
     ```
 

@@ -184,13 +184,27 @@ nextflow run main.nf
 ```
 
 ```console title="Result of running the workflow"
- N E X T F L O W   ~  version 24.10.2
+ N E X T F L O W   ~  version 26.04.4
 
-Launching `main.nf` [soggy_linnaeus] DSL2 - revision: bbf79d5c31
+Launching `main.nf` [trusting_mendel] revision: 405c90f891
 
 executor >  local (6)
-[f7/c3be66] sayHello (3)       | 3 of 3 ✔
-[cd/e15303] convertToUpper (3) | 3 of 3 ✔
+[6c/d7ae4e] sayHello (3)       | 3 of 3 ✔
+[72/5fa770] convertToUpper (2) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/nf-test/results
+
+  greetings:
+    - Hola-output.txt
+    - Hello-output.txt
+    - Bonjour-output.txt
+
+  upper_greetings:
+    - UPPER-Hola-output.txt
+    - UPPER-Bonjour-output.txt
+    - UPPER-Hello-output.txt
 ```
 
 CONGRATULATIONS! You just ran a test!
@@ -436,10 +450,10 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [1d4aaf12] 'Should run without failures' PASSED (1.619s)
+  Test [693ba951] 'Should run without failures' PASSED (2.879s)
 
 
-SUCCESS: Executed 1 tests in 1.626s
+SUCCESS: Executed 1 tests in 2.883s
 ```
 
 Success! The pipeline runs successfully and the test passes. Run it as many times as you like and you will always get the same result!
@@ -461,15 +475,28 @@ https://www.nf-test.com
 Test Workflow main.nf
 
   Test [693ba951] 'Should run without failures'
-    > Nextflow 24.10.4 is available - Please consider updating your version to it
-    > N E X T F L O W  ~  version 24.10.0
-    > Launching `/workspaces/training/side-quests/nf-test/main.nf` [zen_ampere] DSL2 - revision: bbf79d5c31
-    > [2b/61e453] Submitted process > sayHello (2)
-    > [31/4e1606] Submitted process > sayHello (1)
-    > [bb/5209ee] Submitted process > sayHello (3)
-    > [83/83db6f] Submitted process > convertToUpper (2)
-    > [9b/3428b1] Submitted process > convertToUpper (1)
-    > [ca/0ba51b] Submitted process > convertToUpper (3)
+    > N E X T F L O W  ~  version 26.04.4
+    > Launching `/workspaces/training/side-quests/nf-test/main.nf` [maniac_mcclintock] - revision: 405c90f891
+    > [fc/6965c3] Submitted process > sayHello (1)
+    > [14/640c84] Submitted process > sayHello (2)
+    > [d6/3594c9] Submitted process > sayHello (3)
+    > [d7/f14d58] Submitted process > convertToUpper (1)
+    > [76/cb9122] Submitted process > convertToUpper (2)
+    > [d1/92b304] Submitted process > convertToUpper (3)
+    >
+    > Outputs:
+    >
+    >   /workspaces/training/side-quests/nf-test/.nf-test/tests/693ba951a20fec36a5a9292ed1cc8a9f/results
+    >
+    >   greetings:
+    >     - Bonjour-output.txt
+    >     - Hello-output.txt
+    >     - Hola-output.txt
+    >
+    >   upper_greetings:
+    >     - UPPER-Bonjour-output.txt
+    >     - UPPER-Hola-output.txt
+    >     - UPPER-Hello-output.txt
     PASSED (5.206s)
 
 
@@ -535,10 +562,10 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [1d4aaf12] 'Should run successfully with correct number of processes' PASSED (1.567s)
+  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (2.876s)
 
 
-SUCCESS: Executed 1 tests in 1.588s
+SUCCESS: Executed 1 tests in 2.879s
 ```
 
 Success! The pipeline runs successfully and the test passes. Now we have began to test the details of the pipeline, as well as the overall status.
@@ -620,11 +647,11 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [f0e08a68] 'Should run successfully with correct number of processes' PASSED (8.144s)
-  Test [d7e32a32] 'Should produce correct output files' PASSED (6.994s)
+  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (3.055s)
+  Test [44ba6e13] 'Should produce correct output files' PASSED (2.941s)
 
 
-SUCCESS: Executed 2 tests in 15.165s
+SUCCESS: Executed 2 tests in 6.004s
 ```
 
 Success! The tests pass because the pipeline completed successfully, the correct number of processes ran and the output files were created. This should also show you how useful it is to provide those informative names for your tests.
@@ -731,6 +758,8 @@ Test Process sayHello
   Nextflow stdout:
 
   Process `sayHello` declares 1 input but was called with 0 arguments
+
+   -- Check script '/workspaces/training/side-quests/nf-test/.nf-test-1eaad118145a1fd798cb07e7dd75d087.nf' at line: 30 or see '/workspaces/training/side-quests/nf-test/.nf-test/tests/1eaad118145a1fd798cb07e7dd75d087/meta/nextflow.log' file for more details
   Nextflow stderr:
 
 FAILURE: Executed 1 tests in 4.884s (1 failed)
@@ -801,7 +830,7 @@ https://www.nf-test.com
 
 Test Process sayHello
 
-  Test [f91a1bcd] 'Should run without failures and produce correct output' PASSED (1.604s)
+  Test [d6837883] 'Should run without failures and produce correct output' PASSED (2.729s)
   Snapshots:
     1 created [Should run without failures and produce correct output]
 
@@ -809,7 +838,7 @@ Test Process sayHello
 Snapshot Summary:
   1 created
 
-SUCCESS: Executed 1 tests in 1.611s
+SUCCESS: Executed 1 tests in 2.733s
 ```
 
 Success! The test passes because the `sayHello` process ran successfully and the output was created.
@@ -859,10 +888,10 @@ https://www.nf-test.com
 
 Test Process sayHello
 
-  Test [f91a1bcd] 'Should run without failures and produce correct output' PASSED (1.675s)
+  Test [d6837883] 'Should run without failures and produce correct output' PASSED (3.092s)
 
 
-SUCCESS: Executed 1 tests in 1.685s
+SUCCESS: Executed 1 tests in 3.097s
 ```
 
 Success! The test passes because the `sayHello` process ran successfully and the output matched the snapshot.
@@ -952,10 +981,10 @@ https://www.nf-test.com
 
 Test Process sayHello
 
-  Test [58df4e4b] 'Should run without failures and contain expected greeting' PASSED (7.196s)
+  Test [c1d07f15] 'Should run without failures and contain expected greeting' PASSED (2.459s)
 
 
-SUCCESS: Executed 1 tests in 7.208s
+SUCCESS: Executed 1 tests in 2.461s
 ```
 
 ### 2.4. Test the `convertToUpper` process
@@ -1071,7 +1100,7 @@ https://www.nf-test.com
 
 Test Process convertToUpper
 
-  Test [c59b6044] 'Should run without failures and produce correct output' PASSED (1.755s)
+  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (3.472s)
   Snapshots:
     1 created [Should run without failures and produce correct output]
 
@@ -1079,7 +1108,7 @@ Test Process convertToUpper
 Snapshot Summary:
   1 created
 
-SUCCESS: Executed 1 tests in 1.764s
+SUCCESS: Executed 1 tests in 3.478s
 ```
 
 Note, we have created a snapshot file for the `convertToUpper` process at `tests/main.converttoupper.nf.test.snap`. If we run the test again, we should see the nf-test passes again.
@@ -1098,10 +1127,10 @@ https://www.nf-test.com
 
 Test Process convertToUpper
 
-  Test [c59b6044] 'Should run without failures and produce correct output' PASSED (1.798s)
+  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (2.387s)
 
 
-SUCCESS: Executed 1 tests in 1.811s
+SUCCESS: Executed 1 tests in 2.39s
 ```
 
 ### Takeaway
@@ -1140,19 +1169,19 @@ https://www.nf-test.com
 
 Test Process convertToUpper
 
-  Test [3d26d9af] 'Should run without failures and produce correct output' PASSED (4.155s)
+  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (3.472s)
 
 Test Workflow main.nf
 
-  Test [f183df37] 'Should run successfully with correct number of processes' PASSED (3.33s)
-  Test [d7e32a32] 'Should produce correct output files' PASSED (3.102s)
+  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (3.156s)
+  Test [44ba6e13] 'Should produce correct output files' PASSED (3.124s)
 
 Test Process sayHello
 
-  Test [58df4e4b] 'Should run without failures and contain expected greeting' PASSED (2.614s)
+  Test [c1d07f15] 'Should run without failures and contain expected greeting' PASSED (5.782s)
 
 
-SUCCESS: Executed 4 tests in 13.481s
+SUCCESS: Executed 4 tests in 15.746s
 ```
 
 Check that out! We ran 4 tests, 1 for each process and 2 for the whole pipeline with a single command. Imagine how powerful this is on a large codebase!

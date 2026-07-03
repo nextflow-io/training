@@ -20,7 +20,8 @@ If you are working through this course by yourself, please acquaint yourself wit
 
 ### Version requirements
 
-This training works with **Nextflow 25.10.2** or later **with the v2 syntax parser DISABLED**.
+This training works with **Nextflow 25.10.2** or later and **requires the v1 syntax parser**, because the nf-core conventions used in this course are not yet compatible with the v2 parser.
+From Nextflow 26.04 the v2 parser is the default, so you must explicitly select v1 as shown below.
 
 #### If you are using our training environment:
 
@@ -29,6 +30,8 @@ You MUST run the following command before going any further:
 ```bash
 export NXF_SYNTAX_PARSER=v1
 ```
+
+On Nextflow 26.04 and later this is essential: it overrides the v2 parser that those versions enable by default (our training environment sets `NXF_SYNTAX_PARSER=v2` for the other courses).
 
 #### If you are using a local or custom environment:
 

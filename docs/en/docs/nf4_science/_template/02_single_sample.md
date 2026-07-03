@@ -141,12 +141,19 @@ nextflow run {DOMAIN_DIR}.nf -profile test
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `{DOMAIN_DIR}.nf` [{RUN_NAME}] DSL2 - revision: {HASH}
+    Launching `{DOMAIN_DIR}.nf` [{RUN_NAME}] revision: {HASH}
 
     executor >  local (1)
     [{HASH}] {PROCESS_A_NAME} (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/{DOMAIN_DIR}/results
+
+      {OUTPUT_NAME}:
+        - {OUTPUT_SUBDIR}/{OUTPUT_FILE}
     ```
 
 {VERIFY_OUTPUT_INSTRUCTIONS}

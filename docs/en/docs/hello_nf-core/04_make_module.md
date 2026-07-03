@@ -251,9 +251,9 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [elegant_plateau] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [elegant_plateau] revision: b9e9b3b8de
 
     Input/output options
       input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
@@ -399,9 +399,9 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [modest_saha] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [modest_saha] revision: b9e9b3b8de
 
     Downloading plugin nf-schema@2.5.1
     Input/output options
@@ -429,10 +429,10 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
     executor >  local (8)
-    [a8/447993] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-    [00/1fc59c] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [57/ac800d] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
-    [b7/092f2b] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
+    [a8/447993] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+    [00/1fc59c] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+    [57/ac800d] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
+    [b7/092f2b] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
@@ -627,9 +627,9 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [exotic_planck] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [exotic_planck] revision: b9e9b3b8de
 
     Input/output options
       input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
@@ -656,10 +656,10 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
     executor >  local (8)
-    [13/9e3c0e] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-    [e2/5b0ee5] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [b6/4fb569] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
-    [38/eb29ea] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
+    [13/9e3c0e] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+    [e2/5b0ee5] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+    [b6/4fb569] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
+    [38/eb29ea] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
@@ -845,9 +845,9 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [admiring_turing] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [admiring_turing] revision: b9e9b3b8de
 
     Input/output options
       input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
@@ -874,10 +874,10 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
     executor >  local (8)
-    [b2/e08524] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-    [13/88939f] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [23/4554e1] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
-    [a3/c6cbe9] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
+    [b2/e08524] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+    [13/88939f] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+    [23/4554e1] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
+    [a3/c6cbe9] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
@@ -982,9 +982,9 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [silly_caravaggio] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [silly_caravaggio] revision: b9e9b3b8de
 
     Input/output options
       input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
@@ -1011,10 +1011,10 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
     executor >  local (8)
-    [db/39978e] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-    [b5/bf6a8d] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [b7/c61842] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
-    [46/5839d6] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
+    [db/39978e] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+    [b5/bf6a8d] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+    [b7/c61842] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
+    [46/5839d6] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
@@ -1166,17 +1166,17 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [silly_fermat] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [silly_fermat] revision: b9e9b3b8de
 
     ...
 
     executor >  local (8)
-    [8d/f3a091] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-    [2e/b5c742] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [6a/d9e183] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
-    [3c/f20b54] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
+    [8d/f3a091] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+    [2e/b5c742] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+    [6a/d9e183] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
+    [3c/f20b54] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
@@ -1580,9 +1580,9 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Command output"
 
     ```console hl_lines="33"
-      N E X T F L O W   ~  version 25.10.4
+      N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [prickly_neumann] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [prickly_neumann] revision: b9e9b3b8de
 
     Input/output options
       input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
@@ -1609,10 +1609,10 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
     executor >  local (8)
-    [e9/008ede] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-    [f0/d70cfe] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [be/0ecc58] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
-    [11/8e082f] CORE_HELLO:HELLO:COWPY (test)       [100%] 1 of 1 ✔
+    [e9/008ede] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+    [f0/d70cfe] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+    [be/0ecc58] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
+    [11/8e082f] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
