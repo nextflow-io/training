@@ -36,7 +36,8 @@ workflow CORE_HELLO {
     // WORKFLOW: Run pipeline
     //
     HELLO (
-        samplesheet
+        samplesheet,
+        params.outdir,
     )
 }
 /*
@@ -73,7 +74,6 @@ workflow {
     // SUBWORKFLOW: Run completion tasks
     //
     PIPELINE_COMPLETION (
-        params.outdir,
         params.monochrome_logs,
     )
 }
