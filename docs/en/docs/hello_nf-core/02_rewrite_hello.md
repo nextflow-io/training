@@ -289,7 +289,6 @@ tree core-hello
 
     ```console
     core-hello
-    ├── README.md
     ├── assets
     │   ├── samplesheet.csv
     │   └── schema_input.json
@@ -300,13 +299,14 @@ tree core-hello
     │   └── test_full.config
     ├── docs
     │   ├── CONTRIBUTING.md
-    │   ├── README.md
     │   ├── output.md
+    │   ├── README.md
     │   └── usage.md
     ├── main.nf
     ├── modules.json
     ├── nextflow.config
     ├── nextflow_schema.json
+    ├── README.md
     ├── subworkflows
     │   ├── local
     │   │   └── utils_nfcore_hello_pipeline

@@ -185,20 +185,20 @@ tree -L 1 pipelines/nf-core/demo
 
     ```console
     pipelines/nf-core/demo
+    ├── assets
     ├── CHANGELOG.md
     ├── CITATIONS.md
     ├── CODE_OF_CONDUCT.md
-    ├── LICENSE
-    ├── README.md
-    ├── assets
     ├── conf
     ├── docs
+    ├── LICENSE
     ├── main.nf
     ├── modules
     ├── modules.json
     ├── nextflow.config
     ├── nextflow_schema.json
     ├── nf-test.config
+    ├── README.md
     ├── ro-crate-metadata.json
     ├── subworkflows
     ├── tests
@@ -320,7 +320,7 @@ SAMPLE3_SE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/il
 ```
 
 This is called a samplesheet, and is the most common form of input to nf-core pipelines.
-Familiarity with the data formats and types is not required for what follows.
+Don't worry if you're not familiar with the data formats and types, it's not important for what follows.
 
 We now have everything we need to try out the pipeline.
 
