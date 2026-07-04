@@ -28,6 +28,12 @@ If you use a different version of nf-core tooling, you may have difficulty follo
 
 You can check what version is installed in your environment using the command `nf-core --version`.
 
+!!! warning "v2 parser compatibility"
+
+    Many nf-core pipelines do not yet support the v2 syntax parser.
+    If you run an nf-core pipeline other than those used in this course and encounter errors, you may need to switch to the v1 parser by setting `export NXF_SYNTAX_PARSER=v1`.
+    See the [version notes](../info/nxf_versions.md) for details.
+
 ## Get ready to work
 
 Once your codespace is running, there are two things you need to do before diving into the training: set your working directory for this specific course, and take a look at the materials provided.
