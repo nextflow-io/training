@@ -185,20 +185,20 @@ tree -L 1 pipelines/nf-core/demo
 
     ```console
     pipelines/nf-core/demo
-    ├── assets
     ├── CHANGELOG.md
     ├── CITATIONS.md
     ├── CODE_OF_CONDUCT.md
+    ├── LICENSE
+    ├── README.md
+    ├── assets
     ├── conf
     ├── docs
-    ├── LICENSE
     ├── main.nf
     ├── modules
     ├── modules.json
     ├── nextflow.config
     ├── nextflow_schema.json
     ├── nf-test.config
-    ├── README.md
     ├── ro-crate-metadata.json
     ├── subworkflows
     ├── tests
@@ -279,7 +279,7 @@ process {
     resourceLimits = [
         cpus: 2,
         memory: '4.GB',
-        time: '1.h'
+        time: '1.h',
     ]
 }
 
@@ -288,8 +288,7 @@ params {
     config_profile_description = 'Minimal test dataset to check pipeline function'
 
     // Input data
-    input  = 'https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
-
+    input                      = 'https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
 }
 ```
 
@@ -321,7 +320,7 @@ SAMPLE3_SE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/il
 ```
 
 This is called a samplesheet, and is the most common form of input to nf-core pipelines.
-Don't worry if you're not familiar with the data formats and types, it's not important for what follows.
+Familiarity with the data formats and types is not required for what follows.
 
 We now have everything we need to try out the pipeline.
 
@@ -433,7 +432,7 @@ executor >  local (8)
 -[nf-core/demo] Pipeline completed successfully-
 ```
 
-This tells us that four processes were run, corresponding to the three tools shown in the pipeline documentation page on the nf-core website: FASTQC, SEQTK_TRIM, MULTIQC and COWPY.
+This tells us that four processes were run, corresponding to the four tools shown in the pipeline documentation page on the nf-core website: `FASTQC`, `SEQTK_TRIM`, `MULTIQC` and `COWPY`.
 
 The full process names as shown here, such as `NFCORE_DEMO:DEMO:MULTIQC`, are longer than what you may have seen in the introductory Hello Nextflow material.
 These include the names of their parent workflows and reflect the modularity of the pipeline code.
@@ -463,7 +462,6 @@ tree -L 2 demo-results
     │   └── SAMPLE3_SE
     ├── multiqc
     │   ├── multiqc_data
-    │   ├── multiqc_plots
     │   └── multiqc_report.html
     └── pipeline_info
         ├── execution_report_2026-07-03_21-31-35.html
@@ -473,11 +471,11 @@ tree -L 2 demo-results
         ├── params_2026-07-03_21-31-43.json
         └── pipeline_dag_2026-07-03_21-31-35.html
 
-    13 directories, 8 files
+    12 directories, 8 files
     ```
 
 That might seem like a lot.
-To learn more about the `nf-core/demo` pipeline's outputs, check out its [documentation page](https://nf-co.re/demo/1.1.0/docs/output/).
+To learn more about the `nf-core/demo` pipeline's outputs, check out its [documentation page](https://nf-co.re/demo/1.2.0/docs/output/).
 
 At this stage, what's important to observe is that the results are organized by module, and there is additionally a directory called `pipeline_info` containing various timestamped reports about the pipeline execution.
 
@@ -737,6 +735,7 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results --skip_trim
 ```console
 ERROR ~ Validation of pipeline parameters failed!
 
+ -- Check '.nextflow.log' file for details
 The following invalid input values have been detected:
 
 * --skip_trim (yes): Value is [string] but should be [boolean]
@@ -816,6 +815,7 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results --input mal
 ```console
 ERROR ~ Validation of pipeline parameters failed!
 
+ -- Check '.nextflow.log' file for details
 The following invalid input values have been detected:
 
 * --input (malformed_samplesheet.csv): Validation of file failed:
@@ -847,7 +847,20 @@ ls pipelines/nf-core/demo/conf/
 ```
 
 ```console
-base.config  igenomes.config  igenomes_ignored.config  modules.config  test.config  test_full.config
+base.config
+containers_conda_lock_files_amd64.config
+containers_conda_lock_files_arm64.config
+containers_docker_amd64.config
+containers_docker_arm64.config
+containers_singularity_https_amd64.config
+containers_singularity_https_arm64.config
+containers_singularity_oras_amd64.config
+containers_singularity_oras_arm64.config
+igenomes.config
+igenomes_ignored.config
+modules.config
+test.config
+test_full.config
 ```
 
 <figure class="excalidraw">
@@ -905,10 +918,11 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results-custom -c c
 ??? success "Command output"
 
     ```console
-    executor >  local (7)
+    executor >  local (8)
     [95/b32876] NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE)     | 3 of 3 ✔
     [17/428668] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) | 3 of 3 ✔
-    [cf/85991a] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+    [cf/85991a] NFCORE_DEMO:DEMO:COWPY                   | 1 of 1 ✔
+    [3c/94a7a0] NFCORE_DEMO:DEMO:MULTIQC (demo)          | 1 of 1 ✔
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
@@ -942,11 +956,11 @@ For example, `FASTQC` has `ext.args = '--quiet'` set by default in `conf/modules
 
 ```groovy title="conf/modules.config" linenums="21" hl_lines="2"
     withName: FASTQC {
-        ext.args = '--quiet'
+        ext.args   = '--quiet'
         publishDir = [
             path: { "${params.outdir}/fastqc/${meta.id}" },
             mode: params.publish_dir_mode,
-            pattern: "*.{html,json}"
+            pattern: "*.{html,json}",
         ]
     }
 ```
