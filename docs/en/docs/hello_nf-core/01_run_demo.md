@@ -867,56 +867,18 @@ If you wish to modify any of the settings specified in these files, do not modif
 Instead, create your own config file and pass it with `-c`.
 The values you specify will override the default values set in those other files.
 
-Let's run through a few exercises to do this in practice.
+Let's try this in practice.
 
-#### 3.2.1. Change resource allocation for a process
+#### 3.2.1. Customize process resources and tool arguments
 
-The demo pipeline assigns resources using labels defined in `base.config`.
-For example, `FASTQC` uses the `process_medium` label, which allocates 6 CPUs and 36 GB of memory.
+nf-core modules support two common types of configuration override: **resource allocation** (CPUs, memory, time) and **tool arguments** via `ext.args`.
 
-The test profile caps resources via `resourceLimits`, but you can also override resources for specific processes.
+Many command-line tools have arguments that are not commonly enough used to be exposed as pipeline parameters.
+The `ext.args` convention lets you pass these arguments to the underlying tool through a config file instead.
 
-Create a file called `custom.config`:
+The `custom.config` file provided in your working directory demonstrates both overrides:
 
 ```groovy title="custom.config" linenums="1"
-process {
-    withName: 'FASTQC' {
-        cpus = 2
-        memory = 4.GB
-    }
-}
-```
-
-Run the pipeline with your custom config:
-
-```bash
-nextflow run nf-core/demo -profile docker,test --outdir demo-results-custom -c custom.config
-```
-
-??? success "Command output"
-
-    ```console
-    executor >  local (7)
-    [ac/23f5aa] NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE)     | 3 of 3 ✔
-    [ff/eac89a] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) | 3 of 3 ✔
-    [3c/94a7a0] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
-    -[nf-core/demo] Pipeline completed successfully-
-    ```
-
-The `-c` flag adds your config on top of the pipeline's built-in configuration.
-
-#### 3.2.2. Set tool argument values with `ext.args`
-
-Many command-line tools have arguments that are not required and are therefore not set up as pipeline parameters unless they are very commonly used.
-For those tool arguments, nf-core modules use a Nextflow convention called `ext.args` to pass arguments to the underlying tool through a configuration file.
-
-For example, let's add a trimming argument to the `SEQTK_TRIM` module using `ext.args`.
-
-##### 3.2.2.1. Update the custom configuration
-
-Update your `custom.config`:
-
-```groovy title="custom.config" linenums="1" hl_lines="6 7 8"
 process {
     withName: 'FASTQC' {
         cpus = 2
@@ -928,14 +890,16 @@ process {
 }
 ```
 
-This tells `seqtk trimfq` to trim 5 bases from the beginning of each read in addition to quality trimming.
+The first block overrides `FASTQC` resource allocation.
+By default, `FASTQC` uses the `process_medium` label from `base.config`, which allocates 6 CPUs and 36 GB of memory; here we cap it at 2 CPUs and 4 GB.
 
-##### 3.2.2.2. Run the pipeline
+The second block passes an extra argument to `SEQTK_TRIM` via `ext.args`.
+The `-b 5` flag tells `seqtk trimfq` to trim 5 bases from the beginning of each read in addition to quality trimming.
 
-Run the pipeline again with this config to see the effect:
+Run the pipeline with this config:
 
 ```bash
-nextflow run nf-core/demo -profile docker,test --outdir demo-results-extargs -c custom.config
+nextflow run nf-core/demo -profile docker,test --outdir demo-results-custom -c custom.config
 ```
 
 ??? success "Command output"
@@ -948,7 +912,9 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results-extargs -c 
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
-To verify the argument was applied, find the `SEQTK_TRIM` work directory hash from the run output (e.g. `work/17/428668...`) and check the `.command.sh` file inside it:
+The `-c` flag adds your config on top of the pipeline's built-in configuration.
+
+To verify the `ext.args` override took effect, find the `SEQTK_TRIM` work directory hash from the run output (e.g. `work/17/428668...`) and check the `.command.sh` file inside it:
 
 ```bash
 cat work/17/428668/.command.sh
@@ -969,12 +935,10 @@ cat work/17/428668/.command.sh
     ...
     ```
 
-You should see `-b 5` in the `seqtk trimfq` command, confirming your `ext.args` override took effect.
+You should see `-b 5` in the `seqtk trimfq` command.
 
-##### 3.2.2.3. Overriding default values
-
-Some modules have `ext.args` already set by default.
-For example, the `FASTQC` module is configured with `ext.args = '--quiet'` by default (defined in `conf/modules.config`).
+One important thing to know about `ext.args`: if a module already has a default value set, your value will **completely replace** it rather than append to it.
+For example, `FASTQC` has `ext.args = '--quiet'` set by default in `conf/modules.config`:
 
 ```groovy title="conf/modules.config" linenums="21" hl_lines="2"
     withName: FASTQC {
@@ -987,12 +951,10 @@ For example, the `FASTQC` module is configured with `ext.args = '--quiet'` by de
     }
 ```
 
-If you provide a value for `ext.args` via a custom configuration file, that value will completely replace the default set for that process.
-
-So for example, if the default was `'--quiet'` and you set `ext.args = '--kmers 8'`, the `--quiet` flag will no longer be applied.
+If you set `ext.args = '--kmers 8'` for `FASTQC`, the `--quiet` flag will no longer be applied.
 To keep both, set `ext.args = '--quiet --kmers 8'`.
 
-This does mean you are responsible for checking what is the default configuration of tools to which you want to provide argument values with `ext.args`.
+You should always check a module's default configuration before overriding `ext.args`.
 
 ### Takeaway
 
