@@ -196,7 +196,7 @@ This configuration tells nf-schema to:
 - **`ignoreParams`**: Skip validation of the `input` parameter's file contents (temporary; we'll re-enable this in section 2)
 - **`monochromeLogs`**: Disable colored output in validation messages when set to `true` (controlled by `params.monochrome_logs`)
 
-!!! note "Why ignore the input parameter?"
+!!! info "Why ignore the input parameter?"
 
     The `input` parameter in `nextflow_schema.json` has `"schema": "assets/schema_input.json"` which tells nf-schema to validate the *contents* of the input CSV file against that schema.
     Since we haven't configured that schema yet, we temporarily ignore this validation.

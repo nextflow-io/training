@@ -756,7 +756,7 @@ We also cover this in more detail in [Part 5: Input Validation](05_input_validat
 The `nf-core/demo` pipeline expects a CSV file with columns `sample`, `fastq_1`, and `fastq_2`.
 This is defined in a schema file (`assets/schema_input.json`) that specifies the expected structure, column types, and constraints.
 
-??? abstract "assets/schema_input.json"
+??? abstract "Schema file for inputs"
 
     ```json title="assets/schema_input.json"
     {

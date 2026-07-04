@@ -77,7 +77,7 @@ Here is what the relationships between the relevant code components look like:
 The unnamed workflow in `main.nf` is called an _entrypoint_ script. It acts as a wrapper for two kinds of nested workflows: the `DEMO` workflow containing the actual analysis logic, located in `workflows/demo.nf`, and a set of housekeeping workflows located under `subworkflows/`.
 The `demo.nf` workflow calls on **modules** located under `modules/`; these contain the **processes** that will perform the actual analysis steps.
 
-!!! note
+!!! info
 
     Subworkflows are not limited to housekeeping functions, and they can make use of process modules.
 
@@ -102,7 +102,7 @@ We'll cover the relevant differences in the next part of this course, when we ta
 
 The `demo.nf` workflow calls on **modules** located under `modules/`, which we'll review next.
 
-!!! note
+!!! info
 
     Some nf-core analysis workflows display additional levels of nesting by calling on lower-level subworkflows.
     This is mostly used for wrapping two or more modules that are commonly used together into easily reusable pipeline segments.
@@ -712,7 +712,7 @@ While we're at it, we can also comment out the line `params.greeting = 'greeting
         params.character = 'turkey'
     ```
 
-!!! note
+!!! info
 
     If you have the Nextflow language server extension installed, the syntax checker will light up your code with red squiggles.
     That's because if you put in a `take:` statement, you have to also have a `main:`.
@@ -859,7 +859,7 @@ There are two important observations to make here:
 - The syntax for calling the imported workflow is essentially the same as the syntax for calling modules.
 - Everything that is related to pulling the inputs into the workflow (input parameter and channel construction) is now declared in this parent workflow.
 
-!!! note
+!!! info
 
     Naming the entrypoint workflow file `main.nf` is a convention, not a requirement.
 
@@ -998,7 +998,7 @@ We're going to tackle this in the following stages:
 3. Add the workflow logic to the `main` block
 4. Update the `emit` block
 
-!!! note
+!!! info
 
     We're going to ignore the version capture block for this first pass.
     Part 4 explains how it works.
@@ -1427,7 +1427,7 @@ If we open up that file and scroll down, we come to this chunk of code:
 
 This is the channel factory that parses the samplesheet and passes it on in a form that is ready to be consumed by the HELLO workflow.
 
-!!! note
+!!! info
 
     The syntax above is a little different from what we've used previously, but basically this:
 
@@ -1726,7 +1726,7 @@ This time you see all the tasks that were run as expected.
 
 ![execution timeline report for the Hello pipeline](./img/execution_timeline_hello.png)
 
-!!! note
+!!! info
 
     Once again the tasks were not run in parallel because we are running on a minimalist machine in Github Codespaces.
     To see these run in parallel, try increasing the CPU allocation of your codespace and the resource limits in the test configuration.

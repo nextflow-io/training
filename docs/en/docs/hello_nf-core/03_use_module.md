@@ -48,7 +48,7 @@ Navigate to the modules page in your web browser and use the search bar to searc
 As you can see, there are quite a few results, many of them modules designed to concatenate very specific types of files.
 Among them, you should see one called `find_concatenate` that is general-purpose.
 
-!!! note "Module naming convention"
+!!! info "Module naming convention"
 
     The underscore (`_`) is used as a stand-in for the slash (`/`) character in module names.
 
@@ -368,7 +368,7 @@ At this point, you might be tempted to dive in and start editing code, but it's 
 
 We're going to tackle that as a separate section because it involves a new mechanism we haven't covered yet: metadata maps.
 
-!!! note
+!!! info
 
     You can optionally delete the `collectGreetings.nf` file:
 
@@ -396,7 +396,7 @@ This will allow us to determine whether we can just treat the new module as a dr
 Ideally this is something you should do _before_ you even install the module, but hey, better late than never.
 (For what it's worth, there is an `uninstall` command to get rid of modules you decide you no longer want.)
 
-!!! note
+!!! info
 
     The FIND_CONCATENATE process includes some rather clever handling of different compression types, file extensions and so on that aren't strictly relevant to what we're trying to show you here, so we'll ignore most of it and focus only on the parts that are important.
 
@@ -535,7 +535,7 @@ As mentioned earlier, the `tuple val(meta), path(files_in)` input setup is a sta
 Hopefully you can start to see how useful this can be.
 Not only does it allow you to name outputs based on metadata, but you can also do things like use it to apply different parameter values, and in combination with specific operators, you can even group, sort or filter out data as it flows through the pipeline.
 
-!!! note "Learn more about metadata"
+!!! info "Learn more about metadata"
 
     For a comprehensive introduction to working with metadata in Nextflow workflows, including how to read metadata from samplesheets and use it to customize processing, see the [Metadata in workflows](../side_quests/metadata/index.md) side quest.
 
@@ -566,7 +566,7 @@ Now that you know everything about metamaps (or enough for the purposes of this 
 
 For the sake of clarity, we'll break this down and cover each step separately.
 
-!!! note
+!!! info
 
     All the changes shown below are made to the workflow logic in the `main` block in the `core-hello/workflows/hello.nf` workflow file.
 
@@ -776,7 +776,7 @@ The `#!groovy .map { meta, file -> file }` operation extracts the file from the 
 
 Then it's just a matter of passing `ch_for_cowpy` to `cowpy` instead of `collectGreetings.out.outfile` in that last line.
 
-!!! note
+!!! info
 
     In the next part of the course, we'll update `cowpy` to work with metadata tuples directly, so this extraction step will no longer be necessary.
 

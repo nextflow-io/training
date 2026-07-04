@@ -531,7 +531,7 @@ You can see we made three changes.
 
 As a result, the module interface is now simpler: it only expects the essential metadata and file inputs.
 
-!!! note
+!!! info
 
     The `?:` operator is often called the 'Elvis operator' because it looks like a sideways Elvis Presley face, with the `?` character symbolizing the wave in his hair.
 
@@ -729,7 +729,7 @@ To summarize the benefits of this approach:
 - **Portability**: Modules can be reused without hardcoded tool options
 - **No workflow changes**: Adding or changing tool options doesn't require updating workflow code
 
-!!! note
+!!! info
 
     The `ext.args` system has powerful additional capabilities not covered here, including switching argument values dynamically based on metadata. See the [nf-core module specifications](https://nf-co.re/docs/guidelines/components/modules) for more details.
 
@@ -1055,7 +1055,7 @@ Now the `core-hello-results` also contains the outputs of the `COWPY` module.
 
 You can see that Nextflow created this hierarchy of directories based on the names of the workflow and of the module.
 
-!!! note
+!!! info
 
     You may notice `hello_software_versions.yml` in `pipeline_info/`.
     It currently only contains version information from `FIND_CONCATENATE`, because `COWPY` doesn't report its version yet.
@@ -1196,7 +1196,7 @@ Workflow:
 
 The workflow-side collection — the `Channel.topic("versions")` block you saw in the placeholder workflow in Part 2 — subscribes to the topic and writes this combined report automatically.
 
-!!! note "Backwards compatibility"
+!!! info "Backwards compatibility"
 
     The `versions_file` branch in the workflow's topic channel block exists to handle modules that haven't yet been updated to use `topic: versions` and still write a `versions.yml` file in the script block with `emit: versions`.
     Both styles are supported simultaneously during the transition.
