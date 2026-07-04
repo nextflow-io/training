@@ -962,4 +962,6 @@ You know how to get help from an nf-core pipeline, set parameters and understand
 
 ### What's next?
 
-Take a break! When you're ready, move on to Part 2, where you will create your own nf-core compatible pipeline from scratch.
+If you just want to run nf-core pipelines, you're done!
+
+If you want to learn to develop your own pipelines according to nf-core standards, take a break, and move on to Part 2 when you're ready. You will learn to create your own nf-core compatible pipeline using the nf-core template-based tools.
