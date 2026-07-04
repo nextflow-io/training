@@ -16,10 +16,6 @@ If you're not familiar with the Hello pipeline or you could use a reminder, see 
     - [Workflows of Workflows](../side_quests/workflows_of_workflows/index.md)
     - [Metadata and meta maps](../side_quests/metadata/index.md)
 
-!!! note
-
-    Make sure you are starting in the `hello-nf-core` directory in your terminal.
-
 ---
 
 ## 1. Examine the pipeline code structure
@@ -28,6 +24,7 @@ The nf-core project enforces strong guidelines for how pipelines are structured,
 
 Before we tackle our pipeline creation project, we need to understand that structure and organization.
 So let's have a look at how the pipeline code is organized in the `nf-core/demo` repository, using the `pipelines` symlink we created in Part 1.
+Make sure you are starting in the `hello-nf-core` directory in your terminal.
 
 As a reminder, you can either use `tree` or use the file explorer to find and open the `nf-core/demo` directory.
 
