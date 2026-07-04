@@ -3941,10 +3941,11 @@
 <h2 id="current-supported-nextflow-syntax-version-requirements">Current supported Nextflow syntax version &amp; requirements<a class="headerlink" href="#current-supported-nextflow-syntax-version-requirements" title="Permanent link">&para;</a></h2>
 <p>As of version 3.0 of the training portal, all our training courses are compatible with Nextflow version 25.10.2 or later unless otherwise specified on the course index page.
 (This does not include deprecated or otherwise archived materials which may not have a version notice).</p>
-<p>The version of Nextflow currently loaded by default in our training environment is <strong>Nextflow 25.10.4</strong>.</p>
+<p>The version of Nextflow currently loaded by default in our training environment is <strong>Nextflow 26.04.4</strong>.</p>
 <p>Because the courses now use typed inputs at the workflow level as well as workflow-level output directives, they require the use of the V2 syntax parser, <strong>unless otherwise specified</strong>.
+The V2 parser is the default from Nextflow 26.04 onward, so on the version we load you don't need to enable it manually.
 If you plan to use the environment we provide through <a href="../../envsetup/01_setup/">Github Codespaces</a> or <a href="../../envsetup/03_devcontainer/">local devcontainers</a>, you don't need to do anything unless specifically noted in the course instructions.
-However, if you are planning to work through the trainings in your own environment (<a href="../../envsetup/02_local/">Manual install</a>), you will need to make sure to use Nextflow version 25.10.2 or later with the v2 syntax parser enabled.</p>
+However, if you are planning to work through the trainings in your own environment (<a href="../../envsetup/02_local/">Manual install</a>), you will need to make sure to use Nextflow version 25.10.2 or later, and to enable the v2 syntax parser if you are on a version before 26.04.</p>
 <h2 id="older-versions-of-the-training-materials">Older versions of the training materials<a class="headerlink" href="#older-versions-of-the-training-materials" title="Permanent link">&para;</a></h2>
 <p>Our training materials have been versioned since February 2025.</p>
 <p>You can access older version of the training materials that work with versions of Nextflow <strong>before 25.10.2</strong> via the dropdown menu item at the top of every page that shows the numbered version of the training materials.
@@ -3960,21 +3961,21 @@ All modern Nextflow code uses DSL2.</p>
 The v1 parser is the original, more permissive parser.
 The v2 parser is stricter and enables new language features such as static typing (typed inputs and outputs) and workflow-level output directives.
 The v2 parser also provides better error messages and catches more errors at parse time rather than at runtime.
-The v2 parser will become the default in Nextflow 26.04.</p>
+The v2 parser is the default from Nextflow 26.04 onward.</p>
 <p>In summary: DSL2 is the language you write; the syntax parser version determines how strictly that language is interpreted and what advanced features are available.</p>
 <h3 id="checking-and-setting-the-nextflow-version">Checking and setting the Nextflow version<a class="headerlink" href="#checking-and-setting-the-nextflow-version" title="Permanent link">&para;</a></h3>
 <p>You can check what version of Nextflow is installed on your system using the command <code>nextflow --version</code>.</p>
 <p>For more information about how to update your version of Nextflow, please see the reference documentation on <a href="https://www.nextflow.io/docs/latest/updating-nextflow.html">Updating Nextflow</a>.</p>
 <h3 id="enabling-the-v2-syntax-parser">Enabling the v2 syntax parser<a class="headerlink" href="#enabling-the-v2-syntax-parser" title="Permanent link">&para;</a></h3>
+<p>From Nextflow 26.04 onward the v2 parser is the default, so the steps below are only needed on versions before 26.04.</p>
 <p>To <strong>enable</strong> the v2 syntax parser for your current session, run the following command in your terminal:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v2
 </code></pre></div>
-<p>To make this permanent (pending v2 becoming the default in Nextflow 26.04), add the export command to your shell profile (<code>~/.bashrc</code>, <code>~/.zshrc</code>, etc.):</p>
+<p>To make this permanent, add the export command to your shell profile (<code>~/.bashrc</code>, <code>~/.zshrc</code>, etc.):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export NXF_SYNTAX_PARSER=v2&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">source</span><span class="w"> </span>~/.bashrc
 </code></pre></div>
-<p>Note that the <code>NXF_SYNTAX_PARSER=v2</code> environment variable is a temporary requirement.
-From Nextflow 26.04 onward, the v2 parser will become the default and this setting will no longer be needed.</p>
+<p>Note that on Nextflow versions before 26.04 the <code>NXF_SYNTAX_PARSER=v2</code> environment variable is required to access the v2 features used in these courses.</p>
 <h3 id="disabling-the-v2-syntax-parser">Disabling the v2 syntax parser<a class="headerlink" href="#disabling-the-v2-syntax-parser" title="Permanent link">&para;</a></h3>
 <p>To <strong>disable</strong> the v2 syntax parser for your current session, run the following command in your terminal:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v1

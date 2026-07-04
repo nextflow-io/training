@@ -4611,13 +4611,27 @@ You can see the full workflow code below.</p>
 <p>Let's run the workflow to make sure it's working as expected.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<div class="highlight"><span class="filename">Result of running the workflow</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go"> N E X T F L O W   ~  version 24.10.2</span>
+<div class="highlight"><span class="filename">Result of running the workflow</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go">Launching `main.nf` [soggy_linnaeus] DSL2 - revision: bbf79d5c31</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go">Launching `main.nf` [trusting_mendel] revision: 405c90f891</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="go">executor &gt;  local (6)</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="go">[f7/c3be66] sayHello (3)       | 3 of 3 ✔</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="go">[cd/e15303] convertToUpper (3) | 3 of 3 ✔</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="go">[6c/d7ae4e] sayHello (3)       | 3 of 3 ✔</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="go">[72/5fa770] convertToUpper (2) | 3 of 3 ✔</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="go">Outputs:</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="go">  /workspaces/training/side-quests/nf-test/results</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="go">  greetings:</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="go">    - Hola-output.txt</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="go">    - Hello-output.txt</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="go">    - Bonjour-output.txt</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="go">  upper_greetings:</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="go">    - UPPER-Hola-output.txt</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="go">    - UPPER-Bonjour-output.txt</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="go">    - UPPER-Hello-output.txt</span>
 </code></pre></div>
 <p>CONGRATULATIONS! You just ran a test!</p>
 <p>"Wait, what? I just ran the workflow and it worked! How is that a test?"</p>
@@ -4816,10 +4830,10 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>
 <a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="go">Test Workflow main.nf</span>
 <a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>
-<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="go">  Test [1d4aaf12] &#39;Should run without failures&#39; PASSED (1.619s)</span>
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="go">  Test [693ba951] &#39;Should run without failures&#39; PASSED (2.879s)</span>
 <a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a>
 <a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a>
-<a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a><span class="go">SUCCESS: Executed 1 tests in 1.626s</span>
+<a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a><span class="go">SUCCESS: Executed 1 tests in 2.883s</span>
 </code></pre></div>
 <p>Success! The pipeline runs successfully and the test passes. Run it as many times as you like and you will always get the same result!</p>
 <p>By default, the Nextflow output is hidden, but to convince yourself that nf-test is definitely running the workflow, you can use the <code>--verbose</code> flag:</p>
@@ -4835,19 +4849,32 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="go">Test Workflow main.nf</span>
 <a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>
 <a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="go">  Test [693ba951] &#39;Should run without failures&#39;</span>
-<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="go">    &gt; Nextflow 24.10.4 is available - Please consider updating your version to it</span>
-<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="go">    &gt; N E X T F L O W  ~  version 24.10.0</span>
-<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="go">    &gt; Launching `/workspaces/training/side-quests/nf-test/main.nf` [zen_ampere] DSL2 - revision: bbf79d5c31</span>
-<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a><span class="go">    &gt; [2b/61e453] Submitted process &gt; sayHello (2)</span>
-<a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a><span class="go">    &gt; [31/4e1606] Submitted process &gt; sayHello (1)</span>
-<a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a><span class="go">    &gt; [bb/5209ee] Submitted process &gt; sayHello (3)</span>
-<a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a><span class="go">    &gt; [83/83db6f] Submitted process &gt; convertToUpper (2)</span>
-<a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a><span class="go">    &gt; [9b/3428b1] Submitted process &gt; convertToUpper (1)</span>
-<a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a><span class="go">    &gt; [ca/0ba51b] Submitted process &gt; convertToUpper (3)</span>
-<a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a><span class="go">    PASSED (5.206s)</span>
-<a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a>
-<a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a>
-<a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a><span class="go">SUCCESS: Executed 1 tests in 5.239s</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="go">    &gt; N E X T F L O W  ~  version 26.04.4</span>
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="go">    &gt; Launching `/workspaces/training/side-quests/nf-test/main.nf` [maniac_mcclintock] - revision: 405c90f891</span>
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="go">    &gt; [fc/6965c3] Submitted process &gt; sayHello (1)</span>
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a><span class="go">    &gt; [14/640c84] Submitted process &gt; sayHello (2)</span>
+<a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a><span class="go">    &gt; [d6/3594c9] Submitted process &gt; sayHello (3)</span>
+<a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a><span class="go">    &gt; [d7/f14d58] Submitted process &gt; convertToUpper (1)</span>
+<a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a><span class="go">    &gt; [76/cb9122] Submitted process &gt; convertToUpper (2)</span>
+<a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a><span class="go">    &gt; [d1/92b304] Submitted process &gt; convertToUpper (3)</span>
+<a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a><span class="go">    &gt;</span>
+<a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a><span class="go">    &gt; Outputs:</span>
+<a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a><span class="go">    &gt;</span>
+<a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a><span class="go">    &gt;   /workspaces/training/side-quests/nf-test/.nf-test/tests/693ba951a20fec36a5a9292ed1cc8a9f/results</span>
+<a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a><span class="go">    &gt;</span>
+<a id="__codelineno-22-24" name="__codelineno-22-24" href="#__codelineno-22-24"></a><span class="go">    &gt;   greetings:</span>
+<a id="__codelineno-22-25" name="__codelineno-22-25" href="#__codelineno-22-25"></a><span class="go">    &gt;     - Bonjour-output.txt</span>
+<a id="__codelineno-22-26" name="__codelineno-22-26" href="#__codelineno-22-26"></a><span class="go">    &gt;     - Hello-output.txt</span>
+<a id="__codelineno-22-27" name="__codelineno-22-27" href="#__codelineno-22-27"></a><span class="go">    &gt;     - Hola-output.txt</span>
+<a id="__codelineno-22-28" name="__codelineno-22-28" href="#__codelineno-22-28"></a><span class="go">    &gt;</span>
+<a id="__codelineno-22-29" name="__codelineno-22-29" href="#__codelineno-22-29"></a><span class="go">    &gt;   upper_greetings:</span>
+<a id="__codelineno-22-30" name="__codelineno-22-30" href="#__codelineno-22-30"></a><span class="go">    &gt;     - UPPER-Bonjour-output.txt</span>
+<a id="__codelineno-22-31" name="__codelineno-22-31" href="#__codelineno-22-31"></a><span class="go">    &gt;     - UPPER-Hola-output.txt</span>
+<a id="__codelineno-22-32" name="__codelineno-22-32" href="#__codelineno-22-32"></a><span class="go">    &gt;     - UPPER-Hello-output.txt</span>
+<a id="__codelineno-22-33" name="__codelineno-22-33" href="#__codelineno-22-33"></a><span class="go">    PASSED (5.206s)</span>
+<a id="__codelineno-22-34" name="__codelineno-22-34" href="#__codelineno-22-34"></a>
+<a id="__codelineno-22-35" name="__codelineno-22-35" href="#__codelineno-22-35"></a>
+<a id="__codelineno-22-36" name="__codelineno-22-36" href="#__codelineno-22-36"></a><span class="go">SUCCESS: Executed 1 tests in 5.239s</span>
 </code></pre></div>
 <h3 id="13-add-assertions">1.3. Add assertions<a class="headerlink" href="#13-add-assertions" title="Permanent link">&para;</a></h3>
 <p>A simple check is to ensure our pipeline is running all the processes we expect and not skipping any silently. Remember our pipeline runs 6 processes, one called <code>sayHello</code> and one called <code>convertToUpper</code> for each of the 3 greetings.</p>
@@ -4925,10 +4952,10 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>
 <a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="go">Test Workflow main.nf</span>
 <a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>
-<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="go">  Test [1d4aaf12] &#39;Should run successfully with correct number of processes&#39; PASSED (1.567s)</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="go">  Test [8a64acb3] &#39;Should run successfully with correct number of processes&#39; PASSED (2.876s)</span>
 <a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>
 <a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a>
-<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="go">SUCCESS: Executed 1 tests in 1.588s</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="go">SUCCESS: Executed 1 tests in 2.879s</span>
 </code></pre></div>
 <p>Success! The pipeline runs successfully and the test passes. Now we have began to test the details of the pipeline, as well as the overall status.</p>
 <h3 id="14-test-the-output">1.4. Test the output<a class="headerlink" href="#14-test-the-output" title="Permanent link">&para;</a></h3>
@@ -5047,11 +5074,11 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a>
 <a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="go">Test Workflow main.nf</span>
 <a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a>
-<a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a><span class="go">  Test [f0e08a68] &#39;Should run successfully with correct number of processes&#39; PASSED (8.144s)</span>
-<a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a><span class="go">  Test [d7e32a32] &#39;Should produce correct output files&#39; PASSED (6.994s)</span>
+<a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a><span class="go">  Test [8a64acb3] &#39;Should run successfully with correct number of processes&#39; PASSED (3.055s)</span>
+<a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a><span class="go">  Test [44ba6e13] &#39;Should produce correct output files&#39; PASSED (2.941s)</span>
 <a id="__codelineno-30-12" name="__codelineno-30-12" href="#__codelineno-30-12"></a>
 <a id="__codelineno-30-13" name="__codelineno-30-13" href="#__codelineno-30-13"></a>
-<a id="__codelineno-30-14" name="__codelineno-30-14" href="#__codelineno-30-14"></a><span class="go">SUCCESS: Executed 2 tests in 15.165s</span>
+<a id="__codelineno-30-14" name="__codelineno-30-14" href="#__codelineno-30-14"></a><span class="go">SUCCESS: Executed 2 tests in 6.004s</span>
 </code></pre></div>
 <p>Success! The tests pass because the pipeline completed successfully, the correct number of processes ran and the output files were created. This should also show you how useful it is to provide those informative names for your tests.</p>
 <p>This is just the surface, we can keep writing assertions to check the details of the pipeline, but for now let's move on to testing the internals of the pipeline.</p>
@@ -5132,9 +5159,11 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-35-19" name="__codelineno-35-19" href="#__codelineno-35-19"></a><span class="go">  Nextflow stdout:</span>
 <a id="__codelineno-35-20" name="__codelineno-35-20" href="#__codelineno-35-20"></a>
 <a id="__codelineno-35-21" name="__codelineno-35-21" href="#__codelineno-35-21"></a><span class="go">  Process `sayHello` declares 1 input but was called with 0 arguments</span>
-<a id="__codelineno-35-22" name="__codelineno-35-22" href="#__codelineno-35-22"></a><span class="go">  Nextflow stderr:</span>
-<a id="__codelineno-35-23" name="__codelineno-35-23" href="#__codelineno-35-23"></a>
-<a id="__codelineno-35-24" name="__codelineno-35-24" href="#__codelineno-35-24"></a><span class="go">FAILURE: Executed 1 tests in 4.884s (1 failed)</span>
+<a id="__codelineno-35-22" name="__codelineno-35-22" href="#__codelineno-35-22"></a>
+<a id="__codelineno-35-23" name="__codelineno-35-23" href="#__codelineno-35-23"></a><span class="go">   -- Check script &#39;/workspaces/training/side-quests/nf-test/.nf-test-1eaad118145a1fd798cb07e7dd75d087.nf&#39; at line: 30 or see &#39;/workspaces/training/side-quests/nf-test/.nf-test/tests/1eaad118145a1fd798cb07e7dd75d087/meta/nextflow.log&#39; file for more details</span>
+<a id="__codelineno-35-24" name="__codelineno-35-24" href="#__codelineno-35-24"></a><span class="go">  Nextflow stderr:</span>
+<a id="__codelineno-35-25" name="__codelineno-35-25" href="#__codelineno-35-25"></a>
+<a id="__codelineno-35-26" name="__codelineno-35-26" href="#__codelineno-35-26"></a><span class="go">FAILURE: Executed 1 tests in 4.884s (1 failed)</span>
 </code></pre></div>
 <p>The test fails because the <code>sayHello</code> process declares 1 input but was called with 0 arguments. Let's fix that by adding an input to the process. Remember from <a href="../../hello_nextflow/03_hello_workflow/">Hello Workflow</a> (and the warmup section above) that our <code>sayHello</code> process takes a single value input, which we will need to provide. We should also fix the test name to better reflect what we're testing.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">After</label><label for="__tabbed_4_2">Before</label></div>
@@ -5237,7 +5266,7 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a>
 <a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a><span class="go">Test Process sayHello</span>
 <a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a>
-<a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a><span class="go">  Test [f91a1bcd] &#39;Should run without failures and produce correct output&#39; PASSED (1.604s)</span>
+<a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a><span class="go">  Test [d6837883] &#39;Should run without failures and produce correct output&#39; PASSED (2.729s)</span>
 <a id="__codelineno-38-11" name="__codelineno-38-11" href="#__codelineno-38-11"></a><span class="go">  Snapshots:</span>
 <a id="__codelineno-38-12" name="__codelineno-38-12" href="#__codelineno-38-12"></a><span class="go">    1 created [Should run without failures and produce correct output]</span>
 <a id="__codelineno-38-13" name="__codelineno-38-13" href="#__codelineno-38-13"></a>
@@ -5245,7 +5274,7 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-38-15" name="__codelineno-38-15" href="#__codelineno-38-15"></a><span class="go">Snapshot Summary:</span>
 <a id="__codelineno-38-16" name="__codelineno-38-16" href="#__codelineno-38-16"></a><span class="go">  1 created</span>
 <a id="__codelineno-38-17" name="__codelineno-38-17" href="#__codelineno-38-17"></a>
-<a id="__codelineno-38-18" name="__codelineno-38-18" href="#__codelineno-38-18"></a><span class="go">SUCCESS: Executed 1 tests in 1.611s</span>
+<a id="__codelineno-38-18" name="__codelineno-38-18" href="#__codelineno-38-18"></a><span class="go">SUCCESS: Executed 1 tests in 2.733s</span>
 </code></pre></div>
 <p>Success! The test passes because the <code>sayHello</code> process ran successfully and the output was created.</p>
 <h3 id="22-check-out-the-snapshot-created-by-the-test">2.2. Check out the snapshot created by the test<a class="headerlink" href="#22-check-out-the-snapshot-created-by-the-test" title="Permanent link">&para;</a></h3>
@@ -5280,10 +5309,10 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-42-7" name="__codelineno-42-7" href="#__codelineno-42-7"></a>
 <a id="__codelineno-42-8" name="__codelineno-42-8" href="#__codelineno-42-8"></a><span class="go">Test Process sayHello</span>
 <a id="__codelineno-42-9" name="__codelineno-42-9" href="#__codelineno-42-9"></a>
-<a id="__codelineno-42-10" name="__codelineno-42-10" href="#__codelineno-42-10"></a><span class="go">  Test [f91a1bcd] &#39;Should run without failures and produce correct output&#39; PASSED (1.675s)</span>
+<a id="__codelineno-42-10" name="__codelineno-42-10" href="#__codelineno-42-10"></a><span class="go">  Test [d6837883] &#39;Should run without failures and produce correct output&#39; PASSED (3.092s)</span>
 <a id="__codelineno-42-11" name="__codelineno-42-11" href="#__codelineno-42-11"></a>
 <a id="__codelineno-42-12" name="__codelineno-42-12" href="#__codelineno-42-12"></a>
-<a id="__codelineno-42-13" name="__codelineno-42-13" href="#__codelineno-42-13"></a><span class="go">SUCCESS: Executed 1 tests in 1.685s</span>
+<a id="__codelineno-42-13" name="__codelineno-42-13" href="#__codelineno-42-13"></a><span class="go">SUCCESS: Executed 1 tests in 3.097s</span>
 </code></pre></div>
 <p>Success! The test passes because the <code>sayHello</code> process ran successfully and the output matched the snapshot.</p>
 <h3 id="23-alternative-to-snapshots-direct-content-assertions">2.3. Alternative to Snapshots: Direct Content Assertions<a class="headerlink" href="#23-alternative-to-snapshots-direct-content-assertions" title="Permanent link">&para;</a></h3>
@@ -5402,10 +5431,10 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a>
 <a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a><span class="go">Test Process sayHello</span>
 <a id="__codelineno-46-9" name="__codelineno-46-9" href="#__codelineno-46-9"></a>
-<a id="__codelineno-46-10" name="__codelineno-46-10" href="#__codelineno-46-10"></a><span class="go">  Test [58df4e4b] &#39;Should run without failures and contain expected greeting&#39; PASSED (7.196s)</span>
+<a id="__codelineno-46-10" name="__codelineno-46-10" href="#__codelineno-46-10"></a><span class="go">  Test [c1d07f15] &#39;Should run without failures and contain expected greeting&#39; PASSED (2.459s)</span>
 <a id="__codelineno-46-11" name="__codelineno-46-11" href="#__codelineno-46-11"></a>
 <a id="__codelineno-46-12" name="__codelineno-46-12" href="#__codelineno-46-12"></a>
-<a id="__codelineno-46-13" name="__codelineno-46-13" href="#__codelineno-46-13"></a><span class="go">SUCCESS: Executed 1 tests in 7.208s</span>
+<a id="__codelineno-46-13" name="__codelineno-46-13" href="#__codelineno-46-13"></a><span class="go">SUCCESS: Executed 1 tests in 2.461s</span>
 </code></pre></div>
 <h3 id="24-test-the-converttoupper-process">2.4. Test the <code>convertToUpper</code> process<a class="headerlink" href="#24-test-the-converttoupper-process" title="Permanent link">&para;</a></h3>
 <p>Let's open the <code>tests/main.converttoupper.nf.test</code> file and take a look at the contents:</p>
@@ -5549,7 +5578,7 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-51-7" name="__codelineno-51-7" href="#__codelineno-51-7"></a>
 <a id="__codelineno-51-8" name="__codelineno-51-8" href="#__codelineno-51-8"></a><span class="go">Test Process convertToUpper</span>
 <a id="__codelineno-51-9" name="__codelineno-51-9" href="#__codelineno-51-9"></a>
-<a id="__codelineno-51-10" name="__codelineno-51-10" href="#__codelineno-51-10"></a><span class="go">  Test [c59b6044] &#39;Should run without failures and produce correct output&#39; PASSED (1.755s)</span>
+<a id="__codelineno-51-10" name="__codelineno-51-10" href="#__codelineno-51-10"></a><span class="go">  Test [f8de7d71] &#39;Should run without failures and produce correct output&#39; PASSED (3.472s)</span>
 <a id="__codelineno-51-11" name="__codelineno-51-11" href="#__codelineno-51-11"></a><span class="go">  Snapshots:</span>
 <a id="__codelineno-51-12" name="__codelineno-51-12" href="#__codelineno-51-12"></a><span class="go">    1 created [Should run without failures and produce correct output]</span>
 <a id="__codelineno-51-13" name="__codelineno-51-13" href="#__codelineno-51-13"></a>
@@ -5557,7 +5586,7 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-51-15" name="__codelineno-51-15" href="#__codelineno-51-15"></a><span class="go">Snapshot Summary:</span>
 <a id="__codelineno-51-16" name="__codelineno-51-16" href="#__codelineno-51-16"></a><span class="go">  1 created</span>
 <a id="__codelineno-51-17" name="__codelineno-51-17" href="#__codelineno-51-17"></a>
-<a id="__codelineno-51-18" name="__codelineno-51-18" href="#__codelineno-51-18"></a><span class="go">SUCCESS: Executed 1 tests in 1.764s</span>
+<a id="__codelineno-51-18" name="__codelineno-51-18" href="#__codelineno-51-18"></a><span class="go">SUCCESS: Executed 1 tests in 3.478s</span>
 </code></pre></div>
 <p>Note, we have created a snapshot file for the <code>convertToUpper</code> process at <code>tests/main.converttoupper.nf.test.snap</code>. If we run the test again, we should see the nf-test passes again.</p>
 <div class="highlight"><span class="filename">nf-test process convertToUpper pass</span><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.converttoupper.nf.test
@@ -5571,10 +5600,10 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-53-7" name="__codelineno-53-7" href="#__codelineno-53-7"></a>
 <a id="__codelineno-53-8" name="__codelineno-53-8" href="#__codelineno-53-8"></a><span class="go">Test Process convertToUpper</span>
 <a id="__codelineno-53-9" name="__codelineno-53-9" href="#__codelineno-53-9"></a>
-<a id="__codelineno-53-10" name="__codelineno-53-10" href="#__codelineno-53-10"></a><span class="go">  Test [c59b6044] &#39;Should run without failures and produce correct output&#39; PASSED (1.798s)</span>
+<a id="__codelineno-53-10" name="__codelineno-53-10" href="#__codelineno-53-10"></a><span class="go">  Test [f8de7d71] &#39;Should run without failures and produce correct output&#39; PASSED (2.387s)</span>
 <a id="__codelineno-53-11" name="__codelineno-53-11" href="#__codelineno-53-11"></a>
 <a id="__codelineno-53-12" name="__codelineno-53-12" href="#__codelineno-53-12"></a>
-<a id="__codelineno-53-13" name="__codelineno-53-13" href="#__codelineno-53-13"></a><span class="go">SUCCESS: Executed 1 tests in 1.811s</span>
+<a id="__codelineno-53-13" name="__codelineno-53-13" href="#__codelineno-53-13"></a><span class="go">SUCCESS: Executed 1 tests in 2.39s</span>
 </code></pre></div>
 <h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
 <p>You know how to write tests for a Nextflow process and run them.</p>
@@ -5598,19 +5627,19 @@ You can see the full workflow code below.</p>
 <a id="__codelineno-55-7" name="__codelineno-55-7" href="#__codelineno-55-7"></a>
 <a id="__codelineno-55-8" name="__codelineno-55-8" href="#__codelineno-55-8"></a><span class="go">Test Process convertToUpper</span>
 <a id="__codelineno-55-9" name="__codelineno-55-9" href="#__codelineno-55-9"></a>
-<a id="__codelineno-55-10" name="__codelineno-55-10" href="#__codelineno-55-10"></a><span class="go">  Test [3d26d9af] &#39;Should run without failures and produce correct output&#39; PASSED (4.155s)</span>
+<a id="__codelineno-55-10" name="__codelineno-55-10" href="#__codelineno-55-10"></a><span class="go">  Test [f8de7d71] &#39;Should run without failures and produce correct output&#39; PASSED (3.472s)</span>
 <a id="__codelineno-55-11" name="__codelineno-55-11" href="#__codelineno-55-11"></a>
 <a id="__codelineno-55-12" name="__codelineno-55-12" href="#__codelineno-55-12"></a><span class="go">Test Workflow main.nf</span>
 <a id="__codelineno-55-13" name="__codelineno-55-13" href="#__codelineno-55-13"></a>
-<a id="__codelineno-55-14" name="__codelineno-55-14" href="#__codelineno-55-14"></a><span class="go">  Test [f183df37] &#39;Should run successfully with correct number of processes&#39; PASSED (3.33s)</span>
-<a id="__codelineno-55-15" name="__codelineno-55-15" href="#__codelineno-55-15"></a><span class="go">  Test [d7e32a32] &#39;Should produce correct output files&#39; PASSED (3.102s)</span>
+<a id="__codelineno-55-14" name="__codelineno-55-14" href="#__codelineno-55-14"></a><span class="go">  Test [8a64acb3] &#39;Should run successfully with correct number of processes&#39; PASSED (3.156s)</span>
+<a id="__codelineno-55-15" name="__codelineno-55-15" href="#__codelineno-55-15"></a><span class="go">  Test [44ba6e13] &#39;Should produce correct output files&#39; PASSED (3.124s)</span>
 <a id="__codelineno-55-16" name="__codelineno-55-16" href="#__codelineno-55-16"></a>
 <a id="__codelineno-55-17" name="__codelineno-55-17" href="#__codelineno-55-17"></a><span class="go">Test Process sayHello</span>
 <a id="__codelineno-55-18" name="__codelineno-55-18" href="#__codelineno-55-18"></a>
-<a id="__codelineno-55-19" name="__codelineno-55-19" href="#__codelineno-55-19"></a><span class="go">  Test [58df4e4b] &#39;Should run without failures and contain expected greeting&#39; PASSED (2.614s)</span>
+<a id="__codelineno-55-19" name="__codelineno-55-19" href="#__codelineno-55-19"></a><span class="go">  Test [c1d07f15] &#39;Should run without failures and contain expected greeting&#39; PASSED (5.782s)</span>
 <a id="__codelineno-55-20" name="__codelineno-55-20" href="#__codelineno-55-20"></a>
 <a id="__codelineno-55-21" name="__codelineno-55-21" href="#__codelineno-55-21"></a>
-<a id="__codelineno-55-22" name="__codelineno-55-22" href="#__codelineno-55-22"></a><span class="go">SUCCESS: Executed 4 tests in 13.481s</span>
+<a id="__codelineno-55-22" name="__codelineno-55-22" href="#__codelineno-55-22"></a><span class="go">SUCCESS: Executed 4 tests in 15.746s</span>
 </code></pre></div>
 <p>Check that out! We ran 4 tests, 1 for each process and 2 for the whole pipeline with a single command. Imagine how powerful this is on a large codebase!</p>
 <hr />

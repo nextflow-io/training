@@ -1257,34 +1257,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Version requirements">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#if-you-are-using-our-training-environment" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        If you are using our training environment:
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#if-you-are-using-a-local-or-custom-environment" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        If you are using a local or custom environment:
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
       </ul>
@@ -3706,34 +3678,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Version requirements">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#if-you-are-using-our-training-environment" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        If you are using our training environment:
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#if-you-are-using-a-local-or-custom-environment" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        If you are using a local or custom environment:
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
       </ul>
@@ -4010,27 +3954,28 @@ You will need to keep these instructions open in parallel to work through the co
 All instructions given during the course (e.g. 'open the file', 'edit the code' or 'run this command') refer to those three parts of the VScode interface unless otherwise specified.</p>
 <p>If you are working through this course by yourself, please acquaint yourself with the <a href="../../envsetup/01_setup/">environment basics</a> for further details.</p>
 <h3 id="version-requirements">Version requirements<a class="headerlink" href="#version-requirements" title="Permanent link">&para;</a></h3>
-<p>This training works with <strong>Nextflow 25.10.2</strong> or later <strong>with the v2 syntax parser DISABLED</strong>.</p>
-<h4 id="if-you-are-using-our-training-environment">If you are using our training environment:<a class="headerlink" href="#if-you-are-using-our-training-environment" title="Permanent link">&para;</a></h4>
-<p>You MUST run the following command before going any further:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v1
-</code></pre></div>
-<h4 id="if-you-are-using-a-local-or-custom-environment">If you are using a local or custom environment:<a class="headerlink" href="#if-you-are-using-a-local-or-custom-environment" title="Permanent link">&para;</a></h4>
-<p>Please make sure you are using the correct settings as documented <a href="../../info/nxf_versions/">here</a>.</p>
-<p>The training additionally requires <strong>nf-core tools 3.5.2</strong>.
+<p>This training works with Nextflow 25.10.2 or later <strong>with the v2 syntax parser</strong>, which is the default from Nextflow 26.04 onward.
+In our training environment you don't need to do anything: it runs Nextflow 26.04.4 with the v2 parser. If you are using a local or custom environment, see the <a href="../../info/nxf_versions/">version notes</a>.</p>
+<p>This training additionally requires <strong>nf-core tools 4.0.2</strong>.
 If you use a different version of nf-core tooling, you may have difficulty following along.</p>
 <p>You can check what version is installed in your environment using the command <code>nf-core --version</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">v2 parser compatibility</p>
+<p>Many nf-core pipelines do not yet support the v2 syntax parser.
+If you run an nf-core pipeline other than those used in this course and encounter errors, you may need to switch to the v1 parser by setting <code>export NXF_SYNTAX_PARSER=v1</code>.
+See the <a href="../../info/nxf_versions/">version notes</a> for details.</p>
+</div>
 <h2 id="get-ready-to-work">Get ready to work<a class="headerlink" href="#get-ready-to-work" title="Permanent link">&para;</a></h2>
 <p>Once your codespace is running, there are two things you need to do before diving into the training: set your working directory for this specific course, and take a look at the materials provided.</p>
 <h3 id="set-the-working-directory">Set the working directory<a class="headerlink" href="#set-the-working-directory" title="Permanent link">&para;</a></h3>
 <p>By default, the codespace opens with the work directory set at the root of all training courses, but for this course, we'll be working in the <code>hello-nf-core/</code> directory.</p>
 <p>Change directory now by running this command in the terminal:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>hello-nf-core/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>hello-nf-core/
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If for whatever reason you move out of this directory (e.g. your codespace goes to sleep), you can always use the full path to return to it, assuming you're running this within the Github Codespaces training environment:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>/workspaces/training/hello-nf-core
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>/workspaces/training/hello-nf-core
 </code></pre></div>
 </div>
 <p>Next, explore the contents of this directory.</p>
@@ -4039,23 +3984,26 @@ If you use a different version of nf-core tooling, you may have difficulty follo
 Alternatively, you can use the <code>tree</code> command.</p>
 <p>Throughout the course, we use the output of <code>tree</code> to represent directory structure and contents in a readable form, sometimes with minor modifications for clarity.</p>
 <p>Here we generate a table of contents to the second level down:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>tree<span class="w"> </span>.<span class="w"> </span>-L<span class="w"> </span><span class="m">2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>tree<span class="w"> </span>.<span class="w"> </span>-L<span class="w"> </span><span class="m">2</span>
 </code></pre></div>
 <details class="abstract">
 <summary>Directory contents</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">.</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">├── greetings.csv</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">├── original-hello</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">│   ├── hello.nf</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">│   ├── modules</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">│   └── nextflow.config</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">└── solutions</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="go">    ├── composable-hello</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="go">    ├── core-hello-part2</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="go">    ├── core-hello-part3</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="go">    ├── core-hello-part4</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="go">    ├── core-hello-part5</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="go">    └── core-hello-start</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">.</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="go">├── custom.config</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">├── greetings.csv</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="go">├── malformed_samplesheet.csv</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="go">├── my_params.yml</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="go">├── original-hello</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="go">│   ├── hello.nf</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="go">│   ├── modules</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="go">│   └── nextflow.config</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="go">└── solutions</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="go">    ├── composable-hello</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="go">    ├── core-hello-part2</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="go">    ├── core-hello-part3</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="go">    ├── core-hello-part4</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="go">    ├── core-hello-part5</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="go">    └── core-hello-start</span>
 </code></pre></div>
 </details>
 <p>Click on the colored box to expand the section and view its contents.
@@ -4063,6 +4011,15 @@ We use collapsible sections like this to include expected command output in a co
 <ul>
 <li>
 <p><strong>The <code>greetings.csv</code> file</strong> is a CSV containing some minimal columnar data we use for testing purposes.</p>
+</li>
+<li>
+<p><strong>The <code>custom.config</code> file</strong> is an example Nextflow configuration file used in Part 1 to demonstrate process resource overrides and <code>ext.args</code>.</p>
+</li>
+<li>
+<p><strong>The <code>malformed_samplesheet.csv</code> file</strong> is an intentionally broken samplesheet used in Part 1 to demonstrate input validation.</p>
+</li>
+<li>
+<p><strong>The <code>my_params.yml</code> file</strong> is an example params file used in Part 1 to demonstrate how to pass boolean parameters to a pipeline.</p>
 </li>
 <li>
 <p><strong>The <code>original-hello</code> directory</strong> contains a copy of the source code produced by working through the complete Hello Nextflow training series (with Docker enabled).</p>
@@ -4077,7 +4034,7 @@ We use collapsible sections like this to include expected command output in a co
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I understand the goal of this course and its prerequisites</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> My environment is up and running</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I've made certain that the syntax parser is set to <strong>v1</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I'm using nf-core tools 4.0.2 (check with <code>nf-core --version</code>)</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I've set my working directory appropriately</li>
 </ul>
 <p>If you can check all the boxes, you're good to go.</p>

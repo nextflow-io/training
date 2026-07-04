@@ -4579,14 +4579,15 @@ We can now combine that with the built-in Docker profile:</p>
 </ul>
 <p>Because we're using <code>-resume</code>, Nextflow will check if anything changed since the last run.
 If the parameters, inputs, and code are the same, all tasks will be retrieved from cache and the pipeline will complete almost instantly.</p>
-<div class="highlight"><span class="filename">Output (excerpt)</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">executor &gt;  local (12)</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">...</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)               [100%] 2 of 2, cached: 2 ✔</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">...</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">-[nf-core/molkart] Pipeline completed successfully-</span>
+<div class="highlight"><span class="filename">Output (excerpt)</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">executor &gt;  local (1)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">[43/e03702] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2, cached: 2 ✔</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2, cached: 2 ✔</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">...</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3, cached: 3 ✔</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">[ef/d7b294] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">-[nf-core/molkart] Pipeline completed successfully-</span>
 </code></pre></div>
-<p>Notice all processes show <code>cached: 2</code> or <code>cached: 1</code> - nothing was re-executed!</p>
+<p>Notice the <code>cached: N</code> annotation on each process - the cached preprocessing and segmentation tasks were not re-executed.</p>
 <h3 id="24-test-profiles">2.4. Test profiles<a class="headerlink" href="#24-test-profiles" title="Permanent link">&para;</a></h3>
 <p>Test profiles provide quick ways to specify default input parameters and datafiles to let you verify the pipeline works.
 nf-core pipelines will always include at least two test profiles:</p>

@@ -4192,12 +4192,12 @@ Users might want different markers, but right now the only way to change them is
 <h3 id="12-observe-the-error">1.2. Observe the error<a class="headerlink" href="#12-observe-the-error" title="Permanent link">&para;</a></h3>
 <p>The build fails:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">&gt; Task :compileGroovy FAILED</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="go">GreetingExtension.groovy: 30: [Static type checking] - The variable [prefix] is undeclared.</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go"> @ line 30, column 9.</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="go">GreetingExtension.groovy: 34: [Static type checking] - The variable [prefix] is undeclared.</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go"> @ line 34, column 9.</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="go">           prefix = session.config.navigate(&#39;greeting.prefix&#39;, &#39;***&#39;) as String</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="go">           ^</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="go">GreetingExtension.groovy: 31: [Static type checking] - The variable [suffix] is undeclared.</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="go">GreetingExtension.groovy: 35: [Static type checking] - The variable [suffix] is undeclared.</span>
 </code></pre></div>
 <p>In Groovy (and Java), you must <em>declare</em> a variable before using it.
 The code tries to assign values to <code>prefix</code> and <code>suffix</code>, but the class has no fields with those names.</p>
