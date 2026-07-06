@@ -649,8 +649,8 @@ Now have a look at the contents of the final output file.
 
 ??? abstract "File contents"
 
-    ```console title="results/COLLECTED-output.txt"
-    Hola
+    ```console title="results/hello_workflow/COLLECTED-output.txt"
+    HOLA
     ```
 
 Oh no. The collection step was run individually on each greeting, which is NOT what we wanted.
@@ -760,7 +760,7 @@ Finally, you can have a look at the contents of the output file to satisfy yours
 
 ??? abstract "File contents"
 
-    ```console title="results/COLLECTED-output.txt"
+    ```console title="results/hello_workflow/COLLECTED-output.txt"
     BONJOUR
     HELLO
     HOLA
@@ -990,7 +990,7 @@ It runs successfully and produces the desired output:
 
 ??? abstract "File contents"
 
-    ```console title="results/COLLECTED-trio-output.txt"
+    ```console title="results/hello_workflow/COLLECTED-trio-output.txt"
     HELLO
     BONJOUR
     HOLA
@@ -1324,5 +1324,5 @@ When providing multiple inputs to a process, what must be true?
 - [x] The order of inputs must match the order defined in the input block
 - [ ] Only two inputs can be provided at a time
 
-Learn more: [3. Pass more than one input to a process](#3-pass-more-than-one-input-to-a-process)
+Learn more: [3. Pass additional parameters to a process](#3-pass-additional-parameters-to-a-process)
 </quiz>

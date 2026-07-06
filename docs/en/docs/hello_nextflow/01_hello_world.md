@@ -783,19 +783,19 @@ In the process block, make the following code change:
 === "After"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-    script:
-    """
-    echo '${greeting}' > output.txt
-    """
+        script:
+        """
+        echo '${greeting}' > output.txt
+        """
     ```
 
 === "Before"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-    script:
-    """
-    echo 'Hello World!' > output.txt
-    """
+        script:
+        """
+        echo 'Hello World!' > output.txt
+        """
     ```
 
 The `$` symbol and curly braces (`{ }`) tell Nextflow this is a variable name that needs to be replaced with the actual input value (=interpolated).
@@ -827,15 +827,15 @@ In the workflow block, make the following code change:
 === "After"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // emit a greeting
-    sayHello(params.input)
+        // emit a greeting
+        sayHello(params.input)
     ```
 
 === "Before"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // emit a greeting
-    sayHello()
+        // emit a greeting
+        sayHello()
     ```
 
 This tells Nextflow to run the `sayHello` process on the value provided through the `--input` parameter.
@@ -1039,8 +1039,6 @@ Knowing how to launch workflows and retrieve outputs is great, but you'll quickl
 
 Here we show you how to use the [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html) feature for when you need to re-launch the same workflow, how to inspect the log of past executions with [`nextflow log`](https://nextflow.io/docs/latest/reference/cli.html#log), and how to delete older work directories with [`nextflow clean`](https://nextflow.io/docs/latest/reference/cli.html#clean).
 
-<!-- Any other cool options we should include? Added log -->
-
 ### 4.1. Re-launch a workflow with `-resume`
 
 Sometimes, you're going to want to re-run a pipeline that you've already launched previously without redoing any steps that already completed successfully.
@@ -1057,7 +1055,7 @@ There are two key advantages to doing this:
 To use it, simply add `-resume` to your command and run it:
 
 ```bash
-nextflow run hello-world.nf -resume
+nextflow run hello-world.nf --input 'Konnichiwa!' -resume
 ```
 
 ??? success "Command output"

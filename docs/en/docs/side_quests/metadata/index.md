@@ -372,7 +372,7 @@ Importantly, we have values for both, but they are currently bundled inside each
 
 One way to extract multiple fields into separate channels is the [`multiMap`](https://www.nextflow.io/docs/latest/reference/operator.html#multimap) operator, which splits one channel into multiple named sub-channels in a single operation.
 
-#### 1.3.1. Add the multiMap operation
+#### 1.3.1. Add the `multiMap` operation
 
 Replace the `map` operation with `multiMap`:
 
@@ -400,7 +400,7 @@ Replace the `map` operation with `multiMap`:
 
 The `multiMap` block defines two named sub-channels (`file` and `character`) from each row, which we can access as `ch_datasheet.file` and `ch_datasheet.character`.
 
-#### 1.3.2. Call COWPY on the sub-channels
+#### 1.3.2. Call `COWPY` on the sub-channels
 
 Now, include the `COWPY` process and give it each sub-channel as a separate argument:
 
@@ -558,7 +558,7 @@ Good news: there is a simpler way to do this.
 
 Rather than splitting the fields into separate channels, we can update the process to receive all inputs as a single tuple, which simplifies the call to the process.
 
-#### 1.4.1. Update the COWPY process
+#### 1.4.1. Update the `COWPY` process
 
 Update `COWPY` to accept a tuple corresponding to the three elements in each row:
 
@@ -780,7 +780,7 @@ Let's restructure the `map` operation to produce a `[meta, file]` tuple:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="5" hl_lines="4 7"
+    ```groovy title="main.nf" linenums="5" hl_lines="4 7 10"
         ch_datasheet = channel.fromPath("./data/datasheet.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -834,7 +834,7 @@ Each element in the channel is now a two-element tuple: the meta map first, the 
 ]
 ```
 
-If we later add a `language` column to the datasheet, it will become available as `meta.language` without requiring any changes to the process input definition.
+If we later add a `language` column to the datasheet and include it in the `map` operation (e.g. `language: row.language`), it becomes available as `meta.language` without requiring any changes to the process input definition.
 
 #### 1.5.3. Update the `COWPY` process to use the meta map
 
@@ -1672,8 +1672,8 @@ sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 ...
 ```
 
-The `character` key is never created in the meta map.
-When the process script evaluates `#!groovy ${meta.character}`, the missing key returns `null`, and Nextflow literally substitutes the string `null` into the command:
+Our `map` operation explicitly writes `#!groovy character: row.character`, so the `character` key is still created in the meta map, but accessing a column that doesn't exist on the parsed row returns `null`, so its value becomes `null`.
+When the process script evaluates `#!groovy ${meta.character}`, Nextflow literally substitutes the string `null` into the command:
 
 ??? failure "Command output"
 

@@ -650,8 +650,6 @@ Have a look at the `results` directory to see if all the output greetings are th
     └── output.txt
     ```
 
-Yes! And they each have the expected contents.
-
 ??? abstract "File contents"
 
     ```console title="Bonjour-output.txt"
@@ -1078,11 +1076,13 @@ Make the following edit to the parameter declaration:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="20" hl_lines="4"
+    ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
      * Pipeline parameters
      */
-    input: String = 'Hola mundo!'
+    params {
+        input: String = 'Hola mundo!'
+    }
     ```
 
 This assumes the file is co-located with the workflow code.

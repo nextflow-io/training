@@ -19,16 +19,17 @@ Use `AskUserQuestion` to determine the setup type:
 
 ---
 
-## Determine NXF_VER
+## Determine NXF_VER and training image
 
-Before any Docker commands, read the Nextflow version from devcontainer.json:
+Before any Docker commands, read the Nextflow version and the training image reference from devcontainer.json:
 
 ```bash
 NXF_VER=$(grep -o '"NXF_VER":\s*"[^"]*"' .devcontainer/devcontainer.json | cut -d'"' -f4)
-echo "Using NXF_VER=${NXF_VER}"
+TRAINING_IMAGE=$(grep -o '"image":\s*"[^"]*"' .devcontainer/devcontainer.json | cut -d'"' -f4)
+echo "Using NXF_VER=${NXF_VER}, TRAINING_IMAGE=${TRAINING_IMAGE}"
 ```
 
-This ensures you use the same version learners get in Codespaces.
+Always use `${TRAINING_IMAGE}` as read from the **currently checked-out branch's** `devcontainer.json` — do not hardcode `ghcr.io/nextflow-io/training:latest`. The tag a branch pins is the version that corresponds to what that branch's docs were written/tested against; pulling whatever the registry's `latest` tag happens to be right now can silently diverge from it. Pull that exact reference (`docker pull "${TRAINING_IMAGE}"`) before starting the container, so a stale local cache doesn't ship an outdated image under the same tag name — but never substitute a different tag than what the branch declares.
 
 ---
 
@@ -40,15 +41,19 @@ For tutorials that don't use containerized processes:
 # Clean up any existing container
 docker stop nf-training 2>/dev/null; docker rm nf-training 2>/dev/null
 
-# Start fresh container with UTF-8 locale support
+# Read the image reference pinned by this branch's devcontainer.json and pull it
 NXF_VER=$(grep -o '"NXF_VER":\s*"[^"]*"' .devcontainer/devcontainer.json | cut -d'"' -f4)
+TRAINING_IMAGE=$(grep -o '"image":\s*"[^"]*"' .devcontainer/devcontainer.json | cut -d'"' -f4)
+docker pull "${TRAINING_IMAGE}"
+
+# Start fresh container with UTF-8 locale support
 docker run -d --name nf-training \
   -e NXF_VER=${NXF_VER} \
   -e LANG=C.UTF-8 \
   -e LC_ALL=C.UTF-8 \
   -v "${PWD}:/workspaces/training" \
   -w /workspaces/training \
-  ghcr.io/nextflow-io/training:latest \
+  "${TRAINING_IMAGE}" \
   sleep infinity
 ```
 
@@ -73,9 +78,11 @@ For tutorials with containerized processes (FASTP, BWA, SAMTOOLS, etc.):
 # Clean up any existing container
 docker stop nf-training 2>/dev/null; docker rm nf-training 2>/dev/null
 
-# Get NXF_VER and host path
+# Read the image reference pinned by this branch's devcontainer.json and pull it
 NXF_VER=$(grep -o '"NXF_VER":\s*"[^"]*"' .devcontainer/devcontainer.json | cut -d'"' -f4)
+TRAINING_IMAGE=$(grep -o '"image":\s*"[^"]*"' .devcontainer/devcontainer.json | cut -d'"' -f4)
 HOST_PATH="${PWD}"
+docker pull "${TRAINING_IMAGE}"
 
 # Start container with DooD support
 docker run -d --name nf-training \
@@ -85,7 +92,7 @@ docker run -d --name nf-training \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v "${HOST_PATH}:${HOST_PATH}" \
   -w "${HOST_PATH}" \
-  ghcr.io/nextflow-io/training:latest \
+  "${TRAINING_IMAGE}" \
   sleep infinity
 
 # Create symlink for Codespaces paths
@@ -166,6 +173,8 @@ docker stop nf-training 2>/dev/null; docker rm nf-training 2>/dev/null
 
 HOST_PATH="${PWD}"
 NXF_VER=$(grep -o '"NXF_VER":\s*"[^"]*"' .devcontainer/devcontainer.json | cut -d'"' -f4)
+TRAINING_IMAGE=$(grep -o '"image":\s*"[^"]*"' .devcontainer/devcontainer.json | cut -d'"' -f4)
+docker pull "${TRAINING_IMAGE}"
 
 docker run -d --name nf-training \
   -e NXF_VER=${NXF_VER} \
@@ -174,7 +183,7 @@ docker run -d --name nf-training \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v "${HOST_PATH}:${HOST_PATH}" \
   -w "${HOST_PATH}" \
-  ghcr.io/nextflow-io/training:latest \
+  "${TRAINING_IMAGE}" \
   sleep infinity
 
 # 3. Recreate symlink (critical!)

@@ -165,9 +165,9 @@ To make it composable with other workflows, a few things need to change.
 
 ### 1.2. Make the workflow composable
 
-To make a workflow composable, four things need to change:
-the workflow gets a name, inputs move to a `take:` block, outputs move to an `emit:` block,
-and the standalone `publish:`/`output {}` blocks are removed (they belong in the entry workflow).
+To make a workflow composable, three things need to change:
+the workflow gets a name, inputs move to a `take:` block, and outputs move to an `emit:` block
+(replacing the standalone `publish:`/`output {}` blocks, which belong in the entry workflow instead).
 
 Let's walk through these changes one by one.
 
@@ -512,7 +512,7 @@ include { REVERSE_TEXT } from '../modules/reverse_text'
 
 workflow TRANSFORM_WORKFLOW {
     take:
-    input_ch // Input channel with messages
+    input_ch // Input channel with greetings
 
     main:
     // Apply transformations in sequence

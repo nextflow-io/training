@@ -843,15 +843,10 @@ A naive way to do that would be to combine the `file()` method with [`channel.of
 
 ```groovy title="Syntax example"
 ch_files = channel.of([file('data/patientA_rep1_normal_R1_001.fastq.gz')],
-                      [file('data/patientA_rep1_normal_R1_001.fastq.gz')])
+                      [file('data/patientA_rep1_normal_R2_001.fastq.gz')])
 ```
 
 That works, but it's clunky.
-
-!!! tip "When to use `file()` vs `channel.fromPath()`"
-
-    - Use `file()` when you need a single Path object for direct manipulation (checking if a file exists, reading its attributes, or passing to a single process invocation)
-    - Use `channel.fromPath()` when you need a channel that can hold multiple files, especially with glob patterns, or when files will flow through multiple processes
 
 This is where [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#frompath) comes in: a convenient channel factory that bundles all the functionality we need to generate a channel from one or more static file strings as well as glob patterns.
 
@@ -924,6 +919,11 @@ As you can see, the file path is being loaded as a `Path` type object in the cha
 This is similar to what `file()` would have done, except now we have a channel that we can load more files into if we want.
 
 Using `channel.fromPath()` is a convenient way of creating a new channel populated by a list of files.
+
+!!! tip "When to use `file()` vs `channel.fromPath()`"
+
+    - Use `file()` when you need a single Path object for direct manipulation (checking if a file exists, reading its attributes, or passing to a single process invocation)
+    - Use `channel.fromPath()` when you need a channel that can hold multiple files, especially with glob patterns, or when files will flow through multiple processes
 
 ### 3.2. View attributes of files in channel
 
@@ -1403,10 +1403,10 @@ Let's update the workflow `main.nf` accordingly:
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         /* Comment out the mapping for now, we'll come back to it!
         ch_files.map { myFile ->
-            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            def (patient, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
                 [
-                    id: sample,
+                    id: patient,
                     replicate: replicate.replace('rep', ''),
                     type: type,
                     readNum: readNum,
@@ -1421,13 +1421,13 @@ Let's update the workflow `main.nf` accordingly:
 === "Before"
 
     ```groovy title="main.nf" linenums="7" hl_lines="1-2"
-        // Load files with channel.fromFilePairs
+        // Load files with channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_files.map { myFile ->
-            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            def (patient, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
                 [
-                    id: sample,
+                    id: patient,
                     replicate: replicate.replace('rep', ''),
                     type: type,
                     readNum: readNum,
@@ -1547,10 +1547,10 @@ Uncomment the map operation in the workflow and make the following edits:
         // Load files with channel.fromFilePairs
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id, files ->
-            def (sample, replicate, type) = id.tokenize('_')
+            def (patient, replicate, type) = id.tokenize('_')
             [
                 [
-                    id: sample,
+                    id: patient,
                     replicate: replicate.replace('rep', ''),
                     type: type
                 ],
@@ -1567,10 +1567,10 @@ Uncomment the map operation in the workflow and make the following edits:
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         /* Comment out the mapping for now, we'll come back to it!
         ch_files.map { myFile ->
-            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            def (patient, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
                 [
-                    id: sample,
+                    id: patient,
                     replicate: replicate.replace('rep', ''),
                     type: type,
                     readNum: readNum,
@@ -1719,10 +1719,10 @@ In the main workflow, replace the `.view()` operator with `#!groovy .set { ch_sa
         // Load files with channel.fromFilePairs
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id,  files ->
-           def (sample, replicate, type, readNum) = id.tokenize('_')
+           def (patient, replicate, type) = id.tokenize('_')
            [
                [
-                   id: sample,
+                   id: patient,
                    replicate: replicate.replace('rep', ''),
                    type: type
                ],
@@ -1741,10 +1741,10 @@ In the main workflow, replace the `.view()` operator with `#!groovy .set { ch_sa
         // Load files with channel.fromFilePairs
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id,  files ->
-           def (sample, replicate, type, readNum) = id.tokenize('_')
+           def (patient, replicate, type) = id.tokenize('_')
            [
                [
-                   id: sample,
+                   id: patient,
                    replicate: replicate.replace('rep', ''),
                    type: type
                ],
@@ -1797,10 +1797,10 @@ In the main workflow, make the following code changes:
         // Load files with channel.fromFilePairs
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_samples = ch_files.map { id,  files ->
-           def (sample, replicate, type, readNum) = id.tokenize('_')
+           def (patient, replicate, type) = id.tokenize('_')
            tuple(
                [
-                   id: sample,
+                   id: patient,
                    replicate: replicate.replace('rep', ''),
                    type: type
                ],
@@ -1830,10 +1830,10 @@ In the main workflow, make the following code changes:
         // Load files with channel.fromFilePairs
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id,  files ->
-           def (sample, replicate, type, readNum) = id.tokenize('_')
+           def (patient, replicate, type) = id.tokenize('_')
            [
                [
-                   id: sample,
+                   id: patient,
                    replicate: replicate.replace('rep', ''),
                    type: type
                ],
@@ -1989,7 +1989,7 @@ Make the following change to the `output {}` block:
 
 === "After"
 
-    ```groovy title="main.nf" hl_lines="3"
+    ```groovy title="main.nf" hl_lines="2"
     analysis_results {
         path { meta, file -> "${meta.type}/${meta.id}/${meta.replicate}" }
     }
@@ -1997,7 +1997,7 @@ Make the following change to the `output {}` block:
 
 === "Before"
 
-    ```groovy title="main.nf" hl_lines="3"
+    ```groovy title="main.nf" hl_lines="2"
     analysis_results {
         path { meta, file -> "${meta.id}" }
     }
@@ -2187,7 +2187,7 @@ Applying these techniques in your own work will enable you to build more efficie
 5.  **Simplifying with channel.fromFilePairs:** We used `channel.fromFilePairs()` to automatically pair related files and extract metadata from paired file IDs.
 
     ```groovy
-    ch_pairs = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
+    ch_files = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
     ```
 
 6.  **Using File Operations in Processes:** We integrated file operations into Nextflow processes with proper input handling, using the `output {}` block to organize outputs based on metadata.
@@ -2197,10 +2197,10 @@ Applying these techniques in your own work will enable you to build more efficie
     ```groovy
     ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
     ch_samples = ch_files.map { id,  files ->
-        def (sample, replicate, type, readNum) = id.tokenize('_')
+        def (patient, replicate, type) = id.tokenize('_')
         tuple(
             [
-                id: sample,
+                id: patient,
                 replicate: replicate.replace('rep', ''),
                 type: type
             ],

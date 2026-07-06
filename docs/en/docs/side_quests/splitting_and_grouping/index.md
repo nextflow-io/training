@@ -152,7 +152,7 @@ Apply these changes to `main.nf`:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="2-6"
+    ```groovy title="main.nf" linenums="2" hl_lines="1-6"
         ch_samples = channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map{ row ->
@@ -529,7 +529,7 @@ Next, we'll consider the situation where you want to join on multiple fields.
 
 ### 3.2. Join on multiple fields
 
-We have 2 replicates for sampleA, but only 1 for sampleB and sampleC. In this case we were able to join them effectively by using the `id` field, but what would happen if they were out of sync? We could mix up the normal and tumor samples from different replicates!
+We have 2 replicates for patientA, but only 1 for patientB and patientC. In this case we were able to join them effectively by using the `id` field, but what would happen if they were out of sync? We could mix up the normal and tumor samples from different replicates!
 
 To avoid this, we can join on multiple fields. There are actually multiple ways to achieve this but we are going to focus on creating a new joining key which includes both the sample `id` and `replicate` number.
 
@@ -723,21 +723,21 @@ We have a lot of duplicated data in our workflow. Each item in the joined sample
 ```groovy
 [
   [
-    "id": "sampleC",
+    "id": "patientC",
     "repeat": "1",
   ],
   [
-    "id": "sampleC",
+    "id": "patientC",
     "repeat": "1",
     "type": "normal",
   ],
-  "sampleC_rep1_normal.bam"
+  "patientC_rep1_normal.bam",
   [
-    "id": "sampleC",
+    "id": "patientC",
     "repeat": "1",
     "type": "tumor",
   ],
-  "sampleC_rep1_tumor.bam"
+  "patientC_rep1_tumor.bam"
 ]
 ```
 
@@ -1000,7 +1000,7 @@ In this section, you've learned:
 
 ## 5. Aggregating samples using `groupTuple`
 
-In the previous sections, we learned how to split data from an input file and filter by specific fields (in our case normal and tumor samples). But this only covers a single type of joining. What if we want to group samples by a specific attribute? For example, instead of joining matched normal-tumor pairs, we might want to process all samples from "sampleA" together regardless of their type. This pattern is common in bioinformatics workflows where you may want to process related samples separately for efficiency reasons before comparing or combining the results at the end.
+In the previous sections, we learned how to split data from an input file and filter by specific fields (in our case normal and tumor samples). But this only covers a single type of joining. What if we want to group samples by a specific attribute? For example, instead of joining matched normal-tumor pairs, we might want to process all samples from "patientA" together regardless of their type. This pattern is common in bioinformatics workflows where you may want to process related samples separately for efficiency reasons before comparing or combining the results at the end.
 
 Nextflow includes built in methods to do this, the main one we will look at is `groupTuple`.
 
@@ -1012,7 +1012,7 @@ The first step is similar to what we did in the previous section. We must isolat
 
 ```groovy title="main.nf" linenums="1"
 {
-  "id": "sampleA",
+  "id": "patientA",
   "repeat": "1",
   "interval": "chr1"
 }
@@ -1195,7 +1195,7 @@ Mastering these channel operations will enable you to build flexible, scalable p
 2.  **Splitting data into separate channels:** We used `filter` to divide data into independent streams based on the `type` field
 
     ```groovy
-    channel.filter { it.type == 'tumor' }
+    channel.filter { meta, file -> meta.type == 'tumor' }
     ```
 
 3.  **Joining matched samples:** We used `join` to recombine related samples based on `id` and `repeat` fields
@@ -1203,31 +1203,31 @@ Mastering these channel operations will enable you to build flexible, scalable p
     - Join two channels by key (first element of tuple)
 
     ```groovy
-    tumor_ch.join(normal_ch)
+    ch_normal_samples.join(ch_tumor_samples)
     ```
 
     - Extract joining key and join by this value
 
     ```groovy
-    tumor_ch.map { meta, file -> [meta.id, meta, file] }
+    ch_normal_samples.map { meta, file -> [meta.id, meta, file] }
         .join(
-          normal_ch.map { meta, file -> [meta.id, meta, file] }
+          ch_tumor_samples.map { meta, file -> [meta.id, meta, file] }
         )
     ```
 
-    - Join on multiple fields using subMap
+    - Join on multiple fields using `subMap`
 
     ```groovy
-    tumor_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+    ch_normal_samples.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
         .join(
-          normal_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+          ch_tumor_samples.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
         )
     ```
 
 4.  **Distributing across intervals:** We used `combine` to create Cartesian products of samples with genomic intervals for parallel processing.
 
     ```groovy
-    samples_ch.combine(intervals_ch)
+    ch_joined_samples.combine(ch_intervals)
     ```
 
 5.  **Aggregating by grouping keys:** We used `groupTuple` to group by the first element in each tuple, thereby collecting samples sharing `id` and `interval` fields and merging technical replicates.

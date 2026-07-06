@@ -17,7 +17,7 @@ Testing allows you to systematically check that every part of your pipeline is w
 
 There are lots of different types of tests we can write:
 
-1. **Module-level tests**: For individual processes
+1. **Process-level tests**: For individual processes
 2. **Workflow-level tests**: For a single workflow
 3. **Pipeline-level tests**: For the pipeline as a whole
 4. **Performance tests**: For the speed and efficiency of the pipeline
@@ -25,16 +25,16 @@ There are lots of different types of tests we can write:
 
 Testing individual processes is analogous to unit tests in other languages. Testing the workflow or the entire pipeline is analogous to what's called integration tests in other languages, where we test the interactions of the components.
 
-[**nf-test**](https://www.nf-test.com/) is a tool that allows you to write module, workflow and pipeline level test. In short, it allows you to systematically check every individual part of the pipeline is working as expected, _in isolation_.
+[**nf-test**](https://www.nf-test.com/) is a tool that allows you to write process, workflow and pipeline level test. In short, it allows you to systematically check every individual part of the pipeline is working as expected, _in isolation_.
 
 ### Learning goals
 
-In this side quest, you'll learn to use nf-test to write a workflow-level test for the pipeline as well as module-level tests for the three processes it calls on.
+In this side quest, you'll learn to use nf-test to write a workflow-level test for the pipeline as well as process-level tests for the two processes it calls on.
 
 By the end of this side quest, you'll be able to use the following techniques effectively:
 
 - Initialize nf-test in your project
-- Generate module-level and workflow-level tests
+- Generate process-level and workflow-level tests
 - Add common types of assertions
 - Understand when to use snapshots vs. content assertions
 - Run tests for an entire project
@@ -47,6 +47,16 @@ Before taking on this side quest, you should:
 
 - Have completed the [Hello Nextflow](../../hello_nextflow/index.md) tutorial or equivalent beginner's course.
 - Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators, working with files, meta data)
+
+!!! warning "nf-test version requirement"
+
+    Process-level tests require **nf-test 0.9.3 or later**. Older versions (including 0.9.2) generate test harness code that is incompatible with the strict syntax parser that Nextflow uses by default from version 26.04 onward, causing a `Script compilation failed` error instead of the expected test result.
+
+    Check your version with `nf-test version`. If you need to upgrade:
+
+    ```bash
+    curl -fsSL https://code.askimed.com/install/nf-test | bash
+    ```
 
 ---
 
@@ -1028,10 +1038,10 @@ This is a similar test to the `sayHello` process, but it's testing the `convertT
 We now need to supply a single input file to the convertToUpper process, which includes some text that we want to convert to uppercase. There are lots of ways we could do this:
 
 - We could create a dedicated file to test
-- We could re-use the existing data/greetings.csv file
+- We could re-use the existing greetings.csv file
 - We could create it on the fly within the test
 
-For now, let's re-use the existing data/greetings.csv file using the example we used with the pipeline level test. As before, we can name the test to better reflect what we're testing, but this time let's leave it to 'snapshot' the content rather than checking for specific strings (as we did in the other process).
+For now, let's re-use the existing greetings.csv file using the example we used with the pipeline level test. As before, we can name the test to better reflect what we're testing, but this time let's leave it to 'snapshot' the content rather than checking for specific strings (as we did in the other process).
 
 === "After"
 
@@ -1223,7 +1233,7 @@ Check out the [nf-test documentation](https://www.nf-test.com/) for more advance
 - Add more comprehensive assertions to your tests
 - Write tests for edge cases and error conditions
 - Set up continuous integration to run tests automatically
-- Learn about other types of tests like workflow and module tests
+- Learn about other types of tests like workflow, performance, and stress tests
 - Explore more advanced content validation techniques
 
 **Remember:** Tests are living documentation of how your code should behave. The more tests you write, and the more specific your assertions are, the more confident you can be in your pipeline's reliability.

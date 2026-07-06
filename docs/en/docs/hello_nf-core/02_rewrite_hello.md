@@ -444,7 +444,7 @@ Let's take a closer look.
 
 This serves as the placeholder for our analysis workflow, with some nf-core functionality already in place.
 
-```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 18 21 53"
+```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 21 53"
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -823,7 +823,7 @@ That is going to be defined in the parent workflow, also called the **entrypoint
 Before integrating our composable workflow into the complex nf-core scaffold, let's verify it works correctly.
 We can make a simple dummy entrypoint workflow to test the composable workflow in isolation.
 
-Create a blank file named `main.nf` in the same`original-hello` directory.
+Create a blank file named `main.nf` in the same `original-hello` directory.
 
 ```bash
 touch original-hello/main.nf
@@ -898,7 +898,7 @@ If you made all the changes correctly, this should run to completion.
     Output: /workspaces/training/hello-nf-core/work/07/bfc7061fa521e86f4e1954191ab4c4/cowpy-COLLECTED-test-batch-output.txt
     ```
 
-This means we've successfully upgraded our HELLO workflow to be composable.
+This means we've successfully upgraded our `HELLO` workflow to be composable.
 
 ### Takeaway
 
@@ -1263,7 +1263,7 @@ Finally, we need to update the `emit` block to include the declaration of the wo
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
-This concludes the modifications we need to make to the HELLO workflow itself.
+This concludes the modifications we need to make to the `HELLO` workflow itself.
 At this point, we have achieved the overall code structure we set out to implement.
 
 ### Takeaway
@@ -1380,7 +1380,7 @@ The nf-core project makes heavy use of nested subworkflows, so this bit can be a
 
 What matters here is that there are two workflows defined:
 
-- `CORE_HELLO` is a thin wrapper for running the HELLO workflow we just finished adapting in `core-hello/workflows/hello.nf`.
+- `CORE_HELLO` is a thin wrapper for running the `HELLO` workflow we just finished adapting in `core-hello/workflows/hello.nf`.
 - An unnamed workflow that calls `CORE_HELLO` as well as two other subworkflows, `PIPELINE_INITIALISATION` and `PIPELINE_COMPLETION`.
 
 Here is a diagram of how they relate to each other:
@@ -1425,7 +1425,7 @@ If we open up that file and scroll down, we come to this chunk of code:
     versions    = ch_versions
 ```
 
-This is the channel factory that parses the samplesheet and passes it on in a form that is ready to be consumed by the HELLO workflow.
+This is the channel factory that parses the samplesheet and passes it on in a form that is ready to be consumed by the `HELLO` workflow.
 
 !!! info
 
@@ -1536,7 +1536,7 @@ Now we can update the `test.config` file as follows:
 
 === "After"
 
-    ```groovy title="core-hello/conf/test.config" linenums="21" hl_lines="6-10"
+    ```groovy title="core-hello/conf/test.config" linenums="21" hl_lines="6 8-10"
     params {
         config_profile_name        = 'Test profile'
         config_profile_description = 'Minimal test dataset to check pipeline function'
@@ -1688,7 +1688,7 @@ If you've done all of the modifications correctly, it should run to completion.
     -[core/hello] Pipeline completed successfully-
     ```
 
-As you can see, this produced the typical nf-core summary at the start thanks to the initialisation subworkflow, and the lines for each module now show the full PIPELINE:WORKFLOW:module names.
+As you can see, this produced the typical nf-core summary at the start thanks to the initialisation subworkflow, and the lines for each module now show the full `PIPELINE:WORKFLOW:module` names.
 
 ### 5.6. Find the pipeline outputs
 

@@ -92,21 +92,21 @@ Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and modify t
 
 === "After"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="3" hl_lines="2"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2"
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
     ```
 
 === "Before"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="3" hl_lines="2"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2"
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
     process cowpy {
     ```
 
 In this case the uppercasing is completely straightforward.
 
-If the process name was composed of several words, for example if we had a process called MyCowpyTool originally in camel case, the nf-core convention would be to use underscores to separate them, yielding MY_COWPY_TOOL.
+If the process name was composed of several words, for example if we had a process called `MyCowpyTool` originally in camel case, the nf-core convention would be to use underscores to separate them, yielding `MY_COWPY_TOOL`.
 
 #### 1.1.2. Update the module import statement
 
@@ -162,7 +162,7 @@ So now let's update the two references to the process in the workflow block of `
     //
     // Collate and save software versions
     //
-    def topic_versions = Channel.topic("versions")
+    def topic_versions = channel.topic("versions")
         .distinct()
         .branch { entry ->
             versions_file: entry instanceof Path
@@ -206,7 +206,7 @@ So now let's update the two references to the process in the workflow block of `
     //
     // Collate and save software versions
     //
-    def topic_versions = Channel.topic("versions")
+    def topic_versions = channel.topic("versions")
         .distinct()
         .branch { entry ->
             versions_file: entry instanceof Path
@@ -313,7 +313,7 @@ Return to the `cowpy.nf` module file and modify it to accept metadata tuples as 
 
 === "After"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="11" hl_lines="2 6"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="9" hl_lines="2 6"
         input:
             tuple val(meta), path(input_file)
             val character
@@ -324,7 +324,7 @@ Return to the `cowpy.nf` module file and modify it to accept metadata tuples as 
 
 === "Before"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="11" hl_lines="2 6"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="9" hl_lines="2 6"
         input:
             path input_file
             val character
@@ -1096,9 +1096,9 @@ That being said, you may decide you want to organize your inputs differently, an
 
 To override the default `publishDir` directive, you can simply add your own directives to the `conf/modules.config` file.
 
-For example, you could override the default for a single process using the `withName:` selector, as in this example where we add a custom `publishDir` directive for the 'COWPY' process.
+For example, you could override the default for a single process using the `withName:` selector, as in this example where we add a custom `publishDir` directive for the `COWPY` process.
 
-```groovy title="core-hello/conf/modules.config" linenums="13" hl_lines="8-10"
+```groovy title="core-hello/conf/modules.config" linenums="13" hl_lines="10-12"
 process {
     publishDir = [
         path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
@@ -1194,7 +1194,7 @@ Workflow:
   Nextflow: 26.04.4
 ```
 
-The workflow-side collection — the `Channel.topic("versions")` block you saw in the placeholder workflow in Part 2 — subscribes to the topic and writes this combined report automatically.
+The workflow-side collection — the `channel.topic("versions")` block you saw in the placeholder workflow in Part 2 — subscribes to the topic and writes this combined report automatically.
 
 !!! info "Backwards compatibility"
 
@@ -1364,7 +1364,7 @@ The default code offers to toggle between Docker and Singularity, but we're goin
 
 === "Before"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6-8"
     process COWPY {
         tag "$meta.id"
         label 'process_single'
@@ -1377,7 +1377,7 @@ The default code offers to toggle between Docker and Singularity, but we're goin
 
 #### 2.2.2. Conda environment
 
-For the Conda environment, the module code specifies `conda "${moduleDir}/environment.yml"` which means that it should be configured in the `environment.yml` file.
+For the Conda environment, the module code specifies `#!groovy conda "${moduleDir}/environment.yml"` which means that it should be configured in the `environment.yml` file.
 
 The module creation tool warned us that it couldn't find the `cowpy` package in Bioconda (the primary channel for bioinformatics tools).
 However, `cowpy` is available in conda-forge, so you can complete the `environment.yml` like this:
@@ -1429,7 +1429,7 @@ Update the input and output blocks:
 
 === "After"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5 6"
     input:
     tuple val(meta), path(input_file)
 
@@ -1519,7 +1519,7 @@ Don't worry too much if this seems mysterious; we include this for completeness 
 
 === "Before"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
