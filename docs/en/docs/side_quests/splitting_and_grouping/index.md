@@ -1203,24 +1203,24 @@ Mastering these channel operations will enable you to build flexible, scalable p
     - Join two channels by key (first element of tuple)
 
     ```groovy
-    tumor_ch.join(normal_ch)
+    normal_ch.join(tumor_ch)
     ```
 
     - Extract joining key and join by this value
 
     ```groovy
-    tumor_ch.map { meta, file -> [meta.id, meta, file] }
+    normal_ch.map { meta, file -> [meta.id, meta, file] }
         .join(
-          normal_ch.map { meta, file -> [meta.id, meta, file] }
+          tumor_ch.map { meta, file -> [meta.id, meta, file] }
         )
     ```
 
     - Join on multiple fields using `subMap`
 
     ```groovy
-    tumor_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+    normal_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
         .join(
-          normal_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+          tumor_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
         )
     ```
 

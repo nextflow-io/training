@@ -1719,7 +1719,7 @@ In the main workflow, replace the `.view()` operator with `#!groovy .set { ch_sa
         // Load files with channel.fromFilePairs
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id,  files ->
-           def (sample, replicate, type, readNum) = id.tokenize('_')
+           def (sample, replicate, type) = id.tokenize('_')
            [
                [
                    id: sample,
@@ -1741,7 +1741,7 @@ In the main workflow, replace the `.view()` operator with `#!groovy .set { ch_sa
         // Load files with channel.fromFilePairs
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id,  files ->
-           def (sample, replicate, type, readNum) = id.tokenize('_')
+           def (sample, replicate, type) = id.tokenize('_')
            [
                [
                    id: sample,
@@ -1797,7 +1797,7 @@ In the main workflow, make the following code changes:
         // Load files with channel.fromFilePairs
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_samples = ch_files.map { id,  files ->
-           def (sample, replicate, type, readNum) = id.tokenize('_')
+           def (sample, replicate, type) = id.tokenize('_')
            tuple(
                [
                    id: sample,
@@ -1830,7 +1830,7 @@ In the main workflow, make the following code changes:
         // Load files with channel.fromFilePairs
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id,  files ->
-           def (sample, replicate, type, readNum) = id.tokenize('_')
+           def (sample, replicate, type) = id.tokenize('_')
            [
                [
                    id: sample,
@@ -2197,7 +2197,7 @@ Applying these techniques in your own work will enable you to build more efficie
     ```groovy
     ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
     ch_samples = ch_files.map { id,  files ->
-        def (sample, replicate, type, readNum) = id.tokenize('_')
+        def (sample, replicate, type) = id.tokenize('_')
         tuple(
             [
                 id: sample,

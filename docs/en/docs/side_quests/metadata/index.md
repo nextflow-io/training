@@ -834,7 +834,7 @@ Each element in the channel is now a two-element tuple: the meta map first, the 
 ]
 ```
 
-If we later add a `language` column to the datasheet, it will become available as `meta.language` without requiring any changes to the process input definition.
+If we later add a `language` column to the datasheet and include it in the `map` operation (e.g. `language: row.language`), it becomes available as `meta.language` without requiring any changes to the process input definition.
 
 #### 1.5.3. Update the `COWPY` process to use the meta map
 
