@@ -152,7 +152,7 @@ Apply these changes to `main.nf`:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="2-6"
+    ```groovy title="main.nf" linenums="2" hl_lines="1-6"
         ch_samples = channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map{ row ->
@@ -1195,7 +1195,7 @@ Mastering these channel operations will enable you to build flexible, scalable p
 2.  **Splitting data into separate channels:** We used `filter` to divide data into independent streams based on the `type` field
 
     ```groovy
-    channel.filter { it.type == 'tumor' }
+    channel.filter { meta, file -> meta.type == 'tumor' }
     ```
 
 3.  **Joining matched samples:** We used `join` to recombine related samples based on `id` and `repeat` fields
@@ -1215,7 +1215,7 @@ Mastering these channel operations will enable you to build flexible, scalable p
         )
     ```
 
-    - Join on multiple fields using subMap
+    - Join on multiple fields using `subMap`
 
     ```groovy
     tumor_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
