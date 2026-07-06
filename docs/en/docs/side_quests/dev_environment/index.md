@@ -97,7 +97,7 @@ If you are using a Mac, some (not all) keyboard shortcuts will use "cmd" instead
 To install the extension manually:
 
 1. Open VS Code
-2. Go to the Extensions view by clicking the extensions icon to the left: ![extensions icon](../img/extensions_icon.png) (shortcut `Ctrl/Cmd+Shift+X` if you're running VSCode locally)
+2. Go to the Extensions view by clicking the extensions icon to the left: ![extensions icon](../img/extensions_icon.png) (shortcut `Ctrl/Cmd+Shift+X` if you're running VS Code locally)
 3. Search for "Nextflow"
 4. Install the official Nextflow extension
 
@@ -329,7 +329,7 @@ Now let's explore navigation in a more complex workflow using `complex_workflow.
 
 ### 4.2. Symbol Navigation
 
-With `complex_workflow.nf` still open, you can get an overview of all symbols in the file by typing `@` into the search bar at the top of VSCode (the keyboard shortcut is `Ctrl/Cmd+Shift+O`, but may not work in Codespaces). This opens the symbol navigation panel, which lists all symbols in the current file:
+With `complex_workflow.nf` still open, you can get an overview of all symbols in the file by typing `@` into the search bar at the top of VS Code (the keyboard shortcut is `Ctrl/Cmd+Shift+O`, but may not work in Codespaces). This opens the symbol navigation panel, which lists all symbols in the current file:
 
 ![Symbol navigation](../img/symbols.png)
 
@@ -543,7 +543,7 @@ If your project is a git repository (as this is), VS Code shows:
 - Inline diff views
 - Commit and push capabilities
 
-Open the Source Control panel using the source control button (![Source control icon](../img/source_control_icon.png)) (`Ctrl+Shift+G` or `Cmd+Shift+G` if you're working with VSCode locally) to see git changes and stage commits directly in the editor.
+Open the Source Control panel using the source control button (![Source control icon](../img/source_control_icon.png)) (`Ctrl+Shift+G` or `Cmd+Shift+G` if you're working with VS Code locally) to see git changes and stage commits directly in the editor.
 
 ![Source Control Panel](../img/source_control.png)
 
