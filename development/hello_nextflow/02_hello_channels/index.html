@@ -5468,7 +5468,6 @@ Have a look at the <code>results</code> directory to see if all the output greet
 <a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="go">└── output.txt</span>
 </code></pre></div>
 </details>
-<p>Yes! And they each have the expected contents.</p>
 <details class="abstract">
 <summary>File contents</summary>
 <div class="highlight"><span class="filename">Bonjour-output.txt</span><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">Bonjour</span>
@@ -5950,11 +5949,15 @@ We're going to update it to point to the CSV file containing our greetings.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-20">20</a></span>
 <span class="normal"><a href="#__codelineno-55-21">21</a></span>
 <span class="normal"><a href="#__codelineno-55-22">22</a></span>
-<span class="normal"><a href="#__codelineno-55-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-55-20" name="__codelineno-55-20"></a><span class="cm">/*</span>
+<span class="normal"><a href="#__codelineno-55-23">23</a></span>
+<span class="normal"><a href="#__codelineno-55-24">24</a></span>
+<span class="normal"><a href="#__codelineno-55-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-55-20" name="__codelineno-55-20"></a><span class="cm">/*</span>
 <a id="__codelineno-55-21" name="__codelineno-55-21"></a><span class="cm"> * Pipeline parameters</span>
 <a id="__codelineno-55-22" name="__codelineno-55-22"></a><span class="cm"> */</span>
-<a id="__codelineno-55-23" name="__codelineno-55-23"></a><span class="hll"><span class="nl">input:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Hola mundo!&#39;</span>
-</span></code></pre></div></td></tr></table></div>
+<a id="__codelineno-55-23" name="__codelineno-55-23"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-55-24" name="__codelineno-55-24"></a><span class="hll"><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Hola mundo!&#39;</span>
+</span><a id="__codelineno-55-25" name="__codelineno-55-25"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>

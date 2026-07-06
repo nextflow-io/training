@@ -5472,7 +5472,7 @@ For example, we could access the file ID with <code>id</code> or the txt file pa
 <p>As you can see, the process takes two separate inputs: a recording file and a character name.
 Importantly, we have values for both, but they are currently bundled inside each element in the channel.</p>
 <p>One way to extract multiple fields into separate channels is the <a href="https://www.nextflow.io/docs/latest/reference/operator.html#multimap"><code>multiMap</code></a> operator, which splits one channel into multiple named sub-channels in a single operation.</p>
-<h4 id="131-add-the-multimap-operation">1.3.1. Add the multiMap operation<a class="headerlink" href="#131-add-the-multimap-operation" title="Permanent link">&para;</a></h4>
+<h4 id="131-add-the-multimap-operation">1.3.1. Add the <code>multiMap</code> operation<a class="headerlink" href="#131-add-the-multimap-operation" title="Permanent link">&para;</a></h4>
 <p>Replace the <code>map</code> operation with <code>multiMap</code>:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">After</label><label for="__tabbed_2_2">Before</label></div>
 <div class="tabbed-content">
@@ -5507,7 +5507,7 @@ Importantly, we have values for both, but they are currently bundled inside each
 </div>
 </div>
 <p>The <code>multiMap</code> block defines two named sub-channels (<code>file</code> and <code>character</code>) from each row, which we can access as <code>ch_datasheet.file</code> and <code>ch_datasheet.character</code>.</p>
-<h4 id="132-call-cowpy-on-the-sub-channels">1.3.2. Call COWPY on the sub-channels<a class="headerlink" href="#132-call-cowpy-on-the-sub-channels" title="Permanent link">&para;</a></h4>
+<h4 id="132-call-cowpy-on-the-sub-channels">1.3.2. Call <code>COWPY</code> on the sub-channels<a class="headerlink" href="#132-call-cowpy-on-the-sub-channels" title="Permanent link">&para;</a></h4>
 <p>Now, include the <code>COWPY</code> process and give it each sub-channel as a separate argument:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">After</label><label for="__tabbed_3_2">Before</label></div>
 <div class="tabbed-content">
@@ -5693,7 +5693,7 @@ That could get annoying and messy.</p>
 <p>Good news: there is a simpler way to do this.</p>
 <h3 id="14-group-everything-as-a-single-input-to-the-process">1.4. Group everything as a single input to the process<a class="headerlink" href="#14-group-everything-as-a-single-input-to-the-process" title="Permanent link">&para;</a></h3>
 <p>Rather than splitting the fields into separate channels, we can update the process to receive all inputs as a single tuple, which simplifies the call to the process.</p>
-<h4 id="141-update-the-cowpy-process">1.4.1. Update the COWPY process<a class="headerlink" href="#141-update-the-cowpy-process" title="Permanent link">&para;</a></h4>
+<h4 id="141-update-the-cowpy-process">1.4.1. Update the <code>COWPY</code> process<a class="headerlink" href="#141-update-the-cowpy-process" title="Permanent link">&para;</a></h4>
 <p>Update <code>COWPY</code> to accept a tuple corresponding to the three elements in each row:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">After</label><label for="__tabbed_5_2">Before</label></div>
 <div class="tabbed-content">
@@ -5965,8 +5965,8 @@ Processes that accept this structure don't need to know or care how many metadat
 <a id="__codelineno-42-11" name="__codelineno-42-11"></a><span class="hll"><span class="w">    </span><span class="n">COWPY</span><span class="o">(</span><span class="n">ch_datasheet</span><span class="o">)</span>
 </span><a id="__codelineno-42-12" name="__codelineno-42-12"></a>
 <a id="__codelineno-42-13" name="__codelineno-42-13"></a><span class="w">    </span><span class="nl">publish:</span>
-<a id="__codelineno-42-14" name="__codelineno-42-14"></a><span class="w">    </span><span class="n">cowpy_art</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">COWPY</span><span class="o">.</span><span class="na">out</span>
-</code></pre></div></td></tr></table></div>
+<a id="__codelineno-42-14" name="__codelineno-42-14"></a><span class="hll"><span class="w">    </span><span class="n">cowpy_art</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">COWPY</span><span class="o">.</span><span class="na">out</span>
+</span></code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
@@ -6002,7 +6002,7 @@ Processes that accept this structure don't need to know or care how many metadat
 <a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="go">  /workspaces/training/side-quests/metadata/data/bonjour.txt</span>
 <a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a><span class="go">]</span>
 </code></pre></div>
-<p>If we later add a <code>language</code> column to the datasheet, it will become available as <code>meta.language</code> without requiring any changes to the process input definition.</p>
+<p>If we later add a <code>language</code> column to the datasheet and include it in the <code>map</code> operation (e.g. <code>language: row.language</code>), it becomes available as <code>meta.language</code> without requiring any changes to the process input definition.</p>
 <h4 id="153-update-the-cowpy-process-to-use-the-meta-map">1.5.3. Update the <code>COWPY</code> process to use the meta map<a class="headerlink" href="#153-update-the-cowpy-process-to-use-the-meta-map" title="Permanent link">&para;</a></h4>
 <p>Update <code>COWPY</code> to accept the <code>[meta, file]</code> tuple structure:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">After</label><label for="__tabbed_9_2">Before</label></div>
@@ -6864,8 +6864,8 @@ Checking the work directory's <code>.command.sh</code> file confirms the command
 <a id="__codelineno-88-3" name="__codelineno-88-3"></a>sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 <a id="__codelineno-88-4" name="__codelineno-88-4"></a>...
 </code></pre></div></td></tr></table></div>
-<p>The <code>character</code> key is never created in the meta map.
-When the process script evaluates <code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">meta</span><span class="o">.</span><span class="na">character</span><span class="o">}</span></code>, the missing key returns <code>null</code>, and Nextflow literally substitutes the string <code>null</code> into the command:</p>
+<p>Our <code>map</code> operation explicitly writes <code class="highlight"><span class="nl">character:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span></code>, so the <code>character</code> key is still created in the meta map, but accessing a column that doesn't exist on the parsed row returns <code>null</code>, so its value becomes <code>null</code>.
+When the process script evaluates <code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">meta</span><span class="o">.</span><span class="na">character</span><span class="o">}</span></code>, Nextflow literally substitutes the string <code>null</code> into the command:</p>
 <details class="failure">
 <summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>

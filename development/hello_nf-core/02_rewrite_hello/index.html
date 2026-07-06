@@ -5246,9 +5246,9 @@ Here, the equivalent <code>HELLO</code> workflow does not yet include any proces
 <a id="__codelineno-17-14" name="__codelineno-17-14"></a>
 <a id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="hll"><span class="n">workflow</span><span class="w"> </span><span class="n">HELLO</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-17-16" name="__codelineno-17-16"></a>
-<a id="__codelineno-17-17" name="__codelineno-17-17"></a><span class="w">    </span><span class="nl">take:</span>
-<a id="__codelineno-17-18" name="__codelineno-17-18"></a><span class="hll"><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="c1">// channel: samplesheet read in from --input</span>
-</span><a id="__codelineno-17-19" name="__codelineno-17-19"></a><span class="w">    </span><span class="n">outdir</span>
+<a id="__codelineno-17-17" name="__codelineno-17-17"></a><span class="hll"><span class="w">    </span><span class="nl">take:</span>
+</span><a id="__codelineno-17-18" name="__codelineno-17-18"></a><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="c1">// channel: samplesheet read in from --input</span>
+<a id="__codelineno-17-19" name="__codelineno-17-19"></a><span class="w">    </span><span class="n">outdir</span>
 <a id="__codelineno-17-20" name="__codelineno-17-20"></a>
 <a id="__codelineno-17-21" name="__codelineno-17-21"></a><span class="hll"><span class="w">    </span><span class="nl">main:</span>
 </span><a id="__codelineno-17-22" name="__codelineno-17-22"></a>
@@ -5669,7 +5669,7 @@ That is going to be defined in the parent workflow, also called the <strong>entr
 <h3 id="32-make-a-dummy-entrypoint-workflow">3.2. Make a dummy entrypoint workflow<a class="headerlink" href="#32-make-a-dummy-entrypoint-workflow" title="Permanent link">&para;</a></h3>
 <p>Before integrating our composable workflow into the complex nf-core scaffold, let's verify it works correctly.
 We can make a simple dummy entrypoint workflow to test the composable workflow in isolation.</p>
-<p>Create a blank file named <code>main.nf</code> in the same<code>original-hello</code> directory.</p>
+<p>Create a blank file named <code>main.nf</code> in the same <code>original-hello</code> directory.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>touch<span class="w"> </span>original-hello/main.nf
 </code></pre></div>
 <p>Copy the following code into the <code>main.nf</code> file.</p>
@@ -5748,7 +5748,7 @@ If we had named the entrypoint workflow <code>something_else.nf</code>, we would
 <a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a><span class="go">Output: /workspaces/training/hello-nf-core/work/07/bfc7061fa521e86f4e1954191ab4c4/cowpy-COLLECTED-test-batch-output.txt</span>
 </code></pre></div>
 </details>
-<p>This means we've successfully upgraded our HELLO workflow to be composable.</p>
+<p>This means we've successfully upgraded our <code>HELLO</code> workflow to be composable.</p>
 <h3 id="takeaway_2">Takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
 <p>You know how to make a workflow composable by giving it a name and adding <code>take</code>, <code>main</code> and <code>emit</code> statements, and how to call it from an entrypoint workflow.</p>
 <h3 id="whats-next_2">What's next?<a class="headerlink" href="#whats-next_2" title="Permanent link">&para;</a></h3>
@@ -6265,7 +6265,7 @@ This ordering makes sense because in a real pipeline, the processes would emit v
 </div>
 </div>
 </div>
-<p>This concludes the modifications we need to make to the HELLO workflow itself.
+<p>This concludes the modifications we need to make to the <code>HELLO</code> workflow itself.
 At this point, we have achieved the overall code structure we set out to implement.</p>
 <h3 id="takeaway_3">Takeaway<a class="headerlink" href="#takeaway_3" title="Permanent link">&para;</a></h3>
 <p>You know how to fit the core pieces of a composable workflow into an nf-core placeholder workflow.</p>
@@ -6452,7 +6452,7 @@ So let's have a look at the top level <code>main.nf</code> entrypoint workflow t
 <p>The nf-core project makes heavy use of nested subworkflows, so this bit can be a little confusing on first approach.</p>
 <p>What matters here is that there are two workflows defined:</p>
 <ul>
-<li><code>CORE_HELLO</code> is a thin wrapper for running the HELLO workflow we just finished adapting in <code>core-hello/workflows/hello.nf</code>.</li>
+<li><code>CORE_HELLO</code> is a thin wrapper for running the <code>HELLO</code> workflow we just finished adapting in <code>core-hello/workflows/hello.nf</code>.</li>
 <li>An unnamed workflow that calls <code>CORE_HELLO</code> as well as two other subworkflows, <code>PIPELINE_INITIALISATION</code> and <code>PIPELINE_COMPLETION</code>.</li>
 </ul>
 <p>Here is a diagram of how they relate to each other:</p>
@@ -6521,7 +6521,7 @@ So let's have a look at the top level <code>main.nf</code> entrypoint workflow t
 <a id="__codelineno-53-101" name="__codelineno-53-101"></a><span class="w">    </span><span class="n">samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_samplesheet</span>
 <a id="__codelineno-53-102" name="__codelineno-53-102"></a><span class="w">    </span><span class="n">versions</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span>
 </code></pre></div></td></tr></table></div>
-<p>This is the channel factory that parses the samplesheet and passes it on in a form that is ready to be consumed by the HELLO workflow.</p>
+<p>This is the channel factory that parses the samplesheet and passes it on in a form that is ready to be consumed by the <code>HELLO</code> workflow.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>The syntax above is a little different from what we've used previously, but basically this:</p>
@@ -6663,8 +6663,8 @@ Typically small test files are stored in the <code>assets</code> directory, so l
 <a id="__codelineno-60-24" name="__codelineno-60-24"></a>
 <a id="__codelineno-60-25" name="__codelineno-60-25"></a><span class="w">    </span><span class="c1">// Input data</span>
 <a id="__codelineno-60-26" name="__codelineno-60-26"></a><span class="hll"><span class="w">    </span><span class="n">input</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/assets/greetings.csv&quot;</span>
-</span><a id="__codelineno-60-27" name="__codelineno-60-27"></a><span class="hll">
-</span><a id="__codelineno-60-28" name="__codelineno-60-28"></a><span class="hll"><span class="w">    </span><span class="c1">// Other parameters</span>
+</span><a id="__codelineno-60-27" name="__codelineno-60-27"></a>
+<a id="__codelineno-60-28" name="__codelineno-60-28"></a><span class="hll"><span class="w">    </span><span class="c1">// Other parameters</span>
 </span><a id="__codelineno-60-29" name="__codelineno-60-29"></a><span class="hll"><span class="w">    </span><span class="n">batch</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;test&#39;</span>
 </span><a id="__codelineno-60-30" name="__codelineno-60-30"></a><span class="hll"><span class="w">    </span><span class="n">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;tux&#39;</span>
 </span><a id="__codelineno-60-31" name="__codelineno-60-31"></a><span class="o">}</span>
@@ -6815,7 +6815,7 @@ As a result, Boolean parameters must be set in a config file or a <code>-params-
 <a id="__codelineno-68-34" name="__codelineno-68-34" href="#__codelineno-68-34"></a><span class="go">-[core/hello] Pipeline completed successfully-</span>
 </code></pre></div>
 </details>
-<p>As you can see, this produced the typical nf-core summary at the start thanks to the initialisation subworkflow, and the lines for each module now show the full PIPELINE:WORKFLOW:module names.</p>
+<p>As you can see, this produced the typical nf-core summary at the start thanks to the initialisation subworkflow, and the lines for each module now show the full <code>PIPELINE:WORKFLOW:module</code> names.</p>
 <h3 id="56-find-the-pipeline-outputs">5.6. Find the pipeline outputs<a class="headerlink" href="#56-find-the-pipeline-outputs" title="Permanent link">&para;</a></h3>
 <p>The question now is: where are the outputs of the pipeline?
 And the answer is quite interesting: there are now two different places to look for the results.</p>

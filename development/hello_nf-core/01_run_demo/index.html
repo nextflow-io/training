@@ -5065,38 +5065,36 @@ To that end, Nextflow supports multiple ways of controlling pipeline configurati
 <a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>
 <a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a><span class="go">  nextflow run nf-core/demo -profile &lt;docker/singularity/.../institute&gt; --input samplesheet.csv --outdir &lt;OUTDIR&gt;</span>
 <a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a>
-<a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a><span class="go">parameter will be printed.</span>
-<a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a>
-<a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a><span class="go">Input/output options</span>
-<a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a><span class="go">  --input                       [string] Path to a metadata file containing information about the samples in the experiment.</span>
-<a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a><span class="go">  --outdir                      [string] The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.</span>
-<a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a>
-<a id="__codelineno-22-24" name="__codelineno-22-24" href="#__codelineno-22-24"></a><span class="go">  --email                       [string] Email address for completion summary.</span>
-<a id="__codelineno-22-25" name="__codelineno-22-25" href="#__codelineno-22-25"></a><span class="go">  --multiqc_title               [string] MultiQC report title. Printed as page header, used for filename if not otherwise specified.</span>
-<a id="__codelineno-22-26" name="__codelineno-22-26" href="#__codelineno-22-26"></a>
-<a id="__codelineno-22-27" name="__codelineno-22-27" href="#__codelineno-22-27"></a><span class="go">Reference genome options</span>
-<a id="__codelineno-22-28" name="__codelineno-22-28" href="#__codelineno-22-28"></a><span class="go">  --genome                      [string] Name of iGenomes reference.</span>
-<a id="__codelineno-22-29" name="__codelineno-22-29" href="#__codelineno-22-29"></a><span class="go">  --fasta                       [string] Path to FASTA genome file.</span>
-<a id="__codelineno-22-30" name="__codelineno-22-30" href="#__codelineno-22-30"></a>
-<a id="__codelineno-22-31" name="__codelineno-22-31" href="#__codelineno-22-31"></a><span class="go">Process skipping options</span>
-<a id="__codelineno-22-32" name="__codelineno-22-32" href="#__codelineno-22-32"></a><span class="go">  --skip_trim                   [boolean] Skip trimming fastq files with seqtk</span>
-<a id="__codelineno-22-33" name="__codelineno-22-33" href="#__codelineno-22-33"></a>
-<a id="__codelineno-22-34" name="__codelineno-22-34" href="#__codelineno-22-34"></a><span class="go">Generic options</span>
-<a id="__codelineno-22-35" name="__codelineno-22-35" href="#__codelineno-22-35"></a><span class="go">  --multiqc_methods_description [string]          Custom MultiQC yaml file containing HTML including a methods description.</span>
-<a id="__codelineno-22-36" name="__codelineno-22-36" href="#__codelineno-22-36"></a><span class="go">  --help                        [boolean, string] Display the help message.</span>
-<a id="__codelineno-22-37" name="__codelineno-22-37" href="#__codelineno-22-37"></a><span class="go">  --help_full                   [boolean]         Display the full detailed help message.</span>
-<a id="__codelineno-22-38" name="__codelineno-22-38" href="#__codelineno-22-38"></a><span class="go">  --show_hidden                 [boolean]         Display hidden parameters in the help message (only works when --help or --help_full are provided).</span>
-<a id="__codelineno-22-39" name="__codelineno-22-39" href="#__codelineno-22-39"></a><span class="go">!! Hiding 19 param(s), use the `--showHidden` parameter to show them !!</span>
-<a id="__codelineno-22-40" name="__codelineno-22-40" href="#__codelineno-22-40"></a><span class="go">------------------------------------------------------</span>
-<a id="__codelineno-22-41" name="__codelineno-22-41" href="#__codelineno-22-41"></a>
-<a id="__codelineno-22-42" name="__codelineno-22-42" href="#__codelineno-22-42"></a><span class="go">* The pipeline</span>
-<a id="__codelineno-22-43" name="__codelineno-22-43" href="#__codelineno-22-43"></a><span class="go">    https://doi.org/10.5281/zenodo.12192442</span>
-<a id="__codelineno-22-44" name="__codelineno-22-44" href="#__codelineno-22-44"></a>
-<a id="__codelineno-22-45" name="__codelineno-22-45" href="#__codelineno-22-45"></a><span class="go">* The nf-core framework</span>
-<a id="__codelineno-22-46" name="__codelineno-22-46" href="#__codelineno-22-46"></a><span class="go">    https://doi.org/10.1038/s41587-020-0439-x</span>
-<a id="__codelineno-22-47" name="__codelineno-22-47" href="#__codelineno-22-47"></a>
-<a id="__codelineno-22-48" name="__codelineno-22-48" href="#__codelineno-22-48"></a><span class="go">* Software dependencies</span>
-<a id="__codelineno-22-49" name="__codelineno-22-49" href="#__codelineno-22-49"></a><span class="go">    https://github.com/nf-core/demo/blob/master/CITATIONS.md</span>
+<a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a><span class="go">Input/output options</span>
+<a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a><span class="go">  --input                       [string] Path to a metadata file containing information about the samples in the experiment.</span>
+<a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a><span class="go">  --outdir                      [string] The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.</span>
+<a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a>
+<a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a><span class="go">  --email                       [string] Email address for completion summary.</span>
+<a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a><span class="go">  --multiqc_title               [string] MultiQC report title. Printed as page header, used for filename if not otherwise specified.</span>
+<a id="__codelineno-22-24" name="__codelineno-22-24" href="#__codelineno-22-24"></a>
+<a id="__codelineno-22-25" name="__codelineno-22-25" href="#__codelineno-22-25"></a><span class="go">Reference genome options</span>
+<a id="__codelineno-22-26" name="__codelineno-22-26" href="#__codelineno-22-26"></a><span class="go">  --genome                      [string] Name of iGenomes reference.</span>
+<a id="__codelineno-22-27" name="__codelineno-22-27" href="#__codelineno-22-27"></a><span class="go">  --fasta                       [string] Path to FASTA genome file.</span>
+<a id="__codelineno-22-28" name="__codelineno-22-28" href="#__codelineno-22-28"></a>
+<a id="__codelineno-22-29" name="__codelineno-22-29" href="#__codelineno-22-29"></a><span class="go">Process skipping options</span>
+<a id="__codelineno-22-30" name="__codelineno-22-30" href="#__codelineno-22-30"></a><span class="go">  --skip_trim                   [boolean] Skip trimming fastq files with seqtk</span>
+<a id="__codelineno-22-31" name="__codelineno-22-31" href="#__codelineno-22-31"></a>
+<a id="__codelineno-22-32" name="__codelineno-22-32" href="#__codelineno-22-32"></a><span class="go">Generic options</span>
+<a id="__codelineno-22-33" name="__codelineno-22-33" href="#__codelineno-22-33"></a><span class="go">  --multiqc_methods_description [string]          Custom MultiQC yaml file containing HTML including a methods description.</span>
+<a id="__codelineno-22-34" name="__codelineno-22-34" href="#__codelineno-22-34"></a><span class="go">  --help                        [boolean, string] Display the help message.</span>
+<a id="__codelineno-22-35" name="__codelineno-22-35" href="#__codelineno-22-35"></a><span class="go">  --help_full                   [boolean]         Display the full detailed help message.</span>
+<a id="__codelineno-22-36" name="__codelineno-22-36" href="#__codelineno-22-36"></a><span class="go">  --show_hidden                 [boolean]         Display hidden parameters in the help message (only works when --help or --help_full are provided).</span>
+<a id="__codelineno-22-37" name="__codelineno-22-37" href="#__codelineno-22-37"></a><span class="go">!! Hiding 19 param(s), use the `--showHidden` parameter to show them !!</span>
+<a id="__codelineno-22-38" name="__codelineno-22-38" href="#__codelineno-22-38"></a><span class="go">------------------------------------------------------</span>
+<a id="__codelineno-22-39" name="__codelineno-22-39" href="#__codelineno-22-39"></a>
+<a id="__codelineno-22-40" name="__codelineno-22-40" href="#__codelineno-22-40"></a><span class="go">* The pipeline</span>
+<a id="__codelineno-22-41" name="__codelineno-22-41" href="#__codelineno-22-41"></a><span class="go">    https://doi.org/10.5281/zenodo.12192442</span>
+<a id="__codelineno-22-42" name="__codelineno-22-42" href="#__codelineno-22-42"></a>
+<a id="__codelineno-22-43" name="__codelineno-22-43" href="#__codelineno-22-43"></a><span class="go">* The nf-core framework</span>
+<a id="__codelineno-22-44" name="__codelineno-22-44" href="#__codelineno-22-44"></a><span class="go">    https://doi.org/10.1038/s41587-020-0439-x</span>
+<a id="__codelineno-22-45" name="__codelineno-22-45" href="#__codelineno-22-45"></a>
+<a id="__codelineno-22-46" name="__codelineno-22-46" href="#__codelineno-22-46"></a><span class="go">* Software dependencies</span>
+<a id="__codelineno-22-47" name="__codelineno-22-47" href="#__codelineno-22-47"></a><span class="go">    https://github.com/nf-core/demo/blob/master/CITATIONS.md</span>
 </code></pre></div>
 </details>
 <p>As you can see, the output groups parameters into categories (Input/output options, Reference genome options, etc.) with types and descriptions for each one.</p>

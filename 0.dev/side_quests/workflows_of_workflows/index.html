@@ -4684,9 +4684,9 @@ It hardcodes the input names, chains three processes, and publishes two outputs.
 </details>
 <p>To make it composable with other workflows, a few things need to change.</p>
 <h3 id="12-make-the-workflow-composable">1.2. Make the workflow composable<a class="headerlink" href="#12-make-the-workflow-composable" title="Permanent link">&para;</a></h3>
-<p>To make a workflow composable, four things need to change:
-the workflow gets a name, inputs move to a <code>take:</code> block, outputs move to an <code>emit:</code> block,
-and the standalone <code>publish:</code>/<code>output {}</code> blocks are removed (they belong in the entry workflow).</p>
+<p>To make a workflow composable, three things need to change:
+the workflow gets a name, inputs move to a <code>take:</code> block, and outputs move to an <code>emit:</code> block
+(replacing the standalone <code>publish:</code>/<code>output {}</code> blocks, which belong in the entry workflow instead).</p>
 <p>Let's walk through these changes one by one.</p>
 <h4 id="121-name-the-workflow">1.2.1. Name the workflow<a class="headerlink" href="#121-name-the-workflow" title="Permanent link">&para;</a></h4>
 <p>Give the workflow a name so it can be imported from a parent workflow.</p>
@@ -5079,7 +5079,7 @@ The main workflow calls <code>GREETING_WORKFLOW</code> and wires its output dire
 <a id="__codelineno-26-3" name="__codelineno-26-3"></a>
 <a id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="hll"><span class="n">workflow</span><span class="w"> </span><span class="n">TRANSFORM_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="hll"><span class="w">    </span><span class="nl">take:</span>
-</span><a id="__codelineno-26-6" name="__codelineno-26-6"></a><span class="hll"><span class="w">    </span><span class="n">input_ch</span><span class="w"> </span><span class="c1">// Input channel with messages</span>
+</span><a id="__codelineno-26-6" name="__codelineno-26-6"></a><span class="hll"><span class="w">    </span><span class="n">input_ch</span><span class="w"> </span><span class="c1">// Input channel with greetings</span>
 </span><a id="__codelineno-26-7" name="__codelineno-26-7"></a>
 <a id="__codelineno-26-8" name="__codelineno-26-8"></a><span class="hll"><span class="w">    </span><span class="nl">main:</span>
 </span><a id="__codelineno-26-9" name="__codelineno-26-9"></a><span class="w">    </span><span class="c1">// Apply transformations in sequence</span>

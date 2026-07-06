@@ -5687,7 +5687,7 @@ We were only expecting one, but there are three.</p>
 <p>Now have a look at the contents of the final output file.</p>
 <details class="abstract">
 <summary>File contents</summary>
-<div class="highlight"><span class="filename">results/COLLECTED-output.txt</span><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">Hola</span>
+<div class="highlight"><span class="filename">results/hello_workflow/COLLECTED-output.txt</span><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">HOLA</span>
 </code></pre></div>
 </details>
 <p>Oh no. The collection step was run individually on each greeting, which is NOT what we wanted.</p>
@@ -5795,7 +5795,7 @@ Looking at the output of the <code>view()</code> statements, we see the followin
 <p>Finally, you can have a look at the contents of the output file to satisfy yourself that everything worked correctly.</p>
 <details class="abstract">
 <summary>File contents</summary>
-<div class="highlight"><span class="filename">results/COLLECTED-output.txt</span><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="go">BONJOUR</span>
+<div class="highlight"><span class="filename">results/hello_workflow/COLLECTED-output.txt</span><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="go">BONJOUR</span>
 <a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="go">HELLO</span>
 <a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="go">HOLA</span>
 </code></pre></div>
@@ -6027,7 +6027,7 @@ Let's use that to declare a <code>batch</code> parameter (with a default value b
 <p>It runs successfully and produces the desired output:</p>
 <details class="abstract">
 <summary>File contents</summary>
-<div class="highlight"><span class="filename">results/COLLECTED-trio-output.txt</span><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="go">HELLO</span>
+<div class="highlight"><span class="filename">results/hello_workflow/COLLECTED-trio-output.txt</span><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="go">HELLO</span>
 <a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a><span class="go">BONJOUR</span>
 <a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a><span class="go">HOLA</span>
 </code></pre></div>
@@ -6463,7 +6463,7 @@ When providing multiple inputs to a process, what must be true?
 - [x] The order of inputs must match the order defined in the input block
 - [ ] Only two inputs can be provided at a time
 
-Learn more: [3. Pass more than one input to a process](#3-pass-more-than-one-input-to-a-process)
+Learn more: [3. Pass additional parameters to a process](#3-pass-additional-parameters-to-a-process)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -6477,7 +6477,7 @@ Learn more: [3. Pass more than one input to a process](#3-pass-more-than-one-inp
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Learn more: <a href="#3-pass-more-than-one-input-to-a-process">3. Pass more than one input to a process</a></p></section>
+    <section class="content hidden"><p>Learn more: <a href="#3-pass-additional-parameters-to-a-process">3. Pass additional parameters to a process</a></p></section>
 </div><div id="quiz-progress-sidebar" aria-label="Quiz Progress" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">
