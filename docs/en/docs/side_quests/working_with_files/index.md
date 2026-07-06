@@ -843,15 +843,10 @@ A naive way to do that would be to combine the `file()` method with [`channel.of
 
 ```groovy title="Syntax example"
 ch_files = channel.of([file('data/patientA_rep1_normal_R1_001.fastq.gz')],
-                      [file('data/patientA_rep1_normal_R1_001.fastq.gz')])
+                      [file('data/patientA_rep1_normal_R2_001.fastq.gz')])
 ```
 
 That works, but it's clunky.
-
-!!! tip "When to use `file()` vs `channel.fromPath()`"
-
-    - Use `file()` when you need a single Path object for direct manipulation (checking if a file exists, reading its attributes, or passing to a single process invocation)
-    - Use `channel.fromPath()` when you need a channel that can hold multiple files, especially with glob patterns, or when files will flow through multiple processes
 
 This is where [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#frompath) comes in: a convenient channel factory that bundles all the functionality we need to generate a channel from one or more static file strings as well as glob patterns.
 
@@ -924,6 +919,11 @@ As you can see, the file path is being loaded as a `Path` type object in the cha
 This is similar to what `file()` would have done, except now we have a channel that we can load more files into if we want.
 
 Using `channel.fromPath()` is a convenient way of creating a new channel populated by a list of files.
+
+!!! tip "When to use `file()` vs `channel.fromPath()`"
+
+    - Use `file()` when you need a single Path object for direct manipulation (checking if a file exists, reading its attributes, or passing to a single process invocation)
+    - Use `channel.fromPath()` when you need a channel that can hold multiple files, especially with glob patterns, or when files will flow through multiple processes
 
 ### 3.2. View attributes of files in channel
 
