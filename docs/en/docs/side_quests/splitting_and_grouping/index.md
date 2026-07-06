@@ -1203,31 +1203,31 @@ Mastering these channel operations will enable you to build flexible, scalable p
     - Join two channels by key (first element of tuple)
 
     ```groovy
-    normal_ch.join(tumor_ch)
+    ch_normal_samples.join(ch_tumor_samples)
     ```
 
     - Extract joining key and join by this value
 
     ```groovy
-    normal_ch.map { meta, file -> [meta.id, meta, file] }
+    ch_normal_samples.map { meta, file -> [meta.id, meta, file] }
         .join(
-          tumor_ch.map { meta, file -> [meta.id, meta, file] }
+          ch_tumor_samples.map { meta, file -> [meta.id, meta, file] }
         )
     ```
 
     - Join on multiple fields using `subMap`
 
     ```groovy
-    normal_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+    ch_normal_samples.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
         .join(
-          tumor_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+          ch_tumor_samples.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
         )
     ```
 
 4.  **Distributing across intervals:** We used `combine` to create Cartesian products of samples with genomic intervals for parallel processing.
 
     ```groovy
-    samples_ch.combine(intervals_ch)
+    ch_joined_samples.combine(ch_intervals)
     ```
 
 5.  **Aggregating by grouping keys:** We used `groupTuple` to group by the first element in each tuple, thereby collecting samples sharing `id` and `interval` fields and merging technical replicates.

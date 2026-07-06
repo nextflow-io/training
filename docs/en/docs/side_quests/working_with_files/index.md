@@ -2187,7 +2187,7 @@ Applying these techniques in your own work will enable you to build more efficie
 5.  **Simplifying with channel.fromFilePairs:** We used `channel.fromFilePairs()` to automatically pair related files and extract metadata from paired file IDs.
 
     ```groovy
-    ch_pairs = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
+    ch_files = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
     ```
 
 6.  **Using File Operations in Processes:** We integrated file operations into Nextflow processes with proper input handling, using the `output {}` block to organize outputs based on metadata.
