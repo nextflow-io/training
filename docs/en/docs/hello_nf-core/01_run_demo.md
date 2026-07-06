@@ -548,8 +548,6 @@ nextflow run nf-core/demo --help
 
       nextflow run nf-core/demo -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>
 
-    parameter will be printed.
-
     Input/output options
       --input                       [string] Path to a metadata file containing information about the samples in the experiment.
       --outdir                      [string] The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.
