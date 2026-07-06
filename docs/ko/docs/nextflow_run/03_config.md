@@ -118,7 +118,7 @@ nextflow run 3-main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
 
@@ -137,7 +137,7 @@ nextflow run 3-main.nf
 
     ```console title="results/3-main/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -217,7 +217,7 @@ nextflow run ../3-main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `../3-main.nf` [trusting_escher] DSL2 - revision: 356df0818d
 
@@ -240,7 +240,7 @@ nextflow run ../3-main.nf
     _________
     / HELLO   \
     | BONJOUR |
-    \ HOLà    /
+    \ HOLA    /
     ---------
       \
         \
@@ -307,7 +307,7 @@ nextflow run 3-main.nf -params-file test-params.yaml
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
@@ -325,7 +325,7 @@ nextflow run 3-main.nf -params-file test-params.yaml
     ```console title="results/3-main/cowpy-COLLECTED-yaml-output.txt"
     _________
     / HELLO   \
-    | HOLà    |
+    | HOLA    |
     \ BONJOUR /
     ---------
     \                             .       .
@@ -494,7 +494,7 @@ nextflow run 3-main.nf --batch outdir
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [amazing_church] DSL2 - revision: 6e18cd130e
 
@@ -516,10 +516,10 @@ nextflow run 3-main.nf --batch outdir
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-outdir-output.txt
     │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
+    │   ├── Hola-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     └── outdir-report.txt
     ```
 
@@ -602,7 +602,7 @@ nextflow run 3-main.nf --batch pnames
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [jovial_mcclintock] DSL2 - revision: ede9037d02
 
@@ -625,13 +625,13 @@ nextflow run 3-main.nf --batch pnames
     ├── convertToUpper
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     ├── cowpy
     │   └── cowpy-COLLECTED-pnames-output.txt
     └── sayHello
         ├── Bonjour-output.txt
         ├── Hello-output.txt
-        └── Holà-output.txt
+        └── Hola-output.txt
     ```
 
 !!! note "참고"
@@ -734,7 +734,7 @@ nextflow run 3-main.nf --batch outmode
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [rowdy_sagan] DSL2 - revision: ede9037d02
 
@@ -758,13 +758,13 @@ nextflow run 3-main.nf --batch outmode
     ├── convertToUpper
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     ├── cowpy
     │   └── cowpy-COLLECTED-outmode-output.txt
     └── sayHello
         ├── Bonjour-output.txt
         ├── Hello-output.txt
-        └── Holà-output.txt
+        └── Hola-output.txt
     ```
 
 출력별 모드 설정 방식을 여전히 사용하고 싶은 주된 이유는 동일한 workflow 내에서 혼합하여 사용하려는 경우입니다. 즉, 일부 출력은 복사하고 일부는 symlink로 연결하는 경우입니다.
@@ -868,7 +868,7 @@ nextflow run 3-main.nf --batch conda
 ??? success "명령 출력"
 
     ```console title="Output"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
 
@@ -1215,7 +1215,7 @@ nextflow run 3-main.nf -profile my_laptop
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
@@ -1303,7 +1303,7 @@ nextflow run 3-main.nf -profile my_laptop,test
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [jovial_coulomb] DSL2 - revision: 46a6763141
 
@@ -1320,7 +1320,7 @@ nextflow run 3-main.nf -profile my_laptop,test
 
     ```console title="results_config/test/"
      _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -1349,7 +1349,7 @@ nextflow run 3-main.nf -profile my_laptop,test
     외부에 저장된 대용량 파일에 대한 URL을 가리킬 수 있습니다.
     Nextflow는 열린 연결이 있는 한 자동으로 다운로드합니다.
 
-    자세한 내용은 Side Quest [Working with Files](../side_quests/working_with_files.md)를 참조하세요.
+    자세한 내용은 Side Quest [Working with Files](../side_quests/working_with_files/index.md)를 참조하세요.
 
 ### 6.3. `nextflow config`를 사용하여 해결된 설정 확인
 
@@ -1488,7 +1488,7 @@ nextflow run nextflow-io/hello
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Pulling nextflow-io/hello ...
      downloaded from https://github.com/nextflow-io/hello.git
@@ -1520,7 +1520,7 @@ nextflow run nextflow-io/hello -r v1.3
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `https://github.com/nextflow-io/hello` [sick_carson] DSL2 - revision: 2ce0b0e294 [v1.3]
 

@@ -14,7 +14,7 @@ additional_information:
   audience_prerequisites:
     - "**Audiencia:** Este curso está diseñado para investigadores en genómica y campos relacionados que desean desarrollar o personalizar pipelines de análisis de datos."
     - "**Habilidades:** Se asume cierta familiaridad con la línea de comandos, conceptos básicos de scripting y formatos comunes de archivos genómicos."
-    - "**Requisitos previos:** Conceptos fundamentales de Nextflow y herramientas cubiertas en [Hello Nextflow](../../hello_nextflow/)."
+    - "**Requisitos previos:** Conceptos fundamentales de Nextflow y herramientas cubiertas en [Hello Nextflow](../../hello_nextflow/index.md)."
 ---
 
 # Nextflow para Genómica
@@ -23,7 +23,7 @@ additional_information:
 
 **Un curso práctico que aplica Nextflow a un caso de uso real en genómica: llamado de variantes con GATK.**
 
-Este curso se basa en la capacitación para principiantes [Hello Nextflow](../../hello_nextflow/) y demuestra cómo usar Nextflow en el contexto específico del dominio de la genómica.
+Este curso se basa en la capacitación para principiantes [Hello Nextflow](../../hello_nextflow/index.md) y demuestra cómo usar Nextflow en el contexto específico del dominio de la genómica.
 Implementarás un pipeline de llamado de variantes con [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), un paquete de software ampliamente utilizado para analizar datos de secuenciación de alto rendimiento.
 
 <!-- additional_information -->

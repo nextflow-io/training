@@ -118,7 +118,7 @@ nextflow run 3-main.nf
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
 
@@ -137,7 +137,7 @@ La salida final de arte ASCII está en el directorio `results/3-main/`, bajo el 
 
     ```console title="results/3-main/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -217,7 +217,7 @@ nextflow run ../3-main.nf
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `../3-main.nf` [trusting_escher] DSL2 - revision: 356df0818d
 
@@ -240,7 +240,7 @@ El archivo de salida final debería contener el personaje tux diciendo los salud
     _________
     / HELLO   \
     | BONJOUR |
-    \ HOLà    /
+    \ HOLA    /
     ---------
       \
         \
@@ -291,7 +291,7 @@ Este archivo de parámetros contiene un par clave-valor para cada una de las ent
 Note el uso de dos puntos (`:`) en lugar de signos de igual (`=`) si compara la sintaxis con el archivo de configuración.
 El archivo config está escrito en Groovy, mientras que el archivo de parámetros está escrito en YAML.
 
-!!! info "Información"
+!!! info "Info"
 
     También proporcionamos una versión JSON del archivo de parámetros como ejemplo pero no vamos a ejecutar con él aquí.
     Siéntase libre de probar ese por su cuenta.
@@ -307,7 +307,7 @@ nextflow run 3-main.nf -params-file test-params.yaml
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
@@ -325,7 +325,7 @@ El archivo de salida final debería contener el personaje stegosaurus diciendo l
     ```console title="results/3-main/cowpy-COLLECTED-yaml-output.txt"
     _________
     / HELLO   \
-    | HOLà    |
+    | HOLA    |
     \ BONJOUR /
     ---------
     \                             .       .
@@ -494,7 +494,7 @@ nextflow run 3-main.nf --batch outdir
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [amazing_church] DSL2 - revision: 6e18cd130e
 
@@ -507,7 +507,7 @@ nextflow run 3-main.nf --batch outdir
 
 Esto todavía produce la misma salida que anteriormente, excepto que esta vez encontramos nuestras salidas bajo `results_config/outdir/`.
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console
     results_config/outdir
@@ -516,10 +516,10 @@ Esto todavía produce la misma salida que anteriormente, excepto que esta vez en
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-outdir-output.txt
     │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
+    │   ├── Hola-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     └── outdir-report.txt
     ```
 
@@ -602,7 +602,7 @@ nextflow run 3-main.nf --batch pnames
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [jovial_mcclintock] DSL2 - revision: ede9037d02
 
@@ -615,7 +615,7 @@ nextflow run 3-main.nf --batch pnames
 
 Esto todavía produce la misma salida que anteriormente, excepto que esta vez encontramos nuestras salidas bajo `results_config/pnames/`, y están agrupadas por process.
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console
     results_config/pnames/
@@ -625,13 +625,13 @@ Esto todavía produce la misma salida que anteriormente, excepto que esta vez en
     ├── convertToUpper
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     ├── cowpy
     │   └── cowpy-COLLECTED-pnames-output.txt
     └── sayHello
         ├── Bonjour-output.txt
         ├── Hello-output.txt
-        └── Holà-output.txt
+        └── Hola-output.txt
     ```
 
 !!! note "Nota"
@@ -734,7 +734,7 @@ nextflow run 3-main.nf --batch outmode
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [rowdy_sagan] DSL2 - revision: ede9037d02
 
@@ -748,7 +748,7 @@ nextflow run 3-main.nf --batch outmode
 Esto todavía produce la misma salida que anteriormente, excepto que esta vez encontramos nuestras salidas bajo `results_config/outmode/`.
 Todavía son todas copias propias, no symlinks.
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console
     results_config/outmode/
@@ -758,13 +758,13 @@ Todavía son todas copias propias, no symlinks.
     ├── convertToUpper
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     ├── cowpy
     │   └── cowpy-COLLECTED-outmode-output.txt
     └── sayHello
         ├── Bonjour-output.txt
         ├── Hello-output.txt
-        └── Holà-output.txt
+        └── Hola-output.txt
     ```
 
 La razón principal por la que aún podría querer usar la forma de establecer el modo por salida es si quiere mezclar y combinar dentro del mismo workflow, _es decir_, tener algunas salidas copiadas y otras como symlinks.
@@ -867,8 +867,8 @@ nextflow run 3-main.nf --batch conda
 
 ??? success "Salida del comando"
 
-    ```console title="Salida"
-    N E X T F L O W   ~  version 25.10.2
+    ```console title="Output"
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
 
@@ -883,7 +883,7 @@ Esto debería funcionar sin problemas y producir las mismas salidas que anterior
 
 Detrás de escena, Nextflow ha recuperado los paquetes Conda y creado el entorno, lo cual normalmente requiere un poco de trabajo; ¡así que es bueno que no tengamos que hacer nada de eso nosotros mismos!
 
-!!! info "Información"
+!!! info "Info"
 
     Esto se ejecuta rápidamente porque el paquete `cowpy` es bastante pequeño, pero si está trabajando con paquetes grandes, puede tomar un poco más de tiempo de lo usual la primera vez, y puede ver que la salida de la consola se queda 'atascada' por un minuto o más antes de completarse.
     Esto es normal y se debe al trabajo extra que Nextflow hace la primera vez que usa un paquete nuevo.
@@ -931,7 +931,7 @@ Nextflow soporta [muchos backends de ejecución diferentes](https://nextflow.io/
 La elección del executor se establece mediante una directiva de process llamada `executor`.
 Por defecto está establecido a `local`, así que la siguiente configuración está implícita:
 
-```groovy title="Configuración incorporada"
+```groovy title="Built-in configuration"
 process {
     executor = 'local'
 }
@@ -959,7 +959,7 @@ Desafortunadamente, cada uno de estos sistemas usa diferentes tecnologías, sint
 
     Por ejemplo, el mismo trabajo que requiere 8 CPUs y 4GB de RAM para ser ejecutado en la cola "my-science-work" necesita expresarse de diferentes maneras dependiendo del backend.
 
-    ```bash title="Config para SLURM / enviar usando sbatch"
+    ```bash title="Config for SLURM / submit using sbatch"
     #SBATCH -o /path/to/my/task/directory/my-task-1.log
     #SBATCH --no-requeue
     #SBATCH -c 8
@@ -967,7 +967,7 @@ Desafortunadamente, cada uno de estos sistemas usa diferentes tecnologías, sint
     #SBATCH -p my-science-work
     ```
 
-    ```bash title="Config para PBS / enviar usando qsub"
+    ```bash title="Config for PBS / submit using qsub"
     #PBS -o /path/to/my/task/directory/my-task-1.log
     #PBS -j oe
     #PBS -q my-science-work
@@ -975,7 +975,7 @@ Desafortunadamente, cada uno de estos sistemas usa diferentes tecnologías, sint
     #PBS -l mem=4gb
     ```
 
-    ```bash title="Config para SGE / enviar usando qsub"
+    ```bash title="Config for SGE / submit using qsub"
     #$ -o /path/to/my/task/directory/my-task-1.log
     #$ -j y
     #$ -terse
@@ -1013,7 +1013,7 @@ La mayoría de las plataformas de computación de alto rendimiento permiten (y a
 Por defecto, Nextflow usará un solo CPU y 2GB de memoria para cada process.
 Las directivas de process correspondientes se llaman `cpus` y `memory`, así que la siguiente configuración está implícita:
 
-```groovy title="Configuración incorporada" linenums="1"
+```groovy title="Built-in configuration" linenums="1"
 process {
     cpus = 1
     memory = 2.GB
@@ -1097,7 +1097,7 @@ Al mismo tiempo, vamos a pretender que el process `cowpy` requiere más recursos
 
 Con esta configuración, todos los processes solicitarán 1GB de memoria y un solo CPU (el predeterminado implícito), excepto el process `cowpy`, que solicitará 2GB y 2 CPUs.
 
-!!! info "Información"
+!!! info "Info"
 
     Si tiene una máquina con pocos CPUs y asigna un número alto por process, podría ver llamadas de process siendo encoladas detrás de otras.
     Esto es porque Nextflow asegura que no solicitemos más CPUs de los que están disponibles.
@@ -1127,7 +1127,7 @@ Por ejemplo, su clúster puede requerir que permanezca dentro de ciertos límite
 
 Puede usar la directiva `resourceLimits` para establecer las limitaciones relevantes. La sintaxis se ve así cuando está sola en un bloque process:
 
-```groovy title="Ejemplo de sintaxis"
+```groovy title="Syntax example"
 process {
     resourceLimits = [
         memory: 750.GB,
@@ -1215,7 +1215,7 @@ nextflow run 3-main.nf -profile my_laptop
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
@@ -1249,7 +1249,7 @@ Puede considerar esto como una alternativa a usar un archivo de parámetros.
 
 La sintaxis para expresar valores predeterminados en este contexto se ve así, para un perfil que nombramos `test`:
 
-```groovy title="Ejemplo de sintaxis"
+```groovy title="Syntax example"
     test {
         params.<parameter1>
         params.<parameter2>
@@ -1292,7 +1292,7 @@ Al igual que para perfiles de configuración técnica, puede configurar múltipl
 Convenientemente, los perfiles no son mutuamente excluyentes, así que podemos especificar múltiples perfiles en nuestra línea de comandos usando la siguiente sintaxis `-profile <profile1>,<profile2>` (para cualquier número de perfiles).
 
 Si combina perfiles que establecen valores para los mismos elementos de configuración y se describen en el mismo archivo de configuración, Nextflow resolverá el conflicto usando el valor que leyó en último lugar (_es decir_, lo que venga después en el archivo).
-Si las configuraciones conflictivas se establecen en diferentes fuentes de configuración, se aplica el [orden de precedencia](https://www.nextflow.io/docs/latest/config.html#configuration-file) predeterminado.
+Si las configuraciones conflictivas se establecen en diferentes fuentes de configuración, se aplica el [orden de precedencia](https://www.nextflow.io/docs/latest/config.html) predeterminado.
 
 Intentemos agregar el perfil de prueba a nuestro comando anterior:
 
@@ -1303,7 +1303,7 @@ nextflow run 3-main.nf -profile my_laptop,test
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [jovial_coulomb] DSL2 - revision: 46a6763141
 
@@ -1320,7 +1320,7 @@ Esto usará Docker donde sea posible y producirá salidas bajo `results_config/t
 
     ```console title="results_config/test/"
      _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -1349,7 +1349,7 @@ Esto significa que mientras distribuyamos cualquier archivo de datos de prueba c
     Podemos apuntar a URLs para archivos más grandes que están almacenados externamente.
     Nextflow los descargará automáticamente mientras haya una conexión abierta.
 
-    Para más detalles, vea el Side Quest [Working with Files](../side_quests/working_with_files.md)
+    Para más detalles, vea el Side Quest [Working with Files](../side_quests/working_with_files/index.md)
 
 ### 6.3. Usar `nextflow config` para ver la configuración resuelta
 
@@ -1488,7 +1488,7 @@ nextflow run nextflow-io/hello
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Pulling nextflow-io/hello ...
      downloaded from https://github.com/nextflow-io/hello.git
@@ -1520,7 +1520,7 @@ nextflow run nextflow-io/hello -r v1.3
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `https://github.com/nextflow-io/hello` [sick_carson] DSL2 - revision: 2ce0b0e294 [v1.3]
 
@@ -1564,7 +1564,7 @@ Cuando los valores de parámetros se establecen tanto en el archivo del workflow
 - [ ] El primer valor encontrado
 - [ ] Causa un error
 
-Más información: [1.1. Configurar valores en `nextflow.config`](#11-configurar-valores-en-nextflowconfig)
+Más información: [1.1. Configurar valores en `nextflow.config`](#11-set-up-values-in-nextflowconfig)
 </quiz>
 
 <quiz>
@@ -1574,7 +1574,7 @@ Más información: [1.1. Configurar valores en `nextflow.config`](#11-configurar
 - [ ] Config usa declaración tipada, workflow usa asignación
 - [ ] Solo los archivos de configuración pueden establecer valores predeterminados
 
-Más información: [1.1. Configurar valores en `nextflow.config`](#11-configurar-valores-en-nextflowconfig)
+Más información: [1.1. Configurar valores en `nextflow.config`](#11-set-up-values-in-nextflowconfig)
 </quiz>
 
 <quiz>
@@ -1584,7 +1584,7 @@ Más información: [1.1. Configurar valores en `nextflow.config`](#11-configurar
 - [x] `-params-file params.yaml`
 - [ ] `--input-params params.yaml`
 
-Más información: [1.3. Usar un archivo de parámetros](#13-usar-un-archivo-de-parámetros)
+Más información: [1.3. Usar un archivo de parámetros](#13-use-a-parameter-file)
 </quiz>
 
 <quiz>
@@ -1594,7 +1594,7 @@ Más información: [1.3. Usar un archivo de parámetros](#13-usar-un-archivo-de-
 - [ ] El directorio para archivos de registro
 - [ ] La ubicación de archivos de módulos
 
-Más información: [2.1. Personalizar el nombre del directorio outputDir](#21-personalizar-el-nombre-del-directorio-outputdir)
+Más información: [2.1. Personalizar el nombre del directorio outputDir](#21-customize-the-outputdir-directory-name)
 </quiz>
 
 <quiz>
@@ -1604,7 +1604,7 @@ Más información: [2.1. Personalizar el nombre del directorio outputDir](#21-pe
 - [x] `#!groovy path { <process>.name }`
 - [ ] `@processName`
 
-Más información: [2.2. Organizar salidas por process](#22-organizar-salidas-por-process)
+Más información: [2.2. Organizar salidas por process](#22-organize-outputs-by-process)
 </quiz>
 
 <quiz>
@@ -1614,7 +1614,7 @@ Si tanto Docker como Conda están habilitados y un process tiene ambas directiva
 - [ ] El primero definido en el process
 - [ ] Causa un error
 
-Más información: [3. Seleccionar una tecnología de empaquetado de software](#3-seleccionar-una-tecnología-de-empaquetado-de-software)
+Más información: [3. Seleccionar una tecnología de empaquetado de software](#3-select-a-software-packaging-technology)
 </quiz>
 
 <quiz>
@@ -1624,7 +1624,7 @@ Más información: [3. Seleccionar una tecnología de empaquetado de software](#
 - [ ] `kubernetes`
 - [ ] `aws`
 
-Más información: [4. Seleccionar una plataforma de ejecución](#4-seleccionar-una-plataforma-de-ejecución)
+Más información: [4. Seleccionar una plataforma de ejecución](#4-select-an-execution-platform)
 </quiz>
 
 <quiz>
@@ -1634,7 +1634,7 @@ Más información: [4. Seleccionar una plataforma de ejecución](#4-seleccionar-
 - [x] `nextflow run workflow.nf -with-report report.html`
 - [ ] `nextflow run workflow.nf -profile report`
 
-Más información: [5.1. Ejecutar el workflow para generar un informe de utilización de recursos](#51-ejecutar-el-workflow-para-generar-un-informe-de-utilización-de-recursos)
+Más información: [5.1. Ejecutar el workflow para generar un informe de utilización de recursos](#51-run-the-workflow-to-generate-a-resource-utilization-report)
 </quiz>
 
 <quiz>
@@ -1644,7 +1644,7 @@ Más información: [5.1. Ejecutar el workflow para generar un informe de utiliza
 - [x] `#!groovy process { withName: 'cowpy' { memory = '2.GB' } }`
 - [ ] `#!groovy resources.cowpy.memory = '2.GB'`
 
-Más información: [5.3. Establecer asignaciones de recursos para un process específico](#53-establecer-asignaciones-de-recursos-para-un-process-específico)
+Más información: [5.3. Establecer asignaciones de recursos para un process específico](#53-set-resource-allocations-for-a-specific-process)
 </quiz>
 
 <quiz>
@@ -1654,7 +1654,7 @@ Más información: [5.3. Establecer asignaciones de recursos para un process esp
 - [x] Limita los recursos máximos que pueden solicitarse
 - [ ] Monitorea el uso de recursos en tiempo real
 
-Más información: [5.5. Agregar límites de recursos](#55-agregar-límites-de-recursos)
+Más información: [5.5. Agregar límites de recursos](#55-add-resource-limits)
 </quiz>
 
 <quiz>
@@ -1664,7 +1664,7 @@ Más información: [5.5. Agregar límites de recursos](#55-agregar-límites-de-r
 - [x] `-profile profile1,profile2`
 - [ ] `--profile profile1 --profile profile2`
 
-Más información: [6. Usar perfiles para cambiar entre configuraciones preestablecidas](#6-usar-perfiles-para-cambiar-entre-configuraciones-preestablecidas)
+Más información: [6. Usar perfiles para cambiar entre configuraciones preestablecidas](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>
 
 <quiz>
@@ -1674,7 +1674,7 @@ Más información: [6. Usar perfiles para cambiar entre configuraciones preestab
 - [x] `nextflow config`
 - [ ] `nextflow resolve`
 
-Más información: [6.3. Usar `nextflow config` para ver la configuración resuelta](#63-usar-nextflow-config-para-ver-la-configuración-resuelta)
+Más información: [6.3. Usar `nextflow config` para ver la configuración resuelta](#63-use-nextflow-config-to-see-the-resolved-configuration)
 </quiz>
 
 <quiz>
@@ -1684,5 +1684,5 @@ Más información: [6.3. Usar `nextflow config` para ver la configuración resue
 - [x] Proporcionar parámetros de prueba para pruebas fáciles del workflow
 - [ ] Definir nuevos processes
 
-Más información: [6. Usar perfiles para cambiar entre configuraciones preestablecidas](#6-usar-perfiles-para-cambiar-entre-configuraciones-preestablecidas)
+Más información: [6. Usar perfiles para cambiar entre configuraciones preestablecidas](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>

@@ -72,7 +72,7 @@ En el archivo principal del workflow `{DOMAIN_DIR}.nf`, bajo la sección `Pipeli
      * Pipeline parameters
      */
     params {
-        // Primary input
+        // Entrada principal
         {PRIMARY_PARAM_NAME}: Path
     }
     ```
@@ -84,7 +84,7 @@ En el archivo principal del workflow `{DOMAIN_DIR}.nf`, bajo la sección `Pipeli
      * Pipeline parameters
      */
 
-    // Primary input
+    // Entrada principal
     ```
 
 Eso configura el parámetro CLI, pero no queremos escribir la ruta del archivo cada vez que ejecutemos el workflow durante el desarrollo.
@@ -143,7 +143,7 @@ nextflow run {DOMAIN_DIR}.nf -profile test
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `{DOMAIN_DIR}.nf` [{RUN_NAME}] DSL2 - revision: {HASH}
 

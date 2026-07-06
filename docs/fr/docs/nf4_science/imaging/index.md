@@ -35,4 +35,4 @@ Ce cours suppose une familiarité minimale avec les éléments suivants :
 - Expérience avec la ligne de commande
 - Familiarité de base avec les formats de fichiers d'imagerie (images TIFF, données tabulaires)
 
-Pour les exigences techniques et la configuration de l'environnement, consultez le mini-cours [Configuration de l'environnement](../../envsetup/).
+Pour les exigences techniques et la configuration de l'environnement, consultez le mini-cours [Configuration de l'environnement](../../envsetup/index.md).

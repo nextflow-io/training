@@ -1,53 +1,38 @@
-# Orientierung
+# Erste Schritte
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Die GitHub Codespaces-Umgebung enthält alle Software, Code und Daten, die für dieses Training notwendig sind, sodass du nichts selbst installieren musst.
-Du benötigst jedoch einen (kostenlosen) Account zum Einloggen und solltest dir ein paar Minuten Zeit nehmen, um dich mit der Benutzeroberfläche vertraut zu machen.
+## Trainingsumgebung starten
 
-Falls du das noch nicht getan hast, folge bitte [diesem Link](../../envsetup/), bevor du fortfährst.
+Um die von uns bereitgestellte Umgebung auf GitHub Codespaces zu nutzen, klicke auf den Button „Open in GitHub Codespaces" unten.
+Weitere Optionen findest du unter [Umgebungsoptionen](../envsetup/index.md).
 
-## Bereitgestellte Materialien
+Wir empfehlen, die Trainingsumgebung in einem neuen Browser-Tab oder -Fenster zu öffnen (je nach Gerät mit Rechtsklick, Strg+Klick oder Cmd+Klick), damit du weiterlesen kannst, während die Umgebung lädt.
+Du solltest diese Anleitung parallel geöffnet halten, um den Kurs durchzuarbeiten.
 
-Während dieses Trainings werden wir im Verzeichnis `side-quests/` arbeiten.
-Dieses Verzeichnis enthält alle Code-Dateien, Testdaten und zusätzlichen Dateien, die du benötigst.
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-Erkunde gerne den Inhalt dieses Verzeichnisses; am einfachsten geht das mit dem Datei-Explorer auf der linken Seite des GitHub Codespaces-Arbeitsbereichs.
-Alternativ kannst du den Befehl `tree` verwenden.
-Im Verlauf des Kurses nutzen wir die Ausgabe von `tree`, um Verzeichnisstrukturen und -inhalte in einer lesbaren Form darzustellen, manchmal mit kleinen Anpassungen zur besseren Übersichtlichkeit.
+### Grundlagen der Umgebung
 
-Hier erstellen wir ein Inhaltsverzeichnis bis zur zweiten Ebene:
+Diese Trainingsumgebung enthält alle Software, Code und Daten, die für den Kurs notwendig sind, sodass du nichts selbst installieren musst.
 
-```bash
-tree . -L 2
-```
+Der Codespace ist mit einer VSCode-Oberfläche eingerichtet, die einen Datei-Explorer, einen Code-Editor und ein Terminal enthält.
+Alle Anweisungen im Kurs (z. B. „Datei öffnen", „Code bearbeiten" oder „diesen Befehl ausführen") beziehen sich auf diese drei Teile der VSCode-Oberfläche, sofern nicht anders angegeben.
 
-Wenn du dies innerhalb von `side-quests` ausführst, solltest du folgende Ausgabe sehen:
+Wenn du diesen Kurs eigenständig durcharbeitest, mach dich bitte mit den [Grundlagen der Umgebung](../envsetup/01_setup.md) vertraut.
 
-```console title="Verzeichnisinhalt"
-.
-├── metadata
-├── nf-core
-├── nf-test
-├── solutions
-├── splitting_and_grouping
-└── workflows_of_workflows
-```
+### Versionsanforderungen
 
-**Hier ist eine Zusammenfassung dessen, was du zum Einstieg wissen solltest:**
+Dieses Training funktioniert mit Nextflow 25.10.2 oder höher **mit aktiviertem v2-Syntax-Parser**.
+Wenn du eine lokale oder benutzerdefinierte Umgebung verwendest, stelle bitte sicher, dass du die richtigen Einstellungen verwendest, wie [hier](../info/nxf_versions.md) dokumentiert.
 
-- **Jedes Verzeichnis entspricht einer einzelnen Side Quest.**
-  Deren Inhalte werden auf der entsprechenden Seite der Side Quest detailliert beschrieben.
+## Checkliste zur Vorbereitung
 
-- **Das Verzeichnis `solutions`** enthält die vollständigen Workflow- und/oder Modul-Skripte, die aus den verschiedenen Schritten jeder Side Quest resultieren.
-  Sie dienen als Referenz, um deine Arbeit zu überprüfen und eventuell auftretende Probleme zu beheben.
+Bereit zum Einstieg?
 
-!!!tip
+- [ ] Ich verstehe das Ziel dieses Kurses und seine Voraussetzungen
+- [ ] Meine Umgebung läuft
 
-    Falls du aus irgendeinem Grund dieses Verzeichnis verlässt, kannst du jederzeit mit diesem Befehl zurückkehren:
+Wenn du alle Punkte abhaken kannst, kann es losgehen.
 
-    ```bash
-    cd /workspaces/training/side-quests
-    ```
-
-Um nun mit dem Kurs zu beginnen, klicke auf den Pfeil in der unteren rechten Ecke dieser Seite.
+**Wähle zum Starten eine Side Quest aus dem Navigationsmenü.**

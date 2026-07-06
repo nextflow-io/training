@@ -17,7 +17,7 @@ Em seguida, você refinou gradualmente o pipeline substituindo um dos módulos l
 Seu pipeline final `core-hello` agora possui:
 
 - **Estrutura padronizada** usando o template nf-core com diretórios organizados para fluxos de trabalho, subfluxos de trabalho, módulos e configuração
-- **Módulos da comunidade** do repositório nf-core (`cat/cat`) junto com seus módulos personalizados
+- **Módulos da comunidade** do repositório nf-core (`find/concatenate`) junto com seus módulos personalizados
 - **Validação abrangente** que verifica tanto parâmetros quanto dados de entrada antes da execução do pipeline
 - **Configuração profissional** com perfis para diferentes ambientes de execução
 - **Documentação completa** e metadados seguindo as convenções nf-core

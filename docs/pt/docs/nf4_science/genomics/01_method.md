@@ -226,7 +226,7 @@ O mesmo se aplica aos arquivos acessórios do genoma de referência (arquivos de
 gatk HaplotypeCaller \
         -R /data/ref/ref.fasta \
         -I /data/bam/reads_mother.bam \
-        -O /data/vcf/reads_mother.vcf \
+        -O reads_mother.vcf \
         -L /data/ref/intervals.bed
 ```
 

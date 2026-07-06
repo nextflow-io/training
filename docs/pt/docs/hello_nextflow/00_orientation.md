@@ -32,14 +32,14 @@ Você precisará manter essas instruções abertas em paralelo para acompanhar o
 
 Este ambiente de treinamento contém todo o software, código e dados necessários para trabalhar no curso de treinamento, então você não precisa instalar nada por conta própria.
 
-O codespace é configurado com uma interface VSCode, que inclui um explorador de sistema de arquivos, um editor de código e um terminal shell.
+O codespace é configurado com uma interface VSCode, que inclui um explorador de arquivos, um editor de código e um terminal shell.
 Todas as instruções dadas durante o curso (por exemplo, 'abra o arquivo', 'edite o código' ou 'execute este comando') se referem a essas três partes da interface do VSCode, salvo indicação em contrário.
 
 Se você está trabalhando neste curso por conta própria, por favor, familiarize-se com as [noções básicas do ambiente](../envsetup/01_setup.md) para mais detalhes.
 
 ### Requisitos de versão
 
-Este treinamento é projetado para Nextflow 25.10.2 ou posterior **com o analisador de sintaxe v2 ATIVADO**.
+Este treinamento funciona com Nextflow 25.10.2 ou posterior **com o analisador de sintaxe v2 ATIVADO**.
 Se você está usando um ambiente local ou personalizado, certifique-se de estar usando as configurações corretas conforme documentado [aqui](../info/nxf_versions.md).
 
 ## Prepare-se para trabalhar

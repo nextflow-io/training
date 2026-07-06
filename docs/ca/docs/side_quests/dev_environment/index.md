@@ -4,6 +4,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+
 Els Entorns de Desenvolupament Integrats (IDE) moderns poden transformar radicalment la vostra experiència de desenvolupament amb Nextflow. Aquesta missió secundària se centra específicament en aprofitar VS Code i la seva extensió de Nextflow per escriure codi més ràpidament, detectar errors d'hora i navegar per workflows complexos de manera eficient.
 
 !!! note "Això no és un tutorial tradicional"
@@ -12,7 +13,7 @@ Els Entorns de Desenvolupament Integrats (IDE) moderns poden transformar radical
 
 ## Què hauríeu de saber primer
 
-Aquesta guia assumeix que heu completat el curs de formació [Hello Nextflow](../hello_nextflow/) i que esteu familiaritzats amb els conceptes fonamentals de Nextflow, incloent-hi:
+Aquesta guia assumeix que heu completat el curs de formació [Hello Nextflow](../../hello_nextflow/index.md) i que esteu familiaritzats amb els conceptes fonamentals de Nextflow, incloent-hi:
 
 - **Estructura bàsica del workflow**: Comprensió dels processos, workflows i com es connecten entre si
 - **Operacions amb canals**: Creació de canals, pas de dades entre processos i ús d'operadors bàsics
@@ -32,7 +33,7 @@ Aquesta guia se centra en les **funcionalitats de productivitat de l'IDE** que u
 
 !!! info "Per què les funcionalitats de l'IDE ara?"
 
-    Probablement ja heu estat utilitzant VS Code durant el curs [Hello Nextflow](../hello_nextflow/), però hem mantingut el focus en aprendre els fonaments de Nextflow en lloc de les funcionalitats de l'IDE. Ara que esteu familiaritzats amb els conceptes bàsics de Nextflow com processos, workflows, canals i mòduls, esteu preparats per aprofitar les sofisticades funcionalitats de l'IDE que us convertiran en un desenvolupador més eficient.
+    Probablement ja heu estat utilitzant VS Code durant el curs [Hello Nextflow](../../hello_nextflow/index.md), però hem mantingut el focus en aprendre els fonaments de Nextflow en lloc de les funcionalitats de l'IDE. Ara que esteu familiaritzats amb els conceptes bàsics de Nextflow com processos, workflows, canals i mòduls, esteu preparats per aprofitar les sofisticades funcionalitats de l'IDE que us convertiran en un desenvolupador més eficient.
 
     Penseu en això com a "pujar de nivell" el vostre entorn de desenvolupament: el mateix editor que heu estat utilitzant té capacitats molt més potents que es tornen veritablement valuoses un cop enteneu per a què us estan ajudant.
 
@@ -101,18 +102,18 @@ Si utilitzeu un Mac, algunes (no totes) les dreceres de teclat utilitzaran "cmd"
 Per instal·lar l'extensió manualment:
 
 1. Obriu VS Code
-2. Aneu a la vista d'Extensions fent clic a la icona d'extensions a l'esquerra: ![icona d'extensions](img/extensions_icon.png) (drecera `Ctrl/Cmd+Shift+X` si executeu VSCode localment)
+2. Aneu a la vista d'Extensions fent clic a la icona d'extensions a l'esquerra: ![icona d'extensions](../img/extensions_icon.png) (drecera `Ctrl/Cmd+Shift+X` si executeu VSCode localment)
 3. Cerqueu "Nextflow"
 4. Instal·leu l'extensió oficial de Nextflow
 
-![Instal·la l'extensió de Nextflow](img/install_extension.png)
+![Instal·la l'extensió de Nextflow](../img/install_extension.png)
 
 ### 0.2. Disposició de l'espai de treball
 
 Com que heu estat utilitzant VS Code durant tot Hello Nextflow, ja esteu familiaritzats amb els conceptes bàsics. Aquí teniu com organitzar el vostre espai de treball de manera eficient per a aquesta sessió:
 
 - **Àrea de l'editor**: Per visualitzar i editar fitxers. Podeu dividir-la en múltiples panells per comparar fitxers un al costat de l'altre.
-- **Explorador de fitxers** feu clic a (![icona de l'explorador de fitxers](img/files_icon.png)) (`Ctrl/Cmd+Shift+E`): Els fitxers i carpetes locals del vostre sistema. Manteniu-lo obert a l'esquerra per navegar entre fitxers.
+- **Explorador de fitxers** feu clic a (![icona de l'explorador de fitxers](../img/files_icon.png)) (`Ctrl/Cmd+Shift+E`): Els fitxers i carpetes locals del vostre sistema. Manteniu-lo obert a l'esquerra per navegar entre fitxers.
 - **Terminal integrat** (`Ctrl+Shift+` accent greu tant per a Windows com per a MacOS): Un terminal per interactuar amb l'ordinador a la part inferior. Utilitzeu-lo per executar Nextflow o altres comandes.
 - **Panell de problemes** (`Ctrl+Shift+M`): VS Code mostrarà aquí qualsevol error i problema que detecti. Això és útil per destacar problemes d'un cop d'ull.
 
@@ -136,7 +137,7 @@ Ara que el vostre espai de treball està configurat, explorem com el ressaltat d
 
 Obriu `basic_workflow.nf` per veure el ressaltat de sintaxi en acció:
 
-![Mostra de sintaxi](img/syntax_showcase.png)
+![Mostra de sintaxi](../img/syntax_showcase.png)
 
 Observeu com VS Code ressalta:
 
@@ -184,7 +185,7 @@ Les opcions d'autocompleció varien depenent d'on us trobeu al vostre codi:
 
 Obriu `basic_workflow.nf` de nou i proveu d'escriure `channel.` al bloc del workflow:
 
-![Autocompleció de canal](img/autocomplete_channel.png)
+![Autocompleció de canal](../img/autocomplete_channel.png)
 
 Veureu suggeriments per a:
 
@@ -198,19 +199,19 @@ Això us ajuda a trobar ràpidament la fàbrica de canals adequada sense necessi
 
 També podeu descobrir els operadors disponibles per aplicar als canals. Per exemple, escriviu `FASTQC.out.html.` per veure les operacions disponibles:
 
-![Autocompleció d'operadors de canal](img/autocomplete_operators.png)
+![Autocompleció d'operadors de canal](../img/autocomplete_operators.png)
 
 #### Directives de procés
 
 Dins d'un bloc script d'un procés, escriviu `task.` per veure les propietats d'execució disponibles:
 
-![Autocompleció de propietats de tasca](img/autocomplete_task.png)
+![Autocompleció de propietats de tasca](../img/autocomplete_task.png)
 
 #### Configuració
 
 Obriu nextflow.config i escriviu `process.` en qualsevol lloc per veure les directives de procés disponibles:
 
-![Autocompleció de configuració](img/autocomplete_config.png)
+![Autocompleció de configuració](../img/autocomplete_config.png)
 
 Veureu suggeriments per a:
 
@@ -236,17 +237,17 @@ La detecció d'errors en temps real de VS Code us ajuda a detectar problemes aba
 
 Creem un error deliberat per veure la detecció en acció. Obriu `basic_workflow.nf` i canvieu el nom del procés de `FASTQC` a `FASTQ` (o qualsevol altre nom no vàlid). VS Code ressaltarà immediatament l'error al bloc del workflow amb un subratllat vermell ondulat:
 
-![Subratllat d'error](img/error_underline.png)
+![Subratllat d'error](../img/error_underline.png)
 
 ### 3.2. Panell de problemes
 
 Més enllà del ressaltat individual d'errors, VS Code proporciona un panell de Problemes centralitzat que agrega tots els errors, advertències i missatges d'informació de tot el vostre espai de treball. Obriu-lo amb `Ctrl/Cmd+Shift+M` i utilitzeu la icona de filtre per mostrar només els errors rellevants per al fitxer actual:
 
-![Filtra el panell de problemes](img/active_file.png)
+![Filtra el panell de problemes](../img/active_file.png)
 
 Feu clic en qualsevol problema per saltar directament a la línia problemàtica
 
-![Panell de problemes](img/problems_panel.png)
+![Panell de problemes](../img/problems_panel.png)
 
 Corregiu l'error canviant el nom del procés de nou a `FASTQC`.
 
@@ -287,7 +288,6 @@ La navegació eficient és crucial quan es treballa amb workflows complexos que 
     ```groovy title="basic_workflow.nf" linenums="3"
     process FASTQC {
         tag "${sample_id}"
-        publishDir "${params.output_dir}/fastqc", mode: 'copy'
 
         input:
         tuple val(sample_id), path(reads)
@@ -311,13 +311,13 @@ La navegació eficient és crucial quan es treballa amb workflows complexos que 
 
 Si passeu el ratolí per sobre del nom d'un procés com `FASTQC`, veureu una finestra emergent amb la interfície del mòdul (entrades i sortides):
 
-![Anar a la definició](img/syntax.png)
+![Anar a la definició](../img/syntax.png)
 
 Aquesta funcionalitat és particularment valuosa quan s'escriuen workflows, ja que us permet entendre la interfície del mòdul sense obrir el fitxer del mòdul directament.
 
 Podeu navegar ràpidament a qualsevol definició de procés, mòdul o variable utilitzant **Ctrl/Cmd-clic**. Passeu el ratolí per sobre de l'enllaç al fitxer del mòdul a la part superior del script i seguiu l'enllaç tal com se suggereix:
 
-![Segueix l'enllaç](img/follow_link.png)
+![Segueix l'enllaç](../img/follow_link.png)
 
 El mateix funciona per als noms de processos. Torneu a `basic_workflow.nf` i proveu-ho amb el nom del procés `FASTQC` al bloc del workflow. Això us porta directament al nom del procés (que és el mateix que el fitxer del mòdul en aquest exemple, però podria estar a mig camí d'un fitxer molt més gran).
 
@@ -336,7 +336,7 @@ Ara explorem la navegació en un workflow més complex utilitzant `complex_workf
 
 Amb `complex_workflow.nf` encara obert, podeu obtenir una visió general de tots els símbols del fitxer escrivint `@` a la barra de cerca a la part superior de VSCode (la drecera de teclat és `Ctrl/Cmd+Shift+O`, però pot no funcionar a Codespaces). Això obre el panell de navegació per símbols, que llista tots els símbols del fitxer actual:
 
-![Navegació per símbols](img/symbols.png)
+![Navegació per símbols](../img/symbols.png)
 
 Això mostra:
 
@@ -350,15 +350,15 @@ Comenceu a escriure per filtrar els resultats.
 
 Entendre on s'utilitza un procés o variable a tot el vostre codi pot ser molt útil. Per exemple, si voleu trobar totes les referències al procés `FASTQC`, comenceu navegant a la seva definició. Podeu fer-ho obrint `modules/fastqc.nf` directament, o utilitzant la funcionalitat de navegació ràpida de VS Code amb `Ctrl/Cmd-clic` com hem fet anteriorment. Un cop a la definició del procés, feu clic dret sobre el nom del procés `FASTQC` i seleccioneu "Find All References" del menú contextual per veure totes les instàncies on s'utilitza.
 
-![Trobar referències](img/references.png)
+![Trobar referències](../img/references.png)
 
 Aquesta funcionalitat mostra totes les instàncies on es fa referència a `FASTQC` dins del vostre espai de treball, incloent-hi el seu ús als dos workflows diferents. Aquesta informació és crucial per avaluar l'impacte potencial de les modificacions al procés `FASTQC`.
 
 ### 4.4. Panell d'esquema
 
-El panell d'Esquema, situat a la barra lateral de l'Explorador (feu clic a ![Icona de l'Explorador](img/files_icon.png)), proporciona una visió general convenient de tots els símbols del vostre fitxer actual. Aquesta funcionalitat us permet navegar ràpidament i gestionar l'estructura del vostre codi mostrant funcions, variables i altres elements clau en una vista jeràrquica.
+El panell d'Esquema, situat a la barra lateral de l'Explorador (feu clic a ![Icona de l'Explorador](../img/files_icon.png)), proporciona una visió general convenient de tots els símbols del vostre fitxer actual. Aquesta funcionalitat us permet navegar ràpidament i gestionar l'estructura del vostre codi mostrant funcions, variables i altres elements clau en una vista jeràrquica.
 
-![Panell d'esquema](img/outline.png)
+![Panell d'esquema](../img/outline.png)
 
 Utilitzeu el panell d'Esquema per navegar ràpidament a diferents parts del vostre codi sense utilitzar el navegador de fitxers.
 
@@ -366,11 +366,11 @@ Utilitzeu el panell d'Esquema per navegar ràpidament a diferents parts del vost
 
 L'extensió de Nextflow de VS Code pot visualitzar el vostre workflow com un Graf Acíclic Dirigit (DAG). Això us ajuda a entendre el flux de dades i les dependències entre processos. Obriu `complex_workflow.nf` i feu clic al botó "Preview DAG" que apareix sobre `workflow {` (el segon bloc `workflow` d'aquest fitxer):
 
-![Previsualització del DAG](img/dag_preview.png)
+![Previsualització del DAG](../img/dag_preview.png)
 
 Això és només el workflow d'entrada, però també podeu previsualitzar el DAG per als workflows interns fent clic al botó "Preview DAG" sobre el workflow `RNASEQ_PIPELINE {` més amunt:
 
-![Previsualització del DAG del workflow intern](img/dag_preview_inner.png)
+![Previsualització del DAG del workflow intern](../img/dag_preview_inner.png)
 
 Per a aquest workflow, podeu utilitzar els nodes del DAG per navegar a les definicions de processos corresponents al codi. Feu clic en un node i us portarà a la definició del procés rellevant a l'editor. Especialment quan un workflow creix fins a una mida gran, això pot ajudar-vos realment a navegar pel codi i entendre com estan connectats els processos.
 
@@ -409,7 +409,7 @@ Quan treballeu amb mòduls, sovint necessiteu veure tant el workflow principal c
 3. Feu clic dret a la pestanya `modules/fastqc.nf` i seleccioneu "Split Right"
 4. Ara podeu veure els dos fitxers un al costat de l'altre
 
-![Editor dividit](img/split_editor.png)
+![Editor dividit](../img/split_editor.png)
 
 Això és inestimable quan:
 
@@ -421,13 +421,13 @@ Això és inestimable quan:
 
 De vegades necessiteu trobar on s'utilitzen patrons específics a tot el vostre projecte. Premeu `Ctrl/Cmd+Shift+F` per obrir el panell de cerca.
 
-Proveu de cercar `publishDir` a tot l'espai de treball:
+Proveu de cercar `container` a tot l'espai de treball:
 
-![Cerca al projecte](img/project_search.png)
+![Cerca al projecte](../img/project_search.png)
 
-Això us mostra tots els fitxers que utilitzen directoris de publicació, ajudant-vos a:
+Això us mostra tots els fitxers que utilitzen la directiva container, ajudant-vos a:
 
-- Entendre els patrons d'organització de sortides
+- Entendre quins processos utilitzen contenidors
 - Trobar exemples de directives específiques
 - Garantir la consistència entre mòduls
 
@@ -494,7 +494,7 @@ Utilitzeu **Ctrl+/** (o **Cmd+/**) de nou per descomentar el codi.
 
 A `complex_workflow.nf`, observeu les petites fletxes al costat de les definicions de processos. Feu-hi clic per plegar (col·lapsar) els processos:
 
-![Plegament de codi](img/code_folding.png)
+![Plegament de codi](../img/code_folding.png)
 
 Això us dóna una visió general d'alt nivell de l'estructura del vostre workflow sense perdre-us en els detalls d'implementació.
 
@@ -548,9 +548,9 @@ Si el vostre projecte és un repositori git (com ho és aquest), VS Code mostra:
 - Vistes de diferències en línia
 - Capacitats de commit i push
 
-Obriu el panell de Control de Codi Font utilitzant el botó de control de codi font (![Icona de control de codi font](img/source_control_icon.png)) (`Ctrl+Shift+G` o `Cmd+Shift+G` si esteu treballant amb VSCode localment) per veure els canvis de git i fer commits directament a l'editor.
+Obriu el panell de Control de Codi Font utilitzant el botó de control de codi font (![Icona de control de codi font](../img/source_control_icon.png)) (`Ctrl+Shift+G` o `Cmd+Shift+G` si esteu treballant amb VSCode localment) per veure els canvis de git i fer commits directament a l'editor.
 
-![Panell de Control de Codi Font](img/source_control.png)
+![Panell de Control de Codi Font](../img/source_control.png)
 
 ### 7.2. Execució i inspecció de workflows
 
@@ -622,8 +622,8 @@ No esperem que recordeu tot, però ara que sabeu que existeixen aquestes funcion
 
 Apliqueu aquestes habilitats de l'IDE mentre treballeu en altres mòduls de formació, per exemple:
 
-- **[nf-test](nf-test.md)**: Creeu suites de proves exhaustives per als vostres workflows
-- **[Hello nf-core](../../hello_nf-core/)**: Construïu pipelines de qualitat de producció amb estàndards de la comunitat
+- **[nf-test](../nf_test/index.md)**: Creeu suites de proves exhaustives per als vostres workflows
+- **[Hello nf-core](../../hello_nf-core/index.md)**: Construïu pipelines de qualitat de producció amb estàndards de la comunitat
 
 El veritable poder d'aquestes funcionalitats de l'IDE emergeix quan treballeu en projectes més grans i complexos. Comenceu a incorporar-les al vostre flux de treball gradualment: en poques sessions, es tornaran una segona naturalesa i transformaran la manera com abordeu el desenvolupament amb Nextflow.
 

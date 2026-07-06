@@ -17,7 +17,7 @@ Ensuite, vous avez progressivement affiné le pipeline en remplaçant l'un des m
 Votre pipeline final `core-hello` possède maintenant :
 
 - **Une structure standardisée** utilisant le modèle nf-core avec des répertoires organisés pour les workflows, les subworkflows, les modules et la configuration
-- **Des modules communautaires** du dépôt nf-core (`cat/cat`) aux côtés de vos modules personnalisés
+- **Des modules communautaires** du dépôt nf-core (`find/concatenate`) aux côtés de vos modules personnalisés
 - **Une validation complète** qui vérifie à la fois les paramètres et les données d'entrée avant l'exécution du pipeline
 - **Une configuration professionnelle** avec des profils pour différents environnements d'exécution
 - **Une documentation complète** et des métadonnées suivant les conventions nf-core

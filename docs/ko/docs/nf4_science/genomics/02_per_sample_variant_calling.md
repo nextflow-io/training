@@ -402,7 +402,7 @@ nextflow run genomics.nf -profile test
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [reverent_sinoussi] DSL2 - revision: 41d43ad7fe
 
@@ -562,7 +562,7 @@ gatk HaplotypeCaller \
     ```
 
 `file()` 구문은 Nextflow에 이러한 입력을 파일 경로로 명시적으로 처리하도록 지시합니다.
-이에 대한 자세한 내용은 사이드 퀘스트 [파일 작업](../../side_quests/working_with_files.md)에서 확인할 수 있습니다.
+이에 대한 자세한 내용은 사이드 퀘스트 [파일 작업](../../side_quests/working_with_files/index.md)에서 확인할 수 있습니다.
 
 ### 2.2. 변이 호출 프로세스 작성 및 워크플로우에서 호출
 
@@ -769,7 +769,7 @@ nextflow run genomics.nf -profile test -resume
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [grave_volta] DSL2 - revision: 4790abc96a
 
@@ -891,7 +891,7 @@ nextflow run genomics.nf -profile test -resume
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [peaceful_yalow] DSL2 - revision: a256d113ad
 
@@ -905,7 +905,7 @@ nextflow run genomics.nf -profile test -resume
 ??? failure "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [loving_pasteur] DSL2 - revision: d2a8e63076
 
@@ -1164,7 +1164,7 @@ nextflow run genomics.nf -profile test
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [special_goldstine] DSL2 - revision: 4cbbf6ea3e
 
@@ -1327,7 +1327,7 @@ nextflow run genomics.nf -profile test
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [sick_albattani] DSL2 - revision: 46d84642f6
 

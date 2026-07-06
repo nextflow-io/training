@@ -477,7 +477,7 @@ nextflow run rnaseq.nf -profile test
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `rnaseq.nf` [mad_lorenz] DSL2 - revision: 5846a164d2
 
@@ -494,7 +494,7 @@ Możesz sprawdzić wyjścia w katalogu results.
 ls results/fastqc
 ```
 
-```console title="Wyjście"
+```console title="Output"
 ENCSR000COQ1_1_fastqc.html  ENCSR000COQ1_1_fastqc.zip
 ```
 
@@ -738,7 +738,7 @@ nextflow run rnaseq.nf -profile test
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `rnaseq.nf` [gloomy_becquerel] DSL2 - revision: bb11055736
 
@@ -755,7 +755,7 @@ Możesz znaleźć wyjścia przycinania w katalogu results.
 ls results/trimming
 ```
 
-```console title="Wyjście"
+```console title="Output"
 ENCSR000COQ1_1.fastq.gz_trimming_report.txt  ENCSR000COQ1_1_trimmed_fastqc.zip
 ENCSR000COQ1_1_trimmed_fastqc.html           ENCSR000COQ1_1_trimmed.fq.gz
 ```
@@ -1016,7 +1016,7 @@ Dodaj wyjścia dopasowania do sekcji `publish:`:
     }
     ```
 
-Następnie musimy powiedzieć Nextflow, gdzie umieścić te wyjścia.
+Następnie musimy powiedzieć Nextflow'owi, gdzie umieścić te wyjścia.
 
 #### 3.3.2. Skonfigurowanie nowych celów wyjściowych
 
@@ -1085,7 +1085,7 @@ nextflow run rnaseq.nf -profile test
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `rnaseq.nf` [elated_stonebraker] DSL2 - revision: e8e57d0cdd
 
@@ -1101,7 +1101,7 @@ Możesz znaleźć wyjścia dopasowania w katalogu results.
 ls results/align
 ```
 
-```console title="Wyjście"
+```console title="Output"
 ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log
 ```
 

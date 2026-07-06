@@ -15,7 +15,7 @@ additional_information:
   audience_prerequisites:
     - "**Hedef Kitle:** Bu kurs, veri analizi pipeline'ları geliştirmek veya özelleştirmek isteyen transkriptomik ve ilgili alanlardaki araştırmacılar için tasarlanmıştır."
     - "**Beceriler:** Komut satırı, temel betik kavramları ve yaygın RNAseq dosya formatları ile bir miktar aşinalık varsayılmaktadır."
-    - "**Ön Koşullar:** [Hello Nextflow](../../hello_nextflow/) eğitiminde ele alınan temel Nextflow kavramları ve araçları."
+    - "**Ön Koşullar:** [Hello Nextflow](../../hello_nextflow/index.md) eğitiminde ele alınan temel Nextflow kavramları ve araçları."
 ---
 
 # RNAseq için Nextflow
@@ -24,7 +24,7 @@ additional_information:
 
 **Nextflow'u gerçek dünya transkriptomik kullanım durumuna uygulayan uygulamalı bir kurs: Trim Galore, HISAT2 ve FastQC ile toplu RNAseq işleme.**
 
-Bu kurs, [Hello Nextflow](../../hello_nextflow/) başlangıç eğitimi üzerine inşa edilmiş olup, Nextflow'un toplu RNAseq analizi bağlamında nasıl kullanılacağını göstermektedir.
+Bu kurs, [Hello Nextflow](../../hello_nextflow/index.md) başlangıç eğitimi üzerine inşa edilmiş olup, Nextflow'un toplu RNAseq analizi bağlamında nasıl kullanılacağını göstermektedir.
 Adaptör dizilerini kırpan, okumaları genom referansına hizalayan ve birkaç aşamada kalite kontrol (QC) gerçekleştiren bir işleme pipeline'ı uygulayacaksınız.
 
 <!-- additional_information -->

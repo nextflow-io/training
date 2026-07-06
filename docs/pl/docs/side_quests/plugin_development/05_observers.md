@@ -207,7 +207,7 @@ Zmodyfikuj `GreetingFactory.groovy`, aby dodać nowy obserwator:
     }
     ```
 
-!!! note "Uwaga"
+!!! note "Składnia list w Groovy"
 
     Zastąpiliśmy javowy zapis `List.<TraceObserver>of(...)` prostszym literałem listy Groovy `[...]`.
     Oba zwracają `Collection`, ale składnia Groovy jest bardziej czytelna przy dodawaniu wielu elementów.
@@ -219,7 +219,7 @@ cd nf-greeting && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 
-!!! tip "Wskazówka"
+!!! tip "Po co `-ansi-log false`?"
 
     Domyślnie wyświetlanie postępu ANSI w Nextflow'ie nadpisuje poprzednie linie, pokazując przejrzysty, aktualizowany widok postępu.
     Oznacza to, że widoczna byłaby tylko *ostateczna* liczba zadań, a nie komunikaty pośrednie.
@@ -234,7 +234,7 @@ Powinieneś zobaczyć „✓ Task completed!" wyświetlone pięć razy (raz na z
 Decorated: *** Hello ***
 ✓ Task completed!
 ✓ Task completed!
-Decorated: *** Holà ***
+Decorated: *** Hola ***
 ✓ Task completed!
 ...
 Pipeline complete! 👋
@@ -310,7 +310,7 @@ nextflow run greet.nf -ansi-log false
 ??? example "Przykład"
 
     ```console
-    N E X T F L O W  ~  version 25.10.2
+    N E X T F L O W  ~  version 25.10.4
     Launching `greet.nf` [pensive_engelbart] DSL2 - revision: 85fefd90d0
     Pipeline is starting! 🚀
     Reversed: olleH
@@ -326,7 +326,7 @@ nextflow run greet.nf -ansi-log false
     [85/a6b3ad] Submitted process > SAY_HELLO (4)
     📊 Tasks completed so far: 1
     📊 Tasks completed so far: 2
-    Decorated: *** Holà ***
+    Decorated: *** Hola ***
     📊 Tasks completed so far: 3
     Decorated: *** Ciao ***
     [3c/be6686] Submitted process > SAY_HELLO (5)

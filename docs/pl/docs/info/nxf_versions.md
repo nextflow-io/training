@@ -6,11 +6,16 @@ hide:
   - footer
 ---
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 ## Aktualnie wspierana wersja składni Nextflow i wymagania
 
-Od wersji 3.0 portalu szkoleniowego wszystkie nasze kursy opierają się na wersji 25.10.2 Nextflow, chyba że na stronie indeksu kursu określono inaczej (z wyjątkiem przestarzałych lub zarchiwizowanych materiałów, które mogą nie zawierać informacji o wersji).
+Od wersji 3.0 portalu szkoleniowego wszystkie nasze kursy są kompatybilne z Nextflow w wersji 25.10.2 lub nowszej, chyba że na stronie indeksu kursu określono inaczej.
+(Nie dotyczy to przestarzałych ani zarchiwizowanych materiałów, które mogą nie zawierać informacji o wersji).
 
-Ponieważ kursy wykorzystują teraz typowane wejścia na poziomie workflow'a, a także dyrektywy wyjściowe na poziomie workflow'a, wymagają użycia parsera składni V2.
+Wersja Nextflow aktualnie ładowana domyślnie w naszym środowisku szkoleniowym to **Nextflow 25.10.4**.
+
+Ponieważ kursy wykorzystują teraz typowane wejścia na poziomie workflow'a, a także dyrektywy wyjściowe na poziomie workflow'a, wymagają użycia parsera składni V2, **chyba że w instrukcjach kursu wyraźnie zaznaczono inaczej**.
 Jeśli planujesz korzystać ze środowiska, które udostępniamy przez [Github Codespaces](../envsetup/01_setup.md) lub [lokalne devcontainery](../envsetup/03_devcontainer.md), nie musisz nic robić, chyba że w instrukcjach kursu wyraźnie zaznaczono inaczej.
 Jeśli jednak planujesz przejść przez szkolenia we własnym środowisku ([Instalacja ręczna](../envsetup/02_local.md)), musisz upewnić się, że używasz Nextflow w wersji 25.10.2 lub nowszej z włączonym parserem składni v2.
 

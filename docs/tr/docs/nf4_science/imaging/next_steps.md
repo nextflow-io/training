@@ -18,8 +18,8 @@ Nextflow bilginizi derinleştirmek için önerilen sonraki adımlar:
 
 Nextflow pipeline'larının nasıl yazılacağını öğrenmek istiyorsanız:
 
-- **[Hello Nextflow](../../hello_nextflow/)**: Kapsamlı Nextflow geliştirme eğitimi
-- **[Side Quests](../../side_quests/)**: Pipeline geliştiricileri için ileri düzey konular
+- **[Hello Nextflow](../../hello_nextflow/index.md)**: Kapsamlı Nextflow geliştirme eğitimi
+- **[Side Quests](../../side_quests/index.md)**: Pipeline geliştiricileri için ileri düzey konular
 
 ### Topluluğa katılın
 

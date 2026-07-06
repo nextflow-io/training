@@ -51,7 +51,7 @@ Aquí tens les nostres principals suggerències sobre què fer a continuació:
 - No només executis Nextflow, escriu-lo! Converteix-te en desenvolupador de Nextflow amb [Hello Nextflow](../hello_nextflow/index.md)
 - Aplica Nextflow a un cas d'ús d'anàlisi científica amb [Nextflow for Science](../nf4_science/index.md)
 - Comença amb nf-core amb [Hello nf-core](../hello_nf-core/index.md)
-- Aprèn tècniques de resolució de problemes amb la [Missió Secundària de Depuració](../side_quests/debugging.md)
+- Aprèn tècniques de resolució de problemes amb la [Missió Secundària de Depuració](../side_quests/debugging/index.md)
 
 Finalment, et recomanem que donis una ullada a [**Seqera Platform**](https://seqera.io/), una plataforma basada en el núvol desenvolupada pels creadors de Nextflow que fa encara més fàcil executar i gestionar els teus workflows, així com gestionar les teves dades i executar anàlisis de manera interactiva en qualsevol entorn.
 

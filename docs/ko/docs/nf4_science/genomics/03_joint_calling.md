@@ -198,7 +198,7 @@ gatk HaplotypeCaller \
 
 ### 1.5. 파이프라인 실행
 
-변경 사항이 작동하는지 확인하기 위해 워크플로우를 실행하세요.
+변경 사항이 작동하는지 확인하기 위해 워크플로우를 실행합니다.
 
 ```bash
 nextflow run genomics.nf -profile test
@@ -207,7 +207,7 @@ nextflow run genomics.nf -profile test
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [nostalgic_franklin] DSL2 - revision: f2c0a93c6a
 
@@ -649,7 +649,7 @@ nextflow run genomics.nf -profile test -resume
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [crazy_marconi] DSL2 - revision: 5da9afc841
 

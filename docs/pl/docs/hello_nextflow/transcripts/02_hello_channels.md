@@ -134,23 +134,23 @@ Jeśli jesteś zainteresowany, jak to zrobić zgodnie z najlepszymi praktykami, 
 
 ## 3. Dostarczanie wielu danych wejściowych przez tablicę
 
-Dobrze. Następnie zbadamy trochę, jak kanały są zbudowane i jak różnią się od innych rodzajów struktur danych w języku kodowania. I pomyślę trochę o tym, jak mógłbym potencjalnie użyć tablicy, która może być znajomą koncepcją, jeśli przyszedłeś z innych języków.
+Dobrze. Następnie zbadamy trochę, jak kanały są zbudowane i czym różnią się od innych rodzajów struktur danych w języku kodowania. Zastanowię się też, jak można by potencjalnie użyć tablicy, która może być znajomą koncepcją, jeśli przyszedłeś z innych języków.
 
-Czy mogę użyć tablicy w kanale? Spróbujmy. Utworzę tablicę, a skopiowałem to z dokumentacji, _"greetings_array"_ i _"Hello", "Bonjour"_ i _"Holà"_. A potem wstawię to tutaj zamiast moich zakodowanych na stałe ciągów znaków. Więc powiem `channel.of` _"greetings_array"_, przekazując tę tablicę do kanału. Spróbujmy.
+Czy można użyć tablicy w kanale? Spróbujmy. Utworzę tablicę — skopiowałem to z dokumentacji — _"greetings_array"_ z wartościami _"Hello"_, _"Bonjour"_ i _"Hola"_. Następnie wstawię ją tutaj zamiast zakodowanych na stałe ciągów znaków. Powiem więc `channel.of` _"greetings_array"_, przekazując tę tablicę do kanału. Spróbujmy.
 
-Wywołuję terminal i uruchamiam pipeline.
+Otwieram terminal i uruchamiam pipeline'a.
 
-Dobrze. Możesz zobaczyć, że instrukcja `view` tutaj wydrukowała naszą tablicę zgodnie z oczekiwaniami, ale potem cały ten czerwony tekst, lub nie będzie czerwony, jeśli nadal masz wyłączony _"-ansi-log"_, ale cały ten czerwony tekst mówi nam, że coś poszło nie tak.
+Dobrze. Widać, że instrukcja `view` wydrukowała naszą tablicę zgodnie z oczekiwaniami, ale cały ten czerwony tekst — lub nie będzie czerwony, jeśli nadal masz wyłączone _"-ansi-log"_ — mówi nam, że coś poszło nie tak.
 
-Nie mamy już ładnego zielonego ptaszka. Mamy czerwony krzyżyk, a jeśli tylko zrobię to trochę szersze, żeby było łatwiej czytać, Nextflow mówi nam, co poszło nie tak.
+Nie mamy już ładnego zielonego ptaszka. Mamy czerwony krzyżyk, a jeśli trochę poszerzę okno, żeby łatwiej było czytać, Nextflow powie nam, co poszło nie tak.
 
-Więc rozłóżmy to na sekcje. Mówi, że błąd został spowodowany przez, a potem powód błędu, którym są brakujące pliki wyjściowe. Więc w zasadzie ten blok `output` powiedział, że ten plik powinien zostać utworzony, a nie został. Następnie mówi, że to jest polecenie, które zostało wykonane. Więc to jest w zasadzie zawartość tego pliku _.command.sh_. Tak to wyglądało po tym, jak wszystkie te zmienne zostały wstawione.
+Rozłóżmy to na części. Mówi, że błąd został spowodowany przez — a następnie podaje jego przyczynę — brakujące pliki wyjściowe. Blok `output` stwierdził więc, że ten plik powinien zostać utworzony, a nie został. Dalej widnieje polecenie, które zostało wykonane — to w zasadzie zawartość pliku _.command.sh_, czyli to, jak wyglądało po podstawieniu wszystkich zmiennych.
 
-I możesz zobaczyć tutaj, że nasze polecenie `echo` zostało uruchomione tylko raz i użyło całej tablicy, ale w reprezentacji ciągu znaków, co nie jest tym, czego chcieliśmy.
+Widać tutaj, że polecenie `echo` zostało uruchomione tylko raz i użyło całej tablicy, ale w reprezentacji ciągu znaków, co nie jest tym, czego chcieliśmy.
 
-A potem polecenie zakończyło się w ten sposób, i to był katalog roboczy, gdzie możemy pójść i zobaczyć pliki, aby zrozumieć trochę więcej.
+Polecenie zakończyło się w ten sposób, a podany katalog roboczy to miejsce, gdzie możemy przejrzeć pliki i lepiej zrozumieć, co się stało.
 
-Dobrze. Więc co się stało, to Nextflow po prostu przekazał całą tę tablicę jako pojedynczy element kanału do procesu, co oznaczało, że proces uruchomił się tylko raz. Miał jedno zadanie i nie użył danych w strukturze, której oczekiwaliśmy.
+Dobrze. Co się więc wydarzyło? Nextflow po prostu przekazał całą tablicę jako pojedynczy element kanału do procesu, co oznaczało, że proces uruchomił się tylko raz. Miał jedno zadanie i nie użył danych w strukturze, której oczekiwaliśmy.
 
 ## 3.2. Używanie operatora do transformacji zawartości kanału
 
@@ -208,47 +208,47 @@ Wspomniałem na początku, że Nextflow enkapsuluje każde wykonane zadanie w sp
 
 ## 4.2. Używanie operatora `splitCsv()` do parsowania pliku
 
-Dobrze, spójrzmy na ten kanał i zobaczmy, jak wygląda. Możemy zrobić _".view"_, a skopiowałem to ze strony. Więc `.view`, i mamy dynamiczne domknięcie tutaj i mówimy nazwa zmiennej "_csv"_ jako wejście. Więc to zawartość kanału, i mówimy `before splitCsv`, i tak to wygląda.
+Dobrze, przyjrzyjmy się temu kanałowi i zobaczmy, jak wygląda. Możemy użyć _".view"_ — skopiowałem to ze strony. Więc `.view`, mamy tu dynamiczne domknięcie i podajemy nazwę zmiennej "_csv"_ jako wejście. To jest zawartość kanału, i mówimy `before splitCsv` — tak to wygląda.
 
-Jeśli uruchomię to ponownie, nadal się nie powiedzie, ale pokaże nam, co jest w tym kanale. To nie jest szczególnie ekscytujące. To ta zmienna _path_. Więc możesz zobaczyć, że to po prostu ciąg znaków tutaj, ponieważ jest drukowany do terminala, ale to jest obiekt _path_, który zawiera informacje i metadane o tym pliku.
+Jeśli uruchomię to ponownie, nadal się nie powiedzie, ale pokaże nam, co jest w tym kanale. Nie jest to szczególnie ekscytujące — to ta zmienna _path_. Możesz zobaczyć, że to po prostu ciąg znaków wydrukowany do terminala, ale jest to obiekt _path_, który zawiera informacje i metadane o tym pliku.
 
-Nie chcemy przekazywać metadanych pliku do wejścia. Chcemy przekazać zawartość tego pliku. Jeśli spojrzymy na plik _greetings.csv_, możesz zobaczyć tutaj, że ma te różne zmienne tutaj. _Hello, Bonjour, Holà_ znowu. I to są rzeczy, które naprawdę chcemy przekazywać do naszego procesu, a nie tylko sam plik jako pojedynczy obiekt.
+Nie chcemy przekazywać metadanych pliku na wejście. Chcemy przekazać zawartość tego pliku. Jeśli spojrzymy na plik _greetings.csv_, zobaczymy, że zawiera różne zmienne: _Hello, Bonjour, Hola_ — znowu. To właśnie te wartości chcemy przekazywać do naszego procesu, a nie sam plik jako pojedynczy obiekt.
 
-Więc musimy sparsować ten plik CSV. Musimy go rozpakować, dostać się do zawartości pliku CSV, a potem przekazać zawartość w kanale do procesu.
+Musimy więc sparsować ten plik CSV — rozpakować go, dostać się do jego zawartości, a następnie przekazać tę zawartość przez kanał do procesu.
 
-Jak prawdopodobnie możesz wywnioskować z komunikatu logowania, chcemy użyć _splitCsv_, który jest kolejnym operatorem, kolejnym operatorem kanału. Więc jeśli zrobię "_dot" "s"_, a potem zobaczysz, że jest automatycznie sugerowany. Ups, _splitCsv_ i nawiasy.
+Jak pewnie możesz wywnioskować z komunikatu w logu, chcemy użyć _splitCsv_, który jest kolejnym operatorem kanału. Jeśli wpiszę "_dot" "s"_, zobaczysz, że jest automatycznie podpowiadany. Ups — _splitCsv_ i nawiasy.
 
-A potem po _splitCsv_, wstawię kolejną instrukcję `view`, żebyśmy mogli zobaczyć, jak to wygląda potem. Uruchommy pipeline i zobaczmy, co mamy.
+Po _splitCsv_ dodam kolejną instrukcję _view_, żebyśmy mogli zobaczyć, jak to wygląda po parsowaniu. Uruchommy pipeline i zobaczmy, co mamy.
 
-Dobrze. Nadal się nie powiodło, ale w nowy i ekscytujący sposób, co jest postępem.
+Dobrze. Nadal się nie powiodło, ale w nowy i ekscytujący sposób — co jest postępem.
 
-Tym razem znowu mamy jakiś problem z naszym skryptem, który został wyrenderowany. Teraz. Nie mamy już końcowej ścieżki, ale mamy tablicę zmiennych, która wygląda bardzo podobnie do błędu, który mieliśmy wcześniej, gdy przekazywaliśmy tablicę jako stałe wejście.
+Tym razem znowu mamy jakiś problem ze skryptem, który został wyrenderowany. Nie mamy już końcowej ścieżki, ale mamy tablicę zmiennych, która wygląda bardzo podobnie do błędu sprzed chwili, gdy przekazywaliśmy tablicę jako stałe wejście.
 
-Z naszym logowaniem z operatora `view` możemy zobaczyć, że `before splitCsv` była ścieżka. I rzeczywiście, po _splitCsv_ mamy trzy różne wyjścia i każde z tych wyjść wygląda strasznie podobnie do każdego z wierszy z pliku _greetings.csv_, co ma sens.
+Z logowania przez operator `view` możemy zobaczyć, że `before splitCsv` była ścieżka. I rzeczywiście, po _splitCsv_ mamy trzy różne wyjścia — każde z nich wygląda bardzo podobnie do jednego z wierszy pliku _greetings.csv_, co ma sens.
 
-Więc co się tutaj stało, to Nextflow sparsował ten plik CSV, dał nam trzy obiekty, jedną tablicę dla każdej linii pliku CSV. Więc potem trzy razy przekazaliśmy tablicę zmiennych do kanału zamiast pojedynczej wartości ciągu znaków.
+Co się tutaj stało: Nextflow sparsował plik CSV i dał nam trzy obiekty — jedną tablicę dla każdej linii. Trzy razy przekazaliśmy więc tablicę zmiennych do kanału zamiast pojedynczej wartości ciągu znaków.
 
-Dobrze, więc ostatnim razem mieliśmy ten problem, użyliśmy _flatten_. Spróbujmy bardzo szybko. Wypróbujmy `flatten` i zobaczmy, co się stanie.
+Dobrze, ostatnim razem gdy mieliśmy ten problem, użyliśmy _flatten_. Spróbujmy szybko — wypróbujmy `flatten` i zobaczmy, co się stanie.
 
-Mogę nazwać te zmienne, jak chcę. Więc nazwę to _myarray_, bo to nie jest już naprawdę CSV. Spróbujmy uruchomić to ponownie i zobaczmy, co się stanie z _flatten_.
+Mogę nazwać te zmienne jak chcę, więc nazwę to _myarray_, bo to już właściwie nie jest CSV. Spróbujmy uruchomić ponownie i zobaczmy, co się stanie z _flatten_.
 
-Więc tym razem uruchomimy, sparsowaliśmy CSV na trzy obiekty tablicowe, a potem je spłaszczyliśmy. I tym razem przeszło. I pipeline Nextflow się uruchomił. Jednak możesz zobaczyć, że _flatten_ naprawdę się rozpędza i spłaszcza wszystko. I więc otrzymujemy trzy niezależne wpisy tablicowe dla każdego wiersza. I więc uruchomił proces trzy razy dla każdego wiersza CSV. I teraz mamy całą masę plików wyników, i 123, 456, i wszelkiego rodzaju rzeczy, nie tylko tę pierwszą kolumnę CSV, której naprawdę chcieliśmy.
+Tym razem uruchomimy pipeline: sparsowaliśmy CSV na trzy obiekty tablicowe, a potem je spłaszczyliśmy. I tym razem przeszło — pipeline Nextflow'a się uruchomił. Możesz jednak zobaczyć, że _flatten_ naprawdę idzie na całość i spłaszcza wszystko. Otrzymujemy trzy niezależne wpisy tablicowe dla każdego wiersza, więc proces uruchomił się trzy razy dla każdego wiersza CSV. Teraz mamy całą masę plików wyników — 123, 456 i wszelkiego rodzaju rzeczy — nie tylko pierwszą kolumnę CSV, której naprawdę chcieliśmy.
 
 ## 4.3. Używanie operatora `map()` do wyodrębnienia powitań
 
-Więc jak dostać się tylko do pierwszej kolumny? Jeśli `flatten` jest tutaj zbyt uproszczony, potrzebujemy bardziej złożonego operatora, gdzie możemy faktycznie dostosować i powiedzieć mu, czego chcemy z CSV.
+Jak więc dostać się tylko do pierwszej kolumny? Jeśli `flatten` jest tutaj zbyt uproszczony, potrzebujemy bardziej złożonego operatora, który pozwoli nam dostosować i wskazać, czego chcemy z CSV.
 
-Aby to zrobić, użyjemy _map_. W zasadzie _map_ po prostu mówi, uruchom jakiś kod, jakąś funkcję na każdym elemencie, który otrzymam i zrób jakąś transformację na nim. A ponieważ jest tak elastyczny, zobaczysz, że pojawia się w kodzie Nextflow cały czas.
+Użyjemy do tego _map_. W zasadzie _map_ mówi po prostu: uruchom jakiś kod, jakąś funkcję na każdym otrzymanym elemencie i wykonaj na nim pewną transformację. Ponieważ jest tak elastyczny, zobaczysz go w kodzie Nextflow bardzo często.
 
-Sam w sobie nic nie robi. Więc nie chcemy zwykłych nawiasów, chcemy tutaj domknięcie i musimy mu powiedzieć, co zrobić. Więc powiem _"row"_, bo dostaje wiersze z CSV, więc to logiczna nazwa zmiennej. Jest wejściem. I chcę zwrócić tylko pierwszy element tej tablicy.
+Sam w sobie nic nie robi. Nie chcemy więc zwykłych nawiasów — potrzebujemy tutaj domknięcia i musimy mu powiedzieć, co ma robić. Użyjemy nazwy _"row"_, bo operator otrzymuje wiersze z CSV — to logiczna nazwa zmiennej. Jest ona wejściem. Chcemy zwrócić tylko pierwszy element tej tablicy.
 
-Tablice w Nextflow są indeksowane od zera, więc powiemy tylko pierwszy element, który jest wierszem zero. Gdybym chciał drugą kolumnę, mógłbym być jeden lub trzecią kolumnę być dwa, i tak dalej. Możemy zwrócić tutaj, co chcemy, ale zwrócę tylko pierwszą wartość.
+Tablice w Nextflow są indeksowane od zera, więc wskazujemy pierwszy element, czyli wiersz zero. Gdybyśmy chcieli drugiej kolumny, użylibyśmy jedynki, trzeciej — dwójki, i tak dalej. Możemy zwrócić tutaj cokolwiek chcemy, ale zwrócimy tylko pierwszą wartość.
 
-I teraz możemy uruchomić pipeline ponownie i zobaczyć, czy robi to, czego oczekujemy.
+Teraz możemy uruchomić pipeline ponownie i sprawdzić, czy robi to, czego oczekujemy.
 
-I rzeczywiście, po _splitCsv_ mamy nasze tablice, a potem po _map_ mamy nasze ładne czyste ciągi znaków, tylko _"Hello", "Bonjour"_ i _"Holà"_. I pipeline teraz robi to, czego chcemy. Fantastycznie.
+I rzeczywiście — po _splitCsv_ mamy nasze tablice, a po _map_ mamy czyste ciągi znaków: _"Hello"_, _"Bonjour"_ i _"Hola"_. Pipeline robi teraz dokładnie to, czego chcemy. Świetnie.
 
-Więc możemy teraz pozbyć się wszystkich tych poleceń `view`. Nie potrzebujemy ich już.
+Możemy więc pozbyć się wszystkich tych poleceń `view` — nie są nam już potrzebne.
 
 ## Podsumowanie
 

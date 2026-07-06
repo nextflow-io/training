@@ -1,12 +1,12 @@
 ---
-title: Home
-description: Welcome to the Nextflow community training portal!
+title: Inici
+description: Benvingut/da al portal de formació de la comunitat Nextflow!
 hide:
   - toc
   - footer
 ---
 
-# Formació de Nextflow
+# Formació en Nextflow
 
 <div class="grid cards" markdown>
 
@@ -14,12 +14,12 @@ hide:
 
     ---
 
-    **Et donem la benvinguda al portal de formació de la comunitat Nextflow!**
+    **Benvingut/da al portal de formació de la comunitat Nextflow!**
 
     Els cursos de formació que es llisten a continuació estan dissenyats per ser utilitzats com a recurs d'autoservei.
-    Pots treballar-los pel teu compte en qualsevol moment, ja sigui a l'entorn basat en web que proporcionem via Github Codespaces o al teu propi entorn.
+    Podeu treballar-hi pel vostre compte en qualsevol moment, ja sigui en l'entorn basat en web que proporcionem mitjançant Github Codespaces o en el vostre propi entorn.
 
-    [Explora els cursos :material-arrow-right:](#catalog-of-nextflow-training-courses){ .md-button .md-button--primary .mt-1 }
+    [Exploreu els cursos :material-arrow-right:](#catalog-of-nextflow-training-courses){ .md-button .md-button--primary .mt-1 }
 
 -   :material-information-outline:{ .lg .middle } __Informació addicional__
 
@@ -27,43 +27,43 @@ hide:
 
     ??? warning "Compatibilitat de versions"
 
-        <!-- Any update to this content needs to be copied to the local installation page -->
-        **A partir de gener de 2026, tots els nostres cursos de formació de Nextflow requereixen la versió 25.10.2 o posterior de Nextflow, amb la sintaxi estricta activada, tret que s'indiqui el contrari.**
+        <!-- Qualsevol actualització d'aquest contingut s'ha de copiar a la pàgina d'instal·lació local -->
+        **A partir del gener de 2026, tots els nostres cursos de formació en Nextflow requereixen la versió 25.10.2 de Nextflow o posterior, amb la sintaxi estricta activada, tret que s'indiqui el contrari.**
 
-        Per a més informació sobre els requisits de versió i la sintaxi estricta, consulteu la [guia de migració de la documentació de Nextflow](https://nextflow.io/docs/latest/strict-syntax.html).
+        Per obtenir més informació sobre els requisits de versió i la sintaxi estricta, consulteu la [guia de migració de la documentació de Nextflow](https://nextflow.io/docs/latest/strict-syntax.html).
 
-        Les versions antigues del material de formació corresponents a la sintaxi anterior estan disponibles mitjançant el selector de versions a la barra de menú d'aquesta pàgina web.
+        Les versions anteriors del material de formació corresponents a la sintaxi prèvia estan disponibles mitjançant el selector de versions a la barra de menú d'aquesta pàgina web.
 
     ??? terminal "Opcions d'entorn"
 
-        Proporcionem un entorn de formació basat en web on tot el que necessites per fer la formació està preinstal·lat, disponible a través de Github Codespaces (requereix un compte gratuït de GitHub).
+        Proporcionem un entorn de formació basat en web on tot el que necessiteu per fer la formació està preinstal·lat, disponible a través de Github Codespaces (requereix un compte de GitHub gratuït).
 
-        [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+        [![Obriu a GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-        Si això no s'ajusta a les teves necessitats, consulta les altres [Opcions d'entorn](./envsetup/index.md).
+        Si això no s'adapta a les vostres necessitats, consulteu les altres [opcions d'entorn](./envsetup/index.md).
 
     ??? learning "Esdeveniments de formació"
 
-        Si prefereixes fer la formació de Nextflow com a part d'un esdeveniment estructurat, hi ha moltes oportunitats per fer-ho. Recomanem consultar les següents opcions:
+        Si preferiu fer la formació en Nextflow com a part d'un esdeveniment estructurat, hi ha moltes oportunitats per fer-ho. Us recomanem que consulteu les opcions següents:
 
-        - **[Training Weeks]()** organitzades trimestralment per l'equip de la Comunitat
-        - **[Seqera Events](https://seqera.io/events/)** inclouen esdeveniments de formació presencials organitzats per Seqera (cerca 'Seqera Sessions' i 'Nextflow Summit')
-        - **[Nextflow Ambassadors]()** organitzen esdeveniments per a la seva comunitat local
-        - **[nf-core events](https://nf-co.re/events)** inclouen hackathons de la comunitat
+        - **[Setmanes de formació]()** organitzades trimestralment per l'equip de la Comunitat
+        - **[Esdeveniments de Seqera](https://seqera.io/events/)** inclouen esdeveniments de formació presencial organitzats per Seqera (cerqueu 'Seqera Sessions' i 'Nextflow Summit')
+        - **[Ambaixadors de Nextflow]()** organitzen esdeveniments per a la seva comunitat local
+        - **[Esdeveniments de nf-core](https://nf-co.re/events)** inclouen hackathons de la comunitat
 
     ??? people "Informació per a formadors"
 
-        Si ets un instructor que organitza les seves pròpies formacions, ets benvingut/da a utilitzar els nostres materials directament des del portal de formació sempre que atribueixis el crèdit adequat. Consulta 'Crèdits i contribucions' a continuació per a més detalls.
+        Si sou un instructor que organitza les vostres pròpies formacions, podeu utilitzar els nostres materials directament des del portal de formació sempre que atribuïu el crèdit corresponent. Vegeu 'Crèdits i contribucions' a continuació per obtenir més detalls.
 
-        A més, ens encantaria saber de tu sobre com podríem donar millor suport als teus esforços de formació! Contacta'ns a [community@seqera.io](mailto:community@seqera.io) o al fòrum de la comunitat (consulta la pàgina d'[Ajuda](help.md)).
+        A més, ens encantaria saber com podríem donar-vos millor suport en els vostres esforços de formació. Poseu-vos en contacte amb nosaltres a [community@seqera.io](mailto:community@seqera.io) o al fòrum de la comunitat (vegeu la pàgina d'[Ajuda](help.md)).
 
     ??? licensing "Llicència de codi obert i política de contribució"
 
         [![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](assets/img/cc_by-nc-sa.svg){ align=right }](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-        Aquest material de formació està desenvolupat i mantingut per [Seqera](https://seqera.io) i publicat sota una llicència de codi obert ([CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/)) en benefici de la comunitat. Si vols utilitzar aquest material d'una manera que quedi fora de l'abast de la llicència (tingues en compte les limitacions sobre l'ús comercial i la redistribució), contacta'ns a [community@seqera.io](mailto:community@seqera.io) per discutir la teva sol·licitud.
+        Aquest material de formació és desenvolupat i mantingut per [Seqera](https://seqera.io) i publicat sota una llicència de codi obert ([CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/)) en benefici de la comunitat. Si voleu utilitzar aquest material d'una manera que quedi fora de l'àmbit de la llicència (tingueu en compte les limitacions sobre l'ús comercial i la redistribució), poseu-vos en contacte amb nosaltres a [community@seqera.io](mailto:community@seqera.io) per parlar de la vostra sol·licitud.
 
-        Donem la benvinguda a millores, correccions i informes d'errors de la comunitat. Cada pàgina té una icona :material-file-edit-outline: a la part superior dreta de la pàgina que enllaça amb el repositori de codi, on pots informar de problemes o proposar canvis al material font de formació mitjançant una pull request. Consulta el `README.md` al repositori per a més detalls.
+        Acceptem millores, correccions i informes d'errors de la comunitat. Cada pàgina té una icona :material-file-edit-outline: a la part superior dreta que enllaça amb el repositori de codi, on podeu informar de problemes o proposar canvis al material de formació font mitjançant una pull request. Vegeu el fitxer `README.md` al repositori per obtenir més detalls.
 
 </div>
 
@@ -73,7 +73,7 @@ hide:
     Agraïm els vostres comentaris i suggeriments de millora.
     Consulteu la nostra [guia de traducció](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md) per a més informació.
 
-## Catàleg de cursos de formació de Nextflow
+## Catàleg de cursos de formació en Nextflow
 
 <div class="grid cards" markdown>
 
@@ -81,45 +81,45 @@ hide:
 
     ---
 
-    ### :material-compass:{.nextflow-primary} Nextflow per a Principiants {.mt-1}
+    ### :material-compass:{.nextflow-primary} Nextflow per a nouvinguts {.mt-1}
 
-    Cursos independents del domini destinats a aquells que són completament nous a Nextflow. Cada curs consisteix en una sèrie de mòduls de formació dissenyats per ajudar els estudiants a desenvolupar les seves habilitats progressivament.
+    Cursos independents del domini destinats a aquells que són completament nous a Nextflow. Cada curs consisteix en una sèrie de mòduls de formació dissenyats per ajudar els estudiants a desenvolupar les seves habilitats de manera progressiva.
 
-    ??? courses "**Hello Nextflow:** Aprèn a desenvolupar els teus propis pipelines"
+    ??? courses "**Hello Nextflow:** Apreneu a desenvolupar els vostres propis pipelines"
 
-        Aquest curs cobreix els components principals del llenguatge Nextflow amb prou detall per permetre desenvolupar pipelines simples però completament funcionals, a més d'elements clau de disseny, desenvolupament i pràctiques de configuració de pipelines.
+        Aquest curs cobreix els components principals del llenguatge Nextflow amb prou detall per permetre el desenvolupament de pipelines simples però completament funcionals, a més dels elements clau de disseny, desenvolupament i pràctiques de configuració de pipelines.
 
-        [Comença la formació Hello Nextflow :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--secondary }
+        [Comenceu la formació Hello Nextflow :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Nextflow Run:** Aprèn a executar pipelines existents"
+    ??? courses "**Nextflow Run:** Apreneu a executar pipelines existents"
 
-        Una introducció concisa a l'execució i configuració de pipelines de Nextflow, basada en el curs de desenvolupadors Hello Nextflow però amb menys èmfasi en el codi. Cobreix l'execució, les sortides, l'estructura bàsica del codi i la configuració per a diferents entorns de càlcul.
+        Una introducció concisa a l'execució i configuració de pipelines Nextflow, basada en el curs per a desenvolupadors Hello Nextflow però amb menys èmfasi en el codi. Cobreix l'execució, les sortides, l'estructura bàsica del codi i la configuració per a diferents entorns de càlcul.
 
-        [Comença la formació Nextflow Run :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
+        [Comenceu la formació Nextflow Run :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
 
     ---
 
-    ### :material-microscope:{.nextflow-primary} Nextflow per a la Ciència {.mt-1}
+    ### :material-microscope:{.nextflow-primary} Nextflow per a la ciència {.mt-1}
 
-    Aprèn a aplicar els conceptes i components presentats a 'Hello Nextflow' a casos d'ús científics específics.
+    Apreneu a aplicar els conceptes i components presentats a 'Hello Nextflow' a casos d'ús científics específics.
 
-    ??? courses "**Nextflow for Genomics** (detecció de variants)"
+    ??? courses "**Nextflow per a Genòmica** (detecció de variants)"
 
-        Per a investigadors que vulguin aprendre a desenvolupar els seus propis pipelines de genòmica. El curs utilitza un cas d'ús de detecció de variants per demostrar com desenvolupar un pipeline de genòmica simple però funcional.
+        Per a investigadors que volen aprendre a desenvolupar els seus propis pipelines de genòmica. El curs utilitza un cas d'ús de detecció de variants per demostrar com desenvolupar un pipeline de genòmica simple però funcional.
 
-        [Comença la formació Nextflow for Genomics :material-arrow-right:](nf4_science/genomics/){ .md-button .md-button--secondary }
+        [Comenceu la formació Nextflow per a Genòmica :material-arrow-right:](nf4_science/genomics/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Nextflow for RNAseq** (RNAseq massiu)"
+    ??? courses "**Nextflow per a RNAseq** (RNAseq massiu)"
 
-        Per a investigadors que vulguin aprendre a desenvolupar els seus propis pipelines de RNAseq. El curs utilitza un cas d'ús de processament de RNAseq massiu per demostrar com desenvolupar un pipeline de RNAseq simple però funcional.
+        Per a investigadors que volen aprendre a desenvolupar els seus propis pipelines de RNAseq. El curs utilitza un cas d'ús de processament de RNAseq massiu per demostrar com desenvolupar un pipeline de RNAseq simple però funcional.
 
-        [Comença la formació Nextflow for RNAseq :material-arrow-right:](nf4_science/rnaseq/){ .md-button .md-button--secondary }
+        [Comenceu la formació Nextflow per a RNAseq :material-arrow-right:](nf4_science/rnaseq/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Nextflow for Imaging** (òmica espacial)"
+    ??? courses "**Nextflow per a Imatge** (òmica espacial)"
 
-        Per a investigadors en imatge i òmica espacial que vulguin aprendre a executar i personalitzar pipelines d'anàlisi. El curs utilitza el pipeline nf-core/molkart per proporcionar un pipeline biològicament rellevant que demostra com executar, configurar i gestionar entrades per a workflows de pipelines de Nextflow.
+        Per a investigadors en imatge i òmica espacial que volen aprendre a executar i personalitzar pipelines d'anàlisi. El curs utilitza el pipeline nf-core/molkart per proporcionar un pipeline biològicament rellevant que demostra com executar, configurar i gestionar les entrades per a workflows de pipelines Nextflow.
 
-        [Comença la formació Nextflow for Imaging :material-arrow-right:](nf4_science/imaging/){ .md-button .md-button--secondary }
+        [Comenceu la formació Nextflow per a Imatge :material-arrow-right:](nf4_science/imaging/index.md){ .md-button .md-button--secondary }
 
 -   :material-run:{ .lg .middle } __Itinerari avançat__
 
@@ -127,41 +127,41 @@ hide:
 
     ### :material-bridge:{.nextflow-primary} De Nextflow a nf-core {.mt-1}
 
-    Aprèn a utilitzar codi i bones pràctiques del projecte comunitari [nf-core](https://nf-co.re/).
+    Apreneu a utilitzar codi i bones pràctiques del projecte de la comunitat [nf-core](https://nf-co.re/).
 
-    Aquests cursos t'ajuden a passar dels fonaments de Nextflow a les bones pràctiques d'nf-core.
-    Comprèn com i per què la comunitat nf-core construeix pipelines, i com pots contribuir i reutilitzar aquestes tècniques.
+    Aquests cursos us ajuden a passar dels fonaments de Nextflow a les bones pràctiques de nf-core.
+    Enteneu com i per què la comunitat nf-core construeix pipelines, i com podeu contribuir-hi i reutilitzar aquestes tècniques.
 
-    ??? courses "**Hello nf-core:** Comença amb nf-core"
+    ??? courses "**Hello nf-core:** Primers passos amb nf-core"
 
-        Per a desenvolupadors que vulguin aprendre a executar i desenvolupar pipelines compatibles amb [nf-core](https://nf-co.re/). El curs cobreix l'estructura dels pipelines nf-core amb prou detall per permetre desenvolupar pipelines simples però completament funcionals que segueixen la plantilla nf-core i les bones pràctiques de desenvolupament, així com utilitzar mòduls nf-core existents.
+        Per a desenvolupadors que volen aprendre a executar i desenvolupar pipelines compatibles amb [nf-core](https://nf-co.re/). El curs cobreix l'estructura dels pipelines nf-core amb prou detall per permetre el desenvolupament de pipelines simples però completament funcionals que segueixen la plantilla nf-core i les bones pràctiques de desenvolupament, així com l'ús de mòduls nf-core existents.
 
-        [Comença la formació Hello nf-core :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
+        [Comenceu la formació Hello nf-core :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
 
     ---
 
-    ### :material-rocket-launch:{.nextflow-primary} Formació Avançada de Nextflow {.mt-1}
+    ### :material-rocket-launch:{.nextflow-primary} Formació avançada en Nextflow {.mt-1}
 
-    Aprèn conceptes i mecanismes avançats per desenvolupar i desplegar pipelines de Nextflow per abordar casos d'ús del món real.
+    Apreneu conceptes i mecanismes avançats per desenvolupar i desplegar pipelines Nextflow per abordar casos d'ús del món real.
 
-    ??? courses "**Side Quests:** Aprofundiments en temes independents"
+    ??? courses "**Side Quests:** Immersions en temes independents"
 
-        Mini-cursos independents destinats a desenvolupadors de Nextflow que vulguin ampliar el seu rang i/o aprofundir les seves habilitats en temes particulars. Es presenten linealment però es poden fer en qualsevol ordre (consulta les dependències a la visió general de cada mini-curs).
+        Mini-cursos independents destinats a desenvolupadors de Nextflow que volen ampliar el seu ventall i/o aprofundir les seves habilitats en temes concrets. Es presenten de manera lineal però es poden fer en qualsevol ordre (vegeu les dependències a la visió general de cada mini-curs).
 
-        [Explora els Side Quests :material-arrow-right:](side_quests/){ .md-button .md-button--secondary }
+        [Exploreu els Side Quests :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Training Collections:** Itineraris d'aprenentatge recomanats a través dels Side Quests"
+    ??? courses "**Col·leccions de formació:** Itineraris d'aprenentatge recomanats a través dels Side Quests"
 
-        Les Training Collections combinen múltiples Side Quests per proporcionar una experiència d'aprenentatge completa al voltant d'un tema o cas d'ús particular.
+        Les col·leccions de formació combinen múltiples Side Quests per proporcionar una experiència d'aprenentatge completa al voltant d'un tema o cas d'ús particular.
 
-        [Explora les Training Collections :material-arrow-right:](training_collections/){ .md-button .md-button--secondary }
+        [Exploreu les col·leccions de formació :material-arrow-right:](training_collections/index.md){ .md-button .md-button--secondary }
 
 </div>
 
-!!! info "Busques materials de formació arxivats?"
+!!! info "Busqueu materials de formació arxivats?"
 
-    Els materials de formació antics (Fundamentals Training, Advanced Training i altres cursos experimentals) s'han eliminat del portal de formació ja que són incompatibles amb la sintaxi estricta de Nextflow 3.0.
-    Si necessites accés a aquests materials, estan disponibles a l'[historial de git](https://github.com/nextflow-io/training) abans de gener de 2026.
+    Els materials de formació antics (Formació Fonamental, Formació Avançada i altres cursos experimentals) s'han eliminat del portal de formació perquè són incompatibles amb la sintaxi estricta de Nextflow 3.0.
+    Si necessiteu accedir a aquests materials, estan disponibles a l'[historial de git](https://github.com/nextflow-io/training) anterior al gener de 2026.
 
 ---
 

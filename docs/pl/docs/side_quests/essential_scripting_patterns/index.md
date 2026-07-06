@@ -1,4 +1,4 @@
-# Podstawowe Wzorce Skryptowania w Nextflow
+# Podstawowe Wzorce Skryptowania
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
@@ -26,7 +26,7 @@ Przekształcimy prosty workflow odczytujący CSV w zaawansowany pipeline bioinfo
 
 Przed podjęciem tego side questu powinieneś:
 
-- Ukończyć samouczek [Hello Nextflow](../hello_nextflow/README.md) lub równoważny kurs dla początkujących.
+- Ukończyć samouczek [Hello Nextflow](../../hello_nextflow/index.md) lub równoważny kurs dla początkujących.
 - Swobodnie posługiwać się podstawowymi konceptami i mechanizmami Nextflow (procesy, kanały, operatory, praca z plikami, metadane)
 - Posiadać podstawową znajomość typowych konstrukcji programistycznych (zmienne, mapy, listy)
 
@@ -39,7 +39,7 @@ Zaczniemy od podstawowych konceptów i będziemy stopniowo przechodzić do zaawa
 
 #### Otwórz środowisko szkoleniowe
 
-Jeśli jeszcze tego nie zrobiłeś, otwórz środowisko szkoleniowe zgodnie z opisem w sekcji [Konfiguracja środowiska](../envsetup/index.md).
+Jeśli jeszcze tego nie zrobiłeś, otwórz środowisko szkoleniowe zgodnie z opisem w sekcji [Konfiguracja środowiska](../../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -167,7 +167,7 @@ Oto jak wygląda ta operacja map:
 
 To nasze pierwsze **domknięcie** — anonimowa funkcja, którą można przekazać jako argument (podobna do lambd w Pythonie lub funkcji strzałkowych w JavaScript). Domknięcia są niezbędne do pracy z operatorami Nextflow.
 
-Domknięcie `{ row -> return row }` przyjmuje parametr `row` (może mieć dowolną nazwę: `item`, `sample` itp.).
+Domknięcie `#!groovy { row -> return row }` przyjmuje parametr `row` (może mieć dowolną nazwę: `item`, `sample` itp.).
 
 Gdy operator `.map()` przetwarza każdy element kanału, przekazuje go do Twojego domknięcia. Tutaj `row` przechowuje jeden wiersz CSV na raz.
 
@@ -278,7 +278,7 @@ Operator trójargumentowy to skrócony zapis instrukcji if/else, który ma posta
 
 Operator dodawania map `+` tworzy **nową mapę** zamiast modyfikować istniejącą. Ten wiersz tworzy nową mapę zawierającą wszystkie pary klucz-wartość z `sample_meta` plus nowy klucz `priority`.
 
-!!! Note "Uwaga"
+!!! note "Uwaga"
 
     Nigdy nie modyfikuj map przekazywanych do domknięć — zawsze twórz nowe, używając np. `+`. W Nextflow te same dane często przepływają przez wiele operacji jednocześnie. Modyfikacja mapy w miejscu może powodować nieprzewidywalne efekty uboczne, gdy inne operacje odwołują się do tego samego obiektu. Tworzenie nowych map zapewnia, że każda operacja ma własną czystą kopię.
 
@@ -356,7 +356,7 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [peaceful_cori] DSL2 - revision: 4cc4a8340f
 
@@ -444,7 +444,7 @@ Ta struktura krotki `[meta, file]` to powszechny wzorzec w Nextflow do przekazyw
 
 !!! note "Uwaga"
 
-    **Mapy i metadane**: Mapy są fundamentem pracy z metadanymi w Nextflow. Bardziej szczegółowe wyjaśnienie pracy z mapami metadanych znajdziesz w side queście [Working with metadata](../metadata/).
+    **Mapy i metadane**: Mapy są fundamentem pracy z metadanymi w Nextflow. Bardziej szczegółowe wyjaśnienie pracy z mapami metadanych znajdziesz w side queście [Working with metadata](../metadata/index.md).
 
 Nasz workflow demonstruje podstawowy wzorzec: **operacje dataflow** (`workflow`, `channel.fromPath()`, `.splitCsv()`, `.map()`, `.view()`) orkiestrują przepływ danych przez pipeline, podczas gdy **skryptowanie** (mapy `[key: value]`, metody stringów, konwersje typów, operatory trójargumentowe) wewnątrz domknięcia `.map()` obsługuje transformację poszczególnych elementów danych.
 
@@ -485,7 +485,7 @@ nextflow run collect.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `collect.nf` [loving_mendel] DSL2 - revision: e8d054a46e
 
@@ -543,7 +543,7 @@ nextflow run collect.nf
 ??? success "Wyjście polecenia"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `collect.nf` [cheeky_stonebraker] DSL2 - revision: 2d5039fb47
 
@@ -614,7 +614,7 @@ nextflow run collect.nf
 ??? success "Wyjście polecenia"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `collect.nf` [cranky_galileo] DSL2 - revision: 5f3c8b2a91
 
@@ -643,7 +643,7 @@ Operator spread jest szczególnie przydatny, gdy trzeba wyodrębnić jedną wła
 !!! tip "Wskazówka: Kiedy używać spread zamiast collect"
 
     - **Używaj spread (`*.`)** do prostego dostępu do właściwości: `samples*.id`, `files*.name`
-    - **Używaj collect** do transformacji lub złożonej logiki: `samples.collect { it.id.toUpperCase() }`, `samples.collect { [it.id, it.quality > 40] }`
+    - **Używaj collect** do transformacji lub złożonej logiki: `#!groovy samples.collect { it.id.toUpperCase() }`, `#!groovy samples.collect { [it.id, it.quality > 40] }`
 
 ### Podsumowanie
 
@@ -743,7 +743,7 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [clever_pauling] DSL2 - revision: 605d2058b4
 
@@ -898,7 +898,7 @@ Napraw to, dodając logikę warunkową do bloku `script:` procesu `FASTP`. Instr
 
 === "Po"
 
-    ```groovy title="main.nf" linenums="10" hl_lines="3-27"
+    ```groovy title="main.nf" linenums="10" hl_lines="2-26"
         script:
         // Proste wykrywanie single-end vs paired-end
         def is_single = reads instanceof List ? reads.size() == 1 : true
@@ -953,7 +953,7 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [adoring_rosalind] DSL2 - revision: 04b1cd93e9
 
@@ -979,7 +979,7 @@ fastp \
     --thread 2
 ```
 
-Inny przykład dynamicznej logiki skryptów można znaleźć w [module Genomics kursu Nextflow for Science](../../nf4science/genomics/02_joint_calling). W tym module wywoływany proces GATK może przyjmować wiele plików wejściowych, ale każdy musi być poprzedzony `-V`, aby utworzyć poprawną linię poleceń. Proces używa skryptowania do transformacji kolekcji plików wejściowych (`all_gvcfs`) w poprawne argumenty polecenia:
+Inny przykład dynamicznej logiki skryptów można znaleźć w [module Genomics kursu Nextflow for Science](../../nf4_science/genomics/03_joint_calling.md). W tym module wywoływany proces GATK może przyjmować wiele plików wejściowych, ale każdy musi być poprzedzony `-V`, aby utworzyć poprawną linię poleceń. Proces używa skryptowania do transformacji kolekcji plików wejściowych (`all_gvcfs`) w poprawne argumenty polecenia:
 
 ```groovy title="command line manipulation for GATK" linenums="1" hl_lines="2 5"
     script:
@@ -1002,8 +1002,6 @@ Przyjrzyj się plikowi modułu `modules/generate_report.nf`:
 
 ```groovy title="modules/generate_report.nf" linenums="1"
 process GENERATE_REPORT {
-
-    publishDir 'results/reports', mode: 'copy'
 
     input:
     tuple val(meta), path(reads)
@@ -1061,7 +1059,7 @@ Dołącz proces do `main.nf` i dodaj go do workflow:
 
 === "Przed"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="1 10-29"
+    ```groovy title="main.nf" linenums="1" hl_lines="1 28"
     include { FASTP } from './modules/fastp.nf'
 
     workflow {
@@ -1128,7 +1126,7 @@ Ale co, jeśli chcemy dodać informacje o tym, kiedy i gdzie odbyło się przetw
         """
     ```
 
-Jeśli to uruchomisz, zauważysz błąd — Nextflow próbuje zinterpretować `${USER}` jako zmienną Nextflow, która nie istnieje.
+Jeśli to uruchomisz, zauważysz błąd — Nextflow próbuje zinterpretować `#!groovy ${USER}` jako zmienną Nextflow, która nie istnieje.
 
 ??? failure "Wyjście polecenia"
 
@@ -1179,9 +1177,9 @@ W tej sekcji nauczyłeś się technik **przetwarzania stringów**:
 - **Wyrażenia regularne do parsowania plików**: Używanie operatora `=~` i wzorców regex (`~/wzorzec/`) do wyodrębniania metadanych ze złożonych konwencji nazewnictwa plików
 - **Dynamiczne generowanie skryptów**: Używanie logiki warunkowej (if/else, operatory trójargumentowe) do generowania różnych stringów skryptów na podstawie cech wejścia
 - **Interpolacja zmiennych**: Rozumienie, kiedy Nextflow interpretuje stringi, a kiedy robi to powłoka
-  - `${var}` — zmienne Nextflow (interpolowane przez Nextflow w czasie kompilacji workflow'u)
-  - `\${var}` — zmienne środowiskowe powłoki (escapowane, przekazywane do basha w czasie wykonania)
-  - `\$(cmd)` — podstawienie poleceń powłoki (escapowane, wykonywane przez basha w czasie wykonania)
+  - `#!groovy ${var}` — zmienne Nextflow (interpolowane przez Nextflow w czasie kompilacji workflow'u)
+  - `#!groovy \${var}` — zmienne środowiskowe powłoki (escapowane, przekazywane do basha w czasie wykonania)
+  - `#!groovy \$(cmd)` — podstawienie poleceń powłoki (escapowane, wykonywane przez basha w czasie wykonania)
 
 Te wzorce przetwarzania i generowania stringów są niezbędne do obsługi różnorodnych formatów plików i konwencji nazewnictwa, które napotkasz w prawdziwych workflow'ach bioinformatycznych.
 
@@ -1291,7 +1289,7 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [admiring_panini] DSL2 - revision: 8cc832e32f
 
@@ -1346,7 +1344,7 @@ Obecnie nasz proces FASTP używa domyślnych zasobów. Uczyńmy go mądrzejszym,
         tuple val(meta), path(reads)
     ```
 
-Domknięcie `{ meta.depth > 40000000 ? 2 : 1 }` używa **operatora trójargumentowego** (omówionego w sekcji 1.1) i jest ewaluowane dla każdego zadania, umożliwiając alokację zasobów per próbka. Próbki o wysokiej głębokości (>40M odczytów) otrzymują 2 procesory, podczas gdy pozostałe otrzymują 1.
+Domknięcie `#!groovy { meta.depth > 40000000 ? 2 : 1 }` używa **operatora trójargumentowego** (omówionego w sekcji 1.1) i jest ewaluowane dla każdego zadania, umożliwiając alokację zasobów per próbka. Próbki o wysokiej głębokości (>40M odczytów) otrzymują 2 procesory, podczas gdy pozostałe otrzymują 1.
 
 !!! note "Uwaga: Dostęp do zmiennych wejściowych w dyrektywach"
 
@@ -1361,7 +1359,7 @@ nextflow run main.nf -ansi-log false
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W  ~  version 25.10.2
+    N E X T F L O W  ~  version 25.10.4
     Launching `main.nf` [fervent_albattani] DSL2 - revision: fa8f249759
     [bd/ff3d41] Submitted process > FASTP (2)
     [a4/a3aab2] Submitted process > FASTP (1)
@@ -1380,7 +1378,7 @@ cat work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.run | grep "docker run"
 Powinieneś zobaczyć coś takiego:
 
 ```bash title="docker command"
-    docker run -i --cpu-shares 4096 --memory 2048m -e "NXF_TASK_WORKDIR" -v /workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690 /bin/bash -ue /workspaces/training/side-quests/essential_scripting_patterns/work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.sh
+    docker run -i --cpu-shares 2048 --memory 2048m -e "NXF_TASK_WORKDIR" -v /workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690 /bin/bash -ue /workspaces/training/side-quests/essential_scripting_patterns/work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.sh
 ```
 
 W tym przykładzie wybraliśmy zadanie, które zażądało 2 procesorów (`--cpu-shares 2048`), ponieważ była to próbka o wysokiej głębokości, ale powinieneś zobaczyć różne alokacje procesorów w zależności od głębokości próbki. Wypróbuj to również dla innych zadań.
@@ -1395,7 +1393,7 @@ Innym potężnym wzorcem jest używanie `task.attempt` do strategii ponawiania. 
     process FASTP {
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-        cpus { meta.depth > 40000000 ? 4 : 2 }
+        cpus { meta.depth > 40000000 ? 2 : 1 }
         memory 1.GB
 
         input:
@@ -1408,7 +1406,7 @@ Innym potężnym wzorcem jest używanie `task.attempt` do strategii ponawiania. 
     process FASTP {
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-        cpus { meta.depth > 40000000 ? 4 : 2 }
+        cpus { meta.depth > 40000000 ? 2 : 1 }
         memory 2.GB
 
         input:
@@ -1434,7 +1432,7 @@ nextflow run main.nf
       Detecting adapter sequence for read1...
       No adapter detected for read1
 
-      .command.sh: line 7:   101 Killed                  fastp --in1 SAMPLE_002_S2_L001_R1_001.fastq --out1 sample_002_trimmed.fastq.gz --json sample_002.fastp.json --html sample_002.fastp.html --thread 2
+      .command.sh: line 7:   101 Killed                  fastp --in1 SAMPLE_002_S2_L001_R1_001.fastq --out1 sample_002_trimmed.fastq.gz --json sample_002.fastp.json --html sample_002.fastp.html --thread 1
     ```
 
 Wskazuje to, że proces został zabity za przekroczenie limitów pamięci.
@@ -1449,7 +1447,7 @@ Aby uczynić nasz workflow bardziej solidnym, możemy zaimplementować strategi�
     process FASTP {
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-        cpus { meta.depth > 40000000 ? 4 : 2 }
+        cpus { meta.depth > 40000000 ? 2 : 1 }
         memory { 1.GB * task.attempt }
         errorStrategy 'retry'
         maxRetries 2
@@ -1464,7 +1462,7 @@ Aby uczynić nasz workflow bardziej solidnym, możemy zaimplementować strategi�
     process FASTP {
         container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
 
-        cpus { meta.depth > 40000000 ? 4 : 2 }
+        cpus { meta.depth > 40000000 ? 2 : 1 }
         memory 2.GB
 
         input:
@@ -1558,7 +1556,7 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [adoring_galileo] DSL2 - revision: c9e83aaef1
 
@@ -1626,7 +1624,7 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W  ~  version 25.10.2
+    N E X T F L O W  ~  version 25.10.4
     Launching `main.nf` [lonely_williams] DSL2 - revision: d0b3f121ec
     [94/b48eac] Submitted process > FASTP (2)
     [2c/d2b28f] Submitted process > GENERATE_REPORT (2)
@@ -1710,7 +1708,7 @@ nextflow run main.nf
 ??? failure "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [trusting_torvalds] DSL2 - revision: b56fbfbce2
 
@@ -1872,7 +1870,7 @@ Utwórz funkcję walidacji przed blokiem workflow, wywołaj ją z workflow i zmi
 
 === "Po"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="5-20 23-24"
+    ```groovy title="main.nf" linenums="1" hl_lines="5-15 18-19"
     include { FASTP } from './modules/fastp.nf'
     include { TRIMGALORE } from './modules/trimgalore.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
@@ -1915,7 +1913,7 @@ nextflow run main.nf
 ??? failure "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [confident_coulomb] DSL2 - revision: 07059399ed
 
@@ -1934,7 +1932,7 @@ nextflow run main.nf --input ./data/nonexistent.csv
 ??? failure "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [cranky_gates] DSL2 - revision: 26839ae3eb
 
@@ -1989,7 +1987,7 @@ nextflow run main.nf --input ./data/samples.csv
 ??? warning "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `main.nf` [awesome_goldwasser] DSL2 - revision: a31662a7c1
 
@@ -2066,7 +2064,7 @@ nextflow run main.nf --input ./data/samples.csv -ansi-log false
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W  ~  version 25.10.2
+    N E X T F L O W  ~  version 25.10.4
     Launching `main.nf` [marvelous_boltzmann] DSL2 - revision: a31662a7c1
     WARN: Low sequencing depth for sample_002: 25000000
     [9b/d48e40] Submitted process > FASTP (2)
@@ -2142,7 +2140,7 @@ Teraz otrzymujemy jeszcze bardziej informatywne podsumowanie, w tym komunikat o 
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W  ~  version 25.10.2
+    N E X T F L O W  ~  version 25.10.4
     Launching `main.nf` [boring_linnaeus] DSL2 - revision: a31662a7c1
     WARN: Low sequencing depth for sample_002: 25000000
     [e5/242efc] Submitted process > FASTP (2)
@@ -2341,7 +2339,7 @@ Stosowanie tych wzorców we własnej pracy pozwoli Ci budować solidne, gotowe n
 
 4.  **Dynamiczne dyrektywy zasobów z domknięciami**: Zbadałeś używanie domknięć w dyrektywach procesów do adaptacyjnej alokacji zasobów na podstawie cech wejścia.
 
-    - Nazwane domknięcia ikompozycja
+    - Nazwane domknięcia i kompozycja
 
     ```groovy
     def enrichData = normalizeId >> addQualityCategory >> addFlags
@@ -2371,9 +2369,10 @@ Stosowanie tych wzorców we własnej pracy pozwoli Ci budować solidne, gotowe n
 
     - Ewaluacja boolowska z prawdziwością Groovy
 
-    ```groovy
+    ````groovy
+    if (sample.```groovy
     if (sample.files) println "Has files"
-    ```
+    ````
 
     - Używanie `filter()` do podzbioru danych z „prawdziwością"
 
@@ -2460,4 +2459,4 @@ Zajrzyj do tych zasobów, gdy będziesz chciał zgłębić bardziej zaawansowane
 
 ## Co dalej?
 
-Wróć do [menu Side Quests](../) lub kliknij przycisk w prawym dolnym rogu strony, aby przejść do następnego tematu na liście.
+Wróć do [menu Side Quests](../index.md) lub kliknij przycisk w prawym dolnym rogu strony, aby przejść do następnego tematu na liście.

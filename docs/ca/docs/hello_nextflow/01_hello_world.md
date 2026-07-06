@@ -214,8 +214,8 @@ nextflow run hello-world.nf
 
 ??? success "Sortida de la comanda"
 
-    ```console hl_lines="7"
-    N E X T F L O W   ~  version 25.10.2
+    ```console hl_lines="6"
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
 
@@ -244,7 +244,7 @@ Dins del directori `work`, Nextflow organitza les sortides i els registres per c
 Per a cada crida de procés, Nextflow crea un subdirectori imbricat, anomenat amb un hash per fer-lo únic, on prepararà totes les entrades necessàries (utilitzant enllaços simbòlics per defecte), escriurà fitxers auxiliars i escriurà registres i qualsevol sortida del procés.
 
 El camí a aquest subdirectori es mostra en forma truncada entre claudàtors a la sortida de la consola.
-Mirant el que hem obtingut per a l'execució mostrada anteriorment, la línia de registre de la consola per al procés sayHello comença amb `[65/7be2fa]`. Això correspon al camí de directori següent: `work/65/7be2fad5e71e5f49998f795677fd68`
+Mirant el que hem obtingut per a l'execució mostrada anteriorment, la línia de registre de la consola per al procés sayHello comença amb `[65/7be2fa]`. Això correspon al camí de directori següent: `work/65/7be2fa7be2fad5e71e5f49998f795677fd68`
 
 Vegem què hi ha allà.
 
@@ -486,7 +486,7 @@ nextflow run hello-world.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5
 
@@ -574,7 +574,7 @@ nextflow run hello-world.nf
 ??? success "Sortida de la comanda"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
 
@@ -653,7 +653,7 @@ nextflow run hello-world.nf
 ??? success "Sortida de la comanda"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
 
@@ -837,7 +837,7 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea
 
@@ -880,7 +880,7 @@ Donem al paràmetre `input` un valor per defecte declarant-lo abans de la defini
  * Paràmetres del pipeline
  */
 params {
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
 }
 ```
 
@@ -890,7 +890,7 @@ Els tipus suportats inclouen `String`, `Integer`, `Float`, `Boolean` i `Path`.
 
 !!! info "Info"
 
-    En workflows més antics, podeu veure que tot aquest bloc `params` s'escriu simplement com `input = 'Holà mundo!'`.
+    En workflows més antics, podeu veure que tot aquest bloc `params` s'escriu simplement com `input = 'Hola mundo!'`.
 
 A mesura que afegiu més paràmetres al vostre pipeline, hauríeu d'afegir-los tots a aquest bloc, tant si necessiteu donar-los un valor per defecte com si no.
 Això facilitarà trobar tots els paràmetres configurables d'una ullada.
@@ -906,7 +906,7 @@ nextflow run hello-world.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582
 
@@ -923,7 +923,7 @@ nextflow run hello-world.nf
     - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
     - cause: you tried to assign a value to the class 'java.lang.String'
     @ line 24, column 12.
-          input: String = 'Holà mundo!'
+          input: String = 'Hola mundo!'
                   ^
 
     1 error
@@ -947,7 +947,7 @@ La sortida estarà al mateix lloc que anteriorment, però el contingut hauria d'
 ??? abstract "Contingut del fitxer"
 
     ```console title="results/hello_world/output.txt"
-    Holà mundo!
+    Hola mundo!
     ```
 
 Nextflow va utilitzar el valor per defecte del paràmetre de salutació per crear la sortida.
@@ -965,7 +965,7 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582
 
@@ -1026,7 +1026,7 @@ nextflow run hello-world.nf -resume
 ??? success "Sortida de la comanda"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
 

@@ -43,7 +43,7 @@ Bu yapılandırma seçeneklerini etkili bir şekilde kullanmayı öğrenerek, pi
 Başlangıç noktası olarak `hello-config.nf` iş akışı betiğini kullanacağız.
 Bu eğitim kursunun 5. Bölümünde üretilen betiğe eşdeğerdir, ancak çıktı hedeflerini değiştirdik:
 
-```groovy title="hello-config.nf" linenums="37" hl_lines="3 7 11 15"
+```groovy title="hello-config.nf" linenums="37" hl_lines="3 7 11 15 19"
 output {
     first_output {
         path 'hello_config/intermediates'
@@ -77,7 +77,7 @@ nextflow run hello-config.nf
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [nice_escher] DSL2 - revision: d5dfdc9872
 
@@ -99,10 +99,10 @@ Daha önce olduğu gibi, çıktı dosyalarını `output` bloğunda belirtilen di
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
+    │   ├── Hola-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     └── batch-report.txt
     ```
 
@@ -112,7 +112,7 @@ Son ASCII sanat çıktısı, `results/hello_config/` dizininde `cowpy-COLLECTED-
 
     ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -237,7 +237,7 @@ nextflow run hello-config.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
 
@@ -256,7 +256,7 @@ Son ASCII sanat çıktısı, daha önce olduğu gibi `results/hello_config/` diz
 
     ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -333,7 +333,7 @@ nextflow run ../hello-config.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `../hello-config.nf` [trusting_escher] DSL2 - revision: 356df0818d
 
@@ -356,7 +356,7 @@ Son çıktı dosyası, selamlamaları söyleyen tux karakterini içermelidir.
     _________
     / HELLO   \
     | BONJOUR |
-    \ HOLà    /
+    \ HOLA    /
     ---------
       \
         \
@@ -419,7 +419,7 @@ nextflow run hello-config.nf -params-file test-params.yaml
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
@@ -437,7 +437,7 @@ Son çıktı dosyası, selamlamaları söyleyen stegosaurus karakterini içermel
     ```console title="results/hello_config/cowpy-COLLECTED-yaml-output.txt"
     _________
     / HELLO   \
-    | HOLà    |
+    | HOLA    |
     \ BONJOUR /
     ---------
     \                             .       .
@@ -500,7 +500,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli/
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [prickly_kay] DSL2 - revision: 32ecc4fba2
 
@@ -524,10 +524,10 @@ Bu, çıktıları `results/` yerine `custom-outdir-cli/` dizinine yayınlar:
             ├── Bonjour-output.txt
             ├── COLLECTED-batch-output.txt
             ├── Hello-output.txt
-            ├── Holà-output.txt
+            ├── Hola-output.txt
             ├── UPPER-Bonjour-output.txt
             ├── UPPER-Hello-output.txt
-            └── UPPER-Holà-output.txt
+            └── UPPER-Hola-output.txt
     ```
 
 Çıktı bloğundaki `path` bildirimlerinden hala `hello_config` alt dizinine sahip olduğumuza dikkat edin.
@@ -612,10 +612,10 @@ Artık çıktılar `hello_config` alt dizini olmadan doğrudan `custom-outdir-cl
         ├── Bonjour-output.txt
         ├── COLLECTED-batch-output.txt
         ├── Hello-output.txt
-        ├── Holà-output.txt
+        ├── Hola-output.txt
         ├── UPPER-Bonjour-output.txt
         ├── UPPER-Hello-output.txt
-        └── UPPER-Holà-output.txt
+        └── UPPER-Hola-output.txt
     ```
 
 !!! tip "İpucu"
@@ -745,7 +745,7 @@ Bunu geri koyalım ve ayrıca dosyaları bir `params.batch` alt dizinine koyalı
 
     `params.batch` değerini `outputDir` yapılandırması yerine çıktı bloğu `path` içine dahil etmek, CLI'da `-output-dir` ile üzerine yazılmayacağı anlamına gelir.
 
-İlk olarak, `outputDir` değerinden `${params.batch}` değerini kaldırmak için yapılandırma dosyasını güncelleyin (çünkü bunu yol bildirimlerine taşıyoruz):
+İlk olarak, `outputDir` değerinden `#!groovy ${params.batch}` değerini kaldırmak için yapılandırma dosyasını güncelleyin (çünkü bunu yol bildirimlerine taşıyoruz):
 
 === "Sonra"
 
@@ -832,7 +832,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-config-2 --batch rep2
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [mad_curry] DSL2 - revision: 668a98ccb9
 
@@ -860,11 +860,11 @@ Bu, çıktıları belirtilen temel yol _ve_ batch adı alt dizini _ve_ sürece g
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Holà-output.txt
+            │   └── UPPER-Hola-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Holà-output.txt
+                └── Hola-output.txt
     ```
 
 ### 2.3. Yayınlama modunu iş akışı düzeyinde ayarlayın
@@ -962,7 +962,7 @@ nextflow run hello-config.nf -output-dir config-output-mode
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [small_stone] DSL2 - revision: 024d6361b5
 
@@ -990,11 +990,11 @@ Bu, çıktıları `config-output-mode/` dizinine yayınlar ve hepsi hala semboli
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Holà-output.txt
+            │   └── UPPER-Hola-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Holà-output.txt
+                └── Hola-output.txt
     ```
 
 Çıktı başına mod ayarlama yöntemini kullanmak isteyebileceğiniz ana neden, aynı iş akışı içinde karıştırmak ve eşleştirmek istemenizdir; _yani_ bazı çıktıların kopyalanmasını ve bazılarının sembolik bağlantı olmasını sağlamak.
@@ -1094,7 +1094,7 @@ nextflow run hello-config.nf --batch conda
 ??? success "Komut çıktısı"
 
     ```console title="Output"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [friendly_lamport] DSL2 - revision: 024d6361b5
 
@@ -1488,7 +1488,7 @@ nextflow run hello-config.nf -profile my_laptop
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [hungry_sanger] DSL2 - revision: 024d6361b5
 
@@ -1572,7 +1572,7 @@ nextflow run hello-config.nf -profile my_laptop,test
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [modest_becquerel] DSL2 - revision: 024d6361b5
 
@@ -1589,7 +1589,7 @@ Bu, mümkün olduğunda Docker kullanacak ve çıktıları `custom-outdir-config
 
     ```console title="custom-outdir-config/test/cowpy/cowpy-COLLECTED-test-output.txt"
      _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -1618,7 +1618,7 @@ Bu, iş akışı koduyla herhangi bir test veri dosyası dağıttığımız sür
     Harici olarak depolanan daha büyük dosyalar için URL'lere işaret edebiliriz.
     Açık bir bağlantı olduğu sürece Nextflow bunları otomatik olarak indirecektir.
 
-    Daha fazla ayrıntı için, Yan Görev [Dosyalarla Çalışma](../side_quests/working_with_files.md) bölümüne bakın.
+    Daha fazla ayrıntı için, Yan Görev [Dosyalarla Çalışma](../side_quests/working_with_files/index.md) bölümüne bakın.
 
 ### 6.3. Çözümlenmiş yapılandırmayı görmek için `nextflow config` kullanın
 

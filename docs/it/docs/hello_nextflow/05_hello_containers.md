@@ -72,7 +72,7 @@ nextflow run hello-containers.nf
 ??? success "Output del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-containers.nf` [nice_escher] DSL2 - revision: d5dfdc9872
 
@@ -85,18 +85,18 @@ nextflow run hello-containers.nf
 
 Come in precedenza, troverete i file di output nella directory specificata nel blocco `output` (`results/hello_containers/`).
 
-??? abstract "Directory contents"
+??? abstract "Contenuto della directory"
 
     ```console
     results/hello_containers/
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Se tutto ha funzionato, siete pronti a imparare come usare i container.
@@ -356,7 +356,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
      ____________________
     / Hello,English,123  \
     | Bonjour,French,456 |
-    \ Holà,Spanish,789   /
+    \ Hola,Spanish,789   /
     --------------------
       \                                  ,+*^^*+___+++_
       \                           ,*^^^^              )
@@ -667,14 +667,14 @@ Pensate che funzionerà?
 Cancelliamo gli output pubblicati precedenti per avere una lavagna pulita, ed eseguiamo il flusso di lavoro con il flag `-resume`.
 
 ```bash
-rm -r hello_containers/
+rm -r results/hello_containers/
 nextflow run hello-containers.nf -resume
 ```
 
 ??? failure "Output del comando (modificato per chiarezza)"
 
     ```console hl_lines="10 13 20-21 26-27"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-containers.nf` [lonely_woese] DSL2 - revision: abf1dccf7f
 
@@ -811,7 +811,7 @@ nextflow run hello-containers.nf -resume
 ??? success "Output del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-containers.nf` [drunk_perlman] DSL2 - revision: abf1dccf7f
 
@@ -825,7 +825,7 @@ nextflow run hello-containers.nf -resume
 Questa volta funziona davvero!
 Come al solito potete trovare gli output del flusso di lavoro nella directory dei risultati corrispondente, anche se questa volta sono un po' più ordinatamente organizzati, con solo il report e l'output finale al livello superiore, e tutti i file intermedi spostati in una sottodirectory.
 
-??? abstract "Directory contents"
+??? abstract "Contenuto della directory"
 
     ```console
     results/hello_containers/
@@ -834,20 +834,20 @@ Come al solito potete trovare gli output del flusso di lavoro nella directory de
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
+    │   ├── Hola-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     └── batch-report.txt
     ```
 
 L'output ASCII art finale è nella directory `results/hello_containers/`, sotto il nome `cowpy-COLLECTED-batch-output.txt`.
 
-??? abstract "File contents"
+??? abstract "Contenuto del file"
 
     ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -886,7 +886,7 @@ Questo corrisponde al seguente percorso di directory troncato: `work/98/656c6c`.
 
 In quella directory, troverete il file `.command.run` che contiene tutti i comandi che Nextflow ha eseguito per vostro conto nel corso dell'esecuzione della pipeline.
 
-??? abstract "File contents"
+??? abstract "Contenuto del file"
 
     ```console title="work/98/656c6c90cce1667c094d880f4b6dcc/.command.run"
     #!/bin/bash
@@ -1116,7 +1116,7 @@ Cosa fa il flag `-v` in un comando `docker run`?
 - [x] Monta un volume dal sistema host nel container
 - [ ] Specifica la versione del container
 
-Per approfondire: [1.3.4. Montare i dati nel container](#134-montare-i-dati-nel-container)
+Per approfondire: [1.3.4. Montare i dati nel container](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1126,7 +1126,7 @@ Perché è necessario montare i volumi quando si usano i container?
 - [x] Perché i container sono isolati dal filesystem host per impostazione predefinita
 - [ ] Per abilitare il networking
 
-Per approfondire: [1.3.4. Montare i dati nel container](#134-montare-i-dati-nel-container)
+Per approfondire: [1.3.4. Montare i dati nel container](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1136,7 +1136,7 @@ Come si specifica un container per un processo Nextflow?
 - [x] `container 'container-uri'`
 - [ ] `use 'container-uri'`
 
-Per approfondire: [2.3.1. Specificare un container per cowpy](#231-specificare-un-container-per-cowpy)
+Per approfondire: [2.3.1. Specificare un container per cowpy](#231-specify-a-container-for-cowpy)
 </quiz>
 
 <quiz>
@@ -1146,7 +1146,7 @@ Quale impostazione `nextflow.config` abilita Docker per il vostro flusso di lavo
 - [ ] `#!groovy container.engine = 'docker'`
 - [ ] `#!groovy docker.activate = true`
 
-Per approfondire: [2.3.2. Abilitare l'uso di Docker tramite il file `nextflow.config`](#232-abilitare-luso-di-docker-tramite-il-file-nextflowconfig)
+Per approfondire: [2.3.2. Abilitare l'uso di Docker tramite il file `nextflow.config`](#232-enable-use-of-docker-via-the-nextflowconfig-file)
 </quiz>
 
 <quiz>
@@ -1156,5 +1156,5 @@ Cosa gestisce automaticamente Nextflow quando esegue un processo in un container
 - [x] Eseguire lo script del processo all'interno del container
 - [x] Pulire l'istanza container dopo l'esecuzione
 
-Per approfondire: [2.3.4. Ispezionare come Nextflow ha lanciato l'attività containerizzata](#234-ispezionare-come-nextflow-ha-lanciato-lattivita-containerizzata)
+Per approfondire: [2.3.4. Ispezionare come Nextflow ha lanciato l'attività containerizzata](#234-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>

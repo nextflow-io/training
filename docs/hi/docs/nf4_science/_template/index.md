@@ -14,7 +14,7 @@ additional_information:
   audience_prerequisites:
     - "**Audience:** This course is designed for researchers in {DOMAIN} and related fields who want to develop or customize data analysis pipelines."
     - "**Skills:** Some familiarity with the command line, basic scripting concepts, and common {DOMAIN} file formats is assumed."
-    - "**Prerequisites:** Foundational Nextflow concepts and tooling covered in [Hello Nextflow](../../hello_nextflow/)."
+    - "**Prerequisites:** Foundational Nextflow concepts and tooling covered in [Hello Nextflow](../../hello_nextflow/index.md)."
 ---
 
 ---
@@ -28,7 +28,7 @@ hide:
   additional_information:
   technical_requirements: true
   learning_objectives: - एक सिंगल सैंपल पर {METHOD} लागू करने के लिए एक लीनियर वर्कफ़्लो लिखें - {ACCESSORY_FILES} जैसी सहायक फ़ाइलों को उचित तरीके से हैंडल करें - प्रति-सैंपल प्रोसेसिंग को समानांतर बनाने के लिए Nextflow के डेटाफ़्लो पैराडाइम का लाभ उठाएं - संबंधित चैनल ऑपरेटरों का उपयोग करके मल्टी-सैंपल एग्रीगेशन लागू करें
-  audience_prerequisites: - "**दर्शक:** यह कोर्स {DOMAIN} और संबंधित क्षेत्रों के शोधकर्ताओं के लिए डिज़ाइन किया गया है जो डेटा विश्लेषण पाइपलाइनों को विकसित या कस्टमाइज़ करना चाहते हैं।" - "**कौशल:** कमांड लाइन, बुनियादी स्क्रिप्टिंग अवधारणाओं और सामान्य {DOMAIN} फ़ाइल फ़ॉर्मेट्स से कुछ परिचितता मानी गई है।" - "**पूर्वापेक्षाएं:** [Hello Nextflow](../../hello_nextflow/) में शामिल बुनियादी Nextflow अवधारणाएं और टूलिंग।"
+  audience_prerequisites: - "**दर्शक:** यह कोर्स {DOMAIN} और संबंधित क्षेत्रों के शोधकर्ताओं के लिए डिज़ाइन किया गया है जो डेटा विश्लेषण पाइपलाइनों को विकसित या कस्टमाइज़ करना चाहते हैं।" - "**कौशल:** कमांड लाइन, बुनियादी स्क्रिप्टिंग अवधारणाओं और सामान्य {DOMAIN} फ़ाइल फ़ॉर्मेट्स से कुछ परिचितता मानी गई है।" - "**पूर्वापेक्षाएं:** [Hello Nextflow](../../hello_nextflow/index.md) में शामिल बुनियादी Nextflow अवधारणाएं और टूलिंग।"
 
 ---
 
@@ -38,7 +38,7 @@ hide:
 
 **एक व्यावहारिक कोर्स जो Nextflow को वास्तविक दुनिया के {DOMAIN} उपयोग के मामले पर लागू करता है: {METHOD_SHORT_DESCRIPTION}।**
 
-यह कोर्स [Hello Nextflow](../../hello_nextflow/) शुरुआती प्रशिक्षण पर आधारित है और दिखाता है कि {DOMAIN} डोमेन के विशिष्ट संदर्भ में Nextflow का उपयोग कैसे करें।
+यह कोर्स [Hello Nextflow](../../hello_nextflow/index.md) शुरुआती प्रशिक्षण पर आधारित है और दिखाता है कि {DOMAIN} डोमेन के विशिष्ट संदर्भ में Nextflow का उपयोग कैसे करें।
 तुम [{TOOL_A}]({TOOL_A_URL}) और [{TOOL_B}]({TOOL_B_URL}) के साथ एक {METHOD} पाइपलाइन लागू करोगे।
 
 <!-- additional_information -->

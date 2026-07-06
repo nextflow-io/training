@@ -6,11 +6,16 @@ hide:
   - footer
 ---
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 ## Versão de sintaxe do Nextflow atualmente suportada e requisitos
 
-A partir da versão 3.0 do portal de treinamento, todos os nossos cursos de treinamento são baseados na versão 25.10.2 do Nextflow, a menos que especificado de outra forma na página de índice do curso (exceto materiais descontinuados ou arquivados que podem não incluir um aviso de versão).
+A partir da versão 3.0 do portal de treinamento, todos os nossos cursos de treinamento são compatíveis com o Nextflow versão 25.10.2 ou posterior, a menos que especificado de outra forma na página de índice do curso.
+(Isso não inclui materiais descontinuados ou arquivados que podem não ter um aviso de versão).
 
-Como os cursos agora usam entradas tipadas no nível do fluxo de trabalho, bem como diretivas de saída no nível do fluxo de trabalho, eles requerem o uso do analisador de sintaxe V2.
+A versão do Nextflow atualmente carregada por padrão em nosso ambiente de treinamento é o **Nextflow 25.10.4**.
+
+Como os cursos agora usam entradas tipadas no nível do fluxo de trabalho, bem como diretivas de saída no nível do fluxo de trabalho, eles requerem o uso do analisador de sintaxe V2, **a menos que especificado de outra forma**.
 Se você planeja usar o ambiente que fornecemos através do [Github Codespaces](../envsetup/01_setup.md) ou [devcontainers locais](../envsetup/03_devcontainer.md), você não precisa fazer nada, a menos que especificamente indicado nas instruções do curso.
 No entanto, se você está planejando trabalhar nos treinamentos em seu próprio ambiente ([Instalação manual](../envsetup/02_local.md)), você precisará garantir o uso do Nextflow versão 25.10.2 ou posterior com o analisador de sintaxe v2 habilitado.
 

@@ -214,8 +214,8 @@ nextflow run hello-world.nf
 
 ??? success "Saída do comando"
 
-    ```console hl_lines="7"
-    N E X T F L O W   ~  version 25.10.2
+    ```console hl_lines="6"
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
 
@@ -486,7 +486,7 @@ nextflow run hello-world.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5
 
@@ -574,7 +574,7 @@ nextflow run hello-world.nf
 ??? success "Saída do comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
 
@@ -653,7 +653,7 @@ nextflow run hello-world.nf
 ??? success "Saída do comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
 
@@ -837,7 +837,7 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea
 
@@ -880,7 +880,7 @@ Vamos dar ao parâmetro `input` um valor padrão declarando-o antes da definiç�
  * Pipeline parameters
  */
 params {
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
 }
 ```
 
@@ -890,7 +890,7 @@ Os tipos suportados incluem `String`, `Integer`, `Float`, `Boolean` e `Path`.
 
 !!! info "Info"
 
-    Em fluxos de trabalho mais antigos, você pode ver que todo o bloco `params` está escrito como apenas `input = 'Holà mundo!'`.
+    Em fluxos de trabalho mais antigos, você pode ver que todo o bloco `params` está escrito como apenas `input = 'Hola mundo!'`.
 
 À medida que você adiciona mais parâmetros ao seu pipeline, deve adicioná-los todos a este bloco, quer você precise ou não dar a eles um valor padrão.
 Isso facilitará encontrar todos os parâmetros configuráveis de relance.
@@ -906,7 +906,7 @@ nextflow run hello-world.nf
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582
 
@@ -923,7 +923,7 @@ nextflow run hello-world.nf
     - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
     - cause: you tried to assign a value to the class 'java.lang.String'
     @ line 24, column 12.
-          input: String = 'Holà mundo!'
+          input: String = 'Hola mundo!'
                   ^
 
     1 error
@@ -947,7 +947,7 @@ A saída estará no mesmo lugar que anteriormente, mas o conteúdo deve ser atua
 ??? abstract "Conteúdo do arquivo"
 
     ```console title="results/hello_world/output.txt"
-    Holà mundo!
+    Hola mundo!
     ```
 
 O Nextflow usou o valor padrão do parâmetro de saudação para criar a saída.
@@ -965,7 +965,7 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582
 
@@ -1028,7 +1028,7 @@ nextflow run hello-world.nf -resume
 ??? success "Saída do comando"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
 
@@ -1171,7 +1171,7 @@ Quais são os componentes mínimos necessários de um processo Nextflow?
 - [ ] Blocos de entrada, saída e script
 - [ ] Apenas um bloco script
 
-Saiba mais: [1.1.1. A definição de `process`](#111-a-definição-de-process)
+Saiba mais: [1.1.1. A definição de `process`](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1181,7 +1181,7 @@ Qual é o propósito do bloco de saída em um processo?
 - [x] Declarar saídas esperadas do processo
 - [ ] Definir variáveis de ambiente
 
-Saiba mais: [1.1.1. A definição de `process`](#111-a-definição-de-process)
+Saiba mais: [1.1.1. A definição de `process`](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1212,7 +1212,7 @@ work/a3/7be2fa.../
 - [ ] `.command.log`
 - [ ] `.command.out`
 
-Saiba mais: [1.2.2. Encontre a saída e os logs no diretório `work`](#122-encontre-a-saída-e-os-logs-no-diretório-work)
+Saiba mais: [1.2.2. Encontre a saída e os logs no diretório `work`](#122-find-the-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -1222,7 +1222,7 @@ O que a flag `-resume` faz?
 - [x] Ignora processos que já foram concluídos com sucesso
 - [ ] Cria um backup do fluxo de trabalho
 
-Saiba mais: [4.1. Relance um fluxo de trabalho com `-resume`](#41-relance-um-fluxo-de-trabalho-com--resume)
+Saiba mais: [4.1. Relance um fluxo de trabalho com `-resume`](#41-re-launch-a-workflow-with--resume)
 </quiz>
 
 <quiz>
@@ -1232,7 +1232,7 @@ Qual é o modo padrão para publicar saídas de fluxo de trabalho?
 - [ ] Mover arquivos para o diretório de saída
 - [ ] Comprimir arquivos no diretório de saída
 
-Saiba mais: [2.3. Defina o modo de publicação para copiar](#23-defina-o-modo-de-publicação-para-copiar)
+Saiba mais: [2.3. Defina o modo de publicação para copiar](#23-set-the-publish-mode-to-copy)
 </quiz>
 
 <quiz>
@@ -1242,7 +1242,7 @@ Como você passa um valor de parâmetro para um fluxo de trabalho Nextflow a par
 - [x] `--parameter value`
 - [ ] `-p parameter=value`
 
-Saiba mais: [3.2. Configure um parâmetro de linha de comando para capturar a entrada do usuário](#32-configure-um-parâmetro-de-linha-de-comando-para-capturar-a-entrada-do-usuário)
+Saiba mais: [3.2. Configure um parâmetro de linha de comando para capturar a entrada do usuário](#32-set-up-a-command-line-parameter-to-capture-user-input)
 </quiz>
 
 <quiz>

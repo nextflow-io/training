@@ -33,10 +33,10 @@ Imaginez exécuter votre pipeline pendant deux heures, pour qu'il plante parce q
 
 Considérez cet exemple :
 
-```console title="Sans validation"
+```console title="Without validation"
 $ nextflow run my-pipeline --input data.txt --output results
 
-...2 heures plus tard...
+...2 hours later...
 
 ERROR ~ No such file: 'data.fq.gz'
   Expected FASTQ format but received TXT
@@ -44,7 +44,7 @@ ERROR ~ No such file: 'data.fq.gz'
 
 Le pipeline a accepté des entrées invalides et s'est exécuté pendant des heures avant d'échouer. Avec une validation appropriée :
 
-```console title="Avec validation"
+```console title="With validation"
 $ nextflow run my-pipeline --input data.txt --output results
 
 ERROR ~ Validation of pipeline parameters failed!
@@ -125,11 +125,11 @@ Les deux schémas utilisent le format JSON Schema, un standard largement adopté
 
 ```mermaid
 graph LR
-    A[L'utilisateur exécute le pipeline] --> B[Validation des paramètres]
-    B -->|✓ Valide| C[Validation des données d'entrée]
-    B -->|✗ Invalide| D[Erreur : Corrigez les paramètres]
-    C -->|✓ Valide| E[Le pipeline s'exécute]
-    C -->|✗ Invalide| F[Erreur : Corrigez les données d'entrée]
+    A[User runs pipeline] --> B[Parameter validation]
+    B -->|✓ Valid| C[Input data validation]
+    B -->|✗ Invalid| D[Error: Fix parameters]
+    C -->|✓ Valid| E[Pipeline executes]
+    C -->|✗ Invalid| F[Error: Fix input data]
 ```
 
 La validation devrait se produire **avant** l'exécution de tout processus du pipeline, pour fournir un retour rapide et éviter le gaspillage de temps de calcul.
@@ -154,11 +154,11 @@ Le comportement de validation est contrôlé via la portée `validation{}` dans 
 
 Puisque nous allons d'abord travailler sur la validation des paramètres (cette section) et ne configurerons pas le schéma de données d'entrée avant la section 2, nous devons temporairement demander à nf-schema d'ignorer la validation du contenu du fichier du paramètre `input`.
 
-Ouvrez `nextflow.config` et trouvez le bloc `validation` (autour de la ligne 246). Ajoutez `ignoreParams` pour ignorer la validation des fichiers d'entrée :
+Ouvrez `nextflow.config` et trouvez le bloc `validation` (autour de la ligne 247). Ajoutez `ignoreParams` pour ignorer la validation des fichiers d'entrée :
 
 === "Après"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="246"
+    ```groovy title="nextflow.config" hl_lines="3" linenums="247"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
@@ -168,7 +168,7 @@ Ouvrez `nextflow.config` et trouvez le bloc `validation` (autour de la ligne 246
 
 === "Avant"
 
-    ```groovy title="nextflow.config" linenums="246"
+    ```groovy title="nextflow.config" linenums="247"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
@@ -197,7 +197,7 @@ grep -A 25 '"input_output_options"' nextflow_schema.json
 
 Le schéma de paramètres est organisé en groupes. Voici le groupe `input_output_options` :
 
-```json title="core-hello/nextflow_schema.json (extrait)" linenums="8"
+```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8"
         "input_output_options": {
             "title": "Input/output options",
             "type": "object",
@@ -257,13 +257,13 @@ nf-core pipelines schema build
 Vous devriez voir quelque chose comme ceci :
 
 ```console
-                                      ,--./,-.
-      ___     __   __   __   ___     /,-._.--\
-|\ | |__  __ /  ` /  \ |__) |__         }  {
-| \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                      `._,._,'
+                                          ,--./,-.
+          ___     __   __   __   ___     /,-._.--~\
+    |\ | |__  __ /  ` /  \ |__) |__         }  {
+    | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                          `._,._,'
 
-nf-core/tools version 3.5.2 - https://nf-co.re
+    nf-core/tools version 3.5.2 - https://nf-co.re
 
 INFO     [✓] Default parameters match schema validation
 INFO     [✓] Pipeline schema looks valid (found 17 params)
@@ -309,7 +309,7 @@ L'outil a maintenant mis à jour votre fichier `nextflow_schema.json` avec le no
 grep -A 25 '"input_output_options"' nextflow_schema.json
 ```
 
-```json title="core-hello/nextflow_schema.json (extrait)" linenums="8" hl_lines="19-23"
+```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8" hl_lines="19-23"
     "input_output_options": {
       "title": "Input/output options",
       "type": "object",
@@ -369,14 +369,14 @@ nextflow run . --input assets/greetings.csv --outdir results --batch my-batch -p
 ??? success "Sortie de la commande"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [peaceful_wozniak] DSL2 - revision: b9e9b3b8de
 
     executor >  local (8)
     [de/a1b2c3] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
     [4f/d5e6f7] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-    [8a/b9c0d1] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔
+    [8a/b9c0d1] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
     [e2/f3a4b5] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
@@ -410,7 +410,7 @@ cat assets/greetings.csv
 ```csv title="assets/greetings.csv"
 Hello,en,87
 Bonjour,fr,96
-Holà,es,98
+Hola,es,98
 ```
 
 Il s'agit d'un simple CSV avec :
@@ -446,7 +446,7 @@ Ouvrez `assets/schema_input.json` et remplacez les sections `properties` et `req
     ```json title="assets/schema_input.json" linenums="1" hl_lines="10-25 27"
     {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
-        "$id": "https://raw.githubusercontent.com/core/hello/main/assets/schema_input.json",
+        "$id": "https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json",
         "title": "core/hello pipeline - params.input schema",
         "description": "Schema for the greetings file provided with params.input",
         "type": "array",
@@ -480,7 +480,7 @@ Ouvrez `assets/schema_input.json` et remplacez les sections `properties` et `req
     ```json title="assets/schema_input.json" linenums="1" hl_lines="10-29 31"
     {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
-        "$id": "https://raw.githubusercontent.com/core/hello/main/assets/schema_input.json",
+        "$id": "https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json",
         "title": "core/hello pipeline - params.input schema",
         "description": "Schema for the file provided with params.input",
         "type": "array",
@@ -536,7 +536,7 @@ Pour notre cas simple, nous devons ajouter une ligne d'en-tête à notre fichier
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 === "Avant"
@@ -544,7 +544,7 @@ Pour notre cas simple, nous devons ajouter une ligne d'en-tête à notre fichier
     ```csv title="assets/greetings.csv" linenums="1"
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 Maintenant le fichier CSV a une ligne d'en-tête qui correspond aux noms de champs dans notre schéma.
@@ -627,8 +627,8 @@ Maintenant mettez à jour le code de création du canal :
 
 Décomposons ce qui a changé :
 
-1. **`samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")`** : Valide le fichier d'entrée par rapport à notre schéma et retourne une liste
-2. **`Channel.fromList(...)`** : Convertit la liste en un canal Nextflow
+1. **`#!groovy samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")`** : Valide le fichier d'entrée par rapport à notre schéma et retourne une liste
+2. **`channel.fromList(...)`** : Convertit la liste en un canal Nextflow
 
 Ceci complète l'implémentation de la validation des données d'entrée en utilisant `samplesheetToList` et les schémas JSON.
 
@@ -640,7 +640,7 @@ Ouvrez `nextflow.config` et supprimez la ligne `ignoreParams` du bloc `validatio
 
 === "Après"
 
-    ```groovy title="nextflow.config" linenums="246"
+    ```groovy title="nextflow.config" linenums="247"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
@@ -649,7 +649,7 @@ Ouvrez `nextflow.config` et supprimez la ligne `ignoreParams` du bloc `validatio
 
 === "Avant"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="246"
+    ```groovy title="nextflow.config" hl_lines="3" linenums="247"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
@@ -684,7 +684,7 @@ nextflow run . --outdir core-hello-results -profile test,docker
     executor >  local (8)
     [c1/39f64a] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
     [44/c3fb82] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-    [62/80fab2] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔
+    [62/80fab2] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
     [e1/4db4fd] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
@@ -711,7 +711,7 @@ Maintenant ouvrez le fichier et changez le nom de la première colonne, dans la 
     message,language,score
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 === "Avant"
@@ -720,7 +720,7 @@ Maintenant ouvrez le fichier et changez le nom de la première colonne, dans la 
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 Cela ne correspond pas à notre schéma, donc la validation devrait générer une erreur.
@@ -734,7 +734,7 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
 ??? failure "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 24.10.4
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [trusting_ochoa] DSL2 - revision: b9e9b3b8de
 
@@ -743,17 +743,17 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
       outdir             : test-results
 
     Generic options
-      trace_report_suffix: 2025-01-27_03-16-04
+      trace_report_suffix: 2025-11-21_07-35-12
 
     Core Nextflow options
       runName            : trusting_ochoa
       containerEngine    : docker
-      launchDir          : /workspace/hello-nf-core
-      workDir            : /workspace/hello-nf-core/work
-      projectDir         : /workspace/hello-nf-core
-      userName           : user
+      launchDir          : /workspaces/training/hello-nf-core/core-hello
+      workDir            : /workspaces/training/hello-nf-core/core-hello/work
+      projectDir         : /workspaces/training/hello-nf-core/core-hello
+      userName           : root
       profile            : docker
-      configFiles        : /workspace/hello-nf-core/nextflow.config
+      configFiles        : /workspaces/training/hello-nf-core/core-hello/nextflow.config
 
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
@@ -793,4 +793,4 @@ Vous avez implémenté et testé à la fois la validation des paramètres et la 
 
 Vous avez terminé les cinq parties du cours de formation Hello nf-core !
 
-Continuez vers le [Résumé](summary.md) pour réfléchir à ce que vous avez construit et appris.
+Continuez vers le [Résumé](next_steps.md) pour réfléchir à ce que vous avez construit et appris.

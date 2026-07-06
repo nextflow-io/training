@@ -15,9 +15,9 @@ Aquesta secció conté col·leccions curades de mòduls de formació anomenats [
 Cada col·lecció té prerequisits específics documentats a la seva pàgina d'índex. No obstant això, la majoria de col·leccions assumeixen:
 
 - Experiència amb la línia de comandes
-- Conceptes i eines fonamentals de Nextflow coberts al curs de formació per a principiants [Hello Nextflow](../../hello_nextflow/)
+- Conceptes i eines fonamentals de Nextflow coberts al curs de formació per a principiants [Hello Nextflow](../hello_nextflow/index.md)
 
-Per als requisits tècnics i la configuració de l'entorn, consulteu el mini-curs [Configuració de l'entorn](../../envsetup/).
+Per als requisits tècnics i la configuració de l'entorn, consulteu el mini-curs [Configuració de l'entorn](../envsetup/index.md).
 
 ## Col·leccions disponibles
 

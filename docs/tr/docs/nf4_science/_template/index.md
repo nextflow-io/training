@@ -14,7 +14,7 @@ additional_information:
   audience_prerequisites:
     - "**Audience:** This course is designed for researchers in {DOMAIN} and related fields who want to develop or customize data analysis pipelines."
     - "**Skills:** Some familiarity with the command line, basic scripting concepts, and common {DOMAIN} file formats is assumed."
-    - "**Prerequisites:** Foundational Nextflow concepts and tooling covered in [Hello Nextflow](../../hello_nextflow/)."
+    - "**Prerequisites:** Foundational Nextflow concepts and tooling covered in [Hello Nextflow](../../hello_nextflow/index.md)."
 ---
 
 ---
@@ -28,7 +28,7 @@ hide:
   additional_information:
   technical_requirements: true
   learning_objectives: - Tek bir örneğe {METHOD} uygulamak için doğrusal bir iş akışı yazın - {ACCESSORY_FILES} gibi yardımcı dosyaları uygun şekilde yönetin - Örnek başına işlemeyi paralel hale getirmek için Nextflow'un veri akışı paradigmasından yararlanın - İlgili kanal operatörlerini kullanarak çok örnekli toplama işlemi uygulayın
-  audience_prerequisites: - "**Hedef Kitle:** Bu kurs, veri analizi pipeline'ları geliştirmek veya özelleştirmek isteyen {DOMAIN} ve ilgili alanlardaki araştırmacılar için tasarlanmıştır." - "**Beceriler:** Komut satırına, temel betik yazma kavramlarına ve yaygın {DOMAIN} dosya formatlarına belirli düzeyde aşinalık varsayılmaktadır." - "**Ön Koşullar:** [Hello Nextflow](../../hello_nextflow/) kursunda ele alınan temel Nextflow kavramları ve araçları."
+  audience_prerequisites: - "**Hedef Kitle:** Bu kurs, veri analizi pipeline'ları geliştirmek veya özelleştirmek isteyen {DOMAIN} ve ilgili alanlardaki araştırmacılar için tasarlanmıştır." - "**Beceriler:** Komut satırına, temel betik yazma kavramlarına ve yaygın {DOMAIN} dosya formatlarına belirli düzeyde aşinalık varsayılmaktadır." - "**Ön Koşullar:** [Hello Nextflow](../../hello_nextflow/index.md) kursunda ele alınan temel Nextflow kavramları ve araçları."
 
 ---
 
@@ -38,7 +38,7 @@ hide:
 
 **Nextflow'u gerçek dünyadan bir {DOMAIN} kullanım senaryosuna uygulayan uygulamalı bir kurs: {METHOD_SHORT_DESCRIPTION}.**
 
-Bu kurs, [Hello Nextflow](../../hello_nextflow/) başlangıç eğitimini temel alarak Nextflow'un {DOMAIN} alanına özgü bağlamda nasıl kullanılacağını göstermektedir.
+Bu kurs, [Hello Nextflow](../../hello_nextflow/index.md) başlangıç eğitimini temel alarak Nextflow'un {DOMAIN} alanına özgü bağlamda nasıl kullanılacağını göstermektedir.
 [{TOOL_A}]({TOOL_A_URL}) ve [{TOOL_B}]({TOOL_B_URL}) araçlarıyla bir {METHOD} pipeline'ı uygulayacaksınız.
 
 <!-- additional_information -->

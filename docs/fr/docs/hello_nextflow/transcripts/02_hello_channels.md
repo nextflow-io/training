@@ -136,7 +136,7 @@ Si vous êtes intéressé·e par comment faire ceci avec les meilleures pratique
 
 D'accord. Ensuite nous allons explorer un peu comment les canaux sont structurés et comment ils diffèrent d'autres types de structures de données dans le langage de codage. Et je vais réfléchir un peu à comment je pourrais potentiellement utiliser un tableau, qui pourrait être un concept familier si vous venez d'autres langages.
 
-Puis-je utiliser un tableau dans un canal ? Essayons. Je vais créer un tableau, et j'ai copié ceci de la documentation, _"greetings_array"_ et _"Hello", "Bonjour"_ et _"Holà"_. Et ensuite je vais mettre ça ici au lieu de mes chaînes codées en dur. Donc je vais dire "channel.of" _"greetings_array"_, passant ce tableau dans un canal. Essayons.
+Puis-je utiliser un tableau dans un canal ? Essayons. Je vais créer un tableau, et j'ai copié ceci de la documentation, _"greetings_array"_ et _"Hello", "Bonjour"_ et _"Hola"_. Et ensuite je vais mettre ça ici au lieu de mes chaînes codées en dur. Donc je vais dire "channel.of" _"greetings_array"_, passant ce tableau dans un canal. Essayons.
 
 Ouvrir le terminal, et exécuter le pipeline.
 
@@ -212,7 +212,7 @@ D'accord, jetons un œil à ce canal et voyons à quoi il ressemble. Nous pouvon
 
 Si je l'exécute à nouveau, il échouera toujours, mais il nous montrera ce qui est à l'intérieur de ce canal. Ce n'est pas particulièrement excitant. C'est cette variable _path_. Donc vous pouvez voir que c'est juste une chaîne ici parce qu'elle est affichée dans un terminal, mais c'est un objet _path_, qui contient les informations et les métadonnées sur ce fichier.
 
-Nous ne voulons pas passer les métadonnées du fichier à l'entrée. Nous voulons passer le contenu de ce fichier. Si nous regardons le fichier _greetings.csv_, vous pouvez voir ici qu'il a ces différentes variables ici. _Hello, Bonjour, Holà_ à nouveau. Et ce sont les choses que nous voulons vraiment passer à notre processus, pas juste le fichier lui-même comme un seul objet.
+Nous ne voulons pas passer les métadonnées du fichier à l'entrée. Nous voulons passer le contenu de ce fichier. Si nous regardons le fichier _greetings.csv_, vous pouvez voir ici qu'il a ces différentes variables. _Hello, Bonjour, Hola_ à nouveau. Et ce sont les choses que nous voulons vraiment passer à notre processus, pas juste le fichier lui-même comme un seul objet.
 
 Donc nous devons analyser ce fichier CSV. Nous devons le déballer, accéder au contenu du fichier CSV, et ensuite passer le contenu dans le canal au processus.
 
@@ -224,9 +224,9 @@ D'accord. Il a toujours échoué, mais d'une manière nouvelle et excitante, ce 
 
 Cette fois encore, nous avons un problème avec notre script, qui a été rendu. Maintenant. Nous n'avons plus le chemin final, mais nous avons un tableau de variables, qui ressemble beaucoup à l'erreur que nous avons eue plus tôt quand nous passions un tableau comme entrée fixe.
 
-Avec notre journalisation de l'opérateur view, nous pouvons voir avant _splitCsv_ c'était le path. Et effectivement, après _splitCsv_, nous avons trois sorties différentes et chacune de ces sorties ressemble énormément à chacune des lignes du fichier _greetings.csv_, ce qui a du sens.
+Avec notre journalisation de l'opérateur view, nous pouvons voir qu'avant _splitCsv_ c'était le path. Et effectivement, après _splitCsv_, nous avons trois sorties différentes et chacune de ces sorties ressemble énormément à chacune des lignes du fichier _greetings.csv_, ce qui a du sens.
 
-Donc ce qui s'est passé ici est que Nextflow a analysé ce fichier CSV nous donnant trois objets, un tableau pour chaque ligne du fichier CSV. Donc ensuite trois fois nous avons passé un tableau de variables au canal au lieu d'une seule valeur de chaîne.
+Donc ce qui s'est passé ici est que Nextflow a analysé ce fichier CSV en nous donnant trois objets, un tableau pour chaque ligne du fichier CSV. Donc ensuite trois fois nous avons passé un tableau de variables au canal au lieu d'une seule valeur de chaîne.
 
 D'accord, donc la dernière fois que nous avons eu ce problème, nous avons utilisé _flatten_. Essayons juste très rapidement. Essayer flatten et voir ce qui se passe.
 
@@ -238,15 +238,15 @@ Donc cette fois nous allons exécuter, nous avons analysé le CSV en trois objet
 
 Donc comment accédons-nous juste à la première colonne ? Si flatten est trop simpliste ici, nous avons besoin d'un opérateur plus complexe où nous pouvons réellement personnaliser et lui dire ce que nous voulons du CSV.
 
-Pour faire ça, nous allons utiliser _map_. Essentiellement _map_ dit juste, exécuter du code, une fonction sur chaque élément que je reçois et faire une sorte de transformation dessus. Et parce que c'est si flexible, vous le verrez apparaître dans le code Nextflow tout le temps.
+Pour faire ça, nous allons utiliser _map_. Essentiellement _map_ dit juste, exécuter du code, une fonction sur chaque élément qui m'est donné et effectuer une sorte de transformation dessus. Et parce qu'il est si flexible, vous le verrez apparaître dans le code Nextflow tout le temps.
 
-Par lui-même, il ne fait rien. Donc nous ne voulons pas de parenthèses régulières, nous voulons une closure ici et nous devons lui dire quoi faire. Donc je vais dire _"row"_, parce qu'on lui donne des lignes du CSV, donc c'est un nom de variable logique. C'est l'entrée. Et je veux retourner juste le premier élément de ce tableau.
+Par lui-même, il ne fait rien. Donc nous ne voulons pas de parenthèses régulières, nous voulons une closure ici et nous devons lui dire quoi faire. Donc je vais dire _"row"_, parce qu'on lui donne des lignes du CSV, c'est donc un nom de variable logique. C'est l'entrée. Et je veux retourner juste le premier élément de ce tableau.
 
-Les tableaux dans Nextflow sont basés sur zéro, donc nous allons dire juste le premier élément, qui est row zéro. Si nous voulions la deuxième colonne, je pourrais être un ou la troisième colonne être deux, et ainsi de suite. Nous pouvons retourner ce que nous voulons ici, mais je vais retourner juste la première valeur.
+Les tableaux dans Nextflow sont basés sur zéro, donc nous allons dire juste le premier élément, qui est row zéro. Si nous voulions la deuxième colonne, ce serait un, ou la troisième colonne ce serait deux, et ainsi de suite. Nous pouvons retourner ce que nous voulons ici, mais je vais retourner juste la première valeur.
 
 Et maintenant, nous pouvons exécuter le pipeline à nouveau et voir s'il fait ce que nous attendons.
 
-Effectivement, après _splitCsv_ nous avons nos tableaux, et ensuite après le _map_, nous avons nos belles chaînes propres, juste _"Hello", "Bonjour"_ et _"Holà"_. Et le pipeline fait maintenant ce que nous voulons qu'il fasse. Fantastique.
+Effectivement, après _splitCsv_ nous avons nos tableaux, et ensuite après le _map_, nous avons nos belles chaînes propres, juste _"Hello", "Bonjour"_ et _"Hola"_. Et le pipeline fait maintenant ce que nous voulons qu'il fasse. Fantastique.
 
 Donc nous pouvons nous débarrasser de toutes ces commandes view maintenant. Nous n'en avons plus besoin.
 

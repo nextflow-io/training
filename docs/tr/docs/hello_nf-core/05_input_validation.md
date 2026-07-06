@@ -154,11 +154,11 @@ Doğrulama davranışı `nextflow.config` içindeki `validation{}` kapsamı arac
 
 İlk olarak parametre doğrulaması üzerinde çalışacağımız (bu bölüm) ve girdi verisi şemasını bölüm 2'ye kadar yapılandırmayacağımız için, geçici olarak nf-schema'ya `input` parametresinin dosya içeriğini doğrulamayı atlamasını söylememiz gerekiyor.
 
-`nextflow.config` dosyasını açın ve `validation` bloğunu bulun (yaklaşık 246. satır). Girdi dosyası doğrulamasını atlamak için `ignoreParams` ekleyin:
+`nextflow.config` dosyasını açın ve `validation` bloğunu bulun (yaklaşık 247. satır). Girdi dosyası doğrulamasını atlamak için `ignoreParams` ekleyin:
 
 === "Sonra"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="246"
+    ```groovy title="nextflow.config" hl_lines="3" linenums="247"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
@@ -168,7 +168,7 @@ Doğrulama davranışı `nextflow.config` içindeki `validation{}` kapsamı arac
 
 === "Önce"
 
-    ```groovy title="nextflow.config" linenums="246"
+    ```groovy title="nextflow.config" linenums="247"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
@@ -257,13 +257,13 @@ nf-core pipelines schema build
 Şöyle bir şey görmelisiniz:
 
 ```console
-                                      ,--./,-.
-      ___     __   __   __   ___     /,-._.--\
-|\ | |__  __ /  ` /  \ |__) |__         }  {
-| \| |       \__, \__/ |  \ |___     \`-._,-`-,
-                                      `._,._,'
+                                          ,--./,-.
+          ___     __   __   __   ___     /,-._.--~\
+    |\ | |__  __ /  ` /  \ |__) |__         }  {
+    | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                          `._,._,'
 
-nf-core/tools version 3.5.2 - https://nf-co.re
+    nf-core/tools version 3.5.2 - https://nf-co.re
 
 INFO     [✓] Default parameters match schema validation
 INFO     [✓] Pipeline schema looks valid (found 17 params)
@@ -369,14 +369,14 @@ nextflow run . --input assets/greetings.csv --outdir results --batch my-batch -p
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [peaceful_wozniak] DSL2 - revision: b9e9b3b8de
 
     executor >  local (8)
     [de/a1b2c3] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
     [4f/d5e6f7] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-    [8a/b9c0d1] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔
+    [8a/b9c0d1] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
     [e2/f3a4b5] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
@@ -410,7 +410,7 @@ cat assets/greetings.csv
 ```csv title="assets/greetings.csv"
 Hello,en,87
 Bonjour,fr,96
-Holà,es,98
+Hola,es,98
 ```
 
 Bu, şunlarla basit bir CSV'dir:
@@ -446,7 +446,7 @@ Bunu selamlamalar kullanım senaryomuz için daha basit bir şema ile değiştir
     ```json title="assets/schema_input.json" linenums="1" hl_lines="10-25 27"
     {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
-        "$id": "https://raw.githubusercontent.com/core/hello/main/assets/schema_input.json",
+        "$id": "https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json",
         "title": "core/hello pipeline - params.input schema",
         "description": "Schema for the greetings file provided with params.input",
         "type": "array",
@@ -480,7 +480,7 @@ Bunu selamlamalar kullanım senaryomuz için daha basit bir şema ile değiştir
     ```json title="assets/schema_input.json" linenums="1" hl_lines="10-29 31"
     {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
-        "$id": "https://raw.githubusercontent.com/core/hello/main/assets/schema_input.json",
+        "$id": "https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json",
         "title": "core/hello pipeline - params.input schema",
         "description": "Schema for the file provided with params.input",
         "type": "array",
@@ -536,7 +536,7 @@ Basit durumumuz için, selamlamalar dosyamıza bir başlık satırı eklememiz g
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 === "Önce"
@@ -544,7 +544,7 @@ Basit durumumuz için, selamlamalar dosyamıza bir başlık satırı eklememiz g
     ```csv title="assets/greetings.csv" linenums="1"
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 Artık CSV dosyası, şemamızdaki alan adlarıyla eşleşen bir başlık satırına sahip.
@@ -627,8 +627,8 @@ include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipelin
 
 Ne değiştiğini açıklayalım:
 
-1. **`samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")`**: Girdi dosyasını şemamıza karşı doğrular ve bir liste döndürür
-2. **`Channel.fromList(...)`**: Listeyi bir Nextflow kanalına dönüştürür
+1. **`#!groovy samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")`**: Girdi dosyasını şemamıza karşı doğrular ve bir liste döndürür
+2. **`channel.fromList(...)`**: Listeyi bir Nextflow kanalına dönüştürür
 
 Bu, `samplesheetToList` ve JSON şemaları kullanarak girdi verisi doğrulamasının uygulanmasını tamamlar.
 
@@ -640,7 +640,7 @@ Artık girdi verisi şemasını yapılandırdığımıza göre, daha önce ekled
 
 === "Sonra"
 
-    ```groovy title="nextflow.config" linenums="246"
+    ```groovy title="nextflow.config" linenums="247"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
@@ -649,7 +649,7 @@ Artık girdi verisi şemasını yapılandırdığımıza göre, daha önce ekled
 
 === "Önce"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="246"
+    ```groovy title="nextflow.config" hl_lines="3" linenums="247"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
@@ -684,7 +684,7 @@ nextflow run . --outdir core-hello-results -profile test,docker
     executor >  local (8)
     [c1/39f64a] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
     [44/c3fb82] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-    [62/80fab2] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔
+    [62/80fab2] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
     [e1/4db4fd] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
@@ -711,7 +711,7 @@ cp assets/greetings.csv assets/invalid_greetings.csv
     message,language,score
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 === "Önce"
@@ -720,7 +720,7 @@ cp assets/greetings.csv assets/invalid_greetings.csv
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
-    Holà,es,98
+    Hola,es,98
     ```
 
 Bu, şemamızla eşleşmez; bu nedenle doğrulama bir hata atmalıdır.
@@ -734,7 +734,7 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
 ??? failure "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 24.10.4
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [trusting_ochoa] DSL2 - revision: b9e9b3b8de
 
@@ -743,17 +743,17 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
       outdir             : test-results
 
     Generic options
-      trace_report_suffix: 2025-01-27_03-16-04
+      trace_report_suffix: 2025-11-21_07-35-12
 
     Core Nextflow options
       runName            : trusting_ochoa
       containerEngine    : docker
-      launchDir          : /workspace/hello-nf-core
-      workDir            : /workspace/hello-nf-core/work
-      projectDir         : /workspace/hello-nf-core
-      userName           : user
+      launchDir          : /workspaces/training/hello-nf-core/core-hello
+      workDir            : /workspaces/training/hello-nf-core/core-hello/work
+      projectDir         : /workspaces/training/hello-nf-core/core-hello
+      userName           : root
       profile            : docker
-      configFiles        : /workspace/hello-nf-core/nextflow.config
+      configFiles        : /workspaces/training/hello-nf-core/core-hello/nextflow.config
 
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
@@ -793,4 +793,4 @@ Hem parametre doğrulaması hem de girdi verisi doğrulamasını uyguladınız v
 
 Hello nf-core eğitim kursunun beş bölümünün tamamını tamamladınız!
 
-Oluşturduklarınızı ve öğrendiklerinizi düşünmek için [Özet](summary.md) bölümüne devam edin.
+Oluşturduklarınızı ve öğrendiklerinizi düşünmek için [Özet](next_steps.md) bölümüne devam edin.

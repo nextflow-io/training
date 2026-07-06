@@ -6,25 +6,25 @@ Congratulazioni per aver completato il corso di formazione Hello nf-core! 🎉
 
 <!-- placeholder for video -->
 
-## Il suo percorso
+## Il tuo percorso
 
-Ha iniziato imparando a recuperare ed eseguire una pipeline demo, poi ha affrontato la conversione di un semplice workflow Nextflow in una pipeline nf-core.
-Ha imparato a creare uno scaffold di pipeline utilizzando un template e ha innestato la pipeline esistente su quello scaffold.
-Poi ha gradualmente perfezionato la pipeline sostituendo uno dei moduli locali con un modulo nf-core, ha trasformato un altro modulo locale per adattarlo agli standard nf-core e ha aggiunto la validazione dell'input.
+Hai iniziato imparando a recuperare ed eseguire una pipeline demo, poi hai affrontato la conversione di un semplice workflow Nextflow in una pipeline nf-core.
+Hai imparato a creare uno scaffold di pipeline utilizzando un template e hai innestato la pipeline esistente su quello scaffold.
+Poi hai gradualmente perfezionato la pipeline sostituendo uno dei moduli locali con un modulo nf-core, hai trasformato un altro modulo locale per adattarlo agli standard nf-core e hai aggiunto la validazione dell'input.
 
-### Cosa ha costruito
+### Cosa hai costruito
 
-La sua pipeline finale `core-hello` ora dispone di:
+La tua pipeline finale `core-hello` ora dispone di:
 
 - **Struttura standardizzata** utilizzando il template nf-core con directory organizzate per workflows, subworkflows, moduli e configurazione
-- **Moduli della community** dal repository nf-core (`cat/cat`) insieme ai suoi moduli personalizzati
+- **Moduli della community** dal repository nf-core (`find/concatenate`) insieme ai tuoi moduli personalizzati
 - **Validazione completa** che verifica sia i parametri che i dati di input prima dell'esecuzione della pipeline
 - **Configurazione professionale** con profili per diversi ambienti di esecuzione
 - **Documentazione completa** e metadati seguendo le convenzioni nf-core
 
 ### Competenze chiave acquisite
 
-Attraverso questo corso pratico, ha imparato a:
+Attraverso questo corso pratico, hai imparato a:
 
 1. **Navigare e comprendere** la struttura delle pipeline nf-core esplorando una pipeline esistente
 2. **Ristrutturare i workflow** per renderli componibili e adattarli al template nf-core
@@ -32,7 +32,7 @@ Attraverso questo corso pratico, ha imparato a:
 4. **Creare moduli personalizzati** seguendo gli standard nf-core per denominazione, struttura e metadati
 5. **Implementare la validazione** utilizzando nf-schema per individuare errori precocemente con feedback chiari
 
-È ora equipaggiato con le conoscenze fondamentali per costruire pipeline nf-core pronte per la produzione che seguono le best practice della community.
+Sei ora equipaggiato con le conoscenze fondamentali per costruire pipeline nf-core pronte per la produzione che seguono le best practice della community.
 
 ## Prossimi passi per sviluppare le sue competenze
 

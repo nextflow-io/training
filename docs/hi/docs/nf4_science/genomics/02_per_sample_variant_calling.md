@@ -402,7 +402,7 @@ nextflow run genomics.nf -profile test
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [reverent_sinoussi] DSL2 - revision: 41d43ad7fe
 
@@ -562,7 +562,7 @@ workflow ब्लॉक के अंदर accessory फ़ाइल पथो
     ```
 
 `file()` सिंटैक्स Nextflow को स्पष्ट रूप से बताता है कि इन इनपुट को फ़ाइल पथों के रूप में हैंडल करना है।
-तुम Side Quest [Working with files](../../side_quests/working_with_files.md) में इसके बारे में अधिक जान सकते हो।
+तुम Side Quest [Working with files](../../side_quests/working_with_files/index.md) में इसके बारे में अधिक जान सकते हो।
 
 ### 2.2. वेरिएंट कॉलिंग प्रोसेस लिखो और workflow में उसे कॉल करो
 
@@ -769,7 +769,7 @@ nextflow run genomics.nf -profile test -resume
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [grave_volta] DSL2 - revision: 4790abc96a
 
@@ -891,7 +891,7 @@ nextflow run genomics.nf -profile test -resume
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [peaceful_yalow] DSL2 - revision: a256d113ad
 
@@ -905,7 +905,7 @@ nextflow run genomics.nf -profile test -resume
 ??? failure "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [loving_pasteur] DSL2 - revision: d2a8e63076
 
@@ -1164,7 +1164,7 @@ nextflow run genomics.nf -profile test
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [special_goldstine] DSL2 - revision: 4cbbf6ea3e
 
@@ -1327,7 +1327,7 @@ nextflow run genomics.nf -profile test
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [sick_albattani] DSL2 - revision: 46d84642f6
 

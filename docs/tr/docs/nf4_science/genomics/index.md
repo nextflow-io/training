@@ -14,7 +14,7 @@ additional_information:
   audience_prerequisites:
     - "**Hedef Kitle:** Bu kurs, veri analizi boru hatları geliştirmek veya özelleştirmek isteyen genomik ve ilgili alanlardaki araştırmacılar için tasarlanmıştır."
     - "**Beceriler:** Komut satırı, temel betik kavramları ve yaygın genomik dosya formatları hakkında bir miktar bilgi sahibi olunduğu varsayılmaktadır."
-    - "**Ön Koşullar:** [Hello Nextflow](../../hello_nextflow/) kursunda ele alınan temel Nextflow kavramları ve araçları."
+    - "**Ön Koşullar:** [Hello Nextflow](../../hello_nextflow/index.md) kursunda ele alınan temel Nextflow kavramları ve araçları."
 ---
 
 # Genomik için Nextflow
@@ -23,7 +23,7 @@ additional_information:
 
 **Gerçek dünya genomik kullanım senaryosuna Nextflow uygulaması: GATK ile varyant çağırma.**
 
-Bu kurs, [Hello Nextflow](../../hello_nextflow/) başlangıç eğitimi üzerine inşa edilmiştir ve Nextflow'un genomik alanının özel bağlamında nasıl kullanılacağını gösterir.
+Bu kurs, [Hello Nextflow](../../hello_nextflow/index.md) başlangıç eğitimi üzerine inşa edilmiştir ve Nextflow'un genomik alanının özel bağlamında nasıl kullanılacağını gösterir.
 Yüksek verimli dizileme verilerini analiz etmek için yaygın olarak kullanılan bir yazılım paketi olan [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit) ile bir varyant çağırma boru hattı uygulayacaksınız.
 
 <!-- additional_information -->

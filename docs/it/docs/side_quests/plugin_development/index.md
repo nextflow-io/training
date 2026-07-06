@@ -21,7 +21,7 @@ Non è richiesta alcuna esperienza precedente con Java o Groovy.
 
 **Prerequisiti**
 
-- Un account GitHub OPPURE un'installazione locale come descritto [qui](../../envsetup/02_local).
+- Un account GitHub OPPURE un'installazione locale come descritto [qui](../../envsetup/02_local.md).
 - Aver completato il corso [Hello Nextflow](../../hello_nextflow/index.md) o equivalente.
 - Java 21 o versione successiva (incluso nell'ambiente di formazione; necessario solo per le Parti 2-6).
 

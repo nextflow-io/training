@@ -6,11 +6,16 @@ hide:
   - footer
 ---
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 ## Desteklenen güncel Nextflow sözdizimi sürümü ve gereksinimleri
 
-Eğitim portalının 3.0 sürümü itibarıyla, kurs indeks sayfasında aksi belirtilmedikçe tüm eğitim kurslarımız Nextflow'un 25.10.2 sürümünü temel almaktadır (sürüm bildirimi içermeyebilecek kullanımdan kaldırılmış veya arşivlenmiş materyaller bu kapsam dışındadır).
+Eğitim portalının 3.0 sürümü itibarıyla, kurs indeks sayfasında aksi belirtilmedikçe tüm eğitim kurslarımız Nextflow 25.10.2 veya daha yeni bir sürümle uyumludur.
+(Sürüm bildirimi içermeyebilecek kullanımdan kaldırılmış veya arşivlenmiş materyaller bu kapsam dışındadır.)
 
-Kurslar artık iş akışı düzeyinde tiplendirilmiş girdiler ve iş akışı düzeyinde çıktı yönergeleri kullandığından, V2 sözdizimi ayrıştırıcısının kullanılması gerekmektedir.
+Eğitim ortamımızda varsayılan olarak yüklenen Nextflow sürümü **Nextflow 25.10.4**'tür.
+
+Kurslar artık iş akışı düzeyinde tiplendirilmiş girdiler ve iş akışı düzeyinde çıktı yönergeleri kullandığından, **aksi belirtilmedikçe** V2 sözdizimi ayrıştırıcısının kullanılması gerekmektedir.
 [Github Codespaces](../envsetup/01_setup.md) veya [yerel devcontainer'lar](../envsetup/03_devcontainer.md) aracılığıyla sağladığımız ortamı kullanmayı planlıyorsanız, kurs talimatlarında özellikle belirtilmedikçe herhangi bir işlem yapmanıza gerek yoktur.
 Ancak eğitimleri kendi ortamınızda ([Manuel kurulum](../envsetup/02_local.md)) tamamlamayı planlıyorsanız, v2 sözdizimi ayrıştırıcısı etkinleştirilmiş şekilde Nextflow 25.10.2 veya daha yeni bir sürümü kullandığınızdan emin olmanız gerekmektedir.
 

@@ -17,7 +17,7 @@ Després has refinat gradualment el pipeline substituint un dels mòduls locals 
 El teu pipeline final `core-hello` ara té:
 
 - **Estructura estandarditzada** utilitzant la plantilla nf-core amb directoris organitzats per a workflows, subworkflows, mòduls i configuració
-- **Mòduls de la comunitat** del repositori nf-core (`cat/cat`) juntament amb els teus mòduls personalitzats
+- **Mòduls de la comunitat** del repositori nf-core (`find/concatenate`) juntament amb els teus mòduls personalitzats
 - **Validació exhaustiva** que comprova tant els paràmetres com les dades d'entrada abans que s'executi el pipeline
 - **Configuració professional** amb perfils per a diferents entorns d'execució
 - **Documentació completa** i metadades seguint les convencions nf-core

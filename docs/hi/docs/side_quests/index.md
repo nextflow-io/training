@@ -2,55 +2,57 @@
 title: साइड क्वेस्ट
 hide:
   - toc
+page_type: index_page
+index_type: course
+additional_information:
+  technical_requirements: true
+  learning_objectives:
+    - एक उत्पादक Nextflow डेवलपमेंट वातावरण सेट अप और कॉन्फ़िगर करें
+    - जटिल डेटा ट्रांसफ़ॉर्मेशन के लिए उन्नत स्क्रिप्टिंग पैटर्न लागू करें
+    - मल्टी-स्टेप वर्कफ़्लो में मेटाडेटा को हैंडल और प्रोपेगेट करें
+    - समानांतर और क्रमिक प्रोसेसिंग के लिए डेटा चैनल को विभाजित और समूहित करें
+    - nf-test का उपयोग करके Nextflow वर्कफ़्लो का परीक्षण करें
+    - { "पुन": "उपयोग योग्य नामित वर्कफ़्लो मॉड्यूल से जटिल पाइपलाइन बनाएं" }
+    - Nextflow फ़ाइल ऑपरेशन का उपयोग करके फ़ाइलों के साथ कुशलतापूर्वक काम करें
+    - सामान्य वर्कफ़्लो समस्याओं को व्यवस्थित रूप से डीबग करें
+    - Nextflow plugins का उपयोग और निर्माण करें
+  audience_prerequisites:
+    - "**दर्शक:** यह संग्रह उन शिक्षार्थियों के लिए बनाया गया है जिन्होंने Hello Nextflow शुरुआती कोर्स पूरा कर लिया है और विशिष्ट विषयों में गहराई से जाना चाहते हैं।"
+    - "**कौशल:** कमांड लाइन का अनुभव और बुनियादी Nextflow अवधारणाओं और टूलिंग से परिचितता मानी जाती है।"
+    - "**कोर्स:** [Hello Nextflow](../hello_nextflow/index.md) या समकक्ष पूरा किया होना चाहिए।"
 ---
 
 # साइड क्वेस्ट
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-यह स्वतंत्र प्रशिक्षण मिनी-कोर्स का संग्रह है जो विशिष्ट विषयों में गहराई से जाते हैं। आप इन्हें किसी भी क्रम में पूरा कर सकते हैं।
+**साइड क्वेस्ट स्वतंत्र प्रशिक्षण मिनी-कोर्स हैं जो विशिष्ट Nextflow विषयों में गहराई से जाते हैं।**
 
-आइए शुरू करें! प्रशिक्षण वातावरण लॉन्च करने के लिए नीचे "Open in GitHub Codespaces" बटन पर क्लिक करें (अधिमानतः एक अलग टैब में), फिर इसके लोड होने के दौरान पढ़ें।
+प्रत्येक साइड क्वेस्ट को तुम्हारी रुचि और ज़रूरत के अनुसार, किसी भी क्रम में स्वतंत्र रूप से लिया जा सकता है।
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+<!-- additional_information -->
 
-## पूर्वापेक्षाएँ
+## कोर्स का अवलोकन
 
-प्रत्येक मिनी-कोर्स की विशिष्ट पूर्वापेक्षाएँ अलग-अलग हैं और संबंधित पेजों में प्रलेखित हैं।
-फिर भी, वे सभी निम्नलिखित के साथ कुछ न्यूनतम परिचितता मानते हैं:
+यदि तुम पहली बार साइड क्वेस्ट देख रहे हो, तो प्रशिक्षण वातावरण और सामग्री के अवलोकन के लिए [Orientation](./orientation.md) पेज से शुरू करो।
 
-- कमांड लाइन के साथ अनुभव
-- [Hello Nextflow](../../hello_nextflow/) शुरुआती प्रशिक्षण कोर्स में शामिल बुनियादी Nextflow अवधारणाएँ और टूलिंग।
+### साइड क्वेस्ट
 
-तकनीकी आवश्यकताओं और वातावरण सेटअप के लिए, [Environment Setup](../../envsetup/) मिनी-कोर्स देखें।
+| साइड क्वेस्ट                                                            | सारांश                                                              | अनुमानित समय |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------ |
+| [Development Environment](./dev_environment/index.md)                   | एक उत्पादक लोकल Nextflow डेवलपमेंट वातावरण सेट अप और कॉन्फ़िगर करें | 45 मिनट      |
+| [Essential Scripting Patterns](./essential_scripting_patterns/index.md) | सामान्य वर्कफ़्लो चुनौतियों के लिए उन्नत स्क्रिप्टिंग तकनीकें       | 90 मिनट      |
+| [File Input Processing](./working_with_files/index.md)                  | फ़ाइल हैंडलिंग, पाथ ऑपरेशन और आउटपुट व्यवस्थित करना                 | 45 मिनट      |
+| [Metadata and Meta Maps](./metadata/index.md)                           | नमूना जानकारी ट्रैक और प्रोपेगेट करने के लिए मेटाडेटा मैप का उपयोग  | 45 मिनट      |
+| [Splitting and Grouping](./splitting_and_grouping/index.md)             | डेटा चैनल को विभाजित और पुनः समूहित करने की तकनीकें                 | 45 मिनट      |
+| [Testing with nf-test](./nf_test/index.md)                              | Nextflow वर्कफ़्लो के लिए परीक्षण लिखना और चलाना                    | 1 घंटा       |
+| [Troubleshooting Workflows](./debugging/index.md)                       | सामान्य वर्कफ़्लो त्रुटियों की पहचान और सुधार                       | 1 घंटा       |
+| [Workflows of Workflows](./workflows_of_workflows/index.md)             | पुन: उपयोग योग्य नामित वर्कफ़्लो मॉड्यूल से जटिल पाइपलाइन बनाना     | 30 मिनट      |
+| [Plugin Development](./plugin_development/index.md)                     | Nextflow plugins का उपयोग और निर्माण                                | 3 घंटे       |
 
-**यदि आप पहली बार साइड क्वेस्ट में प्रवेश कर रहे हैं, तो पहले [Orientation](./orientation.md) पेज अवश्य देखें!**
+[शुरू करें :material-arrow-right:](orientation.md){ .md-button .md-button--primary }
 
-अन्यथा, नीचे दी गई तालिका से एक साइड क्वेस्ट चुनें।
+<!-- Clearfix for float -->
+<div style="content: ''; clear: both; display: table;"></div>
 
-## साइड क्वेस्ट
-
-| साइड क्वेस्ट                                                             | शिक्षण के लिए अनुमानित समय |
-| ------------------------------------------------------------------------ | -------------------------- |
-| [Nextflow development environment walkthrough](./dev_environment/)       | 45 मिनट                    |
-| [Essential Nextflow Scripting Patterns](./essential_scripting_patterns/) | 90 मिनट                    |
-| [Metadata in workflows](./metadata/)                                     | 45 मिनट                    |
-| [Splitting and Grouping](./splitting_and_grouping/)                      | 45 मिनट                    |
-| [Testing with nf-test](./nf_test/)                                       | 1 घंटा                     |
-| [Workflows of workflows](./workflows_of_workflows/)                      | 30 मिनट                    |
-| [Working with files](./working_with_files/)                              | 45 मिनट                    |
-| [Debugging workflows](./debugging/)                                      | 1 घंटा                     |
-
-## मल्टी-पार्ट कोर्स
-
-!!! exercise "Plugin Development"
-
-    !!! tip inline end ""
-
-        :material-run-fast: Nextflow plugins का उपयोग करना और बनाना सीखें।
-
-    यह कोर्स तुम्हारे वर्कफ़्लो में मौजूदा plugins का उपयोग करने और अपना खुद का plugin शुरू से बनाने को कवर करता है, जिसमें कस्टम फ़ंक्शन, वर्कफ़्लो मॉनिटरिंग, कॉन्फ़िगरेशन और वितरण शामिल हैं।
-
-    [Plugin Development प्रशिक्षण शुरू करें :material-arrow-right:](plugin_development/){ .md-button .md-button--primary }
-
-हमें बताएं कि आप यहाँ किन अन्य डोमेन और उपयोग के मामलों को शामिल देखना चाहेंगे, कम्युनिटी फोरम के [Training section](https://community.seqera.io/c/training/) में पोस्ट करके।
+हमें बताओ कि तुम यहाँ किन अन्य विषयों को शामिल देखना चाहते हो, कम्युनिटी फोरम के [Training section](https://community.seqera.io/c/training/) में पोस्ट करके।

@@ -4,6 +4,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+
 Wiesz już, jak wtyczki rozszerzają Nextflow'a o funkcjonalności wielokrotnego użytku.
 Teraz stworzysz własną, zaczynając od szablonu projektu, który zajmuje się konfiguracją budowania za Ciebie.
 
@@ -308,7 +309,7 @@ Pipeline is starting! 🚀
 [98/c9a7d6] Submitted process > SAY_HELLO (5)
 Output: Bonjour
 Output: Hello
-Output: Holà
+Output: Hola
 Output: Ciao
 Output: Hallo
 Pipeline complete! 👋

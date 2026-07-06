@@ -12,7 +12,7 @@
 :green_book: La trascrizione del video è disponibile [qui](./transcripts/00_orientation.md).
 ///
 
-!!! tip
+!!! tip "Suggerimento"
 
     I video di YouTube hanno alcune funzionalità speciali!
 
@@ -62,7 +62,7 @@ Potete impostare VSCode per focalizzarsi su questa directory, in modo che solo i
 code .
 ```
 
-!!! tip
+!!! tip "Suggerimento"
 
     Se per qualsiasi motivo uscite da questa directory (ad es. il codespace va in sleep), potete sempre usare il percorso completo per tornarci, assumendo che stiate eseguendo all'interno dell'ambiente di formazione Github Codespaces:
 
@@ -85,7 +85,7 @@ Qui generiamo una tabella dei contenuti fino al secondo livello:
 tree . -L 2
 ```
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     .

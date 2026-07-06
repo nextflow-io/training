@@ -6,11 +6,16 @@ hide:
   - footer
 ---
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 ## Aktuell unterstützte Nextflow-Syntaxversion & Anforderungen
 
-Ab Version 3.0 des Trainingsportals basieren alle unsere Trainingskurse auf der Nextflow-Version 25.10.2, sofern auf der Kursübersichtsseite nicht anders angegeben (mit Ausnahme veralteter oder archivierter Materialien, die möglicherweise keinen Versionshinweis enthalten).
+Ab Version 3.0 des Trainingsportals sind alle unsere Trainingskurse mit Nextflow Version 25.10.2 oder neuer kompatibel, sofern auf der Kursübersichtsseite nicht anders angegeben.
+(Dies gilt nicht für veraltete oder anderweitig archivierte Materialien, die möglicherweise keinen Versionshinweis enthalten.)
 
-Da die Kurse jetzt typisierte Eingaben auf Workflow-Ebene sowie Workflow-Ausgabedirektiven verwenden, benötigen sie den V2-Syntaxparser.
+Die Nextflow-Version, die in unserer Trainingsumgebung standardmäßig geladen wird, ist **Nextflow 25.10.4**.
+
+Da die Kurse jetzt typisierte Eingaben auf Workflow-Ebene sowie Workflow-Ausgabedirektiven verwenden, benötigen sie den V2-Syntaxparser, **sofern nicht ausdrücklich anders angegeben**.
 Wenn du die Umgebung verwendest, die wir über [Github Codespaces](../envsetup/01_setup.md) oder [lokale Devcontainer](../envsetup/03_devcontainer.md) bereitstellen, musst du nichts tun, sofern in den Kursanweisungen nicht ausdrücklich etwas anderes angegeben ist.
 Wenn du jedoch planst, die Trainings in deiner eigenen Umgebung zu absolvieren ([Manuelle Installation](../envsetup/02_local.md)), musst du sicherstellen, dass du Nextflow Version 25.10.2 oder neuer mit aktiviertem v2-Syntaxparser verwendest.
 

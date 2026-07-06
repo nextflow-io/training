@@ -47,7 +47,7 @@ Aquestes habilitats us ajudaran a implementar una estratègia de proves completa
 
 Abans d'abordar aquesta missió secundària, hauríeu de:
 
-- Haver completat el tutorial [Hello Nextflow](../hello_nextflow/README.md) o un curs equivalent per a principiants.
+- Haver completat el tutorial [Hello Nextflow](../../hello_nextflow/index.md) o un curs equivalent per a principiants.
 - Estar còmodes amb els conceptes i mecanismes bàsics de Nextflow (processos, canals, operadors, treball amb fitxers, metadades)
 
 ---
@@ -56,7 +56,7 @@ Abans d'abordar aquesta missió secundària, hauríeu de:
 
 #### Obriu el codespace de formació
 
-Si encara no ho heu fet, assegureu-vos d'obrir l'entorn de formació tal com es descriu a la [Configuració de l'entorn](../envsetup/index.md).
+Si encara no ho heu fet, assegureu-vos d'obrir l'entorn de formació tal com es descriu a la [Configuració de l'entorn](../../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -84,13 +84,13 @@ Trobareu un fitxer de workflow principal i un fitxer CSV anomenat `greetings.csv
 └── main.nf
 ```
 
-Per a una descripció detallada dels fitxers, consulteu l'[escalfament de Hello Nextflow](../hello_nextflow/00_orientation.md).
+Per a una descripció detallada dels fitxers, consulteu l'[escalfament de Hello Nextflow](../../hello_nextflow/00_orientation.md).
 
-El workflow que provarem és un subconjunt del Hello workflow construït a [Hello Workflow](../hello_nextflow/03_hello_workflow.md).
+El workflow que provarem és un subconjunt del Hello workflow construït a [Hello Workflow](../../hello_nextflow/03_hello_workflow.md).
 
 ??? example "Què fa el workflow Hello Nextflow?"
 
-    Si no heu fet la formació [Hello Nextflow](../hello_nextflow/index.md), aquí teniu una visió general ràpida del que fa aquest workflow senzill.
+    Si no heu fet la formació [Hello Nextflow](../../hello_nextflow/index.md), aquí teniu una visió general ràpida del que fa aquest workflow senzill.
 
     El workflow pren un fitxer CSV que conté salutacions, executa quatre passos de transformació consecutius sobre elles i genera un únic fitxer de text que conté una imatge ASCII d'un personatge divertit dient les salutacions.
 
@@ -121,8 +121,6 @@ Podeu veure el codi complet del workflow a continuació.
     */
     process sayHello {
 
-        publishDir 'results', mode: 'copy'
-
         input:
             val greeting
 
@@ -140,8 +138,6 @@ Podeu veure el codi complet del workflow a continuació.
     */
     process convertToUpper {
 
-        publishDir 'results', mode: 'copy'
-
         input:
             path input_file
 
@@ -155,7 +151,7 @@ Podeu veure el codi complet del workflow a continuació.
     }
 
     workflow {
-
+        main:
         // crea un canal per a les entrades des d'un fitxer CSV
         greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
 
@@ -164,6 +160,17 @@ Podeu veure el codi complet del workflow a continuació.
 
         // converteix la salutació a majúscules
         convertToUpper(sayHello.out)
+
+        publish:
+        greetings = sayHello.out
+        upper_greetings = convertToUpper.out
+    }
+
+    output {
+        greetings {
+        }
+        upper_greetings {
+        }
     }
     ```
 
@@ -568,10 +575,10 @@ Afegim una assertion a la nostra prova per comprovar que el fitxer de sortida s'
             then {
                 assert file("$launchDir/results/Bonjour-output.txt").exists()
                 assert file("$launchDir/results/Hello-output.txt").exists()
-                assert file("$launchDir/results/Holà-output.txt").exists()
+                assert file("$launchDir/results/Hola-output.txt").exists()
                 assert file("$launchDir/results/UPPER-Bonjour-output.txt").exists()
                 assert file("$launchDir/results/UPPER-Hello-output.txt").exists()
-                assert file("$launchDir/results/UPPER-Holà-output.txt").exists()
+                assert file("$launchDir/results/UPPER-Hola-output.txt").exists()
             }
 
         }
@@ -728,7 +735,7 @@ Test Process sayHello
 FAILURE: Executed 1 tests in 4.884s (1 failed)
 ```
 
-La prova falla perquè el procés `sayHello` declara 1 entrada però s'ha cridat amb 0 arguments. Corregim-ho afegint una entrada al procés. Recordeu de [Hello Workflow](../hello_nextflow/03_hello_workflow.md) (i de la secció d'escalfament anterior) que el nostre procés `sayHello` pren una única entrada de valor, que haurem de proporcionar. També hauríem de corregir el nom de la prova per reflectir millor el que estem provant.
+La prova falla perquè el procés `sayHello` declara 1 entrada però s'ha cridat amb 0 arguments. Corregim-ho afegint una entrada al procés. Recordeu de [Hello Workflow](../../hello_nextflow/03_hello_workflow.md) (i de la secció d'escalfament anterior) que el nostre procés `sayHello` pren una única entrada de valor, que haurem de proporcionar. També hauríem de corregir el nom de la prova per reflectir millor el que estem provant.
 
 === "Després"
 
@@ -830,7 +837,7 @@ No l'imprimirem aquí, però hauríeu de veure un fitxer JSON que conté detalls
 
 Això representa les sortides creades pel procés `sayHello`, que estem provant explícitament. Si tornem a executar la prova, el programa comprovarà que la nova sortida coincideix amb la sortida que es va registrar originalment. Aquesta és una manera ràpida i senzilla de provar que les sortides del procés no canvien, per això nf-test la proporciona com a opció per defecte.
 
-!!!warning "Advertència"
+!!! warning "Advertència"
 
     Això significa que hem d'assegurar-nos que la sortida que registrem en l'execució original és correcta!
 
@@ -1195,4 +1202,4 @@ Consulteu la [documentació de nf-test](https://www.nf-test.com/) per a funciona
 
 ## Què segueix?
 
-Torneu al [menú de missions secundàries](../) o feu clic al botó a la part inferior dreta de la pàgina per passar al tema següent de la llista.
+Torneu al [menú de missions secundàries](../index.md) o feu clic al botó a la part inferior dreta de la pàgina per passar al tema següent de la llista.

@@ -246,7 +246,7 @@ nextflow run ./molkart -profile local_dev --input data/samplesheet.csv --outdir 
 nextflow run ./molkart -profile hpc_cluster --input data/samplesheet.csv --outdir results
 ```
 
-!!! note "नोट"
+!!! Note "नोट"
 
     हम इस training environment में HPC profile का test नहीं कर सकते क्योंकि हमारे पास Slurm scheduler तक पहुंच नहीं है।
     लेकिन यह दिखाता है कि आप वास्तविक उपयोग के लिए इसे कैसे configure करेंगे।
@@ -344,7 +344,7 @@ process {
 यह हमारे वर्तमान environment में pipeline को fail कर देगा क्योंकि हमारे पास इतना RAM उपलब्ध नहीं है।
 हम अगले section में इस प्रकार की failures को रोकने का तरीका सीखेंगे।
 
-!!! tip "सुझाव"
+!!! Tip "सुझाव"
 
     Process names खोजने के लिए, pipeline execution output देखें या `.nextflow.log` की जांच करें।
     Process names `WORKFLOW:SUBWORKFLOW:PROCESS` pattern का पालन करते हैं।
@@ -409,7 +409,7 @@ profiles {
 }
 ```
 
-!!! warning "चेतावनी"
+!!! Warning "चेतावनी"
 
     Resource limits को बहुत कम सेट करने से processes fail हो सकते हैं या धीरे चल सकते हैं।
     Pipeline को कम memory-intensive algorithms का उपयोग करने या छोटे chunks में data को process करने की आवश्यकता हो सकती है।
@@ -427,9 +427,9 @@ Process resource requests को cap करके resource-constrained environme
 
 ## निष्कर्ष
 
-अब आप समझते हैं कि विभिन्न computing environments के लिए Nextflow pipelines को कैसे configure करें।
+अब तुम समझते हो कि विभिन्न computing environments के लिए Nextflow pipelines को कैसे configure करें।
 
-आपने जो मुख्य कौशल सीखे हैं:
+मुख्य कौशल जो तुमने सीखे:
 
 - **Configuration precedence**: Nextflow कई स्रोतों से settings को कैसे resolve करता है
 - **nf-core profiles**: Containers, testing, और utilities के लिए built-in profiles का उपयोग करना
@@ -438,7 +438,7 @@ Process resource requests को cap करके resource-constrained environme
 - **Resource limits**: `resourceLimits` के साथ सीमित environments को मैनेज करना
 - **Configuration inspection**: Settings को debug और verify करने के लिए `nextflow config` का उपयोग करना
 
-ये configuration skills किसी भी Nextflow pipeline में transferable हैं और local machines, HPC clusters, और cloud platforms पर workflows को efficiently चलाने में आपकी मदद करेंगी।
+ये configuration skills किसी भी Nextflow pipeline में transferable हैं और local machines, HPC clusters, और cloud platforms पर workflows को efficiently चलाने में तुम्हारी मदद करेंगी।
 
 ### आगे क्या है?
 
@@ -447,6 +447,6 @@ Nextflow for Bioimaging course पूरा करने के लिए बध
 अगले कदम:
 
 - Feedback प्रदान करने के लिए course survey भरें
-- Workflows develop करने के बारे में अधिक जानने के लिए [Hello Nextflow](../hello_nextflow/index.md) देखें
-- nf-core tooling में गहराई से जाने के लिए [Hello nf-core](../hello_nf-core/index.md) explore करें
-- [Training collections](../training_collections/index.md) में अन्य courses देखें
+- Workflows develop करने के बारे में अधिक जानने के लिए [Hello Nextflow](../../hello_nextflow/index.md) देखें
+- nf-core tooling में गहराई से जाने के लिए [Hello nf-core](../../hello_nf-core/index.md) explore करें
+- [Training collections](../../training_collections/index.md) में अन्य courses देखें

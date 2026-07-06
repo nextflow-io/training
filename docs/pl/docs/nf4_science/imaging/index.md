@@ -35,4 +35,4 @@ Ten kurs zakłada podstawową znajomość następujących zagadnień:
 - Doświadczenie z wierszem poleceń
 - Podstawowa znajomość formatów plików obrazowych (obrazy TIFF, dane tabelaryczne)
 
-Wymagania techniczne i konfigurację środowiska można znaleźć w mini-kursie [Environment Setup](../../envsetup/).
+Wymagania techniczne i konfigurację środowiska można znaleźć w mini-kursie [Environment Setup](../../envsetup/index.md).

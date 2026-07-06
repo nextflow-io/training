@@ -20,7 +20,7 @@
 ```csv title="data/greetings.csv" linenums="1"
 Hello,English,123
 Bonjour,French,456
-Holà,Spanish,789
+Hola,Spanish,789
 ```
 
 हमने मूल workflow का एक improved version भी लिखा है, जिसे अब `2a-inputs.nf` कहा जाता है, जो CSV फ़ाइल में पढ़ेगा, greetings extract करेगा और उनमें से प्रत्येक को एक अलग फ़ाइल में लिखेगा।
@@ -42,7 +42,7 @@ nextflow run 2a-inputs.nf --input data/greetings.csv
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `2a-inputs.nf` [mighty_sammet] DSL2 - revision: 29fb5352b3
 
@@ -66,7 +66,7 @@ nextflow run 2a-inputs.nf --input data/greetings.csv
     └── 2a-inputs
         ├── Bonjour-output.txt
         ├── Hello-output.txt
-        └── Holà-output.txt
+        └── Hola-output.txt
     ```
 
 हां! हम `2a-inputs` नाम की एक नई डायरेक्टरी देखते हैं जिसमें अलग-अलग नामों वाली तीन output फ़ाइलें हैं, सुविधाजनक रूप से।
@@ -83,8 +83,8 @@ nextflow run 2a-inputs.nf --input data/greetings.csv
     Bonjour
     ```
 
-    ```console title="results/2a-inputs/Holà-output.txt"
-    Holà
+    ```console title="results/2a-inputs/Hola-output.txt"
+    Hola
     ```
 
 यह confirm करता है कि इनपुट फ़ाइल में प्रत्येक greeting को appropriately process किया गया है।
@@ -124,7 +124,7 @@ nextflow run 2a-inputs.nf --input data/greetings.csv -ansi-log false
 ??? success "कमांड आउटपुट"
 
     ```console linenums="1"
-    N E X T F L O W  ~  version 25.10.2
+    N E X T F L O W  ~  version 25.10.4
     Launching `2a-inputs.nf` [pedantic_hamilton] DSL2 - revision: 6bbc42e49f
     [ab/1a8ece] Submitted process > sayHello (1)
     [0d/2cae24] Submitted process > sayHello (2)
@@ -156,7 +156,7 @@ Condensed mode में, Nextflow report करता है कि calls स�
 
     ```console title="b5/0df1d6"
     work/b5/0df1d642353269909c2ce23fc2a8fa/
-    └── Holà-output.txt
+    └── Hola-output.txt
     ```
 
 यह confirm करता है कि प्रत्येक process call को अन्य सभी से isolation में execute किया जाता है।
@@ -172,7 +172,7 @@ Condensed mode में, Nextflow report करता है कि calls स�
 
 आइए देखें कि workflow code में यह क्या संभव बनाता है।
 
-??? full-code "पूर्ण code फ़ाइल"
+??? full-code "पूर्ण कोड फ़ाइल"
 
     ```groovy title="2a-inputs.nf" linenums="1" hl_lines="31-33 35"
     #!/usr/bin/env nextflow
@@ -244,7 +244,7 @@ Nextflow में, हम यह एक [**channel**](https://nextflow.io/docs/
 ```
 
 यह code `greeting_ch` नाम का एक channel बनाता है जो CSV फ़ाइल पढ़ता है, इसे parse करता है, और प्रत्येक row से पहला column extract करता है।
-परिणाम एक channel है जिसमें `Hello`, `Bonjour`, और `Holà` हैं।
+परिणाम एक channel है जिसमें `Hello`, `Bonjour`, और `Hola` हैं।
 
 ??? tip "यह कैसे काम करता है?"
 
@@ -265,16 +265,16 @@ Nextflow में, हम यह एक [**channel**](https://nextflow.io/docs/
     ```csv title="greetings.csv" linenums="1"
     Hello,English,123
     Bonjour,French,456
-    Holà,Spanish,789
+    Hola,Spanish,789
     ```
 
     हमने उसे एक array में transform किया है जो इस तरह दिखता है:
 
     ```txt title="Array contents"
-    [[Hello,English,123],[Bonjour,French,456],[Holà,Spanish,789]]
+    [[Hello,English,123],[Bonjour,French,456],[Hola,Spanish,789]]
     ```
 
-    और फिर हमने तीन rows में से प्रत्येक से पहला element लिया है और उन्हें एक Nextflow channel में load किया है जिसमें अब `Hello`, `Bonjour`, और `Holà` हैं।
+    और फिर हमने तीन rows में से प्रत्येक से पहला element लिया है और उन्हें एक Nextflow channel में load किया है जिसमें अब `Hello`, `Bonjour`, और `Hola` हैं।
 
     यदि तुम channels और operators को गहराई से समझना चाहते हो, जिसमें उन्हें खुद कैसे लिखना है, [Hello Nextflow Part 2: Hello Channels](../hello_nextflow/02_hello_channels.md#4-read-input-values-from-a-csv-file) देखो।
 
@@ -362,7 +362,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv
 ??? success "कमांड आउटपुट"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
@@ -386,17 +386,17 @@ nextflow run 2b-multistep.nf --input data/greetings.csv
     ├── 2a-inputs
     |   ├── Bonjour-output.txt
     |   ├── Hello-output.txt
-    |   └── Holà-output.txt
+    |   └── Hola-output.txt
     └── 2b-multistep
         ├── COLLECTED-batch-output.txt
         ├── batch-report.txt
         └── intermediates
             ├── Bonjour-output.txt
             ├── Hello-output.txt
-            ├── Holà-output.txt
+            ├── Hola-output.txt
             ├── UPPER-Bonjour-output.txt
             ├── UPPER-Hello-output.txt
-            └── UPPER-Holà-output.txt
+            └── UPPER-Hola-output.txt
 
     ```
 
@@ -411,7 +411,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv
     ```txt title="results/2b-multistep/COLLECTED-batch-output.txt"
     HELLO
     BONJOUR
-    HOLà
+    HOLA
     ```
 
     ```txt title="results/2b-multistep/batch-report.txt"
@@ -425,7 +425,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv
 
 आइए code देखें और multi-step workflows के लिए key patterns identify करें।
 
-??? full-code "पूर्ण code फ़ाइल"
+??? full-code "पूर्ण कोड फ़ाइल"
 
     ```groovy title="2b-multistep.nf" linenums="1" hl_lines="63 75-78 82-84"
     #!/usr/bin/env nextflow
@@ -630,7 +630,7 @@ process collectGreetings {
 --8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
 </figure>
 
-Process calls के बीच channels की contents पर transformations apply करने के लिए कई अन्य [operators](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page) उपलब्ध हैं।
+Process calls के बीच channels की contents पर transformations apply करने के लिए कई अन्य [operators](https://nextflow.io/docs/latest/reference/operator.html) उपलब्ध हैं।
 
 यह pipeline developers को उनकी pipeline की flow logic customize करने में बहुत flexibility देता है।
 Downside यह है कि यह कभी-कभी pipeline क्या कर रही है यह decipher करना कठिन बना सकता है।
@@ -669,7 +669,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv --batch test
 ??? success "कमांड आउटपुट"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
@@ -689,7 +689,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv --batch test
     ├── 2a-inputs
     |   ├── Bonjour-output.txt
     |   ├── Hello-output.txt
-    |   └── Holà-output.txt
+    |   └── Hola-output.txt
     └── 2b-multistep
         ├── COLLECTED-batch-output.txt
         ├── COLLECTED-test-output.txt
@@ -698,10 +698,10 @@ nextflow run 2b-multistep.nf --input data/greetings.csv --batch test
         └── intermediates
             ├── Bonjour-output.txt
             ├── Hello-output.txt
-            ├── Holà-output.txt
+            ├── Hola-output.txt
             ├── UPPER-Bonjour-output.txt
             ├── UPPER-Hello-output.txt
-            └── UPPER-Holà-output.txt
+            └── UPPER-Hola-output.txt
     ```
 
 यह input configuration का एक aspect है, जिसे हम Part 3 में अधिक detail में cover करेंगे, लेकिन अभी के लिए important बात यह जानना है कि input parameters को default values दी जा सकती हैं।
@@ -810,7 +810,7 @@ Workflow में module use करने के लिए, तुम बस �
 इस बार हम पहले code देखने जा रहे हैं।
 `2c-modules.nf` workflow फ़ाइल open करके शुरू करो।
 
-??? full-code "पूर्ण code फ़ाइल"
+??? full-code "पूर्ण कोड फ़ाइल"
 
     ```groovy title="2c-modules.nf" linenums="1"
     #!/usr/bin/env nextflow
@@ -872,7 +872,7 @@ Workflow में module use करने के लिए, तुम बस �
 तुम देखते हो कि workflow logic पिछले workflow version के exactly same है।
 हालांकि, process code workflow फ़ाइल से गायब है, और इसके बजाय `modules` के अंतर्गत अलग फ़ाइलों की ओर point करने वाले `include` statements हैं।
 
-```groovy title="2c-modules.nf" linenums="3"
+```groovy title="hello-modules.nf" linenums="3"
 // Modules को include करें
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
@@ -881,7 +881,7 @@ include { collectGreetings } from './modules/collectGreetings.nf'
 
 उन फ़ाइलों में से एक open करो और तुम्हें corresponding process का code मिलेगा।
 
-??? full-code "पूर्ण code फ़ाइल"
+??? full-code "पूर्ण कोड फ़ाइल"
 
     ```groovy title="modules/sayHello.nf" linenums="1"
     #!/usr/bin/env nextflow
@@ -920,7 +920,7 @@ nextflow run 2c-modules.nf --input data/greetings.csv -resume
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
@@ -961,9 +961,9 @@ Software dependencies manage करने के लिए containers का उ
 
 एक **container** एक lightweight, standalone, executable unit of software है जो container **image** से बनाई जाती है जिसमें code, system libraries और settings सहित application run करने के लिए आवश्यक सब कुछ शामिल होता है।
 
-!!! tip "सुझाव"
+!!! Tip "सुझाव"
 
-    हम यह [Docker](https://www.docker.com/get-started/) technology का उपयोग करके सिखाते हैं, लेकिन Nextflow [कई अन्य container technologies](https://www.nextflow.io/docs/latest/container.html#) को भी support करता है।
+    हम यह [Docker](https://www.docker.com/get-started/) technology का उपयोग करके सिखाते हैं, लेकिन Nextflow [कई अन्य container technologies](https://www.nextflow.io/docs/latest/container.html) को भी support करता है।
 
 ### 4.1. Container को directly use करो
 
@@ -1055,7 +1055,7 @@ ls /
 
 तुम देखते हो कि container के अंदर filesystem तुम्हारे host system पर filesystem से अलग है।
 
-!!! tip "सुझाव"
+!!! Tip "सुझाव"
 
     जब तुम एक container run करते हो, यह default रूप से host system से isolated होता है।
     इसका मतलब है कि container host system पर किसी भी files को access नहीं कर सकता जब तक तुम explicitly इसे ऐसा करने की अनुमति नहीं देते यह specify करके कि तुम `docker run` कमांड के भाग के रूप में following syntax का उपयोग करके एक volume mount करना चाहते हो:
@@ -1153,7 +1153,7 @@ exit
 
 Workflow पिछले वाले के बहुत similar है, plus `cowpy` run करने का extra step।
 
-??? full-code "पूर्ण code फ़ाइल"
+??? full-code "पूर्ण कोड फ़ाइल"
 
     ```groovy title="2d-container.nf" linenums="1" hl_lines="7 15 32 39 59-62"
     #!/usr/bin/env nextflow
@@ -1230,7 +1230,7 @@ cowpy(collectGreetings.out.outfile, params.character)
 
 `cowpy` process, जो ASCII art generate करने के लिए cowpy कमांड wrap करता है, `cowpy.nf` module में defined है।
 
-??? full-code "पूर्ण code फ़ाइल"
+??? full-code "पूर्ण कोड फ़ाइल"
 
     ```groovy title="modules/cowpy.nf" linenums="1"
     #!/usr/bin/env nextflow
@@ -1296,7 +1296,7 @@ nextflow run 2d-container.nf --input data/greetings.csv --character turkey -resu
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `2d-container.nf` [elegant_brattain] DSL2 - revision: 028a841db1
 
@@ -1315,7 +1315,7 @@ nextflow run 2d-container.nf --input data/greetings.csv --character turkey -resu
 
     ```console title="results/2d-container/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------

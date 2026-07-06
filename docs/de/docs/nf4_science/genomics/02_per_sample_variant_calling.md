@@ -1,3 +1,5 @@
+I need to update only the sections affected by the diff - specifically, changing `version 25.10.2` to `version 25.10.4` in console output blocks, and updating one link from `../../side_quests/working_with_files.md` to `../../side_quests/working_with_files/index.md`.
+
 # Teil 2: Variantenerkennung pro Probe
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
@@ -402,7 +404,7 @@ nextflow run genomics.nf -profile test
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [reverent_sinoussi] DSL2 - revision: 41d43ad7fe
 
@@ -562,7 +564,7 @@ Füge Variablen für die Hilfsdateipfade innerhalb des Workflow-Blocks hinzu:
     ```
 
 Die `file()`-Syntax teilt Nextflow explizit mit, diese Eingaben als Dateipfade zu behandeln.
-Mehr darüber erfährst du in der Side Quest [Working with files](../../side_quests/working_with_files.md).
+Mehr darüber erfährst du in der Side Quest [Working with files](../../side_quests/working_with_files/index.md).
 
 ### 2.2. Den Variantenerkennungsprozess schreiben und im Workflow aufrufen
 
@@ -769,7 +771,7 @@ nextflow run genomics.nf -profile test -resume
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [grave_volta] DSL2 - revision: 4790abc96a
 
@@ -891,7 +893,7 @@ Lustige Sache: Dies _könnte funktionieren_, ODER es _könnte fehlschlagen_. Hie
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [peaceful_yalow] DSL2 - revision: a256d113ad
 
@@ -905,7 +907,7 @@ Wenn dein Workflow-Lauf erfolgreich war, führe ihn erneut aus, bis du einen Feh
 ??? failure "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [loving_pasteur] DSL2 - revision: d2a8e63076
 
@@ -1164,7 +1166,7 @@ Diesmal (und jedes Mal) sollte alles korrekt laufen:
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [special_goldstine] DSL2 - revision: 4cbbf6ea3e
 
@@ -1327,7 +1329,7 @@ nextflow run genomics.nf -profile test
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     ┃ Launching `genomics.nf` [sick_albattani] DSL2 - revision: 46d84642f6
 

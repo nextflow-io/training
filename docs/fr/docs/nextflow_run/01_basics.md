@@ -91,7 +91,7 @@ nextflow run 1-hello.nf --input 'Hello World!'
 ??? success "Sortie de la commande"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
 
@@ -168,7 +168,7 @@ nextflow run 1-hello.nf --input 'Hello World!' -output-dir hello_results
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78
 
@@ -185,7 +185,7 @@ hello_results
 ```
 
 Les fichiers dans ce répertoire sont les mêmes qu'avant, seul le répertoire de niveau supérieur est différent.
-Cependant, soyez conscient que dans les deux cas, le résultat « publié » est une copie (ou dans certains cas un lien symbolique) de la sortie réelle produite par Nextflow lors de l'exécution du workflow.
+Cependant, soyez conscient·e que dans les deux cas, le résultat « publié » est une copie (ou dans certains cas un lien symbolique) de la sortie réelle produite par Nextflow lors de l'exécution du workflow.
 
 Alors maintenant, nous allons jeter un coup d'œil sous le capot pour voir où Nextflow a réellement exécuté le travail.
 
@@ -368,7 +368,7 @@ En revanche, si vous regardez le répertoire `results`, il n'y a toujours qu'un 
 
 Cela vous montre que les résultats publiés seront écrasés par les exécutions suivantes, alors que les répertoires de tâches sous `work/` sont préservés.
 
-### Récapitulatif
+### À retenir
 
 Vous savez comment exécuter un script Nextflow simple, surveiller son exécution et trouver ses sorties.
 
@@ -568,7 +568,7 @@ Pour en savoir plus, consultez [Publishing outputs](https://nextflow.io/docs/lat
 
     Au lieu d'avoir un bloc `publish:` dans le workflow et un bloc `output` au niveau supérieur, vous verriez une ligne `publishDir` dans la définition du **process** `sayHello` :
 
-    ```groovy title="Exemple de syntaxe" linenums="1" hl_lines="3"
+    ```groovy title="Syntax example" linenums="1" hl_lines="3"
     process sayHello {
 
         publishDir 'results/1-hello', mode: 'copy'
@@ -623,7 +623,7 @@ nextflow run 1-hello.nf --input 'Hello World!' -resume
 ??? success "Sortie de la commande"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479
 
@@ -746,7 +746,7 @@ Notez que cela ne supprime pas les sous-répertoires de deux caractères (comme 
 
     Vous êtes responsable de sauvegarder toutes les sorties qui vous importent ! C'est la raison principale pour laquelle nous préférons utiliser le mode `copy` plutôt que le mode `symlink` pour la directive `publish`.
 
-### Récapitulatif
+### À retenir
 
 Vous savez comment relancer un pipeline sans répéter les étapes qui ont déjà été exécutées de manière identique, inspecter le log d'exécution, et utiliser la commande `nextflow clean` pour nettoyer les anciens répertoires de travail.
 
@@ -767,7 +767,7 @@ Dans la ligne de sortie console `[a3/7be2fa] SAYHELLO | 1 of 1 ✔`, que représ
 - [x] Le chemin tronqué vers le répertoire de travail de la tâche
 - [ ] La somme de contrôle du fichier de sortie
 
-En savoir plus : [2.4. Trouver la sortie originale et les logs dans le répertoire `work/`](#24-trouver-la-sortie-originale-et-les-logs-dans-le-repertoire-work)
+En savoir plus : [2.4. Trouver la sortie originale et les logs dans le répertoire `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -777,7 +777,7 @@ Quel est le but du fichier `.command.sh` dans un répertoire de tâche ?
 - [ ] Il contient les messages d'erreur des tâches échouées
 - [ ] Il liste les fichiers d'entrée préparés pour la tâche
 
-En savoir plus : [2.4. Trouver la sortie originale et les logs dans le répertoire `work/`](#24-trouver-la-sortie-originale-et-les-logs-dans-le-repertoire-work)
+En savoir plus : [2.4. Trouver la sortie originale et les logs dans le répertoire `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -787,7 +787,7 @@ Qu'arrive-t-il aux résultats publiés lorsque vous ré-exécutez un workflow sa
 - [ ] Nextflow empêche l'écrasement et échoue
 - [ ] Ils sont automatiquement sauvegardés
 
-En savoir plus : [2.5. Ré-exécuter le workflow avec différentes salutations](#25-re-executer-le-workflow-avec-differentes-salutations)
+En savoir plus : [2.5. Ré-exécuter le workflow avec différentes salutations](#24-re-run-the-workflow-with-different-greetings)
 </quiz>
 
 <quiz>
@@ -802,7 +802,7 @@ Qu'indique cette sortie console ?
 - [x] Nextflow a réutilisé les résultats d'une exécution identique précédente
 - [ ] La tâche a été annulée manuellement
 
-En savoir plus : [4.1. Relancer un workflow avec `-resume`](#41-relancer-un-workflow-avec--resume)
+En savoir plus : [4.1. Relancer un workflow avec `-resume`](#41-re-launch-a-workflow-with--resume)
 </quiz>
 
 <quiz>
@@ -812,7 +812,7 @@ Où Nextflow stocke-t-il l'historique d'exécution que la commande `nextflow log
 - [x] Dans le fichier `.nextflow/history`
 - [ ] Dans `nextflow.config`
 
-En savoir plus : [4.2. Inspecter le log des exécutions passées](#42-inspecter-le-log-des-executions-passees)
+En savoir plus : [4.2. Inspecter le log des exécutions passées](#42-inspect-the-log-of-past-executions)
 </quiz>
 
 <quiz>
@@ -822,7 +822,7 @@ Quel est le but du bloc `params` dans un fichier de workflow ?
 - [x] Déclarer et typer les paramètres d'entrée du workflow
 - [ ] Spécifier les options de publication des sorties
 
-En savoir plus : [3.4. Le système params de paramètres de ligne de commande](#34-le-systeme-params-de-parametres-de-ligne-de-commande)
+En savoir plus : [3.4. Le système params de paramètres de ligne de commande](#34-the-params-system-of-command-line-parameters)
 </quiz>
 
 <quiz>
@@ -832,7 +832,7 @@ Dans le bloc `output` du workflow, que fait `mode 'copy'` ?
 - [ ] Copie le script du workflow vers les résultats
 - [ ] Active la copie incrémentielle des fichiers
 
-En savoir plus : [3.5. La directive publish](#35-la-directive-publish)
+En savoir plus : [3.5. La directive publish](#35-the-publish-directive)
 </quiz>
 
 <quiz>
@@ -842,5 +842,5 @@ Quel est le drapeau recommandé à utiliser avec la commande `nextflow clean` av
 - [ ] `-a` (tous) pour sélectionner tous les répertoires
 - [ ] `-q` (silencieux) pour supprimer les avertissements
 
-En savoir plus : [4.3. Supprimer les anciens répertoires de travail](#43-supprimer-les-anciens-repertoires-de-travail)
+En savoir plus : [4.3. Supprimer les anciens répertoires de travail](#43-delete-older-work-directories)
 </quiz>

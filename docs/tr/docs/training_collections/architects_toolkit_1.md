@@ -8,7 +8,7 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Eğitim Koleksiyonlarımız, gelişmiş eğitim materyallerimiz ([Yan Görevler](../../side_quests) olarak adlandırılır) aracılığıyla küratörlü öğrenme yolları sunar. Bu koleksiyon, sağlam ve ölçeklenebilir iş akışları oluşturmak için sıklıkla birlikte kullanılan dört temel konuyu kapsar.
+Eğitim Koleksiyonlarımız, gelişmiş eğitim materyallerimiz ([Yan Görevler](../side_quests/index.md) olarak adlandırılır) aracılığıyla küratörlü öğrenme yolları sunar. Bu koleksiyon, sağlam ve ölçeklenebilir iş akışları oluşturmak için sıklıkla birlikte kullanılan dört temel konuyu kapsar.
 
 ## Öğrenme hedefleri
 
@@ -27,7 +27,7 @@ Bu koleksiyon, temel Nextflow eğitimini tamamlamış ve gelişmiş iş akışı
 
 **Ön koşullar**
 
-- [Hello Nextflow](../../hello_nextflow/) eğitiminin veya eşdeğer deneyimin tamamlanması
+- [Hello Nextflow](../hello_nextflow/index.md) eğitiminin veya eşdeğer deneyimin tamamlanması
 - Nextflow sözdizimi ve kavramlarına temel aşinalık
 - Temel iş akışı geliştirme desenlerinin anlaşılması
 - Komut satırı araçlarıyla deneyim
@@ -36,10 +36,10 @@ Bu koleksiyon, temel Nextflow eğitimini tamamlamış ve gelişmiş iş akışı
 
 Bu koleksiyon, tamamlayıcı iş akışı mühendisliği konularını kapsayan dört Yan Görevden oluşur:
 
-1. **[İç İçe Workflow'lar](../../side_quests/workflows_of_workflows)** - Karmaşık iş akışı mimarisi ve kompozisyonu
-2. **[nf-test ile Test Etme](../../side_quests/nf-test)** - Nextflow iş akışları için test stratejileri
-3. **[Meta Veri](../../side_quests/metadata)** - Nextflow kanallarındaki öğeler için meta veri işleme
-4. **[Bölme ve Gruplama](../../side_quests/splitting_and_grouping)** - Gelişmiş veri işleme desenleri
+1. **[İç İçe Workflow'lar](../side_quests/workflows_of_workflows/index.md)** - Karmaşık iş akışı mimarisi ve kompozisyonu
+2. **[nf-test ile Test Etme](../side_quests/nf_test/index.md)** - Nextflow iş akışları için test stratejileri
+3. **[Meta Veri](../side_quests/metadata/index.md)** - Nextflow kanallarındaki öğeler için meta veri işleme
+4. **[Bölme ve Gruplama](../side_quests/splitting_and_grouping/index.md)** - Gelişmiş veri işleme desenleri
 
 Her Yan Görev bağımsızdır ve bağımsız kavramları kapsar; ancak konular arasında mantıksal bir ilerleme için yukarıda listelenen sırayla tamamlamanızı öneririz.
 

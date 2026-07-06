@@ -118,7 +118,7 @@ nextflow run 3-main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
 
@@ -137,7 +137,7 @@ La sortida final d'art ASCII es troba al directori `results/3-main/`, amb el nom
 
     ```console title="results/3-main/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -217,7 +217,7 @@ nextflow run ../3-main.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `../3-main.nf` [trusting_escher] DSL2 - revision: 356df0818d
 
@@ -240,7 +240,7 @@ El fitxer de sortida final hauria de contenir el caràcter tux dient les salutac
     _________
     / HELLO   \
     | BONJOUR |
-    \ HOLà    /
+    \ HOLA    /
     ---------
       \
         \
@@ -307,7 +307,7 @@ nextflow run 3-main.nf -params-file test-params.yaml
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
@@ -325,7 +325,7 @@ El fitxer de sortida final hauria de contenir el caràcter stegosaurus dient les
     ```console title="results/3-main/cowpy-COLLECTED-yaml-output.txt"
     _________
     / HELLO   \
-    | HOLà    |
+    | HOLA    |
     \ BONJOUR /
     ---------
     \                             .       .
@@ -494,7 +494,7 @@ nextflow run 3-main.nf --batch outdir
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [amazing_church] DSL2 - revision: 6e18cd130e
 
@@ -516,10 +516,10 @@ Això encara produeix la mateixa sortida que anteriorment, excepte que aquesta v
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-outdir-output.txt
     │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
+    │   ├── Hola-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     └── outdir-report.txt
     ```
 
@@ -602,7 +602,7 @@ nextflow run 3-main.nf --batch pnames
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [jovial_mcclintock] DSL2 - revision: ede9037d02
 
@@ -625,13 +625,13 @@ Això encara produeix la mateixa sortida que anteriorment, excepte que aquesta v
     ├── convertToUpper
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     ├── cowpy
     │   └── cowpy-COLLECTED-pnames-output.txt
     └── sayHello
         ├── Bonjour-output.txt
         ├── Hello-output.txt
-        └── Holà-output.txt
+        └── Hola-output.txt
     ```
 
 !!! note "Nota"
@@ -734,7 +734,7 @@ nextflow run 3-main.nf --batch outmode
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [rowdy_sagan] DSL2 - revision: ede9037d02
 
@@ -758,13 +758,13 @@ Encara són totes còpies adequades, no enllaços simbòlics.
     ├── convertToUpper
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     ├── cowpy
     │   └── cowpy-COLLECTED-outmode-output.txt
     └── sayHello
         ├── Bonjour-output.txt
         ├── Hello-output.txt
-        └── Holà-output.txt
+        └── Hola-output.txt
     ```
 
 La raó principal per la qual encara podríeu voler utilitzar la manera per sortida d'establir el mode és si voleu barrejar i combinar dins del mateix workflow, _és a dir_, tenir algunes sortides copiades i algunes enllaçades simbòlicament.
@@ -868,7 +868,7 @@ nextflow run 3-main.nf --batch conda
 ??? success "Sortida de la comanda"
 
     ```console title="Output"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
 
@@ -1215,7 +1215,7 @@ nextflow run 3-main.nf -profile my_laptop
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
@@ -1303,7 +1303,7 @@ nextflow run 3-main.nf -profile my_laptop,test
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `3-main.nf` [jovial_coulomb] DSL2 - revision: 46a6763141
 
@@ -1320,7 +1320,7 @@ Això utilitzarà Docker on sigui possible i produirà sortides sota `results_co
 
     ```console title="results_config/test/"
      _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -1349,7 +1349,7 @@ Això significa que mentre distribuïm qualsevol fitxer de dades de prova amb el
     Podem apuntar a URLs per a fitxers més grans que estan emmagatzemats externament.
     Nextflow els descarregarà automàticament sempre que hi hagi una connexió oberta.
 
-    Per a més detalls, vegeu la Missió Secundària [Treballar amb Fitxers](../side_quests/working_with_files.md)
+    Per a més detalls, vegeu la Missió Secundària [Treballar amb Fitxers](../side_quests/working_with_files/index.md)
 
 ### 6.3. Utilitzar `nextflow config` per veure la configuració resolta
 
@@ -1488,7 +1488,7 @@ nextflow run nextflow-io/hello
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Pulling nextflow-io/hello ...
      downloaded from https://github.com/nextflow-io/hello.git
@@ -1520,7 +1520,7 @@ nextflow run nextflow-io/hello -r v1.3
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `https://github.com/nextflow-io/hello` [sick_carson] DSL2 - revision: 2ce0b0e294 [v1.3]
 

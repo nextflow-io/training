@@ -6,11 +6,16 @@ hide:
   - footer
 ---
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 ## 현재 지원되는 Nextflow 문법 버전 및 요구 사항
 
-교육 포털 버전 3.0부터, 과정 인덱스 페이지에 별도로 명시되지 않는 한 모든 교육 과정은 Nextflow 25.10.2 버전을 기준으로 합니다(더 이상 사용되지 않거나 아카이브된 자료는 버전 안내가 포함되지 않을 수 있습니다).
+교육 포털 버전 3.0부터, 과정 인덱스 페이지에 별도로 명시되지 않는 한 모든 교육 과정은 Nextflow 25.10.2 이상 버전과 호환됩니다.
+(더 이상 사용되지 않거나 아카이브된 자료는 버전 안내가 포함되지 않을 수 있습니다.)
 
-현재 과정에서는 워크플로우 수준의 타입이 지정된 입력과 워크플로우 수준의 출력 지시문을 사용하므로, V2 문법 분석기가 필요합니다.
+현재 교육 환경에서 기본으로 로드되는 Nextflow 버전은 **Nextflow 25.10.4**입니다.
+
+현재 과정에서는 워크플로우 수준의 타입이 지정된 입력과 워크플로우 수준의 출력 지시문을 사용하므로, **별도로 명시된 경우가 아닌 한** V2 문법 분석기가 필요합니다.
 [Github Codespaces](../envsetup/01_setup.md) 또는 [로컬 devcontainer](../envsetup/03_devcontainer.md)를 통해 제공되는 환경을 사용할 계획이라면, 과정 안내에 별도로 명시된 경우가 아닌 한 추가 작업이 필요하지 않습니다.
 그러나 직접 구성한 환경([수동 설치](../envsetup/02_local.md))에서 교육을 진행할 계획이라면, v2 문법 분석기가 활성화된 Nextflow 25.10.2 이상 버전을 사용해야 합니다.
 

@@ -15,9 +15,9 @@ Questa sezione contiene collezioni curate di moduli di formazione chiamati [Side
 Ogni collezione ha prerequisiti specifici documentati nella propria pagina indice. Tuttavia, la maggior parte delle collezioni presuppone:
 
 - Esperienza con la riga di comando
-- Concetti fondamentali di Nextflow e strumenti trattati nel corso di formazione per principianti [Hello Nextflow](../../hello_nextflow/)
+- Concetti fondamentali di Nextflow e strumenti trattati nel corso di formazione per principianti [Hello Nextflow](../hello_nextflow/index.md)
 
-Per i requisiti tecnici e la configurazione dell'ambiente, vedere il mini-corso [Configurazione dell'Ambiente](../../envsetup/).
+Per i requisiti tecnici e la configurazione dell'ambiente, vedere il mini-corso [Environment Setup](../envsetup/index.md).
 
 ## Collezioni disponibili
 

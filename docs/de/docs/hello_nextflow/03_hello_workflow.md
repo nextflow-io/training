@@ -30,7 +30,7 @@ Diesmal werden wir die folgenden Änderungen an unserem Workflow vornehmen, um b
 3. Einen Parameter hinzufügen, um die endgültige Ausgabedatei zu benennen, und diesen als sekundäre Eingabe an den Sammelschritt übergeben.
 4. Den Sammelschritt auch eine einfache Statistik über das Verarbeitete berichten lassen.
 
-??? info "Wie du von diesem Abschnitt aus beginnen kannst"
+??? info "Wie du von diesem Abschnitt aus beginnst"
 
     Dieser Abschnitt des Kurses setzt voraus, dass du die Teile 1-2 des [Hello Nextflow](./index.md)-Kurses abgeschlossen hast, aber wenn du mit den dort behandelten Grundlagen vertraut bist, kannst du von hier aus starten, ohne etwas Besonderes tun zu müssen.
 
@@ -67,7 +67,7 @@ nextflow run hello-workflow.nf
 ??? success "Befehlsausgabe"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-workflow.nf` [admiring_lamarr] DSL2 - revision: 4d4053520d
 
@@ -78,13 +78,13 @@ nextflow run hello-workflow.nf
 Wie zuvor findest du die Ausgabedateien an dem im `output`-Block angegebenen Ort.
 Für dieses Kapitel ist es unter `results/hello_workflow/`.
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     results/hello_workflow
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    └── Holà-output.txt
+    └── Hola-output.txt
     ```
 
 Wenn das bei dir funktioniert hat, bist du bereit zu lernen, wie man einen mehrstufigen Workflow zusammenstellt.
@@ -113,7 +113,7 @@ Für die Umwandlung der Begrüßungen in Großbuchstaben werden wir ein klassisc
 tr '[a-z]' '[A-Z]'
 ```
 
-Dies ist ein sehr naiver Textersetzungs-Einzeiler, der keine akzentuierten Buchstaben berücksichtigt, also wird zum Beispiel 'Holà' zu 'HOLà', aber er wird für die Demonstration der Nextflow-Konzepte gut genug funktionieren, und das ist, was zählt.
+Dies ist ein sehr naiver Textersetzungs-Einzeiler, der keine akzentuierten Buchstaben berücksichtigt, aber er wird für die Demonstration der Nextflow-Konzepte gut genug funktionieren, und das ist, was zählt.
 
 Um es auszuprobieren, können wir den Befehl `echo 'Hello World'` ausführen und seine Ausgabe an den `tr`-Befehl pipen:
 
@@ -123,7 +123,7 @@ echo 'Hello World' | tr '[a-z]' '[A-Z]' > UPPER-output.txt
 
 Die Ausgabe ist eine Textdatei namens `UPPER-output.txt`, die die Großbuchstaben-Version des `Hello World`-Strings enthält.
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="UPPER-output.txt"
     HELLO WORLD
@@ -311,7 +311,7 @@ nextflow run hello-workflow.nf -resume
 ??? success "Befehlsausgabe"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-workflow.nf` [high_cantor] DSL2 - revision: d746983511
 
@@ -324,26 +324,26 @@ In der Konsolenausgabe gibt es jetzt eine zusätzliche Zeile, die dem neuen Proc
 
 Du findest die Ausgaben im Verzeichnis `results/hello_workflow`, wie im `output`-Block festgelegt.
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     results/hello_workflow/
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Das ist praktisch! Aber es lohnt sich trotzdem, einen Blick in das Work-Verzeichnis eines der Aufrufe des zweiten Process zu werfen.
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     work/e0/ecf81b4cacc648b9b994218d5b29d7/
-    ├── Holà-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Holà-output.txt
-    └── UPPER-Holà-output.txt
+    ├── Hola-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Hola-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Beachte, dass es zwei `*-output`-Dateien gibt: die Ausgabe des ersten Process sowie die Ausgabe des zweiten.
@@ -391,18 +391,18 @@ Führe Folgendes in deinem Terminal aus:
 ```bash
 echo 'Hello' | tr '[a-z]' '[A-Z]' > UPPER-Hello-output.txt
 echo 'Bonjour' | tr '[a-z]' '[A-Z]' > UPPER-Bonjour-output.txt
-echo 'Holà' | tr '[a-z]' '[A-Z]' > UPPER-Holà-output.txt
-cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Holà-output.txt > COLLECTED-output.txt
+echo 'Hola' | tr '[a-z]' '[A-Z]' > UPPER-Hola-output.txt
+cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Hola-output.txt > COLLECTED-output.txt
 ```
 
 Die Ausgabe ist eine Textdatei namens `COLLECTED-output.txt`, die die Großbuchstaben-Versionen der ursprünglichen Begrüßungen enthält.
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="COLLECTED-output.txt"
     HELLO
     BONJOUR
-    HOLà
+    HOLA
     ```
 
 Das ist das Ergebnis, das wir mit unserem Workflow erreichen wollen.
@@ -500,7 +500,7 @@ Theoretisch sollte dies jede beliebige Anzahl von Eingabedateien handhaben könn
 
     Einige Kommandozeilenwerkzeuge erfordern die Angabe eines Arguments (wie `-input`) für jede Eingabedatei.
     In diesem Fall müssten wir ein bisschen zusätzliche Arbeit leisten, um den Befehl zusammenzustellen.
-    Du kannst ein Beispiel dafür im [Nextflow for Genomics](../../nf4_science/genomics/)-Trainingskurs sehen.
+    Du kannst ein Beispiel dafür im [Nextflow for Genomics](../nf4_science/genomics/index.md)-Trainingskurs sehen.
 
 ### 2.3. Den Sammelschritt zum Workflow hinzufügen
 
@@ -536,7 +536,68 @@ Nimm im Workflow-Block die folgende Codeänderung vor:
 
 Dies verbindet die Ausgabe von `convertToUpper()` mit der Eingabe von `collectGreetings()`.
 
-#### 2.3.2. Den Workflow mit `-resume` ausführen
+#### 2.3.2. Den `publish:`-Abschnitt aktualisieren
+
+Nimm im `workflow`-Block die folgende Codeänderung vor:
+
+=== "Danach"
+
+    ```groovy title="hello-workflow.nf" linenums="76" hl_lines="4"
+        publish:
+        first_output = sayHello.out
+        uppercased = convertToUpper.out
+        collected = collectGreetings.out
+    }
+    ```
+
+=== "Vorher"
+
+    ```groovy title="hello-workflow.nf" linenums="76"
+        publish:
+        first_output = sayHello.out
+        uppercased = convertToUpper.out
+    }
+    ```
+
+#### 2.3.3. Den `output`-Block aktualisieren
+
+Nimm im `output`-Block die folgende Codeänderung vor:
+
+=== "Danach"
+
+    ```groovy title="hello-workflow.nf" linenums="82" hl_lines="10-13"
+    output {
+        first_output {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+        uppercased {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+        collected {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+    }
+    ```
+
+=== "Vorher"
+
+    ```groovy title="hello-workflow.nf" linenums="82"
+    output {
+        first_output {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+        uppercased {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+    }
+    ```
+
+#### 2.3.4. Den Workflow mit `-resume` ausführen
 
 Lass uns es versuchen.
 
@@ -547,7 +608,7 @@ nextflow run hello-workflow.nf -resume
 ??? success "Befehlsausgabe"
 
     ```console hl_lines="8"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-workflow.nf` [mad_gilbert] DSL2 - revision: 6acfd5e28d
 
@@ -564,10 +625,10 @@ Wir haben nur einen erwartet, aber es sind drei.
 
 Schau dir jetzt den Inhalt der endgültigen Ausgabedatei an.
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="results/COLLECTED-output.txt"
-    Holà
+    Hola
     ```
 
 Oh nein. Der Sammelschritt wurde einzeln auf jede Begrüßung ausgeführt, was NICHT das ist, was wir wollten.
@@ -646,7 +707,7 @@ nextflow run hello-workflow.nf -resume
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-workflow.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
@@ -655,8 +716,8 @@ nextflow run hello-workflow.nf -resume
     [1e/83586c] collectGreetings   | 1 of 1 ✔
     Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
     Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
-    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
-    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
+    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt
+    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt]
     ```
 
 Es läuft erfolgreich, obwohl die Log-Ausgabe möglicherweise etwas unordentlicher aussieht als dies (wir haben es für die Lesbarkeit aufgeräumt).
@@ -675,12 +736,12 @@ Wir können das mit dem folgenden Diagramm zusammenfassen:
 
 Zum Schluss kannst du dir den Inhalt der Ausgabedatei anschauen, um dich selbst davon zu überzeugen, dass alles korrekt funktioniert hat.
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="results/COLLECTED-output.txt"
     BONJOUR
     HELLO
-    HOLà
+    HOLA
     ```
 
 Diesmal haben wir alle drei Begrüßungen in der endgültigen Ausgabedatei. Erfolg!
@@ -879,7 +940,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-workflow.nf` [confident_rutherford] DSL2 - revision: bc58af409c
 
@@ -891,12 +952,12 @@ nextflow run hello-workflow.nf -resume --batch trio
 
 Es läuft erfolgreich und produziert die gewünschte Ausgabe:
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="results/COLLECTED-trio-output.txt"
     HELLO
     BONJOUR
-    HOLà
+    HOLA
     ```
 
 Solange wir den Parameter entsprechend angeben, werden nachfolgende Läufe auf anderen Eingabestapeln keine vorherigen Ergebnisse überschreiben.
@@ -1095,7 +1156,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 ??? success "Befehlsausgabe"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-workflow.nf` [ecstatic_wilson] DSL2 - revision: c80285f8c8
 
@@ -1108,7 +1169,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 Wenn du ins Verzeichnis `results/hello_workflow/` schaust, findest du die neue Berichtsdatei `trio-report.txt`.
 Öffne sie, um zu überprüfen, dass der Workflow korrekt die Anzahl der verarbeiteten Begrüßungen berichtet hat.
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```txt title="trio-report.txt"
     There were 3 greetings in this batch.
@@ -1143,7 +1204,7 @@ Wie greifst du auf die Ausgabe eines Process im Workflow-Block zu?
 - [x] `processName.out`
 - [ ] `get(processName)`
 
-Mehr erfahren: [1.4. Die Ausgabe des ersten Process an den zweiten Process übergeben](#14-die-ausgabe-des-ersten-process-an-den-zweiten-process-ubergeben)
+Mehr erfahren: [1.4. Die Ausgabe des ersten Process an den zweiten Process übergeben](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
@@ -1153,7 +1214,7 @@ Was bestimmt die Reihenfolge der Process-Ausführung in Nextflow?
 - [x] Datenabhängigkeiten zwischen Processes
 - [ ] Zufällige Reihenfolge für parallele Ausführung
 
-Mehr erfahren: [1.4. Die Ausgabe des ersten Process an den zweiten Process übergeben](#14-die-ausgabe-des-ersten-process-an-den-zweiten-process-ubergeben)
+Mehr erfahren: [1.4. Die Ausgabe des ersten Process an den zweiten Process übergeben](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
@@ -1172,7 +1233,7 @@ workflow {
 - [ ] `mix()`
 - [ ] `join()`
 
-Mehr erfahren: [2.4. Einen Operator verwenden, um die Begrüßungen in eine einzelne Eingabe zu sammeln](#24-einen-operator-verwenden-um-die-begrussungen-in-eine-einzelne-eingabe-zu-sammeln)
+Mehr erfahren: [2.4. Einen Operator verwenden, um die Begrüßungen in eine einzelne Eingabe zu sammeln](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1182,7 +1243,7 @@ Wann solltest du den `collect()`-Operator verwenden?
 - [x] Wenn ein nachfolgender Process alle Elemente von einem vorgelagerten Process benötigt
 - [ ] Wenn du Daten auf mehrere Processes aufteilen möchtest
 
-Mehr erfahren: [2.4. Einen Operator verwenden, um die Begrüßungen in eine einzelne Eingabe zu sammeln](#24-einen-operator-verwenden-um-die-begrussungen-in-eine-einzelne-eingabe-zu-sammeln)
+Mehr erfahren: [2.4. Einen Operator verwenden, um die Begrüßungen in eine einzelne Eingabe zu sammeln](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1192,7 +1253,7 @@ Wie greifst du auf eine benannte Ausgabe von einem Process zu?
 - [x] `processName.out.outputName`
 - [ ] `output.processName.outputName`
 
-Mehr erfahren: [4.1.2. Die Berichtsdatei ausgeben und Ausgaben benennen](#412-die-berichtsdatei-ausgeben-und-ausgaben-benennen)
+Mehr erfahren: [4.1.2. Die Berichtsdatei ausgeben und Ausgaben benennen](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1202,7 +1263,7 @@ Was ist die korrekte Syntax, um eine Ausgabe in einem Process zu benennen?
 - [x] `emit: outputName`
 - [ ] `label: outputName`
 
-Mehr erfahren: [4.1.2. Die Berichtsdatei ausgeben und Ausgaben benennen](#412-die-berichtsdatei-ausgeben-und-ausgaben-benennen)
+Mehr erfahren: [4.1.2. Die Berichtsdatei ausgeben und Ausgaben benennen](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1212,5 +1273,5 @@ Was muss bei der Übergabe mehrerer Eingaben an einen Process zutreffen?
 - [x] Die Reihenfolge der Eingaben muss mit der im Eingabeblock definierten Reihenfolge übereinstimmen
 - [ ] Nur zwei Eingaben können gleichzeitig übergeben werden
 
-Mehr erfahren: [3. Zusätzliche Parameter an einen Process übergeben](#3-zusatzliche-parameter-an-einen-process-ubergeben)
+Mehr erfahren: [3. Zusätzliche Parameter an einen Process übergeben](#3-pass-more-than-one-input-to-a-process)
 </quiz>

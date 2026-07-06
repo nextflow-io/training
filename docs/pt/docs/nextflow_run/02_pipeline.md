@@ -20,7 +20,7 @@ Note que os números não são significativos, eles estão lá apenas para fins 
 ```csv title="data/greetings.csv" linenums="1"
 Hello,English,123
 Bonjour,French,456
-Holà,Spanish,789
+Hola,Spanish,789
 ```
 
 Também escrevemos uma versão melhorada do fluxo de trabalho original, agora chamada `2a-inputs.nf`, que lerá o arquivo CSV, extrairá as saudações e escreverá cada uma delas em um arquivo separado.
@@ -42,7 +42,7 @@ nextflow run 2a-inputs.nf --input data/greetings.csv
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `2a-inputs.nf` [mighty_sammet] DSL2 - revision: 29fb5352b3
 
@@ -66,14 +66,14 @@ Vamos olhar o diretório 'results' para ver se nosso fluxo de trabalho ainda est
     └── 2a-inputs
         ├── Bonjour-output.txt
         ├── Hello-output.txt
-        └── Holà-output.txt
+        └── Hola-output.txt
     ```
 
 Sim! Vemos um novo diretório chamado `2a-inputs` com três arquivos de saída com nomes diferentes, convenientemente.
 
 Você pode abrir cada um deles para se satisfazer de que contêm a string de saudação apropriada.
 
-??? abstract "Conteúdo dos arquivos"
+??? abstract "Conteúdo do arquivo"
 
     ```console title="results/2a-inputs/Hello-output.txt"
     Hello
@@ -83,8 +83,8 @@ Você pode abrir cada um deles para se satisfazer de que contêm a string de sau
     Bonjour
     ```
 
-    ```console title="results/2a-inputs/Holà-output.txt"
-    Holà
+    ```console title="results/2a-inputs/Hola-output.txt"
+    Hola
     ```
 
 Isso confirma que cada saudação no arquivo de entrada foi processada apropriadamente.
@@ -124,7 +124,7 @@ nextflow run 2a-inputs.nf --input data/greetings.csv -ansi-log false
 ??? success "Saída do comando"
 
     ```console linenums="1"
-    N E X T F L O W  ~  version 25.10.2
+    N E X T F L O W  ~  version 25.10.4
     Launching `2a-inputs.nf` [pedantic_hamilton] DSL2 - revision: 6bbc42e49f
     [ab/1a8ece] Submitted process > sayHello (1)
     [0d/2cae24] Submitted process > sayHello (2)
@@ -156,7 +156,7 @@ Se olharmos dentro de cada um dos diretórios de tarefa listados lá, podemos ve
 
     ```console title="b5/0df1d6"
     work/b5/0df1d642353269909c2ce23fc2a8fa/
-    └── Holà-output.txt
+    └── Hola-output.txt
     ```
 
 Isso confirma que cada chamada de processo é executada em isolamento de todas as outras.
@@ -244,7 +244,7 @@ Vamos analisar.
 ```
 
 Este código cria um canal chamado `greeting_ch` que lê o arquivo CSV, analisa-o e extrai a primeira coluna de cada linha.
-O resultado é um canal contendo `Hello`, `Bonjour` e `Holà`.
+O resultado é um canal contendo `Hello`, `Bonjour` e `Hola`.
 
 ??? tip "Como isso funciona?"
 
@@ -265,16 +265,16 @@ O resultado é um canal contendo `Hello`, `Bonjour` e `Holà`.
     ```csv title="greetings.csv" linenums="1"
     Hello,English,123
     Bonjour,French,456
-    Holà,Spanish,789
+    Hola,Spanish,789
     ```
 
     Transformamos isso em um array que se parece com isso:
 
     ```txt title="Conteúdo do array"
-    [[Hello,English,123],[Bonjour,French,456],[Holà,Spanish,789]]
+    [[Hello,English,123],[Bonjour,French,456],[Hola,Spanish,789]]
     ```
 
-    E então pegamos o primeiro elemento de cada uma das três linhas e os carregamos em um canal Nextflow que agora contém: `Hello`, `Bonjour` e `Holà`.
+    E então pegamos o primeiro elemento de cada uma das três linhas e os carregamos em um canal Nextflow que agora contém: `Hello`, `Bonjour` e `Hola`.
 
     Se você quiser entender canais e operadores em profundidade, incluindo como escrevê-los você mesmo, veja [Hello Nextflow Parte 2: Hello Channels](../hello_nextflow/02_hello_channels.md#4-read-input-values-from-a-csv-file).
 
@@ -362,7 +362,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv
 ??? success "Saída do comando"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
@@ -386,17 +386,17 @@ Vamos verificar que isso é de fato o que aconteceu olhando no diretório `resul
     ├── 2a-inputs
     |   ├── Bonjour-output.txt
     |   ├── Hello-output.txt
-    |   └── Holà-output.txt
+    |   └── Hola-output.txt
     └── 2b-multistep
         ├── COLLECTED-batch-output.txt
         ├── batch-report.txt
         └── intermediates
             ├── Bonjour-output.txt
             ├── Hello-output.txt
-            ├── Holà-output.txt
+            ├── Hola-output.txt
             ├── UPPER-Bonjour-output.txt
             ├── UPPER-Hello-output.txt
-            └── UPPER-Holà-output.txt
+            └── UPPER-Hola-output.txt
 
     ```
 
@@ -406,12 +406,12 @@ Alguns dos arquivos foram agrupados em um subdiretório chamado `intermediates`,
 Esses dois são os resultados finais do fluxo de trabalho de múltiplas etapas.
 Tire um minuto para olhar os nomes dos arquivos e verificar seu conteúdo para confirmar que são o que você espera.
 
-??? abstract "Conteúdo dos arquivos"
+??? abstract "Conteúdo do arquivo"
 
     ```txt title="results/2b-multistep/COLLECTED-batch-output.txt"
     HELLO
     BONJOUR
-    HOLà
+    HOLA
     ```
 
     ```txt title="results/2b-multistep/batch-report.txt"
@@ -631,7 +631,7 @@ Em contraste, se não aplicássemos `collect()` à saída de `convertToUpper()` 
 --8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
 </figure>
 
-Há muitos outros [operadores](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page) disponíveis para aplicar transformações ao conteúdo de canais entre chamadas de processo.
+Há muitos outros [operadores](https://nextflow.io/docs/latest/reference/operator.html) disponíveis para aplicar transformações ao conteúdo de canais entre chamadas de processo.
 
 Isso dá aos desenvolvedores de pipeline muita flexibilidade para personalizar a lógica de fluxo de seu pipeline.
 A desvantagem é que às vezes pode tornar mais difícil decifrar o que o pipeline está fazendo.
@@ -670,7 +670,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv --batch test
 ??? success "Saída do comando"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
@@ -690,7 +690,7 @@ Você deve ver novas saídas finais nomeadas com seu nome de lote personalizado.
     ├── 2a-inputs
     |   ├── Bonjour-output.txt
     |   ├── Hello-output.txt
-    |   └── Holà-output.txt
+    |   └── Hola-output.txt
     └── 2b-multistep
         ├── COLLECTED-batch-output.txt
         ├── COLLECTED-test-output.txt
@@ -699,10 +699,10 @@ Você deve ver novas saídas finais nomeadas com seu nome de lote personalizado.
         └── intermediates
             ├── Bonjour-output.txt
             ├── Hello-output.txt
-            ├── Holà-output.txt
+            ├── Hola-output.txt
             ├── UPPER-Bonjour-output.txt
             ├── UPPER-Hello-output.txt
-            └── UPPER-Holà-output.txt
+            └── UPPER-Hola-output.txt
     ```
 
 Este é um aspecto da configuração de entrada, que cobriremos com mais detalhes na Parte 3, mas por enquanto o importante é saber que parâmetros de entrada podem receber valores padrão.
@@ -921,13 +921,13 @@ nextflow run 2c-modules.nf --input data/greetings.csv -resume
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
-    [j6/cdfa66] sayHello (1)       | 3 of 3, cached: 3 ✔
-    [95/79484f] convertToUpper (2) | 3 of 3, cached: 3 ✔
-    [5e/4358gc] collectGreetings   | 1 of 1, cached: 1 ✔
+    [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
+    [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
+    [1e/83586c] collectGreetings   | 1 of 1, cached: 1 ✔
     ```
 
 Você notará que as execuções de processo foram todas cacheadas com sucesso, significando que o Nextflow reconheceu que já fez o trabalho solicitado, mesmo que o código tenha sido dividido e o arquivo de fluxo de trabalho principal tenha sido renomeado.
@@ -965,7 +965,7 @@ Um **contêiner** é uma unidade leve, autônoma e executável de software criad
 !!! Tip "Dica"
 
     Ensinamos isso usando a tecnologia [Docker](https://www.docker.com/get-started/), mas o Nextflow suporta várias outras tecnologias de contêiner também.
-    Você pode aprender mais sobre o suporte do Nextflow para contêineres [aqui](https://www.nextflow.io/docs/latest/container.html#).
+    Você pode aprender mais sobre o suporte do Nextflow para contêineres [aqui](https://nextflow.io/docs/latest/container.html).
 
 ### 4.1. Use um contêiner diretamente
 
@@ -1140,7 +1140,7 @@ Você se encontrará de volta no seu shell normal.
 
 Quando executamos um pipeline, queremos ser capazes de dizer ao Nextflow qual contêiner usar em cada etapa, e importante, queremos que ele lide com todo aquele trabalho que acabamos de fazer: puxar o contêiner, iniciá-lo, executar o comando e derrubar o contêiner quando terminar.
 
-Boa notícia: é exatamente isso que o Nextflow vai fazer por nós.
+Boas notícias: é exatamente isso que o Nextflow vai fazer por nós.
 Nós só precisamos especificar um contêiner para cada processo.
 
 Para demonstrar como isso funciona, fizemos outra versão do nosso fluxo de trabalho que executa `cowpy` no arquivo de saudações coletadas produzido na terceira etapa.
@@ -1298,7 +1298,7 @@ nextflow run 2d-container.nf --input data/greetings.csv --character turkey -resu
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `2d-container.nf` [elegant_brattain] DSL2 - revision: 028a841db1
 
@@ -1317,7 +1317,7 @@ Você pode encontrar a saída da etapa `cowpy` no diretório `results`.
 
     ```console title="results/2d-container/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------

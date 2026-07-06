@@ -22,7 +22,7 @@ Se você está trabalhando neste curso por conta própria, por favor familiarize
 
 ### Requisitos de versão
 
-Este treinamento é projetado para Nextflow 25.10.2 ou posterior **com o analisador de sintaxe v2 HABILITADO**.
+Este treinamento funciona com Nextflow 25.10.2 ou posterior **com o analisador de sintaxe v2 HABILITADO**.
 Se você está usando um ambiente local ou personalizado, por favor certifique-se de estar usando as configurações corretas conforme documentado [aqui](../../info/nxf_versions.md).
 
 ## Prepare-se para trabalhar

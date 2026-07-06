@@ -43,7 +43,7 @@
 시작점으로 워크플로우 스크립트 `hello-config.nf`를 사용할 것입니다.
 이것은 이 교육 과정의 파트 5를 완료하여 생성된 스크립트와 동일하지만, 출력 대상을 변경했습니다:
 
-```groovy title="hello-config.nf" linenums="37" hl_lines="3 7 11 15"
+```groovy title="hello-config.nf" linenums="37" hl_lines="3 7 11 15 19"
 output {
     first_output {
         path 'hello_config/intermediates'
@@ -77,7 +77,7 @@ nextflow run hello-config.nf
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [nice_escher] DSL2 - revision: d5dfdc9872
 
@@ -99,10 +99,10 @@ nextflow run hello-config.nf
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
+    │   ├── Hola-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     └── batch-report.txt
     ```
 
@@ -112,7 +112,7 @@ nextflow run hello-config.nf
 
     ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -237,7 +237,7 @@ nextflow run hello-config.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
 
@@ -256,7 +256,7 @@ nextflow run hello-config.nf
 
     ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -333,7 +333,7 @@ nextflow run ../hello-config.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `../hello-config.nf` [trusting_escher] DSL2 - revision: 356df0818d
 
@@ -356,7 +356,7 @@ nextflow run ../hello-config.nf
     _________
     / HELLO   \
     | BONJOUR |
-    \ HOLà    /
+    \ HOLA    /
     ---------
       \
         \
@@ -419,7 +419,7 @@ nextflow run hello-config.nf -params-file test-params.yaml
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
@@ -437,7 +437,7 @@ nextflow run hello-config.nf -params-file test-params.yaml
     ```console title="results/hello_config/cowpy-COLLECTED-yaml-output.txt"
     _________
     / HELLO   \
-    | HOLà    |
+    | HOLA    |
     \ BONJOUR /
     ---------
     \                             .       .
@@ -500,7 +500,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli/
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [prickly_kay] DSL2 - revision: 32ecc4fba2
 
@@ -524,10 +524,10 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli/
             ├── Bonjour-output.txt
             ├── COLLECTED-batch-output.txt
             ├── Hello-output.txt
-            ├── Holà-output.txt
+            ├── Hola-output.txt
             ├── UPPER-Bonjour-output.txt
             ├── UPPER-Hello-output.txt
-            └── UPPER-Holà-output.txt
+            └── UPPER-Hola-output.txt
     ```
 
 출력 블록의 `path` 선언에서 여전히 `hello_config` 하위 디렉토리가 있다는 점에 유의하세요.
@@ -612,10 +612,10 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli-2/
         ├── Bonjour-output.txt
         ├── COLLECTED-batch-output.txt
         ├── Hello-output.txt
-        ├── Holà-output.txt
+        ├── Hola-output.txt
         ├── UPPER-Bonjour-output.txt
         ├── UPPER-Hello-output.txt
-        └── UPPER-Holà-output.txt
+        └── UPPER-Hola-output.txt
     ```
 
 !!! tip "팁"
@@ -745,7 +745,7 @@ nextflow run hello-config.nf --batch my_run
 
     `outputDir` 설정 대신 출력 블록 `path`에 `params.batch`를 포함하면 CLI에서 `-output-dir`로 덮어쓰지 않습니다.
 
-먼저 설정 파일을 업데이트하여 `outputDir`에서 `${params.batch}`를 제거합니다(경로 선언으로 이동하고 있으므로):
+먼저 설정 파일을 업데이트하여 `outputDir`에서 `#!groovy ${params.batch}`를 제거합니다(경로 선언으로 이동하고 있으므로):
 
 === "후"
 
@@ -832,7 +832,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-config-2 --batch rep2
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [mad_curry] DSL2 - revision: 668a98ccb9
 
@@ -860,11 +860,11 @@ nextflow run hello-config.nf -output-dir custom-outdir-config-2 --batch rep2
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Holà-output.txt
+            │   └── UPPER-Hola-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Holà-output.txt
+                └── Hola-output.txt
     ```
 
 ### 2.3. 워크플로우 수준에서 게시 모드 설정
@@ -962,7 +962,7 @@ nextflow run hello-config.nf -output-dir config-output-mode
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [small_stone] DSL2 - revision: 024d6361b5
 
@@ -990,11 +990,11 @@ nextflow run hello-config.nf -output-dir config-output-mode
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Holà-output.txt
+            │   └── UPPER-Hola-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Holà-output.txt
+                └── Hola-output.txt
     ```
 
 출력별 모드 설정 방식을 여전히 사용하고 싶은 주된 이유는 동일한 워크플로우 내에서 혼합하고 일치시키려는 경우, _즉_ 일부 출력은 복사하고 일부는 심볼릭 링크로 만들려는 경우입니다.
@@ -1094,7 +1094,7 @@ nextflow run hello-config.nf --batch conda
 ??? success "명령 출력"
 
     ```console title="Output"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [friendly_lamport] DSL2 - revision: 024d6361b5
 
@@ -1488,7 +1488,7 @@ nextflow run hello-config.nf -profile my_laptop
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [hungry_sanger] DSL2 - revision: 024d6361b5
 
@@ -1572,7 +1572,7 @@ nextflow run hello-config.nf -profile my_laptop,test
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [modest_becquerel] DSL2 - revision: 024d6361b5
 
@@ -1589,7 +1589,7 @@ nextflow run hello-config.nf -profile my_laptop,test
 
     ```console title="custom-outdir-config/test/cowpy/cowpy-COLLECTED-test-output.txt"
      _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -1618,7 +1618,7 @@ nextflow run hello-config.nf -profile my_laptop,test
     외부에 저장된 더 큰 파일에 대한 URL을 가리킬 수 있습니다.
     Nextflow는 열린 연결이 있는 한 자동으로 다운로드합니다.
 
-    자세한 내용은 사이드 퀘스트 [파일 작업](../side_quests/working_with_files.md)을 참조하세요.
+    자세한 내용은 사이드 퀘스트 [파일 작업](../side_quests/working_with_files/index.md)을 참조하세요.
 
 ### 6.3. `nextflow config`를 사용하여 해결된 설정 확인
 

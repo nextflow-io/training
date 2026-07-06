@@ -43,7 +43,7 @@ Imparando a utilizzare efficacemente queste opzioni di configurazione, potete mi
 Useremo lo script del workflow `hello-config.nf` come punto di partenza.
 È equivalente allo script prodotto seguendo la Parte 5 di questo corso di formazione, tranne che abbiamo cambiato le destinazioni dell'output:
 
-```groovy title="hello-config.nf" linenums="37" hl_lines="3 7 11 15"
+```groovy title="hello-config.nf" linenums="37" hl_lines="3 7 11 15 19"
 output {
     first_output {
         path 'hello_config/intermediates'
@@ -77,7 +77,7 @@ nextflow run hello-config.nf
 ??? success "Output del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [nice_escher] DSL2 - revision: d5dfdc9872
 
@@ -90,7 +90,7 @@ nextflow run hello-config.nf
 
 Come in precedenza, troverete i file di output nella directory specificata nel blocco `output` (`results/hello_config/`).
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     results/hello_config/
@@ -99,20 +99,20 @@ Come in precedenza, troverete i file di output nella directory specificata nel b
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
+    │   ├── Hola-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     └── batch-report.txt
     ```
 
 L'output ASCII art finale è nella directory `results/hello_config/`, sotto il nome `cowpy-COLLECTED-batch-output.txt`.
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -237,7 +237,7 @@ nextflow run hello-config.nf
 ??? success "Output del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
 
@@ -252,11 +252,11 @@ Questo produce ancora lo stesso output di prima.
 
 L'output ASCII art finale è nella directory `results/hello_config/`, sotto il nome `cowpy-COLLECTED-batch-output.txt`, come prima.
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -333,7 +333,7 @@ nextflow run ../hello-config.nf
 ??? success "Output del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `../hello-config.nf` [trusting_escher] DSL2 - revision: 356df0818d
 
@@ -350,13 +350,13 @@ In questa esecuzione, Nextflow combina il `nextflow.config` nella nostra directo
 
 Il file di output finale dovrebbe contenere il personaggio tux che dice i saluti.
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title="tux-run/results/hello_config/cowpy-COLLECTED-experiment-output.txt"
     _________
     / HELLO   \
     | BONJOUR |
-    \ HOLà    /
+    \ HOLA    /
     ---------
       \
         \
@@ -403,7 +403,7 @@ Questo file di parametri contiene una coppia chiave-valore per ciascuno degli in
 Nota l'uso dei due punti (`:`) invece dei segni di uguale (`=`) se confronta la sintassi con il file di configurazione.
 Il file di configurazione è scritto in Groovy, mentre il file di parametri è scritto in YAML.
 
-!!! info "Informazione"
+!!! info "Info"
 
     Forniamo anche una versione JSON del file di parametri come esempio ma non la eseguiremo qui.
     Sentitevi liberi di provare quella da soli.
@@ -419,7 +419,7 @@ nextflow run hello-config.nf -params-file test-params.yaml
 ??? success "Output del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
@@ -432,12 +432,12 @@ nextflow run hello-config.nf -params-file test-params.yaml
 
 Il file di output finale dovrebbe contenere il personaggio stegosaurus che dice i saluti.
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title="results/hello_config/cowpy-COLLECTED-yaml-output.txt"
     _________
     / HELLO   \
-    | HOLà    |
+    | HOLA    |
     \ BONJOUR /
     ---------
     \                             .       .
@@ -500,7 +500,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli/
 ??? success "Output del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [prickly_kay] DSL2 - revision: 32ecc4fba2
 
@@ -513,7 +513,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli/
 
 Questo pubblica gli output in `custom-outdir-cli/` invece di `results/`:
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     custom-outdir-cli/
@@ -524,10 +524,10 @@ Questo pubblica gli output in `custom-outdir-cli/` invece di `results/`:
             ├── Bonjour-output.txt
             ├── COLLECTED-batch-output.txt
             ├── Hello-output.txt
-            ├── Holà-output.txt
+            ├── Hola-output.txt
             ├── UPPER-Bonjour-output.txt
             ├── UPPER-Hello-output.txt
-            └── UPPER-Holà-output.txt
+            └── UPPER-Hola-output.txt
     ```
 
 Notate che abbiamo ancora la sottodirectory `hello_config` dalle dichiarazioni `path` nel blocco output.
@@ -602,7 +602,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli-2/
 
 Ora gli output sono pubblicati direttamente sotto `custom-outdir-cli-2/`, senza la sottodirectory `hello_config`:
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     custom-outdir-cli-2/
@@ -612,10 +612,10 @@ Ora gli output sono pubblicati direttamente sotto `custom-outdir-cli-2/`, senza 
         ├── Bonjour-output.txt
         ├── COLLECTED-batch-output.txt
         ├── Hello-output.txt
-        ├── Holà-output.txt
+        ├── Hola-output.txt
         ├── UPPER-Bonjour-output.txt
         ├── UPPER-Hello-output.txt
-        └── UPPER-Holà-output.txt
+        └── UPPER-Hola-output.txt
     ```
 
 !!! tip "Suggerimento"
@@ -745,7 +745,7 @@ Rimettiamola a posto, e mettiamo anche i file in una sottodirectory `params.batc
 
     Includere `params.batch` nel `path` del blocco output, invece del `outputDir` di configurazione, significa che non verrà sovrascritto con `-output-dir` sulla CLI.
 
-Prima, aggiornate il file di configurazione per rimuovere `${params.batch}` da `outputDir` (dato che lo stiamo spostando nelle dichiarazioni di percorso):
+Prima, aggiornate il file di configurazione per rimuovere `#!groovy ${params.batch}` da `outputDir` (dato che lo stiamo spostando nelle dichiarazioni di percorso):
 
 === "Dopo"
 
@@ -832,7 +832,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-config-2 --batch rep2
 ??? success "Output del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [mad_curry] DSL2 - revision: 668a98ccb9
 
@@ -845,7 +845,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-config-2 --batch rep2
 
 Questo pubblica gli output in `custom-outdir-config-2/rep2/`, con il percorso base specificato _e_ la sottodirectory del nome del batch _e_ i risultati raggruppati per processo:
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     custom-outdir-config-2
@@ -860,11 +860,11 @@ Questo pubblica gli output in `custom-outdir-config-2/rep2/`, con il percorso ba
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Holà-output.txt
+            │   └── UPPER-Hola-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Holà-output.txt
+                └── Hola-output.txt
     ```
 
 ### 2.3. Impostare la modalità di pubblicazione a livello di workflow
@@ -962,7 +962,7 @@ nextflow run hello-config.nf -output-dir config-output-mode
 ??? success "Output del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [small_stone] DSL2 - revision: 024d6361b5
 
@@ -975,7 +975,7 @@ nextflow run hello-config.nf -output-dir config-output-mode
 
 Questo pubblica gli output in `config-output-mode/`, e sono ancora tutte copie appropriate, non symlink.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     config-output-mode
@@ -990,11 +990,11 @@ Questo pubblica gli output in `config-output-mode/`, e sono ancora tutte copie a
             ├── convertToUpper
             │   ├── UPPER-Bonjour-output.txt
             │   ├── UPPER-Hello-output.txt
-            │   └── UPPER-Holà-output.txt
+            │   └── UPPER-Hola-output.txt
             └── sayHello
                 ├── Bonjour-output.txt
                 ├── Hello-output.txt
-                └── Holà-output.txt
+                └── Hola-output.txt
     ```
 
 Il motivo principale per cui potreste ancora voler usare il modo per-output di impostare la modalità è se volete mescolare all'interno dello stesso workflow, _cioè_ avere alcuni output copiati e alcuni come symlink.
@@ -1094,7 +1094,7 @@ nextflow run hello-config.nf --batch conda
 ??? success "Output del comando"
 
     ```console title="Output"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [friendly_lamport] DSL2 - revision: 024d6361b5
 
@@ -1488,7 +1488,7 @@ nextflow run hello-config.nf -profile my_laptop
 ??? success "Output del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [hungry_sanger] DSL2 - revision: 024d6361b5
 
@@ -1572,7 +1572,7 @@ nextflow run hello-config.nf -profile my_laptop,test
 ??? success "Output del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-config.nf` [modest_becquerel] DSL2 - revision: 024d6361b5
 
@@ -1585,11 +1585,11 @@ nextflow run hello-config.nf -profile my_laptop,test
 
 Questo userà Docker dove possibile e produrrà output sotto `custom-outdir-config/test`, e questa volta il personaggio è il duo comico `dragonandcow`.
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title="custom-outdir-config/test/cowpy/cowpy-COLLECTED-test-output.txt"
      _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------
@@ -1618,7 +1618,7 @@ Questo significa che finché distribuiamo qualsiasi file di dati di test con il 
     Possiamo puntare a URL per file più grandi che sono memorizzati esternamente.
     Nextflow li scaricherà automaticamente finché c'è una connessione aperta.
 
-    Per maggiori dettagli, vedete la Side Quest [Lavorare con i file](../side_quests/working_with_files.md)
+    Per maggiori dettagli, vedete la Side Quest [Lavorare con i file](../side_quests/working_with_files/index.md)
 
 ### 6.3. Usare `nextflow config` per vedere la configurazione risolta
 
@@ -1752,7 +1752,7 @@ Cosa ha la precedenza quando lo stesso parametro è impostato sia nel file di co
 - [ ] Il primo valore incontrato
 - [ ] Nessuno dei due; causa un errore
 
-Per approfondire: [1.1. Spostare i valori predefiniti in `nextflow.config`](#11-spostare-i-valori-predefiniti-in-nextflowconfig)
+Per approfondire: [1.1. Spostare i valori predefiniti in `nextflow.config`](#11-move-default-values-to-nextflowconfig)
 </quiz>
 
 <quiz>
@@ -1770,7 +1770,7 @@ Se sia Docker che Conda sono abilitati e un processo ha entrambe le direttive, q
 - [ ] Il primo definito
 - [ ] Causa un errore
 
-Per approfondire: [3. Selezionare una tecnologia di packaging del software](#3-selezionare-una-tecnologia-di-packaging-del-software)
+Per approfondire: [3. Selezionare una tecnologia di packaging del software](#3-select-a-software-packaging-technology)
 </quiz>
 
 <quiz>
@@ -1788,7 +1788,7 @@ Come si impostano i requisiti di risorse per un processo specifico nel file di c
 - [x] `#!groovy process { withName: 'processName' { memory = '4 GB' } }`
 - [ ] `#!groovy resources.processName.memory = '4 GB'`
 
-Per approfondire: [5.3. Impostare allocazioni di risorse per un processo specifico](#53-impostare-allocazioni-di-risorse-per-un-processo-specifico)
+Per approfondire: [5.3. Impostare allocazioni di risorse per un processo specifico](#53-set-resource-allocations-for-a-specific-process)
 </quiz>
 
 <quiz>
@@ -1798,7 +1798,7 @@ Quale opzione da riga di comando genera un report di utilizzo delle risorse?
 - [x] `-with-report`
 - [ ] `-with-profile`
 
-Per approfondire: [5.1. Eseguire il workflow per generare un report di utilizzo delle risorse](#51-eseguire-il-workflow-per-generare-un-report-di-utilizzo-delle-risorse)
+Per approfondire: [5.1. Eseguire il workflow per generare un report di utilizzo delle risorse](#51-run-the-workflow-to-generate-a-resource-utilization-report)
 </quiz>
 
 <quiz>
@@ -1808,7 +1808,7 @@ Cosa fa la direttiva `resourceLimits`?
 - [x] Limita le risorse massime che possono essere richieste
 - [ ] Monitora l'uso delle risorse
 
-Per approfondire: [5.5. Aggiungere limiti di risorse](#55-aggiungere-limiti-di-risorse)
+Per approfondire: [5.5. Aggiungere limiti di risorse](#55-add-resource-limits)
 </quiz>
 
 <quiz>
@@ -1818,7 +1818,7 @@ Qual è l'executor predefinito in Nextflow?
 - [ ] `kubernetes`
 - [ ] `aws`
 
-Per approfondire: [4. Selezionare una piattaforma di esecuzione](#4-selezionare-una-piattaforma-di-esecuzione)
+Per approfondire: [4. Selezionare una piattaforma di esecuzione](#4-select-an-execution-platform)
 </quiz>
 
 <quiz>
@@ -1828,7 +1828,7 @@ Come si specifica un file di parametri quando si esegue Nextflow?
 - [x] `-params-file params.json`
 - [ ] `--input params.json`
 
-Per approfondire: [1.3. Usare un file di parametri](#13-usare-un-file-di-parametri)
+Per approfondire: [1.3. Usare un file di parametri](#13-use-a-parameter-file)
 </quiz>
 
 <quiz>
@@ -1838,7 +1838,7 @@ Per cosa possono essere usati i profili? (Selezionate tutte le risposte applicab
 - [x] Fornire parametri di test
 - [ ] Definire nuovi processi
 
-Per approfondire: [6. Usare profili per passare tra configurazioni preimpostate](#6-usare-profili-per-passare-tra-configurazioni-preimpostate)
+Per approfondire: [6. Usare profili per passare tra configurazioni preimpostate](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>
 
 <quiz>
@@ -1848,5 +1848,5 @@ Come si specificano più profili in un singolo comando?
 - [x] `-profile profile1,profile2`
 - [ ] `--profile profile1 --profile profile2`
 
-Per approfondire: [6. Usare profili per passare tra configurazioni preimpostate](#6-usare-profili-per-passare-tra-configurazioni-preimpostate)
+Per approfondire: [6. Usare profili per passare tra configurazioni preimpostate](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>

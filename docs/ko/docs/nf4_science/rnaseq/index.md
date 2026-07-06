@@ -15,7 +15,7 @@ additional_information:
   audience_prerequisites:
     - "**대상:** 이 과정은 데이터 분석 파이프라인을 개발하거나 맞춤화하는 데 관심이 있는 전사체학 및 관련 분야의 연구자를 위한 것입니다."
     - "**기술:** 명령줄, 기본 스크립팅 개념 및 일반적인 RNAseq 파일 형식에 대한 어느 정도의 친숙함을 가정합니다."
-    - "**전제 조건:** [Hello Nextflow](../../hello_nextflow/)에서 다룬 기본적인 Nextflow 개념 및 도구."
+    - "**전제 조건:** [Hello Nextflow](../../hello_nextflow/index.md)에서 다룬 기본적인 Nextflow 개념 및 도구."
 ---
 
 # RNAseq을 위한 Nextflow
@@ -24,7 +24,7 @@ additional_information:
 
 **실제 전사체학 사용 사례에 Nextflow를 적용하는 실습 과정: Trim Galore, HISAT2 및 FastQC를 사용한 bulk RNAseq 처리.**
 
-이 과정은 [Hello Nextflow](../../hello_nextflow/) 초급 교육을 기반으로 하며 bulk RNAseq 분석의 특정 맥락에서 Nextflow를 사용하는 방법을 보여줍니다.
+이 과정은 [Hello Nextflow](../../hello_nextflow/index.md) 초급 교육을 기반으로 하며 bulk RNAseq 분석의 특정 맥락에서 Nextflow를 사용하는 방법을 보여줍니다.
 어댑터 서열을 트리밍하고, 리드를 게놈 참조에 정렬하며, 여러 단계에서 품질 관리(QC)를 수행하는 처리 파이프라인을 구현하게 됩니다.
 
 <!-- additional_information -->

@@ -85,7 +85,7 @@ code .
 tree . -L 2
 ```
 
-??? abstract "Directory contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console
     .

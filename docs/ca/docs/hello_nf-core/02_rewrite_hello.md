@@ -4,24 +4,217 @@
 
 En aquesta segona part del curs de formació Hello nf-core, us mostrem com crear una versió compatible amb nf-core del pipeline produït pel curs per a principiants [Hello Nextflow](../hello_nextflow/index.md).
 
-Haureu notat a la primera secció de la formació que els pipelines nf-core segueixen una estructura força elaborada amb molts fitxers accessoris.
-Crear tot això des de zero seria molt tediós, així que la comunitat nf-core ha desenvolupat eines per fer-ho a partir d'una plantilla, per iniciar el procés.
-
-Us mostrarem com utilitzar aquestes eines per crear una estructura de pipeline i després adaptar el codi de pipeline 'regular' existent a l'estructura nf-core.
+Ho farem en dues fases: primer, utilitzarem les eines nf-core per crear una estructura de pipeline, i després injectarem el codi del pipeline 'regular' existent a aquesta estructura.
 
 Si no esteu familiaritzats amb el pipeline Hello o us caldria un recordatori, consulteu [aquesta pàgina d'informació](../info/hello_pipeline.md).
 
----
+!!! tip "Consell"
 
-## 1. Crear un nou projecte de pipeline
+    Aquesta part del curs introduirà dos mecanismes importants de Nextflow que no es cobreixen al curs introductori Hello Nextflow: els [meta maps](../side_quests/metadata/index.md) i els [workflows of workflows](../side_quests/workflows_of_workflows/index.md), tots dos tractats en detall a les Side Quests enllaçades.
 
-Primer, creem l'estructura per al nou pipeline.
+    Les instruccions següents inclouen la informació essencial que necessiteu per entendre com s'utilitzen en el context nf-core, però pot ser molt per assimilar d'una vegada.
+    Si teniu temps, us recomanem treballar primer les dues Side Quests (en qualsevol ordre):
+
+    - [Workflows of Workflows](../side_quests/workflows_of_workflows/index.md)
+    - [Metadata and meta maps](../side_quests/metadata/index.md)
 
 !!! note "Nota"
 
     Assegureu-vos que esteu al directori `hello-nf-core` al vostre terminal.
 
-### 1.1. Executar l'eina de creació de pipelines basada en plantilla
+---
+
+## 1. Examinar l'estructura del codi del pipeline
+
+El projecte nf-core aplica directrius estrictes sobre com s'estructuren els pipelines i com s'organitza, configura i documenta el codi.
+
+Abans d'abordar el nostre projecte de creació de pipeline, hem d'entendre aquesta estructura i organització.
+Així doncs, donem una ullada a com s'organitza el codi del pipeline al repositori `nf-core/demo`, utilitzant l'enllaç simbòlic `pipelines` que vam crear a la Part 1.
+
+Com a recordatori, podeu utilitzar `tree` o l'explorador de fitxers per trobar i obrir el directori `nf-core/demo`.
+
+```bash
+tree -L 1 pipelines/nf-core/demo
+```
+
+??? abstract "Contingut del directori"
+
+    ```console
+    pipelines/nf-core/demo
+    ├── assets
+    ├── CHANGELOG.md
+    ├── CITATIONS.md
+    ├── CODE_OF_CONDUCT.md
+    ├── conf
+    ├── docs
+    ├── LICENSE
+    ├── main.nf
+    ├── modules
+    ├── modules.json
+    ├── nextflow.config
+    ├── nextflow_schema.json
+    ├── nf-test.config
+    ├── README.md
+    ├── ro-crate-metadata.json
+    ├── subworkflows
+    ├── tests
+    ├── tower.yml
+    └── workflows
+    ```
+
+De moment ens centrarem específicament en els components del codi del pipeline (`main.nf`, `workflows`, `subworkflows`, `modules`) i com es relacionen entre ells.
+
+### 1.1. Estructura modular dels workflows nf-core
+
+L'organització estàndard del codi d'un pipeline nf-core segueix una estructura modular dissenyada per maximitzar la reutilització del codi, tal com s'introdueix a [Hello Modules](../hello_nextflow/04_hello_modules.md), la Part 4 del curs [Hello Nextflow](../hello_nextflow/index.md), tot i que a l'estil nf-core, això s'implementa amb una mica de complexitat addicional.
+Concretament, els pipelines nf-core fan un ús abundant de subworkflows, és a dir, scripts de workflow que són importats per un workflow pare.
+
+Pot semblar una mica abstracte, així que vegem com s'utilitza a la pràctica al pipeline `nf-core/demo`.
+
+Si mireu dins del fitxer `main.nf`, veureu que importa un workflow anomenat `DEMO` de `workflows/demo.nf`, així com alguns mòduls i subworkflows.
+
+Aquí teniu com es veuen les relacions entre els components de codi rellevants:
+
+<figure class="excalidraw">
+    --8<-- "docs/en/docs/hello_nf-core/img/nf-core_demo_code_organization.svg"
+</figure>
+
+El workflow sense nom a `main.nf` s'anomena script _entrypoint_. Actua com a embolcall per a dos tipus de workflows niats: el workflow `DEMO` que conté la lògica d'anàlisi real, ubicat a `workflows/demo.nf`, i un conjunt de workflows de manteniment ubicats sota `subworkflows/`.
+El workflow `demo.nf` crida **mòduls** ubicats sota `modules/`; aquests contenen els **processos** que realitzaran els passos d'anàlisi reals.
+
+!!! note "Nota"
+
+    Els subworkflows no es limiten a funcions de manteniment, i poden fer ús de mòduls de processos.
+
+    El pipeline `nf-core/demo` que es mostra aquí és relativament senzill, però altres pipelines nf-core (com `nf-core/rnaseq`) utilitzen subworkflows que participen en l'anàlisi real.
+
+Ara revisem aquests components en detall.
+
+### 1.2. L'script entrypoint: `main.nf`
+
+L'script `main.nf` és el punt d'entrada des d'on Nextflow comença quan executem `nextflow run nf-core/demo`.
+Això significa que quan executeu `nextflow run nf-core/demo` per executar el pipeline, Nextflow troba i executa automàticament l'script `main.nf`.
+Això funciona per a qualsevol pipeline Nextflow que segueixi aquesta nomenclatura i estructura convencionals, no només els pipelines nf-core.
+
+Utilitzar un script entrypoint facilita l'execució de subworkflows de 'manteniment' estandarditzats abans i després que s'executi l'script d'anàlisi real.
+Revisarem aquests un cop haguem examinat el workflow d'anàlisi real i els seus mòduls.
+
+### 1.3. L'script d'anàlisi: `workflows/demo.nf`
+
+El workflow `workflows/demo.nf` és on s'emmagatzema la lògica central del pipeline.
+Està estructurat de manera similar a un workflow Nextflow normal, excepte que està dissenyat per ser cridat des d'un workflow pare, cosa que requereix algunes funcionalitats addicionals.
+Cobrirem les diferències rellevants a la següent part d'aquest curs, quan abordem la conversió del pipeline Hello simple de Hello Nextflow a una forma compatible amb nf-core.
+
+El workflow `demo.nf` crida **mòduls** ubicats sota `modules/`, que revisarem a continuació.
+
+!!! note "Nota"
+
+    Alguns workflows d'anàlisi nf-core mostren nivells addicionals de niament cridant subworkflows de nivell inferior.
+    Això s'utilitza principalment per agrupar dos o més mòduls que s'utilitzen habitualment junts en segments de pipeline fàcilment reutilitzables.
+    Podeu veure alguns exemples navegant pels [subworkflows nf-core](https://nf-co.re/subworkflows/) disponibles al lloc web nf-core.
+
+    Quan l'script d'anàlisi utilitza subworkflows, aquests s'emmagatzemen sota el directori `subworkflows/`.
+
+### 1.4. Els mòduls
+
+Els mòduls són on viu el codi dels processos, tal com es descriu a la [Part 4 del curs de formació Hello Nextflow](../hello_nextflow/04_hello_modules.md).
+
+Al projecte nf-core, els mòduls s'organitzen utilitzant una estructura niada de múltiples nivells que reflecteix tant el seu origen com el seu contingut.
+Al nivell superior, els mòduls es diferencien com a `nf-core` o `local` (no formen part del projecte nf-core), i després es col·loquen en un directori amb el nom de les eines que encapsulen.
+Si l'eina pertany a un toolkit (és a dir, un paquet que conté múltiples eines), hi ha un nivell de directori intermedi amb el nom del toolkit.
+
+Podeu veure això aplicat a la pràctica als mòduls del pipeline `nf-core/demo`:
+
+```bash
+tree -L 3 pipelines/nf-core/demo/modules
+```
+
+??? abstract "Contingut del directori"
+
+    ```console
+    pipelines/nf-core/demo/modules
+    └── nf-core
+        ├── fastqc
+        │   ├── environment.yml
+        │   ├── main.nf
+        │   ├── meta.yml
+        │   └── tests
+        ├── multiqc
+        │   ├── environment.yml
+        │   ├── main.nf
+        │   ├── meta.yml
+        │   └── tests
+        └── seqtk
+            └── trim
+
+    7 directories, 6 files
+    ```
+
+Aquí veieu que els mòduls `fastqc` i `multiqc` es troben al nivell superior dins dels mòduls `nf-core`, mentre que el mòdul `trim` es troba sota el toolkit al qual pertany, `seqtk`.
+En aquest cas no hi ha mòduls `local`.
+
+El fitxer de codi del mòdul que descriu el procés sempre s'anomena `main.nf`, i va acompanyat de tests i fitxers `.yml` que ignorarem per ara.
+
+En conjunt, el workflow entrypoint, el workflow d'anàlisi i els mòduls són suficients per executar les parts 'interessants' del pipeline.
+No obstant això, sabem que també hi ha subworkflows de manteniment, així que donem-hi una ullada ara.
+
+### 1.5. Els subworkflows de manteniment
+
+Com els mòduls, els subworkflows es diferencien en directoris `local` i `nf-core`, i cada subworkflow té la seva pròpia estructura de directori niada amb el seu propi script `main.nf`, tests i fitxer `.yml`.
+
+```bash
+tree -L 3 pipelines/nf-core/demo/subworkflows
+```
+
+??? abstract "Contingut del directori"
+
+    ```console
+    pipelines/nf-core/demo/subworkflows
+    ├── local
+    │   └── utils_nfcore_demo_pipeline
+    │       └── main.nf
+    └── nf-core
+        ├── utils_nextflow_pipeline
+        │   ├── main.nf
+        │   ├── meta.yml
+        │   └── tests
+        ├── utils_nfcore_pipeline
+        │   ├── main.nf
+        │   ├── meta.yml
+        │   └── tests
+        └── utils_nfschema_plugin
+            ├── main.nf
+            ├── meta.yml
+            └── tests
+
+    9 directories, 7 files
+    ```
+
+Com s'ha indicat anteriorment, el pipeline `nf-core/demo` no inclou cap subworkflow específic d'anàlisi, de manera que tots els subworkflows que veiem aquí són els anomenats workflows de 'manteniment' o 'utilitat', tal com indica el prefix `utils_` als seus noms.
+Aquests subworkflows són els que produeixen la capçalera nf-core elegant a la sortida de la consola, entre altres funcions accessòries.
+
+!!! tip "Consell"
+
+    A part del seu patró de nomenclatura, una altra indicació que aquests subworkflows no realitzen cap funció realment relacionada amb l'anàlisi és que no criden cap procés.
+
+Això completa el repàs dels components de codi principals que constitueixen el pipeline `nf-core/demo`.
+
+### Conclusió
+
+Ara teniu una comprensió d'alt nivell de l'estructura modular dels pipelines nf-core.
+
+### Què segueix?
+
+Creeu una estructura de pipeline utilitzant les eines nf-core.
+
+---
+
+## 2. Crear un nou projecte de pipeline
+
+Com heu vist, els pipelines nf-core segueixen una estructura estandarditzada amb molts fitxers accessoris.
+Crear tot això des de zero seria molt tediós, així que la comunitat nf-core ha desenvolupat eines per fer-ho a partir d'una plantilla, per iniciar el procés.
+
+### 2.1. Executar l'eina de creació de pipelines basada en plantilla
 
 Comencem creant un nou pipeline amb la comanda `nf-core pipelines create`.
 Això crearà una nova estructura de pipeline utilitzant la plantilla base nf-core, personalitzada amb un nom de pipeline, descripció i autor.
@@ -40,7 +233,7 @@ Aquesta TUI us demanarà que proporcioneu informació bàsica sobre el vostre pi
 
 - A la pantalla de benvinguda, feu clic a **Let's go!**.
 - A la pantalla `Choose pipeline type`, feu clic a **Custom**.
-- Introduïu els detalls del vostre pipeline de la següent manera (substituint `< EL VOSTRE NOM >` pel vostre propi nom), després feu clic a **Next**.
+- Introduïu els detalls del vostre pipeline de la següent manera (substituint `< YOUR NAME >` pel vostre propi nom), després feu clic a **Next**.
 
 ```
 [ ] GitHub organisation: core
@@ -91,6 +284,7 @@ tree core-hello
 
     ```console
     core-hello/
+    ├── README.md
     ├── assets
     │   ├── samplesheet.csv
     │   └── schema_input.json
@@ -100,14 +294,13 @@ tree core-hello
     │   ├── test.config
     │   └── test_full.config
     ├── docs
-    │   ├── output.md
     │   ├── README.md
+    │   ├── output.md
     │   └── usage.md
     ├── main.nf
     ├── modules.json
     ├── nextflow.config
     ├── nextflow_schema.json
-    ├── README.md
     ├── subworkflows
     │   ├── local
     │   │   └── utils_nfcore_hello_pipeline
@@ -140,20 +333,15 @@ tree core-hello
     └── workflows
         └── hello.nf
 
-    14 directories, 34 files
+    15 directories, 34 files
     ```
 
 Són molts fitxers!
+No us preocupeu si us sentiu una mica perduts; recorrerem les parts importants aviat, i després pas a pas durant la resta del curs.
 
-Esperem que reconegueu molts d'ells com els mateixos que vam trobar quan vam explorar l'estructura del pipeline `nf-core/demo`.
-Però no us preocupeu si encara us sentiu una mica perduts; recorrerem les parts importants junts durant aquest curs de formació.
+En general, això hauria de semblar similar a l'estructura de codi que vam observar per al pipeline nf-core/demo, excepte que aquí no hi ha cap directori `modules`.
 
-!!! note "Nota"
-
-    Una diferència important en comparació amb el pipeline `nf-core/demo` que vam examinar a la primera part d'aquesta formació és que no hi ha cap directori `modules`.
-    Això és perquè no vam optar per incloure cap dels mòduls nf-core per defecte.
-
-### 1.2. Comprovar que l'estructura és funcional
+### 2.2. Comprovar que l'estructura és funcional
 
 Cregueu-ho o no, tot i que encara no heu afegit cap mòdul per fer-lo fer feina real, l'estructura del pipeline es pot executar utilitzant el perfil de test, de la mateixa manera que vam executar el pipeline `nf-core/demo`.
 
@@ -164,7 +352,7 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `./core-hello/main.nf` [scruffy_marconi] DSL2 - revision: b9e9b3b8de
 
@@ -223,13 +411,29 @@ Podeu donar una ullada als informes per veure què s'ha executat, i la resposta 
 
 ![informe de línia de temps d'execució buit](./img/execution_timeline_empty.png)
 
-Donem una ullada al que hi ha realment al codi.
+Donem una ullada més detallada al que hi ha realment dins.
 
-### 1.3. Examinar el workflow de marcador de posició
+### 2.3. Examinar l'estructura de l'estructura del pipeline
 
-Si mireu dins del fitxer `main.nf`, veureu que importa un workflow anomenat `HELLO` de `workflows/hello`.
+Si recordeu l'estructura del pipeline `nf-core/demo`, hi havia un fitxer `main.nf` que contenia un workflow entrypoint que embolcallava el workflow `DEMO`.
+Ara si obriu el fitxer `main.nf` al vostre projecte recentment creat, veureu que importa un workflow anomenat `HELLO` de `workflows/hello.nf`.
+Això és l'equivalent directe al workflow `DEMO`, tot i que de moment és només un marcador de posició.
 
-Això és equivalent al workflow `workflows/demo.nf` que vam trobar a la Part 1, i serveix com a workflow de marcador de posició per al nostre workflow d'interès, amb alguna funcionalitat nf-core ja en el seu lloc.
+I en conseqüència, aquesta és l'estructura general de l'estructura del pipeline:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nf-core/img/core-hello-initial.svg"
+</figure>
+
+Això us hauria de recordar l'estructura del pipeline `nf-core/demo`!
+L'única diferència real és que el workflow `DEMO` incloïa processos de mòduls.
+Aquí, el workflow `HELLO` equivalent encara no inclou cap procés.
+
+Donem-hi una ullada més detallada.
+
+### 2.4. Examinar el workflow de marcador de posició
+
+Això serveix com a marcador de posició per al nostre workflow d'anàlisi, amb alguna funcionalitat nf-core ja en el seu lloc.
 
 ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 19 53"
 /*
@@ -249,7 +453,7 @@ include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pi
 workflow HELLO {
 
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_samplesheet // canal: samplesheet llegit des de --input
     main:
 
     ch_versions = channel.empty()
@@ -285,7 +489,7 @@ workflow HELLO {
 
 
     emit:
-    versions       = ch_versions                 // channel: [ path(versions.yml) ]
+    versions       = ch_versions                 // canal: [ path(versions.yml) ]
 
 }
 
@@ -305,23 +509,18 @@ En comparació amb un workflow bàsic de Nextflow com el desenvolupat a [Hello N
 
 Aquestes són funcionalitats opcionals de Nextflow que fan que el workflow sigui **composable**, és a dir, que es pot cridar des de dins d'un altre workflow.
 
-!!! note "El bloc `Channel.topic`"
+??? note "El bloc `Channel.topic`"
 
     Potser haureu notat el bloc `def topic_versions = Channel.topic("versions")` que comença a la línia 17.
     Aquest és codi de manteniment estàndard que recull informació de versions de programari de tots els mòduls automàticament.
     nf-core està desplegant aquest mecanisme a tots els pipelines el 2026, de manera que el veureu a tots els nous pipelines d'ara endavant.
     La Part 4 d'aquest curs explica com funciona en detall.
 
-!!! note "Workflows composables en profunditat"
-
-    La [Workflows of Workflows](../side_quests/workflows_of_workflows.md) Side Quest explora la composició de workflows amb molt més detall, incloent com compondre múltiples workflows junts i gestionar fluxos de dades complexos entre ells. Introduïm la composabilitat aquí perquè és un requisit fonamental de l'arquitectura de plantilla nf-core, que utilitza workflows niats per organitzar la inicialització del pipeline, el workflow d'anàlisi principal i les tasques de finalització en components separats i reutilitzables.
-
 Necessitarem connectar la lògica rellevant del nostre workflow d'interès a aquesta estructura.
-El primer pas per a això és fer que el nostre workflow original sigui composable.
 
 ### Conclusió
 
-Ara sabeu com crear una estructura de pipeline utilitzant les eines nf-core.
+Ara sabeu com crear una estructura de pipeline utilitzant les eines nf-core i comparar-la amb l'estructura del pipeline demo.
 
 ### Què segueix?
 
@@ -329,14 +528,22 @@ Apreneu com fer que un workflow simple sigui composable com a preludi per fer-lo
 
 ---
 
-## 2. Fer el workflow original Hello Nextflow composable
+## 3. Fer el workflow Hello Nextflow composable
 
 Ara és el moment de posar-se a treballar integrant el nostre workflow a l'estructura nf-core.
+
 Com a recordatori, estem treballant amb el workflow presentat al nostre curs de formació [Hello Nextflow](../hello_nextflow/index.md).
+Aquest workflow es va escriure com un workflow simple sense nom que es pot executar per si sol.
 
-!!! tip "Consell"
+Per tal de tenir clar quines parts del workflow original han d'anar a cada lloc de l'estructura nf-core, començarem transformant el workflow Hello original en un workflow **composable** que es pugui executar des de dins d'un workflow pare, tal com requereix la plantilla nf-core.
 
-    Si no esteu familiaritzats amb aquest pipeline o us caldria un recordatori, consulteu [El pipeline Hello](../info/hello_pipeline.md).
+Això és el que estem intentant construir ara:
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nf-core/img/composable-hello.svg"
+</figure>
+
+En essència, volem imitar l'estructura modular de l'estructura nf-core, però amb menys complexitat per començar.
 
 Us proporcionem una còpia neta i totalment funcional del workflow Hello Nextflow completat al directori `original-hello` juntament amb els seus mòduls i el fitxer CSV per defecte que espera utilitzar com a entrada.
 
@@ -368,7 +575,7 @@ nextflow run original-hello/hello.nf
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `original-hello/hello.nf` [goofy_babbage] DSL2 - revision: e9e72441e9
 
@@ -378,6 +585,10 @@ nextflow run original-hello/hello.nf
     [0c/17263b] collectGreetings   | 1 of 1 ✔
     [94/542280] cowpy              | 1 of 1 ✔
     ```
+
+Si funciona, esteu a punt per començar a modificar el codi.
+
+### 3.1. Modificar el workflow Hello original
 
 Obrim el fitxer de workflow `hello.nf` per inspeccionar el codi, que es mostra complet a continuació (sense comptar els processos, que estan en mòduls):
 
@@ -404,10 +615,10 @@ workflow {
                       .splitCsv()
                       .map { line -> line[0] }
 
-  // emet una salutacio
+  // emet una salutació
   sayHello(greeting_ch)
 
-  // converteix la salutacio a majuscules
+  // converteix la salutació a majúscules
   convertToUpper(sayHello.out)
 
   // recull totes les salutacions en un fitxer
@@ -419,11 +630,16 @@ workflow {
 ```
 
 Com podeu veure, aquest workflow es va escriure com un workflow simple sense nom que es pot executar per si sol.
-Per tal de fer-lo executable des de dins d'un workflow pare com requereix la plantilla nf-core, necessitem fer-lo **composable**.
+Per fer-lo composable, farem els canvis següents:
+
+1. Donar nom al workflow
+2. Substituir la construcció del canal per `take:`
+3. Prefaciar les operacions del workflow amb `main:`
+4. Afegir la declaració `emit:`
 
 Recorrem els canvis necessaris un per un.
 
-### 2.1. Donar nom al workflow
+#### 3.1.1. Donar nom al workflow
 
 Primer, donem un nom al workflow perquè puguem referir-nos-hi des d'un workflow pare.
 
@@ -441,7 +657,7 @@ Primer, donem un nom al workflow perquè puguem referir-nos-hi des d'un workflow
 
 Les mateixes convencions s'apliquen als noms de workflow que als noms de mòdul.
 
-### 2.2. Substituir la construcció del canal per `take`
+#### 3.1.2. Substituir la construcció del canal per `take`
 
 Ara, substituïu la construcció del canal per una simple declaració `take` que declara les entrades esperades.
 
@@ -495,7 +711,7 @@ Mentre hi som, també podem comentar la línia `params.greeting = 'greetings.csv
 
     Ho afegirem al següent pas.
 
-### 2.3. Prefaciar les operacions del workflow amb la declaració `main`
+#### 3.1.3. Prefaciar les operacions del workflow amb la declaració `main`
 
 A continuació, afegiu una declaració `main` abans de la resta d'operacions cridades al cos del workflow.
 
@@ -504,10 +720,10 @@ A continuació, afegiu una declaració `main` abans de la resta d'operacions cri
     ```groovy title="original-hello/hello.nf" linenums="22" hl_lines="1"
         main:
 
-        // emet una salutacio
+        // emet una salutació
         sayHello(greeting_ch)
 
-        // converteix la salutacio a majuscules
+        // converteix la salutació a majúscules
         convertToUpper(sayHello.out)
 
         // recull totes les salutacions en un fitxer
@@ -520,10 +736,10 @@ A continuació, afegiu una declaració `main` abans de la resta d'operacions cri
 === "Abans"
 
     ```groovy title="original-hello/hello.nf" linenums="21"
-        // emet una salutacio
+        // emet una salutació
         sayHello(greeting_ch)
 
-        // converteix la salutacio a majuscules
+        // converteix la salutació a majúscules
         convertToUpper(sayHello.out)
 
         // recull totes les salutacions en un fitxer
@@ -535,7 +751,7 @@ A continuació, afegiu una declaració `main` abans de la resta d'operacions cri
 
 Això bàsicament diu 'això és el que _fa_ aquest workflow'.
 
-### 2.4. Afegir la declaració `emit`
+#### 3.1.4. Afegir la declaració `emit`
 
 Finalment, afegiu una declaració `emit` que declara quines són les sortides finals del workflow.
 
@@ -546,7 +762,7 @@ Finalment, afegiu una declaració `emit` que declara quines són les sortides fi
 
 Aquesta és una addició completament nova al codi en comparació amb el workflow original.
 
-### 2.5. Resum dels canvis completats
+#### 3.1.5. Resum dels canvis completats
 
 Si heu fet tots els canvis tal com es descriuen, el vostre workflow ara hauria de semblar així:
 
@@ -574,10 +790,10 @@ workflow HELLO {
 
     main:
 
-    // emet una salutacio
+    // emet una salutació
     sayHello(greeting_ch)
 
-    // converteix la salutacio a majuscules
+    // converteix la salutació a majúscules
     convertToUpper(sayHello.out)
 
     // recull totes les salutacions en un fitxer
@@ -594,7 +810,7 @@ workflow HELLO {
 Això descriu tot el que Nextflow necessita EXCEPTE què alimentar al canal d'entrada.
 Això es definirà al workflow pare, també anomenat workflow **entrypoint**.
 
-### 2.6. Fer un workflow entrypoint fictici
+### 3.2. Fer un workflow entrypoint fictici
 
 Abans d'integrar el nostre workflow composable a l'estructura complexa nf-core, verifiquem que funciona correctament.
 Podem fer un workflow entrypoint fictici simple per provar el workflow composable de manera aïllada.
@@ -613,7 +829,7 @@ Copieu el següent codi al fitxer `main.nf`.
 // importa el codi del workflow des del fitxer hello.nf
 include { HELLO } from './hello.nf'
 
-// declara el parametre d'entrada
+// declara el paràmetre d'entrada
 params.greeting = 'greetings.csv'
 
 workflow {
@@ -633,7 +849,7 @@ workflow {
 Hi ha dues observacions importants a fer aquí:
 
 - La sintaxi per cridar el workflow importat és essencialment la mateixa que la sintaxi per cridar mòduls.
-- Tot el que està relacionat amb portar les entrades al workflow (parametre d'entrada i construcció del canal) ara es declara en aquest workflow pare.
+- Tot el que està relacionat amb portar les entrades al workflow (paràmetre d'entrada i construcció del canal) ara es declara en aquest workflow pare.
 
 !!! note "Nota"
 
@@ -645,7 +861,7 @@ Hi ha dues observacions importants a fer aquí:
     No obstant això, podeu anomenar el fitxer de workflow entrypoint d'una altra manera si ho preferiu.
     En aquest cas, assegureu-vos d'especificar el nom del fitxer de workflow a la vostra comanda `nextflow run`.
 
-### 2.7. Comprovar que el workflow s'executa
+### 3.3. Comprovar que el workflow s'executa
 
 Finalment tenim totes les peces que necessitem per verificar que el workflow composable funciona.
 Executem-lo!
@@ -662,7 +878,7 @@ Si heu fet tots els canvis correctament, això hauria de completar-se.
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `original-hello/main.nf` [friendly_wright] DSL2 - revision: 1ecd2d9c0a
 
@@ -686,7 +902,7 @@ Apreneu com injertar un workflow composable bàsic a l'estructura nf-core.
 
 ---
 
-## 3. Ajustar la lògica del workflow actualitzat al workflow de marcador de posició
+## 4. Ajustar la lògica del workflow actualitzat al workflow de marcador de posició
 
 Ara que hem verificat que el nostre workflow composable funciona correctament, tornem a l'estructura del pipeline nf-core que vam crear a la secció 1.
 Volem integrar el workflow composable que acabem de desenvolupar a l'estructura de plantilla nf-core, de manera que el resultat final hauria de semblar així.
@@ -715,7 +931,7 @@ include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pi
 workflow HELLO {
 
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_samplesheet // canal: samplesheet llegit des de --input
     main:
 
     ch_versions = channel.empty()
@@ -751,7 +967,7 @@ workflow HELLO {
 
 
     emit:
-    versions       = ch_versions                 // channel: [ path(versions.yml) ]
+    versions       = ch_versions                 // canal: [ path(versions.yml) ]
 
 }
 
@@ -780,7 +996,7 @@ Abordarem això en les següents etapes:
     Ignorarem el bloc de captura de versions per a aquesta primera passada.
     La Part 4 explica com funciona.
 
-### 3.1. Copiar els mòduls i configurar les importacions de mòduls
+### 4.1. Copiar els mòduls i configurar les importacions de mòduls
 
 Els quatre processos del nostre workflow Hello Nextflow s'emmagatzemen com a mòduls a `original-hello/modules/`.
 Necessitem copiar aquests mòduls a l'estructura del projecte nf-core (sota `core-hello/modules/local/`) i afegir declaracions d'importació al fitxer de workflow nf-core.
@@ -858,19 +1074,19 @@ Dues observacions més interessants aquí:
 - Hem adaptat el format de les declaracions d'importació per seguir la convenció d'estil nf-core.
 - Hem actualitzat els camins relatius als mòduls per reflectir que ara s'emmagatzemen a un nivell diferent de niament.
 
-### 3.2. Deixar la declaració `take` tal com està
+### 4.2. Deixar la declaració `take` tal com està
 
 El projecte nf-core té molta funcionalitat preconstruïda al voltant del concepte del samplesheet, que normalment és un fitxer CSV que conté dades en columnes.
 Com que això és essencialment el que és el nostre fitxer `greetings.csv`, mantindrem la declaració `take` actual tal com està, i simplement actualitzarem el nom del canal d'entrada al següent pas.
 
 ```groovy title="core-hello/workflows/hello.nf" linenums="21"
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_samplesheet // canal: samplesheet llegit des de --input
 ```
 
 El maneig de l'entrada es farà abans d'aquest workflow (no en aquest fitxer de codi).
 
-### 3.3. Afegir la lògica del workflow al bloc `main`
+### 4.3. Afegir la lògica del workflow al bloc `main`
 
 Ara que els nostres mòduls estan disponibles per al workflow, podem connectar la lògica del workflow al bloc `main`.
 
@@ -879,10 +1095,10 @@ Com a recordatori, aquest és el codi rellevant al workflow original, que no va 
 ```groovy title="original-hello/hello.nf" linenums="22"
     main:
 
-    // emet una salutacio
+    // emet una salutació
     sayHello(greeting_ch)
 
-    // converteix la salutacio a majuscules
+    // converteix la salutació a majúscules
     convertToUpper(sayHello.out)
 
     // recull totes les salutacions en un fitxer
@@ -904,16 +1120,16 @@ Aquest ordre té sentit perquè en un pipeline real, els processos emetrien info
     workflow HELLO {
 
         take:
-        ch_samplesheet // channel: samplesheet read in from --input
+        ch_samplesheet // canal: samplesheet llegit des de --input
 
         main:
 
-        ch_versions = Channel.empty()
+        ch_versions = channel.empty()
 
-        // emet una salutacio
+        // emet una salutació
         sayHello(greeting_ch)
 
-        // converteix la salutacio a majuscules
+        // converteix la salutació a majúscules
         convertToUpper(sayHello.out)
 
         // recull totes les salutacions en un fitxer
@@ -953,7 +1169,7 @@ Aquest ordre té sentit perquè en un pipeline real, els processos emetrien info
 
 
         emit:
-        versions       = ch_versions                 // channel: [ path(versions.yml) ]
+        versions       = ch_versions                 // canal: [ path(versions.yml) ]
 
     }
     ```
@@ -964,10 +1180,10 @@ Aquest ordre té sentit perquè en un pipeline real, els processos emetrien info
     workflow HELLO {
 
         take:
-        ch_samplesheet // channel: samplesheet read in from --input
+        ch_samplesheet // canal: samplesheet llegit des de --input
         main:
 
-        ch_versions = Channel.empty()
+        ch_versions = channel.empty()
 
         //
         // Collate and save software versions
@@ -1000,7 +1216,7 @@ Aquest ordre té sentit perquè en un pipeline real, els processos emetrien info
 
 
         emit:
-        versions       = ch_versions                 // channel: [ path(versions.yml) ]
+        versions       = ch_versions                 // canal: [ path(versions.yml) ]
 
     }
     ```
@@ -1012,20 +1228,20 @@ Això es veu genial, però encara necessitem actualitzar el nom del canal que es
 === "Després"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emet una salutacio (actualitzat per utilitzar la convencio nf-core per a samplesheets)
+        // emet una salutació (actualitzat per utilitzar la convenció nf-core per a samplesheets)
         sayHello(ch_samplesheet)
     ```
 
 === "Abans"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emet una salutacio
+        // emet una salutació
         sayHello(greeting_ch)
     ```
 
 Ara la lògica del workflow està correctament connectada.
 
-### 3.4. Actualitzar el bloc `emit`
+### 4.4. Actualitzar el bloc `emit`
 
 Finalment, necessitem actualitzar el bloc `emit` per incloure la declaració de les sortides finals del workflow.
 
@@ -1034,14 +1250,14 @@ Finalment, necessitem actualitzar el bloc `emit` per incloure la declaració de 
     ```groovy title="core-hello/workflows/hello.nf" linenums="69" hl_lines="2"
         emit:
         cowpy_hellos   = cowpy.out
-        versions       = ch_versions                 // channel: [ path(versions.yml) ]
+        versions       = ch_versions                 // canal: [ path(versions.yml) ]
     ```
 
 === "Abans"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="69"
         emit:
-        versions       = ch_versions                 // channel: [ path(versions.yml) ]
+        versions       = ch_versions                 // canal: [ path(versions.yml) ]
     ```
 
 Això conclou les modificacions que necessitem fer al workflow HELLO en si.
@@ -1057,16 +1273,16 @@ Apreneu com adaptar com es gestionen les entrades a l'estructura del pipeline nf
 
 ---
 
-## 4. Adaptar el maneig d'entrades
+## 5. Adaptar el maneig d'entrades
 
 Ara que hem integrat amb èxit la nostra lògica de workflow a l'estructura nf-core, necessitem abordar una peça més crítica: assegurar-nos que les nostres dades d'entrada es processen correctament.
 La plantilla nf-core ve amb un maneig d'entrades sofisticat dissenyat per a conjunts de dades genòmiques complexes, així que necessitem adaptar-lo per treballar amb el nostre fitxer `greetings.csv` més simple.
 
-### 4.1. Identificar on es gestionen les entrades
+### 5.1. Identificar on es gestionen les entrades
 
 El primer pas és esbrinar on es fa el maneig d'entrades.
 
-Potser recordeu que quan vam reescriure el workflow Hello Nextflow per ser composable, vam moure la declaració del parametre d'entrada un nivell cap amunt, al workflow entrypoint `main.nf`.
+Potser recordeu que quan vam reescriure el workflow Hello Nextflow per ser composable, vam moure la declaració del paràmetre d'entrada un nivell cap amunt, al workflow entrypoint `main.nf`.
 Així doncs, donem una ullada al workflow entrypoint `main.nf` de nivell superior que es va crear com a part de l'estructura del pipeline:
 
 ```groovy title="core-hello/main.nf" linenums="1"
@@ -1100,7 +1316,7 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_hell
 workflow CORE_HELLO {
 
     take:
-    samplesheet // channel: samplesheet read in from --input
+    samplesheet // canal: samplesheet llegit des de --input
 
     main:
 
@@ -1129,7 +1345,10 @@ workflow {
         params.monochrome_logs,
         args,
         params.outdir,
-        params.input
+        params.input,
+        params.help,
+        params.help_full,
+        params.show_hidden
     )
 
     //
@@ -1167,7 +1386,7 @@ Aquí hi ha un diagrama de com es relacionen entre ells:
 --8<-- "docs/en/docs/hello_nf-core/img/hello-nested-workflows.svg"
 </figure>
 
-Importantment, no podem trobar cap codi que construeixi un canal d'entrada a aquest nivell, només referències a un samplesheet proporcionat mitjançant el parametre `--input`.
+Importantment, no podem trobar cap codi que construeixi un canal d'entrada a aquest nivell, només referències a un samplesheet proporcionat mitjançant el paràmetre `--input`.
 
 Una mica d'investigació revela que el maneig d'entrades es fa pel subworkflow `PIPELINE_INITIALISATION`, apropiadament, que s'importa de `core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf`.
 
@@ -1221,7 +1440,7 @@ Aquesta és la factoria de canals que analitza el samplesheet i el passa en una 
 
 Aquest codi implica alguns passos d'anàlisi i validació que són altament específics del samplesheet d'exemple inclòs amb la plantilla del pipeline nf-core, que en el moment d'escriure això és molt específic del domini i no és adequat per al nostre projecte de pipeline simple.
 
-### 4.2. Substituir el codi del canal d'entrada de la plantilla
+### 5.2. Substituir el codi del canal d'entrada de la plantilla
 
 La bona notícia és que les necessitats del nostre pipeline són molt més simples, així que podem substituir tot això pel codi de construcció de canal que vam desenvolupar al workflow original Hello Nextflow.
 
@@ -1234,7 +1453,7 @@ Com a recordatori, així és com es veia la construcció del canal (tal com es v
         .map { line -> line[0] }
 ```
 
-Així que només necessitem connectar això al workflow d'inicialització, amb canvis menors: actualitzem el nom del canal de `greeting_ch` a `ch_samplesheet`, i el nom del parametre de `params.greeting` a `params.input` (vegeu la línia destacada).
+Així que només necessitem connectar això al workflow d'inicialització, amb canvis menors: actualitzem el nom del canal de `greeting_ch` a `ch_samplesheet`, i el nom del paràmetre de `params.greeting` a `params.input` (vegeu la línia destacada).
 
 === "Després"
 
@@ -1289,15 +1508,15 @@ Això completa els canvis que necessitem per fer que el processament d'entrades 
 En la seva forma actual, això no ens permetrà aprofitar les capacitats integrades d'nf-core per a la validació d'esquemes, però podem afegir-ho més endavant.
 Per ara, ens centrem en mantenir-ho tan simple com sigui possible per arribar a alguna cosa que puguem executar amb èxit amb dades de prova.
 
-### 4.3. Actualitzar el perfil de test
+### 5.3. Actualitzar el perfil de test
 
-Parlant de dades de prova i parametres, actualitzem el perfil de test per a aquest pipeline per utilitzar el mini-samplesheet `greetings.csv` en lloc del samplesheet d'exemple proporcionat a la plantilla.
+Parlant de dades de prova i paràmetres, actualitzem el perfil de test per a aquest pipeline per utilitzar el mini-samplesheet `greetings.csv` en lloc del samplesheet d'exemple proporcionat a la plantilla.
 
 Sota `core-hello/conf`, trobem dos perfils de test de plantilla: `test.config` i `test_full.config`, que estan destinats a provar una mostra de dades petita i una de mida completa.
 Donat el propòsit del nostre pipeline, realment no té sentit configurar un perfil de test de mida completa, així que sentiu-vos lliures d'ignorar o eliminar `test_full.config`.
-Ens centrarem en configurar `test.config` per executar-se al nostre fitxer `greetings.csv` amb alguns parametres per defecte.
+Ens centrarem en configurar `test.config` per executar-se al nostre fitxer `greetings.csv` amb alguns paràmetres per defecte.
 
-#### 4.3.1. Copiar el fitxer `greetings.csv`
+#### 5.3.1. Copiar el fitxer `greetings.csv`
 
 Primer necessitem copiar el fitxer `greetings.csv` a un lloc apropiat al nostre projecte de pipeline.
 Normalment els fitxers de prova petits s'emmagatzemen al directori `assets`, així que copiem el fitxer des del nostre directori de treball.
@@ -1308,7 +1527,7 @@ cp greetings.csv core-hello/assets/.
 
 Ara el fitxer `greetings.csv` està llest per ser utilitzat com a entrada de prova.
 
-#### 4.3.2. Actualitzar el fitxer `test.config`
+#### 5.3.2. Actualitzar el fitxer `test.config`
 
 Ara podem actualitzar el fitxer `test.config` de la següent manera:
 
@@ -1344,8 +1563,8 @@ Ara podem actualitzar el fitxer `test.config` de la següent manera:
 
 Punts clau:
 
-- **Utilitzant `${projectDir}`**: Aquesta és una variable implícita de Nextflow que apunta al directori on es troba l'script de workflow principal (l'arrel del pipeline). Utilitzar-la assegura que el camí funcioni independentment d'on s'executi el pipeline.
-- **Camins absoluts**: Utilitzant `${projectDir}`, creem un camí absolut, que és important per a dades de prova que s'envien amb el pipeline.
+- **Utilitzant `#!groovy ${projectDir}`**: Aquesta és una variable implícita de Nextflow que apunta al directori on es troba l'script de workflow principal (l'arrel del pipeline). Utilitzar-la assegura que el camí funcioni independentment d'on s'executi el pipeline.
+- **Camins absoluts**: Utilitzant `#!groovy ${projectDir}`, creem un camí absolut, que és important per a dades de prova que s'envien amb el pipeline.
 - **Ubicació de dades de prova**: Els pipelines nf-core normalment emmagatzemen dades de prova al directori `assets/` dins del repositori del pipeline per a fitxers de prova petits, o fan referència a conjunts de dades de prova externs per a fitxers més grans.
 
 I mentre hi som, ajustem els límits de recursos per defecte per assegurar que això s'executarà en màquines molt bàsiques (com les VMs mínimes a Github Codespaces):
@@ -1376,9 +1595,9 @@ I mentre hi som, ajustem els límits de recursos per defecte per assegurar que a
 
 Això completa les modificacions de codi que necessitem fer.
 
-### 4.4. Executar el pipeline amb el perfil de test
+### 5.4. Executar el pipeline amb el perfil de test
 
-Això ha estat molt, però finalment podem provar d'executar el pipeline!
+Ha estat molt, però finalment podem provar d'executar el pipeline!
 Tingueu en compte que hem d'afegir `--validate_params false` a la línia de comandes perquè encara no hem configurat la validació (això vindrà més endavant).
 
 ```bash
@@ -1390,7 +1609,7 @@ Si heu fet totes les modificacions correctament, hauria de completar-se.
 ??? success "Sortida de la comanda"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `core-hello/main.nf` [condescending_allen] DSL2 - revision: b9e9b3b8de
 
@@ -1428,7 +1647,7 @@ Si heu fet totes les modificacions correctament, hauria de completar-se.
 
 Com podeu veure, això va produir el resum típic d'nf-core a l'inici gràcies al subworkflow d'inicialització, i les línies per a cada mòdul ara mostren els noms complets PIPELINE:WORKFLOW:module.
 
-### 4.5. Trobar les sortides del pipeline
+### 5.5. Trobar les sortides del pipeline
 
 La pregunta ara és: on són les sortides del pipeline?
 I la resposta és força interessant: ara hi ha dos llocs diferents per buscar els resultats.
@@ -1453,7 +1672,7 @@ tree core-hello-results
         ├── hello_software_versions.yml
         ├── params_2025-11-21_04-47-13.json
         ├── params_2025-11-21_07-29-41.json
-        └── pipeline_dag_2025-11-21_04-47-18.html
+        ├── pipeline_dag_2025-11-21_04-47-18.html
         └── pipeline_dag_2025-11-21_07-29-37.html
 
     1 directory, 12 files
@@ -1487,10 +1706,10 @@ tree results
     ├── cowpy-COLLECTED-test-batch-output.txt
     ├── cowpy-COLLECTED-test-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
 
     0 directories, 10 files
     ```

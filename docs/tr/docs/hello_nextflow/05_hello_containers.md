@@ -72,7 +72,7 @@ nextflow run hello-containers.nf
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-containers.nf` [nice_escher] DSL2 - revision: d5dfdc9872
 
@@ -92,11 +92,11 @@ Daha önce olduğu gibi, çıktı dosyalarını `output` bloğunda belirtilen di
     ├── Bonjour-output.txt
     ├── COLLECTED-batch-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── batch-report.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Bu sizin için çalıştıysa, konteynerleri nasıl kullanacağınızı öğrenmeye hazırsınız.
@@ -356,7 +356,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
      ____________________
     / Hello,English,123  \
     | Bonjour,French,456 |
-    \ Holà,Spanish,789   /
+    \ Hola,Spanish,789   /
     --------------------
       \                                  ,+*^^*+___+++_
       \                           ,*^^^^              )
@@ -667,14 +667,14 @@ Artık yayımlanan çıktılar biraz daha düzenli olacak.
 Temiz bir sayfa açmak için önceki yayımlanan çıktıları silelim ve iş akışını `-resume` bayrağıyla çalıştıralım.
 
 ```bash
-rm -r hello_containers/
+rm -r results/hello_containers/
 nextflow run hello-containers.nf -resume
 ```
 
 ??? failure "Komut çıktısı (netlik için düzenlendi)"
 
     ```console hl_lines="10 13 20-21 26-27"
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-containers.nf` [lonely_woese] DSL2 - revision: abf1dccf7f
 
@@ -811,7 +811,7 @@ nextflow run hello-containers.nf -resume
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-containers.nf` [drunk_perlman] DSL2 - revision: abf1dccf7f
 
@@ -834,10 +834,10 @@ Her zamanki gibi iş akışı çıktılarını ilgili sonuçlar dizininde bulabi
     │   ├── Bonjour-output.txt
     │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
+    │   ├── Hola-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── UPPER-Hola-output.txt
     └── batch-report.txt
     ```
 
@@ -847,7 +847,7 @@ Son ASCII sanat çıktısı `results/hello_containers/` dizininde, `cowpy-COLLEC
 
     ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
     _________
-    / HOLà    \
+    / HOLA    \
     | HELLO   |
     \ BONJOUR /
     ---------

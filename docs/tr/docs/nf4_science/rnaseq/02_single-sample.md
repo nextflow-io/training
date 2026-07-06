@@ -185,7 +185,7 @@ Bir girdi parametresi bildirmemiz, uygun bir varsayılan değer sağlamak için 
 
 #### 1.1.1. Bir girdi parametresi bildirimi ekleyin
 
-`rnaseq.nf` dosyasında, `Pipeline parametreleri` bölümü altında, `Path` türünde `input` adlı bir parametre bildirin.
+`rnaseq.nf` dosyasında, `Pipeline parametreleri` bölümü altında, `Path` türünde `reads` adlı bir parametre bildirin.
 
 === "Sonra"
 
@@ -217,7 +217,7 @@ Varsayılan bir değer sağlamak için birden fazla seçenek vardır; burada bir
 Bir test profili, komut satırında girdi belirtmeden bir iş akışını denemek için uygun varsayılan değerler sağlar.
 Bu, Nextflow ekosisteminde yaygın bir kuraldır (daha fazla ayrıntı için [Hello Config](../../hello_nextflow/06_hello_config.md) bölümüne bakın).
 
-`nextflow.config` dosyasına, `input` parametresini test FASTQ dosyalarından birine ayarlayan bir `test` profili içeren bir `profiles` bloğu ekleyin.
+`nextflow.config` dosyasına, `reads` parametresini test FASTQ dosyalarından birine ayarlayan bir `test` profili içeren bir `profiles` bloğu ekleyin.
 
 === "Sonra"
 
@@ -477,7 +477,7 @@ nextflow run rnaseq.nf -profile test
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `rnaseq.nf` [mad_lorenz] DSL2 - revision: 5846a164d2
 
@@ -738,7 +738,7 @@ nextflow run rnaseq.nf -profile test
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `rnaseq.nf` [gloomy_becquerel] DSL2 - revision: bb11055736
 
@@ -1085,7 +1085,7 @@ nextflow run rnaseq.nf -profile test
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `rnaseq.nf` [elated_stonebraker] DSL2 - revision: e8e57d0cdd
 

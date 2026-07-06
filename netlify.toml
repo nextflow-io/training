@@ -1,5 +1,15 @@
-# ONLY USED FOR DEPLOYMENT PREVIEWS
-#  production deploys go from gh-pages and are pre-built using Mike, for versioning
+# ONLY USED FOR DEPLOY PREVIEWS.
+#
+# Production at https://training.nextflow.io is served by Netlify directly from
+# the `gh-pages` branch (configured in the Netlify UI, no build command). That
+# branch has no netlify.toml of its own, so Netlify just publishes its contents
+# as-is. The versioned, multilingual site under `gh-pages` is built and committed
+# by .github/workflows/docs.yml (which references mike for the version dropdown
+# but constructs the version directories itself rather than calling `mike deploy`).
+#
+# This file is therefore only consulted on PR deploy previews, which build from
+# a master-derived branch where this file IS present. Previews use docs.py
+# build-all to produce a single non-versioned multilingual snapshot.
 [build]
     command = "curl -LsSf https://astral.sh/uv/install.sh | sh && export PATH=$HOME/.local/bin:$PATH && uv run _scripts/docs.py build-all"
     publish = "site/"

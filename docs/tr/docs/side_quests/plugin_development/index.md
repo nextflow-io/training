@@ -21,7 +21,7 @@ Bu eğitim boyunca mevcut plugin'leri nasıl kullanacağınızı ve isteğe bağ
 
 **Ön koşullar**
 
-- Bir GitHub hesabı VEYA [burada](../../envsetup/02_local) açıklandığı şekilde yerel kurulum.
+- Bir GitHub hesabı VEYA [burada](../../envsetup/02_local.md) açıklandığı şekilde yerel kurulum.
 - [Hello Nextflow](../../hello_nextflow/index.md) kursunu veya eşdeğerini tamamlamış olmak.
 - Java 21 veya üzeri (eğitim ortamına dahildir; yalnızca 2-6. Bölümler için gereklidir).
 

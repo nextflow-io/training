@@ -234,7 +234,7 @@ Dovresti vedere "✓ Task completed!" stampato cinque volte (una per ogni attivi
 Decorated: *** Hello ***
 ✓ Task completed!
 ✓ Task completed!
-Decorated: *** Holà ***
+Decorated: *** Hola ***
 ✓ Task completed!
 ...
 Pipeline complete! 👋
@@ -310,7 +310,7 @@ nextflow run greet.nf -ansi-log false
 ??? example "Output"
 
     ```console
-    N E X T F L O W  ~  version 25.10.2
+    N E X T F L O W  ~  version 25.10.4
     Launching `greet.nf` [pensive_engelbart] DSL2 - revision: 85fefd90d0
     Pipeline is starting! 🚀
     Reversed: olleH
@@ -326,7 +326,7 @@ nextflow run greet.nf -ansi-log false
     [85/a6b3ad] Submitted process > SAY_HELLO (4)
     📊 Tasks completed so far: 1
     📊 Tasks completed so far: 2
-    Decorated: *** Holà ***
+    Decorated: *** Hola ***
     📊 Tasks completed so far: 3
     Decorated: *** Ciao ***
     [3c/be6686] Submitted process > SAY_HELLO (5)

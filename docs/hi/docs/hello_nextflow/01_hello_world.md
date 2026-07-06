@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/tOukLxWCHiA?si=F0t9LFYLjAWoyRXj&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=hi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/tOukLxWCHiA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -21,7 +21,7 @@ Hello Nextflow training course के इस पहले भाग में, �
 
 ---
 
-## 0. Warmup: Hello World उदाहरण को सीधे चलाएं
+## 0. वार्मअप: Hello World उदाहरण को सीधे चलाएं
 
 चलो इसे एक simple command के साथ demonstrate करते हैं जिसे हम सीधे terminal में चलाते हैं, यह दिखाने के लिए कि यह क्या करता है इससे पहले कि हम इसे Nextflow में wrap करें।
 
@@ -214,8 +214,8 @@ nextflow run hello-world.nf
 
 ??? success "कमांड आउटपुट"
 
-    ```console hl_lines="7"
-    N E X T F L O W   ~  version 25.10.2
+    ```console hl_lines="6"
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
 
@@ -244,7 +244,7 @@ nextflow run hello-world.nf
 प्रत्येक process call के लिए, Nextflow एक nested subdirectory बनाता है, जिसे unique बनाने के लिए hash के साथ named किया जाता है, जहाँ यह सभी आवश्यक inputs को stage करेगा (default रूप से symlinks का उपयोग करके), helper files लिखेगा, और logs और process के किसी भी outputs को लिखेगा।
 
 उस subdirectory का path console output में square brackets में truncated form में दिखाया जाता है।
-ऊपर दिखाए गए run के लिए हमें जो मिला उसे देखते हुए, sayHello process के लिए console log line `[65/7be2fa]` से शुरू होती है। यह निम्नलिखित directory path से correspond करता है: `work/65/7be2fad5e71e5f49998f795677fd68`
+ऊपर दिखाए गए run के लिए हमें जो मिला उसे देखते हुए, sayHello process के लिए console log line `[65/7be2fa]` से शुरू होती है। यह निम्नलिखित directory path से correspond करता है: `work/65/7be2fa7be2fad5e71e5f49998f795677fd68`
 
 चलो देखते हैं कि वहाँ क्या है।
 
@@ -486,7 +486,7 @@ nextflow run hello-world.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5
 
@@ -574,7 +574,7 @@ nextflow run hello-world.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
 
@@ -653,7 +653,7 @@ nextflow run hello-world.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
 
@@ -837,7 +837,7 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea
 
@@ -880,7 +880,7 @@ Note करो कि new execution ने `results` directory में publish
  * Pipeline parameters
  */
 params {
-    input: String = 'Holà mundo!'
+    input: String = 'Hola mundo!'
 }
 ```
 
@@ -890,7 +890,7 @@ Supported types में `String`, `Integer`, `Float`, `Boolean`, और `Path`
 
 !!! info "जानकारी"
 
-    पुराने workflows में, तुम देख सकते हो कि पूरा `params` block सिर्फ `input = 'Holà mundo!'` के रूप में लिखा गया है।
+    पुराने workflows में, तुम देख सकते हो कि पूरा `params` block सिर्फ `input = 'Hola mundo!'` के रूप में लिखा गया है।
 
 जैसे-जैसे तुम अपने pipeline में more parameters add करते हो, तुम्हें उन सभी को इस block में add करना चाहिए, चाहे तुम्हें उन्हें default value देने की need हो या नहीं।
 यह एक glance में सभी configurable parameters खोजना आसान बना देगा।
@@ -906,7 +906,7 @@ nextflow run hello-world.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582
 
@@ -923,7 +923,7 @@ nextflow run hello-world.nf
     - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
     - cause: you tried to assign a value to the class 'java.lang.String'
     @ line 24, column 12.
-          input: String = 'Holà mundo!'
+          input: String = 'Hola mundo!'
                   ^
 
     1 error
@@ -947,7 +947,7 @@ Output पहले जैसी same place में होगा, लेकि
 ??? abstract "फ़ाइल सामग्री"
 
     ```console title="results/hello_world/output.txt"
-    Holà mundo!
+    Hola mundo!
     ```
 
 Nextflow ने output बनाने के लिए greeting parameter की default value use की।
@@ -965,7 +965,7 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582
 
@@ -1026,7 +1026,7 @@ nextflow run hello-world.nf -resume
 ??? success "कमांड आउटपुट"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
 
@@ -1095,7 +1095,7 @@ Development process के दौरान, तुम typically अपनी dra
 
 #### 4.3.1. Deletion criteria determine करें
 
-यह determine करने के लिए कई [options](https://nextflow.io/docs/latest/reference/cli.html#clean) हैं कि क्या delete करना है।
+यह determine करने के लिए कई [options](https://www.nextflow.io/docs/latest/reference/cli.html#clean) हैं कि क्या delete करना है।
 
 यहाँ हम तुम्हें एक example दिखाते हैं जो given run से पहले के runs की सभी subdirectories delete करता है, इसके run name का उपयोग करके specified।
 
@@ -1169,7 +1169,7 @@ Nextflow process के minimum required components क्या हैं?
 - [ ] Input, output, और script blocks
 - [ ] केवल एक script block
 
-और जानें: [1.1.1. `process` definition](#111-process-definition)
+और जानें: [1.1.1. `process` definition](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1179,7 +1179,7 @@ Process में output block का purpose क्या है?
 - [x] Process से expected outputs declare करना
 - [ ] Environment variables define करना
 
-और जानें: [1.1.1. `process` definition](#111-process-definition)
+और जानें: [1.1.1. `process` definition](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1210,7 +1210,7 @@ work/a3/7be2fa.../
 - [ ] `.command.log`
 - [ ] `.command.out`
 
-और जानें: [1.2.2. `work` directory में output और logs खोजें](#122-work-directory-में-output-और-logs-खोजें)
+और जानें: [1.2.2. `work` directory में output और logs खोजें](#122-find-the-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -1220,7 +1220,7 @@ work/a3/7be2fa.../
 - [x] उन processes को skip करता है जो पहले से successfully complete हो चुके हैं
 - [ ] Workflow का backup बनाता है
 
-और जानें: [4.1. `-resume` के साथ workflow re-launch करें](#41--resume-के-साथ-workflow-re-launch-करें)
+और जानें: [4.1. `-resume` के साथ workflow re-launch करें](#41-re-launch-a-workflow-with--resume)
 </quiz>
 
 <quiz>
@@ -1230,7 +1230,7 @@ Workflow outputs publish करने के लिए default mode क्या
 - [ ] Files को output directory में move करना
 - [ ] Output directory में files compress करना
 
-और जानें: [2.3. Publish mode को copy पर सेट करें](#23-publish-mode-को-copy-पर-सेट-करें)
+और जानें: [2.3. Publish mode को copy पर सेट करें](#23-set-the-publish-mode-to-copy)
 </quiz>
 
 <quiz>
@@ -1240,7 +1240,7 @@ Command line से Nextflow workflow को parameter value कैसे pass �
 - [x] `--parameter value`
 - [ ] `-p parameter=value`
 
-और जानें: [3.2. User input capture करने के लिए command-line parameter set up करें](#32-user-input-capture-करने-के-लिए-command-line-parameter-set-up-करें)
+और जानें: [3.2. User input capture करने के लिए command-line parameter set up करें](#32-set-up-a-command-line-parameter-to-capture-user-input)
 </quiz>
 
 <quiz>

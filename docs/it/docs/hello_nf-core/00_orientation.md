@@ -6,27 +6,27 @@
 
 Per utilizzare l'ambiente preconfigurato che forniamo su GitHub Codespaces, cliccate sul pulsante "Open in GitHub Codespaces" qui sotto. Per altre opzioni, consultate [Opzioni di ambiente](../envsetup/index.md).
 
-Consigliamo di aprire l'ambiente di formazione in una nuova scheda o finestra del browser (utilizzi il clic destro, ctrl-clic o cmd-clic a seconda della sua dotazione) in modo da poter continuare a leggere mentre l'ambiente si carica.
-Dovrà tenere queste istruzioni aperte in parallelo per seguire il corso.
+Consigliamo di aprire l'ambiente di formazione in una nuova scheda o finestra del browser (utilizzate il clic destro, ctrl-clic o cmd-clic a seconda della vostra dotazione) in modo da poter continuare a leggere mentre l'ambiente si carica.
+Dovrete tenere queste istruzioni aperte in parallelo per seguire il corso.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
 ### Nozioni di base sull'ambiente
 
-Questo ambiente di formazione contiene tutto il software, il codice e i dati necessari per seguire il corso di formazione, quindi non dovrà installare nulla da sola/o.
+Questo ambiente di formazione contiene tutto il software, il codice e i dati necessari per seguire il corso di formazione, quindi non dovrete installare nulla da soli.
 
 Il codespace è configurato con un'interfaccia VSCode, che include un esploratore del filesystem, un editor di codice e una shell di terminale.
 Tutte le istruzioni fornite durante il corso (ad es. 'aprite il file', 'modificate il codice' o 'eseguite questo comando') si riferiscono a queste tre parti dell'interfaccia VSCode, salvo diversa indicazione.
 
-Se sta seguendo questo corso autonomamente, Vi preghiamo di familiarizzare con le [nozioni di base sull'ambiente](../envsetup/01_setup.md) per ulteriori dettagli.
+Se state seguendo questo corso autonomamente, vi preghiamo di familiarizzare con le [nozioni di base sull'ambiente](../envsetup/01_setup.md) per ulteriori dettagli.
 
 ### Requisiti di versione
 
 Questa formazione è progettata per **Nextflow 25.10.2** o successivo **con il parser di sintassi v2 DISABILITATO**.
 
-#### Se sta utilizzando il nostro ambiente di formazione:
+#### Se state utilizzando il nostro ambiente di formazione:
 
-DEVE eseguire il seguente comando prima di procedere oltre:
+DOVETE eseguire il seguente comando prima di procedere oltre:
 
 ```bash
 export NXF_SYNTAX_PARSER=v1
@@ -36,7 +36,7 @@ export NXF_SYNTAX_PARSER=v1
 
 Assicuratevi di utilizzare le impostazioni corrette come documentato [qui](../info/nxf_versions.md).
 
-La formazione richiede inoltre **nf-core tools 3.4.1**.
+La formazione richiede inoltre **nf-core tools 3.5.2**.
 Se utilizzate una versione diversa degli strumenti nf-core, potreste avere difficoltà a seguire.
 
 Potete verificare quale versione è installata nel vostro ambiente utilizzando il comando `nf-core --version`.
@@ -63,7 +63,7 @@ cd hello-nf-core/
     cd /workspaces/training/hello-nf-core
     ```
 
-Ora diamo un'occhiata al contenuto di questa directory.
+Ora esplorate il contenuto di questa directory.
 
 ### Esplorare i materiali forniti
 
@@ -96,7 +96,7 @@ tree . -L 2
         └── core-hello-start
     ```
 
-Clicchi sulla casella colorata per espandere la sezione e visualizzarne il contenuto.
+Cliccate sulla casella colorata per espandere la sezione e visualizzarne il contenuto.
 Utilizziamo sezioni espandibili come questa per includere l'output previsto dei comandi in modo conciso.
 
 - **Il file `greetings.csv`** è un CSV contenente alcuni dati colonnari minimi che utilizziamo a scopo di test.
@@ -104,7 +104,7 @@ Utilizziamo sezioni espandibili come questa per includere l'output previsto dei 
 - **La directory `original-hello`** contiene una copia del codice sorgente prodotto lavorando attraverso la serie completa di formazione Hello Nextflow (con Docker abilitato).
 
 - **La directory `solutions`** contiene gli script del flusso di lavoro completati che risultano da ogni fase del corso.
-  Sono destinati a essere utilizzati come riferimento per verificare il suo lavoro e risolvere eventuali problemi.
+  Sono destinati a essere utilizzati come riferimento per verificare il vostro lavoro e risolvere eventuali problemi.
 
 ## Lista di controllo della preparazione
 

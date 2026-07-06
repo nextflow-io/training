@@ -67,7 +67,7 @@ nextflow run hello-workflow.nf
 ??? success "Sortida de la comanda"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-workflow.nf` [admiring_lamarr] DSL2 - revision: 4d4053520d
 
@@ -84,7 +84,7 @@ Per a aquest capítol, és sota `results/hello_workflow/`.
     results/hello_workflow
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    └── Holà-output.txt
+    └── Hola-output.txt
     ```
 
 Si això us ha funcionat, esteu preparats per aprendre com muntar un workflow de múltiples passos.
@@ -113,7 +113,7 @@ Per fer la conversió de les salutacions a majúscules, utilitzarem una eina UNI
 tr '[a-z]' '[A-Z]'
 ```
 
-Aquesta és una substitució de text molt naïf que no té en compte les lletres accentuades, així que per exemple 'Holà' es convertirà en 'HOLà', però farà una feina prou bona per demostrar els conceptes de Nextflow i això és el que importa.
+Aquesta és una substitució de text molt naïf que no té en compte les lletres accentuades, però farà una feina prou bona per demostrar els conceptes de Nextflow i això és el que importa.
 
 Per provar-ho, podem executar la comanda `echo 'Hello World'` i canalitzar la seva sortida a la comanda `tr`:
 
@@ -311,7 +311,7 @@ nextflow run hello-workflow.nf -resume
 ??? success "Sortida de la comanda"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-workflow.nf` [high_cantor] DSL2 - revision: d746983511
 
@@ -330,10 +330,10 @@ Trobareu les sortides al directori `results/hello_workflow` tal com s'ha estable
     results/hello_workflow/
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Això és convenient! Però encara val la pena donar una ullada dins del directori de treball d'una de les crides al segon procés.
@@ -342,8 +342,8 @@ Això és convenient! Però encara val la pena donar una ullada dins del directo
 
     ```console
     work/e0/ecf81b4cacc648b9b994218d5b29d7/
-    ├── Holà-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Holà-output.txt
-    └── UPPER-Holà-output.txt
+    ├── Hola-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Hola-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Observeu que hi ha dos fitxers `*-output`: la sortida del primer procés així com la sortida del segon.
@@ -391,8 +391,8 @@ Executeu el següent al vostre terminal:
 ```bash
 echo 'Hello' | tr '[a-z]' '[A-Z]' > UPPER-Hello-output.txt
 echo 'Bonjour' | tr '[a-z]' '[A-Z]' > UPPER-Bonjour-output.txt
-echo 'Holà' | tr '[a-z]' '[A-Z]' > UPPER-Holà-output.txt
-cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Holà-output.txt > COLLECTED-output.txt
+echo 'Hola' | tr '[a-z]' '[A-Z]' > UPPER-Hola-output.txt
+cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Hola-output.txt > COLLECTED-output.txt
 ```
 
 La sortida és un fitxer de text anomenat `COLLECTED-output.txt` que conté les versions en majúscules de les salutacions originals.
@@ -402,7 +402,7 @@ La sortida és un fitxer de text anomenat `COLLECTED-output.txt` que conté les 
     ```console title="COLLECTED-output.txt"
     HELLO
     BONJOUR
-    HOLà
+    HOLA
     ```
 
 Aquest és el resultat que volem aconseguir amb el nostre workflow.
@@ -500,7 +500,7 @@ En teoria això hauria de gestionar qualsevol nombre arbitrari de fitxers d'entr
 
     Algunes eines de línia de comandes requereixen proporcionar un argument (com `-input`) per a cada fitxer d'entrada.
     En aquest cas, hauríem de fer una mica de feina extra per compondre la comanda.
-    Podeu veure un exemple d'això al curs de formació [Nextflow for Genomics](../../nf4_science/genomics/).
+    Podeu veure un exemple d'això al curs de formació [Nextflow for Genomics](../nf4_science/genomics/index.md).
 
 ### 2.3. Afegiu el pas de recollida al workflow
 
@@ -536,7 +536,68 @@ Al bloc workflow, feu el següent canvi de codi:
 
 Això connecta la sortida de `convertToUpper()` a l'entrada de `collectGreetings()`.
 
-#### 2.3.2. Executeu el workflow amb `-resume`
+#### 2.3.2. Actualitzeu la secció `publish:`
+
+Al bloc `workflow`, feu el següent canvi de codi:
+
+=== "Després"
+
+    ```groovy title="hello-workflow.nf" linenums="76" hl_lines="4"
+        publish:
+        first_output = sayHello.out
+        uppercased = convertToUpper.out
+        collected = collectGreetings.out
+    }
+    ```
+
+=== "Abans"
+
+    ```groovy title="hello-workflow.nf" linenums="76"
+        publish:
+        first_output = sayHello.out
+        uppercased = convertToUpper.out
+    }
+    ```
+
+#### 2.3.3. Actualitzeu el bloc `output`
+
+Al bloc `output`, feu el següent canvi de codi:
+
+=== "Després"
+
+    ```groovy title="hello-workflow.nf" linenums="82" hl_lines="10-13"
+    output {
+        first_output {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+        uppercased {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+        collected {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+    }
+    ```
+
+=== "Abans"
+
+    ```groovy title="hello-workflow.nf" linenums="82"
+    output {
+        first_output {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+        uppercased {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+    }
+    ```
+
+#### 2.3.4. Executeu el workflow amb `-resume`
 
 Provem-ho.
 
@@ -547,7 +608,7 @@ nextflow run hello-workflow.nf -resume
 ??? success "Sortida de la comanda"
 
     ```console hl_lines="8"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-workflow.nf` [mad_gilbert] DSL2 - revision: 6acfd5e28d
 
@@ -567,7 +628,7 @@ Ara doneu una ullada al contingut del fitxer de sortida final.
 ??? abstract "Contingut del fitxer"
 
     ```console title="results/COLLECTED-output.txt"
-    Holà
+    Hola
     ```
 
 Oh no. El pas de recollida es va executar individualment en cada salutació, que NO és el que volíem.
@@ -646,7 +707,7 @@ nextflow run hello-workflow.nf -resume
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-workflow.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
@@ -655,8 +716,8 @@ nextflow run hello-workflow.nf -resume
     [1e/83586c] collectGreetings   | 1 of 1 ✔
     Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
     Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
-    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
-    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
+    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt
+    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt]
     ```
 
 S'executa amb èxit, encara que la sortida del registre pot semblar una mica més desordenada que això (l'hem netejat per llegibilitat).
@@ -680,7 +741,7 @@ Finalment, podeu donar una ullada al contingut del fitxer de sortida per satisfe
     ```console title="results/COLLECTED-output.txt"
     BONJOUR
     HELLO
-    HOLà
+    HOLA
     ```
 
 Aquesta vegada tenim les tres salutacions al fitxer de sortida final. Èxit!
@@ -879,7 +940,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-workflow.nf` [confident_rutherford] DSL2 - revision: bc58af409c
 
@@ -896,7 +957,7 @@ S'executa amb èxit i produeix la sortida desitjada:
     ```console title="results/COLLECTED-trio-output.txt"
     HELLO
     BONJOUR
-    HOLà
+    HOLA
     ```
 
 Ara, sempre que especifiquem el paràmetre adequadament, execucions posteriors sobre altres lots d'entrades no sobreescriuran resultats anteriors.
@@ -1095,7 +1156,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 ??? success "Sortida de la comanda"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-workflow.nf` [ecstatic_wilson] DSL2 - revision: c80285f8c8
 

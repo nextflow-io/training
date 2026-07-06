@@ -447,6 +447,6 @@ profiles {
 다음 단계:
 
 - 피드백을 제공하기 위해 과정 설문조사를 작성하십시오
-- 워크플로우 개발에 대해 더 자세히 알아보려면 [Hello Nextflow](../hello_nextflow/index.md)를 확인하십시오
-- nf-core 도구에 대해 더 깊이 이해하려면 [Hello nf-core](../hello_nf-core/index.md)를 살펴보십시오
-- [교육 컬렉션](../training_collections/index.md)에서 다른 과정을 찾아보십시오
+- 워크플로우 개발에 대해 더 자세히 알아보려면 [Hello Nextflow](../../hello_nextflow/index.md)를 확인하십시오
+- nf-core 도구에 대해 더 깊이 이해하려면 [Hello nf-core](../../hello_nf-core/index.md)를 살펴보십시오
+- [교육 컬렉션](../../training_collections/index.md)에서 다른 과정을 찾아보십시오

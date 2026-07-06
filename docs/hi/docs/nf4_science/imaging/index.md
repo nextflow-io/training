@@ -35,4 +35,4 @@ hide:
 - command line के साथ अनुभव
 - इमेजिंग फ़ाइल formats (TIFF images, tabular data) से बुनियादी परिचितता
 
-तकनीकी आवश्यकताओं और वातावरण सेटअप के लिए, [Environment Setup](../../envsetup/) मिनी-पाठ्यक्रम देखें।
+तकनीकी आवश्यकताओं और वातावरण सेटअप के लिए, [Environment Setup](../../envsetup/index.md) मिनी-पाठ्यक्रम देखें।

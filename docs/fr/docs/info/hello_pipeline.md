@@ -43,7 +43,7 @@ Les résultats sont publiés dans un répertoire appelé `results/`, et la sorti
   _________
 / BONJOUR \
 | HELLO   |
-\ HOLà    /
+\ HOLA    /
 ---------
   \                                  ,+*^^*+___+++_
   \                           ,*^^^^              )

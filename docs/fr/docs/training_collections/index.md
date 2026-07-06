@@ -15,9 +15,9 @@ Cette section contient des collections organisées de modules de formation appel
 Chaque collection a des prérequis spécifiques documentés sur sa page d'index. Cependant, la plupart des collections supposent :
 
 - Une expérience avec la ligne de commande
-- Les concepts fondamentaux de Nextflow et les outils couverts dans le cours de formation pour débutants [Hello Nextflow](../../hello_nextflow/)
+- Les concepts fondamentaux de Nextflow et les outils couverts dans le cours de formation pour débutants [Hello Nextflow](../hello_nextflow/index.md)
 
-Pour les exigences techniques et la configuration de l'environnement, consultez le mini-cours [Configuration de l'Environnement](../../envsetup/).
+Pour les exigences techniques et la configuration de l'environnement, consultez le mini-cours [Configuration de l'Environnement](../envsetup/index.md).
 
 ## Collections disponibles
 

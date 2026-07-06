@@ -2,55 +2,57 @@
 title: Side Quests
 hide:
   - toc
+page_type: index_page
+index_type: course
+additional_information:
+  technical_requirements: true
+  learning_objectives:
+    - Skonfiguruj produktywne środowisko programistyczne Nextflow'a
+    - Stosuj zaawansowane wzorce skryptowe do złożonych transformacji danych
+    - Obsługuj i propaguj metadane przez wieloetapowe workflow'y
+    - Dziel i grupuj kanały danych do przetwarzania równoległego i szeregowego
+    - Testuj workflow'y Nextflow'a przy użyciu nf-test
+    - Twórz złożone pipeline'y z wielokrotnie używanych, nazwanych modułów workflow'ów
+    - Efektywnie pracuj z plikami przy użyciu operacji na plikach w Nextflow
+    - Systematycznie debuguj typowe problemy z workflow'ami
+    - Używaj i twórz wtyczki do Nextflow'a
+  audience_prerequisites:
+    - "**Odbiorcy:** Ten zbiór jest przeznaczony dla osób, które ukończyły kurs dla początkujących Hello Nextflow i chcą zgłębić konkretne tematy."
+    - "**Umiejętności:** Zakładamy doświadczenie z linią poleceń oraz znajomość podstawowych koncepcji i narzędzi Nextflow'a."
+    - "**Kursy:** Wymagane ukończenie kursu [Hello Nextflow](../hello_nextflow/index.md) lub równoważnego."
 ---
 
 # Side Quests
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-To jest zbiór samodzielnych mini-kursów szkoleniowych, które zgłębiają konkretne tematy. Możesz przejść przez nie w dowolnej kolejności.
+**Side Quests to samodzielne mini-kursy szkoleniowe, które zgłębiają konkretne tematy związane z Nextflow'em.**
 
-Zaczynajmy! Kliknij poniższy przycisk "Open in GitHub Codespaces", aby uruchomić środowisko szkoleniowe (najlepiej w osobnej karcie), a następnie czytaj dalej, podczas gdy się ładuje.
+Każdy side quest można przejść niezależnie, w dowolnej kolejności, zgodnie z własnymi zainteresowaniami i potrzebami.
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+<!-- additional_information -->
 
-## Wymagania wstępne
+## Przegląd kursu
 
-Konkretne wymagania wstępne każdego mini-kursu są różne i zostały udokumentowane na odpowiednich stronach.
-Niemniej jednak wszystkie zakładają pewną minimalną znajomość następujących zagadnień:
+Jeśli po raz pierwszy zagłębiasz się w Side Quests, zacznij od strony [Orientacja](./orientation.md), gdzie znajdziesz omówienie środowiska szkoleniowego i materiałów.
 
-- Doświadczenie z linią poleceń
-- Podstawowe koncepcje i narzędzia Nextflow'a omówione w kursie szkoleniowym dla początkujących [Hello Nextflow](../../hello_nextflow/).
+### Side Quests
 
-Wymagania techniczne i konfigurację środowiska znajdziesz w mini-kursie [Konfiguracja środowiska](../../envsetup/).
+| Side Quest                                                             | Opis                                                                        | Szacowany czas |
+| ---------------------------------------------------------------------- | --------------------------------------------------------------------------- | -------------- |
+| [Środowisko programistyczne](./dev_environment/index.md)               | Skonfiguruj produktywne lokalne środowisko programistyczne Nextflow'a       | 45 min         |
+| [Podstawowe wzorce skryptowe](./essential_scripting_patterns/index.md) | Zaawansowane techniki skryptowe dla typowych wyzwań w workflow'ach          | 90 min         |
+| [Przetwarzanie plików wejściowych](./working_with_files/index.md)      | Obsługa plików, operacje na ścieżkach i organizacja wyników                 | 45 min         |
+| [Metadane i mapy metadanych](./metadata/index.md)                      | Używanie map metadanych do śledzenia i propagowania informacji o próbkach   | 45 min         |
+| [Dzielenie i grupowanie](./splitting_and_grouping/index.md)            | Techniki dzielenia i ponownego grupowania kanałów danych                    | 45 min         |
+| [Testowanie za pomocą nf-test](./nf_test/index.md)                     | Pisanie i uruchamianie testów dla workflow'ów Nextflow'a                    | 1 godzina      |
+| [Rozwiązywanie problemów z workflow'ami](./debugging/index.md)         | Identyfikowanie i naprawianie typowych błędów w workflow'ach                | 1 godzina      |
+| [Workflow'y złożone z workflow'ów](./workflows_of_workflows/index.md)  | Tworzenie złożonych pipeline'ów z wielokrotnie używanych, nazwanych modułów | 30 min         |
+| [Tworzenie wtyczek](./plugin_development/index.md)                     | Używanie i tworzenie wtyczek do Nextflow'a                                  | 3 godziny      |
 
-**Jeśli po raz pierwszy zagłębiasz się w Side Quests, upewnij się, że najpierw zapoznasz się ze stroną [Orientacja](./orientation.md)!**
+[Rozpocznij :material-arrow-right:](orientation.md){ .md-button .md-button--primary }
 
-W przeciwnym razie wybierz side quest z poniższej tabeli.
+<!-- Clearfix for float -->
+<div style="content: ''; clear: both; display: table;"></div>
 
-## Side Quests
-
-| Side Quest                                                                 | Szacowany czas nauczania |
-| -------------------------------------------------------------------------- | ------------------------ |
-| [Przewodnik po środowisku programistycznym Nextflow'a](./dev_environment/) | 45 min                   |
-| [Podstawowe wzorce skryptowe Nextflow'a](./essential_scripting_patterns/)  | 90 min                   |
-| [Metadane w workflow'ach](./metadata/)                                     | 45 min                   |
-| [Dzielenie i grupowanie](./splitting_and_grouping/)                        | 45 min                   |
-| [Testowanie za pomocą nf-test](./nf_test/)                                 | 1 godzina                |
-| [Workflow'y złożone z workflow'ów](./workflows_of_workflows/)              | 30 min                   |
-| [Praca z plikami](./working_with_files/)                                   | 45 min                   |
-| [Debugowanie workflow'ów](./debugging/)                                    | 1 godzina                |
-
-## Kursy wieloczęściowe
-
-!!! exercise "Tworzenie wtyczek"
-
-    !!! tip inline end ""
-
-        :material-run-fast: Naucz się używać i tworzyć wtyczki do Nextflow'a.
-
-    Ten kurs omawia korzystanie z istniejących wtyczek w Twoich workflow'ach oraz budowanie własnych od podstaw — w tym niestandardowe funkcje, monitorowanie workflow'ów, konfigurację i dystrybucję.
-
-    [Rozpocznij szkolenie z tworzenia wtyczek :material-arrow-right:](plugin_development/){ .md-button .md-button--primary }
-
-Daj nam znać, jakie inne dziedziny i przypadki użycia chciałbyś tutaj zobaczyć, publikując wpis w [sekcji Training](https://community.seqera.io/c/training/) na forum społeczności.
+Daj nam znać, jakie inne tematy chciałbyś tutaj zobaczyć, publikując wpis w [sekcji Training](https://community.seqera.io/c/training/) na forum społeczności.

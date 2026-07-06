@@ -2,9 +2,9 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-En aquesta primera part del curs de formació Hello nf-core, us mostrem com trobar i provar un pipeline nf-core, entendre com s'organitza el codi i reconèixer com difereix del codi Nextflow simple tal com es mostra a [Hello Nextflow](../hello_nextflow/index.md).
+En aquesta primera part del curs de formació Hello nf-core, us mostrem com trobar i provar un pipeline nf-core, configurar i personalitzar la seva execució per a les vostres necessitats, i entendre com la validació d'entrada protegeix contra errors comuns.
 
-Utilitzarem un pipeline anomenat nf-core/demo que és mantingut pel projecte nf-core com a part del seu inventari de pipelines per demostrar l'estructura del codi i les operacions de les eines.
+Utilitzarem un pipeline anomenat nf-core/demo que és mantingut pel projecte nf-core com a part del seu inventari de pipelines per a finalitats de demostració i formació.
 
 Assegureu-vos que el vostre directori de treball està configurat a `hello-nf-core/` tal com s'indica a la pàgina [Primers passos](./00_orientation.md).
 
@@ -70,6 +70,8 @@ Recuperem el codi perquè puguem examinar aquesta estructura.
 Un cop hem determinat que el pipeline sembla adequat per als nostres propòsits, provem-lo.
 Afortunadament, Nextflow facilita la recuperació de pipelines des de repositoris correctament formatats sense haver de descarregar res manualment.
 
+#### 1.2.1. Utilitzar `nextflow pull`
+
 Tornem al terminal i executem el següent:
 
 ```bash
@@ -88,6 +90,8 @@ Nextflow fa un `pull` del codi del pipeline, és a dir, descarrega el repositori
 Per ser clars, podeu fer això amb qualsevol pipeline Nextflow que estigui configurat adequadament a GitHub, no només pipelines nf-core.
 No obstant això, nf-core és la col·lecció de codi obert més gran de pipelines Nextflow.
 
+#### 1.2.2. Utilitzar `nextflow list`
+
 Podeu fer que Nextflow us doni una llista dels pipelines que heu recuperat d'aquesta manera:
 
 ```bash
@@ -99,6 +103,10 @@ nextflow list
     ```console
     nf-core/demo
     ```
+
+Podeu provar de recuperar alguns altres pipelines per veure com apareixen llistats quan en teniu més d'un.
+
+#### 1.2.3. Trobar els vostres pipelines a `$NXF_HOME/assets/`
 
 Notareu que els fitxers no estan al vostre directori de treball actual.
 Per defecte, Nextflow els desa a `$NXF_HOME/assets`.
@@ -121,30 +129,71 @@ tree -L 2 $NXF_HOME/assets/
 
 Nextflow manté el codi font descarregat intencionadament 'fora del camí' amb el principi que aquests pipelines s'haurien d'utilitzar més com a biblioteques que com a codi amb el qual interactuaríeu directament.
 
-No obstant això, per als propòsits d'aquesta formació, volem poder explorar i veure què hi ha allà.
-Així que per facilitar-ho, creem un enllaç simbòlic a aquesta ubicació des del nostre directori de treball actual.
+#### 1.2.4. Crear un enllaç simbòlic per accedir fàcilment al codi font
+
+No examinarem el codi en detall, però fem-hi una ullada ràpida per tenir una idea de com és l'organització general.
+
+Per facilitar la navegació pel codi font del pipeline, creeu un enllaç simbòlic al directori d'assets:
 
 ```bash
 ln -s $NXF_HOME/assets pipelines
 ```
 
-Això crea una drecera que facilita l'exploració del codi que acabem de descarregar.
+Això crea una drecera perquè pugueu explorar el codi amb `tree -L 2 pipelines` o obrir fitxers directament.
+
+#### 1.2.5. Visió general de l'organització del codi
+
+Podeu utilitzar `tree` o l'explorador de fitxers per trobar i obrir el directori `nf-core/demo`.
 
 ```bash
-tree -L 2 pipelines
+tree -L 1 pipelines/nf-core/demo
 ```
 
-```console title="Directory contents"
-pipelines
-└── nf-core
-    └── demo
+??? abstract "Contingut del directori"
 
-2 directories, 0 files
-```
+    ```console
+    pipelines/nf-core/demo
+    ├── assets
+    ├── CHANGELOG.md
+    ├── CITATIONS.md
+    ├── CODE_OF_CONDUCT.md
+    ├── conf
+    ├── docs
+    ├── LICENSE
+    ├── main.nf
+    ├── modules
+    ├── modules.json
+    ├── nextflow.config
+    ├── nextflow_schema.json
+    ├── nf-test.config
+    ├── README.md
+    ├── ro-crate-metadata.json
+    ├── subworkflows
+    ├── tests
+    ├── tower.yml
+    └── workflows
+    ```
 
-Ara podem mirar més fàcilment el codi font segons sigui necessari.
+Com podeu veure, hi ha molt en marxa allà, però la majoria no us hauria de preocupar.
 
-Però primer, provem d'executar el nostre primer pipeline nf-core!
+Breument, observem que al nivell superior podeu trobar un fitxer README amb informació resumida, així com fitxers accessoris que resumeixen informació del projecte com ara llicència, directrius de contribució, citació i codi de conducta.
+La documentació detallada del pipeline es troba al directori `docs`.
+Tot aquest contingut s'utilitza per generar les pàgines web al lloc web nf-core de manera programàtica, de manera que sempre estan actualitzades amb el codi.
+
+Per a la resta, podem distingir tres grups funcionals de fitxers de codi:
+
+1. Components del codi del pipeline (`main.nf`, `workflows`, `subworkflows`, `modules`)
+2. Configuració del pipeline
+3. Paràmetres del pipeline / entrades i validació
+
+No repassarem els components del codi del pipeline en aquesta part del curs, però sí que tractarem elements de configuració i validació que probablement us seran rellevants com a usuaris finals de pipelines nf-core.
+
+!!! tip "Consell"
+
+    També podeu navegar pel codi font de qualsevol pipeline nf-core a GitHub, per exemple [github.com/nf-core/demo](https://github.com/nf-core/demo).
+    Tots els pipelines nf-core segueixen el mateix disseny de directoris, de manera que un cop coneixeu l'estructura, podeu trobar fitxers de configuració, mòduls i workflows per a qualsevol pipeline de la mateixa manera.
+
+Però de moment, anem a executar el pipeline!
 
 ### Conclusió
 
@@ -170,7 +219,14 @@ Aquest és un conjunt mínim de paràmetres de configuració perquè el pipeline
 ### 2.1. Examinar el perfil de prova
 
 És una bona pràctica comprovar què especifica el perfil de prova d'un pipeline abans d'executar-lo.
-El perfil `test` per a `nf-core/demo` es troba al fitxer de configuració `conf/test.config` i es mostra a continuació.
+El perfil `test` per a `nf-core/demo` es troba al fitxer de configuració `conf/test.config`.
+Podeu trobar-lo localment dins del codi font del pipeline que `nextflow pull` ha descarregat:
+
+```bash
+code $NXF_HOME/assets/nf-core/demo/conf/test.config
+```
+
+Aquí teniu el contingut d'aquest fitxer:
 
 ```groovy title="conf/test.config" linenums="1" hl_lines="8 26"
 /*
@@ -187,7 +243,7 @@ El perfil `test` per a `nf-core/demo` es troba al fitxer de configuració `conf/
 
 process {
     resourceLimits = [
-        cpus: 4,
+        cpus: 2,
         memory: '4.GB',
         time: '1.h'
     ]
@@ -197,7 +253,7 @@ params {
     config_profile_name        = 'Test profile'
     config_profile_description = 'Minimal test dataset to check pipeline function'
 
-    // Input data
+    // Dades d'entrada
     input  = 'https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
 
 }
@@ -206,7 +262,7 @@ params {
 Notareu immediatament que el bloc de comentaris a la part superior inclou un exemple d'ús que mostra com executar el pipeline amb aquest perfil de prova.
 
 ```groovy title="conf/test.config" linenums="7"
-Use as follows:
+    Use as follows:
         nextflow run nf-core/demo -profile test,<docker/singularity> --outdir <OUTDIR>
 ```
 
@@ -249,9 +305,9 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
 ??? success "Sortida de la comanda"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
-    Launching `https://github.com/nf-core/demo` [magical_pauling] DSL2 - revision: db7f526ce1 [master]
+    Launching `https://github.com/nf-core/demo` [magical_pauling] DSL2 - revision: 45904cb9d1 [master]
 
 
     ------------------------------------------------------
@@ -260,7 +316,7 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
       |\ | |__  __ /  ` /  \ |__) |__         }  {
       | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                             `._,._,'
-      nf-core/demo 1.0.2
+      nf-core/demo 1.1.0
     ------------------------------------------------------
     Input/output options
       input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
@@ -312,19 +368,38 @@ Hi ha una capçalera que inclou un resum de la versió del pipeline, entrades i 
 
     La vostra sortida mostrarà diferents marques de temps, noms d'execució i camins de fitxer, però l'estructura general i l'execució del procés haurien de ser similars.
 
+Fixeu-vos en la línia prop de la part superior de la sortida:
+
+```console
+Launching `https://github.com/nf-core/demo` [magical_pauling] DSL2 - revision: 45904cb9d1 [master]
+```
+
+Això us indica quina revisió del pipeline s'ha utilitzat.
+Com que no hem especificat cap versió, Nextflow ha utilitzat el darrer commit a `master`.
+Per a execucions reproduïbles, hauríeu de fixar una versió específica amb el flag `-r`:
+
+```bash
+nextflow run nf-core/demo -r 1.1.0 -profile docker,test --outdir demo-results
+```
+
+Això garanteix que s'utilitzi sempre el mateix codi del pipeline, independentment de nous commits o versions.
+En aquesta formació ometem `-r` per simplicitat, però en producció sempre hauríeu d'especificar-lo.
+
 Passant a la sortida d'execució, donem una ullada a les línies que ens diuen quins processos s'han executat:
 
 ```console
-    [ff/a6976b] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
-    [39/731ab7] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
-    [7c/78d96e] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+executor >  local (7)
+[ff/a6976b] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
+[39/731ab7] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
+[7c/78d96e] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+-[nf-core/demo] Pipeline completed successfully-
 ```
 
 Això ens diu que s'han executat tres processos, corresponents a les tres eines mostrades a la pàgina de documentació del pipeline al lloc web nf-core: FASTQC, SEQTK_TRIM i MULTIQC.
 
 Els noms complets dels processos tal com es mostren aquí, com ara `NFCORE_DEMO:DEMO:MULTIQC`, són més llargs del que potser heu vist al material introductori Hello Nextflow.
 Aquests inclouen els noms dels seus workflows pare i reflecteixen la modularitat del codi del pipeline.
-Entrarem en més detall sobre això d'aquí a una estona.
+Entrarem en més detall sobre això a la Part 2 d'aquest curs.
 
 ### 2.3. Examinar les sortides del pipeline
 
@@ -360,7 +435,7 @@ tree -L 2 demo-results
     ```
 
 Això pot semblar molt.
-Per aprendre més sobre les sortides del pipeline `nf-core/demo`, consulteu la seva [pàgina de documentació](https://nf-co.re/demo/1.0.2/docs/output/).
+Per aprendre més sobre les sortides del pipeline `nf-core/demo`, consulteu la seva [pàgina de documentació](https://nf-co.re/demo/1.1.0/docs/output/).
 
 En aquesta etapa, el que és important observar és que els resultats estan organitzats per mòdul, i hi ha addicionalment un directori anomenat `pipeline_info` que conté diversos informes amb marca de temps sobre l'execució del pipeline.
 
@@ -381,265 +456,426 @@ Sabeu com executar un pipeline nf-core utilitzant el seu perfil de prova integra
 
 ### Què segueix?
 
-Apreneu com s'organitza el codi del pipeline.
+Apreneu com configurar el pipeline per personalitzar la seva execució.
 
 ---
 
-## 3. Examinar l'estructura del codi del pipeline
+## 3. Configurar l'execució del pipeline
 
-Ara que hem executat amb èxit el pipeline com a usuaris, canviem la nostra perspectiva per veure com estan estructurats internament els pipelines nf-core.
+Tal com s'explica a [Hello Config](../hello_nextflow/06_hello_config.md), volem poder canviar les dades sobre les quals s'executarà el nostre pipeline i com s'executarà sense modificar el codi del pipeline en si.
+Per a aquest fi, Nextflow admet múltiples maneres de controlar la configuració del pipeline, cosa que pot resultar una mica aclaparadora.
 
-El projecte nf-core aplica directrius estrictes sobre com s'estructuren els pipelines, i sobre com s'organitza, configura i documenta el codi.
-Entendre com s'organitza tot això és el primer pas cap al desenvolupament dels vostres propis pipelines compatibles amb nf-core, que abordarem a la Part 2 d'aquest curs.
+El projecte nf-core especifica convencions per organitzar els elements de configuració, distingint dos tipus de configuració al nivell superior: **paràmetres del pipeline** i **configuració** en sentit estricte.
 
-Donem una ullada a com s'organitza el codi del pipeline al repositori `nf-core/demo`, utilitzant l'enllaç simbòlic `pipelines` que hem creat anteriorment.
-
-Podeu utilitzar `tree` o utilitzar l'explorador de fitxers per trobar i obrir el directori `nf-core/demo`.
-
-```bash
-tree -L 1 pipelines/nf-core/demo
-```
-
-??? abstract "Contingut del directori"
-
-    ```console
-    pipelines/nf-core/demo
-    ├── assets
-    ├── CHANGELOG.md
-    ├── CITATIONS.md
-    ├── CODE_OF_CONDUCT.md
-    ├── conf
-    ├── docs
-    ├── LICENSE
-    ├── main.nf
-    ├── modules
-    ├── modules.json
-    ├── nextflow.config
-    ├── nextflow_schema.json
-    ├── nf-test.config
-    ├── README.md
-    ├── ro-crate-metadata.json
-    ├── subworkflows
-    ├── tests
-    ├── tower.yml
-    └── workflows
-    ```
-
-Hi ha molt en marxa allà, així que abordarem això pas a pas.
-
-Primer, observem que al nivell superior, podeu trobar un fitxer README amb informació resumida, així com fitxers accessoris que resumeixen informació del projecte com ara llicència, directrius de contribució, citació i codi de conducta.
-La documentació detallada del pipeline es troba al directori `docs`.
-Tot aquest contingut s'utilitza per generar les pàgines web al lloc web nf-core de manera programàtica, així que sempre estan actualitzades amb el codi.
-
-Ara, per a la resta, dividirem la nostra exploració en tres etapes:
-
-1. Components del codi del pipeline (`main.nf`, `workflows`, `subworkflows`, `modules`)
-2. Configuració del pipeline
-3. Entrades i validació
-
-Comencem amb els components del codi del pipeline.
-Ens centrarem en la jerarquia de fitxers i l'organització estructural, en lloc d'aprofundir en el codi dins de fitxers individuals.
-
-### 3.1. Components del codi del pipeline
-
-L'organització estàndard del codi del pipeline nf-core segueix una estructura modular que està dissenyada per maximitzar la reutilització del codi, tal com es va introduir a [Hello Modules](../hello_nextflow/04_hello_modules.md), Part 4 del curs [Hello Nextflow](../hello_nextflow/index.md), encara que a l'estil nf-core, això s'implementa amb una mica de complexitat addicional.
-Específicament, els pipelines nf-core fan un ús abundant de subworkflows, és a dir, scripts de workflow que són importats per un workflow pare.
-
-Això pot sonar una mica abstracte, així que donem una ullada a com s'utilitza això a la pràctica al pipeline `nf-core/demo`.
-
-!!! note "Nota"
-
-    No repassarem el codi real de _com_ es connecten aquests components modulars, perquè hi ha una certa complexitat addicional associada amb l'ús de subworkflows que pot ser confusa, i entendre això no és necessari en aquesta etapa de la formació.
-    Per ara, ens centrarem en l'organització general i la lògica.
-
-#### 3.1.1. Visió general
-
-Així és com es veuen les relacions entre els components de codi rellevants per al pipeline `nf-core/demo`:
+- Els **paràmetres del pipeline** (establerts mitjançant el sistema `params`) típicament inclouen coses com fitxers d'entrada, flags de comportament d'eines i paràmetres d'anàlisi.
+- La **configuració** en sentit estricte fa referència a la logística de com s'executa el pipeline, és a dir, l'executor, les assignacions de recursos informàtics, etc.
 
 <figure class="excalidraw">
-    --8<-- "docs/en/docs/hello_nf-core/img/nf-core_demo_code_organization.svg"
+    --8<-- "docs/en/docs/hello_nf-core/img/params_vs_config.excalidraw.svg"
 </figure>
 
-Hi ha un script anomenat _punt d'entrada_ anomenat `main.nf`, que actua com a embolcall per a dos tipus de workflows niats: el workflow que conté la lògica d'anàlisi real, ubicat sota `workflows/` i anomenat `demo.nf`, i un conjunt de workflows de manteniment ubicats sota `subworkflows/`.
-El workflow `demo.nf` crida **mòduls** ubicats sota `modules/`; aquests contenen els **processos** que realitzaran els passos d'anàlisi reals.
+Comencem tractant els paràmetres del pipeline i després veurem la configuració en sentit estricte.
 
-!!! note "Nota"
+### 3.1. Paràmetres del pipeline
 
-    Els subworkflows no es limiten a funcions de manteniment, i poden fer ús de mòduls de procés.
+Per a tots els pipelines nf-core, podeu obtenir una llista completa dels paràmetres del pipeline directament des de la línia de comandes utilitzant el flag `--help`, que és en si mateix un paràmetre del pipeline.
 
-    El pipeline `nf-core/demo` mostrat aquí resulta ser del costat més simple de l'espectre, però altres pipelines nf-core (com ara `nf-core/rnaseq`) utilitzen subworkflows que estan involucrats en l'anàlisi real.
+#### 3.1.1. Obtenir la llista de paràmetres amb `--help`
 
-Ara, revisem aquests components per torn.
-
-#### 3.1.2. L'script de punt d'entrada: `main.nf`
-
-L'script `main.nf` és el punt d'entrada des del qual Nextflow comença quan executem `nextflow run nf-core/demo`.
-Això significa que quan executeu `nextflow run nf-core/demo` per executar el pipeline, Nextflow troba i executa automàticament l'script `main.nf`.
-Això funciona per a qualsevol pipeline Nextflow que segueixi aquesta nomenclatura i estructura convencionals, no només pipelines nf-core.
-
-L'ús d'un script de punt d'entrada facilita l'execució de subworkflows de 'manteniment' estandarditzats abans i després que s'executi l'script d'anàlisi real.
-Repassarem aquests després d'haver revisat el workflow d'anàlisi real i els seus mòduls.
-
-#### 3.1.3. L'script d'anàlisi: `workflows/demo.nf`
-
-El workflow `workflows/demo.nf` és on s'emmagatzema la lògica central del pipeline.
-Està estructurat de manera molt similar a un workflow Nextflow normal, excepte que està dissenyat per ser cridat des d'un workflow pare, cosa que requereix algunes característiques addicionals.
-Cobrirem les diferències rellevants a la següent part d'aquest curs, quan abordem la conversió del simple pipeline Hello de Hello Nextflow a una forma compatible amb nf-core.
-
-El workflow `demo.nf` crida **mòduls** ubicats sota `modules/`, que revisarem a continuació.
-
-!!! note "Nota"
-
-    Alguns workflows d'anàlisi nf-core mostren nivells addicionals de niament cridant subworkflows de nivell inferior.
-    Això s'utilitza principalment per embolcallar dos o més mòduls que s'utilitzen comunament junts en segments de pipeline fàcilment reutilitzables.
-    Podeu veure alguns exemples navegant pels [subworkflows nf-core](https://nf-co.re/subworkflows/) disponibles al lloc web nf-core.
-
-    Quan l'script d'anàlisi utilitza subworkflows, aquests s'emmagatzemen sota el directori `subworkflows/`.
-
-#### 3.1.4. Els mòduls
-
-Els mòduls són on viu el codi del procés, tal com es descriu a la [Part 4 del curs de formació Hello Nextflow](../hello_nextflow/04_hello_modules.md).
-
-Al projecte nf-core, els mòduls s'organitzen utilitzant una estructura niada de múltiples nivells que reflecteix tant el seu origen com el seu contingut.
-Al nivell superior, els mòduls es diferencien com a `nf-core` o `local` (no part del projecte nf-core), i després es col·loquen en un directori anomenat segons l'eina o eines que embolcallen.
-Si l'eina pertany a un toolkit (és a dir, un paquet que conté múltiples eines) llavors hi ha un nivell de directori intermedi anomenat segons el toolkit.
-
-Podeu veure això aplicat a la pràctica als mòduls del pipeline `nf-core/demo`:
+Executeu la comanda d'ajuda per al pipeline de demostració:
 
 ```bash
-tree -L 3 pipelines/nf-core/demo/modules
+nextflow run nf-core/demo --help
 ```
 
-??? abstract "Contingut del directori"
+??? success "Sortida de la comanda"
 
     ```console
-    pipelines/nf-core/demo/modules
-    └── nf-core
-        ├── fastqc
-        │   ├── environment.yml
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
-        ├── multiqc
-        │   ├── environment.yml
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
-        └── seqtk
-            └── trim
+     N E X T F L O W   ~  version 25.10.4
 
-    7 directories, 6 files
+    Launching `https://github.com/nf-core/demo` [run_name] DSL2 - revision: 45904cb9d1 [master]
+
+    ----------------------------------------------------
+                                            ,--./,-.
+            ___     __   __   __   ___     /,-._.--~'
+      |\ | |__  __ /  ` /  \ |__) |__         }  {
+      | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                            `._,._,'
+      nf-core/demo 1.1.0
+    ----------------------------------------------------
+    Typical pipeline command:
+
+      nextflow run nf-core/demo -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>
+
+    Input/output options
+      --input                       [string]           Path to a metadata file containing information about the samples in the experiment.
+      --outdir                      [string]           The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.
+      --email                       [string]           Email address for completion summary.
+      --multiqc_title               [string]           MultiQC report title. Printed as page header, used for filename if not otherwise specified.
+
+    Reference genome options
+      --genome                      [string]           Name of iGenomes reference.
+      --fasta                       [string]           Path to FASTA genome file.
+
+    Process skipping options
+      --skip_trim                   [boolean]          Skip trimming fastq files with seqtk
+
+    Generic options
+      --multiqc_methods_description [string]           Custom MultiQC yaml file containing HTML including a methods description.
+      --help                        [boolean, string]  Display the help message.
+      --help_full                   [boolean]          Display the full detailed help message.
+      --show_hidden                 [boolean]          Display hidden parameters in the help message (only works when --help or --help_full are provided).
+     !! Hiding 20 param(s), use the `--show_hidden` parameter to show them !!
+    ----------------------------------------------------
+
+    * The pipeline
+        https://doi.org/10.5281/zenodo.12192442
+
+    * The nf-core framework
+        https://doi.org/10.1038/s41587-020-0439-x
+
+    * Software dependencies
+        https://github.com/nf-core/demo/blob/master/CITATIONS.md
     ```
 
-Aquí veieu que els mòduls `fastqc` i `multiqc` es troben al nivell superior dins dels mòduls `nf-core`, mentre que el mòdul `trim` es troba sota el toolkit al qual pertany, `seqtk`.
-En aquest cas no hi ha mòduls `local`.
+Com podeu veure, la sortida agrupa els paràmetres en categories (opcions d'entrada/sortida, opcions de genoma de referència, etc.) amb tipus i descripcions per a cadascun.
 
-El fitxer de codi del mòdul que descriu el procés sempre s'anomena `main.nf`, i està acompanyat de proves i fitxers `.yml` que ignorarem per ara.
-
-Presos conjuntament, el workflow de punt d'entrada, el workflow d'anàlisi i els mòduls són suficients per executar les parts 'interessants' del pipeline.
-No obstant això, sabem que també hi ha subworkflows de manteniment allà, així que mirem-los ara.
-
-#### 3.1.5. Els subworkflows de manteniment
-
-Com els mòduls, els subworkflows es diferencien en directoris `local` i `nf-core`, i cada subworkflow té la seva pròpia estructura de directori niada amb el seu propi script `main.nf`, proves i fitxer `.yml`.
-
-```bash
-tree -L 3 pipelines/nf-core/demo/subworkflows
-```
-
-??? abstract "Contingut del directori"
-
-    ```console
-    pipelines/nf-core/demo/subworkflows
-    ├── local
-    │   └── utils_nfcore_demo_pipeline
-    │       └── main.nf
-    └── nf-core
-        ├── utils_nextflow_pipeline
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
-        ├── utils_nfcore_pipeline
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
-        └── utils_nfschema_plugin
-            ├── main.nf
-            ├── meta.yml
-            └── tests
-
-    9 directories, 7 files
-    ```
-
-Com s'ha indicat anteriorment, el pipeline `nf-core/demo` no inclou cap subworkflow específic d'anàlisi, així que tots els subworkflows que veiem aquí són els anomenats workflows de 'manteniment' o 'utilitat', tal com indica el prefix `utils_` als seus noms.
-Aquests subworkflows són el que produeix la capçalera nf-core elegant a la sortida de la consola, entre altres funcions accessòries.
+Aquesta categorització ve determinada per un fitxer d'esquema, que es tracta més endavant.
+En pipelines Nextflow simples, `--help` només funciona si el desenvolupador l'ha implementat manualment.
 
 !!! tip "Consell"
 
-    A part del seu patró de nomenclatura, una altra indicació que aquests subworkflows no realitzen cap funció realment relacionada amb l'anàlisi és que no criden cap procés en absolut.
+    Utilitzeu `--help --show_hidden` per veure paràmetres addicionals que estan ocults per defecte, com ara `--publish_dir_mode` o `--monochrome_logs`.
 
-Això completa el resum dels components de codi bàsics que constitueixen el pipeline `nf-core/demo`.
-Ara donem una ullada als elements restants que hauríeu de conèixer una mica abans d'endinsar-vos en el desenvolupament: configuració del pipeline i validació d'entrada.
+#### 3.1.2. Establir valors de paràmetres
 
-### 3.2. Configuració del pipeline
+Tal com es tracta a [Hello Config](../hello_nextflow/06_hello_config.md), podeu establir valors de paràmetres a la línia de comandes amb `--nom_parametre` o recollir un conjunt de paràmetres en un fitxer YAML i passar-lo amb `-params-file`.
+Tots dos enfocaments funcionen de la mateixa manera amb els pipelines nf-core.
 
-Heu après anteriorment que Nextflow ofereix moltes opcions per configurar l'execució del pipeline, ja sigui en termes d'entrades i paràmetres, recursos informàtics i altres aspectes de l'orquestració.
-El projecte nf-core aplica directrius altament estandarditzades per a la configuració del pipeline que tenen com a objectiu construir sobre les opcions de personalització flexibles de Nextflow d'una manera que proporcioni una major consistència i mantenibilitat entre pipelines.
+Per exemple, per ometre el pas de retallada:
 
-El fitxer de configuració central `nextflow.config` s'utilitza per establir valors per defecte per a paràmetres i altres opcions de configuració.
-La majoria d'aquestes opcions de configuració s'apliquen per defecte mentre que d'altres (per exemple, perfils de dependències de programari) s'inclouen com a perfils opcionals.
-
-Hi ha diversos fitxers de configuració addicionals que s'emmagatzemen a la carpeta `conf` i que es poden afegir a la configuració per defecte o opcionalment com a perfils:
-
-- `base.config`: Un fitxer de configuració 'en blanc', apropiat per a l'ús general a la majoria d'entorns informàtics d'alt rendiment. Això defineix grups amplis d'ús de recursos, per exemple, que són convenients per aplicar als mòduls.
-- `modules.config`: Directives i arguments de mòdul addicionals.
-- `test.config`: Un perfil per executar el pipeline amb dades de prova mínimes, que hem utilitzat quan hem executat el pipeline de demostració.
-- `test_full.config`: Un perfil per executar el pipeline amb un conjunt de dades de prova de mida completa.
-
-Tocarem alguns d'aquests fitxers més endavant al curs.
-
-### 3.3. Entrades i validació
-
-Com hem observat anteriorment, quan hem examinat el perfil de prova del pipeline `nf-core/demo`, està dissenyat per prendre com a entrada un samplesheet que conté camins de fitxer i identificadors de mostra.
-Els camins de fitxer enllaçats a dades reals ubicades al repositori `nf-core/test-datasets`.
-
-També es proporciona un exemple de samplesheet sota el directori `assets`, encara que els camins en aquest no són reals.
-
-```csv title="assets/samplesheet.csv" linenums="1"
-sample,fastq_1,fastq_2
-SAMPLE_PAIRED_END,/path/to/fastq/files/AEG588A1_S1_L002_R1_001.fastq.gz,/path/to/fastq/files/AEG588A1_S1_L002_R2_001.fastq.gz
-SAMPLE_SINGLE_END,/path/to/fastq/files/AEG588A4_S4_L003_R1_001.fastq.gz,
-
+```bash
+nextflow run nf-core/demo -profile docker,test --outdir demo-results-notrim --skip_trim
 ```
 
-Aquest samplesheet en particular és bastant simple, però alguns pipelines s'executen amb samplesheets que són més complexos, amb molt més metadades associades amb les entrades primàries.
+??? success "Sortida de la comanda"
 
-Malauradament, com que aquests fitxers poden ser difícils de comprovar a ull, el format inadequat de les dades d'entrada és una font molt comuna de fallades del pipeline.
-Un problema relacionat és quan els paràmetres es proporcionen incorrectament.
+    ```console
+    executor >  local (4)
+    [3f/a82c91] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE) | 3 of 3 ✔
+    [7d/c5e014] NFCORE_DEMO:DEMO:MULTIQC             | 1 of 1 ✔
+    -[nf-core/demo] Pipeline completed successfully-
+    ```
 
-La solució a aquests problemes és executar comprovacions de validació automatitzades en tots els fitxers d'entrada per assegurar que contenen els tipus d'informació esperats, formatats correctament, i en paràmetres per assegurar que són del tipus esperat.
-Això s'anomena validació d'entrada, i idealment s'hauria de fer _abans_ d'intentar executar un pipeline, en lloc d'esperar que el pipeline falli per esbrinar que hi havia un problema amb les entrades.
+El procés `SEQTK_TRIM` ja no apareix a la sortida.
 
-Igual que per a la configuració, el projecte nf-core té opinions molt fortes sobre la validació d'entrada, i recomana l'ús del [plugin nf-schema](https://nextflow-io.github.io/nf-schema/latest/), un plugin Nextflow que proporciona capacitats de validació completes per a pipelines Nextflow.
+!!! info "Info"
 
-Cobrirem aquest tema amb més detall a la Part 5 d'aquest curs.
-Per ara, només sigueu conscients que hi ha dos fitxers JSON proporcionats per a aquest propòsit, `nextflow_schema.json` i `assets/schema_input.json`.
+    Tot i que tècnicament és possible establir paràmetres del pipeline en un fitxer de configuració personalitzat passat amb `-c`, és possible que no sobreescrigui els valors per defecte ja establerts al `nextflow.config` propi del pipeline, depenent de les regles de precedència de configuració de Nextflow.
+    Utilitzar `--nom_parametre` a la línia de comandes o `-params-file` és més fiable, ja que aquests sempre tenen prioritat.
 
-El `nextflow_schema.json` és un fitxer utilitzat per emmagatzemar informació sobre els paràmetres del pipeline incloent tipus, descripció i text d'ajuda en un format llegible per màquina.
-Això s'utilitza per a diversos propòsits, incloent validació automatitzada de paràmetres, generació de text d'ajuda i renderització de formularis de paràmetres interactius en interfícies d'usuari.
+    **Com a regla general:** si apareix a la sortida de `--help`, establiu-lo mitjançant la línia de comandes o un fitxer de paràmetres en lloc d'un fitxer de configuració.
 
-El `schema_input.json` és un fitxer utilitzat per definir l'estructura del samplesheet d'entrada.
-Cada columna pot tenir un tipus, patró, descripció i text d'ajuda en un format llegible per màquina.
-L'esquema s'utilitza per a diversos propòsits, incloent validació automatitzada i proporcionar missatges d'error útils.
+#### 3.1.3. Validació de paràmetres
+
+Curiositat: la comanda `--help` funciona per a tots els pipelines nf-core perquè el projecte nf-core requereix que els desenvolupadors defineixin formalment tots els paràmetres del pipeline en un fitxer d'esquema JSON (`nextflow_schema.json`).
+Aquest esquema registra el tipus, la descripció, el valor per defecte i l'agrupació de cada paràmetre.
+
+A més de generar la sortida de `--help`, el fitxer d'esquema també permet la validació automatitzada en el moment del llançament.
+Això significa que Nextflow pot comprovar que cada paràmetre que passeu existeix i té un valor adequat (del tipus adequat, dins del rang de valors permesos, etc.).
+
+Ho tractem amb més detall a [Part 5: Input Validation](05_input_validation.md), però ja podeu veure-ho en acció donant al pipeline de demostració alguna entrada de paràmetres no vàlida.
+
+##### 3.1.3.1. Paràmetres no reconeguts
+
+Proveu de passar un paràmetre que no existeix:
+
+```bash
+nextflow run nf-core/demo -profile docker,test --outdir demo-results --foobar "invalid"
+```
+
+La sortida de la consola inclou un avís:
+
+```console
+WARN: The following invalid input values have been detected:
+
+* --foobar: invalid
+```
+
+El pipeline continua executant-se, però l'avís us alerta immediatament que `--foobar` no és un paràmetre reconegut.
+Això detecta errors tipogràfics com `--outDir` en lloc de `--outdir` abans que malgasteu temps de còmput preguntant-vos per què la sortida ha anat al lloc equivocat.
+
+##### 3.1.3.2. Valors de paràmetres no vàlids
+
+La validació també comprova els **valors** dels paràmetres.
+El paràmetre `--skip_trim` és un flag booleà, de manera que passar un valor de tipus string fa que el pipeline falli immediatament:
+
+```bash
+nextflow run nf-core/demo -profile docker,test --outdir demo-results --skip_trim yes
+```
+
+```console
+ERROR ~ Validation of pipeline parameters failed!
+
+The following invalid input values have been detected:
+
+* --skip_trim (yes): Value is [string] but should be [boolean]
+```
+
+El pipeline s'atura abans que s'executi cap procés, estalviant-vos una execució fallida o incorrecta.
+Els paràmetres booleans s'han de passar com a flags (`--skip_trim`) sense cap valor, o establir-se a `true`/`false` en un fitxer de paràmetres.
+
+#### 3.1.4. Validació d'entrada
+
+La mateixa lògica de validació també es pot utilitzar per comprovar la validesa dels fitxers d'entrada.
+Per exemple, si un pipeline espera un samplesheet com a entrada de dades principal (que és el cas de molts, si no la majoria, dels pipelines nf-core), el desenvolupador pot proporcionar un esquema d'entrada (diferent de l'esquema de paràmetres) que descrigui com s'ha d'estructurar el fitxer d'entrada.
+
+Llavors, en temps d'execució, Nextflow pot comprovar que el fitxer d'entrada proporcionat és vàlid.
+
+També ho tractem amb més detall a [Part 5: Input Validation](05_input_validation.md), però ja podeu veure-ho en acció donant al pipeline de demostració un samplesheet d'entrada no vàlid.
+
+El pipeline `nf-core/demo` espera un fitxer CSV amb les columnes `sample`, `fastq_1` i `fastq_2`.
+Això es defineix en un fitxer d'esquema (`assets/schema_input.json`) que especifica l'estructura esperada, els tipus de columnes i les restriccions.
+
+??? abstract "assets/schema_input.json"
+
+    ```json title="assets/schema_input.json"
+    {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://raw.githubusercontent.com/nf-core/demo/master/assets/schema_input.json",
+        "title": "nf-core/demo pipeline - params.input schema",
+        "description": "Schema for the file provided with params.input",
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "sample": {
+                    "type": "string",
+                    "pattern": "^\\S+$",
+                    "errorMessage": "Sample name must be provided and cannot contain spaces",
+                    "meta": ["id"]
+                },
+                "fastq_1": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
+                    "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                },
+                "fastq_2": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
+                    "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                }
+            },
+            "required": ["sample", "fastq_1"]
+        }
+    }
+    ```
+
+L'esquema especifica que `sample` i `fastq_1` són obligatoris, mentre que `fastq_2` és opcional (admetent tant dades paired-end com single-end).
+Els camins de fitxer es validen per existència i patró d'extensió.
+
+##### 3.1.4.1. Crear un samplesheet no vàlid
+
+Creeu un samplesheet amb una columna que falta i un camí de fitxer inexistent:
+
+```csv title="malformed_samplesheet.csv"
+sample,fastq_2
+SAMPLE1,/not/a/real/file.fastq.gz
+```
+
+A aquest samplesheet li falta la columna obligatòria `fastq_1` i té un camí de fitxer inexistent a `fastq_2`.
+Tots dos problemes produiran errors de validació al pas següent.
+
+##### 3.1.4.2. Executar el pipeline de demostració amb el samplesheet no vàlid
+
+Executeu el pipeline de demostració utilitzant `malformed_samplesheet.csv` com a entrada.
+
+```bash
+nextflow run nf-core/demo -profile docker,test --outdir demo-results --input malformed_samplesheet.csv
+```
+
+```console
+ERROR ~ Validation of pipeline parameters failed!
+
+The following invalid input values have been detected:
+
+* --input (malformed_samplesheet.csv): Validation of file failed:
+    -> Entry 1: Error for field 'fastq_2' (/not/a/real/file.fastq.gz): the file or directory
+       '/not/a/real/file.fastq.gz' does not exist (FastQ file for reads 2 cannot contain spaces
+       and must have extension '.fq.gz' or '.fastq.gz')
+    -> Entry 1: Missing required field(s): fastq_1
+```
+
+Com podeu veure, el pipeline falla immediatament i informa de **tots** els errors de validació alhora.
+nf-schema no s'atura al primer error: recull tots els problemes i els llista junts, de manera que podeu corregir-ho tot d'una vegada en lloc de descobrir els problemes un per un.
+
+Cada error identifica l'entrada i el camp exactes que han causat el problema, de manera que podeu corregir el vostre samplesheet i tornar a llançar el pipeline amb la confiança que no fallarà en algun punt posterior quan Nextflow intenti accedir al camí del fitxer.
+
+Per als desenvolupadors, tot això es tracta amb més detall a la [Part 5](./05_input_validation.md) d'aquest curs.
+
+### 3.2. Configuració
+
+La configuració en sentit estricte controla **com** s'executa el pipeline: assignació de recursos, arguments específics d'eines, on s'executen les tasques i quin sistema d'empaquetament de programari s'utilitza.
+
+Els pipelines nf-core inclouen configuració per defecte a `nextflow.config` i al directori `conf/`.
+Abans de sobreescriure res, és útil saber on es troben els valors per defecte.
+
+Ja heu vist a la secció 2.1 que el codi font del pipeline es troba a `$NXF_HOME/assets`.
+Llisteu els fitxers de configuració per veure què hi ha disponible:
+
+```bash
+ls $NXF_HOME/assets/nf-core/demo/conf/
+```
+
+```console
+base.config  igenomes.config  igenomes_ignored.config  modules.config  test.config  test_full.config
+```
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nf-core/img/nfcore_config_files.excalidraw.svg"
+</figure>
+
+Els fitxers de configuració més importants són:
+
+- **`conf/base.config`**: Defineix etiquetes de recursos (`process_low`, `process_medium`, `process_high`) que assignen CPUs, memòria i temps als processos. Quan veieu un procés que utilitza més recursos dels esperats, aquí és d'on provenen aquests valors per defecte.
+- **`conf/modules.config`**: Estableix arguments d'eines per procés (`ext.args`) i configuració de publicació de sortides (`publishDir`). Obriu aquest fitxer per veure quins arguments rep cada eina per defecte.
+- **`conf/test.config`**: El perfil de prova que heu utilitzat a la secció 2.1, que limita els recursos mitjançant `resourceLimits` i estableix un samplesheet de prova. S'activa amb `-profile test`.
+  També hi ha un `conf/test_full.config` per executar amb un conjunt de dades de prova de mida completa, útil per a benchmarking.
+
+El `nextflow.config` central carrega tots els anteriors i estableix els valors per defecte adequats per a tot.
+
+Si voleu modificar qualsevol dels paràmetres especificats en aquests fitxers, no modifiqueu cap d'ells directament.
+En canvi, creeu el vostre propi fitxer de configuració i passeu-lo amb `-c`.
+Els valors que especifiqueu sobreescriuran els valors per defecte establerts en aquells altres fitxers.
+
+Fem alguns exercicis per practicar-ho.
+
+#### 3.2.1. Canviar l'assignació de recursos per a un procés
+
+El pipeline de demostració assigna recursos utilitzant etiquetes definides a `base.config`.
+Per exemple, `FASTQC` utilitza l'etiqueta `process_medium`, que assigna 6 CPUs i 36 GB de memòria.
+
+El perfil de prova limita els recursos mitjançant `resourceLimits`, però també podeu sobreescriure els recursos per a processos específics.
+
+Creeu un fitxer anomenat `custom.config`:
+
+```groovy title="custom.config" linenums="1"
+process {
+    withName: 'FASTQC' {
+        cpus = 2
+        memory = 4.GB
+    }
+}
+```
+
+Executeu el pipeline amb la vostra configuració personalitzada:
+
+```bash
+nextflow run nf-core/demo -profile docker,test --outdir demo-results-custom -c custom.config
+```
+
+??? success "Sortida de la comanda"
+
+    ```console
+    executor >  local (7)
+    [2a/f17b3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
+    [9c/e4d028] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
+    [5b/a93c71] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+    -[nf-core/demo] Pipeline completed successfully-
+    ```
+
+El flag `-c` afegeix la vostra configuració a sobre de la configuració integrada del pipeline.
+
+#### 3.2.2. Establir valors d'arguments d'eines amb `ext.args`
+
+Moltes eines de línia de comandes tenen arguments que no són obligatoris i, per tant, no es configuren com a paràmetres del pipeline tret que s'utilitzin molt freqüentment.
+Per a aquests arguments d'eines, els mòduls nf-core utilitzen una convenció de Nextflow anomenada `ext.args` per passar arguments a l'eina subjacent mitjançant un fitxer de configuració.
+
+Per exemple, afegim un argument de retallada al mòdul `SEQTK_TRIM` utilitzant `ext.args`.
+
+##### 3.2.2.1. Actualitzar la configuració personalitzada
+
+Actualitzeu el vostre `custom.config`:
+
+```groovy title="custom.config" linenums="1" hl_lines="6 7 8"
+process {
+    withName: 'FASTQC' {
+        cpus = 2
+        memory = 4.GB
+    }
+    withName: 'SEQTK_TRIM' {
+        ext.args = '-b 5'
+    }
+}
+```
+
+Això indica a `seqtk trimfq` que retalli 5 bases del principi de cada lectura a més de la retallada per qualitat.
+
+##### 3.2.2.2. Executar el pipeline
+
+Executeu el pipeline de nou amb aquesta configuració per veure l'efecte:
+
+```bash
+nextflow run nf-core/demo -profile docker,test --outdir demo-results-extargs -c custom.config
+```
+
+??? success "Sortida de la comanda"
+
+    ```console
+    executor >  local (7)
+    [1e/b7a392] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
+    [ab/cd1234] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
+    [4f/c8d105] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+    -[nf-core/demo] Pipeline completed successfully-
+    ```
+
+Per verificar que l'argument s'ha aplicat, trobeu el hash del directori de treball de `SEQTK_TRIM` a la sortida de l'execució (per exemple, `work/ab/cd1234...`) i comproveu el fitxer `.command.sh` que hi ha dins:
+
+```bash
+cat work/ab/cd1234/.command.sh
+```
+
+??? success "Sortida de la comanda"
+
+    ```console
+    #!/usr/bin/env bash
+    ...
+    seqtk trimfq -b 5 SAMPLE3_SE.fastq.gz | gzip -c > SAMPLE3_SE.trimmed.fastq.gz
+    ```
+
+Hauríeu de veure `-b 5` a la comanda `seqtk trimfq`, confirmant que la sobreescriptura de `ext.args` ha tingut efecte.
+
+##### 3.2.2.3. Sobreescriure valors per defecte
+
+Alguns mòduls ja tenen `ext.args` establert per defecte.
+Per exemple, el mòdul `FASTQC` està configurat amb `ext.args = '--quiet'` per defecte (definit a `conf/modules.config`).
+
+```groovy title="conf/modules.config" linenums="21" hl_lines="2"
+    withName: FASTQC {
+        ext.args = '--quiet'
+        publishDir = [
+            path: { "${params.outdir}/fastqc/${meta.id}" },
+            mode: params.publish_dir_mode,
+            pattern: "*.{html,json}"
+        ]
+    }
+```
+
+Si proporcioneu un valor per a `ext.args` mitjançant un fitxer de configuració personalitzat, aquest valor reemplaçarà completament el valor per defecte establert per a aquell procés.
+
+Així, per exemple, si el valor per defecte era `'--quiet'` i establiu `ext.args = '--kmers 8'`, el flag `--quiet` ja no s'aplicarà.
+Per mantenir tots dos, establiu `ext.args = '--quiet --kmers 8'`.
+
+Això significa que sou responsables de comprovar quina és la configuració per defecte de les eines a les quals voleu proporcionar valors d'arguments amb `ext.args`.
 
 ### Conclusió
 
-Sabeu quins són els components principals d'un pipeline nf-core i com s'organitza el codi; on es troben els elements principals de configuració; i sou conscients de per a què serveix la validació d'entrada.
+Sabeu com obtenir ajuda d'un pipeline nf-core, establir paràmetres i entendre com es validen, i personalitzar la configuració mitjançant fitxers de configuració.
 
 ### Què segueix?
 
-Feu una pausa! Això ha estat molt. Quan us sentiu refrescats i preparats, passeu a la següent secció per aplicar el que heu après per escriure un pipeline compatible amb nf-core.
-
-!!! tip "Consell"
-
-    Si voleu aprendre com compondre workflows amb subworkflows abans de passar a la següent part, consulteu la [Workflows of Workflows](../side_quests/workflows_of_workflows.md) Side Quest.
+Feu una pausa! Quan estigueu preparats, passeu a la Part 2, on creareu el vostre propi pipeline compatible amb nf-core des de zero.

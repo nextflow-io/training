@@ -240,7 +240,7 @@ Une logique assez complexe avec très peu de syntaxe ici. Et vous pouvez espéro
 
 D'accord, c'est génial. Le problème maintenant cependant est que chaque fois que j'exécute ce pipeline, je dois faire dash, input pour qu'il s'exécute.
 
-Si j'essaie d'exécuter sans ce paramètre, maintenant Nextflow va générer une erreur disant qu'il avait besoin de ce paramètre et qu'il n'a pas été défini. et donc il ne savait pas quoi faire.
+Si j'essaie d'exécuter sans ce paramètre, maintenant Nextflow va générer une erreur disant qu'il avait besoin de ce paramètre et qu'il n'a pas été défini. Et donc il ne savait pas quoi faire.
 
 C'est une nouvelle chose cool, au fait. Dans le passé, Nextflow aurait juste exécuté avec une chaîne vide, et vous auriez eu toutes sortes d'erreurs bizarres, qui auraient été difficiles à comprendre. Mais dans le nouvel analyseur syntaxique Nextflow, il est un peu plus prudent et il vous le dit tout de suite.
 
@@ -256,9 +256,9 @@ Si nous voulons un nombre à la place, par exemple, nous pourrions écrire float
 
 Donc cette sécurité de type est une fonctionnalité très nouvelle de Nextflow, mais vraiment puissante pour rendre votre code plus sûr à écrire et à exécuter.
 
-Ensuite après cela nous avons un symbole égal puis la valeur par défaut ici. Nextflow a été écrit à Barcelone à l'origine, donc il semble approprié que nous ayons un peu d'espagnol ici, _« Holà mundo ! »_ comme valeur par défaut.
+Ensuite après cela nous avons un symbole égal puis la valeur par défaut ici. Nextflow a été écrit à Barcelone à l'origine, donc il semble approprié que nous ayons un peu d'espagnol ici, _« Hola mundo ! »_ comme valeur par défaut.
 
-Bon je vais enregistrer ce script, retourner, exécuter le script à nouveau sans _--input_. Et cette fois il devrait s'exécuter et il créera notre nouveau fichier dans _results_. Et dans ce fichier maintenant il dit _« Holà mundo ! »_.
+Bon je vais enregistrer ce script, retourner, exécuter le script à nouveau sans _--input_. Et cette fois il devrait s'exécuter et il créera notre nouveau fichier dans _results_. Et dans ce fichier maintenant il dit _« Hola mundo ! »_.
 
 Ce n'est qu'une valeur par défaut cependant, donc cela ne signifie pas que nous ne pouvons toujours pas faire la même chose qu'avant. Si je retourne et trouve mon ancien script ici, _« Hej Världen »_, parce que je fais _--input_ sur la ligne de commande, cela écrasera cette valeur par défaut et utilisera cela à nouveau dans le fichier output.txt.
 

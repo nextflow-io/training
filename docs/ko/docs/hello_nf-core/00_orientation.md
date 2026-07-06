@@ -36,7 +36,7 @@ export NXF_SYNTAX_PARSER=v1
 
 [여기](../info/nxf_versions.md)에 문서화된 올바른 설정을 사용하고 있는지 확인하십시오.
 
-이 교육에는 추가로 **nf-core tools 3.4.1**이 필요합니다.
+이 교육에는 추가로 **nf-core tools 3.5.2**가 필요합니다.
 다른 버전의 nf-core 도구를 사용하는 경우 따라가기 어려울 수 있습니다.
 
 `nf-core --version` 명령을 사용하여 환경에 설치된 버전을 확인할 수 있습니다.
@@ -63,7 +63,7 @@ cd hello-nf-core/
     cd /workspaces/training/hello-nf-core
     ```
 
-이제 이 디렉토리의 내용을 살펴보겠습니다.
+이제 이 디렉토리의 내용을 살펴봅니다.
 
 ### 제공된 자료 탐색하기
 

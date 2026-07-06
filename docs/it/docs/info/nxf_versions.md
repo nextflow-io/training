@@ -6,11 +6,16 @@ hide:
   - footer
 ---
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 ## Versione della sintassi di Nextflow attualmente supportata e requisiti
 
-A partire dalla versione 3.0 del portale di formazione, tutti i nostri corsi di formazione si basano sulla versione 25.10.2 di Nextflow, salvo diversa indicazione nella pagina indice del corso (ad eccezione dei materiali deprecati o archiviati che potrebbero non includere un avviso sulla versione).
+A partire dalla versione 3.0 del portale di formazione, tutti i nostri corsi di formazione sono compatibili con Nextflow versione 25.10.2 o successiva, salvo diversa indicazione nella pagina indice del corso.
+(Questo non include i materiali deprecati o archiviati che potrebbero non includere un avviso sulla versione).
 
-Poiché i corsi ora utilizzano input tipizzati a livello di flusso di lavoro e direttive di output a livello di flusso di lavoro, richiedono l'uso del parser di sintassi V2.
+La versione di Nextflow attualmente caricata per impostazione predefinita nel nostro ambiente di formazione è **Nextflow 25.10.4**.
+
+Poiché i corsi ora utilizzano input tipizzati a livello di flusso di lavoro e direttive di output a livello di flusso di lavoro, richiedono l'uso del parser di sintassi V2, **salvo diversa indicazione**.
 Se prevedete di utilizzare l'ambiente che forniamo tramite [Github Codespaces](../envsetup/01_setup.md) o [devcontainer locali](../envsetup/03_devcontainer.md), non dovete fare nulla a meno che non sia specificato nelle istruzioni del corso.
 Tuttavia, se prevedete di seguire le formazioni nel vostro ambiente ([Installazione manuale](../envsetup/02_local.md)), dovrete assicurarvi di utilizzare Nextflow versione 25.10.2 o successiva con il parser di sintassi v2 abilitato.
 

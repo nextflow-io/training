@@ -67,7 +67,7 @@ nextflow run hello-workflow.nf
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-workflow.nf` [admiring_lamarr] DSL2 - revision: 4d4053520d
 
@@ -84,7 +84,7 @@ Bu bölüm için, `results/hello_workflow/` altında.
     results/hello_workflow
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    └── Holà-output.txt
+    └── Hola-output.txt
     ```
 
 Bu sizin için çalıştıysa, çok adımlı bir iş akışı oluşturmayı öğrenmeye hazırsınız.
@@ -113,7 +113,7 @@ Selamlamaları büyük harfe dönüştürmek için, 'metin değiştirme' anlamı
 tr '[a-z]' '[A-Z]'
 ```
 
-Bu, aksanlı harfleri dikkate almayan çok basit bir metin değiştirme tek satırıdır; örneğin 'Holà' 'HOLà' olacaktır. Ancak Nextflow kavramlarını göstermek için yeterince iyi bir iş çıkaracaktır ve önemli olan da budur.
+Bu, aksanlı harfleri dikkate almayan çok basit bir metin değiştirme tek satırıdır. Ancak Nextflow kavramlarını göstermek için yeterince iyi bir iş çıkaracaktır ve önemli olan da budur.
 
 Test etmek için, `echo 'Hello World'` komutunu çalıştırabilir ve çıktısını `tr` komutuna yönlendirebiliriz:
 
@@ -311,7 +311,7 @@ nextflow run hello-workflow.nf -resume
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-workflow.nf` [high_cantor] DSL2 - revision: d746983511
 
@@ -330,10 +330,10 @@ Konsol çıktısında, az önce eklediğimiz yeni sürece karşılık gelen fazl
     results/hello_workflow/
     ├── Bonjour-output.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Bu kullanışlı! Ancak yine de ikinci sürece yapılan çağrılardan birinin work dizinine bakmaya değer.
@@ -342,8 +342,8 @@ Bu kullanışlı! Ancak yine de ikinci sürece yapılan çağrılardan birinin w
 
     ```console
     work/e0/ecf81b4cacc648b9b994218d5b29d7/
-    ├── Holà-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Holà-output.txt
-    └── UPPER-Holà-output.txt
+    ├── Hola-output.txt -> /workspaces/training/hello-nextflow/work/ab/81632178cd37e9e815959278808819/Hola-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 İki `*-output` dosyası olduğunu fark edin: ilk sürecin çıktısı ve ikincinin çıktısı.
@@ -391,8 +391,8 @@ Terminalinizde aşağıdakileri çalıştırın:
 ```bash
 echo 'Hello' | tr '[a-z]' '[A-Z]' > UPPER-Hello-output.txt
 echo 'Bonjour' | tr '[a-z]' '[A-Z]' > UPPER-Bonjour-output.txt
-echo 'Holà' | tr '[a-z]' '[A-Z]' > UPPER-Holà-output.txt
-cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Holà-output.txt > COLLECTED-output.txt
+echo 'Hola' | tr '[a-z]' '[A-Z]' > UPPER-Hola-output.txt
+cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Hola-output.txt > COLLECTED-output.txt
 ```
 
 Çıktı, orijinal selamlamaların büyük harf versiyonlarını içeren `COLLECTED-output.txt` adlı bir metin dosyasıdır.
@@ -402,7 +402,7 @@ cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Holà-output.txt > COL
     ```console title="COLLECTED-output.txt"
     HELLO
     BONJOUR
-    HOLà
+    HOLA
     ```
 
 İş akışımızla elde etmek istediğimiz sonuç budur.
@@ -500,7 +500,7 @@ Teoride bu, rastgele sayıda girdi dosyasını işlemelidir.
 
     Bazı komut satırı araçları, her girdi dosyası için bir argüman (örneğin `-input`) sağlamayı gerektirir.
     Bu durumda, komutu oluşturmak için biraz fazladan çalışma yapmamız gerekir.
-    Bunun bir örneğini [Genomik için Nextflow](../../nf4_science/genomics/) eğitim kursunda görebilirsiniz.
+    Bunun bir örneğini [Genomik için Nextflow](../nf4_science/genomics/index.md) eğitim kursunda görebilirsiniz.
 
 ### 2.3. Toplama adımını iş akışına ekleyin
 
@@ -536,7 +536,68 @@ Bu da `convertToUpper.out` adlı bir kanaldır.
 
 Bu, `convertToUpper()`'ın çıktısını `collectGreetings()`'in girdisine bağlar.
 
-#### 2.3.2. İş akışını `-resume` ile çalıştırın
+#### 2.3.2. `publish:` bölümünü güncelleyin
+
+`workflow` bloğunda, aşağıdaki kod değişikliğini yapın:
+
+=== "Sonra"
+
+    ```groovy title="hello-workflow.nf" linenums="76" hl_lines="4"
+        publish:
+        first_output = sayHello.out
+        uppercased = convertToUpper.out
+        collected = collectGreetings.out
+    }
+    ```
+
+=== "Önce"
+
+    ```groovy title="hello-workflow.nf" linenums="76"
+        publish:
+        first_output = sayHello.out
+        uppercased = convertToUpper.out
+    }
+    ```
+
+#### 2.3.3. `output` bloğunu güncelleyin
+
+`output` bloğunda, aşağıdaki kod değişikliğini yapın:
+
+=== "Sonra"
+
+    ```groovy title="hello-workflow.nf" linenums="82" hl_lines="10-13"
+    output {
+        first_output {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+        uppercased {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+        collected {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+    }
+    ```
+
+=== "Önce"
+
+    ```groovy title="hello-workflow.nf" linenums="82"
+    output {
+        first_output {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+        uppercased {
+            path 'hello_workflow'
+            mode 'copy'
+        }
+    }
+    ```
+
+#### 2.3.4. İş akışını `-resume` ile çalıştırın
 
 Hadi deneyelim.
 
@@ -547,7 +608,7 @@ nextflow run hello-workflow.nf -resume
 ??? success "Komut çıktısı"
 
     ```console hl_lines="8"
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-workflow.nf` [mad_gilbert] DSL2 - revision: 6acfd5e28d
 
@@ -567,7 +628,7 @@ Yalnızca bir tane bekliyorduk, ama üç tane var.
 ??? abstract "Dosya içeriği"
 
     ```console title="results/COLLECTED-output.txt"
-    Holà
+    Hola
     ```
 
 Hay aksi. Toplama adımı her selamlama için ayrı ayrı çalıştırıldı, bu istediğimiz şey DEĞİLDİ.
@@ -646,7 +707,7 @@ nextflow run hello-workflow.nf -resume
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-workflow.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
@@ -655,8 +716,8 @@ nextflow run hello-workflow.nf -resume
     [1e/83586c] collectGreetings   | 1 of 1 ✔
     Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
     Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
-    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
-    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
+    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt
+    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt]
     ```
 
 Başarıyla çalışıyor, ancak log çıktısı bundan biraz daha dağınık görünebilir (okunabilirlik için temizledik).
@@ -680,7 +741,7 @@ Son olarak, her şeyin doğru çalıştığından emin olmak için çıktı dosy
     ```console title="results/COLLECTED-output.txt"
     BONJOUR
     HELLO
-    HOLà
+    HOLA
     ```
 
 Bu sefer son çıktı dosyasında üç selamlamamızın hepsi var. Başarılı!
@@ -879,7 +940,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
+    N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-workflow.nf` [confident_rutherford] DSL2 - revision: bc58af409c
 
@@ -896,7 +957,7 @@ Başarıyla çalışıyor ve istenen çıktıyı üretiyor:
     ```console title="results/COLLECTED-trio-output.txt"
     HELLO
     BONJOUR
-    HOLà
+    HOLA
     ```
 
 Artık parametreyi uygun şekilde belirttiğimiz sürece, diğer girdi grupları üzerindeki sonraki çalıştırmalar önceki sonuçları bozmayacak.
@@ -1097,7 +1158,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `hello-workflow.nf` [ecstatic_wilson] DSL2 - revision: c80285f8c8
 

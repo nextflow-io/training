@@ -14,7 +14,7 @@ additional_information:
   audience_prerequisites:
     - "**Audiència:** Aquest curs està dissenyat per a investigadors en genòmica i camps relacionats que vulguin desenvolupar o personalitzar pipelines d'anàlisi de dades."
     - "**Habilitats:** S'assumeix certa familiaritat amb la línia de comandes, conceptes bàsics de scripting i formats de fitxers genòmics comuns."
-    - "**Prerequisits:** Conceptes fonamentals de Nextflow i eines cobertes a [Hello Nextflow](../../hello_nextflow/)."
+    - "**Prerequisits:** Conceptes fonamentals de Nextflow i eines cobertes a [Hello Nextflow](../../hello_nextflow/index.md)."
 ---
 
 # Nextflow per a Genòmica
@@ -23,7 +23,7 @@ additional_information:
 
 **Un curs pràctic que aplica Nextflow a un cas d'ús real de genòmica: detecció de variants amb GATK.**
 
-Aquest curs es basa en la formació per a principiants [Hello Nextflow](../../hello_nextflow/) i demostra com utilitzar Nextflow en el context específic del domini de la genòmica.
+Aquest curs es basa en la formació per a principiants [Hello Nextflow](../../hello_nextflow/index.md) i demostra com utilitzar Nextflow en el context específic del domini de la genòmica.
 Implementareu un pipeline de detecció de variants amb [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), un paquet de programari àmpliament utilitzat per analitzar dades de seqüenciació d'alt rendiment.
 
 <!-- additional_information -->

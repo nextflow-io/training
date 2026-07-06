@@ -1,53 +1,38 @@
-# Orientación
+# Primeros pasos
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-El entorno de GitHub Codespaces contiene todo el software, código y datos necesarios para completar este curso de entrenamiento, por lo que no necesita instalar nada usted mismo.
-Sin embargo, necesita una cuenta (gratuita) para iniciar sesión, y debería tomarse unos minutos para familiarizarse con la interfaz.
+## Iniciar un entorno de capacitación
 
-Si aún no lo ha hecho, por favor siga [este enlace](../../envsetup/) antes de continuar.
+Para usar el entorno preconfigurado que proporcionamos en GitHub Codespaces, haga clic en el botón "Open in GitHub Codespaces" a continuación.
+Para otras opciones, consulte [Opciones de entorno](../envsetup/index.md).
 
-## Materiales proporcionados
+Recomendamos abrir el entorno de capacitación en una nueva pestaña o ventana del navegador (use clic derecho, ctrl+clic o cmd+clic según su equipo) para que pueda seguir leyendo mientras el entorno se carga.
+Necesitará mantener estas instrucciones abiertas en paralelo para trabajar en el curso.
 
-A lo largo de este curso de entrenamiento, trabajaremos en el directorio `side-quests/`.
-Este directorio contiene todos los archivos de código, datos de prueba y archivos accesorios que necesitará.
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-Siéntase libre de explorar los contenidos de este directorio; la forma más fácil de hacerlo es usar el explorador de archivos en el lado izquierdo del espacio de trabajo de GitHub Codespaces.
-Alternativamente, puede usar el comando `tree`.
-A lo largo del curso, usamos la salida de `tree` para representar la estructura y contenidos del directorio de forma legible, a veces con modificaciones menores para mayor claridad.
+### Conceptos básicos del entorno
 
-Aquí generamos una tabla de contenidos hasta el segundo nivel:
+Este entorno de capacitación contiene todo el software, código y datos necesarios para completar el curso, por lo que no necesita instalar nada usted mismo.
 
-```bash
-tree . -L 2
-```
+El codespace está configurado con una interfaz de VSCode, que incluye un explorador de archivos, un editor de código y una terminal.
+Todas las instrucciones dadas durante el curso (por ejemplo, "abra el archivo", "edite el código" o "ejecute este comando") hacen referencia a esas tres partes de la interfaz de VSCode, a menos que se indique lo contrario.
 
-Si ejecuta esto dentro de `side-quests`, debería ver la siguiente salida:
+Si está trabajando en este curso por su cuenta, familiarícese con los [conceptos básicos del entorno](../envsetup/01_setup.md) para más detalles.
 
-```console title="Contenidos del directorio"
-.
-├── metadata
-├── nf-core
-├── nf-test
-├── solutions
-├── splitting_and_grouping
-└── workflows_of_workflows
-```
+### Requisitos de versión
 
-**Esto es un resumen de lo que debería saber para comenzar:**
+Esta capacitación funciona con Nextflow 25.10.2 o posterior **con el analizador de sintaxis v2 HABILITADO**.
+Si está usando un entorno local o personalizado, asegúrese de estar usando la configuración correcta según lo documentado [aquí](../info/nxf_versions.md).
 
-- **Cada directorio corresponde a una misión secundaria individual.**
-  Sus contenidos se detallan en la página de la misión secundaria correspondiente.
+## Lista de verificación de preparación
 
-- **El directorio `solutions`** contiene los scripts de workflow y/o módulo completados que resultan de ejecutar varios pasos de cada misión secundaria.
-  Están destinados a ser usados como referencia para verificar su trabajo y solucionar cualquier problema.
+¿Cree que está listo para comenzar?
 
-!!!tip "Consejo"
+- [ ] Entiendo el objetivo de este curso y sus requisitos previos
+- [ ] Mi entorno está en funcionamiento
 
-    Si por cualquier razón sale de este directorio, siempre puede ejecutar este comando para regresar a él:
+Si puede marcar todas las casillas, está listo para continuar.
 
-    ```bash
-    cd /workspaces/training/side-quests
-    ```
-
-Ahora, para comenzar el curso, haga clic en la flecha en la esquina inferior derecha de esta página.
+**Para comenzar, seleccione una misión secundaria del menú de navegación.**

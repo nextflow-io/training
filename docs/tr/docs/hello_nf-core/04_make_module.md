@@ -10,7 +10,7 @@ Bundan sonra, gelecekte daha verimli çalışmak için şablon tabanlı modül o
 
 ??? info "Bu bölümden nasıl başlanır"
 
-    Bu bölüm, [Bölüm 3: Bir nf-core modülü kullanma](./03_use_module.md) kısmını tamamladığınızı ve `CAT_CAT` modülünü iş hattınıza entegre ettiğinizi varsayar.
+    Bu bölüm, [Bölüm 3: Bir nf-core modülü kullanma](./03_use_module.md) kısmını tamamladığınızı ve `FIND_CONCATENATE` modülünü iş hattınıza entegre ettiğinizi varsayar.
 
     Bölüm 3'ü tamamlamadıysanız veya bu bölüm için yeni başlamak istiyorsanız, başlangıç noktanız olarak `core-hello-part3` çözümünü kullanabilirsiniz.
     Bu komutları `hello-nf-core/` dizini içinden çalıştırın:
@@ -20,7 +20,7 @@ Bundan sonra, gelecekte daha verimli çalışmak için şablon tabanlı modül o
     cd core-hello
     ```
 
-    Bu size `CAT_CAT` modülünün zaten entegre edildiği bir iş hattı verir.
+    Bu size `FIND_CONCATENATE` modülünün zaten entegre edildiği bir iş hattı verir.
     Başarıyla çalıştığını test etmek için aşağıdaki komutu çalıştırabilirsiniz:
 
     ```bash
@@ -127,7 +127,7 @@ Süreç adları büyük/küçük harfe duyarlıdır. Süreç adını değiştird
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
     include { COWPY                  } from '../modules/local/cowpy.nf'
-    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
+    include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
     ```
 
 === "Önce"
@@ -143,7 +143,7 @@ Süreç adları büyük/küçük harfe duyarlıdır. Süreç adını değiştird
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
     include { cowpy                  } from '../modules/local/cowpy.nf'
-    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
+    include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
     ```
 
 Süreç çağrılarını güncellemek zorunda kalmamak için import ifadesinde bir alias kullanabilirdik; ancak bu, büyük harfe çevirme kuralını benimsemenin amacını biraz bozardı.
@@ -156,7 +156,7 @@ Süreç çağrılarını güncellemek zorunda kalmamak için import ifadesinde b
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 38"
     // demetin içinden dosyayı çıkar, cowpy henüz metadata kullanmıyor
-    ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+    ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
     // cowpy ile selamlamaların ASCII sanatını oluştur
     COWPY(ch_for_cowpy, params.character)
@@ -200,7 +200,7 @@ Süreç çağrılarını güncellemek zorunda kalmamak için import ifadesinde b
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 38"
     // demetin içinden dosyayı çıkar, cowpy henüz metadata kullanmıyor
-    ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+    ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
     // cowpy ile selamlamaların ASCII sanatını oluştur
     cowpy(ch_for_cowpy, params.character)
@@ -253,7 +253,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [elegant_plateau] DSL2 - revision: b9e9b3b8de
 
@@ -284,7 +284,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     executor >  local (8)
     [7b/66ceb5] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
     [8e/1bafb9] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-    [bb/203575] CORE_HELLO:HELLO:CAT_CAT (test)     | 1 of 1 ✔
+    [bb/203575] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
     [39/715489] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
@@ -293,7 +293,7 @@ Pekala, bu çalışıyor! Şimdi daha önemli değişiklikler yapmaya geçelim.
 
 ### 1.2. `COWPY`'yi metadata demetlerini kullanacak şekilde güncelleme
 
-`core-hello` iş hattının mevcut versiyonunda, aşağıdaki diyagramın üst yarısında gösterildiği gibi, `CAT_CAT`'in çıktı demetinden dosyayı çıkarıp `COWPY`'ye aktarıyoruz.
+`core-hello` iş hattının mevcut versiyonunda, aşağıdaki diyagramın üst yarısında gösterildiği gibi, `FIND_CONCATENATE`'in çıktı demetinden dosyayı çıkarıp `COWPY`'ye aktarıyoruz.
 
 <figure class="excalidraw">
     --8<-- "docs/en/docs/hello_nf-core/img/cowpy-inputs.svg"
@@ -343,7 +343,7 @@ Artık sürecin ne beklediğini değiştirdiğimize göre, süreç çağrısınd
 #### 1.2.2. İş akışındaki süreç çağrısını güncelleme
 
 İyi haber şu ki bu değişiklik süreç çağrısını basitleştirecek.
-Artık `CAT_CAT` çıktısı ve `COWPY` girdisi aynı "şekle" sahip; yani her ikisi de bir `tuple val(meta), path(input_file)` yapısından oluşuyor. Bu nedenle `CAT_CAT` sürecinin çıktısından dosyayı açıkça çıkarmak yerine onları doğrudan bağlayabiliriz.
+Artık `FIND_CONCATENATE` çıktısı ve `COWPY` girdisi aynı "şekle" sahip; yani her ikisi de bir `tuple val(meta), path(input_file)` yapısından oluşuyor. Bu nedenle `FIND_CONCATENATE` sürecinin çıktısından dosyayı açıkça çıkarmak yerine onları doğrudan bağlayabiliriz.
 
 `hello.nf` iş akışı dosyasını açın (`core-hello/workflows/` altında) ve `COWPY` çağrısını aşağıda gösterildiği gibi güncelleyin.
 
@@ -351,20 +351,20 @@ Artık `CAT_CAT` çıktısı ve `COWPY` girdisi aynı "şekle" sahip; yani her i
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2"
         // cowpy ile selamlamaların ASCII sanatını oluştur
-        COWPY(CAT_CAT.out.file_out, params.character)
+        COWPY(FIND_CONCATENATE.out.file_out, params.character)
     ```
 
 === "Önce"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="1-2 5"
         // demetin içinden dosyayı çıkar, cowpy henüz metadata kullanmıyor
-        ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+        ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
         // cowpy ile selamlamaların ASCII sanatını oluştur
         COWPY(ch_for_cowpy, params.character)
     ```
 
-Artık `COWPY`'yi doğrudan `CAT_CAT.out.file_out` üzerinde çağırıyoruz.
+Artık `COWPY`'yi doğrudan `FIND_CONCATENATE.out.file_out` üzerinde çağırıyoruz.
 
 Sonuç olarak, artık `ch_for_cowpy` kanalını oluşturmamıza gerek yok; bu nedenle o satır (ve yorum satırı) tamamen silinebilir.
 
@@ -401,7 +401,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [modest_saha] DSL2 - revision: b9e9b3b8de
 
@@ -433,12 +433,12 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     executor >  local (8)
     [a8/447993] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
     [00/1fc59c] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [57/ac800d] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+    [57/ac800d] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
     [b7/092f2b] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
-İş hattı başarıyla çalışmalı; metadata artık `CAT_CAT`'ten `COWPY`'ye akıyor.
+İş hattı başarıyla çalışmalı; metadata artık `FIND_CONCATENATE`'ten `COWPY`'ye akıyor.
 
 `COWPY`'yi metadata demetlerini işleyecek şekilde yapmak için yapmamız gerekenleri tamamladık.
 Şimdi, nf-core modül desenlerinden yararlanmak için başka neler yapabileceğimize bakalım.
@@ -549,7 +549,7 @@ withName: 'COWPY' {
 }
 ```
 
-`withName:` sözdizimi bu yapılandırmayı yalnızca `COWPY` sürecine atar; `ext.args = { "-c ${params.character}" }` ise basitçe `character` parametresinin değerini içerecek bir string oluşturur.
+`withName:` sözdizimi bu yapılandırmayı yalnızca `COWPY` sürecine atar; `#!groovy ext.args = { "-c ${params.character}" }` ise basitçe `character` parametresinin değerini içerecek bir string oluşturur.
 Nextflow'a parametre değerini çalışma zamanında değerlendirmesini söyleyen küme parantezlerinin kullanımına dikkat edin.
 
 Anlamlı mı? Hadi ekleyelim.
@@ -603,14 +603,14 @@ Umarım bir iş hattındaki tüm modüllerin `ext.args` değerlerinin bu dosyada
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
         // cowpy ile selamlamaların ASCII sanatını oluştur
-        COWPY(CAT_CAT.out.file_out)
+        COWPY(FIND_CONCATENATE.out.file_out)
     ```
 
 === "Önce"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
         // cowpy ile selamlamaların ASCII sanatını oluştur
-        COWPY(CAT_CAT.out.file_out, params.character)
+        COWPY(FIND_CONCATENATE.out.file_out, params.character)
     ```
 
 İş akışı kodu artık daha temiz: `params.character`'ı doğrudan sürece geçirmemize gerek yok.
@@ -629,7 +629,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [exotic_planck] DSL2 - revision: b9e9b3b8de
 
@@ -660,7 +660,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     executor >  local (8)
     [13/9e3c0e] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
     [e2/5b0ee5] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [b6/4fb569] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+    [b6/4fb569] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
     [38/eb29ea] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
@@ -679,7 +679,7 @@ cat work/38/eb29ea*/cowpy-test.txt
     ```console
     _________
     / HELLO   \
-    | HOLà    |
+    | HOLA    |
     \ BONJOUR /
     ---------
         \
@@ -788,14 +788,14 @@ Bunları yaptıktan sonra, her şeyin daha önce olduğu gibi çalıştığını
 
 Üç değişiklik yaptığımızı görebilirsiniz.
 
-1. **`script:` bloğunda, `prefix = task.ext.prefix ?: "${meta.id}"` satırını ekledik.**
+1. **`script:` bloğunda, `#!groovy prefix = task.ext.prefix ?: "${meta.id}"` satırını ekledik.**
    Bu satır, `prefix` değişkeninin değerini belirlemek için `?:` operatörünü kullanır: boş değilse `task.ext.prefix` içeriği, boşsa metamap'ten (`meta.id`) tanımlayıcı.
    Genel olarak `ext.prefix`'e atıfta bulunsak da, bu kodun modül düzeyindeki `ext.prefix` yapılandırmasını çekmek için `task.ext.prefix`'e başvurması gerektiğini unutmayın.
 
-2. **Komut satırında, `cowpy-${input_file}` yerine `${prefix}.txt` kullandık.**
+2. **Komut satırında, `#!groovy cowpy-${input_file}` yerine `#!groovy ${prefix}.txt` kullandık.**
    Nextflow'un yukarıdaki satır tarafından belirlenen `prefix` değerini enjekte edeceği yer burasıdır.
 
-3. **`output:` bloğunda, `path("cowpy-${input_file}")` yerine `path("${prefix}.txt")` kullandık.**
+3. **`output:` bloğunda, `#!groovy path("cowpy-${input_file}")` yerine `#!groovy path("${prefix}.txt")` kullandık.**
    Bu sadece komut satırında yazılana göre dosya yolunun ne olacağını yeniden ifade eder.
 
 Sonuç olarak, çıktı dosya adı artık mantıklı bir varsayılan (metamap'ten tanımlayıcı) ve uygun dosya formatı uzantısı kullanılarak oluşturuluyor.
@@ -847,7 +847,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [admiring_turing] DSL2 - revision: b9e9b3b8de
 
@@ -878,7 +878,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     executor >  local (8)
     [b2/e08524] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
     [13/88939f] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [23/4554e1] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+    [23/4554e1] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
     [a3/c6cbe9] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
@@ -893,10 +893,10 @@ Varsayılan batch adına göre, cowpy çıktı dosyasını daha önce olduğu gi
     ├── Bonjour-output.txt
     ├── cowpy-test.txt
     ├── Hello-output.txt
-    ├── Holà-output.txt
+    ├── Hola-output.txt
     ├── UPPER-Bonjour-output.txt
     ├── UPPER-Hello-output.txt
-    └── UPPER-Holà-output.txt
+    └── UPPER-Hola-output.txt
     ```
 
 Modül veya iş akışı kodunda herhangi bir değişiklik yapmak zorunda kalmadan adlandırma desenini değiştirebileceğinizi kendinize kanıtlamak için `conf/modules.config` dosyasındaki `ext.prefix` yapılandırmasını değiştirmekten çekinmeyin.
@@ -920,7 +920,7 @@ Peki, modülümüzü nf-core yönergelerine uyacak şekilde iyileştirmek için 
 Çıktıları iki farklı dizine yayınladığımızı fark etmiş olabilirsiniz:
 
 - **`results`** — Başlangıçtan beri yerel modüllerimiz için kullandığımız, modül başına `publishDir` yönergeleri kullanılarak ayrı ayrı ayarlanan orijinal çıktı dizini;
-- **`core-hello-results`** — Komut satırında `--outdir` ile ayarlanan, nf-core günlüklerini ve `CAT_CAT` tarafından yayınlanan sonuçları alan çıktı dizini.
+- **`core-hello-results`** — Komut satırında `--outdir` ile ayarlanan, nf-core günlüklerini ve `FIND_CONCATENATE` tarafından yayınlanan sonuçları alan çıktı dizini.
 
 Bu dağınık ve optimal değil; her şey için tek bir konuma sahip olmak daha iyi olurdu.
 Tabii ki, yerel modüllerimizin her birine gidip `publishDir` yönergesini `core-hello-results` dizinini kullanacak şekilde manuel olarak güncelleyebiliriz; ancak bir dahaki sefere çıktı dizinini değiştirmeye karar verirsek ne olur?
@@ -928,7 +928,7 @@ Tabii ki, yerel modüllerimizin her birine gidip `publishDir` yönergesini `core
 Bireysel modüllerin yayınlama kararları vermesi açıkça gidilecek yol değil; özellikle aynı modülün birçok farklı iş hattında, farklı ihtiyaçları veya tercihleri olan insanlar tarafından kullanılabileceği bir dünyada.
 Çıktıların nereye yayınlanacağını iş akışı yapılandırma düzeyinde kontrol edebilmek istiyoruz.
 
-"Hey," diyebilirsiniz, "`CAT_CAT` çıktılarını `--outdir`'e gönderiyor. Belki onun `publishDir` yönergesini kopyalamalıyız?"
+"Hey," diyebilirsiniz, "`FIND_CONCATENATE` çıktılarını `--outdir`'e gönderiyor. Belki onun `publishDir` yönergesini kopyalamalıyız?"
 
 Evet, bu harika bir fikir.
 
@@ -984,7 +984,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.04.3
+     N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [silly_caravaggio] DSL2 - revision: b9e9b3b8de
 
@@ -1015,7 +1015,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     executor >  local (8)
     [db/39978e] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
     [b5/bf6a8d] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [b7/c61842] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+    [b7/c61842] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
     [46/5839d6] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
@@ -1027,7 +1027,7 @@ Mevcut çalışma dizininize bir göz atın.
 
     ```console hl_lines="4-5"
     core-hello-results/
-    ├── cat
+    ├── find
     │   └── test.txt
     ├── cowpy
     │   └── cowpy-test.txt
@@ -1060,7 +1060,7 @@ Nextflow'un iş akışı ve modül adlarına göre bu dizin hiyerarşisini oluş
 !!! note "Not"
 
     `pipeline_info/` dizininde `hello_software_versions.yml` dosyasını fark edebilirsiniz.
-    Şu anda yalnızca `CAT_CAT`'ten gelen sürüm bilgilerini içeriyor; çünkü `COWPY` henüz kendi sürümünü raporlamıyor.
+    Şu anda yalnızca `FIND_CONCATENATE`'ten gelen sürüm bilgilerini içeriyor; çünkü `COWPY` henüz kendi sürümünü raporlamıyor.
     Bölüm 1.6, bunun nasıl ekleneceğini ele alıyor.
 
 Sorumlu kod `conf/modules.config` dosyasında bulunur.
@@ -1079,9 +1079,9 @@ process {
 Bu karmaşık görünebilir; bu yüzden üç bileşenin her birine bakalım:
 
 - **`path:`** Süreç adına göre çıktı dizinini belirler.
-  `task.process` içinde yer alan bir sürecin tam adı, iş akışı ve modül import hiyerarşisini içerir (`CORE_HELLO:HELLO:CAT_CAT` gibi).
+  `task.process` içinde yer alan bir sürecin tam adı, iş akışı ve modül import hiyerarşisini içerir (`CORE_HELLO:HELLO:FIND_CONCATENATE` gibi).
   `tokenize` işlemleri bu hiyerarşiyi soyarak sadece süreç adını alır; sonra herhangi bir alt çizgiden önceki ilk kısmı alır (varsa) ve küçük harfe dönüştürür.
-  Bu, `CAT_CAT` sonuçlarının `${params.outdir}/cat/` dizinine yayınlanmasını belirleyen şeydir.
+  Bu, `FIND_CONCATENATE` sonuçlarının `#!groovy ${params.outdir}/find/` dizinine yayınlanmasını belirleyen şeydir.
 - **`mode:`** Dosyaların nasıl yayınlanacağını kontrol eder (copy, symlink, vb.).
   Bu, `params.publish_dir_mode` parametresi aracılığıyla yapılandırılabilir.
 - **`saveAs:`** Hangi dosyaların yayınlanacağını filtreler.
@@ -1165,13 +1165,32 @@ Script bloğunda herhangi bir değişiklik gerekmez — sürüm, output bloğund
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
 ```
 
+??? success "Komut çıktısı"
+
+    ```console
+     N E X T F L O W   ~  version 25.10.4
+
+    Launching `./main.nf` [silly_fermat] DSL2 - revision: b9e9b3b8de
+
+    ...
+
+    executor >  local (8)
+    [8d/f3a091] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
+    [2e/b5c742] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
+    [6a/d9e183] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
+    [3c/f20b54] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
+    ```
+
 `core-hello-results/pipeline_info/hello_software_versions.yml` dosyasını açın; artık her iki modülü de göreceksiniz:
 
 ```yaml title="core-hello-results/pipeline_info/hello_software_versions.yml"
-CAT_CAT:
-  pigz: 2.8
 COWPY:
   cowpy: 1.1.5
+FIND_CONCATENATE:
+  coreutils: 9.4
+  find: 4.6.0
+  pigz: 2.8
 ```
 
 İş akışı tarafındaki koleksiyon — Bölüm 2'deki yer tutucu iş akışında gördüğünüz `Channel.topic("versions")` bloğu — topic'e abone olur ve bu birleşik raporu otomatik olarak yazar.
@@ -1256,7 +1275,7 @@ Her dosya belirli bir amaca hizmet eder:
 
 !!! tip "Test hakkında daha fazla bilgi"
 
-    Oluşturulan test dosyası, Nextflow iş hatları ve modülleri için bir test framework'ü olan nf-test'i kullanır. Bu testleri nasıl yazacağınızı ve çalıştıracağınızı öğrenmek için [nf-test yan görevi](../side_quests/nf-test.md)'ne bakın.
+    Oluşturulan test dosyası, Nextflow iş hatları ve modülleri için bir test framework'ü olan nf-test'i kullanır. Bu testleri nasıl yazacağınızı ve çalıştıracağınızı öğrenmek için [nf-test yan görevi](../side_quests/nf_test/index.md)'ne bakın.
 
 Oluşturulan `main.nf`, az önce öğrendiğiniz tüm desenleri ve bazı ek özellikleri içerir:
 
@@ -1432,10 +1451,10 @@ Girdi ve çıktı bloklarını güncelleyin:
 Bu şunları belirtir:
 
 - Girdi dosyası parametre adı (genel `input` yerine `input_file`)
-- Yapılandırılabilir önek desenini kullanan çıktı dosya adı (joker `*` yerine `${prefix}.txt`)
+- Yapılandırılabilir önek desenini kullanan çıktı dosya adı (joker `*` yerine `#!groovy ${prefix}.txt`)
 - Açıklayıcı bir emit adı (genel `output` yerine `cowpy_output`)
 
-Sözdizimini doğrulamak için Nextflow dil sunucusu kullanıyorsanız, `${prefix}` kısmı bu aşamada hata olarak işaretlenecektir; çünkü henüz script bloğuna eklemedik.
+Sözdizimini doğrulamak için Nextflow dil sunucusu kullanıyorsanız, `#!groovy ${prefix}` kısmı bu aşamada hata olarak işaretlenecektir; çünkü henüz script bloğuna eklemedik.
 Şimdi buna geçelim.
 
 #### 2.3.2. Script bloğu
@@ -1471,7 +1490,7 @@ Daha önce manuel olarak yazdığımız modüle dayanarak, aşağıdaki düzenle
 Temel değişiklikler:
 
 - `def prefix`'i sadece `prefix`'e değiştirin (`def` olmadan) — çıktı bloğunda erişilebilir kılmak için
-- Hem `$args` hem de `${prefix}.txt` kullanan gerçek `cowpy` komutunu doldurun
+- Hem `$args` hem de `#!groovy ${prefix}.txt` kullanan gerçek `cowpy` komutunu doldurun
 
 `COWPY` süreci için `ext.args` ve `ext.prefix` yapılandırmasını `modules.config` dosyasına ekleme işini zaten yapmamış olsaydık, bunu şimdi yapmamız gerekecekti.
 
@@ -1512,7 +1531,7 @@ Temel değişiklikler:
 
 - Script bloğuyla eşleşmesi için `def prefix`'i sadece `prefix`'e değiştirin
 - `echo $args` satırını kaldırın (sadece şablon yer tutucu koduydu)
-- Stub, script bloğunun ürettiğiyle eşleşen boş bir `${prefix}.txt` dosyası oluşturur
+- Stub, script bloğunun ürettiğiyle eşleşen boş bir `#!groovy ${prefix}.txt` dosyası oluşturur
 
 Bu, gerçek aracın çalışmasını beklemeden iş akışı mantığını ve dosya işlemeyi test etmenize olanak tanır.
 
@@ -1535,12 +1554,12 @@ Ortam kurulumunu (bölüm 2.2), girdiler/çıktılar (bölüm 2.3.1), script blo
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
     include { COWPY                  } from '../modules/local/cowpy/main.nf'
-    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
+    include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
     ```
 
 === "Önce"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="1" hl_lines="10"
+    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="10"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -1551,7 +1570,7 @@ Ortam kurulumunu (bölüm 2.2), girdiler/çıktılar (bölüm 2.3.1), script blo
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
     include { COWPY                  } from '../modules/local/cowpy.nf'
-    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
+    include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
     ```
 
 Test etmek için iş hattını çalıştıralım.
@@ -1563,7 +1582,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "Komut çıktısı"
 
     ```console hl_lines="33"
-      N E X T F L O W   ~  version 25.04.3
+      N E X T F L O W   ~  version 25.10.4
 
     Launching `./main.nf` [prickly_neumann] DSL2 - revision: b9e9b3b8de
 
@@ -1594,7 +1613,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     executor >  local (8)
     [e9/008ede] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
     [f0/d70cfe] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [be/0ecc58] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+    [be/0ecc58] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
     [11/8e082f] CORE_HELLO:HELLO:COWPY (test)       [100%] 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
