@@ -48,6 +48,16 @@ Before taking on this side quest, you should:
 - Have completed the [Hello Nextflow](../../hello_nextflow/index.md) tutorial or equivalent beginner's course.
 - Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators, working with files, meta data)
 
+!!! warning "nf-test version requirement"
+
+    Process-level tests require **nf-test 0.9.3 or later**. Older versions (including 0.9.2) generate test harness code that is incompatible with the strict syntax parser that Nextflow uses by default from version 26.04 onward, causing a `Script compilation failed` error instead of the expected test result.
+
+    Check your version with `nf-test version`. If you need to upgrade:
+
+    ```bash
+    curl -fsSL https://code.askimed.com/install/nf-test | bash
+    ```
+
 ---
 
 ## 0. Get started
