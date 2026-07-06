@@ -1672,8 +1672,8 @@ sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 ...
 ```
 
-The `character` key is never created in the meta map.
-When the process script evaluates `#!groovy ${meta.character}`, the missing key returns `null`, and Nextflow literally substitutes the string `null` into the command:
+Our `map` operation explicitly writes `#!groovy character: row.character`, so the `character` key is still created in the meta map, but accessing a column that doesn't exist on the parsed row returns `null`, so its value becomes `null`.
+When the process script evaluates `#!groovy ${meta.character}`, Nextflow literally substitutes the string `null` into the command:
 
 ??? failure "Command output"
 
