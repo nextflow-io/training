@@ -1353,7 +1353,7 @@ Let's update the workflow `main.nf` accordingly:
 === "Before"
 
     ```groovy title="main.nf" linenums="7" hl_lines="1-2"
-        // Load files with channel.fromFilePairs
+        // Load files with channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_files.map { myFile ->
             def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
@@ -1883,7 +1883,7 @@ Make the following change to the `output {}` block:
 
 === "After"
 
-    ```groovy title="main.nf" hl_lines="3"
+    ```groovy title="main.nf" hl_lines="2"
     analysis_results {
         path { meta, file -> "${meta.type}/${meta.id}/${meta.replicate}" }
     }
@@ -1891,7 +1891,7 @@ Make the following change to the `output {}` block:
 
 === "Before"
 
-    ```groovy title="main.nf" hl_lines="3"
+    ```groovy title="main.nf" hl_lines="2"
     analysis_results {
         path { meta, file -> "${meta.id}" }
     }
