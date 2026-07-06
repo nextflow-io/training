@@ -1055,7 +1055,7 @@ There are two key advantages to doing this:
 To use it, simply add `-resume` to your command and run it:
 
 ```bash
-nextflow run hello-world.nf -resume
+nextflow run hello-world.nf --input 'Konnichiwa!' -resume
 ```
 
 ??? success "Command output"

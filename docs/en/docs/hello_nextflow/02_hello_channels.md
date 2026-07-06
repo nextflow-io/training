@@ -1076,11 +1076,13 @@ Make the following edit to the parameter declaration:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="20" hl_lines="4"
+    ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
      * Pipeline parameters
      */
-    input: String = 'Hola mundo!'
+    params {
+        input: String = 'Hola mundo!'
+    }
     ```
 
 This assumes the file is co-located with the workflow code.
