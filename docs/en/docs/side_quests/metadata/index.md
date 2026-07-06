@@ -372,7 +372,7 @@ Importantly, we have values for both, but they are currently bundled inside each
 
 One way to extract multiple fields into separate channels is the [`multiMap`](https://www.nextflow.io/docs/latest/reference/operator.html#multimap) operator, which splits one channel into multiple named sub-channels in a single operation.
 
-#### 1.3.1. Add the multiMap operation
+#### 1.3.1. Add the `multiMap` operation
 
 Replace the `map` operation with `multiMap`:
 
@@ -400,7 +400,7 @@ Replace the `map` operation with `multiMap`:
 
 The `multiMap` block defines two named sub-channels (`file` and `character`) from each row, which we can access as `ch_datasheet.file` and `ch_datasheet.character`.
 
-#### 1.3.2. Call COWPY on the sub-channels
+#### 1.3.2. Call `COWPY` on the sub-channels
 
 Now, include the `COWPY` process and give it each sub-channel as a separate argument:
 
@@ -558,7 +558,7 @@ Good news: there is a simpler way to do this.
 
 Rather than splitting the fields into separate channels, we can update the process to receive all inputs as a single tuple, which simplifies the call to the process.
 
-#### 1.4.1. Update the COWPY process
+#### 1.4.1. Update the `COWPY` process
 
 Update `COWPY` to accept a tuple corresponding to the three elements in each row:
 
@@ -780,7 +780,7 @@ Let's restructure the `map` operation to produce a `[meta, file]` tuple:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="5" hl_lines="4 7"
+    ```groovy title="main.nf" linenums="5" hl_lines="4 7 10"
         ch_datasheet = channel.fromPath("./data/datasheet.csv")
             .splitCsv(header: true)
             .map { row ->
