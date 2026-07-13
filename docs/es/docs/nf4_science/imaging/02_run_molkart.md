@@ -64,32 +64,40 @@ Esto crea un directorio `molkart/` que contiene el código fuente completo del p
 
     Típicamente, ejecutaría pipelines de nf-core directamente desde GitHub usando `nextflow run nf-core/molkart -r 1.2.0`.
     Nextflow descarga automáticamente la versión del pipeline solicitada para usted en `$HOME/.nextflow/assets/nf-core/molkart` y lo ejecuta desde allí.
-    Sin embargo, para este entrenamiento, estamos clonando el pipeline a un directorio local diferente para que podamos inspeccionar el código más fácilmente.
+    Sin embargo, para esta capacitación, estamos clonando el pipeline a un directorio local diferente para que podamos inspeccionar el código más fácilmente.
 
 ### 2.1. Comprender los requisitos de contenedores
 
 Antes de ejecutar el pipeline completo, aprendamos por qué los contenedores son esenciales para los pipelines de nf-core.
 
-Intentemos ejecutar el pipeline usando el conjunto de datos de prueba y los parámetros de la configuración de prueba de molkart:
+Proporcionaremos los parámetros del pipeline usando un archivo de parámetros.
+Un archivo de parámetros es un archivo YAML que lista cada parámetro y su valor, lo que mantiene los valores tipados (como los enteros) intactos y mantiene la línea de comandos corta.
 
-```bash
-nextflow run ./molkart \
-  --input 'data/samplesheet.csv' \
-  --mindagap_tilesize 90 \
-  --mindagap_boxsize 7 \
-  --mindagap_loopnum 100 \
-  --clahe_pyramid_tile 368 \
-  --segmentation_method "mesmer,cellpose,stardist" \
-  --outdir results
+Ya se proporciona un archivo `params.yaml` en el directorio de trabajo:
+
+```yaml title="params.yaml"
+input: "data/samplesheet.csv"
+outdir: "results"
+mindagap_tilesize: 90
+mindagap_boxsize: 7
+mindagap_loopnum: 100
+clahe_pyramid_tile: 368
+segmentation_method: "cellpose"
 ```
 
-Desglosemos estos parámetros:
+Estos parámetros son:
 
-- `--input`: Ruta a la hoja de muestras que contiene metadatos de muestras
-- `--mindagap_tilesize`, `--mindagap_boxsize`, `--mindagap_loopnum`: Parámetros para el relleno de patrón de cuadrícula
-- `--clahe_pyramid_tile`: Tamaño del kernel para mejora de contraste
-- `--segmentation_method`: Qué algoritmo(s) usar para la segmentación celular
-- `--outdir`: Dónde guardar los resultados
+- `input`: Ruta a la hoja de muestras que contiene metadatos de muestras
+- `mindagap_tilesize`, `mindagap_boxsize`, `mindagap_loopnum`: Parámetros para el relleno de patrón de cuadrícula
+- `clahe_pyramid_tile`: Tamaño del kernel para mejora de contraste
+- `segmentation_method`: Qué algoritmo(s) usar para la segmentación celular
+- `outdir`: Dónde guardar los resultados
+
+Intentemos ejecutar el pipeline usando estos parámetros:
+
+```bash
+nextflow run ./molkart -params-file params.yaml
+```
 
 !!! Warning "¡Este comando fallará - eso es intencional!"
 
@@ -172,17 +180,10 @@ process {
 }
 ```
 
-Ahora ejecute el pipeline nuevamente con el mismo comando:
+Ahora ejecute el pipeline nuevamente, esta vez ejecutando los tres métodos de segmentación para poder compararlos más adelante:
 
 ```bash
-nextflow run ./molkart \
-  --input 'data/samplesheet.csv' \
-  --mindagap_tilesize 90 \
-  --mindagap_boxsize 7 \
-  --mindagap_loopnum 100 \
-  --clahe_pyramid_tile 368 \
-  --segmentation_method "cellpose,mesmer,stardist" \
-  --outdir results
+nextflow run ./molkart -params-file params.yaml --segmentation_method "mesmer,cellpose,stardist"
 ```
 
 Esta vez, Nextflow:
@@ -209,12 +210,13 @@ Mientras se ejecuta el pipeline, verá una salida similar a esta:
 ??? success "Salida del comando"
 
     ```console
-    Nextflow 25.04.8 is available - Please consider updating your version to it
+     N E X T F L O W   ~  version 26.04.4
 
-    N E X T F L O W   ~  version 25.04.3
+    Launching `./molkart/main.nf` [exotic_banach] revision: e4152308ec
 
-    Launching `https://github.com/nf-core/molkart` [soggy_kalam] DSL2 - revision: 5e54b29cb3 [dev]
-
+    WARN: Unrecognized config option 'validation.help.enabled'
+    WARN: Unrecognized config option 'validation.defaultIgnoreParams'
+    WARN: Unrecognized config option 'validation.monochromeLogs'
 
     ------------------------------------------------------
                                             ,--./,-.
@@ -222,39 +224,34 @@ Mientras se ejecuta el pipeline, verá una salida similar a esta:
       |\ | |__  __ /  ` /  \ |__) |__         }  {
       | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                             `._,._,'
-      nf-core/molkart 1.2.0dev
+      nf-core/molkart 1.2.0
     ------------------------------------------------------
     Segmentation methods and options
-      segmentation_method       : mesmer,cellpose,stardist
+      segmentation_method: mesmer,cellpose,stardist
 
     Image preprocessing
-      mindagap_boxsize          : 7
-      mindagap_loopnum          : 100
-      clahe_kernel              : 25
-      mindagap_tilesize         : 90
-      clahe_pyramid_tile        : 368
+      mindagap_boxsize   : 7
+      mindagap_loopnum   : 100
+      clahe_kernel       : 25
+      mindagap_tilesize  : 90
+      clahe_pyramid_tile : 368
 
     Input/output options
-      input                     : https://raw.githubusercontent.com/nf-core/test-datasets/molkart/test_data/samplesheets/samplesheet_membrane.csv
-      outdir                    : results
-
-    Institutional config options
-      config_profile_name       : Test profile
-      config_profile_description: Minimal test dataset to check pipeline function
+      input              : data/samplesheet.csv
+      outdir             : results
 
     Generic options
-      trace_report_suffix       : 2025-10-18_22-22-21
+      trace_report_suffix: 2026-06-23_16-25-30
 
     Core Nextflow options
-      revision                  : dev
-      runName                   : soggy_kalam
-      containerEngine           : docker
-      launchDir                 : /workspaces/training/nf4-science/imaging
-      workDir                   : /workspaces/training/nf4-science/imaging/work
-      projectDir                : /workspaces/.nextflow/assets/nf-core/molkart
-      userName                  : root
-      profile                   : docker,test
-      configFiles               :
+      runName            : exotic_banach
+      containerEngine    : docker
+      launchDir          : /workspaces/training/nf4-science/imaging
+      workDir            : /workspaces/training/nf4-science/imaging/work
+      projectDir         : /workspaces/training/nf4-science/imaging/molkart
+      userName           : root
+      profile            : standard
+      configFiles        : /workspaces/training/nf4-science/imaging/molkart/nextflow.config, /workspaces/training/nf4-science/imaging/nextflow.config
 
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
@@ -268,22 +265,22 @@ Mientras se ejecuta el pipeline, verá una salida similar a esta:
         https://github.com/nf-core/molkart/blob/master/CITATIONS.md
 
     executor >  local (22)
-    [c1/da5009] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)        [100%] 2 of 2 ✔
-    [73/8f5e8a] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)                    [100%] 2 of 2 ✔
-    [ec/8f84d5] NFCORE_MOLKART:MOLKART:CREATE_STACK (mem_only)             [100%] 1 of 1 ✔
-    [a2/99349b] NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only) [100%] 1 of 1 ✔
-    [95/c9b4b1] NFCORE_MOLKART:MOLKART:DEEPCELL_MESMER (mem_only)          [100%] 1 of 1 ✔
-    [d4/1ebd1e] NFCORE_MOLKART:MOLKART:STARDIST (mem_only)                 [100%] 1 of 1 ✔
-    [3e/3c0736] NFCORE_MOLKART:MOLKART:CELLPOSE (mem_only)                 [100%] 1 of 1 ✔
-    [a0/415c6a] NFCORE_MOLKART:MOLKART:MASKFILTER (mem_only)               [100%] 3 of 3 ✔
-    [14/a830c9] NFCORE_MOLKART:MOLKART:SPOT2CELL (mem_only)                [100%] 3 of 3 ✔
-    [b5/391836] NFCORE_MOLKART:MOLKART:CREATE_ANNDATA (mem_only)           [100%] 3 of 3 ✔
-    [77/aed558] NFCORE_MOLKART:MOLKART:MOLKARTQC (mem_only)                [100%] 3 of 3 ✔
-    [e6/b81475] NFCORE_MOLKART:MOLKART:MULTIQC                             [100%] 1 of 1 ✔
+    [b4/e57ff1] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2 ✔
+    [2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2 ✔
+    [94/b1ef70] NFC…RT:CREATE_STACK (mem_only) | 1 of 1 ✔
+    [58/4b6426] NFC…DUPLICATEFINDER (mem_only) | 1 of 1 ✔
+    [c2/ef7002] NFC…DEEPCELL_MESMER (mem_only) | 1 of 1 ✔
+    [4f/ddd328] NFC…OLKART:STARDIST (mem_only) | 1 of 1 ✔
+    [8c/dd0362] NFC…OLKART:CELLPOSE (mem_only) | 1 of 1 ✔
+    [08/2ddcb5] NFC…KART:MASKFILTER (mem_only) | 3 of 3 ✔
+    [56/e30de0] NFC…LKART:SPOT2CELL (mem_only) | 3 of 3 ✔
+    [b0/5aa635] NFC…:CREATE_ANNDATA (mem_only) | 3 of 3 ✔
+    [5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3 ✔
+    [8e/8bd365] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
     -[nf-core/molkart] Pipeline completed successfully-
-    Completed at: 19-Oct-2025 22:23:01
-    Duration    : 2m 52s
-    CPU hours   : 0.1
+    Completed at: 23-Jun-2026 16:31:40
+    Duration    : 6m 9s
+    CPU hours   : (a few seconds)
     Succeeded   : 22
     ```
 
@@ -303,10 +300,10 @@ La línea del executor `executor > local (22)` le dice:
 
 Cada línea de proceso muestra:
 
-- **Hash** (`[1a/2b3c4d]`): Identificador del directorio de trabajo (como antes)
+- **Hash** (`[b4/e57ff1]`): Identificador del directorio de trabajo (como antes)
 - **Nombre del proceso**: Ruta completa del módulo y nombre del proceso
 - **Identificador de entrada**: Nombre de muestra entre paréntesis
-- **Progreso**: Porcentaje completo y conteo (por ejemplo, `1 of 1 ✔`)
+- **Progreso**: Conteo de tareas y estado de finalización (por ejemplo, `1 of 1 ✔`)
 
 ### Conclusión
 
@@ -372,7 +369,7 @@ El informe incluye:
 - Métricas de calidad de segmentación
 - Número de células y puntos detectados
 
-!!! Tip
+!!! Tip "Consejo"
 
     Los informes MultiQC se incluyen típicamente en todos los pipelines de nf-core.
     Siempre proporcionan una visión general de alto nivel de la ejecución del pipeline y la calidad de los datos.
@@ -426,7 +423,7 @@ Esto muestra:
 - Uso de CPU y memoria
 - Qué tareas fueron cacheadas vs. ejecutadas
 
-!!! Tip
+!!! Tip "Consejo"
 
     Estos informes son increíblemente útiles para optimizar la asignación de recursos y solucionar problemas de rendimiento.
 
@@ -447,7 +444,7 @@ Al igual que con nuestro ejemplo de Hello World, todo el trabajo real ocurre en 
 ### 4.1. Comprender la estructura del directorio de trabajo
 
 El directorio de trabajo contiene un subdirectorio para cada tarea que fue ejecutada.
-Para este pipeline con 12 tareas, habrá 12 subdirectorios de trabajo.
+Para esta ejecución del pipeline con 22 tareas, habrá 22 subdirectorios de trabajo.
 
 Liste el directorio de trabajo:
 
@@ -477,7 +474,7 @@ La diferencia clave con Hello World:
 - Los archivos de salida pueden ser bastante grandes (máscaras de segmentación, imágenes procesadas)
 - Múltiples archivos de entrada y salida por tarea
 
-!!! Tip
+!!! Tip "Consejo"
 
     Si un proceso falla, puede navegar a su directorio de trabajo, examinar `.command.err` para mensajes de error e incluso re-ejecutar `.command.sh` manualmente para depurar el problema.
 
@@ -507,7 +504,7 @@ Una de las características más poderosas de Nextflow es la capacidad de reanud
 Cuando ejecuta un pipeline con `-resume`, Nextflow:
 
 1. Verifica el caché para cada tarea
-2. Si las entradas, código y parámetros son idénticos, reutiliza el resultado cacheado
+2. Si las entradas, el código y los parámetros son idénticos, reutiliza el resultado cacheado
 3. Solo re-ejecuta tareas que cambiaron o fallaron
 
 Esto es esencial para pipelines de larga ejecución donde las fallas pueden ocurrir tarde en la ejecución.
@@ -517,30 +514,29 @@ Esto es esencial para pipelines de larga ejecución donde las fallas pueden ocur
 Ejecute el mismo comando nuevamente, pero agregue `-resume`:
 
 ```bash
-nextflow run ./molkart \
-  --input 'data/samplesheet.csv' \
-  --mindagap_tilesize 90 \
-  --mindagap_boxsize 7 \
-  --mindagap_loopnum 100 \
-  --clahe_pyramid_tile 368 \
-  --segmentation_method "cellpose" \
-  --outdir results \
-  -resume
+nextflow run ./molkart -params-file params.yaml --segmentation_method "mesmer,cellpose,stardist" -resume
 ```
 
-Debería ver una salida como: <!-- TODO: full output -->
+Debería ver una salida como:
 
 ```console
-executor >  local (0)
-[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)        [100%] 2 of 2, cached: 2 ✔
-[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)                    [100%] 2 of 2, cached: 2 ✔
-[7f/8g9h0i] NFCORE_MOLKART:MOLKART:CREATE_STACK (mem_only)             [100%] 1 of 1, cached: 1 ✔
-[9h/0i1j2k] NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only) [100%] 1 of 1, cached: 1 ✔
-[2k/3l4m5n] NFCORE_MOLKART:MOLKART:CELLPOSE (mem_only)                 [100%] 1 of 1, cached: 1 ✔
-...
+executor >  local (1)
+[43/e03702] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2, cached: 2 ✔
+[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2, cached: 2 ✔
+[94/b1ef70] NFC…RT:CREATE_STACK (mem_only) | 1 of 1, cached: 1 ✔
+[58/4b6426] NFC…DUPLICATEFINDER (mem_only) | 1 of 1, cached: 1 ✔
+[c2/ef7002] NFC…DEEPCELL_MESMER (mem_only) | 1 of 1, cached: 1 ✔
+[4f/ddd328] NFC…OLKART:STARDIST (mem_only) | 1 of 1, cached: 1 ✔
+[8c/dd0362] NFC…OLKART:CELLPOSE (mem_only) | 1 of 1, cached: 1 ✔
+[08/2ddcb5] NFC…KART:MASKFILTER (mem_only) | 3 of 3, cached: 3 ✔
+[56/e30de0] NFC…LKART:SPOT2CELL (mem_only) | 3 of 3, cached: 3 ✔
+[b0/5aa635] NFC…:CREATE_ANNDATA (mem_only) | 3 of 3, cached: 3 ✔
+[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3, cached: 3 ✔
+[73/239f45] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
+-[nf-core/molkart] Pipeline completed successfully-
 ```
 
-Note `cached: 2` o `cached: 1` para cada proceso - ¡nada fue re-ejecutado!
+Note la anotación `cached: N` en cada proceso de preprocesamiento y segmentación: esas tareas fueron reutilizadas en lugar de re-ejecutadas.
 
 ### 5.3. Cuándo resume es útil
 
@@ -551,7 +547,7 @@ Resume es particularmente valioso cuando:
 - Su conexión de red se interrumpe durante la descarga de datos
 - Desea agregar salidas adicionales sin rehacer el cómputo
 
-!!! Warning
+!!! Warning "Advertencia"
 
     Resume solo funciona si no ha cambiado los datos de entrada, el código del pipeline o los parámetros.
     Si cambia cualquiera de estos, Nextflow correctamente re-ejecutará las tareas afectadas.

@@ -215,9 +215,9 @@ nextflow run hello-world.nf
 ??? success "Salida del comando"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+    Launching `hello-world.nf` [goofy_torvalds] revision: c33d41f479
 
     executor >  local (1)
     [65/7be2fa] sayHello | 1 of 1 ✔
@@ -486,17 +486,23 @@ nextflow run hello-world.nf
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5
+    Launching `hello-world.nf` [jovial_mayer] revision: 35bd3425e5
 
     executor >  local (1)
     [9f/48ef97] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: output.txt
     ```
 
-La salida de la terminal debería verse familiar. Externamente, nada ha cambiado.
+La salida de la terminal ahora termina con un resumen `Outputs:` que lista las salidas publicadas y el directorio en el que fueron escritas.
 
-Sin embargo, revise su explorador de archivos: esta vez, Nextflow ha creado un nuevo directorio llamado `results/`.
+Revise su explorador de archivos: esta vez, Nextflow también ha creado un nuevo directorio llamado `results/`.
 
 ??? abstract "Contenido del directorio"
 
@@ -574,12 +580,18 @@ nextflow run hello-world.nf
 ??? success "Salida del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
+    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
 
     executor >  local (1)
-    [8c/79499c] process > sayHello [100%] 1 of 1 ✔
+    [8c/79499c] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 Esta vez el resultado se escribe bajo el subdirectorio especificado.
@@ -653,12 +665,18 @@ nextflow run hello-world.nf
 ??? success "Salida del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
+    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
 
     executor >  local (1)
-    [df/521638] process > sayHello [100%] 1 of 1 ✔
+    [df/521638] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 Esta vez, si observa los resultados, el archivo es una copia adecuada en lugar de solo un enlace simbólico.
@@ -767,19 +785,19 @@ En el bloque del proceso, haga el siguiente cambio de código:
 === "Después"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-    script:
-    """
-    echo '${greeting}' > output.txt
-    """
+        script:
+        """
+        echo '${greeting}' > output.txt
+        """
     ```
 
 === "Antes"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-    script:
-    """
-    echo 'Hello World!' > output.txt
-    """
+        script:
+        """
+        echo 'Hello World!' > output.txt
+        """
     ```
 
 El símbolo `$` y las llaves (`{ }`) le dicen a Nextflow que este es un nombre de variable que necesita ser reemplazado con el valor de entrada real (=interpolado).
@@ -811,15 +829,15 @@ En el bloque del workflow, haga el siguiente cambio de código:
 === "Después"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // emite un saludo
-    sayHello(params.input)
+        // emite un saludo
+        sayHello(params.input)
     ```
 
 === "Antes"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // emite un saludo
-    sayHello()
+        // emite un saludo
+        sayHello()
     ```
 
 Esto le dice a Nextflow que ejecute el proceso `sayHello` con el valor proporcionado a través del parámetro `--input`.
@@ -837,12 +855,18 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea
+    Launching `hello-world.nf` [elated_lavoisier] revision: 7c031b42ea
 
     executor >  local (1)
     [4b/654319] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 Si hizo todas estas ediciones correctamente, debería obtener otra ejecución exitosa.
@@ -906,12 +930,18 @@ nextflow run hello-world.nf
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582
+    Launching `hello-world.nf` [determined_edison] revision: 3539118582
 
     executor >  local (1)
     [72/394147] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 ??? question "Si no funcionó"
@@ -936,7 +966,8 @@ nextflow run hello-world.nf
     Esto se mencionó al inicio del curso, pero tal vez se lo perdió.
     Consulte el material de ayuda sobre [versiones de Nextflow](../info/nxf_versions.md).
 
-    En resumen, si está usando Nextflow `25.10` entonces necesita habilitar el analizador de lenguaje v2:
+    El analizador v2 es el predeterminado a partir de Nextflow 26.04, por lo que solo verá este error en versiones anteriores.
+    En una versión anterior a 26.04 necesita habilitar el analizador de lenguaje v2:
 
     ```bash
     export NXF_SYNTAX_PARSER=v2
@@ -965,12 +996,18 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582
+    Launching `hello-world.nf` [elegant_faraday] revision: 3539118582
 
     executor >  local (1)
     [6f/a12a91] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 Una vez más, debería encontrar la salida actualizada correspondiente en su directorio de resultados.
@@ -1020,17 +1057,23 @@ Hay dos ventajas clave al hacer esto:
 Para usarlo, simplemente agregue `-resume` a su comando y ejecútelo:
 
 ```bash
-nextflow run hello-world.nf -resume
+nextflow run hello-world.nf --input 'Konnichiwa!' -resume
 ```
 
 ??? success "Salida del comando"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
+    Launching `hello-world.nf` [golden_cantor] revision: 35bd3425e5
 
     [62/49a1f8] sayHello | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 La salida de la consola debería verse familiar, pero hay una cosa que es un poco diferente en comparación con antes.

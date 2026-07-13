@@ -20,7 +20,7 @@ En aquesta cinquena part del curs de formació Hello nf-core, us mostrem com uti
     Podeu comprovar que s'executa correctament executant la comanda següent:
 
     ```bash
-    nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+    nextflow run . --outdir core-hello-results -profile test,docker
     ```
 
 ---
@@ -84,7 +84,7 @@ nf-schema és el successor del plugin nf-validation obsolet i utilitza l'estànd
 
     ```groovy
     plugins {
-        id 'nf-schema@2.1.1'
+        id 'nf-schema@2.7.2'
     }
     ```
 
@@ -142,23 +142,40 @@ Ara apliquem aquests principis a la pràctica, començant amb la validació de p
 
 Comencem afegint validació de paràmetres al nostre pipeline. Això valida indicadors de línia de comandes com `--input`, `--outdir` i `--batch`.
 
-### 1.1. Configurar la validació per ometre la validació de fitxers d'entrada
+### 1.1. Habilitar la validació i ometre la validació de fitxers d'entrada
 
 La plantilla de pipeline nf-core ve amb nf-schema ja instal·lat i configurat:
 
 - El plugin nf-schema s'instal·la mitjançant el bloc `plugins{}` a `nextflow.config`
-- La validació de paràmetres està habilitada per defecte mitjançant `params.validate_params = true`
+- La validació de paràmetres es controla mitjançant `params.validate_params`
 - La validació es realitza pel subworkflow `UTILS_NFSCHEMA_PLUGIN` durant la inicialització del pipeline
 
-El comportament de validació es controla mitjançant l'àmbit `validation{}` a `nextflow.config`.
+A les Parts 3 i 4 vam establir `validate_params = false` perquè el pipeline pogués executar-se abans de configurar cap esquema.
+Ara que estem preparats per afegir validació, el primer pas és activar-la.
 
-Com que treballarem primer en la validació de paràmetres (aquesta secció) i no configurarem l'esquema de dades d'entrada fins a la secció 2, necessitem dir temporalment a nf-schema que ometi la validació dels continguts del fitxer del paràmetre `input`.
-
-Obriu `nextflow.config` i trobeu el bloc `validation` (al voltant de la línia 247). Afegiu `ignoreParams` per ometre la validació de fitxers d'entrada:
+Obriu `nextflow.config` i trobeu el paràmetre `validate_params` (al voltant de la línia 37), i establiu-lo a `true`:
 
 === "Després"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="247"
+    ```groovy title="nextflow.config" hl_lines="1" linenums="37"
+    validate_params            = true
+    ```
+
+=== "Abans"
+
+    ```groovy title="nextflow.config" hl_lines="1" linenums="37"
+    validate_params            = false
+    ```
+
+El comportament de validació en si es controla mitjançant l'àmbit `validation{}` a `nextflow.config`.
+
+Com que treballarem primer en la validació de paràmetres (aquesta secció) i no configurarem l'esquema de dades d'entrada fins a la secció 2, també necessitem dir temporalment a nf-schema que ometi la validació dels continguts del fitxer del paràmetre `input`.
+
+Trobeu el bloc `validation` (al voltant de la línia 252) i afegiu `ignoreParams` per ometre la validació de fitxers d'entrada:
+
+=== "Després"
+
+    ```groovy title="nextflow.config" hl_lines="3" linenums="252"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
@@ -168,7 +185,7 @@ Obriu `nextflow.config` i trobeu el bloc `validation` (al voltant de la línia 2
 
 === "Abans"
 
-    ```groovy title="nextflow.config" linenums="247"
+    ```groovy title="nextflow.config" linenums="252"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
@@ -181,7 +198,7 @@ Aquesta configuració indica a nf-schema que:
 - **`ignoreParams`**: Ometi la validació dels continguts del fitxer del paràmetre `input` (temporal; ho reactivarem a la secció 2)
 - **`monochromeLogs`**: Desactivi la sortida en color als missatges de validació quan s'estableix a `true` (controlat per `params.monochrome_logs`)
 
-!!! note "Per què ignorar el paràmetre input?"
+!!! info "Per què ignorar el paràmetre input?"
 
     El paràmetre `input` a `nextflow_schema.json` té `"schema": "assets/schema_input.json"` que indica a nf-schema que validi els *continguts* del fitxer CSV d'entrada contra aquest esquema.
     Com que encara no hem configurat aquest esquema, ignorem temporalment aquesta validació.
@@ -263,7 +280,7 @@ Hauríeu de veure alguna cosa així:
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 3.5.2 - https://nf-co.re
+    nf-core/tools version 4.0.2 - https://nf-co.re
 
 INFO     [✓] Default parameters match schema validation
 INFO     [✓] Pipeline schema looks valid (found 17 params)
@@ -310,32 +327,32 @@ grep -A 25 '"input_output_options"' nextflow_schema.json
 ```
 
 ```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8" hl_lines="19-23"
-    "input_output_options": {
-      "title": "Input/output options",
-      "type": "object",
-      "fa_icon": "fas fa-terminal",
-      "description": "Define where the pipeline should find input data and save output data.",
-      "required": ["input", "outdir", "batch"],
-      "properties": {
-        "input": {
-          "type": "string",
-          "format": "file-path",
-          "exists": true,
-          "schema": "assets/schema_input.json",
-          "mimetype": "text/csv",
-          "pattern": "^\\S+\\.csv$",
-          "description": "Path to comma-separated file containing information about the samples in the experiment.",
-          "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.",
-          "fa_icon": "fas fa-file-csv"
-        },
-        "batch": {
-          "type": "string",
-          "description": "Name for this batch of greetings",
-          "fa_icon": "fas fa-layer-group"
-        },
+        "input_output_options": {
+            "title": "Input/output options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Define where the pipeline should find input data and save output data.",
+            "required": ["input", "outdir", "batch"],
+            "properties": {
+                "input": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "schema": "assets/schema_input.json",
+                    "mimetype": "text/csv",
+                    "pattern": "^\\S+\\.csv$",
+                    "description": "Path to comma-separated file containing information about the samples in the experiment.",
+                    "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.",
+                    "fa_icon": "fas fa-file-csv"
+                },
+                "batch": {
+                    "type": "string",
+                    "description": "Name for this batch of greetings",
+                    "fa_icon": "fas fa-layer-group"
+                },
 ```
 
-Hauríeu de veure que el paràmetre `batch` s'ha afegit a l'esquema amb el camp "required" ara mostrant `["input", "outdir", "batch"]`.
+Hauríeu de veure que el paràmetre `batch` s'ha afegit a l'esquema amb el camp `required` ara mostrant `["input", "outdir", "batch"]`.
 
 ### 1.5. Provar la validació de paràmetres
 
@@ -352,7 +369,7 @@ nextflow run . --outdir test-results -profile docker
     ```console
     ERROR ~ Validation of pipeline parameters failed!
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     The following invalid input values have been detected:
 
     * Missing required parameter(s): input, batch
@@ -369,15 +386,15 @@ nextflow run . --input assets/greetings.csv --outdir results --batch my-batch -p
 ??? success "Sortida de la comanda"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [peaceful_wozniak] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [peaceful_wozniak] revision: b9e9b3b8de
 
     executor >  local (8)
-    [de/a1b2c3] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
-    [4f/d5e6f7] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-    [8a/b9c0d1] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
-    [e2/f3a4b5] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔
+    [de/a1b2c3] CORE_HELLO:HELLO:sayHello (3)                | 3 of 3 ✔
+    [4f/d5e6f7] CORE_HELLO:HELLO:convertToUpper (3)          | 3 of 3 ✔
+    [8a/b9c0d1] CORE_HELLO:HELLO:FIND_CONCATENATE (my-batch) | 1 of 1 ✔
+    [e2/f3a4b5] CORE_HELLO:HELLO:COWPY (my-batch)            | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
@@ -640,7 +657,7 @@ Obriu `nextflow.config` i elimineu la línia `ignoreParams` del bloc `validation
 
 === "Després"
 
-    ```groovy title="nextflow.config" linenums="247"
+    ```groovy title="nextflow.config" linenums="252"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
@@ -649,7 +666,7 @@ Obriu `nextflow.config` i elimineu la línia `ignoreParams` del bloc `validation
 
 === "Abans"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="247"
+    ```groovy title="nextflow.config" hl_lines="3" linenums="252"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
@@ -666,7 +683,7 @@ Verifiquem que la nostra validació funciona provant entrades vàlides i no vàl
 #### 2.7.1. Provar amb entrada vàlida
 
 Primer, confirmeu que el pipeline s'executa correctament amb entrada vàlida.
-Noteu que ja no necessitem `--validate_params false` ja que la validació funciona!
+Amb `validate_params = true` i l'esquema d'entrada configurat, tant la validació de paràmetres com la de dades d'entrada s'executen de debò.
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker
@@ -734,9 +751,9 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
 ??? failure "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [trusting_ochoa] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [trusting_ochoa] revision: b9e9b3b8de
 
     Input/output options
       input              : assets/invalid_greetings.csv

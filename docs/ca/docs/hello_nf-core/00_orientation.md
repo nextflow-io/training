@@ -22,24 +22,19 @@ Si esteu treballant en aquest curs pel vostre compte, familiaritzeu-vos amb els 
 
 ### Requisits de versió
 
-Aquesta formació està dissenyada per a **Nextflow 25.10.2** o posterior **amb l'analitzador de sintaxi v2 DESACTIVAT**.
+Aquesta formació funciona amb **Nextflow 25.10.2** o posterior **amb l'analitzador de sintaxi v2**, que és el valor per defecte a partir de Nextflow 26.04.
+Al nostre entorn de formació no cal fer res: s'executa Nextflow 26.04.4 amb l'analitzador v2. Si utilitzeu un entorn local o personalitzat, consulteu les [notes de versió](../info/nxf_versions.md).
 
-#### Si utilitzeu el nostre entorn de formació:
-
-HEU d'executar la comanda següent abans de continuar:
-
-```bash
-export NXF_SYNTAX_PARSER=v1
-```
-
-#### Si utilitzeu un entorn local o personalitzat:
-
-Assegureu-vos que utilitzeu la configuració correcta tal com es documenta [aquí](../info/nxf_versions.md).
-
-La formació també requereix **nf-core tools 3.5.2**.
+La formació també requereix **nf-core tools 4.0.2**.
 Si utilitzeu una versió diferent de les eines nf-core, podeu tenir dificultats per seguir el curs.
 
 Podeu comprovar quina versió està instal·lada al vostre entorn utilitzant la comanda `nf-core --version`.
+
+!!! warning "Compatibilitat amb l'analitzador v2"
+
+    Molts pipelines nf-core encara no admeten l'analitzador de sintaxi v2.
+    Si executeu un pipeline nf-core diferent dels utilitzats en aquest curs i trobeu errors, és possible que hàgiu de canviar a l'analitzador v1 establint `export NXF_SYNTAX_PARSER=v1`.
+    Consulteu les [notes de versió](../info/nxf_versions.md) per a més detalls.
 
 ## Prepareu-vos per treballar
 
@@ -82,7 +77,10 @@ tree . -L 2
 
     ```console
     .
+    ├── custom.config
     ├── greetings.csv
+    ├── malformed_samplesheet.csv
+    ├── my_params.yml
     ├── original-hello
     │   ├── hello.nf
     │   ├── modules
@@ -101,6 +99,12 @@ Utilitzem seccions desplegables com aquesta per incloure la sortida esperada de 
 
 - **El fitxer `greetings.csv`** és un CSV que conté algunes dades columnars mínimes que utilitzem per a proves.
 
+- **El fitxer `custom.config`** és un exemple de fitxer de configuració de Nextflow utilitzat a la Part 1 per demostrar les sobreescriptures de recursos de processos i `ext.args`.
+
+- **El fitxer `malformed_samplesheet.csv`** és un full de mostres intencionadament incorrecte utilitzat a la Part 1 per demostrar la validació d'entrades.
+
+- **El fitxer `my_params.yml`** és un exemple de fitxer de paràmetres utilitzat a la Part 1 per demostrar com passar paràmetres booleans a un pipeline.
+
 - **El directori `original-hello`** conté una còpia del codi font produït en treballar durant la sèrie completa de formació Hello Nextflow (amb Docker activat).
 
 - **El directori `solutions`** conté els scripts de workflow completats que resulten de cada pas del curs.
@@ -112,7 +116,7 @@ Creieu que esteu preparats per començar?
 
 - [ ] Entenc l'objectiu d'aquest curs i els seus prerequisits
 - [ ] El meu entorn està en funcionament
-- [ ] M'he assegurat que l'analitzador de sintaxi està establert a **v1**
+- [ ] Estic utilitzant nf-core tools 4.0.2 (comproveu-ho amb `nf-core --version`)
 - [ ] He establert el meu directori de treball adequadament
 
 Si podeu marcar totes les caselles, esteu a punt per començar.

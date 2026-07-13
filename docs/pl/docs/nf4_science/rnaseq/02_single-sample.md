@@ -477,12 +477,22 @@ nextflow run rnaseq.nf -profile test
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `rnaseq.nf` [mad_lorenz] DSL2 - revision: 5846a164d2
+    Launching `rnaseq.nf` [mad_lorenz] revision: 5846a164d2
 
     executor >  local (1)
     [7b/8ee79e] FASTQC (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/rnaseq/results
+
+      fastqc_zip:
+        - fastqc/ENCSR000COQ1_1_fastqc.zip
+
+      fastqc_html:
+        - fastqc/ENCSR000COQ1_1_fastqc.html
     ```
 
 Powinno to działać bardzo szybko, jeśli pracowałeś przez Część 1 i już pobrałeś kontener.
@@ -684,7 +694,7 @@ Dodaj wyjścia przycinania do sekcji `publish:`:
     }
     ```
 
-Następnie musimy powiedzieć Nextflow, gdzie umieścić te wyjścia.
+Następnie musimy powiedzieć Nextflow'owi, gdzie umieścić te wyjścia.
 
 #### 2.2.2. Skonfigurowanie nowych celów wyjściowych
 
@@ -738,13 +748,32 @@ nextflow run rnaseq.nf -profile test
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `rnaseq.nf` [gloomy_becquerel] DSL2 - revision: bb11055736
+    Launching `rnaseq.nf` [gloomy_becquerel] revision: bb11055736
 
     executor >  local (2)
     [f6/c8ef2e] FASTQC (1)      | 1 of 1 ✔
     [58/c58d8a] TRIM_GALORE (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/rnaseq/results
+
+      fastqc_zip:
+        - fastqc/ENCSR000COQ1_1_fastqc.zip
+
+      fastqc_html:
+        - fastqc/ENCSR000COQ1_1_fastqc.html
+
+      trimmed_reads:
+        - trimming/ENCSR000COQ1_1_trimmed.fq.gz
+
+      trimming_reports:
+        - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
+
+      trimming_fastqc:
+        - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
     ```
 
 To również powinno działać bardzo szybko, ponieważ uruchamiamy na tak małym pliku wejściowym.
@@ -1085,14 +1114,39 @@ nextflow run rnaseq.nf -profile test
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `rnaseq.nf` [elated_stonebraker] DSL2 - revision: e8e57d0cdd
+    Launching `rnaseq.nf` [elated_stonebraker] revision: e8e57d0cdd
 
     executor >  local (3)
     [e8/fa29d6] FASTQC (1)       | 1 of 1 ✔
     [ca/ffdde2] TRIM_GALORE (1)  | 1 of 1 ✔
     [b6/1c6ca3] HISAT2_ALIGN (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/rnaseq/results
+
+      fastqc_zip:
+        - fastqc/ENCSR000COQ1_1_fastqc.zip
+
+      fastqc_html:
+        - fastqc/ENCSR000COQ1_1_fastqc.html
+
+      trimmed_reads:
+        - trimming/ENCSR000COQ1_1_trimmed.fq.gz
+
+      trimming_reports:
+        - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
+
+      trimming_fastqc:
+        - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
+
+      bam:
+        - align/ENCSR000COQ1_1_trimmed.bam
+
+      align_log:
+        - align/ENCSR000COQ1_1_trimmed.hisat2.log
     ```
 
 Możesz znaleźć wyjścia dopasowania w katalogu results.

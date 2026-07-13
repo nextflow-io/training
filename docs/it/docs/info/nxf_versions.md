@@ -13,11 +13,12 @@ hide:
 A partire dalla versione 3.0 del portale di formazione, tutti i nostri corsi di formazione sono compatibili con Nextflow versione 25.10.2 o successiva, salvo diversa indicazione nella pagina indice del corso.
 (Questo non include i materiali deprecati o archiviati che potrebbero non includere un avviso sulla versione).
 
-La versione di Nextflow attualmente caricata per impostazione predefinita nel nostro ambiente di formazione è **Nextflow 25.10.4**.
+La versione di Nextflow attualmente caricata per impostazione predefinita nel nostro ambiente di formazione è **Nextflow 26.04.4**.
 
 Poiché i corsi ora utilizzano input tipizzati a livello di flusso di lavoro e direttive di output a livello di flusso di lavoro, richiedono l'uso del parser di sintassi V2, **salvo diversa indicazione**.
+Il parser V2 è quello predefinito a partire da Nextflow 26.04, quindi nella versione che carichiamo non è necessario abilitarlo manualmente.
 Se prevedete di utilizzare l'ambiente che forniamo tramite [Github Codespaces](../envsetup/01_setup.md) o [devcontainer locali](../envsetup/03_devcontainer.md), non dovete fare nulla a meno che non sia specificato nelle istruzioni del corso.
-Tuttavia, se prevedete di seguire le formazioni nel vostro ambiente ([Installazione manuale](../envsetup/02_local.md)), dovrete assicurarvi di utilizzare Nextflow versione 25.10.2 o successiva con il parser di sintassi v2 abilitato.
+Tuttavia, se prevedete di seguire le formazioni nel vostro ambiente ([Installazione manuale](../envsetup/02_local.md)), dovrete assicurarvi di utilizzare Nextflow versione 25.10.2 o successiva e di abilitare il parser di sintassi v2 se utilizzate una versione precedente alla 26.04.
 
 ## Versioni precedenti dei materiali di formazione
 
@@ -40,7 +41,7 @@ Tutto il codice Nextflow moderno utilizza DSL2.
 Il parser v1 è il parser originale, più permissivo.
 Il parser v2 è più rigoroso e abilita nuove funzionalità del linguaggio come la tipizzazione statica (input e output tipizzati) e direttive di output a livello di flusso di lavoro.
 Il parser v2 fornisce anche messaggi di errore migliori e rileva più errori al momento del parsing piuttosto che durante l'esecuzione.
-Il parser v2 diventerà il predefinito in Nextflow 26.04.
+Il parser v2 è il predefinito a partire da Nextflow 26.04.
 
 In sintesi: DSL2 è il linguaggio che scrivete; la versione del parser di sintassi determina quanto rigorosamente quel linguaggio viene interpretato e quali funzionalità avanzate sono disponibili.
 
@@ -52,21 +53,22 @@ Per maggiori informazioni su come aggiornare la vostra versione di Nextflow, con
 
 ### Abilitare il parser di sintassi v2
 
+A partire da Nextflow 26.04 il parser v2 è il predefinito, quindi i passaggi seguenti sono necessari solo per le versioni precedenti alla 26.04.
+
 Per **abilitare** il parser di sintassi v2 per la sessione corrente, eseguite il seguente comando nel vostro terminale:
 
 ```bash
 export NXF_SYNTAX_PARSER=v2
 ```
 
-Per rendere questa impostazione permanente (in attesa che v2 diventi il predefinito in Nextflow 26.04), aggiungete il comando export al vostro profilo shell (`~/.bashrc`, `~/.zshrc`, ecc.):
+Per rendere questa impostazione permanente, aggiungete il comando export al vostro profilo shell (`~/.bashrc`, `~/.zshrc`, ecc.):
 
 ```bash
 echo 'export NXF_SYNTAX_PARSER=v2' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-Notate che la variabile d'ambiente `NXF_SYNTAX_PARSER=v2` è un requisito temporaneo.
-Da Nextflow 26.04 in poi, il parser v2 diventerà il predefinito e questa impostazione non sarà più necessaria.
+Notate che nelle versioni di Nextflow precedenti alla 26.04 la variabile d'ambiente `NXF_SYNTAX_PARSER=v2` è necessaria per accedere alle funzionalità v2 utilizzate in questi corsi.
 
 ### Disabilitare il parser di sintassi v2
 

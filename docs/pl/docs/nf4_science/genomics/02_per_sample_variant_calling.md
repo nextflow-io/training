@@ -402,12 +402,19 @@ nextflow run genomics.nf -profile test
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `genomics.nf` [reverent_sinoussi] DSL2 - revision: 41d43ad7fe
+    Launching `genomics.nf` [reverent_sinoussi] revision: 41d43ad7fe
 
     executor >  local (1)
     [2a/e69536] SAMTOOLS_INDEX (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/genomics/results
+
+      bam_index:
+        - bam/reads_mother.bam.bai
     ```
 
 Możesz sprawdzić, czy plik indeksu został wygenerowany poprawnie, zaglądając do katalogu roboczego lub do katalogu wyników.
@@ -769,13 +776,26 @@ nextflow run genomics.nf -profile test -resume
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `genomics.nf` [grave_volta] DSL2 - revision: 4790abc96a
+    Launching `genomics.nf` [grave_volta] revision: 4790abc96a
 
     executor >  local (1)
     [2a/e69536] SAMTOOLS_INDEX (1)       | 1 of 1, cached: 1 ✔
     [53/e18e98] GATK_HAPLOTYPECALLER (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/genomics/results
+
+      bam_index:
+        - bam/reads_mother.bam.bai
+
+      vcf:
+        - vcf/reads_mother.bam.vcf
+
+      vcf_idx:
+        - vcf/reads_mother.bam.vcf.idx
     ```
 
 Teraz, jeśli spojrzymy na wyjście konsoli, widzimy wymienione dwa procesy.
@@ -891,13 +911,32 @@ Zabawna rzecz: to _może zadziałać_ LUB _może się nie udać_. Na przykład, 
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `genomics.nf` [peaceful_yalow] DSL2 - revision: a256d113ad
+    Launching `genomics.nf` [peaceful_yalow] revision: a256d113ad
 
     executor >  local (6)
     [4f/7071b0] SAMTOOLS_INDEX (3)       | 3 of 3, cached: 1 ✔
     [7a/89bc43] GATK_HAPLOTYPECALLER (2) | 3 of 3, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/genomics/results
+
+      bam_index:
+        - bam/reads_mother.bam.bai
+        - bam/reads_father.bam.bai
+        - bam/reads_son.bam.bai
+
+      vcf:
+        - vcf/reads_mother.bam.vcf
+        - vcf/reads_father.bam.vcf
+        - vcf/reads_son.bam.vcf
+
+      vcf_idx:
+        - vcf/reads_mother.bam.vcf.idx
+        - vcf/reads_father.bam.vcf.idx
+        - vcf/reads_son.bam.vcf.idx
     ```
 
 Jeśli Twoje uruchomienie workflow'a się powiodło, uruchom je ponownie, aż otrzymasz błąd taki jak ten:
@@ -905,9 +944,9 @@ Jeśli Twoje uruchomienie workflow'a się powiodło, uruchom je ponownie, aż ot
 ??? failure "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `genomics.nf` [loving_pasteur] DSL2 - revision: d2a8e63076
+    Launching `genomics.nf` [loving_pasteur] revision: d2a8e63076
 
     executor >  local (4)
     [01/eea165] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 1 ✔
@@ -1164,13 +1203,32 @@ Tym razem (i za każdym razem) wszystko powinno działać poprawnie:
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `genomics.nf` [special_goldstine] DSL2 - revision: 4cbbf6ea3e
+    Launching `genomics.nf` [special_goldstine] revision: 4cbbf6ea3e
 
     executor >  local (6)
     [d6/10c2c4] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
     [88/1783aa] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/genomics/results
+
+      indexed_bam:
+        - [bam/reads_mother.bam, bam/reads_mother.bam.bai]
+        - [bam/reads_father.bam, bam/reads_father.bam.bai]
+        - [bam/reads_son.bam, bam/reads_son.bam.bai]
+
+      vcf:
+        - vcf/reads_mother.bam.vcf
+        - vcf/reads_father.bam.vcf
+        - vcf/reads_son.bam.vcf
+
+      vcf_idx:
+        - vcf/reads_mother.bam.vcf.idx
+        - vcf/reads_father.bam.vcf.idx
+        - vcf/reads_son.bam.vcf.idx
     ```
 
 Katalog wyników zawiera teraz zarówno pliki BAM, jak i BAI dla każdej próbki (z krotki), wraz z wyjściami VCF:
@@ -1327,13 +1385,32 @@ nextflow run genomics.nf -profile test
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `genomics.nf` [sick_albattani] DSL2 - revision: 46d84642f6
+    Launching `genomics.nf` [sick_albattani] revision: 46d84642f6
 
     executor >  local (6)
     [18/23b4bb] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
     [12/f727bb] GATK_HAPLOTYPECALLER (3) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/genomics/results
+
+      indexed_bam:
+        - [bam/reads_mother.bam, bam/reads_mother.bam.bai]
+        - [bam/reads_father.bam, bam/reads_father.bam.bai]
+        - [bam/reads_son.bam, bam/reads_son.bam.bai]
+
+      vcf:
+        - vcf/reads_mother.bam.vcf
+        - vcf/reads_father.bam.vcf
+        - vcf/reads_son.bam.vcf
+
+      vcf_idx:
+        - vcf/reads_mother.bam.vcf.idx
+        - vcf/reads_father.bam.vcf.idx
+        - vcf/reads_son.bam.vcf.idx
     ```
 
 Powinno to dać taki sam wynik jak poprzednio. Nasz prosty workflow wywoływania wariantów ma teraz wszystkie podstawowe funkcje, których chcieliśmy.

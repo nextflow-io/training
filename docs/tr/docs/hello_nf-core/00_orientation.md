@@ -22,24 +22,19 @@ Bu kursu kendi başınıza takip ediyorsanız, lütfen daha fazla ayrıntı içi
 
 ### Sürüm gereksinimleri
 
-Bu eğitim, **v2 sözdizimi ayrıştırıcısı DEVRE DIŞI** olan **Nextflow 25.10.2** veya sonrası için tasarlanmıştır.
+Bu eğitim, varsayılan olarak Nextflow 26.04 sürümünden itibaren etkin olan **v2 sözdizimi ayrıştırıcısıyla** birlikte **Nextflow 25.10.2 veya sonrası** ile çalışmaktadır.
+Eğitim ortamımızda herhangi bir şey yapmanıza gerek yoktur: v2 ayrıştırıcısıyla Nextflow 26.04.4 çalıştırılmaktadır. Yerel veya özel bir ortam kullanıyorsanız [sürüm notlarına](../info/nxf_versions.md) bakın.
 
-#### Eğitim ortamımızı kullanıyorsanız:
-
-Daha ileriye gitmeden önce aşağıdaki komutu çalıştırmanız GEREKMEKTEDİR:
-
-```bash
-export NXF_SYNTAX_PARSER=v1
-```
-
-#### Yerel veya özel bir ortam kullanıyorsanız:
-
-Lütfen [burada](../info/nxf_versions.md) belgelenen doğru ayarları kullandığınızdan emin olun.
-
-Eğitim ayrıca **nf-core tools 3.5.2** gerektirir.
+Eğitim ayrıca **nf-core tools 4.0.2** gerektirir.
 nf-core araçlarının farklı bir sürümünü kullanırsanız, takip etmekte zorluk yaşayabilirsiniz.
 
 Ortamınızda hangi sürümün yüklü olduğunu `nf-core --version` komutunu kullanarak kontrol edebilirsiniz.
+
+!!! warning "v2 ayrıştırıcı uyumluluğu"
+
+    Birçok nf-core pipeline'ı henüz v2 sözdizimi ayrıştırıcısını desteklememektedir.
+    Bu kursta kullanılanlar dışında bir nf-core pipeline'ı çalıştırır ve hatalarla karşılaşırsanız, `export NXF_SYNTAX_PARSER=v1` ayarını yaparak v1 ayrıştırıcısına geçmeniz gerekebilir.
+    Ayrıntılar için [sürüm notlarına](../info/nxf_versions.md) bakın.
 
 ## Çalışmaya hazır olun
 
@@ -82,7 +77,10 @@ tree . -L 2
 
     ```console
     .
+    ├── custom.config
     ├── greetings.csv
+    ├── malformed_samplesheet.csv
+    ├── my_params.yml
     ├── original-hello
     │   ├── hello.nf
     │   ├── modules
@@ -101,6 +99,12 @@ Beklenen komut çıktısını özlü bir şekilde dahil etmek için bunun gibi d
 
 - **`greetings.csv` dosyası**, test amaçlı kullandığımız bazı minimal sütunsal verileri içeren bir CSV'dir.
 
+- **`custom.config` dosyası**, Bölüm 1'de süreç kaynak geçersiz kılmalarını ve `ext.args` kullanımını göstermek için kullanılan örnek bir Nextflow yapılandırma dosyasıdır.
+
+- **`malformed_samplesheet.csv` dosyası**, Bölüm 1'de girdi doğrulamasını göstermek amacıyla kasıtlı olarak bozulmuş bir örnek sayfasıdır.
+
+- **`my_params.yml` dosyası**, Bölüm 1'de bir pipeline'a boolean parametrelerin nasıl aktarılacağını göstermek için kullanılan örnek bir parametre dosyasıdır.
+
 - **`original-hello` dizini**, Hello Nextflow eğitim serisinin tamamı boyunca çalışarak üretilen kaynak kodun bir kopyasını içerir (Docker etkinleştirilmiş olarak).
 
 - **`solutions` dizini**, kursun her adımından kaynaklanan tamamlanmış iş akışı betiklerini içerir.
@@ -112,7 +116,7 @@ Başlamaya hazır olduğunuzu mu düşünüyorsunuz?
 
 - [ ] Bu kursun hedefini ve ön koşullarını anlıyorum
 - [ ] Ortamım çalışır durumda
-- [ ] Sözdizimi ayrıştırıcısının **v1** olarak ayarlandığından emin oldum
+- [ ] nf-core tools 4.0.2 kullandığımı doğruladım (`nf-core --version` ile kontrol edin)
 - [ ] Çalışma dizinini uygun şekilde ayarladım
 
 Tüm kutuları işaretleyebiliyorsanız, başlamaya hazırsınız.

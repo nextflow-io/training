@@ -83,10 +83,6 @@ SAMPLE_003,human,kidney,45000000,data/sequences/SAMPLE_003_S3_L001_R1_001.fastq,
 
 Nous utiliserons ce jeu de données réaliste pour explorer des techniques de programmation pratiques que vous rencontrerez dans de vrais workflows bioinformatiques.
 
-<!-- TODO: Can we make this more domain-agnostic? -->
-
-<!-- TODO: add an assignment statement? #### Review the assignment -->
-
 #### Liste de vérification
 
 Vous pensez être prêt·e à vous lancer ?
@@ -112,9 +108,19 @@ Commencez par un workflow simple qui lit simplement le fichier CSV (nous l'avons
 
 ```groovy title="main.nf" linenums="1"
 workflow {
+    main:
     ch_samples = channel.fromPath("./data/samples.csv")
         .splitCsv(header: true)
         .view()
+
+    publish:
+    reports = channel.empty()
+}
+
+output {
+    reports {
+        path 'reports'
+    }
 }
 ```
 
@@ -129,11 +135,19 @@ nextflow run main.nf
 ??? success "Sortie de la commande"
 
     ```console
-    Launching `main.nf` [marvelous_tuckerman] DSL2 - revision: 6113e05c17
+     N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [exotic_salas] revision: d915f0414b
 
     [sample_id:SAMPLE_001, organism:human, tissue_type:liver, sequencing_depth:30000000, file_path:data/sequences/SAMPLE_001_S1_L001_R1_001.fastq, quality_score:38.5]
     [sample_id:SAMPLE_002, organism:mouse, tissue_type:brain, sequencing_depth:25000000, file_path:data/sequences/SAMPLE_002_S2_L001_R1_001.fastq, quality_score:35.2]
     [sample_id:SAMPLE_003, organism:human, tissue_type:kidney, sequencing_depth:45000000, file_path:data/sequences/SAMPLE_003_S3_L001_R1_001.fastq, quality_score:42.1]
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
     ```
 
 #### 1.1.2. Ajout de l'opérateur Map
@@ -148,7 +162,7 @@ Voici à quoi ressemble cette opération map :
 
 === "Après"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="3-6"
+    ```groovy title="main.nf" linenums="3" hl_lines="3-6"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -159,7 +173,7 @@ Voici à quoi ressemble cette opération map :
 
 === "Avant"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="3"
+    ```groovy title="main.nf" linenums="3" hl_lines="3"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .view()
@@ -185,7 +199,7 @@ Nous allons maintenant écrire de la logique de **scripting** à l'intérieur de
 
 === "Après"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="4-12"
+    ```groovy title="main.nf" linenums="3" hl_lines="4-12"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -204,7 +218,7 @@ Nous allons maintenant écrire de la logique de **scripting** à l'intérieur de
 
 === "Avant"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="4"
+    ```groovy title="main.nf" linenums="3" hl_lines="4"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -239,7 +253,7 @@ Effectuez le changement suivant :
 
 === "Après"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="11-12"
+    ```groovy title="main.nf" linenums="3" hl_lines="11-12"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -258,7 +272,7 @@ Effectuez le changement suivant :
 
 === "Avant"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="11"
+    ```groovy title="main.nf" linenums="3" hl_lines="11"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -306,7 +320,7 @@ Ajoutons une ligne pour créer une version simplifiée de nos métadonnées qui 
 
 === "Après"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="12-15"
+    ```groovy title="main.nf" linenums="3" hl_lines="12-13"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -329,7 +343,7 @@ Ajoutons une ligne pour créer une version simplifiée de nos métadonnées qui 
 
 === "Avant"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="12"
+    ```groovy title="main.nf" linenums="3" hl_lines="12"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -356,16 +370,22 @@ nextflow run main.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [peaceful_cori] DSL2 - revision: 4cc4a8340f
+    Launching `main.nf` [focused_goldwasser] revision: d9c7a39dec
 
     ID fields only: [id:sample_001, organism:human, tissue:liver]
-    ID fields only: [id:sample_002, organism:mouse, tissue:brain]
-    ID fields only: [id:sample_003, organism:human, tissue:kidney]
     [id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal]
+    ID fields only: [id:sample_002, organism:mouse, tissue:brain]
     [id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal]
+    ID fields only: [id:sample_003, organism:human, tissue:kidney]
     [id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high]
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
     ```
 
 Cela montre à la fois les métadonnées complètes affichées par l'opération `view()` et le sous-ensemble extrait que nous avons affiché avec `println`.
@@ -392,7 +412,7 @@ Produisons une structure de canal comprenant un tuple de 2 éléments : la map d
 
 === "Après"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="12"
+    ```groovy title="main.nf" linenums="3" hl_lines="12"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -411,7 +431,7 @@ Produisons une structure de canal comprenant un tuple de 2 éléments : la map d
 
 === "Avant"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="12"
+    ```groovy title="main.nf" linenums="3" hl_lines="12"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -487,9 +507,9 @@ nextflow run collect.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `collect.nf` [loving_mendel] DSL2 - revision: e8d054a46e
+    Launching `collect.nf` [friendly_jones] revision: 5b2b07e824
 
     Individual channel item: sample_001
     Individual channel item: sample_002
@@ -503,7 +523,7 @@ Voyons maintenant la méthode `collect` sur une List en action. Modifiez `collec
 
 === "Après"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="9-13"
+    ```groovy title="collect.nf" linenums="1" hl_lines="9-13"
     def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
     // channel.collect() - regroupe plusieurs émissions de canal en une seule
@@ -521,7 +541,7 @@ Voyons maintenant la méthode `collect` sur une List en action. Modifiez `collec
 
 === "Avant"
 
-    ```groovy title="main.nf" linenums="1"
+    ```groovy title="collect.nf" linenums="1"
     def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
     // channel.collect() - regroupe plusieurs émissions de canal en une seule
@@ -545,9 +565,9 @@ nextflow run collect.nf
 ??? success "Sortie de la commande"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `collect.nf` [cheeky_stonebraker] DSL2 - revision: 2d5039fb47
+    Launching `collect.nf` [lethal_caravaggio] revision: 48f3dcbb7b
 
     List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
     Individual channel item: sample_001
@@ -616,9 +636,9 @@ nextflow run collect.nf
 ??? success "Sortie de la commande"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `collect.nf` [cranky_galileo] DSL2 - revision: 5f3c8b2a91
+    Launching `collect.nf` [adoring_visvesvaraya] revision: 915ce68e4d
 
     List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
     Spread operator result: [s1, s2, s3]
@@ -677,7 +697,7 @@ Effectuez le changement suivant dans votre workflow `main.nf` existant :
 
 === "Après"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="10-21"
+    ```groovy title="main.nf" linenums="5" hl_lines="10-21"
             .map { row ->
                 // Scripting pour la transformation des données
                 def sample_meta = [
@@ -704,7 +724,7 @@ Effectuez le changement suivant dans votre workflow `main.nf` existant :
 
 === "Avant"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="10-11"
+    ```groovy title="main.nf" linenums="5" hl_lines="10-11"
             .map { row ->
                 // Scripting pour la transformation des données
                 def sample_meta = [
@@ -747,13 +767,19 @@ nextflow run main.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [clever_pauling] DSL2 - revision: 605d2058b4
+    Launching `main.nf` [nasty_brazil] revision: 723ff4e5e6
 
     [[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, sample_num:1, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
     [[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, sample_num:2, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
     [[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, sample_num:3, lane:001, read:R1, chunk:001, priority:high], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
     ```
 
 Cela montre les métadonnées enrichies à partir des noms de fichiers.
@@ -800,8 +826,9 @@ Ensuite, modifiez le bloc `workflow` pour connecter le canal `ch_samples` au pro
 
 === "Après"
 
-    ```groovy title="main.nf" linenums="25" hl_lines="27"
+    ```groovy title="main.nf" linenums="25" hl_lines="28"
     workflow {
+        main:
 
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
@@ -828,13 +855,23 @@ Ensuite, modifiez le bloc `workflow` pour connecter le canal `ch_samples` au pro
             }
 
         ch_fastp = FASTP(ch_samples)
+
+        publish:
+        reports = channel.empty()
+    }
+
+    output {
+        reports {
+            path 'reports'
+        }
     }
     ```
 
 === "Avant"
 
-    ```groovy title="main.nf" linenums="25" hl_lines="26"
+    ```groovy title="main.nf" linenums="25" hl_lines="27"
     workflow {
+        main:
 
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
@@ -857,9 +894,18 @@ Ensuite, modifiez le bloc `workflow` pour connecter le canal `ch_samples` au pro
                 ] : [:]
 
                 def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return [sample_meta + file_meta + [priority: priority], file(row.file_path)]
+                return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
             }
             .view()
+
+        publish:
+        reports = channel.empty()
+    }
+
+    output {
+        reports {
+            path 'reports'
+        }
     }
     ```
 
@@ -872,28 +918,41 @@ nextflow run main.nf
 ??? failure "Sortie de la commande"
 
     ```console
-    ERROR ~ Error executing process > 'FASTP (3)'
+    ERROR ~ Error executing process > 'FASTP (2)'
 
     Caused by:
-      Process `FASTP (3)` terminated with an error exit status (255)
+      Process `FASTP (2)` terminated with an error exit status (255)
 
 
     Command executed:
 
       fastp \
-          --in1 SAMPLE_003_S3_L001_R1_001.fastq \
+          --in1 SAMPLE_002_S2_L001_R1_001.fastq \
           --in2 null \
-          --out1 sample_003_trimmed_R1.fastq.gz \
-          --out2 sample_003_trimmed_R2.fastq.gz \
-          --json sample_003.fastp.json \
-          --html sample_003.fastp.html \
-          --thread 2
+          --out1 sample_002_trimmed_R1.fastq.gz \
+          --out2 sample_002_trimmed_R2.fastq.gz \
+          --json sample_002.fastp.json \
+          --html sample_002.fastp.html \
+          --thread 1
 
     Command exit status:
       255
 
     Command output:
       (empty)
+
+    Command error:
+      ERROR: Failed to open file: null
+
+    Work dir:
+      /workspaces/training/side-quests/essential_scripting_patterns/work/8b/5b15c8cf35259a87db0137312d6d06
+
+    Container:
+      community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690
+
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+
+     -- Check '.nextflow.log' file for details
     ```
 
 Vous pouvez voir que le processus essaie d'exécuter `fastp` avec une valeur `null` pour le deuxième fichier d'entrée, ce qui provoque son échec. C'est parce que notre jeu de données contient des lectures simple brin, mais le processus est codé en dur pour attendre des lectures double brin (deux fichiers d'entrée à la fois).
@@ -957,18 +1016,24 @@ nextflow run main.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [adoring_rosalind] DSL2 - revision: 04b1cd93e9
+    Launching `main.nf` [distracted_bohr] revision: b9b1c249c1
 
     executor >  local (3)
-    [31/a8ad4d] process > FASTP (3) [100%] 3 of 3 ✔
+    [d9/542a41] FASTP (1) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
     ```
 
 Ça a l'air bien ! Si nous vérifions les commandes réelles qui ont été exécutées (adaptez au hash de votre tâche) :
 
 ```console title="Check commands executed"
-cat work/31/a8ad4d95749e685a6d842d3007957f/.command.sh
+cat work/d9/542a41xxxxxxxxxxxxxxxxxxxxxxxxxx/.command.sh
 ```
 
 Nous pouvons voir que Nextflow a correctement choisi la bonne commande pour les lectures simple brin :
@@ -980,7 +1045,7 @@ fastp \
     --out1 sample_003_trimmed.fastq.gz \
     --json sample_003.fastp.json \
     --html sample_003.fastp.html \
-    --thread 2
+    --thread 1
 ```
 
 Un autre usage courant de la logique de script dynamique peut être vu dans [le module Nextflow for Science Genomics](../../nf4_science/genomics/03_joint_calling.md). Dans ce module, le processus GATK appelé peut prendre plusieurs fichiers d'entrée, mais chacun doit être préfixé par `-V` pour former une ligne de commande correcte. Le processus utilise le scripting pour transformer une collection de fichiers d'entrée (`all_gvcfs`) en arguments de commande corrects :
@@ -1027,11 +1092,12 @@ Incluez le processus dans votre `main.nf` et ajoutez-le au workflow :
 
 === "Après"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="2 30"
+    ```groovy title="main.nf" linenums="1" hl_lines="2 31"
     include { FASTP } from './modules/fastp.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
 
     workflow {
+        main:
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -1058,15 +1124,25 @@ Incluez le processus dans votre `main.nf` et ajoutez-le au workflow :
 
         ch_fastp = FASTP(ch_samples)
         GENERATE_REPORT(ch_samples)
+
+        publish:
+        reports = GENERATE_REPORT.out
+    }
+
+    output {
+        reports {
+            path 'reports'
+        }
     }
     ```
 
 === "Avant"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="1 28"
+    ```groovy title="main.nf" linenums="1" hl_lines="1 29"
     include { FASTP } from './modules/fastp.nf'
 
     workflow {
+        main:
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -1092,17 +1168,44 @@ Incluez le processus dans votre `main.nf` et ajoutez-le au workflow :
             }
 
         ch_fastp = FASTP(ch_samples)
+
+        publish:
+        reports = channel.empty()
+    }
+
+    output {
+        reports {
+            path 'reports'
+        }
     }
     ```
 
 Exécutez maintenant le workflow et vérifiez les rapports générés dans `results/reports/`. Ils devraient contenir des informations de base sur chaque échantillon.
 
-<!-- TODO: add the run command -->
+```bash
+nextflow run main.nf
+```
 
 ??? success "Sortie de la commande"
 
     ```console
-    <!-- TODO: output -->
+    N E X T F L O W  ~  version 26.04.4
+    Launching `main.nf` [festering_payne] - revision: 3690c7806d
+    [31/870279] Submitted process > FASTP (1)
+    [52/c9fb45] Submitted process > GENERATE_REPORT (1)
+    [a2/00d26a] Submitted process > GENERATE_REPORT (3)
+    [61/c169b0] Submitted process > FASTP (2)
+    [a1/11c8b1] Submitted process > GENERATE_REPORT (2)
+    [d8/40aa79] Submitted process > FASTP (3)
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
+        - reports/sample_003_report.txt
+        - reports/sample_001_report.txt
+        - reports/sample_002_report.txt
     ```
 
 Mais que faire si nous voulons ajouter des informations sur quand et où le traitement a eu lieu ? Modifions le processus pour utiliser des variables **shell** et un peu de substitution de commandes pour inclure l'utilisateur·trice actuel·le, le nom d'hôte et la date dans le rapport :
@@ -1135,11 +1238,18 @@ Si vous exécutez cela, vous remarquerez une erreur -- Nextflow essaie d'interpr
 ??? failure "Sortie de la commande"
 
     ```console
-    Error modules/generate_report.nf:15:27: `USER` is not defined
-    │  15 |     echo "Processed by: ${USER}" >> ${meta.id}_report.txt
+     N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [furious_euclid] revision: 3690c7806d
+
+    Error modules/generate_report.nf:13:27: `USER` is not defined
+    │  13 |     echo "Processed by: ${USER}" >> ${meta.id}_report.txt
     ╰     |                           ^^^^
 
+
     ERROR ~ Script compilation failed
+
+     -- Check '.nextflow.log' file for details
     ```
 
 Nous devons l'échapper pour que Bash puisse le gérer à la place.
@@ -1199,7 +1309,7 @@ Pour illustrer à quoi cela ressemble avec notre workflow existant, effectuez la
 
 === "Après"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="4-24 29"
+    ```groovy title="main.nf" linenums="1" hl_lines="4-24 30"
     include { FASTP } from './modules/fastp.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
 
@@ -1226,22 +1336,33 @@ Pour illustrer à quoi cela ressemble avec notre workflow existant, effectuez la
     }
 
     workflow {
+        main:
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map{ row -> separateMetadata(row) }
 
         ch_fastp = FASTP(ch_samples)
         GENERATE_REPORT(ch_samples)
+
+        publish:
+        reports = GENERATE_REPORT.out
+    }
+
+    output {
+        reports {
+            path 'reports'
+        }
     }
     ```
 
 === "Avant"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="7-27"
+    ```groovy title="main.nf" linenums="1" hl_lines="8-28"
     include { FASTP } from './modules/fastp.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
 
     workflow {
+        main:
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -1268,6 +1389,15 @@ Pour illustrer à quoi cela ressemble avec notre workflow existant, effectuez la
 
         ch_fastp = FASTP(ch_samples)
         GENERATE_REPORT(ch_samples)
+
+        publish:
+        reports = GENERATE_REPORT.out
+    }
+
+    output {
+        reports {
+            path 'reports'
+        }
     }
     ```
 
@@ -1293,13 +1423,22 @@ nextflow run main.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [admiring_panini] DSL2 - revision: 8cc832e32f
+    Launching `main.nf` [peaceful_plateau] revision: 918c15451f
 
     executor >  local (6)
-    [8c/2e3f91] process > FASTP (3)           [100%] 3 of 3 ✔
-    [7a/1b4c92] process > GENERATE_REPORT (3) [100%] 3 of 3 ✔
+    [a5/f542b1] FASTP (2)           | 3 of 3 ✔
+    [22/a94ad7] GENERATE_REPORT (2) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
+        - reports/sample_001_report.txt
+        - reports/sample_003_report.txt
+        - reports/sample_002_report.txt
     ```
 
 La sortie devrait montrer les deux processus se terminant avec succès. Le workflow est maintenant beaucoup plus propre et plus facile à maintenir, avec toute la logique complexe de traitement des métadonnées encapsulée dans la fonction `separateMetadata`.
@@ -1363,26 +1502,35 @@ nextflow run main.nf -ansi-log false
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W  ~  version 25.10.4
-    Launching `main.nf` [fervent_albattani] DSL2 - revision: fa8f249759
-    [bd/ff3d41] Submitted process > FASTP (2)
-    [a4/a3aab2] Submitted process > FASTP (1)
-    [48/6db0c9] Submitted process > FASTP (3)
-    [ec/83439d] Submitted process > GENERATE_REPORT (3)
-    [bd/15d7cc] Submitted process > GENERATE_REPORT (2)
-    [42/699357] Submitted process > GENERATE_REPORT (1)
+    N E X T F L O W  ~  version 26.04.4
+    Launching `main.nf` [naughty_kay] - revision: 918c15451f
+    [1e/d9a972] Submitted process > GENERATE_REPORT (2)
+    [ef/820ed7] Submitted process > GENERATE_REPORT (3)
+    [f6/ab4b70] Submitted process > FASTP (1)
+    [5b/748d5a] Submitted process > GENERATE_REPORT (1)
+    [7b/d99953] Submitted process > FASTP (3)
+    [37/291870] Submitted process > FASTP (2)
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
+        - reports/sample_002_report.txt
+        - reports/sample_003_report.txt
+        - reports/sample_001_report.txt
     ```
 
 Vous pouvez vérifier la commande `docker` exacte qui a été exécutée pour voir l'allocation de CPU pour une tâche donnée :
 
 ```console title="Check docker command"
-cat work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.run | grep "docker run"
+cat work/7b/d999535cfcdfb6865b4e63cddc3987/.command.run | grep "docker run"
 ```
 
 Vous devriez voir quelque chose comme :
 
 ```bash title="docker command"
-    docker run -i --cpu-shares 2048 --memory 2048m -e "NXF_TASK_WORKDIR" -v /workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690 /bin/bash -ue /workspaces/training/side-quests/essential_scripting_patterns/work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.sh
+    docker run -i --cpu-shares 2048 --memory 2048m -e "NXF_TASK_WORKDIR" -v /workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690 /bin/bash -ue /workspaces/training/side-quests/essential_scripting_patterns/work/7b/d999535cfcdfb6865b4e63cddc3987/.command.sh
 ```
 
 Dans cet exemple, nous avons choisi un exemple qui a demandé 2 CPUs (`--cpu-shares 2048`), car c'était un échantillon à haute profondeur, mais vous devriez voir différentes allocations de CPU selon la profondeur de l'échantillon. Essayez cela pour les autres tâches également.
@@ -1436,7 +1584,7 @@ nextflow run main.nf
       Detecting adapter sequence for read1...
       No adapter detected for read1
 
-      .command.sh: line 7:   101 Killed                  fastp --in1 SAMPLE_002_S2_L001_R1_001.fastq --out1 sample_002_trimmed.fastq.gz --json sample_002.fastp.json --html sample_002.fastp.html --thread 1
+      .command.sh: line 7:    34 Killed                  fastp --in1 SAMPLE_001_S1_L001_R1_001.fastq --out1 sample_001_trimmed.fastq.gz --json sample_001.fastp.json --html sample_001.fastp.html --thread 1
     ```
 
 Cela indique que le processus a été tué pour avoir dépassé les limites de mémoire.
@@ -1524,7 +1672,7 @@ Incluez le nouveau module depuis `modules/trimgalore.nf` :
 
 === "Après"
 
-    ```groovy title="main.nf" linenums="28" hl_lines="5-12"
+    ```groovy title="main.nf" linenums="29" hl_lines="5-12"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row -> separateMetadata(row) }
@@ -1542,7 +1690,7 @@ Incluez le nouveau module depuis `modules/trimgalore.nf` :
 
 === "Avant"
 
-    ```groovy title="main.nf" linenums="28" hl_lines="5"
+    ```groovy title="main.nf" linenums="29" hl_lines="5"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row -> separateMetadata(row) }
@@ -1560,14 +1708,26 @@ nextflow run main.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [adoring_galileo] DSL2 - revision: c9e83aaef1
+    Launching `main.nf` [condescending_venter] revision: 02a7ca6f13
 
-    executor >  local (6)
-    [1d/0747ac] process > FASTP (2)           [100%] 2 of 2 ✔
-    [cc/c44caf] process > TRIMGALORE (1)      [100%] 1 of 1 ✔
-    [34/bd5a9f] process > GENERATE_REPORT (1) [100%] 3 of 3 ✔
+    executor >  local (8)
+    [8b/40c882] FASTP (1)           | 2 of 2, retries: 2 ✔
+    [59/988a68] TRIMGALORE (1)      | 1 of 1 ✔
+    [01/2df2d4] GENERATE_REPORT (3) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
+        - reports/sample_001_report.txt
+        - reports/sample_002_report.txt
+        - reports/sample_003_report.txt
+
+    [0a/8bb1dd] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+    [af/76bc6f] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
     ```
 
 Ici, nous avons utilisé de petites mais puissantes expressions conditionnelles à l'intérieur de l'opérateur `.branch{}` pour router les échantillons en fonction de leurs métadonnées. Les échantillons humains à haute couverture passent par `FASTP`, tandis que tous les autres échantillons passent par `TRIMGALORE`.
@@ -1587,7 +1747,7 @@ Ajoutez ce qui suit avant l'opération de branchement :
 
 === "Après"
 
-    ```groovy title="main.nf" linenums="28" hl_lines="5-11"
+    ```groovy title="main.nf" linenums="29" hl_lines="5-11"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row -> separateMetadata(row) }
@@ -1607,7 +1767,7 @@ Ajoutez ce qui suit avant l'opération de branchement :
 
 === "Avant"
 
-    ```groovy title="main.nf" linenums="28" hl_lines="5"
+    ```groovy title="main.nf" linenums="29" hl_lines="5"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row -> separateMetadata(row) }
@@ -1628,21 +1788,31 @@ nextflow run main.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W  ~  version 25.10.4
-    Launching `main.nf` [lonely_williams] DSL2 - revision: d0b3f121ec
-    [94/b48eac] Submitted process > FASTP (2)
-    [2c/d2b28f] Submitted process > GENERATE_REPORT (2)
-    [65/2e3be4] Submitted process > GENERATE_REPORT (1)
-    [94/b48eac] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
-    [3e/0d8664] Submitted process > TRIMGALORE (1)
-    [6a/9137b0] Submitted process > FASTP (1)
-    [6a/9137b0] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
-    [83/577ac0] Submitted process > GENERATE_REPORT (3)
-    [a2/5117de] Re-submitted process > FASTP (1)
-    [1f/a1a4ca] Re-submitted process > FASTP (2)
+    N E X T F L O W  ~  version 26.04.4
+    Launching `main.nf` [disturbed_jepsen] - revision: 7097b98dd8
+    [5b/a38d75] Submitted process > FASTP (2)
+    [b3/cc56c7] Submitted process > FASTP (1)
+    [01/feef56] Submitted process > GENERATE_REPORT (3)
+    [9b/e944ae] Submitted process > GENERATE_REPORT (1)
+    [74/04af51] Submitted process > GENERATE_REPORT (2)
+    [24/939e1f] Submitted process > TRIMGALORE (1)
+    [b3/cc56c7] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+    [b2/90425f] Re-submitted process > FASTP (1)
+    [5b/a38d75] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+    [24/a79e73] Re-submitted process > FASTP (2)
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
+        - reports/sample_003_report.txt
+        - reports/sample_001_report.txt
+        - reports/sample_002_report.txt
     ```
 
-Parce que nous avons choisi un filtre qui exclut certains échantillons, moins de tâches ont été exécutées.
+Dans ce cas, les trois échantillons satisfont le filtre, donc chaque échantillon continue dans le pipeline.
+Un seuil plus strict exclurait les échantillons à faible profondeur et réduirait le nombre de tâches exécutées.
 
 L'expression de filtre `meta.id && meta.organism && meta.depth >= 25000000` combine la véracité avec des comparaisons explicites :
 
@@ -1712,13 +1882,13 @@ nextflow run main.nf
 ??? failure "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [trusting_torvalds] DSL2 - revision: b56fbfbce2
+    Launching `main.nf` [fervent_bassi] revision: c5d3df5c06
 
     ERROR ~ Cannot invoke method toUpperCase() on null object
 
-    -- Check script 'main.nf' at line: 13 or see '.nextflow.log' file for more details
+     -- Check script 'main.nf' at line: 13 or see '.nextflow.log' file for more details
     ```
 
 Cela plante avec une NullPointerException.
@@ -1768,7 +1938,27 @@ nextflow run main.nf
 ??? success "Sortie de la commande"
 
     ```console
-    <!-- TODO: output -->
+    N E X T F L O W  ~  version 26.04.4
+    Launching `main.nf` [serene_jennings] - revision: d7cb8ec312
+    [6f/754af4] Submitted process > GENERATE_REPORT (2)
+    [fe/9b03c7] Submitted process > GENERATE_REPORT (1)
+    [5c/a9a73c] Submitted process > FASTP (2)
+    [f8/e8ad5e] Submitted process > GENERATE_REPORT (3)
+    [55/0e4155] Submitted process > TRIMGALORE (1)
+    [cb/e00b43] Submitted process > FASTP (1)
+    [cb/e00b43] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+    [5c/a9a73c] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+    [49/fb02c9] Re-submitted process > FASTP (1)
+    [e3/d3cf5f] Re-submitted process > FASTP (2)
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
+        - reports/sample_001_report.txt
+        - reports/sample_002_report.txt
+        - reports/sample_003_report.txt
     ```
 
 Plus de plantage ! Le workflow gère maintenant le champ manquant avec élégance. Lorsque `row.run_id` est `null`, l'opérateur `?.` empêche l'appel à `.toUpperCase()`, et `run_id` devient `null` au lieu de provoquer une exception.
@@ -1812,7 +2002,7 @@ Ajoutez également un opérateur `view()` dans le workflow pour voir les résult
 
 === "Après"
 
-    ```groovy title="main.nf" linenums="30" hl_lines="4"
+    ```groovy title="main.nf" linenums="31" hl_lines="4"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map{ row -> separateMetadata(row) }
@@ -1821,7 +2011,7 @@ Ajoutez également un opérateur `view()` dans le workflow pour voir les résult
 
 === "Avant"
 
-    ```groovy title="main.nf" linenums="30"
+    ```groovy title="main.nf" linenums="31"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map{ row -> separateMetadata(row) }
@@ -1876,7 +2066,7 @@ Créez une fonction de validation avant votre bloc de workflow, appelez-la depui
 
 === "Après"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="5-15 18-19"
+    ```groovy title="main.nf" linenums="1" hl_lines="5-15 19-20"
     include { FASTP } from './modules/fastp.nf'
     include { TRIMGALORE } from './modules/trimgalore.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
@@ -1894,6 +2084,7 @@ Créez une fonction de validation avant votre bloc de workflow, appelez-la depui
     }
     ...
     workflow {
+        main:
         validateInputs()
         ch_samples = channel.fromPath(params.input)
     ```
@@ -1907,6 +2098,7 @@ Créez une fonction de validation avant votre bloc de workflow, appelez-la depui
 
     ...
     workflow {
+        main:
         ch_samples = channel.fromPath("./data/samples.csv")
     ```
 
@@ -1919,9 +2111,9 @@ nextflow run main.nf
 ??? failure "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [confident_coulomb] DSL2 - revision: 07059399ed
+    Launching `main.nf` [golden_lamarck] revision: e1d7259d32
 
     WARN: Access to undefined parameter `input` -- Initialise it to a default value eg. `params.input = some_value`
     Input CSV file path not provided. Please specify --input <file.csv>
@@ -1938,9 +2130,9 @@ nextflow run main.nf --input ./data/nonexistent.csv
 ??? failure "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [cranky_gates] DSL2 - revision: 26839ae3eb
+    Launching `main.nf` [admiring_avogadro] revision: e1d7259d32
 
     Input CSV file not found: ./data/nonexistent.csv
     ```
@@ -1954,7 +2146,27 @@ nextflow run main.nf --input ./data/samples.csv
 ??? success "Sortie de la commande"
 
     ```console
-    <!-- TODO: output -->
+    N E X T F L O W  ~  version 26.04.4
+    Launching `main.nf` [sad_hopper] - revision: e1d7259d32
+    [1d/48ab44] Submitted process > TRIMGALORE (1)
+    [94/f6f423] Submitted process > FASTP (1)
+    [ca/6bbfae] Submitted process > GENERATE_REPORT (1)
+    [25/18c80b] Submitted process > GENERATE_REPORT (3)
+    [11/caf770] Submitted process > FASTP (2)
+    [a6/16ae06] Submitted process > GENERATE_REPORT (2)
+    [11/caf770] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+    [94/f6f423] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+    [a3/cb724c] Re-submitted process > FASTP (2)
+    [d6/8baf95] Re-submitted process > FASTP (1)
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
+        - reports/sample_001_report.txt
+        - reports/sample_003_report.txt
+        - reports/sample_002_report.txt
     ```
 
 Cette fois, il s'exécute avec succès.
@@ -1993,14 +2205,24 @@ nextflow run main.nf --input ./data/samples.csv
 ??? warning "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [awesome_goldwasser] DSL2 - revision: a31662a7c1
+    Launching `main.nf` [jolly_colden] revision: 608f36a239
 
-    executor >  local (5)
-    [ce/df5eeb] process > FASTP (2)           [100%] 2 of 2 ✔
-    [-        ] process > TRIMGALORE          -
-    [d1/7d2b4b] process > GENERATE_REPORT (3) [100%] 3 of 3 ✔
+    executor >  local (8)
+    [3b/e1586c] FASTP (2)           | 2 of 2, retries: 2 ✔
+    [8b/4286b3] TRIMGALORE (1)      | 1 of 1 ✔
+    [a0/761239] GENERATE_REPORT (3) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
+        - reports/sample_003_report.txt
+        - reports/sample_002_report.txt
+        - reports/sample_001_report.txt
+
     WARN: Low sequencing depth for sample_002: 25000000
     ```
 
@@ -2031,7 +2253,7 @@ Ajoutez le gestionnaire d'événements à votre fichier `main.nf`, à l'intérie
 
 === "Après"
 
-    ```groovy title="main.nf" linenums="66" hl_lines="5-16"
+    ```groovy title="main.nf" linenums="67" hl_lines="5-16"
         ch_fastp = FASTP(trim_branches.fastp)
         ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
         GENERATE_REPORT(ch_samples)
@@ -2047,15 +2269,21 @@ Ajoutez le gestionnaire d'événements à votre fichier `main.nf`, à l'intérie
             println "exit status : ${workflow.exitStatus}"
             println ""
         }
+
+        publish:
+        reports = GENERATE_REPORT.out
     }
     ```
 
 === "Avant"
 
-    ```groovy title="main.nf" linenums="66" hl_lines="4"
+    ```groovy title="main.nf" linenums="67" hl_lines="7"
         ch_fastp = FASTP(trim_branches.fastp)
         ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
         GENERATE_REPORT(ch_samples)
+
+        publish:
+        reports = GENERATE_REPORT.out
     }
     ```
 
@@ -2070,29 +2298,44 @@ nextflow run main.nf --input ./data/samples.csv -ansi-log false
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W  ~  version 25.10.4
-    Launching `main.nf` [marvelous_boltzmann] DSL2 - revision: a31662a7c1
+    N E X T F L O W  ~  version 26.04.4
+    Launching `main.nf` [sleepy_sax] - revision: 7f4b2a0423
     WARN: Low sequencing depth for sample_002: 25000000
-    [9b/d48e40] Submitted process > FASTP (2)
-    [6a/73867a] Submitted process > GENERATE_REPORT (2)
-    [79/ad0ac5] Submitted process > GENERATE_REPORT (1)
-    [f3/bda6cb] Submitted process > FASTP (1)
-    [34/d5b52f] Submitted process > GENERATE_REPORT (3)
+    [1d/85ba4a] Submitted process > TRIMGALORE (1)
+    [4c/7c429a] Submitted process > FASTP (2)
+    [22/e7faf8] Submitted process > GENERATE_REPORT (1)
+    [2a/ade0b2] Submitted process > FASTP (1)
+    [1f/193864] Submitted process > GENERATE_REPORT (3)
+    [60/712f82] Submitted process > GENERATE_REPORT (2)
+    [2a/ade0b2] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+    [4c/7c429a] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+    [85/b96cbc] Re-submitted process > FASTP (1)
+    [a7/55b62e] Re-submitted process > FASTP (2)
 
     Pipeline execution summary:
     ==========================
-    Completed at: 2025-10-10T12:14:24.885384+01:00
-    Duration    : 2.9s
+    Completed at: 2026-06-23T15:49:52.574354708Z
+    Duration    : 4.5s
     Success     : true
     workDir     : /workspaces/training/side-quests/essential_scripting_patterns/work
     exit status : 0
+
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
+        - reports/sample_001_report.txt
+        - reports/sample_003_report.txt
+        - reports/sample_002_report.txt
     ```
 
 Rendons-le plus utile en ajoutant une logique conditionnelle :
 
 === "Après"
 
-    ```groovy title="main.nf" linenums="66" hl_lines="5-22"
+    ```groovy title="main.nf" linenums="67" hl_lines="5-22"
         ch_fastp = FASTP(trim_branches.fastp)
         ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
         GENERATE_REPORT(ch_samples)
@@ -2115,12 +2358,15 @@ Rendons-le plus utile en ajoutant une logique conditionnelle :
                 println "Error: ${workflow.errorMessage}"
             }
         }
+
+        publish:
+        reports = GENERATE_REPORT.out
     }
     ```
 
 === "Avant"
 
-    ```groovy title="main.nf" linenums="66" hl_lines="5-16"
+    ```groovy title="main.nf" linenums="67" hl_lines="5-16"
         ch_fastp = FASTP(trim_branches.fastp)
         ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
         GENERATE_REPORT(ch_samples)
@@ -2136,34 +2382,53 @@ Rendons-le plus utile en ajoutant une logique conditionnelle :
             println "exit status : ${workflow.exitStatus}"
             println ""
         }
+
+        publish:
+        reports = GENERATE_REPORT.out
     }
     ```
 
 Nous obtenons maintenant un résumé encore plus informatif, incluant un message de succès/échec et le répertoire de sortie si spécifié :
 
-<!-- TODO: add run command -->
+```bash
+nextflow run main.nf
+```
 
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W  ~  version 25.10.4
-    Launching `main.nf` [boring_linnaeus] DSL2 - revision: a31662a7c1
+    N E X T F L O W  ~  version 26.04.4
+    Launching `main.nf` [hopeful_waddington] - revision: 442ec086c8
     WARN: Low sequencing depth for sample_002: 25000000
-    [e5/242efc] Submitted process > FASTP (2)
-    [3b/74047c] Submitted process > GENERATE_REPORT (3)
-    [8a/7a57e6] Submitted process > GENERATE_REPORT (1)
-    [a8/b1a31f] Submitted process > GENERATE_REPORT (2)
-    [40/648429] Submitted process > FASTP (1)
+    [e5/a71364] Submitted process > FASTP (1)
+    [81/c69cdc] Submitted process > FASTP (2)
+    [d1/368dff] Submitted process > GENERATE_REPORT (3)
+    [f0/19394e] Submitted process > TRIMGALORE (1)
+    [e3/679e45] Submitted process > GENERATE_REPORT (2)
+    [48/406c85] Submitted process > GENERATE_REPORT (1)
+    [81/c69cdc] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+    [e5/a71364] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+    [f8/b10ac0] Re-submitted process > FASTP (2)
+    [9e/49f6e2] Re-submitted process > FASTP (1)
 
     Pipeline execution summary:
     ==========================
-    Completed at: 2025-10-10T12:16:00.522569+01:00
-    Duration    : 3.6s
+    Completed at: 2026-06-23T15:50:06.811854363Z
+    Duration    : 4.4s
     Success     : true
     workDir     : /workspaces/training/side-quests/essential_scripting_patterns/work
     exit status : 0
 
     ✅ Pipeline completed successfully!
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
+        - reports/sample_003_report.txt
+        - reports/sample_002_report.txt
+        - reports/sample_001_report.txt
     ```
 
 Vous pouvez également écrire le résumé dans un fichier en utilisant des opérations sur les fichiers :
@@ -2195,7 +2460,22 @@ workflow {
 
 En plus de `onComplete`, il existe un autre gestionnaire d'événements que vous pouvez utiliser : `onError`, qui s'exécute uniquement si le workflow échoue :
 
-```groovy title="main.nf - onError handler"
+````groovy title="main.nf - onError handler"
+workflow {
+    // ... votre code de workflow ...
+
+    workflow.onError = {
+        println "="* 50
+        println "Pipeline execution failed!"
+        println "Error message: ${workflow.errorMessage}"
+        println "="* 50
+
+        // Écrire un journal d'erreur détaillé
+        def error_file = file("${workflow.launchDir}/error.log")
+        error_file.text = """
+        Workflow Error Report
+        =====================
+        Time: ${new```groovy title="main.nf - onError handler"
 workflow {
     // ... votre code de workflow ...
 
@@ -2218,7 +2498,7 @@ workflow {
         println "Error details written to: ${error_file}"
     }
 }
-```
+````
 
 Vous pouvez utiliser plusieurs gestionnaires ensemble dans votre script de workflow :
 
@@ -2409,9 +2689,7 @@ Appliquer ces modèles dans votre propre travail vous permettra de construire de
 
     - Utiliser `onComplete` pour journaliser et notifier
 
-    ````groovy
-    workflow.onComplete = {
-        println```groovy
+    ```groovy
     workflow.onComplete = {
         println "Success     : ${workflow.success}"
         println "exit status : ${workflow.exitStatus}"
@@ -2423,7 +2701,7 @@ Appliquer ces modèles dans votre propre travail vous permettra de construire de
             println "Error: ${workflow.errorMessage}"
         }
     }
-    ````
+    ```
 
     - Utiliser `onError` pour agir spécifiquement en cas d'échec
 

@@ -141,21 +141,35 @@ nextflow run workflows/greeting.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W  ~  version 24.10.0
-    Launching `workflows/greeting.nf` [peaceful_montalcini] DSL2 - revision: 90f61b7093
+    N E X T F L O W   ~  version 26.04.4
+    Launching `workflows/greeting.nf` [loving_cuvier] revision: 22e91263dd
     executor >  local (9)
-    [51/4f980f] process > VALIDATE_NAME (validating Bob)                    [100%] 3 of 3 ✔
-    [2b/dd8dc2] process > SAY_HELLO (greeting Bob)                          [100%] 3 of 3 ✔
-    [8e/882565] process > TIMESTAMP_GREETING (adding timestamp to greeting) [100%] 3 of 3 ✔
+    [54/ec2442] VAL…TE_NAME (validating Alice) | 3 of 3 ✔
+    [a5/3cf2ab] SAY_HELLO (greeting Charlie)   | 3 of 3 ✔
+    [df/6689ec] TIM…ing timestamp to greeting) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/workflows_of_workflows/results
+
+      greetings:
+        - Alice-output.txt
+        - Bob-output.txt
+        - Charlie-output.txt
+
+      timestamped:
+        - timestamped_Alice-output.txt
+        - timestamped_Bob-output.txt
+        - timestamped_Charlie-output.txt
     ```
 
 다른 워크플로우와 구성 가능하게 만들기 위해 몇 가지를 변경해야 합니다.
 
 ### 1.2. 워크플로우를 구성 가능하게 만들기
 
-워크플로우를 구성 가능하게 만들려면 네 가지를 변경해야 합니다:
-워크플로우에 이름을 부여하고, 입력을 `take:` 블록으로 이동하고, 출력을 `emit:` 블록으로 이동하고,
-단독 실행형 `publish:`/`output {}` 블록을 제거합니다(이 블록들은 진입 워크플로우에 속합니다).
+워크플로우를 구성 가능하게 만들려면 세 가지를 변경해야 합니다:
+워크플로우에 이름을 부여하고, 입력을 `take:` 블록으로 이동하고, 출력을 `emit:` 블록으로 이동합니다
+(단독 실행형 `publish:`/`output {}` 블록은 제거하며, 이 블록들은 진입 워크플로우에 속합니다).
 
 각 변경 사항을 하나씩 살펴봅니다.
 
@@ -278,8 +292,8 @@ nextflow run workflows/greeting.nf
 ??? failure "명령 출력"
 
     ```console
-    N E X T F L O W  ~  version 24.10.0
-    Launching `workflows/greeting.nf` [high_brahmagupta] DSL2 - revision: 8f5857af25
+    N E X T F L O W   ~  version 26.04.4
+    Launching `workflows/greeting.nf` [ridiculous_mandelbrot] revision: e619235cf1
     No entry workflow specified
     ```
 
@@ -363,12 +377,21 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W  ~  version 24.10.0
-    Launching `main.nf` [goofy_mayer] DSL2 - revision: 543f8742fe
+    N E X T F L O W   ~  version 26.04.4
+    Launching `main.nf` [berserk_lalande] revision: 9a841b3c7f
     executor >  local (9)
-    [05/3cc752] process > GREETING_WORKFLOW:VALIDATE_NAME (validating Char... [100%] 3 of 3 ✔
-    [b1/b56ecf] process > GREETING_WORKFLOW:SAY_HELLO (greeting Charlie)      [100%] 3 of 3 ✔
-    [ea/342168] process > GREETING_WORKFLOW:TIMESTAMP_GREETING (adding tim... [100%] 3 of 3 ✔
+    [31/c2931b] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
+    [2a/50592c] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
+    [09/35e2d5] GRE…ing timestamp to greeting) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/workflows_of_workflows/results
+
+      greetings:
+        - greetings/Charlie-output.txt
+        - greetings/Bob-output.txt
+        - greetings/Alice-output.txt
     ```
 
 ??? abstract "디렉토리 내용"
@@ -456,11 +479,25 @@ nextflow run workflows/transform.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W  ~  version 24.10.0
-    Launching `workflows/transform.nf` [blissful_curie] DSL2 - revision: 4e7b1c9f02
+    N E X T F L O W   ~  version 26.04.4
+    Launching `workflows/transform.nf` [cranky_banach] revision: c040a64fcf
     executor >  local (6)
-    [3e/a14c29] process > SAY_HELLO_UPPER (converting t... [100%] 3 of 3 ✔
-    [c8/51b9e3] process > REVERSE_TEXT (reversing UPPER... [100%] 3 of 3 ✔
+    [c8/cd04d9] SAY…estamped_Alice-output.txt) | 3 of 3 ✔
+    [3d/2252c3] REV…estamped_Alice-output.txt) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/workflows_of_workflows/results
+
+      upper:
+        - UPPER-timestamped_Bob-output.txt
+        - UPPER-timestamped_Charlie-output.txt
+        - UPPER-timestamped_Alice-output.txt
+
+      reversed:
+        - REVERSED-UPPER-timestamped_Bob-output.txt
+        - REVERSED-UPPER-timestamped_Charlie-output.txt
+        - REVERSED-UPPER-timestamped_Alice-output.txt
     ```
 
 `GREETING_WORKFLOW`와 구성 가능하게 만들려면 1.2 섹션과 동일한 세 가지 변경 사항을 적용합니다.
@@ -585,14 +622,33 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W  ~  version 24.10.0
-    Launching `main.nf` [sick_kimura] DSL2 - revision: 8dc45fc6a8
+    N E X T F L O W   ~  version 26.04.4
+    Launching `main.nf` [focused_venter] revision: 03b08f23fc
     executor >  local (15)
-    [83/1b51f4] process > GREETING_WORKFLOW:VALIDATE_NAME (validating Alice)  [100%] 3 of 3 ✔
-    [68/556150] process > GREETING_WORKFLOW:SAY_HELLO (greeting Alice)        [100%] 3 of 3 ✔
-    [de/511abd] process > GREETING_WORKFLOW:TIMESTAMP_GREETING (adding tim... [100%] 3 of 3 ✔
-    [cd/e6a7e0] process > TRANSFORM_WORKFLOW:SAY_HELLO_UPPER (converting t... [100%] 3 of 3 ✔
-    [f0/74ba4a] process > TRANSFORM_WORKFLOW:REVERSE_TEXT (reversing UPPER... [100%] 3 of 3 ✔
+    [f6/cd1e04] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
+    [07/1139ba] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
+    [d2/25e304] GRE…ing timestamp to greeting) | 3 of 3 ✔
+    [90/64c33c] TRA…estamped_Alice-output.txt) | 3 of 3 ✔
+    [bf/2f23b0] TRA…estamped_Alice-output.txt) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/workflows_of_workflows/results
+
+      greetings:
+        - greetings/Charlie-output.txt
+        - greetings/Bob-output.txt
+        - greetings/Alice-output.txt
+
+      upper:
+        - upper/UPPER-timestamped_Charlie-output.txt
+        - upper/UPPER-timestamped_Bob-output.txt
+        - upper/UPPER-timestamped_Alice-output.txt
+
+      reversed:
+        - reversed/REVERSED-UPPER-timestamped_Charlie-output.txt
+        - reversed/REVERSED-UPPER-timestamped_Bob-output.txt
+        - reversed/REVERSED-UPPER-timestamped_Alice-output.txt
     ```
 
 ??? abstract "디렉토리 내용"
@@ -616,7 +672,7 @@ nextflow run main.nf
 ??? abstract "파일 내용"
 
     ```console title="results/reversed/REVERSED-UPPER-timestamped_Alice-output.txt"
-    !ECILA ,OLLEH ]04:50:71 60-30-5202[
+    !ECILA ,OLLEH ]71:15:11 32-60-6202[
     ```
 
 파이프라인이 처음부터 끝까지 정상적으로 작동합니다: 인사말이 대문자로 변환되고 뒤집혔습니다.

@@ -20,12 +20,12 @@ nextflow run hello-world.nf --greeting 'Hello World!'
 콘솔 출력은 다음과 같이 표시되어야 합니다:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 26.04.4
 
-Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+Launching `hello-world.nf` [small_swirles] revision: 0fb8dbb23d
 
 executor >  local (1)
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
 축하합니다. 첫 번째 Nextflow 워크플로우를 실행하셨습니다!
@@ -33,7 +33,7 @@ executor >  local (1)
 여기서 가장 중요한 출력은 마지막 줄(6번 줄)입니다:
 
 ```console title="Output" linenums="6"
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
 이는 `sayHello` process가 한 번 성공적으로 실행되었음을 알려줍니다(`1 of 1 ✔`).
@@ -84,19 +84,19 @@ Hello World!
 앞서 실행한 워크플로우의 콘솔 출력으로 돌아가면 다음과 같은 줄이 있었습니다:
 
 ```console title="Excerpt of command output" linenums="6"
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
-줄이 `[a3/7be2fa]`로 시작하는 것이 보이시나요?
+줄이 `[71/8143bd]`로 시작하는 것이 보이시나요?
 이것은 해당 process 실행에 대한 task 디렉토리 경로의 축약된 형태이며, `work/` 디렉토리 경로 내에서 `sayHello` process 실행의 출력을 어디에서 찾을 수 있는지 알려줍니다.
 
-다음 명령을 입력하고(`a3/7be2fa`를 터미널에 표시된 것으로 교체) tab 키를 눌러 경로를 자동 완성하거나 별표를 추가하여 전체 경로를 찾을 수 있습니다:
+다음 명령을 입력하고(`71/8143bd`를 터미널에 표시된 것으로 교체) tab 키를 눌러 경로를 자동 완성하거나 별표를 추가하여 전체 경로를 찾을 수 있습니다:
 
 ```bash
-tree work/a3/7be2fa*
+tree work/71/8143bd*
 ```
 
-전체 디렉토리 경로가 표시됩니다: `work/a3/7be2fa7be2fad5e71e5f49998f795677fd68`
+전체 디렉토리 경로가 표시됩니다: `work/71/8143bd5ed3420e23c5f0dc1a05056d`
 
 그 안에 무엇이 있는지 살펴보겠습니다.
 
@@ -116,8 +116,8 @@ tree work/a3/7be2fa*
 
 ```console title="work/"
 work
-└── a3
-    └── 7be2fad5e71e5f49998f795677fd68
+└── 71
+    └── 8143bd5ed3420e23c5f0dc1a05056d
         ├── .command.begin
         ├── .command.err
         ├── .command.log
@@ -136,7 +136,7 @@ work
 <details>
   <summary>output.txt의 파일 내용</summary>
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" linenums="1"
 Hello World!
 ```
 
@@ -159,10 +159,9 @@ Hello World!
 <details>
   <summary>파일 내용</summary>
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/.command.sh" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" linenums="1"
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
-
 ```
 
 </details>
@@ -357,14 +356,14 @@ nextflow run hello-world.nf --greeting 'Hello World!' -resume
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_noyce] DSL2 - revision: c33d41f479
+    Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d
 
-    [a3/7be2fa] process > sayHello [100%] 1 of 1, cached: 1 ✔
+    [71/8143bd] sayHello | 1 of 1, cached: 1 ✔
     ```
 
-process 상태 줄(5번 줄)에 추가된 `cached:` 부분을 찾아보십시오. 이는 Nextflow가 이미 이 작업을 수행했음을 인식하고 이전에 성공한 실행의 결과를 단순히 재사용했음을 의미합니다.
+process 상태 줄에 추가된 `cached:` 부분을 찾아보십시오. 이는 Nextflow가 이미 이 작업을 수행했음을 인식하고 이전에 성공한 실행의 결과를 단순히 재사용했음을 의미합니다.
 
 작업 하위 디렉토리 해시가 이전 실행과 동일하다는 것도 확인할 수 있습니다.
 Nextflow는 말 그대로 이전 실행을 가리키며 "저기에서 이미 했습니다"라고 말하고 있습니다.

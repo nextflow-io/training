@@ -215,9 +215,9 @@ nextflow run hello-world.nf
 ??? success "명령 출력"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+    Launching `hello-world.nf` [goofy_torvalds] revision: c33d41f479
 
     executor >  local (1)
     [65/7be2fa] sayHello | 1 of 1 ✔
@@ -486,17 +486,23 @@ nextflow run hello-world.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5
+    Launching `hello-world.nf` [jovial_mayer] revision: 35bd3425e5
 
     executor >  local (1)
     [9f/48ef97] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: output.txt
     ```
 
-터미널 출력은 익숙해 보일 것입니다. 외부적으로는 아무것도 변경되지 않았습니다.
+터미널 출력은 이제 게시된 출력과 해당 출력이 저장된 디렉토리를 나열하는 `Outputs:` 요약으로 끝납니다.
 
-그러나 파일 탐색기를 확인하십시오: 이번에는 Nextflow가 `results/`라는 새 디렉토리를 생성했습니다.
+파일 탐색기를 확인하십시오: 이번에는 Nextflow가 `results/`라는 새 디렉토리도 생성했습니다.
 
 ??? abstract "디렉토리 내용"
 
@@ -574,12 +580,18 @@ nextflow run hello-world.nf
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
+    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
 
     executor >  local (1)
-    [8c/79499c] process > sayHello [100%] 1 of 1 ✔
+    [8c/79499c] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 이번에는 결과가 지정된 하위 디렉토리 아래에 기록됩니다.
@@ -653,12 +665,18 @@ nextflow run hello-world.nf
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
+    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
 
     executor >  local (1)
-    [df/521638] process > sayHello [100%] 1 of 1 ✔
+    [df/521638] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 이번에는 결과를 보면 파일이 심볼릭 링크가 아닌 적절한 복사본입니다.
@@ -767,19 +785,19 @@ process sayHello {
 === "후"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-    script:
-    """
-    echo '${greeting}' > output.txt
-    """
+        script:
+        """
+        echo '${greeting}' > output.txt
+        """
     ```
 
 === "전"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-    script:
-    """
-    echo 'Hello World!' > output.txt
-    """
+        script:
+        """
+        echo 'Hello World!' > output.txt
+        """
     ```
 
 `$` 기호와 중괄호(`{ }`)는 Nextflow에게 이것이 실제 입력 값으로 대체(=보간)해야 하는 변수 이름임을 알려줍니다.
@@ -811,15 +829,15 @@ process sayHello {
 === "후"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // 인사말을 내보냅니다
-    sayHello(params.input)
+        // 인사말을 내보냅니다
+        sayHello(params.input)
     ```
 
 === "전"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // 인사말을 내보냅니다
-    sayHello()
+        // 인사말을 내보냅니다
+        sayHello()
     ```
 
 이것은 Nextflow에게 `--input` 매개변수를 통해 제공된 값으로 `sayHello` 프로세스를 실행하도록 지시합니다.
@@ -837,12 +855,18 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea
+    Launching `hello-world.nf` [elated_lavoisier] revision: 7c031b42ea
 
     executor >  local (1)
     [4b/654319] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 이러한 편집을 모두 올바르게 수행했다면 또 다른 성공적인 실행을 얻어야 합니다.
@@ -906,12 +930,18 @@ nextflow run hello-world.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582
+    Launching `hello-world.nf` [determined_edison] revision: 3539118582
 
     executor >  local (1)
     [72/394147] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 ??? question "작동하지 않았다면"
@@ -936,7 +966,8 @@ nextflow run hello-world.nf
     이것은 과정 시작 부분에서 언급되었지만 놓쳤을 수 있습니다.
     [Nextflow 버전](../info/nxf_versions.md) 도움말 자료를 확인하십시오.
 
-    간단히 말해서, Nextflow `25.10`을 사용하는 경우 v2 언어 분석기를 활성화해야 합니다:
+    v2 분석기는 Nextflow 26.04부터 기본값으로 설정되어 있으므로 이전 버전에서만 이 문제가 발생합니다.
+    26.04 이전 버전을 사용하는 경우 v2 언어 분석기를 활성화해야 합니다:
 
     ```bash
     export NXF_SYNTAX_PARSER=v2
@@ -965,12 +996,18 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582
+    Launching `hello-world.nf` [elegant_faraday] revision: 3539118582
 
     executor >  local (1)
     [6f/a12a91] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 다시 한번 results 디렉토리에서 해당하는 업데이트된 출력을 찾을 수 있습니다.
@@ -1004,8 +1041,6 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 
 여기서는 동일한 워크플로우를 다시 실행해야 할 때 [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html) 기능을 사용하는 방법, [`nextflow log`](https://nextflow.io/docs/latest/reference/cli.html#log)로 과거 실행 로그를 검사하는 방법, [`nextflow clean`](https://nextflow.io/docs/latest/reference/cli.html#clean)으로 이전 작업 디렉토리를 삭제하는 방법을 보여드립니다.
 
-<!-- Any other cool options we should include? Added log -->
-
 ### 4.1. `-resume`으로 워크플로우 다시 실행
 
 때로는 이전에 이미 실행한 파이프라인을 이미 성공적으로 완료된 단계를 다시 수행하지 않고 다시 실행하고 싶을 것입니다.
@@ -1022,17 +1057,23 @@ Nextflow에는 이를 수행할 수 있는 [`-resume`](https://nextflow.io/docs/
 사용하려면 명령에 `-resume`을 추가하고 실행하기만 하면 됩니다:
 
 ```bash
-nextflow run hello-world.nf -resume
+nextflow run hello-world.nf --input 'Konnichiwa!' -resume
 ```
 
 ??? success "명령 출력"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
+    Launching `hello-world.nf` [golden_cantor] revision: 35bd3425e5
 
     [62/49a1f8] sayHello | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 콘솔 출력은 익숙해 보이지만, 이전과 약간 다른 점이 있습니다.

@@ -132,9 +132,9 @@ nextflow run bad_syntax.nf
 ??? failure "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_syntax.nf` [stupefied_bhabha] DSL2 - revision: ca6327fad2
+    Launching `bad_syntax.nf` [nice_kalam] revision: 550b9a8873
 
     Error bad_syntax.nf:24:1: Unexpected input: '<EOF>'
 
@@ -260,12 +260,12 @@ nextflow run bad_syntax.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_syntax.nf` [insane_faggin] DSL2 - revision: 961938ee2b
+    Launching `bad_syntax.nf` [small_morse] revision: 961938ee2b
 
     executor >  local (3)
-    [48/cd7f54] PROCESS_FILES (1) | 3 of 3 ✔
+    [f5/dd6f46] PROCESS_FILES (1) | 3 of 3 ✔
     ```
 
 ### 1.2. Utilisation de mots-clés ou de directives de processus incorrects
@@ -281,9 +281,9 @@ nextflow run invalid_process.nf
 ??? failure "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `invalid_process.nf` [nasty_jepsen] DSL2 - revision: da9758d614
+    Launching `invalid_process.nf` [astonishing_pesquet] revision: f42559404a
 
     Error invalid_process.nf:3:1: Invalid process definition -- check for missing or out-of-order section labels
     │   3 | process PROCESS_FILES {
@@ -403,12 +403,12 @@ nextflow run invalid_process.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `invalid_process.nf` [silly_fermi] DSL2 - revision: 961938ee2b
+    Launching `invalid_process.nf` [confident_banach] revision: 961938ee2b
 
     executor >  local (3)
-    [b7/76cd9d] PROCESS_FILES (2) | 3 of 3 ✔
+    [29/87d6b8] PROCESS_FILES (1) | 3 of 3 ✔
     ```
 
 ### 1.3. Utilisation de noms de variables incorrects
@@ -424,9 +424,9 @@ nextflow run no_such_var.nf
 ??? failure "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `no_such_var.nf` [gloomy_meninsky] DSL2 - revision: 0c4d3bc28c
+    Launching `no_such_var.nf` [spontaneous_pasteur] revision: 0c4d3bc28c
 
     Error no_such_var.nf:17:39: `undefined_var` is not defined
     │  17 |     echo "Using undefined variable: ${undefined_var}" >> ${output_pref
@@ -514,7 +514,7 @@ Si vous obtenez une erreur 'No such variable', vous pouvez la corriger soit en d
         val sample_name
 
         output:
-        path "${sample_name}_output.txt"
+        path "${sample_name}_processed.txt"
 
         script:
         // Définir les variables en code Groovy avant le script
@@ -544,12 +544,12 @@ nextflow run no_such_var.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `no_such_var.nf` [suspicious_venter] DSL2 - revision: 6ba490f7c5
+    Launching `no_such_var.nf` [suspicious_venter] revision: 6ba490f7c5
 
     executor >  local (3)
-    [21/237300] PROCESS_FILES (2) | 3 of 3 ✔
+    [26/b4370c] PROCESS_FILES (3) | 3 of 3 ✔
     ```
 
 ### 1.4. Mauvaise utilisation des variables Bash
@@ -565,9 +565,9 @@ nextflow run bad_bash_var.nf
 ??? failure "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_bash_var.nf` [infallible_mandelbrot] DSL2 - revision: 0853c11080
+    Launching `bad_bash_var.nf` [hopeful_koch] revision: 0853c11080
 
     Error bad_bash_var.nf:13:42: `prefix` is not defined
     │  13 |     echo "Processing ${sample_name}" > ${prefix}.txt
@@ -664,12 +664,12 @@ nextflow run bad_bash_var.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_bash_var.nf` [naughty_franklin] DSL2 - revision: 58c1c83709
+    Launching `bad_bash_var.nf` [naughty_franklin] revision: 58c1c83709
 
     executor >  local (3)
-    [4e/560285] PROCESS_FILES (2) | 3 of 3 ✔
+    [cf/19a490] PROCESS_FILES (3) | 3 of 3 ✔
     ```
 
 !!! tip "Variables Groovy vs Bash"
@@ -700,11 +700,11 @@ nextflow run badpractice_syntax.nf
 ??? failure "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `badpractice_syntax.nf` [intergalactic_colden] DSL2 - revision: 5e4b291bde
+    Launching `badpractice_syntax.nf` [fervent_miescher] revision: 5e4b291bde
 
-    Error badpractice_syntax.nf:3:1: Statements cannot be mixed with script declarations -- move statements into a process or workflow
+    Error badpractice_syntax.nf:3:1: Statements cannot be mixed with script declarations -- move statements into a process, workflow, or function
     │   3 | input_ch = channel.of('sample1', 'sample2', 'sample3')
     ╰     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -822,12 +822,12 @@ nextflow run badpractice_syntax.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `badpractice_syntax.nf` [naughty_ochoa] DSL2 - revision: 5e4b291bde
+    Launching `badpractice_syntax.nf` [naughty_ochoa] revision: 5e4b291bde
 
     executor >  local (3)
-    [6a/84a608] PROCESS_FILES (2) | 3 of 3 ✔
+    [f0/350ff4] PROCESS_FILES (2) | 3 of 3 ✔
     ```
 
 Gardez vos canaux d'entrée définis à l'intérieur du bloc workflow, et suivez en général toutes les autres recommandations que l'extension vous fait.
@@ -844,7 +844,7 @@ Apprenez à déboguer des erreurs de structure de canal plus complexes qui survi
 
 ## 2. Erreurs de structure de canal
 
-Les erreurs de structure de canal sont plus subtiles que les erreurs de syntaxe car le code est syntaxiquement correct, mais les formes des données ne correspondent pas à ce que les processus attendent. Nextflow essaiera d'exécuter le pipeline, mais pourrait constater que le nombre d'entrées ne correspond pas à ce qu'il attend et échouer. Ces erreurs n'apparaissent généralement qu'à l'exécution et nécessitent une compréhension des données qui circulent dans votre workflow.
+Les erreurs de structure de canal sont plus subtiles que les erreurs de syntaxe car le code est syntaxiquement correct, mais les formes des données ne correspondent pas à ce que les processus attendent. Nextflow essaiera d'exécuter le pipeline, mais pourrait constater que le nombre d'entrées ne correspond pas à ce qu'il attend et échouer. Ces erreurs apparaissent généralement uniquement à l'exécution et nécessitent une compréhension des données qui circulent dans votre workflow.
 
 !!! tip "Déboguer les canaux avec `.view()`"
 
@@ -867,9 +867,9 @@ nextflow run bad_number_inputs.nf
 ??? failure "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_number_inputs.nf` [happy_swartz] DSL2 - revision: d83e58dcd3
+    Launching `bad_number_inputs.nf` [desperate_carson] revision: d83e58dcd3
 
     Error bad_number_inputs.nf:23:5: Incorrect number of call arguments, expected 1 but received 2
     │  23 |     PROCESS_FILES(samples_ch, files_ch)
@@ -986,12 +986,12 @@ nextflow run bad_number_inputs.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_number_inputs.nf` [big_euler] DSL2 - revision: e302bd87be
+    Launching `bad_number_inputs.nf` [big_euler] revision: e302bd87be
 
     executor >  local (3)
-    [48/497f7b] PROCESS_FILES (3) | 3 of 3 ✔
+    [47/1d039f] PROCESS_FILES (3) | 3 of 3 ✔
     ```
 
 Plus couramment que dans cet exemple, vous pourriez ajouter des entrées supplémentaires à un processus et oublier de mettre à jour l'appel du workflow en conséquence, ce qui peut conduire à ce type d'erreur. Heureusement, c'est l'une des erreurs les plus faciles à comprendre et à corriger, car le message d'erreur est assez clair sur la discordance.
@@ -1008,14 +1008,14 @@ nextflow run exhausted.nf
 
 ??? success "Sortie de la commande"
 
-```console title="Exhausted channel output"
- N E X T F L O W   ~  version 25.10.4
+    ```console title="Exhausted channel output"
+     N E X T F L O W   ~  version 26.04.4
 
-Launching `exhausted.nf` [extravagant_gauss] DSL2 - revision: 08cff7ba2a
+    Launching `exhausted.nf` [romantic_liskov] revision: 31a6ae1494
 
-executor >  local (1)
-[bd/f61fff] PROCESS_FILES (1) [100%] 1 of 1 ✔
-```
+    executor >  local (1)
+    [10/82e235] PROCESS_FILES (1) | 1 of 1 ✔
+    ```
 
 Ce workflow se termine sans erreur, mais il ne traite qu'un seul échantillon !
 
@@ -1133,12 +1133,12 @@ nextflow run exhausted.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `exhausted.nf` [maniac_leavitt] DSL2 - revision: f372a56a7d
+    Launching `exhausted.nf` [maniac_leavitt] revision: f372a56a7d
 
     executor >  local (3)
-    [80/0779e9] PROCESS_FILES (3) | 3 of 3 ✔
+    [d9/886888] PROCESS_FILES (2) | 3 of 3 ✔
     ```
 
 Vous devriez maintenant voir les trois échantillons traités au lieu d'un seul.
@@ -1156,11 +1156,12 @@ nextflow run bad_channel_shape.nf
 ??? failure "Sortie de la commande"
 
     ```console
-    Launching `bad_channel_shape.nf` [hopeful_pare] DSL2 - revision: ffd66071a1
+     N E X T F L O W   ~  version 26.04.4
+
+    Launching `bad_channel_shape.nf` [disturbed_hilbert] revision: 3046f86036
 
     executor >  local (3)
-    executor >  local (3)
-    [3f/c2dcb3] PROCESS_FILES (3) [  0%] 0 of 3 ✘
+    [13/2d7cf7] PROCESS_FILES (2) | 0 of 3 ✘
     ERROR ~ Error executing process > 'PROCESS_FILES (1)'
 
     Caused by:
@@ -1178,7 +1179,7 @@ nextflow run bad_channel_shape.nf
       (empty)
 
     Work dir:
-      /workspaces/training/side-quests/debugging/work/d6/1fb69d1d93300bbc9d42f1875b981e
+      /workspaces/training/side-quests/debugging/work/fc/20d7bd091eb9f7f63b76ab3a802cac
 
     Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
 
@@ -1328,12 +1329,12 @@ nextflow run bad_channel_shape.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_channel_shape.nf` [clever_thompson] DSL2 - revision: 8cbcae3746
+    Launching `bad_channel_shape.nf` [clever_thompson] revision: 8cbcae3746
 
     executor >  local (3)
-    [bb/80a958] PROCESS_FILES (2) | 3 of 3 ✔
+    [81/d0f3ea] PROCESS_FILES (1) | 3 of 3 ✔
     ```
 
 ### 2.4. Techniques de débogage des canaux
@@ -1353,12 +1354,12 @@ nextflow run bad_channel_shape_viewed.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_channel_shape_viewed.nf` [maniac_poisson] DSL2 - revision: b4f24dc9da
+    Launching `bad_channel_shape_viewed.nf` [sleepy_cajal] revision: 03e79cdbad
 
     executor >  local (3)
-    [c0/db76b3] PROCESS_FILES (3) [100%] 3 of 3 ✔
+    [dc/6e5c24] PROCESS_FILES (2) | 3 of 3 ✔
     Channel content: [sample1, file1.txt]
     Channel content: [sample2, file2.txt]
     Channel content: [sample3, file3.txt]
@@ -1418,12 +1419,12 @@ nextflow run bad_channel_shape_viewed.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_channel_shape_viewed.nf` [marvelous_koch] DSL2 - revision: 03e79cdbad
+    Launching `bad_channel_shape_viewed.nf` [marvelous_koch] revision: 03e79cdbad
 
     executor >  local (3)
-    [ff/d67cec] PROCESS_FILES (2) | 3 of 3 ✔
+    [dc/6e5c24] PROCESS_FILES (2) | 3 of 3 ✔
     Channel content: [sample1, file1.txt]
     Channel content: [sample2, file2.txt]
     Channel content: [sample3, file3.txt]
@@ -1459,13 +1460,12 @@ nextflow run missing_output.nf
 ??? failure "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `missing_output.nf` [zen_stone] DSL2 - revision: 37ff61f926
+    Launching `missing_output.nf` [evil_gilbert] revision: 3d5117f7e2
 
     executor >  local (3)
-    executor >  local (3)
-    [fd/2642e9] process > PROCESS_FILES (2) [ 66%] 2 of 3, failed: 2
+    [45/146e39] PROCESS_FILES (1) | 0 of 3 ✘
     ERROR ~ Error executing process > 'PROCESS_FILES (3)'
 
     Caused by:
@@ -1483,9 +1483,9 @@ nextflow run missing_output.nf
       (empty)
 
     Work dir:
-      /workspaces/training/side-quests/debugging/work/02/9604d49fb8200a74d737c72a6c98ed
+      /workspaces/training/side-quests/debugging/work/2b/85afc51ff8d820df3b97b8a7154a30
 
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+    Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
 
     -- Check '.nextflow.log' file for details
     ```
@@ -1567,12 +1567,12 @@ nextflow run missing_output.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `missing_output.nf` [elated_hamilton] DSL2 - revision: 961938ee2b
+    Launching `missing_output.nf` [elated_hamilton] revision: 961938ee2b
 
     executor >  local (3)
-    [16/1c437c] PROCESS_FILES (3) | 3 of 3 ✔
+    [70/6d4479] PROCESS_FILES (1) | 3 of 3 ✔
     ```
 
 ### 3.2. Logiciel manquant
@@ -1588,15 +1588,15 @@ nextflow run missing_software.nf
 ??? failure "Sortie de la commande"
 
     ```console hl_lines="12 18"
-    ERROR ~ Error executing process > 'PROCESS_FILES (3)'
+    ERROR ~ Error executing process > 'PROCESS_FILES (2)'
 
     Caused by:
-      Process `PROCESS_FILES (3)` terminated with an error exit status (127)
+      Process `PROCESS_FILES (2)` terminated with an error exit status (127)
 
 
     Command executed:
 
-      cowpy sample3 > sample3_output.txt
+      cowpy sample2 > sample2_output.txt
 
     Command exit status:
       127
@@ -1608,9 +1608,9 @@ nextflow run missing_software.nf
       .command.sh: line 2: cowpy: command not found
 
     Work dir:
-      /workspaces/training/side-quests/debugging/work/82/42a5bfb60c9c6ee63ebdbc2d51aa6e
+      /workspaces/training/side-quests/debugging/work/2f/bcf8fad6fd101c76950c92062ce299
 
-    Tip: you can try to figure out what's wrong by changing to the process work directory and showing the script file named `.command.sh`
+    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
 
     -- Check '.nextflow.log' file for details
     ```
@@ -1654,12 +1654,12 @@ nextflow run missing_software.nf -profile docker
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `missing_software.nf` [awesome_stonebraker] DSL2 - revision: 0296d12839
+    Launching `missing_software.nf` [awesome_stonebraker] revision: 0296d12839
 
     executor >  local (3)
-    [38/ab20d1] PROCESS_FILES (1) | 3 of 3 ✔
+    [33/bf8d3e] PROCESS_FILES (3) | 3 of 3 ✔
     ```
 
 !!! note "Note"
@@ -1681,34 +1681,19 @@ nextflow run bad_resources.nf -profile docker
 ??? failure "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_resources.nf` [disturbed_elion] DSL2 - revision: 27d2066e86
+    Launching `bad_resources.nf` [curious_escher] revision: e6e544e786
 
     executor >  local (3)
-    [c0/ded8e1] PROCESS_FILES (3) | 0 of 3 ✘
-    ERROR ~ Error executing process > 'PROCESS_FILES (2)'
+    [83/c8c4af] PROCESS_FILES (2) | 0 of 3
+    WARN: Killing running tasks (2)
+    ERROR ~ Error executing process > 'PROCESS_FILES (1)'
 
     Caused by:
-      Process exceeded running time limit (1ms)
+      process hasn't exited
 
-    Command executed:
 
-      cowpy sample2 > sample2_output.txt
-
-    Command exit status:
-      -
-
-    Command output:
-      (empty)
-
-    Work dir:
-      /workspaces/training/side-quests/debugging/work/53/f0a4cc56d6b3dc2a6754ff326f1349
-
-    Container:
-      community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
-
-    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 
      -- Check '.nextflow.log' file for details
     ```
@@ -1717,8 +1702,10 @@ nextflow run bad_resources.nf -profile docker
 
 Examinons `bad_resources.nf` :
 
-```groovy title="bad_resources.nf" linenums="3" hl_lines="3"
+```groovy title="bad_resources.nf" linenums="3" hl_lines="5"
 process PROCESS_FILES {
+
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
     time '1 ms'  // ERREUR : Limite de temps irréaliste
 
@@ -1793,15 +1780,15 @@ nextflow run bad_resources.nf -profile docker
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_resources.nf` [friendly_mcclintock] DSL2 - revision: 381567d2c1
+    Launching `bad_resources.nf` [friendly_mcclintock] revision: 381567d2c1
 
     executor >  local (3)
-    [c2/9b4c41] PROCESS_FILES (3) | 3 of 3 ✔
+    [96/b70b83] PROCESS_FILES (3) | 3 of 3 ✔
     ```
 
-Si vous prenez soin de lire vos messages d'erreur, des échecs comme celui-ci ne devraient pas vous déconcerter longtemps. Mais assurez-vous de comprendre les besoins en ressources des commandes que vous exécutez afin de pouvoir configurer vos directives de ressources de manière appropriée.
+Avec l'executor `local`, l'erreur est moins explicite qu'elle ne le serait avec un ordonnanceur : vous obtenez `process hasn't exited` et `WARN: Killing running tasks` plutôt qu'un message mentionnant la limite de temps. Le lien à établir est que Nextflow tue une tâche lorsqu'elle dépasse les ressources que vous lui avez allouées ; ainsi, lorsqu'un processus est interrompu sans erreur au niveau du script, vérifiez ses directives de ressources. Ici, le coupable est la directive `time`, qui est bien trop faible pour le travail effectué par le processus. Assurez-vous de comprendre les besoins en ressources des commandes que vous exécutez afin de pouvoir configurer vos directives de ressources de manière appropriée.
 
 ### 3.4. Techniques de débogage des processus
 
@@ -1822,20 +1809,21 @@ nextflow run missing_output.nf
 ??? failure "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `missing_output.nf` [irreverent_payne] DSL2 - revision: 3d5117f7e2
+    Launching `missing_output.nf` [irreverent_payne] revision: 3d5117f7e2
 
     executor >  local (3)
-    [5d/d544a4] PROCESS_FILES (2) | 0 of 3 ✘
-    ERROR ~ Error executing process > 'PROCESS_FILES (1)'
+    [f0/42f283] PROCESS_FILES (2) | 0 of 3 ✘
+    ERROR ~ Error executing process > 'PROCESS_FILES (2)'
 
     Caused by:
-      Missing output file(s) `sample1.txt` expected by process `PROCESS_FILES (1)`
+      Missing output file(s) `sample2.txt` expected by process `PROCESS_FILES (2)`
+
 
     Command executed:
 
-      echo "Processing sample1" > sample1_output.txt
+      echo "Processing sample2" > sample2_output.txt
 
     Command exit status:
       0
@@ -1844,9 +1832,9 @@ nextflow run missing_output.nf
       (empty)
 
     Work dir:
-      /workspaces/training/side-quests/debugging/work/1e/2011154d0b0f001cd383d7364b5244
+      /workspaces/training/side-quests/debugging/work/f0/42f283a25543dad8d56b192e314f41
 
-    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+    Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
 
      -- Check '.nextflow.log' file for details
     ```
@@ -1980,21 +1968,21 @@ nextflow run bad_channel_shape_viewed_debug.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_channel_shape_viewed_debug.nf` [agitated_crick] DSL2 - revision: ea3676d9ec
+    Launching `bad_channel_shape_viewed_debug.nf` [infallible_shirley] revision: 37cbda227b
 
     executor >  local (3)
-    [c6/2dac51] process > PROCESS_FILES (3) [100%] 3 of 3 ✔
+    [a1/59e59a] PROCESS_FILES (3) | 3 of 3 ✔
     Channel content: [sample1, file1.txt]
     Channel content: [sample2, file2.txt]
     Channel content: [sample3, file3.txt]
     After mapping: sample1
     After mapping: sample2
     After mapping: sample3
-    Sample name inside process is sample2
-
     Sample name inside process is sample1
+
+    Sample name inside process is sample2
 
     Sample name inside process is sample3
     ```
@@ -2044,9 +2032,9 @@ nextflow run bad_syntax.nf -preview
 ??? failure "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_syntax.nf` [magical_mercator] DSL2 - revision: 550b9a8873
+    Launching `bad_syntax.nf` [magical_mercator] revision: 550b9a8873
 
     Error bad_syntax.nf:24:1: Unexpected input: '<EOF>'
 
@@ -2094,9 +2082,9 @@ nextflow run missing_software_with_stub.nf
       .command.sh: line 2: cowpy: command not found
 
     Work dir:
-      /workspaces/training/side-quests/debugging/work/82/42a5bfb60c9c6ee63ebdbc2d51aa6e
+      /workspaces/training/side-quests/debugging/work/cd/b8686a0d27df5be779a38fed616d01
 
-    Tip: you can try to figure out what's wrong by changing to the process work directory and showing the script file named `.command.sh`
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 
     -- Check '.nextflow.log' file for details
     ```
@@ -2110,12 +2098,12 @@ nextflow run missing_software_with_stub.nf -stub-run
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `missing_software_with_stub.nf` [astonishing_shockley] DSL2 - revision: f1f4f05d7d
+    Launching `missing_software_with_stub.nf` [astonishing_shockley] revision: f1f4f05d7d
 
     executor >  local (3)
-    [b5/2517a3] PROCESS_FILES (3) | 3 of 3 ✔
+    [ba/416414] PROCESS_FILES (2) | 3 of 3 ✔
     ```
 
 #### Examiner le code
@@ -2249,16 +2237,20 @@ Il est maintenant temps de mettre en pratique l'approche de débogage systémati
     ??? failure "Sortie de la commande"
 
         ```console
-        N E X T F L O W   ~  version 25.10.4
+         N E X T F L O W   ~  version 26.04.4
 
-        Launching `buggy_workflow.nf` [wise_ramanujan] DSL2 - revision: d51a8e83fd
+        Launching `buggy_workflow.nf` [happy_aryabhata] revision: 6a296ff695
 
-        ERROR ~ Range [11, 12) out of bounds for length 11
+        Error buggy_workflow.nf:25:12: Unexpected input: '\n'
+        │  25 |     script:
+        ╰     |            ^
+
+        ERROR ~ Script compilation failed
 
          -- Check '.nextflow.log' file for details
         ```
 
-        Cette erreur cryptique indique un problème d'analyse autour des lignes 11-12 dans le bloc `params{}`. L'analyseur v2 détecte les problèmes structurels tôt.
+        L'analyseur pointe vers la ligne 25 (`script:`), mais le vrai coupable se trouve juste au-dessus : la virgule en fin de ligne après la déclaration `output:` à la ligne 23 laisse l'analyseur attendre une autre sortie, ce qui provoque l'échec lorsqu'il atteint `script:`. C'est la première de plusieurs erreurs de syntaxe à corriger.
 
     Appliquez la méthode de débogage en quatre phases que vous avez apprise :
 
@@ -2300,7 +2292,7 @@ Il est maintenant temps de mettre en pratique l'approche de débogage systémati
     ```
 
     ??? solution "Solution"
-        Le `buggy_workflow.nf` contient 9 ou 10 erreurs distinctes (selon comment vous les comptez) couvrant toutes les principales catégories de débogage. Voici une analyse systématique de chaque erreur et comment la corriger.
+        Le `buggy_workflow.nf` contient 10 erreurs distinctes couvrant toutes les principales catégories de débogage. Voici une analyse systématique de chaque erreur et comment la corriger, dans l'ordre où vous les rencontrez réellement avec Nextflow 26.04. Le compilateur résout le workflow en deux passes : il analyse d'abord la syntaxe, puis vérifie statiquement que chaque variable est définie. Vous corrigez donc d'abord les erreurs de syntaxe, puis un lot d'erreurs de variables non définies, avant que le workflow ne s'exécute et que les erreurs d'exécution ne commencent.
 
         Commençons par les erreurs de syntaxe :
 
@@ -2314,6 +2306,8 @@ Il est maintenant temps de mettre en pratique l'approche de débogage systémati
         output:
             path "${sample_id}_result.txt"
         ```
+
+        Une fois la virgule supprimée, l'analyseur parcourt le fichier jusqu'à la fin en cherchant l'accolade qui devrait fermer `processFiles` et signale `Unexpected input: '<EOF>'`.
 
         **Erreur 2 : Erreur de syntaxe — Accolade fermante manquante**
         ```groovy linenums="24"
@@ -2333,6 +2327,17 @@ Il est maintenant temps de mettre en pratique l'approche de débogage systémati
         }  // Ajouter l'accolade fermante manquante
         ```
 
+        Maintenant que la syntaxe est correcte, le vérificateur de types statique s'exécute. Il signale toutes les variables non définies en une seule fois, avant l'exécution du workflow :
+
+        ```console
+        Error buggy_workflow.nf:86:29: `sample_ids` is not defined
+        Error buggy_workflow.nf:27:25: `sample` is not defined
+        Error buggy_workflow.nf:28:27: `sample` is not defined
+        Error buggy_workflow.nf:49:33: `i` is not defined
+        ```
+
+        Ces quatre lignes correspondent à trois bugs distincts, les Erreurs 3, 4 et 5 ci-dessous. La dernière, `i`, est une variable Bash que le vérificateur de types ne peut pas distinguer d'une variable Nextflow, elle apparaît donc ici à la compilation plutôt que comme une erreur d'exécution. Corrigez les trois avant de relancer.
+
         **Erreur 3 : Erreur de nom de variable**
         ```groovy linenums="26"
         echo "Processing: ${sample}"     // ERREUR : devrait être sample_id
@@ -2348,14 +2353,23 @@ Il est maintenant temps de mettre en pratique l'approche de débogage systémati
         ```groovy linenums="87"
         heavy_ch = heavyProcess(sample_ids)  // ERREUR : sample_ids non défini
         ```
-        **Correction :** Utiliser le canal correct et extraire les IDs d'échantillons
+        **Correction :** Utiliser le canal correct
         ```groovy linenums="87"
         heavy_ch = heavyProcess(input_ch)
         ```
 
-        À ce stade, le workflow s'exécutera, mais nous obtiendrons encore des erreurs (par exemple `Path value cannot be null` dans `processFiles`), causées par une mauvaise structure de canal.
+        **Erreur 5 : Erreur d'échappement de variable Bash**
+        ```groovy linenums="48"
+        echo "Heavy computation $i for ${sample_id}"  // ERREUR : $i ressemble à une variable Nextflow non définie
+        ```
+        **Correction :** Échapper la variable Bash pour que Nextflow la laisse au shell
+        ```groovy linenums="48"
+        echo "Heavy computation \${i} for ${sample_id}"
+        ```
 
-        **Erreur 5 : Erreur de structure de canal — Mauvaise sortie de map**
+        Une fois ces erreurs résolues, le workflow compile et commence à s'exécuter. La première erreur d'exécution provient de `processFiles`, qui attend un tuple mais reçoit une valeur simple : `Input tuple does not match tuple declaration in process 'processFiles' -- offending value: sample_003`.
+
+        **Erreur 6 : Erreur de structure de canal — Mauvaise sortie de map**
         ```groovy linenums="83"
         .map { row -> row.sample_id }  // ERREUR : processFiles attend un tuple
         ```
@@ -2364,29 +2378,18 @@ Il est maintenant temps de mettre en pratique l'approche de débogage systémati
         .map { row -> [row.sample_id, file(row.fastq_path)] }
         ```
 
-        Mais cela cassera notre appel pour exécuter `heavyProcess()` ci-dessus, nous devrons donc utiliser un map pour ne passer que les IDs d'échantillons à ce processus :
+        Cela corrige `processFiles`, mais `input_ch` émet maintenant un tuple à deux éléments, et `heavyProcess` reçoit toujours le tuple entier alors qu'il n'attend qu'une valeur simple. Le tuple est rendu dans le script sous la forme `[sample_005, /path/sample_005.fastq.gz]`, ce qui provoque une erreur de syntaxe Bash et un code de sortie 2.
 
-        **Erreur 6 : Mauvaise structure de canal pour heavyProcess**
+        **Erreur 7 : Mauvaise structure de canal pour heavyProcess**
         ```groovy linenums="87"
-        heavy_ch = heavyProcess(input_ch)  // ERREUR : input_ch a maintenant 2 éléments par émission — heavyProcess n'en a besoin que d'un (le premier)
+        heavy_ch = heavyProcess(input_ch)  // ERREUR : input_ch émet maintenant un tuple à 2 éléments ; heavyProcess n'a besoin que du premier élément
         ```
-        **Correction :** Utiliser le canal correct et extraire les IDs d'échantillons
+        **Correction :** Ne passer que les IDs d'échantillons
         ```groovy linenums="87"
         heavy_ch = heavyProcess(input_ch.map{it[0]})
         ```
 
-        Maintenant nous allons un peu plus loin mais recevons une erreur `No such variable: i`, car nous n'avons pas échappé une variable Bash.
-
-        **Erreur 7 : Erreur d'échappement de variable Bash**
-        ```groovy linenums="48"
-        echo "Heavy computation $i for ${sample_id}"  // ERREUR : $i non échappé
-        ```
-        **Correction :** Échapper la variable bash
-        ```groovy linenums="48"
-        echo "Heavy computation \${i} for ${sample_id}"
-        ```
-
-        Maintenant nous obtenons `Process exceeded running time limit (1ms)`, donc nous corrigeons la limite de temps d'exécution pour le processus concerné :
+        Maintenant `heavyProcess` s'exécute, mais atteint sa limite de temps. Avec l'executor `local`, le message est `process hasn't exited` (accompagné d'un message `WARN: Killing running tasks`) plutôt qu'un timeout explicite ; reliez la tâche interrompue à sa directive `time` :
 
         **Erreur 8 : Erreur de configuration de ressources**
         ```groovy linenums="36"
@@ -2397,7 +2400,7 @@ Il est maintenant temps de mettre en pratique l'approche de débogage systémati
         time '100 s'
         ```
 
-        Ensuite, nous avons une erreur `Missing output file(s)` à résoudre :
+        Ensuite, nous avons une erreur `Missing output file(s)` à résoudre, car le script écrit `${sample_id}.txt` mais la déclaration output attend `${sample_id}_heavy.txt` :
 
         **Erreur 9 : Discordance de nom de fichier de sortie**
         ```groovy linenums="49"
@@ -2408,9 +2411,9 @@ Il est maintenant temps de mettre en pratique l'approche de débogage systémati
         done > ${sample_id}_heavy.txt
         ```
 
-        Les deux premiers processus se sont exécutés, mais pas le troisième.
+        Le workflow se termine maintenant sans erreur, mais la sortie `files` est vide : `handleFiles` ne s'est jamais exécuté. Son canal d'entrée, `channel.fromPath("*.txt")`, ne correspond à aucun fichier dans le répertoire de lancement, donc le processus est simplement ignoré sans signaler d'erreur.
 
-        **Erreur 10 : Discordance de nom de fichier de sortie**
+        **Erreur 10 : Mauvaise source de canal**
         ```groovy linenums="88"
         file_ch = channel.fromPath("*.txt") // Erreur : tentative de prendre l'entrée du répertoire courant plutôt que d'un processus
         handleFiles(file_ch)
@@ -2420,7 +2423,7 @@ Il est maintenant temps de mettre en pratique l'approche de débogage systémati
         file_ch = handleFiles(heavy_ch)
         ```
 
-        Avec cela, l'ensemble du workflow devrait s'exécuter.
+        Avec cela, l'ensemble du workflow s'exécute de bout en bout et les trois sorties sont renseignées.
 
         **Workflow corrigé complet :**
         ```groovy linenums="1"
@@ -2471,7 +2474,7 @@ Il est maintenant temps de mettre en pratique l'approche de débogage systémati
             script:
             """
             # Simuler un calcul intensif
-            for i in {1..1000000}; do
+            for i in {1..10000}; do
                 echo "Heavy computation \$i for ${sample_id}"
             done > ${sample_id}_heavy.txt
             """

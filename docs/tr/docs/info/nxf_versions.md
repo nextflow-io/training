@@ -13,11 +13,12 @@ hide:
 Eğitim portalının 3.0 sürümü itibarıyla, kurs indeks sayfasında aksi belirtilmedikçe tüm eğitim kurslarımız Nextflow 25.10.2 veya daha yeni bir sürümle uyumludur.
 (Sürüm bildirimi içermeyebilecek kullanımdan kaldırılmış veya arşivlenmiş materyaller bu kapsam dışındadır.)
 
-Eğitim ortamımızda varsayılan olarak yüklenen Nextflow sürümü **Nextflow 25.10.4**'tür.
+Eğitim ortamımızda varsayılan olarak yüklenen Nextflow sürümü **Nextflow 26.04.4**'tür.
 
 Kurslar artık iş akışı düzeyinde tiplendirilmiş girdiler ve iş akışı düzeyinde çıktı yönergeleri kullandığından, **aksi belirtilmedikçe** V2 sözdizimi ayrıştırıcısının kullanılması gerekmektedir.
+V2 ayrıştırıcısı, Nextflow 26.04 sürümünden itibaren varsayılan olarak etkindir; dolayısıyla yüklediğimiz sürümde bunu manuel olarak etkinleştirmenize gerek yoktur.
 [Github Codespaces](../envsetup/01_setup.md) veya [yerel devcontainer'lar](../envsetup/03_devcontainer.md) aracılığıyla sağladığımız ortamı kullanmayı planlıyorsanız, kurs talimatlarında özellikle belirtilmedikçe herhangi bir işlem yapmanıza gerek yoktur.
-Ancak eğitimleri kendi ortamınızda ([Manuel kurulum](../envsetup/02_local.md)) tamamlamayı planlıyorsanız, v2 sözdizimi ayrıştırıcısı etkinleştirilmiş şekilde Nextflow 25.10.2 veya daha yeni bir sürümü kullandığınızdan emin olmanız gerekmektedir.
+Ancak eğitimleri kendi ortamınızda ([Manuel kurulum](../envsetup/02_local.md)) tamamlamayı planlıyorsanız, Nextflow 25.10.2 veya daha yeni bir sürümü kullandığınızdan ve 26.04 öncesi bir sürümdeyseniz v2 sözdizimi ayrıştırıcısını etkinleştirdiğinizden emin olmanız gerekmektedir.
 
 ## Eğitim materyallerinin eski sürümleri
 
@@ -40,7 +41,7 @@ Tüm modern Nextflow kodları DSL2 kullanmaktadır.
 v1 ayrıştırıcısı, özgün ve daha esnek ayrıştırıcıdır.
 v2 ayrıştırıcısı daha katıdır ve statik tipleme (tiplendirilmiş girdiler ve çıktılar) ile iş akışı düzeyinde çıktı yönergeleri gibi yeni dil özelliklerini etkinleştirir.
 v2 ayrıştırıcısı aynı zamanda daha iyi hata mesajları sağlar ve daha fazla hatayı çalışma zamanı yerine ayrıştırma aşamasında yakalar.
-v2 ayrıştırıcısı, Nextflow 26.04'te varsayılan hale gelecektir.
+v2 ayrıştırıcısı, Nextflow 26.04 ve sonrasında varsayılan hale gelmiştir.
 
 Özetle: DSL2 yazdığınız dildir; sözdizimi ayrıştırıcı sürümü ise bu dilin ne kadar katı yorumlandığını ve hangi gelişmiş özelliklerin kullanılabilir olduğunu belirler.
 
@@ -52,21 +53,22 @@ Nextflow sürümünüzü nasıl güncelleyeceğiniz hakkında daha fazla bilgi i
 
 ### v2 sözdizimi ayrıştırıcısını etkinleştirme
 
+Nextflow 26.04 ve sonrasında v2 ayrıştırıcısı varsayılan olduğundan, aşağıdaki adımlar yalnızca 26.04 öncesi sürümler için gereklidir.
+
 Mevcut oturumunuz için v2 sözdizimi ayrıştırıcısını **etkinleştirmek** üzere terminalinizde aşağıdaki komutu çalıştırın:
 
 ```bash
 export NXF_SYNTAX_PARSER=v2
 ```
 
-Bunu kalıcı hale getirmek için (v2'nin Nextflow 26.04'te varsayılan olmasını beklerken), export komutunu kabuk profilinize ekleyin (`~/.bashrc`, `~/.zshrc` vb.):
+Bunu kalıcı hale getirmek için export komutunu kabuk profilinize ekleyin (`~/.bashrc`, `~/.zshrc` vb.):
 
 ```bash
 echo 'export NXF_SYNTAX_PARSER=v2' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-`NXF_SYNTAX_PARSER=v2` ortam değişkeninin geçici bir gereksinim olduğunu unutmayın.
-Nextflow 26.04 ve sonrasında v2 ayrıştırıcısı varsayılan hale gelecek ve bu ayar artık gerekli olmayacaktır.
+26.04 öncesi Nextflow sürümlerinde bu kurslarda kullanılan v2 özelliklerine erişmek için `NXF_SYNTAX_PARSER=v2` ortam değişkeninin gerekli olduğunu unutmayın.
 
 ### v2 sözdizimi ayrıştırıcısını devre dışı bırakma
 

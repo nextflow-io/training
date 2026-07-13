@@ -20,12 +20,12 @@ nextflow run hello-world.nf --greeting 'Hello World!'
 La salida de su consola debería verse algo así:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 26.04.4
 
-Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+Launching `hello-world.nf` [small_swirles] revision: 0fb8dbb23d
 
 executor >  local (1)
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
 ¡Felicidades, acaba de ejecutar su primer workflow de Nextflow!
@@ -33,7 +33,7 @@ executor >  local (1)
 La salida más importante aquí es la última línea (línea 6):
 
 ```console title="Output" linenums="6"
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
 Esto nos dice que el proceso `sayHello` fue ejecutado exitosamente una vez (`1 of 1 ✔`).
@@ -83,20 +83,20 @@ Eso puede sonar confuso, así que veamos cómo se ve eso en la práctica.
 
 Volviendo a la salida de la consola para el workflow que ejecutamos anteriormente, teníamos esta línea:
 
-```console title="Extracto de la salida del comando" linenums="6"
-[a3/7be2fa] sayHello | 1 of 1 ✔
+```console title="Excerpt of command output" linenums="6"
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
-¿Ve cómo la línea comienza con `[a3/7be2fa]`?
+¿Ve cómo la línea comienza con `[71/8143bd]`?
 Esa es una forma truncada de la ruta del directorio de tarea para esa llamada de proceso, y le dice dónde encontrar la salida de la llamada al proceso `sayHello` dentro de la ruta del directorio `work/`.
 
-Puede encontrar la ruta completa escribiendo el siguiente comando (reemplazando `a3/7be2fa` con lo que ve en su propia terminal) y presionando la tecla tab para autocompletar la ruta o agregando un asterisco:
+Puede encontrar la ruta completa escribiendo el siguiente comando (reemplazando `71/8143bd` con lo que ve en su propia terminal) y presionando la tecla tab para autocompletar la ruta o agregando un asterisco:
 
 ```bash
-tree work/a3/7be2fa*
+tree work/71/8143bd*
 ```
 
-Esto debería producir la ruta completa del directorio: `work/a3/7be2fa7be2fad5e71e5f49998f795677fd68`
+Esto debería producir la ruta completa del directorio: `work/71/8143bd5ed3420e23c5f0dc1a05056d`
 
 Echemos un vistazo a lo que hay ahí.
 
@@ -116,8 +116,8 @@ Los nombres exactos de los subdirectorios serán diferentes en su sistema.
 
 ```console title="work/"
 work
-└── a3
-    └── 7be2fad5e71e5f49998f795677fd68
+└── 71
+    └── 8143bd5ed3420e23c5f0dc1a05056d
         ├── .command.begin
         ├── .command.err
         ├── .command.log
@@ -136,7 +136,7 @@ Si lo abre, encontrará el saludo `Hello World!` nuevamente.
 <details>
   <summary>Contenido del archivo output.txt</summary>
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" linenums="1"
 Hello World!
 ```
 
@@ -159,10 +159,9 @@ El archivo `.command.sh` es especialmente útil porque muestra el comando princi
 <details>
   <summary>Contenido del archivo</summary>
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/.command.sh" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" linenums="1"
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
-
 ```
 
 </details>
@@ -357,14 +356,14 @@ nextflow run hello-world.nf --greeting 'Hello World!' -resume
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_noyce] DSL2 - revision: c33d41f479
+    Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d
 
-    [a3/7be2fa] process > sayHello [100%] 1 of 1, cached: 1 ✔
+    [71/8143bd] sayHello | 1 of 1, cached: 1 ✔
     ```
 
-Busque el bit `cached:` que se ha agregado en la línea de estado del proceso (línea 5), lo que significa que Nextflow ha reconocido que ya ha hecho este trabajo y simplemente reutilizó el resultado de la ejecución exitosa anterior.
+Busque el bit `cached:` que se ha agregado en la línea de estado del proceso, lo que significa que Nextflow ha reconocido que ya ha hecho este trabajo y simplemente reutilizó el resultado de la ejecución exitosa anterior.
 
 También puede ver que el hash del subdirectorio de trabajo es el mismo que en la ejecución anterior.
 Nextflow literalmente le está señalando la ejecución anterior y diciendo "Ya hice eso allí".

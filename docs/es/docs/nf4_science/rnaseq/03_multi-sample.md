@@ -163,14 +163,74 @@ nextflow run rnaseq.nf -profile test
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 24.10.0
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `rnaseq.nf` [golden_curry] DSL2 - revision: 2a5ba5be1e
+    Launching `rnaseq.nf` [golden_curry] revision: 2a5ba5be1e
 
     executor >  local (18)
-    [07/3ff9c5] FASTQC (6)       [100%] 6 of 6 ✔
-    [cc/16859f] TRIM_GALORE (6)  [100%] 6 of 6 ✔
-    [68/4c27b5] HISAT2_ALIGN (6) [100%] 6 of 6 ✔
+    [07/3ff9c5] FASTQC (6)       | 6 of 6 ✔
+    [cc/16859f] TRIM_GALORE (6)  | 6 of 6 ✔
+    [68/4c27b5] HISAT2_ALIGN (6) | 6 of 6 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/rnaseq/results
+
+      fastqc_zip:
+        - fastqc/ENCSR000COQ1_1_fastqc.zip
+        - fastqc/ENCSR000COQ2_1_fastqc.zip
+        - fastqc/ENCSR000COR1_1_fastqc.zip
+        - fastqc/ENCSR000COR2_1_fastqc.zip
+        - fastqc/ENCSR000CPO1_1_fastqc.zip
+        - fastqc/ENCSR000CPO2_1_fastqc.zip
+
+      fastqc_html:
+        - fastqc/ENCSR000COQ1_1_fastqc.html
+        - fastqc/ENCSR000COQ2_1_fastqc.html
+        - fastqc/ENCSR000COR1_1_fastqc.html
+        - fastqc/ENCSR000COR2_1_fastqc.html
+        - fastqc/ENCSR000CPO1_1_fastqc.html
+        - fastqc/ENCSR000CPO2_1_fastqc.html
+
+      trimmed_reads:
+        - trimming/ENCSR000COQ1_1_trimmed.fq.gz
+        - trimming/ENCSR000COQ2_1_trimmed.fq.gz
+        - trimming/ENCSR000COR1_1_trimmed.fq.gz
+        - trimming/ENCSR000COR2_1_trimmed.fq.gz
+        - trimming/ENCSR000CPO1_1_trimmed.fq.gz
+        - trimming/ENCSR000CPO2_1_trimmed.fq.gz
+
+      trimming_reports:
+        - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
+        - trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt
+        - trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt
+        - trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt
+        - trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt
+        - trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt
+
+      trimming_fastqc:
+        - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
+        - [trimming/ENCSR000COQ2_1_trimmed_fastqc.html, trimming/ENCSR000COQ2_1_trimmed_fastqc.zip]
+        - [trimming/ENCSR000COR1_1_trimmed_fastqc.html, trimming/ENCSR000COR1_1_trimmed_fastqc.zip]
+        - [trimming/ENCSR000COR2_1_trimmed_fastqc.html, trimming/ENCSR000COR2_1_trimmed_fastqc.zip]
+        - [trimming/ENCSR000CPO1_1_trimmed_fastqc.html, trimming/ENCSR000CPO1_1_trimmed_fastqc.zip]
+        - [trimming/ENCSR000CPO2_1_trimmed_fastqc.html, trimming/ENCSR000CPO2_1_trimmed_fastqc.zip]
+
+      bam:
+        - align/ENCSR000COQ1_1_trimmed.bam
+        - align/ENCSR000COQ2_1_trimmed.bam
+        - align/ENCSR000COR1_1_trimmed.bam
+        - align/ENCSR000COR2_1_trimmed.bam
+        - align/ENCSR000CPO1_1_trimmed.bam
+        - align/ENCSR000CPO2_1_trimmed.bam
+
+      align_log:
+        - align/ENCSR000COQ1_1_trimmed.hisat2.log
+        - align/ENCSR000COQ2_1_trimmed.hisat2.log
+        - align/ENCSR000COR1_1_trimmed.hisat2.log
+        - align/ENCSR000COR2_1_trimmed.hisat2.log
+        - align/ENCSR000CPO1_1_trimmed.hisat2.log
+        - align/ENCSR000CPO2_1_trimmed.hisat2.log
     ```
 
 Esta vez cada paso se ejecuta 6 veces, una vez para cada muestra en el archivo CSV.
@@ -509,15 +569,79 @@ nextflow run rnaseq.nf -profile test -resume
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 24.10.0
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `rnaseq.nf` [modest_pare] DSL2 - revision: fc724d3b49
+    Launching `rnaseq.nf` [modest_pare] revision: fc724d3b49
 
     executor >  local (1)
-    [07/3ff9c5] FASTQC (6)       [100%] 6 of 6, cached: 6 ✔
-    [2c/8d8e1e] TRIM_GALORE (5)  [100%] 6 of 6, cached: 6 ✔
-    [a4/7f9c44] HISAT2_ALIGN (6) [100%] 6 of 6, cached: 6 ✔
-    [56/e1f102] MULTIQC          [100%] 1 of 1 ✔
+    [07/3ff9c5] FASTQC (6)       | 6 of 6, cached: 6 ✔
+    [2c/8d8e1e] TRIM_GALORE (5)  | 6 of 6, cached: 6 ✔
+    [a4/7f9c44] HISAT2_ALIGN (6) | 6 of 6, cached: 6 ✔
+    [56/e1f102] MULTIQC          | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/rnaseq/results
+
+      fastqc_zip:
+        - fastqc/ENCSR000COQ1_1_fastqc.zip
+        - fastqc/ENCSR000COQ2_1_fastqc.zip
+        - fastqc/ENCSR000COR1_1_fastqc.zip
+        - fastqc/ENCSR000COR2_1_fastqc.zip
+        - fastqc/ENCSR000CPO1_1_fastqc.zip
+        - fastqc/ENCSR000CPO2_1_fastqc.zip
+
+      fastqc_html:
+        - fastqc/ENCSR000COQ1_1_fastqc.html
+        - fastqc/ENCSR000COQ2_1_fastqc.html
+        - fastqc/ENCSR000COR1_1_fastqc.html
+        - fastqc/ENCSR000COR2_1_fastqc.html
+        - fastqc/ENCSR000CPO1_1_fastqc.html
+        - fastqc/ENCSR000CPO2_1_fastqc.html
+
+      trimmed_reads:
+        - trimming/ENCSR000COQ1_1_trimmed.fq.gz
+        - trimming/ENCSR000COQ2_1_trimmed.fq.gz
+        - trimming/ENCSR000COR1_1_trimmed.fq.gz
+        - trimming/ENCSR000COR2_1_trimmed.fq.gz
+        - trimming/ENCSR000CPO1_1_trimmed.fq.gz
+        - trimming/ENCSR000CPO2_1_trimmed.fq.gz
+
+      trimming_reports:
+        - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
+        - trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt
+        - trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt
+        - trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt
+        - trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt
+        - trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt
+
+      trimming_fastqc:
+        - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
+        - [trimming/ENCSR000COQ2_1_trimmed_fastqc.html, trimming/ENCSR000COQ2_1_trimmed_fastqc.zip]
+        - [trimming/ENCSR000COR1_1_trimmed_fastqc.html, trimming/ENCSR000COR1_1_trimmed_fastqc.zip]
+        - [trimming/ENCSR000COR2_1_trimmed_fastqc.html, trimming/ENCSR000COR2_1_trimmed_fastqc.zip]
+        - [trimming/ENCSR000CPO1_1_trimmed_fastqc.html, trimming/ENCSR000CPO1_1_trimmed_fastqc.zip]
+        - [trimming/ENCSR000CPO2_1_trimmed_fastqc.html, trimming/ENCSR000CPO2_1_trimmed_fastqc.zip]
+
+      bam:
+        - align/ENCSR000COQ1_1_trimmed.bam
+        - align/ENCSR000COQ2_1_trimmed.bam
+        - align/ENCSR000COR1_1_trimmed.bam
+        - align/ENCSR000COR2_1_trimmed.bam
+        - align/ENCSR000CPO1_1_trimmed.bam
+        - align/ENCSR000CPO2_1_trimmed.bam
+
+      align_log:
+        - align/ENCSR000COQ1_1_trimmed.hisat2.log
+        - align/ENCSR000COQ2_1_trimmed.hisat2.log
+        - align/ENCSR000COR1_1_trimmed.hisat2.log
+        - align/ENCSR000COR2_1_trimmed.hisat2.log
+        - align/ENCSR000CPO1_1_trimmed.hisat2.log
+        - align/ENCSR000CPO2_1_trimmed.hisat2.log
+
+      multiqc_report: multiqc/all_single-end.html
+
+      multiqc_data: multiqc/all_single-end_data
     ```
 
 Una sola llamada a MULTIQC se ha agregado después de las llamadas a procesos en caché.
@@ -536,6 +660,7 @@ tree -L 2 results/multiqc
     │   ├── cutadapt_filtered_reads_plot.txt
     │   ├── cutadapt_trimmed_sequences_plot_3_Counts.txt
     │   ├── cutadapt_trimmed_sequences_plot_3_Obs_Exp.txt
+    │   ├── fastqc-status-check-heatmap.txt
     │   ├── fastqc_adapter_content_plot.txt
     │   ├── fastqc_overrepresented_sequences_plot.txt
     │   ├── fastqc_per_base_n_content_plot.txt
@@ -546,16 +671,17 @@ tree -L 2 results/multiqc
     │   ├── fastqc_sequence_counts_plot.txt
     │   ├── fastqc_sequence_duplication_levels_plot.txt
     │   ├── fastqc_sequence_length_distribution_plot.txt
-    │   ├── fastqc-status-check-heatmap.txt
     │   ├── fastqc_top_overrepresented_sequences_table.txt
     │   ├── hisat2_se_plot.txt
+    │   ├── llms-full.txt
+    │   ├── multiqc.log
+    │   ├── multiqc.parquet
     │   ├── multiqc_citations.txt
     │   ├── multiqc_cutadapt.txt
     │   ├── multiqc_data.json
     │   ├── multiqc_fastqc.txt
     │   ├── multiqc_general_stats.txt
     │   ├── multiqc_hisat2.txt
-    │   ├── multiqc.log
     │   ├── multiqc_software_versions.txt
     │   └── multiqc_sources.txt
     └── all_single-end.html
@@ -575,18 +701,18 @@ Adaptar el flujo de trabajo para manejar datos de RNAseq de extremos pareados.
 
 ## 3. Habilitar el procesamiento de datos de RNAseq de extremos pareados
 
-Actualmente nuestro flujo de trabajo solo puede manejar datos de RNAseq de un solo extremo.
+Actualmente nuestro workflow solo puede manejar datos de RNAseq de un solo extremo.
 Es cada vez más común ver datos de RNAseq de extremos pareados, así que queremos poder manejar eso.
 
-Hacer que el flujo de trabajo sea completamente agnóstico del tipo de datos requeriría usar características del lenguaje Nextflow un poco más avanzadas, así que no vamos a hacerlo aquí, pero podemos hacer una versión de procesamiento de extremos pareados para demostrar qué necesita ser adaptado.
+Hacer que el workflow sea completamente agnóstico del tipo de datos requeriría usar características del lenguaje Nextflow un poco más avanzadas, así que no vamos a hacerlo aquí, pero podemos hacer una versión de procesamiento de extremos pareados para demostrar qué necesita ser adaptado.
 
-### 3.1. Copiar el flujo de trabajo y actualizar las entradas
+### 3.1. Copiar el workflow y actualizar las entradas
 
-Comenzamos copiando el archivo del flujo de trabajo de un solo extremo y actualizándolo para datos de extremos pareados.
+Comenzamos copiando el archivo del workflow de un solo extremo y actualizándolo para datos de extremos pareados.
 
-#### 3.1.1. Copiar el archivo del flujo de trabajo
+#### 3.1.1. Copiar el archivo del workflow
 
-Cree una copia del archivo del flujo de trabajo para usar como punto de partida para la versión de extremos pareados.
+Cree una copia del archivo del workflow para usar como punto de partida para la versión de extremos pareados.
 
 ```bash
 cp rnaseq.nf rnaseq_pe.nf
@@ -726,7 +852,7 @@ Este módulo necesita cambios más sustanciales:
 
 - La entrada cambia de una sola ruta a una tupla de dos rutas
 - El comando agrega la bandera `--paired` y toma ambos archivos de lectura
-- La salida cambia para reflejar las convenciones de nomenclatura diferentes de Trim Galore para extremos pareados, produciendo reportes FastQC separados para cada archivo de lectura
+- La salida cambia para reflejar las convenciones de nomenclatura de extremos pareados de Trim Galore, produciendo reportes FastQC separados para cada archivo de lectura
 
 === "Después"
 
@@ -953,9 +1079,9 @@ Actualice las entradas correspondientes en el bloque `output {}`:
         }
     ```
 
-El flujo de trabajo de extremos pareados ahora está completamente actualizado y listo para ejecutar.
+El workflow de extremos pareados ahora está completamente actualizado y listo para ejecutar.
 
-### 3.7. Ejecutar el flujo de trabajo
+### 3.7. Ejecutar el workflow
 
 No usamos `-resume` ya que esto no usaría la caché, y hay el doble de datos para procesar que antes, pero aún así debería completarse en menos de un minuto.
 
@@ -966,25 +1092,97 @@ nextflow run rnaseq_pe.nf -profile test_pe
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 24.10.0
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `rnaseq_pe.nf` [reverent_kare] DSL2 - revision: 9c376cc219
+    Launching `rnaseq_pe.nf` [reverent_kare] revision: 9c376cc219
 
     executor >  local (19)
-    [c5/cbde15] FASTQC (5)       [100%] 6 of 6 ✔
-    [e4/fa2784] TRIM_GALORE (5)  [100%] 6 of 6 ✔
-    [3a/e23049] HISAT2_ALIGN (5) [100%] 6 of 6 ✔
-    [e6/a3ccd9] MULTIQC          [100%] 1 of 1 ✔
+    [c5/cbde15] FASTQC (5)       | 6 of 6 ✔
+    [e4/fa2784] TRIM_GALORE (5)  | 6 of 6 ✔
+    [3a/e23049] HISAT2_ALIGN (5) | 6 of 6 ✔
+    [e6/a3ccd9] MULTIQC          | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/rnaseq/results
+
+      fastqc_zip:
+        - [fastqc/ENCSR000COQ1_1_fastqc.zip, fastqc/ENCSR000COQ1_2_fastqc.zip]
+        - [fastqc/ENCSR000COQ2_1_fastqc.zip, fastqc/ENCSR000COQ2_2_fastqc.zip]
+        - [fastqc/ENCSR000COR1_1_fastqc.zip, fastqc/ENCSR000COR1_2_fastqc.zip]
+        - [fastqc/ENCSR000COR2_1_fastqc.zip, fastqc/ENCSR000COR2_2_fastqc.zip]
+        - [fastqc/ENCSR000CPO1_1_fastqc.zip, fastqc/ENCSR000CPO1_2_fastqc.zip]
+        - [fastqc/ENCSR000CPO2_1_fastqc.zip, fastqc/ENCSR000CPO2_2_fastqc.zip]
+
+      fastqc_html:
+        - [fastqc/ENCSR000COQ1_1_fastqc.html, fastqc/ENCSR000COQ1_2_fastqc.html]
+        - [fastqc/ENCSR000COQ2_1_fastqc.html, fastqc/ENCSR000COQ2_2_fastqc.html]
+        - [fastqc/ENCSR000COR1_1_fastqc.html, fastqc/ENCSR000COR1_2_fastqc.html]
+        - [fastqc/ENCSR000COR2_1_fastqc.html, fastqc/ENCSR000COR2_2_fastqc.html]
+        - [fastqc/ENCSR000CPO1_1_fastqc.html, fastqc/ENCSR000CPO1_2_fastqc.html]
+        - [fastqc/ENCSR000CPO2_1_fastqc.html, fastqc/ENCSR000CPO2_2_fastqc.html]
+
+      trimmed_reads:
+        - [trimming/ENCSR000COQ1_1_val_1.fq.gz, trimming/ENCSR000COQ1_2_val_2.fq.gz]
+        - [trimming/ENCSR000COQ2_1_val_1.fq.gz, trimming/ENCSR000COQ2_2_val_2.fq.gz]
+        - [trimming/ENCSR000COR1_1_val_1.fq.gz, trimming/ENCSR000COR1_2_val_2.fq.gz]
+        - [trimming/ENCSR000COR2_1_val_1.fq.gz, trimming/ENCSR000COR2_2_val_2.fq.gz]
+        - [trimming/ENCSR000CPO1_1_val_1.fq.gz, trimming/ENCSR000CPO1_2_val_2.fq.gz]
+        - [trimming/ENCSR000CPO2_1_val_1.fq.gz, trimming/ENCSR000CPO2_2_val_2.fq.gz]
+
+      trimming_reports:
+        - [trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COQ1_2.fastq.gz_trimming_report.txt]
+        - [trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COQ2_2.fastq.gz_trimming_report.txt]
+        - [trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COR1_2.fastq.gz_trimming_report.txt]
+        - [trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COR2_2.fastq.gz_trimming_report.txt]
+        - [trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000CPO1_2.fastq.gz_trimming_report.txt]
+        - [trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000CPO2_2.fastq.gz_trimming_report.txt]
+
+      trimming_fastqc_1:
+        - [trimming/ENCSR000COQ1_1_val_1_fastqc.html, trimming/ENCSR000COQ1_1_val_1_fastqc.zip]
+        - [trimming/ENCSR000COQ2_1_val_1_fastqc.html, trimming/ENCSR000COQ2_1_val_1_fastqc.zip]
+        - [trimming/ENCSR000COR1_1_val_1_fastqc.html, trimming/ENCSR000COR1_1_val_1_fastqc.zip]
+        - [trimming/ENCSR000COR2_1_val_1_fastqc.html, trimming/ENCSR000COR2_1_val_1_fastqc.zip]
+        - [trimming/ENCSR000CPO1_1_val_1_fastqc.html, trimming/ENCSR000CPO1_1_val_1_fastqc.zip]
+        - [trimming/ENCSR000CPO2_1_val_1_fastqc.html, trimming/ENCSR000CPO2_1_val_1_fastqc.zip]
+
+      trimming_fastqc_2:
+        - [trimming/ENCSR000COQ1_2_val_2_fastqc.html, trimming/ENCSR000COQ1_2_val_2_fastqc.zip]
+        - [trimming/ENCSR000COQ2_2_val_2_fastqc.html, trimming/ENCSR000COQ2_2_val_2_fastqc.zip]
+        - [trimming/ENCSR000COR1_2_val_2_fastqc.html, trimming/ENCSR000COR1_2_val_2_fastqc.zip]
+        - [trimming/ENCSR000COR2_2_val_2_fastqc.html, trimming/ENCSR000COR2_2_val_2_fastqc.zip]
+        - [trimming/ENCSR000CPO1_2_val_2_fastqc.html, trimming/ENCSR000CPO1_2_val_2_fastqc.zip]
+        - [trimming/ENCSR000CPO2_2_val_2_fastqc.html, trimming/ENCSR000CPO2_2_val_2_fastqc.zip]
+
+      bam:
+        - align/ENCSR000COQ1_1_val_1.bam
+        - align/ENCSR000COQ2_1_val_1.bam
+        - align/ENCSR000COR1_1_val_1.bam
+        - align/ENCSR000COR2_1_val_1.bam
+        - align/ENCSR000CPO1_1_val_1.bam
+        - align/ENCSR000CPO2_1_val_1.bam
+
+      align_log:
+        - align/ENCSR000COQ1_1_val_1.hisat2.log
+        - align/ENCSR000COQ2_1_val_1.hisat2.log
+        - align/ENCSR000COR1_1_val_1.hisat2.log
+        - align/ENCSR000COR2_1_val_1.hisat2.log
+        - align/ENCSR000CPO1_1_val_1.hisat2.log
+        - align/ENCSR000CPO2_1_val_1.hisat2.log
+
+      multiqc_report: multiqc/all_paired-end.html
+
+      multiqc_data: multiqc/all_paired-end_data
     ```
 
-Ahora tenemos dos versiones ligeramente divergentes de nuestro flujo de trabajo, una para datos de lecturas de un solo extremo y una para datos de extremos pareados.
-El siguiente paso lógico sería hacer que el flujo de trabajo acepte cualquier tipo de datos sobre la marcha, lo cual está fuera del alcance de este curso, pero podríamos abordar eso en un seguimiento.
+Ahora tenemos dos versiones ligeramente divergentes de nuestro workflow, una para datos de lecturas de un solo extremo y una para datos de extremos pareados.
+El siguiente paso lógico sería hacer que el workflow acepte cualquier tipo de datos sobre la marcha, lo cual está fuera del alcance de este curso, pero podríamos abordar eso en un seguimiento.
 
 ---
 
 ### Conclusión
 
-Usted sabe cómo adaptar un flujo de trabajo de una sola muestra para paralelizar el procesamiento de múltiples muestras, generar un reporte de control de calidad completo y adaptar el flujo de trabajo para usar datos de lecturas de extremos pareados.
+Usted sabe cómo adaptar un workflow de una sola muestra para paralelizar el procesamiento de múltiples muestras, generar un reporte de control de calidad completo y adaptar el workflow para usar datos de lecturas de extremos pareados.
 
 ### ¿Qué sigue?
 

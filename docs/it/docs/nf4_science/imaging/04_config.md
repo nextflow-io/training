@@ -131,15 +131,16 @@ Poiché stiamo utilizzando `-resume`, Nextflow verificherà se qualcosa è cambi
 Se i parametri, gli input e il codice sono gli stessi, tutte le attività verranno recuperate dalla cache e la pipeline si completerà quasi istantaneamente.
 
 ```console title="Output (excerpt)"
-executor >  local (12)
+executor >  local (1)
+[43/e03702] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2, cached: 2 ✔
+[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2, cached: 2 ✔
 ...
-[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔
-[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)               [100%] 2 of 2, cached: 2 ✔
-...
+[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3, cached: 3 ✔
+[ef/d7b294] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
 -[nf-core/molkart] Pipeline completed successfully-
 ```
 
-Si noti che tutti i processi mostrano `cached: 2` o `cached: 1` - nulla è stato rieseguito!
+Si noti l'annotazione `cached: N` su ciascun processo - le attività di preprocessing e segmentazione memorizzate nella cache non sono state rieseguite.
 
 ### 2.4. Profili di test
 
@@ -203,7 +204,7 @@ I profili vengono applicati da sinistra a destra, quindi i profili successivi so
 Le pipeline nf-core sono fornite con profili integrati per container, test e ambienti speciali.
 È possibile combinare più profili per costruire la configurazione necessaria.
 
-### Prossimi passi
+### Cosa c'è dopo?
 
 Scopri come creare i tuoi profili personalizzati per diversi ambienti di calcolo.
 

@@ -97,12 +97,12 @@ Build fail होती है:
 
 ```console
 > Task :compileGroovy FAILED
-GreetingExtension.groovy: 30: [Static type checking] - The variable [prefix] is undeclared.
- @ line 30, column 9.
+GreetingExtension.groovy: 34: [Static type checking] - The variable [prefix] is undeclared.
+ @ line 34, column 9.
            prefix = session.config.navigate('greeting.prefix', '***') as String
            ^
 
-GreetingExtension.groovy: 31: [Static type checking] - The variable [suffix] is undeclared.
+GreetingExtension.groovy: 35: [Static type checking] - The variable [suffix] is undeclared.
 ```
 
 Groovy (और Java) में, variable को उपयोग करने से पहले _declare_ करना ज़रूरी है।

@@ -25,7 +25,7 @@ nf-core के साथ काम करने के महान लाभो
     आप निम्नलिखित कमांड चलाकर परीक्षण कर सकते हैं कि यह सफलतापूर्वक चलता है:
 
     ```bash
-    nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+    nextflow run . --outdir core-hello-results -profile test,docker
     ```
 
 ---
@@ -50,7 +50,7 @@ nf-core प्रोजेक्ट [https://nf-co.re/modules](https://nf-co.re/
 जैसा कि आप देख सकते हैं, काफी कुछ परिणाम हैं, उनमें से कई बहुत विशिष्ट प्रकार की फ़ाइलों को जोड़ने के लिए डिज़ाइन किए गए मॉड्यूल हैं।
 उनमें से, आपको `find_concatenate` नामक एक सामान्य-उद्देश्य मॉड्यूल दिखाई देना चाहिए।
 
-!!! note "मॉड्यूल नामकरण परंपरा"
+!!! info "मॉड्यूल नामकरण परंपरा"
 
     underscore (`_`) का उपयोग मॉड्यूल नामों में slash (`/`) वर्ण के स्थान पर किया जाता है।
 
@@ -120,9 +120,11 @@ nf-core modules info find/concatenate
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 3.5.2 - https://nf-co.re
+        nf-core/tools version 4.0.2 - https://nf-co.re
 
 
+    INFO     Reinstalling modules found in 'modules.json' but missing from
+             directory:
     ╭─ Module: find/concatenate  ──────────────────────────────────────────────────╮
     │ 🌐 Repository: https://github.com/nf-core/modules.git                        │
     │ 🔧 Tools: find, pigz                                                         │
@@ -186,6 +188,8 @@ nf-core modules info find/concatenate
 
 यह वही जानकारी है जो आप वेबसाइट पर पा सकते हैं।
 
+`INFO Reinstalling modules found in 'modules.json' but missing from directory` संदेश को आप ignore कर सकते हैं; यह nf-core/tools 4.0.2 द्वारा किसी भी मॉड्यूल के लिए emit किया जाता है जिसे आप `info` से query करते हैं, चाहे वह वास्तव में इंस्टॉल हो या नहीं, और इसका कोई प्रभाव नहीं पड़ता क्योंकि `info` कमांड कोई फ़ाइल नहीं लिखता।
+
 ### 1.4. find/concatenate मॉड्यूल इंस्टॉल करें
 
 अब जब हमें वह मॉड्यूल मिल गया है जो हम चाहते हैं, तो हमें इसे अपनी pipeline के source code में जोड़ना होगा।
@@ -193,14 +197,12 @@ nf-core modules info find/concatenate
 अच्छी खबर यह है कि nf-core प्रोजेक्ट में कुछ tooling शामिल है जो इस भाग को आसान बनाती है।
 विशेष रूप से, `nf-core modules install` कमांड code को retrieve करने और इसे एक ही चरण में आपके प्रोजेक्ट के लिए उपलब्ध कराने को automate करना संभव बनाता है।
 
-अपनी pipeline डायरेक्टरी में जाएं और इंस्टॉलेशन कमांड चलाएं:
+सुनिश्चित करें कि आपकी working डायरेक्टरी `core-hello` pipeline प्रोजेक्ट की root है, फिर इंस्टॉलेशन कमांड चलाएं:
 
 ```bash
 cd core-hello
 nf-core modules install find/concatenate
 ```
-
-tool मॉड्यूल इंस्टॉल करने के लिए आगे बढ़ेगा।
 
 ??? success "कमांड आउटपुट"
 
@@ -212,26 +214,20 @@ tool मॉड्यूल इंस्टॉल करने के लिए �
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 3.5.2 - https://nf-co.re
+    nf-core/tools version 4.0.2 - https://nf-co.re
 
 
     INFO     Installing 'find/concatenate'
-    INFO     Use the following statement to include this module:
-
-     include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
+    NotADirectoryError: [Errno 20] Not a directory:
+    'modules/local/cowpy.nf/meta.yml'
     ```
 
-कमांड स्वचालित रूप से:
+कमांड मॉड्यूल फ़ाइलों को `modules/nf-core/find/concatenate/` में डाउनलोड करता है और इंस्टॉल किए गए मॉड्यूल को ट्रैक करने के लिए `modules.json` को अपडेट करता है।
+अंत में दिखने वाले `NotADirectoryError` को आप ignore कर सकते हैं; यह इसलिए होता है क्योंकि nf-core/tools 4.0.2 अपेक्षा करता है कि हर local मॉड्यूल अपनी खुद की डायरेक्टरी (`modules/local/<name>/main.nf`) में हो, जबकि `core-hello` अभी भी इस चरण में single-file local मॉड्यूल का उपयोग करता है।
+हालाँकि, `find/concatenate` मॉड्यूल सही तरीके से इंस्टॉल हो जाता है, और `modules.json` अपेक्षा के अनुसार अपडेट हो जाता है।
+हम भाग 4 में `cowpy` को directory layout में convert करेंगे।
 
-- मॉड्यूल फ़ाइलों को `modules/nf-core/find/concatenate/` में डाउनलोड करता है
-- इंस्टॉल किए गए मॉड्यूल को ट्रैक करने के लिए `modules.json` को अपडेट करता है
-- आपको अपने workflow में उपयोग करने के लिए सही `include` statement प्रदान करता है
-
-!!! tip "सुझाव"
-
-    मॉड्यूल इंस्टॉलेशन कमांड चलाने से पहले हमेशा सुनिश्चित करें कि आपकी वर्तमान working डायरेक्टरी आपके pipeline प्रोजेक्ट की root है।
-
-आइए जांचें कि मॉड्यूल सही तरीके से इंस्टॉल किया गया था:
+आइए जांचें कि मॉड्यूल फ़ाइलें सही जगह पर हैं:
 
 ```bash
 tree -L 4 modules
@@ -257,7 +253,61 @@ tree -L 4 modules
     5 directories, 7 files
     ```
 
-आप स्थानीय रूप से इंस्टॉल किए गए मॉड्यूल को सूचीबद्ध करने के लिए nf-core utility से पूछकर भी इंस्टॉलेशन को सत्यापित कर सकते हैं:
+आप `modules.json` की जांच करके भी इंस्टॉलेशन की पुष्टि कर सकते हैं, जो अब nf-core/modules रिपॉजिटरी के अंतर्गत `find/concatenate` को सूचीबद्ध करता है।
+
+??? abstract "फ़ाइल सामग्री"
+
+    ```json title="modules.json"
+    {
+        "name": "core/hello",
+        "homePage": "https://github.com/core/hello",
+        "repos": {
+            "https://github.com/nf-core/modules.git": {
+                "modules": {
+                    "nf-core": {
+                        "find/concatenate": {
+                            "branch": "master",
+                            "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                            "installed_by": [
+                                "modules"
+                            ]
+                        }
+                    }
+                },
+                "subworkflows": {
+                    "nf-core": {
+                        "utils_nextflow_pipeline": {
+                            "branch": "master",
+                            "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                            "installed_by": [
+                                "subworkflows"
+                            ]
+                        },
+                        "utils_nfcore_pipeline": {
+                            "branch": "master",
+                            "git_sha": "a3fb7351b1fdb2b1de282b765816bbea190e86a8",
+                            "installed_by": [
+                                "subworkflows"
+                            ]
+                        },
+                        "utils_nfschema_plugin": {
+                            "branch": "master",
+                            "git_sha": "fdc08b8b1ae74f56686ce21f7ea11ad11990ce57",
+                            "installed_by": [
+                                "subworkflows"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ```
+
+यह पुष्टि करता है कि `find/concatenate` मॉड्यूल अब आपके प्रोजेक्ट के source code का हिस्सा है।
+हालाँकि, वास्तव में नए मॉड्यूल का उपयोग करने के लिए, हमें इसे अपनी pipeline में import करना होगा।
+
+अंत में, आप अपनी pipeline में वर्तमान में track किए जा रहे मॉड्यूल की जांच करने के लिए `nf-core modules list local` कमांड का भी उपयोग कर सकते हैं।
 
 ```bash
 nf-core modules list local
@@ -266,25 +316,27 @@ nf-core modules list local
 ??? success "कमांड आउटपुट"
 
     ```console
+
+                                          ,--./,-.
+          ___     __   __   __   ___     /,-._.--~\
+    |\ | |__  __ /  ` /  \ |__) |__         }  {
+    | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                          `._,._,'
+
+    nf-core/tools version 4.0.2 - https://nf-co.re
+
+
     INFO     Repository type: pipeline
     INFO     Modules installed in '.':
 
-    ┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
-    ┃ Module Name    ┃ Repository      ┃ Version SHA ┃ Message        ┃ Date       ┃
-    ┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
-    │ find/concaten… │ nf-core/modules │ 6d46786     │ Support for    │ 2026-04-23 │
-    │                │                 │             │ apptainer as   │            │
-    │                │                 │             │ well as        │            │
-    │                │                 │             │ singularity    │            │
-    │                │                 │             │ for .sif in    │            │
-    │                │                 │             │ `container`    │            │
-    │                │                 │             │ (#11260)       │            │
-    └────────────────┴─────────────────┴─────────────┴────────────────┴────────────┘
+    ┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+    ┃ Module Name      ┃ Repository      ┃ Version SHA ┃ Message                                                                       ┃ Date       ┃
+    ┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+    │ find/concatenate │ nf-core/modules │ 6d46786     │ Support for apptainer as well as singularity for .sif in `container` (#11260) │ 2026-04-23 │
+    └──────────────────┴─────────────────┴─────────────┴───────────────────────────────────────────────────────────────────────────────┴────────────┘
     ```
 
-यह पुष्टि करता है कि `find/concatenate` मॉड्यूल अब आपके प्रोजेक्ट के source code का हिस्सा है।
-
-हालाँकि, वास्तव में नए मॉड्यूल का उपयोग करने के लिए, हमें इसे अपनी pipeline में import करना होगा।
+यह परिणाम तालिका में `find/concatenate` को उसके repository, version SHA, message, और date के साथ दिखाता है।
 
 ### 1.5. मॉड्यूल imports को अपडेट करें
 
@@ -302,7 +354,7 @@ include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
 
 === "बाद में"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="11"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -312,8 +364,8 @@ include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+    include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
     include { cowpy                  } from '../modules/local/cowpy.nf'
-    include { FIND_CONCATENATE                } from '../modules/nf-core/find/concatenate/main'
     ```
 
 === "पहले"
@@ -345,7 +397,7 @@ include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
 
 हम इसे एक अलग सेक्शन के रूप में निपटाने जा रहे हैं क्योंकि इसमें एक नया तंत्र शामिल है जिसे हमने अभी तक कवर नहीं किया है: metadata maps।
 
-!!! note "नोट"
+!!! info "जानकारी"
 
     आप वैकल्पिक रूप से `collectGreetings.nf` फ़ाइल को हटा सकते हैं:
 
@@ -373,7 +425,7 @@ include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
 आदर्श रूप से यह कुछ ऐसा है जो आपको मॉड्यूल इंस्टॉल करने से _पहले_ भी करना चाहिए, लेकिन अरे, देर से बेहतर कभी नहीं।
 (क्या यह मायने रखता है, उन मॉड्यूल से छुटकारा पाने के लिए एक `uninstall` कमांड है जिन्हें आप तय करते हैं कि आप अब नहीं चाहते हैं।)
 
-!!! note "नोट"
+!!! info "जानकारी"
 
     FIND_CONCATENATE process में विभिन्न compression प्रकारों, फ़ाइल extensions इत्यादि की कुछ चतुर handling शामिल है जो सख्ती से हम आपको यहां दिखाने की कोशिश कर रहे हैं उससे संबंधित नहीं हैं, इसलिए हम इसमें से अधिकांश को ignore करेंगे और केवल उन हिस्सों पर ध्यान केंद्रित करेंगे जो महत्वपूर्ण हैं।
 
@@ -512,7 +564,7 @@ ch_input = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
 उम्मीद है कि आप यह देखना शुरू कर सकते हैं कि यह कितना उपयोगी हो सकता है।
 न केवल यह आपको metadata के आधार पर outputs का नाम रखने की अनुमति देता है, बल्कि आप विभिन्न पैरामीटर values लागू करने जैसी चीजें भी कर सकते हैं, और specific operators के संयोजन में, आप data को group, sort या filter भी कर सकते हैं क्योंकि यह pipeline के माध्यम से flows करता है।
 
-!!! note "Metadata के बारे में अधिक जानें"
+!!! info "Metadata के बारे में अधिक जानें"
 
     Nextflow workflows में metadata के साथ काम करने के लिए एक व्यापक परिचय के लिए, जिसमें samplesheets से metadata को कैसे पढ़ें और processing को customize करने के लिए इसका उपयोग कैसे करें, [workflows में Metadata](../side_quests/metadata/index.md) side quest देखें।
 
@@ -543,7 +595,7 @@ ch_input = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
 
 स्पष्टता के लिए, हम इसे तोड़ेंगे और प्रत्येक चरण को अलग से कवर करेंगे।
 
-!!! note "नोट"
+!!! info "जानकारी"
 
     नीचे दिखाए गए सभी परिवर्तन `core-hello/workflows/hello.nf` workflow फ़ाइल में `main` ब्लॉक में workflow logic में किए गए हैं।
 
@@ -570,8 +622,8 @@ def cat_meta = [id: params.batch]
 
 === "बाद में"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // एक अभिवादन emit करें
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="7-8"
+        // अभिवादन emit करें (nf-core samplesheet परंपरा का उपयोग करने के लिए अपडेट किया गया)
         sayHello(ch_samplesheet)
 
         // अभिवादन को uppercase में बदलें
@@ -586,8 +638,8 @@ def cat_meta = [id: params.batch]
 
 === "पहले"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // एक अभिवादन emit करें
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="7-8"
+        // अभिवादन emit करें (nf-core samplesheet परंपरा का उपयोग करने के लिए अपडेट किया गया)
         sayHello(ch_samplesheet)
 
         // अभिवादन को uppercase में बदलें
@@ -608,8 +660,8 @@ def cat_meta = [id: params.batch]
 
 === "बाद में"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="10-11"
-        // एक अभिवादन emit करें
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="10-11"
+        // अभिवादन emit करें (nf-core samplesheet परंपरा का उपयोग करने के लिए अपडेट किया गया)
         sayHello(ch_samplesheet)
 
         // अभिवादन को uppercase में बदलें
@@ -627,8 +679,8 @@ def cat_meta = [id: params.batch]
 
 === "पहले"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // एक अभिवादन emit करें
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
+        // अभिवादन emit करें (nf-core samplesheet परंपरा का उपयोग करने के लिए अपडेट किया गया)
         sayHello(ch_samplesheet)
 
         // अभिवादन को uppercase में बदलें
@@ -654,8 +706,8 @@ def cat_meta = [id: params.batch]
 
 === "बाद में"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="13-14"
-        // एक अभिवादन emit करें
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="13-14"
+        // अभिवादन emit करें (nf-core samplesheet परंपरा का उपयोग करने के लिए अपडेट किया गया)
         sayHello(ch_samplesheet)
 
         // अभिवादन को uppercase में बदलें
@@ -676,8 +728,8 @@ def cat_meta = [id: params.batch]
 
 === "पहले"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // एक अभिवादन emit करें
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
+        // अभिवादन emit करें (nf-core samplesheet परंपरा का उपयोग करने के लिए अपडेट किया गया)
         sayHello(ch_samplesheet)
 
         // अभिवादन को uppercase में बदलें
@@ -704,8 +756,8 @@ def cat_meta = [id: params.batch]
 
 === "बाद में"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="16-17 20"
-        // एक अभिवादन emit करें
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="16-17 20"
+        // अभिवादन emit करें (nf-core samplesheet परंपरा का उपयोग करने के लिए अपडेट किया गया)
         sayHello(ch_samplesheet)
 
         // अभिवादन को uppercase में बदलें
@@ -729,8 +781,8 @@ def cat_meta = [id: params.batch]
 
 === "पहले"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="17"
-        // एक अभिवादन emit करें
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="17"
+        // अभिवादन emit करें (nf-core samplesheet परंपरा का उपयोग करने के लिए अपडेट किया गया)
         sayHello(ch_samplesheet)
 
         // अभिवादन को uppercase में बदलें
@@ -753,7 +805,7 @@ def cat_meta = [id: params.batch]
 
 फिर यह बस उस अंतिम पंक्ति में `collectGreetings.out.outfile` के बजाय `cowpy` को `ch_for_cowpy` पास करने की बात है।
 
-!!! note "नोट"
+!!! info "जानकारी"
 
     पाठ्यक्रम के अगले भाग में, हम `cowpy` को सीधे metadata tuples के साथ काम करने के लिए अपडेट करेंगे, इसलिए यह extraction चरण आवश्यक नहीं रहेगा।
 
@@ -762,7 +814,7 @@ def cat_meta = [id: params.batch]
 आइए परीक्षण करें कि workflow नए integrated `find/concatenate` मॉड्यूल के साथ काम करता है:
 
 ```bash
-nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
 यह यथोचित रूप से जल्दी चलना चाहिए।
@@ -770,40 +822,40 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W ~ version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-        Launching `./main.nf` [evil_pike] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [cheesy_bhabha] revision: d6bbba9521
 
-        Input/output options
-          input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
-          outdir                    : core-hello-results
+    Input/output options
+      input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
+      outdir                    : core-hello-results
 
-        Institutional config options
-          config_profile_name       : Test profile
-          config_profile_description: Minimal test dataset to check pipeline function
+    Institutional config options
+      config_profile_name       : Test profile
+      config_profile_description: Minimal test dataset to check pipeline function
 
-        Generic options
-          validate_params           : false
-          trace_report_suffix       : 2025-10-30_18-50-58
+    Generic options
+      validate_params           : false
+      trace_report_suffix       : 2026-06-23_16-55-02
 
-        Core Nextflow options
-          runName                   : evil_pike
-          containerEngine           : docker
-          launchDir                 : /workspaces/training/hello-nf-core/core-hello
-          workDir                   : /workspaces/training/hello-nf-core/core-hello/work
-          projectDir                : /workspaces/training/hello-nf-core/core-hello
-          userName                  : root
-          profile                   : test,docker
-          configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
+    Core Nextflow options
+      runName                   : cheesy_bhabha
+      containerEngine           : docker
+      launchDir                 : /workspaces/training/hello-nf-core/core-hello
+      workDir                   : /workspaces/training/hello-nf-core/core-hello/work
+      projectDir                : /workspaces/training/hello-nf-core/core-hello
+      userName                  : root
+      profile                   : test,docker
+      configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
 
-        !! Only displaying parameters that differ from the pipeline defaults !!
-        ------------------------------------------------------
-        executor >  local (8)
-        [b3/f005fd] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-        [08/f923d0] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-        [34/3729a9] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
-        [24/df918a] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
-        -[core/hello] Pipeline completed successfully-
+    !! Only displaying parameters that differ from the pipeline defaults !!
+    ------------------------------------------------------
+    executor >  local (8)
+    [bf/aa86d7] CORE_HELLO:HELLO:sayHello (3)            | 3 of 3 ✔
+    [0a/df448e] CORE_HELLO:HELLO:convertToUpper (3)      | 3 of 3 ✔
+    [82/ded72f] CORE_HELLO:HELLO:FIND_CONCATENATE (test) | 1 of 1 ✔
+    [9d/0130bf] CORE_HELLO:HELLO:cowpy                   | 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
     ```
 
 ध्यान दें कि `collectGreetings` के बजाय अब process execution list में `FIND_CONCATENATE` दिखाई देता है।

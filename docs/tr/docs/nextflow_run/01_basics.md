@@ -91,12 +91,18 @@ nextflow run 1-hello.nf --input 'Hello World!'
 ??? success "Komut çıktısı"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+    Launching `1-hello.nf` [goofy_torvalds] revision: c33d41f479
 
     executor >  local (1)
     [a3/7be2fa] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output: 1-hello/output.txt
     ```
 
 Konsol çıktınız buna benzer görünüyorsa, tebrikler, ilk Nextflow workflow'unuzu çalıştırdınız!
@@ -115,13 +121,14 @@ Konsol çıktınız buna benzer görünüyorsa, tebrikler, ilk Nextflow workflow
     Bu kursun başında bahsedilmişti, ama belki kaçırmışsınızdır.
     [Nextflow sürümleri](../info/nxf_versions.md) yardım materyalini kontrol edin.
 
-    Kısacası, Nextflow `25.10` kullanıyorsanız v2 dil ayrıştırıcısını etkinleştirmeniz gerekir:
+    v2 ayrıştırıcısı Nextflow 26.04 itibarıyla varsayılan olarak gelir; bu nedenle bu hatayı yalnızca daha eski sürümlerde görebilirsiniz.
+    26.04 öncesi bir sürümde v2 dil ayrıştırıcısını etkinleştirmeniz gerekir:
 
     ```bash
     export NXF_SYNTAX_PARSER=v2
     ```
 
-Buradaki en önemli çıktı, yukarıdaki çıktıda vurgulanan son satırdır:
+Buradaki en önemli çıktı, yukarıdaki çıktıda vurgulanan satırdır:
 
 ```console
 [a3/7be2fa] sayHello | 1 of 1 ✔
@@ -168,12 +175,18 @@ nextflow run 1-hello.nf --input 'Hello World!' -output-dir hello_results
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78
+    Launching `1-hello.nf` [hungry_celsius] revision: f048d6ea78
 
     executor >  local (1)
-    [a3/1e1535] sayHello [100%] 1 of 1 ✔
+    [a3/1e1535] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/hello_results
+
+      first_output: 1-hello/output.txt
     ```
 
 Artık çıktılarınızın `results` yerine `hello_results` adlı bir dizine yayınlandığını görmelisiniz:
@@ -206,7 +219,7 @@ Bu karmaşık gelebilir, bu yüzden pratikte nasıl göründüğüne bakalım.
 Daha önce çalıştırdığımız workflow için konsol çıktısına geri dönersek, şu satır vardı:
 
 ```console
-[a3/1e1535] sayHello [100%] 1 of 1 ✔
+[a3/1e1535] sayHello | 1 of 1 ✔
 ```
 
 Satırın `[a3/1e1535]` ile nasıl başladığını görüyor musunuz?
@@ -623,11 +636,17 @@ nextflow run 1-hello.nf --input 'Hello World!' -resume
 ??? success "Komut çıktısı"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479
+    Launching `1-hello.nf` [tiny_noyce] revision: c33d41f479
 
     [a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output: 1-hello/output.txt
     ```
 
 Konsol çıktısı tanıdık görünmeli, ancak öncekine kıyasla biraz farklı olan bir şey var.
@@ -767,7 +786,7 @@ Bu eğitimin bir sonraki bölümünde, Nextflow'un birden fazla girdiyi verimli 
 - [x] Görevin çalışma dizinine kısaltılmış yol
 - [ ] Çıktı dosyasının sağlama toplamı
 
-Daha fazla bilgi: [2.4. Orijinal çıktıyı ve logları `work/` dizininde bulun](#23-find-the-original-output-and-logs-in-the-work-directory)
+Daha fazla bilgi: [2.3. Orijinal çıktıyı ve logları `work/` dizininde bulun](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -777,7 +796,7 @@ Görev dizinindeki `.command.sh` dosyasının amacı nedir?
 - [ ] Başarısız görevlerden hata mesajlarını içerir
 - [ ] Görev için hazırlanan girdi dosyalarını listeler
 
-Daha fazla bilgi: [2.4. Orijinal çıktıyı ve logları `work/` dizininde bulun](#23-find-the-original-output-and-logs-in-the-work-directory)
+Daha fazla bilgi: [2.3. Orijinal çıktıyı ve logları `work/` dizininde bulun](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -787,14 +806,14 @@ Daha fazla bilgi: [2.4. Orijinal çıktıyı ve logları `work/` dizininde bulun
 - [ ] Nextflow üzerine yazmayı engeller ve başarısız olur
 - [ ] Otomatik olarak yedeklenirler
 
-Daha fazla bilgi: [2.5. Workflow'u farklı selamlamalarla yeniden çalıştırın](#24-re-run-the-workflow-with-different-greetings)
+Daha fazla bilgi: [2.4. Workflow'u farklı selamlamalarla yeniden çalıştırın](#24-re-run-the-workflow-with-different-greetings)
 </quiz>
 
 <quiz>
 Bu konsol çıktısı neyi gösterir?
 
 ```console
-[skipped  ] process > sayHello (1) [100%] 1 of 1, cached: 1 ✔
+[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
 ```
 
 - [ ] Görev başarısız oldu ve atlandı

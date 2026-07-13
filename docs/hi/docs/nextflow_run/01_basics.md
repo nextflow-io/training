@@ -91,12 +91,18 @@ nextflow run 1-hello.nf --input 'Hello World!'
 ??? success "कमांड आउटपुट"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+    Launching `1-hello.nf` [goofy_torvalds] revision: c33d41f479
 
     executor >  local (1)
     [a3/7be2fa] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output: 1-hello/output.txt
     ```
 
 यदि तुम्हारा console आउटपुट कुछ इस तरह दिखता है, तो बधाई हो, तुमने अभी-अभी अपना पहला Nextflow workflow चलाया है!
@@ -115,13 +121,14 @@ nextflow run 1-hello.nf --input 'Hello World!'
     इसका उल्लेख कोर्स की शुरुआत में किया गया था, लेकिन शायद तुमने इसे miss कर दिया।
     [Nextflow versions](../info/nxf_versions.md) help material देखो।
 
-    संक्षेप में, यदि तुम Nextflow `25.10` का उपयोग कर रहे हो तो तुम्हें v2 language parser enable करना होगा:
+    v2 parser Nextflow 26.04 से डिफ़ॉल्ट है, इसलिए यह केवल पुराने versions पर दिखेगा।
+    26.04 से पहले के version पर तुम्हें v2 language parser enable करना होगा:
 
     ```bash
     export NXF_SYNTAX_PARSER=v2
     ```
 
-यहां सबसे महत्वपूर्ण आउटपुट अंतिम पंक्ति है, जो ऊपर के आउटपुट में हाइलाइट किया गया है:
+यहां सबसे महत्वपूर्ण आउटपुट हाइलाइट की गई पंक्ति है:
 
 ```console
 [a3/7be2fa] sayHello | 1 of 1 ✔
@@ -168,12 +175,18 @@ nextflow run 1-hello.nf --input 'Hello World!' -output-dir hello_results
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78
+    Launching `1-hello.nf` [hungry_celsius] revision: f048d6ea78
 
     executor >  local (1)
-    [a3/1e1535] sayHello [100%] 1 of 1 ✔
+    [a3/1e1535] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/hello_results
+
+      first_output: 1-hello/output.txt
     ```
 
 तुम्हें देखना चाहिए कि तुम्हारे outputs अब `results` के बजाय `hello_results` नाम की डायरेक्टरी में publish हो रहे हैं:
@@ -206,7 +219,7 @@ hello_results
 पहले चलाए गए workflow के console आउटपुट पर वापस जाते हुए, हमारे पास यह पंक्ति थी:
 
 ```console
-[a3/1e1535] sayHello [100%] 1 of 1 ✔
+[a3/1e1535] sayHello | 1 of 1 ✔
 ```
 
 देखो कि पंक्ति `[a3/1e1535]` से कैसे शुरू होती है?
@@ -623,11 +636,17 @@ nextflow run 1-hello.nf --input 'Hello World!' -resume
 ??? success "कमांड आउटपुट"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479
+    Launching `1-hello.nf` [tiny_noyce] revision: c33d41f479
 
     [a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output: 1-hello/output.txt
     ```
 
 Console आउटपुट परिचित दिखना चाहिए, लेकिन पहले की तुलना में एक चीज़ थोड़ी अलग है।
@@ -767,7 +786,7 @@ Console आउटपुट पंक्ति `[a3/7be2fa] SAYHELLO | 1 of 1 ✔
 - [x] Task की work directory का truncated path
 - [ ] Output फ़ाइल का checksum
 
-और जानें: [2.4. `work/` डायरेक्टरी में मूल आउटपुट और लॉग खोजो](#23-find-the-original-output-and-logs-in-the-work-directory)
+और जानें: [2.3. `work/` डायरेक्टरी में मूल आउटपुट और लॉग खोजो](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -777,7 +796,7 @@ Task directory में `.command.sh` फ़ाइल का उद्देश
 - [ ] इसमें failed tasks से error messages होते हैं
 - [ ] यह task के लिए staged input फ़ाइलों को सूचीबद्ध करती है
 
-और जानें: [2.4. `work/` डायरेक्टरी में मूल आउटपुट और लॉग खोजो](#23-find-the-original-output-and-logs-in-the-work-directory)
+और जानें: [2.3. `work/` डायरेक्टरी में मूल आउटपुट और लॉग खोजो](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -787,14 +806,14 @@ Task directory में `.command.sh` फ़ाइल का उद्देश
 - [ ] Nextflow overwriting रोकता है और fail होता है
 - [ ] वे automatically backup हो जाते हैं
 
-और जानें: [2.5. अलग-अलग greetings के साथ workflow फिर से चलाओ](#24-re-run-the-workflow-with-different-greetings)
+और जानें: [2.4. अलग-अलग greetings के साथ workflow फिर से चलाओ](#24-re-run-the-workflow-with-different-greetings)
 </quiz>
 
 <quiz>
 यह console आउटपुट क्या indicate करता है?
 
 ```console
-[skipped  ] process > sayHello (1) [100%] 1 of 1, cached: 1 ✔
+[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
 ```
 
 - [ ] Task fail हुआ और skip किया गया

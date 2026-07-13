@@ -5,6 +5,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 
+
 Wiesz już, jak wtyczki rozszerzają Nextflow'a o funkcjonalności wielokrotnego użytku.
 Teraz stworzysz własną, zaczynając od szablonu projektu, który zajmuje się konfiguracją budowania za Ciebie.
 
@@ -66,15 +67,15 @@ Powinieneś zobaczyć:
 
 ```console
 .
-├── build.gradle
 ├── COPYING
+├── Makefile
+├── README.md
+├── build.gradle
 ├── gradle
 │   └── wrapper
 │       ├── gradle-wrapper.jar
 │       └── gradle-wrapper.properties
 ├── gradlew
-├── Makefile
-├── README.md
 ├── settings.gradle
 └── src
     ├── main
@@ -134,13 +135,13 @@ Najważniejszy jest blok `nextflowPlugin`:
 
 ```groovy title="build.gradle"
 plugins {
-    id 'io.nextflow.nextflow-plugin' version '1.0.0-beta.10'
+    id 'io.nextflow.nextflow-plugin' version '1.0.0-beta.15'
 }
 
 version = '0.1.0'
 
 nextflowPlugin {
-    nextflowVersion = '24.10.0'       // (1)!
+    nextflowVersion = '25.10.0'       // (1)!
 
     provider = 'training'             // (2)!
     className = 'training.plugin.GreetingPlugin'  // (3)!
@@ -173,7 +174,7 @@ Zaktualizuj ją, aby odpowiadała zainstalowanej wersji Nextflow'a i zapewnić p
 
     ```groovy title="build.gradle" hl_lines="2"
     nextflowPlugin {
-        nextflowVersion = '25.10.0'
+        nextflowVersion = '26.04.0'
 
         provider = 'training'
     ```
@@ -182,7 +183,7 @@ Zaktualizuj ją, aby odpowiadała zainstalowanej wersji Nextflow'a i zapewnić p
 
     ```groovy title="build.gradle" hl_lines="2"
     nextflowPlugin {
-        nextflowVersion = '24.10.0'
+        nextflowVersion = '25.10.0'
 
         provider = 'training'
     ```
@@ -251,7 +252,7 @@ make install
     Deprecated Gradle features were used in this build...
 
     BUILD SUCCESSFUL in 23s
-    5 actionable tasks: 5 executed
+    6 actionable tasks: 6 executed
     ```
 
     **Ostrzeżenia są oczekiwane.**

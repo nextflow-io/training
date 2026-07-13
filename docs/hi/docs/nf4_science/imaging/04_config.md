@@ -131,19 +131,20 @@ nextflow run ./molkart \
 यदि parameters, inputs, और code समान हैं, तो सभी tasks cache से पुनर्प्राप्त किए जाएंगे और pipeline लगभग तुरंत पूरा हो जाएगा।
 
 ```console title="Output (excerpt)"
-executor >  local (12)
+executor >  local (1)
+[43/e03702] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2, cached: 2 ✔
+[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2, cached: 2 ✔
 ...
-[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔
-[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)               [100%] 2 of 2, cached: 2 ✔
-...
+[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3, cached: 3 ✔
+[ef/d7b294] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
 -[nf-core/molkart] Pipeline completed successfully-
 ```
 
-ध्यान दें कि सभी processes `cached: 2` या `cached: 1` दिखाते हैं - कुछ भी फिर से execute नहीं किया गया!
+ध्यान दें कि प्रत्येक process पर `cached: N` annotation है - cached preprocessing और segmentation tasks फिर से execute नहीं किए गए।
 
 ### 2.4. Test profiles
 
-Test profiles default input parameters और datafiles को निर्दिष्ट करने के त्वरित तरीके प्रदान करते हैं ताकि आप सत्यापित कर सकें कि pipeline काम करता है।
+Test profiles default input parameters और datafiles को निर्दिष्ट करने के त्वरित तरीके प्रदान करते हैं ताकि तुम सत्यापित कर सको कि pipeline काम करता है।
 nf-core pipelines में हमेशा कम से कम दो test profiles शामिल होंगे:
 
 - `test`: त्वरित testing के लिए छोटा dataset और fast parameters
@@ -184,7 +185,7 @@ process {
 
 ध्यान दें कि इस profile में वही parameters हैं जो हमने पहले अपनी `params.yaml` फ़ाइल में उपयोग किए थे।
 
-आप कॉमा से अलग करके कई profiles को सक्रिय कर सकते हैं।
+तुम कॉमा से अलग करके कई profiles को सक्रिय कर सकते हो।
 आइए इसका उपयोग करके अपनी params फ़ाइल की आवश्यकता के बिना अपने pipeline को test करें:
 
 ```bash
@@ -198,10 +199,10 @@ nextflow run ./molkart -profile docker,test --outdir results -resume
 
 Profiles बाएं से दाएं applied होते हैं, इसलिए बाद के profiles पहले वाले को override करते हैं यदि वे समान values set करते हैं।
 
-### निष्कर्ष
+### सारांश
 
 nf-core pipelines containers, testing, और विशेष environments के लिए built-in profiles के साथ आते हैं।
-आप अपनी आवश्यकता के अनुसार configuration बनाने के लिए कई profiles को combine कर सकते हैं।
+तुम अपनी आवश्यकता के अनुसार configuration बनाने के लिए कई profiles को combine कर सकते हो।
 
 ### आगे क्या है?
 
