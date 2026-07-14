@@ -3,6 +3,9 @@
 # version paths so they do not appear in search results. Only /latest/
 # (the alias for the current release) is left indexable.
 
+/3.6.1/*
+  X-Robots-Tag: noindex
+
 /3.6/*
   X-Robots-Tag: noindex
 
