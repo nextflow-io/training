@@ -194,7 +194,7 @@ A `rnaseq.nf`, sota la secció `Pipeline parameters`, declareu un parametre anom
      * Pipeline parameters
      */
     params {
-        // Primary input
+        // Entrada principal
         input: Path
     }
     ```
@@ -477,12 +477,22 @@ nextflow run rnaseq.nf -profile test
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `rnaseq.nf` [mad_lorenz] DSL2 - revision: 5846a164d2
+    Launching `rnaseq.nf` [mad_lorenz] revision: 5846a164d2
 
     executor >  local (1)
     [7b/8ee79e] FASTQC (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/rnaseq/results
+
+      fastqc_zip:
+        - fastqc/ENCSR000COQ1_1_fastqc.zip
+
+      fastqc_html:
+        - fastqc/ENCSR000COQ1_1_fastqc.html
     ```
 
 Això hauria d'executar-se molt ràpidament si heu treballat la Part 1 i ja heu descarregat el contenidor.
@@ -542,7 +552,7 @@ Aneu endavant i ompliu la definició del procés per vosaltres mateixos utilitza
     #!/usr/bin/env nextflow
 
     /*
-     * Trim adapters and run post-trimming QC
+     * Retalla adaptadors i executa QC post-retallat
      */
     process TRIM_GALORE {
 
@@ -596,7 +606,7 @@ Actualitzeu `rnaseq.nf` per importar el nou mòdul:
 === "Després"
 
     ```groovy title="rnaseq.nf" linenums="3" hl_lines="3"
-    // Module INCLUDE statements
+    // Declaracions INCLUDE de mòduls
     include { FASTQC } from './modules/fastqc.nf'
     include { TRIM_GALORE } from './modules/trim_galore.nf'
     ```
@@ -604,7 +614,7 @@ Actualitzeu `rnaseq.nf` per importar el nou mòdul:
 === "Abans"
 
     ```groovy title="rnaseq.nf" linenums="3"
-    // Module INCLUDE statements
+    // Declaracions INCLUDE de mòduls
     include { FASTQC } from './modules/fastqc.nf'
     ```
 
@@ -738,13 +748,32 @@ nextflow run rnaseq.nf -profile test
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `rnaseq.nf` [gloomy_becquerel] DSL2 - revision: bb11055736
+    Launching `rnaseq.nf` [gloomy_becquerel] revision: bb11055736
 
     executor >  local (2)
     [f6/c8ef2e] FASTQC (1)      | 1 of 1 ✔
     [58/c58d8a] TRIM_GALORE (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/rnaseq/results
+
+      fastqc_zip:
+        - fastqc/ENCSR000COQ1_1_fastqc.zip
+
+      fastqc_html:
+        - fastqc/ENCSR000COQ1_1_fastqc.html
+
+      trimmed_reads:
+        - trimming/ENCSR000COQ1_1_trimmed.fq.gz
+
+      trimming_reports:
+        - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
+
+      trimming_fastqc:
+        - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
     ```
 
 Això també hauria d'executar-se molt ràpidament, ja que estem executant sobre un fitxer d'entrada tan petit.
@@ -1085,14 +1114,39 @@ nextflow run rnaseq.nf -profile test
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `rnaseq.nf` [elated_stonebraker] DSL2 - revision: e8e57d0cdd
+    Launching `rnaseq.nf` [elated_stonebraker] revision: e8e57d0cdd
 
     executor >  local (3)
     [e8/fa29d6] FASTQC (1)       | 1 of 1 ✔
     [ca/ffdde2] TRIM_GALORE (1)  | 1 of 1 ✔
     [b6/1c6ca3] HISAT2_ALIGN (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/rnaseq/results
+
+      fastqc_zip:
+        - fastqc/ENCSR000COQ1_1_fastqc.zip
+
+      fastqc_html:
+        - fastqc/ENCSR000COQ1_1_fastqc.html
+
+      trimmed_reads:
+        - trimming/ENCSR000COQ1_1_trimmed.fq.gz
+
+      trimming_reports:
+        - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
+
+      trimming_fastqc:
+        - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]
+
+      bam:
+        - align/ENCSR000COQ1_1_trimmed.bam
+
+      align_log:
+        - align/ENCSR000COQ1_1_trimmed.hisat2.log
     ```
 
 Podeu trobar les sortides d'alineament al directori de resultats.

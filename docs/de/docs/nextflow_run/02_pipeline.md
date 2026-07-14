@@ -42,12 +42,21 @@ nextflow run 2a-inputs.nf --input data/greetings.csv
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `2a-inputs.nf` [mighty_sammet] DSL2 - revision: 29fb5352b3
+    Launching `2a-inputs.nf` [mighty_sammet] revision: 29fb5352b3
 
     executor >  local (3)
-    [8e/0eb066] sayHello (2) [100%] 3 of 3 ✔
+    [8e/0eb066] sayHello (2) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 2a-inputs/Hello-output.txt
+        - 2a-inputs/Bonjour-output.txt
+        - 2a-inputs/Hola-output.txt
     ```
 
 Spannenderweise scheint dies anzuzeigen, dass '3 von 3' Aufrufe für den process gemacht wurden, was ermutigend ist, da es drei Datenzeilen in der CSV gab, die wir als Eingabe bereitgestellt haben.
@@ -124,11 +133,20 @@ nextflow run 2a-inputs.nf --input data/greetings.csv -ansi-log false
 ??? success "Befehlsausgabe"
 
     ```console linenums="1"
-    N E X T F L O W  ~  version 25.10.4
-    Launching `2a-inputs.nf` [pedantic_hamilton] DSL2 - revision: 6bbc42e49f
+    N E X T F L O W  ~  version 26.04.4
+    Launching `2a-inputs.nf` [pedantic_hamilton] - revision: 6bbc42e49f
     [ab/1a8ece] Submitted process > sayHello (1)
     [0d/2cae24] Submitted process > sayHello (2)
     [b5/0df1d6] Submitted process > sayHello (3)
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 2a-inputs/Hello-output.txt
+        - 2a-inputs/Bonjour-output.txt
+        - 2a-inputs/Hola-output.txt
     ```
 
 Diesmal sehen wir alle drei process-Ausführungen und ihre zugehörigen work-Unterverzeichnisse in der Ausgabe aufgelistet.
@@ -362,13 +380,31 @@ nextflow run 2b-multistep.nf --input data/greetings.csv
 ??? success "Befehlsausgabe"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
+    Launching `2b-multistep.nf` [soggy_franklin] revision: bc8e1b2726
 
     [d6/cdf466] sayHello (1)       | 3 of 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3 ✔
     [1e/83586c] collectGreetings   | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 2b-multistep/intermediates/Hello-output.txt
+        - 2b-multistep/intermediates/Bonjour-output.txt
+        - 2b-multistep/intermediates/Hola-output.txt
+
+      uppercased:
+        - 2b-multistep/intermediates/UPPER-Hello-output.txt
+        - 2b-multistep/intermediates/UPPER-Bonjour-output.txt
+        - 2b-multistep/intermediates/UPPER-Hola-output.txt
+
+      collected: 2b-multistep/COLLECTED-batch-output.txt
+
+      batch_report: 2b-multistep/batch-report.txt
     ```
 
 Du siehst, dass wie versprochen mehrere Schritte als Teil des Workflows ausgeführt wurden; die ersten beiden (`sayHello` und `convertToUpper`) wurden vermutlich auf jeden einzelnen Gruß ausgeführt, und der dritte (`collectGreetings`) wird nur einmal ausgeführt worden sein, auf den Ausgaben aller drei `convertToUpper`-Aufrufe.
@@ -619,6 +655,7 @@ Diesmal heißt der Operator `collect` und wird auf den Ausgabe-Kanal angewendet,
 Der `collect`-Operator wird verwendet, um die Ausgaben von mehreren Aufrufen desselben process zu sammeln und sie in ein einzelnes Kanal-Element zu verpacken.
 
 Im Kontext dieses Workflows nimmt er die drei großgeschriebenen Grüße im `convertToUpper.out` Kanal (die drei separate Kanal-Elemente sind und normalerweise in separaten Aufrufen vom nächsten process behandelt würden) und verpackt sie in ein einzelnes Element.
+So bekommen wir alle Grüße zurück in dieselbe Datei.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nextflow_run/img/with-collect-operator.svg"
@@ -629,8 +666,6 @@ Im Gegensatz dazu würde Nextflow, wenn wir `collect()` nicht auf die Ausgabe vo
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
 </figure>
-
-So bekommen wir alle Grüße zurück in dieselbe Datei.
 
 Es gibt viele andere [Operatoren](https://nextflow.io/docs/latest/reference/operator.html), die verfügbar sind, um Transformationen auf den Inhalt von Kanälen zwischen process-Aufrufen anzuwenden.
 
@@ -671,13 +706,31 @@ nextflow run 2b-multistep.nf --input data/greetings.csv --batch test
 ??? success "Befehlsausgabe"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
+    Launching `2b-multistep.nf` [soggy_franklin] revision: bc8e1b2726
 
     [a5/cdff26] sayHello (1)       | 3 of 3 ✔
     [c5/78794f] convertToUpper (2) | 3 of 3 ✔
     [d3/b4d86c] collectGreetings   | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 2b-multistep/intermediates/Bonjour-output.txt
+        - 2b-multistep/intermediates/Hello-output.txt
+        - 2b-multistep/intermediates/Hola-output.txt
+
+      uppercased:
+        - 2b-multistep/intermediates/UPPER-Hola-output.txt
+        - 2b-multistep/intermediates/UPPER-Bonjour-output.txt
+        - 2b-multistep/intermediates/UPPER-Hello-output.txt
+
+      collected: 2b-multistep/COLLECTED-test-output.txt
+
+      batch_report: 2b-multistep/test-report.txt
     ```
 
 Du solltest neue Endausgaben sehen, die mit deinem benutzerdefinierten Batch-Namen benannt sind.
@@ -922,13 +975,31 @@ nextflow run 2c-modules.nf --input data/greetings.csv -resume
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
+    Launching `2c-modules.nf` [soggy_franklin] revision: bc8e1b2726
 
     [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1e/83586c] collectGreetings   | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 2c-modules/intermediates/Hello-output.txt
+        - 2c-modules/intermediates/Bonjour-output.txt
+        - 2c-modules/intermediates/Hola-output.txt
+
+      uppercased:
+        - 2c-modules/intermediates/UPPER-Hello-output.txt
+        - 2c-modules/intermediates/UPPER-Bonjour-output.txt
+        - 2c-modules/intermediates/UPPER-Hola-output.txt
+
+      collected: 2c-modules/COLLECTED-batch-output.txt
+
+      batch_report: 2c-modules/batch-report.txt
     ```
 
 Du wirst bemerken, dass alle process-Ausführungen erfolgreich aus dem cache geladen wurden, was bedeutet, dass Nextflow erkannt hat, dass es die angeforderte Arbeit bereits erledigt hat, obwohl der Code aufgeteilt wurde und die Haupt-Workflow-Datei umbenannt wurde.
@@ -1076,20 +1147,20 @@ Du siehst, dass das Dateisystem innerhalb des Containers sich vom Dateisystem au
 Von innerhalb des Containers kannst du den `cowpy`-Befehl direkt ausführen.
 
 ```bash
-cowpy "Hello Containers"
+echo "Hello Containers" | cowpy
 ```
 
 ??? success "Befehlsausgabe"
 
     ```console
-    ______________________________________________________
+     __________________
     < Hello Containers >
-    ------------------------------------------------------
-        \   ^__^
+     ------------------
+         \   ^__^
           \  (oo)\_______
-            (__)\       )\/\
-              ||----w |
-              ||     ||
+             (__)\       )\/\
+               ||----w |
+               ||     ||
     ```
 
 Das produziert ASCII-Kunst des Standard-Kuh-Charakters (oder 'Cowacter') mit einer Sprechblase, die den von uns angegebenen Text enthält.
@@ -1098,22 +1169,22 @@ Jetzt, da du die grundlegende Verwendung getestet hast, kannst du versuchen, ihm
 Zum Beispiel sagt die Tool-Dokumentation, dass wir den Charakter mit `-c` setzen können.
 
 ```bash
-cowpy "Hello Containers" -c tux
+echo "Hello Containers" | cowpy -c tux
 ```
 
 ??? success "Befehlsausgabe"
 
     ```console
-    __________________
+     __________________
     < Hello Containers >
-    ------------------
-      \
+     ------------------
+       \
         \
             .--.
-          |o_o |
-          |:_/ |
+           |o_o |
+           |:_/ |
           //   \ \
-        (|     | )
+         (|     | )
         /'\_   _/`\
         \___)=(___/
     ```
@@ -1299,15 +1370,35 @@ nextflow run 2d-container.nf --input data/greetings.csv --character turkey -resu
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `2d-container.nf` [elegant_brattain] DSL2 - revision: 028a841db1
+    Launching `2d-container.nf` [elegant_brattain] revision: 028a841db1
 
     executor >  local (1)
     [95/fa0bac] sayHello (3)       | 3 of 3, cached: 3 ✔
     [92/32533f] convertToUpper (3) | 3 of 3, cached: 3 ✔
     [aa/e697a2] collectGreetings   | 1 of 1, cached: 1 ✔
     [7f/caf718] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 2d-container/intermediates/Bonjour-output.txt
+        - 2d-container/intermediates/Hola-output.txt
+        - 2d-container/intermediates/Hello-output.txt
+
+      uppercased:
+        - 2d-container/intermediates/UPPER-Hola-output.txt
+        - 2d-container/intermediates/UPPER-Hello-output.txt
+        - 2d-container/intermediates/UPPER-Bonjour-output.txt
+
+      collected: 2d-container/intermediates/COLLECTED-batch-output.txt
+
+      batch_report: 2d-container/batch-report.txt
+
+      cowpy_art: 2d-container/cowpy-COLLECTED-batch-output.txt
     ```
 
 Die ersten drei Schritte wurden aus dem cache geladen, da wir sie zuvor schon ausgeführt haben, aber der `cowpy` process ist neu, also wird der tatsächlich ausgeführt.

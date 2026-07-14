@@ -5,6 +5,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 
+
 Ambientes de Desenvolvimento Integrados (IDEs) modernos podem transformar radicalmente sua experiência de desenvolvimento com Nextflow. Esta missão secundária foca especificamente em aproveitar o VS Code e sua extensão para Nextflow para escrever código mais rápido, detectar erros cedo e navegar por fluxos de trabalho complexos com eficiência.
 
 !!! note "Isso não é um tutorial tradicional"
@@ -77,7 +78,7 @@ tree .
 │   └── utils.nf
 └── nextflow.config
 
-3 directories, 12 files
+2 directories, 12 files
 ```
 
 !!! note "Sobre os Arquivos de Exemplo"
@@ -87,7 +88,7 @@ tree .
 
 ### Atalhos de Teclado
 
-Alguns dos recursos neste guia usam atalhos de teclado opcionais. Se você estiver acessando este material via GitHub Codespaces no navegador, alguns atalhos podem não funcionar como esperado, pois são usados para outras funções no seu sistema.
+Alguns dos recursos neste guia usam atalhos de teclado opcionais. Você pode estar acessando este material via GitHub Codespaces no navegador e, nesse caso, alguns atalhos podem não funcionar como esperado, pois são usados para outras funções no seu sistema.
 
 Se você estiver executando o VS Code localmente, como provavelmente fará quando estiver escrevendo fluxos de trabalho de verdade, os atalhos funcionarão conforme descrito.
 
@@ -102,7 +103,7 @@ Se você estiver usando um Mac, alguns (não todos) atalhos de teclado usarão "
 Para instalar a extensão manualmente:
 
 1. Abra o VS Code
-2. Vá para a visualização de Extensões clicando no ícone de extensões à esquerda: ![ícone de extensões](../img/extensions_icon.png) (atalho `Ctrl/Cmd+Shift+X` se você estiver executando o VSCode localmente)
+2. Vá para a visualização de Extensões clicando no ícone de extensões à esquerda: ![ícone de extensões](../img/extensions_icon.png) (atalho `Ctrl/Cmd+Shift+X` se você estiver executando o VS Code localmente)
 3. Pesquise por "Nextflow"
 4. Instale a extensão oficial do Nextflow
 
@@ -334,7 +335,7 @@ Agora vamos explorar a navegação em um fluxo de trabalho mais complexo usando 
 
 ### 4.2. Navegação por Símbolos
 
-Com `complex_workflow.nf` ainda aberto, você pode obter uma visão geral de todos os símbolos no arquivo digitando `@` na barra de pesquisa no topo do VSCode (o atalho de teclado é `Ctrl/Cmd+Shift+O`, mas pode não funcionar no Codespaces). Isso abre o painel de navegação por símbolos, que lista todos os símbolos no arquivo atual:
+Com `complex_workflow.nf` ainda aberto, você pode obter uma visão geral de todos os símbolos no arquivo digitando `@` na barra de pesquisa no topo do VS Code (o atalho de teclado é `Ctrl/Cmd+Shift+O`, mas pode não funcionar no Codespaces). Isso abre o painel de navegação por símbolos, que lista todos os símbolos no arquivo atual:
 
 ![Navegação por símbolos](../img/symbols.png)
 
@@ -548,7 +549,7 @@ Se o seu projeto for um repositório git (como este é), o VS Code mostra:
 - Visualizações de diff inline
 - Capacidades de commit e push
 
-Abra o painel de Controle de Código-Fonte usando o botão de controle de código-fonte (![ícone de controle de código-fonte](../img/source_control_icon.png)) (`Ctrl+Shift+G` ou `Cmd+Shift+G` se você estiver trabalhando com VSCode localmente) para ver as alterações do git e fazer commits diretamente no editor.
+Abra o painel de Controle de Código-Fonte usando o botão de controle de código-fonte (![ícone de controle de código-fonte](../img/source_control_icon.png)) (`Ctrl+Shift+G` ou `Cmd+Shift+G` se você estiver trabalhando com VS Code localmente) para ver as alterações do git e fazer commits diretamente no editor.
 
 ![Painel de Controle de Código-Fonte](../img/source_control.png)
 

@@ -9,26 +9,20 @@ Ara aprendrem dues millors aproximacions per gestionar les entrades: **fitxers d
 
 ### 1.1. El problema amb les línies de comandes llargues
 
-Recordeu la nostra comanda de la Part 2:
+A la Part 2 ja vam utilitzar un fitxer de paràmetres per mantenir la comanda curta i preservar els valors introduïts (com ara els paràmetres enters de preprocessament) intactes:
 
 ```bash
-nextflow run ./molkart \
-  --input 'data/samplesheet.csv' \
-  --mindagap_tilesize 90 \
-  --mindagap_boxsize 7 \
-  --mindagap_loopnum 100 \
-  --clahe_pyramid_tile 368 \
-  --segmentation_method "cellpose" \
-  --outdir results
+nextflow run ./molkart -params-file params.yaml --segmentation_method "mesmer,cellpose,stardist"
 ```
 
-Això funciona, però és difícil de reproduir, compartir o modificar.
+Passar molts paràmetres individualment a la línia de comandes és difícil de reproduir, compartir o modificar.
 Què passa si necessiteu executar la mateixa anàlisi de nou el mes que ve?
 Què passa si un col·laborador vol utilitzar exactament la vostra configuració?
+Un fitxer de paràmetres resol aquest problema.
 
-### 1.2. Solució: Utilitzeu un fitxer de paràmetres
+### 1.2. El fitxer de paràmetres
 
-Creeu un fitxer anomenat `params.yaml`:
+Aquí teniu el fitxer `params.yaml` que hem estat utilitzant:
 
 ```yaml title="params.yaml"
 input: "data/samplesheet.csv"
@@ -40,13 +34,16 @@ clahe_pyramid_tile: 368
 segmentation_method: "cellpose"
 ```
 
-Ara la vostra comanda es converteix en:
+Cada paràmetre s'escriu com un parell `clau: valor`.
+Escriure els enters sense cometes (per exemple `mindagap_tilesize: 90`) preserva el seu tipus enter, que la validació de paràmetres del pipeline requereix.
+
+La vostra comanda es converteix en:
 
 ```bash
 nextflow run ./molkart -params-file params.yaml -resume
 ```
 
-Això és tot! El fitxer de paràmetres documenta la vostra configuració exacta i facilita la reexecució o compartició.
+El fitxer de paràmetres documenta la vostra configuració exacta i facilita la reexecució o compartició.
 
 ### 1.3. Sobreescrivint paràmetres
 

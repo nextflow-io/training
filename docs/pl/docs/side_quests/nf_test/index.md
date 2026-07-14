@@ -1,17 +1,3 @@
-Looking at the diff, I need to update the following in the existing Polish translation:
-
-1. Link `../hello_nextflow/README.md` → `../../hello_nextflow/index.md` (Prerequisites section)
-2. Link `../envsetup/index.md` → `../../envsetup/index.md` (Open training codespace section)
-3. Links `../hello_nextflow/00_orientation.md` → `../../hello_nextflow/00_orientation.md` and `../hello_nextflow/03_hello_workflow.md` → `../../hello_nextflow/03_hello_workflow.md` (Review materials section)
-4. Link `../hello_nextflow/index.md` → `../../hello_nextflow/index.md` (in the collapsible example)
-5. Workflow code block: remove `publishDir` lines, add `main:` and `publish:` blocks, add `output` block
-6. File assertions: `Holà` → `Hola`
-7. Link `../hello_nextflow/03_hello_workflow.md` → `../../hello_nextflow/03_hello_workflow.md` (in section 2.1)
-8. `!!!warning` → `!!! warning` (fix formatting)
-9. Link `../` → `../index.md` (What's next section)
-
-%%%
-
 # Testowanie z nf-test
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
@@ -33,7 +19,7 @@ Testowanie pozwala systematycznie sprawdzać, czy każda część pipeline'u dzi
 
 Istnieje wiele różnych rodzajów testów, które możemy pisać:
 
-1. **Testy na poziomie modułu**: Dla poszczególnych procesów
+1. **Testy na poziomie procesu**: Dla poszczególnych procesów
 2. **Testy na poziomie workflow'u**: Dla pojedynczego workflow'u
 3. **Testy na poziomie pipeline'u**: Dla całego pipeline'u
 4. **Testy wydajnościowe**: Dla szybkości i efektywności pipeline'u
@@ -41,16 +27,16 @@ Istnieje wiele różnych rodzajów testów, które możemy pisać:
 
 Testowanie poszczególnych procesów jest analogiczne do testów jednostkowych w innych językach. Testowanie workflow'u lub całego pipeline'u odpowiada temu, co w innych językach nazywa się testami integracyjnymi — sprawdzamy w nich interakcje między komponentami.
 
-[**nf-test**](https://www.nf-test.com/) to narzędzie umożliwiające pisanie testów na poziomie modułu, workflow'u i pipeline'u. Krótko mówiąc, pozwala systematycznie sprawdzać, czy każda indywidualna część pipeline'u działa zgodnie z oczekiwaniami — _w izolacji_.
+[**nf-test**](https://www.nf-test.com/) to narzędzie umożliwiające pisanie testów na poziomie procesu, workflow'u i pipeline'u. Krótko mówiąc, pozwala systematycznie sprawdzać, czy każda indywidualna część pipeline'u działa zgodnie z oczekiwaniami — _w izolacji_.
 
 ### Cele szkolenia
 
-W tym zadaniu dodatkowym nauczysz się używać nf-test do pisania testu na poziomie workflow'u dla pipeline'u, a także testów na poziomie modułu dla trzech wywoływanych przez niego procesów.
+W tym zadaniu dodatkowym nauczysz się używać nf-test do pisania testu na poziomie workflow'u dla pipeline'u, a także testów na poziomie procesu dla dwóch wywoływanych przez niego procesów.
 
 Po ukończeniu tego zadania będziesz potrafić efektywnie stosować następujące techniki:
 
 - Inicjalizować nf-test w swoim projekcie
-- Generować testy na poziomie modułu i workflow'u
+- Generować testy na poziomie procesu i workflow'u
 - Dodawać typowe rodzaje asercji
 - Rozumieć, kiedy używać snapshotów, a kiedy asercji treści
 - Uruchamiać testy dla całego projektu
@@ -63,6 +49,16 @@ Przed przystąpieniem do tego zadania dodatkowego powinieneś:
 
 - Ukończyć samouczek [Hello Nextflow](../../hello_nextflow/index.md) lub równoważny kurs dla początkujących.
 - Swobodnie posługiwać się podstawowymi konceptami i mechanizmami Nextflow (procesy, kanały, operatory, praca z plikami, metadane).
+
+!!! warning "Wymagana wersja nf-test"
+
+    Testy na poziomie procesu wymagają **nf-test 0.9.3 lub nowszego**. Starsze wersje (w tym 0.9.2) generują kod szkieletu testowego niezgodny ze ścisłym parserem składni, którego Nextflow używa domyślnie od wersji 26.04, co powoduje błąd `Script compilation failed` zamiast oczekiwanego wyniku testu.
+
+    Sprawdź swoją wersję poleceniem `nf-test version`. Jeśli musisz zaktualizować:
+
+    ```bash
+    curl -fsSL https://code.askimed.com/install/nf-test | bash
+    ```
 
 ---
 
@@ -95,7 +91,8 @@ Znajdziesz tu główny plik workflow'u oraz plik CSV o nazwie `greetings.csv`, z
 ```console title="Directory contents"
 .
 ├── greetings.csv
-└── main.nf
+├── main.nf
+└── nextflow.config
 ```
 
 Szczegółowy opis plików znajdziesz w [rozgrzewce z Hello Nextflow](../../hello_nextflow/00_orientation.md).
@@ -125,21 +122,23 @@ Pełny kod workflow'u możesz zobaczyć poniżej.
 ??? example "Kod workflow'u"
 
     ```groovy title="main.nf"
+    #!/usr/bin/env nextflow
+
     /*
-    * Parametry pipeline'u
-    */
+     * Parametry pipeline'u
+     */
     params.input_file = "greetings.csv"
 
     /*
-    * Użyj echo, żeby wypisać 'Hello World!' na standardowe wyjście
-    */
+     * Użyj echo, żeby wypisać 'Hello World!' na standardowe wyjście
+     */
     process sayHello {
 
         input:
-            val greeting
+        val greeting
 
         output:
-            path "${greeting}-output.txt"
+        path "${greeting}-output.txt"
 
         script:
         """
@@ -148,15 +147,15 @@ Pełny kod workflow'u możesz zobaczyć poniżej.
     }
 
     /*
-    * Użyj narzędzia do zamiany tekstu, żeby przekonwertować pozdrowienie na wielkie litery
-    */
+     * Użyj narzędzia do zamiany tekstu, żeby przekonwertować pozdrowienie na wielkie litery
+     */
     process convertToUpper {
 
         input:
-            path input_file
+        path input_file
 
         output:
-            path "UPPER-${input_file}"
+        path "UPPER-${input_file}"
 
         script:
         """
@@ -197,13 +196,27 @@ nextflow run main.nf
 ```
 
 ```console title="Result of running the workflow"
- N E X T F L O W   ~  version 24.10.2
+ N E X T F L O W   ~  version 26.04.4
 
-Launching `main.nf` [soggy_linnaeus] DSL2 - revision: bbf79d5c31
+Launching `main.nf` [trusting_mendel] revision: 405c90f891
 
 executor >  local (6)
-[f7/c3be66] sayHello (3)       | 3 of 3 ✔
-[cd/e15303] convertToUpper (3) | 3 of 3 ✔
+[6c/d7ae4e] sayHello (3)       | 3 of 3 ✔
+[72/5fa770] convertToUpper (2) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/nf-test/results
+
+  greetings:
+    - Hola-output.txt
+    - Hello-output.txt
+    - Bonjour-output.txt
+
+  upper_greetings:
+    - UPPER-Hola-output.txt
+    - UPPER-Bonjour-output.txt
+    - UPPER-Hello-output.txt
 ```
 
 GRATULACJE! Właśnie uruchomiłeś test!
@@ -449,10 +462,10 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [1d4aaf12] 'Should run without failures' PASSED (1.619s)
+  Test [693ba951] 'Should run without failures' PASSED (2.879s)
 
 
-SUCCESS: Executed 1 tests in 1.626s
+SUCCESS: Executed 1 tests in 2.883s
 ```
 
 Sukces! Pipeline uruchamia się pomyślnie i test przechodzi. Uruchamiaj go tyle razy, ile chcesz — zawsze otrzymasz ten sam wynik!
@@ -474,15 +487,28 @@ https://www.nf-test.com
 Test Workflow main.nf
 
   Test [693ba951] 'Should run without failures'
-    > Nextflow 24.10.4 is available - Please consider updating your version to it
-    > N E X T F L O W  ~  version 24.10.0
-    > Launching `/workspaces/training/side-quests/nf-test/main.nf` [zen_ampere] DSL2 - revision: bbf79d5c31
-    > [2b/61e453] Submitted process > sayHello (2)
-    > [31/4e1606] Submitted process > sayHello (1)
-    > [bb/5209ee] Submitted process > sayHello (3)
-    > [83/83db6f] Submitted process > convertToUpper (2)
-    > [9b/3428b1] Submitted process > convertToUpper (1)
-    > [ca/0ba51b] Submitted process > convertToUpper (3)
+    > N E X T F L O W  ~  version 26.04.4
+    > Launching `/workspaces/training/side-quests/nf-test/main.nf` [maniac_mcclintock] - revision: 405c90f891
+    > [fc/6965c3] Submitted process > sayHello (1)
+    > [14/640c84] Submitted process > sayHello (2)
+    > [d6/3594c9] Submitted process > sayHello (3)
+    > [d7/f14d58] Submitted process > convertToUpper (1)
+    > [76/cb9122] Submitted process > convertToUpper (2)
+    > [d1/92b304] Submitted process > convertToUpper (3)
+    >
+    > Outputs:
+    >
+    >   /workspaces/training/side-quests/nf-test/.nf-test/tests/693ba951a20fec36a5a9292ed1cc8a9f/results
+    >
+    >   greetings:
+    >     - Bonjour-output.txt
+    >     - Hello-output.txt
+    >     - Hola-output.txt
+    >
+    >   upper_greetings:
+    >     - UPPER-Bonjour-output.txt
+    >     - UPPER-Hola-output.txt
+    >     - UPPER-Hello-output.txt
     PASSED (5.206s)
 
 
@@ -548,10 +574,10 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [1d4aaf12] 'Should run successfully with correct number of processes' PASSED (1.567s)
+  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (2.876s)
 
 
-SUCCESS: Executed 1 tests in 1.588s
+SUCCESS: Executed 1 tests in 2.879s
 ```
 
 Sukces! Pipeline uruchamia się pomyślnie i test przechodzi. Zaczęliśmy teraz testować szczegóły pipeline'u, a nie tylko jego ogólny status.
@@ -633,11 +659,11 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [f0e08a68] 'Should run successfully with correct number of processes' PASSED (8.144s)
-  Test [d7e32a32] 'Should produce correct output files' PASSED (6.994s)
+  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (3.055s)
+  Test [44ba6e13] 'Should produce correct output files' PASSED (2.941s)
 
 
-SUCCESS: Executed 2 tests in 15.165s
+SUCCESS: Executed 2 tests in 6.004s
 ```
 
 Sukces! Testy przechodzą, ponieważ pipeline zakończył się pomyślnie, uruchomiono właściwą liczbę procesów i pliki wyjściowe zostały utworzone. Powinieneś też teraz zobaczyć, jak przydatne jest nadawanie testom informacyjnych nazw.
@@ -744,6 +770,8 @@ Test Process sayHello
   Nextflow stdout:
 
   Process `sayHello` declares 1 input but was called with 0 arguments
+
+   -- Check script '/workspaces/training/side-quests/nf-test/.nf-test-1eaad118145a1fd798cb07e7dd75d087.nf' at line: 30 or see '/workspaces/training/side-quests/nf-test/.nf-test/tests/1eaad118145a1fd798cb07e7dd75d087/meta/nextflow.log' file for more details
   Nextflow stderr:
 
 FAILURE: Executed 1 tests in 4.884s (1 failed)
@@ -814,7 +842,7 @@ https://www.nf-test.com
 
 Test Process sayHello
 
-  Test [f91a1bcd] 'Should run without failures and produce correct output' PASSED (1.604s)
+  Test [d6837883] 'Should run without failures and produce correct output' PASSED (2.729s)
   Snapshots:
     1 created [Should run without failures and produce correct output]
 
@@ -822,7 +850,7 @@ Test Process sayHello
 Snapshot Summary:
   1 created
 
-SUCCESS: Executed 1 tests in 1.611s
+SUCCESS: Executed 1 tests in 2.733s
 ```
 
 Sukces! Test przechodzi, ponieważ proces `sayHello` uruchomił się pomyślnie i wyjście zostało utworzone.
@@ -872,10 +900,10 @@ https://www.nf-test.com
 
 Test Process sayHello
 
-  Test [f91a1bcd] 'Should run without failures and produce correct output' PASSED (1.675s)
+  Test [d6837883] 'Should run without failures and produce correct output' PASSED (3.092s)
 
 
-SUCCESS: Executed 1 tests in 1.685s
+SUCCESS: Executed 1 tests in 3.097s
 ```
 
 Sukces! Test przechodzi, ponieważ proces `sayHello` uruchomił się pomyślnie i wyjście pasuje do snapshotu.
@@ -965,10 +993,10 @@ https://www.nf-test.com
 
 Test Process sayHello
 
-  Test [58df4e4b] 'Should run without failures and contain expected greeting' PASSED (7.196s)
+  Test [c1d07f15] 'Should run without failures and contain expected greeting' PASSED (2.459s)
 
 
-SUCCESS: Executed 1 tests in 7.208s
+SUCCESS: Executed 1 tests in 2.461s
 ```
 
 ### 2.4. Testowanie procesu `convertToUpper`
@@ -1012,10 +1040,10 @@ To podobny test do tego dla procesu `sayHello`, ale testuje proces `convertToUpp
 Musimy teraz dostarczyć pojedynczy plik wejściowy do procesu `convertToUpper`, zawierający tekst, który chcemy przekonwertować na wielkie litery. Możemy to zrobić na wiele sposobów:
 
 - Możemy utworzyć dedykowany plik do testów
-- Możemy ponownie użyć istniejącego pliku `data/greetings.csv`
+- Możemy ponownie użyć istniejącego pliku `greetings.csv`
 - Możemy go utworzyć w locie w ramach testu
 
-Na razie ponownie użyjmy istniejącego pliku `data/greetings.csv`, korzystając z przykładu użytego w teście na poziomie pipeline'u. Jak poprzednio, możemy nazwać test tak, żeby lepiej odzwierciedlał to, co testujemy, ale tym razem zostawmy „snapshot" treści zamiast sprawdzać konkretne ciągi znaków (jak zrobiliśmy to w przypadku drugiego procesu).
+Na razie ponownie użyjmy istniejącego pliku `greetings.csv`, korzystając z przykładu użytego w teście na poziomie pipeline'u. Jak poprzednio, możemy nazwać test tak, żeby lepiej odzwierciedlał to, co testujemy, ale tym razem zostawmy „snapshot" treści zamiast sprawdzać konkretne ciągi znaków (jak zrobiliśmy to w przypadku drugiego procesu).
 
 === "Po"
 
@@ -1084,7 +1112,7 @@ https://www.nf-test.com
 
 Test Process convertToUpper
 
-  Test [c59b6044] 'Should run without failures and produce correct output' PASSED (1.755s)
+  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (3.472s)
   Snapshots:
     1 created [Should run without failures and produce correct output]
 
@@ -1092,7 +1120,7 @@ Test Process convertToUpper
 Snapshot Summary:
   1 created
 
-SUCCESS: Executed 1 tests in 1.764s
+SUCCESS: Executed 1 tests in 3.478s
 ```
 
 Zwróć uwagę, że utworzyliśmy plik snapshotu dla procesu `convertToUpper` w `tests/main.converttoupper.nf.test.snap`. Jeśli uruchomimy test ponownie, powinniśmy zobaczyć, że nf-test znowu przechodzi.
@@ -1111,10 +1139,10 @@ https://www.nf-test.com
 
 Test Process convertToUpper
 
-  Test [c59b6044] 'Should run without failures and produce correct output' PASSED (1.798s)
+  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (2.387s)
 
 
-SUCCESS: Executed 1 tests in 1.811s
+SUCCESS: Executed 1 tests in 2.39s
 ```
 
 ### Podsumowanie
@@ -1153,19 +1181,19 @@ https://www.nf-test.com
 
 Test Process convertToUpper
 
-  Test [3d26d9af] 'Should run without failures and produce correct output' PASSED (4.155s)
+  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (3.472s)
 
 Test Workflow main.nf
 
-  Test [f183df37] 'Should run successfully with correct number of processes' PASSED (3.33s)
-  Test [d7e32a32] 'Should produce correct output files' PASSED (3.102s)
+  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (3.156s)
+  Test [44ba6e13] 'Should produce correct output files' PASSED (3.124s)
 
 Test Process sayHello
 
-  Test [58df4e4b] 'Should run without failures and contain expected greeting' PASSED (2.614s)
+  Test [c1d07f15] 'Should run without failures and contain expected greeting' PASSED (5.782s)
 
 
-SUCCESS: Executed 4 tests in 13.481s
+SUCCESS: Executed 4 tests in 15.746s
 ```
 
 Spójrz na to! Uruchomiliśmy 4 testy — 1 dla każdego procesu i 2 dla całego pipeline'u — jednym poleceniem. Wyobraź sobie, jak potężne jest to w przypadku dużej bazy kodu!
@@ -1207,7 +1235,7 @@ Zajrzyj do [dokumentacji nf-test](https://www.nf-test.com/), żeby poznać bardz
 - Dodać bardziej kompleksowe asercje do swoich testów
 - Pisać testy dla przypadków brzegowych i warunków błędów
 - Skonfigurować ciągłą integrację, żeby testy uruchamiały się automatycznie
-- Poznać inne rodzaje testów, takie jak testy workflow'u i modułów
+- Poznać inne rodzaje testów, takie jak testy workflow'u, wydajnościowe i obciążeniowe
 - Zgłębić bardziej zaawansowane techniki walidacji treści
 
 **Pamiętaj:** Testy to żywa dokumentacja tego, jak Twój kod powinien się zachowywać. Im więcej testów piszesz i im bardziej szczegółowe są Twoje asercje, tym większą pewność możesz mieć co do niezawodności swojego pipeline'u.
@@ -1217,4 +1245,3 @@ Zajrzyj do [dokumentacji nf-test](https://www.nf-test.com/), żeby poznać bardz
 ## Co dalej?
 
 Wróć do [menu zadań dodatkowych](../index.md) lub kliknij przycisk w prawym dolnym rogu strony, żeby przejść do następnego tematu na liście.
-%%%

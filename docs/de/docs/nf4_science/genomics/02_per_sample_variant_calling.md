@@ -1,5 +1,3 @@
-I need to update only the sections affected by the diff - specifically, changing `version 25.10.2` to `version 25.10.4` in console output blocks, and updating one link from `../../side_quests/working_with_files.md` to `../../side_quests/working_with_files/index.md`.
-
 # Teil 2: Variantenerkennung pro Probe
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
@@ -404,12 +402,19 @@ nextflow run genomics.nf -profile test
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `genomics.nf` [reverent_sinoussi] DSL2 - revision: 41d43ad7fe
+    Launching `genomics.nf` [reverent_sinoussi] revision: 41d43ad7fe
 
     executor >  local (1)
     [2a/e69536] SAMTOOLS_INDEX (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/genomics/results
+
+      bam_index:
+        - bam/reads_mother.bam.bai
     ```
 
 Du kannst überprüfen, dass die Indexdatei korrekt generiert wurde, indem du im Arbeitsverzeichnis oder im Ergebnisverzeichnis nachsiehst.
@@ -771,13 +776,26 @@ nextflow run genomics.nf -profile test -resume
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `genomics.nf` [grave_volta] DSL2 - revision: 4790abc96a
+    Launching `genomics.nf` [grave_volta] revision: 4790abc96a
 
     executor >  local (1)
     [2a/e69536] SAMTOOLS_INDEX (1)       | 1 of 1, cached: 1 ✔
     [53/e18e98] GATK_HAPLOTYPECALLER (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/genomics/results
+
+      bam_index:
+        - bam/reads_mother.bam.bai
+
+      vcf:
+        - vcf/reads_mother.bam.vcf
+
+      vcf_idx:
+        - vcf/reads_mother.bam.vcf.idx
     ```
 
 Wenn wir uns jetzt die Konsolenausgabe ansehen, sehen wir die beiden aufgelisteten Prozesse.
@@ -893,13 +911,32 @@ Lustige Sache: Dies _könnte funktionieren_, ODER es _könnte fehlschlagen_. Hie
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `genomics.nf` [peaceful_yalow] DSL2 - revision: a256d113ad
+    Launching `genomics.nf` [peaceful_yalow] revision: a256d113ad
 
     executor >  local (6)
     [4f/7071b0] SAMTOOLS_INDEX (3)       | 3 of 3, cached: 1 ✔
     [7a/89bc43] GATK_HAPLOTYPECALLER (2) | 3 of 3, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/genomics/results
+
+      bam_index:
+        - bam/reads_mother.bam.bai
+        - bam/reads_father.bam.bai
+        - bam/reads_son.bam.bai
+
+      vcf:
+        - vcf/reads_mother.bam.vcf
+        - vcf/reads_father.bam.vcf
+        - vcf/reads_son.bam.vcf
+
+      vcf_idx:
+        - vcf/reads_mother.bam.vcf.idx
+        - vcf/reads_father.bam.vcf.idx
+        - vcf/reads_son.bam.vcf.idx
     ```
 
 Wenn dein Workflow-Lauf erfolgreich war, führe ihn erneut aus, bis du einen Fehler wie diesen erhältst:
@@ -907,9 +944,9 @@ Wenn dein Workflow-Lauf erfolgreich war, führe ihn erneut aus, bis du einen Feh
 ??? failure "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `genomics.nf` [loving_pasteur] DSL2 - revision: d2a8e63076
+    Launching `genomics.nf` [loving_pasteur] revision: d2a8e63076
 
     executor >  local (4)
     [01/eea165] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 1 ✔
@@ -1166,13 +1203,32 @@ Diesmal (und jedes Mal) sollte alles korrekt laufen:
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `genomics.nf` [special_goldstine] DSL2 - revision: 4cbbf6ea3e
+    Launching `genomics.nf` [special_goldstine] revision: 4cbbf6ea3e
 
     executor >  local (6)
     [d6/10c2c4] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
     [88/1783aa] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/genomics/results
+
+      indexed_bam:
+        - [bam/reads_mother.bam, bam/reads_mother.bam.bai]
+        - [bam/reads_father.bam, bam/reads_father.bam.bai]
+        - [bam/reads_son.bam, bam/reads_son.bam.bai]
+
+      vcf:
+        - vcf/reads_mother.bam.vcf
+        - vcf/reads_father.bam.vcf
+        - vcf/reads_son.bam.vcf
+
+      vcf_idx:
+        - vcf/reads_mother.bam.vcf.idx
+        - vcf/reads_father.bam.vcf.idx
+        - vcf/reads_son.bam.vcf.idx
     ```
 
 Das Ergebnisverzeichnis enthält jetzt sowohl BAM- als auch BAI-Dateien für jede Probe (aus dem Tupel) zusammen mit den VCF-Ausgaben:
@@ -1329,13 +1385,32 @@ nextflow run genomics.nf -profile test
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `genomics.nf` [sick_albattani] DSL2 - revision: 46d84642f6
+    Launching `genomics.nf` [sick_albattani] revision: 46d84642f6
 
     executor >  local (6)
     [18/23b4bb] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
     [12/f727bb] GATK_HAPLOTYPECALLER (3) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/genomics/results
+
+      indexed_bam:
+        - [bam/reads_mother.bam, bam/reads_mother.bam.bai]
+        - [bam/reads_father.bam, bam/reads_father.bam.bai]
+        - [bam/reads_son.bam, bam/reads_son.bam.bai]
+
+      vcf:
+        - vcf/reads_mother.bam.vcf
+        - vcf/reads_father.bam.vcf
+        - vcf/reads_son.bam.vcf
+
+      vcf_idx:
+        - vcf/reads_mother.bam.vcf.idx
+        - vcf/reads_father.bam.vcf.idx
+        - vcf/reads_son.bam.vcf.idx
     ```
 
 Dies sollte dasselbe Ergebnis wie zuvor liefern. Unser einfacher Variantenerkennungs-Workflow hat jetzt alle grundlegenden Funktionen, die wir wollten.

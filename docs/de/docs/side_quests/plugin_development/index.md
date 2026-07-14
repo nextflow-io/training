@@ -27,6 +27,12 @@ Vorkenntnisse in Java oder Groovy sind nicht erforderlich.
 
 **Arbeitsverzeichnis:** `side-quests/plugin_development`
 
+#### Trainingsumgebung öffnen
+
+Falls du das noch nicht getan hast, öffne die Trainingsumgebung wie in der [Umgebung einrichten](../../envsetup/index.md) beschrieben.
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+
 ## Lernziele
 
 Nach Abschluss dieses Trainings kannst du:

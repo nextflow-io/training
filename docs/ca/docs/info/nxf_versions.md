@@ -13,11 +13,12 @@ hide:
 A partir de la versió 3.0 del portal de formació, tots els nostres cursos de formació són compatibles amb la versió 25.10.2 de Nextflow o posterior, tret que s'especifiqui el contrari a la pàgina d'índex del curs.
 (Això no inclou materials obsolets o arxivats que poden no incloure un avís de versió).
 
-La versió de Nextflow carregada per defecte al nostre entorn de formació és **Nextflow 25.10.4**.
+La versió de Nextflow carregada per defecte al nostre entorn de formació és **Nextflow 26.04.4**.
 
 Com que els cursos ara utilitzen entrades tipades a nivell de workflow així com directives de sortida a nivell de workflow, requereixen l'ús de l'analitzador de sintaxi V2, **tret que s'especifiqui el contrari**.
+L'analitzador V2 és el valor per defecte a partir de Nextflow 26.04, de manera que amb la versió que carreguem no cal habilitar-lo manualment.
 Si teniu previst utilitzar l'entorn que proporcionem a través de [Github Codespaces](../envsetup/01_setup.md) o [devcontainers locals](../envsetup/03_devcontainer.md), no cal que feu res tret que s'indiqui específicament a les instruccions del curs.
-No obstant això, si teniu previst treballar amb les formacions al vostre propi entorn ([Instal·lació manual](../envsetup/02_local.md)), haureu d'assegurar-vos d'utilitzar Nextflow versió 25.10.2 o posterior amb l'analitzador de sintaxi v2 habilitat.
+No obstant això, si teniu previst treballar amb les formacions al vostre propi entorn ([Instal·lació manual](../envsetup/02_local.md)), haureu d'assegurar-vos d'utilitzar Nextflow versió 25.10.2 o posterior, i d'habilitar l'analitzador de sintaxi v2 si feu servir una versió anterior a la 26.04.
 
 ## Versions anteriors dels materials de formació
 
@@ -40,7 +41,7 @@ Tot el codi modern de Nextflow utilitza DSL2.
 L'analitzador v1 és l'original, més permissiu.
 L'analitzador v2 és més estricte i habilita noves funcionalitats del llenguatge com el tipat estàtic (entrades i sortides tipades) i directives de sortida a nivell de workflow.
 L'analitzador v2 també proporciona millors missatges d'error i detecta més errors en temps d'anàlisi en lloc de temps d'execució.
-L'analitzador v2 es convertirà en el predeterminat a Nextflow 26.04.
+L'analitzador v2 és el predeterminat a partir de Nextflow 26.04.
 
 En resum: DSL2 és el llenguatge que escriviu; la versió de l'analitzador de sintaxi determina com d'estrictament s'interpreta aquest llenguatge i quines funcionalitats avançades estan disponibles.
 
@@ -52,21 +53,22 @@ Per a més informació sobre com actualitzar la vostra versió de Nextflow, cons
 
 ### Habilitar l'analitzador de sintaxi v2
 
+A partir de Nextflow 26.04, l'analitzador v2 és el predeterminat, de manera que els passos següents només són necessaris en versions anteriors a la 26.04.
+
 Per **habilitar** l'analitzador de sintaxi v2 per a la vostra sessió actual, executeu la següent comanda al vostre terminal:
 
 ```bash
 export NXF_SYNTAX_PARSER=v2
 ```
 
-Per fer-ho permanent (pendent que v2 es converteixi en el predeterminat a Nextflow 26.04), afegiu la comanda export al vostre perfil de shell (`~/.bashrc`, `~/.zshrc`, etc.):
+Per fer-ho permanent, afegiu la comanda export al vostre perfil de shell (`~/.bashrc`, `~/.zshrc`, etc.):
 
 ```bash
 echo 'export NXF_SYNTAX_PARSER=v2' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-Tingueu en compte que la variable d'entorn `NXF_SYNTAX_PARSER=v2` és un requisit temporal.
-A partir de Nextflow 26.04, l'analitzador v2 es convertirà en el predeterminat i aquesta configuració ja no serà necessària.
+Tingueu en compte que en versions de Nextflow anteriors a la 26.04, la variable d'entorn `NXF_SYNTAX_PARSER=v2` és necessària per accedir a les funcionalitats v2 utilitzades en aquests cursos.
 
 ### Deshabilitar l'analitzador de sintaxi v2
 

@@ -13,11 +13,12 @@ hide:
 Od wersji 3.0 portalu szkoleniowego wszystkie nasze kursy są kompatybilne z Nextflow w wersji 25.10.2 lub nowszej, chyba że na stronie indeksu kursu określono inaczej.
 (Nie dotyczy to przestarzałych ani zarchiwizowanych materiałów, które mogą nie zawierać informacji o wersji).
 
-Wersja Nextflow aktualnie ładowana domyślnie w naszym środowisku szkoleniowym to **Nextflow 25.10.4**.
+Wersja Nextflow aktualnie ładowana domyślnie w naszym środowisku szkoleniowym to **Nextflow 26.04.4**.
 
 Ponieważ kursy wykorzystują teraz typowane wejścia na poziomie workflow'a, a także dyrektywy wyjściowe na poziomie workflow'a, wymagają użycia parsera składni V2, **chyba że w instrukcjach kursu wyraźnie zaznaczono inaczej**.
+Parser V2 jest domyślny od Nextflow 26.04 wzwyż, więc w przypadku wersji, którą ładujemy, nie trzeba go włączać ręcznie.
 Jeśli planujesz korzystać ze środowiska, które udostępniamy przez [Github Codespaces](../envsetup/01_setup.md) lub [lokalne devcontainery](../envsetup/03_devcontainer.md), nie musisz nic robić, chyba że w instrukcjach kursu wyraźnie zaznaczono inaczej.
-Jeśli jednak planujesz przejść przez szkolenia we własnym środowisku ([Instalacja ręczna](../envsetup/02_local.md)), musisz upewnić się, że używasz Nextflow w wersji 25.10.2 lub nowszej z włączonym parserem składni v2.
+Jeśli jednak planujesz przejść przez szkolenia we własnym środowisku ([Instalacja ręczna](../envsetup/02_local.md)), musisz upewnić się, że używasz Nextflow w wersji 25.10.2 lub nowszej, a jeśli korzystasz z wersji wcześniejszej niż 26.04 — że masz włączony parser składni v2.
 
 ## Starsze wersje materiałów szkoleniowych
 
@@ -40,7 +41,7 @@ Cały nowoczesny kod Nextflow używa DSL2.
 Parser v1 to oryginalny, bardziej permisywny parser.
 Parser v2 jest bardziej restrykcyjny i umożliwia nowe funkcje językowe, takie jak typowanie statyczne (typowane wejścia i wyjścia) oraz dyrektywy wyjściowe na poziomie workflow'a.
 Parser v2 zapewnia również lepsze komunikaty o błędach i wychwytuje więcej błędów na etapie parsowania, a nie w czasie wykonywania.
-Parser v2 stanie się domyślny w Nextflow 26.04.
+Parser v2 jest domyślny począwszy od Nextflow 26.04.
 
 Podsumowując: DSL2 to język, w którym piszesz; wersja parsera składni określa, jak restrykcyjnie ten język jest interpretowany i jakie zaawansowane funkcje są dostępne.
 
@@ -52,21 +53,22 @@ Więcej informacji o tym, jak zaktualizować swoją wersję Nextflow, znajdziesz
 
 ### Włączanie parsera składni v2
 
+Począwszy od Nextflow 26.04 parser v2 jest domyślny, więc poniższe kroki są potrzebne tylko w wersjach wcześniejszych niż 26.04.
+
 Aby **włączyć** parser składni v2 dla bieżącej sesji, uruchom następujące polecenie w terminalu:
 
 ```bash
 export NXF_SYNTAX_PARSER=v2
 ```
 
-Aby uczynić to trwałym (do czasu, gdy v2 stanie się domyślny w Nextflow 26.04), dodaj polecenie export do profilu powłoki (`~/.bashrc`, `~/.zshrc` itp.):
+Aby uczynić to trwałym, dodaj polecenie export do profilu powłoki (`~/.bashrc`, `~/.zshrc` itp.):
 
 ```bash
 echo 'export NXF_SYNTAX_PARSER=v2' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-Zauważ, że zmienna środowiskowa `NXF_SYNTAX_PARSER=v2` jest tymczasowym wymogiem.
-Od Nextflow 26.04 parser v2 stanie się domyślny i to ustawienie nie będzie już potrzebne.
+Zauważ, że w wersjach Nextflow wcześniejszych niż 26.04 zmienna środowiskowa `NXF_SYNTAX_PARSER=v2` jest wymagana, aby uzyskać dostęp do funkcji v2 używanych w tych kursach.
 
 ### Wyłączanie parsera składni v2
 

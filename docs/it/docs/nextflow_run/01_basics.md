@@ -91,12 +91,18 @@ nextflow run 1-hello.nf --input 'Hello World!'
 ??? success "Output del comando"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+    Launching `1-hello.nf` [goofy_torvalds] revision: c33d41f479
 
     executor >  local (1)
     [a3/7be2fa] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output: 1-hello/output.txt
     ```
 
 Se l'output della tua console appare più o meno così, congratulazioni, hai appena eseguito il tuo primo workflow Nextflow!
@@ -115,13 +121,14 @@ Se l'output della tua console appare più o meno così, congratulazioni, hai app
     Questo è stato menzionato all'inizio del corso, ma forse te lo sei perso.
     Controlla il materiale di aiuto [Versioni di Nextflow](../info/nxf_versions.md).
 
-    In breve, se stai usando Nextflow `25.10` allora devi abilitare il parser del linguaggio v2:
+    Il parser v2 è quello predefinito a partire da Nextflow 26.04, quindi questo problema si verificherà solo con versioni precedenti.
+    Su una versione precedente alla 26.04 devi abilitare il parser del linguaggio v2:
 
     ```bash
     export NXF_SYNTAX_PARSER=v2
     ```
 
-L'output più importante qui è l'ultima riga, che è evidenziata nell'output sopra:
+La parte più importante qui è la riga evidenziata:
 
 ```console
 [a3/7be2fa] sayHello | 1 of 1 ✔
@@ -168,12 +175,18 @@ nextflow run 1-hello.nf --input 'Hello World!' -output-dir hello_results
 ??? success "Output del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78
+    Launching `1-hello.nf` [hungry_celsius] revision: f048d6ea78
 
     executor >  local (1)
-    [a3/1e1535] sayHello [100%] 1 of 1 ✔
+    [a3/1e1535] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/hello_results
+
+      first_output: 1-hello/output.txt
     ```
 
 Dovresti vedere che i tuoi output sono ora pubblicati in una directory chiamata `hello_results` invece di `results`:
@@ -206,7 +219,7 @@ Potrebbe sembrare confuso, quindi vediamo come appare in pratica.
 Tornando all'output della console per il workflow che abbiamo eseguito prima, avevamo questa riga:
 
 ```console
-[a3/1e1535] sayHello [100%] 1 of 1 ✔
+[a3/1e1535] sayHello | 1 of 1 ✔
 ```
 
 Vedi come la riga inizia con `[a3/1e1535]`?
@@ -623,11 +636,17 @@ nextflow run 1-hello.nf --input 'Hello World!' -resume
 ??? success "Output del comando"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479
+    Launching `1-hello.nf` [tiny_noyce] revision: c33d41f479
 
     [a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output: 1-hello/output.txt
     ```
 
 L'output della console dovrebbe sembrare familiare, ma c'è una cosa che è un po' diversa rispetto a prima.
@@ -767,7 +786,7 @@ Nella riga di output della console `[a3/7be2fa] SAYHELLO | 1 of 1 ✔`, cosa rap
 - [x] Il percorso troncato alla directory di lavoro dell'attività
 - [ ] Il checksum del file di output
 
-Approfondisci: [2.4. Trova l'output originale e i log nella directory `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
+Approfondisci: [2.3. Trova l'output originale e i log nella directory `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -777,7 +796,7 @@ Qual è lo scopo del file `.command.sh` in una directory di attività?
 - [ ] Contiene messaggi di errore dalle attività fallite
 - [ ] Elenca i file di input messi in staging per l'attività
 
-Approfondisci: [2.4. Trova l'output originale e i log nella directory `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
+Approfondisci: [2.3. Trova l'output originale e i log nella directory `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -787,14 +806,14 @@ Cosa succede ai risultati pubblicati quando riesegui un workflow senza `-resume`
 - [ ] Nextflow previene la sovrascrittura e fallisce
 - [ ] Vengono automaticamente backed up
 
-Approfondisci: [2.5. Riesegui il workflow con saluti diversi](#24-re-run-the-workflow-with-different-greetings)
+Approfondisci: [2.4. Riesegui il workflow con saluti diversi](#24-re-run-the-workflow-with-different-greetings)
 </quiz>
 
 <quiz>
 Cosa indica questo output della console?
 
 ```console
-[skipped  ] process > sayHello (1) [100%] 1 of 1, cached: 1 ✔
+[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
 ```
 
 - [ ] L'attività è fallita ed è stata saltata

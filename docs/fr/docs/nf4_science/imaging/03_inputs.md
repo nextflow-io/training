@@ -9,26 +9,20 @@ Nous allons maintenant apprendre deux meilleures approches pour gérer les entr�
 
 ### 1.1. Le problème des longues lignes de commande
 
-Rappelons notre commande de la Partie 2 :
+Dans la Partie 2, nous avons déjà utilisé un fichier de paramètres pour garder la commande courte et conserver les valeurs saisies (comme les paramètres entiers de prétraitement) intactes :
 
 ```bash
-nextflow run ./molkart \
-  --input 'data/samplesheet.csv' \
-  --mindagap_tilesize 90 \
-  --mindagap_boxsize 7 \
-  --mindagap_loopnum 100 \
-  --clahe_pyramid_tile 368 \
-  --segmentation_method "cellpose" \
-  --outdir results
+nextflow run ./molkart -params-file params.yaml --segmentation_method "mesmer,cellpose,stardist"
 ```
 
-Cela fonctionne, mais c'est difficile à reproduire, partager ou modifier.
+Passer de nombreux paramètres individuellement sur la ligne de commande est difficile à reproduire, partager ou modifier.
 Que faire si vous devez exécuter la même analyse le mois prochain ?
-Que faire si un collaborateur souhaite utiliser exactement vos paramètres ?
+Que faire si un·e collaborateur·trice souhaite utiliser exactement vos paramètres ?
+Un fichier de paramètres résout ce problème.
 
-### 1.2. Solution : Utiliser un fichier de paramètres
+### 1.2. Le fichier de paramètres
 
-Créez un fichier appelé `params.yaml` :
+Voici le fichier `params.yaml` que nous avons utilisé :
 
 ```yaml title="params.yaml"
 input: "data/samplesheet.csv"
@@ -40,13 +34,16 @@ clahe_pyramid_tile: 368
 segmentation_method: "cellpose"
 ```
 
-Maintenant votre commande devient :
+Chaque paramètre est écrit sous la forme d'une paire `clé: valeur`.
+Écrire les entiers sans guillemets (par exemple `mindagap_tilesize: 90`) préserve leur type entier, ce que la validation des paramètres du pipeline requiert.
+
+Votre commande devient :
 
 ```bash
 nextflow run ./molkart -params-file params.yaml -resume
 ```
 
-C'est tout ! Le fichier de paramètres documente votre configuration exacte et facilite la réexécution ou le partage.
+Le fichier de paramètres documente votre configuration exacte et facilite la réexécution ou le partage.
 
 ### 1.3. Remplacement des paramètres
 
@@ -60,7 +57,7 @@ La ligne ci-dessus change le `segmentation_method` en `stardist` et le nom du `-
 De plus, vous pouvez voir que le flag `-resume` nous a permis de réutiliser les résultats de prétraitement de l'exécution précédente, ce qui économise du temps.
 Vous pouvez utiliser ce modèle pour tester rapidement différentes variations du pipeline.
 
-### Point clé
+### À retenir
 
 Les fichiers de paramètres rendent vos analyses reproductibles et faciles à partager.
 Utilisez-les pour tout travail d'analyse réel.
@@ -125,7 +122,7 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! warning "Avertissement"
+!!! Warning "Avertissement"
 
     Notez que les chemins dans la feuille d'échantillons sont relatifs à l'endroit où vous **exécutez** Nextflow, pas à l'endroit où se trouve la feuille d'échantillons.
 

@@ -91,12 +91,18 @@ nextflow run 1-hello.nf --input 'Hello World!'
 ??? success "Sortida de la comanda"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+    Launching `1-hello.nf` [goofy_torvalds] revision: c33d41f479
 
     executor >  local (1)
     [a3/7be2fa] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output: 1-hello/output.txt
     ```
 
 Si la sortida de la vostra consola s'assembla a això, felicitats, acabeu d'executar el vostre primer workflow de Nextflow!
@@ -115,13 +121,14 @@ Si la sortida de la vostra consola s'assembla a això, felicitats, acabeu d'exec
     Això es va esmentar al començament del curs, però potser us ho heu perdut.
     Consulteu el material d'ajuda sobre [versions de Nextflow](../info/nxf_versions.md).
 
-    En resum, si utilitzeu Nextflow `25.10` necessiteu habilitar l'analitzador de llenguatge v2:
+    L'analitzador v2 és el predeterminat a partir de Nextflow 26.04, de manera que només veureu això en versions anteriors.
+    En una versió anterior a la 26.04 necessiteu habilitar l'analitzador de llenguatge v2:
 
     ```bash
     export NXF_SYNTAX_PARSER=v2
     ```
 
-La sortida més important aquí és l'última línia, que està ressaltada a la sortida anterior:
+La part més important aquí és la línia ressaltada:
 
 ```console
 [a3/7be2fa] sayHello | 1 of 1 ✔
@@ -168,12 +175,18 @@ nextflow run 1-hello.nf --input 'Hello World!' -output-dir hello_results
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78
+    Launching `1-hello.nf` [hungry_celsius] revision: f048d6ea78
 
     executor >  local (1)
-    [a3/1e1535] sayHello [100%] 1 of 1 ✔
+    [a3/1e1535] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/hello_results
+
+      first_output: 1-hello/output.txt
     ```
 
 Hauríeu de veure que les vostres sortides ara es publiquen a un directori anomenat `hello_results` en lloc de `results`:
@@ -206,7 +219,7 @@ Això pot sonar confús, així que vegem com es veu a la pràctica.
 Tornant a la sortida de consola del workflow que hem executat abans, teníem aquesta línia:
 
 ```console
-[a3/1e1535] sayHello [100%] 1 of 1 ✔
+[a3/1e1535] sayHello | 1 of 1 ✔
 ```
 
 Veieu com la línia comença amb `[a3/1e1535]`?
@@ -261,7 +274,7 @@ Vegem què hi ha dins.
 
 Hi ha dos conjunts de directoris a `work/`, de les dues execucions diferents del pipeline que hem fet.
 Cada execució de tasca obté el seu propi directori aïllat per treballar.
-En aquest cas el pipeline ha fet el mateix les dues vegades, així que el contingut de cada directori de tasca és idèntic
+En aquest cas el pipeline ha fet el mateix les dues vegades, així que el contingut de cada directori de tasca és idèntic.
 
 Hauríeu de reconèixer immediatament el fitxer `output.txt`, que de fet és la sortida original del procés `sayHello` que es va publicar al directori `results`.
 Si l'obriu, trobareu la salutació `Hello World!` de nou.
@@ -623,11 +636,17 @@ nextflow run 1-hello.nf --input 'Hello World!' -resume
 ??? success "Sortida de la comanda"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479
+    Launching `1-hello.nf` [tiny_noyce] revision: c33d41f479
 
     [a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output: 1-hello/output.txt
     ```
 
 La sortida de consola hauria de semblar familiar, però hi ha una cosa que és una mica diferent en comparació amb abans.
@@ -794,7 +813,7 @@ Aprèn més: [2.4. Tornar a executar el workflow amb diferents salutacions](#24-
 Què indica aquesta sortida de consola?
 
 ```console
-[skipped  ] process > sayHello (1) [100%] 1 of 1, cached: 1 ✔
+[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
 ```
 
 - [ ] La tasca ha fallat i s'ha omès

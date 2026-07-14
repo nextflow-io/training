@@ -91,12 +91,18 @@ nextflow run 1-hello.nf --input 'Hello World!'
 ??? success "Salida del comando"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+    Launching `1-hello.nf` [goofy_torvalds] revision: c33d41f479
 
     executor >  local (1)
     [a3/7be2fa] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output: 1-hello/output.txt
     ```
 
 Si su salida de consola se ve algo así, ¡felicidades, acaba de ejecutar su primer workflow de Nextflow!
@@ -115,19 +121,20 @@ Si su salida de consola se ve algo así, ¡felicidades, acaba de ejecutar su pri
     Esto se mencionó al inicio del curso, pero tal vez lo pasó por alto.
     Consulte el material de ayuda [Versiones de Nextflow](../info/nxf_versions.md).
 
-    En resumen, si está usando Nextflow `25.10` entonces necesita habilitar el analizador de lenguaje v2:
+    El analizador v2 es el predeterminado a partir de Nextflow 26.04 en adelante, por lo que solo verá esto en versiones anteriores.
+    En una versión anterior a 26.04 necesita habilitar el analizador de lenguaje v2:
 
     ```bash
     export NXF_SYNTAX_PARSER=v2
     ```
 
-La salida más importante aquí es la última línea, que está resaltada en la salida anterior:
+La parte más importante aquí es la línea resaltada:
 
 ```console
 [a3/7be2fa] sayHello | 1 of 1 ✔
 ```
 
-Esto nos dice que el process `sayHello` fue ejecutado exitosamente una vez (`1 of 1 ✔`).
+Esto nos dice que el proceso `sayHello` fue ejecutado exitosamente una vez (`1 of 1 ✔`).
 
 Genial, pero puede estar preguntándose: ¿dónde está la salida?
 
@@ -168,12 +175,18 @@ nextflow run 1-hello.nf --input 'Hello World!' -output-dir hello_results
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78
+    Launching `1-hello.nf` [hungry_celsius] revision: f048d6ea78
 
     executor >  local (1)
-    [a3/1e1535] sayHello [100%] 1 of 1 ✔
+    [a3/1e1535] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/hello_results
+
+      first_output: 1-hello/output.txt
     ```
 
 Debería ver que sus salidas ahora se publican en un directorio llamado `hello_results` en lugar de `results`:
@@ -196,7 +209,7 @@ Ahora vamos a echar un vistazo bajo el capó para ver dónde ejecutó Nextflow r
 
 ### 2.4. Encontrar la salida original y los registros en el directorio `work/`
 
-Cuando ejecuta un workflow, Nextflow crea un 'directorio de tarea' distinto para cada invocación individual de cada process en el workflow (=cada paso en el pipeline).
+Cuando ejecuta un workflow, Nextflow crea un 'directorio de tarea' distinto para cada invocación individual de cada proceso en el workflow (=cada paso en el pipeline).
 Para cada uno, preparará las entradas necesarias, ejecutará la(s) instrucción(es) relevante(s) y escribirá las salidas y archivos de registro dentro de ese único directorio, que se nombra automáticamente usando un hash para hacerlo único.
 
 Todos estos directorios de tareas vivirán bajo un directorio llamado `work` dentro de su directorio actual (donde está ejecutando el comando).
@@ -206,11 +219,11 @@ Eso puede sonar confuso, así que veamos cómo se ve en la práctica.
 Volviendo a la salida de consola del workflow que ejecutamos antes, teníamos esta línea:
 
 ```console
-[a3/1e1535] sayHello [100%] 1 of 1 ✔
+[a3/1e1535] sayHello | 1 of 1 ✔
 ```
 
 ¿Ve cómo la línea comienza con `[a3/1e1535]`?
-Esa es una forma truncada de la ruta del directorio de tarea para esa llamada de process, y le dice dónde encontrar la salida de la llamada del process `sayHello` dentro de la ruta del directorio `work/`.
+Esa es una forma truncada de la ruta del directorio de tarea para esa llamada de proceso, y le dice dónde encontrar la salida de la llamada del proceso `sayHello` dentro de la ruta del directorio `work/`.
 
 Puede encontrar la ruta completa escribiendo el siguiente comando (reemplazando `a3/1e1535` con lo que ve en su propia terminal) y presionando la tecla tab para autocompletar la ruta o agregando un asterisco:
 
@@ -261,9 +274,9 @@ Veamos qué hay ahí.
 
 Hay dos conjuntos de directorios en `work/`, de las dos ejecuciones diferentes del pipeline que hemos hecho.
 Cada ejecución de tarea obtiene su propio directorio aislado para trabajar.
-En este caso el pipeline hizo lo mismo ambas veces, así que los contenidos de cada directorio de tarea son idénticos
+En este caso el pipeline hizo lo mismo ambas veces, así que los contenidos de cada directorio de tarea son idénticos.
 
-Debería reconocer inmediatamente el archivo `output.txt`, que es de hecho la salida original del process `sayHello` que se publicó en el directorio `results`.
+Debería reconocer inmediatamente el archivo `output.txt`, que es de hecho la salida original del proceso `sayHello` que se publicó en el directorio `results`.
 Si lo abre, encontrará el saludo `Hello World!` nuevamente.
 
 ```console title="work/a3/1e153543b0a7f9d2c4735ddb4ab231/output.txt"
@@ -275,11 +288,11 @@ Hello World!
 Estos son los archivos auxiliares y de registro que Nextflow escribió como parte de la ejecución de la tarea:
 
 - **`.command.begin`**: Archivo centinela creado tan pronto como se lanza la tarea.
-- **`.command.err`**: Mensajes de error (`stderr`) emitidos por la llamada del process
-- **`.command.log`**: Salida de registro completa emitida por la llamada del process
-- **`.command.out`**: Salida regular (`stdout`) por la llamada del process
-- **`.command.run`**: Script completo ejecutado por Nextflow para ejecutar la llamada del process
-- **`.command.sh`**: El comando que realmente ejecutó la llamada del process
+- **`.command.err`**: Mensajes de error (`stderr`) emitidos por la llamada del proceso
+- **`.command.log`**: Salida de registro completa emitida por la llamada del proceso
+- **`.command.out`**: Salida regular (`stdout`) por la llamada del proceso
+- **`.command.run`**: Script completo ejecutado por Nextflow para ejecutar la llamada del proceso
+- **`.command.sh`**: El comando que realmente ejecutó la llamada del proceso
 - **`.exitcode`**: El código de salida resultante del comando
 
 El archivo `.command.sh` es especialmente útil porque le muestra el comando principal que Nextflow ejecutó, sin incluir toda la contabilidad y configuración de tarea/entorno.
@@ -623,11 +636,17 @@ nextflow run 1-hello.nf --input 'Hello World!' -resume
 ??? success "Salida del comando"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479
+    Launching `1-hello.nf` [tiny_noyce] revision: c33d41f479
 
     [a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output: 1-hello/output.txt
     ```
 
 La salida de consola debería verse familiar, pero hay una cosa que es un poco diferente comparado con antes.
@@ -767,7 +786,7 @@ En la línea de salida de consola `[a3/7be2fa] SAYHELLO | 1 of 1 ✔`, ¿qué re
 - [x] La ruta truncada al directorio de trabajo de la tarea
 - [ ] La suma de verificación del archivo de salida
 
-Más información: [2.4. Encontrar la salida original y los registros en el directorio `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
+Más información: [2.3. Encontrar la salida original y los registros en el directorio `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -777,7 +796,7 @@ Más información: [2.4. Encontrar la salida original y los registros en el dire
 - [ ] Contiene mensajes de error de tareas fallidas
 - [ ] Lista los archivos de entrada preparados para la tarea
 
-Más información: [2.4. Encontrar la salida original y los registros en el directorio `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
+Más información: [2.3. Encontrar la salida original y los registros en el directorio `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -787,14 +806,14 @@ Más información: [2.4. Encontrar la salida original y los registros en el dire
 - [ ] Nextflow previene la sobrescritura y falla
 - [ ] Son respaldados automáticamente
 
-Más información: [2.5. Re-ejecutar el workflow con diferentes saludos](#24-re-run-the-workflow-with-different-greetings)
+Más información: [2.4. Re-ejecutar el workflow con diferentes saludos](#24-re-run-the-workflow-with-different-greetings)
 </quiz>
 
 <quiz>
 ¿Qué indica esta salida de consola?
 
 ```console
-[skipped  ] process > sayHello (1) [100%] 1 of 1, cached: 1 ✔
+[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
 ```
 
 - [ ] La tarea falló y fue omitida

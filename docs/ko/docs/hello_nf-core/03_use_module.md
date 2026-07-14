@@ -25,14 +25,14 @@ nf-core로 작업할 때 얻을 수 있는 큰 이점 중 하나는 [nf-core/mod
     다음 명령을 실행하여 성공적으로 실행되는지 테스트할 수 있습니다:
 
     ```bash
-    nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+    nextflow run . --outdir core-hello-results -profile test,docker
     ```
 
 ---
 
 ## 1. 적합한 nf-core 모듈 찾기 및 설치하기
 
-먼저, 기존 nf-core 모듈을 찾고 파이프라인에 설치하는 방법을 배워봅시다.
+먼저, 기존 nf-core 모듈을 찾고 파이프라인에 설치하는 방법을 살펴봅니다.
 
 여러 인사말 파일을 하나로 연결하기 위해 Unix `cat` 명령을 사용하는 `collectGreetings` 프로세스를 교체하는 것을 목표로 합니다.
 파일 연결은 매우 일반적인 작업이므로, 이미 nf-core에 그 목적을 위해 설계된 모듈이 있을 것이라고 추론할 수 있습니다.
@@ -50,7 +50,7 @@ nf-core 프로젝트는 [https://nf-co.re/modules](https://nf-co.re/modules)에�
 보시다시피, 많은 결과가 있으며, 그중 많은 것들이 매우 특정한 유형의 파일을 연결하도록 설계된 모듈입니다.
 그중에서 범용인 `find_concatenate`라는 모듈을 볼 수 있을 것입니다.
 
-!!! note "모듈 명명 규칙"
+!!! info "모듈 명명 규칙"
 
     밑줄(`_`)은 모듈 이름에서 슬래시(`/`) 문자의 대체로 사용됩니다.
 
@@ -120,9 +120,11 @@ nf-core modules info find/concatenate
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 3.5.2 - https://nf-co.re
+        nf-core/tools version 4.0.2 - https://nf-co.re
 
 
+    INFO     Reinstalling modules found in 'modules.json' but missing from
+             directory:
     ╭─ Module: find/concatenate  ──────────────────────────────────────────────────╮
     │ 🌐 Repository: https://github.com/nf-core/modules.git                        │
     │ 🔧 Tools: find, pigz                                                         │
@@ -186,6 +188,8 @@ nf-core modules info find/concatenate
 
 이것은 웹사이트에서 찾을 수 있는 것과 정확히 동일한 정보입니다.
 
+`INFO Reinstalling modules found in 'modules.json' but missing from directory` 메시지는 무시해도 됩니다. 이 메시지는 nf-core/tools 4.0.2에서 실제로 설치 여부와 관계없이 `info`로 조회하는 모든 모듈에 대해 출력되며, `info` 명령은 파일을 생성하지 않으므로 아무런 영향이 없습니다.
+
 ### 1.4. find/concatenate 모듈 설치하기
 
 이제 원하는 모듈을 찾았으므로, 파이프라인의 소스 코드에 추가해야 합니다.
@@ -193,14 +197,12 @@ nf-core modules info find/concatenate
 좋은 소식은 nf-core 프로젝트에 이 부분을 쉽게 만드는 도구가 포함되어 있다는 것입니다.
 특히, `nf-core modules install` 명령을 사용하면 코드를 검색하고 한 단계로 프로젝트에서 사용할 수 있도록 자동화할 수 있습니다.
 
-파이프라인 디렉토리로 이동하여 설치 명령을 실행하세요:
+현재 작업 디렉토리가 `core-hello` 파이프라인 프로젝트의 루트인지 확인한 후 설치 명령을 실행하세요:
 
 ```bash
 cd core-hello
 nf-core modules install find/concatenate
 ```
-
-도구가 모듈 설치를 진행합니다.
 
 ??? success "명령 출력"
 
@@ -212,26 +214,20 @@ nf-core modules install find/concatenate
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 3.5.2 - https://nf-co.re
+    nf-core/tools version 4.0.2 - https://nf-co.re
 
 
     INFO     Installing 'find/concatenate'
-    INFO     Use the following statement to include this module:
-
-     include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
+    NotADirectoryError: [Errno 20] Not a directory:
+    'modules/local/cowpy.nf/meta.yml'
     ```
 
-명령은 자동으로:
+명령은 모듈 파일을 `modules/nf-core/find/concatenate/`에 다운로드하고, 설치된 모듈을 추적하기 위해 `modules.json`을 업데이트합니다.
+마지막에 나타나는 `NotADirectoryError`는 무시해도 됩니다. 이 오류는 nf-core/tools 4.0.2가 모든 로컬 모듈이 각자의 디렉토리(`modules/local/<name>/main.nf`)에 있을 것으로 예상하는 반면, `core-hello`는 이 단계에서 아직 단일 파일 형태의 로컬 모듈을 사용하기 때문에 발생합니다.
+`find/concatenate` 모듈은 올바르게 설치되었으며, `modules.json`도 정상적으로 업데이트됩니다.
+파트 4에서 `cowpy`를 디렉토리 구조로 변환하겠습니다.
 
-- 모듈 파일을 `modules/nf-core/find/concatenate/`에 다운로드합니다
-- 설치된 모듈을 추적하기 위해 `modules.json`을 업데이트합니다
-- 워크플로우에서 사용할 올바른 `include` 문을 제공합니다
-
-!!! tip "팁"
-
-    모듈 설치 명령을 실행하기 전에 현재 작업 디렉토리가 파이프라인 프로젝트의 루트인지 항상 확인하세요.
-
-모듈이 올바르게 설치되었는지 확인합니다:
+모듈 파일이 올바르게 설치되었는지 확인합니다:
 
 ```bash
 tree -L 4 modules
@@ -257,7 +253,61 @@ tree -L 4 modules
     5 directories, 7 files
     ```
 
-또한 nf-core 유틸리티에 로컬에 설치된 모듈을 나열하도록 요청하여 설치를 확인할 수 있습니다:
+`modules.json`을 확인하여 설치를 검증할 수도 있습니다. 이 파일에는 이제 nf-core/modules 저장소 아래에 `find/concatenate`가 등록되어 있습니다.
+
+??? abstract "파일 내용"
+
+    ```json title="modules.json"
+    {
+        "name": "core/hello",
+        "homePage": "https://github.com/core/hello",
+        "repos": {
+            "https://github.com/nf-core/modules.git": {
+                "modules": {
+                    "nf-core": {
+                        "find/concatenate": {
+                            "branch": "master",
+                            "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                            "installed_by": [
+                                "modules"
+                            ]
+                        }
+                    }
+                },
+                "subworkflows": {
+                    "nf-core": {
+                        "utils_nextflow_pipeline": {
+                            "branch": "master",
+                            "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                            "installed_by": [
+                                "subworkflows"
+                            ]
+                        },
+                        "utils_nfcore_pipeline": {
+                            "branch": "master",
+                            "git_sha": "a3fb7351b1fdb2b1de282b765816bbea190e86a8",
+                            "installed_by": [
+                                "subworkflows"
+                            ]
+                        },
+                        "utils_nfschema_plugin": {
+                            "branch": "master",
+                            "git_sha": "fdc08b8b1ae74f56686ce21f7ea11ad11990ce57",
+                            "installed_by": [
+                                "subworkflows"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ```
+
+이것은 `find/concatenate` 모듈이 이제 프로젝트의 소스 코드의 일부임을 확인합니다.
+그러나 새 모듈을 실제로 사용하려면 파이프라인으로 가져와야 합니다.
+
+마지막으로, `nf-core modules list local` 명령을 사용하여 파이프라인에서 현재 추적 중인 모듈을 확인할 수도 있습니다.
 
 ```bash
 nf-core modules list local
@@ -266,25 +316,27 @@ nf-core modules list local
 ??? success "명령 출력"
 
     ```console
+
+                                          ,--./,-.
+          ___     __   __   __   ___     /,-._.--~\
+    |\ | |__  __ /  ` /  \ |__) |__         }  {
+    | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                          `._,._,'
+
+    nf-core/tools version 4.0.2 - https://nf-co.re
+
+
     INFO     Repository type: pipeline
     INFO     Modules installed in '.':
 
-    ┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
-    ┃ Module Name    ┃ Repository      ┃ Version SHA ┃ Message        ┃ Date       ┃
-    ┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
-    │ find/concaten… │ nf-core/modules │ 6d46786     │ Support for    │ 2026-04-23 │
-    │                │                 │             │ apptainer as   │            │
-    │                │                 │             │ well as        │            │
-    │                │                 │             │ singularity    │            │
-    │                │                 │             │ for .sif in    │            │
-    │                │                 │             │ `container`    │            │
-    │                │                 │             │ (#11260)       │            │
-    └────────────────┴─────────────────┴─────────────┴────────────────┴────────────┘
+    ┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+    ┃ Module Name      ┃ Repository      ┃ Version SHA ┃ Message                                                                       ┃ Date       ┃
+    ┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+    │ find/concatenate │ nf-core/modules │ 6d46786     │ Support for apptainer as well as singularity for .sif in `container` (#11260) │ 2026-04-23 │
+    └──────────────────┴─────────────────┴─────────────┴───────────────────────────────────────────────────────────────────────────────┴────────────┘
     ```
 
-이것은 `find/concatenate` 모듈이 이제 프로젝트의 소스 코드의 일부임을 확인합니다.
-
-그러나 새 모듈을 실제로 사용하려면 파이프라인으로 가져와야 합니다.
+결과 테이블에 `find/concatenate`가 저장소, 버전 SHA, 메시지, 날짜와 함께 표시됩니다.
 
 ### 1.5. 모듈 임포트 업데이트하기
 
@@ -298,11 +350,11 @@ include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
 
 nf-core 규칙은 모듈을 가져올 때 모듈 이름에 대문자를 사용하는 것입니다.
 
-[core-hello/workflows/hello.nf](core-hello/workflows/hello.nf)를 열고 다음과 같이 교체하세요:
+`core-hello/workflows/hello.nf`를 열고 다음과 같이 교체하세요:
 
 === "후"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="11"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -312,8 +364,8 @@ nf-core 규칙은 모듈을 가져올 때 모듈 이름에 대문자를 사용�
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+    include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
     include { cowpy                  } from '../modules/local/cowpy.nf'
-    include { FIND_CONCATENATE                } from '../modules/nf-core/find/concatenate/main'
     ```
 
 === "전"
@@ -345,7 +397,7 @@ nf-core 모듈의 경로가 로컬 모듈과 어떻게 다른지 주목하세요
 
 이것을 별도의 섹션으로 다룰 것입니다. 아직 다루지 않은 새로운 메커니즘, 즉 메타데이터 맵이 포함되기 때문입니다.
 
-!!! note "참고"
+!!! info "정보"
 
     선택적으로 `collectGreetings.nf` 파일을 삭제할 수 있습니다:
 
@@ -373,7 +425,7 @@ nf-core 모듈을 찾고 프로젝트에서 사용할 수 있도록 만드는 �
 이상적으로는 모듈을 설치하기 전에 이 작업을 수행해야 하지만, 늦더라도 안 하는 것보다는 낫습니다.
 (참고로 더 이상 원하지 않는 모듈을 제거하는 `uninstall` 명령이 있습니다.)
 
-!!! note "참고"
+!!! info "정보"
 
     FIND_CONCATENATE 프로세스에는 우리가 여기서 보여드리려는 것과 엄격하게 관련이 없는 다양한 압축 유형, 파일 확장자 등에 대한 상당히 영리한 처리가 포함되어 있으므로, 대부분을 무시하고 중요한 부분에만 집중하겠습니다.
 
@@ -512,7 +564,7 @@ ch_input = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
 이것이 얼마나 유용할 수 있는지 이해하기 시작했기를 바랍니다.
 메타데이터를 기반으로 출력 이름을 지정할 수 있을 뿐만 아니라, 다른 매개변수 값을 적용하는 것과 같은 작업을 수행할 수 있으며, 특정 연산자와 함께 사용하면 파이프라인을 통과하는 데이터를 그룹화, 정렬 또는 필터링할 수도 있습니다.
 
-!!! note "메타데이터에 대해 자세히 알아보기"
+!!! info "메타데이터에 대해 자세히 알아보기"
 
     샘플시트에서 메타데이터를 읽고 처리를 사용자 정의하는 데 사용하는 방법을 포함하여 Nextflow 워크플로우에서 메타데이터를 사용하는 방법에 대한 포괄적인 소개는 [워크플로우의 메타데이터](../side_quests/metadata/index.md) 사이드 퀘스트를 참조하세요.
 
@@ -543,7 +595,7 @@ ch_input = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
 
 명확성을 위해, 이것을 분류하고 각 단계를 개별적으로 다루겠습니다.
 
-!!! note "참고"
+!!! info "정보"
 
     아래에 표시된 모든 변경 사항은 `core-hello/workflows/hello.nf` 워크플로우 파일의 `main` 블록에 있는 워크플로우 로직에 적용됩니다.
 
@@ -570,8 +622,8 @@ def cat_meta = [id: params.batch]
 
 === "후"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // 인사말 방출
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="7-8"
+        // 인사말 방출 (샘플시트에 nf-core 규칙을 사용하도록 업데이트됨)
         sayHello(ch_samplesheet)
 
         // 인사말을 대문자로 변환
@@ -586,8 +638,8 @@ def cat_meta = [id: params.batch]
 
 === "전"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // 인사말 방출
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="7-8"
+        // 인사말 방출 (샘플시트에 nf-core 규칙을 사용하도록 업데이트됨)
         sayHello(ch_samplesheet)
 
         // 인사말을 대문자로 변환
@@ -608,8 +660,8 @@ def cat_meta = [id: params.batch]
 
 === "후"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="10-11"
-        // 인사말 방출
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="10-11"
+        // 인사말 방출 (샘플시트에 nf-core 규칙을 사용하도록 업데이트됨)
         sayHello(ch_samplesheet)
 
         // 인사말을 대문자로 변환
@@ -627,8 +679,8 @@ def cat_meta = [id: params.batch]
 
 === "전"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // 인사말 방출
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
+        // 인사말 방출 (샘플시트에 nf-core 규칙을 사용하도록 업데이트됨)
         sayHello(ch_samplesheet)
 
         // 인사말을 대문자로 변환
@@ -654,8 +706,8 @@ def cat_meta = [id: params.batch]
 
 === "후"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="13-14"
-        // 인사말 방출
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="13-14"
+        // 인사말 방출 (샘플시트에 nf-core 규칙을 사용하도록 업데이트됨)
         sayHello(ch_samplesheet)
 
         // 인사말을 대문자로 변환
@@ -676,8 +728,8 @@ def cat_meta = [id: params.batch]
 
 === "전"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // 인사말 방출
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
+        // 인사말 방출 (샘플시트에 nf-core 규칙을 사용하도록 업데이트됨)
         sayHello(ch_samplesheet)
 
         // 인사말을 대문자로 변환
@@ -704,8 +756,8 @@ def cat_meta = [id: params.batch]
 
 === "후"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="16-17 20"
-        // 인사말 방출
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="16-17 20"
+        // 인사말 방출 (샘플시트에 nf-core 규칙을 사용하도록 업데이트됨)
         sayHello(ch_samplesheet)
 
         // 인사말을 대문자로 변환
@@ -729,8 +781,8 @@ def cat_meta = [id: params.batch]
 
 === "전"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="17"
-        // 인사말 방출
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="17"
+        // 인사말 방출 (샘플시트에 nf-core 규칙을 사용하도록 업데이트됨)
         sayHello(ch_samplesheet)
 
         // 인사말을 대문자로 변환
@@ -753,7 +805,7 @@ def cat_meta = [id: params.batch]
 
 그런 다음 마지막 줄에서 `collectGreetings.out.outfile` 대신 `ch_for_cowpy`를 `cowpy`에 전달하기만 하면 됩니다.
 
-!!! note "참고"
+!!! info "정보"
 
     과정의 다음 파트에서 `cowpy`를 메타데이터 튜플과 직접 작동하도록 업데이트하므로 이 추출 단계는 더 이상 필요하지 않습니다.
 
@@ -762,7 +814,7 @@ def cat_meta = [id: params.batch]
 새로 통합된 `find/concatenate` 모듈로 워크플로우가 작동하는지 테스트합니다:
 
 ```bash
-nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
 이것은 상당히 빠르게 실행되어야 합니다.
@@ -770,40 +822,40 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W ~ version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-        Launching `./main.nf` [evil_pike] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [cheesy_bhabha] revision: d6bbba9521
 
-        Input/output options
-          input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
-          outdir                    : core-hello-results
+    Input/output options
+      input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
+      outdir                    : core-hello-results
 
-        Institutional config options
-          config_profile_name       : Test profile
-          config_profile_description: Minimal test dataset to check pipeline function
+    Institutional config options
+      config_profile_name       : Test profile
+      config_profile_description: Minimal test dataset to check pipeline function
 
-        Generic options
-          validate_params           : false
-          trace_report_suffix       : 2025-10-30_18-50-58
+    Generic options
+      validate_params           : false
+      trace_report_suffix       : 2026-06-23_16-55-02
 
-        Core Nextflow options
-          runName                   : evil_pike
-          containerEngine           : docker
-          launchDir                 : /workspaces/training/hello-nf-core/core-hello
-          workDir                   : /workspaces/training/hello-nf-core/core-hello/work
-          projectDir                : /workspaces/training/hello-nf-core/core-hello
-          userName                  : root
-          profile                   : test,docker
-          configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
+    Core Nextflow options
+      runName                   : cheesy_bhabha
+      containerEngine           : docker
+      launchDir                 : /workspaces/training/hello-nf-core/core-hello
+      workDir                   : /workspaces/training/hello-nf-core/core-hello/work
+      projectDir                : /workspaces/training/hello-nf-core/core-hello
+      userName                  : root
+      profile                   : test,docker
+      configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
 
-        !! Only displaying parameters that differ from the pipeline defaults !!
-        ------------------------------------------------------
-        executor >  local (8)
-        [b3/f005fd] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-        [08/f923d0] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-        [34/3729a9] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
-        [24/df918a] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
-        -[core/hello] Pipeline completed successfully-
+    !! Only displaying parameters that differ from the pipeline defaults !!
+    ------------------------------------------------------
+    executor >  local (8)
+    [bf/aa86d7] CORE_HELLO:HELLO:sayHello (3)            | 3 of 3 ✔
+    [0a/df448e] CORE_HELLO:HELLO:convertToUpper (3)      | 3 of 3 ✔
+    [82/ded72f] CORE_HELLO:HELLO:FIND_CONCATENATE (test) | 1 of 1 ✔
+    [9d/0130bf] CORE_HELLO:HELLO:cowpy                   | 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
     ```
 
 `collectGreetings` 대신 `FIND_CONCATENATE`가 프로세스 실행 목록에 나타나는 것을 주목하세요.

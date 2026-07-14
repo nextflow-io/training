@@ -27,6 +27,12 @@ Bu eğitim boyunca mevcut plugin'leri nasıl kullanacağınızı ve isteğe bağ
 
 **Çalışma dizini:** `side-quests/plugin_development`
 
+#### Eğitim kod alanını açın
+
+Henüz yapmadıysanız, eğitim ortamını [Ortam Kurulumu](../../envsetup/index.md) bölümünde açıklandığı şekilde açtığınızdan emin olun.
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+
 ## Öğrenme hedefleri
 
 Bu eğitimin sonunda şunları yapabileceksiniz:

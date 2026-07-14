@@ -70,26 +70,34 @@ Bu, tam pipeline kaynak kodunu içeren bir `molkart/` dizini oluşturur.
 
 Tam pipeline'ı çalıştırmadan önce, konteynerların neden nf-core pipeline'ları için gerekli olduğunu öğrenelim.
 
-Pipeline'ı molkart test yapılandırmasından test veri seti ve parametrelerini kullanarak çalıştırmayı deneyelim:
+Pipeline'ın parametrelerini bir parametre dosyası kullanarak sağlayacağız.
+Parametre dosyası, her parametreyi ve değerini listeleyen bir YAML dosyasıdır; bu sayede yazılan değerler (tam sayılar gibi) bozulmadan korunur ve komut satırı kısa tutulur.
 
-```bash
-nextflow run ./molkart \
-  --input 'data/samplesheet.csv' \
-  --mindagap_tilesize 90 \
-  --mindagap_boxsize 7 \
-  --mindagap_loopnum 100 \
-  --clahe_pyramid_tile 368 \
-  --segmentation_method "mesmer,cellpose,stardist" \
-  --outdir results
+Çalışma dizininde zaten bir `params.yaml` dosyası bulunmaktadır:
+
+```yaml title="params.yaml"
+input: "data/samplesheet.csv"
+outdir: "results"
+mindagap_tilesize: 90
+mindagap_boxsize: 7
+mindagap_loopnum: 100
+clahe_pyramid_tile: 368
+segmentation_method: "cellpose"
 ```
 
 Bu parametreleri açıklayalım:
 
-- `--input`: Örnek meta verilerini içeren samplesheet'in yolu
-- `--mindagap_tilesize`, `--mindagap_boxsize`, `--mindagap_loopnum`: Izgara deseni doldurma için parametreler
-- `--clahe_pyramid_tile`: Kontrast iyileştirme için çekirdek boyutu
-- `--segmentation_method`: Hücre segmentasyonu için hangi algoritma(lar)ın kullanılacağı
-- `--outdir`: Sonuçların nereye kaydedileceği
+- `input`: Örnek meta verilerini içeren samplesheet'in yolu
+- `mindagap_tilesize`, `mindagap_boxsize`, `mindagap_loopnum`: Izgara deseni doldurma için parametreler
+- `clahe_pyramid_tile`: Kontrast iyileştirme için çekirdek boyutu
+- `segmentation_method`: Hücre segmentasyonu için hangi algoritma(lar)ın kullanılacağı
+- `outdir`: Sonuçların nereye kaydedileceği
+
+Bu parametreleri kullanarak pipeline'ı çalıştırmayı deneyelim:
+
+```bash
+nextflow run ./molkart -params-file params.yaml
+```
 
 !!! Warning "Bu komut başarısız olacak - bu kasıtlı!"
 
@@ -172,17 +180,10 @@ process {
 }
 ```
 
-Şimdi pipeline'ı aynı komutla tekrar çalıştırın:
+Şimdi pipeline'ı tekrar çalıştırın; bu sefer daha sonra karşılaştırabilmek için üç segmentasyon yönteminin tamamını çalıştırın:
 
 ```bash
-nextflow run ./molkart \
-  --input 'data/samplesheet.csv' \
-  --mindagap_tilesize 90 \
-  --mindagap_boxsize 7 \
-  --mindagap_loopnum 100 \
-  --clahe_pyramid_tile 368 \
-  --segmentation_method "cellpose,mesmer,stardist" \
-  --outdir results
+nextflow run ./molkart -params-file params.yaml --segmentation_method "mesmer,cellpose,stardist"
 ```
 
 Bu sefer Nextflow:
@@ -209,12 +210,13 @@ Pipeline çalışırken, buna benzer bir çıktı göreceksiniz:
 ??? success "Komut çıktısı"
 
     ```console
-    Nextflow 25.04.8 is available - Please consider updating your version to it
+     N E X T F L O W   ~  version 26.04.4
 
-    N E X T F L O W   ~  version 25.04.3
+    Launching `./molkart/main.nf` [exotic_banach] revision: e4152308ec
 
-    Launching `https://github.com/nf-core/molkart` [soggy_kalam] DSL2 - revision: 5e54b29cb3 [dev]
-
+    WARN: Unrecognized config option 'validation.help.enabled'
+    WARN: Unrecognized config option 'validation.defaultIgnoreParams'
+    WARN: Unrecognized config option 'validation.monochromeLogs'
 
     ------------------------------------------------------
                                             ,--./,-.
@@ -222,39 +224,34 @@ Pipeline çalışırken, buna benzer bir çıktı göreceksiniz:
       |\ | |__  __ /  ` /  \ |__) |__         }  {
       | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                             `._,._,'
-      nf-core/molkart 1.2.0dev
+      nf-core/molkart 1.2.0
     ------------------------------------------------------
     Segmentation methods and options
-      segmentation_method       : mesmer,cellpose,stardist
+      segmentation_method: mesmer,cellpose,stardist
 
     Image preprocessing
-      mindagap_boxsize          : 7
-      mindagap_loopnum          : 100
-      clahe_kernel              : 25
-      mindagap_tilesize         : 90
-      clahe_pyramid_tile        : 368
+      mindagap_boxsize   : 7
+      mindagap_loopnum   : 100
+      clahe_kernel       : 25
+      mindagap_tilesize  : 90
+      clahe_pyramid_tile : 368
 
     Input/output options
-      input                     : https://raw.githubusercontent.com/nf-core/test-datasets/molkart/test_data/samplesheets/samplesheet_membrane.csv
-      outdir                    : results
-
-    Institutional config options
-      config_profile_name       : Test profile
-      config_profile_description: Minimal test dataset to check pipeline function
+      input              : data/samplesheet.csv
+      outdir             : results
 
     Generic options
-      trace_report_suffix       : 2025-10-18_22-22-21
+      trace_report_suffix: 2026-06-23_16-25-30
 
     Core Nextflow options
-      revision                  : dev
-      runName                   : soggy_kalam
-      containerEngine           : docker
-      launchDir                 : /workspaces/training/nf4-science/imaging
-      workDir                   : /workspaces/training/nf4-science/imaging/work
-      projectDir                : /workspaces/.nextflow/assets/nf-core/molkart
-      userName                  : root
-      profile                   : docker,test
-      configFiles               :
+      runName            : exotic_banach
+      containerEngine    : docker
+      launchDir          : /workspaces/training/nf4-science/imaging
+      workDir            : /workspaces/training/nf4-science/imaging/work
+      projectDir         : /workspaces/training/nf4-science/imaging/molkart
+      userName           : root
+      profile            : standard
+      configFiles        : /workspaces/training/nf4-science/imaging/molkart/nextflow.config, /workspaces/training/nf4-science/imaging/nextflow.config
 
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
@@ -268,22 +265,22 @@ Pipeline çalışırken, buna benzer bir çıktı göreceksiniz:
         https://github.com/nf-core/molkart/blob/master/CITATIONS.md
 
     executor >  local (22)
-    [c1/da5009] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)        [100%] 2 of 2 ✔
-    [73/8f5e8a] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)                    [100%] 2 of 2 ✔
-    [ec/8f84d5] NFCORE_MOLKART:MOLKART:CREATE_STACK (mem_only)             [100%] 1 of 1 ✔
-    [a2/99349b] NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only) [100%] 1 of 1 ✔
-    [95/c9b4b1] NFCORE_MOLKART:MOLKART:DEEPCELL_MESMER (mem_only)          [100%] 1 of 1 ✔
-    [d4/1ebd1e] NFCORE_MOLKART:MOLKART:STARDIST (mem_only)                 [100%] 1 of 1 ✔
-    [3e/3c0736] NFCORE_MOLKART:MOLKART:CELLPOSE (mem_only)                 [100%] 1 of 1 ✔
-    [a0/415c6a] NFCORE_MOLKART:MOLKART:MASKFILTER (mem_only)               [100%] 3 of 3 ✔
-    [14/a830c9] NFCORE_MOLKART:MOLKART:SPOT2CELL (mem_only)                [100%] 3 of 3 ✔
-    [b5/391836] NFCORE_MOLKART:MOLKART:CREATE_ANNDATA (mem_only)           [100%] 3 of 3 ✔
-    [77/aed558] NFCORE_MOLKART:MOLKART:MOLKARTQC (mem_only)                [100%] 3 of 3 ✔
-    [e6/b81475] NFCORE_MOLKART:MOLKART:MULTIQC                             [100%] 1 of 1 ✔
+    [b4/e57ff1] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2 ✔
+    [2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2 ✔
+    [94/b1ef70] NFC…RT:CREATE_STACK (mem_only) | 1 of 1 ✔
+    [58/4b6426] NFC…DUPLICATEFINDER (mem_only) | 1 of 1 ✔
+    [c2/ef7002] NFC…DEEPCELL_MESMER (mem_only) | 1 of 1 ✔
+    [4f/ddd328] NFC…OLKART:STARDIST (mem_only) | 1 of 1 ✔
+    [8c/dd0362] NFC…OLKART:CELLPOSE (mem_only) | 1 of 1 ✔
+    [08/2ddcb5] NFC…KART:MASKFILTER (mem_only) | 3 of 3 ✔
+    [56/e30de0] NFC…LKART:SPOT2CELL (mem_only) | 3 of 3 ✔
+    [b0/5aa635] NFC…:CREATE_ANNDATA (mem_only) | 3 of 3 ✔
+    [5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3 ✔
+    [8e/8bd365] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
     -[nf-core/molkart] Pipeline completed successfully-
-    Completed at: 19-Oct-2025 22:23:01
-    Duration    : 2m 52s
-    CPU hours   : 0.1
+    Completed at: 23-Jun-2026 16:31:40
+    Duration    : 6m 9s
+    CPU hours   : (a few seconds)
     Succeeded   : 22
     ```
 
@@ -303,10 +300,10 @@ Bu çıktının, pipeline'ın takip ettiği nf-core kuralları nedeniyle Hello W
 
 Her işlem satırı şunları gösterir:
 
-- **Hash** (`[1a/2b3c4d]`): Çalışma dizini tanımlayıcısı (önceki gibi)
+- **Hash** (`[b4/e57ff1]`): Çalışma dizini tanımlayıcısı (önceki gibi)
 - **İşlem adı**: Tam modül yolu ve işlem adı
 - **Girdi tanımlayıcısı**: Parantez içinde örnek adı
-- **İlerleme**: Tamamlanma yüzdesi ve sayısı (örneğin, `1 of 1 ✔`)
+- **İlerleme**: Görev sayısı ve tamamlanma durumu (örneğin, `1 of 1 ✔`)
 
 ### Özetle
 
@@ -447,7 +444,7 @@ Hello World örneğimizde olduğu gibi, tüm gerçek çalışma `work/` dizinind
 ### 4.1. Çalışma dizini yapısını anlama
 
 Çalışma dizini, çalıştırılan her görev için bir alt dizin içerir.
-12 göreve sahip bu pipeline için 12 çalışma alt dizini olacaktır.
+22 göreve sahip bu pipeline çalıştırması için 22 çalışma alt dizini olacaktır.
 
 Çalışma dizinini listeleyin:
 
@@ -479,7 +476,7 @@ Hello World'den temel fark:
 
 !!! Tip "İpucu"
 
-    Bir işlem başarısız olursa, çalışma dizinine gidebilir, hata mesajları için `.command.err` dosyasını inceleyebilir ve hatta sorunu ayıklamak için `.command.sh` dosyasını manuel olarak yeniden çalıştırabilirsiniz.
+    Bir süreç başarısız olursa, çalışma dizinine gidebilir, hata mesajları için `.command.err` dosyasını inceleyebilir ve hatta sorunu ayıklamak için `.command.sh` dosyasını manuel olarak yeniden çalıştırabilirsiniz.
 
 ### 4.3. Çalışma dizini temizliği
 
@@ -517,30 +514,29 @@ Bu, çalıştırmanın geç aşamalarında hataların oluşabileceği uzun süre
 Aynı komutu tekrar çalıştırın, ancak `-resume` ekleyin:
 
 ```bash
-nextflow run ./molkart \
-  --input 'data/samplesheet.csv' \
-  --mindagap_tilesize 90 \
-  --mindagap_boxsize 7 \
-  --mindagap_loopnum 100 \
-  --clahe_pyramid_tile 368 \
-  --segmentation_method "cellpose" \
-  --outdir results \
-  -resume
+nextflow run ./molkart -params-file params.yaml --segmentation_method "mesmer,cellpose,stardist" -resume
 ```
 
-Şuna benzer bir çıktı görmelisiniz: <!-- TODO: full output -->
+Şuna benzer bir çıktı görmelisiniz:
 
 ```console
-executor >  local (0)
-[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)        [100%] 2 of 2, cached: 2 ✔
-[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)                    [100%] 2 of 2, cached: 2 ✔
-[7f/8g9h0i] NFCORE_MOLKART:MOLKART:CREATE_STACK (mem_only)             [100%] 1 of 1, cached: 1 ✔
-[9h/0i1j2k] NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only) [100%] 1 of 1, cached: 1 ✔
-[2k/3l4m5n] NFCORE_MOLKART:MOLKART:CELLPOSE (mem_only)                 [100%] 1 of 1, cached: 1 ✔
-...
+executor >  local (1)
+[43/e03702] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2, cached: 2 ✔
+[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2, cached: 2 ✔
+[94/b1ef70] NFC…RT:CREATE_STACK (mem_only) | 1 of 1, cached: 1 ✔
+[58/4b6426] NFC…DUPLICATEFINDER (mem_only) | 1 of 1, cached: 1 ✔
+[c2/ef7002] NFC…DEEPCELL_MESMER (mem_only) | 1 of 1, cached: 1 ✔
+[4f/ddd328] NFC…OLKART:STARDIST (mem_only) | 1 of 1, cached: 1 ✔
+[8c/dd0362] NFC…OLKART:CELLPOSE (mem_only) | 1 of 1, cached: 1 ✔
+[08/2ddcb5] NFC…KART:MASKFILTER (mem_only) | 3 of 3, cached: 3 ✔
+[56/e30de0] NFC…LKART:SPOT2CELL (mem_only) | 3 of 3, cached: 3 ✔
+[b0/5aa635] NFC…:CREATE_ANNDATA (mem_only) | 3 of 3, cached: 3 ✔
+[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3, cached: 3 ✔
+[73/239f45] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
+-[nf-core/molkart] Pipeline completed successfully-
 ```
 
-Her işlem için `cached: 2` veya `cached: 1` ifadesine dikkat edin - hiçbir şey yeniden çalıştırılmadı!
+Her ön işleme ve segmentasyon sürecindeki `cached: N` ek açıklamasına dikkat edin; bu görevler yeniden çalıştırılmak yerine önbellekten kullanıldı.
 
 ### 5.3. Resume ne zaman yararlıdır
 

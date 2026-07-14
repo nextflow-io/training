@@ -18,10 +18,6 @@ Eğer Hello pipeline'ına aşina değilseniz veya hatırlatmaya ihtiyacınız va
     - [Workflows of Workflows](../side_quests/workflows_of_workflows/index.md)
     - [Metadata and meta maps](../side_quests/metadata/index.md)
 
-!!! note "Not"
-
-    Terminalinizde `hello-nf-core` dizininde olduğunuzdan emin olun.
-
 ---
 
 ## 1. Pipeline kod yapısını inceleme
@@ -30,6 +26,7 @@ nf-core projesi, pipeline'ların nasıl yapılandırılacağı, kodun nasıl org
 
 Pipeline oluşturma projemize başlamadan önce bu yapıyı ve organizasyonu anlamamız gerekiyor.
 O halde, Bölüm 1'de oluşturduğumuz `pipelines` sembolik bağlantısını kullanarak `nf-core/demo` repository'sindeki pipeline kodunun nasıl organize edildiğine bir göz atalım.
+Terminalinizde `hello-nf-core` dizininde olduğunuzdan emin olun.
 
 Hatırlatma olarak, `nf-core/demo` dizinini bulmak ve açmak için `tree` komutunu ya da dosya gezginini kullanabilirsiniz.
 
@@ -82,7 +79,7 @@ Bu biraz soyut gelebilir, o yüzden `nf-core/demo` pipeline'ında bunun pratikte
 `main.nf` içindeki adsız iş akışına _giriş noktası_ betiği denir. Bu betik, iki tür iç içe iş akışı için bir sarmalayıcı görevi görür: `workflows/demo.nf` içinde yer alan ve gerçek analiz mantığını içeren `DEMO` iş akışı ve `subworkflows/` altında bulunan bir dizi yardımcı iş akışı.
 `demo.nf` iş akışı, `modules/` altındaki **modülleri** çağırır; bu modüller, gerçek analiz adımlarını gerçekleştirecek **süreçleri** içerir.
 
-!!! note "Not"
+!!! info "Bilgi"
 
     Subworkflow'lar yalnızca yardımcı işlevlerle sınırlı değildir ve süreç modüllerini kullanabilirler.
 
@@ -107,7 +104,7 @@ Bu kursta, basit Hello pipeline'ını Hello Nextflow'dan nf-core uyumlu bir form
 
 `demo.nf` iş akışı, `modules/` altındaki **modülleri** çağırır; bunları bir sonraki adımda inceleyeceğiz.
 
-!!! note "Not"
+!!! info "Bilgi"
 
     Bazı nf-core analiz iş akışları, alt düzey subworkflow'ları çağırarak ek iç içe geçme seviyeleri gösterir.
     Bu, genellikle birlikte sıkça kullanılan iki veya daha fazla modülü kolayca yeniden kullanılabilir pipeline segmentlerine sarmak için kullanılır.
@@ -266,13 +263,20 @@ TUI kapandığında, aşağıdaki konsol çıktısını görmelisiniz.
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 3.5.2 - https://nf-co.re
+        nf-core/tools version 4.0.2 - https://nf-co.re
 
 
     INFO     Launching interactive nf-core pipeline creation tool.
     ```
 
-Pipeline oluşturmanın çalıştığına dair konsol çıktısında açık bir onay yoktur, ancak `core-hello` adında yeni bir dizin görmelisiniz.
+TUI tamamlandığında, araç pipeline'ın oluşturulduğunu ve konteyner yapılandırmasının üretildiğini bildirir:
+
+```console
+INFO     Creating new pipeline: 'hello'
+INFO     Generated container configs for the pipeline successfully.
+```
+
+Artık `core-hello` adında yeni bir dizin görmelisiniz.
 
 Şablonu kullanarak kendinize ne kadar iş kazandırdığınızı görmek için yeni dizinin içeriğini görüntüleyin.
 
@@ -283,8 +287,7 @@ tree core-hello
 ??? abstract "Dizin içeriği"
 
     ```console
-    core-hello/
-    ├── README.md
+    core-hello
     ├── assets
     │   ├── samplesheet.csv
     │   └── schema_input.json
@@ -294,13 +297,15 @@ tree core-hello
     │   ├── test.config
     │   └── test_full.config
     ├── docs
-    │   ├── README.md
+    │   ├── CONTRIBUTING.md
     │   ├── output.md
+    │   ├── README.md
     │   └── usage.md
     ├── main.nf
     ├── modules.json
     ├── nextflow.config
     ├── nextflow_schema.json
+    ├── README.md
     ├── subworkflows
     │   ├── local
     │   │   └── utils_nfcore_hello_pipeline
@@ -320,6 +325,8 @@ tree core-hello
     │       │   └── tests
     │       │       ├── main.function.nf.test
     │       │       ├── main.function.nf.test.snap
+    │       │       ├── main.nf.test
+    │       │       ├── main.nf.test.snap
     │       │       ├── main.workflow.nf.test
     │       │       ├── main.workflow.nf.test.snap
     │       │       └── nextflow.config
@@ -333,7 +340,7 @@ tree core-hello
     └── workflows
         └── hello.nf
 
-    15 directories, 34 files
+    14 directories, 37 files
     ```
 
 Bu çok fazla dosya!
@@ -352,11 +359,12 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./core-hello/main.nf` [scruffy_marconi] DSL2 - revision: b9e9b3b8de
+    Launching `./core-hello/main.nf` [cheesy_avogadro] revision: d6bbba9521
 
-    Downloading plugin nf-schema@2.5.1
+    WARN: Unrecognized config option 'validation.defaultIgnoreParams'
+    WARN: Unrecognized config option 'validation.monochromeLogs'
     Input/output options
       input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
       outdir                    : core-hello-results
@@ -366,10 +374,10 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
       config_profile_description: Minimal test dataset to check pipeline function
 
     Generic options
-      trace_report_suffix       : 2025-11-21_04-47-18
+      trace_report_suffix       : 2026-06-23_16-56-58
 
     Core Nextflow options
-      runName                   : scruffy_marconi
+      runName                   : cheesy_avogadro
       containerEngine           : docker
       launchDir                 : /workspaces/training/hello-nf-core
       workDir                   : /workspaces/training/hello-nf-core/work
@@ -382,6 +390,9 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
     ------------------------------------------------------
     -[core/hello] Pipeline completed successfully-
     ```
+
+`WARN: Unrecognized config option 'validation.*'` satırları, yeni oluşturulan şablonda sabitlenmiş nf-schema eklentisinin sürümünden kaynaklanmaktadır.
+Bu uyarılar zararsızdır ve çalıştırmayı etkilemez.
 
 Bu, tüm temel bağlantıların yerinde olduğunu gösterir.
 Peki çıktılar nerede? Var mı?
@@ -397,12 +408,12 @@ tree core-hello-results
     ```console
     core-hello-results
     └── pipeline_info
-        ├── execution_report_2025-11-21_04-47-18.html
-        ├── execution_timeline_2025-11-21_04-47-18.html
-        ├── execution_trace_2025-11-21_04-47-18.txt
+        ├── execution_report_2026-06-23_16-56-58.html
+        ├── execution_timeline_2026-06-23_16-56-58.html
+        ├── execution_trace_2026-06-23_16-56-58.txt
         ├── hello_software_versions.yml
-        ├── params_2025-11-21_04-47-18.json
-        └── pipeline_dag_2025-11-21_04-47-18.html
+        ├── params_2026-06-23_16-57-00.json
+        └── pipeline_dag_2026-06-23_16-56-58.html
 
     1 directory, 6 files
     ```
@@ -434,7 +445,7 @@ Daha yakından bakalım.
 
 Bu, bazı nf-core işlevleri zaten yerinde olan analiz iş akışımız için yer tutucu olarak hizmet eder.
 
-```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 19 53"
+```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 21 53"
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -453,14 +464,16 @@ workflow HELLO {
 
     take:
     ch_samplesheet // kanal: --input parametresinden okunan samplesheet
+    outdir
+
     main:
 
-    ch_versions = channel.empty()
+    def ch_versions = channel.empty()
 
     //
     // Yazılım sürümlerini derle ve kaydet
     //
-    def topic_versions = Channel.topic("versions")
+    def topic_versions = channel.topic("versions")
         .distinct()
         .branch { entry ->
             versions_file: entry instanceof Path
@@ -477,19 +490,16 @@ workflow HELLO {
             "${process}:\n${tool_versions.join('\n')}"
         }
 
-    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
+            storeDir: "${outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
             sort: true,
             newLine: true
-        ).set { ch_collated_versions }
-
-
+        )
     emit:
     versions       = ch_versions                 // kanal: [ path(versions.yml) ]
-
 }
 
 /*
@@ -502,15 +512,15 @@ workflow HELLO {
 [Hello Nextflow](../hello_nextflow/index.md)'da geliştirilen temel bir Nextflow iş akışına kıyasla, burada yeni olan birkaç şey fark edeceksiniz (yukarıdaki vurgulanan satırlar):
 
 - İş akışı bloğunun bir adı var
-- İş akışı girdileri `take:` anahtar kelimesi kullanılarak bildirilir ve kanal oluşturma üst iş akışına taşınır
+- İş akışı girdileri `take:` anahtar kelimesi kullanılarak bildirilir (burada bir samplesheet kanalı ve bir çıktı dizini), ve kanal oluşturma üst iş akışına taşınır
 - İş akışı içeriği bir `main:` bloğunun içine yerleştirilir
 - Çıktılar `emit:` anahtar kelimesi kullanılarak bildirilir
 
 Bunlar, iş akışını **birleştirilebilir** yapan Nextflow'un isteğe bağlı özellikleridir; yani başka bir iş akışı içinden çağrılabilir.
 
-??? note "`Channel.topic` bloğu"
+??? note "`channel.topic` bloğu"
 
-    17. satırdan başlayan `def topic_versions = Channel.topic("versions")` bloğunu fark etmiş olabilirsiniz.
+    28. satırdan başlayan `def topic_versions = channel.topic("versions")` bloğunu fark etmiş olabilirsiniz.
     Bu, tüm modüllerden yazılım sürümü bilgilerini otomatik olarak toplayan standart bir temizlik kodudur.
     nf-core bu mekanizmayı 2026 yılında tüm pipeline'lara yaygınlaştırmaktadır; dolayısıyla ilerleyen süreçte tüm yeni pipeline'larda bunu göreceksiniz.
     Bu kursun 4. Bölümü nasıl çalıştığını ayrıntılı olarak açıklamaktadır.
@@ -574,15 +584,15 @@ nextflow run original-hello/hello.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `original-hello/hello.nf` [goofy_babbage] DSL2 - revision: e9e72441e9
+    Launching `original-hello/hello.nf` [sharp_dijkstra] revision: 319b99ee58
 
     executor >  local (8)
-    [a4/081cec] sayHello (1)       | 3 of 3 ✔
-    [e7/7e9058] convertToUpper (3) | 3 of 3 ✔
-    [0c/17263b] collectGreetings   | 1 of 1 ✔
-    [94/542280] cowpy              | 1 of 1 ✔
+    [23/4eb61e] sayHello (3)       | 3 of 3 ✔
+    [c8/81a076] convertToUpper (1) | 3 of 3 ✔
+    [90/ea197e] collectGreetings   | 1 of 1 ✔
+    [da/3df79a] cowpy              | 1 of 1 ✔
     ```
 
 Bu sizin için çalışıyorsa, kodu incelemeye hazırsınız.
@@ -703,7 +713,7 @@ Bu arada, `params.greeting = 'greetings.csv'` satırını da yorum satırı yapa
         params.character = 'turkey'
     ```
 
-!!! note "Not"
+!!! info "Bilgi"
 
     Nextflow dil sunucusu uzantısı yüklüyse, sözdizimi denetleyicisi kodunuzu kırmızı dalgalı çizgilerle işaretleyecektir.
     Bunun nedeni, bir `take:` ifadesi koyarsanız, aynı zamanda bir `main:` de olması gerektiğidir.
@@ -850,7 +860,7 @@ Burada yapılacak iki önemli gözlem var:
 - İçe aktarılan iş akışını çağırma sözdizimi, modülleri çağırma sözdizimi ile esasen aynıdır.
 - Girdileri iş akışına çekmeyle ilgili her şey (girdi parametresi ve kanal oluşturma) artık bu üst iş akışında bildirilir.
 
-!!! note "Not"
+!!! info "Bilgi"
 
     Giriş noktası iş akışı dosyasını `main.nf` olarak adlandırmak bir kural, bir gereklilik değildir.
 
@@ -877,19 +887,19 @@ Tüm değişiklikleri doğru yaptıysanız, bu tamamlanana kadar çalışmalıd�
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `original-hello/main.nf` [friendly_wright] DSL2 - revision: 1ecd2d9c0a
+    Launching `original-hello/main.nf` [irreverent_cajal] revision: 619249b1d7
 
     executor >  local (8)
-    [24/c6c0d8] HELLO:sayHello (3)       | 3 of 3 ✔
-    [dc/721042] HELLO:convertToUpper (3) | 3 of 3 ✔
-    [48/5ab2df] HELLO:collectGreetings   | 1 of 1 ✔
-    [e3/693b7e] HELLO:cowpy              | 1 of 1 ✔
-    Output: /workspaces/training/hello-nf-core/work/e3/693b7e48dc119d0c54543e0634c2e7/cowpy-COLLECTED-test-batch-output.txt
+    [50/b02a90] HELLO:sayHello (1)       | 3 of 3 ✔
+    [c0/3c336a] HELLO:convertToUpper (2) | 3 of 3 ✔
+    [5c/47bb4f] HELLO:collectGreetings   | 1 of 1 ✔
+    [07/bfc706] HELLO:cowpy              | 1 of 1 ✔
+    Output: /workspaces/training/hello-nf-core/work/07/bfc7061fa521e86f4e1954191ab4c4/cowpy-COLLECTED-test-batch-output.txt
     ```
 
-Bu, HELLO iş akışımızı başarıyla birleştirilebilir hale getirdiğimiz anlamına gelir.
+Bu, `HELLO` iş akışımızı başarıyla birleştirilebilir hale getirdiğimiz anlamına gelir.
 
 ### Özetle
 
@@ -931,14 +941,16 @@ workflow HELLO {
 
     take:
     ch_samplesheet // kanal: --input parametresinden okunan samplesheet
+    outdir
+
     main:
 
-    ch_versions = channel.empty()
+    def ch_versions = channel.empty()
 
     //
     // Yazılım sürümlerini derle ve kaydet
     //
-    def topic_versions = Channel.topic("versions")
+    def topic_versions = channel.topic("versions")
         .distinct()
         .branch { entry ->
             versions_file: entry instanceof Path
@@ -955,19 +967,16 @@ workflow HELLO {
             "${process}:\n${tool_versions.join('\n')}"
         }
 
-    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
+            storeDir: "${outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
             sort: true,
             newLine: true
-        ).set { ch_collated_versions }
-
-
+        )
     emit:
     versions       = ch_versions                 // kanal: [ path(versions.yml) ]
-
 }
 
 /*
@@ -977,8 +986,8 @@ workflow HELLO {
 */
 ```
 
-Vurgulanan satırlar birleştirilebilir iş akışı yapısını tanımlar: `workflow HELLO {`, `take:`, `main:` ve `emit:`.
-17–34. satırlar arasındaki büyük blok daha önemlidir: nf-core'un 2026 yılında tüm pipeline'lara yaygınlaştırdığı bir mekanizma olan topic kanallarını kullanarak yazılım sürümü yakalamayı yönetir.
+Bu, birleştirilebilir iş akışı yapısıdır: `take:`, `main:` ve `emit:` içeren adlandırılmış bir `workflow HELLO {` bloğu.
+`// Collate and save software versions` altındaki blok daha önemlidir: nf-core'un 2026 yılında tüm pipeline'lara yaygınlaştırdığı bir mekanizma olan topic kanallarını kullanarak yazılım sürümü yakalamayı yönetir.
 Bunu 4. Bölümde açıklayacağız; şimdilik dokunmadan bırakabileceğiniz standart bir şablon kodu olarak değerlendirin.
 
 2. bölümde geliştirdiğimiz orijinal iş akışının birleştirilebilir versiyonundan ilgili kodu eklememiz gerekiyor.
@@ -990,7 +999,7 @@ Bunu şu aşamalarda ele alacağız:
 3. İş akışı mantığını `main` bloğuna ekleme
 4. `emit` bloğunu güncelleme
 
-!!! note "Not"
+!!! info "Bilgi"
 
     Bu ilk geçiş için versiyon yakalama bloğunu görmezden geliyoruz.
     4. Bölüm nasıl çalıştığını açıklamaktadır.
@@ -1078,9 +1087,10 @@ Burada iki ilginç gözlem daha:
 nf-core projesinin, tipik olarak sütunsal veri içeren bir CSV dosyası olan samplesheet kavramı etrafında çok sayıda önceden oluşturulmuş işlevselliği vardır.
 `greetings.csv` dosyamız esasen bu olduğundan, mevcut `take` bildirimini olduğu gibi tutacağız ve bir sonraki adımda sadece girdi kanalının adını güncelleyeceğiz.
 
-```groovy title="core-hello/workflows/hello.nf" linenums="21"
+```groovy title="core-hello/workflows/hello.nf" linenums="17"
     take:
     ch_samplesheet // kanal: --input parametresinden okunan samplesheet
+    outdir
 ```
 
 Girdi işleme bu iş akışının yukarısında yapılacaktır (bu kod dosyasında değil).
@@ -1110,20 +1120,21 @@ Hatırlatma olarak, orijinal iş akışındaki ilgili kod şudur; birleştirileb
 `main:`'den sonra gelen kodu iş akışının yeni versiyonuna kopyalamamız gerekiyor.
 
 Orada zaten iş akışı tarafından çalıştırılan araçların sürümlerini yakalamakla ilgili bazı kodlar var. Şimdilik bunu olduğu gibi bırakacağız (araç versiyonlarıyla daha sonra ilgileneceğiz).
-`ch_versions = channel.empty()` başlatmasını en üstte tutacağız, ardından iş akışı mantığımızı ekleyeceğiz; versiyon harmanlama kodunu sonda tutacağız.
+`def ch_versions = channel.empty()` başlatmasını en üstte tutacağız, ardından iş akışı mantığımızı ekleyeceğiz; versiyon harmanlama kodunu sonda tutacağız.
 Bu sıralama mantıklıdır çünkü gerçek bir pipeline'da, süreçler iş akışı çalışırken `ch_versions` kanalına eklenecek sürüm bilgisi yayar.
 
 === "Sonra"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="19" hl_lines="10-20"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="15" hl_lines="11-21"
     workflow HELLO {
 
         take:
         ch_samplesheet // kanal: --input parametresinden okunan samplesheet
+        outdir
 
         main:
 
-        ch_versions = channel.empty()
+        def ch_versions = channel.empty()
 
         // bir selamlama yayınla
         sayHello(greeting_ch)
@@ -1140,7 +1151,7 @@ Bu sıralama mantıklıdır çünkü gerçek bir pipeline'da, süreçler iş ak�
         //
         // Collate and save software versions
         //
-        def topic_versions = Channel.topic("versions")
+        def topic_versions = channel.topic("versions")
             .distinct()
             .branch { entry ->
                 versions_file: entry instanceof Path
@@ -1157,37 +1168,36 @@ Bu sıralama mantıklıdır çünkü gerçek bir pipeline'da, süreçler iş ak�
                 "${process}:\n${tool_versions.join('\n')}"
             }
 
-        softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+        def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
             .mix(topic_versions_string)
             .collectFile(
-                storeDir: "${params.outdir}/pipeline_info",
+                storeDir: "${outdir}/pipeline_info",
                 name:  'hello_software_'  + 'versions.yml',
                 sort: true,
                 newLine: true
-            ).set { ch_collated_versions }
-
-
+            )
         emit:
         versions       = ch_versions                 // kanal: [ path(versions.yml) ]
-
     }
     ```
 
 === "Önce"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="19"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="15"
     workflow HELLO {
 
         take:
         ch_samplesheet // kanal: --input parametresinden okunan samplesheet
+        outdir
+
         main:
 
-        ch_versions = channel.empty()
+        def ch_versions = channel.empty()
 
         //
         // Collate and save software versions
         //
-        def topic_versions = Channel.topic("versions")
+        def topic_versions = channel.topic("versions")
             .distinct()
             .branch { entry ->
                 versions_file: entry instanceof Path
@@ -1204,36 +1214,31 @@ Bu sıralama mantıklıdır çünkü gerçek bir pipeline'da, süreçler iş ak�
                 "${process}:\n${tool_versions.join('\n')}"
             }
 
-        softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+        def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
             .mix(topic_versions_string)
             .collectFile(
-                storeDir: "${params.outdir}/pipeline_info",
+                storeDir: "${outdir}/pipeline_info",
                 name:  'hello_software_'  + 'versions.yml',
                 sort: true,
                 newLine: true
-            ).set { ch_collated_versions }
-
-
+            )
         emit:
         versions       = ch_versions                 // kanal: [ path(versions.yml) ]
-
     }
     ```
-
-Ayrıca kodu daha okunabilir yapmak için `main:`'den önce boş bir satır eklediğimizi fark edeceksiniz.
 
 Bu harika görünüyor, ancak `sayHello()` sürecine ilettiğimiz kanalın adını aşağıda gösterildiği gibi `greeting_ch`'den `ch_samplesheet`'e, `take:` anahtar kelimesi altında yazılanla eşleşecek şekilde güncellememiz gerekiyor.
 
 === "Sonra"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="25"
         // bir selamlama yayınla (samplesheet'ler için nf-core kuralını kullanacak şekilde güncellendi)
         sayHello(ch_samplesheet)
     ```
 
 === "Önce"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="25"
         // bir selamlama yayınla
         sayHello(greeting_ch)
     ```
@@ -1246,7 +1251,7 @@ Son olarak, iş akışının son çıktılarının bildirimini içerecek şekild
 
 === "Sonra"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="69" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="71" hl_lines="2"
         emit:
         cowpy_hellos   = cowpy.out
         versions       = ch_versions                 // kanal: [ path(versions.yml) ]
@@ -1254,12 +1259,12 @@ Son olarak, iş akışının son çıktılarının bildirimini içerecek şekild
 
 === "Önce"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="69"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="71"
         emit:
         versions       = ch_versions                 // kanal: [ path(versions.yml) ]
     ```
 
-Bu, HELLO iş akışının kendisinde yapmamız gereken değişiklikleri tamamlar.
+Bu, `HELLO` iş akışının kendisinde yapmamız gereken değişiklikleri tamamlar.
 Bu noktada, uygulamaya koymayı amaçladığımız genel kod yapısına ulaştık.
 
 ### Özetle
@@ -1323,7 +1328,8 @@ workflow CORE_HELLO {
     // WORKFLOW: Run pipeline
     //
     HELLO (
-        samplesheet
+        samplesheet,
+        params.outdir,
     )
 }
 /*
@@ -1360,7 +1366,6 @@ workflow {
     // SUBWORKFLOW: Run completion tasks
     //
     PIPELINE_COMPLETION (
-        params.outdir,
         params.monochrome_logs,
     )
 }
@@ -1376,7 +1381,7 @@ nf-core projesi iç içe subworkflow'ları yoğun bir şekilde kullanır; bu yü
 
 Burada önemli olan iki iş akışı tanımlanmıştır:
 
-- `CORE_HELLO`, `core-hello/workflows/hello.nf` içinde az önce uyarlamayı bitirdiğimiz HELLO iş akışını çalıştırmak için ince bir sarmalayıcıdır.
+- `CORE_HELLO`, `core-hello/workflows/hello.nf` içinde az önce uyarlamayı bitirdiğimiz `HELLO` iş akışını çalıştırmak için ince bir sarmalayıcıdır.
 - `CORE_HELLO`'yu ve iki diğer subworkflow'u, `PIPELINE_INITIALISATION` ve `PIPELINE_COMPLETION`'ı çağıran adsız bir iş akışı.
 
 İşte birbirleriyle nasıl ilişkili olduklarının bir diyagramı:
@@ -1421,9 +1426,9 @@ Bu dosyayı açıp aşağı kaydırırsak, bu kod bloğuna geliriz:
     versions    = ch_versions
 ```
 
-Bu, samplesheet'i ayrıştıran ve HELLO iş akışı tarafından tüketilmeye hazır bir biçimde ileten kanal fabrikasıdır.
+Bu, samplesheet'i ayrıştıran ve `HELLO` iş akışı tarafından tüketilmeye hazır bir biçimde ileten kanal fabrikasıdır.
 
-!!! note "Not"
+!!! info "Bilgi"
 
     Yukarıdaki sözdizimi daha önce kullandığımızdan biraz farklı, ancak temelde bu:
 
@@ -1532,7 +1537,7 @@ cp greetings.csv core-hello/assets/.
 
 === "Sonra"
 
-    ```groovy title="core-hello/conf/test.config" linenums="21" hl_lines="6-10"
+    ```groovy title="core-hello/conf/test.config" linenums="21" hl_lines="6 8-10"
     params {
         config_profile_name        = 'Test profile'
         config_profile_description = 'Minimal test dataset to check pipeline function'
@@ -1594,13 +1599,53 @@ Ve bu arada, bunun çok basit makinelerde (Github Codespaces'teki minimal VM'ler
 
 Bu, yapmamız gereken kod değişikliklerini tamamlar.
 
-### 5.4. Pipeline'ı test profiliyle çalıştırma
+### 5.4. Parametre doğrulamasını devre dışı bırakma
+
+Şablonlu samplesheet ayrıştırmasını kendi basit kanal oluşturma kodumuza değiştirdik; ancak şablon, FASTQ tabanlı bir samplesheet'i tanımlayan `nextflow_schema.json` ve `assets/schema_input.json` dosyalarıyla birlikte gelmeye devam ediyor.
+Bu şemaları henüz `greetings.csv` formatımıza uyarlamadığımız için, şimdilik parametre doğrulamasını kapatmamız gerekiyor (daha sonra düzgün şekilde kuracağız).
+
+`core-hello/nextflow.config` dosyasını açın ve `validate_params` değerini `false` olarak ayarlayın:
+
+=== "Sonra"
+
+    ```groovy title="core-hello/nextflow.config" linenums="37"
+        validate_params            = false
+    ```
+
+=== "Önce"
+
+    ```groovy title="core-hello/nextflow.config" linenums="37"
+        validate_params            = true
+    ```
+
+Bunu komut satırı yerine yapılandırma dosyasında ayarlıyoruz; çünkü Nextflow 26.04 sürümünden itibaren komut satırında sağlanan tüm değerler string olarak yazılmaktadır.
+Bu nedenle, Boolean parametreler gerçek bir `true`/`false` değeri alabilmek için bir yapılandırma dosyasında veya `-params-file` ile ayarlanmalıdır.
+
+Örneğin, burada `--validate_params false` kullanmak **string** `"false"` olarak değerlendirilir ve doğrulama açık kalmaya devam eder.
+
+!!! tip "`nextflow.config` içindeki v2 ayrıştırıcı uyumluluk satırları"
+
+    v2 sözdiziminden bahsetmişken, yapılandırma dosyasındaki `params` bloğunun hemen altında şu iki satırı fark edebilirsiniz:
+
+    ```groovy
+    outputDir = params.outdir
+    workflow.output.mode = params.publish_dir_mode
+    ```
+
+    Bunlar, v2 sözdizimi ayrıştırıcısıyla uyumluluk için gereklidir.
+
+    - v2 sözdiziminde, `params.*` değişkenleri süreç modüllerindeki `publishDir` yönergelerinde doğrudan referans alınamaz; bu nedenle `outputDir`, bu yönergelerin erişebileceği üst düzey bir yapılandırma değişkeni olarak burada tanımlanır.
+
+    - `workflow.output.mode`, v2 iş akışı çıktı bloğu için varsayılan yayımlama modunu ayarlar.
+
+    Her ikisi de nf-core pipeline şablonu tarafından otomatik olarak oluşturulur ve değiştirilmesi gerekmez.
+
+### 5.5. Pipeline'ı test profiliyle çalıştırma
 
 Bu çok şeydi, ancak sonunda pipeline'ı çalıştırmayı deneyebiliriz!
-Henüz doğrulamayı kurmadığımız için komut satırına `--validate_params false` eklememiz gerektiğini unutmayın (bu daha sonra gelecek).
 
 ```bash
-nextflow run core-hello --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run core-hello --outdir core-hello-results -profile test,docker
 ```
 
 Tüm değişiklikleri doğru yaptıysanız, tamamlanana kadar çalışmalıdır.
@@ -1608,9 +1653,9 @@ Tüm değişiklikleri doğru yaptıysanız, tamamlanana kadar çalışmalıdır.
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `core-hello/main.nf` [condescending_allen] DSL2 - revision: b9e9b3b8de
+    Launching `core-hello/main.nf` [voluminous_caravaggio] revision: d6bbba9521
 
     Input/output options
       input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
@@ -1622,10 +1667,10 @@ Tüm değişiklikleri doğru yaptıysanız, tamamlanana kadar çalışmalıdır.
 
     Generic options
       validate_params           : false
-      trace_report_suffix       : 2025-11-21_07-29-37
+      trace_report_suffix       : 2026-06-23_16-58-45
 
     Core Nextflow options
-      runName                   : condescending_allen
+      runName                   : voluminous_caravaggio
       containerEngine           : docker
       launchDir                 : /workspaces/training/hello-nf-core
       workDir                   : /workspaces/training/hello-nf-core/work
@@ -1636,17 +1681,17 @@ Tüm değişiklikleri doğru yaptıysanız, tamamlanana kadar çalışmalıdır.
 
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
-    executor >  local (1)
-    [ed/727b7e] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-    [45/bb6096] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [81/7e2e34] CORE_HELLO:HELLO:collectGreetings   [100%] 1 of 1 ✔
-    [96/9442a1] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
+    executor >  local (8)
+    [30/fc3bdb] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
+    [55/58b611] CORE_HELLO:HELLO:convertToUpper (1) | 3 of 3 ✔
+    [12/83c0bc] CORE_HELLO:HELLO:collectGreetings   | 1 of 1 ✔
+    [18/4894fd] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
-Gördüğünüz gibi, başlatma alt iş akışı sayesinde başlangıçta tipik nf-core özeti üretildi ve her modül için satırlar artık tam PIPELINE:WORKFLOW:modül adlarını gösteriyor.
+Gördüğünüz gibi, başlatma alt iş akışı sayesinde başlangıçta tipik nf-core özeti üretildi ve her modül için satırlar artık tam `PIPELINE:WORKFLOW:modül` adlarını gösteriyor.
 
-### 5.5. Pipeline çıktılarını bulma
+### 5.6. Pipeline çıktılarını bulma
 
 Şimdi soru şu: pipeline'ın çıktıları nerede?
 Ve cevap oldukça ilginç: sonuçlara bakmak için artık iki farklı yer var.
@@ -1662,17 +1707,17 @@ tree core-hello-results
     ```console
     core-hello-results
     └── pipeline_info
-        ├── execution_report_2025-11-21_04-47-18.html
-        ├── execution_report_2025-11-21_07-29-37.html
-        ├── execution_timeline_2025-11-21_04-47-18.html
-        ├── execution_timeline_2025-11-21_07-29-37.html
-        ├── execution_trace_2025-11-21_04-47-18.txt
-        ├── execution_trace_2025-11-21_07-29-37.txt
+        ├── execution_report_2026-06-23_16-56-58.html
+        ├── execution_report_2026-06-23_16-58-45.html
+        ├── execution_timeline_2026-06-23_16-56-58.html
+        ├── execution_timeline_2026-06-23_16-58-45.html
+        ├── execution_trace_2026-06-23_16-56-58.txt
+        ├── execution_trace_2026-06-23_16-58-45.txt
         ├── hello_software_versions.yml
-        ├── params_2025-11-21_04-47-13.json
-        ├── params_2025-11-21_07-29-41.json
-        ├── pipeline_dag_2025-11-21_04-47-18.html
-        └── pipeline_dag_2025-11-21_07-29-37.html
+        ├── params_2026-06-23_16-57-00.json
+        ├── params_2026-06-23_16-58-47.json
+        ├── pipeline_dag_2026-06-23_16-56-58.html
+        └── pipeline_dag_2026-06-23_16-58-45.html
 
     1 directory, 12 files
     ```
@@ -1682,7 +1727,7 @@ Bu sefer beklendiği gibi çalıştırılan tüm görevleri görüyorsunuz.
 
 ![Hello pipeline'ı için yürütme zaman çizelgesi raporu](./img/execution_timeline_hello.png)
 
-!!! note "Not"
+!!! info "Bilgi"
 
     Bir kez daha görevler paralel olarak çalıştırılmadı çünkü Github Codespaces'te minimalist bir makinede çalışıyoruz.
     Bunların paralel çalıştığını görmek için, codespace'inizin CPU tahsisini ve test yapılandırmasındaki kaynak limitlerini artırmayı deneyin.

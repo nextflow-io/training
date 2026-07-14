@@ -91,12 +91,18 @@ nextflow run 1-hello.nf --input 'Hello World!'
 ??? success "Saída do comando"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+    Launching `1-hello.nf` [goofy_torvalds] revision: c33d41f479
 
     executor >  local (1)
     [a3/7be2fa] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output: 1-hello/output.txt
     ```
 
 Se sua saída do console se parece com isso, então parabéns, você acabou de executar seu primeiro fluxo de trabalho Nextflow!
@@ -115,13 +121,14 @@ Se sua saída do console se parece com isso, então parabéns, você acabou de e
     Isso foi mencionado no início do curso, mas talvez você tenha perdido.
     Verifique o material de ajuda [Versões do Nextflow](../info/nxf_versions.md).
 
-    Em resumo, se você está usando o Nextflow `25.10`, então precisa habilitar o analisador de linguagem v2:
+    O analisador v2 é o padrão a partir do Nextflow 26.04 em diante, então você só verá isso em versões anteriores.
+    Em uma versão anterior à 26.04, você precisa habilitar o analisador de linguagem v2:
 
     ```bash
     export NXF_SYNTAX_PARSER=v2
     ```
 
-A saída mais importante aqui é a última linha, que está destacada na saída acima:
+A parte mais importante aqui é a linha destacada:
 
 ```console
 [a3/7be2fa] sayHello | 1 of 1 ✔
@@ -168,12 +175,18 @@ nextflow run 1-hello.nf --input 'Hello World!' -output-dir hello_results
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78
+    Launching `1-hello.nf` [hungry_celsius] revision: f048d6ea78
 
     executor >  local (1)
-    [a3/1e1535] sayHello [100%] 1 of 1 ✔
+    [a3/1e1535] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/hello_results
+
+      first_output: 1-hello/output.txt
     ```
 
 Você deve ver que suas saídas agora são publicadas em um diretório chamado `hello_results` em vez de `results`:
@@ -206,7 +219,7 @@ Isso pode parecer confuso, então vamos ver como isso se parece na prática.
 Voltando à saída do console para o fluxo de trabalho que executamos anteriormente, tínhamos esta linha:
 
 ```console
-[a3/1e1535] sayHello [100%] 1 of 1 ✔
+[a3/1e1535] sayHello | 1 of 1 ✔
 ```
 
 Vê como a linha começa com `[a3/1e1535]`?
@@ -623,11 +636,17 @@ nextflow run 1-hello.nf --input 'Hello World!' -resume
 ??? success "Saída do comando"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479
+    Launching `1-hello.nf` [tiny_noyce] revision: c33d41f479
 
     [a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output: 1-hello/output.txt
     ```
 
 A saída do console deve parecer familiar, mas há uma coisa um pouco diferente comparado a antes.
@@ -767,7 +786,7 @@ Na linha de saída do console `[a3/7be2fa] SAYHELLO | 1 of 1 ✔`, o que `[a3/7b
 - [x] O caminho truncado para o diretório de trabalho da tarefa
 - [ ] O checksum do arquivo de saída
 
-Saiba mais: [2.4. Encontre a saída original e os logs no diretório `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
+Saiba mais: [2.3. Encontre a saída original e os logs no diretório `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -777,7 +796,7 @@ Qual é o propósito do arquivo `.command.sh` em um diretório de tarefa?
 - [ ] Ele contém mensagens de erro de tarefas que falharam
 - [ ] Ele lista os arquivos de entrada preparados para a tarefa
 
-Saiba mais: [2.4. Encontre a saída original e os logs no diretório `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
+Saiba mais: [2.3. Encontre a saída original e os logs no diretório `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -787,14 +806,14 @@ O que acontece com os resultados publicados quando você re-executa um fluxo de 
 - [ ] O Nextflow impede a sobrescrita e falha
 - [ ] Eles são automaticamente copiados como backup
 
-Saiba mais: [2.5. Re-execute o fluxo de trabalho com diferentes saudações](#24-re-run-the-workflow-with-different-greetings)
+Saiba mais: [2.4. Re-execute o fluxo de trabalho com diferentes saudações](#24-re-run-the-workflow-with-different-greetings)
 </quiz>
 
 <quiz>
 O que esta saída do console indica?
 
 ```console
-[skipped  ] process > sayHello (1) [100%] 1 of 1, cached: 1 ✔
+[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
 ```
 
 - [ ] A tarefa falhou e foi pulada

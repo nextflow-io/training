@@ -511,7 +511,7 @@ Herhangi bir pipeline kodunu değiştirmenize gerek yoktur; yalnızca yapıland�
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
     ```
 
@@ -534,7 +534,7 @@ Eklenti, yürütme sırasında çeşitli INFO ve WARN mesajları üretir.
 Bunlar, yerel bir makinede çalışan küçük bir örnek için normaldir:
 
 ```console title="Output (partial)"
-nf-co2footprint plugin  ~  version 1.2.0
+nf-co2footprint plugin  ~  version 1.3.0
 WARN - [nf-co2footprint] Target zone null not found. Attempting to retrieve carbon intensity for fallback zone GLOBAL.
 INFO - [nf-co2footprint] Using fallback carbon intensity from GLOBAL from CI table: 480.0 gCO₂eq/kWh.
 WARN - [nf-co2footprint] Executor 'null' not mapped.
@@ -600,7 +600,7 @@ nf-co2footprint eklentisi, coğrafi konumunuzu ayarlayabileceğiniz bir `co2foot
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
 
     co2footprint {
@@ -614,7 +614,7 @@ nf-co2footprint eklentisi, coğrafi konumunuzu ayarlayabileceğiniz bir `co2foot
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
     ```
 
@@ -634,11 +634,6 @@ INFO - [nf-co2footprint] Using fallback carbon intensity from GB from CI table: 
 
 Bölge uyarısı artık görünmüyor.
 Eklenti artık küresel yedek değer (480.0 gCO₂eq/kWh) yerine GB'ye özgü karbon yoğunluğunu (163.92 gCO₂eq/kWh) kullanmaktadır.
-
-!!! note "Not"
-
-    `WARN: Unrecognized config option 'co2footprint.location'` mesajını da görebilirsiniz.
-    Bu görsel bir uyarıdır ve güvenle yoksayılabilir; eklenti değeri yine de doğru şekilde okur.
 
 Bölüm 6'da kendi eklentiniz için bir yapılandırma kapsamı oluşturacaksınız.
 

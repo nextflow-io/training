@@ -24,7 +24,7 @@ nf-core 프로젝트는 Part 2에서 워크플로우에 사용했던 것과 유�
     다음 명령을 실행하여 성공적으로 실행되는지 테스트할 수 있습니다:
 
     ```bash
-    nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+    nextflow run . --outdir core-hello-results -profile test,docker
     ```
 
 ---
@@ -94,21 +94,21 @@ process cowpy {
 
 === "후"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="3" hl_lines="2"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2"
     // cowpy로 ASCII 아트 생성 (https://github.com/jeffbuttars/cowpy)
     process COWPY {
     ```
 
 === "전"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="3" hl_lines="2"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2"
     // cowpy로 ASCII 아트 생성 (https://github.com/jeffbuttars/cowpy)
     process cowpy {
     ```
 
 이 경우 대문자화는 완전히 직관적입니다.
 
-프로세스 이름이 여러 단어로 구성된 경우, 예를 들어 원래 camel case로 MyCowpyTool이라는 프로세스가 있었다면, nf-core 규칙은 밑줄을 사용하여 분리하여 MY_COWPY_TOOL이 됩니다.
+프로세스 이름이 여러 단어로 구성된 경우, 예를 들어 원래 camel case로 `MyCowpyTool`이라는 프로세스가 있었다면, nf-core 규칙은 밑줄을 사용하여 분리하여 `MY_COWPY_TOOL`이 됩니다.
 
 #### 1.1.2. 모듈 import 문 업데이트
 
@@ -164,7 +164,7 @@ import 문에서 별칭을 사용하여 프로세스 실행을 업데이트하�
     //
     // 소프트웨어 버전 수집 및 저장
     //
-    def topic_versions = Channel.topic("versions")
+    def topic_versions = channel.topic("versions")
         .distinct()
         .branch { entry ->
             versions_file: entry instanceof Path
@@ -208,7 +208,7 @@ import 문에서 별칭을 사용하여 프로세스 실행을 업데이트하�
     //
     // 소프트웨어 버전 수집 및 저장
     //
-    def topic_versions = Channel.topic("versions")
+    def topic_versions = channel.topic("versions")
         .distinct()
         .branch { entry ->
             versions_file: entry instanceof Path
@@ -247,15 +247,15 @@ import 문에서 별칭을 사용하여 프로세스 실행을 업데이트하�
 이러한 변경 후 모든 것이 올바르게 작동하는지 테스트하기 위해 워크플로우를 실행합니다.
 
 ```bash
-nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [elegant_plateau] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [elegant_plateau] revision: b9e9b3b8de
 
     Input/output options
       input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
@@ -315,7 +315,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 
 === "후"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="11" hl_lines="2 6"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="9" hl_lines="2 6"
         input:
             tuple val(meta), path(input_file)
             val character
@@ -326,7 +326,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 
 === "전"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="11" hl_lines="2 6"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="9" hl_lines="2 6"
         input:
             path input_file
             val character
@@ -395,17 +395,17 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 이러한 변경 후 모든 것이 올바르게 작동하는지 테스트하기 위해 워크플로우를 실행합니다.
 
 ```bash
-nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [modest_saha] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [modest_saha] revision: b9e9b3b8de
 
-    Downloading plugin nf-schema@2.5.1
+    Downloading plugin nf-schema@2.7.2
     Input/output options
       input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
       outdir                    : core-hello-results
@@ -431,10 +431,10 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
     executor >  local (8)
-    [a8/447993] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-    [00/1fc59c] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [57/ac800d] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
-    [b7/092f2b] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
+    [a8/447993] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+    [00/1fc59c] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+    [57/ac800d] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
+    [b7/092f2b] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
@@ -532,7 +532,7 @@ Nextflow는 런타임에 해당 인수와 값을 도구 명령줄에 추가합�
 
 결과적으로 모듈 인터페이스가 더 간단해졌습니다: 필수 메타데이터와 파일 입력만 예상합니다.
 
-!!! note "참고"
+!!! info "정보"
 
     `?:` 연산자는 옆으로 누운 Elvis Presley의 얼굴처럼 보이기 때문에 'Elvis 연산자'라고 불리며, `?` 문자가 그의 머리카락의 웨이브를 상징합니다.
 
@@ -622,15 +622,15 @@ withName: 'COWPY' {
 더 수수께끼 같은 옵션 중 하나인 `kosh`를 사용하여 이 명령을 실행하십시오:
 
 ```bash
-nextflow run . --outdir core-hello-results -profile test,docker --validate_params false --character kosh
+nextflow run . --outdir core-hello-results -profile test,docker --character kosh
 ```
 
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [exotic_planck] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [exotic_planck] revision: b9e9b3b8de
 
     Input/output options
       input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
@@ -657,10 +657,10 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
     executor >  local (8)
-    [13/9e3c0e] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-    [e2/5b0ee5] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [b6/4fb569] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
-    [38/eb29ea] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
+    [13/9e3c0e] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+    [e2/5b0ee5] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+    [b6/4fb569] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
+    [38/eb29ea] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
@@ -676,16 +676,16 @@ cat work/38/eb29ea*/cowpy-test.txt
 ??? success "명령 출력"
 
     ```console
-    _________
-    / HELLO   \
-    | HOLA    |
-    \ BONJOUR /
-    ---------
+     _________
+    / BONJOUR \
+    | HELLO   |
+    \ HOLA    /
+     ---------
         \
-        \
+         \
           \
       ___       _____     ___
-    /   \     /    /|   /   \
+     /   \     /    /|   /   \
     |     |   /    / |  |     |
     |     |  /____/  |  |     |
     |     |  |    |  |  |     |
@@ -730,7 +730,7 @@ cat work/38/eb29ea*/cowpy-test.txt
 - **이식성**: 하드코딩된 도구 옵션 없이 모듈을 재사용할 수 있습니다
 - **워크플로우 변경 없음**: 도구 옵션을 추가하거나 변경해도 워크플로우 코드를 업데이트할 필요가 없습니다
 
-!!! note "참고"
+!!! info "정보"
 
     `ext.args` 시스템은 메타데이터에 따라 인수 값을 동적으로 전환하는 것을 포함하여 여기서 다루지 않은 강력한 추가 기능이 있습니다. 자세한 내용은 [nf-core 모듈 사양](https://nf-co.re/docs/guidelines/components/modules)을 참조하십시오.
 
@@ -840,15 +840,15 @@ ext.prefix = { "cowpy-${meta.id}" }
 워크플로우가 여전히 예상대로 작동하는지 테스트합니다.
 
 ```bash
-nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [admiring_turing] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [admiring_turing] revision: b9e9b3b8de
 
     Input/output options
       input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
@@ -875,10 +875,10 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
     executor >  local (8)
-    [b2/e08524] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-    [13/88939f] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [23/4554e1] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
-    [a3/c6cbe9] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
+    [b2/e08524] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+    [13/88939f] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+    [23/4554e1] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
+    [a3/c6cbe9] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
@@ -976,15 +976,15 @@ nf-core 파이프라인은 개별 모듈에서 `publishDir`을 설정하는 대�
 이제 파이프라인을 실행하면 어떤 일이 일어나는지 살펴봅시다.
 
 ```bash
-nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [silly_caravaggio] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [silly_caravaggio] revision: b9e9b3b8de
 
     Input/output options
       input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
@@ -1011,10 +1011,10 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
     executor >  local (8)
-    [db/39978e] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-    [b5/bf6a8d] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [b7/c61842] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
-    [46/5839d6] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
+    [db/39978e] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+    [b5/bf6a8d] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+    [b7/c61842] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
+    [46/5839d6] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
@@ -1055,7 +1055,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 
 Nextflow가 워크플로우와 모듈 이름을 기반으로 이 디렉토리 계층 구조를 생성했습니다.
 
-!!! note "참고"
+!!! info "정보"
 
     `pipeline_info/`에 `hello_software_versions.yml`이 있는 것을 확인할 수 있습니다.
     현재는 `FIND_CONCATENATE`의 버전 정보만 포함되어 있는데, `COWPY`가 아직 버전을 보고하지 않기 때문입니다.
@@ -1096,9 +1096,9 @@ process {
 
 기본 `publishDir` 지시문을 재정의하려면 `conf/modules.config` 파일에 자체 지시문을 추가하면 됩니다.
 
-예를 들어, 아래 예제처럼 `withName:` 선택기를 사용하여 단일 프로세스의 기본값을 재정의할 수 있습니다. 여기서는 'COWPY' 프로세스에 대한 사용자 지정 `publishDir` 지시문을 추가합니다.
+예를 들어, 아래 예제처럼 `withName:` 선택기를 사용하여 단일 프로세스의 기본값을 재정의할 수 있습니다. 여기서는 `COWPY` 프로세스에 대한 사용자 지정 `publishDir` 지시문을 추가합니다.
 
-```groovy title="core-hello/conf/modules.config" linenums="13" hl_lines="8-10"
+```groovy title="core-hello/conf/modules.config" linenums="13" hl_lines="10-12"
 process {
     publishDir = [
         path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
@@ -1160,23 +1160,23 @@ script 블록은 변경할 필요가 없습니다 — 버전은 출력 블록에
 #### 1.6.2. 파이프라인을 실행하고 버전 보고서 확인
 
 ```bash
-nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [silly_fermat] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [silly_fermat] revision: b9e9b3b8de
 
     ...
 
     executor >  local (8)
-    [8d/f3a091] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-    [2e/b5c742] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [6a/d9e183] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
-    [3c/f20b54] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
+    [8d/f3a091] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+    [2e/b5c742] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+    [6a/d9e183] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
+    [3c/f20b54] CORE_HELLO:HELLO:COWPY              | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
@@ -1189,11 +1189,14 @@ FIND_CONCATENATE:
   coreutils: 9.4
   find: 4.6.0
   pigz: 2.8
+Workflow:
+  core/hello: v1.0.0dev
+  Nextflow: 26.04.4
 ```
 
-워크플로우 측 수집 — Part 2의 플레이스홀더 워크플로우에서 보았던 `Channel.topic("versions")` 블록 — 이 topic을 구독하고 이 통합 보고서를 자동으로 작성합니다.
+워크플로우 측 수집 — Part 2의 플레이스홀더 워크플로우에서 보았던 `channel.topic("versions")` 블록 — 이 topic을 구독하고 이 통합 보고서를 자동으로 작성합니다.
 
-!!! note "하위 호환성"
+!!! info "하위 호환성"
 
     워크플로우의 topic 채널 블록에 있는 `versions_file` 브랜치는 아직 `topic: versions`를 사용하도록 업데이트되지 않고 `emit: versions`와 함께 script 블록에서 `versions.yml` 파일을 작성하는 모듈을 처리하기 위해 존재합니다.
     전환 기간 동안 두 스타일이 동시에 지원됩니다.
@@ -1283,16 +1286,16 @@ process COWPY {
     label 'process_single'
 
     conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+    container "${ workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
-        'biocontainers/YOUR-TOOL-HERE' }"
+        'quay.io/biocontainers/YOUR-TOOL-HERE' }"
 
     input:
     tuple val(meta), path(input)        // 패턴 1: 메타데이터 튜플 ✓
 
     output:
     tuple val(meta), path("*"), emit: output
-    tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions, emit: versions_cowpy
+    tuple val("${task.process}"), val('cowpy'), eval("cowpy --version"), topic: versions, emit: versions_cowpy
 
     when:
     task.ext.when == null || task.ext.when
@@ -1361,20 +1364,20 @@ nf-core 가이드라인에 따르면 모듈의 일부로 컨테이너와 Conda �
 
 === "전"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6-8"
     process COWPY {
         tag "$meta.id"
         label 'process_single'
 
         conda "${moduleDir}/environment.yml"
-        container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        container "${ workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container ?
             'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
-            'biocontainers/YOUR-TOOL-HERE' }"
+            'quay.io/biocontainers/YOUR-TOOL-HERE' }"
     ```
 
 #### 2.2.2. Conda 환경
 
-Conda 환경의 경우, 모듈 코드는 `conda "${moduleDir}/environment.yml"`을 지정하며, 이는 `environment.yml` 파일에서 설정해야 함을 의미합니다.
+Conda 환경의 경우, 모듈 코드는 `#!groovy conda "${moduleDir}/environment.yml"`을 지정하며, 이는 `environment.yml` 파일에서 설정해야 함을 의미합니다.
 
 모듈 생성 도구는 Bioconda(생물정보학 도구를 위한 주요 채널)에서 `cowpy` 패키지를 찾을 수 없다고 경고했습니다.
 그러나 `cowpy`는 conda-forge에서 사용할 수 있으므로 다음과 같이 `environment.yml`을 완성할 수 있습니다:
@@ -1426,7 +1429,7 @@ nf-core에 제출하려면 기본값을 더 엄격하게 따라야 하지만, �
 
 === "후"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5 6"
     input:
     tuple val(meta), path(input_file)
 
@@ -1437,13 +1440,13 @@ nf-core에 제출하려면 기본값을 더 엄격하게 따라야 하지만, �
 
 === "전"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5 6"
     input:
     tuple val(meta), path(input)
 
     output:
     tuple val(meta), path("*"), emit: output
-    tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions    , emit: versions_cowpy
+    tuple val("${task.process}"), val('cowpy'), eval("cowpy --version"), topic: versions    , emit: versions_cowpy
     ```
 
 이것은 다음을 지정합니다:
@@ -1451,6 +1454,7 @@ nf-core에 제출하려면 기본값을 더 엄격하게 따라야 하지만, �
 - 입력 파일 매개변수 이름(`input` 대신 `input_file`)
 - 설정 가능한 접두사 패턴을 사용한 출력 파일 이름(와일드카드 `*` 대신 `#!groovy ${prefix}.txt`)
 - 설명적인 emit 이름(일반적인 `output` 대신 `cowpy_output`)
+- 템플릿의 `#!groovy eval("cowpy --version")` 대신 정적 버전 문자열(`#!groovy val("1.1.5")`). 섹션 1.6의 수동 모듈과 일치하며(`cowpy` 도구는 `--version` 플래그를 제공하지 않음)
 
 Nextflow 언어 서버를 사용하여 구문을 검증하는 경우, script 블록에 아직 추가하지 않았기 때문에 이 단계에서 `#!groovy ${prefix}` 부분이 오류로 표시될 수 있습니다.
 이제 그 부분을 살펴보겠습니다.
@@ -1515,7 +1519,7 @@ Nextflow 컨텍스트에서 [stub](https://www.nextflow.io/docs/latest/process.h
 
 === "전"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
@@ -1574,15 +1578,15 @@ Nextflow 컨텍스트에서 [stub](https://www.nextflow.io/docs/latest/process.h
 테스트하기 위해 파이프라인을 실행합니다.
 
 ```bash
-nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
 ??? success "명령 출력"
 
     ```console hl_lines="33"
-      N E X T F L O W   ~  version 25.10.4
+      N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [prickly_neumann] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [prickly_neumann] revision: b9e9b3b8de
 
     Input/output options
       input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
@@ -1609,10 +1613,10 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
     executor >  local (8)
-    [e9/008ede] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-    [f0/d70cfe] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [be/0ecc58] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
-    [11/8e082f] CORE_HELLO:HELLO:COWPY (test)       [100%] 1 of 1 ✔
+    [e9/008ede] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
+    [f0/d70cfe] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
+    [be/0ecc58] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
+    [11/8e082f] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 

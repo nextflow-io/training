@@ -402,12 +402,19 @@ nextflow run genomics.nf -profile test
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `genomics.nf` [reverent_sinoussi] DSL2 - revision: 41d43ad7fe
+    Launching `genomics.nf` [reverent_sinoussi] revision: 41d43ad7fe
 
     executor >  local (1)
     [2a/e69536] SAMTOOLS_INDEX (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/genomics/results
+
+      bam_index:
+        - bam/reads_mother.bam.bai
     ```
 
 작업 디렉토리 또는 결과 디렉토리를 확인하여 인덱스 파일이 올바르게 생성되었는지 확인할 수 있습니다.
@@ -769,13 +776,26 @@ nextflow run genomics.nf -profile test -resume
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `genomics.nf` [grave_volta] DSL2 - revision: 4790abc96a
+    Launching `genomics.nf` [grave_volta] revision: 4790abc96a
 
     executor >  local (1)
     [2a/e69536] SAMTOOLS_INDEX (1)       | 1 of 1, cached: 1 ✔
     [53/e18e98] GATK_HAPLOTYPECALLER (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/genomics/results
+
+      bam_index:
+        - bam/reads_mother.bam.bai
+
+      vcf:
+        - vcf/reads_mother.bam.vcf
+
+      vcf_idx:
+        - vcf/reads_mother.bam.vcf.idx
     ```
 
 이제 콘솔 출력을 보면 두 프로세스가 나열되어 있습니다.
@@ -891,13 +911,32 @@ nextflow run genomics.nf -profile test -resume
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `genomics.nf` [peaceful_yalow] DSL2 - revision: a256d113ad
+    Launching `genomics.nf` [peaceful_yalow] revision: a256d113ad
 
     executor >  local (6)
     [4f/7071b0] SAMTOOLS_INDEX (3)       | 3 of 3, cached: 1 ✔
     [7a/89bc43] GATK_HAPLOTYPECALLER (2) | 3 of 3, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/genomics/results
+
+      bam_index:
+        - bam/reads_mother.bam.bai
+        - bam/reads_father.bam.bai
+        - bam/reads_son.bam.bai
+
+      vcf:
+        - vcf/reads_mother.bam.vcf
+        - vcf/reads_father.bam.vcf
+        - vcf/reads_son.bam.vcf
+
+      vcf_idx:
+        - vcf/reads_mother.bam.vcf.idx
+        - vcf/reads_father.bam.vcf.idx
+        - vcf/reads_son.bam.vcf.idx
     ```
 
 워크플로우 실행이 성공했다면 다음과 같은 오류가 발생할 때까지 다시 실행하세요:
@@ -905,9 +944,9 @@ nextflow run genomics.nf -profile test -resume
 ??? failure "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `genomics.nf` [loving_pasteur] DSL2 - revision: d2a8e63076
+    Launching `genomics.nf` [loving_pasteur] revision: d2a8e63076
 
     executor >  local (4)
     [01/eea165] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 1 ✔
@@ -1164,13 +1203,32 @@ nextflow run genomics.nf -profile test
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `genomics.nf` [special_goldstine] DSL2 - revision: 4cbbf6ea3e
+    Launching `genomics.nf` [special_goldstine] revision: 4cbbf6ea3e
 
     executor >  local (6)
     [d6/10c2c4] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
     [88/1783aa] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/genomics/results
+
+      indexed_bam:
+        - [bam/reads_mother.bam, bam/reads_mother.bam.bai]
+        - [bam/reads_father.bam, bam/reads_father.bam.bai]
+        - [bam/reads_son.bam, bam/reads_son.bam.bai]
+
+      vcf:
+        - vcf/reads_mother.bam.vcf
+        - vcf/reads_father.bam.vcf
+        - vcf/reads_son.bam.vcf
+
+      vcf_idx:
+        - vcf/reads_mother.bam.vcf.idx
+        - vcf/reads_father.bam.vcf.idx
+        - vcf/reads_son.bam.vcf.idx
     ```
 
 결과 디렉토리에는 이제 각 샘플에 대한 BAM 및 BAI 파일(튜플에서)과 VCF 출력이 모두 포함됩니다:
@@ -1327,13 +1385,32 @@ nextflow run genomics.nf -profile test
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `genomics.nf` [sick_albattani] DSL2 - revision: 46d84642f6
+    Launching `genomics.nf` [sick_albattani] revision: 46d84642f6
 
     executor >  local (6)
     [18/23b4bb] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
     [12/f727bb] GATK_HAPLOTYPECALLER (3) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/genomics/results
+
+      indexed_bam:
+        - [bam/reads_mother.bam, bam/reads_mother.bam.bai]
+        - [bam/reads_father.bam, bam/reads_father.bam.bai]
+        - [bam/reads_son.bam, bam/reads_son.bam.bai]
+
+      vcf:
+        - vcf/reads_mother.bam.vcf
+        - vcf/reads_father.bam.vcf
+        - vcf/reads_son.bam.vcf
+
+      vcf_idx:
+        - vcf/reads_mother.bam.vcf.idx
+        - vcf/reads_father.bam.vcf.idx
+        - vcf/reads_son.bam.vcf.idx
     ```
 
 이전과 동일한 결과를 생성해야 합니다. 간단한 변이 호출 워크플로우에 원하는 모든 기본 기능이 이제 있습니다.

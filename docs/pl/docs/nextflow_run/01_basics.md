@@ -91,12 +91,18 @@ nextflow run 1-hello.nf --input 'Hello World!'
 ??? success "Wyjście polecenia"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+    Launching `1-hello.nf` [goofy_torvalds] revision: c33d41f479
 
     executor >  local (1)
     [a3/7be2fa] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output: 1-hello/output.txt
     ```
 
 Jeśli wyjście konsoli wygląda mniej więcej tak, to gratulacje, właśnie uruchomiłeś Swój pierwszy workflow Nextflow!
@@ -115,13 +121,14 @@ Jeśli wyjście konsoli wygląda mniej więcej tak, to gratulacje, właśnie uru
     Zostało to wspomniane na początku kursu, ale może Ci to umknęło.
     Sprawdź materiał pomocniczy [Wersje Nextflow](../info/nxf_versions.md).
 
-    Krótko mówiąc, jeśli używasz Nextflow `25.10`, musisz włączyć parser języka v2:
+    Parser v2 jest domyślny od Nextflow 26.04 wzwyż, więc ten błąd pojawi się tylko na starszych wersjach.
+    Jeśli używasz wersji wcześniejszej niż 26.04, musisz włączyć parser języka v2:
 
     ```bash
     export NXF_SYNTAX_PARSER=v2
     ```
 
-Najważniejsze wyjście tutaj to ostatnia linia, która jest podświetlona w powyższym wyjściu:
+Najważniejsze tutaj to podświetlona linia:
 
 ```console
 [a3/7be2fa] sayHello | 1 of 1 ✔
@@ -152,7 +159,7 @@ Hello World!
 
 ### 2.3. Zapisz wyniki do innego katalogu
 
-Domyślnie Nextflow zapisze wyjścia pipeline'u do katalogu o nazwie `results` w Twojej bieżącej ścieżce.
+Domyślnie Nextflow zapisuje wyjścia pipeline'u do katalogu o nazwie `results` w Twojej bieżącej ścieżce.
 Aby zmienić miejsce, w którym Twoje pliki są publikowane, użyj flagi CLI `-output-dir` (lub `-o` w skrócie).
 
 !!! danger "Niebezpieczeństwo"
@@ -168,12 +175,18 @@ nextflow run 1-hello.nf --input 'Hello World!' -output-dir hello_results
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78
+    Launching `1-hello.nf` [hungry_celsius] revision: f048d6ea78
 
     executor >  local (1)
-    [a3/1e1535] sayHello [100%] 1 of 1 ✔
+    [a3/1e1535] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/hello_results
+
+      first_output: 1-hello/output.txt
     ```
 
 Powinieneś zobaczyć, że Twoje wyjścia są teraz publikowane do katalogu o nazwie `hello_results` zamiast `results`:
@@ -206,7 +219,7 @@ To może brzmieć myląco, więc zobaczmy, jak to wygląda w praktyce.
 Wracając do wyjścia konsoli dla workflow'u, który uruchomiliśmy wcześniej, mieliśmy tę linię:
 
 ```console
-[a3/1e1535] sayHello [100%] 1 of 1 ✔
+[a3/1e1535] sayHello | 1 of 1 ✔
 ```
 
 Widzisz, jak linia zaczyna się od `[a3/1e1535]`?
@@ -623,11 +636,17 @@ nextflow run 1-hello.nf --input 'Hello World!' -resume
 ??? success "Wyjście polecenia"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479
+    Launching `1-hello.nf` [tiny_noyce] revision: c33d41f479
 
     [a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output: 1-hello/output.txt
     ```
 
 Wyjście konsoli powinno wyglądać znajomo, ale jest jedna rzecz, która jest trochę inna niż wcześniej.
@@ -767,7 +786,7 @@ W linii wyjścia konsoli `[a3/7be2fa] SAYHELLO | 1 of 1 ✔`, co reprezentuje `[
 - [x] Skróconą ścieżkę do katalogu roboczego zadania
 - [ ] Sumę kontrolną pliku wyjściowego
 
-Dowiedz się więcej: [2.4. Znajdź oryginalne wyjście i logi w katalogu `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
+Dowiedz się więcej: [2.3. Znajdź oryginalne wyjście i logi w katalogu `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -777,7 +796,7 @@ Jaki jest cel pliku `.command.sh` w katalogu zadania?
 - [ ] Zawiera komunikaty o błędach z nieudanych zadań
 - [ ] Wymienia pliki wejściowe przygotowane dla zadania
 
-Dowiedz się więcej: [2.4. Znajdź oryginalne wyjście i logi w katalogu `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
+Dowiedz się więcej: [2.3. Znajdź oryginalne wyjście i logi w katalogu `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -787,14 +806,14 @@ Co dzieje się z opublikowanymi wynikami, gdy ponownie uruchamiasz workflow bez 
 - [ ] Nextflow zapobiega nadpisywaniu i kończy się niepowodzeniem
 - [ ] Są automatycznie archiwizowane
 
-Dowiedz się więcej: [2.5. Uruchom ponownie workflow z różnymi powitaniami](#24-re-run-the-workflow-with-different-greetings)
+Dowiedz się więcej: [2.4. Uruchom ponownie workflow z różnymi powitaniami](#24-re-run-the-workflow-with-different-greetings)
 </quiz>
 
 <quiz>
 Co wskazuje to wyjście konsoli?
 
 ```console
-[skipped  ] process > sayHello (1) [100%] 1 of 1, cached: 1 ✔
+[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
 ```
 
 - [ ] Zadanie nie powiodło się i zostało pominięte

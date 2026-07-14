@@ -9,26 +9,20 @@ Ahora aprenderemos dos enfoques mejores para gestionar entradas: **archivos de p
 
 ### 1.1. El problema con líneas de comandos largas
 
-Recordemos nuestro comando de la Parte 2:
+En la Parte 2 ya usamos un archivo de parámetros para mantener el comando corto y conservar los valores escritos (como los parámetros enteros de preprocesamiento) intactos:
 
 ```bash
-nextflow run ./molkart \
-  --input 'data/samplesheet.csv' \
-  --mindagap_tilesize 90 \
-  --mindagap_boxsize 7 \
-  --mindagap_loopnum 100 \
-  --clahe_pyramid_tile 368 \
-  --segmentation_method "cellpose" \
-  --outdir results
+nextflow run ./molkart -params-file params.yaml --segmentation_method "mesmer,cellpose,stardist"
 ```
 
-Esto funciona, pero es difícil de reproducir, compartir o modificar.
+Pasar muchos parámetros individualmente en la línea de comandos es difícil de reproducir, compartir o modificar.
 ¿Qué pasa si necesita ejecutar el mismo análisis nuevamente el próximo mes?
 ¿Qué pasa si un colaborador quiere usar exactamente su configuración?
+Un archivo de parámetros resuelve esto.
 
-### 1.2. Solución: Use un archivo de parámetros
+### 1.2. El archivo de parámetros
 
-Cree un archivo llamado `params.yaml`:
+Este es el archivo `params.yaml` que hemos estado usando:
 
 ```yaml title="params.yaml"
 input: "data/samplesheet.csv"
@@ -40,13 +34,16 @@ clahe_pyramid_tile: 368
 segmentation_method: "cellpose"
 ```
 
-Ahora su comando se convierte en:
+Cada parámetro se escribe como un par `clave: valor`.
+Escribir los enteros sin comillas (por ejemplo `mindagap_tilesize: 90`) preserva su tipo entero, que la validación de parámetros del pipeline requiere.
+
+Su comando se convierte en:
 
 ```bash
 nextflow run ./molkart -params-file params.yaml -resume
 ```
 
-¡Eso es todo! El archivo de parámetros documenta su configuración exacta y facilita la reejecución o el compartir.
+El archivo de parámetros documenta su configuración exacta y facilita la reejecución o el compartir.
 
 ### 1.3. Anulación de parámetros
 
@@ -125,7 +122,7 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! warning "Advertencia"
+!!! Warning "Advertencia"
 
     Observe que las rutas en la hoja de muestras son relativas a donde **ejecuta** Nextflow, no a donde se encuentra la hoja de muestras.
 

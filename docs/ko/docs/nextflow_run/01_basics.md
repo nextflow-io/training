@@ -91,12 +91,18 @@ nextflow run 1-hello.nf --input 'Hello World!'
 ??? success "명령 출력"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+    Launching `1-hello.nf` [goofy_torvalds] revision: c33d41f479
 
     executor >  local (1)
     [a3/7be2fa] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output: 1-hello/output.txt
     ```
 
 콘솔 출력이 이와 비슷하다면 축하합니다. 첫 번째 Nextflow 워크플로우를 실행했습니다!
@@ -115,13 +121,14 @@ nextflow run 1-hello.nf --input 'Hello World!'
     이것은 과정 시작 부분에서 언급되었지만 놓쳤을 수 있습니다.
     [Nextflow 버전](../info/nxf_versions.md) 도움말 자료를 확인하세요.
 
-    간단히 말해서, Nextflow `25.10`을 사용하는 경우 v2 언어 분석기를 활성화해야 합니다:
+    v2 분석기는 Nextflow 26.04부터 기본값으로 설정되어 있으므로, 이전 버전에서만 이 오류가 발생합니다.
+    26.04 이전 버전을 사용하는 경우 v2 언어 분석기를 활성화해야 합니다:
 
     ```bash
     export NXF_SYNTAX_PARSER=v2
     ```
 
-여기서 가장 중요한 출력은 위 출력에서 강조된 마지막 줄입니다:
+여기서 가장 중요한 출력은 위 출력에서 강조된 줄입니다:
 
 ```console
 [a3/7be2fa] sayHello | 1 of 1 ✔
@@ -168,12 +175,18 @@ nextflow run 1-hello.nf --input 'Hello World!' -output-dir hello_results
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78
+    Launching `1-hello.nf` [hungry_celsius] revision: f048d6ea78
 
     executor >  local (1)
-    [a3/1e1535] sayHello [100%] 1 of 1 ✔
+    [a3/1e1535] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/hello_results
+
+      first_output: 1-hello/output.txt
     ```
 
 이제 출력이 `results` 대신 `hello_results`라는 디렉토리에 게시된 것을 볼 수 있습니다:
@@ -206,7 +219,7 @@ hello_results
 앞서 실행한 워크플로우의 콘솔 출력으로 돌아가면 다음 줄이 있었습니다:
 
 ```console
-[a3/1e1535] sayHello [100%] 1 of 1 ✔
+[a3/1e1535] sayHello | 1 of 1 ✔
 ```
 
 줄이 `[a3/1e1535]`로 시작하는 것을 보셨나요?
@@ -623,11 +636,17 @@ nextflow run 1-hello.nf --input 'Hello World!' -resume
 ??? success "명령 출력"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479
+    Launching `1-hello.nf` [tiny_noyce] revision: c33d41f479
 
     [a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output: 1-hello/output.txt
     ```
 
 콘솔 출력은 익숙해 보이지만 이전과 약간 다른 점이 있습니다.
@@ -767,7 +786,7 @@ nextflow clean -before backstabbing_swartz -f
 - [x] 작업의 작업 디렉토리에 대한 축약된 경로
 - [ ] 출력 파일의 체크섬
 
-자세히 알아보기: [2.4. `work/` 디렉토리에서 원본 출력 및 로그 찾기](#23-find-the-original-output-and-logs-in-the-work-directory)
+자세히 알아보기: [2.3. `work/` 디렉토리에서 원본 출력 및 로그 찾기](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -777,7 +796,7 @@ nextflow clean -before backstabbing_swartz -f
 - [ ] 실패한 작업의 오류 메시지를 포함합니다
 - [ ] 작업을 위해 스테이징된 입력 파일을 나열합니다
 
-자세히 알아보기: [2.4. `work/` 디렉토리에서 원본 출력 및 로그 찾기](#23-find-the-original-output-and-logs-in-the-work-directory)
+자세히 알아보기: [2.3. `work/` 디렉토리에서 원본 출력 및 로그 찾기](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -787,14 +806,14 @@ nextflow clean -before backstabbing_swartz -f
 - [ ] Nextflow가 덮어쓰기를 방지하고 실패합니다
 - [ ] 자동으로 백업됩니다
 
-자세히 알아보기: [2.5. 다른 인사말로 워크플로우 다시 실행](#24-re-run-the-workflow-with-different-greetings)
+자세히 알아보기: [2.4. 다른 인사말로 워크플로우 다시 실행](#24-re-run-the-workflow-with-different-greetings)
 </quiz>
 
 <quiz>
 이 콘솔 출력은 무엇을 나타내나요?
 
 ```console
-[skipped  ] process > sayHello (1) [100%] 1 of 1, cached: 1 ✔
+[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
 ```
 
 - [ ] 작업이 실패하여 건너뛰었습니다

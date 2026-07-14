@@ -19,7 +19,7 @@
 
 작성할 수 있는 테스트의 종류는 다양합니다:
 
-1. **모듈 수준 테스트**: 개별 process에 대한 테스트
+1. **Process 수준 테스트**: 개별 process에 대한 테스트
 2. **워크플로우 수준 테스트**: 단일 워크플로우에 대한 테스트
 3. **파이프라인 수준 테스트**: 파이프라인 전체에 대한 테스트
 4. **성능 테스트**: 파이프라인의 속도와 효율성에 대한 테스트
@@ -27,16 +27,16 @@
 
 개별 process를 테스트하는 것은 다른 언어의 단위 테스트(unit test)와 유사합니다. 워크플로우나 전체 파이프라인을 테스트하는 것은 다른 언어에서 통합 테스트(integration test)라고 불리는 것과 유사하며, 컴포넌트 간의 상호작용을 테스트합니다.
 
-[**nf-test**](https://www.nf-test.com/)는 모듈, 워크플로우, 파이프라인 수준의 테스트를 작성할 수 있는 도구입니다. 간단히 말해, 파이프라인의 모든 개별 부분이 _독립적으로_ 예상대로 작동하는지 체계적으로 확인할 수 있습니다.
+[**nf-test**](https://www.nf-test.com/)는 process, 워크플로우, 파이프라인 수준의 테스트를 작성할 수 있는 도구입니다. 간단히 말해, 파이프라인의 모든 개별 부분이 _독립적으로_ 예상대로 작동하는지 체계적으로 확인할 수 있습니다.
 
 ### 학습 목표
 
-이 사이드 퀘스트에서는 nf-test를 사용하여 파이프라인에 대한 워크플로우 수준 테스트와 파이프라인이 호출하는 세 가지 process에 대한 모듈 수준 테스트를 작성하는 방법을 학습합니다.
+이 사이드 퀘스트에서는 nf-test를 사용하여 파이프라인에 대한 워크플로우 수준 테스트와 파이프라인이 호출하는 두 가지 process에 대한 process 수준 테스트를 작성하는 방법을 학습합니다.
 
 이 사이드 퀘스트를 마치면 다음 기술들을 효과적으로 활용할 수 있습니다:
 
 - 프로젝트에서 nf-test 초기화하기
-- 모듈 수준 및 워크플로우 수준 테스트 생성하기
+- Process 수준 및 워크플로우 수준 테스트 생성하기
 - 일반적인 유형의 assertion 추가하기
 - 스냅샷과 콘텐츠 assertion의 적절한 사용 시점 이해하기
 - 전체 프로젝트에 대한 테스트 실행하기
@@ -49,6 +49,16 @@
 
 - [Hello Nextflow](../../hello_nextflow/index.md) 튜토리얼 또는 동급의 입문 과정을 완료해야 합니다.
 - 기본적인 Nextflow 개념과 메커니즘(process, 채널, 연산자, 파일 작업, 메타데이터)에 익숙해야 합니다.
+
+!!! warning "nf-test 버전 요구사항"
+
+    Process 수준 테스트는 **nf-test 0.9.3 이상**이 필요합니다. 이전 버전(0.9.2 포함)은 Nextflow가 버전 26.04부터 기본적으로 사용하는 엄격한 구문 분석기와 호환되지 않는 테스트 하네스 코드를 생성하여, 예상된 테스트 결과 대신 `Script compilation failed` 오류가 발생합니다.
+
+    `nf-test version` 명령으로 버전을 확인하세요. 업그레이드가 필요한 경우:
+
+    ```bash
+    curl -fsSL https://code.askimed.com/install/nf-test | bash
+    ```
 
 ---
 
@@ -81,7 +91,8 @@ code .
 ```console title="Directory contents"
 .
 ├── greetings.csv
-└── main.nf
+├── main.nf
+└── nextflow.config
 ```
 
 파일에 대한 자세한 설명은 [Hello Nextflow의 준비 운동](../../hello_nextflow/00_orientation.md)을 참조하세요.
@@ -111,21 +122,23 @@ code .
 ??? example "워크플로우 코드"
 
     ```groovy title="main.nf"
+    #!/usr/bin/env nextflow
+
     /*
-    * 파이프라인 매개변수
-    */
+     * 파이프라인 매개변수
+     */
     params.input_file = "greetings.csv"
 
     /*
-    * echo를 사용하여 'Hello World!'를 표준 출력에 출력
-    */
+     * echo를 사용하여 'Hello World!'를 표준 출력에 출력
+     */
     process sayHello {
 
         input:
-            val greeting
+        val greeting
 
         output:
-            path "${greeting}-output.txt"
+        path "${greeting}-output.txt"
 
         script:
         """
@@ -134,15 +147,15 @@ code .
     }
 
     /*
-    * 텍스트 변환 유틸리티를 사용하여 인사말을 대문자로 변환
-    */
+     * 텍스트 변환 유틸리티를 사용하여 인사말을 대문자로 변환
+     */
     process convertToUpper {
 
         input:
-            path input_file
+        path input_file
 
         output:
-            path "UPPER-${input_file}"
+        path "UPPER-${input_file}"
 
         script:
         """
@@ -183,13 +196,27 @@ nextflow run main.nf
 ```
 
 ```console title="Result of running the workflow"
- N E X T F L O W   ~  version 24.10.2
+ N E X T F L O W   ~  version 26.04.4
 
-Launching `main.nf` [soggy_linnaeus] DSL2 - revision: bbf79d5c31
+Launching `main.nf` [trusting_mendel] revision: 405c90f891
 
 executor >  local (6)
-[f7/c3be66] sayHello (3)       | 3 of 3 ✔
-[cd/e15303] convertToUpper (3) | 3 of 3 ✔
+[6c/d7ae4e] sayHello (3)       | 3 of 3 ✔
+[72/5fa770] convertToUpper (2) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/nf-test/results
+
+  greetings:
+    - Hola-output.txt
+    - Hello-output.txt
+    - Bonjour-output.txt
+
+  upper_greetings:
+    - UPPER-Hola-output.txt
+    - UPPER-Bonjour-output.txt
+    - UPPER-Hello-output.txt
 ```
 
 축하합니다! 방금 테스트를 실행했습니다!
@@ -435,10 +462,10 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [1d4aaf12] 'Should run without failures' PASSED (1.619s)
+  Test [693ba951] 'Should run without failures' PASSED (2.879s)
 
 
-SUCCESS: Executed 1 tests in 1.626s
+SUCCESS: Executed 1 tests in 2.883s
 ```
 
 성공입니다! 파이프라인이 성공적으로 실행되고 테스트가 통과됩니다. 몇 번을 실행해도 항상 같은 결과를 얻을 수 있습니다!
@@ -460,15 +487,28 @@ https://www.nf-test.com
 Test Workflow main.nf
 
   Test [693ba951] 'Should run without failures'
-    > Nextflow 24.10.4 is available - Please consider updating your version to it
-    > N E X T F L O W  ~  version 24.10.0
-    > Launching `/workspaces/training/side-quests/nf-test/main.nf` [zen_ampere] DSL2 - revision: bbf79d5c31
-    > [2b/61e453] Submitted process > sayHello (2)
-    > [31/4e1606] Submitted process > sayHello (1)
-    > [bb/5209ee] Submitted process > sayHello (3)
-    > [83/83db6f] Submitted process > convertToUpper (2)
-    > [9b/3428b1] Submitted process > convertToUpper (1)
-    > [ca/0ba51b] Submitted process > convertToUpper (3)
+    > N E X T F L O W  ~  version 26.04.4
+    > Launching `/workspaces/training/side-quests/nf-test/main.nf` [maniac_mcclintock] - revision: 405c90f891
+    > [fc/6965c3] Submitted process > sayHello (1)
+    > [14/640c84] Submitted process > sayHello (2)
+    > [d6/3594c9] Submitted process > sayHello (3)
+    > [d7/f14d58] Submitted process > convertToUpper (1)
+    > [76/cb9122] Submitted process > convertToUpper (2)
+    > [d1/92b304] Submitted process > convertToUpper (3)
+    >
+    > Outputs:
+    >
+    >   /workspaces/training/side-quests/nf-test/.nf-test/tests/693ba951a20fec36a5a9292ed1cc8a9f/results
+    >
+    >   greetings:
+    >     - Bonjour-output.txt
+    >     - Hello-output.txt
+    >     - Hola-output.txt
+    >
+    >   upper_greetings:
+    >     - UPPER-Bonjour-output.txt
+    >     - UPPER-Hola-output.txt
+    >     - UPPER-Hello-output.txt
     PASSED (5.206s)
 
 
@@ -534,10 +574,10 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [1d4aaf12] 'Should run successfully with correct number of processes' PASSED (1.567s)
+  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (2.876s)
 
 
-SUCCESS: Executed 1 tests in 1.588s
+SUCCESS: Executed 1 tests in 2.879s
 ```
 
 성공입니다! 파이프라인이 성공적으로 실행되고 테스트가 통과됩니다. 이제 파이프라인의 전체 상태뿐만 아니라 세부 사항도 테스트하기 시작했습니다.
@@ -619,11 +659,11 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [f0e08a68] 'Should run successfully with correct number of processes' PASSED (8.144s)
-  Test [d7e32a32] 'Should produce correct output files' PASSED (6.994s)
+  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (3.055s)
+  Test [44ba6e13] 'Should produce correct output files' PASSED (2.941s)
 
 
-SUCCESS: Executed 2 tests in 15.165s
+SUCCESS: Executed 2 tests in 6.004s
 ```
 
 성공입니다! 파이프라인이 성공적으로 완료되고, 올바른 수의 process가 실행되었으며, 출력 파일이 생성되었기 때문에 테스트가 통과됩니다. 이를 통해 테스트에 설명적인 이름을 제공하는 것이 얼마나 유용한지도 알 수 있습니다.
@@ -730,6 +770,8 @@ Test Process sayHello
   Nextflow stdout:
 
   Process `sayHello` declares 1 input but was called with 0 arguments
+
+   -- Check script '/workspaces/training/side-quests/nf-test/.nf-test-1eaad118145a1fd798cb07e7dd75d087.nf' at line: 30 or see '/workspaces/training/side-quests/nf-test/.nf-test/tests/1eaad118145a1fd798cb07e7dd75d087/meta/nextflow.log' file for more details
   Nextflow stderr:
 
 FAILURE: Executed 1 tests in 4.884s (1 failed)
@@ -800,7 +842,7 @@ https://www.nf-test.com
 
 Test Process sayHello
 
-  Test [f91a1bcd] 'Should run without failures and produce correct output' PASSED (1.604s)
+  Test [d6837883] 'Should run without failures and produce correct output' PASSED (2.729s)
   Snapshots:
     1 created [Should run without failures and produce correct output]
 
@@ -808,7 +850,7 @@ Test Process sayHello
 Snapshot Summary:
   1 created
 
-SUCCESS: Executed 1 tests in 1.611s
+SUCCESS: Executed 1 tests in 2.733s
 ```
 
 성공입니다! `sayHello` process가 성공적으로 실행되고 출력이 생성되었기 때문에 테스트가 통과됩니다.
@@ -858,10 +900,10 @@ https://www.nf-test.com
 
 Test Process sayHello
 
-  Test [f91a1bcd] 'Should run without failures and produce correct output' PASSED (1.675s)
+  Test [d6837883] 'Should run without failures and produce correct output' PASSED (3.092s)
 
 
-SUCCESS: Executed 1 tests in 1.685s
+SUCCESS: Executed 1 tests in 3.097s
 ```
 
 성공입니다! `sayHello` process가 성공적으로 실행되고 출력이 스냅샷과 일치하기 때문에 테스트가 통과됩니다.
@@ -951,10 +993,10 @@ https://www.nf-test.com
 
 Test Process sayHello
 
-  Test [58df4e4b] 'Should run without failures and contain expected greeting' PASSED (7.196s)
+  Test [c1d07f15] 'Should run without failures and contain expected greeting' PASSED (2.459s)
 
 
-SUCCESS: Executed 1 tests in 7.208s
+SUCCESS: Executed 1 tests in 2.461s
 ```
 
 ### 2.4. `convertToUpper` process 테스트
@@ -998,10 +1040,10 @@ nextflow_process {
 이제 대문자로 변환하려는 텍스트가 포함된 단일 입력 파일을 convertToUpper process에 제공해야 합니다. 여러 가지 방법이 있습니다:
 
 - 테스트 전용 파일을 생성할 수 있습니다
-- 기존 data/greetings.csv 파일을 재사용할 수 있습니다
+- 기존 greetings.csv 파일을 재사용할 수 있습니다
 - 테스트 내에서 즉석으로 생성할 수 있습니다
 
-지금은 파이프라인 수준 테스트에서 사용한 예시를 활용하여 기존 data/greetings.csv 파일을 재사용합니다. 이전과 마찬가지로 테스트하는 내용을 더 잘 반영하도록 테스트 이름을 지정할 수 있지만, 이번에는 (다른 process에서 했던 것처럼) 특정 문자열을 확인하는 대신 콘텐츠를 '스냅샷'으로 남겨두겠습니다.
+지금은 파이프라인 수준 테스트에서 사용한 예시를 활용하여 기존 greetings.csv 파일을 재사용합니다. 이전과 마찬가지로 테스트하는 내용을 더 잘 반영하도록 테스트 이름을 지정할 수 있지만, 이번에는 (다른 process에서 했던 것처럼) 특정 문자열을 확인하는 대신 콘텐츠를 '스냅샷'으로 남겨두겠습니다.
 
 === "후"
 
@@ -1070,7 +1112,7 @@ https://www.nf-test.com
 
 Test Process convertToUpper
 
-  Test [c59b6044] 'Should run without failures and produce correct output' PASSED (1.755s)
+  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (3.472s)
   Snapshots:
     1 created [Should run without failures and produce correct output]
 
@@ -1078,7 +1120,7 @@ Test Process convertToUpper
 Snapshot Summary:
   1 created
 
-SUCCESS: Executed 1 tests in 1.764s
+SUCCESS: Executed 1 tests in 3.478s
 ```
 
 `convertToUpper` process에 대한 스냅샷 파일이 `tests/main.converttoupper.nf.test.snap`에 생성되었습니다. 테스트를 다시 실행하면 nf-test가 다시 통과되는 것을 확인할 수 있습니다.
@@ -1097,10 +1139,10 @@ https://www.nf-test.com
 
 Test Process convertToUpper
 
-  Test [c59b6044] 'Should run without failures and produce correct output' PASSED (1.798s)
+  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (2.387s)
 
 
-SUCCESS: Executed 1 tests in 1.811s
+SUCCESS: Executed 1 tests in 2.39s
 ```
 
 ### 핵심 정리
@@ -1139,19 +1181,19 @@ https://www.nf-test.com
 
 Test Process convertToUpper
 
-  Test [3d26d9af] 'Should run without failures and produce correct output' PASSED (4.155s)
+  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (3.472s)
 
 Test Workflow main.nf
 
-  Test [f183df37] 'Should run successfully with correct number of processes' PASSED (3.33s)
-  Test [d7e32a32] 'Should produce correct output files' PASSED (3.102s)
+  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (3.156s)
+  Test [44ba6e13] 'Should produce correct output files' PASSED (3.124s)
 
 Test Process sayHello
 
-  Test [58df4e4b] 'Should run without failures and contain expected greeting' PASSED (2.614s)
+  Test [c1d07f15] 'Should run without failures and contain expected greeting' PASSED (5.782s)
 
 
-SUCCESS: Executed 4 tests in 13.481s
+SUCCESS: Executed 4 tests in 15.746s
 ```
 
 확인해 보세요! 단일 명령으로 각 process에 대해 1개, 전체 파이프라인에 대해 2개, 총 4개의 테스트를 실행했습니다. 대규모 코드베이스에서 이것이 얼마나 강력한지 상상해 보세요!
@@ -1180,7 +1222,7 @@ SUCCESS: Executed 4 tests in 13.481s
    - 기본 성공 테스트
    - process 수 검증
    - 출력 파일 존재 확인
-2. process 수준 테스트
+2. Process 수준 테스트
 3. 출력 검증의 두 가지 접근 방식:
    - 완전한 출력 검증을 위한 스냅샷 사용
    - 특정 콘텐츠 확인을 위한 직접 콘텐츠 assertion 사용
@@ -1193,7 +1235,7 @@ SUCCESS: Executed 4 tests in 13.481s
 - 테스트에 더 포괄적인 assertion 추가하기
 - 엣지 케이스 및 오류 조건에 대한 테스트 작성하기
 - 테스트를 자동으로 실행하도록 지속적 통합(CI) 설정하기
-- 워크플로우 및 모듈 테스트와 같은 다른 유형의 테스트 학습하기
+- 워크플로우, 성능 및 스트레스 테스트와 같은 다른 유형의 테스트 학습하기
 - 더 고급 콘텐츠 검증 기술 탐색하기
 
 **기억하세요:** 테스트는 코드가 어떻게 동작해야 하는지에 대한 살아있는 문서입니다. 더 많은 테스트를 작성하고 assertion이 더 구체적일수록 파이프라인의 신뢰성에 대한 확신을 가질 수 있습니다.
