@@ -2978,7 +2978,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Testowanie z nf-test
   
 
     
@@ -4261,21 +4261,21 @@ Na razie nie będziemy przeglądać kodu; najpierw zobaczmy, jak wygląda jego u
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>--greeting<span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span>
 </code></pre></div>
 <p>Wyjście w konsoli powinno wyglądać mniej więcej tak:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Wyjście</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
 <span class="normal"><a href="#__codelineno-1-2">2</a></span>
 <span class="normal"><a href="#__codelineno-1-3">3</a></span>
 <span class="normal"><a href="#__codelineno-1-4">4</a></span>
 <span class="normal"><a href="#__codelineno-1-5">5</a></span>
-<span class="normal"><a href="#__codelineno-1-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="go">Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="go">Launching `hello-world.nf` [small_swirles] revision: 0fb8dbb23d</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4"></a>
 <a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="go">[71/8143bd] sayHello | 1 of 1 ✔</span>
 </code></pre></div></td></tr></table></div>
 <p>Gratulacje, właśnie uruchomiłeś Swój pierwszy workflow Nextflow!</p>
 <p>Najważniejszym wyjściem jest tutaj ostatnia linia (linia 6):</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Wyjście</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="go">[71/8143bd] sayHello | 1 of 1 ✔</span>
 </code></pre></div></td></tr></table></div>
 <p>To mówi nam, że proces <code>sayHello</code> został pomyślnie wykonany raz (<code>1 of 1 ✔</code>).</p>
 <p>To świetnie, ale możesz się zastanawiać: gdzie jest wyjście?</p>
@@ -4309,14 +4309,14 @@ Dla każdego z nich przygotuje niezbędne wejścia, wykona odpowiednie instrukcj
 <p>Wszystkie te katalogi zadań będą znajdować się w katalogu o nazwie <code>work</code> w Twoim bieżącym katalogu (gdzie uruchamiasz polecenie).</p>
 <p>To może brzmieć zagmatwanie, więc zobaczmy, jak to wygląda w praktyce.</p>
 <p>Wracając do wyjścia konsoli dla workflow'u, który uruchomiliśmy wcześniej, mieliśmy tę linię:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Fragment wyjścia polecenia</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Excerpt of command output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="go">[71/8143bd] sayHello | 1 of 1 ✔</span>
 </code></pre></div></td></tr></table></div>
-<p>Widzisz, jak linia zaczyna się od <code>[a3/7be2fa]</code>?
+<p>Widzisz, jak linia zaczyna się od <code>[71/8143bd]</code>?
 To skrócona forma ścieżki katalogu zadania dla tego jednego wywołania procesu i mówi Ci, gdzie znaleźć wyjście wywołania procesu <code>sayHello</code> w ścieżce katalogu <code>work/</code>.</p>
-<p>Możesz znaleźć pełną ścieżkę, wpisując następujące polecenie (zastępując <code>a3/7be2fa</code> tym, co widzisz w Swoim własnym terminalu) i naciskając klawisz tab, aby automatycznie uzupełnić ścieżkę, lub dodając gwiazdkę:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>tree<span class="w"> </span>work/a3/7be2fa*
+<p>Możesz znaleźć pełną ścieżkę, wpisując następujące polecenie (zastępując <code>71/8143bd</code> tym, co widzisz w Swoim własnym terminalu) i naciskając klawisz tab, aby automatycznie uzupełnić ścieżkę, lub dodając gwiazdkę:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>tree<span class="w"> </span>work/71/8143bd*
 </code></pre></div>
-<p>Powinno to zwrócić pełną ścieżkę katalogu: <code>work/a3/7be2fa7be2fad5e71e5f49998f795677fd68</code></p>
+<p>Powinno to zwrócić pełną ścieżkę katalogu: <code>work/71/8143bd5ed3420e23c5f0dc1a05056d</code></p>
 <p>Zobaczmy, co tam jest.</p>
 <div class="admonition tip">
 <p class="admonition-title">Wskazówka</p>
@@ -4330,8 +4330,8 @@ Jednak pliki logów są ustawione jako niewidoczne w terminalu, więc jeśli chc
   <summary>Zawartość katalogu</summary>
 
 <div class="highlight"><span class="filename">work/</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">work</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="go">└── a3</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">    └── 7be2fad5e71e5f49998f795677fd68</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="go">└── 71</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">    └── 8143bd5ed3420e23c5f0dc1a05056d</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="go">        ├── .command.begin</span>
 <a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="go">        ├── .command.err</span>
 <a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="go">        ├── .command.log</span>
@@ -4349,7 +4349,7 @@ Jeśli go otworzysz, znajdziesz ponownie powitanie <code>Hello World!</code>.</p
 <details>
   <summary>Zawartość pliku output.txt</summary>
 
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">Hello World!</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">Hello World!</span>
 </code></pre></div></td></tr></table></div>
 
 </details>
@@ -4369,7 +4369,7 @@ Jeśli go otworzysz, znajdziesz ponownie powitanie <code>Hello World!</code>.</p
 <details>
   <summary>Zawartość pliku</summary>
 
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/.command.sh</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
 <span class="normal"><a href="#__codelineno-10-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="gp">#</span>!/bin/bash<span class="w"> </span>-ue
 <a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="go">echo &#39;Hello World!&#39; &gt; output.txt</span>
 </code></pre></div></td></tr></table></div>
@@ -4562,16 +4562,16 @@ Oznacza to, że Nextflow uruchomi tylko procesy, które dodałeś lub zmodyfikow
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="go">Launching `hello-world.nf` [tiny_noyce] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="go">Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d</span>
 <a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="go">[a3/7be2fa] process &gt; sayHello [100%] 1 of 1, cached: 1 ✔</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="go">[71/8143bd] sayHello | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
 </details>
-<p>Zwróć uwagę na fragment <code>cached:</code>, który został dodany w linii statusu procesu (linia 5), co oznacza, że Nextflow rozpoznał, iż już wykonał tę pracę i po prostu ponownie wykorzystał wynik z poprzedniego pomyślnego uruchomienia.</p>
+<p>Zwróć uwagę na fragment <code>cached:</code>, który został dodany w linii statusu procesu, co oznacza, że Nextflow rozpoznał, iż już wykonał tę pracę i po prostu ponownie wykorzystał wynik z poprzedniego pomyślnego uruchomienia.</p>
 <p>Możesz również zobaczyć, że hash podkatalogu roboczego jest taki sam jak w poprzednim uruchomieniu.
-Nextflow dosłownie wskazuje Ci na poprzednie wykonanie, mówiąc "Już to zrobiłem tam."</p>
+Nextflow dosłownie wskazuje Ci na poprzednie wykonanie, mówiąc „Już to zrobiłem tam."</p>
 <div class="admonition tip">
 <p class="admonition-title">Wskazówka</p>
 <p>Gdy ponownie uruchamiasz pipeline z <code>resume</code>, Nextflow nie nadpisuje żadnych plików zapisanych do katalogu <code>publishDir</code> przez żadne wywołanie procesu, które zostało wcześniej pomyślnie uruchomione.</p>

@@ -2198,7 +2198,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        निष्कर्ष
+        सारांश
       
     </span>
   </a>
@@ -2349,7 +2349,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        निष्कर्ष
+        सारांश
       
     </span>
   </a>
@@ -3857,7 +3857,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        निष्कर्ष
+        सारांश
       
     </span>
   </a>
@@ -4008,7 +4008,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        निष्कर्ष
+        सारांश
       
     </span>
   </a>
@@ -4254,39 +4254,39 @@
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> AI-सहायता प्राप्त अनुवाद - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">अधिक जानें और सुधार सुझाएं</a></span></p>
 <p>Nextflow for Bioimaging प्रशिक्षण पाठ्यक्रम के इस पहले भाग में, हम एक बहुत ही बुनियादी domain-agnostic Hello World उदाहरण का उपयोग करेंगे ताकि आवश्यक ऑपरेशन प्रदर्शित कर सकें और संबंधित Nextflow कोड घटकों को इंगित कर सकें।</p>
 <h2 id="1-workflow">1. workflow चलाएं<a class="headerlink" href="#1-workflow" title="Permanent link">&para;</a></h2>
-<p>हम आपको <code>hello-world.nf</code> नाम की एक workflow स्क्रिप्ट प्रदान करते हैं जो <code>--greeting</code> नाम के command-line argument के माध्यम से इनपुट लेती है और उस greeting वाली एक text फ़ाइल बनाती है।
+<p>हम तुम्हें <code>hello-world.nf</code> नाम की एक workflow स्क्रिप्ट प्रदान करते हैं जो <code>--greeting</code> नाम के command-line argument के माध्यम से इनपुट लेती है और उस greeting वाली एक text फ़ाइल बनाती है।
 हम अभी कोड को नहीं देखेंगे; पहले देखते हैं कि इसे चलाना कैसा लगता है।</p>
 <h3 id="11-workflow-execution">1.1. workflow लॉन्च करें और execution की निगरानी करें<a class="headerlink" href="#11-workflow-execution" title="Permanent link">&para;</a></h3>
 <p>टर्मिनल में, निम्नलिखित कमांड चलाएं:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>--greeting<span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span>
 </code></pre></div>
-<p>आपका console आउटपुट कुछ इस तरह दिखना चाहिए:</p>
+<p>तुम्हारा console आउटपुट कुछ इस तरह दिखना चाहिए:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
 <span class="normal"><a href="#__codelineno-1-2">2</a></span>
 <span class="normal"><a href="#__codelineno-1-3">3</a></span>
 <span class="normal"><a href="#__codelineno-1-4">4</a></span>
 <span class="normal"><a href="#__codelineno-1-5">5</a></span>
-<span class="normal"><a href="#__codelineno-1-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="go">Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="go">Launching `hello-world.nf` [small_swirles] revision: 0fb8dbb23d</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4"></a>
 <a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="go">[71/8143bd] sayHello | 1 of 1 ✔</span>
 </code></pre></div></td></tr></table></div>
-<p>बधाई हो, आपने अभी-अभी अपना पहला Nextflow workflow चलाया!</p>
+<p>बधाई हो, तुमने अभी-अभी अपना पहला Nextflow workflow चलाया!</p>
 <p>यहाँ सबसे महत्वपूर्ण आउटपुट आखिरी लाइन है (line 6):</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="go">[71/8143bd] sayHello | 1 of 1 ✔</span>
 </code></pre></div></td></tr></table></div>
 <p>यह हमें बताता है कि <code>sayHello</code> process एक बार सफलतापूर्वक executed हुआ (<code>1 of 1 ✔</code>)।</p>
-<p>यह बढ़िया है, लेकिन आप सोच रहे होंगे: आउटपुट कहाँ है?</p>
+<p>यह बढ़िया है, लेकिन तुम सोच रहे होंगे: आउटपुट कहाँ है?</p>
 <h3 id="12-results">1.2. <code>results</code> डायरेक्टरी में आउटपुट फ़ाइल खोजें<a class="headerlink" href="#12-results" title="Permanent link">&para;</a></h3>
 <p>यह workflow अपने आउटपुट को <code>results</code> नाम की डायरेक्टरी में publish करने के लिए configured है।
-यदि आप अपनी वर्तमान डायरेक्टरी को देखें, तो आप देखेंगे कि जब आपने workflow चलाई, तो Nextflow ने <code>results</code> नाम की एक नई डायरेक्टरी बनाई, जिसमें <code>output.txt</code> नाम की एक फ़ाइल है।</p>
+यदि तुम अपनी वर्तमान डायरेक्टरी को देखो, तो तुम देखोगे कि जब तुमने workflow चलाई, तो Nextflow ने <code>results</code> नाम की एक नई डायरेक्टरी बनाई, जिसमें <code>output.txt</code> नाम की एक फ़ाइल है।</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">results/</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="go">results</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="go">└── output.txt</span>
 </code></pre></div></td></tr></table></div>
-<p>फ़ाइल खोलें; सामग्री आपके द्वारा command line पर दी गई greeting से मेल खानी चाहिए।</p>
+<p>फ़ाइल खोलो; सामग्री तुम्हारे द्वारा command line पर दी गई greeting से मेल खानी चाहिए।</p>
 <details>
   <summary>फ़ाइल सामग्री</summary>
 
@@ -4296,42 +4296,42 @@
 </details>
 
 <p>यह बढ़िया है, हमारी workflow ने वह किया जो उसे करना था!</p>
-<p>हालांकि, ध्यान रखें कि 'published' परिणाम वास्तविक आउटपुट की एक copy (या कुछ मामलों में symlink) है जो Nextflow ने तब उत्पन्न किया जब उसने workflow को execute किया।</p>
+<p>हालांकि, ध्यान रखो कि 'published' परिणाम वास्तविक आउटपुट की एक copy (या कुछ मामलों में symlink) है जो Nextflow ने तब उत्पन्न किया जब उसने workflow को execute किया।</p>
 <p>तो अब, हम यह देखने के लिए अंदर झांकेंगे कि Nextflow ने वास्तव में कार्य कहाँ execute किया।</p>
 <div class="admonition warning">
 <p class="admonition-title">चेतावनी</p>
 <p>सभी workflows अपने आउटपुट को results डायरेक्टरी में publish करने के लिए set up नहीं होंगे, और/या डायरेक्टरी का नाम अलग हो सकता है।
-इस section में थोड़ा आगे, हम आपको दिखाएंगे कि यह व्यवहार कहाँ निर्दिष्ट है।</p>
+इस section में थोड़ा आगे, हम तुम्हें दिखाएंगे कि यह व्यवहार कहाँ निर्दिष्ट है।</p>
 </div>
 <h3 id="13-work-logs">1.3. <code>work/</code> डायरेक्टरी में मूल आउटपुट और logs खोजें<a class="headerlink" href="#13-work-logs" title="Permanent link">&para;</a></h3>
-<p>जब आप एक workflow चलाते हैं, तो Nextflow workflow में प्रत्येक process के हर एक invocation के लिए एक अलग 'task directory' बनाता है (=pipeline में प्रत्येक चरण)।
+<p>जब तुम एक workflow चलाते हो, तो Nextflow workflow में प्रत्येक process के हर एक invocation के लिए एक अलग 'task directory' बनाता है (=pipeline में प्रत्येक चरण)।
 प्रत्येक के लिए, यह आवश्यक inputs को stage करेगा, संबंधित instruction(s) को execute करेगा और उस एक डायरेक्टरी के भीतर आउटपुट और log फ़ाइलें लिखेगा, जिसका नाम automatically hash का उपयोग करके दिया जाता है ताकि इसे unique बनाया जा सके।</p>
-<p>ये सभी task directories आपकी वर्तमान डायरेक्टरी (जहाँ आप कमांड चला रहे हैं) के अंदर <code>work</code> नाम की डायरेक्टरी के अंतर्गत रहेंगी।</p>
+<p>ये सभी task directories तुम्हारी वर्तमान डायरेक्टरी (जहाँ तुम कमांड चला रहे हो) के अंदर <code>work</code> नाम की डायरेक्टरी के अंतर्गत रहेंगी।</p>
 <p>यह भ्रमित करने वाला लग सकता है, तो देखते हैं कि यह व्यवहार में कैसा दिखता है।</p>
 <p>पहले चलाई गई workflow के console आउटपुट पर वापस जाते हुए, हमारे पास यह लाइन थी:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Excerpt of command output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Excerpt of command output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="go">[71/8143bd] sayHello | 1 of 1 ✔</span>
 </code></pre></div></td></tr></table></div>
-<p>देखें कि लाइन <code>[a3/7be2fa]</code> से कैसे शुरू होती है?
-यह उस एक process call के लिए task directory path का एक संक्षिप्त रूप है, और आपको बताता है कि <code>work/</code> डायरेक्टरी path के भीतर <code>sayHello</code> process call का आउटपुट कहाँ मिलेगा।</p>
-<p>आप निम्नलिखित कमांड टाइप करके (अपने terminal में दिखाई देने वाले <code>a3/7be2fa</code> के साथ बदलते हुए) और path को autocomplete करने के लिए tab key दबाकर या asterisk जोड़कर पूरा path पा सकते हैं:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>tree<span class="w"> </span>work/a3/7be2fa*
+<p>देखो कि लाइन <code>[71/8143bd]</code> से कैसे शुरू होती है?
+यह उस एक process call के लिए task directory path का एक संक्षिप्त रूप है, और तुम्हें बताता है कि <code>work/</code> डायरेक्टरी path के भीतर <code>sayHello</code> process call का आउटपुट कहाँ मिलेगा।</p>
+<p>तुम निम्नलिखित कमांड टाइप करके (अपने terminal में दिखाई देने वाले <code>71/8143bd</code> के साथ बदलते हुए) और path को autocomplete करने के लिए tab key दबाकर या asterisk जोड़कर पूरा path पा सकते हो:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>tree<span class="w"> </span>work/71/8143bd*
 </code></pre></div>
-<p>यह पूरा path directory path देना चाहिए: <code>work/a3/7be2fa7be2fad5e71e5f49998f795677fd68</code></p>
+<p>यह पूरा path directory path देना चाहिए: <code>work/71/8143bd5ed3420e23c5f0dc1a05056d</code></p>
 <p>देखते हैं कि वहाँ क्या है।</p>
 <div class="admonition tip">
 <p class="admonition-title">सुझाव</p>
-<p>यदि आप VSCode file explorer में task subdirectory की सामग्री ब्राउज़ करते हैं, तो आप सभी फ़ाइलें तुरंत देखेंगे।
-हालांकि, log फ़ाइलें terminal में invisible होने के लिए set हैं, इसलिए यदि आप उन्हें देखने के लिए <code>ls</code> या <code>tree</code> का उपयोग करना चाहते हैं, तो आपको invisible फ़ाइलें प्रदर्शित करने के लिए संबंधित विकल्प set करना होगा।</p>
+<p>यदि तुम VSCode file explorer में task subdirectory की सामग्री ब्राउज़ करते हो, तो तुम सभी फ़ाइलें तुरंत देखोगे।
+हालांकि, log फ़ाइलें terminal में invisible होने के लिए set हैं, इसलिए यदि तुम उन्हें देखने के लिए <code>ls</code> या <code>tree</code> का उपयोग करना चाहते हो, तो तुम्हें invisible फ़ाइलें प्रदर्शित करने के लिए संबंधित विकल्प set करना होगा।</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>tree<span class="w"> </span>-a<span class="w"> </span>work
 </code></pre></div>
 </div>
-<p>आपके सिस्टम पर सटीक subdirectory नाम अलग होंगे।</p>
+<p>तुम्हारे सिस्टम पर सटीक subdirectory नाम अलग होंगे।</p>
 <details>
   <summary>डायरेक्टरी सामग्री</summary>
 
 <div class="highlight"><span class="filename">work/</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">work</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="go">└── a3</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">    └── 7be2fad5e71e5f49998f795677fd68</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="go">└── 71</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">    └── 8143bd5ed3420e23c5f0dc1a05056d</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="go">        ├── .command.begin</span>
 <a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="go">        ├── .command.err</span>
 <a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="go">        ├── .command.log</span>
@@ -4344,12 +4344,12 @@
 
 </details>
 
-<p>आपको तुरंत <code>output.txt</code> फ़ाइल पहचाननी चाहिए, जो वास्तव में <code>sayHello</code> process का मूल आउटपुट है जो <code>results</code> डायरेक्टरी में published हुआ।
-यदि आप इसे खोलते हैं, तो आपको फिर से <code>Hello World!</code> greeting मिलेगी।</p>
+<p>तुम्हें तुरंत <code>output.txt</code> फ़ाइल पहचाननी चाहिए, जो वास्तव में <code>sayHello</code> process का मूल आउटपुट है जो <code>results</code> डायरेक्टरी में published हुआ।
+यदि तुम इसे खोलते हो, तो तुम्हें फिर से <code>Hello World!</code> greeting मिलेगी।</p>
 <details>
   <summary>output.txt की फ़ाइल सामग्री</summary>
 
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">Hello World!</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">Hello World!</span>
 </code></pre></div></td></tr></table></div>
 
 </details>
@@ -4365,11 +4365,11 @@
 <li><strong><code>.command.sh</code></strong>: वह कमांड जो वास्तव में process call द्वारा चलाई गई थी</li>
 <li><strong><code>.exitcode</code></strong>: कमांड से परिणामी exit code</li>
 </ul>
-<p><code>.command.sh</code> फ़ाइल विशेष रूप से उपयोगी है क्योंकि यह आपको मुख्य कमांड दिखाती है जो Nextflow ने execute किया, सभी bookkeeping और task/environment setup को शामिल नहीं करते हुए।</p>
+<p><code>.command.sh</code> फ़ाइल विशेष रूप से उपयोगी है क्योंकि यह तुम्हें मुख्य कमांड दिखाती है जो Nextflow ने execute किया, सभी bookkeeping और task/environment setup को शामिल नहीं करते हुए।</p>
 <details>
   <summary>फ़ाइल सामग्री</summary>
 
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/.command.sh</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
 <span class="normal"><a href="#__codelineno-10-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="gp">#</span>!/bin/bash<span class="w"> </span>-ue
 <a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="go">echo &#39;Hello World!&#39; &gt; output.txt</span>
 </code></pre></div></td></tr></table></div>
@@ -4378,15 +4378,15 @@
 
 <div class="admonition tip">
 <p class="admonition-title">सुझाव</p>
-<p>जब कुछ गलत हो जाता है और आपको troubleshoot करने की आवश्यकता होती है कि क्या हुआ, तो यह देखने के लिए <code>command.sh</code> स्क्रिप्ट को देखना उपयोगी हो सकता है कि Nextflow ने workflow instructions, variable interpolation आदि के आधार पर बिल्कुल कौन सी कमांड बनाई।</p>
+<p>जब कुछ गलत हो जाता है और तुम्हें troubleshoot करने की आवश्यकता होती है कि क्या हुआ, तो यह देखने के लिए <code>command.sh</code> स्क्रिप्ट को देखना उपयोगी हो सकता है कि Nextflow ने workflow instructions, variable interpolation आदि के आधार पर बिल्कुल कौन सी कमांड बनाई।</p>
 </div>
 <h3 id="14-greetings">1.4. वैकल्पिक अभ्यास: अलग-अलग greetings के साथ फिर से चलाएं<a class="headerlink" href="#14-greetings" title="Permanent link">&para;</a></h3>
-<p><code>--greeting</code> argument के लिए अलग-अलग मानों के साथ workflow को कुछ बार फिर से चलाने की कोशिश करें, फिर <code>results/</code> डायरेक्टरी और task directories दोनों की सामग्री देखें।</p>
-<p>देखें कि कैसे isolated task directories के आउटपुट और logs संरक्षित हैं, जबकि <code>results</code> डायरेक्टरी की सामग्री बाद के executions के आउटपुट द्वारा overwrite हो जाती है।</p>
-<h3 id="_1">निष्कर्ष<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<p>आप जानते हैं कि एक साधारण Nextflow स्क्रिप्ट कैसे चलाएं, इसके execution की निगरानी कैसे करें और इसके आउटपुट कैसे खोजें।</p>
+<p><code>--greeting</code> argument के लिए अलग-अलग मानों के साथ workflow को कुछ बार फिर से चलाने की कोशिश करो, फिर <code>results/</code> डायरेक्टरी और task directories दोनों की सामग्री देखो।</p>
+<p>देखो कि कैसे isolated task directories के आउटपुट और logs संरक्षित हैं, जबकि <code>results</code> डायरेक्टरी की सामग्री बाद के executions के आउटपुट द्वारा overwrite हो जाती है।</p>
+<h3 id="_1">सारांश<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>तुम जानते हो कि एक साधारण Nextflow स्क्रिप्ट कैसे चलाएं, इसके execution की निगरानी कैसे करें और इसके आउटपुट कैसे खोजें।</p>
 <h3 id="_2">आगे क्या है?<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p>सीखें कि बुनियादी Nextflow स्क्रिप्ट कैसे पढ़ें और पहचानें कि इसके घटक इसकी functionality से कैसे संबंधित हैं।</p>
+<p>सीखो कि बुनियादी Nextflow स्क्रिप्ट कैसे पढ़ें और पहचानें कि इसके घटक इसकी functionality से कैसे संबंधित हैं।</p>
 <hr />
 <h2 id="2-hello-world-workflow-starter">2. Hello World workflow starter स्क्रिप्ट की जांच करें<a class="headerlink" href="#2-hello-world-workflow-starter" title="Permanent link">&para;</a></h2>
 <p>हमने वहाँ मूल रूप से workflow स्क्रिप्ट को एक black box की तरह treat किया।
@@ -4545,58 +4545,58 @@ Workflow परिभाषा keyword <code>workflow</code> से शुरू
 <p>अपने workflow executions को सुविधाजनक रूप से प्रबंधित करना सीखें।</p>
 <hr />
 <h2 id="3-workflow-executions">3. workflow executions प्रबंधित करें<a class="headerlink" href="#3-workflow-executions" title="Permanent link">&para;</a></h2>
-<p>Workflows लॉन्च करना और आउटपुट प्राप्त करना जानना बढ़िया है, लेकिन आप जल्दी पाएंगे कि workflow management के कुछ अन्य पहलू हैं जो आपके जीवन को आसान बना देंगे।</p>
-<p>यहाँ हम आपको दिखाते हैं कि जब आपको उसी workflow को फिर से लॉन्च करना हो तो <code>resume</code> feature का लाभ कैसे उठाएं, <code>nextflow log</code> के साथ execution logs की जांच कैसे करें, और <code>nextflow clean</code> के साथ पुरानी work directories को कैसे delete करें।</p>
+<p>Workflows लॉन्च करना और आउटपुट प्राप्त करना जानना बढ़िया है, लेकिन तुम जल्दी पाओगे कि workflow management के कुछ अन्य पहलू हैं जो तुम्हारे जीवन को आसान बना देंगे।</p>
+<p>यहाँ हम तुम्हें दिखाते हैं कि जब तुम्हें उसी workflow को फिर से लॉन्च करना हो तो <code>resume</code> feature का लाभ कैसे उठाएं, <code>nextflow log</code> के साथ execution logs की जांच कैसे करें, और <code>nextflow clean</code> के साथ पुरानी work directories को कैसे delete करें।</p>
 <h3 id="31-resume-workflow">3.1. <code>-resume</code> के साथ workflow को फिर से लॉन्च करें<a class="headerlink" href="#31-resume-workflow" title="Permanent link">&para;</a></h3>
-<p>कभी-कभी, आप एक pipeline को फिर से चलाना चाहेंगे जिसे आपने पहले लॉन्च किया था, बिना उस काम को फिर से किए जो पहले ही सफलतापूर्वक पूरा हो चुका है।</p>
-<p>Nextflow में <code>-resume</code> नामक एक विकल्प है जो आपको ऐसा करने की अनुमति देता है।
+<p>कभी-कभी, तुम एक pipeline को फिर से चलाना चाहोगे जिसे तुमने पहले लॉन्च किया था, बिना उस काम को फिर से किए जो पहले ही सफलतापूर्वक पूरा हो चुका है।</p>
+<p>Nextflow में <code>-resume</code> नामक एक विकल्प है जो तुम्हें ऐसा करने की अनुमति देता है।
 विशेष रूप से, इस mode में, कोई भी processes जो पहले से ही बिल्कुल वही कोड, settings और inputs के साथ चलाई जा चुकी हैं, skip की जाएंगी।
-इसका मतलब है कि Nextflow केवल उन processes को चलाएगा जिन्हें आपने पिछली बार से जोड़ा या संशोधित किया है, या जिन्हें आप नई settings या inputs प्रदान कर रहे हैं।</p>
+इसका मतलब है कि Nextflow केवल उन processes को चलाएगा जिन्हें तुमने पिछली बार से जोड़ा या संशोधित किया है, या जिन्हें तुम नई settings या inputs प्रदान कर रहे हो।</p>
 <p>ऐसा करने के दो मुख्य फायदे हैं:</p>
 <ul>
-<li>यदि आप एक pipeline विकसित करने के बीच में हैं, तो आप अधिक तेजी से iterate कर सकते हैं क्योंकि आपको अपने परिवर्तनों का परीक्षण करने के लिए केवल उस process(es) को चलाना होगा जिस पर आप सक्रिय रूप से काम कर रहे हैं।</li>
-<li>यदि आप production में एक pipeline चला रहे हैं और कुछ गलत हो जाता है, तो कई मामलों में आप समस्या को ठीक कर सकते हैं और pipeline को फिर से लॉन्च कर सकते हैं, और यह failure के बिंदु से चलना resume करेगा, जो आपका बहुत समय और compute बचा सकता है।</li>
+<li>यदि तुम एक pipeline विकसित करने के बीच में हो, तो तुम अधिक तेजी से iterate कर सकते हो क्योंकि तुम्हें अपने परिवर्तनों का परीक्षण करने के लिए केवल उस process(es) को चलाना होगा जिस पर तुम सक्रिय रूप से काम कर रहे हो।</li>
+<li>यदि तुम production में एक pipeline चला रहे हो और कुछ गलत हो जाता है, तो कई मामलों में तुम समस्या को ठीक कर सकते हो और pipeline को फिर से लॉन्च कर सकते हो, और यह failure के बिंदु से चलना resume करेगा, जो तुम्हारा बहुत समय और compute बचा सकता है।</li>
 </ul>
-<p>इसका उपयोग करने के लिए, बस अपनी कमांड में <code>-resume</code> जोड़ें और इसे चलाएं:</p>
+<p>इसका उपयोग करने के लिए, बस अपनी कमांड में <code>-resume</code> जोड़ो और इसे चलाओ:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>--greeting<span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span><span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
 <summary>कमांड आउटपुट</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="go">Launching `hello-world.nf` [tiny_noyce] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="go">Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d</span>
 <a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="go">[a3/7be2fa] process &gt; sayHello [100%] 1 of 1, cached: 1 ✔</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="go">[71/8143bd] sayHello | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
 </details>
-<p>Process status line (line 5) में जोड़े गए <code>cached:</code> bit को देखें, जिसका अर्थ है कि Nextflow ने पहचान लिया है कि उसने यह काम पहले ही कर लिया है और बस पिछले सफल run के परिणाम का पुन: उपयोग किया।</p>
-<p>आप यह भी देख सकते हैं कि work subdirectory hash पिछले run के समान है।
-Nextflow सचमुच आपको पिछले execution की ओर इशारा कर रहा है और कह रहा है "मैंने वह पहले ही वहाँ कर दिया।"</p>
+<p>Process status line में जोड़े गए <code>cached:</code> bit को देखो, जिसका अर्थ है कि Nextflow ने पहचान लिया है कि उसने यह काम पहले ही कर लिया है और बस पिछले सफल run के परिणाम का पुन: उपयोग किया।</p>
+<p>तुम यह भी देख सकते हो कि work subdirectory hash पिछले run के समान है।
+Nextflow सचमुच तुम्हें पिछले execution की ओर इशारा कर रहा है और कह रहा है "मैंने वह पहले ही वहाँ कर दिया।"</p>
 <div class="admonition tip">
 <p class="admonition-title">सुझाव</p>
-<p>जब आप <code>resume</code> के साथ pipeline को फिर से चलाते हैं, तो Nextflow किसी भी process call द्वारा <code>publishDir</code> डायरेक्टरी में लिखी गई किसी भी फ़ाइल को overwrite नहीं करता है जो पहले सफलतापूर्वक चलाई गई थी।</p>
+<p>जब तुम <code>resume</code> के साथ pipeline को फिर से चलाते हो, तो Nextflow किसी भी process call द्वारा <code>publishDir</code> डायरेक्टरी में लिखी गई किसी भी फ़ाइल को overwrite नहीं करता है जो पहले सफलतापूर्वक चलाई गई थी।</p>
 </div>
 <h3 id="32-executions-log">3.2. पिछले executions के log की जांच करें<a class="headerlink" href="#32-executions-log" title="Permanent link">&para;</a></h3>
-<p>जब भी आप nextflow workflow लॉन्च करते हैं, तो वर्तमान working डायरेक्टरी में <code>.nextflow</code> नामक एक hidden डायरेक्टरी के अंतर्गत <code>history</code> नामक log फ़ाइल में एक line लिखी जाती है।</p>
+<p>जब भी तुम nextflow workflow लॉन्च करते हो, तो वर्तमान working डायरेक्टरी में <code>.nextflow</code> नामक एक hidden डायरेक्टरी के अंतर्गत <code>history</code> नामक log फ़ाइल में एक line लिखी जाती है।</p>
 <p>इस जानकारी तक पहुँचने का एक अधिक सुविधाजनक तरीका <code>nextflow log</code> कमांड का उपयोग करना है।</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>nextflow<span class="w"> </span>log
 </code></pre></div>
-<p>यह log फ़ाइल की सामग्री को terminal में आउटपुट करेगा, आपको timestamp, run name, status, और वर्तमान working डायरेक्टरी के भीतर से लॉन्च किए गए हर Nextflow run के लिए पूरी command line दिखाएगा।</p>
+<p>यह log फ़ाइल की सामग्री को terminal में आउटपुट करेगा, तुम्हें timestamp, run name, status, और वर्तमान working डायरेक्टरी के भीतर से लॉन्च किए गए हर Nextflow run के लिए पूरी command line दिखाएगा।</p>
 <h3 id="33-work-directories-delete">3.3. पुरानी work directories delete करें<a class="headerlink" href="#33-work-directories-delete" title="Permanent link">&para;</a></h3>
-<p>विकास प्रक्रिया के दौरान, आप आमतौर पर अपनी draft pipelines को बड़ी संख्या में चलाएंगे, जो कई subdirectories में बहुत सारी फ़ाइलों के संचय का कारण बन सकता है।
+<p>विकास प्रक्रिया के दौरान, तुम आमतौर पर अपनी draft pipelines को बड़ी संख्या में चलाओगे, जो कई subdirectories में बहुत सारी फ़ाइलों के संचय का कारण बन सकता है।
 चूंकि subdirectories का नाम randomly दिया जाता है, इसलिए उनके नामों से यह बताना मुश्किल है कि पुरानी बनाम अधिक हाल की runs क्या हैं।</p>
-<p>Nextflow में एक सुविधाजनक <code>clean</code> subcommand शामिल है जो automatically पिछली runs के लिए work subdirectories को delete कर सकता है जिनकी आपको अब परवाह नहीं है, कई <a href="https://www.nextflow.io/docs/latest/reference/cli.html#clean">options</a> के साथ यह नियंत्रित करने के लिए कि क्या deleted किया जाएगा।</p>
-<p>आप Nextflow log का उपयोग करके timestamp और/या command line के आधार पर एक run को देख सकते हैं, फिर पहले की runs से work directories को delete करने के लिए <code>nextflow clean -before &lt;run_name&gt; -f</code> का उपयोग कर सकते हैं।</p>
+<p>Nextflow में एक सुविधाजनक <code>clean</code> subcommand शामिल है जो automatically पिछली runs के लिए work subdirectories को delete कर सकता है जिनकी तुम्हें अब परवाह नहीं है, कई <a href="https://www.nextflow.io/docs/latest/reference/cli.html#clean">options</a> के साथ यह नियंत्रित करने के लिए कि क्या deleted किया जाएगा।</p>
+<p>तुम Nextflow log का उपयोग करके timestamp और/या command line के आधार पर एक run को देख सकते हो, फिर पहले की runs से work directories को delete करने के लिए <code>nextflow clean -before &lt;run_name&gt; -f</code> का उपयोग कर सकते हो।</p>
 <div class="admonition warning">
 <p class="admonition-title">चेतावनी</p>
 <p>पिछली runs से work subdirectories को delete करना उन्हें Nextflow के cache से हटा देता है और उन directories में संग्रहीत किसी भी आउटपुट को delete कर देता है।
 इसका मतलब है कि यह संबंधित processes को फिर से चलाए बिना execution को resume करने की Nextflow की क्षमता को तोड़ देता है।</p>
-<p>किसी भी आउटपुट को सहेजना आपकी जिम्मेदारी है जिसकी आपको परवाह है या जिस पर आप निर्भर रहने की योजना बनाते हैं! यदि आप इस उद्देश्य के लिए <code>publishDir</code> directive का उपयोग कर रहे हैं, तो सुनिश्चित करें कि <code>copy</code> mode का उपयोग करें, <code>symlink</code> mode का नहीं।</p>
+<p>किसी भी आउटपुट को सहेजना तुम्हारी जिम्मेदारी है जिसकी तुम्हें परवाह है या जिस पर तुम निर्भर रहने की योजना बनाते हो! यदि तुम इस उद्देश्य के लिए <code>publishDir</code> directive का उपयोग कर रहे हो, तो सुनिश्चित करो कि <code>copy</code> mode का उपयोग करो, <code>symlink</code> mode का नहीं।</p>
 </div>
-<h3 id="_5">निष्कर्ष<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>आप जानते हैं कि pipeline को उन steps को दोहराए बिना कैसे फिर से लॉन्च करें जो पहले ही identical तरीके से चलाए गए थे, execution log की जांच करें, और पुरानी work directories को साफ करने के लिए <code>nextflow clean</code> कमांड का उपयोग करें।</p>
+<h3 id="_5">सारांश<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>तुम जानते हो कि pipeline को उन steps को दोहराए बिना कैसे फिर से लॉन्च करें जो पहले ही identical तरीके से चलाए गए थे, execution log की जांच करें, और पुरानी work directories को साफ करने के लिए <code>nextflow clean</code> कमांड का उपयोग करें।</p>
 <h3 id="_6">आगे क्या है?<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p>अब जब आप बुनियादी Nextflow operations समझते हैं, तो आप nf-core/molkart के साथ एक वास्तविक bioimaging pipeline चलाने के लिए तैयार हैं।</p><div id="quiz-progress-sidebar" aria-label="क्विज़ प्रगति" style="display: none;">
+<p>अब जब तुम बुनियादी Nextflow operations समझते हो, तो तुम nf-core/molkart के साथ एक वास्तविक bioimaging pipeline चलाने के लिए तैयार हो।</p><div id="quiz-progress-sidebar" aria-label="क्विज़ प्रगति" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">
     <span class="md-nav__icon md-icon"></span>

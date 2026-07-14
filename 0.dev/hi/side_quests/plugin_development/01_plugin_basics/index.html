@@ -4744,7 +4744,7 @@ nf-schema plugin में <code>validation</code> configuration scope शाम
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-hello@0.5.0&#39;</span>
 <a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-schema@2.6.1&#39;</span>
-<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="hll"><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.2.0&#39;</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="hll"><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.3.0&#39;</span>
 </span><a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="o">}</span>
 </code></pre></div>
 </div>
@@ -4762,7 +4762,7 @@ nf-schema plugin में <code>validation</code> configuration scope शाम
 </code></pre></div>
 <p>Plugin execution के दौरान कई INFO और WARN messages उत्पन्न करता है।
 ये local machine पर चलने वाले एक छोटे उदाहरण के लिए सामान्य हैं:</p>
-<div class="highlight"><span class="filename">Output (partial)</span><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="go">nf-co2footprint plugin  ~  version 1.2.0</span>
+<div class="highlight"><span class="filename">Output (partial)</span><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="go">nf-co2footprint plugin  ~  version 1.3.0</span>
 <a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="go">WARN - [nf-co2footprint] Target zone null not found. Attempting to retrieve carbon intensity for fallback zone GLOBAL.</span>
 <a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="go">INFO - [nf-co2footprint] Using fallback carbon intensity from GLOBAL from CI table: 480.0 gCO₂eq/kWh.</span>
 <a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="go">WARN - [nf-co2footprint] Executor &#39;null&#39; not mapped.</span>
@@ -4813,7 +4813,7 @@ nf-co2footprint plugin एक <code>co2footprint</code> configuration scope प�
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-hello@0.5.0&#39;</span>
 <a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-schema@2.6.1&#39;</span>
-<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.2.0&#39;</span>
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.3.0&#39;</span>
 <a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a><span class="o">}</span>
 <a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a>
 <a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a><span class="hll"><span class="n">co2footprint</span><span class="w"> </span><span class="o">{</span>
@@ -4825,7 +4825,7 @@ nf-co2footprint plugin एक <code>co2footprint</code> configuration scope प�
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-hello@0.5.0&#39;</span>
 <a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-schema@2.6.1&#39;</span>
-<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.2.0&#39;</span>
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.3.0&#39;</span>
 <a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="o">}</span>
 </code></pre></div>
 </div>
@@ -4842,11 +4842,6 @@ nf-co2footprint plugin एक <code>co2footprint</code> configuration scope प�
 </code></pre></div>
 <p>Zone warning चली गई।
 Plugin अब global fallback (480.0 gCO₂eq/kWh) के बजाय GB-specific carbon intensity (163.92 gCO₂eq/kWh) का उपयोग करता है।</p>
-<div class="admonition note">
-<p class="admonition-title">नोट</p>
-<p>तुम्हें <code>WARN: Unrecognized config option 'co2footprint.location'</code> message भी दिख सकता है।
-यह केवल दिखावटी है और इसे सुरक्षित रूप से नज़रअंदाज़ किया जा सकता है; plugin फिर भी value को सही तरीके से पढ़ता है।</p>
-</div>
 <p>भाग 6 में, तुम अपने plugin के लिए एक configuration scope बनाओगे।</p>
 <p>यह plugin पूरी तरह से observer mechanism के माध्यम से काम करता है, resource metrics एकत्र करने और पाइपलाइन पूरी होने पर अपनी report उत्पन्न करने के लिए workflow lifecycle events में hook करता है।</p>
 <p>तुमने अब function plugins (जो <code>include</code> के साथ import किए जाते हैं) और एक observer plugin (जो केवल config के माध्यम से सक्रिय होता है) दोनों आज़माए हैं।

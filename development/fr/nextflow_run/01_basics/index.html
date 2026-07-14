@@ -4586,13 +4586,19 @@ Vous pouvez l'ouvrir dans l'explorateur de fichiers ou depuis la ligne de comman
 </code></pre></div>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">Launching `1-hello.nf` [goofy_torvalds] revision: c33d41f479</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="go">executor &gt;  local (1)</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="hll"><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
-</span></code></pre></div>
+</span><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="go">  /workspaces/training/nextflow-run/results</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="go">  first_output: 1-hello/output.txt</span>
+</code></pre></div>
 </details>
 <p>Si votre sortie console ressemble à cela, alors félicitations, vous venez d'exécuter votre premier workflow Nextflow !</p>
 <details class="question">
@@ -4605,11 +4611,12 @@ Vous pouvez l'ouvrir dans l'explorateur de fichiers ou depuis la ligne de comman
 <p>Alors vous utilisez probablement l'ancien analyseur de langage Nextflow v1.
 Cela a été mentionné au début du cours, mais vous l'avez peut-être manqué.
 Consultez le matériel d'aide <a href="../../info/nxf_versions/">Versions de Nextflow</a>.</p>
-<p>En bref, si vous utilisez Nextflow <code>25.10</code>, vous devez activer l'analyseur de langage v2 :</p>
+<p>L'analyseur v2 est le comportement par défaut à partir de Nextflow 26.04, vous ne rencontrerez donc ce problème que sur des versions antérieures.
+Sur une version antérieure à 26.04, vous devez activer l'analyseur de langage v2 :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v2
 </code></pre></div>
 </details>
-<p>La sortie la plus importante ici est la dernière ligne, qui est mise en surbrillance dans la sortie ci-dessus :</p>
+<p>La partie la plus importante ici est la ligne mise en surbrillance :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
 <p>Cela nous indique que le <strong>process</strong> <code>sayHello</code> a été exécuté avec succès une fois (<code>1 of 1 ✔</code>).</p>
@@ -4638,12 +4645,18 @@ Plus d'informations à ce sujet plus tard.</p>
 </code></pre></div>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Launching `1-hello.nf` [hungry_celsius] revision: f048d6ea78</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
 <a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">[a3/1e1535] sayHello [100%] 1 of 1 ✔</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">[a3/1e1535] sayHello | 1 of 1 ✔</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="go">  /workspaces/training/nextflow-run/hello_results</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="go">  first_output: 1-hello/output.txt</span>
 </code></pre></div>
 </details>
 <p>Vous devriez voir que vos sorties sont maintenant publiées dans un répertoire appelé <code>hello_results</code> au lieu de <code>results</code> :</p>
@@ -4665,7 +4678,7 @@ Pour chacun, il va préparer les entrées nécessaires, exécuter l'instruction 
 <p>Tous ces répertoires de tâches vivront sous un répertoire appelé <code>work</code> dans votre répertoire actuel (où vous exécutez la commande).</p>
 <p>Cela peut sembler confus, alors voyons à quoi cela ressemble en pratique.</p>
 <p>En revenant à la sortie console pour le workflow que nous avons exécuté plus tôt, nous avions cette ligne :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">[a3/1e1535] sayHello [100%] 1 of 1 ✔</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">[a3/1e1535] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
 <p>Vous voyez comment la ligne commence par <code>[a3/1e1535]</code> ?
 C'est une forme tronquée du chemin du répertoire de tâche pour cet appel de <strong>process</strong>, et vous indique où trouver la sortie de l'appel au <strong>process</strong> <code>sayHello</code> dans le chemin du répertoire <code>work/</code>.</p>
@@ -5074,15 +5087,27 @@ Cela signifie que Nextflow n'exécutera que les <strong>processes</strong> que v
 </code></pre></div>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1">1</a></span>
-<span class="normal"><a href="#__codelineno-30-2">2</a></span>
-<span class="normal"><a href="#__codelineno-30-3">3</a></span>
-<span class="normal"><a href="#__codelineno-30-4">4</a></span>
-<span class="normal"><a href="#__codelineno-30-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-30-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-30-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-30-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-30-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-30-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-30-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-30-10">10</a></span>
+<span class="normal"><a href="#__codelineno-30-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2"></a>
-<a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="go">Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="go">Launching `1-hello.nf` [tiny_noyce] revision: c33d41f479</span>
 <a id="__codelineno-30-4" name="__codelineno-30-4"></a>
 <a id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔</span>
+<a id="__codelineno-30-6" name="__codelineno-30-6"></a>
+<a id="__codelineno-30-7" name="__codelineno-30-7"></a><span class="go">Outputs:</span>
+<a id="__codelineno-30-8" name="__codelineno-30-8"></a>
+<a id="__codelineno-30-9" name="__codelineno-30-9"></a><span class="go">  /workspaces/training/nextflow-run/results</span>
+<a id="__codelineno-30-10" name="__codelineno-30-10"></a>
+<a id="__codelineno-30-11" name="__codelineno-30-11"></a><span class="go">  first_output: 1-hello/output.txt</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>La sortie console devrait sembler familière, mais il y a une chose qui est un peu différente par rapport à avant.</p>
@@ -5189,7 +5214,7 @@ Dans la ligne de sortie console `[a3/7be2fa] SAYHELLO | 1 of 1 ✔`, que représ
 - [x] Le chemin tronqué vers le répertoire de travail de la tâche
 - [ ] La somme de contrôle du fichier de sortie
 
-En savoir plus : [2.4. Trouver la sortie originale et les logs dans le répertoire `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
+En savoir plus : [2.3. Trouver la sortie originale et les logs dans le répertoire `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
@@ -5203,7 +5228,7 @@ En savoir plus : [2.4. Trouver la sortie originale et les logs dans le répertoi
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>En savoir plus : <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.4. Trouver la sortie originale et les logs dans le répertoire <code>work/</code></a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.3. Trouver la sortie originale et les logs dans le répertoire <code>work/</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5214,7 +5239,7 @@ Quel est le but du fichier `.command.sh` dans un répertoire de tâche ?
 - [ ] Il contient les messages d'erreur des tâches échouées
 - [ ] Il liste les fichiers d'entrée préparés pour la tâche
 
-En savoir plus : [2.4. Trouver la sortie originale et les logs dans le répertoire `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
+En savoir plus : [2.3. Trouver la sortie originale et les logs dans le répertoire `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -5228,7 +5253,7 @@ En savoir plus : [2.4. Trouver la sortie originale et les logs dans le répertoi
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>En savoir plus : <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.4. Trouver la sortie originale et les logs dans le répertoire <code>work/</code></a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.3. Trouver la sortie originale et les logs dans le répertoire <code>work/</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5239,7 +5264,7 @@ Qu'arrive-t-il aux résultats publiés lorsque vous ré-exécutez un workflow sa
 - [ ] Nextflow empêche l'écrasement et échoue
 - [ ] Ils sont automatiquement sauvegardés
 
-En savoir plus : [2.5. Ré-exécuter le workflow avec différentes salutations](#24-re-run-the-workflow-with-different-greetings)
+En savoir plus : [2.4. Ré-exécuter le workflow avec différentes salutations](#24-re-run-the-workflow-with-different-greetings)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
@@ -5253,7 +5278,7 @@ En savoir plus : [2.5. Ré-exécuter le workflow avec différentes salutations](
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>En savoir plus : <a href="#24-re-run-the-workflow-with-different-greetings">2.5. Ré-exécuter le workflow avec différentes salutations</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#24-re-run-the-workflow-with-different-greetings">2.4. Ré-exécuter le workflow avec différentes salutations</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5261,7 +5286,7 @@ En savoir plus : [2.5. Ré-exécuter le workflow avec différentes salutations](
 Qu'indique cette sortie console ?
 
 ```console
-[skipped  ] process > sayHello (1) [100%] 1 of 1, cached: 1 ✔
+[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
 ```
 
 - [ ] La tâche a échoué et a été ignorée
@@ -5277,7 +5302,7 @@ En savoir plus : [4.1. Relancer un workflow avec `-resume`](#41-re-launch-a-work
 
                 <div class="quiz-question" id="quiz-3-question">
                     <p>Qu'indique cette sortie console ?</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">[skipped  ] process &gt; sayHello (1) [100%] 1 of 1, cached: 1 ✔</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
                 </div>
                 <form action="javascript:void(0);" onsubmit="return false;">

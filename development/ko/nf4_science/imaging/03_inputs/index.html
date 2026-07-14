@@ -2221,7 +2221,7 @@
   <a href="#12" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. 해결책: 매개변수 파일 사용
+        1.2. 매개변수 파일
       
     </span>
   </a>
@@ -3732,7 +3732,7 @@
   <a href="#12" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. 해결책: 매개변수 파일 사용
+        1.2. 매개변수 파일
       
     </span>
   </a>
@@ -4072,21 +4072,15 @@
 이제 입력을 관리하는 두 가지 더 나은 방법인 <strong>매개변수 파일</strong>과 <strong>샘플시트</strong>를 배우겠습니다.</p>
 <h2 id="1">1. 매개변수 파일 사용하기<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <h3 id="11">1.1. 긴 명령줄의 문제점<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
-<p>Part 2의 명령을 다시 살펴보겠습니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>--input<span class="w"> </span><span class="s1">&#39;data/samplesheet.csv&#39;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span>--mindagap_tilesize<span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>--mindagap_boxsize<span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span>--mindagap_loopnum<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span>--clahe_pyramid_tile<span class="w"> </span><span class="m">368</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;cellpose&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span>--outdir<span class="w"> </span>results
+<p>Part 2에서는 명령을 간결하게 유지하고 정수형 전처리 매개변수와 같이 직접 입력한 값을 그대로 보존하기 위해 매개변수 파일을 사용했습니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;mesmer,cellpose,stardist&quot;</span>
 </code></pre></div>
-<p>이 방법은 작동하지만, 재현하거나 공유하거나 수정하기 어렵습니다.
+<p>많은 매개변수를 명령줄에서 개별적으로 전달하면 재현하거나 공유하거나 수정하기 어렵습니다.
 다음 달에 동일한 분석을 다시 실행해야 한다면 어떻게 하시겠습니까?
-동료가 정확히 같은 설정을 사용하고 싶어한다면 어떻게 하시겠습니까?</p>
-<h3 id="12">1.2. 해결책: 매개변수 파일 사용<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
-<p><code>params.yaml</code>이라는 파일을 생성하십시오:</p>
+동료가 정확히 같은 설정을 사용하고 싶어한다면 어떻게 하시겠습니까?
+매개변수 파일이 이 문제를 해결합니다.</p>
+<h3 id="12">1.2. 매개변수 파일<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p>지금까지 사용해 온 <code>params.yaml</code> 파일은 다음과 같습니다:</p>
 <div class="highlight"><span class="filename">params.yaml</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;data/samplesheet.csv&quot;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">outdir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;results&quot;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">mindagap_tilesize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">90</span>
@@ -4095,10 +4089,12 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nt">clahe_pyramid_tile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">368</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nt">segmentation_method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cellpose&quot;</span>
 </code></pre></div>
-<p>이제 명령이 다음과 같이 간단해집니다:</p>
+<p>각 매개변수는 <code>key: value</code> 쌍으로 작성됩니다.
+정수를 따옴표 없이 작성하면(예: <code>mindagap_tilesize: 90</code>) 정수형이 유지되며, 파이프라인의 매개변수 유효성 검사에서 이를 요구합니다.</p>
+<p>명령은 다음과 같이 간단해집니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>-resume
 </code></pre></div>
-<p>이것으로 끝입니다! 매개변수 파일은 정확한 설정을 문서화하고 재실행이나 공유를 쉽게 만듭니다.</p>
+<p>매개변수 파일은 정확한 설정을 문서화하고 재실행이나 공유를 쉽게 만듭니다.</p>
 <h3 id="13">1.3. 매개변수 재정의하기<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
 <p>명령줄에서 특정 매개변수를 여전히 재정의할 수 있습니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;stardist&quot;</span><span class="w"> </span>--outdir<span class="w"> </span>stardist_results<span class="w"> </span>-resume

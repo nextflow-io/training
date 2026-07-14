@@ -2516,7 +2516,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Testowanie z nf-test
   
 
     
@@ -4743,7 +4743,7 @@ Nie musisz zmieniać żadnego kodu pipeline'u — wystarczy dodać ją do konfig
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-hello@0.5.0&#39;</span>
 <a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-schema@2.6.1&#39;</span>
-<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="hll"><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.2.0&#39;</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="hll"><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.3.0&#39;</span>
 </span><a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="o">}</span>
 </code></pre></div>
 </div>
@@ -4761,7 +4761,7 @@ Nie musisz zmieniać żadnego kodu pipeline'u — wystarczy dodać ją do konfig
 </code></pre></div>
 <p>Wtyczka generuje kilka komunikatów INFO i WARN podczas wykonywania.
 Są one normalne dla małego przykładu uruchamianego na lokalnej maszynie:</p>
-<div class="highlight"><span class="filename">Output (partial)</span><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="go">nf-co2footprint plugin  ~  version 1.2.0</span>
+<div class="highlight"><span class="filename">Output (partial)</span><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="go">nf-co2footprint plugin  ~  version 1.3.0</span>
 <a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="go">WARN - [nf-co2footprint] Target zone null not found. Attempting to retrieve carbon intensity for fallback zone GLOBAL.</span>
 <a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="go">INFO - [nf-co2footprint] Using fallback carbon intensity from GLOBAL from CI table: 480.0 gCO₂eq/kWh.</span>
 <a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="go">WARN - [nf-co2footprint] Executor &#39;null&#39; not mapped.</span>
@@ -4812,7 +4812,7 @@ Wtyczka nf-co2footprint definiuje zakres konfiguracji <code>co2footprint</code>,
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-hello@0.5.0&#39;</span>
 <a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-schema@2.6.1&#39;</span>
-<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.2.0&#39;</span>
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.3.0&#39;</span>
 <a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a><span class="o">}</span>
 <a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a>
 <a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a><span class="hll"><span class="n">co2footprint</span><span class="w"> </span><span class="o">{</span>
@@ -4824,7 +4824,7 @@ Wtyczka nf-co2footprint definiuje zakres konfiguracji <code>co2footprint</code>,
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-hello@0.5.0&#39;</span>
 <a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-schema@2.6.1&#39;</span>
-<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.2.0&#39;</span>
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.3.0&#39;</span>
 <a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="o">}</span>
 </code></pre></div>
 </div>
@@ -4841,11 +4841,6 @@ Wtyczka nf-co2footprint definiuje zakres konfiguracji <code>co2footprint</code>,
 </code></pre></div>
 <p>Ostrzeżenie o strefie zniknęło.
 Wtyczka używa teraz intensywności emisji dwutlenku węgla właściwej dla Wielkiej Brytanii (163,92 gCO₂eq/kWh) zamiast globalnej wartości zastępczej (480,0 gCO₂eq/kWh).</p>
-<div class="admonition note">
-<p class="admonition-title">Uwaga</p>
-<p>Możesz również zobaczyć komunikat <code>WARN: Unrecognized config option 'co2footprint.location'</code>.
-Jest on kosmetyczny i można go bezpiecznie zignorować — wtyczka nadal poprawnie odczytuje tę wartość.</p>
-</div>
 <p>W Części 6 stworzysz własny zakres konfiguracji dla swojej wtyczki.</p>
 <p>Ta wtyczka działa wyłącznie poprzez mechanizm obserwatora, podłączając się do zdarzeń cyklu życia workflow'u w celu zbierania metryk zasobów i generowania raportu po zakończeniu pipeline'u.</p>
 <p>Wypróbowałeś już wtyczki funkcyjne (importowane przy użyciu <code>include</code>) oraz wtyczkę obserwatora (aktywowaną wyłącznie przez konfigurację).

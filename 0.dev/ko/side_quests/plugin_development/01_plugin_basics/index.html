@@ -4743,7 +4743,7 @@ nf-schema 플러그인은 <code>validation</code> 설정 스코프를 포함하�
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-hello@0.5.0&#39;</span>
 <a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-schema@2.6.1&#39;</span>
-<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="hll"><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.2.0&#39;</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="hll"><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.3.0&#39;</span>
 </span><a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="o">}</span>
 </code></pre></div>
 </div>
@@ -4761,7 +4761,7 @@ nf-schema 플러그인은 <code>validation</code> 설정 스코프를 포함하�
 </code></pre></div>
 <p>플러그인은 실행 중에 여러 INFO 및 WARN 메시지를 출력합니다.
 로컬 머신에서 실행되는 소규모 예제에서는 정상적인 동작입니다:</p>
-<div class="highlight"><span class="filename">Output (partial)</span><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="go">nf-co2footprint plugin  ~  version 1.2.0</span>
+<div class="highlight"><span class="filename">Output (partial)</span><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="go">nf-co2footprint plugin  ~  version 1.3.0</span>
 <a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="go">WARN - [nf-co2footprint] Target zone null not found. Attempting to retrieve carbon intensity for fallback zone GLOBAL.</span>
 <a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="go">INFO - [nf-co2footprint] Using fallback carbon intensity from GLOBAL from CI table: 480.0 gCO₂eq/kWh.</span>
 <a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="go">WARN - [nf-co2footprint] Executor &#39;null&#39; not mapped.</span>
@@ -4812,7 +4812,7 @@ nf-co2footprint 플러그인은 지리적 위치를 설정할 수 있는 <code>c
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-hello@0.5.0&#39;</span>
 <a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-schema@2.6.1&#39;</span>
-<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.2.0&#39;</span>
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.3.0&#39;</span>
 <a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a><span class="o">}</span>
 <a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a>
 <a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a><span class="hll"><span class="n">co2footprint</span><span class="w"> </span><span class="o">{</span>
@@ -4824,7 +4824,7 @@ nf-co2footprint 플러그인은 지리적 위치를 설정할 수 있는 <code>c
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-hello@0.5.0&#39;</span>
 <a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-schema@2.6.1&#39;</span>
-<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.2.0&#39;</span>
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.3.0&#39;</span>
 <a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="o">}</span>
 </code></pre></div>
 </div>
@@ -4841,11 +4841,6 @@ nf-co2footprint 플러그인은 지리적 위치를 설정할 수 있는 <code>c
 </code></pre></div>
 <p>zone 경고가 사라졌습니다.
 플러그인이 이제 전역 기본값(480.0 gCO₂eq/kWh) 대신 GB 특정 탄소 집약도(163.92 gCO₂eq/kWh)를 사용합니다.</p>
-<div class="admonition note">
-<p class="admonition-title">참고</p>
-<p><code>WARN: Unrecognized config option 'co2footprint.location'</code> 메시지가 표시될 수도 있습니다.
-이는 외관상의 문제로 무시해도 됩니다. 플러그인은 여전히 값을 올바르게 읽습니다.</p>
-</div>
 <p>파트 6에서는 자신만의 플러그인을 위한 설정 스코프를 만들어 봅니다.</p>
 <p>이 플러그인은 전적으로 observer 메커니즘을 통해 작동하며, 워크플로우 생명주기 이벤트에 연결하여 리소스 메트릭을 수집하고 파이프라인이 완료되면 리포트를 생성합니다.</p>
 <p>이제 function 플러그인(<code>include</code>로 가져오기)과 observer 플러그인(설정만으로 활성화)을 모두 사용해 보았습니다.

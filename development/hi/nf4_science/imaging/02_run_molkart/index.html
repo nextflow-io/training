@@ -2263,7 +2263,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        निष्कर्ष
+        सारांश
       
     </span>
   </a>
@@ -2414,7 +2414,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        निष्कर्ष
+        सारांश
       
     </span>
   </a>
@@ -2484,7 +2484,7 @@
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        निष्कर्ष
+        सारांश
       
     </span>
   </a>
@@ -4001,7 +4001,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        निष्कर्ष
+        सारांश
       
     </span>
   </a>
@@ -4152,7 +4152,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        निष्कर्ष
+        सारांश
       
     </span>
   </a>
@@ -4222,7 +4222,7 @@
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        निष्कर्ष
+        सारांश
       
     </span>
   </a>
@@ -4518,24 +4518,28 @@ Nextflow आपके लिए स्वचालित रूप से अन
 </div>
 <h3 id="21">2.1. कंटेनर आवश्यकताओं को समझना<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p>पूर्ण पाइपलाइन चलाने से पहले, आइए जानें कि nf-core पाइपलाइनों के लिए कंटेनर क्यों आवश्यक हैं।</p>
-<p>आइए molkart टेस्ट कॉन्फ़िगरेशन से टेस्ट डेटासेट और पैरामीटर का उपयोग करके पाइपलाइन चलाने का प्रयास करें:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>--input<span class="w"> </span><span class="s1">&#39;data/samplesheet.csv&#39;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>--mindagap_tilesize<span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span>--mindagap_boxsize<span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span>--mindagap_loopnum<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span>--clahe_pyramid_tile<span class="w"> </span><span class="m">368</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;mesmer,cellpose,stardist&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span>--outdir<span class="w"> </span>results
+<p>हम पाइपलाइन के पैरामीटर एक parameter file का उपयोग करके देंगे।
+एक parameter file एक YAML फ़ाइल होती है जो प्रत्येक पैरामीटर और उसके मान को सूचीबद्ध करती है, जो टाइप किए गए मानों (जैसे integers) को सुरक्षित रखती है और कमांड लाइन को संक्षिप्त रखती है।</p>
+<p>एक <code>params.yaml</code> फ़ाइल पहले से ही working directory में उपलब्ध है:</p>
+<div class="highlight"><span class="filename">params.yaml</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;data/samplesheet.csv&quot;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">outdir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;results&quot;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">mindagap_tilesize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">90</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nt">mindagap_boxsize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nt">mindagap_loopnum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nt">clahe_pyramid_tile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">368</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nt">segmentation_method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cellpose&quot;</span>
 </code></pre></div>
-<p>आइए इन पैरामीटर्स को समझें:</p>
+<p>ये पैरामीटर हैं:</p>
 <ul>
-<li><code>--input</code>: नमूना मेटाडेटा युक्त samplesheet का पथ</li>
-<li><code>--mindagap_tilesize</code>, <code>--mindagap_boxsize</code>, <code>--mindagap_loopnum</code>: ग्रिड पैटर्न फिलिंग के लिए पैरामीटर</li>
-<li><code>--clahe_pyramid_tile</code>: कंट्रास्ट एन्हांसमेंट के लिए कर्नेल साइज़</li>
-<li><code>--segmentation_method</code>: सेल सेगमेंटेशन के लिए कौन सा एल्गोरिदम उपयोग करना है</li>
-<li><code>--outdir</code>: परिणाम कहां सेव करने हैं</li>
+<li><code>input</code>: नमूना मेटाडेटा युक्त samplesheet का पथ</li>
+<li><code>mindagap_tilesize</code>, <code>mindagap_boxsize</code>, <code>mindagap_loopnum</code>: ग्रिड पैटर्न फिलिंग के लिए पैरामीटर</li>
+<li><code>clahe_pyramid_tile</code>: कंट्रास्ट एन्हांसमेंट के लिए कर्नेल साइज़</li>
+<li><code>segmentation_method</code>: सेल सेगमेंटेशन के लिए कौन सा/से एल्गोरिदम उपयोग करना है</li>
+<li><code>outdir</code>: परिणाम कहां सेव करने हैं</li>
 </ul>
+<p>आइए इन पैरामीटर्स का उपयोग करके पाइपलाइन चलाने का प्रयास करें:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml
+</code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">यह कमांड विफल होगी - यह जानबूझकर है!</p>
 <p>हम जानबूझकर इसे कंटेनर के बिना चला रहे हैं ताकि यह प्रदर्शित कर सकें कि उनकी आवश्यकता क्यों है।</p>
@@ -4543,22 +4547,22 @@ Nextflow आपके लिए स्वचालित रूप से अन
 <p>कुछ क्षणों के बाद, आपको इस तरह की एक एरर दिखेगी:</p>
 <details class="failure">
 <summary>कमांड आउटपुट</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">ERROR ~ Error executing process &gt; &#39;NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)&#39;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">Caused by:</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="go">  Process `NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)` terminated with an error exit status (127)</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="go">Command executed:</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="go">  duplicate_finder.py \</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="go">      spots.txt \</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="go">      90</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="go">Command exit status:</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="go">  127</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="go">Command error:</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="go">  .command.sh: line 3: duplicate_finder.py: command not found</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">ERROR ~ Error executing process &gt; &#39;NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)&#39;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">Caused by:</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="go">  Process `NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only)` terminated with an error exit status (127)</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="go">Command executed:</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="go">  duplicate_finder.py \</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="go">      spots.txt \</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="go">      90</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="go">Command exit status:</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="go">  127</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="go">Command error:</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="go">  .command.sh: line 3: duplicate_finder.py: command not found</span>
 </code></pre></div>
 </details>
 <p><strong>यहां क्या हो रहा है?</strong></p>
@@ -4572,10 +4576,10 @@ Nextflow आपके लिए स्वचालित रूप से अन
 <p><strong>इन टूल्स को कहां से आना चाहिए?</strong></p>
 <p>आइए एक प्रोसेस मॉड्यूल का निरीक्षण करें यह देखने के लिए कि यह अपनी सॉफ़्टवेयर आवश्यकताओं को कैसे घोषित करता है।</p>
 <p>CLAHE प्रीप्रोसेसिंग मॉड्यूल खोलें:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>code<span class="w"> </span>molkart/modules/local/clahe/main.nf
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>code<span class="w"> </span>molkart/modules/local/clahe/main.nf
 </code></pre></div>
 <p>लाइन 5 को देखें - आपको दिखेगा:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">container</span><span class="w"> </span><span class="s1">&#39;ghcr.io/schapirolabor/molkart-local:v0.0.4&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">container</span><span class="w"> </span><span class="s1">&#39;ghcr.io/schapirolabor/molkart-local:v0.0.4&#39;</span>
 </code></pre></div>
 <p>यह लाइन Nextflow को बताती है: "इस प्रोसेस को चलाने के लिए, Docker इमेज <code>ghcr.io/schapirolabor/molkart-local:v0.0.4</code> का उपयोग करें, जिसमें सभी आवश्यक सॉफ़्टवेयर हैं।"</p>
 <p>प्रत्येक प्रोसेस घोषित करता है कि कौन सी कंटेनर इमेज अपने आवश्यक टूल प्रदान करती है।
@@ -4584,26 +4588,19 @@ Nextflow आपके लिए स्वचालित रूप से अन
 <h3 id="22-docker">2.2. Docker कॉन्फ़िगर करें और पाइपलाइन लॉन्च करें<a class="headerlink" href="#22-docker" title="Permanent link">&para;</a></h3>
 <p>Docker सक्षम करने के लिए, हमें <code>nextflow.config</code> फ़ाइल में <code>docker.enabled</code> को <code>false</code> से <code>true</code> में बदलना होगा।</p>
 <p>कॉन्फ़िग फ़ाइल खोलें:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>code<span class="w"> </span>nextflow.config
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>code<span class="w"> </span>nextflow.config
 </code></pre></div>
 <p><code>docker.enabled = false</code> को <code>docker.enabled = true</code> में बदलें:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">docker</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">resourceLimits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">        </span><span class="nl">cpus:</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">        </span><span class="nl">memory:</span><span class="w"> </span><span class="s1">&#39;7.GB&#39;</span><span class="o">,</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="o">]</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="o">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">docker</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="n">resourceLimits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">        </span><span class="nl">cpus:</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">        </span><span class="nl">memory:</span><span class="w"> </span><span class="s1">&#39;7.GB&#39;</span><span class="o">,</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="o">]</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="o">}</span>
 </code></pre></div>
-<p>अब समान कमांड के साथ पाइपलाइन फिर से चलाएं:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>--input<span class="w"> </span><span class="s1">&#39;data/samplesheet.csv&#39;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span>--mindagap_tilesize<span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span>--mindagap_boxsize<span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span>--mindagap_loopnum<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span>--clahe_pyramid_tile<span class="w"> </span><span class="m">368</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;cellpose,mesmer,stardist&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">  </span>--outdir<span class="w"> </span>results
+<p>अब पाइपलाइन फिर से चलाएं, इस बार तीनों segmentation methods चलाएं ताकि हम बाद में उनकी तुलना कर सकें:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;mesmer,cellpose,stardist&quot;</span>
 </code></pre></div>
 <p>इस बार, Nextflow:</p>
 <ol>
@@ -4626,82 +4623,78 @@ Nextflow आपके लिए स्वचालित रूप से अन
 <p>जैसे-जैसे पाइपलाइन चलती है, आपको इस तरह का आउटपुट दिखेगा:</p>
 <details class="success">
 <summary>कमांड आउटपुट</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">Nextflow 25.04.8 is available - Please consider updating your version to it</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="go">Launching `https://github.com/nf-core/molkart` [soggy_kalam] DSL2 - revision: 5e54b29cb3 [dev]</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="go">------------------------------------------------------</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="go">                                        ,--./,-.</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="go">        ___     __   __   __   ___     /,-._.--~&#39;</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="go">  |\ | |__  __ /  ` /  \ |__) |__         }  {</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="go">  | \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="go">                                        `._,._,&#39;</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="go">  nf-core/molkart 1.2.0dev</span>
-<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="go">------------------------------------------------------</span>
-<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="go">Segmentation methods and options</span>
-<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="go">  segmentation_method       : mesmer,cellpose,stardist</span>
-<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>
-<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="go">Image preprocessing</span>
-<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="go">  mindagap_boxsize          : 7</span>
-<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="go">  mindagap_loopnum          : 100</span>
-<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="go">  clahe_kernel              : 25</span>
-<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="go">  mindagap_tilesize         : 90</span>
-<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="go">  clahe_pyramid_tile        : 368</span>
-<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>
-<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="go">Input/output options</span>
-<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a><span class="go">  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/molkart/test_data/samplesheets/samplesheet_membrane.csv</span>
-<a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a><span class="go">  outdir                    : results</span>
-<a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a>
-<a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a><span class="go">Institutional config options</span>
-<a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a><span class="go">  config_profile_name       : Test profile</span>
-<a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a><span class="go">  config_profile_description: Minimal test dataset to check pipeline function</span>
-<a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a>
-<a id="__codelineno-8-34" name="__codelineno-8-34" href="#__codelineno-8-34"></a><span class="go">Generic options</span>
-<a id="__codelineno-8-35" name="__codelineno-8-35" href="#__codelineno-8-35"></a><span class="go">  trace_report_suffix       : 2025-10-18_22-22-21</span>
-<a id="__codelineno-8-36" name="__codelineno-8-36" href="#__codelineno-8-36"></a>
-<a id="__codelineno-8-37" name="__codelineno-8-37" href="#__codelineno-8-37"></a><span class="go">Core Nextflow options</span>
-<a id="__codelineno-8-38" name="__codelineno-8-38" href="#__codelineno-8-38"></a><span class="go">  revision                  : dev</span>
-<a id="__codelineno-8-39" name="__codelineno-8-39" href="#__codelineno-8-39"></a><span class="go">  runName                   : soggy_kalam</span>
-<a id="__codelineno-8-40" name="__codelineno-8-40" href="#__codelineno-8-40"></a><span class="go">  containerEngine           : docker</span>
-<a id="__codelineno-8-41" name="__codelineno-8-41" href="#__codelineno-8-41"></a><span class="go">  launchDir                 : /workspaces/training/nf4-science/imaging</span>
-<a id="__codelineno-8-42" name="__codelineno-8-42" href="#__codelineno-8-42"></a><span class="go">  workDir                   : /workspaces/training/nf4-science/imaging/work</span>
-<a id="__codelineno-8-43" name="__codelineno-8-43" href="#__codelineno-8-43"></a><span class="go">  projectDir                : /workspaces/.nextflow/assets/nf-core/molkart</span>
-<a id="__codelineno-8-44" name="__codelineno-8-44" href="#__codelineno-8-44"></a><span class="go">  userName                  : root</span>
-<a id="__codelineno-8-45" name="__codelineno-8-45" href="#__codelineno-8-45"></a><span class="go">  profile                   : docker,test</span>
-<a id="__codelineno-8-46" name="__codelineno-8-46" href="#__codelineno-8-46"></a><span class="go">  configFiles               :</span>
-<a id="__codelineno-8-47" name="__codelineno-8-47" href="#__codelineno-8-47"></a>
-<a id="__codelineno-8-48" name="__codelineno-8-48" href="#__codelineno-8-48"></a><span class="go">!! Only displaying parameters that differ from the pipeline defaults !!</span>
-<a id="__codelineno-8-49" name="__codelineno-8-49" href="#__codelineno-8-49"></a><span class="go">------------------------------------------------------</span>
-<a id="__codelineno-8-50" name="__codelineno-8-50" href="#__codelineno-8-50"></a><span class="go">* The pipeline</span>
-<a id="__codelineno-8-51" name="__codelineno-8-51" href="#__codelineno-8-51"></a><span class="go">    https://doi.org/10.5281/zenodo.10650748</span>
-<a id="__codelineno-8-52" name="__codelineno-8-52" href="#__codelineno-8-52"></a>
-<a id="__codelineno-8-53" name="__codelineno-8-53" href="#__codelineno-8-53"></a><span class="go">* The nf-core framework</span>
-<a id="__codelineno-8-54" name="__codelineno-8-54" href="#__codelineno-8-54"></a><span class="go">    https://doi.org/10.1038/s41587-020-0439-x</span>
-<a id="__codelineno-8-55" name="__codelineno-8-55" href="#__codelineno-8-55"></a>
-<a id="__codelineno-8-56" name="__codelineno-8-56" href="#__codelineno-8-56"></a><span class="go">* Software dependencies</span>
-<a id="__codelineno-8-57" name="__codelineno-8-57" href="#__codelineno-8-57"></a><span class="go">    https://github.com/nf-core/molkart/blob/master/CITATIONS.md</span>
-<a id="__codelineno-8-58" name="__codelineno-8-58" href="#__codelineno-8-58"></a>
-<a id="__codelineno-8-59" name="__codelineno-8-59" href="#__codelineno-8-59"></a><span class="go">executor &gt;  local (22)</span>
-<a id="__codelineno-8-60" name="__codelineno-8-60" href="#__codelineno-8-60"></a><span class="go">[c1/da5009] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)        [100%] 2 of 2 ✔</span>
-<a id="__codelineno-8-61" name="__codelineno-8-61" href="#__codelineno-8-61"></a><span class="go">[73/8f5e8a] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)                    [100%] 2 of 2 ✔</span>
-<a id="__codelineno-8-62" name="__codelineno-8-62" href="#__codelineno-8-62"></a><span class="go">[ec/8f84d5] NFCORE_MOLKART:MOLKART:CREATE_STACK (mem_only)             [100%] 1 of 1 ✔</span>
-<a id="__codelineno-8-63" name="__codelineno-8-63" href="#__codelineno-8-63"></a><span class="go">[a2/99349b] NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only) [100%] 1 of 1 ✔</span>
-<a id="__codelineno-8-64" name="__codelineno-8-64" href="#__codelineno-8-64"></a><span class="go">[95/c9b4b1] NFCORE_MOLKART:MOLKART:DEEPCELL_MESMER (mem_only)          [100%] 1 of 1 ✔</span>
-<a id="__codelineno-8-65" name="__codelineno-8-65" href="#__codelineno-8-65"></a><span class="go">[d4/1ebd1e] NFCORE_MOLKART:MOLKART:STARDIST (mem_only)                 [100%] 1 of 1 ✔</span>
-<a id="__codelineno-8-66" name="__codelineno-8-66" href="#__codelineno-8-66"></a><span class="go">[3e/3c0736] NFCORE_MOLKART:MOLKART:CELLPOSE (mem_only)                 [100%] 1 of 1 ✔</span>
-<a id="__codelineno-8-67" name="__codelineno-8-67" href="#__codelineno-8-67"></a><span class="go">[a0/415c6a] NFCORE_MOLKART:MOLKART:MASKFILTER (mem_only)               [100%] 3 of 3 ✔</span>
-<a id="__codelineno-8-68" name="__codelineno-8-68" href="#__codelineno-8-68"></a><span class="go">[14/a830c9] NFCORE_MOLKART:MOLKART:SPOT2CELL (mem_only)                [100%] 3 of 3 ✔</span>
-<a id="__codelineno-8-69" name="__codelineno-8-69" href="#__codelineno-8-69"></a><span class="go">[b5/391836] NFCORE_MOLKART:MOLKART:CREATE_ANNDATA (mem_only)           [100%] 3 of 3 ✔</span>
-<a id="__codelineno-8-70" name="__codelineno-8-70" href="#__codelineno-8-70"></a><span class="go">[77/aed558] NFCORE_MOLKART:MOLKART:MOLKARTQC (mem_only)                [100%] 3 of 3 ✔</span>
-<a id="__codelineno-8-71" name="__codelineno-8-71" href="#__codelineno-8-71"></a><span class="go">[e6/b81475] NFCORE_MOLKART:MOLKART:MULTIQC                             [100%] 1 of 1 ✔</span>
-<a id="__codelineno-8-72" name="__codelineno-8-72" href="#__codelineno-8-72"></a><span class="go">-[nf-core/molkart] Pipeline completed successfully-</span>
-<a id="__codelineno-8-73" name="__codelineno-8-73" href="#__codelineno-8-73"></a><span class="go">Completed at: 19-Oct-2025 22:23:01</span>
-<a id="__codelineno-8-74" name="__codelineno-8-74" href="#__codelineno-8-74"></a><span class="go">Duration    : 2m 52s</span>
-<a id="__codelineno-8-75" name="__codelineno-8-75" href="#__codelineno-8-75"></a><span class="go">CPU hours   : 0.1</span>
-<a id="__codelineno-8-76" name="__codelineno-8-76" href="#__codelineno-8-76"></a><span class="go">Succeeded   : 22</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">Launching `./molkart/main.nf` [exotic_banach] revision: e4152308ec</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="go">WARN: Unrecognized config option &#39;validation.help.enabled&#39;</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="go">WARN: Unrecognized config option &#39;validation.defaultIgnoreParams&#39;</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="go">WARN: Unrecognized config option &#39;validation.monochromeLogs&#39;</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="go">------------------------------------------------------</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="go">                                        ,--./,-.</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="go">        ___     __   __   __   ___     /,-._.--~&#39;</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="go">  |\ | |__  __ /  ` /  \ |__) |__         }  {</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="go">  | \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="go">                                        `._,._,&#39;</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="go">  nf-core/molkart 1.2.0</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="go">------------------------------------------------------</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="go">Segmentation methods and options</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="go">  segmentation_method: mesmer,cellpose,stardist</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="go">Image preprocessing</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="go">  mindagap_boxsize   : 7</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="go">  mindagap_loopnum   : 100</span>
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="go">  clahe_kernel       : 25</span>
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="go">  mindagap_tilesize  : 90</span>
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="go">  clahe_pyramid_tile : 368</span>
+<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>
+<a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a><span class="go">Input/output options</span>
+<a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a><span class="go">  input              : data/samplesheet.csv</span>
+<a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a><span class="go">  outdir             : results</span>
+<a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a>
+<a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a><span class="go">Generic options</span>
+<a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a><span class="go">  trace_report_suffix: 2026-06-23_16-25-30</span>
+<a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a>
+<a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a><span class="go">Core Nextflow options</span>
+<a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a><span class="go">  runName            : exotic_banach</span>
+<a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a><span class="go">  containerEngine    : docker</span>
+<a id="__codelineno-9-37" name="__codelineno-9-37" href="#__codelineno-9-37"></a><span class="go">  launchDir          : /workspaces/training/nf4-science/imaging</span>
+<a id="__codelineno-9-38" name="__codelineno-9-38" href="#__codelineno-9-38"></a><span class="go">  workDir            : /workspaces/training/nf4-science/imaging/work</span>
+<a id="__codelineno-9-39" name="__codelineno-9-39" href="#__codelineno-9-39"></a><span class="go">  projectDir         : /workspaces/training/nf4-science/imaging/molkart</span>
+<a id="__codelineno-9-40" name="__codelineno-9-40" href="#__codelineno-9-40"></a><span class="go">  userName           : root</span>
+<a id="__codelineno-9-41" name="__codelineno-9-41" href="#__codelineno-9-41"></a><span class="go">  profile            : standard</span>
+<a id="__codelineno-9-42" name="__codelineno-9-42" href="#__codelineno-9-42"></a><span class="go">  configFiles        : /workspaces/training/nf4-science/imaging/molkart/nextflow.config, /workspaces/training/nf4-science/imaging/nextflow.config</span>
+<a id="__codelineno-9-43" name="__codelineno-9-43" href="#__codelineno-9-43"></a>
+<a id="__codelineno-9-44" name="__codelineno-9-44" href="#__codelineno-9-44"></a><span class="go">!! Only displaying parameters that differ from the pipeline defaults !!</span>
+<a id="__codelineno-9-45" name="__codelineno-9-45" href="#__codelineno-9-45"></a><span class="go">------------------------------------------------------</span>
+<a id="__codelineno-9-46" name="__codelineno-9-46" href="#__codelineno-9-46"></a><span class="go">* The pipeline</span>
+<a id="__codelineno-9-47" name="__codelineno-9-47" href="#__codelineno-9-47"></a><span class="go">    https://doi.org/10.5281/zenodo.10650748</span>
+<a id="__codelineno-9-48" name="__codelineno-9-48" href="#__codelineno-9-48"></a>
+<a id="__codelineno-9-49" name="__codelineno-9-49" href="#__codelineno-9-49"></a><span class="go">* The nf-core framework</span>
+<a id="__codelineno-9-50" name="__codelineno-9-50" href="#__codelineno-9-50"></a><span class="go">    https://doi.org/10.1038/s41587-020-0439-x</span>
+<a id="__codelineno-9-51" name="__codelineno-9-51" href="#__codelineno-9-51"></a>
+<a id="__codelineno-9-52" name="__codelineno-9-52" href="#__codelineno-9-52"></a><span class="go">* Software dependencies</span>
+<a id="__codelineno-9-53" name="__codelineno-9-53" href="#__codelineno-9-53"></a><span class="go">    https://github.com/nf-core/molkart/blob/master/CITATIONS.md</span>
+<a id="__codelineno-9-54" name="__codelineno-9-54" href="#__codelineno-9-54"></a>
+<a id="__codelineno-9-55" name="__codelineno-9-55" href="#__codelineno-9-55"></a><span class="go">executor &gt;  local (22)</span>
+<a id="__codelineno-9-56" name="__codelineno-9-56" href="#__codelineno-9-56"></a><span class="go">[b4/e57ff1] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2 ✔</span>
+<a id="__codelineno-9-57" name="__codelineno-9-57" href="#__codelineno-9-57"></a><span class="go">[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2 ✔</span>
+<a id="__codelineno-9-58" name="__codelineno-9-58" href="#__codelineno-9-58"></a><span class="go">[94/b1ef70] NFC…RT:CREATE_STACK (mem_only) | 1 of 1 ✔</span>
+<a id="__codelineno-9-59" name="__codelineno-9-59" href="#__codelineno-9-59"></a><span class="go">[58/4b6426] NFC…DUPLICATEFINDER (mem_only) | 1 of 1 ✔</span>
+<a id="__codelineno-9-60" name="__codelineno-9-60" href="#__codelineno-9-60"></a><span class="go">[c2/ef7002] NFC…DEEPCELL_MESMER (mem_only) | 1 of 1 ✔</span>
+<a id="__codelineno-9-61" name="__codelineno-9-61" href="#__codelineno-9-61"></a><span class="go">[4f/ddd328] NFC…OLKART:STARDIST (mem_only) | 1 of 1 ✔</span>
+<a id="__codelineno-9-62" name="__codelineno-9-62" href="#__codelineno-9-62"></a><span class="go">[8c/dd0362] NFC…OLKART:CELLPOSE (mem_only) | 1 of 1 ✔</span>
+<a id="__codelineno-9-63" name="__codelineno-9-63" href="#__codelineno-9-63"></a><span class="go">[08/2ddcb5] NFC…KART:MASKFILTER (mem_only) | 3 of 3 ✔</span>
+<a id="__codelineno-9-64" name="__codelineno-9-64" href="#__codelineno-9-64"></a><span class="go">[56/e30de0] NFC…LKART:SPOT2CELL (mem_only) | 3 of 3 ✔</span>
+<a id="__codelineno-9-65" name="__codelineno-9-65" href="#__codelineno-9-65"></a><span class="go">[b0/5aa635] NFC…:CREATE_ANNDATA (mem_only) | 3 of 3 ✔</span>
+<a id="__codelineno-9-66" name="__codelineno-9-66" href="#__codelineno-9-66"></a><span class="go">[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3 ✔</span>
+<a id="__codelineno-9-67" name="__codelineno-9-67" href="#__codelineno-9-67"></a><span class="go">[8e/8bd365] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔</span>
+<a id="__codelineno-9-68" name="__codelineno-9-68" href="#__codelineno-9-68"></a><span class="go">-[nf-core/molkart] Pipeline completed successfully-</span>
+<a id="__codelineno-9-69" name="__codelineno-9-69" href="#__codelineno-9-69"></a><span class="go">Completed at: 23-Jun-2026 16:31:40</span>
+<a id="__codelineno-9-70" name="__codelineno-9-70" href="#__codelineno-9-70"></a><span class="go">Duration    : 6m 9s</span>
+<a id="__codelineno-9-71" name="__codelineno-9-71" href="#__codelineno-9-71"></a><span class="go">CPU hours   : (a few seconds)</span>
+<a id="__codelineno-9-72" name="__codelineno-9-72" href="#__codelineno-9-72"></a><span class="go">Succeeded   : 22</span>
 </code></pre></div>
 </details>
 <p>ध्यान दें कि यह आउटपुट हमारे Hello World उदाहरण से अधिक विस्तृत है क्योंकि पाइपलाइन द्वारा अपनाई गई nf-core परंपराओं के कारण:</p>
@@ -4719,13 +4712,13 @@ Nextflow आपके लिए स्वचालित रूप से अन
 </ul>
 <p>प्रत्येक प्रोसेस लाइन दिखाती है:</p>
 <ul>
-<li><strong>Hash</strong> (<code>[1a/2b3c4d]</code>): work डायरेक्टरी आइडेंटिफ़ायर (पहले की तरह)</li>
+<li><strong>Hash</strong> (<code>[b4/e57ff1]</code>): work डायरेक्टरी आइडेंटिफ़ायर (पहले की तरह)</li>
 <li><strong>Process name</strong>: पूर्ण मॉड्यूल पथ और प्रोसेस नाम</li>
 <li><strong>Input identifier</strong>: कोष्ठक में नमूना नाम</li>
-<li><strong>Progress</strong>: पूर्णता का प्रतिशत और गिनती (जैसे, <code>1 of 1 ✔</code>)</li>
+<li><strong>Progress</strong>: कार्य गिनती और पूर्णता स्थिति (जैसे, <code>1 of 1 ✔</code>)</li>
 </ul>
-<h3 id="_1">निष्कर्ष<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<p>आप जानते हैं कि टेस्ट डेटा के साथ nf-core पाइपलाइन कैसे लॉन्च करें और इसके निष्पादन आउटपुट की व्याख्या कैसे करें।</p>
+<h3 id="_1">सारांश<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>तुम जानते हो कि टेस्ट डेटा के साथ nf-core पाइपलाइन कैसे लॉन्च करें और इसके निष्पादन आउटपुट की व्याख्या कैसे करें।</p>
 <h3 id="_2">आगे क्या है?<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>जानें कि परिणाम कहां मिलेंगे और उनकी व्याख्या कैसे करें।</p>
 <hr />
@@ -4734,19 +4727,19 @@ Nextflow आपके लिए स्वचालित रूप से अन
 <h3 id="31">3.1. परिणाम डायरेक्टरी का पता लगाएं<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
 <p>डिफ़ॉल्ट रूप से, nf-core पाइपलाइनें <code>outdir</code> पैरामीटर द्वारा निर्दिष्ट डायरेक्टरी में आउटपुट लिखती हैं, जिसे हमने <code>results/</code> पर सेट किया था।</p>
 <p>सामग्री की सूची बनाएं:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>tree<span class="w"> </span>results/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>tree<span class="w"> </span>results/
 </code></pre></div>
 <p>आपको कई subdirectories दिखनी चाहिए:</p>
-<div class="highlight"><span class="filename">results/</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">results/</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="go">├── anndata/</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="go">├── clahe/</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="go">├── mindagap/</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="go">├── molkartqc/</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="go">├── multiqc/</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="go">├── pipeline_info/</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="go">├── segmentation/</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="go">├── spot2cell/</span>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="go">└── stack/</span>
+<div class="highlight"><span class="filename">results/</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">results/</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="go">├── anndata/</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">├── clahe/</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="go">├── mindagap/</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="go">├── molkartqc/</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="go">├── multiqc/</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="go">├── pipeline_info/</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="go">├── segmentation/</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="go">├── spot2cell/</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="go">└── stack/</span>
 </code></pre></div>
 <p>प्रत्येक subdirectory में पाइपलाइन के एक विशिष्ट चरण से आउटपुट होता है:</p>
 <ul>
@@ -4771,7 +4764,7 @@ Nextflow आपके लिए स्वचालित रूप से अन
 <li>पाई गई सेल्स और स्पॉट्स की संख्या</li>
 </ul>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">सुझाव</p>
 <p>MultiQC रिपोर्ट आमतौर पर सभी nf-core पाइपलाइनों में शामिल होती हैं।
 वे हमेशा पाइपलाइन निष्पादन और डेटा गुणवत्ता का उच्च-स्तरीय अवलोकन प्रदान करती हैं।</p>
 </div>
@@ -4779,7 +4772,7 @@ Nextflow आपके लिए स्वचालित रूप से अन
 <p>सबसे महत्वपूर्ण वैज्ञानिक आउटपुट सेल-बाय-ट्रांसक्रिप्ट काउंट टेबल है।
 यह आपको बताता है कि प्रत्येक सेल में प्रत्येक ट्रांसक्रिप्ट कितने पाए गए।</p>
 <p>spot2cell डायरेक्टरी पर नेविगेट करें:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>ls<span class="w"> </span>results/spot2cell/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>ls<span class="w"> </span>results/spot2cell/
 </code></pre></div>
 <p>आपको इस तरह की फ़ाइलें मिलेंगी:</p>
 <ul>
@@ -4792,7 +4785,7 @@ Nextflow आपके लिए स्वचालित रूप से अन
 <h3 id="34">3.4. निष्पादन रिपोर्ट देखें<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
 <p>Nextflow स्वचालित रूप से कई निष्पादन रिपोर्ट जेनरेट करता है।</p>
 <p>pipeline_info डायरेक्टरी जांचें:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>ls<span class="w"> </span>results/pipeline_info/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>ls<span class="w"> </span>results/pipeline_info/
 </code></pre></div>
 <p>मुख्य फ़ाइलें:</p>
 <ul>
@@ -4802,7 +4795,7 @@ Nextflow आपके लिए स्वचालित रूप से अन
 <li><strong>pipeline_dag.html</strong>: वर्कफ़्लो संरचना दिखाने वाला निर्देशित एसाइक्लिक ग्राफ़</li>
 </ul>
 <p>संसाधन उपयोग देखने के लिए निष्पादन रिपोर्ट खोलें:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>code<span class="w"> </span>results/pipeline_info/execution_report.html
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>code<span class="w"> </span>results/pipeline_info/execution_report.html
 </code></pre></div>
 <p>यह दिखाता है:</p>
 <ul>
@@ -4811,7 +4804,7 @@ Nextflow आपके लिए स्वचालित रूप से अन
 <li>कौन से कार्य कैश्ड थे बनाम निष्पादित</li>
 </ul>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">सुझाव</p>
 <p>ये रिपोर्ट संसाधन आवंटन को अनुकूलित करने और प्रदर्शन समस्याओं को ट्रबलशूट करने के लिए अविश्वसनीय रूप से उपयोगी हैं।</p>
 </div>
 <h3 id="_3">निष्कर्ष<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
@@ -4823,16 +4816,16 @@ Nextflow आपके लिए स्वचालित रूप से अन
 <p>हमारे Hello World उदाहरण की तरह, सभी वास्तविक कार्य <code>work/</code> डायरेक्टरी में होता है।</p>
 <h3 id="41-work">4.1. work डायरेक्टरी संरचना को समझना<a class="headerlink" href="#41-work" title="Permanent link">&para;</a></h3>
 <p>work डायरेक्टरी में निष्पादित प्रत्येक कार्य के लिए एक subdirectory होती है।
-22 कार्यों वाली इस पाइपलाइन के लिए, 22 work subdirectories होंगी।</p>
+22 कार्यों वाली इस पाइपलाइन रन के लिए, 22 work subdirectories होंगी।</p>
 <p>work डायरेक्टरी की सूची बनाएं:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>ls<span class="w"> </span>-d<span class="w"> </span>work/*/*/<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-5
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>ls<span class="w"> </span>-d<span class="w"> </span>work/*/*/<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-5
 </code></pre></div>
 <p>यह पहली 5 कार्य डायरेक्टरियां दिखाता है।</p>
 <h3 id="42">4.2. एक कार्य डायरेक्टरी का निरीक्षण करें<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
 <p>console आउटपुट से एक सेगमेंटेशन प्रोसेस हैश (जैसे, <code>[3m/4n5o6p]</code>) चुनें और अंदर देखें:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>ls<span class="w"> </span>-la<span class="w"> </span>work/3m/4n5o6p*/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>ls<span class="w"> </span>-la<span class="w"> </span>work/3m/4n5o6p*/
 </code></pre></div>
-<p>आपको दिखेगा:</p>
+<p>तुम्हें दिखेगा:</p>
 <ul>
 <li><strong>.command.* फ़ाइलें</strong>: Nextflow निष्पादन स्क्रिप्ट और लॉग (पहले की तरह)</li>
 <li><strong>Staged इनपुट फ़ाइलें</strong>: वास्तविक इनपुट फ़ाइलों के symlinks</li>
@@ -4845,17 +4838,17 @@ Nextflow आपके लिए स्वचालित रूप से अन
 <li>प्रति कार्य कई इनपुट और आउटपुट फ़ाइलें</li>
 </ul>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>यदि कोई प्रोसेस विफल होती है, तो आप उसकी work डायरेक्टरी पर नेविगेट कर सकते हैं, एरर संदेशों के लिए <code>.command.err</code> की जांच कर सकते हैं, और समस्या को debug करने के लिए <code>.command.sh</code> को मैन्युअली फिर से चला भी सकते हैं।</p>
+<p class="admonition-title">सुझाव</p>
+<p>यदि कोई प्रोसेस विफल होती है, तो तुम उसकी work डायरेक्टरी पर नेविगेट कर सकते हो, एरर संदेशों के लिए <code>.command.err</code> की जांच कर सकते हो, और समस्या को debug करने के लिए <code>.command.sh</code> को मैन्युअली फिर से चला भी सकते हो।</p>
 </div>
 <h3 id="43-work">4.3. work डायरेक्टरी की सफाई<a class="headerlink" href="#43-work" title="Permanent link">&para;</a></h3>
 <p>कई पाइपलाइन रन पर work डायरेक्टरी काफी बड़ी हो सकती है।
-जैसा कि हमने भाग 1 में सीखा, आप पुराने रन से work डायरेक्टरियों को हटाने के लिए <code>nextflow clean</code> का उपयोग कर सकते हैं।</p>
+जैसा कि हमने भाग 1 में सीखा, तुम पुराने रन से work डायरेक्टरियों को हटाने के लिए <code>nextflow clean</code> का उपयोग कर सकते हो।</p>
 <p>हालांकि, बड़ी intermediate फ़ाइलों वाली nf-core पाइपलाइनों के लिए, नियमित रूप से साफ करना विशेष रूप से महत्वपूर्ण है।</p>
-<h3 id="_5">निष्कर्ष<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>आप समझते हैं कि nf-core पाइपलाइनें अपनी work डायरेक्टरियों को कैसे व्यवस्थित करती हैं और debugging के लिए व्यक्तिगत कार्यों का निरीक्षण कैसे करें।</p>
+<h3 id="_5">सारांश<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>तुम समझते हो कि nf-core पाइपलाइनें अपनी work डायरेक्टरियों को कैसे व्यवस्थित करती हैं और debugging के लिए व्यक्तिगत कार्यों का निरीक्षण कैसे करें।</p>
 <h3 id="_6">आगे क्या है?<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p>Nextflow cache के बारे में जानें और विफल पाइपलाइन रन को कैसे resume करें।</p>
+<p>Nextflow cache के बारे में जानो और विफल पाइपलाइन रन को कैसे resume करें।</p>
 <hr />
 <h2 id="5-resume">5. पाइपलाइन रन को resume करें<a class="headerlink" href="#5-resume" title="Permanent link">&para;</a></h2>
 <p>Nextflow की सबसे शक्तिशाली विशेषताओं में से एक विफलता के बिंदु से पाइपलाइन को resume करने की क्षमता है।</p>
@@ -4869,26 +4862,25 @@ Nextflow आपके लिए स्वचालित रूप से अन
 <p>यह लंबे समय तक चलने वाली पाइपलाइनों के लिए आवश्यक है जहां निष्पादन के अंत में विफलताएं हो सकती हैं।</p>
 <h3 id="52-molkart-resume">5.2. molkart के साथ resume का प्रयास करें<a class="headerlink" href="#52-molkart-resume" title="Permanent link">&para;</a></h3>
 <p>समान कमांड फिर से चलाएं, लेकिन <code>-resume</code> जोड़ें:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span>--input<span class="w"> </span><span class="s1">&#39;data/samplesheet.csv&#39;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span>--mindagap_tilesize<span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">  </span>--mindagap_boxsize<span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">  </span>--mindagap_loopnum<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">  </span>--clahe_pyramid_tile<span class="w"> </span><span class="m">368</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">  </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;cellpose&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">  </span>--outdir<span class="w"> </span>results<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="w">  </span>-resume
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;mesmer,cellpose,stardist&quot;</span><span class="w"> </span>-resume
 </code></pre></div>
-<p>आपको इस तरह का आउटपुट दिखना चाहिए: <!-- TODO: full output --></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">executor &gt;  local (0)</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="go">[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)        [100%] 2 of 2, cached: 2 ✔</span>
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)                    [100%] 2 of 2, cached: 2 ✔</span>
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="go">[7f/8g9h0i] NFCORE_MOLKART:MOLKART:CREATE_STACK (mem_only)             [100%] 1 of 1, cached: 1 ✔</span>
-<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="go">[9h/0i1j2k] NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only) [100%] 1 of 1, cached: 1 ✔</span>
-<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="go">[2k/3l4m5n] NFCORE_MOLKART:MOLKART:CELLPOSE (mem_only)                 [100%] 1 of 1, cached: 1 ✔</span>
-<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="go">...</span>
+<p>आपको इस तरह का आउटपुट दिखना चाहिए:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="go">executor &gt;  local (1)</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="go">[43/e03702] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2, cached: 2 ✔</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="go">[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2, cached: 2 ✔</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="go">[94/b1ef70] NFC…RT:CREATE_STACK (mem_only) | 1 of 1, cached: 1 ✔</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="go">[58/4b6426] NFC…DUPLICATEFINDER (mem_only) | 1 of 1, cached: 1 ✔</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="go">[c2/ef7002] NFC…DEEPCELL_MESMER (mem_only) | 1 of 1, cached: 1 ✔</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="go">[4f/ddd328] NFC…OLKART:STARDIST (mem_only) | 1 of 1, cached: 1 ✔</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="go">[8c/dd0362] NFC…OLKART:CELLPOSE (mem_only) | 1 of 1, cached: 1 ✔</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="go">[08/2ddcb5] NFC…KART:MASKFILTER (mem_only) | 3 of 3, cached: 3 ✔</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="go">[56/e30de0] NFC…LKART:SPOT2CELL (mem_only) | 3 of 3, cached: 3 ✔</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="go">[b0/5aa635] NFC…:CREATE_ANNDATA (mem_only) | 3 of 3, cached: 3 ✔</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="go">[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3, cached: 3 ✔</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="go">[73/239f45] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="go">-[nf-core/molkart] Pipeline completed successfully-</span>
 </code></pre></div>
-<p>ध्यान दें प्रत्येक प्रोसेस के लिए <code>cached: 2</code> या <code>cached: 1</code> - कुछ भी फिर से निष्पादित नहीं किया गया!</p>
+<p>ध्यान दें प्रत्येक प्रीप्रोसेसिंग और segmentation प्रोसेस पर <code>cached: N</code> का एनोटेशन - वे कार्य फिर से निष्पादित होने के बजाय पुन: उपयोग किए गए।</p>
 <h3 id="53-resume">5.3. resume कब उपयोगी है<a class="headerlink" href="#53-resume" title="Permanent link">&para;</a></h3>
 <p>Resume विशेष रूप से मूल्यवान है जब:</p>
 <ul>
@@ -4898,14 +4890,14 @@ Nextflow आपके लिए स्वचालित रूप से अन
 <li>आप गणना को फिर से किए बिना अतिरिक्त आउटपुट जोड़ना चाहते हैं</li>
 </ul>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<p class="admonition-title">चेतावनी</p>
 <p>Resume केवल तभी काम करता है जब आपने इनपुट डेटा, पाइपलाइन कोड, या पैरामीटर को नहीं बदला हो।
 यदि आप इनमें से किसी को भी बदलते हैं, तो Nextflow सही ढंग से प्रभावित कार्यों को फिर से चलाएगा।</p>
 </div>
-<h3 id="_7">निष्कर्ष<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p>आप जानते हैं कि सफल कार्यों को दोहराए बिना पाइपलाइनों को कुशलतापूर्वक फिर से चलाने के लिए <code>-resume</code> का उपयोग कैसे करें।</p>
+<h3 id="_7">सारांश<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>तुम जानते हो कि सफल कार्यों को दोहराए बिना पाइपलाइनों को कुशलतापूर्वक फिर से चलाने के लिए <code>-resume</code> का उपयोग कैसे करें।</p>
 <h3 id="_8">आगे क्या है?<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<p>अब जब आप टेस्ट डेटा के साथ nf-core/molkart चला सकते हैं, तो आप अपने स्वयं के डेटासेट के लिए इसे कॉन्फ़िगर करना सीखने के लिए तैयार हैं।</p><div id="quiz-progress-sidebar" aria-label="क्विज़ प्रगति" style="display: none;">
+<p>अब जब तुम टेस्ट डेटा के साथ nf-core/molkart चला सकते हो, तो तुम अपने स्वयं के डेटासेट के लिए इसे कॉन्फ़िगर करना सीखने के लिए तैयार हो।</p><div id="quiz-progress-sidebar" aria-label="क्विज़ प्रगति" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">
     <span class="md-nav__icon md-icon"></span>

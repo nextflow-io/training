@@ -5269,7 +5269,7 @@
 <a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="go">│   └── utils.nf</span>
 <a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="go">└── nextflow.config</span>
 <a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="go">3 directories, 12 files</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="go">2 directories, 12 files</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">À propos des fichiers d'exemple</p>
@@ -5279,7 +5279,7 @@
 </ul>
 </div>
 <h3 id="raccourcis-clavier">Raccourcis clavier<a class="headerlink" href="#raccourcis-clavier" title="Permanent link">&para;</a></h3>
-<p>Certaines fonctionnalités de ce guide utilisent des raccourcis clavier optionnels. Si vous accédez à ce contenu via GitHub Codespaces dans un navigateur, il est possible que certains raccourcis ne fonctionnent pas comme prévu, car ils sont utilisés à d'autres fins dans votre système.</p>
+<p>Certaines fonctionnalités de ce guide utilisent des raccourcis clavier optionnels. Il est possible que vous accédiez à ce contenu via GitHub Codespaces dans un navigateur, auquel cas certains raccourcis peuvent ne pas fonctionner comme prévu, car ils sont utilisés à d'autres fins dans votre système.</p>
 <p>Si vous exécutez VS Code localement, comme vous le ferez probablement lorsque vous écrirez réellement des workflows, les raccourcis fonctionneront comme décrit.</p>
 <p>Si vous utilisez un Mac, certains raccourcis clavier (pas tous) utiliseront "cmd" à la place de "ctrl", et nous l'indiquerons dans le texte sous la forme <code>Ctrl/Cmd</code>.</p>
 <h3 id="01-installation-de-lextension-nextflow">0.1. Installation de l'extension Nextflow<a class="headerlink" href="#01-installation-de-lextension-nextflow" title="Permanent link">&para;</a></h3>
@@ -5290,7 +5290,7 @@
 <p>Pour installer l'extension manuellement :</p>
 <ol>
 <li>Ouvrez VS Code</li>
-<li>Accédez à la vue Extensions en cliquant sur l'icône des extensions à gauche : <img alt="icône des extensions" src="../img/extensions_icon.png" /> (raccourci <code>Ctrl/Cmd+Shift+X</code> si vous exécutez VSCode localement)</li>
+<li>Accédez à la vue Extensions en cliquant sur l'icône des extensions à gauche : <img alt="icône des extensions" src="../img/extensions_icon.png" /> (raccourci <code>Ctrl/Cmd+Shift+X</code> si vous exécutez VS Code localement)</li>
 <li>Recherchez "Nextflow"</li>
 <li>Installez l'extension Nextflow officielle</li>
 </ol>
@@ -5470,7 +5470,7 @@
 <li>Naviguez vers le processus <code>TRIM_GALORE</code> dans le bloc workflow. Celui-ci est défini en ligne, donc il ne vous amènera pas à un fichier séparé, mais il vous montrera quand même la définition du processus, et vous pourrez toujours revenir à l'endroit où vous étiez.</li>
 </ol>
 <h3 id="42-navigation-par-symboles">4.2. Navigation par symboles<a class="headerlink" href="#42-navigation-par-symboles" title="Permanent link">&para;</a></h3>
-<p>Avec <code>complex_workflow.nf</code> toujours ouvert, vous pouvez obtenir un aperçu de tous les symboles du fichier en tapant <code>@</code> dans la barre de recherche en haut de VSCode (le raccourci clavier est <code>Ctrl/Cmd+Shift+O</code>, mais il peut ne pas fonctionner dans Codespaces). Cela ouvre le panneau de navigation par symboles, qui liste tous les symboles du fichier courant :</p>
+<p>Avec <code>complex_workflow.nf</code> toujours ouvert, vous pouvez obtenir un aperçu de tous les symboles du fichier en tapant <code>@</code> dans la barre de recherche en haut de VS Code (le raccourci clavier est <code>Ctrl/Cmd+Shift+O</code>, mais il peut ne pas fonctionner dans Codespaces). Cela ouvre le panneau de navigation par symboles, qui liste tous les symboles du fichier courant :</p>
 <p><img alt="Navigation par symboles" src="../img/symbols.png" /></p>
 <p>Cela affiche :</p>
 <ul>
@@ -5619,10 +5619,10 @@
 <li>Les vues de différences en ligne</li>
 <li>Les capacités de commit et de push</li>
 </ul>
-<p>Ouvrez le panneau Contrôle de source en utilisant le bouton de contrôle de source (<img alt="icône du contrôle de source" src="../img/source_control_icon.png" />) (<code>Ctrl+Shift+G</code> ou <code>Cmd+Shift+G</code> si vous travaillez avec VSCode localement) pour voir les modifications git et effectuer des commits directement dans l'éditeur.</p>
+<p>Ouvrez le panneau Contrôle de source en utilisant le bouton de contrôle de source (<img alt="Icône du contrôle de source" src="../img/source_control_icon.png" />) (<code>Ctrl+Shift+G</code> ou <code>Cmd+Shift+G</code> si vous travaillez avec VS Code localement) pour voir les modifications git et effectuer des commits directement dans l'éditeur.</p>
 <p><img alt="Panneau Contrôle de source" src="../img/source_control.png" /></p>
 <h3 id="72-execution-et-inspection-des-workflows">7.2. Exécution et inspection des workflows<a class="headerlink" href="#72-execution-et-inspection-des-workflows" title="Permanent link">&para;</a></h3>
-<p>Exécutons un workflow puis inspectons les résultats. Dans le terminal intégré (<code>Ctrl+Shift+</code> backtick pour Windows et MacOS), exécutez le workflow de base :</p>
+<p>Exécutons un workflow puis inspectons les résultats. Dans le terminal intégré (<code>Ctrl+Shift+</code> backtick sous Windows et MacOS), exécutez le workflow de base :</p>
 <div class="highlight"><span class="filename">Run the basic workflow</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>basic_workflow.nf<span class="w"> </span>--input<span class="w"> </span>data/sample_data.csv<span class="w"> </span>--output_dir<span class="w"> </span>results
 </code></pre></div>
 <p>Pendant l'exécution du workflow, vous verrez la sortie en temps réel dans le terminal. Après la fin de l'exécution, vous pouvez utiliser VS Code pour inspecter les résultats sans quitter votre éditeur :</p>

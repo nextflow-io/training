@@ -4998,7 +4998,7 @@ L'URI del contenidor era <code>community.wave.seqera.io/library/trim-galore:0.6.
 <a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="cm"> * Pipeline parameters</span>
 <a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="cm"> */</span>
 <a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="hll"><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="hll"><span class="w">    </span><span class="c1">// Primary input</span>
+</span><a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="hll"><span class="w">    </span><span class="c1">// Entrada principal</span>
 </span><a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="hll"><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">Path</span>
 </span><a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="hll"><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
@@ -5348,12 +5348,22 @@ Els enllaços simbòlics es trenquen quan netegeu el vostre directori <code>work
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
-<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `rnaseq.nf` [mad_lorenz] DSL2 - revision: 5846a164d2</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `rnaseq.nf` [mad_lorenz] revision: 5846a164d2</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
 <a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="go">executor &gt;  local (1)</span>
 <a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="go">[7b/8ee79e] FASTQC (1) | 1 of 1 ✔</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="go">  /workspaces/training/nf4-science/rnaseq/results</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a>
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="go">  fastqc_zip:</span>
+<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="go">    - fastqc/ENCSR000COQ1_1_fastqc.zip</span>
+<a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a>
+<a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a><span class="go">  fastqc_html:</span>
+<a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a><span class="go">    - fastqc/ENCSR000COQ1_1_fastqc.html</span>
 </code></pre></div>
 </details>
 <p>Això hauria d'executar-se molt ràpidament si heu treballat la Part 1 i ja heu descarregat el contenidor.
@@ -5406,7 +5416,7 @@ L'URI del contenidor era <code>community.wave.seqera.io/library/trim-galore:0.6.
 <span class="normal"><a href="#__codelineno-27-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-27-2" name="__codelineno-27-2"></a>
 <a id="__codelineno-27-3" name="__codelineno-27-3"></a><span class="cm">/*</span>
-<a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="cm"> * Trim adapters and run post-trimming QC</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="cm"> * Retalla adaptadors i executa QC post-retallat</span>
 <a id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="cm"> */</span>
 <a id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="n">process</span><span class="w"> </span><span class="n">TRIM_GALORE</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-27-7" name="__codelineno-27-7"></a>
@@ -5480,14 +5490,14 @@ La bandera <code>--fastqc</code> indica a Trim Galore que executi automàticamen
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">rnaseq.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-3">3</a></span>
 <span class="normal"><a href="#__codelineno-29-4">4</a></span>
-<span class="normal"><a href="#__codelineno-29-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-3" name="__codelineno-29-3"></a><span class="c1">// Module INCLUDE statements</span>
+<span class="normal"><a href="#__codelineno-29-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-3" name="__codelineno-29-3"></a><span class="c1">// Declaracions INCLUDE de mòduls</span>
 <a id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">FASTQC</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/fastqc.nf&#39;</span>
 <a id="__codelineno-29-5" name="__codelineno-29-5"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">TRIM_GALORE</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/trim_galore.nf&#39;</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">rnaseq.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-3">3</a></span>
-<span class="normal"><a href="#__codelineno-30-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="c1">// Module INCLUDE statements</span>
+<span class="normal"><a href="#__codelineno-30-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="c1">// Declaracions INCLUDE de mòduls</span>
 <a id="__codelineno-30-4" name="__codelineno-30-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">FASTQC</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/fastqc.nf&#39;</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5665,13 +5675,32 @@ La bandera <code>--fastqc</code> indica a Trim Galore que executi automàticamen
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>
-<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="go">Launching `rnaseq.nf` [gloomy_becquerel] DSL2 - revision: bb11055736</span>
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="go">Launching `rnaseq.nf` [gloomy_becquerel] revision: bb11055736</span>
 <a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>
 <a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a><span class="go">executor &gt;  local (2)</span>
 <a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a><span class="go">[f6/c8ef2e] FASTQC (1)      | 1 of 1 ✔</span>
 <a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a><span class="go">[58/c58d8a] TRIM_GALORE (1) | 1 of 1 ✔</span>
+<a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a>
+<a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a><span class="go">Outputs:</span>
+<a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a>
+<a id="__codelineno-38-11" name="__codelineno-38-11" href="#__codelineno-38-11"></a><span class="go">  /workspaces/training/nf4-science/rnaseq/results</span>
+<a id="__codelineno-38-12" name="__codelineno-38-12" href="#__codelineno-38-12"></a>
+<a id="__codelineno-38-13" name="__codelineno-38-13" href="#__codelineno-38-13"></a><span class="go">  fastqc_zip:</span>
+<a id="__codelineno-38-14" name="__codelineno-38-14" href="#__codelineno-38-14"></a><span class="go">    - fastqc/ENCSR000COQ1_1_fastqc.zip</span>
+<a id="__codelineno-38-15" name="__codelineno-38-15" href="#__codelineno-38-15"></a>
+<a id="__codelineno-38-16" name="__codelineno-38-16" href="#__codelineno-38-16"></a><span class="go">  fastqc_html:</span>
+<a id="__codelineno-38-17" name="__codelineno-38-17" href="#__codelineno-38-17"></a><span class="go">    - fastqc/ENCSR000COQ1_1_fastqc.html</span>
+<a id="__codelineno-38-18" name="__codelineno-38-18" href="#__codelineno-38-18"></a>
+<a id="__codelineno-38-19" name="__codelineno-38-19" href="#__codelineno-38-19"></a><span class="go">  trimmed_reads:</span>
+<a id="__codelineno-38-20" name="__codelineno-38-20" href="#__codelineno-38-20"></a><span class="go">    - trimming/ENCSR000COQ1_1_trimmed.fq.gz</span>
+<a id="__codelineno-38-21" name="__codelineno-38-21" href="#__codelineno-38-21"></a>
+<a id="__codelineno-38-22" name="__codelineno-38-22" href="#__codelineno-38-22"></a><span class="go">  trimming_reports:</span>
+<a id="__codelineno-38-23" name="__codelineno-38-23" href="#__codelineno-38-23"></a><span class="go">    - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt</span>
+<a id="__codelineno-38-24" name="__codelineno-38-24" href="#__codelineno-38-24"></a>
+<a id="__codelineno-38-25" name="__codelineno-38-25" href="#__codelineno-38-25"></a><span class="go">  trimming_fastqc:</span>
+<a id="__codelineno-38-26" name="__codelineno-38-26" href="#__codelineno-38-26"></a><span class="go">    - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]</span>
 </code></pre></div>
 </details>
 <p>Això també hauria d'executar-se molt ràpidament, ja que estem executant sobre un fitxer d'entrada tan petit.</p>
@@ -6104,14 +6133,39 @@ Utilitzem <code class="highlight"><span class="n">file</span><span class="o">(</
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a>
-<a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a><span class="go">Launching `rnaseq.nf` [elated_stonebraker] DSL2 - revision: e8e57d0cdd</span>
+<a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a><span class="go">Launching `rnaseq.nf` [elated_stonebraker] revision: e8e57d0cdd</span>
 <a id="__codelineno-57-4" name="__codelineno-57-4" href="#__codelineno-57-4"></a>
 <a id="__codelineno-57-5" name="__codelineno-57-5" href="#__codelineno-57-5"></a><span class="go">executor &gt;  local (3)</span>
 <a id="__codelineno-57-6" name="__codelineno-57-6" href="#__codelineno-57-6"></a><span class="go">[e8/fa29d6] FASTQC (1)       | 1 of 1 ✔</span>
 <a id="__codelineno-57-7" name="__codelineno-57-7" href="#__codelineno-57-7"></a><span class="go">[ca/ffdde2] TRIM_GALORE (1)  | 1 of 1 ✔</span>
 <a id="__codelineno-57-8" name="__codelineno-57-8" href="#__codelineno-57-8"></a><span class="go">[b6/1c6ca3] HISAT2_ALIGN (1) | 1 of 1 ✔</span>
+<a id="__codelineno-57-9" name="__codelineno-57-9" href="#__codelineno-57-9"></a>
+<a id="__codelineno-57-10" name="__codelineno-57-10" href="#__codelineno-57-10"></a><span class="go">Outputs:</span>
+<a id="__codelineno-57-11" name="__codelineno-57-11" href="#__codelineno-57-11"></a>
+<a id="__codelineno-57-12" name="__codelineno-57-12" href="#__codelineno-57-12"></a><span class="go">  /workspaces/training/nf4-science/rnaseq/results</span>
+<a id="__codelineno-57-13" name="__codelineno-57-13" href="#__codelineno-57-13"></a>
+<a id="__codelineno-57-14" name="__codelineno-57-14" href="#__codelineno-57-14"></a><span class="go">  fastqc_zip:</span>
+<a id="__codelineno-57-15" name="__codelineno-57-15" href="#__codelineno-57-15"></a><span class="go">    - fastqc/ENCSR000COQ1_1_fastqc.zip</span>
+<a id="__codelineno-57-16" name="__codelineno-57-16" href="#__codelineno-57-16"></a>
+<a id="__codelineno-57-17" name="__codelineno-57-17" href="#__codelineno-57-17"></a><span class="go">  fastqc_html:</span>
+<a id="__codelineno-57-18" name="__codelineno-57-18" href="#__codelineno-57-18"></a><span class="go">    - fastqc/ENCSR000COQ1_1_fastqc.html</span>
+<a id="__codelineno-57-19" name="__codelineno-57-19" href="#__codelineno-57-19"></a>
+<a id="__codelineno-57-20" name="__codelineno-57-20" href="#__codelineno-57-20"></a><span class="go">  trimmed_reads:</span>
+<a id="__codelineno-57-21" name="__codelineno-57-21" href="#__codelineno-57-21"></a><span class="go">    - trimming/ENCSR000COQ1_1_trimmed.fq.gz</span>
+<a id="__codelineno-57-22" name="__codelineno-57-22" href="#__codelineno-57-22"></a>
+<a id="__codelineno-57-23" name="__codelineno-57-23" href="#__codelineno-57-23"></a><span class="go">  trimming_reports:</span>
+<a id="__codelineno-57-24" name="__codelineno-57-24" href="#__codelineno-57-24"></a><span class="go">    - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt</span>
+<a id="__codelineno-57-25" name="__codelineno-57-25" href="#__codelineno-57-25"></a>
+<a id="__codelineno-57-26" name="__codelineno-57-26" href="#__codelineno-57-26"></a><span class="go">  trimming_fastqc:</span>
+<a id="__codelineno-57-27" name="__codelineno-57-27" href="#__codelineno-57-27"></a><span class="go">    - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]</span>
+<a id="__codelineno-57-28" name="__codelineno-57-28" href="#__codelineno-57-28"></a>
+<a id="__codelineno-57-29" name="__codelineno-57-29" href="#__codelineno-57-29"></a><span class="go">  bam:</span>
+<a id="__codelineno-57-30" name="__codelineno-57-30" href="#__codelineno-57-30"></a><span class="go">    - align/ENCSR000COQ1_1_trimmed.bam</span>
+<a id="__codelineno-57-31" name="__codelineno-57-31" href="#__codelineno-57-31"></a>
+<a id="__codelineno-57-32" name="__codelineno-57-32" href="#__codelineno-57-32"></a><span class="go">  align_log:</span>
+<a id="__codelineno-57-33" name="__codelineno-57-33" href="#__codelineno-57-33"></a><span class="go">    - align/ENCSR000COQ1_1_trimmed.hisat2.log</span>
 </code></pre></div>
 </details>
 <p>Podeu trobar les sortides d'alineament al directori de resultats.</p>

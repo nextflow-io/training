@@ -2339,7 +2339,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        निष्कर्ष
+        सारांश
       
     </span>
   </a>
@@ -4034,7 +4034,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        निष्कर्ष
+        सारांश
       
     </span>
   </a>
@@ -4588,16 +4588,17 @@
 </ul>
 <p>क्योंकि हम <code>-resume</code> का उपयोग कर रहे हैं, Nextflow जांच करेगा कि पिछली बार से कुछ बदला है या नहीं।
 यदि parameters, inputs, और code समान हैं, तो सभी tasks cache से पुनर्प्राप्त किए जाएंगे और pipeline लगभग तुरंत पूरा हो जाएगा।</p>
-<div class="highlight"><span class="filename">Output (excerpt)</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">executor &gt;  local (12)</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">...</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)               [100%] 2 of 2, cached: 2 ✔</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">...</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">-[nf-core/molkart] Pipeline completed successfully-</span>
+<div class="highlight"><span class="filename">Output (excerpt)</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">executor &gt;  local (1)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">[43/e03702] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2, cached: 2 ✔</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2, cached: 2 ✔</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">...</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3, cached: 3 ✔</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">[ef/d7b294] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">-[nf-core/molkart] Pipeline completed successfully-</span>
 </code></pre></div>
-<p>ध्यान दें कि सभी processes <code>cached: 2</code> या <code>cached: 1</code> दिखाते हैं - कुछ भी फिर से execute नहीं किया गया!</p>
+<p>ध्यान दें कि प्रत्येक process पर <code>cached: N</code> annotation है - cached preprocessing और segmentation tasks फिर से execute नहीं किए गए।</p>
 <h3 id="24-test-profiles">2.4. Test profiles<a class="headerlink" href="#24-test-profiles" title="Permanent link">&para;</a></h3>
-<p>Test profiles default input parameters और datafiles को निर्दिष्ट करने के त्वरित तरीके प्रदान करते हैं ताकि आप सत्यापित कर सकें कि pipeline काम करता है।
+<p>Test profiles default input parameters और datafiles को निर्दिष्ट करने के त्वरित तरीके प्रदान करते हैं ताकि तुम सत्यापित कर सको कि pipeline काम करता है।
 nf-core pipelines में हमेशा कम से कम दो test profiles शामिल होंगे:</p>
 <ul>
 <li><code>test</code>: त्वरित testing के लिए छोटा dataset और fast parameters</li>
@@ -4631,7 +4632,7 @@ nf-core pipelines में हमेशा कम से कम दो test pro
 <a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="o">}</span>
 </code></pre></div>
 <p>ध्यान दें कि इस profile में वही parameters हैं जो हमने पहले अपनी <code>params.yaml</code> फ़ाइल में उपयोग किए थे।</p>
-<p>आप कॉमा से अलग करके कई profiles को सक्रिय कर सकते हैं।
+<p>तुम कॉमा से अलग करके कई profiles को सक्रिय कर सकते हो।
 आइए इसका उपयोग करके अपनी params फ़ाइल की आवश्यकता के बिना अपने pipeline को test करें:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-profile<span class="w"> </span>docker,test<span class="w"> </span>--outdir<span class="w"> </span>results<span class="w"> </span>-resume
 </code></pre></div>
@@ -4641,9 +4642,9 @@ nf-core pipelines में हमेशा कम से कम दो test pro
 <li><code>test</code>: Test dataset और parameters का उपयोग करें</li>
 </ul>
 <p>Profiles बाएं से दाएं applied होते हैं, इसलिए बाद के profiles पहले वाले को override करते हैं यदि वे समान values set करते हैं।</p>
-<h3 id="_2">निष्कर्ष<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<h3 id="_2">सारांश<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>nf-core pipelines containers, testing, और विशेष environments के लिए built-in profiles के साथ आते हैं।
-आप अपनी आवश्यकता के अनुसार configuration बनाने के लिए कई profiles को combine कर सकते हैं।</p>
+तुम अपनी आवश्यकता के अनुसार configuration बनाने के लिए कई profiles को combine कर सकते हो।</p>
 <h3 id="_3">आगे क्या है?<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>विभिन्न computing environments के लिए अपने custom profiles बनाना सीखें।</p>
 <hr />

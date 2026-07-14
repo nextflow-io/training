@@ -2218,10 +2218,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-solution-utiliser-un-fichier-de-parametres" class="md-nav__link">
+  <a href="#12-le-fichier-de-parametres" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Solution : Utiliser un fichier de paramètres
+        1.2. Le fichier de paramètres
       
     </span>
   </a>
@@ -2240,10 +2240,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#point-cle" class="md-nav__link">
+  <a href="#a-retenir" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Point clé
+        À retenir
       
     </span>
   </a>
@@ -2310,7 +2310,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#point-cle_1" class="md-nav__link">
+  <a href="#point-cle" class="md-nav__link">
     <span class="md-ellipsis">
       
         Point clé
@@ -3729,10 +3729,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-solution-utiliser-un-fichier-de-parametres" class="md-nav__link">
+  <a href="#12-le-fichier-de-parametres" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Solution : Utiliser un fichier de paramètres
+        1.2. Le fichier de paramètres
       
     </span>
   </a>
@@ -3751,10 +3751,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#point-cle" class="md-nav__link">
+  <a href="#a-retenir" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Point clé
+        À retenir
       
     </span>
   </a>
@@ -3821,7 +3821,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#point-cle_1" class="md-nav__link">
+  <a href="#point-cle" class="md-nav__link">
     <span class="md-ellipsis">
       
         Point clé
@@ -4072,21 +4072,15 @@
 Nous allons maintenant apprendre deux meilleures approches pour gérer les entrées : les <strong>fichiers de paramètres</strong> et les <strong>feuilles d'échantillons</strong>.</p>
 <h2 id="1-utilisation-des-fichiers-de-parametres">1. Utilisation des fichiers de paramètres<a class="headerlink" href="#1-utilisation-des-fichiers-de-parametres" title="Permanent link">&para;</a></h2>
 <h3 id="11-le-probleme-des-longues-lignes-de-commande">1.1. Le problème des longues lignes de commande<a class="headerlink" href="#11-le-probleme-des-longues-lignes-de-commande" title="Permanent link">&para;</a></h3>
-<p>Rappelons notre commande de la Partie 2 :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>--input<span class="w"> </span><span class="s1">&#39;data/samplesheet.csv&#39;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span>--mindagap_tilesize<span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>--mindagap_boxsize<span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span>--mindagap_loopnum<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span>--clahe_pyramid_tile<span class="w"> </span><span class="m">368</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;cellpose&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span>--outdir<span class="w"> </span>results
+<p>Dans la Partie 2, nous avons déjà utilisé un fichier de paramètres pour garder la commande courte et conserver les valeurs saisies (comme les paramètres entiers de prétraitement) intactes :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;mesmer,cellpose,stardist&quot;</span>
 </code></pre></div>
-<p>Cela fonctionne, mais c'est difficile à reproduire, partager ou modifier.
+<p>Passer de nombreux paramètres individuellement sur la ligne de commande est difficile à reproduire, partager ou modifier.
 Que faire si vous devez exécuter la même analyse le mois prochain ?
-Que faire si un collaborateur souhaite utiliser exactement vos paramètres ?</p>
-<h3 id="12-solution-utiliser-un-fichier-de-parametres">1.2. Solution : Utiliser un fichier de paramètres<a class="headerlink" href="#12-solution-utiliser-un-fichier-de-parametres" title="Permanent link">&para;</a></h3>
-<p>Créez un fichier appelé <code>params.yaml</code> :</p>
+Que faire si un·e collaborateur·trice souhaite utiliser exactement vos paramètres ?
+Un fichier de paramètres résout ce problème.</p>
+<h3 id="12-le-fichier-de-parametres">1.2. Le fichier de paramètres<a class="headerlink" href="#12-le-fichier-de-parametres" title="Permanent link">&para;</a></h3>
+<p>Voici le fichier <code>params.yaml</code> que nous avons utilisé :</p>
 <div class="highlight"><span class="filename">params.yaml</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;data/samplesheet.csv&quot;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">outdir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;results&quot;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">mindagap_tilesize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">90</span>
@@ -4095,10 +4089,12 @@ Que faire si un collaborateur souhaite utiliser exactement vos paramètres ?</p>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nt">clahe_pyramid_tile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">368</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nt">segmentation_method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cellpose&quot;</span>
 </code></pre></div>
-<p>Maintenant votre commande devient :</p>
+<p>Chaque paramètre est écrit sous la forme d'une paire <code>clé: valeur</code>.
+Écrire les entiers sans guillemets (par exemple <code>mindagap_tilesize: 90</code>) préserve leur type entier, ce que la validation des paramètres du pipeline requiert.</p>
+<p>Votre commande devient :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>-resume
 </code></pre></div>
-<p>C'est tout ! Le fichier de paramètres documente votre configuration exacte et facilite la réexécution ou le partage.</p>
+<p>Le fichier de paramètres documente votre configuration exacte et facilite la réexécution ou le partage.</p>
 <h3 id="13-remplacement-des-parametres">1.3. Remplacement des paramètres<a class="headerlink" href="#13-remplacement-des-parametres" title="Permanent link">&para;</a></h3>
 <p>Vous pouvez toujours remplacer des paramètres spécifiques depuis la ligne de commande :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;stardist&quot;</span><span class="w"> </span>--outdir<span class="w"> </span>stardist_results<span class="w"> </span>-resume
@@ -4106,7 +4102,7 @@ Que faire si un collaborateur souhaite utiliser exactement vos paramètres ?</p>
 <p>La ligne ci-dessus change le <code>segmentation_method</code> en <code>stardist</code> et le nom du <code>--outdir</code> en <code>stardist_results</code> au lieu des paramètres dans le fichier <code>params.yaml</code>.
 De plus, vous pouvez voir que le flag <code>-resume</code> nous a permis de réutiliser les résultats de prétraitement de l'exécution précédente, ce qui économise du temps.
 Vous pouvez utiliser ce modèle pour tester rapidement différentes variations du pipeline.</p>
-<h3 id="point-cle">Point clé<a class="headerlink" href="#point-cle" title="Permanent link">&para;</a></h3>
+<h3 id="a-retenir">À retenir<a class="headerlink" href="#a-retenir" title="Permanent link">&para;</a></h3>
 <p>Les fichiers de paramètres rendent vos analyses reproductibles et faciles à partager.
 Utilisez-les pour tout travail d'analyse réel.</p>
 <h3 id="et-ensuite">Et ensuite ?<a class="headerlink" href="#et-ensuite" title="Permanent link">&para;</a></h3>
@@ -4156,7 +4152,7 @@ Chaque ligne est un échantillon, et les colonnes spécifient les fichiers et le
 <p>Enfin, exécutons nf-core/molkart une fois de plus avec la feuille d'échantillons contenant des chemins de fichiers locaux :</p>
 <p><code>nextflow run ./molkart -params-file params.yaml -resume</code></p>
 <p>Comme vous pouvez le voir, Nextflow exécute cette exécution de manière similaire à lorsque les fichiers étaient téléchargés depuis Github. C'est l'une des grandes fonctionnalités de Nextflow : il organise les données correctement pour vous, quel que soit l'endroit où elles se trouvent.</p>
-<h3 id="point-cle_1">Point clé<a class="headerlink" href="#point-cle_1" title="Permanent link">&para;</a></h3>
+<h3 id="point-cle">Point clé<a class="headerlink" href="#point-cle" title="Permanent link">&para;</a></h3>
 <p>Les feuilles d'échantillons organisent les ensembles de données multi-échantillons d'une manière qui vous permet de définir explicitement vos métadonnées avec les chemins de fichiers.
 La plupart des pipelines nf-core utilisent ce modèle.</p>
 <h3 id="et-ensuite_1">Et ensuite ?<a class="headerlink" href="#et-ensuite_1" title="Permanent link">&para;</a></h3>

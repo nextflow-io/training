@@ -4586,13 +4586,19 @@ Podeu obrir-lo a l'explorador de fitxers o des de la línia de comandes utilitza
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">Launching `1-hello.nf` [goofy_torvalds] revision: c33d41f479</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="go">executor &gt;  local (1)</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="hll"><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
-</span></code></pre></div>
+</span><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="go">  /workspaces/training/nextflow-run/results</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="go">  first_output: 1-hello/output.txt</span>
+</code></pre></div>
 </details>
 <p>Si la sortida de la vostra consola s'assembla a això, felicitats, acabeu d'executar el vostre primer workflow de Nextflow!</p>
 <details class="question">
@@ -4605,11 +4611,12 @@ Podeu obrir-lo a l'explorador de fitxers o des de la línia de comandes utilitza
 <p>Probablement esteu utilitzant l'analitzador de llenguatge v1 de Nextflow més antic.
 Això es va esmentar al començament del curs, però potser us ho heu perdut.
 Consulteu el material d'ajuda sobre <a href="../../info/nxf_versions/">versions de Nextflow</a>.</p>
-<p>En resum, si utilitzeu Nextflow <code>25.10</code> necessiteu habilitar l'analitzador de llenguatge v2:</p>
+<p>L'analitzador v2 és el predeterminat a partir de Nextflow 26.04, de manera que només veureu això en versions anteriors.
+En una versió anterior a la 26.04 necessiteu habilitar l'analitzador de llenguatge v2:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v2
 </code></pre></div>
 </details>
-<p>La sortida més important aquí és l'última línia, que està ressaltada a la sortida anterior:</p>
+<p>La part més important aquí és la línia ressaltada:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
 <p>Això ens diu que el procés <code>sayHello</code> s'ha executat amb èxit una vegada (<code>1 of 1 ✔</code>).</p>
@@ -4638,12 +4645,18 @@ Més sobre això més endavant.</p>
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Launching `1-hello.nf` [hungry_celsius] revision: f048d6ea78</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
 <a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">[a3/1e1535] sayHello [100%] 1 of 1 ✔</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">[a3/1e1535] sayHello | 1 of 1 ✔</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="go">  /workspaces/training/nextflow-run/hello_results</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="go">  first_output: 1-hello/output.txt</span>
 </code></pre></div>
 </details>
 <p>Hauríeu de veure que les vostres sortides ara es publiquen a un directori anomenat <code>hello_results</code> en lloc de <code>results</code>:</p>
@@ -4665,7 +4678,7 @@ Per a cadascun, prepararà les entrades necessàries, executarà la(les) instruc
 <p>Tots aquests directoris de tasca viuran sota un directori anomenat <code>work</code> dins del vostre directori actual (on esteu executant la comanda).</p>
 <p>Això pot sonar confús, així que vegem com es veu a la pràctica.</p>
 <p>Tornant a la sortida de consola del workflow que hem executat abans, teníem aquesta línia:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">[a3/1e1535] sayHello [100%] 1 of 1 ✔</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">[a3/1e1535] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
 <p>Veieu com la línia comença amb <code>[a3/1e1535]</code>?
 Aquesta és una forma truncada del camí del directori de tasca per a aquesta crida de procés, i us indica on trobar la sortida de la crida del procés <code>sayHello</code> dins del camí del directori <code>work/</code>.</p>
@@ -4709,7 +4722,7 @@ Tanmateix, els fitxers de registre estan configurats per ser invisibles al termi
 </details>
 <p>Hi ha dos conjunts de directoris a <code>work/</code>, de les dues execucions diferents del pipeline que hem fet.
 Cada execució de tasca obté el seu propi directori aïllat per treballar.
-En aquest cas el pipeline ha fet el mateix les dues vegades, així que el contingut de cada directori de tasca és idèntic</p>
+En aquest cas el pipeline ha fet el mateix les dues vegades, així que el contingut de cada directori de tasca és idèntic.</p>
 <p>Hauríeu de reconèixer immediatament el fitxer <code>output.txt</code>, que de fet és la sortida original del procés <code>sayHello</code> que es va publicar al directori <code>results</code>.
 Si l'obriu, trobareu la salutació <code>Hello World!</code> de nou.</p>
 <div class="highlight"><span class="filename">work/a3/1e153543b0a7f9d2c4735ddb4ab231/output.txt</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="go">Hello World!</span>
@@ -5074,15 +5087,27 @@ Això significa que Nextflow només executarà processos que hàgiu afegit o mod
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1">1</a></span>
-<span class="normal"><a href="#__codelineno-30-2">2</a></span>
-<span class="normal"><a href="#__codelineno-30-3">3</a></span>
-<span class="normal"><a href="#__codelineno-30-4">4</a></span>
-<span class="normal"><a href="#__codelineno-30-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-30-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-30-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-30-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-30-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-30-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-30-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-30-10">10</a></span>
+<span class="normal"><a href="#__codelineno-30-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2"></a>
-<a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="go">Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="go">Launching `1-hello.nf` [tiny_noyce] revision: c33d41f479</span>
 <a id="__codelineno-30-4" name="__codelineno-30-4"></a>
 <a id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔</span>
+<a id="__codelineno-30-6" name="__codelineno-30-6"></a>
+<a id="__codelineno-30-7" name="__codelineno-30-7"></a><span class="go">Outputs:</span>
+<a id="__codelineno-30-8" name="__codelineno-30-8"></a>
+<a id="__codelineno-30-9" name="__codelineno-30-9"></a><span class="go">  /workspaces/training/nextflow-run/results</span>
+<a id="__codelineno-30-10" name="__codelineno-30-10"></a>
+<a id="__codelineno-30-11" name="__codelineno-30-11"></a><span class="go">  first_output: 1-hello/output.txt</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>La sortida de consola hauria de semblar familiar, però hi ha una cosa que és una mica diferent en comparació amb abans.</p>
@@ -5261,7 +5286,7 @@ Aprèn més: [2.4. Tornar a executar el workflow amb diferents salutacions](#24-
 Què indica aquesta sortida de consola?
 
 ```console
-[skipped  ] process > sayHello (1) [100%] 1 of 1, cached: 1 ✔
+[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
 ```
 
 - [ ] La tasca ha fallat i s'ha omès
@@ -5277,7 +5302,7 @@ Aprèn més: [4.1. Tornar a llançar un workflow amb `-resume`](#41-re-launch-a-
 
                 <div class="quiz-question" id="quiz-3-question">
                     <p>Què indica aquesta sortida de consola?</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">[skipped  ] process &gt; sayHello (1) [100%] 1 of 1, cached: 1 ✔</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
                 </div>
                 <form action="javascript:void(0);" onsubmit="return false;">

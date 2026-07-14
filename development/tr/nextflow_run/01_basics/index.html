@@ -4586,13 +4586,19 @@ Dosya gezgininde açabilir veya örneğin <code>cat</code> yardımcı programın
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">Launching `1-hello.nf` [goofy_torvalds] revision: c33d41f479</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="go">executor &gt;  local (1)</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="hll"><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
-</span></code></pre></div>
+</span><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="go">  /workspaces/training/nextflow-run/results</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="go">  first_output: 1-hello/output.txt</span>
+</code></pre></div>
 </details>
 <p>Konsol çıktınız buna benzer görünüyorsa, tebrikler, ilk Nextflow workflow'unuzu çalıştırdınız!</p>
 <details class="question">
@@ -4605,11 +4611,12 @@ Dosya gezgininde açabilir veya örneğin <code>cat</code> yardımcı programın
 <p>Muhtemelen eski v1 Nextflow dil ayrıştırıcısını kullanıyorsunuz.
 Bu kursun başında bahsedilmişti, ama belki kaçırmışsınızdır.
 <a href="../../info/nxf_versions/">Nextflow sürümleri</a> yardım materyalini kontrol edin.</p>
-<p>Kısacası, Nextflow <code>25.10</code> kullanıyorsanız v2 dil ayrıştırıcısını etkinleştirmeniz gerekir:</p>
+<p>v2 ayrıştırıcısı Nextflow 26.04 itibarıyla varsayılan olarak gelir; bu nedenle bu hatayı yalnızca daha eski sürümlerde görebilirsiniz.
+26.04 öncesi bir sürümde v2 dil ayrıştırıcısını etkinleştirmeniz gerekir:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v2
 </code></pre></div>
 </details>
-<p>Buradaki en önemli çıktı, yukarıdaki çıktıda vurgulanan son satırdır:</p>
+<p>Buradaki en önemli çıktı, yukarıdaki çıktıda vurgulanan satırdır:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
 <p>Bu bize <code>sayHello</code> sürecinin bir kez başarıyla çalıştırıldığını söyler (<code>1 of 1 ✔</code>).</p>
@@ -4638,12 +4645,18 @@ Bunlar hakkında daha sonra daha fazla bilgi.</p>
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Launching `1-hello.nf` [hungry_celsius] revision: f048d6ea78</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
 <a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">[a3/1e1535] sayHello [100%] 1 of 1 ✔</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">[a3/1e1535] sayHello | 1 of 1 ✔</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="go">  /workspaces/training/nextflow-run/hello_results</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="go">  first_output: 1-hello/output.txt</span>
 </code></pre></div>
 </details>
 <p>Artık çıktılarınızın <code>results</code> yerine <code>hello_results</code> adlı bir dizine yayınlandığını görmelisiniz:</p>
@@ -4665,7 +4678,7 @@ Her biri için gerekli girdileri hazırlar, ilgili talimatları yürütür ve ç
 <p>Bu görev dizinlerinin tümü, geçerli dizininizdeki (komutu çalıştırdığınız yer) <code>work</code> adlı bir dizin altında yaşayacaktır.</p>
 <p>Bu karmaşık gelebilir, bu yüzden pratikte nasıl göründüğüne bakalım.</p>
 <p>Daha önce çalıştırdığımız workflow için konsol çıktısına geri dönersek, şu satır vardı:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">[a3/1e1535] sayHello [100%] 1 of 1 ✔</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">[a3/1e1535] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
 <p>Satırın <code>[a3/1e1535]</code> ile nasıl başladığını görüyor musunuz?
 Bu, o süreç çağrısı için görev dizini yolunun kısaltılmış halidir ve <code>work/</code> dizin yolu içinde <code>sayHello</code> süreç çağrısının çıktısını nerede bulacağınızı söyler.</p>
@@ -5074,15 +5087,27 @@ Bu, Nextflow'un yalnızca son çalıştırmadan bu yana eklediğiniz veya deği�
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1">1</a></span>
-<span class="normal"><a href="#__codelineno-30-2">2</a></span>
-<span class="normal"><a href="#__codelineno-30-3">3</a></span>
-<span class="normal"><a href="#__codelineno-30-4">4</a></span>
-<span class="normal"><a href="#__codelineno-30-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-30-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-30-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-30-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-30-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-30-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-30-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-30-10">10</a></span>
+<span class="normal"><a href="#__codelineno-30-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2"></a>
-<a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="go">Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="go">Launching `1-hello.nf` [tiny_noyce] revision: c33d41f479</span>
 <a id="__codelineno-30-4" name="__codelineno-30-4"></a>
 <a id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔</span>
+<a id="__codelineno-30-6" name="__codelineno-30-6"></a>
+<a id="__codelineno-30-7" name="__codelineno-30-7"></a><span class="go">Outputs:</span>
+<a id="__codelineno-30-8" name="__codelineno-30-8"></a>
+<a id="__codelineno-30-9" name="__codelineno-30-9"></a><span class="go">  /workspaces/training/nextflow-run/results</span>
+<a id="__codelineno-30-10" name="__codelineno-30-10"></a>
+<a id="__codelineno-30-11" name="__codelineno-30-11"></a><span class="go">  first_output: 1-hello/output.txt</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>Konsol çıktısı tanıdık görünmeli, ancak öncekine kıyasla biraz farklı olan bir şey var.</p>
@@ -5189,7 +5214,7 @@ Bu, Nextflow'un ilgili süreçleri yeniden çalıştırmadan çalışmaya devam 
 - [x] Görevin çalışma dizinine kısaltılmış yol
 - [ ] Çıktı dosyasının sağlama toplamı
 
-Daha fazla bilgi: [2.4. Orijinal çıktıyı ve logları `work/` dizininde bulun](#23-find-the-original-output-and-logs-in-the-work-directory)
+Daha fazla bilgi: [2.3. Orijinal çıktıyı ve logları `work/` dizininde bulun](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
@@ -5203,7 +5228,7 @@ Daha fazla bilgi: [2.4. Orijinal çıktıyı ve logları `work/` dizininde bulun
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Daha fazla bilgi: <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.4. Orijinal çıktıyı ve logları <code>work/</code> dizininde bulun</a></p></section>
+    <section class="content hidden"><p>Daha fazla bilgi: <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.3. Orijinal çıktıyı ve logları <code>work/</code> dizininde bulun</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5214,7 +5239,7 @@ Görev dizinindeki `.command.sh` dosyasının amacı nedir?
 - [ ] Başarısız görevlerden hata mesajlarını içerir
 - [ ] Görev için hazırlanan girdi dosyalarını listeler
 
-Daha fazla bilgi: [2.4. Orijinal çıktıyı ve logları `work/` dizininde bulun](#23-find-the-original-output-and-logs-in-the-work-directory)
+Daha fazla bilgi: [2.3. Orijinal çıktıyı ve logları `work/` dizininde bulun](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -5228,7 +5253,7 @@ Daha fazla bilgi: [2.4. Orijinal çıktıyı ve logları `work/` dizininde bulun
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Daha fazla bilgi: <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.4. Orijinal çıktıyı ve logları <code>work/</code> dizininde bulun</a></p></section>
+    <section class="content hidden"><p>Daha fazla bilgi: <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.3. Orijinal çıktıyı ve logları <code>work/</code> dizininde bulun</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5239,7 +5264,7 @@ Daha fazla bilgi: [2.4. Orijinal çıktıyı ve logları `work/` dizininde bulun
 - [ ] Nextflow üzerine yazmayı engeller ve başarısız olur
 - [ ] Otomatik olarak yedeklenirler
 
-Daha fazla bilgi: [2.5. Workflow'u farklı selamlamalarla yeniden çalıştırın](#24-re-run-the-workflow-with-different-greetings)
+Daha fazla bilgi: [2.4. Workflow'u farklı selamlamalarla yeniden çalıştırın](#24-re-run-the-workflow-with-different-greetings)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
@@ -5253,7 +5278,7 @@ Daha fazla bilgi: [2.5. Workflow'u farklı selamlamalarla yeniden çalıştırı
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Daha fazla bilgi: <a href="#24-re-run-the-workflow-with-different-greetings">2.5. Workflow'u farklı selamlamalarla yeniden çalıştırın</a></p></section>
+    <section class="content hidden"><p>Daha fazla bilgi: <a href="#24-re-run-the-workflow-with-different-greetings">2.4. Workflow'u farklı selamlamalarla yeniden çalıştırın</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5261,7 +5286,7 @@ Daha fazla bilgi: [2.5. Workflow'u farklı selamlamalarla yeniden çalıştırı
 Bu konsol çıktısı neyi gösterir?
 
 ```console
-[skipped  ] process > sayHello (1) [100%] 1 of 1, cached: 1 ✔
+[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
 ```
 
 - [ ] Görev başarısız oldu ve atlandı
@@ -5277,7 +5302,7 @@ Daha fazla bilgi: [4.1. `-resume` ile bir workflow'u yeniden başlatın](#41-re-
 
                 <div class="quiz-question" id="quiz-3-question">
                     <p>Bu konsol çıktısı neyi gösterir?</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">[skipped  ] process &gt; sayHello (1) [100%] 1 of 1, cached: 1 ✔</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
                 </div>
                 <form action="javascript:void(0);" onsubmit="return false;">

@@ -2206,10 +2206,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cosa-succede-dopo" class="md-nav__link">
+  <a href="#cosa-ce-dopo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Cosa succede dopo?
+        Cosa c'è dopo?
       
     </span>
   </a>
@@ -2287,7 +2287,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cosa-succede-dopo_1" class="md-nav__link">
+  <a href="#cosa-succede-dopo" class="md-nav__link">
     <span class="md-ellipsis">
       
         Cosa succede dopo?
@@ -2357,10 +2357,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cosa-succede-dopo_2" class="md-nav__link">
+  <a href="#cosa-ce-dopo_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Cosa succede dopo?
+        Cosa c'è dopo?
       
     </span>
   </a>
@@ -2978,7 +2978,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Test con nf-test
   
 
     
@@ -3865,10 +3865,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cosa-succede-dopo" class="md-nav__link">
+  <a href="#cosa-ce-dopo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Cosa succede dopo?
+        Cosa c'è dopo?
       
     </span>
   </a>
@@ -3946,7 +3946,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cosa-succede-dopo_1" class="md-nav__link">
+  <a href="#cosa-succede-dopo" class="md-nav__link">
     <span class="md-ellipsis">
       
         Cosa succede dopo?
@@ -4016,10 +4016,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cosa-succede-dopo_2" class="md-nav__link">
+  <a href="#cosa-ce-dopo_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Cosa succede dopo?
+        Cosa c'è dopo?
       
     </span>
   </a>
@@ -4254,7 +4254,7 @@
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traduzione assistita da IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">scopri di più e suggerisci miglioramenti</a></span></p>
 <p>In questa prima parte del corso di formazione Nextflow per il Bioimaging, utilizzeremo un esempio Hello World molto semplice e indipendente dal dominio per dimostrare operazioni essenziali e indicare i componenti corrispondenti del codice Nextflow.</p>
 <h2 id="1-eseguire-il-workflow">1. Eseguire il workflow<a class="headerlink" href="#1-eseguire-il-workflow" title="Permanent link">&para;</a></h2>
-<p>Le forniamo uno script di workflow denominato <code>hello-world.nf</code> che accetta un input tramite un argomento da riga di comando chiamato <code>--greeting</code> e produce un file di testo contenente quel saluto.
+<p>Vi forniamo uno script di workflow denominato <code>hello-world.nf</code> che accetta un input tramite un argomento da riga di comando chiamato <code>--greeting</code> e produce un file di testo contenente quel saluto.
 Non esamineremo ancora il codice; vediamo prima come si presenta la sua esecuzione.</p>
 <h3 id="11-avviare-il-workflow-e-monitorare-lesecuzione">1.1. Avviare il workflow e monitorare l'esecuzione<a class="headerlink" href="#11-avviare-il-workflow-e-monitorare-lesecuzione" title="Permanent link">&para;</a></h3>
 <p>Nel terminale, eseguite il seguente comando:</p>
@@ -4266,27 +4266,27 @@ Non esamineremo ancora il codice; vediamo prima come si presenta la sua esecuzio
 <span class="normal"><a href="#__codelineno-1-3">3</a></span>
 <span class="normal"><a href="#__codelineno-1-4">4</a></span>
 <span class="normal"><a href="#__codelineno-1-5">5</a></span>
-<span class="normal"><a href="#__codelineno-1-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="go">Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="go">Launching `hello-world.nf` [small_swirles] revision: 0fb8dbb23d</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4"></a>
 <a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="go">[71/8143bd] sayHello | 1 of 1 ✔</span>
 </code></pre></div></td></tr></table></div>
-<p>Congratulazioni, ha appena eseguito il suo primo workflow Nextflow!</p>
+<p>Congratulazioni, avete appena eseguito il vostro primo workflow Nextflow!</p>
 <p>L'output più importante qui è l'ultima riga (riga 6):</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="go">[71/8143bd] sayHello | 1 of 1 ✔</span>
 </code></pre></div></td></tr></table></div>
 <p>Questo ci indica che il processo <code>sayHello</code> è stato eseguito con successo una volta (<code>1 of 1 ✔</code>).</p>
-<p>È ottimo, ma potrebbe chiedersi: dove si trova l'output?</p>
+<p>È ottimo, ma potreste chiedervi: dove si trova l'output?</p>
 <h3 id="12-trovare-il-file-di-output-nella-directory-results">1.2. Trovare il file di output nella directory <code>results</code><a class="headerlink" href="#12-trovare-il-file-di-output-nella-directory-results" title="Permanent link">&para;</a></h3>
 <p>Questo workflow è configurato per pubblicare il suo output in una directory chiamata <code>results</code>.
-Se osserva la directory corrente, vedrà che quando ha eseguito il workflow, Nextflow ha creato una nuova directory chiamata <code>results</code>, che contiene un file chiamato <code>output.txt</code>.</p>
+Se osservate la directory corrente, vedrete che quando avete eseguito il workflow, Nextflow ha creato una nuova directory chiamata <code>results</code>, che contiene un file chiamato <code>output.txt</code>.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">results/</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="go">results</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="go">└── output.txt</span>
 </code></pre></div></td></tr></table></div>
-<p>Aprite il file; il contenuto dovrebbe corrispondere al saluto che ha specificato dalla riga di comando.</p>
+<p>Aprite il file; il contenuto dovrebbe corrispondere al saluto che avete specificato dalla riga di comando.</p>
 <details>
   <summary>Contenuto del file</summary>
 
@@ -4296,42 +4296,42 @@ Se osserva la directory corrente, vedrà che quando ha eseguito il workflow, Nex
 </details>
 
 <p>È ottimo, il nostro workflow ha fatto ciò che doveva fare!</p>
-<p>Tuttavia, sia consapevole che il risultato 'pubblicato' è una copia (o in alcuni casi un symlink) dell'output effettivo prodotto da Nextflow quando ha eseguito il workflow.</p>
+<p>Tuttavia, siate consapevoli che il risultato 'pubblicato' è una copia (o in alcuni casi un symlink) dell'output effettivo prodotto da Nextflow quando ha eseguito il workflow.</p>
 <p>Quindi ora, daremo un'occhiata dietro le quinte per vedere dove Nextflow ha effettivamente eseguito il lavoro.</p>
 <div class="admonition warning">
 <p class="admonition-title">Avviso</p>
 <p>Non tutti i workflow saranno configurati per pubblicare gli output in una directory results, e/o il nome della directory potrebbe essere diverso.
-Un po' più avanti in questa sezione, le mostreremo come scoprire dove è specificato questo comportamento.</p>
+Un po' più avanti in questa sezione, vi mostreremo come scoprire dove è specificato questo comportamento.</p>
 </div>
 <h3 id="13-trovare-loutput-originale-e-i-log-nella-directory-work">1.3. Trovare l'output originale e i log nella directory <code>work/</code><a class="headerlink" href="#13-trovare-loutput-originale-e-i-log-nella-directory-work" title="Permanent link">&para;</a></h3>
-<p>Quando esegue un workflow, Nextflow crea una 'directory di attività' distinta per ogni singola invocazione di ciascun processo nel workflow (=ogni passaggio nella pipeline).
+<p>Quando eseguite un workflow, Nextflow crea una 'directory di attività' distinta per ogni singola invocazione di ciascun processo nel workflow (=ogni passaggio nella pipeline).
 Per ognuna, preparerà gli input necessari, eseguirà le istruzioni pertinenti e scriverà output e file di log all'interno di quella directory, che viene nominata automaticamente utilizzando un hash per renderla unica.</p>
 <p>Tutte queste directory di attività risiederanno sotto una directory chiamata <code>work</code> all'interno della vostra directory corrente (dove state eseguendo il comando).</p>
 <p>Questo potrebbe sembrare confuso, quindi vediamo come appare nella pratica.</p>
 <p>Tornando all'output della console per il workflow che abbiamo eseguito in precedenza, avevamo questa riga:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Estratto dell&#x27;output del comando</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Excerpt of command output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="go">[71/8143bd] sayHello | 1 of 1 ✔</span>
 </code></pre></div></td></tr></table></div>
-<p>Vede come la riga inizia con <code>[a3/7be2fa]</code>?
-Questa è una forma troncata del percorso della directory di attività per quella singola chiamata di processo, e le indica dove trovare l'output della chiamata del processo <code>sayHello</code> all'interno del percorso della directory <code>work/</code>.</p>
-<p>Può trovare il percorso completo digitando il seguente comando (sostituendo <code>a3/7be2fa</code> con ciò che vede nel suo terminale) e premendo il tasto tab per completare automaticamente il percorso o aggiungendo un asterisco:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>tree<span class="w"> </span>work/a3/7be2fa*
+<p>Vedete come la riga inizia con <code>[71/8143bd]</code>?
+Questa è una forma troncata del percorso della directory di attività per quella singola chiamata di processo, e vi indica dove trovare l'output della chiamata del processo <code>sayHello</code> all'interno del percorso della directory <code>work/</code>.</p>
+<p>Potete trovare il percorso completo digitando il seguente comando (sostituendo <code>71/8143bd</code> con ciò che vedete nel vostro terminale) e premendo il tasto tab per completare automaticamente il percorso o aggiungendo un asterisco:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>tree<span class="w"> </span>work/71/8143bd*
 </code></pre></div>
-<p>Questo dovrebbe produrre il percorso completo della directory: <code>work/a3/7be2fa7be2fad5e71e5f49998f795677fd68</code></p>
+<p>Questo dovrebbe produrre il percorso completo della directory: <code>work/71/8143bd5ed3420e23c5f0dc1a05056d</code></p>
 <p>Diamo un'occhiata a cosa c'è dentro.</p>
 <div class="admonition tip">
 <p class="admonition-title">Suggerimento</p>
-<p>Se esplora il contenuto della sottodirectory di attività nell'esploratore file di VSCode, vedrà tutti i file immediatamente.
-Tuttavia, i file di log sono impostati per essere invisibili nel terminale, quindi se vuole utilizzare <code>ls</code> o <code>tree</code> per visualizzarli, dovrà impostare l'opzione pertinente per visualizzare i file invisibili.</p>
+<p>Se esplorate il contenuto della sottodirectory di attività nell'esploratore file di VSCode, vedrete tutti i file immediatamente.
+Tuttavia, i file di log sono impostati per essere invisibili nel terminale, quindi se volete utilizzare <code>ls</code> o <code>tree</code> per visualizzarli, dovrete impostare l'opzione pertinente per visualizzare i file invisibili.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>tree<span class="w"> </span>-a<span class="w"> </span>work
 </code></pre></div>
 </div>
-<p>I nomi esatti delle sottodirectory saranno diversi sul suo sistema.</p>
+<p>I nomi esatti delle sottodirectory saranno diversi sul vostro sistema.</p>
 <details>
   <summary>Contenuto della directory</summary>
 
 <div class="highlight"><span class="filename">work/</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">work</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="go">└── a3</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">    └── 7be2fad5e71e5f49998f795677fd68</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="go">└── 71</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">    └── 8143bd5ed3420e23c5f0dc1a05056d</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="go">        ├── .command.begin</span>
 <a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="go">        ├── .command.err</span>
 <a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="go">        ├── .command.log</span>
@@ -4344,12 +4344,12 @@ Tuttavia, i file di log sono impostati per essere invisibili nel terminale, quin
 
 </details>
 
-<p>Dovrebbe riconoscere immediatamente il file <code>output.txt</code>, che è infatti l'output originale del processo <code>sayHello</code> che è stato pubblicato nella directory <code>results</code>.
+<p>Dovreste riconoscere immediatamente il file <code>output.txt</code>, che è infatti l'output originale del processo <code>sayHello</code> che è stato pubblicato nella directory <code>results</code>.
 Se lo aprite, troverete di nuovo il saluto <code>Hello World!</code>.</p>
 <details>
   <summary>Contenuto del file output.txt</summary>
 
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">Hello World!</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">Hello World!</span>
 </code></pre></div></td></tr></table></div>
 
 </details>
@@ -4369,7 +4369,7 @@ Se lo aprite, troverete di nuovo il saluto <code>Hello World!</code>.</p>
 <details>
   <summary>Contenuto del file</summary>
 
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/.command.sh</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
 <span class="normal"><a href="#__codelineno-10-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="gp">#</span>!/bin/bash<span class="w"> </span>-ue
 <a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="go">echo &#39;Hello World!&#39; &gt; output.txt</span>
 </code></pre></div></td></tr></table></div>
@@ -4378,14 +4378,14 @@ Se lo aprite, troverete di nuovo il saluto <code>Hello World!</code>.</p>
 
 <div class="admonition tip">
 <p class="admonition-title">Suggerimento</p>
-<p>Quando qualcosa va storto e deve risolvere il problema, può essere utile guardare lo script <code>command.sh</code> per verificare esattamente quale comando Nextflow ha composto in base alle istruzioni del workflow, all'interpolazione delle variabili e così via.</p>
+<p>Quando qualcosa va storto e dovete risolvere il problema, può essere utile guardare lo script <code>command.sh</code> per verificare esattamente quale comando Nextflow ha composto in base alle istruzioni del workflow, all'interpolazione delle variabili e così via.</p>
 </div>
 <h3 id="14-esercizio-facoltativo-rieseguire-con-saluti-diversi">1.4. Esercizio facoltativo: rieseguire con saluti diversi<a class="headerlink" href="#14-esercizio-facoltativo-rieseguire-con-saluti-diversi" title="Permanent link">&para;</a></h3>
-<p>Provi a rieseguire il workflow alcune volte con valori diversi per l'argomento <code>--greeting</code>, quindi osservi sia il contenuto della directory <code>results/</code> che le directory di attività.</p>
-<p>Osservi come gli output e i log delle directory di attività isolate vengono preservati, mentre il contenuto della directory <code>results</code> viene sovrascritto dall'output delle esecuzioni successive.</p>
+<p>Provate a rieseguire il workflow alcune volte con valori diversi per l'argomento <code>--greeting</code>, quindi osservate sia il contenuto della directory <code>results/</code> che le directory di attività.</p>
+<p>Osservate come gli output e i log delle directory di attività isolate vengono preservati, mentre il contenuto della directory <code>results</code> viene sovrascritto dall'output delle esecuzioni successive.</p>
 <h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
-<p>Sa come eseguire un semplice script Nextflow, monitorarne l'esecuzione e trovare i suoi output.</p>
-<h3 id="cosa-succede-dopo">Cosa succede dopo?<a class="headerlink" href="#cosa-succede-dopo" title="Permanent link">&para;</a></h3>
+<p>Sapete come eseguire un semplice script Nextflow, monitorarne l'esecuzione e trovare i suoi output.</p>
+<h3 id="cosa-ce-dopo">Cosa c'è dopo?<a class="headerlink" href="#cosa-ce-dopo" title="Permanent link">&para;</a></h3>
 <p>Imparate a leggere uno script Nextflow di base e a identificare come i suoi componenti si relazionano alla sua funzionalità.</p>
 <hr />
 <h2 id="2-esaminare-lo-script-iniziale-del-workflow-hello-world">2. Esaminare lo script iniziale del workflow Hello World<a class="headerlink" href="#2-esaminare-lo-script-iniziale-del-workflow-hello-world" title="Permanent link">&para;</a></h2>
@@ -4541,62 +4541,62 @@ Questo li distingue dai parametri a livello Nextflow, che richiedono solo un tra
 </div>
 <h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
 <p>Ora sa come è strutturato un semplice workflow Nextflow e come i componenti di base si relazionano alla sua funzionalità.</p>
-<h3 id="cosa-succede-dopo_1">Cosa succede dopo?<a class="headerlink" href="#cosa-succede-dopo_1" title="Permanent link">&para;</a></h3>
+<h3 id="cosa-succede-dopo">Cosa succede dopo?<a class="headerlink" href="#cosa-succede-dopo" title="Permanent link">&para;</a></h3>
 <p>Imparate a gestire comodamente le esecuzioni del workflow.</p>
 <hr />
 <h2 id="3-gestire-le-esecuzioni-del-workflow">3. Gestire le esecuzioni del workflow<a class="headerlink" href="#3-gestire-le-esecuzioni-del-workflow" title="Permanent link">&para;</a></h2>
-<p>Sapere come avviare workflow e recuperare output è ottimo, ma scoprirà rapidamente che ci sono alcuni altri aspetti della gestione del workflow che renderanno la sua vita più facile.</p>
-<p>Qui vi mostriamo come sfruttare la funzione <code>resume</code> per quando deve rilanciare lo stesso workflow, come ispezionare i log di esecuzione con <code>nextflow log</code>, e come eliminare le directory work più vecchie con <code>nextflow clean</code>.</p>
+<p>Sapere come avviare workflow e recuperare output è ottimo, ma scoprirete rapidamente che ci sono alcuni altri aspetti della gestione del workflow che renderanno la vostra vita più facile.</p>
+<p>Qui vi mostriamo come sfruttare la funzione <code>resume</code> per quando dovete rilanciare lo stesso workflow, come ispezionare i log di esecuzione con <code>nextflow log</code>, e come eliminare le directory work più vecchie con <code>nextflow clean</code>.</p>
 <h3 id="31-rilanciare-un-workflow-con-resume">3.1. Rilanciare un workflow con <code>-resume</code><a class="headerlink" href="#31-rilanciare-un-workflow-con-resume" title="Permanent link">&para;</a></h3>
-<p>A volte, vorrà rieseguire una pipeline che ha già avviato in precedenza senza rifare alcun lavoro che è già stato completato con successo.</p>
-<p>Nextflow ha un'opzione chiamata <code>-resume</code> che le permette di farlo.
+<p>A volte, vorrete rieseguire una pipeline che avete già avviato in precedenza senza rifare alcun lavoro che è già stato completato con successo.</p>
+<p>Nextflow ha un'opzione chiamata <code>-resume</code> che vi permette di farlo.
 Specificamente, in questa modalità, tutti i processi che sono già stati eseguiti con esattamente lo stesso codice, impostazioni e input verranno saltati.
-Questo significa che Nextflow eseguirà solo i processi che ha aggiunto o modificato dall'ultima esecuzione, o ai quali sta fornendo nuove impostazioni o input.</p>
+Questo significa che Nextflow eseguirà solo i processi che avete aggiunto o modificato dall'ultima esecuzione, o ai quali state fornendo nuove impostazioni o input.</p>
 <p>Ci sono due vantaggi chiave nel farlo:</p>
 <ul>
-<li>Se sta sviluppando una pipeline, potete iterare più rapidamente poiché deve solo eseguire il/i processo/i su cui state lavorando attivamente per testare le vostre modifiche.</li>
+<li>Se siete nel mezzo dello sviluppo di una pipeline, potete iterare più rapidamente poiché dovete solo eseguire il/i processo/i su cui state lavorando attivamente per testare le vostre modifiche.</li>
 <li>Se state eseguendo una pipeline in produzione e qualcosa va storto, in molti casi potete risolvere il problema e rilanciare la pipeline, e riprenderà l'esecuzione dal punto di errore, il che può farvi risparmiare molto tempo e calcolo.</li>
 </ul>
-<p>Per utilizzarlo, aggiungete semplicemente <code>-resume</code> al vostro comando ed eseguite:</p>
+<p>Per utilizzarlo, aggiungete semplicemente <code>-resume</code> al vostro comando ed eseguitelo:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>--greeting<span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span><span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
 <summary>Output del comando</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="go">Launching `hello-world.nf` [tiny_noyce] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="go">Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d</span>
 <a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="go">[a3/7be2fa] process &gt; sayHello [100%] 1 of 1, cached: 1 ✔</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="go">[71/8143bd] sayHello | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
 </details>
-<p>Cerchi il bit <code>cached:</code> che è stato aggiunto nella riga dello stato del processo (riga 5), che significa che Nextflow ha riconosciuto di aver già fatto questo lavoro e ha semplicemente riutilizzato il risultato dall'esecuzione precedente riuscita.</p>
-<p>Può anche vedere che l'hash della sottodirectory work è lo stesso dell'esecuzione precedente.
+<p>Cercate il bit <code>cached:</code> che è stato aggiunto nella riga dello stato del processo, che significa che Nextflow ha riconosciuto di aver già fatto questo lavoro e ha semplicemente riutilizzato il risultato dall'esecuzione precedente riuscita.</p>
+<p>Potete anche vedere che l'hash della sottodirectory work è lo stesso dell'esecuzione precedente.
 Nextflow vi sta letteralmente indicando l'esecuzione precedente e dicendo "L'ho già fatto lì."</p>
 <div class="admonition tip">
 <p class="admonition-title">Suggerimento</p>
-<p>Quando riesegue una pipeline con <code>resume</code>, Nextflow non sovrascrive nessun file scritto in una directory <code>publishDir</code> da alcuna chiamata di processo che è stata precedentemente eseguita con successo.</p>
+<p>Quando rieseguite una pipeline con <code>resume</code>, Nextflow non sovrascrive nessun file scritto in una directory <code>publishDir</code> da alcuna chiamata di processo che è stata precedentemente eseguita con successo.</p>
 </div>
 <h3 id="32-ispezionare-il-log-delle-esecuzioni-passate">3.2. Ispezionare il log delle esecuzioni passate<a class="headerlink" href="#32-ispezionare-il-log-delle-esecuzioni-passate" title="Permanent link">&para;</a></h3>
-<p>Ogni volta che avvia un workflow nextflow, viene scritta una riga in un file di log chiamato <code>history</code>, sotto una directory nascosta chiamata <code>.nextflow</code> nella directory di lavoro corrente.</p>
+<p>Ogni volta che avviate un workflow nextflow, viene scritta una riga in un file di log chiamato <code>history</code>, sotto una directory nascosta chiamata <code>.nextflow</code> nella directory di lavoro corrente.</p>
 <p>Un modo più conveniente per accedere a queste informazioni è utilizzare il comando <code>nextflow log</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>nextflow<span class="w"> </span>log
 </code></pre></div>
-<p>Questo produrrà il contenuto del file di log nel terminale, mostrandole il timestamp, il nome dell'esecuzione, lo stato e la riga di comando completa per ogni esecuzione Nextflow che è stata avviata dall'interno della directory di lavoro corrente.</p>
+<p>Questo produrrà il contenuto del file di log nel terminale, mostrandovi il timestamp, il nome dell'esecuzione, lo stato e la riga di comando completa per ogni esecuzione Nextflow che è stata avviata dall'interno della directory di lavoro corrente.</p>
 <h3 id="33-eliminare-le-directory-work-piu-vecchie">3.3. Eliminare le directory work più vecchie<a class="headerlink" href="#33-eliminare-le-directory-work-piu-vecchie" title="Permanent link">&para;</a></h3>
 <p>Durante il processo di sviluppo, tipicamente eseguirete le vostre bozze di pipeline un gran numero di volte, il che può portare a un accumulo di molti file in molte sottodirectory.
 Poiché le sottodirectory sono nominate casualmente, è difficile dire dai loro nomi quali sono le esecuzioni più vecchie rispetto a quelle più recenti.</p>
-<p>Nextflow include un comodo sottocomando <code>clean</code> che potete eliminare automaticamente le sottodirectory work per esecuzioni passate che non vi interessano più, con diverse <a href="https://www.nextflow.io/docs/latest/reference/cli.html#clean">opzioni</a> per controllare cosa verrà eliminato.</p>
-<p>Può utilizzare il log Nextflow per cercare un'esecuzione in base al suo timestamp e/o alla riga di comando, quindi utilizzare <code>nextflow clean -before &lt;run_name&gt; -f</code> per eliminare le directory work dalle esecuzioni precedenti.</p>
+<p>Nextflow include un comodo sottocomando <code>clean</code> che può eliminare automaticamente le sottodirectory work per esecuzioni passate che non vi interessano più, con diverse <a href="https://www.nextflow.io/docs/latest/reference/cli.html#clean">opzioni</a> per controllare cosa verrà eliminato.</p>
+<p>Potete utilizzare il log Nextflow per cercare un'esecuzione in base al suo timestamp e/o alla riga di comando, quindi utilizzare <code>nextflow clean -before &lt;run_name&gt; -f</code> per eliminare le directory work dalle esecuzioni precedenti.</p>
 <div class="admonition warning">
 <p class="admonition-title">Avviso</p>
 <p>L'eliminazione delle sottodirectory work dalle esecuzioni passate le rimuove dalla cache di Nextflow ed elimina qualsiasi output che era memorizzato in quelle directory.
 Questo significa che interrompe la capacità di Nextflow di riprendere l'esecuzione senza rieseguire i processi corrispondenti.</p>
-<p>È responsabile del salvataggio di qualsiasi output che vi interessa o su cui prevedete di fare affidamento! Se sta utilizzando la direttiva <code>publishDir</code> per questo scopo, assicuratevi di utilizzare la modalità <code>copy</code>, non la modalità <code>symlink</code>.</p>
+<p>Siete responsabili del salvataggio di qualsiasi output che vi interessa o su cui prevedete di fare affidamento! Se state utilizzando la direttiva <code>publishDir</code> per questo scopo, assicuratevi di utilizzare la modalità <code>copy</code>, non la modalità <code>symlink</code>.</p>
 </div>
 <h3 id="takeaway_2">Takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
-<p>Sa come rilanciare una pipeline senza ripetere i passaggi che sono già stati eseguiti in modo identico, ispezionare il log di esecuzione e utilizzare il comando <code>nextflow clean</code> per ripulire le vecchie directory work.</p>
-<h3 id="cosa-succede-dopo_2">Cosa succede dopo?<a class="headerlink" href="#cosa-succede-dopo_2" title="Permanent link">&para;</a></h3>
-<p>Ora che comprende le operazioni di base di Nextflow, è pronto per eseguire una vera pipeline di bioimaging con nf-core/molkart.</p><div id="quiz-progress-sidebar" aria-label="Quiz Progress" style="display: none;">
+<p>Sapete come rilanciare una pipeline senza ripetere i passaggi che sono già stati eseguiti in modo identico, ispezionare il log di esecuzione e utilizzare il comando <code>nextflow clean</code> per ripulire le vecchie directory work.</p>
+<h3 id="cosa-ce-dopo_1">Cosa c'è dopo?<a class="headerlink" href="#cosa-ce-dopo_1" title="Permanent link">&para;</a></h3>
+<p>Ora che comprendete le operazioni di base di Nextflow, siete pronti per eseguire una vera pipeline di bioimaging con nf-core/molkart.</p><div id="quiz-progress-sidebar" aria-label="Quiz Progress" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">
     <span class="md-nav__icon md-icon"></span>

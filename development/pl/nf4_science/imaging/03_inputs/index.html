@@ -2218,10 +2218,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-rozwiazanie-uzyj-pliku-parametrow" class="md-nav__link">
+  <a href="#12-plik-parametrow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Rozwiązanie: Użyj pliku parametrów
+        1.2. Plik parametrów
       
     </span>
   </a>
@@ -2886,7 +2886,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Testowanie z nf-test
   
 
     
@@ -3729,10 +3729,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-rozwiazanie-uzyj-pliku-parametrow" class="md-nav__link">
+  <a href="#12-plik-parametrow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Rozwiązanie: Użyj pliku parametrów
+        1.2. Plik parametrów
       
     </span>
   </a>
@@ -4072,21 +4072,15 @@
 Teraz poznamy dwa lepsze podejścia do zarządzania wejściami: <strong>pliki parametrów</strong> oraz <strong>arkusze próbek</strong>.</p>
 <h2 id="1-uzywanie-plikow-parametrow">1. Używanie plików parametrów<a class="headerlink" href="#1-uzywanie-plikow-parametrow" title="Permanent link">&para;</a></h2>
 <h3 id="11-problem-z-dugimi-wierszami-polecen">1.1. Problem z długimi wierszami poleceń<a class="headerlink" href="#11-problem-z-dugimi-wierszami-polecen" title="Permanent link">&para;</a></h3>
-<p>Przypomnijmy sobie nasze polecenie z Części 2:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>--input<span class="w"> </span><span class="s1">&#39;data/samplesheet.csv&#39;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span>--mindagap_tilesize<span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>--mindagap_boxsize<span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span>--mindagap_loopnum<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span>--clahe_pyramid_tile<span class="w"> </span><span class="m">368</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;cellpose&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span>--outdir<span class="w"> </span>results
+<p>W Części 2 używaliśmy już pliku parametrów, aby skrócić polecenie i zachować wpisane wartości (takie jak całkowitoliczbowe parametry przetwarzania wstępnego) w niezmienionej postaci:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;mesmer,cellpose,stardist&quot;</span>
 </code></pre></div>
-<p>To działa, ale trudno to odtworzyć, udostępnić lub zmodyfikować.
+<p>Podawanie wielu parametrów osobno w wierszu poleceń jest trudne do odtworzenia, udostępnienia lub modyfikacji.
 Co jeśli musisz ponownie uruchomić tę samą analizę za miesiąc?
-Co jeśli współpracownik chce użyć dokładnie Twoich ustawień?</p>
-<h3 id="12-rozwiazanie-uzyj-pliku-parametrow">1.2. Rozwiązanie: Użyj pliku parametrów<a class="headerlink" href="#12-rozwiazanie-uzyj-pliku-parametrow" title="Permanent link">&para;</a></h3>
-<p>Utwórz plik o nazwie <code>params.yaml</code>:</p>
+Co jeśli współpracownik chce użyć dokładnie Twoich ustawień?
+Plik parametrów rozwiązuje ten problem.</p>
+<h3 id="12-plik-parametrow">1.2. Plik parametrów<a class="headerlink" href="#12-plik-parametrow" title="Permanent link">&para;</a></h3>
+<p>Oto plik <code>params.yaml</code>, którego używaliśmy:</p>
 <div class="highlight"><span class="filename">params.yaml</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;data/samplesheet.csv&quot;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">outdir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;results&quot;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">mindagap_tilesize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">90</span>
@@ -4095,10 +4089,12 @@ Co jeśli współpracownik chce użyć dokładnie Twoich ustawień?</p>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nt">clahe_pyramid_tile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">368</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nt">segmentation_method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cellpose&quot;</span>
 </code></pre></div>
-<p>Teraz Twoje polecenie staje się:</p>
+<p>Każdy parametr jest zapisany jako para <code>klucz: wartość</code>.
+Zapisywanie liczb całkowitych bez cudzysłowów (na przykład <code>mindagap_tilesize: 90</code>) zachowuje ich typ całkowitoliczbowy, którego wymaga walidacja parametrów pipeline'u.</p>
+<p>Twoje polecenie staje się wtedy:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>-resume
 </code></pre></div>
-<p>To wszystko! Plik parametrów dokumentuje dokładną konfigurację i ułatwia ponowne uruchomienie lub udostępnienie.</p>
+<p>Plik parametrów dokumentuje dokładną konfigurację i ułatwia ponowne uruchomienie lub udostępnienie.</p>
 <h3 id="13-nadpisywanie-parametrow">1.3. Nadpisywanie parametrów<a class="headerlink" href="#13-nadpisywanie-parametrow" title="Permanent link">&para;</a></h3>
 <p>Nadal możesz nadpisać konkretne parametry z wiersza poleceń:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;stardist&quot;</span><span class="w"> </span>--outdir<span class="w"> </span>stardist_results<span class="w"> </span>-resume

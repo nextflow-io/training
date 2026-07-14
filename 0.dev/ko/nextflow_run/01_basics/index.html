@@ -4586,13 +4586,19 @@
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">Launching `1-hello.nf` [goofy_torvalds] revision: c33d41f479</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="go">executor &gt;  local (1)</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="hll"><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
-</span></code></pre></div>
+</span><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="go">  /workspaces/training/nextflow-run/results</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="go">  first_output: 1-hello/output.txt</span>
+</code></pre></div>
 </details>
 <p>콘솔 출력이 이와 비슷하다면 축하합니다. 첫 번째 Nextflow 워크플로우를 실행했습니다!</p>
 <details class="question">
@@ -4605,11 +4611,12 @@
 <p>이전 v1 Nextflow 언어 분석기를 사용하고 있을 가능성이 높습니다.
 이것은 과정 시작 부분에서 언급되었지만 놓쳤을 수 있습니다.
 <a href="../../info/nxf_versions/">Nextflow 버전</a> 도움말 자료를 확인하세요.</p>
-<p>간단히 말해서, Nextflow <code>25.10</code>을 사용하는 경우 v2 언어 분석기를 활성화해야 합니다:</p>
+<p>v2 분석기는 Nextflow 26.04부터 기본값으로 설정되어 있으므로, 이전 버전에서만 이 오류가 발생합니다.
+26.04 이전 버전을 사용하는 경우 v2 언어 분석기를 활성화해야 합니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v2
 </code></pre></div>
 </details>
-<p>여기서 가장 중요한 출력은 위 출력에서 강조된 마지막 줄입니다:</p>
+<p>여기서 가장 중요한 출력은 위 출력에서 강조된 줄입니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
 <p>이것은 <code>sayHello</code> process가 한 번 성공적으로 실행되었음을 알려줍니다(<code>1 of 1 ✔</code>).</p>
@@ -4638,12 +4645,18 @@
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Launching `1-hello.nf` [hungry_celsius] revision: f048d6ea78</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
 <a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">[a3/1e1535] sayHello [100%] 1 of 1 ✔</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">[a3/1e1535] sayHello | 1 of 1 ✔</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="go">  /workspaces/training/nextflow-run/hello_results</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="go">  first_output: 1-hello/output.txt</span>
 </code></pre></div>
 </details>
 <p>이제 출력이 <code>results</code> 대신 <code>hello_results</code>라는 디렉토리에 게시된 것을 볼 수 있습니다:</p>
@@ -4665,7 +4678,7 @@
 <p>이러한 모든 작업 디렉토리는 현재 디렉토리(명령을 실행하는 위치) 내의 <code>work</code>라는 디렉토리 아래에 위치합니다.</p>
 <p>혼란스럽게 들릴 수 있으므로 실제로 어떻게 보이는지 살펴보겠습니다.</p>
 <p>앞서 실행한 워크플로우의 콘솔 출력으로 돌아가면 다음 줄이 있었습니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">[a3/1e1535] sayHello [100%] 1 of 1 ✔</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">[a3/1e1535] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
 <p>줄이 <code>[a3/1e1535]</code>로 시작하는 것을 보셨나요?
 이것은 해당 process 실행의 작업 디렉토리 경로의 축약된 형태이며, <code>work/</code> 디렉토리 경로 내에서 <code>sayHello</code> process 실행의 출력을 찾을 위치를 알려줍니다.</p>
@@ -5074,15 +5087,27 @@ workflow 정의는 <code>workflow</code> 키워드로 시작하고 그 뒤에 �
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1">1</a></span>
-<span class="normal"><a href="#__codelineno-30-2">2</a></span>
-<span class="normal"><a href="#__codelineno-30-3">3</a></span>
-<span class="normal"><a href="#__codelineno-30-4">4</a></span>
-<span class="normal"><a href="#__codelineno-30-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-30-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-30-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-30-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-30-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-30-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-30-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-30-10">10</a></span>
+<span class="normal"><a href="#__codelineno-30-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2"></a>
-<a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="go">Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="go">Launching `1-hello.nf` [tiny_noyce] revision: c33d41f479</span>
 <a id="__codelineno-30-4" name="__codelineno-30-4"></a>
 <a id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔</span>
+<a id="__codelineno-30-6" name="__codelineno-30-6"></a>
+<a id="__codelineno-30-7" name="__codelineno-30-7"></a><span class="go">Outputs:</span>
+<a id="__codelineno-30-8" name="__codelineno-30-8"></a>
+<a id="__codelineno-30-9" name="__codelineno-30-9"></a><span class="go">  /workspaces/training/nextflow-run/results</span>
+<a id="__codelineno-30-10" name="__codelineno-30-10"></a>
+<a id="__codelineno-30-11" name="__codelineno-30-11"></a><span class="go">  first_output: 1-hello/output.txt</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>콘솔 출력은 익숙해 보이지만 이전과 약간 다른 점이 있습니다.</p>
@@ -5189,7 +5214,7 @@ Nextflow 로그를 사용하여 타임스탬프 및/또는 명령줄을 기반�
 - [x] 작업의 작업 디렉토리에 대한 축약된 경로
 - [ ] 출력 파일의 체크섬
 
-자세히 알아보기: [2.4. `work/` 디렉토리에서 원본 출력 및 로그 찾기](#23-find-the-original-output-and-logs-in-the-work-directory)
+자세히 알아보기: [2.3. `work/` 디렉토리에서 원본 출력 및 로그 찾기](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
@@ -5203,7 +5228,7 @@ Nextflow 로그를 사용하여 타임스탬프 및/또는 명령줄을 기반�
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>자세히 알아보기: <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.4. <code>work/</code> 디렉토리에서 원본 출력 및 로그 찾기</a></p></section>
+    <section class="content hidden"><p>자세히 알아보기: <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.3. <code>work/</code> 디렉토리에서 원본 출력 및 로그 찾기</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5214,7 +5239,7 @@ Nextflow 로그를 사용하여 타임스탬프 및/또는 명령줄을 기반�
 - [ ] 실패한 작업의 오류 메시지를 포함합니다
 - [ ] 작업을 위해 스테이징된 입력 파일을 나열합니다
 
-자세히 알아보기: [2.4. `work/` 디렉토리에서 원본 출력 및 로그 찾기](#23-find-the-original-output-and-logs-in-the-work-directory)
+자세히 알아보기: [2.3. `work/` 디렉토리에서 원본 출력 및 로그 찾기](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -5228,7 +5253,7 @@ Nextflow 로그를 사용하여 타임스탬프 및/또는 명령줄을 기반�
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>자세히 알아보기: <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.4. <code>work/</code> 디렉토리에서 원본 출력 및 로그 찾기</a></p></section>
+    <section class="content hidden"><p>자세히 알아보기: <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.3. <code>work/</code> 디렉토리에서 원본 출력 및 로그 찾기</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5239,7 +5264,7 @@ Nextflow 로그를 사용하여 타임스탬프 및/또는 명령줄을 기반�
 - [ ] Nextflow가 덮어쓰기를 방지하고 실패합니다
 - [ ] 자동으로 백업됩니다
 
-자세히 알아보기: [2.5. 다른 인사말로 워크플로우 다시 실행](#24-re-run-the-workflow-with-different-greetings)
+자세히 알아보기: [2.4. 다른 인사말로 워크플로우 다시 실행](#24-re-run-the-workflow-with-different-greetings)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
@@ -5253,7 +5278,7 @@ Nextflow 로그를 사용하여 타임스탬프 및/또는 명령줄을 기반�
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>자세히 알아보기: <a href="#24-re-run-the-workflow-with-different-greetings">2.5. 다른 인사말로 워크플로우 다시 실행</a></p></section>
+    <section class="content hidden"><p>자세히 알아보기: <a href="#24-re-run-the-workflow-with-different-greetings">2.4. 다른 인사말로 워크플로우 다시 실행</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5261,7 +5286,7 @@ Nextflow 로그를 사용하여 타임스탬프 및/또는 명령줄을 기반�
 이 콘솔 출력은 무엇을 나타내나요?
 
 ```console
-[skipped  ] process > sayHello (1) [100%] 1 of 1, cached: 1 ✔
+[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
 ```
 
 - [ ] 작업이 실패하여 건너뛰었습니다
@@ -5277,7 +5302,7 @@ Nextflow 로그를 사용하여 타임스탬프 및/또는 명령줄을 기반�
 
                 <div class="quiz-question" id="quiz-3-question">
                     <p>이 콘솔 출력은 무엇을 나타내나요?</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">[skipped  ] process &gt; sayHello (1) [100%] 1 of 1, cached: 1 ✔</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
                 </div>
                 <form action="javascript:void(0);" onsubmit="return false;">

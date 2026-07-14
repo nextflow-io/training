@@ -2516,7 +2516,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Testando com nf-test
   
 
     
@@ -4744,7 +4744,7 @@ Você não precisa alterar nenhum código do pipeline; basta adicioná-lo à con
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-hello@0.5.0&#39;</span>
 <a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-schema@2.6.1&#39;</span>
-<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="hll"><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.2.0&#39;</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="hll"><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.3.0&#39;</span>
 </span><a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="o">}</span>
 </code></pre></div>
 </div>
@@ -4762,7 +4762,7 @@ Você não precisa alterar nenhum código do pipeline; basta adicioná-lo à con
 </code></pre></div>
 <p>O plugin produz várias mensagens INFO e WARN durante a execução.
 Isso é normal para um exemplo pequeno sendo executado em uma máquina local:</p>
-<div class="highlight"><span class="filename">Output (partial)</span><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="go">nf-co2footprint plugin  ~  version 1.2.0</span>
+<div class="highlight"><span class="filename">Output (partial)</span><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="go">nf-co2footprint plugin  ~  version 1.3.0</span>
 <a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="go">WARN - [nf-co2footprint] Target zone null not found. Attempting to retrieve carbon intensity for fallback zone GLOBAL.</span>
 <a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="go">INFO - [nf-co2footprint] Using fallback carbon intensity from GLOBAL from CI table: 480.0 gCO₂eq/kWh.</span>
 <a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="go">WARN - [nf-co2footprint] Executor &#39;null&#39; not mapped.</span>
@@ -4813,7 +4813,7 @@ O plugin nf-co2footprint define um escopo de configuração <code>co2footprint</
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-hello@0.5.0&#39;</span>
 <a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-schema@2.6.1&#39;</span>
-<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.2.0&#39;</span>
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.3.0&#39;</span>
 <a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a><span class="o">}</span>
 <a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a>
 <a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a><span class="hll"><span class="n">co2footprint</span><span class="w"> </span><span class="o">{</span>
@@ -4825,7 +4825,7 @@ O plugin nf-co2footprint define um escopo de configuração <code>co2footprint</
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-hello@0.5.0&#39;</span>
 <a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-schema@2.6.1&#39;</span>
-<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.2.0&#39;</span>
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-co2footprint@1.3.0&#39;</span>
 <a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="o">}</span>
 </code></pre></div>
 </div>
@@ -4842,11 +4842,6 @@ O plugin nf-co2footprint define um escopo de configuração <code>co2footprint</
 </code></pre></div>
 <p>O aviso de zona desapareceu.
 O plugin agora usa a intensidade de carbono específica do GB (163.92 gCO₂eq/kWh) em vez do valor global de fallback (480.0 gCO₂eq/kWh).</p>
-<div class="admonition note">
-<p class="admonition-title">Nota</p>
-<p>Você também pode ver uma mensagem <code>WARN: Unrecognized config option 'co2footprint.location'</code>.
-Isso é apenas cosmético e pode ser ignorado com segurança; o plugin ainda lê o valor corretamente.</p>
-</div>
 <p>Na Parte 6, você criará um escopo de configuração para o seu próprio plugin.</p>
 <p>Este plugin funciona inteiramente por meio do mecanismo observer, conectando-se aos eventos do ciclo de vida do fluxo de trabalho para coletar métricas de recursos e gerar seu relatório quando o pipeline é concluído.</p>
 <p>Você agora experimentou plugins de função (importados com <code>include</code>) e um plugin observer (ativado apenas pela configuração).

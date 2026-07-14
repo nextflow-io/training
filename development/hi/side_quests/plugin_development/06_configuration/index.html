@@ -4201,12 +4201,12 @@ Users अलग markers चाहते हो सकते हैं, लेक
 <h3 id="12-error">1.2. Error देखो<a class="headerlink" href="#12-error" title="Permanent link">&para;</a></h3>
 <p>Build fail होती है:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">&gt; Task :compileGroovy FAILED</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="go">GreetingExtension.groovy: 30: [Static type checking] - The variable [prefix] is undeclared.</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go"> @ line 30, column 9.</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="go">GreetingExtension.groovy: 34: [Static type checking] - The variable [prefix] is undeclared.</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go"> @ line 34, column 9.</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="go">           prefix = session.config.navigate(&#39;greeting.prefix&#39;, &#39;***&#39;) as String</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="go">           ^</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="go">GreetingExtension.groovy: 31: [Static type checking] - The variable [suffix] is undeclared.</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="go">GreetingExtension.groovy: 35: [Static type checking] - The variable [suffix] is undeclared.</span>
 </code></pre></div>
 <p>Groovy (और Java) में, variable को उपयोग करने से पहले <em>declare</em> करना ज़रूरी है।
 Code <code>prefix</code> और <code>suffix</code> को values assign करने की कोशिश करता है, लेकिन class में उन नामों के कोई fields नहीं हैं।</p>

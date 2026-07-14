@@ -1614,7 +1614,7 @@
   <span class="md-ellipsis">
     
   
-    02 per sample variant calling
+    Teil 2: Variantenerkennung pro Probe
   
 
     
@@ -2981,7 +2981,7 @@
   <a href="#232-den-workflow-ausfuhren" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3.2. Den Workflow ausführen
+        2.3.2. Den Workflow ausführen:
       
     </span>
   </a>
@@ -3428,7 +3428,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Testen mit nf-test
   
 
     
@@ -4722,7 +4722,7 @@
   <a href="#232-den-workflow-ausfuhren" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3.2. Den Workflow ausführen
+        2.3.2. Den Workflow ausführen:
       
     </span>
   </a>
@@ -5326,9 +5326,9 @@ Schau dir <a href="../../hello_nextflow/02_hello_channels/#4-read-input-values-f
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="go">Launching `main.nf` [exotic_albattani] DSL2 - revision: c0d03cec83</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="go">Launching `main.nf` [exotic_albattani] revision: c0d03cec83</span>
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
 <a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="go">[id:sampleA, character:squirrel, recording:/workspaces/training/side-quests/metadata/data/bonjour.txt]</span>
 <a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="go">[id:sampleB, character:tux, recording:/workspaces/training/side-quests/metadata/data/guten_tag.txt]</span>
@@ -5337,6 +5337,12 @@ Schau dir <a href="../../hello_nextflow/02_hello_channels/#4-read-input-values-f
 <a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="go">[id:sampleE, character:stegosaurus, recording:/workspaces/training/side-quests/metadata/data/hola.txt]</span>
 <a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="go">[id:sampleF, character:moose, recording:/workspaces/training/side-quests/metadata/data/salut.txt]</span>
 <a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="go">[id:sampleG, character:turtle, recording:/workspaces/training/side-quests/metadata/data/ciao.txt]</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="go">Outputs:</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="go">  /workspaces/training/side-quests/metadata/results</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="go">  cowpy_art:</span>
 </code></pre></div>
 </details>
 <p>Wir sehen, dass der Operator für jede Zeile in der CSV-Datei eine Map aus Schlüssel-Wert-Paaren erstellt hat, wobei die Spaltenüberschriften als Schlüssel für die entsprechenden Werte dienen.</p>
@@ -5368,9 +5374,9 @@ Zum Beispiel könnten wir mit <code>id</code> auf die Datei-ID oder mit <code>re
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>examples/map_demo.nf
 </code></pre></div>
 <p>Und das kannst du in der Ausgabe erwarten:</p>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Launching `map_demo.nf` [cheesy_plateau] DSL2 - revision: fae5b8496e</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Launching `examples/map_demo.nf` [cheesy_plateau] revision: fae5b8496e</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
 <a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="go">map: [id:sampleA, character:squirrel]</span>
 <a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">id: sampleA</span>
@@ -5414,9 +5420,9 @@ Zum Beispiel könnten wir mit <code>id</code> auf die Datei-ID oder mit <code>re
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">Launching `main.nf` [exotic_albattani] DSL2 - revision: c0d03cec83</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">Launching `main.nf` [exotic_albattani] revision: c0d03cec83</span>
 <a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
 <a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="go">squirrel</span>
 <a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="go">tux</span>
@@ -5425,6 +5431,12 @@ Zum Beispiel könnten wir mit <code>id</code> auf die Datei-ID oder mit <code>re
 <a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="go">stegosaurus</span>
 <a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="go">moose</span>
 <a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="go">turtle</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="go">Outputs:</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a><span class="go">  /workspaces/training/side-quests/metadata/results</span>
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a><span class="go">  cowpy_art:</span>
 </code></pre></div>
 </details>
 <p>Das zeigt, dass wir auf die Werte der <code>character</code>-Spalte für jede Zeile zugreifen können.</p>
@@ -5632,12 +5644,25 @@ Wir haben Werte für beides, aber sie sind derzeit in jedem Element des Kanals g
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>
-<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="go">Launching `main.nf` [clever_dijkstra] DSL2 - revision: a1b2c3d4e5</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="go">Launching `main.nf` [clever_dijkstra] revision: a1b2c3d4e5</span>
 <a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
 <a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="go">executor &gt;  local (7)</span>
-<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="go">[3a/f1c290] COWPY (7) [100%] 7 of 7 ✔</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="go">[3a/f1c290] COWPY (7) | 7 of 7 ✔</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="go">  /workspaces/training/side-quests/metadata/results</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a>
+<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="go">  cowpy_art:</span>
+<a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a><span class="go">    - cowpy-bonjour.txt</span>
+<a id="__codelineno-26-14" name="__codelineno-26-14" href="#__codelineno-26-14"></a><span class="go">    - cowpy-guten_tag.txt</span>
+<a id="__codelineno-26-15" name="__codelineno-26-15" href="#__codelineno-26-15"></a><span class="go">    - cowpy-salut.txt</span>
+<a id="__codelineno-26-16" name="__codelineno-26-16" href="#__codelineno-26-16"></a><span class="go">    - cowpy-hola.txt</span>
+<a id="__codelineno-26-17" name="__codelineno-26-17" href="#__codelineno-26-17"></a><span class="go">    - cowpy-hello.txt</span>
+<a id="__codelineno-26-18" name="__codelineno-26-18" href="#__codelineno-26-18"></a><span class="go">    - cowpy-hallo.txt</span>
+<a id="__codelineno-26-19" name="__codelineno-26-19" href="#__codelineno-26-19"></a><span class="go">    - cowpy-ciao.txt</span>
 </code></pre></div>
 </details>
 <p>Wie du siehst, hat <code>COWPY</code> jede Datei mit der richtigen Figur verarbeitet.</p>
@@ -5834,12 +5859,25 @@ Das geschieht auf der Ebene der Eingabeschnittstelle von <code>COWPY</code>, wo 
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>
-<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="go">Launching `main.nf` [pedantic_lovelace] DSL2 - revision: b2c3d4e5f6</span>
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="go">Launching `main.nf` [pedantic_lovelace] revision: b2c3d4e5f6</span>
 <a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a>
 <a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a><span class="go">executor &gt;  local (7)</span>
-<a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a><span class="go">[5e/2a1b34] COWPY (7) [100%] 7 of 7 ✔</span>
+<a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a><span class="go">[5e/2a1b34] COWPY (7) | 7 of 7 ✔</span>
+<a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a>
+<a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a>
+<a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a><span class="go">  /workspaces/training/side-quests/metadata/results</span>
+<a id="__codelineno-36-11" name="__codelineno-36-11" href="#__codelineno-36-11"></a>
+<a id="__codelineno-36-12" name="__codelineno-36-12" href="#__codelineno-36-12"></a><span class="go">  cowpy_art:</span>
+<a id="__codelineno-36-13" name="__codelineno-36-13" href="#__codelineno-36-13"></a><span class="go">    - cowpy-bonjour.txt</span>
+<a id="__codelineno-36-14" name="__codelineno-36-14" href="#__codelineno-36-14"></a><span class="go">    - cowpy-guten_tag.txt</span>
+<a id="__codelineno-36-15" name="__codelineno-36-15" href="#__codelineno-36-15"></a><span class="go">    - cowpy-salut.txt</span>
+<a id="__codelineno-36-16" name="__codelineno-36-16" href="#__codelineno-36-16"></a><span class="go">    - cowpy-hola.txt</span>
+<a id="__codelineno-36-17" name="__codelineno-36-17" href="#__codelineno-36-17"></a><span class="go">    - cowpy-hello.txt</span>
+<a id="__codelineno-36-18" name="__codelineno-36-18" href="#__codelineno-36-18"></a><span class="go">    - cowpy-hallo.txt</span>
+<a id="__codelineno-36-19" name="__codelineno-36-19" href="#__codelineno-36-19"></a><span class="go">    - cowpy-ciao.txt</span>
 </code></pre></div>
 </details>
 <p>Die Ausgabe sind dieselben sieben <code>cowpy-*.txt</code>-Dateien wie zuvor, jetzt mit einem einfacheren Aufruf von <code>COWPY</code>.</p>
@@ -5936,8 +5974,8 @@ Prozesse, die diese Struktur akzeptieren, müssen nicht wissen oder sich darum k
 <a id="__codelineno-42-11" name="__codelineno-42-11"></a><span class="hll"><span class="w">    </span><span class="n">COWPY</span><span class="o">(</span><span class="n">ch_datasheet</span><span class="o">)</span>
 </span><a id="__codelineno-42-12" name="__codelineno-42-12"></a>
 <a id="__codelineno-42-13" name="__codelineno-42-13"></a><span class="w">    </span><span class="nl">publish:</span>
-<a id="__codelineno-42-14" name="__codelineno-42-14"></a><span class="w">    </span><span class="n">cowpy_art</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">COWPY</span><span class="o">.</span><span class="na">out</span>
-</code></pre></div></td></tr></table></div>
+<a id="__codelineno-42-14" name="__codelineno-42-14"></a><span class="hll"><span class="w">    </span><span class="n">cowpy_art</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">COWPY</span><span class="o">.</span><span class="na">out</span>
+</span></code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
@@ -5948,9 +5986,9 @@ Prozesse, die diese Struktur akzeptieren, müssen nicht wissen oder sich darum k
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><span class="filename">View meta map</span><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><span class="filename">View meta map</span><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>
-<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="go">Launching `main.nf` [lethal_booth] DSL2 - revision: 0d8f844c07</span>
+<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="go">Launching `main.nf` [lethal_booth] revision: 0d8f844c07</span>
 <a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a>
 <a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a><span class="go">[[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/data/bonjour.txt]</span>
 <a id="__codelineno-44-6" name="__codelineno-44-6" href="#__codelineno-44-6"></a><span class="go">[[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/data/guten_tag.txt]</span>
@@ -5959,6 +5997,12 @@ Prozesse, die diese Struktur akzeptieren, müssen nicht wissen oder sich darum k
 <a id="__codelineno-44-9" name="__codelineno-44-9" href="#__codelineno-44-9"></a><span class="go">[[id:sampleE, character:stegosaurus], /workspaces/training/side-quests/metadata/data/hola.txt]</span>
 <a id="__codelineno-44-10" name="__codelineno-44-10" href="#__codelineno-44-10"></a><span class="go">[[id:sampleF, character:moose], /workspaces/training/side-quests/metadata/data/salut.txt]</span>
 <a id="__codelineno-44-11" name="__codelineno-44-11" href="#__codelineno-44-11"></a><span class="go">[[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/data/ciao.txt]</span>
+<a id="__codelineno-44-12" name="__codelineno-44-12" href="#__codelineno-44-12"></a>
+<a id="__codelineno-44-13" name="__codelineno-44-13" href="#__codelineno-44-13"></a><span class="go">Outputs:</span>
+<a id="__codelineno-44-14" name="__codelineno-44-14" href="#__codelineno-44-14"></a>
+<a id="__codelineno-44-15" name="__codelineno-44-15" href="#__codelineno-44-15"></a><span class="go">  /workspaces/training/side-quests/metadata/results</span>
+<a id="__codelineno-44-16" name="__codelineno-44-16" href="#__codelineno-44-16"></a>
+<a id="__codelineno-44-17" name="__codelineno-44-17" href="#__codelineno-44-17"></a><span class="go">  cowpy_art:</span>
 </code></pre></div>
 </details>
 <p>Jedes Element im Kanal ist jetzt ein Tupel aus zwei Elementen: zuerst die Meta-Map, dann die Datei.</p>
@@ -5967,7 +6011,7 @@ Prozesse, die diese Struktur akzeptieren, müssen nicht wissen oder sich darum k
 <a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="go">  /workspaces/training/side-quests/metadata/data/bonjour.txt</span>
 <a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a><span class="go">]</span>
 </code></pre></div>
-<p>Wenn wir später eine <code>language</code>-Spalte zum Datenblatt hinzufügen, wird sie als <code>meta.language</code> verfügbar, ohne dass Änderungen an der Prozess-Eingabedefinition erforderlich sind.</p>
+<p>Wenn wir später eine <code>language</code>-Spalte zum Datenblatt hinzufügen und sie in der <code>map</code>-Operation einbinden (z.B. <code>language: row.language</code>), wird sie als <code>meta.language</code> verfügbar, ohne dass Änderungen an der Prozess-Eingabedefinition erforderlich sind.</p>
 <h4 id="153-den-cowpy-prozess-aktualisieren-um-die-meta-map-zu-verwenden">1.5.3. Den <code>COWPY</code>-Prozess aktualisieren, um die Meta-Map zu verwenden<a class="headerlink" href="#153-den-cowpy-prozess-aktualisieren-um-die-meta-map-zu-verwenden" title="Permanent link">&para;</a></h4>
 <p>Aktualisiere <code>COWPY</code>, um die <code>[meta, file]</code>-Tupelstruktur zu akzeptieren:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">Danach</label><label for="__tabbed_9_2">Vorher</label></div>
@@ -6103,12 +6147,25 @@ Auf jedes Feld in der Meta-Map kann auf dieselbe Weise zugegriffen werden.</p>
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>
-<a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a><span class="go">Launching `main.nf` [wise_sammet] DSL2 - revision: 99797b1e92</span>
+<a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a><span class="go">Launching `main.nf` [wise_sammet] revision: 99797b1e92</span>
 <a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a>
 <a id="__codelineno-51-5" name="__codelineno-51-5" href="#__codelineno-51-5"></a><span class="go">executor &gt;  local (7)</span>
-<a id="__codelineno-51-6" name="__codelineno-51-6" href="#__codelineno-51-6"></a><span class="go">[5d/dffd4e] COWPY (7) [100%] 7 of 7 ✔</span>
+<a id="__codelineno-51-6" name="__codelineno-51-6" href="#__codelineno-51-6"></a><span class="go">[5d/dffd4e] COWPY (7) | 7 of 7 ✔</span>
+<a id="__codelineno-51-7" name="__codelineno-51-7" href="#__codelineno-51-7"></a>
+<a id="__codelineno-51-8" name="__codelineno-51-8" href="#__codelineno-51-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-51-9" name="__codelineno-51-9" href="#__codelineno-51-9"></a>
+<a id="__codelineno-51-10" name="__codelineno-51-10" href="#__codelineno-51-10"></a><span class="go">  /workspaces/training/side-quests/metadata/results</span>
+<a id="__codelineno-51-11" name="__codelineno-51-11" href="#__codelineno-51-11"></a>
+<a id="__codelineno-51-12" name="__codelineno-51-12" href="#__codelineno-51-12"></a><span class="go">  cowpy_art:</span>
+<a id="__codelineno-51-13" name="__codelineno-51-13" href="#__codelineno-51-13"></a><span class="go">    - cowpy-bonjour.txt</span>
+<a id="__codelineno-51-14" name="__codelineno-51-14" href="#__codelineno-51-14"></a><span class="go">    - cowpy-guten_tag.txt</span>
+<a id="__codelineno-51-15" name="__codelineno-51-15" href="#__codelineno-51-15"></a><span class="go">    - cowpy-salut.txt</span>
+<a id="__codelineno-51-16" name="__codelineno-51-16" href="#__codelineno-51-16"></a><span class="go">    - cowpy-hola.txt</span>
+<a id="__codelineno-51-17" name="__codelineno-51-17" href="#__codelineno-51-17"></a><span class="go">    - cowpy-hello.txt</span>
+<a id="__codelineno-51-18" name="__codelineno-51-18" href="#__codelineno-51-18"></a><span class="go">    - cowpy-hallo.txt</span>
+<a id="__codelineno-51-19" name="__codelineno-51-19" href="#__codelineno-51-19"></a><span class="go">    - cowpy-ciao.txt</span>
 </code></pre></div>
 </details>
 <p>Das Ergebnisverzeichnis enthält jetzt die ASCII-Kunst-Dateien.</p>
@@ -6192,7 +6249,7 @@ Bei einem Textausschnitt gibt es eine Sprachvorhersage und einen Wahrscheinlichk
 <a id="__codelineno-54-15" name="__codelineno-54-15"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-54-16" name="__codelineno-54-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Die Eingabedefinition verwendet dieselbe <code>tuple val(meta), path(file)</code>-Struktur, die wir in Abschnitt 1 aufgebaut haben, sodass <code>ch_datasheet</code> direkt in diesen Prozess einfließen kann.</p>
+<p>Die Eingabedefinition verwendet dieselbe <code>tuple val(meta), path(file)</code>-Struktur, die wir in Abschnitt 1 aufgebaut haben, sodass <code>ch_datasheet</code> direkt in diesen Prozess einfließen kann, ohne Anpassungen zu benötigen.</p>
 <p>Die Ausgabe fügt <code>stdout</code> als drittes Element hinzu: Das erfasst die Sprachvorhersage, die <code>langid</code> auf der Konsole ausgibt.
 Der <code>sed</code>-Befehl entfernt den Wahrscheinlichkeitswert und den abschließenden Zeilenumbruch und lässt nur den zweistelligen Sprachcode übrig.</p>
 <h4 id="211-einen-aufruf-von-identify_language-hinzufugen">2.1.1. Einen Aufruf von <code>IDENTIFY_LANGUAGE</code> hinzufügen<a class="headerlink" href="#211-einen-aufruf-von-identify_language-hinzufugen" title="Permanent link">&para;</a></h4>
@@ -6275,20 +6332,33 @@ Stattdessen verwenden wir <code>IDENTIFY_LANGUAGE.out.view()</code>, um die Erge
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a>
-<a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a><span class="go">Launching `main.nf` [voluminous_mcnulty] DSL2 - revision: f9bcfebabb</span>
+<a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a><span class="go">Launching `main.nf` [voluminous_mcnulty] revision: f9bcfebabb</span>
 <a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a>
-<a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a><span class="go">executor &gt;  local (14)</span>
-<a id="__codelineno-58-6" name="__codelineno-58-6" href="#__codelineno-58-6"></a><span class="go">[5d/dffd4e] COWPY (7)             [100%] 7 of 7, cached: 7 ✔</span>
-<a id="__codelineno-58-7" name="__codelineno-58-7" href="#__codelineno-58-7"></a><span class="go">[4e/f722fe] IDENTIFY_LANGUAGE (7) [100%] 7 of 7 ✔</span>
-<a id="__codelineno-58-8" name="__codelineno-58-8" href="#__codelineno-58-8"></a><span class="go">[[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/work/eb/f7148ebdd898fbe1136bec6a714acb/bonjour.txt, fr]</span>
-<a id="__codelineno-58-9" name="__codelineno-58-9" href="#__codelineno-58-9"></a><span class="go">[[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/work/16/71d72410952c22cd0086d9bca03680/guten_tag.txt, de]</span>
-<a id="__codelineno-58-10" name="__codelineno-58-10" href="#__codelineno-58-10"></a><span class="go">[[id:sampleD, character:turkey], /workspaces/training/side-quests/metadata/work/c4/b7562adddc1cc0b7d414ec45d436eb/hello.txt, en]</span>
-<a id="__codelineno-58-11" name="__codelineno-58-11" href="#__codelineno-58-11"></a><span class="go">[[id:sampleC, character:sheep], /workspaces/training/side-quests/metadata/work/ea/04f5d979429e4455e14b9242fb3b45/hallo.txt, de]</span>
-<a id="__codelineno-58-12" name="__codelineno-58-12" href="#__codelineno-58-12"></a><span class="go">[[id:sampleF, character:moose], /workspaces/training/side-quests/metadata/work/5a/6c2b84bf8fadb98e28e216426be079/salut.txt, fr]</span>
-<a id="__codelineno-58-13" name="__codelineno-58-13" href="#__codelineno-58-13"></a><span class="go">[[id:sampleE, character:stegosaurus], /workspaces/training/side-quests/metadata/work/af/ee7c69bcab891c40d0529305f6b9e7/hola.txt, es]</span>
-<a id="__codelineno-58-14" name="__codelineno-58-14" href="#__codelineno-58-14"></a><span class="go">[[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/work/4e/f722fe47271ba7ebcd69afa42964ca/ciao.txt, it]</span>
+<a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a><span class="go">executor &gt;  local (7)</span>
+<a id="__codelineno-58-6" name="__codelineno-58-6" href="#__codelineno-58-6"></a><span class="go">[c9/34bfec] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔</span>
+<a id="__codelineno-58-7" name="__codelineno-58-7" href="#__codelineno-58-7"></a><span class="go">[58/d865ee] COWPY (7)             | 7 of 7, cached: 7 ✔</span>
+<a id="__codelineno-58-8" name="__codelineno-58-8" href="#__codelineno-58-8"></a><span class="go">[[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/work/f6/8544c23128c0ed7c4f11dbc729b167/ciao.txt, it]</span>
+<a id="__codelineno-58-9" name="__codelineno-58-9" href="#__codelineno-58-9"></a><span class="go">[[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/work/91/a2a307e970fa3950ceeeee6aa3b34c/guten_tag.txt, de]</span>
+<a id="__codelineno-58-10" name="__codelineno-58-10" href="#__codelineno-58-10"></a><span class="go">[[id:sampleD, character:turkey], /workspaces/training/side-quests/metadata/work/5e/ebac0d3e7a45a5e914d0bca827fc02/hello.txt, en]</span>
+<a id="__codelineno-58-11" name="__codelineno-58-11" href="#__codelineno-58-11"></a><span class="go">[[id:sampleF, character:moose], /workspaces/training/side-quests/metadata/work/08/7199b7ab1ca733267d76b8168e5f38/salut.txt, fr]</span>
+<a id="__codelineno-58-12" name="__codelineno-58-12" href="#__codelineno-58-12"></a><span class="go">[[id:sampleE, character:stegosaurus], /workspaces/training/side-quests/metadata/work/7d/890c6fa79c485b4a600eaa89af2140/hola.txt, es]</span>
+<a id="__codelineno-58-13" name="__codelineno-58-13" href="#__codelineno-58-13"></a><span class="go">[[id:sampleC, character:sheep], /workspaces/training/side-quests/metadata/work/d9/b360d0cd38e53c710ec41ac3b74bc3/hallo.txt, de]</span>
+<a id="__codelineno-58-14" name="__codelineno-58-14" href="#__codelineno-58-14"></a><span class="go">[[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/work/c9/34bfec04abaf808c2ef6c5cb8c8273/bonjour.txt, fr]</span>
+<a id="__codelineno-58-15" name="__codelineno-58-15" href="#__codelineno-58-15"></a>
+<a id="__codelineno-58-16" name="__codelineno-58-16" href="#__codelineno-58-16"></a><span class="go">Outputs:</span>
+<a id="__codelineno-58-17" name="__codelineno-58-17" href="#__codelineno-58-17"></a>
+<a id="__codelineno-58-18" name="__codelineno-58-18" href="#__codelineno-58-18"></a><span class="go">  /workspaces/training/side-quests/metadata/results</span>
+<a id="__codelineno-58-19" name="__codelineno-58-19" href="#__codelineno-58-19"></a>
+<a id="__codelineno-58-20" name="__codelineno-58-20" href="#__codelineno-58-20"></a><span class="go">  cowpy_art:</span>
+<a id="__codelineno-58-21" name="__codelineno-58-21" href="#__codelineno-58-21"></a><span class="go">    - cowpy-salut.txt</span>
+<a id="__codelineno-58-22" name="__codelineno-58-22" href="#__codelineno-58-22"></a><span class="go">    - cowpy-hallo.txt</span>
+<a id="__codelineno-58-23" name="__codelineno-58-23" href="#__codelineno-58-23"></a><span class="go">    - cowpy-bonjour.txt</span>
+<a id="__codelineno-58-24" name="__codelineno-58-24" href="#__codelineno-58-24"></a><span class="go">    - cowpy-hello.txt</span>
+<a id="__codelineno-58-25" name="__codelineno-58-25" href="#__codelineno-58-25"></a><span class="go">    - cowpy-hola.txt</span>
+<a id="__codelineno-58-26" name="__codelineno-58-26" href="#__codelineno-58-26"></a><span class="go">    - cowpy-guten_tag.txt</span>
+<a id="__codelineno-58-27" name="__codelineno-58-27" href="#__codelineno-58-27"></a><span class="go">    - cowpy-ciao.txt</span>
 </code></pre></div>
 </details>
 <p>Wir haben jetzt eine Sprachvorhersage für jede Datei im Datensatz.</p>
@@ -6395,19 +6465,32 @@ Das sollte klarer machen, dass wir <code>file</code> einfach an seiner ursprüng
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-70-2" name="__codelineno-70-2" href="#__codelineno-70-2"></a>
-<a id="__codelineno-70-3" name="__codelineno-70-3" href="#__codelineno-70-3"></a><span class="go">Launching `main.nf` [cheeky_fermat] DSL2 - revision: d096281ee4</span>
+<a id="__codelineno-70-3" name="__codelineno-70-3" href="#__codelineno-70-3"></a><span class="go">Launching `main.nf` [cheeky_fermat] revision: d096281ee4</span>
 <a id="__codelineno-70-4" name="__codelineno-70-4" href="#__codelineno-70-4"></a>
-<a id="__codelineno-70-5" name="__codelineno-70-5" href="#__codelineno-70-5"></a><span class="go">[5d/dffd4e] COWPY (7)             [100%] 7 of 7, cached: 7 ✔</span>
-<a id="__codelineno-70-6" name="__codelineno-70-6" href="#__codelineno-70-6"></a><span class="go">[4e/f722fe] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔</span>
-<a id="__codelineno-70-7" name="__codelineno-70-7" href="#__codelineno-70-7"></a><span class="go">[[id:sampleA, character:squirrel, lang:fr], /workspaces/training/side-quests/metadata/work/eb/f7148ebdd898fbe1136bec6a714acb/bonjour.txt]</span>
-<a id="__codelineno-70-8" name="__codelineno-70-8" href="#__codelineno-70-8"></a><span class="go">[[id:sampleB, character:tux, lang:de], /workspaces/training/side-quests/metadata/work/16/71d72410952c22cd0086d9bca03680/guten_tag.txt]</span>
-<a id="__codelineno-70-9" name="__codelineno-70-9" href="#__codelineno-70-9"></a><span class="go">[[id:sampleC, character:sheep, lang:de], /workspaces/training/side-quests/metadata/work/ea/04f5d979429e4455e14b9242fb3b45/hallo.txt]</span>
-<a id="__codelineno-70-10" name="__codelineno-70-10" href="#__codelineno-70-10"></a><span class="go">[[id:sampleD, character:turkey, lang:en], /workspaces/training/side-quests/metadata/work/c4/b7562adddc1cc0b7d414ec45d436eb/hello.txt]</span>
-<a id="__codelineno-70-11" name="__codelineno-70-11" href="#__codelineno-70-11"></a><span class="go">[[id:sampleF, character:moose, lang:fr], /workspaces/training/side-quests/metadata/work/5a/6c2b84bf8fadb98e28e216426be079/salut.txt]</span>
-<a id="__codelineno-70-12" name="__codelineno-70-12" href="#__codelineno-70-12"></a><span class="go">[[id:sampleE, character:stegosaurus, lang:es], /workspaces/training/side-quests/metadata/work/af/ee7c69bcab891c40d0529305f6b9e7/hola.txt]</span>
-<a id="__codelineno-70-13" name="__codelineno-70-13" href="#__codelineno-70-13"></a><span class="go">[[id:sampleG, character:turtle, lang:it], /workspaces/training/side-quests/metadata/work/4e/f722fe47271ba7ebcd69afa42964ca/ciao.txt]</span>
+<a id="__codelineno-70-5" name="__codelineno-70-5" href="#__codelineno-70-5"></a><span class="go">[d9/b360d0] IDENTIFY_LANGUAGE (3) | 7 of 7, cached: 7 ✔</span>
+<a id="__codelineno-70-6" name="__codelineno-70-6" href="#__codelineno-70-6"></a><span class="go">[94/224450] COWPY (3)             | 7 of 7, cached: 7 ✔</span>
+<a id="__codelineno-70-7" name="__codelineno-70-7" href="#__codelineno-70-7"></a><span class="go">[[id:sampleF, character:moose, lang:fr], /workspaces/training/side-quests/metadata/work/08/7199b7ab1ca733267d76b8168e5f38/salut.txt]</span>
+<a id="__codelineno-70-8" name="__codelineno-70-8" href="#__codelineno-70-8"></a><span class="go">[[id:sampleC, character:sheep, lang:de], /workspaces/training/side-quests/metadata/work/d9/b360d0cd38e53c710ec41ac3b74bc3/hallo.txt]</span>
+<a id="__codelineno-70-9" name="__codelineno-70-9" href="#__codelineno-70-9"></a><span class="go">[[id:sampleD, character:turkey, lang:en], /workspaces/training/side-quests/metadata/work/5e/ebac0d3e7a45a5e914d0bca827fc02/hello.txt]</span>
+<a id="__codelineno-70-10" name="__codelineno-70-10" href="#__codelineno-70-10"></a><span class="go">[[id:sampleE, character:stegosaurus, lang:es], /workspaces/training/side-quests/metadata/work/7d/890c6fa79c485b4a600eaa89af2140/hola.txt]</span>
+<a id="__codelineno-70-11" name="__codelineno-70-11" href="#__codelineno-70-11"></a><span class="go">[[id:sampleG, character:turtle, lang:it], /workspaces/training/side-quests/metadata/work/f6/8544c23128c0ed7c4f11dbc729b167/ciao.txt]</span>
+<a id="__codelineno-70-12" name="__codelineno-70-12" href="#__codelineno-70-12"></a><span class="go">[[id:sampleA, character:squirrel, lang:fr], /workspaces/training/side-quests/metadata/work/c9/34bfec04abaf808c2ef6c5cb8c8273/bonjour.txt]</span>
+<a id="__codelineno-70-13" name="__codelineno-70-13" href="#__codelineno-70-13"></a><span class="go">[[id:sampleB, character:tux, lang:de], /workspaces/training/side-quests/metadata/work/91/a2a307e970fa3950ceeeee6aa3b34c/guten_tag.txt]</span>
+<a id="__codelineno-70-14" name="__codelineno-70-14" href="#__codelineno-70-14"></a>
+<a id="__codelineno-70-15" name="__codelineno-70-15" href="#__codelineno-70-15"></a><span class="go">Outputs:</span>
+<a id="__codelineno-70-16" name="__codelineno-70-16" href="#__codelineno-70-16"></a>
+<a id="__codelineno-70-17" name="__codelineno-70-17" href="#__codelineno-70-17"></a><span class="go">  /workspaces/training/side-quests/metadata/results</span>
+<a id="__codelineno-70-18" name="__codelineno-70-18" href="#__codelineno-70-18"></a>
+<a id="__codelineno-70-19" name="__codelineno-70-19" href="#__codelineno-70-19"></a><span class="go">  cowpy_art:</span>
+<a id="__codelineno-70-20" name="__codelineno-70-20" href="#__codelineno-70-20"></a><span class="go">    - cowpy-guten_tag.txt</span>
+<a id="__codelineno-70-21" name="__codelineno-70-21" href="#__codelineno-70-21"></a><span class="go">    - cowpy-hallo.txt</span>
+<a id="__codelineno-70-22" name="__codelineno-70-22" href="#__codelineno-70-22"></a><span class="go">    - cowpy-bonjour.txt</span>
+<a id="__codelineno-70-23" name="__codelineno-70-23" href="#__codelineno-70-23"></a><span class="go">    - cowpy-hello.txt</span>
+<a id="__codelineno-70-24" name="__codelineno-70-24" href="#__codelineno-70-24"></a><span class="go">    - cowpy-hola.txt</span>
+<a id="__codelineno-70-25" name="__codelineno-70-25" href="#__codelineno-70-25"></a><span class="go">    - cowpy-salut.txt</span>
+<a id="__codelineno-70-26" name="__codelineno-70-26" href="#__codelineno-70-26"></a><span class="go">    - cowpy-ciao.txt</span>
 </code></pre></div>
 </details>
 <p>Ja, das stimmt!
@@ -6515,25 +6598,38 @@ Das Hinzufügen eines <code>lang_group</code>-Felds macht diese Klassifizierung 
 </ul>
 <!-- TODO (future) Add note/links to relevant docs in additional resources section -->
 
-<h4 id="232-den-workflow-ausfuhren">2.3.2. Den Workflow ausführen<a class="headerlink" href="#232-den-workflow-ausfuhren" title="Permanent link">&para;</a></h4>
+<h4 id="232-den-workflow-ausfuhren">2.3.2. Den Workflow ausführen:<a class="headerlink" href="#232-den-workflow-ausfuhren" title="Permanent link">&para;</a></h4>
 <p>Führe den Workflow aus, um zu überprüfen, dass es funktioniert:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf<span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a>
-<a id="__codelineno-76-3" name="__codelineno-76-3" href="#__codelineno-76-3"></a><span class="go">Launching `main.nf` [wise_almeida] DSL2 - revision: 46778c3cd0</span>
+<a id="__codelineno-76-3" name="__codelineno-76-3" href="#__codelineno-76-3"></a><span class="go">Launching `main.nf` [wise_almeida] revision: 46778c3cd0</span>
 <a id="__codelineno-76-4" name="__codelineno-76-4" href="#__codelineno-76-4"></a>
-<a id="__codelineno-76-5" name="__codelineno-76-5" href="#__codelineno-76-5"></a><span class="go">[5d/dffd4e] COWPY (7)             [100%] 7 of 7, cached: 7 ✔</span>
-<a id="__codelineno-76-6" name="__codelineno-76-6" href="#__codelineno-76-6"></a><span class="go">[da/652cc6] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔</span>
-<a id="__codelineno-76-7" name="__codelineno-76-7" href="#__codelineno-76-7"></a><span class="go">[[id:sampleA, character:squirrel, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/data/bonjour.txt]</span>
-<a id="__codelineno-76-8" name="__codelineno-76-8" href="#__codelineno-76-8"></a><span class="go">[[id:sampleB, character:tux, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/data/guten_tag.txt]</span>
-<a id="__codelineno-76-9" name="__codelineno-76-9" href="#__codelineno-76-9"></a><span class="go">[[id:sampleC, character:sheep, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/data/hallo.txt]</span>
-<a id="__codelineno-76-10" name="__codelineno-76-10" href="#__codelineno-76-10"></a><span class="go">[[id:sampleD, character:turkey, lang:en, lang_group:germanic], /workspaces/training/side-quests/metadata/data/hello.txt]</span>
-<a id="__codelineno-76-11" name="__codelineno-76-11" href="#__codelineno-76-11"></a><span class="go">[[id:sampleE, character:stegosaurus, lang:es, lang_group:romance], /workspaces/training/side-quests/metadata/data/hola.txt]</span>
-<a id="__codelineno-76-12" name="__codelineno-76-12" href="#__codelineno-76-12"></a><span class="go">[[id:sampleF, character:moose, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/data/salut.txt]</span>
-<a id="__codelineno-76-13" name="__codelineno-76-13" href="#__codelineno-76-13"></a><span class="go">[[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/data/ciao.txt]</span>
+<a id="__codelineno-76-5" name="__codelineno-76-5" href="#__codelineno-76-5"></a><span class="go">[c9/34bfec] IDENTIFY_LANGUAGE (1) | 7 of 7, cached: 7 ✔</span>
+<a id="__codelineno-76-6" name="__codelineno-76-6" href="#__codelineno-76-6"></a><span class="go">[e9/269aa0] COWPY (6)             | 7 of 7, cached: 7 ✔</span>
+<a id="__codelineno-76-7" name="__codelineno-76-7" href="#__codelineno-76-7"></a><span class="go">[[id:sampleC, character:sheep, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/work/d9/b360d0cd38e53c710ec41ac3b74bc3/hallo.txt]</span>
+<a id="__codelineno-76-8" name="__codelineno-76-8" href="#__codelineno-76-8"></a><span class="go">[[id:sampleA, character:squirrel, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/work/c9/34bfec04abaf808c2ef6c5cb8c8273/bonjour.txt]</span>
+<a id="__codelineno-76-9" name="__codelineno-76-9" href="#__codelineno-76-9"></a><span class="go">[[id:sampleE, character:stegosaurus, lang:es, lang_group:romance], /workspaces/training/side-quests/metadata/work/7d/890c6fa79c485b4a600eaa89af2140/hola.txt]</span>
+<a id="__codelineno-76-10" name="__codelineno-76-10" href="#__codelineno-76-10"></a><span class="go">[[id:sampleD, character:turkey, lang:en, lang_group:germanic], /workspaces/training/side-quests/metadata/work/5e/ebac0d3e7a45a5e914d0bca827fc02/hello.txt]</span>
+<a id="__codelineno-76-11" name="__codelineno-76-11" href="#__codelineno-76-11"></a><span class="go">[[id:sampleB, character:tux, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/work/91/a2a307e970fa3950ceeeee6aa3b34c/guten_tag.txt]</span>
+<a id="__codelineno-76-12" name="__codelineno-76-12" href="#__codelineno-76-12"></a><span class="go">[[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/work/f6/8544c23128c0ed7c4f11dbc729b167/ciao.txt]</span>
+<a id="__codelineno-76-13" name="__codelineno-76-13" href="#__codelineno-76-13"></a><span class="go">[[id:sampleF, character:moose, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/work/08/7199b7ab1ca733267d76b8168e5f38/salut.txt]</span>
+<a id="__codelineno-76-14" name="__codelineno-76-14" href="#__codelineno-76-14"></a>
+<a id="__codelineno-76-15" name="__codelineno-76-15" href="#__codelineno-76-15"></a><span class="go">Outputs:</span>
+<a id="__codelineno-76-16" name="__codelineno-76-16" href="#__codelineno-76-16"></a>
+<a id="__codelineno-76-17" name="__codelineno-76-17" href="#__codelineno-76-17"></a><span class="go">  /workspaces/training/side-quests/metadata/results</span>
+<a id="__codelineno-76-18" name="__codelineno-76-18" href="#__codelineno-76-18"></a>
+<a id="__codelineno-76-19" name="__codelineno-76-19" href="#__codelineno-76-19"></a><span class="go">  cowpy_art:</span>
+<a id="__codelineno-76-20" name="__codelineno-76-20" href="#__codelineno-76-20"></a><span class="go">    - cowpy-ciao.txt</span>
+<a id="__codelineno-76-21" name="__codelineno-76-21" href="#__codelineno-76-21"></a><span class="go">    - cowpy-salut.txt</span>
+<a id="__codelineno-76-22" name="__codelineno-76-22" href="#__codelineno-76-22"></a><span class="go">    - cowpy-guten_tag.txt</span>
+<a id="__codelineno-76-23" name="__codelineno-76-23" href="#__codelineno-76-23"></a><span class="go">    - cowpy-hallo.txt</span>
+<a id="__codelineno-76-24" name="__codelineno-76-24" href="#__codelineno-76-24"></a><span class="go">    - cowpy-bonjour.txt</span>
+<a id="__codelineno-76-25" name="__codelineno-76-25" href="#__codelineno-76-25"></a><span class="go">    - cowpy-hola.txt</span>
+<a id="__codelineno-76-26" name="__codelineno-76-26" href="#__codelineno-76-26"></a><span class="go">    - cowpy-hello.txt</span>
 </code></pre></div>
 </details>
 <p>Die Meta-Map enthält jetzt vier Felder: <code>id</code>, <code>character</code>, <code>lang</code> und <code>lang_group</code>.
@@ -6659,13 +6755,26 @@ Die Kanalstruktur ist weiterhin <code>[meta, file]</code>.</p>
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-84-2" name="__codelineno-84-2" href="#__codelineno-84-2"></a>
-<a id="__codelineno-84-3" name="__codelineno-84-3" href="#__codelineno-84-3"></a><span class="go">Launching `main.nf` [suspicious_crick] DSL2 - revision: 25541014c5</span>
+<a id="__codelineno-84-3" name="__codelineno-84-3" href="#__codelineno-84-3"></a><span class="go">Launching `main.nf` [suspicious_crick] revision: 25541014c5</span>
 <a id="__codelineno-84-4" name="__codelineno-84-4" href="#__codelineno-84-4"></a>
 <a id="__codelineno-84-5" name="__codelineno-84-5" href="#__codelineno-84-5"></a><span class="go">executor &gt;  local (14)</span>
-<a id="__codelineno-84-6" name="__codelineno-84-6" href="#__codelineno-84-6"></a><span class="go">[5d/dffd4e] IDENTIFY_LANGUAGE (7) [100%] 7 of 7 ✔</span>
-<a id="__codelineno-84-7" name="__codelineno-84-7" href="#__codelineno-84-7"></a><span class="go">[e7/317c18] COWPY (7)             [100%] 7 of 7 ✔</span>
+<a id="__codelineno-84-6" name="__codelineno-84-6" href="#__codelineno-84-6"></a><span class="go">[99/64c59d] IDENTIFY_LANGUAGE (6) | 7 of 7 ✔</span>
+<a id="__codelineno-84-7" name="__codelineno-84-7" href="#__codelineno-84-7"></a><span class="go">[3c/0f1922] COWPY (7)             | 7 of 7 ✔</span>
+<a id="__codelineno-84-8" name="__codelineno-84-8" href="#__codelineno-84-8"></a>
+<a id="__codelineno-84-9" name="__codelineno-84-9" href="#__codelineno-84-9"></a><span class="go">Outputs:</span>
+<a id="__codelineno-84-10" name="__codelineno-84-10" href="#__codelineno-84-10"></a>
+<a id="__codelineno-84-11" name="__codelineno-84-11" href="#__codelineno-84-11"></a><span class="go">  /workspaces/training/side-quests/metadata/results</span>
+<a id="__codelineno-84-12" name="__codelineno-84-12" href="#__codelineno-84-12"></a>
+<a id="__codelineno-84-13" name="__codelineno-84-13" href="#__codelineno-84-13"></a><span class="go">  cowpy_art:</span>
+<a id="__codelineno-84-14" name="__codelineno-84-14" href="#__codelineno-84-14"></a><span class="go">    - [{id: sampleB, character: tux, lang: de, lang_group: germanic}, germanic/de-guten_tag.txt]</span>
+<a id="__codelineno-84-15" name="__codelineno-84-15" href="#__codelineno-84-15"></a><span class="go">    - [{id: sampleG, character: turtle, lang: it, lang_group: romance}, romance/it-ciao.txt]</span>
+<a id="__codelineno-84-16" name="__codelineno-84-16" href="#__codelineno-84-16"></a><span class="go">    - [{id: sampleC, character: sheep, lang: de, lang_group: germanic}, germanic/de-hallo.txt]</span>
+<a id="__codelineno-84-17" name="__codelineno-84-17" href="#__codelineno-84-17"></a><span class="go">    - [{id: sampleE, character: stegosaurus, lang: es, lang_group: romance}, romance/es-hola.txt]</span>
+<a id="__codelineno-84-18" name="__codelineno-84-18" href="#__codelineno-84-18"></a><span class="go">    - [{id: sampleA, character: squirrel, lang: fr, lang_group: romance}, romance/fr-bonjour.txt]</span>
+<a id="__codelineno-84-19" name="__codelineno-84-19" href="#__codelineno-84-19"></a><span class="go">    - [{id: sampleD, character: turkey, lang: en, lang_group: germanic}, germanic/en-hello.txt]</span>
+<a id="__codelineno-84-20" name="__codelineno-84-20" href="#__codelineno-84-20"></a><span class="go">    - [{id: sampleF, character: moose, lang: fr, lang_group: romance}, romance/fr-salut.txt]</span>
 </code></pre></div>
 </details>
 <p>Das Ergebnisverzeichnis ist jetzt nach Sprachfamilie organisiert, wobei jede Datei nach der erkannten Sprache benannt ist:</p>
@@ -6711,44 +6820,45 @@ Das Fehlverhalten hängt davon ab, ob die Spalte im Datenblatt vorhanden, aber l
 Wenn Nextflow <code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">meta</span><span class="o">.</span><span class="na">character</span><span class="o">}</span></code> in den Befehl einsetzt, erhält das <code>COWPY</code>-Tool ein leeres Argument für <code>-c</code> und schlägt fehl:</p>
 <details class="failure">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-87-1" name="__codelineno-87-1" href="#__codelineno-87-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-87-1" name="__codelineno-87-1" href="#__codelineno-87-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-87-2" name="__codelineno-87-2" href="#__codelineno-87-2"></a>
-<a id="__codelineno-87-3" name="__codelineno-87-3" href="#__codelineno-87-3"></a><span class="go">Launching `main.nf` [marvelous_hirsch] DSL2 - revision: 0dfeee3cc1</span>
+<a id="__codelineno-87-3" name="__codelineno-87-3" href="#__codelineno-87-3"></a><span class="go">Launching `main.nf` [marvelous_hirsch] revision: 0dfeee3cc1</span>
 <a id="__codelineno-87-4" name="__codelineno-87-4" href="#__codelineno-87-4"></a>
-<a id="__codelineno-87-5" name="__codelineno-87-5" href="#__codelineno-87-5"></a><span class="go">executor &gt;  local (9)</span>
-<a id="__codelineno-87-6" name="__codelineno-87-6" href="#__codelineno-87-6"></a><span class="go">[c1/c5dd4f] process &gt; IDENTIFY_LANGUAGE (7) [ 85%] 6 of 7</span>
-<a id="__codelineno-87-7" name="__codelineno-87-7" href="#__codelineno-87-7"></a><span class="go">[d3/b7c415] process &gt; COWPY (2)             [  0%] 0 of 6</span>
-<a id="__codelineno-87-8" name="__codelineno-87-8" href="#__codelineno-87-8"></a><span class="hll"><span class="go">ERROR ~ Error executing process &gt; &#39;COWPY (1)&#39;</span>
-</span><a id="__codelineno-87-9" name="__codelineno-87-9" href="#__codelineno-87-9"></a>
-<a id="__codelineno-87-10" name="__codelineno-87-10" href="#__codelineno-87-10"></a><span class="go">Caused by:</span>
-<a id="__codelineno-87-11" name="__codelineno-87-11" href="#__codelineno-87-11"></a><span class="hll"><span class="go">  Process `COWPY (1)` terminated with an error exit status (2)</span>
-</span><a id="__codelineno-87-12" name="__codelineno-87-12" href="#__codelineno-87-12"></a>
-<a id="__codelineno-87-13" name="__codelineno-87-13" href="#__codelineno-87-13"></a>
-<a id="__codelineno-87-14" name="__codelineno-87-14" href="#__codelineno-87-14"></a><span class="go">Command executed:</span>
-<a id="__codelineno-87-15" name="__codelineno-87-15" href="#__codelineno-87-15"></a>
-<a id="__codelineno-87-16" name="__codelineno-87-16" href="#__codelineno-87-16"></a><span class="hll"><span class="go">  cat bonjour.txt | cowpy -c  &gt; fr-bonjour.txt</span>
-</span><a id="__codelineno-87-17" name="__codelineno-87-17" href="#__codelineno-87-17"></a>
-<a id="__codelineno-87-18" name="__codelineno-87-18" href="#__codelineno-87-18"></a><span class="go">Command exit status:</span>
-<a id="__codelineno-87-19" name="__codelineno-87-19" href="#__codelineno-87-19"></a><span class="go">  2</span>
-<a id="__codelineno-87-20" name="__codelineno-87-20" href="#__codelineno-87-20"></a>
-<a id="__codelineno-87-21" name="__codelineno-87-21" href="#__codelineno-87-21"></a><span class="go">Command output:</span>
-<a id="__codelineno-87-22" name="__codelineno-87-22" href="#__codelineno-87-22"></a><span class="go">  (empty)</span>
-<a id="__codelineno-87-23" name="__codelineno-87-23" href="#__codelineno-87-23"></a>
-<a id="__codelineno-87-24" name="__codelineno-87-24" href="#__codelineno-87-24"></a><span class="go">Command error:</span>
-<a id="__codelineno-87-25" name="__codelineno-87-25" href="#__codelineno-87-25"></a><span class="go">  usage: cowpy [-h] [-l] [-L] [-t] [-u] [-e EYES] [-c COWACTER] [-E] [-r] [-x]</span>
-<a id="__codelineno-87-26" name="__codelineno-87-26" href="#__codelineno-87-26"></a><span class="go">              [-C]</span>
-<a id="__codelineno-87-27" name="__codelineno-87-27" href="#__codelineno-87-27"></a><span class="go">              [msg ...]</span>
-<a id="__codelineno-87-28" name="__codelineno-87-28" href="#__codelineno-87-28"></a><span class="hll"><span class="go">  cowpy: error: argument -c/--cowacter: expected one argument</span>
-</span><a id="__codelineno-87-29" name="__codelineno-87-29" href="#__codelineno-87-29"></a>
-<a id="__codelineno-87-30" name="__codelineno-87-30" href="#__codelineno-87-30"></a><span class="go">Work dir:</span>
-<a id="__codelineno-87-31" name="__codelineno-87-31" href="#__codelineno-87-31"></a><span class="go">  /workspaces/training/side-quests/metadata/work/ca/9d49796612a54dec5ed466063c809b</span>
-<a id="__codelineno-87-32" name="__codelineno-87-32" href="#__codelineno-87-32"></a>
-<a id="__codelineno-87-33" name="__codelineno-87-33" href="#__codelineno-87-33"></a><span class="go">Container:</span>
-<a id="__codelineno-87-34" name="__codelineno-87-34" href="#__codelineno-87-34"></a><span class="go">  community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273</span>
-<a id="__codelineno-87-35" name="__codelineno-87-35" href="#__codelineno-87-35"></a>
-<a id="__codelineno-87-36" name="__codelineno-87-36" href="#__codelineno-87-36"></a><span class="go">Tip: you can try to figure out what&#39;s wrong by changing to the process work dir and showing the script file named `.command.sh`</span>
-<a id="__codelineno-87-37" name="__codelineno-87-37" href="#__codelineno-87-37"></a>
-<a id="__codelineno-87-38" name="__codelineno-87-38" href="#__codelineno-87-38"></a><span class="go">-- Check &#39;.nextflow.log&#39; file for details</span>
+<a id="__codelineno-87-5" name="__codelineno-87-5" href="#__codelineno-87-5"></a><span class="go">executor &gt;  local (14)</span>
+<a id="__codelineno-87-6" name="__codelineno-87-6" href="#__codelineno-87-6"></a><span class="go">[c1/c5dd4f] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔</span>
+<a id="__codelineno-87-7" name="__codelineno-87-7" href="#__codelineno-87-7"></a><span class="hll"><span class="go">[d3/b7c415] COWPY (3)             | 5 of 7</span>
+</span><a id="__codelineno-87-8" name="__codelineno-87-8" href="#__codelineno-87-8"></a><span class="go">WARN: Killing running tasks (1)</span>
+<a id="__codelineno-87-9" name="__codelineno-87-9" href="#__codelineno-87-9"></a><span class="go">ERROR ~ Error executing process &gt; &#39;COWPY (7)&#39;</span>
+<a id="__codelineno-87-10" name="__codelineno-87-10" href="#__codelineno-87-10"></a>
+<a id="__codelineno-87-11" name="__codelineno-87-11" href="#__codelineno-87-11"></a><span class="go">Caused by:</span>
+<a id="__codelineno-87-12" name="__codelineno-87-12" href="#__codelineno-87-12"></a><span class="hll"><span class="go">  Process `COWPY (7)` terminated with an error exit status (2)</span>
+</span><a id="__codelineno-87-13" name="__codelineno-87-13" href="#__codelineno-87-13"></a>
+<a id="__codelineno-87-14" name="__codelineno-87-14" href="#__codelineno-87-14"></a>
+<a id="__codelineno-87-15" name="__codelineno-87-15" href="#__codelineno-87-15"></a><span class="go">Command executed:</span>
+<a id="__codelineno-87-16" name="__codelineno-87-16" href="#__codelineno-87-16"></a>
+<a id="__codelineno-87-17" name="__codelineno-87-17" href="#__codelineno-87-17"></a><span class="hll"><span class="go">  cat bonjour.txt | cowpy -c  &gt; fr-bonjour.txt</span>
+</span><a id="__codelineno-87-18" name="__codelineno-87-18" href="#__codelineno-87-18"></a>
+<a id="__codelineno-87-19" name="__codelineno-87-19" href="#__codelineno-87-19"></a><span class="go">Command exit status:</span>
+<a id="__codelineno-87-20" name="__codelineno-87-20" href="#__codelineno-87-20"></a><span class="go">  2</span>
+<a id="__codelineno-87-21" name="__codelineno-87-21" href="#__codelineno-87-21"></a>
+<a id="__codelineno-87-22" name="__codelineno-87-22" href="#__codelineno-87-22"></a><span class="go">Command output:</span>
+<a id="__codelineno-87-23" name="__codelineno-87-23" href="#__codelineno-87-23"></a><span class="go">  (empty)</span>
+<a id="__codelineno-87-24" name="__codelineno-87-24" href="#__codelineno-87-24"></a>
+<a id="__codelineno-87-25" name="__codelineno-87-25" href="#__codelineno-87-25"></a><span class="go">Command error:</span>
+<a id="__codelineno-87-26" name="__codelineno-87-26" href="#__codelineno-87-26"></a><span class="go">  usage: cowpy [-h] [-l] [-L] [-t] [-u] [-e EYES] [-c COWACTER] [-E] [-r] [-x]</span>
+<a id="__codelineno-87-27" name="__codelineno-87-27" href="#__codelineno-87-27"></a><span class="go">              [-C]</span>
+<a id="__codelineno-87-28" name="__codelineno-87-28" href="#__codelineno-87-28"></a><span class="go">              [msg ...]</span>
+<a id="__codelineno-87-29" name="__codelineno-87-29" href="#__codelineno-87-29"></a><span class="hll"><span class="go">  cowpy: error: argument -c/--cowacter: expected one argument</span>
+</span><a id="__codelineno-87-30" name="__codelineno-87-30" href="#__codelineno-87-30"></a>
+<a id="__codelineno-87-31" name="__codelineno-87-31" href="#__codelineno-87-31"></a><span class="go">Work dir:</span>
+<a id="__codelineno-87-32" name="__codelineno-87-32" href="#__codelineno-87-32"></a><span class="go">  /workspaces/training/side-quests/metadata/work/cc/dfe60ff2e14f0dd88488939eca57b8</span>
+<a id="__codelineno-87-33" name="__codelineno-87-33" href="#__codelineno-87-33"></a>
+<a id="__codelineno-87-34" name="__codelineno-87-34" href="#__codelineno-87-34"></a><span class="go">Container:</span>
+<a id="__codelineno-87-35" name="__codelineno-87-35" href="#__codelineno-87-35"></a><span class="go">  community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273</span>
+<a id="__codelineno-87-36" name="__codelineno-87-36" href="#__codelineno-87-36"></a>
+<a id="__codelineno-87-37" name="__codelineno-87-37" href="#__codelineno-87-37"></a><span class="go">Tip: you can try to figure out what&#39;s wrong by changing to the process work dir and showing the script file named `.command.sh`</span>
+<a id="__codelineno-87-38" name="__codelineno-87-38" href="#__codelineno-87-38"></a>
+<a id="__codelineno-87-39" name="__codelineno-87-39" href="#__codelineno-87-39"></a><span class="go">-- Check &#39;.nextflow.log&#39; file for details</span>
 </code></pre></div>
 </details>
 <p>Die Fehlermeldung (<code>expected one argument</code>) weist auf das leere <code>-c</code>-Flag hin.
@@ -6763,58 +6873,59 @@ Ein Blick in die <code>.command.sh</code>-Datei im work-Verzeichnis bestätigt, 
 <a id="__codelineno-88-3" name="__codelineno-88-3"></a>sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 <a id="__codelineno-88-4" name="__codelineno-88-4"></a>...
 </code></pre></div></td></tr></table></div>
-<p>Der <code>character</code>-Schlüssel wird in der Meta-Map nie erstellt.
-Wenn der Prozess-Script <code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">meta</span><span class="o">.</span><span class="na">character</span><span class="o">}</span></code> auswertet, gibt der fehlende Schlüssel <code>null</code> zurück, und Nextflow setzt buchstäblich den String <code>null</code> in den Befehl ein:</p>
+<p>Unsere <code>map</code>-Operation schreibt explizit <code class="highlight"><span class="nl">character:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span></code>, sodass der <code>character</code>-Schlüssel in der Meta-Map zwar erstellt wird, aber der Zugriff auf eine Spalte, die in der geparsten Zeile nicht existiert, <code>null</code> zurückgibt – der Wert wird also <code>null</code>.
+Wenn der Prozess-Script <code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">meta</span><span class="o">.</span><span class="na">character</span><span class="o">}</span></code> auswertet, setzt Nextflow buchstäblich den String <code>null</code> in den Befehl ein:</p>
 <details class="failure">
 <summary>Befehlsausgabe</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-89-2" name="__codelineno-89-2" href="#__codelineno-89-2"></a>
-<a id="__codelineno-89-3" name="__codelineno-89-3" href="#__codelineno-89-3"></a><span class="go">Launching `main.nf` [jovial_bohr] DSL2 - revision: eaaf375827</span>
+<a id="__codelineno-89-3" name="__codelineno-89-3" href="#__codelineno-89-3"></a><span class="go">Launching `main.nf` [jovial_bohr] revision: eaaf375827</span>
 <a id="__codelineno-89-4" name="__codelineno-89-4" href="#__codelineno-89-4"></a>
-<a id="__codelineno-89-5" name="__codelineno-89-5" href="#__codelineno-89-5"></a><span class="go">executor &gt;  local (9)</span>
-<a id="__codelineno-89-6" name="__codelineno-89-6" href="#__codelineno-89-6"></a><span class="go">[0d/ada9db] process &gt; IDENTIFY_LANGUAGE (5) [ 85%] 6 of 7</span>
-<a id="__codelineno-89-7" name="__codelineno-89-7" href="#__codelineno-89-7"></a><span class="go">[06/28065f] process &gt; COWPY (2)             [  0%] 0 of 6</span>
-<a id="__codelineno-89-8" name="__codelineno-89-8" href="#__codelineno-89-8"></a><span class="hll"><span class="go">ERROR ~ Error executing process &gt; &#39;COWPY (2)&#39;</span>
-</span><a id="__codelineno-89-9" name="__codelineno-89-9" href="#__codelineno-89-9"></a>
-<a id="__codelineno-89-10" name="__codelineno-89-10" href="#__codelineno-89-10"></a><span class="go">Caused by:</span>
-<a id="__codelineno-89-11" name="__codelineno-89-11" href="#__codelineno-89-11"></a><span class="hll"><span class="go">  Process `COWPY (2)` terminated with an error exit status (1)</span>
-</span><a id="__codelineno-89-12" name="__codelineno-89-12" href="#__codelineno-89-12"></a>
-<a id="__codelineno-89-13" name="__codelineno-89-13" href="#__codelineno-89-13"></a>
-<a id="__codelineno-89-14" name="__codelineno-89-14" href="#__codelineno-89-14"></a><span class="go">Command executed:</span>
-<a id="__codelineno-89-15" name="__codelineno-89-15" href="#__codelineno-89-15"></a>
-<a id="__codelineno-89-16" name="__codelineno-89-16" href="#__codelineno-89-16"></a><span class="hll"><span class="go">  cat guten_tag.txt | cowpy -c null &gt; de-guten_tag.txt</span>
-</span><a id="__codelineno-89-17" name="__codelineno-89-17" href="#__codelineno-89-17"></a>
-<a id="__codelineno-89-18" name="__codelineno-89-18" href="#__codelineno-89-18"></a><span class="go">Command exit status:</span>
-<a id="__codelineno-89-19" name="__codelineno-89-19" href="#__codelineno-89-19"></a><span class="go">  1</span>
-<a id="__codelineno-89-20" name="__codelineno-89-20" href="#__codelineno-89-20"></a>
-<a id="__codelineno-89-21" name="__codelineno-89-21" href="#__codelineno-89-21"></a><span class="go">Command output:</span>
-<a id="__codelineno-89-22" name="__codelineno-89-22" href="#__codelineno-89-22"></a><span class="go">  (empty)</span>
-<a id="__codelineno-89-23" name="__codelineno-89-23" href="#__codelineno-89-23"></a>
-<a id="__codelineno-89-24" name="__codelineno-89-24" href="#__codelineno-89-24"></a><span class="go">Command error:</span>
-<a id="__codelineno-89-25" name="__codelineno-89-25" href="#__codelineno-89-25"></a><span class="go">  Traceback (most recent call last):</span>
-<a id="__codelineno-89-26" name="__codelineno-89-26" href="#__codelineno-89-26"></a><span class="go">    File &quot;/opt/conda/bin/cowpy&quot;, line 10, in &lt;module&gt;</span>
-<a id="__codelineno-89-27" name="__codelineno-89-27" href="#__codelineno-89-27"></a><span class="go">      sys.exit(main())</span>
-<a id="__codelineno-89-28" name="__codelineno-89-28" href="#__codelineno-89-28"></a><span class="go">              ~~~~^^</span>
-<a id="__codelineno-89-29" name="__codelineno-89-29" href="#__codelineno-89-29"></a><span class="go">    File &quot;/opt/conda/lib/python3.13/site-packages/cowpy/cow.py&quot;, line 1215, in main</span>
-<a id="__codelineno-89-30" name="__codelineno-89-30" href="#__codelineno-89-30"></a><span class="go">      print(cow(eyes=args.eyes,</span>
-<a id="__codelineno-89-31" name="__codelineno-89-31" href="#__codelineno-89-31"></a><span class="go">            ~~~^^^^^^^^^^^^^^^^</span>
-<a id="__codelineno-89-32" name="__codelineno-89-32" href="#__codelineno-89-32"></a><span class="go">            tongue=args.tongue,</span>
-<a id="__codelineno-89-33" name="__codelineno-89-33" href="#__codelineno-89-33"></a><span class="go">            ^^^^^^^^^^^^^^^^^^^</span>
-<a id="__codelineno-89-34" name="__codelineno-89-34" href="#__codelineno-89-34"></a><span class="go">            thoughts=args.thoughts</span>
-<a id="__codelineno-89-35" name="__codelineno-89-35" href="#__codelineno-89-35"></a><span class="go">            ^^^^^^^^^^^^^^^^^^^^^^</span>
-<a id="__codelineno-89-36" name="__codelineno-89-36" href="#__codelineno-89-36"></a><span class="go">                ).milk(msg)</span>
-<a id="__codelineno-89-37" name="__codelineno-89-37" href="#__codelineno-89-37"></a><span class="go">                ^</span>
-<a id="__codelineno-89-38" name="__codelineno-89-38" href="#__codelineno-89-38"></a><span class="go">  TypeError: &#39;str&#39; object is not callable</span>
-<a id="__codelineno-89-39" name="__codelineno-89-39" href="#__codelineno-89-39"></a>
-<a id="__codelineno-89-40" name="__codelineno-89-40" href="#__codelineno-89-40"></a><span class="go">Work dir:</span>
-<a id="__codelineno-89-41" name="__codelineno-89-41" href="#__codelineno-89-41"></a><span class="go">  /workspaces/training/side-quests/metadata/work/06/28065f7d9fd7d22bba084aa941b6d6</span>
-<a id="__codelineno-89-42" name="__codelineno-89-42" href="#__codelineno-89-42"></a>
-<a id="__codelineno-89-43" name="__codelineno-89-43" href="#__codelineno-89-43"></a><span class="go">Container:</span>
-<a id="__codelineno-89-44" name="__codelineno-89-44" href="#__codelineno-89-44"></a><span class="go">  community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273</span>
-<a id="__codelineno-89-45" name="__codelineno-89-45" href="#__codelineno-89-45"></a>
-<a id="__codelineno-89-46" name="__codelineno-89-46" href="#__codelineno-89-46"></a><span class="go">Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`</span>
-<a id="__codelineno-89-47" name="__codelineno-89-47" href="#__codelineno-89-47"></a>
-<a id="__codelineno-89-48" name="__codelineno-89-48" href="#__codelineno-89-48"></a><span class="go">-- Check &#39;.nextflow.log&#39; file for details</span>
+<a id="__codelineno-89-5" name="__codelineno-89-5" href="#__codelineno-89-5"></a><span class="go">executor &gt;  local (14)</span>
+<a id="__codelineno-89-6" name="__codelineno-89-6" href="#__codelineno-89-6"></a><span class="go">[61/91663a] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔</span>
+<a id="__codelineno-89-7" name="__codelineno-89-7" href="#__codelineno-89-7"></a><span class="hll"><span class="go">[0e/99bfb0] COWPY (7)             | 0 of 7</span>
+</span><a id="__codelineno-89-8" name="__codelineno-89-8" href="#__codelineno-89-8"></a><span class="go">WARN: Killing running tasks (5)</span>
+<a id="__codelineno-89-9" name="__codelineno-89-9" href="#__codelineno-89-9"></a><span class="go">ERROR ~ Error executing process &gt; &#39;COWPY (3)&#39;</span>
+<a id="__codelineno-89-10" name="__codelineno-89-10" href="#__codelineno-89-10"></a>
+<a id="__codelineno-89-11" name="__codelineno-89-11" href="#__codelineno-89-11"></a><span class="go">Caused by:</span>
+<a id="__codelineno-89-12" name="__codelineno-89-12" href="#__codelineno-89-12"></a><span class="hll"><span class="go">  Process `COWPY (3)` terminated with an error exit status (1)</span>
+</span><a id="__codelineno-89-13" name="__codelineno-89-13" href="#__codelineno-89-13"></a>
+<a id="__codelineno-89-14" name="__codelineno-89-14" href="#__codelineno-89-14"></a>
+<a id="__codelineno-89-15" name="__codelineno-89-15" href="#__codelineno-89-15"></a><span class="go">Command executed:</span>
+<a id="__codelineno-89-16" name="__codelineno-89-16" href="#__codelineno-89-16"></a>
+<a id="__codelineno-89-17" name="__codelineno-89-17" href="#__codelineno-89-17"></a><span class="hll"><span class="go">  cat hola.txt | cowpy -c null &gt; es-hola.txt</span>
+</span><a id="__codelineno-89-18" name="__codelineno-89-18" href="#__codelineno-89-18"></a>
+<a id="__codelineno-89-19" name="__codelineno-89-19" href="#__codelineno-89-19"></a><span class="go">Command exit status:</span>
+<a id="__codelineno-89-20" name="__codelineno-89-20" href="#__codelineno-89-20"></a><span class="go">  1</span>
+<a id="__codelineno-89-21" name="__codelineno-89-21" href="#__codelineno-89-21"></a>
+<a id="__codelineno-89-22" name="__codelineno-89-22" href="#__codelineno-89-22"></a><span class="go">Command output:</span>
+<a id="__codelineno-89-23" name="__codelineno-89-23" href="#__codelineno-89-23"></a><span class="go">  (empty)</span>
+<a id="__codelineno-89-24" name="__codelineno-89-24" href="#__codelineno-89-24"></a>
+<a id="__codelineno-89-25" name="__codelineno-89-25" href="#__codelineno-89-25"></a><span class="go">Command error:</span>
+<a id="__codelineno-89-26" name="__codelineno-89-26" href="#__codelineno-89-26"></a><span class="go">  Traceback (most recent call last):</span>
+<a id="__codelineno-89-27" name="__codelineno-89-27" href="#__codelineno-89-27"></a><span class="go">    File &quot;/opt/conda/bin/cowpy&quot;, line 10, in &lt;module&gt;</span>
+<a id="__codelineno-89-28" name="__codelineno-89-28" href="#__codelineno-89-28"></a><span class="go">      sys.exit(main())</span>
+<a id="__codelineno-89-29" name="__codelineno-89-29" href="#__codelineno-89-29"></a><span class="go">              ~~~~^^</span>
+<a id="__codelineno-89-30" name="__codelineno-89-30" href="#__codelineno-89-30"></a><span class="go">    File &quot;/opt/conda/lib/python3.13/site-packages/cowpy/cow.py&quot;, line 1215, in main</span>
+<a id="__codelineno-89-31" name="__codelineno-89-31" href="#__codelineno-89-31"></a><span class="go">      print(cow(eyes=args.eyes,</span>
+<a id="__codelineno-89-32" name="__codelineno-89-32" href="#__codelineno-89-32"></a><span class="go">            ~~~^^^^^^^^^^^^^^^^</span>
+<a id="__codelineno-89-33" name="__codelineno-89-33" href="#__codelineno-89-33"></a><span class="go">            tongue=args.tongue,</span>
+<a id="__codelineno-89-34" name="__codelineno-89-34" href="#__codelineno-89-34"></a><span class="go">            ^^^^^^^^^^^^^^^^^^^</span>
+<a id="__codelineno-89-35" name="__codelineno-89-35" href="#__codelineno-89-35"></a><span class="go">            thoughts=args.thoughts</span>
+<a id="__codelineno-89-36" name="__codelineno-89-36" href="#__codelineno-89-36"></a><span class="go">            ^^^^^^^^^^^^^^^^^^^^^^</span>
+<a id="__codelineno-89-37" name="__codelineno-89-37" href="#__codelineno-89-37"></a><span class="go">                ).milk(msg)</span>
+<a id="__codelineno-89-38" name="__codelineno-89-38" href="#__codelineno-89-38"></a><span class="go">                ^</span>
+<a id="__codelineno-89-39" name="__codelineno-89-39" href="#__codelineno-89-39"></a><span class="go">  TypeError: &#39;str&#39; object is not callable</span>
+<a id="__codelineno-89-40" name="__codelineno-89-40" href="#__codelineno-89-40"></a>
+<a id="__codelineno-89-41" name="__codelineno-89-41" href="#__codelineno-89-41"></a><span class="go">Work dir:</span>
+<a id="__codelineno-89-42" name="__codelineno-89-42" href="#__codelineno-89-42"></a><span class="go">  /workspaces/training/side-quests/metadata/work/52/80c08666f6732690bce00f04993489</span>
+<a id="__codelineno-89-43" name="__codelineno-89-43" href="#__codelineno-89-43"></a>
+<a id="__codelineno-89-44" name="__codelineno-89-44" href="#__codelineno-89-44"></a><span class="go">Container:</span>
+<a id="__codelineno-89-45" name="__codelineno-89-45" href="#__codelineno-89-45"></a><span class="go">  community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273</span>
+<a id="__codelineno-89-46" name="__codelineno-89-46" href="#__codelineno-89-46"></a>
+<a id="__codelineno-89-47" name="__codelineno-89-47" href="#__codelineno-89-47"></a><span class="go">Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`</span>
+<a id="__codelineno-89-48" name="__codelineno-89-48" href="#__codelineno-89-48"></a>
+<a id="__codelineno-89-49" name="__codelineno-89-49" href="#__codelineno-89-49"></a><span class="go">-- Check &#39;.nextflow.log&#39; file for details</span>
 </code></pre></div>
 </details>
 <p>Das <code>cowpy -c null</code> im ausgeführten Befehl ist der diagnostische Hinweis.</p>

@@ -2518,7 +2518,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Testowanie z nf-test
   
 
     
@@ -3950,10 +3950,11 @@
 <h2 id="aktualnie-wspierana-wersja-skadni-nextflow-i-wymagania">Aktualnie wspierana wersja składni Nextflow i wymagania<a class="headerlink" href="#aktualnie-wspierana-wersja-skadni-nextflow-i-wymagania" title="Permanent link">&para;</a></h2>
 <p>Od wersji 3.0 portalu szkoleniowego wszystkie nasze kursy są kompatybilne z Nextflow w wersji 25.10.2 lub nowszej, chyba że na stronie indeksu kursu określono inaczej.
 (Nie dotyczy to przestarzałych ani zarchiwizowanych materiałów, które mogą nie zawierać informacji o wersji).</p>
-<p>Wersja Nextflow aktualnie ładowana domyślnie w naszym środowisku szkoleniowym to <strong>Nextflow 25.10.4</strong>.</p>
+<p>Wersja Nextflow aktualnie ładowana domyślnie w naszym środowisku szkoleniowym to <strong>Nextflow 26.04.4</strong>.</p>
 <p>Ponieważ kursy wykorzystują teraz typowane wejścia na poziomie workflow'a, a także dyrektywy wyjściowe na poziomie workflow'a, wymagają użycia parsera składni V2, <strong>chyba że w instrukcjach kursu wyraźnie zaznaczono inaczej</strong>.
+Parser V2 jest domyślny od Nextflow 26.04 wzwyż, więc w przypadku wersji, którą ładujemy, nie trzeba go włączać ręcznie.
 Jeśli planujesz korzystać ze środowiska, które udostępniamy przez <a href="../../envsetup/01_setup/">Github Codespaces</a> lub <a href="../../envsetup/03_devcontainer/">lokalne devcontainery</a>, nie musisz nic robić, chyba że w instrukcjach kursu wyraźnie zaznaczono inaczej.
-Jeśli jednak planujesz przejść przez szkolenia we własnym środowisku (<a href="../../envsetup/02_local/">Instalacja ręczna</a>), musisz upewnić się, że używasz Nextflow w wersji 25.10.2 lub nowszej z włączonym parserem składni v2.</p>
+Jeśli jednak planujesz przejść przez szkolenia we własnym środowisku (<a href="../../envsetup/02_local/">Instalacja ręczna</a>), musisz upewnić się, że używasz Nextflow w wersji 25.10.2 lub nowszej, a jeśli korzystasz z wersji wcześniejszej niż 26.04 — że masz włączony parser składni v2.</p>
 <h2 id="starsze-wersje-materiaow-szkoleniowych">Starsze wersje materiałów szkoleniowych<a class="headerlink" href="#starsze-wersje-materiaow-szkoleniowych" title="Permanent link">&para;</a></h2>
 <p>Nasze materiały szkoleniowe są wersjonowane od lutego 2025 roku.</p>
 <p>Możesz uzyskać dostęp do starszych wersji materiałów szkoleniowych, które działają z wersjami Nextflow <strong>przed 25.10.2</strong>, korzystając z menu rozwijanego u góry każdej strony, które pokazuje numerowaną wersję materiałów szkoleniowych.
@@ -3969,21 +3970,21 @@ Cały nowoczesny kod Nextflow używa DSL2.</p>
 Parser v1 to oryginalny, bardziej permisywny parser.
 Parser v2 jest bardziej restrykcyjny i umożliwia nowe funkcje językowe, takie jak typowanie statyczne (typowane wejścia i wyjścia) oraz dyrektywy wyjściowe na poziomie workflow'a.
 Parser v2 zapewnia również lepsze komunikaty o błędach i wychwytuje więcej błędów na etapie parsowania, a nie w czasie wykonywania.
-Parser v2 stanie się domyślny w Nextflow 26.04.</p>
+Parser v2 jest domyślny począwszy od Nextflow 26.04.</p>
 <p>Podsumowując: DSL2 to język, w którym piszesz; wersja parsera składni określa, jak restrykcyjnie ten język jest interpretowany i jakie zaawansowane funkcje są dostępne.</p>
 <h3 id="sprawdzanie-i-ustawianie-wersji-nextflow">Sprawdzanie i ustawianie wersji Nextflow<a class="headerlink" href="#sprawdzanie-i-ustawianie-wersji-nextflow" title="Permanent link">&para;</a></h3>
 <p>Możesz sprawdzić, jaka wersja Nextflow jest zainstalowana w Twoim systemie, używając polecenia <code>nextflow --version</code>.</p>
 <p>Więcej informacji o tym, jak zaktualizować swoją wersję Nextflow, znajdziesz w dokumentacji referencyjnej dotyczącej <a href="https://www.nextflow.io/docs/latest/updating-nextflow.html">aktualizacji Nextflow</a>.</p>
 <h3 id="waczanie-parsera-skadni-v2">Włączanie parsera składni v2<a class="headerlink" href="#waczanie-parsera-skadni-v2" title="Permanent link">&para;</a></h3>
+<p>Począwszy od Nextflow 26.04 parser v2 jest domyślny, więc poniższe kroki są potrzebne tylko w wersjach wcześniejszych niż 26.04.</p>
 <p>Aby <strong>włączyć</strong> parser składni v2 dla bieżącej sesji, uruchom następujące polecenie w terminalu:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v2
 </code></pre></div>
-<p>Aby uczynić to trwałym (do czasu, gdy v2 stanie się domyślny w Nextflow 26.04), dodaj polecenie export do profilu powłoki (<code>~/.bashrc</code>, <code>~/.zshrc</code> itp.):</p>
+<p>Aby uczynić to trwałym, dodaj polecenie export do profilu powłoki (<code>~/.bashrc</code>, <code>~/.zshrc</code> itp.):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export NXF_SYNTAX_PARSER=v2&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">source</span><span class="w"> </span>~/.bashrc
 </code></pre></div>
-<p>Zauważ, że zmienna środowiskowa <code>NXF_SYNTAX_PARSER=v2</code> jest tymczasowym wymogiem.
-Od Nextflow 26.04 parser v2 stanie się domyślny i to ustawienie nie będzie już potrzebne.</p>
+<p>Zauważ, że w wersjach Nextflow wcześniejszych niż 26.04 zmienna środowiskowa <code>NXF_SYNTAX_PARSER=v2</code> jest wymagana, aby uzyskać dostęp do funkcji v2 używanych w tych kursach.</p>
 <h3 id="wyaczanie-parsera-skadni-v2">Wyłączanie parsera składni v2<a class="headerlink" href="#wyaczanie-parsera-skadni-v2" title="Permanent link">&para;</a></h3>
 <p>Aby <strong>wyłączyć</strong> parser składni v2 dla bieżącej sesji, uruchom następujące polecenie w terminalu:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v1

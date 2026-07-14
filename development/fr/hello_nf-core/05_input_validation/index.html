@@ -1437,10 +1437,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-configurer-la-validation-pour-ignorer-la-validation-des-fichiers-dentree" class="md-nav__link">
+  <a href="#11-activer-la-validation-et-ignorer-la-validation-des-fichiers-dentree" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Configurer la validation pour ignorer la validation des fichiers d'entrée
+        1.1. Activer la validation et ignorer la validation des fichiers d'entrée
       
     </span>
   </a>
@@ -3928,10 +3928,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-configurer-la-validation-pour-ignorer-la-validation-des-fichiers-dentree" class="md-nav__link">
+  <a href="#11-activer-la-validation-et-ignorer-la-validation-des-fichiers-dentree" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Configurer la validation pour ignorer la validation des fichiers d'entrée
+        1.1. Activer la validation et ignorer la validation des fichiers d'entrée
       
     </span>
   </a>
@@ -4383,7 +4383,7 @@ Exécutez ces commandes depuis le répertoire <code>hello-nf-core/</code> :</p>
 </code></pre></div>
 <p>Cela vous donne un pipeline avec le module <code>COWPY</code> déjà mis à niveau pour suivre les standards nf-core.
 Vous pouvez vérifier qu'il s'exécute avec succès en lançant la commande suivante :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--outdir<span class="w"> </span>core-hello-results<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--validate_params<span class="w"> </span><span class="nb">false</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--outdir<span class="w"> </span>core-hello-results<span class="w"> </span>-profile<span class="w"> </span>test,docker
 </code></pre></div>
 </details>
 <hr />
@@ -4431,7 +4431,7 @@ Bien que nf-schema fonctionne avec n'importe quel workflow Nextflow, c'est la so
 </ul>
 <p>Le plugin nf-schema est spécifié dans <code>nextflow.config</code> :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-schema@2.1.1&#39;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-schema@2.7.2&#39;</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="o">}</span>
 </code></pre></div>
 <p>Une fois installé, vous pouvez importer des fonctions depuis les plugins en utilisant la syntaxe <code>include { functionName } from 'plugin/plugin-name'</code>.</p>
@@ -4491,38 +4491,53 @@ Bien que nf-schema fonctionne avec n'importe quel workflow Nextflow, c'est la so
 <hr />
 <h2 id="1-validation-des-parametres-nextflow_schemajson">1. Validation des paramètres (nextflow_schema.json)<a class="headerlink" href="#1-validation-des-parametres-nextflow_schemajson" title="Permanent link">&para;</a></h2>
 <p>Commençons par ajouter la validation des paramètres à notre pipeline. Cela valide les options en ligne de commande comme <code>--input</code>, <code>--outdir</code> et <code>--batch</code>.</p>
-<h3 id="11-configurer-la-validation-pour-ignorer-la-validation-des-fichiers-dentree">1.1. Configurer la validation pour ignorer la validation des fichiers d'entrée<a class="headerlink" href="#11-configurer-la-validation-pour-ignorer-la-validation-des-fichiers-dentree" title="Permanent link">&para;</a></h3>
+<h3 id="11-activer-la-validation-et-ignorer-la-validation-des-fichiers-dentree">1.1. Activer la validation et ignorer la validation des fichiers d'entrée<a class="headerlink" href="#11-activer-la-validation-et-ignorer-la-validation-des-fichiers-dentree" title="Permanent link">&para;</a></h3>
 <p>Le modèle de pipeline nf-core est livré avec nf-schema déjà installé et configuré :</p>
 <ul>
 <li>Le plugin nf-schema est installé via le bloc <code>plugins{}</code> dans <code>nextflow.config</code></li>
-<li>La validation des paramètres est activée par défaut via <code>params.validate_params = true</code></li>
+<li>La validation des paramètres est contrôlée par <code>params.validate_params</code></li>
 <li>La validation est effectuée par le sous-workflow <code>UTILS_NFSCHEMA_PLUGIN</code> lors de l'initialisation du pipeline</li>
 </ul>
-<p>Le comportement de validation est contrôlé via la portée <code>validation{}</code> dans <code>nextflow.config</code>.</p>
-<p>Puisque nous allons d'abord travailler sur la validation des paramètres (cette section) et ne configurerons pas le schéma de données d'entrée avant la section 2, nous devons temporairement demander à nf-schema d'ignorer la validation du contenu du fichier du paramètre <code>input</code>.</p>
-<p>Ouvrez <code>nextflow.config</code> et trouvez le bloc <code>validation</code> (autour de la ligne 247). Ajoutez <code>ignoreParams</code> pour ignorer la validation des fichiers d'entrée :</p>
+<p>Dans les Parties 3 et 4, nous avons défini <code>validate_params = false</code> pour que le pipeline puisse s'exécuter avant que nous ayons configuré des schémas.
+Maintenant que nous sommes prêt·es à ajouter la validation, la première étape consiste à l'activer.</p>
+<p>Ouvrez <code>nextflow.config</code> et trouvez le paramètre <code>validate_params</code> (autour de la ligne 37), et définissez-le sur <code>true</code> :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Après</label><label for="__tabbed_1_2">Avant</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-247">247</a></span>
-<span class="normal"><a href="#__codelineno-5-248">248</a></span>
-<span class="normal"><a href="#__codelineno-5-249">249</a></span>
-<span class="normal"><a href="#__codelineno-5-250">250</a></span>
-<span class="normal"><a href="#__codelineno-5-251">251</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-247" name="__codelineno-5-247"></a><span class="n">validation</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-5-248" name="__codelineno-5-248"></a><span class="w">    </span><span class="n">defaultIgnoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;genomes&quot;</span><span class="o">]</span>
-<a id="__codelineno-5-249" name="__codelineno-5-249"></a><span class="hll"><span class="w">    </span><span class="n">ignoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;input&#39;</span><span class="o">]</span>
-</span><a id="__codelineno-5-250" name="__codelineno-5-250"></a><span class="w">    </span><span class="n">monochromeLogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">monochrome_logs</span>
-<a id="__codelineno-5-251" name="__codelineno-5-251"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-37">37</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-37" name="__codelineno-5-37"></a><span class="hll"><span class="n">validate_params</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-37">37</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-37" name="__codelineno-6-37"></a><span class="hll"><span class="n">validate_params</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>Le comportement de validation lui-même est contrôlé via la portée <code>validation{}</code> dans <code>nextflow.config</code>.</p>
+<p>Puisque nous allons d'abord travailler sur la validation des paramètres (cette section) et ne configurerons pas le schéma de données d'entrée avant la section 2, nous devons également temporairement demander à nf-schema d'ignorer la validation du contenu du fichier du paramètre <code>input</code>.</p>
+<p>Trouvez le bloc <code>validation</code> (autour de la ligne 252) et ajoutez <code>ignoreParams</code> pour ignorer la validation des fichiers d'entrée :</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Après</label><label for="__tabbed_2_2">Avant</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-252">252</a></span>
+<span class="normal"><a href="#__codelineno-7-253">253</a></span>
+<span class="normal"><a href="#__codelineno-7-254">254</a></span>
+<span class="normal"><a href="#__codelineno-7-255">255</a></span>
+<span class="normal"><a href="#__codelineno-7-256">256</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-252" name="__codelineno-7-252"></a><span class="n">validation</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-7-253" name="__codelineno-7-253"></a><span class="w">    </span><span class="n">defaultIgnoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;genomes&quot;</span><span class="o">]</span>
+<a id="__codelineno-7-254" name="__codelineno-7-254"></a><span class="hll"><span class="w">    </span><span class="n">ignoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;input&#39;</span><span class="o">]</span>
+</span><a id="__codelineno-7-255" name="__codelineno-7-255"></a><span class="w">    </span><span class="n">monochromeLogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">monochrome_logs</span>
+<a id="__codelineno-7-256" name="__codelineno-7-256"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-247">247</a></span>
-<span class="normal"><a href="#__codelineno-6-248">248</a></span>
-<span class="normal"><a href="#__codelineno-6-249">249</a></span>
-<span class="normal"><a href="#__codelineno-6-250">250</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-247" name="__codelineno-6-247"></a><span class="n">validation</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-6-248" name="__codelineno-6-248"></a><span class="w">    </span><span class="n">defaultIgnoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;genomes&quot;</span><span class="o">]</span>
-<a id="__codelineno-6-249" name="__codelineno-6-249"></a><span class="w">    </span><span class="n">monochromeLogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">monochrome_logs</span>
-<a id="__codelineno-6-250" name="__codelineno-6-250"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-252">252</a></span>
+<span class="normal"><a href="#__codelineno-8-253">253</a></span>
+<span class="normal"><a href="#__codelineno-8-254">254</a></span>
+<span class="normal"><a href="#__codelineno-8-255">255</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-252" name="__codelineno-8-252"></a><span class="n">validation</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-8-253" name="__codelineno-8-253"></a><span class="w">    </span><span class="n">defaultIgnoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;genomes&quot;</span><span class="o">]</span>
+<a id="__codelineno-8-254" name="__codelineno-8-254"></a><span class="w">    </span><span class="n">monochromeLogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">monochrome_logs</span>
+<a id="__codelineno-8-255" name="__codelineno-8-255"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -4533,7 +4548,7 @@ Bien que nf-schema fonctionne avec n'importe quel workflow Nextflow, c'est la so
 <li><strong><code>ignoreParams</code></strong> : Ignorer la validation du contenu du fichier du paramètre <code>input</code> (temporaire ; nous réactiverons cela dans la section 2)</li>
 <li><strong><code>monochromeLogs</code></strong> : Désactiver la sortie colorée dans les messages de validation lorsque défini sur <code>true</code> (contrôlé par <code>params.monochrome_logs</code>)</li>
 </ul>
-<div class="admonition note">
+<div class="admonition info">
 <p class="admonition-title">Pourquoi ignorer le paramètre input ?</p>
 <p>Le paramètre <code>input</code> dans <code>nextflow_schema.json</code> a <code>"schema": "assets/schema_input.json"</code> qui indique à nf-schema de valider le <em>contenu</em> du fichier CSV d'entrée par rapport à ce schéma.
 Puisque nous n'avons pas encore configuré ce schéma, nous ignorons temporairement cette validation.
@@ -4541,60 +4556,60 @@ Nous supprimerons ce paramètre dans la section 2 après avoir configuré le sch
 </div>
 <h3 id="12-examiner-le-schema-de-parametres">1.2. Examiner le schéma de paramètres<a class="headerlink" href="#12-examiner-le-schema-de-parametres" title="Permanent link">&para;</a></h3>
 <p>Regardons une section du fichier <code>nextflow_schema.json</code> qui est fourni avec notre modèle de pipeline :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">25</span><span class="w"> </span><span class="s1">&#39;&quot;input_output_options&quot;&#39;</span><span class="w"> </span>nextflow_schema.json
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">25</span><span class="w"> </span><span class="s1">&#39;&quot;input_output_options&quot;&#39;</span><span class="w"> </span>nextflow_schema.json
 </code></pre></div>
 <p>Le schéma de paramètres est organisé en groupes. Voici le groupe <code>input_output_options</code> :</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/nextflow_schema.json (excerpt)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-8-10">10</a></span>
-<span class="normal"><a href="#__codelineno-8-11">11</a></span>
-<span class="normal"><a href="#__codelineno-8-12">12</a></span>
-<span class="normal"><a href="#__codelineno-8-13">13</a></span>
-<span class="normal"><a href="#__codelineno-8-14">14</a></span>
-<span class="normal"><a href="#__codelineno-8-15">15</a></span>
-<span class="normal"><a href="#__codelineno-8-16">16</a></span>
-<span class="normal"><a href="#__codelineno-8-17">17</a></span>
-<span class="normal"><a href="#__codelineno-8-18">18</a></span>
-<span class="normal"><a href="#__codelineno-8-19">19</a></span>
-<span class="normal"><a href="#__codelineno-8-20">20</a></span>
-<span class="normal"><a href="#__codelineno-8-21">21</a></span>
-<span class="normal"><a href="#__codelineno-8-22">22</a></span>
-<span class="normal"><a href="#__codelineno-8-23">23</a></span>
-<span class="normal"><a href="#__codelineno-8-24">24</a></span>
-<span class="normal"><a href="#__codelineno-8-25">25</a></span>
-<span class="normal"><a href="#__codelineno-8-26">26</a></span>
-<span class="normal"><a href="#__codelineno-8-27">27</a></span>
-<span class="normal"><a href="#__codelineno-8-28">28</a></span>
-<span class="normal"><a href="#__codelineno-8-29">29</a></span>
-<span class="normal"><a href="#__codelineno-8-30">30</a></span>
-<span class="normal"><a href="#__codelineno-8-31">31</a></span>
-<span class="normal"><a href="#__codelineno-8-32">32</a></span>
-<span class="normal"><a href="#__codelineno-8-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="w">        </span><span class="nt">&quot;input_output_options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w">            </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Input/output options&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="w">            </span><span class="nt">&quot;fa_icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fas fa-terminal&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="w">            </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Define where the pipeline should find input data and save output data.&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="w">            </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;outdir&quot;</span><span class="p">],</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="w">            </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="w">                </span><span class="nt">&quot;input&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="w">                    </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file-path&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="w">                    </span><span class="nt">&quot;exists&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<a id="__codelineno-8-19" name="__codelineno-8-19"></a><span class="w">                    </span><span class="nt">&quot;schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;assets/schema_input.json&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-20" name="__codelineno-8-20"></a><span class="w">                    </span><span class="nt">&quot;mimetype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text/csv&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-21" name="__codelineno-8-21"></a><span class="w">                    </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^\\S+\\.csv$&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-22" name="__codelineno-8-22"></a><span class="w">                    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Path to comma-separated file containing information about the samples in the experiment.&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-23" name="__codelineno-8-23"></a><span class="w">                    </span><span class="nt">&quot;help_text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-24" name="__codelineno-8-24"></a><span class="w">                    </span><span class="nt">&quot;fa_icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fas fa-file-csv&quot;</span>
-<a id="__codelineno-8-25" name="__codelineno-8-25"></a><span class="w">                </span><span class="p">},</span>
-<a id="__codelineno-8-26" name="__codelineno-8-26"></a><span class="w">                </span><span class="nt">&quot;outdir&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-8-27" name="__codelineno-8-27"></a><span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-28" name="__codelineno-8-28"></a><span class="w">                    </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;directory-path&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-29" name="__codelineno-8-29"></a><span class="w">                    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-30" name="__codelineno-8-30"></a><span class="w">                    </span><span class="nt">&quot;fa_icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fas fa-folder-open&quot;</span>
-<a id="__codelineno-8-31" name="__codelineno-8-31"></a><span class="w">                </span><span class="p">}</span>
-<a id="__codelineno-8-32" name="__codelineno-8-32"></a><span class="w">            </span><span class="p">}</span>
-<a id="__codelineno-8-33" name="__codelineno-8-33"></a><span class="w">        </span><span class="p">},</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/nextflow_schema.json (excerpt)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-10-10">10</a></span>
+<span class="normal"><a href="#__codelineno-10-11">11</a></span>
+<span class="normal"><a href="#__codelineno-10-12">12</a></span>
+<span class="normal"><a href="#__codelineno-10-13">13</a></span>
+<span class="normal"><a href="#__codelineno-10-14">14</a></span>
+<span class="normal"><a href="#__codelineno-10-15">15</a></span>
+<span class="normal"><a href="#__codelineno-10-16">16</a></span>
+<span class="normal"><a href="#__codelineno-10-17">17</a></span>
+<span class="normal"><a href="#__codelineno-10-18">18</a></span>
+<span class="normal"><a href="#__codelineno-10-19">19</a></span>
+<span class="normal"><a href="#__codelineno-10-20">20</a></span>
+<span class="normal"><a href="#__codelineno-10-21">21</a></span>
+<span class="normal"><a href="#__codelineno-10-22">22</a></span>
+<span class="normal"><a href="#__codelineno-10-23">23</a></span>
+<span class="normal"><a href="#__codelineno-10-24">24</a></span>
+<span class="normal"><a href="#__codelineno-10-25">25</a></span>
+<span class="normal"><a href="#__codelineno-10-26">26</a></span>
+<span class="normal"><a href="#__codelineno-10-27">27</a></span>
+<span class="normal"><a href="#__codelineno-10-28">28</a></span>
+<span class="normal"><a href="#__codelineno-10-29">29</a></span>
+<span class="normal"><a href="#__codelineno-10-30">30</a></span>
+<span class="normal"><a href="#__codelineno-10-31">31</a></span>
+<span class="normal"><a href="#__codelineno-10-32">32</a></span>
+<span class="normal"><a href="#__codelineno-10-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="w">        </span><span class="nt">&quot;input_output_options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="w">            </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Input/output options&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="w">            </span><span class="nt">&quot;fa_icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fas fa-terminal&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="w">            </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Define where the pipeline should find input data and save output data.&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="w">            </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;outdir&quot;</span><span class="p">],</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="w">            </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="w">                </span><span class="nt">&quot;input&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16"></a><span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="w">                    </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file-path&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18"></a><span class="w">                    </span><span class="nt">&quot;exists&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19"></a><span class="w">                    </span><span class="nt">&quot;schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;assets/schema_input.json&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20"></a><span class="w">                    </span><span class="nt">&quot;mimetype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text/csv&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21"></a><span class="w">                    </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^\\S+\\.csv$&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22"></a><span class="w">                    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Path to comma-separated file containing information about the samples in the experiment.&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-23" name="__codelineno-10-23"></a><span class="w">                    </span><span class="nt">&quot;help_text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-24" name="__codelineno-10-24"></a><span class="w">                    </span><span class="nt">&quot;fa_icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fas fa-file-csv&quot;</span>
+<a id="__codelineno-10-25" name="__codelineno-10-25"></a><span class="w">                </span><span class="p">},</span>
+<a id="__codelineno-10-26" name="__codelineno-10-26"></a><span class="w">                </span><span class="nt">&quot;outdir&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-27" name="__codelineno-10-27"></a><span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-28" name="__codelineno-10-28"></a><span class="w">                    </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;directory-path&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-29" name="__codelineno-10-29"></a><span class="w">                    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-30" name="__codelineno-10-30"></a><span class="w">                    </span><span class="nt">&quot;fa_icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fas fa-folder-open&quot;</span>
+<a id="__codelineno-10-31" name="__codelineno-10-31"></a><span class="w">                </span><span class="p">}</span>
+<a id="__codelineno-10-32" name="__codelineno-10-32"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-10-33" name="__codelineno-10-33"></a><span class="w">        </span><span class="p">},</span>
 </code></pre></div></td></tr></table></div>
 <p>Chaque entrée décrite ici possède les propriétés clés suivantes qui peuvent être validées :</p>
 <ul>
@@ -4616,21 +4631,21 @@ Les paramètres déclarés ailleurs dans vos scripts de workflow (comme dans <co
 <h3 id="13-ajouter-le-parametre-batch">1.3. Ajouter le paramètre batch<a class="headerlink" href="#13-ajouter-le-parametre-batch" title="Permanent link">&para;</a></h3>
 <p>Bien que le schéma soit un fichier JSON qui peut être édité manuellement, <strong>l'édition manuelle est sujette aux erreurs et n'est pas recommandée</strong>.
 À la place, nf-core fournit un outil GUI interactif qui gère la syntaxe JSON Schema pour vous et valide vos modifications :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>nf-core<span class="w"> </span>pipelines<span class="w"> </span>schema<span class="w"> </span>build
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>nf-core<span class="w"> </span>pipelines<span class="w"> </span>schema<span class="w"> </span>build
 </code></pre></div>
 <p>Vous devriez voir quelque chose comme ceci :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">                                          ,--./,-.</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="go">          ___     __   __   __   ___     /,-._.--~\</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="go">    |\ | |__  __ /  ` /  \ |__) |__         }  {</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="go">    | \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="go">                                          `._,._,&#39;</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="go">    nf-core/tools version 3.5.2 - https://nf-co.re</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="go">INFO     [✓] Default parameters match schema validation</span>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="go">INFO     [✓] Pipeline schema looks valid (found 17 params)</span>
-<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="go">INFO     Writing schema with 17 params: &#39;nextflow_schema.json&#39;</span>
-<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="go">🚀  Launch web builder for customisation and editing? [y/n]:</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">                                          ,--./,-.</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="go">          ___     __   __   __   ___     /,-._.--~\</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="go">    |\ | |__  __ /  ` /  \ |__) |__         }  {</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="go">    | \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="go">                                          `._,._,&#39;</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="go">    nf-core/tools version 4.0.2 - https://nf-co.re</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="go">INFO     [✓] Default parameters match schema validation</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="go">INFO     [✓] Pipeline schema looks valid (found 17 params)</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="go">INFO     Writing schema with 17 params: &#39;nextflow_schema.json&#39;</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="go">🚀  Launch web builder for customisation and editing? [y/n]:</span>
 </code></pre></div>
 <p>Tapez <code>y</code> et appuyez sur Entrée pour lancer l'interface web interactive.</p>
 <p>Votre navigateur s'ouvrira affichant le constructeur de schéma de paramètres :</p>
@@ -4649,92 +4664,92 @@ Les paramètres déclarés ailleurs dans vos scripts de workflow (comme dans <co
 <p><img alt="Ajout du paramètre batch" src="../img/schema_add.png" /></p>
 <p>Lorsque vous avez terminé, cliquez sur le bouton <strong>"Finished"</strong> en haut à droite.</p>
 <p>De retour dans votre terminal, vous verrez :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">INFO     Writing schema with 18 params: &#39;nextflow_schema.json&#39;</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="go">⣾ Use ctrl+c to stop waiting and force exit.</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">INFO     Writing schema with 18 params: &#39;nextflow_schema.json&#39;</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="go">⣾ Use ctrl+c to stop waiting and force exit.</span>
 </code></pre></div>
 <p>Appuyez sur <code>Ctrl+C</code> pour quitter le constructeur de schéma.</p>
 <p>L'outil a maintenant mis à jour votre fichier <code>nextflow_schema.json</code> avec le nouveau paramètre <code>batch</code>, en gérant correctement toute la syntaxe JSON Schema.</p>
 <h3 id="14-verifier-les-modifications">1.4. Vérifier les modifications<a class="headerlink" href="#14-verifier-les-modifications" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">25</span><span class="w"> </span><span class="s1">&#39;&quot;input_output_options&quot;&#39;</span><span class="w"> </span>nextflow_schema.json
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">25</span><span class="w"> </span><span class="s1">&#39;&quot;input_output_options&quot;&#39;</span><span class="w"> </span>nextflow_schema.json
 </code></pre></div>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/nextflow_schema.json (excerpt)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-13-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-13-10">10</a></span>
-<span class="normal"><a href="#__codelineno-13-11">11</a></span>
-<span class="normal"><a href="#__codelineno-13-12">12</a></span>
-<span class="normal"><a href="#__codelineno-13-13">13</a></span>
-<span class="normal"><a href="#__codelineno-13-14">14</a></span>
-<span class="normal"><a href="#__codelineno-13-15">15</a></span>
-<span class="normal"><a href="#__codelineno-13-16">16</a></span>
-<span class="normal"><a href="#__codelineno-13-17">17</a></span>
-<span class="normal"><a href="#__codelineno-13-18">18</a></span>
-<span class="normal"><a href="#__codelineno-13-19">19</a></span>
-<span class="normal"><a href="#__codelineno-13-20">20</a></span>
-<span class="normal"><a href="#__codelineno-13-21">21</a></span>
-<span class="normal"><a href="#__codelineno-13-22">22</a></span>
-<span class="normal"><a href="#__codelineno-13-23">23</a></span>
-<span class="normal"><a href="#__codelineno-13-24">24</a></span>
-<span class="normal"><a href="#__codelineno-13-25">25</a></span>
-<span class="normal"><a href="#__codelineno-13-26">26</a></span>
-<span class="normal"><a href="#__codelineno-13-27">27</a></span>
-<span class="normal"><a href="#__codelineno-13-28">28</a></span>
-<span class="normal"><a href="#__codelineno-13-29">29</a></span>
-<span class="normal"><a href="#__codelineno-13-30">30</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="w">    </span><span class="nt">&quot;input_output_options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="w">      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Input/output options&quot;</span><span class="p">,</span>
-<a id="__codelineno-13-10" name="__codelineno-13-10"></a><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
-<a id="__codelineno-13-11" name="__codelineno-13-11"></a><span class="w">      </span><span class="nt">&quot;fa_icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fas fa-terminal&quot;</span><span class="p">,</span>
-<a id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Define where the pipeline should find input data and save output data.&quot;</span><span class="p">,</span>
-<a id="__codelineno-13-13" name="__codelineno-13-13"></a><span class="w">      </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;outdir&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;batch&quot;</span><span class="p">],</span>
-<a id="__codelineno-13-14" name="__codelineno-13-14"></a><span class="w">      </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-13-15" name="__codelineno-13-15"></a><span class="w">        </span><span class="nt">&quot;input&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-13-16" name="__codelineno-13-16"></a><span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<a id="__codelineno-13-17" name="__codelineno-13-17"></a><span class="w">          </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file-path&quot;</span><span class="p">,</span>
-<a id="__codelineno-13-18" name="__codelineno-13-18"></a><span class="w">          </span><span class="nt">&quot;exists&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<a id="__codelineno-13-19" name="__codelineno-13-19"></a><span class="w">          </span><span class="nt">&quot;schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;assets/schema_input.json&quot;</span><span class="p">,</span>
-<a id="__codelineno-13-20" name="__codelineno-13-20"></a><span class="w">          </span><span class="nt">&quot;mimetype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text/csv&quot;</span><span class="p">,</span>
-<a id="__codelineno-13-21" name="__codelineno-13-21"></a><span class="w">          </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^\\S+\\.csv$&quot;</span><span class="p">,</span>
-<a id="__codelineno-13-22" name="__codelineno-13-22"></a><span class="w">          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Path to comma-separated file containing information about the samples in the experiment.&quot;</span><span class="p">,</span>
-<a id="__codelineno-13-23" name="__codelineno-13-23"></a><span class="w">          </span><span class="nt">&quot;help_text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.&quot;</span><span class="p">,</span>
-<a id="__codelineno-13-24" name="__codelineno-13-24"></a><span class="w">          </span><span class="nt">&quot;fa_icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fas fa-file-csv&quot;</span>
-<a id="__codelineno-13-25" name="__codelineno-13-25"></a><span class="w">        </span><span class="p">},</span>
-<a id="__codelineno-13-26" name="__codelineno-13-26"></a><span class="hll"><span class="w">        </span><span class="nt">&quot;batch&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><a id="__codelineno-13-27" name="__codelineno-13-27"></a><span class="hll"><span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-13-28" name="__codelineno-13-28"></a><span class="hll"><span class="w">          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Name for this batch of greetings&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-13-29" name="__codelineno-13-29"></a><span class="hll"><span class="w">          </span><span class="nt">&quot;fa_icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fas fa-layer-group&quot;</span>
-</span><a id="__codelineno-13-30" name="__codelineno-13-30"></a><span class="hll"><span class="w">        </span><span class="p">},</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/nextflow_schema.json (excerpt)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-15-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-15-10">10</a></span>
+<span class="normal"><a href="#__codelineno-15-11">11</a></span>
+<span class="normal"><a href="#__codelineno-15-12">12</a></span>
+<span class="normal"><a href="#__codelineno-15-13">13</a></span>
+<span class="normal"><a href="#__codelineno-15-14">14</a></span>
+<span class="normal"><a href="#__codelineno-15-15">15</a></span>
+<span class="normal"><a href="#__codelineno-15-16">16</a></span>
+<span class="normal"><a href="#__codelineno-15-17">17</a></span>
+<span class="normal"><a href="#__codelineno-15-18">18</a></span>
+<span class="normal"><a href="#__codelineno-15-19">19</a></span>
+<span class="normal"><a href="#__codelineno-15-20">20</a></span>
+<span class="normal"><a href="#__codelineno-15-21">21</a></span>
+<span class="normal"><a href="#__codelineno-15-22">22</a></span>
+<span class="normal"><a href="#__codelineno-15-23">23</a></span>
+<span class="normal"><a href="#__codelineno-15-24">24</a></span>
+<span class="normal"><a href="#__codelineno-15-25">25</a></span>
+<span class="normal"><a href="#__codelineno-15-26">26</a></span>
+<span class="normal"><a href="#__codelineno-15-27">27</a></span>
+<span class="normal"><a href="#__codelineno-15-28">28</a></span>
+<span class="normal"><a href="#__codelineno-15-29">29</a></span>
+<span class="normal"><a href="#__codelineno-15-30">30</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="w">        </span><span class="nt">&quot;input_output_options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9"></a><span class="w">            </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Input/output options&quot;</span><span class="p">,</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11"></a><span class="w">            </span><span class="nt">&quot;fa_icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fas fa-terminal&quot;</span><span class="p">,</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12"></a><span class="w">            </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Define where the pipeline should find input data and save output data.&quot;</span><span class="p">,</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13"></a><span class="w">            </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;outdir&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;batch&quot;</span><span class="p">],</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14"></a><span class="w">            </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15"></a><span class="w">                </span><span class="nt">&quot;input&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16"></a><span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17"></a><span class="w">                    </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file-path&quot;</span><span class="p">,</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18"></a><span class="w">                    </span><span class="nt">&quot;exists&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19"></a><span class="w">                    </span><span class="nt">&quot;schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;assets/schema_input.json&quot;</span><span class="p">,</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20"></a><span class="w">                    </span><span class="nt">&quot;mimetype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text/csv&quot;</span><span class="p">,</span>
+<a id="__codelineno-15-21" name="__codelineno-15-21"></a><span class="w">                    </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^\\S+\\.csv$&quot;</span><span class="p">,</span>
+<a id="__codelineno-15-22" name="__codelineno-15-22"></a><span class="w">                    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Path to comma-separated file containing information about the samples in the experiment.&quot;</span><span class="p">,</span>
+<a id="__codelineno-15-23" name="__codelineno-15-23"></a><span class="w">                    </span><span class="nt">&quot;help_text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.&quot;</span><span class="p">,</span>
+<a id="__codelineno-15-24" name="__codelineno-15-24"></a><span class="w">                    </span><span class="nt">&quot;fa_icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fas fa-file-csv&quot;</span>
+<a id="__codelineno-15-25" name="__codelineno-15-25"></a><span class="w">                </span><span class="p">},</span>
+<a id="__codelineno-15-26" name="__codelineno-15-26"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;batch&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><a id="__codelineno-15-27" name="__codelineno-15-27"></a><span class="hll"><span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-15-28" name="__codelineno-15-28"></a><span class="hll"><span class="w">                    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Name for this batch of greetings&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-15-29" name="__codelineno-15-29"></a><span class="hll"><span class="w">                    </span><span class="nt">&quot;fa_icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fas fa-layer-group&quot;</span>
+</span><a id="__codelineno-15-30" name="__codelineno-15-30"></a><span class="hll"><span class="w">                </span><span class="p">},</span>
 </span></code></pre></div></td></tr></table></div>
-<p>Vous devriez voir que le paramètre <code>batch</code> a été ajouté au schéma avec le champ "required" affichant maintenant <code>["input", "outdir", "batch"]</code>.</p>
+<p>Vous devriez voir que le paramètre <code>batch</code> a été ajouté au schéma avec le champ <code>required</code> affichant maintenant <code>["input", "outdir", "batch"]</code>.</p>
 <h3 id="15-tester-la-validation-des-parametres">1.5. Tester la validation des paramètres<a class="headerlink" href="#15-tester-la-validation-des-parametres" title="Permanent link">&para;</a></h3>
 <p>Testons maintenant que la validation des paramètres fonctionne correctement.</p>
 <p>D'abord, essayez d'exécuter sans le paramètre requis <code>input</code> :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--outdir<span class="w"> </span>test-results<span class="w"> </span>-profile<span class="w"> </span>docker
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--outdir<span class="w"> </span>test-results<span class="w"> </span>-profile<span class="w"> </span>docker
 </code></pre></div>
 <details class="warning">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">ERROR ~ Validation of pipeline parameters failed!</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="go">-- Check &#39;.nextflow.log&#39; file for details</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="go">The following invalid input values have been detected:</span>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="go">* Missing required parameter(s): input, batch</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">ERROR ~ Validation of pipeline parameters failed!</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go"> -- Check &#39;.nextflow.log&#39; file for details</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="go">The following invalid input values have been detected:</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="go">* Missing required parameter(s): input, batch</span>
 </code></pre></div>
 </details>
 <p>Parfait ! La validation détecte le paramètre requis manquant avant l'exécution du pipeline.</p>
 <p>Maintenant essayez avec un ensemble de paramètres valides :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--input<span class="w"> </span>assets/greetings.csv<span class="w"> </span>--outdir<span class="w"> </span>results<span class="w"> </span>--batch<span class="w"> </span>my-batch<span class="w"> </span>-profile<span class="w"> </span>test,docker
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--input<span class="w"> </span>assets/greetings.csv<span class="w"> </span>--outdir<span class="w"> </span>results<span class="w"> </span>--batch<span class="w"> </span>my-batch<span class="w"> </span>-profile<span class="w"> </span>test,docker
 </code></pre></div>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">Launching `./main.nf` [peaceful_wozniak] DSL2 - revision: b9e9b3b8de</span>
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
-<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="go">executor &gt;  local (8)</span>
-<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="go">[de/a1b2c3] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔</span>
-<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="go">[4f/d5e6f7] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔</span>
-<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="go">[8a/b9c0d1] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔</span>
-<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="go">[e2/f3a4b5] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔</span>
-<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="go">-[core/hello] Pipeline completed successfully-</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="go">Launching `./main.nf` [peaceful_wozniak] revision: b9e9b3b8de</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="go">executor &gt;  local (8)</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="go">[de/a1b2c3] CORE_HELLO:HELLO:sayHello (3)                | 3 of 3 ✔</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="go">[4f/d5e6f7] CORE_HELLO:HELLO:convertToUpper (3)          | 3 of 3 ✔</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="go">[8a/b9c0d1] CORE_HELLO:HELLO:FIND_CONCATENATE (my-batch) | 1 of 1 ✔</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="go">[e2/f3a4b5] CORE_HELLO:HELLO:COWPY (my-batch)            | 1 of 1 ✔</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="go">-[core/hello] Pipeline completed successfully-</span>
 </code></pre></div>
 </details>
 <p>Le pipeline devrait s'exécuter avec succès, et le paramètre <code>batch</code> est maintenant validé.</p>
@@ -4749,11 +4764,11 @@ L'interface web gère toute la syntaxe JSON Schema pour vous, facilitant la gest
 Alors que la validation des paramètres vérifie les options en ligne de commande, la validation des données d'entrée s'assure que les données à l'intérieur du fichier CSV sont structurées correctement.</p>
 <h3 id="21-comprendre-le-format-de-greetingscsv">2.1. Comprendre le format de greetings.csv<a class="headerlink" href="#21-comprendre-le-format-de-greetingscsv" title="Permanent link">&para;</a></h3>
 <p>Rappelons-nous à quoi ressemble notre entrée :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>cat<span class="w"> </span>assets/greetings.csv
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>cat<span class="w"> </span>assets/greetings.csv
 </code></pre></div>
-<div class="highlight"><span class="filename">assets/greetings.csv</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>Hello,en,87
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>Bonjour,fr,96
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>Hola,es,98
+<div class="highlight"><span class="filename">assets/greetings.csv</span><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>Hello,en,87
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>Bonjour,fr,96
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>Hola,es,98
 </code></pre></div>
 <p>Il s'agit d'un simple CSV avec :</p>
 <ul>
@@ -4777,134 +4792,134 @@ Alors que la validation des paramètres vérifie les options en ligne de command
 <p>Le modèle de pipeline nf-core inclut un fichier par défaut <code>assets/schema_input.json</code> conçu pour les données de séquençage en paired-end.
 Nous devons le remplacer par un schéma plus simple pour notre cas d'usage de salutations.</p>
 <p>Ouvrez <code>assets/schema_input.json</code> et remplacez les sections <code>properties</code> et <code>required</code> :</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Après</label><label for="__tabbed_2_2">Avant</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Après</label><label for="__tabbed_3_2">Avant</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">assets/schema_input.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-20-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-20-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-20-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-20-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-20-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-20-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-20-10">10</a></span>
-<span class="normal"><a href="#__codelineno-20-11">11</a></span>
-<span class="normal"><a href="#__codelineno-20-12">12</a></span>
-<span class="normal"><a href="#__codelineno-20-13">13</a></span>
-<span class="normal"><a href="#__codelineno-20-14">14</a></span>
-<span class="normal"><a href="#__codelineno-20-15">15</a></span>
-<span class="normal"><a href="#__codelineno-20-16">16</a></span>
-<span class="normal"><a href="#__codelineno-20-17">17</a></span>
-<span class="normal"><a href="#__codelineno-20-18">18</a></span>
-<span class="normal"><a href="#__codelineno-20-19">19</a></span>
-<span class="normal"><a href="#__codelineno-20-20">20</a></span>
-<span class="normal"><a href="#__codelineno-20-21">21</a></span>
-<span class="normal"><a href="#__codelineno-20-22">22</a></span>
-<span class="normal"><a href="#__codelineno-20-23">23</a></span>
-<span class="normal"><a href="#__codelineno-20-24">24</a></span>
-<span class="normal"><a href="#__codelineno-20-25">25</a></span>
-<span class="normal"><a href="#__codelineno-20-26">26</a></span>
-<span class="normal"><a href="#__codelineno-20-27">27</a></span>
-<span class="normal"><a href="#__codelineno-20-28">28</a></span>
-<span class="normal"><a href="#__codelineno-20-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="p">{</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="w">    </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://json-schema.org/draft/2020-12/schema&quot;</span><span class="p">,</span>
-<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="w">    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json&quot;</span><span class="p">,</span>
-<a id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;core/hello pipeline - params.input schema&quot;</span><span class="p">,</span>
-<a id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Schema for the greetings file provided with params.input&quot;</span><span class="p">,</span>
-<a id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
-<a id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="w">    </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
-<a id="__codelineno-20-9" name="__codelineno-20-9"></a><span class="w">        </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-20-10" name="__codelineno-20-10"></a><span class="hll"><span class="w">            </span><span class="nt">&quot;greeting&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><a id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-20-12" name="__codelineno-20-12"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^\\S.*$&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-20-13" name="__codelineno-20-13"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Greeting must be provided and cannot be empty or start with whitespace&quot;</span>
-</span><a id="__codelineno-20-14" name="__codelineno-20-14"></a><span class="hll"><span class="w">            </span><span class="p">},</span>
-</span><a id="__codelineno-20-15" name="__codelineno-20-15"></a><span class="hll"><span class="w">            </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><a id="__codelineno-20-16" name="__codelineno-20-16"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-20-17" name="__codelineno-20-17"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;enum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;fr&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;es&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;it&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;de&quot;</span><span class="p">],</span>
-</span><a id="__codelineno-20-18" name="__codelineno-20-18"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Language must be one of: en, fr, es, it, de&quot;</span>
-</span><a id="__codelineno-20-19" name="__codelineno-20-19"></a><span class="hll"><span class="w">            </span><span class="p">},</span>
-</span><a id="__codelineno-20-20" name="__codelineno-20-20"></a><span class="hll"><span class="w">            </span><span class="nt">&quot;score&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><a id="__codelineno-20-21" name="__codelineno-20-21"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-20-22" name="__codelineno-20-22"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-</span><a id="__codelineno-20-23" name="__codelineno-20-23"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
-</span><a id="__codelineno-20-24" name="__codelineno-20-24"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Score must be an integer with a value between 0 and 100&quot;</span>
-</span><a id="__codelineno-20-25" name="__codelineno-20-25"></a><span class="hll"><span class="w">            </span><span class="p">}</span>
-</span><a id="__codelineno-20-26" name="__codelineno-20-26"></a><span class="w">        </span><span class="p">},</span>
-<a id="__codelineno-20-27" name="__codelineno-20-27"></a><span class="hll"><span class="w">        </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;greeting&quot;</span><span class="p">]</span>
-</span><a id="__codelineno-20-28" name="__codelineno-20-28"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-20-29" name="__codelineno-20-29"></a><span class="p">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">assets/schema_input.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-22-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-22-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-22-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-22-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-22-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-22-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-22-10">10</a></span>
+<span class="normal"><a href="#__codelineno-22-11">11</a></span>
+<span class="normal"><a href="#__codelineno-22-12">12</a></span>
+<span class="normal"><a href="#__codelineno-22-13">13</a></span>
+<span class="normal"><a href="#__codelineno-22-14">14</a></span>
+<span class="normal"><a href="#__codelineno-22-15">15</a></span>
+<span class="normal"><a href="#__codelineno-22-16">16</a></span>
+<span class="normal"><a href="#__codelineno-22-17">17</a></span>
+<span class="normal"><a href="#__codelineno-22-18">18</a></span>
+<span class="normal"><a href="#__codelineno-22-19">19</a></span>
+<span class="normal"><a href="#__codelineno-22-20">20</a></span>
+<span class="normal"><a href="#__codelineno-22-21">21</a></span>
+<span class="normal"><a href="#__codelineno-22-22">22</a></span>
+<span class="normal"><a href="#__codelineno-22-23">23</a></span>
+<span class="normal"><a href="#__codelineno-22-24">24</a></span>
+<span class="normal"><a href="#__codelineno-22-25">25</a></span>
+<span class="normal"><a href="#__codelineno-22-26">26</a></span>
+<span class="normal"><a href="#__codelineno-22-27">27</a></span>
+<span class="normal"><a href="#__codelineno-22-28">28</a></span>
+<span class="normal"><a href="#__codelineno-22-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="p">{</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="w">    </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://json-schema.org/draft/2020-12/schema&quot;</span><span class="p">,</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="w">    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json&quot;</span><span class="p">,</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;core/hello pipeline - params.input schema&quot;</span><span class="p">,</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Schema for the greetings file provided with params.input&quot;</span><span class="p">,</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6"></a><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7"></a><span class="w">    </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8"></a><span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9"></a><span class="w">        </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10"></a><span class="hll"><span class="w">            </span><span class="nt">&quot;greeting&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><a id="__codelineno-22-11" name="__codelineno-22-11"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-22-12" name="__codelineno-22-12"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^\\S.*$&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-22-13" name="__codelineno-22-13"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Greeting must be provided and cannot be empty or start with whitespace&quot;</span>
+</span><a id="__codelineno-22-14" name="__codelineno-22-14"></a><span class="hll"><span class="w">            </span><span class="p">},</span>
+</span><a id="__codelineno-22-15" name="__codelineno-22-15"></a><span class="hll"><span class="w">            </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><a id="__codelineno-22-16" name="__codelineno-22-16"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-22-17" name="__codelineno-22-17"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;enum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;fr&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;es&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;it&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;de&quot;</span><span class="p">],</span>
+</span><a id="__codelineno-22-18" name="__codelineno-22-18"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Language must be one of: en, fr, es, it, de&quot;</span>
+</span><a id="__codelineno-22-19" name="__codelineno-22-19"></a><span class="hll"><span class="w">            </span><span class="p">},</span>
+</span><a id="__codelineno-22-20" name="__codelineno-22-20"></a><span class="hll"><span class="w">            </span><span class="nt">&quot;score&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><a id="__codelineno-22-21" name="__codelineno-22-21"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-22-22" name="__codelineno-22-22"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+</span><a id="__codelineno-22-23" name="__codelineno-22-23"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+</span><a id="__codelineno-22-24" name="__codelineno-22-24"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Score must be an integer with a value between 0 and 100&quot;</span>
+</span><a id="__codelineno-22-25" name="__codelineno-22-25"></a><span class="hll"><span class="w">            </span><span class="p">}</span>
+</span><a id="__codelineno-22-26" name="__codelineno-22-26"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-22-27" name="__codelineno-22-27"></a><span class="hll"><span class="w">        </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;greeting&quot;</span><span class="p">]</span>
+</span><a id="__codelineno-22-28" name="__codelineno-22-28"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-22-29" name="__codelineno-22-29"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">assets/schema_input.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-21-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-21-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-21-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-21-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-21-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-21-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-21-10">10</a></span>
-<span class="normal"><a href="#__codelineno-21-11">11</a></span>
-<span class="normal"><a href="#__codelineno-21-12">12</a></span>
-<span class="normal"><a href="#__codelineno-21-13">13</a></span>
-<span class="normal"><a href="#__codelineno-21-14">14</a></span>
-<span class="normal"><a href="#__codelineno-21-15">15</a></span>
-<span class="normal"><a href="#__codelineno-21-16">16</a></span>
-<span class="normal"><a href="#__codelineno-21-17">17</a></span>
-<span class="normal"><a href="#__codelineno-21-18">18</a></span>
-<span class="normal"><a href="#__codelineno-21-19">19</a></span>
-<span class="normal"><a href="#__codelineno-21-20">20</a></span>
-<span class="normal"><a href="#__codelineno-21-21">21</a></span>
-<span class="normal"><a href="#__codelineno-21-22">22</a></span>
-<span class="normal"><a href="#__codelineno-21-23">23</a></span>
-<span class="normal"><a href="#__codelineno-21-24">24</a></span>
-<span class="normal"><a href="#__codelineno-21-25">25</a></span>
-<span class="normal"><a href="#__codelineno-21-26">26</a></span>
-<span class="normal"><a href="#__codelineno-21-27">27</a></span>
-<span class="normal"><a href="#__codelineno-21-28">28</a></span>
-<span class="normal"><a href="#__codelineno-21-29">29</a></span>
-<span class="normal"><a href="#__codelineno-21-30">30</a></span>
-<span class="normal"><a href="#__codelineno-21-31">31</a></span>
-<span class="normal"><a href="#__codelineno-21-32">32</a></span>
-<span class="normal"><a href="#__codelineno-21-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="p">{</span>
-<a id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="w">    </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://json-schema.org/draft/2020-12/schema&quot;</span><span class="p">,</span>
-<a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="w">    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json&quot;</span><span class="p">,</span>
-<a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;core/hello pipeline - params.input schema&quot;</span><span class="p">,</span>
-<a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Schema for the file provided with params.input&quot;</span><span class="p">,</span>
-<a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
-<a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="w">    </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
-<a id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="w">        </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-21-10" name="__codelineno-21-10"></a><span class="hll"><span class="w">            </span><span class="nt">&quot;sample&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><a id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-21-12" name="__codelineno-21-12"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^\\S+$&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-21-13" name="__codelineno-21-13"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sample name must be provided and cannot contain spaces&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;meta&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
-</span><a id="__codelineno-21-15" name="__codelineno-21-15"></a><span class="hll"><span class="w">            </span><span class="p">},</span>
-</span><a id="__codelineno-21-16" name="__codelineno-21-16"></a><span class="hll"><span class="w">            </span><span class="nt">&quot;fastq_1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><a id="__codelineno-21-17" name="__codelineno-21-17"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-21-18" name="__codelineno-21-18"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file-path&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-21-19" name="__codelineno-21-19"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;exists&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-</span><a id="__codelineno-21-20" name="__codelineno-21-20"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-21-21" name="__codelineno-21-21"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FastQ file for reads 1 must be provided, cannot contain spaces and must have extension &#39;.fq.gz&#39; or &#39;.fastq.gz&#39;&quot;</span>
-</span><a id="__codelineno-21-22" name="__codelineno-21-22"></a><span class="hll"><span class="w">            </span><span class="p">},</span>
-</span><a id="__codelineno-21-23" name="__codelineno-21-23"></a><span class="hll"><span class="w">            </span><span class="nt">&quot;fastq_2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><a id="__codelineno-21-24" name="__codelineno-21-24"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-21-25" name="__codelineno-21-25"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file-path&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-21-26" name="__codelineno-21-26"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;exists&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-</span><a id="__codelineno-21-27" name="__codelineno-21-27"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$&quot;</span><span class="p">,</span>
-</span><a id="__codelineno-21-28" name="__codelineno-21-28"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FastQ file for reads 2 cannot contain spaces and must have extension &#39;.fq.gz&#39; or &#39;.fastq.gz&#39;&quot;</span>
-</span><a id="__codelineno-21-29" name="__codelineno-21-29"></a><span class="hll"><span class="w">            </span><span class="p">}</span>
-</span><a id="__codelineno-21-30" name="__codelineno-21-30"></a><span class="w">        </span><span class="p">},</span>
-<a id="__codelineno-21-31" name="__codelineno-21-31"></a><span class="hll"><span class="w">        </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;fastq_1&quot;</span><span class="p">]</span>
-</span><a id="__codelineno-21-32" name="__codelineno-21-32"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-21-33" name="__codelineno-21-33"></a><span class="p">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">assets/schema_input.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-23-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-23-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-23-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-23-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-23-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-23-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-23-10">10</a></span>
+<span class="normal"><a href="#__codelineno-23-11">11</a></span>
+<span class="normal"><a href="#__codelineno-23-12">12</a></span>
+<span class="normal"><a href="#__codelineno-23-13">13</a></span>
+<span class="normal"><a href="#__codelineno-23-14">14</a></span>
+<span class="normal"><a href="#__codelineno-23-15">15</a></span>
+<span class="normal"><a href="#__codelineno-23-16">16</a></span>
+<span class="normal"><a href="#__codelineno-23-17">17</a></span>
+<span class="normal"><a href="#__codelineno-23-18">18</a></span>
+<span class="normal"><a href="#__codelineno-23-19">19</a></span>
+<span class="normal"><a href="#__codelineno-23-20">20</a></span>
+<span class="normal"><a href="#__codelineno-23-21">21</a></span>
+<span class="normal"><a href="#__codelineno-23-22">22</a></span>
+<span class="normal"><a href="#__codelineno-23-23">23</a></span>
+<span class="normal"><a href="#__codelineno-23-24">24</a></span>
+<span class="normal"><a href="#__codelineno-23-25">25</a></span>
+<span class="normal"><a href="#__codelineno-23-26">26</a></span>
+<span class="normal"><a href="#__codelineno-23-27">27</a></span>
+<span class="normal"><a href="#__codelineno-23-28">28</a></span>
+<span class="normal"><a href="#__codelineno-23-29">29</a></span>
+<span class="normal"><a href="#__codelineno-23-30">30</a></span>
+<span class="normal"><a href="#__codelineno-23-31">31</a></span>
+<span class="normal"><a href="#__codelineno-23-32">32</a></span>
+<span class="normal"><a href="#__codelineno-23-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="p">{</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="w">    </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://json-schema.org/draft/2020-12/schema&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="w">    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;core/hello pipeline - params.input schema&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Schema for the file provided with params.input&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6"></a><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7"></a><span class="w">    </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8"></a><span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="w">        </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10"></a><span class="hll"><span class="w">            </span><span class="nt">&quot;sample&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><a id="__codelineno-23-11" name="__codelineno-23-11"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^\\S+$&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-23-13" name="__codelineno-23-13"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sample name must be provided and cannot contain spaces&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-23-14" name="__codelineno-23-14"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;meta&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+</span><a id="__codelineno-23-15" name="__codelineno-23-15"></a><span class="hll"><span class="w">            </span><span class="p">},</span>
+</span><a id="__codelineno-23-16" name="__codelineno-23-16"></a><span class="hll"><span class="w">            </span><span class="nt">&quot;fastq_1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><a id="__codelineno-23-17" name="__codelineno-23-17"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-23-18" name="__codelineno-23-18"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file-path&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-23-19" name="__codelineno-23-19"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;exists&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><a id="__codelineno-23-20" name="__codelineno-23-20"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-23-21" name="__codelineno-23-21"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FastQ file for reads 1 must be provided, cannot contain spaces and must have extension &#39;.fq.gz&#39; or &#39;.fastq.gz&#39;&quot;</span>
+</span><a id="__codelineno-23-22" name="__codelineno-23-22"></a><span class="hll"><span class="w">            </span><span class="p">},</span>
+</span><a id="__codelineno-23-23" name="__codelineno-23-23"></a><span class="hll"><span class="w">            </span><span class="nt">&quot;fastq_2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><a id="__codelineno-23-24" name="__codelineno-23-24"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-23-25" name="__codelineno-23-25"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file-path&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-23-26" name="__codelineno-23-26"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;exists&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><a id="__codelineno-23-27" name="__codelineno-23-27"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$&quot;</span><span class="p">,</span>
+</span><a id="__codelineno-23-28" name="__codelineno-23-28"></a><span class="hll"><span class="w">                </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FastQ file for reads 2 cannot contain spaces and must have extension &#39;.fq.gz&#39; or &#39;.fastq.gz&#39;&quot;</span>
+</span><a id="__codelineno-23-29" name="__codelineno-23-29"></a><span class="hll"><span class="w">            </span><span class="p">}</span>
+</span><a id="__codelineno-23-30" name="__codelineno-23-30"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-23-31" name="__codelineno-23-31"></a><span class="hll"><span class="w">        </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;fastq_1&quot;</span><span class="p">]</span>
+</span><a id="__codelineno-23-32" name="__codelineno-23-32"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-23-33" name="__codelineno-23-33"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -4923,24 +4938,24 @@ Nous devons le remplacer par un schéma plus simple pour notre cas d'usage de sa
 <h3 id="24-ajouter-un-en-tete-au-fichier-greetingscsv">2.4. Ajouter un en-tête au fichier greetings.csv<a class="headerlink" href="#24-ajouter-un-en-tete-au-fichier-greetingscsv" title="Permanent link">&para;</a></h3>
 <p>Lorsque nf-schema lit un fichier CSV, il s'attend à ce que la première ligne contienne des en-têtes de colonnes qui correspondent aux noms de champs dans le schéma.</p>
 <p>Pour notre cas simple, nous devons ajouter une ligne d'en-tête à notre fichier de salutations :</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Après</label><label for="__tabbed_3_2">Avant</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Après</label><label for="__tabbed_4_2">Avant</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">assets/greetings.csv</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
-<span class="normal"><a href="#__codelineno-22-2">2</a></span>
-<span class="normal"><a href="#__codelineno-22-3">3</a></span>
-<span class="normal"><a href="#__codelineno-22-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="hll">greeting,language,score
-</span><a id="__codelineno-22-2" name="__codelineno-22-2"></a>Hello,en,87
-<a id="__codelineno-22-3" name="__codelineno-22-3"></a>Bonjour,fr,96
-<a id="__codelineno-22-4" name="__codelineno-22-4"></a>Hola,es,98
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">assets/greetings.csv</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1">1</a></span>
+<span class="normal"><a href="#__codelineno-24-2">2</a></span>
+<span class="normal"><a href="#__codelineno-24-3">3</a></span>
+<span class="normal"><a href="#__codelineno-24-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="hll">greeting,language,score
+</span><a id="__codelineno-24-2" name="__codelineno-24-2"></a>Hello,en,87
+<a id="__codelineno-24-3" name="__codelineno-24-3"></a>Bonjour,fr,96
+<a id="__codelineno-24-4" name="__codelineno-24-4"></a>Hola,es,98
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">assets/greetings.csv</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span>
-<span class="normal"><a href="#__codelineno-23-2">2</a></span>
-<span class="normal"><a href="#__codelineno-23-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a>Hello,en,87
-<a id="__codelineno-23-2" name="__codelineno-23-2"></a>Bonjour,fr,96
-<a id="__codelineno-23-3" name="__codelineno-23-3"></a>Hola,es,98
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">assets/greetings.csv</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span>
+<span class="normal"><a href="#__codelineno-25-2">2</a></span>
+<span class="normal"><a href="#__codelineno-25-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1"></a>Hello,en,87
+<a id="__codelineno-25-2" name="__codelineno-25-2"></a>Bonjour,fr,96
+<a id="__codelineno-25-3" name="__codelineno-25-3"></a>Hola,es,98
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -4965,83 +4980,83 @@ Nous devons le remplacer par un schéma plus simple pour notre cas d'usage de sa
 <li>Extraire uniquement les chaînes de salutation pour notre workflow</li>
 </ol>
 <p>D'abord, notez que la fonction <code>samplesheetToList</code> est déjà importée en haut du fichier (le modèle nf-core l'inclut par défaut) :</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-24-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-24-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-24-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-24-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-24-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-24-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-24-10">10</a></span>
-<span class="normal"><a href="#__codelineno-24-11">11</a></span>
-<span class="normal"><a href="#__codelineno-24-12">12</a></span>
-<span class="normal"><a href="#__codelineno-24-13">13</a></span>
-<span class="normal"><a href="#__codelineno-24-14">14</a></span>
-<span class="normal"><a href="#__codelineno-24-15">15</a></span>
-<span class="normal"><a href="#__codelineno-24-16">16</a></span>
-<span class="normal"><a href="#__codelineno-24-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="c1">//</span>
-<a id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="c1">// Sous-workflow avec des fonctionnalités spécifiques au pipeline core/hello</span>
-<a id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="c1">//</span>
-<a id="__codelineno-24-4" name="__codelineno-24-4"></a>
-<a id="__codelineno-24-5" name="__codelineno-24-5"></a><span class="cm">/*</span>
-<a id="__codelineno-24-6" name="__codelineno-24-6"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-<a id="__codelineno-24-7" name="__codelineno-24-7"></a><span class="cm">    IMPORT DES FONCTIONS / MODULES / SOUS-WORKFLOWS</span>
-<a id="__codelineno-24-8" name="__codelineno-24-8"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-<a id="__codelineno-24-9" name="__codelineno-24-9"></a><span class="cm">*/</span>
-<a id="__codelineno-24-10" name="__codelineno-24-10"></a>
-<a id="__codelineno-24-11" name="__codelineno-24-11"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">UTILS_NFSCHEMA_PLUGIN</span><span class="w">     </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../../nf-core/utils_nfschema_plugin&#39;</span>
-<a id="__codelineno-24-12" name="__codelineno-24-12"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">paramsSummaryMap</span><span class="w">          </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;plugin/nf-schema&#39;</span>
-<a id="__codelineno-24-13" name="__codelineno-24-13"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">samplesheetToList</span><span class="w">         </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;plugin/nf-schema&#39;</span>
-</span><a id="__codelineno-24-14" name="__codelineno-24-14"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">paramsHelp</span><span class="w">                </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;plugin/nf-schema&#39;</span>
-<a id="__codelineno-24-15" name="__codelineno-24-15"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">completionSummary</span><span class="w">         </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../../nf-core/utils_nfcore_pipeline&#39;</span>
-<a id="__codelineno-24-16" name="__codelineno-24-16"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">UTILS_NFCORE_PIPELINE</span><span class="w">     </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../../nf-core/utils_nfcore_pipeline&#39;</span>
-<a id="__codelineno-24-17" name="__codelineno-24-17"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">UTILS_NEXTFLOW_PIPELINE</span><span class="w">   </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../../nf-core/utils_nextflow_pipeline&#39;</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-26-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-26-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-26-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-26-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-26-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-26-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-26-10">10</a></span>
+<span class="normal"><a href="#__codelineno-26-11">11</a></span>
+<span class="normal"><a href="#__codelineno-26-12">12</a></span>
+<span class="normal"><a href="#__codelineno-26-13">13</a></span>
+<span class="normal"><a href="#__codelineno-26-14">14</a></span>
+<span class="normal"><a href="#__codelineno-26-15">15</a></span>
+<span class="normal"><a href="#__codelineno-26-16">16</a></span>
+<span class="normal"><a href="#__codelineno-26-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="c1">//</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2"></a><span class="c1">// Sous-workflow avec des fonctionnalités spécifiques au pipeline core/hello</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3"></a><span class="c1">//</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4"></a>
+<a id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="cm">/*</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7"></a><span class="cm">    IMPORT DES FONCTIONS / MODULES / SOUS-WORKFLOWS</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9"></a><span class="cm">*/</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10"></a>
+<a id="__codelineno-26-11" name="__codelineno-26-11"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">UTILS_NFSCHEMA_PLUGIN</span><span class="w">     </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../../nf-core/utils_nfschema_plugin&#39;</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">paramsSummaryMap</span><span class="w">          </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;plugin/nf-schema&#39;</span>
+<a id="__codelineno-26-13" name="__codelineno-26-13"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">samplesheetToList</span><span class="w">         </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;plugin/nf-schema&#39;</span>
+</span><a id="__codelineno-26-14" name="__codelineno-26-14"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">paramsHelp</span><span class="w">                </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;plugin/nf-schema&#39;</span>
+<a id="__codelineno-26-15" name="__codelineno-26-15"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">completionSummary</span><span class="w">         </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../../nf-core/utils_nfcore_pipeline&#39;</span>
+<a id="__codelineno-26-16" name="__codelineno-26-16"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">UTILS_NFCORE_PIPELINE</span><span class="w">     </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../../nf-core/utils_nfcore_pipeline&#39;</span>
+<a id="__codelineno-26-17" name="__codelineno-26-17"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">UTILS_NEXTFLOW_PIPELINE</span><span class="w">   </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../../nf-core/utils_nextflow_pipeline&#39;</span>
 </code></pre></div></td></tr></table></div>
 <p>Maintenant mettez à jour le code de création du canal :</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Après</label><label for="__tabbed_4_2">Avant</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Après</label><label for="__tabbed_5_2">Avant</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-80">80</a></span>
-<span class="normal"><a href="#__codelineno-25-81">81</a></span>
-<span class="normal"><a href="#__codelineno-25-82">82</a></span>
-<span class="normal"><a href="#__codelineno-25-83">83</a></span>
-<span class="normal"><a href="#__codelineno-25-84">84</a></span>
-<span class="normal"><a href="#__codelineno-25-85">85</a></span>
-<span class="normal"><a href="#__codelineno-25-86">86</a></span>
-<span class="normal"><a href="#__codelineno-25-87">87</a></span>
-<span class="normal"><a href="#__codelineno-25-88">88</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-80" name="__codelineno-25-80"></a><span class="w">    </span><span class="c1">//</span>
-<a id="__codelineno-25-81" name="__codelineno-25-81"></a><span class="w">    </span><span class="c1">// Crée un canal à partir du fichier d&#39;entrée fourni via params.input</span>
-<a id="__codelineno-25-82" name="__codelineno-25-82"></a><span class="w">    </span><span class="c1">//</span>
-<a id="__codelineno-25-83" name="__codelineno-25-83"></a><span class="hll"><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromList</span><span class="o">(</span><span class="n">samplesheetToList</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;${projectDir}/assets/schema_input.json&quot;</span><span class="o">))</span>
-</span><a id="__codelineno-25-84" name="__codelineno-25-84"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-25-85" name="__codelineno-25-85"></a>
-<a id="__codelineno-25-86" name="__codelineno-25-86"></a><span class="w">    </span><span class="nl">emit:</span>
-<a id="__codelineno-25-87" name="__codelineno-25-87"></a><span class="w">    </span><span class="n">samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_samplesheet</span>
-<a id="__codelineno-25-88" name="__codelineno-25-88"></a><span class="w">    </span><span class="n">versions</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-80">80</a></span>
+<span class="normal"><a href="#__codelineno-27-81">81</a></span>
+<span class="normal"><a href="#__codelineno-27-82">82</a></span>
+<span class="normal"><a href="#__codelineno-27-83">83</a></span>
+<span class="normal"><a href="#__codelineno-27-84">84</a></span>
+<span class="normal"><a href="#__codelineno-27-85">85</a></span>
+<span class="normal"><a href="#__codelineno-27-86">86</a></span>
+<span class="normal"><a href="#__codelineno-27-87">87</a></span>
+<span class="normal"><a href="#__codelineno-27-88">88</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-80" name="__codelineno-27-80"></a><span class="w">    </span><span class="c1">//</span>
+<a id="__codelineno-27-81" name="__codelineno-27-81"></a><span class="w">    </span><span class="c1">// Crée un canal à partir du fichier d&#39;entrée fourni via params.input</span>
+<a id="__codelineno-27-82" name="__codelineno-27-82"></a><span class="w">    </span><span class="c1">//</span>
+<a id="__codelineno-27-83" name="__codelineno-27-83"></a><span class="hll"><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromList</span><span class="o">(</span><span class="n">samplesheetToList</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;${projectDir}/assets/schema_input.json&quot;</span><span class="o">))</span>
+</span><a id="__codelineno-27-84" name="__codelineno-27-84"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-27-85" name="__codelineno-27-85"></a>
+<a id="__codelineno-27-86" name="__codelineno-27-86"></a><span class="w">    </span><span class="nl">emit:</span>
+<a id="__codelineno-27-87" name="__codelineno-27-87"></a><span class="w">    </span><span class="n">samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_samplesheet</span>
+<a id="__codelineno-27-88" name="__codelineno-27-88"></a><span class="w">    </span><span class="n">versions</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-80">80</a></span>
-<span class="normal"><a href="#__codelineno-26-81">81</a></span>
-<span class="normal"><a href="#__codelineno-26-82">82</a></span>
-<span class="normal"><a href="#__codelineno-26-83">83</a></span>
-<span class="normal"><a href="#__codelineno-26-84">84</a></span>
-<span class="normal"><a href="#__codelineno-26-85">85</a></span>
-<span class="normal"><a href="#__codelineno-26-86">86</a></span>
-<span class="normal"><a href="#__codelineno-26-87">87</a></span>
-<span class="normal"><a href="#__codelineno-26-88">88</a></span>
-<span class="normal"><a href="#__codelineno-26-89">89</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-80" name="__codelineno-26-80"></a><span class="w">    </span><span class="c1">//</span>
-<a id="__codelineno-26-81" name="__codelineno-26-81"></a><span class="w">    </span><span class="c1">// Crée un canal à partir du fichier d&#39;entrée fourni via params.input</span>
-<a id="__codelineno-26-82" name="__codelineno-26-82"></a><span class="w">    </span><span class="c1">//</span>
-<a id="__codelineno-26-83" name="__codelineno-26-83"></a><span class="hll"><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-</span><a id="__codelineno-26-84" name="__codelineno-26-84"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
-</span><a id="__codelineno-26-85" name="__codelineno-26-85"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-26-86" name="__codelineno-26-86"></a>
-<a id="__codelineno-26-87" name="__codelineno-26-87"></a><span class="w">    </span><span class="nl">emit:</span>
-<a id="__codelineno-26-88" name="__codelineno-26-88"></a><span class="w">    </span><span class="n">samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_samplesheet</span>
-<a id="__codelineno-26-89" name="__codelineno-26-89"></a><span class="w">    </span><span class="n">versions</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-80">80</a></span>
+<span class="normal"><a href="#__codelineno-28-81">81</a></span>
+<span class="normal"><a href="#__codelineno-28-82">82</a></span>
+<span class="normal"><a href="#__codelineno-28-83">83</a></span>
+<span class="normal"><a href="#__codelineno-28-84">84</a></span>
+<span class="normal"><a href="#__codelineno-28-85">85</a></span>
+<span class="normal"><a href="#__codelineno-28-86">86</a></span>
+<span class="normal"><a href="#__codelineno-28-87">87</a></span>
+<span class="normal"><a href="#__codelineno-28-88">88</a></span>
+<span class="normal"><a href="#__codelineno-28-89">89</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-80" name="__codelineno-28-80"></a><span class="w">    </span><span class="c1">//</span>
+<a id="__codelineno-28-81" name="__codelineno-28-81"></a><span class="w">    </span><span class="c1">// Crée un canal à partir du fichier d&#39;entrée fourni via params.input</span>
+<a id="__codelineno-28-82" name="__codelineno-28-82"></a><span class="w">    </span><span class="c1">//</span>
+<a id="__codelineno-28-83" name="__codelineno-28-83"></a><span class="hll"><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
+</span><a id="__codelineno-28-84" name="__codelineno-28-84"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
+</span><a id="__codelineno-28-85" name="__codelineno-28-85"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-28-86" name="__codelineno-28-86"></a>
+<a id="__codelineno-28-87" name="__codelineno-28-87"></a><span class="w">    </span><span class="nl">emit:</span>
+<a id="__codelineno-28-88" name="__codelineno-28-88"></a><span class="w">    </span><span class="n">samplesheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_samplesheet</span>
+<a id="__codelineno-28-89" name="__codelineno-28-89"></a><span class="w">    </span><span class="n">versions</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5055,28 +5070,28 @@ Nous devons le remplacer par un schéma plus simple pour notre cas d'usage de sa
 <p>Maintenant que nous avons configuré le schéma de données d'entrée, nous pouvons supprimer le paramètre d'ignore temporaire que nous avons ajouté plus tôt.</p>
 <h3 id="26-reactiver-la-validation-des-entrees">2.6. Réactiver la validation des entrées<a class="headerlink" href="#26-reactiver-la-validation-des-entrees" title="Permanent link">&para;</a></h3>
 <p>Ouvrez <code>nextflow.config</code> et supprimez la ligne <code>ignoreParams</code> du bloc <code>validation</code> :</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Après</label><label for="__tabbed_5_2">Avant</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Après</label><label for="__tabbed_6_2">Avant</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-247">247</a></span>
-<span class="normal"><a href="#__codelineno-27-248">248</a></span>
-<span class="normal"><a href="#__codelineno-27-249">249</a></span>
-<span class="normal"><a href="#__codelineno-27-250">250</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-247" name="__codelineno-27-247"></a><span class="n">validation</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-27-248" name="__codelineno-27-248"></a><span class="w">    </span><span class="n">defaultIgnoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;genomes&quot;</span><span class="o">]</span>
-<a id="__codelineno-27-249" name="__codelineno-27-249"></a><span class="w">    </span><span class="n">monochromeLogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">monochrome_logs</span>
-<a id="__codelineno-27-250" name="__codelineno-27-250"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-252">252</a></span>
+<span class="normal"><a href="#__codelineno-29-253">253</a></span>
+<span class="normal"><a href="#__codelineno-29-254">254</a></span>
+<span class="normal"><a href="#__codelineno-29-255">255</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-252" name="__codelineno-29-252"></a><span class="n">validation</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-29-253" name="__codelineno-29-253"></a><span class="w">    </span><span class="n">defaultIgnoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;genomes&quot;</span><span class="o">]</span>
+<a id="__codelineno-29-254" name="__codelineno-29-254"></a><span class="w">    </span><span class="n">monochromeLogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">monochrome_logs</span>
+<a id="__codelineno-29-255" name="__codelineno-29-255"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-247">247</a></span>
-<span class="normal"><a href="#__codelineno-28-248">248</a></span>
-<span class="normal"><a href="#__codelineno-28-249">249</a></span>
-<span class="normal"><a href="#__codelineno-28-250">250</a></span>
-<span class="normal"><a href="#__codelineno-28-251">251</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-247" name="__codelineno-28-247"></a><span class="n">validation</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-28-248" name="__codelineno-28-248"></a><span class="w">    </span><span class="n">defaultIgnoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;genomes&quot;</span><span class="o">]</span>
-<a id="__codelineno-28-249" name="__codelineno-28-249"></a><span class="hll"><span class="w">    </span><span class="n">ignoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;input&#39;</span><span class="o">]</span>
-</span><a id="__codelineno-28-250" name="__codelineno-28-250"></a><span class="w">    </span><span class="n">monochromeLogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">monochrome_logs</span>
-<a id="__codelineno-28-251" name="__codelineno-28-251"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-252">252</a></span>
+<span class="normal"><a href="#__codelineno-30-253">253</a></span>
+<span class="normal"><a href="#__codelineno-30-254">254</a></span>
+<span class="normal"><a href="#__codelineno-30-255">255</a></span>
+<span class="normal"><a href="#__codelineno-30-256">256</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-252" name="__codelineno-30-252"></a><span class="n">validation</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-30-253" name="__codelineno-30-253"></a><span class="w">    </span><span class="n">defaultIgnoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;genomes&quot;</span><span class="o">]</span>
+<a id="__codelineno-30-254" name="__codelineno-30-254"></a><span class="hll"><span class="w">    </span><span class="n">ignoreParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;input&#39;</span><span class="o">]</span>
+</span><a id="__codelineno-30-255" name="__codelineno-30-255"></a><span class="w">    </span><span class="n">monochromeLogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">monochrome_logs</span>
+<a id="__codelineno-30-256" name="__codelineno-30-256"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5086,23 +5101,23 @@ Nous devons le remplacer par un schéma plus simple pour notre cas d'usage de sa
 <p>Vérifions que notre validation fonctionne en testant des entrées valides et invalides.</p>
 <h4 id="271-tester-avec-une-entree-valide">2.7.1. Tester avec une entrée valide<a class="headerlink" href="#271-tester-avec-une-entree-valide" title="Permanent link">&para;</a></h4>
 <p>D'abord, confirmez que le pipeline s'exécute avec succès avec une entrée valide.
-Notez que nous n'avons plus besoin de <code>--validate_params false</code> puisque la validation fonctionne !</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--outdir<span class="w"> </span>core-hello-results<span class="w"> </span>-profile<span class="w"> </span>test,docker
+Avec <code>validate_params = true</code> et le schéma d'entrée en place, la validation des paramètres et des données d'entrée s'exécutent désormais pour de vrai.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--outdir<span class="w"> </span>core-hello-results<span class="w"> </span>-profile<span class="w"> </span>test,docker
 </code></pre></div>
 <details class="success">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="go">------------------------------------------------------</span>
-<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="go">WARN: The following invalid input values have been detected:</span>
-<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>
-<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="go">* --character: tux</span>
-<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>
-<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a>
-<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="go">executor &gt;  local (8)</span>
-<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="go">[c1/39f64a] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔</span>
-<a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a><span class="go">[44/c3fb82] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔</span>
-<a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a><span class="go">[62/80fab2] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔</span>
-<a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a><span class="go">[e1/4db4fd] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔</span>
-<a id="__codelineno-30-12" name="__codelineno-30-12" href="#__codelineno-30-12"></a><span class="go">-[core/hello] Pipeline completed successfully-</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="go">------------------------------------------------------</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="go">WARN: The following invalid input values have been detected:</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="go">* --character: tux</span>
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>
+<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a>
+<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="go">executor &gt;  local (8)</span>
+<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="go">[c1/39f64a] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔</span>
+<a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a><span class="go">[44/c3fb82] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔</span>
+<a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a><span class="go">[62/80fab2] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔</span>
+<a id="__codelineno-32-11" name="__codelineno-32-11" href="#__codelineno-32-11"></a><span class="go">[e1/4db4fd] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔</span>
+<a id="__codelineno-32-12" name="__codelineno-32-12" href="#__codelineno-32-12"></a><span class="go">-[core/hello] Pipeline completed successfully-</span>
 </code></pre></div>
 </details>
 <p>Excellent ! Le pipeline s'exécute avec succès et la validation se passe silencieusement.
@@ -5111,74 +5126,74 @@ Si vous le souhaitez, utilisez ce que vous avez appris pour ajouter également l
 <h4 id="272-tester-avec-une-entree-invalide">2.7.2. Tester avec une entrée invalide<a class="headerlink" href="#272-tester-avec-une-entree-invalide" title="Permanent link">&para;</a></h4>
 <p>Réussir la validation est toujours une bonne sensation, mais assurons-nous que la validation détectera réellement les erreurs.</p>
 <p>Pour créer un fichier de test avec un nom de colonne invalide, commencez par faire une copie du fichier <code>greetings.csv</code> :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>cp<span class="w"> </span>assets/greetings.csv<span class="w"> </span>assets/invalid_greetings.csv
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>cp<span class="w"> </span>assets/greetings.csv<span class="w"> </span>assets/invalid_greetings.csv
 </code></pre></div>
 <p>Maintenant ouvrez le fichier et changez le nom de la première colonne, dans la ligne d'en-tête, de <code>greeting</code> à <code>message</code> :</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Après</label><label for="__tabbed_6_2">Avant</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Après</label><label for="__tabbed_7_2">Avant</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tmp_invalid_greetings.csv</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1">1</a></span>
-<span class="normal"><a href="#__codelineno-32-2">2</a></span>
-<span class="normal"><a href="#__codelineno-32-3">3</a></span>
-<span class="normal"><a href="#__codelineno-32-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1"></a><span class="hll">message,language,score
-</span><a id="__codelineno-32-2" name="__codelineno-32-2"></a>Hello,en,87
-<a id="__codelineno-32-3" name="__codelineno-32-3"></a>Bonjour,fr,96
-<a id="__codelineno-32-4" name="__codelineno-32-4"></a>Hola,es,98
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tmp_invalid_greetings.csv</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1">1</a></span>
+<span class="normal"><a href="#__codelineno-34-2">2</a></span>
+<span class="normal"><a href="#__codelineno-34-3">3</a></span>
+<span class="normal"><a href="#__codelineno-34-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1"></a><span class="hll">message,language,score
+</span><a id="__codelineno-34-2" name="__codelineno-34-2"></a>Hello,en,87
+<a id="__codelineno-34-3" name="__codelineno-34-3"></a>Bonjour,fr,96
+<a id="__codelineno-34-4" name="__codelineno-34-4"></a>Hola,es,98
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tmp_invalid_greetings.csv</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1">1</a></span>
-<span class="normal"><a href="#__codelineno-33-2">2</a></span>
-<span class="normal"><a href="#__codelineno-33-3">3</a></span>
-<span class="normal"><a href="#__codelineno-33-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="hll">greeting,language,score
-</span><a id="__codelineno-33-2" name="__codelineno-33-2"></a>Hello,en,87
-<a id="__codelineno-33-3" name="__codelineno-33-3"></a>Bonjour,fr,96
-<a id="__codelineno-33-4" name="__codelineno-33-4"></a>Hola,es,98
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tmp_invalid_greetings.csv</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1">1</a></span>
+<span class="normal"><a href="#__codelineno-35-2">2</a></span>
+<span class="normal"><a href="#__codelineno-35-3">3</a></span>
+<span class="normal"><a href="#__codelineno-35-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1"></a><span class="hll">greeting,language,score
+</span><a id="__codelineno-35-2" name="__codelineno-35-2"></a>Hello,en,87
+<a id="__codelineno-35-3" name="__codelineno-35-3"></a>Bonjour,fr,96
+<a id="__codelineno-35-4" name="__codelineno-35-4"></a>Hola,es,98
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
 <p>Cela ne correspond pas à notre schéma, donc la validation devrait générer une erreur.</p>
 <p>Essayez d'exécuter le pipeline avec cette entrée invalide :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--input<span class="w"> </span>assets/invalid_greetings.csv<span class="w"> </span>--outdir<span class="w"> </span>test-results<span class="w"> </span>-profile<span class="w"> </span>docker
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--input<span class="w"> </span>assets/invalid_greetings.csv<span class="w"> </span>--outdir<span class="w"> </span>test-results<span class="w"> </span>-profile<span class="w"> </span>docker
 </code></pre></div>
 <details class="failure">
 <summary>Sortie de la commande</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
-<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
-<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">Launching `./main.nf` [trusting_ochoa] DSL2 - revision: b9e9b3b8de</span>
-<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>
-<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="go">Input/output options</span>
-<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="go">  input              : assets/invalid_greetings.csv</span>
-<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="go">  outdir             : test-results</span>
-<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a>
-<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="go">Generic options</span>
-<a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a><span class="go">  trace_report_suffix: 2025-11-21_07-35-12</span>
-<a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a>
-<a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a><span class="go">Core Nextflow options</span>
-<a id="__codelineno-35-13" name="__codelineno-35-13" href="#__codelineno-35-13"></a><span class="go">  runName            : trusting_ochoa</span>
-<a id="__codelineno-35-14" name="__codelineno-35-14" href="#__codelineno-35-14"></a><span class="go">  containerEngine    : docker</span>
-<a id="__codelineno-35-15" name="__codelineno-35-15" href="#__codelineno-35-15"></a><span class="go">  launchDir          : /workspaces/training/hello-nf-core/core-hello</span>
-<a id="__codelineno-35-16" name="__codelineno-35-16" href="#__codelineno-35-16"></a><span class="go">  workDir            : /workspaces/training/hello-nf-core/core-hello/work</span>
-<a id="__codelineno-35-17" name="__codelineno-35-17" href="#__codelineno-35-17"></a><span class="go">  projectDir         : /workspaces/training/hello-nf-core/core-hello</span>
-<a id="__codelineno-35-18" name="__codelineno-35-18" href="#__codelineno-35-18"></a><span class="go">  userName           : root</span>
-<a id="__codelineno-35-19" name="__codelineno-35-19" href="#__codelineno-35-19"></a><span class="go">  profile            : docker</span>
-<a id="__codelineno-35-20" name="__codelineno-35-20" href="#__codelineno-35-20"></a><span class="go">  configFiles        : /workspaces/training/hello-nf-core/core-hello/nextflow.config</span>
-<a id="__codelineno-35-21" name="__codelineno-35-21" href="#__codelineno-35-21"></a>
-<a id="__codelineno-35-22" name="__codelineno-35-22" href="#__codelineno-35-22"></a><span class="go">!! Only displaying parameters that differ from the pipeline defaults !!</span>
-<a id="__codelineno-35-23" name="__codelineno-35-23" href="#__codelineno-35-23"></a><span class="go">------------------------------------------------------</span>
-<a id="__codelineno-35-24" name="__codelineno-35-24" href="#__codelineno-35-24"></a><span class="go">ERROR ~ Validation of pipeline parameters failed!</span>
-<a id="__codelineno-35-25" name="__codelineno-35-25" href="#__codelineno-35-25"></a>
-<a id="__codelineno-35-26" name="__codelineno-35-26" href="#__codelineno-35-26"></a><span class="go"> -- Check &#39;.nextflow.log&#39; file for details</span>
-<a id="__codelineno-35-27" name="__codelineno-35-27" href="#__codelineno-35-27"></a><span class="go">The following invalid input values have been detected:</span>
-<a id="__codelineno-35-28" name="__codelineno-35-28" href="#__codelineno-35-28"></a>
-<a id="__codelineno-35-29" name="__codelineno-35-29" href="#__codelineno-35-29"></a><span class="go">* Missing required parameter(s): batch</span>
-<a id="__codelineno-35-30" name="__codelineno-35-30" href="#__codelineno-35-30"></a><span class="go">* --input (assets/invalid_greetings.csv): Validation of file failed:</span>
-<a id="__codelineno-35-31" name="__codelineno-35-31" href="#__codelineno-35-31"></a><span class="go">    -&gt; Entry 1: Missing required field(s): greeting</span>
-<a id="__codelineno-35-32" name="__codelineno-35-32" href="#__codelineno-35-32"></a><span class="go">    -&gt; Entry 2: Missing required field(s): greeting</span>
-<a id="__codelineno-35-33" name="__codelineno-35-33" href="#__codelineno-35-33"></a><span class="go">    -&gt; Entry 3: Missing required field(s): greeting</span>
-<a id="__codelineno-35-34" name="__codelineno-35-34" href="#__codelineno-35-34"></a>
-<a id="__codelineno-35-35" name="__codelineno-35-35" href="#__codelineno-35-35"></a><span class="go"> -- Check script &#39;subworkflows/nf-core/utils_nfschema_plugin/main.nf&#39; at line: 68 or see &#39;.nextflow.log&#39; file for more details</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="go">Launching `./main.nf` [trusting_ochoa] revision: b9e9b3b8de</span>
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>
+<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="go">Input/output options</span>
+<a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a><span class="go">  input              : assets/invalid_greetings.csv</span>
+<a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a><span class="go">  outdir             : test-results</span>
+<a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a>
+<a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a><span class="go">Generic options</span>
+<a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a><span class="go">  trace_report_suffix: 2025-11-21_07-35-12</span>
+<a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a>
+<a id="__codelineno-37-12" name="__codelineno-37-12" href="#__codelineno-37-12"></a><span class="go">Core Nextflow options</span>
+<a id="__codelineno-37-13" name="__codelineno-37-13" href="#__codelineno-37-13"></a><span class="go">  runName            : trusting_ochoa</span>
+<a id="__codelineno-37-14" name="__codelineno-37-14" href="#__codelineno-37-14"></a><span class="go">  containerEngine    : docker</span>
+<a id="__codelineno-37-15" name="__codelineno-37-15" href="#__codelineno-37-15"></a><span class="go">  launchDir          : /workspaces/training/hello-nf-core/core-hello</span>
+<a id="__codelineno-37-16" name="__codelineno-37-16" href="#__codelineno-37-16"></a><span class="go">  workDir            : /workspaces/training/hello-nf-core/core-hello/work</span>
+<a id="__codelineno-37-17" name="__codelineno-37-17" href="#__codelineno-37-17"></a><span class="go">  projectDir         : /workspaces/training/hello-nf-core/core-hello</span>
+<a id="__codelineno-37-18" name="__codelineno-37-18" href="#__codelineno-37-18"></a><span class="go">  userName           : root</span>
+<a id="__codelineno-37-19" name="__codelineno-37-19" href="#__codelineno-37-19"></a><span class="go">  profile            : docker</span>
+<a id="__codelineno-37-20" name="__codelineno-37-20" href="#__codelineno-37-20"></a><span class="go">  configFiles        : /workspaces/training/hello-nf-core/core-hello/nextflow.config</span>
+<a id="__codelineno-37-21" name="__codelineno-37-21" href="#__codelineno-37-21"></a>
+<a id="__codelineno-37-22" name="__codelineno-37-22" href="#__codelineno-37-22"></a><span class="go">!! Only displaying parameters that differ from the pipeline defaults !!</span>
+<a id="__codelineno-37-23" name="__codelineno-37-23" href="#__codelineno-37-23"></a><span class="go">------------------------------------------------------</span>
+<a id="__codelineno-37-24" name="__codelineno-37-24" href="#__codelineno-37-24"></a><span class="go">ERROR ~ Validation of pipeline parameters failed!</span>
+<a id="__codelineno-37-25" name="__codelineno-37-25" href="#__codelineno-37-25"></a>
+<a id="__codelineno-37-26" name="__codelineno-37-26" href="#__codelineno-37-26"></a><span class="go"> -- Check &#39;.nextflow.log&#39; file for details</span>
+<a id="__codelineno-37-27" name="__codelineno-37-27" href="#__codelineno-37-27"></a><span class="go">The following invalid input values have been detected:</span>
+<a id="__codelineno-37-28" name="__codelineno-37-28" href="#__codelineno-37-28"></a>
+<a id="__codelineno-37-29" name="__codelineno-37-29" href="#__codelineno-37-29"></a><span class="go">* Missing required parameter(s): batch</span>
+<a id="__codelineno-37-30" name="__codelineno-37-30" href="#__codelineno-37-30"></a><span class="go">* --input (assets/invalid_greetings.csv): Validation of file failed:</span>
+<a id="__codelineno-37-31" name="__codelineno-37-31" href="#__codelineno-37-31"></a><span class="go">    -&gt; Entry 1: Missing required field(s): greeting</span>
+<a id="__codelineno-37-32" name="__codelineno-37-32" href="#__codelineno-37-32"></a><span class="go">    -&gt; Entry 2: Missing required field(s): greeting</span>
+<a id="__codelineno-37-33" name="__codelineno-37-33" href="#__codelineno-37-33"></a><span class="go">    -&gt; Entry 3: Missing required field(s): greeting</span>
+<a id="__codelineno-37-34" name="__codelineno-37-34" href="#__codelineno-37-34"></a>
+<a id="__codelineno-37-35" name="__codelineno-37-35" href="#__codelineno-37-35"></a><span class="go"> -- Check script &#39;subworkflows/nf-core/utils_nfschema_plugin/main.nf&#39; at line: 68 or see &#39;.nextflow.log&#39; file for more details</span>
 </code></pre></div>
 </details>
 <p>Parfait ! La validation a détecté l'erreur et fourni un message d'erreur clair et utile indiquant :</p>

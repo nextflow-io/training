@@ -2347,10 +2347,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#proximos-passos" class="md-nav__link">
+  <a href="#o-que-vem-a-seguir" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Próximos passos
+        O que vem a seguir?
       
     </span>
   </a>
@@ -2406,7 +2406,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#proximos-passos_1" class="md-nav__link">
+  <a href="#proximos-passos" class="md-nav__link">
     <span class="md-ellipsis">
       
         Próximos passos
@@ -2465,7 +2465,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#proximos-passos_2" class="md-nav__link">
+  <a href="#proximos-passos_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Próximos passos
@@ -2535,7 +2535,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#proximos-passos_3" class="md-nav__link">
+  <a href="#proximos-passos_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         Próximos passos
@@ -2561,7 +2561,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#o-que-vem-a-seguir" class="md-nav__link">
+  <a href="#o-que-vem-a-seguir_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         O que vem a seguir?
@@ -3098,7 +3098,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Testando com nf-test
   
 
     
@@ -4042,10 +4042,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#proximos-passos" class="md-nav__link">
+  <a href="#o-que-vem-a-seguir" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Próximos passos
+        O que vem a seguir?
       
     </span>
   </a>
@@ -4101,7 +4101,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#proximos-passos_1" class="md-nav__link">
+  <a href="#proximos-passos" class="md-nav__link">
     <span class="md-ellipsis">
       
         Próximos passos
@@ -4160,7 +4160,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#proximos-passos_2" class="md-nav__link">
+  <a href="#proximos-passos_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Próximos passos
@@ -4230,7 +4230,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#proximos-passos_3" class="md-nav__link">
+  <a href="#proximos-passos_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         Próximos passos
@@ -4256,7 +4256,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#o-que-vem-a-seguir" class="md-nav__link">
+  <a href="#o-que-vem-a-seguir_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         O que vem a seguir?
@@ -4588,14 +4588,15 @@ Agora podemos combinar isso com o profile Docker integrado:</p>
 </ul>
 <p>Como estamos usando <code>-resume</code>, o Nextflow vai verificar se algo mudou desde a última execução.
 Se os parâmetros, entradas e código forem os mesmos, todas as tarefas serão recuperadas do cache e o pipeline será concluído quase instantaneamente.</p>
-<div class="highlight"><span class="filename">Output (excerpt)</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">executor &gt;  local (12)</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">...</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)               [100%] 2 of 2, cached: 2 ✔</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">...</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">-[nf-core/molkart] Pipeline completed successfully-</span>
+<div class="highlight"><span class="filename">Output (excerpt)</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">executor &gt;  local (1)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">[43/e03702] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2, cached: 2 ✔</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2, cached: 2 ✔</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">...</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3, cached: 3 ✔</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">[ef/d7b294] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">-[nf-core/molkart] Pipeline completed successfully-</span>
 </code></pre></div>
-<p>Note que todos os processos mostram <code>cached: 2</code> ou <code>cached: 1</code> - nada foi re-executado!</p>
+<p>Note a anotação <code>cached: N</code> em cada processo - as tarefas de pré-processamento e segmentação em cache não foram re-executadas.</p>
 <h3 id="24-profiles-de-teste">2.4. Profiles de teste<a class="headerlink" href="#24-profiles-de-teste" title="Permanent link">&para;</a></h3>
 <p>Profiles de teste fornecem maneiras rápidas de especificar parâmetros de entrada padrão e arquivos de dados para permitir que você verifique se o pipeline funciona.
 Pipelines nf-core sempre incluirão pelo menos dois profiles de teste:</p>
@@ -4644,7 +4645,7 @@ Vamos usar isso para testar nosso pipeline sem precisar do nosso arquivo params:
 <h3 id="conclusao">Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h3>
 <p>Pipelines nf-core vêm com profiles integrados para contêineres, testes e ambientes especiais.
 Você pode combinar múltiplos profiles para construir a configuração que precisa.</p>
-<h3 id="proximos-passos">Próximos passos<a class="headerlink" href="#proximos-passos" title="Permanent link">&para;</a></h3>
+<h3 id="o-que-vem-a-seguir">O que vem a seguir?<a class="headerlink" href="#o-que-vem-a-seguir" title="Permanent link">&para;</a></h3>
 <p>Aprenda como criar seus próprios profiles personalizados para diferentes ambientes de computação.</p>
 <hr />
 <h2 id="3-criando-profiles-personalizados">3. Criando profiles personalizados<a class="headerlink" href="#3-criando-profiles-personalizados" title="Permanent link">&para;</a></h2>
@@ -4698,7 +4699,7 @@ Mas isso mostra como você configuraria para uso no mundo real.</p>
 <h3 id="conclusao_1">Conclusão<a class="headerlink" href="#conclusao_1" title="Permanent link">&para;</a></h3>
 <p>Profiles personalizados permitem que você alterne entre diferentes ambientes de computação com uma única flag de linha de comando.
 Use <code>nextflow config</code> para inspecionar a configuração resolvida antes de executar.</p>
-<h3 id="proximos-passos_1">Próximos passos<a class="headerlink" href="#proximos-passos_1" title="Permanent link">&para;</a></h3>
+<h3 id="proximos-passos">Próximos passos<a class="headerlink" href="#proximos-passos" title="Permanent link">&para;</a></h3>
 <p>Aprenda como personalizar solicitações de recursos para processos individuais usando o sistema de process label do nf-core.</p>
 <hr />
 <h2 id="4-personalizando-solicitacoes-de-recursos">4. Personalizando solicitações de recursos<a class="headerlink" href="#4-personalizando-solicitacoes-de-recursos" title="Permanent link">&para;</a></h2>
@@ -4758,7 +4759,7 @@ Nomes de processos seguem o padrão <code>WORKFLOW:SUBWORKFLOW:PROCESS</code>.</
 <h3 id="conclusao_2">Conclusão<a class="headerlink" href="#conclusao_2" title="Permanent link">&para;</a></h3>
 <p>Pipelines nf-core usam process labels para padronizar a alocação de recursos.
 Você pode sobrescrever recursos por label (afeta múltiplos processos) ou por nome (afeta um processo específico).</p>
-<h3 id="proximos-passos_2">Próximos passos<a class="headerlink" href="#proximos-passos_2" title="Permanent link">&para;</a></h3>
+<h3 id="proximos-passos_1">Próximos passos<a class="headerlink" href="#proximos-passos_1" title="Permanent link">&para;</a></h3>
 <p>Aprenda como gerenciar limites de recursos em ambientes restritos como GitHub Codespaces.</p>
 <hr />
 <h2 id="5-gerenciando-recursos-em-ambientes-restritos">5. Gerenciando recursos em ambientes restritos<a class="headerlink" href="#5-gerenciando-recursos-em-ambientes-restritos" title="Permanent link">&para;</a></h2>
@@ -4805,7 +4806,7 @@ O pipeline pode precisar usar algoritmos menos intensivos em memória ou process
 <h3 id="conclusao_3">Conclusão<a class="headerlink" href="#conclusao_3" title="Permanent link">&para;</a></h3>
 <p>Use <code>resourceLimits</code> para executar pipelines em ambientes com recursos restritos limitando as solicitações de recursos dos processos.
 Diferentes profiles podem ter diferentes limites apropriados para seu ambiente.</p>
-<h3 id="proximos-passos_3">Próximos passos<a class="headerlink" href="#proximos-passos_3" title="Permanent link">&para;</a></h3>
+<h3 id="proximos-passos_2">Próximos passos<a class="headerlink" href="#proximos-passos_2" title="Permanent link">&para;</a></h3>
 <p>Você completou o treinamento principal de Nextflow para Bioimagem!</p>
 <hr />
 <h2 id="conclusao_4">Conclusão<a class="headerlink" href="#conclusao_4" title="Permanent link">&para;</a></h2>
@@ -4820,7 +4821,7 @@ Diferentes profiles podem ter diferentes limites apropriados para seu ambiente.<
 <li><strong>Inspeção de configuração</strong>: Usando <code>nextflow config</code> para depurar e verificar configurações</li>
 </ul>
 <p>Essas habilidades de configuração são transferíveis para qualquer pipeline Nextflow e ajudarão você a executar fluxos de trabalho de forma eficiente em máquinas locais, clusters HPC e plataformas de nuvem.</p>
-<h3 id="o-que-vem-a-seguir">O que vem a seguir?<a class="headerlink" href="#o-que-vem-a-seguir" title="Permanent link">&para;</a></h3>
+<h3 id="o-que-vem-a-seguir_1">O que vem a seguir?<a class="headerlink" href="#o-que-vem-a-seguir_1" title="Permanent link">&para;</a></h3>
 <p>Parabéns por completar o curso Nextflow para Bioimagem!</p>
 <p>Próximos passos:</p>
 <ul>

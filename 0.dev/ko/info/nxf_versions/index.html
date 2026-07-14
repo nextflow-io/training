@@ -3950,10 +3950,11 @@
 <h2 id="nextflow">현재 지원되는 Nextflow 문법 버전 및 요구 사항<a class="headerlink" href="#nextflow" title="Permanent link">&para;</a></h2>
 <p>교육 포털 버전 3.0부터, 과정 인덱스 페이지에 별도로 명시되지 않는 한 모든 교육 과정은 Nextflow 25.10.2 이상 버전과 호환됩니다.
 (더 이상 사용되지 않거나 아카이브된 자료는 버전 안내가 포함되지 않을 수 있습니다.)</p>
-<p>현재 교육 환경에서 기본으로 로드되는 Nextflow 버전은 <strong>Nextflow 25.10.4</strong>입니다.</p>
+<p>현재 교육 환경에서 기본으로 로드되는 Nextflow 버전은 <strong>Nextflow 26.04.4</strong>입니다.</p>
 <p>현재 과정에서는 워크플로우 수준의 타입이 지정된 입력과 워크플로우 수준의 출력 지시문을 사용하므로, <strong>별도로 명시된 경우가 아닌 한</strong> V2 문법 분석기가 필요합니다.
+V2 분석기는 Nextflow 26.04부터 기본값으로 설정되어 있으므로, 해당 버전을 사용하는 경우 수동으로 활성화할 필요가 없습니다.
 <a href="../../envsetup/01_setup/">Github Codespaces</a> 또는 <a href="../../envsetup/03_devcontainer/">로컬 devcontainer</a>를 통해 제공되는 환경을 사용할 계획이라면, 과정 안내에 별도로 명시된 경우가 아닌 한 추가 작업이 필요하지 않습니다.
-그러나 직접 구성한 환경(<a href="../../envsetup/02_local/">수동 설치</a>)에서 교육을 진행할 계획이라면, v2 문법 분석기가 활성화된 Nextflow 25.10.2 이상 버전을 사용해야 합니다.</p>
+그러나 직접 구성한 환경(<a href="../../envsetup/02_local/">수동 설치</a>)에서 교육을 진행할 계획이라면, Nextflow 25.10.2 이상 버전을 사용해야 하며, 26.04 이전 버전을 사용하는 경우 v2 문법 분석기를 직접 활성화해야 합니다.</p>
 <h2 id="_1">이전 버전의 교육 자료<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>교육 자료는 2025년 2월부터 버전 관리가 시작되었습니다.</p>
 <p><strong>25.10.2 이전</strong> Nextflow 버전과 호환되는 이전 교육 자료는 모든 페이지 상단의 드롭다운 메뉴에서 교육 자료의 버전 번호를 선택하여 접근할 수 있습니다.
@@ -3969,21 +3970,21 @@ DSL1은 Nextflow 22.03에서 더 이상 사용되지 않게 되었고, 22.12에�
 v1 분석기는 기존의 더 유연한 분석기입니다.
 v2 분석기는 더 엄격하며, 정적 타이핑(타입이 지정된 입력 및 출력)과 워크플로우 수준의 출력 지시문과 같은 새로운 언어 기능을 지원합니다.
 v2 분석기는 더 나은 오류 메시지를 제공하며, 런타임이 아닌 파싱 시점에 더 많은 오류를 감지합니다.
-v2 분석기는 Nextflow 26.04에서 기본값이 될 예정입니다.</p>
+v2 분석기는 Nextflow 26.04부터 기본값으로 설정됩니다.</p>
 <p>요약하면, DSL2는 작성하는 언어이고, 문법 분석기 버전은 해당 언어를 얼마나 엄격하게 해석하고 어떤 고급 기능을 사용할 수 있는지를 결정합니다.</p>
 <h3 id="nextflow_2">Nextflow 버전 확인 및 설정<a class="headerlink" href="#nextflow_2" title="Permanent link">&para;</a></h3>
 <p><code>nextflow --version</code> 명령어를 사용하여 시스템에 설치된 Nextflow 버전을 확인할 수 있습니다.</p>
 <p>Nextflow 버전 업데이트 방법에 대한 자세한 내용은 <a href="https://www.nextflow.io/docs/latest/updating-nextflow.html">Nextflow 업데이트</a> 참조 문서를 확인하세요.</p>
 <h3 id="v2">v2 문법 분석기 활성화<a class="headerlink" href="#v2" title="Permanent link">&para;</a></h3>
+<p>Nextflow 26.04부터는 v2 분석기가 기본값으로 설정되므로, 아래 단계는 26.04 이전 버전에서만 필요합니다.</p>
 <p>현재 세션에서 v2 문법 분석기를 <strong>활성화</strong>하려면 터미널에서 다음 명령어를 실행하세요:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v2
 </code></pre></div>
-<p>이 설정을 영구적으로 적용하려면(Nextflow 26.04에서 v2가 기본값이 될 때까지), 셸 프로파일(<code>~/.bashrc</code>, <code>~/.zshrc</code> 등)에 export 명령어를 추가하세요:</p>
+<p>이 설정을 영구적으로 적용하려면, 셸 프로파일(<code>~/.bashrc</code>, <code>~/.zshrc</code> 등)에 export 명령어를 추가하세요:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export NXF_SYNTAX_PARSER=v2&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">source</span><span class="w"> </span>~/.bashrc
 </code></pre></div>
-<p><code>NXF_SYNTAX_PARSER=v2</code> 환경 변수는 임시 요구 사항입니다.
-Nextflow 26.04부터는 v2 분석기가 기본값이 되므로 이 설정이 더 이상 필요하지 않습니다.</p>
+<p>26.04 이전 버전의 Nextflow에서는 이 과정에서 사용되는 v2 기능에 접근하기 위해 <code>NXF_SYNTAX_PARSER=v2</code> 환경 변수가 필요합니다.</p>
 <h3 id="v2_1">v2 문법 분석기 비활성화<a class="headerlink" href="#v2_1" title="Permanent link">&para;</a></h3>
 <p>현재 세션에서 v2 문법 분석기를 <strong>비활성화</strong>하려면 터미널에서 다음 명령어를 실행하세요:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v1

@@ -1257,34 +1257,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Requisits de versió">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#si-utilitzeu-el-nostre-entorn-de-formacio" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Si utilitzeu el nostre entorn de formació:
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#si-utilitzeu-un-entorn-local-o-personalitzat" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Si utilitzeu un entorn local o personalitzat:
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
       </ul>
@@ -3706,34 +3678,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Requisits de versió">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#si-utilitzeu-el-nostre-entorn-de-formacio" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Si utilitzeu el nostre entorn de formació:
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#si-utilitzeu-un-entorn-local-o-personalitzat" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Si utilitzeu un entorn local o personalitzat:
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
       </ul>
@@ -4019,27 +3963,28 @@ Haureu de mantenir aquestes instruccions obertes en paral·lel per treballar dur
 Totes les instruccions donades durant el curs (per exemple, "obriu el fitxer", "editeu el codi" o "executeu aquesta comanda") es refereixen a aquestes tres parts de la interfície VSCode tret que s'especifiqui el contrari.</p>
 <p>Si esteu treballant en aquest curs pel vostre compte, familiaritzeu-vos amb els <a href="../../envsetup/01_setup/">conceptes bàsics de l'entorn</a> per a més detalls.</p>
 <h3 id="requisits-de-versio">Requisits de versió<a class="headerlink" href="#requisits-de-versio" title="Permanent link">&para;</a></h3>
-<p>Aquesta formació està dissenyada per a <strong>Nextflow 25.10.2</strong> o posterior <strong>amb l'analitzador de sintaxi v2 DESACTIVAT</strong>.</p>
-<h4 id="si-utilitzeu-el-nostre-entorn-de-formacio">Si utilitzeu el nostre entorn de formació:<a class="headerlink" href="#si-utilitzeu-el-nostre-entorn-de-formacio" title="Permanent link">&para;</a></h4>
-<p>HEU d'executar la comanda següent abans de continuar:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v1
-</code></pre></div>
-<h4 id="si-utilitzeu-un-entorn-local-o-personalitzat">Si utilitzeu un entorn local o personalitzat:<a class="headerlink" href="#si-utilitzeu-un-entorn-local-o-personalitzat" title="Permanent link">&para;</a></h4>
-<p>Assegureu-vos que utilitzeu la configuració correcta tal com es documenta <a href="../../info/nxf_versions/">aquí</a>.</p>
-<p>La formació també requereix <strong>nf-core tools 3.5.2</strong>.
+<p>Aquesta formació funciona amb <strong>Nextflow 25.10.2</strong> o posterior <strong>amb l'analitzador de sintaxi v2</strong>, que és el valor per defecte a partir de Nextflow 26.04.
+Al nostre entorn de formació no cal fer res: s'executa Nextflow 26.04.4 amb l'analitzador v2. Si utilitzeu un entorn local o personalitzat, consulteu les <a href="../../info/nxf_versions/">notes de versió</a>.</p>
+<p>La formació també requereix <strong>nf-core tools 4.0.2</strong>.
 Si utilitzeu una versió diferent de les eines nf-core, podeu tenir dificultats per seguir el curs.</p>
 <p>Podeu comprovar quina versió està instal·lada al vostre entorn utilitzant la comanda <code>nf-core --version</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Compatibilitat amb l'analitzador v2</p>
+<p>Molts pipelines nf-core encara no admeten l'analitzador de sintaxi v2.
+Si executeu un pipeline nf-core diferent dels utilitzats en aquest curs i trobeu errors, és possible que hàgiu de canviar a l'analitzador v1 establint <code>export NXF_SYNTAX_PARSER=v1</code>.
+Consulteu les <a href="../../info/nxf_versions/">notes de versió</a> per a més detalls.</p>
+</div>
 <h2 id="prepareu-vos-per-treballar">Prepareu-vos per treballar<a class="headerlink" href="#prepareu-vos-per-treballar" title="Permanent link">&para;</a></h2>
 <p>Un cop el vostre codespace estigui en funcionament, hi ha dues coses que heu de fer abans d'endinsar-vos en la formació: establir el vostre directori de treball per a aquest curs específic i donar un cop d'ull als materials proporcionats.</p>
 <h3 id="establir-el-directori-de-treball">Establir el directori de treball<a class="headerlink" href="#establir-el-directori-de-treball" title="Permanent link">&para;</a></h3>
 <p>Per defecte, el codespace s'obre amb el directori de treball establert a l'arrel de tots els cursos de formació, però per a aquest curs, treballarem al directori <code>hello-nf-core/</code>.</p>
 <p>Canvieu de directori ara executant aquesta comanda al terminal:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>hello-nf-core/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>hello-nf-core/
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Consell</p>
 <p>Si per qualsevol motiu sortiu d'aquest directori (per exemple, el vostre codespace s'adorm), sempre podeu utilitzar el camí complet per tornar-hi, assumint que esteu executant això dins de l'entorn de formació de Github Codespaces:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>/workspaces/training/hello-nf-core
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>/workspaces/training/hello-nf-core
 </code></pre></div>
 </div>
 <p>A continuació, exploreu el contingut d'aquest directori.</p>
@@ -4048,23 +3993,26 @@ Si utilitzeu una versió diferent de les eines nf-core, podeu tenir dificultats 
 Alternativament, podeu utilitzar la comanda <code>tree</code>.</p>
 <p>Durant el curs, utilitzem la sortida de <code>tree</code> per representar l'estructura i el contingut del directori de forma llegible, de vegades amb modificacions menors per claredat.</p>
 <p>Aquí generem una taula de continguts fins al segon nivell:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>tree<span class="w"> </span>.<span class="w"> </span>-L<span class="w"> </span><span class="m">2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>tree<span class="w"> </span>.<span class="w"> </span>-L<span class="w"> </span><span class="m">2</span>
 </code></pre></div>
 <details class="abstract">
 <summary>Contingut del directori</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">.</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">├── greetings.csv</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">├── original-hello</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">│   ├── hello.nf</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">│   ├── modules</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">│   └── nextflow.config</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">└── solutions</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="go">    ├── composable-hello</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="go">    ├── core-hello-part2</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="go">    ├── core-hello-part3</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="go">    ├── core-hello-part4</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="go">    ├── core-hello-part5</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="go">    └── core-hello-start</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">.</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="go">├── custom.config</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">├── greetings.csv</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="go">├── malformed_samplesheet.csv</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="go">├── my_params.yml</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="go">├── original-hello</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="go">│   ├── hello.nf</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="go">│   ├── modules</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="go">│   └── nextflow.config</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="go">└── solutions</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="go">    ├── composable-hello</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="go">    ├── core-hello-part2</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="go">    ├── core-hello-part3</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="go">    ├── core-hello-part4</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="go">    ├── core-hello-part5</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="go">    └── core-hello-start</span>
 </code></pre></div>
 </details>
 <p>Feu clic a la caixa de color per expandir la secció i veure el seu contingut.
@@ -4072,6 +4020,15 @@ Utilitzem seccions desplegables com aquesta per incloure la sortida esperada de 
 <ul>
 <li>
 <p><strong>El fitxer <code>greetings.csv</code></strong> és un CSV que conté algunes dades columnars mínimes que utilitzem per a proves.</p>
+</li>
+<li>
+<p><strong>El fitxer <code>custom.config</code></strong> és un exemple de fitxer de configuració de Nextflow utilitzat a la Part 1 per demostrar les sobreescriptures de recursos de processos i <code>ext.args</code>.</p>
+</li>
+<li>
+<p><strong>El fitxer <code>malformed_samplesheet.csv</code></strong> és un full de mostres intencionadament incorrecte utilitzat a la Part 1 per demostrar la validació d'entrades.</p>
+</li>
+<li>
+<p><strong>El fitxer <code>my_params.yml</code></strong> és un exemple de fitxer de paràmetres utilitzat a la Part 1 per demostrar com passar paràmetres booleans a un pipeline.</p>
 </li>
 <li>
 <p><strong>El directori <code>original-hello</code></strong> conté una còpia del codi font produït en treballar durant la sèrie completa de formació Hello Nextflow (amb Docker activat).</p>
@@ -4086,7 +4043,7 @@ Utilitzem seccions desplegables com aquesta per incloure la sortida esperada de 
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Entenc l'objectiu d'aquest curs i els seus prerequisits</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> El meu entorn està en funcionament</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> M'he assegurat que l'analitzador de sintaxi està establert a <strong>v1</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Estic utilitzant nf-core tools 4.0.2 (comproveu-ho amb <code>nf-core --version</code>)</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> He establert el meu directori de treball adequadament</li>
 </ul>
 <p>Si podeu marcar totes les caselles, esteu a punt per començar.</p>

@@ -3950,10 +3950,11 @@
 <h2 id="desteklenen-guncel-nextflow-sozdizimi-surumu-ve-gereksinimleri">Desteklenen güncel Nextflow sözdizimi sürümü ve gereksinimleri<a class="headerlink" href="#desteklenen-guncel-nextflow-sozdizimi-surumu-ve-gereksinimleri" title="Permanent link">&para;</a></h2>
 <p>Eğitim portalının 3.0 sürümü itibarıyla, kurs indeks sayfasında aksi belirtilmedikçe tüm eğitim kurslarımız Nextflow 25.10.2 veya daha yeni bir sürümle uyumludur.
 (Sürüm bildirimi içermeyebilecek kullanımdan kaldırılmış veya arşivlenmiş materyaller bu kapsam dışındadır.)</p>
-<p>Eğitim ortamımızda varsayılan olarak yüklenen Nextflow sürümü <strong>Nextflow 25.10.4</strong>'tür.</p>
+<p>Eğitim ortamımızda varsayılan olarak yüklenen Nextflow sürümü <strong>Nextflow 26.04.4</strong>'tür.</p>
 <p>Kurslar artık iş akışı düzeyinde tiplendirilmiş girdiler ve iş akışı düzeyinde çıktı yönergeleri kullandığından, <strong>aksi belirtilmedikçe</strong> V2 sözdizimi ayrıştırıcısının kullanılması gerekmektedir.
+V2 ayrıştırıcısı, Nextflow 26.04 sürümünden itibaren varsayılan olarak etkindir; dolayısıyla yüklediğimiz sürümde bunu manuel olarak etkinleştirmenize gerek yoktur.
 <a href="../../envsetup/01_setup/">Github Codespaces</a> veya <a href="../../envsetup/03_devcontainer/">yerel devcontainer'lar</a> aracılığıyla sağladığımız ortamı kullanmayı planlıyorsanız, kurs talimatlarında özellikle belirtilmedikçe herhangi bir işlem yapmanıza gerek yoktur.
-Ancak eğitimleri kendi ortamınızda (<a href="../../envsetup/02_local/">Manuel kurulum</a>) tamamlamayı planlıyorsanız, v2 sözdizimi ayrıştırıcısı etkinleştirilmiş şekilde Nextflow 25.10.2 veya daha yeni bir sürümü kullandığınızdan emin olmanız gerekmektedir.</p>
+Ancak eğitimleri kendi ortamınızda (<a href="../../envsetup/02_local/">Manuel kurulum</a>) tamamlamayı planlıyorsanız, Nextflow 25.10.2 veya daha yeni bir sürümü kullandığınızdan ve 26.04 öncesi bir sürümdeyseniz v2 sözdizimi ayrıştırıcısını etkinleştirdiğinizden emin olmanız gerekmektedir.</p>
 <h2 id="egitim-materyallerinin-eski-surumleri">Eğitim materyallerinin eski sürümleri<a class="headerlink" href="#egitim-materyallerinin-eski-surumleri" title="Permanent link">&para;</a></h2>
 <p>Eğitim materyallerimiz Şubat 2025'ten itibaren sürümlendirilmektedir.</p>
 <p><strong>25.10.2 öncesi</strong> Nextflow sürümleriyle çalışan eğitim materyallerinin eski sürümlerine, her sayfanın üst kısmındaki eğitim materyallerinin numaralı sürümünü gösteren açılır menü öğesi aracılığıyla erişebilirsiniz.
@@ -3969,21 +3970,21 @@ Tüm modern Nextflow kodları DSL2 kullanmaktadır.</p>
 v1 ayrıştırıcısı, özgün ve daha esnek ayrıştırıcıdır.
 v2 ayrıştırıcısı daha katıdır ve statik tipleme (tiplendirilmiş girdiler ve çıktılar) ile iş akışı düzeyinde çıktı yönergeleri gibi yeni dil özelliklerini etkinleştirir.
 v2 ayrıştırıcısı aynı zamanda daha iyi hata mesajları sağlar ve daha fazla hatayı çalışma zamanı yerine ayrıştırma aşamasında yakalar.
-v2 ayrıştırıcısı, Nextflow 26.04'te varsayılan hale gelecektir.</p>
+v2 ayrıştırıcısı, Nextflow 26.04 ve sonrasında varsayılan hale gelmiştir.</p>
 <p>Özetle: DSL2 yazdığınız dildir; sözdizimi ayrıştırıcı sürümü ise bu dilin ne kadar katı yorumlandığını ve hangi gelişmiş özelliklerin kullanılabilir olduğunu belirler.</p>
 <h3 id="nextflow-surumunu-kontrol-etme-ve-ayarlama">Nextflow sürümünü kontrol etme ve ayarlama<a class="headerlink" href="#nextflow-surumunu-kontrol-etme-ve-ayarlama" title="Permanent link">&para;</a></h3>
 <p>Sisteminizde yüklü olan Nextflow sürümünü <code>nextflow --version</code> komutunu kullanarak kontrol edebilirsiniz.</p>
 <p>Nextflow sürümünüzü nasıl güncelleyeceğiniz hakkında daha fazla bilgi için lütfen <a href="https://www.nextflow.io/docs/latest/updating-nextflow.html">Nextflow'u Güncelleme</a> başlıklı referans belgelerine bakınız.</p>
 <h3 id="v2-sozdizimi-ayrstrcsn-etkinlestirme">v2 sözdizimi ayrıştırıcısını etkinleştirme<a class="headerlink" href="#v2-sozdizimi-ayrstrcsn-etkinlestirme" title="Permanent link">&para;</a></h3>
+<p>Nextflow 26.04 ve sonrasında v2 ayrıştırıcısı varsayılan olduğundan, aşağıdaki adımlar yalnızca 26.04 öncesi sürümler için gereklidir.</p>
 <p>Mevcut oturumunuz için v2 sözdizimi ayrıştırıcısını <strong>etkinleştirmek</strong> üzere terminalinizde aşağıdaki komutu çalıştırın:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v2
 </code></pre></div>
-<p>Bunu kalıcı hale getirmek için (v2'nin Nextflow 26.04'te varsayılan olmasını beklerken), export komutunu kabuk profilinize ekleyin (<code>~/.bashrc</code>, <code>~/.zshrc</code> vb.):</p>
+<p>Bunu kalıcı hale getirmek için export komutunu kabuk profilinize ekleyin (<code>~/.bashrc</code>, <code>~/.zshrc</code> vb.):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export NXF_SYNTAX_PARSER=v2&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">source</span><span class="w"> </span>~/.bashrc
 </code></pre></div>
-<p><code>NXF_SYNTAX_PARSER=v2</code> ortam değişkeninin geçici bir gereksinim olduğunu unutmayın.
-Nextflow 26.04 ve sonrasında v2 ayrıştırıcısı varsayılan hale gelecek ve bu ayar artık gerekli olmayacaktır.</p>
+<p>26.04 öncesi Nextflow sürümlerinde bu kurslarda kullanılan v2 özelliklerine erişmek için <code>NXF_SYNTAX_PARSER=v2</code> ortam değişkeninin gerekli olduğunu unutmayın.</p>
 <h3 id="v2-sozdizimi-ayrstrcsn-devre-ds-brakma">v2 sözdizimi ayrıştırıcısını devre dışı bırakma<a class="headerlink" href="#v2-sozdizimi-ayrstrcsn-devre-ds-brakma" title="Permanent link">&para;</a></h3>
 <p>Mevcut oturumunuz için v2 sözdizimi ayrıştırıcısını <strong>devre dışı bırakmak</strong> üzere terminalinizde aşağıdaki komutu çalıştırın:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v1

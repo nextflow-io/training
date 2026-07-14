@@ -2518,7 +2518,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Test con nf-test
   
 
     
@@ -3950,10 +3950,11 @@
 <h2 id="versione-della-sintassi-di-nextflow-attualmente-supportata-e-requisiti">Versione della sintassi di Nextflow attualmente supportata e requisiti<a class="headerlink" href="#versione-della-sintassi-di-nextflow-attualmente-supportata-e-requisiti" title="Permanent link">&para;</a></h2>
 <p>A partire dalla versione 3.0 del portale di formazione, tutti i nostri corsi di formazione sono compatibili con Nextflow versione 25.10.2 o successiva, salvo diversa indicazione nella pagina indice del corso.
 (Questo non include i materiali deprecati o archiviati che potrebbero non includere un avviso sulla versione).</p>
-<p>La versione di Nextflow attualmente caricata per impostazione predefinita nel nostro ambiente di formazione è <strong>Nextflow 25.10.4</strong>.</p>
+<p>La versione di Nextflow attualmente caricata per impostazione predefinita nel nostro ambiente di formazione è <strong>Nextflow 26.04.4</strong>.</p>
 <p>Poiché i corsi ora utilizzano input tipizzati a livello di flusso di lavoro e direttive di output a livello di flusso di lavoro, richiedono l'uso del parser di sintassi V2, <strong>salvo diversa indicazione</strong>.
+Il parser V2 è quello predefinito a partire da Nextflow 26.04, quindi nella versione che carichiamo non è necessario abilitarlo manualmente.
 Se prevedete di utilizzare l'ambiente che forniamo tramite <a href="../../envsetup/01_setup/">Github Codespaces</a> o <a href="../../envsetup/03_devcontainer/">devcontainer locali</a>, non dovete fare nulla a meno che non sia specificato nelle istruzioni del corso.
-Tuttavia, se prevedete di seguire le formazioni nel vostro ambiente (<a href="../../envsetup/02_local/">Installazione manuale</a>), dovrete assicurarvi di utilizzare Nextflow versione 25.10.2 o successiva con il parser di sintassi v2 abilitato.</p>
+Tuttavia, se prevedete di seguire le formazioni nel vostro ambiente (<a href="../../envsetup/02_local/">Installazione manuale</a>), dovrete assicurarvi di utilizzare Nextflow versione 25.10.2 o successiva e di abilitare il parser di sintassi v2 se utilizzate una versione precedente alla 26.04.</p>
 <h2 id="versioni-precedenti-dei-materiali-di-formazione">Versioni precedenti dei materiali di formazione<a class="headerlink" href="#versioni-precedenti-dei-materiali-di-formazione" title="Permanent link">&para;</a></h2>
 <p>I nostri materiali di formazione sono versionati da febbraio 2025.</p>
 <p>Potete accedere alle versioni precedenti dei materiali di formazione che funzionano con versioni di Nextflow <strong>precedenti alla 25.10.2</strong> tramite il menu a tendina nella parte superiore di ogni pagina che mostra la versione numerata dei materiali di formazione.
@@ -3969,21 +3970,21 @@ Tutto il codice Nextflow moderno utilizza DSL2.</p>
 Il parser v1 è il parser originale, più permissivo.
 Il parser v2 è più rigoroso e abilita nuove funzionalità del linguaggio come la tipizzazione statica (input e output tipizzati) e direttive di output a livello di flusso di lavoro.
 Il parser v2 fornisce anche messaggi di errore migliori e rileva più errori al momento del parsing piuttosto che durante l'esecuzione.
-Il parser v2 diventerà il predefinito in Nextflow 26.04.</p>
+Il parser v2 è il predefinito a partire da Nextflow 26.04.</p>
 <p>In sintesi: DSL2 è il linguaggio che scrivete; la versione del parser di sintassi determina quanto rigorosamente quel linguaggio viene interpretato e quali funzionalità avanzate sono disponibili.</p>
 <h3 id="verificare-e-impostare-la-versione-di-nextflow">Verificare e impostare la versione di Nextflow<a class="headerlink" href="#verificare-e-impostare-la-versione-di-nextflow" title="Permanent link">&para;</a></h3>
 <p>Potete verificare quale versione di Nextflow è installata sul vostro sistema utilizzando il comando <code>nextflow --version</code>.</p>
 <p>Per maggiori informazioni su come aggiornare la vostra versione di Nextflow, consultate la documentazione di riferimento su <a href="https://www.nextflow.io/docs/latest/updating-nextflow.html">Aggiornamento di Nextflow</a>.</p>
 <h3 id="abilitare-il-parser-di-sintassi-v2">Abilitare il parser di sintassi v2<a class="headerlink" href="#abilitare-il-parser-di-sintassi-v2" title="Permanent link">&para;</a></h3>
+<p>A partire da Nextflow 26.04 il parser v2 è il predefinito, quindi i passaggi seguenti sono necessari solo per le versioni precedenti alla 26.04.</p>
 <p>Per <strong>abilitare</strong> il parser di sintassi v2 per la sessione corrente, eseguite il seguente comando nel vostro terminale:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v2
 </code></pre></div>
-<p>Per rendere questa impostazione permanente (in attesa che v2 diventi il predefinito in Nextflow 26.04), aggiungete il comando export al vostro profilo shell (<code>~/.bashrc</code>, <code>~/.zshrc</code>, ecc.):</p>
+<p>Per rendere questa impostazione permanente, aggiungete il comando export al vostro profilo shell (<code>~/.bashrc</code>, <code>~/.zshrc</code>, ecc.):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export NXF_SYNTAX_PARSER=v2&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">source</span><span class="w"> </span>~/.bashrc
 </code></pre></div>
-<p>Notate che la variabile d'ambiente <code>NXF_SYNTAX_PARSER=v2</code> è un requisito temporaneo.
-Da Nextflow 26.04 in poi, il parser v2 diventerà il predefinito e questa impostazione non sarà più necessaria.</p>
+<p>Notate che nelle versioni di Nextflow precedenti alla 26.04 la variabile d'ambiente <code>NXF_SYNTAX_PARSER=v2</code> è necessaria per accedere alle funzionalità v2 utilizzate in questi corsi.</p>
 <h3 id="disabilitare-il-parser-di-sintassi-v2">Disabilitare il parser di sintassi v2<a class="headerlink" href="#disabilitare-il-parser-di-sintassi-v2" title="Permanent link">&para;</a></h3>
 <p>Per <strong>disabilitare</strong> il parser di sintassi v2 per la sessione corrente, eseguite il seguente comando nel vostro terminale:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v1

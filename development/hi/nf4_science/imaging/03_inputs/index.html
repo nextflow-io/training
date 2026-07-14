@@ -2221,7 +2221,7 @@
   <a href="#12" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. समाधान: पैरामीटर फ़ाइल का उपयोग करें
+        1.2. पैरामीटर फ़ाइल
       
     </span>
   </a>
@@ -3732,7 +3732,7 @@
   <a href="#12" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. समाधान: पैरामीटर फ़ाइल का उपयोग करें
+        1.2. पैरामीटर फ़ाइल
       
     </span>
   </a>
@@ -4072,21 +4072,15 @@
 अब हम इनपुट को प्रबंधित करने के दो बेहतर तरीके सीखेंगे: <strong>पैरामीटर फ़ाइलें</strong> और <strong>samplesheets</strong>।</p>
 <h2 id="1">1. पैरामीटर फ़ाइलों का उपयोग<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <h3 id="11">1.1. लंबी कमांड लाइनों की समस्या<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
-<p>भाग 2 से हमारी कमांड याद करें:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>--input<span class="w"> </span><span class="s1">&#39;data/samplesheet.csv&#39;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span>--mindagap_tilesize<span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>--mindagap_boxsize<span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span>--mindagap_loopnum<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span>--clahe_pyramid_tile<span class="w"> </span><span class="m">368</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;cellpose&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span>--outdir<span class="w"> </span>results
+<p>भाग 2 में हमने पहले से ही एक पैरामीटर फ़ाइल का उपयोग किया था ताकि कमांड छोटी रहे और टाइप किए गए मान (जैसे integer प्रीप्रोसेसिंग पैरामीटर) सही बने रहें:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;mesmer,cellpose,stardist&quot;</span>
 </code></pre></div>
-<p>यह काम करता है, लेकिन इसे पुनः उत्पन्न करना, साझा करना या संशोधित करना कठिन है।
-यदि आपको अगले महीने फिर से वही विश्लेषण चलाने की आवश्यकता हो तो क्या होगा?
-यदि कोई सहयोगी आपकी सटीक सेटिंग्स का उपयोग करना चाहता है तो क्या होगा?</p>
-<h3 id="12">1.2. समाधान: पैरामीटर फ़ाइल का उपयोग करें<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
-<p><code>params.yaml</code> नाम की एक फ़ाइल बनाएं:</p>
+<p>कमांड लाइन पर कई पैरामीटर अलग-अलग पास करना पुनः उत्पन्न करना, साझा करना या संशोधित करना कठिन होता है।
+यदि तुम्हें अगले महीने फिर से वही विश्लेषण चलाने की आवश्यकता हो तो क्या होगा?
+यदि कोई सहयोगी तुम्हारी सटीक सेटिंग्स का उपयोग करना चाहता है तो क्या होगा?
+एक पैरामीटर फ़ाइल इसे हल करती है।</p>
+<h3 id="12">1.2. पैरामीटर फ़ाइल<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p>यहाँ वह <code>params.yaml</code> फ़ाइल है जिसका हम उपयोग कर रहे हैं:</p>
 <div class="highlight"><span class="filename">params.yaml</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;data/samplesheet.csv&quot;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">outdir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;results&quot;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">mindagap_tilesize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">90</span>
@@ -4095,22 +4089,24 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nt">clahe_pyramid_tile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">368</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nt">segmentation_method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cellpose&quot;</span>
 </code></pre></div>
-<p>अब आपकी कमांड बन जाती है:</p>
+<p>प्रत्येक पैरामीटर <code>key: value</code> जोड़े के रूप में लिखा जाता है।
+integers को बिना quotes के लिखना (उदाहरण के लिए <code>mindagap_tilesize: 90</code>) उनके integer प्रकार को बनाए रखता है, जिसकी pipeline के पैरामीटर validation को आवश्यकता होती है।</p>
+<p>तुम्हारी कमांड बन जाती है:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>-resume
 </code></pre></div>
-<p>बस इतना ही! पैरामीटर फ़ाइल आपके सटीक कॉन्फ़िगरेशन को दस्तावेज़ित करती है और इसे फिर से चलाना या साझा करना आसान बनाती है।</p>
+<p>पैरामीटर फ़ाइल तुम्हारे सटीक कॉन्फ़िगरेशन को दस्तावेज़ित करती है और इसे फिर से चलाना या साझा करना आसान बनाती है।</p>
 <h3 id="13">1.3. पैरामीटर को ओवरराइड करना<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
-<p>आप अभी भी कमांड लाइन से विशिष्ट पैरामीटर को ओवरराइड कर सकते हैं:</p>
+<p>तुम अभी भी कमांड लाइन से विशिष्ट पैरामीटर को ओवरराइड कर सकते हो:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;stardist&quot;</span><span class="w"> </span>--outdir<span class="w"> </span>stardist_results<span class="w"> </span>-resume
 </code></pre></div>
-<p>उपरोक्त लाइन <code>segmentation_method</code> को <code>stardist</code> में बदल देती है और <code>--outdir</code> नाम को <code>params.yaml</code> फ़ाइल में दिए गए पैरामीटर के बजाय <code>stardist_results</code> में बदल देती है।
-इसके अतिरिक्त, आप देख सकते हैं कि <code>-resume</code> फ़्लैग ने हमें पिछले रन से प्री-प्रोसेसिंग परिणामों का पुन: उपयोग करने की अनुमति दी, जिससे समय की बचत हुई।
-आप इस पैटर्न का उपयोग pipeline के विभिन्न विविधताओं का शीघ्रता से परीक्षण करने के लिए कर सकते हैं।</p>
+<p>उपरोक्त लाइन <code>segmentation_method</code> को <code>stardist</code> में बदल देती है और <code>--outdir</code> नाम को <code>stardist_results</code> में बदल देती है, न कि <code>params.yaml</code> फ़ाइल में दिए गए पैरामीटर के अनुसार।
+इसके अतिरिक्त, तुम देख सकते हो कि <code>-resume</code> फ़्लैग ने हमें पिछले रन से प्री-प्रोसेसिंग परिणामों का पुन: उपयोग करने की अनुमति दी, जिससे समय की बचत हुई।
+तुम इस पैटर्न का उपयोग pipeline के विभिन्न विविधताओं का शीघ्रता से परीक्षण करने के लिए कर सकते हो।</p>
 <h3 id="_1">मुख्य बात<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<p>पैरामीटर फ़ाइलें आपके विश्लेषण को पुनरुत्पादनीय और साझा करने में आसान बनाती हैं।
-किसी भी वास्तविक विश्लेषण कार्य के लिए इनका उपयोग करें।</p>
+<p>पैरामीटर फ़ाइलें तुम्हारे विश्लेषण को पुनरुत्पादनीय और साझा करने में आसान बनाती हैं।
+किसी भी वास्तविक विश्लेषण कार्य के लिए इनका उपयोग करो।</p>
 <h3 id="_2">आगे क्या?<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p>जानें कि samplesheets कैसे कई नमूनों के बारे में जानकारी को व्यवस्थित करती हैं।</p>
+<p>जानो कि samplesheets कैसे कई नमूनों के बारे में जानकारी को व्यवस्थित करती हैं।</p>
 <hr />
 <h2 id="2-samplesheet">2. Samplesheet पैटर्न<a class="headerlink" href="#2-samplesheet" title="Permanent link">&para;</a></h2>
 <h3 id="21-samplesheet">2.1. Samplesheet क्या है?<a class="headerlink" href="#21-samplesheet" title="Permanent link">&para;</a></h3>

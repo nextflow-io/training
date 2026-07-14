@@ -4266,16 +4266,16 @@ Henüz koda bakmayacağız; önce çalıştırmanın nasıl göründüğünü g�
 <span class="normal"><a href="#__codelineno-1-3">3</a></span>
 <span class="normal"><a href="#__codelineno-1-4">4</a></span>
 <span class="normal"><a href="#__codelineno-1-5">5</a></span>
-<span class="normal"><a href="#__codelineno-1-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="go">Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="go">Launching `hello-world.nf` [small_swirles] revision: 0fb8dbb23d</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4"></a>
 <a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="go">[71/8143bd] sayHello | 1 of 1 ✔</span>
 </code></pre></div></td></tr></table></div>
 <p>Tebrikler, ilk Nextflow workflow'unuzu çalıştırdınız!</p>
 <p>Buradaki en önemli çıktı son satırdır (satır 6):</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="go">[71/8143bd] sayHello | 1 of 1 ✔</span>
 </code></pre></div></td></tr></table></div>
 <p>Bu bize <code>sayHello</code> sürecinin bir kez başarıyla çalıştırıldığını söylüyor (<code>1 of 1 ✔</code>).</p>
 <p>Bu harika, ancak merak ediyor olabilirsiniz: çıktı nerede?</p>
@@ -4309,14 +4309,14 @@ Her biri için gerekli girdileri hazırlar, ilgili komut(lar)ı çalıştırır 
 <p>Tüm bu görev dizinleri, mevcut dizininizin içinde (komutu çalıştırdığınız yerde) <code>work</code> adlı bir dizin altında bulunacaktır.</p>
 <p>Bu kafa karıştırıcı gelebilir, o yüzden pratikte bunun nasıl göründüğünü görelim.</p>
 <p>Daha önce çalıştırdığımız workflow'un konsol çıktısına geri dönersek, şu satırımız vardı:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Excerpt of command output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Excerpt of command output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="go">[71/8143bd] sayHello | 1 of 1 ✔</span>
 </code></pre></div></td></tr></table></div>
-<p>Satırın <code>[a3/7be2fa]</code> ile nasıl başladığını görüyor musunuz?
+<p>Satırın <code>[71/8143bd]</code> ile nasıl başladığını görüyor musunuz?
 Bu, o süreç çağrısı için görev dizini yolunun kısaltılmış bir biçimidir ve <code>sayHello</code> süreç çağrısının çıktısını <code>work/</code> dizin yolu içinde nerede bulacağınızı söyler.</p>
-<p>Tam yolu aşağıdaki komutu yazarak (kendi terminalinizde gördüğünüzle <code>a3/7be2fa</code> yerine koyarak) ve tab tuşuna basarak yolu otomatik tamamlayarak veya bir yıldız işareti ekleyerek bulabilirsiniz:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>tree<span class="w"> </span>work/a3/7be2fa*
+<p>Tam yolu aşağıdaki komutu yazarak (kendi terminalinizde gördüğünüzle <code>71/8143bd</code> yerine koyarak) ve tab tuşuna basarak yolu otomatik tamamlayarak veya bir yıldız işareti ekleyerek bulabilirsiniz:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>tree<span class="w"> </span>work/71/8143bd*
 </code></pre></div>
-<p>Bu, tam dizin yolunu vermelidir: <code>work/a3/7be2fa7be2fad5e71e5f49998f795677fd68</code></p>
+<p>Bu, tam dizin yolunu vermelidir: <code>work/71/8143bd5ed3420e23c5f0dc1a05056d</code></p>
 <p>Orada ne olduğuna bir göz atalım.</p>
 <div class="admonition tip">
 <p class="admonition-title">İpucu</p>
@@ -4330,8 +4330,8 @@ Ancak, günlük dosyaları terminalde görünmez olarak ayarlanmıştır, bu ned
   <summary>Dizin içeriği</summary>
 
 <div class="highlight"><span class="filename">work/</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">work</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="go">└── a3</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">    └── 7be2fad5e71e5f49998f795677fd68</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="go">└── 71</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">    └── 8143bd5ed3420e23c5f0dc1a05056d</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="go">        ├── .command.begin</span>
 <a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="go">        ├── .command.err</span>
 <a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="go">        ├── .command.log</span>
@@ -4349,7 +4349,7 @@ Açarsanız, yine <code>Hello World!</code> selamlamasını bulacaksınız.</p>
 <details>
   <summary>output.txt dosyasının içeriği</summary>
 
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">Hello World!</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">Hello World!</span>
 </code></pre></div></td></tr></table></div>
 
 </details>
@@ -4369,7 +4369,7 @@ Açarsanız, yine <code>Hello World!</code> selamlamasını bulacaksınız.</p>
 <details>
   <summary>Dosya içeriği</summary>
 
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/.command.sh</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
 <span class="normal"><a href="#__codelineno-10-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="gp">#</span>!/bin/bash<span class="w"> </span>-ue
 <a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="go">echo &#39;Hello World!&#39; &gt; output.txt</span>
 </code></pre></div></td></tr></table></div>
@@ -4562,14 +4562,14 @@ Bu, Nextflow'un yalnızca son çalıştırmadan bu yana eklediğiniz veya deği�
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="go">Launching `hello-world.nf` [tiny_noyce] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="go">Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d</span>
 <a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="go">[a3/7be2fa] process &gt; sayHello [100%] 1 of 1, cached: 1 ✔</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="go">[71/8143bd] sayHello | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
 </details>
-<p>Süreç durum satırına eklenmiş olan <code>cached:</code> kısmına bakın (satır 5); bu, Nextflow'un bu çalışmayı zaten yaptığını tanıdığı ve önceki başarılı çalıştırmadan sonucu yeniden kullandığı anlamına gelir.</p>
+<p>Süreç durum satırına eklenmiş olan <code>cached:</code> kısmına bakın; bu, Nextflow'un bu çalışmayı zaten yaptığını tanıdığı ve önceki başarılı çalıştırmadan sonucu yeniden kullandığı anlamına gelir.</p>
 <p>Ayrıca çalışma alt dizini hash'inin önceki çalıştırmayla aynı olduğunu görebilirsiniz.
 Nextflow tam anlamıyla size önceki çalıştırmayı gösteriyor ve "Bunu zaten orada yaptım" diyor.</p>
 <div class="admonition tip">

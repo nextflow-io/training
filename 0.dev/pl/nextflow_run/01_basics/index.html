@@ -3116,7 +3116,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Testowanie z nf-test
   
 
     
@@ -4586,13 +4586,19 @@ Możesz go otworzyć w eksploratorze plików lub z wiersza poleceń, używając 
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">Launching `1-hello.nf` [goofy_torvalds] revision: c33d41f479</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="go">executor &gt;  local (1)</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="hll"><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
-</span></code></pre></div>
+</span><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="go">  /workspaces/training/nextflow-run/results</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="go">  first_output: 1-hello/output.txt</span>
+</code></pre></div>
 </details>
 <p>Jeśli wyjście konsoli wygląda mniej więcej tak, to gratulacje, właśnie uruchomiłeś Swój pierwszy workflow Nextflow!</p>
 <details class="question">
@@ -4605,11 +4611,12 @@ Możesz go otworzyć w eksploratorze plików lub z wiersza poleceń, używając 
 <p>To prawdopodobnie używasz starszego parsera języka Nextflow v1.
 Zostało to wspomniane na początku kursu, ale może Ci to umknęło.
 Sprawdź materiał pomocniczy <a href="../../info/nxf_versions/">Wersje Nextflow</a>.</p>
-<p>Krótko mówiąc, jeśli używasz Nextflow <code>25.10</code>, musisz włączyć parser języka v2:</p>
+<p>Parser v2 jest domyślny od Nextflow 26.04 wzwyż, więc ten błąd pojawi się tylko na starszych wersjach.
+Jeśli używasz wersji wcześniejszej niż 26.04, musisz włączyć parser języka v2:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v2
 </code></pre></div>
 </details>
-<p>Najważniejsze wyjście tutaj to ostatnia linia, która jest podświetlona w powyższym wyjściu:</p>
+<p>Najważniejsze tutaj to podświetlona linia:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
 <p>To mówi nam, że <strong>proces</strong> <code>sayHello</code> został pomyślnie wykonany raz (<code>1 of 1 ✔</code>).</p>
@@ -4626,7 +4633,7 @@ Jeśli spojrzysz na Swój bieżący katalog, zobaczysz, że gdy uruchomiłeś wo
 </code></pre></div></td></tr></table></div>
 <p>Świetnie, nasz workflow zrobił to, co miał zrobić!</p>
 <h3 id="23-zapisz-wyniki-do-innego-katalogu">2.3. Zapisz wyniki do innego katalogu<a class="headerlink" href="#23-zapisz-wyniki-do-innego-katalogu" title="Permanent link">&para;</a></h3>
-<p>Domyślnie Nextflow zapisze wyjścia pipeline'u do katalogu o nazwie <code>results</code> w Twojej bieżącej ścieżce.
+<p>Domyślnie Nextflow zapisuje wyjścia pipeline'u do katalogu o nazwie <code>results</code> w Twojej bieżącej ścieżce.
 Aby zmienić miejsce, w którym Twoje pliki są publikowane, użyj flagi CLI <code>-output-dir</code> (lub <code>-o</code> w skrócie).</p>
 <div class="admonition danger">
 <p class="admonition-title">Niebezpieczeństwo</p>
@@ -4638,12 +4645,18 @@ Więcej na ten temat później.</p>
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Launching `1-hello.nf` [hungry_celsius] revision: f048d6ea78</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
 <a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">[a3/1e1535] sayHello [100%] 1 of 1 ✔</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">[a3/1e1535] sayHello | 1 of 1 ✔</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="go">  /workspaces/training/nextflow-run/hello_results</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="go">  first_output: 1-hello/output.txt</span>
 </code></pre></div>
 </details>
 <p>Powinieneś zobaczyć, że Twoje wyjścia są teraz publikowane do katalogu o nazwie <code>hello_results</code> zamiast <code>results</code>:</p>
@@ -4665,7 +4678,7 @@ Dla każdego z nich przygotowuje niezbędne dane wejściowe, wykonuje odpowiedni
 <p>Wszystkie te katalogi zadań będą znajdować się w katalogu o nazwie <code>work</code> w bieżącym katalogu (skąd uruchamiasz polecenie).</p>
 <p>To może brzmieć myląco, więc zobaczmy, jak to wygląda w praktyce.</p>
 <p>Wracając do wyjścia konsoli dla workflow'u, który uruchomiliśmy wcześniej, mieliśmy tę linię:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">[a3/1e1535] sayHello [100%] 1 of 1 ✔</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">[a3/1e1535] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
 <p>Widzisz, jak linia zaczyna się od <code>[a3/1e1535]</code>?
 To jest skrócona forma ścieżki katalogu zadania dla tego jednego wywołania <strong>procesu</strong> i mówi, gdzie znaleźć wyjście wywołania <code>sayHello</code> w ścieżce katalogu <code>work/</code>.</p>
@@ -5074,15 +5087,27 @@ To oznacza, że Nextflow uruchomi tylko te, które dodałeś lub zmodyfikowałe�
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1">1</a></span>
-<span class="normal"><a href="#__codelineno-30-2">2</a></span>
-<span class="normal"><a href="#__codelineno-30-3">3</a></span>
-<span class="normal"><a href="#__codelineno-30-4">4</a></span>
-<span class="normal"><a href="#__codelineno-30-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-30-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-30-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-30-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-30-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-30-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-30-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-30-10">10</a></span>
+<span class="normal"><a href="#__codelineno-30-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2"></a>
-<a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="go">Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="go">Launching `1-hello.nf` [tiny_noyce] revision: c33d41f479</span>
 <a id="__codelineno-30-4" name="__codelineno-30-4"></a>
 <a id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔</span>
+<a id="__codelineno-30-6" name="__codelineno-30-6"></a>
+<a id="__codelineno-30-7" name="__codelineno-30-7"></a><span class="go">Outputs:</span>
+<a id="__codelineno-30-8" name="__codelineno-30-8"></a>
+<a id="__codelineno-30-9" name="__codelineno-30-9"></a><span class="go">  /workspaces/training/nextflow-run/results</span>
+<a id="__codelineno-30-10" name="__codelineno-30-10"></a>
+<a id="__codelineno-30-11" name="__codelineno-30-11"></a><span class="go">  first_output: 1-hello/output.txt</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>Wyjście konsoli powinno wyglądać znajomo, ale jest jedna rzecz, która jest trochę inna niż wcześniej.</p>
@@ -5189,7 +5214,7 @@ W linii wyjścia konsoli `[a3/7be2fa] SAYHELLO | 1 of 1 ✔`, co reprezentuje `[
 - [x] Skróconą ścieżkę do katalogu roboczego zadania
 - [ ] Sumę kontrolną pliku wyjściowego
 
-Dowiedz się więcej: [2.4. Znajdź oryginalne wyjście i logi w katalogu `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
+Dowiedz się więcej: [2.3. Znajdź oryginalne wyjście i logi w katalogu `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
@@ -5203,7 +5228,7 @@ Dowiedz się więcej: [2.4. Znajdź oryginalne wyjście i logi w katalogu `work/
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.4. Znajdź oryginalne wyjście i logi w katalogu <code>work/</code></a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.3. Znajdź oryginalne wyjście i logi w katalogu <code>work/</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5214,7 +5239,7 @@ Jaki jest cel pliku `.command.sh` w katalogu zadania?
 - [ ] Zawiera komunikaty o błędach z nieudanych zadań
 - [ ] Wymienia pliki wejściowe przygotowane dla zadania
 
-Dowiedz się więcej: [2.4. Znajdź oryginalne wyjście i logi w katalogu `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
+Dowiedz się więcej: [2.3. Znajdź oryginalne wyjście i logi w katalogu `work/`](#23-find-the-original-output-and-logs-in-the-work-directory)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -5228,7 +5253,7 @@ Dowiedz się więcej: [2.4. Znajdź oryginalne wyjście i logi w katalogu `work/
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.4. Znajdź oryginalne wyjście i logi w katalogu <code>work/</code></a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#23-find-the-original-output-and-logs-in-the-work-directory">2.3. Znajdź oryginalne wyjście i logi w katalogu <code>work/</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5239,7 +5264,7 @@ Co dzieje się z opublikowanymi wynikami, gdy ponownie uruchamiasz workflow bez 
 - [ ] Nextflow zapobiega nadpisywaniu i kończy się niepowodzeniem
 - [ ] Są automatycznie archiwizowane
 
-Dowiedz się więcej: [2.5. Uruchom ponownie workflow z różnymi powitaniami](#24-re-run-the-workflow-with-different-greetings)
+Dowiedz się więcej: [2.4. Uruchom ponownie workflow z różnymi powitaniami](#24-re-run-the-workflow-with-different-greetings)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
@@ -5253,7 +5278,7 @@ Dowiedz się więcej: [2.5. Uruchom ponownie workflow z różnymi powitaniami](#
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#24-re-run-the-workflow-with-different-greetings">2.5. Uruchom ponownie workflow z różnymi powitaniami</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#24-re-run-the-workflow-with-different-greetings">2.4. Uruchom ponownie workflow z różnymi powitaniami</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5261,7 +5286,7 @@ Dowiedz się więcej: [2.5. Uruchom ponownie workflow z różnymi powitaniami](#
 Co wskazuje to wyjście konsoli?
 
 ```console
-[skipped  ] process > sayHello (1) [100%] 1 of 1, cached: 1 ✔
+[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔
 ```
 
 - [ ] Zadanie nie powiodło się i zostało pominięte
@@ -5277,7 +5302,7 @@ Dowiedz się więcej: [4.1. Ponownie uruchom workflow z `-resume`](#41-re-launch
 
                 <div class="quiz-question" id="quiz-3-question">
                     <p>Co wskazuje to wyjście konsoli?</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">[skipped  ] process &gt; sayHello (1) [100%] 1 of 1, cached: 1 ✔</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
                 </div>
                 <form action="javascript:void(0);" onsubmit="return false;">

@@ -4266,16 +4266,16 @@
 <span class="normal"><a href="#__codelineno-1-3">3</a></span>
 <span class="normal"><a href="#__codelineno-1-4">4</a></span>
 <span class="normal"><a href="#__codelineno-1-5">5</a></span>
-<span class="normal"><a href="#__codelineno-1-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="go">Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="go">Launching `hello-world.nf` [small_swirles] revision: 0fb8dbb23d</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4"></a>
 <a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="go">[71/8143bd] sayHello | 1 of 1 ✔</span>
 </code></pre></div></td></tr></table></div>
 <p>축하합니다. 첫 번째 Nextflow 워크플로우를 실행하셨습니다!</p>
 <p>여기서 가장 중요한 출력은 마지막 줄(6번 줄)입니다:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="go">[71/8143bd] sayHello | 1 of 1 ✔</span>
 </code></pre></div></td></tr></table></div>
 <p>이는 <code>sayHello</code> process가 한 번 성공적으로 실행되었음을 알려줍니다(<code>1 of 1 ✔</code>).</p>
 <p>좋습니다만, 출력이 어디에 있는지 궁금하실 것입니다.</p>
@@ -4309,14 +4309,14 @@
 <p>이러한 모든 task 디렉토리는 현재 디렉토리(명령을 실행하는 위치) 내의 <code>work</code>라는 디렉토리 아래에 위치합니다.</p>
 <p>혼란스러울 수 있으니 실제로 어떤 모습인지 살펴보겠습니다.</p>
 <p>앞서 실행한 워크플로우의 콘솔 출력으로 돌아가면 다음과 같은 줄이 있었습니다:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Excerpt of command output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Excerpt of command output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="go">[71/8143bd] sayHello | 1 of 1 ✔</span>
 </code></pre></div></td></tr></table></div>
-<p>줄이 <code>[a3/7be2fa]</code>로 시작하는 것이 보이시나요?
+<p>줄이 <code>[71/8143bd]</code>로 시작하는 것이 보이시나요?
 이것은 해당 process 실행에 대한 task 디렉토리 경로의 축약된 형태이며, <code>work/</code> 디렉토리 경로 내에서 <code>sayHello</code> process 실행의 출력을 어디에서 찾을 수 있는지 알려줍니다.</p>
-<p>다음 명령을 입력하고(<code>a3/7be2fa</code>를 터미널에 표시된 것으로 교체) tab 키를 눌러 경로를 자동 완성하거나 별표를 추가하여 전체 경로를 찾을 수 있습니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>tree<span class="w"> </span>work/a3/7be2fa*
+<p>다음 명령을 입력하고(<code>71/8143bd</code>를 터미널에 표시된 것으로 교체) tab 키를 눌러 경로를 자동 완성하거나 별표를 추가하여 전체 경로를 찾을 수 있습니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>tree<span class="w"> </span>work/71/8143bd*
 </code></pre></div>
-<p>전체 디렉토리 경로가 표시됩니다: <code>work/a3/7be2fa7be2fad5e71e5f49998f795677fd68</code></p>
+<p>전체 디렉토리 경로가 표시됩니다: <code>work/71/8143bd5ed3420e23c5f0dc1a05056d</code></p>
 <p>그 안에 무엇이 있는지 살펴보겠습니다.</p>
 <div class="admonition tip">
 <p class="admonition-title">팁</p>
@@ -4330,8 +4330,8 @@
   <summary>디렉토리 내용</summary>
 
 <div class="highlight"><span class="filename">work/</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">work</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="go">└── a3</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">    └── 7be2fad5e71e5f49998f795677fd68</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="go">└── 71</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">    └── 8143bd5ed3420e23c5f0dc1a05056d</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="go">        ├── .command.begin</span>
 <a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="go">        ├── .command.err</span>
 <a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="go">        ├── .command.log</span>
@@ -4349,7 +4349,7 @@
 <details>
   <summary>output.txt의 파일 내용</summary>
 
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">Hello World!</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">Hello World!</span>
 </code></pre></div></td></tr></table></div>
 
 </details>
@@ -4369,7 +4369,7 @@
 <details>
   <summary>파일 내용</summary>
 
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/.command.sh</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
 <span class="normal"><a href="#__codelineno-10-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="gp">#</span>!/bin/bash<span class="w"> </span>-ue
 <a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="go">echo &#39;Hello World!&#39; &gt; output.txt</span>
 </code></pre></div></td></tr></table></div>
@@ -4562,14 +4562,14 @@ workflow 정의는 <code>workflow</code> 키워드로 시작하고 선택적 이
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">N E X T F L O W   ~  version 25.04.3</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="go">Launching `hello-world.nf` [tiny_noyce] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="go">Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d</span>
 <a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="go">[a3/7be2fa] process &gt; sayHello [100%] 1 of 1, cached: 1 ✔</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="go">[71/8143bd] sayHello | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
 </details>
-<p>process 상태 줄(5번 줄)에 추가된 <code>cached:</code> 부분을 찾아보십시오. 이는 Nextflow가 이미 이 작업을 수행했음을 인식하고 이전에 성공한 실행의 결과를 단순히 재사용했음을 의미합니다.</p>
+<p>process 상태 줄에 추가된 <code>cached:</code> 부분을 찾아보십시오. 이는 Nextflow가 이미 이 작업을 수행했음을 인식하고 이전에 성공한 실행의 결과를 단순히 재사용했음을 의미합니다.</p>
 <p>작업 하위 디렉토리 해시가 이전 실행과 동일하다는 것도 확인할 수 있습니다.
 Nextflow는 말 그대로 이전 실행을 가리키며 "저기에서 이미 했습니다"라고 말하고 있습니다.</p>
 <div class="admonition tip">

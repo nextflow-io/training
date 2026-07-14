@@ -4542,7 +4542,7 @@
 프로파일을 사용하면 구성 파일을 편집하지 않고도 다양한 컴퓨팅 시나리오 간에 쉽게 전환할 수 있습니다.</p>
 <p>모든 nf-core 파이프라인에는 사용할 수 있는 여러 기본 프로파일이 함께 제공됩니다.</p>
 <h3 id="22">2.2. 내장 프로파일 검사하기<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
-<p>파이프라인 코드베이스와 관련된 <code>molkart/nextflow.config</code> 파일에서 이들을 검사해 보겠습니다:</p>
+<p>파이프라인 코드베이스와 관련된 <code>molkart/nextflow.config</code> 파일에서 이들을 검사합니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>code<span class="w"> </span>molkart/nextflow.config
 </code></pre></div>
 <p><code>profiles</code> 블록을 검색하십시오:</p>
@@ -4588,14 +4588,15 @@
 </ul>
 <p><code>-resume</code>을 사용하기 때문에 Nextflow는 마지막 실행 이후 변경 사항이 있는지 확인합니다.
 매개변수, 입력 및 코드가 동일하면 모든 작업이 캐시에서 검색되고 파이프라인이 거의 즉시 완료됩니다.</p>
-<div class="highlight"><span class="filename">Output (excerpt)</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">executor &gt;  local (12)</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">...</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)               [100%] 2 of 2, cached: 2 ✔</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">...</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">-[nf-core/molkart] Pipeline completed successfully-</span>
+<div class="highlight"><span class="filename">Output (excerpt)</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">executor &gt;  local (1)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">[43/e03702] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2, cached: 2 ✔</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2, cached: 2 ✔</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">...</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3, cached: 3 ✔</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">[ef/d7b294] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">-[nf-core/molkart] Pipeline completed successfully-</span>
 </code></pre></div>
-<p>모든 프로세스가 <code>cached: 2</code> 또는 <code>cached: 1</code>을 표시하는 것을 확인하십시오 - 아무것도 재실행되지 않았습니다!</p>
+<p>각 프로세스의 <code>cached: N</code> 표시를 확인하십시오 - 캐시된 전처리 및 분할 작업은 재실행되지 않았습니다.</p>
 <h3 id="24">2.4. 테스트 프로파일<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
 <p>테스트 프로파일은 파이프라인이 작동하는지 확인할 수 있도록 기본 입력 매개변수와 데이터 파일을 지정하는 빠른 방법을 제공합니다.
 nf-core 파이프라인은 항상 최소 두 개의 테스트 프로파일을 포함합니다:</p>
@@ -4632,7 +4633,7 @@ nf-core 파이프라인은 항상 최소 두 개의 테스트 프로파일을 �
 </code></pre></div>
 <p>이 프로파일에는 이전에 <code>params.yaml</code> 파일에서 사용했던 것과 동일한 매개변수가 포함되어 있습니다.</p>
 <p>쉼표로 구분하여 여러 프로파일을 활성화할 수 있습니다.
-이를 사용하여 params 파일 없이 파이프라인을 테스트해 보겠습니다:</p>
+이를 사용하여 params 파일 없이 파이프라인을 테스트합니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-profile<span class="w"> </span>docker,test<span class="w"> </span>--outdir<span class="w"> </span>results<span class="w"> </span>-resume
 </code></pre></div>
 <p>이것은 다음을 결합합니다:</p>
@@ -4645,7 +4646,7 @@ nf-core 파이프라인은 항상 최소 두 개의 테스트 프로파일을 �
 <p>nf-core 파이프라인에는 컨테이너, 테스트 및 특수 환경을 위한 내장 프로파일이 함께 제공됩니다.
 여러 프로파일을 결합하여 필요한 구성을 만들 수 있습니다.</p>
 <h3 id="_3">다음 단계<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>다양한 컴퓨팅 환경을 위한 자체 사용자 정의 프로파일을 만드는 방법을 배웁니다.</p>
+<p>다양한 컴퓨팅 환경을 위한 자체 사용자 정의 프로파일을 만드는 방법을 학습합니다.</p>
 <hr />
 <h2 id="3">3. 사용자 정의 프로파일 만들기<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
 <h3 id="31-hpc">3.1. 로컬 개발과 HPC 실행 간 전환을 위한 프로파일 만들기<a class="headerlink" href="#31-hpc" title="Permanent link">&para;</a></h3>

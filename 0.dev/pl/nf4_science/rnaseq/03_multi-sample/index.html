@@ -3163,7 +3163,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Testowanie z nf-test
   
 
     
@@ -4784,14 +4784,74 @@ To pozwala nam odwoływać się do kolumn po nazwie w operacji <code>map</code>:
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">N E X T F L O W   ~  version 24.10.0</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">Launching `rnaseq.nf` [golden_curry] DSL2 - revision: 2a5ba5be1e</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">Launching `rnaseq.nf` [golden_curry] revision: 2a5ba5be1e</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
 <a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="go">executor &gt;  local (18)</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="go">[07/3ff9c5] FASTQC (6)       [100%] 6 of 6 ✔</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="go">[cc/16859f] TRIM_GALORE (6)  [100%] 6 of 6 ✔</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="go">[68/4c27b5] HISAT2_ALIGN (6) [100%] 6 of 6 ✔</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="go">[07/3ff9c5] FASTQC (6)       | 6 of 6 ✔</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="go">[cc/16859f] TRIM_GALORE (6)  | 6 of 6 ✔</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="go">[68/4c27b5] HISAT2_ALIGN (6) | 6 of 6 ✔</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="go">Outputs:</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="go">  /workspaces/training/nf4-science/rnaseq/results</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="go">  fastqc_zip:</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="go">    - fastqc/ENCSR000COQ1_1_fastqc.zip</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="go">    - fastqc/ENCSR000COQ2_1_fastqc.zip</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="go">    - fastqc/ENCSR000COR1_1_fastqc.zip</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="go">    - fastqc/ENCSR000COR2_1_fastqc.zip</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="go">    - fastqc/ENCSR000CPO1_1_fastqc.zip</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="go">    - fastqc/ENCSR000CPO2_1_fastqc.zip</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="go">  fastqc_html:</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="go">    - fastqc/ENCSR000COQ1_1_fastqc.html</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="go">    - fastqc/ENCSR000COQ2_1_fastqc.html</span>
+<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a><span class="go">    - fastqc/ENCSR000COR1_1_fastqc.html</span>
+<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="go">    - fastqc/ENCSR000COR2_1_fastqc.html</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a><span class="go">    - fastqc/ENCSR000CPO1_1_fastqc.html</span>
+<a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a><span class="go">    - fastqc/ENCSR000CPO2_1_fastqc.html</span>
+<a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a>
+<a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a><span class="go">  trimmed_reads:</span>
+<a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a><span class="go">    - trimming/ENCSR000COQ1_1_trimmed.fq.gz</span>
+<a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a><span class="go">    - trimming/ENCSR000COQ2_1_trimmed.fq.gz</span>
+<a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a><span class="go">    - trimming/ENCSR000COR1_1_trimmed.fq.gz</span>
+<a id="__codelineno-8-34" name="__codelineno-8-34" href="#__codelineno-8-34"></a><span class="go">    - trimming/ENCSR000COR2_1_trimmed.fq.gz</span>
+<a id="__codelineno-8-35" name="__codelineno-8-35" href="#__codelineno-8-35"></a><span class="go">    - trimming/ENCSR000CPO1_1_trimmed.fq.gz</span>
+<a id="__codelineno-8-36" name="__codelineno-8-36" href="#__codelineno-8-36"></a><span class="go">    - trimming/ENCSR000CPO2_1_trimmed.fq.gz</span>
+<a id="__codelineno-8-37" name="__codelineno-8-37" href="#__codelineno-8-37"></a>
+<a id="__codelineno-8-38" name="__codelineno-8-38" href="#__codelineno-8-38"></a><span class="go">  trimming_reports:</span>
+<a id="__codelineno-8-39" name="__codelineno-8-39" href="#__codelineno-8-39"></a><span class="go">    - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt</span>
+<a id="__codelineno-8-40" name="__codelineno-8-40" href="#__codelineno-8-40"></a><span class="go">    - trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt</span>
+<a id="__codelineno-8-41" name="__codelineno-8-41" href="#__codelineno-8-41"></a><span class="go">    - trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt</span>
+<a id="__codelineno-8-42" name="__codelineno-8-42" href="#__codelineno-8-42"></a><span class="go">    - trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt</span>
+<a id="__codelineno-8-43" name="__codelineno-8-43" href="#__codelineno-8-43"></a><span class="go">    - trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt</span>
+<a id="__codelineno-8-44" name="__codelineno-8-44" href="#__codelineno-8-44"></a><span class="go">    - trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt</span>
+<a id="__codelineno-8-45" name="__codelineno-8-45" href="#__codelineno-8-45"></a>
+<a id="__codelineno-8-46" name="__codelineno-8-46" href="#__codelineno-8-46"></a><span class="go">  trimming_fastqc:</span>
+<a id="__codelineno-8-47" name="__codelineno-8-47" href="#__codelineno-8-47"></a><span class="go">    - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]</span>
+<a id="__codelineno-8-48" name="__codelineno-8-48" href="#__codelineno-8-48"></a><span class="go">    - [trimming/ENCSR000COQ2_1_trimmed_fastqc.html, trimming/ENCSR000COQ2_1_trimmed_fastqc.zip]</span>
+<a id="__codelineno-8-49" name="__codelineno-8-49" href="#__codelineno-8-49"></a><span class="go">    - [trimming/ENCSR000COR1_1_trimmed_fastqc.html, trimming/ENCSR000COR1_1_trimmed_fastqc.zip]</span>
+<a id="__codelineno-8-50" name="__codelineno-8-50" href="#__codelineno-8-50"></a><span class="go">    - [trimming/ENCSR000COR2_1_trimmed_fastqc.html, trimming/ENCSR000COR2_1_trimmed_fastqc.zip]</span>
+<a id="__codelineno-8-51" name="__codelineno-8-51" href="#__codelineno-8-51"></a><span class="go">    - [trimming/ENCSR000CPO1_1_trimmed_fastqc.html, trimming/ENCSR000CPO1_1_trimmed_fastqc.zip]</span>
+<a id="__codelineno-8-52" name="__codelineno-8-52" href="#__codelineno-8-52"></a><span class="go">    - [trimming/ENCSR000CPO2_1_trimmed_fastqc.html, trimming/ENCSR000CPO2_1_trimmed_fastqc.zip]</span>
+<a id="__codelineno-8-53" name="__codelineno-8-53" href="#__codelineno-8-53"></a>
+<a id="__codelineno-8-54" name="__codelineno-8-54" href="#__codelineno-8-54"></a><span class="go">  bam:</span>
+<a id="__codelineno-8-55" name="__codelineno-8-55" href="#__codelineno-8-55"></a><span class="go">    - align/ENCSR000COQ1_1_trimmed.bam</span>
+<a id="__codelineno-8-56" name="__codelineno-8-56" href="#__codelineno-8-56"></a><span class="go">    - align/ENCSR000COQ2_1_trimmed.bam</span>
+<a id="__codelineno-8-57" name="__codelineno-8-57" href="#__codelineno-8-57"></a><span class="go">    - align/ENCSR000COR1_1_trimmed.bam</span>
+<a id="__codelineno-8-58" name="__codelineno-8-58" href="#__codelineno-8-58"></a><span class="go">    - align/ENCSR000COR2_1_trimmed.bam</span>
+<a id="__codelineno-8-59" name="__codelineno-8-59" href="#__codelineno-8-59"></a><span class="go">    - align/ENCSR000CPO1_1_trimmed.bam</span>
+<a id="__codelineno-8-60" name="__codelineno-8-60" href="#__codelineno-8-60"></a><span class="go">    - align/ENCSR000CPO2_1_trimmed.bam</span>
+<a id="__codelineno-8-61" name="__codelineno-8-61" href="#__codelineno-8-61"></a>
+<a id="__codelineno-8-62" name="__codelineno-8-62" href="#__codelineno-8-62"></a><span class="go">  align_log:</span>
+<a id="__codelineno-8-63" name="__codelineno-8-63" href="#__codelineno-8-63"></a><span class="go">    - align/ENCSR000COQ1_1_trimmed.hisat2.log</span>
+<a id="__codelineno-8-64" name="__codelineno-8-64" href="#__codelineno-8-64"></a><span class="go">    - align/ENCSR000COQ2_1_trimmed.hisat2.log</span>
+<a id="__codelineno-8-65" name="__codelineno-8-65" href="#__codelineno-8-65"></a><span class="go">    - align/ENCSR000COR1_1_trimmed.hisat2.log</span>
+<a id="__codelineno-8-66" name="__codelineno-8-66" href="#__codelineno-8-66"></a><span class="go">    - align/ENCSR000COR2_1_trimmed.hisat2.log</span>
+<a id="__codelineno-8-67" name="__codelineno-8-67" href="#__codelineno-8-67"></a><span class="go">    - align/ENCSR000CPO1_1_trimmed.hisat2.log</span>
+<a id="__codelineno-8-68" name="__codelineno-8-68" href="#__codelineno-8-68"></a><span class="go">    - align/ENCSR000CPO2_1_trimmed.hisat2.log</span>
 </code></pre></div>
 </details>
 <p>Tym razem każdy krok jest uruchamiany 6 razy, raz dla każdej próbki w pliku CSV.</p>
@@ -5195,15 +5255,79 @@ Wejście <code>val output_name</code> to ciąg znaków, który kontroluje nazwę
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">N E X T F L O W   ~  version 24.10.0</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
-<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="go">Launching `rnaseq.nf` [modest_pare] DSL2 - revision: fc724d3b49</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="go">Launching `rnaseq.nf` [modest_pare] revision: fc724d3b49</span>
 <a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>
 <a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="go">[07/3ff9c5] FASTQC (6)       [100%] 6 of 6, cached: 6 ✔</span>
-<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="go">[2c/8d8e1e] TRIM_GALORE (5)  [100%] 6 of 6, cached: 6 ✔</span>
-<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="go">[a4/7f9c44] HISAT2_ALIGN (6) [100%] 6 of 6, cached: 6 ✔</span>
-<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="go">[56/e1f102] MULTIQC          [100%] 1 of 1 ✔</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="go">[07/3ff9c5] FASTQC (6)       | 6 of 6, cached: 6 ✔</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="go">[2c/8d8e1e] TRIM_GALORE (5)  | 6 of 6, cached: 6 ✔</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="go">[a4/7f9c44] HISAT2_ALIGN (6) | 6 of 6, cached: 6 ✔</span>
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="go">[56/e1f102] MULTIQC          | 1 of 1 ✔</span>
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a>
+<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a><span class="go">Outputs:</span>
+<a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a>
+<a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a><span class="go">  /workspaces/training/nf4-science/rnaseq/results</span>
+<a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a>
+<a id="__codelineno-27-15" name="__codelineno-27-15" href="#__codelineno-27-15"></a><span class="go">  fastqc_zip:</span>
+<a id="__codelineno-27-16" name="__codelineno-27-16" href="#__codelineno-27-16"></a><span class="go">    - fastqc/ENCSR000COQ1_1_fastqc.zip</span>
+<a id="__codelineno-27-17" name="__codelineno-27-17" href="#__codelineno-27-17"></a><span class="go">    - fastqc/ENCSR000COQ2_1_fastqc.zip</span>
+<a id="__codelineno-27-18" name="__codelineno-27-18" href="#__codelineno-27-18"></a><span class="go">    - fastqc/ENCSR000COR1_1_fastqc.zip</span>
+<a id="__codelineno-27-19" name="__codelineno-27-19" href="#__codelineno-27-19"></a><span class="go">    - fastqc/ENCSR000COR2_1_fastqc.zip</span>
+<a id="__codelineno-27-20" name="__codelineno-27-20" href="#__codelineno-27-20"></a><span class="go">    - fastqc/ENCSR000CPO1_1_fastqc.zip</span>
+<a id="__codelineno-27-21" name="__codelineno-27-21" href="#__codelineno-27-21"></a><span class="go">    - fastqc/ENCSR000CPO2_1_fastqc.zip</span>
+<a id="__codelineno-27-22" name="__codelineno-27-22" href="#__codelineno-27-22"></a>
+<a id="__codelineno-27-23" name="__codelineno-27-23" href="#__codelineno-27-23"></a><span class="go">  fastqc_html:</span>
+<a id="__codelineno-27-24" name="__codelineno-27-24" href="#__codelineno-27-24"></a><span class="go">    - fastqc/ENCSR000COQ1_1_fastqc.html</span>
+<a id="__codelineno-27-25" name="__codelineno-27-25" href="#__codelineno-27-25"></a><span class="go">    - fastqc/ENCSR000COQ2_1_fastqc.html</span>
+<a id="__codelineno-27-26" name="__codelineno-27-26" href="#__codelineno-27-26"></a><span class="go">    - fastqc/ENCSR000COR1_1_fastqc.html</span>
+<a id="__codelineno-27-27" name="__codelineno-27-27" href="#__codelineno-27-27"></a><span class="go">    - fastqc/ENCSR000COR2_1_fastqc.html</span>
+<a id="__codelineno-27-28" name="__codelineno-27-28" href="#__codelineno-27-28"></a><span class="go">    - fastqc/ENCSR000CPO1_1_fastqc.html</span>
+<a id="__codelineno-27-29" name="__codelineno-27-29" href="#__codelineno-27-29"></a><span class="go">    - fastqc/ENCSR000CPO2_1_fastqc.html</span>
+<a id="__codelineno-27-30" name="__codelineno-27-30" href="#__codelineno-27-30"></a>
+<a id="__codelineno-27-31" name="__codelineno-27-31" href="#__codelineno-27-31"></a><span class="go">  trimmed_reads:</span>
+<a id="__codelineno-27-32" name="__codelineno-27-32" href="#__codelineno-27-32"></a><span class="go">    - trimming/ENCSR000COQ1_1_trimmed.fq.gz</span>
+<a id="__codelineno-27-33" name="__codelineno-27-33" href="#__codelineno-27-33"></a><span class="go">    - trimming/ENCSR000COQ2_1_trimmed.fq.gz</span>
+<a id="__codelineno-27-34" name="__codelineno-27-34" href="#__codelineno-27-34"></a><span class="go">    - trimming/ENCSR000COR1_1_trimmed.fq.gz</span>
+<a id="__codelineno-27-35" name="__codelineno-27-35" href="#__codelineno-27-35"></a><span class="go">    - trimming/ENCSR000COR2_1_trimmed.fq.gz</span>
+<a id="__codelineno-27-36" name="__codelineno-27-36" href="#__codelineno-27-36"></a><span class="go">    - trimming/ENCSR000CPO1_1_trimmed.fq.gz</span>
+<a id="__codelineno-27-37" name="__codelineno-27-37" href="#__codelineno-27-37"></a><span class="go">    - trimming/ENCSR000CPO2_1_trimmed.fq.gz</span>
+<a id="__codelineno-27-38" name="__codelineno-27-38" href="#__codelineno-27-38"></a>
+<a id="__codelineno-27-39" name="__codelineno-27-39" href="#__codelineno-27-39"></a><span class="go">  trimming_reports:</span>
+<a id="__codelineno-27-40" name="__codelineno-27-40" href="#__codelineno-27-40"></a><span class="go">    - trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt</span>
+<a id="__codelineno-27-41" name="__codelineno-27-41" href="#__codelineno-27-41"></a><span class="go">    - trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt</span>
+<a id="__codelineno-27-42" name="__codelineno-27-42" href="#__codelineno-27-42"></a><span class="go">    - trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt</span>
+<a id="__codelineno-27-43" name="__codelineno-27-43" href="#__codelineno-27-43"></a><span class="go">    - trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt</span>
+<a id="__codelineno-27-44" name="__codelineno-27-44" href="#__codelineno-27-44"></a><span class="go">    - trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt</span>
+<a id="__codelineno-27-45" name="__codelineno-27-45" href="#__codelineno-27-45"></a><span class="go">    - trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt</span>
+<a id="__codelineno-27-46" name="__codelineno-27-46" href="#__codelineno-27-46"></a>
+<a id="__codelineno-27-47" name="__codelineno-27-47" href="#__codelineno-27-47"></a><span class="go">  trimming_fastqc:</span>
+<a id="__codelineno-27-48" name="__codelineno-27-48" href="#__codelineno-27-48"></a><span class="go">    - [trimming/ENCSR000COQ1_1_trimmed_fastqc.html, trimming/ENCSR000COQ1_1_trimmed_fastqc.zip]</span>
+<a id="__codelineno-27-49" name="__codelineno-27-49" href="#__codelineno-27-49"></a><span class="go">    - [trimming/ENCSR000COQ2_1_trimmed_fastqc.html, trimming/ENCSR000COQ2_1_trimmed_fastqc.zip]</span>
+<a id="__codelineno-27-50" name="__codelineno-27-50" href="#__codelineno-27-50"></a><span class="go">    - [trimming/ENCSR000COR1_1_trimmed_fastqc.html, trimming/ENCSR000COR1_1_trimmed_fastqc.zip]</span>
+<a id="__codelineno-27-51" name="__codelineno-27-51" href="#__codelineno-27-51"></a><span class="go">    - [trimming/ENCSR000COR2_1_trimmed_fastqc.html, trimming/ENCSR000COR2_1_trimmed_fastqc.zip]</span>
+<a id="__codelineno-27-52" name="__codelineno-27-52" href="#__codelineno-27-52"></a><span class="go">    - [trimming/ENCSR000CPO1_1_trimmed_fastqc.html, trimming/ENCSR000CPO1_1_trimmed_fastqc.zip]</span>
+<a id="__codelineno-27-53" name="__codelineno-27-53" href="#__codelineno-27-53"></a><span class="go">    - [trimming/ENCSR000CPO2_1_trimmed_fastqc.html, trimming/ENCSR000CPO2_1_trimmed_fastqc.zip]</span>
+<a id="__codelineno-27-54" name="__codelineno-27-54" href="#__codelineno-27-54"></a>
+<a id="__codelineno-27-55" name="__codelineno-27-55" href="#__codelineno-27-55"></a><span class="go">  bam:</span>
+<a id="__codelineno-27-56" name="__codelineno-27-56" href="#__codelineno-27-56"></a><span class="go">    - align/ENCSR000COQ1_1_trimmed.bam</span>
+<a id="__codelineno-27-57" name="__codelineno-27-57" href="#__codelineno-27-57"></a><span class="go">    - align/ENCSR000COQ2_1_trimmed.bam</span>
+<a id="__codelineno-27-58" name="__codelineno-27-58" href="#__codelineno-27-58"></a><span class="go">    - align/ENCSR000COR1_1_trimmed.bam</span>
+<a id="__codelineno-27-59" name="__codelineno-27-59" href="#__codelineno-27-59"></a><span class="go">    - align/ENCSR000COR2_1_trimmed.bam</span>
+<a id="__codelineno-27-60" name="__codelineno-27-60" href="#__codelineno-27-60"></a><span class="go">    - align/ENCSR000CPO1_1_trimmed.bam</span>
+<a id="__codelineno-27-61" name="__codelineno-27-61" href="#__codelineno-27-61"></a><span class="go">    - align/ENCSR000CPO2_1_trimmed.bam</span>
+<a id="__codelineno-27-62" name="__codelineno-27-62" href="#__codelineno-27-62"></a>
+<a id="__codelineno-27-63" name="__codelineno-27-63" href="#__codelineno-27-63"></a><span class="go">  align_log:</span>
+<a id="__codelineno-27-64" name="__codelineno-27-64" href="#__codelineno-27-64"></a><span class="go">    - align/ENCSR000COQ1_1_trimmed.hisat2.log</span>
+<a id="__codelineno-27-65" name="__codelineno-27-65" href="#__codelineno-27-65"></a><span class="go">    - align/ENCSR000COQ2_1_trimmed.hisat2.log</span>
+<a id="__codelineno-27-66" name="__codelineno-27-66" href="#__codelineno-27-66"></a><span class="go">    - align/ENCSR000COR1_1_trimmed.hisat2.log</span>
+<a id="__codelineno-27-67" name="__codelineno-27-67" href="#__codelineno-27-67"></a><span class="go">    - align/ENCSR000COR2_1_trimmed.hisat2.log</span>
+<a id="__codelineno-27-68" name="__codelineno-27-68" href="#__codelineno-27-68"></a><span class="go">    - align/ENCSR000CPO1_1_trimmed.hisat2.log</span>
+<a id="__codelineno-27-69" name="__codelineno-27-69" href="#__codelineno-27-69"></a><span class="go">    - align/ENCSR000CPO2_1_trimmed.hisat2.log</span>
+<a id="__codelineno-27-70" name="__codelineno-27-70" href="#__codelineno-27-70"></a>
+<a id="__codelineno-27-71" name="__codelineno-27-71" href="#__codelineno-27-71"></a><span class="go">  multiqc_report: multiqc/all_single-end.html</span>
+<a id="__codelineno-27-72" name="__codelineno-27-72" href="#__codelineno-27-72"></a>
+<a id="__codelineno-27-73" name="__codelineno-27-73" href="#__codelineno-27-73"></a><span class="go">  multiqc_data: multiqc/all_single-end_data</span>
 </code></pre></div>
 </details>
 <p>Pojedyncze wywołanie MULTIQC zostało dodane po zbuforowanych wywołaniach procesów.</p>
@@ -5217,29 +5341,31 @@ Wejście <code>val output_name</code> to ciąg znaków, który kontroluje nazwę
 <a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="go">│   ├── cutadapt_filtered_reads_plot.txt</span>
 <a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="go">│   ├── cutadapt_trimmed_sequences_plot_3_Counts.txt</span>
 <a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="go">│   ├── cutadapt_trimmed_sequences_plot_3_Obs_Exp.txt</span>
-<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="go">│   ├── fastqc_adapter_content_plot.txt</span>
-<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a><span class="go">│   ├── fastqc_overrepresented_sequences_plot.txt</span>
-<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a><span class="go">│   ├── fastqc_per_base_n_content_plot.txt</span>
-<a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a><span class="go">│   ├── fastqc_per_base_sequence_quality_plot.txt</span>
-<a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a><span class="go">│   ├── fastqc_per_sequence_gc_content_plot_Counts.txt</span>
-<a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a><span class="go">│   ├── fastqc_per_sequence_gc_content_plot_Percentages.txt</span>
-<a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a><span class="go">│   ├── fastqc_per_sequence_quality_scores_plot.txt</span>
-<a id="__codelineno-29-13" name="__codelineno-29-13" href="#__codelineno-29-13"></a><span class="go">│   ├── fastqc_sequence_counts_plot.txt</span>
-<a id="__codelineno-29-14" name="__codelineno-29-14" href="#__codelineno-29-14"></a><span class="go">│   ├── fastqc_sequence_duplication_levels_plot.txt</span>
-<a id="__codelineno-29-15" name="__codelineno-29-15" href="#__codelineno-29-15"></a><span class="go">│   ├── fastqc_sequence_length_distribution_plot.txt</span>
-<a id="__codelineno-29-16" name="__codelineno-29-16" href="#__codelineno-29-16"></a><span class="go">│   ├── fastqc-status-check-heatmap.txt</span>
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="go">│   ├── fastqc-status-check-heatmap.txt</span>
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a><span class="go">│   ├── fastqc_adapter_content_plot.txt</span>
+<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a><span class="go">│   ├── fastqc_overrepresented_sequences_plot.txt</span>
+<a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a><span class="go">│   ├── fastqc_per_base_n_content_plot.txt</span>
+<a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a><span class="go">│   ├── fastqc_per_base_sequence_quality_plot.txt</span>
+<a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a><span class="go">│   ├── fastqc_per_sequence_gc_content_plot_Counts.txt</span>
+<a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a><span class="go">│   ├── fastqc_per_sequence_gc_content_plot_Percentages.txt</span>
+<a id="__codelineno-29-13" name="__codelineno-29-13" href="#__codelineno-29-13"></a><span class="go">│   ├── fastqc_per_sequence_quality_scores_plot.txt</span>
+<a id="__codelineno-29-14" name="__codelineno-29-14" href="#__codelineno-29-14"></a><span class="go">│   ├── fastqc_sequence_counts_plot.txt</span>
+<a id="__codelineno-29-15" name="__codelineno-29-15" href="#__codelineno-29-15"></a><span class="go">│   ├── fastqc_sequence_duplication_levels_plot.txt</span>
+<a id="__codelineno-29-16" name="__codelineno-29-16" href="#__codelineno-29-16"></a><span class="go">│   ├── fastqc_sequence_length_distribution_plot.txt</span>
 <a id="__codelineno-29-17" name="__codelineno-29-17" href="#__codelineno-29-17"></a><span class="go">│   ├── fastqc_top_overrepresented_sequences_table.txt</span>
 <a id="__codelineno-29-18" name="__codelineno-29-18" href="#__codelineno-29-18"></a><span class="go">│   ├── hisat2_se_plot.txt</span>
-<a id="__codelineno-29-19" name="__codelineno-29-19" href="#__codelineno-29-19"></a><span class="go">│   ├── multiqc_citations.txt</span>
-<a id="__codelineno-29-20" name="__codelineno-29-20" href="#__codelineno-29-20"></a><span class="go">│   ├── multiqc_cutadapt.txt</span>
-<a id="__codelineno-29-21" name="__codelineno-29-21" href="#__codelineno-29-21"></a><span class="go">│   ├── multiqc_data.json</span>
-<a id="__codelineno-29-22" name="__codelineno-29-22" href="#__codelineno-29-22"></a><span class="go">│   ├── multiqc_fastqc.txt</span>
-<a id="__codelineno-29-23" name="__codelineno-29-23" href="#__codelineno-29-23"></a><span class="go">│   ├── multiqc_general_stats.txt</span>
-<a id="__codelineno-29-24" name="__codelineno-29-24" href="#__codelineno-29-24"></a><span class="go">│   ├── multiqc_hisat2.txt</span>
-<a id="__codelineno-29-25" name="__codelineno-29-25" href="#__codelineno-29-25"></a><span class="go">│   ├── multiqc.log</span>
-<a id="__codelineno-29-26" name="__codelineno-29-26" href="#__codelineno-29-26"></a><span class="go">│   ├── multiqc_software_versions.txt</span>
-<a id="__codelineno-29-27" name="__codelineno-29-27" href="#__codelineno-29-27"></a><span class="go">│   └── multiqc_sources.txt</span>
-<a id="__codelineno-29-28" name="__codelineno-29-28" href="#__codelineno-29-28"></a><span class="go">└── all_single-end.html</span>
+<a id="__codelineno-29-19" name="__codelineno-29-19" href="#__codelineno-29-19"></a><span class="go">│   ├── llms-full.txt</span>
+<a id="__codelineno-29-20" name="__codelineno-29-20" href="#__codelineno-29-20"></a><span class="go">│   ├── multiqc.log</span>
+<a id="__codelineno-29-21" name="__codelineno-29-21" href="#__codelineno-29-21"></a><span class="go">│   ├── multiqc.parquet</span>
+<a id="__codelineno-29-22" name="__codelineno-29-22" href="#__codelineno-29-22"></a><span class="go">│   ├── multiqc_citations.txt</span>
+<a id="__codelineno-29-23" name="__codelineno-29-23" href="#__codelineno-29-23"></a><span class="go">│   ├── multiqc_cutadapt.txt</span>
+<a id="__codelineno-29-24" name="__codelineno-29-24" href="#__codelineno-29-24"></a><span class="go">│   ├── multiqc_data.json</span>
+<a id="__codelineno-29-25" name="__codelineno-29-25" href="#__codelineno-29-25"></a><span class="go">│   ├── multiqc_fastqc.txt</span>
+<a id="__codelineno-29-26" name="__codelineno-29-26" href="#__codelineno-29-26"></a><span class="go">│   ├── multiqc_general_stats.txt</span>
+<a id="__codelineno-29-27" name="__codelineno-29-27" href="#__codelineno-29-27"></a><span class="go">│   ├── multiqc_hisat2.txt</span>
+<a id="__codelineno-29-28" name="__codelineno-29-28" href="#__codelineno-29-28"></a><span class="go">│   ├── multiqc_software_versions.txt</span>
+<a id="__codelineno-29-29" name="__codelineno-29-29" href="#__codelineno-29-29"></a><span class="go">│   └── multiqc_sources.txt</span>
+<a id="__codelineno-29-30" name="__codelineno-29-30" href="#__codelineno-29-30"></a><span class="go">└── all_single-end.html</span>
 </code></pre></div>
 </details>
 <p>Ten ostatni plik <code>all_single-end.html</code> to pełny zagregowany raport, wygodnie zapakowany w jeden łatwy do przeglądania plik HTML.</p>
@@ -5730,15 +5856,87 @@ Zaktualizuj blok <code>.mix()</code> w <code>rnaseq_pe.nf</code>, aby uwzględni
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="go">N E X T F L O W   ~  version 24.10.0</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a>
-<a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a><span class="go">Launching `rnaseq_pe.nf` [reverent_kare] DSL2 - revision: 9c376cc219</span>
+<a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a><span class="go">Launching `rnaseq_pe.nf` [reverent_kare] revision: 9c376cc219</span>
 <a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a>
 <a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a><span class="go">executor &gt;  local (19)</span>
-<a id="__codelineno-58-6" name="__codelineno-58-6" href="#__codelineno-58-6"></a><span class="go">[c5/cbde15] FASTQC (5)       [100%] 6 of 6 ✔</span>
-<a id="__codelineno-58-7" name="__codelineno-58-7" href="#__codelineno-58-7"></a><span class="go">[e4/fa2784] TRIM_GALORE (5)  [100%] 6 of 6 ✔</span>
-<a id="__codelineno-58-8" name="__codelineno-58-8" href="#__codelineno-58-8"></a><span class="go">[3a/e23049] HISAT2_ALIGN (5) [100%] 6 of 6 ✔</span>
-<a id="__codelineno-58-9" name="__codelineno-58-9" href="#__codelineno-58-9"></a><span class="go">[e6/a3ccd9] MULTIQC          [100%] 1 of 1 ✔</span>
+<a id="__codelineno-58-6" name="__codelineno-58-6" href="#__codelineno-58-6"></a><span class="go">[c5/cbde15] FASTQC (5)       | 6 of 6 ✔</span>
+<a id="__codelineno-58-7" name="__codelineno-58-7" href="#__codelineno-58-7"></a><span class="go">[e4/fa2784] TRIM_GALORE (5)  | 6 of 6 ✔</span>
+<a id="__codelineno-58-8" name="__codelineno-58-8" href="#__codelineno-58-8"></a><span class="go">[3a/e23049] HISAT2_ALIGN (5) | 6 of 6 ✔</span>
+<a id="__codelineno-58-9" name="__codelineno-58-9" href="#__codelineno-58-9"></a><span class="go">[e6/a3ccd9] MULTIQC          | 1 of 1 ✔</span>
+<a id="__codelineno-58-10" name="__codelineno-58-10" href="#__codelineno-58-10"></a>
+<a id="__codelineno-58-11" name="__codelineno-58-11" href="#__codelineno-58-11"></a><span class="go">Outputs:</span>
+<a id="__codelineno-58-12" name="__codelineno-58-12" href="#__codelineno-58-12"></a>
+<a id="__codelineno-58-13" name="__codelineno-58-13" href="#__codelineno-58-13"></a><span class="go">  /workspaces/training/nf4-science/rnaseq/results</span>
+<a id="__codelineno-58-14" name="__codelineno-58-14" href="#__codelineno-58-14"></a>
+<a id="__codelineno-58-15" name="__codelineno-58-15" href="#__codelineno-58-15"></a><span class="go">  fastqc_zip:</span>
+<a id="__codelineno-58-16" name="__codelineno-58-16" href="#__codelineno-58-16"></a><span class="go">    - [fastqc/ENCSR000COQ1_1_fastqc.zip, fastqc/ENCSR000COQ1_2_fastqc.zip]</span>
+<a id="__codelineno-58-17" name="__codelineno-58-17" href="#__codelineno-58-17"></a><span class="go">    - [fastqc/ENCSR000COQ2_1_fastqc.zip, fastqc/ENCSR000COQ2_2_fastqc.zip]</span>
+<a id="__codelineno-58-18" name="__codelineno-58-18" href="#__codelineno-58-18"></a><span class="go">    - [fastqc/ENCSR000COR1_1_fastqc.zip, fastqc/ENCSR000COR1_2_fastqc.zip]</span>
+<a id="__codelineno-58-19" name="__codelineno-58-19" href="#__codelineno-58-19"></a><span class="go">    - [fastqc/ENCSR000COR2_1_fastqc.zip, fastqc/ENCSR000COR2_2_fastqc.zip]</span>
+<a id="__codelineno-58-20" name="__codelineno-58-20" href="#__codelineno-58-20"></a><span class="go">    - [fastqc/ENCSR000CPO1_1_fastqc.zip, fastqc/ENCSR000CPO1_2_fastqc.zip]</span>
+<a id="__codelineno-58-21" name="__codelineno-58-21" href="#__codelineno-58-21"></a><span class="go">    - [fastqc/ENCSR000CPO2_1_fastqc.zip, fastqc/ENCSR000CPO2_2_fastqc.zip]</span>
+<a id="__codelineno-58-22" name="__codelineno-58-22" href="#__codelineno-58-22"></a>
+<a id="__codelineno-58-23" name="__codelineno-58-23" href="#__codelineno-58-23"></a><span class="go">  fastqc_html:</span>
+<a id="__codelineno-58-24" name="__codelineno-58-24" href="#__codelineno-58-24"></a><span class="go">    - [fastqc/ENCSR000COQ1_1_fastqc.html, fastqc/ENCSR000COQ1_2_fastqc.html]</span>
+<a id="__codelineno-58-25" name="__codelineno-58-25" href="#__codelineno-58-25"></a><span class="go">    - [fastqc/ENCSR000COQ2_1_fastqc.html, fastqc/ENCSR000COQ2_2_fastqc.html]</span>
+<a id="__codelineno-58-26" name="__codelineno-58-26" href="#__codelineno-58-26"></a><span class="go">    - [fastqc/ENCSR000COR1_1_fastqc.html, fastqc/ENCSR000COR1_2_fastqc.html]</span>
+<a id="__codelineno-58-27" name="__codelineno-58-27" href="#__codelineno-58-27"></a><span class="go">    - [fastqc/ENCSR000COR2_1_fastqc.html, fastqc/ENCSR000COR2_2_fastqc.html]</span>
+<a id="__codelineno-58-28" name="__codelineno-58-28" href="#__codelineno-58-28"></a><span class="go">    - [fastqc/ENCSR000CPO1_1_fastqc.html, fastqc/ENCSR000CPO1_2_fastqc.html]</span>
+<a id="__codelineno-58-29" name="__codelineno-58-29" href="#__codelineno-58-29"></a><span class="go">    - [fastqc/ENCSR000CPO2_1_fastqc.html, fastqc/ENCSR000CPO2_2_fastqc.html]</span>
+<a id="__codelineno-58-30" name="__codelineno-58-30" href="#__codelineno-58-30"></a>
+<a id="__codelineno-58-31" name="__codelineno-58-31" href="#__codelineno-58-31"></a><span class="go">  trimmed_reads:</span>
+<a id="__codelineno-58-32" name="__codelineno-58-32" href="#__codelineno-58-32"></a><span class="go">    - [trimming/ENCSR000COQ1_1_val_1.fq.gz, trimming/ENCSR000COQ1_2_val_2.fq.gz]</span>
+<a id="__codelineno-58-33" name="__codelineno-58-33" href="#__codelineno-58-33"></a><span class="go">    - [trimming/ENCSR000COQ2_1_val_1.fq.gz, trimming/ENCSR000COQ2_2_val_2.fq.gz]</span>
+<a id="__codelineno-58-34" name="__codelineno-58-34" href="#__codelineno-58-34"></a><span class="go">    - [trimming/ENCSR000COR1_1_val_1.fq.gz, trimming/ENCSR000COR1_2_val_2.fq.gz]</span>
+<a id="__codelineno-58-35" name="__codelineno-58-35" href="#__codelineno-58-35"></a><span class="go">    - [trimming/ENCSR000COR2_1_val_1.fq.gz, trimming/ENCSR000COR2_2_val_2.fq.gz]</span>
+<a id="__codelineno-58-36" name="__codelineno-58-36" href="#__codelineno-58-36"></a><span class="go">    - [trimming/ENCSR000CPO1_1_val_1.fq.gz, trimming/ENCSR000CPO1_2_val_2.fq.gz]</span>
+<a id="__codelineno-58-37" name="__codelineno-58-37" href="#__codelineno-58-37"></a><span class="go">    - [trimming/ENCSR000CPO2_1_val_1.fq.gz, trimming/ENCSR000CPO2_2_val_2.fq.gz]</span>
+<a id="__codelineno-58-38" name="__codelineno-58-38" href="#__codelineno-58-38"></a>
+<a id="__codelineno-58-39" name="__codelineno-58-39" href="#__codelineno-58-39"></a><span class="go">  trimming_reports:</span>
+<a id="__codelineno-58-40" name="__codelineno-58-40" href="#__codelineno-58-40"></a><span class="go">    - [trimming/ENCSR000COQ1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COQ1_2.fastq.gz_trimming_report.txt]</span>
+<a id="__codelineno-58-41" name="__codelineno-58-41" href="#__codelineno-58-41"></a><span class="go">    - [trimming/ENCSR000COQ2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COQ2_2.fastq.gz_trimming_report.txt]</span>
+<a id="__codelineno-58-42" name="__codelineno-58-42" href="#__codelineno-58-42"></a><span class="go">    - [trimming/ENCSR000COR1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COR1_2.fastq.gz_trimming_report.txt]</span>
+<a id="__codelineno-58-43" name="__codelineno-58-43" href="#__codelineno-58-43"></a><span class="go">    - [trimming/ENCSR000COR2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000COR2_2.fastq.gz_trimming_report.txt]</span>
+<a id="__codelineno-58-44" name="__codelineno-58-44" href="#__codelineno-58-44"></a><span class="go">    - [trimming/ENCSR000CPO1_1.fastq.gz_trimming_report.txt, trimming/ENCSR000CPO1_2.fastq.gz_trimming_report.txt]</span>
+<a id="__codelineno-58-45" name="__codelineno-58-45" href="#__codelineno-58-45"></a><span class="go">    - [trimming/ENCSR000CPO2_1.fastq.gz_trimming_report.txt, trimming/ENCSR000CPO2_2.fastq.gz_trimming_report.txt]</span>
+<a id="__codelineno-58-46" name="__codelineno-58-46" href="#__codelineno-58-46"></a>
+<a id="__codelineno-58-47" name="__codelineno-58-47" href="#__codelineno-58-47"></a><span class="go">  trimming_fastqc_1:</span>
+<a id="__codelineno-58-48" name="__codelineno-58-48" href="#__codelineno-58-48"></a><span class="go">    - [trimming/ENCSR000COQ1_1_val_1_fastqc.html, trimming/ENCSR000COQ1_1_val_1_fastqc.zip]</span>
+<a id="__codelineno-58-49" name="__codelineno-58-49" href="#__codelineno-58-49"></a><span class="go">    - [trimming/ENCSR000COQ2_1_val_1_fastqc.html, trimming/ENCSR000COQ2_1_val_1_fastqc.zip]</span>
+<a id="__codelineno-58-50" name="__codelineno-58-50" href="#__codelineno-58-50"></a><span class="go">    - [trimming/ENCSR000COR1_1_val_1_fastqc.html, trimming/ENCSR000COR1_1_val_1_fastqc.zip]</span>
+<a id="__codelineno-58-51" name="__codelineno-58-51" href="#__codelineno-58-51"></a><span class="go">    - [trimming/ENCSR000COR2_1_val_1_fastqc.html, trimming/ENCSR000COR2_1_val_1_fastqc.zip]</span>
+<a id="__codelineno-58-52" name="__codelineno-58-52" href="#__codelineno-58-52"></a><span class="go">    - [trimming/ENCSR000CPO1_1_val_1_fastqc.html, trimming/ENCSR000CPO1_1_val_1_fastqc.zip]</span>
+<a id="__codelineno-58-53" name="__codelineno-58-53" href="#__codelineno-58-53"></a><span class="go">    - [trimming/ENCSR000CPO2_1_val_1_fastqc.html, trimming/ENCSR000CPO2_1_val_1_fastqc.zip]</span>
+<a id="__codelineno-58-54" name="__codelineno-58-54" href="#__codelineno-58-54"></a>
+<a id="__codelineno-58-55" name="__codelineno-58-55" href="#__codelineno-58-55"></a><span class="go">  trimming_fastqc_2:</span>
+<a id="__codelineno-58-56" name="__codelineno-58-56" href="#__codelineno-58-56"></a><span class="go">    - [trimming/ENCSR000COQ1_2_val_2_fastqc.html, trimming/ENCSR000COQ1_2_val_2_fastqc.zip]</span>
+<a id="__codelineno-58-57" name="__codelineno-58-57" href="#__codelineno-58-57"></a><span class="go">    - [trimming/ENCSR000COQ2_2_val_2_fastqc.html, trimming/ENCSR000COQ2_2_val_2_fastqc.zip]</span>
+<a id="__codelineno-58-58" name="__codelineno-58-58" href="#__codelineno-58-58"></a><span class="go">    - [trimming/ENCSR000COR1_2_val_2_fastqc.html, trimming/ENCSR000COR1_2_val_2_fastqc.zip]</span>
+<a id="__codelineno-58-59" name="__codelineno-58-59" href="#__codelineno-58-59"></a><span class="go">    - [trimming/ENCSR000COR2_2_val_2_fastqc.html, trimming/ENCSR000COR2_2_val_2_fastqc.zip]</span>
+<a id="__codelineno-58-60" name="__codelineno-58-60" href="#__codelineno-58-60"></a><span class="go">    - [trimming/ENCSR000CPO1_2_val_2_fastqc.html, trimming/ENCSR000CPO1_2_val_2_fastqc.zip]</span>
+<a id="__codelineno-58-61" name="__codelineno-58-61" href="#__codelineno-58-61"></a><span class="go">    - [trimming/ENCSR000CPO2_2_val_2_fastqc.html, trimming/ENCSR000CPO2_2_val_2_fastqc.zip]</span>
+<a id="__codelineno-58-62" name="__codelineno-58-62" href="#__codelineno-58-62"></a>
+<a id="__codelineno-58-63" name="__codelineno-58-63" href="#__codelineno-58-63"></a><span class="go">  bam:</span>
+<a id="__codelineno-58-64" name="__codelineno-58-64" href="#__codelineno-58-64"></a><span class="go">    - align/ENCSR000COQ1_1_val_1.bam</span>
+<a id="__codelineno-58-65" name="__codelineno-58-65" href="#__codelineno-58-65"></a><span class="go">    - align/ENCSR000COQ2_1_val_1.bam</span>
+<a id="__codelineno-58-66" name="__codelineno-58-66" href="#__codelineno-58-66"></a><span class="go">    - align/ENCSR000COR1_1_val_1.bam</span>
+<a id="__codelineno-58-67" name="__codelineno-58-67" href="#__codelineno-58-67"></a><span class="go">    - align/ENCSR000COR2_1_val_1.bam</span>
+<a id="__codelineno-58-68" name="__codelineno-58-68" href="#__codelineno-58-68"></a><span class="go">    - align/ENCSR000CPO1_1_val_1.bam</span>
+<a id="__codelineno-58-69" name="__codelineno-58-69" href="#__codelineno-58-69"></a><span class="go">    - align/ENCSR000CPO2_1_val_1.bam</span>
+<a id="__codelineno-58-70" name="__codelineno-58-70" href="#__codelineno-58-70"></a>
+<a id="__codelineno-58-71" name="__codelineno-58-71" href="#__codelineno-58-71"></a><span class="go">  align_log:</span>
+<a id="__codelineno-58-72" name="__codelineno-58-72" href="#__codelineno-58-72"></a><span class="go">    - align/ENCSR000COQ1_1_val_1.hisat2.log</span>
+<a id="__codelineno-58-73" name="__codelineno-58-73" href="#__codelineno-58-73"></a><span class="go">    - align/ENCSR000COQ2_1_val_1.hisat2.log</span>
+<a id="__codelineno-58-74" name="__codelineno-58-74" href="#__codelineno-58-74"></a><span class="go">    - align/ENCSR000COR1_1_val_1.hisat2.log</span>
+<a id="__codelineno-58-75" name="__codelineno-58-75" href="#__codelineno-58-75"></a><span class="go">    - align/ENCSR000COR2_1_val_1.hisat2.log</span>
+<a id="__codelineno-58-76" name="__codelineno-58-76" href="#__codelineno-58-76"></a><span class="go">    - align/ENCSR000CPO1_1_val_1.hisat2.log</span>
+<a id="__codelineno-58-77" name="__codelineno-58-77" href="#__codelineno-58-77"></a><span class="go">    - align/ENCSR000CPO2_1_val_1.hisat2.log</span>
+<a id="__codelineno-58-78" name="__codelineno-58-78" href="#__codelineno-58-78"></a>
+<a id="__codelineno-58-79" name="__codelineno-58-79" href="#__codelineno-58-79"></a><span class="go">  multiqc_report: multiqc/all_paired-end.html</span>
+<a id="__codelineno-58-80" name="__codelineno-58-80" href="#__codelineno-58-80"></a>
+<a id="__codelineno-58-81" name="__codelineno-58-81" href="#__codelineno-58-81"></a><span class="go">  multiqc_data: multiqc/all_paired-end_data</span>
 </code></pre></div>
 </details>
 <p>Teraz mamy dwie nieco rozbieżne wersje naszego workflow'u, jedną dla danych single-end i jedną dla danych paired-end.

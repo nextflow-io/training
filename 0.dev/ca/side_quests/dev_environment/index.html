@@ -5259,7 +5259,7 @@
 <a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="go">│   └── utils.nf</span>
 <a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="go">└── nextflow.config</span>
 <a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="go">3 directories, 12 files</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="go">2 directories, 12 files</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Sobre els fitxers d'exemple</p>
@@ -5460,7 +5460,7 @@
 <li>Navegueu al procés <code>TRIM_GALORE</code> al bloc del workflow. Està definit en línia, de manera que no us portarà a un fitxer separat, però encara us mostrarà la definició del procés i podreu navegar enrere on éreu.</li>
 </ol>
 <h3 id="42-navegacio-per-simbols">4.2. Navegació per símbols<a class="headerlink" href="#42-navegacio-per-simbols" title="Permanent link">&para;</a></h3>
-<p>Amb <code>complex_workflow.nf</code> encara obert, podeu obtenir una visió general de tots els símbols del fitxer escrivint <code>@</code> a la barra de cerca a la part superior de VSCode (la drecera de teclat és <code>Ctrl/Cmd+Shift+O</code>, però pot no funcionar a Codespaces). Això obre el panell de navegació per símbols, que llista tots els símbols del fitxer actual:</p>
+<p>Amb <code>complex_workflow.nf</code> encara obert, podeu obtenir una visió general de tots els símbols del fitxer escrivint <code>@</code> a la barra de cerca a la part superior de VS Code (la drecera de teclat és <code>Ctrl/Cmd+Shift+O</code>, però pot no funcionar a Codespaces). Això obre el panell de navegació per símbols, que llista tots els símbols del fitxer actual:</p>
 <p><img alt="Navegació per símbols" src="../img/symbols.png" /></p>
 <p>Això mostra:</p>
 <ul>
@@ -5480,7 +5480,7 @@
 <h3 id="45-visualitzacio-del-dag">4.5. Visualització del DAG<a class="headerlink" href="#45-visualitzacio-del-dag" title="Permanent link">&para;</a></h3>
 <p>L'extensió de Nextflow de VS Code pot visualitzar el vostre workflow com un Graf Acíclic Dirigit (DAG). Això us ajuda a entendre el flux de dades i les dependències entre processos. Obriu <code>complex_workflow.nf</code> i feu clic al botó "Preview DAG" que apareix sobre <code>workflow {</code> (el segon bloc <code>workflow</code> d'aquest fitxer):</p>
 <p><img alt="Previsualització del DAG" src="../img/dag_preview.png" /></p>
-<p>Això és només el workflow d'entrada, però també podeu previsualitzar el DAG per als workflows interns fent clic al botó "Preview DAG" sobre el workflow <code>RNASEQ_PIPELINE {</code> més amunt:</p>
+<p>Aquest és només el workflow d'entrada, però també podeu previsualitzar el DAG per als workflows interns fent clic al botó "Preview DAG" sobre el workflow <code>RNASEQ_PIPELINE {</code> més amunt:</p>
 <p><img alt="Previsualització del DAG del workflow intern" src="../img/dag_preview_inner.png" /></p>
 <p>Per a aquest workflow, podeu utilitzar els nodes del DAG per navegar a les definicions de processos corresponents al codi. Feu clic en un node i us portarà a la definició del procés rellevant a l'editor. Especialment quan un workflow creix fins a una mida gran, això pot ajudar-vos realment a navegar pel codi i entendre com estan connectats els processos.</p>
 <h3 id="conclusio_4">Conclusió<a class="headerlink" href="#conclusio_4" title="Permanent link">&para;</a></h3>
@@ -5609,7 +5609,7 @@
 <li>Vistes de diferències en línia</li>
 <li>Capacitats de commit i push</li>
 </ul>
-<p>Obriu el panell de Control de Codi Font utilitzant el botó de control de codi font (<img alt="Icona de control de codi font" src="../img/source_control_icon.png" />) (<code>Ctrl+Shift+G</code> o <code>Cmd+Shift+G</code> si esteu treballant amb VSCode localment) per veure els canvis de git i fer commits directament a l'editor.</p>
+<p>Obriu el panell de Control de Codi Font utilitzant el botó de control de codi font (<img alt="Icona de control de codi font" src="../img/source_control_icon.png" />) (<code>Ctrl+Shift+G</code> o <code>Cmd+Shift+G</code> si esteu treballant amb VS Code localment) per veure els canvis de git i preparar commits directament a l'editor.</p>
 <p><img alt="Panell de Control de Codi Font" src="../img/source_control.png" /></p>
 <h3 id="72-execucio-i-inspeccio-de-workflows">7.2. Execució i inspecció de workflows<a class="headerlink" href="#72-execucio-i-inspeccio-de-workflows" title="Permanent link">&para;</a></h3>
 <p>Executem un workflow i després inspeccionem els resultats. Al terminal integrat (<code>Ctrl+Shift+</code> accent greu tant per a Windows com per a MacOS), executeu el workflow bàsic:</p>

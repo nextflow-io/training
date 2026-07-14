@@ -3382,7 +3382,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Testowanie z nf-test
   
 
     
@@ -5258,9 +5258,9 @@ Ale będziemy jej potrzebować, aby skorzystać z wyjść na poziomie workflow'u
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">Launching `hello-world.nf` [goofy_torvalds] revision: c33d41f479</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="go">executor &gt;  local (1)</span>
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="hll"><span class="go">[65/7be2fa] sayHello | 1 of 1 ✔</span>
@@ -5515,16 +5515,22 @@ Później nauczysz się sposobów generowania zaawansowanych struktur katalogów
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
-<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">Launching `hello-world.nf` [jovial_mayer] revision: 35bd3425e5</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
 <a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="go">executor &gt;  local (1)</span>
 <a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="go">[9f/48ef97] sayHello | 1 of 1 ✔</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="go">  /workspaces/training/hello-nextflow/results</span>
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="go">  first_output: output.txt</span>
 </code></pre></div>
 </details>
-<p>Wyjście terminala powinno wyglądać znajomo. Zewnętrznie nic się nie zmieniło.</p>
-<p>Jednak sprawdź eksplorator plików: tym razem Nextflow utworzył nowy katalog o nazwie <code>results/</code>.</p>
+<p>Wyjście terminala kończy się teraz podsumowaniem <code>Outputs:</code>, które wymienia opublikowane wyjścia i katalog, do którego zostały zapisane.</p>
+<p>Sprawdź eksplorator plików: tym razem Nextflow utworzył również nowy katalog o nazwie <code>results/</code>.</p>
 <details class="abstract">
 <summary>Zawartość katalogu</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">.</span>
@@ -5595,12 +5601,18 @@ Aby ustawić niestandardową lokalizację, po prostu edytuj <code>path</code> od
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>
-<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="go">Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="go">Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1</span>
 <a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
 <a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="go">[8c/79499c] process &gt; sayHello [100%] 1 of 1 ✔</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="go">[8c/79499c] sayHello | 1 of 1 ✔</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="go">  /workspaces/training/hello-nextflow/results</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a>
+<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="go">  first_output: hello_world/output.txt</span>
 </code></pre></div>
 </details>
 <p>Tym razem wynik jest zapisywany w określonym podkatalogu.</p>
@@ -5670,12 +5682,18 @@ Po prostu dodaj <code>mode 'copy'</code> do odpowiedniej definicji wyjścia na p
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>
-<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="go">Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="go">Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1</span>
 <a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>
 <a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="go">[df/521638] process &gt; sayHello [100%] 1 of 1 ✔</span>
+<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="go">[df/521638] sayHello | 1 of 1 ✔</span>
+<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a>
+<a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a>
+<a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="go">  /workspaces/training/hello-nextflow/results</span>
+<a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a>
+<a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a><span class="go">  first_output: hello_world/output.txt</span>
 </code></pre></div>
 </details>
 <p>Tym razem, jeśli spojrzysz na wyniki, plik jest właściwą kopią, a nie tylko dowiązaniem symbolicznym.</p>
@@ -5780,20 +5798,20 @@ Chcemy dodać elastyczność za pomocą zmiennej wejściowej, co ułatwi zmianę
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-14">14</a></span>
 <span class="normal"><a href="#__codelineno-36-15">15</a></span>
 <span class="normal"><a href="#__codelineno-36-16">16</a></span>
-<span class="normal"><a href="#__codelineno-36-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-14" name="__codelineno-36-14"></a><span class="nl">script:</span>
-<a id="__codelineno-36-15" name="__codelineno-36-15"></a><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-36-16" name="__codelineno-36-16"></a><span class="hll"><span class="s2">echo &#39;${greeting}&#39; &gt; output.txt</span>
-</span><a id="__codelineno-36-17" name="__codelineno-36-17"></a><span class="s2">&quot;&quot;&quot;</span>
+<span class="normal"><a href="#__codelineno-36-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-14" name="__codelineno-36-14"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-36-15" name="__codelineno-36-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-36-16" name="__codelineno-36-16"></a><span class="hll"><span class="s2">    echo &#39;${greeting}&#39; &gt; output.txt</span>
+</span><a id="__codelineno-36-17" name="__codelineno-36-17"></a><span class="s2">    &quot;&quot;&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-14">14</a></span>
 <span class="normal"><a href="#__codelineno-37-15">15</a></span>
 <span class="normal"><a href="#__codelineno-37-16">16</a></span>
-<span class="normal"><a href="#__codelineno-37-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-14" name="__codelineno-37-14"></a><span class="nl">script:</span>
-<a id="__codelineno-37-15" name="__codelineno-37-15"></a><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-37-16" name="__codelineno-37-16"></a><span class="hll"><span class="s2">echo &#39;Hello World!&#39; &gt; output.txt</span>
-</span><a id="__codelineno-37-17" name="__codelineno-37-17"></a><span class="s2">&quot;&quot;&quot;</span>
+<span class="normal"><a href="#__codelineno-37-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-14" name="__codelineno-37-14"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-37-15" name="__codelineno-37-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-37-16" name="__codelineno-37-16"></a><span class="hll"><span class="s2">    echo &#39;Hello World!&#39; &gt; output.txt</span>
+</span><a id="__codelineno-37-17" name="__codelineno-37-17"></a><span class="s2">    &quot;&quot;&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5823,14 +5841,14 @@ Zasadniczo możemy to napisać gdziekolwiek; ale ponieważ zamierzamy przekazać
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-23">23</a></span>
-<span class="normal"><a href="#__codelineno-38-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-23" name="__codelineno-38-23"></a><span class="c1">// wyemituj pozdrowienie</span>
-<a id="__codelineno-38-24" name="__codelineno-38-24"></a><span class="hll"><span class="n">sayHello</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-38-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-23" name="__codelineno-38-23"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<a id="__codelineno-38-24" name="__codelineno-38-24"></a><span class="hll"><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-23">23</a></span>
-<span class="normal"><a href="#__codelineno-39-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-23" name="__codelineno-39-23"></a><span class="c1">// wyemituj pozdrowienie</span>
-<a id="__codelineno-39-24" name="__codelineno-39-24"></a><span class="hll"><span class="n">sayHello</span><span class="o">()</span>
+<span class="normal"><a href="#__codelineno-39-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-23" name="__codelineno-39-23"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<a id="__codelineno-39-24" name="__codelineno-39-24"></a><span class="hll"><span class="w">    </span><span class="n">sayHello</span><span class="o">()</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5843,12 +5861,18 @@ Zasadniczo możemy to napisać gdziekolwiek; ale ponieważ zamierzamy przekazać
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>
-<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="go">Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea</span>
+<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="go">Launching `hello-world.nf` [elated_lavoisier] revision: 7c031b42ea</span>
 <a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>
 <a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="go">executor &gt;  local (1)</span>
 <a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a><span class="go">[4b/654319] sayHello | 1 of 1 ✔</span>
+<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a>
+<a id="__codelineno-41-8" name="__codelineno-41-8" href="#__codelineno-41-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-41-9" name="__codelineno-41-9" href="#__codelineno-41-9"></a>
+<a id="__codelineno-41-10" name="__codelineno-41-10" href="#__codelineno-41-10"></a><span class="go">  /workspaces/training/hello-nextflow/results</span>
+<a id="__codelineno-41-11" name="__codelineno-41-11" href="#__codelineno-41-11"></a>
+<a id="__codelineno-41-12" name="__codelineno-41-12" href="#__codelineno-41-12"></a><span class="go">  first_output: hello_world/output.txt</span>
 </code></pre></div>
 </details>
 <p>Jeśli wprowadzono wszystkie te edycje poprawnie, powinieneś uzyskać kolejne pomyślne wykonanie.</p>
@@ -5900,12 +5924,18 @@ To ułatwi znalezienie wszystkich konfigurowalnych parametrów na pierwszy rzut 
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>
-<a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="go">Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582</span>
+<a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="go">Launching `hello-world.nf` [determined_edison] revision: 3539118582</span>
 <a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a>
 <a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a><span class="go">executor &gt;  local (1)</span>
 <a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a><span class="go">[72/394147] sayHello | 1 of 1 ✔</span>
+<a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a>
+<a id="__codelineno-45-8" name="__codelineno-45-8" href="#__codelineno-45-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-45-9" name="__codelineno-45-9" href="#__codelineno-45-9"></a>
+<a id="__codelineno-45-10" name="__codelineno-45-10" href="#__codelineno-45-10"></a><span class="go">  /workspaces/training/hello-nextflow/results</span>
+<a id="__codelineno-45-11" name="__codelineno-45-11" href="#__codelineno-45-11"></a>
+<a id="__codelineno-45-12" name="__codelineno-45-12" href="#__codelineno-45-12"></a><span class="go">  first_output: hello_world/output.txt</span>
 </code></pre></div>
 </details>
 <details class="question">
@@ -5926,7 +5956,8 @@ To ułatwi znalezienie wszystkich konfigurowalnych parametrów na pierwszy rzut 
 <p>Prawdopodobnie używasz starszego parsera języka Nextflow v1.
 Zostało to wspomniane na początku kursu, ale może Ci to umknęło.
 Sprawdź materiały pomocnicze <a href="../../info/nxf_versions/">Wersje Nextflow</a>.</p>
-<p>Krótko mówiąc, jeśli używasz Nextflow <code>25.10</code>, musisz włączyć parser języka v2:</p>
+<p>Parser v2 jest domyślny od Nextflow 26.04 wzwyż, więc ten błąd pojawi się tylko na starszych wersjach.
+Na wersji starszej niż 26.04 musisz włączyć parser języka v2:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v2
 </code></pre></div>
 </details>
@@ -5944,12 +5975,18 @@ Sprawdź materiały pomocnicze <a href="../../info/nxf_versions/">Wersje Nextflo
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>
-<a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="go">Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582</span>
+<a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="go">Launching `hello-world.nf` [elegant_faraday] revision: 3539118582</span>
 <a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>
 <a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a><span class="go">executor &gt;  local (1)</span>
 <a id="__codelineno-50-6" name="__codelineno-50-6" href="#__codelineno-50-6"></a><span class="go">[6f/a12a91] sayHello | 1 of 1 ✔</span>
+<a id="__codelineno-50-7" name="__codelineno-50-7" href="#__codelineno-50-7"></a>
+<a id="__codelineno-50-8" name="__codelineno-50-8" href="#__codelineno-50-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-50-9" name="__codelineno-50-9" href="#__codelineno-50-9"></a>
+<a id="__codelineno-50-10" name="__codelineno-50-10" href="#__codelineno-50-10"></a><span class="go">  /workspaces/training/hello-nextflow/results</span>
+<a id="__codelineno-50-11" name="__codelineno-50-11" href="#__codelineno-50-11"></a>
+<a id="__codelineno-50-12" name="__codelineno-50-12" href="#__codelineno-50-12"></a><span class="go">  first_output: hello_world/output.txt</span>
 </code></pre></div>
 </details>
 <p>Po raz kolejny powinieneś znaleźć odpowiednie zaktualizowane wyjście w Swoim katalogu wyników.</p>
@@ -5972,8 +6009,6 @@ Jeśli ten sam parametr jest ustawiony na różne wartości w wielu miejscach, N
 <h2 id="4-zarzadzaj-wykonywaniem-workflowu">4. Zarządzaj wykonywaniem workflow'u<a class="headerlink" href="#4-zarzadzaj-wykonywaniem-workflowu" title="Permanent link">&para;</a></h2>
 <p>Wiedza o tym, jak uruchamiać workflow'y i pobierać wyjścia, jest świetna, ale szybko przekonasz się, że jest kilka innych aspektów zarządzania workflow'em, które ułatwią Ci życie, szczególnie jeśli tworzysz własne workflow'y.</p>
 <p>Tutaj pokażemy Ci, jak używać funkcji <a href="https://nextflow.io/docs/latest/cache-and-resume.html"><code>-resume</code></a>, gdy musisz ponownie uruchomić ten sam workflow, jak przeglądać dziennik poprzednich wykonań za pomocą <a href="https://nextflow.io/docs/latest/reference/cli.html#log"><code>nextflow log</code></a> i jak usuwać starsze katalogi work za pomocą <a href="https://nextflow.io/docs/latest/reference/cli.html#clean"><code>nextflow clean</code></a>.</p>
-<!-- Any other cool options we should include? Added log -->
-
 <h3 id="41-uruchom-ponownie-workflow-z-resume">4.1. Uruchom ponownie workflow z <code>-resume</code><a class="headerlink" href="#41-uruchom-ponownie-workflow-z-resume" title="Permanent link">&para;</a></h3>
 <p>Czasami zechcesz ponownie uruchomić pipeline, który już wcześniej uruchamiałeś, bez powtarzania kroków zakończonych pomyślnie.</p>
 <p>Nextflow ma opcję o nazwie <a href="https://nextflow.io/docs/latest/cache-and-resume.html"><code>-resume</code></a>, która to umożliwia.
@@ -5985,16 +6020,22 @@ Oznacza to, że Nextflow uruchomi tylko procesy dodane lub zmodyfikowane od osta
 <li>Jeśli uruchamiasz pipeline w produkcji i coś pójdzie nie tak, w wielu przypadkach możesz naprawić problem i ponownie uruchomić pipeline, a wznowi on wykonywanie od punktu awarii, co może zaoszczędzić Ci dużo czasu i zasobów obliczeniowych.</li>
 </ul>
 <p>Aby jej użyć, po prostu dodaj <code>-resume</code> do Swojego polecenia i uruchom go:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>-resume
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Konnichiwa!&#39;</span><span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="go">N E X T F L O W   ~  version 25.10.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>
-<a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a><span class="go">Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5</span>
+<a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a><span class="go">Launching `hello-world.nf` [golden_cantor] revision: 35bd3425e5</span>
 <a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a>
 <a id="__codelineno-53-5" name="__codelineno-53-5" href="#__codelineno-53-5"></a><span class="hll"><span class="go">[62/49a1f8] sayHello | 1 of 1, cached: 1 ✔</span>
-</span></code></pre></div>
+</span><a id="__codelineno-53-6" name="__codelineno-53-6" href="#__codelineno-53-6"></a>
+<a id="__codelineno-53-7" name="__codelineno-53-7" href="#__codelineno-53-7"></a><span class="go">Outputs:</span>
+<a id="__codelineno-53-8" name="__codelineno-53-8" href="#__codelineno-53-8"></a>
+<a id="__codelineno-53-9" name="__codelineno-53-9" href="#__codelineno-53-9"></a><span class="go">  /workspaces/training/hello-nextflow/results</span>
+<a id="__codelineno-53-10" name="__codelineno-53-10" href="#__codelineno-53-10"></a>
+<a id="__codelineno-53-11" name="__codelineno-53-11" href="#__codelineno-53-11"></a><span class="go">  first_output: hello_world/output.txt</span>
+</code></pre></div>
 </details>
 <p>Wyjście konsoli powinno wyglądać znajomo, ale jest jedna rzecz, która jest nieco inna w porównaniu do poprzedniego.</p>
 <p>Szukaj części <code>cached:</code>, która została dodana w linii statusu procesu (linia 5), co oznacza, że Nextflow rozpoznał, że już wykonał tę pracę i po prostu ponownie użył wyniku z poprzedniego pomyślnego uruchomienia.</p>

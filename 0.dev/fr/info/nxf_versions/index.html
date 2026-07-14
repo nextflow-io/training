@@ -3950,10 +3950,11 @@
 <h2 id="version-de-syntaxe-nextflow-actuellement-prise-en-charge-et-exigences">Version de syntaxe Nextflow actuellement prise en charge et exigences<a class="headerlink" href="#version-de-syntaxe-nextflow-actuellement-prise-en-charge-et-exigences" title="Permanent link">&para;</a></h2>
 <p>À partir de la version 3.0 du portail de formation, tous nos cours de formation sont compatibles avec Nextflow version 25.10.2 ou ultérieure, sauf indication contraire sur la page d'index du cours.
 (Cela ne s'applique pas aux supports obsolètes ou archivés qui peuvent ne pas inclure de mention de version.)</p>
-<p>La version de Nextflow actuellement chargée par défaut dans notre environnement de formation est <strong>Nextflow 25.10.4</strong>.</p>
+<p>La version de Nextflow actuellement chargée par défaut dans notre environnement de formation est <strong>Nextflow 26.04.4</strong>.</p>
 <p>Étant donné que les cours utilisent désormais des entrées typées au niveau du workflow ainsi que des directives de sortie au niveau du workflow, ils nécessitent l'utilisation de l'analyseur syntaxique V2, <strong>sauf indication contraire</strong>.
+L'analyseur syntaxique V2 est activé par défaut à partir de Nextflow 26.04, donc avec la version que nous chargeons, vous n'avez pas besoin de l'activer manuellement.
 Si vous prévoyez d'utiliser l'environnement que nous fournissons via <a href="../../envsetup/01_setup/">Github Codespaces</a> ou les <a href="../../envsetup/03_devcontainer/">devcontainers locaux</a>, vous n'avez rien à faire sauf indication contraire dans les instructions du cours.
-Cependant, si vous prévoyez de suivre les formations dans votre propre environnement (<a href="../../envsetup/02_local/">Installation manuelle</a>), vous devrez vous assurer d'utiliser Nextflow version 25.10.2 ou ultérieure avec l'analyseur syntaxique v2 activé.</p>
+Cependant, si vous prévoyez de suivre les formations dans votre propre environnement (<a href="../../envsetup/02_local/">Installation manuelle</a>), vous devrez vous assurer d'utiliser Nextflow version 25.10.2 ou ultérieure, et d'activer l'analyseur syntaxique v2 si vous utilisez une version antérieure à 26.04.</p>
 <h2 id="versions-anterieures-des-supports-de-formation">Versions antérieures des supports de formation<a class="headerlink" href="#versions-anterieures-des-supports-de-formation" title="Permanent link">&para;</a></h2>
 <p>Nos supports de formation sont versionnés depuis février 2025.</p>
 <p>Vous pouvez accéder aux versions antérieures des supports de formation qui fonctionnent avec les versions de Nextflow <strong>antérieures à 25.10.2</strong> via le menu déroulant en haut de chaque page qui affiche la version numérotée des supports de formation.
@@ -3969,21 +3970,21 @@ Tout le code Nextflow moderne utilise DSL2.</p>
 L'analyseur v1 est l'analyseur original, plus permissif.
 L'analyseur v2 est plus strict et active de nouvelles fonctionnalités du langage telles que le typage statique (entrées et sorties typées) et les directives de sortie au niveau du workflow.
 L'analyseur v2 fournit également de meilleurs messages d'erreur et détecte davantage d'erreurs au moment de l'analyse plutôt qu'à l'exécution.
-L'analyseur v2 deviendra la valeur par défaut dans Nextflow 26.04.</p>
+L'analyseur v2 est la valeur par défaut à partir de Nextflow 26.04.</p>
 <p>En résumé : DSL2 est le langage que vous écrivez ; la version de l'analyseur syntaxique détermine avec quelle rigueur ce langage est interprété et quelles fonctionnalités avancées sont disponibles.</p>
 <h3 id="verifier-et-definir-la-version-de-nextflow">Vérifier et définir la version de Nextflow<a class="headerlink" href="#verifier-et-definir-la-version-de-nextflow" title="Permanent link">&para;</a></h3>
 <p>Vous pouvez vérifier quelle version de Nextflow est installée sur votre système en utilisant la commande <code>nextflow --version</code>.</p>
 <p>Pour plus d'informations sur la mise à jour de votre version de Nextflow, veuillez consulter la documentation de référence sur la <a href="https://www.nextflow.io/docs/latest/updating-nextflow.html">Mise à jour de Nextflow</a>.</p>
 <h3 id="activer-lanalyseur-syntaxique-v2">Activer l'analyseur syntaxique v2<a class="headerlink" href="#activer-lanalyseur-syntaxique-v2" title="Permanent link">&para;</a></h3>
+<p>À partir de Nextflow 26.04, l'analyseur v2 est la valeur par défaut ; les étapes ci-dessous ne sont donc nécessaires que pour les versions antérieures à 26.04.</p>
 <p>Pour <strong>activer</strong> l'analyseur syntaxique v2 pour votre session actuelle, exécutez la commande suivante dans votre terminal :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v2
 </code></pre></div>
-<p>Pour rendre cela permanent (en attendant que v2 devienne la valeur par défaut dans Nextflow 26.04), ajoutez la commande export à votre profil shell (<code>~/.bashrc</code>, <code>~/.zshrc</code>, etc.) :</p>
+<p>Pour rendre cela permanent, ajoutez la commande export à votre profil shell (<code>~/.bashrc</code>, <code>~/.zshrc</code>, etc.) :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export NXF_SYNTAX_PARSER=v2&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">source</span><span class="w"> </span>~/.bashrc
 </code></pre></div>
-<p>Notez que la variable d'environnement <code>NXF_SYNTAX_PARSER=v2</code> est une exigence temporaire.
-À partir de Nextflow 26.04, l'analyseur v2 deviendra la valeur par défaut et ce paramètre ne sera plus nécessaire.</p>
+<p>Notez que sur les versions de Nextflow antérieures à 26.04, la variable d'environnement <code>NXF_SYNTAX_PARSER=v2</code> est requise pour accéder aux fonctionnalités v2 utilisées dans ces cours.</p>
 <h3 id="desactiver-lanalyseur-syntaxique-v2">Désactiver l'analyseur syntaxique v2<a class="headerlink" href="#desactiver-lanalyseur-syntaxique-v2" title="Permanent link">&para;</a></h3>
 <p>Pour <strong>désactiver</strong> l'analyseur syntaxique v2 pour votre session actuelle, exécutez la commande suivante dans votre terminal :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v1

@@ -3950,10 +3950,11 @@
 <h2 id="versio-de-sintaxi-de-nextflow-i-requisits-actuals">Versió de sintaxi de Nextflow i requisits actuals<a class="headerlink" href="#versio-de-sintaxi-de-nextflow-i-requisits-actuals" title="Permanent link">&para;</a></h2>
 <p>A partir de la versió 3.0 del portal de formació, tots els nostres cursos de formació són compatibles amb la versió 25.10.2 de Nextflow o posterior, tret que s'especifiqui el contrari a la pàgina d'índex del curs.
 (Això no inclou materials obsolets o arxivats que poden no incloure un avís de versió).</p>
-<p>La versió de Nextflow carregada per defecte al nostre entorn de formació és <strong>Nextflow 25.10.4</strong>.</p>
+<p>La versió de Nextflow carregada per defecte al nostre entorn de formació és <strong>Nextflow 26.04.4</strong>.</p>
 <p>Com que els cursos ara utilitzen entrades tipades a nivell de workflow així com directives de sortida a nivell de workflow, requereixen l'ús de l'analitzador de sintaxi V2, <strong>tret que s'especifiqui el contrari</strong>.
+L'analitzador V2 és el valor per defecte a partir de Nextflow 26.04, de manera que amb la versió que carreguem no cal habilitar-lo manualment.
 Si teniu previst utilitzar l'entorn que proporcionem a través de <a href="../../envsetup/01_setup/">Github Codespaces</a> o <a href="../../envsetup/03_devcontainer/">devcontainers locals</a>, no cal que feu res tret que s'indiqui específicament a les instruccions del curs.
-No obstant això, si teniu previst treballar amb les formacions al vostre propi entorn (<a href="../../envsetup/02_local/">Instal·lació manual</a>), haureu d'assegurar-vos d'utilitzar Nextflow versió 25.10.2 o posterior amb l'analitzador de sintaxi v2 habilitat.</p>
+No obstant això, si teniu previst treballar amb les formacions al vostre propi entorn (<a href="../../envsetup/02_local/">Instal·lació manual</a>), haureu d'assegurar-vos d'utilitzar Nextflow versió 25.10.2 o posterior, i d'habilitar l'analitzador de sintaxi v2 si feu servir una versió anterior a la 26.04.</p>
 <h2 id="versions-anteriors-dels-materials-de-formacio">Versions anteriors dels materials de formació<a class="headerlink" href="#versions-anteriors-dels-materials-de-formacio" title="Permanent link">&para;</a></h2>
 <p>Els nostres materials de formació tenen versions des de febrer de 2025.</p>
 <p>Podeu accedir a versions anteriors dels materials de formació que funcionen amb versions de Nextflow <strong>anteriors a la 25.10.2</strong> mitjançant el menú desplegable a la part superior de cada pàgina que mostra la versió numerada dels materials de formació.
@@ -3969,21 +3970,21 @@ Tot el codi modern de Nextflow utilitza DSL2.</p>
 L'analitzador v1 és l'original, més permissiu.
 L'analitzador v2 és més estricte i habilita noves funcionalitats del llenguatge com el tipat estàtic (entrades i sortides tipades) i directives de sortida a nivell de workflow.
 L'analitzador v2 també proporciona millors missatges d'error i detecta més errors en temps d'anàlisi en lloc de temps d'execució.
-L'analitzador v2 es convertirà en el predeterminat a Nextflow 26.04.</p>
+L'analitzador v2 és el predeterminat a partir de Nextflow 26.04.</p>
 <p>En resum: DSL2 és el llenguatge que escriviu; la versió de l'analitzador de sintaxi determina com d'estrictament s'interpreta aquest llenguatge i quines funcionalitats avançades estan disponibles.</p>
 <h3 id="comprovar-i-establir-la-versio-de-nextflow">Comprovar i establir la versió de Nextflow<a class="headerlink" href="#comprovar-i-establir-la-versio-de-nextflow" title="Permanent link">&para;</a></h3>
 <p>Podeu comprovar quina versió de Nextflow està instal·lada al vostre sistema utilitzant la comanda <code>nextflow --version</code>.</p>
 <p>Per a més informació sobre com actualitzar la vostra versió de Nextflow, consulteu la documentació de referència sobre <a href="https://www.nextflow.io/docs/latest/updating-nextflow.html">Actualitzar Nextflow</a>.</p>
 <h3 id="habilitar-lanalitzador-de-sintaxi-v2">Habilitar l'analitzador de sintaxi v2<a class="headerlink" href="#habilitar-lanalitzador-de-sintaxi-v2" title="Permanent link">&para;</a></h3>
+<p>A partir de Nextflow 26.04, l'analitzador v2 és el predeterminat, de manera que els passos següents només són necessaris en versions anteriors a la 26.04.</p>
 <p>Per <strong>habilitar</strong> l'analitzador de sintaxi v2 per a la vostra sessió actual, executeu la següent comanda al vostre terminal:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v2
 </code></pre></div>
-<p>Per fer-ho permanent (pendent que v2 es converteixi en el predeterminat a Nextflow 26.04), afegiu la comanda export al vostre perfil de shell (<code>~/.bashrc</code>, <code>~/.zshrc</code>, etc.):</p>
+<p>Per fer-ho permanent, afegiu la comanda export al vostre perfil de shell (<code>~/.bashrc</code>, <code>~/.zshrc</code>, etc.):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export NXF_SYNTAX_PARSER=v2&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">source</span><span class="w"> </span>~/.bashrc
 </code></pre></div>
-<p>Tingueu en compte que la variable d'entorn <code>NXF_SYNTAX_PARSER=v2</code> és un requisit temporal.
-A partir de Nextflow 26.04, l'analitzador v2 es convertirà en el predeterminat i aquesta configuració ja no serà necessària.</p>
+<p>Tingueu en compte que en versions de Nextflow anteriors a la 26.04, la variable d'entorn <code>NXF_SYNTAX_PARSER=v2</code> és necessària per accedir a les funcionalitats v2 utilitzades en aquests cursos.</p>
 <h3 id="deshabilitar-lanalitzador-de-sintaxi-v2">Deshabilitar l'analitzador de sintaxi v2<a class="headerlink" href="#deshabilitar-lanalitzador-de-sintaxi-v2" title="Permanent link">&para;</a></h3>
 <p>Per <strong>deshabilitar</strong> l'analitzador de sintaxi v2 per a la vostra sessió actual, executeu la següent comanda al vostre terminal:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v1

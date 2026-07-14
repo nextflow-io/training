@@ -2218,10 +2218,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-solucao-use-um-arquivo-de-parametros" class="md-nav__link">
+  <a href="#12-o-arquivo-de-parametros" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Solução: Use um arquivo de parâmetros
+        1.2. O arquivo de parâmetros
       
     </span>
   </a>
@@ -2886,7 +2886,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Testando com nf-test
   
 
     
@@ -3729,10 +3729,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-solucao-use-um-arquivo-de-parametros" class="md-nav__link">
+  <a href="#12-o-arquivo-de-parametros" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Solução: Use um arquivo de parâmetros
+        1.2. O arquivo de parâmetros
       
     </span>
   </a>
@@ -4072,21 +4072,15 @@
 Agora vamos aprender duas abordagens melhores para gerenciar entradas: <strong>arquivos de parâmetros</strong> e <strong>planilhas de amostras</strong>.</p>
 <h2 id="1-usando-arquivos-de-parametros">1. Usando arquivos de parâmetros<a class="headerlink" href="#1-usando-arquivos-de-parametros" title="Permanent link">&para;</a></h2>
 <h3 id="11-o-problema-com-linhas-de-comando-longas">1.1. O problema com linhas de comando longas<a class="headerlink" href="#11-o-problema-com-linhas-de-comando-longas" title="Permanent link">&para;</a></h3>
-<p>Lembre-se do nosso comando da Parte 2:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>--input<span class="w"> </span><span class="s1">&#39;data/samplesheet.csv&#39;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span>--mindagap_tilesize<span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>--mindagap_boxsize<span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span>--mindagap_loopnum<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span>--clahe_pyramid_tile<span class="w"> </span><span class="m">368</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;cellpose&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span>--outdir<span class="w"> </span>results
+<p>Na Parte 2, já usamos um arquivo de parâmetros para manter o comando curto e preservar os valores digitados (como os parâmetros inteiros de pré-processamento) intactos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;mesmer,cellpose,stardist&quot;</span>
 </code></pre></div>
-<p>Isso funciona, mas é difícil de reproduzir, compartilhar ou modificar.
+<p>Passar muitos parâmetros individualmente na linha de comando é difícil de reproduzir, compartilhar ou modificar.
 E se você precisar executar a mesma análise novamente no próximo mês?
-E se um colaborador quiser usar suas configurações exatas?</p>
-<h3 id="12-solucao-use-um-arquivo-de-parametros">1.2. Solução: Use um arquivo de parâmetros<a class="headerlink" href="#12-solucao-use-um-arquivo-de-parametros" title="Permanent link">&para;</a></h3>
-<p>Crie um arquivo chamado <code>params.yaml</code>:</p>
+E se um colaborador quiser usar suas configurações exatas?
+Um arquivo de parâmetros resolve isso.</p>
+<h3 id="12-o-arquivo-de-parametros">1.2. O arquivo de parâmetros<a class="headerlink" href="#12-o-arquivo-de-parametros" title="Permanent link">&para;</a></h3>
+<p>Aqui está o arquivo <code>params.yaml</code> que temos usado:</p>
 <div class="highlight"><span class="filename">params.yaml</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;data/samplesheet.csv&quot;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">outdir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;results&quot;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">mindagap_tilesize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">90</span>
@@ -4095,17 +4089,19 @@ E se um colaborador quiser usar suas configurações exatas?</p>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nt">clahe_pyramid_tile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">368</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nt">segmentation_method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cellpose&quot;</span>
 </code></pre></div>
-<p>Agora seu comando se torna:</p>
+<p>Cada parâmetro é escrito como um par <code>chave: valor</code>.
+Escrever inteiros sem aspas (por exemplo, <code>mindagap_tilesize: 90</code>) preserva o tipo inteiro, o que a validação de parâmetros do pipeline exige.</p>
+<p>Seu comando se torna:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>-resume
 </code></pre></div>
-<p>É isso! O arquivo de parâmetros documenta sua configuração exata e facilita a reexecução ou compartilhamento.</p>
+<p>O arquivo de parâmetros documenta sua configuração exata e facilita a reexecução ou compartilhamento.</p>
 <h3 id="13-sobrescrevendo-parametros">1.3. Sobrescrevendo parâmetros<a class="headerlink" href="#13-sobrescrevendo-parametros" title="Permanent link">&para;</a></h3>
 <p>Você ainda pode sobrescrever parâmetros específicos da linha de comando:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;stardist&quot;</span><span class="w"> </span>--outdir<span class="w"> </span>stardist_results<span class="w"> </span>-resume
 </code></pre></div>
 <p>A linha acima altera o <code>segmentation_method</code> para <code>stardist</code> e o nome do <code>--outdir</code> para <code>stardist_results</code> em vez dos parâmetros no arquivo <code>params.yaml</code>.
 Além disso, você pode ver que a flag <code>-resume</code> nos permitiu reutilizar os resultados de pré-processamento da execução anterior, economizando tempo.
-Você pode usar esse padrão para testar rapidamente diferentes variações do fluxo de trabalho.</p>
+Você pode usar esse padrão para testar rapidamente diferentes variações do pipeline.</p>
 <h3 id="conclusao">Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h3>
 <p>Arquivos de parâmetros tornam suas análises reproduzíveis e fáceis de compartilhar.
 Use-os para qualquer trabalho de análise real.</p>
