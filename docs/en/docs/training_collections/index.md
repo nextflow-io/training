@@ -20,6 +20,7 @@ For technical requirements and environment setup, see the [Environment Setup](..
 ## Available collections
 
 - [The Architect's Toolkit I](./architects_toolkit_1.md) - A collection of four Side Quests covering workflow architecture patterns for assembling complex pipelines, implementing testing strategies, managing metadata management, and grouping and splitting data. _Estimated duration: 4 hours in group training._
+- [Nextflow Triathlon](./nextflow_triathlon.md) - A fast-track introduction to the Nextflow ecosystem, combining the Nextflow Run and nf-core Run courses with a Side Quest on running pipelines with Seqera Platform. _Estimated duration: 2.5 hours._
 
 ## Suggesting new collections
 

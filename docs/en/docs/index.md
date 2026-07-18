@@ -87,7 +87,7 @@ hide:
 
     ??? courses "**Nextflow Run:** Learn to run existing pipelines"
 
-        A concise introduction to running and configuring Nextflow pipelines, based on the Hello Nextflow developer's course but with less focus on code. Covers execution, outputs, basic code structure, and configuration for different compute environments."
+        A fast-track introduction to running Nextflow pipelines, with less focus on code than Hello Nextflow. Covers execution, outputs, channels, containers, and configuration.
 
         [Start the Nextflow Run training :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
 
@@ -126,9 +126,15 @@ hide:
     These courses help you go from Nextflow fundamentals to nf-core best practices.
     Understand how and why the nf-core community builds pipelines, and how you can contribute and reuse these techniques.
 
+    ??? courses "**nf-core Run:** Learn to run nf-core pipelines"
+
+        A fast-track introduction to finding, running, and configuring nf-core community pipelines, from a minimal training pipeline to a production-scale analysis pipeline.
+
+        [Start the nf-core Run training :material-arrow-right:](nfcore_run/index.md){ .md-button .md-button--secondary }
+
     ??? courses "**Hello nf-core:** Get started with nf-core"
 
-        For developers who wish to learn run and develop [nf-core](https://nf-co.re/) compliant pipelines. The course covers the structure of nf-core pipelines in enough detail to enable developing simple but fully functional pipelines that follow the nf-core template and development best practices, as well as use existing nf-core modules.
+        For developers who wish to learn to develop [nf-core](https://nf-co.re/) compliant pipelines. The course covers the structure of nf-core pipelines in enough detail to enable developing simple but fully functional pipelines that follow the nf-core template and development best practices, as well as use existing nf-core modules.
 
         [Start the Hello nf-core training :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
 
@@ -144,9 +150,9 @@ hide:
 
         [Browse the Side Quests :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Training Collections:** Recommended learning paths through the Side Quests"
+    ??? courses "**Training Collections:** Recommended learning paths through our courses"
 
-        Training Collections combine multiple Side Quests in order to provide a comprehensive learning experience around a particular theme or use case.
+        Training Collections combine multiple courses and Side Quests in order to provide a comprehensive learning experience around a particular theme or use case.
 
         [Browse the Training Collections :material-arrow-right:](training_collections/index.md){ .md-button .md-button--secondary }
 
@@ -156,6 +162,8 @@ hide:
 
     Older training materials (Fundamentals Training, Advanced Training, and other experimental courses) have been removed from the training portal as they are incompatible with Nextflow 3.0 strict syntax.
     If you need access to these materials, they are available in the [git history](https://github.com/nextflow-io/training) prior to January 2026.
+
+    The previous version of the Nextflow Run course, superseded by the current one, is still browsable at [archive/nextflow_run](archive/nextflow_run/index.md).
 
 ---
 

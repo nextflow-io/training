@@ -5,20 +5,10 @@ repo_name: nextflow-io/training
 
 nav:
   - index.md
-  - Nextflow Triathlon:
-      - nextflow_triathlon/index.md
-      - nextflow_triathlon/00_orientation.md
-      - nextflow_triathlon/01_run_nextflow.md
-      - nextflow_triathlon/02_run_nfcore.md
-      - nextflow_triathlon/03_run_seqera.md
-      - nextflow_triathlon/next_steps.md
-      - nextflow_triathlon/survey.md
   - Nextflow Run:
       - nextflow_run/index.md
       - nextflow_run/00_orientation.md
-      - nextflow_run/01_basics.md
-      - nextflow_run/02_pipeline.md
-      - nextflow_run/03_config.md
+      - nextflow_run/01_run_nextflow.md
       - nextflow_run/next_steps.md
       - nextflow_run/survey.md
   - Hello Nextflow:
@@ -32,14 +22,19 @@ nav:
       - hello_nextflow/06_hello_config.md
       - hello_nextflow/next_steps.md
       - hello_nextflow/survey.md
+  - nf-core Run:
+      - nfcore_run/index.md
+      - nfcore_run/00_orientation.md
+      - nfcore_run/01_run_demo.md
+      - nfcore_run/next_steps.md
+      - nfcore_run/survey.md
   - Hello nf-core:
       - hello_nf-core/index.md
       - hello_nf-core/00_orientation.md
-      - hello_nf-core/01_run_demo.md
-      - hello_nf-core/02_rewrite_hello.md
-      - hello_nf-core/03_use_module.md
-      - hello_nf-core/04_make_module.md
-      - hello_nf-core/05_input_validation.md
+      - hello_nf-core/01_rewrite_hello.md
+      - hello_nf-core/02_use_module.md
+      - hello_nf-core/03_make_module.md
+      - hello_nf-core/04_input_validation.md
       - hello_nf-core/next_steps.md
       - hello_nf-core/survey.md
   - Nextflow for Science:
@@ -80,6 +75,7 @@ nav:
       - side_quests/nf_test/index.md
       - side_quests/debugging/index.md
       - side_quests/workflows_of_workflows/index.md
+      - side_quests/seqera_platform/index.md
       - Plugin Development:
           - side_quests/plugin_development/index.md
           - side_quests/plugin_development/01_plugin_basics.md
@@ -93,6 +89,7 @@ nav:
   - Training Collections:
       - training_collections/index.md
       - training_collections/architects_toolkit_1.md
+      - training_collections/nextflow_triathlon.md
   - Help:
       - help.md
       - Training environment:
@@ -266,8 +263,8 @@ plugins:
   - enumerate-headings:
       restart_increment_after:
         - envsetup/01_setup.md
-        - nextflow_triathlon/00_orientation.md
         - nextflow_run/00_orientation.md
+        - nfcore_run/00_orientation.md
         - hello_nextflow/00_orientation.md
         - hello_nf-core/00_orientation.md
         - nf4_science/genomics/00_orientation.md
@@ -279,8 +276,9 @@ plugins:
         - help*.md
         - info/*.md
         - envsetup/*.md
-        - nextflow_triathlon/*.md
+        - archive/nextflow_run/*.md
         - nextflow_run/*.md
+        - nfcore_run/*.md
         - hello_nextflow/*.md
         - hello_nf-core/*.md
         - nf4_science/genomics/*.md
@@ -289,7 +287,8 @@ plugins:
         - side_quests/*.md
         - side_quests/**/*.md
         - training_collections/index.md
-        - training_collections/advanced_workflow_development/index.md
+        - training_collections/architects_toolkit_1.md
+        - training_collections/nextflow_triathlon.md
 
   - search
   - mkdocs_quiz:

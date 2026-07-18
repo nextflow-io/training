@@ -1627,7 +1627,7 @@ There are two complementary approaches to make workflows more robust against mis
 **1. Input validation**
 
 The most reliable solution is to validate the datasheet before any processing begins, so problems are caught early with a clear error message rather than surfacing as a cryptic process failure mid-run.
-The [Hello nf-core](../../hello_nf-core/05_input_validation.md) training covers how to add input validation using the nf-schema plugin. <!-- TODO (future) pending a proper Validation side quest -->
+The [Hello nf-core](../../hello_nf-core/04_input_validation.md) training covers how to add input validation using the nf-schema plugin. <!-- TODO (future) pending a proper Validation side quest -->
 
 **2. Explicit process inputs for required values**
 

@@ -2,32 +2,28 @@
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json",
     "title": "core/hello pipeline - params.input schema",
-    "description": "Schema for the file provided with params.input",
+    "description": "Schema for the greetings file provided with params.input",
     "type": "array",
     "items": {
         "type": "object",
         "properties": {
-            "sample": {
+            "greeting": {
                 "type": "string",
-                "pattern": "^\\S+$",
-                "errorMessage": "Sample name must be provided and cannot contain spaces",
-                "meta": ["id"]
+                "pattern": "^\\S.*$",
+                "errorMessage": "Greeting must be provided and cannot be empty or start with whitespace"
             },
-            "fastq_1": {
+            "language": {
                 "type": "string",
-                "format": "file-path",
-                "exists": true,
-                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "enum": ["en", "fr", "es", "it", "de"],
+                "errorMessage": "Language must be one of: en, fr, es, it, de"
             },
-            "fastq_2": {
-                "type": "string",
-                "format": "file-path",
-                "exists": true,
-                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+            "score": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100,
+                "errorMessage": "Score must be an integer with a value between 0 and 100"
             }
         },
-        "required": ["sample", "fastq_1"]
+        "required": ["greeting"]
     }
 }

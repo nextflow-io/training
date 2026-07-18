@@ -7,7 +7,6 @@ index_type: course
 additional_information:
   technical_requirements: true
   learning_objectives:
-    - Retrieve, launch and manage execution of nf-core pipelines
     - Describe the code structure and project organization of nf-core pipelines
     - Create a basic nf-core compatible pipeline from a template
     - Upgrade a plain Nextflow workflow to fit nf-core standards
@@ -17,7 +16,7 @@ additional_information:
   audience_prerequisites:
     - "**Audience:** This course is designed for learners who are already familiar with basic Nextflow and want to learn to use nf-core resources and best practices."
     - "**Skills:** Familiarity with the command line, basic scripting concepts and common file formats is assumed."
-    - "**Courses:** Must have completed the [Hello Nextflow](../hello_nextflow/index.md) course or equivalent."
+    - "**Courses:** Must have completed the [Hello Nextflow](../hello_nextflow/index.md) course or equivalent. If you haven't yet run an nf-core pipeline, we also recommend completing [nf-core Run](../nfcore_run/index.md) first."
     - "**Domain:** The exercises are all domain-agnostic, so no prior scientific knowledge is required."
 ---
 
@@ -49,15 +48,14 @@ Instead, we will focus on the essential concepts that will help you get started 
 
 ### Lesson plan
 
-We've broken this down into five parts that will each focus on specific aspects of using nf-core resources.
+We've broken this down into four parts that will each focus on specific aspects of using nf-core resources.
 
 | Course chapter                                             | Summary                                                                                                                                                            | Estimated duration |
 | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------ |
-| [Part 1: Run a demo pipeline](./01_run_demo.md)            | Run an existing nf-core pipeline and examine its code structure to get a sense of what makes these pipelines different from basic Nextflow workflows               | 30 mins            |
-| [Part 2: Rewrite Hello for nf-core](./02_rewrite_hello.md) | Adapt an existing workflow to the nf-core template scaffold, starting from the simple workflow produced in the [Hello Nextflow](../hello_nextflow/index.md) course | 60 mins            |
-| [Part 3: Use an nf-core module](./03_use_module.md)        | Explore the community modules library and learn to integrate pre-built, tested modules that wrap common bioinformatics tools                                       | 30 mins            |
-| [Part 4: Make an nf-core module](./04_make_module.md)      | Create your own nf-core-style module using the specific structure, naming conventions, and metadata requirements established by nf-core                            | 30 mins            |
-| [Part 5: Add input validation](./05_input_validation.md)   | Implement input validation for both command-line parameters and input data files using nf-schema                                                                   | 30 mins            |
+| [Part 1: Rewrite Hello for nf-core](./01_rewrite_hello.md) | Adapt an existing workflow to the nf-core template scaffold, starting from the simple workflow produced in the [Hello Nextflow](../hello_nextflow/index.md) course | 60 mins            |
+| [Part 2: Use an nf-core module](./02_use_module.md)        | Explore the community modules library and learn to integrate pre-built, tested modules that wrap common bioinformatics tools                                       | 30 mins            |
+| [Part 3: Make an nf-core module](./03_make_module.md)      | Create your own nf-core-style module using the specific structure, naming conventions, and metadata requirements established by nf-core                            | 30 mins            |
+| [Part 4: Add input validation](./04_input_validation.md)   | Implement input validation for both command-line parameters and input data files using nf-schema                                                                   | 30 mins            |
 
 By the end of this course, you will be able to take advantage of the enormous wealth of resources offered by the nf-core project.
 
