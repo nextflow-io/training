@@ -13,3 +13,6 @@ extra:
       <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">हम कुकीज़ का उपयोग कैसे करते हैं</a> इसके बारे में अधिक जानें।
     cookies:
       posthog: "PostHog Analytics"
+  nav_group_labels:
+    "Nextflow Run": "उपयोगकर्ता"
+    "Hello Nextflow": "डेवलपर्स"

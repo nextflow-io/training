@@ -1,6 +1,6 @@
 # Part 1: Run a demo pipeline
 
-In this first part of the nf-core Run training course, we show you how to find and try out an nf-core pipeline, configure and customize its execution for your needs, and understand how input validation protects against common errors.
+In this first part of the Run nf-core training course, we show you how to find and try out an nf-core pipeline, configure and customize its execution for your needs, and understand how input validation protects against common errors.
 
 We are going to use a pipeline called nf-core/demo that is maintained by the nf-core project as part of its inventory of pipelines for demonstration and training purposes.
 
@@ -397,7 +397,7 @@ This tells us that three processes were run, corresponding to the three tools sh
 
 The full process names as shown here, such as `NFCORE_DEMO:DEMO:MULTIQC`, are longer than what you may have seen in the introductory Hello Nextflow material.
 These include the names of their parent workflows and reflect the modularity of the pipeline code.
-If you want to learn to develop nf-core-style pipelines yourself, see the [Hello nf-core](../hello_nf-core/index.md) course.
+If you want to learn to develop nf-core-style pipelines yourself, see the [Build with nf-core](../hello_nf-core/index.md) course.
 
 ### 2.3. Examine the pipeline's outputs
 
@@ -713,7 +713,7 @@ nf-schema does not stop at the first error — it collects every problem and lis
 
 Each error identifies the exact entry and field that caused the problem, so you can fix your samplesheet then re-launch the pipeline with confidence that it's not going to fail at some later point when Nextflow actually goes to access the file path.
 
-For developers, all of this is covered in more detail in [Part 4 of Hello nf-core](../hello_nf-core/04_input_validation.md).
+For developers, all of this is covered in more detail in [Part 4 of Build with nf-core](../hello_nf-core/04_input_validation.md).
 
 ### 3.2. Configuration
 

@@ -1629,7 +1629,7 @@ Es gibt zwei sich ergänzende Ansätze, um Workflows robuster gegen fehlende Met
 **1. Eingabevalidierung**
 
 Die zuverlässigste Lösung ist, das Datenblatt zu validieren, bevor die Verarbeitung beginnt, damit Probleme frühzeitig mit einer klaren Fehlermeldung erkannt werden, anstatt als kryptischer Prozessfehler mitten in der Ausführung aufzutauchen.
-Das [Hello nf-core](../../hello_nf-core/05_input_validation.md)-Training zeigt, wie man Eingabevalidierung mit dem nf-schema-Plugin hinzufügt. <!-- TODO (future) pending a proper Validation side quest -->
+Das [Build with nf-core](../../hello_nf-core/05_input_validation.md)-Training zeigt, wie man Eingabevalidierung mit dem nf-schema-Plugin hinzufügt. <!-- TODO (future) pending a proper Validation side quest -->
 
 **2. Explizite Prozesseingaben für erforderliche Werte**
 

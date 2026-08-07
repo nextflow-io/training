@@ -1549,7 +1549,7 @@ Sabeu tot el que necessiteu saber per començar a executar i gestionar pipelines
 Això conclou aquest curs, però si esteu ansiosos per continuar aprenent, tenim dues recomanacions principals:
 
 - Si voleu aprofundir en el desenvolupament dels vostres propis pipelines, feu una ullada a [Hello Nextflow](../hello_nextflow/index.md), un curs per a principiants que cobreix la mateixa progressió general que aquest però entra en molt més detall sobre canals i operadors.
-- Si us agradaria continuar aprenent a executar pipelines de Nextflow sense aprofundir en el codi, feu una ullada a la primera part de [Hello nf-core](../hello_nf-core/index.md), que introdueix les eines per trobar i executar pipelines del projecte [nf-core](https://nf-co.re/) enormement popular.
+- Si us agradaria continuar aprenent a executar pipelines de Nextflow sense aprofundir en el codi, feu una ullada a la primera part de [Build with nf-core](../hello_nf-core/index.md), que introdueix les eines per trobar i executar pipelines del projecte [nf-core](https://nf-co.re/) enormement popular.
 
 Que us divertiu!
 

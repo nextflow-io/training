@@ -1629,7 +1629,7 @@ Il existe deux approches complémentaires pour rendre les workflows plus robuste
 **1. Validation des entrées**
 
 La solution la plus fiable est de valider la feuille de données avant tout traitement, afin que les problèmes soient détectés tôt avec un message d'erreur clair plutôt que de se manifester comme un échec cryptique de processus en cours d'exécution.
-La formation [Hello nf-core](../../hello_nf-core/05_input_validation.md) explique comment ajouter une validation des entrées en utilisant le plugin nf-schema. <!-- TODO (future) pending a proper Validation side quest -->
+La formation [Build with nf-core](../../hello_nf-core/05_input_validation.md) explique comment ajouter une validation des entrées en utilisant le plugin nf-schema. <!-- TODO (future) pending a proper Validation side quest -->
 
 **2. Entrées de processus explicites pour les valeurs requises**
 

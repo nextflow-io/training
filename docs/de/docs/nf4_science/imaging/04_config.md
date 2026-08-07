@@ -448,5 +448,5 @@ Nächste Schritte:
 
 - Fülle die Kursumfrage aus, um Feedback zu geben
 - Schau dir [Hello Nextflow](../../hello_nextflow/index.md) an, um mehr über die Entwicklung von Workflows zu lernen
-- Erkunde [Hello nf-core](../../hello_nf-core/index.md), um tiefer in die nf-core Werkzeuge einzutauchen
+- Erkunde [Build with nf-core](../../hello_nf-core/index.md), um tiefer in die nf-core Werkzeuge einzutauchen
 - Durchsuche andere Kurse in den [Trainingssammlungen](../../training_collections/index.md)

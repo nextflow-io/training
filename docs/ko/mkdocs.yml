@@ -12,3 +12,6 @@ extra:
       <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">쿠키 사용 방법</a>에 대해 자세히 알아보세요.
     cookies:
       posthog: "PostHog 분석"
+  nav_group_labels:
+    "Nextflow Run": "사용자"
+    "Hello Nextflow": "개발자"

@@ -1,6 +1,6 @@
 # Part 1: Rewrite Hello for nf-core
 
-In this first part of the Hello nf-core training course, we show you how to create an nf-core compatible version of the pipeline produced by the [Hello Nextflow](../hello_nextflow/index.md) beginners' course.
+In this first part of the Build with nf-core training course, we show you how to create an nf-core compatible version of the pipeline produced by the [Hello Nextflow](../hello_nextflow/index.md) beginners' course.
 
 We're going to do this in two phases: first, we'll use nf-core tooling to create a pipeline scaffold, then graft the existing 'regular' pipeline code onto the scaffold.
 

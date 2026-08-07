@@ -1551,7 +1551,7 @@ Wiesz wszystko, co musisz wiedzieć, aby rozpocząć uruchamianie i zarządzanie
 To kończy ten kurs, ale jeśli chcesz kontynuować naukę, mamy dwie główne rekomendacje:
 
 - Jeśli chcesz zagłębić się w tworzenie własnych pipeline'ów, zajrzyj do [Hello Nextflow](../hello_nextflow/index.md), kursu dla początkujących, który obejmuje tę samą ogólną progresję co ten, ale wchodzi w znacznie więcej szczegółów na temat kanałów i operatorów.
-- Jeśli chciałbyś kontynuować naukę uruchamiania pipeline'ów Nextflow bez zagłębiania się w kod, zajrzyj do pierwszej części [Hello nf-core](../hello_nf-core/index.md), która wprowadza narzędzia do znajdowania i uruchamiania pipeline'ów z niezwykle popularnego projektu [nf-core](https://nf-co.re/).
+- Jeśli chciałbyś kontynuować naukę uruchamiania pipeline'ów Nextflow bez zagłębiania się w kod, zajrzyj do pierwszej części [Build with nf-core](../hello_nf-core/index.md), która wprowadza narzędzia do znajdowania i uruchamiania pipeline'ów z niezwykle popularnego projektu [nf-core](https://nf-co.re/).
 
 Baw się dobrze!
 

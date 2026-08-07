@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Nesta primeira parte do curso de treinamento Hello nf-core, mostramos como encontrar e experimentar um pipeline do nf-core, configurar e personalizar sua execução para suas necessidades, e entender como a validação de entrada protege contra erros comuns.
+Nesta primeira parte do curso de treinamento Build with nf-core, mostramos como encontrar e experimentar um pipeline do nf-core, configurar e personalizar sua execução para suas necessidades, e entender como a validação de entrada protege contra erros comuns.
 
 Vamos usar um pipeline chamado nf-core/demo que é mantido pelo projeto nf-core como parte de seu inventário de pipelines para fins de demonstração e treinamento.
 

@@ -132,11 +132,11 @@ hide:
     Aquests cursos us ajuden a passar dels fonaments de Nextflow a les bones pràctiques de nf-core.
     Enteneu com i per què la comunitat nf-core construeix pipelines, i com podeu contribuir-hi i reutilitzar aquestes tècniques.
 
-    ??? courses "**Hello nf-core:** Primers passos amb nf-core"
+    ??? courses "**Build with nf-core:** Primers passos amb nf-core"
 
         Per a desenvolupadors que volen aprendre a executar i desenvolupar pipelines compatibles amb [nf-core](https://nf-co.re/). El curs cobreix l'estructura dels pipelines nf-core amb prou detall per permetre el desenvolupament de pipelines simples però completament funcionals que segueixen la plantilla nf-core i les bones pràctiques de desenvolupament, així com l'ús de mòduls nf-core existents.
 
-        [Comenceu la formació Hello nf-core :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
+        [Comenceu la formació Build with nf-core :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
 
     ---
 
@@ -150,11 +150,11 @@ hide:
 
         [Exploreu els Side Quests :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Col·leccions de formació:** Itineraris d'aprenentatge recomanats a través dels Side Quests"
+    ??? courses "**Itineraris d'Aprenentatge:** Rutes curades a través dels nostres cursos"
 
-        Les col·leccions de formació combinen múltiples Side Quests per proporcionar una experiència d'aprenentatge completa al voltant d'un tema o cas d'ús particular.
+        Els itineraris d'aprenentatge combinen múltiples Side Quests per proporcionar una experiència d'aprenentatge completa al voltant d'un tema o cas d'ús particular.
 
-        [Exploreu les col·leccions de formació :material-arrow-right:](training_collections/index.md){ .md-button .md-button--secondary }
+        [Exploreu els itineraris d'aprenentatge :material-arrow-right:](training_collections/index.md){ .md-button .md-button--secondary }
 
 </div>
 

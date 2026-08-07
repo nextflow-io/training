@@ -1,6 +1,6 @@
 # Course summary
 
-Congratulations on completing the Hello nf-core training course! 🎉
+Congratulations on completing the Build with nf-core training course! 🎉
 
 <!-- placeholder for video -->
 

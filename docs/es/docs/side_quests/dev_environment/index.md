@@ -623,7 +623,7 @@ No esperamos que recuerde todo, pero ahora que sabe que estas características e
 Aplique estas habilidades del IDE mientras trabaja en otros módulos de capacitación, por ejemplo:
 
 - **[nf-test](../nf_test/index.md)**: Cree suites de pruebas completas para sus workflows
-- **[Hello nf-core](../../hello_nf-core/index.md)**: Construya pipelines de calidad de producción con estándares de la comunidad
+- **[Build with nf-core](../../hello_nf-core/index.md)**: Construya pipelines de calidad de producción con estándares de la comunidad
 
 El verdadero poder de estas características del IDE emerge cuando trabaja en proyectos más grandes y complejos. Comience a incorporarlas en su flujo de trabajo gradualmente: en pocas sesiones, se volverán algo natural y transformarán la manera en que aborda el desarrollo con Nextflow.
 

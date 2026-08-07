@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Bu Hello nf-core eğitim kursunun beşinci bölümünde, pipeline girdi ve parametrelerini doğrulamak için nf-schema eklentisinin nasıl kullanılacağını gösteriyoruz.
+Bu Build with nf-core eğitim kursunun beşinci bölümünde, pipeline girdi ve parametrelerini doğrulamak için nf-schema eklentisinin nasıl kullanılacağını gösteriyoruz.
 
 ??? info "Bu bölümden nasıl başlanır"
 
@@ -791,6 +791,6 @@ Hem parametre doğrulaması hem de girdi verisi doğrulamasını uyguladınız v
 
 ### Sırada ne var?
 
-Hello nf-core eğitim kursunun beş bölümünün tamamını tamamladınız!
+Build with nf-core eğitim kursunun beş bölümünün tamamını tamamladınız!
 
 Oluşturduklarınızı ve öğrendiklerinizi düşünmek için [Özet](next_steps.md) bölümüne devam edin.

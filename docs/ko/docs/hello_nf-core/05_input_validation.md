@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Hello nf-core 교육 과정의 다섯 번째 파트에서는 nf-schema 플러그인을 사용하여 파이프라인 입력과 매개변수를 검증하는 방법을 보여드립니다.
+Build with nf-core 교육 과정의 다섯 번째 파트에서는 nf-schema 플러그인을 사용하여 파이프라인 입력과 매개변수를 검증하는 방법을 보여드립니다.
 
 ??? info "이 섹션을 시작하는 방법"
 
@@ -791,6 +791,6 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
 
 ### 다음 단계
 
-Hello nf-core 교육 과정의 다섯 개 파트를 모두 완료했습니다!
+Build with nf-core 교육 과정의 다섯 개 파트를 모두 완료했습니다!
 
 [Summary](next_steps.md)로 계속 진행하여 구축하고 배운 내용을 돌아보십시오.

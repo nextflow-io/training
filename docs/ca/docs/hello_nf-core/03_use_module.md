@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-En aquesta tercera part del curs de formació Hello nf-core, us mostrem com trobar, instal·lar i utilitzar un mòdul nf-core existent al vostre pipeline.
+En aquesta tercera part del curs de formació Build with nf-core, us mostrem com trobar, instal·lar i utilitzar un mòdul nf-core existent al vostre pipeline.
 
 Un dels grans avantatges de treballar amb nf-core és la capacitat d'aprofitar mòduls preconstruïts i provats del repositori [nf-core/modules](https://github.com/nf-core/modules).
 En lloc d'escriure cada procés des de zero, podeu instal·lar i utilitzar mòduls mantinguts per la comunitat que segueixen les millors pràctiques.

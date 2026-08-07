@@ -54,7 +54,7 @@ Artık Nextflow'da kendi pipeline'larınızı geliştirmeye başlamak için teme
 Bundan sonra ne yapılacağına dair en iyi 3 önerimiz:
 
 - [Nextflow for Science](../nf4_science/index.md) ile Nextflow'u bilimsel bir analiz kullanım durumuna uygulayın
-- [Hello nf-core](../hello_nf-core/index.md) ile nf-core'a başlayın
+- [Build with nf-core](../hello_nf-core/index.md) ile nf-core'a başlayın
 - [Side Quests](../side_quests/index.md) ile daha gelişmiş Nextflow özelliklerini keşfedin
 
 Son olarak, Nextflow'un yaratıcıları tarafından geliştirilen, iş akışlarınızı başlatmayı ve yönetmeyi, verilerinizi yönetmeyi ve herhangi bir ortamda etkileşimli analizler çalıştırmayı daha da kolaylaştıran bulut tabanlı bir platform olan [**Seqera Platform**](https://seqera.io/)'a göz atmanızı öneririz.

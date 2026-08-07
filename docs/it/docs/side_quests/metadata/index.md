@@ -1629,7 +1629,7 @@ Esistono due approcci complementari per rendere i flussi di lavoro più robusti 
 **1. Validazione dell'input**
 
 La soluzione più affidabile è validare il foglio dati prima che inizi qualsiasi elaborazione, in modo che i problemi vengano rilevati tempestivamente con un messaggio di errore chiaro piuttosto che emergere come un errore criptico del processo a metà esecuzione.
-La formazione [Hello nf-core](../../hello_nf-core/05_input_validation.md) spiega come aggiungere la validazione dell'input usando il plugin nf-schema. <!-- TODO (future) pending a proper Validation side quest -->
+La formazione [Build with nf-core](../../hello_nf-core/05_input_validation.md) spiega come aggiungere la validazione dell'input usando il plugin nf-schema. <!-- TODO (future) pending a proper Validation side quest -->
 
 **2. Input espliciti del processo per i valori obbligatori**
 

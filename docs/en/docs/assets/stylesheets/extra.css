@@ -449,6 +449,21 @@ h3 .enumerate-headings-plugin {
   text-decoration: underline;
 }
 
+/* Sidebar group labels (non-clickable) - see overrides/partials/nav.html */
+.md-nav__item--group-label {
+  padding-right: 0.6rem;
+  margin-top: 1.2rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--md-default-fg-color--light);
+}
+.md-nav--primary > .md-nav__list > .md-nav__item--group-label:first-child {
+  margin-top: 0;
+}
+
 /* Language selector dropdown - allow dynamic height */
 .md-select:focus-within .md-select__inner,
 .md-select:hover .md-select__inner {

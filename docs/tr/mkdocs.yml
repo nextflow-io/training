@@ -13,3 +13,6 @@ extra:
       <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">Çerezleri nasıl kullandığımız</a> hakkında daha fazla bilgi edinin.
     cookies:
       posthog: "PostHog Analytics"
+  nav_group_labels:
+    "Nextflow Run": "Kullanıcılar"
+    "Hello Nextflow": "Geliştiriciler"

@@ -1,6 +1,6 @@
 # Part 3: Make an nf-core module
 
-In this third part of the Hello nf-core training course, we show you how to create an nf-core module by applying the key conventions that make modules portable and maintainable.
+In this third part of the Build with nf-core training course, we show you how to create an nf-core module by applying the key conventions that make modules portable and maintainable.
 
 The nf-core project provides a command (`nf-core modules create`) that generates properly structured module templates automatically, similar to what we used for the workflow in Part 1.
 However, for teaching purposes, we're going to start by doing it manually: transforming the local `cowpy` module in your `core-hello` pipeline into an nf-core-style module step-by-step.

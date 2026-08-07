@@ -126,17 +126,17 @@ hide:
     These courses help you go from Nextflow fundamentals to nf-core best practices.
     Understand how and why the nf-core community builds pipelines, and how you can contribute and reuse these techniques.
 
-    ??? courses "**nf-core Run:** Learn to run nf-core pipelines"
+    ??? courses "**Run nf-core:** Learn to run nf-core pipelines"
 
         A fast-track introduction to finding, running, and configuring nf-core community pipelines, from a minimal training pipeline to a production-scale analysis pipeline.
 
-        [Start the nf-core Run training :material-arrow-right:](nfcore_run/index.md){ .md-button .md-button--secondary }
+        [Start the Run nf-core training :material-arrow-right:](nfcore_run/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Hello nf-core:** Get started with nf-core"
+    ??? courses "**Build with nf-core:** Get started with nf-core"
 
         For developers who wish to learn to develop [nf-core](https://nf-co.re/) compliant pipelines. The course covers the structure of nf-core pipelines in enough detail to enable developing simple but fully functional pipelines that follow the nf-core template and development best practices, as well as use existing nf-core modules.
 
-        [Start the Hello nf-core training :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
+        [Start the Build with nf-core training :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
 
     ---
 
@@ -149,12 +149,6 @@ hide:
         Standalone mini-courses intended for Nextflow developers who wish to widen their range and/or deepen their skills on particular topics. They are presented linearly but can be taken in any order (see dependencies in each mini-course overview).
 
         [Browse the Side Quests :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
-
-    ??? courses "**Training Collections:** Recommended learning paths through our courses"
-
-        Training Collections combine multiple courses and Side Quests in order to provide a comprehensive learning experience around a particular theme or use case.
-
-        [Browse the Training Collections :material-arrow-right:](training_collections/index.md){ .md-button .md-button--secondary }
 
 </div>
 

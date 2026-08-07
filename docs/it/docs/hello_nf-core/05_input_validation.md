@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-In questa quinta parte del corso di formazione Hello nf-core, mostriamo come utilizzare il plugin nf-schema per validare gli input e i parametri della pipeline.
+In questa quinta parte del corso di formazione Build with nf-core, mostriamo come utilizzare il plugin nf-schema per validare gli input e i parametri della pipeline.
 
 ??? info "Come iniziare da questa sezione"
 
@@ -791,6 +791,6 @@ Avete implementato e testato sia la validazione dei parametri che la validazione
 
 ### Cosa c'è dopo?
 
-Avete completato tutte e cinque le parti del corso di formazione Hello nf-core!
+Avete completato tutte e cinque le parti del corso di formazione Build with nf-core!
 
 Continuate con il [Riepilogo](next_steps.md) per riflettere su ciò che avete costruito e imparato.

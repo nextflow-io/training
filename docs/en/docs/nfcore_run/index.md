@@ -1,5 +1,5 @@
 ---
-title: nf-core Run
+title: Run nf-core
 hide:
   - toc
 page_type: index_page
@@ -17,9 +17,9 @@ additional_information:
     - "**Domain:** The exercises use bioinformatics pipelines, but no prior scientific domain knowledge is required."
 ---
 
-# nf-core Run
+# Run nf-core
 
-**nf-core Run is a hands-on introduction to finding, running, and configuring nf-core community pipelines.**
+**Run nf-core is a hands-on introduction to finding, running, and configuring nf-core community pipelines.**
 
 Working through practical examples and guided exercises, you will learn to find and retrieve nf-core pipelines, run them using their built-in test profiles, and customize their execution through parameters and configuration files.
 
@@ -34,7 +34,7 @@ This course is hands-on, with goal-oriented exercises structured to introduce in
 You will start with `nf-core/demo`, a minimal pipeline maintained by the nf-core project for training purposes, then apply what you've learned to `nf-core/rnaseq`, a widely-used production pipeline for bulk RNA sequencing analysis.
 
 This course focuses on running pipelines.
-If you're looking for an intro to developing nf-core-compatible pipelines, see [Hello nf-core](../hello_nf-core/index.md).
+If you're looking for an intro to developing nf-core-compatible pipelines, see [Build with nf-core](../hello_nf-core/index.md).
 
 ### Lesson plan
 

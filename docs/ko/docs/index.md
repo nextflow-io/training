@@ -132,11 +132,11 @@ hide:
     이 과정들은 Nextflow 기초부터 nf-core 모범 사례까지 단계적으로 학습할 수 있도록 도와줍니다.
     nf-core 커뮤니티가 파이프라인을 구축하는 방법과 이유를 이해하고, 이러한 기법에 기여하고 재사용하는 방법을 학습합니다.
 
-    ??? courses "**Hello nf-core:** nf-core 시작하기"
+    ??? courses "**Build with nf-core:** nf-core 시작하기"
 
         [nf-core](https://nf-co.re/) 호환 파이프라인을 실행하고 개발하고자 하는 개발자를 위한 과정입니다. nf-core 템플릿과 개발 모범 사례를 따르는 간단하지만 완전히 기능하는 파이프라인을 개발하고, 기존 nf-core 모듈을 활용할 수 있을 만큼 nf-core 파이프라인의 구조를 충분히 다룹니다.
 
-        [Hello nf-core 교육 시작하기 :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
+        [Build with nf-core 교육 시작하기 :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
 
     ---
 
@@ -150,11 +150,11 @@ hide:
 
         [Side Quests 살펴보기 :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Training Collections:** Side Quests를 통한 추천 학습 경로"
+    ??? courses "**Learning Paths:** Side Quests를 통한 추천 학습 경로"
 
-        Training Collections는 특정 주제나 활용 사례를 중심으로 포괄적인 학습 경험을 제공하기 위해 여러 Side Quests를 결합합니다.
+        Learning Paths는 특정 주제나 활용 사례를 중심으로 포괄적인 학습 경험을 제공하기 위해 여러 Side Quests를 결합합니다.
 
-        [Training Collections 살펴보기 :material-arrow-right:](training_collections/index.md){ .md-button .md-button--secondary }
+        [Learning Paths 살펴보기 :material-arrow-right:](training_collections/index.md){ .md-button .md-button--secondary }
 
 </div>
 

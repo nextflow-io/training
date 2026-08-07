@@ -14,3 +14,6 @@ extra:
       <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">como usamos cookies</a>.
     cookies:
       posthog: "PostHog Analytics"
+  nav_group_labels:
+    "Nextflow Run": "Usuários"
+    "Hello Nextflow": "Desenvolvedores"

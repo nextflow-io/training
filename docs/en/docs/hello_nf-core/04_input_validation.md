@@ -1,6 +1,6 @@
 # Part 4: Input validation
 
-In this fourth part of the Hello nf-core training course, we show you how to use the nf-schema plugin to validate pipeline inputs and parameters.
+In this fourth part of the Build with nf-core training course, we show you how to use the nf-schema plugin to validate pipeline inputs and parameters.
 
 ??? info "How to begin from this section"
 
@@ -789,6 +789,6 @@ You've implemented and tested both parameter validation and input data validatio
 
 ### What's next?
 
-You've completed all five parts of the Hello nf-core training course!
+You've completed all five parts of the Build with nf-core training course!
 
 Continue to the [Summary](next_steps.md) to reflect on what you've built and learned.

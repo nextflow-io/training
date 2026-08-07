@@ -1628,7 +1628,7 @@ Istnieją dwa uzupełniające się podejścia, które czynią workflow'y bardzie
 **1. Walidacja wejść**
 
 Najbardziej niezawodnym rozwiązaniem jest walidacja arkusza danych przed rozpoczęciem jakiegokolwiek przetwarzania, dzięki czemu problemy są wykrywane wcześnie z czytelnym komunikatem błędu, zamiast ujawniać się jako tajemnicze błędy procesu w trakcie uruchomienia.
-Szkolenie [Hello nf-core](../../hello_nf-core/05_input_validation.md) omawia, jak dodać walidację wejść za pomocą wtyczki nf-schema. <!-- TODO (future) pending a proper Validation side quest -->
+Szkolenie [Build with nf-core](../../hello_nf-core/05_input_validation.md) omawia, jak dodać walidację wejść za pomocą wtyczki nf-schema. <!-- TODO (future) pending a proper Validation side quest -->
 
 **2. Jawne wejścia procesu dla wymaganych wartości**
 

@@ -1,75 +1,8 @@
-# Running Pipelines with Seqera Platform
+# Part 1: Run with Seqera
 
-Seqera Platform is a web-based platform, developed by the creators of Nextflow, for launching, monitoring, and managing Nextflow pipelines at scale.
-In this side quest, you will set up access to Seqera, launch a production-scale pipeline from both the web interface and the command line, and add a new pipeline to your workspace.
+In this part of the Run with Seqera training course, you will set up access to Seqera Platform, launch a production-scale pipeline from both the web interface and the command line, and add a new pipeline to your workspace.
 
-### Learning goals
-
-In this side quest, we'll explore how to run pipelines with **Seqera Platform**:
-
-- **Getting started**: signing up for Seqera and exploring the Community Showcase
-- **Launching from the web**: adding a pipeline from the curated collection and launching a run
-- **Launching from the CLI**: authenticating and using the `tw` command-line tool
-- **Adding new pipelines**: registering a GitHub-hosted pipeline and launching it both ways
-
-By the end, you'll be comfortable launching and monitoring Nextflow pipelines on Seqera Platform, whether you prefer working from the web interface or the command line.
-
-### Prerequisites
-
-Before taking on this side quest, you should:
-
-- Have completed the [nf-core Run](../../nfcore_run/index.md) course or otherwise be familiar with running `nf-core/demo` and `nf-core/rnaseq`.
-- Have (or be willing to create) a free [Seqera Platform](https://cloud.seqera.io) account.
-- Have access to a Seqera workspace with a configured compute environment (see section 1.3 below).
-
----
-
-## 0. Get started
-
-#### Open the training codespace
-
-If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../../envsetup/index.md).
-
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
-
-#### Move into the project directory
-
-Let's move into the directory where the files for this side quest are located.
-
-```bash
-cd side-quests/seqera_platform
-```
-
-You can set VSCode to focus on this directory:
-
-```bash
-code .
-```
-
-#### Review the materials
-
-```bash
-tree .
-```
-
-??? abstract "Directory contents"
-
-    ```console
-    .
-    └── .seqera_config
-    ```
-
-The **`.seqera_config`** file is a stub you will fill in during section 3 to configure the `tw` CLI with your Seqera access token and workspace.
-
-#### Readiness checklist
-
-Think you're ready to dive in?
-
-- [ ] I understand the goal of this side quest and its prerequisites
-- [ ] My codespace is up and running
-- [ ] I've set my working directory appropriately
-
-If you can check all the boxes, you're good to go.
+Make sure your working directory is set to `seqera-run/` as instructed on the [Getting started](./00_orientation.md) page.
 
 ---
 
@@ -97,7 +30,7 @@ It gives you a realistic preview of what the Platform looks like with real pipel
 
 1. Log in at [cloud.seqera.io](https://cloud.seqera.io).
 2. In the left sidebar, click **Showcase**.
-3. Browse the available pipelines — you will recognize several nf-core pipelines from the nf-core Run course.
+3. Browse the available pipelines — you will recognize several nf-core pipelines from the Run nf-core course.
 4. Click a pipeline to view its configuration and launch settings.
 5. Click **Runs** to explore example run histories, including task-level details and reports from previous executions.
 
@@ -124,7 +57,7 @@ Free credits to try out Seqera Compute are [available on request](https://seqera
 
 !!! note
 
-    The rest of this side quest assumes you have access to a workspace with a configured compute environment.
+    The rest of this course assumes you have access to a workspace with a configured compute environment.
     If you are in a group training session, your instructor will confirm which workspace and compute environment to use.
 
 ### Takeaway
@@ -139,7 +72,7 @@ Launch a production-scale RNA-seq pipeline from the Seqera Cloud web interface.
 
 ## 2. Launch nf-core/rnaseq from the web interface
 
-As covered in nf-core Run, the nf-core/rnaseq pipeline is a community-curated pipeline for bulk RNA sequence data analysis.
+As covered in Run nf-core, the nf-core/rnaseq pipeline is a community-curated pipeline for bulk RNA sequence data analysis.
 
 In this section, you will add the pipeline to your workspace, launch a run, and monitor its execution.
 
@@ -147,7 +80,7 @@ In this section, you will add the pipeline to your workspace, launch a run, and 
 
 Conveniently, nf-core/rnaseq is part of a curated collection of pipelines that can be added to your workspace in a few clicks through the Seqera Pipelines service.
 
-_We'll show you how to add your own pipelines later in this side quest._
+_We'll show you how to add your own pipelines later in this course._
 
 1. Navigate to [**Seqera Pipelines**](https://seqera.io/pipelines) to browse the community collection.
 2. Search for `rnaseq` and select **nf-core/rnaseq**.
@@ -205,7 +138,7 @@ Learn how to do all of this from the command line using the `tw` CLI.
 ## 3. Launch pipelines from the command line
 
 In the run view, click the **Command line** tab.
-You will see the exact `nextflow run` command that Platform constructed and submitted on your behalf — the same kind of command you have been running manually in the nf-core Run course.
+You will see the exact `nextflow run` command that Platform constructed and submitted on your behalf — the same kind of command you have been running manually in the Run nf-core course.
 
 Platform does not replace Nextflow; it orchestrates it.
 Everything you can do through the web interface, you can also do from a terminal using the `tw` CLI, the command-line tool for interacting with the Platform API.
@@ -383,7 +316,7 @@ Add a new pipeline to your workspace from the command line and launch it.
 ## 4. Add a new pipeline and run it
 
 Any Nextflow pipeline on GitHub can be added to your workspace with `tw pipelines add`, as long as it has a `main.nf` entry point and a `nextflow.config` at its root.
-nf-core/demo is a good example to practice with: you already ran it in the nf-core Run course, so you know what it does and what to expect.
+nf-core/demo is a good example to practice with: you already ran it in the Run nf-core course, so you know what it does and what to expect.
 
 ### 4.1. Add nf-core/demo to your workspace
 
@@ -436,7 +369,7 @@ The next two sections walk through how to provide those values: first through th
 With the launch form open, fill in the two required parameters.
 
 For `input`, enter the test samplesheet URL from the nf-core/demo test profile.
-You can find it in `conf/test.config` inside the pipeline repository, which you examined in the nf-core Run course:
+You can find it in `conf/test.config` inside the pipeline repository, which you examined in the Run nf-core course:
 
 ```
 https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
@@ -509,7 +442,7 @@ You know how to add any GitHub-hosted Nextflow pipeline to your workspace and la
 
 ## Summary
 
-In this side quest you learned to:
+In this course you learned to:
 
 - Sign up for a Seqera account and explore the Community Showcase
 - Add a pipeline from the curated catalog, launch a production-scale run, and monitor execution

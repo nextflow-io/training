@@ -1,6 +1,6 @@
 # Part 2: Use an nf-core module
 
-In this second part of the Hello nf-core training course, we show you how to find, install, and use an existing nf-core module in your pipeline.
+In this second part of the Build with nf-core training course, we show you how to find, install, and use an existing nf-core module in your pipeline.
 
 One of the great benefits of working with nf-core is the ability to leverage pre-built, tested modules from the [nf-core/modules](https://github.com/nf-core/modules) repository.
 Rather than writing every process from scratch, you can install and use community-maintained modules that follow best practices.

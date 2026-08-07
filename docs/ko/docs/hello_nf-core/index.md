@@ -1,5 +1,5 @@
 ---
-title: Hello nf-core
+title: Build with nf-core
 hide:
   - toc
 page_type: index_page
@@ -21,11 +21,11 @@ additional_information:
     - "**영역:** 모든 연습은 영역에 구애받지 않으므로 사전 과학 지식이 필요하지 않습니다."
 ---
 
-# Hello nf-core
+# Build with nf-core
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-**Hello nf-core는 nf-core 리소스와 모범 사례 사용에 대한 실습 입문 과정입니다.**
+**Build with nf-core는 nf-core 리소스와 모범 사례 사용에 대한 실습 입문 과정입니다.**
 
 ![nf-core logo](./img/nf-core-logo.png#only-light)
 ![nf-core logo](./img/nf-core-logo-darkbg.png#only-dark)

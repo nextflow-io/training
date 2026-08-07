@@ -1,6 +1,6 @@
 # Course summary
 
-Congratulations on completing the nf-core Run training course! 🎉
+Congratulations on completing the Run nf-core training course! 🎉
 
 <!-- placeholder for video -->
 
@@ -36,12 +36,11 @@ You're now equipped with the foundational knowledge to start running nf-core pip
 
 Here are our top suggestions for what to do next:
 
-- Don't just run nf-core pipelines, develop them! Learn nf-core best practices with [Hello nf-core](../hello_nf-core/index.md)
+- Launch and monitor these pipelines at scale with [Run with Seqera](../seqera_run/index.md)
+- Don't just run nf-core pipelines, develop them! Learn nf-core best practices with [Build with nf-core](../hello_nf-core/index.md)
 - New to Nextflow itself? Start with [Nextflow Run](../nextflow_run/index.md)
 - Apply Nextflow to a scientific analysis use case with [Nextflow for Science](../nf4_science/index.md)
 - Explore more advanced Nextflow features with the [Side Quests](../side_quests/index.md)
-
-Finally, we recommend you have a look at [**Seqera Platform**](https://seqera.io/), a cloud-based platform developed by the creators of Nextflow that makes it even easier to launch and manage your workflows, as well as manage your data and run analyses interactively in any environment.
 
 ## Getting help
 

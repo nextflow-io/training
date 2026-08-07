@@ -50,5 +50,5 @@ Si desarrolla un plugin útil, considere compartirlo con la comunidad a través 
 Si aún no lo ha hecho, consulte nuestros otros cursos de capacitación:
 
 - **[Hello Nextflow](../../hello_nextflow/index.md)**: Conceptos fundamentales de Nextflow
-- **[Hello nf-core](../../hello_nf-core/index.md)**: Pipelines de nf-core y mejores prácticas
+- **[Build with nf-core](../../hello_nf-core/index.md)**: Pipelines de nf-core y mejores prácticas
 - **[Side Quests](../index.md)**: Análisis en profundidad de temas específicos

@@ -1629,7 +1629,7 @@ Süreç betiği `#!groovy ${meta.character}` ifadesini değerlendirdiğinde, eks
 **1. Girdi doğrulaması**
 
 En güvenilir çözüm, herhangi bir işlem başlamadan önce veri sayfasını doğrulamaktır; böylece sorunlar, çalışmanın ortasında anlaşılması güç bir süreç hatası olarak ortaya çıkmak yerine erken ve net bir hata mesajıyla yakalanır.
-[Hello nf-core](../../hello_nf-core/05_input_validation.md) eğitimi, nf-schema eklentisini kullanarak girdi doğrulamasının nasıl ekleneceğini ele almaktadır. <!-- TODO (gelecek) uygun bir Doğrulama yan görevi bekliyor -->
+[Build with nf-core](../../hello_nf-core/05_input_validation.md) eğitimi, nf-schema eklentisini kullanarak girdi doğrulamasının nasıl ekleneceğini ele almaktadır. <!-- TODO (gelecek) uygun bir Doğrulama yan görevi bekliyor -->
 
 **2. Zorunlu değerler için açık süreç girdileri**
 

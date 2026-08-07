@@ -1,5 +1,5 @@
 ---
-title: Hello nf-core
+title: Build with nf-core
 hide:
   - toc
 page_type: index_page
@@ -21,11 +21,11 @@ additional_information:
     - "**Fachgebiet:** Die Übungen sind alle fachgebietsneutral, daher ist kein spezifisches wissenschaftliches Vorwissen erforderlich."
 ---
 
-# Hello nf-core
+# Build with nf-core
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-**Hello nf-core ist eine praktische Einführung in die Nutzung von nf-core Ressourcen und Best Practices.**
+**Build with nf-core ist eine praktische Einführung in die Nutzung von nf-core Ressourcen und Best Practices.**
 
 ![nf-core logo](./img/nf-core-logo.png#only-light)
 ![nf-core logo](./img/nf-core-logo-darkbg.png#only-dark)

@@ -54,7 +54,7 @@ Ara esteu equipats amb el coneixement fonamental per començar a desenvolupar el
 Aquí teniu les nostres 3 principals suggerències sobre què fer a continuació:
 
 - Apliqueu Nextflow a un cas d'ús d'anàlisi científica amb [Nextflow for Science](../nf4_science/index.md)
-- Inicieu-vos amb nf-core amb [Hello nf-core](../hello_nf-core/index.md)
+- Inicieu-vos amb nf-core amb [Build with nf-core](../hello_nf-core/index.md)
 - Exploreu característiques més avançades de Nextflow amb les [Side Quests](../side_quests/index.md)
 
 Finalment, us recomanem que doneu una ullada a [**Seqera Platform**](https://seqera.io/), una plataforma basada en el núvol desenvolupada pels creadors de Nextflow que fa encara més fàcil llançar i gestionar els vostres workflows, així com gestionar les vostres dades i executar anàlisis de manera interactiva en qualsevol entorn.

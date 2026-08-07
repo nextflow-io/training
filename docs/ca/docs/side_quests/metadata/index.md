@@ -1629,7 +1629,7 @@ Hi ha dos enfocaments complementaris per fer els workflows més robustos davant 
 **1. Validació d'entrada**
 
 La solució més fiable és validar el full de dades abans que comenci qualsevol processament, de manera que els problemes es detectin aviat amb un missatge d'error clar en lloc de manifestar-se com una fallada críptica del procés a mig camí.
-La formació de [Hello nf-core](../../hello_nf-core/05_input_validation.md) explica com afegir validació d'entrada utilitzant el connector nf-schema. <!-- TODO (futur) pendent d'una missió secundària de Validació pròpia -->
+La formació de [Build with nf-core](../../hello_nf-core/05_input_validation.md) explica com afegir validació d'entrada utilitzant el connector nf-schema. <!-- TODO (futur) pendent d'una missió secundària de Validació pròpia -->
 
 **2. Entrades explícites del procés per als valors requerits**
 

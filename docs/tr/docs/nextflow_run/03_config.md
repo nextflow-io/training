@@ -1549,7 +1549,7 @@ Nextflow pipeline'larını çalıştırmaya ve yönetmeye başlamak için bilmen
 Bu, bu kursu sonlandırıyor, ancak öğrenmeye devam etmek istiyorsanız, iki ana önerimiz var:
 
 - Kendi pipeline'larınızı geliştirmeyi daha derinlemesine incelemek istiyorsanız, bu kursla aynı genel ilerlemeyi kapsayan ancak kanallar ve operatörler hakkında çok daha ayrıntılı giden yeni başlayanlar için bir kurs olan [Hello Nextflow](../hello_nextflow/index.md)'a bakın.
-- Koda daha derinlemesine girmeden Nextflow pipeline'larını çalıştırmayı öğrenmeye devam etmek istiyorsanız, son derece popüler [nf-core](../hello_nf-core/index.md) projesinden pipeline'ları bulmak ve çalıştırmak için araçları tanıtan [Hello nf-core](https://nf-co.re/)'un ilk bölümüne bakın.
+- Koda daha derinlemesine girmeden Nextflow pipeline'larını çalıştırmayı öğrenmeye devam etmek istiyorsanız, son derece popüler [nf-core](../hello_nf-core/index.md) projesinden pipeline'ları bulmak ve çalıştırmak için araçları tanıtan [Build with nf-core](https://nf-co.re/)'un ilk bölümüne bakın.
 
 İyi eğlenceler!
 

@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Im ersten Teil des Hello nf-core Trainingskurses zeigen wir dir, wie du eine nf-core Pipeline findest und ausprobierst, ihre Ausführung für deine Bedürfnisse konfigurierst und anpasst, und wie die Eingabevalidierung vor häufigen Fehlern schützt.
+Im ersten Teil des Build with nf-core Trainingskurses zeigen wir dir, wie du eine nf-core Pipeline findest und ausprobierst, ihre Ausführung für deine Bedürfnisse konfigurierst und anpasst, und wie die Eingabevalidierung vor häufigen Fehlern schützt.
 
 Wir werden eine Pipeline namens nf-core/demo verwenden, die vom nf-core-Projekt als Teil seines Pipeline-Inventars für Demonstrations- und Trainingszwecke gepflegt wird.
 

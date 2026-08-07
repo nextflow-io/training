@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-In questa quarta parte del corso di formazione Hello nf-core, vi mostreremo come creare un modulo nf-core applicando le convenzioni chiave che rendono i moduli portabili e manutenibili.
+In questa quarta parte del corso di formazione Build with nf-core, vi mostreremo come creare un modulo nf-core applicando le convenzioni chiave che rendono i moduli portabili e manutenibili.
 
 Il progetto nf-core fornisce un comando (`nf-core modules create`) che genera automaticamente template di moduli correttamente strutturati, simile a quello che abbiamo utilizzato per il workflow nella Parte 2.
 Tuttavia, per scopi didattici, inizieremo facendolo manualmente: trasformando il modulo locale `cowpy` nel vostro pipeline `core-hello` in un modulo in stile nf-core passo dopo passo.
