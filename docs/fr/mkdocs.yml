@@ -34,6 +34,9 @@ extra:
     hello_nextflow/index.md: "Aperçu"
     hello_nf-core/index.md: "Aperçu"
     nf4_science/index.md: "Aperçu"
+    nf4_science/genomics/index.md: "Aperçu"
+    nf4_science/rnaseq/index.md: "Aperçu"
+    nf4_science/imaging/index.md: "Aperçu"
     side_quests/index.md: "Aperçu"
   nav_section_separators:
     side_quests/dev_environment/index.md: "Outils et Astuces pour Développeurs"

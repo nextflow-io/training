@@ -34,6 +34,9 @@ extra:
     hello_nextflow/index.md: "Visió general"
     hello_nf-core/index.md: "Visió general"
     nf4_science/index.md: "Visió general"
+    nf4_science/genomics/index.md: "Visió general"
+    nf4_science/rnaseq/index.md: "Visió general"
+    nf4_science/imaging/index.md: "Visió general"
     side_quests/index.md: "Visió general"
   nav_section_separators:
     side_quests/dev_environment/index.md: "Eines i Trucs per a Desenvolupadors"

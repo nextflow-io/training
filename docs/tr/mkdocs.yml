@@ -33,6 +33,9 @@ extra:
     hello_nextflow/index.md: "Genel Bakış"
     hello_nf-core/index.md: "Genel Bakış"
     nf4_science/index.md: "Genel Bakış"
+    nf4_science/genomics/index.md: "Genel Bakış"
+    nf4_science/rnaseq/index.md: "Genel Bakış"
+    nf4_science/imaging/index.md: "Genel Bakış"
     side_quests/index.md: "Genel Bakış"
   nav_section_separators:
     side_quests/dev_environment/index.md: "Geliştirici Araçları ve İpuçları"

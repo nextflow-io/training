@@ -34,6 +34,9 @@ extra:
     hello_nextflow/index.md: "Resumen"
     hello_nf-core/index.md: "Resumen"
     nf4_science/index.md: "Resumen"
+    nf4_science/genomics/index.md: "Resumen"
+    nf4_science/rnaseq/index.md: "Resumen"
+    nf4_science/imaging/index.md: "Resumen"
     side_quests/index.md: "Resumen"
   nav_section_separators:
     side_quests/dev_environment/index.md: "Herramientas y Trucos para Desarrolladores"
