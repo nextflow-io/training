@@ -370,7 +370,7 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
       containerEngine           : docker
       launchDir                 : /workspaces/training/nfcore-run
       workDir                   : /workspaces/training/nfcore-run/work
-      projectDir                : /workspaces/.nextflow/assets/nf-core/demo
+      projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2
       userName                  : root
       profile                   : docker,test
       configFiles               : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/nextflow.config
