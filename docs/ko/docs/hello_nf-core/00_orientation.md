@@ -22,24 +22,19 @@ codespace는 VSCode 인터페이스로 설정되어 있으며, 파일 시스템 
 
 ### 버전 요구 사항
 
-이 교육은 **Nextflow 25.10.2** 또는 이후 버전에서 **v2 syntax parser가 비활성화된 상태**로 설계되었습니다.
+이 교육은 **v2 syntax parser가 활성화된** Nextflow 25.10.2 이상에서 작동하며, v2 parser는 Nextflow 26.04부터 기본값입니다.
+제공하는 교육 환경에서는 별도로 설정할 필요가 없습니다. v2 parser가 적용된 Nextflow 26.04.4가 실행됩니다. 로컬 또는 사용자 지정 환경을 사용하는 경우 [버전 참고 사항](../info/nxf_versions.md)을 확인하십시오.
 
-#### 제공하는 교육 환경을 사용하는 경우:
-
-더 진행하기 전에 다음 명령을 반드시 실행해야 합니다:
-
-```bash
-export NXF_SYNTAX_PARSER=v1
-```
-
-#### 로컬 또는 사용자 지정 환경을 사용하는 경우:
-
-[여기](../info/nxf_versions.md)에 문서화된 올바른 설정을 사용하고 있는지 확인하십시오.
-
-이 교육에는 추가로 **nf-core tools 3.5.2**가 필요합니다.
+이 교육에는 추가로 **nf-core tools 4.0.2**가 필요합니다.
 다른 버전의 nf-core 도구를 사용하는 경우 따라가기 어려울 수 있습니다.
 
 `nf-core --version` 명령을 사용하여 환경에 설치된 버전을 확인할 수 있습니다.
+
+!!! warning "v2 parser 호환성"
+
+    많은 nf-core 파이프라인이 아직 v2 syntax parser를 지원하지 않습니다.
+    이 과정에서 사용하는 파이프라인 외의 nf-core 파이프라인을 실행하다가 오류가 발생하면 `export NXF_SYNTAX_PARSER=v1`을 설정하여 v1 parser로 전환해야 할 수 있습니다.
+    자세한 내용은 [버전 참고 사항](../info/nxf_versions.md)을 확인하십시오.
 
 ## 작업 준비하기
 
@@ -82,7 +77,10 @@ tree . -L 2
 
     ```console
     .
+    ├── custom.config
     ├── greetings.csv
+    ├── malformed_samplesheet.csv
+    ├── my_params.yml
     ├── original-hello
     │   ├── hello.nf
     │   ├── modules
@@ -101,6 +99,12 @@ tree . -L 2
 
 - **`greetings.csv` 파일**은 테스트 목적으로 사용하는 최소한의 열 데이터가 포함된 CSV입니다.
 
+- **`custom.config` 파일**은 Part 1에서 process 리소스 재정의 및 `ext.args`를 시연하는 데 사용되는 Nextflow 설정 파일 예제입니다.
+
+- **`malformed_samplesheet.csv` 파일**은 Part 1에서 입력 유효성 검사를 시연하기 위해 의도적으로 잘못 작성된 samplesheet입니다.
+
+- **`my_params.yml` 파일**은 Part 1에서 파이프라인에 boolean 매개변수를 전달하는 방법을 시연하는 데 사용되는 매개변수 파일 예제입니다.
+
 - **`original-hello` 디렉토리**에는 전체 Hello Nextflow 교육 시리즈를 진행하여 생성된 소스 코드의 사본이 포함되어 있습니다(Docker 활성화 상태).
 
 - **`solutions` 디렉토리**에는 과정의 각 단계에서 생성되는 완성된 워크플로우 스크립트가 포함되어 있습니다.
@@ -112,7 +116,7 @@ tree . -L 2
 
 - [ ] 이 과정의 목표와 전제 조건을 이해했습니다
 - [ ] 환경이 실행 중입니다
-- [ ] syntax parser가 **v1**로 설정되어 있는지 확인했습니다
+- [ ] nf-core tools 4.0.2를 사용하고 있습니다(`nf-core --version`으로 확인)
 - [ ] 작업 디렉토리를 적절하게 설정했습니다
 
 모든 항목을 체크할 수 있다면 준비가 완료된 것입니다.

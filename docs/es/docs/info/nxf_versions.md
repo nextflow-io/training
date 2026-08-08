@@ -13,11 +13,12 @@ hide:
 A partir de la versión 3.0 del portal de capacitación, todos nuestros cursos de capacitación son compatibles con Nextflow versión 25.10.2 o posterior, a menos que se especifique lo contrario en la página de índice del curso.
 (Esto no incluye los materiales obsoletos o archivados que pueden no incluir un aviso de versión).
 
-La versión de Nextflow cargada por defecto en nuestro entorno de capacitación es **Nextflow 25.10.4**.
+La versión de Nextflow cargada por defecto en nuestro entorno de capacitación es **Nextflow 26.04.4**.
 
 Debido a que los cursos ahora utilizan entradas tipadas a nivel de workflow, así como directivas de salida a nivel de workflow, requieren el uso del analizador de sintaxis V2, **a menos que se especifique lo contrario**.
+El analizador V2 es el predeterminado a partir de Nextflow 26.04 en adelante, por lo que en la versión que cargamos no necesitas habilitarlo manualmente.
 Si planeas usar el entorno que proporcionamos a través de [Github Codespaces](../envsetup/01_setup.md) o [devcontainers locales](../envsetup/03_devcontainer.md), no necesitas hacer nada a menos que se indique específicamente en las instrucciones del curso.
-Sin embargo, si planeas trabajar en las capacitaciones en tu propio entorno ([Instalación manual](../envsetup/02_local.md)), deberás asegurarte de usar Nextflow versión 25.10.2 o posterior con el analizador de sintaxis v2 habilitado.
+Sin embargo, si planeas trabajar en las capacitaciones en tu propio entorno ([Instalación manual](../envsetup/02_local.md)), deberás asegurarte de usar Nextflow versión 25.10.2 o posterior, y de habilitar el analizador de sintaxis v2 si estás usando una versión anterior a 26.04.
 
 ## Versiones anteriores de los materiales de capacitación
 
@@ -40,7 +41,7 @@ Todo el código moderno de Nextflow usa DSL2.
 El analizador v1 es el original, más permisivo.
 El analizador v2 es más estricto y habilita nuevas características del lenguaje como tipado estático (entradas y salidas tipadas) y directivas de salida a nivel de workflow.
 El analizador v2 también proporciona mejores mensajes de error y detecta más errores en tiempo de análisis en lugar de en tiempo de ejecución.
-El analizador v2 se convertirá en el predeterminado en Nextflow 26.04.
+El analizador v2 es el predeterminado a partir de Nextflow 26.04 en adelante.
 
 En resumen: DSL2 es el lenguaje que escribes; la versión del analizador de sintaxis determina qué tan estrictamente se interpreta ese lenguaje y qué características avanzadas están disponibles.
 
@@ -52,21 +53,22 @@ Para más información sobre cómo actualizar tu versión de Nextflow, consulta 
 
 ### Habilitar el analizador de sintaxis v2
 
+A partir de Nextflow 26.04 en adelante, el analizador v2 es el predeterminado, por lo que los pasos a continuación solo son necesarios en versiones anteriores a 26.04.
+
 Para **habilitar** el analizador de sintaxis v2 para tu sesión actual, ejecuta el siguiente comando en tu terminal:
 
 ```bash
 export NXF_SYNTAX_PARSER=v2
 ```
 
-Para hacer esto permanente (mientras v2 se convierte en el predeterminado en Nextflow 26.04), agrega el comando export a tu perfil de shell (`~/.bashrc`, `~/.zshrc`, etc.):
+Para hacer esto permanente, agrega el comando export a tu perfil de shell (`~/.bashrc`, `~/.zshrc`, etc.):
 
 ```bash
 echo 'export NXF_SYNTAX_PARSER=v2' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-Ten en cuenta que la variable de entorno `NXF_SYNTAX_PARSER=v2` es un requisito temporal.
-A partir de Nextflow 26.04 en adelante, el analizador v2 se convertirá en el predeterminado y esta configuración ya no será necesaria.
+Ten en cuenta que en versiones de Nextflow anteriores a 26.04, la variable de entorno `NXF_SYNTAX_PARSER=v2` es necesaria para acceder a las características de v2 utilizadas en estos cursos.
 
 ### Deshabilitar el analizador de sintaxis v2
 

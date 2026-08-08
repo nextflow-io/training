@@ -18,10 +18,6 @@ Hello 파이프라인에 익숙하지 않거나 복습이 필요하시면 [이 �
     - [Workflows of Workflows](../side_quests/workflows_of_workflows/index.md)
     - [Metadata and meta maps](../side_quests/metadata/index.md)
 
-!!! note "참고"
-
-    터미널에서 `hello-nf-core` 디렉토리에 있는지 확인하세요.
-
 ---
 
 ## 1. 파이프라인 코드 구조 살펴보기
@@ -30,6 +26,7 @@ nf-core 프로젝트는 파이프라인의 구조, 코드 구성, 설정, 문서
 
 파이프라인 생성 작업을 시작하기 전에 해당 구조와 구성 방식을 이해해야 합니다.
 1부에서 생성한 `pipelines` 심볼릭 링크를 사용하여 `nf-core/demo` 저장소에서 파이프라인 코드가 어떻게 구성되어 있는지 살펴보겠습니다.
+터미널에서 `hello-nf-core` 디렉토리에 있는지 확인하세요.
 
 파일 탐색기를 사용하거나 `tree` 명령으로 `nf-core/demo` 디렉토리를 찾아 열 수 있습니다.
 
@@ -82,7 +79,7 @@ tree -L 1 pipelines/nf-core/demo
 `main.nf`의 이름 없는 workflow는 _진입점(entrypoint)_ 스크립트라고 합니다. 이는 두 종류의 내포된 workflow를 위한 래퍼 역할을 합니다: `workflows/demo.nf`에 위치한 실제 분석 로직을 포함하는 `DEMO` workflow와 `subworkflows/` 아래에 위치한 일련의 관리 workflow입니다.
 `demo.nf` workflow는 `modules/` 아래에 위치한 **모듈**을 호출하며, 이 모듈들에는 실제 분석 단계를 수행하는 **프로세스**가 포함되어 있습니다.
 
-!!! note "참고"
+!!! info "정보"
 
     Subworkflow는 관리 기능에만 국한되지 않으며, 프로세스 모듈을 활용할 수 있습니다.
 
@@ -107,7 +104,7 @@ tree -L 1 pipelines/nf-core/demo
 
 `demo.nf` workflow는 `modules/` 아래에 위치한 **모듈**을 호출하며, 다음에 살펴보겠습니다.
 
-!!! note "참고"
+!!! info "정보"
 
     일부 nf-core 분석 workflow는 하위 수준의 subworkflow를 호출하여 추가적인 내포 수준을 보여줍니다.
     이는 주로 함께 자주 사용되는 두 개 이상의 모듈을 쉽게 재사용 가능한 파이프라인 세그먼트로 묶는 데 사용됩니다.
@@ -266,13 +263,20 @@ TUI가 닫히면 다음과 같은 콘솔 출력이 표시됩니다.
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 3.5.2 - https://nf-co.re
+        nf-core/tools version 4.0.2 - https://nf-co.re
 
 
     INFO     Launching interactive nf-core pipeline creation tool.
     ```
 
-파이프라인 생성이 성공했다는 명시적인 확인은 콘솔 출력에 없지만, `core-hello`라는 새 디렉토리가 보일 것입니다.
+TUI가 완료되면 도구가 파이프라인을 생성하고 컨테이너 설정을 생성했다고 보고합니다:
+
+```console
+INFO     Creating new pipeline: 'hello'
+INFO     Generated container configs for the pipeline successfully.
+```
+
+이제 `core-hello`라는 새 디렉토리가 보일 것입니다.
 
 새 디렉토리의 내용을 확인하여 템플릿을 사용함으로써 얼마나 많은 작업을 절약했는지 확인하세요.
 
@@ -283,8 +287,7 @@ tree core-hello
 ??? abstract "디렉토리 내용"
 
     ```console
-    core-hello/
-    ├── README.md
+    core-hello
     ├── assets
     │   ├── samplesheet.csv
     │   └── schema_input.json
@@ -294,13 +297,15 @@ tree core-hello
     │   ├── test.config
     │   └── test_full.config
     ├── docs
-    │   ├── README.md
+    │   ├── CONTRIBUTING.md
     │   ├── output.md
+    │   ├── README.md
     │   └── usage.md
     ├── main.nf
     ├── modules.json
     ├── nextflow.config
     ├── nextflow_schema.json
+    ├── README.md
     ├── subworkflows
     │   ├── local
     │   │   └── utils_nfcore_hello_pipeline
@@ -320,6 +325,8 @@ tree core-hello
     │       │   └── tests
     │       │       ├── main.function.nf.test
     │       │       ├── main.function.nf.test.snap
+    │       │       ├── main.nf.test
+    │       │       ├── main.nf.test.snap
     │       │       ├── main.workflow.nf.test
     │       │       ├── main.workflow.nf.test.snap
     │       │       └── nextflow.config
@@ -333,7 +340,7 @@ tree core-hello
     └── workflows
         └── hello.nf
 
-    15 directories, 34 files
+    14 directories, 37 files
     ```
 
 정말 많은 파일입니다!
@@ -352,11 +359,12 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./core-hello/main.nf` [scruffy_marconi] DSL2 - revision: b9e9b3b8de
+    Launching `./core-hello/main.nf` [cheesy_avogadro] revision: d6bbba9521
 
-    Downloading plugin nf-schema@2.5.1
+    WARN: Unrecognized config option 'validation.defaultIgnoreParams'
+    WARN: Unrecognized config option 'validation.monochromeLogs'
     Input/output options
       input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
       outdir                    : core-hello-results
@@ -366,10 +374,10 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
       config_profile_description: Minimal test dataset to check pipeline function
 
     Generic options
-      trace_report_suffix       : 2025-11-21_04-47-18
+      trace_report_suffix       : 2026-06-23_16-56-58
 
     Core Nextflow options
-      runName                   : scruffy_marconi
+      runName                   : cheesy_avogadro
       containerEngine           : docker
       launchDir                 : /workspaces/training/hello-nf-core
       workDir                   : /workspaces/training/hello-nf-core/work
@@ -382,6 +390,9 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
     ------------------------------------------------------
     -[core/hello] Pipeline completed successfully-
     ```
+
+`WARN: Unrecognized config option 'validation.*'` 줄은 새로 생성된 템플릿에 고정된 nf-schema 플러그인 버전에서 발생합니다.
+이는 무해하며 실행에 영향을 주지 않습니다.
 
 이는 모든 기본 배선이 제자리에 있음을 보여줍니다.
 그렇다면 출력은 어디에 있을까요? 출력이 있기는 한가요?
@@ -397,12 +408,12 @@ tree core-hello-results
     ```console
     core-hello-results
     └── pipeline_info
-        ├── execution_report_2025-11-21_04-47-18.html
-        ├── execution_timeline_2025-11-21_04-47-18.html
-        ├── execution_trace_2025-11-21_04-47-18.txt
+        ├── execution_report_2026-06-23_16-56-58.html
+        ├── execution_timeline_2026-06-23_16-56-58.html
+        ├── execution_trace_2026-06-23_16-56-58.txt
         ├── hello_software_versions.yml
-        ├── params_2025-11-21_04-47-18.json
-        └── pipeline_dag_2025-11-21_04-47-18.html
+        ├── params_2026-06-23_16-57-00.json
+        └── pipeline_dag_2026-06-23_16-56-58.html
 
     1 directory, 6 files
     ```
@@ -435,7 +446,7 @@ tree core-hello-results
 
 이는 일부 nf-core 기능이 이미 갖춰진 분석 workflow의 플레이스홀더 역할을 합니다.
 
-```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 19 53"
+```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 21 53"
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -454,14 +465,16 @@ workflow HELLO {
 
     take:
     ch_samplesheet // channel: --input에서 읽은 샘플시트
+    outdir
+
     main:
 
-    ch_versions = channel.empty()
+    def ch_versions = channel.empty()
 
     //
     // 소프트웨어 버전 수집 및 저장
     //
-    def topic_versions = Channel.topic("versions")
+    def topic_versions = channel.topic("versions")
         .distinct()
         .branch { entry ->
             versions_file: entry instanceof Path
@@ -478,19 +491,16 @@ workflow HELLO {
             "${process}:\n${tool_versions.join('\n')}"
         }
 
-    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
+            storeDir: "${outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
             sort: true,
             newLine: true
-        ).set { ch_collated_versions }
-
-
+        )
     emit:
     versions       = ch_versions                 // channel: [ path(versions.yml) ]
-
 }
 
 /*
@@ -503,15 +513,15 @@ workflow HELLO {
 [Hello Nextflow](../hello_nextflow/index.md)에서 개발된 것과 같은 기본 Nextflow workflow와 비교하면, 여기에서 새로운 몇 가지 사항(위의 강조 표시된 줄)을 발견할 수 있습니다:
 
 - workflow 블록에 이름이 있습니다
-- workflow 입력은 `take:` 키워드를 사용하여 선언되고 채널 구성은 상위 workflow로 이동됩니다
+- workflow 입력은 `take:` 키워드를 사용하여 선언되고(여기서는 샘플시트 채널과 출력 디렉토리), 채널 구성은 상위 workflow로 이동됩니다
 - workflow 내용은 `main:` 블록 내부에 배치됩니다
 - 출력은 `emit:` 키워드를 사용하여 선언됩니다
 
 이것들은 workflow를 **구성 가능(composable)**하게 만드는 Nextflow의 선택적 기능으로, 다른 workflow 내에서 호출될 수 있음을 의미합니다.
 
-??? note "`Channel.topic` 블록"
+??? note "`channel.topic` 블록"
 
-    17번째 줄부터 시작하는 `def topic_versions = Channel.topic("versions")` 블록을 발견하셨을 것입니다.
+    28번째 줄부터 시작하는 `def topic_versions = channel.topic("versions")` 블록을 발견하셨을 것입니다.
     이는 모든 모듈에서 소프트웨어 버전 정보를 자동으로 수집하는 상용구 관리 코드입니다.
     nf-core는 2026년에 모든 파이프라인에 이 메커니즘을 도입할 예정이므로, 앞으로 모든 새 파이프라인에서 이를 볼 수 있습니다.
     이 과정의 4부에서 작동 방식을 자세히 설명합니다.
@@ -575,15 +585,15 @@ nextflow run original-hello/hello.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `original-hello/hello.nf` [goofy_babbage] DSL2 - revision: e9e72441e9
+    Launching `original-hello/hello.nf` [sharp_dijkstra] revision: 319b99ee58
 
     executor >  local (8)
-    [a4/081cec] sayHello (1)       | 3 of 3 ✔
-    [e7/7e9058] convertToUpper (3) | 3 of 3 ✔
-    [0c/17263b] collectGreetings   | 1 of 1 ✔
-    [94/542280] cowpy              | 1 of 1 ✔
+    [23/4eb61e] sayHello (3)       | 3 of 3 ✔
+    [c8/81a076] convertToUpper (1) | 3 of 3 ✔
+    [90/ea197e] collectGreetings   | 1 of 1 ✔
+    [da/3df79a] cowpy              | 1 of 1 ✔
     ```
 
 정상적으로 실행된다면 다음 단계로 넘어갈 준비가 된 것입니다.
@@ -704,7 +714,7 @@ workflow {
         params.character = 'turkey'
     ```
 
-!!! note "참고"
+!!! info "정보"
 
     Nextflow 언어 서버 확장이 설치되어 있다면 구문 검사기가 코드에 빨간 물결선을 표시할 것입니다.
     이는 `take:` 문을 넣으면 `main:`도 있어야 하기 때문입니다.
@@ -851,7 +861,7 @@ workflow {
 - 가져온 workflow를 호출하는 구문은 모듈을 호출하는 구문과 본질적으로 동일합니다.
 - 입력을 workflow로 가져오는 것과 관련된 모든 것(입력 매개변수 및 채널 구성)은 이제 이 상위 workflow에 선언됩니다.
 
-!!! note "참고"
+!!! info "정보"
 
     진입점 workflow 파일의 이름을 `main.nf`로 지정하는 것은 규칙이지 요구 사항이 아닙니다.
 
@@ -878,19 +888,19 @@ nextflow run ./original-hello
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `original-hello/main.nf` [friendly_wright] DSL2 - revision: 1ecd2d9c0a
+    Launching `original-hello/main.nf` [irreverent_cajal] revision: 619249b1d7
 
     executor >  local (8)
-    [24/c6c0d8] HELLO:sayHello (3)       | 3 of 3 ✔
-    [dc/721042] HELLO:convertToUpper (3) | 3 of 3 ✔
-    [48/5ab2df] HELLO:collectGreetings   | 1 of 1 ✔
-    [e3/693b7e] HELLO:cowpy              | 1 of 1 ✔
-    Output: /workspaces/training/hello-nf-core/work/e3/693b7e48dc119d0c54543e0634c2e7/cowpy-COLLECTED-test-batch-output.txt
+    [50/b02a90] HELLO:sayHello (1)       | 3 of 3 ✔
+    [c0/3c336a] HELLO:convertToUpper (2) | 3 of 3 ✔
+    [5c/47bb4f] HELLO:collectGreetings   | 1 of 1 ✔
+    [07/bfc706] HELLO:cowpy              | 1 of 1 ✔
+    Output: /workspaces/training/hello-nf-core/work/07/bfc7061fa521e86f4e1954191ab4c4/cowpy-COLLECTED-test-batch-output.txt
     ```
 
-이는 HELLO workflow를 구성 가능하게 업그레이드하는 데 성공했음을 의미합니다.
+이는 `HELLO` workflow를 구성 가능하게 업그레이드하는 데 성공했음을 의미합니다.
 
 ### 핵심 정리
 
@@ -932,14 +942,16 @@ workflow HELLO {
 
     take:
     ch_samplesheet // channel: --input에서 읽어온 samplesheet
+    outdir
+
     main:
 
-    ch_versions = channel.empty()
+    def ch_versions = channel.empty()
 
     //
     // 소프트웨어 버전 수집 및 저장
     //
-    def topic_versions = Channel.topic("versions")
+    def topic_versions = channel.topic("versions")
         .distinct()
         .branch { entry ->
             versions_file: entry instanceof Path
@@ -956,19 +968,16 @@ workflow HELLO {
             "${process}:\n${tool_versions.join('\n')}"
         }
 
-    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
+            storeDir: "${outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
             sort: true,
             newLine: true
-        ).set { ch_collated_versions }
-
-
+        )
     emit:
     versions       = ch_versions                 // channel: [ path(versions.yml) ]
-
 }
 
 /*
@@ -978,8 +987,8 @@ workflow HELLO {
 */
 ```
 
-강조 표시된 줄은 구성 가능한 workflow 구조를 정의합니다: `workflow HELLO {`, `take:`, `main:`, `emit:`.
-17~34번째 줄 사이의 큰 블록은 더 실질적인 내용으로, topic 채널을 사용하여 소프트웨어 버전을 캡처하는 메커니즘을 처리합니다. 이는 nf-core가 2026년에 모든 파이프라인에 도입할 예정인 기능입니다.
+이것이 구성 가능한 workflow 구조입니다: `take:`, `main:`, `emit:`을 포함하는 이름 있는 `workflow HELLO {` 블록입니다.
+`// Collate and save software versions` 아래의 블록은 더 실질적인 내용으로, topic 채널을 사용하여 소프트웨어 버전을 캡처하는 메커니즘을 처리합니다. 이는 nf-core가 2026년에 모든 파이프라인에 도입할 예정인 기능입니다.
 4부에서 설명할 예정이므로, 지금은 그대로 두어도 되는 상용구 코드로 취급하세요.
 
 섹션 2에서 개발한 원래 workflow의 구성 가능한 버전에서 관련 코드를 추가해야 합니다.
@@ -991,7 +1000,7 @@ workflow HELLO {
 3. workflow 로직을 `main` 블록에 추가
 4. `emit` 블록 업데이트
 
-!!! note "참고"
+!!! info "정보"
 
     이번 첫 번째 패스에서는 버전 캡처 블록을 무시하겠습니다.
     4부에서 작동 방식을 설명합니다.
@@ -1079,9 +1088,10 @@ include { cowpy } from './modules/cowpy.nf'
 nf-core 프로젝트에는 일반적으로 열 데이터를 포함하는 CSV 파일인 samplesheet 개념과 관련된 많은 사전 구축 기능이 있습니다.
 본질적으로 우리의 `greetings.csv` 파일이 그러하므로 현재 `take` 선언을 그대로 유지하고 다음 단계에서 입력 채널의 이름만 업데이트하겠습니다.
 
-```groovy title="core-hello/workflows/hello.nf" linenums="21"
+```groovy title="core-hello/workflows/hello.nf" linenums="17"
     take:
     ch_samplesheet // channel: --input에서 읽어온 samplesheet
+    outdir
 ```
 
 입력 처리는 이 workflow의 상위에서 수행됩니다(이 코드 파일에서가 아님).
@@ -1111,20 +1121,21 @@ nf-core 프로젝트에는 일반적으로 열 데이터를 포함하는 CSV 파
 `main:` 뒤에 오는 코드를 workflow의 새 버전에 복사해야 합니다.
 
 workflow를 실행하는 도구의 버전을 캡처하는 것과 관련된 일부 코드가 이미 있습니다. 지금은 그대로 두겠습니다(도구 버전은 나중에 처리하겠습니다).
-맨 위에 `ch_versions = channel.empty()` 초기화를 유지한 다음 workflow 로직을 삽입하고 버전 수집 코드를 끝에 유지하겠습니다.
+맨 위에 `def ch_versions = channel.empty()` 초기화를 유지한 다음 workflow 로직을 삽입하고 버전 수집 코드를 끝에 유지하겠습니다.
 이러한 순서는 실제 파이프라인에서 프로세스가 workflow가 실행될 때 `ch_versions` 채널에 추가될 버전 정보를 방출하기 때문에 의미가 있습니다.
 
 === "후"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="19" hl_lines="10-20"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="15" hl_lines="11-21"
     workflow HELLO {
 
         take:
         ch_samplesheet // channel: --input에서 읽어온 samplesheet
+        outdir
 
         main:
 
-        ch_versions = channel.empty()
+        def ch_versions = channel.empty()
 
         // 인사말 출력
         sayHello(greeting_ch)
@@ -1141,7 +1152,7 @@ workflow를 실행하는 도구의 버전을 캡처하는 것과 관련된 일�
         //
         // 소프트웨어 버전 수집 및 저장
         //
-        def topic_versions = Channel.topic("versions")
+        def topic_versions = channel.topic("versions")
             .distinct()
             .branch { entry ->
                 versions_file: entry instanceof Path
@@ -1158,37 +1169,36 @@ workflow를 실행하는 도구의 버전을 캡처하는 것과 관련된 일�
                 "${process}:\n${tool_versions.join('\n')}"
             }
 
-        softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+        def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
             .mix(topic_versions_string)
             .collectFile(
-                storeDir: "${params.outdir}/pipeline_info",
+                storeDir: "${outdir}/pipeline_info",
                 name:  'hello_software_'  + 'versions.yml',
                 sort: true,
                 newLine: true
-            ).set { ch_collated_versions }
-
-
+            )
         emit:
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
-
     }
     ```
 
 === "전"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="19"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="15"
     workflow HELLO {
 
         take:
         ch_samplesheet // channel: --input에서 읽어온 samplesheet
+        outdir
+
         main:
 
-        ch_versions = channel.empty()
+        def ch_versions = channel.empty()
 
         //
         // 소프트웨어 버전 수집 및 저장
         //
-        def topic_versions = Channel.topic("versions")
+        def topic_versions = channel.topic("versions")
             .distinct()
             .branch { entry ->
                 versions_file: entry instanceof Path
@@ -1205,36 +1215,31 @@ workflow를 실행하는 도구의 버전을 캡처하는 것과 관련된 일�
                 "${process}:\n${tool_versions.join('\n')}"
             }
 
-        softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+        def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
             .mix(topic_versions_string)
             .collectFile(
-                storeDir: "${params.outdir}/pipeline_info",
+                storeDir: "${outdir}/pipeline_info",
                 name:  'hello_software_'  + 'versions.yml',
                 sort: true,
                 newLine: true
-            ).set { ch_collated_versions }
-
-
+            )
         emit:
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
-
     }
     ```
-
-`main:` 앞에 빈 줄을 추가하여 코드를 더 읽기 쉽게 만들었습니다.
 
 좋아 보이지만 `take:` 키워드 아래에 작성된 것과 일치하도록 아래와 같이 `sayHello()` 프로세스에 전달하는 채널의 이름을 `greeting_ch`에서 `ch_samplesheet`로 업데이트해야 합니다.
 
 === "후"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="25"
         // 인사말 출력 (nf-core samplesheet 규칙을 사용하도록 업데이트됨)
         sayHello(ch_samplesheet)
     ```
 
 === "전"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="25"
         // 인사말 출력
         sayHello(greeting_ch)
     ```
@@ -1247,7 +1252,7 @@ workflow를 실행하는 도구의 버전을 캡처하는 것과 관련된 일�
 
 === "후"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="69" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="71" hl_lines="2"
         emit:
         cowpy_hellos   = cowpy.out
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
@@ -1255,12 +1260,12 @@ workflow를 실행하는 도구의 버전을 캡처하는 것과 관련된 일�
 
 === "전"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="69"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="71"
         emit:
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
-이것으로 HELLO workflow 자체에 대한 수정이 완료됩니다.
+이것으로 `HELLO` workflow 자체에 대한 수정이 완료됩니다.
 이 시점에서 우리는 구현하기로 설정한 전반적인 코드 구조를 달성했습니다.
 
 ### 핵심 정리
@@ -1324,7 +1329,8 @@ workflow CORE_HELLO {
     // WORKFLOW: 파이프라인 실행
     //
     HELLO (
-        samplesheet
+        samplesheet,
+        params.outdir,
     )
 }
 /*
@@ -1361,7 +1367,6 @@ workflow {
     // SUBWORKFLOW: 완료 작업 실행
     //
     PIPELINE_COMPLETION (
-        params.outdir,
         params.monochrome_logs,
     )
 }
@@ -1377,7 +1382,7 @@ nf-core 프로젝트는 내포된 subworkflow를 많이 사용하므로 이 부�
 
 여기서 중요한 것은 두 개의 workflow가 정의되어 있다는 것입니다:
 
-- `CORE_HELLO`는 `core-hello/workflows/hello.nf`에서 방금 조정을 완료한 HELLO workflow를 실행하기 위한 얇은 래퍼입니다.
+- `CORE_HELLO`는 `core-hello/workflows/hello.nf`에서 방금 조정을 완료한 `HELLO` workflow를 실행하기 위한 얇은 래퍼입니다.
 - `CORE_HELLO`와 `PIPELINE_INITIALISATION`, `PIPELINE_COMPLETION`이라는 두 개의 다른 subworkflow를 호출하는 이름 없는 workflow입니다.
 
 그들이 서로 어떻게 관련되어 있는지 보여주는 다이어그램이 있습니다:
@@ -1422,9 +1427,9 @@ nf-core 프로젝트는 내포된 subworkflow를 많이 사용하므로 이 부�
     versions    = ch_versions
 ```
 
-이것은 samplesheet를 파싱하고 HELLO workflow에서 소비할 준비가 된 형태로 전달하는 channel factory입니다.
+이것은 samplesheet를 파싱하고 `HELLO` workflow에서 소비할 준비가 된 형태로 전달하는 channel factory입니다.
 
-!!! note "참고"
+!!! info "정보"
 
     위의 구문은 이전에 사용한 것과 약간 다르지만 기본적으로 다음은:
 
@@ -1533,7 +1538,7 @@ cp greetings.csv core-hello/assets/.
 
 === "후"
 
-    ```groovy title="core-hello/conf/test.config" linenums="21" hl_lines="6-10"
+    ```groovy title="core-hello/conf/test.config" linenums="21" hl_lines="6 8-10"
     params {
         config_profile_name        = 'Test profile'
         config_profile_description = 'Minimal test dataset to check pipeline function'
@@ -1595,13 +1600,53 @@ cp greetings.csv core-hello/assets/.
 
 이것으로 필요한 코드 수정이 완료되었습니다.
 
-### 5.4. 테스트 프로필로 파이프라인 실행
+### 5.4. 매개변수 검증 비활성화
+
+템플릿의 samplesheet 파싱을 자체적인 간단한 채널 구성으로 교체했지만, 템플릿에는 여전히 fastq 기반 samplesheet를 설명하는 `nextflow_schema.json`과 `assets/schema_input.json`이 포함되어 있습니다.
+해당 스키마를 아직 `greetings.csv` 형식에 맞게 조정하지 않았으므로, 지금은 매개변수 검증을 비활성화해야 합니다(나중에 제대로 설정할 것입니다).
+
+`core-hello/nextflow.config`를 열고 `validate_params`를 `false`로 설정합니다:
+
+=== "후"
+
+    ```groovy title="core-hello/nextflow.config" linenums="37"
+        validate_params            = false
+    ```
+
+=== "전"
+
+    ```groovy title="core-hello/nextflow.config" linenums="37"
+        validate_params            = true
+    ```
+
+명령줄 대신 설정 파일에서 이를 설정하는 이유는 Nextflow 버전 26.04부터 명령줄에서 제공되는 모든 값이 문자열로 처리되기 때문입니다.
+따라서 Boolean 매개변수는 실제 `true`/`false` 값을 갖기 위해 설정 파일이나 `-params-file`에서 설정해야 합니다.
+
+예를 들어, 여기서 `--validate_params false`를 사용하면 **문자열** `"false"`로 평가되어 검증이 계속 활성화된 상태로 유지됩니다.
+
+!!! tip "`nextflow.config`의 v2 분석기 호환성 줄"
+
+    v2 구문에 대해 말하자면, 설정 파일의 `params` 블록 바로 아래에 다음 두 줄이 있을 수 있습니다:
+
+    ```groovy
+    outputDir = params.outdir
+    workflow.output.mode = params.publish_dir_mode
+    ```
+
+    이는 v2 구문 분석기와의 호환성을 위해 필요합니다.
+
+    - v2 구문에서는 `params.*` 변수를 프로세스 모듈의 `publishDir` 지시문 내에서 직접 참조할 수 없으므로, `outputDir`이 해당 지시문이 접근할 수 있는 최상위 설정 변수로 여기에 정의됩니다.
+
+    - `workflow.output.mode`는 v2 workflow 출력 블록의 기본 게시 모드를 설정합니다.
+
+    두 줄 모두 nf-core 파이프라인 템플릿에 의해 자동으로 생성되며 수정할 필요가 없습니다.
+
+### 5.5. 테스트 프로필로 파이프라인 실행
 
 많은 작업이었지만 이제 마침내 파이프라인을 실행해 볼 수 있습니다!
-아직 검증을 설정하지 않았기 때문에 명령줄에 `--validate_params false`를 추가해야 합니다(이는 나중에 다룰 것입니다).
 
 ```bash
-nextflow run core-hello --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run core-hello --outdir core-hello-results -profile test,docker
 ```
 
 모든 수정을 올바르게 수행했다면 완료될 때까지 실행되어야 합니다.
@@ -1609,9 +1654,9 @@ nextflow run core-hello --outdir core-hello-results -profile test,docker --valid
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `core-hello/main.nf` [condescending_allen] DSL2 - revision: b9e9b3b8de
+    Launching `core-hello/main.nf` [voluminous_caravaggio] revision: d6bbba9521
 
     Input/output options
       input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
@@ -1623,10 +1668,10 @@ nextflow run core-hello --outdir core-hello-results -profile test,docker --valid
 
     Generic options
       validate_params           : false
-      trace_report_suffix       : 2025-11-21_07-29-37
+      trace_report_suffix       : 2026-06-23_16-58-45
 
     Core Nextflow options
-      runName                   : condescending_allen
+      runName                   : voluminous_caravaggio
       containerEngine           : docker
       launchDir                 : /workspaces/training/hello-nf-core
       workDir                   : /workspaces/training/hello-nf-core/work
@@ -1637,17 +1682,17 @@ nextflow run core-hello --outdir core-hello-results -profile test,docker --valid
 
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
-    executor >  local (1)
-    [ed/727b7e] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-    [45/bb6096] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-    [81/7e2e34] CORE_HELLO:HELLO:collectGreetings   [100%] 1 of 1 ✔
-    [96/9442a1] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
+    executor >  local (8)
+    [30/fc3bdb] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
+    [55/58b611] CORE_HELLO:HELLO:convertToUpper (1) | 3 of 3 ✔
+    [12/83c0bc] CORE_HELLO:HELLO:collectGreetings   | 1 of 1 ✔
+    [18/4894fd] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
-보시다시피, 초기화 subworkflow 덕분에 시작 부분에 일반적인 nf-core 요약이 생성되었으며, 각 모듈에 대한 줄은 이제 PIPELINE:WORKFLOW:module 전체 이름을 보여줍니다.
+보시다시피, 초기화 subworkflow 덕분에 시작 부분에 일반적인 nf-core 요약이 생성되었으며, 각 모듈에 대한 줄은 이제 `PIPELINE:WORKFLOW:module` 전체 이름을 보여줍니다.
 
-### 5.5. 파이프라인 출력 찾기
+### 5.6. 파이프라인 출력 찾기
 
 이제 질문은: 파이프라인의 출력은 어디에 있을까요?
 그리고 답은 꽤 흥미롭습니다: 결과를 찾을 수 있는 두 개의 서로 다른 장소가 있습니다.
@@ -1663,17 +1708,17 @@ tree core-hello-results
     ```console
     core-hello-results
     └── pipeline_info
-        ├── execution_report_2025-11-21_04-47-18.html
-        ├── execution_report_2025-11-21_07-29-37.html
-        ├── execution_timeline_2025-11-21_04-47-18.html
-        ├── execution_timeline_2025-11-21_07-29-37.html
-        ├── execution_trace_2025-11-21_04-47-18.txt
-        ├── execution_trace_2025-11-21_07-29-37.txt
+        ├── execution_report_2026-06-23_16-56-58.html
+        ├── execution_report_2026-06-23_16-58-45.html
+        ├── execution_timeline_2026-06-23_16-56-58.html
+        ├── execution_timeline_2026-06-23_16-58-45.html
+        ├── execution_trace_2026-06-23_16-56-58.txt
+        ├── execution_trace_2026-06-23_16-58-45.txt
         ├── hello_software_versions.yml
-        ├── params_2025-11-21_04-47-13.json
-        ├── params_2025-11-21_07-29-41.json
-        ├── pipeline_dag_2025-11-21_04-47-18.html
-        └── pipeline_dag_2025-11-21_07-29-37.html
+        ├── params_2026-06-23_16-57-00.json
+        ├── params_2026-06-23_16-58-47.json
+        ├── pipeline_dag_2026-06-23_16-56-58.html
+        └── pipeline_dag_2026-06-23_16-58-45.html
 
     1 directory, 12 files
     ```
@@ -1683,7 +1728,7 @@ tree core-hello-results
 
 ![Hello 파이프라인의 실행 타임라인 보고서](./img/execution_timeline_hello.png)
 
-!!! note "참고"
+!!! info "정보"
 
     Github Codespaces에서 최소한의 머신으로 실행하고 있기 때문에 작업이 다시 병렬로 실행되지 않았습니다.
     작업이 병렬로 실행되는 것을 보려면 codespace의 CPU 할당량과 테스트 설정의 리소스 제한을 늘려보세요.

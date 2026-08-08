@@ -22,24 +22,19 @@ Se você está trabalhando neste curso por conta própria, por favor familiarize
 
 ### Requisitos de versão
 
-Este treinamento é projetado para **Nextflow 25.10.2** ou posterior **com o analisador de sintaxe v2 DESABILITADO**.
+Este treinamento funciona com o Nextflow 25.10.2 ou posterior **com o analisador de sintaxe v2**, que é o padrão a partir do Nextflow 26.04 em diante.
+Em nosso ambiente de treinamento, você não precisa fazer nada: ele executa o Nextflow 26.04.4 com o analisador v2. Se você estiver usando um ambiente local ou personalizado, consulte as [notas de versão](../info/nxf_versions.md).
 
-#### Se você está usando nosso ambiente de treinamento:
-
-Você DEVE executar o seguinte comando antes de prosseguir:
-
-```bash
-export NXF_SYNTAX_PARSER=v1
-```
-
-#### Se você está usando um ambiente local ou personalizado:
-
-Por favor certifique-se de que está usando as configurações corretas conforme documentado [aqui](../info/nxf_versions.md).
-
-O treinamento adicionalmente requer **nf-core tools 3.5.2**.
+Este treinamento adicionalmente requer **nf-core tools 4.0.2**.
 Se você usar uma versão diferente das ferramentas nf-core, você pode ter dificuldades em acompanhar.
 
 Você pode verificar qual versão está instalada em seu ambiente usando o comando `nf-core --version`.
+
+!!! warning "Compatibilidade com o analisador v2"
+
+    Muitos pipelines nf-core ainda não suportam o analisador de sintaxe v2.
+    Se você executar um pipeline nf-core diferente dos usados neste curso e encontrar erros, pode ser necessário mudar para o analisador v1 definindo `export NXF_SYNTAX_PARSER=v1`.
+    Consulte as [notas de versão](../info/nxf_versions.md) para mais detalhes.
 
 ## Prepare-se para trabalhar
 
@@ -82,7 +77,10 @@ tree . -L 2
 
     ```console
     .
+    ├── custom.config
     ├── greetings.csv
+    ├── malformed_samplesheet.csv
+    ├── my_params.yml
     ├── original-hello
     │   ├── hello.nf
     │   ├── modules
@@ -101,6 +99,12 @@ Usamos seções recolhíveis como esta para incluir a saída esperada de comando
 
 - **O arquivo `greetings.csv`** é um CSV contendo alguns dados colunares mínimos que usamos para fins de teste.
 
+- **O arquivo `custom.config`** é um exemplo de arquivo de configuração Nextflow usado na Parte 1 para demonstrar substituições de recursos de processos e `ext.args`.
+
+- **O arquivo `malformed_samplesheet.csv`** é uma planilha de amostras intencionalmente quebrada usada na Parte 1 para demonstrar a validação de entrada.
+
+- **O arquivo `my_params.yml`** é um exemplo de arquivo de parâmetros usado na Parte 1 para demonstrar como passar parâmetros booleanos para um pipeline.
+
 - **O diretório `original-hello`** contém uma cópia do código fonte produzido ao trabalhar na série completa de treinamento Hello Nextflow (com Docker habilitado).
 
 - **O diretório `solutions`** contém os scripts de fluxo de trabalho completos que resultam de cada etapa do curso.
@@ -112,7 +116,7 @@ Acha que está pronto para mergulhar?
 
 - [ ] Eu entendo o objetivo deste curso e seus pré-requisitos
 - [ ] Meu ambiente está ativo e funcionando
-- [ ] Eu me certifiquei de que o analisador de sintaxe está configurado para **v1**
+- [ ] Estou usando nf-core tools 4.0.2 (verifique com `nf-core --version`)
 - [ ] Eu configurei meu diretório de trabalho apropriadamente
 
 Se você pode marcar todas as caixas, você está pronto para começar.

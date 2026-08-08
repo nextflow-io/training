@@ -25,7 +25,7 @@ Per demostrar com funciona això, substituirem el mòdul personalitzat `collectG
     Podeu comprovar que s'executa correctament executant la comanda següent:
 
     ```bash
-    nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+    nextflow run . --outdir core-hello-results -profile test,docker
     ```
 
 ---
@@ -50,7 +50,7 @@ Navegueu a la pàgina de mòduls al vostre navegador web i utilitzeu la barra de
 Com podeu veure, hi ha força resultats, molts d'ells mòduls dissenyats per concatenar tipus de fitxers molt específics.
 Entre ells, hauríeu de veure un anomenat `find_concatenate` que és de propòsit general.
 
-!!! note "Convenció de nomenclatura de mòduls"
+!!! info "Convenció de nomenclatura de mòduls"
 
     El guió baix (`_`) s'utilitza com a substitut del caràcter barra (`/`) als noms de mòduls.
 
@@ -120,9 +120,11 @@ Això mostra documentació sobre el mòdul, incloent les seves entrades, sortide
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 3.5.2 - https://nf-co.re
+        nf-core/tools version 4.0.2 - https://nf-co.re
 
 
+    INFO     Reinstalling modules found in 'modules.json' but missing from
+             directory:
     ╭─ Module: find/concatenate  ──────────────────────────────────────────────────╮
     │ 🌐 Repository: https://github.com/nf-core/modules.git                        │
     │ 🔧 Tools: find, pigz                                                         │
@@ -186,6 +188,8 @@ Això mostra documentació sobre el mòdul, incloent les seves entrades, sortide
 
 Aquesta és exactament la mateixa informació que podeu trobar al lloc web.
 
+Podeu ignorar el missatge `INFO Reinstalling modules found in 'modules.json' but missing from directory`; l'emet nf-core/tools 4.0.2 per a qualsevol mòdul que consulteu amb `info`, estigui o no instal·lat, i no té cap efecte ja que la comanda `info` no escriu cap fitxer.
+
 ### 1.4. Instal·lar el mòdul find/concatenate
 
 Ara que hem trobat el mòdul que volem, hem d'afegir-lo al codi font del nostre pipeline.
@@ -193,14 +197,12 @@ Ara que hem trobat el mòdul que volem, hem d'afegir-lo al codi font del nostre 
 La bona notícia és que el projecte nf-core inclou eines per facilitar aquesta part.
 Específicament, la comanda `nf-core modules install` permet automatitzar la recuperació del codi i fer-lo disponible al vostre projecte en un sol pas.
 
-Navegueu al directori del vostre pipeline i executeu la comanda d'instal·lació:
+Assegureu-vos que el vostre directori de treball actual és l'arrel del projecte de pipeline `core-hello` i executeu la comanda d'instal·lació:
 
 ```bash
 cd core-hello
 nf-core modules install find/concatenate
 ```
-
-L'eina procedirà a instal·lar el mòdul.
 
 ??? success "Sortida de la comanda"
 
@@ -212,26 +214,20 @@ L'eina procedirà a instal·lar el mòdul.
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 3.5.2 - https://nf-co.re
+    nf-core/tools version 4.0.2 - https://nf-co.re
 
 
     INFO     Installing 'find/concatenate'
-    INFO     Use the following statement to include this module:
-
-     include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
+    NotADirectoryError: [Errno 20] Not a directory:
+    'modules/local/cowpy.nf/meta.yml'
     ```
 
-La comanda automàticament:
+La comanda descarrega els fitxers del mòdul a `modules/nf-core/find/concatenate/` i actualitza `modules.json` per fer seguiment del mòdul instal·lat.
+Podeu ignorar el `NotADirectoryError` al final; es produeix perquè nf-core/tools 4.0.2 espera que cada mòdul local resideixi al seu propi directori (`modules/local/<nom>/main.nf`), mentre que `core-hello` encara utilitza mòduls locals d'un sol fitxer en aquesta etapa.
+No obstant això, el mòdul `find/concatenate` s'instal·la correctament i `modules.json` s'actualitza com s'espera.
+Convertirem `cowpy` a l'estructura de directoris a la Part 4.
 
-- Descarrega els fitxers del mòdul a `modules/nf-core/find/concatenate/`
-- Actualitza `modules.json` per fer seguiment del mòdul instal·lat
-- Us proporciona la declaració `include` correcta per utilitzar al vostre workflow
-
-!!! tip "Consell"
-
-    Assegureu-vos sempre que el vostre directori de treball actual és l'arrel del vostre projecte de pipeline abans d'executar la comanda d'instal·lació del mòdul.
-
-Comprovem que el mòdul s'ha instal·lat correctament:
+Comprovem que els fitxers del mòdul estan al seu lloc:
 
 ```bash
 tree -L 4 modules
@@ -257,7 +253,61 @@ tree -L 4 modules
     5 directories, 7 files
     ```
 
-També podeu verificar la instal·lació demanant a la utilitat nf-core que llisti els mòduls instal·lats localment:
+També podeu confirmar la instal·lació inspeccionant `modules.json`, que ara llista `find/concatenate` sota el repositori nf-core/modules.
+
+??? abstract "Contingut del fitxer"
+
+    ```json title="modules.json"
+    {
+        "name": "core/hello",
+        "homePage": "https://github.com/core/hello",
+        "repos": {
+            "https://github.com/nf-core/modules.git": {
+                "modules": {
+                    "nf-core": {
+                        "find/concatenate": {
+                            "branch": "master",
+                            "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                            "installed_by": [
+                                "modules"
+                            ]
+                        }
+                    }
+                },
+                "subworkflows": {
+                    "nf-core": {
+                        "utils_nextflow_pipeline": {
+                            "branch": "master",
+                            "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                            "installed_by": [
+                                "subworkflows"
+                            ]
+                        },
+                        "utils_nfcore_pipeline": {
+                            "branch": "master",
+                            "git_sha": "a3fb7351b1fdb2b1de282b765816bbea190e86a8",
+                            "installed_by": [
+                                "subworkflows"
+                            ]
+                        },
+                        "utils_nfschema_plugin": {
+                            "branch": "master",
+                            "git_sha": "fdc08b8b1ae74f56686ce21f7ea11ad11990ce57",
+                            "installed_by": [
+                                "subworkflows"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ```
+
+Això confirma que el mòdul `find/concatenate` ara forma part del codi font del vostre projecte.
+No obstant això, per utilitzar realment el nou mòdul, hem d'importar-lo al nostre pipeline.
+
+Finalment, també podeu utilitzar la comanda `nf-core modules list local` per comprovar quins mòduls es fan seguiment actualment al vostre pipeline.
 
 ```bash
 nf-core modules list local
@@ -266,25 +316,27 @@ nf-core modules list local
 ??? success "Sortida de la comanda"
 
     ```console
+
+                                          ,--./,-.
+          ___     __   __   __   ___     /,-._.--~\
+    |\ | |__  __ /  ` /  \ |__) |__         }  {
+    | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                          `._,._,'
+
+    nf-core/tools version 4.0.2 - https://nf-co.re
+
+
     INFO     Repository type: pipeline
     INFO     Modules installed in '.':
 
-    ┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
-    ┃ Module Name    ┃ Repository      ┃ Version SHA ┃ Message        ┃ Date       ┃
-    ┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
-    │ find/concaten… │ nf-core/modules │ 6d46786     │ Support for    │ 2026-04-23 │
-    │                │                 │             │ apptainer as   │            │
-    │                │                 │             │ well as        │            │
-    │                │                 │             │ singularity    │            │
-    │                │                 │             │ for .sif in    │            │
-    │                │                 │             │ `container`    │            │
-    │                │                 │             │ (#11260)       │            │
-    └────────────────┴─────────────────┴─────────────┴────────────────┴────────────┘
+    ┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+    ┃ Module Name      ┃ Repository      ┃ Version SHA ┃ Message                                                                       ┃ Date       ┃
+    ┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+    │ find/concatenate │ nf-core/modules │ 6d46786     │ Support for apptainer as well as singularity for .sif in `container` (#11260) │ 2026-04-23 │
+    └──────────────────┴─────────────────┴─────────────┴───────────────────────────────────────────────────────────────────────────────┴────────────┘
     ```
 
-Això confirma que el mòdul `find/concatenate` ara forma part del codi font del vostre projecte.
-
-No obstant això, per utilitzar realment el nou mòdul, hem d'importar-lo al nostre pipeline.
+Això mostra `find/concatenate` a la taula resultant juntament amb el seu repositori, SHA de versió, missatge i data.
 
 ### 1.5. Actualitzar les importacions de mòduls
 
@@ -302,7 +354,7 @@ Obriu `core-hello/workflows/hello.nf` i feu la substitució següent:
 
 === "Després"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="11"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -312,8 +364,8 @@ Obriu `core-hello/workflows/hello.nf` i feu la substitució següent:
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+    include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
     include { cowpy                  } from '../modules/local/cowpy.nf'
-    include { FIND_CONCATENATE                } from '../modules/nf-core/find/concatenate/main'
     ```
 
 === "Abans"
@@ -345,7 +397,7 @@ En aquest punt, podríeu estar temptats de començar a editar codi, però val la
 
 Tractarem això com una secció separada perquè implica un nou mecanisme que encara no hem cobert: els mapes de metadades.
 
-!!! note "Nota"
+!!! info "Info"
 
     Opcionalment podeu eliminar el fitxer `collectGreetings.nf`:
 
@@ -373,7 +425,7 @@ Això ens permetrà determinar si podem tractar el nou mòdul com un reemplaçam
 Idealment això és quelcom que hauríeu de fer _abans_ fins i tot d'instal·lar el mòdul, però bé, més val tard que mai.
 (Per cert, hi ha una comanda `uninstall` per desfer-se dels mòduls que decidiu que ja no voleu.)
 
-!!! note "Nota"
+!!! info "Info"
 
     El procés FIND_CONCATENATE inclou una gestió força intel·ligent de diferents tipus de compressió, extensions de fitxer i altres aspectes que no són estrictament rellevants per al que intentem mostrar-vos aquí, així que ignorarem la major part i ens centrarem només en les parts que són importants.
 
@@ -512,7 +564,7 @@ Com s'ha esmentat anteriorment, la configuració d'entrada `tuple val(meta), pat
 Esperem que pugueu començar a veure com d'útil pot ser això.
 No només us permet nomenar sortides basant-vos en metadades, sinó que també podeu fer coses com utilitzar-les per aplicar diferents valors de paràmetres, i en combinació amb operadors específics, fins i tot podeu agrupar, ordenar o filtrar dades mentre flueixen pel pipeline.
 
-!!! note "Més informació sobre metadades"
+!!! info "Més informació sobre metadades"
 
     Per a una introducció completa sobre com treballar amb metadades als workflows Nextflow, incloent com llegir metadades des de fulls de mostres i utilitzar-les per personalitzar el processament, consulteu la missió secundària [Metadades als workflows](../side_quests/metadata/index.md).
 
@@ -543,7 +595,7 @@ Ara que sabeu tot sobre els metamaps (o prou per als propòsits d'aquest curs, a
 
 Per claredat, dividirem això i cobrirem cada pas per separat.
 
-!!! note "Nota"
+!!! info "Info"
 
     Tots els canvis mostrats a continuació es fan a la lògica del workflow al bloc `main` del fitxer de workflow `core-hello/workflows/hello.nf`.
 
@@ -570,11 +622,11 @@ Afegim aquestes línies després de la crida a `convertToUpper`, eliminant la cr
 
 === "Després"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // emet una salutacio
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="7-8"
+        // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
         sayHello(ch_samplesheet)
 
-        // converteix la salutacio a majuscules
+        // converteix la salutació a majúscules
         convertToUpper(sayHello.out)
 
         // crea un mapa de metadades amb el nom del lot com a ID
@@ -586,11 +638,11 @@ Afegim aquestes línies després de la crida a `convertToUpper`, eliminant la cr
 
 === "Abans"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // emet una salutacio
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="7-8"
+        // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
         sayHello(ch_samplesheet)
 
-        // converteix la salutacio a majuscules
+        // converteix la salutació a majúscules
         convertToUpper(sayHello.out)
 
         // recull totes les salutacions en un fitxer
@@ -608,11 +660,11 @@ A continuació, transformeu el canal de fitxers en un canal de tuples que contin
 
 === "Després"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="10-11"
-        // emet una salutacio
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="10-11"
+        // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
         sayHello(ch_samplesheet)
 
-        // converteix la salutacio a majuscules
+        // converteix la salutació a majúscules
         convertToUpper(sayHello.out)
 
         // crea un mapa de metadades amb el nom del lot com a ID
@@ -627,11 +679,11 @@ A continuació, transformeu el canal de fitxers en un canal de tuples que contin
 
 === "Abans"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emet una salutacio
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
+        // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
         sayHello(ch_samplesheet)
 
-        // converteix la salutacio a majuscules
+        // converteix la salutació a majúscules
         convertToUpper(sayHello.out)
 
         // crea un mapa de metadades amb el nom del lot com a ID
@@ -654,11 +706,11 @@ Ara cridem `FIND_CONCATENATE` sobre el canal acabat de crear:
 
 === "Després"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="13-14"
-        // emet una salutacio
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="13-14"
+        // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
         sayHello(ch_samplesheet)
 
-        // converteix la salutacio a majuscules
+        // converteix la salutació a majúscules
         convertToUpper(sayHello.out)
 
         // crea un mapa de metadades amb el nom del lot com a ID
@@ -676,11 +728,11 @@ Ara cridem `FIND_CONCATENATE` sobre el canal acabat de crear:
 
 === "Abans"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emet una salutacio
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
+        // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
         sayHello(ch_samplesheet)
 
-        // converteix la salutacio a majuscules
+        // converteix la salutació a majúscules
         convertToUpper(sayHello.out)
 
         // crea un mapa de metadades amb el nom del lot com a ID
@@ -704,11 +756,11 @@ Com que `cowpy` encara no accepta tuples de metadades (ho arreglarem a la següe
 
 === "Després"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="16-17 20"
-        // emet una salutacio
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="16-17 20"
+        // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
         sayHello(ch_samplesheet)
 
-        // converteix la salutacio a majuscules
+        // converteix la salutació a majúscules
         convertToUpper(sayHello.out)
 
         // crea un mapa de metadades amb el nom del lot com a ID
@@ -729,11 +781,11 @@ Com que `cowpy` encara no accepta tuples de metadades (ho arreglarem a la següe
 
 === "Abans"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="17"
-        // emet una salutacio
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="17"
+        // emet una salutació (actualitzat per utilitzar la convenció nf-core per a fulls de mostres)
         sayHello(ch_samplesheet)
 
-        // converteix la salutacio a majuscules
+        // converteix la salutació a majúscules
         convertToUpper(sayHello.out)
 
         // crea un mapa de metadades amb el nom del lot com a ID
@@ -753,7 +805,7 @@ L'operació `#!groovy .map { meta, file -> file }` extreu el fitxer de la tupla 
 
 Llavors només cal passar `ch_for_cowpy` a `cowpy` en lloc de `collectGreetings.out.outfile` en aquesta última línia.
 
-!!! note "Nota"
+!!! info "Info"
 
     A la següent part del curs, actualitzarem `cowpy` per treballar directament amb tuples de metadades, així que aquest pas d'extracció ja no serà necessari.
 
@@ -762,7 +814,7 @@ Llavors només cal passar `ch_for_cowpy` a `cowpy` en lloc de `collectGreetings.
 Provem que el workflow funciona amb el mòdul `find/concatenate` acabat d'integrar:
 
 ```bash
-nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
 Això hauria d'executar-se raonablement ràpid.
@@ -770,40 +822,40 @@ Això hauria d'executar-se raonablement ràpid.
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W ~ version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-        Launching `./main.nf` [evil_pike] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [cheesy_bhabha] revision: d6bbba9521
 
-        Input/output options
-          input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
-          outdir                    : core-hello-results
+    Input/output options
+      input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
+      outdir                    : core-hello-results
 
-        Institutional config options
-          config_profile_name       : Test profile
-          config_profile_description: Minimal test dataset to check pipeline function
+    Institutional config options
+      config_profile_name       : Test profile
+      config_profile_description: Minimal test dataset to check pipeline function
 
-        Generic options
-          validate_params           : false
-          trace_report_suffix       : 2025-10-30_18-50-58
+    Generic options
+      validate_params           : false
+      trace_report_suffix       : 2026-06-23_16-55-02
 
-        Core Nextflow options
-          runName                   : evil_pike
-          containerEngine           : docker
-          launchDir                 : /workspaces/training/hello-nf-core/core-hello
-          workDir                   : /workspaces/training/hello-nf-core/core-hello/work
-          projectDir                : /workspaces/training/hello-nf-core/core-hello
-          userName                  : root
-          profile                   : test,docker
-          configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
+    Core Nextflow options
+      runName                   : cheesy_bhabha
+      containerEngine           : docker
+      launchDir                 : /workspaces/training/hello-nf-core/core-hello
+      workDir                   : /workspaces/training/hello-nf-core/core-hello/work
+      projectDir                : /workspaces/training/hello-nf-core/core-hello
+      userName                  : root
+      profile                   : test,docker
+      configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
 
-        !! Only displaying parameters that differ from the pipeline defaults !!
-        ------------------------------------------------------
-        executor >  local (8)
-        [b3/f005fd] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-        [08/f923d0] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-        [34/3729a9] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
-        [24/df918a] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
-        -[core/hello] Pipeline completed successfully-
+    !! Only displaying parameters that differ from the pipeline defaults !!
+    ------------------------------------------------------
+    executor >  local (8)
+    [bf/aa86d7] CORE_HELLO:HELLO:sayHello (3)            | 3 of 3 ✔
+    [0a/df448e] CORE_HELLO:HELLO:convertToUpper (3)      | 3 of 3 ✔
+    [82/ded72f] CORE_HELLO:HELLO:FIND_CONCATENATE (test) | 1 of 1 ✔
+    [9d/0130bf] CORE_HELLO:HELLO:cowpy                   | 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
     ```
 
 Observeu que `FIND_CONCATENATE` ara apareix a la llista d'execució de processos en lloc de `collectGreetings`.

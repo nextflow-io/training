@@ -74,7 +74,7 @@ tree .
 │   └── utils.nf
 └── nextflow.config
 
-3 directories, 12 files
+2 directories, 12 files
 ```
 
 !!! note "Örnek Dosyalar Hakkında"

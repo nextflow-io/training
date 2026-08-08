@@ -70,26 +70,34 @@ git clone --branch 1.2.0 --depth 1 https://github.com/nf-core/molkart
 
 전체 파이프라인을 실행하기 전에 컨테이너가 nf-core 파이프라인에 왜 필수적인지 알아보겠습니다.
 
-molkart 테스트 설정의 테스트 데이터셋과 매개변수를 사용하여 파이프라인을 실행해 보겠습니다:
+매개변수 파일을 사용하여 파이프라인의 매개변수를 전달합니다.
+매개변수 파일은 각 매개변수와 그 값을 나열한 YAML 파일로, 정수와 같은 타입이 지정된 값을 그대로 유지하고 명령줄을 간결하게 유지합니다.
 
-```bash
-nextflow run ./molkart \
-  --input 'data/samplesheet.csv' \
-  --mindagap_tilesize 90 \
-  --mindagap_boxsize 7 \
-  --mindagap_loopnum 100 \
-  --clahe_pyramid_tile 368 \
-  --segmentation_method "mesmer,cellpose,stardist" \
-  --outdir results
+작업 디렉토리에 `params.yaml` 파일이 이미 제공되어 있습니다:
+
+```yaml title="params.yaml"
+input: "data/samplesheet.csv"
+outdir: "results"
+mindagap_tilesize: 90
+mindagap_boxsize: 7
+mindagap_loopnum: 100
+clahe_pyramid_tile: 368
+segmentation_method: "cellpose"
 ```
 
 이 매개변수들을 살펴보겠습니다:
 
-- `--input`: 샘플 메타데이터가 포함된 샘플시트 경로
-- `--mindagap_tilesize`, `--mindagap_boxsize`, `--mindagap_loopnum`: 그리드 패턴 채우기를 위한 매개변수
-- `--clahe_pyramid_tile`: 대비 향상을 위한 커널 크기
-- `--segmentation_method`: 세포 분할에 사용할 알고리즘
-- `--outdir`: 결과를 저장할 위치
+- `input`: 샘플 메타데이터가 포함된 샘플시트 경로
+- `mindagap_tilesize`, `mindagap_boxsize`, `mindagap_loopnum`: 그리드 패턴 채우기를 위한 매개변수
+- `clahe_pyramid_tile`: 대비 향상을 위한 커널 크기
+- `segmentation_method`: 세포 분할에 사용할 알고리즘
+- `outdir`: 결과를 저장할 위치
+
+이 매개변수를 사용하여 파이프라인을 실행합니다:
+
+```bash
+nextflow run ./molkart -params-file params.yaml
+```
 
 !!! Warning "이 명령은 실패할 것입니다 - 의도적입니다!"
 
@@ -172,17 +180,10 @@ process {
 }
 ```
 
-이제 동일한 명령으로 파이프라인을 다시 실행하세요:
+이번에는 세 가지 분할 방법을 모두 실행하여 나중에 비교할 수 있도록 파이프라인을 다시 실행합니다:
 
 ```bash
-nextflow run ./molkart \
-  --input 'data/samplesheet.csv' \
-  --mindagap_tilesize 90 \
-  --mindagap_boxsize 7 \
-  --mindagap_loopnum 100 \
-  --clahe_pyramid_tile 368 \
-  --segmentation_method "cellpose,mesmer,stardist" \
-  --outdir results
+nextflow run ./molkart -params-file params.yaml --segmentation_method "mesmer,cellpose,stardist"
 ```
 
 이번에는 Nextflow가:
@@ -209,12 +210,13 @@ nextflow run ./molkart \
 ??? success "명령 출력"
 
     ```console
-    Nextflow 25.04.8 is available - Please consider updating your version to it
+     N E X T F L O W   ~  version 26.04.4
 
-    N E X T F L O W   ~  version 25.04.3
+    Launching `./molkart/main.nf` [exotic_banach] revision: e4152308ec
 
-    Launching `https://github.com/nf-core/molkart` [soggy_kalam] DSL2 - revision: 5e54b29cb3 [dev]
-
+    WARN: Unrecognized config option 'validation.help.enabled'
+    WARN: Unrecognized config option 'validation.defaultIgnoreParams'
+    WARN: Unrecognized config option 'validation.monochromeLogs'
 
     ------------------------------------------------------
                                             ,--./,-.
@@ -222,39 +224,34 @@ nextflow run ./molkart \
       |\ | |__  __ /  ` /  \ |__) |__         }  {
       | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                             `._,._,'
-      nf-core/molkart 1.2.0dev
+      nf-core/molkart 1.2.0
     ------------------------------------------------------
     Segmentation methods and options
-      segmentation_method       : mesmer,cellpose,stardist
+      segmentation_method: mesmer,cellpose,stardist
 
     Image preprocessing
-      mindagap_boxsize          : 7
-      mindagap_loopnum          : 100
-      clahe_kernel              : 25
-      mindagap_tilesize         : 90
-      clahe_pyramid_tile        : 368
+      mindagap_boxsize   : 7
+      mindagap_loopnum   : 100
+      clahe_kernel       : 25
+      mindagap_tilesize  : 90
+      clahe_pyramid_tile : 368
 
     Input/output options
-      input                     : https://raw.githubusercontent.com/nf-core/test-datasets/molkart/test_data/samplesheets/samplesheet_membrane.csv
-      outdir                    : results
-
-    Institutional config options
-      config_profile_name       : Test profile
-      config_profile_description: Minimal test dataset to check pipeline function
+      input              : data/samplesheet.csv
+      outdir             : results
 
     Generic options
-      trace_report_suffix       : 2025-10-18_22-22-21
+      trace_report_suffix: 2026-06-23_16-25-30
 
     Core Nextflow options
-      revision                  : dev
-      runName                   : soggy_kalam
-      containerEngine           : docker
-      launchDir                 : /workspaces/training/nf4-science/imaging
-      workDir                   : /workspaces/training/nf4-science/imaging/work
-      projectDir                : /workspaces/.nextflow/assets/nf-core/molkart
-      userName                  : root
-      profile                   : docker,test
-      configFiles               :
+      runName            : exotic_banach
+      containerEngine    : docker
+      launchDir          : /workspaces/training/nf4-science/imaging
+      workDir            : /workspaces/training/nf4-science/imaging/work
+      projectDir         : /workspaces/training/nf4-science/imaging/molkart
+      userName           : root
+      profile            : standard
+      configFiles        : /workspaces/training/nf4-science/imaging/molkart/nextflow.config, /workspaces/training/nf4-science/imaging/nextflow.config
 
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
@@ -268,22 +265,22 @@ nextflow run ./molkart \
         https://github.com/nf-core/molkart/blob/master/CITATIONS.md
 
     executor >  local (22)
-    [c1/da5009] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)        [100%] 2 of 2 ✔
-    [73/8f5e8a] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)                    [100%] 2 of 2 ✔
-    [ec/8f84d5] NFCORE_MOLKART:MOLKART:CREATE_STACK (mem_only)             [100%] 1 of 1 ✔
-    [a2/99349b] NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only) [100%] 1 of 1 ✔
-    [95/c9b4b1] NFCORE_MOLKART:MOLKART:DEEPCELL_MESMER (mem_only)          [100%] 1 of 1 ✔
-    [d4/1ebd1e] NFCORE_MOLKART:MOLKART:STARDIST (mem_only)                 [100%] 1 of 1 ✔
-    [3e/3c0736] NFCORE_MOLKART:MOLKART:CELLPOSE (mem_only)                 [100%] 1 of 1 ✔
-    [a0/415c6a] NFCORE_MOLKART:MOLKART:MASKFILTER (mem_only)               [100%] 3 of 3 ✔
-    [14/a830c9] NFCORE_MOLKART:MOLKART:SPOT2CELL (mem_only)                [100%] 3 of 3 ✔
-    [b5/391836] NFCORE_MOLKART:MOLKART:CREATE_ANNDATA (mem_only)           [100%] 3 of 3 ✔
-    [77/aed558] NFCORE_MOLKART:MOLKART:MOLKARTQC (mem_only)                [100%] 3 of 3 ✔
-    [e6/b81475] NFCORE_MOLKART:MOLKART:MULTIQC                             [100%] 1 of 1 ✔
+    [b4/e57ff1] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2 ✔
+    [2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2 ✔
+    [94/b1ef70] NFC…RT:CREATE_STACK (mem_only) | 1 of 1 ✔
+    [58/4b6426] NFC…DUPLICATEFINDER (mem_only) | 1 of 1 ✔
+    [c2/ef7002] NFC…DEEPCELL_MESMER (mem_only) | 1 of 1 ✔
+    [4f/ddd328] NFC…OLKART:STARDIST (mem_only) | 1 of 1 ✔
+    [8c/dd0362] NFC…OLKART:CELLPOSE (mem_only) | 1 of 1 ✔
+    [08/2ddcb5] NFC…KART:MASKFILTER (mem_only) | 3 of 3 ✔
+    [56/e30de0] NFC…LKART:SPOT2CELL (mem_only) | 3 of 3 ✔
+    [b0/5aa635] NFC…:CREATE_ANNDATA (mem_only) | 3 of 3 ✔
+    [5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3 ✔
+    [8e/8bd365] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
     -[nf-core/molkart] Pipeline completed successfully-
-    Completed at: 19-Oct-2025 22:23:01
-    Duration    : 2m 52s
-    CPU hours   : 0.1
+    Completed at: 23-Jun-2026 16:31:40
+    Duration    : 6m 9s
+    CPU hours   : (a few seconds)
     Succeeded   : 22
     ```
 
@@ -303,10 +300,10 @@ executor 라인 `executor > local (22)`는 다음을 알려줍니다:
 
 각 프로세스 라인은 다음을 보여줍니다:
 
-- **해시** (`[1a/2b3c4d]`): 작업 디렉토리 식별자 (이전과 같음)
+- **해시** (`[b4/e57ff1]`): 작업 디렉토리 식별자 (이전과 같음)
 - **프로세스 이름**: 전체 모듈 경로 및 프로세스 이름
 - **입력 식별자**: 괄호 안의 샘플 이름
-- **진행률**: 완료 백분율 및 개수 (예: `1 of 1 ✔`)
+- **진행률**: 작업 수 및 완료 상태 (예: `1 of 1 ✔`)
 
 ### 핵심 정리
 
@@ -447,7 +444,7 @@ Hello World 예제와 마찬가지로 모든 실제 작업은 `work/` 디렉토�
 ### 4.1. 작업 디렉토리 구조 이해하기
 
 작업 디렉토리에는 실행된 각 작업에 대한 하위 디렉토리가 포함됩니다.
-12개의 작업이 있는 이 파이프라인의 경우 12개의 작업 하위 디렉토리가 있습니다.
+22개의 작업이 있는 이 파이프라인의 경우 22개의 작업 하위 디렉토리가 있습니다.
 
 작업 디렉토리를 나열하세요:
 
@@ -517,30 +514,29 @@ Nextflow의 가장 강력한 기능 중 하나는 실패 지점부터 파이프�
 동일한 명령을 다시 실행하되 `-resume`을 추가하세요:
 
 ```bash
-nextflow run ./molkart \
-  --input 'data/samplesheet.csv' \
-  --mindagap_tilesize 90 \
-  --mindagap_boxsize 7 \
-  --mindagap_loopnum 100 \
-  --clahe_pyramid_tile 368 \
-  --segmentation_method "cellpose" \
-  --outdir results \
-  -resume
+nextflow run ./molkart -params-file params.yaml --segmentation_method "mesmer,cellpose,stardist" -resume
 ```
 
-다음과 같은 출력이 표시됩니다: <!-- TODO: full output -->
+다음과 같은 출력이 표시됩니다:
 
 ```console
-executor >  local (0)
-[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)        [100%] 2 of 2, cached: 2 ✔
-[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)                    [100%] 2 of 2, cached: 2 ✔
-[7f/8g9h0i] NFCORE_MOLKART:MOLKART:CREATE_STACK (mem_only)             [100%] 1 of 1, cached: 1 ✔
-[9h/0i1j2k] NFCORE_MOLKART:MOLKART:MINDAGAP_DUPLICATEFINDER (mem_only) [100%] 1 of 1, cached: 1 ✔
-[2k/3l4m5n] NFCORE_MOLKART:MOLKART:CELLPOSE (mem_only)                 [100%] 1 of 1, cached: 1 ✔
-...
+executor >  local (1)
+[43/e03702] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2, cached: 2 ✔
+[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2, cached: 2 ✔
+[94/b1ef70] NFC…RT:CREATE_STACK (mem_only) | 1 of 1, cached: 1 ✔
+[58/4b6426] NFC…DUPLICATEFINDER (mem_only) | 1 of 1, cached: 1 ✔
+[c2/ef7002] NFC…DEEPCELL_MESMER (mem_only) | 1 of 1, cached: 1 ✔
+[4f/ddd328] NFC…OLKART:STARDIST (mem_only) | 1 of 1, cached: 1 ✔
+[8c/dd0362] NFC…OLKART:CELLPOSE (mem_only) | 1 of 1, cached: 1 ✔
+[08/2ddcb5] NFC…KART:MASKFILTER (mem_only) | 3 of 3, cached: 3 ✔
+[56/e30de0] NFC…LKART:SPOT2CELL (mem_only) | 3 of 3, cached: 3 ✔
+[b0/5aa635] NFC…:CREATE_ANNDATA (mem_only) | 3 of 3, cached: 3 ✔
+[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3, cached: 3 ✔
+[73/239f45] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
+-[nf-core/molkart] Pipeline completed successfully-
 ```
 
-각 프로세스에 대해 `cached: 2` 또는 `cached: 1`이 표시되는 것을 주목하세요 - 아무것도 다시 실행되지 않았습니다!
+각 전처리 및 분할 프로세스에 표시된 `cached: N` 주석을 주목하세요 - 해당 작업들은 다시 실행되지 않고 재사용되었습니다.
 
 ### 5.3. 재개가 유용한 경우
 

@@ -207,13 +207,32 @@ nextflow run genomics.nf -profile test
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `genomics.nf` [nostalgic_franklin] DSL2 - revision: f2c0a93c6a
+    Launching `genomics.nf` [nostalgic_franklin] revision: f2c0a93c6a
 
     executor >  local (6)
     [cc/fbc705] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
     [27/0d7eb9] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/genomics/results
+
+      indexed_bam:
+        - [indexed_bam/reads_mother.bam, indexed_bam/reads_mother.bam.bai]
+        - [indexed_bam/reads_father.bam, indexed_bam/reads_father.bam.bai]
+        - [indexed_bam/reads_son.bam, indexed_bam/reads_son.bam.bai]
+
+      gvcf:
+        - gvcf/reads_mother.bam.g.vcf
+        - gvcf/reads_father.bam.g.vcf
+        - gvcf/reads_son.bam.g.vcf
+
+      gvcf_idx:
+        - gvcf/reads_mother.bam.g.vcf.idx
+        - gvcf/reads_father.bam.g.vcf.idx
+        - gvcf/reads_son.bam.g.vcf.idx
     ```
 
 Die Nextflow-Ausgabe sieht genauso aus wie zuvor, aber die `.g.vcf`-Dateien und ihre Indexdateien sind jetzt in Unterverzeichnissen organisiert.
@@ -649,14 +668,37 @@ nextflow run genomics.nf -profile test -resume
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `genomics.nf` [crazy_marconi] DSL2 - revision: 5da9afc841
+    Launching `genomics.nf` [crazy_marconi] revision: 5da9afc841
 
     executor >  local (1)
     [9a/c7a873] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 3 ✔
     [e4/4ed55e] GATK_HAPLOTYPECALLER (2) | 3 of 3, cached: 3 ✔
     [a6/7cc8ed] GATK_JOINTGENOTYPING     | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/genomics/results
+
+      indexed_bam:
+        - [indexed_bam/reads_mother.bam, indexed_bam/reads_mother.bam.bai]
+        - [indexed_bam/reads_father.bam, indexed_bam/reads_father.bam.bai]
+        - [indexed_bam/reads_son.bam, indexed_bam/reads_son.bam.bai]
+
+      gvcf:
+        - gvcf/reads_mother.bam.g.vcf
+        - gvcf/reads_father.bam.g.vcf
+        - gvcf/reads_son.bam.g.vcf
+
+      gvcf_idx:
+        - gvcf/reads_mother.bam.g.vcf.idx
+        - gvcf/reads_father.bam.g.vcf.idx
+        - gvcf/reads_son.bam.g.vcf.idx
+
+      joint_vcf: family_trio.joint.vcf
+
+      joint_vcf_idx: family_trio.joint.vcf.idx
     ```
 
 Die ersten beiden Schritte sind aus dem vorherigen Lauf gecacht, und der neue `GATK_JOINTGENOTYPING`-Schritt läuft einmal auf den gesammelten Eingaben aller drei Proben.

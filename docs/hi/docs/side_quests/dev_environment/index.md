@@ -74,7 +74,7 @@ tree .
 │   └── utils.nf
 └── nextflow.config
 
-3 directories, 12 files
+2 directories, 12 files
 ```
 
 !!! note "उदाहरण फ़ाइलों के बारे में"
@@ -545,11 +545,11 @@ VS Code केवल कोड संपादित करने से पर�
 - Inline diff views
 - Commit और push क्षमताएं
 
-Source Control panel खोलने के लिए source control बटन (![Source control icon](../img/source_control_icon.png)) (`Ctrl+Shift+G` या यदि तुम VSCode लोकल रूप से काम कर रहे हो तो `Cmd+Shift+G`) का उपयोग करो ताकि git changes देख सको और सीधे editor में commits stage कर सको।
+Source Control panel खोलने के लिए source control बटन (![Source control icon](../img/source_control_icon.png)) (`Ctrl+Shift+G` या यदि तुम VS Code लोकल रूप से काम कर रहे हो तो `Cmd+Shift+G`) का उपयोग करो ताकि git changes देख सको और सीधे editor में commits stage कर सको।
 
 ![Source Control Panel](../img/source_control.png)
 
-### 7.2. वर्कफ़्लो चलाना और परिणाम जाँचना
+### 7.2. वर्कफ़्लो चलाना और जाँचना
 
 आइए एक वर्कफ़्लो चलाएं और फिर परिणाम जाँचें। Integrated terminal में (Windows और MacOS दोनों में `Ctrl+Shift+` बैकटिक), बुनियादी वर्कफ़्लो चलाओ:
 

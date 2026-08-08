@@ -19,21 +19,21 @@ nextflow run hello-world.nf --greeting 'Hello World!'
 
 La sortie de votre console devrait ressembler à ceci :
 
-```console title="Sortie" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+```console title="Output" linenums="1"
+ N E X T F L O W   ~  version 26.04.4
 
-Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+Launching `hello-world.nf` [small_swirles] revision: 0fb8dbb23d
 
 executor >  local (1)
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
 Félicitations, vous venez d'exécuter votre premier workflow Nextflow !
 
 La sortie la plus importante ici est la dernière ligne (ligne 6) :
 
-```console title="Sortie" linenums="6"
-[a3/7be2fa] sayHello | 1 of 1 ✔
+```console title="Output" linenums="6"
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
 Cela nous indique que le processus `sayHello` a été exécuté avec succès une fois (`1 of 1 ✔`).
@@ -83,20 +83,20 @@ Cela peut sembler déroutant, alors voyons à quoi cela ressemble en pratique.
 
 En revenant à la sortie console du workflow que nous avons exécuté précédemment, nous avions cette ligne :
 
-```console title="Extrait de la sortie de la commande" linenums="6"
-[a3/7be2fa] sayHello | 1 of 1 ✔
+```console title="Excerpt of command output" linenums="6"
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
-Voyez comment la ligne commence par `[a3/7be2fa]` ?
+Voyez comment la ligne commence par `[71/8143bd]` ?
 C'est une forme tronquée du chemin du répertoire de tâche pour cet appel de processus particulier, et vous indique où trouver la sortie de l'appel du processus `sayHello` dans le chemin du répertoire `work/`.
 
-Vous pouvez trouver le chemin complet en tapant la commande suivante (en remplaçant `a3/7be2fa` par ce que vous voyez dans votre propre terminal) et en appuyant sur la touche tab pour compléter automatiquement le chemin ou en ajoutant un astérisque :
+Vous pouvez trouver le chemin complet en tapant la commande suivante (en remplaçant `71/8143bd` par ce que vous voyez dans votre propre terminal) et en appuyant sur la touche tab pour compléter automatiquement le chemin ou en ajoutant un astérisque :
 
 ```bash
-tree work/a3/7be2fa*
+tree work/71/8143bd*
 ```
 
-Cela devrait donner le chemin complet du répertoire : `work/a3/7be2fa7be2fad5e71e5f49998f795677fd68`
+Cela devrait donner le chemin complet du répertoire : `work/71/8143bd5ed3420e23c5f0dc1a05056d`
 
 Voyons ce qu'il y a dedans.
 
@@ -116,8 +116,8 @@ Les noms exacts des sous-répertoires seront différents sur votre système.
 
 ```console title="work/"
 work
-└── a3
-    └── 7be2fad5e71e5f49998f795677fd68
+└── 71
+    └── 8143bd5ed3420e23c5f0dc1a05056d
         ├── .command.begin
         ├── .command.err
         ├── .command.log
@@ -136,7 +136,7 @@ Si vous l'ouvrez, vous retrouverez le message de salutation `Hello World!`.
 <details>
   <summary>Contenu du fichier output.txt</summary>
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" linenums="1"
 Hello World!
 ```
 
@@ -159,10 +159,9 @@ Le fichier `.command.sh` est particulièrement utile car il vous montre la comma
 <details>
   <summary>Contenu du fichier</summary>
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/.command.sh" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" linenums="1"
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
-
 ```
 
 </details>
@@ -357,14 +356,14 @@ nextflow run hello-world.nf --greeting 'Hello World!' -resume
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_noyce] DSL2 - revision: c33d41f479
+    Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d
 
-    [a3/7be2fa] process > sayHello [100%] 1 of 1, cached: 1 ✔
+    [71/8143bd] sayHello | 1 of 1, cached: 1 ✔
     ```
 
-Recherchez le bit `cached:` qui a été ajouté dans la ligne de statut du processus (ligne 5), ce qui signifie que Nextflow a reconnu qu'il a déjà fait ce travail et a simplement réutilisé le résultat de l'exécution précédente réussie.
+Recherchez le bit `cached:` qui a été ajouté dans la ligne de statut du processus, ce qui signifie que Nextflow a reconnu qu'il a déjà fait ce travail et a simplement réutilisé le résultat de l'exécution précédente réussie.
 
 Vous pouvez également voir que le hash du sous-répertoire work est le même que lors de l'exécution précédente.
 Nextflow vous indique littéralement l'exécution précédente et dit « J'ai déjà fait ça là-bas. »

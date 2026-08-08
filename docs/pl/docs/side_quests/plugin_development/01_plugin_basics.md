@@ -510,7 +510,7 @@ Zaktualizuj `nextflow.config`:
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
     ```
 
@@ -533,7 +533,7 @@ Wtyczka generuje kilka komunikatów INFO i WARN podczas wykonywania.
 Są one normalne dla małego przykładu uruchamianego na lokalnej maszynie:
 
 ```console title="Output (partial)"
-nf-co2footprint plugin  ~  version 1.2.0
+nf-co2footprint plugin  ~  version 1.3.0
 WARN - [nf-co2footprint] Target zone null not found. Attempting to retrieve carbon intensity for fallback zone GLOBAL.
 INFO - [nf-co2footprint] Using fallback carbon intensity from GLOBAL from CI table: 480.0 gCO₂eq/kWh.
 WARN - [nf-co2footprint] Executor 'null' not mapped.
@@ -599,7 +599,7 @@ Dodaj blok `co2footprint` do `nextflow.config`:
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
 
     co2footprint {
@@ -613,7 +613,7 @@ Dodaj blok `co2footprint` do `nextflow.config`:
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
     ```
 
@@ -633,11 +633,6 @@ INFO - [nf-co2footprint] Using fallback carbon intensity from GB from CI table: 
 
 Ostrzeżenie o strefie zniknęło.
 Wtyczka używa teraz intensywności emisji dwutlenku węgla właściwej dla Wielkiej Brytanii (163,92 gCO₂eq/kWh) zamiast globalnej wartości zastępczej (480,0 gCO₂eq/kWh).
-
-!!! note "Uwaga"
-
-    Możesz również zobaczyć komunikat `WARN: Unrecognized config option 'co2footprint.location'`.
-    Jest on kosmetyczny i można go bezpiecznie zignorować — wtyczka nadal poprawnie odczytuje tę wartość.
 
 W Części 6 stworzysz własny zakres konfiguracji dla swojej wtyczki.
 

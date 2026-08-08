@@ -42,12 +42,21 @@ nextflow run 2a-inputs.nf --input data/greetings.csv
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `2a-inputs.nf` [mighty_sammet] DSL2 - revision: 29fb5352b3
+    Launching `2a-inputs.nf` [mighty_sammet] revision: 29fb5352b3
 
     executor >  local (3)
-    [8e/0eb066] sayHello (2) [100%] 3 of 3 ✔
+    [8e/0eb066] sayHello (2) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 2a-inputs/Hello-output.txt
+        - 2a-inputs/Bonjour-output.txt
+        - 2a-inputs/Hola-output.txt
     ```
 
 रोमांचक रूप से, यह indicate करता है कि process के लिए '3 of 3' calls किए गए, जो encouraging है, क्योंकि हमने जो CSV इनपुट के रूप में प्रदान किया उसमें तीन rows of data थीं।
@@ -124,11 +133,20 @@ nextflow run 2a-inputs.nf --input data/greetings.csv -ansi-log false
 ??? success "कमांड आउटपुट"
 
     ```console linenums="1"
-    N E X T F L O W  ~  version 25.10.4
-    Launching `2a-inputs.nf` [pedantic_hamilton] DSL2 - revision: 6bbc42e49f
+    N E X T F L O W  ~  version 26.04.4
+    Launching `2a-inputs.nf` [pedantic_hamilton] - revision: 6bbc42e49f
     [ab/1a8ece] Submitted process > sayHello (1)
     [0d/2cae24] Submitted process > sayHello (2)
     [b5/0df1d6] Submitted process > sayHello (3)
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 2a-inputs/Hello-output.txt
+        - 2a-inputs/Bonjour-output.txt
+        - 2a-inputs/Hola-output.txt
     ```
 
 इस बार हम सभी तीन process runs और उनकी associated work subdirectories आउटपुट में listed देखते हैं।
@@ -362,13 +380,31 @@ nextflow run 2b-multistep.nf --input data/greetings.csv
 ??? success "कमांड आउटपुट"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
+    Launching `2b-multistep.nf` [soggy_franklin] revision: bc8e1b2726
 
     [d6/cdf466] sayHello (1)       | 3 of 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3 ✔
     [1e/83586c] collectGreetings   | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 2b-multistep/intermediates/Hello-output.txt
+        - 2b-multistep/intermediates/Bonjour-output.txt
+        - 2b-multistep/intermediates/Hola-output.txt
+
+      uppercased:
+        - 2b-multistep/intermediates/UPPER-Hello-output.txt
+        - 2b-multistep/intermediates/UPPER-Bonjour-output.txt
+        - 2b-multistep/intermediates/UPPER-Hola-output.txt
+
+      collected: 2b-multistep/COLLECTED-batch-output.txt
+
+      batch_report: 2b-multistep/batch-report.txt
     ```
 
 तुम देखते हो कि जैसा कि promised था, workflow के भाग के रूप में कई steps run किए गए; पहले दो (`sayHello` और `convertToUpper`) presumably प्रत्येक individual greeting पर run किए गए, और तीसरा (`collectGreetings`) सभी तीन `convertToUpper` calls के outputs पर केवल एक बार run किया गया होगा।
@@ -669,13 +705,31 @@ nextflow run 2b-multistep.nf --input data/greetings.csv --batch test
 ??? success "कमांड आउटपुट"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
+    Launching `2b-multistep.nf` [soggy_franklin] revision: bc8e1b2726
 
     [a5/cdff26] sayHello (1)       | 3 of 3 ✔
     [c5/78794f] convertToUpper (2) | 3 of 3 ✔
     [d3/b4d86c] collectGreetings   | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 2b-multistep/intermediates/Bonjour-output.txt
+        - 2b-multistep/intermediates/Hello-output.txt
+        - 2b-multistep/intermediates/Hola-output.txt
+
+      uppercased:
+        - 2b-multistep/intermediates/UPPER-Hola-output.txt
+        - 2b-multistep/intermediates/UPPER-Bonjour-output.txt
+        - 2b-multistep/intermediates/UPPER-Hello-output.txt
+
+      collected: 2b-multistep/COLLECTED-test-output.txt
+
+      batch_report: 2b-multistep/test-report.txt
     ```
 
 तुम्हें अपने custom batch name के साथ named नए final outputs देखने चाहिए।
@@ -920,13 +974,31 @@ nextflow run 2c-modules.nf --input data/greetings.csv -resume
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
+    Launching `2c-modules.nf` [soggy_franklin] revision: bc8e1b2726
 
     [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1e/83586c] collectGreetings   | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 2c-modules/intermediates/Hello-output.txt
+        - 2c-modules/intermediates/Bonjour-output.txt
+        - 2c-modules/intermediates/Hola-output.txt
+
+      uppercased:
+        - 2c-modules/intermediates/UPPER-Hello-output.txt
+        - 2c-modules/intermediates/UPPER-Bonjour-output.txt
+        - 2c-modules/intermediates/UPPER-Hola-output.txt
+
+      collected: 2c-modules/COLLECTED-batch-output.txt
+
+      batch_report: 2c-modules/batch-report.txt
     ```
 
 तुम देखोगे कि सभी process executions successfully cached हुए, मतलब Nextflow ने recognize किया कि यह requested work पहले ही कर चुका है, भले ही code split हो गया है और main workflow फ़ाइल का नाम बदल गया है।
@@ -1073,20 +1145,20 @@ ls /
 Container के अंदर से, तुम `cowpy` कमांड directly run कर सकते हो।
 
 ```bash
-cowpy "Hello Containers"
+echo "Hello Containers" | cowpy
 ```
 
 ??? success "कमांड आउटपुट"
 
     ```console
-    ______________________________________________________
+     __________________
     < Hello Containers >
-    ------------------------------------------------------
-        \   ^__^
+     ------------------
+         \   ^__^
           \  (oo)\_______
-            (__)\       )\/\
-              ||----w |
-              ||     ||
+             (__)\       )\/\
+               ||----w |
+               ||     ||
     ```
 
 यह default cow character (या 'cowacter') की ASCII art produce करता है जिसमें हमारे द्वारा specified text वाला speech bubble है।
@@ -1095,22 +1167,22 @@ cowpy "Hello Containers"
 उदाहरण के लिए, tool documentation कहता है कि हम `-c` के साथ character set कर सकते हैं।
 
 ```bash
-cowpy "Hello Containers" -c tux
+echo "Hello Containers" | cowpy -c tux
 ```
 
 ??? success "कमांड आउटपुट"
 
     ```console
-    __________________
+     __________________
     < Hello Containers >
-    ------------------
-      \
+     ------------------
+       \
         \
             .--.
-          |o_o |
-          |:_/ |
+           |o_o |
+           |:_/ |
           //   \ \
-        (|     | )
+         (|     | )
         /'\_   _/`\
         \___)=(___/
     ```
@@ -1296,15 +1368,35 @@ nextflow run 2d-container.nf --input data/greetings.csv --character turkey -resu
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `2d-container.nf` [elegant_brattain] DSL2 - revision: 028a841db1
+    Launching `2d-container.nf` [elegant_brattain] revision: 028a841db1
 
     executor >  local (1)
     [95/fa0bac] sayHello (3)       | 3 of 3, cached: 3 ✔
     [92/32533f] convertToUpper (3) | 3 of 3, cached: 3 ✔
     [aa/e697a2] collectGreetings   | 1 of 1, cached: 1 ✔
     [7f/caf718] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 2d-container/intermediates/Bonjour-output.txt
+        - 2d-container/intermediates/Hola-output.txt
+        - 2d-container/intermediates/Hello-output.txt
+
+      uppercased:
+        - 2d-container/intermediates/UPPER-Hola-output.txt
+        - 2d-container/intermediates/UPPER-Hello-output.txt
+        - 2d-container/intermediates/UPPER-Bonjour-output.txt
+
+      collected: 2d-container/intermediates/COLLECTED-batch-output.txt
+
+      batch_report: 2d-container/batch-report.txt
+
+      cowpy_art: 2d-container/cowpy-COLLECTED-batch-output.txt
     ```
 
 पहले तीन steps cached हुए क्योंकि हमने उन्हें पहले run कर लिया था, लेकिन `cowpy` process नया है इसलिए वह actually run होता है।

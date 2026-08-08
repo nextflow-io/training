@@ -44,7 +44,7 @@ process heavyProcess {
     script:
     """
     # Simulate heavy computation
-    for i in {1..1000000}; do
+    for i in {1..10000}; do
         echo "Heavy computation $i for ${sample_id}"
     done > ${sample_id}.txt
     """

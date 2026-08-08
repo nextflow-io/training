@@ -19,7 +19,7 @@ Les proves us permeten comprovar sistemàticament que cada part del vostre pipel
 
 Hi ha molts tipus diferents de proves que podem escriure:
 
-1. **Proves a nivell de mòdul**: Per a processos individuals
+1. **Proves a nivell de procés**: Per a processos individuals
 2. **Proves a nivell de workflow**: Per a un workflow individual
 3. **Proves a nivell de pipeline**: Per al pipeline en conjunt
 4. **Proves de rendiment**: Per a la velocitat i l'eficiència del pipeline
@@ -27,16 +27,16 @@ Hi ha molts tipus diferents de proves que podem escriure:
 
 Provar processos individuals és anàleg a les proves unitàries en altres llenguatges. Provar el workflow o tot el pipeline és anàleg al que s'anomenen proves d'integració en altres llenguatges, on provem les interaccions dels components.
 
-[**nf-test**](https://www.nf-test.com/) és una eina que us permet escriure proves a nivell de mòdul, workflow i pipeline. En resum, us permet comprovar sistemàticament que cada part individual del pipeline funciona com s'espera, _de manera aïllada_.
+[**nf-test**](https://www.nf-test.com/) és una eina que us permet escriure proves a nivell de procés, workflow i pipeline. En resum, us permet comprovar sistemàticament que cada part individual del pipeline funciona com s'espera, _de manera aïllada_.
 
 ### Objectius d'aprenentatge
 
-En aquesta missió secundària, aprendreu a utilitzar nf-test per escriure una prova a nivell de workflow per al pipeline, així com proves a nivell de mòdul per als tres processos que invoca.
+En aquesta missió secundària, aprendreu a utilitzar nf-test per escriure una prova a nivell de workflow per al pipeline, així com proves a nivell de procés per als dos processos que invoca.
 
 Al final d'aquesta missió secundària, podreu utilitzar les tècniques següents de manera efectiva:
 
 - Inicialitzar nf-test al vostre projecte
-- Generar proves a nivell de mòdul i de workflow
+- Generar proves a nivell de procés i de workflow
 - Afegir tipus comuns d'assertions
 - Entendre quan utilitzar snapshots en lloc d'assertions de contingut
 - Executar proves per a tot un projecte
@@ -49,6 +49,16 @@ Abans d'abordar aquesta missió secundària, hauríeu de:
 
 - Haver completat el tutorial [Hello Nextflow](../../hello_nextflow/index.md) o un curs equivalent per a principiants.
 - Estar còmodes amb els conceptes i mecanismes bàsics de Nextflow (processos, canals, operadors, treball amb fitxers, metadades)
+
+!!! warning "Requisit de versió de nf-test"
+
+    Les proves a nivell de procés requereixen **nf-test 0.9.3 o posterior**. Les versions anteriors (inclosa la 0.9.2) generen codi de bastida de proves incompatible amb l'analitzador sintàctic estricte que Nextflow utilitza per defecte a partir de la versió 26.04, cosa que provoca un error `Script compilation failed` en lloc del resultat de prova esperat.
+
+    Comproveu la vostra versió amb `nf-test version`. Si necessiteu actualitzar:
+
+    ```bash
+    curl -fsSL https://code.askimed.com/install/nf-test | bash
+    ```
 
 ---
 
@@ -81,7 +91,8 @@ Trobareu un fitxer de workflow principal i un fitxer CSV anomenat `greetings.csv
 ```console title="Directory contents"
 .
 ├── greetings.csv
-└── main.nf
+├── main.nf
+└── nextflow.config
 ```
 
 Per a una descripció detallada dels fitxers, consulteu l'[escalfament de Hello Nextflow](../../hello_nextflow/00_orientation.md).
@@ -111,21 +122,23 @@ Podeu veure el codi complet del workflow a continuació.
 ??? example "Codi del workflow"
 
     ```groovy title="main.nf"
+    #!/usr/bin/env nextflow
+
     /*
-    * Paràmetres del pipeline
-    */
+     * Paràmetres del pipeline
+     */
     params.input_file = "greetings.csv"
 
     /*
-    * Utilitza echo per imprimir 'Hello World!' a la sortida estàndard
-    */
+     * Utilitza echo per imprimir 'Hello World!' a la sortida estàndard
+     */
     process sayHello {
 
         input:
-            val greeting
+        val greeting
 
         output:
-            path "${greeting}-output.txt"
+        path "${greeting}-output.txt"
 
         script:
         """
@@ -134,15 +147,15 @@ Podeu veure el codi complet del workflow a continuació.
     }
 
     /*
-    * Utilitza una utilitat de substitució de text per convertir la salutació a majúscules
-    */
+     * Utilitza una utilitat de substitució de text per convertir la salutació a majúscules
+     */
     process convertToUpper {
 
         input:
-            path input_file
+        path input_file
 
         output:
-            path "UPPER-${input_file}"
+        path "UPPER-${input_file}"
 
         script:
         """
@@ -183,13 +196,27 @@ nextflow run main.nf
 ```
 
 ```console title="Result of running the workflow"
- N E X T F L O W   ~  version 24.10.2
+ N E X T F L O W   ~  version 26.04.4
 
-Launching `main.nf` [soggy_linnaeus] DSL2 - revision: bbf79d5c31
+Launching `main.nf` [trusting_mendel] revision: 405c90f891
 
 executor >  local (6)
-[f7/c3be66] sayHello (3)       | 3 of 3 ✔
-[cd/e15303] convertToUpper (3) | 3 of 3 ✔
+[6c/d7ae4e] sayHello (3)       | 3 of 3 ✔
+[72/5fa770] convertToUpper (2) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/nf-test/results
+
+  greetings:
+    - Hola-output.txt
+    - Hello-output.txt
+    - Bonjour-output.txt
+
+  upper_greetings:
+    - UPPER-Hola-output.txt
+    - UPPER-Bonjour-output.txt
+    - UPPER-Hello-output.txt
 ```
 
 FELICITATS! Acabeu d'executar una prova!
@@ -435,10 +462,10 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [1d4aaf12] 'Should run without failures' PASSED (1.619s)
+  Test [693ba951] 'Should run without failures' PASSED (2.879s)
 
 
-SUCCESS: Executed 1 tests in 1.626s
+SUCCESS: Executed 1 tests in 2.883s
 ```
 
 Èxit! El pipeline s'executa correctament i la prova passa. Executeu-lo tantes vegades com vulgueu i sempre obtindreu el mateix resultat!
@@ -460,15 +487,28 @@ https://www.nf-test.com
 Test Workflow main.nf
 
   Test [693ba951] 'Should run without failures'
-    > Nextflow 24.10.4 is available - Please consider updating your version to it
-    > N E X T F L O W  ~  version 24.10.0
-    > Launching `/workspaces/training/side-quests/nf-test/main.nf` [zen_ampere] DSL2 - revision: bbf79d5c31
-    > [2b/61e453] Submitted process > sayHello (2)
-    > [31/4e1606] Submitted process > sayHello (1)
-    > [bb/5209ee] Submitted process > sayHello (3)
-    > [83/83db6f] Submitted process > convertToUpper (2)
-    > [9b/3428b1] Submitted process > convertToUpper (1)
-    > [ca/0ba51b] Submitted process > convertToUpper (3)
+    > N E X T F L O W  ~  version 26.04.4
+    > Launching `/workspaces/training/side-quests/nf-test/main.nf` [maniac_mcclintock] - revision: 405c90f891
+    > [fc/6965c3] Submitted process > sayHello (1)
+    > [14/640c84] Submitted process > sayHello (2)
+    > [d6/3594c9] Submitted process > sayHello (3)
+    > [d7/f14d58] Submitted process > convertToUpper (1)
+    > [76/cb9122] Submitted process > convertToUpper (2)
+    > [d1/92b304] Submitted process > convertToUpper (3)
+    >
+    > Outputs:
+    >
+    >   /workspaces/training/side-quests/nf-test/.nf-test/tests/693ba951a20fec36a5a9292ed1cc8a9f/results
+    >
+    >   greetings:
+    >     - Bonjour-output.txt
+    >     - Hello-output.txt
+    >     - Hola-output.txt
+    >
+    >   upper_greetings:
+    >     - UPPER-Bonjour-output.txt
+    >     - UPPER-Hola-output.txt
+    >     - UPPER-Hello-output.txt
     PASSED (5.206s)
 
 
@@ -534,10 +574,10 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [1d4aaf12] 'Should run successfully with correct number of processes' PASSED (1.567s)
+  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (2.876s)
 
 
-SUCCESS: Executed 1 tests in 1.588s
+SUCCESS: Executed 1 tests in 2.879s
 ```
 
 Èxit! El pipeline s'executa correctament i la prova passa. Ara hem començat a provar els detalls del pipeline, a més de l'estat general.
@@ -619,11 +659,11 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [f0e08a68] 'Should run successfully with correct number of processes' PASSED (8.144s)
-  Test [d7e32a32] 'Should produce correct output files' PASSED (6.994s)
+  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (3.055s)
+  Test [44ba6e13] 'Should produce correct output files' PASSED (2.941s)
 
 
-SUCCESS: Executed 2 tests in 15.165s
+SUCCESS: Executed 2 tests in 6.004s
 ```
 
 Èxit! Les proves passen perquè el pipeline s'ha completat correctament, el nombre correcte de processos s'ha executat i els fitxers de sortida s'han creat. Això també us hauria de mostrar com d'útil és proporcionar noms informatius per a les vostres proves.
@@ -730,6 +770,8 @@ Test Process sayHello
   Nextflow stdout:
 
   Process `sayHello` declares 1 input but was called with 0 arguments
+
+   -- Check script '/workspaces/training/side-quests/nf-test/.nf-test-1eaad118145a1fd798cb07e7dd75d087.nf' at line: 30 or see '/workspaces/training/side-quests/nf-test/.nf-test/tests/1eaad118145a1fd798cb07e7dd75d087/meta/nextflow.log' file for more details
   Nextflow stderr:
 
 FAILURE: Executed 1 tests in 4.884s (1 failed)
@@ -800,7 +842,7 @@ https://www.nf-test.com
 
 Test Process sayHello
 
-  Test [f91a1bcd] 'Should run without failures and produce correct output' PASSED (1.604s)
+  Test [d6837883] 'Should run without failures and produce correct output' PASSED (2.729s)
   Snapshots:
     1 created [Should run without failures and produce correct output]
 
@@ -808,7 +850,7 @@ Test Process sayHello
 Snapshot Summary:
   1 created
 
-SUCCESS: Executed 1 tests in 1.611s
+SUCCESS: Executed 1 tests in 2.733s
 ```
 
 Èxit! La prova passa perquè el procés `sayHello` s'ha executat correctament i la sortida s'ha creat.
@@ -858,10 +900,10 @@ https://www.nf-test.com
 
 Test Process sayHello
 
-  Test [f91a1bcd] 'Should run without failures and produce correct output' PASSED (1.675s)
+  Test [d6837883] 'Should run without failures and produce correct output' PASSED (3.092s)
 
 
-SUCCESS: Executed 1 tests in 1.685s
+SUCCESS: Executed 1 tests in 3.097s
 ```
 
 Èxit! La prova passa perquè el procés `sayHello` s'ha executat correctament i la sortida coincideix amb el snapshot.
@@ -951,10 +993,10 @@ https://www.nf-test.com
 
 Test Process sayHello
 
-  Test [58df4e4b] 'Should run without failures and contain expected greeting' PASSED (7.196s)
+  Test [c1d07f15] 'Should run without failures and contain expected greeting' PASSED (2.459s)
 
 
-SUCCESS: Executed 1 tests in 7.208s
+SUCCESS: Executed 1 tests in 2.461s
 ```
 
 ### 2.4. Proveu el procés `convertToUpper`
@@ -998,10 +1040,10 @@ Aquesta és una prova similar a la del procés `sayHello`, però prova el procé
 Ara hem de proporcionar un únic fitxer d'entrada al procés convertToUpper, que inclou algun text que volem convertir a majúscules. Hi ha moltes maneres de fer-ho:
 
 - Podríem crear un fitxer dedicat per a la prova
-- Podríem reutilitzar el fitxer data/greetings.csv existent
+- Podríem reutilitzar el fitxer greetings.csv existent
 - Podríem crear-lo sobre la marxa dins de la prova
 
-De moment, reutilitzem el fitxer data/greetings.csv existent utilitzant l'exemple que hem usat amb la prova a nivell de pipeline. Com abans, podem anomenar la prova per reflectir millor el que estem provant, però aquesta vegada deixem que faci un 'snapshot' del contingut en lloc de comprovar cadenes específiques (com hem fet amb l'altre procés).
+De moment, reutilitzem el fitxer greetings.csv existent utilitzant l'exemple que hem usat amb la prova a nivell de pipeline. Com abans, podem anomenar la prova per reflectir millor el que estem provant, però aquesta vegada deixem que faci un 'snapshot' del contingut en lloc de comprovar cadenes específiques (com hem fet amb l'altre procés).
 
 === "Després"
 
@@ -1070,7 +1112,7 @@ https://www.nf-test.com
 
 Test Process convertToUpper
 
-  Test [c59b6044] 'Should run without failures and produce correct output' PASSED (1.755s)
+  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (3.472s)
   Snapshots:
     1 created [Should run without failures and produce correct output]
 
@@ -1078,7 +1120,7 @@ Test Process convertToUpper
 Snapshot Summary:
   1 created
 
-SUCCESS: Executed 1 tests in 1.764s
+SUCCESS: Executed 1 tests in 3.478s
 ```
 
 Tingueu en compte que hem creat un fitxer de snapshot per al procés `convertToUpper` a `tests/main.converttoupper.nf.test.snap`. Si tornem a executar la prova, hauríem de veure que nf-test passa de nou.
@@ -1097,10 +1139,10 @@ https://www.nf-test.com
 
 Test Process convertToUpper
 
-  Test [c59b6044] 'Should run without failures and produce correct output' PASSED (1.798s)
+  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (2.387s)
 
 
-SUCCESS: Executed 1 tests in 1.811s
+SUCCESS: Executed 1 tests in 2.39s
 ```
 
 ### Conclusió
@@ -1139,19 +1181,19 @@ https://www.nf-test.com
 
 Test Process convertToUpper
 
-  Test [3d26d9af] 'Should run without failures and produce correct output' PASSED (4.155s)
+  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (3.472s)
 
 Test Workflow main.nf
 
-  Test [f183df37] 'Should run successfully with correct number of processes' PASSED (3.33s)
-  Test [d7e32a32] 'Should produce correct output files' PASSED (3.102s)
+  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (3.156s)
+  Test [44ba6e13] 'Should produce correct output files' PASSED (3.124s)
 
 Test Process sayHello
 
-  Test [58df4e4b] 'Should run without failures and contain expected greeting' PASSED (2.614s)
+  Test [c1d07f15] 'Should run without failures and contain expected greeting' PASSED (5.782s)
 
 
-SUCCESS: Executed 4 tests in 13.481s
+SUCCESS: Executed 4 tests in 15.746s
 ```
 
 Mireu això! Hem executat 4 proves, 1 per a cada procés i 2 per a tot el pipeline amb una única comanda. Imagineu com de poderós és això en una base de codi gran!
@@ -1193,7 +1235,7 @@ Consulteu la [documentació de nf-test](https://www.nf-test.com/) per a funciona
 - Afegir assertions més exhaustives a les vostres proves
 - Escriure proves per a casos límit i condicions d'error
 - Configurar la integració contínua per executar les proves automàticament
-- Aprendre sobre altres tipus de proves com les proves de workflow i de mòdul
+- Aprendre sobre altres tipus de proves com les proves de workflow, de rendiment i d'estrès
 - Explorar tècniques de validació de contingut més avançades
 
 **Recordeu:** Les proves són documentació viva de com hauria de comportar-se el vostre codi. Com més proves escriviu, i com més específiques siguin les vostres assertions, més segurs podeu estar de la fiabilitat del vostre pipeline.

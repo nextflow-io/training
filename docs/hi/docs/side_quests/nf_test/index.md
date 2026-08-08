@@ -19,7 +19,7 @@
 
 हम कई अलग-अलग प्रकार के परीक्षण लिख सकते हैं:
 
-1. **मॉड्यूल-स्तरीय परीक्षण**: अलग-अलग प्रोसेस के लिए
+1. **प्रोसेस-स्तरीय परीक्षण**: अलग-अलग प्रोसेस के लिए
 2. **वर्कफ़्लो-स्तरीय परीक्षण**: एकल वर्कफ़्लो के लिए
 3. **पाइपलाइन-स्तरीय परीक्षण**: पूरी पाइपलाइन के लिए
 4. **प्रदर्शन परीक्षण**: पाइपलाइन की गति और दक्षता के लिए
@@ -27,16 +27,16 @@
 
 अलग-अलग प्रोसेस का परीक्षण करना अन्य भाषाओं में यूनिट परीक्षणों के समान है। वर्कफ़्लो या पूरी पाइपलाइन का परीक्षण करना अन्य भाषाओं में इंटीग्रेशन परीक्षण के समान है, जहाँ हम घटकों की परस्पर क्रियाओं का परीक्षण करते हैं।
 
-[**nf-test**](https://www.nf-test.com/) एक ऐसा टूल है जो तुम्हें मॉड्यूल, वर्कफ़्लो और पाइपलाइन स्तर के परीक्षण लिखने की अनुमति देता है। संक्षेप में, यह तुम्हें व्यवस्थित रूप से जाँचने की अनुमति देता है कि पाइपलाइन का हर अलग हिस्सा अपेक्षित रूप से काम कर रहा है, _अलगाव में_।
+[**nf-test**](https://www.nf-test.com/) एक ऐसा टूल है जो तुम्हें प्रोसेस, वर्कफ़्लो और पाइपलाइन स्तर के परीक्षण लिखने की अनुमति देता है। संक्षेप में, यह तुम्हें व्यवस्थित रूप से जाँचने की अनुमति देता है कि पाइपलाइन का हर अलग हिस्सा अपेक्षित रूप से काम कर रहा है, _अलगाव में_।
 
 ### सीखने के लक्ष्य
 
-इस साइड क्वेस्ट में, तुम पाइपलाइन के लिए वर्कफ़्लो-स्तरीय परीक्षण और इसके द्वारा बुलाए जाने वाले तीन प्रोसेस के लिए मॉड्यूल-स्तरीय परीक्षण लिखने के लिए nf-test का उपयोग करना सीखोगे।
+इस साइड क्वेस्ट में, तुम पाइपलाइन के लिए वर्कफ़्लो-स्तरीय परीक्षण और इसके द्वारा बुलाए जाने वाले दो प्रोसेस के लिए प्रोसेस-स्तरीय परीक्षण लिखने के लिए nf-test का उपयोग करना सीखोगे।
 
 इस साइड क्वेस्ट के अंत तक, तुम निम्नलिखित तकनीकों का प्रभावी ढंग से उपयोग करने में सक्षम होगे:
 
 - अपने प्रोजेक्ट में nf-test को इनिशियलाइज़ करना
-- मॉड्यूल-स्तरीय और वर्कफ़्लो-स्तरीय परीक्षण जनरेट करना
+- प्रोसेस-स्तरीय और वर्कफ़्लो-स्तरीय परीक्षण जनरेट करना
 - सामान्य प्रकार के assertions जोड़ना
 - यह समझना कि snapshots बनाम content assertions का उपयोग कब करना है
 - पूरे प्रोजेक्ट के लिए परीक्षण चलाना
@@ -49,6 +49,16 @@
 
 - [Hello Nextflow](../../hello_nextflow/index.md) ट्यूटोरियल या समकक्ष शुरुआती कोर्स पूरा करना चाहिए।
 - बुनियादी Nextflow अवधारणाओं और तंत्रों (प्रोसेस, चैनल, ऑपरेटर, फ़ाइलों के साथ काम करना, मेटा डेटा) का उपयोग करने में सहज होना चाहिए।
+
+!!! warning "nf-test संस्करण आवश्यकता"
+
+    प्रोसेस-स्तरीय परीक्षणों के लिए **nf-test 0.9.3 या उसके बाद का संस्करण** आवश्यक है। पुराने संस्करण (0.9.2 सहित) ऐसा test harness कोड जनरेट करते हैं जो Nextflow के strict syntax parser के साथ असंगत है, जिसे Nextflow संस्करण 26.04 से डिफ़ॉल्ट रूप से उपयोग करता है, जिससे अपेक्षित परीक्षण परिणाम के बजाय `Script compilation failed` त्रुटि आती है।
+
+    अपना संस्करण `nf-test version` से जाँचो। अगर तुम्हें अपग्रेड करना है:
+
+    ```bash
+    curl -fsSL https://code.askimed.com/install/nf-test | bash
+    ```
 
 ---
 
@@ -81,7 +91,8 @@ code .
 ```console title="Directory contents"
 .
 ├── greetings.csv
-└── main.nf
+├── main.nf
+└── nextflow.config
 ```
 
 फ़ाइलों के विस्तृत विवरण के लिए, [Hello Nextflow का वार्मअप](../../hello_nextflow/00_orientation.md) देखो।
@@ -111,21 +122,23 @@ code .
 ??? example "वर्कफ़्लो कोड"
 
     ```groovy title="main.nf"
+    #!/usr/bin/env nextflow
+
     /*
-    * पाइपलाइन पैरामीटर
-    */
+     * पाइपलाइन पैरामीटर
+     */
     params.input_file = "greetings.csv"
 
     /*
-    * 'Hello World!' को standard out पर प्रिंट करने के लिए echo का उपयोग करें
-    */
+     * 'Hello World!' को standard out पर प्रिंट करने के लिए echo का उपयोग करें
+     */
     process sayHello {
 
         input:
-            val greeting
+        val greeting
 
         output:
-            path "${greeting}-output.txt"
+        path "${greeting}-output.txt"
 
         script:
         """
@@ -134,15 +147,15 @@ code .
     }
 
     /*
-    * अभिवादन को अपरकेस में बदलने के लिए text replace utility का उपयोग करें
-    */
+     * अभिवादन को अपरकेस में बदलने के लिए text replace utility का उपयोग करें
+     */
     process convertToUpper {
 
         input:
-            path input_file
+        path input_file
 
         output:
-            path "UPPER-${input_file}"
+        path "UPPER-${input_file}"
 
         script:
         """
@@ -183,13 +196,27 @@ nextflow run main.nf
 ```
 
 ```console title="Result of running the workflow"
- N E X T F L O W   ~  version 24.10.2
+ N E X T F L O W   ~  version 26.04.4
 
-Launching `main.nf` [soggy_linnaeus] DSL2 - revision: bbf79d5c31
+Launching `main.nf` [trusting_mendel] revision: 405c90f891
 
 executor >  local (6)
-[f7/c3be66] sayHello (3)       | 3 of 3 ✔
-[cd/e15303] convertToUpper (3) | 3 of 3 ✔
+[6c/d7ae4e] sayHello (3)       | 3 of 3 ✔
+[72/5fa770] convertToUpper (2) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/nf-test/results
+
+  greetings:
+    - Hola-output.txt
+    - Hello-output.txt
+    - Bonjour-output.txt
+
+  upper_greetings:
+    - UPPER-Hola-output.txt
+    - UPPER-Bonjour-output.txt
+    - UPPER-Hello-output.txt
 ```
 
 बधाई हो! तुमने अभी एक परीक्षण चलाया!
@@ -435,10 +462,10 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [1d4aaf12] 'Should run without failures' PASSED (1.619s)
+  Test [693ba951] 'Should run without failures' PASSED (2.879s)
 
 
-SUCCESS: Executed 1 tests in 1.626s
+SUCCESS: Executed 1 tests in 2.883s
 ```
 
 सफलता! पाइपलाइन सफलतापूर्वक चलती है और परीक्षण पास होता है। इसे जितनी बार चाहो चलाओ और तुम्हें हमेशा वही परिणाम मिलेगा!
@@ -460,15 +487,28 @@ https://www.nf-test.com
 Test Workflow main.nf
 
   Test [693ba951] 'Should run without failures'
-    > Nextflow 24.10.4 is available - Please consider updating your version to it
-    > N E X T F L O W  ~  version 24.10.0
-    > Launching `/workspaces/training/side-quests/nf-test/main.nf` [zen_ampere] DSL2 - revision: bbf79d5c31
-    > [2b/61e453] Submitted process > sayHello (2)
-    > [31/4e1606] Submitted process > sayHello (1)
-    > [bb/5209ee] Submitted process > sayHello (3)
-    > [83/83db6f] Submitted process > convertToUpper (2)
-    > [9b/3428b1] Submitted process > convertToUpper (1)
-    > [ca/0ba51b] Submitted process > convertToUpper (3)
+    > N E X T F L O W  ~  version 26.04.4
+    > Launching `/workspaces/training/side-quests/nf-test/main.nf` [maniac_mcclintock] - revision: 405c90f891
+    > [fc/6965c3] Submitted process > sayHello (1)
+    > [14/640c84] Submitted process > sayHello (2)
+    > [d6/3594c9] Submitted process > sayHello (3)
+    > [d7/f14d58] Submitted process > convertToUpper (1)
+    > [76/cb9122] Submitted process > convertToUpper (2)
+    > [d1/92b304] Submitted process > convertToUpper (3)
+    >
+    > Outputs:
+    >
+    >   /workspaces/training/side-quests/nf-test/.nf-test/tests/693ba951a20fec36a5a9292ed1cc8a9f/results
+    >
+    >   greetings:
+    >     - Bonjour-output.txt
+    >     - Hello-output.txt
+    >     - Hola-output.txt
+    >
+    >   upper_greetings:
+    >     - UPPER-Bonjour-output.txt
+    >     - UPPER-Hola-output.txt
+    >     - UPPER-Hello-output.txt
     PASSED (5.206s)
 
 
@@ -534,10 +574,10 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [1d4aaf12] 'Should run successfully with correct number of processes' PASSED (1.567s)
+  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (2.876s)
 
 
-SUCCESS: Executed 1 tests in 1.588s
+SUCCESS: Executed 1 tests in 2.879s
 ```
 
 सफलता! पाइपलाइन सफलतापूर्वक चलती है और परीक्षण पास होता है। अब हमने पाइपलाइन के विवरण के साथ-साथ समग्र स्थिति का परीक्षण करना शुरू कर दिया है।
@@ -619,11 +659,11 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [f0e08a68] 'Should run successfully with correct number of processes' PASSED (8.144s)
-  Test [d7e32a32] 'Should produce correct output files' PASSED (6.994s)
+  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (3.055s)
+  Test [44ba6e13] 'Should produce correct output files' PASSED (2.941s)
 
 
-SUCCESS: Executed 2 tests in 15.165s
+SUCCESS: Executed 2 tests in 6.004s
 ```
 
 सफलता! परीक्षण पास होते हैं क्योंकि पाइपलाइन सफलतापूर्वक पूरी हुई, सही संख्या में प्रोसेस चले और आउटपुट फ़ाइलें बनाई गईं। यह तुम्हें यह भी दिखाना चाहिए कि अपने परीक्षणों के लिए वे सूचनाप्रद नाम प्रदान करना कितना उपयोगी है।
@@ -730,6 +770,8 @@ Test Process sayHello
   Nextflow stdout:
 
   Process `sayHello` declares 1 input but was called with 0 arguments
+
+   -- Check script '/workspaces/training/side-quests/nf-test/.nf-test-1eaad118145a1fd798cb07e7dd75d087.nf' at line: 30 or see '/workspaces/training/side-quests/nf-test/.nf-test/tests/1eaad118145a1fd798cb07e7dd75d087/meta/nextflow.log' file for more details
   Nextflow stderr:
 
 FAILURE: Executed 1 tests in 4.884s (1 failed)
@@ -800,7 +842,7 @@ https://www.nf-test.com
 
 Test Process sayHello
 
-  Test [f91a1bcd] 'Should run without failures and produce correct output' PASSED (1.604s)
+  Test [d6837883] 'Should run without failures and produce correct output' PASSED (2.729s)
   Snapshots:
     1 created [Should run without failures and produce correct output]
 
@@ -808,7 +850,7 @@ Test Process sayHello
 Snapshot Summary:
   1 created
 
-SUCCESS: Executed 1 tests in 1.611s
+SUCCESS: Executed 1 tests in 2.733s
 ```
 
 सफलता! परीक्षण पास होता है क्योंकि `sayHello` प्रोसेस सफलतापूर्वक चला और आउटपुट बनाया गया।
@@ -858,10 +900,10 @@ https://www.nf-test.com
 
 Test Process sayHello
 
-  Test [f91a1bcd] 'Should run without failures and produce correct output' PASSED (1.675s)
+  Test [d6837883] 'Should run without failures and produce correct output' PASSED (3.092s)
 
 
-SUCCESS: Executed 1 tests in 1.685s
+SUCCESS: Executed 1 tests in 3.097s
 ```
 
 सफलता! परीक्षण पास होता है क्योंकि `sayHello` प्रोसेस सफलतापूर्वक चला और आउटपुट snapshot से मेल खाया।
@@ -951,10 +993,10 @@ https://www.nf-test.com
 
 Test Process sayHello
 
-  Test [58df4e4b] 'Should run without failures and contain expected greeting' PASSED (7.196s)
+  Test [c1d07f15] 'Should run without failures and contain expected greeting' PASSED (2.459s)
 
 
-SUCCESS: Executed 1 tests in 7.208s
+SUCCESS: Executed 1 tests in 2.461s
 ```
 
 ### 2.4. `convertToUpper` प्रोसेस का परीक्षण करो
@@ -998,10 +1040,10 @@ nextflow_process {
 अब हमें convertToUpper प्रोसेस को एक single इनपुट फ़ाइल प्रदान करनी होगी, जिसमें कुछ टेक्स्ट है जिसे हम अपरकेस में बदलना चाहते हैं। हम इसे कई तरीकों से कर सकते हैं:
 
 - हम परीक्षण के लिए एक समर्पित फ़ाइल बना सकते हैं
-- हम मौजूदा data/greetings.csv फ़ाइल का पुनः उपयोग कर सकते हैं
+- हम मौजूदा greetings.csv फ़ाइल का पुनः उपयोग कर सकते हैं
 - हम इसे परीक्षण के भीतर ही बना सकते हैं
 
-अभी के लिए, आइए पाइपलाइन स्तर के परीक्षण के साथ उपयोग किए गए उदाहरण का उपयोग करके मौजूदा data/greetings.csv फ़ाइल का पुनः उपयोग करें। पहले की तरह, हम परीक्षण का नाम बेहतर ढंग से दर्शाने के लिए रख सकते हैं कि हम क्या परीक्षण कर रहे हैं, लेकिन इस बार आइए इसे सामग्री को 'snapshot' करने दें बजाय विशिष्ट strings की जाँच करने के (जैसा हमने दूसरे प्रोसेस में किया था)।
+अभी के लिए, आइए पाइपलाइन स्तर के परीक्षण के साथ उपयोग किए गए उदाहरण का उपयोग करके मौजूदा greetings.csv फ़ाइल का पुनः उपयोग करें। पहले की तरह, हम परीक्षण का नाम बेहतर ढंग से दर्शाने के लिए रख सकते हैं कि हम क्या परीक्षण कर रहे हैं, लेकिन इस बार आइए इसे सामग्री को 'snapshot' करने दें बजाय विशिष्ट strings की जाँच करने के (जैसा हमने दूसरे प्रोसेस में किया था)।
 
 === "बाद में"
 
@@ -1070,7 +1112,7 @@ https://www.nf-test.com
 
 Test Process convertToUpper
 
-  Test [c59b6044] 'Should run without failures and produce correct output' PASSED (1.755s)
+  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (3.472s)
   Snapshots:
     1 created [Should run without failures and produce correct output]
 
@@ -1078,7 +1120,7 @@ Test Process convertToUpper
 Snapshot Summary:
   1 created
 
-SUCCESS: Executed 1 tests in 1.764s
+SUCCESS: Executed 1 tests in 3.478s
 ```
 
 ध्यान दो, हमने `convertToUpper` प्रोसेस के लिए `tests/main.converttoupper.nf.test.snap` पर एक snapshot फ़ाइल बनाई है। अगर हम परीक्षण फिर से चलाते हैं, तो हमें nf-test फिर से पास होते देखना चाहिए।
@@ -1097,10 +1139,10 @@ https://www.nf-test.com
 
 Test Process convertToUpper
 
-  Test [c59b6044] 'Should run without failures and produce correct output' PASSED (1.798s)
+  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (2.387s)
 
 
-SUCCESS: Executed 1 tests in 1.811s
+SUCCESS: Executed 1 tests in 2.39s
 ```
 
 ### सारांश
@@ -1139,19 +1181,19 @@ https://www.nf-test.com
 
 Test Process convertToUpper
 
-  Test [3d26d9af] 'Should run without failures and produce correct output' PASSED (4.155s)
+  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (3.472s)
 
 Test Workflow main.nf
 
-  Test [f183df37] 'Should run successfully with correct number of processes' PASSED (3.33s)
-  Test [d7e32a32] 'Should produce correct output files' PASSED (3.102s)
+  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (3.156s)
+  Test [44ba6e13] 'Should produce correct output files' PASSED (3.124s)
 
 Test Process sayHello
 
-  Test [58df4e4b] 'Should run without failures and contain expected greeting' PASSED (2.614s)
+  Test [c1d07f15] 'Should run without failures and contain expected greeting' PASSED (5.782s)
 
 
-SUCCESS: Executed 4 tests in 13.481s
+SUCCESS: Executed 4 tests in 15.746s
 ```
 
 देखो! हमने एक ही कमांड से 4 परीक्षण चलाए, प्रत्येक प्रोसेस के लिए 1 और पूरी पाइपलाइन के लिए 2। कल्पना करो कि एक बड़े codebase पर यह कितना शक्तिशाली है!
@@ -1193,7 +1235,7 @@ SUCCESS: Executed 4 tests in 13.481s
 - अपने परीक्षणों में अधिक व्यापक assertions जोड़ना
 - edge cases और त्रुटि स्थितियों के लिए परीक्षण लिखना
 - परीक्षणों को स्वचालित रूप से चलाने के लिए continuous integration सेट करना
-- वर्कफ़्लो और मॉड्यूल परीक्षणों जैसे अन्य प्रकार के परीक्षणों के बारे में जानना
+- वर्कफ़्लो, प्रदर्शन और स्ट्रेस परीक्षणों जैसे अन्य प्रकार के परीक्षणों के बारे में जानना
 - अधिक उन्नत content validation तकनीकों का पता लगाना
 
 **याद रखो:** परीक्षण इस बात का जीवंत दस्तावेज़ीकरण है कि तुम्हारा कोड कैसे व्यवहार करना चाहिए। जितने अधिक परीक्षण तुम लिखते हो, और जितने अधिक विशिष्ट तुम्हारे assertions होते हैं, उतना ही अधिक तुम अपनी पाइपलाइन की विश्वसनीयता पर भरोसा कर सकते हो।

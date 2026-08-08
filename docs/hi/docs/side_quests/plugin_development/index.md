@@ -27,6 +27,12 @@ Parts 2-6 में अपना खुद का plugin बनाना शा�
 
 **Working directory:** `side-quests/plugin_development`
 
+#### Training codespace खोलें
+
+अगर तुमने अभी तक ऐसा नहीं किया है, तो [Environment Setup](../../envsetup/index.md) में बताए अनुसार training environment ज़रूर खोलो।
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+
 ## Learning objectives
 
 इस प्रशिक्षण के अंत तक, तुम यह करने में सक्षम होगे:

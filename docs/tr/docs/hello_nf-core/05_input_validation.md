@@ -20,7 +20,7 @@ Bu Build with nf-core eğitim kursunun beşinci bölümünde, pipeline girdi ve 
     Başarılı bir şekilde çalıştığını aşağıdaki komutu çalıştırarak test edebilirsiniz:
 
     ```bash
-    nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+    nextflow run . --outdir core-hello-results -profile test,docker
     ```
 
 ---
@@ -84,7 +84,7 @@ nf-schema, kullanımdan kaldırılmış nf-validation eklentisinin halefidir ve 
 
     ```groovy
     plugins {
-        id 'nf-schema@2.1.1'
+        id 'nf-schema@2.7.2'
     }
     ```
 
@@ -142,23 +142,40 @@ Doğrulama, herhangi bir pipeline süreci çalışmadan **önce** gerçekleşmel
 
 Pipeline'ımıza parametre doğrulaması ekleyerek başlayalım. Bu, `--input`, `--outdir` ve `--batch` gibi komut satırı bayraklarını doğrular.
 
-### 1.1. Doğrulamayı girdi dosyası doğrulamasını atlayacak şekilde yapılandırın
+### 1.1. Doğrulamayı etkinleştirin ve girdi dosyası doğrulamasını atlayın
 
 nf-core pipeline şablonu nf-schema ile birlikte gelir ve zaten kurulmuş ve yapılandırılmıştır:
 
 - nf-schema eklentisi `nextflow.config` içindeki `plugins{}` bloğu aracılığıyla kurulur
-- Parametre doğrulaması varsayılan olarak `params.validate_params = true` aracılığıyla etkinleştirilir
+- Parametre doğrulaması `params.validate_params` tarafından kontrol edilir
 - Doğrulama, pipeline başlatma sırasında `UTILS_NFSCHEMA_PLUGIN` alt iş akışı tarafından gerçekleştirilir
 
-Doğrulama davranışı `nextflow.config` içindeki `validation{}` kapsamı aracılığıyla kontrol edilir.
+Bölüm 3 ve 4'te herhangi bir şema yapılandırmadan önce pipeline'ın çalışabilmesi için `validate_params = false` olarak ayarladık.
+Artık doğrulama eklemeye hazır olduğumuza göre, ilk adım bunu açmaktır.
 
-İlk olarak parametre doğrulaması üzerinde çalışacağımız (bu bölüm) ve girdi verisi şemasını bölüm 2'ye kadar yapılandırmayacağımız için, geçici olarak nf-schema'ya `input` parametresinin dosya içeriğini doğrulamayı atlamasını söylememiz gerekiyor.
-
-`nextflow.config` dosyasını açın ve `validation` bloğunu bulun (yaklaşık 247. satır). Girdi dosyası doğrulamasını atlamak için `ignoreParams` ekleyin:
+`nextflow.config` dosyasını açın ve `validate_params` parametresini bulun (yaklaşık 37. satır), ardından `true` olarak ayarlayın:
 
 === "Sonra"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="247"
+    ```groovy title="nextflow.config" hl_lines="1" linenums="37"
+    validate_params            = true
+    ```
+
+=== "Önce"
+
+    ```groovy title="nextflow.config" hl_lines="1" linenums="37"
+    validate_params            = false
+    ```
+
+Doğrulama davranışının kendisi `nextflow.config` içindeki `validation{}` kapsamı aracılığıyla kontrol edilir.
+
+İlk olarak parametre doğrulaması üzerinde çalışacağımız (bu bölüm) ve girdi verisi şemasını bölüm 2'ye kadar yapılandırmayacağımız için, geçici olarak nf-schema'ya `input` parametresinin dosya içeriğini doğrulamayı atlamasını da söylememiz gerekiyor.
+
+`validation` bloğunu bulun (yaklaşık 252. satır) ve girdi dosyası doğrulamasını atlamak için `ignoreParams` ekleyin:
+
+=== "Sonra"
+
+    ```groovy title="nextflow.config" hl_lines="3" linenums="252"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
@@ -168,7 +185,7 @@ Doğrulama davranışı `nextflow.config` içindeki `validation{}` kapsamı arac
 
 === "Önce"
 
-    ```groovy title="nextflow.config" linenums="247"
+    ```groovy title="nextflow.config" linenums="252"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
@@ -181,7 +198,7 @@ Bu yapılandırma nf-schema'ya şunları söyler:
 - **`ignoreParams`**: `input` parametresinin dosya içeriğinin doğrulamasını atla (geçici; bunu bölüm 2'de yeniden etkinleştireceğiz)
 - **`monochromeLogs`**: `true` olarak ayarlandığında doğrulama mesajlarında renkli çıktıyı devre dışı bırak (`params.monochrome_logs` tarafından kontrol edilir)
 
-!!! note "Input parametresi neden yok sayılıyor?"
+!!! info "Input parametresi neden yok sayılıyor?"
 
     `nextflow_schema.json` içindeki `input` parametresi, `"schema": "assets/schema_input.json"` içerir; bu da nf-schema'ya girdi CSV dosyasının *içeriğini* bu şemaya karşı doğrulamasını söyler.
     Bu şemayı henüz yapılandırmadığımız için, bu doğrulamayı geçici olarak yok sayıyoruz.
@@ -263,7 +280,7 @@ nf-core pipelines schema build
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 3.5.2 - https://nf-co.re
+    nf-core/tools version 4.0.2 - https://nf-co.re
 
 INFO     [✓] Default parameters match schema validation
 INFO     [✓] Pipeline schema looks valid (found 17 params)
@@ -310,32 +327,32 @@ grep -A 25 '"input_output_options"' nextflow_schema.json
 ```
 
 ```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8" hl_lines="19-23"
-    "input_output_options": {
-      "title": "Input/output options",
-      "type": "object",
-      "fa_icon": "fas fa-terminal",
-      "description": "Define where the pipeline should find input data and save output data.",
-      "required": ["input", "outdir", "batch"],
-      "properties": {
-        "input": {
-          "type": "string",
-          "format": "file-path",
-          "exists": true,
-          "schema": "assets/schema_input.json",
-          "mimetype": "text/csv",
-          "pattern": "^\\S+\\.csv$",
-          "description": "Path to comma-separated file containing information about the samples in the experiment.",
-          "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.",
-          "fa_icon": "fas fa-file-csv"
-        },
-        "batch": {
-          "type": "string",
-          "description": "Name for this batch of greetings",
-          "fa_icon": "fas fa-layer-group"
-        },
+        "input_output_options": {
+            "title": "Input/output options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Define where the pipeline should find input data and save output data.",
+            "required": ["input", "outdir", "batch"],
+            "properties": {
+                "input": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "schema": "assets/schema_input.json",
+                    "mimetype": "text/csv",
+                    "pattern": "^\\S+\\.csv$",
+                    "description": "Path to comma-separated file containing information about the samples in the experiment.",
+                    "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.",
+                    "fa_icon": "fas fa-file-csv"
+                },
+                "batch": {
+                    "type": "string",
+                    "description": "Name for this batch of greetings",
+                    "fa_icon": "fas fa-layer-group"
+                },
 ```
 
-`batch` parametresinin şemaya eklendiğini ve "required" alanının artık `["input", "outdir", "batch"]` gösterdiğini görmelisiniz.
+`batch` parametresinin şemaya eklendiğini ve `required` alanının artık `["input", "outdir", "batch"]` gösterdiğini görmelisiniz.
 
 ### 1.5. Parametre doğrulamasını test edin
 
@@ -352,7 +369,7 @@ nextflow run . --outdir test-results -profile docker
     ```console
     ERROR ~ Validation of pipeline parameters failed!
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     The following invalid input values have been detected:
 
     * Missing required parameter(s): input, batch
@@ -369,15 +386,15 @@ nextflow run . --input assets/greetings.csv --outdir results --batch my-batch -p
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [peaceful_wozniak] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [peaceful_wozniak] revision: b9e9b3b8de
 
     executor >  local (8)
-    [de/a1b2c3] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
-    [4f/d5e6f7] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-    [8a/b9c0d1] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
-    [e2/f3a4b5] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔
+    [de/a1b2c3] CORE_HELLO:HELLO:sayHello (3)                | 3 of 3 ✔
+    [4f/d5e6f7] CORE_HELLO:HELLO:convertToUpper (3)          | 3 of 3 ✔
+    [8a/b9c0d1] CORE_HELLO:HELLO:FIND_CONCATENATE (my-batch) | 1 of 1 ✔
+    [e2/f3a4b5] CORE_HELLO:HELLO:COWPY (my-batch)            | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
@@ -640,7 +657,7 @@ Artık girdi verisi şemasını yapılandırdığımıza göre, daha önce ekled
 
 === "Sonra"
 
-    ```groovy title="nextflow.config" linenums="247"
+    ```groovy title="nextflow.config" linenums="252"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
@@ -649,7 +666,7 @@ Artık girdi verisi şemasını yapılandırdığımıza göre, daha önce ekled
 
 === "Önce"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="247"
+    ```groovy title="nextflow.config" hl_lines="3" linenums="252"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
@@ -666,7 +683,7 @@ Doğrulamanın hem geçerli hem de geçersiz girdilerle çalıştığını test 
 #### 2.7.1. Geçerli girdi ile test edin
 
 İlk olarak, pipeline'ın geçerli girdi ile başarıyla çalıştığını onaylayın.
-Doğrulama çalıştığı için artık `--validate_params false` kullanmamıza gerek olmadığını unutmayın!
+`validate_params = true` olarak ayarlandığında ve girdi şeması yerinde olduğunda, hem parametre hem de girdi verisi doğrulaması artık gerçek anlamda çalışır.
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker
@@ -734,9 +751,9 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
 ??? failure "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [trusting_ochoa] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [trusting_ochoa] revision: b9e9b3b8de
 
     Input/output options
       input              : assets/invalid_greetings.csv

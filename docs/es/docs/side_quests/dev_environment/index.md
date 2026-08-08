@@ -5,6 +5,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 
+
 Los Entornos de Desarrollo Integrados (IDEs) modernos pueden transformar radicalmente su experiencia de desarrollo con Nextflow. Esta misión secundaria se enfoca específicamente en aprovechar VS Code y su extensión de Nextflow para escribir código más rápido, detectar errores temprano y navegar workflows complejos de manera eficiente.
 
 !!! note "Esto no es un tutorial tradicional"
@@ -77,7 +78,7 @@ tree .
 │   └── utils.nf
 └── nextflow.config
 
-3 directories, 12 files
+2 directories, 12 files
 ```
 
 !!! note "Sobre los archivos de ejemplo"
@@ -102,7 +103,7 @@ Si usa una Mac, algunos (no todos) los atajos de teclado usarán "cmd" en lugar 
 Para instalar la extensión manualmente:
 
 1. Abra VS Code
-2. Vaya a la vista de Extensiones haciendo clic en el ícono de extensiones a la izquierda: ![ícono de extensiones](../img/extensions_icon.png) (atajo `Ctrl/Cmd+Shift+X` si está ejecutando VSCode localmente)
+2. Vaya a la vista de Extensiones haciendo clic en el ícono de extensiones a la izquierda: ![ícono de extensiones](../img/extensions_icon.png) (atajo `Ctrl/Cmd+Shift+X` si está ejecutando VS Code localmente)
 3. Busque "Nextflow"
 4. Instale la extensión oficial de Nextflow
 
@@ -307,7 +308,7 @@ La navegación eficiente es crucial cuando se trabaja con workflows complejos qu
     }
     ```
 
-### 4.1. Ir a la definición
+### 4.1. Ir a la Definición
 
 Si pasa el cursor sobre el nombre de un proceso como `FASTQC`, verá una ventana emergente con la interfaz del módulo (entradas y salidas):
 
@@ -332,9 +333,9 @@ Ahora exploremos la navegación en un workflow más complejo usando `complex_wor
 5. Navegue hacia atrás nuevamente
 6. Navegue al proceso `TRIM_GALORE` en el bloque del workflow. Este está definido en línea, por lo que no lo llevará a un archivo separado, pero aún le mostrará la definición del proceso y podrá navegar de vuelta a donde estaba.
 
-### 4.2. Navegación de símbolos
+### 4.2. Navegación de Símbolos
 
-Con `complex_workflow.nf` aún abierto, puede obtener una descripción general de todos los símbolos en el archivo escribiendo `@` en la barra de búsqueda en la parte superior de VSCode (el atajo de teclado es `Ctrl/Cmd+Shift+O`, pero puede que no funcione en Codespaces). Esto abre el panel de navegación de símbolos, que lista todos los símbolos en el archivo actual:
+Con `complex_workflow.nf` aún abierto, puede obtener una descripción general de todos los símbolos en el archivo escribiendo `@` en la barra de búsqueda en la parte superior de VS Code (el atajo de teclado es `Ctrl/Cmd+Shift+O`, pero puede que no funcione en Codespaces). Esto abre el panel de navegación de símbolos, que lista todos los símbolos en el archivo actual:
 
 ![Navegación de símbolos](../img/symbols.png)
 
@@ -346,7 +347,7 @@ Esto muestra:
 
 Comience a escribir para filtrar los resultados.
 
-### 4.3. Buscar todas las referencias
+### 4.3. Buscar Todas las Referencias
 
 Comprender dónde se usa un proceso o variable en toda su base de código puede ser muy útil. Por ejemplo, si desea encontrar todas las referencias al proceso `FASTQC`, comience navegando a su definición. Puede hacerlo abriendo `modules/fastqc.nf` directamente, o usando la característica de navegación rápida de VS Code con `Ctrl/Cmd+clic` como hicimos anteriormente. Una vez en la definición del proceso, haga clic derecho en el nombre del proceso `FASTQC` y seleccione "Find All References" del menú contextual para ver todas las instancias donde se usa.
 
@@ -354,7 +355,7 @@ Comprender dónde se usa un proceso o variable en toda su base de código puede 
 
 Esta característica muestra todas las instancias donde se hace referencia a `FASTQC` dentro de su espacio de trabajo, incluyendo su uso en los dos workflows distintos. Esta información es crucial para evaluar el impacto potencial de las modificaciones al proceso `FASTQC`.
 
-### 4.4. Panel de esquema
+### 4.4. Panel de Esquema
 
 El panel de Esquema, ubicado en la barra lateral del Explorador (haga clic en ![ícono del Explorador](../img/files_icon.png)), proporciona una descripción general conveniente de todos los símbolos en su archivo actual. Esta característica le permite navegar y gestionar rápidamente la estructura de su código mostrando funciones, variables y otros elementos clave en una vista jerárquica.
 
@@ -548,7 +549,7 @@ Si su proyecto es un repositorio git (como este), VS Code muestra:
 - Vistas de diferencias en línea
 - Capacidades de confirmación y envío
 
-Abra el panel de Control de código fuente usando el botón de control de código fuente (![ícono de control de código fuente](../img/source_control_icon.png)) (`Ctrl+Shift+G` o `Cmd+Shift+G` si está trabajando con VSCode localmente) para ver los cambios de git y confirmar directamente en el editor.
+Abra el panel de Control de código fuente usando el botón de control de código fuente (![Ícono de control de código fuente](../img/source_control_icon.png)) (`Ctrl+Shift+G` o `Cmd+Shift+G` si está trabajando con VS Code localmente) para ver los cambios de git y confirmar directamente en el editor.
 
 ![Panel de control de código fuente](../img/source_control.png)
 

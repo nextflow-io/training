@@ -20,7 +20,7 @@ Build with nf-core 교육 과정의 다섯 번째 파트에서는 nf-schema 플�
     다음 명령을 실행하여 성공적으로 실행되는지 테스트할 수 있습니다:
 
     ```bash
-    nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+    nextflow run . --outdir core-hello-results -profile test,docker
     ```
 
 ---
@@ -84,7 +84,7 @@ nf-schema는 더 이상 사용되지 않는 nf-validation 플러그인의 후속
 
     ```groovy
     plugins {
-        id 'nf-schema@2.1.1'
+        id 'nf-schema@2.7.2'
     }
     ```
 
@@ -142,23 +142,40 @@ graph LR
 
 파이프라인에 매개변수 검증을 추가하는 것부터 시작합니다. 이는 `--input`, `--outdir`, `--batch`와 같은 명령줄 플래그를 검증합니다.
 
-### 1.1. 입력 파일 검증을 건너뛰도록 검증 구성
+### 1.1. 검증 활성화 및 입력 파일 검증 건너뛰기
 
 nf-core 파이프라인 템플릿은 이미 nf-schema가 설치되고 구성되어 제공됩니다:
 
 - nf-schema 플러그인은 `nextflow.config`의 `plugins{}` 블록을 통해 설치됩니다
-- 매개변수 검증은 `params.validate_params = true`를 통해 기본적으로 활성화됩니다
+- 매개변수 검증은 `params.validate_params`로 제어됩니다
 - 검증은 파이프라인 초기화 중에 `UTILS_NFSCHEMA_PLUGIN` 서브워크플로우에 의해 수행됩니다
 
-검증 동작은 `nextflow.config`의 `validation{}` 범위를 통해 제어됩니다.
+파트 3과 4에서는 스키마를 구성하기 전에 파이프라인을 실행할 수 있도록 `validate_params = false`로 설정했습니다.
+이제 검증을 추가할 준비가 되었으므로, 첫 번째 단계는 이를 활성화하는 것입니다.
 
-매개변수 검증을 먼저 작업할 것이고(이 섹션) 섹션 2까지 입력 데이터 스키마를 구성하지 않을 것이므로, 일시적으로 nf-schema에게 `input` 매개변수의 파일 내용 검증을 건너뛰도록 지시해야 합니다.
-
-`nextflow.config`를 열고 `validation` 블록을 찾으십시오(247줄 근처). 입력 파일 검증을 건너뛰기 위해 `ignoreParams`를 추가하십시오:
+`nextflow.config`를 열고 `validate_params` 매개변수를 찾으십시오(37줄 근처). 값을 `true`로 설정하십시오:
 
 === "후"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="247"
+    ```groovy title="nextflow.config" hl_lines="1" linenums="37"
+    validate_params            = true
+    ```
+
+=== "전"
+
+    ```groovy title="nextflow.config" hl_lines="1" linenums="37"
+    validate_params            = false
+    ```
+
+검증 동작 자체는 `nextflow.config`의 `validation{}` 범위를 통해 제어됩니다.
+
+매개변수 검증을 먼저 작업할 것이고(이 섹션) 섹션 2까지 입력 데이터 스키마를 구성하지 않을 것이므로, 일시적으로 nf-schema에게 `input` 매개변수의 파일 내용 검증을 건너뛰도록 지시해야 합니다.
+
+`validation` 블록을 찾으십시오(252줄 근처). 입력 파일 검증을 건너뛰기 위해 `ignoreParams`를 추가하십시오:
+
+=== "후"
+
+    ```groovy title="nextflow.config" hl_lines="3" linenums="252"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
@@ -168,7 +185,7 @@ nf-core 파이프라인 템플릿은 이미 nf-schema가 설치되고 구성되�
 
 === "전"
 
-    ```groovy title="nextflow.config" linenums="247"
+    ```groovy title="nextflow.config" linenums="252"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
@@ -181,7 +198,7 @@ nf-core 파이프라인 템플릿은 이미 nf-schema가 설치되고 구성되�
 - **`ignoreParams`**: `input` 매개변수의 파일 내용 검증 건너뛰기 (일시적; 섹션 2에서 다시 활성화할 것임)
 - **`monochromeLogs`**: `true`로 설정되면 검증 메시지의 색상 출력 비활성화 (`params.monochrome_logs`로 제어됨)
 
-!!! note "input 매개변수를 무시하는 이유는 무엇입니까?"
+!!! info "input 매개변수를 무시하는 이유는 무엇입니까?"
 
     `nextflow_schema.json`의 `input` 매개변수는 `"schema": "assets/schema_input.json"`을 가지고 있어 nf-schema에게 해당 스키마에 대해 입력 CSV 파일의 *내용*을 검증하도록 지시합니다.
     아직 해당 스키마를 구성하지 않았으므로 일시적으로 이 검증을 무시합니다.
@@ -263,7 +280,7 @@ nf-core pipelines schema build
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 3.5.2 - https://nf-co.re
+    nf-core/tools version 4.0.2 - https://nf-co.re
 
 INFO     [✓] Default parameters match schema validation
 INFO     [✓] Pipeline schema looks valid (found 17 params)
@@ -310,32 +327,32 @@ grep -A 25 '"input_output_options"' nextflow_schema.json
 ```
 
 ```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8" hl_lines="19-23"
-    "input_output_options": {
-      "title": "Input/output options",
-      "type": "object",
-      "fa_icon": "fas fa-terminal",
-      "description": "Define where the pipeline should find input data and save output data.",
-      "required": ["input", "outdir", "batch"],
-      "properties": {
-        "input": {
-          "type": "string",
-          "format": "file-path",
-          "exists": true,
-          "schema": "assets/schema_input.json",
-          "mimetype": "text/csv",
-          "pattern": "^\\S+\\.csv$",
-          "description": "Path to comma-separated file containing information about the samples in the experiment.",
-          "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.",
-          "fa_icon": "fas fa-file-csv"
-        },
-        "batch": {
-          "type": "string",
-          "description": "Name for this batch of greetings",
-          "fa_icon": "fas fa-layer-group"
-        },
+        "input_output_options": {
+            "title": "Input/output options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Define where the pipeline should find input data and save output data.",
+            "required": ["input", "outdir", "batch"],
+            "properties": {
+                "input": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "schema": "assets/schema_input.json",
+                    "mimetype": "text/csv",
+                    "pattern": "^\\S+\\.csv$",
+                    "description": "Path to comma-separated file containing information about the samples in the experiment.",
+                    "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.",
+                    "fa_icon": "fas fa-file-csv"
+                },
+                "batch": {
+                    "type": "string",
+                    "description": "Name for this batch of greetings",
+                    "fa_icon": "fas fa-layer-group"
+                },
 ```
 
-`batch` 매개변수가 스키마에 추가되었고 "required" 필드가 이제 `["input", "outdir", "batch"]`를 표시하는 것을 확인할 수 있습니다.
+`batch` 매개변수가 스키마에 추가되었고 `required` 필드가 이제 `["input", "outdir", "batch"]`를 표시하는 것을 확인할 수 있습니다.
 
 ### 1.5. 매개변수 검증 테스트
 
@@ -352,7 +369,7 @@ nextflow run . --outdir test-results -profile docker
     ```console
     ERROR ~ Validation of pipeline parameters failed!
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     The following invalid input values have been detected:
 
     * Missing required parameter(s): input, batch
@@ -369,15 +386,15 @@ nextflow run . --input assets/greetings.csv --outdir results --batch my-batch -p
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [peaceful_wozniak] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [peaceful_wozniak] revision: b9e9b3b8de
 
     executor >  local (8)
-    [de/a1b2c3] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
-    [4f/d5e6f7] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-    [8a/b9c0d1] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
-    [e2/f3a4b5] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔
+    [de/a1b2c3] CORE_HELLO:HELLO:sayHello (3)                | 3 of 3 ✔
+    [4f/d5e6f7] CORE_HELLO:HELLO:convertToUpper (3)          | 3 of 3 ✔
+    [8a/b9c0d1] CORE_HELLO:HELLO:FIND_CONCATENATE (my-batch) | 1 of 1 ✔
+    [e2/f3a4b5] CORE_HELLO:HELLO:COWPY (my-batch)            | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
@@ -640,7 +657,7 @@ include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipelin
 
 === "후"
 
-    ```groovy title="nextflow.config" linenums="247"
+    ```groovy title="nextflow.config" linenums="252"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
@@ -649,7 +666,7 @@ include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipelin
 
 === "전"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="247"
+    ```groovy title="nextflow.config" hl_lines="3" linenums="252"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
@@ -666,7 +683,7 @@ include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipelin
 #### 2.7.1. 유효한 입력으로 테스트
 
 먼저 유효한 입력으로 파이프라인이 성공적으로 실행되는지 확인하십시오.
-검증이 작동하므로 더 이상 `--validate_params false`가 필요하지 않습니다!
+`validate_params = true`로 설정되고 입력 스키마가 준비된 상태에서, 이제 매개변수 검증과 입력 데이터 검증이 모두 실제로 실행됩니다.
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker
@@ -734,9 +751,9 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
 ??? failure "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [trusting_ochoa] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [trusting_ochoa] revision: b9e9b3b8de
 
     Input/output options
       input              : assets/invalid_greetings.csv

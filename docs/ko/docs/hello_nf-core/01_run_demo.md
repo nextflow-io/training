@@ -45,9 +45,10 @@ nf-core 프로젝트에서 코드 구조와 도구 작동을 시연하기 위한
 
 ![파이프라인 지하철 노선도](./img/nf-core-demo-subway-cropped.png)
 
-1. Read QC (FASTQC)
-2. Adapter and quality trimming (SEQTK_TRIM)
-3. Present QC for raw reads (MULTIQC)
+1. Read QC ([FASTQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
+2. Adapter and quality trimming ([SEQTK_TRIM](https://github.com/lh3/seqtk))
+3. Present QC for raw reads ([MULTIQC](http://multiqc.info/))
+4. Generate a lighthearted text message from a cow ([COWPY](https://github.com/jeffbuttars/cowpy))
 
 #### 1.1.2. 명령줄 예제
 
@@ -82,7 +83,7 @@ nextflow pull nf-core/demo
 
     ```console
     Checking nf-core/demo ...
-    downloaded from https://github.com/nf-core/demo.git - revision: 04060b4644 [master]
+    downloaded from https://github.com/nf-core/demo.git - revision: 32893afef8 [master]
     ```
 
 Nextflow는 파이프라인 코드를 `pull`하여 전체 저장소를 로컬 드라이브에 다운로드합니다.
@@ -106,40 +107,73 @@ nextflow list
 
 다른 파이프라인을 몇 개 더 pull하여 여러 개가 있을 때 어떻게 나열되는지 확인해볼 수 있습니다.
 
-#### 1.2.3. `$NXF_HOME/assets/`에서 파이프라인 찾기
+#### 1.2.3. 파이프라인이 다운로드된 위치 찾기
 
 파일들이 현재 작업 디렉토리에 없다는 것을 알 수 있습니다.
-기본적으로 Nextflow는 `$NXF_HOME/assets`에 저장합니다.
+기본적으로 Nextflow는 pull한 파이프라인을 `$NXF_HOME/assets`에 저장합니다.
+
+특정 파이프라인의 위치를 확인하려면 Nextflow에 직접 물어보십시오:
 
 ```bash
-tree -L 2 $NXF_HOME/assets/
+nextflow info nf-core/demo
 ```
 
-```console title="Directory contents"
-/workspaces/.nextflow/assets/
-└── nf-core
-    └── demo
+??? success "명령 출력"
 
-2 directories, 0 files
-```
+    ```console
+    project name: nf-core/demo
+    repository  : https://github.com/nf-core/demo
+    local path  : /workspaces/.nextflow/assets/.repos/nf-core/demo
+    main script : main.nf
+    description : An nf-core demo pipeline
+    revisions   :
+      TEMPLATE
+      bumper
+      dev
+      fix-nxfversion
+      manually-merge-3_0_2
+    > master (default)
+      nf-core-template-merge-2.13.2.dev0
+      nf-core-template-merge-2.14.0
+      nf-core-template-merge-2.14.1
+      nf-core-template-merge-3.0.0
+      nf-core-template-merge-3.0.1
+      nf-core-template-merge-3.0.2
+      nf-core-template-merge-3.1.0
+      nf-core-template-merge-3.1.2
+      nf-core-template-merge-3.2.0
+      nf-core-template-merge-3.2.1
+      nf-core-template-merge-3.3.1
+      nf-core-template-merge-3.3.2
+      nf-core-template-merge-4.0.0
+      1.0.0 [t]
+      1.0.1 [t]
+      1.0.2 [t]
+      1.1.0 [t]
+    > 1.2.0 [t]
+    ```
 
-!!! note "참고"
+!!! info "정보"
 
     교육 환경을 사용하지 않는 경우 시스템에서 전체 경로가 다를 수 있습니다.
 
 Nextflow는 이러한 파이프라인을 직접 상호작용하는 코드가 아닌 라이브러리처럼 사용해야 한다는 원칙에 따라 다운로드된 소스 코드를 의도적으로 '방해가 되지 않는' 위치에 보관합니다.
 
+내부적으로 Nextflow는 pull한 각 파이프라인을 `$NXF_HOME/assets/.repos/` 아래에 git 저장소로 저장하고, 각 리비전의 코드를 `clones/<commit>/` 하위 디렉토리에 체크아웃합니다.
+`.repos`는 숨겨진 디렉토리이므로 `tree -L 2 $NXF_HOME/assets/`를 실행하면 비어 있는 것처럼 보입니다.
+
 #### 1.2.4. 소스 코드에 쉽게 접근하기 위한 심볼릭 링크 만들기
 
 코드를 자세히 살펴보지는 않겠지만, 전체적인 구성이 어떻게 되어 있는지 간략히 확인해보겠습니다.
 
-파이프라인 소스 코드를 더 쉽게 탐색할 수 있도록 assets 디렉토리에 대한 심볼릭 링크를 만드십시오:
+파이프라인 소스 코드를 더 쉽게 탐색할 수 있도록 체크아웃된 파이프라인 사본을 가리키는 심볼릭 링크를 만드십시오:
 
 ```bash
-ln -s $NXF_HOME/assets pipelines
+mkdir -p pipelines/nf-core
+ln -s "$(echo $NXF_HOME/assets/.repos/nf-core/demo/clones/*/)" pipelines/nf-core/demo
 ```
 
-이렇게 하면 `tree -L 2 pipelines`로 코드를 탐색하거나 파일을 직접 열 수 있는 바로가기가 만들어집니다.
+이렇게 하면 `tree -L 2 pipelines/nf-core/demo`로 코드를 탐색하거나 파일을 직접 열 수 있는 바로가기가 만들어집니다.
 
 #### 1.2.5. 코드 구성 개요
 
@@ -172,6 +206,8 @@ tree -L 1 pipelines/nf-core/demo
     ├── tests
     ├── tower.yml
     └── workflows
+
+    7 directories, 12 files
     ```
 
 보시다시피 많은 내용이 있지만, 대부분은 신경 쓰지 않아도 됩니다.
@@ -211,7 +247,7 @@ tree -L 1 pipelines/nf-core/demo
 이것은 [nf-core/test-datasets](https://github.com/nf-core/test-datasets) 저장소에서 호스팅되는 작은 테스트 데이터셋을 사용하여 파이프라인을 실행하기 위한 최소한의 설정 모음입니다.
 작은 규모로 파이프라인을 빠르게 사용해볼 수 있는 좋은 방법입니다.
 
-!!! note "참고"
+!!! tip "팁"
 
     Nextflow의 configuration profile 시스템을 사용하면 다양한 컨테이너 엔진이나 실행 환경 간에 쉽게 전환할 수 있습니다.
     자세한 내용은 [Hello Nextflow Part 6: Configuration](../hello_nextflow/06_hello_config.md)을 참조하십시오.
@@ -220,10 +256,10 @@ tree -L 1 pipelines/nf-core/demo
 
 파이프라인을 실행하기 전에 파이프라인의 test 프로파일이 무엇을 지정하는지 확인하는 것이 좋습니다.
 `nf-core/demo`의 `test` 프로파일은 설정 파일 `conf/test.config`에 있습니다.
-`nextflow pull`로 다운로드한 파이프라인 소스 내에서 로컬로 찾을 수 있습니다:
+섹션 1.2.4에서 만든 `pipelines` 심볼릭 링크를 통해 `nextflow pull`로 다운로드한 파이프라인 소스 내에서 로컬로 찾을 수 있습니다:
 
 ```bash
-code $NXF_HOME/assets/nf-core/demo/conf/test.config
+code pipelines/nf-core/demo/conf/test.config
 ```
 
 해당 파일의 내용은 다음과 같습니다:
@@ -245,7 +281,7 @@ process {
     resourceLimits = [
         cpus: 2,
         memory: '4.GB',
-        time: '1.h'
+        time: '1.h',
     ]
 }
 
@@ -254,8 +290,7 @@ params {
     config_profile_description = 'Minimal test dataset to check pipeline function'
 
     // 입력 데이터
-    input  = 'https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
-
+    input                      = 'https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
 }
 ```
 
@@ -287,16 +322,16 @@ SAMPLE3_SE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/il
 ```
 
 이것은 샘플시트라고 하며, nf-core 파이프라인에 대한 가장 일반적인 입력 형식입니다.
-
-!!! note "참고"
-
-    데이터 형식과 유형에 익숙하지 않더라도 걱정하지 마십시오. 이후 내용에 중요하지 않습니다.
+데이터 형식과 유형에 익숙하지 않더라도 걱정하지 마십시오. 이후 내용에 중요하지 않습니다.
 
 따라서 파이프라인을 사용해보는 데 필요한 모든 것이 있음을 확인했습니다.
 
 ### 2.2. 파이프라인 실행하기
 
-컨테이너 시스템으로 Docker를, 출력 디렉토리로 `demo-results`를 사용하기로 결정했다면, 테스트 명령을 실행할 준비가 된 것입니다:
+위에서 언급한 것처럼, 예제 테스트 명령을 거의 그대로 사용할 수 있습니다. 사용할 소프트웨어 패키징 시스템과 출력 디렉토리 이름만 지정하면 됩니다.
+여기서는 컨테이너 시스템으로 Docker를, 출력 디렉토리로 `demo-results`를 사용하겠습니다.
+
+테스트 명령을 실행합니다:
 
 ```bash
 nextflow run nf-core/demo -profile docker,test --outdir demo-results
@@ -305,9 +340,10 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `https://github.com/nf-core/demo` [magical_pauling] DSL2 - revision: 45904cb9d1 [master]
+    Downloading plugin nf-schema@2.7.2
+    Launching `https://github.com/nf-core/demo` [cranky_curry] revision: 32893afef8 [master]
 
 
     ------------------------------------------------------
@@ -316,8 +352,9 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
       |\ | |__  __ /  ` /  \ |__) |__         }  {
       | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                             `._,._,'
-      nf-core/demo 1.1.0
+      nf-core/demo 1.2.0
     ------------------------------------------------------
+
     Input/output options
       input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
       outdir                    : demo-results
@@ -327,21 +364,22 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
       config_profile_description: Minimal test dataset to check pipeline function
 
     Generic options
-      trace_report_suffix       : 2025-11-21_04-57-41
+      trace_report_suffix       : 2026-07-03_21-31-35
 
     Core Nextflow options
       revision                  : master
-      runName                   : magical_pauling
+      runName                   : cranky_curry
       containerEngine           : docker
       launchDir                 : /workspaces/training/hello-nf-core
       workDir                   : /workspaces/training/hello-nf-core/work
-      projectDir                : /workspaces/.nextflow/assets/nf-core/demo
+      projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2
       userName                  : root
       profile                   : docker,test
-      configFiles               : /workspaces/.nextflow/assets/nf-core/demo/nextflow.config
+      configFiles               : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/nextflow.config
 
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
+
     * The pipeline
         https://doi.org/10.5281/zenodo.12192442
 
@@ -351,11 +389,11 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
     * Software dependencies
         https://github.com/nf-core/demo/blob/master/CITATIONS.md
 
-
-    executor >  local (7)
-    [ff/a6976b] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
-    [39/731ab7] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
-    [7c/78d96e] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+    executor >  local (8)
+    [ca/5b0f3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     [100%] 3 of 3 ✔
+    [b7/cb6812] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) [100%] 3 of 3 ✔
+    [ff/6ebd98] NFCORE_DEMO:DEMO:COWPY                   [100%] 1 of 1 ✔
+    [09/bbd1b4] NFCORE_DEMO:DEMO:MULTIQC (demo)          [100%] 1 of 1 ✔
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
@@ -364,14 +402,14 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
 기본 Nextflow 파이프라인을 실행할 때보다 콘솔 출력이 훨씬 많다는 것을 알 수 있습니다.
 파이프라인의 버전, 입력 및 출력, 그리고 몇 가지 설정 요소의 요약이 포함된 헤더가 있습니다.
 
-!!! note "참고"
+!!! info "정보"
 
     출력에는 다른 타임스탬프, 실행 이름 및 파일 경로가 표시되지만 전체 구조와 프로세스 실행은 유사해야 합니다.
 
 출력 상단 근처의 다음 줄을 확인하십시오:
 
 ```console
-Launching `https://github.com/nf-core/demo` [magical_pauling] DSL2 - revision: 45904cb9d1 [master]
+Launching `https://github.com/nf-core/demo` [cranky_curry] revision: 32893afef8 [master]
 ```
 
 이 줄은 어떤 리비전의 파이프라인이 사용되었는지 알려줍니다.
@@ -379,7 +417,7 @@ Launching `https://github.com/nf-core/demo` [magical_pauling] DSL2 - revision: 4
 재현 가능한 실행을 위해서는 `-r` 플래그를 사용하여 특정 릴리스를 지정해야 합니다:
 
 ```bash
-nextflow run nf-core/demo -r 1.1.0 -profile docker,test --outdir demo-results
+nextflow run nf-core/demo -r 1.2.0 -profile docker,test --outdir demo-results
 ```
 
 이렇게 하면 새로운 커밋이나 릴리스에 관계없이 항상 동일한 파이프라인 코드가 사용됩니다.
@@ -388,14 +426,15 @@ nextflow run nf-core/demo -r 1.1.0 -profile docker,test --outdir demo-results
 실행 출력으로 이동하여 어떤 프로세스가 실행되었는지 알려주는 줄을 살펴보겠습니다:
 
 ```console
-executor >  local (7)
-[ff/a6976b] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
-[39/731ab7] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
-[7c/78d96e] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+executor >  local (8)
+[ca/5b0f3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     [100%] 3 of 3 ✔
+[b7/cb6812] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) [100%] 3 of 3 ✔
+[ff/6ebd98] NFCORE_DEMO:DEMO:COWPY                   [100%] 1 of 1 ✔
+[09/bbd1b4] NFCORE_DEMO:DEMO:MULTIQC (demo)          [100%] 1 of 1 ✔
 -[nf-core/demo] Pipeline completed successfully-
 ```
 
-이것은 nf-core 웹사이트의 파이프라인 문서 페이지에 표시된 세 가지 도구에 해당하는 세 개의 프로세스가 실행되었음을 알려줍니다: FASTQC, SEQTK_TRIM 및 MULTIQC.
+이것은 nf-core 웹사이트의 파이프라인 문서 페이지에 표시된 네 가지 도구에 해당하는 네 개의 프로세스가 실행되었음을 알려줍니다: `FASTQC`, `SEQTK_TRIM`, `MULTIQC`, `COWPY`.
 
 여기에 표시된 `NFCORE_DEMO:DEMO:MULTIQC`와 같은 전체 프로세스 이름은 Hello Nextflow 입문 자료에서 본 것보다 깁니다.
 여기에는 상위 워크플로우의 이름이 포함되어 있으며 파이프라인 코드의 모듈성을 반영합니다.
@@ -413,6 +452,8 @@ tree -L 2 demo-results
 
     ```console
     demo-results
+    ├── cowpy
+    │   └── cowpy.txt
     ├── fastqc
     │   ├── SAMPLE1_PE
     │   ├── SAMPLE2_PE
@@ -423,19 +464,20 @@ tree -L 2 demo-results
     │   └── SAMPLE3_SE
     ├── multiqc
     │   ├── multiqc_data
-    │   ├── multiqc_plots
     │   └── multiqc_report.html
     └── pipeline_info
-        ├── execution_report_2025-11-21_04-57-41.html
-        ├── execution_timeline_2025-11-21_04-57-41.html
-        ├── execution_trace_2025-11-21_04-57-41.txt
+        ├── execution_report_2026-07-03_21-31-35.html
+        ├── execution_timeline_2026-07-03_21-31-35.html
+        ├── execution_trace_2026-07-03_21-31-35.txt
         ├── nf_core_demo_software_mqc_versions.yml
-        ├── params_2025-11-21_04-57-46.json
-        └── pipeline_dag_2025-11-21_04-57-41.html
+        ├── params_2026-07-03_21-31-43.json
+        └── pipeline_dag_2026-07-03_21-31-35.html
+
+    12 directories, 8 files
     ```
 
 많아 보일 수 있습니다.
-`nf-core/demo` 파이프라인의 출력에 대해 자세히 알아보려면 [문서 페이지](https://nf-co.re/demo/1.1.0/docs/output/)를 확인하십시오.
+`nf-core/demo` 파이프라인의 출력에 대해 자세히 알아보려면 [문서 페이지](https://nf-co.re/demo/1.2.0/docs/output/)를 확인하십시오.
 
 현 단계에서 중요한 것은 결과가 모듈별로 구성되어 있고, 파이프라인 실행에 대한 다양한 타임스탬프가 있는 보고서가 포함된 `pipeline_info`라는 디렉토리가 추가로 있다는 것입니다.
 
@@ -443,7 +485,7 @@ tree -L 2 demo-results
 
 ![실행 타임라인 보고서](./img/execution_timeline.png)
 
-!!! note "참고"
+!!! info "정보"
 
     여기서 작업이 병렬로 실행되지 않은 이유는 Github Codespaces의 최소 사양 머신에서 실행하고 있기 때문입니다.
     병렬 실행을 보려면 codespace의 CPU 할당과 테스트 설정의 리소스 제한을 늘려보십시오.
@@ -491,42 +533,44 @@ nextflow run nf-core/demo --help
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `https://github.com/nf-core/demo` [run_name] DSL2 - revision: 45904cb9d1 [master]
+    Launching `https://github.com/nf-core/demo` [adoring_meucci] revision: 32893afef8 [master]
 
-    ----------------------------------------------------
+
+    ------------------------------------------------------
                                             ,--./,-.
             ___     __   __   __   ___     /,-._.--~'
       |\ | |__  __ /  ` /  \ |__) |__         }  {
       | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                             `._,._,'
-      nf-core/demo 1.1.0
-    ----------------------------------------------------
+      nf-core/demo 1.2.0
+    ------------------------------------------------------
     Typical pipeline command:
 
       nextflow run nf-core/demo -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>
 
     Input/output options
-      --input                       [string]           Path to a metadata file containing information about the samples in the experiment.
-      --outdir                      [string]           The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.
-      --email                       [string]           Email address for completion summary.
-      --multiqc_title               [string]           MultiQC report title. Printed as page header, used for filename if not otherwise specified.
+      --input                       [string] Path to a metadata file containing information about the samples in the experiment.
+      --outdir                      [string] The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.
+
+      --email                       [string] Email address for completion summary.
+      --multiqc_title               [string] MultiQC report title. Printed as page header, used for filename if not otherwise specified.
 
     Reference genome options
-      --genome                      [string]           Name of iGenomes reference.
-      --fasta                       [string]           Path to FASTA genome file.
+      --genome                      [string] Name of iGenomes reference.
+      --fasta                       [string] Path to FASTA genome file.
 
     Process skipping options
-      --skip_trim                   [boolean]          Skip trimming fastq files with seqtk
+      --skip_trim                   [boolean] Skip trimming fastq files with seqtk
 
     Generic options
-      --multiqc_methods_description [string]           Custom MultiQC yaml file containing HTML including a methods description.
-      --help                        [boolean, string]  Display the help message.
-      --help_full                   [boolean]          Display the full detailed help message.
-      --show_hidden                 [boolean]          Display hidden parameters in the help message (only works when --help or --help_full are provided).
-     !! Hiding 20 param(s), use the `--show_hidden` parameter to show them !!
-    ----------------------------------------------------
+      --multiqc_methods_description [string]          Custom MultiQC yaml file containing HTML including a methods description.
+      --help                        [boolean, string] Display the help message.
+      --help_full                   [boolean]         Display the full detailed help message.
+      --show_hidden                 [boolean]         Display hidden parameters in the help message (only works when --help or --help_full are provided).
+    !! Hiding 19 param(s), use the `--showHidden` parameter to show them !!
+    ------------------------------------------------------
 
     * The pipeline
         https://doi.org/10.5281/zenodo.12192442
@@ -552,24 +596,98 @@ nextflow run nf-core/demo --help
 [Hello Config](../hello_nextflow/06_hello_config.md)에서 다룬 것처럼, 명령줄에서 `--param_name`으로 매개변수 값을 설정하거나, YAML 파일에 매개변수 집합을 모아 `-params-file`로 전달할 수 있습니다.
 두 방법 모두 nf-core 파이프라인에서 동일하게 작동합니다.
 
-예를 들어, 트리밍 단계를 건너뛰려면:
+예를 들어, 트리밍 단계를 건너뛰려면 boolean 매개변수 `skip_trim`을 `true`로 설정해야 합니다.
+작업 디렉토리에 해당 값이 이미 설정된 `my_params.yml` 파일이 제공되어 있습니다:
+
+```yaml title="my_params.yml"
+skip_trim: true
+```
+
+`-params-file`로 전달합니다:
 
 ```bash
-nextflow run nf-core/demo -profile docker,test --outdir demo-results-notrim --skip_trim
+nextflow run nf-core/demo -profile docker,test --outdir demo-results-notrim -params-file my_params.yml
 ```
 
 ??? success "명령 출력"
 
     ```console
-    executor >  local (4)
-    [3f/a82c91] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE) | 3 of 3 ✔
-    [7d/c5e014] NFCORE_DEMO:DEMO:MULTIQC             | 1 of 1 ✔
+     N E X T F L O W   ~  version 26.04.4
+
+    Launching `https://github.com/nf-core/demo` [focused_heisenberg] revision: 32893afef8 [master]
+
+
+    ------------------------------------------------------
+                                            ,--./,-.
+            ___     __   __   __   ___     /,-._.--~'
+      |\ | |__  __ /  ` /  \ |__) |__         }  {
+      | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                            `._,._,'
+      nf-core/demo 1.2.0
+    ------------------------------------------------------
+
+    Input/output options
+      input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
+      outdir                    : demo-results-notrim
+
+    Process skipping options
+      skip_trim                 : true
+
+    Institutional config options
+      config_profile_name       : Test profile
+      config_profile_description: Minimal test dataset to check pipeline function
+
+    Generic options
+      trace_report_suffix       : 2026-07-03_22-08-47
+
+    Core Nextflow options
+      revision                  : master
+      runName                   : focused_heisenberg
+      containerEngine           : docker
+      launchDir                 : /workspaces/training/hello-nf-core
+      workDir                   : /workspaces/training/hello-nf-core/work
+      projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2
+      userName                  : root
+      profile                   : docker,test
+      configFiles               : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/nextflow.config
+
+    !! Only displaying parameters that differ from the pipeline defaults !!
+    ------------------------------------------------------
+
+    * The pipeline
+        https://doi.org/10.5281/zenodo.12192442
+
+    * The nf-core framework
+        https://doi.org/10.1038/s41587-020-0439-x
+
+    * Software dependencies
+        https://github.com/nf-core/demo/blob/master/CITATIONS.md
+
+    executor >  local (5)
+    [7a/f3599e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE) [100%] 3 of 3 ✔
+    [b0/2f0bdc] NFCORE_DEMO:DEMO:COWPY               [100%] 1 of 1 ✔
+    [c3/3c2278] NFCORE_DEMO:DEMO:MULTIQC (demo)      [100%] 1 of 1 ✔
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
 `SEQTK_TRIM` 프로세스가 출력에 더 이상 나타나지 않습니다.
 
-!!! info "정보"
+!!! warning "매개변수 입력에 관한 중요한 제한 사항"
+
+    **명령줄에서 boolean 매개변수 설정하기**
+
+    Nextflow 버전 26.04부터 명령줄에서 제공되는 모든 값은 string으로 처리됩니다.
+    `skip_trim`과 같은 boolean 매개변수의 경우, 플래그 형태(`--skip_trim`)나 `--skip_trim true`로 전달하면 **string** `"true"`로 평가되어 스키마 검증에 실패합니다:
+
+    ```console
+    * --skip_trim (true): Value is [string] but should be [boolean]
+    ```
+
+    boolean 매개변수를 실제 `true`/`false` 값으로 설정하려면 위에서 보여준 것처럼 `-params-file`을 사용하거나 설정 파일에서 설정하십시오.
+    string, integer, 파일 경로 매개변수는 영향을 받지 않으며 명령줄에서 직접 설정할 수 있습니다.
+    이 과정에서는 boolean 매개변수에 대해 이 방식을 일관되게 사용합니다.
+
+    **사용자 정의 설정 파일 사용하기**
 
     `-c`로 전달하는 사용자 정의 설정 파일에서 파이프라인 매개변수를 설정하는 것이 기술적으로는 가능하지만, Nextflow의 설정 우선순위 규칙에 따라 파이프라인 자체의 `nextflow.config`에 이미 설정된 기본값을 재정의하지 못할 수 있습니다.
     명령줄에서 `--param_name`을 사용하거나 `-params-file`을 사용하는 것이 더 안정적입니다. 이 방법들은 항상 우선순위가 높습니다.
@@ -617,13 +735,14 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results --skip_trim
 ```console
 ERROR ~ Validation of pipeline parameters failed!
 
+ -- Check '.nextflow.log' file for details
 The following invalid input values have been detected:
 
 * --skip_trim (yes): Value is [string] but should be [boolean]
 ```
 
 파이프라인은 어떤 프로세스도 실행하기 전에 중단되어, 실패하거나 잘못된 실행을 방지합니다.
-Boolean 매개변수는 값 없이 플래그로 전달하거나(`--skip_trim`), params 파일에서 `true`/`false`로 설정해야 합니다.
+섹션 3.1.2에서 언급한 것처럼, boolean 매개변수는 명령줄에서 전달하는 값이 string으로 처리되므로 params 파일에서 실제 `true`/`false` 값으로 설정해야 합니다.
 
 #### 3.1.4. 입력 검증
 
@@ -637,7 +756,7 @@ Boolean 매개변수는 값 없이 플래그로 전달하거나(`--skip_trim`), 
 `nf-core/demo` 파이프라인은 `sample`, `fastq_1`, `fastq_2` 열이 있는 CSV 파일을 기대합니다.
 이는 예상 구조, 열 유형 및 제약 조건을 지정하는 스키마 파일(`assets/schema_input.json`)에 정의되어 있습니다.
 
-??? abstract "assets/schema_input.json"
+??? abstract "입력에 대한 스키마 파일"
 
     ```json title="assets/schema_input.json"
     {
@@ -678,9 +797,7 @@ Boolean 매개변수는 값 없이 플래그로 전달하거나(`--skip_trim`), 
 스키마는 `sample`과 `fastq_1`이 필수이고 `fastq_2`는 선택 사항임을 지정합니다(페어드 엔드 및 단일 엔드 데이터 모두 지원).
 파일 경로는 존재 여부와 확장자 패턴이 검증됩니다.
 
-##### 3.1.4.1. 잘못된 샘플시트 만들기
-
-누락된 열과 존재하지 않는 파일 경로가 있는 샘플시트를 만드십시오:
+이를 시연하기 위해 작업 디렉토리에 `malformed_samplesheet.csv`라는 잘못된 샘플시트가 제공되어 있습니다:
 
 ```csv title="malformed_samplesheet.csv"
 sample,fastq_2
@@ -688,11 +805,8 @@ SAMPLE1,/not/a/real/file.fastq.gz
 ```
 
 이 샘플시트는 필수 `fastq_1` 열이 없고 `fastq_2`에 존재하지 않는 파일 경로가 있습니다.
-두 문제 모두 다음 단계에서 검증 오류를 발생시킵니다.
 
-##### 3.1.4.2. 잘못된 샘플시트로 데모 파이프라인 실행하기
-
-`malformed_samplesheet.csv`를 입력으로 사용하여 데모 파이프라인을 실행합니다.
+`malformed_samplesheet.csv`를 입력으로 사용하여 데모 파이프라인을 실행합니다:
 
 ```bash
 nextflow run nf-core/demo -profile docker,test --outdir demo-results --input malformed_samplesheet.csv
@@ -701,6 +815,7 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results --input mal
 ```console
 ERROR ~ Validation of pipeline parameters failed!
 
+ -- Check '.nextflow.log' file for details
 The following invalid input values have been detected:
 
 * --input (malformed_samplesheet.csv): Validation of file failed:
@@ -725,14 +840,27 @@ nf-core 파이프라인은 `nextflow.config`와 `conf/` 디렉토리에 기본 �
 무언가를 재정의하기 전에 기본값이 어디에 있는지 파악하는 것이 도움이 됩니다.
 
 섹션 2.1에서 파이프라인 소스 코드가 `$NXF_HOME/assets`에 있다는 것을 이미 확인했습니다.
-사용 가능한 설정 파일을 나열합니다:
+섹션 1.2.4의 `pipelines` 심볼릭 링크를 사용하여 사용 가능한 설정 파일을 나열합니다:
 
 ```bash
-ls $NXF_HOME/assets/nf-core/demo/conf/
+ls pipelines/nf-core/demo/conf/
 ```
 
 ```console
-base.config  igenomes.config  igenomes_ignored.config  modules.config  test.config  test_full.config
+base.config
+containers_conda_lock_files_amd64.config
+containers_conda_lock_files_arm64.config
+containers_docker_amd64.config
+containers_docker_arm64.config
+containers_singularity_https_amd64.config
+containers_singularity_https_arm64.config
+containers_singularity_oras_amd64.config
+containers_singularity_oras_arm64.config
+igenomes.config
+igenomes_ignored.config
+modules.config
+test.config
+test_full.config
 ```
 
 <figure class="excalidraw">
@@ -752,56 +880,18 @@ base.config  igenomes.config  igenomes_ignored.config  modules.config  test.conf
 대신 자체 설정 파일을 만들어 `-c`로 전달하십시오.
 지정한 값이 다른 파일에 설정된 기본값을 재정의합니다.
 
-실제로 이를 수행하는 몇 가지 연습을 진행해보겠습니다.
+실제로 이를 수행해보겠습니다.
 
-#### 3.2.1. 프로세스의 리소스 할당 변경하기
+#### 3.2.1. 프로세스 리소스 및 도구 인자 맞춤화하기
 
-데모 파이프라인은 `base.config`에 정의된 레이블을 사용하여 리소스를 할당합니다.
-예를 들어, `FASTQC`는 6개의 CPU와 36GB 메모리를 할당하는 `process_medium` 레이블을 사용합니다.
+nf-core 모듈은 두 가지 일반적인 설정 재정의를 지원합니다: **리소스 할당** (CPU, 메모리, 시간)과 `ext.args`를 통한 **도구 인자**.
 
-test 프로파일은 `resourceLimits`를 통해 리소스를 제한하지만, 특정 프로세스의 리소스를 재정의할 수도 있습니다.
+많은 명령줄 도구에는 파이프라인 매개변수로 노출될 만큼 일반적으로 사용되지 않는 인자가 있습니다.
+`ext.args` 규칙을 사용하면 설정 파일을 통해 기본 도구에 이러한 인자를 전달할 수 있습니다.
 
-`custom.config` 파일을 만드십시오:
+작업 디렉토리에 제공된 `custom.config` 파일은 두 가지 재정의를 모두 보여줍니다:
 
 ```groovy title="custom.config" linenums="1"
-process {
-    withName: 'FASTQC' {
-        cpus = 2
-        memory = 4.GB
-    }
-}
-```
-
-사용자 정의 설정으로 파이프라인을 실행합니다:
-
-```bash
-nextflow run nf-core/demo -profile docker,test --outdir demo-results-custom -c custom.config
-```
-
-??? success "명령 출력"
-
-    ```console
-    executor >  local (7)
-    [2a/f17b3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
-    [9c/e4d028] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
-    [5b/a93c71] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
-    -[nf-core/demo] Pipeline completed successfully-
-    ```
-
-`-c` 플래그는 파이프라인의 내장 설정 위에 사용자 정의 설정을 추가합니다.
-
-#### 3.2.2. `ext.args`로 도구 인자 값 설정하기
-
-많은 명령줄 도구에는 필수가 아닌 인자가 있어, 매우 일반적으로 사용되지 않는 한 파이프라인 매개변수로 설정되지 않습니다.
-이러한 도구 인자의 경우, nf-core 모듈은 설정 파일을 통해 기본 도구에 인자를 전달하기 위해 `ext.args`라는 Nextflow 규칙을 사용합니다.
-
-예를 들어, `ext.args`를 사용하여 `SEQTK_TRIM` 모듈에 트리밍 인자를 추가해보겠습니다.
-
-##### 3.2.2.1. 사용자 정의 설정 업데이트하기
-
-`custom.config`를 업데이트합니다:
-
-```groovy title="custom.config" linenums="1" hl_lines="6 7 8"
 process {
     withName: 'FASTQC' {
         cpus = 2
@@ -813,64 +903,72 @@ process {
 }
 ```
 
-이렇게 하면 `seqtk trimfq`가 품질 트리밍 외에 각 리드의 시작 부분에서 5개의 염기를 추가로 트리밍합니다.
+첫 번째 블록은 `FASTQC` 리소스 할당을 재정의합니다.
+기본적으로 `FASTQC`는 `base.config`의 `process_medium` 레이블을 사용하여 6개의 CPU와 36GB 메모리를 할당합니다. 여기서는 2개의 CPU와 4GB로 제한합니다.
 
-##### 3.2.2.2. 파이프라인 실행하기
+두 번째 블록은 `ext.args`를 통해 `SEQTK_TRIM`에 추가 인자를 전달합니다.
+`-b 5` 플래그는 `seqtk trimfq`가 품질 트리밍 외에 각 리드의 시작 부분에서 5개의 염기를 추가로 트리밍하도록 합니다.
 
-이 설정으로 파이프라인을 다시 실행하여 효과를 확인합니다:
+이 설정으로 파이프라인을 실행합니다:
 
 ```bash
-nextflow run nf-core/demo -profile docker,test --outdir demo-results-extargs -c custom.config
+nextflow run nf-core/demo -profile docker,test --outdir demo-results-custom -c custom.config
 ```
 
 ??? success "명령 출력"
 
     ```console
-    executor >  local (7)
-    [1e/b7a392] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
-    [ab/cd1234] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
-    [4f/c8d105] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+    executor >  local (8)
+    [95/b32876] NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE)     | 3 of 3 ✔
+    [17/428668] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) | 3 of 3 ✔
+    [cf/85991a] NFCORE_DEMO:DEMO:COWPY                   | 1 of 1 ✔
+    [3c/94a7a0] NFCORE_DEMO:DEMO:MULTIQC (demo)          | 1 of 1 ✔
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
-인자가 적용되었는지 확인하려면, 실행 출력에서 `SEQTK_TRIM` work 디렉토리 해시(예: `work/ab/cd1234...`)를 찾아 내부의 `.command.sh` 파일을 확인하십시오:
+`-c` 플래그는 파이프라인의 내장 설정 위에 사용자 정의 설정을 추가합니다.
+
+`ext.args` 재정의가 적용되었는지 확인하려면, 실행 출력에서 `SEQTK_TRIM` work 디렉토리 해시(예: `work/17/428668...`)를 찾아 내부의 `.command.sh` 파일을 확인하십시오:
 
 ```bash
-cat work/ab/cd1234/.command.sh
+cat work/17/428668/.command.sh
 ```
 
 ??? success "명령 출력"
 
     ```console
-    #!/usr/bin/env bash
+    #!/usr/bin/env bash -e -u -o pipefail
+    printf "%s\n" sample1_R1.fastq.gz sample1_R2.fastq.gz | while read f;
+    do
+        seqtk \
+            trimfq \
+            -b 5 \
+            $f \
+            | gzip --no-name > SAMPLE1_PE_$(basename $f)
+    done
     ...
-    seqtk trimfq -b 5 SAMPLE3_SE.fastq.gz | gzip -c > SAMPLE3_SE.trimmed.fastq.gz
     ```
 
 `seqtk trimfq` 명령에 `-b 5`가 포함되어 있어 `ext.args` 재정의가 적용되었음을 확인할 수 있습니다.
 
-##### 3.2.2.3. 기본값 재정의하기
-
-일부 모듈에는 기본적으로 `ext.args`가 이미 설정되어 있습니다.
-예를 들어, `FASTQC` 모듈은 기본적으로 `ext.args = '--quiet'`로 설정되어 있습니다(`conf/modules.config`에 정의됨).
+`ext.args`에 대해 알아야 할 중요한 사항이 있습니다: 모듈에 이미 기본값이 설정되어 있는 경우, 사용자가 지정한 값이 기존 값에 추가되는 것이 아니라 **완전히 대체**됩니다.
+예를 들어, `FASTQC`는 `conf/modules.config`에 기본적으로 `ext.args = '--quiet'`로 설정되어 있습니다:
 
 ```groovy title="conf/modules.config" linenums="21" hl_lines="2"
     withName: FASTQC {
-        ext.args = '--quiet'
+        ext.args   = '--quiet'
         publishDir = [
             path: { "${params.outdir}/fastqc/${meta.id}" },
             mode: params.publish_dir_mode,
-            pattern: "*.{html,json}"
+            pattern: "*.{html,json}",
         ]
     }
 ```
 
-사용자 정의 설정 파일을 통해 `ext.args` 값을 제공하면, 해당 값이 해당 프로세스에 설정된 기본값을 완전히 대체합니다.
-
-예를 들어, 기본값이 `'--quiet'`이고 `ext.args = '--kmers 8'`로 설정하면 `--quiet` 플래그가 더 이상 적용되지 않습니다.
+`FASTQC`에 `ext.args = '--kmers 8'`로 설정하면 `--quiet` 플래그가 더 이상 적용되지 않습니다.
 두 가지를 모두 유지하려면 `ext.args = '--quiet --kmers 8'`로 설정하십시오.
 
-따라서 `ext.args`로 인자 값을 제공하려는 도구의 기본 설정을 직접 확인할 책임이 있습니다.
+따라서 `ext.args`로 인자 값을 제공하려는 모듈의 기본 설정을 항상 먼저 확인해야 합니다.
 
 ### 핵심 정리
 
@@ -878,4 +976,6 @@ nf-core 파이프라인에서 도움말을 얻는 방법, 매개변수를 설정
 
 ### 다음 단계
 
-잠시 휴식을 취하십시오! 준비가 되었으면 파트 2로 이동하여 처음부터 nf-core 호환 파이프라인을 직접 만들어보겠습니다.
+nf-core 파이프라인 실행만이 목표라면 여기서 마무리해도 됩니다!
+
+nf-core 표준에 따라 직접 파이프라인을 개발하고 싶다면, 잠시 휴식을 취한 후 파트 2로 이동하십시오. nf-core 템플릿 기반 도구를 사용하여 nf-core 호환 파이프라인을 직접 만드는 방법을 배워보겠습니다.

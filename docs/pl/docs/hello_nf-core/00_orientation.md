@@ -22,24 +22,19 @@ Jeśli przechodzisz przez ten kurs samodzielnie, zapoznaj się z [podstawami śr
 
 ### Wymagania dotyczące wersji
 
-To szkolenie jest przeznaczone dla **Nextflow 25.10.2** lub nowszego **z WYŁĄCZONYM parserem składni v2**.
+To szkolenie działa z Nextflow'em 25.10.2 lub nowszym **z parserem składni v2**, który jest domyślny od Nextflow'a 26.04 wzwyż.
+W naszym środowisku szkoleniowym nie musisz nic robić: działa ono z Nextflow'em 26.04.4 i parserem v2. Jeśli korzystasz ze środowiska lokalnego lub niestandardowego, zapoznaj się z [uwagami dotyczącymi wersji](../info/nxf_versions.md).
 
-#### Jeśli korzystasz z naszego środowiska szkoleniowego:
-
-MUSISZ uruchomić następujące polecenie przed dalszym postępowaniem:
-
-```bash
-export NXF_SYNTAX_PARSER=v1
-```
-
-#### Jeśli korzystasz ze środowiska lokalnego lub niestandardowego:
-
-Upewnij się, że używasz prawidłowych ustawień zgodnie z dokumentacją [tutaj](../info/nxf_versions.md).
-
-Szkolenie wymaga dodatkowo **nf-core tools 3.5.2**.
-Jeśli używasz innej wersji narzędzi nf-core, możesz mieć trudności z śledzeniem kursu.
+Szkolenie wymaga dodatkowo **nf-core tools 4.0.2**.
+Jeśli używasz innej wersji narzędzi nf-core, możesz mieć trudności ze śledzeniem kursu.
 
 Możesz sprawdzić, jaka wersja jest zainstalowana w Twoim środowisku, używając polecenia `nf-core --version`.
+
+!!! warning "Zgodność z parserem v2"
+
+    Wiele pipeline'ów nf-core nie obsługuje jeszcze parsera składni v2.
+    Jeśli uruchomisz pipeline nf-core inny niż te używane w tym kursie i napotkasz błędy, może być konieczne przełączenie się na parser v1 poprzez ustawienie `export NXF_SYNTAX_PARSER=v1`.
+    Szczegóły znajdziesz w [uwagach dotyczących wersji](../info/nxf_versions.md).
 
 ## Przygotuj się do pracy
 
@@ -82,7 +77,10 @@ tree . -L 2
 
     ```console
     .
+    ├── custom.config
     ├── greetings.csv
+    ├── malformed_samplesheet.csv
+    ├── my_params.yml
     ├── original-hello
     │   ├── hello.nf
     │   ├── modules
@@ -101,6 +99,12 @@ Używamy takich zwijanych sekcji, aby w zwięzły sposób uwzględnić oczekiwan
 
 - **Plik `greetings.csv`** to plik CSV zawierający minimalne dane kolumnowe, których używamy do celów testowych.
 
+- **Plik `custom.config`** to przykładowy plik konfiguracyjny Nextflow'a używany w Części 1 do demonstracji nadpisywania zasobów procesów oraz `ext.args`.
+
+- **Plik `malformed_samplesheet.csv`** to celowo uszkodzony samplesheet używany w Części 1 do demonstracji walidacji danych wejściowych.
+
+- **Plik `my_params.yml`** to przykładowy plik parametrów używany w Części 1 do demonstracji przekazywania parametrów boolean do pipeline'u.
+
 - **Katalog `original-hello`** zawiera kopię kodu źródłowego powstałego w wyniku przejścia przez kompletną serię szkoleń Hello Nextflow (z włączonym Dockerem).
 
 - **Katalog `solutions`** zawiera ukończone skrypty workflow'ów, które powstają w wyniku każdego kroku kursu.
@@ -112,7 +116,7 @@ Myślisz, że jesteś gotowy/gotowa do rozpoczęcia?
 
 - [ ] Rozumiem cel tego kursu i jego wymagania wstępne
 - [ ] Moje środowisko jest uruchomione i działa
-- [ ] Upewniłem/upewniłam się, że parser składni jest ustawiony na **v1**
+- [ ] Używam nf-core tools 4.0.2 (sprawdź poleceniem `nf-core --version`)
 - [ ] Ustawiłem/ustawiłam odpowiednio mój katalog roboczy
 
 Jeśli możesz zaznaczyć wszystkie pola, możesz zaczynać.

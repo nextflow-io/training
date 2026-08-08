@@ -131,15 +131,16 @@ Ponieważ używamy `-resume`, Nextflow sprawdzi, czy coś się zmieniło od osta
 Jeśli parametry, wejścia i kod są takie same, wszystkie zadania będą pobrane z cache'u i pipeline zakończy się niemal natychmiast.
 
 ```console title="Output (excerpt)"
-executor >  local (12)
+executor >  local (1)
+[43/e03702] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2, cached: 2 ✔
+[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2, cached: 2 ✔
 ...
-[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔
-[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)               [100%] 2 of 2, cached: 2 ✔
-...
+[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3, cached: 3 ✔
+[ef/d7b294] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
 -[nf-core/molkart] Pipeline completed successfully-
 ```
 
-Zauważ, że wszystkie procesy pokazują `cached: 2` lub `cached: 1` - nic nie zostało ponownie wykonane!
+Zauważ adnotację `cached: N` przy każdym procesie - zadania przetwarzania wstępnego i segmentacji pobrane z cache'u nie zostały ponownie wykonane.
 
 ### 2.4. Profile testowe
 

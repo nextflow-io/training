@@ -131,15 +131,16 @@ Comme nous utilisons `-resume`, Nextflow vérifiera si quelque chose a changé d
 Si les paramètres, les entrées et le code sont identiques, toutes les tâches seront récupérées du cache et le pipeline se terminera presque instantanément.
 
 ```console title="Output (excerpt)"
-executor >  local (12)
+executor >  local (1)
+[43/e03702] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2, cached: 2 ✔
+[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2, cached: 2 ✔
 ...
-[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔
-[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)               [100%] 2 of 2, cached: 2 ✔
-...
+[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3, cached: 3 ✔
+[ef/d7b294] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
 -[nf-core/molkart] Pipeline completed successfully-
 ```
 
-Remarquez que tous les processus affichent `cached: 2` ou `cached: 1` - rien n'a été ré-exécuté !
+Remarquez l'annotation `cached: N` sur chaque processus — les tâches de prétraitement et de segmentation en cache n'ont pas été ré-exécutées.
 
 ### 2.4. Profils de test
 

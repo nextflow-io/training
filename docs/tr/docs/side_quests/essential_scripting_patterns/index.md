@@ -55,7 +55,7 @@ cd side-quests/essential_scripting_patterns
 
 Ana iş akışı dosyasını ve örnek veri dosyalarını içeren bir `data` dizinini bulacaksınız.
 
-```console title="Dizin içeriği"
+```console title="Directory contents"
 .
 ├── collect.nf
 ├── data
@@ -83,10 +83,6 @@ SAMPLE_003,human,kidney,45000000,data/sequences/SAMPLE_003_S3_L001_R1_001.fastq,
 
 Gerçek biyoinformatik iş akışlarında karşılaşacağınız pratik programlama tekniklerini keşfetmek için bu gerçekçi veri kümesini kullanacağız.
 
-<!-- TODO: Bunu daha alana özgüsüz hale getirebilir miyiz? -->
-
-<!-- TODO: bir atama ifadesi ekle? #### Görevi inceleyin -->
-
 #### Hazırlık kontrol listesi
 
 Başlamaya hazır mısınız?
@@ -112,9 +108,19 @@ CSV dosyasını yalnızca okuyan basit bir iş akışıyla başlayın (`main.nf`
 
 ```groovy title="main.nf" linenums="1"
 workflow {
+    main:
     ch_samples = channel.fromPath("./data/samples.csv")
         .splitCsv(header: true)
         .view()
+
+    publish:
+    reports = channel.empty()
+}
+
+output {
+    reports {
+        path 'reports'
+    }
 }
 ```
 
@@ -129,11 +135,19 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    Launching `main.nf` [marvelous_tuckerman] DSL2 - revision: 6113e05c17
+     N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [exotic_salas] revision: d915f0414b
 
     [sample_id:SAMPLE_001, organism:human, tissue_type:liver, sequencing_depth:30000000, file_path:data/sequences/SAMPLE_001_S1_L001_R1_001.fastq, quality_score:38.5]
     [sample_id:SAMPLE_002, organism:mouse, tissue_type:brain, sequencing_depth:25000000, file_path:data/sequences/SAMPLE_002_S2_L001_R1_001.fastq, quality_score:35.2]
     [sample_id:SAMPLE_003, organism:human, tissue_type:kidney, sequencing_depth:45000000, file_path:data/sequences/SAMPLE_003_S3_L001_R1_001.fastq, quality_score:42.1]
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
     ```
 
 #### 1.1.2. Map Operatörünü Eklemek
@@ -148,7 +162,7 @@ Map işleminin nasıl göründüğü aşağıdadır:
 
 === "Sonra"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="3-6"
+    ```groovy title="main.nf" linenums="3" hl_lines="3-6"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -159,7 +173,7 @@ Map işleminin nasıl göründüğü aşağıdadır:
 
 === "Önce"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="3"
+    ```groovy title="main.nf" linenums="3" hl_lines="3"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .view()
@@ -185,7 +199,7 @@ Girdiyi değiştirmeden döndürdüğümüz için öncekiyle aynı çıktıyı g
 
 === "Sonra"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="4-12"
+    ```groovy title="main.nf" linenums="3" hl_lines="4-12"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -204,7 +218,7 @@ Girdiyi değiştirmeden döndürdüğümüz için öncekiyle aynı çıktıyı g
 
 === "Önce"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="4"
+    ```groovy title="main.nf" linenums="3" hl_lines="4"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -239,7 +253,7 @@ Aşağıdaki değişikliği yapın:
 
 === "Sonra"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="11-12"
+    ```groovy title="main.nf" linenums="3" hl_lines="11-12"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -258,7 +272,7 @@ Aşağıdaki değişikliği yapın:
 
 === "Önce"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="11"
+    ```groovy title="main.nf" linenums="3" hl_lines="11"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -306,7 +320,7 @@ Yalnızca kimlik alanlarını içeren, meta verilerimizin basitleştirilmiş bir
 
 === "Sonra"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="12-15"
+    ```groovy title="main.nf" linenums="3" hl_lines="12-13"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -319,7 +333,7 @@ Yalnızca kimlik alanlarını içeren, meta verilerimizin basitleştirilmiş bir
                     quality: row.quality_score.toDouble()
                 ]
                 def id_only = sample_meta.subMap(['id', 'organism', 'tissue'])
-                println "Yalnızca kimlik alanları: ${id_only}"
+                println "ID fields only: ${id_only}"
 
                 def priority = sample_meta.quality > 40 ? 'high' : 'normal'
                 return sample_meta + [priority: priority]
@@ -329,7 +343,7 @@ Yalnızca kimlik alanlarını içeren, meta verilerimizin basitleştirilmiş bir
 
 === "Önce"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="12"
+    ```groovy title="main.nf" linenums="3" hl_lines="12"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -356,16 +370,22 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [peaceful_cori] DSL2 - revision: 4cc4a8340f
+    Launching `main.nf` [focused_goldwasser] revision: d9c7a39dec
 
-    Yalnızca kimlik alanları: [id:sample_001, organism:human, tissue:liver]
-    Yalnızca kimlik alanları: [id:sample_002, organism:mouse, tissue:brain]
-    Yalnızca kimlik alanları: [id:sample_003, organism:human, tissue:kidney]
+    ID fields only: [id:sample_001, organism:human, tissue:liver]
     [id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal]
+    ID fields only: [id:sample_002, organism:mouse, tissue:brain]
     [id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal]
+    ID fields only: [id:sample_003, organism:human, tissue:kidney]
     [id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high]
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
     ```
 
 Bu çıktı, `view()` işlemiyle görüntülenen tam meta veriyi ve `println` ile yazdırdığımız çıkarılmış alt kümeyi birlikte göstermektedir.
@@ -390,7 +410,7 @@ Bu yöntem, farklı süreçler için farklı meta veri sürümleri oluşturmanı
 
 === "Sonra"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="12"
+    ```groovy title="main.nf" linenums="3" hl_lines="12"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -409,7 +429,7 @@ Bu yöntem, farklı süreçler için farklı meta veri sürümleri oluşturmanı
 
 === "Önce"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="12"
+    ```groovy title="main.nf" linenums="3" hl_lines="12"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -461,9 +481,9 @@ def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
 // channel.collect() - birden fazla kanal yayınını tek bir yayında gruplar
 ch_input = channel.fromList(sample_ids)
-ch_input.view { sample -> "Bireysel kanal öğesi: ${sample}" }
+ch_input.view { sample -> "Individual channel item: ${sample}" }
 ch_collected = ch_input.collect()
-ch_collected.view { list -> "channel.collect() sonucu: ${list} (${list.size()} öğe tek bir öğede gruplandı)" }
+ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
 ```
 
 Adımlar:
@@ -485,14 +505,14 @@ nextflow run collect.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `collect.nf` [loving_mendel] DSL2 - revision: e8d054a46e
+    Launching `collect.nf` [friendly_jones] revision: 5b2b07e824
 
-    Bireysel kanal öğesi: sample_001
-    Bireysel kanal öğesi: sample_002
-    Bireysel kanal öğesi: sample_003
-    channel.collect() sonucu: [sample_001, sample_002, sample_003] (3 öğe tek bir öğede gruplandı)
+    Individual channel item: sample_001
+    Individual channel item: sample_002
+    Individual channel item: sample_003
+    channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
     ```
 
 `view()` her kanal yayını için bir çıktı döndürür; dolayısıyla bu tek çıktının orijinal 3 öğeyi tek bir listede grupladığını biliyoruz.
@@ -501,32 +521,32 @@ nextflow run collect.nf
 
 === "Sonra"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="9-13"
+    ```groovy title="collect.nf" linenums="1" hl_lines="9-13"
     def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
     // channel.collect() - birden fazla kanal yayınını tek bir yayında gruplar
     ch_input = channel.fromList(sample_ids)
-    ch_input.view { sample -> "Bireysel kanal öğesi: ${sample}" }
+    ch_input.view { sample -> "Individual channel item: ${sample}" }
     ch_collected = ch_input.collect()
-    ch_collected.view { list -> "channel.collect() sonucu: ${list} (${list.size()} öğe tek bir öğede gruplandı)" }
+    ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
 
     // List.collect() - her öğeyi dönüştürür, yapıyı korur
     def formatted_ids = sample_ids.collect { id ->
         id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
     }
-    println "List.collect() sonucu: ${formatted_ids} (${sample_ids.size()} öğe ${formatted_ids.size()} öğeye dönüştürüldü)"
+    println "List.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
     ```
 
 === "Önce"
 
-    ```groovy title="main.nf" linenums="1"
+    ```groovy title="collect.nf" linenums="1"
     def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
     // channel.collect() - birden fazla kanal yayınını tek bir yayında gruplar
     ch_input = channel.fromList(sample_ids)
-    ch_input.view { sample -> "Bireysel kanal öğesi: ${sample}" }
+    ch_input.view { sample -> "Individual channel item: ${sample}" }
     ch_collected = ch_input.collect()
-    ch_collected.view { list -> "channel.collect() sonucu: ${list} (${list.size()} öğe tek bir öğede gruplandı)" }
+    ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
     ```
 
 Bu yeni kod parçasında:
@@ -543,15 +563,15 @@ nextflow run collect.nf
 ??? success "Komut çıktısı"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `collect.nf` [cheeky_stonebraker] DSL2 - revision: 2d5039fb47
+    Launching `collect.nf` [lethal_caravaggio] revision: 48f3dcbb7b
 
-    List.collect() sonucu: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 öğe 3 öğeye dönüştürüldü)
-    Bireysel kanal öğesi: sample_001
-    Bireysel kanal öğesi: sample_002
-    Bireysel kanal öğesi: sample_003
-    channel.collect() sonucu: [sample_001, sample_002, sample_003] (3 öğe tek bir öğede gruplandı)
+    List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
+    Individual channel item: sample_001
+    Individual channel item: sample_002
+    Individual channel item: sample_003
+    channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
     ```
 
 Bu sefer verinin yapısını DEĞİŞTİRMEDİK; listede hâlâ 3 öğe var. Ancak List'in `collect` yöntemiyle her öğeyi DÖNÜŞTÜRDÜKve değiştirilmiş değerlere sahip yeni bir liste elde ettik. Bu, bir kanal üzerinde `map` operatörü kullanmaya benzer; ancak kanal yerine bir List veri yapısı üzerinde çalışmaktadır.
@@ -571,20 +591,20 @@ List'in `collect` yöntemiyle ilişkili olan spread operatörü (`*.`), koleksiy
 
     // channel.collect() - birden fazla kanal yayınını tek bir yayında gruplar
     ch_input = channel.fromList(sample_ids)
-    ch_input.view { sample -> "Bireysel kanal öğesi: ${sample}" }
+    ch_input.view { sample -> "Individual channel item: ${sample}" }
     ch_collected = ch_input.collect()
-    ch_collected.view { list -> "channel.collect() sonucu: ${list} (${list.size()} öğe tek bir öğede gruplandı)" }
+    ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
 
     // List.collect() - her öğeyi dönüştürür, yapıyı korur
     def formatted_ids = sample_ids.collect { id ->
         id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
     }
-    println "List.collect() sonucu: ${formatted_ids} (${sample_ids.size()} öğe ${formatted_ids.size()} öğeye dönüştürüldü)"
+    println "List.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
 
     // Spread operatörü - kısa ve öz özellik erişimi
     def sample_data = [[id: 's1', quality: 38.5], [id: 's2', quality: 42.1], [id: 's3', quality: 35.2]]
     def all_ids = sample_data*.id
-    println "Spread operatörü sonucu: ${all_ids}"
+    println "Spread operator result: ${all_ids}"
     ```
 
 === "Önce"
@@ -594,36 +614,36 @@ List'in `collect` yöntemiyle ilişkili olan spread operatörü (`*.`), koleksiy
 
     // channel.collect() - birden fazla kanal yayınını tek bir yayında gruplar
     ch_input = channel.fromList(sample_ids)
-    ch_input.view { sample -> "Bireysel kanal öğesi: ${sample}" }
+    ch_input.view { sample -> "Individual channel item: ${sample}" }
     ch_collected = ch_input.collect()
-    ch_collected.view { list -> "channel.collect() sonucu: ${list} (${list.size()} öğe tek bir öğede gruplandı)" }
+    ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
 
     // List.collect() - her öğeyi dönüştürür, yapıyı korur
     def formatted_ids = sample_ids.collect { id ->
         id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
     }
-    println "List.collect() sonucu: ${formatted_ids} (${sample_ids.size()} öğe ${formatted_ids.size()} öğeye dönüştürüldü)"
+    println "List.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
     ```
 
 Güncellenmiş iş akışını çalıştırın:
 
-```bash title="Spread operatörünü test edin"
+```bash title="Test spread operator"
 nextflow run collect.nf
 ```
 
 ??? success "Komut çıktısı"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `collect.nf` [cranky_galileo] DSL2 - revision: 5f3c8b2a91
+    Launching `collect.nf` [adoring_visvesvaraya] revision: 915ce68e4d
 
-    List.collect() sonucu: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 öğe 3 öğeye dönüştürüldü)
-    Spread operatörü sonucu: [s1, s2, s3]
-    Bireysel kanal öğesi: sample_001
-    Bireysel kanal öğesi: sample_002
-    Bireysel kanal öğesi: sample_003
-    channel.collect() sonucu: [sample_001, sample_002, sample_003] (3 öğe tek bir öğede gruplandı)
+    List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
+    Spread operator result: [s1, s2, s3]
+    Individual channel item: sample_001
+    Individual channel item: sample_002
+    Individual channel item: sample_003
+    channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
     ```
 
 Spread operatörü `*.`, yaygın bir collect kalıbı için kısayoldur:
@@ -673,7 +693,7 @@ Mevcut `main.nf` iş akışınızda aşağıdaki değişikliği yapın:
 
 === "Sonra"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="10-21"
+    ```groovy title="main.nf" linenums="5" hl_lines="10-21"
             .map { row ->
                 // Veri dönüşümü için betik yazımı
                 def sample_meta = [
@@ -700,7 +720,7 @@ Mevcut `main.nf` iş akışınızda aşağıdaki değişikliği yapın:
 
 === "Önce"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="10-11"
+    ```groovy title="main.nf" linenums="5" hl_lines="10-11"
             .map { row ->
                 // Veri dönüşümü için betik yazımı
                 def sample_meta = [
@@ -736,20 +756,26 @@ Bu, meta veriyi otomatik olarak çıkarmak için Illumina tarzı adlandırma kur
 
 Değiştirilen iş akışını çalıştırın:
 
-```bash title="Kalıp eşleştirmeyi test edin"
+```bash title="Test pattern matching"
 nextflow run main.nf
 ```
 
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [clever_pauling] DSL2 - revision: 605d2058b4
+    Launching `main.nf` [nasty_brazil] revision: 723ff4e5e6
 
     [[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, sample_num:1, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
     [[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, sample_num:2, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
     [[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, sample_num:3, lane:001, read:R1, chunk:001, priority:high], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
     ```
 
 Bu çıktı, dosya adlarından zenginleştirilmiş meta veriyi göstermektedir.
@@ -796,8 +822,9 @@ Ardından `ch_samples` kanalını `FASTP` sürecine bağlamak için `workflow` b
 
 === "Sonra"
 
-    ```groovy title="main.nf" linenums="25" hl_lines="27"
+    ```groovy title="main.nf" linenums="25" hl_lines="28"
     workflow {
+        main:
 
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
@@ -824,13 +851,23 @@ Ardından `ch_samples` kanalını `FASTP` sürecine bağlamak için `workflow` b
             }
 
         ch_fastp = FASTP(ch_samples)
+
+        publish:
+        reports = channel.empty()
+    }
+
+    output {
+        reports {
+            path 'reports'
+        }
     }
     ```
 
 === "Önce"
 
-    ```groovy title="main.nf" linenums="25" hl_lines="26"
+    ```groovy title="main.nf" linenums="25" hl_lines="27"
     workflow {
+        main:
 
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
@@ -853,9 +890,18 @@ Ardından `ch_samples` kanalını `FASTP` sürecine bağlamak için `workflow` b
                 ] : [:]
 
                 def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-                return [sample_meta + file_meta + [priority: priority], file(row.file_path)]
+                return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
             }
             .view()
+
+        publish:
+        reports = channel.empty()
+    }
+
+    output {
+        reports {
+            path 'reports'
+        }
     }
     ```
 
@@ -868,28 +914,41 @@ nextflow run main.nf
 ??? failure "Komut çıktısı"
 
     ```console
-    ERROR ~ Error executing process > 'FASTP (3)'
+    ERROR ~ Error executing process > 'FASTP (2)'
 
     Caused by:
-      Process `FASTP (3)` terminated with an error exit status (255)
+      Process `FASTP (2)` terminated with an error exit status (255)
 
 
     Command executed:
 
       fastp \
-          --in1 SAMPLE_003_S3_L001_R1_001.fastq \
+          --in1 SAMPLE_002_S2_L001_R1_001.fastq \
           --in2 null \
-          --out1 sample_003_trimmed_R1.fastq.gz \
-          --out2 sample_003_trimmed_R2.fastq.gz \
-          --json sample_003.fastp.json \
-          --html sample_003.fastp.html \
-          --thread 2
+          --out1 sample_002_trimmed_R1.fastq.gz \
+          --out2 sample_002_trimmed_R2.fastq.gz \
+          --json sample_002.fastp.json \
+          --html sample_002.fastp.html \
+          --thread 1
 
     Command exit status:
       255
 
     Command output:
       (empty)
+
+    Command error:
+      ERROR: Failed to open file: null
+
+    Work dir:
+      /workspaces/training/side-quests/essential_scripting_patterns/work/8b/5b15c8cf35259a87db0137312d6d06
+
+    Container:
+      community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690
+
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+
+     -- Check '.nextflow.log' file for details
     ```
 
 Sürecin ikinci girdi dosyası için `null` değeriyle `fastp` çalıştırmaya çalıştığını ve bu nedenle başarısız olduğunu görebilirsiniz. Bunun nedeni, veri kümemizin tek uçlu okumalar içermesi, ancak sürecin çift uçlu okumalar (aynı anda iki girdi dosyası) beklediği şekilde sabit kodlanmış olmasıdır.
@@ -953,18 +1012,24 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [adoring_rosalind] DSL2 - revision: 04b1cd93e9
+    Launching `main.nf` [distracted_bohr] revision: b9b1c249c1
 
     executor >  local (3)
-    [31/a8ad4d] process > FASTP (3) [100%] 3 of 3 ✔
+    [d9/542a41] FASTP (1) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
     ```
 
 Harika görünüyor! Çalıştırılan gerçek komutları kontrol edersek (görev hash'inize göre özelleştirin):
 
-```console title="Çalıştırılan komutları kontrol edin"
-cat work/31/a8ad4d95749e685a6d842d3007957f/.command.sh
+```console title="Check commands executed"
+cat work/d9/542a41xxxxxxxxxxxxxxxxxxxxxxxxxx/.command.sh
 ```
 
 Nextflow'un tek uçlu okumalar için doğru komutu seçtiğini görebiliriz:
@@ -976,12 +1041,12 @@ fastp \
     --out1 sample_003_trimmed.fastq.gz \
     --json sample_003.fastp.json \
     --html sample_003.fastp.html \
-    --thread 2
+    --thread 1
 ```
 
 Dinamik betik mantığının başka bir yaygın kullanımı [Nextflow for Science Genomics modülünde](../../nf4_science/genomics/03_joint_calling.md) görülebilir. O modülde çağrılan GATK süreci birden fazla girdi dosyası alabilir, ancak doğru bir komut satırı oluşturmak için her birinin başına `-V` eklenmelidir. Süreç, bir girdi dosyaları koleksiyonunu (`all_gvcfs`) doğru komut argümanlarına dönüştürmek için betik yazımını kullanır:
 
-```groovy title="GATK için komut satırı işleme" linenums="1" hl_lines="2 5"
+```groovy title="command line manipulation for GATK" linenums="1" hl_lines="2 5"
     script:
     def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
     """
@@ -1011,8 +1076,8 @@ process GENERATE_REPORT {
 
     script:
     """
-    echo "İşleniyor: ${reads}" > ${meta.id}_report.txt
-    echo "Örnek: ${meta.id}" >> ${meta.id}_report.txt
+    echo "Processing ${reads}" > ${meta.id}_report.txt
+    echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
     """
 }
 ```
@@ -1023,11 +1088,12 @@ Süreci `main.nf` dosyanıza dahil edin ve iş akışına ekleyin:
 
 === "Sonra"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="2 30"
+    ```groovy title="main.nf" linenums="1" hl_lines="2 31"
     include { FASTP } from './modules/fastp.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
 
     workflow {
+        main:
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -1054,15 +1120,25 @@ Süreci `main.nf` dosyanıza dahil edin ve iş akışına ekleyin:
 
         ch_fastp = FASTP(ch_samples)
         GENERATE_REPORT(ch_samples)
+
+        publish:
+        reports = GENERATE_REPORT.out
+    }
+
+    output {
+        reports {
+            path 'reports'
+        }
     }
     ```
 
 === "Önce"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="1 28"
+    ```groovy title="main.nf" linenums="1" hl_lines="1 29"
     include { FASTP } from './modules/fastp.nf'
 
     workflow {
+        main:
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -1088,17 +1164,44 @@ Süreci `main.nf` dosyanıza dahil edin ve iş akışına ekleyin:
             }
 
         ch_fastp = FASTP(ch_samples)
+
+        publish:
+        reports = channel.empty()
+    }
+
+    output {
+        reports {
+            path 'reports'
+        }
     }
     ```
 
 Şimdi iş akışını çalıştırın ve `results/reports/` dizinindeki oluşturulan raporları kontrol edin. Her örnek hakkında temel bilgiler içermeleri gerekir.
 
-<!-- TODO: çalıştırma komutunu ekle -->
+```bash
+nextflow run main.nf
+```
 
 ??? success "Komut çıktısı"
 
     ```console
-    <!-- TODO: çıktı -->
+    N E X T F L O W  ~  version 26.04.4
+    Launching `main.nf` [festering_payne] - revision: 3690c7806d
+    [31/870279] Submitted process > FASTP (1)
+    [52/c9fb45] Submitted process > GENERATE_REPORT (1)
+    [a2/00d26a] Submitted process > GENERATE_REPORT (3)
+    [61/c169b0] Submitted process > FASTP (2)
+    [a1/11c8b1] Submitted process > GENERATE_REPORT (2)
+    [d8/40aa79] Submitted process > FASTP (3)
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
+        - reports/sample_003_report.txt
+        - reports/sample_001_report.txt
+        - reports/sample_002_report.txt
     ```
 
 Peki işlemenin ne zaman ve nerede gerçekleştiğine dair bilgi eklemek istersek? Rapora geçerli kullanıcıyı, ana bilgisayar adını ve tarihi dahil etmek için **kabuk** değişkenlerini ve komut ikamesini kullanalım:
@@ -1108,11 +1211,11 @@ Peki işlemenin ne zaman ve nerede gerçekleştiğine dair bilgi eklemek isterse
     ```groovy title="modules/generate_report.nf" linenums="10" hl_lines="5-7"
         script:
         """
-        echo "İşleniyor: ${reads}" > ${meta.id}_report.txt
-        echo "Örnek: ${meta.id}" >> ${meta.id}_report.txt
-        echo "İşleyen: ${USER}" >> ${meta.id}_report.txt
-        echo "Ana bilgisayar: $(hostname)" >> ${meta.id}_report.txt
-        echo "Tarih: $(date)" >> ${meta.id}_report.txt
+        echo "Processing ${reads}" > ${meta.id}_report.txt
+        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+        echo "Processed by: ${USER}" >> ${meta.id}_report.txt
+        echo "Hostname: $(hostname)" >> ${meta.id}_report.txt
+        echo "Date: $(date)" >> ${meta.id}_report.txt
         """
     ```
 
@@ -1121,8 +1224,8 @@ Peki işlemenin ne zaman ve nerede gerçekleştiğine dair bilgi eklemek isterse
     ```groovy title="modules/generate_report.nf" linenums="10"
         script:
         """
-        echo "İşleniyor: ${reads}" > ${meta.id}_report.txt
-        echo "Örnek: ${meta.id}" >> ${meta.id}_report.txt
+        echo "Processing ${reads}" > ${meta.id}_report.txt
+        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
         """
     ```
 
@@ -1131,11 +1234,18 @@ Bunu çalıştırırsanız bir hata fark edeceksiniz; Nextflow, `#!groovy ${USER
 ??? failure "Komut çıktısı"
 
     ```console
-    Error modules/generate_report.nf:15:27: `USER` is not defined
-    │  15 |     echo "Processed by: ${USER}" >> ${meta.id}_report.txt
+     N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [furious_euclid] revision: 3690c7806d
+
+    Error modules/generate_report.nf:13:27: `USER` is not defined
+    │  13 |     echo "Processed by: ${USER}" >> ${meta.id}_report.txt
     ╰     |                           ^^^^
 
+
     ERROR ~ Script compilation failed
+
+     -- Check '.nextflow.log' file for details
     ```
 
 Bash'in bunu işleyebilmesi için kaçış karakteri eklememiz gerekiyor.
@@ -1147,11 +1257,11 @@ Kabuk değişkenlerini ve komut ikamelerini ters eğik çizgi (`\`) ile kaçıra
     ```groovy title="modules/generate_report.nf" linenums="10" hl_lines="5-7"
         script:
         """
-        echo "İşleniyor: ${reads}" > ${meta.id}_report.txt
-        echo "Örnek: ${meta.id}" >> ${meta.id}_report.txt
-        echo "İşleyen: \${USER}" >> ${meta.id}_report.txt
-        echo "Ana bilgisayar: \$(hostname)" >> ${meta.id}_report.txt
-        echo "Tarih: \$(date)" >> ${meta.id}_report.txt
+        echo "Processing ${reads}" > ${meta.id}_report.txt
+        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+        echo "Processed by: \${USER}" >> ${meta.id}_report.txt
+        echo "Hostname: \$(hostname)" >> ${meta.id}_report.txt
+        echo "Date: \$(date)" >> ${meta.id}_report.txt
         """
     ```
 
@@ -1160,11 +1270,11 @@ Kabuk değişkenlerini ve komut ikamelerini ters eğik çizgi (`\`) ile kaçıra
     ```groovy title="modules/generate_report.nf" linenums="10"
         script:
         """
-        echo "İşleniyor: ${reads}" > ${meta.id}_report.txt
-        echo "Örnek: ${meta.id}" >> ${meta.id}_report.txt
-        echo "İşleyen: ${USER}" >> ${meta.id}_report.txt
-        echo "Ana bilgisayar: $(hostname)" >> ${meta.id}_report.txt
-        echo "Tarih: $(date)" >> ${meta.id}_report.txt
+        echo "Processing ${reads}" > ${meta.id}_report.txt
+        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+        echo "Processed by: ${USER}" >> ${meta.id}_report.txt
+        echo "Hostname: $(hostname)" >> ${meta.id}_report.txt
+        echo "Date: $(date)" >> ${meta.id}_report.txt
         """
     ```
 
@@ -1195,7 +1305,7 @@ Mevcut iş akışımızla bunun nasıl göründüğünü göstermek için aşağ
 
 === "Sonra"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="4-24 29"
+    ```groovy title="main.nf" linenums="1" hl_lines="4-24 30"
     include { FASTP } from './modules/fastp.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
 
@@ -1222,22 +1332,33 @@ Mevcut iş akışımızla bunun nasıl göründüğünü göstermek için aşağ
     }
 
     workflow {
+        main:
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map{ row -> separateMetadata(row) }
 
         ch_fastp = FASTP(ch_samples)
         GENERATE_REPORT(ch_samples)
+
+        publish:
+        reports = GENERATE_REPORT.out
+    }
+
+    output {
+        reports {
+            path 'reports'
+        }
     }
     ```
 
 === "Önce"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="7-27"
+    ```groovy title="main.nf" linenums="1" hl_lines="8-28"
     include { FASTP } from './modules/fastp.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
 
     workflow {
+        main:
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -1264,12 +1385,21 @@ Mevcut iş akışımızla bunun nasıl göründüğünü göstermek için aşağ
 
         ch_fastp = FASTP(ch_samples)
         GENERATE_REPORT(ch_samples)
+
+        publish:
+        reports = GENERATE_REPORT.out
+    }
+
+    output {
+        reports {
+            path 'reports'
+        }
     }
     ```
 
 Bu mantığı bir fonksiyona çıkararak gerçek iş akışı mantığını çok daha temiz bir hale getirdik:
 
-```groovy title="minimal iş akışı"
+```groovy title="minimal workflow"
     ch_samples = channel.fromPath("./data/samples.csv")
         .splitCsv(header: true)
         .map{ row -> separateMetadata(row) }
@@ -1289,13 +1419,22 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [admiring_panini] DSL2 - revision: 8cc832e32f
+    Launching `main.nf` [peaceful_plateau] revision: 918c15451f
 
     executor >  local (6)
-    [8c/2e3f91] process > FASTP (3)           [100%] 3 of 3 ✔
-    [7a/1b4c92] process > GENERATE_REPORT (3) [100%] 3 of 3 ✔
+    [a5/f542b1] FASTP (2)           | 3 of 3 ✔
+    [22/a94ad7] GENERATE_REPORT (2) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
+        - reports/sample_001_report.txt
+        - reports/sample_003_report.txt
+        - reports/sample_002_report.txt
     ```
 
 Çıktı, her iki sürecin de başarıyla tamamlandığını göstermelidir. İş akışı artık çok daha temiz ve sürdürülebilir; tüm karmaşık meta veri işleme mantığı `separateMetadata` fonksiyonunda kapsüllenmiştir.
@@ -1359,26 +1498,35 @@ nextflow run main.nf -ansi-log false
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W  ~  version 25.10.4
-    Launching `main.nf` [fervent_albattani] DSL2 - revision: fa8f249759
-    [bd/ff3d41] Submitted process > FASTP (2)
-    [a4/a3aab2] Submitted process > FASTP (1)
-    [48/6db0c9] Submitted process > FASTP (3)
-    [ec/83439d] Submitted process > GENERATE_REPORT (3)
-    [bd/15d7cc] Submitted process > GENERATE_REPORT (2)
-    [42/699357] Submitted process > GENERATE_REPORT (1)
+    N E X T F L O W  ~  version 26.04.4
+    Launching `main.nf` [naughty_kay] - revision: 918c15451f
+    [1e/d9a972] Submitted process > GENERATE_REPORT (2)
+    [ef/820ed7] Submitted process > GENERATE_REPORT (3)
+    [f6/ab4b70] Submitted process > FASTP (1)
+    [5b/748d5a] Submitted process > GENERATE_REPORT (1)
+    [7b/d99953] Submitted process > FASTP (3)
+    [37/291870] Submitted process > FASTP (2)
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
+        - reports/sample_002_report.txt
+        - reports/sample_003_report.txt
+        - reports/sample_001_report.txt
     ```
 
 Herhangi bir görev için CPU tahsisini görmek amacıyla çalıştırılan `docker` komutunu kontrol edebilirsiniz:
 
-```console title="Docker komutunu kontrol edin"
-cat work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.run | grep "docker run"
+```console title="Check docker command"
+cat work/7b/d999535cfcdfb6865b4e63cddc3987/.command.run | grep "docker run"
 ```
 
 Şuna benzer bir şey görmelisiniz:
 
-```bash title="docker komutu"
-    docker run -i --cpu-shares 2048 --memory 2048m -e "NXF_TASK_WORKDIR" -v /workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690 /bin/bash -ue /workspaces/training/side-quests/essential_scripting_patterns/work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.sh
+```bash title="docker command"
+    docker run -i --cpu-shares 2048 --memory 2048m -e "NXF_TASK_WORKDIR" -v /workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690 /bin/bash -ue /workspaces/training/side-quests/essential_scripting_patterns/work/7b/d999535cfcdfb6865b4e63cddc3987/.command.sh
 ```
 
 Bu örnekte yüksek derinlikli bir örnek olduğu için 2 CPU talep eden bir örnek seçtik (`--cpu-shares 2048`); ancak örnek derinliğine bağlı olarak farklı CPU tahsisleri görmelisiniz. Diğer görevler için de bunu deneyin.
@@ -1432,7 +1580,7 @@ nextflow run main.nf
       Detecting adapter sequence for read1...
       No adapter detected for read1
 
-      .command.sh: line 7:   101 Killed                  fastp --in1 SAMPLE_002_S2_L001_R1_001.fastq --out1 sample_002_trimmed.fastq.gz --json sample_002.fastp.json --html sample_002.fastp.html --thread 1
+      .command.sh: line 7:    34 Killed                  fastp --in1 SAMPLE_001_S1_L001_R1_001.fastq --out1 sample_001_trimmed.fastq.gz --json sample_001.fastp.json --html sample_001.fastp.html --thread 1
     ```
 
 Bu, sürecin bellek sınırını aştığı için sonlandırıldığını göstermektedir.
@@ -1520,7 +1668,7 @@ Nextflow'un [veri akışı operatörleri](https://www.nextflow.io/docs/latest/re
 
 === "Sonra"
 
-    ```groovy title="main.nf" linenums="28" hl_lines="5-12"
+    ```groovy title="main.nf" linenums="29" hl_lines="5-12"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row -> separateMetadata(row) }
@@ -1538,7 +1686,7 @@ Nextflow'un [veri akışı operatörleri](https://www.nextflow.io/docs/latest/re
 
 === "Önce"
 
-    ```groovy title="main.nf" linenums="28" hl_lines="5"
+    ```groovy title="main.nf" linenums="29" hl_lines="5"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row -> separateMetadata(row) }
@@ -1556,14 +1704,26 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [adoring_galileo] DSL2 - revision: c9e83aaef1
+    Launching `main.nf` [condescending_venter] revision: 02a7ca6f13
 
-    executor >  local (6)
-    [1d/0747ac] process > FASTP (2)           [100%] 2 of 2 ✔
-    [cc/c44caf] process > TRIMGALORE (1)      [100%] 1 of 1 ✔
-    [34/bd5a9f] process > GENERATE_REPORT (1) [100%] 3 of 3 ✔
+    executor >  local (8)
+    [8b/40c882] FASTP (1)           | 2 of 2, retries: 2 ✔
+    [59/988a68] TRIMGALORE (1)      | 1 of 1 ✔
+    [01/2df2d4] GENERATE_REPORT (3) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
+        - reports/sample_001_report.txt
+        - reports/sample_002_report.txt
+        - reports/sample_003_report.txt
+
+    [0a/8bb1dd] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+    [af/76bc6f] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
     ```
 
 Burada, örnekleri meta verilerine göre yönlendirmek için `.branch{}` operatörü içinde küçük ama güçlü koşullu ifadeler kullandık. Yüksek kapsama sahip insan örnekleri `FASTP`'tan geçerken diğer tüm örnekler `TRIMGALORE`'dan geçer.
@@ -1583,7 +1743,7 @@ Dal işleminden önce aşağıdakini ekleyin:
 
 === "Sonra"
 
-    ```groovy title="main.nf" linenums="28" hl_lines="5-11"
+    ```groovy title="main.nf" linenums="29" hl_lines="5-11"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row -> separateMetadata(row) }
@@ -1603,7 +1763,7 @@ Dal işleminden önce aşağıdakini ekleyin:
 
 === "Önce"
 
-    ```groovy title="main.nf" linenums="28" hl_lines="5"
+    ```groovy title="main.nf" linenums="29" hl_lines="5"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row -> separateMetadata(row) }
@@ -1624,21 +1784,31 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W  ~  version 25.10.4
-    Launching `main.nf` [lonely_williams] DSL2 - revision: d0b3f121ec
-    [94/b48eac] Submitted process > FASTP (2)
-    [2c/d2b28f] Submitted process > GENERATE_REPORT (2)
-    [65/2e3be4] Submitted process > GENERATE_REPORT (1)
-    [94/b48eac] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
-    [3e/0d8664] Submitted process > TRIMGALORE (1)
-    [6a/9137b0] Submitted process > FASTP (1)
-    [6a/9137b0] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
-    [83/577ac0] Submitted process > GENERATE_REPORT (3)
-    [a2/5117de] Re-submitted process > FASTP (1)
-    [1f/a1a4ca] Re-submitted process > FASTP (2)
+    N E X T F L O W  ~  version 26.04.4
+    Launching `main.nf` [disturbed_jepsen] - revision: 7097b98dd8
+    [5b/a38d75] Submitted process > FASTP (2)
+    [b3/cc56c7] Submitted process > FASTP (1)
+    [01/feef56] Submitted process > GENERATE_REPORT (3)
+    [9b/e944ae] Submitted process > GENERATE_REPORT (1)
+    [74/04af51] Submitted process > GENERATE_REPORT (2)
+    [24/939e1f] Submitted process > TRIMGALORE (1)
+    [b3/cc56c7] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+    [b2/90425f] Re-submitted process > FASTP (1)
+    [5b/a38d75] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+    [24/a79e73] Re-submitted process > FASTP (2)
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
+        - reports/sample_003_report.txt
+        - reports/sample_001_report.txt
+        - reports/sample_002_report.txt
     ```
 
-Bazı örnekleri dışlayan bir filtre seçtiğimiz için daha az görev çalıştırıldı.
+Bu durumda üç örnek de filtreyi geçmektedir; dolayısıyla her örnek pipeline'da ilerlemeye devam eder.
+Daha katı bir eşik, düşük derinlikli örnekleri dışarıda bırakır ve çalıştırılan görev sayısını azaltır.
 
 `meta.id && meta.organism && meta.depth >= 25000000` filtre ifadesi, doğruluk değerini açık karşılaştırmalarla birleştirir:
 
@@ -1708,13 +1878,13 @@ nextflow run main.nf
 ??? failure "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [trusting_torvalds] DSL2 - revision: b56fbfbce2
+    Launching `main.nf` [fervent_bassi] revision: c5d3df5c06
 
     ERROR ~ Cannot invoke method toUpperCase() on null object
 
-    -- Check script 'main.nf' at line: 13 or see '.nextflow.log' file for more details
+     -- Check script 'main.nf' at line: 13 or see '.nextflow.log' file for more details
     ```
 
 Bu, NullPointerException ile çöküyor.
@@ -1764,7 +1934,27 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    <!-- TODO: çıktı -->
+    N E X T F L O W  ~  version 26.04.4
+    Launching `main.nf` [serene_jennings] - revision: d7cb8ec312
+    [6f/754af4] Submitted process > GENERATE_REPORT (2)
+    [fe/9b03c7] Submitted process > GENERATE_REPORT (1)
+    [5c/a9a73c] Submitted process > FASTP (2)
+    [f8/e8ad5e] Submitted process > GENERATE_REPORT (3)
+    [55/0e4155] Submitted process > TRIMGALORE (1)
+    [cb/e00b43] Submitted process > FASTP (1)
+    [cb/e00b43] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+    [5c/a9a73c] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+    [49/fb02c9] Re-submitted process > FASTP (1)
+    [e3/d3cf5f] Re-submitted process > FASTP (2)
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
+        - reports/sample_001_report.txt
+        - reports/sample_002_report.txt
+        - reports/sample_003_report.txt
     ```
 
 Çökme yok! İş akışı artık eksik alanı zarif biçimde işliyor. `row.run_id` `null` olduğunda, `?.` operatörü `.toUpperCase()` çağrısını engeller ve `run_id`, istisna fırlatmak yerine `null` olur.
@@ -1808,7 +1998,7 @@ Sonuçları görmek için iş akışına bir `view()` operatörü de ekleyin:
 
 === "Sonra"
 
-    ```groovy title="main.nf" linenums="30" hl_lines="4"
+    ```groovy title="main.nf" linenums="31" hl_lines="4"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map{ row -> separateMetadata(row) }
@@ -1817,7 +2007,7 @@ Sonuçları görmek için iş akışına bir `view()` operatörü de ekleyin:
 
 === "Önce"
 
-    ```groovy title="main.nf" linenums="30"
+    ```groovy title="main.nf" linenums="31"
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map{ row -> separateMetadata(row) }
@@ -1870,7 +2060,7 @@ Bazen girdi parametreleri geçersizse iş akışını hemen durdurmak gerekir. N
 
 === "Sonra"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="5-15 18-19"
+    ```groovy title="main.nf" linenums="1" hl_lines="5-15 19-20"
     include { FASTP } from './modules/fastp.nf'
     include { TRIMGALORE } from './modules/trimgalore.nf'
     include { GENERATE_REPORT } from './modules/generate_report.nf'
@@ -1878,16 +2068,17 @@ Bazen girdi parametreleri geçersizse iş akışını hemen durdurmak gerekir. N
     def validateInputs() {
         // Girdi parametresinin sağlandığını kontrol et
         if (!params.input) {
-            error("Girdi CSV dosya yolu belirtilmedi. Lütfen --input <file.csv> ile belirtin")
+            error("Input CSV file path not provided. Please specify --input <file.csv>")
         }
 
         // CSV dosyasının var olduğunu kontrol et
         if (!file(params.input).exists()) {
-            error("Girdi CSV dosyası bulunamadı: ${params.input}")
+            error("Input CSV file not found: ${params.input}")
         }
     }
     ...
     workflow {
+        main:
         validateInputs()
         ch_samples = channel.fromPath(params.input)
     ```
@@ -1901,6 +2092,7 @@ Bazen girdi parametreleri geçersizse iş akışını hemen durdurmak gerekir. N
 
     ...
     workflow {
+        main:
         ch_samples = channel.fromPath("./data/samples.csv")
     ```
 
@@ -1913,12 +2105,12 @@ nextflow run main.nf
 ??? failure "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [confident_coulomb] DSL2 - revision: 07059399ed
+    Launching `main.nf` [golden_lamarck] revision: e1d7259d32
 
     WARN: Access to undefined parameter `input` -- Initialise it to a default value eg. `params.input = some_value`
-    Girdi CSV dosya yolu belirtilmedi. Lütfen --input <file.csv> ile belirtin
+    Input CSV file path not provided. Please specify --input <file.csv>
     ```
 
 İş akışı, daha sonra gizemli bir şekilde başarısız olmak yerine açık bir hata mesajıyla hemen durur.
@@ -1932,11 +2124,11 @@ nextflow run main.nf --input ./data/nonexistent.csv
 ??? failure "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [cranky_gates] DSL2 - revision: 26839ae3eb
+    Launching `main.nf` [admiring_avogadro] revision: e1d7259d32
 
-    Girdi CSV dosyası bulunamadı: ./data/nonexistent.csv
+    Input CSV file not found: ./data/nonexistent.csv
     ```
 
 Son olarak, doğru dosyayla çalıştırın:
@@ -1948,7 +2140,27 @@ nextflow run main.nf --input ./data/samples.csv
 ??? success "Komut çıktısı"
 
     ```console
-    <!-- TODO: çıktı -->
+    N E X T F L O W  ~  version 26.04.4
+    Launching `main.nf` [sad_hopper] - revision: e1d7259d32
+    [1d/48ab44] Submitted process > TRIMGALORE (1)
+    [94/f6f423] Submitted process > FASTP (1)
+    [ca/6bbfae] Submitted process > GENERATE_REPORT (1)
+    [25/18c80b] Submitted process > GENERATE_REPORT (3)
+    [11/caf770] Submitted process > FASTP (2)
+    [a6/16ae06] Submitted process > GENERATE_REPORT (2)
+    [11/caf770] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+    [94/f6f423] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+    [a3/cb724c] Re-submitted process > FASTP (2)
+    [d6/8baf95] Re-submitted process > FASTP (1)
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
+        - reports/sample_001_report.txt
+        - reports/sample_003_report.txt
+        - reports/sample_002_report.txt
     ```
 
 Bu sefer başarıyla çalışır.
@@ -1962,7 +2174,7 @@ Bu sefer başarıyla çalışır.
 
         // Verinin mantıklı olduğunu doğrula
         if (sample_meta.depth < 30000000) {
-            log.warn "Düşük dizileme derinliği ${sample_meta.id} için: ${sample_meta.depth}"
+            log.warn "Low sequencing depth for ${sample_meta.id}: ${sample_meta.depth}"
         }
 
         return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
@@ -1987,14 +2199,24 @@ nextflow run main.nf --input ./data/samples.csv
 ??? warning "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [awesome_goldwasser] DSL2 - revision: a31662a7c1
+    Launching `main.nf` [jolly_colden] revision: 608f36a239
 
-    executor >  local (5)
-    [ce/df5eeb] process > FASTP (2)           [100%] 2 of 2 ✔
-    [-        ] process > TRIMGALORE          -
-    [d1/7d2b4b] process > GENERATE_REPORT (3) [100%] 3 of 3 ✔
+    executor >  local (8)
+    [3b/e1586c] FASTP (2)           | 2 of 2, retries: 2 ✔
+    [8b/4286b3] TRIMGALORE (1)      | 1 of 1 ✔
+    [a0/761239] GENERATE_REPORT (3) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
+        - reports/sample_003_report.txt
+        - reports/sample_002_report.txt
+        - reports/sample_001_report.txt
+
     WARN: Low sequencing depth for sample_002: 25000000
     ```
 
@@ -2025,31 +2247,37 @@ Olay işleyicisini `main.nf` dosyanıza, iş akışı tanımınızın içine ekl
 
 === "Sonra"
 
-    ```groovy title="main.nf" linenums="66" hl_lines="5-16"
+    ```groovy title="main.nf" linenums="67" hl_lines="5-16"
         ch_fastp = FASTP(trim_branches.fastp)
         ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
         GENERATE_REPORT(ch_samples)
 
         workflow.onComplete = {
             println ""
-            println "Pipeline yürütme özeti:"
+            println "Pipeline execution summary:"
             println "=========================="
-            println "Tamamlandı: ${workflow.complete}"
-            println "Süre       : ${workflow.duration}"
-            println "Başarı     : ${workflow.success}"
-            println "workDir    : ${workflow.workDir}"
-            println "Çıkış kodu : ${workflow.exitStatus}"
+            println "Completed at: ${workflow.complete}"
+            println "Duration    : ${workflow.duration}"
+            println "Success     : ${workflow.success}"
+            println "workDir     : ${workflow.workDir}"
+            println "exit status : ${workflow.exitStatus}"
             println ""
         }
+
+        publish:
+        reports = GENERATE_REPORT.out
     }
     ```
 
 === "Önce"
 
-    ```groovy title="main.nf" linenums="66" hl_lines="4"
+    ```groovy title="main.nf" linenums="67" hl_lines="7"
         ch_fastp = FASTP(trim_branches.fastp)
         ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
         GENERATE_REPORT(ch_samples)
+
+        publish:
+        reports = GENERATE_REPORT.out
     }
     ```
 
@@ -2064,115 +2292,153 @@ nextflow run main.nf --input ./data/samples.csv -ansi-log false
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W  ~  version 25.10.4
-    Launching `main.nf` [marvelous_boltzmann] DSL2 - revision: a31662a7c1
+    N E X T F L O W  ~  version 26.04.4
+    Launching `main.nf` [sleepy_sax] - revision: 7f4b2a0423
     WARN: Low sequencing depth for sample_002: 25000000
-    [9b/d48e40] Submitted process > FASTP (2)
-    [6a/73867a] Submitted process > GENERATE_REPORT (2)
-    [79/ad0ac5] Submitted process > GENERATE_REPORT (1)
-    [f3/bda6cb] Submitted process > FASTP (1)
-    [34/d5b52f] Submitted process > GENERATE_REPORT (3)
+    [1d/85ba4a] Submitted process > TRIMGALORE (1)
+    [4c/7c429a] Submitted process > FASTP (2)
+    [22/e7faf8] Submitted process > GENERATE_REPORT (1)
+    [2a/ade0b2] Submitted process > FASTP (1)
+    [1f/193864] Submitted process > GENERATE_REPORT (3)
+    [60/712f82] Submitted process > GENERATE_REPORT (2)
+    [2a/ade0b2] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+    [4c/7c429a] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+    [85/b96cbc] Re-submitted process > FASTP (1)
+    [a7/55b62e] Re-submitted process > FASTP (2)
 
-    Pipeline yürütme özeti:
+    Pipeline execution summary:
     ==========================
-    Tamamlandı: 2025-10-10T12:14:24.885384+01:00
-    Süre       : 2.9s
-    Başarı     : true
-    workDir    : /workspaces/training/side-quests/essential_scripting_patterns/work
-    Çıkış kodu : 0
+    Completed at: 2026-06-23T15:49:52.574354708Z
+    Duration    : 4.5s
+    Success     : true
+    workDir     : /workspaces/training/side-quests/essential_scripting_patterns/work
+    exit status : 0
+
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
+        - reports/sample_001_report.txt
+        - reports/sample_003_report.txt
+        - reports/sample_002_report.txt
     ```
 
 Koşullu mantık ekleyerek daha kullanışlı hale getirelim:
 
 === "Sonra"
 
-    ```groovy title="main.nf" linenums="66" hl_lines="5-22"
-        ch_fastp = FASTP(trim_branches.fastp)
-        ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)       GENERATE_REPORT(ch_samples)
-
-        workflow.onComplete = {
-            println ""
-            println "Pipeline yürütme özeti:"
-            println "=========================="
-            println "Tamamlandı: ${workflow.complete}"
-            println "Süre       : ${workflow.duration}"
-            println "Başarı     : ${workflow.success}"
-            println "workDir    : ${workflow.workDir}"
-            println "Çıkış kodu : ${workflow.exitStatus}"
-            println ""
-
-            if (workflow.success) {
-                println "✅ Pipeline başarıyla tamamlandı!"
-            } else {
-                println "❌ Pipeline başarısız oldu!"
-                println "Hata: ${workflow.errorMessage}"
-            }
-        }
-    }
-    ```
-
-=== "Önce"
-
-    ```groovy title="main.nf" linenums="66" hl_lines="5-16"
+    ```groovy title="main.nf" linenums="67" hl_lines="5-22"
         ch_fastp = FASTP(trim_branches.fastp)
         ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
         GENERATE_REPORT(ch_samples)
 
         workflow.onComplete = {
             println ""
-            println "Pipeline yürütme özeti:"
+            println "Pipeline execution summary:"
             println "=========================="
-            println "Tamamlandı: ${workflow.complete}"
-            println "Süre       : ${workflow.duration}"
-            println "Başarı     : ${workflow.success}"
-            println "workDir    : ${workflow.workDir}"
-            println "Çıkış kodu : ${workflow.exitStatus}"
+            println "Completed at: ${workflow.complete}"
+            println "Duration    : ${workflow.duration}"
+            println "Success     : ${workflow.success}"
+            println "workDir     : ${workflow.workDir}"
+            println "exit status : ${workflow.exitStatus}"
+            println ""
+
+            if (workflow.success) {
+                println "✅ Pipeline completed successfully!"
+            } else {
+                println "❌ Pipeline failed!"
+                println "Error: ${workflow.errorMessage}"
+            }
+        }
+
+        publish:
+        reports = GENERATE_REPORT.out
+    }
+    ```
+
+=== "Önce"
+
+    ```groovy title="main.nf" linenums="67" hl_lines="5-16"
+        ch_fastp = FASTP(trim_branches.fastp)
+        ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
+        GENERATE_REPORT(ch_samples)
+
+        workflow.onComplete = {
+            println ""
+            println "Pipeline execution summary:"
+            println "=========================="
+            println "Completed at: ${workflow.complete}"
+            println "Duration    : ${workflow.duration}"
+            println "Success     : ${workflow.success}"
+            println "workDir     : ${workflow.workDir}"
+            println "exit status : ${workflow.exitStatus}"
             println ""
         }
+
+        publish:
+        reports = GENERATE_REPORT.out
     }
     ```
 
 Artık belirtilmişse çıktı dizinini ve başarı/başarısızlık mesajını da içeren çok daha bilgilendirici bir özet elde ediyoruz:
 
-<!-- TODO: çalıştırma komutunu ekle -->
+```bash
+nextflow run main.nf
+```
 
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W  ~  version 25.10.4
-    Launching `main.nf` [boring_linnaeus] DSL2 - revision: a31662a7c1
+    N E X T F L O W  ~  version 26.04.4
+    Launching `main.nf` [hopeful_waddington] - revision: 442ec086c8
     WARN: Low sequencing depth for sample_002: 25000000
-    [e5/242efc] Submitted process > FASTP (2)
-    [3b/74047c] Submitted process > GENERATE_REPORT (3)
-    [8a/7a57e6] Submitted process > GENERATE_REPORT (1)
-    [a8/b1a31f] Submitted process > GENERATE_REPORT (2)
-    [40/648429] Submitted process > FASTP (1)
+    [e5/a71364] Submitted process > FASTP (1)
+    [81/c69cdc] Submitted process > FASTP (2)
+    [d1/368dff] Submitted process > GENERATE_REPORT (3)
+    [f0/19394e] Submitted process > TRIMGALORE (1)
+    [e3/679e45] Submitted process > GENERATE_REPORT (2)
+    [48/406c85] Submitted process > GENERATE_REPORT (1)
+    [81/c69cdc] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+    [e5/a71364] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+    [f8/b10ac0] Re-submitted process > FASTP (2)
+    [9e/49f6e2] Re-submitted process > FASTP (1)
 
-    Pipeline yürütme özeti:
+    Pipeline execution summary:
     ==========================
-    Tamamlandı: 2025-10-10T12:16:00.522569+01:00
-    Süre       : 3.6s
-    Başarı     : true
-    workDir    : /workspaces/training/side-quests/essential_scripting_patterns/work
-    Çıkış kodu : 0
+    Completed at: 2026-06-23T15:50:06.811854363Z
+    Duration    : 4.4s
+    Success     : true
+    workDir     : /workspaces/training/side-quests/essential_scripting_patterns/work
+    exit status : 0
 
-    ✅ Pipeline başarıyla tamamlandı!
+    ✅ Pipeline completed successfully!
+
+    Outputs:
+
+      /workspaces/training/side-quests/essential_scripting_patterns/results
+
+      reports:
+        - reports/sample_003_report.txt
+        - reports/sample_002_report.txt
+        - reports/sample_001_report.txt
     ```
 
 Dosya işlemlerini kullanarak özeti bir dosyaya da yazabilirsiniz:
 
-```groovy title="main.nf - Özeti dosyaya yazmak"
+```groovy title="main.nf - Writing summary to file"
 workflow {
     // ... iş akışı kodunuz ...
 
     workflow.onComplete = {
         def summary = """
-        Pipeline Yürütme Özeti
+        Pipeline Execution Summary
         ===========================
-        Tamamlandı: ${workflow.complete}
-        Süre      : ${workflow.duration}
-        Başarı    : ${workflow.success}
-        Komut     : ${workflow.commandLine}
+        Completed: ${workflow.complete}
+        Duration : ${workflow.duration}
+        Success  : ${workflow.success}
+        Command  : ${workflow.commandLine}
         """
 
         println summary
@@ -2188,48 +2454,48 @@ workflow {
 
 `onComplete`'in yanı sıra kullanabileceğiniz bir olay işleyicisi daha vardır: yalnızca iş akışı başarısız olduğunda çalışan `onError`:
 
-```groovy title="main.nf - onError işleyicisi"
+```groovy title="main.nf - onError handler"
 workflow {
     // ... iş akışı kodunuz ...
 
     workflow.onError = {
         println "="* 50
-        println "Pipeline yürütmesi başarısız oldu!"
-        println "Hata mesajı: ${workflow.errorMessage}"
+        println "Pipeline execution failed!"
+        println "Error message: ${workflow.errorMessage}"
         println "="* 50
 
         // Ayrıntılı hata günlüğü yaz
         def error_file = file("${workflow.launchDir}/error.log")
         error_file.text = """
-        İş Akışı Hata Raporu
+        Workflow Error Report
         =====================
-        Zaman: ${new Date()}
-        Hata: ${workflow.errorMessage}
-        Hata raporu: ${workflow.errorReport ?: 'Ayrıntılı rapor mevcut değil'}
+        Time: ${new Date()}
+        Error: ${workflow.errorMessage}
+        Error report: ${workflow.errorReport ?: 'No detailed report available'}
         """
 
-        println "Hata ayrıntıları şuraya yazıldı: ${error_file}"
+        println "Error details written to: ${error_file}"
     }
 }
 ```
 
 İş akışı betiğinizde birden fazla işleyiciyi birlikte kullanabilirsiniz:
 
-```groovy title="main.nf - Birleşik işleyiciler"
+```groovy title="main.nf - Combined handlers"
 workflow {
     // ... iş akışı kodunuz ...
 
     workflow.onError = {
-        println "İş akışı başarısız oldu: ${workflow.errorMessage}"
+        println "Workflow failed: ${workflow.errorMessage}"
     }
 
     workflow.onComplete = {
         def duration_mins = workflow.duration.toMinutes().round(2)
-        def status = workflow.success ? "BAŞARILI ✅" : "BAŞARISIZ ❌"
+        def status = workflow.success ? "SUCCESS ✅" : "FAILED ❌"
 
         println """
-        Pipeline tamamlandı: ${status}
-        Süre: ${duration_mins} dakika
+        Pipeline finished: ${status}
+        Duration: ${duration_mins} minutes
         """
     }
 }
@@ -2313,10 +2579,10 @@ Bu kalıpları kendi çalışmalarınızda uygulamak, dayanıklı, üretime haz�
 
     ```groovy
     def separateMetadata(row) {
-        def sample_meta = [ /* kısalık için kod gizlendi */ ]
+        def sample_meta = [ /* code hidden for brevity */ ]
         def fastq_path = file(row.file_path)
         def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
-        def file_meta = m ? [ /* kısalık için kod gizlendi */ ] : [:]
+        def file_meta = m ? [ /* code hidden for brevity */ ] : [:]
         def priority = sample_meta.quality > 40 ? 'high' : 'normal'
 
         return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
@@ -2368,7 +2634,7 @@ Bu kalıpları kendi çalışmalarınızda uygulamak, dayanıklı, üretime haz�
     - Groovy doğruluk değeriyle boolean değerlendirme
 
     ```groovy
-    if (sample.files) println "Dosyalar mevcut"
+    if (sample.files) println "Has files"
     ```
 
     - 'Doğruluk değeri' ile veriyi alt kümelere ayırmak için `filter()` kullanmak
@@ -2391,9 +2657,9 @@ Bu kalıpları kendi çalışmalarınızda uygulamak, dayanıklı, üretime haz�
     ```groovy
     try {
         def errors = validateSample(sample)
-        if (errors) throw new RuntimeException("Geçersiz: ${errors.join(', ')}")
+        if (errors) throw new RuntimeException("Invalid: ${errors.join(', ')}")
     } catch (Exception e) {
-        println "Hata: ${e.message}"
+        println "Error: ${e.message}"
     }
     ```
 
@@ -2403,14 +2669,14 @@ Bu kalıpları kendi çalışmalarınızda uygulamak, dayanıklı, üretime haz�
 
     ```groovy
     workflow.onComplete = {
-        println "Başarı     : ${workflow.success}"
-        println "Çıkış kodu : ${workflow.exitStatus}"
+        println "Success     : ${workflow.success}"
+        println "exit status : ${workflow.exitStatus}"
 
         if (workflow.success) {
-            println "✅ Pipeline başarıyla tamamlandı!"
+            println "✅ Pipeline completed successfully!"
         } else {
-            println "❌ Pipeline başarısız oldu!"
-            println "Hata: ${workflow.errorMessage}"
+            println "❌ Pipeline failed!"
+            println "Error: ${workflow.errorMessage}"
         }
     }
     ```
@@ -2422,12 +2688,12 @@ Bu kalıpları kendi çalışmalarınızda uygulamak, dayanıklı, üretime haz�
         // Ayrıntılı hata günlüğü yaz
         def error_file = file("${workflow.launchDir}/error.log")
         error_file.text = """
-        Zaman: ${new Date()}
-        Hata: ${workflow.errorMessage}
-        Hata raporu: ${workflow.errorReport ?: 'Ayrıntılı rapor mevcut değil'}
+        Time: ${new Date()}
+        Error: ${workflow.errorMessage}
+        Error report: ${workflow.errorReport ?: 'No detailed report available'}
         """
 
-        println "Hata ayrıntıları şuraya yazıldı: ${error_file}"
+        println "Error details written to: ${error_file}"
     }
     ```
 

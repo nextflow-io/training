@@ -72,7 +72,7 @@ process {
 
 ### 2.2. 내장 프로파일 검사하기
 
-파이프라인 코드베이스와 관련된 `molkart/nextflow.config` 파일에서 이들을 검사해 보겠습니다:
+파이프라인 코드베이스와 관련된 `molkart/nextflow.config` 파일에서 이들을 검사합니다:
 
 ```bash
 code molkart/nextflow.config
@@ -131,15 +131,16 @@ nextflow run ./molkart \
 매개변수, 입력 및 코드가 동일하면 모든 작업이 캐시에서 검색되고 파이프라인이 거의 즉시 완료됩니다.
 
 ```console title="Output (excerpt)"
-executor >  local (12)
+executor >  local (1)
+[43/e03702] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2, cached: 2 ✔
+[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2, cached: 2 ✔
 ...
-[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔
-[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)               [100%] 2 of 2, cached: 2 ✔
-...
+[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3, cached: 3 ✔
+[ef/d7b294] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
 -[nf-core/molkart] Pipeline completed successfully-
 ```
 
-모든 프로세스가 `cached: 2` 또는 `cached: 1`을 표시하는 것을 확인하십시오 - 아무것도 재실행되지 않았습니다!
+각 프로세스의 `cached: N` 표시를 확인하십시오 - 캐시된 전처리 및 분할 작업은 재실행되지 않았습니다.
 
 ### 2.4. 테스트 프로파일
 
@@ -185,7 +186,7 @@ process {
 이 프로파일에는 이전에 `params.yaml` 파일에서 사용했던 것과 동일한 매개변수가 포함되어 있습니다.
 
 쉼표로 구분하여 여러 프로파일을 활성화할 수 있습니다.
-이를 사용하여 params 파일 없이 파이프라인을 테스트해 보겠습니다:
+이를 사용하여 params 파일 없이 파이프라인을 테스트합니다:
 
 ```bash
 nextflow run ./molkart -profile docker,test --outdir results -resume
@@ -205,7 +206,7 @@ nf-core 파이프라인에는 컨테이너, 테스트 및 특수 환경을 위�
 
 ### 다음 단계
 
-다양한 컴퓨팅 환경을 위한 자체 사용자 정의 프로파일을 만드는 방법을 배웁니다.
+다양한 컴퓨팅 환경을 위한 자체 사용자 정의 프로파일을 만드는 방법을 학습합니다.
 
 ---
 

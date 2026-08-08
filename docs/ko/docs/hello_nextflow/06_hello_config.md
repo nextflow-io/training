@@ -77,15 +77,31 @@ nextflow run hello-config.nf
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-config.nf` [nice_escher] DSL2 - revision: d5dfdc9872
+    Launching `hello-config.nf` [nice_escher] revision: d5dfdc9872
 
-    executor > local (7)
-    [6a/bc46a6] sayHello (2) [100%] 3 of 3 ✔
-    [33/67bc48] convertToUpper (3) [100%] 3 of 3 ✔
-    [b5/de03ba] collectGreetings [100%] 1 of 1 ✔
+    executor >  local (8)
+    [6a/bc46a6] sayHello (2)       | 3 of 3 ✔
+    [33/67bc48] convertToUpper (3) | 3 of 3 ✔
+    [b5/de03ba] collectGreetings   | 1 of 1 ✔
     [98/c6b57b] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_config/intermediates/Bonjour-output.txt
+        - hello_config/intermediates/Hello-output.txt
+        - hello_config/intermediates/Hola-output.txt
+      uppercased:
+        - hello_config/intermediates/UPPER-Bonjour-output.txt
+        - hello_config/intermediates/UPPER-Hello-output.txt
+        - hello_config/intermediates/UPPER-Hola-output.txt
+      collected: hello_config/intermediates/COLLECTED-batch-output.txt
+      batch_report: hello_config/batch-report.txt
+      cowpy_art: hello_config/cowpy-COLLECTED-batch-output.txt
     ```
 
 이전과 마찬가지로 `output` 블록에 지정된 디렉토리(`results/hello_config/`)에서 출력 파일을 찾을 수 있습니다.
@@ -237,15 +253,31 @@ nextflow run hello-config.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-config.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
+    Launching `hello-config.nf` [disturbed_einstein] revision: ede9037d02
 
     executor >  local (8)
     [f0/35723c] sayHello (2)       | 3 of 3 ✔
     [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
     [17/e97d32] collectGreetings   | 1 of 1 ✔
     [98/c6b57b] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_config/intermediates/Hello-output.txt
+        - hello_config/intermediates/Hola-output.txt
+        - hello_config/intermediates/Bonjour-output.txt
+      uppercased:
+        - hello_config/intermediates/UPPER-Hola-output.txt
+        - hello_config/intermediates/UPPER-Hello-output.txt
+        - hello_config/intermediates/UPPER-Bonjour-output.txt
+      collected: hello_config/intermediates/COLLECTED-batch-output.txt
+      batch_report: hello_config/batch-report.txt
+      cowpy_art: hello_config/cowpy-COLLECTED-batch-output.txt
     ```
 
 이것은 여전히 이전과 동일한 출력을 생성합니다.
@@ -333,15 +365,31 @@ nextflow run ../hello-config.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `../hello-config.nf` [trusting_escher] DSL2 - revision: 356df0818d
+    Launching `../hello-config.nf` [trusting_escher] revision: 356df0818d
 
     executor >  local (8)
-    [59/b66913] sayHello (2)       [100%] 3 of 3 ✔
-    [ad/f06364] convertToUpper (3) [100%] 3 of 3 ✔
-    [10/714895] collectGreetings   [100%] 1 of 1 ✔
-    [88/3ece98] cowpy              [100%] 1 of 1 ✔
+    [59/b66913] sayHello (2)       | 3 of 3 ✔
+    [ad/f06364] convertToUpper (3) | 3 of 3 ✔
+    [10/714895] collectGreetings   | 1 of 1 ✔
+    [88/3ece98] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/tux-run/results
+
+      first_output:
+        - hello_config/intermediates/Hola-output.txt
+        - hello_config/intermediates/Hello-output.txt
+        - hello_config/intermediates/Bonjour-output.txt
+      uppercased:
+        - hello_config/intermediates/UPPER-Bonjour-output.txt
+        - hello_config/intermediates/UPPER-Hello-output.txt
+        - hello_config/intermediates/UPPER-Hola-output.txt
+      collected: hello_config/intermediates/COLLECTED-experiment-output.txt
+      batch_report: hello_config/experiment-report.txt
+      cowpy_art: hello_config/cowpy-COLLECTED-experiment-output.txt
     ```
 
 이것은 `tux-run/work/` 및 `tux-run/results/`를 포함하여 `tux-run/` 아래에 새로운 디렉토리 세트를 생성합니다.
@@ -419,15 +467,31 @@ nextflow run hello-config.nf -params-file test-params.yaml
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-config.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
+    Launching `hello-config.nf` [disturbed_sammet] revision: ede9037d02
 
     executor >  local (8)
     [f0/35723c] sayHello (2)       | 3 of 3 ✔
     [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
     [17/e97d32] collectGreetings   | 1 of 1 ✔
     [98/c6b57b] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_config/intermediates/Hola-output.txt
+        - hello_config/intermediates/Bonjour-output.txt
+        - hello_config/intermediates/Hello-output.txt
+      uppercased:
+        - hello_config/intermediates/UPPER-Hello-output.txt
+        - hello_config/intermediates/UPPER-Hola-output.txt
+        - hello_config/intermediates/UPPER-Bonjour-output.txt
+      collected: hello_config/intermediates/COLLECTED-yaml-output.txt
+      batch_report: hello_config/yaml-report.txt
+      cowpy_art: hello_config/cowpy-COLLECTED-yaml-output.txt
     ```
 
 최종 출력 파일에는 인사말을 말하는 stegosaurus 캐릭터가 포함되어야 합니다.
@@ -500,15 +564,31 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli/
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-config.nf` [prickly_kay] DSL2 - revision: 32ecc4fba2
+    Launching `hello-config.nf` [prickly_kay] revision: 32ecc4fba2
 
     executor >  local (8)
-    [9f/332636] sayHello (1)       [100%] 3 of 3 ✔
-    [03/a55991] convertToUpper (3) [100%] 3 of 3 ✔
-    [e5/ab7893] collectGreetings   [100%] 1 of 1 ✔
-    [a8/97338e] cowpy              [100%] 1 of 1 ✔
+    [9f/332636] sayHello (1)       | 3 of 3 ✔
+    [03/a55991] convertToUpper (3) | 3 of 3 ✔
+    [e5/ab7893] collectGreetings   | 1 of 1 ✔
+    [a8/97338e] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/custom-outdir-cli
+
+      first_output:
+        - hello_config/intermediates/Hola-output.txt
+        - hello_config/intermediates/Hello-output.txt
+        - hello_config/intermediates/Bonjour-output.txt
+      uppercased:
+        - hello_config/intermediates/UPPER-Bonjour-output.txt
+        - hello_config/intermediates/UPPER-Hello-output.txt
+        - hello_config/intermediates/UPPER-Hola-output.txt
+      collected: hello_config/intermediates/COLLECTED-batch-output.txt
+      batch_report: hello_config/batch-report.txt
+      cowpy_art: hello_config/cowpy-COLLECTED-batch-output.txt
     ```
 
 이것은 `results/` 대신 `custom-outdir-cli/`에 출력을 게시합니다:
@@ -832,15 +912,31 @@ nextflow run hello-config.nf -output-dir custom-outdir-config-2 --batch rep2
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-config.nf` [mad_curry] DSL2 - revision: 668a98ccb9
+    Launching `hello-config.nf` [mad_curry] revision: 668a98ccb9
 
     executor >  local (8)
-    [9e/6095e0] sayHello (1)       [100%] 3 of 3 ✔
-    [05/454d52] convertToUpper (3) [100%] 3 of 3 ✔
-    [ed/e3ddfb] collectGreetings   [100%] 1 of 1 ✔
-    [39/5e063a] cowpy              [100%] 1 of 1 ✔
+    [9e/6095e0] sayHello (1)       | 3 of 3 ✔
+    [05/454d52] convertToUpper (3) | 3 of 3 ✔
+    [ed/e3ddfb] collectGreetings   | 1 of 1 ✔
+    [39/5e063a] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/custom-outdir-config-2
+
+      first_output:
+        - rep2/intermediates/sayHello/Bonjour-output.txt
+        - rep2/intermediates/sayHello/Hello-output.txt
+        - rep2/intermediates/sayHello/Hola-output.txt
+      uppercased:
+        - rep2/intermediates/convertToUpper/UPPER-Hello-output.txt
+        - rep2/intermediates/convertToUpper/UPPER-Bonjour-output.txt
+        - rep2/intermediates/convertToUpper/UPPER-Hola-output.txt
+      collected: rep2/intermediates/collectGreetings/COLLECTED-rep2-output.txt
+      batch_report: rep2/collectGreetings/rep2-report.txt
+      cowpy_art: rep2/cowpy/cowpy-COLLECTED-rep2-output.txt
     ```
 
 이것은 지정된 기본 경로 _및_ 배치 이름 하위 디렉토리 _및_ 프로세스별로 그룹화된 결과와 함께 `custom-outdir-config-2/rep2/`에 출력을 게시합니다:
@@ -962,15 +1058,31 @@ nextflow run hello-config.nf -output-dir config-output-mode
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-config.nf` [small_stone] DSL2 - revision: 024d6361b5
+    Launching `hello-config.nf` [small_stone] revision: 024d6361b5
 
     executor >  local (8)
-    [e8/a0e93e] sayHello (1)       [100%] 3 of 3 ✔
-    [14/176c9d] convertToUpper (3) [100%] 3 of 3 ✔
-    [23/d667ca] collectGreetings   [100%] 1 of 1 ✔
-    [e6/1dc80e] cowpy              [100%] 1 of 1 ✔
+    [e8/a0e93e] sayHello (1)       | 3 of 3 ✔
+    [14/176c9d] convertToUpper (3) | 3 of 3 ✔
+    [23/d667ca] collectGreetings   | 1 of 1 ✔
+    [e6/1dc80e] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/config-output-mode
+
+      first_output:
+        - batch/intermediates/sayHello/Hola-output.txt
+        - batch/intermediates/sayHello/Bonjour-output.txt
+        - batch/intermediates/sayHello/Hello-output.txt
+      uppercased:
+        - batch/intermediates/convertToUpper/UPPER-Bonjour-output.txt
+        - batch/intermediates/convertToUpper/UPPER-Hola-output.txt
+        - batch/intermediates/convertToUpper/UPPER-Hello-output.txt
+      collected: batch/intermediates/collectGreetings/COLLECTED-batch-output.txt
+      batch_report: batch/collectGreetings/batch-report.txt
+      cowpy_art: batch/cowpy/cowpy-COLLECTED-batch-output.txt
     ```
 
 이것은 `config-output-mode/`에 출력을 게시하며, 여전히 모두 심볼릭 링크가 아닌 적절한 복사본입니다.
@@ -1094,15 +1206,32 @@ nextflow run hello-config.nf --batch conda
 ??? success "명령 출력"
 
     ```console title="Output"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-config.nf` [friendly_lamport] DSL2 - revision: 024d6361b5
+    Launching `hello-config.nf` [friendly_lamport] revision: 024d6361b5
 
     executor >  local (8)
-    [e8/91c116] sayHello (2)       [100%] 3 of 3 ✔
-    [fe/6a70ce] convertToUpper (3) [100%] 3 of 3 ✔
-    [99/7cc493] collectGreetings   [100%] 1 of 1 ✔
-    [3c/09fb59] cowpy              [100%] 1 of 1 ✔
+    [e8/91c116] sayHello (2)       | 3 of 3 ✔
+    [fe/6a70ce] convertToUpper (3) | 3 of 3 ✔
+    [99/7cc493] collectGreetings   | 1 of 1 ✔
+    [3c/09fb59] cowpy              | 1 of 1 ✔
+    Creating env using conda: conda-forge::cowpy==1.1.5 [cache /workspaces/training/hello-nextflow/work/conda/env-898314d566668b6587ad714ae06b8520]
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/custom-outdir-config
+
+      first_output:
+        - conda/intermediates/sayHello/Bonjour-output.txt
+        - conda/intermediates/sayHello/Hola-output.txt
+        - conda/intermediates/sayHello/Hello-output.txt
+      uppercased:
+        - conda/intermediates/convertToUpper/UPPER-Bonjour-output.txt
+        - conda/intermediates/convertToUpper/UPPER-Hola-output.txt
+        - conda/intermediates/convertToUpper/UPPER-Hello-output.txt
+      collected: conda/intermediates/collectGreetings/COLLECTED-conda-output.txt
+      batch_report: conda/collectGreetings/conda-report.txt
+      cowpy_art: conda/cowpy/cowpy-COLLECTED-conda-output.txt
     ```
 
 이것은 문제없이 작동하고 `custom-outdir-config/conda` 아래에 이전과 동일한 출력을 생성해야 합니다.
@@ -1488,15 +1617,31 @@ nextflow run hello-config.nf -profile my_laptop
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-config.nf` [hungry_sanger] DSL2 - revision: 024d6361b5
+    Launching `hello-config.nf` [hungry_sanger] revision: 024d6361b5
 
     executor >  local (8)
-    [b0/fb2ec9] sayHello (3)       [100%] 3 of 3 ✔
-    [4a/e039f0] convertToUpper (3) [100%] 3 of 3 ✔
-    [6f/408fa9] collectGreetings   [100%] 1 of 1 ✔
-    [f1/fd6520] cowpy              [100%] 1 of 1 ✔
+    [b0/fb2ec9] sayHello (3)       | 3 of 3 ✔
+    [4a/e039f0] convertToUpper (3) | 3 of 3 ✔
+    [6f/408fa9] collectGreetings   | 1 of 1 ✔
+    [f1/fd6520] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/custom-outdir-config
+
+      first_output:
+        - batch/intermediates/sayHello/Bonjour-output.txt
+        - batch/intermediates/sayHello/Hola-output.txt
+        - batch/intermediates/sayHello/Hello-output.txt
+      uppercased:
+        - batch/intermediates/convertToUpper/UPPER-Bonjour-output.txt
+        - batch/intermediates/convertToUpper/UPPER-Hola-output.txt
+        - batch/intermediates/convertToUpper/UPPER-Hello-output.txt
+      collected: batch/intermediates/collectGreetings/COLLECTED-batch-output.txt
+      batch_report: batch/collectGreetings/batch-report.txt
+      cowpy_art: batch/cowpy/cowpy-COLLECTED-batch-output.txt
     ```
 
 보시다시피 이를 통해 런타임에 설정 간을 매우 편리하게 전환할 수 있습니다.
@@ -1572,15 +1717,31 @@ nextflow run hello-config.nf -profile my_laptop,test
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-config.nf` [modest_becquerel] DSL2 - revision: 024d6361b5
+    Launching `hello-config.nf` [modest_becquerel] revision: 024d6361b5
 
     executor >  local (8)
-    [4c/fe2580] sayHello (1)       [100%] 3 of 3 ✔
-    [fd/7d9017] convertToUpper (3) [100%] 3 of 3 ✔
-    [13/1523bd] collectGreetings   [100%] 1 of 1 ✔
-    [06/a1ee14] cowpy              [100%] 1 of 1 ✔
+    [4c/fe2580] sayHello (1)       | 3 of 3 ✔
+    [fd/7d9017] convertToUpper (3) | 3 of 3 ✔
+    [13/1523bd] collectGreetings   | 1 of 1 ✔
+    [06/a1ee14] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/custom-outdir-config
+
+      first_output:
+        - test/intermediates/sayHello/Hello-output.txt
+        - test/intermediates/sayHello/Hola-output.txt
+        - test/intermediates/sayHello/Bonjour-output.txt
+      uppercased:
+        - test/intermediates/convertToUpper/UPPER-Hola-output.txt
+        - test/intermediates/convertToUpper/UPPER-Hello-output.txt
+        - test/intermediates/convertToUpper/UPPER-Bonjour-output.txt
+      collected: test/intermediates/collectGreetings/COLLECTED-test-output.txt
+      batch_report: test/collectGreetings/test-report.txt
+      cowpy_art: test/cowpy/cowpy-COLLECTED-test-output.txt
     ```
 
 이것은 가능한 경우 Docker를 사용하고 `custom-outdir-config/test` 아래에 출력을 생성하며, 이번에는 캐릭터가 코미디 듀오 `dragonandcow`입니다.

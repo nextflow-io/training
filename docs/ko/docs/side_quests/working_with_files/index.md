@@ -163,11 +163,17 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
+    Launching `main.nf` [romantic_chandrasekhar] revision: 5a4a89bc3a
 
     data/patientA_rep1_normal_R1_001.fastq.gz is of class class java.lang.String
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 보시다시피, Nextflow는 우리가 작성한 그대로 문자열 경로를 출력했습니다.
@@ -211,11 +217,17 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
+    Launching `main.nf` [kickass_coulomb] revision: 5af44b1b59
 
     /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz is of class class sun.nio.fs.UnixPath
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 이번에는 입력으로 제공한 상대 경로 대신 전체 절대 경로가 표시됩니다.
@@ -275,15 +287,21 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48
+    Launching `main.nf` [ecstatic_ampere] revision: f3fa3dcb48
 
     File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
     Simple name: patientA_rep1_normal_R1_001
     Extension: gz
     Parent directory: /workspaces/training/side-quests/working_with_files/data
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 위에서 다양한 파일 속성이 콘솔에 출력된 것을 확인할 수 있습니다.
@@ -392,9 +410,9 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [cheeky_hypatia] DSL2 - revision: 281d13c414
+    Launching `main.nf` [cheeky_hypatia] revision: 281d13c414
 
     File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
@@ -402,9 +420,15 @@ nextflow run main.nf
     Extension: gz
     Parent directory: /workspaces/training/side-quests/working_with_files/data
     executor >  local (1)
-    [e9/341c05] COUNT_LINES [100%] 1 of 1 ✔
-    Processing file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
+    [e9/341c05] COUNT_LINES | 1 of 1 ✔
+    Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 프로세스 내에서 파일을 적절히 처리할 수 있음을 보여줍니다.
@@ -475,10 +499,11 @@ nextflow run main.nf
 ??? failure "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [friendly_goodall] DSL2 - revision: ae50609b20
+    Launching `main.nf` [friendly_goodall] revision: ae50609b20
 
+    File object class: class java.lang.String
     [-        ] COUNT_LINES -
     ERROR ~ Error executing process > 'COUNT_LINES'
 
@@ -487,9 +512,9 @@ nextflow run main.nf
 
 
 
-    Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 중요한 부분은 다음입니다:
@@ -543,12 +568,13 @@ nextflow run main.nf
 ??? failure "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [soggy_golick] DSL2 - revision: ae50609b20
+    Launching `main.nf` [soggy_golick] revision: ae50609b20
 
+    File object class: class java.lang.String
     executor >  local (1)
-    [b3/b3023c] COUNT_LINES [  0%] 0 of 1 ✘
+    [b3/b3023c] COUNT_LINES | 0 of 1 ✘
     ERROR ~ Error executing process > 'COUNT_LINES'
 
     Caused by:
@@ -576,9 +602,9 @@ nextflow run main.nf
     Work dir:
       /workspaces/training/side-quests/working_with_files/work/b3/b3023cb2ccb986851301d8e369e79f
 
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 위에서 언급한 것처럼 프로세스가 디버깅 정보를 출력하도록 설정되어 있어 오류에 대한 많은 세부 정보가 표시됩니다.
@@ -692,9 +718,9 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
+    Launching `main.nf` [insane_swartz] revision: fff18abe6d
 
     File object class: class nextflow.file.http.XPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
@@ -702,9 +728,15 @@ nextflow run main.nf
     Extension: gz
     Parent directory: /nextflow-io/training/master/side-quests/working_with_files/data
     executor >  local (1)
-    [8a/2ab7ca] COUNT_LINES [100%] 1 of 1 ✔
+    [8a/2ab7ca] COUNT_LINES | 1 of 1 ✔
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 작동합니다! 거의 변경된 것이 없음을 확인할 수 있습니다.
@@ -813,15 +845,10 @@ nextflow run main.nf
 
 ```groovy title="Syntax example"
 ch_files = channel.of([file('data/patientA_rep1_normal_R1_001.fastq.gz')],
-                      [file('data/patientA_rep1_normal_R1_001.fastq.gz')])
+                      [file('data/patientA_rep1_normal_R2_001.fastq.gz')])
 ```
 
 작동하기는 하지만 번거롭습니다.
-
-!!! tip "`file()` vs `channel.fromPath()` 사용 시기"
-
-    - 단일 Path 객체가 필요한 경우(파일 존재 여부 확인, 속성 읽기, 단일 프로세스 실행에 전달)에는 `file()`을 사용하세요
-    - 여러 파일을 담을 수 있는 채널이 필요한 경우, 특히 glob 패턴을 사용하거나 파일이 여러 프로세스를 통해 흐를 때는 `channel.fromPath()`를 사용하세요
 
 여기서 [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#frompath)가 등장합니다. 하나 이상의 정적 파일 문자열과 glob 패턴에서 채널을 생성하는 데 필요한 모든 기능을 번들로 제공하는 편리한 채널 팩토리입니다.
 
@@ -877,17 +904,28 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [grave_meucci] DSL2 - revision: b09964a583
+    Launching `main.nf` [grave_meucci] revision: b09964a583
 
     Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 보시다시피, 파일 경로가 채널에서 `Path` 유형 객체로 로드되고 있습니다.
 이것은 `file()`이 했을 것과 유사하지만, 이제 원하는 경우 더 많은 파일을 로드할 수 있는 채널이 생겼습니다.
 
 `channel.fromPath()`는 파일 목록으로 채워진 새 채널을 생성하는 편리한 방법입니다.
+
+!!! tip "`file()` vs `channel.fromPath()` 사용 시기"
+
+    - 단일 Path 객체가 필요한 경우(파일 존재 여부 확인, 속성 읽기, 단일 프로세스 실행에 전달)에는 `file()`을 사용하세요
+    - 여러 파일을 담을 수 있는 채널이 필요한 경우, 특히 glob 패턴을 사용하거나 파일이 여러 프로세스를 통해 흐를 때는 `channel.fromPath()`를 사용하세요
 
 ### 3.2. 채널의 파일 속성 보기
 
@@ -934,12 +972,12 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [furious_swanson] DSL2 - revision: c35c34950d
+    Launching `main.nf` [furious_swanson] revision: c35c34950d
 
     executor >  local (1)
-    [9d/6701a6] COUNT_LINES (1) [100%] 1 of 1 ✔
+    [9d/6701a6] COUNT_LINES (1) | 1 of 1 ✔
     File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
     Simple name: patientA_rep1_normal_R1_001
@@ -947,6 +985,12 @@ nextflow run main.nf
     Parent directory: /workspaces/training/side-quests/working_with_files/data
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 이전과 동일한 결과이지만, 이제 파일이 채널에 있으므로 더 많은 파일을 추가할 수 있습니다.
@@ -1003,12 +1047,12 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [boring_sammet] DSL2 - revision: d2aa789c9a
+    Launching `main.nf` [boring_sammet] revision: d2aa789c9a
 
     executor >  local (2)
-    [3c/a65de5] COUNT_LINES (2) [100%] 2 of 2 ✔
+    [3c/a65de5] COUNT_LINES (2) | 2 of 2 ✔
     File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
     Simple name: patientA_rep1_normal_R1_001
@@ -1024,6 +1068,12 @@ nextflow run main.nf
 
     Processing file: patientA_rep1_normal_R2_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 보시다시피, 이제 채널에 두 개의 Path 객체가 있습니다. Nextflow가 파일 이름 확장을 올바르게 수행하고 두 파일을 모두 로드하고 처리했음을 보여줍니다.
@@ -1108,19 +1158,25 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console hl_lines="7-8"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [suspicious_mahavira] DSL2 - revision: ae8edc4e48
+    Launching `main.nf` [suspicious_mahavira] revision: ae8edc4e48
 
     executor >  local (2)
-    [e9/55774b] COUNT_LINES (2) [100%] 2 of 2 ✔
-    [patientA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [e9/55774b] COUNT_LINES (2) | 2 of 2 ✔
     [patientA_rep1_normal_R1_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    [patientA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    Processing file: patientA_rep1_normal_R2_001.fastq.gz
+    40
+
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
 
-    Processing file: patientA_rep1_normal_R2_001.fastq.gz
-    40
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 채널의 각 요소는 이제 `simpleName`과 원래 파일 객체를 포함하는 튜플입니다.
@@ -1164,19 +1220,25 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console hl_lines="7-8"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [gigantic_gauss] DSL2 - revision: a39baabb57
+    Launching `main.nf` [gigantic_gauss] revision: a39baabb57
 
     executor >  local (2)
-    [e7/da2f4b] COUNT_LINES (2) [100%] 2 of 2 ✔
-    [[patientA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [e7/da2f4b] COUNT_LINES (2) | 2 of 2 ✔
     [[patientA, rep1, normal, R1, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    [[patientA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
     Processing file: patientA_rep1_normal_R2_001.fastq.gz
     40
 
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 이제 채널의 각 요소에 대한 튜플에는 메타데이터 목록(_예:_ `[patientA, rep1, normal, R1, 001]`)과 원래 파일 객체가 포함됩니다.
@@ -1265,19 +1327,25 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console hl_lines="7-8"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
+    Launching `main.nf` [infallible_swartz] revision: 7f4e68c0cb
 
     executor >  local (2)
-    [1b/e7fb27] COUNT_LINES (1) [100%] 2 of 2 ✔
-    [[id:patientA, replicate:1, type:normal, readNum:2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [1b/e7fb27] COUNT_LINES (1) | 2 of 2 ✔
     [[id:patientA, replicate:1, type:normal, readNum:1], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    [[id:patientA, replicate:1, type:normal, readNum:2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
     Processing file: patientA_rep1_normal_R2_001.fastq.gz
     40
 
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 이제 메타데이터가 명확하게 레이블링되어(_예:_ `[id:patientA, replicate:1, type:normal, readNum:2]`) 무엇이 무엇인지 훨씬 쉽게 알 수 있습니다.
@@ -1337,10 +1405,10 @@ data/patientA_rep1_normal_R{1,2}_001.fastq.gz
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         /* 지금은 매핑을 주석 처리합니다. 나중에 다시 살펴볼 것입니다!
         ch_files.map { myFile ->
-            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            def (patient, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
                 [
-                    id: sample,
+                    id: patient,
                     replicate: replicate.replace('rep', ''),
                     type: type,
                     readNum: readNum,
@@ -1355,13 +1423,13 @@ data/patientA_rep1_normal_R{1,2}_001.fastq.gz
 === "전"
 
     ```groovy title="main.nf" linenums="7" hl_lines="1-2"
-        // channel.fromFilePairs로 파일 로드
+        // channel.fromPath로 파일 로드
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_files.map { myFile ->
-            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            def (patient, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
                 [
-                    id: sample,
+                    id: patient,
                     replicate: replicate.replace('rep', ''),
                     type: type,
                     readNum: readNum,
@@ -1383,12 +1451,11 @@ nextflow run main.nf
 
 ??? failure "명령 출력"
 
-    ```console hl_lines="7-8"
-     N E X T F L O W   ~  version 25.10.4
+    ```console hl_lines="6-7"
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [angry_koch] DSL2 - revision: 44fdf66105
+    Launching `main.nf` [angry_koch] revision: 44fdf66105
 
-    [-        ] COUNT_LINES -
     [-        ] COUNT_LINES -
     [patientA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
     ERROR ~ Error executing process > 'COUNT_LINES (1)'
@@ -1398,9 +1465,9 @@ nextflow run main.nf
 
 
 
-    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 이런, 이번에는 실행이 실패했습니다!
@@ -1451,11 +1518,17 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console hl_lines="5"
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [fabulous_davinci] DSL2 - revision: 22b53268dc
+    Launching `main.nf` [fabulous_davinci] revision: 22b53268dc
 
     [patientA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 이번에는 워크플로우가 성공했습니다!
@@ -1476,10 +1549,10 @@ nextflow run main.nf
         // channel.fromFilePairs로 파일 로드
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id, files ->
-            def (sample, replicate, type) = id.tokenize('_')
+            def (patient, replicate, type) = id.tokenize('_')
             [
                 [
-                    id: sample,
+                    id: patient,
                     replicate: replicate.replace('rep', ''),
                     type: type
                 ],
@@ -1496,10 +1569,10 @@ nextflow run main.nf
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         /* 지금은 매핑을 주석 처리합니다. 나중에 다시 살펴볼 것입니다!
         ch_files.map { myFile ->
-            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            def (patient, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
                 [
-                    id: sample,
+                    id: patient,
                     replicate: replicate.replace('rep', ''),
                     type: type,
                     readNum: readNum,
@@ -1526,11 +1599,17 @@ nextflow run main.nf
 
     ```console
 
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [prickly_stonebraker] DSL2 - revision: f62ab10a3f
+    Launching `main.nf` [prickly_stonebraker] revision: f62ab10a3f
 
     [[id:patientA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 결과가 나왔습니다: 출력 튜플의 첫 번째 위치에 메타데이터 map(`[id:patientA, replicate:1, type:normal]`)이 있고, 그 뒤에 의도한 대로 페어드 파일의 튜플이 있습니다.
@@ -1642,10 +1721,10 @@ process ANALYZE_READS {
         // channel.fromFilePairs로 파일 로드
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id,  files ->
-           def (sample, replicate, type, readNum) = id.tokenize('_')
+           def (patient, replicate, type) = id.tokenize('_')
            [
                [
-                   id: sample,
+                   id: patient,
                    replicate: replicate.replace('rep', ''),
                    type: type
                ],
@@ -1664,10 +1743,10 @@ process ANALYZE_READS {
         // channel.fromFilePairs로 파일 로드
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id,  files ->
-           def (sample, replicate, type, readNum) = id.tokenize('_')
+           def (patient, replicate, type) = id.tokenize('_')
            [
                [
-                   id: sample,
+                   id: patient,
                    replicate: replicate.replace('rep', ''),
                    type: type
                ],
@@ -1686,11 +1765,17 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [goofy_kirch] DSL2 - revision: 3313283e42
+    Launching `main.nf` [goofy_kirch] revision: 3313283e42
 
     [[id:patientA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
     ```
 
 이제 이름으로 채널을 참조할 수 있음을 확인했습니다.
@@ -1714,10 +1799,10 @@ nextflow run main.nf
         // channel.fromFilePairs로 파일 로드
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_samples = ch_files.map { id,  files ->
-           def (sample, replicate, type, readNum) = id.tokenize('_')
+           def (patient, replicate, type) = id.tokenize('_')
            tuple(
                [
-                   id: sample,
+                   id: patient,
                    replicate: replicate.replace('rep', ''),
                    type: type
                ],
@@ -1747,10 +1832,10 @@ nextflow run main.nf
         // channel.fromFilePairs로 파일 로드
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id,  files ->
-           def (sample, replicate, type, readNum) = id.tokenize('_')
+           def (patient, replicate, type) = id.tokenize('_')
            [
                [
-                   id: sample,
+                   id: patient,
                    replicate: replicate.replace('rep', ''),
                    type: type
                ],
@@ -1784,12 +1869,19 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [shrivelled_cori] DSL2 - revision: b546a31769
+    Launching `main.nf` [shrivelled_cori] revision: b546a31769
 
     executor >  local (1)
-    [b5/110360] process > ANALYZE_READS (patientA) [100%] 1 of 1 ✔
+    [b5/110360] ANALYZE_READS (patientA) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
+        - [{id: patientA, replicate: '1', type: normal}, patientA/patientA_stats.txt]
     ```
 
 출력이 `results` 디렉토리에 게시되므로 확인해 봅니다.
@@ -1849,12 +1941,26 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [big_stonebraker] DSL2 - revision: f7f9b8a76c
+    Launching `main.nf` [big_stonebraker] revision: f7f9b8a76c
 
     executor >  local (8)
-    [d5/441891] process > ANALYZE_READS (patientC) [100%] 8 of 8 ✔
+    [d5/441891] ANALYZE_READS (patientC) | 8 of 8 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
+        - [{id: patientB, replicate: '1', type: tumor}, patientB/patientB_stats.txt]
+        - [{id: patientA, replicate: '2', type: tumor}, patientA/patientA_stats.txt]
+        - [{id: patientC, replicate: '1', type: normal}, patientC/patientC_stats.txt]
+        - [{id: patientB, replicate: '1', type: normal}, patientB/patientB_stats.txt]
+        - [{id: patientA, replicate: '1', type: normal}, patientA/patientA_stats.txt]
+        - [{id: patientA, replicate: '1', type: tumor}, patientA/patientA_stats.txt]
+        - [{id: patientA, replicate: '2', type: normal}, patientA/patientA_stats.txt]
+        - [{id: patientC, replicate: '1', type: tumor}, patientC/patientC_stats.txt]
     ```
 
 이제 results 디렉토리에 사용 가능한 모든 데이터에 대한 결과가 포함되어야 합니다.
@@ -1885,7 +1991,7 @@ nextflow run main.nf
 
 === "후"
 
-    ```groovy title="main.nf" hl_lines="3"
+    ```groovy title="main.nf" hl_lines="2"
     analysis_results {
         path { meta, file -> "${meta.type}/${meta.id}/${meta.replicate}" }
     }
@@ -1893,7 +1999,7 @@ nextflow run main.nf
 
 === "전"
 
-    ```groovy title="main.nf" hl_lines="3"
+    ```groovy title="main.nf" hl_lines="2"
     analysis_results {
         path { meta, file -> "${meta.id}" }
     }
@@ -1911,12 +2017,26 @@ nextflow run main.nf
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
+    Launching `main.nf` [insane_swartz] revision: fff18abe6d
 
     executor >  local (8)
-    [e3/449081] process > ANALYZE_READS (patientC) [100%] 8 of 8 ✔
+    [e3/449081] ANALYZE_READS (patientC) | 8 of 8 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/working_with_files/results
+
+      analysis_results:
+        - [{id: patientB, replicate: '1', type: normal}, normal/patientB/1/patientB_stats.txt]
+        - [{id: patientB, replicate: '1', type: tumor}, tumor/patientB/1/patientB_stats.txt]
+        - [{id: patientC, replicate: '1', type: normal}, normal/patientC/1/patientC_stats.txt]
+        - [{id: patientA, replicate: '1', type: tumor}, tumor/patientA/1/patientA_stats.txt]
+        - [{id: patientA, replicate: '1', type: normal}, normal/patientA/1/patientA_stats.txt]
+        - [{id: patientA, replicate: '2', type: normal}, normal/patientA/2/patientA_stats.txt]
+        - [{id: patientC, replicate: '1', type: tumor}, tumor/patientC/1/patientC_stats.txt]
+        - [{id: patientA, replicate: '2', type: tumor}, tumor/patientA/2/patientA_stats.txt]
     ```
 
 이제 results 디렉토리를 확인합니다:
@@ -2069,20 +2189,21 @@ nextflow run main.nf
 5.  **channel.fromFilePairs로 단순화:** `channel.fromFilePairs()`를 사용하여 관련 파일을 자동으로 쌍으로 묶고 페어드 파일 ID에서 메타데이터를 추출했습니다.
 
     ```groovy
-    ch_pairs = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
+    ch_files = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
     ```
 
 6.  **프로세스에서 파일 작업 사용:** 적절한 입력 처리를 통해 파일 작업을 Nextflow 프로세스에 통합하고, `output {}` 블록을 사용하여 메타데이터를 기반으로 출력을 구성했습니다.
 
     - 프로세스 입력에 meta map 연결
 
-    ```groovy
+    ````groovy
     ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
     ch_samples = ch_files.map { id,  files ->
-        def (sample, replicate, type, readNum) = id.tokenize('_')
+        def (patient, replicate, type) = id.tokenize('_')
         tuple(
+            ```groovy
             [
-                id: sample,
+                id: patient,
                 replicate: replicate.replace('rep', ''),
                 type: type
             ],
@@ -2091,7 +2212,7 @@ nextflow run main.nf
     }
 
     ANALYZE_READS(ch_samples)
-    ```
+    ````
 
     - 메타데이터를 기반으로 출력 구성
 

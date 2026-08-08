@@ -23,7 +23,7 @@ To demonstrate how this works, we'll replace the custom `collectGreetings` modul
     You can test that it runs successfully by running the following command:
 
     ```bash
-    nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+    nextflow run . --outdir core-hello-results -profile test,docker
     ```
 
 ---
@@ -48,7 +48,7 @@ Navigate to the modules page in your web browser and use the search bar to searc
 As you can see, there are quite a few results, many of them modules designed to concatenate very specific types of files.
 Among them, you should see one called `find_concatenate` that is general-purpose.
 
-!!! note "Module naming convention"
+!!! info "Module naming convention"
 
     The underscore (`_`) is used as a stand-in for the slash (`/`) character in module names.
 
@@ -118,9 +118,11 @@ This displays documentation about the module, including its inputs, outputs, and
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 3.5.2 - https://nf-co.re
+        nf-core/tools version 4.0.2 - https://nf-co.re
 
 
+    INFO     Reinstalling modules found in 'modules.json' but missing from
+             directory:
     ╭─ Module: find/concatenate  ──────────────────────────────────────────────────╮
     │ 🌐 Repository: https://github.com/nf-core/modules.git                        │
     │ 🔧 Tools: find, pigz                                                         │
@@ -184,6 +186,8 @@ This displays documentation about the module, including its inputs, outputs, and
 
 This is the exact same information you can find on the website.
 
+You can ignore the `INFO Reinstalling modules found in 'modules.json' but missing from directory` message; it is emitted by nf-core/tools 4.0.2 for any module you query with `info`, whether or not it is actually installed, and has no effect since the `info` command doesn't write any files.
+
 ### 1.4. Install the find/concatenate module
 
 Now that we've found the module we want, we need to add it to our pipeline's source code.
@@ -191,14 +195,12 @@ Now that we've found the module we want, we need to add it to our pipeline's sou
 The good news is that the nf-core project includes some tooling to make this part easy.
 Specifically, the `nf-core modules install` command makes it possible to automate retrieving the code and making it available to your project in a single step.
 
-Navigate to your pipeline directory and run the installation command:
+Make sure your working directory is the root of the `core-hello` pipeline project, then run the installation command:
 
 ```bash
 cd core-hello
 nf-core modules install find/concatenate
 ```
-
-The tool will proceed to install the module.
 
 ??? success "Command output"
 
@@ -210,26 +212,20 @@ The tool will proceed to install the module.
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 3.5.2 - https://nf-co.re
+    nf-core/tools version 4.0.2 - https://nf-co.re
 
 
     INFO     Installing 'find/concatenate'
-    INFO     Use the following statement to include this module:
-
-     include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
+    NotADirectoryError: [Errno 20] Not a directory:
+    'modules/local/cowpy.nf/meta.yml'
     ```
 
-The command automatically:
+The command downloads the module files to `modules/nf-core/find/concatenate/` and updates `modules.json` to track the installed module.
+You can ignore the `NotADirectoryError` at the end; it happens because nf-core/tools 4.0.2 expects every local module to live in its own directory (`modules/local/<name>/main.nf`), while `core-hello` still uses single-file local modules at this stage.
+However, the `find/concatenate` module is installed correctly, and `modules.json` is updated as expected.
+We'll convert `cowpy` to the directory layout in Part 4.
 
-- Downloads the module files to `modules/nf-core/find/concatenate/`
-- Updates `modules.json` to track the installed module
-- Provides you with the correct `include` statement to use in your workflow
-
-!!! tip
-
-    Always make sure your current working directory is the root of your pipeline project before running the module installation command.
-
-Let's check that the module was installed correctly:
+Let's check that the module files are in place:
 
 ```bash
 tree -L 4 modules
@@ -255,7 +251,61 @@ tree -L 4 modules
     5 directories, 7 files
     ```
 
-You can also verify the installation by asking the nf-core utility to list locally installed modules:
+You can also confirm the installation by inspecting `modules.json`, which now lists `find/concatenate` under the nf-core/modules repository.
+
+??? abstract "File contents"
+
+    ```json title="modules.json"
+    {
+        "name": "core/hello",
+        "homePage": "https://github.com/core/hello",
+        "repos": {
+            "https://github.com/nf-core/modules.git": {
+                "modules": {
+                    "nf-core": {
+                        "find/concatenate": {
+                            "branch": "master",
+                            "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                            "installed_by": [
+                                "modules"
+                            ]
+                        }
+                    }
+                },
+                "subworkflows": {
+                    "nf-core": {
+                        "utils_nextflow_pipeline": {
+                            "branch": "master",
+                            "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                            "installed_by": [
+                                "subworkflows"
+                            ]
+                        },
+                        "utils_nfcore_pipeline": {
+                            "branch": "master",
+                            "git_sha": "a3fb7351b1fdb2b1de282b765816bbea190e86a8",
+                            "installed_by": [
+                                "subworkflows"
+                            ]
+                        },
+                        "utils_nfschema_plugin": {
+                            "branch": "master",
+                            "git_sha": "fdc08b8b1ae74f56686ce21f7ea11ad11990ce57",
+                            "installed_by": [
+                                "subworkflows"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ```
+
+This confirms that the `find/concatenate` module is now part of your project's source code.
+However, to actually use the new module, we need to import it into our pipeline.
+
+Finally, you can also use the `nf-core modules list local` command to check what modules are currently tracked in your pipeline.
 
 ```bash
 nf-core modules list local
@@ -264,25 +314,27 @@ nf-core modules list local
 ??? success "Command output"
 
     ```console
+
+                                          ,--./,-.
+          ___     __   __   __   ___     /,-._.--~\
+    |\ | |__  __ /  ` /  \ |__) |__         }  {
+    | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                          `._,._,'
+
+    nf-core/tools version 4.0.2 - https://nf-co.re
+
+
     INFO     Repository type: pipeline
     INFO     Modules installed in '.':
 
-    ┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
-    ┃ Module Name    ┃ Repository      ┃ Version SHA ┃ Message        ┃ Date       ┃
-    ┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
-    │ find/concaten… │ nf-core/modules │ 6d46786     │ Support for    │ 2026-04-23 │
-    │                │                 │             │ apptainer as   │            │
-    │                │                 │             │ well as        │            │
-    │                │                 │             │ singularity    │            │
-    │                │                 │             │ for .sif in    │            │
-    │                │                 │             │ `container`    │            │
-    │                │                 │             │ (#11260)       │            │
-    └────────────────┴─────────────────┴─────────────┴────────────────┴────────────┘
+    ┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+    ┃ Module Name      ┃ Repository      ┃ Version SHA ┃ Message                                                                       ┃ Date       ┃
+    ┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+    │ find/concatenate │ nf-core/modules │ 6d46786     │ Support for apptainer as well as singularity for .sif in `container` (#11260) │ 2026-04-23 │
+    └──────────────────┴─────────────────┴─────────────┴───────────────────────────────────────────────────────────────────────────────┴────────────┘
     ```
 
-This confirms that the `find/concatenate` module is now part of your project's source code.
-
-However, to actually use the new module, we need to import it into our pipeline.
+This shows `find/concatenate` in the resulting table alongside its repository, version SHA, message, and date.
 
 ### 1.5. Update the module imports
 
@@ -300,7 +352,7 @@ Open up `core-hello/workflows/hello.nf` and make the following substitution:
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="11"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -310,8 +362,8 @@ Open up `core-hello/workflows/hello.nf` and make the following substitution:
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+    include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
     include { cowpy                  } from '../modules/local/cowpy.nf'
-    include { FIND_CONCATENATE                } from '../modules/nf-core/find/concatenate/main'
     ```
 
 === "Before"
@@ -343,7 +395,7 @@ At this point, you might be tempted to dive in and start editing code, but it's 
 
 We're going to tackle that as a separate section because it involves a new mechanism we haven't covered yet: metadata maps.
 
-!!! note
+!!! info
 
     You can optionally delete the `collectGreetings.nf` file:
 
@@ -371,9 +423,9 @@ This will allow us to determine whether we can just treat the new module as a dr
 Ideally this is something you should do _before_ you even install the module, but hey, better late than never.
 (For what it's worth, there is an `uninstall` command to get rid of modules you decide you no longer want.)
 
-!!! note
+!!! info
 
-    The FIND_CONCATENATE process includes some rather clever handling of different compression types, file extensions and so on that aren't strictly relevant to what we're trying to show you here, so we'll ignore most of it and focus only on the parts that are important.
+    The `FIND_CONCATENATE` process includes some rather clever handling of different compression types, file extensions and so on that aren't strictly relevant to what we're trying to show you here, so we'll ignore most of it and focus only on the parts that are important.
 
 ### 2.1. Compare the two modules' interfaces
 
@@ -421,12 +473,12 @@ process FIND_CONCATENATE {
     tuple val("${task.process}"), val("coreutils"), eval("cat --version | sed '1!d; s/.* //'"), topic: versions, emit: versions_coreutils
 ```
 
-The FIND_CONCATENATE module takes a single input, but that input is a tuple containing two things:
+The `FIND_CONCATENATE` module takes a single input, but that input is a tuple containing two things:
 
 - `meta` is a structure containing metadata, called a metamap;
 - `files_in` contains one or more input files to process, equivalent to `collectGreetings`'s `input_files`.
 
-Upon completion, FIND_CONCATENATE delivers its outputs in two parts:
+Upon completion, `FIND_CONCATENATE` delivers its outputs in two parts:
 
 - A tuple containing the metamap and the concatenated output file, emitted with the `file_out` tag;
 - Three version tuples (one per tool used) published to the `versions` topic channel for software version tracking.
@@ -440,14 +492,14 @@ This may seem like a lot to keep track of just looking at the code, so here's a 
 </figure>
 
 You can see that the two modules have similar input requirements in terms of content (a set of input files plus some metadata) but very different expectations for how that content is packaged.
-Ignoring the versions output for now, their main output is equivalent too (a concatenated file), except FIND_CONCATENATE also emits the metamap in conjunction with the output file.
+Ignoring the versions output for now, their main output is equivalent too (a concatenated file), except `FIND_CONCATENATE` also emits the metamap in conjunction with the output file.
 
 The packaging differences will be fairly easy to deal with, as you'll see in a little bit.
 However, to understand the metamap part, we need to introduce you to some additional context.
 
 ### 2.2. Understanding metamaps
 
-We just told you that the FIND_CONCATENATE module expects a metadata map as part of its input tuple.
+We just told you that the `FIND_CONCATENATE` module expects a metadata map as part of its input tuple.
 Let's take a few minutes to take a closer look at what that is.
 
 The **metadata map**, often referred to as **metamap** for short, is a Groovy-style map containing information about units of data.
@@ -510,7 +562,7 @@ As mentioned earlier, the `tuple val(meta), path(files_in)` input setup is a sta
 Hopefully you can start to see how useful this can be.
 Not only does it allow you to name outputs based on metadata, but you can also do things like use it to apply different parameter values, and in combination with specific operators, you can even group, sort or filter out data as it flows through the pipeline.
 
-!!! note "Learn more about metadata"
+!!! info "Learn more about metadata"
 
     For a comprehensive introduction to working with metadata in Nextflow workflows, including how to read metadata from samplesheets and use it to customize processing, see the [Metadata in workflows](../side_quests/metadata/index.md) side quest.
 
@@ -535,13 +587,13 @@ Integrate the new module into a workflow.
 
 ---
 
-## 3. Integrate FIND_CONCATENATE into the `hello.nf` workflow
+## 3. Integrate `FIND_CONCATENATE` into the `hello.nf` workflow
 
 Now that you know everything about metamaps (or enough for the purposes of this course, anyway), it's time to actually implement the changes we outlined above.
 
 For the sake of clarity, we'll break this down and cover each step separately.
 
-!!! note
+!!! info
 
     All the changes shown below are made to the workflow logic in the `main` block in the `core-hello/workflows/hello.nf` workflow file.
 
@@ -568,8 +620,8 @@ Let's add these lines after the `convertToUpper` call, removing the `collectGree
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // emit a greeting
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="7-8"
+        // emit a greeting (updated to use the nf-core convention for samplesheets)
         sayHello(ch_samplesheet)
 
         // convert the greeting to uppercase
@@ -584,8 +636,8 @@ Let's add these lines after the `convertToUpper` call, removing the `collectGree
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // emit a greeting
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="7-8"
+        // emit a greeting (updated to use the nf-core convention for samplesheets)
         sayHello(ch_samplesheet)
 
         // convert the greeting to uppercase
@@ -606,8 +658,8 @@ Next, transform the channel of files into a channel of tuples containing metadat
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="10-11"
-        // emit a greeting
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="10-11"
+        // emit a greeting (updated to use the nf-core convention for samplesheets)
         sayHello(ch_samplesheet)
 
         // convert the greeting to uppercase
@@ -625,8 +677,8 @@ Next, transform the channel of files into a channel of tuples containing metadat
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
+        // emit a greeting (updated to use the nf-core convention for samplesheets)
         sayHello(ch_samplesheet)
 
         // convert the greeting to uppercase
@@ -646,14 +698,14 @@ The line we've added achieves two things:
 
 That is all we need to do to set up the input tuple for `FIND_CONCATENATE`.
 
-### 3.3. Call the FIND_CONCATENATE module
+### 3.3. Call the `FIND_CONCATENATE` module
 
 Now call `FIND_CONCATENATE` on the newly created channel:
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="13-14"
-        // emit a greeting
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="13-14"
+        // emit a greeting (updated to use the nf-core convention for samplesheets)
         sayHello(ch_samplesheet)
 
         // convert the greeting to uppercase
@@ -674,8 +726,8 @@ Now call `FIND_CONCATENATE` on the newly created channel:
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
+        // emit a greeting (updated to use the nf-core convention for samplesheets)
         sayHello(ch_samplesheet)
 
         // convert the greeting to uppercase
@@ -702,8 +754,8 @@ Since `cowpy` doesn't accept metadata tuples yet (we'll fix this in the next par
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="16-17 20"
-        // emit a greeting
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="16-17 20"
+        // emit a greeting (updated to use the nf-core convention for samplesheets)
         sayHello(ch_samplesheet)
 
         // convert the greeting to uppercase
@@ -727,8 +779,8 @@ Since `cowpy` doesn't accept metadata tuples yet (we'll fix this in the next par
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="17"
-        // emit a greeting
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29" hl_lines="17"
+        // emit a greeting (updated to use the nf-core convention for samplesheets)
         sayHello(ch_samplesheet)
 
         // convert the greeting to uppercase
@@ -751,7 +803,7 @@ The `#!groovy .map { meta, file -> file }` operation extracts the file from the 
 
 Then it's just a matter of passing `ch_for_cowpy` to `cowpy` instead of `collectGreetings.out.outfile` in that last line.
 
-!!! note
+!!! info
 
     In the next part of the course, we'll update `cowpy` to work with metadata tuples directly, so this extraction step will no longer be necessary.
 
@@ -760,7 +812,7 @@ Then it's just a matter of passing `ch_for_cowpy` to `cowpy` instead of `collect
 Let's test that the workflow works with the newly integrated `find/concatenate` module:
 
 ```bash
-nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+nextflow run . --outdir core-hello-results -profile test,docker
 ```
 
 This should run reasonably quickly.
@@ -768,40 +820,40 @@ This should run reasonably quickly.
 ??? success "Command output"
 
     ```console
-    N E X T F L O W ~ version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-        Launching `./main.nf` [evil_pike] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [cheesy_bhabha] revision: d6bbba9521
 
-        Input/output options
-          input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
-          outdir                    : core-hello-results
+    Input/output options
+      input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
+      outdir                    : core-hello-results
 
-        Institutional config options
-          config_profile_name       : Test profile
-          config_profile_description: Minimal test dataset to check pipeline function
+    Institutional config options
+      config_profile_name       : Test profile
+      config_profile_description: Minimal test dataset to check pipeline function
 
-        Generic options
-          validate_params           : false
-          trace_report_suffix       : 2025-10-30_18-50-58
+    Generic options
+      validate_params           : false
+      trace_report_suffix       : 2026-06-23_16-55-02
 
-        Core Nextflow options
-          runName                   : evil_pike
-          containerEngine           : docker
-          launchDir                 : /workspaces/training/hello-nf-core/core-hello
-          workDir                   : /workspaces/training/hello-nf-core/core-hello/work
-          projectDir                : /workspaces/training/hello-nf-core/core-hello
-          userName                  : root
-          profile                   : test,docker
-          configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
+    Core Nextflow options
+      runName                   : cheesy_bhabha
+      containerEngine           : docker
+      launchDir                 : /workspaces/training/hello-nf-core/core-hello
+      workDir                   : /workspaces/training/hello-nf-core/core-hello/work
+      projectDir                : /workspaces/training/hello-nf-core/core-hello
+      userName                  : root
+      profile                   : test,docker
+      configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
 
-        !! Only displaying parameters that differ from the pipeline defaults !!
-        ------------------------------------------------------
-        executor >  local (8)
-        [b3/f005fd] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-        [08/f923d0] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-        [34/3729a9] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     [100%] 1 of 1 ✔
-        [24/df918a] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
-        -[core/hello] Pipeline completed successfully-
+    !! Only displaying parameters that differ from the pipeline defaults !!
+    ------------------------------------------------------
+    executor >  local (8)
+    [bf/aa86d7] CORE_HELLO:HELLO:sayHello (3)            | 3 of 3 ✔
+    [0a/df448e] CORE_HELLO:HELLO:convertToUpper (3)      | 3 of 3 ✔
+    [82/ded72f] CORE_HELLO:HELLO:FIND_CONCATENATE (test) | 1 of 1 ✔
+    [9d/0130bf] CORE_HELLO:HELLO:cowpy                   | 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
     ```
 
 Notice that `FIND_CONCATENATE` now appears in the process execution list instead of `collectGreetings`.

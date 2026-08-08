@@ -131,15 +131,16 @@ Com que estem utilitzant `-resume`, Nextflow comprovarà si alguna cosa ha canvi
 Si els paràmetres, entrades i codi són els mateixos, totes les tasques es recuperaran de la memòria cau i el pipeline es completarà gairebé instantàniament.
 
 ```console title="Output (excerpt)"
-executor >  local (12)
+executor >  local (1)
+[43/e03702] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2, cached: 2 ✔
+[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2, cached: 2 ✔
 ...
-[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔
-[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)               [100%] 2 of 2, cached: 2 ✔
-...
+[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3, cached: 3 ✔
+[ef/d7b294] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
 -[nf-core/molkart] Pipeline completed successfully-
 ```
 
-Observa que tots els processos mostren `cached: 2` o `cached: 1` - no s'ha tornat a executar res!
+Observa l'anotació `cached: N` a cada procés - les tasques de preprocessament i segmentació emmagatzemades en memòria cau no s'han tornat a executar.
 
 ### 2.4. Perfils de prova
 

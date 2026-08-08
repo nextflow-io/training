@@ -154,7 +154,7 @@ workflow {
 
 === "Sonra"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="2-6"
+    ```groovy title="main.nf" linenums="2" hl_lines="1-6"
         ch_samples = channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map{ row ->
@@ -178,9 +178,9 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9
+    Launching `main.nf` [deadly_mercator] revision: bd6b0224e9
 
     [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
@@ -234,9 +234,9 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [admiring_brown] DSL2 - revision: 194d61704d
+    Launching `main.nf` [admiring_brown] revision: 194d61704d
 
     [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
@@ -297,9 +297,9 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74
+    Launching `main.nf` [trusting_poisson] revision: 639186ee74
 
     [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
@@ -340,9 +340,9 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
+    Launching `main.nf` [maniac_boltzmann] revision: 3636b6576b
 
     Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -389,9 +389,9 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
+    Launching `main.nf` [maniac_boltzmann] revision: 3636b6576b
 
     Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -444,9 +444,9 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d
+    Launching `main.nf` [mad_lagrange] revision: 9940b3f23d
 
     Tumor sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     Tumor sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -502,9 +502,9 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [soggy_wiles] DSL2 - revision: 3bc1979889
+    Launching `main.nf` [soggy_wiles] revision: 3bc1979889
 
     [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -531,7 +531,7 @@ Sonraki adımda, birden fazla alana göre birleştirmek istediğiniz durumu ele 
 
 ### 3.2. Birden fazla alana göre birleştirme
 
-sampleA için 2 replikatımız var, ancak sampleB ve sampleC için yalnızca 1 replikat bulunuyor. Bu durumda `id` alanını kullanarak bunları etkili biçimde birleştirebildik; peki senkronizasyon bozulursa ne olur? Farklı replikatlardan normal ve tümör örneklerini karıştırabiliriz!
+patientA için 2 replikatımız var, ancak patientB ve patientC için yalnızca 1 replikat bulunuyor. Bu durumda `id` alanını kullanarak bunları etkili biçimde birleştirebildik; peki senkronizasyon bozulursa ne olur? Farklı replikatlardan normal ve tümör örneklerini karıştırabiliriz!
 
 Bunu önlemek için birden fazla alana göre birleştirebiliriz. Bunu başarmanın aslında birden fazla yolu vardır; ancak hem örnek `id`'sini hem de `replicate` numarasını içeren yeni bir birleştirme anahtarı oluşturmaya odaklanacağız.
 
@@ -568,9 +568,9 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [prickly_wing] DSL2 - revision: 3bebf22dee
+    Launching `main.nf` [prickly_wing] revision: 3bebf22dee
 
     [[patientA, 1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     [[patientA, 2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -617,9 +617,9 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [reverent_wing] DSL2 - revision: 847016c3b7
+    Launching `main.nf` [reverent_wing] revision: 847016c3b7
 
     [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -704,15 +704,17 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [angry_meninsky] DSL2 - revision: 2edc226b1d
+    Launching `main.nf` [evil_swartz] revision: 5ef9b852a4
 
-    [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-    [[id:patientB, repeat:1], [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    [[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+    [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]
+    [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]
+    [[id:patientB, repeat:1], [id:patientB, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]
+    [[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_tumor.bam]
     ```
+
+    Closure artık her yolu `file()` ile sardığından, dosya girişleri örnek sayfasındaki yalın dosya adları yerine çözümlenmiş mutlak yollar olarak görünür.
 
 Adlandırılmış closure kullanmak, aynı dönüşümü birden fazla yerde yeniden kullanmamıza olanak tanır; bu da hata riskini azaltır ve kodu daha okunabilir ve sürdürülebilir hale getirir.
 
@@ -723,21 +725,21 @@ Adlandırılmış closure kullanmak, aynı dönüşümü birden fazla yerde yeni
 ```groovy
 [
   [
-    "id": "sampleC",
+    "id": "patientC",
     "repeat": "1",
   ],
   [
-    "id": "sampleC",
+    "id": "patientC",
     "repeat": "1",
     "type": "normal",
   ],
-  "sampleC_rep1_normal.bam"
+  "patientC_rep1_normal.bam",
   [
-    "id": "sampleC",
+    "id": "patientC",
     "repeat": "1",
     "type": "tumor",
   ],
-  "sampleC_rep1_tumor.bam"
+  "patientC_rep1_tumor.bam"
 ]
 ```
 
@@ -766,6 +768,10 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
+    N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [lonely_perlman] revision: 36bb08c483
+
     [[id:patientA, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]
     [[id:patientA, repeat:2], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]
     [[id:patientB, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]
@@ -803,9 +809,9 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [confident_leavitt] DSL2 - revision: a2303895bd
+    Launching `main.nf` [confident_leavitt] revision: a2303895bd
 
     [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
     [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
@@ -881,9 +887,9 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [mighty_tesla] DSL2 - revision: ae013ab70b
+    Launching `main.nf` [mighty_tesla] revision: ae013ab70b
 
     [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr1]
     [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr2]
@@ -963,9 +969,9 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd
+    Launching `main.nf` [sad_hawking] revision: 1f6f6250cd
 
     [[id:patientA, repeat:1, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
     [[id:patientA, repeat:1, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
@@ -996,7 +1002,7 @@ Bu bölümde şunları öğrendiniz:
 
 ## 5. `groupTuple` kullanarak örnekleri toplama
 
-Önceki bölümlerde, bir girdi dosyasından verileri nasıl böleceğimizi ve belirli alanlara göre (bizim durumumuzda normal ve tümör örnekleri) nasıl filtreleyeceğimizi öğrendik. Ancak bu yalnızca tek bir birleştirme türünü kapsar. Örnekleri belirli bir özniteliğe göre gruplamak istersek ne olur? Örneğin, eşleştirilmiş normal-tümör çiftlerini birleştirmek yerine, türlerinden bağımsız olarak "sampleA"dan gelen tüm örnekleri birlikte işlemek isteyebiliriz. Bu desen, sonunda sonuçları karşılaştırmadan veya birleştirmeden önce verimlilik nedeniyle ilgili örnekleri ayrı ayrı işlemek isteyebileceğiniz biyoinformatik iş akışlarında yaygındır.
+Önceki bölümlerde, bir girdi dosyasından verileri nasıl böleceğimizi ve belirli alanlara göre (bizim durumumuzda normal ve tümör örnekleri) nasıl filtreleyeceğimizi öğrendik. Ancak bu yalnızca tek bir birleştirme türünü kapsar. Örnekleri belirli bir özniteliğe göre gruplamak istersek ne olur? Örneğin, eşleştirilmiş normal-tümör çiftlerini birleştirmek yerine, türlerinden bağımsız olarak "patientA"dan gelen tüm örnekleri birlikte işlemek isteyebiliriz. Bu desen, sonunda sonuçları karşılaştırmadan veya birleştirmeden önce verimlilik nedeniyle ilgili örnekleri ayrı ayrı işlemek isteyebileceğiniz biyoinformatik iş akışlarında yaygındır.
 
 Nextflow bunu yapmak için yerleşik yöntemler içerir; inceleyeceğimiz ana yöntem `groupTuple`'dır.
 
@@ -1008,7 +1014,7 @@ Bunu yapmak için gruplama değişkenlerimizi yalıtmamız gerekir; böylece bun
 
 ```groovy title="main.nf" linenums="1"
 {
-  "id": "sampleA",
+  "id": "patientA",
   "repeat": "1",
   "interval": "chr1"
 }
@@ -1064,9 +1070,9 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76
+    Launching `main.nf` [hopeful_brenner] revision: 7f4f7fea76
 
     [[id:patientA, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
     [[id:patientA, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
@@ -1128,9 +1134,9 @@ nextflow run main.nf
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d
+    Launching `main.nf` [friendly_jang] revision: a1bee1c55d
 
     [[id:patientA, interval:chr1], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
     [[id:patientA, interval:chr2], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
@@ -1191,7 +1197,7 @@ Bu kanal işlemlerinde ustalaşmak, döngülere veya yinelemeli programlamaya ba
 2.  **Verileri ayrı kanallara bölme:** `type` alanına göre verileri bağımsız akışlara bölmek için `filter` kullandık
 
     ```groovy
-    channel.filter { it.type == 'tumor' }
+    channel.filter { meta, file -> meta.type == 'tumor' }
     ```
 
 3.  **Eşleştirilmiş örnekleri birleştirme:** `id` ve `repeat` alanlarına göre ilgili örnekleri yeniden birleştirmek için `join` kullandık
@@ -1199,31 +1205,31 @@ Bu kanal işlemlerinde ustalaşmak, döngülere veya yinelemeli programlamaya ba
     - İki kanalı anahtara göre birleştirme (demetin ilk öğesi)
 
     ```groovy
-    tumor_ch.join(normal_ch)
+    ch_normal_samples.join(ch_tumor_samples)
     ```
 
     - Birleştirme anahtarını çıkarma ve bu değere göre birleştirme
 
     ```groovy
-    tumor_ch.map { meta, file -> [meta.id, meta, file] }
+    ch_normal_samples.map { meta, file -> [meta.id, meta, file] }
         .join(
-          normal_ch.map { meta, file -> [meta.id, meta, file] }
+          ch_tumor_samples.map { meta, file -> [meta.id, meta, file] }
         )
     ```
 
-    - subMap kullanarak birden fazla alana göre birleştirme
+    - `subMap` kullanarak birden fazla alana göre birleştirme
 
     ```groovy
-    tumor_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+    ch_normal_samples.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
         .join(
-          normal_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+          ch_tumor_samples.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
         )
     ```
 
 4.  **Aralıklara dağıtma:** Paralel işleme için örneklerin genomik aralıklarla Kartezyen çarpımlarını oluşturmak amacıyla `combine` kullandık.
 
     ```groovy
-    samples_ch.combine(intervals_ch)
+    ch_joined_samples.combine(ch_intervals)
     ```
 
 5.  **Gruplama anahtarlarına göre toplama:** Her demetteki ilk öğeye göre gruplamak, böylece `id` ve `interval` alanlarını paylaşan örnekleri toplayarak teknik replikatları birleştirmek için `groupTuple` kullandık.

@@ -19,7 +19,7 @@ Test, pipeline'ınızın her parçasının beklenen şekilde çalışıp çalı�
 
 Yazabileceğimiz pek çok farklı test türü vardır:
 
-1. **Modül düzeyinde testler**: Bireysel süreçler için
+1. **Süreç düzeyinde testler**: Bireysel süreçler için
 2. **İş akışı düzeyinde testler**: Tek bir iş akışı için
 3. **Pipeline düzeyinde testler**: Bir bütün olarak pipeline için
 4. **Performans testleri**: Pipeline'ın hızı ve verimliliği için
@@ -27,16 +27,16 @@ Yazabileceğimiz pek çok farklı test türü vardır:
 
 Bireysel süreçleri test etmek, diğer dillerdeki birim testlerine benzerdir. İş akışını veya tüm pipeline'ı test etmek ise diğer dillerde entegrasyon testleri olarak adlandırılan şeye benzer; burada bileşenlerin etkileşimlerini test ederiz.
 
-[**nf-test**](https://www.nf-test.com/), modül, iş akışı ve pipeline düzeyinde testler yazmanıza olanak tanıyan bir araçtır. Kısacası, pipeline'ın her bir parçasının _izole olarak_ beklenen şekilde çalışıp çalışmadığını sistematik olarak kontrol etmenizi sağlar.
+[**nf-test**](https://www.nf-test.com/), süreç, iş akışı ve pipeline düzeyinde testler yazmanıza olanak tanıyan bir araçtır. Kısacası, pipeline'ın her bir parçasının _izole olarak_ beklenen şekilde çalışıp çalışmadığını sistematik olarak kontrol etmenizi sağlar.
 
 ### Öğrenme hedefleri
 
-Bu yan görevde, pipeline için iş akışı düzeyinde bir test ve çağırdığı üç süreç için modül düzeyinde testler yazmak amacıyla nf-test kullanmayı öğreneceksiniz.
+Bu yan görevde, pipeline için iş akışı düzeyinde bir test ve çağırdığı iki süreç için süreç düzeyinde testler yazmak amacıyla nf-test kullanmayı öğreneceksiniz.
 
 Bu yan görevin sonunda aşağıdaki teknikleri etkin bir şekilde kullanabileceksiniz:
 
 - Projenizde nf-test'i başlatma
-- Modül düzeyinde ve iş akışı düzeyinde testler oluşturma
+- Süreç düzeyinde ve iş akışı düzeyinde testler oluşturma
 - Yaygın assertion türleri ekleme
 - Snapshot'ların ne zaman, içerik assertion'larının ne zaman kullanılacağını anlama
 - Tüm proje için testleri çalıştırma
@@ -49,6 +49,16 @@ Bu yan göreve başlamadan önce şunları yapmanız gerekir:
 
 - [Hello Nextflow](../../hello_nextflow/index.md) eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmanız.
 - Temel Nextflow kavramları ve mekanizmalarını (süreçler, kanallar, operatörler, dosyalarla çalışma, meta veri) rahatça kullanabilmeniz.
+
+!!! warning "nf-test sürüm gereksinimi"
+
+    Süreç düzeyinde testler **nf-test 0.9.3 veya daha yeni bir sürüm** gerektirir. Daha eski sürümler (0.9.2 dahil), Nextflow'un 26.04 sürümünden itibaren varsayılan olarak kullandığı katı sözdizimi ayrıştırıcısıyla uyumsuz test iskelet kodu üretir; bu durum beklenen test sonucu yerine `Script compilation failed` hatasına neden olur.
+
+    Sürümünüzü `nf-test version` komutuyla kontrol edebilirsiniz. Yükseltmeniz gerekiyorsa:
+
+    ```bash
+    curl -fsSL https://code.askimed.com/install/nf-test | bash
+    ```
 
 ---
 
@@ -81,7 +91,8 @@ Bir ana iş akışı dosyası ve pipeline'ın girdisini içeren `greetings.csv` 
 ```console title="Directory contents"
 .
 ├── greetings.csv
-└── main.nf
+├── main.nf
+└── nextflow.config
 ```
 
 Dosyaların ayrıntılı açıklaması için [Hello Nextflow'daki ısınma bölümüne](../../hello_nextflow/00_orientation.md) bakın.
@@ -111,21 +122,23 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.
 ??? example "İş akışı kodu"
 
     ```groovy title="main.nf"
+    #!/usr/bin/env nextflow
+
     /*
-    * Pipeline parametreleri
-    */
+     * Pipeline parametreleri
+     */
     params.input_file = "greetings.csv"
 
     /*
-    * Standart çıktıya 'Hello World!' yazdırmak için echo kullan
-    */
+     * Standart çıktıya 'Hello World!' yazdırmak için echo kullan
+     */
     process sayHello {
 
         input:
-            val greeting
+        val greeting
 
         output:
-            path "${greeting}-output.txt"
+        path "${greeting}-output.txt"
 
         script:
         """
@@ -134,15 +147,15 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.
     }
 
     /*
-    * Selamlamayı büyük harfe dönüştürmek için metin değiştirme aracı kullan
-    */
+     * Selamlamayı büyük harfe dönüştürmek için metin değiştirme aracı kullan
+     */
     process convertToUpper {
 
         input:
-            path input_file
+        path input_file
 
         output:
-            path "UPPER-${input_file}"
+        path "UPPER-${input_file}"
 
         script:
         """
@@ -183,13 +196,27 @@ nextflow run main.nf
 ```
 
 ```console title="Result of running the workflow"
- N E X T F L O W   ~  version 24.10.2
+ N E X T F L O W   ~  version 26.04.4
 
-Launching `main.nf` [soggy_linnaeus] DSL2 - revision: bbf79d5c31
+Launching `main.nf` [trusting_mendel] revision: 405c90f891
 
 executor >  local (6)
-[f7/c3be66] sayHello (3)       | 3 of 3 ✔
-[cd/e15303] convertToUpper (3) | 3 of 3 ✔
+[6c/d7ae4e] sayHello (3)       | 3 of 3 ✔
+[72/5fa770] convertToUpper (2) | 3 of 3 ✔
+
+Outputs:
+
+  /workspaces/training/side-quests/nf-test/results
+
+  greetings:
+    - Hola-output.txt
+    - Hello-output.txt
+    - Bonjour-output.txt
+
+  upper_greetings:
+    - UPPER-Hola-output.txt
+    - UPPER-Bonjour-output.txt
+    - UPPER-Hello-output.txt
 ```
 
 TEBRİKLER! Az önce bir test çalıştırdınız!
@@ -435,10 +462,10 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [1d4aaf12] 'Should run without failures' PASSED (1.619s)
+  Test [693ba951] 'Should run without failures' PASSED (2.879s)
 
 
-SUCCESS: Executed 1 tests in 1.626s
+SUCCESS: Executed 1 tests in 2.883s
 ```
 
 Başarılı! Pipeline başarıyla çalışıyor ve test geçiyor. İstediğiniz kadar çalıştırın, her seferinde aynı sonucu alacaksınız!
@@ -460,15 +487,28 @@ https://www.nf-test.com
 Test Workflow main.nf
 
   Test [693ba951] 'Should run without failures'
-    > Nextflow 24.10.4 is available - Please consider updating your version to it
-    > N E X T F L O W  ~  version 24.10.0
-    > Launching `/workspaces/training/side-quests/nf-test/main.nf` [zen_ampere] DSL2 - revision: bbf79d5c31
-    > [2b/61e453] Submitted process > sayHello (2)
-    > [31/4e1606] Submitted process > sayHello (1)
-    > [bb/5209ee] Submitted process > sayHello (3)
-    > [83/83db6f] Submitted process > convertToUpper (2)
-    > [9b/3428b1] Submitted process > convertToUpper (1)
-    > [ca/0ba51b] Submitted process > convertToUpper (3)
+    > N E X T F L O W  ~  version 26.04.4
+    > Launching `/workspaces/training/side-quests/nf-test/main.nf` [maniac_mcclintock] - revision: 405c90f891
+    > [fc/6965c3] Submitted process > sayHello (1)
+    > [14/640c84] Submitted process > sayHello (2)
+    > [d6/3594c9] Submitted process > sayHello (3)
+    > [d7/f14d58] Submitted process > convertToUpper (1)
+    > [76/cb9122] Submitted process > convertToUpper (2)
+    > [d1/92b304] Submitted process > convertToUpper (3)
+    >
+    > Outputs:
+    >
+    >   /workspaces/training/side-quests/nf-test/.nf-test/tests/693ba951a20fec36a5a9292ed1cc8a9f/results
+    >
+    >   greetings:
+    >     - Bonjour-output.txt
+    >     - Hello-output.txt
+    >     - Hola-output.txt
+    >
+    >   upper_greetings:
+    >     - UPPER-Bonjour-output.txt
+    >     - UPPER-Hola-output.txt
+    >     - UPPER-Hello-output.txt
     PASSED (5.206s)
 
 
@@ -534,10 +574,10 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [1d4aaf12] 'Should run successfully with correct number of processes' PASSED (1.567s)
+  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (2.876s)
 
 
-SUCCESS: Executed 1 tests in 1.588s
+SUCCESS: Executed 1 tests in 2.879s
 ```
 
 Başarılı! Pipeline başarıyla çalışıyor ve test geçiyor. Artık pipeline'ın genel durumunun yanı sıra ayrıntılarını da test etmeye başladık.
@@ -619,11 +659,11 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [f0e08a68] 'Should run successfully with correct number of processes' PASSED (8.144s)
-  Test [d7e32a32] 'Should produce correct output files' PASSED (6.994s)
+  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (3.055s)
+  Test [44ba6e13] 'Should produce correct output files' PASSED (2.941s)
 
 
-SUCCESS: Executed 2 tests in 15.165s
+SUCCESS: Executed 2 tests in 6.004s
 ```
 
 Başarılı! Pipeline başarıyla tamamlandığı, doğru sayıda süreç çalıştığı ve çıktı dosyaları oluşturulduğu için testler geçiyor. Bu aynı zamanda testleriniz için bu bilgilendirici adları sağlamanın ne kadar yararlı olduğunu da gösteriyor.
@@ -730,6 +770,8 @@ Test Process sayHello
   Nextflow stdout:
 
   Process `sayHello` declares 1 input but was called with 0 arguments
+
+   -- Check script '/workspaces/training/side-quests/nf-test/.nf-test-1eaad118145a1fd798cb07e7dd75d087.nf' at line: 30 or see '/workspaces/training/side-quests/nf-test/.nf-test/tests/1eaad118145a1fd798cb07e7dd75d087/meta/nextflow.log' file for more details
   Nextflow stderr:
 
 FAILURE: Executed 1 tests in 4.884s (1 failed)
@@ -800,7 +842,7 @@ https://www.nf-test.com
 
 Test Process sayHello
 
-  Test [f91a1bcd] 'Should run without failures and produce correct output' PASSED (1.604s)
+  Test [d6837883] 'Should run without failures and produce correct output' PASSED (2.729s)
   Snapshots:
     1 created [Should run without failures and produce correct output]
 
@@ -808,7 +850,7 @@ Test Process sayHello
 Snapshot Summary:
   1 created
 
-SUCCESS: Executed 1 tests in 1.611s
+SUCCESS: Executed 1 tests in 2.733s
 ```
 
 Başarılı! `sayHello` süreci başarıyla çalıştığı ve çıktı oluşturulduğu için test geçiyor.
@@ -858,10 +900,10 @@ https://www.nf-test.com
 
 Test Process sayHello
 
-  Test [f91a1bcd] 'Should run without failures and produce correct output' PASSED (1.675s)
+  Test [d6837883] 'Should run without failures and produce correct output' PASSED (3.092s)
 
 
-SUCCESS: Executed 1 tests in 1.685s
+SUCCESS: Executed 1 tests in 3.097s
 ```
 
 Başarılı! `sayHello` süreci başarıyla çalıştığı ve çıktı snapshot ile eşleştiği için test geçiyor.
@@ -951,10 +993,10 @@ https://www.nf-test.com
 
 Test Process sayHello
 
-  Test [58df4e4b] 'Should run without failures and contain expected greeting' PASSED (7.196s)
+  Test [c1d07f15] 'Should run without failures and contain expected greeting' PASSED (2.459s)
 
 
-SUCCESS: Executed 1 tests in 7.208s
+SUCCESS: Executed 1 tests in 2.461s
 ```
 
 ### 2.4. `convertToUpper` sürecini test etme
@@ -998,10 +1040,10 @@ Bu, `sayHello` sürecine benzer bir test, ancak `convertToUpper` sürecini test 
 Şimdi `convertToUpper` sürecine büyük harfe dönüştürmek istediğimiz bir metin içeren tek bir girdi dosyası sağlamamız gerekiyor. Bunu yapmanın pek çok yolu vardır:
 
 - Test için özel bir dosya oluşturabiliriz
-- Mevcut `data/greetings.csv` dosyasını yeniden kullanabiliriz
+- Mevcut `greetings.csv` dosyasını yeniden kullanabiliriz
 - Test içinde anında oluşturabiliriz
 
-Şimdilik, pipeline düzeyindeki testte kullandığımız örneği kullanarak mevcut `data/greetings.csv` dosyasını yeniden kullanalım. Daha önce olduğu gibi, neyi test ettiğimizi daha iyi yansıtmak için testi adlandırabiliriz; ancak bu sefer (diğer süreçte yaptığımız gibi belirli dizeler kontrol etmek yerine) içeriği 'snapshot' olarak bırakalım.
+Şimdilik, pipeline düzeyindeki testte kullandığımız örneği kullanarak mevcut `greetings.csv` dosyasını yeniden kullanalım. Daha önce olduğu gibi, neyi test ettiğimizi daha iyi yansıtmak için testi adlandırabiliriz; ancak bu sefer (diğer süreçte yaptığımız gibi belirli dizeler kontrol etmek yerine) içeriği 'snapshot' olarak bırakalım.
 
 === "Sonra"
 
@@ -1070,7 +1112,7 @@ https://www.nf-test.com
 
 Test Process convertToUpper
 
-  Test [c59b6044] 'Should run without failures and produce correct output' PASSED (1.755s)
+  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (3.472s)
   Snapshots:
     1 created [Should run without failures and produce correct output]
 
@@ -1078,7 +1120,7 @@ Test Process convertToUpper
 Snapshot Summary:
   1 created
 
-SUCCESS: Executed 1 tests in 1.764s
+SUCCESS: Executed 1 tests in 3.478s
 ```
 
 `convertToUpper` süreci için `tests/main.converttoupper.nf.test.snap` konumunda bir snapshot dosyası oluşturduğumuza dikkat edin. Testi tekrar çalıştırırsak, nf-test'in yeniden geçtiğini görmeliyiz.
@@ -1097,10 +1139,10 @@ https://www.nf-test.com
 
 Test Process convertToUpper
 
-  Test [c59b6044] 'Should run without failures and produce correct output' PASSED (1.798s)
+  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (2.387s)
 
 
-SUCCESS: Executed 1 tests in 1.811s
+SUCCESS: Executed 1 tests in 2.39s
 ```
 
 ### Özetle
@@ -1139,19 +1181,19 @@ https://www.nf-test.com
 
 Test Process convertToUpper
 
-  Test [3d26d9af] 'Should run without failures and produce correct output' PASSED (4.155s)
+  Test [f8de7d71] 'Should run without failures and produce correct output' PASSED (3.472s)
 
 Test Workflow main.nf
 
-  Test [f183df37] 'Should run successfully with correct number of processes' PASSED (3.33s)
-  Test [d7e32a32] 'Should produce correct output files' PASSED (3.102s)
+  Test [8a64acb3] 'Should run successfully with correct number of processes' PASSED (3.156s)
+  Test [44ba6e13] 'Should produce correct output files' PASSED (3.124s)
 
 Test Process sayHello
 
-  Test [58df4e4b] 'Should run without failures and contain expected greeting' PASSED (2.614s)
+  Test [c1d07f15] 'Should run without failures and contain expected greeting' PASSED (5.782s)
 
 
-SUCCESS: Executed 4 tests in 13.481s
+SUCCESS: Executed 4 tests in 15.746s
 ```
 
 Buna bakın! Tek bir komutla her süreç için 1 ve tüm pipeline için 2 olmak üzere toplam 4 test çalıştırdık. Büyük bir kod tabanında bunun ne kadar güçlü olduğunu hayal edin!
@@ -1193,7 +1235,7 @@ Daha gelişmiş test özellikleri ve en iyi uygulamalar için [nf-test belgeleri
 - Testlerinize daha kapsamlı assertion'lar ekleme
 - Uç durumlar ve hata koşulları için testler yazma
 - Testleri otomatik olarak çalıştırmak için sürekli entegrasyon kurma
-- İş akışı ve modül testleri gibi diğer test türleri hakkında bilgi edinme
+- İş akışı, performans ve stres testleri gibi diğer test türleri hakkında bilgi edinme
 - Daha gelişmiş içerik doğrulama tekniklerini keşfetme
 
 **Unutmayın:** Testler, kodunuzun nasıl davranması gerektiğinin yaşayan bir dokümantasyonudur. Ne kadar çok test yazarsanız ve assertion'larınız ne kadar spesifik olursa, pipeline'ınızın güvenilirliğinden o kadar emin olabilirsiniz.

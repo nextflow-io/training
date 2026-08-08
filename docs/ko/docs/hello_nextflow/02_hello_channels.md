@@ -52,12 +52,18 @@ nextflow run hello-channels.nf --input 'Hello Channels!'
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [wise_jennings] DSL2 - revision: b24f4902d6
+    Launching `hello-channels.nf` [wise_jennings] revision: b24f4902d6
 
     executor >  local (1)
-    [6f/824bc1] process > sayHello [100%] 1 of 1 ✔
+    [6f/824bc1] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_channels/output.txt
     ```
 
 이전과 마찬가지로, 위에 표시된 워크플로우 스크립트의 `output` 블록에 지정된 대로 `results/hello_channels` 디렉토리에서 `output.txt`라는 이름의 출력 파일을 찾을 수 있습니다.
@@ -196,12 +202,19 @@ nextflow run hello-channels.nf
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [fabulous_crick] DSL2 - revision: 23e20f76e8
+    Launching `hello-channels.nf` [fabulous_crick] revision: 23e20f76e8
 
     executor >  local (1)
-    [c0/4f1872] process > sayHello (1) [100%] 1 of 1 ✔
+    [c0/4f1872] sayHello (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
     ```
 
 두 편집을 모두 올바르게 수행했다면 성공적으로 실행될 것입니다.
@@ -271,13 +284,20 @@ nextflow run hello-channels.nf
 ??? success "명령 출력"
 
     ```console hl_lines="7"
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [scruffy_shaw] DSL2 - revision: 2ede41e14a
+    Launching `hello-channels.nf` [scruffy_shaw] revision: 2ede41e14a
 
     executor >  local (1)
-    [ef/f7e40a] sayHello (1) [100%] 1 of 1 ✔
+    [ef/f7e40a] sayHello (1) | 1 of 1 ✔
     Hello Channels!
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
     ```
 
 보시다시피 channel 내용이 콘솔에 출력됩니다.
@@ -337,15 +357,24 @@ nextflow run hello-channels.nf
 ??? success "명령 출력"
 
     ```console hl_lines="6"
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [amazing_crick] DSL2 - revision: 59a9a5888a
+    Launching `hello-channels.nf` [amazing_crick] revision: 59a9a5888a
 
     executor >  local (3)
-    [f4/c9962c] process > sayHello (1) [100%] 3 of 3 ✔
+    [f4/c9962c] sayHello (1) | 3 of 3 ✔
     Hello
     Bonjour
     Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
+        - hello_channels/output.txt
+        - hello_channels/output.txt
     ```
 
 확실히 잘 실행된 것 같습니다.
@@ -420,14 +449,23 @@ nextflow run hello-channels.nf -ansi-log false
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W  ~  version 25.10.4
-    Launching `hello-channels.nf` [desperate_monod] DSL2 - revision: 59a9a5888a
+    N E X T F L O W  ~  version 26.04.4
+    Launching `hello-channels.nf` [desperate_monod] - revision: 59a9a5888a
     Hello
     Bonjour
     Hola
     [23/871c7e] Submitted process > sayHello (2)
     [7f/21e2c2] Submitted process > sayHello (1)
     [f4/ea10a6] Submitted process > sayHello (3)
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
+        - hello_channels/output.txt
+        - hello_channels/output.txt
     ```
 
 이번에는 세 개의 process 실행과 관련 작업 하위 디렉토리가 모두 출력에 나열됩니다.
@@ -581,15 +619,24 @@ nextflow run hello-channels.nf
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [sharp_minsky] DSL2 - revision: 16a291febe
+    Launching `hello-channels.nf` [sharp_minsky] revision: 16a291febe
 
     executor >  local (3)
-    [e8/33ee64] sayHello (2) [100%] 3 of 3 ✔
+    [e8/33ee64] sayHello (2) | 3 of 3 ✔
     Hello
     Bonjour
     Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/Bonjour-output.txt
+        - hello_channels/Hola-output.txt
+        - hello_channels/Hello-output.txt
     ```
 
 요약 보기로 돌아가면 출력이 다시 한 줄로 요약됩니다.
@@ -604,8 +651,6 @@ nextflow run hello-channels.nf
     ├── Hola-output.txt
     └── output.txt
     ```
-
-그렇습니다! 각각 예상한 내용이 들어 있습니다.
 
 ??? abstract "파일 내용"
 
@@ -761,9 +806,9 @@ nextflow run hello-channels.nf
 ??? failure "명령 출력"
 
     ```console hl_lines="7 11 16"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [friendly_koch] DSL2 - revision: 97256837a7
+    Launching `hello-channels.nf` [friendly_koch] revision: 97256837a7
 
     executor >  local (1)
     [a8/1f6ead] sayHello (1) | 0 of 1
@@ -940,16 +985,25 @@ nextflow run hello-channels.nf
 ??? success "명령 출력"
 
     ```console hl_lines="7-10"
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [sleepy_gutenberg] DSL2 - revision: 1db4f760ee
+    Launching `hello-channels.nf` [sleepy_gutenberg] revision: 1db4f760ee
 
     executor >  local (3)
-    [b1/6a1e15] sayHello (2) [100%] 3 of 3 ✔
+    [b1/6a1e15] sayHello (2) | 3 of 3 ✔
     Before flatten: [Hello, Bonjour, Hola]
     After flatten: Hello
     After flatten: Bonjour
     After flatten: Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/Bonjour-output.txt
+        - hello_channels/Hola-output.txt
+        - hello_channels/Hello-output.txt
     ```
 
 이번에는 작동하며 `flatten()` 연산자를 실행하기 전과 후에 channel의 내용이 어떻게 보이는지에 대한 추가 통찰력을 제공합니다.
@@ -1023,11 +1077,13 @@ Hola,Spanish,789
 
 === "전"
 
-    ```groovy title="hello-channels.nf" linenums="20" hl_lines="4"
+    ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
      * 파이프라인 매개변수
      */
-    input: String = 'Hola mundo!'
+    params {
+        input: String = 'Hola mundo!'
+    }
     ```
 
 이것은 파일이 워크플로우 코드와 같은 위치에 있다고 가정합니다.
@@ -1094,9 +1150,9 @@ nextflow run hello-channels.nf
 ??? failure "명령 출력"
 
     ```console hl_lines="5 6 9 15"
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [peaceful_poisson] DSL2 - revision: a286c08ad5
+    Launching `hello-channels.nf` [peaceful_poisson] revision: a286c08ad5
 
     [-        ] sayHello [  0%] 0 of 1
     Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv
@@ -1197,12 +1253,12 @@ nextflow run hello-channels.nf
 ??? failure "명령 출력"
 
     ```console hl_lines="7-11 14 19"
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [insane_fermat] DSL2 - revision: 8e62fcbeb1
+    Launching `hello-channels.nf` [insane_fermat] revision: 8e62fcbeb1
 
     executor >  local (3)
-    [24/76da2f] sayHello (2) [  0%] 0 of 3 ✘
+    [24/76da2f] sayHello (2) | 0 of 3 ✘
     Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
     After splitCsv: [Hello, English, 123]
     After splitCsv: [Bonjour, French, 456]
@@ -1317,12 +1373,12 @@ nextflow run hello-channels.nf
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [focused_volhard] DSL2 - revision: de435e45be
+    Launching `hello-channels.nf` [focused_volhard] revision: de435e45be
 
     executor >  local (3)
-    [54/6eebe3] sayHello (3) [100%] 3 of 3 ✔
+    [54/6eebe3] sayHello (3) | 3 of 3 ✔
     Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
     After splitCsv: [Hello, English, 123]
     After splitCsv: [Bonjour, French, 456]
@@ -1330,6 +1386,15 @@ nextflow run hello-channels.nf
     After map: Hello
     After map: Bonjour
     After map: Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/Hola-output.txt
+        - hello_channels/Bonjour-output.txt
+        - hello_channels/Hello-output.txt
     ```
 
 이번에는 오류 없이 실행될 것입니다.

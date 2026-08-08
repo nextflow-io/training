@@ -43,12 +43,21 @@ nextflow run 2a-inputs.nf --input data/greetings.csv
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `2a-inputs.nf` [mighty_sammet] DSL2 - revision: 29fb5352b3
+    Launching `2a-inputs.nf` [mighty_sammet] revision: 29fb5352b3
 
     executor >  local (3)
-    [8e/0eb066] sayHello (2) [100%] 3 of 3 ✔
+    [8e/0eb066] sayHello (2) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 2a-inputs/Hello-output.txt
+        - 2a-inputs/Bonjour-output.txt
+        - 2a-inputs/Hola-output.txt
     ```
 
 흥미롭게도 이것은 process에 대해 '3 of 3' 호출이 이루어졌음을 나타내며, 입력으로 제공한 CSV에 세 개의 데이터 행이 있었기 때문에 고무적입니다.
@@ -125,11 +134,20 @@ nextflow run 2a-inputs.nf --input data/greetings.csv -ansi-log false
 ??? success "명령 출력"
 
     ```console linenums="1"
-    N E X T F L O W  ~  version 25.10.4
-    Launching `2a-inputs.nf` [pedantic_hamilton] DSL2 - revision: 6bbc42e49f
+    N E X T F L O W  ~  version 26.04.4
+    Launching `2a-inputs.nf` [pedantic_hamilton] - revision: 6bbc42e49f
     [ab/1a8ece] Submitted process > sayHello (1)
     [0d/2cae24] Submitted process > sayHello (2)
     [b5/0df1d6] Submitted process > sayHello (3)
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 2a-inputs/Hello-output.txt
+        - 2a-inputs/Bonjour-output.txt
+        - 2a-inputs/Hola-output.txt
     ```
 
 이번에는 출력에 세 가지 process 실행과 관련 작업 하위 디렉토리가 모두 나열됩니다.
@@ -364,13 +382,31 @@ nextflow run 2b-multistep.nf --input data/greetings.csv
 ??? success "명령 출력"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
+    Launching `2b-multistep.nf` [soggy_franklin] revision: bc8e1b2726
 
     [d6/cdf466] sayHello (1)       | 3 of 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3 ✔
     [1e/83586c] collectGreetings   | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 2b-multistep/intermediates/Hello-output.txt
+        - 2b-multistep/intermediates/Bonjour-output.txt
+        - 2b-multistep/intermediates/Hola-output.txt
+
+      uppercased:
+        - 2b-multistep/intermediates/UPPER-Hello-output.txt
+        - 2b-multistep/intermediates/UPPER-Bonjour-output.txt
+        - 2b-multistep/intermediates/UPPER-Hola-output.txt
+
+      collected: 2b-multistep/COLLECTED-batch-output.txt
+
+      batch_report: 2b-multistep/batch-report.txt
     ```
 
 약속대로 workflow의 일부로 여러 단계가 실행된 것을 볼 수 있습니다.
@@ -675,13 +711,31 @@ nextflow run 2b-multistep.nf --input data/greetings.csv --batch test
 ??? success "명령 출력"
 
     ```console linenums="1"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
+    Launching `2b-multistep.nf` [soggy_franklin] revision: bc8e1b2726
 
     [a5/cdff26] sayHello (1)       | 3 of 3 ✔
     [c5/78794f] convertToUpper (2) | 3 of 3 ✔
     [d3/b4d86c] collectGreetings   | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 2b-multistep/intermediates/Bonjour-output.txt
+        - 2b-multistep/intermediates/Hello-output.txt
+        - 2b-multistep/intermediates/Hola-output.txt
+
+      uppercased:
+        - 2b-multistep/intermediates/UPPER-Hola-output.txt
+        - 2b-multistep/intermediates/UPPER-Bonjour-output.txt
+        - 2b-multistep/intermediates/UPPER-Hello-output.txt
+
+      collected: 2b-multistep/COLLECTED-test-output.txt
+
+      batch_report: 2b-multistep/test-report.txt
     ```
 
 사용자 정의 배치 이름으로 명명된 새 최종 출력을 볼 수 있습니다.
@@ -930,13 +984,31 @@ nextflow run 2c-modules.nf --input data/greetings.csv -resume
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
+    Launching `2c-modules.nf` [soggy_franklin] revision: bc8e1b2726
 
     [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1e/83586c] collectGreetings   | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 2c-modules/intermediates/Hello-output.txt
+        - 2c-modules/intermediates/Bonjour-output.txt
+        - 2c-modules/intermediates/Hola-output.txt
+
+      uppercased:
+        - 2c-modules/intermediates/UPPER-Hello-output.txt
+        - 2c-modules/intermediates/UPPER-Bonjour-output.txt
+        - 2c-modules/intermediates/UPPER-Hola-output.txt
+
+      collected: 2c-modules/COLLECTED-batch-output.txt
+
+      batch_report: 2c-modules/batch-report.txt
     ```
 
 코드가 분할되고 기본 workflow 파일 이름이 변경되었음에도 불구하고 process 실행이 모두 성공적으로 캐시되었음을 알 수 있습니다.
@@ -1085,20 +1157,20 @@ ls /
 컨테이너 내부에서 `cowpy` 명령을 직접 실행할 수 있습니다.
 
 ```bash
-cowpy "Hello Containers"
+echo "Hello Containers" | cowpy
 ```
 
 ??? success "명령 출력"
 
     ```console
-    ______________________________________________________
+     __________________
     < Hello Containers >
-    ------------------------------------------------------
-        \   ^__^
+     ------------------
+         \   ^__^
           \  (oo)\_______
-            (__)\       )\/\
-              ||----w |
-              ||     ||
+             (__)\       )\/\
+               ||----w |
+               ||     ||
     ```
 
 이것은 지정한 텍스트가 포함된 말풍선이 있는 기본 소 캐릭터(또는 'cowacter')의 ASCII 아트를 생성합니다.
@@ -1107,22 +1179,22 @@ cowpy "Hello Containers"
 예를 들어 도구 문서에 따르면 `-c`로 캐릭터를 설정할 수 있습니다.
 
 ```bash
-cowpy "Hello Containers" -c tux
+echo "Hello Containers" | cowpy -c tux
 ```
 
 ??? success "명령 출력"
 
     ```console
-    __________________
+     __________________
     < Hello Containers >
-    ------------------
-      \
+     ------------------
+       \
         \
             .--.
-          |o_o |
-          |:_/ |
+           |o_o |
+           |:_/ |
           //   \ \
-        (|     | )
+         (|     | )
         /'\_   _/`\
         \___)=(___/
     ```
@@ -1310,15 +1382,35 @@ nextflow run 2d-container.nf --input data/greetings.csv --character turkey -resu
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `2d-container.nf` [elegant_brattain] DSL2 - revision: 028a841db1
+    Launching `2d-container.nf` [elegant_brattain] revision: 028a841db1
 
     executor >  local (1)
     [95/fa0bac] sayHello (3)       | 3 of 3, cached: 3 ✔
     [92/32533f] convertToUpper (3) | 3 of 3, cached: 3 ✔
     [aa/e697a2] collectGreetings   | 1 of 1, cached: 1 ✔
     [7f/caf718] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 2d-container/intermediates/Bonjour-output.txt
+        - 2d-container/intermediates/Hola-output.txt
+        - 2d-container/intermediates/Hello-output.txt
+
+      uppercased:
+        - 2d-container/intermediates/UPPER-Hola-output.txt
+        - 2d-container/intermediates/UPPER-Hello-output.txt
+        - 2d-container/intermediates/UPPER-Bonjour-output.txt
+
+      collected: 2d-container/intermediates/COLLECTED-batch-output.txt
+
+      batch_report: 2d-container/batch-report.txt
+
+      cowpy_art: 2d-container/cowpy-COLLECTED-batch-output.txt
     ```
 
 처음 세 단계는 이전에 이미 실행했으므로 캐시되었지만 `cowpy` process는 새로운 것이므로 실제로 실행됩니다.

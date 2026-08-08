@@ -20,7 +20,7 @@ Build with nf-core प्रशिक्षण कोर्स के इस प
     आप निम्नलिखित कमांड चलाकर परीक्षण कर सकते हैं कि यह सफलतापूर्वक चलता है:
 
     ```bash
-    nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+    nextflow run . --outdir core-hello-results -profile test,docker
     ```
 
 ---
@@ -84,7 +84,7 @@ nf-schema deprecated nf-validation plugin का उत्तराधिका�
 
     ```groovy
     plugins {
-        id 'nf-schema@2.1.1'
+        id 'nf-schema@2.7.2'
     }
     ```
 
@@ -142,23 +142,40 @@ graph LR
 
 आइए अपने pipeline में पैरामीटर सत्यापन जोड़कर शुरू करें। यह `--input`, `--outdir`, और `--batch` जैसे कमांड-लाइन फ्लैग को सत्यापित करता है।
 
-### 1.1. इनपुट फ़ाइल सत्यापन को छोड़ने के लिए सत्यापन कॉन्फ़िगर करें
+### 1.1. सत्यापन सक्षम करें और इनपुट फ़ाइल सत्यापन को छोड़ें
 
 nf-core pipeline टेम्पलेट nf-schema के साथ पहले से इंस्टॉल और कॉन्फ़िगर होता है:
 
 - nf-schema plugin `nextflow.config` में `plugins{}` ब्लॉक के माध्यम से इंस्टॉल किया गया है
-- पैरामीटर सत्यापन `params.validate_params = true` के माध्यम से डिफ़ॉल्ट रूप से सक्षम है
+- पैरामीटर सत्यापन `params.validate_params` द्वारा नियंत्रित किया जाता है
 - सत्यापन pipeline इनिशियलाइज़ेशन के दौरान `UTILS_NFSCHEMA_PLUGIN` subworkflow द्वारा किया जाता है
 
-सत्यापन व्यवहार `nextflow.config` में `validation{}` स्कोप के माध्यम से नियंत्रित किया जाता है।
+भाग 3 और 4 में हमने `validate_params = false` सेट किया था ताकि pipeline किसी भी स्कीमा को कॉन्फ़िगर करने से पहले चल सके।
+अब जब हम सत्यापन जोड़ने के लिए तैयार हैं, तो पहला कदम इसे चालू करना है।
 
-चूंकि हम पहले पैरामीटर सत्यापन पर काम करेंगे (यह खंड) और खंड 2 तक इनपुट डेटा स्कीमा कॉन्फ़िगर नहीं करेंगे, हमें अस्थायी रूप से nf-schema को `input` पैरामीटर की फ़ाइल सामग्री को सत्यापित करने से छोड़ने के लिए कहना होगा।
-
-`nextflow.config` खोलें और `validation` ब्लॉक खोजें (लगभग लाइन 247)। इनपुट फ़ाइल सत्यापन को छोड़ने के लिए `ignoreParams` जोड़ें:
+`nextflow.config` खोलें और `validate_params` पैरामीटर खोजें (लगभग लाइन 37), और इसे `true` पर सेट करें:
 
 === "बाद में"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="247"
+    ```groovy title="nextflow.config" hl_lines="1" linenums="37"
+    validate_params            = true
+    ```
+
+=== "पहले"
+
+    ```groovy title="nextflow.config" hl_lines="1" linenums="37"
+    validate_params            = false
+    ```
+
+सत्यापन व्यवहार स्वयं `nextflow.config` में `validation{}` स्कोप के माध्यम से नियंत्रित किया जाता है।
+
+चूंकि हम पहले पैरामीटर सत्यापन पर काम करेंगे (यह खंड) और खंड 2 तक इनपुट डेटा स्कीमा कॉन्फ़िगर नहीं करेंगे, हमें अस्थायी रूप से nf-schema को `input` पैरामीटर की फ़ाइल सामग्री को सत्यापित करने से छोड़ने के लिए भी कहना होगा।
+
+`validation` ब्लॉक खोजें (लगभग लाइन 252) और इनपुट फ़ाइल सत्यापन को छोड़ने के लिए `ignoreParams` जोड़ें:
+
+=== "बाद में"
+
+    ```groovy title="nextflow.config" hl_lines="3" linenums="252"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
@@ -168,7 +185,7 @@ nf-core pipeline टेम्पलेट nf-schema के साथ पहल�
 
 === "पहले"
 
-    ```groovy title="nextflow.config" linenums="247"
+    ```groovy title="nextflow.config" linenums="252"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
@@ -181,7 +198,7 @@ nf-core pipeline टेम्पलेट nf-schema के साथ पहल�
 - **`ignoreParams`**: `input` पैरामीटर की फ़ाइल सामग्री के सत्यापन को छोड़ें (अस्थायी; हम खंड 2 में इसे फिर से सक्षम करेंगे)
 - **`monochromeLogs`**: `true` पर सेट होने पर सत्यापन संदेशों में रंगीन आउटपुट अक्षम करें (`params.monochrome_logs` द्वारा नियंत्रित)
 
-!!! note "input पैरामीटर को क्यों अनदेखा करें?"
+!!! info "input पैरामीटर को क्यों अनदेखा करें?"
 
     `nextflow_schema.json` में `input` पैरामीटर में `"schema": "assets/schema_input.json"` है जो nf-schema को उस स्कीमा के विरुद्ध इनपुट CSV फ़ाइल की *सामग्री* को सत्यापित करने के लिए कहता है।
     चूंकि हमने अभी तक उस स्कीमा को कॉन्फ़िगर नहीं किया है, हम अस्थायी रूप से इस सत्यापन को अनदेखा करते हैं।
@@ -263,7 +280,7 @@ nf-core pipelines schema build
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 3.5.2 - https://nf-co.re
+    nf-core/tools version 4.0.2 - https://nf-co.re
 
 INFO     [✓] Default parameters match schema validation
 INFO     [✓] Pipeline schema looks valid (found 17 params)
@@ -310,32 +327,32 @@ grep -A 25 '"input_output_options"' nextflow_schema.json
 ```
 
 ```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8" hl_lines="19-23"
-    "input_output_options": {
-      "title": "Input/output options",
-      "type": "object",
-      "fa_icon": "fas fa-terminal",
-      "description": "Define where the pipeline should find input data and save output data.",
-      "required": ["input", "outdir", "batch"],
-      "properties": {
-        "input": {
-          "type": "string",
-          "format": "file-path",
-          "exists": true,
-          "schema": "assets/schema_input.json",
-          "mimetype": "text/csv",
-          "pattern": "^\\S+\\.csv$",
-          "description": "Path to comma-separated file containing information about the samples in the experiment.",
-          "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.",
-          "fa_icon": "fas fa-file-csv"
-        },
-        "batch": {
-          "type": "string",
-          "description": "Name for this batch of greetings",
-          "fa_icon": "fas fa-layer-group"
-        },
+        "input_output_options": {
+            "title": "Input/output options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Define where the pipeline should find input data and save output data.",
+            "required": ["input", "outdir", "batch"],
+            "properties": {
+                "input": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "schema": "assets/schema_input.json",
+                    "mimetype": "text/csv",
+                    "pattern": "^\\S+\\.csv$",
+                    "description": "Path to comma-separated file containing information about the samples in the experiment.",
+                    "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.",
+                    "fa_icon": "fas fa-file-csv"
+                },
+                "batch": {
+                    "type": "string",
+                    "description": "Name for this batch of greetings",
+                    "fa_icon": "fas fa-layer-group"
+                },
 ```
 
-तुम्हें दिखना चाहिए कि `batch` पैरामीटर स्कीमा में जोड़ा गया है, "required" फ़ील्ड अब `["input", "outdir", "batch"]` दिखा रहा है।
+तुम्हें दिखना चाहिए कि `batch` पैरामीटर स्कीमा में जोड़ा गया है, `required` फ़ील्ड अब `["input", "outdir", "batch"]` दिखा रहा है।
 
 ### 1.5. पैरामीटर सत्यापन का परीक्षण करें
 
@@ -352,7 +369,7 @@ nextflow run . --outdir test-results -profile docker
     ```console
     ERROR ~ Validation of pipeline parameters failed!
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     The following invalid input values have been detected:
 
     * Missing required parameter(s): input, batch
@@ -369,15 +386,15 @@ nextflow run . --input assets/greetings.csv --outdir results --batch my-batch -p
 ??? success "कमांड आउटपुट"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [peaceful_wozniak] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [peaceful_wozniak] revision: b9e9b3b8de
 
     executor >  local (8)
-    [de/a1b2c3] CORE_HELLO:HELLO:sayHello (3)       | 3 of 3 ✔
-    [4f/d5e6f7] CORE_HELLO:HELLO:convertToUpper (3) | 3 of 3 ✔
-    [8a/b9c0d1] CORE_HELLO:HELLO:FIND_CONCATENATE (test)     | 1 of 1 ✔
-    [e2/f3a4b5] CORE_HELLO:HELLO:COWPY (test)       | 1 of 1 ✔
+    [de/a1b2c3] CORE_HELLO:HELLO:sayHello (3)                | 3 of 3 ✔
+    [4f/d5e6f7] CORE_HELLO:HELLO:convertToUpper (3)          | 3 of 3 ✔
+    [8a/b9c0d1] CORE_HELLO:HELLO:FIND_CONCATENATE (my-batch) | 1 of 1 ✔
+    [e2/f3a4b5] CORE_HELLO:HELLO:COWPY (my-batch)            | 1 of 1 ✔
     -[core/hello] Pipeline completed successfully-
     ```
 
@@ -640,7 +657,7 @@ include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipelin
 
 === "बाद में"
 
-    ```groovy title="nextflow.config" linenums="247"
+    ```groovy title="nextflow.config" linenums="252"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
@@ -649,7 +666,7 @@ include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipelin
 
 === "पहले"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="247"
+    ```groovy title="nextflow.config" hl_lines="3" linenums="252"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
@@ -666,7 +683,7 @@ include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipelin
 #### 2.7.1. मान्य इनपुट के साथ परीक्षण करें
 
 सबसे पहले, पुष्टि करें कि pipeline मान्य इनपुट के साथ सफलतापूर्वक चलता है।
-ध्यान दें कि हमें अब `--validate_params false` की आवश्यकता नहीं है क्योंकि सत्यापन काम कर रहा है!
+`validate_params = true` और इनपुट स्कीमा के साथ, पैरामीटर और इनपुट डेटा दोनों का सत्यापन अब वास्तव में चलता है।
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker
@@ -734,9 +751,9 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
 ??? failure "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [trusting_ochoa] DSL2 - revision: b9e9b3b8de
+    Launching `./main.nf` [trusting_ochoa] revision: b9e9b3b8de
 
     Input/output options
       input              : assets/invalid_greetings.csv

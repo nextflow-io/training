@@ -511,7 +511,7 @@ nf-hello और nf-schema दोनों function plugins हैं: वे fun
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
     ```
 
@@ -534,7 +534,7 @@ Plugin execution के दौरान कई INFO और WARN messages उत�
 ये local machine पर चलने वाले एक छोटे उदाहरण के लिए सामान्य हैं:
 
 ```console title="Output (partial)"
-nf-co2footprint plugin  ~  version 1.2.0
+nf-co2footprint plugin  ~  version 1.3.0
 WARN - [nf-co2footprint] Target zone null not found. Attempting to retrieve carbon intensity for fallback zone GLOBAL.
 INFO - [nf-co2footprint] Using fallback carbon intensity from GLOBAL from CI table: 480.0 gCO₂eq/kWh.
 WARN - [nf-co2footprint] Executor 'null' not mapped.
@@ -600,7 +600,7 @@ nf-co2footprint plugin एक `co2footprint` configuration scope परिभा
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
 
     co2footprint {
@@ -614,7 +614,7 @@ nf-co2footprint plugin एक `co2footprint` configuration scope परिभा
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
     ```
 
@@ -634,11 +634,6 @@ INFO - [nf-co2footprint] Using fallback carbon intensity from GB from CI table: 
 
 Zone warning चली गई।
 Plugin अब global fallback (480.0 gCO₂eq/kWh) के बजाय GB-specific carbon intensity (163.92 gCO₂eq/kWh) का उपयोग करता है।
-
-!!! note "नोट"
-
-    तुम्हें `WARN: Unrecognized config option 'co2footprint.location'` message भी दिख सकता है।
-    यह केवल दिखावटी है और इसे सुरक्षित रूप से नज़रअंदाज़ किया जा सकता है; plugin फिर भी value को सही तरीके से पढ़ता है।
 
 भाग 6 में, तुम अपने plugin के लिए एक configuration scope बनाओगे।
 

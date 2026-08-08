@@ -116,15 +116,35 @@ nextflow run 3-main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `3-main.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
+    Launching `3-main.nf` [disturbed_einstein] revision: ede9037d02
 
     executor >  local (8)
     [f0/35723c] sayHello (2)       | 3 of 3 ✔
     [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
     [17/e97d32] collectGreetings   | 1 of 1 ✔
     [98/c6b57b] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 3-main/intermediates/Hello-output.txt
+        - 3-main/intermediates/Bonjour-output.txt
+        - 3-main/intermediates/Hola-output.txt
+
+      uppercased:
+        - 3-main/intermediates/UPPER-Hello-output.txt
+        - 3-main/intermediates/UPPER-Bonjour-output.txt
+        - 3-main/intermediates/UPPER-Hola-output.txt
+
+      collected: 3-main/intermediates/COLLECTED-batch-output.txt
+
+      batch_report: 3-main/batch-report.txt
+
+      cowpy_art: 3-main/cowpy-COLLECTED-batch-output.txt
     ```
 
 This still produces the same output as previously.
@@ -215,15 +235,35 @@ nextflow run ../3-main.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `../3-main.nf` [trusting_escher] DSL2 - revision: 356df0818d
+    Launching `../3-main.nf` [trusting_escher] revision: 356df0818d
 
     executor >  local (8)
-    [59/b66913] sayHello (2)       [100%] 3 of 3 ✔
-    [ad/f06364] convertToUpper (3) [100%] 3 of 3 ✔
-    [10/714895] collectGreetings   [100%] 1 of 1 ✔
-    [88/3ece98] cowpy              [100%] 1 of 1 ✔
+    [59/b66913] sayHello (2)       | 3 of 3 ✔
+    [ad/f06364] convertToUpper (3) | 3 of 3 ✔
+    [10/714895] collectGreetings   | 1 of 1 ✔
+    [88/3ece98] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/tux-run/results
+
+      first_output:
+        - 3-main/intermediates/Hola-output.txt
+        - 3-main/intermediates/Bonjour-output.txt
+        - 3-main/intermediates/Hello-output.txt
+
+      uppercased:
+        - 3-main/intermediates/UPPER-Bonjour-output.txt
+        - 3-main/intermediates/UPPER-Hello-output.txt
+        - 3-main/intermediates/UPPER-Hola-output.txt
+
+      collected: 3-main/intermediates/COLLECTED-experiment-output.txt
+
+      batch_report: 3-main/experiment-report.txt
+
+      cowpy_art: 3-main/cowpy-COLLECTED-experiment-output.txt
     ```
 
 This will create a new set of directories under `tux-run/` including `tux-run/work/` and `tux-run/results/`.
@@ -305,15 +345,35 @@ nextflow run 3-main.nf -params-file test-params.yaml
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `3-main.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
+    Launching `3-main.nf` [disturbed_sammet] revision: ede9037d02
 
     executor >  local (8)
     [2b/9a7d1e] sayHello (2)       | 3 of 3 ✔
     [5c/8f3b2a] convertToUpper (3) | 3 of 3 ✔
     [a3/29d8fb] collectGreetings   | 1 of 1 ✔
     [b7/83ef12] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 3-main/intermediates/Hola-output.txt
+        - 3-main/intermediates/Hello-output.txt
+        - 3-main/intermediates/Bonjour-output.txt
+
+      uppercased:
+        - 3-main/intermediates/UPPER-Hola-output.txt
+        - 3-main/intermediates/UPPER-Hello-output.txt
+        - 3-main/intermediates/UPPER-Bonjour-output.txt
+
+      collected: 3-main/intermediates/COLLECTED-yaml-output.txt
+
+      batch_report: 3-main/yaml-report.txt
+
+      cowpy_art: 3-main/cowpy-COLLECTED-yaml-output.txt
     ```
 
 The final output file should contain the stegosaurus character saying the greetings.
@@ -492,15 +552,35 @@ nextflow run 3-main.nf --batch outdir
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `3-main.nf` [amazing_church] DSL2 - revision: 6e18cd130e
+    Launching `3-main.nf` [amazing_church] revision: 6e18cd130e
 
     executor >  local (8)
-    [9c/6a03ea] sayHello (2)       [100%] 3 of 3 ✔
-    [11/9e58a6] convertToUpper (3) [100%] 3 of 3 ✔
-    [c8/1977e5] collectGreetings   [100%] 1 of 1 ✔
-    [38/f01eda] cowpy              [100%] 1 of 1 ✔
+    [9c/6a03ea] sayHello (2)       | 3 of 3 ✔
+    [11/9e58a6] convertToUpper (3) | 3 of 3 ✔
+    [c8/1977e5] collectGreetings   | 1 of 1 ✔
+    [38/f01eda] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results_config/outdir
+
+      first_output:
+        - intermediates/Bonjour-output.txt
+        - intermediates/Hello-output.txt
+        - intermediates/Hola-output.txt
+
+      uppercased:
+        - intermediates/UPPER-Bonjour-output.txt
+        - intermediates/UPPER-Hola-output.txt
+        - intermediates/UPPER-Hello-output.txt
+
+      collected: intermediates/COLLECTED-outdir-output.txt
+
+      batch_report: outdir-report.txt
+
+      cowpy_art: cowpy-COLLECTED-outdir-output.txt
     ```
 
 This still produces the same output as previously, except this time we find our outputs under `results_config/outdir/`.
@@ -600,15 +680,35 @@ nextflow run 3-main.nf --batch pnames
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `3-main.nf` [jovial_mcclintock] DSL2 - revision: ede9037d02
+    Launching `3-main.nf` [jovial_mcclintock] revision: ede9037d02
 
     executor >  local (8)
     [4a/c2e6b8] sayHello (2)       | 3 of 3 ✔
     [6f/d4a172] convertToUpper (3) | 3 of 3 ✔
     [e8/4f19d7] collectGreetings   | 1 of 1 ✔
     [f2/a85c36] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results_config/pnames
+
+      first_output:
+        - sayHello/Bonjour-output.txt
+        - sayHello/Hola-output.txt
+        - sayHello/Hello-output.txt
+
+      uppercased:
+        - convertToUpper/UPPER-Bonjour-output.txt
+        - convertToUpper/UPPER-Hola-output.txt
+        - convertToUpper/UPPER-Hello-output.txt
+
+      collected: collectGreetings/COLLECTED-pnames-output.txt
+
+      batch_report: collectGreetings/pnames-report.txt
+
+      cowpy_art: cowpy/cowpy-COLLECTED-pnames-output.txt
     ```
 
 This still produces the same output as previously, except this time we find our outputs under `results_config/pnames/`, and they are grouped by process.
@@ -732,15 +832,35 @@ nextflow run 3-main.nf --batch outmode
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `3-main.nf` [rowdy_sagan] DSL2 - revision: ede9037d02
+    Launching `3-main.nf` [rowdy_sagan] revision: ede9037d02
 
     executor >  local (8)
     [5b/d91e3c] sayHello (2)       | 3 of 3 ✔
     [8a/f6c241] convertToUpper (3) | 3 of 3 ✔
     [89/cd3a48] collectGreetings   | 1 of 1 ✔
     [9e/71fb52] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results_config/outmode
+
+      first_output:
+        - sayHello/Bonjour-output.txt
+        - sayHello/Hola-output.txt
+        - sayHello/Hello-output.txt
+
+      uppercased:
+        - convertToUpper/UPPER-Bonjour-output.txt
+        - convertToUpper/UPPER-Hola-output.txt
+        - convertToUpper/UPPER-Hello-output.txt
+
+      collected: collectGreetings/COLLECTED-outmode-output.txt
+
+      batch_report: collectGreetings/outmode-report.txt
+
+      cowpy_art: cowpy/cowpy-COLLECTED-outmode-output.txt
     ```
 
 This still produces the same output as previously, except this time we find our outputs under `results_config/outmode/`.
@@ -866,15 +986,35 @@ nextflow run 3-main.nf --batch conda
 ??? success "Command output"
 
     ```console title="Output"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `3-main.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
+    Launching `3-main.nf` [trusting_lovelace] revision: 028a841db1
 
     executor >  local (8)
     [ee/4ca1f2] sayHello (3)       | 3 of 3 ✔
     [20/2596a7] convertToUpper (1) | 3 of 3 ✔
     [b3/e15de5] collectGreetings   | 1 of 1 ✔
     [c5/af5f88] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results_config/conda
+
+      first_output:
+        - sayHello/Bonjour-output.txt
+        - sayHello/Hola-output.txt
+        - sayHello/Hello-output.txt
+
+      uppercased:
+        - convertToUpper/UPPER-Bonjour-output.txt
+        - convertToUpper/UPPER-Hello-output.txt
+        - convertToUpper/UPPER-Hola-output.txt
+
+      collected: collectGreetings/COLLECTED-conda-output.txt
+
+      batch_report: collectGreetings/conda-report.txt
+
+      cowpy_art: cowpy/cowpy-COLLECTED-conda-output.txt
     ```
 
 This should work without issue and produce the same outputs as previously under `results_config/conda`.
@@ -1213,15 +1353,35 @@ nextflow run 3-main.nf -profile my_laptop
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `3-main.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
+    Launching `3-main.nf` [gigantic_brazil] revision: ede9037d02
 
     executor >  local (8)
     [58/da9437] sayHello (3)       | 3 of 3 ✔
     [35/9cbe77] convertToUpper (2) | 3 of 3 ✔
     [67/857d05] collectGreetings   | 1 of 1 ✔
     [37/7b51b5] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results_config/batch
+
+      first_output:
+        - sayHello/Hello-output.txt
+        - sayHello/Hola-output.txt
+        - sayHello/Bonjour-output.txt
+
+      uppercased:
+        - convertToUpper/UPPER-Hello-output.txt
+        - convertToUpper/UPPER-Hola-output.txt
+        - convertToUpper/UPPER-Bonjour-output.txt
+
+      collected: collectGreetings/COLLECTED-batch-output.txt
+
+      batch_report: collectGreetings/batch-report.txt
+
+      cowpy_art: cowpy/cowpy-COLLECTED-batch-output.txt
     ```
 
 As you can see, this allows us to toggle between configurations very conveniently at runtime.
@@ -1301,15 +1461,35 @@ nextflow run 3-main.nf -profile my_laptop,test
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `3-main.nf` [jovial_coulomb] DSL2 - revision: 46a6763141
+    Launching `3-main.nf` [jovial_coulomb] revision: 46a6763141
 
     executor >  local (8)
     [9b/687cdc] sayHello (2)       | 3 of 3 ✔
     [ca/552187] convertToUpper (3) | 3 of 3 ✔
     [e8/83e306] collectGreetings   | 1 of 1 ✔
     [fd/e84fa9] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results_config/test
+
+      first_output:
+        - sayHello/Hola-output.txt
+        - sayHello/Bonjour-output.txt
+        - sayHello/Hello-output.txt
+
+      uppercased:
+        - convertToUpper/UPPER-Bonjour-output.txt
+        - convertToUpper/UPPER-Hola-output.txt
+        - convertToUpper/UPPER-Hello-output.txt
+
+      collected: collectGreetings/COLLECTED-test-output.txt
+
+      batch_report: collectGreetings/test-report.txt
+
+      cowpy_art: cowpy/cowpy-COLLECTED-test-output.txt
     ```
 
 This will use Docker where possible and produce outputs under `results_config/test`, and this time the character is the comedic duo `dragonandcow`.
@@ -1486,14 +1666,14 @@ nextflow run nextflow-io/hello
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
     Pulling nextflow-io/hello ...
      downloaded from https://github.com/nextflow-io/hello.git
-    Launching `https://github.com/nextflow-io/hello` [sleepy_swanson] DSL2 - revision: 2ce0b0e294 [master]
+    Launching `https://github.com/nextflow-io/hello` [sleepy_swanson] revision: 3c2cdc9823 [master]
 
     executor >  local (4)
-    [ba/08236d] sayHello (4) [100%] 4 of 4 ✔
+    [ba/08236d] sayHello (4) | 4 of 4 ✔
     Ciao world!
 
     Hello world!
@@ -1518,12 +1698,12 @@ nextflow run nextflow-io/hello -r v1.3
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `https://github.com/nextflow-io/hello` [sick_carson] DSL2 - revision: 2ce0b0e294 [v1.3]
+    Launching `https://github.com/nextflow-io/hello` [sick_carson] revision: 2ce0b0e294 [v1.3]
 
     executor >  local (4)
-    [61/e11f77] sayHello (4) [100%] 4 of 4 ✔
+    [61/e11f77] sayHello (4) | 4 of 4 ✔
     Ciao world!
 
     Bonjour world!

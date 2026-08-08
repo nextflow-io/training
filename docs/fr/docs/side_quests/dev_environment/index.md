@@ -87,7 +87,7 @@ tree .
 │   └── utils.nf
 └── nextflow.config
 
-3 directories, 12 files
+2 directories, 12 files
 ```
 
 !!! note "À propos des fichiers d'exemple"
@@ -97,7 +97,7 @@ tree .
 
 ### Raccourcis clavier
 
-Certaines fonctionnalités de ce guide utilisent des raccourcis clavier optionnels. Si vous accédez à ce contenu via GitHub Codespaces dans un navigateur, il est possible que certains raccourcis ne fonctionnent pas comme prévu, car ils sont utilisés à d'autres fins dans votre système.
+Certaines fonctionnalités de ce guide utilisent des raccourcis clavier optionnels. Il est possible que vous accédiez à ce contenu via GitHub Codespaces dans un navigateur, auquel cas certains raccourcis peuvent ne pas fonctionner comme prévu, car ils sont utilisés à d'autres fins dans votre système.
 
 Si vous exécutez VS Code localement, comme vous le ferez probablement lorsque vous écrirez réellement des workflows, les raccourcis fonctionneront comme décrit.
 
@@ -112,7 +112,7 @@ Si vous utilisez un Mac, certains raccourcis clavier (pas tous) utiliseront "cmd
 Pour installer l'extension manuellement :
 
 1. Ouvrez VS Code
-2. Accédez à la vue Extensions en cliquant sur l'icône des extensions à gauche : ![icône des extensions](../img/extensions_icon.png) (raccourci `Ctrl/Cmd+Shift+X` si vous exécutez VSCode localement)
+2. Accédez à la vue Extensions en cliquant sur l'icône des extensions à gauche : ![icône des extensions](../img/extensions_icon.png) (raccourci `Ctrl/Cmd+Shift+X` si vous exécutez VS Code localement)
 3. Recherchez "Nextflow"
 4. Installez l'extension Nextflow officielle
 
@@ -344,7 +344,7 @@ Explorons maintenant la navigation dans un workflow plus complexe en utilisant `
 
 ### 4.2. Navigation par symboles
 
-Avec `complex_workflow.nf` toujours ouvert, vous pouvez obtenir un aperçu de tous les symboles du fichier en tapant `@` dans la barre de recherche en haut de VSCode (le raccourci clavier est `Ctrl/Cmd+Shift+O`, mais il peut ne pas fonctionner dans Codespaces). Cela ouvre le panneau de navigation par symboles, qui liste tous les symboles du fichier courant :
+Avec `complex_workflow.nf` toujours ouvert, vous pouvez obtenir un aperçu de tous les symboles du fichier en tapant `@` dans la barre de recherche en haut de VS Code (le raccourci clavier est `Ctrl/Cmd+Shift+O`, mais il peut ne pas fonctionner dans Codespaces). Cela ouvre le panneau de navigation par symboles, qui liste tous les symboles du fichier courant :
 
 ![Navigation par symboles](../img/symbols.png)
 
@@ -558,13 +558,13 @@ Si votre projet est un dépôt git (comme c'est le cas ici), VS Code affiche :
 - Les vues de différences en ligne
 - Les capacités de commit et de push
 
-Ouvrez le panneau Contrôle de source en utilisant le bouton de contrôle de source (![icône du contrôle de source](../img/source_control_icon.png)) (`Ctrl+Shift+G` ou `Cmd+Shift+G` si vous travaillez avec VSCode localement) pour voir les modifications git et effectuer des commits directement dans l'éditeur.
+Ouvrez le panneau Contrôle de source en utilisant le bouton de contrôle de source (![Icône du contrôle de source](../img/source_control_icon.png)) (`Ctrl+Shift+G` ou `Cmd+Shift+G` si vous travaillez avec VS Code localement) pour voir les modifications git et effectuer des commits directement dans l'éditeur.
 
 ![Panneau Contrôle de source](../img/source_control.png)
 
 ### 7.2. Exécution et inspection des workflows
 
-Exécutons un workflow puis inspectons les résultats. Dans le terminal intégré (`Ctrl+Shift+` backtick pour Windows et MacOS), exécutez le workflow de base :
+Exécutons un workflow puis inspectons les résultats. Dans le terminal intégré (`Ctrl+Shift+` backtick sous Windows et MacOS), exécutez le workflow de base :
 
 ```bash title="Run the basic workflow"
 nextflow run basic_workflow.nf --input data/sample_data.csv --output_dir results

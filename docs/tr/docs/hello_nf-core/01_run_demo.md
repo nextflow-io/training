@@ -45,9 +45,10 @@ Yeni bir pipeline'ı kullanmayı düşündüğünüzde, ne yaptığını ve çal
 
 ![pipeline metro haritası](./img/nf-core-demo-subway-cropped.png)
 
-1. Read QC (FASTQC)
-2. Adapter and quality trimming (SEQTK_TRIM)
-3. Present QC for raw reads (MULTIQC)
+1. Read QC ([FASTQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
+2. Adapter and quality trimming ([SEQTK_TRIM](https://github.com/lh3/seqtk))
+3. Present QC for raw reads ([MULTIQC](http://multiqc.info/))
+4. Generate a lighthearted text message from a cow ([COWPY](https://github.com/jeffbuttars/cowpy))
 
 #### 1.1.2. Örnek komut satırı
 
@@ -82,7 +83,7 @@ nextflow pull nf-core/demo
 
     ```console
     Checking nf-core/demo ...
-    downloaded from https://github.com/nf-core/demo.git - revision: 04060b4644 [master]
+    downloaded from https://github.com/nf-core/demo.git - revision: 32893afef8 [master]
     ```
 
 Nextflow, pipeline kodunun bir `pull` işlemini yapar; yani tüm depoyu yerel diskinize indirir.
@@ -106,40 +107,73 @@ nextflow list
 
 Birden fazla pipeline listelendiğinde nasıl göründüğünü görmek için birkaç pipeline daha indirmeyi deneyebilirsiniz.
 
-#### 1.2.3. Pipeline'larınızı `$NXF_HOME/assets/` dizininde bulma
+#### 1.2.3. Pipeline'ın indirildiği konumu bulma
 
 Dosyaların mevcut çalışma dizininizde olmadığını fark edeceksiniz.
-Varsayılan olarak, Nextflow bunları `$NXF_HOME/assets` dizinine kaydeder.
+Varsayılan olarak, Nextflow indirilen pipeline'ları `$NXF_HOME/assets` dizinine kaydeder.
+
+Belirli bir pipeline'ın nerede bulunduğunu öğrenmek için doğrudan Nextflow'a sorabilirsiniz:
 
 ```bash
-tree -L 2 $NXF_HOME/assets/
+nextflow info nf-core/demo
 ```
 
-```console title="Directory contents"
-/workspaces/.nextflow/assets/
-└── nf-core
-    └── demo
+??? success "Komut çıktısı"
 
-2 directories, 0 files
-```
+    ```console
+    project name: nf-core/demo
+    repository  : https://github.com/nf-core/demo
+    local path  : /workspaces/.nextflow/assets/.repos/nf-core/demo
+    main script : main.nf
+    description : An nf-core demo pipeline
+    revisions   :
+      TEMPLATE
+      bumper
+      dev
+      fix-nxfversion
+      manually-merge-3_0_2
+    > master (default)
+      nf-core-template-merge-2.13.2.dev0
+      nf-core-template-merge-2.14.0
+      nf-core-template-merge-2.14.1
+      nf-core-template-merge-3.0.0
+      nf-core-template-merge-3.0.1
+      nf-core-template-merge-3.0.2
+      nf-core-template-merge-3.1.0
+      nf-core-template-merge-3.1.2
+      nf-core-template-merge-3.2.0
+      nf-core-template-merge-3.2.1
+      nf-core-template-merge-3.3.1
+      nf-core-template-merge-3.3.2
+      nf-core-template-merge-4.0.0
+      1.0.0 [t]
+      1.0.1 [t]
+      1.0.2 [t]
+      1.1.0 [t]
+    > 1.2.0 [t]
+    ```
 
-!!! note "Not"
+!!! info "Bilgi"
 
     Eğitim ortamımızı kullanmıyorsanız, tam yol sisteminizde farklı olabilir.
 
 Nextflow, indirilen kaynak kodunu kasıtlı olarak erişimi doğrudan olmayan bir konumda tutar; bu pipeline'ların doğrudan etkileşimde bulunacağınız kod yerine daha çok kütüphaneler gibi kullanılması gerektiği ilkesine dayanır.
 
+Arka planda Nextflow, indirilen her pipeline'ı `$NXF_HOME/assets/.repos/` dizininde bir git deposu olarak saklar ve her revizyonun kodunu `clones/<commit>/` alt dizinine çıkarır.
+`.repos` gizli bir dizin olduğundan, `tree -L 2 $NXF_HOME/assets/` komutu boş görünecektir.
+
 #### 1.2.4. Kaynak koda kolay erişim için sembolik bağlantı oluşturma
 
 Koda ayrıntılı olarak bakmayacağız; ancak genel organizasyonun nasıl göründüğüne dair bir fikir edinmek için hızlıca göz atalım.
 
-Pipeline kaynak koduna göz atmayı kolaylaştırmak için assets dizinine sembolik bir bağlantı oluşturun:
+Pipeline kaynak koduna göz atmayı kolaylaştırmak için, pipeline'ın çıkarılmış kopyasına işaret eden bir sembolik bağlantı oluşturun:
 
 ```bash
-ln -s $NXF_HOME/assets pipelines
+mkdir -p pipelines/nf-core
+ln -s "$(echo $NXF_HOME/assets/.repos/nf-core/demo/clones/*/)" pipelines/nf-core/demo
 ```
 
-Bu, `tree -L 2 pipelines` komutuyla kodu keşfetmenizi veya dosyaları doğrudan açmanızı sağlayan bir kısayol oluşturur.
+Bu, `tree -L 2 pipelines/nf-core/demo` komutuyla kodu keşfetmenizi veya dosyaları doğrudan açmanızı sağlayan bir kısayol oluşturur.
 
 #### 1.2.5. Kod organizasyonuna genel bakış
 
@@ -172,6 +206,8 @@ tree -L 1 pipelines/nf-core/demo
     ├── tests
     ├── tower.yml
     └── workflows
+
+    7 directories, 12 files
     ```
 
 Orada çok şey oluyor; ancak bunların büyük çoğunluğu hakkında endişelenmenize gerek yok.
@@ -211,7 +247,7 @@ Kolaylık sağlamak için, her nf-core pipeline'ı bir test profiliyle birlikte 
 Bu, [nf-core/test-datasets](https://github.com/nf-core/test-datasets) deposunda barındırılan küçük bir test veri setini kullanarak pipeline'ın çalıştırılması için minimum yapılandırma ayarları kümesidir.
 Küçük ölçekte bir pipeline'ı hızlıca denemenin harika bir yoludur.
 
-!!! note "Not"
+!!! tip "İpucu"
 
     Nextflow'un yapılandırma profil sistemi, farklı konteyner motorları veya çalıştırma ortamları arasında kolayca geçiş yapmanızı sağlar.
     Daha fazla ayrıntı için [Hello Nextflow Bölüm 6: Yapılandırma](../hello_nextflow/06_hello_config.md) bölümüne bakın.
@@ -220,10 +256,10 @@ Küçük ölçekte bir pipeline'ı hızlıca denemenin harika bir yoludur.
 
 Bir pipeline'ın test profilinin çalıştırmadan önce ne belirttiğini kontrol etmek iyi bir uygulamadır.
 `nf-core/demo` için `test` profili `conf/test.config` yapılandırma dosyasında bulunur.
-`nextflow pull` ile indirilen pipeline kaynağının içinde yerel olarak bulabilirsiniz:
+`nextflow pull` ile indirilen pipeline kaynağının içinde, 1.2.4. bölümünde oluşturulan `pipelines` sembolik bağlantısı aracılığıyla yerel olarak bulabilirsiniz:
 
 ```bash
-code $NXF_HOME/assets/nf-core/demo/conf/test.config
+code pipelines/nf-core/demo/conf/test.config
 ```
 
 Bu dosyanın içeriği aşağıda gösterilmiştir:
@@ -245,7 +281,7 @@ process {
     resourceLimits = [
         cpus: 2,
         memory: '4.GB',
-        time: '1.h'
+        time: '1.h',
     ]
 }
 
@@ -254,8 +290,7 @@ params {
     config_profile_description = 'Minimal test dataset to check pipeline function'
 
     // Girdi verileri
-    input  = 'https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
-
+    input                      = 'https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
 }
 ```
 
@@ -287,16 +322,16 @@ SAMPLE3_SE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/il
 ```
 
 Buna samplesheet denir ve nf-core pipeline'larına en yaygın girdi biçimidir.
+Veri formatlarına ve türlerine aşina değilseniz endişelenmeyin; takip edenler için önemli değil.
 
-!!! note "Not"
-
-    Veri formatlarına ve türlerine aşina değilseniz endişelenmeyin; takip edenler için önemli değil.
-
-Bu, pipeline'ı denemek için ihtiyacımız olan her şeye sahip olduğumuzu doğrular.
+Artık pipeline'ı denemek için ihtiyacımız olan her şeye sahibiz.
 
 ### 2.2. Pipeline'ı çalıştırma
 
-Konteyner sistemi için Docker'ı ve çıktı dizini olarak `demo-results`'ı kullanmaya karar verelim; test komutunu çalıştırmaya hazırız:
+Yukarıda belirtildiği gibi, örnek test komutunu neredeyse olduğu gibi kullanabiliriz; yalnızca hangi yazılım paketleme sistemini kullanacağımızı ve çıktı dizinine ne ad vereceğimizi belirtmemiz gerekiyor.
+Konteyner sistemi için Docker'ı ve çıktı dizini olarak `demo-results`'ı kullanmaya karar verelim.
+
+Test komutunu çalıştırmaya hazırız:
 
 ```bash
 nextflow run nf-core/demo -profile docker,test --outdir demo-results
@@ -305,9 +340,10 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `https://github.com/nf-core/demo` [magical_pauling] DSL2 - revision: 45904cb9d1 [master]
+    Downloading plugin nf-schema@2.7.2
+    Launching `https://github.com/nf-core/demo` [cranky_curry] revision: 32893afef8 [master]
 
 
     ------------------------------------------------------
@@ -316,8 +352,9 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
       |\ | |__  __ /  ` /  \ |__) |__         }  {
       | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                             `._,._,'
-      nf-core/demo 1.1.0
+      nf-core/demo 1.2.0
     ------------------------------------------------------
+
     Input/output options
       input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
       outdir                    : demo-results
@@ -327,21 +364,22 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
       config_profile_description: Minimal test dataset to check pipeline function
 
     Generic options
-      trace_report_suffix       : 2025-11-21_04-57-41
+      trace_report_suffix       : 2026-07-03_21-31-35
 
     Core Nextflow options
       revision                  : master
-      runName                   : magical_pauling
+      runName                   : cranky_curry
       containerEngine           : docker
       launchDir                 : /workspaces/training/hello-nf-core
       workDir                   : /workspaces/training/hello-nf-core/work
-      projectDir                : /workspaces/.nextflow/assets/nf-core/demo
+      projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2
       userName                  : root
       profile                   : docker,test
-      configFiles               : /workspaces/.nextflow/assets/nf-core/demo/nextflow.config
+      configFiles               : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/nextflow.config
 
     !! Only displaying parameters that differ from the pipeline defaults !!
     ------------------------------------------------------
+
     * The pipeline
         https://doi.org/10.5281/zenodo.12192442
 
@@ -351,11 +389,11 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
     * Software dependencies
         https://github.com/nf-core/demo/blob/master/CITATIONS.md
 
-
-    executor >  local (7)
-    [ff/a6976b] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
-    [39/731ab7] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
-    [7c/78d96e] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+    executor >  local (8)
+    [ca/5b0f3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     [100%] 3 of 3 ✔
+    [b7/cb6812] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) [100%] 3 of 3 ✔
+    [ff/6ebd98] NFCORE_DEMO:DEMO:COWPY                   [100%] 1 of 1 ✔
+    [09/bbd1b4] NFCORE_DEMO:DEMO:MULTIQC (demo)          [100%] 1 of 1 ✔
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
@@ -364,14 +402,14 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
 Temel bir Nextflow pipeline'ı çalıştırdığınızda olduğundan çok daha fazla konsol çıktısı olduğunu fark edeceksiniz.
 Pipeline'ın sürümünün, girdilerinin ve çıktılarının bir özetini ve birkaç yapılandırma öğesini içeren bir başlık vardır.
 
-!!! note "Not"
+!!! info "Bilgi"
 
     Çıktınız farklı zaman damgaları, çalıştırma adları ve dosya yolları gösterecektir; ancak genel yapı ve süreç çalıştırması benzer olmalıdır.
 
 Çıktının üst kısmındaki şu satıra dikkat edin:
 
 ```console
-Launching `https://github.com/nf-core/demo` [magical_pauling] DSL2 - revision: 45904cb9d1 [master]
+Launching `https://github.com/nf-core/demo` [cranky_curry] revision: 32893afef8 [master]
 ```
 
 Bu satır, pipeline'ın hangi revizyonunun kullanıldığını gösterir.
@@ -379,7 +417,7 @@ Bir sürüm belirtmediğimiz için Nextflow, `master` dalındaki en son commit'i
 Tekrarlanabilir çalıştırmalar için `-r` bayrağını kullanarak belirli bir sürümü sabitlemelisiniz:
 
 ```bash
-nextflow run nf-core/demo -r 1.1.0 -profile docker,test --outdir demo-results
+nextflow run nf-core/demo -r 1.2.0 -profile docker,test --outdir demo-results
 ```
 
 Bu, yeni commit'ler veya sürümler yayınlansa da her seferinde aynı pipeline kodunun kullanılmasını sağlar.
@@ -388,14 +426,15 @@ Bu eğitimde basitlik adına `-r` bayrağını atlıyoruz; ancak üretim ortamı
 Çalıştırma çıktısına geçerek, hangi süreçlerin çalıştırıldığını bize söyleyen satırlara bakalım:
 
 ```console
-executor >  local (7)
-[ff/a6976b] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
-[39/731ab7] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
-[7c/78d96e] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+executor >  local (8)
+[ca/5b0f3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     [100%] 3 of 3 ✔
+[b7/cb6812] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) [100%] 3 of 3 ✔
+[ff/6ebd98] NFCORE_DEMO:DEMO:COWPY                   [100%] 1 of 1 ✔
+[09/bbd1b4] NFCORE_DEMO:DEMO:MULTIQC (demo)          [100%] 1 of 1 ✔
 -[nf-core/demo] Pipeline completed successfully-
 ```
 
-Bu bize üç sürecin çalıştırıldığını söyler; bunlar nf-core web sitesindeki pipeline dokümantasyon sayfasında gösterilen üç araca karşılık gelir: FASTQC, SEQTK_TRIM ve MULTIQC.
+Bu bize dört sürecin çalıştırıldığını söyler; bunlar nf-core web sitesindeki pipeline dokümantasyon sayfasında gösterilen dört araca karşılık gelir: `FASTQC`, `SEQTK_TRIM`, `MULTIQC` ve `COWPY`.
 
 Burada gösterildiği gibi `NFCORE_DEMO:DEMO:MULTIQC` şeklindeki tam süreç adları, tanıtıcı Hello Nextflow materyalinde görmüş olabileceğinizden daha uzundur.
 Bunlar üst iş akışlarının adlarını içerir ve pipeline kodunun modülerliğini yansıtır.
@@ -413,6 +452,8 @@ tree -L 2 demo-results
 
     ```console
     demo-results
+    ├── cowpy
+    │   └── cowpy.txt
     ├── fastqc
     │   ├── SAMPLE1_PE
     │   ├── SAMPLE2_PE
@@ -423,19 +464,20 @@ tree -L 2 demo-results
     │   └── SAMPLE3_SE
     ├── multiqc
     │   ├── multiqc_data
-    │   ├── multiqc_plots
     │   └── multiqc_report.html
     └── pipeline_info
-        ├── execution_report_2025-11-21_04-57-41.html
-        ├── execution_timeline_2025-11-21_04-57-41.html
-        ├── execution_trace_2025-11-21_04-57-41.txt
+        ├── execution_report_2026-07-03_21-31-35.html
+        ├── execution_timeline_2026-07-03_21-31-35.html
+        ├── execution_trace_2026-07-03_21-31-35.txt
         ├── nf_core_demo_software_mqc_versions.yml
-        ├── params_2025-11-21_04-57-46.json
-        └── pipeline_dag_2025-11-21_04-57-41.html
+        ├── params_2026-07-03_21-31-43.json
+        └── pipeline_dag_2026-07-03_21-31-35.html
+
+    12 directories, 8 files
     ```
 
 Bu çok fazla görünebilir.
-`nf-core/demo` pipeline'ının çıktıları hakkında daha fazla bilgi edinmek için [dokümantasyon sayfasına](https://nf-co.re/demo/1.1.0/docs/output/) bakın.
+`nf-core/demo` pipeline'ının çıktıları hakkında daha fazla bilgi edinmek için [dokümantasyon sayfasına](https://nf-co.re/demo/1.2.0/docs/output/) bakın.
 
 Bu aşamada, gözlemlenmesi gereken önemli şey, sonuçların modüle göre düzenlenmiş olması ve ek olarak pipeline çalıştırması hakkında çeşitli zaman damgalı raporlar içeren `pipeline_info` adlı bir dizinin bulunmasıdır.
 
@@ -443,7 +485,7 @@ Bu aşamada, gözlemlenmesi gereken önemli şey, sonuçların modüle göre dü
 
 ![çalıştırma zaman çizelgesi raporu](./img/execution_timeline.png)
 
-!!! note "Not"
+!!! info "Bilgi"
 
     Burada görevler paralel olarak çalıştırılmadı; çünkü Github Codespaces'te minimalist bir makine üzerinde çalışıyoruz.
     Bunların paralel olarak çalıştığını görmek için, codespace'inizin CPU tahsisini ve test yapılandırmasındaki kaynak sınırlarını artırmayı deneyin.
@@ -491,42 +533,44 @@ nextflow run nf-core/demo --help
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `https://github.com/nf-core/demo` [run_name] DSL2 - revision: 45904cb9d1 [master]
+    Launching `https://github.com/nf-core/demo` [adoring_meucci] revision: 32893afef8 [master]
 
-    ----------------------------------------------------
+
+    ------------------------------------------------------
                                             ,--./,-.
             ___     __   __   __   ___     /,-._.--~'
       |\ | |__  __ /  ` /  \ |__) |__         }  {
       | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                             `._,._,'
-      nf-core/demo 1.1.0
-    ----------------------------------------------------
+      nf-core/demo 1.2.0
+    ------------------------------------------------------
     Typical pipeline command:
 
       nextflow run nf-core/demo -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>
 
     Input/output options
-      --input                       [string]           Path to a metadata file containing information about the samples in the experiment.
-      --outdir                      [string]           The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.
-      --email                       [string]           Email address for completion summary.
-      --multiqc_title               [string]           MultiQC report title. Printed as page header, used for filename if not otherwise specified.
+      --input                       [string] Path to a metadata file containing information about the samples in the experiment.
+      --outdir                      [string] The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.
+
+      --email                       [string] Email address for completion summary.
+      --multiqc_title               [string] MultiQC report title. Printed as page header, used for filename if not otherwise specified.
 
     Reference genome options
-      --genome                      [string]           Name of iGenomes reference.
-      --fasta                       [string]           Path to FASTA genome file.
+      --genome                      [string] Name of iGenomes reference.
+      --fasta                       [string] Path to FASTA genome file.
 
     Process skipping options
-      --skip_trim                   [boolean]          Skip trimming fastq files with seqtk
+      --skip_trim                   [boolean] Skip trimming fastq files with seqtk
 
     Generic options
-      --multiqc_methods_description [string]           Custom MultiQC yaml file containing HTML including a methods description.
-      --help                        [boolean, string]  Display the help message.
-      --help_full                   [boolean]          Display the full detailed help message.
-      --show_hidden                 [boolean]          Display hidden parameters in the help message (only works when --help or --help_full are provided).
-     !! Hiding 20 param(s), use the `--show_hidden` parameter to show them !!
-    ----------------------------------------------------
+      --multiqc_methods_description [string]          Custom MultiQC yaml file containing HTML including a methods description.
+      --help                        [boolean, string] Display the help message.
+      --help_full                   [boolean]         Display the full detailed help message.
+      --show_hidden                 [boolean]         Display hidden parameters in the help message (only works when --help or --help_full are provided).
+    !! Hiding 19 param(s), use the `--showHidden` parameter to show them !!
+    ------------------------------------------------------
 
     * The pipeline
         https://doi.org/10.5281/zenodo.12192442
@@ -552,24 +596,98 @@ Yalın Nextflow pipeline'larında `--help`, yalnızca geliştirici bunu manuel o
 [Hello Config](../hello_nextflow/06_hello_config.md) bölümünde ele alındığı gibi, parametre değerlerini komut satırında `--param_name` ile ayarlayabilir veya bir dizi parametreyi YAML dosyasında toplayıp `-params-file` ile geçirebilirsiniz.
 Her iki yaklaşım da nf-core pipeline'larıyla aynı şekilde çalışır.
 
-Örneğin, kırpma adımını atlamak için:
+Örneğin, kırpma adımını atlamak için `skip_trim` boolean parametresini `true` olarak ayarlamamız gerekir.
+Çalışma dizininizde bu değer önceden ayarlanmış `my_params.yml` adlı bir params dosyası bulunmaktadır:
+
+```yaml title="my_params.yml"
+skip_trim: true
+```
+
+`-params-file` ile geçirin:
 
 ```bash
-nextflow run nf-core/demo -profile docker,test --outdir demo-results-notrim --skip_trim
+nextflow run nf-core/demo -profile docker,test --outdir demo-results-notrim -params-file my_params.yml
 ```
 
 ??? success "Komut çıktısı"
 
     ```console
-    executor >  local (4)
-    [3f/a82c91] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE) | 3 of 3 ✔
-    [7d/c5e014] NFCORE_DEMO:DEMO:MULTIQC             | 1 of 1 ✔
+     N E X T F L O W   ~  version 26.04.4
+
+    Launching `https://github.com/nf-core/demo` [focused_heisenberg] revision: 32893afef8 [master]
+
+
+    ------------------------------------------------------
+                                            ,--./,-.
+            ___     __   __   __   ___     /,-._.--~'
+      |\ | |__  __ /  ` /  \ |__) |__         }  {
+      | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                            `._,._,'
+      nf-core/demo 1.2.0
+    ------------------------------------------------------
+
+    Input/output options
+      input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
+      outdir                    : demo-results-notrim
+
+    Process skipping options
+      skip_trim                 : true
+
+    Institutional config options
+      config_profile_name       : Test profile
+      config_profile_description: Minimal test dataset to check pipeline function
+
+    Generic options
+      trace_report_suffix       : 2026-07-03_22-08-47
+
+    Core Nextflow options
+      revision                  : master
+      runName                   : focused_heisenberg
+      containerEngine           : docker
+      launchDir                 : /workspaces/training/hello-nf-core
+      workDir                   : /workspaces/training/hello-nf-core/work
+      projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2
+      userName                  : root
+      profile                   : docker,test
+      configFiles               : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/nextflow.config
+
+    !! Only displaying parameters that differ from the pipeline defaults !!
+    ------------------------------------------------------
+
+    * The pipeline
+        https://doi.org/10.5281/zenodo.12192442
+
+    * The nf-core framework
+        https://doi.org/10.1038/s41587-020-0439-x
+
+    * Software dependencies
+        https://github.com/nf-core/demo/blob/master/CITATIONS.md
+
+    executor >  local (5)
+    [7a/f3599e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE) [100%] 3 of 3 ✔
+    [b0/2f0bdc] NFCORE_DEMO:DEMO:COWPY               [100%] 1 of 1 ✔
+    [c3/3c2278] NFCORE_DEMO:DEMO:MULTIQC (demo)      [100%] 1 of 1 ✔
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
 `SEQTK_TRIM` süreci artık çıktıda görünmüyor.
 
-!!! info "Bilgi"
+!!! warning "Parametre girdileriyle ilgili önemli kısıtlamalar"
+
+    **Boolean parametreleri komut satırında ayarlama**
+
+    Nextflow 26.04 sürümünden itibaren, komut satırında sağlanan tüm değerler string olarak yazılır.
+    `skip_trim` gibi bir boolean parametre için, bunu yalın bayrak olarak (`--skip_trim`) veya `--skip_trim true` şeklinde geçirmek, şema doğrulamasında başarısız olan `"true"` **string**'i olarak değerlendirilir:
+
+    ```console
+    * --skip_trim (true): Value is [string] but should be [boolean]
+    ```
+
+    Bir boolean parametreyi gerçek `true`/`false` değerine ayarlamak için yukarıda gösterildiği gibi `-params-file` kullanın ya da bir yapılandırma dosyasında ayarlayın.
+    String, integer ve dosya yolu parametreleri bu durumdan etkilenmez ve doğrudan komut satırında ayarlanabilir.
+    Bu kurs, boolean parametreler için bu kalıbı her yerde kullanmaktadır.
+
+    **Özel yapılandırma dosyaları kullanma**
 
     `-c` ile geçirilen özel bir yapılandırma dosyasında pipeline parametrelerini ayarlamak teknik olarak mümkün olsa da, Nextflow'un yapılandırma öncelik kurallarına bağlı olarak bu, pipeline'ın kendi `nextflow.config` dosyasında zaten ayarlanmış varsayılanları geçersiz kılmayabilir.
     Komut satırında `--param_name` veya `-params-file` kullanmak daha güvenilirdir; çünkü bunlar her zaman öncelik taşır.
@@ -603,7 +721,7 @@ WARN: The following invalid input values have been detected:
 ```
 
 Pipeline çalışmaya devam eder; ancak uyarı, `--foobar`'ın tanınan bir parametre olmadığını hemen bildirir.
-Bu, `--outdir` yerine `--outDir` gibi yazım hatalarını, çıktının neden yanlış yere gittiğini merak ederek hesaplama zamanı harcamadan önce yakalar.
+Bu, `--outdir` yerine `--outDir` gibi yazım hatalarını dikkatinize çekmek için tasarlanmıştır; böylece zaman ve hesaplama kaynağı harcamadan önce sorunu fark edebilirsiniz.
 
 ##### 3.1.3.2. Geçersiz parametre değerleri
 
@@ -617,13 +735,14 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results --skip_trim
 ```console
 ERROR ~ Validation of pipeline parameters failed!
 
+ -- Check '.nextflow.log' file for details
 The following invalid input values have been detected:
 
 * --skip_trim (yes): Value is [string] but should be [boolean]
 ```
 
 Herhangi bir süreç çalışmadan önce pipeline durur; bu sizi başarısız veya hatalı bir çalıştırmadan korur.
-Boolean parametreler değer olmadan bayrak olarak (`--skip_trim`) geçirilmeli ya da params dosyasında `true`/`false` olarak ayarlanmalıdır.
+3.1.2. bölümünde belirtildiği gibi, boolean parametreler komut satırında string olarak yazıldığından, params dosyasında gerçek `true`/`false` değerine ayarlanmalıdır.
 
 #### 3.1.4. Girdi doğrulama
 
@@ -637,7 +756,7 @@ Bunu da [Bölüm 5: Girdi Doğrulama](05_input_validation.md) bölümünde daha 
 `nf-core/demo` pipeline'ı `sample`, `fastq_1` ve `fastq_2` sütunlarına sahip bir CSV dosyası bekler.
 Bu, beklenen yapıyı, sütun türlerini ve kısıtlamaları belirten bir şema dosyasında (`assets/schema_input.json`) tanımlanmıştır.
 
-??? abstract "assets/schema_input.json"
+??? abstract "Girdiler için şema dosyası"
 
     ```json title="assets/schema_input.json"
     {
@@ -678,9 +797,7 @@ Bu, beklenen yapıyı, sütun türlerini ve kısıtlamaları belirten bir şema 
 Şema, `sample` ve `fastq_1`'in zorunlu olduğunu; `fastq_2`'nin ise isteğe bağlı olduğunu (hem çift uçlu hem de tek uçlu verileri destekler) belirtir.
 Dosya yolları, varlık ve uzantı deseni açısından doğrulanır.
 
-##### 3.1.4.1. Geçersiz bir samplesheet oluşturma
-
-Eksik bir sütun ve var olmayan bir dosya yolu içeren bir samplesheet oluşturun:
+Bunu göstermek için, çalışma dizininizde `malformed_samplesheet.csv` adlı hatalı biçimlendirilmiş bir samplesheet bulunmaktadır:
 
 ```csv title="malformed_samplesheet.csv"
 sample,fastq_2
@@ -688,11 +805,8 @@ SAMPLE1,/not/a/real/file.fastq.gz
 ```
 
 Bu samplesheet, zorunlu `fastq_1` sütununu içermiyor ve `fastq_2`'de var olmayan bir dosya yolu barındırıyor.
-Her iki sorun da bir sonraki adımda doğrulama hatası üretecektir.
 
-##### 3.1.4.2. Demo pipeline'ı geçersiz samplesheet ile çalıştırma
-
-Demo pipeline'ı `malformed_samplesheet.csv` dosyasını girdi olarak kullanarak çalıştırın.
+Demo pipeline'ı `malformed_samplesheet.csv` dosyasını girdi olarak kullanarak çalıştırın:
 
 ```bash
 nextflow run nf-core/demo -profile docker,test --outdir demo-results --input malformed_samplesheet.csv
@@ -701,6 +815,7 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results --input mal
 ```console
 ERROR ~ Validation of pipeline parameters failed!
 
+ -- Check '.nextflow.log' file for details
 The following invalid input values have been detected:
 
 * --input (malformed_samplesheet.csv): Validation of file failed:
@@ -725,14 +840,27 @@ nf-core pipeline'ları, `nextflow.config` ve `conf/` dizininde varsayılan yapı
 Herhangi bir şeyi geçersiz kılmadan önce, varsayılanların nerede bulunduğunu bilmek faydalıdır.
 
 2.1. bölümünde pipeline kaynak kodunun `$NXF_HOME/assets` dizininde bulunduğunu gördünüz.
-Mevcut yapılandırma dosyalarını listelemek için:
+1.2.4. bölümündeki `pipelines` sembolik bağlantısını kullanarak mevcut yapılandırma dosyalarını listeleyebilirsiniz:
 
 ```bash
-ls $NXF_HOME/assets/nf-core/demo/conf/
+ls pipelines/nf-core/demo/conf/
 ```
 
 ```console
-base.config  igenomes.config  igenomes_ignored.config  modules.config  test.config  test_full.config
+base.config
+containers_conda_lock_files_amd64.config
+containers_conda_lock_files_arm64.config
+containers_docker_amd64.config
+containers_docker_arm64.config
+containers_singularity_https_amd64.config
+containers_singularity_https_arm64.config
+containers_singularity_oras_amd64.config
+containers_singularity_oras_arm64.config
+igenomes.config
+igenomes_ignored.config
+modules.config
+test.config
+test_full.config
 ```
 
 <figure class="excalidraw">
@@ -752,56 +880,18 @@ Bu dosyalarda belirtilen ayarlardan herhangi birini değiştirmek isterseniz, bu
 Bunun yerine kendi yapılandırma dosyanızı oluşturun ve `-c` ile geçirin.
 Belirttiğiniz değerler, diğer dosyalarda ayarlanan varsayılan değerleri geçersiz kılar.
 
-Bunu pratikte yapmak için birkaç alıştırma üzerinden geçelim.
+Bunu pratikte deneyelim.
 
-#### 3.2.1. Bir süreç için kaynak tahsisini değiştirme
+#### 3.2.1. Süreç kaynaklarını ve araç argümanlarını özelleştirme
 
-Demo pipeline, `base.config` dosyasında tanımlanan etiketleri kullanarak kaynakları atar.
-Örneğin, `FASTQC` süreci 6 CPU ve 36 GB bellek tahsis eden `process_medium` etiketini kullanır.
+nf-core modülleri iki yaygın yapılandırma geçersiz kılma türünü destekler: **kaynak tahsisi** (CPU, bellek, zaman) ve `ext.args` aracılığıyla **araç argümanları**.
 
-Test profili kaynakları `resourceLimits` aracılığıyla sınırlar; ancak belirli süreçler için kaynakları da geçersiz kılabilirsiniz.
+Birçok komut satırı aracının, pipeline parametresi olarak sunulmayacak kadar az kullanılan isteğe bağlı argümanları vardır.
+`ext.args` kuralı, bu argümanları bir yapılandırma dosyası aracılığıyla temel araca geçirmenizi sağlar.
 
-`custom.config` adlı bir dosya oluşturun:
+Çalışma dizininizde sağlanan `custom.config` dosyası her iki geçersiz kılmayı da göstermektedir:
 
 ```groovy title="custom.config" linenums="1"
-process {
-    withName: 'FASTQC' {
-        cpus = 2
-        memory = 4.GB
-    }
-}
-```
-
-Pipeline'ı özel yapılandırmanızla çalıştırın:
-
-```bash
-nextflow run nf-core/demo -profile docker,test --outdir demo-results-custom -c custom.config
-```
-
-??? success "Komut çıktısı"
-
-    ```console
-    executor >  local (7)
-    [2a/f17b3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
-    [9c/e4d028] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
-    [5b/a93c71] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
-    -[nf-core/demo] Pipeline completed successfully-
-    ```
-
-`-c` bayrağı, yapılandırmanızı pipeline'ın yerleşik yapılandırmasının üzerine ekler.
-
-#### 3.2.2. `ext.args` ile araç argüman değerlerini ayarlama
-
-Birçok komut satırı aracının, çok yaygın kullanılmadıkça pipeline parametresi olarak ayarlanmayan isteğe bağlı argümanları vardır.
-Bu araç argümanları için nf-core modülleri, argümanları bir yapılandırma dosyası aracılığıyla temel araca geçirmek amacıyla `ext.args` adlı bir Nextflow kuralını kullanır.
-
-Örneğin, `ext.args` kullanarak `SEQTK_TRIM` modülüne bir kırpma argümanı ekleyelim.
-
-##### 3.2.2.1. Özel yapılandırmayı güncelleme
-
-`custom.config` dosyanızı güncelleyin:
-
-```groovy title="custom.config" linenums="1" hl_lines="6 7 8"
 process {
     withName: 'FASTQC' {
         cpus = 2
@@ -813,64 +903,72 @@ process {
 }
 ```
 
-Bu, `seqtk trimfq`'ya kalite kırpmasına ek olarak her okumanın başından 5 baz kırpmasını söyler.
+İlk blok, `FASTQC` kaynak tahsisini geçersiz kılar.
+Varsayılan olarak `FASTQC`, `base.config` dosyasındaki `process_medium` etiketini kullanır ve 6 CPU ile 36 GB bellek tahsis eder; burada bunu 2 CPU ve 4 GB ile sınırlandırıyoruz.
 
-##### 3.2.2.2. Pipeline'ı çalıştırma
+İkinci blok, `ext.args` aracılığıyla `SEQTK_TRIM`'e ek bir argüman geçirir.
+`-b 5` bayrağı, `seqtk trimfq`'ya kalite kırpmasına ek olarak her okumanın başından 5 baz kırpmasını söyler.
 
-Etkisini görmek için pipeline'ı bu yapılandırmayla tekrar çalıştırın:
+Pipeline'ı bu yapılandırmayla çalıştırın:
 
 ```bash
-nextflow run nf-core/demo -profile docker,test --outdir demo-results-extargs -c custom.config
+nextflow run nf-core/demo -profile docker,test --outdir demo-results-custom -c custom.config
 ```
 
 ??? success "Komut çıktısı"
 
     ```console
-    executor >  local (7)
-    [1e/b7a392] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
-    [ab/cd1234] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
-    [4f/c8d105] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
+    executor >  local (8)
+    [95/b32876] NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE)     | 3 of 3 ✔
+    [17/428668] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) | 3 of 3 ✔
+    [cf/85991a] NFCORE_DEMO:DEMO:COWPY                   | 1 of 1 ✔
+    [3c/94a7a0] NFCORE_DEMO:DEMO:MULTIQC (demo)          | 1 of 1 ✔
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
-Argümanın uygulandığını doğrulamak için, çalıştırma çıktısından `SEQTK_TRIM` work dizini hash'ini bulun (örn. `work/ab/cd1234...`) ve içindeki `.command.sh` dosyasını kontrol edin:
+`-c` bayrağı, yapılandırmanızı pipeline'ın yerleşik yapılandırmasının üzerine ekler.
+
+`ext.args` geçersiz kılmasının etkili olduğunu doğrulamak için, çalıştırma çıktısından `SEQTK_TRIM` work dizini hash'ini bulun (örn. `work/17/428668...`) ve içindeki `.command.sh` dosyasını kontrol edin:
 
 ```bash
-cat work/ab/cd1234/.command.sh
+cat work/17/428668/.command.sh
 ```
 
 ??? success "Komut çıktısı"
 
     ```console
-    #!/usr/bin/env bash
+    #!/usr/bin/env bash -e -u -o pipefail
+    printf "%s\n" sample1_R1.fastq.gz sample1_R2.fastq.gz | while read f;
+    do
+        seqtk \
+            trimfq \
+            -b 5 \
+            $f \
+            | gzip --no-name > SAMPLE1_PE_$(basename $f)
+    done
     ...
-    seqtk trimfq -b 5 SAMPLE3_SE.fastq.gz | gzip -c > SAMPLE3_SE.trimmed.fastq.gz
     ```
 
-`seqtk trimfq` komutunda `-b 5`'i görmelisiniz; bu, `ext.args` geçersiz kılmanızın etkili olduğunu doğrular.
+`seqtk trimfq` komutunda `-b 5`'i görmelisiniz.
 
-##### 3.2.2.3. Varsayılan değerleri geçersiz kılma
-
-Bazı modüllerin `ext.args` değerleri varsayılan olarak zaten ayarlanmıştır.
-Örneğin, `FASTQC` modülü varsayılan olarak `ext.args = '--quiet'` ile yapılandırılmıştır (`conf/modules.config` dosyasında tanımlanmıştır).
+`ext.args` hakkında bilmeniz gereken önemli bir nokta: bir modülün varsayılan olarak ayarlanmış bir değeri varsa, sizin değeriniz buna **eklenmek yerine tamamen yerini alır**.
+Örneğin, `FASTQC` modülü `conf/modules.config` dosyasında varsayılan olarak `ext.args = '--quiet'` ile yapılandırılmıştır:
 
 ```groovy title="conf/modules.config" linenums="21" hl_lines="2"
     withName: FASTQC {
-        ext.args = '--quiet'
+        ext.args   = '--quiet'
         publishDir = [
             path: { "${params.outdir}/fastqc/${meta.id}" },
             mode: params.publish_dir_mode,
-            pattern: "*.{html,json}"
+            pattern: "*.{html,json}",
         ]
     }
 ```
 
-Özel bir yapılandırma dosyası aracılığıyla `ext.args` için bir değer sağlarsanız, bu değer söz konusu süreç için ayarlanan varsayılanın tamamen yerini alır.
-
-Örneğin, varsayılan `'--quiet'` iken `ext.args = '--kmers 8'` ayarlarsanız, `--quiet` bayrağı artık uygulanmayacaktır.
+`FASTQC` için `ext.args = '--kmers 8'` ayarlarsanız, `--quiet` bayrağı artık uygulanmayacaktır.
 Her ikisini de korumak için `ext.args = '--quiet --kmers 8'` olarak ayarlayın.
 
-Bu, `ext.args` ile argüman değerleri sağlamak istediğiniz araçların varsayılan yapılandırmasını kontrol etmekten sorumlu olduğunuz anlamına gelir.
+`ext.args` değerini geçersiz kılmadan önce her zaman modülün varsayılan yapılandırmasını kontrol etmelisiniz.
 
 ### Özetle
 
@@ -878,4 +976,6 @@ Bir nf-core pipeline'ından nasıl yardım alacağınızı, parametreleri nasıl
 
 ### Sırada ne var?
 
-Bir mola verin! Hazır hissettiğinizde, kendi nf-core uyumlu pipeline'ınızı sıfırdan oluşturacağınız 2. Bölüme geçin.
+Yalnızca nf-core pipeline'larını çalıştırmak istiyorsanız, bu kadar!
+
+nf-core standartlarına göre kendi pipeline'larınızı geliştirmeyi öğrenmek istiyorsanız, bir mola verin ve hazır hissettiğinizde 2. Bölüme geçin. nf-core şablon tabanlı araçları kullanarak kendi nf-core uyumlu pipeline'ınızı nasıl oluşturacağınızı öğreneceksiniz.

@@ -74,7 +74,7 @@ tree .
 │   └── utils.nf
 └── nextflow.config
 
-3 directories, 12 files
+2 directories, 12 files
 ```
 
 !!! note "예제 파일에 대하여"
@@ -316,7 +316,7 @@ VS Code의 오류 감지와 문제 패널을 사용하여 워크플로우 실행
 
 ![링크 따라가기](../img/follow_link.png)
 
-process 이름에도 동일하게 작동합니다. `basic_workflow.nf`로 돌아가서 workflow 블록의 `FASTQC` process 이름에 이를 적용해 봅니다. 이렇게 하면 process 이름으로 직접 연결됩니다(이 예제에서는 모듈 파일과 동일하지만, 훨씬 더 큰 파일의 중간 부분일 수도 있습니다).
+process 이름에도 동일하게 작동합니다. `basic_workflow.nf`로 돌아가서 workflow 블록의 `FASTQC` process 이름에 이를 적용합니다. 이렇게 하면 process 이름으로 직접 연결됩니다(이 예제에서는 모듈 파일과 동일하지만, 훨씬 더 큰 파일의 중간 부분일 수도 있습니다).
 
 이전 위치로 돌아가려면 **Alt+←** (또는 Mac에서 **Ctrl+-**)를 사용합니다. 이는 현재 위치를 잃지 않고 코드를 탐색하는 강력한 방법입니다.
 

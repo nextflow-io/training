@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=es" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -69,14 +69,29 @@ nextflow run hello-modules.nf
 ??? success "Salida del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [hopeful_avogadro] DSL2 - revision: b09af1237d
+    Launching `hello-modules.nf` [hopeful_avogadro] revision: b09af1237d
 
     executor >  local (7)
-    [0f/8795c9] sayHello (3)       [100%] 3 of 3 ✔
-    [6a/eb2510] convertToUpper (3) [100%] 3 of 3 ✔
-    [af/479117] collectGreetings   [100%] 1 of 1 ✔
+    [0f/8795c9] sayHello (3)       | 3 of 3 ✔
+    [6a/eb2510] convertToUpper (3) | 3 of 3 ✔
+    [af/479117] collectGreetings   | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_modules/Hola-output.txt
+        - hello_modules/Bonjour-output.txt
+        - hello_modules/Hello-output.txt
+      uppercased:
+        - hello_modules/UPPER-Hola-output.txt
+        - hello_modules/UPPER-Bonjour-output.txt
+        - hello_modules/UPPER-Hello-output.txt
+      collected: hello_modules/COLLECTED-batch-output.txt
+      batch_report: hello_modules/batch-report.txt
     ```
 
 Como anteriormente, encontrará los archivos de salida en el directorio especificado en el bloque `output` (aquí, `results/hello_modules/`).
@@ -172,7 +187,7 @@ Insertemos eso arriba del bloque `params` y completémoslo apropiadamente.
     * Parámetros del pipeline
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -184,7 +199,7 @@ Insertemos eso arriba del bloque `params` y completémoslo apropiadamente.
     * Parámetros del pipeline
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -202,9 +217,9 @@ nextflow run hello-modules.nf -resume
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [romantic_poisson] DSL2 - revision: 96edfa9ad3
+    Launching `hello-modules.nf` [romantic_poisson] revision: 96edfa9ad3
 
     [f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
     [3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
@@ -278,7 +293,7 @@ Inserte la declaración de importación arriba del bloque `params` y complétela
     * Parámetros del pipeline
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -293,7 +308,7 @@ Inserte la declaración de importación arriba del bloque `params` y complétela
     * Parámetros del pipeline
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -311,9 +326,9 @@ nextflow run hello-modules.nf -resume
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [nauseous_heisenberg] DSL2 - revision: a04a9f2da0
+    Launching `hello-modules.nf` [nauseous_heisenberg] revision: a04a9f2da0
 
     [c9/763d42] sayHello (3)       | 3 of 3, cached: 3 ✔
     [60/bc6831] convertToUpper (3) | 3 of 3, cached: 3 ✔
@@ -381,7 +396,7 @@ Inserte la declaración de importación arriba del bloque `params` y complétela
     * Parámetros del pipeline
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -397,7 +412,7 @@ Inserte la declaración de importación arriba del bloque `params` y complétela
     * Parámetros del pipeline
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -415,9 +430,9 @@ nextflow run hello-modules.nf -resume
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [friendly_coulomb] DSL2 - revision: 7aa2b9bc0f
+    Launching `hello-modules.nf` [friendly_coulomb] revision: 7aa2b9bc0f
 
     [f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
     [3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔

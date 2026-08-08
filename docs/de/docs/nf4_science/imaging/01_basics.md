@@ -19,21 +19,21 @@ nextflow run hello-world.nf --greeting 'Hello World!'
 
 Deine Konsolenausgabe sollte in etwa so aussehen:
 
-```console title="Ausgabe" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+```console title="Output" linenums="1"
+ N E X T F L O W   ~  version 26.04.4
 
-Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+Launching `hello-world.nf` [small_swirles] revision: 0fb8dbb23d
 
 executor >  local (1)
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
 Glückwunsch, du hast gerade deinen ersten Nextflow Workflow ausgeführt!
 
 Die wichtigste Ausgabe hier ist die letzte Zeile (Zeile 6):
 
-```console title="Ausgabe" linenums="6"
-[a3/7be2fa] sayHello | 1 of 1 ✔
+```console title="Output" linenums="6"
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
 Dies zeigt uns, dass der `sayHello` Prozess einmal erfolgreich ausgeführt wurde (`1 of 1 ✔`).
@@ -83,20 +83,20 @@ Das klingt vielleicht verwirrend, also schauen wir uns an, wie das in der Praxis
 
 Zurück zur Konsolenausgabe für den Workflow, den wir vorhin ausgeführt haben, hatten wir diese Zeile:
 
-```console title="Auszug der Befehlsausgabe" linenums="6"
-[a3/7be2fa] sayHello | 1 of 1 ✔
+```console title="Excerpt of command output" linenums="6"
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
-Siehst du, wie die Zeile mit `[a3/7be2fa]` beginnt?
+Siehst du, wie die Zeile mit `[71/8143bd]` beginnt?
 Das ist eine gekürzte Form des Aufgabenverzeichnispfads für diesen einen Prozessaufruf und zeigt dir, wo du die Ausgabe des `sayHello` Prozessaufrufs innerhalb des `work/` Verzeichnispfads findest.
 
-Du kannst den vollständigen Pfad finden, indem du folgenden Befehl eingibst (ersetze `a3/7be2fa` mit dem, was du in deinem eigenen Terminal siehst) und die Tab-Taste drückst, um den Pfad zu vervollständigen oder ein Sternchen hinzuzufügen:
+Du kannst den vollständigen Pfad finden, indem du folgenden Befehl eingibst (ersetze `71/8143bd` mit dem, was du in deinem eigenen Terminal siehst) und die Tab-Taste drückst, um den Pfad zu vervollständigen oder ein Sternchen hinzuzufügen:
 
 ```bash
-tree work/a3/7be2fa*
+tree work/71/8143bd*
 ```
 
-Dies sollte den vollständigen Verzeichnispfad ergeben: `work/a3/7be2fa7be2fad5e71e5f49998f795677fd68`
+Dies sollte den vollständigen Verzeichnispfad ergeben: `work/71/8143bd5ed3420e23c5f0dc1a05056d`
 
 Schauen wir uns an, was sich darin befindet.
 
@@ -116,8 +116,8 @@ Die genauen Unterverzeichnisnamen werden auf deinem System unterschiedlich sein.
 
 ```console title="work/"
 work
-└── a3
-    └── 7be2fad5e71e5f49998f795677fd68
+└── 71
+    └── 8143bd5ed3420e23c5f0dc1a05056d
         ├── .command.begin
         ├── .command.err
         ├── .command.log
@@ -136,7 +136,7 @@ Wenn du sie öffnest, wirst du die `Hello World!` Begrüßung wieder finden.
 <details>
   <summary>Dateiinhalt von output.txt</summary>
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" linenums="1"
 Hello World!
 ```
 
@@ -159,10 +159,9 @@ Die `.command.sh` Datei ist besonders nützlich, weil sie dir den Hauptbefehl ze
 <details>
   <summary>Dateiinhalt</summary>
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/.command.sh" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" linenums="1"
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
-
 ```
 
 </details>
@@ -177,11 +176,11 @@ Versuche, den Workflow mehrmals mit verschiedenen Werten für das `--greeting` A
 
 Beobachte, wie die Ausgaben und Logs isolierter Aufgabenverzeichnisse erhalten bleiben, während der Inhalt des `results` Verzeichnisses von der Ausgabe nachfolgender Ausführungen überschrieben wird.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt, wie man ein einfaches Nextflow Skript ausführt, seine Ausführung überwacht und seine Ausgaben findet.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie man ein grundlegendes Nextflow Skript liest und erkennt, wie seine Komponenten mit seiner Funktionalität zusammenhängen.
 
@@ -357,14 +356,14 @@ nextflow run hello-world.nf --greeting 'Hello World!' -resume
 ??? success "Befehlsausgabe"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_noyce] DSL2 - revision: c33d41f479
+    Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d
 
-    [a3/7be2fa] process > sayHello [100%] 1 of 1, cached: 1 ✔
+    [71/8143bd] sayHello | 1 of 1, cached: 1 ✔
     ```
 
-Achte auf den `cached:` Teil, der in der Prozessstatuszeile (Zeile 5) hinzugefügt wurde, was bedeutet, dass Nextflow erkannt hat, dass es diese Arbeit bereits erledigt hat und einfach das Ergebnis aus dem vorherigen erfolgreichen Lauf wiederverwendet.
+Achte auf den `cached:` Teil, der in der Prozessstatuszeile hinzugefügt wurde, was bedeutet, dass Nextflow erkannt hat, dass es diese Arbeit bereits erledigt hat und einfach das Ergebnis aus dem vorherigen erfolgreichen Lauf wiederverwendet.
 
 Du kannst auch sehen, dass der work Unterverzeichnis-Hash derselbe ist wie im vorherigen Lauf.
 Nextflow zeigt dir buchstäblich auf die vorherige Ausführung und sagt "Das habe ich bereits dort drüben gemacht."
@@ -401,10 +400,10 @@ Du kannst das Nextflow Log verwenden, um einen Lauf anhand seines Zeitstempels u
 
     Du bist dafür verantwortlich, alle Ausgaben zu speichern, die dir wichtig sind oder auf die du dich verlassen möchtest! Wenn du die `publishDir` Direktive für diesen Zweck verwendest, stelle sicher, dass du den `copy` Modus verwendest, nicht den `symlink` Modus.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt, wie man eine Pipeline erneut startet, ohne Schritte zu wiederholen, die bereits auf identische Weise ausgeführt wurden, das Ausführungslog einsieht und den `nextflow clean` Befehl verwendest, um alte work Verzeichnisse aufzuräumen.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Jetzt, da du grundlegende Nextflow Operationen verstehst, bist du bereit, eine echte Bioimaging Pipeline mit nf-core/molkart auszuführen.

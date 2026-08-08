@@ -74,7 +74,7 @@ tree .
 │   └── utils.nf
 └── nextflow.config
 
-3 directories, 12 files
+2 directories, 12 files
 ```
 
 !!! note "Informazioni sui file di esempio"
@@ -331,7 +331,7 @@ Ora esploriamo la navigazione in un flusso di lavoro più complesso usando `comp
 
 ### 4.2. Navigazione tra Simboli
 
-Con `complex_workflow.nf` ancora aperto, potete ottenere una panoramica di tutti i simboli nel file digitando `@` nella barra di ricerca in cima a VSCode (la scorciatoia da tastiera è `Ctrl/Cmd+Shift+O`, ma potrebbe non funzionare in Codespaces). Questo apre il pannello di navigazione dei simboli, che elenca tutti i simboli nel file corrente:
+Con `complex_workflow.nf` ancora aperto, potete ottenere una panoramica di tutti i simboli nel file digitando `@` nella barra di ricerca in cima a VS Code (la scorciatoia da tastiera è `Ctrl/Cmd+Shift+O`, ma potrebbe non funzionare in Codespaces). Questo apre il pannello di navigazione dei simboli, che elenca tutti i simboli nel file corrente:
 
 ![Navigazione tra simboli](../img/symbols.png)
 
@@ -545,7 +545,7 @@ Se il vostro progetto è un repository git (come questo), VS Code mostra:
 - Viste diff inline
 - Capacità di commit e push
 
-Aprite il pannello Source Control usando il pulsante source control (![icona Source control](../img/source_control_icon.png)) (`Ctrl+Shift+G` o `Cmd+Shift+G` se lavorate con VSCode localmente) per vedere le modifiche git e preparare i commit direttamente nell'editor.
+Aprite il pannello Source Control usando il pulsante source control (![icona Source control](../img/source_control_icon.png)) (`Ctrl+Shift+G` o `Cmd+Shift+G` se lavorate con VS Code localmente) per vedere le modifiche git e preparare i commit direttamente nell'editor.
 
 ![Pannello Source Control](../img/source_control.png)
 

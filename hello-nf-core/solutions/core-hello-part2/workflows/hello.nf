@@ -20,6 +20,7 @@ workflow HELLO {
 
     take:
     ch_samplesheet // channel: samplesheet read in from --input
+    outdir
 
     main:
 
@@ -49,7 +50,7 @@ workflow HELLO {
     //
     // Collate and save software versions
     //
-    def topic_versions = Channel.topic("versions")
+    def topic_versions = channel.topic("versions")
         .distinct()
         .branch { entry ->
             versions_file: entry instanceof Path
@@ -69,7 +70,7 @@ workflow HELLO {
     softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
+            storeDir: "${outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
             sort: true,
             newLine: true

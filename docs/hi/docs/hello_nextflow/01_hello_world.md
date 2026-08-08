@@ -215,9 +215,9 @@ nextflow run hello-world.nf
 ??? success "कमांड आउटपुट"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+    Launching `hello-world.nf` [goofy_torvalds] revision: c33d41f479
 
     executor >  local (1)
     [65/7be2fa] sayHello | 1 of 1 ✔
@@ -486,17 +486,23 @@ nextflow run hello-world.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5
+    Launching `hello-world.nf` [jovial_mayer] revision: 35bd3425e5
 
     executor >  local (1)
     [9f/48ef97] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: output.txt
     ```
 
-Terminal output परिचित दिखना चाहिए। बाहरी रूप से, कुछ भी नहीं बदला है।
+Terminal output अब एक `Outputs:` summary के साथ समाप्त होता है जो published outputs और उस directory को list करता है जहाँ वे लिखे गए थे।
 
-हालाँकि, अपना file explorer check करो: इस बार, Nextflow ने `results/` नामक एक new directory बनाई है।
+अपना file explorer check करो: इस बार, Nextflow ने `results/` नामक एक new directory भी बनाई है।
 
 ??? abstract "डायरेक्टरी सामग्री"
 
@@ -574,12 +580,18 @@ nextflow run hello-world.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
+    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
 
     executor >  local (1)
-    [8c/79499c] process > sayHello [100%] 1 of 1 ✔
+    [8c/79499c] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 इस बार result specified subdirectory के तहत लिखा जाता है।
@@ -653,12 +665,18 @@ nextflow run hello-world.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
+    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
 
     executor >  local (1)
-    [df/521638] process > sayHello [100%] 1 of 1 ✔
+    [df/521638] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 इस बार, यदि तुम results देखो, तो file एक proper copy है बजाय सिर्फ एक symlink के।
@@ -767,19 +785,19 @@ Process block में, निम्नलिखित code change करो:
 === "बाद में"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-    script:
-    """
-    echo '${greeting}' > output.txt
-    """
+        script:
+        """
+        echo '${greeting}' > output.txt
+        """
     ```
 
 === "पहले"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-    script:
-    """
-    echo 'Hello World!' > output.txt
-    """
+        script:
+        """
+        echo 'Hello World!' > output.txt
+        """
     ```
 
 `$` symbol और curly braces (`{ }`) Nextflow को बताते हैं कि यह एक variable name है जिसे actual input value से replace किया जाना चाहिए (=interpolated)।
@@ -811,15 +829,15 @@ Workflow block में, निम्नलिखित code change करो:
 === "बाद में"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // एक अभिवादन emit करें
-    sayHello(params.input)
+        // एक अभिवादन emit करें
+        sayHello(params.input)
     ```
 
 === "पहले"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // एक अभिवादन emit करें
-    sayHello()
+        // एक अभिवादन emit करें
+        sayHello()
     ```
 
 यह Nextflow को बताता है कि `--input` parameter के माध्यम से provide की गई value पर `sayHello` process चलाएं।
@@ -837,12 +855,18 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea
+    Launching `hello-world.nf` [elated_lavoisier] revision: 7c031b42ea
 
     executor >  local (1)
     [4b/654319] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 यदि तुमने ये सभी edits correctly किए, तो तुम्हें एक और successful execution मिलनी चाहिए।
@@ -906,12 +930,18 @@ nextflow run hello-world.nf
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582
+    Launching `hello-world.nf` [determined_edison] revision: 3539118582
 
     executor >  local (1)
     [72/394147] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 ??? question "यदि यह काम नहीं किया"
@@ -936,7 +966,8 @@ nextflow run hello-world.nf
     यह course की शुरुआत में mention किया गया था, लेकिन शायद तुमने इसे miss कर दिया।
     [Nextflow versions](../info/nxf_versions.md) help material check करो।
 
-    संक्षेप में, यदि तुम Nextflow `25.10` use कर रहे हो तो तुम्हें v2 language parser enable करना होगा:
+    v2 parser Nextflow 26.04 से default है, इसलिए तुम यह केवल पुराने versions पर देखोगे।
+    26.04 से पहले के version पर तुम्हें v2 language parser enable करना होगा:
 
     ```bash
     export NXF_SYNTAX_PARSER=v2
@@ -965,12 +996,18 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 ??? success "कमांड आउटपुट"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582
+    Launching `hello-world.nf` [elegant_faraday] revision: 3539118582
 
     executor >  local (1)
     [6f/a12a91] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 एक बार फिर, तुम्हें अपनी results directory में corresponding updated output मिलनी चाहिए।
@@ -1020,17 +1057,23 @@ Specifically, इस mode में, कोई भी processes जो पहल
 इसे use करने के लिए, simply अपने command में `-resume` add करो और इसे run करो:
 
 ```bash
-nextflow run hello-world.nf -resume
+nextflow run hello-world.nf --input 'Konnichiwa!' -resume
 ```
 
 ??? success "कमांड आउटपुट"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
+    Launching `hello-world.nf` [golden_cantor] revision: 35bd3425e5
 
     [62/49a1f8] sayHello | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 Console output परिचित दिखना चाहिए, लेकिन एक चीज़ है जो पहले की तुलना में थोड़ी different है।

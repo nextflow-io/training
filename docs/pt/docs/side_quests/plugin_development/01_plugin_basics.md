@@ -511,7 +511,7 @@ Atualize o `nextflow.config`:
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
     ```
 
@@ -534,7 +534,7 @@ O plugin produz várias mensagens INFO e WARN durante a execução.
 Isso é normal para um exemplo pequeno sendo executado em uma máquina local:
 
 ```console title="Output (partial)"
-nf-co2footprint plugin  ~  version 1.2.0
+nf-co2footprint plugin  ~  version 1.3.0
 WARN - [nf-co2footprint] Target zone null not found. Attempting to retrieve carbon intensity for fallback zone GLOBAL.
 INFO - [nf-co2footprint] Using fallback carbon intensity from GLOBAL from CI table: 480.0 gCO₂eq/kWh.
 WARN - [nf-co2footprint] Executor 'null' not mapped.
@@ -600,7 +600,7 @@ Adicione um bloco `co2footprint` ao `nextflow.config`:
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
 
     co2footprint {
@@ -614,7 +614,7 @@ Adicione um bloco `co2footprint` ao `nextflow.config`:
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
     ```
 
@@ -634,11 +634,6 @@ INFO - [nf-co2footprint] Using fallback carbon intensity from GB from CI table: 
 
 O aviso de zona desapareceu.
 O plugin agora usa a intensidade de carbono específica do GB (163.92 gCO₂eq/kWh) em vez do valor global de fallback (480.0 gCO₂eq/kWh).
-
-!!! note "Nota"
-
-    Você também pode ver uma mensagem `WARN: Unrecognized config option 'co2footprint.location'`.
-    Isso é apenas cosmético e pode ser ignorado com segurança; o plugin ainda lê o valor corretamente.
 
 Na Parte 6, você criará um escopo de configuração para o seu próprio plugin.
 
