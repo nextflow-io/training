@@ -26,3 +26,16 @@ extra:
     nf4_science/index.md: "विज्ञान के लिए Nextflow"
     side_quests/index.md: "साइड क्वेस्ट"
     envsetup/index.md: "प्रशिक्षण वातावरण"
+  nav_child_title_overrides:
+    nextflow_run/index.md: "अवलोकन"
+    nfcore_run/index.md: "अवलोकन"
+    seqera_run/index.md: "अवलोकन"
+    hello_nextflow/index.md: "अवलोकन"
+    hello_nf-core/index.md: "अवलोकन"
+    nf4_science/index.md: "अवलोकन"
+    side_quests/index.md: "अवलोकन"
+  nav_section_separators:
+    side_quests/dev_environment/index.md: "डेवलपर टूल्स और ट्रिक्स"
+    side_quests/working_with_files/index.md: "डेटाफ्लो में गहराई से जानकारी"
+    side_quests/workflows_of_workflows/index.md: "क्रियान्वित मॉड्यूलर आर्किटेक्चर"
+    side_quests/nf_test/index.md: "Nextflow का विस्तारित ब्रह्मांड"

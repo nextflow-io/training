@@ -25,3 +25,16 @@ extra:
     nf4_science/index.md: "과학을 위한 Nextflow"
     side_quests/index.md: "사이드 퀘스트"
     envsetup/index.md: "교육 환경"
+  nav_child_title_overrides:
+    nextflow_run/index.md: "개요"
+    nfcore_run/index.md: "개요"
+    seqera_run/index.md: "개요"
+    hello_nextflow/index.md: "개요"
+    hello_nf-core/index.md: "개요"
+    nf4_science/index.md: "개요"
+    side_quests/index.md: "개요"
+  nav_section_separators:
+    side_quests/dev_environment/index.md: "개발자 도구 및 팁"
+    side_quests/working_with_files/index.md: "데이터 흐름 심층 분석"
+    side_quests/workflows_of_workflows/index.md: "실전 모듈형 아키텍처"
+    side_quests/nf_test/index.md: "Nextflow 확장 유니버스"

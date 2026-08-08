@@ -144,8 +144,14 @@ def generate_renamed_section_items(
     Recursively process nav items to use page titles for section names,
     unless overridden via extra.nav_title_overrides (keyed by the source
     path of the section's index page, relative to docs_dir).
+
+    Also applies extra.nav_child_title_overrides to any Page item's own
+    nav label (keyed the same way), for cases like the "Overview" label
+    on a section's first child, which is set explicitly in nav.yml and
+    otherwise can't vary per language.
     """
     title_overrides = config.extra.get("nav_title_overrides", {})
+    child_title_overrides = config.extra.get("nav_child_title_overrides", {})
     new_items: list[Union[Page, Section, Link]] = []
     for item in items:
         if isinstance(item, Section):
@@ -166,6 +172,10 @@ def generate_renamed_section_items(
             item.children = new_children
             new_items.append(item)
         else:
+            if isinstance(item, Page):
+                child_override = child_title_overrides.get(item.file.src_path)
+                if child_override:
+                    item.title = child_override
             new_items.append(item)
     return new_items
 

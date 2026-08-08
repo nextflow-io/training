@@ -74,13 +74,13 @@ nav:
       - Overview: side_quests/index.md
       - side_quests/orientation.md
       - side_quests/dev_environment/index.md
+      - side_quests/debugging/index.md
       - side_quests/essential_scripting_patterns/index.md
       - side_quests/working_with_files/index.md
       - side_quests/metadata/index.md
       - side_quests/splitting_and_grouping/index.md
-      - side_quests/nf_test/index.md
-      - side_quests/debugging/index.md
       - side_quests/workflows_of_workflows/index.md
+      - side_quests/nf_test/index.md
       - Plugin Development:
           - side_quests/plugin_development/index.md
           - side_quests/plugin_development/01_plugin_basics.md
@@ -179,6 +179,14 @@ extra:
     hello_nf-core/index.md: Build with nf-core
     nf4_science/index.md: Nextflow for Science
     side_quests/index.md: Side Quests
+  # Non-clickable separators inside a nested nav list, keyed by the source
+  # path of the child page the separator should appear directly above.
+  # Rendered by overrides/partials/nav-item.html.
+  nav_section_separators:
+    side_quests/dev_environment/index.md: Developer Tools & Tricks
+    side_quests/working_with_files/index.md: Deep Dives into Dataflow
+    side_quests/workflows_of_workflows/index.md: Modular Architecture in Action
+    side_quests/nf_test/index.md: The Nextflow Extended Universe
   # Announcement banner for upcoming training
   announcement:
     active: true

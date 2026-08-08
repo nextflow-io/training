@@ -27,3 +27,16 @@ extra:
     nf4_science/index.md: "Nextflow per la Scienza"
     side_quests/index.md: "Missioni Secondarie"
     envsetup/index.md: "Ambiente di Formazione"
+  nav_child_title_overrides:
+    nextflow_run/index.md: "Panoramica"
+    nfcore_run/index.md: "Panoramica"
+    seqera_run/index.md: "Panoramica"
+    hello_nextflow/index.md: "Panoramica"
+    hello_nf-core/index.md: "Panoramica"
+    nf4_science/index.md: "Panoramica"
+    side_quests/index.md: "Panoramica"
+  nav_section_separators:
+    side_quests/dev_environment/index.md: "Strumenti e Trucchi per Sviluppatori"
+    side_quests/working_with_files/index.md: "Approfondimenti sul Flusso di Dati"
+    side_quests/workflows_of_workflows/index.md: "Architettura Modulare in Azione"
+    side_quests/nf_test/index.md: "L'Universo Esteso di Nextflow"

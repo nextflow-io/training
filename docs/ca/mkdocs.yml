@@ -27,3 +27,16 @@ extra:
     nf4_science/index.md: "Nextflow per a la Ciència"
     side_quests/index.md: "Side Quests"
     envsetup/index.md: "Entorn de Formació"
+  nav_child_title_overrides:
+    nextflow_run/index.md: "Visió general"
+    nfcore_run/index.md: "Visió general"
+    seqera_run/index.md: "Visió general"
+    hello_nextflow/index.md: "Visió general"
+    hello_nf-core/index.md: "Visió general"
+    nf4_science/index.md: "Visió general"
+    side_quests/index.md: "Visió general"
+  nav_section_separators:
+    side_quests/dev_environment/index.md: "Eines i Trucs per a Desenvolupadors"
+    side_quests/working_with_files/index.md: "Immersió en el Flux de Dades"
+    side_quests/workflows_of_workflows/index.md: "Arquitectura Modular en Acció"
+    side_quests/nf_test/index.md: "L'Univers Estès de Nextflow"
