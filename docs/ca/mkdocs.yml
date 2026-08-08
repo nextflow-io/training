@@ -25,6 +25,9 @@ extra:
     hello_nextflow/index.md: Hello Nextflow
     hello_nf-core/index.md: Build with nf-core
     nf4_science/index.md: "Nextflow per a la Ciència"
+    nf4_science/genomics/index.md: "Genòmica"
+    nf4_science/rnaseq/index.md: "RNAseq"
+    nf4_science/imaging/index.md: "Imaging"
     side_quests/index.md: "Side Quests"
     envsetup/index.md: "Entorn de Formació"
   nav_child_title_overrides:

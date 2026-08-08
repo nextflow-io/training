@@ -23,6 +23,9 @@ extra:
     hello_nextflow/index.md: Hello Nextflow
     hello_nf-core/index.md: Build with nf-core
     nf4_science/index.md: "과학을 위한 Nextflow"
+    nf4_science/genomics/index.md: "유전체학"
+    nf4_science/rnaseq/index.md: "RNAseq"
+    nf4_science/imaging/index.md: "이미징"
     side_quests/index.md: "사이드 퀘스트"
     envsetup/index.md: "교육 환경"
   nav_child_title_overrides:

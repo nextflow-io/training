@@ -182,6 +182,9 @@ extra:
     hello_nextflow/index.md: Hello Nextflow
     hello_nf-core/index.md: Build with nf-core
     nf4_science/index.md: Nextflow for Science
+    nf4_science/genomics/index.md: "Genomics"
+    nf4_science/rnaseq/index.md: "RNAseq"
+    nf4_science/imaging/index.md: "Imaging"
     side_quests/index.md: Side Quests
   # Non-clickable separators inside a nested nav list, keyed by the source
   # path of the child page the separator should appear directly above.

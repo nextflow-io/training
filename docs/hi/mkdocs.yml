@@ -24,6 +24,9 @@ extra:
     hello_nextflow/index.md: Hello Nextflow
     hello_nf-core/index.md: Build with nf-core
     nf4_science/index.md: "विज्ञान के लिए Nextflow"
+    nf4_science/genomics/index.md: "जीनोमिक्स"
+    nf4_science/rnaseq/index.md: "RNAseq"
+    nf4_science/imaging/index.md: "इमेजिंग"
     side_quests/index.md: "साइड क्वेस्ट"
     envsetup/index.md: "प्रशिक्षण वातावरण"
   nav_child_title_overrides:
