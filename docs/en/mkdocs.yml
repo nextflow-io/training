@@ -47,6 +47,27 @@ nav:
       - hello_nf-core/04_input_validation.md
       - hello_nf-core/next_steps.md
       - hello_nf-core/survey.md
+  - Side Quests:
+      - Overview: side_quests/index.md
+      - side_quests/orientation.md
+      - side_quests/dev_environment/index.md
+      - side_quests/debugging/index.md
+      - side_quests/essential_scripting_patterns/index.md
+      - side_quests/working_with_files/index.md
+      - side_quests/metadata/index.md
+      - side_quests/splitting_and_grouping/index.md
+      - side_quests/workflows_of_workflows/index.md
+      - side_quests/nf_test/index.md
+      - Plugin Development:
+          - side_quests/plugin_development/index.md
+          - side_quests/plugin_development/01_plugin_basics.md
+          - side_quests/plugin_development/02_create_project.md
+          - side_quests/plugin_development/03_custom_functions.md
+          - side_quests/plugin_development/04_build_and_test.md
+          - side_quests/plugin_development/05_observers.md
+          - side_quests/plugin_development/06_configuration.md
+          - side_quests/plugin_development/summary.md
+          - side_quests/plugin_development/next_steps.md
   - Nextflow for Science:
       - Overview: nf4_science/index.md
       - Genomics:
@@ -74,27 +95,6 @@ nav:
           - nf4_science/imaging/04_config.md
           - nf4_science/imaging/survey.md
           - nf4_science/imaging/next_steps.md
-  - Side Quests:
-      - Overview: side_quests/index.md
-      - side_quests/orientation.md
-      - side_quests/dev_environment/index.md
-      - side_quests/debugging/index.md
-      - side_quests/essential_scripting_patterns/index.md
-      - side_quests/working_with_files/index.md
-      - side_quests/metadata/index.md
-      - side_quests/splitting_and_grouping/index.md
-      - side_quests/workflows_of_workflows/index.md
-      - side_quests/nf_test/index.md
-      - Plugin Development:
-          - side_quests/plugin_development/index.md
-          - side_quests/plugin_development/01_plugin_basics.md
-          - side_quests/plugin_development/02_create_project.md
-          - side_quests/plugin_development/03_custom_functions.md
-          - side_quests/plugin_development/04_build_and_test.md
-          - side_quests/plugin_development/05_observers.md
-          - side_quests/plugin_development/06_configuration.md
-          - side_quests/plugin_development/summary.md
-          - side_quests/plugin_development/next_steps.md
   - Training Environment:
       - envsetup/index.md
       - envsetup/01_setup.md

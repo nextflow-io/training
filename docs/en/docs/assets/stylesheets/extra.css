@@ -201,11 +201,11 @@ h3 .enumerate-headings-plugin {
 .md-typeset .admonition.catalog,
 .md-typeset details.catalog {
   border-color: rgb(142, 142, 142);
-  font-size: 0.8rem;
 }
 .md-typeset .catalog > .admonition-title,
 .md-typeset .catalog > summary {
   background-color: rgba(153, 153, 153, 0.1);
+  font-weight: normal;
 }
 .md-typeset .catalog > .admonition-title::before,
 .md-typeset .catalog > summary::before {

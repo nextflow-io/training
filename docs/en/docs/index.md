@@ -17,7 +17,7 @@ hide:
     **Welcome to the Nextflow community training portal!**
 
     The training courses listed below are designed to be usable as a self-service resource.
-    You can work through them on your own at any time either in the web-based environment we provide via Github Codespaces or in your own environment.
+    You can work through them on your own at any time, either in the web-based environment we provide via Github Codespaces or in your own environment.
 
     [Explore the courses :material-arrow-right:](#catalog-of-nextflow-training-courses){ .md-button .md-button--primary .mt-1 }
 
@@ -77,81 +77,75 @@ hide:
 
     ### :material-play-circle:{.nextflow-primary} Run pipelines {.mt-1}
 
-    Domain-agnostic courses for learners who want to run existing pipelines without writing their own code. Each course consists of a series of training modules that are designed to help learners build up their skills progressively.
+    Learn to run existing pipelines without writing any code.
 
-    ??? courses "**Nextflow Run:** Learn to run existing pipelines"
+    ??? courses "**Nextflow Run:** Run pipelines with Nextflow"
 
-        A fast-track introduction to running Nextflow pipelines, with less focus on code than Hello Nextflow. Covers execution, outputs, channels, containers, and configuration.
+        A fast-track introduction to running Nextflow pipelines that does not require understanding code. Covers launching pipelines, retrieving outputs, using containers, and configuring execution at a basic level.
 
-        [Start the Nextflow Run training :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
+        [View the training :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Run nf-core:** Learn to run nf-core pipelines"
+    ??? courses "**Run nf-core:** Find and run community-curated pipelines"
 
-        A fast-track introduction to finding, running, and configuring nf-core community pipelines, from a minimal training pipeline to a production-scale analysis pipeline.
+        A fast-track introduction to finding, running, and configuring pipelines from the nf-core community project, starting with a minimal demo pipeline then scaling up to a production-scale analysis pipeline.
 
-        [Start the Run nf-core training :material-arrow-right:](nfcore_run/index.md){ .md-button .md-button--secondary }
+        [View the training :material-arrow-right:](nfcore_run/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Run with Seqera:** Learn to launch and monitor pipelines at scale"
+    ??? courses "**Run with Seqera:** Launch and monitor pipelines at scale"
 
         A hands-on introduction to launching and monitoring Nextflow pipelines with Seqera Platform, from both the web interface and the command line.
 
-        [Start the Run with Seqera training :material-arrow-right:](seqera_run/index.md){ .md-button .md-button--secondary }
+        [View the training :material-arrow-right:](seqera_run/index.md){ .md-button .md-button--secondary }
+
+    ---
+
+    ### :material-tune:{.nextflow-primary} Configure execution {.mt-1}
+
+    Coming soon: Learn to configure your pipelines effectively.
+
+    ??? courses "**Nextflow Dot Config:** Configure pipelines like a pro"
+
+        Coming soon: Hands-on demonstration of the most useful configuration options.
 
 -   :material-code-tags:{ .lg .middle } __For developers__
 
     ---
 
-    ### :material-compass:{.nextflow-primary} Nextflow fundamentals {.mt-1}
+    ### :material-wrench:{.nextflow-primary} Write pipelines {.mt-1}
 
-    Domain-agnostic courses intended for those who are completely new to developing Nextflow pipelines. Each course consists of a series of training modules that are designed to help learners build up their skills progressively.
+    Learn to develop your own Nextflow pipelines.
 
-    ??? courses "**Hello Nextflow:** Learn to develop your own pipelines"
+    ??? courses "**Hello Nextflow:** Develop your own pipelines from scratch"
 
         This course covers the core components of the Nextflow language in enough detail to enable developing simple but fully functional pipelines, plus key elements of pipeline design, development and configuration practices.
 
-        [Start the Hello Nextflow training :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--secondary }
+        [View the training :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Build with nf-core:** Get started with nf-core"
+    ??? courses "**Build with nf-core:** Use the nf-core tools and rules"
 
-        For developers who wish to learn to develop [nf-core](https://nf-co.re/) compliant pipelines. The course covers the structure of nf-core pipelines in enough detail to enable developing simple but fully functional pipelines that follow the nf-core template and development best practices, as well as use existing nf-core modules.
+        For Nextflow developers who wish to learn to develop [nf-core](https://nf-co.re/) compliant pipelines.
+        The course covers the structure of nf-core pipelines in enough detail to enable developing simple but fully functional pipelines that leverage the nf-core template and development best practices, as well as use existing nf-core modules.
 
-        [Start the Build with nf-core training :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
+        [View the training :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
+
+    ??? catalog "**Side Quests:** Dive into advanced Nextflow topics"
+
+        A collection of standalone mini-courses intended for Nextflow developers who wish to widen their range and/or deepen their skills on particular topics.
+        They are presented linearly but can be taken in any order (see dependencies in each mini-course overview).
+
+        [Browse the Side Quests :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
 
     ---
 
     ### :material-microscope:{.nextflow-primary} Nextflow for Science {.mt-1}
 
-    Learn to apply the concepts and components presented in 'Hello Nextflow' to specific scientific use cases.
+    Learn to develop Nextflow pipelines for specific scientific applications.
 
-    ??? courses "**Nextflow for Genomics** (variant calling)"
+    ??? catalog "**NF4Science:** Apply basic Nextflow to specific use cases"
 
-        For researchers who wish to learn how to develop their own genomics pipelines. The course uses a variant calling use case to demonstrate how to develop a simple but functional genomics pipeline.
+        A collection of courses that each demonstrate how to develop a simple but functional pipeline for a real scientific use case by applying the concepts and components presented in 'Hello Nextflow'.
 
-        [Start the Nextflow for Genomics training :material-arrow-right:](nf4_science/genomics/index.md){ .md-button .md-button--secondary }
-
-    ??? courses "**Nextflow for RNAseq** (bulk RNAseq)"
-
-        For researchers who wish to learn how to develop their own RNAseq pipelines. The course uses a bulk RNAseq processing use case to demonstrate how to develop a simple but functional RNAseq pipeline.
-
-        [Start the Nextflow for RNAseq training :material-arrow-right:](nf4_science/rnaseq/index.md){ .md-button .md-button--secondary }
-
-    ??? courses "**Nextflow for Imaging** (spatial omics)"
-
-        For researchers in imaging and spatial omics who wish to learn how to run and customize analysis pipelines. The course uses the nf-core/molkart pipeline to provide a biologically-relevant pipeline demonstrate how to run, configure, and manage inputs for Nextflow pipelines workflows.
-
-        [Start the Nextflow for Imaging training :material-arrow-right:](nf4_science/imaging/index.md){ .md-button .md-button--secondary }
-
-    ---
-
-    ### :material-rocket-launch:{.nextflow-primary} Advanced Nextflow Training {.mt-1}
-
-    Learn advanced concepts and mechanisms for developing and deploying Nextflow pipelines to address real-world use cases.
-
-    ??? courses "**Side Quests:** Deep dives into standalone topics"
-
-        Standalone mini-courses intended for Nextflow developers who wish to widen their range and/or deepen their skills on particular topics. They are presented linearly but can be taken in any order (see dependencies in each mini-course overview).
-
-        [Browse the Side Quests :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
+        [Browse the available scientific use cases :material-arrow-right:](nf4_science/index.md){ .md-button .md-button--secondary }
 
 </div>
 
