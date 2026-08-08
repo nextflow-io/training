@@ -38,9 +38,11 @@ If you're looking for an intro to developing nf-core-compatible pipelines, see [
 
 ### Lesson plan
 
-| Course chapter                                  | Summary                                                                                                                      | Estimated duration |
-| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| [Part 1: Run a demo pipeline](./01_run_demo.md) | Find and retrieve an nf-core pipeline, run it using its test profile, configure its execution, and run a production pipeline | 60 mins            |
+| Course chapter                                                       | Summary                                                                                     | Estimated duration |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------ |
+| [Part 1: Run a demo pipeline](./01_run_demo.md)                      | Find and retrieve an nf-core pipeline and run it using its test profile                     | 20 mins            |
+| [Part 2: Configure pipeline execution](./02_configure_execution.md)  | Set parameters, understand validation, and customize resource allocation and tool arguments | 20 mins            |
+| [Part 3: Run a production pipeline](./03_run_production_pipeline.md) | Pull and run nf-core/rnaseq, and override its default resource allocations                  | 20 mins            |
 
 By the end of this course, you will be able to take advantage of the wealth of community pipelines offered by the nf-core project.
 

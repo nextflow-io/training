@@ -36,9 +36,10 @@ Then you'll switch to the `tw` command-line tool to do the same from a terminal,
 
 ### Lesson plan
 
-| Course chapter                                     | Summary                                                                                                | Estimated duration |
-| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------ |
-| [Part 1: Run with Seqera](./01_run_with_seqera.md) | Set up Seqera Platform access, launch a pipeline from the web and the CLI, and register a new pipeline | 45 mins            |
+| Course chapter                                                             | Summary                                                                                      | Estimated duration |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------ |
+| [Part 1: Launch pipelines from the web interface](./01_run_with_seqera.md) | Set up Seqera Platform access and launch a production-scale pipeline from the web interface  | 20 mins            |
+| [Part 2: Launch pipelines from the command line](./02_launch_from_cli.md)  | Authenticate the `tw` CLI, launch a saved pipeline, and register a new pipeline from the CLI | 25 mins            |
 
 By the end of this course, you will be comfortable launching and monitoring Nextflow pipelines on Seqera Platform, whether you prefer working from the web interface or the command line.
 

@@ -71,13 +71,39 @@ hide:
 
 <div class="grid cards" markdown>
 
--   :material-walk:{ .lg .middle } __Introductory track__
+-   :material-account:{ .lg .middle } __For users__
 
     ---
 
-    ### :material-compass:{.nextflow-primary} Nextflow for Newcomers {.mt-1}
+    ### :material-play-circle:{.nextflow-primary} Run pipelines {.mt-1}
 
-    Domain-agnostic courses intended for those who are completely new to Nextflow. Each course consists of a series of training modules that are designed to help learners build up their skills progressively.
+    Domain-agnostic courses for learners who want to run existing pipelines without writing their own code. Each course consists of a series of training modules that are designed to help learners build up their skills progressively.
+
+    ??? courses "**Nextflow Run:** Learn to run existing pipelines"
+
+        A fast-track introduction to running Nextflow pipelines, with less focus on code than Hello Nextflow. Covers execution, outputs, channels, containers, and configuration.
+
+        [Start the Nextflow Run training :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
+
+    ??? courses "**Run nf-core:** Learn to run nf-core pipelines"
+
+        A fast-track introduction to finding, running, and configuring nf-core community pipelines, from a minimal training pipeline to a production-scale analysis pipeline.
+
+        [Start the Run nf-core training :material-arrow-right:](nfcore_run/index.md){ .md-button .md-button--secondary }
+
+    ??? courses "**Run with Seqera:** Learn to launch and monitor pipelines at scale"
+
+        A hands-on introduction to launching and monitoring Nextflow pipelines with Seqera Platform, from both the web interface and the command line.
+
+        [Start the Run with Seqera training :material-arrow-right:](seqera_run/index.md){ .md-button .md-button--secondary }
+
+-   :material-code-tags:{ .lg .middle } __For developers__
+
+    ---
+
+    ### :material-compass:{.nextflow-primary} Nextflow fundamentals {.mt-1}
+
+    Domain-agnostic courses intended for those who are completely new to developing Nextflow pipelines. Each course consists of a series of training modules that are designed to help learners build up their skills progressively.
 
     ??? courses "**Hello Nextflow:** Learn to develop your own pipelines"
 
@@ -85,11 +111,11 @@ hide:
 
         [Start the Hello Nextflow training :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Nextflow Run:** Learn to run existing pipelines"
+    ??? courses "**Build with nf-core:** Get started with nf-core"
 
-        A fast-track introduction to running Nextflow pipelines, with less focus on code than Hello Nextflow. Covers execution, outputs, channels, containers, and configuration.
+        For developers who wish to learn to develop [nf-core](https://nf-co.re/) compliant pipelines. The course covers the structure of nf-core pipelines in enough detail to enable developing simple but fully functional pipelines that follow the nf-core template and development best practices, as well as use existing nf-core modules.
 
-        [Start the Nextflow Run training :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
+        [Start the Build with nf-core training :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
 
     ---
 
@@ -114,29 +140,6 @@ hide:
         For researchers in imaging and spatial omics who wish to learn how to run and customize analysis pipelines. The course uses the nf-core/molkart pipeline to provide a biologically-relevant pipeline demonstrate how to run, configure, and manage inputs for Nextflow pipelines workflows.
 
         [Start the Nextflow for Imaging training :material-arrow-right:](nf4_science/imaging/index.md){ .md-button .md-button--secondary }
-
--   :material-run:{ .lg .middle } __Advanced track__
-
-    ---
-
-    ### :material-bridge:{.nextflow-primary} From Nextflow to nf-core {.mt-1}
-
-    Learn to utilize code and best practices from the [nf-core](https://nf-co.re/) community project.
-
-    These courses help you go from Nextflow fundamentals to nf-core best practices.
-    Understand how and why the nf-core community builds pipelines, and how you can contribute and reuse these techniques.
-
-    ??? courses "**Run nf-core:** Learn to run nf-core pipelines"
-
-        A fast-track introduction to finding, running, and configuring nf-core community pipelines, from a minimal training pipeline to a production-scale analysis pipeline.
-
-        [Start the Run nf-core training :material-arrow-right:](nfcore_run/index.md){ .md-button .md-button--secondary }
-
-    ??? courses "**Build with nf-core:** Get started with nf-core"
-
-        For developers who wish to learn to develop [nf-core](https://nf-co.re/) compliant pipelines. The course covers the structure of nf-core pipelines in enough detail to enable developing simple but fully functional pipelines that follow the nf-core template and development best practices, as well as use existing nf-core modules.
-
-        [Start the Build with nf-core training :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
 
     ---
 

@@ -38,9 +38,10 @@ If you're looking for an intro to developing Nextflow pipelines, see [Hello Next
 
 ### Lesson plan
 
-| Course chapter                               | Summary                                                                                                | Estimated duration |
-| -------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------ |
-| [Part 1: Run Nextflow](./01_run_nextflow.md) | Launch and manage Nextflow pipelines, understand essential workflow mechanics, and configure execution | 45 mins            |
+| Course chapter                                               | Summary                                                                           | Estimated duration |
+| ------------------------------------------------------------ | --------------------------------------------------------------------------------- | ------------------ |
+| [Part 1: Run Nextflow](./01_run_nextflow.md)                 | Launch and manage Nextflow pipelines, and understand essential workflow mechanics | 25 mins            |
+| [Part 2: Configure the pipeline](./02_configure_pipeline.md) | Configure pipeline execution using `nextflow.config`, reports, and profiles       | 20 mins            |
 
 By the end of this course, you will be well-prepared for tackling the next steps in your journey to run reproducible workflows for your scientific computing needs.
 

@@ -9,18 +9,22 @@ nav:
       - Overview: nextflow_run/index.md
       - nextflow_run/00_orientation.md
       - nextflow_run/01_run_nextflow.md
+      - nextflow_run/02_configure_pipeline.md
       - nextflow_run/next_steps.md
       - nextflow_run/survey.md
   - Run nf-core:
       - Overview: nfcore_run/index.md
       - nfcore_run/00_orientation.md
       - nfcore_run/01_run_demo.md
+      - nfcore_run/02_configure_execution.md
+      - nfcore_run/03_run_production_pipeline.md
       - nfcore_run/next_steps.md
       - nfcore_run/survey.md
   - Run with Seqera:
       - Overview: seqera_run/index.md
       - seqera_run/00_orientation.md
       - seqera_run/01_run_with_seqera.md
+      - seqera_run/02_launch_from_cli.md
       - seqera_run/next_steps.md
       - seqera_run/survey.md
   - Hello Nextflow:
