@@ -26,45 +26,38 @@ additional_information:
 
 **Side Quests are standalone training mini-courses that go deeper into specific Nextflow topics.**
 
-Each side quest can be taken independently, in any order, based on your interests and needs.
+Each side quest can be done independently, in any order, to build your skills in the specific areas that matter most to your own projects.
+Together, they cover the skills you need to move from simple pipelines to production-ready workflows.
 
 <!-- additional_information -->
 
-## Course overview
+### Browse by Topic
 
-If this is your first time exploring the Side Quests, start with the [Orientation](./orientation.md) page for an overview of the training environment and materials.
+If this is your first time taking one of our trainings, start with the [Getting started](./orientation.md) page for an overview of the training environment and materials.
+Otherwise, feel free to dive straight into whichever quest calls to you.
 
-### Suggested path: The Architect's Toolkit I
-
-If you'd rather follow a guided sequence than pick your own topics, work through these four Side Quests in order to build a complete set of workflow architecture skills for assembling complex, production-grade pipelines:
-
-1. **[Workflows of Workflows](./workflows_of_workflows/index.md)** - Complex workflow architecture and composition
-2. **[Testing with nf-test](./nf_test/index.md)** - Testing strategies for Nextflow workflows
-3. **[Metadata](./metadata/index.md)** - Handling metadata for items in Nextflow channels
-4. **[Splitting and Grouping](./splitting_and_grouping/index.md)** - Advanced data processing patterns
-
-Each Side Quest is self-contained and covers independent concepts, but we recommend completing them in the order listed above for a logical progression through the topics.
-This path assumes you've completed [Hello Nextflow](../hello_nextflow/index.md) or equivalent. _Estimated duration: 4 hours in group training._
-
-When you complete the path, please take a minute to fill out the [feedback survey](https://seqera.typeform.com/to/Q9pc2YKw) - it helps us improve the training materials for everyone.
-
-### All Side Quests
-
-| Side Quest                                                              | Summary                                                                  | Time Estimate |
-| ----------------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------- |
-| [Development Environment](./dev_environment/index.md)                   | Set up and configure a productive local Nextflow development environment | 45 mins       |
-| [Essential Scripting Patterns](./essential_scripting_patterns/index.md) | Advanced scripting techniques for common workflow challenges             | 90 mins       |
-| [File Input Processing](./working_with_files/index.md)                  | File handling, path operations, and organizing outputs                   | 45 mins       |
-| [Metadata and Meta Maps](./metadata/index.md)                           | Using metadata maps to track and propagate sample information            | 45 mins       |
-| [Splitting and Grouping](./splitting_and_grouping/index.md)             | Techniques for splitting and regrouping data channels                    | 45 mins       |
-| [Testing with nf-test](./nf_test/index.md)                              | Writing and running tests for Nextflow workflows                         | 1 hour        |
-| [Troubleshooting Workflows](./debugging/index.md)                       | Identifying and fixing common workflow errors                            | 1 hour        |
-| [Workflows of Workflows](./workflows_of_workflows/index.md)             | Composing complex pipelines from reusable named workflow modules         | 30 mins       |
-| [Plugin Development](./plugin_development/index.md)                     | Using and building Nextflow plugins                                      | 3 hours       |
+<table>
+<thead>
+<tr><th>Side Quest</th><th>Summary</th><th>Time Estimate</th></tr>
+</thead>
+<tbody>
+<tr><th colspan="3">Developer Tools &amp; Tricks</th></tr>
+<tr><td><a href="./dev_environment/">Development Environment</a></td><td>Set up and configure a productive local Nextflow development environment</td><td>45 mins</td></tr>
+<tr><td><a href="./debugging/">Troubleshooting Workflows</a></td><td>Identifying and fixing common workflow errors</td><td>1 hour</td></tr>
+<tr><td><a href="./essential_scripting_patterns/">Essential Scripting Patterns</a></td><td>Advanced scripting techniques for common workflow challenges</td><td>90 mins</td></tr>
+<tr><th colspan="3">Deep Dives into Dataflow</th></tr>
+<tr><td><a href="./working_with_files/">File Input Processing</a></td><td>File handling, path operations, and organizing outputs</td><td>45 mins</td></tr>
+<tr><td><a href="./metadata/">Metadata and Meta Maps</a></td><td>Using metadata maps to track and propagate sample information</td><td>45 mins</td></tr>
+<tr><td><a href="./splitting_and_grouping/">Splitting and Grouping</a></td><td>Techniques for splitting and regrouping data channels</td><td>45 mins</td></tr>
+<tr><th colspan="3">Modular Architecture in Action</th></tr>
+<tr><td><a href="./workflows_of_workflows/">Workflows of Workflows</a></td><td>Composing complex pipelines from reusable named workflow modules</td><td>30 mins</td></tr>
+<tr><th colspan="3">The Nextflow Extended Universe</th></tr>
+<tr><td><a href="./nf_test/">Testing with nf-test</a></td><td>Writing and running tests for Nextflow workflows</td><td>1 hour</td></tr>
+<tr><td><a href="./plugin_development/">Plugin Development</a></td><td>Using and building Nextflow plugins</td><td>3 hours</td></tr>
+</tbody>
+</table>
 
 [Get started :material-arrow-right:](orientation.md){ .md-button .md-button--primary }
 
 <!-- Clearfix for float -->
 <div style="content: ''; clear: both; display: table;"></div>
-
-Let us know what other topics you'd like to see covered here by posting in the [Training section](https://community.seqera.io/c/training/) of the community forum.

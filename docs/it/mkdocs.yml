@@ -15,5 +15,15 @@ extra:
     cookies:
       posthog: "PostHog Analytics"
   nav_group_labels:
+    "Ambiente di Formazione": "Configurazione e Aiuto"
     "Nextflow Run": "Utenti"
     "Hello Nextflow": "Sviluppatori"
+  nav_title_overrides:
+    nextflow_run/index.md: Nextflow Run
+    nfcore_run/index.md: Run nf-core
+    seqera_run/index.md: Run with Seqera
+    hello_nextflow/index.md: Hello Nextflow
+    hello_nf-core/index.md: Build with nf-core
+    nf4_science/index.md: "Nextflow per la Scienza"
+    side_quests/index.md: "Missioni Secondarie"
+    envsetup/index.md: "Ambiente di Formazione"

@@ -13,5 +13,15 @@ extra:
     cookies:
       posthog: "PostHog 분석"
   nav_group_labels:
+    "교육 환경": "설정 및 도움말"
     "Nextflow Run": "사용자"
     "Hello Nextflow": "개발자"
+  nav_title_overrides:
+    nextflow_run/index.md: Nextflow Run
+    nfcore_run/index.md: Run nf-core
+    seqera_run/index.md: Run with Seqera
+    hello_nextflow/index.md: Hello Nextflow
+    hello_nf-core/index.md: Build with nf-core
+    nf4_science/index.md: "과학을 위한 Nextflow"
+    side_quests/index.md: "사이드 퀘스트"
+    envsetup/index.md: "교육 환경"

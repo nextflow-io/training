@@ -14,5 +14,15 @@ extra:
     cookies:
       posthog: "PostHog Analytics"
   nav_group_labels:
+    "प्रशिक्षण वातावरण": "सेटअप और सहायता"
     "Nextflow Run": "उपयोगकर्ता"
     "Hello Nextflow": "डेवलपर्स"
+  nav_title_overrides:
+    nextflow_run/index.md: Nextflow Run
+    nfcore_run/index.md: Run nf-core
+    seqera_run/index.md: Run with Seqera
+    hello_nextflow/index.md: Hello Nextflow
+    hello_nf-core/index.md: Build with nf-core
+    nf4_science/index.md: "विज्ञान के लिए Nextflow"
+    side_quests/index.md: "साइड क्वेस्ट"
+    envsetup/index.md: "प्रशिक्षण वातावरण"

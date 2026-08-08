@@ -383,6 +383,28 @@ h3 .enumerate-headings-plugin {
   font-size: 0.8rem;
 }
 
+/* Category separator rows within a single continuous data table,
+  e.g. <tr><th colspan="3">Category</th></tr> in the side quests catalog.
+  Default theme CSS only puts border-top on <td>, not <th>, since <th>
+  normally only appears once in <thead> - add it back here since these
+  sit mid-<tbody> and need the same row divider as regular data rows. */
+.md-typeset table tbody th[colspan] {
+  background-color: var(--md-default-fg-color--lightest);
+  border-top: 0.05rem solid var(--md-typeset-table-color);
+  text-align: left;
+}
+
+/* Distinguish the real column-header row from category separator rows
+  above: brand-color fill plus the same uppercase/letter-spaced treatment
+  used for the sidebar group labels (see .md-nav__item--group-label). */
+.md-typeset table thead th {
+  background-color: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
 /* YouTube video embeds */
 .md-typeset figure:has(.video-wrapper) {
   width: 100%;

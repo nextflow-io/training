@@ -5,35 +5,26 @@ repo_name: nextflow-io/training
 
 nav:
   - index.md
-  - Help:
-      - help.md
-      - Training environment:
-          - envsetup/index.md
-          - envsetup/01_setup.md
-          - envsetup/03_devcontainer.md
-          - envsetup/02_local.md
-      - info/nxf_versions.md
-      - info/hello_pipeline.md
   - Nextflow Run:
-      - nextflow_run/index.md
+      - Overview: nextflow_run/index.md
       - nextflow_run/00_orientation.md
       - nextflow_run/01_run_nextflow.md
       - nextflow_run/next_steps.md
       - nextflow_run/survey.md
   - Run nf-core:
-      - nfcore_run/index.md
+      - Overview: nfcore_run/index.md
       - nfcore_run/00_orientation.md
       - nfcore_run/01_run_demo.md
       - nfcore_run/next_steps.md
       - nfcore_run/survey.md
   - Run with Seqera:
-      - seqera_run/index.md
+      - Overview: seqera_run/index.md
       - seqera_run/00_orientation.md
       - seqera_run/01_run_with_seqera.md
       - seqera_run/next_steps.md
       - seqera_run/survey.md
   - Hello Nextflow:
-      - hello_nextflow/index.md
+      - Overview: hello_nextflow/index.md
       - hello_nextflow/00_orientation.md
       - hello_nextflow/01_hello_world.md
       - hello_nextflow/02_hello_channels.md
@@ -44,7 +35,7 @@ nav:
       - hello_nextflow/next_steps.md
       - hello_nextflow/survey.md
   - Build with nf-core:
-      - hello_nf-core/index.md
+      - Overview: hello_nf-core/index.md
       - hello_nf-core/00_orientation.md
       - hello_nf-core/01_rewrite_hello.md
       - hello_nf-core/02_use_module.md
@@ -53,7 +44,7 @@ nav:
       - hello_nf-core/next_steps.md
       - hello_nf-core/survey.md
   - Nextflow for Science:
-      - nf4_science/index.md
+      - Overview: nf4_science/index.md
       - Genomics:
           - nf4_science/genomics/index.md
           - nf4_science/genomics/00_orientation.md
@@ -80,7 +71,7 @@ nav:
           - nf4_science/imaging/survey.md
           - nf4_science/imaging/next_steps.md
   - Side Quests:
-      - side_quests/index.md
+      - Overview: side_quests/index.md
       - side_quests/orientation.md
       - side_quests/dev_environment/index.md
       - side_quests/essential_scripting_patterns/index.md
@@ -100,6 +91,14 @@ nav:
           - side_quests/plugin_development/06_configuration.md
           - side_quests/plugin_development/summary.md
           - side_quests/plugin_development/next_steps.md
+  - Training Environment:
+      - envsetup/index.md
+      - envsetup/01_setup.md
+      - envsetup/03_devcontainer.md
+      - envsetup/02_local.md
+  - info/nxf_versions.md
+  - info/hello_pipeline.md
+  - help.md
 
 theme:
   name: material
@@ -164,8 +163,22 @@ extra:
   # in the left sidebar. Key = exact top-level nav title. Rendered by
   # overrides/partials/nav.html. Add more entries here to label further groups.
   nav_group_labels:
+    "Training Environment": Setup & Help
     "Nextflow Run": Users
     "Hello Nextflow": Developers
+  # Per-section nav title overrides, keyed by the section's index page
+  # source path (relative to docs_dir). Takes precedence over the page's
+  # own title, for when the nav label should differ from the page itself.
+  # Applied by generate_renamed_section_items in _scripts/mkdocs_hooks.py.
+  nav_title_overrides:
+    envsetup/index.md: Training Environment
+    nextflow_run/index.md: Nextflow Run
+    nfcore_run/index.md: Run nf-core
+    seqera_run/index.md: Run with Seqera
+    hello_nextflow/index.md: Hello Nextflow
+    hello_nf-core/index.md: Build with nf-core
+    nf4_science/index.md: Nextflow for Science
+    side_quests/index.md: Side Quests
   # Announcement banner for upcoming training
   announcement:
     active: true

@@ -30,7 +30,7 @@ hide:
         <!-- Any update to this content needs to be copied to the local installation page -->
         **As of January 2026, all of our Nextflow training courses require Nextflow version 25.10.2 or later, with strict syntax activated, unless otherwise noted.**
 
-        For more information about version requirements and strict syntax, please see the [Nextflow docs migration guide](https://nextflow.io/docs/latest/strict-syntax.html).
+        For more information about version requirements and strict syntax, please see the [Nextflow versions](info/nxf_versions.md) guide.
 
         Older versions of the training material corresponding to prior syntax are available via the version selector in the menu bar of this webpage.
 
