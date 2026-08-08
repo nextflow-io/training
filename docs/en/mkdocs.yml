@@ -325,6 +325,14 @@ plugins:
         "training_collections/index.md": "side_quests/index.md"
         "training_collections/architects_toolkit_1.md": "side_quests/index.md#suggested-path-the-architects-toolkit-i"
         "training_collections/nextflow_triathlon.md": "nextflow_run/index.md"
+        "nextflow_run/01_basics.md": "archive/nextflow_run/01_basics.md"
+        "nextflow_run/02_pipeline.md": "archive/nextflow_run/02_pipeline.md"
+        "nextflow_run/03_config.md": "archive/nextflow_run/03_config.md"
+        "hello_nf-core/02_rewrite_hello.md": "hello_nf-core/01_rewrite_hello.md"
+        "hello_nf-core/03_use_module.md": "hello_nf-core/02_use_module.md"
+        "hello_nf-core/04_make_module.md": "hello_nf-core/03_make_module.md"
+        "hello_nf-core/05_input_validation.md": "hello_nf-core/04_input_validation.md"
+        "hello_nf-core/01_run_demo.md": "nfcore_run/01_run_demo.md"
 hooks:
   - ../../_scripts/mkdocs_hooks.py
   - ../en/hooks/index_page_hook.py
