@@ -169,8 +169,7 @@ You know how to configure pipeline behavior using `nextflow.config`, how to gene
 
 ### What's next?
 
-You've covered the fundamentals of running Nextflow pipelines.
-See [Next steps](next_steps.md) for where to go from here.
+Head on to [Part 3](./03_remote_repositories.md), where you'll learn how to run pipelines directly from remote repositories such as GitHub.
 
 ---
 

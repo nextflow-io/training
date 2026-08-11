@@ -10,6 +10,7 @@ nav:
       - nextflow_run/00_orientation.md
       - nextflow_run/01_run_nextflow.md
       - nextflow_run/02_configure_pipeline.md
+      - nextflow_run/03_remote_repositories.md
       - nextflow_run/next_steps.md
       - nextflow_run/survey.md
   - Run nf-core:
@@ -27,6 +28,14 @@ nav:
       - seqera_run/02_launch_from_cli.md
       - seqera_run/next_steps.md
       - seqera_run/survey.md
+  - Nextflow Dot Config:
+      - Overview: nextflow_config/index.md
+      - nextflow_config/00_orientation.md
+      - nextflow_config/01_parameters_and_outputs.md
+      - nextflow_config/02_packaging_execution_resources.md
+      - nextflow_config/03_profiles.md
+      - nextflow_config/next_steps.md
+      - nextflow_config/survey.md
   - Hello Nextflow:
       - Overview: hello_nextflow/index.md
       - hello_nextflow/00_orientation.md
@@ -180,6 +189,7 @@ extra:
     nextflow_run/index.md: Nextflow Run
     nfcore_run/index.md: Run nf-core
     seqera_run/index.md: Run with Seqera
+    nextflow_config/index.md: Nextflow Dot Config
     hello_nextflow/index.md: Hello Nextflow
     hello_nf-core/index.md: Build with nf-core
     nf4_science/index.md: Nextflow for Science
@@ -302,6 +312,7 @@ plugins:
         - nextflow_run/00_orientation.md
         - nfcore_run/00_orientation.md
         - seqera_run/00_orientation.md
+        - nextflow_config/00_orientation.md
         - hello_nextflow/00_orientation.md
         - hello_nf-core/00_orientation.md
         - nf4_science/genomics/00_orientation.md
@@ -317,6 +328,7 @@ plugins:
         - nextflow_run/*.md
         - nfcore_run/*.md
         - seqera_run/*.md
+        - nextflow_config/*.md
         - hello_nextflow/*.md
         - hello_nf-core/*.md
         - nf4_science/genomics/*.md

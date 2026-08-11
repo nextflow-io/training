@@ -8,7 +8,8 @@ Congratulations on completing the Nextflow Run training course! 🎉
 
 You started with a very basic workflow, and learned to run it, find the outputs, and manage its execution.
 Then, you worked your way through increasingly more complex versions of that workflow and learned to recognize the essential concepts and mechanisms that power Nextflow pipelines, including channels, containers, and `-resume`.
-Finally, you learned how to customize the configuration of a pipeline using `nextflow.config` and profiles.
+Then, you learned how to customize the configuration of a pipeline using `nextflow.config` and profiles.
+Finally, you learned how to run pipelines directly from remote repositories such as GitHub.
 
 ### What you learned
 
@@ -40,6 +41,7 @@ Through this hands-on course, you've learned how to:
 - Use `-resume` to avoid repeating completed work
 - Use containers to manage software dependencies
 - Configure pipelines using `nextflow.config` and profiles
+- Run a pipeline directly from a remote repository and pin it to a specific revision
 
 You're now equipped with the foundational knowledge to start integrating existing Nextflow pipelines into your own work.
 
@@ -47,6 +49,7 @@ You're now equipped with the foundational knowledge to start integrating existin
 
 Here are our top suggestions for what to do next:
 
+- Dive deeper into pipeline configuration with [Nextflow Dot Config](../nextflow_config/index.md)
 - Learn to run nf-core community pipelines with [Run nf-core](../nfcore_run/index.md)
 - Launch and monitor pipelines at scale with [Run with Seqera](../seqera_run/index.md)
 - Don't just run Nextflow, write it! Become a Nextflow developer with [Hello Nextflow](../hello_nextflow/index.md)

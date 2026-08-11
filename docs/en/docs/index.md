@@ -101,11 +101,13 @@ hide:
 
     ### :material-tune:{.nextflow-primary} Configure execution {.mt-1}
 
-    Coming soon: Learn to configure your pipelines effectively.
+    Learn to configure your pipelines effectively.
 
     ??? courses "**Nextflow Dot Config:** Configure pipelines like a pro"
 
-        Coming soon: Hands-on demonstration of the most useful configuration options.
+        A hands-on introduction to configuring Nextflow pipeline execution: managing inputs and outputs, adapting to different compute environments, and switching between preset configuration profiles.
+
+        [View the training :material-arrow-right:](nextflow_config/index.md){ .md-button .md-button--secondary }
 
 -   :material-code-tags:{ .lg .middle } __For developers__
 
