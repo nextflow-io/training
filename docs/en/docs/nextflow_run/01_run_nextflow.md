@@ -351,11 +351,7 @@ The workflow `main.nf` chains four processes into a complete pipeline.
 Each input greeting flows through all four steps: `sayHello` writes it to a file, `convertToUpper` converts the text to uppercase, `collectGreetings` merges all results into one file, and `cowpy` generates ASCII art from the merged output using a containerized tool.
 
 Note that this workflow uses modules: each process is defined in its own file under `modules/`, and `main.nf` imports them with `include` statements instead of defining them inline.
-This makes each process reusable across multiple workflows without duplicating code.
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/modules.svg"
-</figure>
+This makes each process reusable across multiple workflows without duplicating code. To learn more, see the code exploration section further below.
 
 ### 3.1. Run the workflow
 
@@ -458,6 +454,10 @@ Check `results/full_pipeline/` for the ASCII art file.
 
     Each module file contains a single process definition, structured the same way as the `sayHello` module in [1.4](#14-optional-code-walkthrough).
     Keeping processes in separate files makes them reusable across multiple workflows without duplicating code.
+
+    <figure class="excalidraw">
+    --8<-- "docs/en/docs/hello_nextflow/img/modules.svg"
+    </figure>
 
     ## Using containerized software
 
