@@ -143,6 +143,7 @@ theme:
       courses: octicons/log-16
       terminal: octicons/terminal-16
       full-code: material/code-block-braces
+      optional: material/book-open-variant
       learning: octicons/mortar-board-16
       people: octicons/people-16
       licensing: octicons/law-16
