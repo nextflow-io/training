@@ -41,7 +41,7 @@
     },
     "containerEnv": {
         // Docker API compatibility
-        "DOCKER_API_VERSION": "1.43"
+        "DOCKER_API_VERSION": "1.44"
     },
     "onCreateCommand": "bash ${localWorkspaceFolder}/.devcontainer/setup.sh",
     "postCreateCommand": "mkdir -p /workspaces && rm -rf /workspaces/training && ln -s ${localWorkspaceFolder} /workspaces/training",
