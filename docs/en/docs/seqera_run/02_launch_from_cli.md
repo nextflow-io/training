@@ -8,7 +8,7 @@ Now we do the same from the command line using the `tw` CLI, and add a new pipel
 ## 1. Launch pipelines from the command line
 
 In the run view, click the **Command line** tab.
-You will see the exact `nextflow run` command that Platform constructed and submitted on your behalf — the same kind of command you have been running manually in the Run nf-core course.
+You will see the exact `nextflow run` command that Platform constructed and submitted on your behalf — the same kind of command you have been running manually in the Use nf-core course.
 
 Platform does not replace Nextflow; it orchestrates it.
 Everything you can do through the web interface, you can also do from a terminal using the `tw` CLI, the command-line tool for interacting with the Platform API.
@@ -186,7 +186,7 @@ Add a new pipeline to your workspace from the command line and launch it.
 ## 2. Add a new pipeline and run it
 
 Any Nextflow pipeline on GitHub can be added to your workspace with `tw pipelines add`, as long as it has a `main.nf` entry point and a `nextflow.config` at its root.
-nf-core/demo is a good example to practice with: you already ran it in the Run nf-core course, so you know what it does and what to expect.
+nf-core/demo is a good example to practice with: you already ran it in the Use nf-core course, so you know what it does and what to expect.
 
 ### 2.1. Add nf-core/demo to your workspace
 
@@ -239,7 +239,7 @@ The next two sections walk through how to provide those values: first through th
 With the launch form open, fill in the two required parameters.
 
 For `input`, enter the test samplesheet URL from the nf-core/demo test profile.
-You can find it in `conf/test.config` inside the pipeline repository, which you examined in the Run nf-core course:
+You can find it in `conf/test.config` inside the pipeline repository, which you examined in the Use nf-core course:
 
 ```
 https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv

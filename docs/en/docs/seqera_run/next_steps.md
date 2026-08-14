@@ -1,6 +1,6 @@
 # Course summary
 
-Congratulations on completing the Run with Seqera training course! 🎉
+Congratulations on completing the Scale with Seqera training course! 🎉
 
 <!-- placeholder for video -->
 

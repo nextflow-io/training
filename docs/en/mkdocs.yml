@@ -13,7 +13,7 @@ nav:
       - nextflow_run/03_remote_repositories.md
       - nextflow_run/next_steps.md
       - nextflow_run/survey.md
-  - Run nf-core:
+  - Use nf-core:
       - Overview: nfcore_run/index.md
       - nfcore_run/00_orientation.md
       - nfcore_run/01_run_demo.md
@@ -21,7 +21,7 @@ nav:
       - nfcore_run/03_run_production_pipeline.md
       - nfcore_run/next_steps.md
       - nfcore_run/survey.md
-  - Run with Seqera:
+  - Scale with Seqera:
       - Overview: seqera_run/index.md
       - seqera_run/00_orientation.md
       - seqera_run/01_run_with_seqera.md
@@ -187,8 +187,8 @@ extra:
   nav_title_overrides:
     envsetup/index.md: Training Environment
     nextflow_run/index.md: Nextflow Run
-    nfcore_run/index.md: Run nf-core
-    seqera_run/index.md: Run with Seqera
+    nfcore_run/index.md: Use nf-core
+    seqera_run/index.md: Scale with Seqera
     nextflow_config/index.md: Nextflow Dot Config
     hello_nextflow/index.md: Hello Nextflow
     hello_nf-core/index.md: Build with nf-core

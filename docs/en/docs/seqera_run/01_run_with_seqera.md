@@ -1,6 +1,6 @@
 # Part 1: Launch pipelines from the web interface
 
-In this part of the Run with Seqera training course, you will set up access to Seqera Platform and launch a production-scale pipeline from the web interface.
+In this part of the Scale with Seqera training course, you will set up access to Seqera Platform and launch a production-scale pipeline from the web interface.
 
 Make sure your working directory is set to `seqera-run/` as instructed on the [Getting started](./00_orientation.md) page.
 
@@ -30,7 +30,7 @@ It gives you a realistic preview of what the Platform looks like with real pipel
 
 1. Log in at [cloud.seqera.io](https://cloud.seqera.io).
 2. In the left sidebar, click **Showcase**.
-3. Browse the available pipelines — you will recognize several nf-core pipelines from the Run nf-core course.
+3. Browse the available pipelines — you will recognize several nf-core pipelines from the Use nf-core course.
 4. Click a pipeline to view its configuration and launch settings.
 5. Click **Runs** to explore example run histories, including task-level details and reports from previous executions.
 
@@ -72,7 +72,7 @@ Launch a production-scale RNA-seq pipeline from the Seqera Cloud web interface.
 
 ## 2. Launch nf-core/rnaseq from the web interface
 
-As covered in Run nf-core, the nf-core/rnaseq pipeline is a community-curated pipeline for bulk RNA sequence data analysis.
+As covered in Use nf-core, the nf-core/rnaseq pipeline is a community-curated pipeline for bulk RNA sequence data analysis.
 
 In this section, you will add the pipeline to your workspace, launch a run, and monitor its execution.
 

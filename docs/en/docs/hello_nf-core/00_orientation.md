@@ -118,7 +118,7 @@ nextflow pull nf-core/demo
 ln -s $NXF_HOME/assets pipelines
 ```
 
-If you've already completed the [Run nf-core](../nfcore_run/index.md) course, `nf-core/demo` is already cached locally, but the symlink above still needs to be created fresh in this directory.
+If you've already completed the [Use nf-core](../nfcore_run/index.md) course, `nf-core/demo` is already cached locally, but the symlink above still needs to be created fresh in this directory.
 
 ## Readiness checklist
 

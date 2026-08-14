@@ -1,5 +1,5 @@
 ---
-title: Run with Seqera
+title: Scale with Seqera
 hide:
   - toc
 page_type: index_page
@@ -14,12 +14,12 @@ additional_information:
   audience_prerequisites:
     - "**Audience:** This course is designed for learners who want to run Nextflow pipelines at scale using Seqera Platform."
     - "**Skills:** Familiarity with running nf-core pipelines from the command line is assumed."
-    - "**Courses:** Must have completed [Run nf-core](../nfcore_run/index.md) or otherwise be comfortable running `nf-core/demo` and `nf-core/rnaseq`."
+    - "**Courses:** Must have completed [Use nf-core](../nfcore_run/index.md) or otherwise be comfortable running `nf-core/demo` and `nf-core/rnaseq`."
 ---
 
-# Run with Seqera
+# Scale with Seqera
 
-**Run with Seqera is a hands-on introduction to launching and monitoring Nextflow pipelines with Seqera Platform.**
+**Scale with Seqera is a hands-on introduction to launching and monitoring Nextflow pipelines with Seqera Platform.**
 
 Working through practical examples, you will set up access to Seqera Platform, launch a production-scale pipeline from both the web interface and the command line, and add a new pipeline to your workspace.
 
@@ -29,7 +29,7 @@ You will take away the skills and confidence to run and monitor your own pipelin
 
 ## Course overview
 
-This course is hands-on, and builds on the pipelines you already ran in [Run nf-core](../nfcore_run/index.md).
+This course is hands-on, and builds on the pipelines you already ran in [Use nf-core](../nfcore_run/index.md).
 
 You will start by signing up for Seqera Platform and launching `nf-core/rnaseq`, a production-scale pipeline, from the web interface.
 Then you'll switch to the `tw` command-line tool to do the same from a terminal, and finally register a new pipeline, `nf-core/demo`, and launch it both ways.

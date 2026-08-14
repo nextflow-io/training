@@ -16,7 +16,7 @@ additional_information:
   audience_prerequisites:
     - "**Audience:** This course is designed for learners who are already familiar with basic Nextflow and want to learn to use nf-core resources and best practices."
     - "**Skills:** Familiarity with the command line, basic scripting concepts and common file formats is assumed."
-    - "**Courses:** Must have completed the [Hello Nextflow](../hello_nextflow/index.md) course or equivalent. If you haven't yet run an nf-core pipeline, we also recommend completing [Run nf-core](../nfcore_run/index.md) first."
+    - "**Courses:** Must have completed the [Hello Nextflow](../hello_nextflow/index.md) course or equivalent. If you haven't yet run an nf-core pipeline, we also recommend completing [Use nf-core](../nfcore_run/index.md) first."
     - "**Domain:** The exercises are all domain-agnostic, so no prior scientific knowledge is required."
 ---
 

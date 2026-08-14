@@ -1,6 +1,6 @@
 # Part 1: Run a demo pipeline
 
-In this first part of the Run nf-core training course, we show you how to find an nf-core pipeline and try it out using its built-in test profile.
+In this first part of the Use nf-core training course, we show you how to find an nf-core pipeline and try it out using its built-in test profile.
 
 We are going to use a pipeline called nf-core/demo that is maintained by the nf-core project as part of its inventory of pipelines for demonstration and training purposes.
 

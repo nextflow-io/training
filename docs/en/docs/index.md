@@ -85,13 +85,13 @@ hide:
 
         [View the training :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Run nf-core:** Find and run community-curated pipelines"
+    ??? courses "**Use nf-core:** Find and run community-curated pipelines"
 
         A fast-track introduction to finding, running, and configuring pipelines from the nf-core community project, starting with a minimal demo pipeline then scaling up to a production-scale analysis pipeline.
 
         [View the training :material-arrow-right:](nfcore_run/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Run with Seqera:** Launch and monitor pipelines at scale"
+    ??? courses "**Scale with Seqera:** Launch and monitor pipelines at scale"
 
         A hands-on introduction to launching and monitoring Nextflow pipelines with Seqera Platform, from both the web interface and the command line.
 

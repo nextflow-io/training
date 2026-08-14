@@ -73,4 +73,4 @@ Think you're ready to dive in?
 
 If you can check all the boxes, you're good to go.
 
-**To continue to [Part 1: Run with Seqera](./01_run_with_seqera.md), click on the arrow in the bottom right corner of this page.**
+**To continue to [Part 1: Launch pipelines from the web interface](./01_run_with_seqera.md), click on the arrow in the bottom right corner of this page.**

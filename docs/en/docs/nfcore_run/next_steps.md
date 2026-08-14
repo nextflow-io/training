@@ -1,6 +1,6 @@
 # Course summary
 
-Congratulations on completing the Run nf-core training course! 🎉
+Congratulations on completing the Use nf-core training course! 🎉
 
 <!-- placeholder for video -->
 
@@ -36,7 +36,7 @@ You're now equipped with the foundational knowledge to start running nf-core pip
 
 Here are our top suggestions for what to do next:
 
-- Launch and monitor these pipelines at scale with [Run with Seqera](../seqera_run/index.md)
+- Launch and monitor these pipelines at scale with [Scale with Seqera](../seqera_run/index.md)
 - Don't just run nf-core pipelines, develop them! Learn nf-core best practices with [Build with nf-core](../hello_nf-core/index.md)
 - New to Nextflow itself? Start with [Nextflow Run](../nextflow_run/index.md)
 - Apply Nextflow to a scientific analysis use case with [Nextflow for Science](../nf4_science/index.md)

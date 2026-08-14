@@ -1,5 +1,5 @@
 ---
-title: Run nf-core
+title: Use nf-core
 hide:
   - toc
 page_type: index_page
@@ -17,9 +17,9 @@ additional_information:
     - "**Domain:** The exercises use bioinformatics pipelines, but no prior scientific domain knowledge is required."
 ---
 
-# Run nf-core
+# Use nf-core
 
-**Run nf-core is a hands-on introduction to finding, running, and configuring nf-core community pipelines.**
+**Use nf-core is a hands-on introduction to finding, running, and configuring nf-core community pipelines.**
 
 Working through practical examples and guided exercises, you will learn to find and retrieve nf-core pipelines, run them using their built-in test profiles, and customize their execution through parameters and configuration files.
 

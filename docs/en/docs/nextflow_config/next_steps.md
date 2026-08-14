@@ -24,8 +24,8 @@ You're now equipped to configure Nextflow pipelines for a range of compute envir
 
 Here are our top suggestions for what to do next:
 
-- Learn to run nf-core community pipelines with [Run nf-core](../nfcore_run/index.md)
-- Launch and monitor pipelines at scale with [Run with Seqera](../seqera_run/index.md)
+- Learn to run nf-core community pipelines with [Use nf-core](../nfcore_run/index.md)
+- Launch and monitor pipelines at scale with [Scale with Seqera](../seqera_run/index.md)
 - Don't just run Nextflow, write it! Become a Nextflow developer with [Hello Nextflow](../hello_nextflow/index.md)
 - Apply Nextflow to a scientific analysis use case with [Nextflow for Science](../nf4_science/index.md)
 
