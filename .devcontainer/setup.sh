@@ -30,4 +30,7 @@ cd /workspaces/training
 rm -rf /tmp/nf-test ~/.m2/repository
 echo "nf-test updated with v2 parser support"
 
+# Install the platform_automation side quest tools (terraform, tw, az)
+bash "$(dirname "$0")/install-platform-tools.sh"
+
 cat /usr/local/etc/vscode-dev-containers/first-run-notice.txt

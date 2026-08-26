@@ -1,0 +1,7 @@
+# Feedback survey
+
+Before you move on, please complete this short 5-question survey to rate the training, share any feedback you may have about your experience, and let us know what else we could do to help you in your Nextflow journey.
+
+This should take you only a minute or two to complete. Thank you for helping us improve our training materials for everyone!
+
+<!-- TODO: insert the Typeform embed snippet / data-tf-live ID for this side quest's survey -->
