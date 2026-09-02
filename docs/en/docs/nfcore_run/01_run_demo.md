@@ -332,7 +332,7 @@ Here we'll use Docker for the container system and `demo-results`, respectively.
 With that, we can run the test command:
 
 ```bash
-nextflow run nf-core/demo -profile docker,test --outdir demo-results
+nextflow run nf-core/demo -profile test,docker --outdir demo-results
 ```
 
 ??? success "Command output"
@@ -371,7 +371,7 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
       workDir                   : /workspaces/training/nfcore-run/work
       projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2
       userName                  : root
-      profile                   : docker,test
+      profile                   : test,docker
       configFiles               : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/nextflow.config
 
     !! Only displaying parameters that differ from the pipeline defaults !!
@@ -414,7 +414,7 @@ Because we did not specify a version, Nextflow used the latest commit on `master
 For reproducible runs, you should pin a specific release using the `-r` flag:
 
 ```bash
-nextflow run nf-core/demo -r 1.2.0 -profile docker,test --outdir demo-results
+nextflow run nf-core/demo -r 1.2.0 -profile test,docker --outdir demo-results
 ```
 
 This ensures that the same pipeline code is used every time, regardless of new commits or releases.

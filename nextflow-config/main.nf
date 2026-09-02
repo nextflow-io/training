@@ -36,18 +36,23 @@ workflow {
 
 output {
     first_output {
-        path { sayHello.name }
+        path 'full_pipeline/intermediates'
+        mode 'copy'
     }
     uppercased {
-        path { convertToUpper.name }
+        path 'full_pipeline/intermediates'
+        mode 'copy'
     }
     collected {
-        path { collectGreetings.name }
+        path 'full_pipeline/intermediates'
+        mode 'copy'
     }
     batch_report {
-        path { collectGreetings.name }
+        path 'full_pipeline'
+        mode 'copy'
     }
     cowpy_art {
-        path { cowpy.name }
+        path 'full_pipeline'
+        mode 'copy'
     }
 }

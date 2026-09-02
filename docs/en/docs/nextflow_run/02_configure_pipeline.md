@@ -93,7 +93,7 @@ nextflow run main.nf --input data/greetings.csv --character turkey -with-report
 ??? success "Command output"
 
     ```console hl_lines="6 7 8 9"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
     Launching `main.nf` [lonely_aryabhata] DSL2 - revision: c3c85dec78
 
@@ -122,7 +122,7 @@ nextflow run main.nf -profile test
 ??? success "Command output"
 
     ```console hl_lines="6 7 8 9"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
     Launching `main.nf` [silly_goodall] DSL2 - revision: c3c85dec78
 

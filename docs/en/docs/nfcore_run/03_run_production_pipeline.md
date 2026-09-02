@@ -35,13 +35,13 @@ The pipeline is now cached locally and ready to run.
 Run it with the test profile and Docker:
 
 ```bash
-nextflow run nf-core/rnaseq -profile docker,test --outdir rnaseq-results
+nextflow run nf-core/rnaseq -profile test,docker --outdir rnaseq-results
 ```
 
 ??? failure "Command output"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
     Launching `https://github.com/nf-core/rnaseq` [suspicious_dijkstra] DSL2 - revision: e7ca46272c [master]
 
@@ -142,13 +142,13 @@ This file is already present in your working directory.
 Pass it with `-c` to apply the overrides:
 
 ```bash
-nextflow run nf-core/rnaseq -profile docker,test -c laptop.config --outdir rnaseq-results
+nextflow run nf-core/rnaseq -profile test,docker -c laptop.config --outdir rnaseq-results
 ```
 
 ??? success "Command output (pipeline launching)"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
     Launching `https://github.com/nf-core/rnaseq` [romantic_faraday] DSL2 - revision: e7ca46272c [master]
 

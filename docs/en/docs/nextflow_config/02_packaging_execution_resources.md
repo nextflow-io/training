@@ -180,7 +180,7 @@ The same request for 8 CPUs and 4 GB of RAM on a queue called `my-science-work` 
     #PBS -o /path/to/my/task/directory/my-task-1.log
     #PBS -j oe
     #PBS -q my-science-work
-    #PBS -l nodes=1:ppn=5
+    #PBS -l nodes=1:ppn=8
     #PBS -l mem=4gb
     ```
 
@@ -190,7 +190,7 @@ The same request for 8 CPUs and 4 GB of RAM on a queue called `my-science-work` 
     #$ -terse
     #$ -notify
     #$ -q my-science-work
-    #$ -l slots=5
+    #$ -l slots=8
     #$ -l h_rss=4096M,mem_free=4096M
     ```
 
@@ -208,16 +208,15 @@ Learn how to evaluate and set compute resource allocations.
 
 ## 3. Control compute resource allocations
 
-By default, Nextflow allocates a single CPU and 2 GB of memory to each process, via the `cpus` and `memory` directives:
+By default, Nextflow allocates a single CPU to each process via the `cpus` directive, and does not impose a memory limit unless you set one:
 
 ```groovy title="Built-in configuration"
 process {
     cpus = 1
-    memory = 2.GB
 }
 ```
 
-You already know from [Nextflow Run](../nextflow_run/index.md) that this pipeline's configuration overrides the default to 1 GB for all processes.
+You already know from [Nextflow Run](../nextflow_run/index.md) that this pipeline's configuration sets `memory` to 1 GB for all processes.
 But how do you know what values to actually use for your own pipelines?
 
 ### 3.1. Generate a resource utilization report

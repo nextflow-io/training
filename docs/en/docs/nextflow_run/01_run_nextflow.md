@@ -24,7 +24,7 @@ nextflow run 1-hello.nf --input 'Hello World!'
 ??? success "Command output"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
     Launching `1-hello.nf` [infallible_volhard] DSL2 - revision: 82d40dbf94
 
@@ -84,8 +84,8 @@ The `.command.sh` file is especially useful when debugging — it shows precisel
     include { sayHello } from './modules/sayHello.nf'
 
     /*
-      * Pipeline parameters
-      */
+     * Pipeline parameters
+     */
     params {
         input: String
     }
@@ -235,7 +235,7 @@ nextflow run 2-inputs.nf --input data/greetings.csv
 ??? success "Command output"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
     Launching `2-inputs.nf` [nauseous_babbage] DSL2 - revision: b90778224d
 
@@ -268,7 +268,7 @@ nextflow run 2-inputs.nf --input data/greetings.csv -ansi-log false
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
     Launching `2-inputs.nf` [extravagant_bardeen] DSL2 - revision: b90778224d
     [43/0bac1c] Submitted process > sayHello (1)
@@ -289,7 +289,7 @@ nextflow run 2-inputs.nf --input data/greetings-extended.csv -resume
 ??? success "Command output"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
     Launching `2-inputs.nf` [adoring_mayer] DSL2 - revision: b90778224d
 
@@ -358,13 +358,15 @@ This makes each process reusable across multiple workflows without duplicating c
 Run the following command in your terminal.
 
 ```bash
-nextflow run main.nf --input data/greetings.csv --character turkey
+nextflow run main.nf --input data/greetings.csv
 ```
+
+The `character` parameter defaults to `turkey` in `nextflow.config`, so the ASCII art uses a turkey unless you override it (try adding `--character tux`).
 
 ??? success "Command output"
 
     ```console hl_lines="6 7 8 9"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
     Launching `main.nf` [reverent_jepsen] DSL2 - revision: c3c85dec78
 

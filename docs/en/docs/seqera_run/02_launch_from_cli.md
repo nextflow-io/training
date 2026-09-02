@@ -57,7 +57,7 @@ access token you just generated and the workspace identifier.
 Open the `.seqera_config` file in this directory in the editor and set the two variables:
 
 - **`TOWER_ACCESS_TOKEN`**: the token you generated in section 1.2
-- **`TOWER_WORKSPACE_ID`**: your workspace in `org-name/workspace-name` format
+- **`TOWER_WORKSPACE_ID`**: the numeric ID of your workspace (the `ID` column in `tw workspaces list`, which you run in section 1.4)
 
 Once the values are filled in, load the config:
 
@@ -150,7 +150,7 @@ The pipeline you added to your workspace in [Part 1](./01_run_with_seqera.md) is
 Launch it with the `test` profile:
 
 ```bash
-tw launch nf-core-rnaseq -p test
+tw launch nf-core-rnaseq --profile test
 ```
 
 ??? success "Command output"
@@ -278,7 +278,7 @@ outdir: "s3://my-bucket/demo-results-cli"
 Now you can launch the pipeline using the `test` profile (which provides the `input` samplesheet) and the params file (which provides `outdir`):
 
 ```bash
-tw launch nf-core-demo -p test --params-file params.yaml
+tw launch nf-core-demo --profile test --params-file params.yaml
 ```
 
 ??? success "Command output"

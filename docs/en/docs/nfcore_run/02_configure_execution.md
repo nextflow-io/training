@@ -109,7 +109,7 @@ skip_trim: true
 Pass it with `-params-file`:
 
 ```bash
-nextflow run nf-core/demo -profile docker,test --outdir demo-results-notrim -params-file my_params.yml
+nextflow run nf-core/demo -profile test,docker --outdir demo-results-notrim -params-file my_params.yml
 ```
 
 ??? success "Command output"
@@ -151,7 +151,7 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results-notrim -par
       workDir                   : /workspaces/training/hello-nf-core/work
       projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2
       userName                  : root
-      profile                   : docker,test
+      profile                   : test,docker
       configFiles               : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/nextflow.config
 
     !! Only displaying parameters that differ from the pipeline defaults !!
@@ -212,7 +212,7 @@ We cover this in more detail in [input validation section](../hello_nf-core/04_i
 Try passing a parameter that does not exist:
 
 ```bash
-nextflow run nf-core/demo -profile docker,test --outdir demo-results --foobar "invalid"
+nextflow run nf-core/demo -profile test,docker --outdir demo-results --foobar "invalid"
 ```
 
 The console output includes a warning:
@@ -232,7 +232,7 @@ Validation also checks parameter **values**.
 The `--skip_trim` parameter is a boolean flag, so passing a string value causes the pipeline to fail immediately:
 
 ```bash
-nextflow run nf-core/demo -profile docker,test --outdir demo-results --skip_trim yes
+nextflow run nf-core/demo -profile test,docker --outdir demo-results --skip_trim yes
 ```
 
 ```console
@@ -312,7 +312,7 @@ This samplesheet is missing the required `fastq_1` column and has a non-existent
 Run the demo pipeline using `malformed_samplesheet.csv` as the input:
 
 ```bash
-nextflow run nf-core/demo -profile docker,test --outdir demo-results --input malformed_samplesheet.csv
+nextflow run nf-core/demo -profile test,docker --outdir demo-results --input malformed_samplesheet.csv
 ```
 
 ```console
@@ -415,7 +415,7 @@ The `-b 5` flag tells `seqtk trimfq` to trim 5 bases from the beginning of each 
 Run the pipeline with this config:
 
 ```bash
-nextflow run nf-core/demo -profile docker,test --outdir demo-results-custom -c custom.config
+nextflow run nf-core/demo -profile test,docker --outdir demo-results-custom -c custom.config
 ```
 
 ??? success "Command output"
