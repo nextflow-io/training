@@ -51,7 +51,7 @@ You can explore the course materials using the file explorer on the left, or wit
 Run the following from the terminal to see the full structure:
 
 ```bash
-tree .
+tree -a .
 ```
 
 ??? abstract "Directory contents"

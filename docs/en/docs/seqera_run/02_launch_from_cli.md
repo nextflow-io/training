@@ -35,7 +35,7 @@ tw --version
 ??? success "Command output"
 
     ```console
-    tw version 0.30.0 (fde9dec)
+    Tower CLI version 0.40.0 (build 26db579)
     ```
 
 The `tw` CLI is installed and ready to configure.
