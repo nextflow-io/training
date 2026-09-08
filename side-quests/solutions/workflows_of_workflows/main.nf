@@ -1,3 +1,5 @@
+#!/usr/bin/env nextflow
+
 include { GREETING_WORKFLOW } from './workflows/greeting'
 include { TRANSFORM_WORKFLOW } from './workflows/transform'
 
