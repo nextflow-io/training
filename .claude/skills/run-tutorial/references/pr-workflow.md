@@ -2,21 +2,24 @@
 
 When the walkthrough identifies fixable issues, follow this workflow.
 
-## 1. Independent Verification (MANDATORY)
+## 1. Independent Verification (MANDATORY for fixes that change lesson meaning)
 
-Before a proposed fix reaches step 2, it must be confirmed by a subagent that did not diagnose it - see [Delegation Pattern](../SKILL.md#delegation-pattern) in the main skill. Spawn a fresh subagent and hand it:
+This step applies to any fix that changes what the lesson teaches or claims - a new or reworded explanation, a behavior claim, pedagogical framing, or where an explanation is placed. A fix that's mechanically checkable instead (a `grep` for a banned pattern returns zero matches, an `hl_lines` count is arithmetically correct, a hash-consistency check passes) can be confirmed directly by rerunning that exact check - skip ahead to step 2 once you've done so.
+
+For a fix that does qualify, it must be confirmed by a subagent that did not diagnose it - see [Delegation Pattern](../SKILL.md#delegation-pattern) in the main skill. Spawn a fresh subagent and hand it:
 
 - the lesson section text and the proposed diff
 - the original discrepancy that triggered the fix
 - the observed command output or file contents that exposed it
 - instructions to rerun or reproduce the smallest relevant check, not just read the diff
+- instructions to confirm the fix's full scope: re-derive the complete set of instances of the underlying problem (e.g. grep the file for the pattern being fixed) so a fix that only addresses the specifically-cited instance isn't mistaken for a complete one
 
-Ask it to report a verdict, the evidence it checked, and any remaining uncertainty - a bare pass/fail isn't enough to catch a fix that only looks right.
+Ask it to report a verdict, the evidence it checked, and any remaining uncertainty - a bare pass/fail isn't enough to catch a fix that only looks right. Note that the fixer's own sanity check (confirming its change builds/runs) is a separate, necessary step but does not substitute for this independent pass - it shares whatever blind spot produced the original diagnosis.
 
 - **Pass**: carry the fix into step 2.
 - **Fail or uncertain**: send the fix back to diagnosis with the independent reviewer's objection. Do not weaken the objection or re-verify it yourself - get a second independent pass on the revised fix. If a fix fails twice, stop looping: surface the discrepancy and both objections to the user instead of attempting a third revision unsupervised.
 
-This catches a fix that suppresses a symptom (e.g., deleting a failing assertion, or loosening a code snippet until it stops looking wrong) without actually making the tutorial teach the right thing.
+This catches a fix that suppresses a symptom (e.g., deleting a failing assertion, or loosening a code snippet until it stops looking wrong) without actually making the tutorial teach the right thing, and a fix that's correct as far as it goes but leaves the same problem uncorrected elsewhere in the file.
 
 ## 2. Categorize Issues
 
