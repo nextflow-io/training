@@ -52,7 +52,7 @@ While your actual run hashes will differ from documented hashes (acceptable), th
 
 ```bash
 # Find all hashes in a file
-grep -oE '\[[a-z0-9]{2}/[a-z0-9]{6}\]' file.md | sort | uniq -c | sort -rn
+grep -oE '\[[0-9a-f]{2}/[0-9a-f]{6}\]' file.md | sort | uniq -c | sort -rn
 
 # Check for invalid hex characters
 grep -oE '\[[^]]+\]' file.md | grep -Ev '^\[[0-9a-f]{2}/[0-9a-f]{6}\]$'
