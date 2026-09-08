@@ -55,7 +55,7 @@ While your actual run hashes will differ from documented hashes (acceptable), th
 grep -oE '\[[a-z0-9]{2}/[a-z0-9]{6}\]' file.md | sort | uniq -c | sort -rn
 
 # Check for invalid hex characters
-grep -oE '\[[^]]+\]' file.md | grep -E '\[[^0-9a-f/\]]'
+grep -oE '\[[^]]+\]' file.md | grep -Ev '^\[[0-9a-f]{2}/[0-9a-f]{6}\]$'
 ```
 
 Duplicate hash counts > 1 are only acceptable when:
