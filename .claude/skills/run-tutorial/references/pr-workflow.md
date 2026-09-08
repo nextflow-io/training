@@ -2,7 +2,16 @@
 
 When the walkthrough identifies fixable issues, follow this workflow.
 
-## 1. Categorize Issues
+## 1. Independent Verification (MANDATORY)
+
+Before a proposed fix reaches step 2, it must be confirmed by a subagent that did not diagnose it - see [Delegation Pattern](../SKILL.md#delegation-pattern) in the main skill. Spawn a fresh subagent, hand it only the lesson section text and the proposed diff, and ask it a single question: does this diff resolve the discrepancy against what the section actually teaches?
+
+- **Pass**: carry the fix into step 2.
+- **Fail or uncertain**: send the fix back to diagnosis with the independent reviewer's objection. Do not weaken the objection or re-verify it yourself - get a second independent pass on the revised fix.
+
+This catches a fix that suppresses a symptom (e.g., deleting a failing assertion, or loosening a code snippet until it stops looking wrong) without actually making the tutorial teach the right thing.
+
+## 2. Categorize Issues
 
 **Auto-fixable** (apply programmatically):
 - Extra/missing whitespace in code blocks
@@ -16,7 +25,7 @@ When the walkthrough identifies fixable issues, follow this workflow.
 - Incorrect command outputs
 - Structural changes to lesson flow
 
-## 2. Present Fixes to User
+## 3. Present Fixes to User
 
 Before making any changes, list each fix with:
 
@@ -34,7 +43,7 @@ Use `AskUserQuestion` with options:
 - "Let me review/modify first"
 - "No, skip PR"
 
-## 3. Create Branch
+## 4. Create Branch
 
 ```bash
 git checkout -b fix/<tutorial-name>-walkthrough-fixes
@@ -42,7 +51,7 @@ git checkout -b fix/<tutorial-name>-walkthrough-fixes
 
 Use descriptive branch names based on the tutorial being fixed.
 
-## 4. Apply and Commit
+## 5. Apply and Commit
 
 Stage only the files you're fixing:
 
@@ -57,7 +66,7 @@ Found during tutorial walkthrough testing.
 Co-Authored-By: Claude <noreply@anthropic.com>"
 ```
 
-## 5. Push and Create PR
+## 6. Push and Create PR
 
 ```bash
 git push -u origin fix/<tutorial-name>-walkthrough-fixes
@@ -83,7 +92,7 @@ EOF
 )"
 ```
 
-## 6. Cleanup
+## 7. Cleanup
 
 After PR is created:
 

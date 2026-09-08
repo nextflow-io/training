@@ -70,6 +70,17 @@ This walkthrough MUST invoke other skills. **Do not skip these.**
 
 ---
 
+## Delegation Pattern
+
+Run this skill as a coordinator, not a single long-lived session that inlines every command and every line of terminal output. A multi-section walkthrough that captures raw `nextflow run` output inline, for every section, in one context, burns most of its budget on transcripts that are only useful for the few seconds it takes to compare them against the docs.
+
+- **Delegate Phase 2 (and 2B) per lesson to a fresh subagent** using the `Agent` tool (`general-purpose` is sufficient; this is read-heavy comparison work, not judgment work that needs a stronger model). Brief it with the lesson file path, the mode (A or B), the working directory from [repo-conventions.md](../shared/repo-conventions.md), and the exact per-section report shape from [Output Format](#output-format). It runs the commands and does the Before/After and hash-consistency comparisons itself; it returns the structured report, not the raw terminal output. The coordinator reads the report, not the transcript.
+- **Never delegate understanding.** A brief of "check if this lesson works" produces a bare pass/fail you cannot check. Name the sections, point at [acceptable-differences.md](references/acceptable-differences.md) for what to flag versus ignore, and require the report to cite the actual command output for every flagged issue - not a paraphrase of what the docs say should happen.
+- **Verify a proposed fix independently before it reaches Phase 4's PR workflow.** The subagent that found a discrepancy and drafted the fix is not the one that confirms the fix is right - it has already committed to its own diagnosis. Spawn a second, fresh subagent with no memory of the walkthrough's reasoning; hand it only the lesson section text and the proposed diff; ask it to confirm the diff actually resolves the discrepancy (and doesn't just make the symptom disappear). Only bring a fix into Phase 4 once this independent check passes. See [Phase 4](#phase-4-propose-fixes-and-create-pr-if-issues-found).
+- Keep the coordinator's own context to: which lessons are in scope, the aggregated per-lesson reports, the fixes proposed, and the independent-verification verdicts. Everything else - lesson prose, full command output, intermediate file contents - belongs in a subagent that discards it at handoff.
+
+---
+
 ## Initial Setup
 
 Use `AskUserQuestion` to determine:
@@ -310,6 +321,7 @@ Record results before proceeding.
 If fixable issues were identified, follow [references/pr-workflow.md](references/pr-workflow.md) to create a PR.
 
 Key points:
+- **Run the independent verification gate from [Delegation Pattern](#delegation-pattern) on every proposed fix first.** A fix that hasn't been confirmed by a subagent independent of the one that diagnosed it does not proceed to the steps below.
 - Categorize as auto-fixable vs. requires review
 - Present fixes to user with **actual section headings** (read from document - do not guess!)
 - Get user approval via `AskUserQuestion` before making changes
