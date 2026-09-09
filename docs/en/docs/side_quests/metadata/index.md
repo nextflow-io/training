@@ -7,7 +7,8 @@ This extra information is what we call metadata.
 Metadata is data describing other data.
 Metadata tracks important details about files and experimental conditions, and helps tailor analyses to each dataset's unique characteristics.
 
-Think of it like a library catalog: while books contain the actual content (raw data), the catalog cards provide essential information about each book—when it was published, who wrote it, where to find it (metadata).
+Think of it like a library catalog: while books contain the actual content (raw data), the catalog cards provide essential information about each book.
+That information includes when it was published, who wrote it, and where to find it (metadata).
 In Nextflow pipelines, metadata can be used to:
 
 - Track file-specific information throughout the workflow
@@ -354,15 +355,15 @@ process COWPY {
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
     input:
-    path input_file
+    path recording
     val character
 
     output:
-    path "cowpy-${input_file}"
+    path "cowpy-${recording}"
 
     script:
     """
-    cat ${input_file} | cowpy -c ${character} > cowpy-${input_file}
+    cat ${recording} | cowpy -c ${character} > cowpy-${recording}
     """
 }
 ```
@@ -592,15 +593,15 @@ Update `COWPY` to accept a tuple corresponding to the three elements in each row
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
         input:
-        path input_file
+        path recording
         val character
 
         output:
-        path "cowpy-${input_file}"
+        path "cowpy-${recording}"
 
         script:
         """
-        cat ${input_file} | cowpy -c ${character} > cowpy-${input_file}
+        cat ${recording} | cowpy -c ${character} > cowpy-${recording}
         """
     }
     ```
@@ -740,7 +741,7 @@ input:
 tuple val(id), val(character), path(recording)
 ```
 
-If a collaborator uses a differently structured datasheet — with additional columns, or columns in a different order — this process won't work without modification.
+If a collaborator uses a differently structured datasheet (with additional columns, or columns in a different order), this process won't work without modification.
 This makes the process fragile, because its input structure is tied to the exact composition of the datasheet.
 
 To solve this, we need a way to pass all the metadata as a bundle without hard-coding its exact structure into the process interface.
@@ -748,7 +749,7 @@ To solve this, we need a way to pass all the metadata as a bundle without hard-c
 ### 1.5. Use a meta map + file interface
 
 The solution is to separate two distinct concerns in the channel: the **metadata about a sample**, and the **data file** itself.
-By bundling all metadata into a single map — the "meta map" — we get a consistent two-element tuple regardless of how many metadata columns the datasheet contains:
+By bundling all metadata into a single map (the "meta map"), we get a consistent two-element tuple regardless of how many metadata columns the datasheet contains:
 
 ```groovy title="Syntax example"
 input:
@@ -849,14 +850,14 @@ Update `COWPY` to accept the `[meta, file]` tuple structure:
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
         input:
-        tuple val(meta), path(input_file)
+        tuple val(meta), path(recording)
 
         output:
-        path "cowpy-${input_file}"
+        path "cowpy-${recording}"
 
         script:
         """
-        cat ${input_file} | cowpy -c ${meta.character} > cowpy-${input_file}
+        cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
         """
     }
     ```
@@ -1438,37 +1439,38 @@ The channel structure is still `[meta, file]`.
 
 With `lang` and `lang_group` now available in the meta map, we can use them to add a language code to the output file names and organize them into subdirectories by language family.
 
-This requires three changes: updating the `COWPY` process to rename its output and include `meta` in what it emits, updating the `COWPY` call to run on `ch_languages`, and updating the output block to specify the subdirectory path.
+This requires three changes: updating the `COWPY` process to include `meta` in what it emits, updating the `COWPY` call to run on `ch_languages`, and updating the output block to route each file into a language-group subdirectory and rename it using the detected language code.
 
 #### 2.4.1. Update the `COWPY` process
 
-Rename the output file using the language code from the meta map, and add `meta` to the output so the output block can access `lang_group` for subdirectory routing:
+Add `meta` to the output so the output block can access `lang` and `lang_group` for routing and renaming:
 
 === "After"
 
-    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2 6"
+    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2"
         output:
-        tuple val(meta), path("${meta.lang}-${input_file}")
+        tuple val(meta), path("cowpy-${recording}")
 
         script:
         """
-        cat ${input_file} | cowpy -c ${meta.character} > ${meta.lang}-${input_file}
+        cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
         """
     ```
 
 === "Before"
 
-    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2 6"
+    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2"
         output:
-        path "cowpy-${input_file}"
+        path "cowpy-${recording}"
 
         script:
         """
-        cat ${input_file} | cowpy -c ${meta.character} > cowpy-${input_file}
+        cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
         """
     ```
 
-This shows how we can take advantage of other metadata fields to customize the behavior of a process, without having to modify the input definition at all.
+This is a minimal process-level change: `COWPY` doesn't need to know that `lang` or `lang_group` exist, only that it should carry `meta` along with its output.
+Routing and renaming based on those fields both happen downstream, in the output block.
 
 #### 2.4.2. Update the `COWPY` call to run on `ch_languages`
 
@@ -1504,14 +1506,16 @@ We also remove the `ch_languages.view()` line since we don't need to inspect cha
 
 #### 2.4.3. Update the output block
 
-Add a `path` closure to the `output {}` block to route each file into its language group subdirectory:
+Add a `path` closure to the `output {}` block that uses the [`>>` operator](https://www.nextflow.io/docs/latest/workflow.html#dynamic-publish-path) to publish each file to an explicit target: its language-group subdirectory, under a name prefixed with its detected language:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="40" hl_lines="3"
+    ```groovy title="main.nf" linenums="40" hl_lines="3-5"
     output {
         cowpy_art {
-            path { meta, file -> meta.lang_group }
+            path { meta, file ->
+                file >> "${meta.lang_group}/${meta.lang}-${file.name}"
+            }
         }
     }
     ```
@@ -1525,7 +1529,7 @@ Add a `path` closure to the `output {}` block to route each file into its langua
     }
     ```
 
-This shows how we can use metadata to organize outputs with great flexibility.
+This shows how we can use metadata to both organize and rename outputs, entirely from the output block, without changing the process itself.
 
 #### 2.4.4. Run the full pipeline
 
@@ -1552,13 +1556,13 @@ nextflow run main.nf
       /workspaces/training/side-quests/metadata/results
 
       cowpy_art:
-        - [{id: sampleB, character: tux, lang: de, lang_group: germanic}, germanic/de-guten_tag.txt]
-        - [{id: sampleG, character: turtle, lang: it, lang_group: romance}, romance/it-ciao.txt]
-        - [{id: sampleC, character: sheep, lang: de, lang_group: germanic}, germanic/de-hallo.txt]
-        - [{id: sampleE, character: stegosaurus, lang: es, lang_group: romance}, romance/es-hola.txt]
-        - [{id: sampleA, character: squirrel, lang: fr, lang_group: romance}, romance/fr-bonjour.txt]
-        - [{id: sampleD, character: turkey, lang: en, lang_group: germanic}, germanic/en-hello.txt]
-        - [{id: sampleF, character: moose, lang: fr, lang_group: romance}, romance/fr-salut.txt]
+        - [{id: sampleB, character: tux, lang: de, lang_group: germanic}, germanic/de-cowpy-guten_tag.txt]
+        - [{id: sampleG, character: turtle, lang: it, lang_group: romance}, romance/it-cowpy-ciao.txt]
+        - [{id: sampleC, character: sheep, lang: de, lang_group: germanic}, germanic/de-cowpy-hallo.txt]
+        - [{id: sampleE, character: stegosaurus, lang: es, lang_group: romance}, romance/es-cowpy-hola.txt]
+        - [{id: sampleA, character: squirrel, lang: fr, lang_group: romance}, romance/fr-cowpy-bonjour.txt]
+        - [{id: sampleD, character: turkey, lang: en, lang_group: germanic}, germanic/en-cowpy-hello.txt]
+        - [{id: sampleF, character: moose, lang: fr, lang_group: romance}, romance/fr-cowpy-salut.txt]
     ```
 
 The results directory is now organized by language family, with each file named after its detected language:
@@ -1566,19 +1570,19 @@ The results directory is now organized by language family, with each file named 
 ```console title="Results directory contents"
 results/
 ├── germanic
-│   ├── de-guten_tag.txt
-│   ├── de-hallo.txt
-│   └── en-hello.txt
+│   ├── de-cowpy-guten_tag.txt
+│   ├── de-cowpy-hallo.txt
+│   └── en-cowpy-hello.txt
 └── romance
-    ├── es-hola.txt
-    ├── fr-bonjour.txt
-    ├── fr-salut.txt
-    └── it-ciao.txt
+    ├── es-cowpy-hola.txt
+    ├── fr-cowpy-bonjour.txt
+    ├── fr-cowpy-salut.txt
+    └── it-cowpy-ciao.txt
 ```
 
-The `path` closure in the `output {}` block receives each `[meta, file]` tuple and returns `meta.lang_group` as the subdirectory name.
-The file name itself comes from what the process outputs (`#!groovy "${meta.lang}-${input_file}"`).
-Both pieces of metadata (language code and language group) come from the enriched meta map built up in this section.
+The `path` closure in the `output {}` block receives each `[meta, file]` tuple.
+The `>>` operator publishes `file` to the target `#!groovy "${meta.lang_group}/${meta.lang}-${file.name}"`, combining the subdirectory (`lang_group`) and the renamed file (prefixed with `lang`) in a single expression.
+Both pieces of metadata come from the enriched meta map built up in this section, and `COWPY` itself never needs to know either exists.
 
 ### Takeaway
 
@@ -1633,7 +1637,7 @@ When Nextflow substitutes `#!groovy ${meta.character}` into the command, the `CO
 
     Command executed:
 
-      cat bonjour.txt | cowpy -c  > fr-bonjour.txt
+      cat bonjour.txt | cowpy -c  > cowpy-bonjour.txt
 
     Command exit status:
       2
@@ -1694,7 +1698,7 @@ When the process script evaluates `#!groovy ${meta.character}`, Nextflow literal
 
     Command executed:
 
-      cat hola.txt | cowpy -c null > es-hola.txt
+      cat hola.txt | cowpy -c null > cowpy-hola.txt
 
     Command exit status:
       1
@@ -1748,7 +1752,7 @@ If you want the process interface itself to communicate that a particular value 
 
     ```groovy title="modules/cowpy.nf" linenums="6"
     input:
-    tuple val(meta), val(character), path(input_file)
+    tuple val(meta), val(character), path(recording)
     ```
 
 === "Workflow call"
@@ -1819,15 +1823,17 @@ The "meta map + data file" tuple pattern is a core convention in Nextflow, offer
 3.  **Using metadata inside a process:** Access any field via dot notation in the script block.
 
     ```groovy
-    cat ${input_file} | cowpy -c ${meta.character} > ${meta.lang}-${input_file}
+    cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
     ```
 
-4.  **Organizing outputs by metadata value:** Use the `path` closure in the `output {}` block.
+4.  **Organizing and renaming outputs by metadata value:** Use the `path` closure in the `output {}` block, with the `>>` operator to control both the target directory and the published file name.
 
     ```groovy
     output {
         cowpy_art {
-            path { meta, file -> meta.lang_group }
+            path { meta, file ->
+                file >> "${meta.lang_group}/${meta.lang}-${file.name}"
+            }
         }
     }
     ```
