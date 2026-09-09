@@ -3685,11 +3685,11 @@
 <p>이 버전의 패키지에 대해 커뮤니티 컨테이너가 처음 빌드되는 경우, 완료하는 데 몇 분이 걸릴 수 있습니다.
 생성된 컨테이너 이미지의 URI(예: <code>community.wave.seqera.io/library/pip_quote:ae07804021465ee9</code>)를 복사하려면 클릭하세요.</p>
 <p>이제 컨테이너 이미지를 사용하여 <code>quote</code> 명령을 실행하고 Grace Hopper의 무작위 명언을 얻을 수 있습니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>community.wave.seqera.io/library/pip_quote:ae07804021465ee9<span class="w"> </span>quote<span class="w"> </span><span class="s2">&quot;Grace Hopper&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>community.wave.seqera.io/library/pip_quote:ae07804021465ee9<span class="w"> </span>quote<span class="w"> </span><span class="s2">"Grace Hopper"</span>
 </code></pre></div>
 <p>출력:</p>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go">Humans are allergic to change. They love to say, &#39;We&#39;ve always done it</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="go">this way.&#39; I try to fight that. That&#39;s why I have a clock on my wall</span>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go">Humans are allergic to change. They love to say, 'We've always done it</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="go">this way.' I try to fight that. That's why I have a clock on my wall</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="go">that runs counter-clockwise.</span>
 </code></pre></div>
 <h3 id="12">1.2. 컨테이너 이미지 직접 빌드하기<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
@@ -3705,14 +3705,14 @@ Seqera Containers 웹사이트로 돌아가서 "Build Details" 버튼을 클릭�
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">RUN</span><span class="w"> </span>micromamba<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>-n<span class="w"> </span>base<span class="w"> </span>-f<span class="w"> </span>/tmp/conda.yml<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>micromamba<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>-n<span class="w"> </span>base<span class="w"> </span>conda-forge::procps-ng<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>micromamba<span class="w"> </span>env<span class="w"> </span><span class="nb">export</span><span class="w"> </span>--name<span class="w"> </span>base<span class="w"> </span>--explicit<span class="w"> </span>&gt;<span class="w"> </span>environment.lock<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&gt;&gt; CONDA_LOCK_START&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"&gt;&gt; CONDA_LOCK_START"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>cat<span class="w"> </span>environment.lock<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&lt;&lt; CONDA_LOCK_END&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"&lt;&lt; CONDA_LOCK_END"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>micromamba<span class="w"> </span>clean<span class="w"> </span>-a<span class="w"> </span>-y
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="c"># 컨테이너를 root 사용자로 실행</span>
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="k">USER</span><span class="w"> </span><span class="s">root</span>
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="c"># PATH 환경 변수를 micromamba 설치 디렉토리를 포함하도록 설정</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$MAMBA_ROOT_PREFIX</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$MAMBA_ROOT_PREFIX</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">"</span>
 </code></pre></div>
 <p>두 번째로 살펴볼 항목은 <code>conda.yml</code> 파일입니다. 이 파일에는 컨테이너 이미지에 설치해야 하는 패키지 목록이 포함되어 있습니다.</p>
 <div class="highlight"><span class="filename">conda.yml</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>channels:
@@ -3732,7 +3732,7 @@ Seqera Containers 웹사이트로 돌아가서 "Build Details" 버튼을 클릭�
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>quote:latest<span class="w"> </span>containers/build
 </code></pre></div>
 <p>빌드가 완료되면 방금 빌드한 컨테이너 이미지를 실행할 수 있습니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>quote:latest<span class="w"> </span>quote<span class="w"> </span><span class="s2">&quot;Margaret Oakley Dayhoff&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>quote:latest<span class="w"> </span>quote<span class="w"> </span><span class="s2">"Margaret Oakley Dayhoff"</span>
 </code></pre></div>
 <h3 id="_1">핵심 정리<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>Nextflow 파이프라인에서 사용하려는 도구의 컨테이너 이미지를 얻는 두 가지 방법을 학습했습니다: Seqera Containers를 사용하는 방법과 컨테이너 이미지를 직접 빌드하는 방법입니다.</p>
@@ -3746,8 +3746,8 @@ Seqera Containers 웹사이트로 돌아가서 "Build Details" 버튼을 클릭�
 <div class="highlight"><span class="filename">cowsay-output-Grace-Hopper.txt</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">  _________________________________________________</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="go"> /                                                 \</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">| Humans are allergic to change. They love to       |</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="go">| say, &#39;We&#39;ve always done it this way.&#39; I try to fi |</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="go">| ght that. That&#39;s why I have a clock on my wall th |</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="go">| say, 'We've always done it this way.' I try to fi |</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="go">| ght that. That's why I have a clock on my wall th |</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="go">| at runs counter-clockwise.                        |</span>
 <a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="go">| -Grace Hopper                                     |</span>
 <a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="go"> \                                                 /</span>
@@ -3773,11 +3773,11 @@ Seqera Containers 웹사이트로 돌아가서 "Build Details" 버튼을 클릭�
 <p class="admonition-title">힌트</p>
 <p>getQuote 프로세스의 <code>script</code> 블록에 적합한 선택은 다음과 같습니다:
     <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nl">script:</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">safe_author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">author</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39; &#39;</span><span class="o">).</span><span class="na">join</span><span class="o">(</span><span class="s1">&#39;-&#39;</span><span class="o">)</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="s2">    quote &quot;$author&quot; &gt; quote-${safe_author}.txt</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="s2">    echo &quot;-${author}&quot; &gt;&gt; quote-${safe_author}.txt</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">safe_author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">author</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">' '</span><span class="o">).</span><span class="na">join</span><span class="o">(</span><span class="s1">'-'</span><span class="o">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="s2">    quote "$author" &gt; quote-${safe_author}.txt</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="s2">    echo "-${author}" &gt;&gt; quote-${safe_author}.txt</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="s2">    """</span>
 </code></pre></div></p>
 </div>
 <p>이 연습의 해결책은 <code>containers/solutions/hello-containers-4.1.nf</code>에서 찾을 수 있습니다.</p>
@@ -4100,9 +4100,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -4341,7 +4342,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -5020,7 +5021,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -5312,7 +5313,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -5484,7 +5485,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -5494,7 +5495,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

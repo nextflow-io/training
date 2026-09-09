@@ -4167,7 +4167,7 @@ Testleri <code>make test</code> ile nasıl çalıştıracağınızı ve plugin'i
 </tbody>
 </table>
 <p>Her sürümden önce <code>build.gradle</code> dosyasındaki sürümü güncelleyin:</p>
-<div class="highlight"><span class="filename">build.gradle</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;1.0.0&#39;</span><span class="w">  </span><span class="c1">// Anlamsal sürümlemeyi kullanın: MAJOR.MINOR.PATCH</span>
+<div class="highlight"><span class="filename">build.gradle</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'1.0.0'</span><span class="w">  </span><span class="c1">// Anlamsal sürümlemeyi kullanın: MAJOR.MINOR.PATCH</span>
 </code></pre></div>
 <h3 id="kayt-defterine-yaymlamak">Kayıt defterine yayımlamak<a class="headerlink" href="#kayt-defterine-yaymlamak" title="Permanent link">&para;</a></h3>
 <p><a href="https://registry.nextflow.io/">Nextflow plugin kayıt defteri</a>, plugin'leri toplulukla paylaşmanın resmi yoludur.</p>
@@ -4181,7 +4181,7 @@ Testleri <code>make test</code> ile nasıl çalıştıracağınızı ve plugin'i
 <p>Adım adım talimatlar için <a href="https://www.nextflow.io/docs/latest/guides/gradle-plugin.html#publishing-a-plugin">resmi yayımlama belgelerine</a> bakın.</p>
 <p>Yayımlandıktan sonra kullanıcılar plugin'inizi herhangi bir yerel kurulum gerektirmeden yükleyebilir:</p>
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-greeting@1.0.0&#39;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">'nf-greeting@1.0.0'</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="o">}</span>
 </code></pre></div>
 <p>Nextflow, ilk kullanımda plugin'i kayıt defterinden otomatik olarak indirir.</p>
@@ -4203,22 +4203,22 @@ Testleri <code>make test</code> ile nasıl çalıştıracağınızı ve plugin'i
 <h2 id="temel-kod-kalplar">Temel kod kalıpları<a class="headerlink" href="#temel-kod-kalplar" title="Permanent link">&para;</a></h2>
 <p><strong>Fonksiyon tanımı:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Function</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">String</span><span class="w"> </span><span class="nf">myFunction</span><span class="o">(</span><span class="n">String</span><span class="w"> </span><span class="n">input</span><span class="o">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">optional</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;default&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">String</span><span class="w"> </span><span class="nf">myFunction</span><span class="o">(</span><span class="n">String</span><span class="w"> </span><span class="n">input</span><span class="o">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">optional</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'default'</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">input</span><span class="o">.</span><span class="na">transform</span><span class="o">()</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="o">}</span>
 </code></pre></div>
 <p><strong>Plugin yapılandırması:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">nextflowPlugin</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="n">provider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;my-org&#39;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="n">className</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;my.org.MyPlugin&#39;</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">extensionPoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;my.org.MyExtension&#39;</span><span class="o">]</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="n">provider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'my-org'</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="n">className</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'my.org.MyPlugin'</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">extensionPoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">'my.org.MyExtension'</span><span class="o">]</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="o">}</span>
 </code></pre></div>
 <p><strong>İş akışlarında kullanım:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFunction</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;plugin/my-plugin&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFunction</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'plugin/my-plugin'</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;a&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;b&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;c&#39;</span><span class="o">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'a'</span><span class="o">,</span><span class="w"> </span><span class="s1">'b'</span><span class="o">,</span><span class="w"> </span><span class="s1">'c'</span><span class="o">)</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">myFunction</span><span class="o">(</span><span class="n">item</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="o">}</span>
@@ -4580,9 +4580,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -4821,7 +4822,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -5500,7 +5501,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -5792,7 +5793,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -5964,7 +5965,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -5974,7 +5975,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

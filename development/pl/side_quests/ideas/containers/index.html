@@ -3685,11 +3685,11 @@ Przejdź do <a href="https://www.seqera.io/containers/">Seqera Containers</a> i 
 <p>Jeśli jest to pierwszy raz, gdy budowany jest kontener społecznościowy dla tej wersji pakietu, może to potrwać kilka minut.
 Kliknij, aby skopiować URI (np. <code>community.wave.seqera.io/library/pip_quote:ae07804021465ee9</code>) utworzonego dla Ciebie obrazu kontenera.</p>
 <p>Możesz teraz użyć obrazu kontenera, aby uruchomić polecenie <code>quote</code> i uzyskać losowe powiedzenie Grace Hopper.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>community.wave.seqera.io/library/pip_quote:ae07804021465ee9<span class="w"> </span>quote<span class="w"> </span><span class="s2">&quot;Grace Hopper&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>community.wave.seqera.io/library/pip_quote:ae07804021465ee9<span class="w"> </span>quote<span class="w"> </span><span class="s2">"Grace Hopper"</span>
 </code></pre></div>
 <p>Wyjście:</p>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go">Humans are allergic to change. They love to say, &#39;We&#39;ve always done it</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="go">this way.&#39; I try to fight that. That&#39;s why I have a clock on my wall</span>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go">Humans are allergic to change. They love to say, 'We've always done it</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="go">this way.' I try to fight that. That's why I have a clock on my wall</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="go">that runs counter-clockwise.</span>
 </code></pre></div>
 <h3 id="12-zbuduj-obraz-kontenera-samodzielnie">1.2. Zbuduj obraz kontenera samodzielnie<a class="headerlink" href="#12-zbuduj-obraz-kontenera-samodzielnie" title="Permanent link">&para;</a></h3>
@@ -3701,18 +3701,18 @@ Dodaliśmy poniżej kilka wyjaśniających komentarzy do Dockerfile'a, aby pomó
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">FROM</span><span class="w"> </span><span class="s">mambaorg/micromamba:1.5.10-noble</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c"># Skopiuj plik conda.yml do kontenera</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">COPY</span><span class="w"> </span>--chown<span class="o">=</span><span class="nv">$MAMBA_USER</span>:<span class="nv">$MAMBA_USER</span><span class="w"> </span>conda.yml<span class="w"> </span>/tmp/conda.yml
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c"># Zainstaluj różne narzędzia dla Nextflow&#39;a oraz pakiety z pliku conda.yml</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c"># Zainstaluj różne narzędzia dla Nextflow'a oraz pakiety z pliku conda.yml</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">RUN</span><span class="w"> </span>micromamba<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>-n<span class="w"> </span>base<span class="w"> </span>-f<span class="w"> </span>/tmp/conda.yml<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>micromamba<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>-n<span class="w"> </span>base<span class="w"> </span>conda-forge::procps-ng<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>micromamba<span class="w"> </span>env<span class="w"> </span><span class="nb">export</span><span class="w"> </span>--name<span class="w"> </span>base<span class="w"> </span>--explicit<span class="w"> </span>&gt;<span class="w"> </span>environment.lock<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&gt;&gt; CONDA_LOCK_START&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"&gt;&gt; CONDA_LOCK_START"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>cat<span class="w"> </span>environment.lock<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&lt;&lt; CONDA_LOCK_END&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"&lt;&lt; CONDA_LOCK_END"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>micromamba<span class="w"> </span>clean<span class="w"> </span>-a<span class="w"> </span>-y
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="c"># Uruchom kontener jako użytkownik root</span>
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="k">USER</span><span class="w"> </span><span class="s">root</span>
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="c"># Ustaw zmienną środowiskową PATH tak, aby zawierała katalog instalacji micromamba</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$MAMBA_ROOT_PREFIX</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$MAMBA_ROOT_PREFIX</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">"</span>
 </code></pre></div>
 <p>Drugim elementem, na który spojrzymy, jest plik <code>conda.yml</code>, który zawiera listę pakietów do zainstalowania w obrazie kontenera.</p>
 <div class="highlight"><span class="filename">conda.yml</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>channels:
@@ -3732,7 +3732,7 @@ Będziemy mogli używać tego tagu do odwoływania się do obrazu kontenera podc
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>quote:latest<span class="w"> </span>containers/build
 </code></pre></div>
 <p>Po zakończeniu budowania możesz uruchomić właśnie zbudowany obraz kontenera.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>quote:latest<span class="w"> </span>quote<span class="w"> </span><span class="s2">&quot;Margaret Oakley Dayhoff&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>quote:latest<span class="w"> </span>quote<span class="w"> </span><span class="s2">"Margaret Oakley Dayhoff"</span>
 </code></pre></div>
 <h3 id="podsumowanie">Podsumowanie<a class="headerlink" href="#podsumowanie" title="Permanent link">&para;</a></h3>
 <p>Poznałeś dwa różne sposoby uzyskania obrazu kontenera dla narzędzia, którego chcesz użyć w swoich pipeline'ach Nextflow: przy użyciu Seqera Containers oraz samodzielne zbudowanie obrazu kontenera.</p>
@@ -3746,8 +3746,8 @@ Wykonanie tych ćwiczeń <em>nie jest wymagane</em> do zrozumienia późniejszyc
 <div class="highlight"><span class="filename">cowsay-output-Grace-Hopper.txt</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">  _________________________________________________</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="go"> /                                                 \</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">| Humans are allergic to change. They love to       |</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="go">| say, &#39;We&#39;ve always done it this way.&#39; I try to fi |</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="go">| ght that. That&#39;s why I have a clock on my wall th |</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="go">| say, 'We've always done it this way.' I try to fi |</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="go">| ght that. That's why I have a clock on my wall th |</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="go">| at runs counter-clockwise.                        |</span>
 <a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="go">| -Grace Hopper                                     |</span>
 <a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="go"> \                                                 /</span>
@@ -3773,11 +3773,11 @@ Ogólnie rzecz biorąc, aby ukończyć to ćwiczenie, będziesz musiał:</p>
 <p class="admonition-title">Podpowiedź</p>
 <p>Dobrym wyborem dla bloku <code>script</code> Twojego procesu getQuote może być:
     <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nl">script:</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">safe_author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">author</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39; &#39;</span><span class="o">).</span><span class="na">join</span><span class="o">(</span><span class="s1">&#39;-&#39;</span><span class="o">)</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="s2">    quote &quot;$author&quot; &gt; quote-${safe_author}.txt</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="s2">    echo &quot;-${author}&quot; &gt;&gt; quote-${safe_author}.txt</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">safe_author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">author</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">' '</span><span class="o">).</span><span class="na">join</span><span class="o">(</span><span class="s1">'-'</span><span class="o">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="s2">    quote "$author" &gt; quote-${safe_author}.txt</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="s2">    echo "-${author}" &gt;&gt; quote-${safe_author}.txt</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="s2">    """</span>
 </code></pre></div></p>
 </div>
 <p>Rozwiązanie tego ćwiczenia znajdziesz w pliku <code>containers/solutions/hello-containers-4.1.nf</code>.</p>
@@ -4100,9 +4100,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -4341,7 +4342,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -5020,7 +5021,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -5312,7 +5313,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -5484,7 +5485,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -5494,7 +5495,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

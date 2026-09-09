@@ -5150,7 +5150,8 @@ Each file comes with its own additional information: what it is, where it came f
 This extra information is what we call metadata.</p>
 <p>Metadata is data describing other data.
 Metadata tracks important details about files and experimental conditions, and helps tailor analyses to each dataset's unique characteristics.</p>
-<p>Think of it like a library catalog: while books contain the actual content (raw data), the catalog cards provide essential information about each book—when it was published, who wrote it, where to find it (metadata).
+<p>Think of it like a library catalog: while books contain the actual content (raw data), the catalog cards provide essential information about each book.
+That information includes when it was published, who wrote it, and where to find it (metadata).
 In Nextflow pipelines, metadata can be used to:</p>
 <ul>
 <li>Track file-specific information throughout the workflow</li>
@@ -5226,7 +5227,7 @@ Starting with a simple datasheet (often called a samplesheet in bioinformatics) 
 <summary>What does <code>COWPY</code> do?</summary>
 <p><code>COWPY</code> is a command-line tool that generates ASCII art to display arbitrary text inputs in a fun way.
 It is a Python implementation of the classic <a href="https://en.wikipedia.org/wiki/Cowsay">cowsay</a> tool by Tony Monroe.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">cowpy &quot;Hello Nextflow&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">cowpy "Hello Nextflow"</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">______________________________________________________</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="go">&lt; Hello Nextflow &gt;</span>
@@ -5238,7 +5239,7 @@ It is a Python implementation of the classic <a href="https://en.wikipedia.org/w
 <a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="go">          ||     ||</span>
 </code></pre></div>
 <p>Optionally, you can select a character (or 'cowacter') to use instead of the default cow.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">cowpy &quot;Hello Nextflow&quot; -c tux</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">cowpy "Hello Nextflow" -c tux</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="go">__________________</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="go">&lt; Hello Nextflow &gt;</span>
@@ -5250,7 +5251,7 @@ It is a Python implementation of the classic <a href="https://en.wikipedia.org/w
 <a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="go">      |:_/ |</span>
 <a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="go">      //   \ \</span>
 <a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="go">    (|     | )</span>
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="go">    /&#39;\_   _/`\</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="go">    /'\_   _/`\</span>
 <a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="go">    \___)=(___/</span>
 </code></pre></div>
 </details>
@@ -5293,7 +5294,7 @@ It is a Python implementation of the classic <a href="https://en.wikipedia.org/w
 <a id="__codelineno-8-2" name="__codelineno-8-2"></a>
 <a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="n">workflow</span><span class="w">  </span><span class="o">{</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 <a id="__codelineno-8-8" name="__codelineno-8-8"></a>
@@ -5352,14 +5353,14 @@ For example, we could access the file ID with <code>id</code> or the txt file pa
 <div class="highlight"><span class="filename">examples/map_demo.nf</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1">// Create a simple map</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="kt">def</span><span class="w"> </span><span class="n">my_map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="nl">id:</span><span class="s1">&#39;sampleA&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="s1">&#39;squirrel&#39;</span><span class="o">]</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="kt">def</span><span class="w"> </span><span class="n">my_map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="nl">id:</span><span class="s1">'sampleA'</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="s1">'squirrel'</span><span class="o">]</span>
 <a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
 <a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="c1">// Print the whole map</span>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="n">println</span><span class="w"> </span><span class="s2">&quot;map: ${my_map}&quot;</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="n">println</span><span class="w"> </span><span class="s2">"map: ${my_map}"</span>
 <a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
 <a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="c1">// Access individual values using dot notation</span>
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="n">println</span><span class="w"> </span><span class="s2">&quot;id: ${my_map.id}&quot;</span>
-<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="n">println</span><span class="w"> </span><span class="s2">&quot;character: ${my_map.character}&quot;</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="n">println</span><span class="w"> </span><span class="s2">"id: ${my_map.id}"</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="n">println</span><span class="w"> </span><span class="s2">"character: ${my_map.character}"</span>
 </code></pre></div>
 <p>Even though it doesn't have a proper <code>workflow</code> block, Nextflow can run this as if it were a workflow:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>examples/map_demo.nf
@@ -5386,7 +5387,7 @@ For example, we could access the file ID with <code>id</code> or the txt file pa
 <span class="normal"><a href="#__codelineno-14-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-14-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-14-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-14-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-14-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 </span><a id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="hll"><span class="w">            </span><span class="n">row</span><span class="o">.</span><span class="na">character</span>
@@ -5397,7 +5398,7 @@ For example, we could access the file ID with <code>id</code> or the txt file pa
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-5">5</a></span>
 <span class="normal"><a href="#__codelineno-15-6">6</a></span>
-<span class="normal"><a href="#__codelineno-15-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-15-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
@@ -5454,19 +5455,19 @@ For example, we could access the file ID with <code>id</code> or the txt file pa
 <span class="normal"><a href="#__codelineno-18-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="c1">// Generate ASCII art with cowpy</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-18-3" name="__codelineno-18-3"></a>
-<a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span>
 <a id="__codelineno-18-5" name="__codelineno-18-5"></a>
 <a id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">recording</span>
 </span><a id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="hll"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">character</span>
 </span><a id="__codelineno-18-9" name="__codelineno-18-9"></a>
 <a id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;cowpy-${input_file}&quot;</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"cowpy-${recording}"</span>
 <a id="__codelineno-18-12" name="__codelineno-18-12"></a>
 <a id="__codelineno-18-13" name="__codelineno-18-13"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="s2">    cat ${input_file} | cowpy -c ${character} &gt; cowpy-${input_file}</span>
-<a id="__codelineno-18-16" name="__codelineno-18-16"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="s2">    cat ${recording} | cowpy -c ${character} &gt; cowpy-${recording}</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16"></a><span class="s2">    """</span>
 <a id="__codelineno-18-17" name="__codelineno-18-17"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>As you can see, the process takes two separate inputs: a recording file and a character name.
@@ -5482,7 +5483,7 @@ Importantly, we have values for both, but they are currently bundled inside each
 <span class="normal"><a href="#__codelineno-19-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-19-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-19-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-19-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-19-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">multiMap</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 </span><a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="hll"><span class="w">            </span><span class="nl">file:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span>
@@ -5496,7 +5497,7 @@ Importantly, we have values for both, but they are currently bundled inside each
 <span class="normal"><a href="#__codelineno-20-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-20-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-20-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-20-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-20-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 </span><a id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="hll"><span class="w">            </span><span class="n">row</span><span class="o">.</span><span class="na">character</span>
@@ -5536,11 +5537,11 @@ Importantly, we have values for both, but they are currently bundled inside each
 <span class="normal"><a href="#__codelineno-21-22">22</a></span>
 <span class="normal"><a href="#__codelineno-21-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2"></a>
-<a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/cowpy.nf&#39;</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/cowpy.nf'</span>
 </span><a id="__codelineno-21-4" name="__codelineno-21-4"></a>
 <a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="w">        </span><span class="o">.</span><span class="na">multiMap</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-21-10" name="__codelineno-21-10"></a><span class="w">            </span><span class="nl">file:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span>
@@ -5582,7 +5583,7 @@ Importantly, we have values for both, but they are currently bundled inside each
 <a id="__codelineno-22-2" name="__codelineno-22-2"></a>
 <a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-22-6" name="__codelineno-22-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-22-7" name="__codelineno-22-7"></a><span class="w">        </span><span class="o">.</span><span class="na">multiMap</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-22-8" name="__codelineno-22-8"></a><span class="w">            </span><span class="nl">file:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span>
@@ -5683,7 +5684,7 @@ Importantly, we have values for both, but they are currently bundled inside each
 <a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a><span class="go">       |:_/ |</span>
 <a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a><span class="go">      //   \ \</span>
 <a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a><span class="go">     (|     | )</span>
-<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a><span class="go">    /&#39;\_   _/`\</span>
+<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a><span class="go">    /'\_   _/`\</span>
 <a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a><span class="go">    \___)=(___/</span>
 </code></pre></div>
 </details>
@@ -5716,18 +5717,18 @@ That could get annoying and messy.</p>
 <span class="normal"><a href="#__codelineno-29-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="c1">// Generate ASCII art with cowpy</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-29-3" name="__codelineno-29-3"></a>
-<a id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span>
 <a id="__codelineno-29-5" name="__codelineno-29-5"></a>
 <a id="__codelineno-29-6" name="__codelineno-29-6"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-29-7" name="__codelineno-29-7"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">id</span><span class="o">),</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">character</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">recording</span><span class="o">)</span>
 </span><a id="__codelineno-29-8" name="__codelineno-29-8"></a>
 <a id="__codelineno-29-9" name="__codelineno-29-9"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-29-10" name="__codelineno-29-10"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;cowpy-${recording}&quot;</span>
+<a id="__codelineno-29-10" name="__codelineno-29-10"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"cowpy-${recording}"</span>
 </span><a id="__codelineno-29-11" name="__codelineno-29-11"></a>
 <a id="__codelineno-29-12" name="__codelineno-29-12"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-29-13" name="__codelineno-29-13"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-29-13" name="__codelineno-29-13"></a><span class="w">    </span><span class="s2">"""</span>
 <a id="__codelineno-29-14" name="__codelineno-29-14"></a><span class="hll"><span class="s2">    cat ${recording} | cowpy -c ${character} &gt; cowpy-${recording}</span>
-</span><a id="__codelineno-29-15" name="__codelineno-29-15"></a><span class="s2">    &quot;&quot;&quot;</span>
+</span><a id="__codelineno-29-15" name="__codelineno-29-15"></a><span class="s2">    """</span>
 <a id="__codelineno-29-16" name="__codelineno-29-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5751,19 +5752,19 @@ That could get annoying and messy.</p>
 <span class="normal"><a href="#__codelineno-30-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="c1">// Generate ASCII art with cowpy</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-30-3" name="__codelineno-30-3"></a>
-<a id="__codelineno-30-4" name="__codelineno-30-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span>
 <a id="__codelineno-30-5" name="__codelineno-30-5"></a>
 <a id="__codelineno-30-6" name="__codelineno-30-6"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-30-7" name="__codelineno-30-7"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
+<a id="__codelineno-30-7" name="__codelineno-30-7"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">recording</span>
 </span><a id="__codelineno-30-8" name="__codelineno-30-8"></a><span class="hll"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">character</span>
 </span><a id="__codelineno-30-9" name="__codelineno-30-9"></a>
 <a id="__codelineno-30-10" name="__codelineno-30-10"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-30-11" name="__codelineno-30-11"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;cowpy-${input_file}&quot;</span>
+<a id="__codelineno-30-11" name="__codelineno-30-11"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"cowpy-${recording}"</span>
 </span><a id="__codelineno-30-12" name="__codelineno-30-12"></a>
 <a id="__codelineno-30-13" name="__codelineno-30-13"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-30-14" name="__codelineno-30-14"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-30-15" name="__codelineno-30-15"></a><span class="hll"><span class="s2">    cat ${input_file} | cowpy -c ${character} &gt; cowpy-${input_file}</span>
-</span><a id="__codelineno-30-16" name="__codelineno-30-16"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-30-14" name="__codelineno-30-14"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-30-15" name="__codelineno-30-15"></a><span class="hll"><span class="s2">    cat ${recording} | cowpy -c ${character} &gt; cowpy-${recording}</span>
+</span><a id="__codelineno-30-16" name="__codelineno-30-16"></a><span class="s2">    """</span>
 <a id="__codelineno-30-17" name="__codelineno-30-17"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5779,7 +5780,7 @@ That could get annoying and messy.</p>
 <span class="normal"><a href="#__codelineno-31-6">6</a></span>
 <span class="normal"><a href="#__codelineno-31-7">7</a></span>
 <span class="normal"><a href="#__codelineno-31-8">8</a></span>
-<span class="normal"><a href="#__codelineno-31-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-5" name="__codelineno-31-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-31-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-5" name="__codelineno-31-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-31-6" name="__codelineno-31-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-31-7" name="__codelineno-31-7"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 </span><a id="__codelineno-31-8" name="__codelineno-31-8"></a><span class="hll"><span class="w">            </span><span class="o">[</span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">,</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="o">]</span>
@@ -5792,7 +5793,7 @@ That could get annoying and messy.</p>
 <span class="normal"><a href="#__codelineno-32-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-32-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-32-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-32-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-32-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-32-6" name="__codelineno-32-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">multiMap</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 </span><a id="__codelineno-32-8" name="__codelineno-32-8"></a><span class="hll"><span class="w">            </span><span class="nl">file:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span>
@@ -5816,7 +5817,7 @@ That happens at the level of <code>COWPY</code>'s input interface, where the <co
 <span class="normal"><a href="#__codelineno-33-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-33-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-33-10">10</a></span>
-<span class="normal"><a href="#__codelineno-33-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-5" name="__codelineno-33-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-33-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-5" name="__codelineno-33-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-33-6" name="__codelineno-33-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-33-7" name="__codelineno-33-7"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-33-8" name="__codelineno-33-8"></a><span class="w">            </span><span class="o">[</span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">,</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="o">]</span>
@@ -5832,7 +5833,7 @@ That happens at the level of <code>COWPY</code>'s input interface, where the <co
 <span class="normal"><a href="#__codelineno-34-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-34-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-34-10">10</a></span>
-<span class="normal"><a href="#__codelineno-34-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-5" name="__codelineno-34-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-34-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-5" name="__codelineno-34-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-34-6" name="__codelineno-34-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-34-7" name="__codelineno-34-7"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-34-8" name="__codelineno-34-8"></a><span class="w">            </span><span class="o">[</span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">,</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="o">]</span>
@@ -5898,7 +5899,7 @@ That happens at the level of <code>COWPY</code>'s input interface, where the <co
 <a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a><span class="go">       |:_/ |</span>
 <a id="__codelineno-38-11" name="__codelineno-38-11" href="#__codelineno-38-11"></a><span class="go">      //   \ \</span>
 <a id="__codelineno-38-12" name="__codelineno-38-12" href="#__codelineno-38-12"></a><span class="go">     (|     | )</span>
-<a id="__codelineno-38-13" name="__codelineno-38-13" href="#__codelineno-38-13"></a><span class="go">    /&#39;\_   _/`\</span>
+<a id="__codelineno-38-13" name="__codelineno-38-13" href="#__codelineno-38-13"></a><span class="go">    /'\_   _/`\</span>
 <a id="__codelineno-38-14" name="__codelineno-38-14" href="#__codelineno-38-14"></a><span class="go">    \___)=(___/</span>
 </code></pre></div>
 </details>
@@ -5907,12 +5908,12 @@ But we still had to unpack the original Groovy map to create the input tuple, an
 <div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="nl">input:</span>
 <a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">id</span><span class="o">),</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">character</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">recording</span><span class="o">)</span>
 </code></pre></div>
-<p>If a collaborator uses a differently structured datasheet — with additional columns, or columns in a different order — this process won't work without modification.
+<p>If a collaborator uses a differently structured datasheet (with additional columns, or columns in a different order), this process won't work without modification.
 This makes the process fragile, because its input structure is tied to the exact composition of the datasheet.</p>
 <p>To solve this, we need a way to pass all the metadata as a bundle without hard-coding its exact structure into the process interface.</p>
 <h3 id="15-use-a-meta-map-file-interface">1.5. Use a meta map + file interface<a class="headerlink" href="#15-use-a-meta-map-file-interface" title="Permanent link">&para;</a></h3>
 <p>The solution is to separate two distinct concerns in the channel: the <strong>metadata about a sample</strong>, and the <strong>data file</strong> itself.
-By bundling all metadata into a single map — the "meta map" — we get a consistent two-element tuple regardless of how many metadata columns the datasheet contains:</p>
+By bundling all metadata into a single map (the "meta map"), we get a consistent two-element tuple regardless of how many metadata columns the datasheet contains:</p>
 <div class="highlight"><span class="filename">Syntax example</span><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="nl">input:</span>
 <a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">file</span><span class="o">)</span>
 </code></pre></div>
@@ -5933,7 +5934,7 @@ Processes that accept this structure don't need to know or care how many metadat
 <span class="normal"><a href="#__codelineno-41-12">12</a></span>
 <span class="normal"><a href="#__codelineno-41-13">13</a></span>
 <span class="normal"><a href="#__codelineno-41-14">14</a></span>
-<span class="normal"><a href="#__codelineno-41-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-41-5" name="__codelineno-41-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-41-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-41-5" name="__codelineno-41-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-41-6" name="__codelineno-41-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-41-7" name="__codelineno-41-7"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-41-8" name="__codelineno-41-8"></a><span class="hll"><span class="w">            </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">],</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="o">]</span>
@@ -5956,7 +5957,7 @@ Processes that accept this structure don't need to know or care how many metadat
 <span class="normal"><a href="#__codelineno-42-11">11</a></span>
 <span class="normal"><a href="#__codelineno-42-12">12</a></span>
 <span class="normal"><a href="#__codelineno-42-13">13</a></span>
-<span class="normal"><a href="#__codelineno-42-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-5" name="__codelineno-42-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-42-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-5" name="__codelineno-42-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-42-6" name="__codelineno-42-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-42-7" name="__codelineno-42-7"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-42-8" name="__codelineno-42-8"></a><span class="hll"><span class="w">            </span><span class="o">[</span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">,</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="o">]</span>
@@ -6026,18 +6027,18 @@ Processes that accept this structure don't need to know or care how many metadat
 <span class="normal"><a href="#__codelineno-46-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1"></a><span class="c1">// Generate ASCII art with cowpy</span>
 <a id="__codelineno-46-2" name="__codelineno-46-2"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-46-3" name="__codelineno-46-3"></a>
-<a id="__codelineno-46-4" name="__codelineno-46-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<a id="__codelineno-46-4" name="__codelineno-46-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span>
 <a id="__codelineno-46-5" name="__codelineno-46-5"></a>
 <a id="__codelineno-46-6" name="__codelineno-46-6"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-46-7" name="__codelineno-46-7"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">input_file</span><span class="o">)</span>
+<a id="__codelineno-46-7" name="__codelineno-46-7"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">recording</span><span class="o">)</span>
 </span><a id="__codelineno-46-8" name="__codelineno-46-8"></a>
 <a id="__codelineno-46-9" name="__codelineno-46-9"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-46-10" name="__codelineno-46-10"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;cowpy-${input_file}&quot;</span>
+<a id="__codelineno-46-10" name="__codelineno-46-10"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"cowpy-${recording}"</span>
 </span><a id="__codelineno-46-11" name="__codelineno-46-11"></a>
 <a id="__codelineno-46-12" name="__codelineno-46-12"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-46-13" name="__codelineno-46-13"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-46-14" name="__codelineno-46-14"></a><span class="hll"><span class="s2">    cat ${input_file} | cowpy -c ${meta.character} &gt; cowpy-${input_file}</span>
-</span><a id="__codelineno-46-15" name="__codelineno-46-15"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-46-13" name="__codelineno-46-13"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-46-14" name="__codelineno-46-14"></a><span class="hll"><span class="s2">    cat ${recording} | cowpy -c ${meta.character} &gt; cowpy-${recording}</span>
+</span><a id="__codelineno-46-15" name="__codelineno-46-15"></a><span class="s2">    """</span>
 <a id="__codelineno-46-16" name="__codelineno-46-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -6060,18 +6061,18 @@ Processes that accept this structure don't need to know or care how many metadat
 <span class="normal"><a href="#__codelineno-47-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1"></a><span class="c1">// Generate ASCII art with cowpy</span>
 <a id="__codelineno-47-2" name="__codelineno-47-2"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-47-3" name="__codelineno-47-3"></a>
-<a id="__codelineno-47-4" name="__codelineno-47-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<a id="__codelineno-47-4" name="__codelineno-47-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span>
 <a id="__codelineno-47-5" name="__codelineno-47-5"></a>
 <a id="__codelineno-47-6" name="__codelineno-47-6"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-47-7" name="__codelineno-47-7"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">id</span><span class="o">),</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">character</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">recording</span><span class="o">)</span>
 </span><a id="__codelineno-47-8" name="__codelineno-47-8"></a>
 <a id="__codelineno-47-9" name="__codelineno-47-9"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-47-10" name="__codelineno-47-10"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;cowpy-${recording}&quot;</span>
+<a id="__codelineno-47-10" name="__codelineno-47-10"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"cowpy-${recording}"</span>
 </span><a id="__codelineno-47-11" name="__codelineno-47-11"></a>
 <a id="__codelineno-47-12" name="__codelineno-47-12"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-47-13" name="__codelineno-47-13"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-47-13" name="__codelineno-47-13"></a><span class="w">    </span><span class="s2">"""</span>
 <a id="__codelineno-47-14" name="__codelineno-47-14"></a><span class="hll"><span class="s2">    cat ${recording} | cowpy -c ${character} &gt; cowpy-${recording}</span>
-</span><a id="__codelineno-47-15" name="__codelineno-47-15"></a><span class="s2">    &quot;&quot;&quot;</span>
+</span><a id="__codelineno-47-15" name="__codelineno-47-15"></a><span class="s2">    """</span>
 <a id="__codelineno-47-16" name="__codelineno-47-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -6093,7 +6094,7 @@ Any field in the meta map is accessible the same way.</p>
 <span class="normal"><a href="#__codelineno-48-11">11</a></span>
 <span class="normal"><a href="#__codelineno-48-12">12</a></span>
 <span class="normal"><a href="#__codelineno-48-13">13</a></span>
-<span class="normal"><a href="#__codelineno-48-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-48-5" name="__codelineno-48-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-48-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-48-5" name="__codelineno-48-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-48-6" name="__codelineno-48-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-48-7" name="__codelineno-48-7"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-48-8" name="__codelineno-48-8"></a><span class="w">            </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">],</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="o">]</span>
@@ -6116,7 +6117,7 @@ Any field in the meta map is accessible the same way.</p>
 <span class="normal"><a href="#__codelineno-49-12">12</a></span>
 <span class="normal"><a href="#__codelineno-49-13">13</a></span>
 <span class="normal"><a href="#__codelineno-49-14">14</a></span>
-<span class="normal"><a href="#__codelineno-49-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-49-5" name="__codelineno-49-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-49-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-49-5" name="__codelineno-49-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-49-6" name="__codelineno-49-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-49-7" name="__codelineno-49-7"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-49-8" name="__codelineno-49-8"></a><span class="w">            </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">],</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="o">]</span>
@@ -6186,7 +6187,7 @@ Any field in the meta map is accessible the same way.</p>
 <a id="__codelineno-53-10" name="__codelineno-53-10" href="#__codelineno-53-10"></a><span class="go">       |:_/ |</span>
 <a id="__codelineno-53-11" name="__codelineno-53-11" href="#__codelineno-53-11"></a><span class="go">      //   \ \</span>
 <a id="__codelineno-53-12" name="__codelineno-53-12" href="#__codelineno-53-12"></a><span class="go">     (|     | )</span>
-<a id="__codelineno-53-13" name="__codelineno-53-13" href="#__codelineno-53-13"></a><span class="go">    /&#39;\_   _/`\</span>
+<a id="__codelineno-53-13" name="__codelineno-53-13" href="#__codelineno-53-13"></a><span class="go">    /'\_   _/`\</span>
 <a id="__codelineno-53-14" name="__codelineno-53-14" href="#__codelineno-53-14"></a><span class="go">    \___)=(___/</span>
 </code></pre></div>
 </details>
@@ -6226,7 +6227,7 @@ Given a snippet of text, it outputs a language prediction and a probability scor
 <span class="normal"><a href="#__codelineno-54-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a><span class="c1">// Use langid to predict the language of each input file</span>
 <a id="__codelineno-54-2" name="__codelineno-54-2"></a><span class="n">process</span><span class="w"> </span><span class="n">IDENTIFY_LANGUAGE</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-54-3" name="__codelineno-54-3"></a>
-<a id="__codelineno-54-4" name="__codelineno-54-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/pip_langid:b2269f456a5629ff&#39;</span>
+<a id="__codelineno-54-4" name="__codelineno-54-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">'community.wave.seqera.io/library/pip_langid:b2269f456a5629ff'</span>
 <a id="__codelineno-54-5" name="__codelineno-54-5"></a>
 <a id="__codelineno-54-6" name="__codelineno-54-6"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-54-7" name="__codelineno-54-7"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">file</span><span class="o">)</span>
@@ -6235,9 +6236,9 @@ Given a snippet of text, it outputs a language prediction and a probability scor
 <a id="__codelineno-54-10" name="__codelineno-54-10"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">file</span><span class="o">),</span><span class="w"> </span><span class="n">stdout</span>
 </span><a id="__codelineno-54-11" name="__codelineno-54-11"></a>
 <a id="__codelineno-54-12" name="__codelineno-54-12"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-54-13" name="__codelineno-54-13"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-54-14" name="__codelineno-54-14"></a><span class="s2">    langid &lt; ${file} -l en,de,fr,es,it | sed -E &quot;s/.*\\(&#39;([a-z]+)&#39;.*/\\1/&quot; | tr -d &#39;\\n&#39;</span>
-<a id="__codelineno-54-15" name="__codelineno-54-15"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-54-13" name="__codelineno-54-13"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-54-14" name="__codelineno-54-14"></a><span class="s2">    langid &lt; ${file} -l en,de,fr,es,it | sed -E "s/.*\\('([a-z]+)'.*/\\1/" | tr -d '\\n'</span>
+<a id="__codelineno-54-15" name="__codelineno-54-15"></a><span class="s2">    """</span>
 <a id="__codelineno-54-16" name="__codelineno-54-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>The input definition uses the same <code>tuple val(meta), path(file)</code> structure we just built in Section 1, so <code>ch_datasheet</code> can feed directly into this process without any adaptation.</p>
@@ -6267,12 +6268,12 @@ The <code>sed</code> command strips the probability score and trailing newline, 
 <span class="normal"><a href="#__codelineno-55-17">17</a></span>
 <span class="normal"><a href="#__codelineno-55-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-55-2" name="__codelineno-55-2"></a>
-<a id="__codelineno-55-3" name="__codelineno-55-3"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/cowpy.nf&#39;</span>
-<a id="__codelineno-55-4" name="__codelineno-55-4"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">IDENTIFY_LANGUAGE</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/langid.nf&#39;</span>
+<a id="__codelineno-55-3" name="__codelineno-55-3"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/cowpy.nf'</span>
+<a id="__codelineno-55-4" name="__codelineno-55-4"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">IDENTIFY_LANGUAGE</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/langid.nf'</span>
 </span><a id="__codelineno-55-5" name="__codelineno-55-5"></a>
 <a id="__codelineno-55-6" name="__codelineno-55-6"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-55-7" name="__codelineno-55-7"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-55-8" name="__codelineno-55-8"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<a id="__codelineno-55-8" name="__codelineno-55-8"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-55-9" name="__codelineno-55-9"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-55-10" name="__codelineno-55-10"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-55-11" name="__codelineno-55-11"></a><span class="w">            </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">],</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="o">]</span>
@@ -6300,11 +6301,11 @@ The <code>sed</code> command strips the probability score and trailing newline, 
 <span class="normal"><a href="#__codelineno-56-12">12</a></span>
 <span class="normal"><a href="#__codelineno-56-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-56-2" name="__codelineno-56-2"></a>
-<a id="__codelineno-56-3" name="__codelineno-56-3"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/cowpy.nf&#39;</span>
+<a id="__codelineno-56-3" name="__codelineno-56-3"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/cowpy.nf'</span>
 <a id="__codelineno-56-4" name="__codelineno-56-4"></a>
 <a id="__codelineno-56-5" name="__codelineno-56-5"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-56-6" name="__codelineno-56-6"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-56-7" name="__codelineno-56-7"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<a id="__codelineno-56-7" name="__codelineno-56-7"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-56-8" name="__codelineno-56-8"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-56-9" name="__codelineno-56-9"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-56-10" name="__codelineno-56-10"></a><span class="w">            </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">],</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="o">]</span>
@@ -6402,14 +6403,14 @@ Rather than keeping it as a separate element, let's fold it back into the meta m
 <summary>Creation of the new meta map using the <code>+</code> operator</summary>
 <p><strong>First, you need to know that we can merge the contents of two maps using the Groovy operator <code>+</code>.</strong></p>
 <p>Let's say we have the following maps:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="n">map1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;sampleA&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="s1">&#39;squirrel&#39;</span><span class="o">]</span>
-<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="n">map2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="nl">lang:</span><span class="w"> </span><span class="s1">&#39;fr&#39;</span><span class="o">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="n">map1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">'sampleA'</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="s1">'squirrel'</span><span class="o">]</span>
+<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="n">map2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="nl">lang:</span><span class="w"> </span><span class="s1">'fr'</span><span class="o">]</span>
 </code></pre></div>
 <p>We can merge them like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="n">new_map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">map2</span>
 </code></pre></div>
 <p>The contents of <code>new_map</code> will be:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;sampleA&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="s1">&#39;squirrel&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">lang:</span><span class="w"> </span><span class="s1">&#39;fr&#39;</span><span class="o">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">'sampleA'</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="s1">'squirrel'</span><span class="o">,</span><span class="w"> </span><span class="nl">lang:</span><span class="w"> </span><span class="s1">'fr'</span><span class="o">]</span>
 </code></pre></div>
 <p>Great!</p>
 <p><strong>But what if you need to add a field that's not already part of a map?</strong></p>
@@ -6433,10 +6434,10 @@ Instead, it is held in a variable called <code>lang_id</code>, and you know you 
 </ul>
 <p>The output is a single unnamed map with the same contents as <code>new_map</code> in our example above.
 So we've effectively transformed:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;sampleA&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="s1">&#39;squirrel&#39;</span><span class="o">],</span><span class="w"> </span><span class="s1">&#39;fr&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">'sampleA'</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="s1">'squirrel'</span><span class="o">],</span><span class="w"> </span><span class="s1">'fr'</span>
 </code></pre></div>
 <p>into:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;sampleA&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="s1">&#39;squirrel&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">lang:</span><span class="w"> </span><span class="s1">&#39;fr&#39;</span><span class="o">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">'sampleA'</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="s1">'squirrel'</span><span class="o">,</span><span class="w"> </span><span class="nl">lang:</span><span class="w"> </span><span class="s1">'fr'</span><span class="o">]</span>
 </code></pre></div>
 <p>Hopefully you can see that if we change <code>map1</code> to <code>meta</code>, that's basically all we need in order to add the language predication to our meta map in our workflow.</p>
 <p>Except for one thing!</p>
@@ -6489,7 +6490,7 @@ We've neatly reorganized the output of the process from <code>meta, file, lang_i
 <div class="admonition tip">
 <p class="admonition-title">Removing keys from a meta map</p>
 <p>You can remove a key from a meta map using the Groovy <a href="https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)"><code>subMap</code></a> method, which returns a new map containing only the keys you specify:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;character&#39;</span><span class="o">])</span><span class="w">  </span><span class="c1">// returns a map with only &#39;id&#39; and &#39;character&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'character'</span><span class="o">])</span><span class="w">  </span><span class="c1">// returns a map with only 'id' and 'character'</span>
 </code></pre></div>
 <p>This is useful when a downstream process or module does not need all the fields that have accumulated in the meta map.</p>
 </div>
@@ -6548,12 +6549,12 @@ Adding a <code>lang_group</code> field will make that classification available d
 <a id="__codelineno-73-19" name="__codelineno-73-19"></a><span class="w">        </span><span class="o">}</span>
 <a id="__codelineno-73-20" name="__codelineno-73-20"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span>
 </span><a id="__codelineno-73-21" name="__codelineno-73-21"></a><span class="hll">
-</span><a id="__codelineno-73-22" name="__codelineno-73-22"></a><span class="hll"><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;unknown&quot;</span>
-</span><a id="__codelineno-73-23" name="__codelineno-73-23"></a><span class="hll"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s2">&quot;de&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s1">&#39;en&#39;</span><span class="o">))</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-73-24" name="__codelineno-73-24"></a><span class="hll"><span class="w">                </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;germanic&quot;</span>
+</span><a id="__codelineno-73-22" name="__codelineno-73-22"></a><span class="hll"><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"unknown"</span>
+</span><a id="__codelineno-73-23" name="__codelineno-73-23"></a><span class="hll"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s2">"de"</span><span class="o">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s1">'en'</span><span class="o">))</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-73-24" name="__codelineno-73-24"></a><span class="hll"><span class="w">                </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"germanic"</span>
 </span><a id="__codelineno-73-25" name="__codelineno-73-25"></a><span class="hll"><span class="w">            </span><span class="o">}</span>
-</span><a id="__codelineno-73-26" name="__codelineno-73-26"></a><span class="hll"><span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;fr&quot;</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;es&quot;</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;it&quot;</span><span class="o">])</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-73-27" name="__codelineno-73-27"></a><span class="hll"><span class="w">                </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;romance&quot;</span>
+</span><a id="__codelineno-73-26" name="__codelineno-73-26"></a><span class="hll"><span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s2">"fr"</span><span class="o">,</span><span class="w"> </span><span class="s2">"es"</span><span class="o">,</span><span class="w"> </span><span class="s2">"it"</span><span class="o">])</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-73-27" name="__codelineno-73-27"></a><span class="hll"><span class="w">                </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"romance"</span>
 </span><a id="__codelineno-73-28" name="__codelineno-73-28"></a><span class="hll"><span class="w">            </span><span class="o">}</span>
 </span><a id="__codelineno-73-29" name="__codelineno-73-29"></a><span class="hll">
 </span><a id="__codelineno-73-30" name="__codelineno-73-30"></a><span class="hll"><span class="w">            </span><span class="o">[</span><span class="n">meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">lang_group:</span><span class="w"> </span><span class="n">lang_group</span><span class="o">],</span><span class="w"> </span><span class="n">file</span><span class="o">]</span>
@@ -6627,9 +6628,9 @@ Adding a <code>lang_group</code> field will make that classification available d
 The channel structure is still <code>[meta, file]</code>.</p>
 <h3 id="24-use-metadata-to-name-and-organize-outputs">2.4. Use metadata to name and organize outputs<a class="headerlink" href="#24-use-metadata-to-name-and-organize-outputs" title="Permanent link">&para;</a></h3>
 <p>With <code>lang</code> and <code>lang_group</code> now available in the meta map, we can use them to add a language code to the output file names and organize them into subdirectories by language family.</p>
-<p>This requires three changes: updating the <code>COWPY</code> process to rename its output and include <code>meta</code> in what it emits, updating the <code>COWPY</code> call to run on <code>ch_languages</code>, and updating the output block to specify the subdirectory path.</p>
+<p>This requires three changes: updating the <code>COWPY</code> process to include <code>meta</code> in what it emits, updating the <code>COWPY</code> call to run on <code>ch_languages</code>, and updating the output block to route each file into a language-group subdirectory and rename it using the detected language code.</p>
 <h4 id="241-update-the-cowpy-process">2.4.1. Update the <code>COWPY</code> process<a class="headerlink" href="#241-update-the-cowpy-process" title="Permanent link">&para;</a></h4>
-<p>Rename the output file using the language code from the meta map, and add <code>meta</code> to the output so the output block can access <code>lang_group</code> for subdirectory routing:</p>
+<p>Add <code>meta</code> to the output so the output block can access <code>lang</code> and <code>lang_group</code> for routing and renaming:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">After</label><label for="__tabbed_14_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -6640,12 +6641,12 @@ The channel structure is still <code>[meta, file]</code>.</p>
 <span class="normal"><a href="#__codelineno-77-13">13</a></span>
 <span class="normal"><a href="#__codelineno-77-14">14</a></span>
 <span class="normal"><a href="#__codelineno-77-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-77-9" name="__codelineno-77-9"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-77-10" name="__codelineno-77-10"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;${meta.lang}-${input_file}&quot;</span><span class="o">)</span>
+<a id="__codelineno-77-10" name="__codelineno-77-10"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"cowpy-${recording}"</span><span class="o">)</span>
 </span><a id="__codelineno-77-11" name="__codelineno-77-11"></a>
 <a id="__codelineno-77-12" name="__codelineno-77-12"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-77-13" name="__codelineno-77-13"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-77-14" name="__codelineno-77-14"></a><span class="hll"><span class="s2">    cat ${input_file} | cowpy -c ${meta.character} &gt; ${meta.lang}-${input_file}</span>
-</span><a id="__codelineno-77-15" name="__codelineno-77-15"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-77-13" name="__codelineno-77-13"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-77-14" name="__codelineno-77-14"></a><span class="s2">    cat ${recording} | cowpy -c ${meta.character} &gt; cowpy-${recording}</span>
+<a id="__codelineno-77-15" name="__codelineno-77-15"></a><span class="s2">    """</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -6656,17 +6657,18 @@ The channel structure is still <code>[meta, file]</code>.</p>
 <span class="normal"><a href="#__codelineno-78-13">13</a></span>
 <span class="normal"><a href="#__codelineno-78-14">14</a></span>
 <span class="normal"><a href="#__codelineno-78-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-78-9" name="__codelineno-78-9"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-78-10" name="__codelineno-78-10"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;cowpy-${input_file}&quot;</span>
+<a id="__codelineno-78-10" name="__codelineno-78-10"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"cowpy-${recording}"</span>
 </span><a id="__codelineno-78-11" name="__codelineno-78-11"></a>
 <a id="__codelineno-78-12" name="__codelineno-78-12"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-78-13" name="__codelineno-78-13"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-78-14" name="__codelineno-78-14"></a><span class="hll"><span class="s2">    cat ${input_file} | cowpy -c ${meta.character} &gt; cowpy-${input_file}</span>
-</span><a id="__codelineno-78-15" name="__codelineno-78-15"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-78-13" name="__codelineno-78-13"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-78-14" name="__codelineno-78-14"></a><span class="s2">    cat ${recording} | cowpy -c ${meta.character} &gt; cowpy-${recording}</span>
+<a id="__codelineno-78-15" name="__codelineno-78-15"></a><span class="s2">    """</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
-<p>This shows how we can take advantage of other metadata fields to customize the behavior of a process, without having to modify the input definition at all.</p>
+<p>This is a minimal process-level change: <code>COWPY</code> doesn't need to know that <code>lang</code> or <code>lang_group</code> exist, only that it should carry <code>meta</code> along with its output.
+Routing and renaming based on those fields both happen downstream, in the output block.</p>
 <h4 id="242-update-the-cowpy-call-to-run-on-ch_languages">2.4.2. Update the <code>COWPY</code> call to run on <code>ch_languages</code><a class="headerlink" href="#242-update-the-cowpy-call-to-run-on-ch_languages" title="Permanent link">&para;</a></h4>
 <p>Replace <code>COWPY(ch_datasheet)</code> with <code>COWPY(ch_languages)</code>:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">After</label><label for="__tabbed_15_2">Before</label></div>
@@ -6711,7 +6713,7 @@ The channel structure is still <code>[meta, file]</code>.</p>
 </div>
 <p>We also remove the <code>ch_languages.view()</code> line since we don't need to inspect channel contents anymore.</p>
 <h4 id="243-update-the-output-block">2.4.3. Update the output block<a class="headerlink" href="#243-update-the-output-block" title="Permanent link">&para;</a></h4>
-<p>Add a <code>path</code> closure to the <code>output {}</code> block to route each file into its language group subdirectory:</p>
+<p>Add a <code>path</code> closure to the <code>output {}</code> block that uses the <a href="https://www.nextflow.io/docs/latest/workflow.html#dynamic-publish-path"><code>&gt;&gt;</code> operator</a> to publish each file to an explicit target: its language-group subdirectory, under a name prefixed with its detected language:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">After</label><label for="__tabbed_16_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -6719,11 +6721,15 @@ The channel structure is still <code>[meta, file]</code>.</p>
 <span class="normal"><a href="#__codelineno-81-41">41</a></span>
 <span class="normal"><a href="#__codelineno-81-42">42</a></span>
 <span class="normal"><a href="#__codelineno-81-43">43</a></span>
-<span class="normal"><a href="#__codelineno-81-44">44</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-81-40" name="__codelineno-81-40"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-81-44">44</a></span>
+<span class="normal"><a href="#__codelineno-81-45">45</a></span>
+<span class="normal"><a href="#__codelineno-81-46">46</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-81-40" name="__codelineno-81-40"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-81-41" name="__codelineno-81-41"></a><span class="w">    </span><span class="n">cowpy_art</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-81-42" name="__codelineno-81-42"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">lang_group</span><span class="w"> </span><span class="o">}</span>
-</span><a id="__codelineno-81-43" name="__codelineno-81-43"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-81-44" name="__codelineno-81-44"></a><span class="o">}</span>
+<a id="__codelineno-81-42" name="__codelineno-81-42"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span>
+</span><a id="__codelineno-81-43" name="__codelineno-81-43"></a><span class="hll"><span class="w">            </span><span class="n">file</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="s2">"${meta.lang_group}/${meta.lang}-${file.name}"</span>
+</span><a id="__codelineno-81-44" name="__codelineno-81-44"></a><span class="hll"><span class="w">        </span><span class="o">}</span>
+</span><a id="__codelineno-81-45" name="__codelineno-81-45"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-81-46" name="__codelineno-81-46"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -6738,7 +6744,7 @@ The channel structure is still <code>[meta, file]</code>.</p>
 </div>
 </div>
 </div>
-<p>This shows how we can use metadata to organize outputs with great flexibility.</p>
+<p>This shows how we can use metadata to both organize and rename outputs, entirely from the output block, without changing the process itself.</p>
 <h4 id="244-run-the-full-pipeline">2.4.4. Run the full pipeline<a class="headerlink" href="#244-run-the-full-pipeline" title="Permanent link">&para;</a></h4>
 <p>Delete the previous results and run the full pipeline:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-83-1" name="__codelineno-83-1" href="#__codelineno-83-1"></a>rm<span class="w"> </span>-r<span class="w"> </span>results
@@ -6759,30 +6765,30 @@ The channel structure is still <code>[meta, file]</code>.</p>
 <a id="__codelineno-84-11" name="__codelineno-84-11" href="#__codelineno-84-11"></a><span class="go">  /workspaces/training/side-quests/metadata/results</span>
 <a id="__codelineno-84-12" name="__codelineno-84-12" href="#__codelineno-84-12"></a>
 <a id="__codelineno-84-13" name="__codelineno-84-13" href="#__codelineno-84-13"></a><span class="go">  cowpy_art:</span>
-<a id="__codelineno-84-14" name="__codelineno-84-14" href="#__codelineno-84-14"></a><span class="go">    - [{id: sampleB, character: tux, lang: de, lang_group: germanic}, germanic/de-guten_tag.txt]</span>
-<a id="__codelineno-84-15" name="__codelineno-84-15" href="#__codelineno-84-15"></a><span class="go">    - [{id: sampleG, character: turtle, lang: it, lang_group: romance}, romance/it-ciao.txt]</span>
-<a id="__codelineno-84-16" name="__codelineno-84-16" href="#__codelineno-84-16"></a><span class="go">    - [{id: sampleC, character: sheep, lang: de, lang_group: germanic}, germanic/de-hallo.txt]</span>
-<a id="__codelineno-84-17" name="__codelineno-84-17" href="#__codelineno-84-17"></a><span class="go">    - [{id: sampleE, character: stegosaurus, lang: es, lang_group: romance}, romance/es-hola.txt]</span>
-<a id="__codelineno-84-18" name="__codelineno-84-18" href="#__codelineno-84-18"></a><span class="go">    - [{id: sampleA, character: squirrel, lang: fr, lang_group: romance}, romance/fr-bonjour.txt]</span>
-<a id="__codelineno-84-19" name="__codelineno-84-19" href="#__codelineno-84-19"></a><span class="go">    - [{id: sampleD, character: turkey, lang: en, lang_group: germanic}, germanic/en-hello.txt]</span>
-<a id="__codelineno-84-20" name="__codelineno-84-20" href="#__codelineno-84-20"></a><span class="go">    - [{id: sampleF, character: moose, lang: fr, lang_group: romance}, romance/fr-salut.txt]</span>
+<a id="__codelineno-84-14" name="__codelineno-84-14" href="#__codelineno-84-14"></a><span class="go">    - [{id: sampleB, character: tux, lang: de, lang_group: germanic}, germanic/de-cowpy-guten_tag.txt]</span>
+<a id="__codelineno-84-15" name="__codelineno-84-15" href="#__codelineno-84-15"></a><span class="go">    - [{id: sampleG, character: turtle, lang: it, lang_group: romance}, romance/it-cowpy-ciao.txt]</span>
+<a id="__codelineno-84-16" name="__codelineno-84-16" href="#__codelineno-84-16"></a><span class="go">    - [{id: sampleC, character: sheep, lang: de, lang_group: germanic}, germanic/de-cowpy-hallo.txt]</span>
+<a id="__codelineno-84-17" name="__codelineno-84-17" href="#__codelineno-84-17"></a><span class="go">    - [{id: sampleE, character: stegosaurus, lang: es, lang_group: romance}, romance/es-cowpy-hola.txt]</span>
+<a id="__codelineno-84-18" name="__codelineno-84-18" href="#__codelineno-84-18"></a><span class="go">    - [{id: sampleA, character: squirrel, lang: fr, lang_group: romance}, romance/fr-cowpy-bonjour.txt]</span>
+<a id="__codelineno-84-19" name="__codelineno-84-19" href="#__codelineno-84-19"></a><span class="go">    - [{id: sampleD, character: turkey, lang: en, lang_group: germanic}, germanic/en-cowpy-hello.txt]</span>
+<a id="__codelineno-84-20" name="__codelineno-84-20" href="#__codelineno-84-20"></a><span class="go">    - [{id: sampleF, character: moose, lang: fr, lang_group: romance}, romance/fr-cowpy-salut.txt]</span>
 </code></pre></div>
 </details>
 <p>The results directory is now organized by language family, with each file named after its detected language:</p>
 <div class="highlight"><span class="filename">Results directory contents</span><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a><span class="go">results/</span>
 <a id="__codelineno-85-2" name="__codelineno-85-2" href="#__codelineno-85-2"></a><span class="go">├── germanic</span>
-<a id="__codelineno-85-3" name="__codelineno-85-3" href="#__codelineno-85-3"></a><span class="go">│   ├── de-guten_tag.txt</span>
-<a id="__codelineno-85-4" name="__codelineno-85-4" href="#__codelineno-85-4"></a><span class="go">│   ├── de-hallo.txt</span>
-<a id="__codelineno-85-5" name="__codelineno-85-5" href="#__codelineno-85-5"></a><span class="go">│   └── en-hello.txt</span>
+<a id="__codelineno-85-3" name="__codelineno-85-3" href="#__codelineno-85-3"></a><span class="go">│   ├── de-cowpy-guten_tag.txt</span>
+<a id="__codelineno-85-4" name="__codelineno-85-4" href="#__codelineno-85-4"></a><span class="go">│   ├── de-cowpy-hallo.txt</span>
+<a id="__codelineno-85-5" name="__codelineno-85-5" href="#__codelineno-85-5"></a><span class="go">│   └── en-cowpy-hello.txt</span>
 <a id="__codelineno-85-6" name="__codelineno-85-6" href="#__codelineno-85-6"></a><span class="go">└── romance</span>
-<a id="__codelineno-85-7" name="__codelineno-85-7" href="#__codelineno-85-7"></a><span class="go">    ├── es-hola.txt</span>
-<a id="__codelineno-85-8" name="__codelineno-85-8" href="#__codelineno-85-8"></a><span class="go">    ├── fr-bonjour.txt</span>
-<a id="__codelineno-85-9" name="__codelineno-85-9" href="#__codelineno-85-9"></a><span class="go">    ├── fr-salut.txt</span>
-<a id="__codelineno-85-10" name="__codelineno-85-10" href="#__codelineno-85-10"></a><span class="go">    └── it-ciao.txt</span>
+<a id="__codelineno-85-7" name="__codelineno-85-7" href="#__codelineno-85-7"></a><span class="go">    ├── es-cowpy-hola.txt</span>
+<a id="__codelineno-85-8" name="__codelineno-85-8" href="#__codelineno-85-8"></a><span class="go">    ├── fr-cowpy-bonjour.txt</span>
+<a id="__codelineno-85-9" name="__codelineno-85-9" href="#__codelineno-85-9"></a><span class="go">    ├── fr-cowpy-salut.txt</span>
+<a id="__codelineno-85-10" name="__codelineno-85-10" href="#__codelineno-85-10"></a><span class="go">    └── it-cowpy-ciao.txt</span>
 </code></pre></div>
-<p>The <code>path</code> closure in the <code>output {}</code> block receives each <code>[meta, file]</code> tuple and returns <code>meta.lang_group</code> as the subdirectory name.
-The file name itself comes from what the process outputs (<code class="highlight"><span class="s2">&quot;${meta.lang}-${input_file}&quot;</span></code>).
-Both pieces of metadata (language code and language group) come from the enriched meta map built up in this section.</p>
+<p>The <code>path</code> closure in the <code>output {}</code> block receives each <code>[meta, file]</code> tuple.
+The <code>&gt;&gt;</code> operator publishes <code>file</code> to the target <code class="highlight"><span class="s2">"${meta.lang_group}/${meta.lang}-${file.name}"</span></code>, combining the subdirectory (<code>lang_group</code>) and the renamed file (prefixed with <code>lang</code>) in a single expression.
+Both pieces of metadata come from the enriched meta map built up in this section, and <code>COWPY</code> itself never needs to know either exists.</p>
 <h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
 <p>In this section, you've learned:</p>
 <ul>
@@ -6819,7 +6825,7 @@ When Nextflow substitutes <code class="highlight"><span class="n">$</span><span 
 <a id="__codelineno-87-6" name="__codelineno-87-6" href="#__codelineno-87-6"></a><span class="go">[c1/c5dd4f] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔</span>
 <a id="__codelineno-87-7" name="__codelineno-87-7" href="#__codelineno-87-7"></a><span class="hll"><span class="go">[d3/b7c415] COWPY (3)             | 5 of 7</span>
 </span><a id="__codelineno-87-8" name="__codelineno-87-8" href="#__codelineno-87-8"></a><span class="go">WARN: Killing running tasks (1)</span>
-<a id="__codelineno-87-9" name="__codelineno-87-9" href="#__codelineno-87-9"></a><span class="go">ERROR ~ Error executing process &gt; &#39;COWPY (7)&#39;</span>
+<a id="__codelineno-87-9" name="__codelineno-87-9" href="#__codelineno-87-9"></a><span class="go">ERROR ~ Error executing process &gt; 'COWPY (7)'</span>
 <a id="__codelineno-87-10" name="__codelineno-87-10" href="#__codelineno-87-10"></a>
 <a id="__codelineno-87-11" name="__codelineno-87-11" href="#__codelineno-87-11"></a><span class="go">Caused by:</span>
 <a id="__codelineno-87-12" name="__codelineno-87-12" href="#__codelineno-87-12"></a><span class="hll"><span class="go">  Process `COWPY (7)` terminated with an error exit status (2)</span>
@@ -6827,7 +6833,7 @@ When Nextflow substitutes <code class="highlight"><span class="n">$</span><span 
 <a id="__codelineno-87-14" name="__codelineno-87-14" href="#__codelineno-87-14"></a>
 <a id="__codelineno-87-15" name="__codelineno-87-15" href="#__codelineno-87-15"></a><span class="go">Command executed:</span>
 <a id="__codelineno-87-16" name="__codelineno-87-16" href="#__codelineno-87-16"></a>
-<a id="__codelineno-87-17" name="__codelineno-87-17" href="#__codelineno-87-17"></a><span class="hll"><span class="go">  cat bonjour.txt | cowpy -c  &gt; fr-bonjour.txt</span>
+<a id="__codelineno-87-17" name="__codelineno-87-17" href="#__codelineno-87-17"></a><span class="hll"><span class="go">  cat bonjour.txt | cowpy -c  &gt; cowpy-bonjour.txt</span>
 </span><a id="__codelineno-87-18" name="__codelineno-87-18" href="#__codelineno-87-18"></a>
 <a id="__codelineno-87-19" name="__codelineno-87-19" href="#__codelineno-87-19"></a><span class="go">Command exit status:</span>
 <a id="__codelineno-87-20" name="__codelineno-87-20" href="#__codelineno-87-20"></a><span class="go">  2</span>
@@ -6847,9 +6853,9 @@ When Nextflow substitutes <code class="highlight"><span class="n">$</span><span 
 <a id="__codelineno-87-34" name="__codelineno-87-34" href="#__codelineno-87-34"></a><span class="go">Container:</span>
 <a id="__codelineno-87-35" name="__codelineno-87-35" href="#__codelineno-87-35"></a><span class="go">  community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273</span>
 <a id="__codelineno-87-36" name="__codelineno-87-36" href="#__codelineno-87-36"></a>
-<a id="__codelineno-87-37" name="__codelineno-87-37" href="#__codelineno-87-37"></a><span class="go">Tip: you can try to figure out what&#39;s wrong by changing to the process work dir and showing the script file named `.command.sh`</span>
+<a id="__codelineno-87-37" name="__codelineno-87-37" href="#__codelineno-87-37"></a><span class="go">Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`</span>
 <a id="__codelineno-87-38" name="__codelineno-87-38" href="#__codelineno-87-38"></a>
-<a id="__codelineno-87-39" name="__codelineno-87-39" href="#__codelineno-87-39"></a><span class="go">-- Check &#39;.nextflow.log&#39; file for details</span>
+<a id="__codelineno-87-39" name="__codelineno-87-39" href="#__codelineno-87-39"></a><span class="go">-- Check '.nextflow.log' file for details</span>
 </code></pre></div>
 </details>
 <p>The error message (<code>expected one argument</code>) points to the empty <code>-c</code> flag.
@@ -6876,7 +6882,7 @@ When the process script evaluates <code class="highlight"><span class="n">$</spa
 <a id="__codelineno-89-6" name="__codelineno-89-6" href="#__codelineno-89-6"></a><span class="go">[61/91663a] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔</span>
 <a id="__codelineno-89-7" name="__codelineno-89-7" href="#__codelineno-89-7"></a><span class="hll"><span class="go">[0e/99bfb0] COWPY (7)             | 0 of 7</span>
 </span><a id="__codelineno-89-8" name="__codelineno-89-8" href="#__codelineno-89-8"></a><span class="go">WARN: Killing running tasks (5)</span>
-<a id="__codelineno-89-9" name="__codelineno-89-9" href="#__codelineno-89-9"></a><span class="go">ERROR ~ Error executing process &gt; &#39;COWPY (3)&#39;</span>
+<a id="__codelineno-89-9" name="__codelineno-89-9" href="#__codelineno-89-9"></a><span class="go">ERROR ~ Error executing process &gt; 'COWPY (3)'</span>
 <a id="__codelineno-89-10" name="__codelineno-89-10" href="#__codelineno-89-10"></a>
 <a id="__codelineno-89-11" name="__codelineno-89-11" href="#__codelineno-89-11"></a><span class="go">Caused by:</span>
 <a id="__codelineno-89-12" name="__codelineno-89-12" href="#__codelineno-89-12"></a><span class="hll"><span class="go">  Process `COWPY (3)` terminated with an error exit status (1)</span>
@@ -6884,7 +6890,7 @@ When the process script evaluates <code class="highlight"><span class="n">$</spa
 <a id="__codelineno-89-14" name="__codelineno-89-14" href="#__codelineno-89-14"></a>
 <a id="__codelineno-89-15" name="__codelineno-89-15" href="#__codelineno-89-15"></a><span class="go">Command executed:</span>
 <a id="__codelineno-89-16" name="__codelineno-89-16" href="#__codelineno-89-16"></a>
-<a id="__codelineno-89-17" name="__codelineno-89-17" href="#__codelineno-89-17"></a><span class="hll"><span class="go">  cat hola.txt | cowpy -c null &gt; es-hola.txt</span>
+<a id="__codelineno-89-17" name="__codelineno-89-17" href="#__codelineno-89-17"></a><span class="hll"><span class="go">  cat hola.txt | cowpy -c null &gt; cowpy-hola.txt</span>
 </span><a id="__codelineno-89-18" name="__codelineno-89-18" href="#__codelineno-89-18"></a>
 <a id="__codelineno-89-19" name="__codelineno-89-19" href="#__codelineno-89-19"></a><span class="go">Command exit status:</span>
 <a id="__codelineno-89-20" name="__codelineno-89-20" href="#__codelineno-89-20"></a><span class="go">  1</span>
@@ -6894,10 +6900,10 @@ When the process script evaluates <code class="highlight"><span class="n">$</spa
 <a id="__codelineno-89-24" name="__codelineno-89-24" href="#__codelineno-89-24"></a>
 <a id="__codelineno-89-25" name="__codelineno-89-25" href="#__codelineno-89-25"></a><span class="go">Command error:</span>
 <a id="__codelineno-89-26" name="__codelineno-89-26" href="#__codelineno-89-26"></a><span class="go">  Traceback (most recent call last):</span>
-<a id="__codelineno-89-27" name="__codelineno-89-27" href="#__codelineno-89-27"></a><span class="go">    File &quot;/opt/conda/bin/cowpy&quot;, line 10, in &lt;module&gt;</span>
+<a id="__codelineno-89-27" name="__codelineno-89-27" href="#__codelineno-89-27"></a><span class="go">    File "/opt/conda/bin/cowpy", line 10, in &lt;module&gt;</span>
 <a id="__codelineno-89-28" name="__codelineno-89-28" href="#__codelineno-89-28"></a><span class="go">      sys.exit(main())</span>
 <a id="__codelineno-89-29" name="__codelineno-89-29" href="#__codelineno-89-29"></a><span class="go">              ~~~~^^</span>
-<a id="__codelineno-89-30" name="__codelineno-89-30" href="#__codelineno-89-30"></a><span class="go">    File &quot;/opt/conda/lib/python3.13/site-packages/cowpy/cow.py&quot;, line 1215, in main</span>
+<a id="__codelineno-89-30" name="__codelineno-89-30" href="#__codelineno-89-30"></a><span class="go">    File "/opt/conda/lib/python3.13/site-packages/cowpy/cow.py", line 1215, in main</span>
 <a id="__codelineno-89-31" name="__codelineno-89-31" href="#__codelineno-89-31"></a><span class="go">      print(cow(eyes=args.eyes,</span>
 <a id="__codelineno-89-32" name="__codelineno-89-32" href="#__codelineno-89-32"></a><span class="go">            ~~~^^^^^^^^^^^^^^^^</span>
 <a id="__codelineno-89-33" name="__codelineno-89-33" href="#__codelineno-89-33"></a><span class="go">            tongue=args.tongue,</span>
@@ -6906,7 +6912,7 @@ When the process script evaluates <code class="highlight"><span class="n">$</spa
 <a id="__codelineno-89-36" name="__codelineno-89-36" href="#__codelineno-89-36"></a><span class="go">            ^^^^^^^^^^^^^^^^^^^^^^</span>
 <a id="__codelineno-89-37" name="__codelineno-89-37" href="#__codelineno-89-37"></a><span class="go">                ).milk(msg)</span>
 <a id="__codelineno-89-38" name="__codelineno-89-38" href="#__codelineno-89-38"></a><span class="go">                ^</span>
-<a id="__codelineno-89-39" name="__codelineno-89-39" href="#__codelineno-89-39"></a><span class="go">  TypeError: &#39;str&#39; object is not callable</span>
+<a id="__codelineno-89-39" name="__codelineno-89-39" href="#__codelineno-89-39"></a><span class="go">  TypeError: 'str' object is not callable</span>
 <a id="__codelineno-89-40" name="__codelineno-89-40" href="#__codelineno-89-40"></a>
 <a id="__codelineno-89-41" name="__codelineno-89-41" href="#__codelineno-89-41"></a><span class="go">Work dir:</span>
 <a id="__codelineno-89-42" name="__codelineno-89-42" href="#__codelineno-89-42"></a><span class="go">  /workspaces/training/side-quests/metadata/work/52/80c08666f6732690bce00f04993489</span>
@@ -6916,7 +6922,7 @@ When the process script evaluates <code class="highlight"><span class="n">$</spa
 <a id="__codelineno-89-46" name="__codelineno-89-46" href="#__codelineno-89-46"></a>
 <a id="__codelineno-89-47" name="__codelineno-89-47" href="#__codelineno-89-47"></a><span class="go">Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`</span>
 <a id="__codelineno-89-48" name="__codelineno-89-48" href="#__codelineno-89-48"></a>
-<a id="__codelineno-89-49" name="__codelineno-89-49" href="#__codelineno-89-49"></a><span class="go">-- Check &#39;.nextflow.log&#39; file for details</span>
+<a id="__codelineno-89-49" name="__codelineno-89-49" href="#__codelineno-89-49"></a><span class="go">-- Check '.nextflow.log' file for details</span>
 </code></pre></div>
 </details>
 <p>The <code>cowpy -c null</code> in the executed command is the diagnostic clue.</p>
@@ -6932,7 +6938,7 @@ The <a href="../../hello_nf-core/05_input_validation/">Hello nf-core</a> trainin
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/cowpy.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-90-6">6</a></span>
 <span class="normal"><a href="#__codelineno-90-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-90-6" name="__codelineno-90-6"></a><span class="nl">input:</span>
-<a id="__codelineno-90-7" name="__codelineno-90-7"></a><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">character</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">input_file</span><span class="o">)</span>
+<a id="__codelineno-90-7" name="__codelineno-90-7"></a><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">character</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">recording</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -6967,7 +6973,7 @@ If the field is absent, the workflow fails clearly at the channel level before t
 <ol>
 <li>
 <p><strong>Reading and structuring metadata:</strong> Parse a CSV datasheet and create a meta map.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-92-1" name="__codelineno-92-1" href="#__codelineno-92-1"></a><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;datasheet.csv&#39;</span><span class="o">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-92-1" name="__codelineno-92-1" href="#__codelineno-92-1"></a><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'datasheet.csv'</span><span class="o">)</span>
 <a id="__codelineno-92-2" name="__codelineno-92-2" href="#__codelineno-92-2"></a><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-92-3" name="__codelineno-92-3" href="#__codelineno-92-3"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-92-4" name="__codelineno-92-4" href="#__codelineno-92-4"></a><span class="w">        </span><span class="o">[</span><span class="w"> </span><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">],</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="w"> </span><span class="o">]</span>
@@ -6983,25 +6989,27 @@ If the field is absent, the workflow fails clearly at the channel level before t
 <a id="__codelineno-93-5" name="__codelineno-93-5" href="#__codelineno-93-5"></a>
 <a id="__codelineno-93-6" name="__codelineno-93-6" href="#__codelineno-93-6"></a><span class="c1">// From conditional logic</span>
 <a id="__codelineno-93-7" name="__codelineno-93-7" href="#__codelineno-93-7"></a><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-93-8" name="__codelineno-93-8" href="#__codelineno-93-8"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;unknown&quot;</span>
-<a id="__codelineno-93-9" name="__codelineno-93-9" href="#__codelineno-93-9"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;de&quot;</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;en&quot;</span><span class="o">])</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;germanic&quot;</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-93-10" name="__codelineno-93-10" href="#__codelineno-93-10"></a><span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;fr&quot;</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;es&quot;</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;it&quot;</span><span class="o">])</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;romance&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-93-8" name="__codelineno-93-8" href="#__codelineno-93-8"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"unknown"</span>
+<a id="__codelineno-93-9" name="__codelineno-93-9" href="#__codelineno-93-9"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s2">"de"</span><span class="o">,</span><span class="w"> </span><span class="s2">"en"</span><span class="o">])</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"germanic"</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-93-10" name="__codelineno-93-10" href="#__codelineno-93-10"></a><span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s2">"fr"</span><span class="o">,</span><span class="w"> </span><span class="s2">"es"</span><span class="o">,</span><span class="w"> </span><span class="s2">"it"</span><span class="o">])</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"romance"</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-93-11" name="__codelineno-93-11" href="#__codelineno-93-11"></a><span class="w">    </span><span class="o">[</span><span class="w"> </span><span class="n">meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">lang_group:</span><span class="w"> </span><span class="n">lang_group</span><span class="o">],</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">]</span>
 <a id="__codelineno-93-12" name="__codelineno-93-12" href="#__codelineno-93-12"></a><span class="o">}</span>
 </code></pre></div>
 </li>
 <li>
 <p><strong>Using metadata inside a process:</strong> Access any field via dot notation in the script block.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a><span class="n">cat</span><span class="w"> </span><span class="n">$</span><span class="o">{</span><span class="n">input_file</span><span class="o">}</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">cowpy</span><span class="w"> </span><span class="o">-</span><span class="n">c</span><span class="w"> </span><span class="n">$</span><span class="o">{</span><span class="n">meta</span><span class="o">.</span><span class="na">character</span><span class="o">}</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">$</span><span class="o">{</span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="o">}-</span><span class="n">$</span><span class="o">{</span><span class="n">input_file</span><span class="o">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a><span class="n">cat</span><span class="w"> </span><span class="n">$</span><span class="o">{</span><span class="n">recording</span><span class="o">}</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">cowpy</span><span class="w"> </span><span class="o">-</span><span class="n">c</span><span class="w"> </span><span class="n">$</span><span class="o">{</span><span class="n">meta</span><span class="o">.</span><span class="na">character</span><span class="o">}</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">cowpy</span><span class="o">-</span><span class="n">$</span><span class="o">{</span><span class="n">recording</span><span class="o">}</span>
 </code></pre></div>
 </li>
 <li>
-<p><strong>Organizing outputs by metadata value:</strong> Use the <code>path</code> closure in the <code>output {}</code> block.</p>
+<p><strong>Organizing and renaming outputs by metadata value:</strong> Use the <code>path</code> closure in the <code>output {}</code> block, with the <code>&gt;&gt;</code> operator to control both the target directory and the published file name.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-95-1" name="__codelineno-95-1" href="#__codelineno-95-1"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-95-2" name="__codelineno-95-2" href="#__codelineno-95-2"></a><span class="w">    </span><span class="n">cowpy_art</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-95-3" name="__codelineno-95-3" href="#__codelineno-95-3"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">lang_group</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-95-4" name="__codelineno-95-4" href="#__codelineno-95-4"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-95-5" name="__codelineno-95-5" href="#__codelineno-95-5"></a><span class="o">}</span>
+<a id="__codelineno-95-3" name="__codelineno-95-3" href="#__codelineno-95-3"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-95-4" name="__codelineno-95-4" href="#__codelineno-95-4"></a><span class="w">            </span><span class="n">file</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="s2">"${meta.lang_group}/${meta.lang}-${file.name}"</span>
+<a id="__codelineno-95-5" name="__codelineno-95-5" href="#__codelineno-95-5"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-95-6" name="__codelineno-95-6" href="#__codelineno-95-6"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-95-7" name="__codelineno-95-7" href="#__codelineno-95-7"></a><span class="o">}</span>
 </code></pre></div>
 </li>
 </ol>
@@ -7310,9 +7318,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -7551,7 +7560,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -8230,7 +8239,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -8522,7 +8531,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -8694,7 +8703,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -8704,7 +8713,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

@@ -4493,14 +4493,14 @@ Dobbiamo attivare la modalità di variant calling GVCF e aggiornare l'estensione
 <span class="normal"><a href="#__codelineno-3-26">26</a></span>
 <span class="normal"><a href="#__codelineno-3-27">27</a></span>
 <span class="normal"><a href="#__codelineno-3-28">28</a></span>
-<span class="normal"><a href="#__codelineno-3-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-22" name="__codelineno-3-22"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<span class="normal"><a href="#__codelineno-3-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-22" name="__codelineno-3-22"></a><span class="w">    </span><span class="s2">"""</span>
 <a id="__codelineno-3-23" name="__codelineno-3-23"></a><span class="s2">    gatk HaplotypeCaller \</span>
 <a id="__codelineno-3-24" name="__codelineno-3-24"></a><span class="s2">        -R ${ref_fasta} \</span>
 <a id="__codelineno-3-25" name="__codelineno-3-25"></a><span class="s2">        -I ${input_bam} \</span>
 <a id="__codelineno-3-26" name="__codelineno-3-26"></a><span class="hll"><span class="s2">        -O ${input_bam}.g.vcf \</span>
 </span><a id="__codelineno-3-27" name="__codelineno-3-27"></a><span class="s2">        -L ${interval_list} \</span>
 <a id="__codelineno-3-28" name="__codelineno-3-28"></a><span class="hll"><span class="s2">        -ERC GVCF</span>
-</span><a id="__codelineno-3-29" name="__codelineno-3-29"></a><span class="s2">    &quot;&quot;&quot;</span>
+</span><a id="__codelineno-3-29" name="__codelineno-3-29"></a><span class="s2">    """</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -4510,13 +4510,13 @@ Dobbiamo attivare la modalità di variant calling GVCF e aggiornare l'estensione
 <span class="normal"><a href="#__codelineno-4-25">25</a></span>
 <span class="normal"><a href="#__codelineno-4-26">26</a></span>
 <span class="normal"><a href="#__codelineno-4-27">27</a></span>
-<span class="normal"><a href="#__codelineno-4-28">28</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-22" name="__codelineno-4-22"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<span class="normal"><a href="#__codelineno-4-28">28</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-22" name="__codelineno-4-22"></a><span class="w">    </span><span class="s2">"""</span>
 <a id="__codelineno-4-23" name="__codelineno-4-23"></a><span class="s2">    gatk HaplotypeCaller \</span>
 <a id="__codelineno-4-24" name="__codelineno-4-24"></a><span class="s2">        -R ${ref_fasta} \</span>
 <a id="__codelineno-4-25" name="__codelineno-4-25"></a><span class="s2">        -I ${input_bam} \</span>
 <a id="__codelineno-4-26" name="__codelineno-4-26"></a><span class="hll"><span class="s2">        -O ${input_bam}.vcf \</span>
 </span><a id="__codelineno-4-27" name="__codelineno-4-27"></a><span class="s2">        -L ${interval_list}</span>
-<a id="__codelineno-4-28" name="__codelineno-4-28"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-4-28" name="__codelineno-4-28"></a><span class="s2">    """</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -4530,16 +4530,16 @@ Poiché abbiamo cambiato l'output del comando da <code>.vcf</code> a <code>.g.vc
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/gatk_haplotypecaller.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-17">17</a></span>
 <span class="normal"><a href="#__codelineno-5-18">18</a></span>
 <span class="normal"><a href="#__codelineno-5-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${input_bam}.g.vcf&quot;</span><span class="w">     </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">vcf</span>
-</span><a id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${input_bam}.g.vcf.idx&quot;</span><span class="w"> </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">idx</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${input_bam}.g.vcf"</span><span class="w">     </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">vcf</span>
+</span><a id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${input_bam}.g.vcf.idx"</span><span class="w"> </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">idx</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/gatk_haplotypecaller.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-17">17</a></span>
 <span class="normal"><a href="#__codelineno-6-18">18</a></span>
 <span class="normal"><a href="#__codelineno-6-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-17" name="__codelineno-6-17"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${input_bam}.vcf&quot;</span><span class="w">     </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">vcf</span>
-</span><a id="__codelineno-6-19" name="__codelineno-6-19"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${input_bam}.vcf.idx&quot;</span><span class="w"> </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">idx</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${input_bam}.vcf"</span><span class="w">     </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">vcf</span>
+</span><a id="__codelineno-6-19" name="__codelineno-6-19"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${input_bam}.vcf.idx"</span><span class="w"> </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">idx</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -4590,13 +4590,13 @@ Organizzeremo anche i file GVCF nella loro sottodirectory per maggiore chiarezza
 <span class="normal"><a href="#__codelineno-9-62">62</a></span>
 <span class="normal"><a href="#__codelineno-9-63">63</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-53" name="__codelineno-9-53"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-9-54" name="__codelineno-9-54"></a><span class="w">    </span><span class="n">indexed_bam</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-9-55" name="__codelineno-9-55"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;indexed_bam&#39;</span>
+<a id="__codelineno-9-55" name="__codelineno-9-55"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'indexed_bam'</span>
 </span><a id="__codelineno-9-56" name="__codelineno-9-56"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-9-57" name="__codelineno-9-57"></a><span class="hll"><span class="w">    </span><span class="n">gvcf</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-9-58" name="__codelineno-9-58"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;gvcf&#39;</span>
+</span><a id="__codelineno-9-58" name="__codelineno-9-58"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'gvcf'</span>
 </span><a id="__codelineno-9-59" name="__codelineno-9-59"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-9-60" name="__codelineno-9-60"></a><span class="hll"><span class="w">    </span><span class="n">gvcf_idx</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-9-61" name="__codelineno-9-61"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;gvcf&#39;</span>
+</span><a id="__codelineno-9-61" name="__codelineno-9-61"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'gvcf'</span>
 </span><a id="__codelineno-9-62" name="__codelineno-9-62"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-9-63" name="__codelineno-9-63"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -4614,13 +4614,13 @@ Organizzeremo anche i file GVCF nella loro sottodirectory per maggiore chiarezza
 <span class="normal"><a href="#__codelineno-10-62">62</a></span>
 <span class="normal"><a href="#__codelineno-10-63">63</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-53" name="__codelineno-10-53"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-10-54" name="__codelineno-10-54"></a><span class="w">    </span><span class="n">indexed_bam</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-10-55" name="__codelineno-10-55"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;bam&#39;</span>
+<a id="__codelineno-10-55" name="__codelineno-10-55"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'bam'</span>
 <a id="__codelineno-10-56" name="__codelineno-10-56"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-10-57" name="__codelineno-10-57"></a><span class="w">    </span><span class="n">vcf</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-10-58" name="__codelineno-10-58"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;vcf&#39;</span>
+<a id="__codelineno-10-58" name="__codelineno-10-58"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'vcf'</span>
 <a id="__codelineno-10-59" name="__codelineno-10-59"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-10-60" name="__codelineno-10-60"></a><span class="w">    </span><span class="n">vcf_idx</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-10-61" name="__codelineno-10-61"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;vcf&#39;</span>
+<a id="__codelineno-10-61" name="__codelineno-10-61"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'vcf'</span>
 <a id="__codelineno-10-62" name="__codelineno-10-62"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-10-63" name="__codelineno-10-63"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -4749,12 +4749,12 @@ Più avanti nella serie di formazione imparerete come usare i metadati dei campi
 <span class="normal"><a href="#__codelineno-18-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-18-10">10</a></span>
 <span class="normal"><a href="#__codelineno-18-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="n">test</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/samplesheet.csv&quot;</span>
-<a id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.fasta&quot;</span>
-<a id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.fasta.fai&quot;</span>
-<a id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.dict&quot;</span>
-<a id="__codelineno-18-9" name="__codelineno-18-9"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">intervals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/intervals.bed&quot;</span>
-<a id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="hll"><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">cohort_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;family_trio&quot;</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/samplesheet.csv"</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/ref.fasta"</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/ref.fasta.fai"</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/ref.dict"</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">intervals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/intervals.bed"</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="hll"><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">cohort_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"family_trio"</span>
 </span><a id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4766,11 +4766,11 @@ Più avanti nella serie di formazione imparerete come usare i metadati dei campi
 <span class="normal"><a href="#__codelineno-19-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-19-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-19-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="n">test</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/samplesheet.csv&quot;</span>
-<a id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.fasta&quot;</span>
-<a id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.fasta.fai&quot;</span>
-<a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.dict&quot;</span>
-<a id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">intervals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/intervals.bed&quot;</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/samplesheet.csv"</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/ref.fasta"</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/ref.fasta.fai"</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/ref.dict"</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">intervals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/intervals.bed"</span>
 <a id="__codelineno-19-10" name="__codelineno-19-10"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4836,7 +4836,7 @@ Il comando GenomicsDBImport si aspetta un argomento <code>-V</code> separato per
 </code></pre></div>
 <p>Importante, dobbiamo costruire questa stringa dinamicamente da qualunque file sia nel canale raccolto.
 Nextflow (tramite Groovy) fornisce un modo conciso per farlo:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="kt">def</span><span class="w"> </span><span class="n">gvcfs_line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">all_gvcfs</span><span class="o">.</span><span class="na">collect</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">gvcf</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;-V ${gvcf}&quot;</span><span class="w"> </span><span class="o">}.</span><span class="na">join</span><span class="o">(</span><span class="s1">&#39; &#39;</span><span class="o">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="kt">def</span><span class="w"> </span><span class="n">gvcfs_line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">all_gvcfs</span><span class="o">.</span><span class="na">collect</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">gvcf</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"-V ${gvcf}"</span><span class="w"> </span><span class="o">}.</span><span class="na">join</span><span class="o">(</span><span class="s1">' '</span><span class="o">)</span>
 </code></pre></div>
 <p>Scomponendo questo:</p>
 <ol>
@@ -4885,9 +4885,9 @@ Potete inserire codice Groovy arbitrario tra <code>script:</code> e l'apertura <
 <a id="__codelineno-26-12" name="__codelineno-26-12"></a><span class="w">    </span><span class="nl">output:</span>
 <a id="__codelineno-26-13" name="__codelineno-26-13"></a>
 <a id="__codelineno-26-14" name="__codelineno-26-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-26-15" name="__codelineno-26-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-26-15" name="__codelineno-26-15"></a><span class="w">    </span><span class="s2">"""</span>
 <a id="__codelineno-26-16" name="__codelineno-26-16"></a>
-<a id="__codelineno-26-17" name="__codelineno-26-17"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-26-17" name="__codelineno-26-17"></a><span class="s2">    """</span>
 <a id="__codelineno-26-18" name="__codelineno-26-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4935,7 +4935,7 @@ Potete inserire codice Groovy arbitrario tra <code>script:</code> e l'apertura <
 <a id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="cm"> */</span>
 <a id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="n">process</span><span class="w"> </span><span class="n">GATK_JOINTGENOTYPING</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-27-7" name="__codelineno-27-7"></a>
-<a id="__codelineno-27-8" name="__codelineno-27-8"></a><span class="hll"><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">&quot;community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867&quot;</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8"></a><span class="hll"><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">"community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"</span>
 </span><a id="__codelineno-27-9" name="__codelineno-27-9"></a>
 <a id="__codelineno-27-10" name="__codelineno-27-10"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-27-11" name="__codelineno-27-11"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">all_gvcfs</span>
@@ -4947,12 +4947,12 @@ Potete inserire codice Groovy arbitrario tra <code>script:</code> e l'apertura <
 </span><a id="__codelineno-27-17" name="__codelineno-27-17"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">ref_dict</span>
 </span><a id="__codelineno-27-18" name="__codelineno-27-18"></a>
 <a id="__codelineno-27-19" name="__codelineno-27-19"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-27-20" name="__codelineno-27-20"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${cohort_name}.joint.vcf&quot;</span><span class="w">     </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">vcf</span>
-</span><a id="__codelineno-27-21" name="__codelineno-27-21"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${cohort_name}.joint.vcf.idx&quot;</span><span class="w"> </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">idx</span>
+<a id="__codelineno-27-20" name="__codelineno-27-20"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${cohort_name}.joint.vcf"</span><span class="w">     </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">vcf</span>
+</span><a id="__codelineno-27-21" name="__codelineno-27-21"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${cohort_name}.joint.vcf.idx"</span><span class="w"> </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">idx</span>
 </span><a id="__codelineno-27-22" name="__codelineno-27-22"></a>
 <a id="__codelineno-27-23" name="__codelineno-27-23"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-27-24" name="__codelineno-27-24"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">gvcfs_line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">all_gvcfs</span><span class="o">.</span><span class="na">collect</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">gvcf</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;-V ${gvcf}&quot;</span><span class="w"> </span><span class="o">}.</span><span class="na">join</span><span class="o">(</span><span class="s1">&#39; &#39;</span><span class="o">)</span>
-</span><a id="__codelineno-27-25" name="__codelineno-27-25"></a><span class="hll"><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-27-24" name="__codelineno-27-24"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">gvcfs_line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">all_gvcfs</span><span class="o">.</span><span class="na">collect</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">gvcf</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"-V ${gvcf}"</span><span class="w"> </span><span class="o">}.</span><span class="na">join</span><span class="o">(</span><span class="s1">' '</span><span class="o">)</span>
+</span><a id="__codelineno-27-25" name="__codelineno-27-25"></a><span class="hll"><span class="w">    </span><span class="s2">"""</span>
 </span><a id="__codelineno-27-26" name="__codelineno-27-26"></a><span class="s2">    gatk GenomicsDBImport \</span>
 <a id="__codelineno-27-27" name="__codelineno-27-27"></a><span class="s2">        ${gvcfs_line} \</span>
 <a id="__codelineno-27-28" name="__codelineno-27-28"></a><span class="s2">        -L ${interval_list} \</span>
@@ -4963,7 +4963,7 @@ Potete inserire codice Groovy arbitrario tra <code>script:</code> e l'apertura <
 </span><a id="__codelineno-27-33" name="__codelineno-27-33"></a><span class="hll"><span class="s2">        -V gendb://${cohort_name}_gdb \</span>
 </span><a id="__codelineno-27-34" name="__codelineno-27-34"></a><span class="s2">        -L ${interval_list} \</span>
 <a id="__codelineno-27-35" name="__codelineno-27-35"></a><span class="s2">        -O ${cohort_name}.joint.vcf</span>
-<a id="__codelineno-27-36" name="__codelineno-27-36"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-27-36" name="__codelineno-27-36"></a><span class="s2">    """</span>
 <a id="__codelineno-27-37" name="__codelineno-27-37"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4987,17 +4987,17 @@ Per usarlo nel flusso di lavoro, dovrete importare il modulo e aggiungere una ch
 <span class="normal"><a href="#__codelineno-28-4">4</a></span>
 <span class="normal"><a href="#__codelineno-28-5">5</a></span>
 <span class="normal"><a href="#__codelineno-28-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="c1">// Module INCLUDE statements</span>
-<a id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAMTOOLS_INDEX</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/samtools_index.nf&#39;</span>
-<a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">GATK_HAPLOTYPECALLER</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/gatk_haplotypecaller.nf&#39;</span>
-<a id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">GATK_JOINTGENOTYPING</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/gatk_jointgenotyping.nf&#39;</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAMTOOLS_INDEX</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/samtools_index.nf'</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">GATK_HAPLOTYPECALLER</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/gatk_haplotypecaller.nf'</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">GATK_JOINTGENOTYPING</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/gatk_jointgenotyping.nf'</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-3">3</a></span>
 <span class="normal"><a href="#__codelineno-29-4">4</a></span>
 <span class="normal"><a href="#__codelineno-29-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-3" name="__codelineno-29-3"></a><span class="c1">// Module INCLUDE statements</span>
-<a id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAMTOOLS_INDEX</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/samtools_index.nf&#39;</span>
-<a id="__codelineno-29-5" name="__codelineno-29-5"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">GATK_HAPLOTYPECALLER</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/gatk_haplotypecaller.nf&#39;</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAMTOOLS_INDEX</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/samtools_index.nf'</span>
+<a id="__codelineno-29-5" name="__codelineno-29-5"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">GATK_HAPLOTYPECALLER</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/gatk_haplotypecaller.nf'</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5099,19 +5099,19 @@ Li metteremo alla radice della directory results poiché questo è l'output fina
 <span class="normal"><a href="#__codelineno-34-89">89</a></span>
 <span class="normal"><a href="#__codelineno-34-90">90</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-74" name="__codelineno-34-74"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-34-75" name="__codelineno-34-75"></a><span class="w">    </span><span class="n">indexed_bam</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-34-76" name="__codelineno-34-76"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;indexed_bam&#39;</span>
+<a id="__codelineno-34-76" name="__codelineno-34-76"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'indexed_bam'</span>
 <a id="__codelineno-34-77" name="__codelineno-34-77"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-34-78" name="__codelineno-34-78"></a><span class="w">    </span><span class="n">gvcf</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-34-79" name="__codelineno-34-79"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;gvcf&#39;</span>
+<a id="__codelineno-34-79" name="__codelineno-34-79"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'gvcf'</span>
 <a id="__codelineno-34-80" name="__codelineno-34-80"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-34-81" name="__codelineno-34-81"></a><span class="w">    </span><span class="n">gvcf_idx</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-34-82" name="__codelineno-34-82"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;gvcf&#39;</span>
+<a id="__codelineno-34-82" name="__codelineno-34-82"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'gvcf'</span>
 <a id="__codelineno-34-83" name="__codelineno-34-83"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-34-84" name="__codelineno-34-84"></a><span class="hll"><span class="w">    </span><span class="n">joint_vcf</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-34-85" name="__codelineno-34-85"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;.&#39;</span>
+</span><a id="__codelineno-34-85" name="__codelineno-34-85"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'.'</span>
 </span><a id="__codelineno-34-86" name="__codelineno-34-86"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span><a id="__codelineno-34-87" name="__codelineno-34-87"></a><span class="hll"><span class="w">    </span><span class="n">joint_vcf_idx</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-34-88" name="__codelineno-34-88"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;.&#39;</span>
+</span><a id="__codelineno-34-88" name="__codelineno-34-88"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'.'</span>
 </span><a id="__codelineno-34-89" name="__codelineno-34-89"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span><a id="__codelineno-34-90" name="__codelineno-34-90"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5129,13 +5129,13 @@ Li metteremo alla radice della directory results poiché questo è l'output fina
 <span class="normal"><a href="#__codelineno-35-83">83</a></span>
 <span class="normal"><a href="#__codelineno-35-84">84</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-35-74" name="__codelineno-35-74"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-35-75" name="__codelineno-35-75"></a><span class="w">    </span><span class="n">indexed_bam</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-35-76" name="__codelineno-35-76"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;indexed_bam&#39;</span>
+<a id="__codelineno-35-76" name="__codelineno-35-76"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'indexed_bam'</span>
 <a id="__codelineno-35-77" name="__codelineno-35-77"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-35-78" name="__codelineno-35-78"></a><span class="w">    </span><span class="n">gvcf</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-35-79" name="__codelineno-35-79"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;gvcf&#39;</span>
+<a id="__codelineno-35-79" name="__codelineno-35-79"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'gvcf'</span>
 <a id="__codelineno-35-80" name="__codelineno-35-80"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-35-81" name="__codelineno-35-81"></a><span class="w">    </span><span class="n">gvcf_idx</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-35-82" name="__codelineno-35-82"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;gvcf&#39;</span>
+<a id="__codelineno-35-82" name="__codelineno-35-82"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'gvcf'</span>
 <a id="__codelineno-35-83" name="__codelineno-35-83"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-35-84" name="__codelineno-35-84"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5523,9 +5523,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -5764,7 +5765,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -6443,7 +6444,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -6735,7 +6736,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -6907,7 +6908,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -6917,7 +6918,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

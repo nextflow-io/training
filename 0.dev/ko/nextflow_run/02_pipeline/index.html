@@ -5030,7 +5030,7 @@ ANSI 로깅을 비활성화하면 Nextflow가 터미널 출력에서 색상을 �
 <span class="normal"><a href="#__codelineno-13-46">46</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2"></a>
 <a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="cm">/*</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="cm">* Use echo to print &#39;Hello World!&#39; to a file</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="cm">* Use echo to print 'Hello World!' to a file</span>
 <a id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="cm">*/</span>
 <a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-13-7" name="__codelineno-13-7"></a>
@@ -5038,12 +5038,12 @@ ANSI 로깅을 비활성화하면 Nextflow가 터미널 출력에서 색상을 �
 <a id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
 <a id="__codelineno-13-10" name="__codelineno-13-10"></a>
 <a id="__codelineno-13-11" name="__codelineno-13-11"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${greeting}-output.txt&quot;</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${greeting}-output.txt"</span>
 <a id="__codelineno-13-13" name="__codelineno-13-13"></a>
 <a id="__codelineno-13-14" name="__codelineno-13-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-13-15" name="__codelineno-13-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-13-16" name="__codelineno-13-16"></a><span class="s2">    echo &#39;${greeting}&#39; &gt; &#39;${greeting}-output.txt&#39;</span>
-<a id="__codelineno-13-17" name="__codelineno-13-17"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16"></a><span class="s2">    echo '${greeting}' &gt; '${greeting}-output.txt'</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17"></a><span class="s2">    """</span>
 <a id="__codelineno-13-18" name="__codelineno-13-18"></a><span class="o">}</span>
 <a id="__codelineno-13-19" name="__codelineno-13-19"></a>
 <a id="__codelineno-13-20" name="__codelineno-13-20"></a><span class="cm">/*</span>
@@ -5069,8 +5069,8 @@ ANSI 로깅을 비활성화하면 Nextflow가 터미널 출력에서 색상을 �
 <a id="__codelineno-13-40" name="__codelineno-13-40"></a>
 <a id="__codelineno-13-41" name="__codelineno-13-41"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-13-42" name="__codelineno-13-42"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-13-43" name="__codelineno-13-43"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;2a-inputs&#39;</span>
-<a id="__codelineno-13-44" name="__codelineno-13-44"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-13-43" name="__codelineno-13-43"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'2a-inputs'</span>
+<a id="__codelineno-13-44" name="__codelineno-13-44"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-13-45" name="__codelineno-13-45"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-13-46" name="__codelineno-13-46"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5162,12 +5162,12 @@ channel은 입력을 효율적으로 처리하고 다단계 workflow에서 한 �
 <a id="__codelineno-18-9" name="__codelineno-18-9"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
 <a id="__codelineno-18-10" name="__codelineno-18-10"></a>
 <a id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-18-12" name="__codelineno-18-12"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${greeting}-output.txt&quot;</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${greeting}-output.txt"</span>
 </span><a id="__codelineno-18-13" name="__codelineno-18-13"></a>
 <a id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-18-16" name="__codelineno-18-16"></a><span class="hll"><span class="s2">    echo &#39;${greeting}&#39; &gt; &#39;${greeting}-output.txt&#39;</span>
-</span><a id="__codelineno-18-17" name="__codelineno-18-17"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16"></a><span class="hll"><span class="s2">    echo '${greeting}' &gt; '${greeting}-output.txt'</span>
+</span><a id="__codelineno-18-17" name="__codelineno-18-17"></a><span class="s2">    """</span>
 <a id="__codelineno-18-18" name="__codelineno-18-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p><code>1-hello.nf</code>의 이 process 버전과 비교하여 출력 선언과 명령의 관련 부분이 출력 파일 이름에 인사말 값을 포함하도록 변경된 것을 볼 수 있습니다.</p>
@@ -5418,7 +5418,7 @@ channel에 대해 방금 배운 것을 바탕으로, Nextflow가 channel과 연�
 <span class="normal"><a href="#__codelineno-24-104">104</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-24-2" name="__codelineno-24-2"></a>
 <a id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="cm">/*</span>
-<a id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="cm">* Use echo to print &#39;Hello World!&#39; to a file</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="cm">* Use echo to print 'Hello World!' to a file</span>
 <a id="__codelineno-24-5" name="__codelineno-24-5"></a><span class="cm">*/</span>
 <a id="__codelineno-24-6" name="__codelineno-24-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-24-7" name="__codelineno-24-7"></a>
@@ -5426,12 +5426,12 @@ channel에 대해 방금 배운 것을 바탕으로, Nextflow가 channel과 연�
 <a id="__codelineno-24-9" name="__codelineno-24-9"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
 <a id="__codelineno-24-10" name="__codelineno-24-10"></a>
 <a id="__codelineno-24-11" name="__codelineno-24-11"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-24-12" name="__codelineno-24-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${greeting}-output.txt&quot;</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${greeting}-output.txt"</span>
 <a id="__codelineno-24-13" name="__codelineno-24-13"></a>
 <a id="__codelineno-24-14" name="__codelineno-24-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-24-15" name="__codelineno-24-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-24-16" name="__codelineno-24-16"></a><span class="s2">    echo &#39;${greeting}&#39; &gt; &#39;${greeting}-output.txt&#39;</span>
-<a id="__codelineno-24-17" name="__codelineno-24-17"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-24-15" name="__codelineno-24-15"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-24-16" name="__codelineno-24-16"></a><span class="s2">    echo '${greeting}' &gt; '${greeting}-output.txt'</span>
+<a id="__codelineno-24-17" name="__codelineno-24-17"></a><span class="s2">    """</span>
 <a id="__codelineno-24-18" name="__codelineno-24-18"></a><span class="o">}</span>
 <a id="__codelineno-24-19" name="__codelineno-24-19"></a>
 <a id="__codelineno-24-20" name="__codelineno-24-20"></a><span class="cm">/*</span>
@@ -5443,12 +5443,12 @@ channel에 대해 방금 배운 것을 바탕으로, Nextflow가 channel과 연�
 <a id="__codelineno-24-26" name="__codelineno-24-26"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
 <a id="__codelineno-24-27" name="__codelineno-24-27"></a>
 <a id="__codelineno-24-28" name="__codelineno-24-28"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-24-29" name="__codelineno-24-29"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;UPPER-${input_file}&quot;</span>
+<a id="__codelineno-24-29" name="__codelineno-24-29"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"UPPER-${input_file}"</span>
 <a id="__codelineno-24-30" name="__codelineno-24-30"></a>
 <a id="__codelineno-24-31" name="__codelineno-24-31"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-24-32" name="__codelineno-24-32"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-24-33" name="__codelineno-24-33"></a><span class="s2">    cat &#39;${input_file}&#39; | tr &#39;[a-z]&#39; &#39;[A-Z]&#39; &gt; &#39;UPPER-${input_file}&#39;</span>
-<a id="__codelineno-24-34" name="__codelineno-24-34"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-24-32" name="__codelineno-24-32"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-24-33" name="__codelineno-24-33"></a><span class="s2">    cat '${input_file}' | tr '[a-z]' '[A-Z]' &gt; 'UPPER-${input_file}'</span>
+<a id="__codelineno-24-34" name="__codelineno-24-34"></a><span class="s2">    """</span>
 <a id="__codelineno-24-35" name="__codelineno-24-35"></a><span class="o">}</span>
 <a id="__codelineno-24-36" name="__codelineno-24-36"></a>
 <a id="__codelineno-24-37" name="__codelineno-24-37"></a><span class="cm">/*</span>
@@ -5461,15 +5461,15 @@ channel에 대해 방금 배운 것을 바탕으로, Nextflow가 channel과 연�
 <a id="__codelineno-24-44" name="__codelineno-24-44"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">batch_name</span>
 <a id="__codelineno-24-45" name="__codelineno-24-45"></a>
 <a id="__codelineno-24-46" name="__codelineno-24-46"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-24-47" name="__codelineno-24-47"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;COLLECTED-${batch_name}-output.txt&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">outfile</span>
-<a id="__codelineno-24-48" name="__codelineno-24-48"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${batch_name}-report.txt&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">report</span>
+<a id="__codelineno-24-47" name="__codelineno-24-47"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"COLLECTED-${batch_name}-output.txt"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">outfile</span>
+<a id="__codelineno-24-48" name="__codelineno-24-48"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${batch_name}-report.txt"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">report</span>
 <a id="__codelineno-24-49" name="__codelineno-24-49"></a>
 <a id="__codelineno-24-50" name="__codelineno-24-50"></a><span class="w">    </span><span class="nl">script:</span>
 <a id="__codelineno-24-51" name="__codelineno-24-51"></a><span class="w">    </span><span class="n">count_greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input_files</span><span class="o">.</span><span class="na">size</span><span class="o">()</span>
-<a id="__codelineno-24-52" name="__codelineno-24-52"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-24-53" name="__codelineno-24-53"></a><span class="s2">    cat ${input_files} &gt; &#39;COLLECTED-${batch_name}-output.txt&#39;</span>
-<a id="__codelineno-24-54" name="__codelineno-24-54"></a><span class="s2">    echo &#39;There were ${count_greetings} greetings in this batch.&#39; &gt; &#39;${batch_name}-report.txt&#39;</span>
-<a id="__codelineno-24-55" name="__codelineno-24-55"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-24-52" name="__codelineno-24-52"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-24-53" name="__codelineno-24-53"></a><span class="s2">    cat ${input_files} &gt; 'COLLECTED-${batch_name}-output.txt'</span>
+<a id="__codelineno-24-54" name="__codelineno-24-54"></a><span class="s2">    echo 'There were ${count_greetings} greetings in this batch.' &gt; '${batch_name}-report.txt'</span>
+<a id="__codelineno-24-55" name="__codelineno-24-55"></a><span class="s2">    """</span>
 <a id="__codelineno-24-56" name="__codelineno-24-56"></a><span class="o">}</span>
 <a id="__codelineno-24-57" name="__codelineno-24-57"></a>
 <a id="__codelineno-24-58" name="__codelineno-24-58"></a><span class="cm">/*</span>
@@ -5477,7 +5477,7 @@ channel에 대해 방금 배운 것을 바탕으로, Nextflow가 channel과 연�
 <a id="__codelineno-24-60" name="__codelineno-24-60"></a><span class="cm">*/</span>
 <a id="__codelineno-24-61" name="__codelineno-24-61"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-24-62" name="__codelineno-24-62"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">Path</span>
-<a id="__codelineno-24-63" name="__codelineno-24-63"></a><span class="hll"><span class="w">    </span><span class="nl">batch:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;batch&#39;</span>
+<a id="__codelineno-24-63" name="__codelineno-24-63"></a><span class="hll"><span class="w">    </span><span class="nl">batch:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'batch'</span>
 </span><a id="__codelineno-24-64" name="__codelineno-24-64"></a><span class="o">}</span>
 <a id="__codelineno-24-65" name="__codelineno-24-65"></a>
 <a id="__codelineno-24-66" name="__codelineno-24-66"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
@@ -5503,20 +5503,20 @@ channel에 대해 방금 배운 것을 바탕으로, Nextflow가 channel과 연�
 <a id="__codelineno-24-86" name="__codelineno-24-86"></a>
 <a id="__codelineno-24-87" name="__codelineno-24-87"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-24-88" name="__codelineno-24-88"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-24-89" name="__codelineno-24-89"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;2b-multistep/intermediates&#39;</span>
-<a id="__codelineno-24-90" name="__codelineno-24-90"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-24-89" name="__codelineno-24-89"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'2b-multistep/intermediates'</span>
+<a id="__codelineno-24-90" name="__codelineno-24-90"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-24-91" name="__codelineno-24-91"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-24-92" name="__codelineno-24-92"></a><span class="w">    </span><span class="n">uppercased</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-24-93" name="__codelineno-24-93"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;2b-multistep/intermediates&#39;</span>
-<a id="__codelineno-24-94" name="__codelineno-24-94"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-24-93" name="__codelineno-24-93"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'2b-multistep/intermediates'</span>
+<a id="__codelineno-24-94" name="__codelineno-24-94"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-24-95" name="__codelineno-24-95"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-24-96" name="__codelineno-24-96"></a><span class="w">    </span><span class="n">collected</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-24-97" name="__codelineno-24-97"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;2b-multistep&#39;</span>
-<a id="__codelineno-24-98" name="__codelineno-24-98"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-24-97" name="__codelineno-24-97"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'2b-multistep'</span>
+<a id="__codelineno-24-98" name="__codelineno-24-98"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-24-99" name="__codelineno-24-99"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-24-100" name="__codelineno-24-100"></a><span class="w">    </span><span class="n">batch_report</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-24-101" name="__codelineno-24-101"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;2b-multistep&#39;</span>
-<a id="__codelineno-24-102" name="__codelineno-24-102"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-24-101" name="__codelineno-24-101"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'2b-multistep'</span>
+<a id="__codelineno-24-102" name="__codelineno-24-102"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-24-103" name="__codelineno-24-103"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-24-104" name="__codelineno-24-104"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5627,7 +5627,7 @@ channel에 대해 방금 배운 것을 바탕으로, Nextflow가 channel과 연�
 <span class="normal"><a href="#__codelineno-29-63">63</a></span>
 <span class="normal"><a href="#__codelineno-29-64">64</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-61" name="__codelineno-29-61"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-29-62" name="__codelineno-29-62"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">Path</span>
-<a id="__codelineno-29-63" name="__codelineno-29-63"></a><span class="hll"><span class="w">    </span><span class="nl">batch:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;batch&#39;</span>
+<a id="__codelineno-29-63" name="__codelineno-29-63"></a><span class="hll"><span class="w">    </span><span class="nl">batch:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'batch'</span>
 </span><a id="__codelineno-29-64" name="__codelineno-29-64"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>workflow에 기본값이 설정되어 있으므로 제공할 필요가 없습니다.
@@ -5736,8 +5736,8 @@ channel에 대해 방금 배운 것을 바탕으로, Nextflow가 channel과 연�
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2b-multistep.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-46">46</a></span>
 <span class="normal"><a href="#__codelineno-33-47">47</a></span>
 <span class="normal"><a href="#__codelineno-33-48">48</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-46" name="__codelineno-33-46"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-33-47" name="__codelineno-33-47"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;COLLECTED-${batch_name}-output.txt&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">outfile</span>
-<a id="__codelineno-33-48" name="__codelineno-33-48"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${batch_name}-report.txt&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">report</span>
+<a id="__codelineno-33-47" name="__codelineno-33-47"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"COLLECTED-${batch_name}-output.txt"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">outfile</span>
+<a id="__codelineno-33-48" name="__codelineno-33-48"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${batch_name}-report.txt"</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">report</span>
 </code></pre></div></td></tr></table></div>
 <p>이것은 <code>publish:</code> 블록에서 <code>emit:</code>으로 지정된 이름으로 참조됩니다:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2b-multistep.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-80">80</a></span>
@@ -5772,20 +5772,20 @@ channel에 대해 방금 배운 것을 바탕으로, Nextflow가 channel과 연�
 <span class="normal"><a href="#__codelineno-35-103">103</a></span>
 <span class="normal"><a href="#__codelineno-35-104">104</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-35-87" name="__codelineno-35-87"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-35-88" name="__codelineno-35-88"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-35-89" name="__codelineno-35-89"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;2b-multistep/intermediates&#39;</span>
-</span><a id="__codelineno-35-90" name="__codelineno-35-90"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-35-89" name="__codelineno-35-89"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'2b-multistep/intermediates'</span>
+</span><a id="__codelineno-35-90" name="__codelineno-35-90"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-35-91" name="__codelineno-35-91"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-35-92" name="__codelineno-35-92"></a><span class="w">    </span><span class="n">uppercased</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-35-93" name="__codelineno-35-93"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;2b-multistep/intermediates&#39;</span>
-</span><a id="__codelineno-35-94" name="__codelineno-35-94"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-35-93" name="__codelineno-35-93"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'2b-multistep/intermediates'</span>
+</span><a id="__codelineno-35-94" name="__codelineno-35-94"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-35-95" name="__codelineno-35-95"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-35-96" name="__codelineno-35-96"></a><span class="w">    </span><span class="n">collected</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-35-97" name="__codelineno-35-97"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;2b-multistep&#39;</span>
-</span><a id="__codelineno-35-98" name="__codelineno-35-98"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-35-97" name="__codelineno-35-97"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'2b-multistep'</span>
+</span><a id="__codelineno-35-98" name="__codelineno-35-98"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-35-99" name="__codelineno-35-99"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-35-100" name="__codelineno-35-100"></a><span class="w">    </span><span class="n">batch_report</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-35-101" name="__codelineno-35-101"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;2b-multistep&#39;</span>
-</span><a id="__codelineno-35-102" name="__codelineno-35-102"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-35-101" name="__codelineno-35-101"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'2b-multistep'</span>
+</span><a id="__codelineno-35-102" name="__codelineno-35-102"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-35-103" name="__codelineno-35-103"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-35-104" name="__codelineno-35-104"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5894,16 +5894,16 @@ workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄 impor
 <span class="normal"><a href="#__codelineno-37-54">54</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-37-2" name="__codelineno-37-2"></a>
 <a id="__codelineno-37-3" name="__codelineno-37-3"></a><span class="c1">// 모듈 포함</span>
-<a id="__codelineno-37-4" name="__codelineno-37-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayHello.nf&#39;</span>
-<a id="__codelineno-37-5" name="__codelineno-37-5"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/convertToUpper.nf&#39;</span>
-<a id="__codelineno-37-6" name="__codelineno-37-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/collectGreetings.nf&#39;</span>
+<a id="__codelineno-37-4" name="__codelineno-37-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/sayHello.nf'</span>
+<a id="__codelineno-37-5" name="__codelineno-37-5"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/convertToUpper.nf'</span>
+<a id="__codelineno-37-6" name="__codelineno-37-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/collectGreetings.nf'</span>
 <a id="__codelineno-37-7" name="__codelineno-37-7"></a>
 <a id="__codelineno-37-8" name="__codelineno-37-8"></a><span class="cm">/*</span>
 <a id="__codelineno-37-9" name="__codelineno-37-9"></a><span class="cm">* Pipeline parameters</span>
 <a id="__codelineno-37-10" name="__codelineno-37-10"></a><span class="cm">*/</span>
 <a id="__codelineno-37-11" name="__codelineno-37-11"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-37-12" name="__codelineno-37-12"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">Path</span>
-<a id="__codelineno-37-13" name="__codelineno-37-13"></a><span class="w">    </span><span class="nl">batch:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;batch&#39;</span>
+<a id="__codelineno-37-13" name="__codelineno-37-13"></a><span class="w">    </span><span class="nl">batch:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'batch'</span>
 <a id="__codelineno-37-14" name="__codelineno-37-14"></a><span class="o">}</span>
 <a id="__codelineno-37-15" name="__codelineno-37-15"></a>
 <a id="__codelineno-37-16" name="__codelineno-37-16"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
@@ -5929,20 +5929,20 @@ workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄 impor
 <a id="__codelineno-37-36" name="__codelineno-37-36"></a>
 <a id="__codelineno-37-37" name="__codelineno-37-37"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-37-38" name="__codelineno-37-38"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-37-39" name="__codelineno-37-39"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;2c-modules/intermediates&#39;</span>
-<a id="__codelineno-37-40" name="__codelineno-37-40"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-37-39" name="__codelineno-37-39"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'2c-modules/intermediates'</span>
+<a id="__codelineno-37-40" name="__codelineno-37-40"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-37-41" name="__codelineno-37-41"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-37-42" name="__codelineno-37-42"></a><span class="w">    </span><span class="n">uppercased</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-37-43" name="__codelineno-37-43"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;2c-modules/intermediates&#39;</span>
-<a id="__codelineno-37-44" name="__codelineno-37-44"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-37-43" name="__codelineno-37-43"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'2c-modules/intermediates'</span>
+<a id="__codelineno-37-44" name="__codelineno-37-44"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-37-45" name="__codelineno-37-45"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-37-46" name="__codelineno-37-46"></a><span class="w">    </span><span class="n">collected</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-37-47" name="__codelineno-37-47"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;2c-modules&#39;</span>
-<a id="__codelineno-37-48" name="__codelineno-37-48"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-37-47" name="__codelineno-37-47"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'2c-modules'</span>
+<a id="__codelineno-37-48" name="__codelineno-37-48"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-37-49" name="__codelineno-37-49"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-37-50" name="__codelineno-37-50"></a><span class="w">    </span><span class="n">batch_report</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-37-51" name="__codelineno-37-51"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;2c-modules&#39;</span>
-<a id="__codelineno-37-52" name="__codelineno-37-52"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-37-51" name="__codelineno-37-51"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'2c-modules'</span>
+<a id="__codelineno-37-52" name="__codelineno-37-52"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-37-53" name="__codelineno-37-53"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-37-54" name="__codelineno-37-54"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5953,9 +5953,9 @@ workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄 impor
 <span class="normal"><a href="#__codelineno-38-4">4</a></span>
 <span class="normal"><a href="#__codelineno-38-5">5</a></span>
 <span class="normal"><a href="#__codelineno-38-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-3" name="__codelineno-38-3"></a><span class="c1">// 모듈 포함</span>
-<a id="__codelineno-38-4" name="__codelineno-38-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayHello.nf&#39;</span>
-<a id="__codelineno-38-5" name="__codelineno-38-5"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/convertToUpper.nf&#39;</span>
-<a id="__codelineno-38-6" name="__codelineno-38-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/collectGreetings.nf&#39;</span>
+<a id="__codelineno-38-4" name="__codelineno-38-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/sayHello.nf'</span>
+<a id="__codelineno-38-5" name="__codelineno-38-5"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/convertToUpper.nf'</span>
+<a id="__codelineno-38-6" name="__codelineno-38-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/collectGreetings.nf'</span>
 </code></pre></div></td></tr></table></div>
 <p>해당 파일 중 하나를 열면 해당 process의 코드를 찾을 수 있습니다.</p>
 <details class="full-code">
@@ -5980,7 +5980,7 @@ workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄 impor
 <span class="normal"><a href="#__codelineno-39-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-39-2" name="__codelineno-39-2"></a>
 <a id="__codelineno-39-3" name="__codelineno-39-3"></a><span class="cm">/*</span>
-<a id="__codelineno-39-4" name="__codelineno-39-4"></a><span class="cm">* Use echo to print &#39;Hello World!&#39; to a file</span>
+<a id="__codelineno-39-4" name="__codelineno-39-4"></a><span class="cm">* Use echo to print 'Hello World!' to a file</span>
 <a id="__codelineno-39-5" name="__codelineno-39-5"></a><span class="cm">*/</span>
 <a id="__codelineno-39-6" name="__codelineno-39-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-39-7" name="__codelineno-39-7"></a>
@@ -5988,12 +5988,12 @@ workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄 impor
 <a id="__codelineno-39-9" name="__codelineno-39-9"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
 <a id="__codelineno-39-10" name="__codelineno-39-10"></a>
 <a id="__codelineno-39-11" name="__codelineno-39-11"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-39-12" name="__codelineno-39-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${greeting}-output.txt&quot;</span>
+<a id="__codelineno-39-12" name="__codelineno-39-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${greeting}-output.txt"</span>
 <a id="__codelineno-39-13" name="__codelineno-39-13"></a>
 <a id="__codelineno-39-14" name="__codelineno-39-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-39-15" name="__codelineno-39-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-39-16" name="__codelineno-39-16"></a><span class="s2">    echo &#39;${greeting}&#39; &gt; &#39;${greeting}-output.txt&#39;</span>
-<a id="__codelineno-39-17" name="__codelineno-39-17"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-39-15" name="__codelineno-39-15"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-39-16" name="__codelineno-39-16"></a><span class="s2">    echo '${greeting}' &gt; '${greeting}-output.txt'</span>
+<a id="__codelineno-39-17" name="__codelineno-39-17"></a><span class="s2">    """</span>
 <a id="__codelineno-39-18" name="__codelineno-39-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </details>
@@ -6065,7 +6065,7 @@ Nextflow의 컨테이너 지원에 대해 더 자세히 알아보려면 <a href=
 <h4 id="411">4.1.1. 컨테이너 이미지 가져오기<a class="headerlink" href="#411" title="Permanent link">&para;</a></h4>
 <p>컨테이너를 사용하려면 일반적으로 컨테이너 레지스트리에서 컨테이너 이미지를 다운로드하거나 "가져온" 다음 컨테이너 이미지를 실행하여 컨테이너 인스턴스를 생성합니다.</p>
 <p>일반 구문은 다음과 같습니다:</p>
-<div class="highlight"><span class="filename">구문</span><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>docker<span class="w"> </span>pull<span class="w"> </span><span class="s1">&#39;&lt;container&gt;&#39;</span>
+<div class="highlight"><span class="filename">구문</span><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>docker<span class="w"> </span>pull<span class="w"> </span><span class="s1">'&lt;container&gt;'</span>
 </code></pre></div>
 <ul>
 <li><code>docker pull</code>은 컨테이너 시스템에 저장소에서 컨테이너 이미지를 가져오라는 지시입니다.</li>
@@ -6075,11 +6075,11 @@ Nextflow의 컨테이너 지원에 대해 더 자세히 알아보려면 <a href=
 <p>게시된 컨테이너를 찾을 수 있는 다양한 저장소가 있습니다.
 <a href="https://seqera.io/containers/">Seqera Containers</a> 서비스를 사용하여 <code>cowpy</code> Conda 패키지에서 이 Docker 컨테이너 이미지를 생성했습니다: <code>'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</code>.</p>
 <p>전체 가져오기 명령을 실행하세요:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>docker<span class="w"> </span>pull<span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>docker<span class="w"> </span>pull<span class="w"> </span><span class="s1">'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span>
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="go">Unable to find image &#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39; locally</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="go">Unable to find image 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273' locally</span>
 <a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="go">131d6a1b707a8e65: Pulling from library/cowpy</span>
 <a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="go">dafa2b0c44d2: Pull complete</span>
 <a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a><span class="go">dec6b097362e: Pull complete</span>
@@ -6104,14 +6104,14 @@ Nextflow의 컨테이너 지원에 대해 더 자세히 알아보려면 <a href=
 <h4 id="412">4.1.2. 컨테이너 시작<a class="headerlink" href="#412" title="Permanent link">&para;</a></h4>
 <p>컨테이너는 일회성 명령으로 실행할 수 있지만, 대화형으로 사용할 수도 있어 컨테이너 내부에서 셸 프롬프트를 제공하고 명령으로 놀 수 있습니다.</p>
 <p>일반 구문은 다음과 같습니다:</p>
-<div class="highlight"><span class="filename">구문</span><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="s1">&#39;&lt;container&gt;&#39;</span><span class="w"> </span><span class="o">[</span>tool<span class="w"> </span>command<span class="o">]</span>
+<div class="highlight"><span class="filename">구문</span><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="s1">'&lt;container&gt;'</span><span class="w"> </span><span class="o">[</span>tool<span class="w"> </span>command<span class="o">]</span>
 </code></pre></div>
 <ul>
 <li><code>docker run --rm '&lt;container&gt;'</code>는 컨테이너 시스템에 컨테이너 이미지에서 컨테이너 인스턴스를 시작하고 그 안에서 명령을 실행하라는 지시입니다.</li>
 <li><code>--rm</code>은 명령이 완료된 후 컨테이너 인스턴스를 종료하라고 시스템에 지시합니다.</li>
 </ul>
 <p>완전히 조립된 컨테이너 실행 명령은 다음과 같습니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="s1">'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span>
 </code></pre></div>
 <p>이 명령을 실행하면 프롬프트가 <code>(base) root@b645838b3314:/tmp#</code>과 같은 것으로 변경되어 이제 컨테이너 내부에 있음을 나타냅니다.</p>
 <p><code>ls</code>를 실행하여 디렉토리 내용을 나열하여 이를 확인할 수 있습니다:</p>
@@ -6134,7 +6134,7 @@ Nextflow의 컨테이너 지원에 대해 더 자세히 알아보려면 <a href=
 </div>
 <h4 id="413-cowpy">4.1.3. <code>cowpy</code> 도구 실행<a class="headerlink" href="#413-cowpy" title="Permanent link">&para;</a></h4>
 <p>컨테이너 내부에서 <code>cowpy</code> 명령을 직접 실행할 수 있습니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello Containers&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cowpy
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"Hello Containers"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cowpy
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
@@ -6151,7 +6151,7 @@ Nextflow의 컨테이너 지원에 대해 더 자세히 알아보려면 <a href=
 <p>이것은 지정한 텍스트가 포함된 말풍선이 있는 기본 소 캐릭터(또는 'cowacter')의 ASCII 아트를 생성합니다.</p>
 <p>이제 기본 사용법을 테스트했으니 몇 가지 매개변수를 제공해 볼 수 있습니다.
 예를 들어 도구 문서에 따르면 <code>-c</code>로 캐릭터를 설정할 수 있습니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello Containers&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cowpy<span class="w"> </span>-c<span class="w"> </span>tux
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"Hello Containers"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cowpy<span class="w"> </span>-c<span class="w"> </span>tux
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
@@ -6165,7 +6165,7 @@ Nextflow의 컨테이너 지원에 대해 더 자세히 알아보려면 <a href=
 <a id="__codelineno-53-8" name="__codelineno-53-8" href="#__codelineno-53-8"></a><span class="go">       |:_/ |</span>
 <a id="__codelineno-53-9" name="__codelineno-53-9" href="#__codelineno-53-9"></a><span class="go">      //   \ \</span>
 <a id="__codelineno-53-10" name="__codelineno-53-10" href="#__codelineno-53-10"></a><span class="go">     (|     | )</span>
-<a id="__codelineno-53-11" name="__codelineno-53-11" href="#__codelineno-53-11"></a><span class="go">    /&#39;\_   _/`\</span>
+<a id="__codelineno-53-11" name="__codelineno-53-11" href="#__codelineno-53-11"></a><span class="go">    /'\_   _/`\</span>
 <a id="__codelineno-53-12" name="__codelineno-53-12" href="#__codelineno-53-12"></a><span class="go">    \___)=(___/</span>
 </code></pre></div>
 </details>
@@ -6265,17 +6265,17 @@ Nextflow의 컨테이너 지원에 대해 더 자세히 알아보려면 <a href=
 <span class="normal"><a href="#__codelineno-55-63">63</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-55-2" name="__codelineno-55-2"></a>
 <a id="__codelineno-55-3" name="__codelineno-55-3"></a><span class="c1">// 모듈 포함</span>
-<a id="__codelineno-55-4" name="__codelineno-55-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayHello.nf&#39;</span>
-<a id="__codelineno-55-5" name="__codelineno-55-5"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/convertToUpper.nf&#39;</span>
-<a id="__codelineno-55-6" name="__codelineno-55-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/collectGreetings.nf&#39;</span>
-<a id="__codelineno-55-7" name="__codelineno-55-7"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">cowpy</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/cowpy.nf&#39;</span>
+<a id="__codelineno-55-4" name="__codelineno-55-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/sayHello.nf'</span>
+<a id="__codelineno-55-5" name="__codelineno-55-5"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/convertToUpper.nf'</span>
+<a id="__codelineno-55-6" name="__codelineno-55-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/collectGreetings.nf'</span>
+<a id="__codelineno-55-7" name="__codelineno-55-7"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">cowpy</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/cowpy.nf'</span>
 </span><a id="__codelineno-55-8" name="__codelineno-55-8"></a>
 <a id="__codelineno-55-9" name="__codelineno-55-9"></a><span class="cm">/*</span>
 <a id="__codelineno-55-10" name="__codelineno-55-10"></a><span class="cm">* Pipeline parameters</span>
 <a id="__codelineno-55-11" name="__codelineno-55-11"></a><span class="cm">*/</span>
 <a id="__codelineno-55-12" name="__codelineno-55-12"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-55-13" name="__codelineno-55-13"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">Path</span>
-<a id="__codelineno-55-14" name="__codelineno-55-14"></a><span class="w">    </span><span class="nl">batch:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;batch&#39;</span>
+<a id="__codelineno-55-14" name="__codelineno-55-14"></a><span class="w">    </span><span class="nl">batch:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'batch'</span>
 <a id="__codelineno-55-15" name="__codelineno-55-15"></a><span class="hll"><span class="w">    </span><span class="nl">character:</span><span class="w"> </span><span class="n">String</span>
 </span><a id="__codelineno-55-16" name="__codelineno-55-16"></a><span class="o">}</span>
 <a id="__codelineno-55-17" name="__codelineno-55-17"></a>
@@ -6305,24 +6305,24 @@ Nextflow의 컨테이너 지원에 대해 더 자세히 알아보려면 <a href=
 <a id="__codelineno-55-41" name="__codelineno-55-41"></a>
 <a id="__codelineno-55-42" name="__codelineno-55-42"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-55-43" name="__codelineno-55-43"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-55-44" name="__codelineno-55-44"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;2d-container/intermediates&#39;</span>
-<a id="__codelineno-55-45" name="__codelineno-55-45"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-55-44" name="__codelineno-55-44"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'2d-container/intermediates'</span>
+<a id="__codelineno-55-45" name="__codelineno-55-45"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-55-46" name="__codelineno-55-46"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-55-47" name="__codelineno-55-47"></a><span class="w">    </span><span class="n">uppercased</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-55-48" name="__codelineno-55-48"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;2d-container/intermediates&#39;</span>
-<a id="__codelineno-55-49" name="__codelineno-55-49"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-55-48" name="__codelineno-55-48"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'2d-container/intermediates'</span>
+<a id="__codelineno-55-49" name="__codelineno-55-49"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-55-50" name="__codelineno-55-50"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-55-51" name="__codelineno-55-51"></a><span class="w">    </span><span class="n">collected</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-55-52" name="__codelineno-55-52"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;2d-container/intermediates&#39;</span>
-<a id="__codelineno-55-53" name="__codelineno-55-53"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-55-52" name="__codelineno-55-52"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'2d-container/intermediates'</span>
+<a id="__codelineno-55-53" name="__codelineno-55-53"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-55-54" name="__codelineno-55-54"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-55-55" name="__codelineno-55-55"></a><span class="w">    </span><span class="n">batch_report</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-55-56" name="__codelineno-55-56"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;2d-container&#39;</span>
-<a id="__codelineno-55-57" name="__codelineno-55-57"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-55-56" name="__codelineno-55-56"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'2d-container'</span>
+<a id="__codelineno-55-57" name="__codelineno-55-57"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-55-58" name="__codelineno-55-58"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-55-59" name="__codelineno-55-59"></a><span class="hll"><span class="w">    </span><span class="n">cowpy_art</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-55-60" name="__codelineno-55-60"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;2d-container&#39;</span>
-</span><a id="__codelineno-55-61" name="__codelineno-55-61"></a><span class="hll"><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+</span><a id="__codelineno-55-60" name="__codelineno-55-60"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'2d-container'</span>
+</span><a id="__codelineno-55-61" name="__codelineno-55-61"></a><span class="hll"><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 </span><a id="__codelineno-55-62" name="__codelineno-55-62"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span><a id="__codelineno-55-63" name="__codelineno-55-63"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -6358,19 +6358,19 @@ Nextflow의 컨테이너 지원에 대해 더 자세히 알아보려면 <a href=
 <a id="__codelineno-57-3" name="__codelineno-57-3"></a><span class="c1">// Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)</span>
 <a id="__codelineno-57-4" name="__codelineno-57-4"></a><span class="n">process</span><span class="w"> </span><span class="n">cowpy</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-57-5" name="__codelineno-57-5"></a>
-<a id="__codelineno-57-6" name="__codelineno-57-6"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<a id="__codelineno-57-6" name="__codelineno-57-6"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span>
 <a id="__codelineno-57-7" name="__codelineno-57-7"></a>
 <a id="__codelineno-57-8" name="__codelineno-57-8"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-57-9" name="__codelineno-57-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
 <a id="__codelineno-57-10" name="__codelineno-57-10"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">character</span>
 <a id="__codelineno-57-11" name="__codelineno-57-11"></a>
 <a id="__codelineno-57-12" name="__codelineno-57-12"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-57-13" name="__codelineno-57-13"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;cowpy-${input_file}&quot;</span>
+<a id="__codelineno-57-13" name="__codelineno-57-13"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"cowpy-${input_file}"</span>
 <a id="__codelineno-57-14" name="__codelineno-57-14"></a>
 <a id="__codelineno-57-15" name="__codelineno-57-15"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-57-16" name="__codelineno-57-16"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-57-17" name="__codelineno-57-17"></a><span class="s2">    cat ${input_file} | cowpy -c &quot;${character}&quot; &gt; cowpy-${input_file}</span>
-<a id="__codelineno-57-18" name="__codelineno-57-18"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-57-16" name="__codelineno-57-16"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-57-17" name="__codelineno-57-17"></a><span class="s2">    cat ${input_file} | cowpy -c "${character}" &gt; cowpy-${input_file}</span>
+<a id="__codelineno-57-18" name="__codelineno-57-18"></a><span class="s2">    """</span>
 <a id="__codelineno-57-19" name="__codelineno-57-19"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </details>
@@ -6484,10 +6484,10 @@ Nextflow의 컨테이너 지원에 대해 더 자세히 알아보려면 <a href=
 <summary>파일 내용</summary>
 <div class="highlight"><span class="filename">work/7f/caf71890cce1667c094d880f4b6dcc/.command.run</span><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="gp">#</span>!/bin/bash
 <a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a><span class="gp">#</span><span class="c1">## ---</span>
-<a id="__codelineno-62-3" name="__codelineno-62-3" href="#__codelineno-62-3"></a><span class="gp">#</span><span class="c1">## name: &#39;cowpy&#39;</span>
-<a id="__codelineno-62-4" name="__codelineno-62-4" href="#__codelineno-62-4"></a><span class="gp">#</span><span class="c1">## container: &#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<a id="__codelineno-62-3" name="__codelineno-62-3" href="#__codelineno-62-3"></a><span class="gp">#</span><span class="c1">## name: 'cowpy'</span>
+<a id="__codelineno-62-4" name="__codelineno-62-4" href="#__codelineno-62-4"></a><span class="gp">#</span><span class="c1">## container: 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span>
 <a id="__codelineno-62-5" name="__codelineno-62-5" href="#__codelineno-62-5"></a><span class="gp">#</span><span class="c1">## outputs:</span>
-<a id="__codelineno-62-6" name="__codelineno-62-6" href="#__codelineno-62-6"></a><span class="gp">#</span><span class="c1">## - &#39;cowpy-COLLECTED-batch-output.txt&#39;</span>
+<a id="__codelineno-62-6" name="__codelineno-62-6" href="#__codelineno-62-6"></a><span class="gp">#</span><span class="c1">## - 'cowpy-COLLECTED-batch-output.txt'</span>
 <a id="__codelineno-62-7" name="__codelineno-62-7" href="#__codelineno-62-7"></a><span class="gp">#</span><span class="c1">## ...</span>
 <a id="__codelineno-62-8" name="__codelineno-62-8" href="#__codelineno-62-8"></a><span class="go">set -e</span>
 <a id="__codelineno-62-9" name="__codelineno-62-9" href="#__codelineno-62-9"></a><span class="go">set -u</span>
@@ -6497,13 +6497,13 @@ Nextflow의 컨테이너 지원에 대해 더 자세히 알아보려면 <a href=
 <a id="__codelineno-62-13" name="__codelineno-62-13" href="#__codelineno-62-13"></a><span class="go">...</span>
 <a id="__codelineno-62-14" name="__codelineno-62-14" href="#__codelineno-62-14"></a>
 <a id="__codelineno-62-15" name="__codelineno-62-15" href="#__codelineno-62-15"></a><span class="go">nxf_launch() {</span>
-<a id="__codelineno-62-16" name="__codelineno-62-16" href="#__codelineno-62-16"></a><span class="go">    docker run -i --cpu-shares 1024 -e &quot;NXF_TASK_WORKDIR&quot; -v /workspaces/training/nextflow-run/work:/workspaces/training/nextflow-run/work -w &quot;$NXF_TASK_WORKDIR&quot; --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/nextflow-run/work/7f/caf71890cce1667c094d880f4b6dcc/.command.sh</span>
+<a id="__codelineno-62-16" name="__codelineno-62-16" href="#__codelineno-62-16"></a><span class="go">    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/nextflow-run/work:/workspaces/training/nextflow-run/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/nextflow-run/work/7f/caf71890cce1667c094d880f4b6dcc/.command.sh</span>
 <a id="__codelineno-62-17" name="__codelineno-62-17" href="#__codelineno-62-17"></a><span class="go">}</span>
 </code></pre></div>
 </details>
 <p>이 파일에서 <code>nxf_launch</code>를 검색하면 다음과 같은 것을 볼 수 있습니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="go">nxf_launch() {</span>
-<a id="__codelineno-63-2" name="__codelineno-63-2" href="#__codelineno-63-2"></a><span class="go">    docker run -i --cpu-shares 1024 -e &quot;NXF_TASK_WORKDIR&quot; -v /workspaces/training/nextflow-run/work:/workspaces/training/nextflow-run/work -w &quot;$NXF_TASK_WORKDIR&quot; --name $NXF_BOXID community.wave.seqera.io/library/pip_cowpy:131d6a1b707a8e65 /bin/bash -ue /workspaces/training/nextflow-run/work/7f/caf7189fca6c56ba627b75749edcb3/.command.sh</span>
+<a id="__codelineno-63-2" name="__codelineno-63-2" href="#__codelineno-63-2"></a><span class="go">    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/nextflow-run/work:/workspaces/training/nextflow-run/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/pip_cowpy:131d6a1b707a8e65 /bin/bash -ue /workspaces/training/nextflow-run/work/7f/caf7189fca6c56ba627b75749edcb3/.command.sh</span>
 <a id="__codelineno-63-3" name="__codelineno-63-3" href="#__codelineno-63-3"></a><span class="go">}</span>
 </code></pre></div>
 <p>이 시작 명령은 Nextflow가 수동으로 실행할 때와 매우 유사한 <code>docker run</code> 명령을 사용하여 process 실행을 시작하고 있음을 보여줍니다.
@@ -6624,7 +6624,7 @@ export NO_COLOR=1
     <a href="#quiz-3" class="quiz-header-link">#</a>
 
     <div class="quiz-question" id="quiz-3-question">
-        <p>출력 파일 이름에 입력 값을 포함하는 것이 중요한 이유는 무엇인가요(예: <code class="highlight"><span class="s2">&quot;${greeting}-output.txt&quot;</span></code>)?</p>
+        <p>출력 파일 이름에 입력 값을 포함하는 것이 중요한 이유는 무엇인가요(예: <code class="highlight"><span class="s2">"${greeting}-output.txt"</span></code>)?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
         <fieldset aria-labelledby="quiz-3-question"><div><input type="radio" name="answer" value="0" id="quiz-3-0" ><label for="quiz-3-0">처리 속도를 향상시키기 위해</label></div><div><input type="radio" name="answer" value="1" id="quiz-3-1" ><label for="quiz-3-1">resume 기능을 활성화하기 위해</label></div><div><input type="radio" name="answer" value="2" id="quiz-3-2" data-correct="true"><label for="quiz-3-2">여러 입력을 처리할 때 출력 파일이 서로 덮어쓰지 않도록 방지하기 위해</label></div><div><input type="radio" name="answer" value="3" id="quiz-3-3" ><label for="quiz-3-3">파일을 더 쉽게 압축하기 위해</label></div></fieldset>
@@ -7054,9 +7054,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -7295,7 +7296,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -7974,7 +7975,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -8266,7 +8267,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -8438,7 +8439,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -8448,7 +8449,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

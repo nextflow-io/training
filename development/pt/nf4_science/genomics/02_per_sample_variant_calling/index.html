@@ -5141,9 +5141,9 @@ Em seguida, vamos encapsular esses mesmos comandos em um fluxo de trabalho Nextf
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="nl">output:</span>
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="s2">"""</span>
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="s2">    """</span>
 <a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="o">}</span>
 </code></pre></div>
 <div class="highlight"><span class="filename">modules/gatk_haplotypecaller.nf</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
@@ -5160,9 +5160,9 @@ Em seguida, vamos encapsular esses mesmos comandos em um fluxo de trabalho Nextf
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="nl">output:</span>
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="s2">"""</span>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="s2">    """</span>
 <a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="o">}</span>
 </code></pre></div>
 </details>
@@ -5189,7 +5189,7 @@ Em seguida, vamos encapsular esses mesmos comandos em um fluxo de trabalho Nextf
 <h2 id="1-escrever-um-fluxo-de-trabalho-de-uma-unica-etapa-que-executa-o-samtools-index-em-um-arquivo-bam">1. Escrever um fluxo de trabalho de uma única etapa que executa o Samtools index em um arquivo BAM<a class="headerlink" href="#1-escrever-um-fluxo-de-trabalho-de-uma-unica-etapa-que-executa-o-samtools-index-em-um-arquivo-bam" title="Permanent link">&para;</a></h2>
 <p>Esta primeira etapa se concentra no básico: carregar um arquivo BAM e gerar um índice para ele.</p>
 <p>Lembre-se do comando <code>samtools index</code> da <a href="../01_method/">Parte 1</a>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>samtools<span class="w"> </span>index<span class="w"> </span><span class="s1">&#39;&lt;input_bam&gt;&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>samtools<span class="w"> </span>index<span class="w"> </span><span class="s1">'&lt;input_bam&gt;'</span>
 </code></pre></div>
 <p>O comando recebe um arquivo BAM como entrada e produz um arquivo de índice <code>.bai</code> ao lado dele.
 O URI do contêiner era <code>community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464</code>.</p>
@@ -5254,7 +5254,7 @@ Esta é uma convenção comum no ecossistema Nextflow (veja <a href="../../../he
 <a id="__codelineno-6-2" name="__codelineno-6-2"></a>
 <a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="hll"><span class="n">profiles</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="hll"><span class="w">        </span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/bam/reads_mother.bam&quot;</span>
+</span><a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="hll"><span class="w">        </span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/bam/reads_mother.bam"</span>
 </span><a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span><a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="hll"><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
@@ -5336,9 +5336,9 @@ Você deve reconhecer os principais elementos estruturais; caso contrário, cons
 <a id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="w">    </span><span class="nl">output:</span>
 <a id="__codelineno-10-13" name="__codelineno-10-13"></a>
 <a id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="w">    </span><span class="s2">"""</span>
 <a id="__codelineno-10-16" name="__codelineno-10-16"></a>
-<a id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="s2">    """</span>
 <a id="__codelineno-10-18" name="__codelineno-10-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5369,18 +5369,18 @@ Você deve reconhecer os principais elementos estruturais; caso contrário, cons
 <a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="cm"> */</span>
 <a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="n">process</span><span class="w"> </span><span class="n">SAMTOOLS_INDEX</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-11-7" name="__codelineno-11-7"></a>
-<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="hll"><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464&#39;</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="hll"><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'</span>
 </span><a id="__codelineno-11-9" name="__codelineno-11-9"></a>
 <a id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_bam</span>
 </span><a id="__codelineno-11-12" name="__codelineno-11-12"></a>
 <a id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${input_bam}.bai&quot;</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${input_bam}.bai"</span>
 </span><a id="__codelineno-11-15" name="__codelineno-11-15"></a>
 <a id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="hll"><span class="s2">    samtools index &#39;$input_bam&#39;</span>
-</span><a id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="hll"><span class="s2">    samtools index '$input_bam'</span>
+</span><a id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="s2">    """</span>
 <a id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5395,7 +5395,7 @@ Para usá-lo no fluxo de trabalho, você precisará importar o módulo e adicion
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-3">3</a></span>
 <span class="normal"><a href="#__codelineno-12-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="c1">// Module INCLUDE statements</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAMTOOLS_INDEX</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/samtools_index.nf&#39;</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAMTOOLS_INDEX</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/samtools_index.nf'</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -5485,7 +5485,7 @@ Vamos adicionar um destino para <code>bam_index</code> que publica em um subdire
 <span class="normal"><a href="#__codelineno-18-29">29</a></span>
 <span class="normal"><a href="#__codelineno-18-30">30</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-26" name="__codelineno-18-26"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-18-27" name="__codelineno-18-27"></a><span class="hll"><span class="w">    </span><span class="n">bam_index</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-18-28" name="__codelineno-18-28"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;bam&#39;</span>
+</span><a id="__codelineno-18-28" name="__codelineno-18-28"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'bam'</span>
 </span><a id="__codelineno-18-29" name="__codelineno-18-29"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span><a id="__codelineno-18-30" name="__codelineno-18-30"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5621,11 +5621,11 @@ Precisamos declarar parâmetros para eles, adicionar valores padrão ao perfil d
 <span class="normal"><a href="#__codelineno-27-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-27-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-27-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="n">test</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/bam/reads_mother.bam&quot;</span>
-<a id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="hll"><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.fasta&quot;</span>
-</span><a id="__codelineno-27-7" name="__codelineno-27-7"></a><span class="hll"><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.fasta.fai&quot;</span>
-</span><a id="__codelineno-27-8" name="__codelineno-27-8"></a><span class="hll"><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.dict&quot;</span>
-</span><a id="__codelineno-27-9" name="__codelineno-27-9"></a><span class="hll"><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">intervals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/intervals.bed&quot;</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/bam/reads_mother.bam"</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="hll"><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/ref.fasta"</span>
+</span><a id="__codelineno-27-7" name="__codelineno-27-7"></a><span class="hll"><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/ref.fasta.fai"</span>
+</span><a id="__codelineno-27-8" name="__codelineno-27-8"></a><span class="hll"><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/ref.dict"</span>
+</span><a id="__codelineno-27-9" name="__codelineno-27-9"></a><span class="hll"><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">intervals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/intervals.bed"</span>
 </span><a id="__codelineno-27-10" name="__codelineno-27-10"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5633,7 +5633,7 @@ Precisamos declarar parâmetros para eles, adicionar valores padrão ao perfil d
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-4">4</a></span>
 <span class="normal"><a href="#__codelineno-28-5">5</a></span>
 <span class="normal"><a href="#__codelineno-28-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="n">test</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/bam/reads_mother.bam&quot;</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/bam/reads_mother.bam"</span>
 <a id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5735,9 +5735,9 @@ Você pode aprender mais sobre isso na Side Quest <a href="../../../side_quests/
 <a id="__codelineno-31-12" name="__codelineno-31-12"></a><span class="w">    </span><span class="nl">output:</span>
 <a id="__codelineno-31-13" name="__codelineno-31-13"></a>
 <a id="__codelineno-31-14" name="__codelineno-31-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-31-15" name="__codelineno-31-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-31-15" name="__codelineno-31-15"></a><span class="w">    </span><span class="s2">"""</span>
 <a id="__codelineno-31-16" name="__codelineno-31-16"></a>
-<a id="__codelineno-31-17" name="__codelineno-31-17"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-31-17" name="__codelineno-31-17"></a><span class="s2">    """</span>
 <a id="__codelineno-31-18" name="__codelineno-31-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5778,7 +5778,7 @@ Você pode aprender mais sobre isso na Side Quest <a href="../../../side_quests/
 <a id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="cm"> */</span>
 <a id="__codelineno-32-6" name="__codelineno-32-6"></a><span class="n">process</span><span class="w"> </span><span class="n">GATK_HAPLOTYPECALLER</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-32-7" name="__codelineno-32-7"></a>
-<a id="__codelineno-32-8" name="__codelineno-32-8"></a><span class="hll"><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">&quot;community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867&quot;</span>
+<a id="__codelineno-32-8" name="__codelineno-32-8"></a><span class="hll"><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">"community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"</span>
 </span><a id="__codelineno-32-9" name="__codelineno-32-9"></a>
 <a id="__codelineno-32-10" name="__codelineno-32-10"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-32-11" name="__codelineno-32-11"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_bam</span>
@@ -5789,17 +5789,17 @@ Você pode aprender mais sobre isso na Side Quest <a href="../../../side_quests/
 </span><a id="__codelineno-32-16" name="__codelineno-32-16"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">interval_list</span>
 </span><a id="__codelineno-32-17" name="__codelineno-32-17"></a>
 <a id="__codelineno-32-18" name="__codelineno-32-18"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-32-19" name="__codelineno-32-19"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${input_bam}.vcf&quot;</span><span class="w">     </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">vcf</span>
-</span><a id="__codelineno-32-20" name="__codelineno-32-20"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${input_bam}.vcf.idx&quot;</span><span class="w"> </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">idx</span>
+<a id="__codelineno-32-19" name="__codelineno-32-19"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${input_bam}.vcf"</span><span class="w">     </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">vcf</span>
+</span><a id="__codelineno-32-20" name="__codelineno-32-20"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${input_bam}.vcf.idx"</span><span class="w"> </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">idx</span>
 </span><a id="__codelineno-32-21" name="__codelineno-32-21"></a>
 <a id="__codelineno-32-22" name="__codelineno-32-22"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-32-23" name="__codelineno-32-23"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-32-23" name="__codelineno-32-23"></a><span class="w">    </span><span class="s2">"""</span>
 <a id="__codelineno-32-24" name="__codelineno-32-24"></a><span class="hll"><span class="s2">    gatk HaplotypeCaller \</span>
 </span><a id="__codelineno-32-25" name="__codelineno-32-25"></a><span class="hll"><span class="s2">        -R ${ref_fasta} \</span>
 </span><a id="__codelineno-32-26" name="__codelineno-32-26"></a><span class="hll"><span class="s2">        -I ${input_bam} \</span>
 </span><a id="__codelineno-32-27" name="__codelineno-32-27"></a><span class="hll"><span class="s2">        -O ${input_bam}.vcf \</span>
 </span><a id="__codelineno-32-28" name="__codelineno-32-28"></a><span class="hll"><span class="s2">        -L ${interval_list}</span>
-</span><a id="__codelineno-32-29" name="__codelineno-32-29"></a><span class="s2">    &quot;&quot;&quot;</span>
+</span><a id="__codelineno-32-29" name="__codelineno-32-29"></a><span class="s2">    """</span>
 <a id="__codelineno-32-30" name="__codelineno-32-30"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5820,14 +5820,14 @@ Para usá-lo no fluxo de trabalho, você precisará importar o módulo e adicion
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-3">3</a></span>
 <span class="normal"><a href="#__codelineno-33-4">4</a></span>
 <span class="normal"><a href="#__codelineno-33-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-3" name="__codelineno-33-3"></a><span class="c1">// Module INCLUDE statements</span>
-<a id="__codelineno-33-4" name="__codelineno-33-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAMTOOLS_INDEX</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/samtools_index.nf&#39;</span>
-<a id="__codelineno-33-5" name="__codelineno-33-5"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">GATK_HAPLOTYPECALLER</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/gatk_haplotypecaller.nf&#39;</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAMTOOLS_INDEX</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/samtools_index.nf'</span>
+<a id="__codelineno-33-5" name="__codelineno-33-5"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">GATK_HAPLOTYPECALLER</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/gatk_haplotypecaller.nf'</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-3">3</a></span>
 <span class="normal"><a href="#__codelineno-34-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-3" name="__codelineno-34-3"></a><span class="c1">// Module INCLUDE statements</span>
-<a id="__codelineno-34-4" name="__codelineno-34-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAMTOOLS_INDEX</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/samtools_index.nf&#39;</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAMTOOLS_INDEX</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/samtools_index.nf'</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5923,13 +5923,13 @@ No Nextflow, as entradas são posicionais, o que significa que você <em>deve</e
 <span class="normal"><a href="#__codelineno-39-60">60</a></span>
 <span class="normal"><a href="#__codelineno-39-61">61</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-51" name="__codelineno-39-51"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-39-52" name="__codelineno-39-52"></a><span class="w">    </span><span class="n">bam_index</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-39-53" name="__codelineno-39-53"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;bam&#39;</span>
+<a id="__codelineno-39-53" name="__codelineno-39-53"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'bam'</span>
 <a id="__codelineno-39-54" name="__codelineno-39-54"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-39-55" name="__codelineno-39-55"></a><span class="hll"><span class="w">    </span><span class="n">vcf</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-39-56" name="__codelineno-39-56"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;vcf&#39;</span>
+</span><a id="__codelineno-39-56" name="__codelineno-39-56"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'vcf'</span>
 </span><a id="__codelineno-39-57" name="__codelineno-39-57"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span><a id="__codelineno-39-58" name="__codelineno-39-58"></a><span class="hll"><span class="w">    </span><span class="n">vcf_idx</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-39-59" name="__codelineno-39-59"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;vcf&#39;</span>
+</span><a id="__codelineno-39-59" name="__codelineno-39-59"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'vcf'</span>
 </span><a id="__codelineno-39-60" name="__codelineno-39-60"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span><a id="__codelineno-39-61" name="__codelineno-39-61"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5941,7 +5941,7 @@ No Nextflow, as entradas são posicionais, o que significa que você <em>deve</e
 <span class="normal"><a href="#__codelineno-40-52">52</a></span>
 <span class="normal"><a href="#__codelineno-40-53">53</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-40-49" name="__codelineno-40-49"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-40-50" name="__codelineno-40-50"></a><span class="w">    </span><span class="n">bam_index</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-40-51" name="__codelineno-40-51"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;bam&#39;</span>
+<a id="__codelineno-40-51" name="__codelineno-40-51"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'bam'</span>
 <a id="__codelineno-40-52" name="__codelineno-40-52"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-40-53" name="__codelineno-40-53"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -6048,14 +6048,14 @@ Esta é uma maneira rápida de testar a execução de várias amostras; na próx
 <span class="normal"><a href="#__codelineno-47-13">13</a></span>
 <span class="normal"><a href="#__codelineno-47-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-4" name="__codelineno-47-4"></a><span class="n">test</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-47-5" name="__codelineno-47-5"></a><span class="hll"><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
-</span><a id="__codelineno-47-6" name="__codelineno-47-6"></a><span class="hll"><span class="w">        </span><span class="s2">&quot;${projectDir}/data/bam/reads_mother.bam&quot;</span><span class="o">,</span>
-</span><a id="__codelineno-47-7" name="__codelineno-47-7"></a><span class="hll"><span class="w">        </span><span class="s2">&quot;${projectDir}/data/bam/reads_father.bam&quot;</span><span class="o">,</span>
-</span><a id="__codelineno-47-8" name="__codelineno-47-8"></a><span class="hll"><span class="w">        </span><span class="s2">&quot;${projectDir}/data/bam/reads_son.bam&quot;</span>
+</span><a id="__codelineno-47-6" name="__codelineno-47-6"></a><span class="hll"><span class="w">        </span><span class="s2">"${projectDir}/data/bam/reads_mother.bam"</span><span class="o">,</span>
+</span><a id="__codelineno-47-7" name="__codelineno-47-7"></a><span class="hll"><span class="w">        </span><span class="s2">"${projectDir}/data/bam/reads_father.bam"</span><span class="o">,</span>
+</span><a id="__codelineno-47-8" name="__codelineno-47-8"></a><span class="hll"><span class="w">        </span><span class="s2">"${projectDir}/data/bam/reads_son.bam"</span>
 </span><a id="__codelineno-47-9" name="__codelineno-47-9"></a><span class="hll"><span class="w">    </span><span class="o">]</span>
-</span><a id="__codelineno-47-10" name="__codelineno-47-10"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.fasta&quot;</span>
-<a id="__codelineno-47-11" name="__codelineno-47-11"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.fasta.fai&quot;</span>
-<a id="__codelineno-47-12" name="__codelineno-47-12"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.dict&quot;</span>
-<a id="__codelineno-47-13" name="__codelineno-47-13"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">intervals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/intervals.bed&quot;</span>
+</span><a id="__codelineno-47-10" name="__codelineno-47-10"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/ref.fasta"</span>
+<a id="__codelineno-47-11" name="__codelineno-47-11"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/ref.fasta.fai"</span>
+<a id="__codelineno-47-12" name="__codelineno-47-12"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/ref.dict"</span>
+<a id="__codelineno-47-13" name="__codelineno-47-13"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">intervals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/intervals.bed"</span>
 <a id="__codelineno-47-14" name="__codelineno-47-14"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -6067,11 +6067,11 @@ Esta é uma maneira rápida de testar a execução de várias amostras; na próx
 <span class="normal"><a href="#__codelineno-48-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-48-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-48-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-48-4" name="__codelineno-48-4"></a><span class="n">test</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-48-5" name="__codelineno-48-5"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/bam/reads_mother.bam&quot;</span>
-<a id="__codelineno-48-6" name="__codelineno-48-6"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.fasta&quot;</span>
-<a id="__codelineno-48-7" name="__codelineno-48-7"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.fasta.fai&quot;</span>
-<a id="__codelineno-48-8" name="__codelineno-48-8"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.dict&quot;</span>
-<a id="__codelineno-48-9" name="__codelineno-48-9"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">intervals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/intervals.bed&quot;</span>
+<a id="__codelineno-48-5" name="__codelineno-48-5"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/bam/reads_mother.bam"</span>
+<a id="__codelineno-48-6" name="__codelineno-48-6"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/ref.fasta"</span>
+<a id="__codelineno-48-7" name="__codelineno-48-7"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/ref.fasta.fai"</span>
+<a id="__codelineno-48-8" name="__codelineno-48-8"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/ref.dict"</span>
+<a id="__codelineno-48-9" name="__codelineno-48-9"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">intervals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/intervals.bed"</span>
 <a id="__codelineno-48-10" name="__codelineno-48-10"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -6123,7 +6123,7 @@ Esta é uma maneira rápida de testar a execução de várias amostras; na próx
 <a id="__codelineno-51-5" name="__codelineno-51-5" href="#__codelineno-51-5"></a><span class="go">executor &gt;  local (4)</span>
 <a id="__codelineno-51-6" name="__codelineno-51-6" href="#__codelineno-51-6"></a><span class="go">[01/eea165] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 1 ✔</span>
 <a id="__codelineno-51-7" name="__codelineno-51-7" href="#__codelineno-51-7"></a><span class="go">[a5/fa9fd0] GATK_HAPLOTYPECALLER (3) | 1 of 3, cached: 1</span>
-<a id="__codelineno-51-8" name="__codelineno-51-8" href="#__codelineno-51-8"></a><span class="go">ERROR ~ Error executing process &gt; &#39;GATK_HAPLOTYPECALLER (2)&#39;</span>
+<a id="__codelineno-51-8" name="__codelineno-51-8" href="#__codelineno-51-8"></a><span class="go">ERROR ~ Error executing process &gt; 'GATK_HAPLOTYPECALLER (2)'</span>
 <a id="__codelineno-51-9" name="__codelineno-51-9" href="#__codelineno-51-9"></a>
 <a id="__codelineno-51-10" name="__codelineno-51-10" href="#__codelineno-51-10"></a><span class="go">Caused by:</span>
 <a id="__codelineno-51-11" name="__codelineno-51-11" href="#__codelineno-51-11"></a><span class="go">  Process `GATK_HAPLOTYPECALLER (2)` terminated with an error exit status (2)</span>
@@ -6238,13 +6238,13 @@ No entanto, elas vão poluir sua saída do console, então recomendamos removê-
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/samtools_index.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-58-14">14</a></span>
 <span class="normal"><a href="#__codelineno-58-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-58-14" name="__codelineno-58-14"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-58-15" name="__codelineno-58-15"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">input_bam</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;${input_bam}.bai&quot;</span><span class="o">)</span>
+<a id="__codelineno-58-15" name="__codelineno-58-15"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">input_bam</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"${input_bam}.bai"</span><span class="o">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/samtools_index.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-59-14">14</a></span>
 <span class="normal"><a href="#__codelineno-59-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-59-14" name="__codelineno-59-14"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-59-15" name="__codelineno-59-15"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${input_bam}.bai&quot;</span>
+<a id="__codelineno-59-15" name="__codelineno-59-15"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${input_bam}.bai"</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -6323,13 +6323,13 @@ No entanto, elas vão poluir sua saída do console, então recomendamos removê-
 <a id="__codelineno-64-51" name="__codelineno-64-51"></a>
 <a id="__codelineno-64-52" name="__codelineno-64-52"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-64-53" name="__codelineno-64-53"></a><span class="hll"><span class="w">    </span><span class="n">indexed_bam</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-64-54" name="__codelineno-64-54"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;bam&#39;</span>
+</span><a id="__codelineno-64-54" name="__codelineno-64-54"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'bam'</span>
 <a id="__codelineno-64-55" name="__codelineno-64-55"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-64-56" name="__codelineno-64-56"></a><span class="w">    </span><span class="n">vcf</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-64-57" name="__codelineno-64-57"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;vcf&#39;</span>
+<a id="__codelineno-64-57" name="__codelineno-64-57"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'vcf'</span>
 <a id="__codelineno-64-58" name="__codelineno-64-58"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-64-59" name="__codelineno-64-59"></a><span class="w">    </span><span class="n">vcf_idx</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-64-60" name="__codelineno-64-60"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;vcf&#39;</span>
+<a id="__codelineno-64-60" name="__codelineno-64-60"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'vcf'</span>
 <a id="__codelineno-64-61" name="__codelineno-64-61"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-64-62" name="__codelineno-64-62"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -6359,13 +6359,13 @@ No entanto, elas vão poluir sua saída do console, então recomendamos removê-
 <a id="__codelineno-65-51" name="__codelineno-65-51"></a>
 <a id="__codelineno-65-52" name="__codelineno-65-52"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-65-53" name="__codelineno-65-53"></a><span class="w">    </span><span class="n">bam_index</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-65-54" name="__codelineno-65-54"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;bam&#39;</span>
+<a id="__codelineno-65-54" name="__codelineno-65-54"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'bam'</span>
 <a id="__codelineno-65-55" name="__codelineno-65-55"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-65-56" name="__codelineno-65-56"></a><span class="w">    </span><span class="n">vcf</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-65-57" name="__codelineno-65-57"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;vcf&#39;</span>
+<a id="__codelineno-65-57" name="__codelineno-65-57"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'vcf'</span>
 <a id="__codelineno-65-58" name="__codelineno-65-58"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-65-59" name="__codelineno-65-59"></a><span class="w">    </span><span class="n">vcf_idx</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-65-60" name="__codelineno-65-60"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;vcf&#39;</span>
+<a id="__codelineno-65-60" name="__codelineno-65-60"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'vcf'</span>
 <a id="__codelineno-65-61" name="__codelineno-65-61"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-65-62" name="__codelineno-65-62"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -6483,11 +6483,11 @@ Se você não estiver executando isso no ambiente de treinamento que fornecemos,
 <span class="normal"><a href="#__codelineno-72-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-72-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-72-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-72-4" name="__codelineno-72-4"></a><span class="n">test</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-72-5" name="__codelineno-72-5"></a><span class="hll"><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/samplesheet.csv&quot;</span>
-</span><a id="__codelineno-72-6" name="__codelineno-72-6"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.fasta&quot;</span>
-<a id="__codelineno-72-7" name="__codelineno-72-7"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.fasta.fai&quot;</span>
-<a id="__codelineno-72-8" name="__codelineno-72-8"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.dict&quot;</span>
-<a id="__codelineno-72-9" name="__codelineno-72-9"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">intervals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/intervals.bed&quot;</span>
+<a id="__codelineno-72-5" name="__codelineno-72-5"></a><span class="hll"><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/samplesheet.csv"</span>
+</span><a id="__codelineno-72-6" name="__codelineno-72-6"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/ref.fasta"</span>
+<a id="__codelineno-72-7" name="__codelineno-72-7"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/ref.fasta.fai"</span>
+<a id="__codelineno-72-8" name="__codelineno-72-8"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/ref.dict"</span>
+<a id="__codelineno-72-9" name="__codelineno-72-9"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">intervals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/intervals.bed"</span>
 <a id="__codelineno-72-10" name="__codelineno-72-10"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -6504,14 +6504,14 @@ Se você não estiver executando isso no ambiente de treinamento que fornecemos,
 <span class="normal"><a href="#__codelineno-73-13">13</a></span>
 <span class="normal"><a href="#__codelineno-73-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-73-4" name="__codelineno-73-4"></a><span class="n">test</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-73-5" name="__codelineno-73-5"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
-<a id="__codelineno-73-6" name="__codelineno-73-6"></a><span class="w">        </span><span class="s2">&quot;${projectDir}/data/bam/reads_mother.bam&quot;</span><span class="o">,</span>
-<a id="__codelineno-73-7" name="__codelineno-73-7"></a><span class="w">        </span><span class="s2">&quot;${projectDir}/data/bam/reads_father.bam&quot;</span><span class="o">,</span>
-<a id="__codelineno-73-8" name="__codelineno-73-8"></a><span class="w">        </span><span class="s2">&quot;${projectDir}/data/bam/reads_son.bam&quot;</span>
+<a id="__codelineno-73-6" name="__codelineno-73-6"></a><span class="w">        </span><span class="s2">"${projectDir}/data/bam/reads_mother.bam"</span><span class="o">,</span>
+<a id="__codelineno-73-7" name="__codelineno-73-7"></a><span class="w">        </span><span class="s2">"${projectDir}/data/bam/reads_father.bam"</span><span class="o">,</span>
+<a id="__codelineno-73-8" name="__codelineno-73-8"></a><span class="w">        </span><span class="s2">"${projectDir}/data/bam/reads_son.bam"</span>
 <a id="__codelineno-73-9" name="__codelineno-73-9"></a><span class="w">    </span><span class="o">]</span>
-<a id="__codelineno-73-10" name="__codelineno-73-10"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.fasta&quot;</span>
-<a id="__codelineno-73-11" name="__codelineno-73-11"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.fasta.fai&quot;</span>
-<a id="__codelineno-73-12" name="__codelineno-73-12"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.dict&quot;</span>
-<a id="__codelineno-73-13" name="__codelineno-73-13"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">intervals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/intervals.bed&quot;</span>
+<a id="__codelineno-73-10" name="__codelineno-73-10"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/ref.fasta"</span>
+<a id="__codelineno-73-11" name="__codelineno-73-11"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/ref.fasta.fai"</span>
+<a id="__codelineno-73-12" name="__codelineno-73-12"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">reference_dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/ref.dict"</span>
+<a id="__codelineno-73-13" name="__codelineno-73-13"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">intervals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/data/ref/intervals.bed"</span>
 <a id="__codelineno-73-14" name="__codelineno-73-14"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -6885,9 +6885,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -7126,7 +7127,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -7805,7 +7806,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -8097,7 +8098,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -8269,7 +8270,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -8279,7 +8280,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

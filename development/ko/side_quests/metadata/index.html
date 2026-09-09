@@ -5235,7 +5235,7 @@ Nextflow 파이프라인에서 메타데이터는 다음과 같은 용도로 사
 <summary><code>COWPY</code>는 무엇을 하나요?</summary>
 <p><code>COWPY</code>는 임의의 텍스트 입력을 재미있는 방식으로 표시하는 ASCII 아트를 생성하는 명령줄 도구입니다.
 Tony Monroe의 클래식 <a href="https://en.wikipedia.org/wiki/Cowsay">cowsay</a> 도구의 Python 구현입니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">cowpy &quot;Hello Nextflow&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">cowpy "Hello Nextflow"</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">______________________________________________________</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="go">&lt; Hello Nextflow &gt;</span>
@@ -5247,7 +5247,7 @@ Tony Monroe의 클래식 <a href="https://en.wikipedia.org/wiki/Cowsay">cowsay</
 <a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="go">          ||     ||</span>
 </code></pre></div>
 <p>선택적으로 기본 소 대신 사용할 캐릭터(또는 'cowacter')를 선택할 수 있습니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">cowpy &quot;Hello Nextflow&quot; -c tux</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">cowpy "Hello Nextflow" -c tux</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="go">__________________</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="go">&lt; Hello Nextflow &gt;</span>
@@ -5259,7 +5259,7 @@ Tony Monroe의 클래식 <a href="https://en.wikipedia.org/wiki/Cowsay">cowsay</
 <a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="go">      |:_/ |</span>
 <a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="go">      //   \ \</span>
 <a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="go">    (|     | )</span>
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="go">    /&#39;\_   _/`\</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="go">    /'\_   _/`\</span>
 <a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="go">    \___)=(___/</span>
 </code></pre></div>
 </details>
@@ -5302,7 +5302,7 @@ Tony Monroe의 클래식 <a href="https://en.wikipedia.org/wiki/Cowsay">cowsay</
 <a id="__codelineno-8-2" name="__codelineno-8-2"></a>
 <a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="n">workflow</span><span class="w">  </span><span class="o">{</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 <a id="__codelineno-8-8" name="__codelineno-8-8"></a>
@@ -5361,14 +5361,14 @@ Tony Monroe의 클래식 <a href="https://en.wikipedia.org/wiki/Cowsay">cowsay</
 <div class="highlight"><span class="filename">examples/map_demo.nf</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1">// 간단한 맵 생성</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="kt">def</span><span class="w"> </span><span class="n">my_map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="nl">id:</span><span class="s1">&#39;sampleA&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="s1">&#39;squirrel&#39;</span><span class="o">]</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="kt">def</span><span class="w"> </span><span class="n">my_map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="nl">id:</span><span class="s1">'sampleA'</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="s1">'squirrel'</span><span class="o">]</span>
 <a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
 <a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="c1">// 전체 맵 출력</span>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="n">println</span><span class="w"> </span><span class="s2">&quot;map: ${my_map}&quot;</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="n">println</span><span class="w"> </span><span class="s2">"map: ${my_map}"</span>
 <a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
 <a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="c1">// 점 표기법으로 개별 값 접근</span>
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="n">println</span><span class="w"> </span><span class="s2">&quot;id: ${my_map.id}&quot;</span>
-<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="n">println</span><span class="w"> </span><span class="s2">&quot;character: ${my_map.character}&quot;</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="n">println</span><span class="w"> </span><span class="s2">"id: ${my_map.id}"</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="n">println</span><span class="w"> </span><span class="s2">"character: ${my_map.character}"</span>
 </code></pre></div>
 <p>적절한 <code>workflow</code> 블록이 없더라도 Nextflow는 이를 워크플로우처럼 실행할 수 있습니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>examples/map_demo.nf
@@ -5395,7 +5395,7 @@ Tony Monroe의 클래식 <a href="https://en.wikipedia.org/wiki/Cowsay">cowsay</
 <span class="normal"><a href="#__codelineno-14-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-14-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-14-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-14-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-14-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 </span><a id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="hll"><span class="w">            </span><span class="n">row</span><span class="o">.</span><span class="na">character</span>
@@ -5406,7 +5406,7 @@ Tony Monroe의 클래식 <a href="https://en.wikipedia.org/wiki/Cowsay">cowsay</
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-5">5</a></span>
 <span class="normal"><a href="#__codelineno-15-6">6</a></span>
-<span class="normal"><a href="#__codelineno-15-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-15-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
@@ -5463,19 +5463,19 @@ Tony Monroe의 클래식 <a href="https://en.wikipedia.org/wiki/Cowsay">cowsay</
 <span class="normal"><a href="#__codelineno-18-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="c1">// cowpy로 ASCII 아트 생성</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-18-3" name="__codelineno-18-3"></a>
-<a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span>
 <a id="__codelineno-18-5" name="__codelineno-18-5"></a>
 <a id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
 </span><a id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="hll"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">character</span>
 </span><a id="__codelineno-18-9" name="__codelineno-18-9"></a>
 <a id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;cowpy-${input_file}&quot;</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"cowpy-${input_file}"</span>
 <a id="__codelineno-18-12" name="__codelineno-18-12"></a>
 <a id="__codelineno-18-13" name="__codelineno-18-13"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="w">    </span><span class="s2">"""</span>
 <a id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="s2">    cat ${input_file} | cowpy -c ${character} &gt; cowpy-${input_file}</span>
-<a id="__codelineno-18-16" name="__codelineno-18-16"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16"></a><span class="s2">    """</span>
 <a id="__codelineno-18-17" name="__codelineno-18-17"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>프로세스가 두 개의 별도 입력(녹음 파일과 캐릭터 이름)을 받는 것을 확인할 수 있습니다.
@@ -5491,7 +5491,7 @@ Tony Monroe의 클래식 <a href="https://en.wikipedia.org/wiki/Cowsay">cowsay</
 <span class="normal"><a href="#__codelineno-19-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-19-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-19-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-19-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-19-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">multiMap</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 </span><a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="hll"><span class="w">            </span><span class="nl">file:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span>
@@ -5505,7 +5505,7 @@ Tony Monroe의 클래식 <a href="https://en.wikipedia.org/wiki/Cowsay">cowsay</
 <span class="normal"><a href="#__codelineno-20-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-20-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-20-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-20-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-20-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 </span><a id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="hll"><span class="w">            </span><span class="n">row</span><span class="o">.</span><span class="na">character</span>
@@ -5545,11 +5545,11 @@ Tony Monroe의 클래식 <a href="https://en.wikipedia.org/wiki/Cowsay">cowsay</
 <span class="normal"><a href="#__codelineno-21-22">22</a></span>
 <span class="normal"><a href="#__codelineno-21-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2"></a>
-<a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/cowpy.nf&#39;</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/cowpy.nf'</span>
 </span><a id="__codelineno-21-4" name="__codelineno-21-4"></a>
 <a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="w">        </span><span class="o">.</span><span class="na">multiMap</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-21-10" name="__codelineno-21-10"></a><span class="w">            </span><span class="nl">file:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span>
@@ -5591,7 +5591,7 @@ Tony Monroe의 클래식 <a href="https://en.wikipedia.org/wiki/Cowsay">cowsay</
 <a id="__codelineno-22-2" name="__codelineno-22-2"></a>
 <a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-22-6" name="__codelineno-22-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-22-7" name="__codelineno-22-7"></a><span class="w">        </span><span class="o">.</span><span class="na">multiMap</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-22-8" name="__codelineno-22-8"></a><span class="w">            </span><span class="nl">file:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span>
@@ -5692,7 +5692,7 @@ Tony Monroe의 클래식 <a href="https://en.wikipedia.org/wiki/Cowsay">cowsay</
 <a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a><span class="go">       |:_/ |</span>
 <a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a><span class="go">      //   \ \</span>
 <a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a><span class="go">     (|     | )</span>
-<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a><span class="go">    /&#39;\_   _/`\</span>
+<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a><span class="go">    /'\_   _/`\</span>
 <a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a><span class="go">    \___)=(___/</span>
 </code></pre></div>
 </details>
@@ -5724,18 +5724,18 @@ Tony Monroe의 클래식 <a href="https://en.wikipedia.org/wiki/Cowsay">cowsay</
 <span class="normal"><a href="#__codelineno-29-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="c1">// cowpy로 ASCII 아트 생성</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-29-3" name="__codelineno-29-3"></a>
-<a id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span>
 <a id="__codelineno-29-5" name="__codelineno-29-5"></a>
 <a id="__codelineno-29-6" name="__codelineno-29-6"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-29-7" name="__codelineno-29-7"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">id</span><span class="o">),</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">character</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">recording</span><span class="o">)</span>
 </span><a id="__codelineno-29-8" name="__codelineno-29-8"></a>
 <a id="__codelineno-29-9" name="__codelineno-29-9"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-29-10" name="__codelineno-29-10"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;cowpy-${recording}&quot;</span>
+<a id="__codelineno-29-10" name="__codelineno-29-10"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"cowpy-${recording}"</span>
 </span><a id="__codelineno-29-11" name="__codelineno-29-11"></a>
 <a id="__codelineno-29-12" name="__codelineno-29-12"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-29-13" name="__codelineno-29-13"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-29-13" name="__codelineno-29-13"></a><span class="w">    </span><span class="s2">"""</span>
 <a id="__codelineno-29-14" name="__codelineno-29-14"></a><span class="hll"><span class="s2">    cat ${recording} | cowpy -c ${character} &gt; cowpy-${recording}</span>
-</span><a id="__codelineno-29-15" name="__codelineno-29-15"></a><span class="s2">    &quot;&quot;&quot;</span>
+</span><a id="__codelineno-29-15" name="__codelineno-29-15"></a><span class="s2">    """</span>
 <a id="__codelineno-29-16" name="__codelineno-29-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5759,19 +5759,19 @@ Tony Monroe의 클래식 <a href="https://en.wikipedia.org/wiki/Cowsay">cowsay</
 <span class="normal"><a href="#__codelineno-30-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="c1">// cowpy로 ASCII 아트 생성</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-30-3" name="__codelineno-30-3"></a>
-<a id="__codelineno-30-4" name="__codelineno-30-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span>
 <a id="__codelineno-30-5" name="__codelineno-30-5"></a>
 <a id="__codelineno-30-6" name="__codelineno-30-6"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-30-7" name="__codelineno-30-7"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
 </span><a id="__codelineno-30-8" name="__codelineno-30-8"></a><span class="hll"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">character</span>
 </span><a id="__codelineno-30-9" name="__codelineno-30-9"></a>
 <a id="__codelineno-30-10" name="__codelineno-30-10"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-30-11" name="__codelineno-30-11"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;cowpy-${input_file}&quot;</span>
+<a id="__codelineno-30-11" name="__codelineno-30-11"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"cowpy-${input_file}"</span>
 </span><a id="__codelineno-30-12" name="__codelineno-30-12"></a>
 <a id="__codelineno-30-13" name="__codelineno-30-13"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-30-14" name="__codelineno-30-14"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-30-14" name="__codelineno-30-14"></a><span class="w">    </span><span class="s2">"""</span>
 <a id="__codelineno-30-15" name="__codelineno-30-15"></a><span class="hll"><span class="s2">    cat ${input_file} | cowpy -c ${character} &gt; cowpy-${input_file}</span>
-</span><a id="__codelineno-30-16" name="__codelineno-30-16"></a><span class="s2">    &quot;&quot;&quot;</span>
+</span><a id="__codelineno-30-16" name="__codelineno-30-16"></a><span class="s2">    """</span>
 <a id="__codelineno-30-17" name="__codelineno-30-17"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5787,7 +5787,7 @@ Tony Monroe의 클래식 <a href="https://en.wikipedia.org/wiki/Cowsay">cowsay</
 <span class="normal"><a href="#__codelineno-31-6">6</a></span>
 <span class="normal"><a href="#__codelineno-31-7">7</a></span>
 <span class="normal"><a href="#__codelineno-31-8">8</a></span>
-<span class="normal"><a href="#__codelineno-31-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-5" name="__codelineno-31-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-31-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-5" name="__codelineno-31-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-31-6" name="__codelineno-31-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-31-7" name="__codelineno-31-7"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 </span><a id="__codelineno-31-8" name="__codelineno-31-8"></a><span class="hll"><span class="w">            </span><span class="o">[</span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">,</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="o">]</span>
@@ -5800,7 +5800,7 @@ Tony Monroe의 클래식 <a href="https://en.wikipedia.org/wiki/Cowsay">cowsay</
 <span class="normal"><a href="#__codelineno-32-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-32-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-32-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-32-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-32-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-32-6" name="__codelineno-32-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">multiMap</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 </span><a id="__codelineno-32-8" name="__codelineno-32-8"></a><span class="hll"><span class="w">            </span><span class="nl">file:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span>
@@ -5824,7 +5824,7 @@ Nextflow에게 녹음 파일이 경로로 처리되어야 한다는 것(즉, 올
 <span class="normal"><a href="#__codelineno-33-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-33-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-33-10">10</a></span>
-<span class="normal"><a href="#__codelineno-33-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-5" name="__codelineno-33-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-33-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-5" name="__codelineno-33-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-33-6" name="__codelineno-33-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-33-7" name="__codelineno-33-7"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-33-8" name="__codelineno-33-8"></a><span class="w">            </span><span class="o">[</span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">,</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="o">]</span>
@@ -5840,7 +5840,7 @@ Nextflow에게 녹음 파일이 경로로 처리되어야 한다는 것(즉, 올
 <span class="normal"><a href="#__codelineno-34-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-34-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-34-10">10</a></span>
-<span class="normal"><a href="#__codelineno-34-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-5" name="__codelineno-34-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-34-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-5" name="__codelineno-34-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-34-6" name="__codelineno-34-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-34-7" name="__codelineno-34-7"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-34-8" name="__codelineno-34-8"></a><span class="w">            </span><span class="o">[</span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">,</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="o">]</span>
@@ -5906,7 +5906,7 @@ Nextflow에게 녹음 파일이 경로로 처리되어야 한다는 것(즉, 올
 <a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a><span class="go">       |:_/ |</span>
 <a id="__codelineno-38-11" name="__codelineno-38-11" href="#__codelineno-38-11"></a><span class="go">      //   \ \</span>
 <a id="__codelineno-38-12" name="__codelineno-38-12" href="#__codelineno-38-12"></a><span class="go">     (|     | )</span>
-<a id="__codelineno-38-13" name="__codelineno-38-13" href="#__codelineno-38-13"></a><span class="go">    /&#39;\_   _/`\</span>
+<a id="__codelineno-38-13" name="__codelineno-38-13" href="#__codelineno-38-13"></a><span class="go">    /'\_   _/`\</span>
 <a id="__codelineno-38-14" name="__codelineno-38-14" href="#__codelineno-38-14"></a><span class="go">    \___)=(___/</span>
 </code></pre></div>
 </details>
@@ -5941,7 +5941,7 @@ Nextflow에게 녹음 파일이 경로로 처리되어야 한다는 것(즉, 올
 <span class="normal"><a href="#__codelineno-41-12">12</a></span>
 <span class="normal"><a href="#__codelineno-41-13">13</a></span>
 <span class="normal"><a href="#__codelineno-41-14">14</a></span>
-<span class="normal"><a href="#__codelineno-41-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-41-5" name="__codelineno-41-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-41-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-41-5" name="__codelineno-41-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-41-6" name="__codelineno-41-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-41-7" name="__codelineno-41-7"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-41-8" name="__codelineno-41-8"></a><span class="hll"><span class="w">            </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">],</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="o">]</span>
@@ -5964,7 +5964,7 @@ Nextflow에게 녹음 파일이 경로로 처리되어야 한다는 것(즉, 올
 <span class="normal"><a href="#__codelineno-42-11">11</a></span>
 <span class="normal"><a href="#__codelineno-42-12">12</a></span>
 <span class="normal"><a href="#__codelineno-42-13">13</a></span>
-<span class="normal"><a href="#__codelineno-42-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-5" name="__codelineno-42-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-42-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-5" name="__codelineno-42-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-42-6" name="__codelineno-42-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-42-7" name="__codelineno-42-7"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-42-8" name="__codelineno-42-8"></a><span class="hll"><span class="w">            </span><span class="o">[</span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">,</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="o">]</span>
@@ -6034,18 +6034,18 @@ Nextflow에게 녹음 파일이 경로로 처리되어야 한다는 것(즉, 올
 <span class="normal"><a href="#__codelineno-46-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1"></a><span class="c1">// cowpy로 ASCII 아트 생성</span>
 <a id="__codelineno-46-2" name="__codelineno-46-2"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-46-3" name="__codelineno-46-3"></a>
-<a id="__codelineno-46-4" name="__codelineno-46-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<a id="__codelineno-46-4" name="__codelineno-46-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span>
 <a id="__codelineno-46-5" name="__codelineno-46-5"></a>
 <a id="__codelineno-46-6" name="__codelineno-46-6"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-46-7" name="__codelineno-46-7"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">input_file</span><span class="o">)</span>
 </span><a id="__codelineno-46-8" name="__codelineno-46-8"></a>
 <a id="__codelineno-46-9" name="__codelineno-46-9"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-46-10" name="__codelineno-46-10"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;cowpy-${input_file}&quot;</span>
+<a id="__codelineno-46-10" name="__codelineno-46-10"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"cowpy-${input_file}"</span>
 </span><a id="__codelineno-46-11" name="__codelineno-46-11"></a>
 <a id="__codelineno-46-12" name="__codelineno-46-12"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-46-13" name="__codelineno-46-13"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-46-13" name="__codelineno-46-13"></a><span class="w">    </span><span class="s2">"""</span>
 <a id="__codelineno-46-14" name="__codelineno-46-14"></a><span class="hll"><span class="s2">    cat ${input_file} | cowpy -c ${meta.character} &gt; cowpy-${input_file}</span>
-</span><a id="__codelineno-46-15" name="__codelineno-46-15"></a><span class="s2">    &quot;&quot;&quot;</span>
+</span><a id="__codelineno-46-15" name="__codelineno-46-15"></a><span class="s2">    """</span>
 <a id="__codelineno-46-16" name="__codelineno-46-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -6068,18 +6068,18 @@ Nextflow에게 녹음 파일이 경로로 처리되어야 한다는 것(즉, 올
 <span class="normal"><a href="#__codelineno-47-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1"></a><span class="c1">// cowpy로 ASCII 아트 생성</span>
 <a id="__codelineno-47-2" name="__codelineno-47-2"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-47-3" name="__codelineno-47-3"></a>
-<a id="__codelineno-47-4" name="__codelineno-47-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<a id="__codelineno-47-4" name="__codelineno-47-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span>
 <a id="__codelineno-47-5" name="__codelineno-47-5"></a>
 <a id="__codelineno-47-6" name="__codelineno-47-6"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-47-7" name="__codelineno-47-7"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">id</span><span class="o">),</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">character</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">recording</span><span class="o">)</span>
 </span><a id="__codelineno-47-8" name="__codelineno-47-8"></a>
 <a id="__codelineno-47-9" name="__codelineno-47-9"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-47-10" name="__codelineno-47-10"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;cowpy-${recording}&quot;</span>
+<a id="__codelineno-47-10" name="__codelineno-47-10"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"cowpy-${recording}"</span>
 </span><a id="__codelineno-47-11" name="__codelineno-47-11"></a>
 <a id="__codelineno-47-12" name="__codelineno-47-12"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-47-13" name="__codelineno-47-13"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-47-13" name="__codelineno-47-13"></a><span class="w">    </span><span class="s2">"""</span>
 <a id="__codelineno-47-14" name="__codelineno-47-14"></a><span class="hll"><span class="s2">    cat ${recording} | cowpy -c ${character} &gt; cowpy-${recording}</span>
-</span><a id="__codelineno-47-15" name="__codelineno-47-15"></a><span class="s2">    &quot;&quot;&quot;</span>
+</span><a id="__codelineno-47-15" name="__codelineno-47-15"></a><span class="s2">    """</span>
 <a id="__codelineno-47-16" name="__codelineno-47-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -6101,7 +6101,7 @@ Nextflow에게 녹음 파일이 경로로 처리되어야 한다는 것(즉, 올
 <span class="normal"><a href="#__codelineno-48-11">11</a></span>
 <span class="normal"><a href="#__codelineno-48-12">12</a></span>
 <span class="normal"><a href="#__codelineno-48-13">13</a></span>
-<span class="normal"><a href="#__codelineno-48-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-48-5" name="__codelineno-48-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-48-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-48-5" name="__codelineno-48-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-48-6" name="__codelineno-48-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-48-7" name="__codelineno-48-7"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-48-8" name="__codelineno-48-8"></a><span class="w">            </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">],</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="o">]</span>
@@ -6124,7 +6124,7 @@ Nextflow에게 녹음 파일이 경로로 처리되어야 한다는 것(즉, 올
 <span class="normal"><a href="#__codelineno-49-12">12</a></span>
 <span class="normal"><a href="#__codelineno-49-13">13</a></span>
 <span class="normal"><a href="#__codelineno-49-14">14</a></span>
-<span class="normal"><a href="#__codelineno-49-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-49-5" name="__codelineno-49-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-49-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-49-5" name="__codelineno-49-5"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-49-6" name="__codelineno-49-6"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-49-7" name="__codelineno-49-7"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-49-8" name="__codelineno-49-8"></a><span class="w">            </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">],</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="o">]</span>
@@ -6194,7 +6194,7 @@ Nextflow에게 녹음 파일이 경로로 처리되어야 한다는 것(즉, 올
 <a id="__codelineno-53-10" name="__codelineno-53-10" href="#__codelineno-53-10"></a><span class="go">       |:_/ |</span>
 <a id="__codelineno-53-11" name="__codelineno-53-11" href="#__codelineno-53-11"></a><span class="go">      //   \ \</span>
 <a id="__codelineno-53-12" name="__codelineno-53-12" href="#__codelineno-53-12"></a><span class="go">     (|     | )</span>
-<a id="__codelineno-53-13" name="__codelineno-53-13" href="#__codelineno-53-13"></a><span class="go">    /&#39;\_   _/`\</span>
+<a id="__codelineno-53-13" name="__codelineno-53-13" href="#__codelineno-53-13"></a><span class="go">    /'\_   _/`\</span>
 <a id="__codelineno-53-14" name="__codelineno-53-14" href="#__codelineno-53-14"></a><span class="go">    \___)=(___/</span>
 </code></pre></div>
 </details>
@@ -6234,7 +6234,7 @@ Nextflow에게 녹음 파일이 경로로 처리되어야 한다는 것(즉, 올
 <span class="normal"><a href="#__codelineno-54-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a><span class="c1">// 각 입력 파일의 언어를 예측하기 위해 langid를 사용합니다</span>
 <a id="__codelineno-54-2" name="__codelineno-54-2"></a><span class="n">process</span><span class="w"> </span><span class="n">IDENTIFY_LANGUAGE</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-54-3" name="__codelineno-54-3"></a>
-<a id="__codelineno-54-4" name="__codelineno-54-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/pip_langid:b2269f456a5629ff&#39;</span>
+<a id="__codelineno-54-4" name="__codelineno-54-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">'community.wave.seqera.io/library/pip_langid:b2269f456a5629ff'</span>
 <a id="__codelineno-54-5" name="__codelineno-54-5"></a>
 <a id="__codelineno-54-6" name="__codelineno-54-6"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-54-7" name="__codelineno-54-7"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">file</span><span class="o">)</span>
@@ -6243,9 +6243,9 @@ Nextflow에게 녹음 파일이 경로로 처리되어야 한다는 것(즉, 올
 <a id="__codelineno-54-10" name="__codelineno-54-10"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">file</span><span class="o">),</span><span class="w"> </span><span class="n">stdout</span>
 </span><a id="__codelineno-54-11" name="__codelineno-54-11"></a>
 <a id="__codelineno-54-12" name="__codelineno-54-12"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-54-13" name="__codelineno-54-13"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-54-14" name="__codelineno-54-14"></a><span class="s2">    langid &lt; ${file} -l en,de,fr,es,it | sed -E &quot;s/.*\\(&#39;([a-z]+)&#39;.*/\\1/&quot; | tr -d &#39;\\n&#39;</span>
-<a id="__codelineno-54-15" name="__codelineno-54-15"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-54-13" name="__codelineno-54-13"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-54-14" name="__codelineno-54-14"></a><span class="s2">    langid &lt; ${file} -l en,de,fr,es,it | sed -E "s/.*\\('([a-z]+)'.*/\\1/" | tr -d '\\n'</span>
+<a id="__codelineno-54-15" name="__codelineno-54-15"></a><span class="s2">    """</span>
 <a id="__codelineno-54-16" name="__codelineno-54-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>입력 정의가 섹션 1에서 구축한 것과 동일한 <code>tuple val(meta), path(file)</code> 구조를 사용하므로, <code>ch_datasheet</code>를 별도의 수정 없이 이 프로세스에 바로 전달할 수 있습니다.</p>
@@ -6275,12 +6275,12 @@ Nextflow에게 녹음 파일이 경로로 처리되어야 한다는 것(즉, 올
 <span class="normal"><a href="#__codelineno-55-17">17</a></span>
 <span class="normal"><a href="#__codelineno-55-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-55-2" name="__codelineno-55-2"></a>
-<a id="__codelineno-55-3" name="__codelineno-55-3"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/cowpy.nf&#39;</span>
-<a id="__codelineno-55-4" name="__codelineno-55-4"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">IDENTIFY_LANGUAGE</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/langid.nf&#39;</span>
+<a id="__codelineno-55-3" name="__codelineno-55-3"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/cowpy.nf'</span>
+<a id="__codelineno-55-4" name="__codelineno-55-4"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">IDENTIFY_LANGUAGE</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/langid.nf'</span>
 </span><a id="__codelineno-55-5" name="__codelineno-55-5"></a>
 <a id="__codelineno-55-6" name="__codelineno-55-6"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-55-7" name="__codelineno-55-7"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-55-8" name="__codelineno-55-8"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<a id="__codelineno-55-8" name="__codelineno-55-8"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-55-9" name="__codelineno-55-9"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-55-10" name="__codelineno-55-10"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-55-11" name="__codelineno-55-11"></a><span class="w">            </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">],</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="o">]</span>
@@ -6308,11 +6308,11 @@ Nextflow에게 녹음 파일이 경로로 처리되어야 한다는 것(즉, 올
 <span class="normal"><a href="#__codelineno-56-12">12</a></span>
 <span class="normal"><a href="#__codelineno-56-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-56-2" name="__codelineno-56-2"></a>
-<a id="__codelineno-56-3" name="__codelineno-56-3"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/cowpy.nf&#39;</span>
+<a id="__codelineno-56-3" name="__codelineno-56-3"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/cowpy.nf'</span>
 <a id="__codelineno-56-4" name="__codelineno-56-4"></a>
 <a id="__codelineno-56-5" name="__codelineno-56-5"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-56-6" name="__codelineno-56-6"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-56-7" name="__codelineno-56-7"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/datasheet.csv&quot;</span><span class="o">)</span>
+<a id="__codelineno-56-7" name="__codelineno-56-7"></a><span class="w">    </span><span class="n">ch_datasheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"./data/datasheet.csv"</span><span class="o">)</span>
 <a id="__codelineno-56-8" name="__codelineno-56-8"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-56-9" name="__codelineno-56-9"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-56-10" name="__codelineno-56-10"></a><span class="w">            </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">],</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="o">]</span>
@@ -6410,14 +6410,14 @@ Nextflow에게 녹음 파일이 경로로 처리되어야 한다는 것(즉, 올
 <summary><code>+</code> 연산자를 사용한 새 메타 맵 생성</summary>
 <p><strong>먼저, Groovy 연산자 <code>+</code>를 사용하여 두 맵의 내용을 병합할 수 있다는 것을 알아야 합니다.</strong></p>
 <p>다음과 같은 맵이 있다고 가정합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="n">map1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;sampleA&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="s1">&#39;squirrel&#39;</span><span class="o">]</span>
-<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="n">map2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="nl">lang:</span><span class="w"> </span><span class="s1">&#39;fr&#39;</span><span class="o">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="n">map1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">'sampleA'</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="s1">'squirrel'</span><span class="o">]</span>
+<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="n">map2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="nl">lang:</span><span class="w"> </span><span class="s1">'fr'</span><span class="o">]</span>
 </code></pre></div>
 <p>다음과 같이 병합할 수 있습니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="n">new_map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">map2</span>
 </code></pre></div>
 <p><code>new_map</code>의 내용은 다음과 같습니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;sampleA&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="s1">&#39;squirrel&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">lang:</span><span class="w"> </span><span class="s1">&#39;fr&#39;</span><span class="o">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">'sampleA'</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="s1">'squirrel'</span><span class="o">,</span><span class="w"> </span><span class="nl">lang:</span><span class="w"> </span><span class="s1">'fr'</span><span class="o">]</span>
 </code></pre></div>
 <p>훌륭합니다!</p>
 <p><strong>그런데 맵에 아직 없는 필드를 추가해야 한다면 어떻게 할까요?</strong></p>
@@ -6441,10 +6441,10 @@ Nextflow에게 녹음 파일이 경로로 처리되어야 한다는 것(즉, 올
 </ul>
 <p>출력은 위 예시의 <code>new_map</code>과 동일한 내용을 가진 단일 이름 없는 맵입니다.
 즉, 다음을 변환한 것입니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;sampleA&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="s1">&#39;squirrel&#39;</span><span class="o">],</span><span class="w"> </span><span class="s1">&#39;fr&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">'sampleA'</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="s1">'squirrel'</span><span class="o">],</span><span class="w"> </span><span class="s1">'fr'</span>
 </code></pre></div>
 <p>다음으로:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;sampleA&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="s1">&#39;squirrel&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">lang:</span><span class="w"> </span><span class="s1">&#39;fr&#39;</span><span class="o">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">'sampleA'</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="s1">'squirrel'</span><span class="o">,</span><span class="w"> </span><span class="nl">lang:</span><span class="w"> </span><span class="s1">'fr'</span><span class="o">]</span>
 </code></pre></div>
 <p><code>map1</code>을 <code>meta</code>로 변경하면, 워크플로우의 메타 맵에 언어 예측을 추가하는 데 필요한 것이 기본적으로 전부라는 것을 알 수 있습니다.</p>
 <p>단 한 가지만 제외하고요!</p>
@@ -6497,7 +6497,7 @@ Nextflow에게 녹음 파일이 경로로 처리되어야 한다는 것(즉, 올
 <div class="admonition tip">
 <p class="admonition-title">메타 맵에서 키 제거</p>
 <p>Groovy <a href="https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)"><code>subMap</code></a> 메서드를 사용하여 메타 맵에서 키를 제거할 수 있습니다. 이 메서드는 지정한 키만 포함하는 새 맵을 반환합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;character&#39;</span><span class="o">])</span><span class="w">  </span><span class="c1">// &#39;id&#39;와 &#39;character&#39;만 포함하는 맵 반환</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'character'</span><span class="o">])</span><span class="w">  </span><span class="c1">// 'id'와 'character'만 포함하는 맵 반환</span>
 </code></pre></div>
 <p>이는 다운스트림 프로세스나 모듈이 메타 맵에 누적된 모든 필드를 필요로 하지 않을 때 유용합니다.</p>
 </div>
@@ -6556,12 +6556,12 @@ Nextflow에게 녹음 파일이 경로로 처리되어야 한다는 것(즉, 올
 <a id="__codelineno-73-19" name="__codelineno-73-19"></a><span class="w">        </span><span class="o">}</span>
 <a id="__codelineno-73-20" name="__codelineno-73-20"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span>
 </span><a id="__codelineno-73-21" name="__codelineno-73-21"></a><span class="hll">
-</span><a id="__codelineno-73-22" name="__codelineno-73-22"></a><span class="hll"><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;unknown&quot;</span>
-</span><a id="__codelineno-73-23" name="__codelineno-73-23"></a><span class="hll"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s2">&quot;de&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s1">&#39;en&#39;</span><span class="o">))</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-73-24" name="__codelineno-73-24"></a><span class="hll"><span class="w">                </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;germanic&quot;</span>
+</span><a id="__codelineno-73-22" name="__codelineno-73-22"></a><span class="hll"><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"unknown"</span>
+</span><a id="__codelineno-73-23" name="__codelineno-73-23"></a><span class="hll"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s2">"de"</span><span class="o">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s1">'en'</span><span class="o">))</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-73-24" name="__codelineno-73-24"></a><span class="hll"><span class="w">                </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"germanic"</span>
 </span><a id="__codelineno-73-25" name="__codelineno-73-25"></a><span class="hll"><span class="w">            </span><span class="o">}</span>
-</span><a id="__codelineno-73-26" name="__codelineno-73-26"></a><span class="hll"><span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;fr&quot;</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;es&quot;</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;it&quot;</span><span class="o">])</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-73-27" name="__codelineno-73-27"></a><span class="hll"><span class="w">                </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;romance&quot;</span>
+</span><a id="__codelineno-73-26" name="__codelineno-73-26"></a><span class="hll"><span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s2">"fr"</span><span class="o">,</span><span class="w"> </span><span class="s2">"es"</span><span class="o">,</span><span class="w"> </span><span class="s2">"it"</span><span class="o">])</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-73-27" name="__codelineno-73-27"></a><span class="hll"><span class="w">                </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"romance"</span>
 </span><a id="__codelineno-73-28" name="__codelineno-73-28"></a><span class="hll"><span class="w">            </span><span class="o">}</span>
 </span><a id="__codelineno-73-29" name="__codelineno-73-29"></a><span class="hll">
 </span><a id="__codelineno-73-30" name="__codelineno-73-30"></a><span class="hll"><span class="w">            </span><span class="o">[</span><span class="n">meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">lang_group:</span><span class="w"> </span><span class="n">lang_group</span><span class="o">],</span><span class="w"> </span><span class="n">file</span><span class="o">]</span>
@@ -6648,12 +6648,12 @@ Nextflow에게 녹음 파일이 경로로 처리되어야 한다는 것(즉, 올
 <span class="normal"><a href="#__codelineno-77-13">13</a></span>
 <span class="normal"><a href="#__codelineno-77-14">14</a></span>
 <span class="normal"><a href="#__codelineno-77-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-77-9" name="__codelineno-77-9"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-77-10" name="__codelineno-77-10"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;${meta.lang}-${input_file}&quot;</span><span class="o">)</span>
+<a id="__codelineno-77-10" name="__codelineno-77-10"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"${meta.lang}-${input_file}"</span><span class="o">)</span>
 </span><a id="__codelineno-77-11" name="__codelineno-77-11"></a>
 <a id="__codelineno-77-12" name="__codelineno-77-12"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-77-13" name="__codelineno-77-13"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-77-13" name="__codelineno-77-13"></a><span class="w">    </span><span class="s2">"""</span>
 <a id="__codelineno-77-14" name="__codelineno-77-14"></a><span class="hll"><span class="s2">    cat ${input_file} | cowpy -c ${meta.character} &gt; ${meta.lang}-${input_file}</span>
-</span><a id="__codelineno-77-15" name="__codelineno-77-15"></a><span class="s2">    &quot;&quot;&quot;</span>
+</span><a id="__codelineno-77-15" name="__codelineno-77-15"></a><span class="s2">    """</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -6664,12 +6664,12 @@ Nextflow에게 녹음 파일이 경로로 처리되어야 한다는 것(즉, 올
 <span class="normal"><a href="#__codelineno-78-13">13</a></span>
 <span class="normal"><a href="#__codelineno-78-14">14</a></span>
 <span class="normal"><a href="#__codelineno-78-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-78-9" name="__codelineno-78-9"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-78-10" name="__codelineno-78-10"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;cowpy-${input_file}&quot;</span>
+<a id="__codelineno-78-10" name="__codelineno-78-10"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"cowpy-${input_file}"</span>
 </span><a id="__codelineno-78-11" name="__codelineno-78-11"></a>
 <a id="__codelineno-78-12" name="__codelineno-78-12"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-78-13" name="__codelineno-78-13"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-78-13" name="__codelineno-78-13"></a><span class="w">    </span><span class="s2">"""</span>
 <a id="__codelineno-78-14" name="__codelineno-78-14"></a><span class="hll"><span class="s2">    cat ${input_file} | cowpy -c ${meta.character} &gt; cowpy-${input_file}</span>
-</span><a id="__codelineno-78-15" name="__codelineno-78-15"></a><span class="s2">    &quot;&quot;&quot;</span>
+</span><a id="__codelineno-78-15" name="__codelineno-78-15"></a><span class="s2">    """</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -6789,7 +6789,7 @@ Nextflow에게 녹음 파일이 경로로 처리되어야 한다는 것(즉, 올
 <a id="__codelineno-85-10" name="__codelineno-85-10" href="#__codelineno-85-10"></a><span class="go">    └── it-ciao.txt</span>
 </code></pre></div>
 <p><code>output {}</code> 블록의 <code>path</code> closure는 각 <code>[meta, file]</code> 튜플을 받아 <code>meta.lang_group</code>을 서브디렉토리 이름으로 반환합니다.
-파일 이름 자체는 프로세스가 출력하는 것(<code class="highlight"><span class="s2">&quot;${meta.lang}-${input_file}&quot;</span></code>)에서 옵니다.
+파일 이름 자체는 프로세스가 출력하는 것(<code class="highlight"><span class="s2">"${meta.lang}-${input_file}"</span></code>)에서 옵니다.
 두 메타데이터(언어 코드와 언어 그룹) 모두 이 섹션에서 구축한 풍부해진 메타 맵에서 옵니다.</p>
 <h3 id="_10">핵심 정리<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>이 섹션에서 다음 내용을 학습했습니다.</p>
@@ -6827,7 +6827,7 @@ Nextflow가 명령에 <code class="highlight"><span class="n">$</span><span clas
 <a id="__codelineno-87-6" name="__codelineno-87-6" href="#__codelineno-87-6"></a><span class="go">[c1/c5dd4f] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔</span>
 <a id="__codelineno-87-7" name="__codelineno-87-7" href="#__codelineno-87-7"></a><span class="hll"><span class="go">[d3/b7c415] COWPY (3)             | 5 of 7</span>
 </span><a id="__codelineno-87-8" name="__codelineno-87-8" href="#__codelineno-87-8"></a><span class="go">WARN: Killing running tasks (1)</span>
-<a id="__codelineno-87-9" name="__codelineno-87-9" href="#__codelineno-87-9"></a><span class="go">ERROR ~ Error executing process &gt; &#39;COWPY (7)&#39;</span>
+<a id="__codelineno-87-9" name="__codelineno-87-9" href="#__codelineno-87-9"></a><span class="go">ERROR ~ Error executing process &gt; 'COWPY (7)'</span>
 <a id="__codelineno-87-10" name="__codelineno-87-10" href="#__codelineno-87-10"></a>
 <a id="__codelineno-87-11" name="__codelineno-87-11" href="#__codelineno-87-11"></a><span class="go">Caused by:</span>
 <a id="__codelineno-87-12" name="__codelineno-87-12" href="#__codelineno-87-12"></a><span class="hll"><span class="go">  Process `COWPY (7)` terminated with an error exit status (2)</span>
@@ -6855,9 +6855,9 @@ Nextflow가 명령에 <code class="highlight"><span class="n">$</span><span clas
 <a id="__codelineno-87-34" name="__codelineno-87-34" href="#__codelineno-87-34"></a><span class="go">Container:</span>
 <a id="__codelineno-87-35" name="__codelineno-87-35" href="#__codelineno-87-35"></a><span class="go">  community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273</span>
 <a id="__codelineno-87-36" name="__codelineno-87-36" href="#__codelineno-87-36"></a>
-<a id="__codelineno-87-37" name="__codelineno-87-37" href="#__codelineno-87-37"></a><span class="go">Tip: you can try to figure out what&#39;s wrong by changing to the process work dir and showing the script file named `.command.sh`</span>
+<a id="__codelineno-87-37" name="__codelineno-87-37" href="#__codelineno-87-37"></a><span class="go">Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`</span>
 <a id="__codelineno-87-38" name="__codelineno-87-38" href="#__codelineno-87-38"></a>
-<a id="__codelineno-87-39" name="__codelineno-87-39" href="#__codelineno-87-39"></a><span class="go">-- Check &#39;.nextflow.log&#39; file for details</span>
+<a id="__codelineno-87-39" name="__codelineno-87-39" href="#__codelineno-87-39"></a><span class="go">-- Check '.nextflow.log' file for details</span>
 </code></pre></div>
 </details>
 <p>오류 메시지(<code>expected one argument</code>)는 빈 <code>-c</code> 플래그를 가리킵니다.
@@ -6884,7 +6884,7 @@ Nextflow가 명령에 <code class="highlight"><span class="n">$</span><span clas
 <a id="__codelineno-89-6" name="__codelineno-89-6" href="#__codelineno-89-6"></a><span class="go">[61/91663a] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔</span>
 <a id="__codelineno-89-7" name="__codelineno-89-7" href="#__codelineno-89-7"></a><span class="hll"><span class="go">[0e/99bfb0] COWPY (7)             | 0 of 7</span>
 </span><a id="__codelineno-89-8" name="__codelineno-89-8" href="#__codelineno-89-8"></a><span class="go">WARN: Killing running tasks (5)</span>
-<a id="__codelineno-89-9" name="__codelineno-89-9" href="#__codelineno-89-9"></a><span class="go">ERROR ~ Error executing process &gt; &#39;COWPY (3)&#39;</span>
+<a id="__codelineno-89-9" name="__codelineno-89-9" href="#__codelineno-89-9"></a><span class="go">ERROR ~ Error executing process &gt; 'COWPY (3)'</span>
 <a id="__codelineno-89-10" name="__codelineno-89-10" href="#__codelineno-89-10"></a>
 <a id="__codelineno-89-11" name="__codelineno-89-11" href="#__codelineno-89-11"></a><span class="go">Caused by:</span>
 <a id="__codelineno-89-12" name="__codelineno-89-12" href="#__codelineno-89-12"></a><span class="hll"><span class="go">  Process `COWPY (3)` terminated with an error exit status (1)</span>
@@ -6902,10 +6902,10 @@ Nextflow가 명령에 <code class="highlight"><span class="n">$</span><span clas
 <a id="__codelineno-89-24" name="__codelineno-89-24" href="#__codelineno-89-24"></a>
 <a id="__codelineno-89-25" name="__codelineno-89-25" href="#__codelineno-89-25"></a><span class="go">Command error:</span>
 <a id="__codelineno-89-26" name="__codelineno-89-26" href="#__codelineno-89-26"></a><span class="go">  Traceback (most recent call last):</span>
-<a id="__codelineno-89-27" name="__codelineno-89-27" href="#__codelineno-89-27"></a><span class="go">    File &quot;/opt/conda/bin/cowpy&quot;, line 10, in &lt;module&gt;</span>
+<a id="__codelineno-89-27" name="__codelineno-89-27" href="#__codelineno-89-27"></a><span class="go">    File "/opt/conda/bin/cowpy", line 10, in &lt;module&gt;</span>
 <a id="__codelineno-89-28" name="__codelineno-89-28" href="#__codelineno-89-28"></a><span class="go">      sys.exit(main())</span>
 <a id="__codelineno-89-29" name="__codelineno-89-29" href="#__codelineno-89-29"></a><span class="go">              ~~~~^^</span>
-<a id="__codelineno-89-30" name="__codelineno-89-30" href="#__codelineno-89-30"></a><span class="go">    File &quot;/opt/conda/lib/python3.13/site-packages/cowpy/cow.py&quot;, line 1215, in main</span>
+<a id="__codelineno-89-30" name="__codelineno-89-30" href="#__codelineno-89-30"></a><span class="go">    File "/opt/conda/lib/python3.13/site-packages/cowpy/cow.py", line 1215, in main</span>
 <a id="__codelineno-89-31" name="__codelineno-89-31" href="#__codelineno-89-31"></a><span class="go">      print(cow(eyes=args.eyes,</span>
 <a id="__codelineno-89-32" name="__codelineno-89-32" href="#__codelineno-89-32"></a><span class="go">            ~~~^^^^^^^^^^^^^^^^</span>
 <a id="__codelineno-89-33" name="__codelineno-89-33" href="#__codelineno-89-33"></a><span class="go">            tongue=args.tongue,</span>
@@ -6914,7 +6914,7 @@ Nextflow가 명령에 <code class="highlight"><span class="n">$</span><span clas
 <a id="__codelineno-89-36" name="__codelineno-89-36" href="#__codelineno-89-36"></a><span class="go">            ^^^^^^^^^^^^^^^^^^^^^^</span>
 <a id="__codelineno-89-37" name="__codelineno-89-37" href="#__codelineno-89-37"></a><span class="go">                ).milk(msg)</span>
 <a id="__codelineno-89-38" name="__codelineno-89-38" href="#__codelineno-89-38"></a><span class="go">                ^</span>
-<a id="__codelineno-89-39" name="__codelineno-89-39" href="#__codelineno-89-39"></a><span class="go">  TypeError: &#39;str&#39; object is not callable</span>
+<a id="__codelineno-89-39" name="__codelineno-89-39" href="#__codelineno-89-39"></a><span class="go">  TypeError: 'str' object is not callable</span>
 <a id="__codelineno-89-40" name="__codelineno-89-40" href="#__codelineno-89-40"></a>
 <a id="__codelineno-89-41" name="__codelineno-89-41" href="#__codelineno-89-41"></a><span class="go">Work dir:</span>
 <a id="__codelineno-89-42" name="__codelineno-89-42" href="#__codelineno-89-42"></a><span class="go">  /workspaces/training/side-quests/metadata/work/52/80c08666f6732690bce00f04993489</span>
@@ -6924,7 +6924,7 @@ Nextflow가 명령에 <code class="highlight"><span class="n">$</span><span clas
 <a id="__codelineno-89-46" name="__codelineno-89-46" href="#__codelineno-89-46"></a>
 <a id="__codelineno-89-47" name="__codelineno-89-47" href="#__codelineno-89-47"></a><span class="go">Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`</span>
 <a id="__codelineno-89-48" name="__codelineno-89-48" href="#__codelineno-89-48"></a>
-<a id="__codelineno-89-49" name="__codelineno-89-49" href="#__codelineno-89-49"></a><span class="go">-- Check &#39;.nextflow.log&#39; file for details</span>
+<a id="__codelineno-89-49" name="__codelineno-89-49" href="#__codelineno-89-49"></a><span class="go">-- Check '.nextflow.log' file for details</span>
 </code></pre></div>
 </details>
 <p>실행된 명령의 <code>cowpy -c null</code>이 진단 단서입니다.</p>
@@ -6975,7 +6975,7 @@ Nextflow가 명령에 <code class="highlight"><span class="n">$</span><span clas
 <ol>
 <li>
 <p><strong>메타데이터 읽기 및 구조화:</strong> CSV 데이터시트를 파싱하고 메타 맵을 생성합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-92-1" name="__codelineno-92-1" href="#__codelineno-92-1"></a><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;datasheet.csv&#39;</span><span class="o">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-92-1" name="__codelineno-92-1" href="#__codelineno-92-1"></a><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'datasheet.csv'</span><span class="o">)</span>
 <a id="__codelineno-92-2" name="__codelineno-92-2" href="#__codelineno-92-2"></a><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
 <a id="__codelineno-92-3" name="__codelineno-92-3" href="#__codelineno-92-3"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-92-4" name="__codelineno-92-4" href="#__codelineno-92-4"></a><span class="w">        </span><span class="o">[</span><span class="w"> </span><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">character</span><span class="o">],</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">recording</span><span class="w"> </span><span class="o">]</span>
@@ -6991,9 +6991,9 @@ Nextflow가 명령에 <code class="highlight"><span class="n">$</span><span clas
 <a id="__codelineno-93-5" name="__codelineno-93-5" href="#__codelineno-93-5"></a>
 <a id="__codelineno-93-6" name="__codelineno-93-6" href="#__codelineno-93-6"></a><span class="c1">// 조건 로직에서</span>
 <a id="__codelineno-93-7" name="__codelineno-93-7" href="#__codelineno-93-7"></a><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-93-8" name="__codelineno-93-8" href="#__codelineno-93-8"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;unknown&quot;</span>
-<a id="__codelineno-93-9" name="__codelineno-93-9" href="#__codelineno-93-9"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;de&quot;</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;en&quot;</span><span class="o">])</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;germanic&quot;</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-93-10" name="__codelineno-93-10" href="#__codelineno-93-10"></a><span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;fr&quot;</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;es&quot;</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;it&quot;</span><span class="o">])</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;romance&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-93-8" name="__codelineno-93-8" href="#__codelineno-93-8"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"unknown"</span>
+<a id="__codelineno-93-9" name="__codelineno-93-9" href="#__codelineno-93-9"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s2">"de"</span><span class="o">,</span><span class="w"> </span><span class="s2">"en"</span><span class="o">])</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"germanic"</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-93-10" name="__codelineno-93-10" href="#__codelineno-93-10"></a><span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">lang</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s2">"fr"</span><span class="o">,</span><span class="w"> </span><span class="s2">"es"</span><span class="o">,</span><span class="w"> </span><span class="s2">"it"</span><span class="o">])</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">lang_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"romance"</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-93-11" name="__codelineno-93-11" href="#__codelineno-93-11"></a><span class="w">    </span><span class="o">[</span><span class="w"> </span><span class="n">meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">lang_group:</span><span class="w"> </span><span class="n">lang_group</span><span class="o">],</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">]</span>
 <a id="__codelineno-93-12" name="__codelineno-93-12" href="#__codelineno-93-12"></a><span class="o">}</span>
 </code></pre></div>
@@ -7318,9 +7318,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -7559,7 +7560,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -8238,7 +8239,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -8530,7 +8531,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -8702,7 +8703,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -8712,7 +8713,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

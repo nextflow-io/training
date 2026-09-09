@@ -4011,7 +4011,7 @@
 <h2 id="1">1. 테스트가 필요한 이유<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <p>빌드가 성공했다는 것은 코드가 컴파일되었다는 의미이지, 예상대로 작동한다는 의미는 아닙니다.
 단위 테스트는 함수가 주어진 입력에 대해 올바른 출력을 생성하는지 자동으로 확인하는 작은 코드 조각입니다.
-예를 들어, <code class="highlight"><span class="n">reverseGreeting</span><span class="o">(</span><span class="s2">&quot;Hello&quot;</span><span class="o">)</span></code>가 <code>"olleH"</code>를 반환하는지 확인하는 테스트를 작성할 수 있습니다.</p>
+예를 들어, <code class="highlight"><span class="n">reverseGreeting</span><span class="o">(</span><span class="s2">"Hello"</span><span class="o">)</span></code>가 <code>"olleH"</code>를 반환하는지 확인하는 테스트를 작성할 수 있습니다.</p>
 <p>테스트가 유용한 이유는 다음과 같습니다:</p>
 <ul>
 <li>사용자보다 먼저 버그를 발견할 수 있습니다</li>
@@ -4025,12 +4025,12 @@ Spock은 이미 프로젝트에 설정되어 있으므로(<code>build.gradle</co
 <p>Python의 <code>pytest</code>나 R의 <code>testthat</code>과 같은 테스트 도구를 사용해 본 적이 있다면, Spock도 동일한 역할을 합니다. 알려진 입력으로 코드를 호출하고 출력을 확인하는 작은 함수를 작성합니다.
 차이점은 Spock이 Nextflow process나 workflow와 유사한 레이블이 붙은 블록(<code>given:</code>, <code>expect:</code>, <code>when:</code>, <code>then:</code>)을 사용한다는 것입니다.</p>
 <p>기본 구조는 다음과 같습니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kt">def</span><span class="w"> </span><span class="nf">&#39;should reverse a greeting&#39;</span><span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w">   </span><span class="c1">// (1)!</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kt">def</span><span class="w"> </span><span class="nf">'should reverse a greeting'</span><span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w">   </span><span class="c1">// (1)!</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nl">given:</span><span class="w">                             </span><span class="c1">// (2)!</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GreetingExtension</span><span class="o">()</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nl">expect:</span><span class="w">                            </span><span class="c1">// (3)!</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;olleH&#39;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">'Hello'</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'olleH'</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="o">}</span>
 </code></pre></div>
 <ol>
@@ -4102,13 +4102,13 @@ Spock은 이미 프로젝트에 설정되어 있으므로(<code>build.gradle</co
 <a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="cm"> */</span>
 <a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="kd">class</span><span class="w"> </span><span class="nc">GreetingExtensionTest</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Specification</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-6-9" name="__codelineno-6-9"></a>
-<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="nf">&#39;should reverse a greeting&#39;</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="nf">'should reverse a greeting'</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="hll"><span class="w">        </span><span class="nl">given:</span>
 </span><a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="hll"><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GreetingExtension</span><span class="o">()</span><span class="w">            </span><span class="c1">// (1)!</span>
 </span><a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="hll">
 </span><a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="hll"><span class="w">        </span><span class="nl">expect:</span>
-</span><a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="hll"><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;olleH&#39;</span><span class="w">     </span><span class="c1">// (2)!</span>
-</span><a id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="hll"><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;ruojnoB&#39;</span>
+</span><a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="hll"><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">'Hello'</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'olleH'</span><span class="w">     </span><span class="c1">// (2)!</span>
+</span><a id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="hll"><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">'Bonjour'</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'ruojnoB'</span>
 </span><a id="__codelineno-6-17" name="__codelineno-6-17"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span><a id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -4181,21 +4181,21 @@ Spock은 이미 프로젝트에 설정되어 있으므로(<code>build.gradle</co
 <a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="cm"> */</span>
 <a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="kd">class</span><span class="w"> </span><span class="nc">GreetingExtensionTest</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Specification</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-8-9" name="__codelineno-8-9"></a>
-<a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="nf">&#39;should reverse a greeting&#39;</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="nf">'should reverse a greeting'</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="w">        </span><span class="nl">given:</span>
 <a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GreetingExtension</span><span class="o">()</span>
 <a id="__codelineno-8-13" name="__codelineno-8-13"></a>
 <a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="w">        </span><span class="nl">expect:</span>
-<a id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;olleH&#39;</span>
-<a id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;ruojnoB&#39;</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">'Hello'</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'olleH'</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">'Bonjour'</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'ruojnoB'</span>
 <a id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="hll">
-</span><a id="__codelineno-8-19" name="__codelineno-8-19"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="nf">&#39;should decorate a greeting&#39;</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-8-19" name="__codelineno-8-19"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="nf">'should decorate a greeting'</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-8-20" name="__codelineno-8-20"></a><span class="hll"><span class="w">        </span><span class="nl">given:</span>
 </span><a id="__codelineno-8-21" name="__codelineno-8-21"></a><span class="hll"><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GreetingExtension</span><span class="o">()</span>
 </span><a id="__codelineno-8-22" name="__codelineno-8-22"></a><span class="hll">
 </span><a id="__codelineno-8-23" name="__codelineno-8-23"></a><span class="hll"><span class="w">        </span><span class="nl">expect:</span>
-</span><a id="__codelineno-8-24" name="__codelineno-8-24"></a><span class="hll"><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">decorateGreeting</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;*** Hello ***&#39;</span>
+</span><a id="__codelineno-8-24" name="__codelineno-8-24"></a><span class="hll"><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">decorateGreeting</span><span class="o">(</span><span class="s1">'Hello'</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'*** Hello ***'</span>
 </span><a id="__codelineno-8-25" name="__codelineno-8-25"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span><a id="__codelineno-8-26" name="__codelineno-8-26"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -4227,13 +4227,13 @@ Spock은 이미 프로젝트에 설정되어 있으므로(<code>build.gradle</co
 <a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="cm"> */</span>
 <a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="kd">class</span><span class="w"> </span><span class="nc">GreetingExtensionTest</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Specification</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-9-9" name="__codelineno-9-9"></a>
-<a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="nf">&#39;should reverse a greeting&#39;</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="nf">'should reverse a greeting'</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="w">        </span><span class="nl">given:</span>
 <a id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GreetingExtension</span><span class="o">()</span>
 <a id="__codelineno-9-13" name="__codelineno-9-13"></a>
 <a id="__codelineno-9-14" name="__codelineno-9-14"></a><span class="w">        </span><span class="nl">expect:</span>
-<a id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;olleH&#39;</span>
-<a id="__codelineno-9-16" name="__codelineno-9-16"></a><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;ruojnoB&#39;</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">'Hello'</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'olleH'</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16"></a><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">'Bonjour'</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'ruojnoB'</span>
 <a id="__codelineno-9-17" name="__codelineno-9-17"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-9-18" name="__codelineno-9-18"></a><span class="hll"><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
@@ -4261,12 +4261,12 @@ Spock은 이미 프로젝트에 설정되어 있으므로(<code>build.gradle</co
 <details class="solution">
 <summary>해결책</summary>
 <p><code>GreetingExtensionTest.groovy</code>에 다음 테스트 메서드를 추가합니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kt">def</span><span class="w"> </span><span class="nf">&#39;should handle empty string&#39;</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kt">def</span><span class="w"> </span><span class="nf">'should handle empty string'</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="nl">given:</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GreetingExtension</span><span class="o">()</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
 <a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="nl">expect:</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">&#39;&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">''</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">''</span>
 <a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="o">}</span>
 </code></pre></div>
 <p>빈 문자열을 뒤집어도 빈 문자열입니다.</p>
@@ -4599,9 +4599,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -4840,7 +4841,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -5519,7 +5520,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -5811,7 +5812,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -5983,7 +5984,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -5993,7 +5994,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

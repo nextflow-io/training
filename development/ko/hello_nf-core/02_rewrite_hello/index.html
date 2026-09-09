@@ -5021,7 +5021,7 @@ nf-core 웹사이트에서 사용 가능한 <a href="https://nf-co.re/subworkflo
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="go">          ___     __   __   __   ___     /,-._.--~\</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">    |\ | |__  __ /  ` /  \ |__) |__         }  {</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="go">    | \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="go">                                          `._,._,&#39;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="go">                                          `._,._,'</span>
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
 <a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="go">    nf-core/tools version 4.0.2 - https://nf-co.re</span>
 <a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
@@ -5030,7 +5030,7 @@ nf-core 웹사이트에서 사용 가능한 <a href="https://nf-co.re/subworkflo
 </code></pre></div>
 </details>
 <p>TUI가 완료되면 도구가 파이프라인을 생성하고 컨테이너 설정을 생성했다고 보고합니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">INFO     Creating new pipeline: &#39;hello&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">INFO     Creating new pipeline: 'hello'</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="go">INFO     Generated container configs for the pipeline successfully.</span>
 </code></pre></div>
 <p>이제 <code>core-hello</code>라는 새 디렉토리가 보일 것입니다.</p>
@@ -5108,8 +5108,8 @@ nf-core 웹사이트에서 사용 가능한 <a href="https://nf-co.re/subworkflo
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="go">Launching `./core-hello/main.nf` [cheesy_avogadro] revision: d6bbba9521</span>
 <a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="go">WARN: Unrecognized config option &#39;validation.defaultIgnoreParams&#39;</span>
-<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="go">WARN: Unrecognized config option &#39;validation.monochromeLogs&#39;</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="go">WARN: Unrecognized config option 'validation.defaultIgnoreParams'</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="go">WARN: Unrecognized config option 'validation.monochromeLogs'</span>
 <a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="go">Input/output options</span>
 <a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="go">  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv</span>
 <a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="go">  outdir                    : core-hello-results</span>
@@ -5244,8 +5244,8 @@ nf-core 웹사이트에서 사용 가능한 <a href="https://nf-co.re/subworkflo
 <a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="cm">    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS</span>
 <a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
 <a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="cm">*/</span>
-<a id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">paramsSummaryMap</span><span class="w">       </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;plugin/nf-schema&#39;</span>
-<a id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../subworkflows/nf-core/utils_nfcore_pipeline&#39;</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">paramsSummaryMap</span><span class="w">       </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'plugin/nf-schema'</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'../subworkflows/nf-core/utils_nfcore_pipeline'</span>
 <a id="__codelineno-17-8" name="__codelineno-17-8"></a>
 <a id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="cm">/*</span>
 <a id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
@@ -5266,7 +5266,7 @@ nf-core 웹사이트에서 사용 가능한 <a href="https://nf-co.re/subworkflo
 <a id="__codelineno-17-25" name="__codelineno-17-25"></a><span class="w">    </span><span class="c1">//</span>
 <a id="__codelineno-17-26" name="__codelineno-17-26"></a><span class="w">    </span><span class="c1">// 소프트웨어 버전 수집 및 저장</span>
 <a id="__codelineno-17-27" name="__codelineno-17-27"></a><span class="w">    </span><span class="c1">//</span>
-<a id="__codelineno-17-28" name="__codelineno-17-28"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">topic</span><span class="o">(</span><span class="s2">&quot;versions&quot;</span><span class="o">)</span>
+<a id="__codelineno-17-28" name="__codelineno-17-28"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">topic</span><span class="o">(</span><span class="s2">"versions"</span><span class="o">)</span>
 <a id="__codelineno-17-29" name="__codelineno-17-29"></a><span class="w">        </span><span class="o">.</span><span class="na">distinct</span><span class="o">()</span>
 <a id="__codelineno-17-30" name="__codelineno-17-30"></a><span class="w">        </span><span class="o">.</span><span class="na">branch</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-17-31" name="__codelineno-17-31"></a><span class="w">            </span><span class="nl">versions_file:</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Path</span>
@@ -5275,19 +5275,19 @@ nf-core 웹사이트에서 사용 가능한 <a href="https://nf-co.re/subworkflo
 <a id="__codelineno-17-34" name="__codelineno-17-34"></a>
 <a id="__codelineno-17-35" name="__codelineno-17-35"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">topic_versions</span><span class="o">.</span><span class="na">versions_tuple</span>
 <a id="__codelineno-17-36" name="__codelineno-17-36"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">process</span><span class="o">,</span><span class="w"> </span><span class="n">tool</span><span class="o">,</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-17-37" name="__codelineno-17-37"></a><span class="w">            </span><span class="o">[</span><span class="w"> </span><span class="n">process</span><span class="o">[</span><span class="n">process</span><span class="o">.</span><span class="na">lastIndexOf</span><span class="o">(</span><span class="s1">&#39;:&#39;</span><span class="o">)+</span><span class="mi">1</span><span class="o">..-</span><span class="mi">1</span><span class="o">],</span><span class="w"> </span><span class="s2">&quot;  ${tool}: ${version}&quot;</span><span class="w"> </span><span class="o">]</span>
+<a id="__codelineno-17-37" name="__codelineno-17-37"></a><span class="w">            </span><span class="o">[</span><span class="w"> </span><span class="n">process</span><span class="o">[</span><span class="n">process</span><span class="o">.</span><span class="na">lastIndexOf</span><span class="o">(</span><span class="s1">':'</span><span class="o">)+</span><span class="mi">1</span><span class="o">..-</span><span class="mi">1</span><span class="o">],</span><span class="w"> </span><span class="s2">"  ${tool}: ${version}"</span><span class="w"> </span><span class="o">]</span>
 <a id="__codelineno-17-38" name="__codelineno-17-38"></a><span class="w">        </span><span class="o">}</span>
 <a id="__codelineno-17-39" name="__codelineno-17-39"></a><span class="w">        </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">(</span><span class="nl">by:</span><span class="mi">0</span><span class="o">)</span>
 <a id="__codelineno-17-40" name="__codelineno-17-40"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">process</span><span class="o">,</span><span class="w"> </span><span class="n">tool_versions</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-17-41" name="__codelineno-17-41"></a><span class="w">            </span><span class="n">tool_versions</span><span class="o">.</span><span class="na">unique</span><span class="o">().</span><span class="na">sort</span><span class="o">()</span>
-<a id="__codelineno-17-42" name="__codelineno-17-42"></a><span class="w">            </span><span class="s2">&quot;${process}:\n${tool_versions.join(&#39;\n&#39;)}&quot;</span>
+<a id="__codelineno-17-42" name="__codelineno-17-42"></a><span class="w">            </span><span class="s2">"${process}:\n${tool_versions.join('\n')}"</span>
 <a id="__codelineno-17-43" name="__codelineno-17-43"></a><span class="w">        </span><span class="o">}</span>
 <a id="__codelineno-17-44" name="__codelineno-17-44"></a>
 <a id="__codelineno-17-45" name="__codelineno-17-45"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">ch_collated_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="o">(</span><span class="n">ch_versions</span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">topic_versions</span><span class="o">.</span><span class="na">versions_file</span><span class="o">))</span>
 <a id="__codelineno-17-46" name="__codelineno-17-46"></a><span class="w">        </span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">topic_versions_string</span><span class="o">)</span>
 <a id="__codelineno-17-47" name="__codelineno-17-47"></a><span class="w">        </span><span class="o">.</span><span class="na">collectFile</span><span class="o">(</span>
-<a id="__codelineno-17-48" name="__codelineno-17-48"></a><span class="w">            </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">&quot;${outdir}/pipeline_info&quot;</span><span class="o">,</span>
-<a id="__codelineno-17-49" name="__codelineno-17-49"></a><span class="w">            </span><span class="nl">name:</span><span class="w">  </span><span class="s1">&#39;hello_software_&#39;</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;versions.yml&#39;</span><span class="o">,</span>
+<a id="__codelineno-17-48" name="__codelineno-17-48"></a><span class="w">            </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">"${outdir}/pipeline_info"</span><span class="o">,</span>
+<a id="__codelineno-17-49" name="__codelineno-17-49"></a><span class="w">            </span><span class="nl">name:</span><span class="w">  </span><span class="s1">'hello_software_'</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">'versions.yml'</span><span class="o">,</span>
 <a id="__codelineno-17-50" name="__codelineno-17-50"></a><span class="w">            </span><span class="nl">sort:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
 <a id="__codelineno-17-51" name="__codelineno-17-51"></a><span class="w">            </span><span class="nl">newLine:</span><span class="w"> </span><span class="kc">true</span>
 <a id="__codelineno-17-52" name="__codelineno-17-52"></a><span class="w">        </span><span class="o">)</span>
@@ -5411,15 +5411,15 @@ nf-core는 2026년에 모든 파이프라인에 이 메커니즘을 도입할 �
 <a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="cm">/*</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="cm">* Pipeline parameters</span>
 <a id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="cm">*/</span>
-<a id="__codelineno-22-6" name="__codelineno-22-6"></a><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;greetings.csv&#39;</span>
-<a id="__codelineno-22-7" name="__codelineno-22-7"></a><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;test-batch&#39;</span>
-<a id="__codelineno-22-8" name="__codelineno-22-8"></a><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;turkey&#39;</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6"></a><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'greetings.csv'</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7"></a><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'test-batch'</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8"></a><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'turkey'</span>
 <a id="__codelineno-22-9" name="__codelineno-22-9"></a>
 <a id="__codelineno-22-10" name="__codelineno-22-10"></a><span class="c1">// 모듈 포함</span>
-<a id="__codelineno-22-11" name="__codelineno-22-11"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayHello.nf&#39;</span>
-<a id="__codelineno-22-12" name="__codelineno-22-12"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/convertToUpper.nf&#39;</span>
-<a id="__codelineno-22-13" name="__codelineno-22-13"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/collectGreetings.nf&#39;</span>
-<a id="__codelineno-22-14" name="__codelineno-22-14"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">cowpy</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/cowpy.nf&#39;</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/sayHello.nf'</span>
+<a id="__codelineno-22-12" name="__codelineno-22-12"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/convertToUpper.nf'</span>
+<a id="__codelineno-22-13" name="__codelineno-22-13"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/collectGreetings.nf'</span>
+<a id="__codelineno-22-14" name="__codelineno-22-14"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">cowpy</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/cowpy.nf'</span>
 <a id="__codelineno-22-15" name="__codelineno-22-15"></a>
 <a id="__codelineno-22-16" name="__codelineno-22-16"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-22-17" name="__codelineno-22-17"></a>
@@ -5502,9 +5502,9 @@ nf-core는 2026년에 모든 파이프라인에 이 메커니즘을 도입할 �
 <span class="normal"><a href="#__codelineno-27-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-3" name="__codelineno-27-3"></a><span class="w">    </span><span class="cm">/*</span>
 <a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="cm">    * Pipeline parameters</span>
 <a id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="cm">    */</span>
-<a id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="hll"><span class="w">    </span><span class="c1">//params.greeting = &#39;greetings.csv&#39;</span>
-</span><a id="__codelineno-27-7" name="__codelineno-27-7"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;test-batch&#39;</span>
-<a id="__codelineno-27-8" name="__codelineno-27-8"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;turkey&#39;</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="hll"><span class="w">    </span><span class="c1">//params.greeting = 'greetings.csv'</span>
+</span><a id="__codelineno-27-7" name="__codelineno-27-7"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'test-batch'</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'turkey'</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -5516,9 +5516,9 @@ nf-core는 2026년에 모든 파이프라인에 이 메커니즘을 도입할 �
 <span class="normal"><a href="#__codelineno-28-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="w">    </span><span class="cm">/*</span>
 <a id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="cm">    * Pipeline parameters</span>
 <a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="cm">    */</span>
-<a id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="hll"><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;greetings.csv&#39;</span>
-</span><a id="__codelineno-28-7" name="__codelineno-28-7"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;test-batch&#39;</span>
-<a id="__codelineno-28-8" name="__codelineno-28-8"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;turkey&#39;</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="hll"><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'greetings.csv'</span>
+</span><a id="__codelineno-28-7" name="__codelineno-28-7"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'test-batch'</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'turkey'</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5639,15 +5639,15 @@ nf-core는 2026년에 모든 파이프라인에 이 메커니즘을 도입할 �
 <a id="__codelineno-32-3" name="__codelineno-32-3"></a><span class="cm">/*</span>
 <a id="__codelineno-32-4" name="__codelineno-32-4"></a><span class="cm">* Pipeline parameters</span>
 <a id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="cm">*/</span>
-<a id="__codelineno-32-6" name="__codelineno-32-6"></a><span class="c1">// params.greeting = &#39;greetings.csv&#39;</span>
-<a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;test-batch&#39;</span>
-<a id="__codelineno-32-8" name="__codelineno-32-8"></a><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;turkey&#39;</span>
+<a id="__codelineno-32-6" name="__codelineno-32-6"></a><span class="c1">// params.greeting = 'greetings.csv'</span>
+<a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'test-batch'</span>
+<a id="__codelineno-32-8" name="__codelineno-32-8"></a><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'turkey'</span>
 <a id="__codelineno-32-9" name="__codelineno-32-9"></a>
 <a id="__codelineno-32-10" name="__codelineno-32-10"></a><span class="c1">// 모듈 포함</span>
-<a id="__codelineno-32-11" name="__codelineno-32-11"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayHello.nf&#39;</span>
-<a id="__codelineno-32-12" name="__codelineno-32-12"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/convertToUpper.nf&#39;</span>
-<a id="__codelineno-32-13" name="__codelineno-32-13"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/collectGreetings.nf&#39;</span>
-<a id="__codelineno-32-14" name="__codelineno-32-14"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">cowpy</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/cowpy.nf&#39;</span>
+<a id="__codelineno-32-11" name="__codelineno-32-11"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/sayHello.nf'</span>
+<a id="__codelineno-32-12" name="__codelineno-32-12"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/convertToUpper.nf'</span>
+<a id="__codelineno-32-13" name="__codelineno-32-13"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/collectGreetings.nf'</span>
+<a id="__codelineno-32-14" name="__codelineno-32-14"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">cowpy</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/cowpy.nf'</span>
 <a id="__codelineno-32-15" name="__codelineno-32-15"></a>
 <a id="__codelineno-32-16" name="__codelineno-32-16"></a><span class="hll"><span class="n">workflow</span><span class="w"> </span><span class="n">HELLO</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-32-17" name="__codelineno-32-17"></a>
@@ -5704,10 +5704,10 @@ nf-core는 2026년에 모든 파이프라인에 이 메커니즘을 도입할 �
 <span class="normal"><a href="#__codelineno-34-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-34-2" name="__codelineno-34-2"></a>
 <a id="__codelineno-34-3" name="__codelineno-34-3"></a><span class="c1">// hello.nf 파일에서 workflow 코드 가져오기</span>
-<a id="__codelineno-34-4" name="__codelineno-34-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">HELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./hello.nf&#39;</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">HELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./hello.nf'</span>
 <a id="__codelineno-34-5" name="__codelineno-34-5"></a>
 <a id="__codelineno-34-6" name="__codelineno-34-6"></a><span class="c1">// 입력 매개변수 선언</span>
-<a id="__codelineno-34-7" name="__codelineno-34-7"></a><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;greetings.csv&#39;</span>
+<a id="__codelineno-34-7" name="__codelineno-34-7"></a><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'greetings.csv'</span>
 <a id="__codelineno-34-8" name="__codelineno-34-8"></a>
 <a id="__codelineno-34-9" name="__codelineno-34-9"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-34-10" name="__codelineno-34-10"></a><span class="w">  </span><span class="c1">// CSV 파일에서 입력용 채널 생성</span>
@@ -5719,7 +5719,7 @@ nf-core는 2026년에 모든 파이프라인에 이 메커니즘을 도입할 �
 <a id="__codelineno-34-16" name="__codelineno-34-16"></a><span class="w">  </span><span class="n">HELLO</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-34-17" name="__codelineno-34-17"></a>
 <a id="__codelineno-34-18" name="__codelineno-34-18"></a><span class="w">  </span><span class="c1">// workflow에서 방출된 출력 보기</span>
-<a id="__codelineno-34-19" name="__codelineno-34-19"></a><span class="w">  </span><span class="n">HELLO</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Output: $output&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-34-19" name="__codelineno-34-19"></a><span class="w">  </span><span class="n">HELLO</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Output: $output"</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-34-20" name="__codelineno-34-20"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>여기서 두 가지 중요한 관찰 사항이 있습니다:</p>
@@ -5840,8 +5840,8 @@ Nextflow는 실행 디렉토리에서 <code>main.nf</code>라는 파일을 자�
 <a id="__codelineno-37-3" name="__codelineno-37-3"></a><span class="cm">    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS</span>
 <a id="__codelineno-37-4" name="__codelineno-37-4"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
 <a id="__codelineno-37-5" name="__codelineno-37-5"></a><span class="cm">*/</span>
-<a id="__codelineno-37-6" name="__codelineno-37-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">paramsSummaryMap</span><span class="w">       </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;plugin/nf-schema&#39;</span>
-<a id="__codelineno-37-7" name="__codelineno-37-7"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../subworkflows/nf-core/utils_nfcore_pipeline&#39;</span>
+<a id="__codelineno-37-6" name="__codelineno-37-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">paramsSummaryMap</span><span class="w">       </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'plugin/nf-schema'</span>
+<a id="__codelineno-37-7" name="__codelineno-37-7"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'../subworkflows/nf-core/utils_nfcore_pipeline'</span>
 <a id="__codelineno-37-8" name="__codelineno-37-8"></a>
 <a id="__codelineno-37-9" name="__codelineno-37-9"></a><span class="cm">/*</span>
 <a id="__codelineno-37-10" name="__codelineno-37-10"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
@@ -5862,7 +5862,7 @@ Nextflow는 실행 디렉토리에서 <code>main.nf</code>라는 파일을 자�
 <a id="__codelineno-37-25" name="__codelineno-37-25"></a><span class="w">    </span><span class="c1">//</span>
 <a id="__codelineno-37-26" name="__codelineno-37-26"></a><span class="w">    </span><span class="c1">// 소프트웨어 버전 수집 및 저장</span>
 <a id="__codelineno-37-27" name="__codelineno-37-27"></a><span class="w">    </span><span class="c1">//</span>
-<a id="__codelineno-37-28" name="__codelineno-37-28"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">topic</span><span class="o">(</span><span class="s2">&quot;versions&quot;</span><span class="o">)</span>
+<a id="__codelineno-37-28" name="__codelineno-37-28"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">topic</span><span class="o">(</span><span class="s2">"versions"</span><span class="o">)</span>
 <a id="__codelineno-37-29" name="__codelineno-37-29"></a><span class="w">        </span><span class="o">.</span><span class="na">distinct</span><span class="o">()</span>
 <a id="__codelineno-37-30" name="__codelineno-37-30"></a><span class="w">        </span><span class="o">.</span><span class="na">branch</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-37-31" name="__codelineno-37-31"></a><span class="w">            </span><span class="nl">versions_file:</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Path</span>
@@ -5871,19 +5871,19 @@ Nextflow는 실행 디렉토리에서 <code>main.nf</code>라는 파일을 자�
 <a id="__codelineno-37-34" name="__codelineno-37-34"></a>
 <a id="__codelineno-37-35" name="__codelineno-37-35"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">topic_versions</span><span class="o">.</span><span class="na">versions_tuple</span>
 <a id="__codelineno-37-36" name="__codelineno-37-36"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">process</span><span class="o">,</span><span class="w"> </span><span class="n">tool</span><span class="o">,</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-37-37" name="__codelineno-37-37"></a><span class="w">            </span><span class="o">[</span><span class="w"> </span><span class="n">process</span><span class="o">[</span><span class="n">process</span><span class="o">.</span><span class="na">lastIndexOf</span><span class="o">(</span><span class="s1">&#39;:&#39;</span><span class="o">)+</span><span class="mi">1</span><span class="o">..-</span><span class="mi">1</span><span class="o">],</span><span class="w"> </span><span class="s2">&quot;  ${tool}: ${version}&quot;</span><span class="w"> </span><span class="o">]</span>
+<a id="__codelineno-37-37" name="__codelineno-37-37"></a><span class="w">            </span><span class="o">[</span><span class="w"> </span><span class="n">process</span><span class="o">[</span><span class="n">process</span><span class="o">.</span><span class="na">lastIndexOf</span><span class="o">(</span><span class="s1">':'</span><span class="o">)+</span><span class="mi">1</span><span class="o">..-</span><span class="mi">1</span><span class="o">],</span><span class="w"> </span><span class="s2">"  ${tool}: ${version}"</span><span class="w"> </span><span class="o">]</span>
 <a id="__codelineno-37-38" name="__codelineno-37-38"></a><span class="w">        </span><span class="o">}</span>
 <a id="__codelineno-37-39" name="__codelineno-37-39"></a><span class="w">        </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">(</span><span class="nl">by:</span><span class="mi">0</span><span class="o">)</span>
 <a id="__codelineno-37-40" name="__codelineno-37-40"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">process</span><span class="o">,</span><span class="w"> </span><span class="n">tool_versions</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-37-41" name="__codelineno-37-41"></a><span class="w">            </span><span class="n">tool_versions</span><span class="o">.</span><span class="na">unique</span><span class="o">().</span><span class="na">sort</span><span class="o">()</span>
-<a id="__codelineno-37-42" name="__codelineno-37-42"></a><span class="w">            </span><span class="s2">&quot;${process}:\n${tool_versions.join(&#39;\n&#39;)}&quot;</span>
+<a id="__codelineno-37-42" name="__codelineno-37-42"></a><span class="w">            </span><span class="s2">"${process}:\n${tool_versions.join('\n')}"</span>
 <a id="__codelineno-37-43" name="__codelineno-37-43"></a><span class="w">        </span><span class="o">}</span>
 <a id="__codelineno-37-44" name="__codelineno-37-44"></a>
 <a id="__codelineno-37-45" name="__codelineno-37-45"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">ch_collated_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="o">(</span><span class="n">ch_versions</span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">topic_versions</span><span class="o">.</span><span class="na">versions_file</span><span class="o">))</span>
 <a id="__codelineno-37-46" name="__codelineno-37-46"></a><span class="w">        </span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">topic_versions_string</span><span class="o">)</span>
 <a id="__codelineno-37-47" name="__codelineno-37-47"></a><span class="w">        </span><span class="o">.</span><span class="na">collectFile</span><span class="o">(</span>
-<a id="__codelineno-37-48" name="__codelineno-37-48"></a><span class="w">            </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">&quot;${outdir}/pipeline_info&quot;</span><span class="o">,</span>
-<a id="__codelineno-37-49" name="__codelineno-37-49"></a><span class="w">            </span><span class="nl">name:</span><span class="w">  </span><span class="s1">&#39;hello_software_&#39;</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;versions.yml&#39;</span><span class="o">,</span>
+<a id="__codelineno-37-48" name="__codelineno-37-48"></a><span class="w">            </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">"${outdir}/pipeline_info"</span><span class="o">,</span>
+<a id="__codelineno-37-49" name="__codelineno-37-49"></a><span class="w">            </span><span class="nl">name:</span><span class="w">  </span><span class="s1">'hello_software_'</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">'versions.yml'</span><span class="o">,</span>
 <a id="__codelineno-37-50" name="__codelineno-37-50"></a><span class="w">            </span><span class="nl">sort:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
 <a id="__codelineno-37-51" name="__codelineno-37-51"></a><span class="w">            </span><span class="nl">newLine:</span><span class="w"> </span><span class="kc">true</span>
 <a id="__codelineno-37-52" name="__codelineno-37-52"></a><span class="w">        </span><span class="o">)</span>
@@ -5942,10 +5942,10 @@ Nextflow는 실행 디렉토리에서 <code>main.nf</code>라는 파일을 자�
 <span class="normal"><a href="#__codelineno-41-11">11</a></span>
 <span class="normal"><a href="#__codelineno-41-12">12</a></span>
 <span class="normal"><a href="#__codelineno-41-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-41-9" name="__codelineno-41-9"></a><span class="c1">// 모듈 포함</span>
-<a id="__codelineno-41-10" name="__codelineno-41-10"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayHello.nf&#39;</span>
-<a id="__codelineno-41-11" name="__codelineno-41-11"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/convertToUpper.nf&#39;</span>
-<a id="__codelineno-41-12" name="__codelineno-41-12"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/collectGreetings.nf&#39;</span>
-<a id="__codelineno-41-13" name="__codelineno-41-13"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">cowpy</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/cowpy.nf&#39;</span>
+<a id="__codelineno-41-10" name="__codelineno-41-10"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/sayHello.nf'</span>
+<a id="__codelineno-41-11" name="__codelineno-41-11"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/convertToUpper.nf'</span>
+<a id="__codelineno-41-12" name="__codelineno-41-12"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/collectGreetings.nf'</span>
+<a id="__codelineno-41-13" name="__codelineno-41-13"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">cowpy</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/cowpy.nf'</span>
 </code></pre></div></td></tr></table></div>
 <p><code>core-hello/workflows/hello.nf</code> 파일을 열고 아래와 같이 이러한 import 문을 변환합니다.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">후</label><label for="__tabbed_5_2">전</label></div>
@@ -5966,12 +5966,12 @@ Nextflow는 실행 디렉토리에서 <code>main.nf</code>라는 파일을 자�
 <a id="__codelineno-42-3" name="__codelineno-42-3"></a><span class="cm">    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS</span>
 <a id="__codelineno-42-4" name="__codelineno-42-4"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
 <a id="__codelineno-42-5" name="__codelineno-42-5"></a><span class="cm">*/</span>
-<a id="__codelineno-42-6" name="__codelineno-42-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">paramsSummaryMap</span><span class="w">       </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;plugin/nf-schema&#39;</span>
-<a id="__codelineno-42-7" name="__codelineno-42-7"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../subworkflows/nf-core/utils_nfcore_pipeline&#39;</span>
-<a id="__codelineno-42-8" name="__codelineno-42-8"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w">               </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/sayHello.nf&#39;</span>
-</span><a id="__codelineno-42-9" name="__codelineno-42-9"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w">         </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/convertToUpper.nf&#39;</span>
-</span><a id="__codelineno-42-10" name="__codelineno-42-10"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w">       </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/collectGreetings.nf&#39;</span>
-</span><a id="__codelineno-42-11" name="__codelineno-42-11"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">cowpy</span><span class="w">                  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/cowpy.nf&#39;</span>
+<a id="__codelineno-42-6" name="__codelineno-42-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">paramsSummaryMap</span><span class="w">       </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'plugin/nf-schema'</span>
+<a id="__codelineno-42-7" name="__codelineno-42-7"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'../subworkflows/nf-core/utils_nfcore_pipeline'</span>
+<a id="__codelineno-42-8" name="__codelineno-42-8"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w">               </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'../modules/local/sayHello.nf'</span>
+</span><a id="__codelineno-42-9" name="__codelineno-42-9"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w">         </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'../modules/local/convertToUpper.nf'</span>
+</span><a id="__codelineno-42-10" name="__codelineno-42-10"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w">       </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'../modules/local/collectGreetings.nf'</span>
+</span><a id="__codelineno-42-11" name="__codelineno-42-11"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">cowpy</span><span class="w">                  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'../modules/local/cowpy.nf'</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -5986,8 +5986,8 @@ Nextflow는 실행 디렉토리에서 <code>main.nf</code>라는 파일을 자�
 <a id="__codelineno-43-3" name="__codelineno-43-3"></a><span class="cm">    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS</span>
 <a id="__codelineno-43-4" name="__codelineno-43-4"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
 <a id="__codelineno-43-5" name="__codelineno-43-5"></a><span class="cm">*/</span>
-<a id="__codelineno-43-6" name="__codelineno-43-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">paramsSummaryMap</span><span class="w">       </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;plugin/nf-schema&#39;</span>
-<a id="__codelineno-43-7" name="__codelineno-43-7"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../subworkflows/nf-core/utils_nfcore_pipeline&#39;</span>
+<a id="__codelineno-43-6" name="__codelineno-43-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">paramsSummaryMap</span><span class="w">       </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'plugin/nf-schema'</span>
+<a id="__codelineno-43-7" name="__codelineno-43-7"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'../subworkflows/nf-core/utils_nfcore_pipeline'</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -6120,7 +6120,7 @@ Nextflow는 실행 디렉토리에서 <code>main.nf</code>라는 파일을 자�
 <a id="__codelineno-46-37" name="__codelineno-46-37"></a><span class="w">    </span><span class="c1">//</span>
 <a id="__codelineno-46-38" name="__codelineno-46-38"></a><span class="w">    </span><span class="c1">// 소프트웨어 버전 수집 및 저장</span>
 <a id="__codelineno-46-39" name="__codelineno-46-39"></a><span class="w">    </span><span class="c1">//</span>
-<a id="__codelineno-46-40" name="__codelineno-46-40"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">topic</span><span class="o">(</span><span class="s2">&quot;versions&quot;</span><span class="o">)</span>
+<a id="__codelineno-46-40" name="__codelineno-46-40"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">topic</span><span class="o">(</span><span class="s2">"versions"</span><span class="o">)</span>
 <a id="__codelineno-46-41" name="__codelineno-46-41"></a><span class="w">        </span><span class="o">.</span><span class="na">distinct</span><span class="o">()</span>
 <a id="__codelineno-46-42" name="__codelineno-46-42"></a><span class="w">        </span><span class="o">.</span><span class="na">branch</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-46-43" name="__codelineno-46-43"></a><span class="w">            </span><span class="nl">versions_file:</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Path</span>
@@ -6129,19 +6129,19 @@ Nextflow는 실행 디렉토리에서 <code>main.nf</code>라는 파일을 자�
 <a id="__codelineno-46-46" name="__codelineno-46-46"></a>
 <a id="__codelineno-46-47" name="__codelineno-46-47"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">topic_versions</span><span class="o">.</span><span class="na">versions_tuple</span>
 <a id="__codelineno-46-48" name="__codelineno-46-48"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">process</span><span class="o">,</span><span class="w"> </span><span class="n">tool</span><span class="o">,</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-46-49" name="__codelineno-46-49"></a><span class="w">            </span><span class="o">[</span><span class="w"> </span><span class="n">process</span><span class="o">[</span><span class="n">process</span><span class="o">.</span><span class="na">lastIndexOf</span><span class="o">(</span><span class="s1">&#39;:&#39;</span><span class="o">)+</span><span class="mi">1</span><span class="o">..-</span><span class="mi">1</span><span class="o">],</span><span class="w"> </span><span class="s2">&quot;  ${tool}: ${version}&quot;</span><span class="w"> </span><span class="o">]</span>
+<a id="__codelineno-46-49" name="__codelineno-46-49"></a><span class="w">            </span><span class="o">[</span><span class="w"> </span><span class="n">process</span><span class="o">[</span><span class="n">process</span><span class="o">.</span><span class="na">lastIndexOf</span><span class="o">(</span><span class="s1">':'</span><span class="o">)+</span><span class="mi">1</span><span class="o">..-</span><span class="mi">1</span><span class="o">],</span><span class="w"> </span><span class="s2">"  ${tool}: ${version}"</span><span class="w"> </span><span class="o">]</span>
 <a id="__codelineno-46-50" name="__codelineno-46-50"></a><span class="w">        </span><span class="o">}</span>
 <a id="__codelineno-46-51" name="__codelineno-46-51"></a><span class="w">        </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">(</span><span class="nl">by:</span><span class="mi">0</span><span class="o">)</span>
 <a id="__codelineno-46-52" name="__codelineno-46-52"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">process</span><span class="o">,</span><span class="w"> </span><span class="n">tool_versions</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-46-53" name="__codelineno-46-53"></a><span class="w">            </span><span class="n">tool_versions</span><span class="o">.</span><span class="na">unique</span><span class="o">().</span><span class="na">sort</span><span class="o">()</span>
-<a id="__codelineno-46-54" name="__codelineno-46-54"></a><span class="w">            </span><span class="s2">&quot;${process}:\n${tool_versions.join(&#39;\n&#39;)}&quot;</span>
+<a id="__codelineno-46-54" name="__codelineno-46-54"></a><span class="w">            </span><span class="s2">"${process}:\n${tool_versions.join('\n')}"</span>
 <a id="__codelineno-46-55" name="__codelineno-46-55"></a><span class="w">        </span><span class="o">}</span>
 <a id="__codelineno-46-56" name="__codelineno-46-56"></a>
 <a id="__codelineno-46-57" name="__codelineno-46-57"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">ch_collated_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="o">(</span><span class="n">ch_versions</span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">topic_versions</span><span class="o">.</span><span class="na">versions_file</span><span class="o">))</span>
 <a id="__codelineno-46-58" name="__codelineno-46-58"></a><span class="w">        </span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">topic_versions_string</span><span class="o">)</span>
 <a id="__codelineno-46-59" name="__codelineno-46-59"></a><span class="w">        </span><span class="o">.</span><span class="na">collectFile</span><span class="o">(</span>
-<a id="__codelineno-46-60" name="__codelineno-46-60"></a><span class="w">            </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">&quot;${outdir}/pipeline_info&quot;</span><span class="o">,</span>
-<a id="__codelineno-46-61" name="__codelineno-46-61"></a><span class="w">            </span><span class="nl">name:</span><span class="w">  </span><span class="s1">&#39;hello_software_&#39;</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;versions.yml&#39;</span><span class="o">,</span>
+<a id="__codelineno-46-60" name="__codelineno-46-60"></a><span class="w">            </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">"${outdir}/pipeline_info"</span><span class="o">,</span>
+<a id="__codelineno-46-61" name="__codelineno-46-61"></a><span class="w">            </span><span class="nl">name:</span><span class="w">  </span><span class="s1">'hello_software_'</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">'versions.yml'</span><span class="o">,</span>
 <a id="__codelineno-46-62" name="__codelineno-46-62"></a><span class="w">            </span><span class="nl">sort:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
 <a id="__codelineno-46-63" name="__codelineno-46-63"></a><span class="w">            </span><span class="nl">newLine:</span><span class="w"> </span><span class="kc">true</span>
 <a id="__codelineno-46-64" name="__codelineno-46-64"></a><span class="w">        </span><span class="o">)</span>
@@ -6204,7 +6204,7 @@ Nextflow는 실행 디렉토리에서 <code>main.nf</code>라는 파일을 자�
 <a id="__codelineno-47-25" name="__codelineno-47-25"></a><span class="w">    </span><span class="c1">//</span>
 <a id="__codelineno-47-26" name="__codelineno-47-26"></a><span class="w">    </span><span class="c1">// 소프트웨어 버전 수집 및 저장</span>
 <a id="__codelineno-47-27" name="__codelineno-47-27"></a><span class="w">    </span><span class="c1">//</span>
-<a id="__codelineno-47-28" name="__codelineno-47-28"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">topic</span><span class="o">(</span><span class="s2">&quot;versions&quot;</span><span class="o">)</span>
+<a id="__codelineno-47-28" name="__codelineno-47-28"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">topic</span><span class="o">(</span><span class="s2">"versions"</span><span class="o">)</span>
 <a id="__codelineno-47-29" name="__codelineno-47-29"></a><span class="w">        </span><span class="o">.</span><span class="na">distinct</span><span class="o">()</span>
 <a id="__codelineno-47-30" name="__codelineno-47-30"></a><span class="w">        </span><span class="o">.</span><span class="na">branch</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-47-31" name="__codelineno-47-31"></a><span class="w">            </span><span class="nl">versions_file:</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Path</span>
@@ -6213,19 +6213,19 @@ Nextflow는 실행 디렉토리에서 <code>main.nf</code>라는 파일을 자�
 <a id="__codelineno-47-34" name="__codelineno-47-34"></a>
 <a id="__codelineno-47-35" name="__codelineno-47-35"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">topic_versions</span><span class="o">.</span><span class="na">versions_tuple</span>
 <a id="__codelineno-47-36" name="__codelineno-47-36"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">process</span><span class="o">,</span><span class="w"> </span><span class="n">tool</span><span class="o">,</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-47-37" name="__codelineno-47-37"></a><span class="w">            </span><span class="o">[</span><span class="w"> </span><span class="n">process</span><span class="o">[</span><span class="n">process</span><span class="o">.</span><span class="na">lastIndexOf</span><span class="o">(</span><span class="s1">&#39;:&#39;</span><span class="o">)+</span><span class="mi">1</span><span class="o">..-</span><span class="mi">1</span><span class="o">],</span><span class="w"> </span><span class="s2">&quot;  ${tool}: ${version}&quot;</span><span class="w"> </span><span class="o">]</span>
+<a id="__codelineno-47-37" name="__codelineno-47-37"></a><span class="w">            </span><span class="o">[</span><span class="w"> </span><span class="n">process</span><span class="o">[</span><span class="n">process</span><span class="o">.</span><span class="na">lastIndexOf</span><span class="o">(</span><span class="s1">':'</span><span class="o">)+</span><span class="mi">1</span><span class="o">..-</span><span class="mi">1</span><span class="o">],</span><span class="w"> </span><span class="s2">"  ${tool}: ${version}"</span><span class="w"> </span><span class="o">]</span>
 <a id="__codelineno-47-38" name="__codelineno-47-38"></a><span class="w">        </span><span class="o">}</span>
 <a id="__codelineno-47-39" name="__codelineno-47-39"></a><span class="w">        </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">(</span><span class="nl">by:</span><span class="mi">0</span><span class="o">)</span>
 <a id="__codelineno-47-40" name="__codelineno-47-40"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">process</span><span class="o">,</span><span class="w"> </span><span class="n">tool_versions</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-47-41" name="__codelineno-47-41"></a><span class="w">            </span><span class="n">tool_versions</span><span class="o">.</span><span class="na">unique</span><span class="o">().</span><span class="na">sort</span><span class="o">()</span>
-<a id="__codelineno-47-42" name="__codelineno-47-42"></a><span class="w">            </span><span class="s2">&quot;${process}:\n${tool_versions.join(&#39;\n&#39;)}&quot;</span>
+<a id="__codelineno-47-42" name="__codelineno-47-42"></a><span class="w">            </span><span class="s2">"${process}:\n${tool_versions.join('\n')}"</span>
 <a id="__codelineno-47-43" name="__codelineno-47-43"></a><span class="w">        </span><span class="o">}</span>
 <a id="__codelineno-47-44" name="__codelineno-47-44"></a>
 <a id="__codelineno-47-45" name="__codelineno-47-45"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">ch_collated_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="o">(</span><span class="n">ch_versions</span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">topic_versions</span><span class="o">.</span><span class="na">versions_file</span><span class="o">))</span>
 <a id="__codelineno-47-46" name="__codelineno-47-46"></a><span class="w">        </span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">topic_versions_string</span><span class="o">)</span>
 <a id="__codelineno-47-47" name="__codelineno-47-47"></a><span class="w">        </span><span class="o">.</span><span class="na">collectFile</span><span class="o">(</span>
-<a id="__codelineno-47-48" name="__codelineno-47-48"></a><span class="w">            </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">&quot;${outdir}/pipeline_info&quot;</span><span class="o">,</span>
-<a id="__codelineno-47-49" name="__codelineno-47-49"></a><span class="w">            </span><span class="nl">name:</span><span class="w">  </span><span class="s1">&#39;hello_software_&#39;</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;versions.yml&#39;</span><span class="o">,</span>
+<a id="__codelineno-47-48" name="__codelineno-47-48"></a><span class="w">            </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">"${outdir}/pipeline_info"</span><span class="o">,</span>
+<a id="__codelineno-47-49" name="__codelineno-47-49"></a><span class="w">            </span><span class="nl">name:</span><span class="w">  </span><span class="s1">'hello_software_'</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">'versions.yml'</span><span class="o">,</span>
 <a id="__codelineno-47-50" name="__codelineno-47-50"></a><span class="w">            </span><span class="nl">sort:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
 <a id="__codelineno-47-51" name="__codelineno-47-51"></a><span class="w">            </span><span class="nl">newLine:</span><span class="w"> </span><span class="kc">true</span>
 <a id="__codelineno-47-52" name="__codelineno-47-52"></a><span class="w">        </span><span class="o">)</span>
@@ -6387,9 +6387,9 @@ nf-core 템플릿은 복잡한 유전체학 데이터 세트를 위해 설계된
 <a id="__codelineno-52-13" name="__codelineno-52-13"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
 <a id="__codelineno-52-14" name="__codelineno-52-14"></a><span class="cm">*/</span>
 <a id="__codelineno-52-15" name="__codelineno-52-15"></a>
-<a id="__codelineno-52-16" name="__codelineno-52-16"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">HELLO</span><span class="w">  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./workflows/hello&#39;</span>
-<a id="__codelineno-52-17" name="__codelineno-52-17"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">PIPELINE_INITIALISATION</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./subworkflows/local/utils_nfcore_hello_pipeline&#39;</span>
-<a id="__codelineno-52-18" name="__codelineno-52-18"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">PIPELINE_COMPLETION</span><span class="w">     </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./subworkflows/local/utils_nfcore_hello_pipeline&#39;</span>
+<a id="__codelineno-52-16" name="__codelineno-52-16"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">HELLO</span><span class="w">  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./workflows/hello'</span>
+<a id="__codelineno-52-17" name="__codelineno-52-17"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">PIPELINE_INITIALISATION</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./subworkflows/local/utils_nfcore_hello_pipeline'</span>
+<a id="__codelineno-52-18" name="__codelineno-52-18"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">PIPELINE_COMPLETION</span><span class="w">     </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./subworkflows/local/utils_nfcore_hello_pipeline'</span>
 <a id="__codelineno-52-19" name="__codelineno-52-19"></a><span class="cm">/*</span>
 <a id="__codelineno-52-20" name="__codelineno-52-20"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
 <a id="__codelineno-52-21" name="__codelineno-52-21"></a><span class="cm">    NAMED WORKFLOWS FOR PIPELINE</span>
@@ -6507,7 +6507,7 @@ nf-core 템플릿은 복잡한 유전체학 데이터 세트를 위해 설계된
 <a id="__codelineno-53-78" name="__codelineno-53-78"></a><span class="w">    </span><span class="c1">//</span>
 <a id="__codelineno-53-79" name="__codelineno-53-79"></a>
 <a id="__codelineno-53-80" name="__codelineno-53-80"></a><span class="w">    </span><span class="n">channel</span>
-<a id="__codelineno-53-81" name="__codelineno-53-81"></a><span class="w">        </span><span class="o">.</span><span class="na">fromList</span><span class="o">(</span><span class="n">samplesheetToList</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;${projectDir}/assets/schema_input.json&quot;</span><span class="o">))</span>
+<a id="__codelineno-53-81" name="__codelineno-53-81"></a><span class="w">        </span><span class="o">.</span><span class="na">fromList</span><span class="o">(</span><span class="n">samplesheetToList</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">,</span><span class="w"> </span><span class="s2">"${projectDir}/assets/schema_input.json"</span><span class="o">))</span>
 <a id="__codelineno-53-82" name="__codelineno-53-82"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-53-83" name="__codelineno-53-83"></a><span class="w">            </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">fastq_1</span><span class="o">,</span><span class="w"> </span><span class="n">fastq_2</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-53-84" name="__codelineno-53-84"></a><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="o">(!</span><span class="n">fastq_2</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
@@ -6611,7 +6611,7 @@ nf-core 템플릿은 복잡한 유전체학 데이터 세트를 위해 설계된
 <a id="__codelineno-58-78" name="__codelineno-58-78"></a><span class="w">    </span><span class="c1">//</span>
 <a id="__codelineno-58-79" name="__codelineno-58-79"></a>
 <a id="__codelineno-58-80" name="__codelineno-58-80"></a><span class="hll"><span class="w">    </span><span class="n">channel</span>
-</span><a id="__codelineno-58-81" name="__codelineno-58-81"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">fromList</span><span class="o">(</span><span class="n">samplesheetToList</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;${projectDir}/assets/schema_input.json&quot;</span><span class="o">))</span>
+</span><a id="__codelineno-58-81" name="__codelineno-58-81"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">fromList</span><span class="o">(</span><span class="n">samplesheetToList</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">,</span><span class="w"> </span><span class="s2">"${projectDir}/assets/schema_input.json"</span><span class="o">))</span>
 </span><a id="__codelineno-58-82" name="__codelineno-58-82"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-58-83" name="__codelineno-58-83"></a><span class="hll"><span class="w">            </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">fastq_1</span><span class="o">,</span><span class="w"> </span><span class="n">fastq_2</span><span class="w"> </span><span class="o">-&gt;</span>
 </span><a id="__codelineno-58-84" name="__codelineno-58-84"></a><span class="hll"><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="o">(!</span><span class="n">fastq_2</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
@@ -6667,15 +6667,15 @@ nf-core 템플릿은 복잡한 유전체학 데이터 세트를 위해 설계된
 <span class="normal"><a href="#__codelineno-60-29">29</a></span>
 <span class="normal"><a href="#__codelineno-60-30">30</a></span>
 <span class="normal"><a href="#__codelineno-60-31">31</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-60-21" name="__codelineno-60-21"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-60-22" name="__codelineno-60-22"></a><span class="w">    </span><span class="n">config_profile_name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Test profile&#39;</span>
-<a id="__codelineno-60-23" name="__codelineno-60-23"></a><span class="w">    </span><span class="n">config_profile_description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Minimal test dataset to check pipeline function&#39;</span>
+<a id="__codelineno-60-22" name="__codelineno-60-22"></a><span class="w">    </span><span class="n">config_profile_name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s1">'Test profile'</span>
+<a id="__codelineno-60-23" name="__codelineno-60-23"></a><span class="w">    </span><span class="n">config_profile_description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Minimal test dataset to check pipeline function'</span>
 <a id="__codelineno-60-24" name="__codelineno-60-24"></a>
 <a id="__codelineno-60-25" name="__codelineno-60-25"></a><span class="w">    </span><span class="c1">// 입력 데이터</span>
-<a id="__codelineno-60-26" name="__codelineno-60-26"></a><span class="hll"><span class="w">    </span><span class="n">input</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/assets/greetings.csv&quot;</span>
+<a id="__codelineno-60-26" name="__codelineno-60-26"></a><span class="hll"><span class="w">    </span><span class="n">input</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">"${projectDir}/assets/greetings.csv"</span>
 </span><a id="__codelineno-60-27" name="__codelineno-60-27"></a>
 <a id="__codelineno-60-28" name="__codelineno-60-28"></a><span class="hll"><span class="w">    </span><span class="c1">// 기타 매개변수</span>
-</span><a id="__codelineno-60-29" name="__codelineno-60-29"></a><span class="hll"><span class="w">    </span><span class="n">batch</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;test&#39;</span>
-</span><a id="__codelineno-60-30" name="__codelineno-60-30"></a><span class="hll"><span class="w">    </span><span class="n">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;tux&#39;</span>
+</span><a id="__codelineno-60-29" name="__codelineno-60-29"></a><span class="hll"><span class="w">    </span><span class="n">batch</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s1">'test'</span>
+</span><a id="__codelineno-60-30" name="__codelineno-60-30"></a><span class="hll"><span class="w">    </span><span class="n">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'tux'</span>
 </span><a id="__codelineno-60-31" name="__codelineno-60-31"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -6689,13 +6689,13 @@ nf-core 템플릿은 복잡한 유전체학 데이터 세트를 위해 설계된
 <span class="normal"><a href="#__codelineno-61-27">27</a></span>
 <span class="normal"><a href="#__codelineno-61-28">28</a></span>
 <span class="normal"><a href="#__codelineno-61-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-61-21" name="__codelineno-61-21"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-61-22" name="__codelineno-61-22"></a><span class="w">    </span><span class="n">config_profile_name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Test profile&#39;</span>
-<a id="__codelineno-61-23" name="__codelineno-61-23"></a><span class="w">    </span><span class="n">config_profile_description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Minimal test dataset to check pipeline function&#39;</span>
+<a id="__codelineno-61-22" name="__codelineno-61-22"></a><span class="w">    </span><span class="n">config_profile_name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s1">'Test profile'</span>
+<a id="__codelineno-61-23" name="__codelineno-61-23"></a><span class="w">    </span><span class="n">config_profile_description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Minimal test dataset to check pipeline function'</span>
 <a id="__codelineno-61-24" name="__codelineno-61-24"></a>
 <a id="__codelineno-61-25" name="__codelineno-61-25"></a><span class="w">    </span><span class="c1">// 입력 데이터</span>
 <a id="__codelineno-61-26" name="__codelineno-61-26"></a><span class="hll"><span class="w">    </span><span class="c1">// TODO nf-core: nf-core/test-datasets에 테스트 데이터 경로 지정</span>
 </span><a id="__codelineno-61-27" name="__codelineno-61-27"></a><span class="hll"><span class="w">    </span><span class="c1">// TODO nf-core: 명령줄 플래그가 필요하지 않도록 테스트에 필요한 매개변수 제공</span>
-</span><a id="__codelineno-61-28" name="__codelineno-61-28"></a><span class="hll"><span class="w">    </span><span class="n">input</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">pipelines_testdata_base_path</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv&#39;</span>
+</span><a id="__codelineno-61-28" name="__codelineno-61-28"></a><span class="hll"><span class="w">    </span><span class="n">input</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">pipelines_testdata_base_path</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">'viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'</span>
 </span><a id="__codelineno-61-29" name="__codelineno-61-29"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -6720,8 +6720,8 @@ nf-core 템플릿은 복잡한 유전체학 데이터 세트를 위해 설계된
 <span class="normal"><a href="#__codelineno-62-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-62-13" name="__codelineno-62-13"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-62-14" name="__codelineno-62-14"></a><span class="w">    </span><span class="n">resourceLimits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
 <a id="__codelineno-62-15" name="__codelineno-62-15"></a><span class="hll"><span class="w">        </span><span class="nl">cpus:</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span>
-</span><a id="__codelineno-62-16" name="__codelineno-62-16"></a><span class="hll"><span class="w">        </span><span class="nl">memory:</span><span class="w"> </span><span class="s1">&#39;4.GB&#39;</span><span class="o">,</span>
-</span><a id="__codelineno-62-17" name="__codelineno-62-17"></a><span class="w">        </span><span class="nl">time:</span><span class="w"> </span><span class="s1">&#39;1.h&#39;</span>
+</span><a id="__codelineno-62-16" name="__codelineno-62-16"></a><span class="hll"><span class="w">        </span><span class="nl">memory:</span><span class="w"> </span><span class="s1">'4.GB'</span><span class="o">,</span>
+</span><a id="__codelineno-62-17" name="__codelineno-62-17"></a><span class="w">        </span><span class="nl">time:</span><span class="w"> </span><span class="s1">'1.h'</span>
 <a id="__codelineno-62-18" name="__codelineno-62-18"></a><span class="w">    </span><span class="o">]</span>
 <a id="__codelineno-62-19" name="__codelineno-62-19"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -6736,8 +6736,8 @@ nf-core 템플릿은 복잡한 유전체학 데이터 세트를 위해 설계된
 <span class="normal"><a href="#__codelineno-63-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-63-13" name="__codelineno-63-13"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-63-14" name="__codelineno-63-14"></a><span class="w">    </span><span class="n">resourceLimits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
 <a id="__codelineno-63-15" name="__codelineno-63-15"></a><span class="hll"><span class="w">        </span><span class="nl">cpus:</span><span class="w"> </span><span class="mi">4</span><span class="o">,</span>
-</span><a id="__codelineno-63-16" name="__codelineno-63-16"></a><span class="hll"><span class="w">        </span><span class="nl">memory:</span><span class="w"> </span><span class="s1">&#39;15.GB&#39;</span><span class="o">,</span>
-</span><a id="__codelineno-63-17" name="__codelineno-63-17"></a><span class="w">        </span><span class="nl">time:</span><span class="w"> </span><span class="s1">&#39;1.h&#39;</span>
+</span><a id="__codelineno-63-16" name="__codelineno-63-16"></a><span class="hll"><span class="w">        </span><span class="nl">memory:</span><span class="w"> </span><span class="s1">'15.GB'</span><span class="o">,</span>
+</span><a id="__codelineno-63-17" name="__codelineno-63-17"></a><span class="w">        </span><span class="nl">time:</span><span class="w"> </span><span class="s1">'1.h'</span>
 <a id="__codelineno-63-18" name="__codelineno-63-18"></a><span class="w">    </span><span class="o">]</span>
 <a id="__codelineno-63-19" name="__codelineno-63-19"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -7187,9 +7187,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -7428,7 +7429,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -8107,7 +8108,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -8399,7 +8400,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -8571,7 +8572,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -8581,7 +8582,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

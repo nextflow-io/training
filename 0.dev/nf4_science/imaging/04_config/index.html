@@ -4521,7 +4521,7 @@ Now we'll explore how to configure pipelines for different computing environment
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">resourceLimits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">        </span><span class="nl">cpus:</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">        </span><span class="nl">memory:</span><span class="w"> </span><span class="s1">&#39;7.GB&#39;</span><span class="o">,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">        </span><span class="nl">memory:</span><span class="w"> </span><span class="s1">'7.GB'</span><span class="o">,</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="o">]</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="o">}</span>
 </code></pre></div>
@@ -4551,7 +4551,7 @@ They make it easy to switch between different compute scenarios without editing 
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="n">conda</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">        </span><span class="n">conda</span><span class="o">.</span><span class="na">enabled</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">        </span><span class="n">docker</span><span class="o">.</span><span class="na">enabled</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">        </span><span class="n">conda</span><span class="o">.</span><span class="na">channels</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;conda-forge&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;bioconda&#39;</span><span class="o">]</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">        </span><span class="n">conda</span><span class="o">.</span><span class="na">channels</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">'conda-forge'</span><span class="o">,</span><span class="w"> </span><span class="s1">'bioconda'</span><span class="o">]</span>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="o">}</span>
 </code></pre></div>
@@ -4598,27 +4598,27 @@ nf-core pipelines will always include at least two test profiles:</p>
 <p>Let's take a closer look at the <code>test</code> profile in molkart which is included using the <code>includeConfig</code> directive:</p>
 <div class="highlight"><span class="filename">molkart/nextflow.config (excerpt)</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">profiles</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="o">...</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="n">test</span><span class="w">      </span><span class="o">{</span><span class="w"> </span><span class="n">includeConfig</span><span class="w"> </span><span class="s1">&#39;conf/test.config&#39;</span><span class="w">      </span><span class="o">}</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="n">test</span><span class="w">      </span><span class="o">{</span><span class="w"> </span><span class="n">includeConfig</span><span class="w"> </span><span class="s1">'conf/test.config'</span><span class="w">      </span><span class="o">}</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="o">}</span>
 </code></pre></div>
 <p>This means whenever we run the pipeline with <code>-profile test</code>, Nextflow will load the configuration from <code>conf/test.config</code>.</p>
 <div class="highlight"><span class="filename">molkart/conf/test.config (excerpt)</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="n">config_profile_name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Test profile&#39;</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">config_profile_description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Minimal test dataset to check pipeline function&#39;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="n">config_profile_name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s1">'Test profile'</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">config_profile_description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Minimal test dataset to check pipeline function'</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/nf-core/test-datasets/molkart/test_data/samplesheets/samplesheet_membrane.csv&#39;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'https://raw.githubusercontent.com/nf-core/test-datasets/molkart/test_data/samplesheets/samplesheet_membrane.csv'</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="n">mindagap_tilesize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">90</span>
 <a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="n">mindagap_boxsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span>
 <a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="n">mindagap_loopnum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
 <a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="n">clahe_pyramid_tile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">368</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="n">segmentation_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;mesmer,cellpose,stardist&quot;</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="n">segmentation_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"mesmer,cellpose,stardist"</span>
 <a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="o">}</span>
 <a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>
 <a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">    </span><span class="n">resourceLimits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
 <a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">        </span><span class="nl">cpus:</span><span class="w"> </span><span class="mi">4</span><span class="o">,</span>
-<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">        </span><span class="nl">memory:</span><span class="w"> </span><span class="s1">&#39;15.GB&#39;</span><span class="o">,</span>
-<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">        </span><span class="nl">time:</span><span class="w"> </span><span class="s1">&#39;1.h&#39;</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">        </span><span class="nl">memory:</span><span class="w"> </span><span class="s1">'15.GB'</span><span class="o">,</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">        </span><span class="nl">time:</span><span class="w"> </span><span class="s1">'1.h'</span>
 <a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">    </span><span class="o">]</span>
 <a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="o">}</span>
 </code></pre></div>
@@ -4650,14 +4650,14 @@ You can combine multiple profiles to build the configuration you need.</p>
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">profiles</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="n">local_dev</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">        </span><span class="n">docker</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">        </span><span class="n">process</span><span class="o">.</span><span class="na">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;local&#39;</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">        </span><span class="n">process</span><span class="o">.</span><span class="na">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'local'</span>
 <a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
 <a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="n">hpc_cluster</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">        </span><span class="n">singularity</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">        </span><span class="n">process</span><span class="o">.</span><span class="na">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;slurm&#39;</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">        </span><span class="n">process</span><span class="o">.</span><span class="na">queue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;standard_queue&#39;</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">        </span><span class="n">singularity</span><span class="o">.</span><span class="na">cacheDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/shared/containers&#39;</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">        </span><span class="n">process</span><span class="o">.</span><span class="na">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'slurm'</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">        </span><span class="n">process</span><span class="o">.</span><span class="na">queue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'standard_queue'</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">        </span><span class="n">singularity</span><span class="o">.</span><span class="na">cacheDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'/shared/containers'</span>
 <a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="o">}</span>
 </code></pre></div>
@@ -4703,9 +4703,9 @@ These labels get converted into specific resource requests in one of the configu
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="mi">6</span><span class="o">.</span><span class="na">GB</span><span class="w">   </span><span class="o">*</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">attempt</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="n">time</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="mi">4</span><span class="o">.</span><span class="na">h</span><span class="w">    </span><span class="o">*</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">attempt</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="n">errorStrategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">exitStatus</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">((</span><span class="mi">130</span><span class="o">..</span><span class="mi">145</span><span class="o">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">104</span><span class="o">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;retry&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;finish&#39;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="n">errorStrategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">exitStatus</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">((</span><span class="mi">130</span><span class="o">..</span><span class="mi">145</span><span class="o">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">104</span><span class="o">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">'retry'</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">'finish'</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">    </span><span class="n">maxRetries</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">    </span><span class="n">maxErrors</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;-1&#39;</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">    </span><span class="n">maxErrors</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s1">'-1'</span>
 <a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
 <a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">    </span><span class="nl">withLabel:</span><span class="n">process_single</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">        </span><span class="n">cpus</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="mi">1</span><span class="w">                   </span><span class="o">}</span>
@@ -4733,7 +4733,7 @@ These labels get converted into specific resource requests in one of the configu
 <h3 id="42-overriding-resources-for-specific-processes">4.2. Overriding resources for specific processes<a class="headerlink" href="#42-overriding-resources-for-specific-processes" title="Permanent link">&para;</a></h3>
 <p>For fine-grained control, target individual processes by name:</p>
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="nl">withName:</span><span class="w"> </span><span class="s1">&#39;NFCORE_MOLKART:MOLKART:CELLPOSE&#39;</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="nl">withName:</span><span class="w"> </span><span class="s1">'NFCORE_MOLKART:MOLKART:CELLPOSE'</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">        </span><span class="n">cpus</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">        </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="o">.</span><span class="na">GB</span>
 <a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span><span class="o">}</span>
@@ -4770,7 +4770,7 @@ In a cluster environment with larger nodes, such requests would be submitted to 
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">profiles</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="n">local_dev</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">        </span><span class="n">docker</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">        </span><span class="n">process</span><span class="o">.</span><span class="na">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;local&#39;</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">        </span><span class="n">process</span><span class="o">.</span><span class="na">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'local'</span>
 <a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">        </span><span class="n">process</span><span class="o">.</span><span class="na">resourceLimits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
 <a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">            </span><span class="nl">cpus:</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span>
 <a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">            </span><span class="nl">memory:</span><span class="w"> </span><span class="mi">7</span><span class="o">.</span><span class="na">GB</span>
@@ -4779,8 +4779,8 @@ In a cluster environment with larger nodes, such requests would be submitted to 
 <a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>
 <a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="w">    </span><span class="n">hpc_cluster</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="w">        </span><span class="n">singularity</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="w">        </span><span class="n">process</span><span class="o">.</span><span class="na">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;slurm&#39;</span>
-<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="w">        </span><span class="n">process</span><span class="o">.</span><span class="na">queue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;batch&#39;</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="w">        </span><span class="n">process</span><span class="o">.</span><span class="na">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'slurm'</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="w">        </span><span class="n">process</span><span class="o">.</span><span class="na">queue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'batch'</span>
 <a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="w">        </span><span class="n">process</span><span class="o">.</span><span class="na">resourceLimits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
 <a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="w">            </span><span class="nl">cpus:</span><span class="w"> </span><span class="mi">32</span><span class="o">,</span>
 <a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a><span class="w">            </span><span class="nl">memory:</span><span class="w"> </span><span class="mi">128</span><span class="o">.</span><span class="na">GB</span><span class="o">,</span>
@@ -5117,9 +5117,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -5358,7 +5359,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -6037,7 +6038,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -6329,7 +6330,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -6501,7 +6502,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -6511,7 +6512,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

@@ -4011,7 +4011,7 @@ W tej sekcji napiszesz i uruchomisz testy przy użyciu frameworka testowego Spoc
 <h2 id="1-po-co-testowac">1. Po co testować?<a class="headerlink" href="#1-po-co-testowac" title="Permanent link">&para;</a></h2>
 <p>Pomyślna kompilacja oznacza, że kod się kompiluje, ale nie sprawdza, czy działa zgodnie z oczekiwaniami.
 Testy jednostkowe to małe fragmenty kodu, które automatycznie sprawdzają, czy Twoje funkcje zwracają właściwe wyjście dla danego wejścia.
-Na przykład test może sprawdzić, że <code class="highlight"><span class="n">reverseGreeting</span><span class="o">(</span><span class="s2">&quot;Hello&quot;</span><span class="o">)</span></code> zwraca <code>"olleH"</code>.</p>
+Na przykład test może sprawdzić, że <code class="highlight"><span class="n">reverseGreeting</span><span class="o">(</span><span class="s2">"Hello"</span><span class="o">)</span></code> zwraca <code>"olleH"</code>.</p>
 <p>Testy są wartościowe, ponieważ:</p>
 <ul>
 <li>Wykrywają błędy, zanim zrobią to użytkownicy</li>
@@ -4025,12 +4025,12 @@ Spock jest już skonfigurowany w projekcie (przez <code>build.gradle</code>), wi
 <p>Jeśli korzystałeś wcześniej z narzędzi testowych (takich jak <code>pytest</code> w Pythonie czy <code>testthat</code> w R), Spock pełni tę samą rolę: piszesz małe funkcje, które wywołują Twój kod ze znanymi danymi wejściowymi i sprawdzają wyniki.
 Różnica polega na tym, że Spock używa oznaczonych bloków (<code>given:</code>, <code>expect:</code>, <code>when:</code>, <code>then:</code>), podobnych do procesu lub workflow'u w Nextflow.</p>
 <p>Oto podstawowa struktura:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kt">def</span><span class="w"> </span><span class="nf">&#39;should reverse a greeting&#39;</span><span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w">   </span><span class="c1">// (1)!</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kt">def</span><span class="w"> </span><span class="nf">'should reverse a greeting'</span><span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w">   </span><span class="c1">// (1)!</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nl">given:</span><span class="w">                             </span><span class="c1">// (2)!</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GreetingExtension</span><span class="o">()</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nl">expect:</span><span class="w">                            </span><span class="c1">// (3)!</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;olleH&#39;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">'Hello'</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'olleH'</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="o">}</span>
 </code></pre></div>
 <ol>
@@ -4102,13 +4102,13 @@ Test sprawdza funkcję bezpośrednio, bez uruchamiania pipeline'u.</p>
 <a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="cm"> */</span>
 <a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="kd">class</span><span class="w"> </span><span class="nc">GreetingExtensionTest</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Specification</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-6-9" name="__codelineno-6-9"></a>
-<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="nf">&#39;should reverse a greeting&#39;</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="nf">'should reverse a greeting'</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="hll"><span class="w">        </span><span class="nl">given:</span>
 </span><a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="hll"><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GreetingExtension</span><span class="o">()</span><span class="w">            </span><span class="c1">// (1)!</span>
 </span><a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="hll">
 </span><a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="hll"><span class="w">        </span><span class="nl">expect:</span>
-</span><a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="hll"><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;olleH&#39;</span><span class="w">     </span><span class="c1">// (2)!</span>
-</span><a id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="hll"><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;ruojnoB&#39;</span>
+</span><a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="hll"><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">'Hello'</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'olleH'</span><span class="w">     </span><span class="c1">// (2)!</span>
+</span><a id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="hll"><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">'Bonjour'</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'ruojnoB'</span>
 </span><a id="__codelineno-6-17" name="__codelineno-6-17"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span><a id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -4181,21 +4181,21 @@ Sprawdza ona, czy <code>decorateGreeting</code> opakowuje wejściowy string znak
 <a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="cm"> */</span>
 <a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="kd">class</span><span class="w"> </span><span class="nc">GreetingExtensionTest</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Specification</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-8-9" name="__codelineno-8-9"></a>
-<a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="nf">&#39;should reverse a greeting&#39;</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="nf">'should reverse a greeting'</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="w">        </span><span class="nl">given:</span>
 <a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GreetingExtension</span><span class="o">()</span>
 <a id="__codelineno-8-13" name="__codelineno-8-13"></a>
 <a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="w">        </span><span class="nl">expect:</span>
-<a id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;olleH&#39;</span>
-<a id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;ruojnoB&#39;</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">'Hello'</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'olleH'</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">'Bonjour'</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'ruojnoB'</span>
 <a id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="hll">
-</span><a id="__codelineno-8-19" name="__codelineno-8-19"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="nf">&#39;should decorate a greeting&#39;</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-8-19" name="__codelineno-8-19"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="nf">'should decorate a greeting'</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-8-20" name="__codelineno-8-20"></a><span class="hll"><span class="w">        </span><span class="nl">given:</span>
 </span><a id="__codelineno-8-21" name="__codelineno-8-21"></a><span class="hll"><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GreetingExtension</span><span class="o">()</span>
 </span><a id="__codelineno-8-22" name="__codelineno-8-22"></a><span class="hll">
 </span><a id="__codelineno-8-23" name="__codelineno-8-23"></a><span class="hll"><span class="w">        </span><span class="nl">expect:</span>
-</span><a id="__codelineno-8-24" name="__codelineno-8-24"></a><span class="hll"><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">decorateGreeting</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;*** Hello ***&#39;</span>
+</span><a id="__codelineno-8-24" name="__codelineno-8-24"></a><span class="hll"><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">decorateGreeting</span><span class="o">(</span><span class="s1">'Hello'</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'*** Hello ***'</span>
 </span><a id="__codelineno-8-25" name="__codelineno-8-25"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span><a id="__codelineno-8-26" name="__codelineno-8-26"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -4227,13 +4227,13 @@ Sprawdza ona, czy <code>decorateGreeting</code> opakowuje wejściowy string znak
 <a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="cm"> */</span>
 <a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="kd">class</span><span class="w"> </span><span class="nc">GreetingExtensionTest</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Specification</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-9-9" name="__codelineno-9-9"></a>
-<a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="nf">&#39;should reverse a greeting&#39;</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="nf">'should reverse a greeting'</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="w">        </span><span class="nl">given:</span>
 <a id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GreetingExtension</span><span class="o">()</span>
 <a id="__codelineno-9-13" name="__codelineno-9-13"></a>
 <a id="__codelineno-9-14" name="__codelineno-9-14"></a><span class="w">        </span><span class="nl">expect:</span>
-<a id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;olleH&#39;</span>
-<a id="__codelineno-9-16" name="__codelineno-9-16"></a><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;ruojnoB&#39;</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">'Hello'</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'olleH'</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16"></a><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">'Bonjour'</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'ruojnoB'</span>
 <a id="__codelineno-9-17" name="__codelineno-9-17"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-9-18" name="__codelineno-9-18"></a><span class="hll"><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
@@ -4261,12 +4261,12 @@ Dodaj test, uruchom <code>make test</code> i sprawdź, czy przechodzi.</p>
 <details class="solution">
 <summary>Rozwiązanie</summary>
 <p>Dodaj tę metodę testową do <code>GreetingExtensionTest.groovy</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kt">def</span><span class="w"> </span><span class="nf">&#39;should handle empty string&#39;</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kt">def</span><span class="w"> </span><span class="nf">'should handle empty string'</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="nl">given:</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GreetingExtension</span><span class="o">()</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
 <a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="nl">expect:</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">&#39;&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="n">ext</span><span class="o">.</span><span class="na">reverseGreeting</span><span class="o">(</span><span class="s1">''</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">''</span>
 <a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="o">}</span>
 </code></pre></div>
 <p>Odwrócony pusty string to nadal pusty string.</p>
@@ -4599,9 +4599,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -4840,7 +4841,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -5519,7 +5520,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -5811,7 +5812,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -5983,7 +5984,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -5993,7 +5994,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

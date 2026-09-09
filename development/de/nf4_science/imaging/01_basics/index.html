@@ -4258,7 +4258,7 @@
 Wir werden uns den Code noch nicht ansehen; zuerst schauen wir uns an, wie es aussieht, wenn man ihn ausführt.</p>
 <h3 id="11-den-workflow-starten-und-die-ausfuhrung-uberwachen">1.1. Den Workflow starten und die Ausführung überwachen<a class="headerlink" href="#11-den-workflow-starten-und-die-ausfuhrung-uberwachen" title="Permanent link">&para;</a></h3>
 <p>Führe im Terminal folgenden Befehl aus:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>--greeting<span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>--greeting<span class="w"> </span><span class="s1">'Hello World!'</span>
 </code></pre></div>
 <p>Deine Konsolenausgabe sollte in etwa so aussehen:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Output</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
@@ -4371,7 +4371,7 @@ Wenn du sie öffnest, wirst du die <code>Hello World!</code> Begrüßung wieder 
 
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
 <span class="normal"><a href="#__codelineno-10-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="gp">#</span>!/bin/bash<span class="w"> </span>-ue
-<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="go">echo &#39;Hello World!&#39; &gt; output.txt</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="go">echo 'Hello World!' &gt; output.txt</span>
 </code></pre></div></td></tr></table></div>
 
 </details>
@@ -4429,18 +4429,18 @@ Jetzt, da wir gesehen haben, was es tut, lass uns die Box öffnen und hineinscha
 <a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="cm"> */</span>
 <a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-11-7" name="__codelineno-11-7"></a>
-<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">'results'</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-11-9" name="__codelineno-11-9"></a>
 <a id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
 <a id="__codelineno-11-12" name="__codelineno-11-12"></a>
 <a id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">'output.txt'</span>
 <a id="__codelineno-11-15" name="__codelineno-11-15"></a>
 <a id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="s2">    echo &#39;$greeting&#39; &gt; output.txt</span>
-<a id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="s2">    echo '$greeting' &gt; output.txt</span>
+<a id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="s2">    """</span>
 <a id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="o">}</span>
 <a id="__codelineno-11-21" name="__codelineno-11-21"></a>
 <a id="__codelineno-11-22" name="__codelineno-11-22"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
@@ -4485,18 +4485,18 @@ Der Prozesskörper muss einen script-Block enthalten, der den auszuführenden Be
 <a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="cm"> */</span>
 <a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-12-7" name="__codelineno-12-7"></a>
-<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">'results'</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-12-9" name="__codelineno-12-9"></a>
 <a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
 <a id="__codelineno-12-12" name="__codelineno-12-12"></a>
 <a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">'output.txt'</span>
 <a id="__codelineno-12-15" name="__codelineno-12-15"></a>
 <a id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="s2">    echo &#39;$greeting&#39; &gt; output.txt</span>
-<a id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="s2">    echo '$greeting' &gt; output.txt</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="s2">    """</span>
 <a id="__codelineno-12-20" name="__codelineno-12-20"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 
@@ -4558,7 +4558,7 @@ Das bedeutet, dass Nextflow nur Prozesse ausführt, die du seit dem letzten Lauf
 <li>Wenn du eine Pipeline im Produktionsbetrieb ausführst und etwas schiefgeht, kannst du in vielen Fällen das Problem beheben und die Pipeline erneut starten, und sie wird vom Fehlerpunkt aus weiterlaufen, was dir viel Zeit und Rechenleistung sparen kann.</li>
 </ul>
 <p>Um es zu verwenden, füge einfach <code>-resume</code> zu deinem Befehl hinzu und führe ihn aus:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>--greeting<span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span><span class="w"> </span>-resume
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>--greeting<span class="w"> </span><span class="s1">'Hello World!'</span><span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
@@ -4893,9 +4893,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -5134,7 +5135,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -5813,7 +5814,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -6105,7 +6106,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -6277,7 +6278,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -6287,7 +6288,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

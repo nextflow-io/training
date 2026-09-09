@@ -4069,7 +4069,7 @@ Due file sono i più importanti.</p>
 <p>Questo file identifica il progetto:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>cat<span class="w"> </span>settings.gradle
 </code></pre></div>
-<div class="highlight"><span class="filename">settings.gradle</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">rootProject</span><span class="o">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;nf-greeting&#39;</span>
+<div class="highlight"><span class="filename">settings.gradle</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">rootProject</span><span class="o">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'nf-greeting'</span>
 </code></pre></div>
 <p>Il nome qui deve corrispondere a quello che inserirai in <code>nextflow.config</code> quando utilizzerai il plugin.</p>
 <h3 id="32-buildgradle">3.2. build.gradle<a class="headerlink" href="#32-buildgradle" title="Permanent link">&para;</a></h3>
@@ -4079,19 +4079,19 @@ Due file sono i più importanti.</p>
 <p>Il file contiene diverse sezioni.
 La più importante è il blocco <code>nextflowPlugin</code>:</p>
 <div class="highlight"><span class="filename">build.gradle</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;io.nextflow.nextflow-plugin&#39;</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="s1">&#39;1.0.0-beta.15&#39;</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">'io.nextflow.nextflow-plugin'</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="s1">'1.0.0-beta.15'</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="o">}</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;0.1.0&#39;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'0.1.0'</span>
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
 <a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="n">nextflowPlugin</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="n">nextflowVersion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;25.10.0&#39;</span><span class="w">       </span><span class="c1">// (1)!</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="n">nextflowVersion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'25.10.0'</span><span class="w">       </span><span class="c1">// (1)!</span>
 <a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">    </span><span class="n">provider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;training&#39;</span><span class="w">             </span><span class="c1">// (2)!</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">    </span><span class="n">className</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;training.plugin.GreetingPlugin&#39;</span><span class="w">  </span><span class="c1">// (3)!</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">    </span><span class="n">provider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'training'</span><span class="w">             </span><span class="c1">// (2)!</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">    </span><span class="n">className</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'training.plugin.GreetingPlugin'</span><span class="w">  </span><span class="c1">// (3)!</span>
 <a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">    </span><span class="n">extensionPoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="w">               </span><span class="c1">// (4)!</span>
-<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">        </span><span class="s1">&#39;training.plugin.GreetingExtension&#39;</span><span class="o">,</span>
-<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">        </span><span class="s1">&#39;training.plugin.GreetingFactory&#39;</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">        </span><span class="s1">'training.plugin.GreetingExtension'</span><span class="o">,</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">        </span><span class="s1">'training.plugin.GreetingFactory'</span>
 <a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">    </span><span class="o">]</span>
 <a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>
 <a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="o">}</span>
@@ -4116,16 +4116,16 @@ Aggiornalo per corrispondere alla versione di Nextflow installata, per garantire
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><span class="filename">build.gradle</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">nextflowPlugin</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="hll"><span class="w">    </span><span class="n">nextflowVersion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;26.04.0&#39;</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="hll"><span class="w">    </span><span class="n">nextflowVersion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'26.04.0'</span>
 </span><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="n">provider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;training&#39;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="n">provider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'training'</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><span class="filename">build.gradle</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">nextflowPlugin</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="hll"><span class="w">    </span><span class="n">nextflowVersion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;25.10.0&#39;</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="hll"><span class="w">    </span><span class="n">nextflowVersion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'25.10.0'</span>
 </span><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="n">provider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;training&#39;</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="n">provider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'training'</span>
 </code></pre></div>
 </div>
 </div>
@@ -4221,15 +4221,15 @@ I principali da tenere a mente:</p>
 <div class="tabbed-block">
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1">// Configurazione per gli esercizi di sviluppo plugin</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-schema@2.6.1&#39;</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="hll"><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-greeting@0.1.0&#39;</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">'nf-schema@2.6.1'</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="hll"><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">'nf-greeting@0.1.0'</span>
 </span><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="o">}</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1">// Configurazione per gli esercizi di sviluppo plugin</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-schema@2.6.1&#39;</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">'nf-schema@2.6.1'</span>
 <a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="o">}</span>
 </code></pre></div>
 </div>
@@ -4569,9 +4569,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -4810,7 +4811,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -5489,7 +5490,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -5781,7 +5782,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -5953,7 +5954,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -5963,7 +5964,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

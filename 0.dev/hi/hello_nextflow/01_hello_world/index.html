@@ -5087,7 +5087,7 @@
 </div>
 <h3 id="01-terminal-hello">0.1. Terminal को hello कहलवाएं<a class="headerlink" href="#01-terminal-hello" title="Permanent link">&para;</a></h3>
 <p>अपने terminal में निम्नलिखित command चलाओ।</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">'Hello World!'</span>
 </code></pre></div>
 <details class="success">
 <summary>कमांड आउटपुट</summary>
@@ -5097,7 +5097,7 @@
 <p>यह terminal में 'Hello World' text output करता है।</p>
 <h3 id="02-output-file">0.2. Output को एक file में लिखें<a class="headerlink" href="#02-output-file" title="Permanent link">&para;</a></h3>
 <p>Pipelines चलाने में ज्यादातर files से data पढ़ना और results को अन्य files में लिखना शामिल है, तो चलो command को modify करते हैं ताकि text output को एक file में लिखें ताकि उदाहरण थोड़ा अधिक relevant हो।</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>output.txt
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">'Hello World!'</span><span class="w"> </span>&gt;<span class="w"> </span>output.txt
 </code></pre></div>
 <details class="success">
 <summary>कमांड आउटपुट</summary>
@@ -5151,17 +5151,17 @@
 <span class="normal"><a href="#__codelineno-5-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2"></a>
 <a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="cm">/*</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="cm">* &#39;Hello World!&#39; को एक फ़ाइल में प्रिंट करने के लिए echo का उपयोग करें</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="cm">* 'Hello World!' को एक फ़ाइल में प्रिंट करने के लिए echo का उपयोग करें</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="cm">*/</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-5-7" name="__codelineno-5-7"></a>
 <a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">'output.txt'</span>
 <a id="__codelineno-5-10" name="__codelineno-5-10"></a>
 <a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="s2">    echo &#39;Hello World!&#39; &gt; output.txt</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="s2">    echo 'Hello World!' &gt; output.txt</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="s2">    """</span>
 <a id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="o">}</span>
 <a id="__codelineno-5-16" name="__codelineno-5-16"></a>
 <a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
@@ -5192,17 +5192,17 @@ Process body में एक script block होना चाहिए जो �
 <span class="normal"><a href="#__codelineno-6-13">13</a></span>
 <span class="normal"><a href="#__codelineno-6-14">14</a></span>
 <span class="normal"><a href="#__codelineno-6-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="cm">/*</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="cm">* &#39;Hello World!&#39; को एक फ़ाइल में प्रिंट करने के लिए echo का उपयोग करें</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="cm">* 'Hello World!' को एक फ़ाइल में प्रिंट करने के लिए echo का उपयोग करें</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="cm">*/</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-6-7" name="__codelineno-6-7"></a>
 <a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">'output.txt'</span>
 <a id="__codelineno-6-10" name="__codelineno-6-10"></a>
 <a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="s2">    echo &#39;Hello World!&#39; &gt; output.txt</span>
-<a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="s2">    echo 'Hello World!' &gt; output.txt</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="s2">    """</span>
 <a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>यहाँ हमारे पास <code>sayHello</code> नामक एक <strong>process</strong> है जो अपना <strong>output</strong> <code>output.txt</code> नामक एक file में लिखता है।</p>
@@ -5326,7 +5326,7 @@ Workflow definition keyword <code>workflow</code> से शुरू होत�
 <details class="abstract">
 <summary>फ़ाइल सामग्री</summary>
 <div class="highlight"><span class="filename">.command.sh</span><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="gp">#</span>!/bin/bash<span class="w"> </span>-ue
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="go">echo &#39;Hello World!&#39; &gt; output.txt</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="go">echo 'Hello World!' &gt; output.txt</span>
 </code></pre></div>
 </details>
 <p>यह उससे match करता है जो हमने पहले manually चलाया था।</p>
@@ -5480,7 +5480,7 @@ Workflow definition keyword <code>workflow</code> से शुरू होत�
 <a id="__codelineno-18-26" name="__codelineno-18-26"></a>
 <a id="__codelineno-18-27" name="__codelineno-18-27"></a><span class="hll"><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-18-28" name="__codelineno-18-28"></a><span class="hll"><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-18-29" name="__codelineno-18-29"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;.&#39;</span>
+</span><a id="__codelineno-18-29" name="__codelineno-18-29"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'.'</span>
 </span><a id="__codelineno-18-30" name="__codelineno-18-30"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span><a id="__codelineno-18-31" name="__codelineno-18-31"></a><span class="hll"><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
@@ -5575,7 +5575,7 @@ Custom location set करने के लिए, बस <code>path</code> क�
 <span class="normal"><a href="#__codelineno-23-30">30</a></span>
 <span class="normal"><a href="#__codelineno-23-31">31</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-27" name="__codelineno-23-27"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-23-28" name="__codelineno-23-28"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-23-29" name="__codelineno-23-29"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_world&#39;</span>
+<a id="__codelineno-23-29" name="__codelineno-23-29"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'hello_world'</span>
 </span><a id="__codelineno-23-30" name="__codelineno-23-30"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-23-31" name="__codelineno-23-31"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5587,7 +5587,7 @@ Custom location set करने के लिए, बस <code>path</code> क�
 <span class="normal"><a href="#__codelineno-24-30">30</a></span>
 <span class="normal"><a href="#__codelineno-24-31">31</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-27" name="__codelineno-24-27"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-24-28" name="__codelineno-24-28"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-24-29" name="__codelineno-24-29"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;.&#39;</span>
+<a id="__codelineno-24-29" name="__codelineno-24-29"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'.'</span>
 </span><a id="__codelineno-24-30" name="__codelineno-24-30"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-24-31" name="__codelineno-24-31"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5655,8 +5655,8 @@ Process name या अन्य variables का उपयोग करके r
 <span class="normal"><a href="#__codelineno-28-31">31</a></span>
 <span class="normal"><a href="#__codelineno-28-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-27" name="__codelineno-28-27"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-28-28" name="__codelineno-28-28"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-28-29" name="__codelineno-28-29"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_world&#39;</span>
-<a id="__codelineno-28-30" name="__codelineno-28-30"></a><span class="hll"><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-28-29" name="__codelineno-28-29"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'hello_world'</span>
+<a id="__codelineno-28-30" name="__codelineno-28-30"></a><span class="hll"><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 </span><a id="__codelineno-28-31" name="__codelineno-28-31"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-28-32" name="__codelineno-28-32"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5668,7 +5668,7 @@ Process name या अन्य variables का उपयोग करके r
 <span class="normal"><a href="#__codelineno-29-30">30</a></span>
 <span class="normal"><a href="#__codelineno-29-31">31</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-27" name="__codelineno-29-27"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-29-28" name="__codelineno-29-28"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-29-29" name="__codelineno-29-29"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_world&#39;</span>
+<a id="__codelineno-29-29" name="__codelineno-29-29"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'hello_world'</span>
 <a id="__codelineno-29-30" name="__codelineno-29-30"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-29-31" name="__codelineno-29-31"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5725,15 +5725,15 @@ Process name या अन्य variables का उपयोग करके r
 <span class="normal"><a href="#__codelineno-33-16">16</a></span>
 <span class="normal"><a href="#__codelineno-33-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-6" name="__codelineno-33-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-33-7" name="__codelineno-33-7"></a>
-<a id="__codelineno-33-8" name="__codelineno-33-8"></a><span class="hll"><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results/hello_world&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-33-8" name="__codelineno-33-8"></a><span class="hll"><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">'results/hello_world'</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">'copy'</span>
 </span><a id="__codelineno-33-9" name="__codelineno-33-9"></a>
 <a id="__codelineno-33-10" name="__codelineno-33-10"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-33-11" name="__codelineno-33-11"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
+<a id="__codelineno-33-11" name="__codelineno-33-11"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">'output.txt'</span>
 <a id="__codelineno-33-12" name="__codelineno-33-12"></a>
 <a id="__codelineno-33-13" name="__codelineno-33-13"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-33-14" name="__codelineno-33-14"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-33-15" name="__codelineno-33-15"></a><span class="s2">    echo &#39;Hello World!&#39; &gt; output.txt</span>
-<a id="__codelineno-33-16" name="__codelineno-33-16"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-33-14" name="__codelineno-33-14"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-33-15" name="__codelineno-33-15"></a><span class="s2">    echo 'Hello World!' &gt; output.txt</span>
+<a id="__codelineno-33-16" name="__codelineno-33-16"></a><span class="s2">    """</span>
 <a id="__codelineno-33-17" name="__codelineno-33-17"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>तुम अभी भी इस code pattern को पुराने Nextflow pipelines और process modules में हर जगह पाओगे, इसलिए इसके बारे में aware होना important है।
@@ -5773,7 +5773,7 @@ Process name या अन्य variables का उपयोग करके r
 </span><a id="__codelineno-34-9" name="__codelineno-34-9"></a><span class="hll"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
 </span><a id="__codelineno-34-10" name="__codelineno-34-10"></a>
 <a id="__codelineno-34-11" name="__codelineno-34-11"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-34-12" name="__codelineno-34-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
+<a id="__codelineno-34-12" name="__codelineno-34-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">'output.txt'</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -5783,7 +5783,7 @@ Process name या अन्य variables का उपयोग करके r
 <span class="normal"><a href="#__codelineno-35-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-35-6" name="__codelineno-35-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-35-7" name="__codelineno-35-7"></a>
 <a id="__codelineno-35-8" name="__codelineno-35-8"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-35-9" name="__codelineno-35-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
+<a id="__codelineno-35-9" name="__codelineno-35-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">'output.txt'</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5799,9 +5799,9 @@ Process name या अन्य variables का उपयोग करके r
 <span class="normal"><a href="#__codelineno-36-15">15</a></span>
 <span class="normal"><a href="#__codelineno-36-16">16</a></span>
 <span class="normal"><a href="#__codelineno-36-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-14" name="__codelineno-36-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-36-15" name="__codelineno-36-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-36-16" name="__codelineno-36-16"></a><span class="hll"><span class="s2">    echo &#39;${greeting}&#39; &gt; output.txt</span>
-</span><a id="__codelineno-36-17" name="__codelineno-36-17"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-36-15" name="__codelineno-36-15"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-36-16" name="__codelineno-36-16"></a><span class="hll"><span class="s2">    echo '${greeting}' &gt; output.txt</span>
+</span><a id="__codelineno-36-17" name="__codelineno-36-17"></a><span class="s2">    """</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -5809,9 +5809,9 @@ Process name या अन्य variables का उपयोग करके r
 <span class="normal"><a href="#__codelineno-37-15">15</a></span>
 <span class="normal"><a href="#__codelineno-37-16">16</a></span>
 <span class="normal"><a href="#__codelineno-37-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-14" name="__codelineno-37-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-37-15" name="__codelineno-37-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-37-16" name="__codelineno-37-16"></a><span class="hll"><span class="s2">    echo &#39;Hello World!&#39; &gt; output.txt</span>
-</span><a id="__codelineno-37-17" name="__codelineno-37-17"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-37-15" name="__codelineno-37-15"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-37-16" name="__codelineno-37-16"></a><span class="hll"><span class="s2">    echo 'Hello World!' &gt; output.txt</span>
+</span><a id="__codelineno-37-17" name="__codelineno-37-17"></a><span class="s2">    """</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5857,7 +5857,7 @@ Process name या अन्य variables का उपयोग करके r
 <p>Effect में, हमने section की शुरुआत में outlined steps (2) और (3) एक ही बार में accomplish कर लिए हैं।</p>
 <h3 id="33-workflow-command">3.3. Workflow command चलाएं<a class="headerlink" href="#33-workflow-command" title="Permanent link">&para;</a></h3>
 <p>चलो इसे चलाते हैं!</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Bonjour le monde!&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">'Bonjour le monde!'</span>
 </code></pre></div>
 <details class="success">
 <summary>कमांड आउटपुट</summary>
@@ -5906,7 +5906,7 @@ Process name या अन्य variables का उपयोग करके r
 <a id="__codelineno-43-21" name="__codelineno-43-21"></a><span class="cm"> * Pipeline parameters</span>
 <a id="__codelineno-43-22" name="__codelineno-43-22"></a><span class="cm"> */</span>
 <a id="__codelineno-43-23" name="__codelineno-43-23"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-43-24" name="__codelineno-43-24"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Hola mundo!&#39;</span>
+<a id="__codelineno-43-24" name="__codelineno-43-24"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Hola mundo!'</span>
 <a id="__codelineno-43-25" name="__codelineno-43-25"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>जैसा कि तुम देखते हो, हम specify कर सकते हैं कि workflow किस type के input की expect करता है (Nextflow 25.10.2 और बाद में)।
@@ -5943,15 +5943,15 @@ Supported types में <code>String</code>, <code>Integer</code>, <code>Float
 <p>यदि वह इस तरह की error के साथ fail हुआ:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>ERROR ~ Script compilation error
 <a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>- file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
-<a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>- cause: you tried to assign a value to the class &#39;java.lang.String&#39;
+<a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>- cause: you tried to assign a value to the class 'java.lang.String'
 <a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a>@ line 24, column 12.
-<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>      input: String = &#39;Hola mundo!&#39;
+<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>      input: String = 'Hola mundo!'
 <a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a>              ^
 <a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a>
 <a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a>1 error
 <a id="__codelineno-46-9" name="__codelineno-46-9" href="#__codelineno-46-9"></a>
 <a id="__codelineno-46-10" name="__codelineno-46-10" href="#__codelineno-46-10"></a>
-<a id="__codelineno-46-11" name="__codelineno-46-11" href="#__codelineno-46-11"></a>-- Check &#39;.nextflow.log&#39; file for details
+<a id="__codelineno-46-11" name="__codelineno-46-11" href="#__codelineno-46-11"></a>-- Check '.nextflow.log' file for details
 </code></pre></div>
 <p>तो तुम शायद पुराने v1 Nextflow language parser का उपयोग कर रहे हो।
 यह course की शुरुआत में mention किया गया था, लेकिन शायद तुमने इसे miss कर दिया।
@@ -5971,7 +5971,7 @@ Supported types में <code>String</code>, <code>Integer</code>, <code>Float
 <h4 id="343-default-value-override">3.4.3. Default value override करें<a class="headerlink" href="#343-default-value-override" title="Permanent link">&para;</a></h4>
 <p>यदि तुम command line पर parameter provide करते हो, तो CLI value default value को override करेगी।</p>
 <p>Try करो:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Konnichiwa!&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">'Konnichiwa!'</span>
 </code></pre></div>
 <details class="success">
 <summary>कमांड आउटपुट</summary>
@@ -6020,7 +6020,7 @@ Specifically, इस mode में, कोई भी processes जो पहल
 <li>यदि तुम production में pipeline run कर रहे हो और कुछ wrong हो जाता है, तो कई cases में तुम issue fix कर सकते हो और pipeline relaunch कर सकते हो, और यह failure के point से running resume करेगा, जो तुम्हें बहुत time और compute बचा सकता है।</li>
 </ul>
 <p>इसे use करने के लिए, simply अपने command में <code>-resume</code> add करो और इसे run करो:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Konnichiwa!&#39;</span><span class="w"> </span>-resume
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">'Konnichiwa!'</span><span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
 <summary>कमांड आउटपुट</summary>
@@ -6055,9 +6055,9 @@ Nextflow literally तुम्हें previous execution की ओर point 
 <span class="normal"><a href="#__codelineno-54-2">2</a></span>
 <span class="normal"><a href="#__codelineno-54-3">3</a></span>
 <span class="normal"><a href="#__codelineno-54-4">4</a></span>
-<span class="normal"><a href="#__codelineno-54-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a>2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input &#39;Hello World&#39;
+<span class="normal"><a href="#__codelineno-54-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a>2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input 'Hello World'
 <a id="__codelineno-54-2" name="__codelineno-54-2"></a>2025-07-04 19:27:20	2.9s	spontaneous_blackwell	OK	3539118582ccde68dde471cc2c66295c	59a5db23-d83c-4c02-a54e-37ddb73a337e	nextflow run 1-hello.nf --input Bonjour
-<a id="__codelineno-54-3" name="__codelineno-54-3"></a>2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run 1-hello.nf --input &#39;Dobry den&#39;
+<a id="__codelineno-54-3" name="__codelineno-54-3"></a>2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run 1-hello.nf --input 'Dobry den'
 <a id="__codelineno-54-4" name="__codelineno-54-4"></a>2025-07-04 19:27:45	2.4s	backstabbing_swartz	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa
 <a id="__codelineno-54-5" name="__codelineno-54-5"></a>2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
 </code></pre></div></td></tr></table></div>
@@ -6074,9 +6074,9 @@ Nextflow literally तुम्हें previous execution की ओर point 
 <span class="normal"><a href="#__codelineno-56-4">4</a></span>
 <span class="normal"><a href="#__codelineno-56-5">5</a></span>
 <span class="normal"><a href="#__codelineno-56-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1"></a><span class="go">TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND</span>
-<a id="__codelineno-56-2" name="__codelineno-56-2"></a><span class="go">2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run 1-hello.nf --input &#39;Hello World&#39;</span>
+<a id="__codelineno-56-2" name="__codelineno-56-2"></a><span class="go">2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run 1-hello.nf --input 'Hello World'</span>
 <a id="__codelineno-56-3" name="__codelineno-56-3"></a><span class="go">2025-07-04 19:27:20     2.9s            spontaneous_blackwell   OK       3539118582     59a5db23-d83c-4c02-a54e-37ddb73a337e    nextflow run 1-hello.nf --input Bonjour</span>
-<a id="__codelineno-56-4" name="__codelineno-56-4"></a><span class="go">2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run 1-hello.nf --input &#39;Dobry den&#39;</span>
+<a id="__codelineno-56-4" name="__codelineno-56-4"></a><span class="go">2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run 1-hello.nf --input 'Dobry den'</span>
 <a id="__codelineno-56-5" name="__codelineno-56-5"></a><span class="go">2025-07-04 19:27:45     2.4s            backstabbing_swartz     OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa</span>
 <a id="__codelineno-56-6" name="__codelineno-56-6"></a><span class="go">2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa -resume</span>
 </code></pre></div></td></tr></table></div>
@@ -6644,9 +6644,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -6885,7 +6886,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -7564,7 +7565,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -7856,7 +7857,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -8028,7 +8029,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -8038,7 +8039,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

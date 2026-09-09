@@ -4597,20 +4597,20 @@ It is equivalent to the script produced by working through Part 4 of this traini
 <span class="normal"><a href="#__codelineno-1-53">53</a></span>
 <span class="normal"><a href="#__codelineno-1-54">54</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-37" name="__codelineno-1-37"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-1-38" name="__codelineno-1-38"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-1-39" name="__codelineno-1-39"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_containers&#39;</span>
-</span><a id="__codelineno-1-40" name="__codelineno-1-40"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-1-39" name="__codelineno-1-39"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'hello_containers'</span>
+</span><a id="__codelineno-1-40" name="__codelineno-1-40"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-1-41" name="__codelineno-1-41"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-1-42" name="__codelineno-1-42"></a><span class="w">    </span><span class="n">uppercased</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-1-43" name="__codelineno-1-43"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_containers&#39;</span>
-</span><a id="__codelineno-1-44" name="__codelineno-1-44"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-1-43" name="__codelineno-1-43"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'hello_containers'</span>
+</span><a id="__codelineno-1-44" name="__codelineno-1-44"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-1-45" name="__codelineno-1-45"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-1-46" name="__codelineno-1-46"></a><span class="w">    </span><span class="n">collected</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-1-47" name="__codelineno-1-47"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_containers&#39;</span>
-</span><a id="__codelineno-1-48" name="__codelineno-1-48"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-1-47" name="__codelineno-1-47"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'hello_containers'</span>
+</span><a id="__codelineno-1-48" name="__codelineno-1-48"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-1-49" name="__codelineno-1-49"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-1-50" name="__codelineno-1-50"></a><span class="w">    </span><span class="n">batch_report</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-1-51" name="__codelineno-1-51"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_containers&#39;</span>
-</span><a id="__codelineno-1-52" name="__codelineno-1-52"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-1-51" name="__codelineno-1-51"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'hello_containers'</span>
+</span><a id="__codelineno-1-52" name="__codelineno-1-52"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-1-53" name="__codelineno-1-53"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-1-54" name="__codelineno-1-54"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -4666,7 +4666,7 @@ It is equivalent to the script produced by working through Part 4 of this traini
 <h3 id="11-pull-the-container-image">1.1. Pull the container image<a class="headerlink" href="#11-pull-the-container-image" title="Permanent link">&para;</a></h3>
 <p>To use a container, you usually download or <em>pull</em> a container image from a container registry, and then run the container image to create a container instance.</p>
 <p>The general syntax is as follows:</p>
-<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>pull<span class="w"> </span><span class="s1">&#39;&lt;container&gt;&#39;</span>
+<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>pull<span class="w"> </span><span class="s1">'&lt;container&gt;'</span>
 </code></pre></div>
 <p>The <code>docker pull</code> part is the instruction to the container system to pull a container image from a repository.</p>
 <p>The <code>'&lt;container&gt;'</code> part is the URI address of the container image.</p>
@@ -4693,7 +4693,7 @@ It is equivalent to the script produced by working through Part 4 of this traini
 <p>There are various repositories where you can find published containers.
 We used the <a href="https://seqera.io/containers/">Seqera Containers</a> service to generate this Docker container image from the <code>cowpy</code> Conda package: <code>'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</code>.</p>
 <p>Run the complete pull command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>pull<span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>pull<span class="w"> </span><span class="s1">'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span>
 </code></pre></div>
 <details class="success">
 <summary>Command output</summary>
@@ -4722,14 +4722,14 @@ Once it's done, you have a local copy of the container image.</p>
 <p>One very common way that people use containers is to run them directly, <em>i.e.</em> non-interactively.
 This is great for running one-off commands.</p>
 <p>The general syntax is as follows:</p>
-<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="s1">&#39;&lt;container&gt;&#39;</span><span class="w"> </span><span class="o">[</span>tool<span class="w"> </span>command<span class="o">]</span>
+<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="s1">'&lt;container&gt;'</span><span class="w"> </span><span class="o">[</span>tool<span class="w"> </span>command<span class="o">]</span>
 </code></pre></div>
 <p>The <code>docker run --rm '&lt;container&gt;'</code> part is the instruction to the container system to spin up a container instance from a container image and execute a command in it.
 The <code>--rm</code> flag tells the system to shut down the container instance after the command has completed.</p>
 <p>The <code>[tool command]</code> syntax depends on the tool you are using and how the container is set up.
 Let's just start with <code>cowpy</code>.</p>
 <p>Fully assembled, the container execution command looks like this; go ahead and run it.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span><span class="w"> </span>cowpy
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="s1">'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span><span class="w"> </span>cowpy
 </code></pre></div>
 <details class="success">
 <summary>Command output</summary>
@@ -4749,7 +4749,7 @@ Let's just start with <code>cowpy</code>.</p>
 <h4 id="131-spin-up-the-container">1.3.1. Spin up the container<a class="headerlink" href="#131-spin-up-the-container" title="Permanent link">&para;</a></h4>
 <p>To run interactively, we just add <code>-it</code> to the <code>docker run</code> command.
 Optionally, we can specify the shell we want to use inside the container by appending <em>e.g.</em> <code>/bin/bash</code> to the command.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span><span class="w"> </span>/bin/bash
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="s1">'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span><span class="w"> </span>/bin/bash
 </code></pre></div>
 <p>Notice that your prompt changes to something like <code>(base) root@b645838b3314:/tmp#</code>, which indicates that you are now inside the container.</p>
 <p>You can verify this by running <code>ls /</code> to list directory contents from the root of the filesystem:</p>
@@ -4768,7 +4768,7 @@ This means that the container can't access any files on the host system unless y
 <h4 id="132-run-the-desired-tool-commands">1.3.2. Run the desired tool command(s)<a class="headerlink" href="#132-run-the-desired-tool-commands" title="Permanent link">&para;</a></h4>
 <p>Now that you are inside the container, you can run the <code>cowpy</code> command directly and give it some parameters.
 For example, the tool documentation says we can change the character ('cowacter') with <code>-c</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello Containers&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cowpy<span class="w"> </span>-c<span class="w"> </span>tux
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"Hello Containers"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cowpy<span class="w"> </span>-c<span class="w"> </span>tux
 </code></pre></div>
 <details class="success">
 <summary>Command output</summary>
@@ -4782,7 +4782,7 @@ For example, the tool documentation says we can change the character ('cowacter'
 <a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="go">       |:_/ |</span>
 <a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="go">      //   \ \</span>
 <a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="go">     (|     | )</span>
-<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="go">    /&#39;\_   _/`\</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="go">    /'\_   _/`\</span>
 <a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="go">    \___)=(___/</span>
 </code></pre></div>
 </details>
@@ -4808,7 +4808,7 @@ But since we don't have access to the filesystem, we can't.</p>
 </code></pre></div>
 <p>In our case <code>&lt;outside_path&gt;</code> will be the current working directory, so we can just use a dot (<code>.</code>), and <code>&lt;inside_path&gt;</code> is just an alias we make up; let's call it <code>/my_project</code> (the inside path must be absolute).</p>
 <p>To mount a volume, we replace the paths and add the volume mounting argument to the docker run command as follows:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span>.:/my_project<span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span><span class="w"> </span>/bin/bash
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span>.:/my_project<span class="w"> </span><span class="s1">'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span><span class="w"> </span>/bin/bash
 </code></pre></div>
 <p>This mounts the current working directory as a volume that will be accessible under <code>/my_project</code> inside the container.</p>
 <p>You can check that it works by listing the contents of <code>/my_project</code>:</p>
@@ -4919,12 +4919,12 @@ This means that you can use any container image you like to run your processes, 
 <a id="__codelineno-26-8" name="__codelineno-26-8"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">character</span>
 <a id="__codelineno-26-9" name="__codelineno-26-9"></a>
 <a id="__codelineno-26-10" name="__codelineno-26-10"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-26-11" name="__codelineno-26-11"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;cowpy-${input_file}&quot;</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"cowpy-${input_file}"</span>
 <a id="__codelineno-26-12" name="__codelineno-26-12"></a>
 <a id="__codelineno-26-13" name="__codelineno-26-13"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-26-14" name="__codelineno-26-14"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-26-15" name="__codelineno-26-15"></a><span class="s2">    cat ${input_file} | cowpy -c &quot;${character}&quot; &gt; cowpy-${input_file}</span>
-<a id="__codelineno-26-16" name="__codelineno-26-16"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-26-14" name="__codelineno-26-14"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-26-15" name="__codelineno-26-15"></a><span class="s2">    cat ${input_file} | cowpy -c "${character}" &gt; cowpy-${input_file}</span>
+<a id="__codelineno-26-16" name="__codelineno-26-16"></a><span class="s2">    """</span>
 <a id="__codelineno-26-17" name="__codelineno-26-17"></a>
 <a id="__codelineno-26-18" name="__codelineno-26-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -4942,10 +4942,10 @@ This means that you can use any container image you like to run your processes, 
 <span class="normal"><a href="#__codelineno-27-5">5</a></span>
 <span class="normal"><a href="#__codelineno-27-6">6</a></span>
 <span class="normal"><a href="#__codelineno-27-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-3" name="__codelineno-27-3"></a><span class="c1">// Include modules</span>
-<a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayHello.nf&#39;</span>
-<a id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/convertToUpper.nf&#39;</span>
-<a id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/collectGreetings.nf&#39;</span>
-<a id="__codelineno-27-7" name="__codelineno-27-7"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">cowpy</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/cowpy.nf&#39;</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/sayHello.nf'</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/convertToUpper.nf'</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/collectGreetings.nf'</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">cowpy</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/cowpy.nf'</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -4953,9 +4953,9 @@ This means that you can use any container image you like to run your processes, 
 <span class="normal"><a href="#__codelineno-28-4">4</a></span>
 <span class="normal"><a href="#__codelineno-28-5">5</a></span>
 <span class="normal"><a href="#__codelineno-28-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="c1">// Include modules</span>
-<a id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayHello.nf&#39;</span>
-<a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/convertToUpper.nf&#39;</span>
-<a id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/collectGreetings.nf&#39;</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/sayHello.nf'</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/convertToUpper.nf'</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/collectGreetings.nf'</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5041,9 +5041,9 @@ This means that you can use any container image you like to run your processes, 
 <a id="__codelineno-31-10" name="__codelineno-31-10"></a><span class="cm">* Pipeline parameters</span>
 <a id="__codelineno-31-11" name="__codelineno-31-11"></a><span class="cm">*/</span>
 <a id="__codelineno-31-12" name="__codelineno-31-12"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-31-13" name="__codelineno-31-13"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;data/greetings.csv&#39;</span>
-<a id="__codelineno-31-14" name="__codelineno-31-14"></a><span class="w">    </span><span class="nl">batch:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;batch&#39;</span>
-<a id="__codelineno-31-15" name="__codelineno-31-15"></a><span class="hll"><span class="w">    </span><span class="nl">character:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;turkey&#39;</span>
+<a id="__codelineno-31-13" name="__codelineno-31-13"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'data/greetings.csv'</span>
+<a id="__codelineno-31-14" name="__codelineno-31-14"></a><span class="w">    </span><span class="nl">batch:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'batch'</span>
+<a id="__codelineno-31-15" name="__codelineno-31-15"></a><span class="hll"><span class="w">    </span><span class="nl">character:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'turkey'</span>
 </span><a id="__codelineno-31-16" name="__codelineno-31-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5058,8 +5058,8 @@ This means that you can use any container image you like to run your processes, 
 <a id="__codelineno-32-10" name="__codelineno-32-10"></a><span class="cm">* Pipeline parameters</span>
 <a id="__codelineno-32-11" name="__codelineno-32-11"></a><span class="cm">*/</span>
 <a id="__codelineno-32-12" name="__codelineno-32-12"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-32-13" name="__codelineno-32-13"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;data/greetings.csv&#39;</span>
-<a id="__codelineno-32-14" name="__codelineno-32-14"></a><span class="w">    </span><span class="nl">batch:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;batch&#39;</span>
+<a id="__codelineno-32-13" name="__codelineno-32-13"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'data/greetings.csv'</span>
+<a id="__codelineno-32-14" name="__codelineno-32-14"></a><span class="w">    </span><span class="nl">batch:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'batch'</span>
 <a id="__codelineno-32-15" name="__codelineno-32-15"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5131,24 +5131,24 @@ This means that you can use any container image you like to run your processes, 
 <span class="normal"><a href="#__codelineno-35-62">62</a></span>
 <span class="normal"><a href="#__codelineno-35-63">63</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-35-42" name="__codelineno-35-42"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-35-43" name="__codelineno-35-43"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-35-44" name="__codelineno-35-44"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_containers/intermediates&#39;</span>
-</span><a id="__codelineno-35-45" name="__codelineno-35-45"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-35-44" name="__codelineno-35-44"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'hello_containers/intermediates'</span>
+</span><a id="__codelineno-35-45" name="__codelineno-35-45"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-35-46" name="__codelineno-35-46"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-35-47" name="__codelineno-35-47"></a><span class="w">    </span><span class="n">uppercased</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-35-48" name="__codelineno-35-48"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_containers/intermediates&#39;</span>
-</span><a id="__codelineno-35-49" name="__codelineno-35-49"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-35-48" name="__codelineno-35-48"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'hello_containers/intermediates'</span>
+</span><a id="__codelineno-35-49" name="__codelineno-35-49"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-35-50" name="__codelineno-35-50"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-35-51" name="__codelineno-35-51"></a><span class="w">    </span><span class="n">collected</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-35-52" name="__codelineno-35-52"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_containers/intermediates&#39;</span>
-</span><a id="__codelineno-35-53" name="__codelineno-35-53"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-35-52" name="__codelineno-35-52"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'hello_containers/intermediates'</span>
+</span><a id="__codelineno-35-53" name="__codelineno-35-53"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-35-54" name="__codelineno-35-54"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-35-55" name="__codelineno-35-55"></a><span class="w">    </span><span class="n">batch_report</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-35-56" name="__codelineno-35-56"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_containers&#39;</span>
-</span><a id="__codelineno-35-57" name="__codelineno-35-57"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-35-56" name="__codelineno-35-56"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'hello_containers'</span>
+</span><a id="__codelineno-35-57" name="__codelineno-35-57"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-35-58" name="__codelineno-35-58"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-35-59" name="__codelineno-35-59"></a><span class="hll"><span class="w">    </span><span class="n">cowpy_art</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-35-60" name="__codelineno-35-60"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_containers&#39;</span>
-</span><a id="__codelineno-35-61" name="__codelineno-35-61"></a><span class="hll"><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+</span><a id="__codelineno-35-60" name="__codelineno-35-60"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'hello_containers'</span>
+</span><a id="__codelineno-35-61" name="__codelineno-35-61"></a><span class="hll"><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 </span><a id="__codelineno-35-62" name="__codelineno-35-62"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span><a id="__codelineno-35-63" name="__codelineno-35-63"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5173,20 +5173,20 @@ This means that you can use any container image you like to run your processes, 
 <span class="normal"><a href="#__codelineno-36-58">58</a></span>
 <span class="normal"><a href="#__codelineno-36-59">59</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-42" name="__codelineno-36-42"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-36-43" name="__codelineno-36-43"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-36-44" name="__codelineno-36-44"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_containers&#39;</span>
-</span><a id="__codelineno-36-45" name="__codelineno-36-45"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-36-44" name="__codelineno-36-44"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'hello_containers'</span>
+</span><a id="__codelineno-36-45" name="__codelineno-36-45"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-36-46" name="__codelineno-36-46"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-36-47" name="__codelineno-36-47"></a><span class="w">    </span><span class="n">uppercased</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-36-48" name="__codelineno-36-48"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_containers&#39;</span>
-</span><a id="__codelineno-36-49" name="__codelineno-36-49"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-36-48" name="__codelineno-36-48"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'hello_containers'</span>
+</span><a id="__codelineno-36-49" name="__codelineno-36-49"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-36-50" name="__codelineno-36-50"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-36-51" name="__codelineno-36-51"></a><span class="w">    </span><span class="n">collected</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-36-52" name="__codelineno-36-52"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_containers&#39;</span>
-</span><a id="__codelineno-36-53" name="__codelineno-36-53"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-36-52" name="__codelineno-36-52"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'hello_containers'</span>
+</span><a id="__codelineno-36-53" name="__codelineno-36-53"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-36-54" name="__codelineno-36-54"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-36-55" name="__codelineno-36-55"></a><span class="w">    </span><span class="n">batch_report</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-36-56" name="__codelineno-36-56"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_containers&#39;</span>
-</span><a id="__codelineno-36-57" name="__codelineno-36-57"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-36-56" name="__codelineno-36-56"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'hello_containers'</span>
+</span><a id="__codelineno-36-57" name="__codelineno-36-57"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-36-58" name="__codelineno-36-58"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-36-59" name="__codelineno-36-59"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5221,7 +5221,7 @@ This means that you can use any container image you like to run your processes, 
 <a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a><span class="go">[ef/3135a8] convertToUpper (3) | 3 of 3, cached: 3 ✔</span>
 <a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a><span class="go">[7f/f435e3] collectGreetings   | 1 of 1, cached: 1 ✔</span>
 <a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a><span class="go">[9b/02e776] cowpy              | 0 of 1 ✘</span>
-<a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a><span class="hll"><span class="go">ERROR ~ Error executing process &gt; &#39;cowpy&#39;</span>
+<a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a><span class="hll"><span class="go">ERROR ~ Error executing process &gt; 'cowpy'</span>
 </span><a id="__codelineno-38-11" name="__codelineno-38-11" href="#__codelineno-38-11"></a>
 <a id="__codelineno-38-12" name="__codelineno-38-12" href="#__codelineno-38-12"></a><span class="go">Caused by:</span>
 <a id="__codelineno-38-13" name="__codelineno-38-13" href="#__codelineno-38-13"></a><span class="hll"><span class="go">  Process `cowpy` terminated with an error exit status (127)</span>
@@ -5229,7 +5229,7 @@ This means that you can use any container image you like to run your processes, 
 <a id="__codelineno-38-15" name="__codelineno-38-15" href="#__codelineno-38-15"></a>
 <a id="__codelineno-38-16" name="__codelineno-38-16" href="#__codelineno-38-16"></a><span class="go">Command executed:</span>
 <a id="__codelineno-38-17" name="__codelineno-38-17" href="#__codelineno-38-17"></a>
-<a id="__codelineno-38-18" name="__codelineno-38-18" href="#__codelineno-38-18"></a><span class="go">  cat COLLECTED-batch-output.txt | cowpy -c &quot;turkey&quot; &gt; cowpy-COLLECTED-batch-output.txt</span>
+<a id="__codelineno-38-18" name="__codelineno-38-18" href="#__codelineno-38-18"></a><span class="go">  cat COLLECTED-batch-output.txt | cowpy -c "turkey" &gt; cowpy-COLLECTED-batch-output.txt</span>
 <a id="__codelineno-38-19" name="__codelineno-38-19" href="#__codelineno-38-19"></a>
 <a id="__codelineno-38-20" name="__codelineno-38-20" href="#__codelineno-38-20"></a><span class="hll"><span class="go">Command exit status:</span>
 </span><a id="__codelineno-38-21" name="__codelineno-38-21" href="#__codelineno-38-21"></a><span class="hll"><span class="go">  127</span>
@@ -5245,10 +5245,10 @@ This means that you can use any container image you like to run your processes, 
 <a id="__codelineno-38-31" name="__codelineno-38-31" href="#__codelineno-38-31"></a>
 <a id="__codelineno-38-32" name="__codelineno-38-32" href="#__codelineno-38-32"></a><span class="go">Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line</span>
 <a id="__codelineno-38-33" name="__codelineno-38-33" href="#__codelineno-38-33"></a>
-<a id="__codelineno-38-34" name="__codelineno-38-34" href="#__codelineno-38-34"></a><span class="go">-- Check &#39;.nextflow.log&#39; file for details</span>
+<a id="__codelineno-38-34" name="__codelineno-38-34" href="#__codelineno-38-34"></a><span class="go">-- Check '.nextflow.log' file for details</span>
 <a id="__codelineno-38-35" name="__codelineno-38-35" href="#__codelineno-38-35"></a><span class="go">ERROR ~ Cannot access first() element from an empty List</span>
 <a id="__codelineno-38-36" name="__codelineno-38-36" href="#__codelineno-38-36"></a>
-<a id="__codelineno-38-37" name="__codelineno-38-37" href="#__codelineno-38-37"></a><span class="go">-- Check &#39;.nextflow.log&#39; file for details</span>
+<a id="__codelineno-38-37" name="__codelineno-38-37" href="#__codelineno-38-37"></a><span class="go">-- Check '.nextflow.log' file for details</span>
 </code></pre></div>
 </details>
 <p>Oh no, there's an error!
@@ -5279,19 +5279,19 @@ The error code given by <code>error exit status (127)</code> means the executabl
 <span class="normal"><a href="#__codelineno-39-18">18</a></span>
 <span class="normal"><a href="#__codelineno-39-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-4" name="__codelineno-39-4"></a><span class="n">process</span><span class="w"> </span><span class="n">cowpy</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-39-5" name="__codelineno-39-5"></a>
-<a id="__codelineno-39-6" name="__codelineno-39-6"></a><span class="hll"><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<a id="__codelineno-39-6" name="__codelineno-39-6"></a><span class="hll"><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span>
 </span><a id="__codelineno-39-7" name="__codelineno-39-7"></a>
 <a id="__codelineno-39-8" name="__codelineno-39-8"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-39-9" name="__codelineno-39-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
 <a id="__codelineno-39-10" name="__codelineno-39-10"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">character</span>
 <a id="__codelineno-39-11" name="__codelineno-39-11"></a>
 <a id="__codelineno-39-12" name="__codelineno-39-12"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-39-13" name="__codelineno-39-13"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;cowpy-${input_file}&quot;</span>
+<a id="__codelineno-39-13" name="__codelineno-39-13"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"cowpy-${input_file}"</span>
 <a id="__codelineno-39-14" name="__codelineno-39-14"></a>
 <a id="__codelineno-39-15" name="__codelineno-39-15"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-39-16" name="__codelineno-39-16"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-39-17" name="__codelineno-39-17"></a><span class="s2">    cat ${input_file} | cowpy -c &quot;${character}&quot; &gt; cowpy-${input_file}</span>
-<a id="__codelineno-39-18" name="__codelineno-39-18"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-39-16" name="__codelineno-39-16"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-39-17" name="__codelineno-39-17"></a><span class="s2">    cat ${input_file} | cowpy -c "${character}" &gt; cowpy-${input_file}</span>
+<a id="__codelineno-39-18" name="__codelineno-39-18"></a><span class="s2">    """</span>
 <a id="__codelineno-39-19" name="__codelineno-39-19"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5316,12 +5316,12 @@ The error code given by <code>error exit status (127)</code> means the executabl
 <a id="__codelineno-40-8" name="__codelineno-40-8"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">character</span>
 <a id="__codelineno-40-9" name="__codelineno-40-9"></a>
 <a id="__codelineno-40-10" name="__codelineno-40-10"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-40-11" name="__codelineno-40-11"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;cowpy-${input_file}&quot;</span>
+<a id="__codelineno-40-11" name="__codelineno-40-11"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"cowpy-${input_file}"</span>
 <a id="__codelineno-40-12" name="__codelineno-40-12"></a>
 <a id="__codelineno-40-13" name="__codelineno-40-13"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-40-14" name="__codelineno-40-14"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-40-15" name="__codelineno-40-15"></a><span class="s2">    cat ${input_file} | cowpy -c &quot;${character}&quot; &gt; cowpy-${input_file}</span>
-<a id="__codelineno-40-16" name="__codelineno-40-16"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-40-14" name="__codelineno-40-14"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-40-15" name="__codelineno-40-15"></a><span class="s2">    cat ${input_file} | cowpy -c "${character}" &gt; cowpy-${input_file}</span>
+<a id="__codelineno-40-16" name="__codelineno-40-16"></a><span class="s2">    """</span>
 <a id="__codelineno-40-17" name="__codelineno-40-17"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5445,10 +5445,10 @@ That corresponds to the following truncated directory path: <code>work/98/656c6c
 <summary>File contents</summary>
 <div class="highlight"><span class="filename">work/98/656c6c90cce1667c094d880f4b6dcc/.command.run</span><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="gp">#</span>!/bin/bash
 <a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="gp">#</span><span class="c1">## ---</span>
-<a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a><span class="gp">#</span><span class="c1">## name: &#39;cowpy&#39;</span>
-<a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a><span class="gp">#</span><span class="c1">## container: &#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a><span class="gp">#</span><span class="c1">## name: 'cowpy'</span>
+<a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a><span class="gp">#</span><span class="c1">## container: 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'</span>
 <a id="__codelineno-47-5" name="__codelineno-47-5" href="#__codelineno-47-5"></a><span class="gp">#</span><span class="c1">## outputs:</span>
-<a id="__codelineno-47-6" name="__codelineno-47-6" href="#__codelineno-47-6"></a><span class="gp">#</span><span class="c1">## - &#39;cowpy-COLLECTED-batch-output.txt&#39;</span>
+<a id="__codelineno-47-6" name="__codelineno-47-6" href="#__codelineno-47-6"></a><span class="gp">#</span><span class="c1">## - 'cowpy-COLLECTED-batch-output.txt'</span>
 <a id="__codelineno-47-7" name="__codelineno-47-7" href="#__codelineno-47-7"></a><span class="gp">#</span><span class="c1">## ...</span>
 <a id="__codelineno-47-8" name="__codelineno-47-8" href="#__codelineno-47-8"></a><span class="go">set -e</span>
 <a id="__codelineno-47-9" name="__codelineno-47-9" href="#__codelineno-47-9"></a><span class="go">set -u</span>
@@ -5466,20 +5466,20 @@ That corresponds to the following truncated directory path: <code>work/98/656c6c
 <a id="__codelineno-47-21" name="__codelineno-47-21" href="#__codelineno-47-21"></a><span class="go">    elif [[ $ts == *%3N ]]; then echo ${ts/\%3N/000}</span>
 <a id="__codelineno-47-22" name="__codelineno-47-22" href="#__codelineno-47-22"></a><span class="go">    elif [[ $ts == *3N ]]; then echo ${ts/3N/000}</span>
 <a id="__codelineno-47-23" name="__codelineno-47-23" href="#__codelineno-47-23"></a><span class="go">    elif [[ ${#ts} == 13 ]]; then echo $ts</span>
-<a id="__codelineno-47-24" name="__codelineno-47-24" href="#__codelineno-47-24"></a><span class="go">    else echo &quot;Unexpected timestamp value: $ts&quot;; exit 1</span>
+<a id="__codelineno-47-24" name="__codelineno-47-24" href="#__codelineno-47-24"></a><span class="go">    else echo "Unexpected timestamp value: $ts"; exit 1</span>
 <a id="__codelineno-47-25" name="__codelineno-47-25" href="#__codelineno-47-25"></a><span class="go">    fi</span>
 <a id="__codelineno-47-26" name="__codelineno-47-26" href="#__codelineno-47-26"></a><span class="go">}</span>
 <a id="__codelineno-47-27" name="__codelineno-47-27" href="#__codelineno-47-27"></a>
 <a id="__codelineno-47-28" name="__codelineno-47-28" href="#__codelineno-47-28"></a><span class="go">nxf_env() {</span>
-<a id="__codelineno-47-29" name="__codelineno-47-29" href="#__codelineno-47-29"></a><span class="go">    echo &#39;============= task environment =============&#39;</span>
-<a id="__codelineno-47-30" name="__codelineno-47-30" href="#__codelineno-47-30"></a><span class="go">    env | sort | sed &quot;s/\(.*\)AWS\(.*\)=\(.\{6\}\).*/\1AWS\2=\3xxxxxxxxxxxxx/&quot;</span>
-<a id="__codelineno-47-31" name="__codelineno-47-31" href="#__codelineno-47-31"></a><span class="go">    echo &#39;============= task output ==================&#39;</span>
+<a id="__codelineno-47-29" name="__codelineno-47-29" href="#__codelineno-47-29"></a><span class="go">    echo '============= task environment ============='</span>
+<a id="__codelineno-47-30" name="__codelineno-47-30" href="#__codelineno-47-30"></a><span class="go">    env | sort | sed "s/\(.*\)AWS\(.*\)=\(.\{6\}\).*/\1AWS\2=\3xxxxxxxxxxxxx/"</span>
+<a id="__codelineno-47-31" name="__codelineno-47-31" href="#__codelineno-47-31"></a><span class="go">    echo '============= task output =================='</span>
 <a id="__codelineno-47-32" name="__codelineno-47-32" href="#__codelineno-47-32"></a><span class="go">}</span>
 <a id="__codelineno-47-33" name="__codelineno-47-33" href="#__codelineno-47-33"></a>
 <a id="__codelineno-47-34" name="__codelineno-47-34" href="#__codelineno-47-34"></a><span class="go">nxf_kill() {</span>
 <a id="__codelineno-47-35" name="__codelineno-47-35" href="#__codelineno-47-35"></a><span class="go">    declare -a children</span>
 <a id="__codelineno-47-36" name="__codelineno-47-36" href="#__codelineno-47-36"></a><span class="go">    while read P PP;do</span>
-<a id="__codelineno-47-37" name="__codelineno-47-37" href="#__codelineno-47-37"></a><span class="go">        children[$PP]+=&quot; $P&quot;</span>
+<a id="__codelineno-47-37" name="__codelineno-47-37" href="#__codelineno-47-37"></a><span class="go">        children[$PP]+=" $P"</span>
 <a id="__codelineno-47-38" name="__codelineno-47-38" href="#__codelineno-47-38"></a><span class="go">    done &lt; &lt;(ps -e -o pid= -o ppid=)</span>
 <a id="__codelineno-47-39" name="__codelineno-47-39" href="#__codelineno-47-39"></a>
 <a id="__codelineno-47-40" name="__codelineno-47-40" href="#__codelineno-47-40"></a><span class="go">    kill_all() {</span>
@@ -5492,9 +5492,9 @@ That corresponds to the following truncated directory path: <code>work/98/656c6c
 <a id="__codelineno-47-47" name="__codelineno-47-47" href="#__codelineno-47-47"></a>
 <a id="__codelineno-47-48" name="__codelineno-47-48" href="#__codelineno-47-48"></a><span class="go">nxf_mktemp() {</span>
 <a id="__codelineno-47-49" name="__codelineno-47-49" href="#__codelineno-47-49"></a><span class="go">    local base=${1:-/tmp}</span>
-<a id="__codelineno-47-50" name="__codelineno-47-50" href="#__codelineno-47-50"></a><span class="go">    mkdir -p &quot;$base&quot;</span>
+<a id="__codelineno-47-50" name="__codelineno-47-50" href="#__codelineno-47-50"></a><span class="go">    mkdir -p "$base"</span>
 <a id="__codelineno-47-51" name="__codelineno-47-51" href="#__codelineno-47-51"></a><span class="go">    if [[ $(uname) = Darwin ]]; then mktemp -d $base/nxf.XXXXXXXXXX</span>
-<a id="__codelineno-47-52" name="__codelineno-47-52" href="#__codelineno-47-52"></a><span class="go">    else TMPDIR=&quot;$base&quot; mktemp -d -t nxf.XXXXXXXXXX</span>
+<a id="__codelineno-47-52" name="__codelineno-47-52" href="#__codelineno-47-52"></a><span class="go">    else TMPDIR="$base" mktemp -d -t nxf.XXXXXXXXXX</span>
 <a id="__codelineno-47-53" name="__codelineno-47-53" href="#__codelineno-47-53"></a><span class="go">    fi</span>
 <a id="__codelineno-47-54" name="__codelineno-47-54" href="#__codelineno-47-54"></a><span class="go">}</span>
 <a id="__codelineno-47-55" name="__codelineno-47-55" href="#__codelineno-47-55"></a>
@@ -5543,7 +5543,7 @@ That corresponds to the following truncated directory path: <code>work/98/656c6c
 <a id="__codelineno-47-98" name="__codelineno-47-98" href="#__codelineno-47-98"></a><span class="go">}</span>
 <a id="__codelineno-47-99" name="__codelineno-47-99" href="#__codelineno-47-99"></a>
 <a id="__codelineno-47-100" name="__codelineno-47-100" href="#__codelineno-47-100"></a><span class="go">nxf_launch() {</span>
-<a id="__codelineno-47-101" name="__codelineno-47-101" href="#__codelineno-47-101"></a><span class="go">    docker run -i --cpu-shares 1024 -e &quot;NXF_TASK_WORKDIR&quot; -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w &quot;$NXF_TASK_WORKDIR&quot; --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/hello-nextflow/work/98/656c6c90cce1667c094d880f4b6dcc/.command.sh</span>
+<a id="__codelineno-47-101" name="__codelineno-47-101" href="#__codelineno-47-101"></a><span class="go">    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/hello-nextflow/work/98/656c6c90cce1667c094d880f4b6dcc/.command.sh</span>
 <a id="__codelineno-47-102" name="__codelineno-47-102" href="#__codelineno-47-102"></a><span class="go">}</span>
 <a id="__codelineno-47-103" name="__codelineno-47-103" href="#__codelineno-47-103"></a>
 <a id="__codelineno-47-104" name="__codelineno-47-104" href="#__codelineno-47-104"></a><span class="go">nxf_stage() {</span>
@@ -5572,17 +5572,17 @@ That corresponds to the following truncated directory path: <code>work/98/656c6c
 <a id="__codelineno-47-127" name="__codelineno-47-127" href="#__codelineno-47-127"></a><span class="go">nxf_main() {</span>
 <a id="__codelineno-47-128" name="__codelineno-47-128" href="#__codelineno-47-128"></a><span class="go">    trap on_exit EXIT</span>
 <a id="__codelineno-47-129" name="__codelineno-47-129" href="#__codelineno-47-129"></a><span class="go">    trap on_term TERM INT USR2</span>
-<a id="__codelineno-47-130" name="__codelineno-47-130" href="#__codelineno-47-130"></a><span class="go">    trap &#39;&#39; USR1</span>
+<a id="__codelineno-47-130" name="__codelineno-47-130" href="#__codelineno-47-130"></a><span class="go">    trap '' USR1</span>
 <a id="__codelineno-47-131" name="__codelineno-47-131" href="#__codelineno-47-131"></a>
-<a id="__codelineno-47-132" name="__codelineno-47-132" href="#__codelineno-47-132"></a><span class="go">    [[ &quot;${NXF_CHDIR:-}&quot; ]] &amp;&amp; cd &quot;$NXF_CHDIR&quot;</span>
-<a id="__codelineno-47-133" name="__codelineno-47-133" href="#__codelineno-47-133"></a><span class="go">    export NXF_BOXID=&quot;nxf-$(dd bs=18 count=1 if=/dev/urandom 2&gt;/dev/null | base64 | tr +/ 0A | tr -d &#39;\r\n&#39;)&quot;</span>
-<a id="__codelineno-47-134" name="__codelineno-47-134" href="#__codelineno-47-134"></a><span class="go">    NXF_SCRATCH=&#39;&#39;</span>
+<a id="__codelineno-47-132" name="__codelineno-47-132" href="#__codelineno-47-132"></a><span class="go">    [[ "${NXF_CHDIR:-}" ]] &amp;&amp; cd "$NXF_CHDIR"</span>
+<a id="__codelineno-47-133" name="__codelineno-47-133" href="#__codelineno-47-133"></a><span class="go">    export NXF_BOXID="nxf-$(dd bs=18 count=1 if=/dev/urandom 2&gt;/dev/null | base64 | tr +/ 0A | tr -d '\r\n')"</span>
+<a id="__codelineno-47-134" name="__codelineno-47-134" href="#__codelineno-47-134"></a><span class="go">    NXF_SCRATCH=''</span>
 <a id="__codelineno-47-135" name="__codelineno-47-135" href="#__codelineno-47-135"></a><span class="go">    [[ $NXF_DEBUG &gt; 0 ]] &amp;&amp; nxf_env</span>
 <a id="__codelineno-47-136" name="__codelineno-47-136" href="#__codelineno-47-136"></a><span class="go">    touch /workspaces/training/hello-nextflow/work/98/656c6c90cce1667c094d880f4b6dcc/.command.begin</span>
 <a id="__codelineno-47-137" name="__codelineno-47-137" href="#__codelineno-47-137"></a><span class="go">    set +u</span>
 <a id="__codelineno-47-138" name="__codelineno-47-138" href="#__codelineno-47-138"></a><span class="go">    set -u</span>
 <a id="__codelineno-47-139" name="__codelineno-47-139" href="#__codelineno-47-139"></a><span class="go">    [[ $NXF_SCRATCH ]] &amp;&amp; cd $NXF_SCRATCH</span>
-<a id="__codelineno-47-140" name="__codelineno-47-140" href="#__codelineno-47-140"></a><span class="go">    export NXF_TASK_WORKDIR=&quot;$PWD&quot;</span>
+<a id="__codelineno-47-140" name="__codelineno-47-140" href="#__codelineno-47-140"></a><span class="go">    export NXF_TASK_WORKDIR="$PWD"</span>
 <a id="__codelineno-47-141" name="__codelineno-47-141" href="#__codelineno-47-141"></a><span class="go">    nxf_stage</span>
 <a id="__codelineno-47-142" name="__codelineno-47-142" href="#__codelineno-47-142"></a>
 <a id="__codelineno-47-143" name="__codelineno-47-143" href="#__codelineno-47-143"></a><span class="go">    set +e</span>
@@ -5597,7 +5597,7 @@ That corresponds to the following truncated directory path: <code>work/98/656c6c
 </details>
 <p>If you search for <code>nxf_launch</code> in this file, you should see something like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go">nxf_launch() {</span>
-<a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a><span class="go">    docker run -i --cpu-shares 1024 -e &quot;NXF_TASK_WORKDIR&quot; -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w &quot;$NXF_TASK_WORKDIR&quot; --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/hello-nextflow/work/98/656c6c90cce1667c094d880f4b6dcc/.command.sh</span>
+<a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a><span class="go">    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/hello-nextflow/work/98/656c6c90cce1667c094d880f4b6dcc/.command.sh</span>
 <a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a><span class="go">}</span>
 </code></pre></div>
 <p>As you can see, Nextflow is using the <code>docker run</code> command to launch the process call.
@@ -5610,18 +5610,18 @@ It also mounts the corresponding work subdirectory into the container, sets the 
 <a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a>                                   |     |
 <a id="__codelineno-49-6" name="__codelineno-49-6" href="#__codelineno-49-6"></a>                                ,--|     |-.
 <a id="__codelineno-49-7" name="__codelineno-49-7" href="#__codelineno-49-7"></a>                         __,----|  |     | |
-<a id="__codelineno-49-8" name="__codelineno-49-8" href="#__codelineno-49-8"></a>                       ,;::     |  `_____&#39; |
+<a id="__codelineno-49-8" name="__codelineno-49-8" href="#__codelineno-49-8"></a>                       ,;::     |  `_____' |
 <a id="__codelineno-49-9" name="__codelineno-49-9" href="#__codelineno-49-9"></a>                       `._______|    i^i   |
-<a id="__codelineno-49-10" name="__codelineno-49-10" href="#__codelineno-49-10"></a>                                `----| |---&#39;| .
+<a id="__codelineno-49-10" name="__codelineno-49-10" href="#__codelineno-49-10"></a>                                `----| |---'| .
 <a id="__codelineno-49-11" name="__codelineno-49-11" href="#__codelineno-49-11"></a>                           ,-------._| |== ||//
-<a id="__codelineno-49-12" name="__codelineno-49-12" href="#__codelineno-49-12"></a>                           |       |_|P`.  /&#39;/
-<a id="__codelineno-49-13" name="__codelineno-49-13" href="#__codelineno-49-13"></a>                           `-------&#39; &#39;Y Y/&#39;/&#39;
+<a id="__codelineno-49-12" name="__codelineno-49-12" href="#__codelineno-49-12"></a>                           |       |_|P`.  /'/
+<a id="__codelineno-49-13" name="__codelineno-49-13" href="#__codelineno-49-13"></a>                           `-------' 'Y Y/'/'
 <a id="__codelineno-49-14" name="__codelineno-49-14" href="#__codelineno-49-14"></a>                                     .==\ /_\
-<a id="__codelineno-49-15" name="__codelineno-49-15" href="#__codelineno-49-15"></a>   ^__^                             /   /&#39;|  `i
-<a id="__codelineno-49-16" name="__codelineno-49-16" href="#__codelineno-49-16"></a>   (oo)\_______                   /&#39;   /  |   |
-<a id="__codelineno-49-17" name="__codelineno-49-17" href="#__codelineno-49-17"></a>   (__)\       )\/\             /&#39;    /   |   `i
-<a id="__codelineno-49-18" name="__codelineno-49-18" href="#__codelineno-49-18"></a>       ||----w |           ___,;`----&#39;.___L_,-&#39;`\__
-<a id="__codelineno-49-19" name="__codelineno-49-19" href="#__codelineno-49-19"></a>       ||     ||          i_____;----\.____i&quot;&quot;\____\
+<a id="__codelineno-49-15" name="__codelineno-49-15" href="#__codelineno-49-15"></a>   ^__^                             /   /'|  `i
+<a id="__codelineno-49-16" name="__codelineno-49-16" href="#__codelineno-49-16"></a>   (oo)\_______                   /'   /  |   |
+<a id="__codelineno-49-17" name="__codelineno-49-17" href="#__codelineno-49-17"></a>   (__)\       )\/\             /'    /   |   `i
+<a id="__codelineno-49-18" name="__codelineno-49-18" href="#__codelineno-49-18"></a>       ||----w |           ___,;`----'.___L_,-'`\__
+<a id="__codelineno-49-19" name="__codelineno-49-19" href="#__codelineno-49-19"></a>       ||     ||          i_____;----\.____i""\____\
 </code></pre></div>
 <h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
 <p>You know how to use containers in Nextflow to run processes.</p>
@@ -5770,7 +5770,7 @@ Learn more: [2.3.2. Enable use of Docker via the `nextflow.config` file](#232-en
         <p>Which <code>nextflow.config</code> setting enables Docker for your workflow?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset aria-labelledby="quiz-5-question"><div><input type="radio" name="answer" value="0" id="quiz-5-0" ><label for="quiz-5-0"><code class="highlight"><span class="n">process</span><span class="o">.</span><span class="na">docker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span></code></label></div><div><input type="radio" name="answer" value="1" id="quiz-5-1" data-correct="true"><label for="quiz-5-1"><code class="highlight"><span class="n">docker</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span></code></label></div><div><input type="radio" name="answer" value="2" id="quiz-5-2" ><label for="quiz-5-2"><code class="highlight"><span class="n">container</span><span class="o">.</span><span class="na">engine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;docker&#39;</span></code></label></div><div><input type="radio" name="answer" value="3" id="quiz-5-3" ><label for="quiz-5-3"><code class="highlight"><span class="n">docker</span><span class="o">.</span><span class="na">activate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span></code></label></div></fieldset>
+        <fieldset aria-labelledby="quiz-5-question"><div><input type="radio" name="answer" value="0" id="quiz-5-0" ><label for="quiz-5-0"><code class="highlight"><span class="n">process</span><span class="o">.</span><span class="na">docker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span></code></label></div><div><input type="radio" name="answer" value="1" id="quiz-5-1" data-correct="true"><label for="quiz-5-1"><code class="highlight"><span class="n">docker</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span></code></label></div><div><input type="radio" name="answer" value="2" id="quiz-5-2" ><label for="quiz-5-2"><code class="highlight"><span class="n">container</span><span class="o">.</span><span class="na">engine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'docker'</span></code></label></div><div><input type="radio" name="answer" value="3" id="quiz-5-3" ><label for="quiz-5-3"><code class="highlight"><span class="n">docker</span><span class="o">.</span><span class="na">activate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span></code></label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
@@ -6097,9 +6097,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -6338,7 +6339,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -7017,7 +7018,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -7309,7 +7310,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -7481,7 +7482,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -7491,7 +7492,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

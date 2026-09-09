@@ -5064,10 +5064,10 @@ Si vous n'êtes pas familier·ère avec l'analyse du cancer, sachez simplement q
 <a id="__codelineno-3-2" name="__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d&#39;un chemin sous forme de chaîne</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d'un chemin sous forme de chaîne</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'data/patientA_rep1_normal_R1_001.fastq.gz'</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7"></a>
-<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;${myFile} is of class ${myFile.class}&quot;</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"${myFile} is of class ${myFile.class}"</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9"></a>
 <a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">    </span><span class="nl">publish:</span>
 <a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">    </span><span class="n">analysis_results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">empty</span><span class="o">()</span>
@@ -5116,20 +5116,20 @@ C'est logique, puisque nous n'avons pas encore indiqué à Nextflow qu'elle corr
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-5">5</a></span>
 <span class="normal"><a href="#__codelineno-6-6">6</a></span>
 <span class="normal"><a href="#__codelineno-6-7">7</a></span>
-<span class="normal"><a href="#__codelineno-6-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d&#39;un chemin sous forme de chaîne</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-6-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d'un chemin sous forme de chaîne</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R1_001.fastq.gz'</span><span class="o">)</span>
 </span><a id="__codelineno-6-7" name="__codelineno-6-7"></a>
-<a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;${myFile} is of class ${myFile.class}&quot;</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"${myFile} is of class ${myFile.class}"</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-5">5</a></span>
 <span class="normal"><a href="#__codelineno-7-6">6</a></span>
 <span class="normal"><a href="#__codelineno-7-7">7</a></span>
-<span class="normal"><a href="#__codelineno-7-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d&#39;un chemin sous forme de chaîne</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span>
+<span class="normal"><a href="#__codelineno-7-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d'un chemin sous forme de chaîne</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'data/patientA_rep1_normal_R1_001.fastq.gz'</span>
 </span><a id="__codelineno-7-7" name="__codelineno-7-7"></a>
-<a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;${myFile} is of class ${myFile.class}&quot;</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"${myFile} is of class ${myFile.class}"</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5181,25 +5181,25 @@ Comme nous le verrons plus tard, les fichiers distants auront des noms de classe
 <span class="normal"><a href="#__codelineno-10-10">10</a></span>
 <span class="normal"><a href="#__codelineno-10-11">11</a></span>
 <span class="normal"><a href="#__codelineno-10-12">12</a></span>
-<span class="normal"><a href="#__codelineno-10-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d&#39;un chemin sous forme de chaîne</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-10-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d'un chemin sous forme de chaîne</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R1_001.fastq.gz'</span><span class="o">)</span>
 <a id="__codelineno-10-7" name="__codelineno-10-7"></a>
 <a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="hll"><span class="w">    </span><span class="c1">// Affiche les attributs du fichier</span>
-</span><a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
-</span><a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
-</span><a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
-</span><a id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
-</span><a id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
+</span><a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"File object class: ${myFile.class}"</span>
+</span><a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"File name: ${myFile.name}"</span>
+</span><a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Simple name: ${myFile.simpleName}"</span>
+</span><a id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Extension: ${myFile.extension}"</span>
+</span><a id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Parent directory: ${myFile.parent}"</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-5">5</a></span>
 <span class="normal"><a href="#__codelineno-11-6">6</a></span>
 <span class="normal"><a href="#__codelineno-11-7">7</a></span>
-<span class="normal"><a href="#__codelineno-11-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d&#39;un chemin sous forme de chaîne</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-11-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d'un chemin sous forme de chaîne</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R1_001.fastq.gz'</span><span class="o">)</span>
 <a id="__codelineno-11-7" name="__codelineno-11-7"></a>
-<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;${myFile} is of class ${myFile.class}&quot;</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"${myFile} is of class ${myFile.class}"</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5242,7 +5242,7 @@ Jusqu'à présent, nous avons vérifié que Nextflow traite maintenant notre fic
 <span class="normal"><a href="#__codelineno-14-4">4</a></span>
 <span class="normal"><a href="#__codelineno-14-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2"></a>
-<a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COUNT_LINES</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/count_lines.nf&#39;</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COUNT_LINES</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/count_lines.nf'</span>
 </span><a id="__codelineno-14-4" name="__codelineno-14-4"></a>
 <a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 </code></pre></div></td></tr></table></div>
@@ -5277,11 +5277,11 @@ Jusqu'à présent, nous avons vérifié que Nextflow traite maintenant notre fic
 <a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
 <a id="__codelineno-16-6" name="__codelineno-16-6"></a>
 <a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="w">    </span><span class="s2">"""</span>
 <a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="s2">    set -o pipefail</span>
-<a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="s2">    echo &quot;Processing file: $input_file&quot;</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="s2">    echo "Processing file: $input_file"</span>
 <a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="s2">    gzip -dc $input_file | wc -l</span>
-<a id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="s2">    """</span>
 <a id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Comme vous pouvez le voir, il s'agit d'un petit script assez simple qui décompresse le fichier et compte le nombre de lignes qu'il contient.</p>
@@ -5309,15 +5309,15 @@ Sans cela, vous ne verriez que le statut d'exécution du processus, mais pas la 
 <span class="normal"><a href="#__codelineno-17-15">15</a></span>
 <span class="normal"><a href="#__codelineno-17-16">16</a></span>
 <span class="normal"><a href="#__codelineno-17-17">17</a></span>
-<span class="normal"><a href="#__codelineno-17-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d&#39;un chemin sous forme de chaîne</span>
-<a id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-17-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d'un chemin sous forme de chaîne</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R1_001.fastq.gz'</span><span class="o">)</span>
 <a id="__codelineno-17-9" name="__codelineno-17-9"></a>
 <a id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="w">    </span><span class="c1">// Affiche les attributs du fichier</span>
-<a id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
-<a id="__codelineno-17-12" name="__codelineno-17-12"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
-<a id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
-<a id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
-<a id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"File object class: ${myFile.class}"</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"File name: ${myFile.name}"</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Simple name: ${myFile.simpleName}"</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Extension: ${myFile.extension}"</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Parent directory: ${myFile.parent}"</span>
 <a id="__codelineno-17-16" name="__codelineno-17-16"></a>
 <a id="__codelineno-17-17" name="__codelineno-17-17"></a><span class="hll"><span class="w">    </span><span class="c1">// Compte les lignes dans le fichier</span>
 </span><a id="__codelineno-17-18" name="__codelineno-17-18"></a><span class="hll"><span class="w">    </span><span class="n">COUNT_LINES</span><span class="o">(</span><span class="n">myFile</span><span class="o">)</span>
@@ -5332,15 +5332,15 @@ Sans cela, vous ne verriez que le statut d'exécution du processus, mais pas la 
 <span class="normal"><a href="#__codelineno-18-12">12</a></span>
 <span class="normal"><a href="#__codelineno-18-13">13</a></span>
 <span class="normal"><a href="#__codelineno-18-14">14</a></span>
-<span class="normal"><a href="#__codelineno-18-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d&#39;un chemin sous forme de chaîne</span>
-<a id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-18-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d'un chemin sous forme de chaîne</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R1_001.fastq.gz'</span><span class="o">)</span>
 <a id="__codelineno-18-9" name="__codelineno-18-9"></a>
 <a id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="hll"><span class="w">    </span><span class="c1">// Affiche les attributs du fichier</span>
-</span><a id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
-</span><a id="__codelineno-18-12" name="__codelineno-18-12"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
-</span><a id="__codelineno-18-13" name="__codelineno-18-13"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
-</span><a id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
-</span><a id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
+</span><a id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"File object class: ${myFile.class}"</span>
+</span><a id="__codelineno-18-12" name="__codelineno-18-12"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"File name: ${myFile.name}"</span>
+</span><a id="__codelineno-18-13" name="__codelineno-18-13"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Simple name: ${myFile.simpleName}"</span>
+</span><a id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Extension: ${myFile.extension}"</span>
+</span><a id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Parent directory: ${myFile.parent}"</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5402,16 +5402,16 @@ Sans cela, vous ne verriez que le statut d'exécution du processus, mais pas la 
 <span class="normal"><a href="#__codelineno-21-17">17</a></span>
 <span class="normal"><a href="#__codelineno-21-18">18</a></span>
 <span class="normal"><a href="#__codelineno-21-19">19</a></span>
-<span class="normal"><a href="#__codelineno-21-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d&#39;un chemin sous forme de chaîne</span>
-<a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span>
+<span class="normal"><a href="#__codelineno-21-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d'un chemin sous forme de chaîne</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'data/patientA_rep1_normal_R1_001.fastq.gz'</span>
 </span><a id="__codelineno-21-9" name="__codelineno-21-9"></a>
 <a id="__codelineno-21-10" name="__codelineno-21-10"></a><span class="w">    </span><span class="c1">// Affiche les attributs du fichier</span>
-<a id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
+<a id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"File object class: ${myFile.class}"</span>
 <a id="__codelineno-21-12" name="__codelineno-21-12"></a><span class="hll"><span class="w">    </span><span class="cm">/*</span>
-</span><a id="__codelineno-21-13" name="__codelineno-21-13"></a><span class="hll"><span class="cm">    println &quot;File name: ${myFile.name}&quot;</span>
-</span><a id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="hll"><span class="cm">    println &quot;Simple name: ${myFile.simpleName}&quot;</span>
-</span><a id="__codelineno-21-15" name="__codelineno-21-15"></a><span class="hll"><span class="cm">    println &quot;Extension: ${myFile.extension}&quot;</span>
-</span><a id="__codelineno-21-16" name="__codelineno-21-16"></a><span class="hll"><span class="cm">    println &quot;Parent directory: ${myFile.parent}&quot;</span>
+</span><a id="__codelineno-21-13" name="__codelineno-21-13"></a><span class="hll"><span class="cm">    println "File name: ${myFile.name}"</span>
+</span><a id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="hll"><span class="cm">    println "Simple name: ${myFile.simpleName}"</span>
+</span><a id="__codelineno-21-15" name="__codelineno-21-15"></a><span class="hll"><span class="cm">    println "Extension: ${myFile.extension}"</span>
+</span><a id="__codelineno-21-16" name="__codelineno-21-16"></a><span class="hll"><span class="cm">    println "Parent directory: ${myFile.parent}"</span>
 </span><a id="__codelineno-21-17" name="__codelineno-21-17"></a><span class="hll"><span class="cm">    */</span>
 </span><a id="__codelineno-21-18" name="__codelineno-21-18"></a>
 <a id="__codelineno-21-19" name="__codelineno-21-19"></a><span class="w">    </span><span class="c1">// Compte les lignes dans le fichier</span>
@@ -5430,15 +5430,15 @@ Sans cela, vous ne verriez que le statut d'exécution du processus, mais pas la 
 <span class="normal"><a href="#__codelineno-22-15">15</a></span>
 <span class="normal"><a href="#__codelineno-22-16">16</a></span>
 <span class="normal"><a href="#__codelineno-22-17">17</a></span>
-<span class="normal"><a href="#__codelineno-22-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-7" name="__codelineno-22-7"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d&#39;un chemin sous forme de chaîne</span>
-<a id="__codelineno-22-8" name="__codelineno-22-8"></a><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-22-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-7" name="__codelineno-22-7"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d'un chemin sous forme de chaîne</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8"></a><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R1_001.fastq.gz'</span><span class="o">)</span>
 <a id="__codelineno-22-9" name="__codelineno-22-9"></a>
 <a id="__codelineno-22-10" name="__codelineno-22-10"></a><span class="hll"><span class="w">    </span><span class="c1">// Affiche les attributs du fichier</span>
-</span><a id="__codelineno-22-11" name="__codelineno-22-11"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
-</span><a id="__codelineno-22-12" name="__codelineno-22-12"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
-</span><a id="__codelineno-22-13" name="__codelineno-22-13"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
-</span><a id="__codelineno-22-14" name="__codelineno-22-14"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
-</span><a id="__codelineno-22-15" name="__codelineno-22-15"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
+</span><a id="__codelineno-22-11" name="__codelineno-22-11"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"File object class: ${myFile.class}"</span>
+</span><a id="__codelineno-22-12" name="__codelineno-22-12"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"File name: ${myFile.name}"</span>
+</span><a id="__codelineno-22-13" name="__codelineno-22-13"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Simple name: ${myFile.simpleName}"</span>
+</span><a id="__codelineno-22-14" name="__codelineno-22-14"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Extension: ${myFile.extension}"</span>
+</span><a id="__codelineno-22-15" name="__codelineno-22-15"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Parent directory: ${myFile.parent}"</span>
 </span><a id="__codelineno-22-16" name="__codelineno-22-16"></a>
 <a id="__codelineno-22-17" name="__codelineno-22-17"></a><span class="w">    </span><span class="c1">// Compte les lignes dans le fichier</span>
 <a id="__codelineno-22-18" name="__codelineno-22-18"></a><span class="w">    </span><span class="n">COUNT_LINES</span><span class="o">(</span><span class="n">myFile</span><span class="o">)</span>
@@ -5457,20 +5457,20 @@ Sans cela, vous ne verriez que le statut d'exécution du processus, mais pas la 
 <a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>
 <a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="go">File object class: class java.lang.String</span>
 <a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="go">[-        ] COUNT_LINES -</span>
-<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="go">ERROR ~ Error executing process &gt; &#39;COUNT_LINES&#39;</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="go">ERROR ~ Error executing process &gt; 'COUNT_LINES'</span>
 <a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>
 <a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="go">Caused by:</span>
-<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a><span class="go">  Not a valid path value: &#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span>
+<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a><span class="go">  Not a valid path value: 'data/patientA_rep1_normal_R1_001.fastq.gz'</span>
 <a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a>
 <a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a>
 <a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a>
 <a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a><span class="go">Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`</span>
 <a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a>
-<a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a><span class="go"> -- Check &#39;.nextflow.log&#39; file for details</span>
+<a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a><span class="go"> -- Check '.nextflow.log' file for details</span>
 </code></pre></div>
 </details>
 <p>Voici la partie importante :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="go">Not a valid path value: &#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="go">Not a valid path value: 'data/patientA_rep1_normal_R1_001.fastq.gz'</span>
 </code></pre></div>
 <p>Lorsque vous spécifiez une entrée <code>path</code>, Nextflow vérifie que vous passez de véritables références de fichiers, et non de simples chaînes.
 Cette erreur vous indique que <code>'data/patientA_rep1_normal_R1_001.fastq.gz'</code> n'est pas une valeur de chemin valide car c'est une chaîne, et non un objet Path.</p>
@@ -5524,7 +5524,7 @@ Combiné avec <code>val</code> dans le processus, cela produit l'erreur illustr�
 <a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="go">File object class: class java.lang.String</span>
 <a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="go">executor &gt;  local (1)</span>
 <a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a><span class="go">[b3/b3023c] COUNT_LINES | 0 of 1 ✘</span>
-<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a><span class="go">ERROR ~ Error executing process &gt; &#39;COUNT_LINES&#39;</span>
+<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a><span class="go">ERROR ~ Error executing process &gt; 'COUNT_LINES'</span>
 <a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a>
 <a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a><span class="go">Caused by:</span>
 <a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a><span class="go">  Process `COUNT_LINES` terminated with an error exit status (1)</span>
@@ -5533,7 +5533,7 @@ Combiné avec <code>val</code> dans le processus, cela produit l'erreur illustr�
 <a id="__codelineno-29-14" name="__codelineno-29-14" href="#__codelineno-29-14"></a><span class="go">Command executed:</span>
 <a id="__codelineno-29-15" name="__codelineno-29-15" href="#__codelineno-29-15"></a>
 <a id="__codelineno-29-16" name="__codelineno-29-16" href="#__codelineno-29-16"></a><span class="go">  set -o pipefail</span>
-<a id="__codelineno-29-17" name="__codelineno-29-17" href="#__codelineno-29-17"></a><span class="go">  echo &quot;Processing file: data/patientA_rep1_normal_R1_001.fastq.gz&quot;</span>
+<a id="__codelineno-29-17" name="__codelineno-29-17" href="#__codelineno-29-17"></a><span class="go">  echo "Processing file: data/patientA_rep1_normal_R1_001.fastq.gz"</span>
 <a id="__codelineno-29-18" name="__codelineno-29-18" href="#__codelineno-29-18"></a><span class="go">  gzip -dc data/patientA_rep1_normal_R1_001.fastq.gz | wc -l</span>
 <a id="__codelineno-29-19" name="__codelineno-29-19" href="#__codelineno-29-19"></a>
 <a id="__codelineno-29-20" name="__codelineno-29-20" href="#__codelineno-29-20"></a><span class="go">Command exit status:</span>
@@ -5553,7 +5553,7 @@ Combiné avec <code>val</code> dans le processus, cela produit l'erreur illustr�
 <a id="__codelineno-29-34" name="__codelineno-29-34" href="#__codelineno-29-34"></a>
 <a id="__codelineno-29-35" name="__codelineno-29-35" href="#__codelineno-29-35"></a><span class="go">Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`</span>
 <a id="__codelineno-29-36" name="__codelineno-29-36" href="#__codelineno-29-36"></a>
-<a id="__codelineno-29-37" name="__codelineno-29-37" href="#__codelineno-29-37"></a><span class="go"> -- Check &#39;.nextflow.log&#39; file for details</span>
+<a id="__codelineno-29-37" name="__codelineno-29-37" href="#__codelineno-29-37"></a><span class="go"> -- Check '.nextflow.log' file for details</span>
 </code></pre></div>
 </details>
 <p>Cela affiche de nombreux détails sur l'erreur car le processus est configuré pour afficher des informations de débogage, comme indiqué ci-dessus.</p>
@@ -5561,7 +5561,7 @@ Combiné avec <code>val</code> dans le processus, cela produit l'erreur illustr�
 <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="go">Command executed:</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>
 <a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="go">  set -o pipefail</span>
-<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="go">  echo &quot;Processing file: data/patientA_rep1_normal_R1_001.fastq.gz&quot;</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="go">  echo "Processing file: data/patientA_rep1_normal_R1_001.fastq.gz"</span>
 <a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="go">  gzip -dc data/patientA_rep1_normal_R1_001.fastq.gz | wc -l</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">Command error:</span>
@@ -5621,15 +5621,15 @@ Par exemple, vous pouvez développer avec un petit ensemble de test local avant 
 <span class="normal"><a href="#__codelineno-32-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-32-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-32-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-32-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-2" name="__codelineno-32-2"></a><span class="w">    </span><span class="c1">// Utilisation d&#39;un fichier distant depuis internet</span>
-<a id="__codelineno-32-3" name="__codelineno-32-3"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;https://raw.github.com/nextflow-io/training/master/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-32-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-2" name="__codelineno-32-2"></a><span class="w">    </span><span class="c1">// Utilisation d'un fichier distant depuis internet</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">'https://raw.github.com/nextflow-io/training/master/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz'</span><span class="o">)</span>
 </span><a id="__codelineno-32-4" name="__codelineno-32-4"></a>
 <a id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="w">    </span><span class="c1">// Affiche les attributs du fichier</span>
-<a id="__codelineno-32-6" name="__codelineno-32-6"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
-<a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
-<a id="__codelineno-32-8" name="__codelineno-32-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
-<a id="__codelineno-32-9" name="__codelineno-32-9"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
-<a id="__codelineno-32-10" name="__codelineno-32-10"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
+<a id="__codelineno-32-6" name="__codelineno-32-6"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"File object class: ${myFile.class}"</span>
+<a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"File name: ${myFile.name}"</span>
+<a id="__codelineno-32-8" name="__codelineno-32-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Simple name: ${myFile.simpleName}"</span>
+<a id="__codelineno-32-9" name="__codelineno-32-9"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Extension: ${myFile.extension}"</span>
+<a id="__codelineno-32-10" name="__codelineno-32-10"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Parent directory: ${myFile.parent}"</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -5641,15 +5641,15 @@ Par exemple, vous pouvez développer avec un petit ensemble de test local avant 
 <span class="normal"><a href="#__codelineno-33-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-33-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-33-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-33-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-2" name="__codelineno-33-2"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d&#39;un chemin sous forme de chaîne</span>
-<a id="__codelineno-33-3" name="__codelineno-33-3"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-33-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-2" name="__codelineno-33-2"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d'un chemin sous forme de chaîne</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R1_001.fastq.gz'</span><span class="o">)</span>
 </span><a id="__codelineno-33-4" name="__codelineno-33-4"></a>
 <a id="__codelineno-33-5" name="__codelineno-33-5"></a><span class="w">    </span><span class="c1">// Affiche les attributs du fichier</span>
-<a id="__codelineno-33-6" name="__codelineno-33-6"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
-<a id="__codelineno-33-7" name="__codelineno-33-7"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
-<a id="__codelineno-33-8" name="__codelineno-33-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
-<a id="__codelineno-33-9" name="__codelineno-33-9"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
-<a id="__codelineno-33-10" name="__codelineno-33-10"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
+<a id="__codelineno-33-6" name="__codelineno-33-6"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"File object class: ${myFile.class}"</span>
+<a id="__codelineno-33-7" name="__codelineno-33-7"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"File name: ${myFile.name}"</span>
+<a id="__codelineno-33-8" name="__codelineno-33-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Simple name: ${myFile.simpleName}"</span>
+<a id="__codelineno-33-9" name="__codelineno-33-9"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Extension: ${myFile.extension}"</span>
+<a id="__codelineno-33-10" name="__codelineno-33-10"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Parent directory: ${myFile.parent}"</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5709,13 +5709,13 @@ Donc, si vous exécutez à nouveau sur le même fichier et que vous n'avez pas s
 Cependant, d'autres protocoles de stockage tels que le stockage blob (<code>s3://</code>, <code>az://</code>, <code>gs://</code>) peuvent utiliser à la fois des globs et des chemins de répertoires.</p>
 <p>Voici comment vous pourriez utiliser des motifs glob avec le stockage cloud :</p>
 <div class="highlight"><span class="filename">Cloud storage examples (not runnable in this environment)</span><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="c1">// S3 avec des motifs glob - correspondrait à plusieurs fichiers</span>
-<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="n">ch_s3_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;s3://my-bucket/data/*.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="n">ch_s3_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'s3://my-bucket/data/*.fastq.gz'</span><span class="o">)</span>
 <a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>
 <a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="c1">// Azure Blob Storage avec des motifs glob</span>
-<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="n">ch_azure_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;az://container/data/patient*_R{1,2}.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="n">ch_azure_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'az://container/data/patient*_R{1,2}.fastq.gz'</span><span class="o">)</span>
 <a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a>
 <a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a><span class="c1">// Google Cloud Storage avec des motifs glob</span>
-<a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a><span class="n">ch_gcs_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;gs://bucket/data/sample_*.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a><span class="n">ch_gcs_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'gs://bucket/data/sample_*.fastq.gz'</span><span class="o">)</span>
 </code></pre></div>
 <p>Nous vous montrerons comment travailler avec des globs en pratique dans la section suivante.</p>
 </div>
@@ -5732,15 +5732,15 @@ Cependant, d'autres protocoles de stockage tels que le stockage blob (<code>s3:/
 <span class="normal"><a href="#__codelineno-38-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-38-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-38-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-38-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-2" name="__codelineno-38-2"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d&#39;un chemin sous forme de chaîne</span>
-<a id="__codelineno-38-3" name="__codelineno-38-3"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-38-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-2" name="__codelineno-38-2"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d'un chemin sous forme de chaîne</span>
+<a id="__codelineno-38-3" name="__codelineno-38-3"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R1_001.fastq.gz'</span><span class="o">)</span>
 </span><a id="__codelineno-38-4" name="__codelineno-38-4"></a>
 <a id="__codelineno-38-5" name="__codelineno-38-5"></a><span class="w">    </span><span class="c1">// Affiche les attributs du fichier</span>
-<a id="__codelineno-38-6" name="__codelineno-38-6"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
-<a id="__codelineno-38-7" name="__codelineno-38-7"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
-<a id="__codelineno-38-8" name="__codelineno-38-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
-<a id="__codelineno-38-9" name="__codelineno-38-9"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
-<a id="__codelineno-38-10" name="__codelineno-38-10"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
+<a id="__codelineno-38-6" name="__codelineno-38-6"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"File object class: ${myFile.class}"</span>
+<a id="__codelineno-38-7" name="__codelineno-38-7"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"File name: ${myFile.name}"</span>
+<a id="__codelineno-38-8" name="__codelineno-38-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Simple name: ${myFile.simpleName}"</span>
+<a id="__codelineno-38-9" name="__codelineno-38-9"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Extension: ${myFile.extension}"</span>
+<a id="__codelineno-38-10" name="__codelineno-38-10"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Parent directory: ${myFile.parent}"</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -5752,15 +5752,15 @@ Cependant, d'autres protocoles de stockage tels que le stockage blob (<code>s3:/
 <span class="normal"><a href="#__codelineno-39-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-39-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-39-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-39-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-2" name="__codelineno-39-2"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d&#39;un chemin sous forme de chaîne</span>
-<a id="__codelineno-39-3" name="__codelineno-39-3"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;https://raw.github.com/nextflow-io/training/master/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-39-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-2" name="__codelineno-39-2"></a><span class="w">    </span><span class="c1">// Crée un objet Path à partir d'un chemin sous forme de chaîne</span>
+<a id="__codelineno-39-3" name="__codelineno-39-3"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">'https://raw.github.com/nextflow-io/training/master/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz'</span><span class="o">)</span>
 </span><a id="__codelineno-39-4" name="__codelineno-39-4"></a>
 <a id="__codelineno-39-5" name="__codelineno-39-5"></a><span class="w">    </span><span class="c1">// Affiche les attributs du fichier</span>
-<a id="__codelineno-39-6" name="__codelineno-39-6"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
-<a id="__codelineno-39-7" name="__codelineno-39-7"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
-<a id="__codelineno-39-8" name="__codelineno-39-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
-<a id="__codelineno-39-9" name="__codelineno-39-9"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
-<a id="__codelineno-39-10" name="__codelineno-39-10"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
+<a id="__codelineno-39-6" name="__codelineno-39-6"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"File object class: ${myFile.class}"</span>
+<a id="__codelineno-39-7" name="__codelineno-39-7"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"File name: ${myFile.name}"</span>
+<a id="__codelineno-39-8" name="__codelineno-39-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Simple name: ${myFile.simpleName}"</span>
+<a id="__codelineno-39-9" name="__codelineno-39-9"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Extension: ${myFile.extension}"</span>
+<a id="__codelineno-39-10" name="__codelineno-39-10"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Parent directory: ${myFile.parent}"</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5780,8 +5780,8 @@ Cependant, d'autres protocoles de stockage tels que le stockage blob (<code>s3:/
 <h2 id="3-utilisation-de-la-fabrique-de-canaux-frompath">3. Utilisation de la fabrique de canaux <code>fromPath()</code><a class="headerlink" href="#3-utilisation-de-la-fabrique-de-canaux-frompath" title="Permanent link">&para;</a></h2>
 <p>Jusqu'à présent, nous avons travaillé avec un seul fichier à la fois, mais dans Nextflow, nous allons généralement vouloir créer un canal d'entrée avec plusieurs fichiers d'entrée à traiter.</p>
 <p>Une façon naïve de faire cela serait de combiner la méthode <code>file()</code> avec <a href="https://www.nextflow.io/docs/latest/reference/channel.html#of"><code>channel.of()</code></a> comme ceci :</p>
-<div class="highlight"><span class="filename">Syntax example</span><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">([</span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)],</span>
-<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="w">                      </span><span class="o">[</span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R2_001.fastq.gz&#39;</span><span class="o">)])</span>
+<div class="highlight"><span class="filename">Syntax example</span><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">([</span><span class="n">file</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R1_001.fastq.gz'</span><span class="o">)],</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="w">                      </span><span class="o">[</span><span class="n">file</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R2_001.fastq.gz'</span><span class="o">)])</span>
 </code></pre></div>
 <p>Cela fonctionne, mais c'est maladroit.</p>
 <p>C'est là qu'intervient <a href="https://www.nextflow.io/docs/latest/reference/channel.html#frompath"><code>channel.fromPath()</code></a> : une fabrique de canaux pratique qui regroupe toutes les fonctionnalités dont nous avons besoin pour générer un canal à partir d'une ou plusieurs chaînes de fichiers statiques ainsi que des motifs glob.</p>
@@ -5805,16 +5805,16 @@ Cependant, d'autres protocoles de stockage tels que le stockage blob (<code>s3:/
 <span class="normal"><a href="#__codelineno-41-19">19</a></span>
 <span class="normal"><a href="#__codelineno-41-20">20</a></span>
 <span class="normal"><a href="#__codelineno-41-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-41-7" name="__codelineno-41-7"></a><span class="hll"><span class="w">    </span><span class="c1">// Charge les fichiers avec channel.fromPath</span>
-</span><a id="__codelineno-41-8" name="__codelineno-41-8"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
-</span><a id="__codelineno-41-9" name="__codelineno-41-9"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Found file: $myFile&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-41-8" name="__codelineno-41-8"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R1_001.fastq.gz'</span><span class="o">)</span>
+</span><a id="__codelineno-41-9" name="__codelineno-41-9"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Found file: $myFile"</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-41-10" name="__codelineno-41-10"></a>
 <a id="__codelineno-41-11" name="__codelineno-41-11"></a><span class="w">    </span><span class="c1">// Affiche les attributs du fichier</span>
-<a id="__codelineno-41-12" name="__codelineno-41-12"></a><span class="w">    </span><span class="cm">/* Commentons cela pour l&#39;instant, nous y reviendrons !</span>
-<a id="__codelineno-41-13" name="__codelineno-41-13"></a><span class="cm">    println &quot;File object class: ${myFile.class}&quot;</span>
-<a id="__codelineno-41-14" name="__codelineno-41-14"></a><span class="cm">    println &quot;File name: ${myFile.name}&quot;</span>
-<a id="__codelineno-41-15" name="__codelineno-41-15"></a><span class="cm">    println &quot;Simple name: ${myFile.simpleName}&quot;</span>
-<a id="__codelineno-41-16" name="__codelineno-41-16"></a><span class="cm">    println &quot;Extension: ${myFile.extension}&quot;</span>
-<a id="__codelineno-41-17" name="__codelineno-41-17"></a><span class="cm">    println &quot;Parent directory: ${myFile.parent}&quot;</span>
+<a id="__codelineno-41-12" name="__codelineno-41-12"></a><span class="w">    </span><span class="cm">/* Commentons cela pour l'instant, nous y reviendrons !</span>
+<a id="__codelineno-41-13" name="__codelineno-41-13"></a><span class="cm">    println "File object class: ${myFile.class}"</span>
+<a id="__codelineno-41-14" name="__codelineno-41-14"></a><span class="cm">    println "File name: ${myFile.name}"</span>
+<a id="__codelineno-41-15" name="__codelineno-41-15"></a><span class="cm">    println "Simple name: ${myFile.simpleName}"</span>
+<a id="__codelineno-41-16" name="__codelineno-41-16"></a><span class="cm">    println "Extension: ${myFile.extension}"</span>
+<a id="__codelineno-41-17" name="__codelineno-41-17"></a><span class="cm">    println "Parent directory: ${myFile.parent}"</span>
 <a id="__codelineno-41-18" name="__codelineno-41-18"></a><span class="cm">    */</span>
 <a id="__codelineno-41-19" name="__codelineno-41-19"></a>
 <a id="__codelineno-41-20" name="__codelineno-41-20"></a><span class="w">    </span><span class="c1">// Compte les lignes dans le fichier</span>
@@ -5833,15 +5833,15 @@ Cependant, d'autres protocoles de stockage tels que le stockage blob (<code>s3:/
 <span class="normal"><a href="#__codelineno-42-15">15</a></span>
 <span class="normal"><a href="#__codelineno-42-16">16</a></span>
 <span class="normal"><a href="#__codelineno-42-17">17</a></span>
-<span class="normal"><a href="#__codelineno-42-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-7" name="__codelineno-42-7"></a><span class="hll"><span class="w">    </span><span class="c1">// Crée un objet Path à partir d&#39;un chemin sous forme de chaîne</span>
-</span><a id="__codelineno-42-8" name="__codelineno-42-8"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
+<span class="normal"><a href="#__codelineno-42-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-7" name="__codelineno-42-7"></a><span class="hll"><span class="w">    </span><span class="c1">// Crée un objet Path à partir d'un chemin sous forme de chaîne</span>
+</span><a id="__codelineno-42-8" name="__codelineno-42-8"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R1_001.fastq.gz'</span><span class="o">)</span>
 </span><a id="__codelineno-42-9" name="__codelineno-42-9"></a>
 <a id="__codelineno-42-10" name="__codelineno-42-10"></a><span class="w">    </span><span class="c1">// Affiche les attributs du fichier</span>
-<a id="__codelineno-42-11" name="__codelineno-42-11"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
-<a id="__codelineno-42-12" name="__codelineno-42-12"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
-<a id="__codelineno-42-13" name="__codelineno-42-13"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
-<a id="__codelineno-42-14" name="__codelineno-42-14"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
-<a id="__codelineno-42-15" name="__codelineno-42-15"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
+<a id="__codelineno-42-11" name="__codelineno-42-11"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"File object class: ${myFile.class}"</span>
+<a id="__codelineno-42-12" name="__codelineno-42-12"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"File name: ${myFile.name}"</span>
+<a id="__codelineno-42-13" name="__codelineno-42-13"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Simple name: ${myFile.simpleName}"</span>
+<a id="__codelineno-42-14" name="__codelineno-42-14"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Extension: ${myFile.extension}"</span>
+<a id="__codelineno-42-15" name="__codelineno-42-15"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Parent directory: ${myFile.parent}"</span>
 <a id="__codelineno-42-16" name="__codelineno-42-16"></a>
 <a id="__codelineno-42-17" name="__codelineno-42-17"></a><span class="w">    </span><span class="c1">// Compte les lignes dans le fichier</span>
 <a id="__codelineno-42-18" name="__codelineno-42-18"></a><span class="w">    </span><span class="n">COUNT_LINES</span><span class="o">(</span><span class="n">myFile</span><span class="o">)</span>
@@ -5896,13 +5896,13 @@ C'est similaire à ce qu'aurait fait <code>file()</code>, sauf que nous avons ma
 <span class="normal"><a href="#__codelineno-45-16">16</a></span>
 <span class="normal"><a href="#__codelineno-45-17">17</a></span>
 <span class="normal"><a href="#__codelineno-45-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-45-7" name="__codelineno-45-7"></a><span class="w">    </span><span class="c1">// Charge les fichiers avec channel.fromPath</span>
-<a id="__codelineno-45-8" name="__codelineno-45-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-45-8" name="__codelineno-45-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R1_001.fastq.gz'</span><span class="o">)</span>
 <a id="__codelineno-45-9" name="__codelineno-45-9"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span>
-</span><a id="__codelineno-45-10" name="__codelineno-45-10"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
-</span><a id="__codelineno-45-11" name="__codelineno-45-11"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
-</span><a id="__codelineno-45-12" name="__codelineno-45-12"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
-</span><a id="__codelineno-45-13" name="__codelineno-45-13"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
-</span><a id="__codelineno-45-14" name="__codelineno-45-14"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
+</span><a id="__codelineno-45-10" name="__codelineno-45-10"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"File object class: ${myFile.class}"</span>
+</span><a id="__codelineno-45-11" name="__codelineno-45-11"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"File name: ${myFile.name}"</span>
+</span><a id="__codelineno-45-12" name="__codelineno-45-12"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"Simple name: ${myFile.simpleName}"</span>
+</span><a id="__codelineno-45-13" name="__codelineno-45-13"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"Extension: ${myFile.extension}"</span>
+</span><a id="__codelineno-45-14" name="__codelineno-45-14"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"Parent directory: ${myFile.parent}"</span>
 </span><a id="__codelineno-45-15" name="__codelineno-45-15"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span><a id="__codelineno-45-16" name="__codelineno-45-16"></a>
 <a id="__codelineno-45-17" name="__codelineno-45-17"></a><span class="w">    </span><span class="c1">// Compte les lignes dans le fichier</span>
@@ -5916,8 +5916,8 @@ C'est similaire à ce qu'aurait fait <code>file()</code>, sauf que nous avons ma
 <span class="normal"><a href="#__codelineno-46-10">10</a></span>
 <span class="normal"><a href="#__codelineno-46-11">11</a></span>
 <span class="normal"><a href="#__codelineno-46-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-46-7" name="__codelineno-46-7"></a><span class="w">    </span><span class="c1">// Charge les fichiers avec channel.fromPath</span>
-<a id="__codelineno-46-8" name="__codelineno-46-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
-<a id="__codelineno-46-9" name="__codelineno-46-9"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Found file: $myFile&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-46-8" name="__codelineno-46-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R1_001.fastq.gz'</span><span class="o">)</span>
+<a id="__codelineno-46-9" name="__codelineno-46-9"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Found file: $myFile"</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-46-10" name="__codelineno-46-10"></a>
 <a id="__codelineno-46-11" name="__codelineno-46-11"></a><span class="w">    </span><span class="c1">// Compte les lignes dans le fichier</span>
 <a id="__codelineno-46-12" name="__codelineno-46-12"></a><span class="w">    </span><span class="c1">// COUNT_LINES(ch_files)</span>
@@ -5975,13 +5975,13 @@ Le processus de correspondance de ces motifs est appelé « globbing » ou « ex
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-51-7">7</a></span>
 <span class="normal"><a href="#__codelineno-51-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-51-7" name="__codelineno-51-7"></a><span class="w">  </span><span class="c1">// Charge les fichiers avec channel.fromPath</span>
-<a id="__codelineno-51-8" name="__codelineno-51-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R*_001.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-51-8" name="__codelineno-51-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R*_001.fastq.gz'</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-7">7</a></span>
 <span class="normal"><a href="#__codelineno-52-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-52-7" name="__codelineno-52-7"></a><span class="w">  </span><span class="c1">// Charge les fichiers avec channel.fromPath</span>
-<a id="__codelineno-52-8" name="__codelineno-52-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-52-8" name="__codelineno-52-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R1_001.fastq.gz'</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -6067,7 +6067,7 @@ Par exemple, le nom de fichier <code>patientA_rep1_normal_R2_001</code> encode l
 <span class="normal"><a href="#__codelineno-55-10">10</a></span>
 <span class="normal"><a href="#__codelineno-55-11">11</a></span>
 <span class="normal"><a href="#__codelineno-55-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-55-7" name="__codelineno-55-7"></a><span class="w">    </span><span class="c1">// Charge les fichiers avec channel.fromPath</span>
-<a id="__codelineno-55-8" name="__codelineno-55-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R*_001.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-55-8" name="__codelineno-55-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R*_001.fastq.gz'</span><span class="o">)</span>
 <a id="__codelineno-55-9" name="__codelineno-55-9"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span>
 </span><a id="__codelineno-55-10" name="__codelineno-55-10"></a><span class="hll"><span class="w">        </span><span class="o">[</span><span class="w"> </span><span class="n">myFile</span><span class="o">.</span><span class="na">simpleName</span><span class="o">,</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">]</span>
 </span><a id="__codelineno-55-11" name="__codelineno-55-11"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
@@ -6084,13 +6084,13 @@ Par exemple, le nom de fichier <code>patientA_rep1_normal_R2_001</code> encode l
 <span class="normal"><a href="#__codelineno-56-13">13</a></span>
 <span class="normal"><a href="#__codelineno-56-14">14</a></span>
 <span class="normal"><a href="#__codelineno-56-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-7" name="__codelineno-56-7"></a><span class="w">    </span><span class="c1">// Charge les fichiers avec channel.fromPath</span>
-<a id="__codelineno-56-8" name="__codelineno-56-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R*_001.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-56-8" name="__codelineno-56-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R*_001.fastq.gz'</span><span class="o">)</span>
 <a id="__codelineno-56-9" name="__codelineno-56-9"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span>
-</span><a id="__codelineno-56-10" name="__codelineno-56-10"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
-</span><a id="__codelineno-56-11" name="__codelineno-56-11"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
-</span><a id="__codelineno-56-12" name="__codelineno-56-12"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
-</span><a id="__codelineno-56-13" name="__codelineno-56-13"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
-</span><a id="__codelineno-56-14" name="__codelineno-56-14"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
+</span><a id="__codelineno-56-10" name="__codelineno-56-10"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"File object class: ${myFile.class}"</span>
+</span><a id="__codelineno-56-11" name="__codelineno-56-11"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"File name: ${myFile.name}"</span>
+</span><a id="__codelineno-56-12" name="__codelineno-56-12"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"Simple name: ${myFile.simpleName}"</span>
+</span><a id="__codelineno-56-13" name="__codelineno-56-13"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"Extension: ${myFile.extension}"</span>
+</span><a id="__codelineno-56-14" name="__codelineno-56-14"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"Parent directory: ${myFile.parent}"</span>
 </span><a id="__codelineno-56-15" name="__codelineno-56-15"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
@@ -6137,9 +6137,9 @@ Heureusement, ces composants sont simplement séparés par des underscores dans 
 <span class="normal"><a href="#__codelineno-59-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-59-10">10</a></span>
 <span class="normal"><a href="#__codelineno-59-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-59-7" name="__codelineno-59-7"></a><span class="w">    </span><span class="c1">// Charge les fichiers avec channel.fromPath</span>
-<a id="__codelineno-59-8" name="__codelineno-59-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R*_001.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-59-8" name="__codelineno-59-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R*_001.fastq.gz'</span><span class="o">)</span>
 <a id="__codelineno-59-9" name="__codelineno-59-9"></a><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-59-10" name="__codelineno-59-10"></a><span class="hll"><span class="w">        </span><span class="o">[</span><span class="w"> </span><span class="n">myFile</span><span class="o">.</span><span class="na">simpleName</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">),</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">]</span>
+<a id="__codelineno-59-10" name="__codelineno-59-10"></a><span class="hll"><span class="w">        </span><span class="o">[</span><span class="w"> </span><span class="n">myFile</span><span class="o">.</span><span class="na">simpleName</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">'_'</span><span class="o">),</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">]</span>
 </span><a id="__codelineno-59-11" name="__codelineno-59-11"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -6149,7 +6149,7 @@ Heureusement, ces composants sont simplement séparés par des underscores dans 
 <span class="normal"><a href="#__codelineno-60-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-60-10">10</a></span>
 <span class="normal"><a href="#__codelineno-60-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-60-7" name="__codelineno-60-7"></a><span class="w">    </span><span class="c1">// Charge les fichiers avec channel.fromPath</span>
-<a id="__codelineno-60-8" name="__codelineno-60-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R*_001.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-60-8" name="__codelineno-60-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R*_001.fastq.gz'</span><span class="o">)</span>
 <a id="__codelineno-60-9" name="__codelineno-60-9"></a><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-60-10" name="__codelineno-60-10"></a><span class="hll"><span class="w">        </span><span class="o">[</span><span class="w"> </span><span class="n">myFile</span><span class="o">.</span><span class="na">simpleName</span><span class="o">,</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">]</span>
 </span><a id="__codelineno-60-11" name="__codelineno-60-11"></a><span class="w">    </span><span class="o">}</span>
@@ -6225,15 +6225,15 @@ Effectuez les modifications suivantes dans le workflow :</p>
 <span class="normal"><a href="#__codelineno-66-18">18</a></span>
 <span class="normal"><a href="#__codelineno-66-19">19</a></span>
 <span class="normal"><a href="#__codelineno-66-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-66-7" name="__codelineno-66-7"></a><span class="w">    </span><span class="c1">// Charge les fichiers avec channel.fromPath</span>
-<a id="__codelineno-66-8" name="__codelineno-66-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R*_001.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-66-8" name="__codelineno-66-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R*_001.fastq.gz'</span><span class="o">)</span>
 <a id="__codelineno-66-9" name="__codelineno-66-9"></a><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-66-10" name="__codelineno-66-10"></a><span class="hll"><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">patient</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">,</span><span class="w"> </span><span class="n">readNum</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myFile</span><span class="o">.</span><span class="na">simpleName</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">)</span>
+<a id="__codelineno-66-10" name="__codelineno-66-10"></a><span class="hll"><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">patient</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">,</span><span class="w"> </span><span class="n">readNum</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myFile</span><span class="o">.</span><span class="na">simpleName</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">'_'</span><span class="o">)</span>
 </span><a id="__codelineno-66-11" name="__codelineno-66-11"></a><span class="hll"><span class="w">        </span><span class="o">[</span>
 </span><a id="__codelineno-66-12" name="__codelineno-66-12"></a><span class="hll"><span class="w">          </span><span class="o">[</span>
 </span><a id="__codelineno-66-13" name="__codelineno-66-13"></a><span class="hll"><span class="w">            </span><span class="nl">id:</span><span class="w"> </span><span class="n">patient</span><span class="o">,</span>
-</span><a id="__codelineno-66-14" name="__codelineno-66-14"></a><span class="hll"><span class="w">            </span><span class="nl">replicate:</span><span class="w"> </span><span class="n">replicate</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">&#39;rep&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">),</span>
+</span><a id="__codelineno-66-14" name="__codelineno-66-14"></a><span class="hll"><span class="w">            </span><span class="nl">replicate:</span><span class="w"> </span><span class="n">replicate</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">'rep'</span><span class="o">,</span><span class="w"> </span><span class="s1">''</span><span class="o">),</span>
 </span><a id="__codelineno-66-15" name="__codelineno-66-15"></a><span class="hll"><span class="w">            </span><span class="nl">type:</span><span class="w"> </span><span class="n">type</span><span class="o">,</span>
-</span><a id="__codelineno-66-16" name="__codelineno-66-16"></a><span class="hll"><span class="w">            </span><span class="nl">readNum:</span><span class="w"> </span><span class="n">readNum</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">&#39;R&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">),</span>
+</span><a id="__codelineno-66-16" name="__codelineno-66-16"></a><span class="hll"><span class="w">            </span><span class="nl">readNum:</span><span class="w"> </span><span class="n">readNum</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">'R'</span><span class="o">,</span><span class="w"> </span><span class="s1">''</span><span class="o">),</span>
 </span><a id="__codelineno-66-17" name="__codelineno-66-17"></a><span class="hll"><span class="w">          </span><span class="o">],</span>
 </span><a id="__codelineno-66-18" name="__codelineno-66-18"></a><span class="hll"><span class="w">          </span><span class="n">myFile</span>
 </span><a id="__codelineno-66-19" name="__codelineno-66-19"></a><span class="hll"><span class="w">        </span><span class="o">]</span>
@@ -6246,9 +6246,9 @@ Effectuez les modifications suivantes dans le workflow :</p>
 <span class="normal"><a href="#__codelineno-67-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-67-10">10</a></span>
 <span class="normal"><a href="#__codelineno-67-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-67-7" name="__codelineno-67-7"></a><span class="w">    </span><span class="c1">// Charge les fichiers avec channel.fromPath</span>
-<a id="__codelineno-67-8" name="__codelineno-67-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R*_001.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-67-8" name="__codelineno-67-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R*_001.fastq.gz'</span><span class="o">)</span>
 <a id="__codelineno-67-9" name="__codelineno-67-9"></a><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-67-10" name="__codelineno-67-10"></a><span class="hll"><span class="w">        </span><span class="o">[</span><span class="w"> </span><span class="n">myFile</span><span class="o">.</span><span class="na">simpleName</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">),</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">]</span>
+<a id="__codelineno-67-10" name="__codelineno-67-10"></a><span class="hll"><span class="w">        </span><span class="o">[</span><span class="w"> </span><span class="n">myFile</span><span class="o">.</span><span class="na">simpleName</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">'_'</span><span class="o">),</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">]</span>
 </span><a id="__codelineno-67-11" name="__codelineno-67-11"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -6340,14 +6340,14 @@ Cela va prendre deux étapes :</p>
 <span class="normal"><a href="#__codelineno-72-21">21</a></span>
 <span class="normal"><a href="#__codelineno-72-22">22</a></span>
 <span class="normal"><a href="#__codelineno-72-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-72-7" name="__codelineno-72-7"></a><span class="hll"><span class="w">    </span><span class="c1">// Charge les fichiers avec channel.fromFilePairs</span>
-</span><a id="__codelineno-72-8" name="__codelineno-72-8"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
-</span><a id="__codelineno-72-9" name="__codelineno-72-9"></a><span class="w">    </span><span class="cm">/* Commentons le mapping pour l&#39;instant, nous y reviendrons !</span>
+</span><a id="__codelineno-72-8" name="__codelineno-72-8"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R{1,2}_001.fastq.gz'</span><span class="o">)</span>
+</span><a id="__codelineno-72-9" name="__codelineno-72-9"></a><span class="w">    </span><span class="cm">/* Commentons le mapping pour l'instant, nous y reviendrons !</span>
 <a id="__codelineno-72-10" name="__codelineno-72-10"></a><span class="cm">    ch_files.map { myFile -&gt;</span>
-<a id="__codelineno-72-11" name="__codelineno-72-11"></a><span class="cm">        def (patient, replicate, type, readNum) = myFile.simpleName.tokenize(&#39;_&#39;)</span>
+<a id="__codelineno-72-11" name="__codelineno-72-11"></a><span class="cm">        def (patient, replicate, type, readNum) = myFile.simpleName.tokenize('_')</span>
 <a id="__codelineno-72-12" name="__codelineno-72-12"></a><span class="cm">        [</span>
 <a id="__codelineno-72-13" name="__codelineno-72-13"></a><span class="cm">            [</span>
 <a id="__codelineno-72-14" name="__codelineno-72-14"></a><span class="cm">                id: patient,</span>
-<a id="__codelineno-72-15" name="__codelineno-72-15"></a><span class="cm">                replicate: replicate.replace(&#39;rep&#39;, &#39;&#39;),</span>
+<a id="__codelineno-72-15" name="__codelineno-72-15"></a><span class="cm">                replicate: replicate.replace('rep', ''),</span>
 <a id="__codelineno-72-16" name="__codelineno-72-16"></a><span class="cm">                type: type,</span>
 <a id="__codelineno-72-17" name="__codelineno-72-17"></a><span class="cm">                readNum: readNum,</span>
 <a id="__codelineno-72-18" name="__codelineno-72-18"></a><span class="cm">            ],</span>
@@ -6374,13 +6374,13 @@ Cela va prendre deux étapes :</p>
 <span class="normal"><a href="#__codelineno-73-19">19</a></span>
 <span class="normal"><a href="#__codelineno-73-20">20</a></span>
 <span class="normal"><a href="#__codelineno-73-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-73-7" name="__codelineno-73-7"></a><span class="hll"><span class="w">    </span><span class="c1">// Charge les fichiers avec channel.fromPath</span>
-</span><a id="__codelineno-73-8" name="__codelineno-73-8"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R*_001.fastq.gz&#39;</span><span class="o">)</span>
+</span><a id="__codelineno-73-8" name="__codelineno-73-8"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R*_001.fastq.gz'</span><span class="o">)</span>
 </span><a id="__codelineno-73-9" name="__codelineno-73-9"></a><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-73-10" name="__codelineno-73-10"></a><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">patient</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">,</span><span class="w"> </span><span class="n">readNum</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myFile</span><span class="o">.</span><span class="na">simpleName</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">)</span>
+<a id="__codelineno-73-10" name="__codelineno-73-10"></a><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">patient</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">,</span><span class="w"> </span><span class="n">readNum</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myFile</span><span class="o">.</span><span class="na">simpleName</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">'_'</span><span class="o">)</span>
 <a id="__codelineno-73-11" name="__codelineno-73-11"></a><span class="w">        </span><span class="o">[</span>
 <a id="__codelineno-73-12" name="__codelineno-73-12"></a><span class="w">            </span><span class="o">[</span>
 <a id="__codelineno-73-13" name="__codelineno-73-13"></a><span class="w">                </span><span class="nl">id:</span><span class="w"> </span><span class="n">patient</span><span class="o">,</span>
-<a id="__codelineno-73-14" name="__codelineno-73-14"></a><span class="w">                </span><span class="nl">replicate:</span><span class="w"> </span><span class="n">replicate</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">&#39;rep&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">),</span>
+<a id="__codelineno-73-14" name="__codelineno-73-14"></a><span class="w">                </span><span class="nl">replicate:</span><span class="w"> </span><span class="n">replicate</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">'rep'</span><span class="o">,</span><span class="w"> </span><span class="s1">''</span><span class="o">),</span>
 <a id="__codelineno-73-15" name="__codelineno-73-15"></a><span class="w">                </span><span class="nl">type:</span><span class="w"> </span><span class="n">type</span><span class="o">,</span>
 <a id="__codelineno-73-16" name="__codelineno-73-16"></a><span class="w">                </span><span class="nl">readNum:</span><span class="w"> </span><span class="n">readNum</span><span class="o">,</span>
 <a id="__codelineno-73-17" name="__codelineno-73-17"></a><span class="w">            </span><span class="o">],</span>
@@ -6405,21 +6405,21 @@ Nous la rajouterons plus tard, avec quelques modifications.</p>
 <a id="__codelineno-75-4" name="__codelineno-75-4" href="#__codelineno-75-4"></a>
 <a id="__codelineno-75-5" name="__codelineno-75-5" href="#__codelineno-75-5"></a><span class="go">[-        ] COUNT_LINES -</span>
 <a id="__codelineno-75-6" name="__codelineno-75-6" href="#__codelineno-75-6"></a><span class="hll"><span class="go">[patientA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]</span>
-</span><a id="__codelineno-75-7" name="__codelineno-75-7" href="#__codelineno-75-7"></a><span class="hll"><span class="go">ERROR ~ Error executing process &gt; &#39;COUNT_LINES (1)&#39;</span>
+</span><a id="__codelineno-75-7" name="__codelineno-75-7" href="#__codelineno-75-7"></a><span class="hll"><span class="go">ERROR ~ Error executing process &gt; 'COUNT_LINES (1)'</span>
 </span><a id="__codelineno-75-8" name="__codelineno-75-8" href="#__codelineno-75-8"></a>
 <a id="__codelineno-75-9" name="__codelineno-75-9" href="#__codelineno-75-9"></a><span class="go">Caused by:</span>
-<a id="__codelineno-75-10" name="__codelineno-75-10" href="#__codelineno-75-10"></a><span class="go">  Not a valid path value: &#39;patientA_rep1_normal_R&#39;</span>
+<a id="__codelineno-75-10" name="__codelineno-75-10" href="#__codelineno-75-10"></a><span class="go">  Not a valid path value: 'patientA_rep1_normal_R'</span>
 <a id="__codelineno-75-11" name="__codelineno-75-11" href="#__codelineno-75-11"></a>
 <a id="__codelineno-75-12" name="__codelineno-75-12" href="#__codelineno-75-12"></a>
 <a id="__codelineno-75-13" name="__codelineno-75-13" href="#__codelineno-75-13"></a>
 <a id="__codelineno-75-14" name="__codelineno-75-14" href="#__codelineno-75-14"></a><span class="go">Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`</span>
 <a id="__codelineno-75-15" name="__codelineno-75-15" href="#__codelineno-75-15"></a>
-<a id="__codelineno-75-16" name="__codelineno-75-16" href="#__codelineno-75-16"></a><span class="go"> -- Check &#39;.nextflow.log&#39; file for details</span>
+<a id="__codelineno-75-16" name="__codelineno-75-16" href="#__codelineno-75-16"></a><span class="go"> -- Check '.nextflow.log' file for details</span>
 </code></pre></div>
 </details>
 <p>Oups, cette fois l'exécution a échoué !</p>
 <p>La partie pertinente du message d'erreur est ici :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="go">Not a valid path value: &#39;patientA_rep1_normal_R&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="go">Not a valid path value: 'patientA_rep1_normal_R'</span>
 </code></pre></div>
 <p>C'est parce que nous avons changé la fabrique de canaux.
 Jusqu'à présent, le canal d'entrée d'origine ne contenait que les chemins de fichiers.
@@ -6489,13 +6489,13 @@ Mais nous n'allons pas faire cela, car notre objectif final est d'utiliser un pr
 <span class="normal"><a href="#__codelineno-81-18">18</a></span>
 <span class="normal"><a href="#__codelineno-81-19">19</a></span>
 <span class="normal"><a href="#__codelineno-81-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-81-7" name="__codelineno-81-7"></a><span class="w">    </span><span class="c1">// Charge les fichiers avec channel.fromFilePairs</span>
-<a id="__codelineno-81-8" name="__codelineno-81-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-81-8" name="__codelineno-81-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R{1,2}_001.fastq.gz'</span><span class="o">)</span>
 <a id="__codelineno-81-9" name="__codelineno-81-9"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">id</span><span class="o">,</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span>
-</span><a id="__codelineno-81-10" name="__codelineno-81-10"></a><span class="hll"><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">patient</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">)</span>
+</span><a id="__codelineno-81-10" name="__codelineno-81-10"></a><span class="hll"><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">patient</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">'_'</span><span class="o">)</span>
 </span><a id="__codelineno-81-11" name="__codelineno-81-11"></a><span class="w">        </span><span class="o">[</span>
 <a id="__codelineno-81-12" name="__codelineno-81-12"></a><span class="w">            </span><span class="o">[</span>
 <a id="__codelineno-81-13" name="__codelineno-81-13"></a><span class="w">                </span><span class="nl">id:</span><span class="w"> </span><span class="n">patient</span><span class="o">,</span>
-<a id="__codelineno-81-14" name="__codelineno-81-14"></a><span class="w">                </span><span class="nl">replicate:</span><span class="w"> </span><span class="n">replicate</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">&#39;rep&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">),</span>
+<a id="__codelineno-81-14" name="__codelineno-81-14"></a><span class="w">                </span><span class="nl">replicate:</span><span class="w"> </span><span class="n">replicate</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">'rep'</span><span class="o">,</span><span class="w"> </span><span class="s1">''</span><span class="o">),</span>
 <a id="__codelineno-81-15" name="__codelineno-81-15"></a><span class="hll"><span class="w">                </span><span class="nl">type:</span><span class="w"> </span><span class="n">type</span>
 </span><a id="__codelineno-81-16" name="__codelineno-81-16"></a><span class="w">            </span><span class="o">],</span>
 <a id="__codelineno-81-17" name="__codelineno-81-17"></a><span class="hll"><span class="w">            </span><span class="n">files</span>
@@ -6522,14 +6522,14 @@ Mais nous n'allons pas faire cela, car notre objectif final est d'utiliser un pr
 <span class="normal"><a href="#__codelineno-82-21">21</a></span>
 <span class="normal"><a href="#__codelineno-82-22">22</a></span>
 <span class="normal"><a href="#__codelineno-82-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-82-7" name="__codelineno-82-7"></a><span class="w">    </span><span class="c1">// Charge les fichiers avec channel.fromFilePairs</span>
-<a id="__codelineno-82-8" name="__codelineno-82-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
-<a id="__codelineno-82-9" name="__codelineno-82-9"></a><span class="hll"><span class="w">    </span><span class="cm">/* Commentons le mapping pour l&#39;instant, nous y reviendrons !</span>
+<a id="__codelineno-82-8" name="__codelineno-82-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R{1,2}_001.fastq.gz'</span><span class="o">)</span>
+<a id="__codelineno-82-9" name="__codelineno-82-9"></a><span class="hll"><span class="w">    </span><span class="cm">/* Commentons le mapping pour l'instant, nous y reviendrons !</span>
 </span><a id="__codelineno-82-10" name="__codelineno-82-10"></a><span class="hll"><span class="cm">    ch_files.map { myFile -&gt;</span>
-</span><a id="__codelineno-82-11" name="__codelineno-82-11"></a><span class="hll"><span class="cm">        def (patient, replicate, type, readNum) = myFile.simpleName.tokenize(&#39;_&#39;)</span>
+</span><a id="__codelineno-82-11" name="__codelineno-82-11"></a><span class="hll"><span class="cm">        def (patient, replicate, type, readNum) = myFile.simpleName.tokenize('_')</span>
 </span><a id="__codelineno-82-12" name="__codelineno-82-12"></a><span class="cm">        [</span>
 <a id="__codelineno-82-13" name="__codelineno-82-13"></a><span class="cm">            [</span>
 <a id="__codelineno-82-14" name="__codelineno-82-14"></a><span class="cm">                id: patient,</span>
-<a id="__codelineno-82-15" name="__codelineno-82-15"></a><span class="cm">                replicate: replicate.replace(&#39;rep&#39;, &#39;&#39;),</span>
+<a id="__codelineno-82-15" name="__codelineno-82-15"></a><span class="cm">                replicate: replicate.replace('rep', ''),</span>
 <a id="__codelineno-82-16" name="__codelineno-82-16"></a><span class="cm">                type: type,</span>
 <a id="__codelineno-82-17" name="__codelineno-82-17"></a><span class="hll"><span class="cm">                readNum: readNum,</span>
 </span><a id="__codelineno-82-18" name="__codelineno-82-18"></a><span class="cm">            ],</span>
@@ -6592,7 +6592,7 @@ Nous pourrions imaginer que cela effectue un alignement de séquences, un appel 
 <span class="normal"><a href="#__codelineno-85-4">4</a></span>
 <span class="normal"><a href="#__codelineno-85-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-85-2" name="__codelineno-85-2"></a>
-<a id="__codelineno-85-3" name="__codelineno-85-3"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ANALYZE_READS</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/analyze_reads.nf&#39;</span>
+<a id="__codelineno-85-3" name="__codelineno-85-3"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ANALYZE_READS</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules/analyze_reads.nf'</span>
 </span><a id="__codelineno-85-4" name="__codelineno-85-4"></a>
 <a id="__codelineno-85-5" name="__codelineno-85-5"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 </code></pre></div></td></tr></table></div>
@@ -6634,18 +6634,18 @@ Nous pourrions imaginer que cela effectue un alignement de séquences, un appel 
 <a id="__codelineno-87-5" name="__codelineno-87-5"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">files</span><span class="o">)</span>
 <a id="__codelineno-87-6" name="__codelineno-87-6"></a>
 <a id="__codelineno-87-7" name="__codelineno-87-7"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-87-8" name="__codelineno-87-8"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;${meta.id}_stats.txt&quot;</span><span class="o">)</span>
+<a id="__codelineno-87-8" name="__codelineno-87-8"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"${meta.id}_stats.txt"</span><span class="o">)</span>
 <a id="__codelineno-87-9" name="__codelineno-87-9"></a>
 <a id="__codelineno-87-10" name="__codelineno-87-10"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-87-11" name="__codelineno-87-11"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-87-12" name="__codelineno-87-12"></a><span class="s2">    echo &quot;Sample metadata: ${meta.id}&quot; &gt; ${meta.id}_stats.txt</span>
-<a id="__codelineno-87-13" name="__codelineno-87-13"></a><span class="s2">    echo &quot;Replicate: ${meta.replicate}&quot; &gt;&gt; ${meta.id}_stats.txt</span>
-<a id="__codelineno-87-14" name="__codelineno-87-14"></a><span class="s2">    echo &quot;Type: ${meta.type}&quot; &gt;&gt; ${meta.id}_stats.txt</span>
-<a id="__codelineno-87-15" name="__codelineno-87-15"></a><span class="s2">    echo &quot;Read 1: ${files[0]}&quot; &gt;&gt; ${meta.id}_stats.txt</span>
-<a id="__codelineno-87-16" name="__codelineno-87-16"></a><span class="s2">    echo &quot;Read 2: ${files[1]}&quot; &gt;&gt; ${meta.id}_stats.txt</span>
-<a id="__codelineno-87-17" name="__codelineno-87-17"></a><span class="s2">    echo &quot;Read 1 size: \$(gunzip -dc ${files[0]} | wc -l | awk &#39;{print \$1/4}&#39;) reads&quot; &gt;&gt; ${meta.id}_stats.txt</span>
-<a id="__codelineno-87-18" name="__codelineno-87-18"></a><span class="s2">    echo &quot;Read 2 size: \$(gunzip -dc ${files[1]} | wc -l | awk &#39;{print \$1/4}&#39;) reads&quot; &gt;&gt; ${meta.id}_stats.txt</span>
-<a id="__codelineno-87-19" name="__codelineno-87-19"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-87-11" name="__codelineno-87-11"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-87-12" name="__codelineno-87-12"></a><span class="s2">    echo "Sample metadata: ${meta.id}" &gt; ${meta.id}_stats.txt</span>
+<a id="__codelineno-87-13" name="__codelineno-87-13"></a><span class="s2">    echo "Replicate: ${meta.replicate}" &gt;&gt; ${meta.id}_stats.txt</span>
+<a id="__codelineno-87-14" name="__codelineno-87-14"></a><span class="s2">    echo "Type: ${meta.type}" &gt;&gt; ${meta.id}_stats.txt</span>
+<a id="__codelineno-87-15" name="__codelineno-87-15"></a><span class="s2">    echo "Read 1: ${files[0]}" &gt;&gt; ${meta.id}_stats.txt</span>
+<a id="__codelineno-87-16" name="__codelineno-87-16"></a><span class="s2">    echo "Read 2: ${files[1]}" &gt;&gt; ${meta.id}_stats.txt</span>
+<a id="__codelineno-87-17" name="__codelineno-87-17"></a><span class="s2">    echo "Read 1 size: \$(gunzip -dc ${files[0]} | wc -l | awk '{print \$1/4}') reads" &gt;&gt; ${meta.id}_stats.txt</span>
+<a id="__codelineno-87-18" name="__codelineno-87-18"></a><span class="s2">    echo "Read 2 size: \$(gunzip -dc ${files[1]} | wc -l | awk '{print \$1/4}') reads" &gt;&gt; ${meta.id}_stats.txt</span>
+<a id="__codelineno-87-19" name="__codelineno-87-19"></a><span class="s2">    """</span>
 <a id="__codelineno-87-20" name="__codelineno-87-20"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <div class="admonition note">
@@ -6691,13 +6691,13 @@ Afin d'alimenter le contenu remappé au processus <code>ANALYZE_READS</code> (et
 <span class="normal"><a href="#__codelineno-88-21">21</a></span>
 <span class="normal"><a href="#__codelineno-88-22">22</a></span>
 <span class="normal"><a href="#__codelineno-88-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-88-7" name="__codelineno-88-7"></a><span class="w">    </span><span class="c1">// Charge les fichiers avec channel.fromFilePairs</span>
-<a id="__codelineno-88-8" name="__codelineno-88-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-88-8" name="__codelineno-88-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R{1,2}_001.fastq.gz'</span><span class="o">)</span>
 <a id="__codelineno-88-9" name="__codelineno-88-9"></a><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">id</span><span class="o">,</span><span class="w">  </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-88-10" name="__codelineno-88-10"></a><span class="w">       </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">patient</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">)</span>
+<a id="__codelineno-88-10" name="__codelineno-88-10"></a><span class="w">       </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">patient</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">'_'</span><span class="o">)</span>
 <a id="__codelineno-88-11" name="__codelineno-88-11"></a><span class="w">       </span><span class="o">[</span>
 <a id="__codelineno-88-12" name="__codelineno-88-12"></a><span class="w">           </span><span class="o">[</span>
 <a id="__codelineno-88-13" name="__codelineno-88-13"></a><span class="w">               </span><span class="nl">id:</span><span class="w"> </span><span class="n">patient</span><span class="o">,</span>
-<a id="__codelineno-88-14" name="__codelineno-88-14"></a><span class="w">               </span><span class="nl">replicate:</span><span class="w"> </span><span class="n">replicate</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">&#39;rep&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">),</span>
+<a id="__codelineno-88-14" name="__codelineno-88-14"></a><span class="w">               </span><span class="nl">replicate:</span><span class="w"> </span><span class="n">replicate</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">'rep'</span><span class="o">,</span><span class="w"> </span><span class="s1">''</span><span class="o">),</span>
 <a id="__codelineno-88-15" name="__codelineno-88-15"></a><span class="w">               </span><span class="nl">type:</span><span class="w"> </span><span class="n">type</span>
 <a id="__codelineno-88-16" name="__codelineno-88-16"></a><span class="w">           </span><span class="o">],</span>
 <a id="__codelineno-88-17" name="__codelineno-88-17"></a><span class="w">           </span><span class="n">files</span>
@@ -6724,13 +6724,13 @@ Afin d'alimenter le contenu remappé au processus <code>ANALYZE_READS</code> (et
 <span class="normal"><a href="#__codelineno-89-18">18</a></span>
 <span class="normal"><a href="#__codelineno-89-19">19</a></span>
 <span class="normal"><a href="#__codelineno-89-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-89-7" name="__codelineno-89-7"></a><span class="w">    </span><span class="c1">// Charge les fichiers avec channel.fromFilePairs</span>
-<a id="__codelineno-89-8" name="__codelineno-89-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-89-8" name="__codelineno-89-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R{1,2}_001.fastq.gz'</span><span class="o">)</span>
 <a id="__codelineno-89-9" name="__codelineno-89-9"></a><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">id</span><span class="o">,</span><span class="w">  </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-89-10" name="__codelineno-89-10"></a><span class="w">       </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">patient</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">)</span>
+<a id="__codelineno-89-10" name="__codelineno-89-10"></a><span class="w">       </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">patient</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">'_'</span><span class="o">)</span>
 <a id="__codelineno-89-11" name="__codelineno-89-11"></a><span class="w">       </span><span class="o">[</span>
 <a id="__codelineno-89-12" name="__codelineno-89-12"></a><span class="w">           </span><span class="o">[</span>
 <a id="__codelineno-89-13" name="__codelineno-89-13"></a><span class="w">               </span><span class="nl">id:</span><span class="w"> </span><span class="n">patient</span><span class="o">,</span>
-<a id="__codelineno-89-14" name="__codelineno-89-14"></a><span class="w">               </span><span class="nl">replicate:</span><span class="w"> </span><span class="n">replicate</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">&#39;rep&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">),</span>
+<a id="__codelineno-89-14" name="__codelineno-89-14"></a><span class="w">               </span><span class="nl">replicate:</span><span class="w"> </span><span class="n">replicate</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">'rep'</span><span class="o">,</span><span class="w"> </span><span class="s1">''</span><span class="o">),</span>
 <a id="__codelineno-89-15" name="__codelineno-89-15"></a><span class="w">               </span><span class="nl">type:</span><span class="w"> </span><span class="n">type</span>
 <a id="__codelineno-89-16" name="__codelineno-89-16"></a><span class="w">           </span><span class="o">],</span>
 <a id="__codelineno-89-17" name="__codelineno-89-17"></a><span class="w">           </span><span class="n">files</span>
@@ -6802,20 +6802,20 @@ Afin d'alimenter le contenu remappé au processus <code>ANALYZE_READS</code> (et
 <span class="normal"><a href="#__codelineno-92-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-92-5" name="__codelineno-92-5"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-92-6" name="__codelineno-92-6"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-92-7" name="__codelineno-92-7"></a><span class="w">    </span><span class="c1">// Charge les fichiers avec channel.fromFilePairs</span>
-<a id="__codelineno-92-8" name="__codelineno-92-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-92-8" name="__codelineno-92-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R{1,2}_001.fastq.gz'</span><span class="o">)</span>
 <a id="__codelineno-92-9" name="__codelineno-92-9"></a><span class="hll"><span class="w">    </span><span class="n">ch_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_files</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">id</span><span class="o">,</span><span class="w">  </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span>
-</span><a id="__codelineno-92-10" name="__codelineno-92-10"></a><span class="w">       </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">patient</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">)</span>
+</span><a id="__codelineno-92-10" name="__codelineno-92-10"></a><span class="w">       </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">patient</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">'_'</span><span class="o">)</span>
 <a id="__codelineno-92-11" name="__codelineno-92-11"></a><span class="hll"><span class="w">       </span><span class="n">tuple</span><span class="o">(</span>
 </span><a id="__codelineno-92-12" name="__codelineno-92-12"></a><span class="w">           </span><span class="o">[</span>
 <a id="__codelineno-92-13" name="__codelineno-92-13"></a><span class="w">               </span><span class="nl">id:</span><span class="w"> </span><span class="n">patient</span><span class="o">,</span>
-<a id="__codelineno-92-14" name="__codelineno-92-14"></a><span class="w">               </span><span class="nl">replicate:</span><span class="w"> </span><span class="n">replicate</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">&#39;rep&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">),</span>
+<a id="__codelineno-92-14" name="__codelineno-92-14"></a><span class="w">               </span><span class="nl">replicate:</span><span class="w"> </span><span class="n">replicate</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">'rep'</span><span class="o">,</span><span class="w"> </span><span class="s1">''</span><span class="o">),</span>
 <a id="__codelineno-92-15" name="__codelineno-92-15"></a><span class="w">               </span><span class="nl">type:</span><span class="w"> </span><span class="n">type</span>
 <a id="__codelineno-92-16" name="__codelineno-92-16"></a><span class="w">           </span><span class="o">],</span>
 <a id="__codelineno-92-17" name="__codelineno-92-17"></a><span class="w">           </span><span class="n">files</span>
 <a id="__codelineno-92-18" name="__codelineno-92-18"></a><span class="hll"><span class="w">       </span><span class="o">)</span>
 </span><a id="__codelineno-92-19" name="__codelineno-92-19"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-92-20" name="__codelineno-92-20"></a>
-<a id="__codelineno-92-21" name="__codelineno-92-21"></a><span class="hll"><span class="w">    </span><span class="c1">// Exécute l&#39;analyse</span>
+<a id="__codelineno-92-21" name="__codelineno-92-21"></a><span class="hll"><span class="w">    </span><span class="c1">// Exécute l'analyse</span>
 </span><a id="__codelineno-92-22" name="__codelineno-92-22"></a><span class="hll"><span class="w">    </span><span class="n">ANALYZE_READS</span><span class="o">(</span><span class="n">ch_samples</span><span class="o">)</span>
 </span><a id="__codelineno-92-23" name="__codelineno-92-23"></a>
 <a id="__codelineno-92-24" name="__codelineno-92-24"></a><span class="w">    </span><span class="nl">publish:</span>
@@ -6824,7 +6824,7 @@ Afin d'alimenter le contenu remappé au processus <code>ANALYZE_READS</code> (et
 <a id="__codelineno-92-27" name="__codelineno-92-27"></a>
 <a id="__codelineno-92-28" name="__codelineno-92-28"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-92-29" name="__codelineno-92-29"></a><span class="w">    </span><span class="n">analysis_results</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-92-30" name="__codelineno-92-30"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;${meta.id}&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-92-30" name="__codelineno-92-30"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"${meta.id}"</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-92-31" name="__codelineno-92-31"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-92-32" name="__codelineno-92-32"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -6860,13 +6860,13 @@ Afin d'alimenter le contenu remappé au processus <code>ANALYZE_READS</code> (et
 <span class="normal"><a href="#__codelineno-93-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-93-5" name="__codelineno-93-5"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-93-6" name="__codelineno-93-6"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-93-7" name="__codelineno-93-7"></a><span class="w">    </span><span class="c1">// Charge les fichiers avec channel.fromFilePairs</span>
-<a id="__codelineno-93-8" name="__codelineno-93-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-93-8" name="__codelineno-93-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R{1,2}_001.fastq.gz'</span><span class="o">)</span>
 <a id="__codelineno-93-9" name="__codelineno-93-9"></a><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">id</span><span class="o">,</span><span class="w">  </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-93-10" name="__codelineno-93-10"></a><span class="w">       </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">patient</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">)</span>
+<a id="__codelineno-93-10" name="__codelineno-93-10"></a><span class="w">       </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">patient</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">'_'</span><span class="o">)</span>
 <a id="__codelineno-93-11" name="__codelineno-93-11"></a><span class="w">       </span><span class="o">[</span>
 <a id="__codelineno-93-12" name="__codelineno-93-12"></a><span class="w">           </span><span class="o">[</span>
 <a id="__codelineno-93-13" name="__codelineno-93-13"></a><span class="w">               </span><span class="nl">id:</span><span class="w"> </span><span class="n">patient</span><span class="o">,</span>
-<a id="__codelineno-93-14" name="__codelineno-93-14"></a><span class="w">               </span><span class="nl">replicate:</span><span class="w"> </span><span class="n">replicate</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">&#39;rep&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">),</span>
+<a id="__codelineno-93-14" name="__codelineno-93-14"></a><span class="w">               </span><span class="nl">replicate:</span><span class="w"> </span><span class="n">replicate</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">'rep'</span><span class="o">,</span><span class="w"> </span><span class="s1">''</span><span class="o">),</span>
 <a id="__codelineno-93-15" name="__codelineno-93-15"></a><span class="w">               </span><span class="nl">type:</span><span class="w"> </span><span class="n">type</span>
 <a id="__codelineno-93-16" name="__codelineno-93-16"></a><span class="w">           </span><span class="o">],</span>
 <a id="__codelineno-93-17" name="__codelineno-93-17"></a><span class="w">           </span><span class="n">files</span>
@@ -6908,7 +6908,7 @@ Ici, nous utilisons <code>meta.id</code> pour organiser les résultats par patie
 <a id="__codelineno-95-10" name="__codelineno-95-10" href="#__codelineno-95-10"></a><span class="go">  /workspaces/training/side-quests/working_with_files/results</span>
 <a id="__codelineno-95-11" name="__codelineno-95-11" href="#__codelineno-95-11"></a>
 <a id="__codelineno-95-12" name="__codelineno-95-12" href="#__codelineno-95-12"></a><span class="go">  analysis_results:</span>
-<a id="__codelineno-95-13" name="__codelineno-95-13" href="#__codelineno-95-13"></a><span class="go">    - [{id: patientA, replicate: &#39;1&#39;, type: normal}, patientA/patientA_stats.txt]</span>
+<a id="__codelineno-95-13" name="__codelineno-95-13" href="#__codelineno-95-13"></a><span class="go">    - [{id: patientA, replicate: '1', type: normal}, patientA/patientA_stats.txt]</span>
 </code></pre></div>
 </details>
 <p>Les sorties sont publiées dans un répertoire <code>results</code>, alors jetez un œil là-dedans.</p>
@@ -6941,13 +6941,13 @@ Effectuez les modifications suivantes dans le workflow :</p>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-98-7">7</a></span>
 <span class="normal"><a href="#__codelineno-98-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-98-7" name="__codelineno-98-7"></a><span class="w">    </span><span class="c1">// Charge les fichiers avec channel.fromFilePairs</span>
-<a id="__codelineno-98-8" name="__codelineno-98-8"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/*_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-98-8" name="__codelineno-98-8"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/*_R{1,2}_001.fastq.gz'</span><span class="o">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-99-7">7</a></span>
 <span class="normal"><a href="#__codelineno-99-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-99-7" name="__codelineno-99-7"></a><span class="w">    </span><span class="c1">// Charge les fichiers avec channel.fromFilePairs</span>
-<a id="__codelineno-99-8" name="__codelineno-99-8"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
+<a id="__codelineno-99-8" name="__codelineno-99-8"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R{1,2}_001.fastq.gz'</span><span class="o">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -6969,14 +6969,14 @@ Effectuez les modifications suivantes dans le workflow :</p>
 <a id="__codelineno-101-10" name="__codelineno-101-10" href="#__codelineno-101-10"></a><span class="go">  /workspaces/training/side-quests/working_with_files/results</span>
 <a id="__codelineno-101-11" name="__codelineno-101-11" href="#__codelineno-101-11"></a>
 <a id="__codelineno-101-12" name="__codelineno-101-12" href="#__codelineno-101-12"></a><span class="go">  analysis_results:</span>
-<a id="__codelineno-101-13" name="__codelineno-101-13" href="#__codelineno-101-13"></a><span class="go">    - [{id: patientB, replicate: &#39;1&#39;, type: tumor}, patientB/patientB_stats.txt]</span>
-<a id="__codelineno-101-14" name="__codelineno-101-14" href="#__codelineno-101-14"></a><span class="go">    - [{id: patientA, replicate: &#39;2&#39;, type: tumor}, patientA/patientA_stats.txt]</span>
-<a id="__codelineno-101-15" name="__codelineno-101-15" href="#__codelineno-101-15"></a><span class="go">    - [{id: patientC, replicate: &#39;1&#39;, type: normal}, patientC/patientC_stats.txt]</span>
-<a id="__codelineno-101-16" name="__codelineno-101-16" href="#__codelineno-101-16"></a><span class="go">    - [{id: patientB, replicate: &#39;1&#39;, type: normal}, patientB/patientB_stats.txt]</span>
-<a id="__codelineno-101-17" name="__codelineno-101-17" href="#__codelineno-101-17"></a><span class="go">    - [{id: patientA, replicate: &#39;1&#39;, type: normal}, patientA/patientA_stats.txt]</span>
-<a id="__codelineno-101-18" name="__codelineno-101-18" href="#__codelineno-101-18"></a><span class="go">    - [{id: patientA, replicate: &#39;1&#39;, type: tumor}, patientA/patientA_stats.txt]</span>
-<a id="__codelineno-101-19" name="__codelineno-101-19" href="#__codelineno-101-19"></a><span class="go">    - [{id: patientA, replicate: &#39;2&#39;, type: normal}, patientA/patientA_stats.txt]</span>
-<a id="__codelineno-101-20" name="__codelineno-101-20" href="#__codelineno-101-20"></a><span class="go">    - [{id: patientC, replicate: &#39;1&#39;, type: tumor}, patientC/patientC_stats.txt]</span>
+<a id="__codelineno-101-13" name="__codelineno-101-13" href="#__codelineno-101-13"></a><span class="go">    - [{id: patientB, replicate: '1', type: tumor}, patientB/patientB_stats.txt]</span>
+<a id="__codelineno-101-14" name="__codelineno-101-14" href="#__codelineno-101-14"></a><span class="go">    - [{id: patientA, replicate: '2', type: tumor}, patientA/patientA_stats.txt]</span>
+<a id="__codelineno-101-15" name="__codelineno-101-15" href="#__codelineno-101-15"></a><span class="go">    - [{id: patientC, replicate: '1', type: normal}, patientC/patientC_stats.txt]</span>
+<a id="__codelineno-101-16" name="__codelineno-101-16" href="#__codelineno-101-16"></a><span class="go">    - [{id: patientB, replicate: '1', type: normal}, patientB/patientB_stats.txt]</span>
+<a id="__codelineno-101-17" name="__codelineno-101-17" href="#__codelineno-101-17"></a><span class="go">    - [{id: patientA, replicate: '1', type: normal}, patientA/patientA_stats.txt]</span>
+<a id="__codelineno-101-18" name="__codelineno-101-18" href="#__codelineno-101-18"></a><span class="go">    - [{id: patientA, replicate: '1', type: tumor}, patientA/patientA_stats.txt]</span>
+<a id="__codelineno-101-19" name="__codelineno-101-19" href="#__codelineno-101-19"></a><span class="go">    - [{id: patientA, replicate: '2', type: normal}, patientA/patientA_stats.txt]</span>
+<a id="__codelineno-101-20" name="__codelineno-101-20" href="#__codelineno-101-20"></a><span class="go">    - [{id: patientC, replicate: '1', type: tumor}, patientC/patientC_stats.txt]</span>
 </code></pre></div>
 </details>
 <p>Le répertoire de résultats devrait maintenant contenir des résultats pour toutes les données disponibles.</p>
@@ -7002,13 +7002,13 @@ Nous écrasons le fichier de sortie à chaque fois.</p>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><span class="filename">main.nf</span><pre><span></span><code><a id="__codelineno-103-1" name="__codelineno-103-1" href="#__codelineno-103-1"></a><span class="n">analysis_results</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-103-2" name="__codelineno-103-2" href="#__codelineno-103-2"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;${meta.type}/${meta.id}/${meta.replicate}&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-103-2" name="__codelineno-103-2" href="#__codelineno-103-2"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"${meta.type}/${meta.id}/${meta.replicate}"</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-103-3" name="__codelineno-103-3" href="#__codelineno-103-3"></a><span class="o">}</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><span class="filename">main.nf</span><pre><span></span><code><a id="__codelineno-104-1" name="__codelineno-104-1" href="#__codelineno-104-1"></a><span class="n">analysis_results</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-104-2" name="__codelineno-104-2" href="#__codelineno-104-2"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;${meta.id}&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-104-2" name="__codelineno-104-2" href="#__codelineno-104-2"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"${meta.id}"</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-104-3" name="__codelineno-104-3" href="#__codelineno-104-3"></a><span class="o">}</span>
 </code></pre></div>
 </div>
@@ -7033,14 +7033,14 @@ Nous écrasons le fichier de sortie à chaque fois.</p>
 <a id="__codelineno-106-10" name="__codelineno-106-10" href="#__codelineno-106-10"></a><span class="go">  /workspaces/training/side-quests/working_with_files/results</span>
 <a id="__codelineno-106-11" name="__codelineno-106-11" href="#__codelineno-106-11"></a>
 <a id="__codelineno-106-12" name="__codelineno-106-12" href="#__codelineno-106-12"></a><span class="go">  analysis_results:</span>
-<a id="__codelineno-106-13" name="__codelineno-106-13" href="#__codelineno-106-13"></a><span class="go">    - [{id: patientB, replicate: &#39;1&#39;, type: normal}, normal/patientB/1/patientB_stats.txt]</span>
-<a id="__codelineno-106-14" name="__codelineno-106-14" href="#__codelineno-106-14"></a><span class="go">    - [{id: patientB, replicate: &#39;1&#39;, type: tumor}, tumor/patientB/1/patientB_stats.txt]</span>
-<a id="__codelineno-106-15" name="__codelineno-106-15" href="#__codelineno-106-15"></a><span class="go">    - [{id: patientC, replicate: &#39;1&#39;, type: normal}, normal/patientC/1/patientC_stats.txt]</span>
-<a id="__codelineno-106-16" name="__codelineno-106-16" href="#__codelineno-106-16"></a><span class="go">    - [{id: patientA, replicate: &#39;1&#39;, type: tumor}, tumor/patientA/1/patientA_stats.txt]</span>
-<a id="__codelineno-106-17" name="__codelineno-106-17" href="#__codelineno-106-17"></a><span class="go">    - [{id: patientA, replicate: &#39;1&#39;, type: normal}, normal/patientA/1/patientA_stats.txt]</span>
-<a id="__codelineno-106-18" name="__codelineno-106-18" href="#__codelineno-106-18"></a><span class="go">    - [{id: patientA, replicate: &#39;2&#39;, type: normal}, normal/patientA/2/patientA_stats.txt]</span>
-<a id="__codelineno-106-19" name="__codelineno-106-19" href="#__codelineno-106-19"></a><span class="go">    - [{id: patientC, replicate: &#39;1&#39;, type: tumor}, tumor/patientC/1/patientC_stats.txt]</span>
-<a id="__codelineno-106-20" name="__codelineno-106-20" href="#__codelineno-106-20"></a><span class="go">    - [{id: patientA, replicate: &#39;2&#39;, type: tumor}, tumor/patientA/2/patientA_stats.txt]</span>
+<a id="__codelineno-106-13" name="__codelineno-106-13" href="#__codelineno-106-13"></a><span class="go">    - [{id: patientB, replicate: '1', type: normal}, normal/patientB/1/patientB_stats.txt]</span>
+<a id="__codelineno-106-14" name="__codelineno-106-14" href="#__codelineno-106-14"></a><span class="go">    - [{id: patientB, replicate: '1', type: tumor}, tumor/patientB/1/patientB_stats.txt]</span>
+<a id="__codelineno-106-15" name="__codelineno-106-15" href="#__codelineno-106-15"></a><span class="go">    - [{id: patientC, replicate: '1', type: normal}, normal/patientC/1/patientC_stats.txt]</span>
+<a id="__codelineno-106-16" name="__codelineno-106-16" href="#__codelineno-106-16"></a><span class="go">    - [{id: patientA, replicate: '1', type: tumor}, tumor/patientA/1/patientA_stats.txt]</span>
+<a id="__codelineno-106-17" name="__codelineno-106-17" href="#__codelineno-106-17"></a><span class="go">    - [{id: patientA, replicate: '1', type: normal}, normal/patientA/1/patientA_stats.txt]</span>
+<a id="__codelineno-106-18" name="__codelineno-106-18" href="#__codelineno-106-18"></a><span class="go">    - [{id: patientA, replicate: '2', type: normal}, normal/patientA/2/patientA_stats.txt]</span>
+<a id="__codelineno-106-19" name="__codelineno-106-19" href="#__codelineno-106-19"></a><span class="go">    - [{id: patientC, replicate: '1', type: tumor}, tumor/patientC/1/patientC_stats.txt]</span>
+<a id="__codelineno-106-20" name="__codelineno-106-20" href="#__codelineno-106-20"></a><span class="go">    - [{id: patientA, replicate: '2', type: tumor}, tumor/patientA/2/patientA_stats.txt]</span>
 </code></pre></div>
 </details>
 <p>Vérifiez maintenant le répertoire de résultats :</p>
@@ -7102,7 +7102,7 @@ Vous pouvez en apprendre davantage à ce sujet dans la quête secondaire <a href
 <ul>
 <li>Créer un objet Path avec <code>file()</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-108-1" name="__codelineno-108-1" href="#__codelineno-108-1"></a><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="o">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-108-1" name="__codelineno-108-1" href="#__codelineno-108-1"></a><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">'path/to/file.txt'</span><span class="o">)</span>
 </code></pre></div>
 <ul>
 <li>Obtenir les attributs du fichier</li>
@@ -7118,32 +7118,32 @@ Vous pouvez en apprendre davantage à ce sujet dans la quête secondaire <a href
 <ul>
 <li>Fichier local</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-110-1" name="__codelineno-110-1" href="#__codelineno-110-1"></a><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;path/to/file.txt&#39;</span><span class="o">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-110-1" name="__codelineno-110-1" href="#__codelineno-110-1"></a><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">'path/to/file.txt'</span><span class="o">)</span>
 </code></pre></div>
 <ul>
 <li>FTP</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-111-1" name="__codelineno-111-1" href="#__codelineno-111-1"></a><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;ftp://path/to/file.txt&#39;</span><span class="o">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-111-1" name="__codelineno-111-1" href="#__codelineno-111-1"></a><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">'ftp://path/to/file.txt'</span><span class="o">)</span>
 </code></pre></div>
 <ul>
 <li>HTTPS</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-112-1" name="__codelineno-112-1" href="#__codelineno-112-1"></a><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;https://path/to/file.txt&#39;</span><span class="o">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-112-1" name="__codelineno-112-1" href="#__codelineno-112-1"></a><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">'https://path/to/file.txt'</span><span class="o">)</span>
 </code></pre></div>
 <ul>
 <li>Amazon S3</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-113-1" name="__codelineno-113-1" href="#__codelineno-113-1"></a><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;s3://path/to/file.txt&#39;</span><span class="o">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-113-1" name="__codelineno-113-1" href="#__codelineno-113-1"></a><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">'s3://path/to/file.txt'</span><span class="o">)</span>
 </code></pre></div>
 <ul>
 <li>Azure Blob Storage</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-114-1" name="__codelineno-114-1" href="#__codelineno-114-1"></a><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;az://path/to/file.txt&#39;</span><span class="o">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-114-1" name="__codelineno-114-1" href="#__codelineno-114-1"></a><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">'az://path/to/file.txt'</span><span class="o">)</span>
 </code></pre></div>
 <ul>
 <li>Google Cloud Storage</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-115-1" name="__codelineno-115-1" href="#__codelineno-115-1"></a><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;gs://path/to/file.txt&#39;</span><span class="o">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-115-1" name="__codelineno-115-1" href="#__codelineno-115-1"></a><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">'gs://path/to/file.txt'</span><span class="o">)</span>
 </code></pre></div>
 </li>
 <li>
@@ -7151,32 +7151,32 @@ Vous pouvez en apprendre davantage à ce sujet dans la quête secondaire <a href
 <ul>
 <li>Créer un canal à partir d'un motif de fichier</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-116-1" name="__codelineno-116-1" href="#__codelineno-116-1"></a><span class="w"> </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/*.fastq.gz&#39;</span><span class="o">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-116-1" name="__codelineno-116-1" href="#__codelineno-116-1"></a><span class="w"> </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/*.fastq.gz'</span><span class="o">)</span>
 </code></pre></div>
 <ul>
 <li>Obtenir les attributs du fichier</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-117-1" name="__codelineno-117-1" href="#__codelineno-117-1"></a><span class="w"> </span><span class="n">ch_files</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-117-2" name="__codelineno-117-2" href="#__codelineno-117-2"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
-<a id="__codelineno-117-3" name="__codelineno-117-3" href="#__codelineno-117-3"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
-<a id="__codelineno-117-4" name="__codelineno-117-4" href="#__codelineno-117-4"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
-<a id="__codelineno-117-5" name="__codelineno-117-5" href="#__codelineno-117-5"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
-<a id="__codelineno-117-6" name="__codelineno-117-6" href="#__codelineno-117-6"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
+<a id="__codelineno-117-2" name="__codelineno-117-2" href="#__codelineno-117-2"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"File object class: ${myFile.class}"</span>
+<a id="__codelineno-117-3" name="__codelineno-117-3" href="#__codelineno-117-3"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"File name: ${myFile.name}"</span>
+<a id="__codelineno-117-4" name="__codelineno-117-4" href="#__codelineno-117-4"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Simple name: ${myFile.simpleName}"</span>
+<a id="__codelineno-117-5" name="__codelineno-117-5" href="#__codelineno-117-5"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Extension: ${myFile.extension}"</span>
+<a id="__codelineno-117-6" name="__codelineno-117-6" href="#__codelineno-117-6"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">"Parent directory: ${myFile.parent}"</span>
 <a id="__codelineno-117-7" name="__codelineno-117-7" href="#__codelineno-117-7"></a><span class="o">}</span>
 </code></pre></div>
 </li>
 <li>
 <p><strong>Extraction des métadonnées du patient à partir des noms de fichiers :</strong> Nous avons utilisé <code>tokenize()</code> et <code>replace()</code> pour extraire et structurer les métadonnées à partir des noms de fichiers, en les convertissant en maps organisées.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-118-1" name="__codelineno-118-1" href="#__codelineno-118-1"></a><span class="kt">def</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">.</span><span class="na">name</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-118-1" name="__codelineno-118-1" href="#__codelineno-118-1"></a><span class="kt">def</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">.</span><span class="na">name</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">'_'</span><span class="o">)</span>
 <a id="__codelineno-118-2" name="__codelineno-118-2" href="#__codelineno-118-2"></a><span class="kt">def</span><span class="w"> </span><span class="n">patientId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
-<a id="__codelineno-118-3" name="__codelineno-118-3" href="#__codelineno-118-3"></a><span class="kt">def</span><span class="w"> </span><span class="n">replicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="o">[</span><span class="mi">1</span><span class="o">].</span><span class="na">replace</span><span class="o">(</span><span class="s1">&#39;rep&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">)</span>
+<a id="__codelineno-118-3" name="__codelineno-118-3" href="#__codelineno-118-3"></a><span class="kt">def</span><span class="w"> </span><span class="n">replicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="o">[</span><span class="mi">1</span><span class="o">].</span><span class="na">replace</span><span class="o">(</span><span class="s1">'rep'</span><span class="o">,</span><span class="w"> </span><span class="s1">''</span><span class="o">)</span>
 <a id="__codelineno-118-4" name="__codelineno-118-4" href="#__codelineno-118-4"></a><span class="kt">def</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span>
-<a id="__codelineno-118-5" name="__codelineno-118-5" href="#__codelineno-118-5"></a><span class="kt">def</span><span class="w"> </span><span class="n">readNum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="o">[</span><span class="mi">3</span><span class="o">].</span><span class="na">replace</span><span class="o">(</span><span class="s1">&#39;R&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">)</span>
+<a id="__codelineno-118-5" name="__codelineno-118-5" href="#__codelineno-118-5"></a><span class="kt">def</span><span class="w"> </span><span class="n">readNum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="o">[</span><span class="mi">3</span><span class="o">].</span><span class="na">replace</span><span class="o">(</span><span class="s1">'R'</span><span class="o">,</span><span class="w"> </span><span class="s1">''</span><span class="o">)</span>
 </code></pre></div>
 </li>
 <li>
 <p><strong>Simplification avec channel.fromFilePairs :</strong> Nous avons utilisé <code>channel.fromFilePairs()</code> pour apparier automatiquement les fichiers liés et extraire les métadonnées à partir des identifiants des fichiers appariés.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-119-1" name="__codelineno-119-1" href="#__codelineno-119-1"></a><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/*_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-119-1" name="__codelineno-119-1" href="#__codelineno-119-1"></a><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/*_R{1,2}_001.fastq.gz'</span><span class="o">)</span>
 </code></pre></div>
 </li>
 <li>
@@ -7184,13 +7184,13 @@ Vous pouvez en apprendre davantage à ce sujet dans la quête secondaire <a href
 <ul>
 <li>Associer une meta map aux entrées du processus</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-120-1" name="__codelineno-120-1" href="#__codelineno-120-1"></a><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R{1,2}_001.fastq.gz&#39;</span><span class="o">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-120-1" name="__codelineno-120-1" href="#__codelineno-120-1"></a><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'data/patientA_rep1_normal_R{1,2}_001.fastq.gz'</span><span class="o">)</span>
 <a id="__codelineno-120-2" name="__codelineno-120-2" href="#__codelineno-120-2"></a><span class="n">ch_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_files</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">id</span><span class="o">,</span><span class="w">  </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-120-3" name="__codelineno-120-3" href="#__codelineno-120-3"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">patient</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">)</span>
+<a id="__codelineno-120-3" name="__codelineno-120-3" href="#__codelineno-120-3"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">patient</span><span class="o">,</span><span class="w"> </span><span class="n">replicate</span><span class="o">,</span><span class="w"> </span><span class="n">type</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">'_'</span><span class="o">)</span>
 <a id="__codelineno-120-4" name="__codelineno-120-4" href="#__codelineno-120-4"></a><span class="w">    </span><span class="n">tuple</span><span class="o">(</span>
 <a id="__codelineno-120-5" name="__codelineno-120-5" href="#__codelineno-120-5"></a><span class="w">        </span><span class="o">[</span>
 <a id="__codelineno-120-6" name="__codelineno-120-6" href="#__codelineno-120-6"></a><span class="w">            </span><span class="nl">id:</span><span class="w"> </span><span class="n">patient</span><span class="o">,</span>
-<a id="__codelineno-120-7" name="__codelineno-120-7" href="#__codelineno-120-7"></a><span class="w">            </span><span class="nl">replicate:</span><span class="w"> </span><span class="n">replicate</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">&#39;rep&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">),</span>
+<a id="__codelineno-120-7" name="__codelineno-120-7" href="#__codelineno-120-7"></a><span class="w">            </span><span class="nl">replicate:</span><span class="w"> </span><span class="n">replicate</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s1">'rep'</span><span class="o">,</span><span class="w"> </span><span class="s1">''</span><span class="o">),</span>
 <a id="__codelineno-120-8" name="__codelineno-120-8" href="#__codelineno-120-8"></a><span class="w">            </span><span class="nl">type:</span><span class="w"> </span><span class="n">type</span>
 <a id="__codelineno-120-9" name="__codelineno-120-9" href="#__codelineno-120-9"></a><span class="w">        </span><span class="o">],</span>
 <a id="__codelineno-120-10" name="__codelineno-120-10" href="#__codelineno-120-10"></a><span class="w">        </span><span class="n">files</span>
@@ -7204,7 +7204,7 @@ Vous pouvez en apprendre davantage à ce sujet dans la quête secondaire <a href
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-121-1" name="__codelineno-121-1" href="#__codelineno-121-1"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-121-2" name="__codelineno-121-2" href="#__codelineno-121-2"></a><span class="w">    </span><span class="n">analysis_results</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-121-3" name="__codelineno-121-3" href="#__codelineno-121-3"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;${meta.type}/${meta.id}/${meta.replicate}&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-121-3" name="__codelineno-121-3" href="#__codelineno-121-3"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"${meta.type}/${meta.id}/${meta.replicate}"</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-121-4" name="__codelineno-121-4" href="#__codelineno-121-4"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-121-5" name="__codelineno-121-5" href="#__codelineno-121-5"></a><span class="o">}</span>
 </code></pre></div>
@@ -7515,9 +7515,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -7756,7 +7757,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -8435,7 +8436,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -8727,7 +8728,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -8899,7 +8900,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -8909,7 +8910,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

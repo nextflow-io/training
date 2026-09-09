@@ -4545,7 +4545,7 @@ L'exemple normalment consisteix a imprimir la frase "Hello, World!" al dispositi
 </div>
 <h3 id="11-fer-que-el-terminal-digui-hola">1.1. Fer que el terminal digui hola<a class="headerlink" href="#11-fer-que-el-terminal-digui-hola" title="Permanent link">&para;</a></h3>
 <p>Executeu la comanda següent al vostre terminal.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">'Hello World!'</span>
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
@@ -4555,7 +4555,7 @@ L'exemple normalment consisteix a imprimir la frase "Hello, World!" al dispositi
 <p>Això mostra el text 'Hello World' directament al terminal.</p>
 <h3 id="12-escriure-la-sortida-a-un-fitxer">1.2. Escriure la sortida a un fitxer<a class="headerlink" href="#12-escriure-la-sortida-a-un-fitxer" title="Permanent link">&para;</a></h3>
 <p>Executar pipelines implica principalment llegir dades de fitxers i escriure resultats a altres fitxers, així que modifiquem la comanda per escriure la sortida de text a un fitxer per fer l'exemple una mica més rellevant.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>output.txt
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">'Hello World!'</span><span class="w"> </span>&gt;<span class="w"> </span>output.txt
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
@@ -4582,7 +4582,7 @@ Podeu obrir-lo a l'explorador de fitxers o des de la línia de comandes utilitza
 <p>No mirarem el codi encara; primer vegem com és executar-lo.</p>
 <h3 id="21-llancar-el-workflow-i-monitoritzar-lexecucio">2.1. Llançar el workflow i monitoritzar l'execució<a class="headerlink" href="#21-llancar-el-workflow-i-monitoritzar-lexecucio" title="Permanent link">&para;</a></h3>
 <p>Al terminal, executeu la comanda següent.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="m">1</span>-hello.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="m">1</span>-hello.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">'Hello World!'</span>
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
@@ -4606,7 +4606,7 @@ Podeu obrir-lo a l'explorador de fitxers o des de la línia de comandes utilitza
 <p>Si ha fallat amb un error que s'assembla a això:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Parameter `input` was specified on the command line or params file but is not declared in the script or config
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>-- Check script &#39;1-hello.nf&#39; at line: 23 or see &#39;.nextflow.log&#39; file for more details
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>-- Check script '1-hello.nf' at line: 23 or see '.nextflow.log' file for more details
 </code></pre></div>
 <p>Probablement esteu utilitzant l'analitzador de llenguatge v1 de Nextflow més antic.
 Això es va esmentar al començament del curs, però potser us ho heu perdut.
@@ -4641,7 +4641,7 @@ Per canviar on es publiquen els vostres fitxers, utilitzeu la bandera CLI <code>
 Això és perquè <code>--input</code> és un <em>paràmetre</em> del pipeline i <code>-output-dir</code> és una bandera CLI bàsica de Nextflow.
 Més sobre això més endavant.</p>
 </div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="m">1</span>-hello.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span><span class="w"> </span>-output-dir<span class="w"> </span>hello_results
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="m">1</span>-hello.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">'Hello World!'</span><span class="w"> </span>-output-dir<span class="w"> </span>hello_results
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
@@ -4740,7 +4740,7 @@ Si l'obriu, trobareu la salutació <code>Hello World!</code> de nou.</p>
 </ul>
 <p>El fitxer <code>.command.sh</code> és especialment útil perquè us mostra la comanda principal que Nextflow va executar, sense incloure tota la comptabilitat i configuració de tasca/entorn.</p>
 <div class="highlight"><span class="filename">work/a3/1e153543b0a7f9d2c4735ddb4ab231/.command.sh</span><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="gp">#</span>!/bin/bash<span class="w"> </span>-ue
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="go">echo &#39;Hello World!&#39; &gt; output.txt</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="go">echo 'Hello World!' &gt; output.txt</span>
 </code></pre></div>
 <p>Així que això confirma que el workflow va compondre la mateixa comanda que vam executar directament a la línia de comandes abans.</p>
 <p>Quan alguna cosa va malament i necessiteu solucionar problemes sobre què ha passat, pot ser útil mirar l'script <code>command.sh</code> per comprovar exactament quina comanda va compondre Nextflow basant-se en les instruccions del workflow, interpolació de variables, etc.</p>
@@ -4868,7 +4868,7 @@ Ara que hem vist què fa, obrim la caixa i mirem a dins.</p>
 <span class="normal"><a href="#__codelineno-23-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2"></a>
 <a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="cm">/*</span>
-<a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="cm">* Use echo to print &#39;Hello World!&#39; to a file</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="cm">* Use echo to print 'Hello World!' to a file</span>
 <a id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="cm">*/</span>
 <a id="__codelineno-23-6" name="__codelineno-23-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-23-7" name="__codelineno-23-7"></a>
@@ -4876,12 +4876,12 @@ Ara que hem vist què fa, obrim la caixa i mirem a dins.</p>
 <a id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
 <a id="__codelineno-23-10" name="__codelineno-23-10"></a>
 <a id="__codelineno-23-11" name="__codelineno-23-11"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
+<a id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">'output.txt'</span>
 <a id="__codelineno-23-13" name="__codelineno-23-13"></a>
 <a id="__codelineno-23-14" name="__codelineno-23-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-23-15" name="__codelineno-23-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-23-16" name="__codelineno-23-16"></a><span class="s2">    echo &#39;${greeting}&#39; &gt; output.txt</span>
-<a id="__codelineno-23-17" name="__codelineno-23-17"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-23-15" name="__codelineno-23-15"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-23-16" name="__codelineno-23-16"></a><span class="s2">    echo '${greeting}' &gt; output.txt</span>
+<a id="__codelineno-23-17" name="__codelineno-23-17"></a><span class="s2">    """</span>
 <a id="__codelineno-23-18" name="__codelineno-23-18"></a><span class="o">}</span>
 <a id="__codelineno-23-19" name="__codelineno-23-19"></a>
 <a id="__codelineno-23-20" name="__codelineno-23-20"></a><span class="cm">/*</span>
@@ -4903,8 +4903,8 @@ Ara que hem vist què fa, obrim la caixa i mirem a dins.</p>
 <a id="__codelineno-23-36" name="__codelineno-23-36"></a>
 <a id="__codelineno-23-37" name="__codelineno-23-37"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-23-38" name="__codelineno-23-38"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-23-39" name="__codelineno-23-39"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;1-hello&#39;</span>
-<a id="__codelineno-23-40" name="__codelineno-23-40"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-23-39" name="__codelineno-23-39"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'1-hello'</span>
+<a id="__codelineno-23-40" name="__codelineno-23-40"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-23-41" name="__codelineno-23-41"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-23-42" name="__codelineno-23-42"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -4940,12 +4940,12 @@ El cos del procés ha de contenir un bloc script que especifica la comanda a exe
 <a id="__codelineno-24-9" name="__codelineno-24-9"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
 <a id="__codelineno-24-10" name="__codelineno-24-10"></a>
 <a id="__codelineno-24-11" name="__codelineno-24-11"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-24-12" name="__codelineno-24-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">'output.txt'</span>
 <a id="__codelineno-24-13" name="__codelineno-24-13"></a>
 <a id="__codelineno-24-14" name="__codelineno-24-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-24-15" name="__codelineno-24-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-24-16" name="__codelineno-24-16"></a><span class="s2">    echo &#39;${greeting}&#39; &gt; output.txt</span>
-<a id="__codelineno-24-17" name="__codelineno-24-17"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-24-15" name="__codelineno-24-15"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-24-16" name="__codelineno-24-16"></a><span class="s2">    echo '${greeting}' &gt; output.txt</span>
+<a id="__codelineno-24-17" name="__codelineno-24-17"></a><span class="s2">    """</span>
 <a id="__codelineno-24-18" name="__codelineno-24-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Aquí tenim un <strong>process</strong> anomenat <code>sayHello</code> que pren una variable d'<strong>input</strong> anomenada <code>greeting</code> i escriu la seva <strong>output</strong> a un fitxer anomenat <code>output.txt</code>.</p>
@@ -5023,8 +5023,8 @@ Aquesta és una meitat del sistema de gestió de sortides; l'altra meitat és el
 <span class="normal"><a href="#__codelineno-27-41">41</a></span>
 <span class="normal"><a href="#__codelineno-27-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-37" name="__codelineno-27-37"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-27-38" name="__codelineno-27-38"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-27-39" name="__codelineno-27-39"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;1-hello&#39;</span>
-<a id="__codelineno-27-40" name="__codelineno-27-40"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-27-39" name="__codelineno-27-39"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'1-hello'</span>
+<a id="__codelineno-27-40" name="__codelineno-27-40"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-27-41" name="__codelineno-27-41"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-27-42" name="__codelineno-27-42"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5051,15 +5051,15 @@ També veureu que quan un workflow genera múltiples sortides, cadascuna es llis
 <span class="normal"><a href="#__codelineno-28-11">11</a></span>
 <span class="normal"><a href="#__codelineno-28-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-28-2" name="__codelineno-28-2"></a>
-<a id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="hll"><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results/1-hello&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="hll"><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">'results/1-hello'</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">'copy'</span>
 </span><a id="__codelineno-28-4" name="__codelineno-28-4"></a>
 <a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">'output.txt'</span>
 <a id="__codelineno-28-7" name="__codelineno-28-7"></a>
 <a id="__codelineno-28-8" name="__codelineno-28-8"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-28-9" name="__codelineno-28-9"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-28-10" name="__codelineno-28-10"></a><span class="s2">    echo &#39;Hello World!&#39; &gt; output.txt</span>
-<a id="__codelineno-28-11" name="__codelineno-28-11"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-28-9" name="__codelineno-28-9"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-28-10" name="__codelineno-28-10"></a><span class="s2">    echo 'Hello World!' &gt; output.txt</span>
+<a id="__codelineno-28-11" name="__codelineno-28-11"></a><span class="s2">    """</span>
 <a id="__codelineno-28-12" name="__codelineno-28-12"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Tanmateix, no recomanem utilitzar això en cap treball nou ja que eventualment no es permetrà en versions futures del llenguatge Nextflow.</p>
@@ -5083,7 +5083,7 @@ Això significa que Nextflow només executarà processos que hàgiu afegit o mod
 <li>Si esteu executant un pipeline en producció i alguna cosa va malament, en molts casos podeu solucionar el problema i tornar a llançar el pipeline, i es reprendrà l'execució des del punt de fallada, cosa que us pot estalviar molt de temps i càlcul.</li>
 </ul>
 <p>Per utilitzar-lo, simplement afegiu <code>-resume</code> a la vostra comanda i executeu-la:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="m">1</span>-hello.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span><span class="w"> </span>-resume
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="m">1</span>-hello.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">'Hello World!'</span><span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
@@ -5127,9 +5127,9 @@ Nextflow literalment us està assenyalant l'execució anterior i dient "Ja ho va
 <span class="normal"><a href="#__codelineno-31-2">2</a></span>
 <span class="normal"><a href="#__codelineno-31-3">3</a></span>
 <span class="normal"><a href="#__codelineno-31-4">4</a></span>
-<span class="normal"><a href="#__codelineno-31-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a>2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input &#39;Hello World&#39;
+<span class="normal"><a href="#__codelineno-31-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a>2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input 'Hello World'
 <a id="__codelineno-31-2" name="__codelineno-31-2"></a>2025-07-04 19:27:20	2.9s	spontaneous_blackwell	OK	3539118582ccde68dde471cc2c66295c	59a5db23-d83c-4c02-a54e-37ddb73a337e	nextflow run 1-hello.nf --input Bonjour
-<a id="__codelineno-31-3" name="__codelineno-31-3"></a>2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run 1-hello.nf --input &#39;Dobry den&#39;
+<a id="__codelineno-31-3" name="__codelineno-31-3"></a>2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run 1-hello.nf --input 'Dobry den'
 <a id="__codelineno-31-4" name="__codelineno-31-4"></a>2025-07-04 19:27:45	2.4s	backstabbing_swartz	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa
 <a id="__codelineno-31-5" name="__codelineno-31-5"></a>2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
 </code></pre></div></td></tr></table></div>
@@ -5146,9 +5146,9 @@ Nextflow literalment us està assenyalant l'execució anterior i dient "Ja ho va
 <span class="normal"><a href="#__codelineno-33-4">4</a></span>
 <span class="normal"><a href="#__codelineno-33-5">5</a></span>
 <span class="normal"><a href="#__codelineno-33-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="go">TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND</span>
-<a id="__codelineno-33-2" name="__codelineno-33-2"></a><span class="go">2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run 1-hello.nf --input &#39;Hello World&#39;</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2"></a><span class="go">2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run 1-hello.nf --input 'Hello World'</span>
 <a id="__codelineno-33-3" name="__codelineno-33-3"></a><span class="go">2025-07-04 19:27:20     2.9s            spontaneous_blackwell   OK       3539118582     59a5db23-d83c-4c02-a54e-37ddb73a337e    nextflow run 1-hello.nf --input Bonjour</span>
-<a id="__codelineno-33-4" name="__codelineno-33-4"></a><span class="go">2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run 1-hello.nf --input &#39;Dobry den&#39;</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4"></a><span class="go">2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run 1-hello.nf --input 'Dobry den'</span>
 <a id="__codelineno-33-5" name="__codelineno-33-5"></a><span class="go">2025-07-04 19:27:45     2.4s            backstabbing_swartz     OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa</span>
 <a id="__codelineno-33-6" name="__codelineno-33-6"></a><span class="go">2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa -resume</span>
 </code></pre></div></td></tr></table></div>
@@ -5708,9 +5708,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -5949,7 +5950,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -6628,7 +6629,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -6920,7 +6921,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -7092,7 +7093,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -7102,7 +7103,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

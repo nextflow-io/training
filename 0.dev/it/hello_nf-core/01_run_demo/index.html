@@ -4652,7 +4652,7 @@ Poiché <code>.repos</code> è una directory nascosta, un semplice <code>tree -L
 <p>Non esamineremo il codice in dettaglio, ma diamo una rapida occhiata per farci un'idea di come appare l'organizzazione generale.</p>
 <p>Per rendere più facile sfogliare il codice sorgente della pipeline, create un collegamento simbolico che punta alla copia estratta della pipeline:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>pipelines/nf-core
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>ln<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$NXF_HOME</span>/assets/.repos/nf-core/demo/clones/*/<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span>pipelines/nf-core/demo
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>ln<span class="w"> </span>-s<span class="w"> </span><span class="s2">"</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$NXF_HOME</span>/assets/.repos/nf-core/demo/clones/*/<span class="k">)</span><span class="s2">"</span><span class="w"> </span>pipelines/nf-core/demo
 </code></pre></div>
 <p>Questo crea una scorciatoia che vi permette di esplorare il codice con <code>tree -L 2 pipelines/nf-core/demo</code> o di aprire i file direttamente.</p>
 <h4 id="125-panoramica-dellorganizzazione-del-codice">1.2.5. Panoramica dell'organizzazione del codice<a class="headerlink" href="#125-panoramica-dellorganizzazione-del-codice" title="Permanent link">&para;</a></h4>
@@ -4764,17 +4764,17 @@ Potete trovarlo localmente all'interno del codice sorgente della pipeline scaric
 <a id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="w">    </span><span class="n">resourceLimits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
 <a id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="w">        </span><span class="nl">cpus:</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span>
-<a id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="w">        </span><span class="nl">memory:</span><span class="w"> </span><span class="s1">&#39;4.GB&#39;</span><span class="o">,</span>
-<a id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="w">        </span><span class="nl">time:</span><span class="w"> </span><span class="s1">&#39;1.h&#39;</span><span class="o">,</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="w">        </span><span class="nl">memory:</span><span class="w"> </span><span class="s1">'4.GB'</span><span class="o">,</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="w">        </span><span class="nl">time:</span><span class="w"> </span><span class="s1">'1.h'</span><span class="o">,</span>
 <a id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="w">    </span><span class="o">]</span>
 <a id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="o">}</span>
 <a id="__codelineno-11-20" name="__codelineno-11-20"></a>
 <a id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-11-22" name="__codelineno-11-22"></a><span class="w">    </span><span class="n">config_profile_name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Test profile&#39;</span>
-<a id="__codelineno-11-23" name="__codelineno-11-23"></a><span class="w">    </span><span class="n">config_profile_description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Minimal test dataset to check pipeline function&#39;</span>
+<a id="__codelineno-11-22" name="__codelineno-11-22"></a><span class="w">    </span><span class="n">config_profile_name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s1">'Test profile'</span>
+<a id="__codelineno-11-23" name="__codelineno-11-23"></a><span class="w">    </span><span class="n">config_profile_description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Minimal test dataset to check pipeline function'</span>
 <a id="__codelineno-11-24" name="__codelineno-11-24"></a>
 <a id="__codelineno-11-25" name="__codelineno-11-25"></a><span class="w">    </span><span class="c1">// Dati di input</span>
-<a id="__codelineno-11-26" name="__codelineno-11-26"></a><span class="hll"><span class="w">    </span><span class="n">input</span><span class="w">                      </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv&#39;</span>
+<a id="__codelineno-11-26" name="__codelineno-11-26"></a><span class="hll"><span class="w">    </span><span class="n">input</span><span class="w">                      </span><span class="o">=</span><span class="w"> </span><span class="s1">'https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'</span>
 </span><a id="__codelineno-11-27" name="__codelineno-11-27"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Noterete subito che il blocco di commenti in alto include un esempio di utilizzo che mostra come eseguire la pipeline con questo profilo di test.</p>
@@ -4815,10 +4815,10 @@ Qui useremo Docker per il sistema di container e <code>demo-results</code>, risp
 <a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
 <a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="go">------------------------------------------------------</span>
 <a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="go">                                        ,--./,-.</span>
-<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="go">        ___     __   __   __   ___     /,-._.--~&#39;</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="go">        ___     __   __   __   ___     /,-._.--~'</span>
 <a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="go">  |\ | |__  __ /  ` /  \ |__) |__         }  {</span>
 <a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="go">  | \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
-<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="go">                                        `._,._,&#39;</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="go">                                        `._,._,'</span>
 <a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="go">  nf-core/demo 1.2.0</span>
 <a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="go">------------------------------------------------------</span>
 <a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>
@@ -5064,10 +5064,10 @@ A tal fine, Nextflow supporta diversi modi per controllare la configurazione del
 <a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>
 <a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="go">------------------------------------------------------</span>
 <a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="go">                                        ,--./,-.</span>
-<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="go">        ___     __   __   __   ___     /,-._.--~&#39;</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="go">        ___     __   __   __   ___     /,-._.--~'</span>
 <a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="go">  |\ | |__  __ /  ` /  \ |__) |__         }  {</span>
 <a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="go">  | \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
-<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="go">                                        `._,._,&#39;</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="go">                                        `._,._,'</span>
 <a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="go">  nf-core/demo 1.2.0</span>
 <a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="go">------------------------------------------------------</span>
 <a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a><span class="go">Typical pipeline command:</span>
@@ -5132,10 +5132,10 @@ Nella vostra directory di lavoro è fornito un file di parametri chiamato <code>
 <a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>
 <a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="go">------------------------------------------------------</span>
 <a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="go">                                        ,--./,-.</span>
-<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="go">        ___     __   __   __   ___     /,-._.--~&#39;</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="go">        ___     __   __   __   ___     /,-._.--~'</span>
 <a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="go">  |\ | |__  __ /  ` /  \ |__) |__         }  {</span>
 <a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="go">  | \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
-<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a><span class="go">                                        `._,._,&#39;</span>
+<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a><span class="go">                                        `._,._,'</span>
 <a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a><span class="go">  nf-core/demo 1.2.0</span>
 <a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a><span class="go">------------------------------------------------------</span>
 <a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a>
@@ -5207,7 +5207,7 @@ Ciò significa che Nextflow può verificare che ogni parametro passato esista e 
 <p>Tratteremo questo in maggior dettaglio nella <a href="../05_input_validation/">Parte 5: Input Validation</a>, ma potete già vederlo in azione fornendo alla pipeline demo un input di parametri non valido.</p>
 <h5 id="3131-parametri-non-riconosciuti">3.1.3.1. Parametri non riconosciuti<a class="headerlink" href="#3131-parametri-non-riconosciuti" title="Permanent link">&para;</a></h5>
 <p>Provate a passare un parametro che non esiste:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/demo<span class="w"> </span>-profile<span class="w"> </span>docker,test<span class="w"> </span>--outdir<span class="w"> </span>demo-results<span class="w"> </span>--foobar<span class="w"> </span><span class="s2">&quot;invalid&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/demo<span class="w"> </span>-profile<span class="w"> </span>docker,test<span class="w"> </span>--outdir<span class="w"> </span>demo-results<span class="w"> </span>--foobar<span class="w"> </span><span class="s2">"invalid"</span>
 </code></pre></div>
 <p>L'output della console include un avviso:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="go">WARN: The following invalid input values have been detected:</span>
@@ -5223,7 +5223,7 @@ Il parametro <code>--skip_trim</code> è un flag boolean, quindi passare un valo
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="go">ERROR ~ Validation of pipeline parameters failed!</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>
-<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="go"> -- Check &#39;.nextflow.log&#39; file for details</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="go"> -- Check '.nextflow.log' file for details</span>
 <a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="go">The following invalid input values have been detected:</span>
 <a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>
 <a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="go">* --skip_trim (yes): Value is [string] but should be [boolean]</span>
@@ -5240,36 +5240,36 @@ Questo è definito in un file di schema (<code>assets/schema_input.json</code>) 
 <details class="abstract">
 <summary>File di schema per gli input</summary>
 <div class="highlight"><span class="filename">assets/schema_input.json</span><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="p">{</span>
-<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">    </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://json-schema.org/draft/2020-12/schema&quot;</span><span class="p">,</span>
-<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/nf-core/demo/master/assets/schema_input.json&quot;</span><span class="p">,</span>
-<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;nf-core/demo pipeline - params.input schema&quot;</span><span class="p">,</span>
-<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Schema for the file provided with params.input&quot;</span><span class="p">,</span>
-<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
-<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a><span class="w">    </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
-<a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="w">        </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="w">            </span><span class="nt">&quot;sample&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a><span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a><span class="w">                </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^\\S+$&quot;</span><span class="p">,</span>
-<a id="__codelineno-31-13" name="__codelineno-31-13" href="#__codelineno-31-13"></a><span class="w">                </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sample name must be provided and cannot contain spaces&quot;</span><span class="p">,</span>
-<a id="__codelineno-31-14" name="__codelineno-31-14" href="#__codelineno-31-14"></a><span class="w">                </span><span class="nt">&quot;meta&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">    </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://json-schema.org/draft/2020-12/schema"</span><span class="p">,</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">    </span><span class="nt">"$id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/nf-core/demo/master/assets/schema_input.json"</span><span class="p">,</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nf-core/demo pipeline - params.input schema"</span><span class="p">,</span>
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="w">    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Schema for the file provided with params.input"</span><span class="p">,</span>
+<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span>
+<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a><span class="w">    </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span>
+<a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="w">        </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="w">            </span><span class="nt">"sample"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a><span class="w">                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a><span class="w">                </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^\\S+$"</span><span class="p">,</span>
+<a id="__codelineno-31-13" name="__codelineno-31-13" href="#__codelineno-31-13"></a><span class="w">                </span><span class="nt">"errorMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sample name must be provided and cannot contain spaces"</span><span class="p">,</span>
+<a id="__codelineno-31-14" name="__codelineno-31-14" href="#__codelineno-31-14"></a><span class="w">                </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"id"</span><span class="p">]</span>
 <a id="__codelineno-31-15" name="__codelineno-31-15" href="#__codelineno-31-15"></a><span class="w">            </span><span class="p">},</span>
-<a id="__codelineno-31-16" name="__codelineno-31-16" href="#__codelineno-31-16"></a><span class="w">            </span><span class="nt">&quot;fastq_1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-31-17" name="__codelineno-31-17" href="#__codelineno-31-17"></a><span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<a id="__codelineno-31-18" name="__codelineno-31-18" href="#__codelineno-31-18"></a><span class="w">                </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file-path&quot;</span><span class="p">,</span>
-<a id="__codelineno-31-19" name="__codelineno-31-19" href="#__codelineno-31-19"></a><span class="w">                </span><span class="nt">&quot;exists&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<a id="__codelineno-31-20" name="__codelineno-31-20" href="#__codelineno-31-20"></a><span class="w">                </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$&quot;</span><span class="p">,</span>
-<a id="__codelineno-31-21" name="__codelineno-31-21" href="#__codelineno-31-21"></a><span class="w">                </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FastQ file for reads 1 must be provided, cannot contain spaces and must have extension &#39;.fq.gz&#39; or &#39;.fastq.gz&#39;&quot;</span>
+<a id="__codelineno-31-16" name="__codelineno-31-16" href="#__codelineno-31-16"></a><span class="w">            </span><span class="nt">"fastq_1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-31-17" name="__codelineno-31-17" href="#__codelineno-31-17"></a><span class="w">                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<a id="__codelineno-31-18" name="__codelineno-31-18" href="#__codelineno-31-18"></a><span class="w">                </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file-path"</span><span class="p">,</span>
+<a id="__codelineno-31-19" name="__codelineno-31-19" href="#__codelineno-31-19"></a><span class="w">                </span><span class="nt">"exists"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-31-20" name="__codelineno-31-20" href="#__codelineno-31-20"></a><span class="w">                </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$"</span><span class="p">,</span>
+<a id="__codelineno-31-21" name="__codelineno-31-21" href="#__codelineno-31-21"></a><span class="w">                </span><span class="nt">"errorMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"</span>
 <a id="__codelineno-31-22" name="__codelineno-31-22" href="#__codelineno-31-22"></a><span class="w">            </span><span class="p">},</span>
-<a id="__codelineno-31-23" name="__codelineno-31-23" href="#__codelineno-31-23"></a><span class="w">            </span><span class="nt">&quot;fastq_2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-31-24" name="__codelineno-31-24" href="#__codelineno-31-24"></a><span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<a id="__codelineno-31-25" name="__codelineno-31-25" href="#__codelineno-31-25"></a><span class="w">                </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file-path&quot;</span><span class="p">,</span>
-<a id="__codelineno-31-26" name="__codelineno-31-26" href="#__codelineno-31-26"></a><span class="w">                </span><span class="nt">&quot;exists&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<a id="__codelineno-31-27" name="__codelineno-31-27" href="#__codelineno-31-27"></a><span class="w">                </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$&quot;</span><span class="p">,</span>
-<a id="__codelineno-31-28" name="__codelineno-31-28" href="#__codelineno-31-28"></a><span class="w">                </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FastQ file for reads 2 cannot contain spaces and must have extension &#39;.fq.gz&#39; or &#39;.fastq.gz&#39;&quot;</span>
+<a id="__codelineno-31-23" name="__codelineno-31-23" href="#__codelineno-31-23"></a><span class="w">            </span><span class="nt">"fastq_2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-31-24" name="__codelineno-31-24" href="#__codelineno-31-24"></a><span class="w">                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<a id="__codelineno-31-25" name="__codelineno-31-25" href="#__codelineno-31-25"></a><span class="w">                </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file-path"</span><span class="p">,</span>
+<a id="__codelineno-31-26" name="__codelineno-31-26" href="#__codelineno-31-26"></a><span class="w">                </span><span class="nt">"exists"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-31-27" name="__codelineno-31-27" href="#__codelineno-31-27"></a><span class="w">                </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$"</span><span class="p">,</span>
+<a id="__codelineno-31-28" name="__codelineno-31-28" href="#__codelineno-31-28"></a><span class="w">                </span><span class="nt">"errorMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"</span>
 <a id="__codelineno-31-29" name="__codelineno-31-29" href="#__codelineno-31-29"></a><span class="w">            </span><span class="p">}</span>
 <a id="__codelineno-31-30" name="__codelineno-31-30" href="#__codelineno-31-30"></a><span class="w">        </span><span class="p">},</span>
-<a id="__codelineno-31-31" name="__codelineno-31-31" href="#__codelineno-31-31"></a><span class="w">        </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;fastq_1&quot;</span><span class="p">]</span>
+<a id="__codelineno-31-31" name="__codelineno-31-31" href="#__codelineno-31-31"></a><span class="w">        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"sample"</span><span class="p">,</span><span class="w"> </span><span class="s2">"fastq_1"</span><span class="p">]</span>
 <a id="__codelineno-31-32" name="__codelineno-31-32" href="#__codelineno-31-32"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-31-33" name="__codelineno-31-33" href="#__codelineno-31-33"></a><span class="p">}</span>
 </code></pre></div>
@@ -5286,13 +5286,13 @@ I percorsi dei file vengono validati per esistenza e pattern dell'estensione.</p
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="go">ERROR ~ Validation of pipeline parameters failed!</span>
 <a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>
-<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="go"> -- Check &#39;.nextflow.log&#39; file for details</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="go"> -- Check '.nextflow.log' file for details</span>
 <a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="go">The following invalid input values have been detected:</span>
 <a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a>
 <a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a><span class="go">* --input (malformed_samplesheet.csv): Validation of file failed:</span>
-<a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a><span class="go">    -&gt; Entry 1: Error for field &#39;fastq_2&#39; (/not/a/real/file.fastq.gz): the file or directory</span>
-<a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a><span class="go">       &#39;/not/a/real/file.fastq.gz&#39; does not exist (FastQ file for reads 2 cannot contain spaces</span>
-<a id="__codelineno-34-9" name="__codelineno-34-9" href="#__codelineno-34-9"></a><span class="go">       and must have extension &#39;.fq.gz&#39; or &#39;.fastq.gz&#39;)</span>
+<a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a><span class="go">    -&gt; Entry 1: Error for field 'fastq_2' (/not/a/real/file.fastq.gz): the file or directory</span>
+<a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a><span class="go">       '/not/a/real/file.fastq.gz' does not exist (FastQ file for reads 2 cannot contain spaces</span>
+<a id="__codelineno-34-9" name="__codelineno-34-9" href="#__codelineno-34-9"></a><span class="go">       and must have extension '.fq.gz' or '.fastq.gz')</span>
 <a id="__codelineno-34-10" name="__codelineno-34-10" href="#__codelineno-34-10"></a><span class="go">    -&gt; Entry 1: Missing required field(s): fastq_1</span>
 </code></pre></div>
 <p>Come potete vedere, la pipeline fallisce immediatamente e riporta <strong>tutti</strong> gli errori di validazione in una volta sola.
@@ -5434,12 +5434,12 @@ La convenzione <code>ext.args</code> vi permette di passare questi argomenti all
 <span class="normal"><a href="#__codelineno-37-7">7</a></span>
 <span class="normal"><a href="#__codelineno-37-8">8</a></span>
 <span class="normal"><a href="#__codelineno-37-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-37-2" name="__codelineno-37-2"></a><span class="w">    </span><span class="nl">withName:</span><span class="w"> </span><span class="s1">&#39;FASTQC&#39;</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2"></a><span class="w">    </span><span class="nl">withName:</span><span class="w"> </span><span class="s1">'FASTQC'</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-37-3" name="__codelineno-37-3"></a><span class="w">        </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
 <a id="__codelineno-37-4" name="__codelineno-37-4"></a><span class="w">        </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="o">.</span><span class="na">GB</span>
 <a id="__codelineno-37-5" name="__codelineno-37-5"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-37-6" name="__codelineno-37-6"></a><span class="w">    </span><span class="nl">withName:</span><span class="w"> </span><span class="s1">&#39;SEQTK_TRIM&#39;</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-37-7" name="__codelineno-37-7"></a><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;-b 5&#39;</span>
+<a id="__codelineno-37-6" name="__codelineno-37-6"></a><span class="w">    </span><span class="nl">withName:</span><span class="w"> </span><span class="s1">'SEQTK_TRIM'</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-37-7" name="__codelineno-37-7"></a><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'-b 5'</span>
 <a id="__codelineno-37-8" name="__codelineno-37-8"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-37-9" name="__codelineno-37-9"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5467,7 +5467,7 @@ Il flag <code>-b 5</code> dice a <code>seqtk trimfq</code> di tagliare 5 basi da
 <details class="success">
 <summary>Output del comando</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="gp">#</span>!/usr/bin/env<span class="w"> </span>bash<span class="w"> </span>-e<span class="w"> </span>-u<span class="w"> </span>-o<span class="w"> </span>pipefail
-<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="go">printf &quot;%s\n&quot; sample1_R1.fastq.gz sample1_R2.fastq.gz | while read f;</span>
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="go">printf "%s\n" sample1_R1.fastq.gz sample1_R2.fastq.gz | while read f;</span>
 <a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="go">do</span>
 <a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a><span class="go">    seqtk \</span>
 <a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="go">        trimfq \</span>
@@ -5489,11 +5489,11 @@ Per esempio, <code>FASTQC</code> ha <code>ext.args = '--quiet'</code> impostato 
 <span class="normal"><a href="#__codelineno-42-26">26</a></span>
 <span class="normal"><a href="#__codelineno-42-27">27</a></span>
 <span class="normal"><a href="#__codelineno-42-28">28</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-21" name="__codelineno-42-21"></a><span class="w">    </span><span class="nl">withName:</span><span class="w"> </span><span class="n">FASTQC</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-42-22" name="__codelineno-42-22"></a><span class="hll"><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">args</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;--quiet&#39;</span>
+<a id="__codelineno-42-22" name="__codelineno-42-22"></a><span class="hll"><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">args</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s1">'--quiet'</span>
 </span><a id="__codelineno-42-23" name="__codelineno-42-23"></a><span class="w">        </span><span class="n">publishDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
-<a id="__codelineno-42-24" name="__codelineno-42-24"></a><span class="w">            </span><span class="nl">path:</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;${params.outdir}/fastqc/${meta.id}&quot;</span><span class="w"> </span><span class="o">},</span>
+<a id="__codelineno-42-24" name="__codelineno-42-24"></a><span class="w">            </span><span class="nl">path:</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">"${params.outdir}/fastqc/${meta.id}"</span><span class="w"> </span><span class="o">},</span>
 <a id="__codelineno-42-25" name="__codelineno-42-25"></a><span class="w">            </span><span class="nl">mode:</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">publish_dir_mode</span><span class="o">,</span>
-<a id="__codelineno-42-26" name="__codelineno-42-26"></a><span class="w">            </span><span class="nl">pattern:</span><span class="w"> </span><span class="s2">&quot;*.{html,json}&quot;</span><span class="o">,</span>
+<a id="__codelineno-42-26" name="__codelineno-42-26"></a><span class="w">            </span><span class="nl">pattern:</span><span class="w"> </span><span class="s2">"*.{html,json}"</span><span class="o">,</span>
 <a id="__codelineno-42-27" name="__codelineno-42-27"></a><span class="w">        </span><span class="o">]</span>
 <a id="__codelineno-42-28" name="__codelineno-42-28"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5801,9 +5801,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -6042,7 +6043,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -6721,7 +6722,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -7013,7 +7014,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -7185,7 +7186,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -7195,7 +7196,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

@@ -4864,13 +4864,13 @@ It is equivalent to the script produced by working through Part 1 of this traini
 <span class="normal"><a href="#__codelineno-0-41">41</a></span>
 <span class="normal"><a href="#__codelineno-0-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-37" name="__codelineno-0-37"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-0-38" name="__codelineno-0-38"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-0-39" name="__codelineno-0-39"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_channels&#39;</span>
-</span><a id="__codelineno-0-40" name="__codelineno-0-40"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'hello_channels'</span>
+</span><a id="__codelineno-0-40" name="__codelineno-0-40"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">'copy'</span>
 <a id="__codelineno-0-41" name="__codelineno-0-41"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-0-42" name="__codelineno-0-42"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Just to make sure everything is working, run the script once before making any changes:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-channels.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Hello Channels!&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-channels.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">'Hello Channels!'</span>
 </code></pre></div>
 <details class="success">
 <summary>Command output</summary>
@@ -4913,7 +4913,7 @@ It is equivalent to the script produced by working through Part 1 of this traini
 To keep things simple for now, we are going to use the most basic channel factory, called <a href="https://nextflow.io/docs/latest/reference/channel.html#of"><code>channel.of</code></a>, which will create a channel containing a single value.
 Functionally this will be similar to how we had it set up before, but instead of having Nextflow create a channel implicitly, we are doing this explicitly now.</p>
 <p>This is the line of code we're going to use:</p>
-<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">greeting_ch = channel.of(&#39;Hello Channels!&#39;)</span>
+<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">greeting_ch = channel.of('Hello Channels!')</span>
 </code></pre></div>
 <p>This creates a channel called <code>greeting_ch</code> using the <code>channel.of()</code> channel factory, which sets up a simple queue channel, and loads the string <code>'Hello Channels!'</code> to use as the greeting value.</p>
 <figure class="excalidraw">
@@ -4945,7 +4945,7 @@ Functionally this will be similar to how we had it set up before, but instead of
 <a id="__codelineno-6-28" name="__codelineno-6-28"></a>
 <a id="__codelineno-6-29" name="__codelineno-6-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-6-30" name="__codelineno-6-30"></a><span class="hll"><span class="w">    </span><span class="c1">// create a channel for inputs</span>
-</span><a id="__codelineno-6-31" name="__codelineno-6-31"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello Channels!&#39;</span><span class="o">)</span>
+</span><a id="__codelineno-6-31" name="__codelineno-6-31"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'Hello Channels!'</span><span class="o">)</span>
 </span><a id="__codelineno-6-32" name="__codelineno-6-32"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-6-33" name="__codelineno-6-33"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 <a id="__codelineno-6-34" name="__codelineno-6-34"></a>
@@ -4997,7 +4997,7 @@ Functionally this will be similar to how we had it set up before, but instead of
 <a id="__codelineno-8-28" name="__codelineno-8-28"></a>
 <a id="__codelineno-8-29" name="__codelineno-8-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-8-30" name="__codelineno-8-30"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-8-31" name="__codelineno-8-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello Channels!&#39;</span><span class="o">)</span>
+<a id="__codelineno-8-31" name="__codelineno-8-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'Hello Channels!'</span><span class="o">)</span>
 <a id="__codelineno-8-32" name="__codelineno-8-32"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-8-33" name="__codelineno-8-33"></a><span class="hll"><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 </span><a id="__codelineno-8-34" name="__codelineno-8-34"></a>
@@ -5021,7 +5021,7 @@ Functionally this will be similar to how we had it set up before, but instead of
 <a id="__codelineno-9-28" name="__codelineno-9-28"></a>
 <a id="__codelineno-9-29" name="__codelineno-9-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-9-30" name="__codelineno-9-30"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-9-31" name="__codelineno-9-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello Channels!&#39;</span><span class="o">)</span>
+<a id="__codelineno-9-31" name="__codelineno-9-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'Hello Channels!'</span><span class="o">)</span>
 <a id="__codelineno-9-32" name="__codelineno-9-32"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-9-33" name="__codelineno-9-33"></a><span class="hll"><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 </span><a id="__codelineno-9-34" name="__codelineno-9-34"></a>
@@ -5088,7 +5088,7 @@ You can think of <code>view()</code> as a debugging tool, like a <code>print()</
 <a id="__codelineno-13-28" name="__codelineno-13-28"></a>
 <a id="__codelineno-13-29" name="__codelineno-13-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-13-30" name="__codelineno-13-30"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-13-31" name="__codelineno-13-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello Channels!&#39;</span><span class="o">)</span>
+<a id="__codelineno-13-31" name="__codelineno-13-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'Hello Channels!'</span><span class="o">)</span>
 <a id="__codelineno-13-32" name="__codelineno-13-32"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </span><a id="__codelineno-13-33" name="__codelineno-13-33"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-13-34" name="__codelineno-13-34"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
@@ -5113,7 +5113,7 @@ You can think of <code>view()</code> as a debugging tool, like a <code>print()</
 <a id="__codelineno-14-28" name="__codelineno-14-28"></a>
 <a id="__codelineno-14-29" name="__codelineno-14-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-14-30" name="__codelineno-14-30"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-14-31" name="__codelineno-14-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello Channels!&#39;</span><span class="o">)</span>
+<a id="__codelineno-14-31" name="__codelineno-14-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'Hello Channels!'</span><span class="o">)</span>
 <a id="__codelineno-14-32" name="__codelineno-14-32"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-14-33" name="__codelineno-14-33"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-14-34" name="__codelineno-14-34"></a>
@@ -5167,7 +5167,7 @@ We can just load multiple values into the channel.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-30">30</a></span>
 <span class="normal"><a href="#__codelineno-17-31">31</a></span>
 <span class="normal"><a href="#__codelineno-17-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-30" name="__codelineno-17-30"></a><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-17-31" name="__codelineno-17-31"></a><span class="hll"><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">)</span>
+<a id="__codelineno-17-31" name="__codelineno-17-31"></a><span class="hll"><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'Hello'</span><span class="o">,</span><span class="s1">'Bonjour'</span><span class="o">,</span><span class="s1">'Hola'</span><span class="o">)</span>
 </span><a id="__codelineno-17-32" name="__codelineno-17-32"></a><span class="w">                     </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5175,7 +5175,7 @@ We can just load multiple values into the channel.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-30">30</a></span>
 <span class="normal"><a href="#__codelineno-18-31">31</a></span>
 <span class="normal"><a href="#__codelineno-18-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-30" name="__codelineno-18-30"></a><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-18-31" name="__codelineno-18-31"></a><span class="hll"><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello Channels&#39;</span><span class="o">)</span>
+<a id="__codelineno-18-31" name="__codelineno-18-31"></a><span class="hll"><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'Hello Channels'</span><span class="o">)</span>
 </span><a id="__codelineno-18-32" name="__codelineno-18-32"></a><span class="w">                     </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5386,12 +5386,12 @@ Here, for convenience, we'll just use the greeting itself since it's just a shor
 <a id="__codelineno-33-9" name="__codelineno-33-9"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
 <a id="__codelineno-33-10" name="__codelineno-33-10"></a>
 <a id="__codelineno-33-11" name="__codelineno-33-11"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-33-12" name="__codelineno-33-12"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${greeting}-output.txt&quot;</span>
+<a id="__codelineno-33-12" name="__codelineno-33-12"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"${greeting}-output.txt"</span>
 </span><a id="__codelineno-33-13" name="__codelineno-33-13"></a>
 <a id="__codelineno-33-14" name="__codelineno-33-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-33-15" name="__codelineno-33-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-33-16" name="__codelineno-33-16"></a><span class="hll"><span class="s2">    echo &#39;${greeting}&#39; &gt; &#39;${greeting}-output.txt&#39;</span>
-</span><a id="__codelineno-33-17" name="__codelineno-33-17"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-33-15" name="__codelineno-33-15"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-33-16" name="__codelineno-33-16"></a><span class="hll"><span class="s2">    echo '${greeting}' &gt; '${greeting}-output.txt'</span>
+</span><a id="__codelineno-33-17" name="__codelineno-33-17"></a><span class="s2">    """</span>
 <a id="__codelineno-33-18" name="__codelineno-33-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5414,12 +5414,12 @@ Here, for convenience, we'll just use the greeting itself since it's just a shor
 <a id="__codelineno-34-9" name="__codelineno-34-9"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
 <a id="__codelineno-34-10" name="__codelineno-34-10"></a>
 <a id="__codelineno-34-11" name="__codelineno-34-11"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-34-12" name="__codelineno-34-12"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
+<a id="__codelineno-34-12" name="__codelineno-34-12"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">'output.txt'</span>
 </span><a id="__codelineno-34-13" name="__codelineno-34-13"></a>
 <a id="__codelineno-34-14" name="__codelineno-34-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-34-15" name="__codelineno-34-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-34-16" name="__codelineno-34-16"></a><span class="hll"><span class="s2">    echo &#39;${greeting}&#39; &gt; output.txt</span>
-</span><a id="__codelineno-34-17" name="__codelineno-34-17"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-34-15" name="__codelineno-34-15"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-34-16" name="__codelineno-34-16"></a><span class="hll"><span class="s2">    echo '${greeting}' &gt; output.txt</span>
+</span><a id="__codelineno-34-17" name="__codelineno-34-17"></a><span class="s2">    """</span>
 <a id="__codelineno-34-18" name="__codelineno-34-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5529,9 +5529,9 @@ Let's try it; we'll need to set up the input variable and load it into the chann
 <a id="__codelineno-41-28" name="__codelineno-41-28"></a>
 <a id="__codelineno-41-29" name="__codelineno-41-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-41-30" name="__codelineno-41-30"></a><span class="hll"><span class="w">    </span><span class="c1">// declare an array of input greetings</span>
-</span><a id="__codelineno-41-31" name="__codelineno-41-31"></a><span class="hll"><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
+</span><a id="__codelineno-41-31" name="__codelineno-41-31"></a><span class="hll"><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">'Hello'</span><span class="o">,</span><span class="s1">'Bonjour'</span><span class="o">,</span><span class="s1">'Hola'</span><span class="o">]</span>
 </span><a id="__codelineno-41-32" name="__codelineno-41-32"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-41-33" name="__codelineno-41-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">)</span>
+<a id="__codelineno-41-33" name="__codelineno-41-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'Hello'</span><span class="o">,</span><span class="s1">'Bonjour'</span><span class="o">,</span><span class="s1">'Hola'</span><span class="o">)</span>
 <a id="__codelineno-41-34" name="__codelineno-41-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 <a id="__codelineno-41-35" name="__codelineno-41-35"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-41-36" name="__codelineno-41-36"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
@@ -5557,7 +5557,7 @@ Let's try it; we'll need to set up the input variable and load it into the chann
 <a id="__codelineno-42-28" name="__codelineno-42-28"></a>
 <a id="__codelineno-42-29" name="__codelineno-42-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-42-30" name="__codelineno-42-30"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-42-31" name="__codelineno-42-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">)</span>
+<a id="__codelineno-42-31" name="__codelineno-42-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'Hello'</span><span class="o">,</span><span class="s1">'Bonjour'</span><span class="o">,</span><span class="s1">'Hola'</span><span class="o">)</span>
 <a id="__codelineno-42-32" name="__codelineno-42-32"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 <a id="__codelineno-42-33" name="__codelineno-42-33"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-42-34" name="__codelineno-42-34"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
@@ -5593,7 +5593,7 @@ Let's try it; we'll need to set up the input variable and load it into the chann
 <a id="__codelineno-43-28" name="__codelineno-43-28"></a>
 <a id="__codelineno-43-29" name="__codelineno-43-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-43-30" name="__codelineno-43-30"></a><span class="w">    </span><span class="c1">// declare an array of input greetings</span>
-<a id="__codelineno-43-31" name="__codelineno-43-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
+<a id="__codelineno-43-31" name="__codelineno-43-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">'Hello'</span><span class="o">,</span><span class="s1">'Bonjour'</span><span class="o">,</span><span class="s1">'Hola'</span><span class="o">]</span>
 <a id="__codelineno-43-32" name="__codelineno-43-32"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
 <a id="__codelineno-43-33" name="__codelineno-43-33"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 </span><a id="__codelineno-43-34" name="__codelineno-43-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
@@ -5623,9 +5623,9 @@ Let's try it; we'll need to set up the input variable and load it into the chann
 <a id="__codelineno-44-28" name="__codelineno-44-28"></a>
 <a id="__codelineno-44-29" name="__codelineno-44-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-44-30" name="__codelineno-44-30"></a><span class="w">    </span><span class="c1">// declare an array of input greetings</span>
-<a id="__codelineno-44-31" name="__codelineno-44-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
+<a id="__codelineno-44-31" name="__codelineno-44-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">'Hello'</span><span class="o">,</span><span class="s1">'Bonjour'</span><span class="o">,</span><span class="s1">'Hola'</span><span class="o">]</span>
 <a id="__codelineno-44-32" name="__codelineno-44-32"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
-<a id="__codelineno-44-33" name="__codelineno-44-33"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">)</span>
+<a id="__codelineno-44-33" name="__codelineno-44-33"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'Hello'</span><span class="o">,</span><span class="s1">'Bonjour'</span><span class="o">,</span><span class="s1">'Hola'</span><span class="o">)</span>
 </span><a id="__codelineno-44-34" name="__codelineno-44-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 <a id="__codelineno-44-35" name="__codelineno-44-35"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-44-36" name="__codelineno-44-36"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
@@ -5651,7 +5651,7 @@ Let's try it; we'll need to set up the input variable and load it into the chann
 <a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a><span class="go">executor &gt;  local (1)</span>
 <a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a><span class="go">[a8/1f6ead] sayHello (1) | 0 of 1</span>
 <a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a><span class="hll"><span class="go">[Hello, Bonjour, Hola]</span>
-</span><a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a><span class="go">ERROR ~ Error executing process &gt; &#39;sayHello (1)&#39;</span>
+</span><a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a><span class="go">ERROR ~ Error executing process &gt; 'sayHello (1)'</span>
 <a id="__codelineno-46-9" name="__codelineno-46-9" href="#__codelineno-46-9"></a>
 <a id="__codelineno-46-10" name="__codelineno-46-10" href="#__codelineno-46-10"></a><span class="go">Caused by:</span>
 <a id="__codelineno-46-11" name="__codelineno-46-11" href="#__codelineno-46-11"></a><span class="hll"><span class="go">  Missing output file(s) `[Hello, Bonjour, Hola]-output.txt` expected by process `sayHello (1)`</span>
@@ -5659,7 +5659,7 @@ Let's try it; we'll need to set up the input variable and load it into the chann
 <a id="__codelineno-46-13" name="__codelineno-46-13" href="#__codelineno-46-13"></a>
 <a id="__codelineno-46-14" name="__codelineno-46-14" href="#__codelineno-46-14"></a><span class="go">Command executed:</span>
 <a id="__codelineno-46-15" name="__codelineno-46-15" href="#__codelineno-46-15"></a>
-<a id="__codelineno-46-16" name="__codelineno-46-16" href="#__codelineno-46-16"></a><span class="hll"><span class="go">  echo &#39;[Hello, Bonjour, Hola]&#39; &gt; &#39;[Hello, Bonjour, Hola]-output.txt&#39;</span>
+<a id="__codelineno-46-16" name="__codelineno-46-16" href="#__codelineno-46-16"></a><span class="hll"><span class="go">  echo '[Hello, Bonjour, Hola]' &gt; '[Hello, Bonjour, Hola]-output.txt'</span>
 </span><a id="__codelineno-46-17" name="__codelineno-46-17" href="#__codelineno-46-17"></a>
 <a id="__codelineno-46-18" name="__codelineno-46-18" href="#__codelineno-46-18"></a><span class="go">Command exit status:</span>
 <a id="__codelineno-46-19" name="__codelineno-46-19" href="#__codelineno-46-19"></a><span class="go">  0</span>
@@ -5672,7 +5672,7 @@ Let's try it; we'll need to set up the input variable and load it into the chann
 <a id="__codelineno-46-26" name="__codelineno-46-26" href="#__codelineno-46-26"></a>
 <a id="__codelineno-46-27" name="__codelineno-46-27" href="#__codelineno-46-27"></a><span class="go">Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`</span>
 <a id="__codelineno-46-28" name="__codelineno-46-28" href="#__codelineno-46-28"></a>
-<a id="__codelineno-46-29" name="__codelineno-46-29" href="#__codelineno-46-29"></a><span class="go">-- Check &#39;.nextflow.log&#39; file for details</span>
+<a id="__codelineno-46-29" name="__codelineno-46-29" href="#__codelineno-46-29"></a><span class="go">-- Check '.nextflow.log' file for details</span>
 </code></pre></div>
 </details>
 <p>Oh no! There's an error!</p>
@@ -5716,7 +5716,7 @@ Now we're going to look at operators that allow us to act on the contents of a c
 <a id="__codelineno-47-28" name="__codelineno-47-28"></a>
 <a id="__codelineno-47-29" name="__codelineno-47-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-47-30" name="__codelineno-47-30"></a><span class="w">    </span><span class="c1">// declare an array of input greetings</span>
-<a id="__codelineno-47-31" name="__codelineno-47-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
+<a id="__codelineno-47-31" name="__codelineno-47-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">'Hello'</span><span class="o">,</span><span class="s1">'Bonjour'</span><span class="o">,</span><span class="s1">'Hola'</span><span class="o">]</span>
 <a id="__codelineno-47-32" name="__codelineno-47-32"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
 <a id="__codelineno-47-33" name="__codelineno-47-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 <a id="__codelineno-47-34" name="__codelineno-47-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
@@ -5747,7 +5747,7 @@ Now we're going to look at operators that allow us to act on the contents of a c
 <a id="__codelineno-48-28" name="__codelineno-48-28"></a>
 <a id="__codelineno-48-29" name="__codelineno-48-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-48-30" name="__codelineno-48-30"></a><span class="w">    </span><span class="c1">// declare an array of input greetings</span>
-<a id="__codelineno-48-31" name="__codelineno-48-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
+<a id="__codelineno-48-31" name="__codelineno-48-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">'Hello'</span><span class="o">,</span><span class="s1">'Bonjour'</span><span class="o">,</span><span class="s1">'Hola'</span><span class="o">]</span>
 <a id="__codelineno-48-32" name="__codelineno-48-32"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
 <a id="__codelineno-48-33" name="__codelineno-48-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 <a id="__codelineno-48-34" name="__codelineno-48-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
@@ -5796,12 +5796,12 @@ Now we're going to look at operators that allow us to act on the contents of a c
 <a id="__codelineno-49-28" name="__codelineno-49-28"></a>
 <a id="__codelineno-49-29" name="__codelineno-49-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-49-30" name="__codelineno-49-30"></a><span class="w">    </span><span class="c1">// declare an array of input greetings</span>
-<a id="__codelineno-49-31" name="__codelineno-49-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
+<a id="__codelineno-49-31" name="__codelineno-49-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">'Hello'</span><span class="o">,</span><span class="s1">'Bonjour'</span><span class="o">,</span><span class="s1">'Hola'</span><span class="o">]</span>
 <a id="__codelineno-49-32" name="__codelineno-49-32"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
 <a id="__codelineno-49-33" name="__codelineno-49-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
-<a id="__codelineno-49-34" name="__codelineno-49-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-49-34" name="__codelineno-49-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Before flatten: $greeting"</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-49-35" name="__codelineno-49-35"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">flatten</span><span class="o">()</span>
-</span><a id="__codelineno-49-36" name="__codelineno-49-36"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-49-36" name="__codelineno-49-36"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"After flatten: $greeting"</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-49-37" name="__codelineno-49-37"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-49-38" name="__codelineno-49-38"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-49-39" name="__codelineno-49-39"></a>
@@ -5829,7 +5829,7 @@ Now we're going to look at operators that allow us to act on the contents of a c
 <a id="__codelineno-50-28" name="__codelineno-50-28"></a>
 <a id="__codelineno-50-29" name="__codelineno-50-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-50-30" name="__codelineno-50-30"></a><span class="w">    </span><span class="c1">// declare an array of input greetings</span>
-<a id="__codelineno-50-31" name="__codelineno-50-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
+<a id="__codelineno-50-31" name="__codelineno-50-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">'Hello'</span><span class="o">,</span><span class="s1">'Bonjour'</span><span class="o">,</span><span class="s1">'Hola'</span><span class="o">]</span>
 <a id="__codelineno-50-32" name="__codelineno-50-32"></a><span class="w">    </span><span class="c1">// create a channel for inputs</span>
 <a id="__codelineno-50-33" name="__codelineno-50-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
 <a id="__codelineno-50-34" name="__codelineno-50-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
@@ -5844,7 +5844,7 @@ Now we're going to look at operators that allow us to act on the contents of a c
 </div>
 </div>
 </div>
-<p>You see we've added a second <code>.view</code> statement, and for each of them, we've replaced the empty parentheses (<code>()</code>) with curly braces containing some code, such as <code class="highlight"><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span></code>.</p>
+<p>You see we've added a second <code>.view</code> statement, and for each of them, we've replaced the empty parentheses (<code>()</code>) with curly braces containing some code, such as <code class="highlight"><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Before flatten: $greeting"</span><span class="w"> </span><span class="o">}</span></code>.</p>
 <p>These are called <em>closures</em>. The code they contain will be executed for each item in the channel.
 We define a temporary variable for the inner value, here called <code>greeting</code> (but it could be any arbitrary name), which is only used within the scope of that closure.</p>
 <p>In this example, <code>$greeting</code> represents each individual item loaded in the channel.
@@ -5941,7 +5941,7 @@ We're going to update it to point to the CSV file containing our greetings.</p>
 <a id="__codelineno-54-21" name="__codelineno-54-21"></a><span class="cm">* Pipeline parameters</span>
 <a id="__codelineno-54-22" name="__codelineno-54-22"></a><span class="cm">*/</span>
 <a id="__codelineno-54-23" name="__codelineno-54-23"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-54-24" name="__codelineno-54-24"></a><span class="hll"><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;data/greetings.csv&#39;</span>
+<a id="__codelineno-54-24" name="__codelineno-54-24"></a><span class="hll"><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'data/greetings.csv'</span>
 </span><a id="__codelineno-54-25" name="__codelineno-54-25"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5955,7 +5955,7 @@ We're going to update it to point to the CSV file containing our greetings.</p>
 <a id="__codelineno-55-21" name="__codelineno-55-21"></a><span class="cm"> * Pipeline parameters</span>
 <a id="__codelineno-55-22" name="__codelineno-55-22"></a><span class="cm"> */</span>
 <a id="__codelineno-55-23" name="__codelineno-55-23"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-55-24" name="__codelineno-55-24"></a><span class="hll"><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Hola mundo!&#39;</span>
+<a id="__codelineno-55-24" name="__codelineno-55-24"></a><span class="hll"><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Hola mundo!'</span>
 </span><a id="__codelineno-55-25" name="__codelineno-55-25"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5988,9 +5988,9 @@ We need to switch to using a new channel factory, <a href="https://nextflow.io/d
 <a id="__codelineno-56-29" name="__codelineno-56-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-56-30" name="__codelineno-56-30"></a><span class="hll"><span class="w">    </span><span class="c1">// create a channel for inputs from a CSV file</span>
 </span><a id="__codelineno-56-31" name="__codelineno-56-31"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-</span><a id="__codelineno-56-32" name="__codelineno-56-32"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-56-32" name="__codelineno-56-32"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Before flatten: $greeting"</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-56-33" name="__codelineno-56-33"></a><span class="hll"><span class="w">                         </span><span class="c1">// .flatten()</span>
-</span><a id="__codelineno-56-34" name="__codelineno-56-34"></a><span class="hll"><span class="w">                         </span><span class="c1">// .view { greeting -&gt; &quot;After flatten: $greeting&quot; }</span>
+</span><a id="__codelineno-56-34" name="__codelineno-56-34"></a><span class="hll"><span class="w">                         </span><span class="c1">// .view { greeting -&gt; "After flatten: $greeting" }</span>
 </span><a id="__codelineno-56-35" name="__codelineno-56-35"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-56-36" name="__codelineno-56-36"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-56-37" name="__codelineno-56-37"></a>
@@ -6019,12 +6019,12 @@ We need to switch to using a new channel factory, <a href="https://nextflow.io/d
 <a id="__codelineno-57-28" name="__codelineno-57-28"></a>
 <a id="__codelineno-57-29" name="__codelineno-57-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-57-30" name="__codelineno-57-30"></a><span class="hll"><span class="w">    </span><span class="c1">// declare an array of input greetings</span>
-</span><a id="__codelineno-57-31" name="__codelineno-57-31"></a><span class="hll"><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Hola&#39;</span><span class="o">]</span>
+</span><a id="__codelineno-57-31" name="__codelineno-57-31"></a><span class="hll"><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">'Hello'</span><span class="o">,</span><span class="s1">'Bonjour'</span><span class="o">,</span><span class="s1">'Hola'</span><span class="o">]</span>
 </span><a id="__codelineno-57-32" name="__codelineno-57-32"></a><span class="hll"><span class="w">    </span><span class="c1">// create a channel for inputs</span>
 </span><a id="__codelineno-57-33" name="__codelineno-57-33"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
-</span><a id="__codelineno-57-34" name="__codelineno-57-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-57-34" name="__codelineno-57-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Before flatten: $greeting"</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-57-35" name="__codelineno-57-35"></a><span class="w">                         </span><span class="o">.</span><span class="na">flatten</span><span class="o">()</span>
-<a id="__codelineno-57-36" name="__codelineno-57-36"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-57-36" name="__codelineno-57-36"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"After flatten: $greeting"</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-57-37" name="__codelineno-57-37"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-57-38" name="__codelineno-57-38"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-57-39" name="__codelineno-57-39"></a>
@@ -6049,7 +6049,7 @@ We've also commented out the <code>flatten()</code> and the second <code>view()<
 <a id="__codelineno-59-4" name="__codelineno-59-4" href="#__codelineno-59-4"></a>
 <a id="__codelineno-59-5" name="__codelineno-59-5" href="#__codelineno-59-5"></a><span class="hll"><span class="go">[-        ] sayHello [  0%] 0 of 1</span>
 </span><a id="__codelineno-59-6" name="__codelineno-59-6" href="#__codelineno-59-6"></a><span class="hll"><span class="go">Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv</span>
-</span><a id="__codelineno-59-7" name="__codelineno-59-7" href="#__codelineno-59-7"></a><span class="go">ERROR ~ Error executing process &gt; &#39;sayHello (1)&#39;</span>
+</span><a id="__codelineno-59-7" name="__codelineno-59-7" href="#__codelineno-59-7"></a><span class="go">ERROR ~ Error executing process &gt; 'sayHello (1)'</span>
 <a id="__codelineno-59-8" name="__codelineno-59-8" href="#__codelineno-59-8"></a>
 <a id="__codelineno-59-9" name="__codelineno-59-9" href="#__codelineno-59-9"></a><span class="hll"><span class="go">Caused by:</span>
 </span><a id="__codelineno-59-10" name="__codelineno-59-10" href="#__codelineno-59-10"></a><span class="go">  File `/workspaces/training/hello-nextflow/data/greetings.csv-output.txt` is outside the scope of the process work directory: /workspaces/training/hello-nextflow/work/30/e610cb4ea5ae8693f456ac3329c92f</span>
@@ -6057,7 +6057,7 @@ We've also commented out the <code>flatten()</code> and the second <code>view()<
 <a id="__codelineno-59-12" name="__codelineno-59-12" href="#__codelineno-59-12"></a>
 <a id="__codelineno-59-13" name="__codelineno-59-13" href="#__codelineno-59-13"></a><span class="go">Command executed:</span>
 <a id="__codelineno-59-14" name="__codelineno-59-14" href="#__codelineno-59-14"></a>
-<a id="__codelineno-59-15" name="__codelineno-59-15" href="#__codelineno-59-15"></a><span class="hll"><span class="go">  echo &#39;/workspaces/training/hello-nextflow/data/greetings.csv&#39; &gt; &#39;/workspaces/training/hello-nextflow/data/greetings.csv-output.txt&#39;</span>
+<a id="__codelineno-59-15" name="__codelineno-59-15" href="#__codelineno-59-15"></a><span class="hll"><span class="go">  echo '/workspaces/training/hello-nextflow/data/greetings.csv' &gt; '/workspaces/training/hello-nextflow/data/greetings.csv-output.txt'</span>
 </span><a id="__codelineno-59-16" name="__codelineno-59-16" href="#__codelineno-59-16"></a>
 <a id="__codelineno-59-17" name="__codelineno-59-17" href="#__codelineno-59-17"></a><span class="go">Command exit status:</span>
 <a id="__codelineno-59-18" name="__codelineno-59-18" href="#__codelineno-59-18"></a><span class="go">  -</span>
@@ -6070,7 +6070,7 @@ We've also commented out the <code>flatten()</code> and the second <code>view()<
 <a id="__codelineno-59-25" name="__codelineno-59-25" href="#__codelineno-59-25"></a>
 <a id="__codelineno-59-26" name="__codelineno-59-26" href="#__codelineno-59-26"></a><span class="go">Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line</span>
 <a id="__codelineno-59-27" name="__codelineno-59-27" href="#__codelineno-59-27"></a>
-<a id="__codelineno-59-28" name="__codelineno-59-28" href="#__codelineno-59-28"></a><span class="go">-- Check &#39;.nextflow.log&#39; file for details</span>
+<a id="__codelineno-59-28" name="__codelineno-59-28" href="#__codelineno-59-28"></a><span class="go">-- Check '.nextflow.log' file for details</span>
 </code></pre></div>
 </details>
 <p>Oh no, it doesn't work. Have a look at the start of the console output and error message.
@@ -6106,9 +6106,9 @@ So it has resolved the file path correctly, but it didn't actually parse its con
 <a id="__codelineno-60-29" name="__codelineno-60-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-60-30" name="__codelineno-60-30"></a><span class="w">    </span><span class="c1">// create a channel for inputs from a CSV file</span>
 <a id="__codelineno-60-31" name="__codelineno-60-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-<a id="__codelineno-60-32" name="__codelineno-60-32"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-60-32" name="__codelineno-60-32"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Before splitCsv: $csv"</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-60-33" name="__codelineno-60-33"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
-</span><a id="__codelineno-60-34" name="__codelineno-60-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-60-34" name="__codelineno-60-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"After splitCsv: $csv"</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-60-35" name="__codelineno-60-35"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-60-36" name="__codelineno-60-36"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-60-37" name="__codelineno-60-37"></a>
@@ -6136,9 +6136,9 @@ So it has resolved the file path correctly, but it didn't actually parse its con
 <a id="__codelineno-61-29" name="__codelineno-61-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-61-30" name="__codelineno-61-30"></a><span class="w">    </span><span class="c1">// create a channel for inputs from a CSV file</span>
 <a id="__codelineno-61-31" name="__codelineno-61-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-<a id="__codelineno-61-32" name="__codelineno-61-32"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-61-32" name="__codelineno-61-32"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Before flatten: $greeting"</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-61-33" name="__codelineno-61-33"></a><span class="hll"><span class="w">                         </span><span class="c1">// .flatten()</span>
-</span><a id="__codelineno-61-34" name="__codelineno-61-34"></a><span class="hll"><span class="w">                         </span><span class="c1">// .view { greeting -&gt; &quot;After flatten: $greeting&quot; }</span>
+</span><a id="__codelineno-61-34" name="__codelineno-61-34"></a><span class="hll"><span class="w">                         </span><span class="c1">// .view { greeting -&gt; "After flatten: $greeting" }</span>
 </span><a id="__codelineno-61-35" name="__codelineno-61-35"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-61-36" name="__codelineno-61-36"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-61-37" name="__codelineno-61-37"></a>
@@ -6167,7 +6167,7 @@ Technically we could have used the same variable name (<code>greeting</code>) bu
 </span><a id="__codelineno-63-8" name="__codelineno-63-8" href="#__codelineno-63-8"></a><span class="hll"><span class="go">After splitCsv: [Hello, English, 123]</span>
 </span><a id="__codelineno-63-9" name="__codelineno-63-9" href="#__codelineno-63-9"></a><span class="hll"><span class="go">After splitCsv: [Bonjour, French, 456]</span>
 </span><a id="__codelineno-63-10" name="__codelineno-63-10" href="#__codelineno-63-10"></a><span class="hll"><span class="go">After splitCsv: [Hola, Spanish, 789]</span>
-</span><a id="__codelineno-63-11" name="__codelineno-63-11" href="#__codelineno-63-11"></a><span class="hll"><span class="go">ERROR ~ Error executing process &gt; &#39;sayHello (2)&#39;</span>
+</span><a id="__codelineno-63-11" name="__codelineno-63-11" href="#__codelineno-63-11"></a><span class="hll"><span class="go">ERROR ~ Error executing process &gt; 'sayHello (2)'</span>
 </span><a id="__codelineno-63-12" name="__codelineno-63-12" href="#__codelineno-63-12"></a>
 <a id="__codelineno-63-13" name="__codelineno-63-13" href="#__codelineno-63-13"></a><span class="go">Caused by:</span>
 <a id="__codelineno-63-14" name="__codelineno-63-14" href="#__codelineno-63-14"></a><span class="hll"><span class="go">  Missing output file(s) `[Bonjour, French, 456]-output.txt` expected by process `sayHello (2)`</span>
@@ -6175,7 +6175,7 @@ Technically we could have used the same variable name (<code>greeting</code>) bu
 <a id="__codelineno-63-16" name="__codelineno-63-16" href="#__codelineno-63-16"></a>
 <a id="__codelineno-63-17" name="__codelineno-63-17" href="#__codelineno-63-17"></a><span class="go">Command executed:</span>
 <a id="__codelineno-63-18" name="__codelineno-63-18" href="#__codelineno-63-18"></a>
-<a id="__codelineno-63-19" name="__codelineno-63-19" href="#__codelineno-63-19"></a><span class="hll"><span class="go">  echo &#39;[Bonjour, French, 456]&#39; &gt; &#39;[Bonjour, French, 456]-output.txt&#39;</span>
+<a id="__codelineno-63-19" name="__codelineno-63-19" href="#__codelineno-63-19"></a><span class="hll"><span class="go">  echo '[Bonjour, French, 456]' &gt; '[Bonjour, French, 456]-output.txt'</span>
 </span><a id="__codelineno-63-20" name="__codelineno-63-20" href="#__codelineno-63-20"></a>
 <a id="__codelineno-63-21" name="__codelineno-63-21" href="#__codelineno-63-21"></a><span class="go">Command exit status:</span>
 <a id="__codelineno-63-22" name="__codelineno-63-22" href="#__codelineno-63-22"></a><span class="go">  0</span>
@@ -6186,9 +6186,9 @@ Technically we could have used the same variable name (<code>greeting</code>) bu
 <a id="__codelineno-63-27" name="__codelineno-63-27" href="#__codelineno-63-27"></a><span class="go">Work dir:</span>
 <a id="__codelineno-63-28" name="__codelineno-63-28" href="#__codelineno-63-28"></a><span class="go">  /workspaces/training/hello-nextflow/work/24/76da2fcc4876b61632749f99e26a50</span>
 <a id="__codelineno-63-29" name="__codelineno-63-29" href="#__codelineno-63-29"></a>
-<a id="__codelineno-63-30" name="__codelineno-63-30" href="#__codelineno-63-30"></a><span class="go">Tip: you can try to figure out what&#39;s wrong by changing to the process work dir and showing the script file named `.command.sh`</span>
+<a id="__codelineno-63-30" name="__codelineno-63-30" href="#__codelineno-63-30"></a><span class="go">Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`</span>
 <a id="__codelineno-63-31" name="__codelineno-63-31" href="#__codelineno-63-31"></a>
-<a id="__codelineno-63-32" name="__codelineno-63-32" href="#__codelineno-63-32"></a><span class="go">-- Check &#39;.nextflow.log&#39; file for details</span>
+<a id="__codelineno-63-32" name="__codelineno-63-32" href="#__codelineno-63-32"></a><span class="go">-- Check '.nextflow.log' file for details</span>
 </code></pre></div>
 </details>
 <p>Interestingly, this fails too, but with a different error.
@@ -6237,11 +6237,11 @@ This is what the syntax looks like:</p>
 <a id="__codelineno-65-29" name="__codelineno-65-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-65-30" name="__codelineno-65-30"></a><span class="w">    </span><span class="c1">// create a channel for inputs from a CSV file</span>
 <a id="__codelineno-65-31" name="__codelineno-65-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-<a id="__codelineno-65-32" name="__codelineno-65-32"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-65-32" name="__codelineno-65-32"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Before splitCsv: $csv"</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-65-33" name="__codelineno-65-33"></a><span class="w">                         </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
-<a id="__codelineno-65-34" name="__codelineno-65-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-65-34" name="__codelineno-65-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"After splitCsv: $csv"</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-65-35" name="__codelineno-65-35"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">item</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-</span><a id="__codelineno-65-36" name="__codelineno-65-36"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After map: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-65-36" name="__codelineno-65-36"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"After map: $csv"</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-65-37" name="__codelineno-65-37"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-65-38" name="__codelineno-65-38"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-65-39" name="__codelineno-65-39"></a>
@@ -6269,9 +6269,9 @@ This is what the syntax looks like:</p>
 <a id="__codelineno-66-29" name="__codelineno-66-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-66-30" name="__codelineno-66-30"></a><span class="w">    </span><span class="c1">// create a channel for inputs from a CSV file</span>
 <a id="__codelineno-66-31" name="__codelineno-66-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-<a id="__codelineno-66-32" name="__codelineno-66-32"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-66-32" name="__codelineno-66-32"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Before splitCsv: $csv"</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-66-33" name="__codelineno-66-33"></a><span class="w">                         </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
-<a id="__codelineno-66-34" name="__codelineno-66-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-66-34" name="__codelineno-66-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"After splitCsv: $csv"</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-66-35" name="__codelineno-66-35"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-66-36" name="__codelineno-66-36"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-66-37" name="__codelineno-66-37"></a>
@@ -6394,7 +6394,7 @@ Learn more: [1.1. Create an input channel](#11-create-an-input-channel)
 
                 <div class="quiz-question" id="quiz-1-question">
                     <p>What will this code output?</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Hola&#39;</span><span class="o">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'Hello'</span><span class="o">,</span><span class="w"> </span><span class="s1">'Bonjour'</span><span class="o">,</span><span class="w"> </span><span class="s1">'Hola'</span><span class="o">)</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div>
                 </div>
@@ -6851,9 +6851,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -7092,7 +7093,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -7771,7 +7772,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -8063,7 +8064,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -8235,7 +8236,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -8245,7 +8246,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

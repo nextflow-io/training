@@ -4073,7 +4073,7 @@ Agora vamos aprender duas abordagens melhores para gerenciar entradas: <strong>a
 <h2 id="1-usando-arquivos-de-parametros">1. Usando arquivos de parâmetros<a class="headerlink" href="#1-usando-arquivos-de-parametros" title="Permanent link">&para;</a></h2>
 <h3 id="11-o-problema-com-linhas-de-comando-longas">1.1. O problema com linhas de comando longas<a class="headerlink" href="#11-o-problema-com-linhas-de-comando-longas" title="Permanent link">&para;</a></h3>
 <p>Na Parte 2, já usamos um arquivo de parâmetros para manter o comando curto e preservar os valores digitados (como os parâmetros inteiros de pré-processamento) intactos:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;mesmer,cellpose,stardist&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>--segmentation_method<span class="w"> </span><span class="s2">"mesmer,cellpose,stardist"</span>
 </code></pre></div>
 <p>Passar muitos parâmetros individualmente na linha de comando é difícil de reproduzir, compartilhar ou modificar.
 E se você precisar executar a mesma análise novamente no próximo mês?
@@ -4081,13 +4081,13 @@ E se um colaborador quiser usar suas configurações exatas?
 Um arquivo de parâmetros resolve isso.</p>
 <h3 id="12-o-arquivo-de-parametros">1.2. O arquivo de parâmetros<a class="headerlink" href="#12-o-arquivo-de-parametros" title="Permanent link">&para;</a></h3>
 <p>Aqui está o arquivo <code>params.yaml</code> que temos usado:</p>
-<div class="highlight"><span class="filename">params.yaml</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;data/samplesheet.csv&quot;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">outdir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;results&quot;</span>
+<div class="highlight"><span class="filename">params.yaml</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="s">"data/samplesheet.csv"</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">outdir</span><span class="p">:</span><span class="w"> </span><span class="s">"results"</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">mindagap_tilesize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">90</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nt">mindagap_boxsize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nt">mindagap_loopnum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nt">clahe_pyramid_tile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">368</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nt">segmentation_method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cellpose&quot;</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nt">segmentation_method</span><span class="p">:</span><span class="w"> </span><span class="s">"cellpose"</span>
 </code></pre></div>
 <p>Cada parâmetro é escrito como um par <code>chave: valor</code>.
 Escrever inteiros sem aspas (por exemplo, <code>mindagap_tilesize: 90</code>) preserva o tipo inteiro, o que a validação de parâmetros do pipeline exige.</p>
@@ -4097,7 +4097,7 @@ Escrever inteiros sem aspas (por exemplo, <code>mindagap_tilesize: 90</code>) pr
 <p>O arquivo de parâmetros documenta sua configuração exata e facilita a reexecução ou compartilhamento.</p>
 <h3 id="13-sobrescrevendo-parametros">1.3. Sobrescrevendo parâmetros<a class="headerlink" href="#13-sobrescrevendo-parametros" title="Permanent link">&para;</a></h3>
 <p>Você ainda pode sobrescrever parâmetros específicos da linha de comando:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>--segmentation_method<span class="w"> </span><span class="s2">&quot;stardist&quot;</span><span class="w"> </span>--outdir<span class="w"> </span>stardist_results<span class="w"> </span>-resume
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>./molkart<span class="w"> </span>-params-file<span class="w"> </span>params.yaml<span class="w"> </span>--segmentation_method<span class="w"> </span><span class="s2">"stardist"</span><span class="w"> </span>--outdir<span class="w"> </span>stardist_results<span class="w"> </span>-resume
 </code></pre></div>
 <p>A linha acima altera o <code>segmentation_method</code> para <code>stardist</code> e o nome do <code>--outdir</code> para <code>stardist_results</code> em vez dos parâmetros no arquivo <code>params.yaml</code>.
 Além disso, você pode ver que a flag <code>-resume</code> nos permitiu reutilizar os resultados de pré-processamento da execução anterior, economizando tempo.
@@ -4453,9 +4453,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -4694,7 +4695,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -5373,7 +5374,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -5665,7 +5666,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -5837,7 +5838,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -5847,7 +5848,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

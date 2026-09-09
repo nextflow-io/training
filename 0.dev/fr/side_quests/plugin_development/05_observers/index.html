@@ -4074,14 +4074,14 @@ Dans cette section, vous allez créer un observateur qui compte les tâches term
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cm">/*</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="cm"> * Copyright 2025, Seqera Labs</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="cm"> *</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="cm"> * Licensed under the Apache License, Version 2.0 (the "License");</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="cm"> * you may not use this file except in compliance with the License.</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="cm"> * You may obtain a copy of the License at</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="cm"> *</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="cm"> *     http://www.apache.org/licenses/LICENSE-2.0</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="cm"> *</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="cm"> * distributed under the License is distributed on an "AS IS" BASIS,</span>
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="cm"> * See the License for the specific language governing permissions and</span>
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="cm"> * limitations under the License.</span>
@@ -4104,12 +4104,12 @@ Dans cette section, vous allez créer un observateur qui compte les tâches term
 </span><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>
 <a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a><span class="hll"><span class="w">    </span><span class="nd">@Override</span>
 </span><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="hll"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">onFlowCreate</span><span class="o">(</span><span class="n">Session</span><span class="w"> </span><span class="n">session</span><span class="o">)</span><span class="w"> </span><span class="o">{</span><span class="w">            </span><span class="c1">// (2)!</span>
-</span><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Pipeline is starting! 🚀&quot;</span>
+</span><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"Pipeline is starting! 🚀"</span>
 </span><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>
 <a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a><span class="hll"><span class="w">    </span><span class="nd">@Override</span>
 </span><a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a><span class="hll"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">onFlowComplete</span><span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w">                         </span><span class="c1">// (3)!</span>
-</span><a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Pipeline complete! 👋&quot;</span>
+</span><a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"Pipeline complete! 👋"</span>
 </span><a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a><span class="o">}</span>
 </code></pre></div>
@@ -4200,7 +4200,7 @@ L'ajout d'un nouvel observateur à un plugin nécessite deux choses : écrire la
 <a id="__codelineno-4-13" name="__codelineno-4-13"></a>
 <a id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="w">    </span><span class="nd">@Override</span>
 <a id="__codelineno-4-15" name="__codelineno-4-15"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">onProcessComplete</span><span class="o">(</span><span class="n">TaskHandler</span><span class="w"> </span><span class="n">handler</span><span class="o">,</span><span class="w"> </span><span class="n">TraceRecord</span><span class="w"> </span><span class="n">trace</span><span class="o">)</span><span class="w"> </span><span class="o">{</span><span class="w">  </span><span class="c1">// (3)!</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16"></a><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;✓ Task completed!&quot;</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16"></a><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"✓ Task completed!"</span>
 <a id="__codelineno-4-17" name="__codelineno-4-17"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-4-18" name="__codelineno-4-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -4223,14 +4223,14 @@ Examinez-la :</p>
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="cm">/*</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="cm"> * Copyright 2025, Seqera Labs</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="cm"> *</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="cm"> * Licensed under the Apache License, Version 2.0 (the "License");</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="cm"> * you may not use this file except in compliance with the License.</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="cm"> * You may obtain a copy of the License at</span>
 <a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="cm"> *</span>
 <a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="cm"> *     http://www.apache.org/licenses/LICENSE-2.0</span>
 <a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="cm"> *</span>
 <a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="cm"> * distributed under the License is distributed on an "AS IS" BASIS,</span>
 <a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="cm"> * See the License for the specific language governing permissions and</span>
 <a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="cm"> * limitations under the License.</span>
@@ -4368,12 +4368,12 @@ Lorsque l'ensemble du workflow se termine, l'observateur affiche le total final.
 <a id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="w">    </span><span class="nd">@Override</span>
 <a id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">onProcessComplete</span><span class="o">(</span><span class="n">TaskHandler</span><span class="w"> </span><span class="n">handler</span><span class="o">,</span><span class="w"> </span><span class="n">TraceRecord</span><span class="w"> </span><span class="n">trace</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="hll"><span class="w">        </span><span class="n">taskCount</span><span class="o">++</span><span class="w">                          </span><span class="c1">// (2)!</span>
-</span><a id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;📊 Tasks completed so far: ${taskCount}&quot;</span>
+</span><a id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"📊 Tasks completed so far: ${taskCount}"</span>
 </span><a id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-11-21" name="__codelineno-11-21"></a>
 <a id="__codelineno-11-22" name="__codelineno-11-22"></a><span class="hll"><span class="w">    </span><span class="nd">@Override</span>
 </span><a id="__codelineno-11-23" name="__codelineno-11-23"></a><span class="hll"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">onFlowComplete</span><span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w">                  </span><span class="c1">// (3)!</span>
-</span><a id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;📈 Final task count: ${taskCount}&quot;</span>
+</span><a id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"📈 Final task count: ${taskCount}"</span>
 </span><a id="__codelineno-11-25" name="__codelineno-11-25"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-11-26" name="__codelineno-11-26"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -4444,17 +4444,17 @@ La méthode <code>onFilePublish</code> reçoit les chemins de destination et de 
 <span class="normal"><a href="#__codelineno-14-20">20</a></span>
 <span class="normal"><a href="#__codelineno-14-21">21</a></span>
 <span class="normal"><a href="#__codelineno-14-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-10" name="__codelineno-14-10"></a><span class="n">process</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-14-11" name="__codelineno-14-11"></a><span class="hll"><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results&#39;</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11"></a><span class="hll"><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">'results'</span>
 </span><a id="__codelineno-14-12" name="__codelineno-14-12"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-14-13" name="__codelineno-14-13"></a><span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
 <a id="__codelineno-14-14" name="__codelineno-14-14"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-14-15" name="__codelineno-14-15"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;greeting.txt&#39;</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'greeting.txt'</span>
 <a id="__codelineno-14-16" name="__codelineno-14-16"></a><span class="w">    </span><span class="nl">script:</span>
 <a id="__codelineno-14-17" name="__codelineno-14-17"></a><span class="w">    </span><span class="c1">// Utilise notre fonction de plugin personnalisée pour décorer le message</span>
 <a id="__codelineno-14-18" name="__codelineno-14-18"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">decorated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decorateGreeting</span><span class="o">(</span><span class="n">greeting</span><span class="o">)</span>
-<a id="__codelineno-14-19" name="__codelineno-14-19"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-14-20" name="__codelineno-14-20"></a><span class="s2">    echo &#39;$decorated&#39; &gt; greeting.txt</span>
-<a id="__codelineno-14-21" name="__codelineno-14-21"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-14-20" name="__codelineno-14-20"></a><span class="s2">    echo '$decorated' &gt; greeting.txt</span>
+<a id="__codelineno-14-21" name="__codelineno-14-21"></a><span class="s2">    """</span>
 <a id="__codelineno-14-22" name="__codelineno-14-22"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4474,13 +4474,13 @@ La méthode <code>onFilePublish</code> reçoit les chemins de destination et de 
 <a id="__codelineno-15-11" name="__codelineno-15-11"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-15-12" name="__codelineno-15-12"></a><span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
 <a id="__codelineno-15-13" name="__codelineno-15-13"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-15-14" name="__codelineno-15-14"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;greeting.txt&#39;</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'greeting.txt'</span>
 <a id="__codelineno-15-15" name="__codelineno-15-15"></a><span class="w">    </span><span class="nl">script:</span>
 <a id="__codelineno-15-16" name="__codelineno-15-16"></a><span class="w">    </span><span class="c1">// Utilise notre fonction de plugin personnalisée pour décorer le message</span>
 <a id="__codelineno-15-17" name="__codelineno-15-17"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">decorated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decorateGreeting</span><span class="o">(</span><span class="n">greeting</span><span class="o">)</span>
-<a id="__codelineno-15-18" name="__codelineno-15-18"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-15-19" name="__codelineno-15-19"></a><span class="s2">    echo &#39;$decorated&#39; &gt; greeting.txt</span>
-<a id="__codelineno-15-20" name="__codelineno-15-20"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19"></a><span class="s2">    echo '$decorated' &gt; greeting.txt</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20"></a><span class="s2">    """</span>
 <a id="__codelineno-15-21" name="__codelineno-15-21"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4538,17 +4538,17 @@ La méthode <code>onFilePublish</code> reçoit les chemins de destination et de 
 <a id="__codelineno-16-17" name="__codelineno-16-17"></a><span class="w">    </span><span class="nd">@Override</span>
 <a id="__codelineno-16-18" name="__codelineno-16-18"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">onProcessComplete</span><span class="o">(</span><span class="n">TaskHandler</span><span class="w"> </span><span class="n">handler</span><span class="o">,</span><span class="w"> </span><span class="n">TraceRecord</span><span class="w"> </span><span class="n">trace</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-16-19" name="__codelineno-16-19"></a><span class="w">        </span><span class="n">taskCount</span><span class="o">++</span>
-<a id="__codelineno-16-20" name="__codelineno-16-20"></a><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;📊 Tasks completed so far: ${taskCount}&quot;</span>
+<a id="__codelineno-16-20" name="__codelineno-16-20"></a><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"📊 Tasks completed so far: ${taskCount}"</span>
 <a id="__codelineno-16-21" name="__codelineno-16-21"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-16-22" name="__codelineno-16-22"></a>
 <a id="__codelineno-16-23" name="__codelineno-16-23"></a><span class="hll"><span class="w">    </span><span class="nd">@Override</span>
 </span><a id="__codelineno-16-24" name="__codelineno-16-24"></a><span class="hll"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">onFilePublish</span><span class="o">(</span><span class="n">Path</span><span class="w"> </span><span class="n">destination</span><span class="o">,</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="n">source</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-16-25" name="__codelineno-16-25"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;📁 Published: ${destination.fileName}&quot;</span>
+</span><a id="__codelineno-16-25" name="__codelineno-16-25"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"📁 Published: ${destination.fileName}"</span>
 </span><a id="__codelineno-16-26" name="__codelineno-16-26"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span><a id="__codelineno-16-27" name="__codelineno-16-27"></a>
 <a id="__codelineno-16-28" name="__codelineno-16-28"></a><span class="w">    </span><span class="nd">@Override</span>
 <a id="__codelineno-16-29" name="__codelineno-16-29"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">onFlowComplete</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-16-30" name="__codelineno-16-30"></a><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;📈 Final task count: ${taskCount}&quot;</span>
+<a id="__codelineno-16-30" name="__codelineno-16-30"></a><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"📈 Final task count: ${taskCount}"</span>
 <a id="__codelineno-16-31" name="__codelineno-16-31"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-16-32" name="__codelineno-16-32"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -4879,9 +4879,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -5120,7 +5121,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -5799,7 +5800,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -6091,7 +6092,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -6263,7 +6264,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -6273,7 +6274,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page

@@ -4818,28 +4818,28 @@ Se scorrete verso l'inizio del file, troverete un'intestazione composta da molte
 <span class="normal"><a href="#__codelineno-15-37">37</a></span>
 <span class="normal"><a href="#__codelineno-15-38">38</a></span>
 <span class="normal"><a href="#__codelineno-15-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="gp">#</span><span class="c1">#fileformat=VCFv4.2</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="gp">#</span><span class="c1">#FILTER=&lt;ID=LowQual,Description=&quot;Low quality&quot;&gt;</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=AD,Number=R,Type=Integer,Description=&quot;Allelic depths for the ref and alt alleles in the order listed&quot;&gt;</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=DP,Number=1,Type=Integer,Description=&quot;Approximate read depth (reads with MQ=255 or with bad mates are filtered)&quot;&gt;</span>
-<a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=GQ,Number=1,Type=Integer,Description=&quot;Genotype Quality&quot;&gt;</span>
-<a id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=GT,Number=1,Type=String,Description=&quot;Genotype&quot;&gt;</span>
-<a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PL,Number=G,Type=Integer,Description=&quot;Normalized, Phred-scaled likelihoods for genotypes as defined in the VCF specification&quot;&gt;</span>
-<a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=HaplotypeCaller,CommandLine=&quot;HaplotypeCaller --output reads_mother.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abridged]&quot;,Version=&quot;4.5.0.0&quot;,Date=&quot;February 11, 2026 at 4:23:43 PM GMT&quot;&gt;</span>
-<a id="__codelineno-15-9" name="__codelineno-15-9"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=AC,Number=A,Type=Integer,Description=&quot;Allele count in genotypes, for each ALT allele, in the same order as listed&quot;&gt;</span>
-<a id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=AF,Number=A,Type=Float,Description=&quot;Allele Frequency, for each ALT allele, in the same order as listed&quot;&gt;</span>
-<a id="__codelineno-15-11" name="__codelineno-15-11"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=AN,Number=1,Type=Integer,Description=&quot;Total number of alleles in called genotypes&quot;&gt;</span>
-<a id="__codelineno-15-12" name="__codelineno-15-12"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=BaseQRankSum,Number=1,Type=Float,Description=&quot;Z-score from Wilcoxon rank sum test of Alt Vs. Ref base qualities&quot;&gt;</span>
-<a id="__codelineno-15-13" name="__codelineno-15-13"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=DP,Number=1,Type=Integer,Description=&quot;Approximate read depth; some reads may have been filtered&quot;&gt;</span>
-<a id="__codelineno-15-14" name="__codelineno-15-14"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=ExcessHet,Number=1,Type=Float,Description=&quot;Phred-scaled p-value for exact test of excess heterozygosity&quot;&gt;</span>
-<a id="__codelineno-15-15" name="__codelineno-15-15"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=FS,Number=1,Type=Float,Description=&quot;Phred-scaled p-value using Fisher&#39;s exact test to detect strand bias&quot;&gt;</span>
-<a id="__codelineno-15-16" name="__codelineno-15-16"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=InbreedingCoeff,Number=1,Type=Float,Description=&quot;Inbreeding coefficient as estimated from the genotype likelihoods per-sample when compared against the Hardy-Weinberg expectation&quot;&gt;</span>
-<a id="__codelineno-15-17" name="__codelineno-15-17"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MLEAC,Number=A,Type=Integer,Description=&quot;Maximum likelihood expectation (MLE) for the allele counts (not necessarily the same as the AC), for each ALT allele, in the same order as listed&quot;&gt;</span>
-<a id="__codelineno-15-18" name="__codelineno-15-18"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MLEAF,Number=A,Type=Float,Description=&quot;Maximum likelihood expectation (MLE) for the allele frequency (not necessarily the same as the AF), for each ALT allele, in the same order as listed&quot;&gt;</span>
-<a id="__codelineno-15-19" name="__codelineno-15-19"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MQ,Number=1,Type=Float,Description=&quot;RMS Mapping Quality&quot;&gt;</span>
-<a id="__codelineno-15-20" name="__codelineno-15-20"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MQRankSum,Number=1,Type=Float,Description=&quot;Z-score From Wilcoxon rank sum test of Alt vs. Ref read mapping qualities&quot;&gt;</span>
-<a id="__codelineno-15-21" name="__codelineno-15-21"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=QD,Number=1,Type=Float,Description=&quot;Variant Confidence/Quality by Depth&quot;&gt;</span>
-<a id="__codelineno-15-22" name="__codelineno-15-22"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=ReadPosRankSum,Number=1,Type=Float,Description=&quot;Z-score from Wilcoxon rank sum test of Alt vs. Ref read position bias&quot;&gt;</span>
-<a id="__codelineno-15-23" name="__codelineno-15-23"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=SOR,Number=1,Type=Float,Description=&quot;Symmetric Odds Ratio of 2x2 contingency table to detect strand bias&quot;&gt;</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="gp">#</span><span class="c1">#FILTER=&lt;ID=LowQual,Description="Low quality"&gt;</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=AD,Number=R,Type=Integer,Description="Allelic depths for the ref and alt alleles in the order listed"&gt;</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=DP,Number=1,Type=Integer,Description="Approximate read depth (reads with MQ=255 or with bad mates are filtered)"&gt;</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=GQ,Number=1,Type=Integer,Description="Genotype Quality"&gt;</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=GT,Number=1,Type=String,Description="Genotype"&gt;</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PL,Number=G,Type=Integer,Description="Normalized, Phred-scaled likelihoods for genotypes as defined in the VCF specification"&gt;</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=HaplotypeCaller,CommandLine="HaplotypeCaller --output reads_mother.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abridged]",Version="4.5.0.0",Date="February 11, 2026 at 4:23:43 PM GMT"&gt;</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes, for each ALT allele, in the same order as listed"&gt;</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=AF,Number=A,Type=Float,Description="Allele Frequency, for each ALT allele, in the same order as listed"&gt;</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes"&gt;</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=BaseQRankSum,Number=1,Type=Float,Description="Z-score from Wilcoxon rank sum test of Alt Vs. Ref base qualities"&gt;</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=DP,Number=1,Type=Integer,Description="Approximate read depth; some reads may have been filtered"&gt;</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=ExcessHet,Number=1,Type=Float,Description="Phred-scaled p-value for exact test of excess heterozygosity"&gt;</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=FS,Number=1,Type=Float,Description="Phred-scaled p-value using Fisher's exact test to detect strand bias"&gt;</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=InbreedingCoeff,Number=1,Type=Float,Description="Inbreeding coefficient as estimated from the genotype likelihoods per-sample when compared against the Hardy-Weinberg expectation"&gt;</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MLEAC,Number=A,Type=Integer,Description="Maximum likelihood expectation (MLE) for the allele counts (not necessarily the same as the AC), for each ALT allele, in the same order as listed"&gt;</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MLEAF,Number=A,Type=Float,Description="Maximum likelihood expectation (MLE) for the allele frequency (not necessarily the same as the AF), for each ALT allele, in the same order as listed"&gt;</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MQ,Number=1,Type=Float,Description="RMS Mapping Quality"&gt;</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MQRankSum,Number=1,Type=Float,Description="Z-score From Wilcoxon rank sum test of Alt vs. Ref read mapping qualities"&gt;</span>
+<a id="__codelineno-15-21" name="__codelineno-15-21"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=QD,Number=1,Type=Float,Description="Variant Confidence/Quality by Depth"&gt;</span>
+<a id="__codelineno-15-22" name="__codelineno-15-22"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=ReadPosRankSum,Number=1,Type=Float,Description="Z-score from Wilcoxon rank sum test of Alt vs. Ref read position bias"&gt;</span>
+<a id="__codelineno-15-23" name="__codelineno-15-23"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=SOR,Number=1,Type=Float,Description="Symmetric Odds Ratio of 2x2 contingency table to detect strand bias"&gt;</span>
 <a id="__codelineno-15-24" name="__codelineno-15-24"></a><span class="gp">#</span><span class="c1">#contig=&lt;ID=20_10037292_10066351,length=29059&gt;</span>
 <a id="__codelineno-15-25" name="__codelineno-15-25"></a><span class="gp">#</span><span class="c1">#source=HaplotypeCaller</span>
 <a id="__codelineno-15-26" name="__codelineno-15-26"></a><span class="hll"><span class="gp">#</span>CHROM<span class="w">  </span>POS<span class="w">     </span>ID<span class="w">      </span>REF<span class="w">     </span>ALT<span class="w">     </span>QUAL<span class="w">    </span>FILTER<span class="w">  </span>INFO<span class="w">    </span>FORMAT<span class="w">  </span>reads_mother
@@ -5017,7 +5017,7 @@ Tecnicamente questo non è un requisito, ma è una convenzione fortemente raccom
 <a id="__codelineno-25-25" name="__codelineno-25-25" href="#__codelineno-25-25"></a><span class="go">16:51:00.893 INFO  FeatureManager - Using codec BEDCodec to read file file:///data/ref/intervals.bed</span>
 <a id="__codelineno-25-26" name="__codelineno-25-26" href="#__codelineno-25-26"></a><span class="go">16:51:00.905 INFO  IntervalArgumentCollection - Processing 6369 bp from intervals</span>
 <a id="__codelineno-25-27" name="__codelineno-25-27" href="#__codelineno-25-27"></a><span class="go">16:51:00.910 INFO  HaplotypeCaller - Done initializing engine</span>
-<a id="__codelineno-25-28" name="__codelineno-25-28" href="#__codelineno-25-28"></a><span class="go">16:51:00.912 INFO  HaplotypeCallerEngine - Tool is in reference confidence mode and the annotation, the following changes will be made to any specified annotations: &#39;StrandBiasBySample&#39; will be enabled. &#39;ChromosomeCounts&#39;, &#39;FisherStrand&#39;, &#39;StrandOddsRatio&#39; and &#39;QualByDepth&#39; annotations have been disabled</span>
+<a id="__codelineno-25-28" name="__codelineno-25-28" href="#__codelineno-25-28"></a><span class="go">16:51:00.912 INFO  HaplotypeCallerEngine - Tool is in reference confidence mode and the annotation, the following changes will be made to any specified annotations: 'StrandBiasBySample' will be enabled. 'ChromosomeCounts', 'FisherStrand', 'StrandOddsRatio' and 'QualByDepth' annotations have been disabled</span>
 <a id="__codelineno-25-29" name="__codelineno-25-29" href="#__codelineno-25-29"></a><span class="go">16:51:00.917 INFO  NativeLibraryLoader - Loading libgkl_utils.so from jar:file:/opt/conda/share/gatk4-4.5.0.0-0/gatk-package-4.5.0.0-local.jar!/com/intel/gkl/native/libgkl_utils.so</span>
 <a id="__codelineno-25-30" name="__codelineno-25-30" href="#__codelineno-25-30"></a><span class="go">16:51:00.919 INFO  NativeLibraryLoader - Loading libgkl_smithwaterman.so from jar:file:/opt/conda/share/gatk4-4.5.0.0-0/gatk-package-4.5.0.0-local.jar!/com/intel/gkl/native/libgkl_smithwaterman.so</span>
 <a id="__codelineno-25-31" name="__codelineno-25-31" href="#__codelineno-25-31"></a><span class="go">16:51:00.919 INFO  SmithWatermanAligner - Using AVX accelerated SmithWaterman implementation</span>
@@ -5260,19 +5260,19 @@ Tecnicamente questo non è un requisito, ma è una convenzione fortemente raccom
 <span class="normal"><a href="#__codelineno-27-198">198</a></span>
 <span class="normal"><a href="#__codelineno-27-199">199</a></span>
 <span class="normal"><a href="#__codelineno-27-200">200</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="gp">#</span><span class="c1">#fileformat=VCFv4.2</span>
-<a id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="gp">#</span><span class="c1">#ALT=&lt;ID=NON_REF,Description=&quot;Represents any possible alternative allele not already represented at this location by REF and ALT&quot;&gt;</span>
-<a id="__codelineno-27-3" name="__codelineno-27-3"></a><span class="gp">#</span><span class="c1">#FILTER=&lt;ID=LowQual,Description=&quot;Low quality&quot;&gt;</span>
-<a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=AD,Number=R,Type=Integer,Description=&quot;Allelic depths for the ref and alt alleles in the order listed&quot;&gt;</span>
-<a id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=DP,Number=1,Type=Integer,Description=&quot;Approximate read depth (reads with MQ=255 or with bad mates are filtered)&quot;&gt;</span>
-<a id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=GQ,Number=1,Type=Integer,Description=&quot;Genotype Quality&quot;&gt;</span>
-<a id="__codelineno-27-7" name="__codelineno-27-7"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=GT,Number=1,Type=String,Description=&quot;Genotype&quot;&gt;</span>
-<a id="__codelineno-27-8" name="__codelineno-27-8"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=MIN_DP,Number=1,Type=Integer,Description=&quot;Minimum DP observed within the GVCF block&quot;&gt;</span>
-<a id="__codelineno-27-9" name="__codelineno-27-9"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PGT,Number=1,Type=String,Description=&quot;Physical phasing haplotype information, describing how the alternate alleles are phased in relation to one another; will always be heterozygous and is not intended to describe called alleles&quot;&gt;</span>
-<a id="__codelineno-27-10" name="__codelineno-27-10"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PID,Number=1,Type=String,Description=&quot;Physical phasing ID information, where each unique ID within a given sample (but not across samples) connects records within a phasing group&quot;&gt;</span>
-<a id="__codelineno-27-11" name="__codelineno-27-11"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PL,Number=G,Type=Integer,Description=&quot;Normalized, Phred-scaled likelihoods for genotypes as defined in the VCF specification&quot;&gt;</span>
-<a id="__codelineno-27-12" name="__codelineno-27-12"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PS,Number=1,Type=Integer,Description=&quot;Phasing set (typically the position of the first variant in the set)&quot;&gt;</span>
-<a id="__codelineno-27-13" name="__codelineno-27-13"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=SB,Number=4,Type=Integer,Description=&quot;Per-sample component statistics which comprise the Fisher&#39;s Exact Test to detect strand bias.&quot;&gt;</span>
-<a id="__codelineno-27-14" name="__codelineno-27-14"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=HaplotypeCaller,CommandLine=&quot;HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abridged]&quot;,Version=&quot;4.5.0.0&quot;,Date=&quot;February 11, 2026 at 4:51:00 PM GMT&quot;&gt;</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="gp">#</span><span class="c1">#ALT=&lt;ID=NON_REF,Description="Represents any possible alternative allele not already represented at this location by REF and ALT"&gt;</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3"></a><span class="gp">#</span><span class="c1">#FILTER=&lt;ID=LowQual,Description="Low quality"&gt;</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=AD,Number=R,Type=Integer,Description="Allelic depths for the ref and alt alleles in the order listed"&gt;</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=DP,Number=1,Type=Integer,Description="Approximate read depth (reads with MQ=255 or with bad mates are filtered)"&gt;</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=GQ,Number=1,Type=Integer,Description="Genotype Quality"&gt;</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=GT,Number=1,Type=String,Description="Genotype"&gt;</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=MIN_DP,Number=1,Type=Integer,Description="Minimum DP observed within the GVCF block"&gt;</span>
+<a id="__codelineno-27-9" name="__codelineno-27-9"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PGT,Number=1,Type=String,Description="Physical phasing haplotype information, describing how the alternate alleles are phased in relation to one another; will always be heterozygous and is not intended to describe called alleles"&gt;</span>
+<a id="__codelineno-27-10" name="__codelineno-27-10"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PID,Number=1,Type=String,Description="Physical phasing ID information, where each unique ID within a given sample (but not across samples) connects records within a phasing group"&gt;</span>
+<a id="__codelineno-27-11" name="__codelineno-27-11"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PL,Number=G,Type=Integer,Description="Normalized, Phred-scaled likelihoods for genotypes as defined in the VCF specification"&gt;</span>
+<a id="__codelineno-27-12" name="__codelineno-27-12"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PS,Number=1,Type=Integer,Description="Phasing set (typically the position of the first variant in the set)"&gt;</span>
+<a id="__codelineno-27-13" name="__codelineno-27-13"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=SB,Number=4,Type=Integer,Description="Per-sample component statistics which comprise the Fisher's Exact Test to detect strand bias."&gt;</span>
+<a id="__codelineno-27-14" name="__codelineno-27-14"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=HaplotypeCaller,CommandLine="HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abridged]",Version="4.5.0.0",Date="February 11, 2026 at 4:51:00 PM GMT"&gt;</span>
 <a id="__codelineno-27-15" name="__codelineno-27-15"></a><span class="gp">#</span><span class="c1">#GVCFBlock0-1=minGQ=0(inclusive),maxGQ=1(exclusive)</span>
 <a id="__codelineno-27-16" name="__codelineno-27-16"></a><span class="gp">#</span><span class="c1">#GVCFBlock1-2=minGQ=1(inclusive),maxGQ=2(exclusive)</span>
 <a id="__codelineno-27-17" name="__codelineno-27-17"></a><span class="gp">#</span><span class="c1">#GVCFBlock10-11=minGQ=10(inclusive),maxGQ=11(exclusive)</span>
@@ -5338,16 +5338,16 @@ Tecnicamente questo non è un requisito, ma è una convenzione fortemente raccom
 <a id="__codelineno-27-77" name="__codelineno-27-77"></a><span class="gp">#</span><span class="c1">#GVCFBlock9-10=minGQ=9(inclusive),maxGQ=10(exclusive)</span>
 <a id="__codelineno-27-78" name="__codelineno-27-78"></a><span class="gp">#</span><span class="c1">#GVCFBlock90-99=minGQ=90(inclusive),maxGQ=99(exclusive)</span>
 <a id="__codelineno-27-79" name="__codelineno-27-79"></a><span class="gp">#</span><span class="c1">#GVCFBlock99-100=minGQ=99(inclusive),maxGQ=100(exclusive)</span>
-<a id="__codelineno-27-80" name="__codelineno-27-80"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=BaseQRankSum,Number=1,Type=Float,Description=&quot;Z-score from Wilcoxon rank sum test of Alt Vs. Ref base qualities&quot;&gt;</span>
-<a id="__codelineno-27-81" name="__codelineno-27-81"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=DP,Number=1,Type=Integer,Description=&quot;Approximate read depth; some reads may have been filtered&quot;&gt;</span>
-<a id="__codelineno-27-82" name="__codelineno-27-82"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=END,Number=1,Type=Integer,Description=&quot;Stop position of the interval&quot;&gt;</span>
-<a id="__codelineno-27-83" name="__codelineno-27-83"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=ExcessHet,Number=1,Type=Float,Description=&quot;Phred-scaled p-value for exact test of excess heterozygosity&quot;&gt;</span>
-<a id="__codelineno-27-84" name="__codelineno-27-84"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=InbreedingCoeff,Number=1,Type=Float,Description=&quot;Inbreeding coefficient as estimated from the genotype likelihoods per-sample when compared against the Hardy-Weinberg expectation&quot;&gt;</span>
-<a id="__codelineno-27-85" name="__codelineno-27-85"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MLEAC,Number=A,Type=Integer,Description=&quot;Maximum likelihood expectation (MLE) for the allele counts (not necessarily the same as the AC), for each ALT allele, in the same order as listed&quot;&gt;</span>
-<a id="__codelineno-27-86" name="__codelineno-27-86"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MLEAF,Number=A,Type=Float,Description=&quot;Maximum likelihood expectation (MLE) for the allele frequency (not necessarily the same as the AF), for each ALT allele, in the same order as listed&quot;&gt;</span>
-<a id="__codelineno-27-87" name="__codelineno-27-87"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MQRankSum,Number=1,Type=Float,Description=&quot;Z-score From Wilcoxon rank sum test of Alt vs. Ref read mapping qualities&quot;&gt;</span>
-<a id="__codelineno-27-88" name="__codelineno-27-88"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=RAW_MQandDP,Number=2,Type=Integer,Description=&quot;Raw data (sum of squared MQ and total depth) for improved RMS Mapping Quality calculation. Incompatible with deprecated RAW_MQ formulation.&quot;&gt;</span>
-<a id="__codelineno-27-89" name="__codelineno-27-89"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=ReadPosRankSum,Number=1,Type=Float,Description=&quot;Z-score from Wilcoxon rank sum test of Alt vs. Ref read position bias&quot;&gt;</span>
+<a id="__codelineno-27-80" name="__codelineno-27-80"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=BaseQRankSum,Number=1,Type=Float,Description="Z-score from Wilcoxon rank sum test of Alt Vs. Ref base qualities"&gt;</span>
+<a id="__codelineno-27-81" name="__codelineno-27-81"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=DP,Number=1,Type=Integer,Description="Approximate read depth; some reads may have been filtered"&gt;</span>
+<a id="__codelineno-27-82" name="__codelineno-27-82"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=END,Number=1,Type=Integer,Description="Stop position of the interval"&gt;</span>
+<a id="__codelineno-27-83" name="__codelineno-27-83"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=ExcessHet,Number=1,Type=Float,Description="Phred-scaled p-value for exact test of excess heterozygosity"&gt;</span>
+<a id="__codelineno-27-84" name="__codelineno-27-84"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=InbreedingCoeff,Number=1,Type=Float,Description="Inbreeding coefficient as estimated from the genotype likelihoods per-sample when compared against the Hardy-Weinberg expectation"&gt;</span>
+<a id="__codelineno-27-85" name="__codelineno-27-85"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MLEAC,Number=A,Type=Integer,Description="Maximum likelihood expectation (MLE) for the allele counts (not necessarily the same as the AC), for each ALT allele, in the same order as listed"&gt;</span>
+<a id="__codelineno-27-86" name="__codelineno-27-86"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MLEAF,Number=A,Type=Float,Description="Maximum likelihood expectation (MLE) for the allele frequency (not necessarily the same as the AF), for each ALT allele, in the same order as listed"&gt;</span>
+<a id="__codelineno-27-87" name="__codelineno-27-87"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MQRankSum,Number=1,Type=Float,Description="Z-score From Wilcoxon rank sum test of Alt vs. Ref read mapping qualities"&gt;</span>
+<a id="__codelineno-27-88" name="__codelineno-27-88"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=RAW_MQandDP,Number=2,Type=Integer,Description="Raw data (sum of squared MQ and total depth) for improved RMS Mapping Quality calculation. Incompatible with deprecated RAW_MQ formulation."&gt;</span>
+<a id="__codelineno-27-89" name="__codelineno-27-89"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=ReadPosRankSum,Number=1,Type=Float,Description="Z-score from Wilcoxon rank sum test of Alt vs. Ref read position bias"&gt;</span>
 <a id="__codelineno-27-90" name="__codelineno-27-90"></a><span class="gp">#</span><span class="c1">#contig=&lt;ID=20_10037292_10066351,length=29059&gt;</span>
 <a id="__codelineno-27-91" name="__codelineno-27-91"></a><span class="gp">#</span><span class="c1">#source=HaplotypeCaller</span>
 <a id="__codelineno-27-92" name="__codelineno-27-92"></a><span class="hll"><span class="gp">#</span>CHROM<span class="w">	</span>POS<span class="w">	</span>ID<span class="w">	</span>REF<span class="w">	</span>ALT<span class="w">	</span>QUAL<span class="w">	</span>FILTER<span class="w">	</span>INFO<span class="w">	</span>FORMAT<span class="w">	</span>reads_mother
@@ -5504,7 +5504,7 @@ Questo rende possibile distinguere tra due casi molto diversi: (1) ci sono dati 
 <a id="__codelineno-29-25" name="__codelineno-29-25" href="#__codelineno-29-25"></a><span class="go">17:28:30.933 INFO  FeatureManager - Using codec BEDCodec to read file file:///data/ref/intervals.bed</span>
 <a id="__codelineno-29-26" name="__codelineno-29-26" href="#__codelineno-29-26"></a><span class="go">17:28:30.946 INFO  IntervalArgumentCollection - Processing 6369 bp from intervals</span>
 <a id="__codelineno-29-27" name="__codelineno-29-27" href="#__codelineno-29-27"></a><span class="go">17:28:30.951 INFO  HaplotypeCaller - Done initializing engine</span>
-<a id="__codelineno-29-28" name="__codelineno-29-28" href="#__codelineno-29-28"></a><span class="go">17:28:30.953 INFO  HaplotypeCallerEngine - Tool is in reference confidence mode and the annotation, the following changes will be made to any specified annotations: &#39;StrandBiasBySample&#39; will be enabled. &#39;ChromosomeCounts&#39;, &#39;FisherStrand&#39;, &#39;StrandOddsRatio&#39; and &#39;QualByDepth&#39; annotations have been disabled</span>
+<a id="__codelineno-29-28" name="__codelineno-29-28" href="#__codelineno-29-28"></a><span class="go">17:28:30.953 INFO  HaplotypeCallerEngine - Tool is in reference confidence mode and the annotation, the following changes will be made to any specified annotations: 'StrandBiasBySample' will be enabled. 'ChromosomeCounts', 'FisherStrand', 'StrandOddsRatio' and 'QualByDepth' annotations have been disabled</span>
 <a id="__codelineno-29-29" name="__codelineno-29-29" href="#__codelineno-29-29"></a><span class="go">17:28:30.957 INFO  NativeLibraryLoader - Loading libgkl_utils.so from jar:file:/opt/conda/share/gatk4-4.5.0.0-0/gatk-package-4.5.0.0-local.jar!/com/intel/gkl/native/libgkl_utils.so</span>
 <a id="__codelineno-29-30" name="__codelineno-29-30" href="#__codelineno-29-30"></a><span class="go">17:28:30.959 INFO  NativeLibraryLoader - Loading libgkl_smithwaterman.so from jar:file:/opt/conda/share/gatk4-4.5.0.0-0/gatk-package-4.5.0.0-local.jar!/com/intel/gkl/native/libgkl_smithwaterman.so</span>
 <a id="__codelineno-29-31" name="__codelineno-29-31" href="#__codelineno-29-31"></a><span class="go">17:28:30.960 INFO  SmithWatermanAligner - Using AVX accelerated SmithWaterman implementation</span>
@@ -5574,7 +5574,7 @@ Questo rende possibile distinguere tra due casi molto diversi: (1) ci sono dati 
 <a id="__codelineno-31-25" name="__codelineno-31-25" href="#__codelineno-31-25"></a><span class="go">17:30:10.277 INFO  FeatureManager - Using codec BEDCodec to read file file:///data/ref/intervals.bed</span>
 <a id="__codelineno-31-26" name="__codelineno-31-26" href="#__codelineno-31-26"></a><span class="go">17:30:10.290 INFO  IntervalArgumentCollection - Processing 6369 bp from intervals</span>
 <a id="__codelineno-31-27" name="__codelineno-31-27" href="#__codelineno-31-27"></a><span class="go">17:30:10.296 INFO  HaplotypeCaller - Done initializing engine</span>
-<a id="__codelineno-31-28" name="__codelineno-31-28" href="#__codelineno-31-28"></a><span class="go">17:30:10.298 INFO  HaplotypeCallerEngine - Tool is in reference confidence mode and the annotation, the following changes will be made to any specified annotations: &#39;StrandBiasBySample&#39; will be enabled. &#39;ChromosomeCounts&#39;, &#39;FisherStrand&#39;, &#39;StrandOddsRatio&#39; and &#39;QualByDepth&#39; annotations have been disabled</span>
+<a id="__codelineno-31-28" name="__codelineno-31-28" href="#__codelineno-31-28"></a><span class="go">17:30:10.298 INFO  HaplotypeCallerEngine - Tool is in reference confidence mode and the annotation, the following changes will be made to any specified annotations: 'StrandBiasBySample' will be enabled. 'ChromosomeCounts', 'FisherStrand', 'StrandOddsRatio' and 'QualByDepth' annotations have been disabled</span>
 <a id="__codelineno-31-29" name="__codelineno-31-29" href="#__codelineno-31-29"></a><span class="go">17:30:10.302 INFO  NativeLibraryLoader - Loading libgkl_utils.so from jar:file:/opt/conda/share/gatk4-4.5.0.0-0/gatk-package-4.5.0.0-local.jar!/com/intel/gkl/native/libgkl_utils.so</span>
 <a id="__codelineno-31-30" name="__codelineno-31-30" href="#__codelineno-31-30"></a><span class="go">17:30:10.303 INFO  NativeLibraryLoader - Loading libgkl_smithwaterman.so from jar:file:/opt/conda/share/gatk4-4.5.0.0-0/gatk-package-4.5.0.0-local.jar!/com/intel/gkl/native/libgkl_smithwaterman.so</span>
 <a id="__codelineno-31-31" name="__codelineno-31-31" href="#__codelineno-31-31"></a><span class="go">17:30:10.304 INFO  SmithWatermanAligner - Using AVX accelerated SmithWaterman implementation</span>
@@ -5795,40 +5795,40 @@ Potete esplorarlo ma vedrete rapidamente che questo formato di data store non è
 <span class="normal"><a href="#__codelineno-37-56">56</a></span>
 <span class="normal"><a href="#__codelineno-37-57">57</a></span>
 <span class="normal"><a href="#__codelineno-37-58">58</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1"></a><span class="gp">#</span><span class="c1">#fileformat=VCFv4.2</span>
-<a id="__codelineno-37-2" name="__codelineno-37-2"></a><span class="gp">#</span><span class="c1">#ALT=&lt;ID=NON_REF,Description=&quot;Represents any possible alternative allele not already represented at this location by REF and ALT&quot;&gt;</span>
-<a id="__codelineno-37-3" name="__codelineno-37-3"></a><span class="gp">#</span><span class="c1">#FILTER=&lt;ID=LowQual,Description=&quot;Low quality&quot;&gt;</span>
-<a id="__codelineno-37-4" name="__codelineno-37-4"></a><span class="gp">#</span><span class="c1">#FILTER=&lt;ID=PASS,Description=&quot;All filters passed&quot;&gt;</span>
-<a id="__codelineno-37-5" name="__codelineno-37-5"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=AD,Number=R,Type=Integer,Description=&quot;Allelic depths for the ref and alt alleles in the order listed&quot;&gt;</span>
-<a id="__codelineno-37-6" name="__codelineno-37-6"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=DP,Number=1,Type=Integer,Description=&quot;Approximate read depth (reads with MQ=255 or with bad mates are filtered)&quot;&gt;</span>
-<a id="__codelineno-37-7" name="__codelineno-37-7"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=GQ,Number=1,Type=Integer,Description=&quot;Genotype Quality&quot;&gt;</span>
-<a id="__codelineno-37-8" name="__codelineno-37-8"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=GT,Number=1,Type=String,Description=&quot;Genotype&quot;&gt;</span>
-<a id="__codelineno-37-9" name="__codelineno-37-9"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=MIN_DP,Number=1,Type=Integer,Description=&quot;Minimum DP observed within the GVCF block&quot;&gt;</span>
-<a id="__codelineno-37-10" name="__codelineno-37-10"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PGT,Number=1,Type=String,Description=&quot;Physical phasing haplotype information, describing how the alternate alleles are phased in relation to one another; will always be heterozygous and is not intended to describe called alleles&quot;&gt;</span>
-<a id="__codelineno-37-11" name="__codelineno-37-11"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PID,Number=1,Type=String,Description=&quot;Physical phasing ID information, where each unique ID within a given sample (but not across samples) connects records within a phasing group&quot;&gt;</span>
-<a id="__codelineno-37-12" name="__codelineno-37-12"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PL,Number=G,Type=Integer,Description=&quot;Normalized, Phred-scaled likelihoods for genotypes as defined in the VCF specification&quot;&gt;</span>
-<a id="__codelineno-37-13" name="__codelineno-37-13"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PS,Number=1,Type=Integer,Description=&quot;Phasing set (typically the position of the first variant in the set)&quot;&gt;</span>
-<a id="__codelineno-37-14" name="__codelineno-37-14"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=RGQ,Number=1,Type=Integer,Description=&quot;Unconditional reference genotype confidence, encoded as a phred quality -10*log10 p(genotype call is wrong)&quot;&gt;</span>
-<a id="__codelineno-37-15" name="__codelineno-37-15"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=SB,Number=4,Type=Integer,Description=&quot;Per-sample component statistics which comprise the Fisher&#39;s Exact Test to detect strand bias.&quot;&gt;</span>
-<a id="__codelineno-37-16" name="__codelineno-37-16"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=GenomicsDBImport,CommandLine=&quot;GenomicsDBImport --genomicsdb-workspace-path family_trio_gdb --variant reads_mother.g.vcf --variant reads_father.g.vcf --variant reads_son.g.vcf --intervals /data/ref/intervals.bed [abridged]&quot;,Version=&quot;4.5.0.0&quot;,Date=&quot;February 11, 2026 at 5:37:07 PM GMT&quot;&gt;</span>
-<a id="__codelineno-37-17" name="__codelineno-37-17"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=GenotypeGVCFs,CommandLine=&quot;GenotypeGVCFs --output family_trio.vcf --variant gendb://family_trio_gdb --reference /data/ref/ref.fasta --include-non-variant-sites false [abridged]&quot;,Version=&quot;4.5.0.0&quot;,Date=&quot;February 11, 2026 at 5:38:45 PM GMT&quot;&gt;</span>
-<a id="__codelineno-37-18" name="__codelineno-37-18"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=HaplotypeCaller,CommandLine=&quot;HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abridged]&quot;,Version=&quot;4.5.0.0&quot;,Date=&quot;February 11, 2026 at 4:51:00 PM GMT&quot;&gt;</span>
-<a id="__codelineno-37-19" name="__codelineno-37-19"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=AC,Number=A,Type=Integer,Description=&quot;Allele count in genotypes, for each ALT allele, in the same order as listed&quot;&gt;</span>
-<a id="__codelineno-37-20" name="__codelineno-37-20"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=AF,Number=A,Type=Float,Description=&quot;Allele Frequency, for each ALT allele, in the same order as listed&quot;&gt;</span>
-<a id="__codelineno-37-21" name="__codelineno-37-21"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=AN,Number=1,Type=Integer,Description=&quot;Total number of alleles in called genotypes&quot;&gt;</span>
-<a id="__codelineno-37-22" name="__codelineno-37-22"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=BaseQRankSum,Number=1,Type=Float,Description=&quot;Z-score from Wilcoxon rank sum test of Alt Vs. Ref base qualities&quot;&gt;</span>
-<a id="__codelineno-37-23" name="__codelineno-37-23"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=DP,Number=1,Type=Integer,Description=&quot;Approximate read depth; some reads may have been filtered&quot;&gt;</span>
-<a id="__codelineno-37-24" name="__codelineno-37-24"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=END,Number=1,Type=Integer,Description=&quot;Stop position of the interval&quot;&gt;</span>
-<a id="__codelineno-37-25" name="__codelineno-37-25"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=ExcessHet,Number=1,Type=Float,Description=&quot;Phred-scaled p-value for exact test of excess heterozygosity&quot;&gt;</span>
-<a id="__codelineno-37-26" name="__codelineno-37-26"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=FS,Number=1,Type=Float,Description=&quot;Phred-scaled p-value using Fisher&#39;s exact test to detect strand bias&quot;&gt;</span>
-<a id="__codelineno-37-27" name="__codelineno-37-27"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=InbreedingCoeff,Number=1,Type=Float,Description=&quot;Inbreeding coefficient as estimated from the genotype likelihoods per-sample when compared against the Hardy-Weinberg expectation&quot;&gt;</span>
-<a id="__codelineno-37-28" name="__codelineno-37-28"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MLEAC,Number=A,Type=Integer,Description=&quot;Maximum likelihood expectation (MLE) for the allele counts (not necessarily the same as the AC), for each ALT allele, in the same order as listed&quot;&gt;</span>
-<a id="__codelineno-37-29" name="__codelineno-37-29"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MLEAF,Number=A,Type=Float,Description=&quot;Maximum likelihood expectation (MLE) for the allele frequency (not necessarily the same as the AF), for each ALT allele, in the same order as listed&quot;&gt;</span>
-<a id="__codelineno-37-30" name="__codelineno-37-30"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MQ,Number=1,Type=Float,Description=&quot;RMS Mapping Quality&quot;&gt;</span>
-<a id="__codelineno-37-31" name="__codelineno-37-31"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MQRankSum,Number=1,Type=Float,Description=&quot;Z-score From Wilcoxon rank sum test of Alt vs. Ref read mapping qualities&quot;&gt;</span>
-<a id="__codelineno-37-32" name="__codelineno-37-32"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=QD,Number=1,Type=Float,Description=&quot;Variant Confidence/Quality by Depth&quot;&gt;</span>
-<a id="__codelineno-37-33" name="__codelineno-37-33"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=RAW_MQandDP,Number=2,Type=Integer,Description=&quot;Raw data (sum of squared MQ and total depth) for improved RMS Mapping Quality calculation. Incompatible with deprecated RAW_MQ formulation.&quot;&gt;</span>
-<a id="__codelineno-37-34" name="__codelineno-37-34"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=ReadPosRankSum,Number=1,Type=Float,Description=&quot;Z-score from Wilcoxon rank sum test of Alt vs. Ref read position bias&quot;&gt;</span>
-<a id="__codelineno-37-35" name="__codelineno-37-35"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=SOR,Number=1,Type=Float,Description=&quot;Symmetric Odds Ratio of 2x2 contingency table to detect strand bias&quot;&gt;</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2"></a><span class="gp">#</span><span class="c1">#ALT=&lt;ID=NON_REF,Description="Represents any possible alternative allele not already represented at this location by REF and ALT"&gt;</span>
+<a id="__codelineno-37-3" name="__codelineno-37-3"></a><span class="gp">#</span><span class="c1">#FILTER=&lt;ID=LowQual,Description="Low quality"&gt;</span>
+<a id="__codelineno-37-4" name="__codelineno-37-4"></a><span class="gp">#</span><span class="c1">#FILTER=&lt;ID=PASS,Description="All filters passed"&gt;</span>
+<a id="__codelineno-37-5" name="__codelineno-37-5"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=AD,Number=R,Type=Integer,Description="Allelic depths for the ref and alt alleles in the order listed"&gt;</span>
+<a id="__codelineno-37-6" name="__codelineno-37-6"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=DP,Number=1,Type=Integer,Description="Approximate read depth (reads with MQ=255 or with bad mates are filtered)"&gt;</span>
+<a id="__codelineno-37-7" name="__codelineno-37-7"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=GQ,Number=1,Type=Integer,Description="Genotype Quality"&gt;</span>
+<a id="__codelineno-37-8" name="__codelineno-37-8"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=GT,Number=1,Type=String,Description="Genotype"&gt;</span>
+<a id="__codelineno-37-9" name="__codelineno-37-9"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=MIN_DP,Number=1,Type=Integer,Description="Minimum DP observed within the GVCF block"&gt;</span>
+<a id="__codelineno-37-10" name="__codelineno-37-10"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PGT,Number=1,Type=String,Description="Physical phasing haplotype information, describing how the alternate alleles are phased in relation to one another; will always be heterozygous and is not intended to describe called alleles"&gt;</span>
+<a id="__codelineno-37-11" name="__codelineno-37-11"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PID,Number=1,Type=String,Description="Physical phasing ID information, where each unique ID within a given sample (but not across samples) connects records within a phasing group"&gt;</span>
+<a id="__codelineno-37-12" name="__codelineno-37-12"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PL,Number=G,Type=Integer,Description="Normalized, Phred-scaled likelihoods for genotypes as defined in the VCF specification"&gt;</span>
+<a id="__codelineno-37-13" name="__codelineno-37-13"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PS,Number=1,Type=Integer,Description="Phasing set (typically the position of the first variant in the set)"&gt;</span>
+<a id="__codelineno-37-14" name="__codelineno-37-14"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=RGQ,Number=1,Type=Integer,Description="Unconditional reference genotype confidence, encoded as a phred quality -10*log10 p(genotype call is wrong)"&gt;</span>
+<a id="__codelineno-37-15" name="__codelineno-37-15"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=SB,Number=4,Type=Integer,Description="Per-sample component statistics which comprise the Fisher's Exact Test to detect strand bias."&gt;</span>
+<a id="__codelineno-37-16" name="__codelineno-37-16"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=GenomicsDBImport,CommandLine="GenomicsDBImport --genomicsdb-workspace-path family_trio_gdb --variant reads_mother.g.vcf --variant reads_father.g.vcf --variant reads_son.g.vcf --intervals /data/ref/intervals.bed [abridged]",Version="4.5.0.0",Date="February 11, 2026 at 5:37:07 PM GMT"&gt;</span>
+<a id="__codelineno-37-17" name="__codelineno-37-17"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=GenotypeGVCFs,CommandLine="GenotypeGVCFs --output family_trio.vcf --variant gendb://family_trio_gdb --reference /data/ref/ref.fasta --include-non-variant-sites false [abridged]",Version="4.5.0.0",Date="February 11, 2026 at 5:38:45 PM GMT"&gt;</span>
+<a id="__codelineno-37-18" name="__codelineno-37-18"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=HaplotypeCaller,CommandLine="HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abridged]",Version="4.5.0.0",Date="February 11, 2026 at 4:51:00 PM GMT"&gt;</span>
+<a id="__codelineno-37-19" name="__codelineno-37-19"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes, for each ALT allele, in the same order as listed"&gt;</span>
+<a id="__codelineno-37-20" name="__codelineno-37-20"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=AF,Number=A,Type=Float,Description="Allele Frequency, for each ALT allele, in the same order as listed"&gt;</span>
+<a id="__codelineno-37-21" name="__codelineno-37-21"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes"&gt;</span>
+<a id="__codelineno-37-22" name="__codelineno-37-22"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=BaseQRankSum,Number=1,Type=Float,Description="Z-score from Wilcoxon rank sum test of Alt Vs. Ref base qualities"&gt;</span>
+<a id="__codelineno-37-23" name="__codelineno-37-23"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=DP,Number=1,Type=Integer,Description="Approximate read depth; some reads may have been filtered"&gt;</span>
+<a id="__codelineno-37-24" name="__codelineno-37-24"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=END,Number=1,Type=Integer,Description="Stop position of the interval"&gt;</span>
+<a id="__codelineno-37-25" name="__codelineno-37-25"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=ExcessHet,Number=1,Type=Float,Description="Phred-scaled p-value for exact test of excess heterozygosity"&gt;</span>
+<a id="__codelineno-37-26" name="__codelineno-37-26"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=FS,Number=1,Type=Float,Description="Phred-scaled p-value using Fisher's exact test to detect strand bias"&gt;</span>
+<a id="__codelineno-37-27" name="__codelineno-37-27"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=InbreedingCoeff,Number=1,Type=Float,Description="Inbreeding coefficient as estimated from the genotype likelihoods per-sample when compared against the Hardy-Weinberg expectation"&gt;</span>
+<a id="__codelineno-37-28" name="__codelineno-37-28"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MLEAC,Number=A,Type=Integer,Description="Maximum likelihood expectation (MLE) for the allele counts (not necessarily the same as the AC), for each ALT allele, in the same order as listed"&gt;</span>
+<a id="__codelineno-37-29" name="__codelineno-37-29"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MLEAF,Number=A,Type=Float,Description="Maximum likelihood expectation (MLE) for the allele frequency (not necessarily the same as the AF), for each ALT allele, in the same order as listed"&gt;</span>
+<a id="__codelineno-37-30" name="__codelineno-37-30"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MQ,Number=1,Type=Float,Description="RMS Mapping Quality"&gt;</span>
+<a id="__codelineno-37-31" name="__codelineno-37-31"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MQRankSum,Number=1,Type=Float,Description="Z-score From Wilcoxon rank sum test of Alt vs. Ref read mapping qualities"&gt;</span>
+<a id="__codelineno-37-32" name="__codelineno-37-32"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=QD,Number=1,Type=Float,Description="Variant Confidence/Quality by Depth"&gt;</span>
+<a id="__codelineno-37-33" name="__codelineno-37-33"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=RAW_MQandDP,Number=2,Type=Integer,Description="Raw data (sum of squared MQ and total depth) for improved RMS Mapping Quality calculation. Incompatible with deprecated RAW_MQ formulation."&gt;</span>
+<a id="__codelineno-37-34" name="__codelineno-37-34"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=ReadPosRankSum,Number=1,Type=Float,Description="Z-score from Wilcoxon rank sum test of Alt vs. Ref read position bias"&gt;</span>
+<a id="__codelineno-37-35" name="__codelineno-37-35"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=SOR,Number=1,Type=Float,Description="Symmetric Odds Ratio of 2x2 contingency table to detect strand bias"&gt;</span>
 <a id="__codelineno-37-36" name="__codelineno-37-36"></a><span class="gp">#</span><span class="c1">#contig=&lt;ID=20_10037292_10066351,length=29059&gt;</span>
 <a id="__codelineno-37-37" name="__codelineno-37-37"></a><span class="gp">#</span><span class="c1">#source=GenomicsDBImport</span>
 <a id="__codelineno-37-38" name="__codelineno-37-38"></a><span class="gp">#</span><span class="c1">#source=GenotypeGVCFs</span>
@@ -6202,9 +6202,10 @@ input[type="radio"].wrong {
   z-index: 3; /* Below Material header (z-index: 4) but above page content */
 }
 
-/* Show mobile tracker only on small screens (mobile/tablet) */
-/* Material breakpoint: up to 76.1875em (1219px) */
-@media screen and (max-width: 76.1875em) {
+/* Show the mobile tracker only when the secondary sidebar (and its progress
+   widget) is hidden. Material reveals .md-sidebar--secondary at min-width: 60em,
+   so the mobile tracker must stop at 60em - 1px to avoid showing both at once. */
+@media screen and (max-width: 59.9375em) {
   .quiz-progress-mobile {
     display: block;
   }
@@ -6443,7 +6444,7 @@ window.mkdocsQuizConfig = {
   progressSidebarPosition: "bottom"
 };
 </script><script type="text/javascript" defer>// Wrap everything in an IIFE to avoid variable redeclaration issues
-// when Material for MkDocs instant navigation reloads the page
+// when Material theme instant navigation reloads the page
 (function () {
   // Constants
   const STORAGE_KEY_PREFIX = "quiz_progress_";
@@ -7122,7 +7123,7 @@ window.mkdocsQuizConfig = {
       if (headerLink) {
         const handler = (e) => {
           // Let the browser handle the anchor navigation normally
-          // This prevents Material for MkDocs from intercepting it as a page navigation
+          // This prevents Material themes from intercepting it as a page navigation
           e.stopPropagation();
         };
         addTrackedEventListener(headerLink, "click", handler);
@@ -7414,7 +7415,7 @@ window.mkdocsQuizConfig = {
 
       const submitHandler = (event) => {
         event.preventDefault();
-        event.stopPropagation(); // Prevent Material theme from intercepting form submission
+        event.stopPropagation(); // Prevent Material themes from intercepting form submission
         let is_correct = false;
         let selectedValues = [];
         let section = quiz.querySelector("section");
@@ -7586,7 +7587,7 @@ window.mkdocsQuizConfig = {
     initializePage();
   }
 
-  // Material for MkDocs instant navigation support
+  // Material theme instant navigation support
   // Cleanup and reinitialize when navigating between pages
   if (typeof document$ !== "undefined") {
     // Unsubscribe from any previous subscription to prevent duplicate handlers
@@ -7596,7 +7597,7 @@ window.mkdocsQuizConfig = {
       window._mkdocsQuizSubscription.unsubscribe();
     }
 
-    // Material theme with instant navigation is active
+    // A Material theme with instant navigation is active
     window._mkdocsQuizSubscription = document$.subscribe(() => {
       cleanup(); // Remove old event listeners to prevent memory leaks
       // Reinitialize everything for the new page
