@@ -149,7 +149,7 @@ hide:
 
         [View the training :material-arrow-right:](nf4_science/genomics/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**RNAseq:** Develop an RNAseq processing pipeline"
+    ??? courses "**RNAseq:** Develop a bulk RNAseq processing pipeline"
 
         A course for researchers who wish to learn how to develop their own RNAseq pipelines, using a bulk RNAseq processing use case to demonstrate essential Nextflow development patterns.
 
