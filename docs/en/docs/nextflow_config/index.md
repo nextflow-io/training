@@ -1,5 +1,5 @@
 ---
-title: Nextflow Dot Config
+title: Nextflow Config
 hide:
   - toc
 page_type: index_page
@@ -18,9 +18,9 @@ additional_information:
     - "**Courses:** Must have completed [Nextflow Run](../nextflow_run/index.md) or otherwise be comfortable running a local pipeline with `nextflow run`."
 ---
 
-# Nextflow Dot Config
+# Nextflow Config
 
-**Nextflow Dot Config is a hands-on introduction to configuring Nextflow pipeline execution.**
+**Nextflow Config is a hands-on introduction to configuring Nextflow pipeline execution.**
 
 Working through goal-oriented exercises, you will learn how to manage inputs and outputs, adapt a pipeline to different compute environments, and bundle configuration into switchable profiles.
 

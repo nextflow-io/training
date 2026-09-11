@@ -28,7 +28,7 @@ nav:
       - seqera_run/02_launch_from_cli.md
       - seqera_run/next_steps.md
       - seqera_run/survey.md
-  - Nextflow Dot Config:
+  - Nextflow Config:
       - Overview: nextflow_config/index.md
       - nextflow_config/00_orientation.md
       - nextflow_config/01_parameters_and_outputs.md
@@ -189,7 +189,7 @@ extra:
     nextflow_run/index.md: Nextflow Run
     nfcore_run/index.md: Use nf-core
     seqera_run/index.md: Scale with Seqera
-    nextflow_config/index.md: Nextflow Dot Config
+    nextflow_config/index.md: Nextflow Config
     hello_nextflow/index.md: Hello Nextflow
     hello_nf-core/index.md: Build with nf-core
     nf4_science/index.md: Nextflow for Science

@@ -1,6 +1,6 @@
 # Course summary
 
-Congratulations on completing the Nextflow Dot Config training course! 🎉
+Congratulations on completing the Nextflow Config training course! 🎉
 
 ## Your journey
 

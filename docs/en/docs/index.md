@@ -103,7 +103,7 @@ hide:
 
     Learn to configure your pipelines effectively.
 
-    ??? courses "**Nextflow Dot Config:** Configure pipelines like a pro"
+    ??? courses "**Nextflow Config:** Configure pipelines like a pro"
 
         A hands-on introduction to configuring Nextflow pipeline execution: managing inputs and outputs, adapting to different compute environments, and switching between preset configuration profiles.
 
