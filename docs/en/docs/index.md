@@ -99,9 +99,9 @@ hide:
 
     ---
 
-    ### :material-tune:{.nextflow-primary} Configure execution {.mt-1}
+    ### :material-tune:{.nextflow-primary} Manage execution {.mt-1}
 
-    Learn to configure your pipelines effectively.
+    Learn to manage pipeline execution effectively.
 
     ??? courses "**Nextflow Config:** Configure pipelines like a pro"
 
