@@ -168,3 +168,41 @@ hide:
         [View the training :material-arrow-right:](nf4_science/imaging/index.md){ .md-button .md-button--secondary }
 
 </div>
+
+## Setup & Help
+
+<div class="grid cards mb-4" markdown>
+
+-   :material-cog-outline:{ .lg .middle } __Training Environment__
+
+    ---
+
+    Options for setting up your environment for the Nextflow trainings.
+
+    [View the training environments :material-arrow-right:](envsetup/index.md){ .md-button .md-button--secondary }
+
+-   :material-tag-outline:{ .lg .middle } __Nextflow versions__
+
+    ---
+
+    Understanding and managing the evolution of Nextflow's syntax versions.
+
+    [Check version requirements :material-arrow-right:](info/nxf_versions.md){ .md-button .md-button--secondary }
+
+-   :material-file-code-outline:{ .lg .middle } __The Hello pipeline__
+
+    ---
+
+    Recap of what the Hello pipeline does and how it is structured.
+
+    [Read the recap :material-arrow-right:](info/hello_pipeline.md){ .md-button .md-button--secondary }
+
+-   :material-lifebuoy:{ .lg .middle } __Getting help__
+
+    ---
+
+    Helpful resources when you have a problem with Nextflow training.
+
+    [Find help :material-arrow-right:](help.md){ .md-button .md-button--secondary }
+
+</div>
