@@ -143,11 +143,23 @@ hide:
 
     Learn to develop Nextflow pipelines for specific scientific applications.
 
-    ??? catalog "**NF4Science:** Apply basic Nextflow to specific use cases"
+    ??? courses "**Nextflow for Genomics:** Develop a variant calling pipeline"
 
-        A collection of courses that each demonstrate how to develop a simple but functional pipeline for a real scientific use case by applying the concepts and components presented in 'Hello Nextflow'.
+        A course for researchers who wish to learn how to develop their own genomics pipelines, using a variant calling use case to demonstrate essential Nextflow development patterns.
 
-        [Browse the available scientific use cases :material-arrow-right:](nf4_science/index.md){ .md-button .md-button--secondary }
+        [View the training :material-arrow-right:](nf4_science/genomics/index.md){ .md-button .md-button--secondary }
+
+    ??? courses "**Nextflow for RNAseq:** Develop an RNAseq processing pipeline"
+
+        A course for researchers who wish to learn how to develop their own RNAseq pipelines, using a bulk RNAseq processing use case to demonstrate essential Nextflow development patterns.
+
+        [View the training :material-arrow-right:](nf4_science/rnaseq/index.md){ .md-button .md-button--secondary }
+
+    ??? courses "**Nextflow for Bioimaging:** Run and configure imaging pipelines"
+
+        A course for researchers who wish to learn how to run and configure bioimaging pipelines, using nf-core/molkart to demonstrate essential Nextflow usage patterns.
+
+        [View the training :material-arrow-right:](nf4_science/imaging/index.md){ .md-button .md-button--secondary }
 
 </div>
 
