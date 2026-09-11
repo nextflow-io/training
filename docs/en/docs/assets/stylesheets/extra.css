@@ -507,7 +507,7 @@ h3 .enumerate-headings-plugin {
   margin-top: 0.8rem;
   padding-top: 0.6rem;
   border-top: 1px solid var(--md-default-fg-color--lightest);
-  font-style: italic;
+  font-weight: 700;
 }
 
 /* Language selector dropdown - allow dynamic height */
