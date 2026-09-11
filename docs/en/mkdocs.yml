@@ -112,6 +112,7 @@ nav:
   - info/nxf_versions.md
   - info/hello_pipeline.md
   - help.md
+  - training_events.md
 
 theme:
   name: material
@@ -322,6 +323,7 @@ plugins:
       exclude:
         - index*.md
         - help*.md
+        - training_events*.md
         - info/*.md
         - envsetup/*.md
         - archive/nextflow_run/*.md

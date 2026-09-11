@@ -4,6 +4,7 @@
 **/docs/help.md
 **/docs/envsetup/index.md
 **/docs/hello_nextflow/index.md
+**/docs/training_events.md
 
 # Ignore all files in side-quests/solutions
 side-quests/solutions/nf-core/**/*.js

@@ -501,6 +501,15 @@ h3 .enumerate-headings-plugin {
   margin-top: 0;
 }
 
+/* Set "Training Events" apart from the Setup & Help utility pages it's
+  nested under, since it's community/events content rather than setup */
+.md-nav--primary a.md-nav__link[href*="training_events"] {
+  margin-top: 0.8rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+  font-style: italic;
+}
+
 /* Language selector dropdown - allow dynamic height */
 .md-select:focus-within .md-select__inner,
 .md-select:hover .md-select__inner {

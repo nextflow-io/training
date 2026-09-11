@@ -16,54 +16,20 @@ hide:
 
     **Welcome to the Nextflow community training portal!**
 
-    The training courses listed below are designed to be usable as a self-service resource.
-    You can work through them on your own at any time, either in the web-based environment we provide via Github Codespaces or in your own environment.
+    Work through the courses below at your own pace, in our web-based environment or your own.
+    Each course is hands-on, with goal-oriented exercises you can complete independently.
 
-    [Explore the courses :material-arrow-right:](#catalog-of-nextflow-training-courses){ .md-button .md-button--primary .mt-1 }
+    [Explore the courses :material-arrow-down:](#catalog-of-nextflow-training-courses){ .md-button .md-button--primary .mt-1 }
 
--   :material-information-outline:{ .lg .middle } __Additional information__
+-   :material-account-group-outline:{ .lg .middle } __Training Events__
 
     ---
 
-    ??? warning "Version compatibility"
+    **Looking for something beyond self-service?**
 
-        <!-- Any update to this content needs to be copied to the local installation page -->
-        **As of January 2026, all of our Nextflow training courses require Nextflow version 25.10.2 or later, with strict syntax activated, unless otherwise noted.**
+    Find structured training events, guidance for running your own trainings, and our open-source license and contribution policy.
 
-        For more information about version requirements and strict syntax, please see the [Nextflow versions](info/nxf_versions.md) guide.
-
-        Older versions of the training material corresponding to prior syntax are available via the version selector in the menu bar of this webpage.
-
-    ??? terminal "Environment options"
-
-        We provide a web-based training environment where everything you need to take the training is preinstalled, available through Github Codespaces (requires a free GitHub account).
-
-        [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
-
-        If this does not suit your needs, please see the other [Environment options](./envsetup/index.md).
-
-    ??? learning "Training events"
-
-        If you'd prefer to take Nextflow training as part of a structured event, there are many opportunities to do so. We recommend checking out the following options:
-
-        - **[Training Weeks]()** organized quarterly by the Community team
-        - **[Seqera Events](https://seqera.io/events/)** include in-person training events organized by Seqera (search for 'Seqera Sessions' and 'Nextflow Summit')
-        - **[Nextflow Ambassadors]()** organize events for their local community
-        - **[nf-core events](https://nf-co.re/events)** include community hackathons
-
-    ??? people "Information for trainers"
-
-        If you are an instructor running your own trainings, you are welcome to use our materials directly from the training portal as long as you attribute proper credit. See 'Credits and contributions' below for details.
-
-        In addition, we'd love to hear from you on how we could better support your training efforts! Please contact us at [community@seqera.io](mailto:community@seqera.io) or on the community forum (see [Help](help.md) page).
-
-    ??? licensing "Open-source license and contribution policy"
-
-        [![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](assets/img/cc_by-nc-sa.svg){ align=right }](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-
-        This training material is developed and maintained by [Seqera](https://seqera.io) and released under an open-source license ([CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/)) for the benefit of the community. If you wish to use this material in a way that falls outside the scope of the license (note the limitations on commercial use and redistribution), please contact us at [community@seqera.io](mailto:community@seqera.io) to discuss your request.
-
-        We welcome improvements, fixes and bug reports from the community. Every page has a :material-file-edit-outline: icon in the top right of the page linking to the code repository, where you can report issues or propose changes to the training source material via a pull request. See the `README.md` in the repository for more details.
+    [See training events :material-arrow-right:](training_events.md){ .md-button .md-button--secondary .mt-1 }
 
 </div>
 
