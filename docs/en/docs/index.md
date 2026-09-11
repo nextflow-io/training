@@ -109,6 +109,9 @@ hide:
 
         [View the training :material-arrow-right:](nextflow_config/index.md){ .md-button .md-button--secondary }
 
+    _More topics, such as performance tuning and HPC/cloud execution, are planned for this section._
+    <!-- TODO: link to interest poll once available -->
+
 -   :material-code-tags:{ .lg .middle } __For developers__
 
     ---
