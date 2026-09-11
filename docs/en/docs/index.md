@@ -109,8 +109,11 @@ hide:
 
         [View the training :material-arrow-right:](nextflow_config/index.md){ .md-button .md-button--secondary }
 
-    _More topics, such as performance tuning and HPC/cloud execution, are planned for this section._
-    <!-- TODO: link to interest poll once available -->
+    !!! info compact "More topics coming"
+
+        Performance tuning, HPC/cloud execution, and more are planned for this section.
+        Vote on what to cover next in our short interest poll.
+        <!-- TODO: link to interest poll once available -->
 
 -   :material-code-tags:{ .lg .middle } __For developers__
 
@@ -163,22 +166,5 @@ hide:
         A course for researchers who wish to learn how to run and configure bioimaging pipelines, using nf-core/molkart to demonstrate essential Nextflow usage patterns.
 
         [View the training :material-arrow-right:](nf4_science/imaging/index.md){ .md-button .md-button--secondary }
-
-</div>
-
-!!! info "Looking for archived training materials?"
-
-    Older training materials (Fundamentals Training, Advanced Training, and other experimental courses) have been removed from the training portal as they are incompatible with Nextflow 3.0 strict syntax.
-    If you need access to these materials, they are available in the [git history](https://github.com/nextflow-io/training) prior to January 2026.
-
-    The previous version of the Nextflow Run course, superseded by the current one, is still browsable at [archive/nextflow_run](archive/nextflow_run/index.md).
-
----
-
-<div markdown class="homepage_logos">
-
-![Seqera](assets/img/seqera_logo.png#only-light)
-
-![Seqera](assets/img/seqera_logo_dark.png#only-dark)
 
 </div>

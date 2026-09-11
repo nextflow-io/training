@@ -37,6 +37,10 @@ You will execute several versions of a Nextflow pipeline that processes text inp
 This course focuses on running pipelines (named after the core `nextflow run` command).
 If you're looking for an intro to developing Nextflow pipelines, see [Hello Nextflow](../hello_nextflow/index.md).
 
+!!! note
+
+    Looking for the previous version of this course? It's superseded by the version on this page, but still browsable at [archive/nextflow_run](../archive/nextflow_run/index.md).
+
 ### Lesson plan
 
 | Course chapter                                                                | Summary                                                                           | Estimated duration |

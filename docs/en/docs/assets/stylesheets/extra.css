@@ -142,14 +142,10 @@ h3 .enumerate-headings-plugin {
   background-color: #17191e;
 }
 
-/* Homepage logos */
-.homepage_logos {
-  text-align: center;
-}
-.homepage_logos img {
-  height: 2rem;
-  max-width: 100%;
-  margin: 1rem auto 0;
+/* Compact admonition for minor asides, e.g. "coming soon" notes */
+.md-typeset .admonition.compact,
+.md-typeset details.compact {
+  font-size: 0.65rem;
 }
 
 /* Custom right-hand-side sidebar */
