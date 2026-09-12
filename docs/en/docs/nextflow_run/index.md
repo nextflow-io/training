@@ -39,7 +39,7 @@ If you're looking for an intro to developing Nextflow pipelines, see [Hello Next
 
 !!! note
 
-    Looking for the previous version of this course? It's superseded by the version on this page, but still browsable at [archive/nextflow_run](../archive/nextflow_run/index.md).
+    Looking for the previous version of this course? It's superseded by the version on this page, but still browsable in the [3.6.1 release](https://training.nextflow.io/3.6.1/nextflow_run/) of the training site.
 
 ### Lesson plan
 
