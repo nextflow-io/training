@@ -221,8 +221,8 @@ But how do you know what values to actually use for your own pipelines?
 
 ### 3.1. Generate a resource utilization report
 
-If you don't know up front how much CPU and memory your processes need, you can profile them: run the workflow with some default allocations, record actual usage, then adjust from there.
-Add `-with-report <filename>.html` to generate a report.
+You already generated an execution report with `-with-report` in [Nextflow Run](../nextflow_run/02_configure_pipeline.md).
+That same report is how you find out how much CPU and memory your processes actually need: run the workflow with some default allocations, record actual usage, then adjust from there.
 
 ```bash
 nextflow run main.nf -with-report report-config-1.html
@@ -230,12 +230,21 @@ nextflow run main.nf -with-report report-config-1.html
 
 The report is an HTML file you can open in a browser.
 It breaks down runtime and resource utilization per process, including what percentage of the allocated resources was actually used.
+Here's what it shows for `cowpy` with the current defaults (1 CPU, 1 GB memory):
+
+| Metric           | Value  |
+| ---------------- | ------ |
+| CPU usage        | 116%   |
+| Peak memory used | 6.4 MB |
+| Allocated memory | 1 GB   |
+
+`cowpy` uses well under 1% of its 1 GB allocation; the `%cpu` above 100% just means it briefly uses more than one CPU's worth of processing inside the container, in short bursts.
 
 See [Reports](https://nextflow.io/docs/latest/reports.html) for the full list of available features.
 
 ### 3.2. Set resource allocations for a specific process
 
-Say the profiling report showed that `cowpy` needs more resources than the other processes.
+The report above shows `cowpy` comfortably within its current allocation, but say you wanted to give it more headroom anyway, for example because you expect larger inputs in production.
 You can override the defaults for a single process with `withName`.
 
 === "After"
@@ -304,7 +313,15 @@ nextflow run main.nf -with-report report-config-2.html
       cowpy_art: cowpy/cowpy-COLLECTED-batch-output.txt
     ```
 
-You won't see a real difference on such a small workload, but this profile-then-adjust cycle is exactly what you'd use to right-size resource allocations for a real pipeline, based on actual data rather than guesswork.
+Comparing the two reports for `cowpy`:
+
+| Metric           | Before (1 CPU, 1 GB) | After (2 CPUs, 2 GB) |
+| ---------------- | -------------------- | -------------------- |
+| Peak memory used | 6.4 MB               | 6.4 MB               |
+| CPU usage        | 116%                 | 118%                 |
+
+Doubling the allocation didn't change actual usage at all, which tells you the original 1 GB / 1 CPU was already generous for this toy workload.
+On a real pipeline processing non-trivial data, you'd expect the numbers themselves to differ meaningfully between processes, which is exactly why you profile before deciding what to allocate, rather than guessing.
 
 !!! tip
 

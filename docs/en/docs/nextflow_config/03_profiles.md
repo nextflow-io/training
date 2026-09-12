@@ -195,7 +195,8 @@ Learn how to inspect the fully resolved configuration before you run anything.
 
 ## 3. Inspect the resolved configuration
 
-With configuration spread across a base file, profiles, parameter files, and the command line, it can be tricky to work out by hand what will actually apply to a given run.
+You already used `nextflow config -profile test` in [Nextflow Run](../nextflow_run/02_configure_pipeline.md) to check what a single profile resolves to.
+That command becomes especially useful once you're combining multiple profiles: as you just saw, when two profiles set the same option, it can be tricky to work out by hand which value actually wins.
 The `nextflow config` command resolves all of that for you, without running the pipeline.
 
 ### 3.1. Resolve the default configuration
