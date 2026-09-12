@@ -14,7 +14,7 @@ additional_information:
   audience_prerequisites:
     - "**Audience:** This course is designed for learners who want to run Nextflow pipelines at scale using Seqera Platform."
     - "**Skills:** Familiarity with running nf-core pipelines from the command line is assumed."
-    - "**Courses:** Must have completed [Use nf-core](../nfcore_run/index.md) or otherwise be comfortable running `nf-core/demo` and `nf-core/rnaseq`."
+    - "**Courses:** Must have completed [Nextflow Run](../nextflow_run/index.md) and [Use nf-core](../nfcore_run/index.md), or otherwise be comfortable running local and `nf-core/rnaseq` pipelines."
 ---
 
 # Scale with Seqera

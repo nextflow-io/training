@@ -12,8 +12,9 @@ additional_information:
     - Understand how nf-core pipelines validate parameters and input data
     - Run a production-scale pipeline (nf-core/rnaseq) and override its default resource allocations
   audience_prerequisites:
-    - "**Audience:** This course is designed for learners who are new to Nextflow and nf-core and want to run existing community pipelines."
+    - "**Audience:** This course is designed for learners who already know how to run local Nextflow pipelines and are new to nf-core, and want to run existing community pipelines."
     - "**Skills:** Some familiarity with the command line, basic scripting concepts and common file formats is assumed."
+    - "**Courses:** Must have completed [Nextflow Run](../nextflow_run/index.md) or otherwise be comfortable running a local pipeline with `nextflow run`."
     - "**Domain:** The exercises use bioinformatics pipelines, but no prior scientific domain knowledge is required."
 ---
 
