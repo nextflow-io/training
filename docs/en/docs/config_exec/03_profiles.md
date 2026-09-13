@@ -86,7 +86,7 @@ nextflow run main.nf -profile my_laptop
 
     Outputs:
 
-      /workspaces/training/execution-config/results
+      /workspaces/training/config-exec/results
 
       first_output:
         - full_pipeline/intermediates/Bonjour-output.txt
@@ -137,7 +137,7 @@ nextflow run main.nf -profile my_laptop,test
 
     Outputs:
 
-      /workspaces/training/execution-config/results
+      /workspaces/training/config-exec/results
 
       first_output:
         - full_pipeline/intermediates/Hola-output.txt

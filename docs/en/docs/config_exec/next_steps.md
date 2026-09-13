@@ -1,6 +1,6 @@
 # Course summary
 
-Congratulations on completing the Execution Config training course! 🎉
+Congratulations on completing the Configure Execution training course! 🎉
 
 ## Your journey
 
