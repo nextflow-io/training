@@ -8,8 +8,8 @@ Congratulations on completing the Nextflow Run training course! 🎉
 
 You started with a very basic workflow, and learned to run it and find its outputs.
 Then, you ran progressively more realistic versions of that pipeline: processing multiple inputs from a CSV file in parallel, using `-resume` to skip completed work, and using containers to manage the software a pipeline depends on.
-Next, you learned how to customize the configuration of a pipeline using `nextflow.config` and profiles.
-After that, you learned how to inspect the history of past runs and clean up old work directories.
+Next, you learned how to customize the configuration of a pipeline using `nextflow.config` and profiles, and how to control where and how its outputs get published.
+After that, you learned how to generate execution reports, inspect the history of past runs, and clean up old work directories.
 Finally, you learned how to run pipelines directly from remote repositories such as GitHub.
 
 ### Skills acquired
@@ -21,7 +21,10 @@ Through this hands-on course, you've learned how to:
 - Use `-resume` to avoid repeating completed work
 - Use containers to manage software dependencies
 - Configure pipelines using `nextflow.config` and profiles
-- Inspect the history of past runs with `nextflow log` and clean up old work directories with `nextflow clean`
+- Customize where and how outputs get published
+- Generate an HTML execution report with `-with-report` and an execution timeline with `-with-timeline`
+- Inspect the history of past runs with `nextflow log`
+- Clean up old work directories with `nextflow clean`
 - Run a pipeline directly from a remote repository, and pin it to a specific revision (and unpin it again) for reproducibility
 
 You're now equipped with the foundational knowledge to start integrating existing Nextflow pipelines into your own work.

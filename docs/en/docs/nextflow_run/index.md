@@ -10,8 +10,8 @@ additional_information:
     - Launch and manage Nextflow pipelines from the command line
     - Understand how channels and operators enable efficient multi-input, multi-step workflows
     - Use containers to manage software dependencies and ensure reproducibility
-    - Configure pipeline execution and generate execution reports
-    - Inspect the history of past runs and clean up old work directories
+    - Configure pipeline execution and outputs
+    - Generate execution reports, inspect the history of past runs, and clean up old work directories
     - Run pipelines directly from remote repositories such as GitHub
   audience_prerequisites:
     - "**Audience:** This course is designed for learners who are completely new to Nextflow and want to run existing pipelines."
@@ -44,12 +44,12 @@ If you're looking for an intro to developing Nextflow pipelines, see [Hello Next
 
 ### Lesson plan
 
-| Course chapter                                                                | Summary                                                                           | Estimated duration |
-| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------ |
-| [Part 1: Run Nextflow](./01_run_nextflow.md)                                  | Launch and manage Nextflow pipelines, and understand essential workflow mechanics | 25 mins            |
-| [Part 2: Configure the pipeline](./02_configure_pipeline.md)                  | Configure pipeline execution using `nextflow.config`, reports, and profiles       | 20 mins            |
-| [Part 3: Manage workflow executions](./03_manage_executions.md)               | Inspect the history of past runs and clean up old work directories                | 10 mins            |
-| [Part 4: Run pipelines from remote repositories](./04_remote_repositories.md) | Run a pipeline directly from GitHub and pin it to a specific revision             | 10 mins            |
+| Course chapter                                                  | Summary                                                                                         | Estimated duration |
+| --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------ |
+| [Part 1: Run Nextflow](./01_run_nextflow.md)                    | Launch and manage Nextflow pipelines, and understand essential workflow mechanics               | 25 mins            |
+| [Part 2: Configure the pipeline](./02_configure_pipeline.md)    | Configure pipeline execution and outputs using `nextflow.config`                                | 20 mins            |
+| [Part 3: Manage workflow executions](./03_manage_executions.md) | Generate execution reports, inspect the history of past runs, and clean up old work directories | 10 mins            |
+| [Part 4: Run remote pipelines](./04_remote_repositories.md)     | Run a pipeline directly from GitHub and pin it to a specific revision                           | 10 mins            |
 
 By the end of this course, you will be well-prepared for tackling the next steps in your journey to run reproducible workflows for your scientific computing needs.
 

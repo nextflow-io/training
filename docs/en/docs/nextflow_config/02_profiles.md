@@ -1,6 +1,6 @@
-# Part 3: Use profiles to switch configurations
+# Part 2: Use profiles to switch configurations
 
-Across the last two parts, you've accumulated quite a few configuration options: software packaging, resource allocations, output settings.
+In the last part, you accumulated a few configuration options: software packaging and resource allocations.
 In practice, you'll often want to switch between whole sets of these options depending on where you're running, for example a laptop for development and an HPC cluster for production.
 
 Nextflow lets you set up any number of [profiles](https://nextflow.io/docs/latest/config.html#profiles) describing different configurations, and select one (or several) at runtime with a single flag.
@@ -76,33 +76,13 @@ nextflow run main.nf -profile my_laptop
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [gigantic_brazil] DSL2 - revision: 6e18cd130e
+    Launching `main.nf` [cheeky_goldstine] DSL2 - revision: c3c85dec78
 
     executor >  local (8)
-    [81/b80ad1] sayHello (1)       | 3 of 3 ✔
-    [40/40e8e4] convertToUpper (3) | 3 of 3 ✔
-    [69/7be777] collectGreetings   | 1 of 1 ✔
-    [a9/c21c04] cowpy              | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nextflow-config/results_config/batch
-
-      first_output:
-        - sayHello/Bonjour-output.txt
-        - sayHello/Hola-output.txt
-        - sayHello/Hello-output.txt
-
-      uppercased:
-        - convertToUpper/UPPER-Hello-output.txt
-        - convertToUpper/UPPER-Hola-output.txt
-        - convertToUpper/UPPER-Bonjour-output.txt
-
-      collected: collectGreetings/COLLECTED-batch-output.txt
-
-      batch_report: collectGreetings/batch-report.txt
-
-      cowpy_art: cowpy/cowpy-COLLECTED-batch-output.txt
+    [da/0111e3] sayHello (1)       | 3 of 3 ✔
+    [db/e19e47] convertToUpper (2) | 3 of 3 ✔
+    [71/ad2bde] collectGreetings   | 1 of 1 ✔
+    [85/afb958] cowpy              | 1 of 1 ✔
     ```
 
 !!! warning
@@ -140,52 +120,23 @@ nextflow run main.nf -profile my_laptop,test
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [jovial_coulomb] DSL2 - revision: 6e18cd130e
+    Launching `main.nf` [sleepy_minsky] DSL2 - revision: c3c85dec78
 
     executor >  local (8)
-    [0e/c4aba3] sayHello (1)       | 3 of 3 ✔
-    [36/705145] convertToUpper (3) | 3 of 3 ✔
-    [7d/67c7fd] collectGreetings   | 1 of 1 ✔
-    [d6/e782f3] cowpy              | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nextflow-config/results_config/batch
-
-      first_output:
-        - sayHello/Hola-output.txt
-        - sayHello/Bonjour-output.txt
-        - sayHello/Hello-output.txt
-
-      uppercased:
-        - convertToUpper/UPPER-Hello-output.txt
-        - convertToUpper/UPPER-Hola-output.txt
-        - convertToUpper/UPPER-Bonjour-output.txt
-
-      collected: collectGreetings/COLLECTED-test-output.txt
-
-      batch_report: collectGreetings/test-report.txt
-
-      cowpy_art: cowpy/cowpy-COLLECTED-test-output.txt
+    [b2/103b0d] sayHello (3)       | 3 of 3 ✔
+    [00/6a7642] convertToUpper (2) | 3 of 3 ✔
+    [b1/3df765] collectGreetings   | 1 of 1 ✔
+    [d1/4e5ae1] cowpy              | 1 of 1 ✔
     ```
 
 The individual file names correctly pick up `batch = 'test'` from the `test` profile (`COLLECTED-test-output.txt`, and so on).
-
-!!! warning "outputDir does not follow profile-specific parameter overrides"
-
-    Notice that the base output path is still `results_config/batch`, not `results_config/test`.
-
-    `outputDir = "results_config/${params.batch}"` is a top-level configuration option, and its string is interpolated once, while the base `nextflow.config` is parsed, using the default value of `params.batch` at that point.
-    Profiles are applied afterward, so overriding `params.batch` in a profile changes the value used inside the workflow and in individual file names, but not the already-resolved `outputDir` path.
-
-    If you need the base output directory itself to vary by profile, set `outputDir` inside each profile block instead of relying on parameter interpolation at the top level.
 
 If you combine profiles that set the same option, Nextflow resolves the conflict using whichever value it reads last, that is, whichever comes later in the file.
 If the conflicting settings come from different configuration sources entirely, the standard [order of precedence](https://www.nextflow.io/docs/latest/config.html) applies.
 
 ### Takeaway
 
-You know how to combine multiple profiles in a single run, and that top-level options interpolating `params` values are resolved before profile-specific overrides are applied.
+You know how to combine multiple profiles in a single run, and how Nextflow resolves conflicts when more than one profile sets the same option.
 
 ### What's next?
 
@@ -208,12 +159,6 @@ nextflow config
 ??? success "Command output"
 
     ```groovy
-    params {
-       input = 'data/greetings.csv'
-       batch = 'batch'
-       character = 'turkey'
-    }
-
     docker {
        enabled = true
     }
@@ -226,12 +171,10 @@ nextflow config
        }
     }
 
-    outputDir = 'results_config/batch'
-
-    workflow {
-       output {
-          mode = 'copy'
-       }
+    params {
+       input = 'data/greetings.csv'
+       batch = 'batch'
+       character = 'turkey'
     }
     ```
 
@@ -248,12 +191,6 @@ nextflow config -profile my_laptop,test
 ??? success "Command output"
 
     ```groovy
-    params {
-       input = 'data/greetings.csv'
-       batch = 'test'
-       character = 'tux'
-    }
-
     docker {
        enabled = true
     }
@@ -267,16 +204,14 @@ nextflow config -profile my_laptop,test
        executor = 'local'
     }
 
-    outputDir = 'results_config/batch'
-
-    workflow {
-       output {
-          mode = 'copy'
-       }
+    params {
+       input = 'data/greetings.csv'
+       batch = 'test'
+       character = 'tux'
     }
     ```
 
-Comparing the two confirms what changed: `params.batch`, `params.character`, and `process.executor` all reflect the `my_laptop,test` profiles, while `outputDir` stays put for the reason explained above.
+Comparing the two confirms what changed: `params.batch`, `params.character`, and `process.executor` all reflect the `my_laptop,test` profiles.
 This gets especially valuable for pipelines with many layers of configuration, where working out the resolved settings by hand would be tedious and error-prone.
 
 ### Takeaway
@@ -295,6 +230,5 @@ See [Course summary](next_steps.md) for where to go from here.
 In this part you learned to:
 
 - Define profiles that bundle infrastructure-specific configuration
-- Combine multiple profiles in a single run
-- Recognize when a top-level option won't follow a profile-specific parameter override
+- Combine multiple profiles in a single run, and understand how conflicts between them resolve
 - Use `nextflow config` to inspect the fully resolved configuration

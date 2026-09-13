@@ -1,4 +1,4 @@
-# Part 4: Run pipelines from remote repositories
+# Part 4: Run remote pipelines
 
 So far, you've run workflow scripts stored locally.
 In practice, you'll often want to run pipelines published in remote repositories, such as GitHub, without downloading them yourself.

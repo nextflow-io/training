@@ -402,13 +402,13 @@ The `character` parameter defaults to `turkey` in `nextflow.config`, so the ASCI
     ```console hl_lines="6 7 8 9"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [reverent_jepsen] DSL2 - revision: c3c85dec78
+    Launching `main.nf` [nostalgic_brahmagupta] DSL2 - revision: ce74f81996
 
     executor >  local (8)
-    [87/35824b] sayHello (3)       | 3 of 3 ✔
-    [0f/31c37e] convertToUpper (1) | 3 of 3 ✔
-    [49/c25ca1] collectGreetings   | 1 of 1 ✔
-    [a5/29e13f] cowpy              | 1 of 1 ✔
+    [56/8499f6] sayHello (3)       | 3 of 3 ✔
+    [cc/0ee42a] convertToUpper (3) | 3 of 3 ✔
+    [eb/0f2e24] collectGreetings   | 1 of 1 ✔
+    [b5/34e07f] cowpy              | 1 of 1 ✔
     ```
 
 Four processes ran, but not the same number of times.
@@ -424,7 +424,7 @@ The `results` directory reflects that fan-in, plus whatever the pipeline author 
 
 ```console title="results/"
 results
-└── full_pipeline
+└── batch
     ├── batch-report.txt
     ├── cowpy-COLLECTED-batch-output.txt
     └── intermediates
@@ -437,15 +437,17 @@ results
         └── UPPER-Hola-output.txt
 ```
 
+The top-level directory is named after the `batch` parameter, which defaults to `batch`; you'll see it change in later exercises.
+
 Check `cowpy-COLLECTED-batch-output.txt` for the ASCII art file.
 
 ??? abstract "File contents"
 
-    ```console title="results/full_pipeline/cowpy-COLLECTED-batch-output.txt"
+    ```console title="results/batch/cowpy-COLLECTED-batch-output.txt"
      _________
-    / HOLA    \
+    / HELLO   \
     | BONJOUR |
-    \ HELLO   /
+    \ HOLA    /
      ---------
       \                                  ,+*^^*+___+++_
        \                           ,*^^^^              )
@@ -473,11 +475,11 @@ Check `cowpy-COLLECTED-batch-output.txt` for the ASCII art file.
 Just like in [2.1](#21-run-the-workflow), every one of these 8 task executions, across all four processes, gets its own directory under `work/`, completely isolated from the others.
 `collectGreetings` is a good illustration of why that matters: it depends on the outputs of all three `convertToUpper` tasks, which live in three different task directories, so Nextflow stages symlinks to those files inside `collectGreetings`'s own directory rather than having it read from its upstream tasks' directories directly:
 
-```console title="work/b4/a1934c.../"
+```console title="work/eb/0f2e24.../"
 COLLECTED-batch-output.txt
-UPPER-Bonjour-output.txt -> ../../70/41fe5677.../UPPER-Bonjour-output.txt
-UPPER-Hello-output.txt   -> ../../e3/3353cf48.../UPPER-Hello-output.txt
-UPPER-Hola-output.txt    -> ../../e3/9e5ce6a1.../UPPER-Hola-output.txt
+UPPER-Bonjour-output.txt -> ../../69/e6c057.../UPPER-Bonjour-output.txt
+UPPER-Hello-output.txt   -> ../../cc/ba7d19.../UPPER-Hello-output.txt
+UPPER-Hola-output.txt    -> ../../cc/0ee42a.../UPPER-Hola-output.txt
 batch-report.txt
 .command.sh
 ```

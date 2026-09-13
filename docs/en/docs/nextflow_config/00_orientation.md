@@ -71,17 +71,13 @@ tree . -L 2
     │   ├── convertToUpper.nf
     │   ├── cowpy.nf
     │   └── sayHello.nf
-    ├── nextflow.config
-    ├── test-params.json
-    └── test-params.yaml
+    └── nextflow.config
     ```
 
 The **`main.nf`** and **`modules/`** files are the same multi-step pipeline from [Nextflow Run](../nextflow_run/index.md), and the **`nextflow.config`** file is the same configuration you already saw there.
 You'll extend both over the course of these exercises.
 
 The **`data/`** directory contains the CSV input file the pipeline reads from.
-
-The **`test-params.yaml`** and **`test-params.json`** files are example parameter files you'll use in Part 1.
 
 ## Readiness checklist
 
@@ -93,4 +89,4 @@ Think you're ready to dive in?
 
 If you can check all the boxes, you're good to go.
 
-**To continue to [Part 1: Manage inputs and outputs](./01_parameters_and_outputs.md), click on the arrow in the bottom right corner of this page.**
+**To continue to [Part 1: Adapt to your compute environment](./01_packaging_execution_resources.md), click on the arrow in the bottom right corner of this page.**

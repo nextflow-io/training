@@ -1,5 +1,0 @@
-{
-    "input": "data/greetings.csv",
-    "batch": "json",
-    "character": "stegosaurus"
-}

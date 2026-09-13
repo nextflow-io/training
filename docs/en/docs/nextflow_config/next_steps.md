@@ -4,16 +4,13 @@ Congratulations on completing the Nextflow Config training course! 🎉
 
 ## Your journey
 
-You started by managing input parameters with configuration and parameter files, and controlling how outputs get published.
-Then, you learned how to adapt a pipeline's execution to different compute environments: switching software packaging technology, selecting an execution platform, and controlling resource allocations.
+You started by adapting a pipeline's execution to different compute environments: switching software packaging technology, selecting an execution platform, and controlling resource allocations.
 Finally, you learned how to bundle configuration into profiles, combine them at runtime, and inspect the fully resolved configuration.
 
 ### Skills acquired
 
 Through this hands-on course, you've learned how to:
 
-- Manage input parameters with a run-specific configuration file and a parameter file
-- Control the base output directory, organize outputs by process, and set the publish mode
 - Switch software packaging technology between Docker and Conda
 - Select an execution platform and control per-process resource allocations
 - Define and combine profiles, and inspect resolved configuration with `nextflow config`

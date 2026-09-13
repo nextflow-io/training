@@ -32,9 +32,8 @@ nav:
   - Nextflow Config:
       - Overview: nextflow_config/index.md
       - nextflow_config/00_orientation.md
-      - nextflow_config/01_parameters_and_outputs.md
-      - nextflow_config/02_packaging_execution_resources.md
-      - nextflow_config/03_profiles.md
+      - nextflow_config/01_packaging_execution_resources.md
+      - nextflow_config/02_profiles.md
       - nextflow_config/next_steps.md
       - nextflow_config/survey.md
   - Hello Nextflow:

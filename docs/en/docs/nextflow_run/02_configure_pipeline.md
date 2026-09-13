@@ -1,7 +1,7 @@
 # Part 2: Configure the pipeline
 
 In [Part 1](./01_run_nextflow.md), you ran a complete multi-step pipeline that processes multiple inputs in parallel using containers.
-Now we're going to look at how to configure pipeline behavior using `nextflow.config`: first by examining the configuration file we already gave you, then by exploring a couple of other ways to supply configuration, and finally by learning to diagnose pipeline execution with an execution report.
+Now we're going to look at how to configure pipeline behavior using `nextflow.config`: first by examining the configuration file we already gave you, then by exploring a couple of other ways to supply configuration, and finally by controlling how and where outputs get published.
 
 ---
 
@@ -58,7 +58,7 @@ Let's go through each one, then put profiles to use by running the pipeline with
 
     This config covers local execution on a single machine.
     Nextflow also supports HPC schedulers (SLURM, PBS, LSF) and cloud executors (AWS Batch, Google Cloud Batch, Azure Batch), all configured through the same `nextflow.config` mechanism.
-    See [Part 2: Adapt to your compute environment](../nextflow_config/02_packaging_execution_resources.md) in the [Nextflow Config](../nextflow_config/index.md) course for a full walkthrough of these options.
+    See [Part 1: Adapt to your compute environment](../nextflow_config/01_packaging_execution_resources.md) in the [Nextflow Config](../nextflow_config/index.md) course for a full walkthrough of these options.
 
 ### 1.1. Software packaging
 
@@ -91,7 +91,7 @@ process {
 
 This caps every process at a single CPU and 1 GB of memory.
 
-Nextflow also lets you set different values for individual named processes or groups of processes; you'll learn how in [Part 2: Adapt to your compute environment](../nextflow_config/02_packaging_execution_resources.md#32-set-resource-allocations-for-a-specific-process) of the [Nextflow Config](../nextflow_config/index.md) course.
+Nextflow also lets you set different values for individual named processes or groups of processes; you'll learn how in [Part 1: Adapt to your compute environment](../nextflow_config/01_packaging_execution_resources.md#32-set-resource-allocations-for-a-specific-process) of the [Nextflow Config](../nextflow_config/index.md) course.
 
 ### 1.3. Pipeline parameters
 
@@ -149,22 +149,22 @@ nextflow run main.nf -profile test
     ```console hl_lines="6 7 8 9"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [silly_goodall] DSL2 - revision: c3c85dec78
+    Launching `main.nf` [reverent_heisenberg] DSL2 - revision: ce74f81996
 
     executor >  local (8)
-    [06/9614da] sayHello (2)       | 3 of 3 ✔
-    [8d/5f1b8a] convertToUpper (3) | 3 of 3 ✔
-    [1e/cd52db] collectGreetings   | 1 of 1 ✔
-    [2c/5f41d8] cowpy              | 1 of 1 ✔
+    [3d/8a12c7] sayHello (3)       | 3 of 3 ✔
+    [e7/e0934f] convertToUpper (2) | 3 of 3 ✔
+    [1d/616569] collectGreetings   | 1 of 1 ✔
+    [44/7d46cf] cowpy              | 1 of 1 ✔
     ```
 
 The pipeline runs with `batch = 'test'` and `character = 'tux'`.
-Check `results/full_pipeline/`: the batch name appears in the output file names, and the ASCII art features the tux penguin instead of a turkey.
+Check `results/test/`: the batch name is now part of the directory path itself, and the ASCII art features the tux penguin instead of a turkey.
 
 !!! note
 
     You can activate several profiles at once, and use `nextflow config -profile <name>,<name>` to see the fully resolved result before running anything.
-    Combining profiles, and how Nextflow resolves conflicts between them, is covered in depth in [Part 3: Use profiles to switch configurations](../nextflow_config/03_profiles.md) of the [Nextflow Config](../nextflow_config/index.md) course.
+    Combining profiles, and how Nextflow resolves conflicts between them, is covered in depth in [Part 2: Use profiles to switch configurations](../nextflow_config/02_profiles.md) of the [Nextflow Config](../nextflow_config/index.md) course.
 
 ### Takeaway
 
@@ -207,13 +207,13 @@ nextflow run main.nf -c custom.config
     ```console hl_lines="6 7 8 9"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [confident_salas] DSL2 - revision: c3c85dec78
+    Launching `main.nf` [exotic_cray] DSL2 - revision: ce74f81996
 
     executor >  local (8)
-    [2d/db1b4a] sayHello (3)       | 3 of 3 ✔
-    [b3/d0887f] convertToUpper (3) | 3 of 3 ✔
-    [bf/97609d] collectGreetings   | 1 of 1 ✔
-    [5b/3fafa9] cowpy              | 1 of 1 ✔
+    [77/e02315] sayHello (1)       | 3 of 3 ✔
+    [a6/ccf44b] convertToUpper (3) | 3 of 3 ✔
+    [56/fd1296] collectGreetings   | 1 of 1 ✔
+    [2c/205a94] cowpy              | 1 of 1 ✔
     ```
 
 Nextflow merges `custom.config` on top of the pipeline's own `nextflow.config`, so every process now gets 2 CPUs and 2 GB of memory instead of the defaults, and runs through Conda instead of Docker.
@@ -259,21 +259,21 @@ nextflow run main.nf -params-file test-params.yaml
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [admiring_einstein] DSL2 - revision: c3c85dec78
+    Launching `main.nf` [sharp_faraday] DSL2 - revision: ce74f81996
 
     executor >  local (8)
-    [dd/e91005] sayHello (2)       | 3 of 3 ✔
-    [e6/e61a91] convertToUpper (2) | 3 of 3 ✔
-    [9f/d2c326] collectGreetings   | 1 of 1 ✔
-    [ea/c73e53] cowpy              | 1 of 1 ✔
+    [1c/9ff63e] sayHello (1)       | 3 of 3 ✔
+    [3b/bb5691] convertToUpper (2) | 3 of 3 ✔
+    [cd/2c1f6e] collectGreetings   | 1 of 1 ✔
+    [89/c333bc] cowpy              | 1 of 1 ✔
     ```
 
 ??? abstract "File contents"
 
-    ```console title="results/full_pipeline/cowpy-COLLECTED-yaml-output.txt"
+    ```console title="results/yaml/cowpy-COLLECTED-yaml-output.txt"
      _________
-    / HOLA    \
-    | BONJOUR |
+    / BONJOUR \
+    | HOLA    |
     \ HELLO   /
      ---------
     \                             .       .
@@ -300,16 +300,22 @@ You know two more ways to supply configuration: a run-specific configuration fil
 
 ### What's next?
 
-Learn how to generate an execution report, useful when a pipeline doesn't behave the way you expect.
+Learn how to control how and where your pipeline's outputs get published.
 
 ---
 
-## 3. Generate an execution report
+## 3. Manage pipeline outputs
 
-Add `-with-report` to any `nextflow run` command to generate an HTML report after the pipeline completes:
+A pipeline author decides how outputs are organized in code, but you don't need to touch that code to control where they end up or how they get there.
+Nextflow gives you config-level ways to do that instead: set a base output directory, and choose whether files get copied or symlinked.
+
+### 3.1. Customize the output directory
+
+By default, Nextflow publishes outputs under `results/`.
+Point it elsewhere with `-output-dir` (or its short form, `-o`):
 
 ```bash
-nextflow run main.nf --input data/greetings.csv --character turkey -with-report
+nextflow run main.nf -output-dir outputs
 ```
 
 ??? success "Command output"
@@ -317,31 +323,123 @@ nextflow run main.nf --input data/greetings.csv --character turkey -with-report
     ```console hl_lines="6 7 8 9"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [lonely_aryabhata] DSL2 - revision: c3c85dec78
+    Launching `main.nf` [serene_kimura] DSL2 - revision: ce74f81996
 
     executor >  local (8)
-    [9e/f3fa5e] sayHello (3)       | 3 of 3 ✔
-    [08/4a93d7] convertToUpper (2) | 3 of 3 ✔
-    [c5/c8595a] collectGreetings   | 1 of 1 ✔
-    [2a/1e5abe] cowpy              | 1 of 1 ✔
+    [31/df5c15] sayHello (3)       | 3 of 3 ✔
+    [08/8bb2e5] convertToUpper (1) | 3 of 3 ✔
+    [e5/5814da] collectGreetings   | 1 of 1 ✔
+    [cf/8ab8c6] cowpy              | 1 of 1 ✔
     ```
 
-Nextflow writes the report to a file named `report-<timestamp>.html` in the working directory.
-Open it in a browser to see an execution summary, a table of every task with its status and runtime, and resource usage charts broken down by process.
+??? abstract "Directory contents"
 
-The **Tasks** tab lists every task the pipeline ran, with its process name, status, and resource usage:
+    ```console
+    outputs/batch
+    ├── batch-report.txt
+    ├── cowpy-COLLECTED-batch-output.txt
+    └── intermediates
+        ├── Bonjour-output.txt
+        ├── COLLECTED-batch-output.txt
+        ├── Hello-output.txt
+        ├── Hola-output.txt
+        ├── UPPER-Bonjour-output.txt
+        ├── UPPER-Hello-output.txt
+        └── UPPER-Hola-output.txt
+    ```
 
-![Execution report tasks table](img/execution_report_tasks.png)
+The outputs now land under `outputs/batch/` instead of the built-in `results/batch/` default.
+The pipeline's own code still decides the structure within that base directory, like the `batch/` and `intermediates/` subdirectories; `-output-dir` only controls where that structure starts.
 
-The report is especially useful when a pipeline takes longer than expected or a task fails: the task table shows exactly where time was spent and which tasks succeeded or failed.
+`-output-dir` is really just a command-line shortcut for the `outputDir` configuration option, so it can go anywhere configuration can: directly in `nextflow.config`, inside a profile, or in a `-c` overlay file like the one you used earlier in this part.
+For example, this snippet shows the same setting placed directly in `nextflow.config` instead of passed on the command line:
+
+```groovy title="nextflow.config"
+outputDir = 'outputs'
+```
+
+See [Configuration file](https://nextflow.io/docs/latest/config.html) in the Nextflow reference for the full list of places a configuration option like this can live.
+
+### 3.2. Choose how outputs get published
+
+By default, Nextflow publishes outputs as symlinks that point to the locations of the outputs under `work/`, not real copies:
+
+```console
+$ ls -l results/batch/intermediates/Hello-output.txt
+lrwxr-xr-x  ...  Hello-output.txt -> /workspaces/training/nextflow-run/work/b7/b8c4d1.../Hello-output.txt
+```
+
+Pipeline authors can set the 'publish mode' to either `'copy'` or `'move'` for each individual process in the workflow code.
+They typically do this for the final outputs of the pipeline, while leaving the default `'symlink'` behavior set for intermediate files that can be deleted once the full pipeline has been run.
+
+That avoids duplicating data on disk, but it means you can't delete the task directories under `work/` without breaking the link, losing the ability to use `-resume`.
+If you want all output files to be properly copied instead, set [`workflow.output.mode`](https://nextflow.io/docs/latest/reference/config.html#workflow) to `'copy'` in your pipeline configuration. (Unlike `-output-dir`, there's no command-line flag for this; it's config-only.)
+
+Try setting it in `nextflow.config`:
+
+=== "After"
+
+    ```groovy title="nextflow.config" hl_lines="7"
+    params {
+        input = 'data/greetings.csv'
+        batch = 'batch'
+        character = 'turkey'
+    }
+
+    workflow.output.mode = 'copy'
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config"
+    params {
+        input = 'data/greetings.csv'
+        batch = 'batch'
+        character = 'turkey'
+    }
+    ```
+
+Then run the pipeline, changing the batch name so that you can see the difference in the outputs:
+
+```bash
+nextflow run main.nf --batch withmode
+```
+
+??? success "Command output"
+
+    ```console hl_lines="6 7 8 9"
+    N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [angry_noether] DSL2 - revision: ce74f81996
+
+    executor >  local (8)
+    [41/2b478d] sayHello (3)       | 3 of 3 ✔
+    [bf/dd2840] convertToUpper (2) | 3 of 3 ✔
+    [ea/364e97] collectGreetings   | 1 of 1 ✔
+    [10/76fe7b] cowpy              | 1 of 1 ✔
+    ```
+
+Have a look at one of the output files like before:
+
+```console
+$ ls -l results/withmode/intermediates/Hello-output.txt
+-rw-r--r--  ...  Hello-output.txt
+```
+
+Now it's a real, independent file that will stay available even if `work/` gets cleaned up.
+
+!!! warning
+
+    The `workflow.output.mode` setting only fills in a default for outputs that don't already have a mode set in the pipeline code.
+    It cannot override a mode the author hardcoded, no matter what you set it to.
 
 ### Takeaway
 
-You know how to generate an HTML execution report with `-with-report`, useful for diagnosing a pipeline that's slow or failing.
+You know how to customize the base output directory and choose between copied and symlinked outputs, both without touching the pipeline's code.
 
 ### What's next?
 
-Head on to [Part 3](./03_manage_executions.md), where you'll learn how to inspect the history of past runs and clean up old work directories.
+Head on to [Part 3](./03_manage_executions.md), where you'll learn how to inspect the history of past runs, generate execution reports, and clean up old work directories.
 
 ---
 
@@ -351,4 +449,4 @@ In this part you learned to:
 
 - Configure pipeline behavior using `nextflow.config` and profiles
 - Supply configuration via a run-specific configuration file or a parameter file
-- Generate an HTML execution report with `-with-report`
+- Customize the output directory and choose between copied and symlinked outputs

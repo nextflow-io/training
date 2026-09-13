@@ -1,7 +1,7 @@
-# Part 2: Adapt to your compute environment
+# Part 1: Adapt to your compute environment
 
-So far, the pipeline's configuration has controlled inputs and outputs.
-This part covers the other half of the picture: adapting a pipeline's execution to whatever compute environment it happens to run on, without changing the workflow code.
+In [Nextflow Run](../nextflow_run/index.md), you configured a pipeline's inputs, parameters, and outputs.
+This course covers the other half of the picture: adapting a pipeline's execution to whatever compute environment it happens to run on, without changing the workflow code.
 
 ---
 
@@ -74,33 +74,13 @@ nextflow run main.nf --batch conda
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [trusting_lovelace] DSL2 - revision: 6e18cd130e
+    Launching `main.nf` [suspicious_hopper] DSL2 - revision: c3c85dec78
 
     executor >  local (8)
-    [6b/8ef390] sayHello (2)       | 3 of 3 ✔
-    [0a/620ffe] convertToUpper (1) | 3 of 3 ✔
-    [ca/3de7b2] collectGreetings   | 1 of 1 ✔
-    [c2/2d3e55] cowpy              | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nextflow-config/results_config/conda
-
-      first_output:
-        - sayHello/Bonjour-output.txt
-        - sayHello/Hola-output.txt
-        - sayHello/Hello-output.txt
-
-      uppercased:
-        - convertToUpper/UPPER-Bonjour-output.txt
-        - convertToUpper/UPPER-Hola-output.txt
-        - convertToUpper/UPPER-Hello-output.txt
-
-      collected: collectGreetings/COLLECTED-conda-output.txt
-
-      batch_report: collectGreetings/conda-report.txt
-
-      cowpy_art: cowpy/cowpy-COLLECTED-conda-output.txt
+    [6b/a3cf85] sayHello (2)       | 3 of 3 ✔
+    [2c/f5eba3] convertToUpper (3) | 3 of 3 ✔
+    [e9/1285e8] collectGreetings   | 1 of 1 ✔
+    [5e/7cc4f9] cowpy              | 1 of 1 ✔
     ```
 
 This produces the same output as running with Docker, even though the mechanics are different behind the scenes: Nextflow retrieves the Conda package and builds an environment from it, instead of pulling a container image.
@@ -284,33 +264,13 @@ nextflow run main.nf -with-report report-config-2.html
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [determined_shockley] DSL2 - revision: 6e18cd130e
+    Launching `main.nf` [furious_roentgen] DSL2 - revision: c3c85dec78
 
     executor >  local (8)
-    [a9/9b3bcc] sayHello (2)       | 3 of 3 ✔
-    [ae/75bd9e] convertToUpper (1) | 3 of 3 ✔
-    [fe/321c4c] collectGreetings   | 1 of 1 ✔
-    [16/850e70] cowpy              | 1 of 1 ✔
-
-    Outputs:
-
-      /workspaces/training/nextflow-config/results_config/batch
-
-      first_output:
-        - sayHello/Bonjour-output.txt
-        - sayHello/Hello-output.txt
-        - sayHello/Hola-output.txt
-
-      uppercased:
-        - convertToUpper/UPPER-Hola-output.txt
-        - convertToUpper/UPPER-Bonjour-output.txt
-        - convertToUpper/UPPER-Hello-output.txt
-
-      collected: collectGreetings/COLLECTED-batch-output.txt
-
-      batch_report: collectGreetings/batch-report.txt
-
-      cowpy_art: cowpy/cowpy-COLLECTED-batch-output.txt
+    [e8/1584eb] sayHello (2)       | 3 of 3 ✔
+    [0f/b88085] convertToUpper (3) | 3 of 3 ✔
+    [11/d81bfa] collectGreetings   | 1 of 1 ✔
+    [a7/ca287f] cowpy              | 1 of 1 ✔
     ```
 
 Comparing the two reports for `cowpy`:
@@ -360,7 +320,7 @@ You know how to generate a profiling report to assess resource utilization, over
 
 ### What's next?
 
-Head on to [Part 3](./03_profiles.md), where you'll learn how to bundle configuration like this into switchable profiles.
+Head on to [Part 2](./02_profiles.md), where you'll learn how to bundle configuration like this into switchable profiles.
 
 ---
 
