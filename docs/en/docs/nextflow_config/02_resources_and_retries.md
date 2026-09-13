@@ -48,7 +48,7 @@ You can override the defaults for a single process with `withName`.
 
 === "After"
 
-    ```groovy title="nextflow.config" linenums="6" hl_lines="4-5"
+    ```groovy title="nextflow.config" linenums="6" hl_lines="5-6"
     process {
         memory = 1.GB
         withName: 'cowpy' {
