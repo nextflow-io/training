@@ -2953,10 +2953,10 @@ To that end, Nextflow supports multiple ways of controlling pipeline configurati
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="go">  nextflow run nf-core/demo -profile &lt;docker/singularity/.../institute&gt; --input samplesheet.csv --outdir &lt;OUTDIR&gt;</span>
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="go">Input/output options</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="go">  --input                       [string] Path to a metadata file containing information about the samples in the experiment.</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="go">  --outdir                      [string] The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.</span>
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="go">Input/output options</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="go">  --input                       [string] Path to a metadata file containing information about the samples in the experiment.</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="go">  --outdir                      [string] The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.</span>
 <a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="go">  --email                       [string] Email address for completion summary.</span>
 <a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="go">  --multiqc_title               [string] MultiQC report title. Printed as page header, used for filename if not otherwise specified.</span>
 <a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>
@@ -2972,7 +2972,7 @@ To that end, Nextflow supports multiple ways of controlling pipeline configurati
 <a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="go">  --help                        [boolean, string] Display the help message.</span>
 <a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="go">  --help_full                   [boolean]         Display the full detailed help message.</span>
 <a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="go">  --show_hidden                 [boolean]         Display hidden parameters in the help message (only works when --help or --help_full are provided).</span>
-<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="go">!! Hiding 19 param(s), use the `--showHidden` parameter to show them !!</span>
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="go"> !! Hiding 19 param(s), use the `--showHidden` parameter to show them !!</span>
 <a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="go">------------------------------------------------------</span>
 <a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>
 <a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="go">* The pipeline</span>
@@ -3036,8 +3036,8 @@ A params file called <code>my_params.yml</code> is provided in your working dire
 <a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a><span class="go">  revision                  : master</span>
 <a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a><span class="go">  runName                   : focused_heisenberg</span>
 <a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a><span class="go">  containerEngine           : docker</span>
-<a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a><span class="go">  launchDir                 : /workspaces/training/nfcore-build</span>
-<a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a><span class="go">  workDir                   : /workspaces/training/nfcore-build/work</span>
+<a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a><span class="go">  launchDir                 : /workspaces/training/nfcore-use</span>
+<a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a><span class="go">  workDir                   : /workspaces/training/nfcore-use/work</span>
 <a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a><span class="go">  projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2</span>
 <a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a><span class="go">  userName                  : root</span>
 <a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a><span class="go">  profile                   : test,docker</span>
@@ -3056,9 +3056,9 @@ A params file called <code>my_params.yml</code> is provided in your working dire
 <a id="__codelineno-4-50" name="__codelineno-4-50" href="#__codelineno-4-50"></a><span class="go">    https://github.com/nf-core/demo/blob/master/CITATIONS.md</span>
 <a id="__codelineno-4-51" name="__codelineno-4-51" href="#__codelineno-4-51"></a>
 <a id="__codelineno-4-52" name="__codelineno-4-52" href="#__codelineno-4-52"></a><span class="go">executor &gt;  local (5)</span>
-<a id="__codelineno-4-53" name="__codelineno-4-53" href="#__codelineno-4-53"></a><span class="go">[7a/f3599e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE) [100%] 3 of 3 ✔</span>
-<a id="__codelineno-4-54" name="__codelineno-4-54" href="#__codelineno-4-54"></a><span class="go">[b0/2f0bdc] NFCORE_DEMO:DEMO:COWPY               [100%] 1 of 1 ✔</span>
-<a id="__codelineno-4-55" name="__codelineno-4-55" href="#__codelineno-4-55"></a><span class="go">[c3/3c2278] NFCORE_DEMO:DEMO:MULTIQC (demo)      [100%] 1 of 1 ✔</span>
+<a id="__codelineno-4-53" name="__codelineno-4-53" href="#__codelineno-4-53"></a><span class="go">[7a/f3599e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE) | 3 of 3 ✔</span>
+<a id="__codelineno-4-54" name="__codelineno-4-54" href="#__codelineno-4-54"></a><span class="go">[b0/2f0bdc] NFCORE_DEMO:DEMO:COWPY               | 1 of 1 ✔</span>
+<a id="__codelineno-4-55" name="__codelineno-4-55" href="#__codelineno-4-55"></a><span class="go">[c3/3c2278] NFCORE_DEMO:DEMO:MULTIQC (demo)      | 1 of 1 ✔</span>
 <a id="__codelineno-4-56" name="__codelineno-4-56" href="#__codelineno-4-56"></a><span class="go">-[nf-core/demo] Pipeline completed successfully-</span>
 </code></pre></div>
 </details>
@@ -3106,6 +3106,8 @@ The <code>--skip_trim</code> parameter is a boolean flag, so passing a string va
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="go">The following invalid input values have been detected:</span>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="go">* --skip_trim (yes): Value is [string] but should be [boolean]</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="go"> -- Check script '/workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details</span>
 </code></pre></div>
 <p>The pipeline stops before any processes run, saving you from a failed or incorrect execution.
 As noted in <a href="#12-set-parameter-values">1.2</a>, boolean parameters should be set to a genuine <code>true</code>/<code>false</code> value in a params file rather than passed on the command line, since command-line values are typed as strings.</p>
@@ -3169,10 +3171,10 @@ File paths are validated for existence and extension pattern.</p>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="go">The following invalid input values have been detected:</span>
 <a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
 <a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">* --input (malformed_samplesheet.csv): Validation of file failed:</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="go">    -&gt; Entry 1: Error for field 'fastq_2' (/not/a/real/file.fastq.gz): the file or directory</span>
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="go">       '/not/a/real/file.fastq.gz' does not exist (FastQ file for reads 2 cannot contain spaces</span>
-<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="go">       and must have extension '.fq.gz' or '.fastq.gz')</span>
-<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="go">    -&gt; Entry 1: Missing required field(s): fastq_1</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="go">    -&gt; Entry 1: Error for field 'fastq_2' (/not/a/real/file.fastq.gz): the file or directory '/not/a/real/file.fastq.gz' does not exist (FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz')</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="go">    -&gt; Entry 1: Missing required field(s): fastq_1</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="go"> -- Check script '/workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details</span>
 </code></pre></div>
 <p>As you can see, the pipeline fails immediately and reports <strong>all</strong> validation errors at once.
 nf-schema does not stop at the first error — it collects every problem and lists them together, so you can fix everything in one go rather than discovering issues one by one.</p>

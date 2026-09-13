@@ -3298,30 +3298,30 @@ We'll also organize the GVCF files into their own subdirectory for clarity.</p>
 <summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="go">Launching `genomics.nf` [nostalgic_franklin] revision: f2c0a93c6a</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="go">Launching `genomics.nf` [crazy_solvay] revision: 1fa50d94ef</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
 <a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="go">executor &gt;  local (6)</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="go">[cc/fbc705] SAMTOOLS_INDEX (3)       | 3 of 3 ✔</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="go">[27/0d7eb9] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="go">[9f/c67a60] SAMTOOLS_INDEX (2)       | 3 of 3 ✔</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="go">[47/a20c52] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔</span>
 <a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
 <a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="go">Outputs:</span>
 <a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>
 <a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="go">  /workspaces/training/nf4-science/genomics/results</span>
 <a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>
 <a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="go">  indexed_bam:</span>
-<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="go">    - [indexed_bam/reads_mother.bam, indexed_bam/reads_mother.bam.bai]</span>
-<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="go">    - [indexed_bam/reads_father.bam, indexed_bam/reads_father.bam.bai]</span>
-<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="go">    - [indexed_bam/reads_son.bam, indexed_bam/reads_son.bam.bai]</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="go">    - [indexed_bam/reads_son.bam, indexed_bam/reads_son.bam.bai]</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="go">    - [indexed_bam/reads_mother.bam, indexed_bam/reads_mother.bam.bai]</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="go">    - [indexed_bam/reads_father.bam, indexed_bam/reads_father.bam.bai]</span>
 <a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>
 <a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="go">  gvcf:</span>
-<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="go">    - gvcf/reads_mother.bam.g.vcf</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="go">    - gvcf/reads_son.bam.g.vcf</span>
 <a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="go">    - gvcf/reads_father.bam.g.vcf</span>
-<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="go">    - gvcf/reads_son.bam.g.vcf</span>
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="go">    - gvcf/reads_mother.bam.g.vcf</span>
 <a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>
 <a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="go">  gvcf_idx:</span>
-<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="go">    - gvcf/reads_mother.bam.g.vcf.idx</span>
+<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="go">    - gvcf/reads_son.bam.g.vcf.idx</span>
 <a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a><span class="go">    - gvcf/reads_father.bam.g.vcf.idx</span>
-<a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a><span class="go">    - gvcf/reads_son.bam.g.vcf.idx</span>
+<a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a><span class="go">    - gvcf/reads_mother.bam.g.vcf.idx</span>
 </code></pre></div>
 </details>
 <p>The Nextflow output looks the same as before, but the <code>.g.vcf</code> files and their index files are now organized in subdirectories.</p>
@@ -3329,19 +3329,19 @@ We'll also organize the GVCF files into their own subdirectory for clarity.</p>
 <summary>Directory contents (symlinks shortened)</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">results/</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="go">├── gvcf/</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">│   ├── reads_father.bam.g.vcf -&gt; */27/0d7eb9*/reads_father.bam.g.vcf</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="go">│   ├── reads_father.bam.g.vcf.idx -&gt; */27/0d7eb9*/reads_father.bam.g.vcf.idx</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="go">│   ├── reads_mother.bam.g.vcf -&gt; */e4/4ed55e*/reads_mother.bam.g.vcf</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">│   ├── reads_mother.bam.g.vcf.idx -&gt; */e4/4ed55e*/reads_mother.bam.g.vcf.idx</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="go">│   ├── reads_son.bam.g.vcf -&gt; */08/e95962*/reads_son.bam.g.vcf</span>
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="go">│   └── reads_son.bam.g.vcf.idx -&gt; */08/e95962*/reads_son.bam.g.vcf.idx</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">│   ├── reads_father.bam.g.vcf -&gt; */0d/e1b164*/reads_father.bam.g.vcf</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="go">│   ├── reads_father.bam.g.vcf.idx -&gt; */0d/e1b164*/reads_father.bam.g.vcf.idx</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="go">│   ├── reads_mother.bam.g.vcf -&gt; */47/a20c52*/reads_mother.bam.g.vcf</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">│   ├── reads_mother.bam.g.vcf.idx -&gt; */47/a20c52*/reads_mother.bam.g.vcf.idx</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="go">│   ├── reads_son.bam.g.vcf -&gt; */a6/d2a73e*/reads_son.bam.g.vcf</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="go">│   └── reads_son.bam.g.vcf.idx -&gt; */a6/d2a73e*/reads_son.bam.g.vcf.idx</span>
 <a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="go">└── indexed_bam/</span>
-<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="go">    ├── reads_father.bam -&gt; */9a/c7a873*/reads_father.bam</span>
-<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="go">    ├── reads_father.bam.bai -&gt; */9a/c7a873*/reads_father.bam.bai</span>
-<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="go">    ├── reads_mother.bam -&gt; */f1/8d8486*/reads_mother.bam</span>
-<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="go">    ├── reads_mother.bam.bai -&gt; */f1/8d8486*/reads_mother.bam.bai</span>
-<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="go">    ├── reads_son.bam -&gt; */cc/fbc705*/reads_son.bam</span>
-<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="go">    └── reads_son.bam.bai -&gt; */cc/fbc705*/reads_son.bam.bai</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="go">    ├── reads_father.bam -&gt; */9f/c67a60*/reads_father.bam</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="go">    ├── reads_father.bam.bai -&gt; */9f/c67a60*/reads_father.bam.bai</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="go">    ├── reads_mother.bam -&gt; */bb/13a815*/reads_mother.bam</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="go">    ├── reads_mother.bam.bai -&gt; */bb/13a815*/reads_mother.bam.bai</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="go">    ├── reads_son.bam -&gt; */b3/27e144*/reads_son.bam</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="go">    └── reads_son.bam.bai -&gt; */b3/27e144*/reads_son.bam.bai</span>
 </code></pre></div>
 </details>
 <p>If you open one of the GVCF files and scroll through it, you can verify that GATK HaplotypeCaller produced GVCF files as requested.</p>
@@ -3813,30 +3813,30 @@ We'll put them at the root of the results directory since this is the final outp
 <summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>
-<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="go">Launching `genomics.nf` [crazy_marconi] revision: 5da9afc841</span>
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="go">Launching `genomics.nf` [maniac_shaw] revision: 7c1f77a8bc</span>
 <a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>
 <a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a><span class="go">[9a/c7a873] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 3 ✔</span>
-<a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a><span class="go">[e4/4ed55e] GATK_HAPLOTYPECALLER (2) | 3 of 3, cached: 3 ✔</span>
-<a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a><span class="go">[a6/7cc8ed] GATK_JOINTGENOTYPING     | 1 of 1 ✔</span>
+<a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a><span class="go">[9f/c67a60] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 3 ✔</span>
+<a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a><span class="go">[a6/d2a73e] GATK_HAPLOTYPECALLER (1) | 3 of 3, cached: 3 ✔</span>
+<a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a><span class="go">[2a/6052e7] GATK_JOINTGENOTYPING     | 1 of 1 ✔</span>
 <a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a>
 <a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a><span class="go">Outputs:</span>
 <a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a>
 <a id="__codelineno-37-12" name="__codelineno-37-12" href="#__codelineno-37-12"></a><span class="go">  /workspaces/training/nf4-science/genomics/results</span>
 <a id="__codelineno-37-13" name="__codelineno-37-13" href="#__codelineno-37-13"></a>
 <a id="__codelineno-37-14" name="__codelineno-37-14" href="#__codelineno-37-14"></a><span class="go">  indexed_bam:</span>
-<a id="__codelineno-37-15" name="__codelineno-37-15" href="#__codelineno-37-15"></a><span class="go">    - [indexed_bam/reads_mother.bam, indexed_bam/reads_mother.bam.bai]</span>
+<a id="__codelineno-37-15" name="__codelineno-37-15" href="#__codelineno-37-15"></a><span class="go">    - [indexed_bam/reads_son.bam, indexed_bam/reads_son.bam.bai]</span>
 <a id="__codelineno-37-16" name="__codelineno-37-16" href="#__codelineno-37-16"></a><span class="go">    - [indexed_bam/reads_father.bam, indexed_bam/reads_father.bam.bai]</span>
-<a id="__codelineno-37-17" name="__codelineno-37-17" href="#__codelineno-37-17"></a><span class="go">    - [indexed_bam/reads_son.bam, indexed_bam/reads_son.bam.bai]</span>
+<a id="__codelineno-37-17" name="__codelineno-37-17" href="#__codelineno-37-17"></a><span class="go">    - [indexed_bam/reads_mother.bam, indexed_bam/reads_mother.bam.bai]</span>
 <a id="__codelineno-37-18" name="__codelineno-37-18" href="#__codelineno-37-18"></a>
 <a id="__codelineno-37-19" name="__codelineno-37-19" href="#__codelineno-37-19"></a><span class="go">  gvcf:</span>
-<a id="__codelineno-37-20" name="__codelineno-37-20" href="#__codelineno-37-20"></a><span class="go">    - gvcf/reads_mother.bam.g.vcf</span>
-<a id="__codelineno-37-21" name="__codelineno-37-21" href="#__codelineno-37-21"></a><span class="go">    - gvcf/reads_father.bam.g.vcf</span>
+<a id="__codelineno-37-20" name="__codelineno-37-20" href="#__codelineno-37-20"></a><span class="go">    - gvcf/reads_father.bam.g.vcf</span>
+<a id="__codelineno-37-21" name="__codelineno-37-21" href="#__codelineno-37-21"></a><span class="go">    - gvcf/reads_mother.bam.g.vcf</span>
 <a id="__codelineno-37-22" name="__codelineno-37-22" href="#__codelineno-37-22"></a><span class="go">    - gvcf/reads_son.bam.g.vcf</span>
 <a id="__codelineno-37-23" name="__codelineno-37-23" href="#__codelineno-37-23"></a>
 <a id="__codelineno-37-24" name="__codelineno-37-24" href="#__codelineno-37-24"></a><span class="go">  gvcf_idx:</span>
-<a id="__codelineno-37-25" name="__codelineno-37-25" href="#__codelineno-37-25"></a><span class="go">    - gvcf/reads_mother.bam.g.vcf.idx</span>
-<a id="__codelineno-37-26" name="__codelineno-37-26" href="#__codelineno-37-26"></a><span class="go">    - gvcf/reads_father.bam.g.vcf.idx</span>
+<a id="__codelineno-37-25" name="__codelineno-37-25" href="#__codelineno-37-25"></a><span class="go">    - gvcf/reads_father.bam.g.vcf.idx</span>
+<a id="__codelineno-37-26" name="__codelineno-37-26" href="#__codelineno-37-26"></a><span class="go">    - gvcf/reads_mother.bam.g.vcf.idx</span>
 <a id="__codelineno-37-27" name="__codelineno-37-27" href="#__codelineno-37-27"></a><span class="go">    - gvcf/reads_son.bam.g.vcf.idx</span>
 <a id="__codelineno-37-28" name="__codelineno-37-28" href="#__codelineno-37-28"></a>
 <a id="__codelineno-37-29" name="__codelineno-37-29" href="#__codelineno-37-29"></a><span class="go">  joint_vcf: family_trio.joint.vcf</span>
@@ -3849,22 +3849,22 @@ The final output file, <code>family_trio.joint.vcf</code> (and its index), are i
 <details class="abstract">
 <summary>Directory contents (symlinks shortened)</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">results/</span>
-<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="go">├── family_trio.joint.vcf -&gt; */a6/7cc8ed*/family_trio.joint.vcf</span>
-<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="go">├── family_trio.joint.vcf.idx -&gt; */a6/7cc8ed*/family_trio.joint.vcf.idx</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="go">├── family_trio.joint.vcf -&gt; */2a/6052e7*/family_trio.joint.vcf</span>
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="go">├── family_trio.joint.vcf.idx -&gt; */2a/6052e7*/family_trio.joint.vcf.idx</span>
 <a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a><span class="go">├── gvcf/</span>
-<a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a><span class="go">│   ├── reads_father.bam.g.vcf -&gt; */27/0d7eb9*/reads_father.bam.g.vcf</span>
-<a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a><span class="go">│   ├── reads_father.bam.g.vcf.idx -&gt; */27/0d7eb9*/reads_father.bam.g.vcf.idx</span>
-<a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a><span class="go">│   ├── reads_mother.bam.g.vcf -&gt; */e4/4ed55e*/reads_mother.bam.g.vcf</span>
-<a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a><span class="go">│   ├── reads_mother.bam.g.vcf.idx -&gt; */e4/4ed55e*/reads_mother.bam.g.vcf.idx</span>
-<a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a><span class="go">│   ├── reads_son.bam.g.vcf -&gt; */08/e95962*/reads_son.bam.g.vcf</span>
-<a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a><span class="go">│   └── reads_son.bam.g.vcf.idx -&gt; */08/e95962*/reads_son.bam.g.vcf.idx</span>
+<a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a><span class="go">│   ├── reads_father.bam.g.vcf -&gt; */0d/e1b164*/reads_father.bam.g.vcf</span>
+<a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a><span class="go">│   ├── reads_father.bam.g.vcf.idx -&gt; */0d/e1b164*/reads_father.bam.g.vcf.idx</span>
+<a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a><span class="go">│   ├── reads_mother.bam.g.vcf -&gt; */47/a20c52*/reads_mother.bam.g.vcf</span>
+<a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a><span class="go">│   ├── reads_mother.bam.g.vcf.idx -&gt; */47/a20c52*/reads_mother.bam.g.vcf.idx</span>
+<a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a><span class="go">│   ├── reads_son.bam.g.vcf -&gt; */a6/d2a73e*/reads_son.bam.g.vcf</span>
+<a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a><span class="go">│   └── reads_son.bam.g.vcf.idx -&gt; */a6/d2a73e*/reads_son.bam.g.vcf.idx</span>
 <a id="__codelineno-38-11" name="__codelineno-38-11" href="#__codelineno-38-11"></a><span class="go">└── indexed_bam/</span>
-<a id="__codelineno-38-12" name="__codelineno-38-12" href="#__codelineno-38-12"></a><span class="go">    ├── reads_father.bam -&gt; */9a/c7a873*/reads_father.bam</span>
-<a id="__codelineno-38-13" name="__codelineno-38-13" href="#__codelineno-38-13"></a><span class="go">    ├── reads_father.bam.bai -&gt; */9a/c7a873*/reads_father.bam.bai</span>
-<a id="__codelineno-38-14" name="__codelineno-38-14" href="#__codelineno-38-14"></a><span class="go">    ├── reads_mother.bam -&gt; */f1/8d8486*/reads_mother.bam</span>
-<a id="__codelineno-38-15" name="__codelineno-38-15" href="#__codelineno-38-15"></a><span class="go">    ├── reads_mother.bam.bai -&gt; */f1/8d8486*/reads_mother.bam.bai</span>
-<a id="__codelineno-38-16" name="__codelineno-38-16" href="#__codelineno-38-16"></a><span class="go">    ├── reads_son.bam -&gt; */cc/fbc705*/reads_son.bam</span>
-<a id="__codelineno-38-17" name="__codelineno-38-17" href="#__codelineno-38-17"></a><span class="go">    └── reads_son.bam.bai -&gt; */cc/fbc705*/reads_son.bam.bai</span>
+<a id="__codelineno-38-12" name="__codelineno-38-12" href="#__codelineno-38-12"></a><span class="go">    ├── reads_father.bam -&gt; */9f/c67a60*/reads_father.bam</span>
+<a id="__codelineno-38-13" name="__codelineno-38-13" href="#__codelineno-38-13"></a><span class="go">    ├── reads_father.bam.bai -&gt; */9f/c67a60*/reads_father.bam.bai</span>
+<a id="__codelineno-38-14" name="__codelineno-38-14" href="#__codelineno-38-14"></a><span class="go">    ├── reads_mother.bam -&gt; */bb/13a815*/reads_mother.bam</span>
+<a id="__codelineno-38-15" name="__codelineno-38-15" href="#__codelineno-38-15"></a><span class="go">    ├── reads_mother.bam.bai -&gt; */bb/13a815*/reads_mother.bam.bai</span>
+<a id="__codelineno-38-16" name="__codelineno-38-16" href="#__codelineno-38-16"></a><span class="go">    ├── reads_son.bam -&gt; */b3/27e144*/reads_son.bam</span>
+<a id="__codelineno-38-17" name="__codelineno-38-17" href="#__codelineno-38-17"></a><span class="go">    └── reads_son.bam.bai -&gt; */b3/27e144*/reads_son.bam.bai</span>
 </code></pre></div>
 </details>
 <p>If you open the joint VCF file, you can verify that the workflow produced the expected variant calls.</p>

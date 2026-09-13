@@ -697,10 +697,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-unpin-a-pipeline" class="md-nav__link">
+  <a href="#22-revisions-apply-per-invocation-only" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Unpin a pipeline
+        2.2. Revisions apply per invocation only
       
     </span>
   </a>
@@ -2445,10 +2445,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-unpin-a-pipeline" class="md-nav__link">
+  <a href="#22-revisions-apply-per-invocation-only" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Unpin a pipeline
+        2.2. Revisions apply per invocation only
       
     </span>
   </a>
@@ -2756,18 +2756,19 @@ To find where a specific pipeline landed, and which revisions are available, ask
 </code></pre></div>
 <details class="success">
 <summary>Command output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">project name: nextflow-io/hello</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="go">repository  : https://github.com/nextflow-io/hello</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">local path  : /workspaces/.nextflow/assets/nextflow-io/hello</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="go">main script : main.nf</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="go">revisions   :</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="go">* master (default)</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="go">  mybranch</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="go">  testing</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="go">  v1.1 [t]</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="go">  v1.2 [t]</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="go">  v1.3 [t]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go"> project name: nextflow-io/hello</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="go"> repository  : https://github.com/nextflow-io/hello</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go"> local path  : /workspaces/.nextflow/assets/.repos/nextflow-io/hello</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="go"> main script : main.nf</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="go"> revisions   :</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="go"> &gt; master (default)</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="go">   mybranch</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="go">   testing</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="go">   v1.1 [t]</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="go">   v1.2 [t]</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="go">   v1.3 [t]</span>
 </code></pre></div>
+<p>Nextflow marks each revision you've already checked out locally with <code>&gt;</code>; the rest are available but not yet fetched into a working copy.</p>
 </details>
 <p>You can also list every pipeline you've pulled so far with <code>nextflow list</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>list
@@ -2793,56 +2794,52 @@ You can pin a particular version (tag), branch, or commit using the <code>-r</co
 <summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="go">Launching `https://github.com/nextflow-io/hello` [sick_carson] revision: 2ce0b0e294 [v1.3]</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="go">executor &gt;  local (4)</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="go">[61/e11f77] sayHello (4) | 4 of 4 ✔</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="go">Ciao world!</span>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="go">Bonjour world!</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="go">Pulling nextflow-io/hello:v1.3 ...</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="go"> downloaded from https://github.com/nextflow-io/hello.git</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="go">Launching `https://github.com/nextflow-io/hello` [sick_carson] revision: 2ce0b0e294 [v1.3]</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="go">executor &gt;  local (4)</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="go">[61/e11f77] sayHello (4) | 4 of 4 ✔</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="go">Ciao world!</span>
 <a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="go">Hello world!</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="go">Bonjour world!</span>
 <a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>
-<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="go">Hola world!</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="go">Hello world!</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="go">Hola world!</span>
 </code></pre></div>
 </details>
-<p>Pinning an exact revision is essential for reproducibility.
+<p>Nextflow fetches this revision the first time you request it, hence the <code>Pulling</code> and <code>downloaded from</code> lines; requesting the same revision again later skips straight to <code>Launching</code>.
+Pinning an exact revision is essential for reproducibility.
 It guarantees that you and your collaborators run the exact same pipeline code, regardless of what has changed in the repository since.</p>
-<h3 id="22-unpin-a-pipeline">2.2. Unpin a pipeline<a class="headerlink" href="#22-unpin-a-pipeline" title="Permanent link">&para;</a></h3>
-<p>Pinning a revision doesn't just apply to that one run: Nextflow checks out that revision in the local cache, so it also becomes what any later run without <code>-r</code> uses.
+<h3 id="22-revisions-apply-per-invocation-only">2.2. Revisions apply per invocation only<a class="headerlink" href="#22-revisions-apply-per-invocation-only" title="Permanent link">&para;</a></h3>
+<p>Pinning a revision with <code>-r</code> only affects the run where you specify it: it does not change what a later, plain <code>nextflow run</code> uses.
 Try running the pipeline again without <code>-r</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nextflow-io/hello
 </code></pre></div>
-<details class="failure">
-<summary>Command output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">Project `nextflow-io/hello` is currently stuck on revision: v1.3 -- you need to explicitly specify a revision with the option `-r` in order to use it</span>
-</code></pre></div>
-</details>
-<p>Nextflow refuses to guess, since silently running a different revision than the one you pinned would defeat the purpose of pinning it in the first place.
-To go back to running the default branch, pass it explicitly with <code>-r</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nextflow-io/hello<span class="w"> </span>-r<span class="w"> </span>master
-</code></pre></div>
 <details class="success">
 <summary>Command output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">Launching `https://github.com/nextflow-io/hello` [hungry_maxwell] DSL2 - revision: 3c2cdc9823 [master]</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="go">executor &gt;  local (4)</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="go">[ba/08236d] sayHello (4) | 4 of 4 ✔</span>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="go">Ciao world!</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="go">Hello world!</span>
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>
-<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="go">Bonjour world!</span>
-<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>
-<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="go">Hola world!</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">Launching `https://github.com/nextflow-io/hello` [hungry_maxwell] revision: 3c2cdc9823 [master]</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="go">executor &gt;  local (4)</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="go">[ba/08236d] sayHello (4) | 4 of 4 ✔</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="go">Ciao world!</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="go">Hello world!</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="go">Bonjour world!</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="go">Hola world!</span>
 </code></pre></div>
 </details>
-<p>You can find the name of a pipeline's default branch by running <code>nextflow info &lt;pipeline&gt;</code>; it's the one marked <code>(default)</code>.
-Once you've run it, the pipeline is unstuck: plain <code>nextflow run nextflow-io/hello</code> commands go back to using that branch until you pin it to something else again.</p>
+<p>Even though the previous run explicitly pinned <code>v1.3</code>, this run goes straight back to the default branch (<code>master</code>).
+Nextflow keeps a separate local working copy for each revision you've used, which is what the <code>&gt;</code> markers in <code>nextflow info</code> show, but it never remembers which one you ran last.
+You can find the name of a pipeline's default branch by running <code>nextflow info &lt;pipeline&gt;</code>; it's the one marked <code>(default)</code>.
+Reproducibility is entirely on you: always pass <code>-r</code> explicitly whenever it matters, rather than assuming a revision you pinned in an earlier run still applies.</p>
 <h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
-<p>You know how to pin a remote pipeline to a specific version, branch, or commit for reproducible execution, and how to unpin it again.</p>
+<p>You know how to pin a remote pipeline to a specific version, branch, or commit for reproducible execution, and that the pin applies only to that one invocation, not to later runs.</p>
 <h3 id="whats-next_1">What's next?<a class="headerlink" href="#whats-next_1" title="Permanent link">&para;</a></h3>
 <p>You've covered the fundamentals of running and managing Nextflow pipelines.
 See <a href="../next_steps/">Course summary</a> for where to go from here.</p>
@@ -2851,7 +2848,7 @@ See <a href="../next_steps/">Course summary</a> for where to go from here.</p>
 <p>In this part you learned to:</p>
 <ul>
 <li>Run a pipeline directly from a GitHub repository without downloading it</li>
-<li>Pin a remote pipeline to a specific revision for reproducibility, and unpin it again</li>
+<li>Pin a remote pipeline to a specific revision for reproducibility, and understand that the pin applies only to that one invocation</li>
 </ul><div id="quiz-progress-sidebar" aria-label="क्विज़ प्रगति" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">

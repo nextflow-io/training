@@ -5800,33 +5800,33 @@ This allows you to find out what settings will be used without having to launch 
 <details class="success">
 <summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-79-2" name="__codelineno-79-2" href="#__codelineno-79-2"></a><span class="w">  </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'data/greetings.csv'</span>
-<a id="__codelineno-79-3" name="__codelineno-79-3" href="#__codelineno-79-3"></a><span class="w">  </span><span class="n">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'batch'</span>
-<a id="__codelineno-79-4" name="__codelineno-79-4" href="#__codelineno-79-4"></a><span class="w">  </span><span class="n">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'turkey'</span>
+<a id="__codelineno-79-2" name="__codelineno-79-2" href="#__codelineno-79-2"></a><span class="w">   </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'data/greetings.csv'</span>
+<a id="__codelineno-79-3" name="__codelineno-79-3" href="#__codelineno-79-3"></a><span class="w">   </span><span class="n">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'batch'</span>
+<a id="__codelineno-79-4" name="__codelineno-79-4" href="#__codelineno-79-4"></a><span class="w">   </span><span class="n">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'turkey'</span>
 <a id="__codelineno-79-5" name="__codelineno-79-5" href="#__codelineno-79-5"></a><span class="o">}</span>
 <a id="__codelineno-79-6" name="__codelineno-79-6" href="#__codelineno-79-6"></a>
 <a id="__codelineno-79-7" name="__codelineno-79-7" href="#__codelineno-79-7"></a><span class="n">docker</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-79-8" name="__codelineno-79-8" href="#__codelineno-79-8"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<a id="__codelineno-79-8" name="__codelineno-79-8" href="#__codelineno-79-8"></a><span class="w">   </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
 <a id="__codelineno-79-9" name="__codelineno-79-9" href="#__codelineno-79-9"></a><span class="o">}</span>
 <a id="__codelineno-79-10" name="__codelineno-79-10" href="#__codelineno-79-10"></a>
 <a id="__codelineno-79-11" name="__codelineno-79-11" href="#__codelineno-79-11"></a><span class="n">conda</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-79-12" name="__codelineno-79-12" href="#__codelineno-79-12"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-79-12" name="__codelineno-79-12" href="#__codelineno-79-12"></a><span class="w">   </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <a id="__codelineno-79-13" name="__codelineno-79-13" href="#__codelineno-79-13"></a><span class="o">}</span>
 <a id="__codelineno-79-14" name="__codelineno-79-14" href="#__codelineno-79-14"></a>
 <a id="__codelineno-79-15" name="__codelineno-79-15" href="#__codelineno-79-15"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-79-16" name="__codelineno-79-16" href="#__codelineno-79-16"></a><span class="w">  </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'1 GB'</span>
-<a id="__codelineno-79-17" name="__codelineno-79-17" href="#__codelineno-79-17"></a><span class="w">  </span><span class="nl">withName:</span><span class="n">cowpy</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-79-16" name="__codelineno-79-16" href="#__codelineno-79-16"></a><span class="w">   </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'1 GB'</span>
+<a id="__codelineno-79-17" name="__codelineno-79-17" href="#__codelineno-79-17"></a><span class="w">   </span><span class="nl">withName:</span><span class="n">cowpy</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-79-18" name="__codelineno-79-18" href="#__codelineno-79-18"></a><span class="w">      </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2 GB'</span>
 <a id="__codelineno-79-19" name="__codelineno-79-19" href="#__codelineno-79-19"></a><span class="w">      </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
-<a id="__codelineno-79-20" name="__codelineno-79-20" href="#__codelineno-79-20"></a><span class="w">  </span><span class="o">}</span>
+<a id="__codelineno-79-20" name="__codelineno-79-20" href="#__codelineno-79-20"></a><span class="w">   </span><span class="o">}</span>
 <a id="__codelineno-79-21" name="__codelineno-79-21" href="#__codelineno-79-21"></a><span class="o">}</span>
 <a id="__codelineno-79-22" name="__codelineno-79-22" href="#__codelineno-79-22"></a>
 <a id="__codelineno-79-23" name="__codelineno-79-23" href="#__codelineno-79-23"></a><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'custom-outdir-config/'</span>
 <a id="__codelineno-79-24" name="__codelineno-79-24" href="#__codelineno-79-24"></a>
 <a id="__codelineno-79-25" name="__codelineno-79-25" href="#__codelineno-79-25"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-79-26" name="__codelineno-79-26" href="#__codelineno-79-26"></a><span class="w">  </span><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-79-26" name="__codelineno-79-26" href="#__codelineno-79-26"></a><span class="w">   </span><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-79-27" name="__codelineno-79-27" href="#__codelineno-79-27"></a><span class="w">      </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'copy'</span>
-<a id="__codelineno-79-28" name="__codelineno-79-28" href="#__codelineno-79-28"></a><span class="w">  </span><span class="o">}</span>
+<a id="__codelineno-79-28" name="__codelineno-79-28" href="#__codelineno-79-28"></a><span class="w">   </span><span class="o">}</span>
 <a id="__codelineno-79-29" name="__codelineno-79-29" href="#__codelineno-79-29"></a><span class="o">}</span>
 </code></pre></div>
 </details>
@@ -5838,34 +5838,34 @@ This allows you to find out what settings will be used without having to launch 
 <details class="success">
 <summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-81-1" name="__codelineno-81-1" href="#__codelineno-81-1"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-81-2" name="__codelineno-81-2" href="#__codelineno-81-2"></a><span class="w">  </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'data/greetings.csv'</span>
-<a id="__codelineno-81-3" name="__codelineno-81-3" href="#__codelineno-81-3"></a><span class="w">  </span><span class="n">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'test'</span>
-<a id="__codelineno-81-4" name="__codelineno-81-4" href="#__codelineno-81-4"></a><span class="w">  </span><span class="n">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'dragonandcow'</span>
+<a id="__codelineno-81-2" name="__codelineno-81-2" href="#__codelineno-81-2"></a><span class="w">   </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'data/greetings.csv'</span>
+<a id="__codelineno-81-3" name="__codelineno-81-3" href="#__codelineno-81-3"></a><span class="w">   </span><span class="n">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'test'</span>
+<a id="__codelineno-81-4" name="__codelineno-81-4" href="#__codelineno-81-4"></a><span class="w">   </span><span class="n">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'dragonandcow'</span>
 <a id="__codelineno-81-5" name="__codelineno-81-5" href="#__codelineno-81-5"></a><span class="o">}</span>
 <a id="__codelineno-81-6" name="__codelineno-81-6" href="#__codelineno-81-6"></a>
 <a id="__codelineno-81-7" name="__codelineno-81-7" href="#__codelineno-81-7"></a><span class="n">docker</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-81-8" name="__codelineno-81-8" href="#__codelineno-81-8"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-81-8" name="__codelineno-81-8" href="#__codelineno-81-8"></a><span class="w">   </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <a id="__codelineno-81-9" name="__codelineno-81-9" href="#__codelineno-81-9"></a><span class="o">}</span>
 <a id="__codelineno-81-10" name="__codelineno-81-10" href="#__codelineno-81-10"></a>
 <a id="__codelineno-81-11" name="__codelineno-81-11" href="#__codelineno-81-11"></a><span class="n">conda</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-81-12" name="__codelineno-81-12" href="#__codelineno-81-12"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-81-12" name="__codelineno-81-12" href="#__codelineno-81-12"></a><span class="w">   </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <a id="__codelineno-81-13" name="__codelineno-81-13" href="#__codelineno-81-13"></a><span class="o">}</span>
 <a id="__codelineno-81-14" name="__codelineno-81-14" href="#__codelineno-81-14"></a>
 <a id="__codelineno-81-15" name="__codelineno-81-15" href="#__codelineno-81-15"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-81-16" name="__codelineno-81-16" href="#__codelineno-81-16"></a><span class="w">  </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'1 GB'</span>
-<a id="__codelineno-81-17" name="__codelineno-81-17" href="#__codelineno-81-17"></a><span class="w">  </span><span class="nl">withName:</span><span class="n">cowpy</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-81-16" name="__codelineno-81-16" href="#__codelineno-81-16"></a><span class="w">   </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'1 GB'</span>
+<a id="__codelineno-81-17" name="__codelineno-81-17" href="#__codelineno-81-17"></a><span class="w">   </span><span class="nl">withName:</span><span class="n">cowpy</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-81-18" name="__codelineno-81-18" href="#__codelineno-81-18"></a><span class="w">      </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2 GB'</span>
 <a id="__codelineno-81-19" name="__codelineno-81-19" href="#__codelineno-81-19"></a><span class="w">      </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
-<a id="__codelineno-81-20" name="__codelineno-81-20" href="#__codelineno-81-20"></a><span class="w">  </span><span class="o">}</span>
-<a id="__codelineno-81-21" name="__codelineno-81-21" href="#__codelineno-81-21"></a><span class="w">  </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'local'</span>
+<a id="__codelineno-81-20" name="__codelineno-81-20" href="#__codelineno-81-20"></a><span class="w">   </span><span class="o">}</span>
+<a id="__codelineno-81-21" name="__codelineno-81-21" href="#__codelineno-81-21"></a><span class="w">   </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'local'</span>
 <a id="__codelineno-81-22" name="__codelineno-81-22" href="#__codelineno-81-22"></a><span class="o">}</span>
 <a id="__codelineno-81-23" name="__codelineno-81-23" href="#__codelineno-81-23"></a>
 <a id="__codelineno-81-24" name="__codelineno-81-24" href="#__codelineno-81-24"></a><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'custom-outdir-config/'</span>
 <a id="__codelineno-81-25" name="__codelineno-81-25" href="#__codelineno-81-25"></a>
 <a id="__codelineno-81-26" name="__codelineno-81-26" href="#__codelineno-81-26"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-81-27" name="__codelineno-81-27" href="#__codelineno-81-27"></a><span class="w">  </span><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-81-27" name="__codelineno-81-27" href="#__codelineno-81-27"></a><span class="w">   </span><span class="n">output</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-81-28" name="__codelineno-81-28" href="#__codelineno-81-28"></a><span class="w">      </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'copy'</span>
-<a id="__codelineno-81-29" name="__codelineno-81-29" href="#__codelineno-81-29"></a><span class="w">  </span><span class="o">}</span>
+<a id="__codelineno-81-29" name="__codelineno-81-29" href="#__codelineno-81-29"></a><span class="w">   </span><span class="o">}</span>
 <a id="__codelineno-81-30" name="__codelineno-81-30" href="#__codelineno-81-30"></a><span class="o">}</span>
 </code></pre></div>
 </details>

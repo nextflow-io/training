@@ -2872,14 +2872,34 @@ We'll generate the first two here; see <a href="https://nextflow.io/docs/latest/
 <summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="go">Launching `main.nf` [intergalactic_dalembert] DSL2 - revision: ce74f81996</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="go">Launching `main.nf` [intergalactic_dalembert] revision: ce74f81996</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="go">executor &gt;  local (8)</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="hll"><span class="go">[34/23f10f] sayHello (2)       | 3 of 3 ✔</span>
 </span><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="hll"><span class="go">[af/cab69d] convertToUpper (3) | 3 of 3 ✔</span>
 </span><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="hll"><span class="go">[9e/d73afb] collectGreetings   | 1 of 1 ✔</span>
 </span><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="hll"><span class="go">[3c/392db0] cowpy              | 1 of 1 ✔</span>
-</span></code></pre></div>
+</span><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="go">Outputs:</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="go">  /workspaces/training/nextflow-run/results</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="go">  first_output:</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="go">    - batch/intermediates/Bonjour-output.txt</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="go">    - batch/intermediates/Hello-output.txt</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="go">    - batch/intermediates/Hola-output.txt</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="go">  uppercased:</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="go">    - batch/intermediates/UPPER-Bonjour-output.txt</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="go">    - batch/intermediates/UPPER-Hello-output.txt</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="go">    - batch/intermediates/UPPER-Hola-output.txt</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="go">  collected: batch/intermediates/COLLECTED-batch-output.txt</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="go">  batch_report: batch/batch-report.txt</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="go">  cowpy_art: batch/cowpy-COLLECTED-batch-output.txt</span>
+</code></pre></div>
 </details>
 <p>Nextflow writes the report to a file named <code>report-&lt;timestamp&gt;.html</code> in the working directory.
 Open it in a browser to see an execution summary, a table of every task with its status and runtime, and resource usage charts broken down by process.</p>
@@ -2894,14 +2914,34 @@ Open it in a browser to see an execution summary, a table of every task with its
 <summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">Launching `main.nf` [jolly_noyce] DSL2 - revision: ce74f81996</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">Launching `main.nf` [jolly_noyce] revision: ce74f81996</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="go">executor &gt;  local (8)</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="hll"><span class="go">[ad/e92ef3] sayHello (3)       | 3 of 3 ✔</span>
 </span><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="hll"><span class="go">[2a/df8a8d] convertToUpper (2) | 3 of 3 ✔</span>
 </span><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="hll"><span class="go">[be/7fb72a] collectGreetings   | 1 of 1 ✔</span>
 </span><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="hll"><span class="go">[63/dc9bd6] cowpy              | 1 of 1 ✔</span>
-</span></code></pre></div>
+</span><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="go">Outputs:</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="go">  /workspaces/training/nextflow-run/results</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="go">  first_output:</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="go">    - batch/intermediates/Bonjour-output.txt</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="go">    - batch/intermediates/Hello-output.txt</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="go">    - batch/intermediates/Hola-output.txt</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="go">  uppercased:</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="go">    - batch/intermediates/UPPER-Bonjour-output.txt</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="go">    - batch/intermediates/UPPER-Hello-output.txt</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="go">    - batch/intermediates/UPPER-Hola-output.txt</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="go">  collected: batch/intermediates/COLLECTED-batch-output.txt</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="go">  batch_report: batch/batch-report.txt</span>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="go">  cowpy_art: batch/cowpy-COLLECTED-batch-output.txt</span>
+</code></pre></div>
 </details>
 <p>Nextflow writes the timeline to a file named <code>timeline-&lt;timestamp&gt;.html</code>.
 Open it in a browser to see a bar for every task, positioned and sized by when it ran and how long it took:</p>

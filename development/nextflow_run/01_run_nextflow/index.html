@@ -3083,17 +3083,24 @@ We start with a simple Hello World workflow, then progress to a complete multi-s
 <summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="go">Launching `1-hello.nf` [infallible_volhard] DSL2 - revision: 82d40dbf94</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="go">Launching `1-hello.nf` [infallible_volhard] revision: 82d40dbf94</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="go">executor &gt;  local (1)</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="hll"><span class="go">[6d/740edd] sayHello | 1 of 1 ✔</span>
-</span></code></pre></div>
+</span><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="go">  /workspaces/training/nextflow-run/results</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="go">  first_output: 1-hello/Hello World!-output.txt</span>
+</code></pre></div>
 </details>
-<p>The most important line in the output is the last one:</p>
+<p>The key line in the output is the process status line:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">[6d/740edd] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
 <p>This tells us that the <code>sayHello</code> process ran successfully once.
-The <code>[6d/740edd]</code> prefix is a truncated path to the task's working directory — more on that below.</p>
+The <code>[6d/740edd]</code> prefix is a truncated path to the task's working directory — more on that below.
+The <code>Outputs:</code> block that follows lists every file the pipeline published, labeled according to the <code>output</code> block covered in <a href="#14-optional-code-walkthrough">1.4</a> below.</p>
 <h3 id="12-find-the-output">1.2. Find the output<a class="headerlink" href="#12-find-the-output" title="Permanent link">&para;</a></h3>
 <p>This workflow is configured to publish its output to a <code>results</code> directory.
 After running, you should find the output there:</p>
@@ -3295,11 +3302,20 @@ The workflow <code>2-inputs.nf</code> reads from a CSV file and runs <code>sayHe
 <summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="go">Launching `2-inputs.nf` [nauseous_babbage] DSL2 - revision: b90778224d</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="go">Launching `2-inputs.nf` [nauseous_babbage] revision: b90778224d</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
 <a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="go">executor &gt;  local (3)</span>
 <a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="hll"><span class="go">[66/de7844] sayHello (3) | 3 of 3 ✔</span>
-</span></code></pre></div>
+</span><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="go">  /workspaces/training/nextflow-run/results</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="go">  first_output:</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="go">    - 2-inputs/Bonjour-output.txt</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="go">    - 2-inputs/Hello-output.txt</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="go">    - 2-inputs/Hola-output.txt</span>
+</code></pre></div>
 </details>
 <p>The <code>3 of 3</code> tells us the <code>sayHello</code> process was called three times, once per row in the CSV.</p>
 <p>In the <code>results</code> directory, you should now see three output files, one per greeting:</p>
@@ -3335,12 +3351,20 @@ To see each process call listed individually, add <code>-ansi-log false</code>:<
 </code></pre></div>
 <details class="success">
 <summary>Command output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">Launching `2-inputs.nf` [extravagant_bardeen] DSL2 - revision: b90778224d</span>
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="go">[43/0bac1c] Submitted process &gt; sayHello (1)</span>
-<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="go">[2d/99f604] Submitted process &gt; sayHello (2)</span>
-<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="go">[6d/7578d7] Submitted process &gt; sayHello (3)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">N E X T F L O W  ~  version 26.04.4</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="go">Launching `2-inputs.nf` [extravagant_bardeen] - revision: b90778224d</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">[43/0bac1c] Submitted process &gt; sayHello (1)</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="go">[2d/99f604] Submitted process &gt; sayHello (2)</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="go">[6d/7578d7] Submitted process &gt; sayHello (3)</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="go">Outputs:</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="go">  /workspaces/training/nextflow-run/results</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="go">  first_output:</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="go">    - 2-inputs/Hello-output.txt</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="go">    - 2-inputs/Bonjour-output.txt</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a><span class="go">    - 2-inputs/Hola-output.txt</span>
 </code></pre></div>
 </details>
 <p>This shows all three process calls and the unique work subdirectory created for each one.</p>
@@ -3352,11 +3376,22 @@ To see each process call listed individually, add <code>-ansi-log false</code>:<
 <summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="go">Launching `2-inputs.nf` [adoring_mayer] DSL2 - revision: b90778224d</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="go">Launching `2-inputs.nf` [adoring_mayer] revision: b90778224d</span>
 <a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>
 <a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="go">executor &gt;  local (2)</span>
 <a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="hll"><span class="go">[84/2f3067] sayHello (5) | 5 of 5, cached: 3 ✔</span>
-</span></code></pre></div>
+</span><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="go">Outputs:</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="go">  /workspaces/training/nextflow-run/results</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="go">  first_output:</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="go">    - 2-inputs/Bonjour-output.txt</span>
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="go">    - 2-inputs/Ciao-output.txt</span>
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="go">    - 2-inputs/Hello-output.txt</span>
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a><span class="go">    - 2-inputs/Hola-output.txt</span>
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a><span class="go">    - 2-inputs/Ola-output.txt</span>
+</code></pre></div>
 </details>
 <p>Nextflow ran only the two new inputs.
 The three greetings processed in the previous run were cached and reused automatically.</p>
@@ -3422,14 +3457,34 @@ This makes each process reusable across multiple workflows without duplicating c
 <summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>
-<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="go">Launching `main.nf` [nostalgic_brahmagupta] DSL2 - revision: ce74f81996</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="go">Launching `main.nf` [nostalgic_brahmagupta] revision: ce74f81996</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>
 <a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="go">executor &gt;  local (8)</span>
 <a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="hll"><span class="go">[56/8499f6] sayHello (3)       | 3 of 3 ✔</span>
 </span><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="hll"><span class="go">[cc/0ee42a] convertToUpper (3) | 3 of 3 ✔</span>
 </span><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="hll"><span class="go">[eb/0f2e24] collectGreetings   | 1 of 1 ✔</span>
 </span><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="hll"><span class="go">[b5/34e07f] cowpy              | 1 of 1 ✔</span>
-</span></code></pre></div>
+</span><a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="go">Outputs:</span>
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="go">  /workspaces/training/nextflow-run/results</span>
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>
+<a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a><span class="go">  first_output:</span>
+<a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a><span class="go">    - batch/intermediates/Bonjour-output.txt</span>
+<a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a><span class="go">    - batch/intermediates/Hello-output.txt</span>
+<a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a><span class="go">    - batch/intermediates/Hola-output.txt</span>
+<a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a>
+<a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a><span class="go">  uppercased:</span>
+<a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a><span class="go">    - batch/intermediates/UPPER-Bonjour-output.txt</span>
+<a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a><span class="go">    - batch/intermediates/UPPER-Hello-output.txt</span>
+<a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a><span class="go">    - batch/intermediates/UPPER-Hola-output.txt</span>
+<a id="__codelineno-22-24" name="__codelineno-22-24" href="#__codelineno-22-24"></a>
+<a id="__codelineno-22-25" name="__codelineno-22-25" href="#__codelineno-22-25"></a><span class="go">  collected: batch/intermediates/COLLECTED-batch-output.txt</span>
+<a id="__codelineno-22-26" name="__codelineno-22-26" href="#__codelineno-22-26"></a>
+<a id="__codelineno-22-27" name="__codelineno-22-27" href="#__codelineno-22-27"></a><span class="go">  batch_report: batch/batch-report.txt</span>
+<a id="__codelineno-22-28" name="__codelineno-22-28" href="#__codelineno-22-28"></a>
+<a id="__codelineno-22-29" name="__codelineno-22-29" href="#__codelineno-22-29"></a><span class="go">  cowpy_art: batch/cowpy-COLLECTED-batch-output.txt</span>
+</code></pre></div>
 </details>
 <p>Four processes ran, but not the same number of times.
 <code>sayHello</code> and <code>convertToUpper</code> each ran once per input (3 of 3): every greeting needs to be written out and uppercased on its own.

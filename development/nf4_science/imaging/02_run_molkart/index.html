@@ -3393,15 +3393,15 @@ However, Nextflow only uses these containers if you tell it to!</p>
 </code></pre></div>
 <p>You should see several subdirectories:</p>
 <div class="highlight"><span class="filename">results/</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">results/</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="go">├── anndata/</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">├── clahe/</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="go">├── mindagap/</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="go">├── molkartqc/</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="go">├── multiqc/</span>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="go">├── pipeline_info/</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="go">├── segmentation/</span>
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="go">├── spot2cell/</span>
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="go">└── stack/</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="go">├── anndata</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">├── clahe</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="go">├── mindagap</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="go">├── molkartqc</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="go">├── multiqc</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="go">├── pipeline_info</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="go">├── segmentation</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="go">├── spot2cell</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="go">└── stack</span>
 </code></pre></div>
 <p>Each subdirectory contains outputs from a specific stage of the pipeline:</p>
 <ul>
@@ -3449,15 +3449,15 @@ Notice how Nextflow is able to process multiple segmentation methods in parallel
 <p>Check the pipeline_info directory:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>ls<span class="w"> </span>results/pipeline_info/
 </code></pre></div>
-<p>Key files:</p>
+<p>Key files (each name ends with a timestamp, e.g. <code>execution_report_2026-01-15_10-30-00.html</code>):</p>
 <ul>
-<li><strong>execution_report.html</strong>: Timeline and resource usage visualization</li>
-<li><strong>execution_timeline.html</strong>: Gantt chart of process execution</li>
-<li><strong>execution_trace.txt</strong>: Detailed task execution metrics</li>
-<li><strong>pipeline_dag.html</strong>: Directed acyclic graph showing workflow structure</li>
+<li><strong>execution_report_*.html</strong>: Timeline and resource usage visualization</li>
+<li><strong>execution_timeline_*.html</strong>: Gantt chart of process execution</li>
+<li><strong>execution_trace_*.txt</strong>: Detailed task execution metrics</li>
+<li><strong>pipeline_dag_*.html</strong>: Directed acyclic graph showing workflow structure</li>
 </ul>
 <p>Open the execution report to see resource usage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>code<span class="w"> </span>results/pipeline_info/execution_report.html
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>code<span class="w"> </span>results/pipeline_info/execution_report_*.html
 </code></pre></div>
 <p>This shows:</p>
 <ul>
@@ -3484,8 +3484,8 @@ For this pipeline run with 22 tasks, there will be 22 work subdirectories.</p>
 </code></pre></div>
 <p>This shows the first 5 task directories.</p>
 <h3 id="42-inspect-a-task-directory">4.2. Inspect a task directory<a class="headerlink" href="#42-inspect-a-task-directory" title="Permanent link">&para;</a></h3>
-<p>Pick one of the segmentation process hashes from the console output (e.g., <code>[3m/4n5o6p]</code>) and look inside:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>ls<span class="w"> </span>-la<span class="w"> </span>work/3m/4n5o6p*/
+<p>Pick one of the segmentation process hashes from the console output (e.g., <code>[3a/4b5c6d]</code>) and look inside:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>ls<span class="w"> </span>-la<span class="w"> </span>work/3a/4b5c6d*/
 </code></pre></div>
 <p>You'll see:</p>
 <ul>

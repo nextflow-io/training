@@ -4012,10 +4012,10 @@ Symlinks will break when you clean up your <code>work</code> directory, so for p
 <summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
-<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `rnaseq.nf` [mad_lorenz] revision: 5846a164d2</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `rnaseq.nf` [fabulous_engelbart] revision: 859d80cde8</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
 <a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="go">[7b/8ee79e] FASTQC (1) | 1 of 1 ✔</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="go">[4e/36fb3d] FASTQC (1) | 1 of 1 ✔</span>
 <a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>
 <a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="go">Outputs:</span>
 <a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>
@@ -4339,11 +4339,11 @@ The <code>--fastqc</code> flag tells Trim Galore to automatically run FastQC on 
 <summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>
-<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="go">Launching `rnaseq.nf` [gloomy_becquerel] revision: bb11055736</span>
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="go">Launching `rnaseq.nf` [stupefied_volhard] revision: faaf310b2f</span>
 <a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>
 <a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a><span class="go">executor &gt;  local (2)</span>
-<a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a><span class="go">[f6/c8ef2e] FASTQC (1)      | 1 of 1 ✔</span>
-<a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a><span class="go">[58/c58d8a] TRIM_GALORE (1) | 1 of 1 ✔</span>
+<a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a><span class="go">[a3/ac9284] FASTQC (1)      | 1 of 1 ✔</span>
+<a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a><span class="go">[55/c4d983] TRIM_GALORE (1) | 1 of 1 ✔</span>
 <a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a>
 <a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a><span class="go">Outputs:</span>
 <a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a>
@@ -4622,8 +4622,8 @@ We use <code class="highlight"><span class="n">file</span><span class="o">(</spa
 <a id="__codelineno-50-28" name="__codelineno-50-28"></a><span class="w">    </span><span class="c1">// Adapter trimming and post-trimming QC</span>
 <a id="__codelineno-50-29" name="__codelineno-50-29"></a><span class="w">    </span><span class="n">TRIM_GALORE</span><span class="o">(</span><span class="n">read_ch</span><span class="o">)</span>
 <a id="__codelineno-50-30" name="__codelineno-50-30"></a>
-<a id="__codelineno-50-31" name="__codelineno-50-31"></a><span class="w">    </span><span class="c1">// Alignment to a reference genome</span>
-<a id="__codelineno-50-32" name="__codelineno-50-32"></a><span class="hll"><span class="w">    </span><span class="n">HISAT2_ALIGN</span><span class="o">(</span><span class="n">TRIM_GALORE</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">trimmed_reads</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">hisat2_index_zip</span><span class="o">))</span>
+<a id="__codelineno-50-31" name="__codelineno-50-31"></a><span class="hll"><span class="w">    </span><span class="c1">// Alignment to a reference genome</span>
+</span><a id="__codelineno-50-32" name="__codelineno-50-32"></a><span class="hll"><span class="w">    </span><span class="n">HISAT2_ALIGN</span><span class="o">(</span><span class="n">TRIM_GALORE</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">trimmed_reads</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">hisat2_index_zip</span><span class="o">))</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -4797,12 +4797,12 @@ We use <code class="highlight"><span class="n">file</span><span class="o">(</spa
 <summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a>
-<a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a><span class="go">Launching `rnaseq.nf` [elated_stonebraker] revision: e8e57d0cdd</span>
+<a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a><span class="go">Launching `rnaseq.nf` [nauseous_allen] revision: 45d77a9709</span>
 <a id="__codelineno-57-4" name="__codelineno-57-4" href="#__codelineno-57-4"></a>
 <a id="__codelineno-57-5" name="__codelineno-57-5" href="#__codelineno-57-5"></a><span class="go">executor &gt;  local (3)</span>
-<a id="__codelineno-57-6" name="__codelineno-57-6" href="#__codelineno-57-6"></a><span class="go">[e8/fa29d6] FASTQC (1)       | 1 of 1 ✔</span>
-<a id="__codelineno-57-7" name="__codelineno-57-7" href="#__codelineno-57-7"></a><span class="go">[ca/ffdde2] TRIM_GALORE (1)  | 1 of 1 ✔</span>
-<a id="__codelineno-57-8" name="__codelineno-57-8" href="#__codelineno-57-8"></a><span class="go">[b6/1c6ca3] HISAT2_ALIGN (1) | 1 of 1 ✔</span>
+<a id="__codelineno-57-6" name="__codelineno-57-6" href="#__codelineno-57-6"></a><span class="go">[57/b3c2cb] FASTQC (1)       | 1 of 1 ✔</span>
+<a id="__codelineno-57-7" name="__codelineno-57-7" href="#__codelineno-57-7"></a><span class="go">[98/451aef] TRIM_GALORE (1)  | 1 of 1 ✔</span>
+<a id="__codelineno-57-8" name="__codelineno-57-8" href="#__codelineno-57-8"></a><span class="go">[78/7cf2c3] HISAT2_ALIGN (1) | 1 of 1 ✔</span>
 <a id="__codelineno-57-9" name="__codelineno-57-9" href="#__codelineno-57-9"></a>
 <a id="__codelineno-57-10" name="__codelineno-57-10" href="#__codelineno-57-10"></a><span class="go">Outputs:</span>
 <a id="__codelineno-57-11" name="__codelineno-57-11" href="#__codelineno-57-11"></a>

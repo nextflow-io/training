@@ -3313,7 +3313,7 @@ In real pipelines with complex sample sheets and many columns, this kind of vali
 <p>Run the pipeline:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello.nf
 </code></pre></div>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="go">ERROR ~ Validation of samplesheet failed!</span>
+<div class="highlight"><span class="filename">Output (partial)</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="go">ERROR ~ Validation of samplesheet failed!</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="go">The following errors have been detected in greetings.csv:</span>
 <a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>
@@ -3322,6 +3322,8 @@ In real pipelines with complex sample sheets and many columns, this kind of vali
 <a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="go">-&gt; Entry 3: Missing required field(s): greeting</span>
 <a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="go">-&gt; Entry 4: Missing required field(s): greeting</span>
 <a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="go">-&gt; Entry 5: Missing required field(s): greeting</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="go"> -- Check script 'hello.nf' at line: 20 or see '.nextflow.log' file for more details</span>
 </code></pre></div>
 <p>The pipeline refuses to run because the schema requires a <code>greeting</code> column and can't find one.</p>
 <p>Now restore the required column but rename the optional <code>language</code> column to <code>lang</code>:</p>
@@ -3425,18 +3427,20 @@ You don't need to change any pipeline code; just add it to the config.</p>
 <p>The plugin produces several INFO and WARN messages during execution.
 These are normal for a small example running on a local machine:</p>
 <div class="highlight"><span class="filename">Output (partial)</span><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="go">nf-co2footprint plugin  ~  version 1.3.0</span>
-<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="go">WARN - [nf-co2footprint] Target zone null not found. Attempting to retrieve carbon intensity for fallback zone GLOBAL.</span>
-<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="go">INFO - [nf-co2footprint] Using fallback carbon intensity from GLOBAL from CI table: 480.0 gCO₂eq/kWh.</span>
-<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="go">WARN - [nf-co2footprint] Executor 'null' not mapped.</span>
-<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="go">WARN - [nf-co2footprint] Fallback to: `machineType = null`, `pue = 1.0`. ...</span>
-<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="go">...</span>
-<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="go">WARN - [nf-co2footprint] No CPU model detected. Using default CPU power draw value (11.41 W).</span>
-<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="go">WARN - [nf-co2footprint] 🔁 Requested memory is null for task 2. Using maximum consumed memory/`peak_rss` (0 GB) for CO₂e footprint computation.</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="go">INFO - [nf-co2footprint] 🔕 Repeated task-specific messages (🔁) are only logged once in the console. Further occurrences are logged at DEBUG level, appearing only in the `.nextflow.log` file.</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="go">WARN - [nf-co2footprint] Target zone null not found. Attempting to retrieve carbon intensity for fallback zone GLOBAL.</span>
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="go">INFO - [nf-co2footprint] Electricity Maps API key is not set. To retrieve real-time carbon intensity values, please provide a key with the parameter `emApiKey`.</span>
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="go">INFO - [nf-co2footprint] Using fallback carbon intensity from GLOBAL from CI table: 480.0 gCO₂eq/kWh.</span>
+<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="go">WARN - [nf-co2footprint] Executor 'null' not mapped.</span>
+<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="go">WARN - [nf-co2footprint] Fallback to: `machineType = null`, `pue = 1.0`. ...</span>
+<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="go">...</span>
+<a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a><span class="go">WARN - [nf-co2footprint] No CPU model detected. Using default CPU power draw value (11.41 W).</span>
+<a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a><span class="go">WARN - [nf-co2footprint] 🔁 Requested memory is null for task 2. Using maximum consumed memory/`peak_rss` (0 GB) for CO₂e footprint computation.</span>
 </code></pre></div>
 <p>The warnings about zone, executor, CPU model, and memory appear because the plugin can't detect the full hardware details of a local training environment.
 In a production environment (e.g., an HPC cluster or cloud), these values would be available and the estimates more accurate.</p>
 <p>At the end, look for a line like:</p>
-<div class="highlight"><span class="filename">Output (partial)</span><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="go">🌱 The workflow run used 126.76 uWh of electricity, resulting in the release of 60.84 ug of CO₂ equivalents into the atmosphere.</span>
+<div class="highlight"><span class="filename">Output (partial)</span><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="go">INFO - [nf-co2footprint] 🌱 The workflow run used 126.76 uWh of electricity, resulting in the release of 60.84 ug of CO₂ equivalents into the atmosphere.</span>
 </code></pre></div>
 <p>(Your numbers will differ.)</p>
 <h3 id="33-view-the-report">3.3. View the report<a class="headerlink" href="#33-view-the-report" title="Permanent link">&para;</a></h3>
