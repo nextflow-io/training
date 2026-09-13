@@ -39,6 +39,8 @@ workflow  {
 
 output {
     cowpy_art {
-        path { meta, file -> meta.lang_group }
+        path { meta, file ->
+            file >> "${meta.lang_group}/${meta.lang}-${file.name}"
+        }
     }
 }

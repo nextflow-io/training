@@ -50,5 +50,5 @@ Jeśli stworzysz użyteczną wtyczkę, rozważ podzielenie się nią ze społecz
 Jeśli jeszcze tego nie zrobiłeś, sprawdź nasze inne kursy szkoleniowe:
 
 - **[Hello Nextflow](../../hello_nextflow/index.md)**: Podstawowe koncepcje Nextflow'a
-- **[Hello nf-core](../../hello_nf-core/index.md)**: Pipeline'y nf-core i najlepsze praktyki
+- **[Build with nf-core](../../hello_nf-core/index.md)**: Pipeline'y nf-core i najlepsze praktyki
 - **[Side Quests](../index.md)**: Dogłębne omówienie konkretnych tematów

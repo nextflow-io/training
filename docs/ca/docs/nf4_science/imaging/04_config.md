@@ -449,5 +449,5 @@ Pròxims passos:
 
 - Omple l'enquesta del curs per proporcionar comentaris
 - Consulta [Hello Nextflow](../../hello_nextflow/index.md) per aprendre més sobre el desenvolupament de workflows
-- Explora [Hello nf-core](../../hello_nf-core/index.md) per aprofundir en les eines d'nf-core
+- Explora [Build with nf-core](../../hello_nf-core/index.md) per aprofundir en les eines d'nf-core
 - Navega per altres cursos a les [col·leccions de formació](../../training_collections/index.md)

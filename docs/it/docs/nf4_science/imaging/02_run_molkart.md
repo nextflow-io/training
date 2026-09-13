@@ -27,7 +27,7 @@ Caratteristiche chiave delle pipeline nf-core:
 
 !!! tip "Desidera saperne di più su nf-core?"
 
-    Per un'introduzione approfondita allo sviluppo di pipeline nf-core, consulti il corso di formazione [Hello nf-core](../../hello_nf-core/index.md).
+    Per un'introduzione approfondita allo sviluppo di pipeline nf-core, consulti il corso di formazione [Build with nf-core](../../hello_nf-core/index.md).
     Copre come creare e personalizzare pipeline nf-core da zero.
 
 ### 1.2. La pipeline molkart

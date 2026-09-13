@@ -50,7 +50,7 @@ Workflow configuration flexible, reproducible तरीके से inputs औ�
 
 - बस Nextflow run मत करो, इसे लिखो! [Hello Nextflow](../hello_nextflow/index.md) के साथ Nextflow developer बनो
 - [Nextflow for Science](../nf4_science/index.md) के साथ scientific analysis use case पर Nextflow apply करो
-- [Hello nf-core](../hello_nf-core/index.md) के साथ nf-core के साथ शुरू करो
+- [Build with nf-core](../hello_nf-core/index.md) के साथ nf-core के साथ शुरू करो
 - [Debugging Side Quest](../side_quests/debugging/index.md) के साथ troubleshooting techniques सीखो
 
 अंत में, हम recommend करते हैं कि तुम [**Seqera Platform**](https://seqera.io/) पर एक नज़र डालो, Nextflow के creators द्वारा developed एक cloud-based platform जो तुम्हारी workflows launch और manage करना और भी आसान बनाता है, साथ ही तुम्हारे data manage करना और किसी भी environment में interactively analyses run करना।

@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Hello nf-core 교육 과정의 세 번째 파트에서는 기존 nf-core 모듈을 파이프라인에서 찾고, 설치하고, 사용하는 방법을 다룹니다.
+Build with nf-core 교육 과정의 세 번째 파트에서는 기존 nf-core 모듈을 파이프라인에서 찾고, 설치하고, 사용하는 방법을 다룹니다.
 
 nf-core로 작업할 때 얻을 수 있는 큰 이점 중 하나는 [nf-core/modules](https://github.com/nf-core/modules) 저장소에서 사전 구축되고 테스트된 모듈을 활용할 수 있다는 것입니다.
 모든 프로세스를 처음부터 작성하는 대신, 모범 사례를 따르는 커뮤니티 유지 관리 모듈을 설치하고 사용할 수 있습니다.

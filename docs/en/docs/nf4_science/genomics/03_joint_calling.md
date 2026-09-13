@@ -51,8 +51,8 @@ This automates the steps from the second section of [Part 1: Method overview](./
 
 !!! tip
 
-     Make sure you're in the correct working directory:
-     `cd /workspaces/training/nf4-science/genomics`
+    Make sure you're in the correct working directory:
+    `cd /workspaces/training/nf4-science/genomics`
 
 ---
 

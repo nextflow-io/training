@@ -132,11 +132,11 @@ hide:
     Ces cours vous accompagnent des fondamentaux de Nextflow jusqu'aux bonnes pratiques nf-core.
     Comprenez comment et pourquoi la communauté nf-core développe des pipelines, et comment vous pouvez contribuer et réutiliser ces techniques.
 
-    ??? courses "**Hello nf-core :** Premiers pas avec nf-core"
+    ??? courses "**Build with nf-core :** Premiers pas avec nf-core"
 
         Pour les développeur·ses qui souhaitent apprendre à exécuter et développer des pipelines conformes à [nf-core](https://nf-co.re/). Le cours couvre la structure des pipelines nf-core avec suffisamment de détails pour permettre le développement de pipelines simples mais entièrement fonctionnels, suivant le modèle nf-core et les bonnes pratiques de développement, ainsi que l'utilisation des modules nf-core existants.
 
-        [Commencer la formation Hello nf-core :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
+        [Commencer la formation Build with nf-core :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
 
     ---
 
@@ -150,11 +150,11 @@ hide:
 
         [Parcourir les Quêtes secondaires :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Training Collections :** Parcours d'apprentissage recommandés à travers les Quêtes secondaires"
+    ??? courses "**Learning Paths :** Parcours d'apprentissage recommandés à travers les Quêtes secondaires"
 
-        Les Training Collections combinent plusieurs Quêtes secondaires afin de fournir une expérience d'apprentissage complète autour d'un thème ou d'un cas d'usage particulier.
+        Les Learning Paths combinent plusieurs Quêtes secondaires afin de fournir une expérience d'apprentissage complète autour d'un thème ou d'un cas d'usage particulier.
 
-        [Parcourir les Training Collections :material-arrow-right:](training_collections/index.md){ .md-button .md-button--secondary }
+        [Parcourir les Learning Paths :material-arrow-right:](training_collections/index.md){ .md-button .md-button--secondary }
 
 </div>
 

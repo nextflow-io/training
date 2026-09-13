@@ -27,7 +27,7 @@ Hauptmerkmale von nf-core-Pipelines:
 
 !!! tip "Möchtest du mehr über nf-core erfahren?"
 
-    Für eine ausführliche Einführung in die Entwicklung von nf-core-Pipelines sieh dir den Kurs [Hello nf-core](../../hello_nf-core/index.md) an.
+    Für eine ausführliche Einführung in die Entwicklung von nf-core-Pipelines sieh dir den Kurs [Build with nf-core](../../hello_nf-core/index.md) an.
     Er behandelt, wie man nf-core-Pipelines von Grund auf erstellt und anpasst.
 
 ### 1.2. Die molkart-Pipeline

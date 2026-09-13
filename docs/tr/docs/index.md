@@ -132,11 +132,11 @@ hide:
     Bu kurslar, Nextflow temellerinden nf-core en iyi uygulamalarına geçişinizi destekler.
     nf-core topluluğunun pipeline'ları nasıl ve neden oluşturduğunu, bu tekniklere nasıl katkıda bulunabileceğinizi ve bunları nasıl yeniden kullanabileceğinizi anlayın.
 
-    ??? courses "**Hello nf-core:** nf-core ile başlayın"
+    ??? courses "**Build with nf-core:** nf-core ile başlayın"
 
         [nf-core](https://nf-co.re/) uyumlu pipeline'ları çalıştırmak ve geliştirmek isteyen geliştiriciler için. Kurs, nf-core şablonunu ve geliştirme en iyi uygulamalarını izleyen, mevcut nf-core modüllerini kullanan, basit ama tam işlevsel pipeline'lar geliştirmeye yetecek düzeyde nf-core pipeline'larının yapısını kapsamaktadır.
 
-        [Hello nf-core eğitimine başlayın :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
+        [Build with nf-core eğitimine başlayın :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
 
     ---
 
@@ -150,11 +150,11 @@ hide:
 
         [Side Quests'e göz atın :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Eğitim Koleksiyonları:** Side Quests için önerilen öğrenme yolları"
+    ??? courses "**Öğrenme Yolları:** Kurslarımız arasında küratörlü rotalar"
 
-        Eğitim Koleksiyonları, belirli bir tema veya kullanım senaryosu etrafında kapsamlı bir öğrenme deneyimi sunmak amacıyla birden fazla Side Quest'i bir araya getirir.
+        Öğrenme Yolları, belirli bir tema veya kullanım senaryosu etrafında kapsamlı bir öğrenme deneyimi sunmak amacıyla birden fazla Side Quest'i bir araya getirir.
 
-        [Eğitim Koleksiyonlarına göz atın :material-arrow-right:](training_collections/index.md){ .md-button .md-button--secondary }
+        [Öğrenme Yollarına göz atın :material-arrow-right:](training_collections/index.md){ .md-button .md-button--secondary }
 
 </div>
 

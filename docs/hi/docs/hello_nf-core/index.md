@@ -1,5 +1,5 @@
 ---
-title: Hello nf-core
+title: Build with nf-core
 hide:
   - toc
 page_type: index_page
@@ -21,11 +21,11 @@ additional_information:
     - "**डोमेन:** सभी अभ्यास डोमेन-अज्ञेयवादी हैं, इसलिए किसी पूर्व वैज्ञानिक ज्ञान की आवश्यकता नहीं है।"
 ---
 
-# Hello nf-core
+# Build with nf-core
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-**Hello nf-core, nf-core संसाधनों और सर्वोत्तम प्रथाओं का उपयोग करने के लिए एक व्यावहारिक परिचय है।**
+**Build with nf-core, nf-core संसाधनों और सर्वोत्तम प्रथाओं का उपयोग करने के लिए एक व्यावहारिक परिचय है।**
 
 ![nf-core logo](./img/nf-core-logo.png#only-light)
 ![nf-core logo](./img/nf-core-logo-darkbg.png#only-dark)
