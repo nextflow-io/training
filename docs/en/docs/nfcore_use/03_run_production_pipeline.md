@@ -25,7 +25,7 @@ nextflow pull nf-core/rnaseq
 
     ```console
     Checking nf-core/rnaseq ...
-    downloaded from https://github.com/nf-core/rnaseq.git - revision: e7ca46272c [master]
+     downloaded from https://github.com/nf-core/rnaseq.git - revision: 1f03b53ef7 [master]
     ```
 
 The pipeline is now cached locally and ready to run.
@@ -43,7 +43,7 @@ nextflow run nf-core/rnaseq -profile test,docker --outdir rnaseq-results
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `https://github.com/nf-core/rnaseq` [suspicious_dijkstra] DSL2 - revision: e7ca46272c [master]
+    Launching `https://github.com/nf-core/rnaseq` [suspicious_dijkstra] revision: 1f03b53ef7 [master]
 
     ------------------------------------------------------
                                             ,--./,-.
@@ -64,7 +64,9 @@ nextflow run nf-core/rnaseq -profile test,docker --outdir rnaseq-results
     Caused by:
       Process requirement exceeds available memory -- req: 12 GB; avail: 7.7 GB
 
+
     Command executed:
+
       fq lint \
           --disable-validator P001 \
           SRR6357072_1.fastq.gz SRR6357072_2.fastq.gz > WT_REP2.fq_lint.txt
@@ -82,9 +84,9 @@ nextflow run nf-core/rnaseq -profile test,docker --outdir rnaseq-results
       quay.io/biocontainers/fq:0.12.0--h9ee0642_0
 
     Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+
      -- Check '.nextflow.log' file for details
     ERROR ~ Pipeline failed. Please refer to troubleshooting docs for common issues: https://nf-co.re/docs/running/troubleshooting
-     -- Check '.nextflow.log' file for details
     ```
 
 The key line in that error is:
@@ -150,7 +152,7 @@ nextflow run nf-core/rnaseq -profile test,docker -c laptop.config --outdir rnase
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `https://github.com/nf-core/rnaseq` [romantic_faraday] DSL2 - revision: e7ca46272c [master]
+    Launching `https://github.com/nf-core/rnaseq` [romantic_faraday] revision: 1f03b53ef7 [master]
 
     ------------------------------------------------------
                                             ,--./,-.
@@ -161,9 +163,9 @@ nextflow run nf-core/rnaseq -profile test,docker -c laptop.config --outdir rnase
       nf-core/rnaseq 3.26.0
     ------------------------------------------------------
     ...
-    executor >  local
-    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FQ_LINT (RAP1_IAA_30M_REP1)   | 3 of 5, running
-    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FASTQC (RAP1_IAA_30M_REP1)    | 2 of 5, running
+    executor >  local (7)
+    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FQ_LINT (RAP1_IAA_30M_REP1)   | 3 of 5
+    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FASTQC (RAP1_IAA_30M_REP1)    | 2 of 5
     ...
     ```
 
