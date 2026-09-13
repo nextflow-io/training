@@ -87,13 +87,33 @@ nextflow run main.nf -with-report report-config-2.html
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [furious_roentgen] DSL2 - revision: c3c85dec78
+    Launching `main.nf` [voluminous_venter] revision: c3c85dec78
 
     executor >  local (8)
-    [e8/1584eb] sayHello (2)       | 3 of 3 ✔
-    [0f/b88085] convertToUpper (3) | 3 of 3 ✔
-    [11/d81bfa] collectGreetings   | 1 of 1 ✔
-    [a7/ca287f] cowpy              | 1 of 1 ✔
+    [a1/0e96d4] sayHello (1)       | 3 of 3 ✔
+    [a3/7173a3] convertToUpper (2) | 3 of 3 ✔
+    [4f/a8ae3d] collectGreetings   | 1 of 1 ✔
+    [91/3724f8] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/execution-config/results
+
+      first_output:
+        - full_pipeline/intermediates/Bonjour-output.txt
+        - full_pipeline/intermediates/Hola-output.txt
+        - full_pipeline/intermediates/Hello-output.txt
+
+      uppercased:
+        - full_pipeline/intermediates/UPPER-Bonjour-output.txt
+        - full_pipeline/intermediates/UPPER-Hello-output.txt
+        - full_pipeline/intermediates/UPPER-Hola-output.txt
+
+      collected: full_pipeline/intermediates/COLLECTED-batch-output.txt
+
+      batch_report: full_pipeline/batch-report.txt
+
+      cowpy_art: full_pipeline/cowpy-COLLECTED-batch-output.txt
     ```
 
 Comparing the two reports for `cowpy`:
@@ -189,31 +209,40 @@ nextflow run main.nf
 ??? failure "Command output (abridged)"
 
     ```console
-    [PROCESS 20/24eec4] cowpy
-    [ERROR] cowpy
-    exit: 137
-    cmd: cat COLLECTED-batch-output.txt | cowpy -c "turkey" > cowpy-COLLECTED-batch-output.txt
-    workdir: .../work/20/24eec4...
-    [PROCESS 7f/5814b3] cowpy
-    [ERROR] cowpy
-    exit: 1
-    cmd: cat COLLECTED-batch-output.txt | cowpy -c "turkey" > cowpy-COLLECTED-batch-output.txt
-    workdir: .../work/7f/5814b3...
-    [PROCESS 12/4c9601] cowpy
-    [ERROR] ERROR ~ Error executing process > 'cowpy'
+    N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [desperate_brazil] revision: c3c85dec78
+
+    executor >  local (10)
+    [67/fe1f49] sayHello (1)       | 3 of 3 ✔
+    [8a/f13335] convertToUpper (1) | 3 of 3 ✔
+    [39/1b24ed] collectGreetings   | 1 of 1 ✔
+    [7a/d5eb6f] cowpy              | 0 of 1, retries: 2 ✘
+    [9d/b79eb3] NOTE: Process `cowpy` terminated with an error exit status (137) -- Execution is retried (1)
+    [6d/1d9d84] NOTE: Process `cowpy` terminated with an error exit status (137) -- Execution is retried (2)
+    ERROR ~ Error executing process > 'cowpy'
 
     Caused by:
       Process `cowpy` terminated with an error exit status (137)
 
+    Command executed:
+      cat COLLECTED-batch-output.txt | cowpy -c "turkey" > cowpy-COLLECTED-batch-output.txt
+
     Command exit status:
       137
 
+    Command output:
+      (empty)
+
+    Command error:
+      /usr/local/bin/_activate_current_env.sh: line 35:    14 Killed                  micromamba activate "${ENV_NAME:-base}"
+
     Work dir:
-      .../work/12/4c9601...
+      /workspaces/training/execution-config/work/7a/d5eb6feeac0eed18d95d3da7a7aeb4
 
     Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
 
-    [FAILED] completed=10 failed=3 cached=0
+    -- Check '.nextflow.log' file for details
     ```
 
 Exit code 137 is the standard signal for an out-of-memory kill: the container didn't have enough memory to run `cowpy` at all.
@@ -264,27 +293,44 @@ nextflow run main.nf
 ??? success "Command output (abridged)"
 
     ```console
-    [PROCESS 99/b9c7f4] cowpy
-    [ERROR] cowpy
-    exit: 137
-    cmd: cat COLLECTED-batch-output.txt | cowpy -c "turkey" > cowpy-COLLECTED-batch-output.txt
-    workdir: .../work/99/b9c7f4...
-    [PROCESS d6/d3627d] cowpy
+    N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [grave_joliot] revision: c3c85dec78
+
+    executor >  local (9)
+    [0f/211b8a] sayHello (2)       | 3 of 3 ✔
+    [26/301ea2] convertToUpper (3) | 3 of 3 ✔
+    [22/5a895b] collectGreetings   | 1 of 1 ✔
+    [e1/beee86] cowpy              | 1 of 1, retries: 1 ✔
+    [b6/7aed6a] NOTE: Process `cowpy` terminated with an error exit status (137) -- Execution is retried (1)
 
     Outputs:
 
-      ...
-      cowpy_art: full_pipeline/cowpy-COLLECTED-batch-output.txt
+      /workspaces/training/execution-config/results
 
-    [FAILED] completed=9 failed=1 cached=0
+      first_output:
+        - full_pipeline/intermediates/Hola-output.txt
+        - full_pipeline/intermediates/Hello-output.txt
+        - full_pipeline/intermediates/Bonjour-output.txt
+
+      uppercased:
+        - full_pipeline/intermediates/UPPER-Hola-output.txt
+        - full_pipeline/intermediates/UPPER-Hello-output.txt
+        - full_pipeline/intermediates/UPPER-Bonjour-output.txt
+
+      collected: full_pipeline/intermediates/COLLECTED-batch-output.txt
+
+      batch_report: full_pipeline/batch-report.txt
+
+      cowpy_art: full_pipeline/cowpy-COLLECTED-batch-output.txt
     ```
 
 The first attempt still fails at 6 MB, but the retry runs with 12 MB (`6.MB * 2`) and succeeds, and the pipeline completes with all outputs published.
 
 !!! warning
 
-    The console summary tag above still reads `[FAILED]`, even though the pipeline as a whole succeeded: that tag reflects individual task attempts, not overall outcome, and one attempt did fail along the way.
-    Check for the `Outputs:` listing, or the command's exit status, to see whether the run actually succeeded.
+    The console output still includes a `NOTE:` line reporting the failed first attempt, even though the pipeline as a whole succeeded: Nextflow logs each retry individually, but a retried failure doesn't affect the overall outcome.
+    Check for the `Outputs:` summary, or the command's exit status, to confirm whether the run actually succeeded.
 
 See [Dynamic computing resources](https://nextflow.io/docs/latest/process.html#dynamic-task-resources) in the Nextflow documentation for more advanced retry patterns, including scaling based on which specific error occurred.
 
