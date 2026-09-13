@@ -105,6 +105,16 @@ docker exec -e NXF_SYNTAX_PARSER=v2 nf-training nextflow run ...
 
 This validates tutorials against the strict syntax that will become default in future Nextflow versions.
 
+### Console Output Mode (CRITICAL)
+
+Nextflow 26.04+ detects Claude Code (via the `CLAUDECODE` environment variable) and switches to a machine-readable "agent mode" console format that no learner ever sees. **Every direct `nextflow run` invocation must force human mode**, or any console output copied into documentation will not match reality:
+
+```bash
+env -u CLAUDECODE NXF_AGENT_MODE=false nextflow run ...
+```
+
+In Docker, this is not needed since containers don't inherit the host shell's `CLAUDECODE` variable — but see [Console Output Mode](../shared/repo-conventions.md#console-output-mode-critical) in repo-conventions for the full explanation before assuming that holds in every setup.
+
 ---
 
 ## Working Directory Mapping
@@ -227,14 +237,14 @@ For documentation verification mode, skip progressive editing of starter files. 
 #### 2B.1 Run Each Solution Directly
 
 ```bash
-nextflow run solutions/<lesson>/script.nf -c solutions/<lesson>/nextflow.config
+env -u CLAUDECODE NXF_AGENT_MODE=false nextflow run solutions/<lesson>/script.nf -c solutions/<lesson>/nextflow.config
 ```
 
 #### 2B.2 Test with Profiles (if applicable)
 
 ```bash
-nextflow run solutions/<lesson>/script.nf -c solutions/<lesson>/nextflow.config -profile test
-nextflow run solutions/<lesson>/script.nf -c solutions/<lesson>/nextflow.config -profile my_laptop,test
+env -u CLAUDECODE NXF_AGENT_MODE=false nextflow run solutions/<lesson>/script.nf -c solutions/<lesson>/nextflow.config -profile test
+env -u CLAUDECODE NXF_AGENT_MODE=false nextflow run solutions/<lesson>/script.nf -c solutions/<lesson>/nextflow.config -profile my_laptop,test
 ```
 
 #### 2B.3 Verify Config Resolution
