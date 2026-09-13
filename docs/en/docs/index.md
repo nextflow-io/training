@@ -69,9 +69,9 @@ hide:
 
     Learn to manage pipeline execution effectively.
 
-    ??? courses "**Nextflow Config:** Configure pipelines like a pro"
+    ??? courses "**Execution Config:** Configure pipelines like a pro"
 
-        A hands-on introduction to configuring Nextflow pipeline execution: managing inputs and outputs, adapting to different compute environments, and switching between preset configuration profiles.
+        A hands-on introduction to configuring Nextflow pipeline execution: adapting to different compute environments, controlling resource allocations and retries, and switching between preset configuration profiles.
 
         [View the training :material-arrow-right:](nextflow_config/index.md){ .md-button .md-button--secondary }
 

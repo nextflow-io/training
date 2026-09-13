@@ -58,7 +58,7 @@ Let's go through each one, then put profiles to use by running the pipeline with
 
     This config covers local execution on a single machine.
     Nextflow also supports HPC schedulers (SLURM, PBS, LSF) and cloud executors (AWS Batch, Google Cloud Batch, Azure Batch), all configured through the same `nextflow.config` mechanism.
-    See [Part 1: Adapt to your compute environment](../nextflow_config/01_packaging_execution_resources.md) in the [Nextflow Config](../nextflow_config/index.md) course for a full walkthrough of these options.
+    See [Part 1: Adapt to your compute environment](../nextflow_config/01_packaging_and_execution.md) in the [Execution Config](../nextflow_config/index.md) course for a full walkthrough of these options.
 
 ### 1.1. Software packaging
 
@@ -91,7 +91,7 @@ process {
 
 This caps every process at a single CPU and 1 GB of memory.
 
-Nextflow also lets you set different values for individual named processes or groups of processes; you'll learn how in [Part 1: Adapt to your compute environment](../nextflow_config/01_packaging_execution_resources.md#32-set-resource-allocations-for-a-specific-process) of the [Nextflow Config](../nextflow_config/index.md) course.
+Nextflow also lets you set different values for individual named processes or groups of processes; you'll learn how in [Part 2: Manage compute resources and failures](../nextflow_config/02_resources_and_retries.md#12-set-resource-allocations-for-a-specific-process) of the [Execution Config](../nextflow_config/index.md) course.
 
 ### 1.3. Pipeline parameters
 
@@ -164,7 +164,7 @@ Check `results/test/`: the batch name is now part of the directory path itself, 
 !!! note
 
     You can activate several profiles at once, and use `nextflow config -profile <name>,<name>` to see the fully resolved result before running anything.
-    Combining profiles, and how Nextflow resolves conflicts between them, is covered in depth in [Part 2: Use profiles to switch configurations](../nextflow_config/02_profiles.md) of the [Nextflow Config](../nextflow_config/index.md) course.
+    Combining profiles, and how Nextflow resolves conflicts between them, is covered in depth in [Part 3: Use profiles to switch configurations](../nextflow_config/03_profiles.md) of the [Execution Config](../nextflow_config/index.md) course.
 
 ### Takeaway
 

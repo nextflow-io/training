@@ -1,10 +1,11 @@
 # Course summary
 
-Congratulations on completing the Nextflow Config training course! 🎉
+Congratulations on completing the Execution Config training course! 🎉
 
 ## Your journey
 
-You started by adapting a pipeline's execution to different compute environments: switching software packaging technology, selecting an execution platform, and controlling resource allocations.
+You started by adapting a pipeline's execution to different compute environments: switching software packaging technology and selecting an execution platform.
+Next, you learned to control resource allocations and automatically retry tasks that fail.
 Finally, you learned how to bundle configuration into profiles, combine them at runtime, and inspect the fully resolved configuration.
 
 ### Skills acquired
@@ -12,7 +13,8 @@ Finally, you learned how to bundle configuration into profiles, combine them at 
 Through this hands-on course, you've learned how to:
 
 - Switch software packaging technology between Docker and Conda
-- Select an execution platform and control per-process resource allocations
+- Select an execution platform, and understand what changes behind the scenes when you do
+- Control per-process resource allocations, and automatically retry tasks that fail
 - Define and combine profiles, and inspect resolved configuration with `nextflow config`
 
 You're now equipped to configure Nextflow pipelines for a range of compute environments with confidence.

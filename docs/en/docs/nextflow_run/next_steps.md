@@ -33,7 +33,7 @@ You're now equipped with the foundational knowledge to start integrating existin
 
 Here are our top suggestions for what to do next:
 
-- Dive deeper into pipeline configuration with [Nextflow Config](../nextflow_config/index.md)
+- Dive deeper into pipeline configuration with [Execution Config](../nextflow_config/index.md)
 - Learn to run nf-core community pipelines with [Use nf-core](../nfcore_run/index.md)
 - Launch and monitor pipelines at scale with [Scale with Seqera](../seqera_run/index.md)
 

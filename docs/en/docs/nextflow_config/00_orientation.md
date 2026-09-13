@@ -89,4 +89,4 @@ Think you're ready to dive in?
 
 If you can check all the boxes, you're good to go.
 
-**To continue to [Part 1: Adapt to your compute environment](./01_packaging_execution_resources.md), click on the arrow in the bottom right corner of this page.**
+**To continue to [Part 1: Adapt to your compute environment](./01_packaging_and_execution.md), click on the arrow in the bottom right corner of this page.**

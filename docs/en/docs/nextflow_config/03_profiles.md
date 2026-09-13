@@ -1,6 +1,6 @@
-# Part 2: Use profiles to switch configurations
+# Part 3: Use profiles to switch configurations
 
-In the last part, you accumulated a few configuration options: software packaging and resource allocations.
+Across [Part 1](./01_packaging_and_execution.md) and [Part 2](./02_resources_and_retries.md), you accumulated a few configuration options: software packaging, execution platform, and resource allocations.
 In practice, you'll often want to switch between whole sets of these options depending on where you're running, for example a laptop for development and an HPC cluster for production.
 
 Nextflow lets you set up any number of [profiles](https://nextflow.io/docs/latest/config.html#profiles) describing different configurations, and select one (or several) at runtime with a single flag.
@@ -166,6 +166,7 @@ nextflow config
     process {
        memory = '1 GB'
        withName:cowpy {
+          conda = 'conda-forge::cowpy==1.1.5'
           memory = '2 GB'
           cpus = 2
        }
@@ -198,6 +199,7 @@ nextflow config -profile my_laptop,test
     process {
        memory = '1 GB'
        withName:cowpy {
+          conda = 'conda-forge::cowpy==1.1.5'
           memory = '2 GB'
           cpus = 2
        }
