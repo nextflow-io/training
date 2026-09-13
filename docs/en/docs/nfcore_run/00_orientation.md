@@ -76,11 +76,16 @@ tree .
 
     ```console
     .
-    └── laptop.config
+    ├── custom.config
+    ├── laptop.config
+    ├── malformed_samplesheet.csv
+    └── my_params.yml
     ```
 
 - **The `laptop.config` file** is a configuration file we'll use in section 4 to cap resource usage when running a production-scale pipeline locally.
   You can ignore it until then.
+- **The `my_params.yml`, `malformed_samplesheet.csv`, and `custom.config` files** are used in Part 2, to demonstrate setting parameters from a file, input validation, and process-level configuration overrides.
+  You can ignore them until then too.
 
 ## Readiness checklist
 

@@ -75,10 +75,7 @@ tree . -L 2
 
     ```console
     .
-    ├── custom.config
     ├── greetings.csv
-    ├── malformed_samplesheet.csv
-    ├── my_params.yml
     ├── original-hello
     │   ├── hello.nf
     │   ├── modules
@@ -96,12 +93,6 @@ Click on the colored box to expand the section and view its contents.
 We use collapsible sections like this to include expected command output in a concise way.
 
 - **The `greetings.csv` file** is a CSV containing some minimal columnar data we use for testing purposes.
-
-- **The `custom.config` file** is an example Nextflow configuration file used in Part 1 to demonstrate process resource overrides and `ext.args`.
-
-- **The `malformed_samplesheet.csv` file** is an intentionally broken samplesheet used in Part 1 to demonstrate input validation.
-
-- **The `my_params.yml` file** is an example params file used in Part 1 to demonstrate how to pass boolean parameters to a pipeline.
 
 - **The `original-hello` directory** contains a copy of the source code produced by working through the complete Hello Nextflow training series (with Docker enabled).
 
