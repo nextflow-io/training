@@ -6,39 +6,18 @@ Congratulations on completing the Nextflow Run training course! 🎉
 
 ## Your journey
 
-You started with a very basic workflow, and learned to run it, find the outputs, and manage its execution.
-Then, you worked your way through increasingly more complex versions of that workflow and learned to recognize the essential concepts and mechanisms that power Nextflow pipelines, including channels, containers, and `-resume`.
-Then, you learned how to customize the configuration of a pipeline using `nextflow.config` and profiles.
-Then, you learned how to inspect the history of past runs and clean up old work directories.
+You started with a very basic workflow, and learned to run it and find its outputs.
+Then, you ran progressively more realistic versions of that pipeline: processing multiple inputs from a CSV file in parallel, using `-resume` to skip completed work, and using containers to manage the software a pipeline depends on.
+Next, you learned how to customize the configuration of a pipeline using `nextflow.config` and profiles.
+After that, you learned how to inspect the history of past runs and clean up old work directories.
 Finally, you learned how to run pipelines directly from remote repositories such as GitHub.
-
-### What you learned
-
-You are now able to manage the execution of the Hello pipeline, describe how it is structured, and identify the main pieces of code involved.
-
-- The final form of the Hello workflow takes as input a CSV file containing text greetings.
-- The four steps are implemented as Nextflow processes (`sayHello`, `convertToUpper`, `collectGreetings`, and `cowpy`) stored in separate module files.
-- The results are published to a directory called `results/`.
-- The final output of the pipeline is a plain text file containing ASCII art of a character saying the transformed text.
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
-</figure>
-
-1. **`sayHello`:** Writes each greeting to its own output file (_e.g._ "Hello-output.txt")
-2. **`convertToUpper`:** Converts each greeting to uppercase (_e.g._ "HELLO")
-3. **`collectGreetings`:** Collects all uppercase greetings into a single batch file
-4. **`cowpy`:** Generates ASCII art using the `cowpy` tool
-
-The workflow configuration supports providing inputs and parameters in a flexible, reproducible way.
 
 ### Skills acquired
 
 Through this hands-on course, you've learned how to:
 
 - Launch a Nextflow workflow locally and find its outputs
-- Recognize the core Nextflow components that constitute a simple multi-step workflow
-- Process multiple inputs in parallel using channels
+- Run a multi-step pipeline that processes multiple inputs in parallel
 - Use `-resume` to avoid repeating completed work
 - Use containers to manage software dependencies
 - Configure pipelines using `nextflow.config` and profiles
@@ -54,9 +33,8 @@ Here are our top suggestions for what to do next:
 - Dive deeper into pipeline configuration with [Nextflow Config](../nextflow_config/index.md)
 - Learn to run nf-core community pipelines with [Use nf-core](../nfcore_run/index.md)
 - Launch and monitor pipelines at scale with [Scale with Seqera](../seqera_run/index.md)
-- Don't just run Nextflow, write it! Become a Nextflow developer with [Hello Nextflow](../hello_nextflow/index.md)
-- Apply Nextflow to a scientific analysis use case with [Nextflow for Science](../nf4_science/index.md)
-- Learn troubleshooting techniques with the [Debugging Side Quest](../side_quests/debugging/index.md)
+
+Or, if you're ready to stop just running Nextflow and start writing it, become a Nextflow developer with [Hello Nextflow](../hello_nextflow/index.md).
 
 ## Getting help
 
