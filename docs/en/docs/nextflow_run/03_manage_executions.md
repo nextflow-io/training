@@ -24,13 +24,33 @@ nextflow run main.nf --input data/greetings.csv --character turkey -with-report
     ```console hl_lines="6 7 8 9"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [intergalactic_dalembert] DSL2 - revision: ce74f81996
+    Launching `main.nf` [intergalactic_dalembert] revision: ce74f81996
 
     executor >  local (8)
     [34/23f10f] sayHello (2)       | 3 of 3 ✔
     [af/cab69d] convertToUpper (3) | 3 of 3 ✔
     [9e/d73afb] collectGreetings   | 1 of 1 ✔
     [3c/392db0] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - batch/intermediates/Bonjour-output.txt
+        - batch/intermediates/Hello-output.txt
+        - batch/intermediates/Hola-output.txt
+
+      uppercased:
+        - batch/intermediates/UPPER-Bonjour-output.txt
+        - batch/intermediates/UPPER-Hello-output.txt
+        - batch/intermediates/UPPER-Hola-output.txt
+
+      collected: batch/intermediates/COLLECTED-batch-output.txt
+
+      batch_report: batch/batch-report.txt
+
+      cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
     ```
 
 Nextflow writes the report to a file named `report-<timestamp>.html` in the working directory.
@@ -55,13 +75,33 @@ nextflow run main.nf --input data/greetings.csv --character turkey -with-timelin
     ```console hl_lines="6 7 8 9"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [jolly_noyce] DSL2 - revision: ce74f81996
+    Launching `main.nf` [jolly_noyce] revision: ce74f81996
 
     executor >  local (8)
     [ad/e92ef3] sayHello (3)       | 3 of 3 ✔
     [2a/df8a8d] convertToUpper (2) | 3 of 3 ✔
     [be/7fb72a] collectGreetings   | 1 of 1 ✔
     [63/dc9bd6] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - batch/intermediates/Bonjour-output.txt
+        - batch/intermediates/Hello-output.txt
+        - batch/intermediates/Hola-output.txt
+
+      uppercased:
+        - batch/intermediates/UPPER-Bonjour-output.txt
+        - batch/intermediates/UPPER-Hello-output.txt
+        - batch/intermediates/UPPER-Hola-output.txt
+
+      collected: batch/intermediates/COLLECTED-batch-output.txt
+
+      batch_report: batch/batch-report.txt
+
+      cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
     ```
 
 Nextflow writes the timeline to a file named `timeline-<timestamp>.html`.
