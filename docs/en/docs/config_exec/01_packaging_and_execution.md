@@ -85,12 +85,12 @@ nextflow run main.nf --batch conda
     [6d/d48030] sayHello (2)       | 3 of 3 ✔
     [f5/7a9d76] convertToUpper (1) | 3 of 3 ✔
     [1c/79b693] collectGreetings   | 1 of 1 ✔
-    Creating env using conda: conda-forge::cowpy==1.1.5 [cache /workspaces/training/execution-config/work/conda/env-898314d566668b6587ad714ae06b8520]
+    Creating env using conda: conda-forge::cowpy==1.1.5 [cache /workspaces/training/config-exec/work/conda/env-898314d566668b6587ad714ae06b8520]
     [bb/64b67c] cowpy              | 1 of 1 ✔
 
     Outputs:
 
-      /workspaces/training/execution-config/results
+      /workspaces/training/config-exec/results
 
       first_output:
         - full_pipeline/intermediates/Hola-output.txt

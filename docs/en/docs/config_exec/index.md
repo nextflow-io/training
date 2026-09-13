@@ -1,5 +1,5 @@
 ---
-title: Execution Config
+title: Configure Execution
 hide:
   - toc
 page_type: index_page
@@ -17,9 +17,9 @@ additional_information:
     - "**Courses:** Must have completed [Nextflow Run](../nextflow_run/index.md) or otherwise be comfortable running a local pipeline with `nextflow run`."
 ---
 
-# Execution Config
+# Configure Execution
 
-**Execution Config is a hands-on introduction to adapting Nextflow pipeline execution to different compute environments.**
+**Configure Execution is a hands-on introduction to adapting Nextflow pipeline execution to different compute environments.**
 
 Working through goal-oriented exercises, you will learn how to switch software packaging technology, select an execution platform, control compute resource allocations and retries, and bundle configuration into switchable profiles.
 

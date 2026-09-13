@@ -2,6 +2,7 @@ site_name: training.nextflow.io
 site_url: https://training.nextflow.io/
 repo_url: https://github.com/nextflow-io/training
 repo_name: nextflow-io/training
+edit_uri: edit/master/docs/en/docs/
 
 nav:
   - index.md
@@ -29,14 +30,14 @@ nav:
       - seqera_scale/02_launch_from_cli.md
       - seqera_scale/next_steps.md
       - seqera_scale/survey.md
-  - Execution Config:
-      - Overview: execution_config/index.md
-      - execution_config/00_orientation.md
-      - execution_config/01_packaging_and_execution.md
-      - execution_config/02_resources_and_retries.md
-      - execution_config/03_profiles.md
-      - execution_config/next_steps.md
-      - execution_config/survey.md
+  - Configure Execution:
+      - Overview: config_exec/index.md
+      - config_exec/00_orientation.md
+      - config_exec/01_packaging_and_execution.md
+      - config_exec/02_resources_and_retries.md
+      - config_exec/03_profiles.md
+      - config_exec/next_steps.md
+      - config_exec/survey.md
   - Hello Nextflow:
       - Overview: hello_nextflow/index.md
       - hello_nextflow/00_orientation.md
@@ -191,7 +192,7 @@ extra:
     nextflow_run/index.md: Nextflow Run
     nfcore_use/index.md: Use nf-core
     seqera_scale/index.md: Scale with Seqera
-    execution_config/index.md: Execution Config
+    config_exec/index.md: Configure Execution
     hello_nextflow/index.md: Hello Nextflow
     nfcore_build/index.md: Build with nf-core
     nf4_science/index.md: Nextflow for Science
@@ -314,7 +315,7 @@ plugins:
         - nextflow_run/00_orientation.md
         - nfcore_use/00_orientation.md
         - seqera_scale/00_orientation.md
-        - execution_config/00_orientation.md
+        - config_exec/00_orientation.md
         - hello_nextflow/00_orientation.md
         - nfcore_build/00_orientation.md
         - nf4_science/genomics/00_orientation.md
@@ -330,7 +331,7 @@ plugins:
         - nextflow_run/*.md
         - nfcore_use/*.md
         - seqera_scale/*.md
-        - execution_config/*.md
+        - config_exec/*.md
         - hello_nextflow/*.md
         - nfcore_build/*.md
         - nf4_science/genomics/*.md
@@ -363,13 +364,20 @@ plugins:
         "hello_nf-core/04_input_validation.md": "nfcore_build/04_input_validation.md"
         "hello_nf-core/next_steps.md": "nfcore_build/next_steps.md"
         "hello_nf-core/survey.md": "nfcore_build/survey.md"
-        "nextflow_config/index.md": "execution_config/index.md"
-        "nextflow_config/00_orientation.md": "execution_config/00_orientation.md"
-        "nextflow_config/01_packaging_and_execution.md": "execution_config/01_packaging_and_execution.md"
-        "nextflow_config/02_resources_and_retries.md": "execution_config/02_resources_and_retries.md"
-        "nextflow_config/03_profiles.md": "execution_config/03_profiles.md"
-        "nextflow_config/next_steps.md": "execution_config/next_steps.md"
-        "nextflow_config/survey.md": "execution_config/survey.md"
+        "nextflow_config/index.md": "config_exec/index.md"
+        "nextflow_config/00_orientation.md": "config_exec/00_orientation.md"
+        "nextflow_config/01_packaging_and_execution.md": "config_exec/01_packaging_and_execution.md"
+        "nextflow_config/02_resources_and_retries.md": "config_exec/02_resources_and_retries.md"
+        "nextflow_config/03_profiles.md": "config_exec/03_profiles.md"
+        "nextflow_config/next_steps.md": "config_exec/next_steps.md"
+        "nextflow_config/survey.md": "config_exec/survey.md"
+        "execution_config/index.md": "config_exec/index.md"
+        "execution_config/00_orientation.md": "config_exec/00_orientation.md"
+        "execution_config/01_packaging_and_execution.md": "config_exec/01_packaging_and_execution.md"
+        "execution_config/02_resources_and_retries.md": "config_exec/02_resources_and_retries.md"
+        "execution_config/03_profiles.md": "config_exec/03_profiles.md"
+        "execution_config/next_steps.md": "config_exec/next_steps.md"
+        "execution_config/survey.md": "config_exec/survey.md"
         "nfcore_run/index.md": "nfcore_use/index.md"
         "nfcore_run/00_orientation.md": "nfcore_use/00_orientation.md"
         "nfcore_run/01_run_demo.md": "nfcore_use/01_run_demo.md"

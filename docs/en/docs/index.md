@@ -69,11 +69,11 @@ hide:
 
     Learn to manage pipeline execution effectively.
 
-    ??? courses "**Execution Config:** Configure pipelines like a pro"
+    ??? courses "**Configure Execution:** Configure resources, retries, and execution profiles"
 
         A hands-on introduction to configuring Nextflow pipeline execution: adapting to different compute environments, controlling resource allocations and retries, and switching between preset configuration profiles.
 
-        [View the training :material-arrow-right:](execution_config/index.md){ .md-button .md-button--secondary }
+        [View the training :material-arrow-right:](config_exec/index.md){ .md-button .md-button--secondary }
 
     !!! info compact "More topics coming"
 

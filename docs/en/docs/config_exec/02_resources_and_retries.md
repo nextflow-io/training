@@ -97,7 +97,7 @@ nextflow run main.nf -with-report report-config-2.html
 
     Outputs:
 
-      /workspaces/training/execution-config/results
+      /workspaces/training/config-exec/results
 
       first_output:
         - full_pipeline/intermediates/Bonjour-output.txt
@@ -238,7 +238,7 @@ nextflow run main.nf
       /usr/local/bin/_activate_current_env.sh: line 35:    14 Killed                  micromamba activate "${ENV_NAME:-base}"
 
     Work dir:
-      /workspaces/training/execution-config/work/7a/d5eb6feeac0eed18d95d3da7a7aeb4
+      /workspaces/training/config-exec/work/7a/d5eb6feeac0eed18d95d3da7a7aeb4
 
     Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
 
@@ -306,7 +306,7 @@ nextflow run main.nf
 
     Outputs:
 
-      /workspaces/training/execution-config/results
+      /workspaces/training/config-exec/results
 
       first_output:
         - full_pipeline/intermediates/Hola-output.txt

@@ -30,10 +30,10 @@ Once your codespace is running, there are two things to do before diving in: set
 ### Set the working directory
 
 By default, the codespace opens at the root of all training courses.
-For this course, change to the `execution-config/` directory:
+For this course, change to the `config-exec/` directory:
 
 ```bash
-cd execution-config/
+cd config-exec/
 ```
 
 Then set VSCode to focus on this directory, so only the relevant files appear in the file explorer sidebar:
@@ -47,7 +47,7 @@ code .
     If for whatever reason you move out of this directory (e.g. your codespace goes to sleep), you can always use the full path to return to it, assuming you're running this within the Github Codespaces training environment:
 
     ```bash
-    cd /workspaces/training/execution-config
+    cd /workspaces/training/config-exec
     ```
 
 ### Explore the materials provided
