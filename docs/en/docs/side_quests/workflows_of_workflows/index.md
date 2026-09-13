@@ -153,25 +153,25 @@ nextflow run workflows/greeting.nf
 
     ```console
     N E X T F L O W   ~  version 26.04.4
-    Launching `workflows/greeting.nf` [loving_cuvier] revision: 22e91263dd
+    Launching `workflows/greeting.nf` [sharp_kirch] revision: 04c0a33f79
     executor >  local (9)
-    [54/ec2442] VAL…TE_NAME (validating Alice) | 3 of 3 ✔
-    [a5/3cf2ab] SAY_HELLO (greeting Charlie)   | 3 of 3 ✔
-    [df/6689ec] TIM…ing timestamp to greeting) | 3 of 3 ✔
+    [c5/9df3c8] VAL…TE_NAME (validating Alice) | 3 of 3 ✔
+    [e0/243874] SAY_HELLO (greeting Alice)     | 3 of 3 ✔
+    [c5/e40c8d] TIM…ing timestamp to greeting) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/workflows_of_workflows/results
 
       greetings:
-        - Alice-output.txt
-        - Bob-output.txt
         - Charlie-output.txt
+        - Bob-output.txt
+        - Alice-output.txt
 
       timestamped:
-        - timestamped_Alice-output.txt
         - timestamped_Bob-output.txt
         - timestamped_Charlie-output.txt
+        - timestamped_Alice-output.txt
     ```
 
 To make it composable with other workflows, a few things need to change.
@@ -306,7 +306,7 @@ nextflow run workflows/greeting.nf
 
     ```console
     N E X T F L O W   ~  version 26.04.4
-    Launching `workflows/greeting.nf` [ridiculous_mandelbrot] revision: e619235cf1
+    Launching `workflows/greeting.nf` [intergalactic_leavitt] revision: 89ac88c6c2
     No entry workflow specified
     ```
 
@@ -395,19 +395,19 @@ nextflow run main.nf
 
     ```console
     N E X T F L O W   ~  version 26.04.4
-    Launching `main.nf` [berserk_lalande] revision: 9a841b3c7f
+    Launching `main.nf` [agitated_jones] revision: 6b0e98dd05
     executor >  local (9)
-    [31/c2931b] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
-    [2a/50592c] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
-    [09/35e2d5] GRE…ing timestamp to greeting) | 3 of 3 ✔
+    [00/5ac4ce] GRE…DATE_NAME (validating Bob) | 3 of 3 ✔
+    [7d/dde45c] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
+    [fd/a044cc] GRE…ing timestamp to greeting) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/workflows_of_workflows/results
 
       greetings:
-        - greetings/Charlie-output.txt
         - greetings/Bob-output.txt
+        - greetings/Charlie-output.txt
         - greetings/Alice-output.txt
     ```
 
@@ -506,10 +506,10 @@ nextflow run workflows/transform.nf
 
     ```console
     N E X T F L O W   ~  version 26.04.4
-    Launching `workflows/transform.nf` [cranky_banach] revision: c040a64fcf
+    Launching `workflows/transform.nf` [evil_meninsky] revision: 4e35790d32
     executor >  local (6)
-    [c8/cd04d9] SAY…estamped_Alice-output.txt) | 3 of 3 ✔
-    [3d/2252c3] REV…estamped_Alice-output.txt) | 3 of 3 ✔
+    [7d/4ed7de] SAY…estamped_Alice-output.txt) | 3 of 3 ✔
+    [70/ddaafa] REV…imestamped_Bob-output.txt) | 3 of 3 ✔
 
     Outputs:
 
@@ -521,9 +521,9 @@ nextflow run workflows/transform.nf
         - UPPER-timestamped_Alice-output.txt
 
       reversed:
-        - REVERSED-UPPER-timestamped_Bob-output.txt
         - REVERSED-UPPER-timestamped_Charlie-output.txt
         - REVERSED-UPPER-timestamped_Alice-output.txt
+        - REVERSED-UPPER-timestamped_Bob-output.txt
     ```
 
 To make it composable with `GREETING_WORKFLOW`, the same three changes from section 1.2 apply.
@@ -655,21 +655,21 @@ nextflow run main.nf
 
     ```console
     N E X T F L O W   ~  version 26.04.4
-    Launching `main.nf` [focused_venter] revision: 03b08f23fc
+    Launching `main.nf` [special_magritte] revision: 2a0e54fecd
     executor >  local (15)
-    [f6/cd1e04] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
-    [07/1139ba] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
-    [d2/25e304] GRE…ing timestamp to greeting) | 3 of 3 ✔
-    [90/64c33c] TRA…estamped_Alice-output.txt) | 3 of 3 ✔
-    [bf/2f23b0] TRA…estamped_Alice-output.txt) | 3 of 3 ✔
+    [e7/e051a5] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
+    [ca/cf1b18] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
+    [e5/aa6be2] GRE…ing timestamp to greeting) | 3 of 3 ✔
+    [d2/7afc88] TRA…imestamped_Bob-output.txt) | 3 of 3 ✔
+    [5b/70f190] TRA…estamped_Alice-output.txt) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/workflows_of_workflows/results
 
       greetings:
-        - greetings/Charlie-output.txt
         - greetings/Bob-output.txt
+        - greetings/Charlie-output.txt
         - greetings/Alice-output.txt
 
       upper:
@@ -707,7 +707,7 @@ nextflow run main.nf
 ??? abstract "File contents"
 
     ```console title="results/reversed/REVERSED-UPPER-timestamped_Alice-output.txt"
-    !ECILA ,OLLEH ]71:15:11 32-60-6202[
+    !ECILA ,OLLEH ]54:84:81 31-90-6202[
     ```
 
 The pipeline is working end-to-end: the greeting has been uppercased and reversed.
