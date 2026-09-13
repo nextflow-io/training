@@ -722,9 +722,6 @@ nextflow run hello-containers.nf -resume
     Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
 
     -- Check '.nextflow.log' file for details
-    ERROR ~ Cannot access first() element from an empty List
-
-    -- Check '.nextflow.log' file for details
     ```
 
 Oh não, há um erro!

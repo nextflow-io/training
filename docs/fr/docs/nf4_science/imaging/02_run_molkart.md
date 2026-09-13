@@ -27,7 +27,7 @@ Caractéristiques clés des pipelines nf-core :
 
 !!! tip "Vous voulez en savoir plus sur nf-core ?"
 
-    Pour une introduction approfondie au développement de pipelines nf-core, consultez le cours de formation [Build with nf-core](../../hello_nf-core/index.md).
+    Pour une introduction approfondie au développement de pipelines nf-core, consultez le cours de formation [Build with nf-core](../../nfcore_build/index.md).
     Il couvre comment créer et personnaliser des pipelines nf-core à partir de zéro.
 
 ### 1.2. Le pipeline molkart
@@ -333,15 +333,15 @@ Vous devriez voir plusieurs sous-répertoires :
 
 ```console title="results/"
 results/
-├── anndata/
-├── clahe/
-├── mindagap/
-├── molkartqc/
-├── multiqc/
-├── pipeline_info/
-├── segmentation/
-├── spot2cell/
-└── stack/
+├── anndata
+├── clahe
+├── mindagap
+├── molkartqc
+├── multiqc
+├── pipeline_info
+├── segmentation
+├── spot2cell
+└── stack
 ```
 
 Chaque sous-répertoire contient des sorties d'une étape spécifique du pipeline :
@@ -404,17 +404,17 @@ Vérifiez le répertoire pipeline_info :
 ls results/pipeline_info/
 ```
 
-Fichiers clés :
+Fichiers clés (chaque nom se termine par un horodatage, par exemple `execution_report_2026-01-15_10-30-00.html`) :
 
-- **execution_report.html** : Chronologie et visualisation de l'utilisation des ressources
-- **execution_timeline.html** : Diagramme de Gantt de l'exécution des processus
-- **execution_trace.txt** : Métriques détaillées d'exécution des tâches
-- **pipeline_dag.html** : Graphe acyclique dirigé montrant la structure du workflow
+- **execution_report\_\*.html** : Chronologie et visualisation de l'utilisation des ressources
+- **execution_timeline\_\*.html** : Diagramme de Gantt de l'exécution des processus
+- **execution_trace\_\*.txt** : Métriques détaillées d'exécution des tâches
+- **pipeline_dag\_\*.html** : Graphe acyclique dirigé montrant la structure du workflow
 
 Ouvrez le rapport d'exécution pour voir l'utilisation des ressources :
 
 ```bash
-code results/pipeline_info/execution_report.html
+code results/pipeline_info/execution_report_*.html
 ```
 
 Cela montre :
@@ -431,7 +431,7 @@ Cela montre :
 
 Vous savez comment localiser les sorties du pipeline, examiner les rapports de contrôle qualité et accéder aux métriques d'exécution.
 
-### Et maintenant ?
+### Et ensuite ?
 
 Apprenez le répertoire de travail et comment Nextflow gère les fichiers intermédiaires.
 
@@ -456,10 +456,10 @@ Cela montre les 5 premiers répertoires de tâches.
 
 ### 4.2. Inspecter un répertoire de tâche
 
-Prenez l'un des hashs de processus de segmentation de la sortie console (par ex., `[3m/4n5o6p]`) et regardez à l'intérieur :
+Prenez l'un des hashs de processus de segmentation de la sortie console (par ex., `[3a/4b5c6d]`) et regardez à l'intérieur :
 
 ```bash
-ls -la work/3m/4n5o6p*/
+ls -la work/3a/4b5c6d*/
 ```
 
 Vous verrez :

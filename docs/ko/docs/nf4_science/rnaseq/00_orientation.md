@@ -27,7 +27,7 @@ codespace는 파일 시스템 탐색기, 코드 편집기 및 터미널 셸을 �
 
 ## 작업 준비하기
 
-codespace가 실행되면 교육에 들어가기 전에 두 가지 작업을 수행해야 합니다: 이 특정 과정의 작업 디렉토리를 설정하고 제공된 자료를 살펴보는 것입니다.
+codespace가 실행되면 교육을 시작하기 전에 두 가지 작업을 수행해야 합니다: 이 특정 과정의 작업 디렉토리를 설정하고 제공된 자료를 살펴보는 것입니다.
 
 ### 작업 디렉토리 설정
 
@@ -89,23 +89,23 @@ tree . -L 3
     │   │   ├── ENCSR000CPO2_1.fastq.gz
     │   │   └── ENCSR000CPO2_2.fastq.gz
     │   └── single-end.csv
+    ├── modules
+    │   ├── fastqc.nf
+    │   ├── hisat2_align.nf
+    │   ├── multiqc.nf
+    │   └── trim_galore.nf
     ├── nextflow.config
     ├── rnaseq.nf
     └── solutions
-        ├── modules
-        │   ├── fastqc.nf
-        │   ├── fastqc_pe.nf
-        │   ├── hisat2_align.nf
-        │   ├── hisat2_align_pe.nf
-        │   ├── multiqc.nf
-        │   ├── trim_galore.nf
-        │   └── trim_galore_pe.nf
-        ├── rnaseq-2.1.nf
-        ├── rnaseq-2.2.nf
-        ├── rnaseq-2.3.nf
-        ├── rnaseq-3.1.nf
-        ├── rnaseq-3.2.nf
-        └── rnaseq_pe-3.3.nf
+        ├── part2
+        │   ├── modules
+        │   ├── nextflow.config
+        │   └── rnaseq-2.nf
+        └── part3
+            ├── modules
+            ├── nextflow.config
+            ├── rnaseq-3.nf
+            └── rnaseq_pe-3.nf
     ```
 
 색상이 있는 상자를 클릭하면 섹션이 확장되어 내용을 볼 수 있습니다.

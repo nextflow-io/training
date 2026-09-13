@@ -7,11 +7,12 @@ index_type: course
 additional_information:
   technical_requirements: true
   learning_objectives:
-    - Lanzar y gestionar la ejecución de workflows de Nextflow
-    - Encontrar e interpretar salidas (resultados) y archivos de registro
-    - Reconocer los componentes principales de Nextflow en un workflow simple de múltiples pasos
-    - Configurar la ejecución de pipelines para ejecutarse en plataformas de computación comunes, incluyendo HPC y nube
-    - Resumir las mejores prácticas para reproducibilidad, portabilidad y reutilización de código que hacen los pipelines FAIR, incluyendo modularidad de código y contenedores de software
+    - Lanzar y gestionar pipelines de Nextflow desde la línea de comandos
+    - Comprender cómo los canales y operadores permiten workflows eficientes con múltiples entradas y múltiples pasos
+    - Usar contenedores para gestionar dependencias de software y garantizar la reproducibilidad
+    - Configurar la ejecución de pipelines y sus salidas
+    - Generar reportes de ejecución, inspeccionar el historial de ejecuciones anteriores y limpiar directorios de trabajo antiguos
+    - Ejecutar pipelines directamente desde repositorios remotos como GitHub
   audience_prerequisites:
     - "**Audiencia:** Este curso está diseñado para quienes son completamente nuevos en Nextflow y desean ejecutar pipelines existentes."
     - "**Habilidades:** Se asume cierta familiaridad con la línea de comandos, conceptos básicos de scripting y formatos de archivo comunes."
@@ -24,7 +25,7 @@ additional_information:
 
 **Nextflow Run es una introducción práctica a la ejecución de workflows de análisis de datos reproducibles y escalables.**
 
-A través de ejemplos prácticos y ejercicios guiados, aprenderá los fundamentos del uso de Nextflow, incluyendo cómo ejecutar pipelines, gestionar archivos y dependencias de software, paralelizar la ejecución sin esfuerzo y ejecutar workflows en diferentes entornos de computación.
+A través de una serie de ejercicios orientados a objetivos, aprenderá los fundamentos para lanzar y gestionar pipelines de Nextflow, comprenderá cómo los canales y operadores permiten el procesamiento paralelo de múltiples entradas, y usará contenedores para gestionar dependencias de software.
 
 Se llevará las habilidades y la confianza para comenzar a ejecutar workflows con Nextflow.
 
@@ -32,25 +33,25 @@ Se llevará las habilidades y la confianza para comenzar a ejecutar workflows co
 
 ## Descripción general del curso
 
-### Qué hará
-
 Este curso es práctico, con ejercicios orientados a objetivos estructurados para introducir información gradualmente.
 
-Ejecutará varias versiones de un pipeline de Nextflow que procesa entradas de texto.
-Comenzará con una versión simple que consiste en un solo paso, y eventualmente progresará a una versión de múltiples pasos que toma un archivo CSV de entradas de texto tabulares, ejecuta algunos pasos de transformación y produce un único archivo de texto que contiene una imagen ASCII de un personaje diciendo el texto transformado.
+Ejecutará varias versiones de un pipeline de Nextflow que procesa entradas de texto, comenzando con una versión simple de un solo paso y progresando a una versión de múltiples pasos que toma un archivo CSV de entradas, ejecuta algunos pasos de transformación y produce un único archivo de texto con arte ASCII generado por una herramienta en contenedor.
 
 Este curso se enfoca en ejecutar pipelines (nombrado así por el comando principal `nextflow run`).
 Si busca una introducción al desarrollo de pipelines de Nextflow, consulte [Hello Nextflow](../hello_nextflow/index.md).
 
+!!! note "Nota"
+
+    ¿Busca la versión anterior de este curso? Ha sido reemplazada por la versión en esta página, pero aún puede consultarse en la [versión 3.6.1](https://training.nextflow.io/3.6.1/nextflow_run/) del sitio de capacitación.
+
 ### Plan de lecciones
 
-Hemos dividido esto en tres partes que se enfocarán en aspectos específicos de la ejecución y gestión de pipelines escritos en Nextflow.
-
-| Capítulo del curso                                      | Resumen                                                                                                                       | Duración estimada |
-| ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| [Parte 1: Ejecutar operaciones básicas](./01_basics.md) | Lanzar y gestionar la ejecución de un workflow simple                                                                         | 30 mins           |
-| [Parte 2: Ejecutar pipelines reales](./02_pipeline.md)  | Procesar entradas complejas, ejecutar workflows de múltiples pasos, usar contenedores y paralelizar la ejecución sin esfuerzo | 60 mins           |
-| [Parte 3: Configuración de ejecución](./03_config.md)   | Personalizar el comportamiento del pipeline y optimizar el uso en diferentes entornos computacionales                         | 60 mins           |
+| Capítulo del curso                                                       | Resumen                                                                                                                      | Duración estimada |
+| ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| [Parte 1: Ejecutar Nextflow](./01_run_nextflow.md)                       | Lanzar y gestionar pipelines de Nextflow, y comprender los mecanismos esenciales del workflow                                | 25 mins           |
+| [Parte 2: Configurar el pipeline](./02_configure_pipeline.md)            | Configurar la ejecución del pipeline y sus salidas usando `nextflow.config`                                                  | 20 mins           |
+| [Parte 3: Gestionar ejecuciones del workflow](./03_manage_executions.md) | Generar reportes de ejecución, inspeccionar el historial de ejecuciones anteriores y limpiar directorios de trabajo antiguos | 10 mins           |
+| [Parte 4: Ejecutar pipelines remotos](./04_remote_repositories.md)       | Ejecutar un pipeline directamente desde GitHub y fijarlo a una revisión específica                                           | 10 mins           |
 
 Al final de este curso, estará bien preparado para abordar los próximos pasos en su camino para ejecutar workflows reproducibles para sus necesidades de computación científica.
 

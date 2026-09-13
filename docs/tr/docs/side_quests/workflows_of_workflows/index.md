@@ -2,9 +2,11 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Bir pipeline geliştirirken, farklı veri türleri veya analiz adımları için benzer süreç dizileri oluşturduğunuzu sık sık fark edersiniz. Bu süreç dizilerini kopyalayıp yapıştırarak bakımı zor olan tekrarlı kodlara yol açabilirsiniz; ya da anlaşılması ve değiştirilmesi güç olan tek bir devasa iş akışı oluşturabilirsiniz.
+Bir pipeline geliştirirken, farklı veri türleri veya analiz adımları için benzer süreç dizileri oluşturduğunuzu sık sık fark edersiniz.
+Bu süreç dizilerini kopyalayıp yapıştırarak bakımı zor olan tekrarlı kodlara yol açabilirsiniz; ya da anlaşılması ve değiştirilmesi güç olan tek bir devasa iş akışı oluşturabilirsiniz.
 
-Nextflow'un en güçlü özelliklerinden biri, karmaşık pipeline'ları daha küçük, yeniden kullanılabilir iş akışı modüllerinden oluşturabilmesidir. Bu modüler yaklaşım, pipeline'ların geliştirilmesini, test edilmesini ve bakımını kolaylaştırır.
+Nextflow'un en güçlü özelliklerinden biri, karmaşık pipeline'ları daha küçük, yeniden kullanılabilir iş akışı modüllerinden oluşturabilmesidir.
+Bu modüler yaklaşım, pipeline'ların geliştirilmesini, test edilmesini ve bakımını kolaylaştırır.
 
 ### Öğrenme hedefleri
 
@@ -39,7 +41,7 @@ Henüz yapmadıysanız, eğitim ortamını [Ortam Kurulumu](../../envsetup/index
 
 #### Proje dizinine geçin
 
-Bu eğitim için gerekli dosyaların bulunduğu dizine geçelim.
+Bu eğitim için gerekli dosyaların bulunduğu dizine geçin.
 
 ```bash
 cd side-quests/workflows_of_workflows
@@ -79,7 +81,16 @@ Göreviniz, bu modülleri daha sonra bir ana iş akışında bir araya getirece�
 - İsimleri doğrulayan, selamlamalar oluşturan ve zaman damgası ekleyen bir `GREETING_WORKFLOW`
 - Metni büyük harfe dönüştüren ve tersine çeviren bir `TRANSFORM_WORKFLOW`
 
-<!-- TODO: give a bit more details, similar to how it's done in the Metadata side quest -->
+Tamamlanmış pipeline, her iki iş akışını tek bir veri akışında zincirler:
+
+1. **Doğrula**: Her ismin doğru biçimlendirildiğini kontrol edin
+2. **Selamla**: Her geçerli isim için bir selamlama oluşturun
+3. **Zaman Damgası**: Her selamlamanın oluşturulduğu zamanı kaydedin
+4. **Büyük Harf**: Zaman damgalı selamlamayı büyük harfe dönüştürün
+5. **Tersine Çevir**: Büyük harfli metni tersine çevirin
+
+İlk üç adım `GREETING_WORKFLOW`'a, son iki adım ise `TRANSFORM_WORKFLOW`'a aittir.
+Bunları ayrı, birleştirilebilir iş akışları olarak oluşturmak, her aşamayı birbirine bağlamadan önce bağımsız olarak geliştirip test etmenizi sağlar.
 
 #### Hazırlık kontrol listesi
 
@@ -103,6 +114,8 @@ Greeting iş akışı, isimleri doğrular ve zaman damgalı selamlamalar üretir
 `workflows/greeting.nf` dosyasını açın ve kodu inceleyin:
 
 ```groovy title="workflows/greeting.nf" linenums="1"
+#!/usr/bin/env nextflow
+
 include { VALIDATE_NAME } from '../modules/validate_name'
 include { SAY_HELLO } from '../modules/say_hello'
 include { TIMESTAMP_GREETING } from '../modules/timestamp_greeting'
@@ -141,25 +154,25 @@ nextflow run workflows/greeting.nf
 
     ```console
     N E X T F L O W   ~  version 26.04.4
-    Launching `workflows/greeting.nf` [loving_cuvier] revision: 22e91263dd
+    Launching `workflows/greeting.nf` [sharp_kirch] revision: 04c0a33f79
     executor >  local (9)
-    [54/ec2442] VAL…TE_NAME (validating Alice) | 3 of 3 ✔
-    [a5/3cf2ab] SAY_HELLO (greeting Charlie)   | 3 of 3 ✔
-    [df/6689ec] TIM…ing timestamp to greeting) | 3 of 3 ✔
+    [c5/9df3c8] VAL…TE_NAME (validating Alice) | 3 of 3 ✔
+    [e0/243874] SAY_HELLO (greeting Alice)     | 3 of 3 ✔
+    [c5/e40c8d] TIM…ing timestamp to greeting) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/workflows_of_workflows/results
 
       greetings:
-        - Alice-output.txt
-        - Bob-output.txt
         - Charlie-output.txt
+        - Bob-output.txt
+        - Alice-output.txt
 
       timestamped:
-        - timestamped_Alice-output.txt
         - timestamped_Bob-output.txt
         - timestamped_Charlie-output.txt
+        - timestamped_Alice-output.txt
     ```
 
 Diğer iş akışlarıyla birleştirilebilir hale getirmek için birkaç değişiklik yapmamız gerekiyor.
@@ -170,7 +183,7 @@ Bir iş akışını birleştirilebilir hale getirmek için üç şeyin değişme
 iş akışına bir ad verilir, girdiler `take:` bloğuna taşınır ve çıktılar `emit:` bloğuna taşınır
 (bağımsız `publish:`/`output {}` blokları kaldırılır; bunlar giriş iş akışına aittir).
 
-Bu değişiklikleri tek tek inceleyelim.
+Aşağıdaki bölümler bu değişiklikleri tek tek ele almaktadır.
 
 #### 1.2.1. İş akışını adlandırın
 
@@ -221,7 +234,7 @@ Sabit kodlanmış kanal tanımını, iş akışının beklediği girdileri bildi
         timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
     ```
 
-`take:` bloğu kanalı yalnızca adıyla tanımlar; içine ne gireceğinin ayrıntıları üst iş akışı tarafından belirlenecektir.
+`take:` bloğu kanalı yalnızca adıyla tanımlar. İçine ne gireceğini üst iş akışı belirler.
 
 #### 1.2.3. `emit:` ile çıktıları tanımlayın
 
@@ -260,7 +273,9 @@ Sabit kodlanmış kanal tanımını, iş akışının beklediği girdileri bildi
 
 Üç değişikliğin tamamından sonra dosyanın tamamı şöyle görünmelidir:
 
-```groovy title="workflows/greeting.nf" linenums="1" hl_lines="5 6 7 9 15 16 17"
+```groovy title="workflows/greeting.nf" linenums="1" hl_lines="7 8 9 11 17 18 19"
+#!/usr/bin/env nextflow
+
 include { VALIDATE_NAME } from '../modules/validate_name'
 include { SAY_HELLO } from '../modules/say_hello'
 include { TIMESTAMP_GREETING } from '../modules/timestamp_greeting'
@@ -291,7 +306,7 @@ nextflow run workflows/greeting.nf
 
     ```console
     N E X T F L O W   ~  version 26.04.4
-    Launching `workflows/greeting.nf` [ridiculous_mandelbrot] revision: e619235cf1
+    Launching `workflows/greeting.nf` [intergalactic_leavitt] revision: 89ac88c6c2
     No entry workflow specified
     ```
 
@@ -299,11 +314,12 @@ Bu, önemli bir kavramı ortaya koymaktadır: **giriş iş akışı**.
 Nextflow, bir betiği doğrudan çalıştırdığınızda adsız bir `workflow {}` bloğunu giriş noktası olarak kullanır.
 `GREETING_WORKFLOW` adlandırılmış olduğundan Nextflow, onu kendi başına nasıl çalıştıracağını bilmez.
 
-Bu kasıtlıdır; birleştirilebilir iş akışları doğrudan çalıştırılmak için değil, bir giriş iş akışından çağrılmak üzere tasarlanmıştır. Çözüm, `GREETING_WORKFLOW`'u içe aktarıp çağıran `main.nf` dosyasında bir giriş iş akışı oluşturmaktır.
+Bu kasıtlıdır. Birleştirilebilir iş akışları doğrudan çalıştırılmak için değil, bir giriş iş akışından çağrılmak üzere tasarlanmıştır.
+Çözüm, `GREETING_WORKFLOW`'u içe aktarıp çağıran `main.nf` dosyasında bir giriş iş akışı oluşturmaktır.
 
 ### 1.3. Ana iş akışını güncelleyin ve test edin
 
-Şimdi greeting iş akışını çağırmak için ana iş akışını güncelleyelim.
+Greeting iş akışını çağırmak için ana iş akışını güncelleyin.
 
 #### 1.3.1. Greeting workflow'unu dahil edin ve çağırın
 
@@ -311,7 +327,9 @@ Bu kasıtlıdır; birleştirilebilir iş akışları doğrudan çalıştırılma
 
 === "Sonra"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="1 7 8 11"
+    ```groovy title="main.nf" linenums="1" hl_lines="3 9 10 13"
+    #!/usr/bin/env nextflow
+
     include { GREETING_WORKFLOW } from './workflows/greeting'
 
     workflow {
@@ -329,6 +347,8 @@ Bu kasıtlıdır; birleştirilebilir iş akışları doğrudan çalıştırılma
 === "Önce"
 
     ```groovy title="main.nf" linenums="1"
+    #!/usr/bin/env nextflow
+
     workflow {
         main:
         names = channel.of('Alice', 'Bob', 'Charlie')
@@ -375,23 +395,23 @@ nextflow run main.nf
 
     ```console
     N E X T F L O W   ~  version 26.04.4
-    Launching `main.nf` [berserk_lalande] revision: 9a841b3c7f
+    Launching `main.nf` [agitated_jones] revision: 6b0e98dd05
     executor >  local (9)
-    [31/c2931b] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
-    [2a/50592c] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
-    [09/35e2d5] GRE…ing timestamp to greeting) | 3 of 3 ✔
+    [00/5ac4ce] GRE…DATE_NAME (validating Bob) | 3 of 3 ✔
+    [7d/dde45c] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
+    [fd/a044cc] GRE…ing timestamp to greeting) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/workflows_of_workflows/results
 
       greetings:
-        - greetings/Charlie-output.txt
         - greetings/Bob-output.txt
+        - greetings/Charlie-output.txt
         - greetings/Alice-output.txt
     ```
 
-??? abstract "Dizin içeriği"
+??? abstract "`results/` dizinine eklenen yeni içerik"
 
     ```console
     results/
@@ -401,6 +421,9 @@ nextflow run main.nf
         └── Charlie-output.txt
     ```
 
+    1.1. bölümündeki bağımsız çalıştırmadan gelen altı dosya (`Alice-output.txt`, `timestamped_Alice-output.txt` vb.) bu yeni `greetings/` alt dizininin yanında `results/` içinde durmaya devam etmektedir.
+    Bu beklenen bir durumdur: bu derste hiçbir şey onları silmez ve 2.1. bölümü bunları doğrudan girdi olarak okur.
+
 ??? abstract "Dosya içeriği"
 
     ```console title="results/greetings/Alice-output.txt"
@@ -408,6 +431,9 @@ nextflow run main.nf
     ```
 
 Selamlama dosyaları `results/greetings/` dizinine yayımlanır. Ana iş akışı `GREETING_WORKFLOW`'u çağırır ve çıktısını doğrudan `publish:` bölümüne bağlar.
+
+`GREETING_WORKFLOW.out.timestamped` burada `publish:` bölümüne bağlı değildir. 2. bölümden itibaren bu kanal, kendi başına yayımlanan bir çıktı olmak yerine `TRANSFORM_WORKFLOW`'un girdisi haline gelir.
+Bunu, `timestamped`'in besleyeceği başka bir şey olmadığı için doğrudan yayımlandığı 1.1. bölümündeki bağımsız çalıştırmayla karşılaştırın.
 
 ### Özetle
 
@@ -425,7 +451,7 @@ Artık çalışan bir greeting iş akışınız var. Bu iş akışı:
 - Her ismi doğrular
 - Her geçerli isim için bir selamlama oluşturur
 - Selamlamalara zaman damgası ekler
-- Hem orijinal hem de zaman damgalı selamlamaları çıktı olarak sunar
+- Hem orijinal hem de zaman damgalı selamlamaları yayınlar; ancak bu aşamada yalnızca orijinal selamlamalar `results/` dizinine yayımlanır
 
 Bu modüler yaklaşım, greeting iş akışını bağımsız olarak test etmenize veya daha büyük pipeline'larda bir bileşen olarak kullanmanıza olanak tanır.
 
@@ -440,6 +466,8 @@ Transform iş akışı, zaman damgalı selamlamalara metin dönüşümleri uygul
 `workflows/transform.nf` dosyasını açın ve kodu inceleyin:
 
 ```groovy title="workflows/transform.nf" linenums="1"
+#!/usr/bin/env nextflow
+
 include { SAY_HELLO_UPPER } from '../modules/say_hello_upper'
 include { REVERSE_TEXT } from '../modules/reverse_text'
 
@@ -476,10 +504,10 @@ nextflow run workflows/transform.nf
 
     ```console
     N E X T F L O W   ~  version 26.04.4
-    Launching `workflows/transform.nf` [cranky_banach] revision: c040a64fcf
+    Launching `workflows/transform.nf` [evil_meninsky] revision: 4e35790d32
     executor >  local (6)
-    [c8/cd04d9] SAY…estamped_Alice-output.txt) | 3 of 3 ✔
-    [3d/2252c3] REV…estamped_Alice-output.txt) | 3 of 3 ✔
+    [7d/4ed7de] SAY…estamped_Alice-output.txt) | 3 of 3 ✔
+    [70/ddaafa] REV…imestamped_Bob-output.txt) | 3 of 3 ✔
 
     Outputs:
 
@@ -491,9 +519,9 @@ nextflow run workflows/transform.nf
         - UPPER-timestamped_Alice-output.txt
 
       reversed:
-        - REVERSED-UPPER-timestamped_Bob-output.txt
         - REVERSED-UPPER-timestamped_Charlie-output.txt
         - REVERSED-UPPER-timestamped_Alice-output.txt
+        - REVERSED-UPPER-timestamped_Bob-output.txt
     ```
 
 `GREETING_WORKFLOW` ile birleştirilebilir hale getirmek için 1.2. bölümündeki üç değişikliğin aynısı geçerlidir.
@@ -504,7 +532,9 @@ nextflow run workflows/transform.nf
 
 Tamamlanmış dosya şöyle görünmelidir:
 
-```groovy title="workflows/transform.nf" linenums="1" hl_lines="4 5 6 8 13 14 15"
+```groovy title="workflows/transform.nf" linenums="1" hl_lines="6 7 8 10 15 16 17"
+#!/usr/bin/env nextflow
+
 include { SAY_HELLO_UPPER } from '../modules/say_hello_upper'
 include { REVERSE_TEXT } from '../modules/reverse_text'
 
@@ -527,7 +557,7 @@ Transform iş akışı artık birleştirilebilir durumdadır ve ana iş akışı
 
 ### 2.3. Ana iş akışını güncelleyin ve test edin
 
-Şimdi dönüşüm iş akışını çağırmak için ana iş akışını güncelleyelim.
+Dönüşüm iş akışını çağırmak için ana iş akışını güncelleyin.
 
 #### 2.3.1. Dönüşüm workflow'unu dahil edin ve çağırın
 
@@ -535,7 +565,9 @@ Include ifadesini, zaman damgalı selamlamalar üzerinde zincirlenen `TRANSFORM_
 
 === "Sonra"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="2 11 12 16 17"
+    ```groovy title="main.nf" linenums="1" hl_lines="4 13 14 18 19"
+    #!/usr/bin/env nextflow
+
     include { GREETING_WORKFLOW } from './workflows/greeting'
     include { TRANSFORM_WORKFLOW } from './workflows/transform'
 
@@ -559,6 +591,8 @@ Include ifadesini, zaman damgalı selamlamalar üzerinde zincirlenen `TRANSFORM_
 === "Önce"
 
     ```groovy title="main.nf" linenums="1"
+    #!/usr/bin/env nextflow
+
     include { GREETING_WORKFLOW } from './workflows/greeting'
 
     workflow {
@@ -619,21 +653,21 @@ nextflow run main.nf
 
     ```console
     N E X T F L O W   ~  version 26.04.4
-    Launching `main.nf` [focused_venter] revision: 03b08f23fc
+    Launching `main.nf` [special_magritte] revision: 2a0e54fecd
     executor >  local (15)
-    [f6/cd1e04] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
-    [07/1139ba] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
-    [d2/25e304] GRE…ing timestamp to greeting) | 3 of 3 ✔
-    [90/64c33c] TRA…estamped_Alice-output.txt) | 3 of 3 ✔
-    [bf/2f23b0] TRA…estamped_Alice-output.txt) | 3 of 3 ✔
+    [e7/e051a5] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
+    [ca/cf1b18] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
+    [e5/aa6be2] GRE…ing timestamp to greeting) | 3 of 3 ✔
+    [d2/7afc88] TRA…imestamped_Bob-output.txt) | 3 of 3 ✔
+    [5b/70f190] TRA…estamped_Alice-output.txt) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/workflows_of_workflows/results
 
       greetings:
-        - greetings/Charlie-output.txt
         - greetings/Bob-output.txt
+        - greetings/Charlie-output.txt
         - greetings/Alice-output.txt
 
       upper:
@@ -647,7 +681,7 @@ nextflow run main.nf
         - reversed/REVERSED-UPPER-timestamped_Alice-output.txt
     ```
 
-??? abstract "Dizin içeriği"
+??? abstract "`results/` dizinine eklenen yeni içerik"
 
     ```console
     results/
@@ -665,10 +699,13 @@ nextflow run main.nf
         └── UPPER-timestamped_Charlie-output.txt
     ```
 
+    `results/` kök dizini aynı zamanda 1.1. ve 2.1. bölümlerindeki bağımsız çalıştırmalardan kalan dosyaları (`Alice-output.txt`, `timestamped_Alice-output.txt`, `UPPER-timestamped_Alice-output.txt` vb.) içermeye devam etmektedir.
+    Bu beklenen bir durumdur: bu ders hiçbir zaman bunları temizlemenizi istemez.
+
 ??? abstract "Dosya içeriği"
 
     ```console title="results/reversed/REVERSED-UPPER-timestamped_Alice-output.txt"
-    !ECILA ,OLLEH ]71:15:11 32-60-6202[
+    !ECILA ,OLLEH ]54:84:81 31-90-6202[
     ```
 
 Pipeline uçtan uca çalışıyor: selamlama büyük harfe dönüştürülmüş ve tersine çevrilmiştir.
@@ -695,9 +732,10 @@ Bu modüler yaklaşım, tek parça pipeline'lara kıyasla çeşitli avantajlar s
 - Arayüzler tutarlı kaldığı sürece bir iş akışındaki değişiklikler diğerlerini etkilemez
 - Giriş noktaları, pipeline'ınızın farklı bölümlerini çalıştıracak şekilde yapılandırılabilir
 
-_Ancak şunu belirtmek önemlidir: İş akışlarını çağırmak süreçleri çağırmaya biraz benzese de aslında aynı şey değildir. Örneğin, N boyutunda bir kanalla çağırarak bir iş akışını N kez çalıştıramazsınız; N boyutunda bir kanalı iş akışına iletmeniz ve dahili olarak yinelemeniz gerekir._
+Bir iş akışını çağırmak, bir süreci çağırmaya benzer; ancak aynı şey değildir.
+N boyutunda bir kanal ileterek bir iş akışını N kez çalıştıramazsınız: kanalı bir kez iletirsiniz ve iş akışı dahili olarak üzerinde yineleme yapar.
 
-Bu teknikleri kendi çalışmalarınızda uygulamak, bakımı kolay ve ölçeklenebilir kalırken karmaşık biyoinformatik görevleri yerine getirebilen daha gelişmiş Nextflow pipeline'ları oluşturmanızı sağlayacaktır.
+Bu teknikleri kendi çalışmalarınızda uygulamak, bakımı kolay ve ölçeklenebilir kalırken karmaşık veri işleme görevlerini yerine getirebilen daha gelişmiş Nextflow pipeline'ları oluşturmanızı sağlayacaktır.
 
 ### Temel kalıplar
 
@@ -706,21 +744,21 @@ Bu teknikleri kendi çalışmalarınızda uygulamak, bakımı kolay ve ölçekle
     ```groovy
     workflow EXAMPLE_WORKFLOW {
         take:
-            // Girdi kanalları burada tanımlanır
-            input_ch
+        // Girdi kanalları burada tanımlanır
+        input_ch
 
         main:
-            // İş akışı mantığı buraya gelir
-            // Süreçlerin çağrıldığı ve kanalların işlendiği yer burasıdır
-            result_ch = SOME_PROCESS(input_ch)
+        // İş akışı mantığı buraya gelir
+        // Süreçlerin çağrıldığı ve kanalların işlendiği yer burasıdır
+        result_ch = SOME_PROCESS(input_ch)
 
         emit:
-            // Çıktı kanalları burada tanımlanır
-            output_ch = result_ch
+        // Çıktı kanalları burada tanımlanır
+        output_ch = result_ch
     }
     ```
 
-2.  **İş akışı içe aktarmaları:** İki bağımsız iş akışı modülü oluşturduk ve bunları include ifadeleriyle bir ana pipeline'a aktardık.
+2.  **İş akışı içe aktarmaları**: İki bağımsız iş akışı modülü oluşturduk ve bunları include ifadeleriyle bir ana pipeline'a aktardık.
 
     - Tek bir iş akışını içe aktarma
 
@@ -740,7 +778,8 @@ Bu teknikleri kendi çalışmalarınızda uygulamak, bakımı kolay ve ölçekle
     include { WORKFLOW_A as WORKFLOW_A_ALIAS } from './path/to/workflow'
     ```
 
-3.  **Giriş noktaları**: Nextflow, yürütmenin nereden başlayacağını bilmek için adsız bir giriş iş akışı gerektirir. Bu giriş iş akışı, adlandırılmış iş akışlarınızı çağırır.
+3.  **Giriş noktaları**: Nextflow, yürütmenin nereden başlayacağını bilmek için adsız bir giriş iş akışı gerektirir.
+    Bu giriş iş akışı, adlandırılmış iş akışlarınızı çağırır.
 
     - Adsız iş akışı (giriş noktası)
 
@@ -759,9 +798,9 @@ Bu teknikleri kendi çalışmalarınızda uygulamak, bakımı kolay ve ölçekle
     }
     ```
 
-4.  **Veri akışını yönetme:** Ad alanı gösterimini (`WORKFLOW_NAME.out.channel_name`) kullanarak iş akışı çıktılarına nasıl erişileceğini ve bunların diğer iş akışlarına nasıl iletileceğini öğrendik.
+4.  **Veri akışını yönetme**: Ad alanı gösterimini (`WORKFLOW_NAME.out.channel_name`) kullanarak iş akışı çıktılarına nasıl erişileceğini ve bunların diğer iş akışlarına nasıl iletileceğini öğrendik.
 
-    ```nextflow
+    ```groovy
     WORKFLOW_A(input_ch)
     WORKFLOW_B(WORKFLOW_A.out.some_channel)
     ```

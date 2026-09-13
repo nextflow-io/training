@@ -22,24 +22,23 @@ Si esteu treballant en aquest curs pel vostre compte, familiaritzeu-vos amb els 
 
 ### Requisits de versió
 
-Aquesta formació funciona amb Nextflow 25.10.2 o posterior **amb l'analitzador de sintaxi v2 ACTIVAT**.
+Aquest curs requereix Nextflow 25.10.2 o posterior, amb l'analitzador de sintaxi v2 activat (el valor per defecte a partir de la versió 25.10+).
 Si utilitzeu un entorn local o personalitzat, assegureu-vos que utilitzeu la configuració correcta tal com es documenta [aquí](../info/nxf_versions.md).
 
 ## Prepareu-vos per treballar
 
-Un cop el vostre codespace estigui en funcionament, hi ha dues coses que heu de fer abans d'endinsar-vos en la formació: establir el vostre directori de treball per a aquest curs específic i donar un cop d'ull als materials proporcionats.
+Un cop el vostre codespace estigui en funcionament, hi ha dues coses que heu de fer abans d'endinsar-vos en la formació: establir el vostre directori de treball i donar un cop d'ull als materials proporcionats.
 
 ### Establir el directori de treball
 
-Per defecte, el codespace s'obre amb el directori de treball establert a l'arrel de tots els cursos de formació, però per a aquest curs, treballarem al directori `nextflow-run/`.
-
-Canvieu de directori ara executant aquesta comanda al terminal:
+Per defecte, el codespace s'obre a l'arrel de tots els cursos de formació.
+Per a aquest curs, canvieu al directori `nextflow-run/`:
 
 ```bash
 cd nextflow-run/
 ```
 
-Podeu configurar VSCode perquè se centri en aquest directori, de manera que només els fitxers rellevants es mostrin a la barra lateral de l'explorador de fitxers:
+A continuació, configureu VSCode perquè se centri en aquest directori, de manera que només els fitxers rellevants es mostrin a la barra lateral de l'explorador de fitxers:
 
 ```bash
 code .
@@ -53,16 +52,10 @@ code .
     cd /workspaces/training/nextflow-run
     ```
 
-Ara donem un cop d'ull als continguts.
-
 ### Explorar els materials proporcionats
 
-Podeu explorar els continguts d'aquest directori utilitzant l'explorador de fitxers al costat esquerre de l'espai de treball de formació.
-Alternativament, podeu utilitzar la comanda `tree`.
-
-Al llarg del curs, utilitzem la sortida de `tree` per representar l'estructura i els continguts del directori de forma llegible, de vegades amb modificacions menors per claredat.
-
-Aquí generem una taula de continguts fins al segon nivell:
+Podeu explorar els materials del curs utilitzant l'explorador de fitxers a l'esquerra, o amb la comanda `tree`.
+Executeu el següent des del terminal per veure l'estructura completa:
 
 ```bash
 tree . -L 2
@@ -73,41 +66,26 @@ tree . -L 2
     ```console
     .
     ├── 1-hello.nf
-    ├── 2a-inputs.nf
-    ├── 2b-multistep.nf
-    ├── 2c-modules.nf
-    ├── 2d-container.nf
-    ├── 3-main.nf
+    ├── 2-inputs.nf
     ├── data
+    │   ├── greetings-extended.csv
     │   └── greetings.csv
+    ├── main.nf
     ├── modules
     │   ├── collectGreetings.nf
     │   ├── convertToUpper.nf
     │   ├── cowpy.nf
     │   └── sayHello.nf
-    ├── nextflow.config
-    ├── solutions
-    │   ├── 3-main.nf
-    │   ├── modules
-    │   └── nextflow.config
-    ├── test-params.json
-    └── test-params.yaml
+    └── nextflow.config
     ```
 
-Feu clic a la caixa de color per expandir la secció i veure els seus continguts.
-Utilitzem seccions desplegables com aquesta per mostrar la sortida esperada de les comandes així com els continguts de directoris i fitxers de manera concisa.
+Els **fitxers `.nf`** són scripts de workflow de complexitat creixent, utilitzats en aquest ordre al llarg del curs.
 
-- **Els fitxers `.nf`** són scripts de workflow que estan numerats segons la part del curs en què s'utilitzen.
+El **directori `data/`** conté els fitxers d'entrada CSV que utilitzarem a partir de la secció 2.
 
-- **El fitxer `nextflow.config`** és un fitxer de configuració que estableix propietats mínimes de l'entorn.
-  Podeu ignorar-lo de moment.
+El **directori `modules/`** conté les definicions de processos utilitzades per `main.nf`.
 
-- **El fitxer `greetings.csv`** sota `data/` conté dades d'entrada que utilitzarem en la major part del curs. Es descriu a la Part 2 (Executar pipelines), quan l'introduïm per primera vegada.
-
-- **Els fitxers `test-params.*`** són fitxers de configuració que utilitzarem a la Part 3 (Configuració). Podeu ignorar-los de moment.
-
-- **El directori `solutions`** conté l'estat final del workflow i els seus fitxers accessoris (configuració i mòduls) que resulten de completar el curs.
-  Estan pensats per ser utilitzats com a referència per comprovar el vostre treball i resoldre qualsevol problema.
+El **fitxer `nextflow.config`** és un fitxer de configuració que estableix propietats mínimes de l'entorn. Podeu ignorar-lo de moment; el veurem a la secció 4.
 
 ## Llista de verificació de preparació
 
@@ -119,4 +97,4 @@ Creieu que esteu preparats per començar?
 
 Si podeu marcar totes les caselles, esteu preparats per començar.
 
-**Per continuar a la [Part 1: Executar operacions bàsiques](./01_basics.md), feu clic a la fletxa de la cantonada inferior dreta d'aquesta pàgina.**
+**Per continuar a la [Part 1: Executar Nextflow](./01_run_nextflow.md), feu clic a la fletxa de la cantonada inferior dreta d'aquesta pàgina.**

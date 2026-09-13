@@ -1783,7 +1783,7 @@ Això significa que mentre distribuïm qualsevol fitxer de dades de prova amb el
 
 ### 6.3. Utilitzar `nextflow config` per veure la configuració resolta
 
-Com s'ha notat anteriorment, de vegades el mateix parametre pot estar establert a diferents valors en perfils que voleu combinar.
+Com s'ha notat anteriorment, de vegades el mateix paràmetre pot estar establert a diferents valors en perfils que voleu combinar.
 I més generalment, hi ha nombrosos llocs on es poden emmagatzemar elements de configuració, i de vegades les mateixes propietats poden estar establertes a diferents valors en diferents llocs.
 
 Nextflow aplica un [ordre de precedència](https://nextflow.io/docs/latest/config.html) establert per resoldre qualsevol conflicte, però això pot ser complicat de determinar vosaltres mateixos.
@@ -1806,33 +1806,33 @@ nextflow config
 
     ```groovy
     params {
-      input = 'data/greetings.csv'
-      batch = 'batch'
-      character = 'turkey'
+       input = 'data/greetings.csv'
+       batch = 'batch'
+       character = 'turkey'
     }
 
     docker {
-      enabled = false
+       enabled = false
     }
 
     conda {
-      enabled = true
+       enabled = true
     }
 
     process {
-      memory = '1 GB'
-      withName:cowpy {
+       memory = '1 GB'
+       withName:cowpy {
           memory = '2 GB'
           cpus = 2
-      }
+       }
     }
 
     outputDir = 'custom-outdir-config/'
 
     workflow {
-      output {
+       output {
           mode = 'copy'
-      }
+       }
     }
     ```
 
@@ -1850,34 +1850,34 @@ nextflow config -profile my_laptop,test
 
     ```groovy
     params {
-      input = 'data/greetings.csv'
-      batch = 'test'
-      character = 'dragonandcow'
+       input = 'data/greetings.csv'
+       batch = 'test'
+       character = 'dragonandcow'
     }
 
     docker {
-      enabled = true
+       enabled = true
     }
 
     conda {
-      enabled = true
+       enabled = true
     }
 
     process {
-      memory = '1 GB'
-      withName:cowpy {
+       memory = '1 GB'
+       withName:cowpy {
           memory = '2 GB'
           cpus = 2
-      }
-      executor = 'local'
+       }
+       executor = 'local'
     }
 
     outputDir = 'custom-outdir-config/'
 
     workflow {
-      output {
+       output {
           mode = 'copy'
-      }
+       }
     }
     ```
 

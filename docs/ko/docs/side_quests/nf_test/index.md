@@ -262,9 +262,10 @@ nf-test init
 다음과 같은 출력이 생성됩니다:
 
 ```bash
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 Project configured. Configuration is stored in nf-test.config
 ```
@@ -308,7 +309,7 @@ nextflow_pipeline {
 
         when {
             params {
-                // define parameters here. Example:
+                // 여기에 매개변수를 정의합니다. 예:
                 // outdir = "tests/results"
             }
         }
@@ -367,9 +368,10 @@ nf-test test tests/main.nf.test
 ```console title="nf-test pipeline fail"
 > nf-test test tests/main.nf.test
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Workflow main.nf
@@ -399,7 +401,7 @@ FAILURE: Executed 1 tests in 4.679s (1 failed)
 ```groovy title="tests/main.nf.test"
 when {
     params {
-        // define parameters here. Example:
+        // 여기에 매개변수를 정의합니다. 예:
         // outdir = "tests/results"
     }
 }
@@ -440,7 +442,7 @@ ERROR ~ No such file or directory: /workspaces/training/side-quests/nf-test/.nf-
     ```groovy title="tests/main.nf.test" linenums="1" hl_lines="3 4"
     when {
         params {
-            // define parameters here. Example:
+            // 여기에 매개변수를 정의합니다. 예:
             // outdir = "tests/results"
         }
     }
@@ -455,9 +457,10 @@ nf-test test tests/main.nf.test
 ```console title="Pipeline passes"
 > nf-test test tests/main.nf.test
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Workflow main.nf
@@ -479,9 +482,10 @@ nf-test test tests/main.nf.test --verbose
 ```console title="Pipeline runs all processes"
 > nf-test test tests/main.nf.test
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Workflow main.nf
@@ -567,9 +571,10 @@ nf-test test tests/main.nf.test
 ```
 
 ```console title="Pipeline passes with assertions"
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Workflow main.nf
@@ -652,9 +657,10 @@ nf-test test tests/main.nf.test
 ```console title="Pipeline passes with file assertions"
 > nf-test test tests/main.nf.test
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Workflow main.nf
@@ -706,7 +712,7 @@ SUCCESS: Generated 2 test files.
 
 지금은 `main.sayhello.nf.test` 파일의 `sayhello` process에 집중합니다.
 
-파일을 열어 내용을 살펴보겠습니다.
+파일을 열어 내용을 살펴봅니다.
 
 ```groovy title="tests/main.sayhello.nf.test"
 nextflow_process {
@@ -719,12 +725,12 @@ nextflow_process {
 
         when {
             params {
-                // define parameters here. Example:
+                // 매개변수를 여기에 정의합니다. 예시:
                 // outdir = "tests/results"
             }
             process {
                 """
-                // define inputs of the process here. Example:
+                // process의 입력을 여기에 정의합니다. 예시:
                 // input[0] = file("test-file.txt")
                 """
             }
@@ -751,9 +757,10 @@ nf-test test tests/main.sayhello.nf.test
 ```console title="Process test fails"
 > nf-test test tests/main.sayhello.nf.test
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Process sayHello
@@ -786,7 +793,7 @@ FAILURE: Executed 1 tests in 4.884s (1 failed)
 
             when {
                 params {
-                    // define parameters here. Example:
+                    // 매개변수를 여기에 정의합니다. 예시:
                     // outdir = "tests/results"
                 }
                 process {
@@ -811,12 +818,12 @@ FAILURE: Executed 1 tests in 4.884s (1 failed)
 
             when {
                 params {
-                    // define parameters here. Example:
+                    // 매개변수를 여기에 정의합니다. 예시:
                     // outdir = "tests/results"
                 }
                 process {
                     """
-                    // define inputs of the process here. Example:
+                    // process의 입력을 여기에 정의합니다. 예시:
                     // input[0] = file("test-file.txt")
                     """
                 }
@@ -835,9 +842,10 @@ FAILURE: Executed 1 tests in 4.884s (1 failed)
 ```console title="nf-test pipeline pass"
 > nf-test test tests/main.sayhello.nf.test
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Process sayHello
@@ -863,7 +871,7 @@ SUCCESS: Executed 1 tests in 2.733s
 assert snapshot(process.out).match()
 ```
 
-이는 nf-test에게 `sayHello` process의 출력 스냅샷을 생성하도록 지시합니다. 스냅샷 파일의 내용을 살펴보겠습니다.
+이는 nf-test에게 `sayHello` process의 출력 스냅샷을 생성하도록 지시합니다. 스냅샷 파일의 내용을 살펴봅니다.
 
 ```console title="Snapshot file contents"
 code tests/main.sayhello.nf.test.snap
@@ -893,9 +901,10 @@ code tests/main.sayhello.nf.test.snap
 ```console title="nf-test process pass with snapshot"
 > nf-test test tests/main.sayhello.nf.test
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Process sayHello
@@ -925,7 +934,7 @@ SUCCESS: Executed 1 tests in 3.097s
 
             when {
                 params {
-                    // define parameters here
+                    // 매개변수를 여기에 정의합니다
                 }
                 process {
                     """
@@ -950,7 +959,7 @@ SUCCESS: Executed 1 tests in 3.097s
 
             when {
                 params {
-                    // define parameters here. Example:
+                    // 매개변수를 여기에 정의합니다. 예시:
                     // outdir = "tests/results"
                 }
                 process {
@@ -986,9 +995,10 @@ nf-test test tests/main.sayhello.nf.test
 ```console title="Process test fails"
 > nf-test test tests/main.sayhello.nf.test
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Process sayHello
@@ -1001,7 +1011,7 @@ SUCCESS: Executed 1 tests in 2.461s
 
 ### 2.4. `convertToUpper` process 테스트
 
-`tests/main.converttoupper.nf.test` 파일을 열어 내용을 살펴보겠습니다:
+`tests/main.converttoupper.nf.test` 파일을 열어 내용을 살펴봅니다:
 
 ```groovy title="tests/main.converttoupper.nf.test"
 nextflow_process {
@@ -1014,12 +1024,12 @@ nextflow_process {
 
         when {
             params {
-                // define parameters here. Example:
+                // 매개변수를 여기에 정의합니다. 예시:
                 // outdir = "tests/results"
             }
             process {
                 """
-                // define inputs of the process here. Example:
+                // process의 입력을 여기에 정의합니다. 예시:
                 // input[0] = file("test-file.txt")
                 """
             }
@@ -1052,7 +1062,7 @@ nextflow_process {
 
             when {
                 params {
-                    // define parameters here. Example:
+                    // 매개변수를 여기에 정의합니다. 예시:
                     // outdir = "tests/results"
                 }
                 process {
@@ -1077,12 +1087,12 @@ nextflow_process {
 
             when {
                 params {
-                    // define parameters here. Example:
+                    // 매개변수를 여기에 정의합니다. 예시:
                     // outdir = "tests/results"
                 }
                 process {
                     """
-                    // define inputs of the process here. Example:
+                    // process의 입력을 여기에 정의합니다. 예시:
                     // input[0] = file("test-file.txt")
                     """
                 }
@@ -1105,9 +1115,10 @@ nf-test test tests/main.converttoupper.nf.test
 ```console title="nf-test process convertToUpper pass"
 > nf-test test tests/main.converttoupper.nf.test
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Process convertToUpper
@@ -1132,9 +1143,10 @@ nf-test test tests/main.converttoupper.nf.test
 ```console title="nf-test process convertToUpper pass"
 > nf-test test tests/main.converttoupper.nf.test
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Process convertToUpper
@@ -1174,9 +1186,10 @@ nf-test test .
 ```console title="nf-test repo pass"
 > nf-test test .
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Process convertToUpper

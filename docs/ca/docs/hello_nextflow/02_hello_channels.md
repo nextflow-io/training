@@ -1069,7 +1069,7 @@ Feu la següent edició a la declaració del paràmetre:
 
     ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
-    * Parametres del pipeline
+    * Paràmetres del pipeline
     */
     params {
         input: Path = 'data/greetings.csv'
@@ -1080,7 +1080,7 @@ Feu la següent edició a la declaració del paràmetre:
 
     ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
-     * Parametres del pipeline
+     * Paràmetres del pipeline
      */
     params {
         input: String = 'Hola mundo!'
@@ -1108,7 +1108,7 @@ Al bloc workflow, feu el següent canvi de codi:
                              .view { greeting -> "Before flatten: $greeting" }
                              // .flatten()
                              // .view { greeting -> "After flatten: $greeting" }
-        // emet una salutacio
+        // emet una salutació
         sayHello(greeting_ch)
 
         publish:
@@ -1129,7 +1129,7 @@ Al bloc workflow, feu el següent canvi de codi:
                              .view { greeting -> "Before flatten: $greeting" }
                              .flatten()
                              .view { greeting -> "After flatten: $greeting" }
-        // emet una salutacio
+        // emet una salutació
         sayHello(greeting_ch)
 
         publish:
@@ -1155,7 +1155,7 @@ nextflow run hello-channels.nf
 
     Launching `hello-channels.nf` [peaceful_poisson] revision: a286c08ad5
 
-    [-        ] sayHello [  0%] 0 of 1
+    [-        ] sayHello | 0 of 1
     Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv
     ERROR ~ Error executing process > 'sayHello (1)'
 
@@ -1213,7 +1213,7 @@ Al bloc workflow, feu el següent canvi de codi per substituir `flatten()` amb `
                              .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
                              .view { csv -> "After splitCsv: $csv" }
-        // emet una salutacio
+        // emet una salutació
         sayHello(greeting_ch)
 
         publish:
@@ -1232,7 +1232,7 @@ Al bloc workflow, feu el següent canvi de codi per substituir `flatten()` amb `
                              .view { greeting -> "Before flatten: $greeting" }
                              // .flatten()
                              // .view { greeting -> "After flatten: $greeting" }
-        // emet una salutacio
+        // emet una salutació
         sayHello(greeting_ch)
 
         publish:
@@ -1334,7 +1334,7 @@ Al bloc workflow, feu el següent canvi de codi:
                              .view { csv -> "After splitCsv: $csv" }
                              .map { item -> item[0] }
                              .view { csv -> "After map: $csv" }
-        // emet una salutacio
+        // emet una salutació
         sayHello(greeting_ch)
 
         publish:
@@ -1353,7 +1353,7 @@ Al bloc workflow, feu el següent canvi de codi:
                              .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
                              .view { csv -> "After splitCsv: $csv" }
-        // emet una salutacio
+        // emet una salutació
         sayHello(greeting_ch)
 
         publish:
@@ -1402,9 +1402,9 @@ Aquesta vegada hauria d'executar-se sense error.
 
 Mirant la sortida de les instruccions `view()`, veieu el següent:
 
-- Una única instrucció `Abans de splitCsv:`: en aquell moment el canal conté un element, el camí del fitxer original.
-- Tres instruccions separades `Després de splitCsv:`: una per a cada salutació, però cadascuna està continguda dins d'un array que correspon a aquella línia del fitxer.
-- Tres instruccions separades `Després de map:`: una per a cada salutació, que ara són elements individuals al canal.
+- Una única instrucció `Before splitCsv:`: en aquell moment el canal conté un element, el camí del fitxer original.
+- Tres instruccions separades `After splitCsv:`: una per a cada salutació, però cadascuna està continguda dins d'un array que correspon a aquella línia del fitxer.
+- Tres instruccions separades `After map:`: una per a cada salutació, que ara són elements individuals al canal.
 
 _Tingueu en compte que les línies poden aparèixer en un ordre diferent a la vostra sortida._
 

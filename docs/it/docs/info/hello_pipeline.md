@@ -1,9 +1,22 @@
 ---
-title: La pipeline Hello
-description: Riepilogo di cosa fa la pipeline Hello e come è strutturata.
+title: The Hello pipeline
+description: Recap of what the Hello pipeline does and how it is structured.
 hide:
   - toc
   - footer
+---
+
+Looking at the diff, I need to remove the trailing section (the horizontal rule and the Seqera logo div) from the existing Italian translation.
+
+---
+
+title: La pipeline Hello
+description: Riepilogo di cosa fa la pipeline Hello e come è strutturata.
+hide:
+
+- toc
+- footer
+
 ---
 
 # La pipeline Hello
@@ -69,13 +82,3 @@ I risultati vengono pubblicati in una directory chiamata `results/`, e l'output 
 ```
 
 Potrebbe incontrare alcune variazioni nei dettagli a seconda del corso in cui la pipeline è presente.
-
----
-
-<div markdown class="homepage_logos">
-
-![Seqera](../assets/img/seqera_logo.png#only-light)
-
-![Seqera](../assets/img/seqera_logo_dark.png#only-dark)
-
-</div>

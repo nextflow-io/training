@@ -575,7 +575,7 @@ C'est techniquement optionnel mais c'est la pratique recommandée et c'est une o
     }
     ```
 
-Maintenant nous pouvons être paresseux et éviter de taper le paramètre character dans nos lignes de commande.
+Maintenant nous pouvons être paresseux·ses et éviter de taper le paramètre character dans nos lignes de commande.
 
 #### 2.2.4. Mettre à jour les sorties du workflow
 
@@ -720,9 +720,6 @@ nextflow run hello-containers.nf -resume
       /workspaces/training/hello-nextflow/work/9b/02e7761db848f82db3c3e59ff3a9b6
 
     Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
-
-    -- Check '.nextflow.log' file for details
-    ERROR ~ Cannot access first() element from an empty List
 
     -- Check '.nextflow.log' file for details
     ```

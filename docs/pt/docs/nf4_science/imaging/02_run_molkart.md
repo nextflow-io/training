@@ -27,7 +27,7 @@ Principais características dos pipelines nf-core:
 
 !!! tip "Quer aprender mais sobre nf-core?"
 
-    Para uma introdução aprofundada ao desenvolvimento de pipelines nf-core, confira o curso de treinamento [Build with nf-core](../../hello_nf-core/index.md).
+    Para uma introdução aprofundada ao desenvolvimento de pipelines nf-core, confira o curso de treinamento [Build with nf-core](../../nfcore_build/index.md).
     Ele abrange como criar e personalizar pipelines nf-core do zero.
 
 ### 1.2. O pipeline molkart
@@ -333,15 +333,15 @@ Você deve ver vários subdiretórios:
 
 ```console title="results/"
 results/
-├── anndata/
-├── clahe/
-├── mindagap/
-├── molkartqc/
-├── multiqc/
-├── pipeline_info/
-├── segmentation/
-├── spot2cell/
-└── stack/
+├── anndata
+├── clahe
+├── mindagap
+├── molkartqc
+├── multiqc
+├── pipeline_info
+├── segmentation
+├── spot2cell
+└── stack
 ```
 
 Cada subdiretório contém saídas de um estágio específico do pipeline:
@@ -404,17 +404,17 @@ Verifique o diretório pipeline_info:
 ls results/pipeline_info/
 ```
 
-Arquivos principais:
+Arquivos principais (cada nome termina com um timestamp, por exemplo, `execution_report_2026-01-15_10-30-00.html`):
 
-- **execution_report.html**: Visualização de linha do tempo e uso de recursos
-- **execution_timeline.html**: Gráfico de Gantt da execução de processos
-- **execution_trace.txt**: Métricas detalhadas de execução de tarefas
-- **pipeline_dag.html**: Grafo acíclico dirigido mostrando a estrutura do fluxo de trabalho
+- **execution_report\_\*.html**: Visualização de linha do tempo e uso de recursos
+- **execution_timeline\_\*.html**: Gráfico de Gantt da execução de processos
+- **execution_trace\_\*.txt**: Métricas detalhadas de execução de tarefas
+- **pipeline_dag\_\*.html**: Grafo acíclico dirigido mostrando a estrutura do fluxo de trabalho
 
 Abra o relatório de execução para ver o uso de recursos:
 
 ```bash
-code results/pipeline_info/execution_report.html
+code results/pipeline_info/execution_report_*.html
 ```
 
 Isso mostra:
@@ -456,10 +456,10 @@ Isso mostra os primeiros 5 diretórios de tarefas.
 
 ### 4.2. Inspecionar um diretório de tarefa
 
-Escolha um dos hashes de processo de segmentação da saída do console (ex.: `[3m/4n5o6p]`) e olhe dentro:
+Escolha um dos hashes de processo de segmentação da saída do console (ex.: `[3a/4b5c6d]`) e olhe dentro:
 
 ```bash
-ls -la work/3m/4n5o6p*/
+ls -la work/3a/4b5c6d*/
 ```
 
 Você verá:

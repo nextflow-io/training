@@ -41,7 +41,6 @@ Zalecamy użycie opcji samoinstalacji dla Nextflow'a i opcji PyPI dla narzędzi 
 
 !!! warning "Kompatybilność wersji"
 
-    <!-- Any update to this content needs to be copied to the home page -->
     **Od stycznia 2026 roku wszystkie nasze kursy szkoleniowe Nextflow wymagają wersji Nextflow'a 25.10.2 lub nowszej, z włączoną ścisłą składnią v2, chyba że zaznaczono inaczej.**
 
     Więcej informacji o wymaganiach wersji i ścisłej składni v2 znajdziesz w przewodniku [Wersje Nextflow'a](../info/nxf_versions.md).

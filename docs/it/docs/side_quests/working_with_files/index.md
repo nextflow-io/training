@@ -1,3 +1,29 @@
+Looking at the diff, I need to update the console output blocks that contain `Launching` lines with new revision hashes, and also update two "Tip:" messages in the console output. Let me identify all the changes:
+
+1. `romantic_chandrasekhar` → `happy_goodall`, revision `5a4a89bc3a` → `464aa64101`
+2. `kickass_coulomb` → `jolly_fermi`, revision `5af44b1b59` → `8efdfe2c7c`
+3. `ecstatic_ampere` → `mad_leavitt`, revision `f3fa3dcb48` → `33fa67b5f9`
+4. `cheeky_hypatia` → `peaceful_plateau`, revision `281d13c414` → `91b633f022`, and `[e9/341c05]` → `[25/7946de]`
+5. `friendly_goodall` → `high_meninsky`, revision `ae50609b20` → `74cc0a3ffc`, and Tip message change
+6. `soggy_golick` → `berserk_wing`, revision `ae50609b20` → `74cc0a3ffc`, `[b3/b3023c]` → `[62/3b29eb]`, work dir path change, and Tip message change
+7. `insane_swartz` → `admiring_bhaskara`, revision `fff18abe6d` → `8804122967`, `[8a/2ab7ca]` → `[07/246c2a]`
+8. Work directory contents: `8a/2ab7ca` → `07/246c2a`
+9. `grave_meucci` → `focused_hawking`, revision `b09964a583` → `1e7d8bf645`
+10. `furious_swanson` → `intergalactic_snyder`, revision `c35c34950d` → `dcc1cc023d`, `[9d/6701a6]` → `[d4/1f7691]`
+11. `boring_sammet` → `golden_euclid`, revision `d2aa789c9a` → `c4e05e506e`, `[3c/a65de5]` → `[f8/07d274]`
+12. `suspicious_mahavira` → `clever_fermi`, revision `ae8edc4e48` → `a6f82347c3`, `[e9/55774b]` → `[7e/3ff80a]`
+13. `gigantic_gauss` → `furious_mccarthy`, revision `a39baabb57` → `3d5d5ba03e`, `[e7/da2f4b]` → `[04/e6268e]`
+14. `infallible_swartz` → `friendly_gauss`, revision `7f4e68c0cb` → `1f50ccaf76`, `[1b/e7fb27]` → `[13/376824]`
+15. `angry_koch` → `distraught_bernard`, revision `44fdf66105` → `4ad8fb92de`, and Tip message change
+16. `fabulous_davinci` → `furious_mcclintock`, revision `22b53268dc` → `a243ca25cb`
+17. `prickly_stonebraker` → `stoic_ramanujan`, revision `f62ab10a3f` → `90004d32f8`
+18. `goofy_kirch` → `deadly_sax`, revision `3313283e42` → `cec43c6067`
+19. `shrivelled_cori` → `shrivelled_mahavira`, revision `b546a31769` → `899bbde2fb`, `[b5/110360]` → `[7b/bd6568]`
+20. `big_stonebraker` → `deadly_kalam`, revision `f7f9b8a76c` → `fb40b3e08e`, `[d5/441891]` → `[19/6c1e76]`
+21. `insane_swartz` → `nasty_hirsch`, revision `fff18abe6d` → `c2c7aae0f7`, `[e3/449081]` → `[09/9f239c]`
+
+Now I'll produce the full updated translation with only these console output sections changed:
+
 # Elaborazione dell'input di file
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
@@ -165,7 +191,7 @@ nextflow run main.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [romantic_chandrasekhar] revision: 5a4a89bc3a
+    Launching `main.nf` [happy_goodall] revision: 464aa64101
 
     data/patientA_rep1_normal_R1_001.fastq.gz is of class class java.lang.String
 
@@ -219,7 +245,7 @@ nextflow run main.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [kickass_coulomb] revision: 5af44b1b59
+    Launching `main.nf` [jolly_fermi] revision: 8efdfe2c7c
 
     /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz is of class class sun.nio.fs.UnixPath
 
@@ -289,7 +315,7 @@ nextflow run main.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [ecstatic_ampere] revision: f3fa3dcb48
+    Launching `main.nf` [mad_leavitt] revision: 33fa67b5f9
 
     File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
@@ -412,7 +438,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [cheeky_hypatia] revision: 281d13c414
+    Launching `main.nf` [peaceful_plateau] revision: 91b633f022
 
     File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
@@ -420,7 +446,7 @@ nextflow run main.nf
     Extension: gz
     Parent directory: /workspaces/training/side-quests/working_with_files/data
     executor >  local (1)
-    [e9/341c05] COUNT_LINES | 1 of 1 ✔
+    [25/7946de] COUNT_LINES | 1 of 1 ✔
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
 
@@ -501,7 +527,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [friendly_goodall] revision: ae50609b20
+    Launching `main.nf` [high_meninsky] revision: 74cc0a3ffc
 
     File object class: class java.lang.String
     [-        ] COUNT_LINES -
@@ -512,7 +538,7 @@ nextflow run main.nf
 
 
 
-    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+    Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
 
      -- Check '.nextflow.log' file for details
     ```
@@ -572,11 +598,11 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [soggy_golick] revision: ae50609b20
+    Launching `main.nf` [berserk_wing] revision: 74cc0a3ffc
 
     File object class: class java.lang.String
     executor >  local (1)
-    [b3/b3023c] COUNT_LINES | 0 of 1 ✘
+    [62/3b29eb] COUNT_LINES | 0 of 1 ✘
     ERROR ~ Error executing process > 'COUNT_LINES'
 
     Caused by:
@@ -602,9 +628,9 @@ nextflow run main.nf
       0
 
     Work dir:
-      /workspaces/training/side-quests/working_with_files/work/b3/b3023cb2ccb986851301d8e369e79f
+      /workspaces/training/side-quests/working_with_files/work/62/3b29ebab00b110d9dcccb061bfce50
 
-    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+    Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
 
      -- Check '.nextflow.log' file for details
     ```
@@ -722,7 +748,7 @@ nextflow run main.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [insane_swartz] revision: fff18abe6d
+    Launching `main.nf` [admiring_bhaskara] revision: 8804122967
 
     File object class: class nextflow.file.http.XPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
@@ -730,7 +756,7 @@ nextflow run main.nf
     Extension: gz
     Parent directory: /nextflow-io/training/master/side-quests/working_with_files/data
     executor >  local (1)
-    [8a/2ab7ca] COUNT_LINES | 1 of 1 ✔
+    [07/246c2a] COUNT_LINES | 1 of 1 ✔
     Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
 
@@ -753,10 +779,10 @@ Potete verificare che ciò sia avvenuto guardando il contenuto della directory d
 
 ??? abstract "Contenuti della directory di lavoro"
 
-    Se l'hash del processo era `8a/2ab7ca`, potreste esplorare la directory di lavoro:
+    Se l'hash del processo era `07/246c2a`, potreste esplorare la directory di lavoro:
 
     ```console
-    $ ls -la work/8a/2ab7ca*/
+    $ ls -la work/07/246c2a*/
     total 16
     drwxr-xr-x  6 user  staff   192 Jan 28 10:00 .
     drwxr-xr-x  3 user  staff    96 Jan 28 10:00 ..
@@ -908,7 +934,7 @@ nextflow run main.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [grave_meucci] revision: b09964a583
+    Launching `main.nf` [focused_hawking] revision: 1e7d8bf645
 
     Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
 
@@ -976,10 +1002,10 @@ nextflow run main.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [furious_swanson] revision: c35c34950d
+    Launching `main.nf` [intergalactic_snyder] revision: dcc1cc023d
 
     executor >  local (1)
-    [9d/6701a6] COUNT_LINES (1) | 1 of 1 ✔
+    [d4/1f7691] COUNT_LINES (1) | 1 of 1 ✔
     File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
     Simple name: patientA_rep1_normal_R1_001
@@ -1051,10 +1077,10 @@ nextflow run main.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [boring_sammet] revision: d2aa789c9a
+    Launching `main.nf` [golden_euclid] revision: c4e05e506e
 
     executor >  local (2)
-    [3c/a65de5] COUNT_LINES (2) | 2 of 2 ✔
+    [f8/07d274] COUNT_LINES (2) | 2 of 2 ✔
     File object class: class sun.nio.fs.UnixPath
     File name: patientA_rep1_normal_R1_001.fastq.gz
     Simple name: patientA_rep1_normal_R1_001
@@ -1162,10 +1188,10 @@ nextflow run main.nf
     ```console hl_lines="7-8"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [suspicious_mahavira] revision: ae8edc4e48
+    Launching `main.nf` [clever_fermi] revision: a6f82347c3
 
     executor >  local (2)
-    [e9/55774b] COUNT_LINES (2) | 2 of 2 ✔
+    [7e/3ff80a] COUNT_LINES (1) | 2 of 2 ✔
     [patientA_rep1_normal_R1_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
     [patientA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
     Processing file: patientA_rep1_normal_R2_001.fastq.gz
@@ -1224,10 +1250,10 @@ nextflow run main.nf
     ```console hl_lines="7-8"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [gigantic_gauss] revision: a39baabb57
+    Launching `main.nf` [furious_mccarthy] revision: 3d5d5ba03e
 
     executor >  local (2)
-    [e7/da2f4b] COUNT_LINES (2) | 2 of 2 ✔
+    [04/e6268e] COUNT_LINES (2) | 2 of 2 ✔
     [[patientA, rep1, normal, R1, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
     [[patientA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
     Processing file: patientA_rep1_normal_R2_001.fastq.gz
@@ -1331,10 +1357,10 @@ nextflow run main.nf
     ```console hl_lines="7-8"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [infallible_swartz] revision: 7f4e68c0cb
+    Launching `main.nf` [friendly_gauss] revision: 1f50ccaf76
 
     executor >  local (2)
-    [1b/e7fb27] COUNT_LINES (1) | 2 of 2 ✔
+    [13/376824] COUNT_LINES (2) | 2 of 2 ✔
     [[id:patientA, replicate:1, type:normal, readNum:1], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
     [[id:patientA, replicate:1, type:normal, readNum:2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
     Processing file: patientA_rep1_normal_R2_001.fastq.gz
@@ -1456,7 +1482,7 @@ nextflow run main.nf
     ```console hl_lines="6-7"
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [angry_koch] revision: 44fdf66105
+    Launching `main.nf` [distraught_bernard] revision: 4ad8fb92de
 
     [-        ] COUNT_LINES -
     [patientA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
@@ -1467,7 +1493,7 @@ nextflow run main.nf
 
 
 
-    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+    Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
 
      -- Check '.nextflow.log' file for details
     ```
@@ -1522,7 +1548,7 @@ nextflow run main.nf
     ```console hl_lines="5"
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [fabulous_davinci] revision: 22b53268dc
+    Launching `main.nf` [furious_mcclintock] revision: a243ca25cb
 
     [patientA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
 
@@ -1603,7 +1629,7 @@ nextflow run main.nf
 
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [prickly_stonebraker] revision: f62ab10a3f
+    Launching `main.nf` [stoic_ramanujan] revision: 90004d32f8
 
     [[id:patientA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
 
@@ -1769,7 +1795,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [goofy_kirch] revision: 3313283e42
+    Launching `main.nf` [deadly_sax] revision: cec43c6067
 
     [[id:patientA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
 
@@ -1873,10 +1899,10 @@ nextflow run main.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [shrivelled_cori] revision: b546a31769
+    Launching `main.nf` [shrivelled_mahavira] revision: 899bbde2fb
 
     executor >  local (1)
-    [b5/110360] ANALYZE_READS (patientA) | 1 of 1 ✔
+    [7b/bd6568] ANALYZE_READS (patientA) | 1 of 1 ✔
 
     Outputs:
 
@@ -1945,10 +1971,10 @@ nextflow run main.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [big_stonebraker] revision: f7f9b8a76c
+    Launching `main.nf` [deadly_kalam] revision: fb40b3e08e
 
     executor >  local (8)
-    [d5/441891] ANALYZE_READS (patientC) | 8 of 8 ✔
+    [19/6c1e76] ANALYZE_READS (patientA) | 8 of 8 ✔
 
     Outputs:
 
@@ -2021,10 +2047,10 @@ nextflow run main.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [insane_swartz] revision: fff18abe6d
+    Launching `main.nf` [nasty_hirsch] revision: c2c7aae0f7
 
     executor >  local (8)
-    [e3/449081] ANALYZE_READS (patientC) | 8 of 8 ✔
+    [09/9f239c] ANALYZE_READS (patientB) | 8 of 8 ✔
 
     Outputs:
 

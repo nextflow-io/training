@@ -28,31 +28,38 @@ additional_information:
 
 **साइड क्वेस्ट स्वतंत्र प्रशिक्षण मिनी-कोर्स हैं जो विशिष्ट Nextflow विषयों में गहराई से जाते हैं।**
 
-प्रत्येक साइड क्वेस्ट को तुम्हारी रुचि और ज़रूरत के अनुसार, किसी भी क्रम में स्वतंत्र रूप से लिया जा सकता है।
+प्रत्येक साइड क्वेस्ट को स्वतंत्र रूप से, किसी भी क्रम में किया जा सकता है, ताकि तुम उन विशिष्ट क्षेत्रों में अपने कौशल को बढ़ा सको जो तुम्हारे अपने प्रोजेक्ट के लिए सबसे ज़रूरी हैं।
+मिलकर, ये उन कौशलों को कवर करते हैं जो तुम्हें सरल पाइपलाइन से प्रोडक्शन-रेडी वर्कफ़्लो तक जाने के लिए चाहिए।
 
 <!-- additional_information -->
 
-## कोर्स का अवलोकन
+### विषय के अनुसार ब्राउज़ करें
 
-यदि तुम पहली बार साइड क्वेस्ट देख रहे हो, तो प्रशिक्षण वातावरण और सामग्री के अवलोकन के लिए [Orientation](./orientation.md) पेज से शुरू करो।
+यदि यह तुम्हारा हमारे किसी प्रशिक्षण में पहली बार है, तो प्रशिक्षण वातावरण और सामग्री के अवलोकन के लिए [शुरू करना](./orientation.md) पेज से शुरू करो।
+अन्यथा, सीधे उस क्वेस्ट में जाने के लिए स्वतंत्र महसूस करो जो तुम्हें बुला रही है।
 
-### साइड क्वेस्ट
-
-| साइड क्वेस्ट                                                            | सारांश                                                              | अनुमानित समय |
-| ----------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------ |
-| [Development Environment](./dev_environment/index.md)                   | एक उत्पादक लोकल Nextflow डेवलपमेंट वातावरण सेट अप और कॉन्फ़िगर करें | 45 मिनट      |
-| [Essential Scripting Patterns](./essential_scripting_patterns/index.md) | सामान्य वर्कफ़्लो चुनौतियों के लिए उन्नत स्क्रिप्टिंग तकनीकें       | 90 मिनट      |
-| [File Input Processing](./working_with_files/index.md)                  | फ़ाइल हैंडलिंग, पाथ ऑपरेशन और आउटपुट व्यवस्थित करना                 | 45 मिनट      |
-| [Metadata and Meta Maps](./metadata/index.md)                           | नमूना जानकारी ट्रैक और प्रोपेगेट करने के लिए मेटाडेटा मैप का उपयोग  | 45 मिनट      |
-| [Splitting and Grouping](./splitting_and_grouping/index.md)             | डेटा चैनल को विभाजित और पुनः समूहित करने की तकनीकें                 | 45 मिनट      |
-| [Testing with nf-test](./nf_test/index.md)                              | Nextflow वर्कफ़्लो के लिए परीक्षण लिखना और चलाना                    | 1 घंटा       |
-| [Troubleshooting Workflows](./debugging/index.md)                       | सामान्य वर्कफ़्लो त्रुटियों की पहचान और सुधार                       | 1 घंटा       |
-| [Workflows of Workflows](./workflows_of_workflows/index.md)             | पुन: उपयोग योग्य नामित वर्कफ़्लो मॉड्यूल से जटिल पाइपलाइन बनाना     | 30 मिनट      |
-| [Plugin Development](./plugin_development/index.md)                     | Nextflow plugins का उपयोग और निर्माण                                | 3 घंटे       |
+<table>
+<thead>
+<tr><th>साइड क्वेस्ट</th><th>सारांश</th><th>अनुमानित समय</th></tr>
+</thead>
+<tbody>
+<tr><th colspan="3">डेवलपर टूल्स &amp; ट्रिक्स</th></tr>
+<tr><td><a href="./dev_environment/">Development Environment</a></td><td>एक उत्पादक लोकल Nextflow डेवलपमेंट वातावरण सेट अप और कॉन्फ़िगर करें</td><td>45 मिनट</td></tr>
+<tr><td><a href="./debugging/">Troubleshooting Workflows</a></td><td>सामान्य वर्कफ़्लो त्रुटियों की पहचान और सुधार</td><td>1 घंटा</td></tr>
+<tr><td><a href="./essential_scripting_patterns/">Essential Scripting Patterns</a></td><td>सामान्य वर्कफ़्लो चुनौतियों के लिए उन्नत स्क्रिप्टिंग तकनीकें</td><td>90 मिनट</td></tr>
+<tr><th colspan="3">डेटाफ़्लो में गहरी डुबकी</th></tr>
+<tr><td><a href="./working_with_files/">File Input Processing</a></td><td>फ़ाइल हैंडलिंग, पाथ ऑपरेशन और आउटपुट व्यवस्थित करना</td><td>45 मिनट</td></tr>
+<tr><td><a href="./metadata/">Metadata and Meta Maps</a></td><td>नमूना जानकारी ट्रैक और प्रोपेगेट करने के लिए मेटाडेटा मैप का उपयोग</td><td>45 मिनट</td></tr>
+<tr><td><a href="./splitting_and_grouping/">Splitting and Grouping</a></td><td>डेटा चैनल को विभाजित और पुनः समूहित करने की तकनीकें</td><td>45 मिनट</td></tr>
+<tr><th colspan="3">मॉड्यूलर आर्किटेक्चर व्यवहार में</th></tr>
+<tr><td><a href="./workflows_of_workflows/">Workflows of Workflows</a></td><td>पुन: उपयोग योग्य नामित वर्कफ़्लो मॉड्यूल से जटिल पाइपलाइन बनाना</td><td>30 मिनट</td></tr>
+<tr><th colspan="3">Nextflow एक्सटेंडेड यूनिवर्स</th></tr>
+<tr><td><a href="./nf_test/">Testing with nf-test</a></td><td>Nextflow वर्कफ़्लो के लिए परीक्षण लिखना और चलाना</td><td>1 घंटा</td></tr>
+<tr><td><a href="./plugin_development/">Plugin Development</a></td><td>Nextflow plugins का उपयोग और निर्माण</td><td>3 घंटे</td></tr>
+</tbody>
+</table>
 
 [शुरू करें :material-arrow-right:](orientation.md){ .md-button .md-button--primary }
 
 <!-- Clearfix for float -->
 <div style="content: ''; clear: both; display: table;"></div>
-
-हमें बताओ कि तुम यहाँ किन अन्य विषयों को शामिल देखना चाहते हो, कम्युनिटी फोरम के [Training section](https://community.seqera.io/c/training/) में पोस्ट करके।

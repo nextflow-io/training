@@ -1189,14 +1189,13 @@ nextflow run main.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W  ~  version 26.04.4
-    Launching `main.nf` [festering_payne] - revision: 3690c7806d
-    [31/870279] Submitted process > FASTP (1)
-    [52/c9fb45] Submitted process > GENERATE_REPORT (1)
-    [a2/00d26a] Submitted process > GENERATE_REPORT (3)
-    [61/c169b0] Submitted process > FASTP (2)
-    [a1/11c8b1] Submitted process > GENERATE_REPORT (2)
-    [d8/40aa79] Submitted process > FASTP (3)
+     N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [festering_payne] revision: 3690c7806d
+
+    executor >  local (6)
+    [d5/67a3aa] FASTP (3)           | 3 of 3 ✔
+    [11/982b68] GENERATE_REPORT (1) | 3 of 3 ✔
 
     Outputs:
 
@@ -1710,12 +1709,14 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [condescending_venter] revision: 02a7ca6f13
+    Launching `main.nf` [condescending_venter] revision: bba0842886
 
     executor >  local (8)
     [8b/40c882] FASTP (1)           | 2 of 2, retries: 2 ✔
     [59/988a68] TRIMGALORE (1)      | 1 of 1 ✔
     [01/2df2d4] GENERATE_REPORT (3) | 3 of 3 ✔
+    [0a/8bb1dd] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+    [af/76bc6f] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
 
     Outputs:
 
@@ -1725,9 +1726,6 @@ nextflow run main.nf
         - reports/sample_001_report.txt
         - reports/sample_002_report.txt
         - reports/sample_003_report.txt
-
-    [0a/8bb1dd] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
-    [af/76bc6f] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
     ```
 
 Ici, nous avons utilisé de petites mais puissantes expressions conditionnelles à l'intérieur de l'opérateur `.branch{}` pour router les échantillons en fonction de leurs métadonnées. Les échantillons humains à haute couverture passent par `FASTP`, tandis que tous les autres échantillons passent par `TRIMGALORE`.
@@ -1788,18 +1786,16 @@ nextflow run main.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W  ~  version 26.04.4
-    Launching `main.nf` [disturbed_jepsen] - revision: 7097b98dd8
-    [5b/a38d75] Submitted process > FASTP (2)
-    [b3/cc56c7] Submitted process > FASTP (1)
-    [01/feef56] Submitted process > GENERATE_REPORT (3)
-    [9b/e944ae] Submitted process > GENERATE_REPORT (1)
-    [74/04af51] Submitted process > GENERATE_REPORT (2)
-    [24/939e1f] Submitted process > TRIMGALORE (1)
+     N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [disturbed_jepsen] revision: 7097b98dd8
+
+    executor >  local (6)
+    [4f/af20c4] FASTP (2)           | 2 of 2, retries: 2 ✔
+    [99/320017] TRIMGALORE (1)      | 1 of 1 ✔
+    [3a/7c9caa] GENERATE_REPORT (1) | 3 of 3 ✔
     [b3/cc56c7] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
-    [b2/90425f] Re-submitted process > FASTP (1)
     [5b/a38d75] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
-    [24/a79e73] Re-submitted process > FASTP (2)
 
     Outputs:
 
@@ -1938,18 +1934,16 @@ nextflow run main.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W  ~  version 26.04.4
-    Launching `main.nf` [serene_jennings] - revision: d7cb8ec312
-    [6f/754af4] Submitted process > GENERATE_REPORT (2)
-    [fe/9b03c7] Submitted process > GENERATE_REPORT (1)
-    [5c/a9a73c] Submitted process > FASTP (2)
-    [f8/e8ad5e] Submitted process > GENERATE_REPORT (3)
-    [55/0e4155] Submitted process > TRIMGALORE (1)
-    [cb/e00b43] Submitted process > FASTP (1)
+     N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [serene_jennings] revision: d7cb8ec312
+
+    executor >  local (6)
+    [69/cab072] FASTP (2)           | 2 of 2, retries: 2 ✔
+    [09/3b946a] TRIMGALORE (1)      | 1 of 1 ✔
+    [3e/bfa8c5] GENERATE_REPORT (2) | 3 of 3 ✔
     [cb/e00b43] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
     [5c/a9a73c] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
-    [49/fb02c9] Re-submitted process > FASTP (1)
-    [e3/d3cf5f] Re-submitted process > FASTP (2)
 
     Outputs:
 
@@ -2035,9 +2029,7 @@ Parfait ! Maintenant tous les échantillons ont un champ `run` avec soit leur id
 
 Supprimez maintenant l'opérateur `.view()` maintenant que nous avons confirmé que cela fonctionne.
 
-!!! tip "Astuce"
-
-    **Combiner Navigation Sûre et Elvis**
+!!! tip "Combiner Navigation Sûre et Elvis"
 
     Le modèle `value?.method() ?: 'default'` est courant dans les workflows de production :
 
@@ -2113,7 +2105,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [golden_lamarck] revision: e1d7259d32
+    Launching `main.nf` [golden_lamarck] revision: 0d323c9cad
 
     WARN: Access to undefined parameter `input` -- Initialise it to a default value eg. `params.input = some_value`
     Input CSV file path not provided. Please specify --input <file.csv>
@@ -2132,7 +2124,7 @@ nextflow run main.nf --input ./data/nonexistent.csv
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [admiring_avogadro] revision: e1d7259d32
+    Launching `main.nf` [admiring_avogadro] revision: 0d323c9cad
 
     Input CSV file not found: ./data/nonexistent.csv
     ```
@@ -2146,18 +2138,16 @@ nextflow run main.nf --input ./data/samples.csv
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W  ~  version 26.04.4
-    Launching `main.nf` [sad_hopper] - revision: e1d7259d32
-    [1d/48ab44] Submitted process > TRIMGALORE (1)
-    [94/f6f423] Submitted process > FASTP (1)
-    [ca/6bbfae] Submitted process > GENERATE_REPORT (1)
-    [25/18c80b] Submitted process > GENERATE_REPORT (3)
-    [11/caf770] Submitted process > FASTP (2)
-    [a6/16ae06] Submitted process > GENERATE_REPORT (2)
+     N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [sad_hopper] revision: 0d323c9cad
+
+    executor >  local (6)
+    [67/e870d6] FASTP (2)           | 2 of 2, retries: 2 ✔
+    [e9/685c2d] TRIMGALORE (1)      | 1 of 1 ✔
+    [fa/8ff90b] GENERATE_REPORT (3) | 3 of 3 ✔
     [11/caf770] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
     [94/f6f423] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
-    [a3/cb724c] Re-submitted process > FASTP (2)
-    [d6/8baf95] Re-submitted process > FASTP (1)
 
     Outputs:
 
@@ -2207,7 +2197,7 @@ nextflow run main.nf --input ./data/samples.csv
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [jolly_colden] revision: 608f36a239
+    Launching `main.nf` [jolly_colden] revision: 08552a816f
 
     executor >  local (8)
     [3b/e1586c] FASTP (2)           | 2 of 2, retries: 2 ✔
@@ -2299,7 +2289,7 @@ nextflow run main.nf --input ./data/samples.csv -ansi-log false
 
     ```console
     N E X T F L O W  ~  version 26.04.4
-    Launching `main.nf` [sleepy_sax] - revision: 7f4b2a0423
+    Launching `main.nf` [sleepy_sax] - revision: a5468824bd
     WARN: Low sequencing depth for sample_002: 25000000
     [1d/85ba4a] Submitted process > TRIMGALORE (1)
     [4c/7c429a] Submitted process > FASTP (2)
@@ -2391,26 +2381,23 @@ Rendons-le plus utile en ajoutant une logique conditionnelle :
 Nous obtenons maintenant un résumé encore plus informatif, incluant un message de succès/échec et le répertoire de sortie si spécifié :
 
 ```bash
-nextflow run main.nf
+nextflow run main.nf --input ./data/samples.csv
 ```
 
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W  ~  version 26.04.4
-    Launching `main.nf` [hopeful_waddington] - revision: 442ec086c8
+     N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [hopeful_waddington] revision: d5a2a830a7
+
+    executor >  local (6)
+    [ba/58eddd] FASTP (1)           | 2 of 2, retries: 2 ✔
+    [03/3ccc01] TRIMGALORE (1)      | 1 of 1 ✔
+    [a6/2bcd58] GENERATE_REPORT (3) | 3 of 3 ✔
     WARN: Low sequencing depth for sample_002: 25000000
-    [e5/a71364] Submitted process > FASTP (1)
-    [81/c69cdc] Submitted process > FASTP (2)
-    [d1/368dff] Submitted process > GENERATE_REPORT (3)
-    [f0/19394e] Submitted process > TRIMGALORE (1)
-    [e3/679e45] Submitted process > GENERATE_REPORT (2)
-    [48/406c85] Submitted process > GENERATE_REPORT (1)
     [81/c69cdc] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
     [e5/a71364] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
-    [f8/b10ac0] Re-submitted process > FASTP (2)
-    [9e/49f6e2] Re-submitted process > FASTP (1)
-
     Pipeline execution summary:
     ==========================
     Completed at: 2026-06-23T15:50:06.811854363Z
@@ -2460,22 +2447,7 @@ workflow {
 
 En plus de `onComplete`, il existe un autre gestionnaire d'événements que vous pouvez utiliser : `onError`, qui s'exécute uniquement si le workflow échoue :
 
-````groovy title="main.nf - onError handler"
-workflow {
-    // ... votre code de workflow ...
-
-    workflow.onError = {
-        println "="* 50
-        println "Pipeline execution failed!"
-        println "Error message: ${workflow.errorMessage}"
-        println "="* 50
-
-        // Écrire un journal d'erreur détaillé
-        def error_file = file("${workflow.launchDir}/error.log")
-        error_file.text = """
-        Workflow Error Report
-        =====================
-        Time: ${new```groovy title="main.nf - onError handler"
+```groovy title="main.nf - onError handler"
 workflow {
     // ... votre code de workflow ...
 
@@ -2498,7 +2470,7 @@ workflow {
         println "Error details written to: ${error_file}"
     }
 }
-````
+```
 
 Vous pouvez utiliser plusieurs gestionnaires ensemble dans votre script de workflow :
 

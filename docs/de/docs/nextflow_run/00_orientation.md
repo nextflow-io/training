@@ -22,24 +22,23 @@ Wenn du diesen Kurs selbstständig durcharbeitest, mache dich bitte mit den [Gru
 
 ### Versionsanforderungen
 
-Dieses Training ist für Nextflow 25.10.2 oder später **mit aktiviertem v2-Syntax-Parser** konzipiert.
+Dieser Kurs erfordert Nextflow 25.10.2 oder später, mit aktiviertem v2-Syntax-Parser (Standard ab 25.10+).
 Wenn du eine lokale oder benutzerdefinierte Umgebung verwendest, stelle bitte sicher, dass du die richtigen Einstellungen wie [hier](../info/nxf_versions.md) dokumentiert verwendest.
 
 ## Bereit zum Arbeiten
 
-Sobald dein Codespace läuft, musst du zwei Dinge tun, bevor du in das Training eintauchst: dein Arbeitsverzeichnis für diesen speziellen Kurs festlegen und dir die bereitgestellten Materialien ansehen.
+Sobald dein Codespace läuft, musst du zwei Dinge tun, bevor du in das Training eintauchst: dein Arbeitsverzeichnis festlegen und dir die bereitgestellten Materialien ansehen.
 
 ### Das Arbeitsverzeichnis festlegen
 
-Standardmäßig öffnet sich der Codespace mit dem Arbeitsverzeichnis am Stamm aller Trainingskurse, aber für diesen Kurs werden wir im Verzeichnis `nextflow-run/` arbeiten.
-
-Wechsle jetzt das Verzeichnis, indem du diesen Befehl im Terminal ausführst:
+Standardmäßig öffnet sich der Codespace am Stamm aller Trainingskurse.
+Wechsle für diesen Kurs in das Verzeichnis `nextflow-run/`:
 
 ```bash
 cd nextflow-run/
 ```
 
-Du kannst VSCode so einstellen, dass es sich auf dieses Verzeichnis konzentriert, sodass nur die relevanten Dateien in der Datei-Explorer-Seitenleiste angezeigt werden:
+Dann stelle VSCode so ein, dass es sich auf dieses Verzeichnis konzentriert, sodass nur die relevanten Dateien in der Datei-Explorer-Seitenleiste angezeigt werden:
 
 ```bash
 code .
@@ -53,16 +52,10 @@ code .
     cd /workspaces/training/nextflow-run
     ```
 
-Schauen wir uns jetzt den Inhalt an.
-
 ### Die bereitgestellten Materialien erkunden
 
-Du kannst den Inhalt dieses Verzeichnisses erkunden, indem du den Datei-Explorer auf der linken Seite des Trainingsarbeitsbereichs verwendest.
-Alternativ kannst du den Befehl `tree` verwenden.
-
-Während des gesamten Kurses verwenden wir die Ausgabe von `tree`, um Verzeichnisstruktur und -inhalt in lesbarer Form darzustellen, manchmal mit kleineren Anpassungen zur Klarheit.
-
-Hier generieren wir ein Inhaltsverzeichnis bis zur zweiten Ebene:
+Du kannst die Kursmaterialien mit dem Datei-Explorer auf der linken Seite oder mit dem Befehl `tree` erkunden.
+Führe folgenden Befehl im Terminal aus, um die vollständige Struktur zu sehen:
 
 ```bash
 tree . -L 2
@@ -73,41 +66,26 @@ tree . -L 2
     ```console
     .
     ├── 1-hello.nf
-    ├── 2a-inputs.nf
-    ├── 2b-multistep.nf
-    ├── 2c-modules.nf
-    ├── 2d-container.nf
-    ├── 3-main.nf
+    ├── 2-inputs.nf
     ├── data
+    │   ├── greetings-extended.csv
     │   └── greetings.csv
+    ├── main.nf
     ├── modules
     │   ├── collectGreetings.nf
     │   ├── convertToUpper.nf
     │   ├── cowpy.nf
     │   └── sayHello.nf
-    ├── nextflow.config
-    ├── solutions
-    │   ├── 3-main.nf
-    │   ├── modules
-    │   └── nextflow.config
-    ├── test-params.json
-    └── test-params.yaml
+    └── nextflow.config
     ```
 
-Klicke auf das farbige Feld, um den Abschnitt zu erweitern und seinen Inhalt anzuzeigen.
-Wir verwenden solche einklappbaren Abschnitte, um erwartete Befehlsausgaben sowie Verzeichnis- und Dateiinhalte kompakt darzustellen.
+Die **`.nf`-Dateien** sind Workflow-Scripts mit zunehmender Komplexität, die in dieser Reihenfolge im Kurs verwendet werden.
 
-- **Die `.nf`-Dateien** sind Workflow-Scripts, die basierend darauf nummeriert sind, in welchem Teil des Kurses sie verwendet werden.
+Das **`data/`-Verzeichnis** enthält die CSV-Eingabedateien, die wir ab Abschnitt 2 verwenden werden.
 
-- **Die Datei `nextflow.config`** ist eine Konfigurationsdatei, die minimale Umgebungseigenschaften festlegt.
-  Du kannst sie vorerst ignorieren.
+Das **`modules/`-Verzeichnis** enthält die Prozessdefinitionen, die von `main.nf` verwendet werden.
 
-- **Die Datei `greetings.csv`** unter `data/` enthält Eingabedaten, die wir im größten Teil des Kurses verwenden werden. Sie wird in Teil 2 (Pipelines ausführen) beschrieben, wenn wir sie zum ersten Mal einführen.
-
-- **Die `test-params.*`-Dateien** sind Konfigurationsdateien, die wir in Teil 3 (Konfiguration) verwenden werden. Du kannst sie vorerst ignorieren.
-
-- **Das `solutions`-Verzeichnis** enthält den Endzustand des Workflows und seiner Hilfsdateien (Config und Module), die sich aus dem Abschluss des Kurses ergeben.
-  Sie sind als Referenz gedacht, um deine Arbeit zu überprüfen und eventuelle Probleme zu beheben.
+Die **`nextflow.config`-Datei** ist eine Konfigurationsdatei, die minimale Umgebungseigenschaften festlegt. Du kannst sie vorerst ignorieren; wir gehen in Abschnitt 4 darauf ein.
 
 ## Bereitschafts-Checkliste
 
@@ -119,4 +97,4 @@ Denkst du, du bist bereit einzutauchen?
 
 Wenn du alle Kästchen abhaken kannst, bist du startklar.
 
-**Um zu [Teil 1: Grundlegende Operationen](./01_basics.md) fortzufahren, klicke auf den Pfeil in der unteren rechten Ecke dieser Seite.**
+**Um zu [Teil 1: Nextflow ausführen](./01_run_nextflow.md) fortzufahren, klicke auf den Pfeil in der unteren rechten Ecke dieser Seite.**

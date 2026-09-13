@@ -1806,33 +1806,33 @@ nextflow config
 
     ```groovy
     params {
-      input = 'data/greetings.csv'
-      batch = 'batch'
-      character = 'turkey'
+       input = 'data/greetings.csv'
+       batch = 'batch'
+       character = 'turkey'
     }
 
     docker {
-      enabled = false
+       enabled = false
     }
 
     conda {
-      enabled = true
+       enabled = true
     }
 
     process {
-      memory = '1 GB'
-      withName:cowpy {
+       memory = '1 GB'
+       withName:cowpy {
           memory = '2 GB'
           cpus = 2
-      }
+       }
     }
 
     outputDir = 'custom-outdir-config/'
 
     workflow {
-      output {
+       output {
           mode = 'copy'
-      }
+       }
     }
     ```
 
@@ -1850,34 +1850,34 @@ nextflow config -profile my_laptop,test
 
     ```groovy
     params {
-      input = 'data/greetings.csv'
-      batch = 'test'
-      character = 'dragonandcow'
+       input = 'data/greetings.csv'
+       batch = 'test'
+       character = 'dragonandcow'
     }
 
     docker {
-      enabled = true
+       enabled = true
     }
 
     conda {
-      enabled = true
+       enabled = true
     }
 
     process {
-      memory = '1 GB'
-      withName:cowpy {
+       memory = '1 GB'
+       withName:cowpy {
           memory = '2 GB'
           cpus = 2
-      }
-      executor = 'local'
+       }
+       executor = 'local'
     }
 
     outputDir = 'custom-outdir-config/'
 
     workflow {
-      output {
+       output {
           mode = 'copy'
-      }
+       }
     }
     ```
 

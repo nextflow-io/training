@@ -40,7 +40,7 @@ Aquestes eines no estan instal·lades a l'entorn de GitHub Codespaces, així que
 
 !!! tip "Consell"
 
-     Assegureu-vos que esteu al directori `nf4-science/rnaseq`. L'última part del camí mostrat quan escriviu `pwd` hauria de ser `rnaseq`.
+    Assegureu-vos que esteu al directori `nf4-science/rnaseq`. L'última part del camí mostrat quan escriviu `pwd` hauria de ser `rnaseq`.
 
 ---
 

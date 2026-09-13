@@ -41,7 +41,6 @@ Nextflow의 경우 self-install 옵션을, nf-core 도구의 경우 PyPI 옵션�
 
 !!! warning "버전 호환성"
 
-    <!-- Any update to this content needs to be copied to the home page -->
     **2026년 1월 기준, 별도의 언급이 없는 한 모든 Nextflow 교육 과정은 strict v2 구문이 활성화된 Nextflow 버전 25.10.2 이상을 필요로 합니다.**
 
     버전 요구 사항 및 strict v2 구문에 대한 자세한 내용은 [Nextflow 버전](../info/nxf_versions.md) 가이드를 참조하십시오.

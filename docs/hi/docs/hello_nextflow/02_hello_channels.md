@@ -1069,7 +1069,7 @@ Parameter declaration में निम्नलिखित edit करो:
 
     ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
-    * Pipeline पैरामीटर
+    * Pipeline parameters
     */
     params {
         input: Path = 'data/greetings.csv'
@@ -1155,7 +1155,7 @@ nextflow run hello-channels.nf
 
     Launching `hello-channels.nf` [peaceful_poisson] revision: a286c08ad5
 
-    [-        ] sayHello [  0%] 0 of 1
+    [-        ] sayHello | 0 of 1
     Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv
     ERROR ~ Error executing process > 'sayHello (1)'
 

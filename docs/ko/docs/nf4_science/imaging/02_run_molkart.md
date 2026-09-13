@@ -27,14 +27,14 @@ nf-core 파이프라인의 주요 특징:
 
 !!! tip "nf-core에 대해 더 알고 싶으신가요?"
 
-    nf-core 파이프라인 개발에 대한 심층적인 소개를 보려면 [Build with nf-core](../../hello_nf-core/index.md) 교육 과정을 확인하세요.
+    nf-core 파이프라인 개발에 대한 심층적인 소개를 보려면 [Build with nf-core](../../nfcore_build/index.md) 교육 과정을 확인하세요.
     처음부터 nf-core 파이프라인을 생성하고 사용자 정의하는 방법을 다룹니다.
 
 ### 1.2. molkart 파이프라인
 
 ![nf-core/molkart 파이프라인](img/molkart.png)
 
-[nf-core/molkart](https://nf-co.re/molkart) 파이프라인은 공간 전사체학 이미징 데이터를 여러 단계로 처리합니다:
+[nf-core/molkart](https://nf-co.re/molkart) 파이프라인은 공간 전사체 이미징 데이터를 여러 단계로 처리합니다:
 
 1. **이미지 전처리**: 그리드 패턴 채우기 및 선택적 대비 향상
 2. **세포 분할**: 다중 알고리즘 옵션 (Cellpose, Mesmer, ilastik, Stardist)
@@ -323,7 +323,7 @@ executor 라인 `executor > local (22)`는 다음을 알려줍니다:
 
 기본적으로 nf-core 파이프라인은 `outdir` 매개변수로 지정된 디렉토리에 출력을 작성하며, 우리는 이를 `results/`로 설정했습니다.
 
-내용을 나열하세요:
+내용을 나열합니다:
 
 ```bash
 tree results/
@@ -333,15 +333,15 @@ tree results/
 
 ```console title="results/"
 results/
-├── anndata/
-├── clahe/
-├── mindagap/
-├── molkartqc/
-├── multiqc/
-├── pipeline_info/
-├── segmentation/
-├── spot2cell/
-└── stack/
+├── anndata
+├── clahe
+├── mindagap
+├── molkartqc
+├── multiqc
+├── pipeline_info
+├── segmentation
+├── spot2cell
+└── stack
 ```
 
 각 하위 디렉토리에는 파이프라인의 특정 단계에서 나온 출력물이 포함되어 있습니다:
@@ -379,7 +379,7 @@ MultiQC 보고서는 모든 파이프라인 단계의 품질 메트릭을 결합
 가장 중요한 과학적 출력물은 세포별 전사체 카운트 테이블입니다.
 이는 각 세포에서 각 전사체가 몇 개 감지되었는지 알려줍니다.
 
-spot2cell 디렉토리로 이동하세요:
+spot2cell 디렉토리로 이동합니다:
 
 ```bash
 ls results/spot2cell/
@@ -398,23 +398,23 @@ Nextflow가 여러 분할 방법을 병렬로 처리하여 결과를 쉽게 비�
 
 Nextflow는 여러 실행 보고서를 자동으로 생성합니다.
 
-pipeline_info 디렉토리를 확인하세요:
+pipeline_info 디렉토리를 확인합니다:
 
 ```bash
 ls results/pipeline_info/
 ```
 
-주요 파일:
+주요 파일 (각 파일 이름은 타임스탬프로 끝납니다. 예: `execution_report_2026-01-15_10-30-00.html`):
 
-- **execution_report.html**: 타임라인 및 리소스 사용량 시각화
-- **execution_timeline.html**: 프로세스 실행의 Gantt 차트
-- **execution_trace.txt**: 상세한 작업 실행 메트릭
-- **pipeline_dag.html**: 워크플로 구조를 보여주는 방향성 비순환 그래프
+- **execution_report\_\*.html**: 타임라인 및 리소스 사용량 시각화
+- **execution_timeline\_\*.html**: 프로세스 실행의 Gantt 차트
+- **execution_trace\_\*.txt**: 상세한 작업 실행 메트릭
+- **pipeline_dag\_\*.html**: 워크플로 구조를 보여주는 방향성 비순환 그래프
 
-실행 보고서를 열어 리소스 사용량을 확인하세요:
+실행 보고서를 열어 리소스 사용량을 확인합니다:
 
 ```bash
-code results/pipeline_info/execution_report.html
+code results/pipeline_info/execution_report_*.html
 ```
 
 다음을 보여줍니다:
@@ -456,10 +456,10 @@ ls -d work/*/*/ | head -5
 
 ### 4.2. 작업 디렉토리 검사하기
 
-콘솔 출력의 분할 프로세스 해시 중 하나를 선택하고 (예: `[3m/4n5o6p]`) 내부를 살펴보세요:
+콘솔 출력의 분할 프로세스 해시 중 하나를 선택하고 (예: `[3a/4b5c6d]`) 내부를 살펴보세요:
 
 ```bash
-ls -la work/3m/4n5o6p*/
+ls -la work/3a/4b5c6d*/
 ```
 
 다음을 볼 수 있습니다:

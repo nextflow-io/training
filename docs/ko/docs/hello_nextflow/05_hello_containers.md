@@ -431,7 +431,7 @@ Nextflow는 컴퓨팅 환경에 설치되지 않은 도구를 실행할 수 있�
 
 ### 2.1. `cowpy` 모듈 작성
 
-먼저 `cowpy` 프로세스 모듈을 생성합시다.
+먼저 `cowpy` 프로세스 모듈을 생성합니다.
 
 #### 2.1.1. 새 모듈에 대한 파일 스텁 생성
 
@@ -503,7 +503,7 @@ process cowpy {
 
 #### 2.2.2. 워크플로우에 `cowpy` 프로세스 실행 추가
 
-기억하시다시피 두 개의 출력을 생성하는 `collectGreetings()` 프로세스의 출력에 `cowpy()` 프로세스를 연결합시다:
+기억하시다시피 두 개의 출력을 생성하는 `collectGreetings()` 프로세스의 출력에 `cowpy()` 프로세스를 연결합니다:
 
 - `collectGreetings.out.outfile`에는 출력 파일이 포함됩니다 <--_우리가 원하는 것_
 - `collectGreetings.out.report`에는 배치당 인사말 수가 포함된 보고 파일이 포함됩니다
@@ -608,11 +608,11 @@ process cowpy {
 
 `cowpy` 프로세스는 하나의 출력만 생성하므로 `.out`을 추가하여 일반적인 방식으로 참조할 수 있습니다.
 
-하지만 지금은 워크플로우 수준 출력 업데이트를 마무리합시다.
+하지만 지금은 워크플로우 수준 출력 업데이트를 마무리합니다.
 
 ##### 2.2.4.2. `output` 블록 업데이트
 
-`output` 블록에 최종 `cowpy_art` 출력을 추가해야 합니다. 그러는 동안 파이프라인이 완료되어 실제로 중요한 출력이 무엇인지 알게 되었으므로 게시 대상도 편집합시다.
+`output` 블록에 최종 `cowpy_art` 출력을 추가해야 합니다. 그러는 동안 파이프라인이 완료되어 실제로 중요한 출력이 무엇인지 알게 되었으므로 게시 대상도 편집합니다.
 
 `output` 블록에서 다음 코드 변경을 수행하십시오:
 
@@ -678,7 +678,7 @@ process cowpy {
 
 작동할 것 같습니까?
 
-이전에 게시된 출력을 삭제하여 깨끗한 상태로 만들고 `-resume` 플래그로 워크플로우를 실행합시다.
+이전에 게시된 출력을 삭제하여 깨끗한 상태로 만들고 `-resume` 플래그로 워크플로우를 실행합니다.
 
 ```bash
 rm -r results/hello_containers/
@@ -720,9 +720,6 @@ nextflow run hello-containers.nf -resume
       /workspaces/training/hello-nextflow/work/9b/02e7761db848f82db3c3e59ff3a9b6
 
     Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
-
-    -- Check '.nextflow.log' file for details
-    ERROR ~ Cannot access first() element from an empty List
 
     -- Check '.nextflow.log' file for details
     ```
@@ -786,7 +783,7 @@ nextflow run hello-containers.nf -resume
 
 #### 2.3.2. `nextflow.config` 파일을 통해 Docker 사용 활성화
 
-*'Docker 사용이 활성화된 경우'*라고 말했다는 것을 주목하십시오. 기본적으로 활성화되어 있지 않으므로 Nextflow에게 Docker를 사용할 수 있도록 허용해야 합니다.
+_'Docker 사용이 활성화된 경우'_ 라고 말했다는 것을 주목하십시오. 기본적으로 활성화되어 있지 않으므로 Nextflow에게 Docker를 사용할 수 있도록 허용해야 합니다.
 이를 위해 설정을 다루는 이 과정의 다음이자 마지막 파트(파트 6)의 주제를 약간 앞당기겠습니다.
 
 Nextflow가 워크플로우 실행을 설정하기 위해 제공하는 주요 방법 중 하나는 `nextflow.config` 파일을 사용하는 것입니다.
@@ -794,7 +791,7 @@ Nextflow가 워크플로우 실행을 설정하기 위해 제공하는 주요 �
 
 Docker를 명시적으로 비활성화하는 한 줄의 코드가 포함된 `nextflow.config` 파일을 제공했습니다: `docker.enabled = false`.
 
-이제 Docker를 활성화하기 위해 `true`로 전환합시다:
+이제 Docker를 활성화하기 위해 `true`로 전환합니다:
 
 === "후"
 
@@ -816,7 +813,7 @@ Docker를 명시적으로 비활성화하는 한 줄의 코드가 포함된 `nex
 
 #### 2.3.3. Docker가 활성화된 상태로 워크플로우 실행
 
-`-resume` 플래그로 워크플로우를 실행하십시오:
+`-resume` 플래그로 워크플로우를 실행합니다:
 
 ```bash
 nextflow run hello-containers.nf -resume
@@ -908,7 +905,7 @@ nextflow run hello-containers.nf -resume
 
 #### 2.3.4. Nextflow가 컨테이너화된 작업을 시작한 방법 검사
 
-이 섹션의 마지막 코다로, Nextflow가 내부적으로 컨테이너와 어떻게 작동하는지에 대해 조금 더 통찰력을 얻기 위해 `cowpy` 프로세스 실행 중 하나의 작업 하위 디렉토리를 살펴봅시다.
+이 섹션의 마지막 코다로, Nextflow가 내부적으로 컨테이너와 어떻게 작동하는지에 대해 조금 더 통찰력을 얻기 위해 `cowpy` 프로세스 실행 중 하나의 작업 하위 디렉토리를 살펴봅니다.
 
 `nextflow run` 명령의 출력을 확인하여 `cowpy` 프로세스의 작업 하위 디렉토리 경로를 찾으십시오.
 위에 표시된 실행에서 얻은 것을 보면, `cowpy` 프로세스의 콘솔 로그 라인은 `[98/656c6c]`로 시작합니다.

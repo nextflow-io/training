@@ -638,9 +638,24 @@ nextflow run hello-workflow.nf -resume
     [79/33b2f0] sayHello (2)         | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (3)   | 3 of 3, cached: 3 ✔
     [47/50fe4a] collectGreetings (1) | 3 of 3 ✔
-    ```
 
-    A saída do terminal agora também termina com um bloco de resumo `Outputs:`. Omitimos aqui para focar nas linhas de status dos processos.
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hola-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Hello-output.txt
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+      collected:
+        - hello_workflow/COLLECTED-output.txt
+        - hello_workflow/COLLECTED-output.txt
+        - hello_workflow/COLLECTED-output.txt
+    ```
 
 Ele executa com sucesso, incluindo a terceira etapa.
 
@@ -735,6 +750,7 @@ nextflow run hello-workflow.nf -resume
 
     Launching `hello-workflow.nf` [soggy_franklin] revision: bc8e1b2726
 
+    executor >  local (1)
     [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1e/83586c] collectGreetings   | 1 of 1 ✔
@@ -742,6 +758,20 @@ nextflow run hello-workflow.nf -resume
     Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
     Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt
     After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt]
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hola-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+      collected: hello_workflow/COLLECTED-output.txt
     ```
 
 Ele executa com sucesso, embora a saída do log possa parecer um pouco mais bagunçada do que isso (nós a limpamos para legibilidade).
@@ -749,8 +779,8 @@ Ele executa com sucesso, embora a saída do log possa parecer um pouco mais bagu
 Desta vez a terceira etapa foi chamada apenas uma vez!
 Olhando para a saída das instruções `view()`, vemos o seguinte:
 
-- Três instruções `Antes do collect:`, uma para cada saudação: nesse ponto os caminhos de arquivo são itens individuais no canal.
-- Uma única instrução `Depois do collect:`: os três caminhos de arquivo agora estão empacotados em um único elemento.
+- Três instruções `Before collect:`, uma para cada saudação: nesse ponto os caminhos de arquivo são itens individuais no canal.
+- Uma única instrução `After collect:`: os três caminhos de arquivo agora estão empacotados em um único elemento.
 
 Podemos resumir isso com o seguinte diagrama:
 

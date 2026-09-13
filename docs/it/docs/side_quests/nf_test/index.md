@@ -262,9 +262,10 @@ nf-test init
 Questo dovrebbe produrre il seguente output:
 
 ```bash
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 Project configured. Configuration is stored in nf-test.config
 ```
@@ -308,7 +309,7 @@ nextflow_pipeline {
 
         when {
             params {
-                // define parameters here. Example:
+                // definire i parametri qui. Esempio:
                 // outdir = "tests/results"
             }
         }
@@ -367,9 +368,10 @@ nf-test test tests/main.nf.test
 ```console title="nf-test pipeline fail"
 > nf-test test tests/main.nf.test
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Workflow main.nf
@@ -399,7 +401,7 @@ Il test fallisce! Cosa è successo?
 ```groovy title="tests/main.nf.test"
 when {
     params {
-        // define parameters here. Example:
+        // definire i parametri qui. Esempio:
         // outdir = "tests/results"
     }
 }
@@ -440,7 +442,7 @@ Potreste chiedervi come faremo a puntare alla radice della pipeline nel test. Po
     ```groovy title="tests/main.nf.test" linenums="1" hl_lines="3 4"
     when {
         params {
-            // define parameters here. Example:
+            // definire i parametri qui. Esempio:
             // outdir = "tests/results"
         }
     }
@@ -455,9 +457,10 @@ nf-test test tests/main.nf.test
 ```console title="Pipeline passes"
 > nf-test test tests/main.nf.test
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Workflow main.nf
@@ -479,9 +482,10 @@ nf-test test tests/main.nf.test --verbose
 ```console title="Pipeline runs all processes"
 > nf-test test tests/main.nf.test
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Workflow main.nf
@@ -567,9 +571,10 @@ nf-test test tests/main.nf.test
 ```
 
 ```console title="Pipeline passes with assertions"
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Workflow main.nf
@@ -652,9 +657,10 @@ nf-test test tests/main.nf.test
 ```console title="Pipeline passes with file assertions"
 > nf-test test tests/main.nf.test
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Workflow main.nf
@@ -751,9 +757,10 @@ nf-test test tests/main.sayhello.nf.test
 ```console title="Process test fails"
 > nf-test test tests/main.sayhello.nf.test
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Process sayHello
@@ -835,9 +842,10 @@ Eseguiamo di nuovo il test per vedere se funziona.
 ```console title="nf-test pipeline pass"
 > nf-test test tests/main.sayhello.nf.test
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Process sayHello
@@ -893,9 +901,10 @@ Possiamo eseguire di nuovo il test e vedere che dovrebbe passare:
 ```console title="nf-test process pass with snapshot"
 > nf-test test tests/main.sayhello.nf.test
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Process sayHello
@@ -986,9 +995,10 @@ nf-test test tests/main.sayhello.nf.test
 ```console title="Process test fails"
 > nf-test test tests/main.sayhello.nf.test
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Process sayHello
@@ -1105,9 +1115,10 @@ nf-test test tests/main.converttoupper.nf.test
 ```console title="nf-test process convertToUpper pass"
 > nf-test test tests/main.converttoupper.nf.test
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Process convertToUpper
@@ -1132,9 +1143,10 @@ nf-test test tests/main.converttoupper.nf.test
 ```console title="nf-test process convertToUpper pass"
 > nf-test test tests/main.converttoupper.nf.test
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Process convertToUpper
@@ -1174,9 +1186,10 @@ Notate che stiamo usando semplicemente `.` per eseguire tutto dalla nostra direc
 ```console title="nf-test repo pass"
 > nf-test test .
 
-🚀 nf-test 0.9.3
+🚀 nf-test 0.9.5
 https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+Please cite: https://doi.org/10.1093/gigascience/giaf130
+(c) 2021 - 2026 Lukas Forer and Sebastian Schoenherr
 
 
 Test Process convertToUpper

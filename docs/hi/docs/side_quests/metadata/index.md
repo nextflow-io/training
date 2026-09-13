@@ -9,7 +9,8 @@
 मेटाडेटा वह डेटा है जो दूसरे डेटा का वर्णन करता है।
 मेटाडेटा फ़ाइलों और प्रयोगात्मक परिस्थितियों के बारे में महत्वपूर्ण विवरण ट्रैक करता है, और प्रत्येक डेटासेट की अनूठी विशेषताओं के अनुसार विश्लेषण को अनुकूलित करने में मदद करता है।
 
-इसे एक लाइब्रेरी कैटलॉग की तरह सोचो: जबकि किताबों में वास्तविक सामग्री (raw डेटा) होती है, कैटलॉग कार्ड प्रत्येक किताब के बारे में आवश्यक जानकारी प्रदान करते हैं—कब प्रकाशित हुई, किसने लिखी, कहाँ मिलेगी (मेटाडेटा)।
+इसे एक लाइब्रेरी कैटलॉग की तरह सोचो: जबकि किताबों में वास्तविक सामग्री (raw डेटा) होती है, कैटलॉग कार्ड प्रत्येक किताब के बारे में आवश्यक जानकारी प्रदान करते हैं।
+उस जानकारी में शामिल है कि वह कब प्रकाशित हुई, किसने लिखी, और कहाँ मिलेगी (मेटाडेटा)।
 Nextflow पाइपलाइनों में, मेटाडेटा का उपयोग इन कामों के लिए किया जा सकता है:
 
 - पूरे वर्कफ़्लो में फ़ाइल-विशिष्ट जानकारी ट्रैक करना
@@ -214,7 +215,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [exotic_albattani] revision: c0d03cec83
+    Launching `main.nf` [exotic_albattani] revision: c7ce88ee60
 
     [id:sampleA, character:squirrel, recording:/workspaces/training/side-quests/metadata/data/bonjour.txt]
     [id:sampleB, character:tux, recording:/workspaces/training/side-quests/metadata/data/guten_tag.txt]
@@ -322,7 +323,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [exotic_albattani] revision: c0d03cec83
+    Launching `main.nf` [exotic_albattani] revision: 10a2598a59
 
     squirrel
     tux
@@ -356,15 +357,15 @@ process COWPY {
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
     input:
-    path input_file
+    path recording
     val character
 
     output:
-    path "cowpy-${input_file}"
+    path "cowpy-${recording}"
 
     script:
     """
-    cat ${input_file} | cowpy -c ${character} > cowpy-${input_file}
+    cat ${recording} | cowpy -c ${character} > cowpy-${recording}
     """
 }
 ```
@@ -497,7 +498,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [clever_dijkstra] revision: a1b2c3d4e5
+    Launching `main.nf` [clever_dijkstra] revision: 2fb579b3bd
 
     executor >  local (7)
     [3a/f1c290] COWPY (7) | 7 of 7 ✔
@@ -594,15 +595,15 @@ Fields को अलग-अलग channels में split करने के �
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
         input:
-        path input_file
+        path recording
         val character
 
         output:
-        path "cowpy-${input_file}"
+        path "cowpy-${recording}"
 
         script:
         """
-        cat ${input_file} | cowpy -c ${character} > cowpy-${input_file}
+        cat ${recording} | cowpy -c ${character} > cowpy-${recording}
         """
     }
     ```
@@ -681,7 +682,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [pedantic_lovelace] revision: b2c3d4e5f6
+    Launching `main.nf` [pedantic_lovelace] revision: 745a78a291
 
     executor >  local (7)
     [5e/2a1b34] COWPY (7) | 7 of 7 ✔
@@ -742,7 +743,7 @@ input:
 tuple val(id), val(character), path(recording)
 ```
 
-अगर कोई collaborator अलग तरह से structured datasheet का उपयोग करे—अतिरिक्त columns के साथ, या अलग क्रम में columns के साथ—तो यह प्रोसेस बिना modification के काम नहीं करेगी।
+अगर कोई collaborator अलग तरह से structured datasheet का उपयोग करे (अतिरिक्त columns के साथ, या अलग क्रम में columns के साथ), तो यह प्रोसेस बिना modification के काम नहीं करेगी।
 इससे प्रोसेस fragile हो जाती है, क्योंकि इसकी input structure datasheet की exact composition से tied है।
 
 इसे solve करने के लिए, हमें एक ऐसा तरीका चाहिए जिससे सभी मेटाडेटा को एक bundle के रूप में pass किया जा सके बिना process interface में उसकी exact structure को hard-code किए।
@@ -750,7 +751,7 @@ tuple val(id), val(character), path(recording)
 ### 1.5. Meta map + file interface का उपयोग करना
 
 इसका solution यह है कि channel में दो अलग-अलग concerns को अलग किया जाए: **किसी sample के बारे में मेटाडेटा**, और **data file** खुद।
-सभी मेटाडेटा को एक single map में bundle करके—"meta map"—हमें एक consistent two-element tuple मिलता है चाहे datasheet में कितने भी metadata columns हों:
+सभी मेटाडेटा को एक single map में bundle करके ("meta map"), हमें एक consistent two-element tuple मिलता है चाहे datasheet में कितने भी metadata columns हों:
 
 ```groovy title="Syntax example"
 input:
@@ -810,7 +811,7 @@ nextflow run main.nf
     ```console title="View meta map"
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [lethal_booth] revision: 0d8f844c07
+    Launching `main.nf` [lethal_booth] revision: 50e03309d4
 
     [[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/data/bonjour.txt]
     [[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/data/guten_tag.txt]
@@ -851,14 +852,14 @@ nextflow run main.nf
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
         input:
-        tuple val(meta), path(input_file)
+        tuple val(meta), path(recording)
 
         output:
-        path "cowpy-${input_file}"
+        path "cowpy-${recording}"
 
         script:
         """
-        cat ${input_file} | cowpy -c ${meta.character} > cowpy-${input_file}
+        cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
         """
     }
     ```
@@ -937,7 +938,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [wise_sammet] revision: 99797b1e92
+    Launching `main.nf` [wise_sammet] revision: f8f429c3df
 
     executor >  local (7)
     [5d/dffd4e] COWPY (7) | 7 of 7 ✔
@@ -1103,7 +1104,7 @@ nextflow run main.nf -resume
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [voluminous_mcnulty] revision: f9bcfebabb
+    Launching `main.nf` [voluminous_mcnulty] revision: 1d1ec2b857
 
     executor >  local (7)
     [c9/34bfec] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
@@ -1278,7 +1279,7 @@ nextflow run main.nf -resume
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [cheeky_fermat] revision: d096281ee4
+    Launching `main.nf` [cheeky_fermat] revision: f55f2f98b9
 
     [d9/b360d0] IDENTIFY_LANGUAGE (3) | 7 of 7, cached: 7 ✔
     [94/224450] COWPY (3)             | 7 of 7, cached: 7 ✔
@@ -1407,7 +1408,7 @@ nextflow run main.nf -resume
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [wise_almeida] revision: 46778c3cd0
+    Launching `main.nf` [wise_almeida] revision: 0f4b36d66d
 
     [c9/34bfec] IDENTIFY_LANGUAGE (1) | 7 of 7, cached: 7 ✔
     [e9/269aa0] COWPY (6)             | 7 of 7, cached: 7 ✔
@@ -1440,37 +1441,38 @@ Channel structure अभी भी `[meta, file]` है।
 
 Meta map में `lang` और `lang_group` अब उपलब्ध होने के साथ, हम उनका उपयोग output file names में language code जोड़ने और उन्हें language family के अनुसार subdirectories में व्यवस्थित करने के लिए कर सकते हैं।
 
-इसके लिए तीन बदलाव चाहिए: `COWPY` प्रोसेस को update करना ताकि वह अपना output rename करे और `meta` को emit करे, `COWPY` call को `ch_languages` पर चलाने के लिए update करना, और output block को subdirectory path specify करने के लिए update करना।
+इसके लिए तीन बदलाव चाहिए: `COWPY` प्रोसेस को update करना ताकि वह `meta` को emit करे, `COWPY` call को `ch_languages` पर चलाने के लिए update करना, और output block को update करना ताकि प्रत्येक फ़ाइल को language-group subdirectory में route किया जा सके और detected language code का उपयोग करके उसका नाम बदला जा सके।
 
 #### 2.4.1. `COWPY` प्रोसेस update करो
 
-Meta map से language code का उपयोग करके output file को rename करो, और output में `meta` जोड़ो ताकि output block subdirectory routing के लिए `lang_group` access कर सके:
+Output में `meta` जोड़ो ताकि output block routing और renaming के लिए `lang` और `lang_group` access कर सके:
 
 === "बाद में"
 
-    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2 6"
+    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2"
         output:
-        tuple val(meta), path("${meta.lang}-${input_file}")
+        tuple val(meta), path("cowpy-${recording}")
 
         script:
         """
-        cat ${input_file} | cowpy -c ${meta.character} > ${meta.lang}-${input_file}
+        cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
         """
     ```
 
 === "पहले"
 
-    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2 6"
+    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2"
         output:
-        path "cowpy-${input_file}"
+        path "cowpy-${recording}"
 
         script:
         """
-        cat ${input_file} | cowpy -c ${meta.character} > cowpy-${input_file}
+        cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
         """
     ```
 
-यह दिखाता है कि हम input definition को बिल्कुल modify किए बिना प्रोसेस के behavior को customize करने के लिए अन्य metadata fields का लाभ कैसे उठा सकते हैं।
+यह एक minimal process-level बदलाव है: `COWPY` को यह जानने की ज़रूरत नहीं कि `lang` या `lang_group` exist करते हैं, केवल यह कि उसे अपने output के साथ `meta` को carry करना है।
+उन fields के आधार पर routing और renaming दोनों downstream, output block में होते हैं।
 
 #### 2.4.2. `ch_languages` पर चलाने के लिए `COWPY` call update करो
 
@@ -1506,14 +1508,16 @@ Meta map से language code का उपयोग करके output file �
 
 #### 2.4.3. Output block update करो
 
-`output {}` block में एक `path` closure जोड़ो ताकि प्रत्येक फ़ाइल को उसके language group subdirectory में route किया जा सके:
+`output {}` block में एक `path` closure जोड़ो जो [`>>` operator](https://www.nextflow.io/docs/latest/workflow.html#dynamic-publish-path) का उपयोग करके प्रत्येक फ़ाइल को एक explicit target पर publish करे: उसकी language-group subdirectory में, detected language से prefixed नाम के साथ:
 
 === "बाद में"
 
-    ```groovy title="main.nf" linenums="40" hl_lines="3"
+    ```groovy title="main.nf" linenums="40" hl_lines="3-5"
     output {
         cowpy_art {
-            path { meta, file -> meta.lang_group }
+            path { meta, file ->
+                file >> "${meta.lang_group}/${meta.lang}-${file.name}"
+            }
         }
     }
     ```
@@ -1527,7 +1531,7 @@ Meta map से language code का उपयोग करके output file �
     }
     ```
 
-यह दिखाता है कि हम outputs को बड़ी flexibility के साथ व्यवस्थित करने के लिए मेटाडेटा का उपयोग कैसे कर सकते हैं।
+यह दिखाता है कि हम outputs को व्यवस्थित और rename करने के लिए मेटाडेटा का उपयोग कैसे कर सकते हैं, पूरी तरह output block से, बिना process को बदले।
 
 #### 2.4.4. पूरी पाइपलाइन चलाओ
 
@@ -1543,7 +1547,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [suspicious_crick] revision: 25541014c5
+    Launching `main.nf` [suspicious_crick] revision: 955602d59b
 
     executor >  local (14)
     [99/64c59d] IDENTIFY_LANGUAGE (6) | 7 of 7 ✔
@@ -1554,13 +1558,13 @@ nextflow run main.nf
       /workspaces/training/side-quests/metadata/results
 
       cowpy_art:
-        - [{id: sampleB, character: tux, lang: de, lang_group: germanic}, germanic/de-guten_tag.txt]
-        - [{id: sampleG, character: turtle, lang: it, lang_group: romance}, romance/it-ciao.txt]
-        - [{id: sampleC, character: sheep, lang: de, lang_group: germanic}, germanic/de-hallo.txt]
-        - [{id: sampleE, character: stegosaurus, lang: es, lang_group: romance}, romance/es-hola.txt]
-        - [{id: sampleA, character: squirrel, lang: fr, lang_group: romance}, romance/fr-bonjour.txt]
-        - [{id: sampleD, character: turkey, lang: en, lang_group: germanic}, germanic/en-hello.txt]
-        - [{id: sampleF, character: moose, lang: fr, lang_group: romance}, romance/fr-salut.txt]
+        - [{id: sampleB, character: tux, lang: de, lang_group: germanic}, germanic/de-cowpy-guten_tag.txt]
+        - [{id: sampleG, character: turtle, lang: it, lang_group: romance}, romance/it-cowpy-ciao.txt]
+        - [{id: sampleC, character: sheep, lang: de, lang_group: germanic}, germanic/de-cowpy-hallo.txt]
+        - [{id: sampleE, character: stegosaurus, lang: es, lang_group: romance}, romance/es-cowpy-hola.txt]
+        - [{id: sampleA, character: squirrel, lang: fr, lang_group: romance}, romance/fr-cowpy-bonjour.txt]
+        - [{id: sampleD, character: turkey, lang: en, lang_group: germanic}, germanic/en-cowpy-hello.txt]
+        - [{id: sampleF, character: moose, lang: fr, lang_group: romance}, romance/fr-cowpy-salut.txt]
     ```
 
 Results डायरेक्टरी अब language family के अनुसार व्यवस्थित है, प्रत्येक फ़ाइल का नाम उसकी detected language के अनुसार है:
@@ -1568,19 +1572,19 @@ Results डायरेक्टरी अब language family के अनु�
 ```console title="Results directory contents"
 results/
 ├── germanic
-│   ├── de-guten_tag.txt
-│   ├── de-hallo.txt
-│   └── en-hello.txt
+│   ├── de-cowpy-guten_tag.txt
+│   ├── de-cowpy-hallo.txt
+│   └── en-cowpy-hello.txt
 └── romance
-    ├── es-hola.txt
-    ├── fr-bonjour.txt
-    ├── fr-salut.txt
-    └── it-ciao.txt
+    ├── es-cowpy-hola.txt
+    ├── fr-cowpy-bonjour.txt
+    ├── fr-cowpy-salut.txt
+    └── it-cowpy-ciao.txt
 ```
 
-`output {}` block में `path` closure प्रत्येक `[meta, file]` tuple receive करता है और subdirectory name के रूप में `meta.lang_group` return करता है।
-File name खुद वह है जो प्रोसेस output करती है (`#!groovy "${meta.lang}-${input_file}"`)।
-मेटाडेटा के दोनों pieces (language code और language group) इस section में बनाए गए enriched meta map से आते हैं।
+`output {}` block में `path` closure प्रत्येक `[meta, file]` tuple receive करता है।
+`>>` operator `file` को target `#!groovy "${meta.lang_group}/${meta.lang}-${file.name}"` पर publish करता है, एक single expression में subdirectory (`lang_group`) और renamed file (जिसे `lang` से prefix किया गया है) को combine करता है।
+मेटाडेटा के दोनों pieces इस section में बनाए गए enriched meta map से आते हैं, और `COWPY` को खुद कभी यह जानने की ज़रूरत नहीं कि वे exist करते हैं।
 
 ### सारांश
 
@@ -1621,7 +1625,7 @@ Datasheet parse होने पर सभी entries के लिए `characte
     ```console hl_lines="7 12 17 29"
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [marvelous_hirsch] revision: 0dfeee3cc1
+    Launching `main.nf` [marvelous_hirsch] revision: 955602d59b
 
     executor >  local (14)
     [c1/c5dd4f] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
@@ -1635,7 +1639,7 @@ Datasheet parse होने पर सभी entries के लिए `characte
 
     Command executed:
 
-      cat bonjour.txt | cowpy -c  > fr-bonjour.txt
+      cat bonjour.txt | cowpy -c  > cowpy-bonjour.txt
 
     Command exit status:
       2
@@ -1645,8 +1649,8 @@ Datasheet parse होने पर सभी entries के लिए `characte
 
     Command error:
       usage: cowpy [-h] [-l] [-L] [-t] [-u] [-e EYES] [-c COWACTER] [-E] [-r] [-x]
-                  [-C]
-                  [msg ...]
+                   [-C]
+                   [msg ...]
       cowpy: error: argument -c/--cowacter: expected one argument
 
     Work dir:
@@ -1657,7 +1661,7 @@ Datasheet parse होने पर सभी entries के लिए `characte
 
     Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 Error message (`expected one argument`) empty `-c` flag की ओर इशारा करता है।
@@ -1682,7 +1686,7 @@ sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
     ```console hl_lines="7 12 17"
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [jovial_bohr] revision: eaaf375827
+    Launching `main.nf` [jovial_bohr] revision: 955602d59b
 
     executor >  local (14)
     [61/91663a] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
@@ -1696,7 +1700,7 @@ sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 
     Command executed:
 
-      cat hola.txt | cowpy -c null > es-hola.txt
+      cat hola.txt | cowpy -c null > cowpy-hola.txt
 
     Command exit status:
       1
@@ -1728,7 +1732,7 @@ sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 
     Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 Executed command में `cowpy -c null` diagnostic clue है।
@@ -1740,7 +1744,7 @@ Workflows को missing metadata के खिलाफ अधिक robust ब
 **1. Input validation**
 
 सबसे reliable solution यह है कि कोई भी processing शुरू होने से पहले datasheet को validate किया जाए, ताकि समस्याएँ एक clear error message के साथ जल्दी पकड़ी जाएँ बजाय run के बीच में एक cryptic process failure के रूप में सामने आने के।
-[Build with nf-core](../../hello_nf-core/05_input_validation.md) training में nf-schema plugin का उपयोग करके input validation जोड़ने का तरीका cover किया गया है। <!-- TODO (future) pending a proper Validation side quest -->
+[Build with nf-core](../../nfcore_build/04_input_validation.md) training में nf-schema plugin का उपयोग करके input validation जोड़ने का तरीका cover किया गया है। <!-- TODO (future) pending a proper Validation side quest -->
 
 **2. Required values के लिए explicit process inputs**
 
@@ -1750,7 +1754,7 @@ Workflows को missing metadata के खिलाफ अधिक robust ब
 
     ```groovy title="modules/cowpy.nf" linenums="6"
     input:
-    tuple val(meta), val(character), path(input_file)
+    tuple val(meta), val(character), path(recording)
     ```
 
 === "Workflow call"
@@ -1821,15 +1825,17 @@ Meta map channel structures को clean और stable रखता है, ल�
 3.  **Process के अंदर मेटाडेटा का उपयोग करना:** Script block में dot notation के ज़रिए किसी भी field को access करो।
 
     ```groovy
-    cat ${input_file} | cowpy -c ${meta.character} > ${meta.lang}-${input_file}
+    cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
     ```
 
-4.  **Metadata value के अनुसार outputs व्यवस्थित करना:** `output {}` block में `path` closure का उपयोग करो।
+4.  **Metadata value के अनुसार outputs व्यवस्थित और rename करना:** `output {}` block में `path` closure का उपयोग करो, target directory और published file name दोनों को control करने के लिए `>>` operator के साथ।
 
     ```groovy
     output {
         cowpy_art {
-            path { meta, file -> meta.lang_group }
+            path { meta, file ->
+                file >> "${meta.lang_group}/${meta.lang}-${file.name}"
+            }
         }
     }
     ```

@@ -633,11 +633,10 @@ Nous ne nous attendons pas à ce que vous vous souveniez de tout, mais maintenan
 Appliquez ces compétences IDE en travaillant sur d'autres modules de formation, par exemple :
 
 - **[nf-test](../nf_test/index.md)** : Créez des suites de tests complètes pour vos workflows
-- **[Build with nf-core](../../hello_nf-core/index.md)** : Construisez des pipelines de qualité production avec les standards de la communauté
+- **[Build with nf-core](../../nfcore_build/index.md)** : Construisez des pipelines de qualité production avec les standards de la communauté
 
 La véritable puissance de ces fonctionnalités IDE se révèle lorsque vous travaillez sur des projets plus grands et plus complexes. Commencez à les intégrer progressivement dans votre workflow — en quelques sessions, elles deviendront une seconde nature et transformeront votre approche du développement Nextflow.
 
 De la détection des erreurs avant qu'elles ne vous ralentissent à la navigation aisée dans des bases de code complexes, ces outils feront de vous un·e développeur·se plus confiant·e et plus efficace.
 
 Bon codage !
-%%%

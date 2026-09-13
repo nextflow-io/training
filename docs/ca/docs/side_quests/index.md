@@ -28,31 +28,38 @@ additional_information:
 
 **Les Side Quests són mini-cursos de formació independents que aprofundeixen en temes específics de Nextflow.**
 
-Cada side quest es pot fer de manera independent, en qualsevol ordre, segons els vostres interessos i necessitats.
+Cada side quest es pot fer de manera independent, en qualsevol ordre, per desenvolupar les vostres habilitats en les àrees específiques que més importin als vostres projectes.
+En conjunt, cobreixen les habilitats necessàries per passar de pipelines senzills a workflows preparats per a producció.
 
 <!-- additional_information -->
 
-## Visió general del curs
+### Exploreu per tema
 
-Si és la primera vegada que exploreu les Side Quests, comenceu per la pàgina d'[Orientació](./orientation.md) per obtenir una visió general de l'entorn de formació i els materials.
+Si és la primera vegada que feu una de les nostres formacions, comenceu per la pàgina de [Primers passos](./orientation.md) per obtenir una visió general de l'entorn de formació i els materials.
+En cas contrari, podeu endinsar-vos directament en la quest que més us cridi l'atenció.
 
-### Side Quests
-
-| Side Quest                                                                   | Resum                                                                              | Temps Estimat |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------- |
-| [Entorn de Desenvolupament](./dev_environment/index.md)                      | Configurar un entorn de desenvolupament local de Nextflow productiu                | 45 minuts     |
-| [Patrons Essencials de Programació](./essential_scripting_patterns/index.md) | Tècniques avançades de programació per a reptes habituals en workflows             | 90 minuts     |
-| [Processament de Fitxers d'Entrada](./working_with_files/index.md)           | Gestió de fitxers, operacions de rutes i organització de sortides                  | 45 minuts     |
-| [Metadades i Meta Maps](./metadata/index.md)                                 | Ús de mapes de metadades per fer el seguiment i propagar informació de mostres     | 45 minuts     |
-| [Divisió i Agrupació](./splitting_and_grouping/index.md)                     | Tècniques per dividir i reagrupar canals de dades                                  | 45 minuts     |
-| [Proves amb nf-test](./nf_test/index.md)                                     | Escriure i executar proves per a workflows de Nextflow                             | 1 hora        |
-| [Depuració de Workflows](./debugging/index.md)                               | Identificar i corregir errors habituals en workflows                               | 1 hora        |
-| [Workflows de Workflows](./workflows_of_workflows/index.md)                  | Composar pipelines complexos a partir de mòduls de workflow reutilitzables amb nom | 30 minuts     |
-| [Desenvolupament de Plugins](./plugin_development/index.md)                  | Utilitzar i crear plugins de Nextflow                                              | 3 hores       |
+<table>
+<thead>
+<tr><th>Side Quest</th><th>Resum</th><th>Temps Estimat</th></tr>
+</thead>
+<tbody>
+<tr><th colspan="3">Eines i Trucs per a Desenvolupadors</th></tr>
+<tr><td><a href="./dev_environment/">Entorn de Desenvolupament</a></td><td>Configurar un entorn de desenvolupament local de Nextflow productiu</td><td>45 minuts</td></tr>
+<tr><td><a href="./debugging/">Depuració de Workflows</a></td><td>Identificar i corregir errors habituals en workflows</td><td>1 hora</td></tr>
+<tr><td><a href="./essential_scripting_patterns/">Patrons Essencials de Programació</a></td><td>Tècniques avançades de programació per a reptes habituals en workflows</td><td>90 minuts</td></tr>
+<tr><th colspan="3">Aprofundiment en el Flux de Dades</th></tr>
+<tr><td><a href="./working_with_files/">Processament de Fitxers d'Entrada</a></td><td>Gestió de fitxers, operacions de rutes i organització de sortides</td><td>45 minuts</td></tr>
+<tr><td><a href="./metadata/">Metadades i Meta Maps</a></td><td>Ús de mapes de metadades per fer el seguiment i propagar informació de mostres</td><td>45 minuts</td></tr>
+<tr><td><a href="./splitting_and_grouping/">Divisió i Agrupació</a></td><td>Tècniques per dividir i reagrupar canals de dades</td><td>45 minuts</td></tr>
+<tr><th colspan="3">Arquitectura Modular en Acció</th></tr>
+<tr><td><a href="./workflows_of_workflows/">Workflows de Workflows</a></td><td>Composar pipelines complexos a partir de mòduls de workflow reutilitzables amb nom</td><td>30 minuts</td></tr>
+<tr><th colspan="3">L'Univers Estès de Nextflow</th></tr>
+<tr><td><a href="./nf_test/">Proves amb nf-test</a></td><td>Escriure i executar proves per a workflows de Nextflow</td><td>1 hora</td></tr>
+<tr><td><a href="./plugin_development/">Desenvolupament de Plugins</a></td><td>Utilitzar i crear plugins de Nextflow</td><td>3 hores</td></tr>
+</tbody>
+</table>
 
 [Comenceu :material-arrow-right:](orientation.md){ .md-button .md-button--primary }
 
 <!-- Clearfix for float -->
 <div style="content: ''; clear: both; display: table;"></div>
-
-Feu-nos saber quins altres temes us agradaria veure coberts aquí publicant a la [secció de Formació](https://community.seqera.io/c/training/) del fòrum de la comunitat.

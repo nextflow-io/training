@@ -8,39 +8,26 @@ Felicitats per haver completat el curs de formació Nextflow Run! 🎉
 
 ## El teu recorregut
 
-Has començat amb un workflow molt bàsic, i has après a executar-lo, trobar les sortides i gestionar la seva execució.
-Després, has treballat amb versions cada vegada més complexes d'aquest workflow i has après a reconèixer els conceptes i mecanismes essencials que impulsen els pipelines de Nextflow, incloent canals i operadors, modularització de codi i contenidors.
-Finalment, has après com personalitzar la configuració d'un pipeline per adaptar-lo a les teves preferències i la teva infraestructura computacional.
-
-### Què has après
-
-Ara ets capaç de gestionar l'execució del pipeline Hello, descriure com està estructurat i identificar les peces principals de codi implicades.
-
-- La forma final del workflow Hello pren com a entrada un fitxer CSV que conté salutacions de text.
-- Els quatre passos s'implementen com a processos de Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` i `cowpy`) emmagatzemats en fitxers de mòdul separats.
-- Els resultats es publiquen en un directori anomenat `results/`.
-- La sortida final del pipeline és un fitxer de text pla que conté art ASCII d'un personatge dient les salutacions en majúscules.
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
-</figure>
-
-1. **`sayHello`:** Escriu cada salutació al seu propi fitxer de sortida (_p. ex._ "Hello-output.txt")
-2. **`convertToUpper`:** Converteix cada salutació a majúscules (_p. ex._ "HELLO")
-3. **`collectGreetings`:** Recull totes les salutacions en majúscules en un únic fitxer per lots
-4. **`cowpy`:** Genera art ASCII utilitzant l'eina `cowpy`
-
-La configuració del workflow permet proporcionar entrades i paràmetres de manera flexible i reproduïble.
+Has començat amb un workflow molt bàsic, i has après a executar-lo i trobar les seves sortides.
+Després, has executat versions cada vegada més realistes d'aquest pipeline: processant múltiples entrades d'un fitxer CSV en paral·lel, utilitzant `-resume` per ometre el treball completat, i utilitzant contenidors per gestionar el programari del qual depèn un pipeline.
+A continuació, has après com personalitzar la configuració d'un pipeline utilitzant `nextflow.config` i perfils, i com controlar on i com es publiquen les seves sortides.
+Després d'això, has après com generar informes d'execució, inspeccionar l'historial d'execucions anteriors i netejar els directoris de treball antics.
+Finalment, has après com executar pipelines directament des de repositoris remots com GitHub.
 
 ### Habilitats adquirides
 
 A través d'aquest curs pràctic, has après com:
 
-- Executar un workflow de Nextflow localment
-- Trobar i interpretar sortides (resultats) i fitxers de registre generats per Nextflow
-- Reconèixer els components bàsics de Nextflow que constitueixen un workflow simple de múltiples passos
-- Descriure conceptes del següent nivell com operadors i factories de canals
-- Configurar pipelines per a diferents entorns computacionals
+- Llançar un workflow de Nextflow localment i trobar les seves sortides
+- Executar un pipeline de múltiples passos que processa múltiples entrades en paral·lel
+- Utilitzar `-resume` per evitar repetir el treball completat
+- Utilitzar contenidors per gestionar les dependències de programari
+- Configurar pipelines utilitzant `nextflow.config` i perfils
+- Personalitzar on i com es publiquen les sortides
+- Generar un informe d'execució HTML amb `-with-report` i una línia de temps d'execució amb `-with-timeline`
+- Inspeccionar l'historial d'execucions anteriors amb `nextflow log`
+- Netejar els directoris de treball antics amb `nextflow clean`
+- Executar un pipeline directament des d'un repositori remot, i fixar-lo a una revisió específica (i desfer-ne la fixació) per a la reproduïbilitat
 
 Ara estàs equipat amb el coneixement fonamental per començar a integrar pipelines de Nextflow existents en el teu propi treball.
 
@@ -48,12 +35,11 @@ Ara estàs equipat amb el coneixement fonamental per començar a integrar pipeli
 
 Aquí tens les nostres principals suggerències sobre què fer a continuació:
 
-- No només executis Nextflow, escriu-lo! Converteix-te en desenvolupador de Nextflow amb [Hello Nextflow](../hello_nextflow/index.md)
-- Aplica Nextflow a un cas d'ús d'anàlisi científica amb [Nextflow for Science](../nf4_science/index.md)
-- Comença amb nf-core amb [Build with nf-core](../hello_nf-core/index.md)
-- Aprèn tècniques de resolució de problemes amb la [Missió Secundària de Depuració](../side_quests/debugging/index.md)
+- Aprofundeix en la configuració de pipelines amb [Execution Config](../execution_config/index.md)
+- Aprèn a executar pipelines de la comunitat nf-core amb [Use nf-core](../nfcore_use/index.md)
+- Llança i monitora pipelines a escala amb [Scale with Seqera](../seqera_scale/index.md)
 
-Finalment, et recomanem que donis una ullada a [**Seqera Platform**](https://seqera.io/), una plataforma basada en el núvol desenvolupada pels creadors de Nextflow que fa encara més fàcil executar i gestionar els teus workflows, així com gestionar les teves dades i executar anàlisis de manera interactiva en qualsevol entorn.
+O, si estàs preparat/da per deixar d'executar Nextflow i començar a escriure'l, converteix-te en desenvolupador/a de Nextflow amb [Hello Nextflow](../hello_nextflow/index.md).
 
 ## Obtenir ajuda
 
