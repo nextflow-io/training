@@ -1,7 +1,35 @@
-{#- Override of MkDocs Material actions.html to add translate icon for
-translated pages. See:
+{#- Override of MkDocs Material actions.html.
+
+Translated pages are AI-generated and regenerated wholesale on each
+translation run (see TRANSLATING.md), so a direct GitHub edit would
+just be overwritten. For non-English pages, the "edit" action is
+replaced with a pre-filled link to open a new issue instead of a raw
+GitHub edit link. The "view source" action still points at the real
+translated file, which is still useful when reporting a problem.
+
+See:
 https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/actions.html
--#} {% if page.edit_url %} {% if "content.action.edit" in features %}
+
+NOTE: this file is excluded from prettier (see .prettierignore) because
+prettier's HTML formatter doesn't understand Jinja string literals and
+will happily insert a real newline in the middle of a quoted string,
+silently corrupting the issue_intro/issue_note text below.
+-#}
+{% set issue_intro = "Describe the issue with this translated page below." %}
+{% set issue_note = "Note: this page's content is AI-generated and regenerated from the English source on each translation run, so it can't be fixed with a direct edit here - see TRANSLATING.md (https://github.com/nextflow-io/training/blob/master/TRANSLATING.md) for how the process works." %}
+{% if page.edit_url %} {% if "content.action.edit" in features %} {% if
+config.theme.language and config.theme.language != "en" %} {% set issue_title
+= "Translation issue: " ~ page.title %} {% set issue_body = "Page: " ~
+config.site_url ~ page.url ~ "\n\n" ~ issue_intro ~ "\n\n" ~ issue_note %}
+<a
+  href="https://github.com/nextflow-io/training/issues/new?title={{ issue_title | urlencode }}&body={{ issue_body | urlencode }}"
+  title="Report an issue with this translation"
+  class="md-content__button md-icon"
+>
+  {% set icon = config.theme.icon.edit or "material/file-edit-outline" %} {%
+  include ".icons/" ~ icon ~ ".svg" %}
+</a>
+{% else %}
 <a
   href="{{ page.edit_url }}"
   title="{{ lang.t('action.edit') }}"
@@ -11,9 +39,9 @@ https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/
   {% set icon = config.theme.icon.edit or "material/file-edit-outline" %} {%
   include ".icons/" ~ icon ~ ".svg" %}
 </a>
-{% endif %} {% if "content.action.view" in features %} {% if "/blob/" in
-page.edit_url %} {% set part = "blob" %} {% else %} {% set part = "edit" %} {%
-endif %}
+{% endif %} {% endif %} {% if "content.action.view" in features %} {% if
+"/blob/" in page.edit_url %} {% set part = "blob" %} {% else %} {% set part =
+"edit" %} {% endif %}
 <a
   href="{{ page.edit_url | replace(part, 'raw') }}"
   title="{{ lang.t('action.view') }}"
