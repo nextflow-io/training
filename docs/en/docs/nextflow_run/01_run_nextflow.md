@@ -26,13 +26,19 @@ nextflow run 1-hello.nf --input 'Hello World!'
     ```console hl_lines="6"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `1-hello.nf` [infallible_volhard] DSL2 - revision: 82d40dbf94
+    Launching `1-hello.nf` [infallible_volhard] revision: 82d40dbf94
 
     executor >  local (1)
     [6d/740edd] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output: 1-hello/Hello World!-output.txt
     ```
 
-The most important line in the output is the last one:
+The key line in the output is the process status line:
 
 ```console
 [6d/740edd] sayHello | 1 of 1 ✔
@@ -40,6 +46,7 @@ The most important line in the output is the last one:
 
 This tells us that the `sayHello` process ran successfully once.
 The `[6d/740edd]` prefix is a truncated path to the task's working directory — more on that below.
+The `Outputs:` block that follows lists every file the pipeline published, labeled according to the `output` block covered in [1.4](#14-optional-code-walkthrough) below.
 
 ### 1.2. Find the output
 
@@ -239,10 +246,19 @@ nextflow run 2-inputs.nf --input data/greetings.csv
     ```console hl_lines="6"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `2-inputs.nf` [nauseous_babbage] DSL2 - revision: b90778224d
+    Launching `2-inputs.nf` [nauseous_babbage] revision: b90778224d
 
     executor >  local (3)
     [66/de7844] sayHello (3) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 2-inputs/Bonjour-output.txt
+        - 2-inputs/Hello-output.txt
+        - 2-inputs/Hola-output.txt
     ```
 
 The `3 of 3` tells us the `sayHello` process was called three times, once per row in the CSV.
@@ -297,12 +313,20 @@ nextflow run 2-inputs.nf --input data/greetings.csv -ansi-log false
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
-
-    Launching `2-inputs.nf` [extravagant_bardeen] DSL2 - revision: b90778224d
+    N E X T F L O W  ~  version 26.04.4
+    Launching `2-inputs.nf` [extravagant_bardeen] - revision: b90778224d
     [43/0bac1c] Submitted process > sayHello (1)
     [2d/99f604] Submitted process > sayHello (2)
     [6d/7578d7] Submitted process > sayHello (3)
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 2-inputs/Hello-output.txt
+        - 2-inputs/Bonjour-output.txt
+        - 2-inputs/Hola-output.txt
     ```
 
 This shows all three process calls and the unique work subdirectory created for each one.
@@ -320,10 +344,21 @@ nextflow run 2-inputs.nf --input data/greetings-extended.csv -resume
     ```console hl_lines="6"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `2-inputs.nf` [adoring_mayer] DSL2 - revision: b90778224d
+    Launching `2-inputs.nf` [adoring_mayer] revision: b90778224d
 
     executor >  local (2)
     [84/2f3067] sayHello (5) | 5 of 5, cached: 3 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - 2-inputs/Bonjour-output.txt
+        - 2-inputs/Ciao-output.txt
+        - 2-inputs/Hello-output.txt
+        - 2-inputs/Hola-output.txt
+        - 2-inputs/Ola-output.txt
     ```
 
 Nextflow ran only the two new inputs.
@@ -402,13 +437,33 @@ The `character` parameter defaults to `turkey` in `nextflow.config`, so the ASCI
     ```console hl_lines="6 7 8 9"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [nostalgic_brahmagupta] DSL2 - revision: ce74f81996
+    Launching `main.nf` [nostalgic_brahmagupta] revision: ce74f81996
 
     executor >  local (8)
     [56/8499f6] sayHello (3)       | 3 of 3 ✔
     [cc/0ee42a] convertToUpper (3) | 3 of 3 ✔
     [eb/0f2e24] collectGreetings   | 1 of 1 ✔
     [b5/34e07f] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - batch/intermediates/Bonjour-output.txt
+        - batch/intermediates/Hello-output.txt
+        - batch/intermediates/Hola-output.txt
+
+      uppercased:
+        - batch/intermediates/UPPER-Bonjour-output.txt
+        - batch/intermediates/UPPER-Hello-output.txt
+        - batch/intermediates/UPPER-Hola-output.txt
+
+      collected: batch/intermediates/COLLECTED-batch-output.txt
+
+      batch_report: batch/batch-report.txt
+
+      cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
     ```
 
 Four processes ran, but not the same number of times.
