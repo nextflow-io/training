@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Dans cette deuxième partie du cours de formation Hello nf-core, nous vous montrons comment créer une version compatible nf-core du pipeline produit par le cours pour débutant·es [Hello Nextflow](../hello_nextflow/index.md).
+Dans cette deuxième partie du cours de formation Build with nf-core, nous vous montrons comment créer une version compatible nf-core du pipeline produit par le cours pour débutant·es [Hello Nextflow](../hello_nextflow/index.md).
 
 Nous allons procéder en deux phases : d'abord, nous utiliserons les outils nf-core pour créer une structure de pipeline, puis nous grefferons le code du pipeline « régulier » existant sur cette structure.
 

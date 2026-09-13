@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Hello nf-core 교육 과정의 두 번째 부분에서는 [Hello Nextflow](../hello_nextflow/index.md) 초급자 과정에서 만든 파이프라인의 nf-core 호환 버전을 생성하는 방법을 보여드립니다.
+Build with nf-core 교육 과정의 두 번째 부분에서는 [Hello Nextflow](../hello_nextflow/index.md) 초급자 과정에서 만든 파이프라인의 nf-core 호환 버전을 생성하는 방법을 보여드립니다.
 
 두 단계로 진행합니다. 먼저 nf-core 도구를 사용하여 파이프라인 스캐폴드를 생성한 다음, 기존의 '일반' 파이프라인 코드를 스캐폴드에 맞게 조정합니다.
 

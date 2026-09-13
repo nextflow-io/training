@@ -50,5 +50,5 @@
 अगर तुमने अभी तक नहीं किया है, तो हमारे अन्य प्रशिक्षण कोर्स देखो:
 
 - **[Hello Nextflow](../../hello_nextflow/index.md)**: Nextflow की बुनियादी अवधारणाएँ
-- **[Hello nf-core](../../hello_nf-core/index.md)**: nf-core पाइपलाइन और बेस्ट प्रैक्टिसेज़
+- **[Build with nf-core](../../hello_nf-core/index.md)**: nf-core पाइपलाइन और बेस्ट प्रैक्टिसेज़
 - **[Side Quests](../index.md)**: विशिष्ट विषयों पर गहन जानकारी

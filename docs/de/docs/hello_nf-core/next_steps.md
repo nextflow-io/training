@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Herzlichen Glückwunsch zum Abschluss des Hello nf-core Trainingskurses! 🎉
+Herzlichen Glückwunsch zum Abschluss des Build with nf-core Trainingskurses! 🎉
 
 <!-- placeholder for video -->
 

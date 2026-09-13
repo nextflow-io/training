@@ -620,7 +620,7 @@ nextflow run basic_workflow.nf --input data/sample_data.csv --output_dir results
 इन IDE कौशलों को अन्य प्रशिक्षण मॉड्यूल के माध्यम से काम करते समय लागू करो, उदाहरण के लिए:
 
 - **[nf-test](../nf_test/index.md)**: अपने वर्कफ़्लो के लिए व्यापक test suites बनाओ
-- **[Hello nf-core](../../hello_nf-core/index.md)**: community standards के साथ production-quality पाइपलाइन बनाओ
+- **[Build with nf-core](../../hello_nf-core/index.md)**: community standards के साथ production-quality पाइपलाइन बनाओ
 
 इन IDE फ़ीचर्स की वास्तविक शक्ति तब उभरती है जब तुम बड़े, अधिक जटिल प्रोजेक्ट पर काम करते हो। इन्हें धीरे-धीरे अपने वर्कफ़्लो में शामिल करना शुरू करो - कुछ सत्रों के भीतर, ये स्वाभाविक हो जाएंगे और Nextflow डेवलपमेंट के प्रति तुम्हारे दृष्टिकोण को बदल देंगे।
 

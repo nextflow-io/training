@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W tej pierwszej części szkolenia Hello nf-core pokażemy Ci, jak znaleźć i wypróbować pipeline nf-core, skonfigurować i dostosować jego wykonanie do swoich potrzeb oraz zrozumieć, jak walidacja wejścia chroni przed typowymi błędami.
+W tej pierwszej części szkolenia Build with nf-core pokażemy Ci, jak znaleźć i wypróbować pipeline nf-core, skonfigurować i dostosować jego wykonanie do swoich potrzeb oraz zrozumieć, jak walidacja wejścia chroni przed typowymi błędami.
 
 Będziemy używać pipeline'a o nazwie nf-core/demo, który jest utrzymywany przez projekt nf-core jako część inwentarza pipeline'ów służących do demonstracji i celów szkoleniowych.
 

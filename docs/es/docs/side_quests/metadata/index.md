@@ -1740,7 +1740,7 @@ Hay dos enfoques complementarios para hacer los workflows más robustos ante met
 **1. Validación de entrada**
 
 La solución más confiable es validar la hoja de datos antes de que comience cualquier procesamiento, para que los problemas se detecten temprano con un mensaje de error claro en lugar de aparecer como un fallo críptico del proceso a mitad de la ejecución.
-La capacitación [Hello nf-core](../../hello_nf-core/05_input_validation.md) cubre cómo agregar validación de entrada usando el plugin nf-schema. <!-- TODO (future) pending a proper Validation side quest -->
+La capacitación [Build with nf-core](../../hello_nf-core/05_input_validation.md) cubre cómo agregar validación de entrada usando el plugin nf-schema. <!-- TODO (future) pending a proper Validation side quest -->
 
 **2. Entradas explícitas del proceso para valores requeridos**
 

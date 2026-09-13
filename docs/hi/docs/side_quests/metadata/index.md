@@ -1740,7 +1740,7 @@ Workflows को missing metadata के खिलाफ अधिक robust ब
 **1. Input validation**
 
 सबसे reliable solution यह है कि कोई भी processing शुरू होने से पहले datasheet को validate किया जाए, ताकि समस्याएँ एक clear error message के साथ जल्दी पकड़ी जाएँ बजाय run के बीच में एक cryptic process failure के रूप में सामने आने के।
-[Hello nf-core](../../hello_nf-core/05_input_validation.md) training में nf-schema plugin का उपयोग करके input validation जोड़ने का तरीका cover किया गया है। <!-- TODO (future) pending a proper Validation side quest -->
+[Build with nf-core](../../hello_nf-core/05_input_validation.md) training में nf-schema plugin का उपयोग करके input validation जोड़ने का तरीका cover किया गया है। <!-- TODO (future) pending a proper Validation side quest -->
 
 **2. Required values के लिए explicit process inputs**
 

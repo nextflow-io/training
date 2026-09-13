@@ -132,11 +132,11 @@ hide:
     Estos cursos le ayudan a pasar de los fundamentos de Nextflow a las buenas prácticas de nf-core.
     Comprenda cómo y por qué la comunidad nf-core construye pipelines, y cómo puede contribuir y reutilizar estas técnicas.
 
-    ??? courses "**Hello nf-core:** Primeros pasos con nf-core"
+    ??? courses "**Build with nf-core:** Primeros pasos con nf-core"
 
         Para desarrolladores que deseen aprender a ejecutar y desarrollar pipelines compatibles con [nf-core](https://nf-co.re/). El curso cubre la estructura de los pipelines de nf-core con suficiente detalle para permitir el desarrollo de pipelines simples pero completamente funcionales que sigan la plantilla y las buenas prácticas de desarrollo de nf-core, así como el uso de módulos nf-core existentes.
 
-        [Comenzar la capacitación Hello nf-core :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
+        [Comenzar la capacitación Build with nf-core :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
 
     ---
 
@@ -150,11 +150,11 @@ hide:
 
         [Explorar los Side Quests :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Training Collections:** Rutas de aprendizaje recomendadas a través de los Side Quests"
+    ??? courses "**Learning Paths:** Rutas de aprendizaje recomendadas a través de los Side Quests"
 
-        Las Training Collections combinan múltiples Side Quests para proporcionar una experiencia de aprendizaje integral en torno a un tema o caso de uso particular.
+        Las Learning Paths combinan múltiples Side Quests para proporcionar una experiencia de aprendizaje integral en torno a un tema o caso de uso particular.
 
-        [Explorar las Training Collections :material-arrow-right:](training_collections/index.md){ .md-button .md-button--secondary }
+        [Explorar las Learning Paths :material-arrow-right:](training_collections/index.md){ .md-button .md-button--secondary }
 
 </div>
 

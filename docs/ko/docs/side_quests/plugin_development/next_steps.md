@@ -50,5 +50,5 @@ Nextflow에서 필요했지만 찾지 못했던 기능을 생각해 보세요.
 아직 수강하지 않으셨다면, 다음 교육 과정들을 확인해 보세요:
 
 - **[Hello Nextflow](../../hello_nextflow/index.md)**: Nextflow의 기초 개념
-- **[Hello nf-core](../../hello_nf-core/index.md)**: nf-core 파이프라인 및 모범 사례
+- **[Build with nf-core](../../hello_nf-core/index.md)**: nf-core 파이프라인 및 모범 사례
 - **[Side Quests](../index.md)**: 특정 주제에 대한 심층 학습

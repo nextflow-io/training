@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-In diesem zweiten Teil des Hello nf-core Trainingskurses zeigen wir dir, wie du eine nf-core-kompatible Version der Pipeline erstellst, die im [Hello Nextflow](../hello_nextflow/index.md) Einsteigerkurs entwickelt wurde.
+In diesem zweiten Teil des Build with nf-core Trainingskurses zeigen wir dir, wie du eine nf-core-kompatible Version der Pipeline erstellst, die im [Hello Nextflow](../hello_nextflow/index.md) Einsteigerkurs entwickelt wurde.
 
 Wir gehen das in zwei Phasen an: Zuerst verwenden wir nf-core-Werkzeuge, um ein Pipeline-Gerüst zu erstellen, und pfropfen dann den bestehenden 'normalen' Pipeline-Code auf das Gerüst auf.
 
