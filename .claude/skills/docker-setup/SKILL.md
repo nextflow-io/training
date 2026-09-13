@@ -213,3 +213,4 @@ docker stop nf-training && docker rm nf-training
 - The container uses `sleep infinity` so it persists across multiple command executions
 - Symlink must be recreated each time the container restarts
 - For long sessions, periodically check container is still running: `docker ps | grep nf-training`
+- The `docker run`/`docker exec` commands above only set `NXF_VER`, `LANG`, and `LC_ALL` inside the container, so it does not inherit the host shell's `CLAUDECODE` variable and Nextflow 26.04+'s agent-mode console output is not triggered here. See [Console Output Mode](../shared/repo-conventions.md#console-output-mode-critical) in repo-conventions — do not add `-e CLAUDECODE` or otherwise forward the host environment into this container, as that would reintroduce the problem.
