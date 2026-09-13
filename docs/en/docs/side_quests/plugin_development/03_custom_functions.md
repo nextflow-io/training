@@ -266,7 +266,7 @@ nextflow run greet.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `greet.nf` [elated_marconi] revision: cd8d52c97c
+    Launching `greet.nf` [elated_marconi] revision: 8cc49dbe33
 
     Pipeline is starting! 🚀
     executor >  local (5)
@@ -443,7 +443,7 @@ nextflow run greet.nf
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `greet.nf` [elated_marconi] revision: cd8d52c97c
+    Launching `greet.nf` [elated_marconi] revision: bef1bea9f0
 
     Pipeline is starting! 🚀
     executor >  local (5)
