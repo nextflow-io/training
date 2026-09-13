@@ -266,11 +266,13 @@ Once the TUI closes, you should see the following console output.
     INFO     Launching interactive nf-core pipeline creation tool.
     ```
 
-Once the TUI has finished, the tool reports that it created the pipeline and generated its container configuration:
+Once the TUI has finished, the tool reports that it created the pipeline, generated its container configuration, and initialized a local git repository for the new pipeline:
 
 ```console
 INFO     Creating new pipeline: 'hello'
 INFO     Generated container configs for the pipeline successfully.
+INFO     Initialising local pipeline git repository
+INFO     Pipeline created: ./core-hello
 ```
 
 You should now see a new directory called `core-hello`.

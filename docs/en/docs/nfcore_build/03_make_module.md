@@ -253,7 +253,7 @@ nextflow run . --outdir core-hello-results -profile test,docker
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [elegant_plateau] revision: b9e9b3b8de
+    Launching `./main.nf` [elegant_plateau] revision: d6bbba9521
 
     Input/output options
       input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
@@ -401,7 +401,7 @@ nextflow run . --outdir core-hello-results -profile test,docker
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [modest_saha] revision: b9e9b3b8de
+    Launching `./main.nf` [modest_saha] revision: d6bbba9521
 
     Downloading plugin nf-schema@2.7.2
     Input/output options
@@ -629,7 +629,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --character kosh
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [exotic_planck] revision: b9e9b3b8de
+    Launching `./main.nf` [exotic_planck] revision: d6bbba9521
 
     Input/output options
       input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
@@ -847,7 +847,7 @@ nextflow run . --outdir core-hello-results -profile test,docker
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [admiring_turing] revision: b9e9b3b8de
+    Launching `./main.nf` [admiring_turing] revision: d6bbba9521
 
     Input/output options
       input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
@@ -984,7 +984,7 @@ nextflow run . --outdir core-hello-results -profile test,docker
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [silly_caravaggio] revision: b9e9b3b8de
+    Launching `./main.nf` [silly_caravaggio] revision: d6bbba9521
 
     Input/output options
       input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
@@ -1168,7 +1168,7 @@ nextflow run . --outdir core-hello-results -profile test,docker
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [silly_fermat] revision: b9e9b3b8de
+    Launching `./main.nf` [silly_fermat] revision: d6bbba9521
 
     ...
 
@@ -1586,7 +1586,7 @@ nextflow run . --outdir core-hello-results -profile test,docker
     ```console hl_lines="33"
       N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [prickly_neumann] revision: b9e9b3b8de
+    Launching `./main.nf` [prickly_neumann] revision: d6bbba9521
 
     Input/output options
       input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv

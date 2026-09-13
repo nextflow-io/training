@@ -76,13 +76,33 @@ nextflow run main.nf -profile my_laptop
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [cheeky_goldstine] DSL2 - revision: c3c85dec78
+    Launching `main.nf` [nice_kimura] revision: c3c85dec78
 
     executor >  local (8)
-    [da/0111e3] sayHello (1)       | 3 of 3 ✔
-    [db/e19e47] convertToUpper (2) | 3 of 3 ✔
-    [71/ad2bde] collectGreetings   | 1 of 1 ✔
-    [85/afb958] cowpy              | 1 of 1 ✔
+    [df/b86b2f] sayHello (2)       | 3 of 3 ✔
+    [b2/e2cb9c] convertToUpper (3) | 3 of 3 ✔
+    [af/2ecff7] collectGreetings   | 1 of 1 ✔
+    [c6/713c96] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/execution-config/results
+
+      first_output:
+        - full_pipeline/intermediates/Bonjour-output.txt
+        - full_pipeline/intermediates/Hello-output.txt
+        - full_pipeline/intermediates/Hola-output.txt
+
+      uppercased:
+        - full_pipeline/intermediates/UPPER-Bonjour-output.txt
+        - full_pipeline/intermediates/UPPER-Hello-output.txt
+        - full_pipeline/intermediates/UPPER-Hola-output.txt
+
+      collected: full_pipeline/intermediates/COLLECTED-batch-output.txt
+
+      batch_report: full_pipeline/batch-report.txt
+
+      cowpy_art: full_pipeline/cowpy-COLLECTED-batch-output.txt
     ```
 
 !!! warning
@@ -107,13 +127,33 @@ nextflow run main.nf -profile my_laptop,test
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [sleepy_minsky] DSL2 - revision: c3c85dec78
+    Launching `main.nf` [romantic_volhard] revision: c3c85dec78
 
     executor >  local (8)
-    [b2/103b0d] sayHello (3)       | 3 of 3 ✔
-    [00/6a7642] convertToUpper (2) | 3 of 3 ✔
-    [b1/3df765] collectGreetings   | 1 of 1 ✔
-    [d1/4e5ae1] cowpy              | 1 of 1 ✔
+    [22/81de4f] sayHello (3)       | 3 of 3 ✔
+    [93/e16b04] convertToUpper (1) | 3 of 3 ✔
+    [ca/3e6a91] collectGreetings   | 1 of 1 ✔
+    [16/0cc7e3] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/execution-config/results
+
+      first_output:
+        - full_pipeline/intermediates/Hola-output.txt
+        - full_pipeline/intermediates/Hello-output.txt
+        - full_pipeline/intermediates/Bonjour-output.txt
+
+      uppercased:
+        - full_pipeline/intermediates/UPPER-Hello-output.txt
+        - full_pipeline/intermediates/UPPER-Bonjour-output.txt
+        - full_pipeline/intermediates/UPPER-Hola-output.txt
+
+      collected: full_pipeline/intermediates/COLLECTED-test-output.txt
+
+      batch_report: full_pipeline/test-report.txt
+
+      cowpy_art: full_pipeline/cowpy-COLLECTED-test-output.txt
     ```
 
 The individual file names correctly pick up `batch = 'test'` from the `test` profile (`COLLECTED-test-output.txt`, and so on).
@@ -146,6 +186,12 @@ nextflow config
 ??? success "Command output"
 
     ```groovy
+    params {
+       input = 'data/greetings.csv'
+       batch = 'batch'
+       character = 'turkey'
+    }
+
     docker {
        enabled = true
     }
@@ -157,12 +203,6 @@ nextflow config
           memory = '2 GB'
           cpus = 2
        }
-    }
-
-    params {
-       input = 'data/greetings.csv'
-       batch = 'batch'
-       character = 'turkey'
     }
     ```
 
@@ -179,6 +219,12 @@ nextflow config -profile my_laptop,test
 ??? success "Command output"
 
     ```groovy
+    params {
+       input = 'data/greetings.csv'
+       batch = 'test'
+       character = 'tux'
+    }
+
     docker {
        enabled = true
     }
@@ -191,12 +237,6 @@ nextflow config -profile my_laptop,test
           cpus = 2
        }
        executor = 'local'
-    }
-
-    params {
-       input = 'data/greetings.csv'
-       batch = 'test'
-       character = 'tux'
     }
     ```
 

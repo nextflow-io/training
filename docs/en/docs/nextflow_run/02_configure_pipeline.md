@@ -149,13 +149,33 @@ nextflow run main.nf -profile test
     ```console hl_lines="6 7 8 9"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [reverent_heisenberg] DSL2 - revision: ce74f81996
+    Launching `main.nf` [reverent_heisenberg] revision: ce74f81996
 
     executor >  local (8)
     [3d/8a12c7] sayHello (3)       | 3 of 3 ✔
     [e7/e0934f] convertToUpper (2) | 3 of 3 ✔
     [1d/616569] collectGreetings   | 1 of 1 ✔
     [44/7d46cf] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - test/intermediates/Bonjour-output.txt
+        - test/intermediates/Hello-output.txt
+        - test/intermediates/Hola-output.txt
+
+      uppercased:
+        - test/intermediates/UPPER-Bonjour-output.txt
+        - test/intermediates/UPPER-Hello-output.txt
+        - test/intermediates/UPPER-Hola-output.txt
+
+      collected: test/intermediates/COLLECTED-test-output.txt
+
+      batch_report: test/test-report.txt
+
+      cowpy_art: test/cowpy-COLLECTED-test-output.txt
     ```
 
 The pipeline runs with `batch = 'test'` and `character = 'tux'`.
@@ -207,13 +227,33 @@ nextflow run main.nf -c custom.config
     ```console hl_lines="6 7 8 9"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [exotic_cray] DSL2 - revision: ce74f81996
+    Launching `main.nf` [exotic_cray] revision: ce74f81996
 
     executor >  local (8)
     [77/e02315] sayHello (1)       | 3 of 3 ✔
     [a6/ccf44b] convertToUpper (3) | 3 of 3 ✔
     [56/fd1296] collectGreetings   | 1 of 1 ✔
     [2c/205a94] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - batch/intermediates/Bonjour-output.txt
+        - batch/intermediates/Hello-output.txt
+        - batch/intermediates/Hola-output.txt
+
+      uppercased:
+        - batch/intermediates/UPPER-Bonjour-output.txt
+        - batch/intermediates/UPPER-Hello-output.txt
+        - batch/intermediates/UPPER-Hola-output.txt
+
+      collected: batch/intermediates/COLLECTED-batch-output.txt
+
+      batch_report: batch/batch-report.txt
+
+      cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
     ```
 
 Nextflow merges `custom.config` on top of the pipeline's own `nextflow.config`, so every process now gets 2 CPUs and 2 GB of memory instead of the defaults, and runs through Conda instead of Docker.
@@ -259,13 +299,33 @@ nextflow run main.nf -params-file test-params.yaml
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [sharp_faraday] DSL2 - revision: ce74f81996
+    Launching `main.nf` [sharp_faraday] revision: ce74f81996
 
     executor >  local (8)
     [1c/9ff63e] sayHello (1)       | 3 of 3 ✔
     [3b/bb5691] convertToUpper (2) | 3 of 3 ✔
     [cd/2c1f6e] collectGreetings   | 1 of 1 ✔
     [89/c333bc] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - yaml/intermediates/Bonjour-output.txt
+        - yaml/intermediates/Hello-output.txt
+        - yaml/intermediates/Hola-output.txt
+
+      uppercased:
+        - yaml/intermediates/UPPER-Bonjour-output.txt
+        - yaml/intermediates/UPPER-Hello-output.txt
+        - yaml/intermediates/UPPER-Hola-output.txt
+
+      collected: yaml/intermediates/COLLECTED-yaml-output.txt
+
+      batch_report: yaml/yaml-report.txt
+
+      cowpy_art: yaml/cowpy-COLLECTED-yaml-output.txt
     ```
 
 ??? abstract "File contents"
@@ -323,13 +383,33 @@ nextflow run main.nf -output-dir outputs
     ```console hl_lines="6 7 8 9"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [serene_kimura] DSL2 - revision: ce74f81996
+    Launching `main.nf` [serene_kimura] revision: ce74f81996
 
     executor >  local (8)
     [31/df5c15] sayHello (3)       | 3 of 3 ✔
     [08/8bb2e5] convertToUpper (1) | 3 of 3 ✔
     [e5/5814da] collectGreetings   | 1 of 1 ✔
     [cf/8ab8c6] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/outputs
+
+      first_output:
+        - batch/intermediates/Bonjour-output.txt
+        - batch/intermediates/Hello-output.txt
+        - batch/intermediates/Hola-output.txt
+
+      uppercased:
+        - batch/intermediates/UPPER-Bonjour-output.txt
+        - batch/intermediates/UPPER-Hello-output.txt
+        - batch/intermediates/UPPER-Hola-output.txt
+
+      collected: batch/intermediates/COLLECTED-batch-output.txt
+
+      batch_report: batch/batch-report.txt
+
+      cowpy_art: batch/cowpy-COLLECTED-batch-output.txt
     ```
 
 ??? abstract "Directory contents"
@@ -410,13 +490,33 @@ nextflow run main.nf --batch withmode
     ```console hl_lines="6 7 8 9"
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [angry_noether] DSL2 - revision: ce74f81996
+    Launching `main.nf` [angry_noether] revision: ce74f81996
 
     executor >  local (8)
     [41/2b478d] sayHello (3)       | 3 of 3 ✔
     [bf/dd2840] convertToUpper (2) | 3 of 3 ✔
     [ea/364e97] collectGreetings   | 1 of 1 ✔
     [10/76fe7b] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nextflow-run/results
+
+      first_output:
+        - withmode/intermediates/Bonjour-output.txt
+        - withmode/intermediates/Hello-output.txt
+        - withmode/intermediates/Hola-output.txt
+
+      uppercased:
+        - withmode/intermediates/UPPER-Bonjour-output.txt
+        - withmode/intermediates/UPPER-Hello-output.txt
+        - withmode/intermediates/UPPER-Hola-output.txt
+
+      collected: withmode/intermediates/COLLECTED-withmode-output.txt
+
+      batch_report: withmode/withmode-report.txt
+
+      cowpy_art: withmode/cowpy-COLLECTED-withmode-output.txt
     ```
 
 Have a look at one of the output files like before:

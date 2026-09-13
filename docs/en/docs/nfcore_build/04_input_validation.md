@@ -386,7 +386,7 @@ nextflow run . --input assets/greetings.csv --outdir results --batch my-batch -p
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [peaceful_wozniak] revision: b9e9b3b8de
+    Launching `./main.nf` [peaceful_wozniak] revision: d6bbba9521
 
     executor >  local (8)
     [de/a1b2c3] CORE_HELLO:HELLO:sayHello (3)                | 3 of 3 ✔
@@ -751,7 +751,7 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [trusting_ochoa] revision: b9e9b3b8de
+    Launching `./main.nf` [trusting_ochoa] revision: d6bbba9521
 
     Input/output options
       input              : assets/invalid_greetings.csv

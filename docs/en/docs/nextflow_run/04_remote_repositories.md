@@ -55,18 +55,20 @@ nextflow info nextflow-io/hello
 ??? success "Command output"
 
     ```console
-    project name: nextflow-io/hello
-    repository  : https://github.com/nextflow-io/hello
-    local path  : /workspaces/.nextflow/assets/nextflow-io/hello
-    main script : main.nf
-    revisions   :
-    * master (default)
-      mybranch
-      testing
-      v1.1 [t]
-      v1.2 [t]
-      v1.3 [t]
+     project name: nextflow-io/hello
+     repository  : https://github.com/nextflow-io/hello
+     local path  : /workspaces/.nextflow/assets/.repos/nextflow-io/hello
+     main script : main.nf
+     revisions   :
+     > master (default)
+       mybranch
+       testing
+       v1.1 [t]
+       v1.2 [t]
+       v1.3 [t]
     ```
+
+    Nextflow marks each revision you've already checked out locally with `>`; the rest are available but not yet fetched into a working copy.
 
 You can also list every pipeline you've pulled so far with `nextflow list`:
 
@@ -108,6 +110,8 @@ nextflow run nextflow-io/hello -r v1.3
     ```console
     N E X T F L O W   ~  version 26.04.4
 
+    Pulling nextflow-io/hello:v1.3 ...
+     downloaded from https://github.com/nextflow-io/hello.git
     Launching `https://github.com/nextflow-io/hello` [sick_carson] revision: 2ce0b0e294 [v1.3]
 
     executor >  local (4)
@@ -121,29 +125,17 @@ nextflow run nextflow-io/hello -r v1.3
     Hola world!
     ```
 
+Nextflow fetches this revision the first time you request it, hence the `Pulling` and `downloaded from` lines; requesting the same revision again later skips straight to `Launching`.
 Pinning an exact revision is essential for reproducibility.
 It guarantees that you and your collaborators run the exact same pipeline code, regardless of what has changed in the repository since.
 
-### 2.2. Unpin a pipeline
+### 2.2. Revisions apply per invocation only
 
-Pinning a revision doesn't just apply to that one run: Nextflow checks out that revision in the local cache, so it also becomes what any later run without `-r` uses.
+Pinning a revision with `-r` only affects the run where you specify it: it does not change what a later, plain `nextflow run` uses.
 Try running the pipeline again without `-r`:
 
 ```bash
 nextflow run nextflow-io/hello
-```
-
-??? failure "Command output"
-
-    ```console
-    Project `nextflow-io/hello` is currently stuck on revision: v1.3 -- you need to explicitly specify a revision with the option `-r` in order to use it
-    ```
-
-Nextflow refuses to guess, since silently running a different revision than the one you pinned would defeat the purpose of pinning it in the first place.
-To go back to running the default branch, pass it explicitly with `-r`:
-
-```bash
-nextflow run nextflow-io/hello -r master
 ```
 
 ??? success "Command output"
@@ -151,7 +143,7 @@ nextflow run nextflow-io/hello -r master
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `https://github.com/nextflow-io/hello` [hungry_maxwell] DSL2 - revision: 3c2cdc9823 [master]
+    Launching `https://github.com/nextflow-io/hello` [hungry_maxwell] revision: 3c2cdc9823 [master]
 
     executor >  local (4)
     [ba/08236d] sayHello (4) | 4 of 4 ✔
@@ -164,12 +156,14 @@ nextflow run nextflow-io/hello -r master
     Hola world!
     ```
 
+Even though the previous run explicitly pinned `v1.3`, this run goes straight back to the default branch (`master`).
+Nextflow keeps a separate local working copy for each revision you've used, which is what the `>` markers in `nextflow info` show, but it never remembers which one you ran last.
 You can find the name of a pipeline's default branch by running `nextflow info <pipeline>`; it's the one marked `(default)`.
-Once you've run it, the pipeline is unstuck: plain `nextflow run nextflow-io/hello` commands go back to using that branch until you pin it to something else again.
+Reproducibility is entirely on you: always pass `-r` explicitly whenever it matters, rather than assuming a revision you pinned in an earlier run still applies.
 
 ### Takeaway
 
-You know how to pin a remote pipeline to a specific version, branch, or commit for reproducible execution, and how to unpin it again.
+You know how to pin a remote pipeline to a specific version, branch, or commit for reproducible execution, and that the pin applies only to that one invocation, not to later runs.
 
 ### What's next?
 
@@ -183,4 +177,4 @@ See [Course summary](next_steps.md) for where to go from here.
 In this part you learned to:
 
 - Run a pipeline directly from a GitHub repository without downloading it
-- Pin a remote pipeline to a specific revision for reproducibility, and unpin it again
+- Pin a remote pipeline to a specific revision for reproducibility, and understand that the pin applies only to that one invocation

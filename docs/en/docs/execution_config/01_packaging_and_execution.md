@@ -79,14 +79,34 @@ nextflow run main.nf --batch conda
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [extravagant_mccarthy] DSL2 - revision: c3c85dec78
+    Launching `main.nf` [romantic_pike] revision: c3c85dec78
 
     executor >  local (8)
-    [c3/1a514c] sayHello (2)       | 3 of 3 ✔
-    [14/615655] convertToUpper (3) | 3 of 3 ✔
-    [78/4d519c] collectGreetings   | 1 of 1 ✔
+    [6d/d48030] sayHello (2)       | 3 of 3 ✔
+    [f5/7a9d76] convertToUpper (1) | 3 of 3 ✔
+    [1c/79b693] collectGreetings   | 1 of 1 ✔
     Creating env using conda: conda-forge::cowpy==1.1.5 [cache /workspaces/training/execution-config/work/conda/env-898314d566668b6587ad714ae06b8520]
-    [0a/2e4f16] cowpy              | 1 of 1 ✔
+    [bb/64b67c] cowpy              | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/execution-config/results
+
+      first_output:
+        - full_pipeline/intermediates/Hola-output.txt
+        - full_pipeline/intermediates/Bonjour-output.txt
+        - full_pipeline/intermediates/Hello-output.txt
+
+      uppercased:
+        - full_pipeline/intermediates/UPPER-Hello-output.txt
+        - full_pipeline/intermediates/UPPER-Bonjour-output.txt
+        - full_pipeline/intermediates/UPPER-Hola-output.txt
+
+      collected: full_pipeline/intermediates/COLLECTED-conda-output.txt
+
+      batch_report: full_pipeline/conda-report.txt
+
+      cowpy_art: full_pipeline/cowpy-COLLECTED-conda-output.txt
     ```
 
 This produces the same output as running with Docker, even though the mechanics are different behind the scenes: Nextflow retrieves the Conda package and builds an environment from it, instead of pulling a container image.

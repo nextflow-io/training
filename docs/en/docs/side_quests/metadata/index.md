@@ -213,7 +213,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [exotic_albattani] revision: c0d03cec83
+    Launching `main.nf` [exotic_albattani] revision: c7ce88ee60
 
     [id:sampleA, character:squirrel, recording:/workspaces/training/side-quests/metadata/data/bonjour.txt]
     [id:sampleB, character:tux, recording:/workspaces/training/side-quests/metadata/data/guten_tag.txt]
@@ -321,7 +321,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [exotic_albattani] revision: c0d03cec83
+    Launching `main.nf` [exotic_albattani] revision: 10a2598a59
 
     squirrel
     tux
@@ -496,7 +496,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [clever_dijkstra] revision: a1b2c3d4e5
+    Launching `main.nf` [clever_dijkstra] revision: 2fb579b3bd
 
     executor >  local (7)
     [3a/f1c290] COWPY (7) | 7 of 7 ✔
@@ -680,7 +680,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [pedantic_lovelace] revision: b2c3d4e5f6
+    Launching `main.nf` [pedantic_lovelace] revision: 745a78a291
 
     executor >  local (7)
     [5e/2a1b34] COWPY (7) | 7 of 7 ✔
@@ -809,7 +809,7 @@ nextflow run main.nf
     ```console title="View meta map"
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [lethal_booth] revision: 0d8f844c07
+    Launching `main.nf` [lethal_booth] revision: 50e03309d4
 
     [[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/data/bonjour.txt]
     [[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/data/guten_tag.txt]
@@ -936,7 +936,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [wise_sammet] revision: 99797b1e92
+    Launching `main.nf` [wise_sammet] revision: f8f429c3df
 
     executor >  local (7)
     [5d/dffd4e] COWPY (7) | 7 of 7 ✔
@@ -1102,7 +1102,7 @@ nextflow run main.nf -resume
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [voluminous_mcnulty] revision: f9bcfebabb
+    Launching `main.nf` [voluminous_mcnulty] revision: 1d1ec2b857
 
     executor >  local (7)
     [c9/34bfec] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
@@ -1277,7 +1277,7 @@ nextflow run main.nf -resume
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [cheeky_fermat] revision: d096281ee4
+    Launching `main.nf` [cheeky_fermat] revision: f55f2f98b9
 
     [d9/b360d0] IDENTIFY_LANGUAGE (3) | 7 of 7, cached: 7 ✔
     [94/224450] COWPY (3)             | 7 of 7, cached: 7 ✔
@@ -1406,7 +1406,7 @@ nextflow run main.nf -resume
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [wise_almeida] revision: 46778c3cd0
+    Launching `main.nf` [wise_almeida] revision: 0f4b36d66d
 
     [c9/34bfec] IDENTIFY_LANGUAGE (1) | 7 of 7, cached: 7 ✔
     [e9/269aa0] COWPY (6)             | 7 of 7, cached: 7 ✔
@@ -1545,7 +1545,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [suspicious_crick] revision: 25541014c5
+    Launching `main.nf` [suspicious_crick] revision: 955602d59b
 
     executor >  local (14)
     [99/64c59d] IDENTIFY_LANGUAGE (6) | 7 of 7 ✔
@@ -1623,7 +1623,7 @@ When Nextflow substitutes `#!groovy ${meta.character}` into the command, the `CO
     ```console hl_lines="7 12 17 29"
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [marvelous_hirsch] revision: 0dfeee3cc1
+    Launching `main.nf` [marvelous_hirsch] revision: 955602d59b
 
     executor >  local (14)
     [c1/c5dd4f] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
@@ -1647,8 +1647,8 @@ When Nextflow substitutes `#!groovy ${meta.character}` into the command, the `CO
 
     Command error:
       usage: cowpy [-h] [-l] [-L] [-t] [-u] [-e EYES] [-c COWACTER] [-E] [-r] [-x]
-                  [-C]
-                  [msg ...]
+                   [-C]
+                   [msg ...]
       cowpy: error: argument -c/--cowacter: expected one argument
 
     Work dir:
@@ -1659,7 +1659,7 @@ When Nextflow substitutes `#!groovy ${meta.character}` into the command, the `CO
 
     Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 The error message (`expected one argument`) points to the empty `-c` flag.
@@ -1684,7 +1684,7 @@ When the process script evaluates `#!groovy ${meta.character}`, Nextflow literal
     ```console hl_lines="7 12 17"
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [jovial_bohr] revision: eaaf375827
+    Launching `main.nf` [jovial_bohr] revision: 955602d59b
 
     executor >  local (14)
     [61/91663a] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
@@ -1730,7 +1730,7 @@ When the process script evaluates `#!groovy ${meta.character}`, Nextflow literal
 
     Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 The `cowpy -c null` in the executed command is the diagnostic clue.
