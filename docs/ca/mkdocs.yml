@@ -1,4 +1,5 @@
 INHERIT: ../en/mkdocs.yml
+edit_uri: edit/master/docs/ca/docs/
 theme:
   language: ca
   custom_dir: ../en/overrides

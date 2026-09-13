@@ -2,6 +2,7 @@ site_name: training.nextflow.io
 site_url: https://training.nextflow.io/
 repo_url: https://github.com/nextflow-io/training
 repo_name: nextflow-io/training
+edit_uri: edit/master/docs/en/docs/
 
 nav:
   - index.md
