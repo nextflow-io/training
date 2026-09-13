@@ -9,7 +9,8 @@ Bu ekstra bilgiye metadata diyoruz.
 Metadata, diğer verileri tanımlayan veridir.
 Metadata, dosyalar ve deneysel koşullar hakkındaki önemli ayrıntıları takip eder ve analizlerin her veri setinin kendine özgü özelliklerine göre uyarlanmasına yardımcı olur.
 
-Bunu bir kütüphane kataloğu gibi düşünebilirsiniz: kitaplar gerçek içeriği (ham veri) barındırırken, katalog kartları her kitap hakkında temel bilgileri sağlar; ne zaman yayımlandığı, kimin yazdığı, nerede bulunacağı (metadata).
+Bunu bir kütüphane kataloğu gibi düşünebilirsiniz: kitaplar gerçek içeriği (ham veri) barındırırken, katalog kartları her kitap hakkında temel bilgileri sağlar.
+Bu bilgiler arasında ne zaman yayımlandığı, kimin yazdığı ve nerede bulunacağı (metadata) yer alır.
 Nextflow pipeline'larında metadata şu amaçlarla kullanılabilir:
 
 - İş akışı boyunca dosyaya özgü bilgileri takip etmek
@@ -214,7 +215,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [exotic_albattani] revision: c0d03cec83
+    Launching `main.nf` [exotic_albattani] revision: c7ce88ee60
 
     [id:sampleA, character:squirrel, recording:/workspaces/training/side-quests/metadata/data/bonjour.txt]
     [id:sampleB, character:tux, recording:/workspaces/training/side-quests/metadata/data/guten_tag.txt]
@@ -322,7 +323,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [exotic_albattani] revision: c0d03cec83
+    Launching `main.nf` [exotic_albattani] revision: 10a2598a59
 
     squirrel
     tux
@@ -356,15 +357,15 @@ process COWPY {
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
     input:
-    path input_file
+    path recording
     val character
 
     output:
-    path "cowpy-${input_file}"
+    path "cowpy-${recording}"
 
     script:
     """
-    cat ${input_file} | cowpy -c ${character} > cowpy-${input_file}
+    cat ${recording} | cowpy -c ${character} > cowpy-${recording}
     """
 }
 ```
@@ -497,7 +498,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [clever_dijkstra] revision: a1b2c3d4e5
+    Launching `main.nf` [clever_dijkstra] revision: 2fb579b3bd
 
     executor >  local (7)
     [3a/f1c290] COWPY (7) | 7 of 7 ✔
@@ -594,15 +595,15 @@ Alanları ayrı kanallara bölmek yerine, süreci tüm girdileri tek bir demet o
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
         input:
-        path input_file
+        path recording
         val character
 
         output:
-        path "cowpy-${input_file}"
+        path "cowpy-${recording}"
 
         script:
         """
-        cat ${input_file} | cowpy -c ${character} > cowpy-${input_file}
+        cat ${recording} | cowpy -c ${character} > cowpy-${recording}
         """
     }
     ```
@@ -681,7 +682,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [pedantic_lovelace] revision: b2c3d4e5f6
+    Launching `main.nf` [pedantic_lovelace] revision: 745a78a291
 
     executor >  local (7)
     [5e/2a1b34] COWPY (7) | 7 of 7 ✔
@@ -810,7 +811,7 @@ nextflow run main.nf
     ```console title="View meta map"
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [lethal_booth] revision: 0d8f844c07
+    Launching `main.nf` [lethal_booth] revision: 50e03309d4
 
     [[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/data/bonjour.txt]
     [[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/data/guten_tag.txt]
@@ -851,14 +852,14 @@ Veri sayfasına daha sonra bir `language` sütunu ekler ve bunu `map` işlemine 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
         input:
-        tuple val(meta), path(input_file)
+        tuple val(meta), path(recording)
 
         output:
-        path "cowpy-${input_file}"
+        path "cowpy-${recording}"
 
         script:
         """
-        cat ${input_file} | cowpy -c ${meta.character} > cowpy-${input_file}
+        cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
         """
     }
     ```
@@ -937,7 +938,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [wise_sammet] revision: 99797b1e92
+    Launching `main.nf` [wise_sammet] revision: f8f429c3df
 
     executor >  local (7)
     [5d/dffd4e] COWPY (7) | 7 of 7 ✔
@@ -1103,7 +1104,7 @@ nextflow run main.nf -resume
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [voluminous_mcnulty] revision: f9bcfebabb
+    Launching `main.nf` [voluminous_mcnulty] revision: 1d1ec2b857
 
     executor >  local (7)
     [c9/34bfec] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
@@ -1278,7 +1279,7 @@ nextflow run main.nf -resume
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [cheeky_fermat] revision: d096281ee4
+    Launching `main.nf` [cheeky_fermat] revision: f55f2f98b9
 
     [d9/b360d0] IDENTIFY_LANGUAGE (3) | 7 of 7, cached: 7 ✔
     [94/224450] COWPY (3)             | 7 of 7, cached: 7 ✔
@@ -1407,7 +1408,7 @@ nextflow run main.nf -resume
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [wise_almeida] revision: 46778c3cd0
+    Launching `main.nf` [wise_almeida] revision: 0f4b36d66d
 
     [c9/34bfec] IDENTIFY_LANGUAGE (1) | 7 of 7, cached: 7 ✔
     [e9/269aa0] COWPY (6)             | 7 of 7, cached: 7 ✔
@@ -1440,37 +1441,38 @@ Kanal yapısı hâlâ `[meta, file]`.
 
 `lang` ve `lang_group` artık meta map'te mevcut olduğuna göre, bunları çıktı dosya adlarına dil kodu eklemek ve dosyaları dil ailesine göre alt dizinlere düzenlemek için kullanabiliriz.
 
-Bu üç değişiklik gerektirir: `COWPY` sürecini çıktısını yeniden adlandıracak ve `meta`'yı yaydığı şeye dahil edecek şekilde güncellemek, `COWPY` çağrısını `ch_languages` üzerinde çalışacak şekilde güncellemek ve alt dizin yolunu belirtmek için çıktı bloğunu güncellemek.
+Bu üç değişiklik gerektirir: `COWPY` sürecini `meta`'yı yaydığı şeye dahil edecek şekilde güncellemek, `COWPY` çağrısını `ch_languages` üzerinde çalışacak şekilde güncellemek ve her dosyayı dil grubu alt dizinine yönlendirmek ve tespit edilen dil kodunu kullanarak yeniden adlandırmak için çıktı bloğunu güncellemek.
 
 #### 2.4.1. `COWPY` sürecini güncelleyin
 
-Meta map'teki dil kodunu kullanarak çıktı dosyasını yeniden adlandırın ve alt dizin yönlendirmesi için `lang_group`'a erişebilmesi amacıyla çıktıya `meta`'yı ekleyin:
+Çıktı bloğunun yönlendirme ve yeniden adlandırma için `lang` ve `lang_group`'a erişebilmesi amacıyla çıktıya `meta`'yı ekleyin:
 
 === "Sonra"
 
-    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2 6"
+    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2"
         output:
-        tuple val(meta), path("${meta.lang}-${input_file}")
+        tuple val(meta), path("cowpy-${recording}")
 
         script:
         """
-        cat ${input_file} | cowpy -c ${meta.character} > ${meta.lang}-${input_file}
+        cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
         """
     ```
 
 === "Önce"
 
-    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2 6"
+    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2"
         output:
-        path "cowpy-${input_file}"
+        path "cowpy-${recording}"
 
         script:
         """
-        cat ${input_file} | cowpy -c ${meta.character} > cowpy-${input_file}
+        cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
         """
     ```
 
-Bu, girdi tanımını hiç değiştirmeden bir sürecin davranışını özelleştirmek için diğer metadata alanlarından nasıl yararlanabileceğimizi gösteriyor.
+Bu, süreç düzeyinde minimal bir değişikliktir: `COWPY`'nin `lang` veya `lang_group`'un var olduğunu bilmesine gerek yoktur; yalnızca `meta`'yı çıktısıyla birlikte taşıması yeterlidir.
+Bu alanlara dayalı yönlendirme ve yeniden adlandırma işlemlerinin her ikisi de aşağı akışta, çıktı bloğunda gerçekleşir.
 
 #### 2.4.2. `COWPY` çağrısını `ch_languages` üzerinde çalışacak şekilde güncelleyin
 
@@ -1506,14 +1508,16 @@ Kanal içeriğini artık incelememize gerek olmadığından `ch_languages.view()
 
 #### 2.4.3. Çıktı bloğunu güncelleyin
 
-Her dosyayı dil grubu alt dizinine yönlendirmek için `output {}` bloğuna bir `path` closure'ı ekleyin:
+Her dosyayı tespit edilen dil adıyla öneklenmiş bir isim altında dil grubu alt dizinine yayımlamak için [`>>` operatörünü](https://www.nextflow.io/docs/latest/workflow.html#dynamic-publish-path) kullanan bir `path` closure'ı `output {}` bloğuna ekleyin:
 
 === "Sonra"
 
-    ```groovy title="main.nf" linenums="40" hl_lines="3"
+    ```groovy title="main.nf" linenums="40" hl_lines="3-5"
     output {
         cowpy_art {
-            path { meta, file -> meta.lang_group }
+            path { meta, file ->
+                file >> "${meta.lang_group}/${meta.lang}-${file.name}"
+            }
         }
     }
     ```
@@ -1527,7 +1531,7 @@ Her dosyayı dil grubu alt dizinine yönlendirmek için `output {}` bloğuna bir
     }
     ```
 
-Bu, çıktıları büyük bir esneklikle düzenlemek için metadata'yı nasıl kullanabileceğimizi gösteriyor.
+Bu, sürecin kendisini değiştirmeden, yalnızca çıktı bloğundan metadata'yı kullanarak çıktıları hem düzenleyip hem de yeniden adlandırabildiğimizi gösteriyor.
 
 #### 2.4.4. Tam pipeline'ı çalıştırın
 
@@ -1543,7 +1547,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [suspicious_crick] revision: 25541014c5
+    Launching `main.nf` [suspicious_crick] revision: 955602d59b
 
     executor >  local (14)
     [99/64c59d] IDENTIFY_LANGUAGE (6) | 7 of 7 ✔
@@ -1554,13 +1558,13 @@ nextflow run main.nf
       /workspaces/training/side-quests/metadata/results
 
       cowpy_art:
-        - [{id: sampleB, character: tux, lang: de, lang_group: germanic}, germanic/de-guten_tag.txt]
-        - [{id: sampleG, character: turtle, lang: it, lang_group: romance}, romance/it-ciao.txt]
-        - [{id: sampleC, character: sheep, lang: de, lang_group: germanic}, germanic/de-hallo.txt]
-        - [{id: sampleE, character: stegosaurus, lang: es, lang_group: romance}, romance/es-hola.txt]
-        - [{id: sampleA, character: squirrel, lang: fr, lang_group: romance}, romance/fr-bonjour.txt]
-        - [{id: sampleD, character: turkey, lang: en, lang_group: germanic}, germanic/en-hello.txt]
-        - [{id: sampleF, character: moose, lang: fr, lang_group: romance}, romance/fr-salut.txt]
+        - [{id: sampleB, character: tux, lang: de, lang_group: germanic}, germanic/de-cowpy-guten_tag.txt]
+        - [{id: sampleG, character: turtle, lang: it, lang_group: romance}, romance/it-cowpy-ciao.txt]
+        - [{id: sampleC, character: sheep, lang: de, lang_group: germanic}, germanic/de-cowpy-hallo.txt]
+        - [{id: sampleE, character: stegosaurus, lang: es, lang_group: romance}, romance/es-cowpy-hola.txt]
+        - [{id: sampleA, character: squirrel, lang: fr, lang_group: romance}, romance/fr-cowpy-bonjour.txt]
+        - [{id: sampleD, character: turkey, lang: en, lang_group: germanic}, germanic/en-cowpy-hello.txt]
+        - [{id: sampleF, character: moose, lang: fr, lang_group: romance}, romance/fr-cowpy-salut.txt]
     ```
 
 Sonuçlar dizini artık dil ailesine göre düzenlenmiş olup her dosya tespit edilen dile göre adlandırılmıştır:
@@ -1568,19 +1572,19 @@ Sonuçlar dizini artık dil ailesine göre düzenlenmiş olup her dosya tespit e
 ```console title="Results directory contents"
 results/
 ├── germanic
-│   ├── de-guten_tag.txt
-│   ├── de-hallo.txt
-│   └── en-hello.txt
+│   ├── de-cowpy-guten_tag.txt
+│   ├── de-cowpy-hallo.txt
+│   └── en-cowpy-hello.txt
 └── romance
-    ├── es-hola.txt
-    ├── fr-bonjour.txt
-    ├── fr-salut.txt
-    └── it-ciao.txt
+    ├── es-cowpy-hola.txt
+    ├── fr-cowpy-bonjour.txt
+    ├── fr-cowpy-salut.txt
+    └── it-cowpy-ciao.txt
 ```
 
-`output {}` bloğundaki `path` closure'ı her `[meta, file]` demetini alır ve alt dizin adı olarak `meta.lang_group`'u döndürür.
-Dosya adının kendisi sürecin çıktısından gelir (`#!groovy "${meta.lang}-${input_file}"`).
-Her iki metadata parçası da (dil kodu ve dil grubu) bu bölümde oluşturulan zenginleştirilmiş meta map'ten gelmektedir.
+`output {}` bloğundaki `path` closure'ı her `[meta, file]` demetini alır.
+`>>` operatörü, `file`'ı `#!groovy "${meta.lang_group}/${meta.lang}-${file.name}"` hedefine yayımlar; alt dizini (`lang_group`) ve yeniden adlandırılmış dosyayı (`lang` ile öneklenmiş) tek bir ifadede birleştirir.
+Her iki metadata parçası da bu bölümde oluşturulan zenginleştirilmiş meta map'ten gelmektedir; `COWPY`'nin ise bunların hiçbirinin var olduğunu bilmesine gerek yoktur.
 
 ### Özetle
 
@@ -1621,7 +1625,7 @@ Nextflow `#!groovy ${meta.character}` ifadesini komuta yerleştirdiğinde, `COWP
     ```console hl_lines="7 12 17 29"
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [marvelous_hirsch] revision: 0dfeee3cc1
+    Launching `main.nf` [marvelous_hirsch] revision: 955602d59b
 
     executor >  local (14)
     [c1/c5dd4f] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
@@ -1635,7 +1639,7 @@ Nextflow `#!groovy ${meta.character}` ifadesini komuta yerleştirdiğinde, `COWP
 
     Command executed:
 
-      cat bonjour.txt | cowpy -c  > fr-bonjour.txt
+      cat bonjour.txt | cowpy -c  > cowpy-bonjour.txt
 
     Command exit status:
       2
@@ -1645,8 +1649,8 @@ Nextflow `#!groovy ${meta.character}` ifadesini komuta yerleştirdiğinde, `COWP
 
     Command error:
       usage: cowpy [-h] [-l] [-L] [-t] [-u] [-e EYES] [-c COWACTER] [-E] [-r] [-x]
-                  [-C]
-                  [msg ...]
+                   [-C]
+                   [msg ...]
       cowpy: error: argument -c/--cowacter: expected one argument
 
     Work dir:
@@ -1657,7 +1661,7 @@ Nextflow `#!groovy ${meta.character}` ifadesini komuta yerleştirdiğinde, `COWP
 
     Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 Hata mesajı (`expected one argument`), boş `-c` bayrağına işaret ediyor.
@@ -1682,7 +1686,7 @@ Süreç betiği `#!groovy ${meta.character}` ifadesini değerlendirdiğinde, Nex
     ```console hl_lines="7 12 17"
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [jovial_bohr] revision: eaaf375827
+    Launching `main.nf` [jovial_bohr] revision: 955602d59b
 
     executor >  local (14)
     [61/91663a] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
@@ -1696,7 +1700,7 @@ Süreç betiği `#!groovy ${meta.character}` ifadesini değerlendirdiğinde, Nex
 
     Command executed:
 
-      cat hola.txt | cowpy -c null > es-hola.txt
+      cat hola.txt | cowpy -c null > cowpy-hola.txt
 
     Command exit status:
       1
@@ -1728,7 +1732,7 @@ Süreç betiği `#!groovy ${meta.character}` ifadesini değerlendirdiğinde, Nex
 
     Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 Çalıştırılan komuttaki `cowpy -c null` ifadesi, tanısal ipucudur.
@@ -1740,7 +1744,7 @@ Süreç betiği `#!groovy ${meta.character}` ifadesini değerlendirdiğinde, Nex
 **1. Girdi doğrulaması**
 
 En güvenilir çözüm, herhangi bir işlem başlamadan önce veri sayfasını doğrulamaktır; böylece sorunlar, çalışmanın ortasında anlaşılması güç bir süreç hatası olarak ortaya çıkmak yerine erken ve net bir hata mesajıyla yakalanır.
-[Build with nf-core](../../hello_nf-core/05_input_validation.md) eğitimi, nf-schema eklentisini kullanarak girdi doğrulamasının nasıl ekleneceğini ele almaktadır. <!-- TODO (gelecek) uygun bir Doğrulama yan görevi bekliyor -->
+[Build with nf-core](../../nfcore_build/04_input_validation.md) eğitimi, nf-schema eklentisini kullanarak girdi doğrulamasının nasıl ekleneceğini ele almaktadır. <!-- TODO (gelecek) uygun bir Doğrulama yan görevi bekliyor -->
 
 **2. Zorunlu değerler için açık süreç girdileri**
 
@@ -1750,7 +1754,7 @@ Süreç arayüzünün belirli bir değerin zorunlu olduğunu iletmesini istiyors
 
     ```groovy title="modules/cowpy.nf" linenums="6"
     input:
-    tuple val(meta), val(character), path(input_file)
+    tuple val(meta), val(character), path(recording)
     ```
 
 === "İş akışı çağrısı"
@@ -1821,15 +1825,17 @@ Bu yan görevde, Nextflow iş akışlarında metadata ile etkili bir şekilde ç
 3.  **Bir sürecin içinde metadata kullanma:** Betik bloğunda nokta gösterimiyle herhangi bir alana erişin.
 
     ```groovy
-    cat ${input_file} | cowpy -c ${meta.character} > ${meta.lang}-${input_file}
+    cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
     ```
 
-4.  **Çıktıları metadata değerine göre düzenleme:** `output {}` bloğunda `path` closure'ı kullanın.
+4.  **Çıktıları metadata değerine göre düzenleme ve yeniden adlandırma:** `output {}` bloğunda `path` closure'ı kullanın; hem hedef dizini hem de yayımlanan dosya adını kontrol etmek için `>>` operatöründen yararlanın.
 
     ```groovy
     output {
         cowpy_art {
-            path { meta, file -> meta.lang_group }
+            path { meta, file ->
+                file >> "${meta.lang_group}/${meta.lang}-${file.name}"
+            }
         }
     }
     ```

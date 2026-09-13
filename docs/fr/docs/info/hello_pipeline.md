@@ -69,13 +69,3 @@ Les résultats sont publiés dans un répertoire appelé `results/`, et la sorti
 ```
 
 Vous pouvez rencontrer quelques variations dans les détails spécifiques selon le cours dans lequel le pipeline est présenté.
-
----
-
-<div markdown class="homepage_logos">
-
-![Seqera](../assets/img/seqera_logo.png#only-light)
-
-![Seqera](../assets/img/seqera_logo_dark.png#only-dark)
-
-</div>

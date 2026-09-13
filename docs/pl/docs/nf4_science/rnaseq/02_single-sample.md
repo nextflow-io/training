@@ -155,8 +155,8 @@ Każdy krok koncentruje się na konkretnym aspekcie rozwoju workflow'u.
 
 !!! tip "Wskazówka"
 
-     Upewnij się, że jesteś we właściwym katalogu roboczym:
-     `cd /workspaces/training/nf4-science/rnaseq`
+    Upewnij się, że jesteś we właściwym katalogu roboczym:
+    `cd /workspaces/training/nf4-science/rnaseq`
 
 ---
 
@@ -479,10 +479,10 @@ nextflow run rnaseq.nf -profile test
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `rnaseq.nf` [mad_lorenz] revision: 5846a164d2
+    Launching `rnaseq.nf` [fabulous_engelbart] revision: 859d80cde8
 
     executor >  local (1)
-    [7b/8ee79e] FASTQC (1) | 1 of 1 ✔
+    [4e/36fb3d] FASTQC (1) | 1 of 1 ✔
 
     Outputs:
 
@@ -750,11 +750,11 @@ nextflow run rnaseq.nf -profile test
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `rnaseq.nf` [gloomy_becquerel] revision: bb11055736
+    Launching `rnaseq.nf` [stupefied_volhard] revision: faaf310b2f
 
     executor >  local (2)
-    [f6/c8ef2e] FASTQC (1)      | 1 of 1 ✔
-    [58/c58d8a] TRIM_GALORE (1) | 1 of 1 ✔
+    [a3/ac9284] FASTQC (1)      | 1 of 1 ✔
+    [55/c4d983] TRIM_GALORE (1) | 1 of 1 ✔
 
     Outputs:
 
@@ -976,7 +976,7 @@ Używamy `#!groovy file(params.hisat2_index_zip)`, aby dostarczyć archiwum inde
 
 === "Po"
 
-    ```groovy title="rnaseq.nf" linenums="19" hl_lines="14-15"
+    ```groovy title="rnaseq.nf" linenums="19" hl_lines="13-14"
     workflow {
 
         main:
@@ -1116,12 +1116,12 @@ nextflow run rnaseq.nf -profile test
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `rnaseq.nf` [elated_stonebraker] revision: e8e57d0cdd
+    Launching `rnaseq.nf` [nauseous_allen] revision: 45d77a9709
 
     executor >  local (3)
-    [e8/fa29d6] FASTQC (1)       | 1 of 1 ✔
-    [ca/ffdde2] TRIM_GALORE (1)  | 1 of 1 ✔
-    [b6/1c6ca3] HISAT2_ALIGN (1) | 1 of 1 ✔
+    [57/b3c2cb] FASTQC (1)       | 1 of 1 ✔
+    [98/451aef] TRIM_GALORE (1)  | 1 of 1 ✔
+    [78/7cf2c3] HISAT2_ALIGN (1) | 1 of 1 ✔
 
     Outputs:
 

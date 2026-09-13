@@ -27,7 +27,7 @@ nf-core pipeline'larının temel özellikleri:
 
 !!! tip "nf-core hakkında daha fazla bilgi edinmek ister misiniz?"
 
-    nf-core pipeline geliştirmeye derinlemesine bir giriş için [Build with nf-core](../../hello_nf-core/index.md) eğitim kursuna göz atın.
+    nf-core pipeline geliştirmeye derinlemesine bir giriş için [Build with nf-core](../../nfcore_build/index.md) eğitim kursuna göz atın.
     Sıfırdan nf-core pipeline'ları oluşturmayı ve özelleştirmeyi kapsar.
 
 ### 1.2. molkart pipeline'ı
@@ -333,15 +333,15 @@ Birkaç alt dizin görmelisiniz:
 
 ```console title="results/"
 results/
-├── anndata/
-├── clahe/
-├── mindagap/
-├── molkartqc/
-├── multiqc/
-├── pipeline_info/
-├── segmentation/
-├── spot2cell/
-└── stack/
+├── anndata
+├── clahe
+├── mindagap
+├── molkartqc
+├── multiqc
+├── pipeline_info
+├── segmentation
+├── spot2cell
+└── stack
 ```
 
 Her alt dizin, pipeline'ın belirli bir aşamasından çıktılar içerir:
@@ -404,17 +404,17 @@ pipeline_info dizinini kontrol edin:
 ls results/pipeline_info/
 ```
 
-Anahtar dosyalar:
+Anahtar dosyalar (her isim bir zaman damgasıyla biter, örn. `execution_report_2026-01-15_10-30-00.html`):
 
-- **execution_report.html**: Zaman çizelgesi ve kaynak kullanım görselleştirmesi
-- **execution_timeline.html**: İşlem çalıştırmasının Gantt grafiği
-- **execution_trace.txt**: Detaylı görev çalıştırma metrikleri
-- **pipeline_dag.html**: İş akışı yapısını gösteren yönlendirilmiş döngüsüz grafik
+- **execution_report\_\*.html**: Zaman çizelgesi ve kaynak kullanım görselleştirmesi
+- **execution_timeline\_\*.html**: İşlem çalıştırmasının Gantt grafiği
+- **execution_trace\_\*.txt**: Detaylı görev çalıştırma metrikleri
+- **pipeline_dag\_\*.html**: İş akışı yapısını gösteren yönlendirilmiş döngüsüz grafik
 
 Kaynak kullanımını görmek için çalıştırma raporunu açın:
 
 ```bash
-code results/pipeline_info/execution_report.html
+code results/pipeline_info/execution_report_*.html
 ```
 
 Bu şunları gösterir:
@@ -456,10 +456,10 @@ Bu, ilk 5 görev dizinini gösterir.
 
 ### 4.2. Bir görev dizinini inceleme
 
-Konsol çıktısından segmentasyon işlem hash'lerinden birini seçin (örneğin, `[3m/4n5o6p]`) ve içine bakın:
+Konsol çıktısından segmentasyon işlem hash'lerinden birini seçin (örneğin, `[3a/4b5c6d]`) ve içine bakın:
 
 ```bash
-ls -la work/3m/4n5o6p*/
+ls -la work/3a/4b5c6d*/
 ```
 
 Şunları göreceksiniz:

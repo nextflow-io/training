@@ -10,60 +10,26 @@ hide:
 
 <div class="grid cards" markdown>
 
--   :material-book-open-variant:{ .lg .middle } __Cours en libre-service__
+-   :material-book-open-variant:{ .lg .middle } __Cours en libre accès__
 
     ---
 
     **Bienvenue sur le portail de formation de la communauté Nextflow !**
 
-    Les cours de formation listés ci-dessous sont conçus pour être utilisés en libre-service.
-    Vous pouvez les suivre à votre propre rythme, à tout moment, soit dans l'environnement web que nous fournissons via Github Codespaces, soit dans votre propre environnement.
+    Suivez les cours ci-dessous à votre propre rythme, dans notre environnement web ou le vôtre.
+    Chaque cours est pratique, avec des exercices orientés vers des objectifs que vous pouvez réaliser de manière autonome.
 
-    [Explorer les cours :material-arrow-right:](#catalog-of-nextflow-training-courses){ .md-button .md-button--primary .mt-1 }
+    [Explorer les cours :material-arrow-down:](#catalog-of-nextflow-training-courses){ .md-button .md-button--primary .mt-1 }
 
--   :material-information-outline:{ .lg .middle } __Informations complémentaires__
+-   :material-account-group-outline:{ .lg .middle } __Événements de formation__
 
     ---
 
-    ??? warning "Compatibilité des versions"
+    **Vous cherchez quelque chose au-delà du libre accès ?**
 
-        <!-- Toute mise à jour de ce contenu doit être copiée sur la page d'installation locale -->
-        **À partir de janvier 2026, tous nos cours de formation Nextflow requièrent Nextflow version 25.10.2 ou ultérieure, avec la syntaxe stricte activée, sauf indication contraire.**
+    Retrouvez des événements de formation structurés, des conseils pour organiser vos propres formations, ainsi que notre licence open-source et notre politique de contribution.
 
-        Pour plus d'informations sur les exigences de version et la syntaxe stricte, veuillez consulter le [guide de migration de la documentation Nextflow](https://nextflow.io/docs/latest/strict-syntax.html).
-
-        Les versions plus anciennes du matériel de formation correspondant à la syntaxe précédente sont disponibles via le sélecteur de version dans la barre de menu de cette page.
-
-    ??? terminal "Options d'environnement"
-
-        Nous fournissons un environnement de formation web où tout ce dont vous avez besoin pour suivre la formation est préinstallé, disponible via Github Codespaces (nécessite un compte GitHub gratuit).
-
-        [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
-
-        Si cela ne correspond pas à vos besoins, veuillez consulter les autres [options d'environnement](./envsetup/index.md).
-
-    ??? learning "Événements de formation"
-
-        Si vous préférez suivre une formation Nextflow dans le cadre d'un événement structuré, de nombreuses opportunités s'offrent à vous. Nous vous recommandons de consulter les options suivantes :
-
-        - **[Training Weeks]()** organisées trimestriellement par l'équipe Community
-        - **[Seqera Events](https://seqera.io/events/)** comprennent des événements de formation en présentiel organisés par Seqera (recherchez « Seqera Sessions » et « Nextflow Summit »)
-        - **[Nextflow Ambassadors]()** organisent des événements pour leur communauté locale
-        - **[nf-core events](https://nf-co.re/events)** comprennent des hackathons communautaires
-
-    ??? people "Informations pour les formateur·trices"
-
-        Si vous êtes un·e formateur·trice qui organise vos propres formations, vous êtes invité·e à utiliser nos supports directement depuis le portail de formation, à condition d'attribuer les crédits appropriés. Consultez la section « Crédits et contributions » ci-dessous pour plus de détails.
-
-        De plus, nous serions ravis d'avoir votre retour sur la façon dont nous pourrions mieux soutenir vos efforts de formation ! Contactez-nous à [community@seqera.io](mailto:community@seqera.io) ou sur le forum communautaire (voir la page [Aide](help.md)).
-
-    ??? licensing "Licence open-source et politique de contribution"
-
-        [![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](assets/img/cc_by-nc-sa.svg){ align=right }](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-
-        Ce matériel de formation est développé et maintenu par [Seqera](https://seqera.io) et publié sous une licence open-source ([CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/)) au bénéfice de la communauté. Si vous souhaitez utiliser ce matériel d'une manière qui dépasse le cadre de la licence (notez les restrictions sur l'utilisation commerciale et la redistribution), veuillez nous contacter à [community@seqera.io](mailto:community@seqera.io) pour discuter de votre demande.
-
-        Nous accueillons avec plaisir les améliorations, corrections et signalements de bugs de la communauté. Chaque page dispose d'une icône :material-file-edit-outline: en haut à droite, qui renvoie vers le dépôt de code, où vous pouvez signaler des problèmes ou proposer des modifications au matériel de formation via une pull request. Consultez le fichier `README.md` dans le dépôt pour plus de détails.
+    [Voir les événements de formation :material-arrow-right:](training_events.md){ .md-button .md-button--secondary .mt-1 }
 
 </div>
 
@@ -77,98 +43,137 @@ hide:
 
 <div class="grid cards" markdown>
 
--   :material-walk:{ .lg .middle } __Parcours débutant__
+-   :material-account:{ .lg .middle } __Pour les utilisateur·trices__
 
     ---
 
-    ### :material-compass:{.nextflow-primary} Nextflow for Newcomers {.mt-1}
+    ### :material-play-circle:{.nextflow-primary} Exécuter des pipelines {.mt-1}
 
-    Des cours indépendants de tout domaine, destinés aux personnes qui découvrent complètement Nextflow. Chaque cours est composé d'une série de modules de formation conçus pour aider les apprenant·es à développer leurs compétences progressivement.
+    Apprenez à exécuter des pipelines existants sans écrire de code.
 
-    ??? courses "**Hello Nextflow :** Apprenez à développer vos propres pipelines"
+    ??? courses "**Nextflow Run :** Exécuter des pipelines avec Nextflow"
+
+        Une introduction rapide à l'exécution de pipelines Nextflow qui ne nécessite pas de comprendre le code. Couvre le lancement de pipelines, la récupération des sorties, l'utilisation de conteneurs et la configuration de l'exécution à un niveau de base.
+
+        [Voir la formation :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
+
+    ??? courses "**Use nf-core :** Trouver et exécuter des pipelines créés par la communauté"
+
+        Une introduction rapide à la recherche, l'exécution et la configuration de pipelines issus du projet communautaire nf-core, en commençant par un pipeline de démonstration minimal avant de passer à un pipeline d'analyse à l'échelle de la production.
+
+        [Voir la formation :material-arrow-right:](nfcore_use/index.md){ .md-button .md-button--secondary }
+
+    ??? courses "**Scale with Seqera :** Lancer et surveiller des pipelines à grande échelle"
+
+        Une introduction pratique au lancement et à la surveillance de pipelines Nextflow avec Seqera Platform, depuis l'interface web et la ligne de commande.
+
+        [Voir la formation :material-arrow-right:](seqera_scale/index.md){ .md-button .md-button--secondary }
+
+    ---
+
+    ### :material-tune:{.nextflow-primary} Gérer l'exécution {.mt-1}
+
+    Apprenez à gérer efficacement l'exécution des pipelines.
+
+    ??? courses "**Execution Config :** Configurer des pipelines comme un·e pro"
+
+        Une introduction pratique à la configuration de l'exécution de pipelines Nextflow : adaptation à différents environnements de calcul, contrôle des allocations de ressources et des nouvelles tentatives, et basculement entre des profils de configuration prédéfinis.
+
+        [Voir la formation :material-arrow-right:](execution_config/index.md){ .md-button .md-button--secondary }
+
+    !!! info compact "D'autres sujets à venir"
+
+        L'optimisation des performances, l'exécution HPC/cloud et bien d'autres sujets sont prévus pour cette section.
+        Votez pour les prochains sujets à couvrir dans notre [court sondage](https://seqera.typeform.com/to/JCs91e8v).
+
+-   :material-code-tags:{ .lg .middle } __Pour les développeur·ses__
+
+    ---
+
+    ### :material-wrench:{.nextflow-primary} Écrire des pipelines {.mt-1}
+
+    Apprenez à développer vos propres pipelines Nextflow.
+
+    ??? courses "**Hello Nextflow :** Développer vos propres pipelines de zéro"
 
         Ce cours couvre les composants essentiels du langage Nextflow avec suffisamment de détails pour permettre le développement de pipelines simples mais entièrement fonctionnels, ainsi que les éléments clés de la conception, du développement et des bonnes pratiques de configuration des pipelines.
 
-        [Commencer la formation Hello Nextflow :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--secondary }
+        [Voir la formation :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Nextflow Run :** Apprenez à exécuter des pipelines existants"
+    ??? courses "**Build with nf-core :** Utiliser les outils et les règles nf-core"
 
-        Une introduction concise à l'exécution et à la configuration de pipelines Nextflow, basée sur le cours Hello Nextflow pour les développeur·ses, mais avec moins d'accent sur le code. Couvre l'exécution, les sorties, la structure de base du code et la configuration pour différents environnements de calcul.
+        Pour les développeur·ses Nextflow qui souhaitent apprendre à développer des pipelines conformes à [nf-core](https://nf-co.re/).
+        Le cours couvre la structure des pipelines nf-core avec suffisamment de détails pour permettre le développement de pipelines simples mais entièrement fonctionnels qui tirent parti du template nf-core et des meilleures pratiques de développement, ainsi que l'utilisation de modules nf-core existants.
 
-        [Commencer la formation Nextflow Run :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
+        [Voir la formation :material-arrow-right:](nfcore_build/index.md){ .md-button .md-button--secondary }
 
-    ---
+    ??? catalog "**Side Quests :** Plongez dans des sujets Nextflow avancés"
 
-    ### :material-microscope:{.nextflow-primary} Nextflow for Science {.mt-1}
-
-    Apprenez à appliquer les concepts et composants présentés dans « Hello Nextflow » à des cas d'usage scientifiques spécifiques.
-
-    ??? courses "**Nextflow for Genomics** (variant calling)"
-
-        Pour les chercheur·euses qui souhaitent apprendre à développer leurs propres pipelines de génomique. Le cours utilise un cas d'usage de variant calling pour démontrer comment développer un pipeline de génomique simple mais fonctionnel.
-
-        [Commencer la formation Nextflow for Genomics :material-arrow-right:](nf4_science/genomics/index.md){ .md-button .md-button--secondary }
-
-    ??? courses "**Nextflow for RNAseq** (bulk RNAseq)"
-
-        Pour les chercheur·euses qui souhaitent apprendre à développer leurs propres pipelines RNAseq. Le cours utilise un cas d'usage de traitement bulk RNAseq pour démontrer comment développer un pipeline RNAseq simple mais fonctionnel.
-
-        [Commencer la formation Nextflow for RNAseq :material-arrow-right:](nf4_science/rnaseq/index.md){ .md-button .md-button--secondary }
-
-    ??? courses "**Nextflow for Imaging** (spatial omics)"
-
-        Pour les chercheur·euses en imagerie et en spatial omics qui souhaitent apprendre à exécuter et personnaliser des pipelines d'analyse. Le cours utilise le pipeline nf-core/molkart pour fournir un pipeline biologiquement pertinent et démontrer comment exécuter, configurer et gérer les entrées pour les workflows de pipelines Nextflow.
-
-        [Commencer la formation Nextflow for Imaging :material-arrow-right:](nf4_science/imaging/index.md){ .md-button .md-button--secondary }
-
--   :material-run:{ .lg .middle } __Parcours avancé__
-
-    ---
-
-    ### :material-bridge:{.nextflow-primary} From Nextflow to nf-core {.mt-1}
-
-    Apprenez à utiliser le code et les bonnes pratiques du projet communautaire [nf-core](https://nf-co.re/).
-
-    Ces cours vous accompagnent des fondamentaux de Nextflow jusqu'aux bonnes pratiques nf-core.
-    Comprenez comment et pourquoi la communauté nf-core développe des pipelines, et comment vous pouvez contribuer et réutiliser ces techniques.
-
-    ??? courses "**Build with nf-core :** Premiers pas avec nf-core"
-
-        Pour les développeur·ses qui souhaitent apprendre à exécuter et développer des pipelines conformes à [nf-core](https://nf-co.re/). Le cours couvre la structure des pipelines nf-core avec suffisamment de détails pour permettre le développement de pipelines simples mais entièrement fonctionnels, suivant le modèle nf-core et les bonnes pratiques de développement, ainsi que l'utilisation des modules nf-core existants.
-
-        [Commencer la formation Build with nf-core :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
-
-    ---
-
-    ### :material-rocket-launch:{.nextflow-primary} Advanced Nextflow Training {.mt-1}
-
-    Apprenez des concepts et mécanismes avancés pour développer et déployer des pipelines Nextflow afin de répondre à des cas d'usage réels.
-
-    ??? courses "**Quêtes secondaires :** Explorations approfondies de sujets autonomes"
-
-        Des mini-cours autonomes destinés aux développeur·ses Nextflow qui souhaitent élargir leur champ de compétences et/ou approfondir leurs connaissances sur des sujets particuliers. Ils sont présentés de manière linéaire mais peuvent être suivis dans n'importe quel ordre (voir les dépendances dans l'aperçu de chaque mini-cours).
+        Une collection de mini-cours autonomes destinés aux développeur·ses Nextflow qui souhaitent élargir leur champ de compétences et/ou approfondir leurs connaissances sur des sujets particuliers.
+        Ils sont présentés de manière linéaire mais peuvent être suivis dans n'importe quel ordre (voir les dépendances dans l'aperçu de chaque mini-cours).
 
         [Parcourir les Quêtes secondaires :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Learning Paths :** Parcours d'apprentissage recommandés à travers les Quêtes secondaires"
+    ---
 
-        Les Learning Paths combinent plusieurs Quêtes secondaires afin de fournir une expérience d'apprentissage complète autour d'un thème ou d'un cas d'usage particulier.
+    ### :material-microscope:{.nextflow-primary} Nextflow pour la science {.mt-1}
 
-        [Parcourir les Learning Paths :material-arrow-right:](training_collections/index.md){ .md-button .md-button--secondary }
+    Apprenez à développer des pipelines Nextflow pour des applications scientifiques spécifiques.
+
+    ??? courses "**Genomics :** Développer un pipeline de détection de variants"
+
+        Un cours pour les chercheur·euses qui souhaitent apprendre à développer leurs propres pipelines de génomique, en utilisant un cas d'usage de détection de variants pour illustrer les patterns essentiels de développement Nextflow.
+
+        [Voir la formation :material-arrow-right:](nf4_science/genomics/index.md){ .md-button .md-button--secondary }
+
+    ??? courses "**RNAseq :** Développer un pipeline de traitement RNAseq en masse"
+
+        Un cours pour les chercheur·euses qui souhaitent apprendre à développer leurs propres pipelines RNAseq, en utilisant un cas d'usage de traitement RNAseq en masse pour illustrer les patterns essentiels de développement Nextflow.
+
+        [Voir la formation :material-arrow-right:](nf4_science/rnaseq/index.md){ .md-button .md-button--secondary }
+
+    ??? courses "**Bioimaging :** Exécuter et configurer des pipelines d'imagerie"
+
+        Un cours pour les chercheur·euses qui souhaitent apprendre à exécuter et configurer des pipelines de bio-imagerie, en utilisant nf-core/molkart pour illustrer les patterns essentiels d'utilisation de Nextflow.
+
+        [Voir la formation :material-arrow-right:](nf4_science/imaging/index.md){ .md-button .md-button--secondary }
 
 </div>
 
-!!! info "Vous recherchez des supports de formation archivés ?"
+## Configuration & Aide
 
-    Les anciens supports de formation (Fundamentals Training, Advanced Training et d'autres cours expérimentaux) ont été retirés du portail de formation car ils sont incompatibles avec la syntaxe stricte de Nextflow 3.0.
-    Si vous avez besoin d'accéder à ces supports, ils sont disponibles dans l'[historique git](https://github.com/nextflow-io/training) antérieur à janvier 2026.
+<div class="grid cards mb-4" markdown>
 
----
+-   :material-cog-outline:{ .lg .middle } __Environnement de formation__
 
-<div markdown class="homepage_logos">
+    ---
 
-![Seqera](assets/img/seqera_logo.png#only-light)
+    Options pour configurer votre environnement pour les formations Nextflow.
 
-![Seqera](assets/img/seqera_logo_dark.png#only-dark)
+    [Voir les environnements de formation :material-arrow-right:](envsetup/index.md){ .md-button .md-button--secondary }
+
+-   :material-tag-outline:{ .lg .middle } __Versions de Nextflow__
+
+    ---
+
+    Comprendre et gérer l'évolution des versions de syntaxe de Nextflow.
+
+    [Vérifier les exigences de version :material-arrow-right:](info/nxf_versions.md){ .md-button .md-button--secondary }
+
+-   :material-file-code-outline:{ .lg .middle } __Le pipeline Hello__
+
+    ---
+
+    Récapitulatif de ce que fait le pipeline Hello et de sa structure.
+
+    [Lire le récapitulatif :material-arrow-right:](info/hello_pipeline.md){ .md-button .md-button--secondary }
+
+-   :material-lifebuoy:{ .lg .middle } __Obtenir de l'aide__
+
+    ---
+
+    Ressources utiles lorsque vous rencontrez un problème avec la formation Nextflow.
+
+    [Trouver de l'aide :material-arrow-right:](help.md){ .md-button .md-button--secondary }
 
 </div>

@@ -1091,7 +1091,7 @@ Nauczysz się, jak radzić sobie z innymi lokalizacjami danych później na swoj
 
 #### 4.1.2. Przełącz na fabrykę kanałów zaprojektowaną do obsługi pliku
 
-Ponieważ teraz chcemy użyć pliku zamiast prostych ciągów jako wejścia, nie możemy użyć fabryki kanałów `channel.of()` z poprzedniego.
+Ponieważ teraz chcemy użyć pliku zamiast prostych ciągów jako wejścia, nie możemy użyć fabryki kanałów `channel.of()` z poprzedniego kroku.
 Musimy przełączyć się na użycie nowej fabryki kanałów, [`channel.fromPath()`](https://nextflow.io/docs/latest/reference/channel.html#frompath), która ma wbudowaną funkcjonalność do obsługi ścieżek plików.
 
 W bloku workflow wprowadź następującą zmianę kodu:
@@ -1154,7 +1154,7 @@ nextflow run hello-channels.nf
 
     Launching `hello-channels.nf` [peaceful_poisson] revision: a286c08ad5
 
-    [-        ] sayHello [  0%] 0 of 1
+    [-        ] sayHello | 0 of 1
     Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv
     ERROR ~ Error executing process > 'sayHello (1)'
 
@@ -1185,7 +1185,7 @@ Część `Command executed:` jest tu szczególnie pomocna.
 
 To może wyglądać trochę znajomo.
 Wygląda na to, że Nextflow próbował uruchomić pojedyncze wywołanie procesu, używając samej ścieżki pliku jako wartości ciągu.
-Więc poprawnie rozpoznał ścieżkę pliku, ale faktycznie nie sparsował jego zawartości, czego chcieliśmy.
+Poprawnie rozpoznał więc ścieżkę pliku, ale faktycznie nie sparsował jego zawartości, czego chcieliśmy.
 
 Jak sprawić, żeby Nextflow otworzył plik i załadował jego zawartość do kanału?
 
@@ -1295,7 +1295,7 @@ Tym razem Nextflow sparsował zawartość pliku (juhu!), ale załadował każdy 
 </figure>
 
 Musimy mu powiedzieć, żeby wziął tylko pierwszą kolumnę w każdym wierszu.
-Więc jak to rozpakować?
+Jak więc to rozpakować?
 
 Wcześniej użyliśmy `flatten()` do rozpakowania zawartości kanału, ale to by tu nie zadziałało, ponieważ flatten rozpakowuje _wszystko_ (możesz spróbować sam, jeśli chcesz zobaczyć na własne oczy).
 
@@ -1303,7 +1303,7 @@ Zamiast tego użyjemy innego operatora o nazwie `map()`, który jest naprawdę u
 
 ### 4.3. Użyj operatora `map()` do wyodrębnienia pozdrowień
 
-Operator [`map()`](https://nextflow.io/docs/latest/reference/operator.html#map) to bardzo poręczne małe narzędzie, które pozwala nam robić różne mapowania na zawartości kanału.
+Operator [`map()`](https://nextflow.io/docs/latest/reference/operator.html#map) to bardzo poręczne narzędzie, które pozwala nam wykonywać różne mapowania na zawartości kanału.
 
 W tym przypadku użyjemy go do wyodrębnienia tego jednego elementu, który chcemy z każdego wiersza w naszym pliku danych.
 Oto jak wygląda składnia:
@@ -1312,9 +1312,9 @@ Oto jak wygląda składnia:
 .map { row -> row[0] }
 ```
 
-Oznacza to 'dla każdego wiersza w kanale weź 0-ty (pierwszy) element, który zawiera'.
+Oznacza to: „dla każdego wiersza w kanale weź 0-ty (pierwszy) element, który zawiera".
 
-Więc zastosujmy to do naszego parsowania CSV.
+Zastosujmy to więc do naszego parsowania CSV.
 
 #### 4.3.1. Zastosuj `map()` do kanału
 
@@ -1413,7 +1413,7 @@ _Zauważ, że linie mogą pojawiać się w innej kolejności w Twoim wyjściu._
 
 Możesz też spojrzeć na pliki wyjściowe, aby zweryfikować, że każde pozdrowienie zostało poprawnie wyodrębnione i przetworzone przez workflow.
 
-Osiągnęliśmy ten sam wynik co poprzednio, ale teraz mamy znacznie większą elastyczność, aby dodawać więcej elementów do kanału pozdrowień, które chcemy przetworzyć, modyfikując plik wejściowy, bez modyfikowania żadnego kodu.
+Osiągnęliśmy ten sam wynik co poprzednio, ale teraz mamy znacznie większą elastyczność, aby dodawać więcej elementów do kanału pozdrowień, które chcemy przetworzyć, modyfikując plik wejściowy — bez modyfikowania żadnego kodu.
 Nauczysz się bardziej zaawansowanych podejść do obsługi złożonych wejść w późniejszym szkoleniu.
 
 ### Podsumowanie

@@ -69,13 +69,3 @@ I risultati vengono pubblicati in una directory chiamata `results/`, e l'output 
 ```
 
 Potrebbe incontrare alcune variazioni nei dettagli a seconda del corso in cui la pipeline è presente.
-
----
-
-<div markdown class="homepage_logos">
-
-![Seqera](../assets/img/seqera_logo.png#only-light)
-
-![Seqera](../assets/img/seqera_logo_dark.png#only-dark)
-
-</div>

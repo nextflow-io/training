@@ -2,9 +2,11 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Ao desenvolver um pipeline, você frequentemente se encontra criando sequências similares de processos para diferentes tipos de dados ou etapas de análise. Você pode acabar copiando e colando essas sequências de processos, gerando código duplicado que é difícil de manter; ou pode criar um fluxo de trabalho massivo que é difícil de entender e modificar.
+Ao desenvolver um pipeline, você frequentemente se encontra criando sequências similares de processos para diferentes tipos de dados ou etapas de análise.
+Você pode acabar copiando e colando essas sequências de processos, gerando código duplicado que é difícil de manter; ou pode criar um fluxo de trabalho massivo que é difícil de entender e modificar.
 
-Um dos recursos mais poderosos do Nextflow é sua capacidade de compor pipelines complexos a partir de módulos de fluxo de trabalho menores e reutilizáveis. Essa abordagem modular torna os pipelines mais fáceis de desenvolver, testar e manter.
+Um dos recursos mais poderosos do Nextflow é sua capacidade de compor pipelines complexos a partir de módulos de fluxo de trabalho menores e reutilizáveis.
+Essa abordagem modular torna os pipelines mais fáceis de desenvolver, testar e manter.
 
 ### Objetivos de aprendizado
 
@@ -39,7 +41,7 @@ Se ainda não tiver feito isso, certifique-se de abrir o ambiente de treinamento
 
 #### Acesse o diretório do projeto
 
-Vamos acessar o diretório onde estão os arquivos deste tutorial.
+Acesse o diretório onde estão os arquivos deste tutorial.
 
 ```bash
 cd side-quests/workflows_of_workflows
@@ -79,7 +81,16 @@ Seu desafio é montar esses módulos em dois fluxos de trabalho separados que se
 - Um `GREETING_WORKFLOW` que valida nomes, cria saudações e adiciona timestamps
 - Um `TRANSFORM_WORKFLOW` que converte texto para maiúsculas e o inverte
 
-<!-- TODO: give a bit more details, similar to how it's done in the Metadata side quest -->
+O pipeline finalizado encadeia ambos os fluxos de trabalho em um único fluxo de dados:
+
+1. **Validar**: verificar se cada nome está bem formado
+2. **Saudar**: gerar uma saudação para cada nome válido
+3. **Timestamp**: registrar quando cada saudação foi criada
+4. **Maiúsculas**: converter a saudação com timestamp para maiúsculas
+5. **Inverter**: inverter o texto em maiúsculas
+
+As três primeiras etapas pertencem ao `GREETING_WORKFLOW`, e as duas últimas pertencem ao `TRANSFORM_WORKFLOW`.
+Construí-los como fluxos de trabalho separados e composáveis permite que você desenvolva e teste cada etapa de forma independente antes de conectá-los.
 
 #### Lista de verificação de prontidão
 
@@ -103,6 +114,8 @@ O fluxo de trabalho de saudação valida nomes e gera saudações com timestamp.
 Abra `workflows/greeting.nf` e examine o código:
 
 ```groovy title="workflows/greeting.nf" linenums="1"
+#!/usr/bin/env nextflow
+
 include { VALIDATE_NAME } from '../modules/validate_name'
 include { SAY_HELLO } from '../modules/say_hello'
 include { TIMESTAMP_GREETING } from '../modules/timestamp_greeting'
@@ -142,25 +155,25 @@ nextflow run workflows/greeting.nf
 
     ```console
     N E X T F L O W   ~  version 26.04.4
-    Launching `workflows/greeting.nf` [loving_cuvier] revision: 22e91263dd
+    Launching `workflows/greeting.nf` [sharp_kirch] revision: 04c0a33f79
     executor >  local (9)
-    [54/ec2442] VAL…TE_NAME (validating Alice) | 3 of 3 ✔
-    [a5/3cf2ab] SAY_HELLO (greeting Charlie)   | 3 of 3 ✔
-    [df/6689ec] TIM…ing timestamp to greeting) | 3 of 3 ✔
+    [c5/9df3c8] VAL…TE_NAME (validating Alice) | 3 of 3 ✔
+    [e0/243874] SAY_HELLO (greeting Alice)     | 3 of 3 ✔
+    [c5/e40c8d] TIM…ing timestamp to greeting) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/workflows_of_workflows/results
 
       greetings:
-        - Alice-output.txt
-        - Bob-output.txt
         - Charlie-output.txt
+        - Bob-output.txt
+        - Alice-output.txt
 
       timestamped:
-        - timestamped_Alice-output.txt
         - timestamped_Bob-output.txt
         - timestamped_Charlie-output.txt
+        - timestamped_Alice-output.txt
     ```
 
 Para torná-lo composável com outros fluxos de trabalho, algumas coisas precisam mudar.
@@ -171,7 +184,7 @@ Para tornar um fluxo de trabalho composável, três coisas precisam mudar:
 o fluxo de trabalho recebe um nome, as entradas são movidas para um bloco `take:` e as saídas são movidas para um bloco `emit:`
 (substituindo os blocos independentes `publish:`/`output {}`, que pertencem ao entry workflow).
 
-Vamos percorrer essas mudanças uma a uma.
+As seções a seguir cobrem essas mudanças uma a uma.
 
 #### 1.2.1. Nomear o fluxo de trabalho
 
@@ -223,7 +236,7 @@ O bloco `take:` vai antes de `main:`, e a linha `names_ch = channel.of(...)` é 
         timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
     ```
 
-O bloco `take:` declara o canal apenas pelo nome — os detalhes do que entra nele serão definidos pelo fluxo de trabalho pai.
+O bloco `take:` declara o canal apenas pelo nome. O fluxo de trabalho pai define o que entra nele.
 
 #### 1.2.3. Declarar saídas com `emit:`
 
@@ -262,7 +275,9 @@ O bloco `emit:` expõe saídas nomeadas que os fluxos de trabalho pai podem aces
 
 Após as três mudanças, o arquivo completo deve ficar assim:
 
-```groovy title="workflows/greeting.nf" linenums="1" hl_lines="5 6 7 9 15 16 17"
+```groovy title="workflows/greeting.nf" linenums="1" hl_lines="7 8 9 11 17 18 19"
+#!/usr/bin/env nextflow
+
 include { VALIDATE_NAME } from '../modules/validate_name'
 include { SAY_HELLO } from '../modules/say_hello'
 include { TIMESTAMP_GREETING } from '../modules/timestamp_greeting'
@@ -293,7 +308,7 @@ nextflow run workflows/greeting.nf
 
     ```console
     N E X T F L O W   ~  version 26.04.4
-    Launching `workflows/greeting.nf` [ridiculous_mandelbrot] revision: e619235cf1
+    Launching `workflows/greeting.nf` [intergalactic_leavitt] revision: 89ac88c6c2
     No entry workflow specified
     ```
 
@@ -301,12 +316,12 @@ Isso introduz um conceito importante: o **entry workflow**.
 O Nextflow usa um bloco `workflow {}` sem nome como ponto de entrada quando você executa um script diretamente.
 `GREETING_WORKFLOW` tem um nome, então o Nextflow não sabe como executá-lo por conta própria.
 
-Isso é intencional — fluxos de trabalho composáveis são projetados para serem chamados a partir de um entry workflow, não executados diretamente.
+Isso é intencional. Fluxos de trabalho composáveis são projetados para serem chamados a partir de um entry workflow, não executados diretamente.
 A solução é um entry workflow em `main.nf` que importa e chama o `GREETING_WORKFLOW`.
 
 ### 1.3. Atualizar e testar o fluxo de trabalho principal
 
-Agora vamos atualizar o fluxo de trabalho principal para chamar o fluxo de trabalho de saudação.
+Agora atualize o fluxo de trabalho principal para chamar o fluxo de trabalho de saudação.
 
 #### 1.3.1. Incluir o fluxo de trabalho de saudação e chamá-lo
 
@@ -314,7 +329,9 @@ Adicione a instrução `include`, atualize o corpo do fluxo de trabalho para cha
 
 === "Depois"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="1 7 8 11"
+    ```groovy title="main.nf" linenums="1" hl_lines="3 9 10 13"
+    #!/usr/bin/env nextflow
+
     include { GREETING_WORKFLOW } from './workflows/greeting'
 
     workflow {
@@ -332,6 +349,8 @@ Adicione a instrução `include`, atualize o corpo do fluxo de trabalho para cha
 === "Antes"
 
     ```groovy title="main.nf" linenums="1"
+    #!/usr/bin/env nextflow
+
     workflow {
         main:
         names = channel.of('Alice', 'Bob', 'Charlie')
@@ -378,23 +397,23 @@ nextflow run main.nf
 
     ```console
     N E X T F L O W   ~  version 26.04.4
-    Launching `main.nf` [berserk_lalande] revision: 9a841b3c7f
+    Launching `main.nf` [agitated_jones] revision: 6b0e98dd05
     executor >  local (9)
-    [31/c2931b] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
-    [2a/50592c] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
-    [09/35e2d5] GRE…ing timestamp to greeting) | 3 of 3 ✔
+    [00/5ac4ce] GRE…DATE_NAME (validating Bob) | 3 of 3 ✔
+    [7d/dde45c] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
+    [fd/a044cc] GRE…ing timestamp to greeting) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/workflows_of_workflows/results
 
       greetings:
-        - greetings/Charlie-output.txt
         - greetings/Bob-output.txt
+        - greetings/Charlie-output.txt
         - greetings/Alice-output.txt
     ```
 
-??? abstract "Conteúdo do diretório"
+??? abstract "Novo conteúdo adicionado em `results/`"
 
     ```console
     results/
@@ -404,6 +423,9 @@ nextflow run main.nf
         └── Charlie-output.txt
     ```
 
+    Os seis arquivos da execução standalone na seção 1.1 (`Alice-output.txt`, `timestamped_Alice-output.txt`, e assim por diante) ainda estão em `results/` ao lado deste novo subdiretório `greetings/`.
+    Isso é esperado: nada nesta lição os exclui, e a seção 2.1 os lê diretamente como entrada.
+
 ??? abstract "Conteúdo do arquivo"
 
     ```console title="results/greetings/Alice-output.txt"
@@ -412,6 +434,10 @@ nextflow run main.nf
 
 Os arquivos de saudação são publicados em `results/greetings/`.
 O fluxo de trabalho principal chama `GREETING_WORKFLOW` e conecta sua saída diretamente à seção `publish:`.
+
+`GREETING_WORKFLOW.out.timestamped` não está conectado ao `publish:` aqui.
+A partir da seção 2, esse canal se torna a entrada do `TRANSFORM_WORKFLOW` em vez de uma saída publicada por si só.
+Compare isso com a execução standalone na seção 1.1, onde `timestamped` não tinha mais nada para alimentar, então era publicado diretamente.
 
 ### Conclusão
 
@@ -429,7 +455,7 @@ Agora você tem um fluxo de trabalho de saudação funcional que:
 - Valida cada nome
 - Cria uma saudação para cada nome válido
 - Adiciona timestamps às saudações
-- Expõe tanto as saudações originais quanto as com timestamp como saídas
+- Emite tanto as saudações originais quanto as com timestamp, embora apenas as saudações originais sejam publicadas em `results/` nesta etapa
 
 Essa abordagem modular permite que você teste o fluxo de trabalho de saudação de forma independente ou o use como componente em pipelines maiores.
 
@@ -444,6 +470,8 @@ O fluxo de trabalho de transformação aplica transformações de texto às saud
 Abra `workflows/transform.nf` e examine o código:
 
 ```groovy title="workflows/transform.nf" linenums="1"
+#!/usr/bin/env nextflow
+
 include { SAY_HELLO_UPPER } from '../modules/say_hello_upper'
 include { REVERSE_TEXT } from '../modules/reverse_text'
 
@@ -480,10 +508,10 @@ nextflow run workflows/transform.nf
 
     ```console
     N E X T F L O W   ~  version 26.04.4
-    Launching `workflows/transform.nf` [cranky_banach] revision: c040a64fcf
+    Launching `workflows/transform.nf` [evil_meninsky] revision: 4e35790d32
     executor >  local (6)
-    [c8/cd04d9] SAY…estamped_Alice-output.txt) | 3 of 3 ✔
-    [3d/2252c3] REV…estamped_Alice-output.txt) | 3 of 3 ✔
+    [7d/4ed7de] SAY…estamped_Alice-output.txt) | 3 of 3 ✔
+    [70/ddaafa] REV…imestamped_Bob-output.txt) | 3 of 3 ✔
 
     Outputs:
 
@@ -495,9 +523,9 @@ nextflow run workflows/transform.nf
         - UPPER-timestamped_Alice-output.txt
 
       reversed:
-        - REVERSED-UPPER-timestamped_Bob-output.txt
         - REVERSED-UPPER-timestamped_Charlie-output.txt
         - REVERSED-UPPER-timestamped_Alice-output.txt
+        - REVERSED-UPPER-timestamped_Bob-output.txt
     ```
 
 Para torná-lo composável com o `GREETING_WORKFLOW`, as mesmas três mudanças da seção 1.2 se aplicam.
@@ -508,7 +536,9 @@ Aplique as mesmas três mudanças da seção 1.2: nomeie o fluxo de trabalho, su
 
 O arquivo finalizado deve ficar assim:
 
-```groovy title="workflows/transform.nf" linenums="1" hl_lines="4 5 6 8 13 14 15"
+```groovy title="workflows/transform.nf" linenums="1" hl_lines="6 7 8 10 15 16 17"
+#!/usr/bin/env nextflow
+
 include { SAY_HELLO_UPPER } from '../modules/say_hello_upper'
 include { REVERSE_TEXT } from '../modules/reverse_text'
 
@@ -531,7 +561,7 @@ O fluxo de trabalho de transformação agora é composável e está pronto para 
 
 ### 2.3. Atualizar e testar o fluxo de trabalho principal
 
-Agora vamos atualizar o fluxo de trabalho principal para chamar o fluxo de trabalho de transformação.
+Agora atualize o fluxo de trabalho principal para chamar o fluxo de trabalho de transformação.
 
 #### 2.3.1. Incluir o fluxo de trabalho de transformação e chamá-lo
 
@@ -539,7 +569,9 @@ Adicione a instrução include, uma chamada ao `TRANSFORM_WORKFLOW` encadeada na
 
 === "Depois"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="2 11 12 16 17"
+    ```groovy title="main.nf" linenums="1" hl_lines="4 13 14 18 19"
+    #!/usr/bin/env nextflow
+
     include { GREETING_WORKFLOW } from './workflows/greeting'
     include { TRANSFORM_WORKFLOW } from './workflows/transform'
 
@@ -563,6 +595,8 @@ Adicione a instrução include, uma chamada ao `TRANSFORM_WORKFLOW` encadeada na
 === "Antes"
 
     ```groovy title="main.nf" linenums="1"
+    #!/usr/bin/env nextflow
+
     include { GREETING_WORKFLOW } from './workflows/greeting'
 
     workflow {
@@ -623,21 +657,21 @@ nextflow run main.nf
 
     ```console
     N E X T F L O W   ~  version 26.04.4
-    Launching `main.nf` [focused_venter] revision: 03b08f23fc
+    Launching `main.nf` [special_magritte] revision: 2a0e54fecd
     executor >  local (15)
-    [f6/cd1e04] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
-    [07/1139ba] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
-    [d2/25e304] GRE…ing timestamp to greeting) | 3 of 3 ✔
-    [90/64c33c] TRA…estamped_Alice-output.txt) | 3 of 3 ✔
-    [bf/2f23b0] TRA…estamped_Alice-output.txt) | 3 of 3 ✔
+    [e7/e051a5] GRE…TE_NAME (validating Alice) | 3 of 3 ✔
+    [ca/cf1b18] GRE…SAY_HELLO (greeting Alice) | 3 of 3 ✔
+    [e5/aa6be2] GRE…ing timestamp to greeting) | 3 of 3 ✔
+    [d2/7afc88] TRA…imestamped_Bob-output.txt) | 3 of 3 ✔
+    [5b/70f190] TRA…estamped_Alice-output.txt) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/side-quests/workflows_of_workflows/results
 
       greetings:
-        - greetings/Charlie-output.txt
         - greetings/Bob-output.txt
+        - greetings/Charlie-output.txt
         - greetings/Alice-output.txt
 
       upper:
@@ -651,7 +685,7 @@ nextflow run main.nf
         - reversed/REVERSED-UPPER-timestamped_Alice-output.txt
     ```
 
-??? abstract "Conteúdo do diretório"
+??? abstract "Novo conteúdo adicionado em `results/`"
 
     ```console
     results/
@@ -669,10 +703,13 @@ nextflow run main.nf
         └── UPPER-timestamped_Charlie-output.txt
     ```
 
+    A raiz de `results/` também ainda contém os arquivos restantes das execuções standalone nas seções 1.1 e 2.1 (`Alice-output.txt`, `timestamped_Alice-output.txt`, `UPPER-timestamped_Alice-output.txt`, e assim por diante).
+    Isso é esperado: esta lição nunca instrui você a removê-los.
+
 ??? abstract "Conteúdo do arquivo"
 
     ```console title="results/reversed/REVERSED-UPPER-timestamped_Alice-output.txt"
-    !ECILA ,OLLEH ]71:15:11 32-60-6202[
+    !ECILA ,OLLEH ]54:84:81 31-90-6202[
     ```
 
 O pipeline está funcionando de ponta a ponta: a saudação foi convertida para maiúsculas e invertida.
@@ -699,7 +736,8 @@ Essa abordagem modular oferece várias vantagens em relação a pipelines monol�
 - Mudanças em um fluxo de trabalho não afetam necessariamente os outros, desde que as interfaces permaneçam consistentes
 - Os entry points podem ser configurados para executar diferentes partes do seu pipeline conforme necessário
 
-_É importante notar, no entanto, que embora chamar fluxos de trabalho seja um pouco parecido com chamar processos, não é exatamente a mesma coisa. Você não pode, por exemplo, executar um fluxo de trabalho N vezes chamando-o com um canal de tamanho N — você precisaria passar um canal de tamanho N para o fluxo de trabalho e iterar internamente._
+Chamar um fluxo de trabalho é similar a chamar um processo, mas não é a mesma coisa.
+Você não pode executar um fluxo de trabalho N vezes passando um canal de tamanho N: você passa o canal uma vez e o fluxo de trabalho itera sobre ele internamente.
 
 Aplicar essas técnicas no seu próprio trabalho permitirá que você construa pipelines Nextflow mais sofisticados, capazes de lidar com tarefas complexas de processamento de dados, mantendo-os fáceis de manter e escaláveis.
 
@@ -710,21 +748,21 @@ Aplicar essas técnicas no seu próprio trabalho permitirá que você construa p
     ```groovy
     workflow EXAMPLE_WORKFLOW {
         take:
-            // Os canais de entrada são declarados aqui
-            input_ch
+        // Os canais de entrada são declarados aqui
+        input_ch
 
         main:
-            // A lógica do fluxo de trabalho vai aqui
-            // É aqui que os processos são chamados e os canais são manipulados
-            result_ch = SOME_PROCESS(input_ch)
+        // A lógica do fluxo de trabalho vai aqui
+        // É aqui que os processos são chamados e os canais são manipulados
+        result_ch = SOME_PROCESS(input_ch)
 
         emit:
-            // Os canais de saída são declarados aqui
-            output_ch = result_ch
+        // Os canais de saída são declarados aqui
+        output_ch = result_ch
     }
     ```
 
-2.  **Importações de fluxo de trabalho:** Construímos dois módulos de fluxo de trabalho independentes e os importamos em um pipeline principal com instruções `include`.
+2.  **Importações de fluxo de trabalho**: Construímos dois módulos de fluxo de trabalho independentes e os importamos em um pipeline principal com instruções `include`.
 
     - Incluir um único fluxo de trabalho
 
@@ -744,7 +782,8 @@ Aplicar essas técnicas no seu próprio trabalho permitirá que você construa p
     include { WORKFLOW_A as WORKFLOW_A_ALIAS } from './path/to/workflow'
     ```
 
-3.  **Entry points**: O Nextflow requer um entry workflow sem nome para saber por onde começar a execução. Esse entry workflow chama seus fluxos de trabalho nomeados.
+3.  **Entry points**: O Nextflow requer um entry workflow sem nome para saber por onde começar a execução.
+    Esse entry workflow chama seus fluxos de trabalho nomeados.
 
     - Fluxo de trabalho sem nome (entry point)
 
@@ -763,9 +802,9 @@ Aplicar essas técnicas no seu próprio trabalho permitirá que você construa p
     }
     ```
 
-4.  **Gerenciamento do fluxo de dados:** Aprendemos como acessar as saídas do fluxo de trabalho usando a notação de namespace (`WORKFLOW_NAME.out.channel_name`) e passá-las para outros fluxos de trabalho.
+4.  **Gerenciamento do fluxo de dados**: Aprendemos como acessar as saídas do fluxo de trabalho usando a notação de namespace (`WORKFLOW_NAME.out.channel_name`) e passá-las para outros fluxos de trabalho.
 
-    ```nextflow
+    ```groovy
     WORKFLOW_A(input_ch)
     WORKFLOW_B(WORKFLOW_A.out.some_channel)
     ```

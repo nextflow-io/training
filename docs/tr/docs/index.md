@@ -16,54 +16,20 @@ hide:
 
     **Nextflow topluluk eğitim portalına hoş geldiniz!**
 
-    Aşağıda listelenen eğitim kursları, kendi kendinize kullanabileceğiniz bir kaynak olarak tasarlanmıştır.
-    Bu kursları istediğiniz zaman, Github Codespaces aracılığıyla sunduğumuz web tabanlı ortamda veya kendi ortamınızda çalışabilirsiniz.
+    Aşağıdaki kursları kendi hızınızda, web tabanlı ortamımızda veya kendi ortamınızda tamamlayın.
+    Her kurs uygulamalıdır ve bağımsız olarak tamamlayabileceğiniz hedefe yönelik alıştırmalar içerir.
 
-    [Kurslara göz atın :material-arrow-right:](#catalog-of-nextflow-training-courses){ .md-button .md-button--primary .mt-1 }
+    [Kurslara göz atın :material-arrow-down:](#catalog-of-nextflow-training-courses){ .md-button .md-button--primary .mt-1 }
 
--   :material-information-outline:{ .lg .middle } __Ek bilgiler__
+-   :material-account-group-outline:{ .lg .middle } __Eğitim Etkinlikleri__
 
     ---
 
-    ??? warning "Sürüm uyumluluğu"
+    **Kendi kendine öğrenmenin ötesinde bir şey mi arıyorsunuz?**
 
-        <!-- Bu içerikte yapılan güncellemelerin yerel kurulum sayfasına da kopyalanması gerekir -->
-        **Ocak 2026 itibarıyla, aksi belirtilmedikçe tüm Nextflow eğitim kurslarımız, katı sözdizimi etkinleştirilmiş Nextflow 25.10.2 veya daha yeni bir sürümünü gerektirmektedir.**
+    Yapılandırılmış eğitim etkinliklerini, kendi eğitimlerinizi düzenlemek için rehberleri ve açık kaynak lisansımızla katkı politikamızı bulun.
 
-        Sürüm gereksinimleri ve katı sözdizimi hakkında daha fazla bilgi için lütfen [Nextflow belgeleri geçiş kılavuzuna](https://nextflow.io/docs/latest/strict-syntax.html) bakın.
-
-        Önceki sözdizimine karşılık gelen eğitim materyalinin eski sürümlerine, bu web sayfasının menü çubuğundaki sürüm seçici aracılığıyla ulaşabilirsiniz.
-
-    ??? terminal "Ortam seçenekleri"
-
-        Eğitim için ihtiyacınız olan her şeyin önceden kurulu olduğu web tabanlı bir eğitim ortamı sunuyoruz. Bu ortama Github Codespaces üzerinden erişebilirsiniz (ücretsiz bir GitHub hesabı gerektirir).
-
-        [![GitHub Codespaces'te Açın](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
-
-        Bu seçenek ihtiyaçlarınızı karşılamıyorsa lütfen diğer [Ortam seçeneklerine](./envsetup/index.md) bakın.
-
-    ??? learning "Eğitim etkinlikleri"
-
-        Nextflow eğitimini yapılandırılmış bir etkinlik kapsamında almayı tercih ediyorsanız bunun için pek çok fırsat mevcuttur. Aşağıdaki seçeneklere göz atmanızı öneririz:
-
-        - Topluluk ekibi tarafından üç ayda bir düzenlenen **[Eğitim Haftaları]()**
-        - Seqera tarafından düzenlenen yüz yüze eğitim etkinliklerini içeren **[Seqera Etkinlikleri](https://seqera.io/events/)** ('Seqera Sessions' ve 'Nextflow Summit' için arama yapın)
-        - Yerel toplulukları için etkinlikler düzenleyen **[Nextflow Büyükelçileri]()**
-        - Topluluk hackathon'larını içeren **[nf-core etkinlikleri](https://nf-co.re/events)**
-
-    ??? people "Eğitmenler için bilgiler"
-
-        Kendi eğitimlerinizi yürüten bir eğitmenseniz, uygun atıfta bulunduğunuz sürece materyallerimizi doğrudan eğitim portalından kullanabilirsiniz. Ayrıntılar için aşağıdaki 'Katkılar ve teşekkürler' bölümüne bakın.
-
-        Bunun yanı sıra, eğitim çalışmalarınızı daha iyi desteklemek için neler yapabileceğimizi sizden duymaktan memnuniyet duyarız! Bize [community@seqera.io](mailto:community@seqera.io) adresinden veya topluluk forumu üzerinden ulaşabilirsiniz (bkz. [Yardım](help.md) sayfası).
-
-    ??? licensing "Açık kaynak lisansı ve katkı politikası"
-
-        [![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](assets/img/cc_by-nc-sa.svg){ align=right }](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-
-        Bu eğitim materyali [Seqera](https://seqera.io) tarafından geliştirilip sürdürülmekte olup topluluk yararına açık kaynak lisansı ([CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/)) altında yayımlanmaktadır. Bu materyali lisans kapsamı dışında (ticari kullanım ve yeniden dağıtım kısıtlamalarına dikkat edin) kullanmak istiyorsanız lütfen talebinizi görüşmek üzere [community@seqera.io](mailto:community@seqera.io) adresiyle iletişime geçin.
-
-        Topluluktan gelen iyileştirmeleri, düzeltmeleri ve hata raporlarını memnuniyetle karşılıyoruz. Her sayfanın sağ üst köşesinde, sorunları bildirebildiğiniz veya bir pull request aracılığıyla eğitim kaynak materyalinde değişiklik önerebileceğiniz kod deposuna bağlantı veren bir :material-file-edit-outline: simgesi bulunmaktadır. Daha fazla ayrıntı için depodaki `README.md` dosyasına bakın.
+    [Eğitim etkinliklerini görüntüleyin :material-arrow-right:](training_events.md){ .md-button .md-button--secondary .mt-1 }
 
 </div>
 
@@ -77,98 +43,135 @@ hide:
 
 <div class="grid cards" markdown>
 
--   :material-walk:{ .lg .middle } __Başlangıç seviyesi__
+-   :material-account:{ .lg .middle } __Kullanıcılar için__
 
     ---
 
-    ### :material-compass:{.nextflow-primary} Yeni Başlayanlar için Nextflow {.mt-1}
+    ### :material-play-circle:{.nextflow-primary} Pipeline'ları çalıştırın {.mt-1}
 
-    Nextflow'a tamamen yeni olanlar için tasarlanmış, alana özgü olmayan kurslar. Her kurs, öğrencilerin becerilerini kademeli olarak geliştirmelerine yardımcı olmak üzere tasarlanmış bir dizi eğitim modülünden oluşmaktadır.
+    Herhangi bir kod yazmadan mevcut pipeline'ları çalıştırmayı öğrenin.
 
-    ??? courses "**Hello Nextflow:** Kendi pipeline'larınızı geliştirmeyi öğrenin"
+    ??? courses "**Nextflow Run:** Nextflow ile pipeline çalıştırın"
 
-        Bu kurs, basit ama tam işlevsel pipeline'lar geliştirmeye yetecek düzeyde Nextflow dilinin temel bileşenlerini kapsamakta; ayrıca pipeline tasarımı, geliştirme ve yapılandırma uygulamalarının temel unsurlarını ele almaktadır.
+        Kod anlamayı gerektirmeyen, Nextflow pipeline'larını çalıştırmaya hızlı bir giriş. Pipeline başlatmayı, çıktıları almayı, konteyner kullanmayı ve temel düzeyde çalıştırmayı yapılandırmayı kapsar.
 
-        [Hello Nextflow eğitimine başlayın :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--secondary }
+        [Eğitimi görüntüleyin :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Nextflow Run:** Mevcut pipeline'ları çalıştırmayı öğrenin"
+    ??? courses "**Use nf-core:** Topluluk tarafından denetlenmiş pipeline'ları bulun ve çalıştırın"
 
-        Hello Nextflow geliştirici kursunu temel alan, ancak koda daha az odaklanan, pipeline'ları çalıştırma ve yapılandırmaya yönelik kısa bir giriş kursu. Çalıştırma, çıktılar, temel kod yapısı ve farklı hesaplama ortamları için yapılandırmayı kapsamaktadır.
+        nf-core topluluk projesinden pipeline'ları bulmaya, çalıştırmaya ve yapılandırmaya hızlı bir giriş. Minimal bir demo pipeline'dan başlayarak üretim ölçeğinde bir analiz pipeline'ına kadar ilerler.
 
-        [Nextflow Run eğitimine başlayın :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
+        [Eğitimi görüntüleyin :material-arrow-right:](nfcore_use/index.md){ .md-button .md-button--secondary }
+
+    ??? courses "**Scale with Seqera:** Pipeline'ları ölçekli olarak başlatın ve izleyin"
+
+        Seqera Platform ile Nextflow pipeline'larını hem web arayüzünden hem de komut satırından başlatmaya ve izlemeye uygulamalı bir giriş.
+
+        [Eğitimi görüntüleyin :material-arrow-right:](seqera_scale/index.md){ .md-button .md-button--secondary }
+
+    ---
+
+    ### :material-tune:{.nextflow-primary} Çalıştırmayı yönetin {.mt-1}
+
+    Pipeline çalıştırmasını etkin biçimde yönetmeyi öğrenin.
+
+    ??? courses "**Execution Config:** Pipeline'ları profesyonelce yapılandırın"
+
+        Nextflow pipeline çalıştırmasını yapılandırmaya uygulamalı bir giriş: farklı hesaplama ortamlarına uyum sağlama, kaynak tahsislerini ve yeniden denemeleri kontrol etme ve önceden tanımlanmış yapılandırma profilleri arasında geçiş yapma.
+
+        [Eğitimi görüntüleyin :material-arrow-right:](execution_config/index.md){ .md-button .md-button--secondary }
+
+    !!! info compact "Daha fazla konu geliyor"
+
+        Bu bölüm için performans ayarı, HPC/bulut çalıştırması ve daha fazlası planlanmaktadır.
+        Bir sonraki konuya ne ekleneceğini belirlemek için [kısa ilgi anketimize](https://seqera.typeform.com/to/JCs91e8v) oy verin.
+
+-   :material-code-tags:{ .lg .middle } __Geliştiriciler için__
+
+    ---
+
+    ### :material-wrench:{.nextflow-primary} Pipeline yazın {.mt-1}
+
+    Kendi Nextflow pipeline'larınızı geliştirmeyi öğrenin.
+
+    ??? courses "**Hello Nextflow:** Sıfırdan kendi pipeline'larınızı geliştirin"
+
+        Bu kurs, basit ama tam işlevli pipeline'lar geliştirmeye yetecek düzeyde Nextflow dilinin temel bileşenlerini; ayrıca pipeline tasarımı, geliştirme ve yapılandırma uygulamalarının temel unsurlarını kapsar.
+
+        [Eğitimi görüntüleyin :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--secondary }
+
+    ??? courses "**Build with nf-core:** nf-core araçlarını ve kurallarını kullanın"
+
+        [nf-core](https://nf-co.re/) uyumlu pipeline'lar geliştirmeyi öğrenmek isteyen Nextflow geliştiricileri için. Kurs; nf-core şablonunu ve geliştirme en iyi uygulamalarını kullanan, mevcut nf-core modüllerinden yararlanan, basit ama tam işlevli pipeline'lar geliştirmeye yetecek düzeyde nf-core pipeline'larının yapısını kapsar.
+
+        [Eğitimi görüntüleyin :material-arrow-right:](nfcore_build/index.md){ .md-button .md-button--secondary }
+
+    ??? catalog "**Side Quests:** Gelişmiş Nextflow konularına dalın"
+
+        Belirli konularda bilgi ve becerilerini genişletmek ya da derinleştirmek isteyen Nextflow geliştiricileri için tasarlanmış bağımsız mini kurslardan oluşan bir koleksiyon. Doğrusal bir sırayla sunulmakla birlikte herhangi bir sırayla alınabilir (bağımlılıklar için her mini kursun giriş bölümüne bakın).
+
+        [Side Quests'e göz atın :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
 
     ---
 
     ### :material-microscope:{.nextflow-primary} Bilim için Nextflow {.mt-1}
 
-    'Hello Nextflow'da sunulan kavram ve bileşenleri belirli bilimsel kullanım senaryolarına uygulamayı öğrenin.
+    Belirli bilimsel uygulamalar için Nextflow pipeline'ları geliştirmeyi öğrenin.
 
-    ??? courses "**Genomik için Nextflow** (varyant çağırma)"
+    ??? courses "**Genomics:** Varyant çağırma pipeline'ı geliştirin"
 
-        Kendi genomik pipeline'larını geliştirmek isteyen araştırmacılar için. Kurs, basit ama işlevsel bir genomik pipeline'ın nasıl geliştirileceğini göstermek amacıyla varyant çağırma kullanım senaryosunu kullanmaktadır.
+        Kendi genomik pipeline'larını geliştirmeyi öğrenmek isteyen araştırmacılar için bir kurs. Temel Nextflow geliştirme kalıplarını göstermek amacıyla varyant çağırma kullanım senaryosunu ele alır.
 
-        [Genomik için Nextflow eğitimine başlayın :material-arrow-right:](nf4_science/genomics/index.md){ .md-button .md-button--secondary }
+        [Eğitimi görüntüleyin :material-arrow-right:](nf4_science/genomics/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**RNAseq için Nextflow** (bulk RNAseq)"
+    ??? courses "**RNAseq:** Toplu RNAseq işleme pipeline'ı geliştirin"
 
-        Kendi RNAseq pipeline'larını geliştirmek isteyen araştırmacılar için. Kurs, basit ama işlevsel bir RNAseq pipeline'ının nasıl geliştirileceğini göstermek amacıyla bulk RNAseq işleme kullanım senaryosunu kullanmaktadır.
+        Kendi RNAseq pipeline'larını geliştirmeyi öğrenmek isteyen araştırmacılar için bir kurs. Temel Nextflow geliştirme kalıplarını göstermek amacıyla toplu RNAseq işleme kullanım senaryosunu ele alır.
 
-        [RNAseq için Nextflow eğitimine başlayın :material-arrow-right:](nf4_science/rnaseq/index.md){ .md-button .md-button--secondary }
+        [Eğitimi görüntüleyin :material-arrow-right:](nf4_science/rnaseq/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Görüntüleme için Nextflow** (uzamsal omiks)"
+    ??? courses "**Bioimaging:** Görüntüleme pipeline'larını çalıştırın ve yapılandırın"
 
-        Analiz pipeline'larını çalıştırmak ve özelleştirmek isteyen görüntüleme ve uzamsal omiks alanındaki araştırmacılar için. Kurs, Nextflow pipeline'larını çalıştırmayı, yapılandırmayı ve girdileri yönetmeyi göstermek amacıyla biyolojik açıdan ilgili bir pipeline olan nf-core/molkart'ı kullanmaktadır.
+        Biyogörüntüleme pipeline'larını çalıştırmayı ve yapılandırmayı öğrenmek isteyen araştırmacılar için bir kurs. Temel Nextflow kullanım kalıplarını göstermek amacıyla nf-core/molkart'ı ele alır.
 
-        [Görüntüleme için Nextflow eğitimine başlayın :material-arrow-right:](nf4_science/imaging/index.md){ .md-button .md-button--secondary }
-
--   :material-run:{ .lg .middle } __İleri seviye__
-
-    ---
-
-    ### :material-bridge:{.nextflow-primary} Nextflow'dan nf-core'a {.mt-1}
-
-    [nf-core](https://nf-co.re/) topluluk projesindeki kodu ve en iyi uygulamaları kullanmayı öğrenin.
-
-    Bu kurslar, Nextflow temellerinden nf-core en iyi uygulamalarına geçişinizi destekler.
-    nf-core topluluğunun pipeline'ları nasıl ve neden oluşturduğunu, bu tekniklere nasıl katkıda bulunabileceğinizi ve bunları nasıl yeniden kullanabileceğinizi anlayın.
-
-    ??? courses "**Build with nf-core:** nf-core ile başlayın"
-
-        [nf-core](https://nf-co.re/) uyumlu pipeline'ları çalıştırmak ve geliştirmek isteyen geliştiriciler için. Kurs, nf-core şablonunu ve geliştirme en iyi uygulamalarını izleyen, mevcut nf-core modüllerini kullanan, basit ama tam işlevsel pipeline'lar geliştirmeye yetecek düzeyde nf-core pipeline'larının yapısını kapsamaktadır.
-
-        [Build with nf-core eğitimine başlayın :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
-
-    ---
-
-    ### :material-rocket-launch:{.nextflow-primary} İleri Düzey Nextflow Eğitimi {.mt-1}
-
-    Gerçek dünya kullanım senaryolarına yönelik Nextflow pipeline'ları geliştirmek ve dağıtmak için ileri düzey kavramları ve mekanizmaları öğrenin.
-
-    ??? courses "**Side Quests:** Bağımsız konulara derinlemesine dalış"
-
-        Belirli konularda kapsamlarını genişletmek ve/veya becerilerini derinleştirmek isteyen Nextflow geliştiricileri için tasarlanmış bağımsız mini kurslar. Doğrusal bir sırayla sunulmakla birlikte herhangi bir sırayla alınabilirler (her mini kursun genel bakışındaki bağımlılıklara bakın).
-
-        [Side Quests'e göz atın :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
-
-    ??? courses "**Öğrenme Yolları:** Kurslarımız arasında küratörlü rotalar"
-
-        Öğrenme Yolları, belirli bir tema veya kullanım senaryosu etrafında kapsamlı bir öğrenme deneyimi sunmak amacıyla birden fazla Side Quest'i bir araya getirir.
-
-        [Öğrenme Yollarına göz atın :material-arrow-right:](training_collections/index.md){ .md-button .md-button--secondary }
+        [Eğitimi görüntüleyin :material-arrow-right:](nf4_science/imaging/index.md){ .md-button .md-button--secondary }
 
 </div>
 
-!!! info "Arşivlenmiş eğitim materyalleri mi arıyorsunuz?"
+## Kurulum ve Yardım
 
-    Eski eğitim materyalleri (Temel Eğitim, İleri Düzey Eğitim ve diğer deneysel kurslar), Nextflow 3.0 katı sözdizimi ile uyumsuz oldukları için eğitim portalından kaldırılmıştır.
-    Bu materyallere erişmeniz gerekiyorsa Ocak 2026 öncesine ait [git geçmişinde](https://github.com/nextflow-io/training) bulunabilirler.
+<div class="grid cards mb-4" markdown>
 
----
+-   :material-cog-outline:{ .lg .middle } __Eğitim Ortamı__
 
-<div markdown class="homepage_logos">
+    ---
 
-![Seqera](assets/img/seqera_logo.png#only-light)
+    Nextflow eğitimleri için ortamınızı kurma seçenekleri.
 
-![Seqera](assets/img/seqera_logo_dark.png#only-dark)
+    [Eğitim ortamlarını görüntüleyin :material-arrow-right:](envsetup/index.md){ .md-button .md-button--secondary }
+
+-   :material-tag-outline:{ .lg .middle } __Nextflow sürümleri__
+
+    ---
+
+    Nextflow'un sözdizimi sürümlerinin gelişimini anlama ve yönetme.
+
+    [Sürüm gereksinimlerini kontrol edin :material-arrow-right:](info/nxf_versions.md){ .md-button .md-button--secondary }
+
+-   :material-file-code-outline:{ .lg .middle } __Hello pipeline__
+
+    ---
+
+    Hello pipeline'ının ne yaptığı ve nasıl yapılandırıldığına ilişkin özet.
+
+    [Özeti okuyun :material-arrow-right:](info/hello_pipeline.md){ .md-button .md-button--secondary }
+
+-   :material-lifebuoy:{ .lg .middle } __Yardım alma__
+
+    ---
+
+    Nextflow eğitiminde bir sorunla karşılaştığınızda başvurabileceğiniz kaynaklar.
+
+    [Yardım bulun :material-arrow-right:](help.md){ .md-button .md-button--secondary }
 
 </div>

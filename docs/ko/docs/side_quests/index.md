@@ -29,30 +29,37 @@ additional_information:
 **사이드 퀘스트는 특정 Nextflow 주제를 더 깊이 다루는 단독 교육 단기 과정 모음입니다.**
 
 각 사이드 퀘스트는 관심사와 필요에 따라 순서에 관계없이 독립적으로 진행할 수 있습니다.
+함께 학습하면 단순한 파이프라인에서 프로덕션 수준의 워크플로우로 나아가는 데 필요한 역량을 갖출 수 있습니다.
 
 <!-- additional_information -->
 
-## 과정 개요
+### 주제별 탐색
 
-사이드 퀘스트를 처음 접하시는 경우, 교육 환경 및 자료 개요를 확인하려면 먼저 [Orientation](./orientation.md) 페이지를 확인하십시오.
+처음으로 교육 과정을 시작하시는 경우, 교육 환경 및 자료 개요를 확인하려면 먼저 [시작하기](./orientation.md) 페이지를 확인하십시오.
+그렇지 않다면, 관심 있는 퀘스트로 바로 진행하셔도 됩니다.
 
-### 사이드 퀘스트
-
-| 사이드 퀘스트                                                           | 요약                                                             | 예상 시간 |
-| ----------------------------------------------------------------------- | ---------------------------------------------------------------- | --------- |
-| [Development Environment](./dev_environment/index.md)                   | 생산적인 로컬 Nextflow 개발 환경 설정 및 구성                    | 45분      |
-| [Essential Scripting Patterns](./essential_scripting_patterns/index.md) | 일반적인 워크플로우 과제를 위한 고급 스크립팅 기법               | 90분      |
-| [File Input Processing](./working_with_files/index.md)                  | 파일 처리, 경로 작업 및 출력 구성                                | 45분      |
-| [Metadata and Meta Maps](./metadata/index.md)                           | 메타데이터 맵을 사용하여 샘플 정보 추적 및 전달                  | 45분      |
-| [Splitting and Grouping](./splitting_and_grouping/index.md)             | 데이터 채널 분할 및 재그룹화 기법                                | 45분      |
-| [Testing with nf-test](./nf_test/index.md)                              | Nextflow 워크플로우를 위한 테스트 작성 및 실행                   | 1시간     |
-| [Troubleshooting Workflows](./debugging/index.md)                       | 일반적인 워크플로우 오류 식별 및 수정                            | 1시간     |
-| [Workflows of Workflows](./workflows_of_workflows/index.md)             | 재사용 가능한 이름 있는 워크플로우 모듈로 복잡한 파이프라인 구성 | 30분      |
-| [Plugin Development](./plugin_development/index.md)                     | Nextflow 플러그인 사용 및 빌드                                   | 3시간     |
+<table>
+<thead>
+<tr><th>사이드 퀘스트</th><th>요약</th><th>예상 시간</th></tr>
+</thead>
+<tbody>
+<tr><th colspan="3">개발자 도구 &amp; 팁</th></tr>
+<tr><td><a href="./dev_environment/">Development Environment</a></td><td>생산적인 로컬 Nextflow 개발 환경 설정 및 구성</td><td>45분</td></tr>
+<tr><td><a href="./debugging/">Troubleshooting Workflows</a></td><td>일반적인 워크플로우 오류 식별 및 수정</td><td>1시간</td></tr>
+<tr><td><a href="./essential_scripting_patterns/">Essential Scripting Patterns</a></td><td>일반적인 워크플로우 과제를 위한 고급 스크립팅 기법</td><td>90분</td></tr>
+<tr><th colspan="3">데이터플로우 심화</th></tr>
+<tr><td><a href="./working_with_files/">File Input Processing</a></td><td>파일 처리, 경로 작업 및 출력 구성</td><td>45분</td></tr>
+<tr><td><a href="./metadata/">Metadata and Meta Maps</a></td><td>메타데이터 맵을 사용하여 샘플 정보 추적 및 전달</td><td>45분</td></tr>
+<tr><td><a href="./splitting_and_grouping/">Splitting and Grouping</a></td><td>데이터 채널 분할 및 재그룹화 기법</td><td>45분</td></tr>
+<tr><th colspan="3">모듈형 아키텍처 실전</th></tr>
+<tr><td><a href="./workflows_of_workflows/">Workflows of Workflows</a></td><td>재사용 가능한 이름 있는 워크플로우 모듈로 복잡한 파이프라인 구성</td><td>30분</td></tr>
+<tr><th colspan="3">Nextflow 확장 세계</th></tr>
+<tr><td><a href="./nf_test/">Testing with nf-test</a></td><td>Nextflow 워크플로우를 위한 테스트 작성 및 실행</td><td>1시간</td></tr>
+<tr><td><a href="./plugin_development/">Plugin Development</a></td><td>Nextflow 플러그인 사용 및 빌드</td><td>3시간</td></tr>
+</tbody>
+</table>
 
 [시작하기 :material-arrow-right:](orientation.md){ .md-button .md-button--primary }
 
 <!-- Clearfix for float -->
 <div style="content: ''; clear: both; display: table;"></div>
-
-커뮤니티 포럼의 [Training 섹션](https://community.seqera.io/c/training/)에 게시하여 여기에서 다루고 싶은 다른 주제를 알려주십시오.

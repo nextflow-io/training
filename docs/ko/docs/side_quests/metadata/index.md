@@ -9,7 +9,8 @@
 메타데이터는 다른 데이터를 설명하는 데이터입니다.
 메타데이터는 파일과 실험 조건에 대한 중요한 세부 정보를 추적하며, 각 데이터셋의 고유한 특성에 맞게 분석을 조정하는 데 도움을 줍니다.
 
-도서관 카탈로그를 생각해 보세요. 책에는 실제 내용(원시 데이터)이 담겨 있지만, 카탈로그 카드는 각 책에 대한 필수 정보(출판 시기, 저자, 위치 등)를 제공합니다(메타데이터).
+도서관 카탈로그를 생각해 보세요. 책에는 실제 내용(원시 데이터)이 담겨 있지만, 카탈로그 카드는 각 책에 대한 필수 정보를 제공합니다.
+그 정보에는 출판 시기, 저자, 위치 등이 포함됩니다(메타데이터).
 Nextflow 파이프라인에서 메타데이터는 다음과 같은 용도로 사용됩니다.
 
 - 워크플로우 전반에 걸쳐 파일별 정보 추적
@@ -214,7 +215,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [exotic_albattani] revision: c0d03cec83
+    Launching `main.nf` [exotic_albattani] revision: c7ce88ee60
 
     [id:sampleA, character:squirrel, recording:/workspaces/training/side-quests/metadata/data/bonjour.txt]
     [id:sampleB, character:tux, recording:/workspaces/training/side-quests/metadata/data/guten_tag.txt]
@@ -322,7 +323,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [exotic_albattani] revision: c0d03cec83
+    Launching `main.nf` [exotic_albattani] revision: 10a2598a59
 
     squirrel
     tux
@@ -356,15 +357,15 @@ process COWPY {
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
     input:
-    path input_file
+    path recording
     val character
 
     output:
-    path "cowpy-${input_file}"
+    path "cowpy-${recording}"
 
     script:
     """
-    cat ${input_file} | cowpy -c ${character} > cowpy-${input_file}
+    cat ${recording} | cowpy -c ${character} > cowpy-${recording}
     """
 }
 ```
@@ -497,7 +498,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [clever_dijkstra] revision: a1b2c3d4e5
+    Launching `main.nf` [clever_dijkstra] revision: 2fb579b3bd
 
     executor >  local (7)
     [3a/f1c290] COWPY (7) | 7 of 7 ✔
@@ -593,15 +594,15 @@ nextflow run main.nf
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
         input:
-        path input_file
+        path recording
         val character
 
         output:
-        path "cowpy-${input_file}"
+        path "cowpy-${recording}"
 
         script:
         """
-        cat ${input_file} | cowpy -c ${character} > cowpy-${input_file}
+        cat ${recording} | cowpy -c ${character} > cowpy-${recording}
         """
     }
     ```
@@ -680,7 +681,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [pedantic_lovelace] revision: b2c3d4e5f6
+    Launching `main.nf` [pedantic_lovelace] revision: 745a78a291
 
     executor >  local (7)
     [5e/2a1b34] COWPY (7) | 7 of 7 ✔
@@ -809,7 +810,7 @@ nextflow run main.nf
     ```console title="View meta map"
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [lethal_booth] revision: 0d8f844c07
+    Launching `main.nf` [lethal_booth] revision: 50e03309d4
 
     [[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/data/bonjour.txt]
     [[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/data/guten_tag.txt]
@@ -850,14 +851,14 @@ nextflow run main.nf
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
         input:
-        tuple val(meta), path(input_file)
+        tuple val(meta), path(recording)
 
         output:
-        path "cowpy-${input_file}"
+        path "cowpy-${recording}"
 
         script:
         """
-        cat ${input_file} | cowpy -c ${meta.character} > cowpy-${input_file}
+        cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
         """
     }
     ```
@@ -936,7 +937,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [wise_sammet] revision: 99797b1e92
+    Launching `main.nf` [wise_sammet] revision: f8f429c3df
 
     executor >  local (7)
     [5d/dffd4e] COWPY (7) | 7 of 7 ✔
@@ -1102,7 +1103,7 @@ nextflow run main.nf -resume
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [voluminous_mcnulty] revision: f9bcfebabb
+    Launching `main.nf` [voluminous_mcnulty] revision: 1d1ec2b857
 
     executor >  local (7)
     [c9/34bfec] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
@@ -1277,7 +1278,7 @@ nextflow run main.nf -resume
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [cheeky_fermat] revision: d096281ee4
+    Launching `main.nf` [cheeky_fermat] revision: f55f2f98b9
 
     [d9/b360d0] IDENTIFY_LANGUAGE (3) | 7 of 7, cached: 7 ✔
     [94/224450] COWPY (3)             | 7 of 7, cached: 7 ✔
@@ -1406,7 +1407,7 @@ nextflow run main.nf -resume
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [wise_almeida] revision: 46778c3cd0
+    Launching `main.nf` [wise_almeida] revision: 0f4b36d66d
 
     [c9/34bfec] IDENTIFY_LANGUAGE (1) | 7 of 7, cached: 7 ✔
     [e9/269aa0] COWPY (6)             | 7 of 7, cached: 7 ✔
@@ -1439,37 +1440,38 @@ nextflow run main.nf -resume
 
 메타 맵에 `lang`과 `lang_group`이 포함되었으니, 이를 사용하여 출력 파일 이름에 언어 코드를 추가하고 언어 계열별로 서브디렉토리에 구성합니다.
 
-세 가지 변경이 필요합니다. `COWPY` 프로세스를 업데이트하여 출력 이름을 변경하고 `meta`를 내보내도록 하고, `COWPY` 실행을 `ch_languages`에서 실행하도록 업데이트하고, 서브디렉토리 경로를 지정하도록 output 블록을 업데이트합니다.
+세 가지 변경이 필요합니다. `COWPY` 프로세스를 업데이트하여 `meta`를 출력에 포함하도록 하고, `COWPY` 실행을 `ch_languages`에서 실행하도록 업데이트하고, 각 파일을 언어 그룹 서브디렉토리로 라우팅하고 감지된 언어 코드를 사용하여 이름을 변경하도록 output 블록을 업데이트합니다.
 
 #### 2.4.1. `COWPY` 프로세스 업데이트
 
-메타 맵의 언어 코드를 사용하여 출력 파일 이름을 변경하고, output 블록이 서브디렉토리 라우팅을 위해 `lang_group`에 접근할 수 있도록 출력에 `meta`를 추가합니다.
+output 블록이 라우팅 및 이름 변경을 위해 `lang`과 `lang_group`에 접근할 수 있도록 출력에 `meta`를 추가합니다.
 
 === "후"
 
-    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2 6"
+    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2"
         output:
-        tuple val(meta), path("${meta.lang}-${input_file}")
+        tuple val(meta), path("cowpy-${recording}")
 
         script:
         """
-        cat ${input_file} | cowpy -c ${meta.character} > ${meta.lang}-${input_file}
+        cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
         """
     ```
 
 === "전"
 
-    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2 6"
+    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2"
         output:
-        path "cowpy-${input_file}"
+        path "cowpy-${recording}"
 
         script:
         """
-        cat ${input_file} | cowpy -c ${meta.character} > cowpy-${input_file}
+        cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
         """
     ```
 
-이는 입력 정의를 전혀 수정하지 않고도 다른 메타데이터 필드를 활용하여 프로세스 동작을 맞춤화하는 방법을 보여줍니다.
+이는 최소한의 프로세스 수준 변경입니다. `COWPY`는 `lang`이나 `lang_group`의 존재를 알 필요 없이, 출력과 함께 `meta`를 전달하기만 하면 됩니다.
+해당 필드를 기반으로 한 라우팅과 이름 변경은 모두 다운스트림, 즉 output 블록에서 처리됩니다.
 
 #### 2.4.2. `ch_languages`에서 `COWPY` 실행하도록 업데이트
 
@@ -1505,14 +1507,16 @@ nextflow run main.nf -resume
 
 #### 2.4.3. output 블록 업데이트
 
-`output {}` 블록에 `path` closure를 추가하여 각 파일을 언어 그룹 서브디렉토리로 라우팅합니다.
+[`>>` 연산자](https://www.nextflow.io/docs/latest/workflow.html#dynamic-publish-path)를 사용하여 각 파일을 명시적 대상(언어 그룹 서브디렉토리 아래, 감지된 언어를 접두사로 한 이름)으로 게시하는 `path` closure를 `output {}` 블록에 추가합니다.
 
 === "후"
 
-    ```groovy title="main.nf" linenums="40" hl_lines="3"
+    ```groovy title="main.nf" linenums="40" hl_lines="3-5"
     output {
         cowpy_art {
-            path { meta, file -> meta.lang_group }
+            path { meta, file ->
+                file >> "${meta.lang_group}/${meta.lang}-${file.name}"
+            }
         }
     }
     ```
@@ -1526,7 +1530,7 @@ nextflow run main.nf -resume
     }
     ```
 
-이는 메타데이터를 사용하여 출력을 유연하게 구성하는 방법을 보여줍니다.
+이는 프로세스 자체를 변경하지 않고, output 블록만으로 출력을 구성하고 이름을 변경하는 데 메타데이터를 활용하는 방법을 보여줍니다.
 
 #### 2.4.4. 전체 파이프라인 실행
 
@@ -1542,7 +1546,7 @@ nextflow run main.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [suspicious_crick] revision: 25541014c5
+    Launching `main.nf` [suspicious_crick] revision: 955602d59b
 
     executor >  local (14)
     [99/64c59d] IDENTIFY_LANGUAGE (6) | 7 of 7 ✔
@@ -1553,13 +1557,13 @@ nextflow run main.nf
       /workspaces/training/side-quests/metadata/results
 
       cowpy_art:
-        - [{id: sampleB, character: tux, lang: de, lang_group: germanic}, germanic/de-guten_tag.txt]
-        - [{id: sampleG, character: turtle, lang: it, lang_group: romance}, romance/it-ciao.txt]
-        - [{id: sampleC, character: sheep, lang: de, lang_group: germanic}, germanic/de-hallo.txt]
-        - [{id: sampleE, character: stegosaurus, lang: es, lang_group: romance}, romance/es-hola.txt]
-        - [{id: sampleA, character: squirrel, lang: fr, lang_group: romance}, romance/fr-bonjour.txt]
-        - [{id: sampleD, character: turkey, lang: en, lang_group: germanic}, germanic/en-hello.txt]
-        - [{id: sampleF, character: moose, lang: fr, lang_group: romance}, romance/fr-salut.txt]
+        - [{id: sampleB, character: tux, lang: de, lang_group: germanic}, germanic/de-cowpy-guten_tag.txt]
+        - [{id: sampleG, character: turtle, lang: it, lang_group: romance}, romance/it-cowpy-ciao.txt]
+        - [{id: sampleC, character: sheep, lang: de, lang_group: germanic}, germanic/de-cowpy-hallo.txt]
+        - [{id: sampleE, character: stegosaurus, lang: es, lang_group: romance}, romance/es-cowpy-hola.txt]
+        - [{id: sampleA, character: squirrel, lang: fr, lang_group: romance}, romance/fr-cowpy-bonjour.txt]
+        - [{id: sampleD, character: turkey, lang: en, lang_group: germanic}, germanic/en-cowpy-hello.txt]
+        - [{id: sampleF, character: moose, lang: fr, lang_group: romance}, romance/fr-cowpy-salut.txt]
     ```
 
 results 디렉토리가 이제 언어 계열별로 구성되었으며, 각 파일은 감지된 언어에 따라 이름이 지정되었습니다.
@@ -1567,19 +1571,19 @@ results 디렉토리가 이제 언어 계열별로 구성되었으며, 각 파�
 ```console title="Results directory contents"
 results/
 ├── germanic
-│   ├── de-guten_tag.txt
-│   ├── de-hallo.txt
-│   └── en-hello.txt
+│   ├── de-cowpy-guten_tag.txt
+│   ├── de-cowpy-hallo.txt
+│   └── en-cowpy-hello.txt
 └── romance
-    ├── es-hola.txt
-    ├── fr-bonjour.txt
-    ├── fr-salut.txt
-    └── it-ciao.txt
+    ├── es-cowpy-hola.txt
+    ├── fr-cowpy-bonjour.txt
+    ├── fr-cowpy-salut.txt
+    └── it-cowpy-ciao.txt
 ```
 
-`output {}` 블록의 `path` closure는 각 `[meta, file]` 튜플을 받아 `meta.lang_group`을 서브디렉토리 이름으로 반환합니다.
-파일 이름 자체는 프로세스가 출력하는 것(`#!groovy "${meta.lang}-${input_file}"`)에서 옵니다.
-두 메타데이터(언어 코드와 언어 그룹) 모두 이 섹션에서 구축한 풍부해진 메타 맵에서 옵니다.
+`output {}` 블록의 `path` closure는 각 `[meta, file]` 튜플을 받습니다.
+`>>` 연산자는 `file`을 대상 `#!groovy "${meta.lang_group}/${meta.lang}-${file.name}"`으로 게시하며, 서브디렉토리(`lang_group`)와 이름이 변경된 파일(`lang`을 접두사로 사용)을 단일 표현식으로 결합합니다.
+두 메타데이터 모두 이 섹션에서 구축한 풍부해진 메타 맵에서 오며, `COWPY` 자체는 두 필드의 존재를 알 필요가 없습니다.
 
 ### 핵심 정리
 
@@ -1620,7 +1624,7 @@ Nextflow가 명령에 `#!groovy ${meta.character}`를 대입할 때 `COWPY` 도�
     ```console hl_lines="7 12 17 29"
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [marvelous_hirsch] revision: 0dfeee3cc1
+    Launching `main.nf` [marvelous_hirsch] revision: 955602d59b
 
     executor >  local (14)
     [c1/c5dd4f] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
@@ -1634,7 +1638,7 @@ Nextflow가 명령에 `#!groovy ${meta.character}`를 대입할 때 `COWPY` 도�
 
     Command executed:
 
-      cat bonjour.txt | cowpy -c  > fr-bonjour.txt
+      cat bonjour.txt | cowpy -c  > cowpy-bonjour.txt
 
     Command exit status:
       2
@@ -1644,8 +1648,8 @@ Nextflow가 명령에 `#!groovy ${meta.character}`를 대입할 때 `COWPY` 도�
 
     Command error:
       usage: cowpy [-h] [-l] [-L] [-t] [-u] [-e EYES] [-c COWACTER] [-E] [-r] [-x]
-                  [-C]
-                  [msg ...]
+                   [-C]
+                   [msg ...]
       cowpy: error: argument -c/--cowacter: expected one argument
 
     Work dir:
@@ -1656,7 +1660,7 @@ Nextflow가 명령에 `#!groovy ${meta.character}`를 대입할 때 `COWPY` 도�
 
     Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 오류 메시지(`expected one argument`)는 빈 `-c` 플래그를 가리킵니다.
@@ -1681,7 +1685,7 @@ sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
     ```console hl_lines="7 12 17"
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [jovial_bohr] revision: eaaf375827
+    Launching `main.nf` [jovial_bohr] revision: 955602d59b
 
     executor >  local (14)
     [61/91663a] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
@@ -1695,7 +1699,7 @@ sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 
     Command executed:
 
-      cat hola.txt | cowpy -c null > es-hola.txt
+      cat hola.txt | cowpy -c null > cowpy-hola.txt
 
     Command exit status:
       1
@@ -1727,7 +1731,7 @@ sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 
     Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 실행된 명령의 `cowpy -c null`이 진단 단서입니다.
@@ -1739,7 +1743,7 @@ sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 **1. 입력 유효성 검사**
 
 가장 신뢰할 수 있는 해결책은 처리가 시작되기 전에 데이터시트를 검증하는 것입니다. 이를 통해 실행 중간에 알 수 없는 프로세스 오류로 나타나는 대신, 명확한 오류 메시지와 함께 문제를 조기에 발견할 수 있습니다.
-[Build with nf-core](../../hello_nf-core/05_input_validation.md) 교육 과정에서 nf-schema 플러그인을 사용하여 입력 유효성 검사를 추가하는 방법을 다룹니다. <!-- TODO (future) pending a proper Validation side quest -->
+[Build with nf-core](../../nfcore_build/04_input_validation.md) 교육 과정에서 nf-schema 플러그인을 사용하여 입력 유효성 검사를 추가하는 방법을 다룹니다. <!-- TODO (future) pending a proper Validation side quest -->
 
 **2. 필수 값에 대한 명시적 프로세스 입력**
 
@@ -1749,7 +1753,7 @@ sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 
     ```groovy title="modules/cowpy.nf" linenums="6"
     input:
-    tuple val(meta), val(character), path(input_file)
+    tuple val(meta), val(character), path(recording)
     ```
 
 === "워크플로우 실행"
@@ -1820,15 +1824,17 @@ sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 3.  **프로세스 내부에서 메타데이터 사용:** 스크립트 블록에서 점 표기법으로 모든 필드에 접근합니다.
 
     ```groovy
-    cat ${input_file} | cowpy -c ${meta.character} > ${meta.lang}-${input_file}
+    cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
     ```
 
-4.  **메타데이터 값으로 출력 구성:** `output {}` 블록의 `path` closure를 사용합니다.
+4.  **메타데이터 값으로 출력 구성 및 이름 변경:** `output {}` 블록의 `path` closure와 `>>` 연산자를 사용하여 대상 디렉토리와 게시 파일 이름을 모두 제어합니다.
 
     ```groovy
     output {
         cowpy_art {
-            path { meta, file -> meta.lang_group }
+            path { meta, file ->
+                file >> "${meta.lang_group}/${meta.lang}-${file.name}"
+            }
         }
     }
     ```

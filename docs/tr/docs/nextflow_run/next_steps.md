@@ -8,39 +8,26 @@ Nextflow Run eğitim kursunu tamamladığınız için tebrikler! 🎉
 
 ## Yolculuğunuz
 
-Çok temel bir iş akışı ile başladınız ve onu çalıştırmayı, çıktıları bulmayı ve çalışmasını yönetmeyi öğrendiniz.
-Ardından, bu iş akışının giderek daha karmaşık versiyonları üzerinde çalıştınız ve kanal'lar ile operatörler, kod modülerleştirme ve konteynerlar dahil Nextflow pipeline'larına güç veren temel kavramları ve mekanizmaları tanımayı öğrendiniz.
-Son olarak, tercihlerinize ve hesaplama altyapınıza uyması için bir pipeline'ın yapılandırmasını nasıl özelleştireceğinizi öğrendiniz.
-
-### Ne öğrendiniz
-
-Artık Hello pipeline'ının çalışmasını yönetebilir, nasıl yapılandırıldığını tanımlayabilir ve dahil olan ana kod parçalarını belirleyebilirsiniz.
-
-- Hello iş akışının son hali, girdi olarak metin selamlamaları içeren bir CSV dosyası alır.
-- Dört adım, ayrı modül dosyalarında saklanan Nextflow süreçleri olarak uygulanır (`sayHello`, `convertToUpper`, `collectGreetings` ve `cowpy`).
-- Sonuçlar `results/` adlı bir dizine yayımlanır.
-- Pipeline'ın nihai çıktısı, büyük harfli selamlamaları söyleyen bir karakterin ASCII art'ını içeren düz metin dosyasıdır.
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
-</figure>
-
-1. **`sayHello`:** Her selamlamayı kendi çıktı dosyasına yazar (örn. "Hello-output.txt")
-2. **`convertToUpper`:** Her selamlamayı büyük harfe dönüştürür (örn. "HELLO")
-3. **`collectGreetings`:** Tüm büyük harfli selamlamaları tek bir toplu dosyaya toplar
-4. **`cowpy`:** `cowpy` aracını kullanarak ASCII art oluşturur
-
-İş akışı yapılandırması, girdilerin ve parametrelerin esnek, tekrarlanabilir bir şekilde sağlanmasını destekler.
+Çok temel bir iş akışı ile başladınız ve onu çalıştırmayı ve çıktılarını bulmayı öğrendiniz.
+Ardından, bu pipeline'ın giderek daha gerçekçi versiyonlarını çalıştırdınız: bir CSV dosyasından birden fazla girdiyi paralel olarak işlediniz, tamamlanan işleri atlamak için `-resume` kullandınız ve bir pipeline'ın bağımlı olduğu yazılımları yönetmek için konteynerlardan yararlandınız.
+Sonra, `nextflow.config` ve profiller kullanarak bir pipeline'ın yapılandırmasını nasıl özelleştireceğinizi ve çıktıların nereye ve nasıl yayımlanacağını nasıl kontrol edeceğinizi öğrendiniz.
+Bunun ardından, yürütme raporları oluşturmayı, geçmiş çalıştırmaların geçmişini incelemeyi ve eski work dizinlerini temizlemeyi öğrendiniz.
+Son olarak, pipeline'ları GitHub gibi uzak depolardan doğrudan nasıl çalıştıracağınızı öğrendiniz.
 
 ### Kazanılan beceriler
 
 Bu uygulamalı kurs sayesinde şunları öğrendiniz:
 
-- Nextflow iş akışını yerel olarak başlatma
-- Nextflow tarafından oluşturulan çıktıları (sonuçlar) ve log dosyalarını bulma ve yorumlama
-- Basit çok adımlı bir iş akışını oluşturan temel Nextflow bileşenlerini tanıma
-- Operatörler ve kanal factory'leri gibi ileri adım kavramlarını tanımlama
-- Pipeline'ları farklı hesaplama ortamları için yapılandırma
+- Nextflow iş akışını yerel olarak başlatma ve çıktılarını bulma
+- Birden fazla girdiyi paralel olarak işleyen çok adımlı bir pipeline çalıştırma
+- Tamamlanan işleri tekrarlamamak için `-resume` kullanma
+- Yazılım bağımlılıklarını yönetmek için konteynerlar kullanma
+- `nextflow.config` ve profiller kullanarak pipeline'ları yapılandırma
+- Çıktıların nereye ve nasıl yayımlanacağını özelleştirme
+- `-with-report` ile HTML yürütme raporu ve `-with-timeline` ile yürütme zaman çizelgesi oluşturma
+- `nextflow log` ile geçmiş çalıştırmaların geçmişini inceleme
+- `nextflow clean` ile eski work dizinlerini temizleme
+- Bir pipeline'ı uzak bir depodan doğrudan çalıştırma ve tekrarlanabilirlik için belirli bir revizyona sabitleme (ve sabitlemeyi geri alma)
 
 Artık mevcut Nextflow pipeline'larını kendi çalışmanıza entegre etmeye başlamak için temel bilgilerle donatıldınız.
 
@@ -48,12 +35,11 @@ Artık mevcut Nextflow pipeline'larını kendi çalışmanıza entegre etmeye ba
 
 Sırada ne yapacağınız için en iyi önerilerimiz:
 
-- Sadece Nextflow çalıştırmayın, yazın! [Hello Nextflow](../hello_nextflow/index.md) ile Nextflow geliştiricisi olun
-- Bilimsel analiz kullanım durumlarına Nextflow uygulayın: [Nextflow for Science](../nf4_science/index.md)
-- [Build with nf-core](../hello_nf-core/index.md) ile nf-core'a başlayın
-- [Debugging Side Quest](../side_quests/debugging/index.md) ile hata ayıklama tekniklerini öğrenin
+- [Execution Config](../execution_config/index.md) ile pipeline yapılandırmasını daha ayrıntılı keşfedin
+- [Use nf-core](../nfcore_use/index.md) ile nf-core topluluk pipeline'larını çalıştırmayı öğrenin
+- [Scale with Seqera](../seqera_scale/index.md) ile pipeline'ları büyük ölçekte başlatın ve izleyin
 
-Son olarak, Nextflow'un yaratıcıları tarafından geliştirilen bulut tabanlı bir platform olan [**Seqera Platform**](https://seqera.io/)'a bakmanızı öneririz; iş akışlarınızı başlatmayı ve yönetmeyi, verilerinizi yönetmeyi ve herhangi bir ortamda etkileşimli analizler çalıştırmayı çok daha kolay hale getirir.
+Ya da yalnızca Nextflow çalıştırmaktan öteye geçmeye hazırsanız, [Hello Nextflow](../hello_nextflow/index.md) ile bir Nextflow geliştiricisi olun.
 
 ## Yardım alma
 

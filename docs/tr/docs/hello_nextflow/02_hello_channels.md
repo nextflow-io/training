@@ -1154,7 +1154,7 @@ nextflow run hello-channels.nf
 
     Launching `hello-channels.nf` [peaceful_poisson] revision: a286c08ad5
 
-    [-        ] sayHello [  0%] 0 of 1
+    [-        ] sayHello | 0 of 1
     Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv
     ERROR ~ Error executing process > 'sayHello (1)'
 
@@ -1240,7 +1240,7 @@ Operatörü uygulamak için, daha önce olduğu gibi kanal fabrikası satırına
     ```
 
 Gördüğünüz gibi, önce/sonra `view()` ifadelerini de güncelledik.
-Teknik olarak aynı değişken adını (`greeting`) kullanabilirdik ama kodu başkaları için daha okunabilir kılmak için daha uygun bir şeye (`csv`) güncelledik.
+Teknik olarak aynı değişken adını (`greeting`) kullanabilirdik ama kodu başkaları için daha okunabilir kılmak amacıyla daha uygun bir şeye (`csv`) güncelledik.
 
 #### 4.2.2. İş akışını tekrar çalıştırın
 

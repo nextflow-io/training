@@ -10,7 +10,7 @@ Sin embargo, los patrones de Nextflow que aprenderá aquí se aplican a cualquie
 
 ## 1. Comprender los pipelines de nf-core
 
-Antes de ejecutar el pipeline, entendamos qué es nf-core y por qué es importante para ejecutar flujos de trabajo.
+Antes de ejecutar el pipeline, entendamos qué es nf-core y por qué es importante para ejecutar workflows.
 
 ### 1.1. ¿Qué es nf-core?
 
@@ -27,7 +27,7 @@ Características clave de los pipelines de nf-core:
 
 !!! tip "¿Quiere aprender más sobre nf-core?"
 
-    Para una introducción detallada al desarrollo de pipelines de nf-core, consulte el curso de entrenamiento [Build with nf-core](../../hello_nf-core/index.md).
+    Para una introducción detallada al desarrollo de pipelines de nf-core, consulte el curso de capacitación [Build with nf-core](../../nfcore_build/index.md).
     Cubre cómo crear y personalizar pipelines de nf-core desde cero.
 
 ### 1.2. El pipeline molkart
@@ -333,15 +333,15 @@ Debería ver varios subdirectorios:
 
 ```console title="results/"
 results/
-├── anndata/
-├── clahe/
-├── mindagap/
-├── molkartqc/
-├── multiqc/
-├── pipeline_info/
-├── segmentation/
-├── spot2cell/
-└── stack/
+├── anndata
+├── clahe
+├── mindagap
+├── molkartqc
+├── multiqc
+├── pipeline_info
+├── segmentation
+├── spot2cell
+└── stack
 ```
 
 Cada subdirectorio contiene salidas de una etapa específica del pipeline:
@@ -404,17 +404,17 @@ Verifique el directorio pipeline_info:
 ls results/pipeline_info/
 ```
 
-Archivos clave:
+Archivos clave (cada nombre termina con una marca de tiempo, por ejemplo `execution_report_2026-01-15_10-30-00.html`):
 
-- **execution_report.html**: Visualización de línea de tiempo y uso de recursos
-- **execution_timeline.html**: Gráfico de Gantt de ejecución de procesos
-- **execution_trace.txt**: Métricas detalladas de ejecución de tareas
-- **pipeline_dag.html**: Grafo acíclico dirigido que muestra la estructura del flujo de trabajo
+- **execution_report\_\*.html**: Visualización de línea de tiempo y uso de recursos
+- **execution_timeline\_\*.html**: Gráfico de Gantt de ejecución de procesos
+- **execution_trace\_\*.txt**: Métricas detalladas de ejecución de tareas
+- **pipeline_dag\_\*.html**: Grafo acíclico dirigido que muestra la estructura del workflow
 
 Abra el informe de ejecución para ver el uso de recursos:
 
 ```bash
-code results/pipeline_info/execution_report.html
+code results/pipeline_info/execution_report_*.html
 ```
 
 Esto muestra:
@@ -456,10 +456,10 @@ Esto muestra los primeros 5 directorios de tareas.
 
 ### 4.2. Inspeccionar un directorio de tareas
 
-Elija uno de los hashes de proceso de segmentación de la salida de consola (por ejemplo, `[3m/4n5o6p]`) y mire dentro:
+Elija uno de los hashes de proceso de segmentación de la salida de consola (por ejemplo, `[3a/4b5c6d]`) y mire dentro:
 
 ```bash
-ls -la work/3m/4n5o6p*/
+ls -la work/3a/4b5c6d*/
 ```
 
 Verá:

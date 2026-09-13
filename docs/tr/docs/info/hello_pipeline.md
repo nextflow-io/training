@@ -69,13 +69,3 @@ Sonuçlar `results/` adlı bir dizine yayınlanır ve pipeline'ın son çıktıs
 ```
 
 Pipeline'ın yer aldığı kursa bağlı olarak ayrıntılarda bazı farklılıklarla karşılaşabilirsiniz.
-
----
-
-<div markdown class="homepage_logos">
-
-![Seqera](../assets/img/seqera_logo.png#only-light)
-
-![Seqera](../assets/img/seqera_logo_dark.png#only-dark)
-
-</div>

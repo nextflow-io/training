@@ -78,7 +78,7 @@ Mevcut oturumunuz için v2 sözdizimi ayrıştırıcısını **devre dışı bı
 export NXF_SYNTAX_PARSER=v1
 ```
 
-<!-- 26.04 sonrasındaki sürümlerde devre dışı bırakmak mümkün olacak mı? -->
+<!-- Will it be possible to disable it in versions after 26.04? -->
 
 ### Mevcut kodun taşınması
 

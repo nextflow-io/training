@@ -638,9 +638,24 @@ nextflow run hello-workflow.nf -resume
     [79/33b2f0] sayHello (2)         | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (3)   | 3 of 3, cached: 3 ✔
     [47/50fe4a] collectGreetings (1) | 3 of 3 ✔
-    ```
 
-    La sortida del terminal ara també acaba amb un bloc de resum `Outputs:`. L'hem omès aquí per centrar-nos en les línies d'estat dels processos.
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hola-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Hello-output.txt
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+      collected:
+        - hello_workflow/COLLECTED-output.txt
+        - hello_workflow/COLLECTED-output.txt
+        - hello_workflow/COLLECTED-output.txt
+    ```
 
 S'executa amb èxit, incloent el tercer pas.
 
@@ -735,6 +750,7 @@ nextflow run hello-workflow.nf -resume
 
     Launching `hello-workflow.nf` [soggy_franklin] revision: bc8e1b2726
 
+    executor >  local (1)
     [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1e/83586c] collectGreetings   | 1 of 1 ✔
@@ -742,6 +758,20 @@ nextflow run hello-workflow.nf -resume
     Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
     Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt
     After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt]
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hola-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+      collected: hello_workflow/COLLECTED-output.txt
     ```
 
 S'executa amb èxit, encara que la sortida del registre pot semblar una mica més desordenada que això (l'hem netejat per llegibilitat).
@@ -749,8 +779,8 @@ S'executa amb èxit, encara que la sortida del registre pot semblar una mica mé
 Aquesta vegada el tercer pas només es va cridar una vegada!
 Mirant la sortida de les instruccions `view()`, veiem el següent:
 
-- Tres instruccions `Abans de collect:`, una per a cada salutació: en aquest punt els camins de fitxer són elements individuals al canal.
-- Una única instrucció `Després de collect:`: els tres camins de fitxer ara estan empaquetats en un únic element.
+- Tres instruccions `Before collect:`, una per a cada salutació: en aquest punt els camins de fitxer són elements individuals al canal.
+- Una única instrucció `After collect:`: els tres camins de fitxer ara estan empaquetats en un únic element.
 
 Podem resumir això amb el següent diagrama:
 

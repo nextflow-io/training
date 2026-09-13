@@ -69,13 +69,3 @@ Els resultats es publiquen en un directori anomenat `results/`, i la sortida fin
 ```
 
 Podeu trobar algunes variacions en els detalls específics depenent del curs en què aparegui el pipeline.
-
----
-
-<div markdown class="homepage_logos">
-
-![Seqera](../assets/img/seqera_logo.png#only-light)
-
-![Seqera](../assets/img/seqera_logo_dark.png#only-dark)
-
-</div>

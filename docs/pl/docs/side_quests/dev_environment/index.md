@@ -1,15 +1,3 @@
-Looking at the diff, I need to update:
-
-1. The link to Hello Nextflow course (two occurrences: in "What you should know first" and in the info admonition)
-2. Image paths (multiple occurrences: `img/` → `../img/`)
-3. The "Before" tab in section 4 (remove `publishDir` line)
-4. Section 5.3 search term changed from `publishDir` to `container`
-5. Links in "What's next?" at the end (`nf-test.md` → `../nf_test/index.md` and `../../hello_nf-core/` → `../../hello_nf-core/index.md`)
-
-I'll update only those specific sections, preserving everything else exactly.
-
-%%%
-
 # Środowisko programistyczne
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
@@ -632,11 +620,10 @@ Nie oczekujemy, że zapamiętasz wszystko, ale teraz wiesz, że te funkcje istni
 Zastosuj te umiejętności IDE podczas pracy z innymi modułami szkoleniowymi, na przykład:
 
 - **[nf-test](../nf_test/index.md)**: Twórz kompleksowe zestawy testów dla swoich workflow'ów
-- **[Build with nf-core](../../hello_nf-core/index.md)**: Buduj pipeline'y produkcyjnej jakości zgodne ze standardami społeczności
+- **[Build with nf-core](../../nfcore_build/index.md)**: Buduj pipeline'y produkcyjnej jakości zgodne ze standardami społeczności
 
 Prawdziwa moc tych funkcji IDE ujawnia się podczas pracy nad większymi, bardziej złożonymi projektami. Zacznij stopniowo włączać je do swojego procesu pracy — po kilku sesjach staną się drugą naturą i zmienią Twoje podejście do programowania w Nextflow.
 
 Od wychwytywania błędów, zanim Cię spowolnią, po sprawne poruszanie się po złożonych bazach kodu — te narzędzia uczynią Cię pewniejszym i bardziej efektywnym programistą.
 
 Miłego kodowania!
-%%%

@@ -8,52 +8,38 @@ Nextflow Run प्रशिक्षण कोर्स पूरा करन�
 
 ## तुम्हारी यात्रा
 
-तुमने एक बहुत ही basic workflow से शुरू किया, और इसे run करना, outputs खोजना, और इसके execution को manage करना सीखा।
-फिर, तुमने उस workflow के increasingly अधिक complex versions के माध्यम से काम किया और essential concepts और mechanisms को पहचानना सीखा जो Nextflow pipelines को power करते हैं, जिसमें channels और operators, code modularization, और containers शामिल हैं।
-अंत में, तुमने सीखा कि अपनी preferences और अपने computational infrastructure में fit करने के लिए pipeline की configuration को कैसे customize करें।
-
-### तुमने क्या सीखा
-
-तुम अब Hello pipeline के execution को manage करने, describe करने कि यह कैसे structured है, और involved code के main pieces identify करने में सक्षम हो।
-
-- Hello workflow का final form input के रूप में text greetings containing एक CSV फ़ाइल लेता है।
-- चार steps Nextflow processes (`sayHello`, `convertToUpper`, `collectGreetings`, और `cowpy`) के रूप में implemented हैं जो अलग module files में stored हैं।
-- Results `results/` नाम की डायरेक्टरी में publish होते हैं।
-- Pipeline का final output एक plain text फ़ाइल है जिसमें uppercased greetings बोलते हुए character की ASCII art है।
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
-</figure>
-
-1. **`sayHello`:** प्रत्येक greeting को अपनी own output फ़ाइल में लिखता है (_e.g._ "Hello-output.txt")
-2. **`convertToUpper`:** प्रत्येक greeting को uppercase में convert करता है (_e.g._ "HELLO")
-3. **`collectGreetings`:** सभी uppercase greetings को एक single batch फ़ाइल में collect करता है
-4. **`cowpy`:** `cowpy` tool का उपयोग करके ASCII art generate करता है
-
-Workflow configuration flexible, reproducible तरीके से inputs और parameters provide करने का support करती है।
+तुमने एक बहुत ही basic workflow से शुरू किया, और इसे run करना और इसके outputs खोजना सीखा।
+फिर, तुमने उस pipeline के progressively अधिक realistic versions run किए: एक CSV फ़ाइल से multiple inputs को parallel में process करना, completed work को skip करने के लिए `-resume` का उपयोग करना, और pipeline जिस software पर निर्भर करती है उसे manage करने के लिए containers का उपयोग करना।
+इसके बाद, तुमने सीखा कि `nextflow.config` और profiles का उपयोग करके pipeline की configuration को कैसे customize करें, और इसके outputs कहाँ और कैसे publish हों यह कैसे control करें।
+उसके बाद, तुमने सीखा कि execution reports कैसे generate करें, पिछले runs का history कैसे inspect करें, और पुरानी work directories को कैसे clean up करें।
+अंत में, तुमने सीखा कि GitHub जैसे remote repositories से directly pipelines कैसे run करें।
 
 ### अर्जित कौशल
 
 इस hands-on course के माध्यम से, तुमने सीखा कि कैसे:
 
-- Locally Nextflow workflow launch करें
-- Nextflow द्वारा generated outputs (results) और log files खोजें और interpret करें
-- एक simple multi-step workflow बनाने वाले core Nextflow components recognize करें
-- Operators और channel factories जैसे next-step concepts describe करें
-- Different computing environments के लिए pipelines configure करें
+- Locally Nextflow workflow launch करें और इसके outputs खोजें
+- एक multi-step pipeline run करें जो multiple inputs को parallel में process करती है
+- Completed work को दोहराने से बचने के लिए `-resume` का उपयोग करें
+- Software dependencies manage करने के लिए containers का उपयोग करें
+- `nextflow.config` और profiles का उपयोग करके pipelines configure करें
+- Outputs कहाँ और कैसे publish हों यह customize करें
+- `-with-report` के साथ HTML execution report और `-with-timeline` के साथ execution timeline generate करें
+- `nextflow log` के साथ पिछले runs का history inspect करें
+- `nextflow clean` के साथ पुरानी work directories clean up करें
+- किसी remote repository से directly pipeline run करें, और reproducibility के लिए इसे किसी specific revision पर pin करें (और फिर unpin भी करें)
 
 तुम अब अपने own work में existing Nextflow pipelines integrate करना शुरू करने के लिए foundational knowledge से equipped हो।
 
 ## अपने skills build करने के लिए next steps
 
-यहां आगे क्या करना है इसके लिए हमारे top suggestions हैं:
+आगे क्या करना है इसके लिए हमारे top suggestions हैं:
 
-- बस Nextflow run मत करो, इसे लिखो! [Hello Nextflow](../hello_nextflow/index.md) के साथ Nextflow developer बनो
-- [Nextflow for Science](../nf4_science/index.md) के साथ scientific analysis use case पर Nextflow apply करो
-- [Build with nf-core](../hello_nf-core/index.md) के साथ nf-core के साथ शुरू करो
-- [Debugging Side Quest](../side_quests/debugging/index.md) के साथ troubleshooting techniques सीखो
+- [Execution Config](../execution_config/index.md) के साथ pipeline configuration में और गहराई से जाओ
+- [Use nf-core](../nfcore_use/index.md) के साथ nf-core community pipelines चलाना सीखो
+- [Scale with Seqera](../seqera_scale/index.md) के साथ बड़े पैमाने पर pipelines launch और monitor करो
 
-अंत में, हम recommend करते हैं कि तुम [**Seqera Platform**](https://seqera.io/) पर एक नज़र डालो, Nextflow के creators द्वारा developed एक cloud-based platform जो तुम्हारी workflows launch और manage करना और भी आसान बनाता है, साथ ही तुम्हारे data manage करना और किसी भी environment में interactively analyses run करना।
+या, अगर तुम सिर्फ Nextflow run करना छोड़कर इसे लिखना शुरू करने के लिए तैयार हो, तो [Hello Nextflow](../hello_nextflow/index.md) के साथ Nextflow developer बनो।
 
 ## Help प्राप्त करना
 

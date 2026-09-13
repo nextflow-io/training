@@ -722,9 +722,6 @@ nextflow run hello-containers.nf -resume
     Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
 
     -- Check '.nextflow.log' file for details
-    ERROR ~ Cannot access first() element from an empty List
-
-    -- Check '.nextflow.log' file for details
     ```
 
 Oh no, c'è un errore!
@@ -1113,7 +1110,7 @@ Sapete come usare i container in Nextflow per eseguire processi.
 
 ### Cosa c'è dopo?
 
-Prendetevi una piccola pausa!
+Prendetevi una pausa!
 
 Quando siete pronti, passate alla [**Parte 6: Hello Config**](./06_hello_config.md) per imparare come configurare l'esecuzione della vostra pipeline per adattarla alla vostra infrastruttura e gestire la configurazione di input e parametri.
 

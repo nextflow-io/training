@@ -27,7 +27,7 @@ Característiques clau dels pipelines nf-core:
 
 !!! tip "Voleu aprendre més sobre nf-core?"
 
-    Per a una introducció en profunditat al desenvolupament de pipelines nf-core, consulteu el curs de formació [Build with nf-core](../../hello_nf-core/index.md).
+    Per a una introducció en profunditat al desenvolupament de pipelines nf-core, consulteu el curs de formació [Build with nf-core](../../nfcore_build/index.md).
     Cobreix com crear i personalitzar pipelines nf-core des de zero.
 
 ### 1.2. El pipeline molkart
@@ -333,15 +333,15 @@ Hauríeu de veure diversos subdirectoris:
 
 ```console title="results/"
 results/
-├── anndata/
-├── clahe/
-├── mindagap/
-├── molkartqc/
-├── multiqc/
-├── pipeline_info/
-├── segmentation/
-├── spot2cell/
-└── stack/
+├── anndata
+├── clahe
+├── mindagap
+├── molkartqc
+├── multiqc
+├── pipeline_info
+├── segmentation
+├── spot2cell
+└── stack
 ```
 
 Cada subdirectori conté sortides d'una etapa específica del pipeline:
@@ -404,17 +404,17 @@ Comproveu el directori pipeline_info:
 ls results/pipeline_info/
 ```
 
-Fitxers clau:
+Fitxers clau (cada nom acaba amb una marca de temps, p. ex. `execution_report_2026-01-15_10-30-00.html`):
 
-- **execution_report.html**: Visualització de la línia de temps i l'ús de recursos
-- **execution_timeline.html**: Diagrama de Gantt de l'execució del procés
-- **execution_trace.txt**: Mètriques detallades d'execució de tasques
-- **pipeline_dag.html**: Graf acíclic dirigit que mostra l'estructura del workflow
+- **execution_report\_\*.html**: Visualització de la línia de temps i l'ús de recursos
+- **execution_timeline\_\*.html**: Diagrama de Gantt de l'execució del procés
+- **execution_trace\_\*.txt**: Mètriques detallades d'execució de tasques
+- **pipeline_dag\_\*.html**: Graf acíclic dirigit que mostra l'estructura del workflow
 
 Obriu l'informe d'execució per veure l'ús de recursos:
 
 ```bash
-code results/pipeline_info/execution_report.html
+code results/pipeline_info/execution_report_*.html
 ```
 
 Això mostra:
@@ -456,10 +456,10 @@ Això mostra els primers 5 directoris de tasques.
 
 ### 4.2. Inspeccionar un directori de tasques
 
-Trieu un dels hashs del procés de segmentació de la sortida de la consola (p. ex., `[3m/4n5o6p]`) i mireu a dins:
+Trieu un dels hashs del procés de segmentació de la sortida de la consola (p. ex., `[3a/4b5c6d]`) i mireu a dins:
 
 ```bash
-ls -la work/3m/4n5o6p*/
+ls -la work/3a/4b5c6d*/
 ```
 
 Veureu:
