@@ -1153,7 +1153,7 @@ nextflow run hello-channels.nf
 
     Launching `hello-channels.nf` [peaceful_poisson] revision: a286c08ad5
 
-    [-        ] sayHello [  0%] 0 of 1
+    [-        ] sayHello | 0 of 1
     Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv
     ERROR ~ Error executing process > 'sayHello (1)'
 
