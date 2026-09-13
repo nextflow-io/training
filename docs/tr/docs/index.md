@@ -53,7 +53,7 @@ hide:
 
     ??? courses "**Nextflow Run:** Nextflow ile pipeline çalıştırın"
 
-        Kod anlamayı gerektirmeyen, Nextflow pipeline'larını çalıştırmaya hızlı bir giriş. Pipeline başlatmayı, çıktıları almayı, konteyner kullanmayı ve temel düzeyde çalıştırmayı yapılandırmayı kapsar.
+        Kod anlamayı gerektirmeyen, Nextflow pipeline'larını çalıştırmaya hızlı bir giriş. Pipeline başlatmayı, çıktıları almayı, konteyner kullanmayı ve temel düzeyde yürütmeyi yapılandırmayı kapsar.
 
         [Eğitimi görüntüleyin :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
 
@@ -63,7 +63,7 @@ hide:
 
         [Eğitimi görüntüleyin :material-arrow-right:](nfcore_use/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Scale with Seqera:** Pipeline'ları ölçekli olarak başlatın ve izleyin"
+    ??? courses "**Scale with Seqera:** Pipeline'ları büyük ölçekte başlatın ve izleyin"
 
         Seqera Platform ile Nextflow pipeline'larını hem web arayüzünden hem de komut satırından başlatmaya ve izlemeye uygulamalı bir giriş.
 
@@ -71,20 +71,20 @@ hide:
 
     ---
 
-    ### :material-tune:{.nextflow-primary} Çalıştırmayı yönetin {.mt-1}
+    ### :material-tune:{.nextflow-primary} Yürütmeyi yönetin {.mt-1}
 
-    Pipeline çalıştırmasını etkin biçimde yönetmeyi öğrenin.
+    Pipeline yürütmesini etkin biçimde yönetmeyi öğrenin.
 
-    ??? courses "**Execution Config:** Pipeline'ları profesyonelce yapılandırın"
+    ??? courses "**Configure Execution:** Kaynakları, yeniden denemeleri ve yürütme profillerini yapılandırın"
 
-        Nextflow pipeline çalıştırmasını yapılandırmaya uygulamalı bir giriş: farklı hesaplama ortamlarına uyum sağlama, kaynak tahsislerini ve yeniden denemeleri kontrol etme ve önceden tanımlanmış yapılandırma profilleri arasında geçiş yapma.
+        Nextflow pipeline yürütmesini yapılandırmaya uygulamalı bir giriş: farklı hesaplama ortamlarına uyum sağlama, kaynak tahsislerini ve yeniden denemeleri kontrol etme ve önceden tanımlanmış yapılandırma profilleri arasında geçiş yapma.
 
-        [Eğitimi görüntüleyin :material-arrow-right:](execution_config/index.md){ .md-button .md-button--secondary }
+        [Eğitimi görüntüleyin :material-arrow-right:](config_exec/index.md){ .md-button .md-button--secondary }
 
     !!! info compact "Daha fazla konu geliyor"
 
-        Bu bölüm için performans ayarı, HPC/bulut çalıştırması ve daha fazlası planlanmaktadır.
-        Bir sonraki konuya ne ekleneceğini belirlemek için [kısa ilgi anketimize](https://seqera.typeform.com/to/JCs91e8v) oy verin.
+        Performans ayarı, HPC/bulut yürütmesi ve daha fazlası bu bölüm için planlanmaktadır.
+        Bir sonraki konuyu belirlemek için [kısa ilgi anketimize](https://seqera.typeform.com/to/JCs91e8v) oy verin.
 
 -   :material-code-tags:{ .lg .middle } __Geliştiriciler için__
 
@@ -96,19 +96,21 @@ hide:
 
     ??? courses "**Hello Nextflow:** Sıfırdan kendi pipeline'larınızı geliştirin"
 
-        Bu kurs, basit ama tam işlevli pipeline'lar geliştirmeye yetecek düzeyde Nextflow dilinin temel bileşenlerini; ayrıca pipeline tasarımı, geliştirme ve yapılandırma uygulamalarının temel unsurlarını kapsar.
+        Bu kurs, basit ama tam işlevli pipeline'lar geliştirmeye yetecek düzeyde Nextflow dilinin temel bileşenlerini; ayrıca pipeline tasarımı, geliştirme ve yapılandırma uygulamalarının kilit unsurlarını kapsar.
 
         [Eğitimi görüntüleyin :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--secondary }
 
     ??? courses "**Build with nf-core:** nf-core araçlarını ve kurallarını kullanın"
 
-        [nf-core](https://nf-co.re/) uyumlu pipeline'lar geliştirmeyi öğrenmek isteyen Nextflow geliştiricileri için. Kurs; nf-core şablonunu ve geliştirme en iyi uygulamalarını kullanan, mevcut nf-core modüllerinden yararlanan, basit ama tam işlevli pipeline'lar geliştirmeye yetecek düzeyde nf-core pipeline'larının yapısını kapsar.
+        [nf-core](https://nf-co.re/) uyumlu pipeline'lar geliştirmeyi öğrenmek isteyen Nextflow geliştiricileri için.
+        Kurs; nf-core şablonunu ve geliştirme en iyi uygulamalarını kullanan, mevcut nf-core modüllerinden yararlanan, basit ama tam işlevli pipeline'lar geliştirmeye yetecek düzeyde nf-core pipeline'larının yapısını kapsar.
 
         [Eğitimi görüntüleyin :material-arrow-right:](nfcore_build/index.md){ .md-button .md-button--secondary }
 
     ??? catalog "**Side Quests:** Gelişmiş Nextflow konularına dalın"
 
-        Belirli konularda bilgi ve becerilerini genişletmek ya da derinleştirmek isteyen Nextflow geliştiricileri için tasarlanmış bağımsız mini kurslardan oluşan bir koleksiyon. Doğrusal bir sırayla sunulmakla birlikte herhangi bir sırayla alınabilir (bağımlılıklar için her mini kursun giriş bölümüne bakın).
+        Belirli konularda bilgi ve becerilerini genişletmek ya da derinleştirmek isteyen Nextflow geliştiricileri için tasarlanmış bağımsız mini kurslardan oluşan bir koleksiyon.
+        Doğrusal bir sırayla sunulmakla birlikte herhangi bir sırayla alınabilir (bağımlılıklar için her mini kursun giriş bölümüne bakın).
 
         [Side Quests'e göz atın :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
 
@@ -162,7 +164,7 @@ hide:
 
     ---
 
-    Hello pipeline'ının ne yaptığı ve nasıl yapılandırıldığına ilişkin özet.
+    Hello pipeline'ının ne yaptığına ve nasıl yapılandırıldığına ilişkin özet.
 
     [Özeti okuyun :material-arrow-right:](info/hello_pipeline.md){ .md-button .md-button--secondary }
 

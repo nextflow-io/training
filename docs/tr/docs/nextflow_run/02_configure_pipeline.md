@@ -60,7 +60,7 @@ Her birini tek tek inceleyelim, ardından pipeline'ı bir profille çalıştıra
 
     Bu yapılandırma, tek bir makinede yerel yürütmeyi kapsar.
     Nextflow aynı zamanda HPC zamanlayıcılarını (SLURM, PBS, LSF) ve bulut yürütücülerini (AWS Batch, Google Cloud Batch, Azure Batch) de destekler; bunların tümü aynı `nextflow.config` mekanizmasıyla yapılandırılır.
-    Bu seçeneklerin tam bir açıklaması için [Execution Config](../execution_config/01_packaging_and_execution.md) kursundaki [Bölüm 1: Hesaplama Ortamınıza Uyum Sağlama](../execution_config/index.md) sayfasına bakın.
+    Bu seçeneklerin tam bir açıklaması için [Configure Execution](../config_exec/01_packaging_and_execution.md) kursundaki [Bölüm 1: Hesaplama Ortamınıza Uyum Sağlama](../config_exec/index.md) sayfasına bakın.
 
 ### 1.1. Yazılım Paketleme
 
@@ -93,7 +93,7 @@ process {
 
 Bu, her süreci tek bir CPU ve 1 GB bellekle sınırlar.
 
-Nextflow ayrıca tek tek adlandırılmış süreçler veya süreç grupları için farklı değerler belirlemenize de olanak tanır; bunu nasıl yapacağınızı [Execution Config](../execution_config/02_resources_and_retries.md#12-set-resource-allocations-for-a-specific-process) kursunun [Bölüm 2: Hesaplama Kaynaklarını ve Hataları Yönetme](../execution_config/index.md) bölümünde öğreneceksiniz.
+Nextflow ayrıca tek tek adlandırılmış süreçler veya süreç grupları için farklı değerler belirlemenize de olanak tanır; bunu nasıl yapacağınızı [Configure Execution](../config_exec/02_resources_and_retries.md#12-set-resource-allocations-for-a-specific-process) kursunun [Bölüm 2: Hesaplama Kaynaklarını ve Hataları Yönetme](../config_exec/index.md) bölümünde öğreneceksiniz.
 
 ### 1.3. Pipeline Parametreleri
 
@@ -186,7 +186,7 @@ Pipeline, `batch = 'test'` ve `character = 'tux'` değerleriyle çalışır.
 !!! note "Not"
 
     Aynı anda birden fazla profili etkinleştirebilir ve herhangi bir şey çalıştırmadan önce tam olarak çözümlenmiş sonucu görmek için `nextflow config -profile <isim>,<isim>` komutunu kullanabilirsiniz.
-    Profillerin birleştirilmesi ve Nextflow'un aralarındaki çakışmaları nasıl çözdüğü, [Execution Config](../execution_config/03_profiles.md) kursunun [Bölüm 3: Yapılandırmaları Değiştirmek için Profilleri Kullanma](../execution_config/index.md) bölümünde ayrıntılı olarak ele alınmaktadır.
+    Profillerin birleştirilmesi ve Nextflow'un aralarındaki çakışmaları nasıl çözdüğü, [Configure Execution](../config_exec/03_profiles.md) kursunun [Bölüm 3: Yapılandırmaları Değiştirmek için Profilleri Kullanma](../config_exec/index.md) bölümünde ayrıntılı olarak ele alınmaktadır.
 
 ### Özetle
 

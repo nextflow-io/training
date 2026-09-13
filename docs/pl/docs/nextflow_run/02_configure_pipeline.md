@@ -1,8 +1,3 @@
----
-title: "Część 2: Konfiguracja pipeline'u"
-description: Naucz się konfigurować zachowanie pipeline'u przy użyciu nextflow.config
----
-
 # Część 2: Konfiguracja pipeline'u
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
@@ -65,7 +60,7 @@ Omówimy każdy z tych obszarów, a następnie wykorzystamy profile w praktyce, 
 
     Ta konfiguracja dotyczy lokalnego wykonania na pojedynczej maszynie.
     Nextflow obsługuje również harmonogramy HPC (SLURM, PBS, LSF) oraz executory chmurowe (AWS Batch, Google Cloud Batch, Azure Batch) — wszystkie konfigurowane za pomocą tego samego mechanizmu `nextflow.config`.
-    Pełny opis tych opcji znajdziesz w [Części 1: Dostosowanie do środowiska obliczeniowego](../execution_config/01_packaging_and_execution.md) kursu [Execution Config](../execution_config/index.md).
+    Pełny opis tych opcji znajdziesz w [Części 1: Dostosowanie do środowiska obliczeniowego](../config_exec/01_packaging_and_execution.md) kursu [Configure Execution](../config_exec/index.md).
 
 ### 1.1. Pakowanie oprogramowania
 
@@ -98,7 +93,7 @@ process {
 
 To ogranicza każdy proces do jednego CPU i 1 GB pamięci.
 
-Nextflow pozwala też ustawiać różne wartości dla poszczególnych nazwanych procesów lub grup procesów — dowiesz się, jak to zrobić, w [Części 2: Zarządzanie zasobami obliczeniowymi i błędami](../execution_config/02_resources_and_retries.md#12-set-resource-allocations-for-a-specific-process) kursu [Execution Config](../execution_config/index.md).
+Nextflow pozwala też ustawiać różne wartości dla poszczególnych nazwanych procesów lub grup procesów — dowiesz się, jak to zrobić, w [Części 2: Zarządzanie zasobami obliczeniowymi i błędami](../config_exec/02_resources_and_retries.md#12-set-resource-allocations-for-a-specific-process) kursu [Configure Execution](../config_exec/index.md).
 
 ### 1.3. Parametry pipeline'u
 
@@ -191,7 +186,7 @@ Sprawdź katalog `results/test/`: nazwa partii jest teraz częścią ścieżki k
 !!! note "Uwaga"
 
     Możesz aktywować kilka profili jednocześnie i użyć `nextflow config -profile <nazwa>,<nazwa>`, aby zobaczyć w pełni rozwiązany wynik przed uruchomieniem czegokolwiek.
-    Łączenie profili i sposób, w jaki Nextflow rozwiązuje konflikty między nimi, jest szczegółowo omówione w [Części 3: Używanie profili do przełączania konfiguracji](../execution_config/03_profiles.md) kursu [Execution Config](../execution_config/index.md).
+    Łączenie profili i sposób, w jaki Nextflow rozwiązuje konflikty między nimi, jest szczegółowo omówione w [Części 3: Używanie profili do przełączania konfiguracji](../config_exec/03_profiles.md) kursu [Configure Execution](../config_exec/index.md).
 
 ### Podsumowanie
 

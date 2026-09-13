@@ -35,7 +35,7 @@ Du bist jetzt mit dem grundlegenden Wissen ausgestattet, um bestehende Nextflow-
 
 Hier sind unsere Top-Vorschläge, was du als Nächstes tun kannst:
 
-- Tauche tiefer in die Pipeline-Konfiguration ein mit [Execution Config](../execution_config/index.md)
+- Tauche tiefer in die Pipeline-Konfiguration ein mit [Configure Execution](../config_exec/index.md)
 - Lerne, nf-core Community-Pipelines auszuführen mit [Use nf-core](../nfcore_use/index.md)
 - Starte und überwache Pipelines in großem Maßstab mit [Scale with Seqera](../seqera_scale/index.md)
 

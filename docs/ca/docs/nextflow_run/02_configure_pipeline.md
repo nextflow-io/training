@@ -60,7 +60,7 @@ Repassem cadascun d'ells i, a continuació, posem els perfils en pràctica execu
 
     Aquesta configuració cobreix l'execució local en una sola màquina.
     Nextflow també admet planificadors HPC (SLURM, PBS, LSF) i executors al núvol (AWS Batch, Google Cloud Batch, Azure Batch), tots configurats mitjançant el mateix mecanisme `nextflow.config`.
-    Consulteu la [Part 1: Adapt to your compute environment](../execution_config/01_packaging_and_execution.md) del curs [Execution Config](../execution_config/index.md) per a una guia completa d'aquestes opcions.
+    Consulteu la [Part 1: Adapt to your compute environment](../config_exec/01_packaging_and_execution.md) del curs [Configure Execution](../config_exec/index.md) per a una guia completa d'aquestes opcions.
 
 ### 1.1. Empaquetament de programari
 
@@ -93,7 +93,7 @@ process {
 
 Això limita cada procés a una sola CPU i 1 GB de memòria.
 
-Nextflow també us permet establir valors diferents per a processos individuals amb nom o grups de processos; aprendreu com fer-ho a la [Part 2: Manage compute resources and failures](../execution_config/02_resources_and_retries.md#12-set-resource-allocations-for-a-specific-process) del curs [Execution Config](../execution_config/index.md).
+Nextflow també us permet establir valors diferents per a processos individuals amb nom o grups de processos; aprendreu com fer-ho a la [Part 2: Manage compute resources and failures](../config_exec/02_resources_and_retries.md#12-set-resource-allocations-for-a-specific-process) del curs [Configure Execution](../config_exec/index.md).
 
 ### 1.3. Paràmetres del pipeline
 
@@ -186,7 +186,7 @@ Comproveu `results/test/`: el nom del lot ara forma part del camí del directori
 !!! note "Nota"
 
     Podeu activar diversos perfils alhora i utilitzar `nextflow config -profile <nom>,<nom>` per veure el resultat completament resolt abans d'executar res.
-    La combinació de perfils i com Nextflow resol els conflictes entre ells es tracta en profunditat a la [Part 3: Use profiles to switch configurations](../execution_config/03_profiles.md) del curs [Execution Config](../execution_config/index.md).
+    La combinació de perfils i com Nextflow resol els conflictes entre ells es tracta en profunditat a la [Part 3: Use profiles to switch configurations](../config_exec/03_profiles.md) del curs [Configure Execution](../config_exec/index.md).
 
 ### Conclusió
 
