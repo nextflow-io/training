@@ -1266,7 +1266,7 @@ md-nav__item--active">
   >
       
 <span class="md-ellipsis">
-    Execution Config   
+    Configure Execution   
 </span>
   
     <span class="md-nav__icon md-icon"></span>
@@ -1280,12 +1280,12 @@ md-nav__item--active">
   >
     <label class="md-nav__title" for="__nav_5">
       <span class="md-nav__icon md-icon"></span>
-        Execution Config  
+        Configure Execution  
     </label>
     <ul class="md-nav__list" data-md-scrollfix>
               
 <li class="md-nav__item">
-  <a href="../../execution_config/" class="md-nav__link">
+  <a href="../../config_exec/" class="md-nav__link">
       
 <span class="md-ellipsis">
     Overview   
@@ -1295,7 +1295,7 @@ md-nav__item--active">
 </li>
           
 <li class="md-nav__item">
-  <a href="../../execution_config/00_orientation/" class="md-nav__link">
+  <a href="../../config_exec/00_orientation/" class="md-nav__link">
       
 <span class="md-ellipsis">
     Getting started   
@@ -1305,7 +1305,7 @@ md-nav__item--active">
 </li>
           
 <li class="md-nav__item">
-  <a href="../../execution_config/01_packaging_and_execution/" class="md-nav__link">
+  <a href="../../config_exec/01_packaging_and_execution/" class="md-nav__link">
       
 <span class="md-ellipsis">
     Part 1: Adapt to your compute environment   
@@ -1315,7 +1315,7 @@ md-nav__item--active">
 </li>
           
 <li class="md-nav__item">
-  <a href="../../execution_config/02_resources_and_retries/" class="md-nav__link">
+  <a href="../../config_exec/02_resources_and_retries/" class="md-nav__link">
       
 <span class="md-ellipsis">
     Part 2: Manage compute resources and failures   
@@ -1325,7 +1325,7 @@ md-nav__item--active">
 </li>
           
 <li class="md-nav__item">
-  <a href="../../execution_config/03_profiles/" class="md-nav__link">
+  <a href="../../config_exec/03_profiles/" class="md-nav__link">
       
 <span class="md-ellipsis">
     Part 3: Use profiles to switch configurations   
@@ -1335,7 +1335,7 @@ md-nav__item--active">
 </li>
           
 <li class="md-nav__item">
-  <a href="../../execution_config/next_steps/" class="md-nav__link">
+  <a href="../../config_exec/next_steps/" class="md-nav__link">
       
 <span class="md-ellipsis">
     Course summary   
@@ -1345,7 +1345,7 @@ md-nav__item--active">
 </li>
           
 <li class="md-nav__item">
-  <a href="../../execution_config/survey/" class="md-nav__link">
+  <a href="../../config_exec/survey/" class="md-nav__link">
       
 <span class="md-ellipsis">
     Feedback survey   
@@ -2853,16 +2853,18 @@ md-nav__item--active">
                 
                   
 
- 
+
+
+  
 <a
-  href="https://github.com/nextflow-io/training/edit/master/docs/nextflow_run/02_configure_pipeline.md"
+  href="https://github.com/nextflow-io/training/edit/master/docs/en/docs/nextflow_run/02_configure_pipeline.md"
   title="Edit this page"
   class="md-content__button md-icon"
   rel="edit"
 >
    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
 </a>
-    
+     
 
 <h1 id="part-2-configure-the-pipeline">Part 2: Configure the pipeline<a class="headerlink" href="#part-2-configure-the-pipeline" title="Permanent link">&para;</a></h1>
 <p>In <a href="../01_run_nextflow/">Part 1</a>, you ran a complete multi-step pipeline that processes multiple inputs in parallel using containers.
@@ -2951,7 +2953,7 @@ Now we're going to look at how to configure pipeline behavior using <code>nextfl
 <p class="admonition-title">Note</p>
 <p>This config covers local execution on a single machine.
 Nextflow also supports HPC schedulers (SLURM, PBS, LSF) and cloud executors (AWS Batch, Google Cloud Batch, Azure Batch), all configured through the same <code>nextflow.config</code> mechanism.
-See <a href="../../execution_config/01_packaging_and_execution/">Part 1: Adapt to your compute environment</a> in the <a href="../../execution_config/">Execution Config</a> course for a full walkthrough of these options.</p>
+See <a href="../../config_exec/01_packaging_and_execution/">Part 1: Adapt to your compute environment</a> in the <a href="../../config_exec/">Configure Execution</a> course for a full walkthrough of these options.</p>
 </div>
 <h3 id="11-software-packaging">1.1. Software packaging<a class="headerlink" href="#11-software-packaging" title="Permanent link">&para;</a></h3>
 <p>Software packaging is how Nextflow supplies the actual tools your processes need, whether that's a container image, a Conda environment, or something else.</p>
@@ -2983,7 +2985,7 @@ Nextflow lets you configure a number of things about how each one actually runs:
 <a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>This caps every process at a single CPU and 1 GB of memory.</p>
-<p>Nextflow also lets you set different values for individual named processes or groups of processes; you'll learn how in <a href="../../execution_config/02_resources_and_retries/#12-set-resource-allocations-for-a-specific-process">Part 2: Manage compute resources and failures</a> of the <a href="../../execution_config/">Execution Config</a> course.</p>
+<p>Nextflow also lets you set different values for individual named processes or groups of processes; you'll learn how in <a href="../../config_exec/02_resources_and_retries/#12-set-resource-allocations-for-a-specific-process">Part 2: Manage compute resources and failures</a> of the <a href="../../config_exec/">Configure Execution</a> course.</p>
 <h3 id="13-pipeline-parameters">1.3. Pipeline parameters<a class="headerlink" href="#13-pipeline-parameters" title="Permanent link">&para;</a></h3>
 <p>Parameters are the pipeline's command-line inputs, the same <code>--input</code>, <code>--batch</code> and <code>--character</code> flags you've already been setting directly on the command line.
 Setting defaults for them here means you don't have to type them out every time, though as you'll see later in this part, there are a couple of other ways to supply them too.</p>
@@ -3078,7 +3080,7 @@ Check <code>results/test/</code>: the batch name is now part of the directory pa
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>You can activate several profiles at once, and use <code>nextflow config -profile &lt;name&gt;,&lt;name&gt;</code> to see the fully resolved result before running anything.
-Combining profiles, and how Nextflow resolves conflicts between them, is covered in depth in <a href="../../execution_config/03_profiles/">Part 3: Use profiles to switch configurations</a> of the <a href="../../execution_config/">Execution Config</a> course.</p>
+Combining profiles, and how Nextflow resolves conflicts between them, is covered in depth in <a href="../../config_exec/03_profiles/">Part 3: Use profiles to switch configurations</a> of the <a href="../../config_exec/">Configure Execution</a> course.</p>
 </div>
 <h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
 <p>You know what the most common elements of a <code>nextflow.config</code> file do, and how to activate a profile.</p>

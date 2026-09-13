@@ -460,4 +460,32 @@
          <loc>https://training.nextflow.io/hi/side_quests/working_with_files/</loc>
          <lastmod>2026-09-13</lastmod>
     </url>
+    <url>
+         <loc>https://training.nextflow.io/hi/config_exec/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/hi/config_exec/00_orientation/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/hi/config_exec/01_packaging_and_execution/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/hi/config_exec/02_resources_and_retries/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/hi/config_exec/03_profiles/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/hi/config_exec/next_steps/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/hi/config_exec/survey/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
 </urlset>
