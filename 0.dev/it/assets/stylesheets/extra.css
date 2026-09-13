@@ -21,6 +21,9 @@
 .mt-1 {
   margin-top: 1rem !important;
 }
+.mb-4 {
+  margin-bottom: 4rem !important;
+}
 
 /* Seqera style typography */
 .md-typeset h1 {
@@ -142,14 +145,10 @@ h3 .enumerate-headings-plugin {
   background-color: #17191e;
 }
 
-/* Homepage logos */
-.homepage_logos {
-  text-align: center;
-}
-.homepage_logos img {
-  height: 2rem;
-  max-width: 100%;
-  margin: 1rem auto 0;
+/* Compact admonition for minor asides, e.g. "coming soon" notes */
+.md-typeset .admonition.compact,
+.md-typeset details.compact {
+  font-size: 0.65rem;
 }
 
 /* Custom right-hand-side sidebar */
@@ -201,11 +200,11 @@ h3 .enumerate-headings-plugin {
 .md-typeset .admonition.catalog,
 .md-typeset details.catalog {
   border-color: rgb(142, 142, 142);
-  font-size: 0.8rem;
 }
 .md-typeset .catalog > .admonition-title,
 .md-typeset .catalog > summary {
   background-color: rgba(153, 153, 153, 0.1);
+  font-weight: normal;
 }
 .md-typeset .catalog > .admonition-title::before,
 .md-typeset .catalog > summary::before {
@@ -261,6 +260,22 @@ h3 .enumerate-headings-plugin {
   background-color: rgb(26, 128, 50);
   -webkit-mask-image: var(--md-admonition-icon--full-code);
   mask-image: var(--md-admonition-icon--full-code);
+}
+
+/* optional */
+.md-typeset .admonition.optional,
+.md-typeset details.optional {
+  border-color: rgb(100, 116, 139);
+}
+.md-typeset .optional > .admonition-title,
+.md-typeset .optional > summary {
+  background-color: rgba(100, 116, 139, 0.1);
+}
+.md-typeset .optional > .admonition-title::before,
+.md-typeset .optional > summary::before {
+  background-color: rgb(100, 116, 139);
+  -webkit-mask-image: var(--md-admonition-icon--optional);
+  mask-image: var(--md-admonition-icon--optional);
 }
 
 /* learning */
@@ -383,6 +398,28 @@ h3 .enumerate-headings-plugin {
   font-size: 0.8rem;
 }
 
+/* Category separator rows within a single continuous data table,
+  e.g. <tr><th colspan="3">Category</th></tr> in the side quests catalog.
+  Default theme CSS only puts border-top on <td>, not <th>, since <th>
+  normally only appears once in <thead> - add it back here since these
+  sit mid-<tbody> and need the same row divider as regular data rows. */
+.md-typeset table tbody th[colspan] {
+  background-color: var(--md-default-fg-color--lightest);
+  border-top: 0.05rem solid var(--md-typeset-table-color);
+  text-align: left;
+}
+
+/* Distinguish the real column-header row from category separator rows
+  above: brand-color fill plus the same uppercase/letter-spaced treatment
+  used for the sidebar group labels (see .md-nav__item--group-label). */
+.md-typeset table thead th {
+  background-color: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
 /* YouTube video embeds */
 .md-typeset figure:has(.video-wrapper) {
   width: 100%;
@@ -447,6 +484,30 @@ h3 .enumerate-headings-plugin {
 .ai-translation-notice a {
   color: inherit;
   text-decoration: underline;
+}
+
+/* Sidebar group labels (non-clickable) - see overrides/partials/nav.html */
+.md-nav__item--group-label {
+  padding-right: 0.6rem;
+  margin-top: 1.2rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--md-default-fg-color--light);
+}
+.md-nav--primary > .md-nav__list > .md-nav__item--group-label:first-child {
+  margin-top: 0;
+}
+
+/* Set "Training Events" apart from the Setup & Help utility pages it's
+  nested under, since it's community/events content rather than setup */
+.md-nav--primary a.md-nav__link[href*="training_events"] {
+  margin-top: 0.8rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+  font-weight: 700;
 }
 
 /* Language selector dropdown - allow dynamic height */

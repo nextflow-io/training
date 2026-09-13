@@ -11,10 +11,6 @@
         <link rel="canonical" href="https://training.nextflow.io/it/hello_nf-core/03_use_module/">
       
       
-        <link rel="prev" href="../02_rewrite_hello/">
-      
-      
-        <link rel="next" href="../04_make_module/">
       
       
         
@@ -99,8 +95,13 @@
       
     
   
+    
+      
+      
+    
   
-  <style>:root{--md-admonition-icon--catalog:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2%202.5A2.5%202.5%200%200%201%204.5%200h8.75a.75.75%200%200%201%20.75.75v12.5a.75.75%200%200%201-.75.75h-2.5a.75.75%200%200%201%200-1.5h1.75v-2h-8a1%201%200%200%200-.714%201.7.75.75%200%201%201-1.072%201.05A2.5%202.5%200%200%201%202%2011.5Zm10.5-1h-8a1%201%200%200%200-1%201v6.708A2.5%202.5%200%200%201%204.5%209h8ZM5%2012.25a.25.25%200%200%201%20.25-.25h3.5a.25.25%200%200%201%20.25.25v3.25a.25.25%200%200%201-.4.2l-1.45-1.087a.25.25%200%200%200-.3%200L5.4%2015.7a.25.25%200%200%201-.4-.2Z%22/%3E%3C/svg%3E');--md-admonition-icon--courses:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M5%208.25a.75.75%200%200%201%20.75-.75h4a.75.75%200%200%201%200%201.5h-4A.75.75%200%200%201%205%208.25M4%2010.5A.75.75%200%200%200%204%2012h4a.75.75%200%200%200%200-1.5z%22/%3E%3Cpath%20d%3D%22M13-.005c1.654%200%203%201.328%203%203%200%20.982-.338%201.933-.783%202.818-.443.879-1.028%201.758-1.582%202.588l-.011.017c-.568.853-1.104%201.659-1.501%202.446-.398.789-.623%201.494-.623%202.136a1.5%201.5%200%201%200%202.333-1.248.75.75%200%200%201%20.834-1.246A3%203%200%200%201%2013%2016H3a3%203%200%200%201-3-3c0-1.582.891-3.135%201.777-4.506q.315-.483.623-.946c.473-.709.923-1.386%201.287-2.048H2.51c-.576%200-1.381-.133-1.907-.783A2.68%202.68%200%200%201%200%202.995a3%203%200%200%201%203-3Zm0%201.5a1.5%201.5%200%200%200-1.5%201.5c0%20.476.223.834.667%201.132A.75.75%200%200%201%2011.75%205.5H5.368c-.467%201.003-1.141%202.015-1.773%202.963-.192.289-.381.571-.558.845C2.13%2010.711%201.5%2011.916%201.5%2013A1.5%201.5%200%200%200%203%2014.5h7.401A3%203%200%200%201%2010%2013c0-.979.338-1.928.784-2.812.441-.874%201.023-1.748%201.575-2.576l.017-.026c.568-.853%201.103-1.658%201.501-2.448s.623-1.497.623-2.143c0-.838-.669-1.5-1.5-1.5m-10%200a1.5%201.5%200%200%200-1.5%201.5c0%20.321.1.569.27.778.097.12.325.227.74.227h7.674A2.7%202.7%200%200%201%2010%202.995c0-.546.146-1.059.401-1.5Z%22/%3E%3C/svg%3E');--md-admonition-icon--terminal:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%202.75C0%201.784.784%201%201.75%201h12.5c.966%200%201.75.784%201.75%201.75v10.5A1.75%201.75%200%200%201%2014.25%2015H1.75A1.75%201.75%200%200%201%200%2013.25Zm1.75-.25a.25.25%200%200%200-.25.25v10.5c0%20.138.112.25.25.25h12.5a.25.25%200%200%200%20.25-.25V2.75a.25.25%200%200%200-.25-.25ZM7.25%208a.75.75%200%200%201-.22.53l-2.25%202.25a.749.749%200%200%201-1.275-.326.75.75%200%200%201%20.215-.734L5.44%208%203.72%206.28a.749.749%200%200%201%20.326-1.275.75.75%200%200%201%20.734.215l2.25%202.25c.141.14.22.331.22.53m1.5%201.5h3a.75.75%200%200%201%200%201.5h-3a.75.75%200%200%201%200-1.5%22/%3E%3C/svg%3E');--md-admonition-icon--full-code:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M5%203c-1.1%200-2%20.9-2%202s-.9%202-2%202v2c1.1%200%202%20.9%202%202s.9%202%202%202h2v-2H5v-1c0-1.1-.9-2-2-2%201.1%200%202-.9%202-2V5h2V3m4%200c1.1%200%202%20.9%202%202s.9%202%202%202v2c-1.1%200-2%20.9-2%202s-.9%202-2%202H9v-2h2v-1c0-1.1.9-2%202-2-1.1%200-2-.9-2-2V5H9V3zm11%203v12c0%201.11-.89%202-2%202H4a2%202%200%200%201-2-2v-3h2v3h16V6h-2.97V4H20c1.11%200%202%20.89%202%202%22/%3E%3C/svg%3E');--md-admonition-icon--learning:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M7.693%201.066a.75.75%200%200%201%20.614%200l7.25%203.25a.75.75%200%200%201%200%201.368L13%206.831v2.794c0%201.024-.81%201.749-1.66%202.173-.893.447-2.075.702-3.34.702q-.417%200-.816-.036a.75.75%200%200%201%20.133-1.494Q7.649%2011%208%2011c1.082%200%202.025-.221%202.67-.543.69-.345.83-.682.83-.832V7.503L8.307%208.934a.75.75%200%200%201-.614%200L4%207.28v1.663c.296.105.575.275.812.512.438.438.688%201.059.688%201.796v3a.75.75%200%200%201-.75.75h-3a.75.75%200%200%201-.75-.75v-3c0-.737.25-1.358.688-1.796.237-.237.516-.407.812-.512V6.606L.443%205.684a.75.75%200%200%201%200-1.368ZM2.583%205%208%207.428%2013.416%205%208%202.572ZM2.5%2011.25v2.25H4v-2.25c0-.388-.125-.611-.25-.735a.7.7%200%200%200-.5-.203.7.7%200%200%200-.5.203c-.125.124-.25.347-.25.735%22/%3E%3C/svg%3E');--md-admonition-icon--people:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2%205.5a3.5%203.5%200%201%201%205.898%202.549%205.51%205.51%200%200%201%203.034%204.084.75.75%200%201%201-1.482.235%204%204%200%200%200-7.9%200%20.75.75%200%200%201-1.482-.236A5.5%205.5%200%200%201%203.102%208.05%203.5%203.5%200%200%201%202%205.5M11%204a3.001%203.001%200%200%201%202.22%205.018%205%205%200%200%201%202.56%203.012.749.749%200%200%201-.885.954.75.75%200%200%201-.549-.514%203.51%203.51%200%200%200-2.522-2.372.75.75%200%200%201-.574-.73v-.352a.75.75%200%200%201%20.416-.672A1.5%201.5%200%200%200%2011%205.5.75.75%200%200%201%2011%204m-5.5-.5a2%202%200%201%200-.001%203.999A2%202%200%200%200%205.5%203.5%22/%3E%3C/svg%3E');--md-admonition-icon--licensing:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M8.75.75V2h.985c.304%200%20.603.08.867.231l1.29.736q.058.033.124.033h2.234a.75.75%200%200%201%200%201.5h-.427l2.111%204.692a.75.75%200%200%201-.154.838l-.53-.53.529.531-.001.002-.002.002-.006.006-.006.005-.01.01-.045.04q-.317.265-.686.45C14.556%2010.78%2013.88%2011%2013%2011a4.5%204.5%200%200%201-2.023-.454%203.5%203.5%200%200%201-.686-.45l-.045-.04-.016-.015-.006-.006-.004-.004v-.001a.75.75%200%200%201-.154-.838L12.178%204.5h-.162c-.305%200-.604-.079-.868-.231l-1.29-.736a.25.25%200%200%200-.124-.033H8.75V13h2.5a.75.75%200%200%201%200%201.5h-6.5a.75.75%200%200%201%200-1.5h2.5V3.5h-.984a.25.25%200%200%200-.124.033l-1.289.737c-.265.15-.564.23-.869.23h-.162l2.112%204.692a.75.75%200%200%201-.154.838l-.53-.53.529.531-.001.002-.002.002-.006.006-.016.015-.045.04q-.317.265-.686.45C4.556%2010.78%203.88%2011%203%2011a4.5%204.5%200%200%201-2.023-.454%203.5%203.5%200%200%201-.686-.45l-.045-.04-.016-.015-.006-.006-.004-.004v-.001a.75.75%200%200%201-.154-.838L2.178%204.5H1.75a.75.75%200%200%201%200-1.5h2.234a.25.25%200%200%200%20.125-.033l1.288-.737c.265-.15.564-.23.869-.23h.984V.75a.75.75%200%200%201%201.5%200m2.945%208.477c.285.135.718.273%201.305.273s1.02-.138%201.305-.273L13%206.327Zm-10%200c.285.135.718.273%201.305.273s1.02-.138%201.305-.273L3%206.327Z%22/%3E%3C/svg%3E');--md-admonition-icon--videos:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%203.75C0%202.784.784%202%201.75%202h12.5c.966%200%201.75.784%201.75%201.75v8.5A1.75%201.75%200%200%201%2014.25%2014H1.75A1.75%201.75%200%200%201%200%2012.25Zm1.75-.25a.25.25%200%200%200-.25.25v8.5c0%20.138.112.25.25.25h12.5a.25.25%200%200%200%20.25-.25v-8.5a.25.25%200%200%200-.25-.25Z%22/%3E%3Cpath%20d%3D%22M6%2010.559V5.442a.25.25%200%200%201%20.379-.215l4.264%202.559a.25.25%200%200%201%200%20.428l-4.264%202.559A.25.25%200%200%201%206%2010.559%22/%3E%3C/svg%3E');}</style>
+  
+  <style>:root{--md-admonition-icon--catalog:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2%202.5A2.5%202.5%200%200%201%204.5%200h8.75a.75.75%200%200%201%20.75.75v12.5a.75.75%200%200%201-.75.75h-2.5a.75.75%200%200%201%200-1.5h1.75v-2h-8a1%201%200%200%200-.714%201.7.75.75%200%201%201-1.072%201.05A2.5%202.5%200%200%201%202%2011.5Zm10.5-1h-8a1%201%200%200%200-1%201v6.708A2.5%202.5%200%200%201%204.5%209h8ZM5%2012.25a.25.25%200%200%201%20.25-.25h3.5a.25.25%200%200%201%20.25.25v3.25a.25.25%200%200%201-.4.2l-1.45-1.087a.25.25%200%200%200-.3%200L5.4%2015.7a.25.25%200%200%201-.4-.2Z%22/%3E%3C/svg%3E');--md-admonition-icon--courses:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M5%208.25a.75.75%200%200%201%20.75-.75h4a.75.75%200%200%201%200%201.5h-4A.75.75%200%200%201%205%208.25M4%2010.5A.75.75%200%200%200%204%2012h4a.75.75%200%200%200%200-1.5z%22/%3E%3Cpath%20d%3D%22M13-.005c1.654%200%203%201.328%203%203%200%20.982-.338%201.933-.783%202.818-.443.879-1.028%201.758-1.582%202.588l-.011.017c-.568.853-1.104%201.659-1.501%202.446-.398.789-.623%201.494-.623%202.136a1.5%201.5%200%201%200%202.333-1.248.75.75%200%200%201%20.834-1.246A3%203%200%200%201%2013%2016H3a3%203%200%200%201-3-3c0-1.582.891-3.135%201.777-4.506q.315-.483.623-.946c.473-.709.923-1.386%201.287-2.048H2.51c-.576%200-1.381-.133-1.907-.783A2.68%202.68%200%200%201%200%202.995a3%203%200%200%201%203-3Zm0%201.5a1.5%201.5%200%200%200-1.5%201.5c0%20.476.223.834.667%201.132A.75.75%200%200%201%2011.75%205.5H5.368c-.467%201.003-1.141%202.015-1.773%202.963-.192.289-.381.571-.558.845C2.13%2010.711%201.5%2011.916%201.5%2013A1.5%201.5%200%200%200%203%2014.5h7.401A3%203%200%200%201%2010%2013c0-.979.338-1.928.784-2.812.441-.874%201.023-1.748%201.575-2.576l.017-.026c.568-.853%201.103-1.658%201.501-2.448s.623-1.497.623-2.143c0-.838-.669-1.5-1.5-1.5m-10%200a1.5%201.5%200%200%200-1.5%201.5c0%20.321.1.569.27.778.097.12.325.227.74.227h7.674A2.7%202.7%200%200%201%2010%202.995c0-.546.146-1.059.401-1.5Z%22/%3E%3C/svg%3E');--md-admonition-icon--terminal:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%202.75C0%201.784.784%201%201.75%201h12.5c.966%200%201.75.784%201.75%201.75v10.5A1.75%201.75%200%200%201%2014.25%2015H1.75A1.75%201.75%200%200%201%200%2013.25Zm1.75-.25a.25.25%200%200%200-.25.25v10.5c0%20.138.112.25.25.25h12.5a.25.25%200%200%200%20.25-.25V2.75a.25.25%200%200%200-.25-.25ZM7.25%208a.75.75%200%200%201-.22.53l-2.25%202.25a.749.749%200%200%201-1.275-.326.75.75%200%200%201%20.215-.734L5.44%208%203.72%206.28a.749.749%200%200%201%20.326-1.275.75.75%200%200%201%20.734.215l2.25%202.25c.141.14.22.331.22.53m1.5%201.5h3a.75.75%200%200%201%200%201.5h-3a.75.75%200%200%201%200-1.5%22/%3E%3C/svg%3E');--md-admonition-icon--full-code:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M5%203c-1.1%200-2%20.9-2%202s-.9%202-2%202v2c1.1%200%202%20.9%202%202s.9%202%202%202h2v-2H5v-1c0-1.1-.9-2-2-2%201.1%200%202-.9%202-2V5h2V3m4%200c1.1%200%202%20.9%202%202s.9%202%202%202v2c-1.1%200-2%20.9-2%202s-.9%202-2%202H9v-2h2v-1c0-1.1.9-2%202-2-1.1%200-2-.9-2-2V5H9V3zm11%203v12c0%201.11-.89%202-2%202H4a2%202%200%200%201-2-2v-3h2v3h16V6h-2.97V4H20c1.11%200%202%20.89%202%202%22/%3E%3C/svg%3E');--md-admonition-icon--optional:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%2021.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65%200-3.35.3-4.75%201.05-.1.05-.15.05-.25.05-.25%200-.5-.25-.5-.5V6c.6-.45%201.25-.75%202-1%201.11-.35%202.33-.5%203.5-.5%201.95%200%204.05.4%205.5%201.5%201.45-1.1%203.55-1.5%205.5-1.5%201.17%200%202.39.15%203.5.5.75.25%201.4.55%202%201v14.6c0%20.25-.25.5-.5.5-.1%200-.15%200-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7%200-4.15.65-5.5%201.5M12%208v11.5c1.35-.85%203.8-1.5%205.5-1.5%201.2%200%202.4.15%203.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7%200-4.15.65-5.5%201.5m1%203.5c1.11-.68%202.6-1%204.5-1%20.91%200%201.76.09%202.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655%200-4.5.84zm4.5.17c-1.71%200-3.21.26-4.5.79v1.69c1.11-.65%202.6-.99%204.5-.99%201.04%200%201.88.08%202.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5%202.9c-.87-.16-1.71-.24-2.5-.24-1.83%200-3.33.27-4.5.8v1.69c1.11-.66%202.6-.99%204.5-.99%201.04%200%201.88.08%202.5.24z%22/%3E%3C/svg%3E');--md-admonition-icon--learning:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M7.693%201.066a.75.75%200%200%201%20.614%200l7.25%203.25a.75.75%200%200%201%200%201.368L13%206.831v2.794c0%201.024-.81%201.749-1.66%202.173-.893.447-2.075.702-3.34.702q-.417%200-.816-.036a.75.75%200%200%201%20.133-1.494Q7.649%2011%208%2011c1.082%200%202.025-.221%202.67-.543.69-.345.83-.682.83-.832V7.503L8.307%208.934a.75.75%200%200%201-.614%200L4%207.28v1.663c.296.105.575.275.812.512.438.438.688%201.059.688%201.796v3a.75.75%200%200%201-.75.75h-3a.75.75%200%200%201-.75-.75v-3c0-.737.25-1.358.688-1.796.237-.237.516-.407.812-.512V6.606L.443%205.684a.75.75%200%200%201%200-1.368ZM2.583%205%208%207.428%2013.416%205%208%202.572ZM2.5%2011.25v2.25H4v-2.25c0-.388-.125-.611-.25-.735a.7.7%200%200%200-.5-.203.7.7%200%200%200-.5.203c-.125.124-.25.347-.25.735%22/%3E%3C/svg%3E');--md-admonition-icon--people:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2%205.5a3.5%203.5%200%201%201%205.898%202.549%205.51%205.51%200%200%201%203.034%204.084.75.75%200%201%201-1.482.235%204%204%200%200%200-7.9%200%20.75.75%200%200%201-1.482-.236A5.5%205.5%200%200%201%203.102%208.05%203.5%203.5%200%200%201%202%205.5M11%204a3.001%203.001%200%200%201%202.22%205.018%205%205%200%200%201%202.56%203.012.749.749%200%200%201-.885.954.75.75%200%200%201-.549-.514%203.51%203.51%200%200%200-2.522-2.372.75.75%200%200%201-.574-.73v-.352a.75.75%200%200%201%20.416-.672A1.5%201.5%200%200%200%2011%205.5.75.75%200%200%201%2011%204m-5.5-.5a2%202%200%201%200-.001%203.999A2%202%200%200%200%205.5%203.5%22/%3E%3C/svg%3E');--md-admonition-icon--licensing:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M8.75.75V2h.985c.304%200%20.603.08.867.231l1.29.736q.058.033.124.033h2.234a.75.75%200%200%201%200%201.5h-.427l2.111%204.692a.75.75%200%200%201-.154.838l-.53-.53.529.531-.001.002-.002.002-.006.006-.006.005-.01.01-.045.04q-.317.265-.686.45C14.556%2010.78%2013.88%2011%2013%2011a4.5%204.5%200%200%201-2.023-.454%203.5%203.5%200%200%201-.686-.45l-.045-.04-.016-.015-.006-.006-.004-.004v-.001a.75.75%200%200%201-.154-.838L12.178%204.5h-.162c-.305%200-.604-.079-.868-.231l-1.29-.736a.25.25%200%200%200-.124-.033H8.75V13h2.5a.75.75%200%200%201%200%201.5h-6.5a.75.75%200%200%201%200-1.5h2.5V3.5h-.984a.25.25%200%200%200-.124.033l-1.289.737c-.265.15-.564.23-.869.23h-.162l2.112%204.692a.75.75%200%200%201-.154.838l-.53-.53.529.531-.001.002-.002.002-.006.006-.016.015-.045.04q-.317.265-.686.45C4.556%2010.78%203.88%2011%203%2011a4.5%204.5%200%200%201-2.023-.454%203.5%203.5%200%200%201-.686-.45l-.045-.04-.016-.015-.006-.006-.004-.004v-.001a.75.75%200%200%201-.154-.838L2.178%204.5H1.75a.75.75%200%200%201%200-1.5h2.234a.25.25%200%200%200%20.125-.033l1.288-.737c.265-.15.564-.23.869-.23h.984V.75a.75.75%200%200%201%201.5%200m2.945%208.477c.285.135.718.273%201.305.273s1.02-.138%201.305-.273L13%206.327Zm-10%200c.285.135.718.273%201.305.273s1.02-.138%201.305-.273L3%206.327Z%22/%3E%3C/svg%3E');--md-admonition-icon--videos:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%203.75C0%202.784.784%202%201.75%202h12.5c.966%200%201.75.784%201.75%201.75v8.5A1.75%201.75%200%200%201%2014.25%2014H1.75A1.75%201.75%200%200%201%200%2012.25Zm1.75-.25a.25.25%200%200%200-.25.25v8.5c0%20.138.112.25.25.25h12.5a.25.25%200%200%200%20.25-.25v-8.5a.25.25%200%200%200-.25-.25Z%22/%3E%3Cpath%20d%3D%22M6%2010.559V5.442a.25.25%200%200%201%20.379-.215l4.264%202.559a.25.25%200%200%201%200%20.428l-4.264%202.559A.25.25%200%200%201%206%2010.559%22/%3E%3C/svg%3E');}</style>
 
 
 
@@ -449,13 +450,17 @@
               <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
-                    
-
-
-
-<nav class="md-nav md-nav--primary" aria-label="Navigazione" data-md-level="0">
+                       
+<nav class="md-nav
+md-nav--primary" aria-label="Navigazione" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
+    <a
+      href="../.."
+      title="training.nextflow.io"
+      class="md-nav__button md-logo"
+      aria-label="training.nextflow.io"
+      data-md-component="logo"
+    >
       
   <img src="../../assets/img/nextflow_logo_dark.png" alt="logo">
 
@@ -463,8 +468,7 @@
     training.nextflow.io
   </label>
   
-    <div class="md-nav__source">
-      <a href="https://github.com/nextflow-io/training" title="Apri repository" class="md-source" data-md-component="source">
+  <div class="md-nav__source"><a href="https://github.com/nextflow-io/training" title="Apri repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
@@ -472,3331 +476,1528 @@
   <div class="md-source__repository">
     nextflow-io/training
   </div>
-</a>
-    </div>
+</a></div>
   
   <ul class="md-nav__list" data-md-scrollfix>
-    
+            
+<li class="md-nav__item">
+  <a href="../.." class="md-nav__link">
       
+<span class="md-ellipsis">
+    Home   
+</span>
+  
+  </a>
+</li>
+   
+    <li class="md-nav__item md-nav__item--group-label" role="presentation">
+      Utenti
+    </li>
+               
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle "
+    type="checkbox"
+    id="__nav_2"
+    
+  />
+   
+  <label
+    class="md-nav__link"
+    for="__nav_2"
+    id="__nav_2_label"
+    tabindex="0"
+  >
       
+<span class="md-ellipsis">
+    Nextflow Run   
+</span>
   
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Home
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Nextflow Run
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Nextflow Run
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nextflow_run/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Nextflow Run
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nextflow_run/00_orientation/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Per iniziare
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nextflow_run/01_basics/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 1: Operazioni base
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nextflow_run/02_pipeline/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 2: Eseguire pipeline reali
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nextflow_run/03_config/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 3: Configurazione dell'esecuzione
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nextflow_run/next_steps/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Riepilogo del corso
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nextflow_run/survey/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sondaggio di feedback
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Hello Nextflow
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Hello Nextflow
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../hello_nextflow/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Hello Nextflow
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../hello_nextflow/00_orientation/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Per iniziare
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../hello_nextflow/01_hello_world/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 1: Hello World
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../hello_nextflow/02_hello_channels/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 2: Hello Channels
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../hello_nextflow/03_hello_workflow/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 3: Hello Workflow
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../hello_nextflow/04_hello_modules/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 4: Hello Modules
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../hello_nextflow/05_hello_containers/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 5: Hello Containers
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../hello_nextflow/06_hello_config/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 6: Hello Config
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../hello_nextflow/next_steps/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Riepilogo del corso
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../hello_nextflow/survey/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sondaggio di feedback
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Hello nf-core
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Hello nf-core
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Hello nf-core
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../00_orientation/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Iniziare
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../01_run_demo/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 1: Eseguire una pipeline demo
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../02_rewrite_hello/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 2: Riscrivere Hello per nf-core
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 3: Usare un modulo nf-core
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 3: Usare un modulo nf-core
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
-          
-
-<nav class="md-nav md-nav--secondary" aria-label="On this page">
-       
-  <label class="md-nav__title" for="__toc">
     <span class="md-nav__icon md-icon"></span>
-    On this page
   </label>
-  <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-     <li class="md-nav__item">
-  <a href="#1-trovare-e-installare-un-modulo-nf-core-adatto" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Trovare e installare un modulo nf-core adatto
-      
-    </span>
-  </a>
   
-    <nav class="md-nav" aria-label="1. Trovare e installare un modulo nf-core adatto">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#11-esplorare-i-moduli-disponibili-sul-sito-web-nf-core" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.1. Esplorare i moduli disponibili sul sito web nf-core
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12-elencare-i-moduli-disponibili-dalla-riga-di-comando" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.2. Elencare i moduli disponibili dalla riga di comando
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#13-ottenere-informazioni-dettagliate-sul-modulo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.3. Ottenere informazioni dettagliate sul modulo
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#14-installare-il-modulo-findconcatenate" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.4. Installare il modulo find/concatenate
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#15-aggiornare-le-importazioni-dei-moduli" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.5. Aggiornare le importazioni dei moduli
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Takeaway
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cosa-ce-dopo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cosa c'è dopo?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>  <li class="md-nav__item">
-  <a href="#2-valutare-i-requisiti-del-nuovo-modulo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Valutare i requisiti del nuovo modulo
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Valutare i requisiti del nuovo modulo">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#21-confrontare-le-interfacce-dei-due-moduli" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.1. Confrontare le interfacce dei due moduli
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#22-comprendere-le-metamap" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2. Comprendere le metamap
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#23-riepilogare-le-modifiche-da-apportare" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3. Riepilogare le modifiche da apportare
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Takeaway
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cosa-ce-dopo_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cosa c'è dopo?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>  <li class="md-nav__item">
-  <a href="#3-integrare-find_concatenate-nel-workflow-hellonf" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Integrare FIND_CONCATENATE nel workflow hello.nf
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Integrare FIND_CONCATENATE nel workflow hello.nf">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#31-creare-una-mappa-di-metadati" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.1. Creare una mappa di metadati
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#32-creare-un-canale-con-tuple-di-metadati" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.2. Creare un canale con tuple di metadati
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#33-chiamare-il-modulo-find_concatenate" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.3. Chiamare il modulo FIND_CONCATENATE
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#34-estrarre-il-file-di-output-dalla-tupla-per-cowpy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.4. Estrarre il file di output dalla tupla per cowpy
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#35-testare-il-workflow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.5. Testare il workflow
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#takeaway_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Takeaway
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cosa-ce-dopo_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cosa c'è dopo?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li> 
-  </ul>
-  
-</nav>
-<nav class="md-nav md-nav--secondary sidebar_resources" aria-label="Resources">
-  <label class="md-nav__title">Resources</label>
-  <ul class="md-nav__list">
-    <li class="md-nav__item">
-      <!-- Community forum (training) -->
-      <a
-        href="https://community.seqera.io/c/training/39"
-        target="_blank"
-        rel="noopener"
-        class="md-nav__link"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path
-            d="M6 15a2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2h2v2m1 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-5m2-8a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2v2H9m0 1a2 2 0 0 1 2 2 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5m8 2a2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2h-2v-2m-1 0a2 2 0 0 1-2 2 2 2 0 0 1-2-2V5a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5m-2 8a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2h2m0-1a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-5Z"
-          ></path>
-        </svg>
-        Community forum
-      </a>
-    </li>
-    <li class="md-nav__item">
-      <!-- Nextflow slack -->
-      <a
-        href="https://www.nextflow.io/slack-invite.html"
-        target="_blank"
-        rel="noopener"
-        class="md-nav__link"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path
-            d="M6 15a2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2h2v2m1 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-5m2-8a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2v2H9m0 1a2 2 0 0 1 2 2 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5m8 2a2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2h-2v-2m-1 0a2 2 0 0 1-2 2 2 2 0 0 1-2-2V5a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5m-2 8a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2h2m0-1a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-5Z"
-          ></path>
-        </svg>
-        Nextflow Slack
-      </a>
-    </li>
-    <li class="md-nav__item">
-      <!-- Github issues -->
-      <a
-        href="https://github.com/nextflow-io/training/issues"
-        target="_blank"
-        rel="noopener"
-        class="md-nav__link"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path
-            d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"
-          ></path>
-        </svg>
-        GitHub issues
-      </a>
-    </li>
-    <li class="md-nav__item">
-      <!-- Seqera AI -->
-      <a
-        href="https://seqera.io/ask-ai/chat-v2"
-        target="_blank"
-        rel="noopener"
-        class="md-nav__link"
-      >
-        <?xml version="1.0" encoding="utf-8"?>
-        <!-- Generator: Adobe Illustrator 28.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-        <svg
-          version="1.1"
-          id="Layer_1"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          x="0px"
-          y="0px"
-          viewBox="80 50 350 350"
-          style="enable-background: new 0 0 500 500"
-          xml:space="preserve"
-        >
-          <style type="text/css">
-            .st0 {
-              clip-path: url(#SVGID_00000006699037935518914080000000086571810102047141_);
-            }
-            .st1 {
-              fill: "gray";
-            }
-          </style>
-          <g>
-            <defs>
-              <rect id="SVGID_1_" x="125" y="125" width="250" height="250" />
-            </defs>
-            <clipPath
-              id="SVGID_00000183214694142566821210000012389151436317298101_"
-            >
-              <use xlink:href="#SVGID_1_" style="overflow: visible" />
-            </clipPath>
-            <g
-              style="
-                clip-path: url(#SVGID_00000183214694142566821210000012389151436317298101_);
-              "
-            >
-              <path
-                class="st1"
-                d="M375,333l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.2-0.9l-0.2-0.8l-0.2-0.8
-                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8
-                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7L365,308l-0.6-0.6l-0.6-0.6l-0.6-0.6l-0.6-0.6L362,305
-                      l-0.6-0.6l-0.7-0.6l-0.6-0.5l-1.2,0.7l-0.8,0.5l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.9,0.4l-0.9,0.4l-0.9,0.3l-0.9,0.3
-                      l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0.1
-                      l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0l-0.9,0h-57.5l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2
-                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.3l0.1,0.3l0.1,0.4l0.1,0.4
-                      l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4l-0.1,0.3l-0.2,0.3l-0.2,0.3
-                      l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
-                      l-0.3,0.1l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0H125V375h209.7l0.9,0l0.9,0l0.9,0l0.8-0.1
-                      l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3
-                      l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5
-                      l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7
-                      l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8
-                      l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0-0.9l0-0.9l0-0.8L375,333z"
-              />
-              <path
-                class="st1"
-                d="M375,260.4l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.1-0.8l-0.1-0.8l-0.2-0.8l-0.2-0.8l-0.2-0.8
-                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.7
-                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.2-0.2h0h-89.8l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2
-                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.4l0.1,0.3
-                      l0.1,0.4l0.1,0.4l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4
-                      l-0.2,0.4l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
-                      l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0h-82.5h-111H125v32.2
-                      h122.8h86.9h0.9l0.9,0l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3
-                      l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.4l0.8-0.4l0.2-0.1l0.6-0.3l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5
-                      l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.5-0.7l0.5-0.7l0.5-0.7
-                      l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7l0.4-0.7l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8
-                      l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0-0.8l0-0.9l0-0.9
-                      L375,260.4z"
-              />
-              <path
-                class="st1"
-                d="M165.3,197.6l-0.9,0l-0.8,0l-0.9,0l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
-                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.2,0.1l-0.6,0.3l-0.8,0.4
-                      l-0.8,0.4l-0.8,0.4l-0.7,0.4l-0.7,0.5l-0.7,0.5L142,205l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
-                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
-                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
-                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.8l0,0.9l0.1,0.8l0.1,0.8
-                      l0.1,0.9l0.1,0.9l0.1,0.8l0.2,0.9l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
-                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.2,0.2h89.8l-59.7-16.4l-0.4-0.1l-0.3-0.1
-                      l-0.4-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3
-                      l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4
-                      l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3
-                      l0.3-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.4-0.2l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0
-                      h0.4h82.5h111H375v-32.3H252.2H165.3z"
-              />
-              <path
-                class="st1"
-                d="M165.3,125l-0.9,0l-0.8,0l-0.9,0.1l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
-                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4
-                      l-0.8,0.4l-0.7,0.5l-0.7,0.4l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
-                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
-                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
-                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.9l0,0.8l0.1,0.9l0.1,0.9
-                      l0.1,0.8l0.1,0.8l0.1,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
-                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.6,0.6l0.6,0.6
-                      l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.7,0.6l0.6,0.5h0l1.1-0.7l0.8-0.5l0.8-0.5l0.8-0.4l0.8-0.4l0.9-0.4l0.9-0.4l0.9-0.4
-                      l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.1l0.9-0.1l0.9-0.1l0.9-0.1
-                      l0.9-0.1l0.9-0.1l0.9,0l0.9,0l0.9,0h57.5l-59.7-16.4l-0.4-0.1l-0.3-0.1l-0.4-0.1l-0.3-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2
-                      l-0.3-0.2l-0.3-0.2l-0.3-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.3l-0.1-0.4
-                      l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3
-                      l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2
-                      l0.3-0.2l0.4-0.1l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0l0.4,0H375V125H165.3z"
-              />
-            </g>
-          </g>
-        </svg>
-        Seqera AI assistant
-      </a>
-    </li>
-    <li class="md-nav__item">
-      <!-- Nextflow docs -->
-      <a
-        href="https://nextflow.io/docs/latest/index.html"
-        target="_blank"
-        rel="noopener"
-        class="md-nav__link"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path
-            d="M17.5 14.33c.79 0 1.63.08 2.5.24v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.33-4.5.99v-1.69c1.17-.53 2.67-.8 4.5-.8M13 12.46c1.29-.53 2.79-.79 4.5-.79.79 0 1.63.07 2.5.23v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.34-4.5.99m4.5-3.65c-1.9 0-3.39.32-4.5 1V9.84c1.23-.56 2.73-.84 4.5-.84.79 0 1.63.08 2.5.23v1.55c-.74-.19-1.59-.28-2.5-.28m3.5 8V7c-1.04-.33-2.21-.5-3.5-.5-2.05 0-3.88.5-5.5 1.5v11.5c1.62-1 3.45-1.5 5.5-1.5 1.19 0 2.36.16 3.5.5m-3.5-14c2.35 0 4.19.5 5.5 1.5v14.56c0 .12-.05.24-.16.35-.11.09-.23.17-.34.17-.11 0-.19-.02-.25-.05-1.28-.69-2.87-1.03-4.75-1.03-2.05 0-3.88.5-5.5 1.5-1.34-1-3.17-1.5-5.5-1.5-1.66 0-3.25.36-4.75 1.07-.03.01-.07.01-.12.03-.04.01-.08.02-.13.02-.11 0-.23-.04-.34-.12a.475.475 0 0 1-.16-.35V6c1.34-1 3.18-1.5 5.5-1.5 2.33 0 4.16.5 5.5 1.5 1.34-1 3.17-1.5 5.5-1.5Z"
-          ></path>
-        </svg>
-        Nextflow Docs
-      </a>
-    </li>
-  </ul>
-</nav>
-      
-    </li>
-  
-
+  <nav
+    class="md-nav"
+    data-md-level="1"
+    aria-labelledby="__nav_2_label"
+    aria-expanded="false"
+  >
+    <label class="md-nav__title" for="__nav_2">
+      <span class="md-nav__icon md-icon"></span>
+        Nextflow Run  
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
               
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../04_make_module/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 4: Creare un modulo nf-core
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../05_input_validation/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 5: Validazione degli input
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../next_steps/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Riepilogo del corso
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../survey/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Questionario di feedback
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
+<li class="md-nav__item">
+  <a href="../../nextflow_run/" class="md-nav__link">
       
-    </li>
+<span class="md-ellipsis">
+    Panoramica   
+</span>
   
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
-        
+  </a>
+</li>
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Nextflow per la Scienza
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Nextflow per la Scienza
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Nextflow per la Scienza
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
+<li class="md-nav__item">
+  <a href="../../nextflow_run/00_orientation/" class="md-nav__link">
       
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
-        
+<span class="md-ellipsis">
+    Per iniziare   
+</span>
+  
+  </a>
+</li>
           
-          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Genomica
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Genomica
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/genomics/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Genomica
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/genomics/00_orientation/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Iniziare
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/genomics/01_method/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 1: Panoramica del metodo
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/genomics/02_per_sample_variant_calling/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 2: Variant calling per campione
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/genomics/03_joint_calling/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 3: Joint calling su una coorte
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/genomics/next_steps/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Riepilogo del corso
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/genomics/survey/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sondaggio di feedback
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
+<li class="md-nav__item">
+  <a href="../../nextflow_run/01_run_nextflow/" class="md-nav__link">
       
-    </li>
+<span class="md-ellipsis">
+    Part 1: Run Nextflow   
+</span>
   
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
-        
+  </a>
+</li>
           
-          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    RNAseq
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    RNAseq
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/rnaseq/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    RNAseq
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/rnaseq/00_orientation/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Primi passi
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/rnaseq/01_method/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 1: Panoramica del metodo
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/rnaseq/02_single-sample/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 2: Implementazione per singolo campione
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/rnaseq/03_multi-sample/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 3: Implementazione con campioni multipli paired-end
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/rnaseq/next_steps/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Riepilogo del corso
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/rnaseq/survey/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sondaggio di feedback
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
+<li class="md-nav__item">
+  <a href="../../nextflow_run/02_configure_pipeline/" class="md-nav__link">
       
-    </li>
+<span class="md-ellipsis">
+    Part 2: Configure the pipeline   
+</span>
   
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
-        
+  </a>
+</li>
           
-          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Imaging
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_4">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Imaging
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/imaging/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Imaging
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/imaging/00_orientation/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Orientamento
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/imaging/01_basics/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 1: Eseguire operazioni di base
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/imaging/02_run_molkart/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 2: Eseguire nf-core/molkart
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/imaging/03_inputs/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 3: Organizzazione degli input
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/imaging/04_config/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 4: Configurazione
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/imaging/survey/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sondaggio
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/imaging/next_steps/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Prossimi passi
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
+<li class="md-nav__item">
+  <a href="../../nextflow_run/03_manage_executions/" class="md-nav__link">
       
-    </li>
+<span class="md-ellipsis">
+    Part 3: Manage workflow executions   
+</span>
   
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
-        
+  </a>
+</li>
           
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Missioni Secondarie
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Missioni Secondarie
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../side_quests/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Missioni Secondarie
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../side_quests/orientation/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Per iniziare
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../side_quests/dev_environment/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Ambiente di Sviluppo
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../side_quests/essential_scripting_patterns/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Pattern Essenziali di Scripting
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../side_quests/working_with_files/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Elaborazione dell'input di file
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../side_quests/metadata/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Metadati e meta map
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../side_quests/splitting_and_grouping/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Suddivisione e Raggruppamento
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../side_quests/nf_test/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Test con nf-test
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../side_quests/debugging/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Risoluzione dei Problemi nei Workflow
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../side_quests/workflows_of_workflows/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Flussi di Lavoro di Flussi di Lavoro
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
+<li class="md-nav__item">
+  <a href="../../nextflow_run/04_remote_repositories/" class="md-nav__link">
       
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_11" >
-        
+<span class="md-ellipsis">
+    Part 4: Run remote pipelines   
+</span>
+  
+  </a>
+</li>
           
-          <label class="md-nav__link" for="__nav_6_11" id="__nav_6_11_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sviluppo di Plugin
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_11_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6_11">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Sviluppo di Plugin
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../side_quests/plugin_development/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sviluppo di Plugin
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../side_quests/plugin_development/01_plugin_basics/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 1: Nozioni di Base sui Plugin
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../side_quests/plugin_development/02_create_project/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 2: Creare un Progetto Plugin
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../side_quests/plugin_development/03_custom_functions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 3: Funzioni Personalizzate
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../side_quests/plugin_development/04_build_and_test/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 4: Testing
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../side_quests/plugin_development/05_observers/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 5: Trace Observer
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../side_quests/plugin_development/06_configuration/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 6: Configurazione
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../side_quests/plugin_development/summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Riepilogo
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../side_quests/plugin_development/next_steps/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Passi Successivi
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
+<li class="md-nav__item">
+  <a href="../../nextflow_run/next_steps/" class="md-nav__link">
       
-    </li>
+<span class="md-ellipsis">
+    Riepilogo del corso   
+</span>
   
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
-        
+  </a>
+</li>
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Training Collections
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Training Collections
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../training_collections/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Training Collections
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../training_collections/architects_toolkit_1/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Il Toolkit dell'Architetto I
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
+<li class="md-nav__item">
+  <a href="../../nextflow_run/survey/" class="md-nav__link">
       
-    </li>
+<span class="md-ellipsis">
+    Sondaggio di feedback   
+</span>
   
-
+  </a>
+</li>
+   
+    </ul>
+  </nav>
+  
+</li>
+              
+<li class="md-nav__item md-nav__item--nested">
     
+  <input
+    class="md-nav__toggle md-toggle "
+    type="checkbox"
+    id="__nav_3"
+    
+  />
+   
+  <label
+    class="md-nav__link"
+    for="__nav_3"
+    id="__nav_3_label"
+    tabindex="0"
+  >
       
+<span class="md-ellipsis">
+    Use nf-core   
+</span>
+  
+    <span class="md-nav__icon md-icon"></span>
+  </label>
+  
+  <nav
+    class="md-nav"
+    data-md-level="1"
+    aria-labelledby="__nav_3_label"
+    aria-expanded="false"
+  >
+    <label class="md-nav__title" for="__nav_3">
+      <span class="md-nav__icon md-icon"></span>
+        Use nf-core  
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+              
+<li class="md-nav__item">
+  <a href="../../nfcore_use/" class="md-nav__link">
       
+<span class="md-ellipsis">
+    Overview   
+</span>
   
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
-        
+  </a>
+</li>
           
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Help
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Help
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../help/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Ottenere aiuto
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
+<li class="md-nav__item">
+  <a href="../../nfcore_use/00_orientation/" class="md-nav__link">
       
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_2" >
-        
+<span class="md-ellipsis">
+    Getting started   
+</span>
+  
+  </a>
+</li>
           
-          <label class="md-nav__link" for="__nav_8_2" id="__nav_8_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Opzioni per l'ambiente
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Opzioni per l'ambiente
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../envsetup/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Opzioni per l'ambiente
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../envsetup/01_setup/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    GitHub Codespaces
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../envsetup/03_devcontainer/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Devcontainers Locali
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../envsetup/02_local/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Installazione manuale
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
+<li class="md-nav__item">
+  <a href="../../nfcore_use/01_run_demo/" class="md-nav__link">
       
-    </li>
+<span class="md-ellipsis">
+    Part 1: Run a demo pipeline   
+</span>
   
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../info/nxf_versions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Versioni di Nextflow
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../info/hello_pipeline/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    La pipeline Hello
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nfcore_use/02_configure_execution/" class="md-nav__link">
       
-    </li>
+<span class="md-ellipsis">
+    Part 2: Configure pipeline execution   
+</span>
   
-
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nfcore_use/03_run_production_pipeline/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 3: Run a production pipeline   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nfcore_use/next_steps/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Course summary   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nfcore_use/survey/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Feedback survey   
+</span>
+  
+  </a>
+</li>
+   
+    </ul>
+  </nav>
+  
+</li>
+              
+<li class="md-nav__item md-nav__item--nested">
     
+  <input
+    class="md-nav__toggle md-toggle "
+    type="checkbox"
+    id="__nav_4"
+    
+  />
+   
+  <label
+    class="md-nav__link"
+    for="__nav_4"
+    id="__nav_4_label"
+    tabindex="0"
+  >
+      
+<span class="md-ellipsis">
+    Scale with Seqera   
+</span>
+  
+    <span class="md-nav__icon md-icon"></span>
+  </label>
+  
+  <nav
+    class="md-nav"
+    data-md-level="1"
+    aria-labelledby="__nav_4_label"
+    aria-expanded="false"
+  >
+    <label class="md-nav__title" for="__nav_4">
+      <span class="md-nav__icon md-icon"></span>
+        Scale with Seqera  
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+              
+<li class="md-nav__item">
+  <a href="../../seqera_scale/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Overview   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../seqera_scale/00_orientation/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Getting started   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../seqera_scale/01_run_with_seqera/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 1: Launch pipelines from the web interface   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../seqera_scale/02_launch_from_cli/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 2: Launch pipelines from the command line   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../seqera_scale/next_steps/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Course summary   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../seqera_scale/survey/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Feedback survey   
+</span>
+  
+  </a>
+</li>
+   
+    </ul>
+  </nav>
+  
+</li>
+              
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle "
+    type="checkbox"
+    id="__nav_5"
+    
+  />
+   
+  <label
+    class="md-nav__link"
+    for="__nav_5"
+    id="__nav_5_label"
+    tabindex="0"
+  >
+      
+<span class="md-ellipsis">
+    Execution Config   
+</span>
+  
+    <span class="md-nav__icon md-icon"></span>
+  </label>
+  
+  <nav
+    class="md-nav"
+    data-md-level="1"
+    aria-labelledby="__nav_5_label"
+    aria-expanded="false"
+  >
+    <label class="md-nav__title" for="__nav_5">
+      <span class="md-nav__icon md-icon"></span>
+        Execution Config  
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+              
+<li class="md-nav__item">
+  <a href="../../execution_config/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Overview   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../execution_config/00_orientation/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Getting started   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../execution_config/01_packaging_and_execution/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 1: Adapt to your compute environment   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../execution_config/02_resources_and_retries/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 2: Manage compute resources and failures   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../execution_config/03_profiles/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 3: Use profiles to switch configurations   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../execution_config/next_steps/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Course summary   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../execution_config/survey/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Feedback survey   
+</span>
+  
+  </a>
+</li>
+   
+    </ul>
+  </nav>
+  
+</li>
+   
+    <li class="md-nav__item md-nav__item--group-label" role="presentation">
+      Sviluppatori
+    </li>
+               
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle "
+    type="checkbox"
+    id="__nav_6"
+    
+  />
+   
+  <label
+    class="md-nav__link"
+    for="__nav_6"
+    id="__nav_6_label"
+    tabindex="0"
+  >
+      
+<span class="md-ellipsis">
+    Hello Nextflow   
+</span>
+  
+    <span class="md-nav__icon md-icon"></span>
+  </label>
+  
+  <nav
+    class="md-nav"
+    data-md-level="1"
+    aria-labelledby="__nav_6_label"
+    aria-expanded="false"
+  >
+    <label class="md-nav__title" for="__nav_6">
+      <span class="md-nav__icon md-icon"></span>
+        Hello Nextflow  
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+              
+<li class="md-nav__item">
+  <a href="../../hello_nextflow/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Panoramica   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../hello_nextflow/00_orientation/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Per iniziare   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../hello_nextflow/01_hello_world/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 1: Hello World   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../hello_nextflow/02_hello_channels/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 2: Hello Channels   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../hello_nextflow/03_hello_workflow/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 3: Hello Workflow   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../hello_nextflow/04_hello_modules/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 4: Hello Modules   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../hello_nextflow/05_hello_containers/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 5: Hello Containers   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../hello_nextflow/06_hello_config/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 6: Hello Config   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../hello_nextflow/next_steps/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Riepilogo del corso   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../hello_nextflow/survey/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Sondaggio di feedback   
+</span>
+  
+  </a>
+</li>
+   
+    </ul>
+  </nav>
+  
+</li>
+              
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle "
+    type="checkbox"
+    id="__nav_7"
+    
+  />
+   
+  <label
+    class="md-nav__link"
+    for="__nav_7"
+    id="__nav_7_label"
+    tabindex="0"
+  >
+      
+<span class="md-ellipsis">
+    Build with nf-core   
+</span>
+  
+    <span class="md-nav__icon md-icon"></span>
+  </label>
+  
+  <nav
+    class="md-nav"
+    data-md-level="1"
+    aria-labelledby="__nav_7_label"
+    aria-expanded="false"
+  >
+    <label class="md-nav__title" for="__nav_7">
+      <span class="md-nav__icon md-icon"></span>
+        Build with nf-core  
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+              
+<li class="md-nav__item">
+  <a href="../../nfcore_build/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Overview   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nfcore_build/00_orientation/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Getting started   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nfcore_build/01_rewrite_hello/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 1: Rewrite Hello for nf-core   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nfcore_build/02_use_module/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 2: Use an nf-core module   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nfcore_build/03_make_module/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 3: Make an nf-core module   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nfcore_build/04_input_validation/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 4: Input validation   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nfcore_build/next_steps/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Course summary   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nfcore_build/survey/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Feedback survey   
+</span>
+  
+  </a>
+</li>
+   
+    </ul>
+  </nav>
+  
+</li>
+              
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle "
+    type="checkbox"
+    id="__nav_8"
+    
+  />
+   
+  <label
+    class="md-nav__link"
+    for="__nav_8"
+    id="__nav_8_label"
+    tabindex="0"
+  >
+      
+<span class="md-ellipsis">
+    Missioni Secondarie   
+</span>
+  
+    <span class="md-nav__icon md-icon"></span>
+  </label>
+  
+  <nav
+    class="md-nav"
+    data-md-level="1"
+    aria-labelledby="__nav_8_label"
+    aria-expanded="false"
+  >
+    <label class="md-nav__title" for="__nav_8">
+      <span class="md-nav__icon md-icon"></span>
+        Missioni Secondarie  
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+              
+<li class="md-nav__item">
+  <a href="../../side_quests/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Panoramica   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../side_quests/orientation/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Per iniziare   
+</span>
+  
+  </a>
+</li>
+     
+      <li class="md-nav__item md-nav__item--group-label" role="presentation">
+        Strumenti e Trucchi per Sviluppatori
+      </li>
+           
+<li class="md-nav__item">
+  <a href="../../side_quests/dev_environment/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Ambiente di Sviluppo   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../side_quests/debugging/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Risoluzione dei Problemi nei Workflow   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../side_quests/essential_scripting_patterns/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Pattern Essenziali di Scripting   
+</span>
+  
+  </a>
+</li>
+     
+      <li class="md-nav__item md-nav__item--group-label" role="presentation">
+        Approfondimenti sul Flusso di Dati
+      </li>
+           
+<li class="md-nav__item">
+  <a href="../../side_quests/working_with_files/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Elaborazione dell'input di file   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../side_quests/metadata/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Metadati e meta map   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../side_quests/splitting_and_grouping/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Suddivisione e Raggruppamento   
+</span>
+  
+  </a>
+</li>
+     
+      <li class="md-nav__item md-nav__item--group-label" role="presentation">
+        Architettura Modulare in Azione
+      </li>
+           
+<li class="md-nav__item">
+  <a href="../../side_quests/workflows_of_workflows/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Flussi di Lavoro di Flussi di Lavoro   
+</span>
+  
+  </a>
+</li>
+     
+      <li class="md-nav__item md-nav__item--group-label" role="presentation">
+        L'Universo Esteso di Nextflow
+      </li>
+           
+<li class="md-nav__item">
+  <a href="../../side_quests/nf_test/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Test con nf-test   
+</span>
+  
+  </a>
+</li>
+               
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle "
+    type="checkbox"
+    id="__nav_8_11"
+    
+  />
+   
+  <label
+    class="md-nav__link"
+    for="__nav_8_11"
+    id="__nav_8_11_label"
+    tabindex="0"
+  >
+      
+<span class="md-ellipsis">
+    Sviluppo di Plugin   
+</span>
+  
+    <span class="md-nav__icon md-icon"></span>
+  </label>
+  
+  <nav
+    class="md-nav"
+    data-md-level="2"
+    aria-labelledby="__nav_8_11_label"
+    aria-expanded="false"
+  >
+    <label class="md-nav__title" for="__nav_8_11">
+      <span class="md-nav__icon md-icon"></span>
+        Sviluppo di Plugin  
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+              
+<li class="md-nav__item">
+  <a href="../../side_quests/plugin_development/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Sviluppo di Plugin   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../side_quests/plugin_development/01_plugin_basics/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 1: Nozioni di Base sui Plugin   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../side_quests/plugin_development/02_create_project/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 2: Creare un Progetto Plugin   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../side_quests/plugin_development/03_custom_functions/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 3: Funzioni Personalizzate   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../side_quests/plugin_development/04_build_and_test/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 4: Testing   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../side_quests/plugin_development/05_observers/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 5: Trace Observer   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../side_quests/plugin_development/06_configuration/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 6: Configurazione   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../side_quests/plugin_development/summary/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Riepilogo   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../side_quests/plugin_development/next_steps/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Passi Successivi   
+</span>
+  
+  </a>
+</li>
+   
+    </ul>
+  </nav>
+  
+</li>
+   
+    </ul>
+  </nav>
+  
+</li>
+              
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle "
+    type="checkbox"
+    id="__nav_9"
+    
+  />
+   
+  <label
+    class="md-nav__link"
+    for="__nav_9"
+    id="__nav_9_label"
+    tabindex="0"
+  >
+      
+<span class="md-ellipsis">
+    Nextflow per la Scienza   
+</span>
+  
+    <span class="md-nav__icon md-icon"></span>
+  </label>
+  
+  <nav
+    class="md-nav"
+    data-md-level="1"
+    aria-labelledby="__nav_9_label"
+    aria-expanded="false"
+  >
+    <label class="md-nav__title" for="__nav_9">
+      <span class="md-nav__icon md-icon"></span>
+        Nextflow per la Scienza  
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+              
+<li class="md-nav__item">
+  <a href="../../nf4_science/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Panoramica   
+</span>
+  
+  </a>
+</li>
+               
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle "
+    type="checkbox"
+    id="__nav_9_2"
+    
+  />
+   
+  <label
+    class="md-nav__link"
+    for="__nav_9_2"
+    id="__nav_9_2_label"
+    tabindex="0"
+  >
+      
+<span class="md-ellipsis">
+    Genomica   
+</span>
+  
+    <span class="md-nav__icon md-icon"></span>
+  </label>
+  
+  <nav
+    class="md-nav"
+    data-md-level="2"
+    aria-labelledby="__nav_9_2_label"
+    aria-expanded="false"
+  >
+    <label class="md-nav__title" for="__nav_9_2">
+      <span class="md-nav__icon md-icon"></span>
+        Genomica  
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+              
+<li class="md-nav__item">
+  <a href="../../nf4_science/genomics/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Panoramica   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nf4_science/genomics/00_orientation/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Iniziare   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nf4_science/genomics/01_method/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 1: Panoramica del metodo   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nf4_science/genomics/02_per_sample_variant_calling/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 2: Variant calling per campione   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nf4_science/genomics/03_joint_calling/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 3: Joint calling su una coorte   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nf4_science/genomics/next_steps/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Riepilogo del corso   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nf4_science/genomics/survey/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Sondaggio di feedback   
+</span>
+  
+  </a>
+</li>
+   
+    </ul>
+  </nav>
+  
+</li>
+               
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle "
+    type="checkbox"
+    id="__nav_9_3"
+    
+  />
+   
+  <label
+    class="md-nav__link"
+    for="__nav_9_3"
+    id="__nav_9_3_label"
+    tabindex="0"
+  >
+      
+<span class="md-ellipsis">
+    RNAseq   
+</span>
+  
+    <span class="md-nav__icon md-icon"></span>
+  </label>
+  
+  <nav
+    class="md-nav"
+    data-md-level="2"
+    aria-labelledby="__nav_9_3_label"
+    aria-expanded="false"
+  >
+    <label class="md-nav__title" for="__nav_9_3">
+      <span class="md-nav__icon md-icon"></span>
+        RNAseq  
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+              
+<li class="md-nav__item">
+  <a href="../../nf4_science/rnaseq/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Panoramica   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nf4_science/rnaseq/00_orientation/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Primi passi   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nf4_science/rnaseq/01_method/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 1: Panoramica del metodo   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nf4_science/rnaseq/02_single-sample/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 2: Implementazione per singolo campione   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nf4_science/rnaseq/03_multi-sample/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 3: Implementazione con campioni multipli paired-end   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nf4_science/rnaseq/next_steps/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Riepilogo del corso   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nf4_science/rnaseq/survey/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Sondaggio di feedback   
+</span>
+  
+  </a>
+</li>
+   
+    </ul>
+  </nav>
+  
+</li>
+               
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle "
+    type="checkbox"
+    id="__nav_9_4"
+    
+  />
+   
+  <label
+    class="md-nav__link"
+    for="__nav_9_4"
+    id="__nav_9_4_label"
+    tabindex="0"
+  >
+      
+<span class="md-ellipsis">
+    Imaging   
+</span>
+  
+    <span class="md-nav__icon md-icon"></span>
+  </label>
+  
+  <nav
+    class="md-nav"
+    data-md-level="2"
+    aria-labelledby="__nav_9_4_label"
+    aria-expanded="false"
+  >
+    <label class="md-nav__title" for="__nav_9_4">
+      <span class="md-nav__icon md-icon"></span>
+        Imaging  
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+              
+<li class="md-nav__item">
+  <a href="../../nf4_science/imaging/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Panoramica   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nf4_science/imaging/00_orientation/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Orientamento   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nf4_science/imaging/01_basics/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 1: Eseguire operazioni di base   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nf4_science/imaging/02_run_molkart/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 2: Eseguire nf-core/molkart   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nf4_science/imaging/03_inputs/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 3: Organizzazione degli input   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nf4_science/imaging/04_config/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Parte 4: Configurazione   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nf4_science/imaging/survey/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Sondaggio   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../nf4_science/imaging/next_steps/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Prossimi passi   
+</span>
+  
+  </a>
+</li>
+   
+    </ul>
+  </nav>
+  
+</li>
+   
+    </ul>
+  </nav>
+  
+</li>
+   
+    <li class="md-nav__item md-nav__item--group-label" role="presentation">
+      Configurazione e Aiuto
+    </li>
+               
+<li class="md-nav__item md-nav__item--nested">
+    
+  <input
+    class="md-nav__toggle md-toggle "
+    type="checkbox"
+    id="__nav_10"
+    
+  />
+   
+  <label
+    class="md-nav__link"
+    for="__nav_10"
+    id="__nav_10_label"
+    tabindex="0"
+  >
+      
+<span class="md-ellipsis">
+    Ambiente di Formazione   
+</span>
+  
+    <span class="md-nav__icon md-icon"></span>
+  </label>
+  
+  <nav
+    class="md-nav"
+    data-md-level="1"
+    aria-labelledby="__nav_10_label"
+    aria-expanded="false"
+  >
+    <label class="md-nav__title" for="__nav_10">
+      <span class="md-nav__icon md-icon"></span>
+        Ambiente di Formazione  
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+              
+<li class="md-nav__item">
+  <a href="../../envsetup/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Opzioni per l'ambiente   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../envsetup/01_setup/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    GitHub Codespaces   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../envsetup/03_devcontainer/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Devcontainers Locali   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../../envsetup/02_local/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Installazione manuale   
+</span>
+  
+  </a>
+</li>
+   
+    </ul>
+  </nav>
+  
+</li>
+         
+<li class="md-nav__item">
+  <a href="../../info/nxf_versions/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Versioni di Nextflow   
+</span>
+  
+  </a>
+</li>
+         
+<li class="md-nav__item">
+  <a href="../../info/hello_pipeline/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    La pipeline Hello   
+</span>
+  
+  </a>
+</li>
+         
+<li class="md-nav__item">
+  <a href="../../help/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Ottenere aiuto   
+</span>
+  
+  </a>
+</li>
+         
+<li class="md-nav__item">
+  <a href="../../training_events/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Training Events   
+</span>
+  
+  </a>
+</li>
+  
   </ul>
 </nav>
                   </div>
@@ -4294,7 +2495,7 @@
 
 <h1 id="parte-3-usare-un-modulo-nf-core">Parte 3: Usare un modulo nf-core<a class="headerlink" href="#parte-3-usare-un-modulo-nf-core" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traduzione assistita da IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">scopri di più e suggerisci miglioramenti</a></span></p>
-<p>In questa terza parte del corso di formazione Hello nf-core, mostreremo come trovare, installare e utilizzare un modulo nf-core esistente nella propria pipeline.</p>
+<p>In questa terza parte del corso di formazione Build with nf-core, mostreremo come trovare, installare e utilizzare un modulo nf-core esistente nella propria pipeline.</p>
 <p>Uno dei grandi vantaggi di lavorare con nf-core è la possibilità di sfruttare moduli pre-costruiti e testati dal repository <a href="https://github.com/nf-core/modules">nf-core/modules</a>.
 Invece di scrivere ogni processo da zero, è possibile installare e utilizzare moduli mantenuti dalla comunità che seguono le best practice.</p>
 <p>Per dimostrare come funziona, sostituiremo il modulo personalizzato <code>collectGreetings</code> con il modulo <code>find/concatenate</code> da nf-core/modules nella pipeline <code>core-hello</code>.</p>
@@ -4320,7 +2521,7 @@ La concatenazione di file è un'operazione molto comune, quindi è ragionevole p
 <h3 id="11-esplorare-i-moduli-disponibili-sul-sito-web-nf-core">1.1. Esplorare i moduli disponibili sul sito web nf-core<a class="headerlink" href="#11-esplorare-i-moduli-disponibili-sul-sito-web-nf-core" title="Permanent link">&para;</a></h3>
 <p>Il progetto nf-core mantiene un catalogo centralizzato di moduli su <a href="https://nf-co.re/modules">https://nf-co.re/modules</a>.</p>
 <p>Navigare alla pagina dei moduli nel browser web e utilizzare la barra di ricerca per cercare 'concatenate'.</p>
-<p><img alt="risultati ricerca moduli" src="../img/module-search-results.png" /></p>
+<p><img alt="risultati ricerca moduli" src="./img/module-search-results.png" /></p>
 <p>Come potete vedere, ci sono diversi risultati, molti dei quali moduli progettati per concatenare tipi di file molto specifici.
 Tra questi, dovrebbe essercene uno chiamato <code>find_concatenate</code> che è generico.</p>
 <div class="admonition info">
@@ -4732,10 +2933,6 @@ Questo ci permetterà di determinare se possiamo semplicemente trattare il nuovo
 <p>Si noti anche che per impostazione predefinita, il file di output sarà denominato in base a un identificatore che fa parte dei metadati (codice non mostrato qui).</p>
 <p>Questo potrebbe sembrare molto da tenere a mente guardando solo il codice, quindi ecco un diagramma per aiutare a visualizzare come tutto si integra.</p>
 <figure class="excalidraw">
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1820.541588887239 770.9795047843418" width="1820.541588887239" height="770.9795047843418"><!-- svg-source:excalidraw --><metadata></metadata><defs><style class="style-fonts">
-      @font-face { font-family: Excalifont; src: url(data:font/woff2;base64,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); }</style></defs><rect x="0" y="0" width="1820.541588887239" height="770.9795047843418" fill="#ffffff"></rect><g stroke-linecap="round"><g transform="translate(463.455187082719 644.7081067020645) rotate(0 319.8220051895744 0.43391251679622656)"><path d="M0 0 C196.39 1.08, 391.66 1.46, 639.64 0 M0 0 C189.77 0.1, 379.73 -0.25, 639.64 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(803.3281343762937 -198.0151069435915) rotate(270 -0.5169738140255049 362.26766104282683)"><path d="M0.69 0.44 C0.46 121.27, -0.51 604.28, -0.5 724.91 M-0.4 -0.38 C-0.91 120.15, -1.84 602.96, -1.71 723.37" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g transform="translate(803.3281343762937 -198.0151069435915) rotate(270 -0.5169738140255049 362.26766104282683)"><path d="M-10.25 699.88 C-6.35 707.75, -2.04 718.57, -1.71 723.37 M-10.25 699.88 C-7.4 707.31, -4.24 716.17, -1.71 723.37" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g transform="translate(803.3281343762937 -198.0151069435915) rotate(270 -0.5169738140255049 362.26766104282683)"><path d="M6.85 699.89 C4.38 707.85, 2.31 718.68, -1.71 723.37 M6.85 699.89 C3.98 707.29, 1.42 716.14, -1.71 723.37" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round" transform="translate(601.2237859102484 550.3077268700044) rotate(0 182.14590991745376 92.65147349589961)"><path d="M-0.37 -1.72 L364.56 1.93 L362.59 183.48 L-0.77 185.43" stroke="none" stroke-width="0" fill="#ffec99"></path><path d="M0 0 C115.65 -1.85, 232.14 -1.4, 364.29 0 M0 0 C137.69 -0.48, 275.55 -0.39, 364.29 0 M364.29 0 C366.39 67.92, 366.65 136.06, 364.29 185.3 M364.29 0 C364.77 61.62, 363.82 121.91, 364.29 185.3 M364.29 185.3 C240.3 186.8, 115.19 185.81, 0 185.3 M364.29 185.3 C241.5 187.44, 118.43 186.65, 0 185.3 M0 185.3 C1.35 124.53, -0.71 61.28, 0 0 M0 185.3 C0.6 126.67, 1.27 67.51, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(285.6461137072288 607.9980336524113) rotate(0 31.164311514690212 43.20054346916368)"><path d="M-0.33 -0.92 L60.6 -1.8 L63.11 85.3 L-0.57 86.01" stroke="none" stroke-width="0" fill="#a5d8ff"></path><path d="M0 0 C21.6 -0.65, 44.22 1.75, 62.33 0 M0 0 C25.2 -0.42, 49.92 -0.69, 62.33 0 M62.33 0 C61.84 32.35, 62.81 64.3, 62.33 86.4 M62.33 0 C63.57 27.83, 61.61 55.33, 62.33 86.4 M62.33 86.4 C44.5 85.96, 30.76 86.01, 0 86.4 M62.33 86.4 C46.39 85.35, 30.98 86.74, 0 86.4 M0 86.4 C0.86 57.52, 1.51 31.85, 0 0 M0 86.4 C1.15 52.28, 0.63 19.61, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(274.04865237322474 596.3271217299589) rotate(0 31.164311514690212 43.20054346916368)"><path d="M-1.73 -1.8 L63.11 -1.11 L61.76 86.01 L-0.68 85.16" stroke="none" stroke-width="0" fill="#a5d8ff"></path><path d="M0 0 C15.03 1.66, 30.73 -0.26, 62.33 0 M0 0 C19.17 -0.42, 38.64 -0.74, 62.33 0 M62.33 0 C63.81 26.03, 62.95 49.6, 62.33 86.4 M62.33 0 C62.23 18.27, 62.88 36.87, 62.33 86.4 M62.33 86.4 C50.18 86.48, 33.22 86.77, 0 86.4 M62.33 86.4 C46.03 86.4, 29.03 85.78, 0 86.4 M0 86.4 C1.09 60.21, 1.39 29.51, 0 0 M0 86.4 C-0.46 54.96, -0.55 23.2, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(263.3557930232737 586.5040719800581) rotate(0 31.164311514690212 43.20054346916368)"><path d="M0.78 -1.11 L61.76 -0.39 L61.65 85.16 L-1.76 86.29" stroke="none" stroke-width="0" fill="#a5d8ff"></path><path d="M0 0 C17.29 -1.01, 30.72 0.24, 62.33 0 M0 0 C16.93 -0.57, 32.43 0.59, 62.33 0 M62.33 0 C63.37 30.6, 61.26 62.06, 62.33 86.4 M62.33 0 C61.19 24.11, 60.76 49.29, 62.33 86.4 M62.33 86.4 C42.67 86.79, 24.17 86.36, 0 86.4 M62.33 86.4 C49.2 86.64, 35.79 87.12, 0 86.4 M0 86.4 C1.11 62.68, 0.64 43.12, 0 0 M0 86.4 C-0.1 66.55, -0.8 46.72, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-opacity="0.9" fill-opacity="0.9" transform="translate(11.453915868890363 574.6729504520645) rotate(0 27.28010755777359 72.24609375)"><text x="0" y="101.83809374999996" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="115.59374999999996px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">[</text></g><g transform="translate(387.73422179092177 574.6729504520645) rotate(0 28.72411346435547 72.24609375)"><text x="0" y="101.83809374999996" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="115.59374999999996px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">]</text></g><g transform="translate(218.2589658843399 585.1807629520645) rotate(0 14.853309631347656 72.24609375)"><text x="0" y="101.83809374999996" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="115.59374999999996px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">,</text></g><g stroke-linecap="round" transform="translate(1637.0521288748355 500.44288926391164) rotate(0 43.94356993890733 51.621968861986716)"><path d="M0.53 1.29 L86.44 -0.29 L86.79 102.5 L2 104.65" stroke="none" stroke-width="0" fill="#b2f2bb"></path><path d="M0 0 C32.72 2.28, 66.08 0.42, 87.89 0 M0 0 C30.12 1.42, 58.31 -0.26, 87.89 0 M87.89 0 C86.36 29.77, 89.74 59.24, 87.89 103.24 M87.89 0 C88 32.67, 89.8 67.03, 87.89 103.24 M87.89 103.24 C54.44 103.88, 20.41 103.24, 0 103.24 M87.89 103.24 C70.79 102.67, 52.77 103.76, 0 103.24 M0 103.24 C-1.62 78.76, -0.09 55.58, 0 0 M0 103.24 C-0.21 78.8, -0.48 53.67, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g transform="translate(1376.8130560364966 485.6940469550136) rotate(0 27.28010755777359 72.24609375)"><text x="0" y="101.83809374999996" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="115.59374999999996px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">[</text></g><g transform="translate(1753.093361958528 485.6940469550136) rotate(0 28.72411346435547 72.24609375)"><text x="0" y="101.83809374999996" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="115.59374999999996px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">]</text></g><g transform="translate(1583.6181060519461 496.2018594550136) rotate(0 14.853309631347656 72.24609375)"><text x="0" y="101.83809374999996" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="115.59374999999996px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">,</text></g><g stroke-linecap="round" transform="translate(602.1505868271811 70.46939089495118) rotate(0 182.14590991745376 92.65147349589961)"><path d="M-0.89 -1.03 L362.68 -0.8 L365.15 183.74 L0.62 184.17" stroke="none" stroke-width="0" fill="#ffec99"></path><path d="M0 0 C95.32 -1.49, 191.83 -2.36, 364.29 0 M0 0 C142.44 0.08, 284.33 0.13, 364.29 0 M364.29 0 C366.57 48.2, 363.79 98.93, 364.29 185.3 M364.29 0 C364.39 37.82, 362.87 75.35, 364.29 185.3 M364.29 185.3 C284.71 183.86, 205.59 182.9, 0 185.3 M364.29 185.3 C237.7 186.26, 111.27 186.39, 0 185.3 M0 185.3 C-3.34 127.11, -1.9 69.73, 0 0 M0 185.3 C1.14 131.34, 0.81 77.43, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(319.4527866399021 31.49396167235318) rotate(0 31.164311514690212 43.20054346916368)"><path d="M-1.61 -0.8 L63.18 -1.56 L62.94 85.27 L-1.75 87.25" stroke="none" stroke-width="0" fill="#a5d8ff"></path><path d="M0 0 C22.94 -1.44, 47.11 1.6, 62.33 0 M0 0 C17.31 0.03, 36.19 0.87, 62.33 0 M62.33 0 C60.7 29.86, 60.74 58.35, 62.33 86.4 M62.33 0 C61.84 25.28, 61.98 50.15, 62.33 86.4 M62.33 86.4 C48.79 86.31, 37.56 88.45, 0 86.4 M62.33 86.4 C42.07 86.69, 19.99 87.42, 0 86.4 M0 86.4 C0.58 64.44, 0.53 43.28, 0 0 M0 86.4 C-0.27 55.37, -0.8 21.88, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(307.8553253058981 19.823049749900747) rotate(0 31.164311514690212 43.20054346916368)"><path d="M0.86 -1.56 L62.94 -1.13 L60.58 87.25 L1.99 87.17" stroke="none" stroke-width="0" fill="#a5d8ff"></path><path d="M0 0 C20.31 2.03, 36.83 0.39, 62.33 0 M0 0 C17.58 0.83, 36.25 0.43, 62.33 0 M62.33 0 C59.54 20.89, 61.33 43.87, 62.33 86.4 M62.33 0 C60.67 26.66, 60.56 53.87, 62.33 86.4 M62.33 86.4 C41.18 87.97, 18.91 86.95, 0 86.4 M62.33 86.4 C43.42 87.55, 23.76 85.8, 0 86.4 M0 86.4 C-0.09 63.16, 1.44 42.31, 0 0 M0 86.4 C-0.52 55.97, -0.88 26.16, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(297.1624659559466 10) rotate(0 31.164311514690212 43.20054346916368)"><path d="M0.62 -1.13 L60.58 0.85 L64.31 87.17 L-1.11 85.23" stroke="none" stroke-width="0" fill="#a5d8ff"></path><path d="M0 0 C14 -0.56, 28.03 -2.39, 62.33 0 M0 0 C18.79 -0.09, 36.23 -1.48, 62.33 0 M62.33 0 C61.35 28.92, 61.77 53.7, 62.33 86.4 M62.33 0 C60.68 25.38, 62.16 51.13, 62.33 86.4 M62.33 86.4 C45.79 87.62, 27.73 88.85, 0 86.4 M62.33 86.4 C41.49 86.26, 21.35 86.98, 0 86.4 M0 86.4 C1.46 64.71, 0.98 41.55, 0 0 M0 86.4 C-0.42 51.63, 0.81 16.88, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g transform="translate(73.16784531829535 37.37238717038963) rotate(0 95.44814558107055 23.28458597427857)"><text x="0" y="32.821952389343046" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="37.25533755884568px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">input_files</text></g><g transform="translate(238.21910677321466 520.4998940410987) rotate(0 64.74764178455973 23.217033945963976)"><text x="0" y="32.726731050230526" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="37.14725431354203px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">files_in</text></g><g transform="translate(98.67294220785652 520.4998940410987) rotate(0 43.257966752539005 23.217033945963976)"><text x="0" y="32.726731050230526" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="37.14725431354203px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">meta</text></g><g transform="translate(1190.260857995277 138.11679749012183) rotate(0 59.68303194655323 23.28458597427857)"><text x="0" y="32.821952389343046" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="37.25533755884568px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">outfile</text></g><g transform="translate(1593.1324430582267 422.4679864124764) rotate(0 84.82573292996994 23.21703394596375)"><text x="0" y="32.726731050230526" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="37.14725431354203px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">${prefix}</text></g><g transform="translate(1460.2670305638853 422.4679864124764) rotate(0 43.257966752539005 23.21703394596375)"><text x="0" y="32.726731050230526" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="37.14725431354203px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">meta</text></g><g transform="translate(641.4574328153053 139.9810192222203) rotate(0 140.66995239257812 22.5)"><text x="0" y="31.716" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="36px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">collectGreetings</text></g><g transform="translate(167.49649280257927 225.85598204199778) rotate(0 106.6806260020901 23.28458597427857)"><text x="0" y="32.821952389343046" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="37.25533755884568px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">batch_name</text></g><g stroke-linecap="round"><g transform="translate(350.48563281167753 166.79479320065366) rotate(270 88.73653421840436 -0.6433072300453659)"><path d="M0 0 C39.13 -1.95, 80.24 -1.16, 177.47 -0.96 M0 0 C51.71 -1.61, 104.56 -1.2, 177.47 -0.96" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(423.0629041713237 237.21684850784732) rotate(270 0.1303700388790503 17.55160304104379)"><path d="M0 0 C0.39 7.22, 0.01 15.27, 0 35.1 M0 0 C0.26 9.37, 0.43 18.8, 0 35.1" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(420.64736148221846 93.68577640870808) rotate(270 -0.15913968304118953 -18.6394679520688)"><path d="M0 0 C-0.4 -12.67, -0.91 -24.78, 0 -37.28 M0 0 C0.32 -13.97, 0.18 -27.07, 0 -37.28" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g transform="translate(1180.6921031482957 523.3089161451362) rotate(0 71.95421031801129 23.217033945963976)"><text x="0" y="32.726731050230526" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="37.14725431354203px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">file_out</text></g><g transform="translate(1179.7837392143688 714.5454368924138) rotate(0 130.86972486195396 23.217033945963976)"><text x="0" y="32.726731050230526" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="37.14725431354203px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">versions (YML)</text></g><g stroke-linecap="round"><g transform="translate(1013.4075709466265 645.5377446093571) rotate(270 91.90500783499715 -0.25956015187057346)"><path d="M0 0 C70.96 -1.58, 144.83 -0.03, 183.81 0 M0 0 C38.86 -0.65, 79.1 0.65, 183.81 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(1131.739279732466 527.0888397403014) rotate(270 0.0817108359597114 23.725738282627844)"><path d="M0.3 0.04 C0.43 7.83, 0.35 39.27, 0.28 47.21 M-0.21 -0.41 C-0.08 7.69, 0.05 39.99, -0.01 47.86" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g transform="translate(1131.739279732466 527.0888397403014) rotate(270 0.0817108359597114 23.725738282627844)"><path d="M-8.09 25.63 C-6.21 30.76, -4.78 34.63, -0.01 47.86 M-8.09 25.63 C-4.75 34.19, -2.49 42.14, -0.01 47.86" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g transform="translate(1131.739279732466 527.0888397403014) rotate(270 0.0817108359597114 23.725738282627844)"><path d="M8.09 25.64 C6.58 30.81, 4.63 34.68, -0.01 47.86 M8.09 25.64 C5.52 34.24, 1.88 42.19, -0.01 47.86" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(1130.2152021221987 714.4806994153514) rotate(270 0.030058432398391233 23.55543405142589)"><path d="M-0.18 -0.23 C-0.27 7.65, -0.28 39.4, -0.16 47.26 M0.73 -0.82 C0.52 7.15, -0.62 39.91, -0.67 47.93" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g transform="translate(1130.2152021221987 714.4806994153514) rotate(270 0.030058432398391233 23.55543405142589)"><path d="M-8.26 25.53 C-5.88 33.52, -2.74 43.04, -0.67 47.93 M-8.26 25.53 C-6.29 30.65, -4.44 36.26, -0.67 47.93" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g transform="translate(1130.2152021221987 714.4806994153514) rotate(270 0.030058432398391233 23.55543405142589)"><path d="M7.92 25.9 C4.33 33.73, 1.49 43.11, -0.67 47.93 M7.92 25.9 C6.16 30.88, 4.3 36.41, -0.67 47.93" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g transform="translate(634.0016398588746 624.6846692020645) rotate(0 152.69796752929688 17.5)"><text x="0" y="24.668" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="28px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">FIND_CONCATENATE</text></g><g stroke-linecap="round" transform="translate(83.7934141633823 600.9267303948345) rotate(0 56.26546153451477 40.16098127890018)"><path d="M0 0 C0 0, 0 0, 0 0 M0 0 C0 0, 0 0, 0 0 M0.27 24.08 C6.77 15.62, 13.89 6.89, 21.26 -0.07 M0.27 24.08 C6.34 17.49, 14.15 8.92, 21.26 -0.07 M-0.12 48.92 C16.01 31.05, 30.71 12.9, 42.52 -0.14 M-0.12 48.92 C15.12 29.71, 32.91 11.02, 42.52 -0.14 M0.14 73 C13.06 55.43, 29.01 42.99, 63.78 -0.21 M0.14 73 C24.74 46.16, 48.13 16.79, 63.78 -0.21 M14.84 80.48 C39.57 56.18, 63.88 28.92, 85.04 -0.28 M14.84 80.48 C40.21 51.4, 66.31 20.76, 85.04 -0.28 M36.1 80.41 C58.67 54.51, 80.04 33.91, 106.3 -0.34 M36.1 80.41 C51.61 62.57, 66.78 44.74, 106.3 -0.34 M57.36 80.34 C79.85 58.16, 100.95 32.68, 112.47 16.94 M57.36 80.34 C77.37 56.82, 98.19 31.31, 112.47 16.94 M78.62 80.27 C88.8 66.42, 102 54.65, 112.74 41.03 M78.62 80.27 C86.51 71.41, 94.76 61.83, 112.74 41.03 M99.88 80.2 C103.93 76.44, 106.87 75.31, 112.35 65.86 M99.88 80.2 C102.22 75.76, 106.07 73.88, 112.35 65.86 M0.23 80.52 C0.23 80.52, 0.23 80.52, 0.23 80.52 M0.23 80.52 C0.23 80.52, 0.23 80.52, 0.23 80.52 M24.31 80.26 C16.43 73.55, 7.44 63.43, 0.16 59.26 M24.31 80.26 C14.47 72.64, 6.17 63.49, 0.16 59.26 M49.15 80.64 C36.33 66.34, 22.24 56.39, 0.09 38 M49.15 80.64 C32.65 66.63, 14.73 51.33, 0.09 38 M73.23 80.38 C57.24 64.83, 39.92 51.92, 0.02 16.74 M73.23 80.38 C49.33 60.47, 26.28 38.79, 0.02 16.74 M97.31 80.11 C75.75 61.07, 58.03 45.28, 4.48 -0.58 M97.31 80.11 C69.98 55.7, 40.51 31.94, 4.48 -0.58 M112.34 71.97 C85.77 48.48, 63.27 29.82, 29.32 -0.19 M112.34 71.97 C83.9 47.41, 54.87 22.78, 29.32 -0.19 M112.27 50.71 C98.45 39.86, 84.64 26.19, 53.4 -0.46 M112.27 50.71 C95.38 36.51, 81.19 23.72, 53.4 -0.46 M112.95 30.11 C101.63 20.63, 90.36 8.94, 78.24 -0.07 M112.95 30.11 C100.1 17.63, 85.58 6.37, 78.24 -0.07 M112.88 8.85 C111.03 6.65, 106.58 4.86, 102.32 -0.34 M112.88 8.85 C109.33 6.51, 106.69 3.66, 102.32 -0.34" stroke="#a5d8ff" stroke-width="2" fill="none"></path><path d="M0 0 C44.55 -0.83, 88.34 -1.08, 112.53 0 M0 0 C42.22 -1.32, 85.17 -1.47, 112.53 0 M112.53 0 C111.1 24.55, 113.87 51.83, 112.53 80.32 M112.53 0 C111.61 26.5, 111.56 54.95, 112.53 80.32 M112.53 80.32 C73.25 82.01, 31.86 78.64, 0 80.32 M112.53 80.32 C76.78 82.28, 40.01 81.96, 0 80.32 M0 80.32 C0.41 62.1, -1.38 42, 0 0 M0 80.32 C0.52 49.09, -0.56 16.95, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round"><g transform="translate(112.13236553707202 600.0776552005882) rotate(0 -0.019350634683974022 39.4131906686589)"><path d="M0 0 C-0.54 15.94, -0.15 30.79, 0 78.83 M0 0 C0 29.53, 0.53 56.86, 0 78.83" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(133.04911374941958 603.852364792634) rotate(0 -0.003334463256919662 39.4131906686589)"><path d="M0 0 C1.02 17.6, -0.98 38.38, 0 78.83 M0 0 C-0.68 19.94, -0.03 39.69, 0 78.83" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(153.2758125323312 599.9438097473521) rotate(0 -0.13637233280871897 39.4131906686589)"><path d="M0 0 C1.03 17.35, -1.79 34.8, 0 78.83 M0 0 C0.31 23.07, 0.57 44.91, 0 78.83" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(174.5729591730519 602.0175795840005) rotate(0 -0.9091576651941295 39.4131906686589)"><path d="M0 0 C-2.4 31.25, -2.45 61.28, 0 78.83 M0 0 C-0.71 21.5, -0.9 44.92, 0 78.83" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(194.48955202377738 618.9700698099932) rotate(0 -55.69687055487816 -0.5193405221880312)"><path d="M0 0 C-21.7 -2.5, -44.89 0.26, -111.39 0 M0 0 C-26.34 -0.38, -52.57 -0.3, -111.39 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(194.73427969754812 630.7200900130974) rotate(0 -55.69687055487816 -0.02607288839362809)"><path d="M0 0 C-23.57 1.83, -48.06 -0.71, -111.39 0 M0 0 C-43.03 -0.61, -85.32 -1.28, -111.39 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(196.5151006353408 644.6560334985061) rotate(0 -55.69687055487816 -0.38471634422467105)"><path d="M0 0 C-35.48 -0.02, -68.13 -1.01, -111.39 0 M0 0 C-26.64 -0.8, -54.33 -1.23, -111.39 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(194.80366233148834 657.8310247655454) rotate(0 -55.69687055487816 -0.33702752771159794)"><path d="M0 0 C-44.08 -2.69, -84.29 -1.26, -111.39 0 M0 0 C-32.36 1.1, -65.74 1.18, -111.39 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(195.0195194148564 670.145295061805) rotate(0 -55.69687055487816 -0.35465530532474077)"><path d="M0 0 C-35.49 0.68, -72.93 -2.14, -111.39 0 M0 0 C-26.76 -1.22, -52.09 -0.68, -111.39 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round" transform="translate(1451.7211689014089 510.2706099707584) rotate(0 56.26546153451477 40.16098127890018)"><path d="M0 0 C0 0, 0 0, 0 0 M0 0 C0 0, 0 0, 0 0 M0.27 24.08 C8.12 13.92, 17.2 6.92, 21.26 -0.07 M0.27 24.08 C4.94 17.98, 12.12 10.82, 21.26 -0.07 M-0.12 48.92 C12.28 31.12, 29.27 16.47, 42.52 -0.14 M-0.12 48.92 C17.46 31.08, 33.39 11.17, 42.52 -0.14 M0.14 73 C23.06 49.13, 43.41 19.82, 63.78 -0.21 M0.14 73 C12.73 57.43, 26.46 43.62, 63.78 -0.21 M14.84 80.48 C41.32 50.82, 70.48 16.75, 85.04 -0.28 M14.84 80.48 C35.78 56.96, 56.19 34.83, 85.04 -0.28 M36.1 80.41 C59.63 51.36, 86.24 20.87, 106.3 -0.34 M36.1 80.41 C58.64 53.18, 80.85 28.96, 106.3 -0.34 M57.36 80.34 C79.31 55.62, 101.03 31.38, 112.47 16.94 M57.36 80.34 C79.09 55.77, 99.23 31.83, 112.47 16.94 M78.62 80.27 C88.41 68.8, 101.87 54.21, 112.74 41.03 M78.62 80.27 C85.98 71.93, 93.47 62.28, 112.74 41.03 M99.88 80.2 C103.4 75.72, 105.34 74.94, 112.35 65.86 M99.88 80.2 C102.88 75.03, 108.02 71.62, 112.35 65.86 M0.23 80.52 C0.23 80.52, 0.23 80.52, 0.23 80.52 M0.23 80.52 C0.23 80.52, 0.23 80.52, 0.23 80.52 M24.31 80.26 C20.56 77, 12.24 68.63, 0.16 59.26 M24.31 80.26 C16.23 73.82, 9.99 67.09, 0.16 59.26 M49.15 80.64 C33.39 66.2, 13.94 50.45, 0.09 38 M49.15 80.64 C32.94 65.75, 17.04 51.74, 0.09 38 M73.23 80.38 C46.46 56.63, 18.56 35.38, 0.02 16.74 M73.23 80.38 C54.75 65.21, 37.89 48.69, 0.02 16.74 M97.31 80.11 C60.7 49.28, 25.05 17.53, 2.22 -2.55 M97.31 80.11 C69.23 55.44, 40.22 30.75, 2.22 -2.55 M116.86 75.91 C95.94 59.09, 74.62 38.4, 26.3 -2.82 M116.86 75.91 C93.81 56.26, 70.21 36.5, 26.3 -2.82 M116.8 54.65 C96.27 38.97, 75.83 17.82, 51.14 -2.43 M116.8 54.65 C100.9 40.24, 84.2 25.79, 51.14 -2.43 M116.73 33.39 C107.79 23.59, 95.65 15.05, 75.22 -2.69 M116.73 33.39 C100.48 20.46, 83.95 4.74, 75.22 -2.69 M116.66 12.13 C109.57 5.82, 105.84 1.86, 100.05 -2.3 M116.66 12.13 C111.24 6.25, 104.66 1.17, 100.05 -2.3" stroke="#a5d8ff" stroke-width="2" fill="none"></path><path d="M0 0 C22.8 -0.83, 46.38 -2.75, 112.53 0 M0 0 C28.63 0.59, 56.56 -0.3, 112.53 0 M112.53 0 C114.87 19.54, 111.36 44.25, 112.53 80.32 M112.53 0 C111.77 22.64, 110.96 47.44, 112.53 80.32 M112.53 80.32 C86.74 81.42, 55.8 79.49, 0 80.32 M112.53 80.32 C76.5 79.48, 41.34 79.71, 0 80.32 M0 80.32 C1.02 58.86, -0.63 36.16, 0 0 M0 80.32 C-0.8 64.01, 0.7 47.17, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round"><g transform="translate(1480.0601202750981 509.4215347765121) rotate(0 -0.2381716994323142 39.413190668658444)"><path d="M0 0 C-0.06 29.83, -1.04 63.99, 0 78.83 M0 0 C-0.76 18.83, -0.38 40.01, 0 78.83" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(1500.9768684874466 513.1962443685579) rotate(0 -0.3460651500849963 39.413190668658444)"><path d="M0 0 C-0.88 25.85, -0.97 49.52, 0 78.83 M0 0 C-0.94 24.46, -0.03 48.64, 0 78.83" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(1521.2035672703582 509.287689323276) rotate(0 -0.319989936817592 39.413190668658444)"><path d="M0 0 C-1.36 17.14, -0.3 32.89, 0 78.83 M0 0 C0.28 17.74, -1.13 32.79, 0 78.83" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(1542.500713911078 511.3614591599244) rotate(0 -0.2571253340856856 39.413190668658444)"><path d="M0 0 C-0.34 26.33, -2.13 54.94, 0 78.83 M0 0 C-0.41 27.6, 1.33 56.78, 0 78.83" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(1562.4173067618044 528.3139493859171) rotate(0 -55.69687055487816 -0.5125869649359629)"><path d="M0 0 C-34.89 -1.54, -65.09 0.29, -111.39 0 M0 0 C-42.86 -1, -88.33 -1.77, -111.39 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(1562.6620344355756 540.0639695890213) rotate(0 -55.69687055487816 -0.3333030738626803)"><path d="M0 0 C-23.9 0.72, -48.37 -2.09, -111.39 0 M0 0 C-25.02 -0.93, -48.49 -0.9, -111.39 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(1564.4428553733683 553.99991307443) rotate(0 -55.69687055487816 -0.002429751295949245)"><path d="M0 0 C-27.59 -1.07, -60.55 2.41, -111.39 0 M0 0 C-32.62 -1.75, -65.95 -0.4, -111.39 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(1562.731417069515 567.1749043414693) rotate(0 -55.69687055487816 -0.42498741716372024)"><path d="M0 0 C-41.31 0.84, -79.48 -2.59, -111.39 0 M0 0 C-24.94 -0.36, -48.61 -0.04, -111.39 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(1562.947274152884 579.4891746377289) rotate(0 -55.69687055487816 0.459454443834602)"><path d="M0 0 C-24.14 -0.65, -49.64 0.8, -111.39 0 M0 0 C-24.94 1.47, -48.79 1.45, -111.39 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(10 362.3725618615181) rotate(0 895.2672532716531 -2.360629580002069)"><path d="M0 0 C629.42 -6.07, 1256.76 -6.52, 1790.53 0" stroke="#1e1e1e" stroke-width="4.5" fill="none" stroke-dasharray="8 12"></path></g></g><mask></mask><g stroke-linecap="round" transform="translate(1346.648626938541 99.3198345246119) rotate(0 43.94356993890733 51.62196886198649)"><path d="M-1.24 -1.46 L88.09 -0.33 L88.62 102.27 L-0.09 102.74" stroke="none" stroke-width="0" fill="#b2f2bb"></path><path d="M0 0 C28.83 1.69, 55.3 1.75, 87.89 0 M0 0 C33.91 0.81, 68.14 0.25, 87.89 0 M87.89 0 C89.36 33.58, 88.46 63.97, 87.89 103.24 M87.89 0 C89.53 26.7, 88.69 55.33, 87.89 103.24 M87.89 103.24 C58.55 105.12, 31.47 103.75, 0 103.24 M87.89 103.24 C54.99 104.08, 19.79 104.17, 0 103.24 M0 103.24 C1.38 71.83, 1.76 39.18, 0 0 M0 103.24 C0.32 76.71, 0.2 50.5, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-opacity="0.8" fill-opacity="0.8" stroke-linecap="round" transform="translate(81.63972104969025 631.1766619481141) rotate(0 55.2197265625 6.34765625)"><path d="M3.17 0 C26.59 2.21, 46.04 0.31, 107.27 0 C107.18 1.87, 110.17 1.21, 110.44 3.17 C111.1 5.44, 110.28 8.42, 110.44 9.52 C110.81 9.8, 110.38 13.33, 107.27 12.7 C66.81 11.28, 28.26 10.98, 3.17 12.7 C-0.94 14.61, -2.06 11.88, 0 9.52 C-0.56 7.61, 0.01 6.69, 0 3.17 C0.5 2.67, -0.04 0.6, 3.17 0" stroke="none" stroke-width="0" fill="#a5d8ff"></path><path d="M3.17 0 C43.67 0.66, 81.85 -0.4, 107.27 0 M3.17 0 C35.96 0.05, 68.68 -0.07, 107.27 0 M107.27 0 C108.53 -0.54, 111.36 0.51, 110.44 3.17 M107.27 0 C108.53 -0.6, 111.19 1.09, 110.44 3.17 M110.44 3.17 C110.5 4.48, 110.59 6.05, 110.44 9.52 M110.44 3.17 C110.55 4.34, 110.42 5.75, 110.44 9.52 M110.44 9.52 C109.91 11.17, 108.8 13.55, 107.27 12.7 M110.44 9.52 C109.8 12.16, 109.02 11.95, 107.27 12.7 M107.27 12.7 C70.7 13.28, 34.58 12.75, 3.17 12.7 M107.27 12.7 C77.38 13.03, 48.49 12.23, 3.17 12.7 M3.17 12.7 C0.92 11.73, -0.62 11.43, 0 9.52 M3.17 12.7 C0.13 13.18, 0 11.13, 0 9.52 M0 9.52 C-0.25 8.08, 0.17 6.34, 0 3.17 M0 9.52 C0.08 7.34, -0.07 5.35, 0 3.17 M0 3.17 C-0.26 1.52, 1.35 -0.62, 3.17 0 M0 3.17 C-0.33 0.44, 1.19 0.15, 3.17 0" stroke="#1971c2" stroke-width="4" fill="none"></path></g><g stroke-opacity="0.8" fill-opacity="0.8" stroke-linecap="round" transform="translate(1454.1514397996903 541.7528338231141) rotate(0 55.2197265625 6.34765625)"><path d="M3.17 0 C32.16 -0.59, 58.66 -2.33, 107.27 0 C111.84 0.58, 110.68 2.37, 110.44 3.17 C110.38 5.63, 110.84 6.69, 110.44 9.52 C112.98 12.46, 111.45 10.47, 107.27 12.7 C79.92 14.04, 47.06 13.97, 3.17 12.7 C0.57 13.26, 2.08 12.03, 0 9.52 C-0.78 8.27, -0.64 6.73, 0 3.17 C-1.36 -0.83, 2.29 -1.82, 3.17 0" stroke="none" stroke-width="0" fill="#a5d8ff"></path><path d="M3.17 0 C24.74 0.09, 47.51 0.26, 107.27 0 M3.17 0 C29.91 -0.65, 56.25 -0.41, 107.27 0 M107.27 0 C108.83 0.46, 110.29 1.79, 110.44 3.17 M107.27 0 C108.47 -1.03, 110.22 0.94, 110.44 3.17 M110.44 3.17 C110.34 5.5, 110.25 7.39, 110.44 9.52 M110.44 3.17 C110.37 4.62, 110.49 6.09, 110.44 9.52 M110.44 9.52 C109.62 11.66, 109.65 12.13, 107.27 12.7 M110.44 9.52 C111.31 11.78, 110.34 13.49, 107.27 12.7 M107.27 12.7 C80.68 12.2, 52.95 12.35, 3.17 12.7 M107.27 12.7 C85.13 12.71, 61.97 12.49, 3.17 12.7 M3.17 12.7 C0.11 12.25, 0.2 12.49, 0 9.52 M3.17 12.7 C1.82 11.79, -0.68 12.34, 0 9.52 M0 9.52 C-0.03 6.74, -0.12 4.25, 0 3.17 M0 9.52 C-0.12 7.45, 0.06 5.62, 0 3.17 M0 3.17 C-0.52 0.48, 1.45 -0.28, 3.17 0 M0 3.17 C-0.46 0.86, 0.81 0.27, 3.17 0" stroke="#1971c2" stroke-width="4" fill="none"></path></g></svg>
 </figure>
 
 <p>Potete vedere che i due moduli hanno requisiti di input simili in termini di contenuto (un insieme di file di input più alcuni metadati) ma aspettative molto diverse per come quel contenuto è confezionato.
@@ -6896,44 +5093,6 @@ window.mkdocsQuizConfig = {
       
         <footer class="md-footer">
   
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Piede" >
-        
-          
-          <a href="../02_rewrite_hello/" class="md-footer__link md-footer__link--prev" aria-label="Precedente: Parte 2: Riscrivere Hello per nf-core">
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-            </div>
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Precedente
-              </span>
-              <div class="md-ellipsis">
-                Parte 2: Riscrivere Hello per nf-core
-              </div>
-            </div>
-          </a>
-        
-        
-          
-          <a href="../04_make_module/" class="md-footer__link md-footer__link--next" aria-label="Successivo: Parte 4: Creare un modulo nf-core">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Successivo
-              </span>
-              <div class="md-ellipsis">
-                Parte 4: Creare un modulo nf-core
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
     
   
   <div class="md-footer-meta md-typeset">
