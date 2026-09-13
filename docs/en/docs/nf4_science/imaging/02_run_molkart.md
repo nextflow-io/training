@@ -331,15 +331,15 @@ You should see several subdirectories:
 
 ```console title="results/"
 results/
-├── anndata/
-├── clahe/
-├── mindagap/
-├── molkartqc/
-├── multiqc/
-├── pipeline_info/
-├── segmentation/
-├── spot2cell/
-└── stack/
+├── anndata
+├── clahe
+├── mindagap
+├── molkartqc
+├── multiqc
+├── pipeline_info
+├── segmentation
+├── spot2cell
+└── stack
 ```
 
 Each subdirectory contains outputs from a specific stage of the pipeline:
@@ -402,17 +402,17 @@ Check the pipeline_info directory:
 ls results/pipeline_info/
 ```
 
-Key files:
+Key files (each name ends with a timestamp, e.g. `execution_report_2026-01-15_10-30-00.html`):
 
-- **execution_report.html**: Timeline and resource usage visualization
-- **execution_timeline.html**: Gantt chart of process execution
-- **execution_trace.txt**: Detailed task execution metrics
-- **pipeline_dag.html**: Directed acyclic graph showing workflow structure
+- **execution_report\_\*.html**: Timeline and resource usage visualization
+- **execution_timeline\_\*.html**: Gantt chart of process execution
+- **execution_trace\_\*.txt**: Detailed task execution metrics
+- **pipeline_dag\_\*.html**: Directed acyclic graph showing workflow structure
 
 Open the execution report to see resource usage:
 
 ```bash
-code results/pipeline_info/execution_report.html
+code results/pipeline_info/execution_report_*.html
 ```
 
 This shows:
@@ -454,10 +454,10 @@ This shows the first 5 task directories.
 
 ### 4.2. Inspect a task directory
 
-Pick one of the segmentation process hashes from the console output (e.g., `[3m/4n5o6p]`) and look inside:
+Pick one of the segmentation process hashes from the console output (e.g., `[3a/4b5c6d]`) and look inside:
 
 ```bash
-ls -la work/3m/4n5o6p*/
+ls -la work/3a/4b5c6d*/
 ```
 
 You'll see:
