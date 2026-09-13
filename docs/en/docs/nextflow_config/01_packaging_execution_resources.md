@@ -89,16 +89,16 @@ This produces the same output as running with Docker, even though the mechanics 
 
     Building a new Conda environment can take a bit longer than pulling a container the first time around, but the package used here is small so it should be quick.
 
-??? info "Mixing and matching Docker and Conda"
-
-    Because these directives are set per process, you can mix and match: some processes use Docker, others use Conda, depending on what's available for each tool.
-    If both a `container` and a `conda` directive are set for a process and both packaging systems are enabled, Nextflow prioritizes containers.
-
 Now switch back to Docker for the rest of this course.
 
 ```groovy title="nextflow.config" linenums="1"
 docker.enabled = true
 ```
+
+??? tip "Mixing and matching Docker and Conda"
+
+    Because these directives are set per process, you can mix and match: some processes use Docker, others use Conda, depending on what's available for each tool.
+    If both a `container` and a `conda` directive are set for a process and both packaging systems are enabled, Nextflow prioritizes containers.
 
 ### Takeaway
 
@@ -176,9 +176,47 @@ The same request for 8 CPUs and 4 GB of RAM on a queue called `my-science-work` 
 
 Nextflow abstracts all of this away: you specify standardized properties such as `cpus`, `memory`, and `queue` once (see [process directives](https://nextflow.io/docs/latest/reference/process.html#process-directives) for the full list), and Nextflow translates them into the appropriate backend-specific scripts at runtime.
 
+### 2.3. See what Nextflow actually runs
+
+That translation isn't just a config-file convenience: it's backed by something concrete you can inspect right now, even with the local executor.
+In [Nextflow Run, section 1.3](../nextflow_run/01_run_nextflow.md#13-explore-the-work-directory), you looked inside a task directory under `work/` and found `.command.sh`, the exact command Nextflow ran.
+That same directory also contains a file you didn't look at yet: `.command.run`.
+
+```bash
+cat work/0a/0df4a1*/.command.run
+```
+
+??? success "Command output (excerpt)"
+
+    ```console
+    #!/bin/bash
+    ### ---
+    ### name: 'convertToUpper (3)'
+    ### container: 'null'
+    ### outputs:
+    ### - 'UPPER-Bonjour-output.txt'
+    ### ...
+    set -e
+    set -u
+    ...
+    nxf_launch() {
+        /bin/bash -ue /workspaces/training/nextflow-run/work/0a/0df4a1028c2001758b1841cff92fc7/.command.sh
+    }
+    ...
+    ```
+
+`.command.run` is the real script Nextflow hands off for execution.
+It wraps `.command.sh` with everything needed to actually run it: environment setup, input/output staging, and reporting the result back to Nextflow.
+With the `local` executor, Nextflow simply runs this script on the same machine.
+
+This is exactly what changes when you set a different `executor`.
+For an HPC scheduler such as Slurm or PBS, Nextflow generates that same kind of wrapper script, adds the scheduler-specific header you saw in [2.2](#22-backend-specific-syntax-is-abstracted-away) (translated from your `cpus`, `memory`, and `queue` settings), and hands the result to that scheduler's own submission command, for example `sbatch` for Slurm.
+From there, Nextflow polls the scheduler for job status instead of watching a local process directly.
+Cloud batch backends work a little differently, since they're driven by API calls rather than a submission command, but the same underlying idea applies: the same task script runs, only how it gets launched and tracked changes.
+
 ### Takeaway
 
-You know how to change the executor to target different compute infrastructure, and that Nextflow abstracts away backend-specific submission syntax.
+You know how to change the executor to target different compute infrastructure, that Nextflow abstracts away backend-specific submission syntax, and what actually happens behind the scenes when a task runs on a different backend.
 
 ### What's next?
 
