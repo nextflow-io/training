@@ -27,7 +27,7 @@ Caratteristiche chiave delle pipeline nf-core:
 
 !!! tip "Desidera saperne di più su nf-core?"
 
-    Per un'introduzione approfondita allo sviluppo di pipeline nf-core, consulti il corso di formazione [Build with nf-core](../../hello_nf-core/index.md).
+    Per un'introduzione approfondita allo sviluppo di pipeline nf-core, consulta il corso di formazione [Build with nf-core](../../nfcore_build/index.md).
     Copre come creare e personalizzare pipeline nf-core da zero.
 
 ### 1.2. La pipeline molkart
@@ -317,31 +317,31 @@ Imparate dove trovare i risultati e come interpretarli.
 
 ## 3. Trovare ed esaminare gli output
 
-Quando la pipeline viene completata con successo, vedrà un messaggio di completamento e un riepilogo dell'esecuzione.
+Quando la pipeline viene completata con successo, vedrete un messaggio di completamento e un riepilogo dell'esecuzione.
 
 ### 3.1. Localizzare la directory dei risultati
 
 Per impostazione predefinita, le pipeline nf-core scrivono gli output in una directory specificata dal parametro `outdir`, che abbiamo impostato su `results/`.
 
-Elenchi i contenuti:
+Elencate i contenuti:
 
 ```bash
 tree results/
 ```
 
-Dovrebbe vedere diverse subdirectory:
+Dovreste vedere diverse subdirectory:
 
 ```console title="results/"
 results/
-├── anndata/
-├── clahe/
-├── mindagap/
-├── molkartqc/
-├── multiqc/
-├── pipeline_info/
-├── segmentation/
-├── spot2cell/
-└── stack/
+├── anndata
+├── clahe
+├── mindagap
+├── molkartqc
+├── multiqc
+├── pipeline_info
+├── segmentation
+├── spot2cell
+└── stack
 ```
 
 Ogni subdirectory contiene output da una fase specifica della pipeline:
@@ -377,49 +377,49 @@ Il report include:
 ### 3.3. Esaminare le tabelle cellula-per-trascritto
 
 L'output scientifico più importante è la tabella di conteggio cellula-per-trascritto.
-Questa Le dice quanti trascritti di ciascun tipo sono stati rilevati in ogni cellula.
+Questa vi dice quanti trascritti di ciascun tipo sono stati rilevati in ogni cellula.
 
-Navighi alla directory spot2cell:
+Navigate alla directory spot2cell:
 
 ```bash
 ls results/spot2cell/
 ```
 
-Troverà file come:
+Troverete file come:
 
 - `cellxgene_mem_only_cellpose.csv`: Tabella cellula-per-trascritto usando la segmentazione Cellpose
 - `cellxgene_mem_only_mesmer.csv`: Tabella cellula-per-trascritto usando la segmentazione Mesmer
 - `cellxgene_mem_only_stardist.csv`: Tabella cellula-per-trascritto usando la segmentazione Stardist
 
 Abbiamo eseguito solo 1 campione in questo dataset di test, ma in un esperimento reale avremmo queste tabelle per ogni campione.
-Noti come Nextflow è in grado di elaborare più metodi di segmentazione in parallelo, rendendo facile confrontare i risultati.
+Notate come Nextflow sia in grado di elaborare più metodi di segmentazione in parallelo, rendendo facile confrontare i risultati.
 
 ### 3.4. Visualizzare i report di esecuzione
 
 Nextflow genera automaticamente diversi report di esecuzione.
 
-Verifichi la directory pipeline_info:
+Verificate la directory pipeline_info:
 
 ```bash
 ls results/pipeline_info/
 ```
 
-File chiave:
+File chiave (il nome di ciascuno termina con un timestamp, ad es. `execution_report_2026-01-15_10-30-00.html`):
 
-- **execution_report.html**: Timeline e visualizzazione dell'utilizzo delle risorse
-- **execution_timeline.html**: Diagramma di Gantt dell'esecuzione dei process
-- **execution_trace.txt**: Metriche dettagliate dell'esecuzione delle attività
-- **pipeline_dag.html**: Grafico aciclico diretto che mostra la struttura del workflow
+- **execution_report\_\*.html**: Timeline e visualizzazione dell'utilizzo delle risorse
+- **execution_timeline\_\*.html**: Diagramma di Gantt dell'esecuzione dei processi
+- **execution_trace\_\*.txt**: Metriche dettagliate dell'esecuzione delle attività
+- **pipeline_dag\_\*.html**: Grafico aciclico diretto che mostra la struttura del flusso di lavoro
 
 Aprite il report di esecuzione per vedere l'utilizzo delle risorse:
 
 ```bash
-code results/pipeline_info/execution_report.html
+code results/pipeline_info/execution_report_*.html
 ```
 
 Questo mostra:
 
-- Quanto tempo ha impiegato ogni process
+- Quanto tempo ha impiegato ogni processo
 - Utilizzo di CPU e memoria
 - Quali attività sono state memorizzate nella cache vs. eseguite
 
@@ -429,11 +429,11 @@ Questo mostra:
 
 ### Takeaway
 
-Sa come localizzare gli output della pipeline, esaminare i report di controllo qualità e accedere alle metriche di esecuzione.
+Sapete come localizzare gli output della pipeline, esaminare i report di controllo qualità e accedere alle metriche di esecuzione.
 
-### Prossimi passi
+### Cosa c'è dopo?
 
-Impari sulla directory di lavoro e come Nextflow gestisce i file intermedi.
+Scoprite come funziona la directory di lavoro e come Nextflow gestisce i file intermedi.
 
 ---
 
@@ -456,10 +456,10 @@ Questo mostra le prime 5 directory di attività.
 
 ### 4.2. Ispezionare una directory di attività
 
-Scegliete uno degli hash dei process di segmentazione dall'output della console (es., `[3m/4n5o6p]`) e guardate all'interno:
+Scegliete uno degli hash dei process di segmentazione dall'output della console (es., `[3a/4b5c6d]`) e guardate all'interno:
 
 ```bash
-ls -la work/3m/4n5o6p*/
+ls -la work/3a/4b5c6d*/
 ```
 
 Vedrete:

@@ -1,16 +1,3 @@
-Looking at the diff, I need to update:
-
-1. Two links from `../hello_nextflow/` to `../../hello_nextflow/index.md`
-2. Multiple image paths from `img/` to `../img/`
-3. A code block removing the `publishDir` line
-4. A search example changing from `publishDir` to `container`
-5. Two links at the end changing paths
-6. The "Before" tab removing the `publishDir` line
-
-Let me apply only these targeted changes to the existing French translation:
-
-%%%
-
 # Environnement de développement
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
@@ -633,11 +620,10 @@ Nous ne nous attendons pas à ce que vous vous souveniez de tout, mais maintenan
 Appliquez ces compétences IDE en travaillant sur d'autres modules de formation, par exemple :
 
 - **[nf-test](../nf_test/index.md)** : Créez des suites de tests complètes pour vos workflows
-- **[Build with nf-core](../../hello_nf-core/index.md)** : Construisez des pipelines de qualité production avec les standards de la communauté
+- **[Build with nf-core](../../nfcore_build/index.md)** : Construisez des pipelines de qualité production avec les standards de la communauté
 
 La véritable puissance de ces fonctionnalités IDE se révèle lorsque vous travaillez sur des projets plus grands et plus complexes. Commencez à les intégrer progressivement dans votre workflow — en quelques sessions, elles deviendront une seconde nature et transformeront votre approche du développement Nextflow.
 
 De la détection des erreurs avant qu'elles ne vous ralentissent à la navigation aisée dans des bases de code complexes, ces outils feront de vous un·e développeur·se plus confiant·e et plus efficace.
 
 Bon codage !
-%%%

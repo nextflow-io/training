@@ -41,7 +41,6 @@ Recomendamos usar la opción de autoinstalación para Nextflow y la opción de P
 
 !!! warning "Compatibilidad de versiones"
 
-    <!-- Cualquier actualización de este contenido debe copiarse a la página principal -->
     **A partir de enero de 2026, todos nuestros cursos de entrenamiento de Nextflow requieren la versión 25.10.2 o posterior de Nextflow, con la sintaxis estricta v2 activada, a menos que se indique lo contrario.**
 
     Para más información sobre los requisitos de versión y la sintaxis estricta v2, consulte la guía de [versiones de Nextflow](../info/nxf_versions.md).

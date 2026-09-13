@@ -8,39 +8,26 @@
 
 ## Su recorrido
 
-Comenzó con un workflow muy básico, y aprendió a ejecutarlo, encontrar las salidas y gestionar su ejecución.
-Luego, trabajó a través de versiones cada vez más complejas de ese workflow y aprendió a reconocer los conceptos y mecanismos esenciales que impulsan los pipelines de Nextflow, incluyendo channels y operadores, modularización de código y contenedores.
-Finalmente, aprendió cómo personalizar la configuración de un pipeline para adaptarlo a sus preferencias y su infraestructura computacional.
-
-### Lo que aprendió
-
-Ahora puede gestionar la ejecución del pipeline Hello, describir cómo está estructurado e identificar las piezas principales de código involucradas.
-
-- La forma final del workflow Hello toma como entrada un archivo CSV que contiene saludos de texto.
-- Los cuatro pasos están implementados como processes de Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` y `cowpy`) almacenados en archivos de módulos separados.
-- Los resultados se publican en un directorio llamado `results/`.
-- La salida final del pipeline es un archivo de texto plano que contiene arte ASCII de un personaje diciendo los saludos en mayúsculas.
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
-</figure>
-
-1. **`sayHello`:** Escribe cada saludo en su propio archivo de salida (_ej._ "Hello-output.txt")
-2. **`convertToUpper`:** Convierte cada saludo a mayúsculas (_ej._ "HELLO")
-3. **`collectGreetings`:** Recolecta todos los saludos en mayúsculas en un único archivo de lote
-4. **`cowpy`:** Genera arte ASCII usando la herramienta `cowpy`
-
-La configuración del workflow soporta proporcionar entradas y parámetros de manera flexible y reproducible.
+Comenzó con un workflow muy básico, y aprendió a ejecutarlo y encontrar sus salidas.
+Luego, ejecutó versiones progresivamente más realistas de ese pipeline: procesando múltiples entradas desde un archivo CSV en paralelo, usando `-resume` para omitir el trabajo completado, y usando contenedores para gestionar el software del que depende un pipeline.
+Después, aprendió cómo personalizar la configuración de un pipeline usando `nextflow.config` y perfiles, y cómo controlar dónde y cómo se publican sus salidas.
+A continuación, aprendió cómo generar reportes de ejecución, inspeccionar el historial de ejecuciones anteriores y limpiar directorios de trabajo antiguos.
+Finalmente, aprendió cómo ejecutar pipelines directamente desde repositorios remotos como GitHub.
 
 ### Habilidades adquiridas
 
 A través de este curso práctico, ha aprendido cómo:
 
-- Lanzar un workflow de Nextflow localmente
-- Encontrar e interpretar salidas (resultados) y archivos de registro generados por Nextflow
-- Reconocer los componentes principales de Nextflow que constituyen un workflow simple de múltiples pasos
-- Describir conceptos del siguiente nivel como operadores y fábricas de channels
-- Configurar pipelines para diferentes entornos de cómputo
+- Lanzar un workflow de Nextflow localmente y encontrar sus salidas
+- Ejecutar un pipeline de múltiples pasos que procesa múltiples entradas en paralelo
+- Usar `-resume` para evitar repetir el trabajo completado
+- Usar contenedores para gestionar las dependencias de software
+- Configurar pipelines usando `nextflow.config` y perfiles
+- Personalizar dónde y cómo se publican las salidas
+- Generar un reporte de ejecución HTML con `-with-report` y una línea de tiempo de ejecución con `-with-timeline`
+- Inspeccionar el historial de ejecuciones anteriores con `nextflow log`
+- Limpiar directorios de trabajo antiguos con `nextflow clean`
+- Ejecutar un pipeline directamente desde un repositorio remoto, y fijarlo a una revisión específica (y desfijarlo nuevamente) para garantizar la reproducibilidad
 
 Ahora está equipado con el conocimiento fundamental para comenzar a integrar pipelines de Nextflow existentes en su propio trabajo.
 
@@ -48,12 +35,11 @@ Ahora está equipado con el conocimiento fundamental para comenzar a integrar pi
 
 Aquí están nuestras principales sugerencias de qué hacer a continuación:
 
-- ¡No solo ejecute Nextflow, escríbalo! Conviértase en un desarrollador de Nextflow con [Hello Nextflow](../hello_nextflow/index.md)
-- Aplique Nextflow a un caso de uso de análisis científico con [Nextflow for Science](../nf4_science/index.md)
-- Comience con nf-core con [Build with nf-core](../hello_nf-core/index.md)
-- Aprenda técnicas de solución de problemas con el [Debugging Side Quest](../side_quests/debugging/index.md)
+- Profundice en la configuración de pipelines con [Execution Config](../execution_config/index.md)
+- Aprenda a ejecutar pipelines de la comunidad nf-core con [Use nf-core](../nfcore_use/index.md)
+- Lance y monitoree pipelines a escala con [Scale with Seqera](../seqera_scale/index.md)
 
-Finalmente, le recomendamos que eche un vistazo a [**Seqera Platform**](https://seqera.io/), una plataforma basada en la nube desarrollada por los creadores de Nextflow que hace aún más fácil lanzar y gestionar sus workflows, así como gestionar sus datos y ejecutar análisis interactivamente en cualquier entorno.
+O, si está listo para dejar de solo ejecutar Nextflow y comenzar a escribirlo, conviértase en un desarrollador de Nextflow con [Hello Nextflow](../hello_nextflow/index.md).
 
 ## Obtener ayuda
 

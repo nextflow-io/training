@@ -41,7 +41,6 @@ Nous recommandons d'utiliser l'option d'auto-installation pour Nextflow et l'opt
 
 !!! warning "Compatibilité des versions"
 
-    <!-- Any update to this content needs to be copied to the home page -->
     **Depuis janvier 2026, tous nos cours de formation Nextflow nécessitent Nextflow version 25.10.2 ou ultérieure, avec la syntaxe stricte v2 activée, sauf indication contraire.**
 
     Pour plus d'informations sur les exigences de version et la syntaxe stricte v2, veuillez consulter le guide [Versions de Nextflow](../info/nxf_versions.md).

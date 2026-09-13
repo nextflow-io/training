@@ -27,7 +27,7 @@ Hauptmerkmale von nf-core-Pipelines:
 
 !!! tip "Möchtest du mehr über nf-core erfahren?"
 
-    Für eine ausführliche Einführung in die Entwicklung von nf-core-Pipelines sieh dir den Kurs [Build with nf-core](../../hello_nf-core/index.md) an.
+    Für eine ausführliche Einführung in die Entwicklung von nf-core-Pipelines sieh dir den Kurs [Build with nf-core](../../nfcore_build/index.md) an.
     Er behandelt, wie man nf-core-Pipelines von Grund auf erstellt und anpasst.
 
 ### 1.2. Die molkart-Pipeline
@@ -333,15 +333,15 @@ Du solltest mehrere Unterverzeichnisse sehen:
 
 ```console title="results/"
 results/
-├── anndata/
-├── clahe/
-├── mindagap/
-├── molkartqc/
-├── multiqc/
-├── pipeline_info/
-├── segmentation/
-├── spot2cell/
-└── stack/
+├── anndata
+├── clahe
+├── mindagap
+├── molkartqc
+├── multiqc
+├── pipeline_info
+├── segmentation
+├── spot2cell
+└── stack
 ```
 
 Jedes Unterverzeichnis enthält Ausgaben aus einer bestimmten Phase der Pipeline:
@@ -404,17 +404,17 @@ Nextflow generiert automatisch mehrere Ausführungsberichte.
 ls results/pipeline_info/
 ```
 
-Wichtige Dateien:
+Wichtige Dateien (jeder Name endet mit einem Zeitstempel, z. B. `execution_report_2026-01-15_10-30-00.html`):
 
-- **execution_report.html**: Zeitachse und Ressourcennutzungsvisualisierung
-- **execution_timeline.html**: Gantt-Diagramm der Prozessausführung
-- **execution_trace.txt**: Detaillierte Aufgabenausführungsmetriken
-- **pipeline_dag.html**: Gerichteter azyklischer Graph, der die Workflow-Struktur zeigt
+- **execution_report\_\*.html**: Zeitachse und Ressourcennutzungsvisualisierung
+- **execution_timeline\_\*.html**: Gantt-Diagramm der Prozessausführung
+- **execution_trace\_\*.txt**: Detaillierte Aufgabenausführungsmetriken
+- **pipeline_dag\_\*.html**: Gerichteter azyklischer Graph, der die Workflow-Struktur zeigt
 
 Öffne den Ausführungsbericht, um die Ressourcennutzung zu sehen:
 
 ```bash
-code results/pipeline_info/execution_report.html
+code results/pipeline_info/execution_report_*.html
 ```
 
 Dies zeigt:
@@ -431,7 +431,7 @@ Dies zeigt:
 
 Du weißt, wie man Pipeline-Ausgaben findet, Qualitätskontrollberichte untersucht und auf Ausführungsmetriken zugreift.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne über das Work-Verzeichnis und wie Nextflow Zwischendateien verwaltet.
 
@@ -456,10 +456,10 @@ Dies zeigt die ersten 5 Aufgabenverzeichnisse.
 
 ### 4.2. Ein Aufgabenverzeichnis inspizieren
 
-Wähle einen der Segmentierungsprozess-Hashes aus der Konsolenausgabe (z.B. `[3m/4n5o6p]`) und schau hinein:
+Wähle einen der Segmentierungsprozess-Hashes aus der Konsolenausgabe (z.B. `[3a/4b5c6d]`) und schau hinein:
 
 ```bash
-ls -la work/3m/4n5o6p*/
+ls -la work/3a/4b5c6d*/
 ```
 
 Du wirst sehen:

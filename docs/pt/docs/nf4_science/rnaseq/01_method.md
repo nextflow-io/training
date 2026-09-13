@@ -40,7 +40,7 @@ Essas ferramentas não estão instaladas no ambiente GitHub Codespaces, então v
 
 !!! tip "Dica"
 
-     Certifique-se de estar no diretório `nf4-science/rnaseq`. A última parte do caminho mostrada quando você digita `pwd` deve ser `rnaseq`.
+    Certifique-se de estar no diretório `nf4-science/rnaseq`. A última parte do caminho mostrada quando você digita `pwd` deve ser `rnaseq`.
 
 ---
 

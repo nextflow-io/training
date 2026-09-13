@@ -110,8 +110,8 @@ Cada estágio se concentra em um aspecto específico do desenvolvimento de fluxo
 
 !!! tip "Dica"
 
-     Certifique-se de estar no diretório de trabalho correto:
-     `cd /workspaces/training/nf4-science/genomics`
+    Certifique-se de estar no diretório de trabalho correto:
+    `cd /workspaces/training/nf4-science/genomics`
 
 ---
 
@@ -404,10 +404,10 @@ nextflow run genomics.nf -profile test
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `genomics.nf` [reverent_sinoussi] revision: 41d43ad7fe
+    Launching `genomics.nf` [elegant_ochoa] revision: fd242ec7cf
 
     executor >  local (1)
-    [2a/e69536] SAMTOOLS_INDEX (1) | 1 of 1 ✔
+    [ad/b2c9bf] SAMTOOLS_INDEX (1) | 1 of 1 ✔
 
     Outputs:
 
@@ -422,7 +422,7 @@ Você pode verificar se o arquivo de índice foi gerado corretamente olhando no 
 ??? abstract "Conteúdo do diretório work"
 
     ```console
-    work/2a/e695367b2f60df09cf826b07192dc3
+    work/ad/b2c9bf4af404ef7cf63e0aa3887f65
     ├── reads_mother.bam -> /workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
     └── reads_mother.bam.bai
     ```
@@ -778,11 +778,11 @@ nextflow run genomics.nf -profile test -resume
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `genomics.nf` [grave_volta] revision: 4790abc96a
+    Launching `genomics.nf` [amazing_stonebraker] revision: 3dc6f69336
 
     executor >  local (1)
-    [2a/e69536] SAMTOOLS_INDEX (1)       | 1 of 1, cached: 1 ✔
-    [53/e18e98] GATK_HAPLOTYPECALLER (1) | 1 of 1 ✔
+    [ad/b2c9bf] SAMTOOLS_INDEX (1)       | 1 of 1, cached: 1 ✔
+    [12/2f009f] GATK_HAPLOTYPECALLER (1) | 1 of 1 ✔
 
     Outputs:
 
@@ -913,11 +913,11 @@ Coisa engraçada: isso _pode funcionar_, OU _pode falhar_. Por exemplo, aqui est
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `genomics.nf` [peaceful_yalow] revision: a256d113ad
+    Launching `genomics.nf` [pensive_noyce] revision: 6c424c0674
 
     executor >  local (6)
-    [4f/7071b0] SAMTOOLS_INDEX (3)       | 3 of 3, cached: 1 ✔
-    [7a/89bc43] GATK_HAPLOTYPECALLER (2) | 3 of 3, cached: 1 ✔
+    [f9/ccfefd] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
+    [dc/b63c4b] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
 
     Outputs:
 
@@ -929,14 +929,14 @@ Coisa engraçada: isso _pode funcionar_, OU _pode falhar_. Por exemplo, aqui est
         - bam/reads_son.bam.bai
 
       vcf:
+        - vcf/reads_son.bam.vcf
         - vcf/reads_mother.bam.vcf
         - vcf/reads_father.bam.vcf
-        - vcf/reads_son.bam.vcf
 
       vcf_idx:
+        - vcf/reads_son.bam.vcf.idx
         - vcf/reads_mother.bam.vcf.idx
         - vcf/reads_father.bam.vcf.idx
-        - vcf/reads_son.bam.vcf.idx
     ```
 
 Se a execução do seu fluxo de trabalho teve sucesso, execute-o novamente até obter um erro como este:
@@ -946,19 +946,19 @@ Se a execução do seu fluxo de trabalho teve sucesso, execute-o novamente até 
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `genomics.nf` [loving_pasteur] revision: d2a8e63076
+    Launching `genomics.nf` [wise_cray] revision: 6c424c0674
 
     executor >  local (4)
-    [01/eea165] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 1 ✔
-    [a5/fa9fd0] GATK_HAPLOTYPECALLER (3) | 1 of 3, cached: 1
-    ERROR ~ Error executing process > 'GATK_HAPLOTYPECALLER (2)'
+    [3e/565553] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 1 ✔
+    [fb/7d64e0] GATK_HAPLOTYPECALLER (2) | 1 of 3, cached: 1 ✘
+    ERROR ~ Error executing process > 'GATK_HAPLOTYPECALLER (3)'
 
     Caused by:
-      Process `GATK_HAPLOTYPECALLER (2)` terminated with an error exit status (2)
+      Process `GATK_HAPLOTYPECALLER (3)` terminated with an error exit status (2)
 
     Command executed:
 
-      gatk HaplotypeCaller         -R ref.fasta         -I reads_father.bam         -O reads_father.bam.vcf         -L intervals.bed
+      gatk HaplotypeCaller         -R ref.fasta         -I reads_son.bam         -O reads_son.bam.vcf         -L intervals.bed
 
     Command exit status:
       2
@@ -988,9 +988,9 @@ Dê uma olhada dentro do diretório work para a chamada do processo `GATK_HAPLOT
 ??? abstract "Conteúdo do diretório"
 
     ```console
-    work/a5/fa9fd0994b6beede5fb9ea073596c2
+    work/3f/e775e3104e279ca5f292bf7b652f3e
     ├── intervals.bed -> /workspaces/training/nf4-science/genomics/data/ref/intervals.bed
-    ├── reads_father.bam.bai -> /workspaces/training/nf4-science/genomics/work/01/eea16597bd6e810fb4cf89e60f8c2d/reads_father.bam.bai
+    ├── reads_father.bam.bai -> /workspaces/training/nf4-science/genomics/work/3e/565553bc8010ce09098c9444851c21/reads_father.bam.bai
     ├── reads_son.bam -> /workspaces/training/nf4-science/genomics/data/bam/reads_son.bam
     ├── reads_son.bam.vcf
     ├── reads_son.bam.vcf.idx
@@ -1041,9 +1041,9 @@ Mais uma vez, isso pode ter sucesso ou falhar. Aqui está como fica a saída das
 /workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
 /workspaces/training/nf4-science/genomics/data/bam/reads_father.bam
 /workspaces/training/nf4-science/genomics/data/bam/reads_son.bam
-/workspaces/training/nf4-science/genomics/work/9c/53492e3518447b75363e1cd951be4b/reads_father.bam.bai
-/workspaces/training/nf4-science/genomics/work/cc/37894fffdf6cc84c3b0b47f9b536b7/reads_son.bam.bai
-/workspaces/training/nf4-science/genomics/work/4d/dff681a3d137ba7d9866e3d9307bd0/reads_mother.bam.bai
+/workspaces/training/nf4-science/genomics/work/4d/8e12c356480c490e6e59c85e2abaa8/reads_son.bam.bai
+/workspaces/training/nf4-science/genomics/work/d6/fd0227cfd683b47126429029ecad65/reads_father.bam.bai
+/workspaces/training/nf4-science/genomics/work/74/9ed94e4fbe4566ea61082e2f2df55a/reads_mother.bam.bai
 ```
 
 As três primeiras linhas correspondem ao canal de entrada e a segunda, ao canal de saída.
@@ -1205,30 +1205,30 @@ Desta vez (e todas as vezes) tudo deve executar corretamente:
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `genomics.nf` [special_goldstine] revision: 4cbbf6ea3e
+    Launching `genomics.nf` [furious_hirsch] revision: 4f0b37c75a
 
     executor >  local (6)
-    [d6/10c2c4] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
-    [88/1783aa] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
+    [39/6efc23] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
+    [de/b3744f] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/nf4-science/genomics/results
 
       indexed_bam:
-        - [bam/reads_mother.bam, bam/reads_mother.bam.bai]
-        - [bam/reads_father.bam, bam/reads_father.bam.bai]
         - [bam/reads_son.bam, bam/reads_son.bam.bai]
+        - [bam/reads_father.bam, bam/reads_father.bam.bai]
+        - [bam/reads_mother.bam, bam/reads_mother.bam.bai]
 
       vcf:
         - vcf/reads_mother.bam.vcf
-        - vcf/reads_father.bam.vcf
         - vcf/reads_son.bam.vcf
+        - vcf/reads_father.bam.vcf
 
       vcf_idx:
         - vcf/reads_mother.bam.vcf.idx
-        - vcf/reads_father.bam.vcf.idx
         - vcf/reads_son.bam.vcf.idx
+        - vcf/reads_father.bam.vcf.idx
     ```
 
 O diretório results agora contém tanto os arquivos BAM quanto BAI para cada amostra (da tupla), junto com as saídas VCF:
@@ -1387,30 +1387,30 @@ nextflow run genomics.nf -profile test
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `genomics.nf` [sick_albattani] revision: 46d84642f6
+    Launching `genomics.nf` [spontaneous_descartes] revision: aa5d4a64f3
 
     executor >  local (6)
-    [18/23b4bb] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
-    [12/f727bb] GATK_HAPLOTYPECALLER (3) | 3 of 3 ✔
+    [f4/553469] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
+    [89/83e197] GATK_HAPLOTYPECALLER (1) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/nf4-science/genomics/results
 
       indexed_bam:
-        - [bam/reads_mother.bam, bam/reads_mother.bam.bai]
         - [bam/reads_father.bam, bam/reads_father.bam.bai]
+        - [bam/reads_mother.bam, bam/reads_mother.bam.bai]
         - [bam/reads_son.bam, bam/reads_son.bam.bai]
 
       vcf:
+        - vcf/reads_son.bam.vcf
         - vcf/reads_mother.bam.vcf
         - vcf/reads_father.bam.vcf
-        - vcf/reads_son.bam.vcf
 
       vcf_idx:
+        - vcf/reads_son.bam.vcf.idx
         - vcf/reads_mother.bam.vcf.idx
         - vcf/reads_father.bam.vcf.idx
-        - vcf/reads_son.bam.vcf.idx
     ```
 
 Isso deve produzir o mesmo resultado de antes. Nosso fluxo de trabalho simples de chamada de variantes agora tem todos os recursos básicos que queríamos.

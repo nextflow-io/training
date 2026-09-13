@@ -1048,7 +1048,7 @@ Hola,Spanish,789
 --8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-multi-inputs-csv.svg"
 </figure>
 
-이를 구현하는 방법을 살펴봅시다.
+이를 구현하는 방법을 살펴봅니다.
 
 ### 4.1. CSV 파일을 인사말 소스로 기대하도록 스크립트 수정
 
@@ -1154,7 +1154,7 @@ nextflow run hello-channels.nf
 
     Launching `hello-channels.nf` [peaceful_poisson] revision: a286c08ad5
 
-    [-        ] sayHello [  0%] 0 of 1
+    [-        ] sayHello | 0 of 1
     Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv
     ERROR ~ Error executing process > 'sayHello (1)'
 
@@ -1314,7 +1314,7 @@ nextflow run hello-channels.nf
 
 이것은 'channel의 각 행에 대해 포함된 0번째(첫 번째) 항목을 가져오라'는 의미입니다.
 
-이것을 CSV 파싱에 적용해 봅시다.
+이것을 CSV 파싱에 적용해 봅니다.
 
 #### 4.3.1. Channel에 `map()` 적용
 

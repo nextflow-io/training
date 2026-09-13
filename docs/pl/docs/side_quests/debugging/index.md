@@ -262,7 +262,7 @@ nextflow run bad_syntax.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_syntax.nf` [small_morse] revision: 961938ee2b
+    Launching `bad_syntax.nf` [small_morse] revision: 27352249e7
 
     executor >  local (3)
     [f5/dd6f46] PROCESS_FILES (1) | 3 of 3 ✔
@@ -405,7 +405,7 @@ nextflow run invalid_process.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `invalid_process.nf` [confident_banach] revision: 961938ee2b
+    Launching `invalid_process.nf` [confident_banach] revision: 74483e75bc
 
     executor >  local (3)
     [29/87d6b8] PROCESS_FILES (1) | 3 of 3 ✔
@@ -546,7 +546,7 @@ nextflow run no_such_var.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `no_such_var.nf` [suspicious_venter] revision: 6ba490f7c5
+    Launching `no_such_var.nf` [suspicious_venter] revision: 229f1da893
 
     executor >  local (3)
     [26/b4370c] PROCESS_FILES (3) | 3 of 3 ✔
@@ -666,7 +666,7 @@ nextflow run bad_bash_var.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_bash_var.nf` [naughty_franklin] revision: 58c1c83709
+    Launching `bad_bash_var.nf` [naughty_franklin] revision: 9c672c6a1b
 
     executor >  local (3)
     [cf/19a490] PROCESS_FILES (3) | 3 of 3 ✔
@@ -824,7 +824,7 @@ nextflow run badpractice_syntax.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `badpractice_syntax.nf` [naughty_ochoa] revision: 5e4b291bde
+    Launching `badpractice_syntax.nf` [naughty_ochoa] revision: 92d029754c
 
     executor >  local (3)
     [f0/350ff4] PROCESS_FILES (2) | 3 of 3 ✔
@@ -1124,7 +1124,7 @@ Takie podejście może nie być odpowiednie we wszystkich sytuacjach.
 
 #### Uruchom pipeline
 
-Wypróbuj jedną z powyższych poprawek i uruchom workflow ponownie:
+Wypróbuj jedną z powyższych poprawek i uruchom workflow ponownie (poniższe wyjście pochodzi z opcji 1a):
 
 ```bash
 nextflow run exhausted.nf
@@ -1135,7 +1135,7 @@ nextflow run exhausted.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `exhausted.nf` [maniac_leavitt] revision: f372a56a7d
+    Launching `exhausted.nf` [maniac_leavitt] revision: 74571a002a
 
     executor >  local (3)
     [d9/886888] PROCESS_FILES (2) | 3 of 3 ✔
@@ -1320,7 +1320,7 @@ Aby to naprawić, jeśli proces wymaga obu wejść, możemy dostosować go do pr
 
 #### Uruchom pipeline
 
-Wybierz jedno z rozwiązań i uruchom workflow ponownie:
+Wybierz jedno z rozwiązań i uruchom workflow ponownie (poniższe wyjście pochodzi z opcji 1):
 
 ```bash
 nextflow run bad_channel_shape.nf
@@ -1331,7 +1331,7 @@ nextflow run bad_channel_shape.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_channel_shape.nf` [clever_thompson] revision: 8cbcae3746
+    Launching `bad_channel_shape.nf` [clever_thompson] revision: 9b60aec7be
 
     executor >  local (3)
     [81/d0f3ea] PROCESS_FILES (1) | 3 of 3 ✔
@@ -1569,7 +1569,7 @@ nextflow run missing_output.nf
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `missing_output.nf` [elated_hamilton] revision: 961938ee2b
+    Launching `missing_output.nf` [elated_hamilton] revision: d7ad486bce
 
     executor >  local (3)
     [70/6d4479] PROCESS_FILES (1) | 3 of 3 ✔
@@ -1782,7 +1782,7 @@ nextflow run bad_resources.nf -profile docker
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `bad_resources.nf` [friendly_mcclintock] revision: 381567d2c1
+    Launching `bad_resources.nf` [friendly_mcclintock] revision: 4304ffa21c
 
     executor >  local (3)
     [96/b70b83] PROCESS_FILES (3) | 3 of 3 ✔

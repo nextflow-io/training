@@ -1,10 +1,6 @@
----
-
 # Entorn de Desenvolupament
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
-
-
 
 Els Entorns de Desenvolupament Integrats (IDE) moderns poden transformar radicalment la vostra experiència de desenvolupament amb Nextflow. Aquesta missió secundària se centra específicament en aprofitar VS Code i la seva extensió de Nextflow per escriure codi més ràpidament, detectar errors d'hora i navegar per workflows complexos de manera eficient.
 
@@ -624,7 +620,7 @@ No esperem que recordeu tot, però ara que sabeu que existeixen aquestes funcion
 Apliqueu aquestes habilitats de l'IDE mentre treballeu en altres mòduls de formació, per exemple:
 
 - **[nf-test](../nf_test/index.md)**: Creeu suites de proves exhaustives per als vostres workflows
-- **[Build with nf-core](../../hello_nf-core/index.md)**: Construïu pipelines de qualitat de producció amb estàndards de la comunitat
+- **[Build with nf-core](../../nfcore_build/index.md)**: Desenvolupeu pipelines de qualitat de producció amb estàndards de la comunitat
 
 El veritable poder d'aquestes funcionalitats de l'IDE emergeix quan treballeu en projectes més grans i complexos. Comenceu a incorporar-les al vostre flux de treball gradualment: en poques sessions, es tornaran una segona naturalesa i transformaran la manera com abordeu el desenvolupament amb Nextflow.
 

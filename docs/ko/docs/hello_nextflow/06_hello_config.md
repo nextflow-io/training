@@ -1608,7 +1608,7 @@ Nextflow를 사용하면 설정 파일 자체를 수정하지 않고도 명령�
 
 Nextflow 명령줄에서 프로필을 지정하려면 `-profile` 인자를 사용합니다.
 
-`my_laptop` 설정으로 워크플로우를 실행해 보겠습니다.
+`my_laptop` 설정으로 워크플로우를 실행합니다.
 
 ```bash
 nextflow run hello-config.nf -profile my_laptop
@@ -1708,7 +1708,7 @@ profiles {
 동일한 설정 요소에 대한 값을 설정하고 동일한 설정 파일에 설명된 프로필을 결합하면 Nextflow는 마지막으로 읽은 값(_즉_ 파일에서 나중에 오는 것)을 사용하여 충돌을 해결합니다.
 충돌하는 설정이 다른 설정 소스에 설정된 경우 기본 [우선순위](https://nextflow.io/docs/latest/config.html)가 적용됩니다.
 
-이전 명령에 테스트 프로필을 추가해 보겠습니다:
+이전 명령에 테스트 프로필을 추가합니다:
 
 ```bash
 nextflow run hello-config.nf -profile my_laptop,test
@@ -1806,33 +1806,33 @@ nextflow config
 
     ```groovy
     params {
-      input = 'data/greetings.csv'
-      batch = 'batch'
-      character = 'turkey'
+       input = 'data/greetings.csv'
+       batch = 'batch'
+       character = 'turkey'
     }
 
     docker {
-      enabled = false
+       enabled = false
     }
 
     conda {
-      enabled = true
+       enabled = true
     }
 
     process {
-      memory = '1 GB'
-      withName:cowpy {
+       memory = '1 GB'
+       withName:cowpy {
           memory = '2 GB'
           cpus = 2
-      }
+       }
     }
 
     outputDir = 'custom-outdir-config/'
 
     workflow {
-      output {
+       output {
           mode = 'copy'
-      }
+       }
     }
     ```
 
@@ -1850,34 +1850,34 @@ nextflow config -profile my_laptop,test
 
     ```groovy
     params {
-      input = 'data/greetings.csv'
-      batch = 'test'
-      character = 'dragonandcow'
+       input = 'data/greetings.csv'
+       batch = 'test'
+       character = 'dragonandcow'
     }
 
     docker {
-      enabled = true
+       enabled = true
     }
 
     conda {
-      enabled = true
+       enabled = true
     }
 
     process {
-      memory = '1 GB'
-      withName:cowpy {
+       memory = '1 GB'
+       withName:cowpy {
           memory = '2 GB'
           cpus = 2
-      }
-      executor = 'local'
+       }
+       executor = 'local'
     }
 
     outputDir = 'custom-outdir-config/'
 
     workflow {
-      output {
+       output {
           mode = 'copy'
-      }
+       }
     }
     ```
 

@@ -27,7 +27,7 @@ Kluczowe cechy pipeline'ów nf-core:
 
 !!! tip "Chcesz dowiedzieć się więcej o nf-core?"
 
-    Aby zapoznać się ze szczegółowym wprowadzeniem do tworzenia pipeline'ów nf-core, sprawdź kurs szkoleniowy [Build with nf-core](../../hello_nf-core/index.md).
+    Aby zapoznać się ze szczegółowym wprowadzeniem do tworzenia pipeline'ów nf-core, sprawdź kurs szkoleniowy [Build with nf-core](../../nfcore_build/index.md).
     Obejmuje on tworzenie i dostosowywanie pipeline'ów nf-core od podstaw.
 
 ### 1.2. Pipeline molkart
@@ -333,15 +333,15 @@ Powinieneś zobaczyć kilka podkatalogów:
 
 ```console title="results/"
 results/
-├── anndata/
-├── clahe/
-├── mindagap/
-├── molkartqc/
-├── multiqc/
-├── pipeline_info/
-├── segmentation/
-├── spot2cell/
-└── stack/
+├── anndata
+├── clahe
+├── mindagap
+├── molkartqc
+├── multiqc
+├── pipeline_info
+├── segmentation
+├── spot2cell
+└── stack
 ```
 
 Każdy podkatalog zawiera wyniki z określonego etapu pipeline'u:
@@ -404,17 +404,17 @@ Sprawdź katalog pipeline_info:
 ls results/pipeline_info/
 ```
 
-Kluczowe pliki:
+Kluczowe pliki (każda nazwa kończy się znacznikiem czasu, np. `execution_report_2026-01-15_10-30-00.html`):
 
-- **execution_report.html**: Oś czasu i wizualizacja użycia zasobów
-- **execution_timeline.html**: Wykres Gantta wykonania procesu
-- **execution_trace.txt**: Szczegółowe metryki wykonania zadań
-- **pipeline_dag.html**: Skierowany graf acykliczny pokazujący strukturę workflow'u
+- **execution_report\_\*.html**: Oś czasu i wizualizacja użycia zasobów
+- **execution_timeline\_\*.html**: Wykres Gantta wykonania procesu
+- **execution_trace\_\*.txt**: Szczegółowe metryki wykonania zadań
+- **pipeline_dag\_\*.html**: Skierowany graf acykliczny pokazujący strukturę workflow'u
 
 Otwórz raport wykonania, aby zobaczyć użycie zasobów:
 
 ```bash
-code results/pipeline_info/execution_report.html
+code results/pipeline_info/execution_report_*.html
 ```
 
 Pokazuje on:
@@ -456,10 +456,10 @@ To pokazuje pierwsze 5 katalogów zadań.
 
 ### 4.2. Inspekcja katalogu zadania
 
-Wybierz jeden z hashy procesu segmentacji z wyjścia konsoli (np. `[3m/4n5o6p]`) i zajrzyj do środka:
+Wybierz jeden z hashy procesu segmentacji z wyjścia konsoli (np. `[3a/4b5c6d]`) i zajrzyj do środka:
 
 ```bash
-ls -la work/3m/4n5o6p*/
+ls -la work/3a/4b5c6d*/
 ```
 
 Zobaczysz:

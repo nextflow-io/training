@@ -1069,7 +1069,7 @@ Haga la siguiente edición a la declaración del parámetro:
 
     ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
-    * Parámetros del pipeline
+    * Pipeline parameters
     */
     params {
         input: Path = 'data/greetings.csv'
@@ -1080,7 +1080,7 @@ Haga la siguiente edición a la declaración del parámetro:
 
     ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
-     * Parámetros del pipeline
+     * Pipeline parameters
      */
     params {
         input: String = 'Hola mundo!'
@@ -1137,7 +1137,7 @@ En el bloque workflow, haga el siguiente cambio de código:
     }
     ```
 
-Notará que cambiamos la entrada del channel de nuevo a `param.input`, y eliminamos la declaración `greetings_array` ya que ya no la necesitaremos.
+Notará que cambiamos la entrada del canal de nuevo a `param.input`, y eliminamos la declaración `greetings_array` ya que ya no la necesitaremos.
 También hemos comentado el `flatten()` y la segunda declaración `view()`.
 
 #### 4.1.3. Ejecutar el workflow
@@ -1155,7 +1155,7 @@ nextflow run hello-channels.nf
 
     Launching `hello-channels.nf` [peaceful_poisson] revision: a286c08ad5
 
-    [-        ] sayHello [  0%] 0 of 1
+    [-        ] sayHello | 0 of 1
     Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv
     ERROR ~ Error executing process > 'sayHello (1)'
 
@@ -1188,7 +1188,7 @@ Esto puede parecer un poco familiar.
 Parece que Nextflow intentó ejecutar una única llamada de proceso usando la ruta del archivo mismo como un valor de cadena.
 Así que ha resuelto la ruta del archivo correctamente, pero en realidad no analizó su contenido, que es lo que queríamos.
 
-¿Cómo hacemos que Nextflow abra el archivo y cargue su contenido en el channel?
+¿Cómo hacemos que Nextflow abra el archivo y cargue su contenido en el canal?
 
 ¡Parece que necesitamos otro [operador](https://nextflow.io/docs/latest/reference/operator.html)!
 
@@ -1196,7 +1196,7 @@ Así que ha resuelto la ruta del archivo correctamente, pero en realidad no anal
 
 Revisando la lista de operadores nuevamente, encontramos [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv), que está diseñado para analizar y dividir texto con formato CSV.
 
-#### 4.2.1. Aplicar `splitCsv()` al channel
+#### 4.2.1. Aplicar `splitCsv()` al canal
 
 Para aplicar el operador, lo agregamos a la línea de la channel factory como anteriormente.
 
@@ -1289,7 +1289,7 @@ nextflow run hello-channels.nf
     ```
 
 Interesantemente, esto también falla, pero con un error diferente.
-Esta vez Nextflow ha analizado el contenido del archivo (¡yay!) pero ha cargado cada fila como un array, y cada array es un elemento en el channel.
+Esta vez Nextflow ha analizado el contenido del archivo (¡yay!) pero ha cargado cada fila como un array, y cada array es un elemento en el canal.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-channels-split-fail.svg"
@@ -1298,13 +1298,13 @@ Esta vez Nextflow ha analizado el contenido del archivo (¡yay!) pero ha cargado
 Necesitamos decirle que solo tome la primera columna en cada fila.
 Entonces, ¿cómo desempacamos esto?
 
-Anteriormente usamos `flatten()` para desempacar el contenido de un channel, pero eso no funcionaría aquí porque flatten desempaca _todo_ (siéntase libre de probarlo si quiere verlo por sí mismo).
+Anteriormente usamos `flatten()` para desempacar el contenido de un canal, pero eso no funcionaría aquí porque flatten desempaca _todo_ (siéntase libre de probarlo si quiere verlo por sí mismo).
 
 En cambio, usaremos otro operador llamado `map()` que es realmente útil y aparece mucho en los pipelines de Nextflow.
 
 ### 4.3. Usar el operador `map()` para extraer los saludos
 
-El operador [`map()`](https://nextflow.io/docs/latest/reference/operator.html#map) es una pequeña herramienta muy práctica que nos permite hacer todo tipo de mapeos al contenido de un channel.
+El operador [`map()`](https://nextflow.io/docs/latest/reference/operator.html#map) es una pequeña herramienta muy práctica que nos permite hacer todo tipo de mapeos al contenido de un canal.
 
 En este caso, vamos a usarlo para extraer ese único elemento que queremos de cada fila en nuestro archivo de datos.
 Así es como se ve la sintaxis:
@@ -1313,11 +1313,11 @@ Así es como se ve la sintaxis:
 .map { row -> row[0] }
 ```
 
-Esto significa 'para cada fila en el channel, tomar el elemento 0 (primero) que contiene'.
+Esto significa 'para cada fila en el canal, tomar el elemento 0 (primero) que contiene'.
 
 Así que apliquemos eso a nuestro análisis CSV.
 
-#### 4.3.1. Aplicar `map()` al channel
+#### 4.3.1. Aplicar `map()` al canal
 
 En el bloque workflow, haga el siguiente cambio de código:
 
@@ -1402,9 +1402,9 @@ Esta vez debería ejecutarse sin error.
 
 Mirando la salida de las declaraciones `view()`, verá lo siguiente:
 
-- Una única declaración `Before splitCsv:`: en ese punto el channel contiene un elemento, la ruta original del archivo.
+- Una única declaración `Before splitCsv:`: en ese punto el canal contiene un elemento, la ruta original del archivo.
 - Tres declaraciones `After splitCsv:` separadas: una para cada saludo, pero cada una está contenida dentro de un array que corresponde a esa línea en el archivo.
-- Tres declaraciones `After map:` separadas: una para cada saludo, que ahora son elementos individuales en el channel.
+- Tres declaraciones `After map:` separadas: una para cada saludo, que ahora son elementos individuales en el canal.
 
 _Note que las líneas pueden aparecer en un orden diferente en su salida._
 
@@ -1414,15 +1414,15 @@ _Note que las líneas pueden aparecer en un orden diferente en su salida._
 
 También puede mirar los archivos de salida para verificar que cada saludo fue correctamente extraído y procesado a través del workflow.
 
-Hemos logrado el mismo resultado que antes, pero ahora tenemos mucha más flexibilidad para agregar más elementos al channel de saludos que queremos procesar modificando un archivo de entrada, sin modificar ningún código.
+Hemos logrado el mismo resultado que antes, pero ahora tenemos mucha más flexibilidad para agregar más elementos al canal de saludos que queremos procesar modificando un archivo de entrada, sin modificar ningún código.
 Aprenderá enfoques más sofisticados para manejar entradas complejas en una capacitación posterior.
 
 ### Conclusión
 
-Sabe cómo usar el constructor de channel `.fromPath()` y los operadores `splitCsv()` y `map()` para leer un archivo de valores de entrada y manejarlos apropiadamente.
+Sabe cómo usar el constructor de canal `.fromPath()` y los operadores `splitCsv()` y `map()` para leer un archivo de valores de entrada y manejarlos apropiadamente.
 
 Más generalmente, tiene una comprensión básica de cómo Nextflow usa **channels** para gestionar entradas a procesos y **operadores** para transformar su contenido.
-También ha visto cómo los channels manejan la ejecución paralela implícitamente.
+También ha visto cómo los canales manejan la ejecución paralela implícitamente.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-channels-parallel.svg"

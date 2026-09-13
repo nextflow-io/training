@@ -28,31 +28,38 @@ additional_information:
 
 **Les Quêtes secondaires sont des mini-cours de formation autonomes qui approfondissent des sujets Nextflow spécifiques.**
 
-Chaque quête secondaire peut être suivie indépendamment, dans n'importe quel ordre, selon vos intérêts et vos besoins.
+Chaque quête secondaire peut être suivie indépendamment, dans n'importe quel ordre, pour développer vos compétences dans les domaines qui comptent le plus pour vos propres projets.
+Ensemble, elles couvrent les compétences nécessaires pour passer de pipelines simples à des workflows prêts pour la production.
 
 <!-- additional_information -->
 
-## Aperçu du cours
+### Parcourir par thème
 
-Si c'est la première fois que vous explorez les Quêtes secondaires, commencez par la page [Orientation](./orientation.md) pour un aperçu de l'environnement de formation et des supports.
+Si c'est la première fois que vous suivez l'une de nos formations, commencez par la page [Premiers pas](./orientation.md) pour un aperçu de l'environnement de formation et des supports.
+Sinon, n'hésitez pas à plonger directement dans la quête qui vous attire.
 
-### Quêtes secondaires
-
-| Quête secondaire                                                        | Résumé                                                                                         | Durée estimée |
-| ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ------------- |
-| [Environnement de développement](./dev_environment/index.md)            | Configurer un environnement de développement Nextflow local et productif                       | 45 min        |
-| [Modèles de script essentiels](./essential_scripting_patterns/index.md) | Techniques de script avancées pour les défis courants des workflows                            | 90 min        |
-| [Traitement des fichiers en entrée](./working_with_files/index.md)      | Gestion des fichiers, opérations sur les chemins et organisation des sorties                   | 45 min        |
-| [Métadonnées et meta maps](./metadata/index.md)                         | Utiliser des maps de métadonnées pour suivre et propager les informations sur les échantillons | 45 min        |
-| [Division et regroupement](./splitting_and_grouping/index.md)           | Techniques de division et de regroupement des canaux de données                                | 45 min        |
-| [Tests avec nf-test](./nf_test/index.md)                                | Écrire et exécuter des tests pour les workflows Nextflow                                       | 1 heure       |
-| [Débogage des workflows](./debugging/index.md)                          | Identifier et corriger les erreurs courantes dans les workflows                                | 1 heure       |
-| [Workflows de workflows](./workflows_of_workflows/index.md)             | Composer des pipelines complexes à partir de modules de workflow nommés et réutilisables       | 30 min        |
-| [Développement de plugins](./plugin_development/index.md)               | Utiliser et créer des plugins Nextflow                                                         | 3 heures      |
+<table>
+<thead>
+<tr><th>Quête secondaire</th><th>Résumé</th><th>Durée estimée</th></tr>
+</thead>
+<tbody>
+<tr><th colspan="3">Outils et astuces pour développeur·ses</th></tr>
+<tr><td><a href="./dev_environment/">Environnement de développement</a></td><td>Configurer un environnement de développement Nextflow local et productif</td><td>45 min</td></tr>
+<tr><td><a href="./debugging/">Débogage des workflows</a></td><td>Identifier et corriger les erreurs courantes dans les workflows</td><td>1 heure</td></tr>
+<tr><td><a href="./essential_scripting_patterns/">Modèles de script essentiels</a></td><td>Techniques de script avancées pour les défis courants des workflows</td><td>90 min</td></tr>
+<tr><th colspan="3">Plongée en profondeur dans le dataflow</th></tr>
+<tr><td><a href="./working_with_files/">Traitement des fichiers en entrée</a></td><td>Gestion des fichiers, opérations sur les chemins et organisation des sorties</td><td>45 min</td></tr>
+<tr><td><a href="./metadata/">Métadonnées et meta maps</a></td><td>Utiliser des maps de métadonnées pour suivre et propager les informations sur les échantillons</td><td>45 min</td></tr>
+<tr><td><a href="./splitting_and_grouping/">Division et regroupement</a></td><td>Techniques de division et de regroupement des canaux de données</td><td>45 min</td></tr>
+<tr><th colspan="3">Architecture modulaire en pratique</th></tr>
+<tr><td><a href="./workflows_of_workflows/">Workflows de workflows</a></td><td>Composer des pipelines complexes à partir de modules de workflow nommés et réutilisables</td><td>30 min</td></tr>
+<tr><th colspan="3">L'univers étendu de Nextflow</th></tr>
+<tr><td><a href="./nf_test/">Tests avec nf-test</a></td><td>Écrire et exécuter des tests pour les workflows Nextflow</td><td>1 heure</td></tr>
+<tr><td><a href="./plugin_development/">Développement de plugins</a></td><td>Utiliser et créer des plugins Nextflow</td><td>3 heures</td></tr>
+</tbody>
+</table>
 
 [Commencer :material-arrow-right:](orientation.md){ .md-button .md-button--primary }
 
 <!-- Clearfix for float -->
 <div style="content: ''; clear: both; display: table;"></div>
-
-Faites-nous savoir quels autres sujets vous aimeriez voir couverts ici en publiant dans la [section Formation](https://community.seqera.io/c/training/) du forum communautaire.

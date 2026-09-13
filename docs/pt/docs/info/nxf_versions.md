@@ -78,7 +78,7 @@ Para **desabilitar** o analisador de sintaxe v2 para sua sessão atual, execute 
 export NXF_SYNTAX_PARSER=v1
 ```
 
-<!-- Será possível desabilitá-lo em versões após 26.04? -->
+<!-- Will it be possible to disable it in versions after 26.04? -->
 
 ### Migrando código existente
 
@@ -96,13 +96,3 @@ Consulte a referência CLI para [`lint`](https://www.nextflow.io/docs/latest/ref
 
 Esperamos que isso seja útil.
 Se você precisar de ajuda, entre em contato no Slack ou no fórum.
-
----
-
-<div markdown class="homepage_logos">
-
-![Seqera](../assets/img/seqera_logo.png#only-light)
-
-![Seqera](../assets/img/seqera_logo_dark.png#only-dark)
-
-</div>

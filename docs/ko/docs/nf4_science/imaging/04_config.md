@@ -135,7 +135,7 @@ executor >  local (1)
 [43/e03702] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2, cached: 2 ✔
 [2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2, cached: 2 ✔
 ...
-[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 3 of 3, cached: 3 ✔
+[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 1 of 1, cached: 1 ✔
 [ef/d7b294] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
 -[nf-core/molkart] Pipeline completed successfully-
 ```
@@ -176,8 +176,8 @@ params {
 
 process {
     resourceLimits = [
-        cpus: 4,
-        memory: '15.GB',
+        cpus: 1,
+        memory: '4.GB',
         time: '1.h'
     ]
 }
@@ -299,7 +299,7 @@ process {
     memory = { 6.GB   * task.attempt }
     time   = { 4.h    * task.attempt }
 
-    errorStrategy = { task.exitStatus in ((130..145) + 104) ? 'retry' : 'finish' }
+    errorStrategy = { task.exitStatus in ((130..145) + 104 + 175) ? 'retry' : 'finish' }
     maxRetries    = 1
     maxErrors     = '-1'
 
@@ -449,5 +449,5 @@ profiles {
 
 - 피드백을 제공하기 위해 과정 설문조사를 작성하십시오
 - 워크플로우 개발에 대해 더 자세히 알아보려면 [Hello Nextflow](../../hello_nextflow/index.md)를 확인하십시오
-- nf-core 도구에 대해 더 깊이 이해하려면 [Build with nf-core](../../hello_nf-core/index.md)를 살펴보십시오
-- [교육 컬렉션](../../training_collections/index.md)에서 다른 과정을 찾아보십시오
+- nf-core 도구에 대해 더 깊이 이해하려면 [Build with nf-core](../../nfcore_build/index.md)를 살펴보십시오
+- [Side Quests](../../side_quests/index.md)에서 더 심화된 주제를 살펴보십시오

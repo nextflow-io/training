@@ -243,7 +243,7 @@ Pipeline complete! 👋
 Obserwator działa.
 Za każdym razem, gdy zadanie się kończy, Nextflow wywołuje `onProcessComplete`, a nasza implementacja wyświetla komunikat.
 
-??? exercise "Ćwiczenie"
+??? exercise "Dostosuj komunikat"
 
     Spróbuj zmienić komunikat w `onProcessComplete` na własny, przebuduj i uruchom ponownie.
     Potwierdza to, że pełny cykl edycja–budowanie–uruchomienie działa dla obserwatorów.
@@ -311,7 +311,7 @@ nextflow run greet.nf -ansi-log false
 
     ```console
     N E X T F L O W  ~  version 26.04.4
-    Launching `greet.nf` [pensive_engelbart] - revision: 85fefd90d0
+    Launching `greet.nf` [pensive_engelbart] - revision: bef1bea9f0
     Pipeline is starting! 🚀
     Reversed: olleH
     Reversed: ruojnoB

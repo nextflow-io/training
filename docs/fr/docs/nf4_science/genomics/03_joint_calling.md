@@ -53,8 +53,8 @@ Cela automatise les étapes de la deuxième section de la [Partie 1 : Aperçu de
 
 !!! tip "Astuce"
 
-     Assurez-vous d'être dans le bon répertoire de travail :
-     `cd /workspaces/training/nf4-science/genomics`
+    Assurez-vous d'être dans le bon répertoire de travail :
+    `cd /workspaces/training/nf4-science/genomics`
 
 ---
 
@@ -209,30 +209,30 @@ nextflow run genomics.nf -profile test
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `genomics.nf` [nostalgic_franklin] revision: f2c0a93c6a
+    Launching `genomics.nf` [crazy_solvay] revision: 1fa50d94ef
 
     executor >  local (6)
-    [cc/fbc705] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
-    [27/0d7eb9] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
+    [9f/c67a60] SAMTOOLS_INDEX (2)       | 3 of 3 ✔
+    [47/a20c52] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
 
     Outputs:
 
       /workspaces/training/nf4-science/genomics/results
 
       indexed_bam:
+        - [indexed_bam/reads_son.bam, indexed_bam/reads_son.bam.bai]
         - [indexed_bam/reads_mother.bam, indexed_bam/reads_mother.bam.bai]
         - [indexed_bam/reads_father.bam, indexed_bam/reads_father.bam.bai]
-        - [indexed_bam/reads_son.bam, indexed_bam/reads_son.bam.bai]
 
       gvcf:
-        - gvcf/reads_mother.bam.g.vcf
-        - gvcf/reads_father.bam.g.vcf
         - gvcf/reads_son.bam.g.vcf
+        - gvcf/reads_father.bam.g.vcf
+        - gvcf/reads_mother.bam.g.vcf
 
       gvcf_idx:
-        - gvcf/reads_mother.bam.g.vcf.idx
-        - gvcf/reads_father.bam.g.vcf.idx
         - gvcf/reads_son.bam.g.vcf.idx
+        - gvcf/reads_father.bam.g.vcf.idx
+        - gvcf/reads_mother.bam.g.vcf.idx
     ```
 
 La sortie Nextflow semble identique à celle d'avant, mais les fichiers `.g.vcf` et leurs fichiers d'index sont maintenant organisés dans des sous-répertoires.
@@ -242,19 +242,19 @@ La sortie Nextflow semble identique à celle d'avant, mais les fichiers `.g.vcf`
     ```console
     results/
     ├── gvcf/
-    │   ├── reads_father.bam.g.vcf -> */27/0d7eb9*/reads_father.bam.g.vcf
-    │   ├── reads_father.bam.g.vcf.idx -> */27/0d7eb9*/reads_father.bam.g.vcf.idx
-    │   ├── reads_mother.bam.g.vcf -> */e4/4ed55e*/reads_mother.bam.g.vcf
-    │   ├── reads_mother.bam.g.vcf.idx -> */e4/4ed55e*/reads_mother.bam.g.vcf.idx
-    │   ├── reads_son.bam.g.vcf -> */08/e95962*/reads_son.bam.g.vcf
-    │   └── reads_son.bam.g.vcf.idx -> */08/e95962*/reads_son.bam.g.vcf.idx
+    │   ├── reads_father.bam.g.vcf -> */0d/e1b164*/reads_father.bam.g.vcf
+    │   ├── reads_father.bam.g.vcf.idx -> */0d/e1b164*/reads_father.bam.g.vcf.idx
+    │   ├── reads_mother.bam.g.vcf -> */47/a20c52*/reads_mother.bam.g.vcf
+    │   ├── reads_mother.bam.g.vcf.idx -> */47/a20c52*/reads_mother.bam.g.vcf.idx
+    │   ├── reads_son.bam.g.vcf -> */a6/d2a73e*/reads_son.bam.g.vcf
+    │   └── reads_son.bam.g.vcf.idx -> */a6/d2a73e*/reads_son.bam.g.vcf.idx
     └── indexed_bam/
-        ├── reads_father.bam -> */9a/c7a873*/reads_father.bam
-        ├── reads_father.bam.bai -> */9a/c7a873*/reads_father.bam.bai
-        ├── reads_mother.bam -> */f1/8d8486*/reads_mother.bam
-        ├── reads_mother.bam.bai -> */f1/8d8486*/reads_mother.bam.bai
-        ├── reads_son.bam -> */cc/fbc705*/reads_son.bam
-        └── reads_son.bam.bai -> */cc/fbc705*/reads_son.bam.bai
+        ├── reads_father.bam -> */9f/c67a60*/reads_father.bam
+        ├── reads_father.bam.bai -> */9f/c67a60*/reads_father.bam.bai
+        ├── reads_mother.bam -> */bb/13a815*/reads_mother.bam
+        ├── reads_mother.bam.bai -> */bb/13a815*/reads_mother.bam.bai
+        ├── reads_son.bam -> */b3/27e144*/reads_son.bam
+        └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
     ```
 
 Si vous ouvrez l'un des fichiers GVCF et que vous le parcourez, vous pouvez vérifier que GATK HaplotypeCaller a produit des fichiers GVCF comme demandé.
@@ -670,30 +670,30 @@ nextflow run genomics.nf -profile test -resume
     ```console
      N E X T F L O W   ~  version 26.04.4
 
-    Launching `genomics.nf` [crazy_marconi] revision: 5da9afc841
+    Launching `genomics.nf` [maniac_shaw] revision: 7c1f77a8bc
 
     executor >  local (1)
-    [9a/c7a873] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 3 ✔
-    [e4/4ed55e] GATK_HAPLOTYPECALLER (2) | 3 of 3, cached: 3 ✔
-    [a6/7cc8ed] GATK_JOINTGENOTYPING     | 1 of 1 ✔
+    [9f/c67a60] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 3 ✔
+    [a6/d2a73e] GATK_HAPLOTYPECALLER (1) | 3 of 3, cached: 3 ✔
+    [2a/6052e7] GATK_JOINTGENOTYPING     | 1 of 1 ✔
 
     Outputs:
 
       /workspaces/training/nf4-science/genomics/results
 
       indexed_bam:
-        - [indexed_bam/reads_mother.bam, indexed_bam/reads_mother.bam.bai]
-        - [indexed_bam/reads_father.bam, indexed_bam/reads_father.bam.bai]
         - [indexed_bam/reads_son.bam, indexed_bam/reads_son.bam.bai]
+        - [indexed_bam/reads_father.bam, indexed_bam/reads_father.bam.bai]
+        - [indexed_bam/reads_mother.bam, indexed_bam/reads_mother.bam.bai]
 
       gvcf:
-        - gvcf/reads_mother.bam.g.vcf
         - gvcf/reads_father.bam.g.vcf
+        - gvcf/reads_mother.bam.g.vcf
         - gvcf/reads_son.bam.g.vcf
 
       gvcf_idx:
-        - gvcf/reads_mother.bam.g.vcf.idx
         - gvcf/reads_father.bam.g.vcf.idx
+        - gvcf/reads_mother.bam.g.vcf.idx
         - gvcf/reads_son.bam.g.vcf.idx
 
       joint_vcf: family_trio.joint.vcf
@@ -708,22 +708,22 @@ Le fichier de sortie final, `family_trio.joint.vcf` (et son index), se trouve da
 
     ```console
     results/
-    ├── family_trio.joint.vcf -> */a6/7cc8ed*/family_trio.joint.vcf
-    ├── family_trio.joint.vcf.idx -> */a6/7cc8ed*/family_trio.joint.vcf.idx
+    ├── family_trio.joint.vcf -> */2a/6052e7*/family_trio.joint.vcf
+    ├── family_trio.joint.vcf.idx -> */2a/6052e7*/family_trio.joint.vcf.idx
     ├── gvcf/
-    │   ├── reads_father.bam.g.vcf -> */27/0d7eb9*/reads_father.bam.g.vcf
-    │   ├── reads_father.bam.g.vcf.idx -> */27/0d7eb9*/reads_father.bam.g.vcf.idx
-    │   ├── reads_mother.bam.g.vcf -> */e4/4ed55e*/reads_mother.bam.g.vcf
-    │   ├── reads_mother.bam.g.vcf.idx -> */e4/4ed55e*/reads_mother.bam.g.vcf.idx
-    │   ├── reads_son.bam.g.vcf -> */08/e95962*/reads_son.bam.g.vcf
-    │   └── reads_son.bam.g.vcf.idx -> */08/e95962*/reads_son.bam.g.vcf.idx
+    │   ├── reads_father.bam.g.vcf -> */0d/e1b164*/reads_father.bam.g.vcf
+    │   ├── reads_father.bam.g.vcf.idx -> */0d/e1b164*/reads_father.bam.g.vcf.idx
+    │   ├── reads_mother.bam.g.vcf -> */47/a20c52*/reads_mother.bam.g.vcf
+    │   ├── reads_mother.bam.g.vcf.idx -> */47/a20c52*/reads_mother.bam.g.vcf.idx
+    │   ├── reads_son.bam.g.vcf -> */a6/d2a73e*/reads_son.bam.g.vcf
+    │   └── reads_son.bam.g.vcf.idx -> */a6/d2a73e*/reads_son.bam.g.vcf.idx
     └── indexed_bam/
-        ├── reads_father.bam -> */9a/c7a873*/reads_father.bam
-        ├── reads_father.bam.bai -> */9a/c7a873*/reads_father.bam.bai
-        ├── reads_mother.bam -> */f1/8d8486*/reads_mother.bam
-        ├── reads_mother.bam.bai -> */f1/8d8486*/reads_mother.bam.bai
-        ├── reads_son.bam -> */cc/fbc705*/reads_son.bam
-        └── reads_son.bam.bai -> */cc/fbc705*/reads_son.bam.bai
+        ├── reads_father.bam -> */9f/c67a60*/reads_father.bam
+        ├── reads_father.bam.bai -> */9f/c67a60*/reads_father.bam.bai
+        ├── reads_mother.bam -> */bb/13a815*/reads_mother.bam
+        ├── reads_mother.bam.bai -> */bb/13a815*/reads_mother.bam.bai
+        ├── reads_son.bam -> */b3/27e144*/reads_son.bam
+        └── reads_son.bam.bai -> */b3/27e144*/reads_son.bam.bai
     ```
 
 Si vous ouvrez le fichier VCF joint, vous pouvez vérifier que le workflow a produit les appels de variants attendus.
