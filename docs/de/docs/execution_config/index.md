@@ -41,7 +41,7 @@ Du nimmst dieselbe mehrstufige Pipeline aus diesem Kurs und passt ihre Konfigura
 | ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | ---------------- |
 | [Teil 1: An deine Rechenumgebung anpassen](./01_packaging_and_execution.md)    | Software-Packaging-Technologie wechseln und eine Ausführungsplattform auswählen          | 20 Min.          |
 | [Teil 2: Rechenressourcen und Fehler verwalten](./02_resources_and_retries.md) | Ressourcenzuweisung steuern und fehlgeschlagene Aufgaben automatisch wiederholen         | 15 Min.          |
-| [Teil 3: Profile zum Wechseln von Konfigurationen nutzen](./03_profiles.md)   | Profile definieren und kombinieren sowie die vollständig aufgelöste Konfiguration prüfen | 15 Min.          |
+| [Teil 3: Profile zum Wechseln von Konfigurationen nutzen](./03_profiles.md)    | Profile definieren und kombinieren sowie die vollständig aufgelöste Konfiguration prüfen | 15 Min.          |
 
 Am Ende dieses Kurses kannst du Nextflow-Pipelines sicher für verschiedene Rechenumgebungen konfigurieren und mit minimalem Aufwand zwischen ihnen wechseln.
 

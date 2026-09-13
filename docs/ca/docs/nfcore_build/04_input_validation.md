@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 En aquesta quarta part del curs de formació Build with nf-core, us mostrem com utilitzar el plugin nf-schema per validar les entrades i els paràmetres del pipeline.
 
 ??? info "Com començar des d'aquesta secció"

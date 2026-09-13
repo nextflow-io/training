@@ -33,11 +33,11 @@ Le rapport est un fichier HTML que vous pouvez ouvrir dans un navigateur.
 Il détaille le temps d'exécution et l'utilisation des ressources par processus, notamment le pourcentage des ressources allouées qui a été réellement utilisé.
 Voici ce qu'il affiche pour `cowpy` avec les valeurs par défaut actuelles (1 CPU, 1 Go de mémoire) :
 
-| Métrique              | Valeur |
-| --------------------- | ------ |
-| Utilisation CPU       | 116%   |
+| Métrique                  | Valeur |
+| ------------------------- | ------ |
+| Utilisation CPU           | 116%   |
 | Mémoire maximale utilisée | 6,4 Mo |
-| Mémoire allouée       | 1 Go   |
+| Mémoire allouée           | 1 Go   |
 
 `cowpy` utilise bien moins de 1% de son allocation de 1 Go ; le `%cpu` supérieur à 100% signifie simplement qu'il utilise brièvement plus d'un CPU de traitement à l'intérieur du conteneur, par courtes rafales.
 
@@ -120,10 +120,10 @@ nextflow run main.nf -with-report report-config-2.html
 
 Comparaison des deux rapports pour `cowpy` :
 
-| Métrique              | Avant (1 CPU, 1 Go) | Après (2 CPUs, 2 Go) |
-| --------------------- | ------------------- | -------------------- |
-| Mémoire maximale utilisée | 6,4 Mo          | 6,4 Mo               |
-| Utilisation CPU       | 116%                | 118%                 |
+| Métrique                  | Avant (1 CPU, 1 Go) | Après (2 CPUs, 2 Go) |
+| ------------------------- | ------------------- | -------------------- |
+| Mémoire maximale utilisée | 6,4 Mo              | 6,4 Mo               |
+| Utilisation CPU           | 116%                | 118%                 |
 
 Doubler l'allocation n'a pas du tout modifié l'utilisation réelle, ce qui indique que le 1 Go / 1 CPU d'origine était déjà généreux pour cette charge de travail de démonstration.
 Sur un pipeline réel traitant des données non triviales, vous vous attendriez à ce que les chiffres diffèrent significativement entre les processus, ce qui explique précisément pourquoi vous profilez avant de décider des allocations, plutôt que de les deviner.

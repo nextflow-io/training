@@ -1,22 +1,9 @@
 ---
-title: The Hello pipeline
-description: Recap of what the Hello pipeline does and how it is structured.
-hide:
-  - toc
-  - footer
----
-
-Looking at the diff, the only change is the removal of the closing `---` divider and the `<div>` block containing the Seqera logos. I need to remove those from the existing French translation.
-
-## %%%
-
 title: Le pipeline Hello
 description: Récapitulatif de ce que fait le pipeline Hello et comment il est structuré.
 hide:
-
-- toc
-- footer
-
+  - toc
+  - footer
 ---
 
 # Le pipeline Hello
@@ -82,4 +69,3 @@ Les résultats sont publiés dans un répertoire appelé `results/`, et la sorti
 ```
 
 Vous pouvez rencontrer quelques variations dans les détails spécifiques selon le cours dans lequel le pipeline est présenté.
-%%%

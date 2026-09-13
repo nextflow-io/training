@@ -1,21 +1,3 @@
-I'll analyze the diff and update only the affected sections in the existing Turkish translation.
-
-Key changes from the diff:
-
-1. Library catalog sentence split into two sentences
-2. Console output revision hashes updated
-3. `input_file` → `recording` in COWPY process code blocks
-4. Parentheses instead of em-dash in a sentence about datasheet structure
-5. "meta map" description changed from em-dash to parentheses
-6. Section 2.4.1 description changed (minimal process-level change explanation)
-7. Section 2.4.3 updated with `>>` operator description
-8. Console output file names updated (added `cowpy-` prefix)
-9. Results directory contents updated
-10. Explanation text updated
-11. Section 3.2 link updated to `Build with nf-core`
-12. Summary section point 3 and 4 updated
-13. Error output updated (file names and formatting)
-
 # Metadata ve Meta Map'ler
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>

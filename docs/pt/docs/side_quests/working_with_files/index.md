@@ -1,14 +1,3 @@
-I'll analyze the diff and update only the specific sections that changed in the existing Portuguese translation. The changes are:
-
-1. Console output strings (revision hashes and launch names) - these must stay as-is (console output is never translated)
-2. One tip message changed from `bash .command.run` to `cat .command.out` (appears multiple times)
-3. Work directory hash changed in section 2.1
-4. Various revision/hash values in console outputs throughout
-
-Let me identify the exact locations and update them:
-
-%%%
-
 # Processamento de Entrada de Arquivos
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
@@ -2245,4 +2234,3 @@ Aplicar essas técnicas em seu próprio trabalho permitirá que você construa f
 ## O que vem a seguir?
 
 Volte ao [menu de Side Quests](../index.md) ou clique no botão no canto inferior direito da página para avançar para o próximo tópico da lista.
-%%%

@@ -24,7 +24,6 @@ additional_information:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 **Build with nf-core ist eine praktische Einführung in die Nutzung von nf-core Ressourcen und Best Practices.**
 
 ![nf-core logo](./img/nf-core-logo.png#only-light)
@@ -53,12 +52,12 @@ Stattdessen konzentrieren wir uns auf die wesentlichen Konzepte, die dir helfen 
 
 Wir haben dies in vier Teile unterteilt, die sich jeweils auf bestimmte Aspekte der Nutzung von nf-core Ressourcen konzentrieren.
 
-| Kurskapitel                                                        | Zusammenfassung                                                                                                                                                                   | Geschätzte Dauer |
-| ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
-| [Teil 1: Hello für nf-core umschreiben](./01_rewrite_hello.md)     | Passe einen bestehenden Workflow an das nf-core Template-Gerüst an, ausgehend vom einfachen Workflow aus dem Kurs [Hello Nextflow](../hello_nextflow/index.md)                    | 60 Min.          |
-| [Teil 2: Ein nf-core Modul verwenden](./02_use_module.md)          | Erkunde die Community-Modulbibliothek und lerne, vorgefertigte, getestete Module zu integrieren, die gängige Bioinformatik-Tools wrappen                                          | 30 Min.          |
-| [Teil 3: Ein nf-core Modul erstellen](./03_make_module.md)         | Erstelle dein eigenes nf-core-style Modul unter Verwendung der spezifischen Struktur, Namenskonventionen und Metadaten-Anforderungen, die von nf-core etabliert wurden            | 30 Min.          |
-| [Teil 4: Eingabevalidierung hinzufügen](./04_input_validation.md)  | Implementiere Eingabevalidierung sowohl für Kommandozeilen-Parameter als auch für Eingabedateien mit nf-schema                                                                    | 30 Min.          |
+| Kurskapitel                                                       | Zusammenfassung                                                                                                                                                        | Geschätzte Dauer |
+| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| [Teil 1: Hello für nf-core umschreiben](./01_rewrite_hello.md)    | Passe einen bestehenden Workflow an das nf-core Template-Gerüst an, ausgehend vom einfachen Workflow aus dem Kurs [Hello Nextflow](../hello_nextflow/index.md)         | 60 Min.          |
+| [Teil 2: Ein nf-core Modul verwenden](./02_use_module.md)         | Erkunde die Community-Modulbibliothek und lerne, vorgefertigte, getestete Module zu integrieren, die gängige Bioinformatik-Tools wrappen                               | 30 Min.          |
+| [Teil 3: Ein nf-core Modul erstellen](./03_make_module.md)        | Erstelle dein eigenes nf-core-style Modul unter Verwendung der spezifischen Struktur, Namenskonventionen und Metadaten-Anforderungen, die von nf-core etabliert wurden | 30 Min.          |
+| [Teil 4: Eingabevalidierung hinzufügen](./04_input_validation.md) | Implementiere Eingabevalidierung sowohl für Kommandozeilen-Parameter als auch für Eingabedateien mit nf-schema                                                         | 30 Min.          |
 
 Am Ende dieses Kurses kannst du den enormen Reichtum an Ressourcen nutzen, die das nf-core Projekt bietet.
 

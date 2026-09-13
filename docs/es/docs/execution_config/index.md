@@ -37,11 +37,11 @@ Tomará el mismo pipeline de múltiples pasos de ese curso y adaptará progresiv
 
 ### Plan de lecciones
 
-| Capítulo del curso                                                                              | Resumen                                                                                    | Duración estimada |
-| ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ----------------- |
-| [Parte 1: Adaptación al entorno de cómputo](./01_packaging_and_execution.md)                   | Cambiar la tecnología de empaquetado de software y seleccionar una plataforma de ejecución | 20 min            |
-| [Parte 2: Gestión de recursos de cómputo y fallos](./02_resources_and_retries.md)              | Controlar la asignación de recursos y reintentar automáticamente las tareas que fallen     | 15 min            |
-| [Parte 3: Uso de perfiles para alternar configuraciones](./03_profiles.md)                     | Definir y combinar perfiles, e inspeccionar la configuración completamente resuelta        | 15 min            |
+| Capítulo del curso                                                                | Resumen                                                                                    | Duración estimada |
+| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ----------------- |
+| [Parte 1: Adaptación al entorno de cómputo](./01_packaging_and_execution.md)      | Cambiar la tecnología de empaquetado de software y seleccionar una plataforma de ejecución | 20 min            |
+| [Parte 2: Gestión de recursos de cómputo y fallos](./02_resources_and_retries.md) | Controlar la asignación de recursos y reintentar automáticamente las tareas que fallen     | 15 min            |
+| [Parte 3: Uso de perfiles para alternar configuraciones](./03_profiles.md)        | Definir y combinar perfiles, e inspeccionar la configuración completamente resuelta        | 15 min            |
 
 Al finalizar este curso, estará en condiciones de configurar pipelines de Nextflow para una variedad de entornos de cómputo y alternar entre ellos con el mínimo esfuerzo.
 

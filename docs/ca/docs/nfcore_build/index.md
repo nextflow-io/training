@@ -24,7 +24,6 @@ additional_information:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 **Build with nf-core és una introducció pràctica a l'ús de recursos i bones pràctiques d'nf-core.**
 
 ![nf-core logo](./img/nf-core-logo.png#only-light)
@@ -53,12 +52,12 @@ En canvi, ens centrarem en els conceptes essencials que t'ajudaran a començar i
 
 Hem dividit això en quatre parts que se centraran cadascuna en aspectes específics de l'ús de recursos nf-core.
 
-| Capítol del curs                                                | Resum                                                                                                                                                                   | Durada estimada |
-| --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| [Part 1: Reescriure Hello per a nf-core](./01_rewrite_hello.md) | Adaptar un workflow existent a l'estructura de la plantilla nf-core, començant pel workflow senzill produït al curs [Hello Nextflow](../hello_nextflow/index.md)        | 60 min          |
-| [Part 2: Utilitzar un mòdul nf-core](./02_use_module.md)        | Explorar la biblioteca de mòduls de la comunitat i aprendre a integrar mòduls preconstruïts i provats que encapsulen eines bioinformàtiques comunes                     | 30 min          |
-| [Part 3: Crear un mòdul nf-core](./03_make_module.md)           | Crear el teu propi mòdul a l'estil nf-core utilitzant l'estructura específica, convencions de nomenclatura i requisits de metadades establerts per nf-core              | 30 min          |
-| [Part 4: Afegir validació d'entrada](./04_input_validation.md)  | Implementar validació d'entrada tant per a paràmetres de línia de comandes com per a fitxers de dades d'entrada utilitzant nf-schema                                    | 30 min          |
+| Capítol del curs                                                | Resum                                                                                                                                                            | Durada estimada |
+| --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| [Part 1: Reescriure Hello per a nf-core](./01_rewrite_hello.md) | Adaptar un workflow existent a l'estructura de la plantilla nf-core, començant pel workflow senzill produït al curs [Hello Nextflow](../hello_nextflow/index.md) | 60 min          |
+| [Part 2: Utilitzar un mòdul nf-core](./02_use_module.md)        | Explorar la biblioteca de mòduls de la comunitat i aprendre a integrar mòduls preconstruïts i provats que encapsulen eines bioinformàtiques comunes              | 30 min          |
+| [Part 3: Crear un mòdul nf-core](./03_make_module.md)           | Crear el teu propi mòdul a l'estil nf-core utilitzant l'estructura específica, convencions de nomenclatura i requisits de metadades establerts per nf-core       | 30 min          |
+| [Part 4: Afegir validació d'entrada](./04_input_validation.md)  | Implementar validació d'entrada tant per a paràmetres de línia de comandes com per a fitxers de dades d'entrada utilitzant nf-schema                             | 30 min          |
 
 Al final d'aquest curs, podràs aprofitar l'enorme riquesa de recursos que ofereix el projecte nf-core.
 

@@ -1,11 +1,6 @@
----
-
 # Ambiente de Desenvolvimento
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
-
-
-
 
 Ambientes de Desenvolvimento Integrados (IDEs) modernos podem transformar radicalmente sua experiência de desenvolvimento com Nextflow. Esta missão secundária foca especificamente em aproveitar o VS Code e sua extensão para Nextflow para escrever código mais rápido, detectar erros cedo e navegar por fluxos de trabalho complexos com eficiência.
 

@@ -41,11 +41,11 @@ Si busqueu una introducció al desenvolupament de pipelines compatibles amb nf-c
 
 ### Pla de lliçons
 
-| Capítol del curs                                                     | Resum                                                                                                          | Durada estimada |
-| -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | --------------- |
-| [Part 1: Executar un pipeline de demostració](./01_run_demo.md)      | Trobar i obtenir un pipeline nf-core i executar-lo utilitzant el seu perfil de prova                           | 20 min          |
-| [Part 2: Configurar l'execució del pipeline](./02_configure_execution.md) | Establir paràmetres, entendre la validació i personalitzar l'assignació de recursos i els arguments d'eines | 20 min          |
-| [Part 3: Executar un pipeline de producció](./03_run_production_pipeline.md) | Obtenir i executar nf-core/rnaseq, i sobreescriure les seves assignacions de recursos per defecte        | 20 min          |
+| Capítol del curs                                                             | Resum                                                                                                       | Durada estimada |
+| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | --------------- |
+| [Part 1: Executar un pipeline de demostració](./01_run_demo.md)              | Trobar i obtenir un pipeline nf-core i executar-lo utilitzant el seu perfil de prova                        | 20 min          |
+| [Part 2: Configurar l'execució del pipeline](./02_configure_execution.md)    | Establir paràmetres, entendre la validació i personalitzar l'assignació de recursos i els arguments d'eines | 20 min          |
+| [Part 3: Executar un pipeline de producció](./03_run_production_pipeline.md) | Obtenir i executar nf-core/rnaseq, i sobreescriure les seves assignacions de recursos per defecte           | 20 min          |
 
 Al final d'aquest curs, podreu aprofitar la gran quantitat de pipelines de la comunitat que ofereix el projecte nf-core.
 

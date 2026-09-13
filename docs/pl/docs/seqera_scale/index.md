@@ -38,10 +38,10 @@ Następnie przejdziesz do narzędzia wiersza poleceń `tw`, aby zrobić to samo 
 
 ### Plan kursu
 
-| Rozdział kursu                                                                          | Opis                                                                                                          | Szacowany czas |
-| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | -------------- |
-| [Część 1: Uruchamianie pipeline'ów z interfejsu webowego](./01_run_with_seqera.md)      | Skonfiguruj dostęp do Seqera Platform i uruchom pipeline produkcyjny z poziomu interfejsu webowego            | 20 min         |
-| [Część 2: Uruchamianie pipeline'ów z wiersza poleceń](./02_launch_from_cli.md)          | Uwierzytelnij `tw` CLI, uruchom zapisany pipeline i zarejestruj nowy pipeline z poziomu wiersza poleceń       | 25 min         |
+| Rozdział kursu                                                                     | Opis                                                                                                    | Szacowany czas |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | -------------- |
+| [Część 1: Uruchamianie pipeline'ów z interfejsu webowego](./01_run_with_seqera.md) | Skonfiguruj dostęp do Seqera Platform i uruchom pipeline produkcyjny z poziomu interfejsu webowego      | 20 min         |
+| [Część 2: Uruchamianie pipeline'ów z wiersza poleceń](./02_launch_from_cli.md)     | Uwierzytelnij `tw` CLI, uruchom zapisany pipeline i zarejestruj nowy pipeline z poziomu wiersza poleceń | 25 min         |
 
 Po ukończeniu kursu będziesz swobodnie uruchamiać i monitorować pipeline'y Nextflow na Seqera Platform — niezależnie od tego, czy wolisz pracować z interfejsu webowego, czy z wiersza poleceń.
 

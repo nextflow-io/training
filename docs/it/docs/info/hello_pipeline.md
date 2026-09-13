@@ -1,22 +1,9 @@
 ---
-title: The Hello pipeline
-description: Recap of what the Hello pipeline does and how it is structured.
-hide:
-  - toc
-  - footer
----
-
-Looking at the diff, I need to remove the trailing section (the horizontal rule and the Seqera logo div) from the existing Italian translation.
-
----
-
 title: La pipeline Hello
 description: Riepilogo di cosa fa la pipeline Hello e come è strutturata.
 hide:
-
-- toc
-- footer
-
+  - toc
+  - footer
 ---
 
 # La pipeline Hello

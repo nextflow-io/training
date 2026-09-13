@@ -37,11 +37,11 @@ Prenderete la stessa pipeline multi-step di quel corso e ne adatterete progressi
 
 ### Piano delle lezioni
 
-| Capitolo del corso                                                             | Sommario                                                                                    | Durata stimata |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- | -------------- |
-| [Parte 1: Adattarsi all'ambiente di calcolo](./01_packaging_and_execution.md)  | Cambiare tecnologia di packaging software e selezionare una piattaforma di esecuzione       | 20 min         |
+| Capitolo del corso                                                                     | Sommario                                                                                       | Durata stimata |
+| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | -------------- |
+| [Parte 1: Adattarsi all'ambiente di calcolo](./01_packaging_and_execution.md)          | Cambiare tecnologia di packaging software e selezionare una piattaforma di esecuzione          | 20 min         |
 | [Parte 2: Gestire le risorse di calcolo e i fallimenti](./02_resources_and_retries.md) | Controllare l'allocazione delle risorse e riprovare automaticamente le attività che falliscono | 15 min         |
-| [Parte 3: Usare i profili per cambiare configurazione](./03_profiles.md)       | Definire e combinare profili, e ispezionare la configurazione completamente risolta          | 15 min         |
+| [Parte 3: Usare i profili per cambiare configurazione](./03_profiles.md)               | Definire e combinare profili, e ispezionare la configurazione completamente risolta            | 15 min         |
 
 Al termine di questo corso, sarete a vostro agio nel configurare pipeline Nextflow per una serie di ambienti di calcolo e nel passare da uno all'altro con il minimo sforzo.
 

@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 En esta tercera parte del curso de capacitación Build with nf-core, le mostramos cómo crear un módulo nf-core aplicando las convenciones clave que hacen que los módulos sean portables y mantenibles.
 
 El proyecto nf-core proporciona un comando (`nf-core modules create`) que genera plantillas de módulos estructuradas correctamente de forma automática, similar a lo que usamos para el workflow en la Parte 1.

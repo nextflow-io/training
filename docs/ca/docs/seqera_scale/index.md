@@ -38,10 +38,10 @@ Després passareu a l'eina de línia de comandes `tw` per fer el mateix des d'un
 
 ### Pla de lliçons
 
-| Capítol del curs                                                           | Resum                                                                                                          | Durada estimada |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | --------------- |
-| [Part 1: Llançar pipelines des de la interfície web](./01_run_with_seqera.md) | Configurar l'accés a Seqera Platform i llançar un pipeline a escala de producció des de la interfície web  | 20 min          |
-| [Part 2: Llançar pipelines des de la línia de comandes](./02_launch_from_cli.md)  | Autenticar el `tw` CLI, llançar un pipeline desat i registrar un nou pipeline des del CLI | 25 min          |
+| Capítol del curs                                                                 | Resum                                                                                                     | Durada estimada |
+| -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------- |
+| [Part 1: Llançar pipelines des de la interfície web](./01_run_with_seqera.md)    | Configurar l'accés a Seqera Platform i llançar un pipeline a escala de producció des de la interfície web | 20 min          |
+| [Part 2: Llançar pipelines des de la línia de comandes](./02_launch_from_cli.md) | Autenticar el `tw` CLI, llançar un pipeline desat i registrar un nou pipeline des del CLI                 | 25 min          |
 
 Al final d'aquest curs, us sentireu còmodes llançant i monitoritzant pipelines de Nextflow a Seqera Platform, tant si preferiu treballar des de la interfície web com des de la línia de comandes.
 

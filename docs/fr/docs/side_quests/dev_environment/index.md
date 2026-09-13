@@ -1,16 +1,3 @@
-Looking at the diff, I need to update:
-
-1. Two links from `../hello_nextflow/` to `../../hello_nextflow/index.md`
-2. Multiple image paths from `img/` to `../img/`
-3. A code block removing the `publishDir` line
-4. A search example changing from `publishDir` to `container`
-5. Two links at the end changing paths
-6. The "Before" tab removing the `publishDir` line
-
-Let me apply only these targeted changes to the existing French translation:
-
-%%%
-
 # Environnement de développement
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>

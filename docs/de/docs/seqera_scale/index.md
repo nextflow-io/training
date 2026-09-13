@@ -38,10 +38,10 @@ Dann wechselst du zum `tw`-Befehlszeilentool, um dasselbe über ein Terminal zu 
 
 ### Lehrplan
 
-| Kurskapitel                                                                | Zusammenfassung                                                                                                    | Geschätzte Dauer |
-| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------- |
-| [Teil 1: Pipelines über die Web-Oberfläche starten](./01_run_with_seqera.md) | Seqera Platform-Zugang einrichten und eine produktionsreife Pipeline über die Web-Oberfläche starten             | 20 Min.          |
-| [Teil 2: Pipelines über die Befehlszeile starten](./02_launch_from_cli.md)  | Die `tw` CLI authentifizieren, eine gespeicherte Pipeline starten und eine neue Pipeline über die CLI registrieren | 25 Min.          |
+| Kurskapitel                                                                  | Zusammenfassung                                                                                                    | Geschätzte Dauer |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------- |
+| [Teil 1: Pipelines über die Web-Oberfläche starten](./01_run_with_seqera.md) | Seqera Platform-Zugang einrichten und eine produktionsreife Pipeline über die Web-Oberfläche starten               | 20 Min.          |
+| [Teil 2: Pipelines über die Befehlszeile starten](./02_launch_from_cli.md)   | Die `tw` CLI authentifizieren, eine gespeicherte Pipeline starten und eine neue Pipeline über die CLI registrieren | 25 Min.          |
 
 Am Ende dieses Kurses kannst du Nextflow-Pipelines auf Seqera Platform sicher starten und überwachen – egal ob du lieber die Web-Oberfläche oder die Befehlszeile verwendest.
 

@@ -37,11 +37,11 @@ Vous reprendrez le même pipeline multi-étapes de ce cours et adapterez progres
 
 ### Plan de cours
 
-| Chapitre du cours                                                                          | Résumé                                                                                    | Durée estimée |
-| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- | ------------- |
-| [Partie 1 : S'adapter à votre environnement de calcul](./01_packaging_and_execution.md)   | Changer de technologie de packaging logiciel et sélectionner une plateforme d'exécution  | 20 min        |
-| [Partie 2 : Gérer les ressources de calcul et les échecs](./02_resources_and_retries.md)  | Contrôler les allocations de ressources et relancer automatiquement les tâches qui échouent | 15 min     |
-| [Partie 3 : Utiliser des profils pour changer de configuration](./03_profiles.md)         | Définir et combiner des profils, et inspecter la configuration entièrement résolue        | 15 min        |
+| Chapitre du cours                                                                        | Résumé                                                                                      | Durée estimée |
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------- |
+| [Partie 1 : S'adapter à votre environnement de calcul](./01_packaging_and_execution.md)  | Changer de technologie de packaging logiciel et sélectionner une plateforme d'exécution     | 20 min        |
+| [Partie 2 : Gérer les ressources de calcul et les échecs](./02_resources_and_retries.md) | Contrôler les allocations de ressources et relancer automatiquement les tâches qui échouent | 15 min        |
+| [Partie 3 : Utiliser des profils pour changer de configuration](./03_profiles.md)        | Définir et combiner des profils, et inspecter la configuration entièrement résolue          | 15 min        |
 
 À la fin de ce cours, vous serez à l'aise pour configurer des pipelines Nextflow pour différents environnements de calcul et basculer entre eux sans difficulté.
 

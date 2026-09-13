@@ -33,11 +33,11 @@ O relatório é um arquivo HTML que você pode abrir no navegador.
 Ele detalha o tempo de execução e a utilização de recursos por processo, incluindo qual porcentagem dos recursos alocados foi realmente utilizada.
 Veja o que ele mostra para `cowpy` com os padrões atuais (1 CPU, 1 GB de memória):
 
-| Métrica              | Valor  |
-| -------------------- | ------ |
-| Uso de CPU           | 116%   |
+| Métrica               | Valor  |
+| --------------------- | ------ |
+| Uso de CPU            | 116%   |
 | Pico de memória usada | 6,4 MB |
-| Memória alocada      | 1 GB   |
+| Memória alocada       | 1 GB   |
 
 `cowpy` usa bem menos de 1% da sua alocação de 1 GB; o `%cpu` acima de 100% significa apenas que ele usa brevemente mais do que o equivalente a um CPU de processamento dentro do contêiner, em rajadas curtas.
 

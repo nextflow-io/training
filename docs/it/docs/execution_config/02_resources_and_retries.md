@@ -33,11 +33,11 @@ Il report è un file HTML che puoi aprire in un browser.
 Suddivide il tempo di esecuzione e l'utilizzo delle risorse per processo, inclusa la percentuale delle risorse allocate effettivamente utilizzata.
 Ecco cosa mostra per `cowpy` con i valori predefiniti attuali (1 CPU, 1 GB di memoria):
 
-| Metrica                | Valore |
-| ---------------------- | ------ |
-| Utilizzo CPU           | 116%   |
-| Memoria massima usata  | 6.4 MB |
-| Memoria allocata       | 1 GB   |
+| Metrica               | Valore |
+| --------------------- | ------ |
+| Utilizzo CPU          | 116%   |
+| Memoria massima usata | 6.4 MB |
+| Memoria allocata      | 1 GB   |
 
 `cowpy` usa ben meno dell'1% della sua allocazione di 1 GB; il `%cpu` superiore al 100% significa semplicemente che usa brevemente più di una CPU di elaborazione all'interno del container, in brevi raffiche.
 

@@ -41,11 +41,11 @@ nf-core uyumlu pipeline geliştirmeye giriş arıyorsanız [Build with nf-core](
 
 ### Ders planı
 
-| Kurs bölümü                                                          | Özet                                                                                                          | Tahmini süre |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------ |
-| [Bölüm 1: Demo pipeline çalıştırma](./01_run_demo.md)                | Bir nf-core pipeline'ı bulun, indirin ve test profili kullanarak çalıştırın                                   | 20 dakika    |
-| [Bölüm 2: Pipeline çalıştırmasını yapılandırma](./02_configure_execution.md) | Parametreleri ayarlayın, doğrulamayı anlayın ve kaynak tahsisi ile araç argümanlarını özelleştirin    | 20 dakika    |
-| [Bölüm 3: Üretim pipeline'ı çalıştırma](./03_run_production_pipeline.md) | nf-core/rnaseq'i indirin ve çalıştırın; varsayılan kaynak tahsislerini geçersiz kılın                    | 20 dakika    |
+| Kurs bölümü                                                                  | Özet                                                                                               | Tahmini süre |
+| ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | ------------ |
+| [Bölüm 1: Demo pipeline çalıştırma](./01_run_demo.md)                        | Bir nf-core pipeline'ı bulun, indirin ve test profili kullanarak çalıştırın                        | 20 dakika    |
+| [Bölüm 2: Pipeline çalıştırmasını yapılandırma](./02_configure_execution.md) | Parametreleri ayarlayın, doğrulamayı anlayın ve kaynak tahsisi ile araç argümanlarını özelleştirin | 20 dakika    |
+| [Bölüm 3: Üretim pipeline'ı çalıştırma](./03_run_production_pipeline.md)     | nf-core/rnaseq'i indirin ve çalıştırın; varsayılan kaynak tahsislerini geçersiz kılın              | 20 dakika    |
 
 Bu kursun sonunda nf-core projesinin sunduğu zengin topluluk pipeline'larından yararlanabileceksiniz.
 

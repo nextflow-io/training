@@ -1,22 +1,9 @@
 ---
-title: The Hello pipeline
-description: Recap of what the Hello pipeline does and how it is structured.
-hide:
-  - toc
-  - footer
----
-
-Looking at the diff, I need to remove the section at the end of the existing translation that contains the horizontal rule, div with homepage_logos, and the two Seqera logo images. Everything else should remain unchanged.
-
-## %%%
-
 title: El pipeline Hello
 description: Resum del que fa el pipeline Hello i com està estructurat.
 hide:
-
-- toc
-- footer
-
+  - toc
+  - footer
 ---
 
 # El pipeline Hello
@@ -82,4 +69,3 @@ Els resultats es publiquen en un directori anomenat `results/`, i la sortida fin
 ```
 
 Podeu trobar algunes variacions en els detalls específics depenent del curs en què aparegui el pipeline.
-%%%

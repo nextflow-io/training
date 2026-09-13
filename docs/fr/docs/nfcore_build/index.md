@@ -24,7 +24,6 @@ additional_information:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 **Build with nf-core est une introduction pratique à l'utilisation des ressources et des bonnes pratiques nf-core.**
 
 ![logo nf-core](./img/nf-core-logo.png#only-light)
@@ -53,12 +52,12 @@ Au lieu de cela, nous nous concentrerons sur les concepts essentiels qui vous ai
 
 Nous avons divisé cela en quatre parties qui se concentreront chacune sur des aspects spécifiques de l'utilisation des ressources nf-core.
 
-| Chapitre du cours                                                        | Résumé                                                                                                                                                          | Durée estimée |
-| ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| [Partie 1 : Réécrire Hello pour nf-core](./01_rewrite_hello.md)          | Adapter un workflow existant à la structure du modèle nf-core, en partant du workflow simple produit dans le cours [Hello Nextflow](../hello_nextflow/index.md) | 60 min        |
+| Chapitre du cours                                                        | Résumé                                                                                                                                                                 | Durée estimée |
+| ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| [Partie 1 : Réécrire Hello pour nf-core](./01_rewrite_hello.md)          | Adapter un workflow existant à la structure du modèle nf-core, en partant du workflow simple produit dans le cours [Hello Nextflow](../hello_nextflow/index.md)        | 60 min        |
 | [Partie 2 : Utiliser un module nf-core](./02_use_module.md)              | Explorer la bibliothèque de modules de la communauté et apprendre à intégrer des modules pré-construits et testés qui encapsulent des outils bioinformatiques courants | 30 min        |
-| [Partie 3 : Créer un module nf-core](./03_make_module.md)                | Créer votre propre module de style nf-core en utilisant la structure spécifique, les conventions de nommage et les exigences de métadonnées établies par nf-core | 30 min        |
-| [Partie 4 : Ajouter la validation des entrées](./04_input_validation.md) | Implémenter la validation des entrées pour les paramètres de ligne de commande et les fichiers de données d'entrée en utilisant nf-schema                       | 30 min        |
+| [Partie 3 : Créer un module nf-core](./03_make_module.md)                | Créer votre propre module de style nf-core en utilisant la structure spécifique, les conventions de nommage et les exigences de métadonnées établies par nf-core       | 30 min        |
+| [Partie 4 : Ajouter la validation des entrées](./04_input_validation.md) | Implémenter la validation des entrées pour les paramètres de ligne de commande et les fichiers de données d'entrée en utilisant nf-schema                              | 30 min        |
 
 À la fin de ce cours, vous serez capable de tirer parti de l'énorme richesse de ressources offertes par le projet nf-core.
 

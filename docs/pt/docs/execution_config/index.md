@@ -37,11 +37,11 @@ Você utilizará o mesmo pipeline de múltiplas etapas daquele curso e adaptará
 
 ### Plano de aulas
 
-| Capítulo do curso                                                                          | Resumo                                                                                    | Duração estimada |
-| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- | ---------------- |
-| [Parte 1: Adapte ao seu ambiente computacional](./01_packaging_and_execution.md)           | Alternar a tecnologia de empacotamento de software e selecionar uma plataforma de execução | 20 min           |
-| [Parte 2: Gerencie recursos computacionais e falhas](./02_resources_and_retries.md)        | Controlar alocações de recursos e reexecutar automaticamente tarefas que falham           | 15 min           |
-| [Parte 3: Use perfis para alternar configurações](./03_profiles.md)                        | Definir e combinar perfis, e inspecionar a configuração completamente resolvida           | 15 min           |
+| Capítulo do curso                                                                   | Resumo                                                                                     | Duração estimada |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ---------------- |
+| [Parte 1: Adapte ao seu ambiente computacional](./01_packaging_and_execution.md)    | Alternar a tecnologia de empacotamento de software e selecionar uma plataforma de execução | 20 min           |
+| [Parte 2: Gerencie recursos computacionais e falhas](./02_resources_and_retries.md) | Controlar alocações de recursos e reexecutar automaticamente tarefas que falham            | 15 min           |
+| [Parte 3: Use perfis para alternar configurações](./03_profiles.md)                 | Definir e combinar perfis, e inspecionar a configuração completamente resolvida            | 15 min           |
 
 Ao final deste curso, você estará confortável para configurar pipelines Nextflow para uma variedade de ambientes computacionais e alternar entre eles com o mínimo de esforço.
 

@@ -1,10 +1,3 @@
-I'll analyze the diff and update only the affected sections in the existing French translation. The changes are:
-
-1. Console output revision identifiers and process hashes updated throughout
-2. Two "Tip" messages changed from `bash .command.run` to `cat .command.out`
-3. Work directory path updated in one section
-4. "Work directory contents" section updated with new hash
-
 # Traitement des fichiers en entrée
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>

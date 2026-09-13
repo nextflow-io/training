@@ -38,10 +38,10 @@ Em seguida, você vai usar a ferramenta de linha de comando `tw` para fazer o me
 
 ### Plano de aulas
 
-| Capítulo do curso                                                                    | Resumo                                                                                                                    | Duração estimada |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- | ---------------- |
-| [Parte 1: Executar pipelines pela interface web](./01_run_with_seqera.md)            | Configure o acesso à Seqera Platform e execute um pipeline em escala de produção pela interface web                       | 20 min           |
-| [Parte 2: Executar pipelines pela linha de comando](./02_launch_from_cli.md)         | Autentique o CLI `tw`, execute um pipeline salvo e registre um novo pipeline pela linha de comando                        | 25 min           |
+| Capítulo do curso                                                            | Resumo                                                                                              | Duração estimada |
+| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ---------------- |
+| [Parte 1: Executar pipelines pela interface web](./01_run_with_seqera.md)    | Configure o acesso à Seqera Platform e execute um pipeline em escala de produção pela interface web | 20 min           |
+| [Parte 2: Executar pipelines pela linha de comando](./02_launch_from_cli.md) | Autentique o CLI `tw`, execute um pipeline salvo e registre um novo pipeline pela linha de comando  | 25 min           |
 
 Ao final deste curso, você estará confortável para executar e monitorar pipelines Nextflow na Seqera Platform, seja pela interface web ou pela linha de comando.
 

@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 In diesem dritten Teil des Build with nf-core Trainingskurses zeigen wir dir, wie du ein nf-core-Modul erstellst, indem du die wichtigsten Konventionen anwendest, die Module portabel und wartbar machen.
 
 Das nf-core-Projekt stellt einen Befehl (`nf-core modules create`) bereit, der automatisch korrekt strukturierte Modulvorlagen generiert, ähnlich wie bei dem, was wir für den Workflow in Teil 1 verwendet haben.

@@ -1,15 +1,3 @@
-Looking at the diff, I need to update:
-
-1. The link to Hello Nextflow course (two occurrences: in "What you should know first" and in the info admonition)
-2. Image paths (multiple occurrences: `img/` → `../img/`)
-3. The "Before" tab in section 4 (remove `publishDir` line)
-4. Section 5.3 search term changed from `publishDir` to `container`
-5. Links in "What's next?" at the end (`nf-test.md` → `../nf_test/index.md` and `../../hello_nf-core/` → `../../hello_nf-core/index.md`)
-
-I'll update only those specific sections, preserving everything else exactly.
-
-%%%
-
 # Środowisko programistyczne
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>

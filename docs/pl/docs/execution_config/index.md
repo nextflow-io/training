@@ -37,11 +37,11 @@ Weźmiesz ten sam wieloetapowy pipeline z tamtego kursu i będziesz stopniowo do
 
 ### Plan zajęć
 
-| Rozdział kursu                                                                 | Opis                                                                                    | Szacowany czas |
-| ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- | -------------- |
-| [Część 1: Dostosowanie do środowiska obliczeniowego](./01_packaging_and_execution.md)   | Przełączanie technologii pakowania oprogramowania i wybór platformy wykonawczej | 20 min         |
+| Rozdział kursu                                                                          | Opis                                                                                         | Szacowany czas |
+| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------- |
+| [Część 1: Dostosowanie do środowiska obliczeniowego](./01_packaging_and_execution.md)   | Przełączanie technologii pakowania oprogramowania i wybór platformy wykonawczej              | 20 min         |
 | [Część 2: Zarządzanie zasobami obliczeniowymi i błędami](./02_resources_and_retries.md) | Kontrolowanie przydziału zasobów i automatyczne ponawianie zadań zakończonych niepowodzeniem | 15 min         |
-| [Część 3: Używanie profili do przełączania konfiguracji](./03_profiles.md)              | Definiowanie i łączenie profili oraz inspekcja w pełni rozwiązanej konfiguracji | 15 min         |
+| [Część 3: Używanie profili do przełączania konfiguracji](./03_profiles.md)              | Definiowanie i łączenie profili oraz inspekcja w pełni rozwiązanej konfiguracji              | 15 min         |
 
 Po ukończeniu tego kursu będziesz swobodnie konfigurować pipeline'y Nextflow dla różnych środowisk obliczeniowych i przełączać się między nimi bez zbędnych komplikacji.
 

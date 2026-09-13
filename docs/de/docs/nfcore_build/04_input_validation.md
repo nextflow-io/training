@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 In diesem vierten Teil des Build with nf-core Trainingskurses zeigen wir dir, wie du das nf-schema Plugin verwendest, um Pipeline-Eingaben und Parameter zu validieren.
 
 ??? info "Wie du von diesem Abschnitt aus beginnst"

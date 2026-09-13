@@ -37,11 +37,11 @@ Partireu del mateix pipeline de múltiples passos d'aquell curs i adaptareu prog
 
 ### Pla de lliçons
 
-| Capítol del curs                                                                              | Resum                                                                                    | Durada estimada |
-| --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | --------------- |
-| [Part 1: Adaptar-se al vostre entorn de còmput](./01_packaging_and_execution.md)             | Canviar la tecnologia d'empaquetament de programari i seleccionar una plataforma d'execució | 20 min          |
-| [Part 2: Gestionar recursos de còmput i fallades](./02_resources_and_retries.md)             | Controlar l'assignació de recursos i reintentar automàticament les tasques que fallen    | 15 min          |
-| [Part 3: Utilitzar perfils per canviar de configuració](./03_profiles.md)                    | Definir i combinar perfils, i inspeccionar la configuració completament resolta          | 15 min          |
+| Capítol del curs                                                                 | Resum                                                                                       | Durada estimada |
+| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | --------------- |
+| [Part 1: Adaptar-se al vostre entorn de còmput](./01_packaging_and_execution.md) | Canviar la tecnologia d'empaquetament de programari i seleccionar una plataforma d'execució | 20 min          |
+| [Part 2: Gestionar recursos de còmput i fallades](./02_resources_and_retries.md) | Controlar l'assignació de recursos i reintentar automàticament les tasques que fallen       | 15 min          |
+| [Part 3: Utilitzar perfils per canviar de configuració](./03_profiles.md)        | Definir i combinar perfils, i inspeccionar la configuració completament resolta             | 15 min          |
 
 Al final d'aquest curs, estareu còmodes configurant pipelines de Nextflow per a una varietat d'entorns de còmput i canviant entre ells amb el mínim d'inconvenients.
 

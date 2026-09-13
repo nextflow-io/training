@@ -1,29 +1,3 @@
-Looking at the diff, I need to update the console output sections that contain revision hashes and process hashes, as well as one tip message change. Let me identify all the changes:
-
-1. `romantic_chandrasekhar` → `happy_goodall`, revision `5a4a89bc3a` → `464aa64101`
-2. `kickass_coulomb` → `jolly_fermi`, revision `5af44b1b59` → `8efdfe2c7c`
-3. `ecstatic_ampere` → `mad_leavitt`, revision `f3fa3dcb48` → `33fa67b5f9`
-4. `cheeky_hypatia` → `peaceful_plateau`, revision `281d13c414` → `91b633f022`, `[e9/341c05]` → `[25/7946de]`
-5. `friendly_goodall` → `high_meninsky`, revision `ae50609b20` → `74cc0a3ffc`, tip message change
-6. `soggy_golick` → `berserk_wing`, revision `ae50609b20` → `74cc0a3ffc`, `[b3/b3023c]` → `[62/3b29eb]`, work dir path change, tip message change
-7. `insane_swartz` → `admiring_bhaskara`, revision `fff18abe6d` → `8804122967`, `[8a/2ab7ca]` → `[07/246c2a]`
-8. Work directory contents: `8a/2ab7ca` → `07/246c2a`
-9. `grave_meucci` → `focused_hawking`, revision `b09964a583` → `1e7d8bf645`
-10. `furious_swanson` → `intergalactic_snyder`, revision `c35c34950d` → `dcc1cc023d`, `[9d/6701a6]` → `[d4/1f7691]`
-11. `boring_sammet` → `golden_euclid`, revision `d2aa789c9a` → `c4e05e506e`, `[3c/a65de5]` → `[f8/07d274]`
-12. `suspicious_mahavira` → `clever_fermi`, revision `ae8edc4e48` → `a6f82347c3`, `[e9/55774b]` → `[7e/3ff80a]`
-13. `gigantic_gauss` → `furious_mccarthy`, revision `a39baabb57` → `3d5d5ba03e`, `[e7/da2f4b]` → `[04/e6268e]`
-14. `infallible_swartz` → `friendly_gauss`, revision `7f4e68c0cb` → `1f50ccaf76`, `[1b/e7fb27]` → `[13/376824]`
-15. `angry_koch` → `distraught_bernard`, revision `44fdf66105` → `4ad8fb92de`, tip message change
-16. `fabulous_davinci` → `furious_mcclintock`, revision `22b53268dc` → `a243ca25cb`
-17. `prickly_stonebraker` → `stoic_ramanujan`, revision `f62ab10a3f` → `90004d32f8`
-18. `goofy_kirch` → `deadly_sax`, revision `3313283e42` → `cec43c6067`
-19. `shrivelled_cori` → `shrivelled_mahavira`, revision `b546a31769` → `899bbde2fb`, `[b5/110360]` → `[7b/bd6568]`
-20. `big_stonebraker` → `deadly_kalam`, revision `f7f9b8a76c` → `fb40b3e08e`, `[d5/441891]` → `[19/6c1e76]`
-21. `insane_swartz` → `nasty_hirsch`, revision `fff18abe6d` → `c2c7aae0f7`, `[e3/449081]` → `[09/9f239c]`
-
-Now I'll produce the full updated translation with only these console output sections changed:
-
 # 파일 입력 처리
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>

@@ -33,11 +33,11 @@ L'informe és un fitxer HTML que podeu obrir en un navegador.
 Desglossa el temps d'execució i la utilització de recursos per procés, incloent-hi quin percentatge dels recursos assignats s'ha utilitzat realment.
 Aquí teniu el que mostra per a `cowpy` amb els valors per defecte actuals (1 CPU, 1 GB de memòria):
 
-| Mètrica                | Valor  |
-| ---------------------- | ------ |
-| Ús de CPU              | 116%   |
-| Memòria màxima usada   | 6.4 MB |
-| Memòria assignada      | 1 GB   |
+| Mètrica              | Valor  |
+| -------------------- | ------ |
+| Ús de CPU            | 116%   |
+| Memòria màxima usada | 6.4 MB |
+| Memòria assignada    | 1 GB   |
 
 `cowpy` utilitza molt menys de l'1% de la seva assignació d'1 GB; el `%cpu` per sobre del 100% simplement significa que utilitza breument més d'una CPU de processament dins del contenidor, en ràfegues curtes.
 

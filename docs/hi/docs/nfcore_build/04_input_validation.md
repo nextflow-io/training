@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 Build with nf-core प्रशिक्षण कोर्स के इस चौथे भाग में, हम आपको दिखाते हैं कि pipeline इनपुट और पैरामीटर को सत्यापित करने के लिए nf-schema plugin का उपयोग कैसे करें।
 
 ??? info "इस खंड से कैसे शुरू करें"

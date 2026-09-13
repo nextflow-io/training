@@ -33,11 +33,11 @@ Der Bericht ist eine HTML-Datei, die du im Browser öffnen kannst.
 Er schlüsselt Laufzeit und Ressourcennutzung pro Prozess auf, einschließlich des prozentualen Anteils der tatsächlich genutzten zugewiesenen Ressourcen.
 So sieht es für `cowpy` mit den aktuellen Standardwerten aus (1 CPU, 1 GB Arbeitsspeicher):
 
-| Metrik                    | Wert   |
-| ------------------------- | ------ |
-| CPU-Nutzung               | 116%   |
+| Metrik                      | Wert   |
+| --------------------------- | ------ |
+| CPU-Nutzung                 | 116%   |
 | Maximaler Speicherverbrauch | 6,4 MB |
-| Zugewiesener Speicher     | 1 GB   |
+| Zugewiesener Speicher       | 1 GB   |
 
 `cowpy` nutzt deutlich weniger als 1% seiner 1-GB-Zuweisung. Der `%cpu`-Wert über 100% bedeutet lediglich, dass es kurzzeitig mehr als eine CPU-Einheit an Rechenleistung innerhalb des Containers nutzt.
 
@@ -120,10 +120,10 @@ nextflow run main.nf -with-report report-config-2.html
 
 Vergleich der beiden Berichte für `cowpy`:
 
-| Metrik                    | Vorher (1 CPU, 1 GB) | Danach (2 CPUs, 2 GB) |
-| ------------------------- | -------------------- | --------------------- |
-| Maximaler Speicherverbrauch | 6,4 MB             | 6,4 MB                |
-| CPU-Nutzung               | 116%                 | 118%                  |
+| Metrik                      | Vorher (1 CPU, 1 GB) | Danach (2 CPUs, 2 GB) |
+| --------------------------- | -------------------- | --------------------- |
+| Maximaler Speicherverbrauch | 6,4 MB               | 6,4 MB                |
+| CPU-Nutzung                 | 116%                 | 118%                  |
 
 Die doppelte Zuweisung hat die tatsächliche Nutzung überhaupt nicht verändert. Das zeigt, dass die ursprünglichen 1 GB / 1 CPU für diese einfache Arbeitslast bereits großzügig waren.
 Bei einer echten Pipeline, die nicht-triviale Daten verarbeitet, würden sich die Zahlen zwischen den Prozessen deutlich unterscheiden – genau deshalb erstellst du ein Profil, bevor du entscheidest, was du zuweist, anstatt zu raten.

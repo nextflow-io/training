@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 Build with nf-core eğitim kursunun bu ikinci bölümünde, mevcut bir nf-core modülünü nasıl bulacağınızı, kuracağınızı ve pipeline'ınızda kullanacağınızı gösteriyoruz.
 
 nf-core ile çalışmanın en büyük avantajlarından biri, [nf-core/modules](https://github.com/nf-core/modules) deposundan önceden oluşturulmuş ve test edilmiş modüllerden yararlanabilmektir.

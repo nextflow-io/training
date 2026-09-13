@@ -1,4 +1,3 @@
-```markdown
 # Bölüm 1: Hesaplama Ortamınıza Uyarlama
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
@@ -261,4 +260,3 @@ Bu bölümde şunları öğrendiniz:
 - Süreç tanımına `conda` yönergesi ekleme
 - `executor` yönergesiyle yürütme platformunu değiştirme
 - Nextflow'un bir görev için gerçekte ne oluşturduğunu ve çalıştırdığını, bunun yürütücüler arasında nasıl değiştiğini inceleme
-```

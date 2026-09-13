@@ -24,7 +24,6 @@ additional_information:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 **Build with nf-core to praktyczne wprowadzenie do korzystania z zasobów i najlepszych praktyk nf-core.**
 
 ![nf-core logo](./img/nf-core-logo.png#only-light)

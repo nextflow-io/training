@@ -37,11 +37,11 @@ O kurstan alınan çok adımlı pipeline'ı ele alacak ve yapılandırmasını f
 
 ### Ders planı
 
-| Kurs bölümü                                                                              | Özet                                                                                    | Tahmini süre |
-| ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ------------ |
-| [Bölüm 1: Hesaplama ortamınıza uyarlama](./01_packaging_and_execution.md)                | Yazılım paketleme teknolojisini değiştirme ve bir yürütme platformu seçme               | 20 dakika    |
-| [Bölüm 2: İşlem kaynaklarını ve hataları yönetme](./02_resources_and_retries.md)         | Kaynak tahsislerini kontrol etme ve başarısız olan görevleri otomatik olarak yeniden deneme | 15 dakika    |
-| [Bölüm 3: Yapılandırmaları değiştirmek için profil kullanma](./03_profiles.md)           | Profiller tanımlama ve birleştirme, tam olarak çözümlenmiş yapılandırmayı inceleme      | 15 dakika    |
+| Kurs bölümü                                                                      | Özet                                                                                        | Tahmini süre |
+| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------ |
+| [Bölüm 1: Hesaplama ortamınıza uyarlama](./01_packaging_and_execution.md)        | Yazılım paketleme teknolojisini değiştirme ve bir yürütme platformu seçme                   | 20 dakika    |
+| [Bölüm 2: İşlem kaynaklarını ve hataları yönetme](./02_resources_and_retries.md) | Kaynak tahsislerini kontrol etme ve başarısız olan görevleri otomatik olarak yeniden deneme | 15 dakika    |
+| [Bölüm 3: Yapılandırmaları değiştirmek için profil kullanma](./03_profiles.md)   | Profiller tanımlama ve birleştirme, tam olarak çözümlenmiş yapılandırmayı inceleme          | 15 dakika    |
 
 Bu kursun sonunda, çeşitli hesaplama ortamları için Nextflow pipeline'larını yapılandırma ve aralarında minimum güçlükle geçiş yapma konusunda kendinize güveneceksiniz.
 

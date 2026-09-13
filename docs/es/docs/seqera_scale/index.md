@@ -38,10 +38,10 @@ Luego cambiará a la herramienta de línea de comandos `tw` para hacer lo mismo 
 
 ### Plan de lecciones
 
-| Capítulo del curso                                                                          | Resumen                                                                                                          | Duración estimada |
-| ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ----------------- |
-| [Parte 1: Ejecutar pipelines desde la interfaz web](./01_run_with_seqera.md)                | Configurar el acceso a Seqera Platform y ejecutar un pipeline a escala de producción desde la interfaz web       | 20 min            |
-| [Parte 2: Ejecutar pipelines desde la línea de comandos](./02_launch_from_cli.md)           | Autenticar el CLI `tw`, ejecutar un pipeline guardado y registrar un nuevo pipeline desde la línea de comandos   | 25 min            |
+| Capítulo del curso                                                                | Resumen                                                                                                        | Duración estimada |
+| --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ----------------- |
+| [Parte 1: Ejecutar pipelines desde la interfaz web](./01_run_with_seqera.md)      | Configurar el acceso a Seqera Platform y ejecutar un pipeline a escala de producción desde la interfaz web     | 20 min            |
+| [Parte 2: Ejecutar pipelines desde la línea de comandos](./02_launch_from_cli.md) | Autenticar el CLI `tw`, ejecutar un pipeline guardado y registrar un nuevo pipeline desde la línea de comandos | 25 min            |
 
 Al finalizar este curso, se sentirá cómodo/a ejecutando y monitoreando pipelines de Nextflow en Seqera Platform, ya sea desde la interfaz web o desde la línea de comandos.
 

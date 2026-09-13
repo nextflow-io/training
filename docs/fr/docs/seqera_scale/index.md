@@ -38,10 +38,10 @@ Vous passerez ensuite à l'outil en ligne de commande `tw` pour faire de même d
 
 ### Plan du cours
 
-| Chapitre du cours                                                          | Résumé                                                                                                                    | Durée estimée |
-| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| [Partie 1 : Lancer des pipelines depuis l'interface web](./01_run_with_seqera.md) | Configurer l'accès à Seqera Platform et lancer un pipeline à l'échelle de production depuis l'interface web | 20 min        |
-| [Partie 2 : Lancer des pipelines depuis la ligne de commande](./02_launch_from_cli.md) | Authentifier le CLI `tw`, lancer un pipeline enregistré et en enregistrer un nouveau depuis le CLI | 25 min        |
+| Chapitre du cours                                                                      | Résumé                                                                                                      | Durée estimée |
+| -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------- |
+| [Partie 1 : Lancer des pipelines depuis l'interface web](./01_run_with_seqera.md)      | Configurer l'accès à Seqera Platform et lancer un pipeline à l'échelle de production depuis l'interface web | 20 min        |
+| [Partie 2 : Lancer des pipelines depuis la ligne de commande](./02_launch_from_cli.md) | Authentifier le CLI `tw`, lancer un pipeline enregistré et en enregistrer un nouveau depuis le CLI          | 25 min        |
 
 À la fin de ce cours, vous serez à l'aise pour lancer et surveiller des pipelines Nextflow sur Seqera Platform, que vous préfériez travailler depuis l'interface web ou depuis la ligne de commande.
 

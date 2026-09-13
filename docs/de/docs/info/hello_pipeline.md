@@ -1,22 +1,9 @@
 ---
-title: The Hello pipeline
-description: Recap of what the Hello pipeline does and how it is structured.
-hide:
-  - toc
-  - footer
----
-
-Looking at the diff, I need to remove the trailing section (the horizontal rule and the Seqera logo div) from the existing German translation.
-
-## %%%
-
 title: Die Hello-Pipeline
 description: Zusammenfassung dessen, was die Hello-Pipeline tut und wie sie strukturiert ist.
 hide:
-
-- toc
-- footer
-
+  - toc
+  - footer
 ---
 
 # Die Hello-Pipeline
@@ -82,4 +69,3 @@ Die Ergebnisse werden in einem Verzeichnis namens `results/` veröffentlicht, un
 ```
 
 Je nach Kurs, in dem die pipeline vorgestellt wird, können kleine Abweichungen in den Details auftreten.
-%%%

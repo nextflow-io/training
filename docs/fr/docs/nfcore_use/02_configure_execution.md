@@ -1,5 +1,5 @@
 ---
-title: Partie 2 : Configurer l'exécution du pipeline
+title: "Partie 2 : Configurer l'exécution du pipeline"
 description: Apprenez à configurer l'exécution d'un pipeline nf-core en définissant des paramètres, en comprenant la validation et en personnalisant l'allocation des ressources.
 ---
 

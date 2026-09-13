@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 ## Uruchom środowisko szkoleniowe
 
 Aby skorzystać z gotowego środowiska, które udostępniamy na GitHub Codespaces, kliknij poniższy przycisk „Open in GitHub Codespaces". Inne opcje znajdziesz w sekcji [Opcje środowiska](../envsetup/index.md).

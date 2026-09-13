@@ -38,10 +38,10 @@ Poi passerete allo strumento a riga di comando `tw` per fare lo stesso da un ter
 
 ### Piano delle lezioni
 
-| Capitolo del corso                                                                          | Sommario                                                                                                          | Durata stimata |
-| ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | -------------- |
-| [Parte 1: Lanciare pipeline dall'interfaccia web](./01_run_with_seqera.md)                  | Configurare l'accesso a Seqera Platform e lanciare una pipeline su scala produttiva dall'interfaccia web          | 20 min         |
-| [Parte 2: Lanciare pipeline dalla riga di comando](./02_launch_from_cli.md)                 | Autenticare la CLI `tw`, lanciare una pipeline salvata e registrare una nuova pipeline dalla riga di comando      | 25 min         |
+| Capitolo del corso                                                          | Sommario                                                                                                     | Durata stimata |
+| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | -------------- |
+| [Parte 1: Lanciare pipeline dall'interfaccia web](./01_run_with_seqera.md)  | Configurare l'accesso a Seqera Platform e lanciare una pipeline su scala produttiva dall'interfaccia web     | 20 min         |
+| [Parte 2: Lanciare pipeline dalla riga di comando](./02_launch_from_cli.md) | Autenticare la CLI `tw`, lanciare una pipeline salvata e registrare una nuova pipeline dalla riga di comando | 25 min         |
 
 Al termine di questo corso, sarete in grado di lanciare e monitorare pipeline Nextflow su Seqera Platform con sicurezza, sia dall'interfaccia web che dalla riga di comando.
 

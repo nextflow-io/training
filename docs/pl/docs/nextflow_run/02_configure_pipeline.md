@@ -1,5 +1,5 @@
 ---
-title: Część 2: Konfiguracja pipeline'u
+title: "Część 2: Konfiguracja pipeline'u"
 description: Naucz się konfigurować zachowanie pipeline'u przy użyciu nextflow.config
 ---
 

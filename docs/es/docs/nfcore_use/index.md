@@ -41,11 +41,11 @@ Si busca una introducción al desarrollo de pipelines compatibles con nf-core, c
 
 ### Plan de lecciones
 
-| Capítulo del curso                                                   | Resumen                                                                                                          | Duración estimada |
-| -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ----------------- |
-| [Parte 1: Ejecutar un pipeline de demostración](./01_run_demo.md)    | Encontrar y obtener un pipeline de nf-core y ejecutarlo usando su perfil de prueba                               | 20 min            |
-| [Parte 2: Configurar la ejecución del pipeline](./02_configure_execution.md) | Establecer parámetros, comprender la validación y personalizar la asignación de recursos y los argumentos de herramientas | 20 min |
-| [Parte 3: Ejecutar un pipeline de producción](./03_run_production_pipeline.md) | Obtener y ejecutar nf-core/rnaseq, y modificar sus asignaciones de recursos predeterminadas              | 20 min            |
+| Capítulo del curso                                                             | Resumen                                                                                                                   | Duración estimada |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| [Parte 1: Ejecutar un pipeline de demostración](./01_run_demo.md)              | Encontrar y obtener un pipeline de nf-core y ejecutarlo usando su perfil de prueba                                        | 20 min            |
+| [Parte 2: Configurar la ejecución del pipeline](./02_configure_execution.md)   | Establecer parámetros, comprender la validación y personalizar la asignación de recursos y los argumentos de herramientas | 20 min            |
+| [Parte 3: Ejecutar un pipeline de producción](./03_run_production_pipeline.md) | Obtener y ejecutar nf-core/rnaseq, y modificar sus asignaciones de recursos predeterminadas                               | 20 min            |
 
 Al finalizar este curso, podrá aprovechar la gran cantidad de pipelines comunitarios que ofrece el proyecto nf-core.
 

@@ -24,7 +24,6 @@ additional_information:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 **Build with nf-core è un'introduzione pratica all'uso delle risorse e delle best practice di nf-core.**
 
 ![nf-core logo](./img/nf-core-logo.png#only-light)

@@ -33,11 +33,11 @@ Rapor, bir tarayıcıda açabileceğiniz bir HTML dosyasıdır.
 Tahsis edilen kaynakların gerçekte ne kadarının kullanıldığı dahil olmak üzere, süreç başına çalışma süresi ve kaynak kullanımını ayrıntılı olarak gösterir.
 Mevcut varsayılanlarla (1 CPU, 1 GB bellek) `cowpy` için gösterdikleri şunlardır:
 
-| Metrik                | Değer  |
-| --------------------- | ------ |
-| CPU kullanımı         | 116%   |
+| Metrik                 | Değer  |
+| ---------------------- | ------ |
+| CPU kullanımı          | 116%   |
 | Kullanılan peak bellek | 6.4 MB |
-| Tahsis edilen bellek  | 1 GB   |
+| Tahsis edilen bellek   | 1 GB   |
 
 `cowpy`, 1 GB tahsisinin %1'inden çok daha azını kullanır; `%cpu` değerinin 100'ün üzerinde olması, konteyner içinde kısa süreli artışlarla zaman zaman birden fazla CPU'nun işlem gücünü kullandığı anlamına gelir.
 
@@ -120,10 +120,10 @@ nextflow run main.nf -with-report report-config-2.html
 
 `cowpy` için iki raporu karşılaştırdığımızda:
 
-| Metrik                | Önce (1 CPU, 1 GB) | Sonra (2 CPU, 2 GB) |
-| --------------------- | ------------------- | -------------------- |
-| Kullanılan peak bellek | 6.4 MB              | 6.4 MB               |
-| CPU kullanımı         | 116%                | 118%                 |
+| Metrik                 | Önce (1 CPU, 1 GB) | Sonra (2 CPU, 2 GB) |
+| ---------------------- | ------------------ | ------------------- |
+| Kullanılan peak bellek | 6.4 MB             | 6.4 MB              |
+| CPU kullanımı          | 116%               | 118%                |
 
 Tahsisi iki katına çıkarmak gerçek kullanımı hiç değiştirmedi; bu da orijinal 1 GB / 1 CPU'nun bu basit iş yükü için zaten yeterli olduğunu gösteriyor.
 Önemsiz olmayan veriler işleyen gerçek bir pipeline'da, sayıların süreçler arasında anlamlı biçimde farklılaşmasını beklersiniz; bu da tahsis etmek yerine tahmin yapmak yerine önce profil çıkarmanız gerektiğinin tam olarak nedenidir.

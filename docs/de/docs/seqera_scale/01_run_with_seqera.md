@@ -1,5 +1,4 @@
 ---
-
 # Teil 1: Pipelines über die Web-Oberfläche starten
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
@@ -7,7 +6,6 @@
 In diesem Teil des Kurses „Scale with Seqera" richtest du den Zugang zur Seqera Platform ein und startest eine produktionsreife Pipeline über die Web-Oberfläche.
 
 Stelle sicher, dass dein Arbeitsverzeichnis auf `seqera-scale/` gesetzt ist, wie auf der Seite [Erste Schritte](./00_orientation.md) beschrieben.
-
 ---
 
 ## 1. Erste Schritte mit Seqera

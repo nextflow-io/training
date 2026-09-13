@@ -41,11 +41,11 @@ Jeśli szukasz wprowadzenia do tworzenia pipeline'ów zgodnych z nf-core, zajrzy
 
 ### Plan kursu
 
-| Rozdział kursu                                                       | Opis                                                                                                          | Szacowany czas |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | -------------- |
-| [Część 1: Uruchom przykładowy pipeline](./01_run_demo.md)            | Znajdź i pobierz pipeline nf-core, a następnie uruchom go przy użyciu profilu testowego                       | 20 min         |
-| [Część 2: Skonfiguruj wykonanie pipeline'u](./02_configure_execution.md) | Ustaw parametry, poznaj walidację oraz dostosuj przydział zasobów i argumenty narzędzi                   | 20 min         |
-| [Część 3: Uruchom pipeline produkcyjny](./03_run_production_pipeline.md) | Pobierz i uruchom nf-core/rnaseq, a następnie nadpisz jego domyślne przydziały zasobów                   | 20 min         |
+| Rozdział kursu                                                           | Opis                                                                                    | Szacowany czas |
+| ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- | -------------- |
+| [Część 1: Uruchom przykładowy pipeline](./01_run_demo.md)                | Znajdź i pobierz pipeline nf-core, a następnie uruchom go przy użyciu profilu testowego | 20 min         |
+| [Część 2: Skonfiguruj wykonanie pipeline'u](./02_configure_execution.md) | Ustaw parametry, poznaj walidację oraz dostosuj przydział zasobów i argumenty narzędzi  | 20 min         |
+| [Część 3: Uruchom pipeline produkcyjny](./03_run_production_pipeline.md) | Pobierz i uruchom nf-core/rnaseq, a następnie nadpisz jego domyślne przydziały zasobów  | 20 min         |
 
 Po ukończeniu kursu będziesz potrafić korzystać z bogatej oferty pipeline'ów społeczności projektu nf-core.
 

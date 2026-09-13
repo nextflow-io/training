@@ -41,11 +41,11 @@ Wenn du eine Einführung in die Entwicklung nf-core-kompatibler Pipelines suchst
 
 ### Lehrplan
 
-| Kurskapitel                                                          | Zusammenfassung                                                                                                    | Geschätzte Dauer |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------- |
-| [Teil 1: Eine Demo-Pipeline ausführen](./01_run_demo.md)             | Eine nf-core-Pipeline finden und abrufen und sie mit ihrem Test-Profil ausführen                                   | 20 Min.          |
-| [Teil 2: Pipeline-Ausführung konfigurieren](./02_configure_execution.md) | Parameter setzen, Validierung verstehen und Ressourcenzuweisung sowie Tool-Argumente anpassen                  | 20 Min.          |
-| [Teil 3: Eine Produktions-Pipeline ausführen](./03_run_production_pipeline.md) | nf-core/rnaseq herunterladen und ausführen und ihre Standard-Ressourcenzuweisungen überschreiben         | 20 Min.          |
+| Kurskapitel                                                                    | Zusammenfassung                                                                                  | Geschätzte Dauer |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ---------------- |
+| [Teil 1: Eine Demo-Pipeline ausführen](./01_run_demo.md)                       | Eine nf-core-Pipeline finden und abrufen und sie mit ihrem Test-Profil ausführen                 | 20 Min.          |
+| [Teil 2: Pipeline-Ausführung konfigurieren](./02_configure_execution.md)       | Parameter setzen, Validierung verstehen und Ressourcenzuweisung sowie Tool-Argumente anpassen    | 20 Min.          |
+| [Teil 3: Eine Produktions-Pipeline ausführen](./03_run_production_pipeline.md) | nf-core/rnaseq herunterladen und ausführen und ihre Standard-Ressourcenzuweisungen überschreiben | 20 Min.          |
 
 Am Ende dieses Kurses kannst du die Vielzahl an Community-Pipelines des nf-core-Projekts für dich nutzen.
 

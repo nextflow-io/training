@@ -1,23 +1,4 @@
 ---
-title: Scale with Seqera
-hide:
-  - toc
-page_type: index_page
-index_type: course
-additional_information:
-  technical_requirements: true
-  learning_objectives:
-    - Sign up for Seqera Platform and explore the Community Showcase
-    - Add a pipeline to a workspace and launch it from the web interface
-    - Authenticate and launch pipelines from the command line with the `tw` CLI
-    - Register a GitHub-hosted pipeline and launch it both ways
-  audience_prerequisites:
-    - "**Audience:** This course is designed for learners who want to run Nextflow pipelines at scale using Seqera Platform."
-    - "**Skills:** Familiarity with running nf-core pipelines from the command line is assumed."
-    - "**Courses:** Must have completed [Nextflow Run](../nextflow_run/index.md) and [Use nf-core](../nfcore_use/index.md), or otherwise be comfortable running local and `nf-core/rnaseq` pipelines."
----
-
----
 title: Seqera के साथ स्केल करें
 hide:
   - toc
@@ -28,7 +9,7 @@ additional_information:
   learning_objectives:
     - Seqera Platform के लिए साइन अप करें और Community Showcase को एक्सप्लोर करें
     - एक workspace में पाइपलाइन जोड़ें और वेब इंटरफ़ेस से उसे लॉन्च करें
-    - `tw` CLI के साथ कमांड लाइन से authenticate करें और पाइपलाइन लॉन्च करें
+    - "`tw` CLI के साथ कमांड लाइन से authenticate करें और पाइपलाइन लॉन्च करें"
     - GitHub पर होस्ट की गई पाइपलाइन को रजिस्टर करें और दोनों तरीकों से लॉन्च करें
   audience_prerequisites:
     - "**दर्शक:** यह कोर्स उन लोगों के लिए बनाया गया है जो Seqera Platform का उपयोग करके Nextflow पाइपलाइन को बड़े पैमाने पर चलाना चाहते हैं।"
@@ -57,10 +38,10 @@ additional_information:
 
 ### पाठ योजना
 
-| कोर्स अध्याय                                                               | सारांश                                                                                                    | अनुमानित समय |
-| -------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------ |
-| [भाग 1: वेब इंटरफ़ेस से पाइपलाइन लॉन्च करें](./01_run_with_seqera.md)    | Seqera Platform की पहुँच सेट अप करें और वेब इंटरफ़ेस से एक प्रोडक्शन-स्केल पाइपलाइन लॉन्च करें         | 20 मिनट      |
-| [भाग 2: कमांड लाइन से पाइपलाइन लॉन्च करें](./02_launch_from_cli.md)      | `tw` CLI को authenticate करें, एक सेव की गई पाइपलाइन लॉन्च करें, और CLI से एक नई पाइपलाइन रजिस्टर करें | 25 मिनट      |
+| कोर्स अध्याय                                                          | सारांश                                                                                                 | अनुमानित समय |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------ |
+| [भाग 1: वेब इंटरफ़ेस से पाइपलाइन लॉन्च करें](./01_run_with_seqera.md) | Seqera Platform की पहुँच सेट अप करें और वेब इंटरफ़ेस से एक प्रोडक्शन-स्केल पाइपलाइन लॉन्च करें         | 20 मिनट      |
+| [भाग 2: कमांड लाइन से पाइपलाइन लॉन्च करें](./02_launch_from_cli.md)   | `tw` CLI को authenticate करें, एक सेव की गई पाइपलाइन लॉन्च करें, और CLI से एक नई पाइपलाइन रजिस्टर करें | 25 मिनट      |
 
 इस कोर्स के अंत तक, तुम Seqera Platform पर Nextflow पाइपलाइन लॉन्च करने और मॉनिटर करने में सहज हो जाओगे, चाहे तुम वेब इंटरफ़ेस से काम करना पसंद करो या कमांड लाइन से।
 
