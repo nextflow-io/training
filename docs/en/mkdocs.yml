@@ -5,6 +5,14 @@ repo_name: nextflow-io/training
 
 nav:
   - index.md
+  - Nextflow Triathlon:
+      - nextflow_triathlon/index.md
+      - nextflow_triathlon/00_orientation.md
+      - nextflow_triathlon/01_run_nextflow.md
+      - nextflow_triathlon/02_run_nfcore.md
+      - nextflow_triathlon/03_run_seqera.md
+      - nextflow_triathlon/next_steps.md
+      - nextflow_triathlon/survey.md
   - Nextflow Run:
       - Overview: nextflow_run/index.md
       - nextflow_run/00_orientation.md
@@ -311,6 +319,7 @@ plugins:
   - enumerate-headings:
       restart_increment_after:
         - envsetup/01_setup.md
+        - nextflow_triathlon/00_orientation.md
         - nextflow_run/00_orientation.md
         - nfcore_use/00_orientation.md
         - seqera_scale/00_orientation.md
@@ -327,6 +336,7 @@ plugins:
         - training_events*.md
         - info/*.md
         - envsetup/*.md
+        - nextflow_triathlon/*.md
         - nextflow_run/*.md
         - nfcore_use/*.md
         - seqera_scale/*.md
