@@ -447,5 +447,5 @@ Next steps:
 
 - Fill out the course survey to provide feedback
 - Check out [Hello Nextflow](../../hello_nextflow/index.md) to learn more about developing workflows
-- Explore [Build with nf-core](../../hello_nf-core/index.md) to dive deeper into nf-core tooling
+- Explore [Build with nf-core](../../nfcore_build/index.md) to dive deeper into nf-core tooling
 - Explore more advanced topics in the [Side Quests](../../side_quests/index.md)

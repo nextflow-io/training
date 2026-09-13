@@ -36,7 +36,7 @@ You're now equipped to run and monitor your own pipelines on Seqera Platform, at
 
 Here are our top suggestions for what to do next:
 
-- Don't just run pipelines, develop them! Learn to write your own with [Hello Nextflow](../hello_nextflow/index.md) or [Build with nf-core](../hello_nf-core/index.md)
+- Don't just run pipelines, develop them! Learn to write your own with [Hello Nextflow](../hello_nextflow/index.md) or [Build with nf-core](../nfcore_build/index.md)
 - Apply Nextflow to a scientific analysis use case with [Nextflow for Science](../nf4_science/index.md)
 - Explore more advanced Nextflow features with the [Side Quests](../side_quests/index.md)
 

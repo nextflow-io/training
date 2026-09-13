@@ -435,7 +435,7 @@ This tells us that four processes were run, corresponding to the four tools show
 
 The full process names as shown here, such as `NFCORE_DEMO:DEMO:MULTIQC`, are longer than what you may have seen in the introductory Hello Nextflow material.
 These include the names of their parent workflows and reflect the modularity of the pipeline code.
-If you want to learn to develop nf-core-style pipelines yourself, see the [Build with nf-core](../hello_nf-core/index.md) course.
+If you want to learn to develop nf-core-style pipelines yourself, see the [Build with nf-core](../nfcore_build/index.md) course.
 
 ### 2.3. Examine the pipeline's outputs
 

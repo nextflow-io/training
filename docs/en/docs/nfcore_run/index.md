@@ -35,7 +35,7 @@ This course is hands-on, with goal-oriented exercises structured to introduce in
 You will start with `nf-core/demo`, a minimal pipeline maintained by the nf-core project for training purposes, then apply what you've learned to `nf-core/rnaseq`, a widely-used production pipeline for bulk RNA sequencing analysis.
 
 This course focuses on running pipelines.
-If you're looking for an intro to developing nf-core-compatible pipelines, see [Build with nf-core](../hello_nf-core/index.md).
+If you're looking for an intro to developing nf-core-compatible pipelines, see [Build with nf-core](../nfcore_build/index.md).
 
 ### Lesson plan
 

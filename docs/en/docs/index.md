@@ -73,7 +73,7 @@ hide:
 
         A hands-on introduction to configuring Nextflow pipeline execution: adapting to different compute environments, controlling resource allocations and retries, and switching between preset configuration profiles.
 
-        [View the training :material-arrow-right:](nextflow_config/index.md){ .md-button .md-button--secondary }
+        [View the training :material-arrow-right:](execution_config/index.md){ .md-button .md-button--secondary }
 
     !!! info compact "More topics coming"
 
@@ -100,7 +100,7 @@ hide:
         For Nextflow developers who wish to learn to develop [nf-core](https://nf-co.re/) compliant pipelines.
         The course covers the structure of nf-core pipelines in enough detail to enable developing simple but fully functional pipelines that leverage the nf-core template and development best practices, as well as use existing nf-core modules.
 
-        [View the training :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
+        [View the training :material-arrow-right:](nfcore_build/index.md){ .md-button .md-button--secondary }
 
     ??? catalog "**Side Quests:** Dive into advanced Nextflow topics"
 

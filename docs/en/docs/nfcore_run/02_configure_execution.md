@@ -3,10 +3,6 @@
 In [Part 1](./01_run_demo.md), you found and ran the nf-core/demo pipeline using its test profile.
 Now we look at how to configure pipeline execution: setting parameters, understanding validation, and customizing resource allocation and tool arguments.
 
----
-
-## 1. Configure pipeline execution
-
 As explained in [Hello Config](../hello_nextflow/06_hello_config.md), we want to be able to change what data our pipeline will run on and how it will run without changing the pipeline code itself.
 To that end, Nextflow supports multiple ways of controlling pipeline configuration, which can be a bit overwhelming.
 
@@ -21,11 +17,13 @@ The nf-core project specifies conventions for organizing configuration elements,
 
 Let's start by tackling pipeline parameters, then we'll look at configuration in the strict sense.
 
-### 1.1. Pipeline parameters
+---
+
+## 1. Pipeline parameters
 
 For all nf-core pipelines, you can obtain a full list of pipeline parameters directly from the command line by using the `--help` flag, which is itself a pipeline parameter.
 
-#### 1.1.1. Get the list of parameters with `--help`
+### 1.1. Get the list of parameters with `--help`
 
 Run the help command for the demo pipeline:
 
@@ -94,7 +92,7 @@ In plain Nextflow pipelines, `--help` only works if the developer implemented it
 
     Use `--help --show_hidden` to see additional parameters that are hidden by default, such as `--publish_dir_mode` or `--monochrome_logs`.
 
-#### 1.1.2. Set parameter values
+### 1.2. Set parameter values
 
 As covered in [Hello Config](../hello_nextflow/06_hello_config.md), you can set parameter values on the command line with `--param_name` or collect a set of parameters in a YAML file and pass it with `-params-file`.
 Both approaches work the same way with nf-core pipelines.
@@ -147,8 +145,8 @@ nextflow run nf-core/demo -profile test,docker --outdir demo-results-notrim -par
       revision                  : master
       runName                   : focused_heisenberg
       containerEngine           : docker
-      launchDir                 : /workspaces/training/hello-nf-core
-      workDir                   : /workspaces/training/hello-nf-core/work
+      launchDir                 : /workspaces/training/nfcore-build
+      workDir                   : /workspaces/training/nfcore-build/work
       projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2
       userName                  : root
       profile                   : test,docker
@@ -197,7 +195,7 @@ The `SEQTK_TRIM` process no longer appears in the output.
 
     As a rule of thumb: If it appears in the `--help` output, set it via the command line or a params file rather than a config file.
 
-#### 1.1.3. Parameter validation
+### 1.3. Parameter validation
 
 Fun fact: the `--help` command works for all nf-core pipelines because the nf-core project requires developers to define all pipeline parameters formally in a JSON schema file (`nextflow_schema.json`).
 This schema records each parameter's type, description, default value, and grouping.
@@ -205,9 +203,9 @@ This schema records each parameter's type, description, default value, and group
 In addition to powering the `--help` output, the schema file also enables automated validation at launch time.
 This means that Nextflow can check that every parameter you pass exists and has been given an appropriate value (of appropriate type, within the allowed range of values etc).
 
-We cover this in more detail in [input validation section](../hello_nf-core/04_input_validation.md), but you can already see it in action by giving the demo pipeline some invalid parameter input.
+We cover this in more detail in [input validation section](../nfcore_build/04_input_validation.md), but you can already see it in action by giving the demo pipeline some invalid parameter input.
 
-##### 1.1.3.1. Unrecognized parameters
+#### 1.3.1. Unrecognized parameters
 
 Try passing a parameter that does not exist:
 
@@ -226,7 +224,7 @@ WARN: The following invalid input values have been detected:
 The pipeline still runs, but the warning alerts you right away that `--foobar` is not a recognized parameter.
 This is meant to draw your attention to non-breaking typos, like `--outDir` being used instead of `--outdir`, which can help you avoid wasting time and compute.
 
-##### 1.1.3.2. Invalid parameter values
+#### 1.3.2. Invalid parameter values
 
 Validation also checks parameter **values**.
 The `--skip_trim` parameter is a boolean flag, so passing a string value causes the pipeline to fail immediately:
@@ -245,16 +243,16 @@ The following invalid input values have been detected:
 ```
 
 The pipeline stops before any processes run, saving you from a failed or incorrect execution.
-As noted in section 1.1.2, boolean parameters should be set to a genuine `true`/`false` value in a params file rather than passed on the command line, since command-line values are typed as strings.
+As noted in [1.2](#12-set-parameter-values), boolean parameters should be set to a genuine `true`/`false` value in a params file rather than passed on the command line, since command-line values are typed as strings.
 
-#### 1.1.4. Input validation
+### 1.4. Input validation
 
 The same validation logic can also be used to check the validity of input files.
 For example, if a pipeline expects a samplesheet as its main data input (which is the case of many if not most nf-core pipelines), the developer can provide an input schema (distinct from the parameters schema) describing how the input file should be structured.
 
 Then, at runtime, Nextflow can check that the input file provided is valid.
 
-We also cover this in more detail in [input validation section](../hello_nf-core/04_input_validation.md), but you can already see it in action by giving the demo pipeline an invalid input samplesheet.
+We also cover this in more detail in [input validation section](../nfcore_build/04_input_validation.md), but you can already see it in action by giving the demo pipeline an invalid input samplesheet.
 
 The `nf-core/demo` pipeline expects a CSV file with columns `sample`, `fastq_1`, and `fastq_2`.
 This is defined in a schema file (`assets/schema_input.json`) that specifies the expected structure, column types, and constraints.
@@ -333,14 +331,26 @@ nf-schema does not stop at the first error — it collects every problem and lis
 
 Each error identifies the exact entry and field that caused the problem, so you can fix your samplesheet then re-launch the pipeline with confidence that it's not going to fail at some later point when Nextflow actually goes to access the file path.
 
-For developers, all of this is covered in more detail in [Part 4 of Build with nf-core](../hello_nf-core/04_input_validation.md).
+For developers, all of this is covered in more detail in [Part 4 of Build with nf-core](../nfcore_build/04_input_validation.md).
 
-### 1.2. Configuration
+### Takeaway
+
+You know how to get a full list of a pipeline's parameters with `--help`, set them via the command line or a params file, and how Nextflow validates both parameter values and input files against the pipeline's schemas.
+
+### What's next?
+
+Learn about the other kind of configuration: how the pipeline runs, covering resource allocation and tool arguments.
+
+---
+
+## 2. Configuration
 
 Configuration in the strict sense controls **how** the pipeline runs: resource allocation, tool-specific arguments, where jobs execute, and which software packaging system to use.
 
 nf-core pipelines include default configuration in `nextflow.config` and the `conf/` directory.
 Before overriding anything, it helps to know where the defaults live.
+
+### 2.1. Explore configuration files
 
 You already saw in [Part 1](./01_run_demo.md) that the pipeline source code lives under `$NXF_HOME/assets`.
 Using the `pipelines` symlink you created in [Part 1](./01_run_demo.md), list the config files to see what's available:
@@ -385,7 +395,7 @@ The values you specify will override the default values set in those other files
 
 Let's try this in practice.
 
-#### 1.2.1. Customize process resources and tool arguments
+### 2.2. Customize process resources and tool arguments
 
 nf-core modules support two common types of configuration override: **resource allocation** (CPUs, memory, time) and **tool arguments** via `ext.args`.
 
@@ -475,7 +485,7 @@ You should always check a module's default configuration before overriding `ext.
 
 ### Takeaway
 
-You know how to get help from an nf-core pipeline, set parameters and understand how they are validated, and customize configuration through config files.
+You know where nf-core pipeline configuration defaults live, and how to override resource allocations and tool arguments with a custom config file.
 
 ### What's next?
 

@@ -30,13 +30,13 @@ nav:
       - seqera_run/next_steps.md
       - seqera_run/survey.md
   - Execution Config:
-      - Overview: nextflow_config/index.md
-      - nextflow_config/00_orientation.md
-      - nextflow_config/01_packaging_and_execution.md
-      - nextflow_config/02_resources_and_retries.md
-      - nextflow_config/03_profiles.md
-      - nextflow_config/next_steps.md
-      - nextflow_config/survey.md
+      - Overview: execution_config/index.md
+      - execution_config/00_orientation.md
+      - execution_config/01_packaging_and_execution.md
+      - execution_config/02_resources_and_retries.md
+      - execution_config/03_profiles.md
+      - execution_config/next_steps.md
+      - execution_config/survey.md
   - Hello Nextflow:
       - Overview: hello_nextflow/index.md
       - hello_nextflow/00_orientation.md
@@ -49,14 +49,14 @@ nav:
       - hello_nextflow/next_steps.md
       - hello_nextflow/survey.md
   - Build with nf-core:
-      - Overview: hello_nf-core/index.md
-      - hello_nf-core/00_orientation.md
-      - hello_nf-core/01_rewrite_hello.md
-      - hello_nf-core/02_use_module.md
-      - hello_nf-core/03_make_module.md
-      - hello_nf-core/04_input_validation.md
-      - hello_nf-core/next_steps.md
-      - hello_nf-core/survey.md
+      - Overview: nfcore_build/index.md
+      - nfcore_build/00_orientation.md
+      - nfcore_build/01_rewrite_hello.md
+      - nfcore_build/02_use_module.md
+      - nfcore_build/03_make_module.md
+      - nfcore_build/04_input_validation.md
+      - nfcore_build/next_steps.md
+      - nfcore_build/survey.md
   - Side Quests:
       - Overview: side_quests/index.md
       - side_quests/orientation.md
@@ -191,9 +191,9 @@ extra:
     nextflow_run/index.md: Nextflow Run
     nfcore_run/index.md: Use nf-core
     seqera_run/index.md: Scale with Seqera
-    nextflow_config/index.md: Execution Config
+    execution_config/index.md: Execution Config
     hello_nextflow/index.md: Hello Nextflow
-    hello_nf-core/index.md: Build with nf-core
+    nfcore_build/index.md: Build with nf-core
     nf4_science/index.md: Nextflow for Science
     nf4_science/genomics/index.md: "Genomics"
     nf4_science/rnaseq/index.md: "RNAseq"
@@ -314,9 +314,9 @@ plugins:
         - nextflow_run/00_orientation.md
         - nfcore_run/00_orientation.md
         - seqera_run/00_orientation.md
-        - nextflow_config/00_orientation.md
+        - execution_config/00_orientation.md
         - hello_nextflow/00_orientation.md
-        - hello_nf-core/00_orientation.md
+        - nfcore_build/00_orientation.md
         - nf4_science/genomics/00_orientation.md
         - nf4_science/rnaseq/00_orientation.md
         - side_quests/orientation.md
@@ -330,9 +330,9 @@ plugins:
         - nextflow_run/*.md
         - nfcore_run/*.md
         - seqera_run/*.md
-        - nextflow_config/*.md
+        - execution_config/*.md
         - hello_nextflow/*.md
-        - hello_nf-core/*.md
+        - nfcore_build/*.md
         - nf4_science/genomics/*.md
         - nf4_science/rnaseq/*.md
         - nf4_science/imaging/*.md
@@ -350,11 +350,26 @@ plugins:
         "nextflow_run/01_basics.md": "https://training.nextflow.io/3.6.1/nextflow_run/01_basics/"
         "nextflow_run/02_pipeline.md": "https://training.nextflow.io/3.6.1/nextflow_run/02_pipeline/"
         "nextflow_run/03_config.md": "https://training.nextflow.io/3.6.1/nextflow_run/03_config/"
-        "hello_nf-core/02_rewrite_hello.md": "hello_nf-core/01_rewrite_hello.md"
-        "hello_nf-core/03_use_module.md": "hello_nf-core/02_use_module.md"
-        "hello_nf-core/04_make_module.md": "hello_nf-core/03_make_module.md"
-        "hello_nf-core/05_input_validation.md": "hello_nf-core/04_input_validation.md"
+        "hello_nf-core/02_rewrite_hello.md": "nfcore_build/01_rewrite_hello.md"
+        "hello_nf-core/03_use_module.md": "nfcore_build/02_use_module.md"
+        "hello_nf-core/04_make_module.md": "nfcore_build/03_make_module.md"
+        "hello_nf-core/05_input_validation.md": "nfcore_build/04_input_validation.md"
         "hello_nf-core/01_run_demo.md": "nfcore_run/01_run_demo.md"
+        "hello_nf-core/index.md": "nfcore_build/index.md"
+        "hello_nf-core/00_orientation.md": "nfcore_build/00_orientation.md"
+        "hello_nf-core/01_rewrite_hello.md": "nfcore_build/01_rewrite_hello.md"
+        "hello_nf-core/02_use_module.md": "nfcore_build/02_use_module.md"
+        "hello_nf-core/03_make_module.md": "nfcore_build/03_make_module.md"
+        "hello_nf-core/04_input_validation.md": "nfcore_build/04_input_validation.md"
+        "hello_nf-core/next_steps.md": "nfcore_build/next_steps.md"
+        "hello_nf-core/survey.md": "nfcore_build/survey.md"
+        "nextflow_config/index.md": "execution_config/index.md"
+        "nextflow_config/00_orientation.md": "execution_config/00_orientation.md"
+        "nextflow_config/01_packaging_and_execution.md": "execution_config/01_packaging_and_execution.md"
+        "nextflow_config/02_resources_and_retries.md": "execution_config/02_resources_and_retries.md"
+        "nextflow_config/03_profiles.md": "execution_config/03_profiles.md"
+        "nextflow_config/next_steps.md": "execution_config/next_steps.md"
+        "nextflow_config/survey.md": "execution_config/survey.md"
 hooks:
   - ../../_scripts/mkdocs_hooks.py
   - ../en/hooks/index_page_hook.py
