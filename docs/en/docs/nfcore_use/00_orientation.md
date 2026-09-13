@@ -45,12 +45,12 @@ Once your codespace is running, there are two things you need to do before divin
 
 ### Set the working directory
 
-By default, the codespace opens with the work directory set at the root of all training courses, but for this course, we'll be working in the `nfcore-run/` directory.
+By default, the codespace opens with the work directory set at the root of all training courses, but for this course, we'll be working in the `nfcore-use/` directory.
 
 Change directory now by running this command in the terminal:
 
 ```bash
-cd nfcore-run/
+cd nfcore-use/
 ```
 
 !!! tip
@@ -58,7 +58,7 @@ cd nfcore-run/
     If for whatever reason you move out of this directory (e.g. your codespace goes to sleep), you can always use the full path to return to it, assuming you're running this within the Github Codespaces training environment:
 
     ```bash
-    cd /workspaces/training/nfcore-run
+    cd /workspaces/training/nfcore-use
     ```
 
 Next, explore the contents of this directory.

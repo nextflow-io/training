@@ -55,13 +55,13 @@ hide:
 
         A fast-track introduction to finding, running, and configuring pipelines from the nf-core community project, starting with a minimal demo pipeline then scaling up to a production-scale analysis pipeline.
 
-        [View the training :material-arrow-right:](nfcore_run/index.md){ .md-button .md-button--secondary }
+        [View the training :material-arrow-right:](nfcore_use/index.md){ .md-button .md-button--secondary }
 
     ??? courses "**Scale with Seqera:** Launch and monitor pipelines at scale"
 
         A hands-on introduction to launching and monitoring Nextflow pipelines with Seqera Platform, from both the web interface and the command line.
 
-        [View the training :material-arrow-right:](seqera_run/index.md){ .md-button .md-button--secondary }
+        [View the training :material-arrow-right:](seqera_scale/index.md){ .md-button .md-button--secondary }
 
     ---
 
@@ -78,8 +78,7 @@ hide:
     !!! info compact "More topics coming"
 
         Performance tuning, HPC/cloud execution, and more are planned for this section.
-        Vote on what to cover next in our short interest poll.
-        <!-- TODO: link to interest poll once available -->
+        Vote on what to cover next in our [short interest poll](https://seqera.typeform.com/to/JCs91e8v).
 
 -   :material-code-tags:{ .lg .middle } __For developers__
 

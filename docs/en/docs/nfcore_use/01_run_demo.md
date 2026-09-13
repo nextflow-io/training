@@ -4,7 +4,7 @@ In this first part of the Use nf-core training course, we show you how to find a
 
 We are going to use a pipeline called nf-core/demo that is maintained by the nf-core project as part of its inventory of pipelines for demonstration and training purposes.
 
-Make sure your working directory is set to `nfcore-run/` as instructed on the [Getting started](./00_orientation.md) page.
+Make sure your working directory is set to `nfcore-use/` as instructed on the [Getting started](./00_orientation.md) page.
 
 ---
 
@@ -367,8 +367,8 @@ nextflow run nf-core/demo -profile test,docker --outdir demo-results
       revision                  : master
       runName                   : cranky_curry
       containerEngine           : docker
-      launchDir                 : /workspaces/training/nfcore-run
-      workDir                   : /workspaces/training/nfcore-run/work
+      launchDir                 : /workspaces/training/nfcore-use
+      workDir                   : /workspaces/training/nfcore-use/work
       projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2
       userName                  : root
       profile                   : test,docker

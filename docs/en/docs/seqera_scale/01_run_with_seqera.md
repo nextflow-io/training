@@ -2,7 +2,7 @@
 
 In this part of the Scale with Seqera training course, you will set up access to Seqera Platform and launch a production-scale pipeline from the web interface.
 
-Make sure your working directory is set to `seqera-run/` as instructed on the [Getting started](./00_orientation.md) page.
+Make sure your working directory is set to `seqera-scale/` as instructed on the [Getting started](./00_orientation.md) page.
 
 ---
 

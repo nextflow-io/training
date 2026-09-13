@@ -76,7 +76,7 @@ nextflow run nf-core/rnaseq -profile test,docker --outdir rnaseq-results
       (empty)
 
     Work dir:
-      /workspaces/training/nfcore-run/work/xx/xxxxxxxxxxxxxxxxxxxxxx
+      /workspaces/training/nfcore-use/work/xx/xxxxxxxxxxxxxxxxxxxxxx
 
     Container:
       quay.io/biocontainers/fq:0.12.0--h9ee0642_0

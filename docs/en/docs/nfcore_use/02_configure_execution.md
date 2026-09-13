@@ -12,7 +12,7 @@ The nf-core project specifies conventions for organizing configuration elements,
 - **Configuration** in the strict sense refers to the logistics of how the pipeline gets run, i.e. the executor, compute resource allocations and so on.
 
 <figure class="excalidraw">
-    --8<-- "docs/en/docs/nfcore_run/img/params_vs_config.excalidraw.svg"
+    --8<-- "docs/en/docs/nfcore_use/img/params_vs_config.excalidraw.svg"
 </figure>
 
 Let's start by tackling pipeline parameters, then we'll look at configuration in the strict sense.
@@ -377,7 +377,7 @@ test_full.config
 ```
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nfcore_run/img/nfcore_config_files.excalidraw.svg"
+--8<-- "docs/en/docs/nfcore_use/img/nfcore_config_files.excalidraw.svg"
 </figure>
 
 The most important configuration files are:

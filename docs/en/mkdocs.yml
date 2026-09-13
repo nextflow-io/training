@@ -15,20 +15,20 @@ nav:
       - nextflow_run/next_steps.md
       - nextflow_run/survey.md
   - Use nf-core:
-      - Overview: nfcore_run/index.md
-      - nfcore_run/00_orientation.md
-      - nfcore_run/01_run_demo.md
-      - nfcore_run/02_configure_execution.md
-      - nfcore_run/03_run_production_pipeline.md
-      - nfcore_run/next_steps.md
-      - nfcore_run/survey.md
+      - Overview: nfcore_use/index.md
+      - nfcore_use/00_orientation.md
+      - nfcore_use/01_run_demo.md
+      - nfcore_use/02_configure_execution.md
+      - nfcore_use/03_run_production_pipeline.md
+      - nfcore_use/next_steps.md
+      - nfcore_use/survey.md
   - Scale with Seqera:
-      - Overview: seqera_run/index.md
-      - seqera_run/00_orientation.md
-      - seqera_run/01_run_with_seqera.md
-      - seqera_run/02_launch_from_cli.md
-      - seqera_run/next_steps.md
-      - seqera_run/survey.md
+      - Overview: seqera_scale/index.md
+      - seqera_scale/00_orientation.md
+      - seqera_scale/01_run_with_seqera.md
+      - seqera_scale/02_launch_from_cli.md
+      - seqera_scale/next_steps.md
+      - seqera_scale/survey.md
   - Execution Config:
       - Overview: execution_config/index.md
       - execution_config/00_orientation.md
@@ -189,8 +189,8 @@ extra:
   nav_title_overrides:
     envsetup/index.md: Training Environment
     nextflow_run/index.md: Nextflow Run
-    nfcore_run/index.md: Use nf-core
-    seqera_run/index.md: Scale with Seqera
+    nfcore_use/index.md: Use nf-core
+    seqera_scale/index.md: Scale with Seqera
     execution_config/index.md: Execution Config
     hello_nextflow/index.md: Hello Nextflow
     nfcore_build/index.md: Build with nf-core
@@ -312,8 +312,8 @@ plugins:
       restart_increment_after:
         - envsetup/01_setup.md
         - nextflow_run/00_orientation.md
-        - nfcore_run/00_orientation.md
-        - seqera_run/00_orientation.md
+        - nfcore_use/00_orientation.md
+        - seqera_scale/00_orientation.md
         - execution_config/00_orientation.md
         - hello_nextflow/00_orientation.md
         - nfcore_build/00_orientation.md
@@ -328,8 +328,8 @@ plugins:
         - info/*.md
         - envsetup/*.md
         - nextflow_run/*.md
-        - nfcore_run/*.md
-        - seqera_run/*.md
+        - nfcore_use/*.md
+        - seqera_scale/*.md
         - execution_config/*.md
         - hello_nextflow/*.md
         - nfcore_build/*.md
@@ -354,7 +354,7 @@ plugins:
         "hello_nf-core/03_use_module.md": "nfcore_build/02_use_module.md"
         "hello_nf-core/04_make_module.md": "nfcore_build/03_make_module.md"
         "hello_nf-core/05_input_validation.md": "nfcore_build/04_input_validation.md"
-        "hello_nf-core/01_run_demo.md": "nfcore_run/01_run_demo.md"
+        "hello_nf-core/01_run_demo.md": "nfcore_use/01_run_demo.md"
         "hello_nf-core/index.md": "nfcore_build/index.md"
         "hello_nf-core/00_orientation.md": "nfcore_build/00_orientation.md"
         "hello_nf-core/01_rewrite_hello.md": "nfcore_build/01_rewrite_hello.md"
@@ -370,6 +370,19 @@ plugins:
         "nextflow_config/03_profiles.md": "execution_config/03_profiles.md"
         "nextflow_config/next_steps.md": "execution_config/next_steps.md"
         "nextflow_config/survey.md": "execution_config/survey.md"
+        "nfcore_run/index.md": "nfcore_use/index.md"
+        "nfcore_run/00_orientation.md": "nfcore_use/00_orientation.md"
+        "nfcore_run/01_run_demo.md": "nfcore_use/01_run_demo.md"
+        "nfcore_run/02_configure_execution.md": "nfcore_use/02_configure_execution.md"
+        "nfcore_run/03_run_production_pipeline.md": "nfcore_use/03_run_production_pipeline.md"
+        "nfcore_run/next_steps.md": "nfcore_use/next_steps.md"
+        "nfcore_run/survey.md": "nfcore_use/survey.md"
+        "seqera_run/index.md": "seqera_scale/index.md"
+        "seqera_run/00_orientation.md": "seqera_scale/00_orientation.md"
+        "seqera_run/01_run_with_seqera.md": "seqera_scale/01_run_with_seqera.md"
+        "seqera_run/02_launch_from_cli.md": "seqera_scale/02_launch_from_cli.md"
+        "seqera_run/next_steps.md": "seqera_scale/next_steps.md"
+        "seqera_run/survey.md": "seqera_scale/survey.md"
 hooks:
   - ../../_scripts/mkdocs_hooks.py
   - ../en/hooks/index_page_hook.py

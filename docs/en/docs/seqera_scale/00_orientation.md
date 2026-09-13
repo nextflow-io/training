@@ -25,10 +25,10 @@ Once your codespace is running, there are two things to do before diving in: set
 ### Set the working directory
 
 By default, the codespace opens at the root of all training courses.
-For this course, change to the `seqera-run/` directory:
+For this course, change to the `seqera-scale/` directory:
 
 ```bash
-cd seqera-run/
+cd seqera-scale/
 ```
 
 Then set VSCode to focus on this directory, so only the relevant files appear in the file explorer sidebar:
@@ -42,7 +42,7 @@ code .
     If for whatever reason you move out of this directory (e.g. your codespace goes to sleep), you can always use the full path to return to it, assuming you're running this within the Github Codespaces training environment:
 
     ```bash
-    cd /workspaces/training/seqera-run
+    cd /workspaces/training/seqera-scale
     ```
 
 ### Explore the materials provided

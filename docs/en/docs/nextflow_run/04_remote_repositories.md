@@ -80,7 +80,7 @@ nextflow list
     nextflow-io/hello
     ```
 
-The [Use nf-core](../nfcore_run/01_run_demo.md#12-retrieve-the-pipeline-code) course covers this caching mechanism in more depth, including how to browse a pulled pipeline's source code.
+The [Use nf-core](../nfcore_use/01_run_demo.md#12-retrieve-the-pipeline-code) course covers this caching mechanism in more depth, including how to browse a pulled pipeline's source code.
 
 ### Takeaway
 
