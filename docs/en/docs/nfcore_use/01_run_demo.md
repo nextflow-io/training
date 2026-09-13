@@ -81,7 +81,7 @@ nextflow pull nf-core/demo
 
     ```console
     Checking nf-core/demo ...
-    downloaded from https://github.com/nf-core/demo.git - revision: 32893afef8 [master]
+     downloaded from https://github.com/nf-core/demo.git - revision: 32893afef8 [master]
     ```
 
 Nextflow does a `pull` of the pipeline code, meaning it downloads the full repository to your local drive.
@@ -119,36 +119,40 @@ nextflow info nf-core/demo
 ??? success "Command output"
 
     ```console
-    project name: nf-core/demo
-    repository  : https://github.com/nf-core/demo
-    local path  : /workspaces/.nextflow/assets/.repos/nf-core/demo
-    main script : main.nf
-    description : An nf-core demo pipeline
-    revisions   :
-      TEMPLATE
-      bumper
-      dev
-      fix-nxfversion
-      manually-merge-3_0_2
-    > master (default)
-      nf-core-template-merge-2.13.2.dev0
-      nf-core-template-merge-2.14.0
-      nf-core-template-merge-2.14.1
-      nf-core-template-merge-3.0.0
-      nf-core-template-merge-3.0.1
-      nf-core-template-merge-3.0.2
-      nf-core-template-merge-3.1.0
-      nf-core-template-merge-3.1.2
-      nf-core-template-merge-3.2.0
-      nf-core-template-merge-3.2.1
-      nf-core-template-merge-3.3.1
-      nf-core-template-merge-3.3.2
-      nf-core-template-merge-4.0.0
-      1.0.0 [t]
-      1.0.1 [t]
-      1.0.2 [t]
-      1.1.0 [t]
-    > 1.2.0 [t]
+     project name: nf-core/demo
+     repository  : https://github.com/nf-core/demo
+     local path  : /workspaces/.nextflow/assets/.repos/nf-core/demo
+     main script : main.nf
+     description : An nf-core demo pipeline
+     revisions   :
+       TEMPLATE
+       bumper
+       dev
+       fix-nxfversion
+       manually-merge-3_0_2
+     > master (default)
+       nf-core-template-merge-2.13.2.dev0
+       nf-core-template-merge-2.14.0
+       nf-core-template-merge-2.14.1
+       nf-core-template-merge-3.0.0
+       nf-core-template-merge-3.0.1
+       nf-core-template-merge-3.0.2
+       nf-core-template-merge-3.1.0
+       nf-core-template-merge-3.1.2
+       nf-core-template-merge-3.2.0
+       nf-core-template-merge-3.2.1
+       nf-core-template-merge-3.3.1
+       nf-core-template-merge-3.3.2
+       nf-core-template-merge-4.0.0
+       nf-core-template-merge-4.0.3
+       nf-core-template-merge-4.1.0
+       nf-core-template-merge-4.1.0-2
+       patch
+       1.0.0 [t]
+       1.0.1 [t]
+       1.0.2 [t]
+       1.1.0 [t]
+     > 1.2.0 [t]
     ```
 
 !!! info
@@ -338,10 +342,11 @@ nextflow run nf-core/demo -profile test,docker --outdir demo-results
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 26.04.4
+     N E X T F L O W   ~  version 26.04.4
 
     Downloading plugin nf-schema@2.7.2
     Launching `https://github.com/nf-core/demo` [cranky_curry] revision: 32893afef8 [master]
+
 
     ------------------------------------------------------
                                             ,--./,-.
@@ -387,10 +392,10 @@ nextflow run nf-core/demo -profile test,docker --outdir demo-results
         https://github.com/nf-core/demo/blob/master/CITATIONS.md
 
     executor >  local (8)
-    [ca/5b0f3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     [100%] 3 of 3 ✔
-    [b7/cb6812] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) [100%] 3 of 3 ✔
-    [ff/6ebd98] NFCORE_DEMO:DEMO:COWPY                   [100%] 1 of 1 ✔
-    [09/bbd1b4] NFCORE_DEMO:DEMO:MULTIQC (demo)          [100%] 1 of 1 ✔
+    [ca/5b0f3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
+    [b7/cb6812] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
+    [ff/6ebd98] NFCORE_DEMO:DEMO:COWPY                   | 1 of 1 ✔
+    [09/bbd1b4] NFCORE_DEMO:DEMO:MULTIQC (demo)          | 1 of 1 ✔
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
@@ -424,10 +429,10 @@ Moving on to the execution output, let's have a look at the lines that tell us w
 
 ```console
 executor >  local (8)
-[ca/5b0f3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     [100%] 3 of 3 ✔
-[b7/cb6812] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) [100%] 3 of 3 ✔
-[ff/6ebd98] NFCORE_DEMO:DEMO:COWPY                   [100%] 1 of 1 ✔
-[09/bbd1b4] NFCORE_DEMO:DEMO:MULTIQC (demo)          [100%] 1 of 1 ✔
+[ca/5b0f3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
+[b7/cb6812] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔
+[ff/6ebd98] NFCORE_DEMO:DEMO:COWPY                   | 1 of 1 ✔
+[09/bbd1b4] NFCORE_DEMO:DEMO:MULTIQC (demo)          | 1 of 1 ✔
 -[nf-core/demo] Pipeline completed successfully-
 ```
 

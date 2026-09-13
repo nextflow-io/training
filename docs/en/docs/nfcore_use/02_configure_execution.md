@@ -51,10 +51,10 @@ nextflow run nf-core/demo --help
 
       nextflow run nf-core/demo -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>
 
+
     Input/output options
       --input                       [string] Path to a metadata file containing information about the samples in the experiment.
       --outdir                      [string] The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.
-
       --email                       [string] Email address for completion summary.
       --multiqc_title               [string] MultiQC report title. Printed as page header, used for filename if not otherwise specified.
 
@@ -70,7 +70,7 @@ nextflow run nf-core/demo --help
       --help                        [boolean, string] Display the help message.
       --help_full                   [boolean]         Display the full detailed help message.
       --show_hidden                 [boolean]         Display hidden parameters in the help message (only works when --help or --help_full are provided).
-    !! Hiding 19 param(s), use the `--showHidden` parameter to show them !!
+     !! Hiding 19 param(s), use the `--showHidden` parameter to show them !!
     ------------------------------------------------------
 
     * The pipeline
@@ -145,8 +145,8 @@ nextflow run nf-core/demo -profile test,docker --outdir demo-results-notrim -par
       revision                  : master
       runName                   : focused_heisenberg
       containerEngine           : docker
-      launchDir                 : /workspaces/training/nfcore-build
-      workDir                   : /workspaces/training/nfcore-build/work
+      launchDir                 : /workspaces/training/nfcore-use
+      workDir                   : /workspaces/training/nfcore-use/work
       projectDir                : /workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2
       userName                  : root
       profile                   : test,docker
@@ -165,9 +165,9 @@ nextflow run nf-core/demo -profile test,docker --outdir demo-results-notrim -par
         https://github.com/nf-core/demo/blob/master/CITATIONS.md
 
     executor >  local (5)
-    [7a/f3599e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE) [100%] 3 of 3 ✔
-    [b0/2f0bdc] NFCORE_DEMO:DEMO:COWPY               [100%] 1 of 1 ✔
-    [c3/3c2278] NFCORE_DEMO:DEMO:MULTIQC (demo)      [100%] 1 of 1 ✔
+    [7a/f3599e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE) | 3 of 3 ✔
+    [b0/2f0bdc] NFCORE_DEMO:DEMO:COWPY               | 1 of 1 ✔
+    [c3/3c2278] NFCORE_DEMO:DEMO:MULTIQC (demo)      | 1 of 1 ✔
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
@@ -240,6 +240,8 @@ ERROR ~ Validation of pipeline parameters failed!
 The following invalid input values have been detected:
 
 * --skip_trim (yes): Value is [string] but should be [boolean]
+
+ -- Check script '/workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
 ```
 
 The pipeline stops before any processes run, saving you from a failed or incorrect execution.
@@ -320,10 +322,10 @@ ERROR ~ Validation of pipeline parameters failed!
 The following invalid input values have been detected:
 
 * --input (malformed_samplesheet.csv): Validation of file failed:
-    -> Entry 1: Error for field 'fastq_2' (/not/a/real/file.fastq.gz): the file or directory
-       '/not/a/real/file.fastq.gz' does not exist (FastQ file for reads 2 cannot contain spaces
-       and must have extension '.fq.gz' or '.fastq.gz')
+    -> Entry 1: Error for field 'fastq_2' (/not/a/real/file.fastq.gz): the file or directory '/not/a/real/file.fastq.gz' does not exist (FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz')
     -> Entry 1: Missing required field(s): fastq_1
+
+ -- Check script '/workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
 ```
 
 As you can see, the pipeline fails immediately and reports **all** validation errors at once.
