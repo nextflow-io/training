@@ -9,6 +9,7 @@ Congratulations on completing the Nextflow Run training course! 🎉
 You started with a very basic workflow, and learned to run it, find the outputs, and manage its execution.
 Then, you worked your way through increasingly more complex versions of that workflow and learned to recognize the essential concepts and mechanisms that power Nextflow pipelines, including channels, containers, and `-resume`.
 Then, you learned how to customize the configuration of a pipeline using `nextflow.config` and profiles.
+Then, you learned how to inspect the history of past runs and clean up old work directories.
 Finally, you learned how to run pipelines directly from remote repositories such as GitHub.
 
 ### What you learned
@@ -41,7 +42,8 @@ Through this hands-on course, you've learned how to:
 - Use `-resume` to avoid repeating completed work
 - Use containers to manage software dependencies
 - Configure pipelines using `nextflow.config` and profiles
-- Run a pipeline directly from a remote repository and pin it to a specific revision
+- Inspect the history of past runs with `nextflow log` and clean up old work directories with `nextflow clean`
+- Run a pipeline directly from a remote repository, and pin it to a specific revision (and unpin it again) for reproducibility
 
 You're now equipped with the foundational knowledge to start integrating existing Nextflow pipelines into your own work.
 

@@ -341,7 +341,7 @@ You know how to generate an HTML execution report with `-with-report`, useful fo
 
 ### What's next?
 
-Head on to [Part 3](./03_remote_repositories.md), where you'll learn how to run pipelines directly from remote repositories such as GitHub.
+Head on to [Part 3](./03_manage_executions.md), where you'll learn how to inspect the history of past runs and clean up old work directories.
 
 ---
 

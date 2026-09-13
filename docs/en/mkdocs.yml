@@ -10,7 +10,8 @@ nav:
       - nextflow_run/00_orientation.md
       - nextflow_run/01_run_nextflow.md
       - nextflow_run/02_configure_pipeline.md
-      - nextflow_run/03_remote_repositories.md
+      - nextflow_run/03_manage_executions.md
+      - nextflow_run/04_remote_repositories.md
       - nextflow_run/next_steps.md
       - nextflow_run/survey.md
   - Use nf-core:
