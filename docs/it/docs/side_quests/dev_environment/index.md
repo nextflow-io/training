@@ -620,7 +620,7 @@ Non ci aspettiamo che ricordiate tutto, ma ora che sapete che queste funzionalit
 Applicate queste competenze IDE mentre lavorate su altri moduli di formazione, ad esempio:
 
 - **[nf-test](../nf_test/index.md)**: Create suite di test complete per i vostri flussi di lavoro
-- **[Hello nf-core](../../hello_nf-core/index.md)**: Costruite pipeline di qualità produttiva con gli standard della community
+- **[Build with nf-core](../../hello_nf-core/index.md)**: Costruite pipeline di qualità produttiva con gli standard della community
 
 Il vero potere di queste funzionalità IDE emerge quando si lavora su progetti più grandi e complessi. Iniziate a incorporarle gradualmente nel vostro flusso di lavoro: nel giro di poche sessioni, diventeranno una seconda natura e trasformeranno il vostro approccio allo sviluppo con Nextflow.
 

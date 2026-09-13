@@ -449,5 +449,5 @@ Nextflow for Bioimaging course पूरा करने के लिए बध
 
 - Feedback प्रदान करने के लिए course survey भरें
 - Workflows develop करने के बारे में अधिक जानने के लिए [Hello Nextflow](../../hello_nextflow/index.md) देखें
-- nf-core tooling में गहराई से जाने के लिए [Hello nf-core](../../hello_nf-core/index.md) explore करें
+- nf-core tooling में गहराई से जाने के लिए [Build with nf-core](../../hello_nf-core/index.md) explore करें
 - [Training collections](../../training_collections/index.md) में अन्य courses देखें

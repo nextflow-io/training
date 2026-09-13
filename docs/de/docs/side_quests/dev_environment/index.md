@@ -620,7 +620,7 @@ Wir erwarten nicht, dass du dir alles merkst, aber jetzt weißt du, dass diese F
 Wende diese IDE-Kenntnisse an, während du andere Trainingsmodule durcharbeitest, zum Beispiel:
 
 - **[nf-test](../nf_test/index.md)**: Erstelle umfassende Test-Suites für deine Workflows
-- **[Hello nf-core](../../hello_nf-core/index.md)**: Baue produktionsreife Pipelines mit Community-Standards
+- **[Build with nf-core](../../hello_nf-core/index.md)**: Baue produktionsreife Pipelines mit Community-Standards
 
 Die wahre Stärke dieser IDE-Funktionen zeigt sich, wenn du an größeren, komplexeren Projekten arbeitest. Integriere sie schrittweise in deinen Workflow – nach wenigen Sitzungen werden sie zur zweiten Natur und verändern, wie du an die Nextflow-Entwicklung herangehst.
 

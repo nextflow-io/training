@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Nesta segunda parte do curso de treinamento Hello nf-core, mostramos como criar uma versão compatível com nf-core do pipeline produzido pelo curso para iniciantes [Hello Nextflow](../hello_nextflow/index.md).
+Nesta segunda parte do curso de treinamento Build with nf-core, mostramos como criar uma versão compatível com nf-core do pipeline produzido pelo curso para iniciantes [Hello Nextflow](../hello_nextflow/index.md).
 
 Vamos fazer isso em duas fases: primeiro, usaremos as ferramentas nf-core para criar uma estrutura de pipeline, e então enxertaremos o código do pipeline 'regular' existente nessa estrutura.
 

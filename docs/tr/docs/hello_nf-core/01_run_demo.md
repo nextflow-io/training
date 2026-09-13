@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Hello nf-core eğitim kursunun bu ilk bölümünde, bir nf-core pipeline'ının nasıl bulunacağını ve deneneceğini, ihtiyaçlarınıza göre çalıştırmanın nasıl yapılandırılıp özelleştirileceğini ve girdi doğrulamanın yaygın hatalara karşı nasıl koruma sağladığını öğreneceksiniz.
+Build with nf-core eğitim kursunun bu ilk bölümünde, bir nf-core pipeline'ının nasıl bulunacağını ve deneneceğini, ihtiyaçlarınıza göre çalıştırmanın nasıl yapılandırılıp özelleştirileceğini ve girdi doğrulamanın yaygın hatalara karşı nasıl koruma sağladığını öğreneceksiniz.
 
 nf-core projesi tarafından kod yapısını ve araç işlemlerini göstermek amacıyla pipeline envanterinin bir parçası olarak sürdürülen nf-core/demo adlı bir pipeline kullanacağız.
 

@@ -1739,7 +1739,7 @@ sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 **1. 입력 유효성 검사**
 
 가장 신뢰할 수 있는 해결책은 처리가 시작되기 전에 데이터시트를 검증하는 것입니다. 이를 통해 실행 중간에 알 수 없는 프로세스 오류로 나타나는 대신, 명확한 오류 메시지와 함께 문제를 조기에 발견할 수 있습니다.
-[Hello nf-core](../../hello_nf-core/05_input_validation.md) 교육 과정에서 nf-schema 플러그인을 사용하여 입력 유효성 검사를 추가하는 방법을 다룹니다. <!-- TODO (future) pending a proper Validation side quest -->
+[Build with nf-core](../../hello_nf-core/05_input_validation.md) 교육 과정에서 nf-schema 플러그인을 사용하여 입력 유효성 검사를 추가하는 방법을 다룹니다. <!-- TODO (future) pending a proper Validation side quest -->
 
 **2. 필수 값에 대한 명시적 프로세스 입력**
 

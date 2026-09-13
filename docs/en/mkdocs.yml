@@ -6,15 +6,39 @@ repo_name: nextflow-io/training
 nav:
   - index.md
   - Nextflow Run:
-      - nextflow_run/index.md
+      - Overview: nextflow_run/index.md
       - nextflow_run/00_orientation.md
-      - nextflow_run/01_basics.md
-      - nextflow_run/02_pipeline.md
-      - nextflow_run/03_config.md
+      - nextflow_run/01_run_nextflow.md
+      - nextflow_run/02_configure_pipeline.md
+      - nextflow_run/03_manage_executions.md
+      - nextflow_run/04_remote_repositories.md
       - nextflow_run/next_steps.md
       - nextflow_run/survey.md
+  - Use nf-core:
+      - Overview: nfcore_run/index.md
+      - nfcore_run/00_orientation.md
+      - nfcore_run/01_run_demo.md
+      - nfcore_run/02_configure_execution.md
+      - nfcore_run/03_run_production_pipeline.md
+      - nfcore_run/next_steps.md
+      - nfcore_run/survey.md
+  - Scale with Seqera:
+      - Overview: seqera_run/index.md
+      - seqera_run/00_orientation.md
+      - seqera_run/01_run_with_seqera.md
+      - seqera_run/02_launch_from_cli.md
+      - seqera_run/next_steps.md
+      - seqera_run/survey.md
+  - Execution Config:
+      - Overview: nextflow_config/index.md
+      - nextflow_config/00_orientation.md
+      - nextflow_config/01_packaging_and_execution.md
+      - nextflow_config/02_resources_and_retries.md
+      - nextflow_config/03_profiles.md
+      - nextflow_config/next_steps.md
+      - nextflow_config/survey.md
   - Hello Nextflow:
-      - hello_nextflow/index.md
+      - Overview: hello_nextflow/index.md
       - hello_nextflow/00_orientation.md
       - hello_nextflow/01_hello_world.md
       - hello_nextflow/02_hello_channels.md
@@ -24,54 +48,26 @@ nav:
       - hello_nextflow/06_hello_config.md
       - hello_nextflow/next_steps.md
       - hello_nextflow/survey.md
-  - Hello nf-core:
-      - hello_nf-core/index.md
+  - Build with nf-core:
+      - Overview: hello_nf-core/index.md
       - hello_nf-core/00_orientation.md
-      - hello_nf-core/01_run_demo.md
-      - hello_nf-core/02_rewrite_hello.md
-      - hello_nf-core/03_use_module.md
-      - hello_nf-core/04_make_module.md
-      - hello_nf-core/05_input_validation.md
+      - hello_nf-core/01_rewrite_hello.md
+      - hello_nf-core/02_use_module.md
+      - hello_nf-core/03_make_module.md
+      - hello_nf-core/04_input_validation.md
       - hello_nf-core/next_steps.md
       - hello_nf-core/survey.md
-  - Nextflow for Science:
-      - nf4_science/index.md
-      - Genomics:
-          - nf4_science/genomics/index.md
-          - nf4_science/genomics/00_orientation.md
-          - nf4_science/genomics/01_method.md
-          - nf4_science/genomics/02_per_sample_variant_calling.md
-          - nf4_science/genomics/03_joint_calling.md
-          - nf4_science/genomics/next_steps.md
-          - nf4_science/genomics/survey.md
-      - RNAseq:
-          - nf4_science/rnaseq/index.md
-          - nf4_science/rnaseq/00_orientation.md
-          - nf4_science/rnaseq/01_method.md
-          - nf4_science/rnaseq/02_single-sample.md
-          - nf4_science/rnaseq/03_multi-sample.md
-          - nf4_science/rnaseq/next_steps.md
-          - nf4_science/rnaseq/survey.md
-      - Imaging:
-          - nf4_science/imaging/index.md
-          - nf4_science/imaging/00_orientation.md
-          - nf4_science/imaging/01_basics.md
-          - nf4_science/imaging/02_run_molkart.md
-          - nf4_science/imaging/03_inputs.md
-          - nf4_science/imaging/04_config.md
-          - nf4_science/imaging/survey.md
-          - nf4_science/imaging/next_steps.md
   - Side Quests:
-      - side_quests/index.md
+      - Overview: side_quests/index.md
       - side_quests/orientation.md
       - side_quests/dev_environment/index.md
+      - side_quests/debugging/index.md
       - side_quests/essential_scripting_patterns/index.md
       - side_quests/working_with_files/index.md
       - side_quests/metadata/index.md
       - side_quests/splitting_and_grouping/index.md
-      - side_quests/nf_test/index.md
-      - side_quests/debugging/index.md
       - side_quests/workflows_of_workflows/index.md
+      - side_quests/nf_test/index.md
       - Plugin Development:
           - side_quests/plugin_development/index.md
           - side_quests/plugin_development/01_plugin_basics.md
@@ -82,18 +78,42 @@ nav:
           - side_quests/plugin_development/06_configuration.md
           - side_quests/plugin_development/summary.md
           - side_quests/plugin_development/next_steps.md
-  - Training Collections:
-      - training_collections/index.md
-      - training_collections/architects_toolkit_1.md
-  - Help:
-      - help.md
-      - Training environment:
-          - envsetup/index.md
-          - envsetup/01_setup.md
-          - envsetup/03_devcontainer.md
-          - envsetup/02_local.md
-      - info/nxf_versions.md
-      - info/hello_pipeline.md
+  - Nextflow for Science:
+      - Overview: nf4_science/index.md
+      - Genomics:
+          - Overview: nf4_science/genomics/index.md
+          - nf4_science/genomics/00_orientation.md
+          - nf4_science/genomics/01_method.md
+          - nf4_science/genomics/02_per_sample_variant_calling.md
+          - nf4_science/genomics/03_joint_calling.md
+          - nf4_science/genomics/next_steps.md
+          - nf4_science/genomics/survey.md
+      - RNAseq:
+          - Overview: nf4_science/rnaseq/index.md
+          - nf4_science/rnaseq/00_orientation.md
+          - nf4_science/rnaseq/01_method.md
+          - nf4_science/rnaseq/02_single-sample.md
+          - nf4_science/rnaseq/03_multi-sample.md
+          - nf4_science/rnaseq/next_steps.md
+          - nf4_science/rnaseq/survey.md
+      - Imaging:
+          - Overview: nf4_science/imaging/index.md
+          - nf4_science/imaging/00_orientation.md
+          - nf4_science/imaging/01_basics.md
+          - nf4_science/imaging/02_run_molkart.md
+          - nf4_science/imaging/03_inputs.md
+          - nf4_science/imaging/04_config.md
+          - nf4_science/imaging/survey.md
+          - nf4_science/imaging/next_steps.md
+  - Training Environment:
+      - envsetup/index.md
+      - envsetup/01_setup.md
+      - envsetup/03_devcontainer.md
+      - envsetup/02_local.md
+  - info/nxf_versions.md
+  - info/hello_pipeline.md
+  - help.md
+  - training_events.md
 
 theme:
   name: material
@@ -134,6 +154,7 @@ theme:
       courses: octicons/log-16
       terminal: octicons/terminal-16
       full-code: material/code-block-braces
+      optional: material/book-open-variant
       learning: octicons/mortar-board-16
       people: octicons/people-16
       licensing: octicons/law-16
@@ -154,6 +175,38 @@ extra_javascript:
 extra:
   # Use root path for localStorage keys so consent/palette work across all versions and languages
   scope: /
+  # Non-clickable group labels shown above the matching top-level nav section
+  # in the left sidebar. Key = exact top-level nav title. Rendered by
+  # overrides/partials/nav.html. Add more entries here to label further groups.
+  nav_group_labels:
+    "Training Environment": Setup & Help
+    "Nextflow Run": Users
+    "Hello Nextflow": Developers
+  # Per-section nav title overrides, keyed by the section's index page
+  # source path (relative to docs_dir). Takes precedence over the page's
+  # own title, for when the nav label should differ from the page itself.
+  # Applied by generate_renamed_section_items in _scripts/mkdocs_hooks.py.
+  nav_title_overrides:
+    envsetup/index.md: Training Environment
+    nextflow_run/index.md: Nextflow Run
+    nfcore_run/index.md: Use nf-core
+    seqera_run/index.md: Scale with Seqera
+    nextflow_config/index.md: Execution Config
+    hello_nextflow/index.md: Hello Nextflow
+    hello_nf-core/index.md: Build with nf-core
+    nf4_science/index.md: Nextflow for Science
+    nf4_science/genomics/index.md: "Genomics"
+    nf4_science/rnaseq/index.md: "RNAseq"
+    nf4_science/imaging/index.md: "Imaging"
+    side_quests/index.md: Side Quests
+  # Non-clickable separators inside a nested nav list, keyed by the source
+  # path of the child page the separator should appear directly above.
+  # Rendered by overrides/partials/nav-item.html.
+  nav_section_separators:
+    side_quests/dev_environment/index.md: Developer Tools & Tricks
+    side_quests/working_with_files/index.md: Deep Dives into Dataflow
+    side_quests/workflows_of_workflows/index.md: Modular Architecture in Action
+    side_quests/nf_test/index.md: The Nextflow Extended Universe
   # Announcement banner for upcoming training
   announcement:
     active: true
@@ -259,6 +312,9 @@ plugins:
       restart_increment_after:
         - envsetup/01_setup.md
         - nextflow_run/00_orientation.md
+        - nfcore_run/00_orientation.md
+        - seqera_run/00_orientation.md
+        - nextflow_config/00_orientation.md
         - hello_nextflow/00_orientation.md
         - hello_nf-core/00_orientation.md
         - nf4_science/genomics/00_orientation.md
@@ -268,9 +324,13 @@ plugins:
       exclude:
         - index*.md
         - help*.md
+        - training_events*.md
         - info/*.md
         - envsetup/*.md
         - nextflow_run/*.md
+        - nfcore_run/*.md
+        - seqera_run/*.md
+        - nextflow_config/*.md
         - hello_nextflow/*.md
         - hello_nf-core/*.md
         - nf4_science/genomics/*.md
@@ -278,12 +338,23 @@ plugins:
         - nf4_science/imaging/*.md
         - side_quests/*.md
         - side_quests/**/*.md
-        - training_collections/index.md
-        - training_collections/advanced_workflow_development/index.md
 
   - search
   - mkdocs_quiz:
       progress_sidebar_position: bottom
+  - redirects:
+      redirect_maps:
+        "training_collections/index.md": "side_quests/index.md"
+        "training_collections/architects_toolkit_1.md": "side_quests/index.md#suggested-path-the-architects-toolkit-i"
+        "training_collections/nextflow_triathlon.md": "nextflow_run/index.md"
+        "nextflow_run/01_basics.md": "https://training.nextflow.io/3.6.1/nextflow_run/01_basics/"
+        "nextflow_run/02_pipeline.md": "https://training.nextflow.io/3.6.1/nextflow_run/02_pipeline/"
+        "nextflow_run/03_config.md": "https://training.nextflow.io/3.6.1/nextflow_run/03_config/"
+        "hello_nf-core/02_rewrite_hello.md": "hello_nf-core/01_rewrite_hello.md"
+        "hello_nf-core/03_use_module.md": "hello_nf-core/02_use_module.md"
+        "hello_nf-core/04_make_module.md": "hello_nf-core/03_make_module.md"
+        "hello_nf-core/05_input_validation.md": "hello_nf-core/04_input_validation.md"
+        "hello_nf-core/01_run_demo.md": "nfcore_run/01_run_demo.md"
 hooks:
   - ../../_scripts/mkdocs_hooks.py
   - ../en/hooks/index_page_hook.py

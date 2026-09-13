@@ -50,5 +50,5 @@ Wenn du ein nützliches Plugin entwickelst, erwäge, es über das Plugin-Registr
 Falls du es noch nicht getan hast, schau dir unsere anderen Trainingskurse an:
 
 - **[Hello Nextflow](../../hello_nextflow/index.md)**: Grundlegende Nextflow-Konzepte
-- **[Hello nf-core](../../hello_nf-core/index.md)**: nf-core-Pipelines und Best Practices
+- **[Build with nf-core](../../hello_nf-core/index.md)**: nf-core-Pipelines und Best Practices
 - **[Side Quests](../index.md)**: Tiefe Einblicke in spezifische Themen

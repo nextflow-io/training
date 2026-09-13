@@ -32,7 +32,7 @@ Nextflow for Genomics 교육 과정을 완료하신 것을 축하합니다! 🎉
 다음으로 할 일에 대한 주요 제안 사항은 다음과 같습니다:
 
 - [Nextflow for Science](../index.md)로 다른 과학 분석 사용 사례에 Nextflow 적용
-- [Hello nf-core](../../hello_nf-core/index.md)로 nf-core 시작하기
+- [Build with nf-core](../../hello_nf-core/index.md)로 nf-core 시작하기
 - [Side Quests](../../side_quests/index.md)로 더 고급 Nextflow 기능 탐색
 
 마지막으로, Nextflow 제작자가 개발한 클라우드 기반 플랫폼인 [**Seqera Platform**](https://seqera.io/)을 살펴보시기를 권장합니다. 이 플랫폼을 사용하면 워크플로우를 더욱 쉽게 시작하고 관리할 수 있으며, 데이터를 관리하고 모든 환경에서 대화형으로 분석을 실행할 수 있습니다.

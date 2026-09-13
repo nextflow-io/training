@@ -13,3 +13,35 @@ extra:
       <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">Çerezleri nasıl kullandığımız</a> hakkında daha fazla bilgi edinin.
     cookies:
       posthog: "PostHog Analytics"
+  nav_group_labels:
+    "Eğitim Ortamı": "Kurulum ve Yardım"
+    "Nextflow Run": "Kullanıcılar"
+    "Hello Nextflow": "Geliştiriciler"
+  nav_title_overrides:
+    nextflow_run/index.md: Nextflow Run
+    nfcore_run/index.md: Run nf-core
+    seqera_run/index.md: Run with Seqera
+    hello_nextflow/index.md: Hello Nextflow
+    hello_nf-core/index.md: Build with nf-core
+    nf4_science/index.md: "Bilim için Nextflow"
+    nf4_science/genomics/index.md: "Genomik"
+    nf4_science/rnaseq/index.md: "RNAseq"
+    nf4_science/imaging/index.md: "Görüntüleme"
+    side_quests/index.md: "Yan Görevler"
+    envsetup/index.md: "Eğitim Ortamı"
+  nav_child_title_overrides:
+    nextflow_run/index.md: "Genel Bakış"
+    nfcore_run/index.md: "Genel Bakış"
+    seqera_run/index.md: "Genel Bakış"
+    hello_nextflow/index.md: "Genel Bakış"
+    hello_nf-core/index.md: "Genel Bakış"
+    nf4_science/index.md: "Genel Bakış"
+    nf4_science/genomics/index.md: "Genel Bakış"
+    nf4_science/rnaseq/index.md: "Genel Bakış"
+    nf4_science/imaging/index.md: "Genel Bakış"
+    side_quests/index.md: "Genel Bakış"
+  nav_section_separators:
+    side_quests/dev_environment/index.md: "Geliştirici Araçları ve İpuçları"
+    side_quests/working_with_files/index.md: "Veri Akışına Derinlemesine Bakış"
+    side_quests/workflows_of_workflows/index.md: "Modüler Mimari Uygulamada"
+    side_quests/nf_test/index.md: "Nextflow'un Genişletilmiş Evreni"

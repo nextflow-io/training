@@ -1,5 +1,5 @@
 ---
-title: Hello nf-core
+title: Build with nf-core
 hide:
   - toc
 page_type: index_page
@@ -21,11 +21,11 @@ additional_information:
     - "**Domaine :** Les exercices sont tous indépendants du domaine scientifique, donc aucune connaissance scientifique préalable n'est requise."
 ---
 
-# Hello nf-core
+# Build with nf-core
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-**Hello nf-core est une introduction pratique à l'utilisation des ressources et des bonnes pratiques nf-core.**
+**Build with nf-core est une introduction pratique à l'utilisation des ressources et des bonnes pratiques nf-core.**
 
 ![logo nf-core](./img/nf-core-logo.png#only-light)
 ![logo nf-core](./img/nf-core-logo-darkbg.png#only-dark)

@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Hello nf-core प्रशिक्षण पाठ्यक्रम के इस दूसरे भाग में, हम तुम्हें दिखाते हैं कि [Hello Nextflow](../hello_nextflow/index.md) शुरुआती पाठ्यक्रम द्वारा तैयार की गई pipeline का nf-core संगत संस्करण कैसे बनाया जाए।
+Build with nf-core प्रशिक्षण पाठ्यक्रम के इस दूसरे भाग में, हम तुम्हें दिखाते हैं कि [Hello Nextflow](../hello_nextflow/index.md) शुरुआती पाठ्यक्रम द्वारा तैयार की गई pipeline का nf-core संगत संस्करण कैसे बनाया जाए।
 
 हम यह दो चरणों में करेंगे: पहले, हम nf-core tooling का उपयोग करके एक pipeline scaffold बनाएंगे, फिर मौजूदा 'नियमित' pipeline कोड को scaffold पर graft करेंगे।
 

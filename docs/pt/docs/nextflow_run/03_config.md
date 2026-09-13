@@ -1729,7 +1729,7 @@ Você sabe tudo o que precisa saber para começar a executar e gerenciar pipelin
 Isso conclui este curso, mas se você está ansioso para continuar aprendendo, temos duas recomendações principais:
 
 - Se você quer se aprofundar no desenvolvimento de seus próprios pipelines, dê uma olhada em [Hello Nextflow](../hello_nextflow/index.md), um curso para iniciantes que cobre a mesma progressão geral que este mas entra em muito mais detalhes sobre canais e operadores.
-- Se você gostaria de continuar aprendendo como executar pipelines Nextflow sem ir mais fundo no código, dê uma olhada na primeira parte de [Hello nf-core](../hello_nf-core/index.md), que introduz as ferramentas para encontrar e executar pipelines do projeto [nf-core](https://nf-co.re/) imensamente popular.
+- Se você gostaria de continuar aprendendo como executar pipelines Nextflow sem ir mais fundo no código, dê uma olhada na primeira parte de [Build with nf-core](../hello_nf-core/index.md), que introduz as ferramentas para encontrar e executar pipelines do projeto [nf-core](https://nf-co.re/) imensamente popular.
 
 Divirta-se!
 

@@ -27,7 +27,7 @@ nf-core 파이프라인의 주요 특징:
 
 !!! tip "nf-core에 대해 더 알고 싶으신가요?"
 
-    nf-core 파이프라인 개발에 대한 심층적인 소개를 보려면 [Hello nf-core](../../hello_nf-core/index.md) 교육 과정을 확인하세요.
+    nf-core 파이프라인 개발에 대한 심층적인 소개를 보려면 [Build with nf-core](../../hello_nf-core/index.md) 교육 과정을 확인하세요.
     처음부터 nf-core 파이프라인을 생성하고 사용자 정의하는 방법을 다룹니다.
 
 ### 1.2. molkart 파이프라인

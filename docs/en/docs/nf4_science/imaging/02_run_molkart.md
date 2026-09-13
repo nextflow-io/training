@@ -25,7 +25,7 @@ Key features of nf-core pipelines:
 
 !!! tip "Want to learn more about nf-core?"
 
-    For an in-depth introduction to nf-core pipeline development, check out the [Hello nf-core](../../hello_nf-core/index.md) training course.
+    For an in-depth introduction to nf-core pipeline development, check out the [Build with nf-core](../../hello_nf-core/index.md) training course.
     It covers how to create and customize nf-core pipelines from scratch.
 
 ### 1.2. The molkart pipeline

@@ -85,10 +85,10 @@ tree . -L 2
     │   └── nextflow.config
     └── solutions
         ├── composable-hello
+        ├── core-hello-part1
         ├── core-hello-part2
         ├── core-hello-part3
         ├── core-hello-part4
-        ├── core-hello-part5
         └── core-hello-start
     ```
 
@@ -107,6 +107,18 @@ We use collapsible sections like this to include expected command output in a co
 
 - **The `solutions` directory** contains the completed workflow scripts that result from each step of the course.
   They are intended to be used as a reference to check your work and troubleshoot any issues.
+
+### Set up the pipeline reference
+
+Part 1 of this course refers to the `nf-core/demo` pipeline's source code for reference.
+Retrieve it and create a shortcut to browse it easily:
+
+```bash
+nextflow pull nf-core/demo
+ln -s $NXF_HOME/assets pipelines
+```
+
+If you've already completed the [Use nf-core](../nfcore_run/index.md) course, `nf-core/demo` is already cached locally, but the symlink above still needs to be created fresh in this directory.
 
 ## Readiness checklist
 

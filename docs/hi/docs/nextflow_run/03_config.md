@@ -1729,7 +1729,7 @@ Exact versions specify करना reproducibility के लिए essential �
 यह इस course को conclude करता है, लेकिन यदि तुम सीखना जारी रखने के लिए eager हो, हमारे पास दो main recommendations हैं:
 
 - यदि तुम अपनी own pipelines develop करने में deeper dig करना चाहते हो, [Hello Nextflow](../hello_nextflow/index.md) देखो, beginners के लिए एक course जो इस वाले जैसी ही general progression cover करता है लेकिन channels और operators के बारे में बहुत अधिक detail में जाता है।
-- यदि तुम code में deeper जाए बिना Nextflow pipelines run करना सीखना जारी रखना चाहते हो, [Hello nf-core](../hello_nf-core/index.md) के first part को देखो, जो hugely popular [nf-core](https://nf-co.re/) project से pipelines खोजने और run करने के लिए tooling introduce करता है।
+- यदि तुम code में deeper जाए बिना Nextflow pipelines run करना सीखना जारी रखना चाहते हो, [Build with nf-core](../hello_nf-core/index.md) के first part को देखो, जो hugely popular [nf-core](https://nf-co.re/) project से pipelines खोजने और run करने के लिए tooling introduce करता है।
 
 मज़े करो!
 

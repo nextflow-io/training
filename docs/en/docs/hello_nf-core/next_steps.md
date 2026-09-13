@@ -1,12 +1,12 @@
 # Course summary
 
-Congratulations on completing the Hello nf-core training course! 🎉
+Congratulations on completing the Build with nf-core training course! 🎉
 
 <!-- placeholder for video -->
 
 ## Your journey
 
-You started by learning retrieve and run a demo pipeline, then tackled the conversion of a simple Nextflow workflow into an nf-core pipeline.
+You started by tackling the conversion of a simple Nextflow workflow into an nf-core pipeline.
 You learned how to create a pipeline scaffold using a template and grafted the existing pipeline onto that scaffold.
 Then you gradually refined the pipeline by replacing one of the local modules with an nf-core module, transformed another one of the local modules to fit nf-core standards, and added input validation.
 

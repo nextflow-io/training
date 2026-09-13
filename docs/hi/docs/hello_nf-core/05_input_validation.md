@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Hello nf-core प्रशिक्षण कोर्स के इस पांचवें भाग में, हम आपको दिखाते हैं कि pipeline इनपुट और पैरामीटर को सत्यापित करने के लिए nf-schema plugin का उपयोग कैसे करें।
+Build with nf-core प्रशिक्षण कोर्स के इस पांचवें भाग में, हम आपको दिखाते हैं कि pipeline इनपुट और पैरामीटर को सत्यापित करने के लिए nf-schema plugin का उपयोग कैसे करें।
 
 ??? info "इस खंड से कैसे शुरू करें"
 
@@ -808,6 +808,6 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
 
 ### आगे क्या है?
 
-आपने Hello nf-core प्रशिक्षण कोर्स के सभी पांच भाग पूरे कर लिए हैं!
+आपने Build with nf-core प्रशिक्षण कोर्स के सभी पांच भाग पूरे कर लिए हैं!
 
 आपने क्या बनाया है और सीखा है, इस पर विचार करने के लिए [सारांश](next_steps.md) पर जारी रखें।

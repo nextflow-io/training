@@ -94,13 +94,3 @@ See the CLI reference for [`lint`](https://www.nextflow.io/docs/latest/reference
 
 We hope this will be helpful.
 If you need help, reach out on Slack or on the forum.
-
----
-
-<div markdown class="homepage_logos">
-
-![Seqera](../assets/img/seqera_logo.png#only-light)
-
-![Seqera](../assets/img/seqera_logo_dark.png#only-dark)
-
-</div>

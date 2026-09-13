@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Dans cette troisième partie du cours de formation Hello nf-core, nous vous montrons comment trouver, installer et utiliser un module nf-core existant dans votre pipeline.
+Dans cette troisième partie du cours de formation Build with nf-core, nous vous montrons comment trouver, installer et utiliser un module nf-core existant dans votre pipeline.
 
 L'un des grands avantages de travailler avec nf-core est la possibilité de tirer parti de modules pré-construits et testés du dépôt [nf-core/modules](https://github.com/nf-core/modules).
 Plutôt que d'écrire chaque processus à partir de zéro, vous pouvez installer et utiliser des modules maintenus par la communauté qui suivent les meilleures pratiques.

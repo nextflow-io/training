@@ -153,8 +153,8 @@ Each step focuses on a specific aspect of workflow development.
 
 !!! tip
 
-     Make sure you're in the correct working directory:
-     `cd /workspaces/training/nf4-science/rnaseq`
+    Make sure you're in the correct working directory:
+    `cd /workspaces/training/nf4-science/rnaseq`
 
 ---
 

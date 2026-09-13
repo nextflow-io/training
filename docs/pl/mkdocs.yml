@@ -14,3 +14,35 @@ extra:
       <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">jak używamy plików cookie</a>.
     cookies:
       posthog: "PostHog Analytics"
+  nav_group_labels:
+    "Środowisko Szkoleniowe": "Konfiguracja i Pomoc"
+    "Nextflow Run": "Użytkownicy"
+    "Hello Nextflow": "Programiści"
+  nav_title_overrides:
+    nextflow_run/index.md: Nextflow Run
+    nfcore_run/index.md: Run nf-core
+    seqera_run/index.md: Run with Seqera
+    hello_nextflow/index.md: Hello Nextflow
+    hello_nf-core/index.md: Build with nf-core
+    nf4_science/index.md: "Nextflow dla Nauki"
+    nf4_science/genomics/index.md: "Genomika"
+    nf4_science/rnaseq/index.md: "RNAseq"
+    nf4_science/imaging/index.md: "Obrazowanie"
+    side_quests/index.md: "Side Quests"
+    envsetup/index.md: "Środowisko Szkoleniowe"
+  nav_child_title_overrides:
+    nextflow_run/index.md: "Przegląd"
+    nfcore_run/index.md: "Przegląd"
+    seqera_run/index.md: "Przegląd"
+    hello_nextflow/index.md: "Przegląd"
+    hello_nf-core/index.md: "Przegląd"
+    nf4_science/index.md: "Przegląd"
+    nf4_science/genomics/index.md: "Przegląd"
+    nf4_science/rnaseq/index.md: "Przegląd"
+    nf4_science/imaging/index.md: "Przegląd"
+    side_quests/index.md: "Przegląd"
+  nav_section_separators:
+    side_quests/dev_environment/index.md: "Narzędzia i Triki dla Programistów"
+    side_quests/working_with_files/index.md: "Głębokie Zanurzenie w Przepływ Danych"
+    side_quests/workflows_of_workflows/index.md: "Architektura Modularna w Praktyce"
+    side_quests/nf_test/index.md: "Rozszerzone Uniwersum Nextflow"

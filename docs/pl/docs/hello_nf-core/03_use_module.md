@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W trzeciej części kursu szkoleniowego Hello nf-core pokażemy, jak znaleźć, zainstalować i użyć istniejącego modułu nf-core w Twoim pipeline'ie.
+W trzeciej części kursu szkoleniowego Build with nf-core pokażemy, jak znaleźć, zainstalować i użyć istniejącego modułu nf-core w Twoim pipeline'ie.
 
 Jedną z głównych korzyści pracy z nf-core jest możliwość wykorzystania wcześniej przygotowanych, przetestowanych modułów z repozytorium [nf-core/modules](https://github.com/nf-core/modules).
 Zamiast pisać każdy proces od podstaw, możesz zainstalować i używać gotowych komponentów utrzymywanych przez społeczność, które przestrzegają najlepszych praktyk.

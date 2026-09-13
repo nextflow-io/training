@@ -7,7 +7,7 @@ include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { sayHello               } from '../modules/local/sayHello.nf'
 include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-include { cowpy                  } from '../modules/local/cowpy.nf'
+include { COWPY                  } from '../modules/local/cowpy/main.nf'
 include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
 
 /*
@@ -41,11 +41,8 @@ workflow HELLO {
     // concatenate the greetings
     FIND_CONCATENATE(ch_for_cat)
 
-    // extract the file from the tuple since cowpy doesn't use metadata yet
-    ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
-
     // generate ASCII art of the greetings with cowpy
-    cowpy(ch_for_cowpy, params.character)
+    COWPY(FIND_CONCATENATE.out.file_out)
 
     //
     // Collate and save software versions
@@ -78,7 +75,7 @@ workflow HELLO {
 
 
     emit:
-    cowpy_hellos   = cowpy.out
+    cowpy_hellos   = COWPY.out.cowpy_output
     versions       = ch_versions                 // channel: [ path(versions.yml) ]
 
 }

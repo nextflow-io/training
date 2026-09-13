@@ -50,5 +50,5 @@ Kullanışlı bir plugin geliştirirseniz, plugin kayıt defteri aracılığıyl
 Henüz tamamlamadıysanız diğer eğitim kurslarımıza göz atın:
 
 - **[Hello Nextflow](../../hello_nextflow/index.md)**: Temel Nextflow kavramları
-- **[Hello nf-core](../../hello_nf-core/index.md)**: nf-core pipeline'ları ve en iyi uygulamalar
+- **[Build with nf-core](../../hello_nf-core/index.md)**: nf-core pipeline'ları ve en iyi uygulamalar
 - **[Side Quests](../index.md)**: Belirli konulara derinlemesine bakış

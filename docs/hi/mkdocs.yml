@@ -13,3 +13,35 @@ extra:
       <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">हम कुकीज़ का उपयोग कैसे करते हैं</a> इसके बारे में अधिक जानें।
     cookies:
       posthog: "PostHog Analytics"
+  nav_group_labels:
+    "प्रशिक्षण वातावरण": "सेटअप और सहायता"
+    "Nextflow Run": "उपयोगकर्ता"
+    "Hello Nextflow": "डेवलपर्स"
+  nav_title_overrides:
+    nextflow_run/index.md: Nextflow Run
+    nfcore_run/index.md: Run nf-core
+    seqera_run/index.md: Run with Seqera
+    hello_nextflow/index.md: Hello Nextflow
+    hello_nf-core/index.md: Build with nf-core
+    nf4_science/index.md: "विज्ञान के लिए Nextflow"
+    nf4_science/genomics/index.md: "जीनोमिक्स"
+    nf4_science/rnaseq/index.md: "RNAseq"
+    nf4_science/imaging/index.md: "इमेजिंग"
+    side_quests/index.md: "साइड क्वेस्ट"
+    envsetup/index.md: "प्रशिक्षण वातावरण"
+  nav_child_title_overrides:
+    nextflow_run/index.md: "अवलोकन"
+    nfcore_run/index.md: "अवलोकन"
+    seqera_run/index.md: "अवलोकन"
+    hello_nextflow/index.md: "अवलोकन"
+    hello_nf-core/index.md: "अवलोकन"
+    nf4_science/index.md: "अवलोकन"
+    nf4_science/genomics/index.md: "अवलोकन"
+    nf4_science/rnaseq/index.md: "अवलोकन"
+    nf4_science/imaging/index.md: "अवलोकन"
+    side_quests/index.md: "अवलोकन"
+  nav_section_separators:
+    side_quests/dev_environment/index.md: "डेवलपर टूल्स और ट्रिक्स"
+    side_quests/working_with_files/index.md: "डेटाफ्लो में गहराई से जानकारी"
+    side_quests/workflows_of_workflows/index.md: "क्रियान्वित मॉड्यूलर आर्किटेक्चर"
+    side_quests/nf_test/index.md: "Nextflow का विस्तारित ब्रह्मांड"

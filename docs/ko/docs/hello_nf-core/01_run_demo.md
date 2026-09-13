@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Hello nf-core 교육 과정의 첫 번째 파트에서는 nf-core 파이프라인을 찾아서 사용해보고, 필요에 맞게 실행을 설정 및 맞춤화하며, 입력 검증이 일반적인 오류를 어떻게 방지하는지 학습합니다.
+Build with nf-core 교육 과정의 첫 번째 파트에서는 nf-core 파이프라인을 찾아서 사용해보고, 필요에 맞게 실행을 설정 및 맞춤화하며, 입력 검증이 일반적인 오류를 어떻게 방지하는지 학습합니다.
 
 nf-core 프로젝트에서 코드 구조와 도구 작동을 시연하기 위한 파이프라인 모음의 일부로 유지 관리하는 nf-core/demo라는 파이프라인을 사용하겠습니다.
 

@@ -48,5 +48,5 @@ If you build a useful plugin, consider sharing it with the community through the
 If you haven't already, check out our other training courses:
 
 - **[Hello Nextflow](../../hello_nextflow/index.md)**: Foundational Nextflow concepts
-- **[Hello nf-core](../../hello_nf-core/index.md)**: nf-core pipelines and best practices
+- **[Build with nf-core](../../hello_nf-core/index.md)**: nf-core pipelines and best practices
 - **[Side Quests](../index.md)**: Deep dives into specific topics

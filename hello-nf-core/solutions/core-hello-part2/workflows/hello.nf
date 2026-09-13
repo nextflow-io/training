@@ -7,8 +7,8 @@ include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { sayHello               } from '../modules/local/sayHello.nf'
 include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-include { collectGreetings       } from '../modules/local/collectGreetings.nf'
 include { cowpy                  } from '../modules/local/cowpy.nf'
+include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -26,17 +26,26 @@ workflow HELLO {
 
     ch_versions = channel.empty()
 
-    // emit a greeting (updated to use the nf-core convention for samplesheets)
+    // emit a greeting
     sayHello(ch_samplesheet)
 
     // convert the greeting to uppercase
     convertToUpper(sayHello.out)
 
-    // collect all the greetings into one file
-    collectGreetings(convertToUpper.out.collect(), params.batch)
+    // create metadata map with batch name as the ID
+    def cat_meta = [ id: params.batch ]
+
+    // create a channel with metadata and files in tuple format
+    ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
+
+    // concatenate the greetings
+    FIND_CONCATENATE(ch_for_cat)
+
+    // extract the file from the tuple since cowpy doesn't use metadata yet
+    ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
     // generate ASCII art of the greetings with cowpy
-    cowpy(collectGreetings.out.outfile, params.character)
+    cowpy(ch_for_cowpy, params.character)
 
     //
     // Collate and save software versions
