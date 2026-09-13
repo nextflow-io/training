@@ -74,6 +74,8 @@ The `.command.sh` file is especially useful when debugging — it shows precisel
 
 ### 1.4. Optional: Code walkthrough
 
+Understanding the code isn't essential if you just want to run pipelines, but if you're curious, it's worth a look.
+
 ??? optional "Click to explore the code associated with this exercise"
 
     Let's open `1-hello.nf` and look at its main components.
@@ -256,6 +258,33 @@ In the `results` directory, you should now see three output files, one per greet
 
 Open any of the output files to confirm each one contains a greeting.
 
+The condensed output above shows a single summary line for `sayHello`, but Nextflow actually launched three separate task executions behind it, one per row in the CSV, and ran them in parallel as soon as your machine had the resources to do so.
+
+Just like the single task you explored in [1.3](#13-explore-the-work-directory), each of these three executions gets its own task directory under `work/`, completely isolated from the others:
+
+```console title="work/"
+work
+├── 2d/276c63.../
+│   ├── .command.sh
+│   └── Hola-output.txt
+├── ab/007682.../
+│   ├── .command.sh
+│   └── Bonjour-output.txt
+└── d9/2476082.../
+    ├── .command.sh
+    └── Hello-output.txt
+```
+
+Each `.command.sh` only ever contains the command for that one greeting:
+
+```console title="work/2d/276c63.../.command.sh"
+#!/bin/bash -ue
+echo 'Hola' > 'Hola-output.txt'
+```
+
+This isolation is what makes parallel execution safe: three tasks running at the same time never share a working directory, so nothing one task writes can collide with or overwrite what another task writes, even if they happen to produce files with the same name.
+It's also why `-resume` (covered next) can cache and reuse individual tasks independently: each task's inputs, outputs, and logs live entirely inside its own directory, with nothing shared between tasks that could get out of sync.
+
 ### 2.2. Run the workflow again with `-ansi-log false`
 
 By default, Nextflow condenses the output to a single summary line per process.
@@ -307,6 +336,8 @@ The `-resume` capability is especially valuable in long pipelines where recoveri
 
 ### 2.4. Optional: Code walkthrough
 
+Understanding the code isn't essential if you just want to run pipelines, but if you're curious, it's worth a look.
+
 ??? optional "Click to explore the code associated with this exercise"
 
     The key change in `2-inputs.nf` is in the `main:` section of the workflow:
@@ -342,13 +373,16 @@ Learn how a complete multi-step pipeline chains processes together using channel
 
 ## 3. Run a multi-step pipeline
 
-The workflow `main.nf` chains four processes into a complete pipeline.
+So far you've run a single process, then run it multiple times in parallel over a set of inputs.
+Real pipelines usually go further: they chain several processes together, feeding the output of one into the next, and often rely on more than one piece of software along the way.
+The workflow `main.nf` puts both of these together into a complete pipeline.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
 </figure>
 
 Each input greeting flows through all four steps: `sayHello` writes it to a file, `convertToUpper` converts the text to uppercase, `collectGreetings` merges all results into one file, and `cowpy` generates ASCII art from the merged output using a containerized tool.
+Nextflow wires these steps together with channels: the output of one process becomes the input of the next, so the whole chain runs automatically as data becomes available, without you having to orchestrate each step by hand.
 
 Note that this workflow uses modules: each process is defined in its own file under `modules/`, and `main.nf` imports them with `include` statements instead of defining them inline.
 This makes each process reusable across multiple workflows without duplicating code. To learn more, see the code exploration section further below.
@@ -377,9 +411,33 @@ The `character` parameter defaults to `turkey` in `nextflow.config`, so the ASCI
     [a5/29e13f] cowpy              | 1 of 1 ✔
     ```
 
-Four processes ran: `sayHello` and `convertToUpper` each ran once per input (3 of 3), `collectGreetings` gathered all outputs into one file (1 of 1), and `cowpy` generated the ASCII art (1 of 1).
+Four processes ran, but not the same number of times.
+`sayHello` and `convertToUpper` each ran once per input (3 of 3): every greeting needs to be written out and uppercased on its own.
+`collectGreetings` and `cowpy` each ran only once (1 of 1): merging the greetings and generating the ASCII art only makes sense once every individual result is in.
+This fan-out-then-fan-in shape, several parallel tasks feeding into a smaller number of downstream tasks, is common in real pipelines.
 
-Check `results/full_pipeline/` for the ASCII art file.
+Nextflow doesn't wait for an entire step to finish before starting the next one.
+As soon as one `sayHello` output is ready, the matching `convertToUpper` task can start, so tasks from different processes run concurrently rather than in strict batches.
+`collectGreetings` and `cowpy` do have to wait, since each of them depends on every upstream result being available first.
+
+The `results` directory reflects that fan-in, plus whatever the pipeline author chose to publish and where: recall the `output` block from the code walkthrough in 1.4, which is what defines this structure.
+
+```console title="results/"
+results
+└── full_pipeline
+    ├── batch-report.txt
+    ├── cowpy-COLLECTED-batch-output.txt
+    └── intermediates
+        ├── Bonjour-output.txt
+        ├── COLLECTED-batch-output.txt
+        ├── Hello-output.txt
+        ├── Hola-output.txt
+        ├── UPPER-Bonjour-output.txt
+        ├── UPPER-Hello-output.txt
+        └── UPPER-Hola-output.txt
+```
+
+Check `cowpy-COLLECTED-batch-output.txt` for the ASCII art file.
 
 ??? abstract "File contents"
 
@@ -412,6 +470,21 @@ Check `results/full_pipeline/` for the ASCII art file.
                           ^^^ ^^ ^^^ ^
     ```
 
+Just like in [2.1](#21-run-the-workflow), every one of these 8 task executions, across all four processes, gets its own directory under `work/`, completely isolated from the others.
+`collectGreetings` is a good illustration of why that matters: it depends on the outputs of all three `convertToUpper` tasks, which live in three different task directories, so Nextflow stages symlinks to those files inside `collectGreetings`'s own directory rather than having it read from its upstream tasks' directories directly:
+
+```console title="work/b4/a1934c.../"
+COLLECTED-batch-output.txt
+UPPER-Bonjour-output.txt -> ../../70/41fe5677.../UPPER-Bonjour-output.txt
+UPPER-Hello-output.txt   -> ../../e3/3353cf48.../UPPER-Hello-output.txt
+UPPER-Hola-output.txt    -> ../../e3/9e5ce6a1.../UPPER-Hola-output.txt
+batch-report.txt
+.command.sh
+```
+
+Each task only ever sees the specific files it needs, wherever they came from, and never the internal contents of another task's directory.
+Across a whole pipeline, that same isolation you saw with a single process in [2.1](#21-run-the-workflow) is what lets Nextflow run every task from every process concurrently, safely.
+
 !!! note
 
     The `cowpy` step runs inside a Docker container rather than relying on software installed locally.
@@ -420,9 +493,11 @@ Check `results/full_pipeline/` for the ASCII art file.
 
 ### 3.2. Optional: Code walkthrough
 
+Understanding the code isn't essential if you just want to run pipelines, but if you're curious, it's worth a look.
+
 ??? optional "Click to explore the code associated with this exercise"
 
-    ## How data flows from one step to the next
+    ### How data flows from one step to the next
 
     Each process passes its output channel to the next:
 
@@ -442,7 +517,7 @@ Check `results/full_pipeline/` for the ASCII art file.
 
     The `.collect()` operator gathers all individual outputs from `convertToUpper` into a single channel item before passing them to `collectGreetings`.
 
-    ## Using process modules
+    ### Using process modules
 
     `main.nf` doesn't define any process code directly.
     Instead, it imports each process from its own file under `modules/`:
@@ -461,7 +536,7 @@ Check `results/full_pipeline/` for the ASCII art file.
     --8<-- "docs/en/docs/hello_nextflow/img/modules.svg"
     </figure>
 
-    ## Using containerized software
+    ### Using containerized software
 
     The `cowpy` process runs inside a Docker container specified in its module file:
 
