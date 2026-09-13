@@ -6,6 +6,8 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
+        <meta name="description" content="Apprenez à configurer l'exécution d'un pipeline nf-core en définissant des paramètres, en comprenant la validation et en personnalisant l'allocation des ressources.">
+      
       
       
         <link rel="canonical" href="https://training.nextflow.io/fr/nfcore_use/02_configure_execution/">
@@ -47,7 +49,7 @@
     
     
       
-        <title>Part 2: Configure pipeline execution - training.nextflow.io</title>
+        <title>Partie 2 : Configurer l'exécution du pipeline - training.nextflow.io</title>
       
     
     
@@ -162,7 +164,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-2-configure-pipeline-execution" class="md-skip">
+        <a href="#partie-2-configurer-lexecution-du-pipeline" class="md-skip">
           Aller au contenu
         </a>
       
@@ -259,7 +261,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Part 2: Configure pipeline execution
+              Partie 2 : Configurer l'exécution du pipeline
             
           </span>
         </div>
@@ -557,7 +559,7 @@ md-nav--primary" aria-label="Navigation" data-md-level="0">
   <a href="../../nextflow_run/01_run_nextflow/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 1: Run Nextflow   
+    Partie 1 : Exécuter Nextflow   
 </span>
   
   </a>
@@ -567,7 +569,7 @@ md-nav--primary" aria-label="Navigation" data-md-level="0">
   <a href="../../nextflow_run/02_configure_pipeline/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 2: Configure the pipeline   
+    Partie 2 : Configurer le pipeline   
 </span>
   
   </a>
@@ -577,7 +579,7 @@ md-nav--primary" aria-label="Navigation" data-md-level="0">
   <a href="../../nextflow_run/03_manage_executions/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 3: Manage workflow executions   
+    Partie 3 : Gérer les exécutions de workflow   
 </span>
   
   </a>
@@ -587,7 +589,7 @@ md-nav--primary" aria-label="Navigation" data-md-level="0">
   <a href="../../nextflow_run/04_remote_repositories/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 4: Run remote pipelines   
+    Partie 4 : Exécuter des pipelines distants   
 </span>
   
   </a>
@@ -668,7 +670,7 @@ md-nav__item--active md-nav__item--nested">
   <a href="../00_orientation/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Getting started   
+    Premiers pas   
 </span>
   
   </a>
@@ -678,7 +680,7 @@ md-nav__item--active md-nav__item--nested">
   <a href="../01_run_demo/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 1: Run a demo pipeline   
+    Partie 1 : Exécuter un pipeline de démonstration   
 </span>
   
   </a>
@@ -692,7 +694,7 @@ md-nav__item--active">
   <label class="md-nav__link md-nav__link--active" for="__toc">
       
 <span class="md-ellipsis">
-    Part 2: Configure pipeline execution   
+    Partie 2 : Configurer l'exécution du pipeline   
 </span>
   
     <span class="md-nav__icon md-icon"></span>
@@ -701,7 +703,7 @@ md-nav__item--active">
   <a href="./" class="md-nav__link md-nav__link--active">
       
 <span class="md-ellipsis">
-    Part 2: Configure pipeline execution   
+    Partie 2 : Configurer l'exécution du pipeline   
 </span>
   
   </a>
@@ -715,22 +717,22 @@ md-nav__item--active">
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-pipeline-parameters" class="md-nav__link">
+  <a href="#1-parametres-du-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Pipeline parameters
+        1. Paramètres du pipeline
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Pipeline parameters">
+    <nav class="md-nav" aria-label="1. Paramètres du pipeline">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-get-the-list-of-parameters-with-help" class="md-nav__link">
+  <a href="#11-obtenir-la-liste-des-parametres-avec-help" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Get the list of parameters with --help
+        1.1. Obtenir la liste des paramètres avec --help
       
     </span>
   </a>
@@ -738,10 +740,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-set-parameter-values" class="md-nav__link">
+  <a href="#12-definir-les-valeurs-des-parametres" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Set parameter values
+        1.2. Définir les valeurs des paramètres
       
     </span>
   </a>
@@ -749,22 +751,22 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-parameter-validation" class="md-nav__link">
+  <a href="#13-validation-des-parametres" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Parameter validation
+        1.3. Validation des paramètres
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1.3. Parameter validation">
+    <nav class="md-nav" aria-label="1.3. Validation des paramètres">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#131-unrecognized-parameters" class="md-nav__link">
+  <a href="#131-parametres-non-reconnus" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3.1. Unrecognized parameters
+        1.3.1. Paramètres non reconnus
       
     </span>
   </a>
@@ -772,10 +774,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#132-invalid-parameter-values" class="md-nav__link">
+  <a href="#132-valeurs-de-parametres-invalides" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3.2. Invalid parameter values
+        1.3.2. Valeurs de paramètres invalides
       
     </span>
   </a>
@@ -788,10 +790,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-input-validation" class="md-nav__link">
+  <a href="#14-validation-des-entrees" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Input validation
+        1.4. Validation des entrées
       
     </span>
   </a>
@@ -799,10 +801,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#a-retenir" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        À retenir
       
     </span>
   </a>
@@ -810,10 +812,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#et-ensuite" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Et ensuite ?
       
     </span>
   </a>
@@ -836,10 +838,10 @@ md-nav__item--active">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-explore-configuration-files" class="md-nav__link">
+  <a href="#21-explorer-les-fichiers-de-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Explore configuration files
+        2.1. Explorer les fichiers de configuration
       
     </span>
   </a>
@@ -847,10 +849,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-customize-process-resources-and-tool-arguments" class="md-nav__link">
+  <a href="#22-personnaliser-les-ressources-des-processus-et-les-arguments-des-outils" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Customize process resources and tool arguments
+        2.2. Personnaliser les ressources des processus et les arguments des outils
       
     </span>
   </a>
@@ -858,10 +860,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#a-retenir_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        À retenir
       
     </span>
   </a>
@@ -869,10 +871,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#et-ensuite_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Et ensuite ?
       
     </span>
   </a>
@@ -883,10 +885,10 @@ md-nav__item--active">
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#summary" class="md-nav__link">
+  <a href="#resume" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Summary
+        Résumé
       
     </span>
   </a>
@@ -1087,7 +1089,7 @@ md-nav__item--active">
   <a href="../03_run_production_pipeline/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 3: Run a production pipeline   
+    Partie 3 : Exécuter un pipeline de production   
 </span>
   
   </a>
@@ -1097,7 +1099,7 @@ md-nav__item--active">
   <a href="../next_steps/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Course summary   
+    Résumé du cours   
 </span>
   
   </a>
@@ -1107,7 +1109,7 @@ md-nav__item--active">
   <a href="../survey/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Feedback survey   
+    Enquête de satisfaction   
 </span>
   
   </a>
@@ -1167,7 +1169,7 @@ md-nav__item--active">
   <a href="../../seqera_scale/00_orientation/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Getting started   
+    Premiers pas   
 </span>
   
   </a>
@@ -1177,7 +1179,7 @@ md-nav__item--active">
   <a href="../../seqera_scale/01_run_with_seqera/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 1: Launch pipelines from the web interface   
+    Partie 1 : Lancer des pipelines depuis l'interface web   
 </span>
   
   </a>
@@ -1187,7 +1189,7 @@ md-nav__item--active">
   <a href="../../seqera_scale/02_launch_from_cli/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 2: Launch pipelines from the command line   
+    Partie 2 : Lancer des pipelines depuis la ligne de commande   
 </span>
   
   </a>
@@ -1197,7 +1199,7 @@ md-nav__item--active">
   <a href="../../seqera_scale/next_steps/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Course summary   
+    Résumé du cours   
 </span>
   
   </a>
@@ -1207,7 +1209,7 @@ md-nav__item--active">
   <a href="../../seqera_scale/survey/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Feedback survey   
+    Enquête de satisfaction   
 </span>
   
   </a>
@@ -1267,7 +1269,7 @@ md-nav__item--active">
   <a href="../../execution_config/00_orientation/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Getting started   
+    Premiers pas   
 </span>
   
   </a>
@@ -1277,7 +1279,7 @@ md-nav__item--active">
   <a href="../../execution_config/01_packaging_and_execution/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 1: Adapt to your compute environment   
+    Partie 1 : Adapter à votre environnement de calcul   
 </span>
   
   </a>
@@ -1287,7 +1289,7 @@ md-nav__item--active">
   <a href="../../execution_config/02_resources_and_retries/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 2: Manage compute resources and failures   
+    Partie 2 : Gérer les ressources de calcul et les échecs   
 </span>
   
   </a>
@@ -1297,7 +1299,7 @@ md-nav__item--active">
   <a href="../../execution_config/03_profiles/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 3: Use profiles to switch configurations   
+    Partie 3 : Utiliser les profils pour changer de configuration   
 </span>
   
   </a>
@@ -1307,7 +1309,7 @@ md-nav__item--active">
   <a href="../../execution_config/next_steps/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Course summary   
+    Résumé du cours   
 </span>
   
   </a>
@@ -1317,7 +1319,7 @@ md-nav__item--active">
   <a href="../../execution_config/survey/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Feedback survey   
+    Enquête de satisfaction   
 </span>
   
   </a>
@@ -1521,7 +1523,7 @@ md-nav__item--active">
   <a href="../../nfcore_build/00_orientation/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Getting started   
+    Premiers pas   
 </span>
   
   </a>
@@ -1531,7 +1533,7 @@ md-nav__item--active">
   <a href="../../nfcore_build/01_rewrite_hello/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 1: Rewrite Hello for nf-core   
+    Partie 1 : Réécrire Hello pour nf-core   
 </span>
   
   </a>
@@ -1541,7 +1543,7 @@ md-nav__item--active">
   <a href="../../nfcore_build/02_use_module/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 2: Use an nf-core module   
+    Partie 2 : Utiliser un module nf-core   
 </span>
   
   </a>
@@ -1551,7 +1553,7 @@ md-nav__item--active">
   <a href="../../nfcore_build/03_make_module/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 3: Make an nf-core module   
+    Partie 3 : Créer un module nf-core   
 </span>
   
   </a>
@@ -1561,7 +1563,7 @@ md-nav__item--active">
   <a href="../../nfcore_build/04_input_validation/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 4: Input validation   
+    Partie 4 : Validation des entrées   
 </span>
   
   </a>
@@ -1571,7 +1573,7 @@ md-nav__item--active">
   <a href="../../nfcore_build/next_steps/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Course summary   
+    Résumé du cours   
 </span>
   
   </a>
@@ -1581,7 +1583,7 @@ md-nav__item--active">
   <a href="../../nfcore_build/survey/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Feedback survey   
+    Enquête de retour d'expérience   
 </span>
   
   </a>
@@ -1655,7 +1657,7 @@ md-nav__item--active">
   <a href="../../side_quests/dev_environment/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Index   
+    Environnement de développement   
 </span>
   
   </a>
@@ -2386,7 +2388,7 @@ md-nav__item--active">
   <a href="../../training_events/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Training Events   
+    Événements de formation   
 </span>
   
   </a>
@@ -2413,22 +2415,22 @@ md-nav__item--active">
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-pipeline-parameters" class="md-nav__link">
+  <a href="#1-parametres-du-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Pipeline parameters
+        1. Paramètres du pipeline
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Pipeline parameters">
+    <nav class="md-nav" aria-label="1. Paramètres du pipeline">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-get-the-list-of-parameters-with-help" class="md-nav__link">
+  <a href="#11-obtenir-la-liste-des-parametres-avec-help" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Get the list of parameters with --help
+        1.1. Obtenir la liste des paramètres avec --help
       
     </span>
   </a>
@@ -2436,10 +2438,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-set-parameter-values" class="md-nav__link">
+  <a href="#12-definir-les-valeurs-des-parametres" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Set parameter values
+        1.2. Définir les valeurs des paramètres
       
     </span>
   </a>
@@ -2447,22 +2449,22 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-parameter-validation" class="md-nav__link">
+  <a href="#13-validation-des-parametres" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Parameter validation
+        1.3. Validation des paramètres
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1.3. Parameter validation">
+    <nav class="md-nav" aria-label="1.3. Validation des paramètres">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#131-unrecognized-parameters" class="md-nav__link">
+  <a href="#131-parametres-non-reconnus" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3.1. Unrecognized parameters
+        1.3.1. Paramètres non reconnus
       
     </span>
   </a>
@@ -2470,10 +2472,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#132-invalid-parameter-values" class="md-nav__link">
+  <a href="#132-valeurs-de-parametres-invalides" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3.2. Invalid parameter values
+        1.3.2. Valeurs de paramètres invalides
       
     </span>
   </a>
@@ -2486,10 +2488,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-input-validation" class="md-nav__link">
+  <a href="#14-validation-des-entrees" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Input validation
+        1.4. Validation des entrées
       
     </span>
   </a>
@@ -2497,10 +2499,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#a-retenir" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        À retenir
       
     </span>
   </a>
@@ -2508,10 +2510,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#et-ensuite" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Et ensuite ?
       
     </span>
   </a>
@@ -2534,10 +2536,10 @@ md-nav__item--active">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-explore-configuration-files" class="md-nav__link">
+  <a href="#21-explorer-les-fichiers-de-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Explore configuration files
+        2.1. Explorer les fichiers de configuration
       
     </span>
   </a>
@@ -2545,10 +2547,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-customize-process-resources-and-tool-arguments" class="md-nav__link">
+  <a href="#22-personnaliser-les-ressources-des-processus-et-les-arguments-des-outils" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Customize process resources and tool arguments
+        2.2. Personnaliser les ressources des processus et les arguments des outils
       
     </span>
   </a>
@@ -2556,10 +2558,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#a-retenir_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        À retenir
       
     </span>
   </a>
@@ -2567,10 +2569,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#et-ensuite_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Et ensuite ?
       
     </span>
   </a>
@@ -2581,10 +2583,10 @@ md-nav__item--active">
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#summary" class="md-nav__link">
+  <a href="#resume" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Summary
+        Résumé
       
     </span>
   </a>
@@ -2810,21 +2812,16 @@ md-nav__item--active">
 </a>
  
 
-<h1 id="part-2-configure-pipeline-execution">Part 2: Configure pipeline execution<a class="headerlink" href="#part-2-configure-pipeline-execution" title="Permanent link">&para;</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Translation in Progress</p>
-<p>This page has not yet been translated into your language.
-You are viewing the original English content.</p>
-<p>Want to help? See our <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">translation guide</a>.</p>
-</div>
-<p>In <a href="../01_run_demo/">Part 1</a>, you found and ran the nf-core/demo pipeline using its test profile.
-Now we look at how to configure pipeline execution: setting parameters, understanding validation, and customizing resource allocation and tool arguments.</p>
-<p>As explained in <a href="../../hello_nextflow/06_hello_config/">Hello Config</a>, we want to be able to change what data our pipeline will run on and how it will run without changing the pipeline code itself.
-To that end, Nextflow supports multiple ways of controlling pipeline configuration, which can be a bit overwhelming.</p>
-<p>The nf-core project specifies conventions for organizing configuration elements, distinguishing two kinds of configuration at the top level: <strong>pipeline parameters</strong> and <strong>configuration</strong> in the strict sense.</p>
+<h1 id="partie-2-configurer-lexecution-du-pipeline">Partie 2 : Configurer l'exécution du pipeline<a class="headerlink" href="#partie-2-configurer-lexecution-du-pipeline" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traduction assistée par IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">en savoir plus et suggérer des améliorations</a></span></p>
+<p>Dans la <a href="../01_run_demo/">Partie 1</a>, vous avez trouvé et exécuté le pipeline nf-core/demo en utilisant son profil de test.
+Nous allons maintenant voir comment configurer l'exécution du pipeline : définir des paramètres, comprendre la validation, et personnaliser l'allocation des ressources et les arguments des outils.</p>
+<p>Comme expliqué dans <a href="../../hello_nextflow/06_hello_config/">Hello Config</a>, nous souhaitons pouvoir modifier les données sur lesquelles notre pipeline s'exécutera et la façon dont il s'exécutera, sans modifier le code du pipeline lui-même.
+À cette fin, Nextflow prend en charge plusieurs façons de contrôler la configuration du pipeline, ce qui peut être un peu déroutant.</p>
+<p>Le projet nf-core définit des conventions pour organiser les éléments de configuration, en distinguant deux types de configuration au niveau supérieur : les <strong>paramètres du pipeline</strong> et la <strong>configuration</strong> au sens strict.</p>
 <ul>
-<li><strong>Pipeline parameters</strong> (set through the <code>params</code> system) typically include things like input files, tool behavior flags and analysis parameters.</li>
-<li><strong>Configuration</strong> in the strict sense refers to the logistics of how the pipeline gets run, i.e. the executor, compute resource allocations and so on.</li>
+<li>Les <strong>paramètres du pipeline</strong> (définis via le système <code>params</code>) incluent généralement des éléments tels que les fichiers d'entrée, les indicateurs de comportement des outils et les paramètres d'analyse.</li>
+<li>La <strong>configuration</strong> au sens strict désigne la logistique de la façon dont le pipeline est exécuté, c'est-à-dire l'executor, l'allocation des ressources de calcul, etc.</li>
 </ul>
 <figure class="excalidraw">
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 860" width="1100" height="860">
@@ -2926,16 +2923,16 @@ To that end, Nextflow supports multiple ways of controlling pipeline configurati
 
 </figure>
 
-<p>Let's start by tackling pipeline parameters, then we'll look at configuration in the strict sense.</p>
+<p>Commençons par les paramètres du pipeline, puis nous examinerons la configuration au sens strict.</p>
 <hr />
-<h2 id="1-pipeline-parameters">1. Pipeline parameters<a class="headerlink" href="#1-pipeline-parameters" title="Permanent link">&para;</a></h2>
-<p>For all nf-core pipelines, you can obtain a full list of pipeline parameters directly from the command line by using the <code>--help</code> flag, which is itself a pipeline parameter.</p>
-<h3 id="11-get-the-list-of-parameters-with-help">1.1. Get the list of parameters with <code>--help</code><a class="headerlink" href="#11-get-the-list-of-parameters-with-help" title="Permanent link">&para;</a></h3>
-<p>Run the help command for the demo pipeline:</p>
+<h2 id="1-parametres-du-pipeline">1. Paramètres du pipeline<a class="headerlink" href="#1-parametres-du-pipeline" title="Permanent link">&para;</a></h2>
+<p>Pour tous les pipelines nf-core, vous pouvez obtenir la liste complète des paramètres du pipeline directement depuis la ligne de commande en utilisant l'indicateur <code>--help</code>, qui est lui-même un paramètre du pipeline.</p>
+<h3 id="11-obtenir-la-liste-des-parametres-avec-help">1.1. Obtenir la liste des paramètres avec <code>--help</code><a class="headerlink" href="#11-obtenir-la-liste-des-parametres-avec-help" title="Permanent link">&para;</a></h3>
+<p>Exécutez la commande d'aide pour le pipeline demo :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/demo<span class="w"> </span>--help
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Sortie de la commande</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="go">Launching `https://github.com/nf-core/demo` [adoring_meucci] revision: 32893afef8 [master]</span>
@@ -2985,25 +2982,25 @@ To that end, Nextflow supports multiple ways of controlling pipeline configurati
 <a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a><span class="go">    https://github.com/nf-core/demo/blob/master/CITATIONS.md</span>
 </code></pre></div>
 </details>
-<p>As you can see, the output groups parameters into categories (Input/output options, Reference genome options, etc.) with types and descriptions for each one.</p>
-<p>This categorization is determined by a schema file, which is covered further below.
-In plain Nextflow pipelines, <code>--help</code> only works if the developer implemented it manually.</p>
+<p>Comme vous pouvez le voir, la sortie regroupe les paramètres par catégories (options d'entrée/sortie, options du génome de référence, etc.) avec les types et les descriptions pour chacun.</p>
+<p>Cette catégorisation est déterminée par un fichier de schéma, qui est présenté plus en détail ci-dessous.
+Dans les pipelines Nextflow simples, <code>--help</code> ne fonctionne que si le·la développeur·se l'a implémenté manuellement.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Use <code>--help --show_hidden</code> to see additional parameters that are hidden by default, such as <code>--publish_dir_mode</code> or <code>--monochrome_logs</code>.</p>
+<p class="admonition-title">Astuce</p>
+<p>Utilisez <code>--help --show_hidden</code> pour voir les paramètres supplémentaires qui sont masqués par défaut, tels que <code>--publish_dir_mode</code> ou <code>--monochrome_logs</code>.</p>
 </div>
-<h3 id="12-set-parameter-values">1.2. Set parameter values<a class="headerlink" href="#12-set-parameter-values" title="Permanent link">&para;</a></h3>
-<p>As covered in <a href="../../hello_nextflow/06_hello_config/">Hello Config</a>, you can set parameter values on the command line with <code>--param_name</code> or collect a set of parameters in a YAML file and pass it with <code>-params-file</code>.
-Both approaches work the same way with nf-core pipelines.</p>
-<p>For example, to skip the trimming step, we want to set the boolean parameter <code>skip_trim</code> to <code>true</code>.
-A params file called <code>my_params.yml</code> is provided in your working directory with that value already set:</p>
+<h3 id="12-definir-les-valeurs-des-parametres">1.2. Définir les valeurs des paramètres<a class="headerlink" href="#12-definir-les-valeurs-des-parametres" title="Permanent link">&para;</a></h3>
+<p>Comme expliqué dans <a href="../../hello_nextflow/06_hello_config/">Hello Config</a>, vous pouvez définir les valeurs des paramètres sur la ligne de commande avec <code>--param_name</code> ou regrouper un ensemble de paramètres dans un fichier YAML et le passer avec <code>-params-file</code>.
+Les deux approches fonctionnent de la même façon avec les pipelines nf-core.</p>
+<p>Par exemple, pour ignorer l'étape de rognage, nous souhaitons définir le paramètre booléen <code>skip_trim</code> à <code>true</code>.
+Un fichier de paramètres appelé <code>my_params.yml</code> est fourni dans votre répertoire de travail avec cette valeur déjà définie :</p>
 <div class="highlight"><span class="filename">my_params.yml</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">skip_trim</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
-<p>Pass it with <code>-params-file</code>:</p>
+<p>Passez-le avec <code>-params-file</code> :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/demo<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--outdir<span class="w"> </span>demo-results-notrim<span class="w"> </span>-params-file<span class="w"> </span>my_params.yml
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Sortie de la commande</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">Launching `https://github.com/nf-core/demo` [focused_heisenberg] revision: 32893afef8 [master]</span>
@@ -3062,42 +3059,42 @@ A params file called <code>my_params.yml</code> is provided in your working dire
 <a id="__codelineno-4-56" name="__codelineno-4-56" href="#__codelineno-4-56"></a><span class="go">-[nf-core/demo] Pipeline completed successfully-</span>
 </code></pre></div>
 </details>
-<p>The <code>SEQTK_TRIM</code> process no longer appears in the output.</p>
+<p>Le processus <code>SEQTK_TRIM</code> n'apparaît plus dans la sortie.</p>
 <div class="admonition warning">
-<p class="admonition-title">Important limitations about parameter inputs</p>
-<p><strong>Setting boolean parameters on the command line</strong></p>
-<p>Starting with Nextflow version 26.04, all values supplied on the command line are typed as strings.
-For a boolean parameter like <code>skip_trim</code>, passing it as a bare flag (<code>--skip_trim</code>) or as <code>--skip_trim true</code> is evaluated as the <strong>string</strong> <code>"true"</code>, which fails schema validation:</p>
+<p class="admonition-title">Avertissement : Limitations importantes concernant les entrées de paramètres</p>
+<p><strong>Définir des paramètres booléens sur la ligne de commande</strong></p>
+<p>À partir de la version 26.04 de Nextflow, toutes les valeurs fournies sur la ligne de commande sont typées comme des chaînes de caractères.
+Pour un paramètre booléen comme <code>skip_trim</code>, le passer comme un indicateur nu (<code>--skip_trim</code>) ou comme <code>--skip_trim true</code> est évalué comme la <strong>chaîne</strong> <code>"true"</code>, ce qui échoue à la validation du schéma :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">* --skip_trim (true): Value is [string] but should be [boolean]</span>
 </code></pre></div>
-<p>To set a boolean parameter to a genuine <code>true</code>/<code>false</code> value, use a <code>-params-file</code> as shown above, or set it in a config file.
-String, integer and file-path parameters are unaffected and can still be set directly on the command line.
-This course uses this pattern throughout for boolean parameters.</p>
-<p><strong>Using custom configuration files</strong></p>
-<p>Although it is technically possible to set pipeline parameters in a custom configuration file passed with <code>-c</code>, this may not override defaults already set in the pipeline's own <code>nextflow.config</code>, depending on Nextflow's configuration precedence rules.
-Using <code>--param_name</code> on the command line or <code>-params-file</code> is more reliable, as these always take precedence.</p>
-<p>As a rule of thumb: If it appears in the <code>--help</code> output, set it via the command line or a params file rather than a config file.</p>
+<p>Pour définir un paramètre booléen à une valeur <code>true</code>/<code>false</code> authentique, utilisez un <code>-params-file</code> comme indiqué ci-dessus, ou définissez-le dans un fichier de configuration.
+Les paramètres de type chaîne, entier et chemin de fichier ne sont pas affectés et peuvent toujours être définis directement sur la ligne de commande.
+Ce cours utilise ce modèle tout au long pour les paramètres booléens.</p>
+<p><strong>Utiliser des fichiers de configuration personnalisés</strong></p>
+<p>Bien qu'il soit techniquement possible de définir des paramètres du pipeline dans un fichier de configuration personnalisé passé avec <code>-c</code>, cela peut ne pas remplacer les valeurs par défaut déjà définies dans le <code>nextflow.config</code> du pipeline, selon les règles de priorité de configuration de Nextflow.
+Utiliser <code>--param_name</code> sur la ligne de commande ou <code>-params-file</code> est plus fiable, car ces méthodes ont toujours la priorité.</p>
+<p>En règle générale : si un paramètre apparaît dans la sortie de <code>--help</code>, définissez-le via la ligne de commande ou un fichier de paramètres plutôt que via un fichier de configuration.</p>
 </div>
-<h3 id="13-parameter-validation">1.3. Parameter validation<a class="headerlink" href="#13-parameter-validation" title="Permanent link">&para;</a></h3>
-<p>Fun fact: the <code>--help</code> command works for all nf-core pipelines because the nf-core project requires developers to define all pipeline parameters formally in a JSON schema file (<code>nextflow_schema.json</code>).
-This schema records each parameter's type, description, default value, and grouping.</p>
-<p>In addition to powering the <code>--help</code> output, the schema file also enables automated validation at launch time.
-This means that Nextflow can check that every parameter you pass exists and has been given an appropriate value (of appropriate type, within the allowed range of values etc).</p>
-<p>We cover this in more detail in <a href="../../nfcore_build/04_input_validation/">input validation section</a>, but you can already see it in action by giving the demo pipeline some invalid parameter input.</p>
-<h4 id="131-unrecognized-parameters">1.3.1. Unrecognized parameters<a class="headerlink" href="#131-unrecognized-parameters" title="Permanent link">&para;</a></h4>
-<p>Try passing a parameter that does not exist:</p>
+<h3 id="13-validation-des-parametres">1.3. Validation des paramètres<a class="headerlink" href="#13-validation-des-parametres" title="Permanent link">&para;</a></h3>
+<p>Fait intéressant : la commande <code>--help</code> fonctionne pour tous les pipelines nf-core parce que le projet nf-core exige des développeur·ses de définir formellement tous les paramètres du pipeline dans un fichier de schéma JSON (<code>nextflow_schema.json</code>).
+Ce schéma enregistre le type, la description, la valeur par défaut et le regroupement de chaque paramètre.</p>
+<p>En plus d'alimenter la sortie de <code>--help</code>, le fichier de schéma permet également une validation automatisée au moment du lancement.
+Cela signifie que Nextflow peut vérifier que chaque paramètre que vous passez existe et a reçu une valeur appropriée (du type approprié, dans la plage de valeurs autorisée, etc.).</p>
+<p>Nous abordons cela plus en détail dans la <a href="../../nfcore_build/04_input_validation/">section sur la validation des entrées</a>, mais vous pouvez déjà le voir en action en fournissant au pipeline demo des entrées de paramètres invalides.</p>
+<h4 id="131-parametres-non-reconnus">1.3.1. Paramètres non reconnus<a class="headerlink" href="#131-parametres-non-reconnus" title="Permanent link">&para;</a></h4>
+<p>Essayez de passer un paramètre qui n'existe pas :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/demo<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--outdir<span class="w"> </span>demo-results<span class="w"> </span>--foobar<span class="w"> </span><span class="s2">"invalid"</span>
 </code></pre></div>
-<p>The console output includes a warning:</p>
+<p>La sortie de la console inclut un avertissement :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="go">WARN: The following invalid input values have been detected:</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="go">* --foobar: invalid</span>
 </code></pre></div>
-<p>The pipeline still runs, but the warning alerts you right away that <code>--foobar</code> is not a recognized parameter.
-This is meant to draw your attention to non-breaking typos, like <code>--outDir</code> being used instead of <code>--outdir</code>, which can help you avoid wasting time and compute.</p>
-<h4 id="132-invalid-parameter-values">1.3.2. Invalid parameter values<a class="headerlink" href="#132-invalid-parameter-values" title="Permanent link">&para;</a></h4>
-<p>Validation also checks parameter <strong>values</strong>.
-The <code>--skip_trim</code> parameter is a boolean flag, so passing a string value causes the pipeline to fail immediately:</p>
+<p>Le pipeline s'exécute quand même, mais l'avertissement vous alerte immédiatement que <code>--foobar</code> n'est pas un paramètre reconnu.
+Cela est destiné à attirer votre attention sur les fautes de frappe non bloquantes, comme l'utilisation de <code>--outDir</code> au lieu de <code>--outdir</code>, ce qui peut vous aider à éviter de perdre du temps et des ressources de calcul.</p>
+<h4 id="132-valeurs-de-parametres-invalides">1.3.2. Valeurs de paramètres invalides<a class="headerlink" href="#132-valeurs-de-parametres-invalides" title="Permanent link">&para;</a></h4>
+<p>La validation vérifie également les <strong>valeurs</strong> des paramètres.
+Le paramètre <code>--skip_trim</code> est un indicateur booléen, donc passer une valeur de type chaîne provoque l'échec immédiat du pipeline :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/demo<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--outdir<span class="w"> </span>demo-results<span class="w"> </span>--skip_trim<span class="w"> </span>yes
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">ERROR ~ Validation of pipeline parameters failed!</span>
@@ -3109,17 +3106,17 @@ The <code>--skip_trim</code> parameter is a boolean flag, so passing a string va
 <a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
 <a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="go"> -- Check script '/workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details</span>
 </code></pre></div>
-<p>The pipeline stops before any processes run, saving you from a failed or incorrect execution.
-As noted in <a href="#12-set-parameter-values">1.2</a>, boolean parameters should be set to a genuine <code>true</code>/<code>false</code> value in a params file rather than passed on the command line, since command-line values are typed as strings.</p>
-<h3 id="14-input-validation">1.4. Input validation<a class="headerlink" href="#14-input-validation" title="Permanent link">&para;</a></h3>
-<p>The same validation logic can also be used to check the validity of input files.
-For example, if a pipeline expects a samplesheet as its main data input (which is the case of many if not most nf-core pipelines), the developer can provide an input schema (distinct from the parameters schema) describing how the input file should be structured.</p>
-<p>Then, at runtime, Nextflow can check that the input file provided is valid.</p>
-<p>We also cover this in more detail in <a href="../../nfcore_build/04_input_validation/">input validation section</a>, but you can already see it in action by giving the demo pipeline an invalid input samplesheet.</p>
-<p>The <code>nf-core/demo</code> pipeline expects a CSV file with columns <code>sample</code>, <code>fastq_1</code>, and <code>fastq_2</code>.
-This is defined in a schema file (<code>assets/schema_input.json</code>) that specifies the expected structure, column types, and constraints.</p>
+<p>Le pipeline s'arrête avant l'exécution de tout processus, vous évitant ainsi une exécution échouée ou incorrecte.
+Comme indiqué dans la <a href="#12-set-parameter-values">section 1.2</a>, les paramètres booléens doivent être définis à une valeur <code>true</code>/<code>false</code> authentique dans un fichier de paramètres plutôt que passés sur la ligne de commande, car les valeurs de la ligne de commande sont typées comme des chaînes de caractères.</p>
+<h3 id="14-validation-des-entrees">1.4. Validation des entrées<a class="headerlink" href="#14-validation-des-entrees" title="Permanent link">&para;</a></h3>
+<p>La même logique de validation peut également être utilisée pour vérifier la validité des fichiers d'entrée.
+Par exemple, si un pipeline attend une samplesheet comme entrée de données principale (ce qui est le cas de nombreux pipelines nf-core, voire de la plupart), le·la développeur·se peut fournir un schéma d'entrée (distinct du schéma des paramètres) décrivant comment le fichier d'entrée doit être structuré.</p>
+<p>Ensuite, au moment de l'exécution, Nextflow peut vérifier que le fichier d'entrée fourni est valide.</p>
+<p>Nous abordons également cela plus en détail dans la <a href="../../nfcore_build/04_input_validation/">section sur la validation des entrées</a>, mais vous pouvez déjà le voir en action en fournissant au pipeline demo une samplesheet d'entrée invalide.</p>
+<p>Le pipeline <code>nf-core/demo</code> attend un fichier CSV avec les colonnes <code>sample</code>, <code>fastq_1</code> et <code>fastq_2</code>.
+Cela est défini dans un fichier de schéma (<code>assets/schema_input.json</code>) qui spécifie la structure attendue, les types de colonnes et les contraintes.</p>
 <details class="abstract">
-<summary>Schema file for inputs</summary>
+<summary>Fichier de schéma pour les entrées</summary>
 <div class="highlight"><span class="filename">assets/schema_input.json</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">{</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://json-schema.org/draft/2020-12/schema"</span><span class="p">,</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nt">"$id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/nf-core/demo/master/assets/schema_input.json"</span><span class="p">,</span>
@@ -3155,14 +3152,14 @@ This is defined in a schema file (<code>assets/schema_input.json</code>) that sp
 <a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-<p>The schema specifies that <code>sample</code> and <code>fastq_1</code> are required, while <code>fastq_2</code> is optional (supporting both paired-end and single-end data).
-File paths are validated for existence and extension pattern.</p>
-<p>To demonstrate this, we provide a malformed samplesheet called <code>malformed_samplesheet.csv</code> in your working directory:</p>
+<p>Le schéma spécifie que <code>sample</code> et <code>fastq_1</code> sont obligatoires, tandis que <code>fastq_2</code> est optionnel (prenant en charge les données paired-end et single-end).
+Les chemins de fichiers sont validés pour leur existence et leur extension.</p>
+<p>Pour illustrer cela, nous fournissons une samplesheet malformée appelée <code>malformed_samplesheet.csv</code> dans votre répertoire de travail :</p>
 <div class="highlight"><span class="filename">malformed_samplesheet.csv</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sample,fastq_2
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>SAMPLE1,/not/a/real/file.fastq.gz
 </code></pre></div>
-<p>This samplesheet is missing the required <code>fastq_1</code> column and has a non-existent file path in <code>fastq_2</code>.</p>
-<p>Run the demo pipeline using <code>malformed_samplesheet.csv</code> as the input:</p>
+<p>Cette samplesheet est dépourvue de la colonne obligatoire <code>fastq_1</code> et contient un chemin de fichier inexistant dans <code>fastq_2</code>.</p>
+<p>Exécutez le pipeline demo en utilisant <code>malformed_samplesheet.csv</code> comme entrée :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/demo<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--outdir<span class="w"> </span>demo-results<span class="w"> </span>--input<span class="w"> </span>malformed_samplesheet.csv
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">ERROR ~ Validation of pipeline parameters failed!</span>
@@ -3176,22 +3173,22 @@ File paths are validated for existence and extension pattern.</p>
 <a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
 <a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="go"> -- Check script '/workspaces/.nextflow/assets/.repos/nf-core/demo/clones/32893afef8076a03a2767a020b3f0cab2e0b40b2/subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details</span>
 </code></pre></div>
-<p>As you can see, the pipeline fails immediately and reports <strong>all</strong> validation errors at once.
-nf-schema does not stop at the first error — it collects every problem and lists them together, so you can fix everything in one go rather than discovering issues one by one.</p>
-<p>Each error identifies the exact entry and field that caused the problem, so you can fix your samplesheet then re-launch the pipeline with confidence that it's not going to fail at some later point when Nextflow actually goes to access the file path.</p>
-<p>For developers, all of this is covered in more detail in <a href="../../nfcore_build/04_input_validation/">Part 4 of Build with nf-core</a>.</p>
-<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
-<p>You know how to get a full list of a pipeline's parameters with <code>--help</code>, set them via the command line or a params file, and how Nextflow validates both parameter values and input files against the pipeline's schemas.</p>
-<h3 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h3>
-<p>Learn about the other kind of configuration: how the pipeline runs, covering resource allocation and tool arguments.</p>
+<p>Comme vous pouvez le voir, le pipeline échoue immédiatement et signale <strong>toutes</strong> les erreurs de validation en même temps.
+nf-schema ne s'arrête pas à la première erreur — il collecte tous les problèmes et les liste ensemble, afin que vous puissiez tout corriger en une seule fois plutôt que de découvrir les problèmes un par un.</p>
+<p>Chaque erreur identifie l'entrée et le champ exacts qui ont causé le problème, afin que vous puissiez corriger votre samplesheet puis relancer le pipeline avec la certitude qu'il ne va pas échouer à un moment ultérieur lorsque Nextflow tentera d'accéder au chemin du fichier.</p>
+<p>Pour les développeur·ses, tout cela est abordé plus en détail dans la <a href="../../nfcore_build/04_input_validation/">Partie 4 de Build with nf-core</a>.</p>
+<h3 id="a-retenir">À retenir<a class="headerlink" href="#a-retenir" title="Permanent link">&para;</a></h3>
+<p>Vous savez comment obtenir la liste complète des paramètres d'un pipeline avec <code>--help</code>, les définir via la ligne de commande ou un fichier de paramètres, et comment Nextflow valide à la fois les valeurs des paramètres et les fichiers d'entrée par rapport aux schémas du pipeline.</p>
+<h3 id="et-ensuite">Et ensuite ?<a class="headerlink" href="#et-ensuite" title="Permanent link">&para;</a></h3>
+<p>Découvrez l'autre type de configuration : la façon dont le pipeline s'exécute, couvrant l'allocation des ressources et les arguments des outils.</p>
 <hr />
 <h2 id="2-configuration">2. Configuration<a class="headerlink" href="#2-configuration" title="Permanent link">&para;</a></h2>
-<p>Configuration in the strict sense controls <strong>how</strong> the pipeline runs: resource allocation, tool-specific arguments, where jobs execute, and which software packaging system to use.</p>
-<p>nf-core pipelines include default configuration in <code>nextflow.config</code> and the <code>conf/</code> directory.
-Before overriding anything, it helps to know where the defaults live.</p>
-<h3 id="21-explore-configuration-files">2.1. Explore configuration files<a class="headerlink" href="#21-explore-configuration-files" title="Permanent link">&para;</a></h3>
-<p>You already saw in <a href="../01_run_demo/">Part 1</a> that the pipeline source code lives under <code>$NXF_HOME/assets</code>.
-Using the <code>pipelines</code> symlink you created in <a href="../01_run_demo/">Part 1</a>, list the config files to see what's available:</p>
+<p>La configuration au sens strict contrôle <strong>comment</strong> le pipeline s'exécute : l'allocation des ressources, les arguments spécifiques aux outils, l'endroit où les tâches s'exécutent et le système d'empaquetage logiciel à utiliser.</p>
+<p>Les pipelines nf-core incluent une configuration par défaut dans <code>nextflow.config</code> et le répertoire <code>conf/</code>.
+Avant de remplacer quoi que ce soit, il est utile de savoir où se trouvent les valeurs par défaut.</p>
+<h3 id="21-explorer-les-fichiers-de-configuration">2.1. Explorer les fichiers de configuration<a class="headerlink" href="#21-explorer-les-fichiers-de-configuration" title="Permanent link">&para;</a></h3>
+<p>Vous avez déjà vu dans la <a href="../01_run_demo/">Partie 1</a> que le code source du pipeline se trouve sous <code>$NXF_HOME/assets</code>.
+En utilisant le lien symbolique <code>pipelines</code> que vous avez créé dans la <a href="../01_run_demo/">Partie 1</a>, listez les fichiers de configuration pour voir ce qui est disponible :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>ls<span class="w"> </span>pipelines/nf-core/demo/conf/
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">base.config</span>
@@ -3295,23 +3292,23 @@ Using the <code>pipelines</code> symlink you created in <a href="../01_run_demo/
 
 </figure>
 
-<p>The most important configuration files are:</p>
+<p>Les fichiers de configuration les plus importants sont :</p>
 <ul>
-<li><strong><code>conf/base.config</code></strong>: Defines resource labels (<code>process_low</code>, <code>process_medium</code>, <code>process_high</code>) that assign CPUs, memory, and time to processes. When you see a process using more resources than expected, this is where those defaults come from.</li>
-<li><strong><code>conf/modules.config</code></strong>: Sets per-process tool arguments (<code>ext.args</code>) and output publishing settings (<code>publishDir</code>). Open this file to see what arguments each tool receives by default.</li>
-<li><strong><code>conf/test.config</code></strong>: The test profile you used in <a href="../01_run_demo/">Part 1</a>, which caps resources via <code>resourceLimits</code> and sets a test samplesheet. Activated with <code>-profile test</code>.
-  There is also a <code>conf/test_full.config</code> for running with a full-sized test dataset, useful for benchmarking.</li>
+<li><strong><code>conf/base.config</code></strong> : Définit les labels de ressources (<code>process_low</code>, <code>process_medium</code>, <code>process_high</code>) qui attribuent des CPUs, de la mémoire et du temps aux processus. Lorsque vous voyez un processus utiliser plus de ressources que prévu, c'est là que proviennent ces valeurs par défaut.</li>
+<li><strong><code>conf/modules.config</code></strong> : Définit les arguments des outils par processus (<code>ext.args</code>) et les paramètres de publication des sorties (<code>publishDir</code>). Ouvrez ce fichier pour voir quels arguments chaque outil reçoit par défaut.</li>
+<li><strong><code>conf/test.config</code></strong> : Le profil de test que vous avez utilisé dans la <a href="../01_run_demo/">Partie 1</a>, qui limite les ressources via <code>resourceLimits</code> et définit une samplesheet de test. Activé avec <code>-profile test</code>.
+  Il existe également un <code>conf/test_full.config</code> pour l'exécution avec un jeu de données de test de taille réelle, utile pour les benchmarks.</li>
 </ul>
-<p>The central <code>nextflow.config</code> loads all of the above and sets the appropriate default values for everything.</p>
-<p>If you wish to modify any of the settings specified in these files, do not modify any of them files directly.
-Instead, create your own config file and pass it with <code>-c</code>.
-The values you specify will override the default values set in those other files.</p>
-<p>Let's try this in practice.</p>
-<h3 id="22-customize-process-resources-and-tool-arguments">2.2. Customize process resources and tool arguments<a class="headerlink" href="#22-customize-process-resources-and-tool-arguments" title="Permanent link">&para;</a></h3>
-<p>nf-core modules support two common types of configuration override: <strong>resource allocation</strong> (CPUs, memory, time) and <strong>tool arguments</strong> via <code>ext.args</code>.</p>
-<p>Many command-line tools have arguments that are not commonly enough used to be exposed as pipeline parameters.
-The <code>ext.args</code> convention lets you pass these arguments to the underlying tool through a config file instead.</p>
-<p>The <code>custom.config</code> file provided in your working directory demonstrates both overrides:</p>
+<p>Le <code>nextflow.config</code> central charge tous les fichiers ci-dessus et définit les valeurs par défaut appropriées pour tout.</p>
+<p>Si vous souhaitez modifier l'un des paramètres spécifiés dans ces fichiers, ne modifiez aucun d'entre eux directement.
+Créez plutôt votre propre fichier de configuration et passez-le avec <code>-c</code>.
+Les valeurs que vous spécifiez remplaceront les valeurs par défaut définies dans ces autres fichiers.</p>
+<p>Essayons cela en pratique.</p>
+<h3 id="22-personnaliser-les-ressources-des-processus-et-les-arguments-des-outils">2.2. Personnaliser les ressources des processus et les arguments des outils<a class="headerlink" href="#22-personnaliser-les-ressources-des-processus-et-les-arguments-des-outils" title="Permanent link">&para;</a></h3>
+<p>Les modules nf-core prennent en charge deux types courants de remplacement de configuration : <strong>l'allocation des ressources</strong> (CPUs, mémoire, temps) et les <strong>arguments des outils</strong> via <code>ext.args</code>.</p>
+<p>De nombreux outils en ligne de commande ont des arguments qui ne sont pas suffisamment utilisés pour être exposés comme paramètres du pipeline.
+La convention <code>ext.args</code> vous permet de passer ces arguments à l'outil sous-jacent via un fichier de configuration.</p>
+<p>Le fichier <code>custom.config</code> fourni dans votre répertoire de travail illustre ces deux types de remplacement :</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">custom.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span>
 <span class="normal"><a href="#__codelineno-16-2">2</a></span>
 <span class="normal"><a href="#__codelineno-16-3">3</a></span>
@@ -3330,15 +3327,15 @@ The <code>ext.args</code> convention lets you pass these arguments to the underl
 <a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>The first block overrides <code>FASTQC</code> resource allocation.
-By default, <code>FASTQC</code> uses the <code>process_medium</code> label from <code>base.config</code>, which allocates 6 CPUs and 36 GB of memory; here we cap it at 2 CPUs and 4 GB.</p>
-<p>The second block passes an extra argument to <code>SEQTK_TRIM</code> via <code>ext.args</code>.
-The <code>-b 5</code> flag tells <code>seqtk trimfq</code> to trim 5 bases from the beginning of each read in addition to quality trimming.</p>
-<p>Run the pipeline with this config:</p>
+<p>Le premier bloc remplace l'allocation des ressources de <code>FASTQC</code>.
+Par défaut, <code>FASTQC</code> utilise le label <code>process_medium</code> de <code>base.config</code>, qui alloue 6 CPUs et 36 Go de mémoire ; ici nous le limitons à 2 CPUs et 4 Go.</p>
+<p>Le second bloc passe un argument supplémentaire à <code>SEQTK_TRIM</code> via <code>ext.args</code>.
+L'indicateur <code>-b 5</code> indique à <code>seqtk trimfq</code> de rogner 5 bases au début de chaque lecture en plus du rognage par qualité.</p>
+<p>Exécutez le pipeline avec cette configuration :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/demo<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--outdir<span class="w"> </span>demo-results-custom<span class="w"> </span>-c<span class="w"> </span>custom.config
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Sortie de la commande</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="go">executor &gt;  local (8)</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="go">[95/b32876] NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE)     | 3 of 3 ✔</span>
 <a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="go">[17/428668] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) | 3 of 3 ✔</span>
@@ -3347,12 +3344,12 @@ The <code>-b 5</code> flag tells <code>seqtk trimfq</code> to trim 5 bases from 
 <a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="go">-[nf-core/demo] Pipeline completed successfully-</span>
 </code></pre></div>
 </details>
-<p>The <code>-c</code> flag adds your config on top of the pipeline's built-in configuration.</p>
-<p>To verify the <code>ext.args</code> override took effect, find the <code>SEQTK_TRIM</code> work directory hash from the run output (e.g. <code>work/17/428668...</code>) and check the <code>.command.sh</code> file inside it:</p>
+<p>L'indicateur <code>-c</code> ajoute votre configuration par-dessus la configuration intégrée du pipeline.</p>
+<p>Pour vérifier que le remplacement de <code>ext.args</code> a bien pris effet, trouvez le hash du répertoire de travail de <code>SEQTK_TRIM</code> dans la sortie de l'exécution (par exemple <code>work/17/428668...</code>) et vérifiez le fichier <code>.command.sh</code> à l'intérieur :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>cat<span class="w"> </span>work/17/428668/.command.sh
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Sortie de la commande</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="gp">#</span>!/usr/bin/env<span class="w"> </span>bash<span class="w"> </span>-e<span class="w"> </span>-u<span class="w"> </span>-o<span class="w"> </span>pipefail
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="go">printf "%s\n" sample1_R1.fastq.gz sample1_R2.fastq.gz | while read f;</span>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="go">do</span>
@@ -3365,9 +3362,9 @@ The <code>-b 5</code> flag tells <code>seqtk trimfq</code> to trim 5 bases from 
 <a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="go">...</span>
 </code></pre></div>
 </details>
-<p>You should see <code>-b 5</code> in the <code>seqtk trimfq</code> command.</p>
-<p>One important thing to know about <code>ext.args</code>: if a module already has a default value set, your value will <strong>completely replace</strong> it rather than append to it.
-For example, <code>FASTQC</code> has <code>ext.args = '--quiet'</code> set by default in <code>conf/modules.config</code>:</p>
+<p>Vous devriez voir <code>-b 5</code> dans la commande <code>seqtk trimfq</code>.</p>
+<p>Une chose importante à savoir sur <code>ext.args</code> : si un module a déjà une valeur par défaut définie, votre valeur la <strong>remplacera complètement</strong> plutôt que de s'y ajouter.
+Par exemple, <code>FASTQC</code> a <code>ext.args = '--quiet'</code> défini par défaut dans <code>conf/modules.config</code> :</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">conf/modules.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-21">21</a></span>
 <span class="normal"><a href="#__codelineno-21-22">22</a></span>
 <span class="normal"><a href="#__codelineno-21-23">23</a></span>
@@ -3384,19 +3381,19 @@ For example, <code>FASTQC</code> has <code>ext.args = '--quiet'</code> set by de
 <a id="__codelineno-21-27" name="__codelineno-21-27"></a><span class="w">        </span><span class="o">]</span>
 <a id="__codelineno-21-28" name="__codelineno-21-28"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>If you set <code>ext.args = '--kmers 8'</code> for <code>FASTQC</code>, the <code>--quiet</code> flag will no longer be applied.
-To keep both, set <code>ext.args = '--quiet --kmers 8'</code>.</p>
-<p>You should always check a module's default configuration before overriding <code>ext.args</code>.</p>
-<h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
-<p>You know where nf-core pipeline configuration defaults live, and how to override resource allocations and tool arguments with a custom config file.</p>
-<h3 id="whats-next_1">What's next?<a class="headerlink" href="#whats-next_1" title="Permanent link">&para;</a></h3>
-<p>Head on to <a href="../03_run_production_pipeline/">Part 3</a>, where you'll apply what you've learned to a real production pipeline.</p>
+<p>Si vous définissez <code>ext.args = '--kmers 8'</code> pour <code>FASTQC</code>, l'indicateur <code>--quiet</code> ne sera plus appliqué.
+Pour conserver les deux, définissez <code>ext.args = '--quiet --kmers 8'</code>.</p>
+<p>Vous devriez toujours vérifier la configuration par défaut d'un module avant de remplacer <code>ext.args</code>.</p>
+<h3 id="a-retenir_1">À retenir<a class="headerlink" href="#a-retenir_1" title="Permanent link">&para;</a></h3>
+<p>Vous savez où se trouvent les valeurs par défaut de configuration des pipelines nf-core, et comment remplacer les allocations de ressources et les arguments des outils avec un fichier de configuration personnalisé.</p>
+<h3 id="et-ensuite_1">Et ensuite ?<a class="headerlink" href="#et-ensuite_1" title="Permanent link">&para;</a></h3>
+<p>Passez à la <a href="../03_run_production_pipeline/">Partie 3</a>, où vous appliquerez ce que vous avez appris à un vrai pipeline de production.</p>
 <hr />
-<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
-<p>In this part you learned to:</p>
+<h2 id="resume">Résumé<a class="headerlink" href="#resume" title="Permanent link">&para;</a></h2>
+<p>Dans cette partie, vous avez appris à :</p>
 <ul>
-<li>Get help, set parameters, and understand parameter and input validation</li>
-<li>Customize resource allocation and tool arguments through configuration files</li>
+<li>Obtenir de l'aide, définir des paramètres et comprendre la validation des paramètres et des entrées</li>
+<li>Personnaliser l'allocation des ressources et les arguments des outils via des fichiers de configuration</li>
 </ul><div id="quiz-progress-sidebar" aria-label="Progression du quiz" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">
@@ -5138,7 +5135,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Pied de page" >
         
           
-          <a href="../01_run_demo/" class="md-footer__link md-footer__link--prev" aria-label="Précédent: Part 1: Run a demo pipeline">
+          <a href="../01_run_demo/" class="md-footer__link md-footer__link--prev" aria-label="Précédent: Partie 1 : Exécuter un pipeline de démonstration">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -5148,20 +5145,20 @@ window.mkdocsQuizConfig = {
                 Précédent
               </span>
               <div class="md-ellipsis">
-                Part 1: Run a demo pipeline
+                Partie 1 : Exécuter un pipeline de démonstration
               </div>
             </div>
           </a>
         
         
           
-          <a href="../03_run_production_pipeline/" class="md-footer__link md-footer__link--next" aria-label="Suivant: Part 3: Run a production pipeline">
+          <a href="../03_run_production_pipeline/" class="md-footer__link md-footer__link--next" aria-label="Suivant: Partie 3 : Exécuter un pipeline de production">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Suivant
               </span>
               <div class="md-ellipsis">
-                Part 3: Run a production pipeline
+                Partie 3 : Exécuter un pipeline de production
               </div>
             </div>
             <div class="md-footer__button md-icon">

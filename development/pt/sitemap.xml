@@ -9,6 +9,10 @@
          <lastmod>2026-09-13</lastmod>
     </url>
     <url>
+         <loc>https://training.nextflow.io/pt/training_events/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
          <loc>https://training.nextflow.io/pt/envsetup/</loc>
          <lastmod>2026-09-13</lastmod>
     </url>
@@ -22,6 +26,34 @@
     </url>
     <url>
          <loc>https://training.nextflow.io/pt/envsetup/03_devcontainer/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/execution_config/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/execution_config/00_orientation/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/execution_config/01_packaging_and_execution/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/execution_config/02_resources_and_retries/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/execution_config/03_profiles/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/execution_config/next_steps/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/execution_config/survey/</loc>
          <lastmod>2026-09-13</lastmod>
     </url>
     <url>
@@ -97,42 +129,6 @@
          <lastmod>2026-09-13</lastmod>
     </url>
     <url>
-         <loc>https://training.nextflow.io/pt/hello_nf-core/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/hello_nf-core/00_orientation/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/hello_nf-core/01_run_demo/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/hello_nf-core/02_rewrite_hello/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/hello_nf-core/03_use_module/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/hello_nf-core/04_make_module/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/hello_nf-core/05_input_validation/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/hello_nf-core/next_steps/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/hello_nf-core/survey/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
          <loc>https://training.nextflow.io/pt/info/conventions/</loc>
          <lastmod>2026-09-13</lastmod>
     </url>
@@ -153,15 +149,19 @@
          <lastmod>2026-09-13</lastmod>
     </url>
     <url>
-         <loc>https://training.nextflow.io/pt/nextflow_run/01_basics/</loc>
+         <loc>https://training.nextflow.io/pt/nextflow_run/01_run_nextflow/</loc>
          <lastmod>2026-09-13</lastmod>
     </url>
     <url>
-         <loc>https://training.nextflow.io/pt/nextflow_run/02_pipeline/</loc>
+         <loc>https://training.nextflow.io/pt/nextflow_run/02_configure_pipeline/</loc>
          <lastmod>2026-09-13</lastmod>
     </url>
     <url>
-         <loc>https://training.nextflow.io/pt/nextflow_run/03_config/</loc>
+         <loc>https://training.nextflow.io/pt/nextflow_run/03_manage_executions/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/nextflow_run/04_remote_repositories/</loc>
          <lastmod>2026-09-13</lastmod>
     </url>
     <url>
@@ -293,6 +293,90 @@
          <lastmod>2026-09-13</lastmod>
     </url>
     <url>
+         <loc>https://training.nextflow.io/pt/nfcore_build/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/nfcore_build/00_orientation/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/nfcore_build/01_rewrite_hello/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/nfcore_build/02_use_module/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/nfcore_build/03_make_module/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/nfcore_build/04_input_validation/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/nfcore_build/next_steps/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/nfcore_build/survey/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/nfcore_use/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/nfcore_use/00_orientation/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/nfcore_use/01_run_demo/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/nfcore_use/02_configure_execution/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/nfcore_use/03_run_production_pipeline/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/nfcore_use/next_steps/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/nfcore_use/survey/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/seqera_scale/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/seqera_scale/00_orientation/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/seqera_scale/01_run_with_seqera/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/seqera_scale/02_launch_from_cli/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/seqera_scale/next_steps/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/pt/seqera_scale/survey/</loc>
+         <lastmod>2026-09-13</lastmod>
+    </url>
+    <url>
          <loc>https://training.nextflow.io/pt/side_quests/</loc>
          <lastmod>2026-09-13</lastmod>
     </url>
@@ -374,138 +458,6 @@
     </url>
     <url>
          <loc>https://training.nextflow.io/pt/side_quests/working_with_files/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/nextflow_run/01_run_nextflow/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/nextflow_run/02_configure_pipeline/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/nextflow_run/03_manage_executions/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/nextflow_run/04_remote_repositories/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/nfcore_use/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/nfcore_use/00_orientation/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/nfcore_use/01_run_demo/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/nfcore_use/02_configure_execution/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/nfcore_use/03_run_production_pipeline/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/nfcore_use/next_steps/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/nfcore_use/survey/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/seqera_scale/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/seqera_scale/00_orientation/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/seqera_scale/01_run_with_seqera/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/seqera_scale/02_launch_from_cli/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/seqera_scale/next_steps/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/seqera_scale/survey/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/execution_config/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/execution_config/00_orientation/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/execution_config/01_packaging_and_execution/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/execution_config/02_resources_and_retries/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/execution_config/03_profiles/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/execution_config/next_steps/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/execution_config/survey/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/nfcore_build/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/nfcore_build/00_orientation/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/nfcore_build/01_rewrite_hello/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/nfcore_build/02_use_module/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/nfcore_build/03_make_module/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/nfcore_build/04_input_validation/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/nfcore_build/next_steps/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/nfcore_build/survey/</loc>
-         <lastmod>2026-09-13</lastmod>
-    </url>
-    <url>
-         <loc>https://training.nextflow.io/pt/training_events/</loc>
          <lastmod>2026-09-13</lastmod>
     </url>
 </urlset>

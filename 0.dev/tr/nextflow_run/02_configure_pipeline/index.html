@@ -47,7 +47,7 @@
     
     
       
-        <title>Part 2: Configure the pipeline - training.nextflow.io</title>
+        <title>Bölüm 2: Pipeline'ı Yapılandırma - training.nextflow.io</title>
       
     
     
@@ -162,7 +162,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-2-configure-the-pipeline" class="md-skip">
+        <a href="#bolum-2-pipeline-yaplandrma" class="md-skip">
           Ana içeriğe geç
         </a>
       
@@ -259,7 +259,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Part 2: Configure the pipeline
+              Bölüm 2: Pipeline'ı Yapılandırma
             
           </span>
         </div>
@@ -558,7 +558,7 @@ md-nav__item--active md-nav__item--nested">
   <a href="../01_run_nextflow/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 1: Run Nextflow   
+    Bölüm 1: Nextflow'u Çalıştırma   
 </span>
   
   </a>
@@ -572,7 +572,7 @@ md-nav__item--active">
   <label class="md-nav__link md-nav__link--active" for="__toc">
       
 <span class="md-ellipsis">
-    Part 2: Configure the pipeline   
+    Bölüm 2: Pipeline'ı Yapılandırma   
 </span>
   
     <span class="md-nav__icon md-icon"></span>
@@ -581,7 +581,7 @@ md-nav__item--active">
   <a href="./" class="md-nav__link md-nav__link--active">
       
 <span class="md-ellipsis">
-    Part 2: Configure the pipeline   
+    Bölüm 2: Pipeline'ı Yapılandırma   
 </span>
   
   </a>
@@ -595,22 +595,22 @@ md-nav__item--active">
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-examine-the-main-configuration-file" class="md-nav__link">
+  <a href="#1-ana-yaplandrma-dosyasn-inceleme" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Examine the main configuration file
+        1. Ana Yapılandırma Dosyasını İnceleme
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Examine the main configuration file">
+    <nav class="md-nav" aria-label="1. Ana Yapılandırma Dosyasını İnceleme">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-software-packaging" class="md-nav__link">
+  <a href="#11-yazlm-paketleme" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Software packaging
+        1.1. Yazılım Paketleme
       
     </span>
   </a>
@@ -618,10 +618,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-process-settings" class="md-nav__link">
+  <a href="#12-surec-ayarlar" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Process settings
+        1.2. Süreç Ayarları
       
     </span>
   </a>
@@ -629,10 +629,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-pipeline-parameters" class="md-nav__link">
+  <a href="#13-pipeline-parametreleri" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Pipeline parameters
+        1.3. Pipeline Parametreleri
       
     </span>
   </a>
@@ -640,10 +640,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-profiles" class="md-nav__link">
+  <a href="#14-profiller" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Profiles
+        1.4. Profiller
       
     </span>
   </a>
@@ -651,10 +651,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#ozetle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Özetle
       
     </span>
   </a>
@@ -662,10 +662,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#srada-ne-var" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Sırada ne var?
       
     </span>
   </a>
@@ -676,22 +676,22 @@ md-nav__item--active">
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-provide-configuration-via-supplemental-files" class="md-nav__link">
+  <a href="#2-ek-dosyalar-araclgyla-yaplandrma-saglama" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Provide configuration via supplemental files
+        2. Ek Dosyalar Aracılığıyla Yapılandırma Sağlama
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Provide configuration via supplemental files">
+    <nav class="md-nav" aria-label="2. Ek Dosyalar Aracılığıyla Yapılandırma Sağlama">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-use-a-run-specific-configuration-file" class="md-nav__link">
+  <a href="#21-calstrmaya-ozgu-bir-yaplandrma-dosyas-kullanma" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Use a run-specific configuration file
+        2.1. Çalıştırmaya Özgü Bir Yapılandırma Dosyası Kullanma
       
     </span>
   </a>
@@ -699,10 +699,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-use-a-parameter-file" class="md-nav__link">
+  <a href="#22-parametre-dosyas-kullanma" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Use a parameter file
+        2.2. Parametre Dosyası Kullanma
       
     </span>
   </a>
@@ -710,10 +710,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#ozetle_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Özetle
       
     </span>
   </a>
@@ -721,10 +721,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#srada-ne-var_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Sırada ne var?
       
     </span>
   </a>
@@ -735,22 +735,22 @@ md-nav__item--active">
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-manage-pipeline-outputs" class="md-nav__link">
+  <a href="#3-pipeline-cktlarn-yonetme" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Manage pipeline outputs
+        3. Pipeline Çıktılarını Yönetme
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Manage pipeline outputs">
+    <nav class="md-nav" aria-label="3. Pipeline Çıktılarını Yönetme">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-customize-the-output-directory" class="md-nav__link">
+  <a href="#31-ckt-dizinini-ozellestirme" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Customize the output directory
+        3.1. Çıktı Dizinini Özelleştirme
       
     </span>
   </a>
@@ -758,10 +758,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-choose-how-outputs-get-published" class="md-nav__link">
+  <a href="#32-cktlarn-nasl-yaymlanacagn-secme" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Choose how outputs get published
+        3.2. Çıktıların Nasıl Yayımlanacağını Seçme
       
     </span>
   </a>
@@ -769,10 +769,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_2" class="md-nav__link">
+  <a href="#ozetle_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Özetle
       
     </span>
   </a>
@@ -780,10 +780,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_2" class="md-nav__link">
+  <a href="#srada-ne-var_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Sırada ne var?
       
     </span>
   </a>
@@ -794,10 +794,10 @@ md-nav__item--active">
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#summary" class="md-nav__link">
+  <a href="#ozet" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Summary
+        Özet
       
     </span>
   </a>
@@ -998,7 +998,7 @@ md-nav__item--active">
   <a href="../03_manage_executions/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 3: Manage workflow executions   
+    Bölüm 3: İş akışı çalıştırmalarını yönetme   
 </span>
   
   </a>
@@ -1008,7 +1008,7 @@ md-nav__item--active">
   <a href="../04_remote_repositories/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 4: Run remote pipelines   
+    Bölüm 4: Uzak Pipeline'ları Çalıştırma   
 </span>
   
   </a>
@@ -1088,7 +1088,7 @@ md-nav__item--active">
   <a href="../../nfcore_use/00_orientation/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Getting started   
+    00 orientation   
 </span>
   
   </a>
@@ -1098,7 +1098,7 @@ md-nav__item--active">
   <a href="../../nfcore_use/01_run_demo/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 1: Run a demo pipeline   
+    Bölüm 1: Demo Pipeline'ı Çalıştırma   
 </span>
   
   </a>
@@ -1108,7 +1108,7 @@ md-nav__item--active">
   <a href="../../nfcore_use/02_configure_execution/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 2: Configure pipeline execution   
+    Bölüm 2: Pipeline Yürütmesini Yapılandırma   
 </span>
   
   </a>
@@ -1118,7 +1118,7 @@ md-nav__item--active">
   <a href="../../nfcore_use/03_run_production_pipeline/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 3: Run a production pipeline   
+    Bölüm 3: Bir Üretim Pipeline'ı Çalıştırma   
 </span>
   
   </a>
@@ -1128,7 +1128,7 @@ md-nav__item--active">
   <a href="../../nfcore_use/next_steps/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Course summary   
+    Kurs Özeti   
 </span>
   
   </a>
@@ -1138,7 +1138,7 @@ md-nav__item--active">
   <a href="../../nfcore_use/survey/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Feedback survey   
+    Geri Bildirim Anketi   
 </span>
   
   </a>
@@ -1198,7 +1198,7 @@ md-nav__item--active">
   <a href="../../seqera_scale/00_orientation/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Getting started   
+    Başlarken   
 </span>
   
   </a>
@@ -1208,7 +1208,7 @@ md-nav__item--active">
   <a href="../../seqera_scale/01_run_with_seqera/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 1: Launch pipelines from the web interface   
+    Bölüm 1: Pipeline'ları web arayüzünden başlatma   
 </span>
   
   </a>
@@ -1218,7 +1218,7 @@ md-nav__item--active">
   <a href="../../seqera_scale/02_launch_from_cli/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 2: Launch pipelines from the command line   
+    Bölüm 2: Pipeline'ları komut satırından başlatma   
 </span>
   
   </a>
@@ -1228,7 +1228,7 @@ md-nav__item--active">
   <a href="../../seqera_scale/next_steps/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Course summary   
+    Next steps   
 </span>
   
   </a>
@@ -1238,7 +1238,7 @@ md-nav__item--active">
   <a href="../../seqera_scale/survey/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Feedback survey   
+    Geri Bildirim Anketi   
 </span>
   
   </a>
@@ -1298,7 +1298,7 @@ md-nav__item--active">
   <a href="../../execution_config/00_orientation/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Getting started   
+    Başlarken   
 </span>
   
   </a>
@@ -1308,7 +1308,7 @@ md-nav__item--active">
   <a href="../../execution_config/01_packaging_and_execution/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 1: Adapt to your compute environment   
+    Bölüm 1: Hesaplama Ortamınıza Uyarlama   
 </span>
   
   </a>
@@ -1318,7 +1318,7 @@ md-nav__item--active">
   <a href="../../execution_config/02_resources_and_retries/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 2: Manage compute resources and failures   
+    Bölüm 2: İşlem Kaynaklarını ve Hataları Yönetme   
 </span>
   
   </a>
@@ -1328,7 +1328,7 @@ md-nav__item--active">
   <a href="../../execution_config/03_profiles/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 3: Use profiles to switch configurations   
+    Bölüm 3: Yapılandırmaları değiştirmek için profiller kullanın   
 </span>
   
   </a>
@@ -1338,7 +1338,7 @@ md-nav__item--active">
   <a href="../../execution_config/next_steps/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Course summary   
+    Next steps   
 </span>
   
   </a>
@@ -1348,7 +1348,7 @@ md-nav__item--active">
   <a href="../../execution_config/survey/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Feedback survey   
+    Geri bildirim anketi   
 </span>
   
   </a>
@@ -1552,7 +1552,7 @@ md-nav__item--active">
   <a href="../../nfcore_build/00_orientation/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Getting started   
+    Başlarken   
 </span>
   
   </a>
@@ -1562,7 +1562,7 @@ md-nav__item--active">
   <a href="../../nfcore_build/01_rewrite_hello/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 1: Rewrite Hello for nf-core   
+    Bölüm 1: Hello'yu nf-core için yeniden yazma   
 </span>
   
   </a>
@@ -1572,7 +1572,7 @@ md-nav__item--active">
   <a href="../../nfcore_build/02_use_module/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 2: Use an nf-core module   
+    Bölüm 2: Bir nf-core modülü kullanma   
 </span>
   
   </a>
@@ -1582,7 +1582,7 @@ md-nav__item--active">
   <a href="../../nfcore_build/03_make_module/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 3: Make an nf-core module   
+    Bölüm 3: Bir nf-core modülü oluşturma   
 </span>
   
   </a>
@@ -1592,7 +1592,7 @@ md-nav__item--active">
   <a href="../../nfcore_build/04_input_validation/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 4: Input validation   
+    Bölüm 4: Girdi doğrulaması   
 </span>
   
   </a>
@@ -1602,7 +1602,7 @@ md-nav__item--active">
   <a href="../../nfcore_build/next_steps/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Course summary   
+    Kurs özeti   
 </span>
   
   </a>
@@ -1612,7 +1612,7 @@ md-nav__item--active">
   <a href="../../nfcore_build/survey/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Feedback survey   
+    Geri bildirim anketi   
 </span>
   
   </a>
@@ -2417,7 +2417,7 @@ md-nav__item--active">
   <a href="../../training_events/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Training Events   
+    Eğitim Etkinlikleri   
 </span>
   
   </a>
@@ -2444,22 +2444,22 @@ md-nav__item--active">
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-examine-the-main-configuration-file" class="md-nav__link">
+  <a href="#1-ana-yaplandrma-dosyasn-inceleme" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Examine the main configuration file
+        1. Ana Yapılandırma Dosyasını İnceleme
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Examine the main configuration file">
+    <nav class="md-nav" aria-label="1. Ana Yapılandırma Dosyasını İnceleme">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-software-packaging" class="md-nav__link">
+  <a href="#11-yazlm-paketleme" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Software packaging
+        1.1. Yazılım Paketleme
       
     </span>
   </a>
@@ -2467,10 +2467,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-process-settings" class="md-nav__link">
+  <a href="#12-surec-ayarlar" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Process settings
+        1.2. Süreç Ayarları
       
     </span>
   </a>
@@ -2478,10 +2478,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-pipeline-parameters" class="md-nav__link">
+  <a href="#13-pipeline-parametreleri" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Pipeline parameters
+        1.3. Pipeline Parametreleri
       
     </span>
   </a>
@@ -2489,10 +2489,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-profiles" class="md-nav__link">
+  <a href="#14-profiller" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Profiles
+        1.4. Profiller
       
     </span>
   </a>
@@ -2500,10 +2500,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#ozetle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Özetle
       
     </span>
   </a>
@@ -2511,10 +2511,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#srada-ne-var" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Sırada ne var?
       
     </span>
   </a>
@@ -2525,22 +2525,22 @@ md-nav__item--active">
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-provide-configuration-via-supplemental-files" class="md-nav__link">
+  <a href="#2-ek-dosyalar-araclgyla-yaplandrma-saglama" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Provide configuration via supplemental files
+        2. Ek Dosyalar Aracılığıyla Yapılandırma Sağlama
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Provide configuration via supplemental files">
+    <nav class="md-nav" aria-label="2. Ek Dosyalar Aracılığıyla Yapılandırma Sağlama">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-use-a-run-specific-configuration-file" class="md-nav__link">
+  <a href="#21-calstrmaya-ozgu-bir-yaplandrma-dosyas-kullanma" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. Use a run-specific configuration file
+        2.1. Çalıştırmaya Özgü Bir Yapılandırma Dosyası Kullanma
       
     </span>
   </a>
@@ -2548,10 +2548,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-use-a-parameter-file" class="md-nav__link">
+  <a href="#22-parametre-dosyas-kullanma" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Use a parameter file
+        2.2. Parametre Dosyası Kullanma
       
     </span>
   </a>
@@ -2559,10 +2559,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_1" class="md-nav__link">
+  <a href="#ozetle_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Özetle
       
     </span>
   </a>
@@ -2570,10 +2570,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_1" class="md-nav__link">
+  <a href="#srada-ne-var_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Sırada ne var?
       
     </span>
   </a>
@@ -2584,22 +2584,22 @@ md-nav__item--active">
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-manage-pipeline-outputs" class="md-nav__link">
+  <a href="#3-pipeline-cktlarn-yonetme" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Manage pipeline outputs
+        3. Pipeline Çıktılarını Yönetme
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Manage pipeline outputs">
+    <nav class="md-nav" aria-label="3. Pipeline Çıktılarını Yönetme">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-customize-the-output-directory" class="md-nav__link">
+  <a href="#31-ckt-dizinini-ozellestirme" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Customize the output directory
+        3.1. Çıktı Dizinini Özelleştirme
       
     </span>
   </a>
@@ -2607,10 +2607,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-choose-how-outputs-get-published" class="md-nav__link">
+  <a href="#32-cktlarn-nasl-yaymlanacagn-secme" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Choose how outputs get published
+        3.2. Çıktıların Nasıl Yayımlanacağını Seçme
       
     </span>
   </a>
@@ -2618,10 +2618,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#takeaway_2" class="md-nav__link">
+  <a href="#ozetle_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        Özetle
       
     </span>
   </a>
@@ -2629,10 +2629,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#whats-next_2" class="md-nav__link">
+  <a href="#srada-ne-var_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        Sırada ne var?
       
     </span>
   </a>
@@ -2643,10 +2643,10 @@ md-nav__item--active">
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#summary" class="md-nav__link">
+  <a href="#ozet" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Summary
+        Özet
       
     </span>
   </a>
@@ -2872,19 +2872,14 @@ md-nav__item--active">
 </a>
  
 
-<h1 id="part-2-configure-the-pipeline">Part 2: Configure the pipeline<a class="headerlink" href="#part-2-configure-the-pipeline" title="Permanent link">&para;</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Translation in Progress</p>
-<p>This page has not yet been translated into your language.
-You are viewing the original English content.</p>
-<p>Want to help? See our <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">translation guide</a>.</p>
-</div>
-<p>In <a href="../01_run_nextflow/">Part 1</a>, you ran a complete multi-step pipeline that processes multiple inputs in parallel using containers.
-Now we're going to look at how to configure pipeline behavior using <code>nextflow.config</code>: first by examining the configuration file we already gave you, then by exploring a couple of other ways to supply configuration, and finally by controlling how and where outputs get published.</p>
+<h1 id="bolum-2-pipeline-yaplandrma">Bölüm 2: Pipeline'ı Yapılandırma<a class="headerlink" href="#bolum-2-pipeline-yaplandrma" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Yapay zeka destekli çeviri - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">daha fazla bilgi ve iyileştirme önerileri</a></span></p>
+<p><a href="../01_run_nextflow/">Bölüm 1</a>'de, konteynerler kullanarak birden fazla girdiyi paralel olarak işleyen eksiksiz bir çok adımlı pipeline çalıştırdınız.
+Şimdi <code>nextflow.config</code> kullanarak pipeline davranışının nasıl yapılandırılacağına bakacağız: önce size sağladığımız yapılandırma dosyasını inceleyerek, ardından yapılandırma sağlamanın birkaç farklı yolunu keşfederek ve son olarak çıktıların nasıl ve nereye yayımlanacağını kontrol ederek.</p>
 <hr />
-<h2 id="1-examine-the-main-configuration-file">1. Examine the main configuration file<a class="headerlink" href="#1-examine-the-main-configuration-file" title="Permanent link">&para;</a></h2>
-<p>Nextflow automatically picks up <code>nextflow.config</code> from the working directory and applies its settings to every run.</p>
-<p>We provide you with a configuration file that covers four areas: software packaging, process settings, pipeline parameters, and execution profiles.</p>
+<h2 id="1-ana-yaplandrma-dosyasn-inceleme">1. Ana Yapılandırma Dosyasını İnceleme<a class="headerlink" href="#1-ana-yaplandrma-dosyasn-inceleme" title="Permanent link">&para;</a></h2>
+<p>Nextflow, <code>nextflow.config</code> dosyasını çalışma dizininden otomatik olarak alır ve ayarlarını her çalıştırmaya uygular.</p>
+<p>Dört alanı kapsayan bir yapılandırma dosyası sağlıyoruz: yazılım paketleme, süreç ayarları, pipeline parametreleri ve yürütme profilleri.</p>
 <details class="full-code">
 <summary>nextflow.config</summary>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
@@ -2923,12 +2918,12 @@ Now we're going to look at how to configure pipeline behavior using <code>nextfl
 <span class="normal"><a href="#__codelineno-0-34">34</a></span>
 <span class="normal"><a href="#__codelineno-0-35">35</a></span>
 <span class="normal"><a href="#__codelineno-0-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="cm">/*</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="cm"> * Software packaging</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="cm"> * Yazılım paketleme</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="cm"> */</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="n">docker</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5"></a>
 <a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="cm">/*</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="cm"> * Process settings</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="cm"> * Süreç ayarları</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="cm"> */</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
@@ -2936,7 +2931,7 @@ Now we're going to look at how to configure pipeline behavior using <code>nextfl
 <a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="o">}</span>
 <a id="__codelineno-0-13" name="__codelineno-0-13"></a>
 <a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="cm">/*</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="cm"> * Pipeline parameters</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="cm"> * Pipeline parametreleri</span>
 <a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="cm"> */</span>
 <a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-0-18" name="__codelineno-0-18"></a><span class="w">    </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'data/greetings.csv'</span>
@@ -2945,7 +2940,7 @@ Now we're going to look at how to configure pipeline behavior using <code>nextfl
 <a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="o">}</span>
 <a id="__codelineno-0-22" name="__codelineno-0-22"></a>
 <a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="cm">/*</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="cm"> * Profiles</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="cm"> * Profiller</span>
 <a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="cm"> */</span>
 <a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="n">profiles</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="w">    </span><span class="n">test</span><span class="w"> </span><span class="o">{</span>
@@ -2960,28 +2955,28 @@ Now we're going to look at how to configure pipeline behavior using <code>nextfl
 <a id="__codelineno-0-36" name="__codelineno-0-36"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </details>
-<p>Let's go through each one, then put profiles to use by running the pipeline with one.</p>
+<p>Her birini tek tek inceleyelim, ardından pipeline'ı bir profille çalıştırarak profilleri pratikte kullanalım.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This config covers local execution on a single machine.
-Nextflow also supports HPC schedulers (SLURM, PBS, LSF) and cloud executors (AWS Batch, Google Cloud Batch, Azure Batch), all configured through the same <code>nextflow.config</code> mechanism.
-See <a href="../../execution_config/01_packaging_and_execution/">Part 1: Adapt to your compute environment</a> in the <a href="../../execution_config/">Execution Config</a> course for a full walkthrough of these options.</p>
+<p class="admonition-title">Not</p>
+<p>Bu yapılandırma, tek bir makinede yerel yürütmeyi kapsar.
+Nextflow aynı zamanda HPC zamanlayıcılarını (SLURM, PBS, LSF) ve bulut yürütücülerini (AWS Batch, Google Cloud Batch, Azure Batch) de destekler; bunların tümü aynı <code>nextflow.config</code> mekanizmasıyla yapılandırılır.
+Bu seçeneklerin tam bir açıklaması için <a href="../../execution_config/01_packaging_and_execution/">Execution Config</a> kursundaki <a href="../../execution_config/">Bölüm 1: Hesaplama Ortamınıza Uyum Sağlama</a> sayfasına bakın.</p>
 </div>
-<h3 id="11-software-packaging">1.1. Software packaging<a class="headerlink" href="#11-software-packaging" title="Permanent link">&para;</a></h3>
-<p>Software packaging is how Nextflow supplies the actual tools your processes need, whether that's a container image, a Conda environment, or something else.</p>
+<h3 id="11-yazlm-paketleme">1.1. Yazılım Paketleme<a class="headerlink" href="#11-yazlm-paketleme" title="Permanent link">&para;</a></h3>
+<p>Yazılım paketleme, Nextflow'un süreçlerinizin ihtiyaç duyduğu araçları nasıl sağladığını belirler; bu bir konteyner imajı, bir Conda ortamı veya başka bir şey olabilir.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
 <span class="normal"><a href="#__codelineno-1-2">2</a></span>
 <span class="normal"><a href="#__codelineno-1-3">3</a></span>
 <span class="normal"><a href="#__codelineno-1-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cm">/*</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="cm"> * Software packaging</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="cm"> * Yazılım paketleme</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="cm"> */</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="n">docker</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 </code></pre></div></td></tr></table></div>
-<p>This line enables Docker for every process.
-Any process that declares a <code>container</code> directive runs inside the specified image.</p>
-<h3 id="12-process-settings">1.2. Process settings<a class="headerlink" href="#12-process-settings" title="Permanent link">&para;</a></h3>
-<p>Remember that a process is a single step in your pipeline, like <code>sayHello</code> or <code>cowpy</code>.
-Nextflow lets you configure a number of things about how each one actually runs: how much CPU and memory it gets, which container or Conda environment it uses, and more.</p>
+<p>Bu satır, her süreç için Docker'ı etkinleştirir.
+<code>container</code> yönergesi tanımlayan her süreç, belirtilen imajın içinde çalışır.</p>
+<h3 id="12-surec-ayarlar">1.2. Süreç Ayarları<a class="headerlink" href="#12-surec-ayarlar" title="Permanent link">&para;</a></h3>
+<p>Bir sürecin, pipeline'ınızdaki <code>sayHello</code> veya <code>cowpy</code> gibi tek bir adım olduğunu hatırlayın.
+Nextflow, her birinin gerçekte nasıl çalışacağına dair pek çok şeyi yapılandırmanıza olanak tanır: ne kadar CPU ve bellek alacağı, hangi konteyneri veya Conda ortamını kullanacağı ve daha fazlası.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
 <span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
@@ -2989,18 +2984,18 @@ Nextflow lets you configure a number of things about how each one actually runs:
 <span class="normal"><a href="#__codelineno-2-10">10</a></span>
 <span class="normal"><a href="#__codelineno-2-11">11</a></span>
 <span class="normal"><a href="#__codelineno-2-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="cm">/*</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="cm"> * Process settings</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="cm"> * Süreç ayarları</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="cm"> */</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
 <a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">    </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">.</span><span class="na">GB</span>
 <a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>This caps every process at a single CPU and 1 GB of memory.</p>
-<p>Nextflow also lets you set different values for individual named processes or groups of processes; you'll learn how in <a href="../../execution_config/02_resources_and_retries/#12-set-resource-allocations-for-a-specific-process">Part 2: Manage compute resources and failures</a> of the <a href="../../execution_config/">Execution Config</a> course.</p>
-<h3 id="13-pipeline-parameters">1.3. Pipeline parameters<a class="headerlink" href="#13-pipeline-parameters" title="Permanent link">&para;</a></h3>
-<p>Parameters are the pipeline's command-line inputs, the same <code>--input</code>, <code>--batch</code> and <code>--character</code> flags you've already been setting directly on the command line.
-Setting defaults for them here means you don't have to type them out every time, though as you'll see later in this part, there are a couple of other ways to supply them too.</p>
+<p>Bu, her süreci tek bir CPU ve 1 GB bellekle sınırlar.</p>
+<p>Nextflow ayrıca tek tek adlandırılmış süreçler veya süreç grupları için farklı değerler belirlemenize de olanak tanır; bunu nasıl yapacağınızı <a href="../../execution_config/02_resources_and_retries/#12-set-resource-allocations-for-a-specific-process">Execution Config</a> kursunun <a href="../../execution_config/">Bölüm 2: Hesaplama Kaynaklarını ve Hataları Yönetme</a> bölümünde öğreneceksiniz.</p>
+<h3 id="13-pipeline-parametreleri">1.3. Pipeline Parametreleri<a class="headerlink" href="#13-pipeline-parametreleri" title="Permanent link">&para;</a></h3>
+<p>Parametreler, pipeline'ın komut satırı girdileridir; daha önce doğrudan komut satırında belirlediğiniz <code>--input</code>, <code>--batch</code> ve <code>--character</code> bayraklarıdır.
+Bunlar için burada varsayılan değerler belirlemek, her seferinde bunları yazmak zorunda kalmamanızı sağlar; ancak bu bölümün ilerleyen kısımlarında göreceğiniz gibi, bunları sağlamanın birkaç farklı yolu daha vardır.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-14">14</a></span>
 <span class="normal"><a href="#__codelineno-3-15">15</a></span>
 <span class="normal"><a href="#__codelineno-3-16">16</a></span>
@@ -3009,7 +3004,7 @@ Setting defaults for them here means you don't have to type them out every time,
 <span class="normal"><a href="#__codelineno-3-19">19</a></span>
 <span class="normal"><a href="#__codelineno-3-20">20</a></span>
 <span class="normal"><a href="#__codelineno-3-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="cm">/*</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="cm"> * Pipeline parameters</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="cm"> * Pipeline parametreleri</span>
 <a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="cm"> */</span>
 <a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="w">    </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'data/greetings.csv'</span>
@@ -3017,9 +3012,9 @@ Setting defaults for them here means you don't have to type them out every time,
 <a id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="w">    </span><span class="n">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'turkey'</span>
 <a id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>These defaults kick in whenever a parameter isn't supplied on the command line, so running <code>nextflow run main.nf</code> with no flags still works.</p>
-<h3 id="14-profiles">1.4. Profiles<a class="headerlink" href="#14-profiles" title="Permanent link">&para;</a></h3>
-<p>Profiles let you bundle up a set of settings under a single name, so you can switch between whole configurations with one flag instead of changing values by hand every time.</p>
+<p>Bu varsayılanlar, komut satırında bir parametre sağlanmadığında devreye girer; dolayısıyla <code>nextflow run main.nf</code> komutunu hiçbir bayrak olmadan çalıştırmak yine de işe yarar.</p>
+<h3 id="14-profiller">1.4. Profiller<a class="headerlink" href="#14-profiller" title="Permanent link">&para;</a></h3>
+<p>Profiller, bir dizi ayarı tek bir ad altında gruplandırmanıza olanak tanır; böylece her seferinde değerleri elle değiştirmek yerine tek bir bayrakla tüm yapılandırmalar arasında geçiş yapabilirsiniz.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-23">23</a></span>
 <span class="normal"><a href="#__codelineno-4-24">24</a></span>
 <span class="normal"><a href="#__codelineno-4-25">25</a></span>
@@ -3034,7 +3029,7 @@ Setting defaults for them here means you don't have to type them out every time,
 <span class="normal"><a href="#__codelineno-4-34">34</a></span>
 <span class="normal"><a href="#__codelineno-4-35">35</a></span>
 <span class="normal"><a href="#__codelineno-4-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-23" name="__codelineno-4-23"></a><span class="cm">/*</span>
-<a id="__codelineno-4-24" name="__codelineno-4-24"></a><span class="cm"> * Profiles</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24"></a><span class="cm"> * Profiller</span>
 <a id="__codelineno-4-25" name="__codelineno-4-25"></a><span class="cm"> */</span>
 <a id="__codelineno-4-26" name="__codelineno-4-26"></a><span class="n">profiles</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-4-27" name="__codelineno-4-27"></a><span class="w">    </span><span class="n">test</span><span class="w"> </span><span class="o">{</span>
@@ -3048,14 +3043,14 @@ Setting defaults for them here means you don't have to type them out every time,
 <a id="__codelineno-4-35" name="__codelineno-4-35"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-4-36" name="__codelineno-4-36"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>The <code>test</code> profile overrides three parameters to run the pipeline with a small, well-defined input set; every nf-core pipeline ships with one of these for quick validation, and it's a convention worth following in your own pipelines too.</p>
-<p>The <code>conda</code> profile switches software packaging from Docker to Conda.</p>
-<p>You activate a profile by passing <code>-profile &lt;name&gt;</code> on the command line.</p>
-<p>Let's put the <code>test</code> profile to use.</p>
+<p><code>test</code> profili, pipeline'ı küçük ve iyi tanımlanmış bir girdi setiyle çalıştırmak için üç parametreyi geçersiz kılar; her nf-core pipeline'ı hızlı doğrulama için böyle bir profille birlikte gelir ve bu, kendi pipeline'larınızda da uygulamaya değer bir kuraldır.</p>
+<p><code>conda</code> profili, yazılım paketlemeyi Docker'dan Conda'ya geçirir.</p>
+<p>Bir profili etkinleştirmek için komut satırında <code>-profile &lt;isim&gt;</code> parametresini kullanırsınız.</p>
+<p><code>test</code> profilini pratikte kullanalım.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf<span class="w"> </span>-profile<span class="w"> </span><span class="nb">test</span>
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Komut çıktısı</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">Launching `main.nf` [reverent_heisenberg] revision: ce74f81996</span>
@@ -3087,24 +3082,24 @@ Setting defaults for them here means you don't have to type them out every time,
 <a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a><span class="go">  cowpy_art: test/cowpy-COLLECTED-test-output.txt</span>
 </code></pre></div>
 </details>
-<p>The pipeline runs with <code>batch = 'test'</code> and <code>character = 'tux'</code>.
-Check <code>results/test/</code>: the batch name is now part of the directory path itself, and the ASCII art features the tux penguin instead of a turkey.</p>
+<p>Pipeline, <code>batch = 'test'</code> ve <code>character = 'tux'</code> değerleriyle çalışır.
+<code>results/test/</code> dizinine bakın: toplu iş adı artık dizin yolunun kendisinin bir parçasıdır ve ASCII sanatı hindi yerine tux penguenini göstermektedir.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>You can activate several profiles at once, and use <code>nextflow config -profile &lt;name&gt;,&lt;name&gt;</code> to see the fully resolved result before running anything.
-Combining profiles, and how Nextflow resolves conflicts between them, is covered in depth in <a href="../../execution_config/03_profiles/">Part 3: Use profiles to switch configurations</a> of the <a href="../../execution_config/">Execution Config</a> course.</p>
+<p class="admonition-title">Not</p>
+<p>Aynı anda birden fazla profili etkinleştirebilir ve herhangi bir şey çalıştırmadan önce tam olarak çözümlenmiş sonucu görmek için <code>nextflow config -profile &lt;isim&gt;,&lt;isim&gt;</code> komutunu kullanabilirsiniz.
+Profillerin birleştirilmesi ve Nextflow'un aralarındaki çakışmaları nasıl çözdüğü, <a href="../../execution_config/03_profiles/">Execution Config</a> kursunun <a href="../../execution_config/">Bölüm 3: Yapılandırmaları Değiştirmek için Profilleri Kullanma</a> bölümünde ayrıntılı olarak ele alınmaktadır.</p>
 </div>
-<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
-<p>You know what the most common elements of a <code>nextflow.config</code> file do, and how to activate a profile.</p>
-<h3 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h3>
-<p>Learn a couple of other ways to supply configuration values without modifying the main <code>nextflow.config</code> file, useful for configuring individual runs and for sharing an exact set of settings with someone else.</p>
+<h3 id="ozetle">Özetle<a class="headerlink" href="#ozetle" title="Permanent link">&para;</a></h3>
+<p>Bir <code>nextflow.config</code> dosyasının en yaygın öğelerinin ne işe yaradığını ve bir profilin nasıl etkinleştirileceğini öğrendiniz.</p>
+<h3 id="srada-ne-var">Sırada ne var?<a class="headerlink" href="#srada-ne-var" title="Permanent link">&para;</a></h3>
+<p>Ana <code>nextflow.config</code> dosyasını değiştirmeden yapılandırma değerleri sağlamanın birkaç farklı yolunu öğrenin; bu yöntemler bireysel çalıştırmaları yapılandırmak ve tam bir ayar setini başkasıyla paylaşmak için kullanışlıdır.</p>
 <hr />
-<h2 id="2-provide-configuration-via-supplemental-files">2. Provide configuration via supplemental files<a class="headerlink" href="#2-provide-configuration-via-supplemental-files" title="Permanent link">&para;</a></h2>
-<p>Setting defaults in <code>nextflow.config</code> works well for values that rarely change.
-Nextflow also gives you two more targeted mechanisms: a run-specific configuration file for adapting execution to a particular environment, and a parameter file for sharing an exact set of input values with a collaborator.</p>
-<h3 id="21-use-a-run-specific-configuration-file">2.1. Use a run-specific configuration file<a class="headerlink" href="#21-use-a-run-specific-configuration-file" title="Permanent link">&para;</a></h3>
-<p>Say you're moving the pipeline to a machine that doesn't have Docker, and you want to give every process more room to work with.
-Create a new configuration file with just the overrides you need:</p>
+<h2 id="2-ek-dosyalar-araclgyla-yaplandrma-saglama">2. Ek Dosyalar Aracılığıyla Yapılandırma Sağlama<a class="headerlink" href="#2-ek-dosyalar-araclgyla-yaplandrma-saglama" title="Permanent link">&para;</a></h2>
+<p><code>nextflow.config</code> dosyasında varsayılan değerleri belirlemek, nadiren değişen değerler için iyi çalışır.
+Nextflow ayrıca iki daha hedefli mekanizma sunar: yürütmeyi belirli bir ortama uyarlamak için çalıştırmaya özgü bir yapılandırma dosyası ve bir iş ortağıyla tam bir girdi değerleri setini paylaşmak için bir parametre dosyası.</p>
+<h3 id="21-calstrmaya-ozgu-bir-yaplandrma-dosyas-kullanma">2.1. Çalıştırmaya Özgü Bir Yapılandırma Dosyası Kullanma<a class="headerlink" href="#21-calstrmaya-ozgu-bir-yaplandrma-dosyas-kullanma" title="Permanent link">&para;</a></h3>
+<p>Diyelim ki pipeline'ı Docker'ın bulunmadığı bir makineye taşıyorsunuz ve her sürece daha fazla çalışma alanı vermek istiyorsunuz.
+Yalnızca ihtiyacınız olan geçersiz kılmaları içeren yeni bir yapılandırma dosyası oluşturun:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">custom.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
 <span class="normal"><a href="#__codelineno-7-2">2</a></span>
 <span class="normal"><a href="#__codelineno-7-3">3</a></span>
@@ -3119,11 +3114,11 @@ Create a new configuration file with just the overrides you need:</p>
 <a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="n">docker</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
 <a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="n">conda</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 </code></pre></div></td></tr></table></div>
-<p>Pass it alongside your main pipeline with <code>-c</code>:</p>
+<p>Ana pipeline'ınızla birlikte <code>-c</code> parametresiyle geçirin:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf<span class="w"> </span>-c<span class="w"> </span>custom.config
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Komut çıktısı</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">Launching `main.nf` [exotic_cray] revision: ce74f81996</span>
@@ -3155,33 +3150,33 @@ Create a new configuration file with just the overrides you need:</p>
 <a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a><span class="go">  cowpy_art: batch/cowpy-COLLECTED-batch-output.txt</span>
 </code></pre></div>
 </details>
-<p>Nextflow merges <code>custom.config</code> on top of the pipeline's own <code>nextflow.config</code>, so every process now gets 2 CPUs and 2 GB of memory instead of the defaults, and runs through Conda instead of Docker.
-<code>cowpy</code> is the only process with a Conda package declared alongside its container, so it's the one you'll see Nextflow actually build an environment for:</p>
+<p>Nextflow, <code>custom.config</code> dosyasını pipeline'ın kendi <code>nextflow.config</code> dosyasının üzerine birleştirir; böylece her süreç artık varsayılanlar yerine 2 CPU ve 2 GB bellek alır ve Docker yerine Conda üzerinden çalışır.
+<code>cowpy</code>, konteynerinin yanı sıra bir Conda paketi de tanımlanmış tek süreçtir; dolayısıyla Nextflow'un gerçekten bir ortam oluşturduğunu göreceğiniz süreç bu olacaktır:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">Creating env using conda: conda-forge::cowpy==1.1.5 [cache /path/to/work/conda/env-898314d566668b6587ad714ae06b8520]</span>
 </code></pre></div>
-<p>A small file that only overrides resource allocation and packaging, without touching pipeline parameters, is exactly the pattern nf-core pipelines expect from institutional configs.
-Browse the <a href="https://github.com/nf-core/configs">nf-core/configs</a> repository for real-world examples.</p>
-<p>That gives you a disposable way to adapt a pipeline to a new environment without touching your normal configuration.</p>
-<h3 id="22-use-a-parameter-file">2.2. Use a parameter file<a class="headerlink" href="#22-use-a-parameter-file" title="Permanent link">&para;</a></h3>
-<p>Say instead you need to share an exact set of run parameters with a collaborator, or record them for a publication.</p>
-<p>Nextflow allows you to supply <a href="https://nextflow.io/docs/latest/config.html#parameter-file">parameter files</a> in YAML or JSON format, which are a simpler way to distribute an exact, reproducible set of values.</p>
-<p>A parameter file called <code>test-params.yaml</code> is already provided in your working directory:</p>
+<p>Yalnızca kaynak tahsisini ve paketlemeyi geçersiz kılan, pipeline parametrelerine dokunmayan küçük bir dosya, nf-core pipeline'larının kurumsal yapılandırmalardan beklediği tam da bu kalıptır.
+Gerçek dünya örnekleri için <a href="https://github.com/nf-core/configs">nf-core/configs</a> deposuna göz atın.</p>
+<p>Bu, normal yapılandırmanıza dokunmadan bir pipeline'ı yeni bir ortama uyarlamanın tek kullanımlık bir yolunu sunar.</p>
+<h3 id="22-parametre-dosyas-kullanma">2.2. Parametre Dosyası Kullanma<a class="headerlink" href="#22-parametre-dosyas-kullanma" title="Permanent link">&para;</a></h3>
+<p>Diyelim ki bir iş ortağıyla tam bir çalıştırma parametreleri setini paylaşmanız veya bunları bir yayın için kaydetmeniz gerekiyor.</p>
+<p>Nextflow, YAML veya JSON formatında <a href="https://nextflow.io/docs/latest/config.html#parameter-file">parametre dosyaları</a> sağlamanıza olanak tanır; bunlar tam ve tekrarlanabilir bir değer setini dağıtmanın daha basit bir yoludur.</p>
+<p><code>test-params.yaml</code> adlı bir parametre dosyası çalışma dizininizde zaten mevcuttur:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">test-params.yaml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
 <span class="normal"><a href="#__codelineno-11-2">2</a></span>
 <span class="normal"><a href="#__codelineno-11-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="s">"data/greetings.csv"</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="nt">batch</span><span class="p">:</span><span class="w"> </span><span class="s">"yaml"</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="nt">character</span><span class="p">:</span><span class="w"> </span><span class="s">"stegosaurus"</span>
 </code></pre></div></td></tr></table></div>
-<p>The syntax uses colons (<code>:</code>) instead of the equal signs (<code>=</code>) used in <code>nextflow.config</code>, since this file is plain YAML rather than Groovy.</p>
+<p>Bu dosya düz YAML olduğundan, <code>nextflow.config</code> dosyasında kullanılan eşittir işaretleri (<code>=</code>) yerine iki nokta üst üste (<code>:</code>) kullanır.</p>
 <div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>A JSON version, <code>test-params.json</code>, is also provided. Feel free to try it on your own; the syntax for passing it is identical.</p>
+<p class="admonition-title">Bilgi</p>
+<p>JSON sürümü olan <code>test-params.json</code> da sağlanmıştır. Kendiniz deneyebilirsiniz; geçirme sözdizimi aynıdır.</p>
 </div>
-<p>Pass the file with <code>-params-file</code>:</p>
+<p>Dosyayı <code>-params-file</code> ile geçirin:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf<span class="w"> </span>-params-file<span class="w"> </span>test-params.yaml
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Komut çıktısı</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Launching `main.nf` [sharp_faraday] revision: ce74f81996</span>
@@ -3214,7 +3209,7 @@ Browse the <a href="https://github.com/nf-core/configs">nf-core/configs</a> repo
 </code></pre></div>
 </details>
 <details class="abstract">
-<summary>File contents</summary>
+<summary>Dosya içeriği</summary>
 <div class="highlight"><span class="filename">results/yaml/cowpy-COLLECTED-yaml-output.txt</span><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="go"> _________</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="go">/ BONJOUR \</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="go">| HOLA    |</span>
@@ -3236,22 +3231,22 @@ Browse the <a href="https://github.com/nf-core/configs">nf-core/configs</a> repo
 <a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="go">                    |_____|        |_____|         ~ - . _ _ _ _ _&gt;</span>
 </code></pre></div>
 </details>
-<p>A parameter file is especially valuable once a pipeline has more than a handful of parameters: it lets you supply them all at once, without a sprawling command line or any change to the workflow script, and it's easy to distribute alongside your results.</p>
-<h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
-<p>You know two more ways to supply configuration: a run-specific configuration file for adapting execution to a new environment, and a parameter file for sharing exact, reproducible input values.</p>
-<h3 id="whats-next_1">What's next?<a class="headerlink" href="#whats-next_1" title="Permanent link">&para;</a></h3>
-<p>Learn how to control how and where your pipeline's outputs get published.</p>
+<p>Bir pipeline'ın birden fazla parametresi olduğunda parametre dosyası özellikle değerlidir: iş akışı betiğinde herhangi bir değişiklik yapmadan veya uzun bir komut satırı oluşturmadan tümünü tek seferde sağlamanıza olanak tanır ve sonuçlarınızla birlikte dağıtmak da kolaydır.</p>
+<h3 id="ozetle_1">Özetle<a class="headerlink" href="#ozetle_1" title="Permanent link">&para;</a></h3>
+<p>Yapılandırma sağlamanın iki farklı yolunu daha öğrendiniz: yürütmeyi yeni bir ortama uyarlamak için çalıştırmaya özgü bir yapılandırma dosyası ve tam, tekrarlanabilir girdi değerlerini paylaşmak için bir parametre dosyası.</p>
+<h3 id="srada-ne-var_1">Sırada ne var?<a class="headerlink" href="#srada-ne-var_1" title="Permanent link">&para;</a></h3>
+<p>Pipeline'ınızın çıktılarının nasıl ve nereye yayımlanacağını nasıl kontrol edeceğinizi öğrenin.</p>
 <hr />
-<h2 id="3-manage-pipeline-outputs">3. Manage pipeline outputs<a class="headerlink" href="#3-manage-pipeline-outputs" title="Permanent link">&para;</a></h2>
-<p>A pipeline author decides how outputs are organized in code, but you don't need to touch that code to control where they end up or how they get there.
-Nextflow gives you config-level ways to do that instead: set a base output directory, and choose whether files get copied or symlinked.</p>
-<h3 id="31-customize-the-output-directory">3.1. Customize the output directory<a class="headerlink" href="#31-customize-the-output-directory" title="Permanent link">&para;</a></h3>
-<p>By default, Nextflow publishes outputs under <code>results/</code>.
-Point it elsewhere with <code>-output-dir</code> (or its short form, <code>-o</code>):</p>
+<h2 id="3-pipeline-cktlarn-yonetme">3. Pipeline Çıktılarını Yönetme<a class="headerlink" href="#3-pipeline-cktlarn-yonetme" title="Permanent link">&para;</a></h2>
+<p>Bir pipeline yazarı, çıktıların kodda nasıl düzenleneceğine karar verir; ancak nereye gideceklerini veya nasıl aktarılacaklarını kontrol etmek için bu koda dokunmanız gerekmez.
+Nextflow bunun yerine yapılandırma düzeyinde yollar sunar: temel bir çıktı dizini belirleyin ve dosyaların kopyalanıp kopyalanmayacağını ya da sembolik bağlantı olarak mı oluşturulacağını seçin.</p>
+<h3 id="31-ckt-dizinini-ozellestirme">3.1. Çıktı Dizinini Özelleştirme<a class="headerlink" href="#31-ckt-dizinini-ozellestirme" title="Permanent link">&para;</a></h3>
+<p>Nextflow varsayılan olarak çıktıları <code>results/</code> altında yayımlar.
+<code>-output-dir</code> (veya kısa formu <code>-o</code>) ile farklı bir konuma yönlendirin:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf<span class="w"> </span>-output-dir<span class="w"> </span>outputs
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Komut çıktısı</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="go">Launching `main.nf` [serene_kimura] revision: ce74f81996</span>
@@ -3284,7 +3279,7 @@ Point it elsewhere with <code>-output-dir</code> (or its short form, <code>-o</c
 </code></pre></div>
 </details>
 <details class="abstract">
-<summary>Directory contents</summary>
+<summary>Dizin içeriği</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">outputs/batch</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="go">├── batch-report.txt</span>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">├── cowpy-COLLECTED-batch-output.txt</span>
@@ -3298,24 +3293,24 @@ Point it elsewhere with <code>-output-dir</code> (or its short form, <code>-o</c
 <a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="go">    └── UPPER-Hola-output.txt</span>
 </code></pre></div>
 </details>
-<p>The outputs now land under <code>outputs/batch/</code> instead of the built-in <code>results/batch/</code> default.
-The pipeline's own code still decides the structure within that base directory, like the <code>batch/</code> and <code>intermediates/</code> subdirectories; <code>-output-dir</code> only controls where that structure starts.</p>
-<p><code>-output-dir</code> is really just a command-line shortcut for the <code>outputDir</code> configuration option, so it can go anywhere configuration can: directly in <code>nextflow.config</code>, inside a profile, or in a <code>-c</code> overlay file like the one you used earlier in this part.
-For example, this snippet shows the same setting placed directly in <code>nextflow.config</code> instead of passed on the command line:</p>
+<p>Çıktılar artık yerleşik <code>results/batch/</code> varsayılanı yerine <code>outputs/batch/</code> altına yerleşir.
+Pipeline'ın kendi kodu, <code>batch/</code> ve <code>intermediates/</code> alt dizinleri gibi bu temel dizin içindeki yapıyı belirlemeye devam eder; <code>-output-dir</code> yalnızca bu yapının nerede başlayacağını kontrol eder.</p>
+<p><code>-output-dir</code>, aslında <code>outputDir</code> yapılandırma seçeneği için yalnızca bir komut satırı kısayoludur; dolayısıyla yapılandırmanın gidebileceği her yere yerleştirilebilir: doğrudan <code>nextflow.config</code> içine, bir profil içine veya bu bölümün başında kullandığınız gibi bir <code>-c</code> katman dosyasına.
+Örneğin, aşağıdaki kod parçacığı aynı ayarın komut satırında geçirilmek yerine doğrudan <code>nextflow.config</code> içine yerleştirildiğini göstermektedir:</p>
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'outputs'</span>
 </code></pre></div>
-<p>See <a href="https://nextflow.io/docs/latest/config.html">Configuration file</a> in the Nextflow reference for the full list of places a configuration option like this can live.</p>
-<h3 id="32-choose-how-outputs-get-published">3.2. Choose how outputs get published<a class="headerlink" href="#32-choose-how-outputs-get-published" title="Permanent link">&para;</a></h3>
-<p>By default, Nextflow publishes outputs as symlinks that point to the locations of the outputs under <code>work/</code>, not real copies:</p>
+<p>Bu tür bir yapılandırma seçeneğinin bulunabileceği tam liste için Nextflow referansındaki <a href="https://nextflow.io/docs/latest/config.html">Yapılandırma dosyası</a> sayfasına bakın.</p>
+<h3 id="32-cktlarn-nasl-yaymlanacagn-secme">3.2. Çıktıların Nasıl Yayımlanacağını Seçme<a class="headerlink" href="#32-cktlarn-nasl-yaymlanacagn-secme" title="Permanent link">&para;</a></h3>
+<p>Nextflow varsayılan olarak çıktıları, gerçek kopyalar olarak değil, <code>work/</code> altındaki çıktı konumlarına işaret eden sembolik bağlantılar olarak yayımlar:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="gp">$ </span>ls<span class="w"> </span>-l<span class="w"> </span>results/batch/intermediates/Hello-output.txt
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="go">lrwxr-xr-x  ...  Hello-output.txt -&gt; /workspaces/training/nextflow-run/work/b7/b8c4d1.../Hello-output.txt</span>
 </code></pre></div>
-<p>Pipeline authors can set the 'publish mode' to either <code>'copy'</code> or <code>'move'</code> for each individual process in the workflow code.
-They typically do this for the final outputs of the pipeline, while leaving the default <code>'symlink'</code> behavior set for intermediate files that can be deleted once the full pipeline has been run.</p>
-<p>That avoids duplicating data on disk, but it means you can't delete the task directories under <code>work/</code> without breaking the link, losing the ability to use <code>-resume</code>.
-If you want all output files to be properly copied instead, set <a href="https://nextflow.io/docs/latest/reference/config.html#workflow"><code>workflow.output.mode</code></a> to <code>'copy'</code> in your pipeline configuration. (Unlike <code>-output-dir</code>, there's no command-line flag for this; it's config-only.)</p>
-<p>Try setting it in <code>nextflow.config</code>:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">After</label><label for="__tabbed_1_2">Before</label></div>
+<p>Pipeline yazarları, iş akışı kodundaki her bir süreç için 'yayımlama modunu' <code>'copy'</code> veya <code>'move'</code> olarak ayarlayabilir.
+Bunu genellikle pipeline'ın son çıktıları için yaparlar; tam pipeline çalıştırıldıktan sonra silinebilecek ara dosyalar için ise varsayılan <code>'symlink'</code> davranışını bırakırlar.</p>
+<p>Bu yaklaşım diskte veri çoğaltmayı önler; ancak <code>-resume</code> kullanma yeteneğini kaybetmeden <code>work/</code> altındaki görev dizinlerini silemeyeceğiniz anlamına gelir.
+Tüm çıktı dosyalarının düzgün şekilde kopyalanmasını istiyorsanız, pipeline yapılandırmanızda <a href="https://nextflow.io/docs/latest/reference/config.html#workflow"><code>workflow.output.mode</code></a> değerini <code>'copy'</code> olarak ayarlayın. (<code>-output-dir</code>'den farklı olarak bunun için komut satırı bayrağı yoktur; yalnızca yapılandırma dosyasıyla ayarlanabilir.)</p>
+<p><code>nextflow.config</code> dosyasında ayarlamayı deneyin:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Sonra</label><label for="__tabbed_1_2">Önce</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
@@ -3337,11 +3332,11 @@ If you want all output files to be properly copied instead, set <a href="https:/
 </div>
 </div>
 </div>
-<p>Then run the pipeline, changing the batch name so that you can see the difference in the outputs:</p>
+<p>Ardından pipeline'ı çalıştırın; çıktılardaki farkı görebilmek için toplu iş adını değiştirin:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf<span class="w"> </span>--batch<span class="w"> </span>withmode
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>Komut çıktısı</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `main.nf` [angry_noether] revision: ce74f81996</span>
@@ -3373,27 +3368,27 @@ If you want all output files to be properly copied instead, set <a href="https:/
 <a id="__codelineno-23-29" name="__codelineno-23-29" href="#__codelineno-23-29"></a><span class="go">  cowpy_art: withmode/cowpy-COLLECTED-withmode-output.txt</span>
 </code></pre></div>
 </details>
-<p>Have a look at one of the output files like before:</p>
+<p>Daha önce yaptığınız gibi çıktı dosyalarından birine bakın:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="gp">$ </span>ls<span class="w"> </span>-l<span class="w"> </span>results/withmode/intermediates/Hello-output.txt
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="go">-rw-r--r--  ...  Hello-output.txt</span>
 </code></pre></div>
-<p>Now it's a real, independent file that will stay available even if <code>work/</code> gets cleaned up.</p>
+<p>Artık <code>work/</code> dizini temizlense bile erişilebilir kalacak gerçek, bağımsız bir dosyadır.</p>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The <code>workflow.output.mode</code> setting only fills in a default for outputs that don't already have a mode set in the pipeline code.
-It cannot override a mode the author hardcoded, no matter what you set it to.</p>
+<p class="admonition-title">Uyarı</p>
+<p><code>workflow.output.mode</code> ayarı yalnızca pipeline kodunda henüz bir mod belirlenmemiş çıktılar için varsayılan değeri doldurur.
+Ne ayarlarsanız ayarlayın, yazarın sabit olarak kodladığı bir modu geçersiz kılamaz.</p>
 </div>
-<h3 id="takeaway_2">Takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
-<p>You know how to customize the base output directory and choose between copied and symlinked outputs, both without touching the pipeline's code.</p>
-<h3 id="whats-next_2">What's next?<a class="headerlink" href="#whats-next_2" title="Permanent link">&para;</a></h3>
-<p>Head on to <a href="../03_manage_executions/">Part 3</a>, where you'll learn how to inspect the history of past runs, generate execution reports, and clean up old work directories.</p>
+<h3 id="ozetle_2">Özetle<a class="headerlink" href="#ozetle_2" title="Permanent link">&para;</a></h3>
+<p>Pipeline koduna dokunmadan temel çıktı dizinini nasıl özelleştireceğinizi ve kopyalanmış ile sembolik bağlantılı çıktılar arasında nasıl seçim yapacağınızı öğrendiniz.</p>
+<h3 id="srada-ne-var_2">Sırada ne var?<a class="headerlink" href="#srada-ne-var_2" title="Permanent link">&para;</a></h3>
+<p>Geçmiş çalıştırmaların geçmişini nasıl inceleyeceğinizi, yürütme raporlarını nasıl oluşturacağınızı ve eski çalışma dizinlerini nasıl temizleyeceğinizi öğreneceğiniz <a href="../03_manage_executions/">Bölüm 3</a>'e geçin.</p>
 <hr />
-<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
-<p>In this part you learned to:</p>
+<h2 id="ozet">Özet<a class="headerlink" href="#ozet" title="Permanent link">&para;</a></h2>
+<p>Bu bölümde şunları öğrendiniz:</p>
 <ul>
-<li>Configure pipeline behavior using <code>nextflow.config</code> and profiles</li>
-<li>Supply configuration via a run-specific configuration file or a parameter file</li>
-<li>Customize the output directory and choose between copied and symlinked outputs</li>
+<li><code>nextflow.config</code> ve profiller kullanarak pipeline davranışını yapılandırma</li>
+<li>Çalıştırmaya özgü bir yapılandırma dosyası veya parametre dosyası aracılığıyla yapılandırma sağlama</li>
+<li>Çıktı dizinini özelleştirme ve kopyalanmış ile sembolik bağlantılı çıktılar arasında seçim yapma</li>
 </ul><div id="quiz-progress-sidebar" aria-label="Quiz Progress" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">
@@ -5135,7 +5130,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Altbilgi" >
         
           
-          <a href="../01_run_nextflow/" class="md-footer__link md-footer__link--prev" aria-label="Önceki: Part 1: Run Nextflow">
+          <a href="../01_run_nextflow/" class="md-footer__link md-footer__link--prev" aria-label="Önceki: Bölüm 1: Nextflow&#39;u Çalıştırma">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -5145,20 +5140,20 @@ window.mkdocsQuizConfig = {
                 Önceki
               </span>
               <div class="md-ellipsis">
-                Part 1: Run Nextflow
+                Bölüm 1: Nextflow'u Çalıştırma
               </div>
             </div>
           </a>
         
         
           
-          <a href="../03_manage_executions/" class="md-footer__link md-footer__link--next" aria-label="Sonraki: Part 3: Manage workflow executions">
+          <a href="../03_manage_executions/" class="md-footer__link md-footer__link--next" aria-label="Sonraki: Bölüm 3: İş akışı çalıştırmalarını yönetme">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Sonraki
               </span>
               <div class="md-ellipsis">
-                Part 3: Manage workflow executions
+                Bölüm 3: İş akışı çalıştırmalarını yönetme
               </div>
             </div>
             <div class="md-footer__button md-icon">
