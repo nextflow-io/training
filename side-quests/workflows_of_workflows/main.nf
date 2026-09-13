@@ -1,3 +1,5 @@
+#!/usr/bin/env nextflow
+
 workflow {
     main:
     names = channel.of('Alice', 'Bob', 'Charlie')

@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Hello nf-core प्रशिक्षण पाठ्यक्रम के इस पहले भाग में, हम तुम्हें दिखाएंगे कि एक nf-core pipeline कैसे खोजें और आज़माएं, अपनी ज़रूरतों के अनुसार इसके execution को कैसे configure और customize करें, और यह समझें कि input validation सामान्य त्रुटियों से कैसे बचाता है।
+Build with nf-core प्रशिक्षण पाठ्यक्रम के इस पहले भाग में, हम तुम्हें दिखाएंगे कि एक nf-core pipeline कैसे खोजें और आज़माएं, अपनी ज़रूरतों के अनुसार इसके execution को कैसे configure और customize करें, और यह समझें कि input validation सामान्य त्रुटियों से कैसे बचाता है।
 
 हम nf-core/demo नामक एक pipeline का उपयोग करने जा रहे हैं जिसे nf-core प्रोजेक्ट अपने pipelines की सूची के हिस्से के रूप में demonstration और प्रशिक्षण उद्देश्यों के लिए बनाए रखता है।
 

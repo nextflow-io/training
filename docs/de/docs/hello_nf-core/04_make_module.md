@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-In diesem vierten Teil des Hello nf-core Trainingskurses zeigen wir dir, wie du ein nf-core-Modul erstellst, indem du die wichtigsten Konventionen anwendest, die Module portabel und wartbar machen.
+In diesem vierten Teil des Build with nf-core Trainingskurses zeigen wir dir, wie du ein nf-core-Modul erstellst, indem du die wichtigsten Konventionen anwendest, die Module portabel und wartbar machen.
 
 Das nf-core-Projekt stellt einen Befehl (`nf-core modules create`) bereit, der automatisch korrekt strukturierte Modulvorlagen generiert, ähnlich wie bei dem, was wir für den Workflow in Teil 2 verwendet haben.
 Zu Lehrzwecken werden wir jedoch damit beginnen, es manuell zu machen: Wir transformieren das lokale `cowpy`-Modul in deiner `core-hello`-Pipeline Schritt für Schritt in ein Modul im nf-core-Stil.

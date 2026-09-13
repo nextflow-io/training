@@ -132,11 +132,11 @@ hide:
     ये कोर्स तुम्हें Nextflow की बुनियादी बातों से nf-core की सर्वोत्तम प्रथाओं तक ले जाते हैं।
     समझो कि nf-core कम्युनिटी पाइपलाइन कैसे और क्यों बनाती है, और तुम इन तकनीकों में कैसे योगदान और पुनः उपयोग कर सकते हो।
 
-    ??? courses "**Hello nf-core:** nf-core के साथ शुरुआत करो"
+    ??? courses "**Build with nf-core:** nf-core के साथ शुरुआत करो"
 
         उन डेवलपर्स के लिए जो [nf-core](https://nf-co.re/) अनुपालक पाइपलाइन चलाना और विकसित करना सीखना चाहते हैं। यह कोर्स nf-core पाइपलाइन की संरचना को इतने विस्तार से कवर करता है कि nf-core टेम्पलेट और विकास की सर्वोत्तम प्रथाओं का पालन करने वाली सरल लेकिन पूरी तरह कार्यात्मक पाइपलाइन विकसित करना संभव हो सके, साथ ही मौजूदा nf-core मॉड्यूल का उपयोग भी।
 
-        [Hello nf-core प्रशिक्षण शुरू करो :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
+        [Build with nf-core प्रशिक्षण शुरू करो :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
 
     ---
 
@@ -150,11 +150,11 @@ hide:
 
         [Side Quests देखो :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Training Collections:** Side Quests के माध्यम से अनुशंसित सीखने के रास्ते"
+    ??? courses "**Learning Paths:** Side Quests के माध्यम से अनुशंसित सीखने के रास्ते"
 
-        Training Collections किसी विशेष थीम या उपयोग के मामले के आसपास एक व्यापक सीखने का अनुभव प्रदान करने के लिए कई Side Quests को जोड़ती हैं।
+        Learning Paths किसी विशेष थीम या उपयोग के मामले के आसपास एक व्यापक सीखने का अनुभव प्रदान करने के लिए कई Side Quests को जोड़ती हैं।
 
-        [Training Collections देखो :material-arrow-right:](training_collections/index.md){ .md-button .md-button--secondary }
+        [Learning Paths देखो :material-arrow-right:](training_collections/index.md){ .md-button .md-button--secondary }
 
 </div>
 

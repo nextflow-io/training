@@ -55,8 +55,8 @@ This implements the method described in [Part 1: Method Overview](./01_method.md
 
 !!! tip
 
-     Make sure you're in the correct working directory:
-     `cd /workspaces/training/nf4-science/rnaseq`
+    Make sure you're in the correct working directory:
+    `cd /workspaces/training/nf4-science/rnaseq`
 
 ---
 

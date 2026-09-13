@@ -620,7 +620,7 @@ Her şeyi hatırlamanızı beklemiyoruz; ancak artık bu özelliklerin var oldu�
 Bu IDE becerilerini diğer eğitim modülleri üzerinde çalışırken uygulayın; örneğin:
 
 - **[nf-test](../nf_test/index.md)**: İş akışlarınız için kapsamlı test paketleri oluşturun
-- **[Hello nf-core](../../hello_nf-core/index.md)**: Topluluk standartlarıyla üretim kalitesinde pipeline'lar oluşturun
+- **[Build with nf-core](../../hello_nf-core/index.md)**: Topluluk standartlarıyla üretim kalitesinde pipeline'lar oluşturun
 
 Bu IDE özelliklerinin gerçek gücü, daha büyük ve daha karmaşık projeler üzerinde çalıştıkça ortaya çıkar. Bunları iş akışınıza kademeli olarak dahil etmeye başlayın; birkaç oturum içinde ikinci doğanız haline gelecek ve Nextflow geliştirmeye yaklaşımınızı dönüştüreceklerdir.
 

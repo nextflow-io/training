@@ -17,7 +17,7 @@ Verify location before running commands. Use paths relative to repository root.
 | Content Type         | Documentation                        | Working Directory       | Solutions                         |
 | -------------------- | ------------------------------------ | ----------------------- | --------------------------------- |
 | hello_nextflow       | `docs/en/docs/hello_nextflow/`       | `hello-nextflow/`       | `hello-nextflow/solutions/`       |
-| hello_nf-core        | `docs/en/docs/hello_nf-core/`        | `hello-nf-core/`        | `hello-nf-core/solutions/`        |
+| nfcore_build         | `docs/en/docs/nfcore_build/`         | `nfcore-build/`         | `nfcore-build/solutions/`         |
 | nf4_science/genomics | `docs/en/docs/nf4_science/genomics/` | `nf4-science/genomics/` | `nf4-science/genomics/solutions/` |
 | nf4_science/rnaseq   | `docs/en/docs/nf4_science/rnaseq/`   | `nf4-science/rnaseq/`   | `nf4-science/rnaseq/solutions/`   |
 | side_quests/\*       | `docs/en/docs/side_quests/<name>.md` | `side-quests/<name>/`   | `side-quests/solutions/<name>/`   |

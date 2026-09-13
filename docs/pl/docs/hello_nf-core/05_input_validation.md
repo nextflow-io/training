@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W tej piątej części kursu szkoleniowego Hello nf-core pokażemy Ci, jak używać wtyczki nf-schema do walidacji danych wejściowych i parametrów pipeline'u.
+W tej piątej części kursu szkoleniowego Build with nf-core pokażemy Ci, jak używać wtyczki nf-schema do walidacji danych wejściowych i parametrów pipeline'u.
 
 ??? info "Jak zacząć od tej sekcji"
 
@@ -808,6 +808,6 @@ Zaimplementowałeś i przetestowałeś zarówno walidację parametrów, jak i wa
 
 ### Co dalej?
 
-Ukończyłeś wszystkie pięć części kursu szkoleniowego Hello nf-core!
+Ukończyłeś wszystkie pięć części kursu szkoleniowego Build with nf-core!
 
 Przejdź do [Podsumowania](next_steps.md), aby zastanowić się nad tym, co zbudowałeś i czego się nauczyłeś.

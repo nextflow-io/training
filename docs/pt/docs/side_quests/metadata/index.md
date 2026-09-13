@@ -1740,7 +1740,7 @@ Existem duas abordagens complementares para tornar os fluxos de trabalho mais ro
 **1. Validação de entrada**
 
 A solução mais confiável é validar a planilha antes de qualquer processamento começar, para que os problemas sejam detectados cedo com uma mensagem de erro clara, em vez de aparecerem como uma falha críptica de processo no meio da execução.
-O treinamento [Hello nf-core](../../hello_nf-core/05_input_validation.md) aborda como adicionar validação de entrada usando o plugin nf-schema. <!-- TODO (future) pending a proper Validation side quest -->
+O treinamento [Build with nf-core](../../hello_nf-core/05_input_validation.md) aborda como adicionar validação de entrada usando o plugin nf-schema. <!-- TODO (future) pending a proper Validation side quest -->
 
 **2. Entradas explícitas do processo para valores obrigatórios**
 

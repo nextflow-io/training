@@ -1729,7 +1729,7 @@ Nextflow pipeline을 실행하고 관리하기 시작하는 데 필요한 모든
 이 과정은 여기서 끝나지만, 계속 배우고 싶다면 두 가지 주요 권장 사항이 있습니다:
 
 - 자체 pipeline을 개발하는 것에 대해 더 깊이 살펴보고 싶다면 채널과 연산자에 대해 훨씬 더 자세히 다루지만 이 과정과 동일한 일반적인 진행을 다루는 초보자를 위한 과정인 [Hello Nextflow](../hello_nextflow/index.md)를 확인하세요.
-- 코드에 더 깊이 들어가지 않고 Nextflow pipeline을 실행하는 방법을 계속 배우고 싶다면 매우 인기 있는 [nf-core](../hello_nf-core/index.md) 프로젝트의 pipeline을 찾고 실행하기 위한 도구를 소개하는 [Hello nf-core](https://nf-co.re/)의 첫 번째 부분을 확인하세요.
+- 코드에 더 깊이 들어가지 않고 Nextflow pipeline을 실행하는 방법을 계속 배우고 싶다면 매우 인기 있는 [nf-core](../hello_nf-core/index.md) 프로젝트의 pipeline을 찾고 실행하기 위한 도구를 소개하는 [Build with nf-core](https://nf-co.re/)의 첫 번째 부분을 확인하세요.
 
 즐거운 시간 되세요!
 

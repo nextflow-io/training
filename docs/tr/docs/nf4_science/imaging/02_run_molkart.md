@@ -27,7 +27,7 @@ nf-core pipeline'larının temel özellikleri:
 
 !!! tip "nf-core hakkında daha fazla bilgi edinmek ister misiniz?"
 
-    nf-core pipeline geliştirmeye derinlemesine bir giriş için [Hello nf-core](../../hello_nf-core/index.md) eğitim kursuna göz atın.
+    nf-core pipeline geliştirmeye derinlemesine bir giriş için [Build with nf-core](../../hello_nf-core/index.md) eğitim kursuna göz atın.
     Sıfırdan nf-core pipeline'ları oluşturmayı ve özelleştirmeyi kapsar.
 
 ### 1.2. molkart pipeline'ı

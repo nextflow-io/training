@@ -38,7 +38,7 @@ These tools are not installed in the GitHub Codespaces environment, so we'll use
 
 !!! tip
 
-     Make sure you're in the `nf4-science/rnaseq` directory. The last part of the path shown when you type `pwd` should be `rnaseq`.
+    Make sure you're in the `nf4-science/rnaseq` directory. The last part of the path shown when you type `pwd` should be `rnaseq`.
 
 ---
 

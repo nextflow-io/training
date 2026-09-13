@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-En aquesta quarta part del curs de formació Hello nf-core, et mostrem com crear un mòdul nf-core aplicant les convencions clau que fan que els mòduls siguin portables i mantenibles.
+En aquesta quarta part del curs de formació Build with nf-core, et mostrem com crear un mòdul nf-core aplicant les convencions clau que fan que els mòduls siguin portables i mantenibles.
 
 El projecte nf-core proporciona una comanda (`nf-core modules create`) que genera plantilles de mòduls estructurades correctament de manera automàtica, similar al que vam utilitzar per al workflow a la Part 2.
 No obstant això, amb finalitats didàctiques, començarem fent-ho manualment: transformant el mòdul local `cowpy` del teu pipeline `core-hello` en un mòdul d'estil nf-core pas a pas.

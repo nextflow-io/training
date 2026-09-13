@@ -32,7 +32,7 @@ Artık kendi çalışmalarınızda {DOMAIN} analiz iş akışlarına Nextflow uy
 Sırada ne yapmanızı önerdiğimize dair en önemli önerilerimiz:
 
 - [Nextflow for Science](../index.md) ile Nextflow'u diğer bilimsel analiz kullanım durumlarına uygulayın
-- [Hello nf-core](../../hello_nf-core/index.md) ile nf-core'a başlayın
+- [Build with nf-core](../../hello_nf-core/index.md) ile nf-core'a başlayın
 - [Side Quests](../../side_quests/index.md) ile daha gelişmiş Nextflow özelliklerini keşfedin
 
 Son olarak, Nextflow'un yaratıcıları tarafından geliştirilen ve iş akışlarınızı başlatmayı ve yönetmeyi, ayrıca verilerinizi yönetmeyi ve analizleri herhangi bir ortamda etkileşimli olarak çalıştırmayı daha da kolaylaştıran bulut tabanlı bir platform olan [**Seqera Platform**](https://seqera.io/)'a göz atmanızı öneririz.

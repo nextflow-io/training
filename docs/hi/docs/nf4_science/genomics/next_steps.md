@@ -32,7 +32,7 @@ Nextflow for Genomics प्रशिक्षण कोर्स पूरा �
 यहाँ हमारे शीर्ष सुझाव हैं कि आगे क्या करें:
 
 - अन्य scientific analysis use cases पर Nextflow लागू करें [Nextflow for Science](../index.md) के साथ
-- nf-core के साथ शुरुआत करें [Hello nf-core](../../hello_nf-core/index.md) के साथ
+- nf-core के साथ शुरुआत करें [Build with nf-core](../../hello_nf-core/index.md) के साथ
 - अधिक advanced Nextflow features का पता लगाएं [Side Quests](../../side_quests/index.md) के साथ
 
 अंत में, हम recommend करते हैं कि तुम [**Seqera Platform**](https://seqera.io/) पर एक नज़र डालो, जो Nextflow के creators द्वारा विकसित एक cloud-based platform है जो तुम्हारे workflows को launch और manage करना, साथ ही तुम्हारे data को manage करना और किसी भी environment में interactively analyses चलाना और भी आसान बनाता है।
