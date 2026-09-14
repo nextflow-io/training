@@ -1,5 +1,5 @@
 ---
-title: Execution Config
+title: Configure Execution
 hide:
   - toc
 page_type: index_page

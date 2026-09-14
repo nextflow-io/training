@@ -1,5 +1,5 @@
 ---
-title: Execution Config
+title: Configure Execution
 hide:
   - toc
 page_type: index_page
@@ -17,11 +17,11 @@ additional_information:
     - "**Kurse:** Du musst [Nextflow Run](../nextflow_run/index.md) abgeschlossen haben oder anderweitig mit dem Ausführen einer lokalen Pipeline mit `nextflow run` vertraut sein."
 ---
 
-# Execution Config
+# Configure Execution
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-**Execution Config ist eine praxisorientierte Einführung in die Anpassung der Nextflow-Pipeline-Ausführung an verschiedene Rechenumgebungen.**
+**Configure Execution ist eine praxisorientierte Einführung in die Anpassung der Nextflow-Pipeline-Ausführung an verschiedene Rechenumgebungen.**
 
 In zielorientierten Übungen lernst du, wie du die Software-Packaging-Technologie wechselst, eine Ausführungsplattform auswählst, Rechenressourcen und Wiederholungsversuche steuerst und Konfigurationen in umschaltbare Profile bündelst.
 

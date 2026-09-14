@@ -1,5 +1,5 @@
 ---
-title: 실행 설정
+title: Configure Execution
 hide:
   - toc
 page_type: index_page
@@ -17,11 +17,11 @@ additional_information:
     - "**선수 과정:** [Nextflow Run](../nextflow_run/index.md)을 완료했거나, `nextflow run`으로 로컬 파이프라인을 실행하는 데 익숙해야 합니다."
 ---
 
-# 실행 설정
+# Configure Execution
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-**Execution Config는 Nextflow 파이프라인 실행을 다양한 컴퓨팅 환경에 맞게 조정하는 방법을 실습 중심으로 학습하는 과정입니다.**
+**Configure Execution는 Nextflow 파이프라인 실행을 다양한 컴퓨팅 환경에 맞게 조정하는 방법을 실습 중심으로 학습하는 과정입니다.**
 
 목표 지향적인 실습을 통해 소프트웨어 패키징 기술 전환, 실행 플랫폼 선택, 컴퓨팅 리소스 할당 및 재시도 제어, 그리고 설정을 전환 가능한 프로파일로 묶는 방법을 학습합니다.
 
