@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 [파트 1](./01_packaging_and_execution.md)에서는 파이프라인의 작업이 실행되는 위치와 방식을 조정했습니다.
 이번 파트에서는 각 작업에 할당되는 컴퓨팅 리소스의 양과, 최선의 추정으로 할당했음에도 작업이 실패했을 때의 처리 방법을 다룹니다.
 

@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 Nelle [Parte 1](./01_packaging_and_execution.md) e [Parte 2](./02_resources_and_retries.md), avete accumulato alcune opzioni di configurazione: packaging del software, piattaforma di esecuzione e allocazione delle risorse.
 In pratica, spesso vorrete passare da un intero insieme di queste opzioni a un altro a seconda di dove state eseguendo il flusso di lavoro, ad esempio un laptop per lo sviluppo e un cluster HPC per la produzione.
 

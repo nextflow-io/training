@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 [Nextflow Run](../nextflow_run/index.md) में, तुमने एक पाइपलाइन के इनपुट, पैरामीटर और आउटपुट कॉन्फ़िगर किए।
 यह कोर्स तस्वीर के दूसरे हिस्से को कवर करता है: वर्कफ़्लो कोड बदले बिना, पाइपलाइन के execution को किसी भी कंप्यूट वातावरण के अनुसार अनुकूलित करना।
 

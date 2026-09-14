@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 In [Teil 1](./01_packaging_and_execution.md) hast du angepasst, wo und wie die Aufgaben einer Pipeline ausgeführt werden.
 Hier passt du an, wie viele Rechenressourcen jede Aufgabe erhält und was passiert, wenn eine Aufgabe trotz deiner besten Schätzung fehlschlägt.
 

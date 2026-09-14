@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 Herzlichen Glückwunsch zum Abschluss des Configure Execution-Kurses! 🎉
 
 ## Deine Reise

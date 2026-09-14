@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 W [Części 1](./01_packaging_and_execution.md) dostosowałeś miejsce i sposób uruchamiania zadań pipeline'u.
 Tutaj dowiesz się, ile zasobów obliczeniowych przydzielić każdemu zadaniu i co się dzieje, gdy zadanie kończy się błędem mimo Twoich najlepszych szacunków dotyczących alokacji.
 

@@ -21,7 +21,6 @@ additional_information:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 **Configure Execution, Nextflow पाइपलाइन execution को विभिन्न कंप्यूट वातावरणों के अनुकूल बनाने का एक व्यावहारिक परिचय है।**
 
 लक्ष्य-उन्मुख अभ्यासों के माध्यम से, तुम सीखोगे कि सॉफ़्टवेयर पैकेजिंग तकनीक कैसे बदलें, execution प्लेटफ़ॉर्म कैसे चुनें, कंप्यूट संसाधन आवंटन और retries को कैसे नियंत्रित करें, और कॉन्फ़िगरेशन को स्विच करने योग्य profiles में कैसे बंडल करें।

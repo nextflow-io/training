@@ -21,7 +21,6 @@ additional_information:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 **Configure Execution to praktyczne wprowadzenie do dostosowywania wykonania pipeline'ów Nextflow do różnych środowisk obliczeniowych.**
 
 Pracując nad ćwiczeniami zorientowanymi na konkretne cele, nauczysz się przełączać technologie pakowania oprogramowania, wybierać platformę wykonawczą, kontrolować przydział zasobów obliczeniowych i ponawianie zadań, a także grupować konfigurację w przełączalne profile.

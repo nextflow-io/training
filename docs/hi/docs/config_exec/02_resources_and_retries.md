@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 [भाग 1](./01_packaging_and_execution.md) में, तुमने यह अनुकूलित किया कि पाइपलाइन के कार्य कहाँ और कैसे चलते हैं।
 यहाँ तुम यह अनुकूलित करोगे कि प्रत्येक कार्य को कितना कंप्यूट मिलता है, और जब कोई कार्य तुम्हारे सर्वोत्तम अनुमान के बावजूद विफल हो जाता है तो क्या होता है।
 

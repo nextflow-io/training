@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 [Bölüm 1](./01_packaging_and_execution.md) ve [Bölüm 2](./02_resources_and_retries.md) boyunca birkaç yapılandırma seçeneği biriktirdiniz: yazılım paketleme, yürütme platformu ve kaynak tahsisleri.
 Pratikte, çalıştırdığınız ortama bağlı olarak bu seçeneklerin tüm kümelerini değiştirmek isteyeceksiniz; örneğin geliştirme için dizüstü bilgisayar, üretim için HPC kümesi.
 

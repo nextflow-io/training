@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 [Nextflow Run](../nextflow_run/index.md) kursunda bir pipeline'ın girdilerini, parametrelerini ve çıktılarını yapılandırdınız.
 Bu kurs, tablonun diğer yarısını ele alır: iş akışı kodunu değiştirmeden, bir pipeline'ın yürütülmesini çalıştığı hesaplama ortamına uyarlamayı öğreneceksiniz.
 

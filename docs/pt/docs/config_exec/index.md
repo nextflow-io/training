@@ -21,7 +21,6 @@ additional_information:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 **Configure Execution é uma introdução prática à adaptação da execução de pipelines Nextflow a diferentes ambientes computacionais.**
 
 Trabalhando em exercícios orientados a objetivos, você aprenderá como alternar a tecnologia de empacotamento de software, selecionar uma plataforma de execução, controlar alocações de recursos computacionais e reexecuções, e agrupar configurações em perfis intercambiáveis.

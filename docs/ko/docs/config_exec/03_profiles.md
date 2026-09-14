@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 [파트 1](./01_packaging_and_execution.md)과 [파트 2](./02_resources_and_retries.md)에 걸쳐 소프트웨어 패키징, 실행 플랫폼, 리소스 할당 등 몇 가지 설정 옵션을 추가했습니다.
 실제 환경에서는 개발용 노트북과 운영용 HPC 클러스터처럼, 실행 환경에 따라 이러한 옵션 세트 전체를 전환해야 하는 경우가 많습니다.
 

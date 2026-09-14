@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 En la [Parte 1](./01_packaging_and_execution.md) y la [Parte 2](./02_resources_and_retries.md), acumuló algunas opciones de configuración: empaquetado de software, plataforma de ejecución y asignación de recursos.
 En la práctica, con frecuencia querrá cambiar entre conjuntos completos de estas opciones dependiendo de dónde esté ejecutando, por ejemplo, una laptop para desarrollo y un clúster HPC para producción.
 

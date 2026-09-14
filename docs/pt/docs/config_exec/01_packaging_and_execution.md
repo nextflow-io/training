@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 Em [Nextflow Run](../nextflow_run/index.md), você configurou as entradas, os parâmetros e as saídas de um pipeline.
 Este curso cobre a outra metade do cenário: adaptar a execução de um pipeline a qualquer ambiente de computação em que ele precise rodar, sem alterar o código do fluxo de trabalho.
 

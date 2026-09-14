@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 ## Iniciar un entorn de formació
 
 Per utilitzar l'entorn preconfigurado que proporcionem a GitHub Codespaces, feu clic al botó "Open in GitHub Codespaces" que trobareu a continuació. Per a altres opcions, consulteu [Opcions d'entorn](../envsetup/index.md).

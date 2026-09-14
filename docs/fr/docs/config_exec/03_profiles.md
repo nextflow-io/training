@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 Tout au long de la [Partie 1](./01_packaging_and_execution.md) et de la [Partie 2](./02_resources_and_retries.md), vous avez accumulé plusieurs options de configuration : l'empaquetage logiciel, la plateforme d'exécution et les allocations de ressources.
 En pratique, vous souhaiterez souvent basculer entre des ensembles complets de ces options selon l'endroit où vous exécutez votre pipeline, par exemple un ordinateur portable pour le développement et un cluster HPC pour la production.
 

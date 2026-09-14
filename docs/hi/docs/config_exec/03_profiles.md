@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 [भाग 1](./01_packaging_and_execution.md) और [भाग 2](./02_resources_and_retries.md) में, तुमने कुछ कॉन्फ़िगरेशन विकल्प जमा किए: सॉफ़्टवेयर पैकेजिंग, execution प्लेटफ़ॉर्म, और resource आवंटन।
 व्यवहार में, तुम अक्सर इन विकल्पों के पूरे सेट के बीच स्विच करना चाहोगे, यह इस बात पर निर्भर करता है कि तुम कहाँ चला रहे हो — उदाहरण के लिए, development के लिए laptop और production के लिए HPC cluster।
 

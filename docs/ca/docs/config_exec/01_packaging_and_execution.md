@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 A [Nextflow Run](../nextflow_run/index.md), heu configurat les entrades, els paràmetres i les sortides d'un pipeline.
 Aquest curs cobreix l'altra meitat: adaptar l'execució d'un pipeline a qualsevol entorn de còmput on s'hagi d'executar, sense modificar el codi del workflow.
 

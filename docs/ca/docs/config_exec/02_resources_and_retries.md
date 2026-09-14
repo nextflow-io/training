@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 A la [Part 1](./01_packaging_and_execution.md), heu adaptat on i com s'executen les tasques d'un pipeline.
 Aquí adaptareu quant còmput rep cada tasca i què passa quan una tasca falla malgrat la vostra millor estimació d'assignació.
 

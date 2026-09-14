@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 W [Części 1](./01_packaging_and_execution.md) i [Części 2](./02_resources_and_retries.md) zebrałeś kilka opcji konfiguracyjnych: pakowanie oprogramowania, platformę wykonawczą i przydziały zasobów.
 W praktyce często będziesz chciał przełączać się między całymi zestawami tych opcji w zależności od środowiska uruchomieniowego — na przykład laptopa do programowania i klastra HPC do produkcji.
 

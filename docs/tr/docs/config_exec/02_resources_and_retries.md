@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 [Bölüm 1](./01_packaging_and_execution.md)'de, bir pipeline'ın görevlerinin nerede ve nasıl çalışacağını uyarladınız.
 Bu bölümde, her görevin ne kadar işlem kaynağı alacağını ve bir görev tahmin ettiğiniz kaynağa rağmen başarısız olduğunda ne olacağını uyarlayacaksınız.
 

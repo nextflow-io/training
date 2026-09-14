@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 Configure Execution प्रशिक्षण कोर्स पूरा करने पर बधाई! 🎉
 
 ## तुम्हारी यात्रा

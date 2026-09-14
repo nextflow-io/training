@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 [Nextflow Run](../nextflow_run/index.md)에서는 파이프라인의 입력, 매개변수, 출력을 설정했습니다.
 이 과정에서는 나머지 절반을 다룹니다. 워크플로우 코드를 변경하지 않고, 파이프라인이 실행되는 컴퓨팅 환경에 맞게 파이프라인 실행을 적용하는 방법입니다.
 

@@ -1,9 +1,6 @@
----
-
 # Kurs Özeti
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
-
 
 Configure Execution eğitim kursunu tamamladığınız için tebrikler! 🎉
 

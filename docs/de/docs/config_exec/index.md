@@ -21,7 +21,6 @@ additional_information:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 **Execution Config ist eine praxisorientierte Einführung in die Anpassung der Nextflow-Pipeline-Ausführung an verschiedene Rechenumgebungen.**
 
 In zielorientierten Übungen lernst du, wie du die Software-Packaging-Technologie wechselst, eine Ausführungsplattform auswählst, Rechenressourcen und Wiederholungsversuche steuerst und Konfigurationen in umschaltbare Profile bündelst.

@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 Na [Parte 1](./01_packaging_and_execution.md), você adaptou onde e como as tarefas de um pipeline são executadas.
 Aqui você vai adaptar quanto recurso computacional cada tarefa recebe e o que acontece quando uma tarefa falha apesar da sua melhor estimativa de alocação.
 

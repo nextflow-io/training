@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 In [Teil 1](./01_packaging_and_execution.md) und [Teil 2](./02_resources_and_retries.md) hast du einige Konfigurationsoptionen gesammelt: Software-Paketierung, Ausführungsplattform und Ressourcenzuweisungen.
 In der Praxis möchtest du oft zwischen ganzen Sätzen dieser Optionen wechseln, je nachdem, wo du arbeitest – zum Beispiel ein Laptop für die Entwicklung und ein HPC-Cluster für den Produktionsbetrieb.
 

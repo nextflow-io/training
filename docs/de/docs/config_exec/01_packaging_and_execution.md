@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 In [Nextflow Run](../nextflow_run/index.md) hast du die Eingaben, Parameter und Ausgaben einer Pipeline konfiguriert.
 Dieser Kurs behandelt die andere Seite: wie du die Ausführung einer Pipeline an die jeweilige Rechenumgebung anpasst, ohne den Workflow-Code zu ändern.
 

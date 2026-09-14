@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 Nella [Parte 1](./01_packaging_and_execution.md), hai adattato dove e come vengono eseguite le attività di una pipeline.
 Qui adatteremo quante risorse di calcolo riceve ogni attività e cosa succede quando un'attività fallisce nonostante la nostra migliore stima sull'allocazione.
 

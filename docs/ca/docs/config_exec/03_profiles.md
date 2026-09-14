@@ -2,7 +2,6 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-
 A través de la [Part 1](./01_packaging_and_execution.md) i la [Part 2](./02_resources_and_retries.md), heu acumulat diverses opcions de configuració: empaquetament de programari, plataforma d'execució i assignació de recursos.
 A la pràctica, sovint voldreu canviar entre conjunts sencers d'aquestes opcions depenent d'on esteu executant, per exemple un ordinador portàtil per al desenvolupament i un clúster HPC per a producció.
 
