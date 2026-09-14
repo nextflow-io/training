@@ -53,7 +53,7 @@ hide:
 
     ??? courses "**Nextflow Run:** Execute pipelines com Nextflow"
 
-        Uma introdução rápida à execução de pipelines Nextflow que não requer entendimento de código. Abrange o lançamento de pipelines, recuperação de saídas, uso de contêineres e configuração de execução em nível básico.
+        Uma introdução rápida à execução de pipelines Nextflow que não requer compreensão de código. Abrange o lançamento de pipelines, recuperação de saídas, uso de contêineres e configuração de execução em um nível básico.
 
         [Ver o treinamento :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--secondary }
 
@@ -75,11 +75,11 @@ hide:
 
     Aprenda a gerenciar a execução de pipelines de forma eficaz.
 
-    ??? courses "**Execution Config:** Configure pipelines como um profissional"
+    ??? courses "**Configure Execution:** Configure recursos, tentativas e perfis de execução"
 
-        Uma introdução prática à configuração da execução de pipelines Nextflow: adaptação a diferentes ambientes de computação, controle de alocações de recursos e tentativas de reexecução, e alternância entre perfis de configuração predefinidos.
+        Uma introdução prática à configuração da execução de pipelines Nextflow: adaptação a diferentes ambientes de computação, controle de alocações de recursos e tentativas, e alternância entre perfis de configuração predefinidos.
 
-        [Ver o treinamento :material-arrow-right:](execution_config/index.md){ .md-button .md-button--secondary }
+        [Ver o treinamento :material-arrow-right:](config_exec/index.md){ .md-button .md-button--secondary }
 
     !!! info compact "Mais tópicos em breve"
 
@@ -148,7 +148,7 @@ hide:
 
     ---
 
-    Opções para configurar seu ambiente para os treinamentos de Nextflow.
+    Opções para configurar seu ambiente para os treinamentos Nextflow.
 
     [Ver os ambientes de treinamento :material-arrow-right:](envsetup/index.md){ .md-button .md-button--secondary }
 
@@ -172,7 +172,7 @@ hide:
 
     ---
 
-    Recursos úteis quando você tiver algum problema com o treinamento de Nextflow.
+    Recursos úteis quando você tiver um problema com o treinamento Nextflow.
 
     [Encontrar ajuda :material-arrow-right:](help.md){ .md-button .md-button--secondary }
 

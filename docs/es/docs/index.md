@@ -75,11 +75,11 @@ hide:
 
     Aprenda a gestionar la ejecución de pipelines de manera efectiva.
 
-    ??? courses "**Execution Config:** Configurar pipelines como un profesional"
+    ??? courses "**Configure Execution:** Configurar recursos, reintentos y perfiles de ejecución"
 
         Una introducción práctica a la configuración de la ejecución de pipelines de Nextflow: adaptación a diferentes entornos de cómputo, control de asignaciones de recursos y reintentos, y cambio entre perfiles de configuración predefinidos.
 
-        [Ver la capacitación :material-arrow-right:](execution_config/index.md){ .md-button .md-button--secondary }
+        [Ver la capacitación :material-arrow-right:](config_exec/index.md){ .md-button .md-button--secondary }
 
     !!! info compact "Más temas próximamente"
 
@@ -172,7 +172,7 @@ hide:
 
     ---
 
-    Recursos útiles cuando tenga algún problema con la capacitación de Nextflow.
+    Recursos útiles cuando tenga un problema con la capacitación de Nextflow.
 
     [Encontrar ayuda :material-arrow-right:](help.md){ .md-button .md-button--secondary }
 

@@ -27,7 +27,7 @@ hide:
 
     **Szukasz czegoś więcej niż samodzielnej nauki?**
 
-    Znajdź ustrukturyzowane wydarzenia szkoleniowe, wskazówki dotyczące prowadzenia własnych szkoleń oraz informacje o naszej licencji open-source i polityce wkładu.
+    Znajdź ustrukturyzowane wydarzenia szkoleniowe, wskazówki dotyczące prowadzenia własnych szkoleń oraz naszą licencję open-source i politykę wkładu.
 
     [Zobacz wydarzenia szkoleniowe :material-arrow-right:](training_events.md){ .md-button .md-button--secondary .mt-1 }
 
@@ -75,11 +75,11 @@ hide:
 
     Naucz się efektywnie zarządzać wykonaniem pipeline'ów.
 
-    ??? courses "**Execution Config:** Konfigurowanie pipeline'ów jak profesjonalista"
+    ??? courses "**Configure Execution:** Konfigurowanie zasobów, ponownych prób i profili wykonania"
 
-        Praktyczne wprowadzenie do konfigurowania wykonania pipeline'ów Nextflow: dostosowywanie do różnych środowisk obliczeniowych, kontrolowanie przydziału zasobów i ponownych prób oraz przełączanie między gotowymi profilami konfiguracyjnymi.
+        Praktyczne wprowadzenie do konfigurowania wykonania pipeline'ów Nextflow: dostosowywanie do różnych środowisk obliczeniowych, kontrolowanie przydziału zasobów i ponownych prób oraz przełączanie między predefiniowanymi profilami konfiguracyjnymi.
 
-        [Zobacz szkolenie :material-arrow-right:](execution_config/index.md){ .md-button .md-button--secondary }
+        [Zobacz szkolenie :material-arrow-right:](config_exec/index.md){ .md-button .md-button--secondary }
 
     !!! info compact "Więcej tematów już wkrótce"
 
@@ -96,7 +96,7 @@ hide:
 
     ??? courses "**Hello Nextflow:** Tworzenie własnych pipeline'ów od podstaw"
 
-        Kurs obejmuje podstawowe elementy języka Nextflow w stopniu wystarczającym do tworzenia prostych, ale w pełni funkcjonalnych pipeline'ów, a także kluczowe aspekty projektowania, rozwijania i konfigurowania pipeline'ów.
+        Kurs obejmuje podstawowe komponenty języka Nextflow w stopniu wystarczającym do tworzenia prostych, ale w pełni funkcjonalnych pipeline'ów, a także kluczowe elementy projektowania, rozwijania i konfigurowania pipeline'ów.
 
         [Zobacz szkolenie :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--secondary }
 
@@ -110,7 +110,7 @@ hide:
     ??? catalog "**Side Quests:** Zagłęb się w zaawansowane tematy Nextflow"
 
         Zbiór samodzielnych mini-kursów przeznaczonych dla deweloperów Nextflow, którzy chcą poszerzyć swoje horyzonty lub pogłębić umiejętności w konkretnych obszarach.
-        Są ułożone liniowo, ale można je realizować w dowolnej kolejności (zależności znajdziesz w opisie każdego mini-kursu).
+        Są ułożone liniowo, ale można je przerabiać w dowolnej kolejności (zależności znajdziesz w opisie każdego mini-kursu).
 
         [Przeglądaj Side Quests :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
 
@@ -126,9 +126,9 @@ hide:
 
         [Zobacz szkolenie :material-arrow-right:](nf4_science/genomics/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**RNAseq:** Tworzenie pipeline'u do przetwarzania danych bulk RNAseq"
+    ??? courses "**RNAseq:** Tworzenie pipeline'u do przetwarzania bulk RNAseq"
 
-        Kurs dla badaczy, którzy chcą nauczyć się tworzyć własne pipeline'y RNAseq — na przykładzie przetwarzania danych bulk RNAseq, ilustrującego kluczowe wzorce deweloperskie w Nextflow.
+        Kurs dla badaczy, którzy chcą nauczyć się tworzyć własne pipeline'y RNAseq — na przykładzie przetwarzania bulk RNAseq, ilustrującego kluczowe wzorce deweloperskie w Nextflow.
 
         [Zobacz szkolenie :material-arrow-right:](nf4_science/rnaseq/index.md){ .md-button .md-button--secondary }
 
@@ -158,7 +158,7 @@ hide:
 
     Informacje o wersjach składni Nextflow i zarządzaniu ich ewolucją.
 
-    [Sprawdź wymagania wersji :material-arrow-right:](info/nxf_versions.md){ .md-button .md-button--secondary }
+    [Sprawdź wymagania dotyczące wersji :material-arrow-right:](info/nxf_versions.md){ .md-button .md-button--secondary }
 
 -   :material-file-code-outline:{ .lg .middle } __Pipeline Hello__
 

@@ -60,7 +60,7 @@ Nextflow स्वचालित रूप से working directory से `nex
 
     यह कॉन्फ़िग एक ही मशीन पर लोकल execution को कवर करता है।
     Nextflow HPC schedulers (SLURM, PBS, LSF) और cloud executors (AWS Batch, Google Cloud Batch, Azure Batch) को भी सपोर्ट करता है, जो सभी उसी `nextflow.config` मेकेनिज्म के ज़रिए कॉन्फ़िगर होते हैं।
-    इन विकल्पों की पूरी जानकारी के लिए [Execution Config](../execution_config/01_packaging_and_execution.md) कोर्स में [भाग 1: अपने compute वातावरण के अनुसार ढालना](../execution_config/index.md) देखो।
+    इन विकल्पों की पूरी जानकारी के लिए [Configure Execution](../config_exec/01_packaging_and_execution.md) कोर्स में [भाग 1: अपने compute वातावरण के अनुसार ढालना](../config_exec/index.md) देखो।
 
 ### 1.1. सॉफ़्टवेयर पैकेजिंग
 
@@ -93,7 +93,7 @@ process {
 
 यह हर प्रोसेस को एक ही CPU और 1 GB memory तक सीमित करता है।
 
-Nextflow तुम्हें अलग-अलग नामित प्रोसेस या प्रोसेस के समूहों के लिए अलग-अलग मान भी सेट करने देता है; तुम यह [Execution Config](../execution_config/02_resources_and_retries.md#12-set-resource-allocations-for-a-specific-process) कोर्स के [भाग 2: compute संसाधन और विफलताओं का प्रबंधन](../execution_config/index.md) में सीखोगे।
+Nextflow तुम्हें अलग-अलग नामित प्रोसेस या प्रोसेस के समूहों के लिए अलग-अलग मान भी सेट करने देता है; तुम यह [Configure Execution](../config_exec/02_resources_and_retries.md#12-set-resource-allocations-for-a-specific-process) कोर्स के [भाग 2: compute संसाधन और विफलताओं का प्रबंधन](../config_exec/index.md) में सीखोगे।
 
 ### 1.3. पाइपलाइन पैरामीटर
 
@@ -186,7 +186,7 @@ nextflow run main.nf -profile test
 !!! note "नोट"
 
     तुम एक साथ कई प्रोफ़ाइल सक्रिय कर सकते हो, और कुछ भी चलाने से पहले पूरी तरह से resolved परिणाम देखने के लिए `nextflow config -profile <name>,<name>` उपयोग कर सकते हो।
-    प्रोफ़ाइल को मिलाना, और Nextflow उनके बीच टकराव को कैसे सुलझाता है, इसे [Execution Config](../execution_config/03_profiles.md) कोर्स के [भाग 3: कॉन्फ़िगरेशन बदलने के लिए प्रोफ़ाइल का उपयोग](../execution_config/index.md) में विस्तार से कवर किया गया है।
+    प्रोफ़ाइल को मिलाना, और Nextflow उनके बीच टकराव को कैसे सुलझाता है, इसे [Configure Execution](../config_exec/03_profiles.md) कोर्स के [भाग 3: कॉन्फ़िगरेशन बदलने के लिए प्रोफ़ाइल का उपयोग](../config_exec/index.md) में विस्तार से कवर किया गया है।
 
 ### सारांश
 

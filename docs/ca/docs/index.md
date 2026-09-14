@@ -75,11 +75,11 @@ hide:
 
     Apreneu a gestionar l'execució de pipelines de manera eficaç.
 
-    ??? courses "**Execution Config:** Configureu pipelines com un professional"
+    ??? courses "**Configure Execution:** Configureu recursos, reintents i perfils d'execució"
 
-        Una introducció pràctica a la configuració de l'execució de pipelines de Nextflow: adaptació a diferents entorns de càlcul, control de l'assignació de recursos i reintents, i canvi entre perfils de configuració predefinits.
+        Una introducció pràctica a la configuració de l'execució de pipelines de Nextflow: adaptació a diferents entorns de càlcul, control d'assignacions de recursos i reintents, i canvi entre perfils de configuració predefinits.
 
-        [Veure la formació :material-arrow-right:](execution_config/index.md){ .md-button .md-button--secondary }
+        [Veure la formació :material-arrow-right:](config_exec/index.md){ .md-button .md-button--secondary }
 
     !!! info compact "Més temes properament"
 
@@ -107,10 +107,10 @@ hide:
 
         [Veure la formació :material-arrow-right:](nfcore_build/index.md){ .md-button .md-button--secondary }
 
-    ??? catalog "**Side Quests:** Endinseuvos en temes avançats de Nextflow"
+    ??? catalog "**Side Quests:** Aprofundiu en temes avançats de Nextflow"
 
         Una col·lecció de mini-cursos independents destinats a desenvolupadors de Nextflow que vulguin ampliar el seu ventall i/o aprofundir les seves habilitats en temes concrets.
-        Es presenten de manera lineal però es poden fer en qualsevol ordre (vegeu les dependències a la descripció general de cada mini-curs).
+        Es presenten de manera lineal però es poden seguir en qualsevol ordre (vegeu les dependències a la descripció general de cada mini-curs).
 
         [Exploreu els Side Quests :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
 
@@ -122,19 +122,19 @@ hide:
 
     ??? courses "**Genomics:** Desenvolupeu un pipeline de detecció de variants"
 
-        Un curs per a investigadors que vulguin aprendre a desenvolupar els seus propis pipelines de genòmica, utilitzant un cas d'ús de detecció de variants per demostrar patrons essencials de desenvolupament amb Nextflow.
+        Un curs per a investigadors que vulguin aprendre a desenvolupar els seus propis pipelines de genòmica, utilitzant un cas d'ús de detecció de variants per demostrar els patrons essencials de desenvolupament amb Nextflow.
 
         [Veure la formació :material-arrow-right:](nf4_science/genomics/index.md){ .md-button .md-button--secondary }
 
     ??? courses "**RNAseq:** Desenvolupeu un pipeline de processament de RNAseq massiu"
 
-        Un curs per a investigadors que vulguin aprendre a desenvolupar els seus propis pipelines de RNAseq, utilitzant un cas d'ús de processament de RNAseq massiu per demostrar patrons essencials de desenvolupament amb Nextflow.
+        Un curs per a investigadors que vulguin aprendre a desenvolupar els seus propis pipelines de RNAseq, utilitzant un cas d'ús de processament de RNAseq massiu per demostrar els patrons essencials de desenvolupament amb Nextflow.
 
         [Veure la formació :material-arrow-right:](nf4_science/rnaseq/index.md){ .md-button .md-button--secondary }
 
     ??? courses "**Bioimaging:** Executeu i configureu pipelines d'imatge"
 
-        Un curs per a investigadors que vulguin aprendre a executar i configurar pipelines de bioimatge, utilitzant nf-core/molkart per demostrar patrons essencials d'ús de Nextflow.
+        Un curs per a investigadors que vulguin aprendre a executar i configurar pipelines de bioimatge, utilitzant nf-core/molkart per demostrar els patrons essencials d'ús de Nextflow.
 
         [Veure la formació :material-arrow-right:](nf4_science/imaging/index.md){ .md-button .md-button--secondary }
 
@@ -164,7 +164,7 @@ hide:
 
     ---
 
-    Resum de què fa el pipeline Hello i com està estructurat.
+    Resum del que fa el pipeline Hello i com està estructurat.
 
     [Llegiu el resum :material-arrow-right:](info/hello_pipeline.md){ .md-button .md-button--secondary }
 

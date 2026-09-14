@@ -59,7 +59,7 @@ hide:
 
     ??? courses "**Use nf-core:** Trovare ed eseguire pipeline curate dalla community"
 
-        Un'introduzione rapida alla ricerca, all'esecuzione e alla configurazione di pipeline del progetto community nf-core, partendo da una pipeline demo minimale per poi scalare fino a una pipeline di analisi a livello di produzione.
+        Un'introduzione rapida alla ricerca, all'esecuzione e alla configurazione di pipeline del progetto community nf-core, partendo da una pipeline demo minimale per poi scalare fino a una pipeline di analisi a livello produttivo.
 
         [Vedi la formazione :material-arrow-right:](nfcore_use/index.md){ .md-button .md-button--secondary }
 
@@ -75,11 +75,11 @@ hide:
 
     Imparate a gestire l'esecuzione delle pipeline in modo efficace.
 
-    ??? courses "**Execution Config:** Configurare le pipeline come un professionista"
+    ??? courses "**Configure Execution:** Configurare risorse, tentativi ripetuti e profili di esecuzione"
 
-        Un'introduzione pratica alla configurazione dell'esecuzione di pipeline Nextflow: adattamento a diversi ambienti di calcolo, controllo delle allocazioni di risorse e dei tentativi di riesecuzione, e passaggio tra profili di configurazione predefiniti.
+        Un'introduzione pratica alla configurazione dell'esecuzione di pipeline Nextflow: adattamento a diversi ambienti di calcolo, controllo delle allocazioni di risorse e dei tentativi ripetuti, e passaggio tra profili di configurazione predefiniti.
 
-        [Vedi la formazione :material-arrow-right:](execution_config/index.md){ .md-button .md-button--secondary }
+        [Vedi la formazione :material-arrow-right:](config_exec/index.md){ .md-button .md-button--secondary }
 
     !!! info compact "Altri argomenti in arrivo"
 
@@ -96,7 +96,7 @@ hide:
 
     ??? courses "**Hello Nextflow:** Sviluppare le proprie pipeline da zero"
 
-        Questo corso copre i componenti fondamentali del linguaggio Nextflow con un livello di dettaglio sufficiente per sviluppare pipeline semplici ma pienamente funzionali, oltre agli elementi chiave di progettazione, sviluppo e configurazione delle pipeline.
+        Questo corso copre i componenti fondamentali del linguaggio Nextflow con un livello di dettaglio sufficiente per sviluppare pipeline semplici ma pienamente funzionali, oltre agli elementi chiave di progettazione, sviluppo e pratiche di configurazione delle pipeline.
 
         [Vedi la formazione :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--secondary }
 
@@ -110,7 +110,7 @@ hide:
     ??? catalog "**Side Quests:** Approfondire argomenti avanzati di Nextflow"
 
         Una raccolta di mini-corsi autonomi pensati per gli sviluppatori Nextflow che desiderano ampliare le proprie competenze e/o approfondire argomenti specifici.
-        Sono presentati in modo lineare ma possono essere seguiti in qualsiasi ordine (vedere le dipendenze nella panoramica di ogni mini-corso).
+        Sono presentati in sequenza ma possono essere seguiti in qualsiasi ordine (vedere le dipendenze nella panoramica di ogni mini-corso).
 
         [Sfoglia i Side Quests :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }
 
@@ -120,7 +120,7 @@ hide:
 
     Imparate a sviluppare pipeline Nextflow per applicazioni scientifiche specifiche.
 
-    ??? courses "**Genomics:** Sviluppare una pipeline per la variant calling"
+    ??? courses "**Genomics:** Sviluppare una pipeline per il variant calling"
 
         Un corso per ricercatori che desiderano imparare a sviluppare le proprie pipeline di genomica, utilizzando un caso d'uso di variant calling per illustrare i pattern di sviluppo Nextflow essenziali.
 
@@ -140,7 +140,7 @@ hide:
 
 </div>
 
-## Setup e Supporto
+## Setup & Help
 
 <div class="grid cards mb-4" markdown>
 

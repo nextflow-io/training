@@ -10,7 +10,7 @@ hide:
 
 <div class="grid cards" markdown>
 
--   :material-book-open-variant:{ .lg .middle } __Self-service-Kurse__
+-   :material-book-open-variant:{ .lg .middle } __Selbstlernkurse__
 
     ---
 
@@ -25,7 +25,7 @@ hide:
 
     ---
 
-    **Suchst du etwas über Self-service hinaus?**
+    **Suchst du etwas über Selbstlernkurse hinaus?**
 
     Finde strukturierte Training Events, Anleitungen für eigene Trainings sowie unsere Open-Source-Lizenz und Beitragsrichtlinien.
 
@@ -63,7 +63,7 @@ hide:
 
         [Zum Training :material-arrow-right:](nfcore_use/index.md){ .md-button .md-button--secondary }
 
-    ??? courses "**Scale with Seqera:** Pipelines in großem Maßstab starten und überwachen"
+    ??? courses "**Scale with Seqera:** Pipelines skaliert starten und überwachen"
 
         Eine praxisorientierte Einführung in das Starten und Überwachen von Nextflow-Pipelines mit der Seqera Platform – sowohl über die Weboberfläche als auch über die Kommandozeile.
 
@@ -73,18 +73,18 @@ hide:
 
     ### :material-tune:{.nextflow-primary} Ausführung verwalten {.mt-1}
 
-    Lerne, die Pipeline-Ausführung effektiv zu verwalten.
+    Lerne, Pipeline-Ausführungen effektiv zu verwalten.
 
-    ??? courses "**Execution Config:** Pipelines wie ein Profi konfigurieren"
+    ??? courses "**Configure Execution:** Ressourcen, Wiederholungen und Ausführungsprofile konfigurieren"
 
-        Eine praxisorientierte Einführung in die Konfiguration von Nextflow-Pipelines: Anpassung an verschiedene Rechenumgebungen, Steuerung von Ressourcenzuweisungen und Wiederholungsversuchen sowie Wechsel zwischen vordefinierten Konfigurationsprofilen.
+        Eine praxisorientierte Einführung in die Konfiguration von Nextflow-Pipelines: Anpassung an verschiedene Rechenumgebungen, Steuerung von Ressourcenzuweisungen und Wiederholungen sowie Wechsel zwischen vordefinierten Konfigurationsprofilen.
 
-        [Zum Training :material-arrow-right:](execution_config/index.md){ .md-button .md-button--secondary }
+        [Zum Training :material-arrow-right:](config_exec/index.md){ .md-button .md-button--secondary }
 
     !!! info compact "Weitere Themen folgen"
 
-        Performance-Tuning, HPC/Cloud-Ausführung und mehr sind für diesen Abschnitt geplant.
-        Stimme ab, was als nächstes behandelt werden soll, in unserer [kurzen Interessenumfrage](https://seqera.typeform.com/to/JCs91e8v).
+        Performance-Tuning, HPC/Cloud-Ausführung und mehr sind für diesen Bereich geplant.
+        Stimme ab, was als nächstes behandelt werden soll, in unserer [kurzen Umfrage](https://seqera.typeform.com/to/JCs91e8v).
 
 -   :material-code-tags:{ .lg .middle } __Für Entwickler\*innen__
 
@@ -109,7 +109,7 @@ hide:
 
     ??? catalog "**Side Quests:** Fortgeschrittene Nextflow-Themen vertiefen"
 
-        Eine Sammlung eigenständiger Mini-Kurse für Nextflow-Entwickler\*innen, die ihr Wissen erweitern und/oder ihre Fähigkeiten in bestimmten Themen vertiefen möchten.
+        Eine Sammlung eigenständiger Mini-Kurse für Nextflow-Entwickler\*innen, die ihr Wissen erweitern und/oder ihre Kenntnisse zu bestimmten Themen vertiefen möchten.
         Sie sind linear aufgebaut, können aber in beliebiger Reihenfolge absolviert werden (siehe Abhängigkeiten in der jeweiligen Mini-Kurs-Übersicht).
 
         [Side Quests durchsuchen :material-arrow-right:](side_quests/index.md){ .md-button .md-button--secondary }

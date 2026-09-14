@@ -60,7 +60,7 @@ Nextflow는 작업 디렉토리에서 `nextflow.config`를 자동으로 인식�
 
     이 설정은 단일 머신에서의 로컬 실행을 다룹니다.
     Nextflow는 HPC 스케줄러(SLURM, PBS, LSF)와 클라우드 executor(AWS Batch, Google Cloud Batch, Azure Batch)도 지원하며, 모두 동일한 `nextflow.config` 메커니즘으로 설정합니다.
-    이러한 옵션에 대한 전체 안내는 [Execution Config](../execution_config/01_packaging_and_execution.md) 과정의 [파트 1: 컴퓨팅 환경에 맞게 적용하기](../execution_config/index.md)를 참조하세요.
+    이러한 옵션에 대한 전체 안내는 [Configure Execution](../config_exec/01_packaging_and_execution.md) 과정의 [파트 1: 컴퓨팅 환경에 맞게 적용하기](../config_exec/index.md)를 참조하세요.
 
 ### 1.1. 소프트웨어 패키징
 
@@ -93,7 +93,7 @@ process {
 
 이 설정은 모든 프로세스를 단일 CPU와 1 GB 메모리로 제한합니다.
 
-Nextflow에서는 개별 프로세스나 프로세스 그룹에 서로 다른 값을 설정할 수도 있습니다. 자세한 내용은 [Execution Config](../execution_config/02_resources_and_retries.md#12-set-resource-allocations-for-a-specific-process) 과정의 [파트 2: 컴퓨팅 리소스 및 오류 관리](../execution_config/index.md)에서 학습할 수 있습니다.
+Nextflow에서는 개별 프로세스나 프로세스 그룹에 서로 다른 값을 설정할 수도 있습니다. 자세한 내용은 [Configure Execution](../config_exec/02_resources_and_retries.md#12-set-resource-allocations-for-a-specific-process) 과정의 [파트 2: 컴퓨팅 리소스 및 오류 관리](../config_exec/index.md)에서 학습할 수 있습니다.
 
 ### 1.3. 파이프라인 매개변수
 
@@ -186,7 +186,7 @@ nextflow run main.nf -profile test
 !!! note "참고"
 
     여러 프로파일을 동시에 활성화할 수 있으며, `nextflow config -profile <name>,<name>`을 사용하면 실행 전에 최종 적용된 결과를 확인할 수 있습니다.
-    프로파일 조합 방법과 Nextflow가 프로파일 간 충돌을 해결하는 방식은 [Execution Config](../execution_config/03_profiles.md) 과정의 [파트 3: 프로파일을 사용하여 설정 전환하기](../execution_config/index.md)에서 자세히 다룹니다.
+    프로파일 조합 방법과 Nextflow가 프로파일 간 충돌을 해결하는 방식은 [Configure Execution](../config_exec/03_profiles.md) 과정의 [파트 3: 프로파일을 사용하여 설정 전환하기](../config_exec/index.md)에서 자세히 다룹니다.
 
 ### 핵심 정리
 
