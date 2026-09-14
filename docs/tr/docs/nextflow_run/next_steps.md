@@ -35,7 +35,7 @@ Artık mevcut Nextflow pipeline'larını kendi çalışmanıza entegre etmeye ba
 
 Sırada ne yapacağınız için en iyi önerilerimiz:
 
-- [Execution Config](../execution_config/index.md) ile pipeline yapılandırmasını daha ayrıntılı keşfedin
+- [Configure Execution](../config_exec/index.md) ile pipeline yapılandırmasını daha ayrıntılı keşfedin
 - [Use nf-core](../nfcore_use/index.md) ile nf-core topluluk pipeline'larını çalıştırmayı öğrenin
 - [Scale with Seqera](../seqera_scale/index.md) ile pipeline'ları büyük ölçekte başlatın ve izleyin
 

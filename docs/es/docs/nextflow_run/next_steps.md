@@ -35,7 +35,7 @@ Ahora está equipado con el conocimiento fundamental para comenzar a integrar pi
 
 Aquí están nuestras principales sugerencias de qué hacer a continuación:
 
-- Profundice en la configuración de pipelines con [Execution Config](../execution_config/index.md)
+- Profundice en la configuración de pipelines con [Configure Execution](../config_exec/index.md)
 - Aprenda a ejecutar pipelines de la comunidad nf-core con [Use nf-core](../nfcore_use/index.md)
 - Lance y monitoree pipelines a escala con [Scale with Seqera](../seqera_scale/index.md)
 

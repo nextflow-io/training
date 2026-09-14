@@ -35,7 +35,7 @@ Jesteś teraz wyposażony w fundamentalną wiedzę potrzebną do rozpoczęcia in
 
 Oto nasze najlepsze sugestie, co zrobić dalej:
 
-- Zagłęb się w konfigurację pipeline'ów dzięki [Execution Config](../execution_config/index.md)
+- Zagłęb się w konfigurację pipeline'ów dzięki [Configure Execution](../config_exec/index.md)
 - Naucz się uruchamiać pipeline'y społeczności nf-core dzięki [Use nf-core](../nfcore_use/index.md)
 - Uruchamiaj i monitoruj pipeline'y na dużą skalę dzięki [Scale with Seqera](../seqera_scale/index.md)
 

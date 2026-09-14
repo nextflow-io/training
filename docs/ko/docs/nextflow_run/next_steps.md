@@ -35,7 +35,7 @@ Nextflow Run 교육 과정을 완료하신 것을 축하합니다! 🎉
 
 다음에 무엇을 할지에 대한 최고의 제안입니다:
 
-- [Execution Config](../execution_config/index.md)로 파이프라인 설정 심화 학습
+- [Configure Execution](../config_exec/index.md)으로 파이프라인 설정 심화 학습
 - [Use nf-core](../nfcore_use/index.md)로 nf-core 커뮤니티 파이프라인 실행 방법 학습
 - [Scale with Seqera](../seqera_scale/index.md)로 대규모 파이프라인 시작 및 모니터링
 

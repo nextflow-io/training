@@ -35,7 +35,7 @@ Ara estàs equipat amb el coneixement fonamental per començar a integrar pipeli
 
 Aquí tens les nostres principals suggerències sobre què fer a continuació:
 
-- Aprofundeix en la configuració de pipelines amb [Execution Config](../execution_config/index.md)
+- Aprofundeix en la configuració de pipelines amb [Configure Execution](../config_exec/index.md)
 - Aprèn a executar pipelines de la comunitat nf-core amb [Use nf-core](../nfcore_use/index.md)
 - Llança i monitora pipelines a escala amb [Scale with Seqera](../seqera_scale/index.md)
 

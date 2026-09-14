@@ -60,7 +60,7 @@ Gehen wir jeden Bereich durch und nutzen dann Profile, indem wir die Pipeline mi
 
     Diese Konfiguration deckt die lokale Ausführung auf einem einzelnen Rechner ab.
     Nextflow unterstützt auch HPC-Scheduler (SLURM, PBS, LSF) und Cloud-Executors (AWS Batch, Google Cloud Batch, Azure Batch), die alle über denselben `nextflow.config`-Mechanismus konfiguriert werden.
-    Einen vollständigen Überblick über diese Optionen findest du in [Teil 1: An deine Rechenumgebung anpassen](../execution_config/01_packaging_and_execution.md) im Kurs [Execution Config](../execution_config/index.md).
+    Einen vollständigen Überblick über diese Optionen findest du in [Teil 1: An deine Rechenumgebung anpassen](../config_exec/01_packaging_and_execution.md) im Kurs [Configure Execution](../config_exec/index.md).
 
 ### 1.1. Software-Paketierung
 
@@ -93,7 +93,7 @@ process {
 
 Das begrenzt jeden Prozess auf eine einzelne CPU und 1 GB Arbeitsspeicher.
 
-Nextflow lässt dich auch unterschiedliche Werte für einzelne benannte Prozesse oder Gruppen von Prozessen festlegen. Wie das geht, lernst du in [Teil 2: Rechenressourcen und Fehler verwalten](../execution_config/02_resources_and_retries.md#12-set-resource-allocations-for-a-specific-process) des Kurses [Execution Config](../execution_config/index.md).
+Nextflow lässt dich auch unterschiedliche Werte für einzelne benannte Prozesse oder Gruppen von Prozessen festlegen. Wie das geht, lernst du in [Teil 2: Rechenressourcen und Fehler verwalten](../config_exec/02_resources_and_retries.md#12-set-resource-allocations-for-a-specific-process) des Kurses [Configure Execution](../config_exec/index.md).
 
 ### 1.3. Pipeline-Parameter
 
@@ -186,7 +186,7 @@ Schau dir `results/test/` an: Der Batch-Name ist jetzt Teil des Verzeichnispfads
 !!! note "Hinweis"
 
     Du kannst mehrere Profile gleichzeitig aktivieren und `nextflow config -profile <name>,<name>` verwenden, um das vollständig aufgelöste Ergebnis zu sehen, bevor du irgendetwas ausführst.
-    Das Kombinieren von Profilen und wie Nextflow Konflikte zwischen ihnen auflöst, wird ausführlich in [Teil 3: Profile zum Wechseln von Konfigurationen verwenden](../execution_config/03_profiles.md) des Kurses [Execution Config](../execution_config/index.md) behandelt.
+    Das Kombinieren von Profilen und wie Nextflow Konflikte zwischen ihnen auflöst, wird ausführlich in [Teil 3: Profile zum Wechseln von Konfigurationen verwenden](../config_exec/03_profiles.md) des Kurses [Configure Execution](../config_exec/index.md) behandelt.
 
 ### Fazit
 

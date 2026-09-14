@@ -59,7 +59,7 @@ hide:
 
     ??? courses "**Use nf-core :** Trouver et exécuter des pipelines créés par la communauté"
 
-        Une introduction rapide à la recherche, l'exécution et la configuration de pipelines issus du projet communautaire nf-core, en commençant par un pipeline de démonstration minimal avant de passer à un pipeline d'analyse à l'échelle de la production.
+        Une introduction rapide à la recherche, l'exécution et la configuration de pipelines issus du projet communautaire nf-core, en commençant par un pipeline de démonstration minimal puis en passant à un pipeline d'analyse à l'échelle de la production.
 
         [Voir la formation :material-arrow-right:](nfcore_use/index.md){ .md-button .md-button--secondary }
 
@@ -75,11 +75,11 @@ hide:
 
     Apprenez à gérer efficacement l'exécution des pipelines.
 
-    ??? courses "**Execution Config :** Configurer des pipelines comme un·e pro"
+    ??? courses "**Configure Execution :** Configurer les ressources, les nouvelles tentatives et les profils d'exécution"
 
         Une introduction pratique à la configuration de l'exécution de pipelines Nextflow : adaptation à différents environnements de calcul, contrôle des allocations de ressources et des nouvelles tentatives, et basculement entre des profils de configuration prédéfinis.
 
-        [Voir la formation :material-arrow-right:](execution_config/index.md){ .md-button .md-button--secondary }
+        [Voir la formation :material-arrow-right:](config_exec/index.md){ .md-button .md-button--secondary }
 
     !!! info compact "D'autres sujets à venir"
 

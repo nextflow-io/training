@@ -60,7 +60,7 @@ Passons en revue chacun d'eux, puis mettons les profils en pratique en exécutan
 
     Cette configuration couvre l'exécution locale sur une seule machine.
     Nextflow prend également en charge les ordonnanceurs HPC (SLURM, PBS, LSF) et les executors cloud (AWS Batch, Google Cloud Batch, Azure Batch), tous configurés via le même mécanisme `nextflow.config`.
-    Consultez la [Partie 1 : S'adapter à votre environnement de calcul](../execution_config/01_packaging_and_execution.md) du cours [Execution Config](../execution_config/index.md) pour une présentation complète de ces options.
+    Consultez la [Partie 1 : S'adapter à votre environnement de calcul](../config_exec/01_packaging_and_execution.md) du cours [Configure Execution](../config_exec/index.md) pour une présentation complète de ces options.
 
 ### 1.1. Packaging logiciel
 
@@ -93,7 +93,7 @@ process {
 
 Cela limite chaque processus à un seul CPU et 1 Go de mémoire.
 
-Nextflow vous permet également de définir des valeurs différentes pour des processus nommés individuellement ou des groupes de processus ; vous apprendrez comment dans la [Partie 2 : Gérer les ressources de calcul et les échecs](../execution_config/02_resources_and_retries.md#12-set-resource-allocations-for-a-specific-process) du cours [Execution Config](../execution_config/index.md).
+Nextflow vous permet également de définir des valeurs différentes pour des processus nommés individuellement ou des groupes de processus ; vous apprendrez comment dans la [Partie 2 : Gérer les ressources de calcul et les échecs](../config_exec/02_resources_and_retries.md#12-set-resource-allocations-for-a-specific-process) du cours [Configure Execution](../config_exec/index.md).
 
 ### 1.3. Paramètres du pipeline
 
@@ -186,7 +186,7 @@ Vérifiez `results/test/` : le nom du batch fait maintenant partie du chemin du 
 !!! note "Note"
 
     Vous pouvez activer plusieurs profils à la fois, et utiliser `nextflow config -profile <name>,<name>` pour voir le résultat entièrement résolu avant d'exécuter quoi que ce soit.
-    La combinaison de profils et la façon dont Nextflow résout les conflits entre eux sont traitées en détail dans la [Partie 3 : Utiliser les profils pour changer de configuration](../execution_config/03_profiles.md) du cours [Execution Config](../execution_config/index.md).
+    La combinaison de profils et la façon dont Nextflow résout les conflits entre eux sont traitées en détail dans la [Partie 3 : Utiliser les profils pour changer de configuration](../config_exec/03_profiles.md) du cours [Configure Execution](../config_exec/index.md).
 
 ### À retenir
 

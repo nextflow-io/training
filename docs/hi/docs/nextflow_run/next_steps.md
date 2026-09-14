@@ -35,7 +35,7 @@ Nextflow Run प्रशिक्षण कोर्स पूरा करन�
 
 आगे क्या करना है इसके लिए हमारे top suggestions हैं:
 
-- [Execution Config](../execution_config/index.md) के साथ pipeline configuration में और गहराई से जाओ
+- [Configure Execution](../config_exec/index.md) के साथ pipeline configuration में और गहराई से जाओ
 - [Use nf-core](../nfcore_use/index.md) के साथ nf-core community pipelines चलाना सीखो
 - [Scale with Seqera](../seqera_scale/index.md) के साथ बड़े पैमाने पर pipelines launch और monitor करो
 
