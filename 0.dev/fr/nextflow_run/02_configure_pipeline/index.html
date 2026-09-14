@@ -1298,7 +1298,7 @@ md-nav__item--active">
   <a href="../../config_exec/00_orientation/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Getting started   
+    Premiers pas   
 </span>
   
   </a>
@@ -1308,7 +1308,7 @@ md-nav__item--active">
   <a href="../../config_exec/01_packaging_and_execution/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 1: Adapt to your compute environment   
+    Partie 1 : Adapter à votre environnement de calcul   
 </span>
   
   </a>
@@ -1318,7 +1318,7 @@ md-nav__item--active">
   <a href="../../config_exec/02_resources_and_retries/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 2: Manage compute resources and failures   
+    Partie 2 : Gérer les ressources de calcul et les échecs   
 </span>
   
   </a>
@@ -1328,7 +1328,7 @@ md-nav__item--active">
   <a href="../../config_exec/03_profiles/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 3: Use profiles to switch configurations   
+    Partie 3 : Utiliser les profils pour changer de configuration   
 </span>
   
   </a>
@@ -1338,7 +1338,7 @@ md-nav__item--active">
   <a href="../../config_exec/next_steps/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Course summary   
+    Résumé du cours   
 </span>
   
   </a>
@@ -1348,7 +1348,7 @@ md-nav__item--active">
   <a href="../../config_exec/survey/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Feedback survey   
+    Enquête de satisfaction   
 </span>
   
   </a>
@@ -2961,7 +2961,7 @@ Nous allons maintenant examiner comment configurer le comportement du pipeline �
 <p class="admonition-title">Note</p>
 <p>Cette configuration couvre l'exécution locale sur une seule machine.
 Nextflow prend également en charge les ordonnanceurs HPC (SLURM, PBS, LSF) et les executors cloud (AWS Batch, Google Cloud Batch, Azure Batch), tous configurés via le même mécanisme <code>nextflow.config</code>.
-Consultez la <a href="../../execution_config/01_packaging_and_execution/">Partie 1 : S'adapter à votre environnement de calcul</a> du cours <a href="../../execution_config/">Execution Config</a> pour une présentation complète de ces options.</p>
+Consultez la <a href="../../config_exec/01_packaging_and_execution/">Partie 1 : S'adapter à votre environnement de calcul</a> du cours <a href="../../config_exec/">Configure Execution</a> pour une présentation complète de ces options.</p>
 </div>
 <h3 id="11-packaging-logiciel">1.1. Packaging logiciel<a class="headerlink" href="#11-packaging-logiciel" title="Permanent link">&para;</a></h3>
 <p>Le packaging logiciel désigne la façon dont Nextflow fournit les outils dont vos processus ont besoin, qu'il s'agisse d'une image de conteneur, d'un environnement Conda ou d'autre chose.</p>
@@ -2993,7 +2993,7 @@ Nextflow vous permet de configurer un certain nombre de choses sur la façon don
 <a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Cela limite chaque processus à un seul CPU et 1 Go de mémoire.</p>
-<p>Nextflow vous permet également de définir des valeurs différentes pour des processus nommés individuellement ou des groupes de processus ; vous apprendrez comment dans la <a href="../../execution_config/02_resources_and_retries/#12-set-resource-allocations-for-a-specific-process">Partie 2 : Gérer les ressources de calcul et les échecs</a> du cours <a href="../../execution_config/">Execution Config</a>.</p>
+<p>Nextflow vous permet également de définir des valeurs différentes pour des processus nommés individuellement ou des groupes de processus ; vous apprendrez comment dans la <a href="../../config_exec/02_resources_and_retries/#12-set-resource-allocations-for-a-specific-process">Partie 2 : Gérer les ressources de calcul et les échecs</a> du cours <a href="../../config_exec/">Configure Execution</a>.</p>
 <h3 id="13-parametres-du-pipeline">1.3. Paramètres du pipeline<a class="headerlink" href="#13-parametres-du-pipeline" title="Permanent link">&para;</a></h3>
 <p>Les paramètres sont les entrées en ligne de commande du pipeline, les mêmes options <code>--input</code>, <code>--batch</code> et <code>--character</code> que vous avez déjà définies directement en ligne de commande.
 Définir leurs valeurs par défaut ici signifie que vous n'avez pas à les saisir à chaque fois, bien que, comme vous le verrez plus loin dans cette partie, il existe d'autres façons de les fournir.</p>
@@ -3088,7 +3088,7 @@ Vérifiez <code>results/test/</code> : le nom du batch fait maintenant partie du
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Vous pouvez activer plusieurs profils à la fois, et utiliser <code>nextflow config -profile &lt;name&gt;,&lt;name&gt;</code> pour voir le résultat entièrement résolu avant d'exécuter quoi que ce soit.
-La combinaison de profils et la façon dont Nextflow résout les conflits entre eux sont traitées en détail dans la <a href="../../execution_config/03_profiles/">Partie 3 : Utiliser les profils pour changer de configuration</a> du cours <a href="../../execution_config/">Execution Config</a>.</p>
+La combinaison de profils et la façon dont Nextflow résout les conflits entre eux sont traitées en détail dans la <a href="../../config_exec/03_profiles/">Partie 3 : Utiliser les profils pour changer de configuration</a> du cours <a href="../../config_exec/">Configure Execution</a>.</p>
 </div>
 <h3 id="a-retenir">À retenir<a class="headerlink" href="#a-retenir" title="Permanent link">&para;</a></h3>
 <p>Vous savez ce que font les éléments les plus courants d'un fichier <code>nextflow.config</code> et comment activer un profil.</p>

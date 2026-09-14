@@ -1298,7 +1298,7 @@ md-nav__item--active">
   <a href="../../config_exec/00_orientation/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Getting started   
+    Primers passos   
 </span>
   
   </a>
@@ -1308,7 +1308,7 @@ md-nav__item--active">
   <a href="../../config_exec/01_packaging_and_execution/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 1: Adapt to your compute environment   
+    Part 1: Adaptació a l'entorn de còmput   
 </span>
   
   </a>
@@ -1318,7 +1318,7 @@ md-nav__item--active">
   <a href="../../config_exec/02_resources_and_retries/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 2: Manage compute resources and failures   
+    Part 2: Gestionar recursos de còmput i fallades   
 </span>
   
   </a>
@@ -1328,7 +1328,7 @@ md-nav__item--active">
   <a href="../../config_exec/03_profiles/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Part 3: Use profiles to switch configurations   
+    Part 3: Utilitzar perfils per canviar configuracions   
 </span>
   
   </a>
@@ -1338,7 +1338,7 @@ md-nav__item--active">
   <a href="../../config_exec/next_steps/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Course summary   
+    Resum del curs   
 </span>
   
   </a>
@@ -1348,7 +1348,7 @@ md-nav__item--active">
   <a href="../../config_exec/survey/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Feedback survey   
+    Enquesta de valoració   
 </span>
   
   </a>
@@ -2961,7 +2961,7 @@ Ara veurem com configurar el comportament del pipeline mitjançant <code>nextflo
 <p class="admonition-title">Nota</p>
 <p>Aquesta configuració cobreix l'execució local en una sola màquina.
 Nextflow també admet planificadors HPC (SLURM, PBS, LSF) i executors al núvol (AWS Batch, Google Cloud Batch, Azure Batch), tots configurats mitjançant el mateix mecanisme <code>nextflow.config</code>.
-Consulteu la <a href="../../execution_config/01_packaging_and_execution/">Part 1: Adapt to your compute environment</a> del curs <a href="../../execution_config/">Execution Config</a> per a una guia completa d'aquestes opcions.</p>
+Consulteu la <a href="../../config_exec/01_packaging_and_execution/">Part 1: Adapt to your compute environment</a> del curs <a href="../../config_exec/">Configure Execution</a> per a una guia completa d'aquestes opcions.</p>
 </div>
 <h3 id="11-empaquetament-de-programari">1.1. Empaquetament de programari<a class="headerlink" href="#11-empaquetament-de-programari" title="Permanent link">&para;</a></h3>
 <p>L'empaquetament de programari és la manera com Nextflow subministra les eines reals que necessiten els vostres processos, ja sigui una imatge de contenidor, un entorn Conda o qualsevol altra cosa.</p>
@@ -2993,7 +2993,7 @@ Nextflow us permet configurar diverses coses sobre com s'executa cadascun: quant
 <a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Això limita cada procés a una sola CPU i 1 GB de memòria.</p>
-<p>Nextflow també us permet establir valors diferents per a processos individuals amb nom o grups de processos; aprendreu com fer-ho a la <a href="../../execution_config/02_resources_and_retries/#12-set-resource-allocations-for-a-specific-process">Part 2: Manage compute resources and failures</a> del curs <a href="../../execution_config/">Execution Config</a>.</p>
+<p>Nextflow també us permet establir valors diferents per a processos individuals amb nom o grups de processos; aprendreu com fer-ho a la <a href="../../config_exec/02_resources_and_retries/#12-set-resource-allocations-for-a-specific-process">Part 2: Manage compute resources and failures</a> del curs <a href="../../config_exec/">Configure Execution</a>.</p>
 <h3 id="13-parametres-del-pipeline">1.3. Paràmetres del pipeline<a class="headerlink" href="#13-parametres-del-pipeline" title="Permanent link">&para;</a></h3>
 <p>Els paràmetres són les entrades de línia de comandes del pipeline, els mateixos indicadors <code>--input</code>, <code>--batch</code> i <code>--character</code> que ja heu estat establint directament a la línia de comandes.
 Establir valors per defecte aquí significa que no els heu d'escriure cada vegada, tot i que, com veureu més endavant en aquesta part, hi ha un parell d'altres maneres de subministrar-los.</p>
@@ -3088,7 +3088,7 @@ Comproveu <code>results/test/</code>: el nom del lot ara forma part del camí de
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
 <p>Podeu activar diversos perfils alhora i utilitzar <code>nextflow config -profile &lt;nom&gt;,&lt;nom&gt;</code> per veure el resultat completament resolt abans d'executar res.
-La combinació de perfils i com Nextflow resol els conflictes entre ells es tracta en profunditat a la <a href="../../execution_config/03_profiles/">Part 3: Use profiles to switch configurations</a> del curs <a href="../../execution_config/">Execution Config</a>.</p>
+La combinació de perfils i com Nextflow resol els conflictes entre ells es tracta en profunditat a la <a href="../../config_exec/03_profiles/">Part 3: Use profiles to switch configurations</a> del curs <a href="../../config_exec/">Configure Execution</a>.</p>
 </div>
 <h3 id="conclusio">Conclusió<a class="headerlink" href="#conclusio" title="Permanent link">&para;</a></h3>
 <p>Sabeu per a què serveixen els elements més comuns d'un fitxer <code>nextflow.config</code> i com activar un perfil.</p>
