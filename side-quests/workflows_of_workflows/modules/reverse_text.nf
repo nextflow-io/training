@@ -12,6 +12,6 @@ process REVERSE_TEXT {
 
     script:
     """
-    cat '${input_file}' | rev > 'REVERSED-${input_file}'
+    cat ${input_file} | rev > REVERSED-${input_file}
     """
 }
