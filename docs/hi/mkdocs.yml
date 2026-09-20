@@ -20,10 +20,10 @@ extra:
     "Hello Nextflow": "डेवलपर्स"
   nav_title_overrides:
     nextflow_run/index.md: Nextflow Run
-    nfcore_run/index.md: Run nf-core
-    seqera_run/index.md: Run with Seqera
+    nfcore_use/index.md: Use nf-core
+    seqera_scale/index.md: Scale with Seqera
     hello_nextflow/index.md: Hello Nextflow
-    hello_nf-core/index.md: Build with nf-core
+    nfcore_build/index.md: Build with nf-core
     nf4_science/index.md: "विज्ञान के लिए Nextflow"
     nf4_science/genomics/index.md: "जीनोमिक्स"
     nf4_science/rnaseq/index.md: "RNAseq"
@@ -32,10 +32,11 @@ extra:
     envsetup/index.md: "प्रशिक्षण वातावरण"
   nav_child_title_overrides:
     nextflow_run/index.md: "अवलोकन"
-    nfcore_run/index.md: "अवलोकन"
-    seqera_run/index.md: "अवलोकन"
+    nfcore_use/index.md: "अवलोकन"
+    seqera_scale/index.md: "अवलोकन"
+    config_exec/index.md: "अवलोकन"
     hello_nextflow/index.md: "अवलोकन"
-    hello_nf-core/index.md: "अवलोकन"
+    nfcore_build/index.md: "अवलोकन"
     nf4_science/index.md: "अवलोकन"
     nf4_science/genomics/index.md: "अवलोकन"
     nf4_science/rnaseq/index.md: "अवलोकन"

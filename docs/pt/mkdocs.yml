@@ -21,10 +21,10 @@ extra:
     "Hello Nextflow": "Desenvolvedores"
   nav_title_overrides:
     nextflow_run/index.md: Nextflow Run
-    nfcore_run/index.md: Run nf-core
-    seqera_run/index.md: Run with Seqera
+    nfcore_use/index.md: Use nf-core
+    seqera_scale/index.md: Scale with Seqera
     hello_nextflow/index.md: Hello Nextflow
-    hello_nf-core/index.md: Build with nf-core
+    nfcore_build/index.md: Build with nf-core
     nf4_science/index.md: "Nextflow para Ciência"
     nf4_science/genomics/index.md: "Genômica"
     nf4_science/rnaseq/index.md: "RNAseq"
@@ -33,10 +33,11 @@ extra:
     envsetup/index.md: "Ambiente de Treinamento"
   nav_child_title_overrides:
     nextflow_run/index.md: "Visão Geral"
-    nfcore_run/index.md: "Visão Geral"
-    seqera_run/index.md: "Visão Geral"
+    nfcore_use/index.md: "Visão Geral"
+    seqera_scale/index.md: "Visão Geral"
+    config_exec/index.md: "Visão Geral"
     hello_nextflow/index.md: "Visão Geral"
-    hello_nf-core/index.md: "Visão Geral"
+    nfcore_build/index.md: "Visão Geral"
     nf4_science/index.md: "Visão Geral"
     nf4_science/genomics/index.md: "Visão Geral"
     nf4_science/rnaseq/index.md: "Visão Geral"
