@@ -20,10 +20,10 @@ extra:
     "Hello Nextflow": "Geliştiriciler"
   nav_title_overrides:
     nextflow_run/index.md: Nextflow Run
-    nfcore_run/index.md: Run nf-core
-    seqera_run/index.md: Run with Seqera
+    nfcore_use/index.md: Use nf-core
+    seqera_scale/index.md: Scale with Seqera
     hello_nextflow/index.md: Hello Nextflow
-    hello_nf-core/index.md: Build with nf-core
+    nfcore_build/index.md: Build with nf-core
     nf4_science/index.md: "Bilim için Nextflow"
     nf4_science/genomics/index.md: "Genomik"
     nf4_science/rnaseq/index.md: "RNAseq"
@@ -32,10 +32,11 @@ extra:
     envsetup/index.md: "Eğitim Ortamı"
   nav_child_title_overrides:
     nextflow_run/index.md: "Genel Bakış"
-    nfcore_run/index.md: "Genel Bakış"
-    seqera_run/index.md: "Genel Bakış"
+    nfcore_use/index.md: "Genel Bakış"
+    seqera_scale/index.md: "Genel Bakış"
+    config_exec/index.md: "Genel Bakış"
     hello_nextflow/index.md: "Genel Bakış"
-    hello_nf-core/index.md: "Genel Bakış"
+    nfcore_build/index.md: "Genel Bakış"
     nf4_science/index.md: "Genel Bakış"
     nf4_science/genomics/index.md: "Genel Bakış"
     nf4_science/rnaseq/index.md: "Genel Bakış"

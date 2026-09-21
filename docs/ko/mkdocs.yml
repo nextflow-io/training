@@ -19,10 +19,10 @@ extra:
     "Hello Nextflow": "개발자"
   nav_title_overrides:
     nextflow_run/index.md: Nextflow Run
-    nfcore_run/index.md: Run nf-core
-    seqera_run/index.md: Run with Seqera
+    nfcore_use/index.md: Use nf-core
+    seqera_scale/index.md: Scale with Seqera
     hello_nextflow/index.md: Hello Nextflow
-    hello_nf-core/index.md: Build with nf-core
+    nfcore_build/index.md: Build with nf-core
     nf4_science/index.md: "과학을 위한 Nextflow"
     nf4_science/genomics/index.md: "유전체학"
     nf4_science/rnaseq/index.md: "RNAseq"
@@ -31,10 +31,11 @@ extra:
     envsetup/index.md: "교육 환경"
   nav_child_title_overrides:
     nextflow_run/index.md: "개요"
-    nfcore_run/index.md: "개요"
-    seqera_run/index.md: "개요"
+    nfcore_use/index.md: "개요"
+    seqera_scale/index.md: "개요"
+    config_exec/index.md: "개요"
     hello_nextflow/index.md: "개요"
-    hello_nf-core/index.md: "개요"
+    nfcore_build/index.md: "개요"
     nf4_science/index.md: "개요"
     nf4_science/genomics/index.md: "개요"
     nf4_science/rnaseq/index.md: "개요"
