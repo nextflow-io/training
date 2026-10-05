@@ -1848,4 +1848,7 @@ The "meta map + data file" tuple pattern is a core convention in Nextflow, offer
 
 ## What's next?
 
+Meta maps don't declare which keys they hold, so a missing or misspelled key quietly becomes `null`.
+The [Types and Records](../types_and_records/index.md) side quest replaces meta maps and `[meta, file]` tuples with records, the typed way to carry metadata, so those mistakes are caught instead.
+
 Return to the [menu of Side Quests](../index.md) or click the button in the bottom right of the page to move on to the next topic in the list.
