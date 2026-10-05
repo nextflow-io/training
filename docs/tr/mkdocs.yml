@@ -45,5 +45,5 @@ extra:
   nav_section_separators:
     side_quests/dev_environment/index.md: "Geliştirici Araçları ve İpuçları"
     side_quests/working_with_files/index.md: "Veri Akışına Derinlemesine Bakış"
-    side_quests/workflows_of_workflows/index.md: "Modüler Mimari Uygulamada"
+    side_quests/composing_pipelines/index.md: "Modüler Mimari Uygulamada"
     side_quests/nf_test/index.md: "Nextflow'un Genişletilmiş Evreni"
