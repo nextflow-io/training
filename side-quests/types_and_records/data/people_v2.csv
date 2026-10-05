@@ -1,5 +1,5 @@
-id,name,language,salutation
-alice,alice,en,Hello
-bruno,BRUNO,fr,Bonjour
-chiara,Chiara,it,Ciao
-dieter,dieter,de,Hallo
+id,name,salutation
+alice,Alice,Hello
+bruno,Bruno,Bonjour
+chiara,Chiara,Ciao
+dieter,Dieter,Hallo

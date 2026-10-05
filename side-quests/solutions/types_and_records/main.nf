@@ -5,17 +5,11 @@ nextflow.enable.types = true
 include { SAY_HELLO } from './modules/say_hello.nf'
 include { SHOUT } from './modules/shout.nf'
 include { COLLECT_GREETINGS } from './modules/collect_greetings.nf'
+include { Person ; Greeting ; Shouted } from './types.nf'
 
 params {
-    input: Path = 'data/people.csv'
+    input: Channel<Person>
     batch: String = 'batch'
-}
-
-record Person {
-    id: String
-    name: String
-    language: String
-    greeting: String
 }
 
 workflow GREET {
@@ -26,27 +20,17 @@ workflow GREET {
     main:
     greetings = SAY_HELLO(people)
     shouted = SHOUT(greetings)
-    collected = COLLECT_GREETINGS(shouted.map { r -> r.shouted }.collect(), batch)
+    collected = COLLECT_GREETINGS(shouted.map { s -> s.shouted }.collect(), batch)
 
     emit:
-    greetings: Channel<Record> = greetings
-    shouted: Channel<Record> = shouted
+    greetings: Channel<Greeting> = greetings
+    shouted: Channel<Shouted> = shouted
     collected: Value<Path> = collected
 }
 
 workflow {
     main:
-    // Read the CSV into a channel of records, one per person
-    people = channel.of(params.input)
-        .flatMap { csv -> csv.splitCsv(header: true) }
-        .map { row ->
-            record(id: row.id, name: row.name, language: row.language, greeting: row.greeting)
-        }
-        .map { person ->
-            person + record(name: person.name.toLowerCase().capitalize())
-        }
-
-    res = GREET(people, channel.value(params.batch))
+    res = GREET(params.input, channel.value(params.batch))
 
     publish:
     greetings = res.greetings

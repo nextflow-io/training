@@ -15,7 +15,7 @@ workflow {
     people = channel.fromPath(params.input)
         .splitCsv(header: true)
         .map { row ->
-            [id: row.id, name: row.name, language: row.language, greeting: row.greeting]
+            [id: row.id, name: row.name, greeting: row.greeting]
         }
 
     greetings = SAY_HELLO(people)

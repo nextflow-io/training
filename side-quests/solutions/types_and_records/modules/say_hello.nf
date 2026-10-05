@@ -1,19 +1,21 @@
 nextflow.enable.types = true
 
+include { Person } from '../types.nf'
+
 /*
  * Write a personalised greeting to a file
  */
 process SAY_HELLO {
-    tag "${id}"
+    tag "${person.id}"
 
     input:
-    record(id: String, name: String, greeting: String)
+    person: Person
 
     output:
-    record(id: id, greeting_file: file("${id}.txt"))
+    person + record(greeting_file: file("${person.id}.txt"))
 
     script:
     """
-    echo '${greeting}, ${name}!' > ${id}.txt
+    echo '${person.greeting}, ${person.name}!' > ${person.id}.txt
     """
 }
