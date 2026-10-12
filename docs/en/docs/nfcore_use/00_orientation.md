@@ -76,16 +76,36 @@ tree .
 
     ```console
     .
+    ├── broken_samplesheet_1.csv
+    ├── broken_samplesheet_2.csv
     ├── custom.config
+    ├── data
+    │   └── reads
+    │       ├── KO_1_S3_L001_R1_001.fastq.gz
+    │       ├── KO_1_S3_L001_R2_001.fastq.gz
+    │       ├── KO_2_S4_L001_R1_001.fastq.gz
+    │       ├── KO_2_S4_L001_R2_001.fastq.gz
+    │       ├── WT_1_S1_L001_R1_001.fastq.gz
+    │       ├── WT_1_S1_L001_R2_001.fastq.gz
+    │       ├── WT_1_S1_L002_R1_001.fastq.gz
+    │       ├── WT_1_S1_L002_R2_001.fastq.gz
+    │       ├── WT_2_S2_L001_R1_001.fastq.gz
+    │       └── WT_2_S2_L001_R2_001.fastq.gz
     ├── laptop.config
     ├── malformed_samplesheet.csv
-    └── my_params.yml
+    ├── my_params.yml
+    └── solutions
+        ├── samplesheet.csv
+        └── tuned.config
     ```
 
 - **The `laptop.config` file** is a configuration file we'll use in section 4 to cap resource usage when running a production-scale pipeline locally.
   You can ignore it until then.
 - **The `my_params.yml`, `malformed_samplesheet.csv`, and `custom.config` files** are used in Part 2, to demonstrate setting parameters from a file, input validation, and process-level configuration overrides.
   You can ignore them until then too.
+- **The `data/reads/` directory** contains FASTQ files for a small RNA-seq experiment, used in Part 5 to write a samplesheet.
+- **The `broken_samplesheet_1.csv` and `broken_samplesheet_2.csv` files** contain errors to diagnose and fix in Part 6.
+- **The `solutions/` directory** contains the completed samplesheet from Part 5 and the tuned configuration file from Part 7.
 
 ## Readiness checklist
 
