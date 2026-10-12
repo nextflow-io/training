@@ -1351,6 +1351,7 @@ Nextflow checks each value against that declaration.
 !!! note "Record types are a new feature"
 
     Record types were introduced in Nextflow 26.04 and require the `nextflow.enable.types` flag.
+    On 26.04, Nextflow prints a warning that static typing is a preview feature.
     A future training course will cover them in detail.
 
 Here is the same workflow written with a record:
@@ -1398,12 +1399,43 @@ The changes from the original are:
 - `record(id: ..., file_name: ...)` creates each record in the channel
 - `sample.id` accesses a field by name instead of by position
 
-If a record is missing a field, Nextflow names it in the error.
-For example, removing `id` from the second record fails with:
+If a record is missing a field, Nextflow names the field in the error.
+To see this, remove `id` from the second record:
 
-```console
-input field `id` at index 0 cannot be null -- append `?` to the type annotation to mark it as nullable
+```groovy title="bad_channel_shape.nf" hl_lines="3" linenums="26"
+    input_ch = channel.of(
+      record(id: 'sample1', file_name: 'file1.txt'),
+      record(file_name: 'file2.txt'),
+      record(id: 'sample3', file_name: 'file3.txt')
+    )
 ```
+
+Run the workflow:
+
+```bash
+nextflow run bad_channel_shape.nf
+```
+
+??? failure "Command output"
+
+    ```console
+     N E X T F L O W   ~  version 26.10.0
+
+    Launching `bad_channel_shape.nf` [condescending_sammet] revision: 15c9f9aa87
+
+    ERROR ~ Error executing process > 'PROCESS_FILES (2)'
+
+    Caused by:
+      [PROCESS_FILES (2)] input field `id` at index 0 cannot be null -- append `?` to the type annotation to mark it as nullable
+
+
+    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+
+     -- Check '.nextflow.log' file for details
+    ```
+
+This error requires Nextflow 26.10 or later.
+On Nextflow 26.04, the task runs with `id` set to `null` and writes `null_output.txt`.
 
 ### 2.4. Channel Debugging Techniques
 
