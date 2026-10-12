@@ -69,13 +69,3 @@ Die Ergebnisse werden in einem Verzeichnis namens `results/` veröffentlicht, un
 ```
 
 Je nach Kurs, in dem die pipeline vorgestellt wird, können kleine Abweichungen in den Details auftreten.
-
----
-
-<div markdown class="homepage_logos">
-
-![Seqera](../assets/img/seqera_logo.png#only-light)
-
-![Seqera](../assets/img/seqera_logo_dark.png#only-dark)
-
-</div>

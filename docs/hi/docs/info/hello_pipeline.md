@@ -69,13 +69,3 @@ Hello workflow एक CSV फ़ाइल लेता है जिसमें
 ```
 
 पाठ्यक्रम के आधार पर जिसमें pipeline प्रदर्शित है, तुम्हें विशिष्टताओं में कुछ भिन्नताएँ मिल सकती हैं।
-
----
-
-<div markdown class="homepage_logos">
-
-![Seqera](../assets/img/seqera_logo.png#only-light)
-
-![Seqera](../assets/img/seqera_logo_dark.png#only-dark)
-
-</div>

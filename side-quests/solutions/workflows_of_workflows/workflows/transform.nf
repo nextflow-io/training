@@ -1,9 +1,11 @@
+#!/usr/bin/env nextflow
+
 include { SAY_HELLO_UPPER } from '../modules/say_hello_upper'
 include { REVERSE_TEXT } from '../modules/reverse_text'
 
 workflow TRANSFORM_WORKFLOW {
     take:
-    input_ch // Input channel with messages
+    input_ch // Input channel with greetings
 
     main:
     // Apply transformations in sequence

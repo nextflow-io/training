@@ -29,30 +29,37 @@ additional_information:
 **Side Quests sind eigenständige Mini-Kurse, die tiefer in spezifische Nextflow-Themen eintauchen.**
 
 Jede Side Quest kann unabhängig und in beliebiger Reihenfolge absolviert werden – je nach deinen Interessen und Bedürfnissen.
+Zusammen decken sie die Fähigkeiten ab, die du brauchst, um von einfachen Pipelines zu produktionsreifen Workflows zu gelangen.
 
 <!-- additional_information -->
 
-## Kursübersicht
+### Nach Thema durchsuchen
 
-Wenn du zum ersten Mal die Side Quests erkundest, schau dir zuerst die [Orientation](./orientation.md)-Seite an. Dort findest du einen Überblick über die Trainingsumgebung und die Materialien.
+Wenn du zum ersten Mal an einem unserer Trainings teilnimmst, schau dir zuerst die Seite [Erste Schritte](./orientation.md) an. Dort findest du einen Überblick über die Trainingsumgebung und die Materialien.
+Ansonsten kannst du direkt in die Quest einsteigen, die dich am meisten anspricht.
 
-### Side Quests
-
-| Side Quest                                                              | Zusammenfassung                                                                      | Geschätzte Zeit |
-| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | --------------- |
-| [Development Environment](./dev_environment/index.md)                   | Eine produktive lokale Nextflow-Entwicklungsumgebung einrichten und konfigurieren    | 45 Min          |
-| [Essential Scripting Patterns](./essential_scripting_patterns/index.md) | Fortgeschrittene Scripting-Techniken für häufige Workflow-Herausforderungen          | 90 Min          |
-| [File Input Processing](./working_with_files/index.md)                  | Dateiverarbeitung, Pfadoperationen und Organisation von Ausgaben                     | 45 Min          |
-| [Metadata and Meta Maps](./metadata/index.md)                           | Metadaten-Maps verwenden, um Probeninformationen zu verfolgen und weiterzugeben      | 45 Min          |
-| [Splitting and Grouping](./splitting_and_grouping/index.md)             | Techniken zum Aufteilen und Neugruppieren von Datenkanälen                           | 45 Min          |
-| [Testing with nf-test](./nf_test/index.md)                              | Tests für Nextflow-Workflows schreiben und ausführen                                 | 1 Stunde        |
-| [Troubleshooting Workflows](./debugging/index.md)                       | Häufige Workflow-Fehler identifizieren und beheben                                   | 1 Stunde        |
-| [Workflows of Workflows](./workflows_of_workflows/index.md)             | Komplexe Pipelines aus wiederverwendbaren benannten Workflow-Modulen zusammenstellen | 30 Min          |
-| [Plugin Development](./plugin_development/index.md)                     | Nextflow-Plugins verwenden und entwickeln                                            | 3 Stunden       |
+<table>
+<thead>
+<tr><th>Side Quest</th><th>Zusammenfassung</th><th>Geschätzte Zeit</th></tr>
+</thead>
+<tbody>
+<tr><th colspan="3">Entwickler-Tools &amp; Tricks</th></tr>
+<tr><td><a href="./dev_environment/">Development Environment</a></td><td>Eine produktive lokale Nextflow-Entwicklungsumgebung einrichten und konfigurieren</td><td>45 Min</td></tr>
+<tr><td><a href="./debugging/">Troubleshooting Workflows</a></td><td>Häufige Workflow-Fehler identifizieren und beheben</td><td>1 Stunde</td></tr>
+<tr><td><a href="./essential_scripting_patterns/">Essential Scripting Patterns</a></td><td>Fortgeschrittene Scripting-Techniken für häufige Workflow-Herausforderungen</td><td>90 Min</td></tr>
+<tr><th colspan="3">Tiefer Einblick in den Datenfluss</th></tr>
+<tr><td><a href="./working_with_files/">File Input Processing</a></td><td>Dateiverarbeitung, Pfadoperationen und Organisation von Ausgaben</td><td>45 Min</td></tr>
+<tr><td><a href="./metadata/">Metadata and Meta Maps</a></td><td>Metadaten-Maps verwenden, um Probeninformationen zu verfolgen und weiterzugeben</td><td>45 Min</td></tr>
+<tr><td><a href="./splitting_and_grouping/">Splitting and Grouping</a></td><td>Techniken zum Aufteilen und Neugruppieren von Datenkanälen</td><td>45 Min</td></tr>
+<tr><th colspan="3">Modulare Architektur in der Praxis</th></tr>
+<tr><td><a href="./workflows_of_workflows/">Workflows of Workflows</a></td><td>Komplexe Pipelines aus wiederverwendbaren benannten Workflow-Modulen zusammenstellen</td><td>30 Min</td></tr>
+<tr><th colspan="3">Das erweiterte Nextflow-Universum</th></tr>
+<tr><td><a href="./nf_test/">Testing with nf-test</a></td><td>Tests für Nextflow-Workflows schreiben und ausführen</td><td>1 Stunde</td></tr>
+<tr><td><a href="./plugin_development/">Plugin Development</a></td><td>Nextflow-Plugins verwenden und entwickeln</td><td>3 Stunden</td></tr>
+</tbody>
+</table>
 
 [Loslegen :material-arrow-right:](orientation.md){ .md-button .md-button--primary }
 
 <!-- Clearfix for float -->
 <div style="content: ''; clear: both; display: table;"></div>
-
-Lass uns wissen, welche anderen Themen du hier gerne behandelt sehen würdest, indem du im [Training-Bereich](https://community.seqera.io/c/training/) des Community-Forums postest.

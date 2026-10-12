@@ -69,14 +69,29 @@ nextflow run hello-modules.nf
 ??? success "Saída do comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [hopeful_avogadro] DSL2 - revision: b09af1237d
+    Launching `hello-modules.nf` [hopeful_avogadro] revision: b09af1237d
 
     executor >  local (7)
-    [0f/8795c9] sayHello (3)       [100%] 3 of 3 ✔
-    [6a/eb2510] convertToUpper (3) [100%] 3 of 3 ✔
-    [af/479117] collectGreetings   [100%] 1 of 1 ✔
+    [0f/8795c9] sayHello (3)       | 3 of 3 ✔
+    [6a/eb2510] convertToUpper (3) | 3 of 3 ✔
+    [af/479117] collectGreetings   | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_modules/Hola-output.txt
+        - hello_modules/Bonjour-output.txt
+        - hello_modules/Hello-output.txt
+      uppercased:
+        - hello_modules/UPPER-Hola-output.txt
+        - hello_modules/UPPER-Bonjour-output.txt
+        - hello_modules/UPPER-Hello-output.txt
+      collected: hello_modules/COLLECTED-batch-output.txt
+      batch_report: hello_modules/batch-report.txt
     ```
 
 Como anteriormente, você encontrará os arquivos de saída no diretório especificado no bloco `output` (aqui, `results/hello_modules/`).
@@ -172,7 +187,7 @@ Vamos inserir isso acima do bloco `params` e preenchê-lo adequadamente.
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -184,7 +199,7 @@ Vamos inserir isso acima do bloco `params` e preenchê-lo adequadamente.
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -202,13 +217,28 @@ nextflow run hello-modules.nf -resume
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [romantic_poisson] DSL2 - revision: 96edfa9ad3
+    Launching `hello-modules.nf` [romantic_poisson] revision: 96edfa9ad3
 
     [f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
     [3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_modules/Hello-output.txt
+        - hello_modules/Bonjour-output.txt
+        - hello_modules/Hola-output.txt
+      uppercased:
+        - hello_modules/UPPER-Hola-output.txt
+        - hello_modules/UPPER-Bonjour-output.txt
+        - hello_modules/UPPER-Hello-output.txt
+      collected: hello_modules/COLLECTED-batch-output.txt
+      batch_report: hello_modules/batch-report.txt
     ```
 
 Isso deve ser executado muito rapidamente porque tudo está em cache.
@@ -220,7 +250,7 @@ O Nextflow reconheceu que ainda é todo o mesmo trabalho a ser feito, mesmo que 
 
 Você sabe como extrair um processo para um módulo local e você sabe que fazer isso não quebra a capacidade de retomada do fluxo de trabalho.
 
-### Qual é o próximo passo?
+### O que vem a seguir?
 
 Pratique criando mais módulos.
 Uma vez que você fez um, você pode fazer um milhão mais...
@@ -278,7 +308,7 @@ Insira a declaração de importação acima do bloco `params` e preencha-a adequ
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -293,7 +323,7 @@ Insira a declaração de importação acima do bloco `params` e preencha-a adequ
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -311,13 +341,28 @@ nextflow run hello-modules.nf -resume
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [nauseous_heisenberg] DSL2 - revision: a04a9f2da0
+    Launching `hello-modules.nf` [nauseous_heisenberg] revision: a04a9f2da0
 
     [c9/763d42] sayHello (3)       | 3 of 3, cached: 3 ✔
     [60/bc6831] convertToUpper (3) | 3 of 3, cached: 3 ✔
     [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_modules/Hola-output.txt
+        - hello_modules/Hello-output.txt
+        - hello_modules/Bonjour-output.txt
+      uppercased:
+        - hello_modules/UPPER-Bonjour-output.txt
+        - hello_modules/UPPER-Hello-output.txt
+        - hello_modules/UPPER-Hola-output.txt
+      collected: hello_modules/COLLECTED-batch-output.txt
+      batch_report: hello_modules/batch-report.txt
     ```
 
 Isso ainda deve produzir a mesma saída de antes.
@@ -381,7 +426,7 @@ Insira a declaração de importação acima do bloco `params` e preencha-a adequ
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -397,7 +442,7 @@ Insira a declaração de importação acima do bloco `params` e preencha-a adequ
     * Pipeline parameters
     */
     params {
-        greeting: Path = 'data/greetings.csv'
+        input: Path = 'data/greetings.csv'
         batch: String = 'batch'
     }
     ```
@@ -415,13 +460,28 @@ nextflow run hello-modules.nf -resume
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-modules.nf` [friendly_coulomb] DSL2 - revision: 7aa2b9bc0f
+    Launching `hello-modules.nf` [friendly_coulomb] revision: 7aa2b9bc0f
 
     [f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
     [3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_modules/Hello-output.txt
+        - hello_modules/Bonjour-output.txt
+        - hello_modules/Hola-output.txt
+      uppercased:
+        - hello_modules/UPPER-Bonjour-output.txt
+        - hello_modules/UPPER-Hello-output.txt
+        - hello_modules/UPPER-Hola-output.txt
+      collected: hello_modules/COLLECTED-batch-output.txt
+      batch_report: hello_modules/batch-report.txt
     ```
 
 Isso ainda deve produzir a mesma saída de antes.
@@ -435,7 +495,7 @@ Parabéns, você fez todo esse trabalho e absolutamente nada mudou na forma como
 Brincadeiras à parte, agora seu código é mais modular, e se você decidir escrever outro pipeline que chama um desses processos, você só precisa digitar uma curta declaração `include` para usar o módulo relevante.
 Isso é melhor do que copiar e colar o código, porque se mais tarde você decidir melhorar o módulo, todos os seus pipelines herdarão as melhorias.
 
-### Qual é o próximo passo?
+### O que vem a seguir?
 
 Faça uma pequena pausa se quiser.
 

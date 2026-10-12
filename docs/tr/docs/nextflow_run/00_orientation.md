@@ -22,24 +22,23 @@ Bu kursu kendi başınıza çalışıyorsanız, daha fazla ayrıntı için [orta
 
 ### Versiyon gereksinimleri
 
-Bu eğitim, v2 sözdizimi ayrıştırıcısı **ETKİNLEŞTİRİLMİŞ** olarak Nextflow 25.10.2 veya üstü için tasarlanmıştır.
+Bu kurs, v2 sözdizimi ayrıştırıcısı etkin (25.10+ sürümünde varsayılan) olarak Nextflow 25.10.2 veya üstünü gerektirir.
 Yerel veya özel bir ortam kullanıyorsanız, [burada](../info/nxf_versions.md) belgelendiği gibi doğru ayarları kullandığınızdan emin olun.
 
 ## Çalışmaya hazırlanın
 
-Codespace'iniz çalışmaya başladığında, eğitime dalmadan önce yapmanız gereken iki şey var: bu kursa özel çalışma dizininizi ayarlayın ve sağlanan materyallere göz atın.
+Codespace'iniz çalışmaya başladığında, eğitime dalmadan önce yapmanız gereken iki şey var: çalışma dizininizi ayarlayın ve sağlanan materyallere göz atın.
 
 ### Çalışma dizinini ayarlayın
 
-Varsayılan olarak, codespace tüm eğitim kurslarının kökünde çalışma dizini ayarlanmış şekilde açılır; ancak bu kurs için `nextflow-run/` dizininde çalışacağız.
-
-Şimdi terminalde bu komutu çalıştırarak dizini değiştirin:
+Varsayılan olarak, codespace tüm eğitim kurslarının kökünde açılır.
+Bu kurs için `nextflow-run/` dizinine geçin:
 
 ```bash
 cd nextflow-run/
 ```
 
-VSCode'u bu dizine odaklanacak şekilde ayarlayabilirsiniz; böylece dosya gezgini kenar çubuğunda yalnızca ilgili dosyalar görünür:
+Ardından VSCode'u bu dizine odaklanacak şekilde ayarlayın; böylece dosya gezgini kenar çubuğunda yalnızca ilgili dosyalar görünür:
 
 ```bash
 code .
@@ -53,16 +52,10 @@ code .
     cd /workspaces/training/nextflow-run
     ```
 
-Şimdi içeriğine bir göz atalım.
-
 ### Sağlanan materyalleri keşfedin
 
-Bu dizinin içeriğini eğitim çalışma alanının sol tarafındaki dosya gezginini kullanarak keşfedebilirsiniz.
-Alternatif olarak, `tree` komutunu kullanabilirsiniz.
-
-Kurs boyunca, dizin yapısını ve içeriğini okunabilir bir biçimde temsil etmek için `tree` çıktısını kullanıyoruz; bazen netlik için küçük değişikliklerle.
-
-Burada ikinci seviyeye kadar bir içindekiler tablosu oluşturuyoruz:
+Kurs materyallerini soldaki dosya gezginini kullanarak veya `tree` komutuyla keşfedebilirsiniz.
+Tam yapıyı görmek için terminalden şunu çalıştırın:
 
 ```bash
 tree . -L 2
@@ -73,41 +66,26 @@ tree . -L 2
     ```console
     .
     ├── 1-hello.nf
-    ├── 2a-inputs.nf
-    ├── 2b-multistep.nf
-    ├── 2c-modules.nf
-    ├── 2d-container.nf
-    ├── 3-main.nf
+    ├── 2-inputs.nf
     ├── data
+    │   ├── greetings-extended.csv
     │   └── greetings.csv
+    ├── main.nf
     ├── modules
     │   ├── collectGreetings.nf
     │   ├── convertToUpper.nf
     │   ├── cowpy.nf
     │   └── sayHello.nf
-    ├── nextflow.config
-    ├── solutions
-    │   ├── 3-main.nf
-    │   ├── modules
-    │   └── nextflow.config
-    ├── test-params.json
-    └── test-params.yaml
+    └── nextflow.config
     ```
 
-Bölümü genişletmek ve içeriğini görüntülemek için renkli kutuya tıklayın.
-Beklenen komut çıktısının yanı sıra dizin ve dosya içeriğini özlü bir şekilde görüntülemek için bu tür daraltılabilir bölümler kullanıyoruz.
+**`.nf` dosyaları**, artan karmaşıklıkta iş akışı betikleridir ve kurs boyunca bu sırayla kullanılır.
 
-- **`.nf` dosyaları**, kursun hangi bölümünde kullanıldıklarına göre numaralandırılmış iş akışı betikleridir.
+**`data/`** dizini, 2. bölümden itibaren kullanacağımız CSV girdi dosyalarını içerir.
 
-- **`nextflow.config` dosyası**, minimum ortam özelliklerini ayarlayan bir yapılandırma dosyasıdır.
-  Şimdilik görmezden gelebilirsiniz.
+**`modules/`** dizini, `main.nf` tarafından kullanılan süreç tanımlarını içerir.
 
-- **`data/` altındaki `greetings.csv` dosyası**, kursun büyük bölümünde kullanacağımız girdi verilerini içerir. İlk kez tanıttığımız Bölüm 2'de (Pipeline'ları çalıştırma) açıklanmıştır.
-
-- **`test-params.*`** dosyaları, Bölüm 3'te (Yapılandırma) kullanacağımız yapılandırma dosyalarıdır. Şimdilik görmezden gelebilirsiniz.
-
-- **`solutions` dizini**, kursu tamamlamanın sonucunda oluşan iş akışının ve yardımcı dosyalarının (yapılandırma ve modüller) son halini içerir.
-  Çalışmanızı kontrol etmek ve herhangi bir sorunu gidermek için referans olarak kullanılması amaçlanmıştır.
+**`nextflow.config`** dosyası, minimum ortam özelliklerini ayarlayan bir yapılandırma dosyasıdır. Şimdilik görmezden gelebilirsiniz; 4. bölümde üzerinden geçeceğiz.
 
 ## Hazırlık kontrol listesi
 
@@ -119,4 +97,4 @@ Dalmaya hazır olduğunuzu mu düşünüyorsunuz?
 
 Tüm kutuları işaretleyebiliyorsanız, hazırsınız.
 
-**[Bölüm 1: Temel İşlemleri Çalıştırma](./01_basics.md) bölümüne devam etmek için bu sayfanın sağ alt köşesindeki oka tıklayın.**
+**[Bölüm 1: Nextflow'u Çalıştırma](./01_run_nextflow.md) bölümüne devam etmek için bu sayfanın sağ alt köşesindeki oka tıklayın.**

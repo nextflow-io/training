@@ -154,7 +154,7 @@ Aplica estos cambios a `main.nf`:
 
 === "Después"
 
-    ```groovy title="main.nf" linenums="2" hl_lines="2-6"
+    ```groovy title="main.nf" linenums="2" hl_lines="1-6"
         ch_samples = channel.fromPath("./data/samplesheet.csv")
             .splitCsv(header: true)
             .map{ row ->
@@ -178,9 +178,9 @@ nextflow run main.nf
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9
+    Launching `main.nf` [wise_venter] revision: 9211c186b2
 
     [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
@@ -234,9 +234,9 @@ nextflow run main.nf
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [admiring_brown] DSL2 - revision: 194d61704d
+    Launching `main.nf` [high_knuth] revision: bc0db74ccc
 
     [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
@@ -297,9 +297,9 @@ nextflow run main.nf
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74
+    Launching `main.nf` [shrivelled_rubens] revision: 636aae17ff
 
     [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
@@ -340,21 +340,25 @@ nextflow run main.nf
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
+    Launching `main.nf` [elated_jepsen] revision: c96ba8f734
 
-    Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
     Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
     Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
     Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+    Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
     Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
     Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
 Hemos separado las muestras normales y tumorales en dos canales diferentes, y usamos un closure proporcionado a `view()` para etiquetarlas de manera diferente en la salida: `#!groovy ch_tumor_samples.view{'Tumor sample: ' + it}`.
+
+!!! note "Nota"
+
+    El orden relativo de las líneas `Normal sample:` y `Tumor sample:` puede variar entre ejecuciones, ya que las dos llamadas a `view()` pertenecen a canales independientes que se ejecutan de forma concurrente. El orden de las muestras _dentro_ de cada etiqueta siempre se preserva.
 
 ### Conclusión
 
@@ -389,18 +393,18 @@ nextflow run main.nf
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
+    Launching `main.nf` [exotic_bassi] revision: c96ba8f734
 
     Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
     Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
     Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-    Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
 Podemos ver que el campo `id` es el primer elemento en cada mapa de metadatos. Para que `join` funcione, debemos aislar el campo `id` en cada tupla. Después de eso, podemos simplemente usar el operador `join` para combinar los dos canales.
@@ -444,18 +448,18 @@ nextflow run main.nf
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d
+    Launching `main.nf` [compassionate_monod] revision: 3132715893
 
-    Tumor sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    Tumor sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
     Normal sample: [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
     Normal sample: [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-    Tumor sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    Tumor sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     Normal sample: [patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
     Normal sample: [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+    Tumor sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    Tumor sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    Tumor sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    Tumor sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
 Puede ser sutil, pero deberías poder ver que el primer elemento en cada tupla es el campo `id`.
@@ -502,9 +506,9 @@ nextflow run main.nf
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [soggy_wiles] DSL2 - revision: 3bc1979889
+    Launching `main.nf` [desperate_shaw] revision: 5508db4b8b
 
     [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -531,7 +535,7 @@ A continuación, consideraremos la situación en la que quieres unir por múltip
 
 ### 3.2. Unir por múltiples campos
 
-Tenemos 2 réplicas para la muestra A, pero solo 1 para las muestras B y C. En este caso pudimos unirlas efectivamente usando el campo `id`, pero ¿qué pasaría si estuvieran desincronizadas? ¡Podríamos mezclar las muestras normales y tumorales de diferentes réplicas!
+Tenemos 2 réplicas para patientA, pero solo 1 para patientB y patientC. En este caso pudimos unirlas efectivamente usando el campo `id`, pero ¿qué pasaría si estuvieran desincronizadas? ¡Podríamos mezclar las muestras normales y tumorales de diferentes réplicas!
 
 Para evitar esto, podemos unir por múltiples campos. En realidad hay múltiples formas de lograr esto, pero nos centraremos en crear una nueva clave de unión que incluya tanto el `id` de la muestra como el número de `replicate`.
 
@@ -568,9 +572,9 @@ nextflow run main.nf
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [prickly_wing] DSL2 - revision: 3bebf22dee
+    Launching `main.nf` [lonely_solvay] revision: 3c97c335d2
 
     [[patientA, 1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     [[patientA, 2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -617,9 +621,9 @@ nextflow run main.nf
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [reverent_wing] DSL2 - revision: 847016c3b7
+    Launching `main.nf` [scruffy_swanson] revision: a8478c9d0a
 
     [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
     [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
@@ -704,15 +708,17 @@ nextflow run main.nf
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [angry_meninsky] DSL2 - revision: 2edc226b1d
+    Launching `main.nf` [admiring_turing] revision: 06c4cbbb2e
 
-    [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-    [[id:patientB, repeat:1], [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    [[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+    [[id:patientA, repeat:1], [id:patientA, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [id:patientA, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]
+    [[id:patientA, repeat:2], [id:patientA, repeat:2, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [id:patientA, repeat:2, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]
+    [[id:patientB, repeat:1], [id:patientB, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [id:patientB, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]
+    [[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_tumor.bam]
     ```
+
+    Dado que el closure ahora envuelve cada ruta con `file()`, las entradas de archivo aparecen como rutas absolutas resueltas en lugar de los nombres de archivo simples de la hoja de muestras.
 
 Usar un closure con nombre nos permite reutilizar la misma transformación en múltiples lugares, reduciendo el riesgo de errores y haciendo el código más legible y fácil de mantener.
 
@@ -723,21 +729,21 @@ Tenemos muchos datos duplicados en nuestro workflow. Cada elemento en las muestr
 ```groovy
 [
   [
-    "id": "sampleC",
+    "id": "patientC",
     "repeat": "1",
   ],
   [
-    "id": "sampleC",
+    "id": "patientC",
     "repeat": "1",
     "type": "normal",
   ],
-  "sampleC_rep1_normal.bam"
+  "patientC_rep1_normal.bam",
   [
-    "id": "sampleC",
+    "id": "patientC",
     "repeat": "1",
     "type": "tumor",
   ],
-  "sampleC_rep1_tumor.bam"
+  "patientC_rep1_tumor.bam"
 ]
 ```
 
@@ -766,6 +772,10 @@ nextflow run main.nf
 ??? success "Salida del comando"
 
     ```console
+    N E X T F L O W   ~  version 26.04.4
+
+    Launching `main.nf` [scruffy_tuckerman] revision: 791ad3c1fb
+
     [[id:patientA, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]
     [[id:patientA, repeat:2], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]
     [[id:patientB, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]
@@ -803,9 +813,9 @@ nextflow run main.nf
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [confident_leavitt] DSL2 - revision: a2303895bd
+    Launching `main.nf` [intergalactic_lagrange] revision: 8c8750a19d
 
     [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
     [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
@@ -881,9 +891,9 @@ nextflow run main.nf
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [mighty_tesla] DSL2 - revision: ae013ab70b
+    Launching `main.nf` [lethal_northcutt] revision: 09667ddd59
 
     [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr1]
     [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr2]
@@ -963,9 +973,9 @@ nextflow run main.nf
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd
+    Launching `main.nf` [hungry_engelbart] revision: 45db6a7dd7
 
     [[id:patientA, repeat:1, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
     [[id:patientA, repeat:1, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
@@ -996,7 +1006,7 @@ En esta sección, has aprendido:
 
 ## 5. Agregar muestras usando `groupTuple`
 
-En las secciones anteriores, aprendimos cómo dividir datos de un archivo de entrada y filtrar por campos específicos (en nuestro caso muestras normales y tumorales). Pero esto solo cubre un tipo de unión. ¿Qué pasa si queremos agrupar muestras por un atributo específico? Por ejemplo, en lugar de unir pares normal-tumor coincidentes, podríamos querer procesar todas las muestras de "sampleA" juntas independientemente de su tipo. Este patrón es común en workflows de bioinformática donde puedes querer procesar muestras relacionadas por separado por razones de eficiencia antes de comparar o combinar los resultados al final.
+En las secciones anteriores, aprendimos cómo dividir datos de un archivo de entrada y filtrar por campos específicos (en nuestro caso muestras normales y tumorales). Pero esto solo cubre un tipo de unión. ¿Qué pasa si queremos agrupar muestras por un atributo específico? Por ejemplo, en lugar de unir pares normal-tumor coincidentes, podríamos querer procesar todas las muestras de "patientA" juntas independientemente de su tipo. Este patrón es común en workflows de bioinformática donde puedes querer procesar muestras relacionadas por separado por razones de eficiencia antes de comparar o combinar los resultados al final.
 
 Nextflow incluye métodos integrados para hacer esto, el principal que veremos es `groupTuple`.
 
@@ -1008,7 +1018,7 @@ El primer paso es similar a lo que hicimos en la sección anterior. Debemos aisl
 
 ```groovy title="main.nf" linenums="1"
 {
-  "id": "sampleA",
+  "id": "patientA",
   "repeat": "1",
   "interval": "chr1"
 }
@@ -1064,9 +1074,9 @@ nextflow run main.nf
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76
+    Launching `main.nf` [stupefied_kirch] revision: c5bd1a7c31
 
     [[id:patientA, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
     [[id:patientA, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
@@ -1128,9 +1138,9 @@ nextflow run main.nf
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d
+    Launching `main.nf` [soggy_borg] revision: cc057d5f49
 
     [[id:patientA, interval:chr1], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
     [[id:patientA, interval:chr2], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
@@ -1191,7 +1201,7 @@ Dominar estas operaciones de canal te permitirá construir pipelines flexibles y
 2.  **Dividir datos en canales separados:** Usamos `filter` para dividir datos en flujos independientes basados en el campo `type`
 
     ```groovy
-    channel.filter { it.type == 'tumor' }
+    channel.filter { meta, file -> meta.type == 'tumor' }
     ```
 
 3.  **Unir muestras coincidentes:** Usamos `join` para recombinar muestras relacionadas basándonos en los campos `id` y `repeat`
@@ -1199,31 +1209,31 @@ Dominar estas operaciones de canal te permitirá construir pipelines flexibles y
     - Unir dos canales por clave (primer elemento de la tupla)
 
     ```groovy
-    tumor_ch.join(normal_ch)
+    ch_normal_samples.join(ch_tumor_samples)
     ```
 
     - Extraer clave de unión y unir por este valor
 
     ```groovy
-    tumor_ch.map { meta, file -> [meta.id, meta, file] }
+    ch_normal_samples.map { meta, file -> [meta.id, meta, file] }
         .join(
-          normal_ch.map { meta, file -> [meta.id, meta, file] }
+          ch_tumor_samples.map { meta, file -> [meta.id, meta, file] }
         )
     ```
 
-    - Unir por múltiples campos usando subMap
+    - Unir por múltiples campos usando `subMap`
 
     ```groovy
-    tumor_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+    ch_normal_samples.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
         .join(
-          normal_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+          ch_tumor_samples.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
         )
     ```
 
 4.  **Distribuir a través de intervalos:** Usamos `combine` para crear productos cartesianos de muestras con intervalos genómicos para procesamiento paralelo.
 
     ```groovy
-    samples_ch.combine(intervals_ch)
+    ch_joined_samples.combine(ch_intervals)
     ```
 
 5.  **Agregar por claves de agrupación:** Usamos `groupTuple` para agrupar por el primer elemento en cada tupla, recopilando así las muestras que comparten los campos `id` e `interval` y fusionando las réplicas técnicas.

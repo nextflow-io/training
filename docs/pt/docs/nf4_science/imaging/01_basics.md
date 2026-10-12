@@ -19,21 +19,21 @@ nextflow run hello-world.nf --greeting 'Hello World!'
 
 A saída do console deve se parecer com isto:
 
-```console title="Saída" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+```console title="Output" linenums="1"
+ N E X T F L O W   ~  version 26.04.4
 
-Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+Launching `hello-world.nf` [small_swirles] revision: 0fb8dbb23d
 
 executor >  local (1)
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
 Parabéns, você acabou de executar seu primeiro fluxo de trabalho Nextflow!
 
 A saída mais importante aqui é a última linha (linha 6):
 
-```console title="Saída" linenums="6"
-[a3/7be2fa] sayHello | 1 of 1 ✔
+```console title="Output" linenums="6"
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
 Isso nos diz que o processo `sayHello` foi executado com sucesso uma vez (`1 of 1 ✔`).
@@ -63,7 +63,7 @@ Hello World!
 
 Isso é ótimo, nosso fluxo de trabalho fez o que deveria fazer!
 
-No entanto, esteja ciente de que o resultado 'publicado' é uma cópia (ou em alguns casos um symlink) da saída real produzida pelo Nextflow quando executou o fluxo de trabalho.
+No entanto, esteja ciente de que o resultado 'publicado' é uma cópia (ou em alguns casos um link simbólico) da saída real produzida pelo Nextflow quando executou o fluxo de trabalho.
 
 Então agora, vamos olhar por baixo do capô para ver onde o Nextflow realmente executou o trabalho.
 
@@ -83,20 +83,20 @@ Isso pode parecer confuso, então vamos ver como isso se parece na prática.
 
 Voltando à saída do console para o fluxo de trabalho que executamos anteriormente, tínhamos esta linha:
 
-```console title="Trecho da saída do comando" linenums="6"
-[a3/7be2fa] sayHello | 1 of 1 ✔
+```console title="Excerpt of command output" linenums="6"
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
-Vê como a linha começa com `[a3/7be2fa]`?
+Vê como a linha começa com `[71/8143bd]`?
 Essa é uma forma truncada do caminho do diretório de tarefa para aquela chamada de processo, e diz onde encontrar a saída da chamada do processo `sayHello` dentro do caminho do diretório `work/`.
 
-Você pode encontrar o caminho completo digitando o seguinte comando (substituindo `a3/7be2fa` pelo que você vê em seu próprio terminal) e pressionando a tecla tab para autocompletar o caminho ou adicionando um asterisco:
+Você pode encontrar o caminho completo digitando o seguinte comando (substituindo `71/8143bd` pelo que você vê em seu próprio terminal) e pressionando a tecla tab para autocompletar o caminho ou adicionando um asterisco:
 
 ```bash
-tree work/a3/7be2fa*
+tree work/71/8143bd*
 ```
 
-Isso deve gerar o caminho completo do diretório: `work/a3/7be2fa7be2fad5e71e5f49998f795677fd68`
+Isso deve gerar o caminho completo do diretório: `work/71/8143bd5ed3420e23c5f0dc1a05056d`
 
 Vamos dar uma olhada no que há lá dentro.
 
@@ -116,8 +116,8 @@ Os nomes exatos dos subdiretórios serão diferentes no seu sistema.
 
 ```console title="work/"
 work
-└── a3
-    └── 7be2fad5e71e5f49998f795677fd68
+└── 71
+    └── 8143bd5ed3420e23c5f0dc1a05056d
         ├── .command.begin
         ├── .command.err
         ├── .command.log
@@ -136,7 +136,7 @@ Se você abri-lo, encontrará a saudação `Hello World!` novamente.
 <details>
   <summary>Conteúdo do arquivo output.txt</summary>
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" linenums="1"
 Hello World!
 ```
 
@@ -159,10 +159,9 @@ O arquivo `.command.sh` é especialmente útil porque mostra o comando principal
 <details>
   <summary>Conteúdo do arquivo</summary>
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/.command.sh" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" linenums="1"
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
-
 ```
 
 </details>
@@ -357,14 +356,14 @@ nextflow run hello-world.nf --greeting 'Hello World!' -resume
 ??? success "Saída do comando"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_noyce] DSL2 - revision: c33d41f479
+    Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d
 
-    [a3/7be2fa] process > sayHello [100%] 1 of 1, cached: 1 ✔
+    [71/8143bd] sayHello | 1 of 1, cached: 1 ✔
     ```
 
-Procure pelo trecho `cached:` que foi adicionado na linha de status do processo (linha 5), o que significa que o Nextflow reconheceu que já fez este trabalho e simplesmente reutilizou o resultado da execução bem-sucedida anterior.
+Procure pelo trecho `cached:` que foi adicionado na linha de status do processo, o que significa que o Nextflow reconheceu que já fez este trabalho e simplesmente reutilizou o resultado da execução bem-sucedida anterior.
 
 Você também pode ver que o hash do subdiretório de trabalho é o mesmo da execução anterior.
 O Nextflow está literalmente apontando para a execução anterior e dizendo "Eu já fiz isso ali."

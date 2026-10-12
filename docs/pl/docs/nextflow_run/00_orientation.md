@@ -22,24 +22,23 @@ Jeśli pracujesz nad tym kursem samodzielnie, zapoznaj się z [podstawami środo
 
 ### Wymagania dotyczące wersji
 
-To szkolenie jest przeznaczone dla Nextflow 25.10.2 lub nowszego **z WŁĄCZONYM parserem składni v2**.
+To szkolenie wymaga Nextflow'a 25.10.2 lub nowszego z włączonym parserem składni v2 (domyślnym od wersji 25.10+).
 Jeśli używasz lokalnego lub niestandardowego środowiska, upewnij się, że używasz prawidłowych ustawień, jak opisano [tutaj](../info/nxf_versions.md).
 
 ## Przygotuj się do pracy
 
-Po uruchomieniu codespace'a musisz wykonać dwie czynności przed rozpoczęciem szkolenia: ustawić katalog roboczy dla tego konkretnego kursu i przejrzeć dostarczone materiały.
+Po uruchomieniu codespace'a musisz wykonać dwie czynności przed rozpoczęciem szkolenia: ustawić katalog roboczy i przejrzeć dostarczone materiały.
 
 ### Ustaw katalog roboczy
 
-Domyślnie codespace otwiera się z katalogiem roboczym ustawionym w głównym folderze wszystkich kursów szkoleniowych, ale w tym kursie będziemy pracować w katalogu `nextflow-run/`.
-
-Zmień katalog teraz, uruchamiając to polecenie w terminalu:
+Domyślnie codespace otwiera się w głównym folderze wszystkich kursów szkoleniowych.
+Na potrzeby tego kursu przejdź do katalogu `nextflow-run/`:
 
 ```bash
 cd nextflow-run/
 ```
 
-Możesz ustawić VSCode tak, aby koncentrował się na tym katalogu, dzięki czemu tylko odpowiednie pliki będą wyświetlane na pasku bocznym eksploratora plików:
+Następnie ustaw VSCode tak, aby koncentrował się na tym katalogu, dzięki czemu tylko odpowiednie pliki będą wyświetlane na pasku bocznym eksploratora plików:
 
 ```bash
 code .
@@ -53,16 +52,10 @@ code .
     cd /workspaces/training/nextflow-run
     ```
 
-Teraz przyjrzyjmy się zawartości.
-
 ### Przejrzyj dostarczone materiały
 
-Możesz przeglądać zawartość tego katalogu, używając eksploratora plików po lewej stronie obszaru roboczego szkolenia.
-Alternatywnie możesz użyć polecenia `tree`.
-
-W całym kursie używamy wyjścia `tree` do przedstawienia struktury i zawartości katalogów w czytelnej formie, czasami z drobnymi modyfikacjami dla przejrzystości.
-
-Tutaj generujemy spis treści do drugiego poziomu:
+Możesz przeglądać materiały kursu, używając eksploratora plików po lewej stronie lub polecenia `tree`.
+Uruchom poniższe polecenie w terminalu, aby zobaczyć pełną strukturę:
 
 ```bash
 tree . -L 2
@@ -73,41 +66,26 @@ tree . -L 2
     ```console
     .
     ├── 1-hello.nf
-    ├── 2a-inputs.nf
-    ├── 2b-multistep.nf
-    ├── 2c-modules.nf
-    ├── 2d-container.nf
-    ├── 3-main.nf
+    ├── 2-inputs.nf
     ├── data
+    │   ├── greetings-extended.csv
     │   └── greetings.csv
+    ├── main.nf
     ├── modules
     │   ├── collectGreetings.nf
     │   ├── convertToUpper.nf
     │   ├── cowpy.nf
     │   └── sayHello.nf
-    ├── nextflow.config
-    ├── solutions
-    │   ├── 3-main.nf
-    │   ├── modules
-    │   └── nextflow.config
-    ├── test-params.json
-    └── test-params.yaml
+    └── nextflow.config
     ```
 
-Kliknij na kolorowe pole, aby rozwinąć sekcję i zobaczyć jej zawartość.
-Używamy zwijanych sekcji takich jak ta do wyświetlania oczekiwanego wyjścia poleceń oraz zawartości katalogów i plików w zwięzły sposób.
+**Pliki `.nf`** to skrypty workflow'ów o rosnącym stopniu złożoności, używane w tej kolejności w trakcie kursu.
 
-- **Pliki `.nf`** to skrypty workflow'ów ponumerowane według części kursu, w której są używane.
+**Katalog `data/`** zawiera pliki CSV, których użyjemy od sekcji 2.
 
-- **Plik `nextflow.config`** to plik konfiguracyjny, który ustawia minimalne właściwości środowiska.
-  Na razie możesz go zignorować.
+**Katalog `modules/`** zawiera definicje procesów używane przez `main.nf`.
 
-- **Plik `greetings.csv`** w katalogu `data/` zawiera dane wejściowe, których użyjemy w większości kursu. Jest opisany w Części 2 (Uruchamianie pipeline'ów), kiedy wprowadzamy go po raz pierwszy.
-
-- **Pliki `test-params.*`** to pliki konfiguracyjne, których użyjemy w Części 3 (Konfiguracja). Na razie możesz je zignorować.
-
-- **Katalog `solutions`** zawiera końcowy stan workflow'u i jego plików pomocniczych (config i moduły), które są wynikiem ukończenia kursu.
-  Są przeznaczone do użycia jako odniesienie do sprawdzenia Twojej pracy i rozwiązywania problemów.
+**Plik `nextflow.config`** to plik konfiguracyjny, który ustawia minimalne właściwości środowiska. Na razie możesz go zignorować; omówimy go w sekcji 4.
 
 ## Lista kontrolna gotowości
 
@@ -119,4 +97,4 @@ Myślisz, że jesteś gotowy, aby zacząć?
 
 Jeśli możesz zaznaczyć wszystkie pola, jesteś gotowy do działania.
 
-**Aby przejść do [Części 1: Uruchamianie podstawowych operacji](./01_basics.md), kliknij strzałkę w prawym dolnym rogu tej strony.**
+**Aby przejść do [Części 1: Uruchamianie Nextflow'a](./01_run_nextflow.md), kliknij strzałkę w prawym dolnym rogu tej strony.**

@@ -41,7 +41,6 @@ Nextflow documentation manual [Environment setup](https://www.nextflow.io/docs/l
 
 !!! warning "Version compatibility"
 
-    <!-- इस content में कोई भी update home page पर copy करना होगा -->
     **जनवरी 2026 के अनुसार, हमारे सभी Nextflow प्रशिक्षण courses के लिए Nextflow version 25.10.2 या बाद का आवश्यक है, strict v2 syntax सक्रिय के साथ, जब तक अन्यथा उल्लेख न हो।**
 
     Version आवश्यकताओं और strict v2 syntax के बारे में अधिक जानकारी के लिए, कृपया [Nextflow versions](../info/nxf_versions.md) guide देखो।

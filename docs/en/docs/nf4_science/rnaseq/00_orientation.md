@@ -87,23 +87,23 @@ tree . -L 3
     │   │   ├── ENCSR000CPO2_1.fastq.gz
     │   │   └── ENCSR000CPO2_2.fastq.gz
     │   └── single-end.csv
+    ├── modules
+    │   ├── fastqc.nf
+    │   ├── hisat2_align.nf
+    │   ├── multiqc.nf
+    │   └── trim_galore.nf
     ├── nextflow.config
     ├── rnaseq.nf
     └── solutions
-        ├── modules
-        │   ├── fastqc.nf
-        │   ├── fastqc_pe.nf
-        │   ├── hisat2_align.nf
-        │   ├── hisat2_align_pe.nf
-        │   ├── multiqc.nf
-        │   ├── trim_galore.nf
-        │   └── trim_galore_pe.nf
-        ├── rnaseq-2.1.nf
-        ├── rnaseq-2.2.nf
-        ├── rnaseq-2.3.nf
-        ├── rnaseq-3.1.nf
-        ├── rnaseq-3.2.nf
-        └── rnaseq_pe-3.3.nf
+        ├── part2
+        │   ├── modules
+        │   ├── nextflow.config
+        │   └── rnaseq-2.nf
+        └── part3
+            ├── modules
+            ├── nextflow.config
+            ├── rnaseq-3.nf
+            └── rnaseq_pe-3.nf
     ```
 
 Click on the colored box to expand the section and view its contents.
