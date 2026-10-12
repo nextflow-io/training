@@ -13,3 +13,11 @@
 [build]
     command = "curl -LsSf https://astral.sh/uv/install.sh | sh && export PATH=$HOME/.local/bin:$PATH && uv run _scripts/docs.py build-all"
     publish = "site/"
+
+# Netlify's build image installs Python via mise, and with no version pinned it
+# falls back to its legacy default (3.10.6). That release has no GitHub artifact
+# attestations, so mise refuses to install it and the build fails before the
+# build command runs. Pin a current release instead (matches .github/workflows/docs.yml
+# and satisfies `requires-python = ">=3.11"` in _scripts/docs.py).
+[build.environment]
+    PYTHON_VERSION = "3.14"
