@@ -1083,11 +1083,12 @@ workflow {
 }
 ```
 
-**1c.** Use the `collect()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#collect):
+**1c.** Use the `collect()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#collect).
+`collect()` emits a list, so use `map` to extract the single item:
 
 ```groovy title="exhausted.nf (fixed - Option 1c)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference').collect()  // Convert to value channel
+    reference_ch = channel.of('baseline_reference').collect().map { refs -> refs[0] }  // Convert to value channel
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
