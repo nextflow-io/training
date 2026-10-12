@@ -74,7 +74,7 @@ tree .
 │   └── utils.nf
 └── nextflow.config
 
-3 directories, 12 files
+2 directories, 12 files
 ```
 
 !!! note "Informazioni sui file di esempio"
@@ -331,7 +331,7 @@ Ora esploriamo la navigazione in un flusso di lavoro più complesso usando `comp
 
 ### 4.2. Navigazione tra Simboli
 
-Con `complex_workflow.nf` ancora aperto, potete ottenere una panoramica di tutti i simboli nel file digitando `@` nella barra di ricerca in cima a VSCode (la scorciatoia da tastiera è `Ctrl/Cmd+Shift+O`, ma potrebbe non funzionare in Codespaces). Questo apre il pannello di navigazione dei simboli, che elenca tutti i simboli nel file corrente:
+Con `complex_workflow.nf` ancora aperto, potete ottenere una panoramica di tutti i simboli nel file digitando `@` nella barra di ricerca in cima a VS Code (la scorciatoia da tastiera è `Ctrl/Cmd+Shift+O`, ma potrebbe non funzionare in Codespaces). Questo apre il pannello di navigazione dei simboli, che elenca tutti i simboli nel file corrente:
 
 ![Navigazione tra simboli](../img/symbols.png)
 
@@ -545,7 +545,7 @@ Se il vostro progetto è un repository git (come questo), VS Code mostra:
 - Viste diff inline
 - Capacità di commit e push
 
-Aprite il pannello Source Control usando il pulsante source control (![icona Source control](../img/source_control_icon.png)) (`Ctrl+Shift+G` o `Cmd+Shift+G` se lavorate con VSCode localmente) per vedere le modifiche git e preparare i commit direttamente nell'editor.
+Aprite il pannello Source Control usando il pulsante source control (![icona Source control](../img/source_control_icon.png)) (`Ctrl+Shift+G` o `Cmd+Shift+G` se lavorate con VS Code localmente) per vedere le modifiche git e preparare i commit direttamente nell'editor.
 
 ![Pannello Source Control](../img/source_control.png)
 
@@ -620,7 +620,7 @@ Non ci aspettiamo che ricordiate tutto, ma ora che sapete che queste funzionalit
 Applicate queste competenze IDE mentre lavorate su altri moduli di formazione, ad esempio:
 
 - **[nf-test](../nf_test/index.md)**: Create suite di test complete per i vostri flussi di lavoro
-- **[Hello nf-core](../../hello_nf-core/index.md)**: Costruite pipeline di qualità produttiva con gli standard della community
+- **[Build with nf-core](../../nfcore_build/index.md)**: Costruite pipeline di qualità produttiva con gli standard della community
 
 Il vero potere di queste funzionalità IDE emerge quando si lavora su progetti più grandi e complessi. Iniziate a incorporarle gradualmente nel vostro flusso di lavoro: nel giro di poche sessioni, diventeranno una seconda natura e trasformeranno il vostro approccio allo sviluppo con Nextflow.
 

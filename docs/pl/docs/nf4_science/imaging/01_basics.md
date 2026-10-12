@@ -19,21 +19,21 @@ nextflow run hello-world.nf --greeting 'Hello World!'
 
 Wyjście w konsoli powinno wyglądać mniej więcej tak:
 
-```console title="Wyjście" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+```console title="Output" linenums="1"
+ N E X T F L O W   ~  version 26.04.4
 
-Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+Launching `hello-world.nf` [small_swirles] revision: 0fb8dbb23d
 
 executor >  local (1)
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
 Gratulacje, właśnie uruchomiłeś Swój pierwszy workflow Nextflow!
 
 Najważniejszym wyjściem jest tutaj ostatnia linia (linia 6):
 
-```console title="Wyjście" linenums="6"
-[a3/7be2fa] sayHello | 1 of 1 ✔
+```console title="Output" linenums="6"
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
 To mówi nam, że proces `sayHello` został pomyślnie wykonany raz (`1 of 1 ✔`).
@@ -83,20 +83,20 @@ To może brzmieć zagmatwanie, więc zobaczmy, jak to wygląda w praktyce.
 
 Wracając do wyjścia konsoli dla workflow'u, który uruchomiliśmy wcześniej, mieliśmy tę linię:
 
-```console title="Fragment wyjścia polecenia" linenums="6"
-[a3/7be2fa] sayHello | 1 of 1 ✔
+```console title="Excerpt of command output" linenums="6"
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
-Widzisz, jak linia zaczyna się od `[a3/7be2fa]`?
+Widzisz, jak linia zaczyna się od `[71/8143bd]`?
 To skrócona forma ścieżki katalogu zadania dla tego jednego wywołania procesu i mówi Ci, gdzie znaleźć wyjście wywołania procesu `sayHello` w ścieżce katalogu `work/`.
 
-Możesz znaleźć pełną ścieżkę, wpisując następujące polecenie (zastępując `a3/7be2fa` tym, co widzisz w Swoim własnym terminalu) i naciskając klawisz tab, aby automatycznie uzupełnić ścieżkę, lub dodając gwiazdkę:
+Możesz znaleźć pełną ścieżkę, wpisując następujące polecenie (zastępując `71/8143bd` tym, co widzisz w Swoim własnym terminalu) i naciskając klawisz tab, aby automatycznie uzupełnić ścieżkę, lub dodając gwiazdkę:
 
 ```bash
-tree work/a3/7be2fa*
+tree work/71/8143bd*
 ```
 
-Powinno to zwrócić pełną ścieżkę katalogu: `work/a3/7be2fa7be2fad5e71e5f49998f795677fd68`
+Powinno to zwrócić pełną ścieżkę katalogu: `work/71/8143bd5ed3420e23c5f0dc1a05056d`
 
 Zobaczmy, co tam jest.
 
@@ -116,8 +116,8 @@ Dokładne nazwy podkatalogów będą różne w Twoim systemie.
 
 ```console title="work/"
 work
-└── a3
-    └── 7be2fad5e71e5f49998f795677fd68
+└── 71
+    └── 8143bd5ed3420e23c5f0dc1a05056d
         ├── .command.begin
         ├── .command.err
         ├── .command.log
@@ -136,7 +136,7 @@ Jeśli go otworzysz, znajdziesz ponownie powitanie `Hello World!`.
 <details>
   <summary>Zawartość pliku output.txt</summary>
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" linenums="1"
 Hello World!
 ```
 
@@ -159,10 +159,9 @@ Plik `.command.sh` jest szczególnie przydatny, ponieważ pokazuje główne pole
 <details>
   <summary>Zawartość pliku</summary>
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/.command.sh" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" linenums="1"
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
-
 ```
 
 </details>
@@ -357,17 +356,17 @@ nextflow run hello-world.nf --greeting 'Hello World!' -resume
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_noyce] DSL2 - revision: c33d41f479
+    Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d
 
-    [a3/7be2fa] process > sayHello [100%] 1 of 1, cached: 1 ✔
+    [71/8143bd] sayHello | 1 of 1, cached: 1 ✔
     ```
 
-Zwróć uwagę na fragment `cached:`, który został dodany w linii statusu procesu (linia 5), co oznacza, że Nextflow rozpoznał, iż już wykonał tę pracę i po prostu ponownie wykorzystał wynik z poprzedniego pomyślnego uruchomienia.
+Zwróć uwagę na fragment `cached:`, który został dodany w linii statusu procesu, co oznacza, że Nextflow rozpoznał, iż już wykonał tę pracę i po prostu ponownie wykorzystał wynik z poprzedniego pomyślnego uruchomienia.
 
 Możesz również zobaczyć, że hash podkatalogu roboczego jest taki sam jak w poprzednim uruchomieniu.
-Nextflow dosłownie wskazuje Ci na poprzednie wykonanie, mówiąc "Już to zrobiłem tam."
+Nextflow dosłownie wskazuje Ci na poprzednie wykonanie, mówiąc „Już to zrobiłem tam."
 
 !!! Tip "Wskazówka"
 

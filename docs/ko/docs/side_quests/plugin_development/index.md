@@ -27,6 +27,12 @@ Java 또는 Groovy 사전 경험은 필요하지 않습니다.
 
 **작업 디렉토리:** `side-quests/plugin_development`
 
+#### 교육 코드스페이스 열기
+
+아직 열지 않으셨다면 [환경 설정](../../envsetup/index.md)에 설명된 대로 교육 환경을 열어 주세요.
+
+[![GitHub Codespaces에서 열기](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+
 ## 학습 목표
 
 이 교육을 마치면 다음을 수행할 수 있습니다:

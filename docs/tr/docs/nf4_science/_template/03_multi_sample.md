@@ -51,8 +51,8 @@ Bunu iki adıma ayırdık:
 
 !!! note "Not"
 
-     Doğru çalışma dizininde olduğunuzdan emin olun:
-     `cd /workspaces/training/nf4-science/{DOMAIN_DIR}`
+    Doğru çalışma dizininde olduğunuzdan emin olun:
+    `cd /workspaces/training/nf4-science/{DOMAIN_DIR}`
 
 ---
 

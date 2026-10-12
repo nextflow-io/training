@@ -6,4 +6,4 @@
 
 완료하는 데 1~2분 정도 소요됩니다. 모든 사람을 위한 교육 자료 개선에 도움을 주셔서 감사합니다!
 
-<div data-tf-live="01KGH8377MK9V7KE75SCKF8QQK"></div><script src="//embed.typeform.com/next/embed.js"></script>
+<div data-tf-live="01M2DNWERQ51HXFWQFJRSEMRK1"></div><script src="//embed.typeform.com/next/embed.js"></script>

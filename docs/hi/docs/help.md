@@ -10,6 +10,7 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+
 चाहे तुम्हें शुरू करने में कठिनाई हो रही हो, बीच में अटक गए हो या कोई अनुवर्ती प्रश्न हो, संपर्क करने में संकोच मत करो! हमारी समुदाय टीम मदद के लिए यहाँ है, और Nextflow समुदाय बहुत सक्रिय, समावेशी और मदद के लिए उत्सुक है।
 
 तुम जो खोज रहे हो उसके आधार पर यहाँ मुख्य विकल्प उपलब्ध हैं।
@@ -63,15 +64,5 @@ hide:
     Nextflow एक मुफ्त, open-source software है जिसे [Seqera](https://seqera.io/) द्वारा विकसित किया गया है, जो Spain में मुख्यालय वाली एक कंपनी है जिसके UK और US में satellite offices हैं। हम Nextflow के लिए व्यावसायिक सहायता सेवाएँ प्रदान करते हैं, जिसमें custom प्रशिक्षण शामिल है।
 
     [संपर्क करें:material-arrow-right:](https://seqera.io/demo/){ .md-button .md-button--primary .mt-1 }
-
-</div>
-
----
-
-<div markdown class="homepage_logos">
-
-![Seqera](assets/img/seqera_logo.png#only-light)
-
-![Seqera](assets/img/seqera_logo_dark.png#only-dark)
 
 </div>

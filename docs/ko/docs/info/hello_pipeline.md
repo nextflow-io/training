@@ -69,13 +69,3 @@ Hello 워크플로우는 인사말이 포함된 CSV 파일을 받아 별도의 �
 ```
 
 파이프라인이 포함된 과정에 따라 세부 사항에서 약간의 차이가 있을 수 있습니다.
-
----
-
-<div markdown class="homepage_logos">
-
-![Seqera](../assets/img/seqera_logo.png#only-light)
-
-![Seqera](../assets/img/seqera_logo_dark.png#only-dark)
-
-</div>

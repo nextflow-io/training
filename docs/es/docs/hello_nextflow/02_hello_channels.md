@@ -52,12 +52,18 @@ nextflow run hello-channels.nf --input 'Hello Channels!'
 ??? success "Salida del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [wise_jennings] DSL2 - revision: b24f4902d6
+    Launching `hello-channels.nf` [wise_jennings] revision: b24f4902d6
 
     executor >  local (1)
-    [6f/824bc1] process > sayHello [100%] 1 of 1 ✔
+    [6f/824bc1] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_channels/output.txt
     ```
 
 Como anteriormente, encontrará el archivo de salida llamado `output.txt` en el directorio `results/hello_channels` (como se especifica en el bloque `output` del script de workflow, mostrado arriba).
@@ -196,12 +202,19 @@ nextflow run hello-channels.nf
 ??? success "Salida del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [fabulous_crick] DSL2 - revision: 23e20f76e8
+    Launching `hello-channels.nf` [fabulous_crick] revision: 23e20f76e8
 
     executor >  local (1)
-    [c0/4f1872] process > sayHello (1) [100%] 1 of 1 ✔
+    [c0/4f1872] sayHello (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
     ```
 
 Si hizo ambas ediciones correctamente, debería obtener una ejecución exitosa.
@@ -271,13 +284,20 @@ nextflow run hello-channels.nf
 ??? success "Salida del comando"
 
     ```console hl_lines="7"
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [scruffy_shaw] DSL2 - revision: 2ede41e14a
+    Launching `hello-channels.nf` [scruffy_shaw] revision: 2ede41e14a
 
     executor >  local (1)
-    [ef/f7e40a] sayHello (1) [100%] 1 of 1 ✔
+    [ef/f7e40a] sayHello (1) | 1 of 1 ✔
     Hello Channels!
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
     ```
 
 Como puede ver, esto muestra el contenido del channel en la consola.
@@ -337,15 +357,24 @@ nextflow run hello-channels.nf
 ??? success "Salida del comando"
 
     ```console hl_lines="6"
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [amazing_crick] DSL2 - revision: 59a9a5888a
+    Launching `hello-channels.nf` [amazing_crick] revision: 59a9a5888a
 
     executor >  local (3)
-    [f4/c9962c] process > sayHello (1) [100%] 3 of 3 ✔
+    [f4/c9962c] sayHello (1) | 3 of 3 ✔
     Hello
     Bonjour
     Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
+        - hello_channels/output.txt
+        - hello_channels/output.txt
     ```
 
 Ciertamente parece haber funcionado bien.
@@ -420,14 +449,23 @@ nextflow run hello-channels.nf -ansi-log false
 ??? success "Salida del comando"
 
     ```console
-     N E X T F L O W  ~  version 25.10.4
-    Launching `hello-channels.nf` [desperate_monod] DSL2 - revision: 59a9a5888a
+    N E X T F L O W  ~  version 26.04.4
+    Launching `hello-channels.nf` [desperate_monod] - revision: 59a9a5888a
     Hello
     Bonjour
     Hola
     [23/871c7e] Submitted process > sayHello (2)
     [7f/21e2c2] Submitted process > sayHello (1)
     [f4/ea10a6] Submitted process > sayHello (3)
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/output.txt
+        - hello_channels/output.txt
+        - hello_channels/output.txt
     ```
 
 Esta vez vemos las tres ejecuciones de proceso y sus subdirectorios de trabajo asociados listados en la salida.
@@ -581,15 +619,24 @@ nextflow run hello-channels.nf
 ??? success "Salida del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [sharp_minsky] DSL2 - revision: 16a291febe
+    Launching `hello-channels.nf` [sharp_minsky] revision: 16a291febe
 
     executor >  local (3)
-    [e8/33ee64] sayHello (2) [100%] 3 of 3 ✔
+    [e8/33ee64] sayHello (2) | 3 of 3 ✔
     Hello
     Bonjour
     Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/Bonjour-output.txt
+        - hello_channels/Hola-output.txt
+        - hello_channels/Hello-output.txt
     ```
 
 Volviendo a la vista resumida, la salida se resume en una línea nuevamente.
@@ -604,8 +651,6 @@ Eche un vistazo al directorio `results` para ver si todos los saludos de salida 
     ├── Hola-output.txt
     └── output.txt
     ```
-
-¡Sí! Y cada uno tiene el contenido esperado.
 
 ??? abstract "Contenido del archivo"
 
@@ -761,9 +806,9 @@ nextflow run hello-channels.nf
 ??? failure "Salida del comando"
 
     ```console hl_lines="7 11 16"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [friendly_koch] DSL2 - revision: 97256837a7
+    Launching `hello-channels.nf` [friendly_koch] revision: 97256837a7
 
     executor >  local (1)
     [a8/1f6ead] sayHello (1) | 0 of 1
@@ -941,16 +986,25 @@ nextflow run hello-channels.nf
 ??? success "Salida del comando"
 
     ```console hl_lines="7-10"
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [sleepy_gutenberg] DSL2 - revision: 1db4f760ee
+    Launching `hello-channels.nf` [sleepy_gutenberg] revision: 1db4f760ee
 
     executor >  local (3)
-    [b1/6a1e15] sayHello (2) [100%] 3 of 3 ✔
+    [b1/6a1e15] sayHello (2) | 3 of 3 ✔
     Before flatten: [Hello, Bonjour, Hola]
     After flatten: Hello
     After flatten: Bonjour
     After flatten: Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/Bonjour-output.txt
+        - hello_channels/Hola-output.txt
+        - hello_channels/Hello-output.txt
     ```
 
 Esta vez funciona Y nos da la información adicional sobre cómo se ve el contenido del channel antes y después de ejecutar el operador `flatten()`.
@@ -1015,7 +1069,7 @@ Haga la siguiente edición a la declaración del parámetro:
 
     ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
-    * Parámetros del pipeline
+    * Pipeline parameters
     */
     params {
         input: Path = 'data/greetings.csv'
@@ -1024,11 +1078,13 @@ Haga la siguiente edición a la declaración del parámetro:
 
 === "Antes"
 
-    ```groovy title="hello-channels.nf" linenums="20" hl_lines="4"
+    ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
-     * Parámetros del pipeline
+     * Pipeline parameters
      */
-    input: String = 'Hola mundo!'
+    params {
+        input: String = 'Hola mundo!'
+    }
     ```
 
 Esto asume que el archivo está ubicado junto con el código del workflow.
@@ -1081,7 +1137,7 @@ En el bloque workflow, haga el siguiente cambio de código:
     }
     ```
 
-Notará que cambiamos la entrada del channel de nuevo a `param.input`, y eliminamos la declaración `greetings_array` ya que ya no la necesitaremos.
+Notará que cambiamos la entrada del canal de nuevo a `param.input`, y eliminamos la declaración `greetings_array` ya que ya no la necesitaremos.
 También hemos comentado el `flatten()` y la segunda declaración `view()`.
 
 #### 4.1.3. Ejecutar el workflow
@@ -1095,11 +1151,11 @@ nextflow run hello-channels.nf
 ??? failure "Salida del comando"
 
     ```console hl_lines="5 6 9 15"
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [peaceful_poisson] DSL2 - revision: a286c08ad5
+    Launching `hello-channels.nf` [peaceful_poisson] revision: a286c08ad5
 
-    [-        ] sayHello [  0%] 0 of 1
+    [-        ] sayHello | 0 of 1
     Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv
     ERROR ~ Error executing process > 'sayHello (1)'
 
@@ -1132,7 +1188,7 @@ Esto puede parecer un poco familiar.
 Parece que Nextflow intentó ejecutar una única llamada de proceso usando la ruta del archivo mismo como un valor de cadena.
 Así que ha resuelto la ruta del archivo correctamente, pero en realidad no analizó su contenido, que es lo que queríamos.
 
-¿Cómo hacemos que Nextflow abra el archivo y cargue su contenido en el channel?
+¿Cómo hacemos que Nextflow abra el archivo y cargue su contenido en el canal?
 
 ¡Parece que necesitamos otro [operador](https://nextflow.io/docs/latest/reference/operator.html)!
 
@@ -1140,7 +1196,7 @@ Así que ha resuelto la ruta del archivo correctamente, pero en realidad no anal
 
 Revisando la lista de operadores nuevamente, encontramos [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv), que está diseñado para analizar y dividir texto con formato CSV.
 
-#### 4.2.1. Aplicar `splitCsv()` al channel
+#### 4.2.1. Aplicar `splitCsv()` al canal
 
 Para aplicar el operador, lo agregamos a la línea de la channel factory como anteriormente.
 
@@ -1198,12 +1254,12 @@ nextflow run hello-channels.nf
 ??? failure "Salida del comando"
 
     ```console hl_lines="7-11 14 19"
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [insane_fermat] DSL2 - revision: 8e62fcbeb1
+    Launching `hello-channels.nf` [insane_fermat] revision: 8e62fcbeb1
 
     executor >  local (3)
-    [24/76da2f] sayHello (2) [  0%] 0 of 3 ✘
+    [24/76da2f] sayHello (2) | 0 of 3 ✘
     Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
     After splitCsv: [Hello, English, 123]
     After splitCsv: [Bonjour, French, 456]
@@ -1233,7 +1289,7 @@ nextflow run hello-channels.nf
     ```
 
 Interesantemente, esto también falla, pero con un error diferente.
-Esta vez Nextflow ha analizado el contenido del archivo (¡yay!) pero ha cargado cada fila como un array, y cada array es un elemento en el channel.
+Esta vez Nextflow ha analizado el contenido del archivo (¡yay!) pero ha cargado cada fila como un array, y cada array es un elemento en el canal.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-channels-split-fail.svg"
@@ -1242,13 +1298,13 @@ Esta vez Nextflow ha analizado el contenido del archivo (¡yay!) pero ha cargado
 Necesitamos decirle que solo tome la primera columna en cada fila.
 Entonces, ¿cómo desempacamos esto?
 
-Anteriormente usamos `flatten()` para desempacar el contenido de un channel, pero eso no funcionaría aquí porque flatten desempaca _todo_ (siéntase libre de probarlo si quiere verlo por sí mismo).
+Anteriormente usamos `flatten()` para desempacar el contenido de un canal, pero eso no funcionaría aquí porque flatten desempaca _todo_ (siéntase libre de probarlo si quiere verlo por sí mismo).
 
 En cambio, usaremos otro operador llamado `map()` que es realmente útil y aparece mucho en los pipelines de Nextflow.
 
 ### 4.3. Usar el operador `map()` para extraer los saludos
 
-El operador [`map()`](https://nextflow.io/docs/latest/reference/operator.html#map) es una pequeña herramienta muy práctica que nos permite hacer todo tipo de mapeos al contenido de un channel.
+El operador [`map()`](https://nextflow.io/docs/latest/reference/operator.html#map) es una pequeña herramienta muy práctica que nos permite hacer todo tipo de mapeos al contenido de un canal.
 
 En este caso, vamos a usarlo para extraer ese único elemento que queremos de cada fila en nuestro archivo de datos.
 Así es como se ve la sintaxis:
@@ -1257,11 +1313,11 @@ Así es como se ve la sintaxis:
 .map { row -> row[0] }
 ```
 
-Esto significa 'para cada fila en el channel, tomar el elemento 0 (primero) que contiene'.
+Esto significa 'para cada fila en el canal, tomar el elemento 0 (primero) que contiene'.
 
 Así que apliquemos eso a nuestro análisis CSV.
 
-#### 4.3.1. Aplicar `map()` al channel
+#### 4.3.1. Aplicar `map()` al canal
 
 En el bloque workflow, haga el siguiente cambio de código:
 
@@ -1318,12 +1374,12 @@ nextflow run hello-channels.nf
 ??? success "Salida del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-channels.nf` [focused_volhard] DSL2 - revision: de435e45be
+    Launching `hello-channels.nf` [focused_volhard] revision: de435e45be
 
     executor >  local (3)
-    [54/6eebe3] sayHello (3) [100%] 3 of 3 ✔
+    [54/6eebe3] sayHello (3) | 3 of 3 ✔
     Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
     After splitCsv: [Hello, English, 123]
     After splitCsv: [Bonjour, French, 456]
@@ -1331,15 +1387,24 @@ nextflow run hello-channels.nf
     After map: Hello
     After map: Bonjour
     After map: Hola
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_channels/Hola-output.txt
+        - hello_channels/Bonjour-output.txt
+        - hello_channels/Hello-output.txt
     ```
 
 Esta vez debería ejecutarse sin error.
 
 Mirando la salida de las declaraciones `view()`, verá lo siguiente:
 
-- Una única declaración `Before splitCsv:`: en ese punto el channel contiene un elemento, la ruta original del archivo.
+- Una única declaración `Before splitCsv:`: en ese punto el canal contiene un elemento, la ruta original del archivo.
 - Tres declaraciones `After splitCsv:` separadas: una para cada saludo, pero cada una está contenida dentro de un array que corresponde a esa línea en el archivo.
-- Tres declaraciones `After map:` separadas: una para cada saludo, que ahora son elementos individuales en el channel.
+- Tres declaraciones `After map:` separadas: una para cada saludo, que ahora son elementos individuales en el canal.
 
 _Note que las líneas pueden aparecer en un orden diferente en su salida._
 
@@ -1349,15 +1414,15 @@ _Note que las líneas pueden aparecer en un orden diferente en su salida._
 
 También puede mirar los archivos de salida para verificar que cada saludo fue correctamente extraído y procesado a través del workflow.
 
-Hemos logrado el mismo resultado que antes, pero ahora tenemos mucha más flexibilidad para agregar más elementos al channel de saludos que queremos procesar modificando un archivo de entrada, sin modificar ningún código.
+Hemos logrado el mismo resultado que antes, pero ahora tenemos mucha más flexibilidad para agregar más elementos al canal de saludos que queremos procesar modificando un archivo de entrada, sin modificar ningún código.
 Aprenderá enfoques más sofisticados para manejar entradas complejas en una capacitación posterior.
 
 ### Conclusión
 
-Sabe cómo usar el constructor de channel `.fromPath()` y los operadores `splitCsv()` y `map()` para leer un archivo de valores de entrada y manejarlos apropiadamente.
+Sabe cómo usar el constructor de canal `.fromPath()` y los operadores `splitCsv()` y `map()` para leer un archivo de valores de entrada y manejarlos apropiadamente.
 
 Más generalmente, tiene una comprensión básica de cómo Nextflow usa **channels** para gestionar entradas a procesos y **operadores** para transformar su contenido.
-También ha visto cómo los channels manejan la ejecución paralela implícitamente.
+También ha visto cómo los canales manejan la ejecución paralela implícitamente.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-channels-parallel.svg"

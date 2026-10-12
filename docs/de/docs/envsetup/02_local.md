@@ -41,7 +41,6 @@ Wir empfehlen die Self-Install-Option für Nextflow und die PyPI-Option für nf-
 
 !!! warning "Versionskompatibilität"
 
-    <!-- Any update to this content needs to be copied to the home page -->
     **Ab Januar 2026 erfordern alle unsere Nextflow-Trainingskurse Nextflow Version 25.10.2 oder höher mit aktivierter strikter v2-Syntax, sofern nicht anders angegeben.**
 
     Weitere Informationen zu Versionsanforderungen und strikter v2-Syntax findest du im [Nextflow-Versionen](../info/nxf_versions.md)-Leitfaden.

@@ -215,9 +215,9 @@ nextflow run hello-world.nf
 ??? success "Sortie de la commande"
 
     ```console hl_lines="6"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+    Launching `hello-world.nf` [goofy_torvalds] revision: c33d41f479
 
     executor >  local (1)
     [65/7be2fa] sayHello | 1 of 1 ✔
@@ -486,17 +486,23 @@ nextflow run hello-world.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5
+    Launching `hello-world.nf` [jovial_mayer] revision: 35bd3425e5
 
     executor >  local (1)
     [9f/48ef97] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: output.txt
     ```
 
-La sortie du terminal devrait sembler familière. Extérieurement, rien n'a changé.
+La sortie du terminal se termine maintenant par un résumé `Outputs:` listant les sorties publiées et le répertoire dans lequel elles ont été écrites.
 
-Cependant, vérifiez votre explorateur de fichiers : cette fois, Nextflow a créé un nouveau répertoire appelé `results/`.
+Vérifiez votre explorateur de fichiers : cette fois, Nextflow a également créé un nouveau répertoire appelé `results/`.
 
 ??? abstract "Contenu du répertoire"
 
@@ -574,12 +580,18 @@ nextflow run hello-world.nf
 ??? success "Sortie de la commande"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
+    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
 
     executor >  local (1)
-    [8c/79499c] process > sayHello [100%] 1 of 1 ✔
+    [8c/79499c] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 Cette fois, le résultat est écrit sous le sous-répertoire spécifié.
@@ -653,12 +665,18 @@ nextflow run hello-world.nf
 ??? success "Sortie de la commande"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_shaw] DSL2 - revision: 757723adc1
+    Launching `hello-world.nf` [tiny_shaw] revision: 757723adc1
 
     executor >  local (1)
-    [df/521638] process > sayHello [100%] 1 of 1 ✔
+    [df/521638] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 Cette fois, si vous regardez les résultats, le fichier est une vraie copie au lieu d'un simple lien symbolique.
@@ -767,19 +785,19 @@ Dans le bloc process, faites la modification de code suivante :
 === "Après"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-    script:
-    """
-    echo '${greeting}' > output.txt
-    """
+        script:
+        """
+        echo '${greeting}' > output.txt
+        """
     ```
 
 === "Avant"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
-    script:
-    """
-    echo 'Hello World!' > output.txt
-    """
+        script:
+        """
+        echo 'Hello World!' > output.txt
+        """
     ```
 
 Le symbole `$` et les accolades (`{ }`) indiquent à Nextflow que c'est un nom de variable qui doit être remplacé par la valeur d'entrée réelle (=interpolé).
@@ -811,15 +829,15 @@ Dans le bloc workflow, faites la modification de code suivante :
 === "Après"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // émettre une salutation
-    sayHello(params.input)
+        // émettre une salutation
+        sayHello(params.input)
     ```
 
 === "Avant"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // émettre une salutation
-    sayHello()
+        // émettre une salutation
+        sayHello()
     ```
 
 Cela indique à Nextflow d'exécuter le **process** `sayHello` sur la valeur fournie via le paramètre `--input`.
@@ -837,12 +855,18 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea
+    Launching `hello-world.nf` [elated_lavoisier] revision: 7c031b42ea
 
     executor >  local (1)
     [4b/654319] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 Si vous avez fait toutes ces modifications correctement, vous devriez obtenir une autre exécution réussie.
@@ -906,12 +930,18 @@ nextflow run hello-world.nf
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582
+    Launching `hello-world.nf` [determined_edison] revision: 3539118582
 
     executor >  local (1)
     [72/394147] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 ??? question "Si cela n'a pas fonctionné"
@@ -936,7 +966,8 @@ nextflow run hello-world.nf
     Cela a été mentionné au début du cours, mais vous l'avez peut-être manqué.
     Consultez le matériel d'aide sur les [versions de Nextflow](../info/nxf_versions.md).
 
-    En bref, si vous utilisez Nextflow `25.10`, vous devez activer l'analyseur de langage v2 :
+    L'analyseur v2 est celui par défaut à partir de Nextflow 26.04, vous ne rencontrerez donc ce problème que sur des versions antérieures.
+    Sur une version antérieure à 26.04, vous devez activer l'analyseur de langage v2 :
 
     ```bash
     export NXF_SYNTAX_PARSER=v2
@@ -965,12 +996,18 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582
+    Launching `hello-world.nf` [elegant_faraday] revision: 3539118582
 
     executor >  local (1)
     [6f/a12a91] sayHello | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 Encore une fois, vous devriez trouver la sortie mise à jour correspondante dans votre répertoire de résultats.
@@ -1004,8 +1041,6 @@ Savoir comment lancer des workflows et récupérer les sorties est très bien, m
 
 Ici, nous vous montrons comment utiliser la fonctionnalité [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html) lorsque vous devez relancer le même workflow, comment inspecter le journal des exécutions passées avec [`nextflow log`](https://nextflow.io/docs/latest/reference/cli.html#log), et comment supprimer les anciens répertoires de travail avec [`nextflow clean`](https://nextflow.io/docs/latest/reference/cli.html#clean).
 
-<!-- Any other cool options we should include? Added log -->
-
 ### 4.1. Relancer un workflow avec `-resume`
 
 Parfois, vous allez vouloir relancer un pipeline que vous avez déjà lancé précédemment sans refaire les étapes qui se sont déjà terminées avec succès.
@@ -1022,17 +1057,23 @@ Il y a deux avantages clés à faire cela :
 Pour l'utiliser, ajoutez simplement `-resume` à votre commande et exécutez-la :
 
 ```bash
-nextflow run hello-world.nf -resume
+nextflow run hello-world.nf --input 'Konnichiwa!' -resume
 ```
 
 ??? success "Sortie de la commande"
 
     ```console hl_lines="5"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
+    Launching `hello-world.nf` [golden_cantor] revision: 35bd3425e5
 
     [62/49a1f8] sayHello | 1 of 1, cached: 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output: hello_world/output.txt
     ```
 
 La sortie console devrait sembler familière, mais il y a une chose qui est un peu différente par rapport à avant.

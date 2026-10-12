@@ -386,7 +386,7 @@ Eseguite la pipeline:
 nextflow run hello.nf
 ```
 
-```console title="Output"
+```console title="Output (partial)"
 ERROR ~ Validation of samplesheet failed!
 
 The following errors have been detected in greetings.csv:
@@ -396,6 +396,8 @@ The following errors have been detected in greetings.csv:
 -> Entry 3: Missing required field(s): greeting
 -> Entry 4: Missing required field(s): greeting
 -> Entry 5: Missing required field(s): greeting
+
+ -- Check script 'hello.nf' at line: 20 or see '.nextflow.log' file for more details
 ```
 
 La pipeline si rifiuta di eseguire perché lo schema richiede una colonna `greeting` e non riesce a trovarla.
@@ -511,7 +513,7 @@ Aggiornate `nextflow.config`:
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
     ```
 
@@ -534,8 +536,10 @@ Il plugin produce diversi messaggi INFO e WARN durante l'esecuzione.
 Questi sono normali per un piccolo esempio eseguito su una macchina locale:
 
 ```console title="Output (partial)"
-nf-co2footprint plugin  ~  version 1.2.0
+nf-co2footprint plugin  ~  version 1.3.0
+INFO - [nf-co2footprint] 🔕 Repeated task-specific messages (🔁) are only logged once in the console. Further occurrences are logged at DEBUG level, appearing only in the `.nextflow.log` file.
 WARN - [nf-co2footprint] Target zone null not found. Attempting to retrieve carbon intensity for fallback zone GLOBAL.
+INFO - [nf-co2footprint] Electricity Maps API key is not set. To retrieve real-time carbon intensity values, please provide a key with the parameter `emApiKey`.
 INFO - [nf-co2footprint] Using fallback carbon intensity from GLOBAL from CI table: 480.0 gCO₂eq/kWh.
 WARN - [nf-co2footprint] Executor 'null' not mapped.
 WARN - [nf-co2footprint] Fallback to: `machineType = null`, `pue = 1.0`. ...
@@ -550,7 +554,7 @@ In un ambiente di produzione (ad es., un cluster HPC o cloud), questi valori sar
 Alla fine, cercate una riga simile a:
 
 ```console title="Output (partial)"
-🌱 The workflow run used 126.76 uWh of electricity, resulting in the release of 60.84 ug of CO₂ equivalents into the atmosphere.
+INFO - [nf-co2footprint] 🌱 The workflow run used 126.76 uWh of electricity, resulting in the release of 60.84 ug of CO₂ equivalents into the atmosphere.
 ```
 
 (I vostri numeri saranno diversi.)
@@ -600,7 +604,7 @@ Aggiungete un blocco `co2footprint` a `nextflow.config`:
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
 
     co2footprint {
@@ -614,7 +618,7 @@ Aggiungete un blocco `co2footprint` a `nextflow.config`:
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
     ```
 
@@ -634,11 +638,6 @@ INFO - [nf-co2footprint] Using fallback carbon intensity from GB from CI table: 
 
 L'avviso sulla zona è scomparso.
 Il plugin ora usa l'intensità di carbonio specifica per GB (163.92 gCO₂eq/kWh) invece del valore globale di fallback (480.0 gCO₂eq/kWh).
-
-!!! note "Nota"
-
-    Potreste anche vedere un messaggio `WARN: Unrecognized config option 'co2footprint.location'`.
-    È puramente cosmetico e può essere ignorato tranquillamente; il plugin legge comunque il valore correttamente.
 
 Nella Parte 6, creerete uno scope di configurazione per il vostro plugin.
 

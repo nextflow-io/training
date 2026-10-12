@@ -74,7 +74,7 @@ tree .
 │   └── utils.nf
 └── nextflow.config
 
-3 directories, 12 files
+2 directories, 12 files
 ```
 
 !!! note "예제 파일에 대하여"
@@ -316,7 +316,7 @@ VS Code의 오류 감지와 문제 패널을 사용하여 워크플로우 실행
 
 ![링크 따라가기](../img/follow_link.png)
 
-process 이름에도 동일하게 작동합니다. `basic_workflow.nf`로 돌아가서 workflow 블록의 `FASTQC` process 이름에 이를 적용해 봅니다. 이렇게 하면 process 이름으로 직접 연결됩니다(이 예제에서는 모듈 파일과 동일하지만, 훨씬 더 큰 파일의 중간 부분일 수도 있습니다).
+process 이름에도 동일하게 작동합니다. `basic_workflow.nf`로 돌아가서 workflow 블록의 `FASTQC` process 이름에 이를 적용합니다. 이렇게 하면 process 이름으로 직접 연결됩니다(이 예제에서는 모듈 파일과 동일하지만, 훨씬 더 큰 파일의 중간 부분일 수도 있습니다).
 
 이전 위치로 돌아가려면 **Alt+←** (또는 Mac에서 **Ctrl+-**)를 사용합니다. 이는 현재 위치를 잃지 않고 코드를 탐색하는 강력한 방법입니다.
 
@@ -620,7 +620,7 @@ VS Code의 Nextflow 개발을 위한 IDE 기능을 빠르게 살펴보았습니�
 다른 교육 모듈을 진행하면서 이러한 IDE 기술을 적용해 보세요. 예를 들어:
 
 - **[nf-test](../nf_test/index.md)**: 워크플로우를 위한 포괄적인 테스트 스위트 작성
-- **[Hello nf-core](../../hello_nf-core/index.md)**: 커뮤니티 표준으로 프로덕션 품질의 파이프라인 구축
+- **[Build with nf-core](../../nfcore_build/index.md)**: 커뮤니티 표준으로 프로덕션 품질의 파이프라인 구축
 
 이러한 IDE 기능의 진정한 힘은 더 크고 복잡한 프로젝트를 진행할 때 발휘됩니다. 단계적으로 워크플로우에 통합하기 시작하세요. 몇 번의 세션 후에는 자연스럽게 익숙해져 Nextflow 개발에 접근하는 방식이 달라질 것입니다.
 

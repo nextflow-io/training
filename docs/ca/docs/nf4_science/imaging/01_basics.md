@@ -20,12 +20,12 @@ nextflow run hello-world.nf --greeting 'Hello World!'
 La sortida de la consola hauria de semblar-se a això:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 26.04.4
 
-Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+Launching `hello-world.nf` [small_swirles] revision: 0fb8dbb23d
 
 executor >  local (1)
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
 Felicitats, acabeu d'executar el vostre primer workflow de Nextflow!
@@ -33,7 +33,7 @@ Felicitats, acabeu d'executar el vostre primer workflow de Nextflow!
 La sortida més important aquí és l'última línia (línia 6):
 
 ```console title="Output" linenums="6"
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
 Això ens indica que el procés `sayHello` s'ha executat correctament una vegada (`1 of 1 ✔`).
@@ -84,19 +84,19 @@ Això pot sonar confús, així que vegem com es veu a la pràctica.
 Tornant a la sortida de consola del workflow que hem executat anteriorment, teníem aquesta línia:
 
 ```console title="Excerpt of command output" linenums="6"
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[71/8143bd] sayHello | 1 of 1 ✔
 ```
 
-Veieu com la línia comença amb `[a3/7be2fa]`?
+Veieu com la línia comença amb `[71/8143bd]`?
 Aquesta és una forma truncada del camí del directori de tasca per a aquesta crida de procés, i us indica on trobar la sortida de la crida del procés `sayHello` dins del camí del directori `work/`.
 
-Podeu trobar el camí complet escrivint la comanda següent (substituint `a3/7be2fa` pel que veieu al vostre propi terminal) i prement la tecla de tabulació per autocompletar el camí o afegint un asterisc:
+Podeu trobar el camí complet escrivint la comanda següent (substituint `71/8143bd` pel que veieu al vostre propi terminal) i prement la tecla de tabulació per autocompletar el camí o afegint un asterisc:
 
 ```bash
-tree work/a3/7be2fa*
+tree work/71/8143bd*
 ```
 
-Això hauria de produir el camí complet del directori: `work/a3/7be2fa7be2fad5e71e5f49998f795677fd68`
+Això hauria de produir el camí complet del directori: `work/71/8143bd5ed3420e23c5f0dc1a05056d`
 
 Vegem què hi ha allà dins.
 
@@ -116,8 +116,8 @@ Els noms exactes dels subdirectoris seran diferents al vostre sistema.
 
 ```console title="work/"
 work
-└── a3
-    └── 7be2fad5e71e5f49998f795677fd68
+└── 71
+    └── 8143bd5ed3420e23c5f0dc1a05056d
         ├── .command.begin
         ├── .command.err
         ├── .command.log
@@ -136,7 +136,7 @@ Si l'obriu, trobareu la salutació `Hello World!` de nou.
 <details>
   <summary>Contingut del fitxer output.txt</summary>
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/output.txt" linenums="1"
 Hello World!
 ```
 
@@ -159,10 +159,9 @@ El fitxer `.command.sh` és especialment útil perquè us mostra la comanda prin
 <details>
   <summary>Contingut del fitxer</summary>
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/.command.sh" linenums="1"
+```console title="work/71/8143bd5ed3420e23c5f0dc1a05056d/.command.sh" linenums="1"
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
-
 ```
 
 </details>
@@ -357,14 +356,14 @@ nextflow run hello-world.nf --greeting 'Hello World!' -resume
 ??? success "Sortida de la comanda"
 
     ```console
-    N E X T F L O W   ~  version 25.04.3
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-world.nf` [tiny_noyce] DSL2 - revision: c33d41f479
+    Launching `hello-world.nf` [maniac_pasteur] revision: 0fb8dbb23d
 
-    [a3/7be2fa] process > sayHello [100%] 1 of 1, cached: 1 ✔
+    [71/8143bd] sayHello | 1 of 1, cached: 1 ✔
     ```
 
-Busqueu la part `cached:` que s'ha afegit a la línia d'estat del procés (línia 5), que significa que Nextflow ha reconegut que ja ha fet aquest treball i simplement ha reutilitzat el resultat de l'execució anterior correcta.
+Busqueu la part `cached:` que s'ha afegit a la línia d'estat del procés, que significa que Nextflow ha reconegut que ja ha fet aquest treball i simplement ha reutilitzat el resultat de l'execució anterior correcta.
 
 També podeu veure que el hash del subdirectori de treball és el mateix que a l'execució anterior.
 Nextflow literalment us està assenyalant l'execució anterior i dient "Ja ho vaig fer allà."

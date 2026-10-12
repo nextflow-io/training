@@ -7,11 +7,12 @@ index_type: course
 additional_information:
   technical_requirements: true
   learning_objectives:
-    - Nextflow-Workflows starten und ihre Ausführung verwalten
-    - Ausgaben (Ergebnisse) und Protokolldateien finden und interpretieren
-    - Kernkomponenten von Nextflow in einem einfachen mehrstufigen Workflow erkennen
-    - Pipeline-Ausführung für gängige Rechenplattformen einschließlich HPC und Cloud konfigurieren
-    - Best Practices für Reproduzierbarkeit, Portabilität und Code-Wiederverwendung zusammenfassen, die Pipelines FAIR machen, einschließlich Code-Modularität und Software-Container
+    - Nextflow-Pipelines von der Befehlszeile starten und verwalten
+    - Verstehen, wie Kanäle und Operatoren effiziente Workflows mit mehreren Eingaben und Schritten ermöglichen
+    - Container verwenden, um Software-Abhängigkeiten zu verwalten und Reproduzierbarkeit sicherzustellen
+    - Pipeline-Ausführung und Ausgaben konfigurieren
+    - Ausführungsberichte erstellen, den Verlauf vergangener Ausführungen einsehen und alte Work-Verzeichnisse bereinigen
+    - Pipelines direkt aus Remote-Repositories wie GitHub ausführen
   audience_prerequisites:
     - "**Zielgruppe:** Dieser Kurs richtet sich an Lernende, die völlig neu bei Nextflow sind und bestehende Pipelines ausführen möchten."
     - "**Kenntnisse:** Grundlegende Vertrautheit mit der Befehlszeile, grundlegenden Scripting-Konzepten und gängigen Dateiformaten wird vorausgesetzt."
@@ -24,35 +25,35 @@ additional_information:
 
 **Nextflow Run ist eine praktische Einführung in die Ausführung reproduzierbarer und skalierbarer Datenanalyse-Workflows.**
 
-Durch praktische Beispiele und geführte Übungen lernst du die Grundlagen der Verwendung von Nextflow, einschließlich der Ausführung von Pipelines, der Verwaltung von Dateien und Software-Abhängigkeiten, der mühelosen Parallelisierung der Ausführung und der Ausführung von Workflows in verschiedenen Rechenumgebungen.
+In einer Reihe zielgerichteter Übungen lernst du die Grundlagen zum Starten und Verwalten von Nextflow-Pipelines, verstehst, wie Kanäle und Operatoren die parallele Verarbeitung mehrerer Eingaben ermöglichen, und verwendest Container zur Verwaltung von Software-Abhängigkeiten.
 
-Nach diesem Kurs kannst du Workflows mit Nextflow ausführen.
+Nach diesem Kurs hast du die Fähigkeiten und das Vertrauen, um Workflows mit Nextflow auszuführen.
 
 <!-- additional_information -->
 
 ## Kursübersicht
 
-### Was du tun wirst
-
 Dieser Kurs ist praxisorientiert, mit zielgerichteten Übungen, die Informationen schrittweise einführen.
 
-Du wirst mehrere Versionen einer Nextflow-Pipeline ausführen, die Texteingaben verarbeitet.
-Du beginnst mit einer einfachen Version, die aus einem einzelnen Schritt besteht, und gelangst schließlich zu einer mehrstufigen Version, die eine CSV-Datei mit tabellarischen Texteingaben nimmt, einige Transformationsschritte ausführt und eine einzelne Textdatei ausgibt, die ein ASCII-Bild eines Charakters enthält, der den transformierten Text sagt.
+Du wirst mehrere Versionen einer Nextflow-Pipeline ausführen, die Texteingaben verarbeitet. Du beginnst mit einer einfachen Version, die aus einem einzelnen Schritt besteht, und gelangst schließlich zu einer mehrstufigen Version, die eine CSV-Datei mit Eingaben nimmt, einige Transformationsschritte ausführt und eine einzelne Textdatei ausgibt, die ASCII-Art enthält, die von einem containerisierten Tool erzeugt wird.
 
 Dieser Kurs konzentriert sich auf das Ausführen von Pipelines (benannt nach dem Kernbefehl `nextflow run`).
 Wenn du eine Einführung in die Entwicklung von Nextflow-Pipelines suchst, siehe [Hello Nextflow](../hello_nextflow/index.md).
 
+!!! note "Hinweis"
+
+    Suchst du die frühere Version dieses Kurses? Sie wurde durch die Version auf dieser Seite ersetzt, ist aber noch im [Release 3.6.1](https://training.nextflow.io/3.6.1/nextflow_run/) der Trainingsseite verfügbar.
+
 ### Lehrplan
 
-Wir haben dies in drei Teile unterteilt, die sich jeweils auf bestimmte Aspekte des Ausführens und Verwaltens von Pipelines konzentrieren, die in Nextflow geschrieben sind.
+| Kurskapitel                                                          | Zusammenfassung                                                                                                     | Geschätzte Dauer |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| [Teil 1: Nextflow ausführen](./01_run_nextflow.md)                   | Nextflow-Pipelines starten und verwalten sowie grundlegende Workflow-Mechanismen verstehen                          | 25 Min           |
+| [Teil 2: Pipeline konfigurieren](./02_configure_pipeline.md)         | Pipeline-Ausführung und Ausgaben mit `nextflow.config` konfigurieren                                                | 20 Min           |
+| [Teil 3: Workflow-Ausführungen verwalten](./03_manage_executions.md) | Ausführungsberichte erstellen, den Verlauf vergangener Ausführungen einsehen und alte Work-Verzeichnisse bereinigen | 10 Min           |
+| [Teil 4: Remote-Pipelines ausführen](./04_remote_repositories.md)    | Eine Pipeline direkt von GitHub ausführen und auf eine bestimmte Revision festlegen                                 | 10 Min           |
 
-| Kurskapitel                                           | Zusammenfassung                                                                                                 | Geschätzte Dauer |
-| ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ---------------- |
-| [Teil 1: Grundlegende Operationen](./01_basics.md)    | Starten und Verwalten der Ausführung eines einfachen Workflows                                                  | 30 Min           |
-| [Teil 2: Echte Pipelines ausführen](./02_pipeline.md) | Komplexe Eingaben verarbeiten, mehrstufige Workflows ausführen, Container verwenden und mühelos parallelisieren | 60 Min           |
-| [Teil 3: Konfiguration](./03_config.md)               | Pipeline-Verhalten anpassen und Nutzung in verschiedenen Rechenumgebungen optimieren                            | 60 Min           |
-
-Nach Abschluss dieses Kurses bist du bereit, reproduzierbare Workflows für deine eigenen Projekte auszuführen.
+Nach Abschluss dieses Kurses bist du gut vorbereitet, um reproduzierbare Workflows für deine eigenen Projekte auszuführen.
 
 Bereit, den Kurs zu beginnen?
 

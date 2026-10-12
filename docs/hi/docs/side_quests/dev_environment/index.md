@@ -74,7 +74,7 @@ tree .
 │   └── utils.nf
 └── nextflow.config
 
-3 directories, 12 files
+2 directories, 12 files
 ```
 
 !!! note "उदाहरण फ़ाइलों के बारे में"
@@ -545,11 +545,11 @@ VS Code केवल कोड संपादित करने से पर�
 - Inline diff views
 - Commit और push क्षमताएं
 
-Source Control panel खोलने के लिए source control बटन (![Source control icon](../img/source_control_icon.png)) (`Ctrl+Shift+G` या यदि तुम VSCode लोकल रूप से काम कर रहे हो तो `Cmd+Shift+G`) का उपयोग करो ताकि git changes देख सको और सीधे editor में commits stage कर सको।
+Source Control panel खोलने के लिए source control बटन (![Source control icon](../img/source_control_icon.png)) (`Ctrl+Shift+G` या यदि तुम VS Code लोकल रूप से काम कर रहे हो तो `Cmd+Shift+G`) का उपयोग करो ताकि git changes देख सको और सीधे editor में commits stage कर सको।
 
 ![Source Control Panel](../img/source_control.png)
 
-### 7.2. वर्कफ़्लो चलाना और परिणाम जाँचना
+### 7.2. वर्कफ़्लो चलाना और जाँचना
 
 आइए एक वर्कफ़्लो चलाएं और फिर परिणाम जाँचें। Integrated terminal में (Windows और MacOS दोनों में `Ctrl+Shift+` बैकटिक), बुनियादी वर्कफ़्लो चलाओ:
 
@@ -620,7 +620,7 @@ nextflow run basic_workflow.nf --input data/sample_data.csv --output_dir results
 इन IDE कौशलों को अन्य प्रशिक्षण मॉड्यूल के माध्यम से काम करते समय लागू करो, उदाहरण के लिए:
 
 - **[nf-test](../nf_test/index.md)**: अपने वर्कफ़्लो के लिए व्यापक test suites बनाओ
-- **[Hello nf-core](../../hello_nf-core/index.md)**: community standards के साथ production-quality पाइपलाइन बनाओ
+- **[Build with nf-core](../../nfcore_build/index.md)**: community standards के साथ production-quality पाइपलाइन बनाओ
 
 इन IDE फ़ीचर्स की वास्तविक शक्ति तब उभरती है जब तुम बड़े, अधिक जटिल प्रोजेक्ट पर काम करते हो। इन्हें धीरे-धीरे अपने वर्कफ़्लो में शामिल करना शुरू करो - कुछ सत्रों के भीतर, ये स्वाभाविक हो जाएंगे और Nextflow डेवलपमेंट के प्रति तुम्हारे दृष्टिकोण को बदल देंगे।
 

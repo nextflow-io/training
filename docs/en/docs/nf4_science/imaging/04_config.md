@@ -129,15 +129,16 @@ Because we're using `-resume`, Nextflow will check if anything changed since the
 If the parameters, inputs, and code are the same, all tasks will be retrieved from cache and the pipeline will complete almost instantly.
 
 ```console title="Output (excerpt)"
-executor >  local (12)
+executor >  local (1)
+[43/e03702] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2, cached: 2 ✔
+[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2, cached: 2 ✔
 ...
-[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔
-[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)               [100%] 2 of 2, cached: 2 ✔
-...
+[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 1 of 1, cached: 1 ✔
+[ef/d7b294] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
 -[nf-core/molkart] Pipeline completed successfully-
 ```
 
-Notice all processes show `cached: 2` or `cached: 1` - nothing was re-executed!
+Notice the `cached: N` annotation on each process - the cached preprocessing and segmentation tasks were not re-executed.
 
 ### 2.4. Test profiles
 
@@ -173,8 +174,8 @@ params {
 
 process {
     resourceLimits = [
-        cpus: 4,
-        memory: '15.GB',
+        cpus: 1,
+        memory: '4.GB',
         time: '1.h'
     ]
 }
@@ -296,7 +297,7 @@ process {
     memory = { 6.GB   * task.attempt }
     time   = { 4.h    * task.attempt }
 
-    errorStrategy = { task.exitStatus in ((130..145) + 104) ? 'retry' : 'finish' }
+    errorStrategy = { task.exitStatus in ((130..145) + 104 + 175) ? 'retry' : 'finish' }
     maxRetries    = 1
     maxErrors     = '-1'
 
@@ -446,5 +447,5 @@ Next steps:
 
 - Fill out the course survey to provide feedback
 - Check out [Hello Nextflow](../../hello_nextflow/index.md) to learn more about developing workflows
-- Explore [Hello nf-core](../../hello_nf-core/index.md) to dive deeper into nf-core tooling
-- Browse other courses in the [training collections](../../training_collections/index.md)
+- Explore [Build with nf-core](../../nfcore_build/index.md) to dive deeper into nf-core tooling
+- Explore more advanced topics in the [Side Quests](../../side_quests/index.md)

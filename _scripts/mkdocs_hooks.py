@@ -141,8 +141,17 @@ def generate_renamed_section_items(
     items: list[Union[Page, Section, Link]], *, config: MkDocsConfig
 ) -> list[Union[Page, Section, Link]]:
     """
-    Recursively process nav items to use page titles for section names.
+    Recursively process nav items to use page titles for section names,
+    unless overridden via extra.nav_title_overrides (keyed by the source
+    path of the section's index page, relative to docs_dir).
+
+    Also applies extra.nav_child_title_overrides to any Page item's own
+    nav label (keyed the same way), for cases like the "Overview" label
+    on a section's first child, which is set explicitly in nav.yml and
+    otherwise can't vary per language.
     """
+    title_overrides = config.extra.get("nav_title_overrides", {})
+    child_title_overrides = config.extra.get("nav_child_title_overrides", {})
     new_items: list[Union[Page, Section, Link]] = []
     for item in items:
         if isinstance(item, Section):
@@ -151,14 +160,22 @@ def generate_renamed_section_items(
             first_child = new_children[0] if new_children else None
             if isinstance(first_child, Page):
                 if first_child.file.src_path.endswith("index.md"):
-                    # Read the source so that the title is parsed and available
-                    first_child.read_source(config=config)
-                    new_title = first_child.title or new_title
+                    override = title_overrides.get(first_child.file.src_path)
+                    if override:
+                        new_title = override
+                    else:
+                        # Read the source so that the title is parsed and available
+                        first_child.read_source(config=config)
+                        new_title = first_child.title or new_title
             # Modify existing section to preserve collapsed state
             item.title = new_title.split("{ #")[0].strip()
             item.children = new_children
             new_items.append(item)
         else:
+            if isinstance(item, Page):
+                child_override = child_title_overrides.get(item.file.src_path)
+                if child_override:
+                    item.title = child_override
             new_items.append(item)
     return new_items
 
