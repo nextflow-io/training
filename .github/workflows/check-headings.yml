@@ -27,6 +27,7 @@ jobs:
           files_ignore: |
             **/transcripts/**/*.md
             .claude/**/*.md
+            **/side_quests/plugin_development/index.md
 
       - name: Run check_headings.py
         if: steps.changed-files.outputs.any_changed == 'true'

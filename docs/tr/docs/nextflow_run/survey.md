@@ -6,4 +6,4 @@ Devam etmeden önce, lütfen eğitimi değerlendirmek, deneyiminiz hakkındaki g
 
 Tamamlamanız yalnızca bir iki dakikanızı alacaktır. Eğitim materyallerimizi herkes için iyileştirmemize yardımcı olduğunuz için teşekkür ederiz!
 
-<div data-tf-live="01KGH8377MK9V7KE75SCKF8QQK"></div><script src="//embed.typeform.com/next/embed.js"></script>
+<div data-tf-live="01M2DNWERQ51HXFWQFJRSEMRK1"></div><script src="//embed.typeform.com/next/embed.js"></script>

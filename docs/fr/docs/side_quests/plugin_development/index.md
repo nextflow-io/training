@@ -27,6 +27,12 @@ Aucune expérience préalable en Java ou en Groovy n'est requise.
 
 **Répertoire de travail :** `side-quests/plugin_development`
 
+#### Ouvrir l'espace de code de formation
+
+Si vous ne l'avez pas encore fait, assurez-vous d'ouvrir l'environnement de formation tel que décrit dans la [Configuration de l'environnement](../../envsetup/index.md).
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+
 ## Objectifs pédagogiques
 
 À la fin de cette formation, vous serez en mesure de :

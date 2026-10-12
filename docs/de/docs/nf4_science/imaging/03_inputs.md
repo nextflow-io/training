@@ -9,26 +9,20 @@ Jetzt lernen wir zwei bessere Ansätze zum Verwalten von Eingaben kennen: **Para
 
 ### 1.1. Das Problem mit langen Befehlszeilen
 
-Erinnere dich an unseren Befehl aus Teil 2:
+In Teil 2 haben wir bereits eine Parameterdatei verwendet, um den Befehl kurz zu halten und eingetippte Werte (wie die ganzzahligen Vorverarbeitungsparameter) korrekt zu übergeben:
 
 ```bash
-nextflow run ./molkart \
-  --input 'data/samplesheet.csv' \
-  --mindagap_tilesize 90 \
-  --mindagap_boxsize 7 \
-  --mindagap_loopnum 100 \
-  --clahe_pyramid_tile 368 \
-  --segmentation_method "cellpose" \
-  --outdir results
+nextflow run ./molkart -params-file params.yaml --segmentation_method "mesmer,cellpose,stardist"
 ```
 
-Das funktioniert, ist aber schwer zu reproduzieren, zu teilen oder zu ändern.
+Viele Parameter einzeln auf der Kommandozeile zu übergeben ist schwer zu reproduzieren, zu teilen oder zu ändern.
 Was, wenn du dieselbe Analyse nächsten Monat erneut ausführen musst?
 Was, wenn ein Kollege genau deine Einstellungen verwenden möchte?
+Eine Parameterdatei löst dieses Problem.
 
-### 1.2. Lösung: Verwende eine Parameterdatei
+### 1.2. Die Parameterdatei
 
-Erstelle eine Datei namens `params.yaml`:
+Hier ist die `params.yaml`-Datei, die wir bisher verwendet haben:
 
 ```yaml title="params.yaml"
 input: "data/samplesheet.csv"
@@ -40,13 +34,16 @@ clahe_pyramid_tile: 368
 segmentation_method: "cellpose"
 ```
 
-Jetzt wird dein Befehl zu:
+Jeder Parameter wird als `key: value`-Paar geschrieben.
+Ganzzahlen ohne Anführungszeichen zu schreiben (zum Beispiel `mindagap_tilesize: 90`) erhält ihren Integer-Typ, den die Parametervalidierung der Pipeline erfordert.
+
+Dein Befehl wird damit zu:
 
 ```bash
 nextflow run ./molkart -params-file params.yaml -resume
 ```
 
-Das war's! Die Parameterdatei dokumentiert deine exakte Konfiguration und macht es einfach, sie erneut auszuführen oder zu teilen.
+Die Parameterdatei dokumentiert deine exakte Konfiguration und macht es einfach, sie erneut auszuführen oder zu teilen.
 
 ### 1.3. Parameter überschreiben
 
@@ -125,7 +122,7 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! warning "Warnung"
+!!! Warning "Warnung"
 
     Beachte, dass die Pfade im Samplesheet relativ zu dem Ort sind, an dem du Nextflow **ausführst**, nicht wo sich das Samplesheet befindet.
 

@@ -27,6 +27,19 @@ These indicate documentation or code problems:
 - **Error messages**: any unexpected errors or warnings
 - **Different channel cardinality**: wrong number of items emitted
 
+## Agent-Mode Console Output (CRITICAL — always flag)
+
+Nextflow 26.04+ renders a different, machine-readable console format when it detects an AI agent environment (see [Console Output Mode](../../shared/repo-conventions.md#console-output-mode-critical)).
+This format must never appear in learner-facing documentation, since no learner will ever see it in their own terminal.
+
+**Flag immediately** if a documented "Command output" block contains any of:
+
+- `[PIPELINE]`, `[WORKDIR]`, `[PROCESS ...]` tags
+- `[SUCCESS] completed=... failed=... cached=...` or `[FAILED] completed=...`
+- `[ERROR]`, `[WARN]` as standalone line-leading tags (as opposed to Nextflow's normal `ERROR ~` prose)
+
+If found, the block was almost certainly captured without `env -u CLAUDECODE NXF_AGENT_MODE=false`, and must be regenerated with that override before being trusted.
+
 ## Hash Consistency Within Documentation (CRITICAL)
 
 While your actual run hashes will differ from documented hashes (acceptable), the documentation itself must be internally consistent:
@@ -52,10 +65,10 @@ While your actual run hashes will differ from documented hashes (acceptable), th
 
 ```bash
 # Find all hashes in a file
-grep -oE '\[[a-z0-9]{2}/[a-z0-9]{6}\]' file.md | sort | uniq -c | sort -rn
+grep -oE '\[[0-9a-f]{2}/[0-9a-f]{6}\]' file.md | sort | uniq -c | sort -rn
 
 # Check for invalid hex characters
-grep -oE '\[[^]]+\]' file.md | grep -E '\[[^0-9a-f/\]]'
+grep -oE '\[[^]]+\]' file.md | grep -Ev '^\[[0-9a-f]{2}/[0-9a-f]{6}\]$'
 ```
 
 Duplicate hash counts > 1 are only acceptable when:

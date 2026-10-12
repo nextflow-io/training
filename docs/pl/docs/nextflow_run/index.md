@@ -7,11 +7,12 @@ index_type: course
 additional_information:
   technical_requirements: true
   learning_objectives:
-    - Uruchamianie i zarządzanie wykonywaniem workflow'ów Nextflow
-    - Znajdowanie i interpretowanie wyników oraz plików dziennika
-    - Rozpoznawanie podstawowych komponentów Nextflow w prostym wieloetapowym workflow'ie
-    - Konfigurowanie wykonywania pipeline'u na popularnych platformach obliczeniowych, w tym HPC i chmurze
-    - Podsumowanie najlepszych praktyk dotyczących odtwarzalności, przenośności i ponownego wykorzystania kodu, które czynią pipeline'y zgodnymi z zasadami FAIR, w tym modułowość kodu i kontenery oprogramowania
+    - Uruchamianie pipeline'ów Nextflow z wiersza poleceń i zarządzanie nimi
+    - Zrozumienie, w jaki sposób kanały i operatory umożliwiają wydajne workflow'y z wieloma wejściami i wieloma krokami
+    - Używanie kontenerów do zarządzania zależnościami oprogramowania i zapewnienia odtwarzalności
+    - Konfigurowanie wykonywania pipeline'u i jego wyników
+    - Generowanie raportów wykonania, przeglądanie historii poprzednich uruchomień i czyszczenie starych katalogów roboczych
+    - Uruchamianie pipeline'ów bezpośrednio ze zdalnych repozytoriów, takich jak GitHub
   audience_prerequisites:
     - "**Odbiorcy:** Ten kurs jest przeznaczony dla osób, które są całkowicie nowe w Nextflow i chcą uruchamiać istniejące pipeline'y."
     - "**Umiejętności:** Zakładana jest pewna znajomość wiersza poleceń, podstawowych koncepcji skryptowania i popularnych formatów plików."
@@ -24,7 +25,7 @@ additional_information:
 
 **Nextflow Run to praktyczne wprowadzenie do uruchamiania odtwarzalnych i skalowalnych workflow'ów analizy danych.**
 
-Pracując z praktycznymi przykładami i ćwiczeniami z przewodnikiem, poznasz podstawy używania Nextflow'a, w tym jak wykonywać pipeline'y, zarządzać plikami i zależnościami oprogramowania, bez wysiłku równoleglić wykonywanie i uruchamiać workflow'y w różnych środowiskach obliczeniowych.
+Pracując przez serię ćwiczeń zorientowanych na cele, poznasz podstawy uruchamiania pipeline'ów Nextflow i zarządzania nimi, zrozumiesz, jak kanały i operatory umożliwiają równoległe przetwarzanie wielu wejść, oraz nauczysz się używać kontenerów do zarządzania zależnościami oprogramowania.
 
 Zdobędziesz umiejętności i pewność siebie, aby rozpocząć uruchamianie workflow'ów z Nextflow'em.
 
@@ -32,25 +33,25 @@ Zdobędziesz umiejętności i pewność siebie, aby rozpocząć uruchamianie wor
 
 ## Przegląd kursu
 
-### Co będziesz robić
-
 Ten kurs jest praktyczny, z ćwiczeniami zorientowanymi na cele, zaprojektowanymi tak, aby stopniowo wprowadzać informacje.
 
-Wykonasz kilka wariantów pipeline'u Nextflow, który przetwarza tekst.
-Zaczniesz od prostej wersji składającej się z jednego kroku, a ostatecznie przejdziesz do wieloetapowej implementacji pobierającej plik CSV z tabelarycznymi danymi wejściowymi, wykonującej kilka transformacji i generującej pojedynczy plik tekstowy zawierający obraz ASCII postaci mówiącej przekształcone słowa.
+Wykonasz kilka wariantów pipeline'u Nextflow przetwarzającego tekstowe dane wejściowe — zaczniesz od prostej wersji składającej się z jednego kroku, a następnie przejdziesz do wieloetapowej implementacji pobierającej plik CSV z danymi wejściowymi, wykonującej kilka kroków transformacji i generującej pojedynczy plik tekstowy zawierający grafikę ASCII wygenerowaną przez narzędzie uruchomione w kontenerze.
 
 Ten kurs koncentruje się na uruchamianiu pipeline'ów (nazwany od podstawowego polecenia `nextflow run`).
 Jeśli szukasz wprowadzenia do tworzenia pipeline'ów Nextflow, zobacz [Hello Nextflow](../hello_nextflow/index.md).
 
+!!! note "Uwaga"
+
+    Szukasz poprzedniej wersji tego kursu? Została zastąpiona przez wersję na tej stronie, ale nadal można ją przeglądać w [wydaniu 3.6.1](https://training.nextflow.io/3.6.1/nextflow_run/) serwisu szkoleniowego.
+
 ### Plan lekcji
 
-Podzieliliśmy to na trzy części, z których każda koncentruje się na konkretnych aspektach uruchamiania i zarządzania pipeline'ami napisanymi w Nextflow'ie.
-
-| Rozdział kursu                                                    | Podsumowanie                                                                                                                                 | Szacowany czas |
-| ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| [Część 1: Podstawowe operacje](./01_basics.md)                    | Uruchamianie i zarządzanie wykonywaniem prostego workflow'u                                                                                  | 30 min         |
-| [Część 2: Uruchamianie prawdziwych pipeline'ów](./02_pipeline.md) | Przetwarzanie złożonych danych wejściowych, uruchamianie wieloetapowych workflow'ów, używanie kontenerów i bezproblemowe równoleglenie pracy | 60 min         |
-| [Część 3: Konfiguracja uruchamiania](./03_config.md)              | Dostosowywanie zachowania pipeline'u i optymalizacja użycia w różnych środowiskach obliczeniowych                                            | 60 min         |
+| Rozdział kursu                                                              | Podsumowanie                                                                                                           | Szacowany czas |
+| --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | -------------- |
+| [Część 1: Uruchamianie Nextflow'a](./01_run_nextflow.md)                    | Uruchamianie pipeline'ów Nextflow i zarządzanie nimi oraz zrozumienie podstawowych mechanizmów workflow'u              | 25 min         |
+| [Część 2: Konfiguracja pipeline'u](./02_configure_pipeline.md)              | Konfigurowanie wykonywania pipeline'u i jego wyników przy użyciu `nextflow.config`                                     | 20 min         |
+| [Część 3: Zarządzanie uruchomieniami workflow'u](./03_manage_executions.md) | Generowanie raportów wykonania, przeglądanie historii poprzednich uruchomień i czyszczenie starych katalogów roboczych | 10 min         |
+| [Część 4: Uruchamianie zdalnych pipeline'ów](./04_remote_repositories.md)   | Uruchamianie pipeline'u bezpośrednio z GitHub i przypinanie go do konkretnej wersji                                    | 10 min         |
 
 Pod koniec tego kursu będziesz dobrze przygotowany do podjęcia kolejnych kroków na swojej drodze ku uruchamianiu odtwarzalnych workflow'ów dla potrzeb obliczeń naukowych.
 

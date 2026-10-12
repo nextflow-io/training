@@ -51,8 +51,8 @@ Podzieliliśmy to na dwa kroki:
 
 !!! note "Uwaga"
 
-     Upewnij się, że jesteś we właściwym katalogu roboczym:
-     `cd /workspaces/training/nf4-science/{DOMAIN_DIR}`
+    Upewnij się, że jesteś we właściwym katalogu roboczym:
+    `cd /workspaces/training/nf4-science/{DOMAIN_DIR}`
 
 ---
 

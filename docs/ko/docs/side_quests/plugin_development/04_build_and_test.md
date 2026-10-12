@@ -215,7 +215,7 @@ make test
 
     ```console
     BUILD SUCCESSFUL in 5s
-    6 actionable tasks: 6 executed
+    7 actionable tasks: 7 executed
     ```
 
     **테스트 결과는 어디에 있나요?** 모든 테스트가 통과하면 Gradle은 상세 출력을 숨깁니다.

@@ -22,7 +22,7 @@ Vi mostreremo come applicare queste fasi di elaborazione in due approcci.
 Prima inizieremo con l'**elaborazione di un singolo campione** che esegue gli strumenti di QC, trimming e allineamento su un campione.
 Poi estenderemo all'**elaborazione multi-campione** che esegue gli stessi strumenti su più campioni e genera un report di controllo qualità aggregato.
 
-Prima di iniziare a scrivere qualsiasi codice del flusso di lavoro per entrambi gli approcci, proveremo i comandi manualmente su alcuni dati di test.
+Prima di addentrarci nella scrittura del codice del flusso di lavoro per entrambi gli approcci, proveremo i comandi manualmente su alcuni dati di test.
 
 ### Dataset
 
@@ -40,7 +40,7 @@ Questi strumenti non sono installati nell'ambiente GitHub Codespaces, quindi li 
 
 !!! tip "Suggerimento"
 
-     Verificate di trovarvi nella directory `nf4-science/rnaseq`. L'ultima parte del percorso mostrato quando digitate `pwd` dovrebbe essere `rnaseq`.
+    Verificate di trovarvi nella directory `nf4-science/rnaseq`. L'ultima parte del percorso mostrato quando digitate `pwd` dovrebbe essere `rnaseq`.
 
 ---
 

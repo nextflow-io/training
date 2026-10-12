@@ -51,8 +51,8 @@ Abbiamo suddiviso questo in due passaggi:
 
 !!! note "Nota"
 
-     Assicuratevi di essere nella directory di lavoro corretta:
-     `cd /workspaces/training/nf4-science/{DOMAIN_DIR}`
+    Assicuratevi di essere nella directory di lavoro corretta:
+    `cd /workspaces/training/nf4-science/{DOMAIN_DIR}`
 
 ---
 

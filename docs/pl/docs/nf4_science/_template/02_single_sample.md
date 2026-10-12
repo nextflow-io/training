@@ -72,7 +72,7 @@ W głównym pliku workflow'a `{DOMAIN_DIR}.nf`, w sekcji `Pipeline parameters`, 
      * Pipeline parameters
      */
     params {
-        // Primary input
+        // Główne wejście
         {PRIMARY_PARAM_NAME}: Path
     }
     ```
@@ -84,7 +84,7 @@ W głównym pliku workflow'a `{DOMAIN_DIR}.nf`, w sekcji `Pipeline parameters`, 
      * Pipeline parameters
      */
 
-    // Primary input
+    // Główne wejście
     ```
 
 To konfiguruje parametr CLI, ale nie chcemy wpisywać ścieżki pliku za każdym razem, gdy uruchamiamy workflow podczas tworzenia.
@@ -143,12 +143,19 @@ nextflow run {DOMAIN_DIR}.nf -profile test
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `{DOMAIN_DIR}.nf` [{RUN_NAME}] DSL2 - revision: {HASH}
+    Launching `{DOMAIN_DIR}.nf` [{RUN_NAME}] revision: {HASH}
 
     executor >  local (1)
     [{HASH}] {PROCESS_A_NAME} (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/{DOMAIN_DIR}/results
+
+      {OUTPUT_NAME}:
+        - {OUTPUT_SUBDIR}/{OUTPUT_FILE}
     ```
 
 {VERIFY_OUTPUT_INSTRUCTIONS}

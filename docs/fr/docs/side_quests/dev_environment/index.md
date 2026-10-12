@@ -1,16 +1,3 @@
-Looking at the diff, I need to update:
-
-1. Two links from `../hello_nextflow/` to `../../hello_nextflow/index.md`
-2. Multiple image paths from `img/` to `../img/`
-3. A code block removing the `publishDir` line
-4. A search example changing from `publishDir` to `container`
-5. Two links at the end changing paths
-6. The "Before" tab removing the `publishDir` line
-
-Let me apply only these targeted changes to the existing French translation:
-
-%%%
-
 # Environnement de développement
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
@@ -87,7 +74,7 @@ tree .
 │   └── utils.nf
 └── nextflow.config
 
-3 directories, 12 files
+2 directories, 12 files
 ```
 
 !!! note "À propos des fichiers d'exemple"
@@ -97,7 +84,7 @@ tree .
 
 ### Raccourcis clavier
 
-Certaines fonctionnalités de ce guide utilisent des raccourcis clavier optionnels. Si vous accédez à ce contenu via GitHub Codespaces dans un navigateur, il est possible que certains raccourcis ne fonctionnent pas comme prévu, car ils sont utilisés à d'autres fins dans votre système.
+Certaines fonctionnalités de ce guide utilisent des raccourcis clavier optionnels. Il est possible que vous accédiez à ce contenu via GitHub Codespaces dans un navigateur, auquel cas certains raccourcis peuvent ne pas fonctionner comme prévu, car ils sont utilisés à d'autres fins dans votre système.
 
 Si vous exécutez VS Code localement, comme vous le ferez probablement lorsque vous écrirez réellement des workflows, les raccourcis fonctionneront comme décrit.
 
@@ -112,7 +99,7 @@ Si vous utilisez un Mac, certains raccourcis clavier (pas tous) utiliseront "cmd
 Pour installer l'extension manuellement :
 
 1. Ouvrez VS Code
-2. Accédez à la vue Extensions en cliquant sur l'icône des extensions à gauche : ![icône des extensions](../img/extensions_icon.png) (raccourci `Ctrl/Cmd+Shift+X` si vous exécutez VSCode localement)
+2. Accédez à la vue Extensions en cliquant sur l'icône des extensions à gauche : ![icône des extensions](../img/extensions_icon.png) (raccourci `Ctrl/Cmd+Shift+X` si vous exécutez VS Code localement)
 3. Recherchez "Nextflow"
 4. Installez l'extension Nextflow officielle
 
@@ -344,7 +331,7 @@ Explorons maintenant la navigation dans un workflow plus complexe en utilisant `
 
 ### 4.2. Navigation par symboles
 
-Avec `complex_workflow.nf` toujours ouvert, vous pouvez obtenir un aperçu de tous les symboles du fichier en tapant `@` dans la barre de recherche en haut de VSCode (le raccourci clavier est `Ctrl/Cmd+Shift+O`, mais il peut ne pas fonctionner dans Codespaces). Cela ouvre le panneau de navigation par symboles, qui liste tous les symboles du fichier courant :
+Avec `complex_workflow.nf` toujours ouvert, vous pouvez obtenir un aperçu de tous les symboles du fichier en tapant `@` dans la barre de recherche en haut de VS Code (le raccourci clavier est `Ctrl/Cmd+Shift+O`, mais il peut ne pas fonctionner dans Codespaces). Cela ouvre le panneau de navigation par symboles, qui liste tous les symboles du fichier courant :
 
 ![Navigation par symboles](../img/symbols.png)
 
@@ -558,13 +545,13 @@ Si votre projet est un dépôt git (comme c'est le cas ici), VS Code affiche :
 - Les vues de différences en ligne
 - Les capacités de commit et de push
 
-Ouvrez le panneau Contrôle de source en utilisant le bouton de contrôle de source (![icône du contrôle de source](../img/source_control_icon.png)) (`Ctrl+Shift+G` ou `Cmd+Shift+G` si vous travaillez avec VSCode localement) pour voir les modifications git et effectuer des commits directement dans l'éditeur.
+Ouvrez le panneau Contrôle de source en utilisant le bouton de contrôle de source (![Icône du contrôle de source](../img/source_control_icon.png)) (`Ctrl+Shift+G` ou `Cmd+Shift+G` si vous travaillez avec VS Code localement) pour voir les modifications git et effectuer des commits directement dans l'éditeur.
 
 ![Panneau Contrôle de source](../img/source_control.png)
 
 ### 7.2. Exécution et inspection des workflows
 
-Exécutons un workflow puis inspectons les résultats. Dans le terminal intégré (`Ctrl+Shift+` backtick pour Windows et MacOS), exécutez le workflow de base :
+Exécutons un workflow puis inspectons les résultats. Dans le terminal intégré (`Ctrl+Shift+` backtick sous Windows et MacOS), exécutez le workflow de base :
 
 ```bash title="Run the basic workflow"
 nextflow run basic_workflow.nf --input data/sample_data.csv --output_dir results
@@ -633,11 +620,10 @@ Nous ne nous attendons pas à ce que vous vous souveniez de tout, mais maintenan
 Appliquez ces compétences IDE en travaillant sur d'autres modules de formation, par exemple :
 
 - **[nf-test](../nf_test/index.md)** : Créez des suites de tests complètes pour vos workflows
-- **[Hello nf-core](../../hello_nf-core/index.md)** : Construisez des pipelines de qualité production avec les standards de la communauté
+- **[Build with nf-core](../../nfcore_build/index.md)** : Construisez des pipelines de qualité production avec les standards de la communauté
 
 La véritable puissance de ces fonctionnalités IDE se révèle lorsque vous travaillez sur des projets plus grands et plus complexes. Commencez à les intégrer progressivement dans votre workflow — en quelques sessions, elles deviendront une seconde nature et transformeront votre approche du développement Nextflow.
 
 De la détection des erreurs avant qu'elles ne vous ralentissent à la navigation aisée dans des bases de code complexes, ces outils feront de vous un·e développeur·se plus confiant·e et plus efficace.
 
 Bon codage !
-%%%

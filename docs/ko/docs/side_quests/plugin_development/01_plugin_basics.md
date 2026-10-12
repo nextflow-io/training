@@ -385,7 +385,7 @@ Hallo,German
 nextflow run hello.nf
 ```
 
-```console title="Output"
+```console title="Output (partial)"
 ERROR ~ Validation of samplesheet failed!
 
 The following errors have been detected in greetings.csv:
@@ -395,6 +395,8 @@ The following errors have been detected in greetings.csv:
 -> Entry 3: Missing required field(s): greeting
 -> Entry 4: Missing required field(s): greeting
 -> Entry 5: Missing required field(s): greeting
+
+ -- Check script 'hello.nf' at line: 20 or see '.nextflow.log' file for more details
 ```
 
 스키마가 `greeting` 열을 요구하는데 찾을 수 없으므로 파이프라인 실행이 거부됩니다.
@@ -510,7 +512,7 @@ nf-hello와 nf-schema는 모두 function 플러그인으로, `include`로 가져
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
     ```
 
@@ -533,8 +535,10 @@ nextflow run hello.nf
 로컬 머신에서 실행되는 소규모 예제에서는 정상적인 동작입니다:
 
 ```console title="Output (partial)"
-nf-co2footprint plugin  ~  version 1.2.0
+nf-co2footprint plugin  ~  version 1.3.0
+INFO - [nf-co2footprint] 🔕 Repeated task-specific messages (🔁) are only logged once in the console. Further occurrences are logged at DEBUG level, appearing only in the `.nextflow.log` file.
 WARN - [nf-co2footprint] Target zone null not found. Attempting to retrieve carbon intensity for fallback zone GLOBAL.
+INFO - [nf-co2footprint] Electricity Maps API key is not set. To retrieve real-time carbon intensity values, please provide a key with the parameter `emApiKey`.
 INFO - [nf-co2footprint] Using fallback carbon intensity from GLOBAL from CI table: 480.0 gCO₂eq/kWh.
 WARN - [nf-co2footprint] Executor 'null' not mapped.
 WARN - [nf-co2footprint] Fallback to: `machineType = null`, `pue = 1.0`. ...
@@ -549,7 +553,7 @@ zone, executor, CPU 모델, 메모리에 대한 경고는 플러그인이 로컬
 마지막에 다음과 같은 줄을 확인합니다:
 
 ```console title="Output (partial)"
-🌱 The workflow run used 126.76 uWh of electricity, resulting in the release of 60.84 ug of CO₂ equivalents into the atmosphere.
+INFO - [nf-co2footprint] 🌱 The workflow run used 126.76 uWh of electricity, resulting in the release of 60.84 ug of CO₂ equivalents into the atmosphere.
 ```
 
 (수치는 다를 수 있습니다.)
@@ -599,7 +603,7 @@ nf-co2footprint 플러그인은 지리적 위치를 설정할 수 있는 `co2foo
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
 
     co2footprint {
@@ -613,7 +617,7 @@ nf-co2footprint 플러그인은 지리적 위치를 설정할 수 있는 `co2foo
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint@1.2.0'
+        id 'nf-co2footprint@1.3.0'
     }
     ```
 
@@ -633,11 +637,6 @@ INFO - [nf-co2footprint] Using fallback carbon intensity from GB from CI table: 
 
 zone 경고가 사라졌습니다.
 플러그인이 이제 전역 기본값(480.0 gCO₂eq/kWh) 대신 GB 특정 탄소 집약도(163.92 gCO₂eq/kWh)를 사용합니다.
-
-!!! note "참고"
-
-    `WARN: Unrecognized config option 'co2footprint.location'` 메시지가 표시될 수도 있습니다.
-    이는 외관상의 문제로 무시해도 됩니다. 플러그인은 여전히 값을 올바르게 읽습니다.
 
 파트 6에서는 자신만의 플러그인을 위한 설정 스코프를 만들어 봅니다.
 
