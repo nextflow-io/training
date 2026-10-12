@@ -48,7 +48,7 @@ In order to avoid overwhelming you with concepts and code, we've broken this dow
 | [Part 3: Hello Workflow](./03_hello_workflow.md)     | Using channels to chain multiple steps together and handle transfer of data between steps        | 60 mins            |
 | [Part 4: Hello Modules](./04_hello_modules.md)       | Applying code modularity principles to increase reusability and decrease maintenance burden      | 20 mins            |
 | [Part 5: Hello Containers](./05_hello_containers.md) | Using containers as a mechanism for managing software dependencies and increase reproducibility  | 60 mins            |
-| [Part 6: Hello Config](./06_hello_config.md)         | Customizing pipeline behavior and optimizing usage in different computational environments usage | 60 mins            |
+| [Part 6: Hello Config](./06_hello_config.md)         | Customizing pipeline behavior and optimizing usage in different computational environments | 60 mins            |
 
 By the end of this course, you will be well-prepared for tackling the next steps in your journey to develop reproducible workflows for your scientific computing needs.
 

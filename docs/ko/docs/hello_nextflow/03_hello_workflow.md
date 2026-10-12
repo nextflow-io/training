@@ -67,12 +67,21 @@ nextflow run hello-workflow.nf
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [admiring_lamarr] DSL2 - revision: 4d4053520d
+    Launching `hello-workflow.nf` [admiring_lamarr] revision: 4d4053520d
 
     executor >  local (3)
-    [b1/5826b5] process > sayHello (2) [100%] 3 of 3 ✔
+    [b1/5826b5] sayHello (2) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Hola-output.txt
     ```
 
 이전과 마찬가지로 `output` 블록에 지정된 위치에서 출력 파일을 찾을 수 있습니다.
@@ -311,13 +320,26 @@ nextflow run hello-workflow.nf -resume
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [high_cantor] DSL2 - revision: d746983511
+    Launching `hello-workflow.nf` [high_cantor] revision: d746983511
 
     executor >  local (3)
-    [ab/816321] process > sayHello (3)       [100%] 3 of 3, cached: 3 ✔
-    [e0/ecf81b] process > convertToUpper (3) [100%] 3 of 3 ✔
+    [ab/816321] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [e0/ecf81b] convertToUpper (3) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Hola-output.txt
+        - hello_workflow/Bonjour-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Hola-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+        - hello_workflow/UPPER-Bonjour-output.txt
     ```
 
 방금 추가한 새 프로세스에 해당하는 추가 줄이 콘솔 출력에 나타납니다.
@@ -370,15 +392,15 @@ Nextflow가 개별 입력 및 출력 파일을 처리하고 두 명령 사이에
 
 ## 2. 모든 인사말을 수집하는 세 번째 단계 추가
 
-여기서 여러 인사말에 대해 수행하는 것처럼 채널의 각 요소에 변환을 적용하기 위해 프로세스를 사용할 때, 때때로 해당 프로세스의 출력 채널에서 요소를 수집하여 일종의 분석 또는 요약을 수행하는 다른 프로세스에 공급하고 싶을 수 있습니다.
+채널의 각 요소에 변환을 적용하기 위해 프로세스를 사용할 때(여기서처럼 여러 인사말에 대해 수행하는 경우), 때때로 해당 프로세스의 출력 채널에서 요소를 수집하여 일종의 분석 또는 요약을 수행하는 다른 프로세스에 공급하고 싶을 수 있습니다.
 
-시연을 위해, `convertToUpper` 프로세스에서 생성된 모든 대문자 인사말을 수집하여 단일 파일에 기록하는 새 단계를 파이프라인에 추가할 것입니다.
+시연을 위해, `convertToUpper` 프로세스에서 생성된 모든 대문자 인사말을 수집하여 단일 파일에 기록하는 새 단계를 파이프라인에 추가합니다.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
 </figure>
 
-미리 스포일러를 하자면, 이것은 매우 유용한 연산자를 포함할 것입니다.
+미리 말씀드리자면, 이 과정에서 매우 유용한 연산자를 사용하게 됩니다.
 
 ### 2.1. 수집 명령 정의 및 터미널에서 테스트
 
@@ -409,7 +431,7 @@ cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Hola-output.txt > COLL
 
 ### 2.2. 수집 단계를 수행하는 새 프로세스 생성
 
-새 프로세스를 생성하고 `collectGreetings()`라고 부릅시다.
+새 프로세스를 생성하고 `collectGreetings()`라고 부릅니다.
 지금까지 본 것을 기반으로 작성을 시작할 수 있습니다.
 
 #### 2.2.1. 프로세스의 '명백한' 부분 작성
@@ -437,15 +459,15 @@ process collectGreetings {
 
 이것은 지금까지 배운 것을 기반으로 자신 있게 작성할 수 있는 부분입니다.
 그러나 이것은 작동하지 않습니다!
-입력 정의와 스크립트 명령의 첫 번째 절반을 생략했는데, 이것을 어떻게 작성해야 하는지 알아내야 합니다.
+입력 정의와 스크립트 명령의 첫 번째 절반을 생략했는데, 이를 어떻게 작성해야 하는지 알아내야 합니다.
 
 #### 2.2.2. `collectGreetings()`에 대한 입력 정의
 
-`convertToUpper()` 프로세스에 대한 모든 호출에서 인사말을 수집해야 합니다.
+`convertToUpper()` 프로세스에 대한 모든 실행에서 인사말을 수집해야 합니다.
 워크플로우의 이전 단계에서 얻을 수 있는 것이 무엇인지 알고 있습니까?
 
 `convertToUpper()`에서 출력되는 채널에는 대문자 인사말이 포함된 개별 파일의 경로가 포함됩니다.
-이것은 하나의 입력 슬롯에 해당합니다; 단순함을 위해 `input_files`라고 부르겠습니다.
+이것은 하나의 입력 슬롯에 해당합니다. 단순함을 위해 `input_files`라고 부르겠습니다.
 
 프로세스 블록에서 다음 코드 변경을 수행하십시오:
 
@@ -511,7 +533,7 @@ process collectGreetings {
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect-connector.svg"
 </figure>
 
-#### 2.3.1. 프로세스 호출 연결
+#### 2.3.1. 프로세스 실행 연결
 
 워크플로우 블록에서 다음 코드 변경을 수행하십시오:
 
@@ -608,27 +630,44 @@ nextflow run hello-workflow.nf -resume
 ??? success "명령 출력"
 
     ```console hl_lines="8"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [mad_gilbert] DSL2 - revision: 6acfd5e28d
+    Launching `hello-workflow.nf` [mad_gilbert] revision: 6acfd5e28d
 
     executor >  local (3)
     [79/33b2f0] sayHello (2)         | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (3)   | 3 of 3, cached: 3 ✔
     [47/50fe4a] collectGreetings (1) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hola-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Hello-output.txt
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+      collected:
+        - hello_workflow/COLLECTED-output.txt
+        - hello_workflow/COLLECTED-output.txt
+        - hello_workflow/COLLECTED-output.txt
     ```
 
 세 번째 단계를 포함하여 성공적으로 실행됩니다.
 
-그러나 마지막 줄에서 `collectGreetings()`에 대한 호출 수를 보십시오.
+그러나 마지막 줄에서 `collectGreetings()`에 대한 실행 수를 보십시오.
 하나만 예상했지만 세 개가 있습니다.
 
 이제 최종 출력 파일의 내용을 살펴보십시오.
 
 ??? abstract "파일 내용"
 
-    ```console title="results/COLLECTED-output.txt"
-    Hola
+    ```console title="results/hello_workflow/COLLECTED-output.txt"
+    HOLA
     ```
 
 이런. 수집 단계가 각 인사말에 대해 개별적으로 실행되었으며, 이것은 우리가 원했던 것이 아닙니다.
@@ -643,14 +682,14 @@ nextflow run hello-workflow.nf -resume
 
 네, 다시 한번 우리 문제에 대한 답은 연산자입니다.
 
-구체적으로, 적절한 이름의 [`collect()`](https://nextflow.io/docs/latest/reference/operator.html#collect) 연산자를 사용할 것입니다.
+구체적으로, 적절한 이름의 [`collect()`](https://nextflow.io/docs/latest/reference/operator.html#collect) 연산자를 사용합니다.
 
 #### 2.4.1. `collect()` 연산자 추가
 
 이번에는 채널 팩토리의 컨텍스트에서 연산자를 추가하는 것이 아니라 출력 채널에 추가하기 때문에 약간 다르게 보일 것입니다.
 
 `convertToUpper.out`을 가져와서 `collect()` 연산자를 추가하면 `convertToUpper.out.collect()`가 됩니다.
-이를 `collectGreetings()` 프로세스 호출에 직접 연결할 수 있습니다.
+이를 `collectGreetings()` 프로세스 실행에 직접 연결할 수 있습니다.
 
 워크플로우 블록에서 다음 코드 변경을 수행하십시오:
 
@@ -672,7 +711,7 @@ nextflow run hello-workflow.nf -resume
 
 #### 2.4.2. `view()` 문 추가
 
-채널 내용의 전후 상태를 시각화하기 위해 몇 가지 `view()` 문도 포함합시다.
+채널 내용의 전후 상태를 시각화하기 위해 몇 가지 `view()` 문도 포함합니다.
 
 === "후"
 
@@ -694,7 +733,7 @@ nextflow run hello-workflow.nf -resume
     }
     ```
 
-`view()` 문은 원하는 곳에 배치할 수 있습니다; 가독성을 위해 호출 바로 뒤에 배치했습니다.
+`view()` 문은 원하는 곳에 배치할 수 있습니다. 가독성을 위해 실행 바로 뒤에 배치했습니다.
 
 #### 2.4.3. `-resume`으로 워크플로우 다시 실행
 
@@ -707,10 +746,11 @@ nextflow run hello-workflow.nf -resume
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
+    Launching `hello-workflow.nf` [soggy_franklin] revision: bc8e1b2726
 
+    executor >  local (1)
     [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1e/83586c] collectGreetings   | 1 of 1 ✔
@@ -718,12 +758,26 @@ nextflow run hello-workflow.nf -resume
     Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
     Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt
     After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt]
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hola-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+      collected: hello_workflow/COLLECTED-output.txt
     ```
 
-성공적으로 실행되지만, 로그 출력이 이것보다 약간 지저분하게 보일 수 있습니다(가독성을 위해 정리했습니다).
+성공적으로 실행됩니다. 다만 로그 출력이 이것보다 약간 지저분하게 보일 수 있습니다(가독성을 위해 정리했습니다).
 
-이번에는 세 번째 단계가 한 번만 호출되었습니다!
-`view()` 문의 출력을 보면 다음을 볼 수 있습니다:
+이번에는 세 번째 단계가 한 번만 실행되었습니다!
+`view()` 문의 출력을 보면 다음을 확인할 수 있습니다:
 
 - 세 개의 `Before collect:` 문, 각 인사말에 대해 하나씩: 해당 시점에서 파일 경로는 채널의 개별 항목입니다.
 - 단일 `After collect:` 문: 세 개의 파일 경로가 이제 단일 요소로 패키징되었습니다.
@@ -734,11 +788,11 @@ nextflow run hello-workflow.nf -resume
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect-WITH-operator.svg"
 </figure>
 
-마지막으로, 출력 파일의 내용을 살펴보고 모든 것이 올바르게 작동했는지 확인할 수 있습니다.
+마지막으로, 출력 파일의 내용을 살펴보고 모든 것이 올바르게 작동했는지 확인합니다.
 
 ??? abstract "파일 내용"
 
-    ```console title="results/COLLECTED-output.txt"
+    ```console title="results/hello_workflow/COLLECTED-output.txt"
     BONJOUR
     HELLO
     HOLA
@@ -749,7 +803,7 @@ nextflow run hello-workflow.nf -resume
 !!! note "참고"
 
     `-resume` 없이 여러 번 실행하면 인사말의 순서가 실행마다 변경되는 것을 볼 수 있습니다.
-    이것은 요소가 프로세스 호출을 통해 흐르는 순서가 일관되게 보장되지 않음을 보여줍니다.
+    이것은 요소가 프로세스 실행을 통해 흐르는 순서가 일관되게 보장되지 않음을 보여줍니다.
 
 #### 2.4.4. 가독성을 위해 `view()` 문 제거
 
@@ -777,7 +831,7 @@ nextflow run hello-workflow.nf -resume
 
 ### 핵심 정리
 
-일괄 프로세스 호출에서 출력을 수집하고 공동 분석 또는 요약 단계에 공급하는 방법을 알게 되었습니다.
+일괄 프로세스 실행에서 출력을 수집하고 공동 분석 또는 요약 단계에 공급하는 방법을 알게 되었습니다.
 
 요약하면, 지금까지 다음과 같이 구축했습니다:
 
@@ -940,21 +994,35 @@ nextflow run hello-workflow.nf -resume --batch trio
 ??? success "명령 출력"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [confident_rutherford] DSL2 - revision: bc58af409c
+    Launching `hello-workflow.nf` [confident_rutherford] revision: bc58af409c
 
     executor >  local (1)
     [79/33b2f0] sayHello (2)       | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [b5/f19efe] collectGreetings   | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Hola-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+      collected: hello_workflow/COLLECTED-trio-output.txt
     ```
 
 성공적으로 실행되고 원하는 출력을 생성합니다:
 
 ??? abstract "파일 내용"
 
-    ```console title="results/COLLECTED-trio-output.txt"
+    ```console title="results/hello_workflow/COLLECTED-trio-output.txt"
     HELLO
     BONJOUR
     HOLA
@@ -1156,14 +1224,29 @@ nextflow run hello-workflow.nf -resume --batch trio
 ??? success "명령 출력"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [ecstatic_wilson] DSL2 - revision: c80285f8c8
+    Launching `hello-workflow.nf` [ecstatic_wilson] revision: c80285f8c8
 
     executor >  local (1)
-    [c5/4c6ca9] sayHello (3)       [100%] 3 of 3, cached: 3 ✔
-    [0e/6cbc59] convertToUpper (3) [100%] 3 of 3, cached: 3 ✔
-    [02/61ead2] collectGreetings   [100%] 1 of 1 ✔
+    [c5/4c6ca9] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [0e/6cbc59] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [02/61ead2] collectGreetings   | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Hola-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+      collected: hello_workflow/COLLECTED-trio-output.txt
+      batch_report: hello_workflow/trio-report.txt
     ```
 
 `results/hello_workflow/` 디렉토리를 보면 새 보고 파일인 `trio-report.txt`를 찾을 수 있습니다.
@@ -1273,5 +1356,5 @@ workflow {
 - [x] 입력 순서가 입력 블록에 정의된 순서와 일치해야 함
 - [ ] 한 번에 두 개의 입력만 제공할 수 있음
 
-자세히 알아보기: [3. 프로세스에 추가 매개변수 전달](#3-pass-more-than-one-input-to-a-process)
+자세히 알아보기: [3. 프로세스에 추가 매개변수 전달](#3-pass-additional-parameters-to-a-process)
 </quiz>

@@ -59,7 +59,7 @@ sudo uv run ./preview_release.py --version 3.0
 - `docs/en/` - English training content (source)
   - `docs/` - Markdown content
     - `hello_nextflow/` - Basic Nextflow introduction
-    - `hello_nf-core/` - nf-core framework training
+    - `nfcore_build/` - nf-core framework training
     - `nf4_science/` - Domain-specific training (genomics, RNAseq)
     - `side_quests/` - Advanced topics
   - `mkdocs.yml` - Site navigation and configuration
@@ -67,7 +67,7 @@ sudo uv run ./preview_release.py --version 3.0
   - `glossary.yml` - Per-language glossary for deterministic post-processing
   - `llm-prompt.md` - Language-specific translation instructions for the LLM
 - `_scripts/` - Translation package (`translate/`) and build scripts (`docs.py`)
-- `hello-nextflow/`, `hello-nf-core/`, `nf4-science/`, `side-quests/` - Runnable Nextflow scripts paired with the matching `docs/en/docs/<module>/` lesson tree. Lesson markdown imports from these dirs via `--8<--` snippets, so changes to a script usually need a matching markdown edit (and vice versa).
+- `hello-nextflow/`, `nfcore-build/`, `nf4-science/`, `side-quests/` - Runnable Nextflow scripts paired with the matching `docs/en/docs/<module>/` lesson tree. Lesson markdown imports from these dirs via `--8<--` snippets, so changes to a script usually need a matching markdown edit (and vice versa).
 - `docs/en/hooks/index_page_hook.py` - mkdocs hook that renders the `index_page` frontmatter template (see Conventions)
 - `.github/check_headings.py` - Validates heading numbering
 

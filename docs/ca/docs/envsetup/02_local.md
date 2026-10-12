@@ -39,9 +39,8 @@ Necessitaràs instal·lar Nextflow mateix, més les eines nf-core, tal com es de
 
 Recomanem utilitzar l'opció d'autoinstal·lació per a Nextflow i l'opció PyPI per a les eines nf-core.
 
-!!! warning "Advertència sobre compatibilitat de versions"
+!!! warning "Compatibilitat de versions"
 
-    <!-- Any update to this content needs to be copied to the home page -->
     **A partir de gener de 2026, tots els nostres cursos de formació de Nextflow requereixen la versió 25.10.2 de Nextflow o posterior, amb la sintaxi estricta v2 activada, tret que s'indiqui el contrari.**
 
     Per a més informació sobre els requisits de versió i la sintaxi estricta v2, consulteu la guia de [versions de Nextflow](../info/nxf_versions.md).

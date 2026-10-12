@@ -1,9 +1,6 @@
----
-
 # Entorn de Desenvolupament
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
-
 
 Els Entorns de Desenvolupament Integrats (IDE) moderns poden transformar radicalment la vostra experiència de desenvolupament amb Nextflow. Aquesta missió secundària se centra específicament en aprofitar VS Code i la seva extensió de Nextflow per escriure codi més ràpidament, detectar errors d'hora i navegar per workflows complexos de manera eficient.
 
@@ -77,7 +74,7 @@ tree .
 │   └── utils.nf
 └── nextflow.config
 
-3 directories, 12 files
+2 directories, 12 files
 ```
 
 !!! note "Sobre els fitxers d'exemple"
@@ -334,7 +331,7 @@ Ara explorem la navegació en un workflow més complex utilitzant `complex_workf
 
 ### 4.2. Navegació per símbols
 
-Amb `complex_workflow.nf` encara obert, podeu obtenir una visió general de tots els símbols del fitxer escrivint `@` a la barra de cerca a la part superior de VSCode (la drecera de teclat és `Ctrl/Cmd+Shift+O`, però pot no funcionar a Codespaces). Això obre el panell de navegació per símbols, que llista tots els símbols del fitxer actual:
+Amb `complex_workflow.nf` encara obert, podeu obtenir una visió general de tots els símbols del fitxer escrivint `@` a la barra de cerca a la part superior de VS Code (la drecera de teclat és `Ctrl/Cmd+Shift+O`, però pot no funcionar a Codespaces). Això obre el panell de navegació per símbols, que llista tots els símbols del fitxer actual:
 
 ![Navegació per símbols](../img/symbols.png)
 
@@ -368,7 +365,7 @@ L'extensió de Nextflow de VS Code pot visualitzar el vostre workflow com un Gra
 
 ![Previsualització del DAG](../img/dag_preview.png)
 
-Això és només el workflow d'entrada, però també podeu previsualitzar el DAG per als workflows interns fent clic al botó "Preview DAG" sobre el workflow `RNASEQ_PIPELINE {` més amunt:
+Aquest és només el workflow d'entrada, però també podeu previsualitzar el DAG per als workflows interns fent clic al botó "Preview DAG" sobre el workflow `RNASEQ_PIPELINE {` més amunt:
 
 ![Previsualització del DAG del workflow intern](../img/dag_preview_inner.png)
 
@@ -548,7 +545,7 @@ Si el vostre projecte és un repositori git (com ho és aquest), VS Code mostra:
 - Vistes de diferències en línia
 - Capacitats de commit i push
 
-Obriu el panell de Control de Codi Font utilitzant el botó de control de codi font (![Icona de control de codi font](../img/source_control_icon.png)) (`Ctrl+Shift+G` o `Cmd+Shift+G` si esteu treballant amb VSCode localment) per veure els canvis de git i fer commits directament a l'editor.
+Obriu el panell de Control de Codi Font utilitzant el botó de control de codi font (![Icona de control de codi font](../img/source_control_icon.png)) (`Ctrl+Shift+G` o `Cmd+Shift+G` si esteu treballant amb VS Code localment) per veure els canvis de git i preparar commits directament a l'editor.
 
 ![Panell de Control de Codi Font](../img/source_control.png)
 
@@ -623,7 +620,7 @@ No esperem que recordeu tot, però ara que sabeu que existeixen aquestes funcion
 Apliqueu aquestes habilitats de l'IDE mentre treballeu en altres mòduls de formació, per exemple:
 
 - **[nf-test](../nf_test/index.md)**: Creeu suites de proves exhaustives per als vostres workflows
-- **[Hello nf-core](../../hello_nf-core/index.md)**: Construïu pipelines de qualitat de producció amb estàndards de la comunitat
+- **[Build with nf-core](../../nfcore_build/index.md)**: Desenvolupeu pipelines de qualitat de producció amb estàndards de la comunitat
 
 El veritable poder d'aquestes funcionalitats de l'IDE emergeix quan treballeu en projectes més grans i complexos. Comenceu a incorporar-les al vostre flux de treball gradualment: en poques sessions, es tornaran una segona naturalesa i transformaran la manera com abordeu el desenvolupament amb Nextflow.
 

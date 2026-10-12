@@ -72,7 +72,7 @@ Dans le fichier de workflow principal `{DOMAIN_DIR}.nf`, sous la section `Pipeli
      * Pipeline parameters
      */
     params {
-        // Primary input
+        // Entrée principale
         {PRIMARY_PARAM_NAME}: Path
     }
     ```
@@ -84,7 +84,7 @@ Dans le fichier de workflow principal `{DOMAIN_DIR}.nf`, sous la section `Pipeli
      * Pipeline parameters
      */
 
-    // Primary input
+    // Entrée principale
     ```
 
 Cela configure le paramètre CLI, mais nous ne voulons pas saisir le chemin du fichier à chaque fois que nous exécutons le workflow pendant le développement.
@@ -143,12 +143,19 @@ nextflow run {DOMAIN_DIR}.nf -profile test
 ??? success "Sortie de la commande"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    ┃ Launching `{DOMAIN_DIR}.nf` [{RUN_NAME}] DSL2 - revision: {HASH}
+    Launching `{DOMAIN_DIR}.nf` [{RUN_NAME}] revision: {HASH}
 
     executor >  local (1)
     [{HASH}] {PROCESS_A_NAME} (1) | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/nf4-science/{DOMAIN_DIR}/results
+
+      {OUTPUT_NAME}:
+        - {OUTPUT_SUBDIR}/{OUTPUT_FILE}
     ```
 
 {VERIFY_OUTPUT_INSTRUCTIONS}

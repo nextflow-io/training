@@ -131,15 +131,16 @@ Ponieważ używamy `-resume`, Nextflow sprawdzi, czy coś się zmieniło od osta
 Jeśli parametry, wejścia i kod są takie same, wszystkie zadania będą pobrane z cache'u i pipeline zakończy się niemal natychmiast.
 
 ```console title="Output (excerpt)"
-executor >  local (12)
+executor >  local (1)
+[43/e03702] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2, cached: 2 ✔
+[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2, cached: 2 ✔
 ...
-[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔
-[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)               [100%] 2 of 2, cached: 2 ✔
-...
+[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 1 of 1, cached: 1 ✔
+[ef/d7b294] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
 -[nf-core/molkart] Pipeline completed successfully-
 ```
 
-Zauważ, że wszystkie procesy pokazują `cached: 2` lub `cached: 1` - nic nie zostało ponownie wykonane!
+Zauważ adnotację `cached: N` przy każdym procesie - zadania przetwarzania wstępnego i segmentacji pobrane z cache'u nie zostały ponownie wykonane.
 
 ### 2.4. Profile testowe
 
@@ -175,8 +176,8 @@ params {
 
 process {
     resourceLimits = [
-        cpus: 4,
-        memory: '15.GB',
+        cpus: 1,
+        memory: '4.GB',
         time: '1.h'
     ]
 }
@@ -298,7 +299,7 @@ process {
     memory = { 6.GB   * task.attempt }
     time   = { 4.h    * task.attempt }
 
-    errorStrategy = { task.exitStatus in ((130..145) + 104) ? 'retry' : 'finish' }
+    errorStrategy = { task.exitStatus in ((130..145) + 104 + 175) ? 'retry' : 'finish' }
     maxRetries    = 1
     maxErrors     = '-1'
 
@@ -346,7 +347,7 @@ W następnej sekcji nauczymy się, jak zapobiegać tego typu awariom.
 
 !!! Tip "Wskazówka"
 
-    Aby znaleźć nazwy procesów, sprawdź wyjście wykonania pipeline'u lub sprawdź `.nextflow.log`.
+    Aby znaleźć nazwy procesów, sprawdź wyjście wykonania pipeline'u lub plik `.nextflow.log`.
     Nazwy procesów mają wzór `WORKFLOW:SUBWORKFLOW:PROCESS`.
 
 ### Podsumowanie
@@ -448,5 +449,5 @@ Następne kroki:
 
 - Wypełnij ankietę kursu, aby przekazać informację zwrotną
 - Sprawdź [Hello Nextflow](../../hello_nextflow/index.md), aby dowiedzieć się więcej o tworzeniu workflow'ów
-- Poznaj [Hello nf-core](../../hello_nf-core/index.md), aby zgłębić narzędzia nf-core
-- Przeglądaj inne kursy w [kolekcjach szkoleniowych](../../training_collections/index.md)
+- Poznaj [Build with nf-core](../../nfcore_build/index.md), aby zgłębić narzędzia nf-core
+- Przeglądaj zaawansowane tematy w [Side Quests](../../side_quests/index.md)

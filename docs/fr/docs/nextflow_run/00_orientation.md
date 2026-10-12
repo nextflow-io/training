@@ -22,24 +22,23 @@ Si vous suivez cette formation par vous-même, veuillez vous familiariser avec l
 
 ### Exigences de version
 
-Cette formation est conçue pour Nextflow 25.10.2 ou ultérieur **avec le parseur de syntaxe v2 ACTIVÉ**.
+Cette formation requiert Nextflow 25.10.2 ou ultérieur, avec le parseur de syntaxe v2 activé (valeur par défaut dans la version 25.10+).
 Si vous utilisez un environnement local ou personnalisé, veuillez vous assurer que vous utilisez les paramètres corrects comme documenté [ici](../info/nxf_versions.md).
 
 ## Se préparer à travailler
 
-Une fois votre codespace en cours d'exécution, il y a deux choses que vous devez faire avant de plonger dans la formation : définir votre répertoire de travail pour cette formation spécifique, et examiner les matériaux fournis.
+Une fois votre codespace en cours d'exécution, il y a deux choses à faire avant de plonger dans la formation : définir votre répertoire de travail, et examiner les matériaux fournis.
 
 ### Définir le répertoire de travail
 
-Par défaut, le codespace s'ouvre avec le répertoire de travail défini à la racine de toutes les formations, mais pour cette formation, nous allons travailler dans le répertoire `nextflow-run/`.
-
-Changez de répertoire maintenant en exécutant cette commande dans le terminal :
+Par défaut, le codespace s'ouvre à la racine de toutes les formations.
+Pour cette formation, changez vers le répertoire `nextflow-run/` :
 
 ```bash
 cd nextflow-run/
 ```
 
-Vous pouvez configurer VSCode pour se concentrer sur ce répertoire, de sorte que seuls les fichiers pertinents apparaissent dans la barre latérale de l'explorateur de fichiers :
+Configurez ensuite VSCode pour se concentrer sur ce répertoire, de sorte que seuls les fichiers pertinents apparaissent dans la barre latérale de l'explorateur de fichiers :
 
 ```bash
 code .
@@ -53,16 +52,10 @@ code .
     cd /workspaces/training/nextflow-run
     ```
 
-Maintenant, examinons le contenu.
-
 ### Explorer les matériaux fournis
 
-Vous pouvez explorer le contenu de ce répertoire en utilisant l'explorateur de fichiers sur le côté gauche de l'espace de travail de formation.
-Alternativement, vous pouvez utiliser la commande `tree`.
-
-Tout au long de la formation, nous utilisons la sortie de `tree` pour représenter la structure et le contenu des répertoires sous une forme lisible, parfois avec des modifications mineures pour plus de clarté.
-
-Ici, nous générons une table des matières jusqu'au deuxième niveau :
+Vous pouvez explorer les matériaux de la formation en utilisant l'explorateur de fichiers sur la gauche, ou avec la commande `tree`.
+Exécutez la commande suivante depuis le terminal pour voir la structure complète :
 
 ```bash
 tree . -L 2
@@ -73,41 +66,26 @@ tree . -L 2
     ```console
     .
     ├── 1-hello.nf
-    ├── 2a-inputs.nf
-    ├── 2b-multistep.nf
-    ├── 2c-modules.nf
-    ├── 2d-container.nf
-    ├── 3-main.nf
+    ├── 2-inputs.nf
     ├── data
+    │   ├── greetings-extended.csv
     │   └── greetings.csv
+    ├── main.nf
     ├── modules
     │   ├── collectGreetings.nf
     │   ├── convertToUpper.nf
     │   ├── cowpy.nf
     │   └── sayHello.nf
-    ├── nextflow.config
-    ├── solutions
-    │   ├── 3-main.nf
-    │   ├── modules
-    │   └── nextflow.config
-    ├── test-params.json
-    └── test-params.yaml
+    └── nextflow.config
     ```
 
-Cliquez sur la boîte colorée pour développer la section et voir son contenu.
-Nous utilisons des sections repliables comme celle-ci pour afficher la sortie attendue des commandes ainsi que le contenu des répertoires et des fichiers de manière concise.
+Les **fichiers `.nf`** sont des scripts de workflow de complexité croissante, utilisés dans cet ordre tout au long de la formation.
 
-- **Les fichiers `.nf`** sont des scripts de workflow numérotés en fonction de la partie de la formation où ils sont utilisés.
+Le **répertoire `data/`** contient les fichiers CSV d'entrée que nous utiliserons à partir de la section 2.
 
-- **Le fichier `nextflow.config`** est un fichier de configuration qui définit les propriétés minimales de l'environnement.
-  Vous pouvez l'ignorer pour l'instant.
+Le **répertoire `modules/`** contient les définitions de processus utilisées par `main.nf`.
 
-- **Le fichier `greetings.csv`** sous `data/` contient les données d'entrée que nous utiliserons dans la majeure partie de la formation. Il est décrit dans la Partie 2 (Exécuter des pipelines), lorsque nous l'introduisons pour la première fois.
-
-- **Les fichiers `test-params.*`** sont des fichiers de configuration que nous utiliserons dans la Partie 3 (Configuration). Vous pouvez les ignorer pour l'instant.
-
-- **Le répertoire `solutions`** contient l'état final du workflow et de ses fichiers accessoires (config et modules) qui résultent de l'achèvement de la formation.
-  Ils sont destinés à être utilisés comme référence pour vérifier votre travail et résoudre les problèmes.
+Le **fichier `nextflow.config`** est un fichier de configuration qui définit les propriétés minimales de l'environnement. Vous pouvez l'ignorer pour l'instant ; nous le passerons en revue dans la section 4.
 
 ## Liste de vérification de préparation
 
@@ -119,4 +97,4 @@ Vous pensez être prêt·e à plonger ?
 
 Si vous pouvez cocher toutes les cases, vous êtes prêt·e à commencer.
 
-**Pour continuer vers [Partie 1 : Exécuter les opérations de base](./01_basics.md), cliquez sur la flèche en bas à droite de cette page.**
+**Pour continuer vers [Partie 1 : Exécuter Nextflow](./01_run_nextflow.md), cliquez sur la flèche en bas à droite de cette page.**

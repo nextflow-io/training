@@ -67,12 +67,21 @@ nextflow run hello-workflow.nf
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [admiring_lamarr] DSL2 - revision: 4d4053520d
+    Launching `hello-workflow.nf` [admiring_lamarr] revision: 4d4053520d
 
     executor >  local (3)
-    [b1/5826b5] process > sayHello (2) [100%] 3 of 3 ✔
+    [b1/5826b5] sayHello (2) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Hola-output.txt
     ```
 
 Daha önce olduğu gibi, çıktı dosyalarını `output` bloğunda belirtilen konumda bulacaksınız.
@@ -311,13 +320,26 @@ nextflow run hello-workflow.nf -resume
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [high_cantor] DSL2 - revision: d746983511
+    Launching `hello-workflow.nf` [high_cantor] revision: d746983511
 
     executor >  local (3)
-    [ab/816321] process > sayHello (3)       [100%] 3 of 3, cached: 3 ✔
-    [e0/ecf81b] process > convertToUpper (3) [100%] 3 of 3 ✔
+    [ab/816321] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [e0/ecf81b] convertToUpper (3) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Hola-output.txt
+        - hello_workflow/Bonjour-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Hola-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+        - hello_workflow/UPPER-Bonjour-output.txt
     ```
 
 Konsol çıktısında, az önce eklediğimiz yeni sürece karşılık gelen fazladan bir satır var.
@@ -608,14 +630,31 @@ nextflow run hello-workflow.nf -resume
 ??? success "Komut çıktısı"
 
     ```console hl_lines="8"
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [mad_gilbert] DSL2 - revision: 6acfd5e28d
+    Launching `hello-workflow.nf` [mad_gilbert] revision: 6acfd5e28d
 
     executor >  local (3)
     [79/33b2f0] sayHello (2)         | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (3)   | 3 of 3, cached: 3 ✔
     [47/50fe4a] collectGreetings (1) | 3 of 3 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hola-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Hello-output.txt
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+      collected:
+        - hello_workflow/COLLECTED-output.txt
+        - hello_workflow/COLLECTED-output.txt
+        - hello_workflow/COLLECTED-output.txt
     ```
 
 Üçüncü adım dahil başarıyla çalışıyor.
@@ -627,8 +666,8 @@ Yalnızca bir tane bekliyorduk, ama üç tane var.
 
 ??? abstract "Dosya içeriği"
 
-    ```console title="results/COLLECTED-output.txt"
-    Hola
+    ```console title="results/hello_workflow/COLLECTED-output.txt"
+    HOLA
     ```
 
 Hay aksi. Toplama adımı her selamlama için ayrı ayrı çalıştırıldı, bu istediğimiz şey DEĞİLDİ.
@@ -707,10 +746,11 @@ nextflow run hello-workflow.nf -resume
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
+    Launching `hello-workflow.nf` [soggy_franklin] revision: bc8e1b2726
 
+    executor >  local (1)
     [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1e/83586c] collectGreetings   | 1 of 1 ✔
@@ -718,6 +758,20 @@ nextflow run hello-workflow.nf -resume
     Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
     Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt
     After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Hola-output.txt]
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hola-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+      collected: hello_workflow/COLLECTED-output.txt
     ```
 
 Başarıyla çalışıyor, ancak log çıktısı bundan biraz daha dağınık görünebilir (okunabilirlik için temizledik).
@@ -725,8 +779,8 @@ Başarıyla çalışıyor, ancak log çıktısı bundan biraz daha dağınık g�
 Bu sefer üçüncü adım yalnızca bir kez çağrıldı!
 `view()` ifadelerinin çıktısına bakarak şunları görüyoruz:
 
-- Her selamlama için bir tane olmak üzere üç `collect öncesi:` ifadesi: o noktada dosya yolları kanalda bireysel öğeler.
-- Tek bir `collect sonrası:` ifadesi: üç dosya yolu artık tek bir öğe içinde paketlenmiş.
+- Her selamlama için bir tane olmak üzere üç `Before collect:` ifadesi: o noktada dosya yolları kanalda bireysel öğeler.
+- Tek bir `After collect:` ifadesi: üç dosya yolu artık tek bir öğe içinde paketlenmiş.
 
 Bunu şu diyagramla özetleyebiliriz:
 
@@ -738,7 +792,7 @@ Son olarak, her şeyin doğru çalıştığından emin olmak için çıktı dosy
 
 ??? abstract "Dosya içeriği"
 
-    ```console title="results/COLLECTED-output.txt"
+    ```console title="results/hello_workflow/COLLECTED-output.txt"
     BONJOUR
     HELLO
     HOLA
@@ -940,21 +994,35 @@ nextflow run hello-workflow.nf -resume --batch trio
 ??? success "Komut çıktısı"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [confident_rutherford] DSL2 - revision: bc58af409c
+    Launching `hello-workflow.nf` [confident_rutherford] revision: bc58af409c
 
     executor >  local (1)
     [79/33b2f0] sayHello (2)       | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [b5/f19efe] collectGreetings   | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Hola-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+      collected: hello_workflow/COLLECTED-trio-output.txt
     ```
 
 Başarıyla çalışıyor ve istenen çıktıyı üretiyor:
 
 ??? abstract "Dosya içeriği"
 
-    ```console title="results/COLLECTED-trio-output.txt"
+    ```console title="results/hello_workflow/COLLECTED-trio-output.txt"
     HELLO
     BONJOUR
     HOLA
@@ -1158,14 +1226,29 @@ nextflow run hello-workflow.nf -resume --batch trio
 ??? success "Komut çıktısı"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
-    Launching `hello-workflow.nf` [ecstatic_wilson] DSL2 - revision: c80285f8c8
+    Launching `hello-workflow.nf` [ecstatic_wilson] revision: c80285f8c8
 
     executor >  local (1)
-    [c5/4c6ca9] sayHello (3)       [100%] 3 of 3, cached: 3 ✔
-    [0e/6cbc59] convertToUpper (3) [100%] 3 of 3, cached: 3 ✔
-    [02/61ead2] collectGreetings   [100%] 1 of 1 ✔
+    [c5/4c6ca9] sayHello (3)       | 3 of 3, cached: 3 ✔
+    [0e/6cbc59] convertToUpper (3) | 3 of 3, cached: 3 ✔
+    [02/61ead2] collectGreetings   | 1 of 1 ✔
+
+    Outputs:
+
+      /workspaces/training/hello-nextflow/results
+
+      first_output:
+        - hello_workflow/Bonjour-output.txt
+        - hello_workflow/Hello-output.txt
+        - hello_workflow/Hola-output.txt
+      uppercased:
+        - hello_workflow/UPPER-Bonjour-output.txt
+        - hello_workflow/UPPER-Hola-output.txt
+        - hello_workflow/UPPER-Hello-output.txt
+      collected: hello_workflow/COLLECTED-trio-output.txt
+      batch_report: hello_workflow/trio-report.txt
     ```
 
 `results/hello_workflow/` dizinine bakarsanız, yeni rapor dosyasını, `trio-report.txt`'yi bulacaksınız.
@@ -1275,5 +1358,5 @@ Bir sürece birden fazla girdi sağlarken ne doğru olmalıdır?
 - [x] Girdilerin sırası girdi bloğunda tanımlanan sırayla eşleşmelidir
 - [ ] Aynı anda yalnızca iki girdi sağlanabilir
 
-Daha fazla bilgi: [3. Bir sürece ek parametreler iletin](#3-pass-more-than-one-input-to-a-process)
+Daha fazla bilgi: [3. Bir sürece ek parametreler iletin](#3-pass-additional-parameters-to-a-process)
 </quiz>

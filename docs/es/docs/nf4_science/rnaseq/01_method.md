@@ -5,7 +5,7 @@
 Existen múltiples métodos válidos para procesar y analizar datos de RNAseq en bulk.
 Para este curso, seguimos el método descrito [aquí](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf) por los Drs. Simon Andrews y Laura Biggins en el [Babraham Institute](https://www.babraham.ac.uk/).
 
-Nuestro objetivo es desarrollar un flujo de trabajo que implemente los siguientes pasos de procesamiento: ejecutar control de calidad inicial en las lecturas de una muestra de RNAseq en bulk, recortar secuencias de adaptadores de las lecturas, alinear las lecturas a un genoma de referencia y producir un informe completo de control de calidad (QC).
+Nuestro objetivo es desarrollar un workflow que implemente los siguientes pasos de procesamiento: ejecutar control de calidad inicial en las lecturas de una muestra de RNAseq en bulk, recortar secuencias de adaptadores de las lecturas, alinear las lecturas a un genoma de referencia y producir un informe completo de control de calidad (QC).
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nf4_science/rnaseq/img/rnaseq-method-03.svg"
@@ -22,7 +22,7 @@ Vamos a mostrarle cómo aplicar estos pasos de procesamiento en dos fases.
 Primero comenzaremos con **procesamiento de muestra única** que ejecuta las herramientas de QC, recorte y alineamiento en una muestra.
 Luego extenderemos a **procesamiento de múltiples muestras** que ejecuta las mismas herramientas en múltiples muestras y genera un informe de control de calidad agregado.
 
-Antes de comenzar a escribir cualquier código de flujo de trabajo para cualquiera de los enfoques, vamos a probar los comandos manualmente con algunos datos de prueba.
+Antes de comenzar a escribir cualquier código de workflow para cualquiera de los enfoques, vamos a probar los comandos manualmente con algunos datos de prueba.
 
 ### Conjunto de datos
 
@@ -40,7 +40,7 @@ Estas herramientas no están instaladas en el entorno de GitHub Codespaces, por 
 
 !!! tip "Consejo"
 
-     Asegúrese de estar en el directorio `nf4-science/rnaseq`. La última parte de la ruta que se muestra cuando escribe `pwd` debe ser `rnaseq`.
+    Asegúrese de estar en el directorio `nf4-science/rnaseq`. La última parte de la ruta que se muestra cuando escribe `pwd` debe ser `rnaseq`.
 
 ---
 

@@ -131,15 +131,16 @@ Como estamos usando `-resume`, Nextflow verificará si algo cambió desde la úl
 Si los parámetros, entradas y código son los mismos, todas las tareas se recuperarán de la caché y el pipeline se completará casi instantáneamente.
 
 ```console title="Output (excerpt)"
-executor >  local (12)
+executor >  local (1)
+[43/e03702] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2, cached: 2 ✔
+[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2, cached: 2 ✔
 ...
-[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔
-[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)               [100%] 2 of 2, cached: 2 ✔
-...
+[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 1 of 1, cached: 1 ✔
+[ef/d7b294] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
 -[nf-core/molkart] Pipeline completed successfully-
 ```
 
-¡Observa que todos los procesos muestran `cached: 2` o `cached: 1` - nada fue re-ejecutado!
+Observa la anotación `cached: N` en cada proceso - las tareas de preprocesamiento y segmentación almacenadas en caché no fueron re-ejecutadas.
 
 ### 2.4. Perfiles de prueba
 
@@ -175,8 +176,8 @@ params {
 
 process {
     resourceLimits = [
-        cpus: 4,
-        memory: '15.GB',
+        cpus: 1,
+        memory: '4.GB',
         time: '1.h'
     ]
 }
@@ -298,7 +299,7 @@ process {
     memory = { 6.GB   * task.attempt }
     time   = { 4.h    * task.attempt }
 
-    errorStrategy = { task.exitStatus in ((130..145) + 104) ? 'retry' : 'finish' }
+    errorStrategy = { task.exitStatus in ((130..145) + 104 + 175) ? 'retry' : 'finish' }
     maxRetries    = 1
     maxErrors     = '-1'
 
@@ -448,5 +449,5 @@ Próximos pasos:
 
 - Completa la encuesta del curso para proporcionar retroalimentación
 - Revisa [Hello Nextflow](../../hello_nextflow/index.md) para aprender más sobre el desarrollo de workflows
-- Explora [Hello nf-core](../../hello_nf-core/index.md) para profundizar en las herramientas de nf-core
-- Navega otros cursos en las [colecciones de entrenamiento](../../training_collections/index.md)
+- Explora [Build with nf-core](../../nfcore_build/index.md) para profundizar en las herramientas de nf-core
+- Explora temas más avanzados en los [Side Quests](../../side_quests/index.md)

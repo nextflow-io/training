@@ -9,7 +9,8 @@ Queste informazioni extra sono ciò che chiamiamo metadati.
 I metadati sono dati che descrivono altri dati.
 I metadati tracciano dettagli importanti sui file e sulle condizioni sperimentali, e aiutano ad adattare le analisi alle caratteristiche uniche di ogni dataset.
 
-Pensateci come a un catalogo di biblioteca: mentre i libri contengono il contenuto effettivo (dati grezzi), le schede catalografiche forniscono informazioni essenziali su ogni libro — quando è stato pubblicato, chi lo ha scritto, dove trovarlo (metadati).
+Pensateci come a un catalogo di biblioteca: mentre i libri contengono il contenuto effettivo (dati grezzi), le schede catalografiche forniscono informazioni essenziali su ogni libro.
+Queste informazioni includono quando è stato pubblicato, chi lo ha scritto e dove trovarlo (metadati).
 Nei pipeline Nextflow, i metadati possono essere utilizzati per:
 
 - Tracciare informazioni specifiche dei file durante il flusso di lavoro
@@ -212,9 +213,9 @@ nextflow run main.nf
 ??? success "Output del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [exotic_albattani] DSL2 - revision: c0d03cec83
+    Launching `main.nf` [exotic_albattani] revision: c7ce88ee60
 
     [id:sampleA, character:squirrel, recording:/workspaces/training/side-quests/metadata/data/bonjour.txt]
     [id:sampleB, character:tux, recording:/workspaces/training/side-quests/metadata/data/guten_tag.txt]
@@ -223,6 +224,12 @@ nextflow run main.nf
     [id:sampleE, character:stegosaurus, recording:/workspaces/training/side-quests/metadata/data/hola.txt]
     [id:sampleF, character:moose, recording:/workspaces/training/side-quests/metadata/data/salut.txt]
     [id:sampleG, character:turtle, recording:/workspaces/training/side-quests/metadata/data/ciao.txt]
+
+    Outputs:
+
+      /workspaces/training/side-quests/metadata/results
+
+      cowpy_art:
     ```
 
 Come potete vedere, l'operatore ha costruito una mappa di coppie chiave-valore per ogni riga del file CSV, con le intestazioni delle colonne come chiavi per i valori corrispondenti.
@@ -265,9 +272,9 @@ Ad esempio, potremmo accedere all'ID del file con `id` o al percorso del file tx
     Ed ecco cosa potete aspettarvi di vedere nell'output:
 
     ```console title="Output"
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `map_demo.nf` [cheesy_plateau] DSL2 - revision: fae5b8496e
+    Launching `examples/map_demo.nf` [cheesy_plateau] revision: fae5b8496e
 
     map: [id:sampleA, character:squirrel]
     id: sampleA
@@ -314,9 +321,9 @@ nextflow run main.nf
 ??? success "Output del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [exotic_albattani] DSL2 - revision: c0d03cec83
+    Launching `main.nf` [exotic_albattani] revision: 10a2598a59
 
     squirrel
     tux
@@ -325,6 +332,12 @@ nextflow run main.nf
     stegosaurus
     moose
     turtle
+
+    Outputs:
+
+      /workspaces/training/side-quests/metadata/results
+
+      cowpy_art:
     ```
 
 Questo mostra che siamo in grado di accedere ai valori dalla colonna `character` per ogni riga.
@@ -344,21 +357,21 @@ process COWPY {
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
     input:
-    path input_file
+    path recording
     val character
 
     output:
-    path "cowpy-${input_file}"
+    path "cowpy-${recording}"
 
     script:
     """
-    cat ${input_file} | cowpy -c ${character} > cowpy-${input_file}
+    cat ${recording} | cowpy -c ${character} > cowpy-${recording}
     """
 }
 ```
 
 Come potete vedere, il processo riceve due input separati: un file di registrazione e un nome di personaggio.
-Abbiamo valori per entrambi, ma sono attualmente raggruppati all'interno di ogni elemento nel canale.
+È importante notare che abbiamo valori per entrambi, ma sono attualmente raggruppati all'interno di ogni elemento nel canale.
 
 Un modo per estrarre più campi in canali separati è l'operatore [`multiMap`](https://www.nextflow.io/docs/latest/reference/operator.html#multimap), che divide un canale in più sotto-canali con nome in una singola operazione.
 
@@ -483,12 +496,25 @@ nextflow run main.nf
 ??? success "Output del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [clever_dijkstra] DSL2 - revision: a1b2c3d4e5
+    Launching `main.nf` [clever_dijkstra] revision: 2fb579b3bd
 
     executor >  local (7)
-    [3a/f1c290] COWPY (7) [100%] 7 of 7 ✔
+    [3a/f1c290] COWPY (7) | 7 of 7 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/metadata/results
+
+      cowpy_art:
+        - cowpy-bonjour.txt
+        - cowpy-guten_tag.txt
+        - cowpy-salut.txt
+        - cowpy-hola.txt
+        - cowpy-hello.txt
+        - cowpy-hallo.txt
+        - cowpy-ciao.txt
     ```
 
 Come potete vedere, `COWPY` è stato eseguito su ogni file usando il personaggio corretto per ognuno.
@@ -569,15 +595,15 @@ Aggiornate `COWPY` per accettare una tupla corrispondente ai tre elementi in ogn
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
         input:
-        path input_file
+        path recording
         val character
 
         output:
-        path "cowpy-${input_file}"
+        path "cowpy-${recording}"
 
         script:
         """
-        cat ${input_file} | cowpy -c ${character} > cowpy-${input_file}
+        cat ${recording} | cowpy -c ${character} > cowpy-${recording}
         """
     }
     ```
@@ -654,12 +680,25 @@ nextflow run main.nf
 ??? success "Output del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [pedantic_lovelace] DSL2 - revision: b2c3d4e5f6
+    Launching `main.nf` [pedantic_lovelace] revision: 745a78a291
 
     executor >  local (7)
-    [5e/2a1b34] COWPY (7) [100%] 7 of 7 ✔
+    [5e/2a1b34] COWPY (7) | 7 of 7 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/metadata/results
+
+      cowpy_art:
+        - cowpy-bonjour.txt
+        - cowpy-guten_tag.txt
+        - cowpy-salut.txt
+        - cowpy-hola.txt
+        - cowpy-hello.txt
+        - cowpy-hallo.txt
+        - cowpy-ciao.txt
     ```
 
 L'output è lo stesso sette file `cowpy-*.txt` di prima, ora prodotti con una chiamata più semplice a `COWPY`.
@@ -704,7 +743,7 @@ input:
 tuple val(id), val(character), path(recording)
 ```
 
-Se un collaboratore usa un foglio dati strutturato diversamente — con colonne aggiuntive, o colonne in un ordine diverso — questo processo non funzionerà senza modifiche.
+Se un collaboratore usa un foglio dati strutturato diversamente (con colonne aggiuntive, o colonne in un ordine diverso), questo processo non funzionerà senza modifiche.
 Questo rende il processo fragile, perché la sua struttura di input è legata alla composizione esatta del foglio dati.
 
 Per risolvere questo problema, abbiamo bisogno di un modo per passare tutti i metadati come un pacchetto senza codificare la sua struttura esatta nell'interfaccia del processo.
@@ -712,7 +751,7 @@ Per risolvere questo problema, abbiamo bisogno di un modo per passare tutti i me
 ### 1.5. Usare un'interfaccia meta map + file
 
 La soluzione è separare due aspetti distinti nel canale: i **metadati su un campione** e il **file di dati** stesso.
-Raggruppando tutti i metadati in una singola map — la "meta map" — otteniamo una tupla consistente a due elementi indipendentemente da quante colonne di metadati contiene il foglio dati:
+Raggruppando tutti i metadati in una singola map (la "meta map"), otteniamo una tupla consistente a due elementi indipendentemente da quante colonne di metadati contiene il foglio dati:
 
 ```groovy title="Syntax example"
 input:
@@ -744,7 +783,7 @@ Ristrutturiamo l'operazione `map` per produrre una tupla `[meta, file]`:
 
 === "Prima"
 
-    ```groovy title="main.nf" linenums="5" hl_lines="4 7"
+    ```groovy title="main.nf" linenums="5" hl_lines="4 7 10"
         ch_datasheet = channel.fromPath("./data/datasheet.csv")
             .splitCsv(header: true)
             .map { row ->
@@ -770,9 +809,9 @@ nextflow run main.nf
 ??? success "Output del comando"
 
     ```console title="View meta map"
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [lethal_booth] DSL2 - revision: 0d8f844c07
+    Launching `main.nf` [lethal_booth] revision: 50e03309d4
 
     [[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/data/bonjour.txt]
     [[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/data/guten_tag.txt]
@@ -781,6 +820,12 @@ nextflow run main.nf
     [[id:sampleE, character:stegosaurus], /workspaces/training/side-quests/metadata/data/hola.txt]
     [[id:sampleF, character:moose], /workspaces/training/side-quests/metadata/data/salut.txt]
     [[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/data/ciao.txt]
+
+    Outputs:
+
+      /workspaces/training/side-quests/metadata/results
+
+      cowpy_art:
     ```
 
 Ogni elemento nel canale è ora una tupla a due elementi: prima la meta map, poi il file.
@@ -792,7 +837,7 @@ Ogni elemento nel canale è ora una tupla a due elementi: prima la meta map, poi
 ]
 ```
 
-Se in seguito aggiungiamo una colonna `language` al foglio dati, sarà disponibile come `meta.language` senza richiedere alcuna modifica alla definizione di input del processo.
+Se in seguito aggiungiamo una colonna `language` al foglio dati e la includiamo nell'operazione `map` (ad es. `language: row.language`), sarà disponibile come `meta.language` senza richiedere alcuna modifica alla definizione di input del processo.
 
 #### 1.5.3. Aggiornare il processo `COWPY` per usare la meta map
 
@@ -807,14 +852,14 @@ Aggiornate `COWPY` per accettare la struttura tupla `[meta, file]`:
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
         input:
-        tuple val(meta), path(input_file)
+        tuple val(meta), path(recording)
 
         output:
-        path "cowpy-${input_file}"
+        path "cowpy-${recording}"
 
         script:
         """
-        cat ${input_file} | cowpy -c ${meta.character} > cowpy-${input_file}
+        cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
         """
     }
     ```
@@ -891,12 +936,25 @@ nextflow run main.nf
 ??? success "Output del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.2
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [wise_sammet] DSL2 - revision: 99797b1e92
+    Launching `main.nf` [wise_sammet] revision: f8f429c3df
 
     executor >  local (7)
-    [5d/dffd4e] COWPY (7) [100%] 7 of 7 ✔
+    [5d/dffd4e] COWPY (7) | 7 of 7 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/metadata/results
+
+      cowpy_art:
+        - cowpy-bonjour.txt
+        - cowpy-guten_tag.txt
+        - cowpy-salut.txt
+        - cowpy-hola.txt
+        - cowpy-hello.txt
+        - cowpy-hallo.txt
+        - cowpy-ciao.txt
     ```
 
 La directory dei risultati ora contiene i file ASCII art.
@@ -1044,20 +1102,33 @@ nextflow run main.nf -resume
 ??? success "Output del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [voluminous_mcnulty] DSL2 - revision: f9bcfebabb
+    Launching `main.nf` [voluminous_mcnulty] revision: 1d1ec2b857
 
-    executor >  local (14)
-    [5d/dffd4e] COWPY (7)             [100%] 7 of 7, cached: 7 ✔
-    [4e/f722fe] IDENTIFY_LANGUAGE (7) [100%] 7 of 7 ✔
-    [[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/work/eb/f7148ebdd898fbe1136bec6a714acb/bonjour.txt, fr]
-    [[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/work/16/71d72410952c22cd0086d9bca03680/guten_tag.txt, de]
-    [[id:sampleD, character:turkey], /workspaces/training/side-quests/metadata/work/c4/b7562adddc1cc0b7d414ec45d436eb/hello.txt, en]
-    [[id:sampleC, character:sheep], /workspaces/training/side-quests/metadata/work/ea/04f5d979429e4455e14b9242fb3b45/hallo.txt, de]
-    [[id:sampleF, character:moose], /workspaces/training/side-quests/metadata/work/5a/6c2b84bf8fadb98e28e216426be079/salut.txt, fr]
-    [[id:sampleE, character:stegosaurus], /workspaces/training/side-quests/metadata/work/af/ee7c69bcab891c40d0529305f6b9e7/hola.txt, es]
-    [[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/work/4e/f722fe47271ba7ebcd69afa42964ca/ciao.txt, it]
+    executor >  local (7)
+    [c9/34bfec] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
+    [58/d865ee] COWPY (7)             | 7 of 7, cached: 7 ✔
+    [[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/work/f6/8544c23128c0ed7c4f11dbc729b167/ciao.txt, it]
+    [[id:sampleB, character:tux], /workspaces/training/side-quests/metadata/work/91/a2a307e970fa3950ceeeee6aa3b34c/guten_tag.txt, de]
+    [[id:sampleD, character:turkey], /workspaces/training/side-quests/metadata/work/5e/ebac0d3e7a45a5e914d0bca827fc02/hello.txt, en]
+    [[id:sampleF, character:moose], /workspaces/training/side-quests/metadata/work/08/7199b7ab1ca733267d76b8168e5f38/salut.txt, fr]
+    [[id:sampleE, character:stegosaurus], /workspaces/training/side-quests/metadata/work/7d/890c6fa79c485b4a600eaa89af2140/hola.txt, es]
+    [[id:sampleC, character:sheep], /workspaces/training/side-quests/metadata/work/d9/b360d0cd38e53c710ec41ac3b74bc3/hallo.txt, de]
+    [[id:sampleA, character:squirrel], /workspaces/training/side-quests/metadata/work/c9/34bfec04abaf808c2ef6c5cb8c8273/bonjour.txt, fr]
+
+    Outputs:
+
+      /workspaces/training/side-quests/metadata/results
+
+      cowpy_art:
+        - cowpy-salut.txt
+        - cowpy-hallo.txt
+        - cowpy-bonjour.txt
+        - cowpy-hello.txt
+        - cowpy-hola.txt
+        - cowpy-guten_tag.txt
+        - cowpy-ciao.txt
     ```
 
 Ora abbiamo una previsione della lingua per ogni file nel dataset.
@@ -1206,19 +1277,32 @@ nextflow run main.nf -resume
 ??? success "Output del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [cheeky_fermat] DSL2 - revision: d096281ee4
+    Launching `main.nf` [cheeky_fermat] revision: f55f2f98b9
 
-    [5d/dffd4e] COWPY (7)             [100%] 7 of 7, cached: 7 ✔
-    [4e/f722fe] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔
-    [[id:sampleA, character:squirrel, lang:fr], /workspaces/training/side-quests/metadata/work/eb/f7148ebdd898fbe1136bec6a714acb/bonjour.txt]
-    [[id:sampleB, character:tux, lang:de], /workspaces/training/side-quests/metadata/work/16/71d72410952c22cd0086d9bca03680/guten_tag.txt]
-    [[id:sampleC, character:sheep, lang:de], /workspaces/training/side-quests/metadata/work/ea/04f5d979429e4455e14b9242fb3b45/hallo.txt]
-    [[id:sampleD, character:turkey, lang:en], /workspaces/training/side-quests/metadata/work/c4/b7562adddc1cc0b7d414ec45d436eb/hello.txt]
-    [[id:sampleF, character:moose, lang:fr], /workspaces/training/side-quests/metadata/work/5a/6c2b84bf8fadb98e28e216426be079/salut.txt]
-    [[id:sampleE, character:stegosaurus, lang:es], /workspaces/training/side-quests/metadata/work/af/ee7c69bcab891c40d0529305f6b9e7/hola.txt]
-    [[id:sampleG, character:turtle, lang:it], /workspaces/training/side-quests/metadata/work/4e/f722fe47271ba7ebcd69afa42964ca/ciao.txt]
+    [d9/b360d0] IDENTIFY_LANGUAGE (3) | 7 of 7, cached: 7 ✔
+    [94/224450] COWPY (3)             | 7 of 7, cached: 7 ✔
+    [[id:sampleF, character:moose, lang:fr], /workspaces/training/side-quests/metadata/work/08/7199b7ab1ca733267d76b8168e5f38/salut.txt]
+    [[id:sampleC, character:sheep, lang:de], /workspaces/training/side-quests/metadata/work/d9/b360d0cd38e53c710ec41ac3b74bc3/hallo.txt]
+    [[id:sampleD, character:turkey, lang:en], /workspaces/training/side-quests/metadata/work/5e/ebac0d3e7a45a5e914d0bca827fc02/hello.txt]
+    [[id:sampleE, character:stegosaurus, lang:es], /workspaces/training/side-quests/metadata/work/7d/890c6fa79c485b4a600eaa89af2140/hola.txt]
+    [[id:sampleG, character:turtle, lang:it], /workspaces/training/side-quests/metadata/work/f6/8544c23128c0ed7c4f11dbc729b167/ciao.txt]
+    [[id:sampleA, character:squirrel, lang:fr], /workspaces/training/side-quests/metadata/work/c9/34bfec04abaf808c2ef6c5cb8c8273/bonjour.txt]
+    [[id:sampleB, character:tux, lang:de], /workspaces/training/side-quests/metadata/work/91/a2a307e970fa3950ceeeee6aa3b34c/guten_tag.txt]
+
+    Outputs:
+
+      /workspaces/training/side-quests/metadata/results
+
+      cowpy_art:
+        - cowpy-guten_tag.txt
+        - cowpy-hallo.txt
+        - cowpy-bonjour.txt
+        - cowpy-hello.txt
+        - cowpy-hola.txt
+        - cowpy-salut.txt
+        - cowpy-ciao.txt
     ```
 
 Sì, funziona!
@@ -1311,7 +1395,7 @@ Punti chiave:
 
 <!-- TODO (future) Add note/links to relevant docs in additional resources section -->
 
-#### 2.3.2. Eseguire il flusso di lavoro
+#### 2.3.2. Eseguire il flusso di lavoro:
 
 Eseguiamo il flusso di lavoro per verificare che funzioni:
 
@@ -1322,19 +1406,32 @@ nextflow run main.nf -resume
 ??? success "Output del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [wise_almeida] DSL2 - revision: 46778c3cd0
+    Launching `main.nf` [wise_almeida] revision: 0f4b36d66d
 
-    [5d/dffd4e] COWPY (7)             [100%] 7 of 7, cached: 7 ✔
-    [da/652cc6] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔
-    [[id:sampleA, character:squirrel, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/data/bonjour.txt]
-    [[id:sampleB, character:tux, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/data/guten_tag.txt]
-    [[id:sampleC, character:sheep, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/data/hallo.txt]
-    [[id:sampleD, character:turkey, lang:en, lang_group:germanic], /workspaces/training/side-quests/metadata/data/hello.txt]
-    [[id:sampleE, character:stegosaurus, lang:es, lang_group:romance], /workspaces/training/side-quests/metadata/data/hola.txt]
-    [[id:sampleF, character:moose, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/data/salut.txt]
-    [[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/data/ciao.txt]
+    [c9/34bfec] IDENTIFY_LANGUAGE (1) | 7 of 7, cached: 7 ✔
+    [e9/269aa0] COWPY (6)             | 7 of 7, cached: 7 ✔
+    [[id:sampleC, character:sheep, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/work/d9/b360d0cd38e53c710ec41ac3b74bc3/hallo.txt]
+    [[id:sampleA, character:squirrel, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/work/c9/34bfec04abaf808c2ef6c5cb8c8273/bonjour.txt]
+    [[id:sampleE, character:stegosaurus, lang:es, lang_group:romance], /workspaces/training/side-quests/metadata/work/7d/890c6fa79c485b4a600eaa89af2140/hola.txt]
+    [[id:sampleD, character:turkey, lang:en, lang_group:germanic], /workspaces/training/side-quests/metadata/work/5e/ebac0d3e7a45a5e914d0bca827fc02/hello.txt]
+    [[id:sampleB, character:tux, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/work/91/a2a307e970fa3950ceeeee6aa3b34c/guten_tag.txt]
+    [[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/work/f6/8544c23128c0ed7c4f11dbc729b167/ciao.txt]
+    [[id:sampleF, character:moose, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/work/08/7199b7ab1ca733267d76b8168e5f38/salut.txt]
+
+    Outputs:
+
+      /workspaces/training/side-quests/metadata/results
+
+      cowpy_art:
+        - cowpy-ciao.txt
+        - cowpy-salut.txt
+        - cowpy-guten_tag.txt
+        - cowpy-hallo.txt
+        - cowpy-bonjour.txt
+        - cowpy-hola.txt
+        - cowpy-hello.txt
     ```
 
 La meta map ora contiene quattro campi: `id`, `character`, `lang` e `lang_group`.
@@ -1344,37 +1441,38 @@ La struttura del canale è ancora `[meta, file]`.
 
 Con `lang` e `lang_group` ora disponibili nella meta map, possiamo usarli per aggiungere un codice lingua ai nomi dei file di output e organizzarli in sottodirectory per famiglia linguistica.
 
-Questo richiede tre modifiche: aggiornare il processo `COWPY` per rinominare il suo output e includere `meta` in ciò che emette, aggiornare la chiamata a `COWPY` per eseguirlo su `ch_languages`, e aggiornare il blocco output per specificare il percorso della sottodirectory.
+Questo richiede tre modifiche: aggiornare il processo `COWPY` per includere `meta` in ciò che emette, aggiornare la chiamata a `COWPY` per eseguirlo su `ch_languages`, e aggiornare il blocco output per instradare ogni file nella sottodirectory del suo gruppo linguistico e rinominarlo usando il codice lingua rilevato.
 
 #### 2.4.1. Aggiornare il processo `COWPY`
 
-Rinominate il file di output usando il codice lingua dalla meta map, e aggiungete `meta` all'output in modo che il blocco output possa accedere a `lang_group` per il routing nelle sottodirectory:
+Aggiungete `meta` all'output in modo che il blocco output possa accedere a `lang` e `lang_group` per il routing e la rinominazione:
 
 === "Dopo"
 
-    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2 6"
+    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2"
         output:
-        tuple val(meta), path("${meta.lang}-${input_file}")
+        tuple val(meta), path("cowpy-${recording}")
 
         script:
         """
-        cat ${input_file} | cowpy -c ${meta.character} > ${meta.lang}-${input_file}
+        cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
         """
     ```
 
 === "Prima"
 
-    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2 6"
+    ```groovy title="modules/cowpy.nf" linenums="9" hl_lines="2"
         output:
-        path "cowpy-${input_file}"
+        path "cowpy-${recording}"
 
         script:
         """
-        cat ${input_file} | cowpy -c ${meta.character} > cowpy-${input_file}
+        cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
         """
     ```
 
-Questo mostra come possiamo sfruttare altri campi dei metadati per personalizzare il comportamento di un processo, senza dover modificare affatto la definizione di input.
+Questa è una modifica minima a livello di processo: `COWPY` non ha bisogno di sapere che `lang` o `lang_group` esistono, solo che deve trasportare `meta` insieme al suo output.
+Il routing e la rinominazione basati su quei campi avvengono entrambi a valle, nel blocco output.
 
 #### 2.4.2. Aggiornare la chiamata a `COWPY` per eseguirlo su `ch_languages`
 
@@ -1410,14 +1508,16 @@ Rimuoviamo anche la riga `ch_languages.view()` poiché non abbiamo più bisogno 
 
 #### 2.4.3. Aggiornare il blocco output
 
-Aggiungete una closure `path` al blocco `output {}` per instradare ogni file nella sottodirectory del suo gruppo linguistico:
+Aggiungete una closure `path` al blocco `output {}` che usa l'[operatore `>>`](https://www.nextflow.io/docs/latest/workflow.html#dynamic-publish-path) per pubblicare ogni file in una destinazione esplicita: la sottodirectory del suo gruppo linguistico, con un nome preceduto dalla lingua rilevata:
 
 === "Dopo"
 
-    ```groovy title="main.nf" linenums="40" hl_lines="3"
+    ```groovy title="main.nf" linenums="40" hl_lines="3-5"
     output {
         cowpy_art {
-            path { meta, file -> meta.lang_group }
+            path { meta, file ->
+                file >> "${meta.lang_group}/${meta.lang}-${file.name}"
+            }
         }
     }
     ```
@@ -1431,7 +1531,7 @@ Aggiungete una closure `path` al blocco `output {}` per instradare ogni file nel
     }
     ```
 
-Questo mostra come possiamo usare i metadati per organizzare gli output con grande flessibilità.
+Questo mostra come possiamo usare i metadati per organizzare e rinominare gli output, interamente dal blocco output, senza modificare il processo stesso.
 
 #### 2.4.4. Eseguire il pipeline completo
 
@@ -1445,13 +1545,26 @@ nextflow run main.nf
 ??? success "Output del comando"
 
     ```console
-     N E X T F L O W   ~  version 25.10.4
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [suspicious_crick] DSL2 - revision: 25541014c5
+    Launching `main.nf` [suspicious_crick] revision: 955602d59b
 
     executor >  local (14)
-    [5d/dffd4e] IDENTIFY_LANGUAGE (7) [100%] 7 of 7 ✔
-    [e7/317c18] COWPY (7)             [100%] 7 of 7 ✔
+    [99/64c59d] IDENTIFY_LANGUAGE (6) | 7 of 7 ✔
+    [3c/0f1922] COWPY (7)             | 7 of 7 ✔
+
+    Outputs:
+
+      /workspaces/training/side-quests/metadata/results
+
+      cowpy_art:
+        - [{id: sampleB, character: tux, lang: de, lang_group: germanic}, germanic/de-cowpy-guten_tag.txt]
+        - [{id: sampleG, character: turtle, lang: it, lang_group: romance}, romance/it-cowpy-ciao.txt]
+        - [{id: sampleC, character: sheep, lang: de, lang_group: germanic}, germanic/de-cowpy-hallo.txt]
+        - [{id: sampleE, character: stegosaurus, lang: es, lang_group: romance}, romance/es-cowpy-hola.txt]
+        - [{id: sampleA, character: squirrel, lang: fr, lang_group: romance}, romance/fr-cowpy-bonjour.txt]
+        - [{id: sampleD, character: turkey, lang: en, lang_group: germanic}, germanic/en-cowpy-hello.txt]
+        - [{id: sampleF, character: moose, lang: fr, lang_group: romance}, romance/fr-cowpy-salut.txt]
     ```
 
 La directory dei risultati è ora organizzata per famiglia linguistica, con ogni file nominato in base alla lingua rilevata:
@@ -1459,19 +1572,19 @@ La directory dei risultati è ora organizzata per famiglia linguistica, con ogni
 ```console title="Results directory contents"
 results/
 ├── germanic
-│   ├── de-guten_tag.txt
-│   ├── de-hallo.txt
-│   └── en-hello.txt
+│   ├── de-cowpy-guten_tag.txt
+│   ├── de-cowpy-hallo.txt
+│   └── en-cowpy-hello.txt
 └── romance
-    ├── es-hola.txt
-    ├── fr-bonjour.txt
-    ├── fr-salut.txt
-    └── it-ciao.txt
+    ├── es-cowpy-hola.txt
+    ├── fr-cowpy-bonjour.txt
+    ├── fr-cowpy-salut.txt
+    └── it-cowpy-ciao.txt
 ```
 
-La closure `path` nel blocco `output {}` riceve ogni tupla `[meta, file]` e restituisce `meta.lang_group` come nome della sottodirectory.
-Il nome del file stesso proviene da ciò che il processo produce (`#!groovy "${meta.lang}-${input_file}"`).
-Entrambi i pezzi di metadati (codice lingua e gruppo linguistico) provengono dalla meta map arricchita costruita in questa sezione.
+La closure `path` nel blocco `output {}` riceve ogni tupla `[meta, file]`.
+L'operatore `>>` pubblica `file` nella destinazione `#!groovy "${meta.lang_group}/${meta.lang}-${file.name}"`, combinando la sottodirectory (`lang_group`) e il file rinominato (preceduto da `lang`) in un'unica espressione.
+Entrambi i pezzi di metadati provengono dalla meta map arricchita costruita in questa sezione, e `COWPY` stesso non ha mai bisogno di sapere che esistono.
 
 ### Takeaway
 
@@ -1509,23 +1622,24 @@ Quando Nextflow sostituisce `#!groovy ${meta.character}` nel comando, lo strumen
 
 ??? failure "Output del comando"
 
-    ```console hl_lines="8 11 16 28"
-     N E X T F L O W   ~  version 25.10.4
+    ```console hl_lines="7 12 17 29"
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [marvelous_hirsch] DSL2 - revision: 0dfeee3cc1
+    Launching `main.nf` [marvelous_hirsch] revision: 955602d59b
 
-    executor >  local (9)
-    [c1/c5dd4f] process > IDENTIFY_LANGUAGE (7) [ 85%] 6 of 7
-    [d3/b7c415] process > COWPY (2)             [  0%] 0 of 6
-    ERROR ~ Error executing process > 'COWPY (1)'
+    executor >  local (14)
+    [c1/c5dd4f] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
+    [d3/b7c415] COWPY (3)             | 5 of 7
+    WARN: Killing running tasks (1)
+    ERROR ~ Error executing process > 'COWPY (7)'
 
     Caused by:
-      Process `COWPY (1)` terminated with an error exit status (2)
+      Process `COWPY (7)` terminated with an error exit status (2)
 
 
     Command executed:
 
-      cat bonjour.txt | cowpy -c  > fr-bonjour.txt
+      cat bonjour.txt | cowpy -c  > cowpy-bonjour.txt
 
     Command exit status:
       2
@@ -1535,19 +1649,19 @@ Quando Nextflow sostituisce `#!groovy ${meta.character}` nel comando, lo strumen
 
     Command error:
       usage: cowpy [-h] [-l] [-L] [-t] [-u] [-e EYES] [-c COWACTER] [-E] [-r] [-x]
-                  [-C]
-                  [msg ...]
+                   [-C]
+                   [msg ...]
       cowpy: error: argument -c/--cowacter: expected one argument
 
     Work dir:
-      /workspaces/training/side-quests/metadata/work/ca/9d49796612a54dec5ed466063c809b
+      /workspaces/training/side-quests/metadata/work/cc/dfe60ff2e14f0dd88488939eca57b8
 
     Container:
       community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
 
     Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 Il messaggio di errore (`expected one argument`) indica il flag `-c` vuoto.
@@ -1564,28 +1678,29 @@ sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 ...
 ```
 
-La chiave `character` non viene mai creata nella meta map.
-Quando lo script del processo valuta `#!groovy ${meta.character}`, la chiave mancante restituisce `null`, e Nextflow sostituisce letteralmente la stringa `null` nel comando:
+La nostra operazione `map` scrive esplicitamente `#!groovy character: row.character`, quindi la chiave `character` viene comunque creata nella meta map, ma accedere a una colonna che non esiste nella riga analizzata restituisce `null`, quindi il suo valore diventa `null`.
+Quando lo script del processo valuta `#!groovy ${meta.character}`, Nextflow sostituisce letteralmente la stringa `null` nel comando:
 
 ??? failure "Output del comando"
 
-    ```console hl_lines="8 11 16"
-     N E X T F L O W   ~  version 25.10.4
+    ```console hl_lines="7 12 17"
+     N E X T F L O W   ~  version 26.04.4
 
-    Launching `main.nf` [jovial_bohr] DSL2 - revision: eaaf375827
+    Launching `main.nf` [jovial_bohr] revision: 955602d59b
 
-    executor >  local (9)
-    [0d/ada9db] process > IDENTIFY_LANGUAGE (5) [ 85%] 6 of 7
-    [06/28065f] process > COWPY (2)             [  0%] 0 of 6
-    ERROR ~ Error executing process > 'COWPY (2)'
+    executor >  local (14)
+    [61/91663a] IDENTIFY_LANGUAGE (1) | 7 of 7 ✔
+    [0e/99bfb0] COWPY (7)             | 0 of 7
+    WARN: Killing running tasks (5)
+    ERROR ~ Error executing process > 'COWPY (3)'
 
     Caused by:
-      Process `COWPY (2)` terminated with an error exit status (1)
+      Process `COWPY (3)` terminated with an error exit status (1)
 
 
     Command executed:
 
-      cat guten_tag.txt | cowpy -c null > de-guten_tag.txt
+      cat hola.txt | cowpy -c null > cowpy-hola.txt
 
     Command exit status:
       1
@@ -1610,14 +1725,14 @@ Quando lo script del processo valuta `#!groovy ${meta.character}`, la chiave man
       TypeError: 'str' object is not callable
 
     Work dir:
-      /workspaces/training/side-quests/metadata/work/06/28065f7d9fd7d22bba084aa941b6d6
+      /workspaces/training/side-quests/metadata/work/52/80c08666f6732690bce00f04993489
 
     Container:
       community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
 
     Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
 
-    -- Check '.nextflow.log' file for details
+     -- Check '.nextflow.log' file for details
     ```
 
 Il `cowpy -c null` nel comando eseguito è l'indizio diagnostico.
@@ -1629,7 +1744,7 @@ Esistono due approcci complementari per rendere i flussi di lavoro più robusti 
 **1. Validazione dell'input**
 
 La soluzione più affidabile è validare il foglio dati prima che inizi qualsiasi elaborazione, in modo che i problemi vengano rilevati tempestivamente con un messaggio di errore chiaro piuttosto che emergere come un errore criptico del processo a metà esecuzione.
-La formazione [Hello nf-core](../../hello_nf-core/05_input_validation.md) spiega come aggiungere la validazione dell'input usando il plugin nf-schema. <!-- TODO (future) pending a proper Validation side quest -->
+La formazione [Build with nf-core](../../nfcore_build/04_input_validation.md) spiega come aggiungere la validazione dell'input usando il plugin nf-schema. <!-- TODO (future) pending a proper Validation side quest -->
 
 **2. Input espliciti del processo per i valori obbligatori**
 
@@ -1639,7 +1754,7 @@ Se volete che l'interfaccia del processo comunichi che un particolare valore è 
 
     ```groovy title="modules/cowpy.nf" linenums="6"
     input:
-    tuple val(meta), val(character), path(input_file)
+    tuple val(meta), val(character), path(recording)
     ```
 
 === "Chiamata nel flusso di lavoro"
@@ -1710,15 +1825,17 @@ Lo schema della tupla "meta map + file di dati" è una convenzione fondamentale 
 3.  **Usare i metadati all'interno di un processo:** Accedere a qualsiasi campo tramite notazione con punto nel blocco script.
 
     ```groovy
-    cat ${input_file} | cowpy -c ${meta.character} > ${meta.lang}-${input_file}
+    cat ${recording} | cowpy -c ${meta.character} > cowpy-${recording}
     ```
 
-4.  **Organizzare gli output per valore dei metadati:** Usare la closure `path` nel blocco `output {}`.
+4.  **Organizzare e rinominare gli output per valore dei metadati:** Usare la closure `path` nel blocco `output {}`, con l'operatore `>>` per controllare sia la directory di destinazione che il nome del file pubblicato.
 
     ```groovy
     output {
         cowpy_art {
-            path { meta, file -> meta.lang_group }
+            path { meta, file ->
+                file >> "${meta.lang_group}/${meta.lang}-${file.name}"
+            }
         }
     }
     ```

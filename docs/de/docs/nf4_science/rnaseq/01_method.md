@@ -40,7 +40,7 @@ Diese Tools sind in der GitHub Codespaces-Umgebung nicht installiert, daher werd
 
 !!! tip "Tipp"
 
-     Stelle sicher, dass du dich im Verzeichnis `nf4-science/rnaseq` befindest. Der letzte Teil des Pfads, der angezeigt wird, wenn du `pwd` eingibst, sollte `rnaseq` sein.
+    Stelle sicher, dass du dich im Verzeichnis `nf4-science/rnaseq` befindest. Der letzte Teil des Pfads, der angezeigt wird, wenn du `pwd` eingibst, sollte `rnaseq` sein.
 
 ---
 
@@ -732,7 +732,7 @@ ls ENCSR000COQ1_1*
 
 ??? abstract "Verzeichnisinhalt"
 
-    ```console title="Ausgabe"
+    ```console title="Output"
     ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log
     ```
 

@@ -131,15 +131,16 @@ Como estamos usando `-resume`, o Nextflow vai verificar se algo mudou desde a ú
 Se os parâmetros, entradas e código forem os mesmos, todas as tarefas serão recuperadas do cache e o pipeline será concluído quase instantaneamente.
 
 ```console title="Output (excerpt)"
-executor >  local (12)
+executor >  local (1)
+[43/e03702] NFC…NDAGAP_MINDAGAP (mem_only) | 2 of 2, cached: 2 ✔
+[2e/cf8910] NFC…T:MOLKART:CLAHE (mem_only) | 2 of 2, cached: 2 ✔
 ...
-[1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔
-[5e/6f7g8h] NFCORE_MOLKART:MOLKART:CLAHE (mem_only)               [100%] 2 of 2, cached: 2 ✔
-...
+[5e/39d5d0] NFC…LKART:MOLKARTQC (mem_only) | 1 of 1, cached: 1 ✔
+[ef/d7b294] NFCORE_MOLKART:MOLKART:MULTIQC | 1 of 1 ✔
 -[nf-core/molkart] Pipeline completed successfully-
 ```
 
-Note que todos os processos mostram `cached: 2` ou `cached: 1` - nada foi re-executado!
+Note a anotação `cached: N` em cada processo - as tarefas de pré-processamento e segmentação em cache não foram re-executadas.
 
 ### 2.4. Profiles de teste
 
@@ -175,8 +176,8 @@ params {
 
 process {
     resourceLimits = [
-        cpus: 4,
-        memory: '15.GB',
+        cpus: 1,
+        memory: '4.GB',
         time: '1.h'
     ]
 }
@@ -203,7 +204,7 @@ Profiles são aplicados da esquerda para a direita, então profiles posteriores 
 Pipelines nf-core vêm com profiles integrados para contêineres, testes e ambientes especiais.
 Você pode combinar múltiplos profiles para construir a configuração que precisa.
 
-### Próximos passos
+### O que vem a seguir?
 
 Aprenda como criar seus próprios profiles personalizados para diferentes ambientes de computação.
 
@@ -298,7 +299,7 @@ process {
     memory = { 6.GB   * task.attempt }
     time   = { 4.h    * task.attempt }
 
-    errorStrategy = { task.exitStatus in ((130..145) + 104) ? 'retry' : 'finish' }
+    errorStrategy = { task.exitStatus in ((130..145) + 104 + 175) ? 'retry' : 'finish' }
     maxRetries    = 1
     maxErrors     = '-1'
 
@@ -354,7 +355,7 @@ Aprenderemos como prevenir esses tipos de falhas na próxima seção.
 Pipelines nf-core usam process labels para padronizar a alocação de recursos.
 Você pode sobrescrever recursos por label (afeta múltiplos processos) ou por nome (afeta um processo específico).
 
-### Próximos passos
+### O que vem a seguir?
 
 Aprenda como gerenciar limites de recursos em ambientes restritos como GitHub Codespaces.
 
@@ -448,5 +449,5 @@ Próximos passos:
 
 - Preencha a pesquisa do curso para fornecer feedback
 - Confira [Hello Nextflow](../../hello_nextflow/index.md) para aprender mais sobre desenvolvimento de fluxos de trabalho
-- Explore [Hello nf-core](../../hello_nf-core/index.md) para mergulhar mais fundo nas ferramentas nf-core
-- Navegue por outros cursos nas [coleções de treinamento](../../training_collections/index.md)
+- Explore [Build with nf-core](../../nfcore_build/index.md) para mergulhar mais fundo nas ferramentas nf-core
+- Explore tópicos mais avançados nos [Side Quests](../../side_quests/index.md)
