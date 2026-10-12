@@ -1238,7 +1238,7 @@ There are two ways to fix this:
               ['sample2', 'file2.txt'],
               ['sample3', 'file3.txt']
             )
-            PROCESS_FILES(input_ch.map { it[0] })  // Fixed: Extract first element
+            PROCESS_FILES(input_ch.map { sample_id, file -> sample_id })  // Fixed: Extract first element
         }
         ```
 
@@ -1481,9 +1481,9 @@ workflow {
       ['sample2', 'file2.txt'],
       ['sample3', 'file3.txt']
     )
-    .view { "Channel content: $it" }  // Debug: Show original channel content
-    .map { tuple -> tuple[0] }        // Transform: Extract first element
-    .view { "After mapping: $it" }    // Debug: Show transformed channel content
+    .view { item -> "Channel content: ${item}" }  // Debug: Show original channel content
+    .map { sample_id, file -> sample_id }         // Transform: Extract first element
+    .view { item -> "After mapping: ${item}" } // Debug: Show transformed channel content
 
     PROCESS_FILES(input_ch)
 }
@@ -2486,7 +2486,7 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         ```
         **Fix:** Pass just the sample IDs
         ```groovy linenums="87"
-        heavy_ch = heavyProcess(input_ch.map{it[0]})
+        heavy_ch = heavyProcess(input_ch.map { sample_id, fastq -> sample_id })
         ```
 
         Now `heavyProcess` runs, but hits its time limit. On the `local` executor the message is `process hasn't exited` (alongside a `WARN: Killing running tasks` message) rather than an explicit timeout, so connect the killed task back to its `time` directive:
@@ -2612,7 +2612,7 @@ Now it's time to put the systematic debugging approach into practice. The workfl
 
             processed_ch = processFiles(input_ch)
 
-            heavy_ch = heavyProcess(input_ch.map{it[0]})
+            heavy_ch = heavyProcess(input_ch.map { sample_id, fastq -> sample_id })
 
             file_ch = handleFiles(heavy_ch)
 
@@ -2691,7 +2691,7 @@ echo "\${bash_var}"          // Bash variable (escaped)
 
 ```groovy
 // Inspect channel content
-my_channel.view { "Content: $it" }
+my_channel.view { item -> "Content: ${item}" }
 
 // Convert queue to value channel (prevents exhaustion)
 reference_ch = channel.value('ref.fa')
