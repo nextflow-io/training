@@ -1,4 +1,4 @@
-# Part 7: Tune compute resources
+# Part 6: Tune compute resources
 
 In [Part 3](./03_run_production_pipeline.md), the `nf-core/rnaseq` test run failed because a process requested more memory than the machine had.
 You fixed it with `laptop.config`, which sets every resource label to 6 GB of memory.
