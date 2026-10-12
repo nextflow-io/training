@@ -217,10 +217,22 @@ The `test` profile provides the reference files, and `--input` replaces its samp
 The pipeline reports success without running any tasks, which means your samplesheet passed validation.
 If you made a mistake, the pipeline stops with a list of errors; Part 6 covers how to interpret and fix them.
 
-!!! tip
+??? tip "Running the full pipeline on this data"
 
-    If you want to run the full pipeline on this data, remove `-preview` and add `-c laptop.config` as in Part 3.
-    The files only contain a few thousand reads each, so the run takes about as long as the test profile.
+    The files only contain 2,000 read pairs each, which is below the pipeline's default minimum of 10,000 reads per sample after trimming.
+    Samples below that threshold are skipped, so lower it with a params file:
+
+    ```yaml title="small_reads.yml"
+    min_trimmed_reads: 1000
+    ```
+
+    Then remove `-preview` and add `-c laptop.config` as in Part 3:
+
+    ```bash
+    nextflow run nf-core/rnaseq -profile test,docker --input samplesheet.csv --outdir results -c laptop.config -params-file small_reads.yml
+    ```
+
+    The parameter must be set in a params file rather than as `--min_trimmed_reads 1000` on the command line, because command-line values are passed as strings and the pipeline expects an integer.
 
 ### Takeaway
 
