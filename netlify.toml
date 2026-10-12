@@ -20,4 +20,4 @@
 # build command runs. Pin a current release instead (matches .github/workflows/docs.yml
 # and satisfies `requires-python = ">=3.11"` in _scripts/docs.py).
 [build.environment]
-    PYTHON_VERSION = "3.12"
+    PYTHON_VERSION = "3.14"
