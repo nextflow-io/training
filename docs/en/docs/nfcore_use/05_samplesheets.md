@@ -222,6 +222,122 @@ If you made a mistake, the pipeline stops with a list of errors; Part 6 covers h
     If you want to run the full pipeline on this data, remove `-preview` and add `-c laptop.config` as in Part 3.
     The files only contain a few thousand reads each, so the run takes about as long as the test profile.
 
+### Takeaway
+
+You can write a samplesheet for a set of FASTQ files, including samples sequenced over multiple lanes, and check it with `-preview` before committing to a full run.
+
+### What's next?
+
+Generate a samplesheet for data from a public archive.
+
+---
+
+## 3. Generate a samplesheet for public data
+
+Analyses often reuse public data, for example to add samples to a study or to reproduce a published result.
+The `nf-core/fetchngs` pipeline downloads sequencing data and metadata from public archives (SRA, ENA, DDBJ and GEO), given a list of accession numbers.
+It can also write a samplesheet formatted for a downstream nf-core pipeline, including `nf-core/rnaseq`.
+
+### 3.1. Download data with fetchngs
+
+The file `data/sra_ids.csv` lists four sequencing runs, one per line:
+
+```csv title="data/sra_ids.csv"
+--8<-- "nfcore-use/data/sra_ids.csv"
+```
+
+These runs come from a drug-screening study ([GEO series GSE206599](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE206599)) in which human cells were treated with the MEK inhibitor trametinib or with DMSO as a control.
+They were chosen because their files are only a few megabytes each.
+
+Run `nf-core/fetchngs` with these accessions, and request a samplesheet for `nf-core/rnaseq`:
+
+```bash
+nextflow run nf-core/fetchngs -profile docker --input data/sra_ids.csv --outdir fetchngs-results --nf_core_pipeline rnaseq
+```
+
+The pipeline downloads the FASTQ files from the ENA, so it needs access to the internet.
+It finishes in about a minute, then prints a warning:
+
+```console title="Command output (excerpt)"
+WARN: =============================================================================
+  Please double-check the samplesheet that has been auto-created by the pipeline.
+  Public databases don't reliably hold information such as strandedness
+  information, controls etc
+
+  All of the sample metadata obtained from the ENA has been appended
+  as additional columns to help you manually curate the samplesheet before
+  running nf-core/other pipelines.
+===================================================================================
+```
+
+The results contain the FASTQ files, the metadata for each run, and the samplesheet:
+
+```console title="Directory contents (excerpt)"
+fetchngs-results
+├── fastq
+│   ├── SRX15815511_SRR19771055_1.fastq.gz
+│   ├── SRX15815511_SRR19771055_2.fastq.gz
+│   └── ...
+├── metadata
+├── pipeline_info
+└── samplesheet
+    └── samplesheet.csv
+```
+
+### 3.2. Examine the generated samplesheet
+
+Open `fetchngs-results/samplesheet/samplesheet.csv`.
+Here are its first four columns and one of the metadata columns, `sample_title`, for the first two rows:
+
+| `sample`      | `fastq_1`                                                   | `fastq_2`                                                   | `strandedness` | `sample_title`                            |
+| ------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | -------------- | ----------------------------------------- |
+| `SRX15815511` | `fetchngs-results/fastq/SRX15815511_SRR19771055_1.fastq.gz` | `fetchngs-results/fastq/SRX15815511_SRR19771055_2.fastq.gz` | `auto`         | `22s000068_Trametinib_DMSO_countsPerGene` |
+| `SRX15815525` | `fetchngs-results/fastq/SRX15815525_SRR19771041_1.fastq.gz` | `fetchngs-results/fastq/SRX15815525_SRR19771041_2.fastq.gz` | `auto`         | `22s000075_Trametinib_DMSO_countsPerGene` |
+
+The first four columns are the ones `nf-core/rnaseq` requires:
+
+- **`sample`** is the experiment accession, which identifies the sample but says nothing about it.
+  The experimental condition only appears in metadata columns such as `sample_title`.
+- **`fastq_1` and `fastq_2`** point to the downloaded files, relative to the directory where you ran `nf-core/fetchngs`.
+- **`strandedness`** is set to `auto`, because the archives do not record it reliably.
+  You can set a different value with the `--nf_core_rnaseq_strandedness` parameter.
+
+The remaining 31 columns contain metadata from the ENA, such as the instrument model, read counts and study title.
+
+The samplesheet is valid as it is.
+You can check it with `-preview`:
+
+```bash
+nextflow run nf-core/rnaseq -profile test,docker --input fetchngs-results/samplesheet/samplesheet.csv --outdir results -preview
+```
+
+```console title="Command output (excerpt)"
+WARN: Found the following unidentified headers in fetchngs-results/samplesheet/samplesheet.csv: - run_accession - experiment_accession - ...
+```
+
+The pipeline passes validation, with a warning listing the columns it does not use.
+
+### 3.3. Curate the samplesheet
+
+The generated samplesheet works, but the accession numbers make the pipeline's outputs hard to interpret: every report and output file will be named after them.
+Curating the samplesheet means giving the samples meaningful names and keeping only the columns the pipeline uses.
+
+??? exercise
+
+    Create a file named `samplesheet_public.csv` with the four columns required by `nf-core/rnaseq`.
+    Name each sample after its treatment, using the `sample_title` column to find out which is which.
+    Check the result with `-preview`.
+
+??? solution
+
+    ```csv title="samplesheet_public.csv"
+    --8<-- "nfcore-use/solutions/samplesheet_public.csv"
+    ```
+
+    The `-preview` run now completes without the warning about unidentified headers.
+
+Keep the generated samplesheet alongside the curated one: its metadata columns record where each sample came from.
+
 ??? exercise "Apply it to the pipeline you chose in Part 4"
 
     Find the samplesheet requirements of the pipeline you chose in [Part 4](./04_choose_pipeline.md), in its usage documentation and in its `assets/schema_input.json` file on GitHub.
@@ -231,7 +347,8 @@ If you made a mistake, the pipeline stops with a list of errors; Part 6 covers h
 
 ### Takeaway
 
-You can write a samplesheet for a set of FASTQ files, including samples sequenced over multiple lanes, and check it with `-preview` before committing to a full run.
+`nf-core/fetchngs` downloads public data and writes a samplesheet for a downstream pipeline.
+The generated samplesheet is a starting point: check the values the archives cannot provide reliably, and rename the samples before running the analysis.
 
 ### What's next?
 
@@ -246,3 +363,4 @@ In this part you learned to:
 - Find a pipeline's samplesheet requirements in its usage documentation and input schema
 - Write a samplesheet for paired-end data, including samples sequenced on multiple lanes
 - Check a samplesheet with `-preview` without running the pipeline
+- Generate a samplesheet for public data with `nf-core/fetchngs`, and curate it before use

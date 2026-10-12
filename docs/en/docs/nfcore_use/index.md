@@ -48,7 +48,7 @@ If you're looking for an intro to developing nf-core-compatible pipelines, see [
 | [Part 2: Configure pipeline execution](./02_configure_execution.md)      | Set parameters, understand validation, and customize resource allocation and tool arguments | 20 mins            |
 | [Part 3: Run a production pipeline](./03_run_production_pipeline.md)     | Pull and run nf-core/rnaseq, and override its default resource allocations                  | 20 mins            |
 | [Part 4: Choose a pipeline](./04_choose_pipeline.md)                     | Find candidate pipelines for a scientific question and evaluate whether they fit            | 40 mins            |
-| [Part 5: Prepare a samplesheet](./05_samplesheets.md)                    | Write a samplesheet for your own data and check it before running                           | 15 mins            |
+| [Part 5: Prepare a samplesheet](./05_samplesheets.md)                    | Write a samplesheet for your own data or for public data, and check it before running       | 25 mins            |
 | [Part 6: Troubleshoot input validation errors](./06_input_validation.md) | Diagnose and fix samplesheet errors caught by the schema and by the pipeline                | 15 mins            |
 | [Part 7: Tune compute resources](./07_resources.md)                      | Use execution reports to right-size resource allocations and remove bottlenecks             | 15 mins            |
 
