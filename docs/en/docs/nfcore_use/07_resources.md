@@ -181,7 +181,7 @@ Tasks now overlap, because several of them fit in memory at once.
 
 ??? exercise "Apply it to the pipeline you chose in Part 4"
 
-    Return to the completed run of the pipeline you chose in [Part 4](./04_choose_pipeline.md) on Seqera Platform.
+    Return to the published results of the pipeline you chose in [Part 4](./04_choose_pipeline.md) and open the execution report in `pipeline_info/`.
     Identify the processes with the highest memory usage, and compare that usage with the memory requested by their labels in the pipeline's `conf/base.config` file.
 
     Which processes would you right-size for your dataset, and in which direction?

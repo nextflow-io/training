@@ -6,7 +6,7 @@ In practice, the first challenge is deciding which pipeline to use, or whether a
 The nf-core catalog contains over a hundred pipelines, several of which can look relevant to the same question.
 A pipeline that processes the right data type does not necessarily produce the result you need.
 
-In this part, you take a research scenario, find candidate pipelines, and evaluate them using their documentation and a completed run on Seqera Platform.
+In this part, you take a research scenario, find candidate pipelines, and evaluate them using their documentation and the results of a completed run.
 Because you examine runs that have already completed, you can look at real outputs and execution reports without waiting for a pipeline to run.
 
 This part works for individual learners and for groups in a workshop.
@@ -105,20 +105,26 @@ Evaluate whether each candidate produces the result you defined in 1.2.
 
 ## 3. Evaluate the candidates
 
-For each candidate, work through the questions below, using the pipeline's **Usage** and **Output** documentation pages and a completed run on Seqera Platform.
+For each candidate, work through the questions below, using the pipeline's **Usage** and **Output** documentation pages and the results of a completed run.
 
-### 3.1. Open a completed run
+### 3.1. Open the results of a completed run
 
-The [Community Showcase](https://cloud.seqera.io) workspace on Seqera Platform contains completed runs of several nf-core pipelines.
-Viewing it requires a free Seqera account.
+For every release, the nf-core project runs each pipeline on a full-size dataset in the cloud and publishes the results.
+You can browse them in the **Results** tab of the pipeline's page on the nf-core website.
 
-1. Log in at [cloud.seqera.io](https://cloud.seqera.io).
-2. In the left sidebar, click **Showcase**.
-3. Click **Runs** and find a completed run of your candidate pipeline.
+The results are organized in the same way as when you run the pipeline yourself:
 
-<!-- TODO: confirm Showcase navigation and which pipelines have completed runs -->
+- The output directories contain the files described in the output documentation, including the MultiQC report in `multiqc/`.
+- The `pipeline_info/` directory contains the execution report and trace, as in [Part 3](./03_run_production_pipeline.md).
 
-A run page shows the parameters the run used, the status and resource usage of every task, and the reports the pipeline produced, including its MultiQC report.
+Some pipelines run several test configurations and organize their results in one subdirectory per configuration, for example per aligner in `nf-core/scrnaseq`.
+For some releases, only the `pipeline_info/` directory is published; in that case, select an earlier release from the version menu, or rely on the output documentation.
+
+!!! tip "Viewing runs on Seqera Platform"
+
+    The Community Showcase workspace on [Seqera Platform](https://cloud.seqera.io) contains completed runs of several nf-core pipelines, including `nf-core/rnaseq` and `nf-core/scrnaseq`.
+    A run page shows the parameters, the status and resource usage of every task, and the reports the pipeline produced.
+    Viewing it requires a free Seqera account; see [Scale with Seqera](../seqera_scale/index.md).
 
 ### 3.2. Inputs
 
@@ -134,14 +140,14 @@ Find the samplesheet format in the usage documentation, as you did for `nf-core/
 
 ### 3.4. Outputs
 
-Read the output documentation and look at the output files and MultiQC report of the completed run.
+Read the output documentation, then look at the output files and the MultiQC report in the published results.
 
 - Does the pipeline produce the result you defined in 1.2, or an intermediate step toward it?
 - If it stops short, what would you need to do next, and is there another pipeline for that step?
 
 ### 3.5. Compute
 
-In the completed run, look at the task list and resource usage.
+Open the execution report in the `pipeline_info/` directory of the published results.
 
 - Which processes took the longest, and which used the most memory?
 - How might that scale to the size of your dataset?
@@ -256,4 +262,4 @@ In this part you learned to:
 
 - Define the result an analysis must produce before choosing a pipeline
 - Find candidate pipelines in the nf-core catalog and check their status
-- Evaluate a pipeline's inputs, reference requirements, outputs and compute needs using its documentation and a completed run
+- Evaluate a pipeline's inputs, reference requirements, outputs and compute needs using its documentation and the results of a completed run
