@@ -1219,9 +1219,45 @@ You can see that we're generating a channel composed of tuples: `['sample1', 'fi
 
 #### Fix the code
 
-To fix this, if the process requires both inputs we could adjust the process to accept a tuple:
+There are three ways to fix this, from least to most structured:
 
-=== "Option 1: Accept tuple in process"
+1. Reshape the data to fit the process
+2. Change the process to fit the data
+3. Type the process and the data together with a record
+
+=== "Option 1: Extract first element"
+
+    === "After"
+
+        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
+        workflow {
+
+            // Channel emits tuples, but process expects single values
+            input_ch = channel.of(
+              ['sample1', 'file1.txt'],
+              ['sample2', 'file2.txt'],
+              ['sample3', 'file3.txt']
+            )
+            PROCESS_FILES(input_ch.map { it[0] })  // Fixed: Extract first element
+        }
+        ```
+
+    === "Before"
+
+        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
+        workflow {
+
+            // Channel emits tuples, but process expects single values
+            input_ch = channel.of(
+              ['sample1', 'file1.txt'],
+              ['sample2', 'file2.txt'],
+              ['sample3', 'file3.txt']
+            )
+            PROCESS_FILES(input_ch)
+        }
+        ```
+
+=== "Option 2: Accept tuple in process"
 
     === "After"
 
@@ -1283,26 +1319,63 @@ To fix this, if the process requires both inputs we could adjust the process to 
         }
         ```
 
-=== "Option 2: Extract first element"
+=== "Option 3: Use a record type"
 
     === "After"
 
-        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
+        ```groovy title="bad_channel_shape.nf" hl_lines="3 5-8 12 15 19 27-29" linenums="1"
+        #!/usr/bin/env nextflow
+
+        nextflow.enable.types = true
+
+        record Sample {
+            id: String
+            file_name: String
+        }
+
+        process PROCESS_FILES {
+            input:
+                sample: Sample  // Fixed: Accept a record with named fields
+
+            output:
+                file("${sample.id}_output.txt")
+
+            script:
+            """
+            echo "Processing ${sample.id}" > ${sample.id}_output.txt
+            """
+        }
+
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // Channel emits records with named fields
             input_ch = channel.of(
-              ['sample1', 'file1.txt'],
-              ['sample2', 'file2.txt'],
-              ['sample3', 'file3.txt']
+              record(id: 'sample1', file_name: 'file1.txt'),
+              record(id: 'sample2', file_name: 'file2.txt'),
+              record(id: 'sample3', file_name: 'file3.txt')
             )
-            PROCESS_FILES(input_ch.map { it[0] })  // Fixed: Extract first element
+            PROCESS_FILES(input_ch)
         }
         ```
 
     === "Before"
 
-        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
+        ```groovy title="bad_channel_shape.nf" hl_lines="5" linenums="1"
+        #!/usr/bin/env nextflow
+
+        process PROCESS_FILES {
+            input:
+                val sample_name  // Expects single value, gets tuple
+
+            output:
+                path "${sample_name}_output.txt"
+
+            script:
+            """
+            echo "Processing ${sample_name}" > ${sample_name}_output.txt
+            """
+        }
+
         workflow {
 
             // Channel emits tuples, but process expects single values
@@ -1315,6 +1388,18 @@ To fix this, if the process requires both inputs we could adjust the process to 
         }
         ```
 
+    !!! note "Record types are a new feature"
+
+        Record types were introduced in Nextflow 26.04 and require the `nextflow.enable.types` flag.
+        Fields are accessed by name (`sample.id`) instead of by position, and Nextflow reports a clear error when a field is missing.
+        For example, a record without `id` fails with:
+
+        ```console
+        input field `id` at index 0 cannot be null -- append `?` to the type annotation to mark it as nullable
+        ```
+
+        A future training course will cover record types in detail.
+
 #### Run the pipeline
 
 Pick one of the solutions and re-run the workflow:
@@ -1326,7 +1411,7 @@ nextflow run bad_channel_shape.nf
 ??? success "Command output"
 
     ```console
-    N E X T F L O W   ~  version 25.10.4
+    N E X T F L O W   ~  version 26.04.4
 
     Launching `bad_channel_shape.nf` [clever_thompson] DSL2 - revision: 8cbcae3746
 
