@@ -399,7 +399,6 @@ nextflow run . --outdir core-hello-results -profile test,docker
 
     Launching `./main.nf` [modest_saha] revision: d6bbba9521
 
-    Downloading plugin nf-schema@2.7.2
     Input/output options
       input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
       outdir                    : core-hello-results

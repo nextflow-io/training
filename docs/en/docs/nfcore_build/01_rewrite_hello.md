@@ -398,6 +398,27 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
 The `WARN: Unrecognized config option 'validation.*'` lines come from the version of the nf-schema plugin pinned in the freshly created template.
 They are harmless and do not affect the run.
 
+The rest of this course uses nf-schema 2.7.2, which does not produce these warnings.
+Open `core-hello/nextflow.config` and update the plugin version in the `plugins` block:
+
+=== "After"
+
+    ```groovy title="core-hello/nextflow.config" linenums="246" hl_lines="3"
+    // Nextflow plugins
+    plugins {
+        id 'nf-schema@2.7.2' // Validation of pipeline parameters and creation of an input channel from a sample sheet
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="core-hello/nextflow.config" linenums="246" hl_lines="3"
+    // Nextflow plugins
+    plugins {
+        id 'nf-schema@2.5.1' // Validation of pipeline parameters and creation of an input channel from a sample sheet
+    }
+    ```
+
 This shows you that all the basic wiring is in place.
 So where are the outputs? Are there any?
 
@@ -1660,10 +1681,9 @@ If you've done all of the modifications correctly, it should run to completion.
     ```console
      N E X T F L O W   ~  version 26.04.4
 
+    Downloading plugin nf-schema@2.7.2
     Launching `core-hello/main.nf` [voluminous_caravaggio] revision: d6bbba9521
 
-    WARN: Unrecognized config option 'validation.defaultIgnoreParams'
-    WARN: Unrecognized config option 'validation.monochromeLogs'
     Input/output options
       input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
       outdir                    : core-hello-results
