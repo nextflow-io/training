@@ -43,11 +43,11 @@ process cowpy {
     conda 'conda-forge::cowpy==1.1.5'
 
     input:
-    path input_file
-    val character
+        path input_file
+        val character
 
     output:
-    path "cowpy-${input_file}"
+        path "cowpy-${input_file}"
 
     script:
     """
@@ -152,7 +152,7 @@ So now let's update the two references to the process in the workflow block of `
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 38"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="5 38"
     // extract the file from the tuple since cowpy doesn't use metadata yet
     ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
@@ -182,7 +182,7 @@ So now let's update the two references to the process in the workflow block of `
     softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
+            storeDir: "${outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
             sort: true,
             newLine: true
@@ -191,12 +191,12 @@ So now let's update the two references to the process in the workflow block of `
 
     emit:
     cowpy_hellos   = COWPY.out
-    versions       = ch_versions
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 38"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="5 38"
     // extract the file from the tuple since cowpy doesn't use metadata yet
     ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
@@ -226,7 +226,7 @@ So now let's update the two references to the process in the workflow block of `
     softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
+            storeDir: "${outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
             sort: true,
             newLine: true
@@ -235,7 +235,7 @@ So now let's update the two references to the process in the workflow block of `
 
     emit:
     cowpy_hellos   = cowpy.out
-    versions       = ch_versions
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
 Be sure to make **both** changes, otherwise you will get an error when you run this.
@@ -299,7 +299,7 @@ In the current version of the `core-hello` pipeline, we're extracting the file f
 
 It would be better to have `COWPY` accept metadata tuples directly, allowing metadata to flow on through the workflow, as shown in the bottom half of the diagram.
 
-To the end, we'll need to make the following changes:
+To that end, we'll need to make the following changes:
 
 1. Update the input and output definitions
 2. Update the process call in the workflow
@@ -347,14 +347,14 @@ Open the `hello.nf` workflow file (under `core-hello/workflows/`) and update the
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="2"
         // generate ASCII art of the greetings with cowpy
         COWPY(FIND_CONCATENATE.out.file_out, params.character)
     ```
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="1-2 5"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="1-2 5"
         // extract the file from the tuple since cowpy doesn't use metadata yet
         ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
@@ -372,7 +372,7 @@ Since `COWPY` now emits a named output, `cowpy_output`, we can update the `hello
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="60" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="77" hl_lines="2"
         emit:
         cowpy_hellos   = COWPY.out.cowpy_output
         versions       = ch_versions
@@ -380,7 +380,7 @@ Since `COWPY` now emits a named output, `cowpy_output`, we can update the `hello
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="60" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="77" hl_lines="2"
         emit:
         cowpy_hellos   = COWPY.out
         versions       = ch_versions
@@ -469,7 +469,7 @@ Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and modify i
 
 === "After"
 
-    ```groovy title="modules/local/cowpy.nf" linenums="1" hl_lines="16 18"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="16 18"
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
@@ -599,14 +599,14 @@ Open the `hello.nf` workflow file (under `core-hello/workflows/`) and update the
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="2"
         // generate ASCII art of the greetings with cowpy
         COWPY(FIND_CONCATENATE.out.file_out)
     ```
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="2"
         // generate ASCII art of the greetings with cowpy
         COWPY(FIND_CONCATENATE.out.file_out, params.character)
     ```
@@ -757,7 +757,7 @@ Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and modify i
 
 === "After"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2 6 8"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="12" hl_lines="2 6 8"
         output:
             tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
 
@@ -772,7 +772,7 @@ Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and modify i
 
 === "Before"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2 7"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="12" hl_lines="2 7"
         output:
             tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output
 
@@ -933,7 +933,7 @@ Yes, that's a great idea.
 Except it doesn't have a `publishDir` directive. (Go ahead, look at the module code.)
 
 That's because nf-core pipelines centralize control at the workflow level by configuring `publishDir` in `conf/modules.config` rather than in individual modules.
-Specifically, the nf-core template declares a default `publishDir` directive (with a predefined directory structure) that applies to all modules unless an overriding directive is provide.
+Specifically, the nf-core template declares a default `publishDir` directive (with a predefined directory structure) that applies to all modules unless an overriding directive is provided.
 
 Doesn't that sound awesome? Could it be that to take advantage of this default directive, all we need to do is remove the current `publishDir` directive from our local modules?
 
@@ -1117,7 +1117,7 @@ process {
 
 We're not actually going to make that change, but feel free to play with this and see what logic you can implement.
 
-The point is that this system allows gives you the best of both worlds: consistency by default and the flexibility to customize the configuration on demand.
+The point is that this system gives you the best of both worlds: consistency by default and the flexibility to customize the configuration on demand.
 
 To summarize, you get:
 
@@ -1141,17 +1141,17 @@ Open the `cowpy.nf` module file and add a version output line as shown below.
 
 === "After"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="13" hl_lines="3"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="10" hl_lines="3"
         output:
-        tuple val(meta), path("${prefix}.txt")                                    , emit: cowpy_output
-        tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions , emit: versions_cowpy
+            tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
+            tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions, emit: versions_cowpy
     ```
 
 === "Before"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="13"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="10"
         output:
-        tuple val(meta), path("${prefix}.txt")  , emit: cowpy_output
+            tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
     ```
 
 The new line publishes a `[process_name, tool_name, version]` tuple to the `"versions"` topic channel.
@@ -1384,7 +1384,7 @@ However, `cowpy` is available in conda-forge, so you can complete the `environme
 
 === "After"
 
-    ```yaml title="modules/local/cowpy/environment.yml"  linenums="1" hl_lines="1 3 5"
+    ```yaml title="modules/local/cowpy/environment.yml" linenums="1" hl_lines="1 5"
     name: COWPY
     channels:
       - conda-forge
@@ -1429,7 +1429,7 @@ Update the input and output blocks:
 
 === "After"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="10" hl_lines="2 5 6"
     input:
     tuple val(meta), path(input_file)
 
@@ -1440,7 +1440,7 @@ Update the input and output blocks:
 
 === "Before"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="10" hl_lines="2 5 6"
     input:
     tuple val(meta), path(input)
 
@@ -1467,7 +1467,7 @@ Based on the module we wrote manually earlier, we should make the following edit
 
 === "After"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="15" hl_lines="3 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="20" hl_lines="3 6"
     script:
     def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
@@ -1480,7 +1480,7 @@ Based on the module we wrote manually earlier, we should make the following edit
 
 === "Before"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="15" hl_lines="3"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="20" hl_lines="3"
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
@@ -1506,7 +1506,7 @@ Don't worry too much if this seems mysterious; we include this for completeness 
 
 === "After"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="29" hl_lines="3 6"
     stub:
     def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
@@ -1519,7 +1519,7 @@ Don't worry too much if this seems mysterious; we include this for completeness 
 
 === "Before"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="29" hl_lines="3 6"
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"

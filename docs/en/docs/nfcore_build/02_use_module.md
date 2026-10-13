@@ -96,7 +96,7 @@ nf-core modules list remote | grep 'find/concatenate'
     │ find/concatenate                                      │
     ```
 
-Just keep in mind the that `grep` approach will only pull out results with the search term in their name.
+Just keep in mind that `grep` approach will only pull out results with the search term in their name.
 
 ### 1.3. Get detailed information about the module
 
@@ -431,17 +431,17 @@ Ideally this is something you should do _before_ you even install the module, bu
 
 As a reminder, this is what the interface to our `collectGreetings` module looks like:
 
-```groovy title="modules/local/collectGreetings.nf (excerpt)" linenums="1" hl_lines="6-7 10"
+```groovy title="modules/local/collectGreetings.nf (excerpt)" linenums="4" hl_lines="6-7 10"
 process collectGreetings {
 
     publishDir 'results', mode: 'copy'
 
     input:
-        path input_files
-        val batch_name
+    path input_files
+    val batch_name
 
     output:
-        path "COLLECTED-${batch_name}-output.txt" , emit: outfile
+    path "COLLECTED-${batch_name}-output.txt" , emit: outfile
 ```
 
 The `collectGreetings` module takes two inputs:
@@ -552,7 +552,7 @@ ch_input = [[[id: 'batch1', date: '25.10.01'], ['file1A.txt', 'file1B.txt']],
 Then the output channel contents coming out like this:
 
 ```groovy title="Example output channel contents"
-ch_input = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
+ch_output = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
             [[id: 'batch2', date: '25.10.26'], 'batch2.txt'],
             [[id: 'batch3', date: '25.11.14'], 'batch3.txt']]
 ```

@@ -148,7 +148,7 @@ The nf-core pipeline template comes with nf-schema already installed and configu
 - Parameter validation is controlled by `params.validate_params`
 - The validation is performed by the `UTILS_NFSCHEMA_PLUGIN` subworkflow during pipeline initialization
 
-In Parts 3 and 4 we set `validate_params = false` so the pipeline could run before we had configured any schemas.
+In Part 1 we set `validate_params = false` so the pipeline could run before we had configured any schemas.
 Now that we're ready to add validation, the first step is to turn it on.
 
 Open `nextflow.config` and find the `validate_params` parameter (around line 37), and set it to `true`:
@@ -169,11 +169,11 @@ The validation behavior itself is controlled through the `validation{}` scope in
 
 Since we'll be working on parameter validation first (this section) and won't configure the input data schema until section 2, we also need to temporarily tell nf-schema to skip validating the `input` parameter's file contents.
 
-Find the `validation` block (around line 252) and add `ignoreParams` to skip input file validation:
+Find the `validation` block (around line 251) and add `ignoreParams` to skip input file validation:
 
 === "After"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="252"
+    ```groovy title="nextflow.config" hl_lines="3" linenums="251"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
@@ -183,7 +183,7 @@ Find the `validation` block (around line 252) and add `ignoreParams` to skip inp
 
 === "Before"
 
-    ```groovy title="nextflow.config" linenums="252"
+    ```groovy title="nextflow.config" linenums="251"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
@@ -324,7 +324,7 @@ The tool has now updated your `nextflow_schema.json` file with the new `batch` p
 grep -A 25 '"input_output_options"' nextflow_schema.json
 ```
 
-```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8" hl_lines="19-23"
+```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8" hl_lines="6 19-23"
         "input_output_options": {
             "title": "Input/output options",
             "type": "object",
@@ -371,6 +371,8 @@ nextflow run . --outdir test-results -profile docker
     The following invalid input values have been detected:
 
     * Missing required parameter(s): input, batch
+
+     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
     ```
 
 Perfect! The validation catches the missing required parameter before the pipeline runs.
@@ -458,7 +460,7 @@ Open `assets/schema_input.json` and replace the `properties` and `required` sect
 
 === "After"
 
-    ```json title="assets/schema_input.json" linenums="1" hl_lines="10-25 27"
+    ```json title="assets/schema_input.json" linenums="1" hl_lines="5 10-25 27"
     {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json",
@@ -492,7 +494,7 @@ Open `assets/schema_input.json` and replace the `properties` and `required` sect
 
 === "Before"
 
-    ```json title="assets/schema_input.json" linenums="1" hl_lines="10-29 31"
+    ```json title="assets/schema_input.json" linenums="1" hl_lines="5 10-29 31"
     {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json",
@@ -613,10 +615,11 @@ Now update the channel creation code:
 
 === "After"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="80" hl_lines="4"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5"
         //
         // Create channel from input file provided through params.input
         //
+
         ch_samplesheet = channel.fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
             .map { line -> line[0] }
 
@@ -627,10 +630,11 @@ Now update the channel creation code:
 
 === "Before"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="80" hl_lines="4 5"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5 6"
         //
         // Create channel from input file provided through params.input
         //
+
         ch_samplesheet = channel.fromPath(params.input)
             .splitCsv()
             .map { line -> line[0] }
@@ -655,7 +659,7 @@ Open `nextflow.config` and remove the `ignoreParams` line from the `validation` 
 
 === "After"
 
-    ```groovy title="nextflow.config" linenums="252"
+    ```groovy title="nextflow.config" linenums="251"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
@@ -664,7 +668,7 @@ Open `nextflow.config` and remove the `ignoreParams` line from the `validation` 
 
 === "Before"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="252"
+    ```groovy title="nextflow.config" hl_lines="3" linenums="251"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
@@ -722,7 +726,7 @@ Now open the file and change the name of the first column, in the header line, f
 
 === "After"
 
-    ```csv title="tmp_invalid_greetings.csv" hl_lines="1" linenums="1"
+    ```csv title="assets/invalid_greetings.csv" hl_lines="1" linenums="1"
     message,language,score
     Hello,en,87
     Bonjour,fr,96
@@ -731,7 +735,7 @@ Now open the file and change the name of the first column, in the header line, f
 
 === "Before"
 
-    ```csv title="tmp_invalid_greetings.csv" hl_lines="1" linenums="1"
+    ```csv title="assets/invalid_greetings.csv" hl_lines="1" linenums="1"
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
@@ -806,6 +810,6 @@ You've implemented and tested both parameter validation and input data validatio
 
 ### What's next?
 
-You've completed all five parts of the Build with nf-core training course!
+You've completed all four parts of the Build with nf-core training course!
 
 Continue to the [Summary](next_steps.md) to reflect on what you've built and learned.

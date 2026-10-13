@@ -106,7 +106,7 @@ Retrieve it and create a shortcut to browse it easily:
 
 ```bash
 nextflow pull nf-core/demo
-ln -s $NXF_HOME/assets pipelines
+ln -s ${NXF_HOME:-$HOME/.nextflow}/assets pipelines
 ```
 
 If you've already completed the [Use nf-core](../nfcore_use/index.md) course, `nf-core/demo` is already cached locally, but the symlink above still needs to be created fresh in this directory.

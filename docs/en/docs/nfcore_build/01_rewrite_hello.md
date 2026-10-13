@@ -744,7 +744,7 @@ Next, add a `main` statement before the rest of the operations called in the bod
 
 === "Before"
 
-    ```groovy title="original-hello/hello.nf" linenums="21"
+    ```groovy title="original-hello/hello.nf" linenums="22"
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -764,7 +764,7 @@ This basically says 'this is what this workflow _does_'.
 
 Finally, add an `emit` statement declaring what are the final outputs of the workflow.
 
-```groovy title="original-hello/hello.nf" linenums="35"
+```groovy title="original-hello/hello.nf" linenums="36"
     emit:
     cowpy_hellos = cowpy.out
 ```
@@ -913,7 +913,7 @@ Learn how to graft a basic composable workflow onto the nf-core scaffold.
 
 ## 4. Fit the updated workflow logic into the placeholder workflow
 
-Now that we've verified our composable workflow works correctly, let's return to the nf-core pipeline scaffold we created in section 1.
+Now that we've verified our composable workflow works correctly, let's return to the nf-core pipeline scaffold we created in section 2.
 We want to integrate the composable workflow we just developed into the nf-core template structure, so the end result should look something like this.
 
 <figure class="excalidraw">
@@ -922,7 +922,7 @@ We want to integrate the composable workflow we just developed into the nf-core 
 
 So how do we make that happen? Let's have a look at the current content of the `HELLO` workflow in `core-hello/workflows/hello.nf` (the nf-core scaffold).
 
-```groovy title="core-hello/workflows/hello.nf" linenums="1"
+```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 21 53"
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -987,10 +987,10 @@ workflow HELLO {
 ```
 
 The highlighted lines define the composable workflow structure: `workflow HELLO {`, `take:`, `main:`, and `emit:`.
-The large block between lines 17–34 is more substantial: it handles software version capture using topic channels, a mechanism nf-core is rolling out across all pipelines in 2026.
+The large block between lines 25–52 is more substantial: it handles software version capture using topic channels, a mechanism nf-core is rolling out across all pipelines in 2026.
 We'll explain it in Part 3; for now, treat it as boilerplate that you can leave untouched.
 
-We need to add the relevant code from the composable version of the original workflow that we developed in section 2.
+We need to add the relevant code from the composable version of the original workflow that we developed in section 3.
 
 We're going to tackle this in the following stages:
 
@@ -1039,7 +1039,7 @@ Now let's set up the module import statements.
 
 These were the import statements in the `original-hello/hello.nf` workflow:
 
-```groovy title="original-hello/hello.nf" linenums="9"
+```groovy title="original-hello/hello.nf" linenums="10"
 // Include modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
@@ -1087,7 +1087,7 @@ Two more interesting observations here:
 The nf-core project has a lot of prebuilt functionality around the concept of the samplesheet, which is typically a CSV file containing columnar data.
 Since that is essentially what our `greetings.csv` file is, we'll keep the current `take` declaration as is, and simply update the name of the input channel in the next step.
 
-```groovy title="core-hello/workflows/hello.nf" linenums="17"
+```groovy title="core-hello/workflows/hello.nf" linenums="21"
     take:
     ch_samplesheet // channel: samplesheet read in from --input
     outdir
@@ -1125,7 +1125,7 @@ This ordering makes sense because in a real pipeline, the processes would emit v
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="15" hl_lines="11-21"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="19" hl_lines="11-21"
     workflow HELLO {
 
         take:
@@ -1183,7 +1183,7 @@ This ordering makes sense because in a real pipeline, the processes would emit v
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="15"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="19"
     workflow HELLO {
 
         take:
@@ -1231,14 +1231,14 @@ This looks great, but we still need to update the name of the channel we're pass
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="25"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
         // emit a greeting (updated to use the nf-core convention for samplesheets)
         sayHello(ch_samplesheet)
     ```
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="25"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
         // emit a greeting
         sayHello(greeting_ch)
     ```
@@ -1251,7 +1251,7 @@ Finally, we need to update the `emit` block to include the declaration of the wo
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="71" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="69" hl_lines="2"
         emit:
         cowpy_hellos   = cowpy.out
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
@@ -1259,7 +1259,7 @@ Finally, we need to update the `emit` block to include the declaration of the wo
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="71"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="69"
         emit:
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
@@ -1396,7 +1396,7 @@ A bit of poking around reveals that the input handling is done by the `PIPELINE_
 
 If we open up that file and scroll down, we come to this chunk of code:
 
-```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76"
+```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="83"
     //
     // Create channel from input file provided through params.input
     //
@@ -1461,7 +1461,7 @@ So we just need to plug that into the initialisation workflow, with minor change
 
 === "After"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-7"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="83" hl_lines="5-7"
         //
         // Create channel from input file provided through params.input
         //
@@ -1477,7 +1477,7 @@ So we just need to plug that into the initialisation workflow, with minor change
 
 === "Before"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-23"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="83" hl_lines="5-23"
         //
         // Create channel from input file provided through params.input
         //
@@ -1719,7 +1719,7 @@ tree core-hello-results
         ├── pipeline_dag_2026-06-23_16-56-58.html
         └── pipeline_dag_2026-06-23_16-58-45.html
 
-    1 directory, 12 files
+    1 directory, 11 files
     ```
 
 You see we got another set of execution reports in addition to the ones we got from the first run, when the workflow was still just a placeholder.
