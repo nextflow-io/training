@@ -691,7 +691,7 @@ Open `nextflow.config` and remove the `ignoreParams` line from the `validation` 
 
 === "After"
 
-    ```groovy title="nextflow.config" linenums="251"
+    ```groovy title="nextflow.config" linenums="252"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
@@ -700,7 +700,7 @@ Open `nextflow.config` and remove the `ignoreParams` line from the `validation` 
 
 === "Before"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="251"
+    ```groovy title="nextflow.config" hl_lines="3" linenums="252"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
