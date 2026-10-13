@@ -262,6 +262,32 @@ We're going to add it in the next section.
 
 ### 1.3. Add the batch parameter
 
+#### 1.3.1. Declare the parameter in `nextflow.config`
+
+So far, `batch` is only set in `conf/test.config`.
+Following the advice above, declare it in the `params` block of `nextflow.config`, below `input`:
+
+=== "After"
+
+    ```groovy title="nextflow.config" hl_lines="4" linenums="12"
+        // TODO nf-core: Specify your pipeline's command line flags
+        // Input options
+        input                      = null
+        batch                      = null
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config" linenums="12"
+        // TODO nf-core: Specify your pipeline's command line flags
+        // Input options
+        input                      = null
+    ```
+
+The default is `null`, like `input`, so the user must still supply a value with `--batch` or through a profile such as `test`.
+
+#### 1.3.2. Add the parameter to the schema
+
 While the schema is a JSON file that can be edited manually, **manual editing is error-prone and not recommended**.
 Instead, nf-core provides an interactive GUI tool that handles the JSON Schema syntax for you and validates your changes:
 
@@ -269,7 +295,7 @@ Instead, nf-core provides an interactive GUI tool that handles the JSON Schema s
 nf-core pipelines schema build
 ```
 
-You should see something like this:
+The tool compares the parameters in `nextflow.config` with the schema and finds the new `batch` parameter:
 
 ```console
                                           ,--./,-.
@@ -278,28 +304,34 @@ You should see something like this:
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
+
 
 INFO     [✓] Default parameters match schema validation
 INFO     [✓] Pipeline schema looks valid (found 17 params)
-INFO     Writing schema with 17 params: 'nextflow_schema.json'
+✨ Found 'params.batch' in the pipeline config, but not in the schema. Add to pipeline schema? [y/n]:
+```
+
+Type `y` and press Enter to add `batch` to the schema:
+
+```console
+INFO     Writing schema with 18 params: 'nextflow_schema.json'
 🚀  Launch web builder for customisation and editing? [y/n]:
 ```
 
-Type `y` and press Enter to launch the interactive web interface.
+The tool has added `batch` with the type `string`, but without a description, and outside any parameter group.
+Type `y` and press Enter to launch the interactive web interface to complete it.
 
 Your browser will open showing the Parameter schema builder:
 
 ![Schema builder interface](./img/schema_build.png)
 
-To add the `batch` parameter:
+To complete the `batch` parameter:
 
-1. Click the **"Add parameter"** button at the top
-2. Use the drag handle (⋮⋮) to move the new parameter up into the "Input/output options" group, below the `input` parameter
-3. Fill in the parameter details:
-   - **ID**: `batch`
+1. Use the drag handle (⋮⋮) to move `batch` into the "Input/output options" group, below the `input` parameter
+2. Fill in the parameter details:
    - **Description**: `Name for this batch of greetings`
-   - **Type**: `string`
+   - **Type**: `string` (already set)
    - **Required**: tick the checkbox
    - Optionally, select an icon from the icon picker (e.g., `fas fa-layer-group`)
 
@@ -747,7 +779,7 @@ This doesn't match our schema, so the validation should throw an error.
 Try running the pipeline with this invalid input:
 
 ```bash
-nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profile docker
+nextflow run . --input assets/invalid_greetings.csv --outdir test-results --batch my-batch -profile docker
 ```
 
 ??? failure "Command output"
@@ -755,17 +787,18 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
     ```console
     N E X T F L O W   ~  version 26.04.4
 
-    Launching `./main.nf` [trusting_ochoa] revision: d6bbba9521
+    Launching `./main.nf` [angry_coulomb] revision: d6bbba9521
 
     Input/output options
       input              : assets/invalid_greetings.csv
+      batch              : my-batch
       outdir             : test-results
 
     Generic options
-      trace_report_suffix: 2025-11-21_07-35-12
+      trace_report_suffix: 2026-10-13_11-49-38
 
     Core Nextflow options
-      runName            : trusting_ochoa
+      runName            : angry_coulomb
       containerEngine    : docker
       launchDir          : /workspaces/training/nfcore-build/core-hello
       workDir            : /workspaces/training/nfcore-build/core-hello/work
@@ -781,7 +814,6 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
      -- Check '.nextflow.log' file for details
     The following invalid input values have been detected:
 
-    * Missing required parameter(s): batch
     * --input (assets/invalid_greetings.csv): Validation of file failed:
         -> Entry 1: Missing required field(s): greeting
         -> Entry 2: Missing required field(s): greeting
@@ -793,7 +825,7 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
 Perfect! The validation caught the error and provided a clear, helpful error message pointing to:
 
 - Which file failed validation
-- Which entry (row 1, the first data row) has the problem
+- Which entries have the problem (all three data rows, since the header no longer contains a `greeting` column)
 - What the specific problem is (missing required field `greeting`)
 
 The schema validation ensures that input files have the correct structure before the pipeline runs, saving time and preventing confusing errors later in execution.
