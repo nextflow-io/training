@@ -172,10 +172,12 @@ To make it easier to browse the pipeline source code, create a symbolic link poi
 
 ```bash
 mkdir -p pipelines/nf-core
-ln -s "$(echo $NXF_HOME/assets/.repos/nf-core/demo/clones/*/)" pipelines/nf-core/demo
+ln -sfn "$(ls -d ${NXF_HOME:-$HOME/.nextflow}/assets/.repos/nf-core/demo/clones/* | head -n 1)" pipelines/nf-core/demo
 ```
 
 This creates a shortcut so you can explore the code with `tree -L 2 pipelines/nf-core/demo` or open files directly.
+If `NXF_HOME` is not set, the command falls back to the default location, `$HOME/.nextflow`.
+If you have pulled more than one revision of the pipeline, there is one `clones/<commit>/` directory per revision, and the command links the first one.
 
 #### 1.2.5. Overview of the code organization
 
