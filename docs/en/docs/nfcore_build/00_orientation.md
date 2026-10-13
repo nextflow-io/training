@@ -107,11 +107,13 @@ Retrieve it and create a shortcut to browse it easily:
 ```bash
 nextflow pull nf-core/demo
 mkdir -p pipelines/nf-core
-ln -s "$(ls -d ${NXF_HOME:-$HOME/.nextflow}/assets/.repos/nf-core/demo/clones/* | head -n 1)" pipelines/nf-core/demo
+ln -sfn "$(ls -d ${NXF_HOME:-$HOME/.nextflow}/assets/.repos/nf-core/demo/clones/* | head -n 1)" pipelines/nf-core/demo
 ```
 
 Nextflow checks out each pulled revision of a pipeline into its own `clones/<commit>/` directory under `$NXF_HOME/assets/.repos/`, so that multiple revisions can be used side by side.
-The `ln` command links the checked-out code to `pipelines/nf-core/demo`; if you have pulled more than one revision, it picks one of them, which is fine for browsing the code structure.
+The `ln` command links the checked-out code to `pipelines/nf-core/demo`.
+If you have pulled more than one revision, it picks one of them.
+The directory listings in this course come from the default revision that `nextflow pull` retrieves, so an older revision may differ slightly; for example, release 1.0.0 has no `modules/local/cowpy`.
 
 If you've already completed the [Use nf-core](../nfcore_use/index.md) course, `nf-core/demo` is already cached locally, but the symlink above still needs to be created fresh in this directory.
 
