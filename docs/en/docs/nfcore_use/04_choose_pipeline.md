@@ -21,14 +21,15 @@ Working alone, write down your answers as you go and compare them with the worke
 
 Choose the scenario closest to your own research interests.
 
-#### 1.1.1. Germline variants in a rare disease trio
+#### 1.1.1. Structural variants in an unsolved rare disease trio
 
-A clinical research lab has whole-exome sequencing data for a family trio: an affected child and both unaffected parents.
-They suspect a recessive disorder and want a short list of candidate causal variants for review.
+A clinical research lab is studying a child with a suspected genetic disorder.
+Exome sequencing of the child and both unaffected parents did not find a causal variant, so the family was re-sequenced with long-read whole-genome sequencing, which detects structural variants that short reads miss.
+The lab wants a short list of candidate structural variants, prioritized by their relevance to the child's clinical features, which have been recorded as HPO terms.
 
-- **Data**: paired-end Illumina exome FASTQ files for three individuals
+- **Data**: Oxford Nanopore whole-genome FASTQ files for three individuals, and HPO terms for the child
 - **Reference**: GRCh38
-- **Starting points**: [nf-core/raredisease](https://nf-co.re/raredisease), [nf-core/sarek](https://nf-co.re/sarek)
+- **Starting point**: [nf-core/raredisease](https://nf-co.re/raredisease)
 
 #### 1.1.2. Differential expression in bulk RNA-seq
 
@@ -185,21 +186,24 @@ If you're working in a group, choose one person to present the card in one minut
 Compare your conclusions with the worked answer for your scenario.
 There is room for judgment, so a different answer with good reasons is not necessarily wrong.
 
-??? solution "Germline variants in a rare disease trio"
+??? solution "Structural variants in an unsolved rare disease trio"
 
-    **Pipeline chosen**: `nf-core/raredisease`.
+    **Pipeline chosen**: `nf-core/longraredisease`.
 
-    **Why it fits**: it is built for this question.
-    It calls SNVs, indels, structural variants and other variant types from exome or genome data, annotates them with VEP, and ranks them with GENMOD, taking the family structure and inheritance models into account (including compound heterozygotes).
-    Its outputs include ranked VCFs per family, which is the short list the lab needs.
+    **Why not `nf-core/raredisease`**: it is an obvious match when you search the catalog for "rare disease", and it addresses the same clinical question, but it only accepts Illumina short-read data.
+    Checking the data type first rules it out.
 
-    **Why not `nf-core/sarek`**: Sarek calls and annotates germline variants very well, and can genotype samples jointly, but it does not use pedigree information or rank variants.
-    You would have to do the prioritization yourself.
+    **Why it fits**: `nf-core/longraredisease` is designed for long-read data from Oxford Nanopore or PacBio, and focuses on structural variants.
+    It calls them with three callers (Sniffles, CuteSV and SVIM) and merges the results into a consensus set, supports trio analysis including detection of de novo variants, annotates the variants with AnnotSV, and ranks them against the patient's HPO terms with SvAnna.
+    It can also call SNVs, copy number variants, short tandem repeats and methylation, which long reads provide from the same data.
 
-    **Inputs to prepare**: the samplesheet requires `sex`, `phenotype` and `case_id` columns, and uses `paternal_id` and `maternal_id` to describe the trio.
-    For exome data, you set `--analysis_type wes` and provide a BED file of the capture targets.
+    **Inputs to prepare**: the samplesheet requires `sample` and `file_path`, and uses `hpo_terms`, `sex`, `phenotype`, `family_id`, `maternal_id` and `paternal_id` to describe the trio and the child's clinical features.
 
-    **Compute concern**: beyond the genome, the pipeline needs several reference resources (VEP cache, variant catalogs, scoring configurations) that you need to download or build before the first run.
+    **What to keep in mind**: check the release history; `nf-core/longraredisease` is much younger than `nf-core/raredisease`, so it has less of a track record.
+    The published test results cover one chromosome of a single sample, and do not include the phenotype-based prioritization step; use the output documentation to see what those results look like.
+
+    **Compute concern**: the published execution report comes from that small test, so it greatly understates the resources a trio of whole genomes requires.
+    Plan for read alignment and variant calling on whole genomes to dominate the run.
 
 ??? solution "Differential expression in bulk RNA-seq"
 
