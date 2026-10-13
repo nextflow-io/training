@@ -102,17 +102,11 @@ We use collapsible sections like this to include expected command output in a co
 ### Set up the pipeline reference
 
 Part 1 of this course refers to the `nf-core/demo` pipeline's source code for reference.
-Retrieve it and create a shortcut to browse it easily:
+Clone it into a local directory so you can browse it easily:
 
 ```bash
-nextflow pull nf-core/demo
-mkdir -p pipelines/nf-core
-ln -sfn "$(ls -d $NXF_HOME/assets/.repos/nf-core/demo/clones/* | head -n 1)" pipelines/nf-core/demo
+nextflow clone nf-core/demo pipelines/nf-core/demo
 ```
-
-Nextflow checks out each pulled revision into its own `clones/<commit>/` directory under `$NXF_HOME/assets/.repos/`, so the command links the first one it finds to `pipelines/nf-core/demo`.
-
-If you've already completed the [Use nf-core](../nfcore_use/index.md) course, `nf-core/demo` is already cached locally, but the symlink above still needs to be created fresh in this directory.
 
 ## Readiness checklist
 
