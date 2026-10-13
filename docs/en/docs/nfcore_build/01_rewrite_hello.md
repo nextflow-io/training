@@ -25,7 +25,7 @@ The nf-core project enforces strong guidelines for how pipelines are structured,
 Before we tackle our pipeline creation project, we need to understand that structure and organization.
 So let's have a look at how the pipeline code is organized in the `nf-core/demo` repository, using the copy in `pipelines/nf-core/demo` that you cloned during [Getting started](00_orientation.md).
 
-As a reminder, you can either use `tree` or use the file explorer to find and open the `nf-core/demo` directory.
+As a reminder, you can either use `tree` or use the file explorer to find and open the `pipelines/nf-core/demo` directory.
 
 ```bash
 tree -L 1 pipelines/nf-core/demo
