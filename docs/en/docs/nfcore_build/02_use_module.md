@@ -186,7 +186,7 @@ This displays documentation about the module, including its inputs, outputs, and
 
 This is the exact same information you can find on the website.
 
-You can ignore the `INFO Reinstalling modules found in 'modules.json' but missing from directory` message; it is emitted by nf-core/tools 4.0.2 for any module you query with `info`, whether or not it is actually installed, and has no effect since the `info` command doesn't write any files.
+You can ignore the `INFO Reinstalling modules found in 'modules.json' but missing from directory` message; it is emitted by nf-core/tools 4.0.2 for any module you query with `info`, whether or not it is actually installed, and has no effect since the `info` command doesn't install anything.
 
 ### 1.4. Install the find/concatenate module
 
@@ -214,13 +214,18 @@ nf-core modules install find/concatenate
     nf-core/tools version 4.0.2 - https://nf-co.re
 
 
+    INFO     Reinstalling modules found in 'modules.json' but missing from
+             directory:
     INFO     Installing 'find/concatenate'
+    ╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+    │ ...                                                                          │
+    ╰──────────────────────────────────────────────────────────────────────────────╯
     NotADirectoryError: [Errno 20] Not a directory:
     'modules/local/cowpy.nf/meta.yml'
     ```
 
 The command downloads the module files to `modules/nf-core/find/concatenate/` and updates `modules.json` to track the installed module.
-You can ignore the `NotADirectoryError` at the end; it happens because nf-core/tools 4.0.2 expects every local module to live in its own directory (`modules/local/<name>/main.nf`), while `core-hello` still uses single-file local modules at this stage.
+You can ignore the long traceback ending in `NotADirectoryError`; it happens because nf-core/tools 4.0.2 expects every local module to live in its own directory (`modules/local/<name>/main.nf`), while `core-hello` still uses single-file local modules at this stage.
 However, the `find/concatenate` module is installed correctly, and `modules.json` is updated as expected.
 We'll convert `cowpy` to the directory layout in Part 3.
 
