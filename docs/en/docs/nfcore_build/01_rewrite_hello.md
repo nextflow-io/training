@@ -1465,12 +1465,12 @@ As a reminder, this is what the channel construction looked like (as seen in the
         .map { line -> line[0] }
 ```
 
-So we just need to plug that into the initialisation workflow, with minor changes: we update the channel name from `greeting_ch` to `ch_samplesheet`, and the parameter name from `params.greeting` to `params.input` (see highlighted line).
+So we just need to plug that into the initialisation workflow, with minor changes: we update the channel name from `greeting_ch` to `ch_samplesheet`, and replace `params.greeting` with `input` (see highlighted line).
 
 !!! note
 
-    The template code reads the samplesheet path from `input`, which is one of the subworkflow's `take:` inputs.
-    The entrypoint `main.nf` passes `params.input` into that input, so referencing `params.input` directly reads the same value.
+    `input` is one of the subworkflow's `take:` inputs, the same one the template code passes to `samplesheetToList`.
+    The entrypoint `main.nf` fills it with `params.input`, so the subworkflow reads the samplesheet path from its input instead of referencing the parameter directly.
 
 === "After"
 
@@ -1479,7 +1479,7 @@ So we just need to plug that into the initialisation workflow, with minor change
         // Create channel from input file provided through params.input
         //
 
-        ch_samplesheet = channel.fromPath(params.input)
+        ch_samplesheet = channel.fromPath(input)
             .splitCsv()
             .map { line -> line[0] }
 

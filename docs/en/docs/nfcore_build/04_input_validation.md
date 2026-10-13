@@ -652,7 +652,7 @@ Now update the channel creation code:
         // Create channel from input file provided through params.input
         //
 
-        ch_samplesheet = channel.fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+        ch_samplesheet = channel.fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
             .map { line -> line[0] }
 
         emit:
@@ -667,7 +667,7 @@ Now update the channel creation code:
         // Create channel from input file provided through params.input
         //
 
-        ch_samplesheet = channel.fromPath(params.input)
+        ch_samplesheet = channel.fromPath(input)
             .splitCsv()
             .map { line -> line[0] }
 
@@ -678,7 +678,7 @@ Now update the channel creation code:
 
 Let's break down what changed:
 
-1. **`#!groovy samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")`**: Validates the input file against our schema and returns a list
+1. **`#!groovy samplesheetToList(input, "${projectDir}/assets/schema_input.json")`**: Validates the input file against our schema and returns a list
 2. **`channel.fromList(...)`**: Converts the list into a Nextflow channel
 
 This completes the implementation of input data validation using `samplesheetToList` and JSON schemas.

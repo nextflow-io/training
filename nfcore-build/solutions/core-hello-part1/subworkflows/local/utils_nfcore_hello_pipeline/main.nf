@@ -77,7 +77,7 @@ workflow PIPELINE_INITIALISATION {
     // Create channel from input file provided through params.input
     //
 
-    ch_samplesheet = channel.fromPath(params.input)
+    ch_samplesheet = channel.fromPath(input)
         .splitCsv()
         .map { line -> line[0] }
 
