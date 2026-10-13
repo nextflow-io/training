@@ -96,7 +96,7 @@ nf-core modules list remote | grep 'find/concatenate'
     │ find/concatenate                                      │
     ```
 
-Just keep in mind the that `grep` approach will only pull out results with the search term in their name.
+Just keep in mind that `grep` approach will only pull out results with the search term in their name.
 
 ### 1.3. Get detailed information about the module
 
@@ -195,10 +195,9 @@ Now that we've found the module we want, we need to add it to our pipeline's sou
 The good news is that the nf-core project includes some tooling to make this part easy.
 Specifically, the `nf-core modules install` command makes it possible to automate retrieving the code and making it available to your project in a single step.
 
-Make sure your working directory is the root of the `core-hello` pipeline project, then run the installation command:
+Make sure your working directory is the root of the `core-hello` pipeline project (run `cd core-hello` if you are still in the `nfcore-build/` directory), then run the installation command:
 
 ```bash
-cd core-hello
 nf-core modules install find/concatenate
 ```
 
@@ -223,7 +222,7 @@ nf-core modules install find/concatenate
 The command downloads the module files to `modules/nf-core/find/concatenate/` and updates `modules.json` to track the installed module.
 You can ignore the `NotADirectoryError` at the end; it happens because nf-core/tools 4.0.2 expects every local module to live in its own directory (`modules/local/<name>/main.nf`), while `core-hello` still uses single-file local modules at this stage.
 However, the `find/concatenate` module is installed correctly, and `modules.json` is updated as expected.
-We'll convert `cowpy` to the directory layout in Part 4.
+We'll convert `cowpy` to the directory layout in Part 3.
 
 Let's check that the module files are in place:
 
@@ -340,9 +339,9 @@ This shows `find/concatenate` in the resulting table alongside its repository, v
 
 Let's replace the `include` statement for the `collectGreetings` module with the one for `FIND_CONCATENATE` in the imports section of the `workflows/hello.nf` workflow.
 
-As a reminder, the module install tool gave us the exact statement to use:
+The import statement points to the module's `main.nf` under `modules/nf-core/`:
 
-```groovy title="Import statement produced by install command"
+```groovy title="Import statement for the find/concatenate module"
 include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
 ```
 
@@ -431,17 +430,17 @@ Ideally this is something you should do _before_ you even install the module, bu
 
 As a reminder, this is what the interface to our `collectGreetings` module looks like:
 
-```groovy title="modules/local/collectGreetings.nf (excerpt)" linenums="1" hl_lines="6-7 10"
+```groovy title="modules/local/collectGreetings.nf (excerpt)" linenums="4" hl_lines="6-7 10"
 process collectGreetings {
 
     publishDir 'results', mode: 'copy'
 
     input:
-        path input_files
-        val batch_name
+    path input_files
+    val batch_name
 
     output:
-        path "COLLECTED-${batch_name}-output.txt" , emit: outfile
+    path "COLLECTED-${batch_name}-output.txt" , emit: outfile
 ```
 
 The `collectGreetings` module takes two inputs:
@@ -464,7 +463,7 @@ process FIND_CONCATENATE {
         : 'community.wave.seqera.io/library/findutils_pigz:c4dd5edc44402661'}"
 
     input:
-    tuple val(meta), path(files_in)
+    tuple val(meta), path(files_in, stageAs: 'to_concatenate/*', arity: '1..*')
 
     output:
     tuple val(meta), path("${prefix}"), emit: file_out
@@ -477,6 +476,7 @@ The `FIND_CONCATENATE` module takes a single input, but that input is a tuple co
 
 - `meta` is a structure containing metadata, called a metamap;
 - `files_in` contains one or more input files to process, equivalent to `collectGreetings`'s `input_files`.
+  The `arity: '1..*'` option requires at least one file, and `stageAs: 'to_concatenate/*'` stages the files into a `to_concatenate/` subdirectory of the task work directory.
 
 Upon completion, `FIND_CONCATENATE` delivers its outputs in two parts:
 
@@ -523,7 +523,7 @@ Now let's put this in the context of the `FIND_CONCATENATE` process, which expec
 
 ```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="10" hl_lines="2 5"
 input:
-tuple val(meta), path(files_in)
+tuple val(meta), path(files_in, stageAs: 'to_concatenate/*', arity: '1..*')
 
 output:
 tuple val(meta), path("${prefix}"), emit: file_out
@@ -552,7 +552,7 @@ ch_input = [[[id: 'batch1', date: '25.10.01'], ['file1A.txt', 'file1B.txt']],
 Then the output channel contents coming out like this:
 
 ```groovy title="Example output channel contents"
-ch_input = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
+ch_output = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
             [[id: 'batch2', date: '25.10.26'], 'batch2.txt'],
             [[id: 'batch3', date: '25.11.14'], 'batch3.txt']]
 ```

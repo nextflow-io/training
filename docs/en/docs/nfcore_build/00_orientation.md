@@ -106,8 +106,11 @@ Retrieve it and create a shortcut to browse it easily:
 
 ```bash
 nextflow pull nf-core/demo
-ln -s $NXF_HOME/assets pipelines
+mkdir -p pipelines/nf-core
+ln -sfn "$(ls -d $NXF_HOME/assets/.repos/nf-core/demo/clones/* | head -n 1)" pipelines/nf-core/demo
 ```
+
+Nextflow checks out each pulled revision into its own `clones/<commit>/` directory under `$NXF_HOME/assets/.repos/`, so the command links the first one it finds to `pipelines/nf-core/demo`.
 
 If you've already completed the [Use nf-core](../nfcore_use/index.md) course, `nf-core/demo` is already cached locally, but the symlink above still needs to be created fresh in this directory.
 
