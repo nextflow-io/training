@@ -23,9 +23,9 @@ If you're not familiar with the Hello pipeline or you could use a reminder, see 
 The nf-core project enforces strong guidelines for how pipelines are structured, and for how the code is organized, configured and documented.
 
 Before we tackle our pipeline creation project, we need to understand that structure and organization.
-So let's have a look at how the pipeline code is organized in the `nf-core/demo` repository, using the `pipelines` symlink you created during [Getting started](00_orientation.md).
+So let's have a look at how the pipeline code is organized in the `nf-core/demo` repository, using the `pipelines/nf-core/demo` symlink you created during [Getting started](00_orientation.md).
 
-As a reminder, you can either use `tree` or use the file explorer to find and open the `nf-core/demo` directory.
+As a reminder, you can either use `tree` or use the file explorer to find and open the `pipelines/nf-core/demo` directory.
 
 ```bash
 tree -L 1 pipelines/nf-core/demo
