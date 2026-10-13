@@ -118,7 +118,7 @@ This displays documentation about the module, including its inputs, outputs, and
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 4.0.2 - https://nf-co.re
+        nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Reinstalling modules found in 'modules.json' but missing from
@@ -186,7 +186,9 @@ This displays documentation about the module, including its inputs, outputs, and
 
 This is the exact same information you can find on the website.
 
-You can ignore the `INFO Reinstalling modules found in 'modules.json' but missing from directory` message; it is emitted by nf-core/tools 4.0.2 for any module you query with `info`, whether or not it is actually installed, and has no effect since the `info` command doesn't write any files.
+You can ignore the `INFO Reinstalling modules found in 'modules.json' but missing from directory` message.
+No module names follow it, which means there is nothing to reinstall.
+The same message appears when you install a module in the next step.
 
 ### 1.4. Install the find/concatenate module
 
@@ -195,10 +197,13 @@ Now that we've found the module we want, we need to add it to our pipeline's sou
 The good news is that the nf-core project includes some tooling to make this part easy.
 Specifically, the `nf-core modules install` command makes it possible to automate retrieving the code and making it available to your project in a single step.
 
-Make sure your working directory is the root of the `core-hello` pipeline project, then run the installation command:
+Make sure your working directory is the root of the `core-hello` pipeline project.
+If you are still in the `nfcore-build/` directory after completing Part 1, run `cd core-hello` first.
+If you started from the solution as described at the top of this page, you are already there.
+
+Then run the installation command:
 
 ```bash
-cd core-hello
 nf-core modules install find/concatenate
 ```
 
@@ -212,18 +217,19 @@ nf-core modules install find/concatenate
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 
+    INFO     Reinstalling modules found in 'modules.json' but missing from
+             directory:
     INFO     Installing 'find/concatenate'
-    NotADirectoryError: [Errno 20] Not a directory:
-    'modules/local/cowpy.nf/meta.yml'
+    INFO     Use the following statement to include this module:
+
+     include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
     ```
 
 The command downloads the module files to `modules/nf-core/find/concatenate/` and updates `modules.json` to track the installed module.
-You can ignore the `NotADirectoryError` at the end; it happens because nf-core/tools 4.0.2 expects every local module to live in its own directory (`modules/local/<name>/main.nf`), while `core-hello` still uses single-file local modules at this stage.
-However, the `find/concatenate` module is installed correctly, and `modules.json` is updated as expected.
-We'll convert `cowpy` to the directory layout in Part 4.
+It also prints the `include` statement you need to import the module into a workflow.
 
 Let's check that the module files are in place:
 
@@ -321,7 +327,7 @@ nf-core modules list local
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Repository type: pipeline
@@ -464,7 +470,7 @@ process FIND_CONCATENATE {
         : 'community.wave.seqera.io/library/findutils_pigz:c4dd5edc44402661'}"
 
     input:
-    tuple val(meta), path(files_in)
+    tuple val(meta), path(files_in, stageAs: 'to_concatenate/*', arity: '1..*')
 
     output:
     tuple val(meta), path("${prefix}"), emit: file_out
@@ -477,6 +483,7 @@ The `FIND_CONCATENATE` module takes a single input, but that input is a tuple co
 
 - `meta` is a structure containing metadata, called a metamap;
 - `files_in` contains one or more input files to process, equivalent to `collectGreetings`'s `input_files`.
+  The `arity: '1..*'` option requires at least one file, and `stageAs: 'to_concatenate/*'` stages the files into a `to_concatenate/` subdirectory of the task work directory.
 
 Upon completion, `FIND_CONCATENATE` delivers its outputs in two parts:
 
@@ -523,7 +530,7 @@ Now let's put this in the context of the `FIND_CONCATENATE` process, which expec
 
 ```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="10" hl_lines="2 5"
 input:
-tuple val(meta), path(files_in)
+tuple val(meta), path(files_in, stageAs: 'to_concatenate/*', arity: '1..*')
 
 output:
 tuple val(meta), path("${prefix}"), emit: file_out
@@ -557,7 +564,7 @@ ch_output = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
             [[id: 'batch3', date: '25.11.14'], 'batch3.txt']]
 ```
 
-As mentioned earlier, the `tuple val(meta), path(files_in)` input setup is a standard pattern used across all nf-core modules.
+As mentioned earlier, the `tuple val(meta), path(...)` input setup is a standard pattern used across all nf-core modules.
 
 Hopefully you can start to see how useful this can be.
 Not only does it allow you to name outputs based on metadata, but you can also do things like use it to apply different parameter values, and in combination with specific operators, you can even group, sort or filter out data as it flows through the pipeline.

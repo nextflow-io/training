@@ -127,6 +127,11 @@ tree -L 3 pipelines/nf-core/demo/modules
 
     ```console
     pipelines/nf-core/demo/modules
+    ├── local
+    │   └── cowpy
+    │       ├── environment.yml
+    │       ├── main.nf
+    │       └── meta.yaml
     └── nf-core
         ├── fastqc
         │   ├── environment.yml
@@ -141,11 +146,15 @@ tree -L 3 pipelines/nf-core/demo/modules
         └── seqtk
             └── trim
 
-    7 directories, 6 files
+    9 directories, 9 files
     ```
 
 Here you see that the `fastqc` and `multiqc` modules sit at the top level within the `nf-core` modules, whereas the `trim` module sits under the toolkit that it belongs to, `seqtk`.
-In this case there are no `local` modules.
+These `nf-core` modules are installed from the shared [nf-core/modules](https://github.com/nf-core/modules) repository and tracked in the pipeline's `modules.json` file.
+
+The `cowpy` module sits under `local`.
+Local modules are written specifically for this pipeline and are not part of the shared nf-core modules repository.
+They follow the same directory layout, with a `main.nf` file in a directory named after the tool.
 
 The module code file describing the process is always called `main.nf`, and is accompanied by tests and `.yml` files which we'll ignore for now.
 
@@ -260,17 +269,16 @@ Once the TUI closes, you should see the following console output.
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 4.0.2 - https://nf-co.re
+        nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Launching interactive nf-core pipeline creation tool.
     ```
 
-Once the TUI has finished, the tool reports that it created the pipeline, generated its container configuration, and initialized a local git repository for the new pipeline:
+Once the TUI has finished, the tool reports that it created the pipeline and initialized a local git repository for the new pipeline:
 
 ```console
 INFO     Creating new pipeline: 'hello'
-INFO     Generated container configs for the pipeline successfully.
 INFO     Initialising local pipeline git repository
 INFO     Pipeline created: ./core-hello
 ```
@@ -1396,13 +1404,13 @@ A bit of poking around reveals that the input handling is done by the `PIPELINE_
 
 If we open up that file and scroll down, we come to this chunk of code:
 
-```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="83"
+```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84"
     //
     // Create channel from input file provided through params.input
     //
 
     channel
-        .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+        .fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
         .map {
             meta, fastq_1, fastq_2 ->
                 if (!fastq_2) {
@@ -1459,9 +1467,14 @@ As a reminder, this is what the channel construction looked like (as seen in the
 
 So we just need to plug that into the initialisation workflow, with minor changes: we update the channel name from `greeting_ch` to `ch_samplesheet`, and the parameter name from `params.greeting` to `params.input` (see highlighted line).
 
+!!! note
+
+    The template code reads the samplesheet path from `input`, which is one of the subworkflow's `take:` inputs.
+    The entrypoint `main.nf` passes `params.input` into that input, so referencing `params.input` directly reads the same value.
+
 === "After"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="83" hl_lines="5-7"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5-7"
         //
         // Create channel from input file provided through params.input
         //
@@ -1477,13 +1490,13 @@ So we just need to plug that into the initialisation workflow, with minor change
 
 === "Before"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="83" hl_lines="5-23"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5-23"
         //
         // Create channel from input file provided through params.input
         //
 
         channel
-            .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+            .fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
             .map {
                 meta, fastq_1, fastq_2 ->
                     if (!fastq_2) {
@@ -1657,6 +1670,8 @@ If you've done all of the modifications correctly, it should run to completion.
 
     Launching `core-hello/main.nf` [voluminous_caravaggio] revision: d6bbba9521
 
+    WARN: Unrecognized config option 'validation.defaultIgnoreParams'
+    WARN: Unrecognized config option 'validation.monochromeLogs'
     Input/output options
       input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
       outdir                    : core-hello-results

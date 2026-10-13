@@ -179,14 +179,14 @@ So now let's update the two references to the process in the workflow block of `
             "${process}:\n${tool_versions.join('\n')}"
         }
 
-    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
             storeDir: "${outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
             sort: true,
             newLine: true
-        ).set { ch_collated_versions }
+        )
 
 
     emit:
@@ -223,14 +223,14 @@ So now let's update the two references to the process in the workflow block of `
             "${process}:\n${tool_versions.join('\n')}"
         }
 
-    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
             storeDir: "${outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
             sort: true,
             newLine: true
-        ).set { ch_collated_versions }
+        )
 
 
     emit:
@@ -1234,8 +1234,11 @@ The `nf-core modules create` command generates a module template that already fo
 Let's create a new version of the `COWPY` module with a minimal template by running this command:
 
 ```bash
-nf-core modules create --empty-template COWPY
+nf-core modules create --empty-template cowpy
 ```
+
+The tool name must be given in lowercase.
+The tool converts it to the uppercase process name `COWPY` in the generated code.
 
 The `--empty-template` flag creates a clean starter template without extra code, making it easier to see the essential structure.
 
@@ -1244,6 +1247,8 @@ It automatically looks up tool information from package repositories like Biocon
 
 You'll be prompted for several configuration options:
 
+- **Bioconda package name**: The tool cannot find a `cowpy` package in Bioconda and asks whether you want to enter a different package name.
+  Answer `n`; we'll fill in the package information manually.
 - **Author information**: Your GitHub username for attribution
 - **Resource label**: A predefined set of computational requirements.
   The nf-core project provides standard labels like `process_single` for lightweight tools and `process_high` for demanding ones.
@@ -1280,7 +1285,9 @@ Each file serves a specific purpose:
 
 The generated `main.nf` includes all the patterns you just learned, plus some additional features:
 
-```groovy title="modules/local/cowpy/main.nf" hl_lines="11 21 22"
+```groovy title="modules/local/cowpy/main.nf" linenums="1" hl_lines="12 23 24"
+
+
 process COWPY {
     tag "$meta.id"
     label 'process_single'
@@ -1290,11 +1297,11 @@ process COWPY {
         'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
         'quay.io/biocontainers/YOUR-TOOL-HERE' }"
 
-    input:
-    tuple val(meta), path(input)        // Pattern 1: Metadata tuples ✓
+    input:tuple val(meta), path(input)        // Pattern 1: Metadata tuples ✓
 
     output:
     tuple val(meta), path("*"), emit: output
+
     tuple val("${task.process}"), val('cowpy'), eval("cowpy --version"), topic: versions, emit: versions_cowpy
 
     when:
@@ -1305,6 +1312,7 @@ process COWPY {
     def prefix = task.ext.prefix ?: "${meta.id}"  // Pattern 3: ext.prefix ✓
 
     """
+
     """
 
     stub:
@@ -1313,9 +1321,13 @@ process COWPY {
 
     """
     echo $args
+
     """
 }
 ```
+
+The generated file starts with two empty lines, and the template places the input declaration on the same line as `input:`.
+We'll move the input declaration onto its own line when we update the inputs and outputs in section 2.3.1.
 
 Notice how all the patterns you applied manually above are already there!
 
@@ -1429,7 +1441,7 @@ Update the input and output blocks:
 
 === "After"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="10" hl_lines="2 5 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="10" hl_lines="1-2 5-6"
     input:
     tuple val(meta), path(input_file)
 
@@ -1440,17 +1452,18 @@ Update the input and output blocks:
 
 === "Before"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="10" hl_lines="2 5 6"
-    input:
-    tuple val(meta), path(input)
+    ```groovy title="modules/local/cowpy/main.nf" linenums="10" hl_lines="1 4-6"
+    input:tuple val(meta), path(input)
 
     output:
     tuple val(meta), path("*"), emit: output
-    tuple val("${task.process}"), val('cowpy'), eval("cowpy --version"), topic: versions    , emit: versions_cowpy
+
+    tuple val("${task.process}"), val('cowpy'), eval("cowpy --version"), topic: versions, emit: versions_cowpy
     ```
 
 This specifies:
 
+- The input declaration on its own line below `input:`
 - The input file parameter name (`input_file` instead of generic `input`)
 - The output filename using the configurable prefix pattern (`#!groovy ${prefix}.txt` instead of wildcard `*`)
 - A descriptive emit name (`cowpy_output` instead of generic `output`)
@@ -1480,12 +1493,13 @@ Based on the module we wrote manually earlier, we should make the following edit
 
 === "Before"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="20" hl_lines="3"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="20" hl_lines="3 6"
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
+
     """
     ```
 
@@ -1506,9 +1520,8 @@ Don't worry too much if this seems mysterious; we include this for completeness 
 
 === "After"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="29" hl_lines="3 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="29" hl_lines="2 5"
     stub:
-    def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
 
     """
@@ -1519,13 +1532,14 @@ Don't worry too much if this seems mysterious; we include this for completeness 
 
 === "Before"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="29" hl_lines="3 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="29" hl_lines="2 3 6"
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
     echo $args
+
     """
     ```
 
@@ -1533,6 +1547,7 @@ Key changes:
 
 - Change `def prefix` to just `prefix` to match the script block
 - Remove the `echo $args` line (which was just template placeholder code)
+- Remove the `def args` line, since the stub no longer uses `args` (`nextflow lint` warns about variables that are declared but not used)
 - The stub creates an empty `#!groovy ${prefix}.txt` file matching what the script block produces
 
 This allows you to test workflow logic and file handling without waiting for the actual tool to run.
