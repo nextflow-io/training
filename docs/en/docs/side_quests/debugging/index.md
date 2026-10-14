@@ -1221,9 +1221,44 @@ You can see that we're generating a channel composed of tuples: `['sample1', 'fi
 
 #### Fix the code
 
-To fix this, if the process requires both inputs we could adjust the process to accept a tuple:
+There are two ways to fix this:
 
-=== "Option 1: Accept tuple in process"
+1. Reshape the data to fit the process
+2. Change the process to fit the data
+
+=== "Option 1: Extract first element"
+
+    === "After"
+
+        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
+        workflow {
+
+            // Channel emits tuples, but process expects single values
+            input_ch = channel.of(
+              ['sample1', 'file1.txt'],
+              ['sample2', 'file2.txt'],
+              ['sample3', 'file3.txt']
+            )
+            PROCESS_FILES(input_ch.map { sample_id, file -> sample_id })  // Fixed: Extract first element
+        }
+        ```
+
+    === "Before"
+
+        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
+        workflow {
+
+            // Channel emits tuples, but process expects single values
+            input_ch = channel.of(
+              ['sample1', 'file1.txt'],
+              ['sample2', 'file2.txt'],
+              ['sample3', 'file3.txt']
+            )
+            PROCESS_FILES(input_ch)
+        }
+        ```
+
+=== "Option 2: Accept tuple in process"
 
     === "After"
 
@@ -1285,41 +1320,9 @@ To fix this, if the process requires both inputs we could adjust the process to 
         }
         ```
 
-=== "Option 2: Extract first element"
-
-    === "After"
-
-        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
-        workflow {
-
-            // Channel emits tuples, but process expects single values
-            input_ch = channel.of(
-              ['sample1', 'file1.txt'],
-              ['sample2', 'file2.txt'],
-              ['sample3', 'file3.txt']
-            )
-            PROCESS_FILES(input_ch.map { sample_id, file -> sample_id })  // Fixed: Extract first element
-        }
-        ```
-
-    === "Before"
-
-        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
-        workflow {
-
-            // Channel emits tuples, but process expects single values
-            input_ch = channel.of(
-              ['sample1', 'file1.txt'],
-              ['sample2', 'file2.txt'],
-              ['sample3', 'file3.txt']
-            )
-            PROCESS_FILES(input_ch)
-        }
-        ```
-
 #### Run the pipeline
 
-Pick one of the solutions and re-run the workflow (the output below uses Option 1):
+Pick one of the solutions and re-run the workflow (the output below uses Option 2):
 
 ```bash
 nextflow run bad_channel_shape.nf
@@ -1335,6 +1338,105 @@ nextflow run bad_channel_shape.nf
     executor >  local (3)
     [81/d0f3ea] PROCESS_FILES (1) | 3 of 3 ✔
     ```
+
+#### Going further: record types
+
+Options 1 and 2 fix this mismatch, but neither prevents the next one.
+A tuple is positional, so the process only knows that it receives a list of values.
+If a channel emits the values in the wrong order, or leaves one out, the error appears later and points at the symptom rather than the cause.
+
+Record types address this by giving the data a declared shape.
+A record defines named, typed fields, and a process declares the record type it accepts.
+Nextflow checks each value against that declaration.
+
+!!! note "Record types are a new feature"
+
+    Record types were introduced in Nextflow 26.04 and require the `nextflow.enable.types` flag.
+    On 26.04, Nextflow prints a warning that static typing is a preview feature.
+    A future training course will cover them in detail.
+
+Here is the same workflow written with a record:
+
+```groovy title="bad_channel_shape.nf" hl_lines="3 5-8 12 15 19 27-29" linenums="1"
+#!/usr/bin/env nextflow
+
+nextflow.enable.types = true
+
+record Sample {
+    id: String
+    file_name: String
+}
+
+process PROCESS_FILES {
+    input:
+        sample: Sample  // Accept a record with named fields
+
+    output:
+        file("${sample.id}_output.txt")
+
+    script:
+    """
+    echo "Processing ${sample.id}" > ${sample.id}_output.txt
+    """
+}
+
+workflow {
+
+    // Channel emits records with named fields
+    input_ch = channel.of(
+      record(id: 'sample1', file_name: 'file1.txt'),
+      record(id: 'sample2', file_name: 'file2.txt'),
+      record(id: 'sample3', file_name: 'file3.txt')
+    )
+    PROCESS_FILES(input_ch)
+}
+```
+
+The changes from the original are:
+
+- `nextflow.enable.types = true` enables typed syntax
+- `record Sample { ... }` declares the fields each sample must have
+- `sample: Sample` declares that the process accepts a `Sample` record
+- `record(id: ..., file_name: ...)` creates each record in the channel
+- `sample.id` accesses a field by name instead of by position
+
+If a record is missing a field, Nextflow names the field in the error.
+To see this, remove `id` from the second record:
+
+```groovy title="bad_channel_shape.nf" hl_lines="3" linenums="26"
+    input_ch = channel.of(
+      record(id: 'sample1', file_name: 'file1.txt'),
+      record(file_name: 'file2.txt'),
+      record(id: 'sample3', file_name: 'file3.txt')
+    )
+```
+
+Run the workflow:
+
+```bash
+nextflow run bad_channel_shape.nf
+```
+
+??? failure "Command output"
+
+    ```console
+     N E X T F L O W   ~  version 26.10.0
+
+    Launching `bad_channel_shape.nf` [condescending_sammet] revision: 15c9f9aa87
+
+    ERROR ~ Error executing process > 'PROCESS_FILES (2)'
+
+    Caused by:
+      [PROCESS_FILES (2)] input field `id` at index 0 cannot be null -- append `?` to the type annotation to mark it as nullable
+
+
+    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+
+     -- Check '.nextflow.log' file for details
+    ```
+
+This error requires Nextflow 26.10 or later.
+On Nextflow 26.04, the task runs with `id` set to `null` and writes `null_output.txt`.
 
 ### 2.4. Channel Debugging Techniques
 
