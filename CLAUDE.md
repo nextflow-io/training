@@ -54,6 +54,13 @@ prettier --write docs/**/*.md
 sudo uv run ./preview_release.py --version 3.0
 ```
 
+### Cut a release
+
+Run the **Draft release** workflow (`.github/workflows/release.yml`).
+It refuses to draft until translations are up to date.
+Publishing the draft deploys the site.
+Full steps in CONTRIBUTING.md (Releasing).
+
 ## Repository Structure
 
 - `docs/en/` - English training content (source)
