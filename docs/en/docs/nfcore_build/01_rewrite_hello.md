@@ -265,7 +265,7 @@ Once the TUI closes, you should see the following console output.
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 4.0.2 - https://nf-co.re
+        nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Launching interactive nf-core pipeline creation tool.

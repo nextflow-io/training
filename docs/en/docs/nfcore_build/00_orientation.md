@@ -23,7 +23,7 @@ If you are working through this course by yourself, please acquaint yourself wit
 This training works with Nextflow 25.10.2 or later **with the v2 syntax parser**, which is the default from Nextflow 26.04 onward.
 In our training environment you don't need to do anything: it runs Nextflow 26.04.4 with the v2 parser. If you are using a local or custom environment, see the [version notes](../info/nxf_versions.md).
 
-This training additionally requires **nf-core tools 4.0.2**.
+This training additionally requires **nf-core tools 4.1.0**.
 If you use a different version of nf-core tooling, you may have difficulty following along.
 
 You can check what version is installed in your environment using the command `nf-core --version`.
@@ -114,7 +114,7 @@ Think you're ready to dive in?
 
 - [ ] I understand the goal of this course and its prerequisites
 - [ ] My environment is up and running
-- [ ] I'm using nf-core tools 4.0.2 (check with `nf-core --version`)
+- [ ] I'm using nf-core tools 4.1.0 (check with `nf-core --version`)
 - [ ] I've set my working directory appropriately
 
 If you can check all the boxes, you're good to go.

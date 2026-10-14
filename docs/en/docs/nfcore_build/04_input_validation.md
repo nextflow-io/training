@@ -304,7 +304,7 @@ The tool compares the parameters in `nextflow.config` with the schema and finds 
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 INFO     [✓] Default parameters match schema validation
 INFO     [✓] Pipeline schema looks valid (found 17 params)

@@ -118,7 +118,7 @@ This displays documentation about the module, including its inputs, outputs, and
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 4.0.2 - https://nf-co.re
+        nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Reinstalling modules found in 'modules.json' but missing from
@@ -186,7 +186,7 @@ This displays documentation about the module, including its inputs, outputs, and
 
 This is the exact same information you can find on the website.
 
-You can ignore the `INFO Reinstalling modules found in 'modules.json' but missing from directory` message; it is emitted by nf-core/tools 4.0.2 for any module you query with `info`, whether or not it is actually installed, and has no effect since the `info` command doesn't install anything.
+You can ignore the `INFO Reinstalling modules found in 'modules.json' but missing from directory` message; it is emitted by nf-core/tools 4.1.0 for any module you query with `info`, whether or not it is actually installed, and has no effect since the `info` command doesn't install anything.
 
 ### 1.4. Install the find/concatenate module
 
@@ -211,7 +211,7 @@ nf-core modules install find/concatenate
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Reinstalling modules found in 'modules.json' but missing from
@@ -325,7 +325,7 @@ nf-core modules list local
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Repository type: pipeline
