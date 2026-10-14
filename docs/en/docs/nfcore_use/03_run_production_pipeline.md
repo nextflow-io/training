@@ -189,8 +189,7 @@ More importantly, you have seen why local execution is a starting point rather t
 
 ### What's next?
 
-You've covered the fundamentals of running nf-core pipelines.
-See [Next steps](next_steps.md) for where to go from here.
+Find and evaluate a pipeline for a scientific question of your own.
 
 ---
 

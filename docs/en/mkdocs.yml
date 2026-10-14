@@ -21,6 +21,9 @@ nav:
       - nfcore_use/01_run_demo.md
       - nfcore_use/02_configure_execution.md
       - nfcore_use/03_run_production_pipeline.md
+      - nfcore_use/04_choose_pipeline.md
+      - nfcore_use/05_inputs.md
+      - nfcore_use/06_resources.md
       - nfcore_use/next_steps.md
       - nfcore_use/survey.md
   - Scale with Seqera:
