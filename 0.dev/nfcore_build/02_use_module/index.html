@@ -3025,7 +3025,7 @@ However, if you do, you can pipe the list to <code>grep</code> to find specific 
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">│ find/concatenate                                      │</span>
 </code></pre></div>
 </details>
-<p>Just keep in mind the that <code>grep</code> approach will only pull out results with the search term in their name.</p>
+<p>Just keep in mind that <code>grep</code> approach will only pull out results with the search term in their name.</p>
 <h3 id="13-get-detailed-information-about-the-module">1.3. Get detailed information about the module<a class="headerlink" href="#13-get-detailed-information-about-the-module" title="Permanent link">&para;</a></h3>
 <p>To see detailed information about a specific module from the command line, use the <code>info</code> command:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>nf-core<span class="w"> </span>modules<span class="w"> </span>info<span class="w"> </span>find/concatenate
@@ -3039,7 +3039,7 @@ However, if you do, you can pipe the list to <code>grep</code> to find specific 
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="go">    | \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="go">                                          `._,._,'</span>
 <a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="go">    nf-core/tools version 4.0.2 - https://nf-co.re</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="go">    nf-core/tools version 4.1.0 - https://nf-co.re</span>
 <a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
 <a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
 <a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="go">INFO     Reinstalling modules found in 'modules.json' but missing from</span>
@@ -3105,14 +3105,13 @@ However, if you do, you can pipe the list to <code>grep</code> to find specific 
 </code></pre></div>
 </details>
 <p>This is the exact same information you can find on the website.</p>
-<p>You can ignore the <code>INFO Reinstalling modules found in 'modules.json' but missing from directory</code> message; it is emitted by nf-core/tools 4.0.2 for any module you query with <code>info</code>, whether or not it is actually installed, and has no effect since the <code>info</code> command doesn't write any files.</p>
+<p>You can ignore the <code>INFO Reinstalling modules found in 'modules.json' but missing from directory</code> message; it is emitted by nf-core/tools 4.1.0 for any module you query with <code>info</code>, whether or not it is actually installed, and has no effect since the <code>info</code> command doesn't install anything.</p>
 <h3 id="14-install-the-findconcatenate-module">1.4. Install the find/concatenate module<a class="headerlink" href="#14-install-the-findconcatenate-module" title="Permanent link">&para;</a></h3>
 <p>Now that we've found the module we want, we need to add it to our pipeline's source code.</p>
 <p>The good news is that the nf-core project includes some tooling to make this part easy.
 Specifically, the <code>nf-core modules install</code> command makes it possible to automate retrieving the code and making it available to your project in a single step.</p>
-<p>Make sure your working directory is the root of the <code>core-hello</code> pipeline project, then run the installation command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">cd</span><span class="w"> </span>core-hello
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>nf-core<span class="w"> </span>modules<span class="w"> </span>install<span class="w"> </span>find/concatenate
+<p>Make sure your working directory is the root of the <code>core-hello</code> pipeline project (run <code>cd core-hello</code> if you are still in the <code>nfcore-build/</code> directory), then run the installation command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nf-core<span class="w"> </span>modules<span class="w"> </span>install<span class="w"> </span>find/concatenate
 </code></pre></div>
 <details class="success">
 <summary>Command output</summary>
@@ -3122,18 +3121,18 @@ Specifically, the <code>nf-core modules install</code> command makes it possible
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="go">| \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="go">                                      `._,._,'</span>
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="go">nf-core/tools version 4.0.2 - https://nf-co.re</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="go">nf-core/tools version 4.1.0 - https://nf-co.re</span>
 <a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
 <a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="go">INFO     Installing 'find/concatenate'</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="go">NotADirectoryError: [Errno 20] Not a directory:</span>
-<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="go">'modules/local/cowpy.nf/meta.yml'</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="go">INFO     Reinstalling modules found in 'modules.json' but missing from</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="go">         directory:</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="go">INFO     Installing 'find/concatenate'</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="go">INFO     Use the following statement to include this module:</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="go"> include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'</span>
 </code></pre></div>
 </details>
-<p>The command downloads the module files to <code>modules/nf-core/find/concatenate/</code> and updates <code>modules.json</code> to track the installed module.
-You can ignore the <code>NotADirectoryError</code> at the end; it happens because nf-core/tools 4.0.2 expects every local module to live in its own directory (<code>modules/local/&lt;name&gt;/main.nf</code>), while <code>core-hello</code> still uses single-file local modules at this stage.
-However, the <code>find/concatenate</code> module is installed correctly, and <code>modules.json</code> is updated as expected.
-We'll convert <code>cowpy</code> to the directory layout in Part 4.</p>
+<p>The command downloads the module files to <code>modules/nf-core/find/concatenate/</code> and updates <code>modules.json</code> to track the installed module.</p>
 <p>Let's check that the module files are in place:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>tree<span class="w"> </span>-L<span class="w"> </span><span class="m">4</span><span class="w"> </span>modules
 </code></pre></div>
@@ -3179,7 +3178,7 @@ We'll convert <code>cowpy</code> to the directory layout in Part 4.</p>
 <a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="w">                </span><span class="nt">"nf-core"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="w">                    </span><span class="nt">"utils_nextflow_pipeline"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="w">                        </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span>
-<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="w">                        </span><span class="nt">"git_sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"05954dab2ff481bcb999f24455da29a5828af08d"</span><span class="p">,</span>
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="w">                        </span><span class="nt">"git_sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c2b22d85f30a706a3073387f30380704fcae013b"</span><span class="p">,</span>
 <a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="w">                        </span><span class="nt">"installed_by"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="w">                            </span><span class="s2">"subworkflows"</span>
 <a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="w">                        </span><span class="p">]</span>
@@ -3193,7 +3192,7 @@ We'll convert <code>cowpy</code> to the directory layout in Part 4.</p>
 <a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a><span class="w">                    </span><span class="p">},</span>
 <a id="__codelineno-12-33" name="__codelineno-12-33" href="#__codelineno-12-33"></a><span class="w">                    </span><span class="nt">"utils_nfschema_plugin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-12-34" name="__codelineno-12-34" href="#__codelineno-12-34"></a><span class="w">                        </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span>
-<a id="__codelineno-12-35" name="__codelineno-12-35" href="#__codelineno-12-35"></a><span class="w">                        </span><span class="nt">"git_sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fdc08b8b1ae74f56686ce21f7ea11ad11990ce57"</span><span class="p">,</span>
+<a id="__codelineno-12-35" name="__codelineno-12-35" href="#__codelineno-12-35"></a><span class="w">                        </span><span class="nt">"git_sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a7b27fd25bfa8dcc07d299e88bd790585901a436"</span><span class="p">,</span>
 <a id="__codelineno-12-36" name="__codelineno-12-36" href="#__codelineno-12-36"></a><span class="w">                        </span><span class="nt">"installed_by"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-12-37" name="__codelineno-12-37" href="#__codelineno-12-37"></a><span class="w">                            </span><span class="s2">"subworkflows"</span>
 <a id="__codelineno-12-38" name="__codelineno-12-38" href="#__codelineno-12-38"></a><span class="w">                        </span><span class="p">]</span>
@@ -3218,7 +3217,7 @@ However, to actually use the new module, we need to import it into our pipeline.
 <a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="go">| \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
 <a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="go">                                      `._,._,'</span>
 <a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
-<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="go">nf-core/tools version 4.0.2 - https://nf-co.re</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="go">nf-core/tools version 4.1.0 - https://nf-co.re</span>
 <a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>
 <a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>
 <a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="go">INFO     Repository type: pipeline</span>
@@ -3234,8 +3233,8 @@ However, to actually use the new module, we need to import it into our pipeline.
 <p>This shows <code>find/concatenate</code> in the resulting table alongside its repository, version SHA, message, and date.</p>
 <h3 id="15-update-the-module-imports">1.5. Update the module imports<a class="headerlink" href="#15-update-the-module-imports" title="Permanent link">&para;</a></h3>
 <p>Let's replace the <code>include</code> statement for the <code>collectGreetings</code> module with the one for <code>FIND_CONCATENATE</code> in the imports section of the <code>workflows/hello.nf</code> workflow.</p>
-<p>As a reminder, the module install tool gave us the exact statement to use:</p>
-<div class="highlight"><span class="filename">Import statement produced by install command</span><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">FIND_CONCATENATE</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'../modules/nf-core/find/concatenate/main'</span>
+<p>The import statement points to the module's <code>main.nf</code> under <code>modules/nf-core/</code>:</p>
+<div class="highlight"><span class="filename">Import statement for the find/concatenate module</span><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">FIND_CONCATENATE</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'../modules/nf-core/find/concatenate/main'</span>
 </code></pre></div>
 <p>Note that the nf-core convention is to use uppercase for module names when importing them.</p>
 <p>Open up <code>core-hello/workflows/hello.nf</code> and make the following substitution:</p>
@@ -3323,25 +3322,25 @@ This will allow us to determine whether we can just treat the new module as a dr
 </div>
 <h3 id="21-compare-the-two-modules-interfaces">2.1. Compare the two modules' interfaces<a class="headerlink" href="#21-compare-the-two-modules-interfaces" title="Permanent link">&para;</a></h3>
 <p>As a reminder, this is what the interface to our <code>collectGreetings</code> module looks like:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/collectGreetings.nf (excerpt)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-19-4"> 4</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/collectGreetings.nf (excerpt)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-4"> 4</a></span>
 <span class="normal"><a href="#__codelineno-19-5"> 5</a></span>
 <span class="normal"><a href="#__codelineno-19-6"> 6</a></span>
 <span class="normal"><a href="#__codelineno-19-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-19-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-19-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-19-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="n">process</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2"></a>
-<a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">'results'</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">'copy'</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4"></a>
-<a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="n">input_files</span>
-</span><a id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="hll"><span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="n">batch_name</span>
-</span><a id="__codelineno-19-8" name="__codelineno-19-8"></a>
-<a id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-19-10" name="__codelineno-19-10"></a><span class="hll"><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s2">"COLLECTED-${batch_name}-output.txt"</span><span class="w"> </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">outfile</span>
+<span class="normal"><a href="#__codelineno-19-10">10</a></span>
+<span class="normal"><a href="#__codelineno-19-11">11</a></span>
+<span class="normal"><a href="#__codelineno-19-12">12</a></span>
+<span class="normal"><a href="#__codelineno-19-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="n">process</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5"></a>
+<a id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">'results'</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">'copy'</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7"></a>
+<a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_files</span>
+</span><a id="__codelineno-19-10" name="__codelineno-19-10"></a><span class="hll"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">batch_name</span>
+</span><a id="__codelineno-19-11" name="__codelineno-19-11"></a>
+<a id="__codelineno-19-12" name="__codelineno-19-12"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"COLLECTED-${batch_name}-output.txt"</span><span class="w"> </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">outfile</span>
 </span></code></pre></div></td></tr></table></div>
 <p>The <code>collectGreetings</code> module takes two inputs:</p>
 <ul>
@@ -3376,7 +3375,7 @@ This will allow us to determine whether we can just treat the new module as a dr
 <a id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="s2">        : 'community.wave.seqera.io/library/findutils_pigz:c4dd5edc44402661'}"</span>
 <a id="__codelineno-20-9" name="__codelineno-20-9"></a>
 <a id="__codelineno-20-10" name="__codelineno-20-10"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">files_in</span><span class="o">)</span>
+<a id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">files_in</span><span class="o">,</span><span class="w"> </span><span class="nl">stageAs:</span><span class="w"> </span><span class="s1">'to_concatenate/*'</span><span class="o">,</span><span class="w"> </span><span class="nl">arity:</span><span class="w"> </span><span class="s1">'1..*'</span><span class="o">)</span>
 </span><a id="__codelineno-20-12" name="__codelineno-20-12"></a>
 <a id="__codelineno-20-13" name="__codelineno-20-13"></a><span class="w">    </span><span class="nl">output:</span>
 <a id="__codelineno-20-14" name="__codelineno-20-14"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"${prefix}"</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">file_out</span>
@@ -3387,7 +3386,8 @@ This will allow us to determine whether we can just treat the new module as a dr
 <p>The <code>FIND_CONCATENATE</code> module takes a single input, but that input is a tuple containing two things:</p>
 <ul>
 <li><code>meta</code> is a structure containing metadata, called a metamap;</li>
-<li><code>files_in</code> contains one or more input files to process, equivalent to <code>collectGreetings</code>'s <code>input_files</code>.</li>
+<li><code>files_in</code> contains one or more input files to process, equivalent to <code>collectGreetings</code>'s <code>input_files</code>.
+  The <code>arity: '1..*'</code> option requires at least one file, and <code>stageAs: 'to_concatenate/*'</code> stages the files into a <code>to_concatenate/</code> subdirectory of the task work directory.</li>
 </ul>
 <p>Upon completion, <code>FIND_CONCATENATE</code> delivers its outputs in two parts:</p>
 <ul>
@@ -3425,7 +3425,7 @@ In the context of Nextflow pipelines, units of data can be anything you want: in
 <span class="normal"><a href="#__codelineno-23-12">12</a></span>
 <span class="normal"><a href="#__codelineno-23-13">13</a></span>
 <span class="normal"><a href="#__codelineno-23-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-10" name="__codelineno-23-10"></a><span class="nl">input:</span>
-<a id="__codelineno-23-11" name="__codelineno-23-11"></a><span class="hll"><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">files_in</span><span class="o">)</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11"></a><span class="hll"><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">files_in</span><span class="o">,</span><span class="w"> </span><span class="nl">stageAs:</span><span class="w"> </span><span class="s1">'to_concatenate/*'</span><span class="o">,</span><span class="w"> </span><span class="nl">arity:</span><span class="w"> </span><span class="s1">'1..*'</span><span class="o">)</span>
 </span><a id="__codelineno-23-12" name="__codelineno-23-12"></a>
 <a id="__codelineno-23-13" name="__codelineno-23-13"></a><span class="nl">output:</span>
 <a id="__codelineno-23-14" name="__codelineno-23-14"></a><span class="hll"><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"${prefix}"</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">file_out</span>
@@ -3443,7 +3443,7 @@ This is the relevant code:</p>
 <a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">            </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">'batch3'</span><span class="o">,</span><span class="w"> </span><span class="nl">date:</span><span class="w"> </span><span class="s1">'25.11.14'</span><span class="o">],</span><span class="w"> </span><span class="o">[</span><span class="s1">'file3A.txt'</span><span class="o">,</span><span class="w"> </span><span class="s1">'file3B.txt'</span><span class="o">]]]</span>
 </code></pre></div>
 <p>Then the output channel contents coming out like this:</p>
-<div class="highlight"><span class="filename">Example output channel contents</span><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">ch_input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[[[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">'batch1'</span><span class="o">,</span><span class="w"> </span><span class="nl">date:</span><span class="w"> </span><span class="s1">'25.10.01'</span><span class="o">],</span><span class="w"> </span><span class="s1">'batch1.txt'</span><span class="o">],</span>
+<div class="highlight"><span class="filename">Example output channel contents</span><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">ch_output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[[[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">'batch1'</span><span class="o">,</span><span class="w"> </span><span class="nl">date:</span><span class="w"> </span><span class="s1">'25.10.01'</span><span class="o">],</span><span class="w"> </span><span class="s1">'batch1.txt'</span><span class="o">],</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">            </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">'batch2'</span><span class="o">,</span><span class="w"> </span><span class="nl">date:</span><span class="w"> </span><span class="s1">'25.10.26'</span><span class="o">],</span><span class="w"> </span><span class="s1">'batch2.txt'</span><span class="o">],</span>
 <a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">            </span><span class="o">[[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">'batch3'</span><span class="o">,</span><span class="w"> </span><span class="nl">date:</span><span class="w"> </span><span class="s1">'25.11.14'</span><span class="o">],</span><span class="w"> </span><span class="s1">'batch3.txt'</span><span class="o">]]</span>
 </code></pre></div>
