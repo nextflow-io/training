@@ -118,7 +118,7 @@ This displays documentation about the module, including its inputs, outputs, and
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 4.0.2 - https://nf-co.re
+        nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Reinstalling modules found in 'modules.json' but missing from
@@ -186,7 +186,7 @@ This displays documentation about the module, including its inputs, outputs, and
 
 This is the exact same information you can find on the website.
 
-You can ignore the `INFO Reinstalling modules found in 'modules.json' but missing from directory` message; it is emitted by nf-core/tools 4.0.2 for any module you query with `info`, whether or not it is actually installed, and has no effect since the `info` command doesn't install anything.
+You can ignore the `INFO Reinstalling modules found in 'modules.json' but missing from directory` message; it is emitted by nf-core/tools 4.1.0 for any module you query with `info`, whether or not it is actually installed, and has no effect since the `info` command doesn't install anything.
 
 ### 1.4. Install the find/concatenate module
 
@@ -211,23 +211,18 @@ nf-core modules install find/concatenate
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Reinstalling modules found in 'modules.json' but missing from
              directory:
     INFO     Installing 'find/concatenate'
-    ╭───────────────────── Traceback (most recent call last) ──────────────────────╮
-    │ ...                                                                          │
-    ╰──────────────────────────────────────────────────────────────────────────────╯
-    NotADirectoryError: [Errno 20] Not a directory:
-    'modules/local/cowpy.nf/meta.yml'
+    INFO     Use the following statement to include this module:
+
+     include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
     ```
 
 The command downloads the module files to `modules/nf-core/find/concatenate/` and updates `modules.json` to track the installed module.
-You can ignore the long traceback ending in `NotADirectoryError`; it happens because nf-core/tools 4.0.2 expects every local module to live in its own directory (`modules/local/<name>/main.nf`), while `core-hello` still uses single-file local modules at this stage.
-However, the `find/concatenate` module is installed correctly, and `modules.json` is updated as expected.
-We'll convert `cowpy` to the directory layout in Part 3.
 
 Let's check that the module files are in place:
 
@@ -280,7 +275,7 @@ You can also confirm the installation by inspecting `modules.json`, which now li
                     "nf-core": {
                         "utils_nextflow_pipeline": {
                             "branch": "master",
-                            "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                            "git_sha": "c2b22d85f30a706a3073387f30380704fcae013b",
                             "installed_by": [
                                 "subworkflows"
                             ]
@@ -294,7 +289,7 @@ You can also confirm the installation by inspecting `modules.json`, which now li
                         },
                         "utils_nfschema_plugin": {
                             "branch": "master",
-                            "git_sha": "fdc08b8b1ae74f56686ce21f7ea11ad11990ce57",
+                            "git_sha": "a7b27fd25bfa8dcc07d299e88bd790585901a436",
                             "installed_by": [
                                 "subworkflows"
                             ]
@@ -325,7 +320,7 @@ nf-core modules list local
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Repository type: pipeline
