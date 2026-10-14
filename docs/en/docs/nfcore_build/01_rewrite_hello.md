@@ -271,11 +271,10 @@ Once the TUI closes, you should see the following console output.
     INFO     Launching interactive nf-core pipeline creation tool.
     ```
 
-Once the TUI has finished, the tool reports that it created the pipeline, generated its container configuration, and initialized a local git repository for the new pipeline:
+Once the TUI has finished, the tool reports that it created the pipeline and initialized a local git repository for the new pipeline:
 
 ```console
 INFO     Creating new pipeline: 'hello'
-INFO     Generated container configs for the pipeline successfully.
 INFO     Initialising local pipeline git repository
 INFO     Pipeline created: ./core-hello
 ```
@@ -1422,7 +1421,7 @@ A bit of poking around reveals that the input handling is done by the `PIPELINE_
 
 If we open up that file and scroll down, we come to this chunk of code:
 
-```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="83"
+```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84"
     //
     // Create channel from input file provided through params.input
     //
@@ -1487,7 +1486,7 @@ So we just need to plug that into the initialisation workflow, with minor change
 
 === "After"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="83" hl_lines="5-7"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5-7"
         //
         // Create channel from input file provided through params.input
         //
@@ -1503,7 +1502,7 @@ So we just need to plug that into the initialisation workflow, with minor change
 
 === "Before"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="83" hl_lines="5-23"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5-23"
         //
         // Create channel from input file provided through params.input
         //

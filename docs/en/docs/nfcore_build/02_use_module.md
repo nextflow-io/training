@@ -217,17 +217,12 @@ nf-core modules install find/concatenate
     INFO     Reinstalling modules found in 'modules.json' but missing from
              directory:
     INFO     Installing 'find/concatenate'
-    ╭───────────────────── Traceback (most recent call last) ──────────────────────╮
-    │ ...                                                                          │
-    ╰──────────────────────────────────────────────────────────────────────────────╯
-    NotADirectoryError: [Errno 20] Not a directory:
-    'modules/local/cowpy.nf/meta.yml'
+    INFO     Use the following statement to include this module:
+
+     include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
     ```
 
 The command downloads the module files to `modules/nf-core/find/concatenate/` and updates `modules.json` to track the installed module.
-You can ignore the long traceback ending in `NotADirectoryError`; it happens because nf-core/tools 4.0.2 expects every local module to live in its own directory (`modules/local/<name>/main.nf`), while `core-hello` still uses single-file local modules at this stage.
-However, the `find/concatenate` module is installed correctly, and `modules.json` is updated as expected.
-We'll convert `cowpy` to the directory layout in Part 3.
 
 Let's check that the module files are in place:
 
