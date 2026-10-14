@@ -653,7 +653,7 @@ md-nav--primary" aria-label="Navigation" data-md-level="0">
   <a href="../../../nfcore_use/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Overview   
+    Überblick   
 </span>
   
   </a>
@@ -763,7 +763,7 @@ md-nav--primary" aria-label="Navigation" data-md-level="0">
   <a href="../../../seqera_scale/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Overview   
+    Überblick   
 </span>
   
   </a>
@@ -863,7 +863,7 @@ md-nav--primary" aria-label="Navigation" data-md-level="0">
   <a href="../../../config_exec/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Overview   
+    Überblick   
 </span>
   
   </a>
@@ -1117,7 +1117,7 @@ md-nav--primary" aria-label="Navigation" data-md-level="0">
   <a href="../../../nfcore_build/" class="md-nav__link">
       
 <span class="md-ellipsis">
-    Overview   
+    Überblick   
 </span>
   
   </a>
@@ -2482,7 +2482,7 @@ md-nav--primary" aria-label="Navigation" data-md-level="0">
 <h2 id="4-eingabewerte-aus-einer-csv-datei-lesen">4. Eingabewerte aus einer CSV-Datei lesen<a class="headerlink" href="#4-eingabewerte-aus-einer-csv-datei-lesen" title="Permanent link">&para;</a></h2>
 <p>Okay, wie können wir das ein bisschen realistischer machen? Du wirst wahrscheinlich nicht viel Code in deiner Nextflow-Pipeline mit fest codierten Arrays erstellen wollen. Du wirst wahrscheinlich die Daten von außen nehmen wollen, wenn du startest, und diese Daten werden mit ziemlicher Sicherheit in Dateien sein.</p>
 <p>Das Nächste, was wir also tun werden, ist, dass wir das replizieren werden, aber anstatt die Daten von einem einzelnen CLI-Parameter oder von einem fest codierten String oder Array zu nehmen, werden wir sie aus einer Datei nehmen.</p>
-<p>Also lass uns unser greetings<em>array loswerden. Und jetzt werden wir diese Channel Factory wieder ändern. Ich habe gerade gesagt, es gibt eine Menge zur Auswahl und es gibt eine namens </em>".fromPath"<em>. Und ich werde ihr sagen, in diesem Fall _params.input</em> zu nehmen, was zurück zu unserer Eingabe geht, die wir früher verwendet haben.</p>
+<p>Also lass uns unser greetings*array loswerden. Und jetzt werden wir diese Channel Factory wieder ändern. Ich habe gerade gesagt, es gibt eine Menge zur Auswahl und es gibt eine namens *".fromPath"<em>. Und ich werde ihr sagen, in diesem Fall _params.input</em> zu nehmen, was zurück zu unserer Eingabe geht, die wir früher verwendet haben.</p>
 <p>Jetzt ist dieser Parameter noch nicht wirklich bereit, verwendet zu werden. Wir sagen immer noch, dass es ein String ist und er ist hier mit einem Standard fest codiert, aber wir könnten diesen String überschreiben. Wir wollen jetzt, dass das stattdessen eine Datei ist. Also ist der Typ anders. Es ist nicht mehr ein <em>String</em>. Es ist ein <em>Path</em>.</p>
 <p>Und dann können wir den Standard setzen, wenn wir wollen, wieder auf einen Path. Und wenn ich im Explorer auf der linken Seite schaue, kannst du sehen, dass ich in diesem Repository, in diesem Arbeitsverzeichnis, ein Verzeichnis namens data habe. Ich habe dort eine Datei namens <em>"greetings.csv".</em></p>
 <p>Also kann ich den Standard hier einfach auf <em>"data/greetings.csv"</em> setzen. Wenn ich diese Pipeline jetzt wieder ohne Befehlszeilenoptionen ausführe, wird sie diesen Standardwert verwenden. Sie weiß, dass es ein Pfad ist, also weiß sie, dass sie das als Pfad behandeln sollte und nicht als String.</p>
