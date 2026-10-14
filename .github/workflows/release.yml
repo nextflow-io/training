@@ -1,0 +1,78 @@
+name: Draft release
+
+# Creates a draft GitHub release once translations are up to date.
+# Publishing the draft triggers docs.yml, which deploys the versioned site.
+# See CONTRIBUTING.md (Releasing) for the full process.
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version, e.g. 3.9 or 3.9.1"
+        type: string
+        required: true
+      skip_translation_check:
+        description: "Skip the translation check (urgent fixes only; follow up with a translations patch release)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # create the draft release
+      actions: write # dispatch translate.yml
+      pull-requests: read # find open translation PRs
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+
+      - name: Validate version
+        env:
+          VERSION: ${{ inputs.version }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?$ ]]; then
+            echo "::error::Version '$VERSION' must look like 3.9 or 3.9.1"
+            exit 1
+          fi
+          if gh release view "$VERSION" >/dev/null 2>&1; then
+            echo "::error::Release $VERSION already exists"
+            exit 1
+          fi
+
+      - name: Check translations are up to date
+        if: ${{ !inputs.skip_translation_check }}
+        working-directory: _scripts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          open_pr=$(gh pr list --state open --search "Update translations in:title" --json url -q '.[0].url')
+          if [ -n "$open_pr" ]; then
+            echo "::error::Translation PR $open_pr is still open. Merge it, then re-run this workflow."
+            exit 1
+          fi
+
+          if uv run -q python -m translate ci-detect | grep -q '^has_work=true$'; then
+            gh workflow run translate.yml --ref master
+            echo "::error::Translations are out of date. Started the Translate workflow; merge the PR it opens, then re-run this workflow."
+            exit 1
+          fi
+
+      - name: Create draft release
+        env:
+          VERSION: ${{ inputs.version }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "$VERSION" --draft --target master --title "$VERSION" --generate-notes
+          echo "Draft created: $(gh release view "$VERSION" --json url -q .url)" >> "$GITHUB_STEP_SUMMARY"
+          echo "Edit the notes, then publish the release to deploy the site." >> "$GITHUB_STEP_SUMMARY"
