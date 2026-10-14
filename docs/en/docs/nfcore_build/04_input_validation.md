@@ -403,7 +403,7 @@ nextflow run . --outdir test-results -profile docker
 
     * Missing required parameter(s): input, batch
 
-     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
+     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 72 or see '.nextflow.log' file for more details
     ```
 
 Perfect! The validation catches the missing required parameter before the pipeline runs.
@@ -646,7 +646,7 @@ Now update the channel creation code:
 
 === "After"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="83" hl_lines="5"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5"
         //
         // Create channel from input file provided through params.input
         //
@@ -661,7 +661,7 @@ Now update the channel creation code:
 
 === "Before"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="83" hl_lines="5 6"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5 6"
         //
         // Create channel from input file provided through params.input
         //
@@ -818,7 +818,7 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results --batc
         -> Entry 2: Missing required field(s): greeting
         -> Entry 3: Missing required field(s): greeting
 
-     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
+     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 72 or see '.nextflow.log' file for more details
     ```
 
 Perfect! The validation caught the error and provided a clear, helpful error message pointing to:
