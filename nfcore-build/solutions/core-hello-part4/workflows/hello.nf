@@ -7,8 +7,8 @@ include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { sayHello               } from '../modules/local/sayHello.nf'
 include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-include { COWPY                  } from '../modules/local/cowpy/main.nf'
 include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+include { COWPY                  } from '../modules/local/cowpy/main.nf'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -24,9 +24,9 @@ workflow HELLO {
 
     main:
 
-    ch_versions = channel.empty()
+    def ch_versions = channel.empty()
 
-    // emit a greeting
+    // emit a greeting (updated to use the nf-core convention for samplesheets)
     sayHello(ch_samplesheet)
 
     // convert the greeting to uppercase
@@ -64,16 +64,14 @@ workflow HELLO {
             "${process}:\n${tool_versions.join('\n')}"
         }
 
-    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
             storeDir: "${outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
             sort: true,
             newLine: true
-        ).set { ch_collated_versions }
-
-
+        )
     emit:
     cowpy_hellos   = COWPY.out.cowpy_output
     versions       = ch_versions                 // channel: [ path(versions.yml) ]

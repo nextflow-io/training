@@ -39,14 +39,14 @@ workflow {
         .map { row ->
             return [row.sample_id, file(row.fastq_path)]
         }
-        .view { "Processing sample: ${it[0]} -> ${it[1]}" }
+        .view { sample_id, fastq -> "Processing sample: ${sample_id} -> ${fastq}" }
 
     // Run FastQC process - Ctrl-click on FASTQC to navigate to module
     FASTQC(ch_input)
 
     // View outputs
-    FASTQC.out.html.view { "FastQC report: ${it}" }
-    FASTQC.out.zip.view { "FastQC data: ${it}" }
+    FASTQC.out.html.view { report -> "FastQC report: ${report}" }
+    FASTQC.out.zip.view { data -> "FastQC data: ${data}" }
 
     publish:
     fastqc_html = FASTQC.out.html
