@@ -879,7 +879,7 @@ Assicuratevi di aprire il file di output per verificare che ora abbiate la nuova
     Bonjour le monde!
     ```
 
-Voilà!
+Et voilà!
 
 Notate come la nuova esecuzione ha sovrascritto il file di output pubblicato nella directory `results`.
 Tuttavia, i risultati delle esecuzioni precedenti sono ancora conservati nelle directory delle attività sotto `work`.
@@ -889,7 +889,7 @@ Tuttavia, i risultati delle esecuzioni precedenti sono ancora conservati nelle d
     Potete facilmente distinguere i parametri a livello di Nextflow dai parametri a livello di pipeline.
 
     - I parametri che si applicano a una pipeline prendono sempre un doppio trattino (`--`).
-    - I parametri che modificano un'impostazione di Nextflow, _ad es._ la funzione `-resume` che abbiamo usato prima, prendono un singolo trattino (`-`).
+    - I parametri che modificano un'impostazione di Nextflow, _ad es._ la funzione `-o` menzionata in precedenza, prendono un singolo trattino (`-`).
 
 ### 3.4. Usare valori predefiniti per i parametri da riga di comando
 

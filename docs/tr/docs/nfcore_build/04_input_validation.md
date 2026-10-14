@@ -150,7 +150,7 @@ nf-core pipeline şablonu nf-schema ile birlikte gelir ve zaten kurulmuş ve yap
 - Parametre doğrulaması `params.validate_params` tarafından kontrol edilir
 - Doğrulama, pipeline başlatma sırasında `UTILS_NFSCHEMA_PLUGIN` alt iş akışı tarafından gerçekleştirilir
 
-Bölüm 3 ve 4'te herhangi bir şema yapılandırmadan önce pipeline'ın çalışabilmesi için `validate_params = false` olarak ayarladık.
+Bölüm 1'de herhangi bir şema yapılandırmadan önce pipeline'ın çalışabilmesi için `validate_params = false` olarak ayarladık.
 Artık doğrulama eklemeye hazır olduğumuza göre, ilk adım bunu açmaktır.
 
 `nextflow.config` dosyasını açın ve `validate_params` parametresini bulun (yaklaşık 37. satır), ardından `true` olarak ayarlayın:
@@ -171,11 +171,11 @@ Doğrulama davranışının kendisi `nextflow.config` içindeki `validation{}` k
 
 İlk olarak parametre doğrulaması üzerinde çalışacağımız (bu bölüm) ve girdi verisi şemasını bölüm 2'ye kadar yapılandırmayacağımız için, geçici olarak nf-schema'ya `input` parametresinin dosya içeriğini doğrulamayı atlamasını da söylememiz gerekiyor.
 
-`validation` bloğunu bulun (yaklaşık 252. satır) ve girdi dosyası doğrulamasını atlamak için `ignoreParams` ekleyin:
+`validation` bloğunu bulun (yaklaşık 251. satır) ve girdi dosyası doğrulamasını atlamak için `ignoreParams` ekleyin:
 
 === "Sonra"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="252"
+    ```groovy title="nextflow.config" hl_lines="3" linenums="251"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
@@ -185,7 +185,7 @@ Doğrulama davranışının kendisi `nextflow.config` içindeki `validation{}` k
 
 === "Önce"
 
-    ```groovy title="nextflow.config" linenums="252"
+    ```groovy title="nextflow.config" linenums="251"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
@@ -264,6 +264,32 @@ Bunu bir sonraki bölümde ekleyeceğiz.
 
 ### 1.3. Batch parametresini ekleyin
 
+#### 1.3.1. Parametreyi `nextflow.config` içinde bildirin
+
+Şu ana kadar `batch`, yalnızca `conf/test.config` içinde ayarlanmıştır.
+Yukarıdaki tavsiyeye uyarak, `nextflow.config` dosyasının `params` bloğunda `input`'un altına bildirin:
+
+=== "Sonra"
+
+    ```groovy title="nextflow.config" hl_lines="4" linenums="12"
+        // TODO nf-core: Specify your pipeline's command line flags
+        // Input options
+        input                      = null
+        batch                      = null
+    ```
+
+=== "Önce"
+
+    ```groovy title="nextflow.config" linenums="12"
+        // TODO nf-core: Specify your pipeline's command line flags
+        // Input options
+        input                      = null
+    ```
+
+Varsayılan değer, `input` gibi `null`'dur; dolayısıyla kullanıcının `--batch` ile veya `test` gibi bir profil aracılığıyla bir değer sağlaması gerekir.
+
+#### 1.3.2. Parametreyi şemaya ekleyin
+
 Şema manuel olarak düzenlenebilen bir JSON dosyası olsa da, **manuel düzenleme hataya açıktır ve önerilmez**.
 Bunun yerine, nf-core sizin için JSON Schema sözdizimini işleyen ve değişikliklerinizi doğrulayan etkileşimli bir GUI aracı sağlar:
 
@@ -271,7 +297,7 @@ Bunun yerine, nf-core sizin için JSON Schema sözdizimini işleyen ve değişik
 nf-core pipelines schema build
 ```
 
-Şöyle bir şey görmelisiniz:
+Araç, `nextflow.config` içindeki parametreleri şemayla karşılaştırır ve yeni `batch` parametresini bulur:
 
 ```console
                                           ,--./,-.
@@ -280,28 +306,33 @@ nf-core pipelines schema build
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 INFO     [✓] Default parameters match schema validation
 INFO     [✓] Pipeline schema looks valid (found 17 params)
-INFO     Writing schema with 17 params: 'nextflow_schema.json'
+✨ Found 'params.batch' in the pipeline config, but not in the schema. Add to pipeline schema? [y/n]:
+```
+
+`batch`'i şemaya eklemek için `y` yazın ve Enter tuşuna basın:
+
+```console
+INFO     Writing schema with 18 params: 'nextflow_schema.json'
 🚀  Launch web builder for customisation and editing? [y/n]:
 ```
 
-Etkileşimli web arayüzünü başlatmak için `y` yazın ve Enter tuşuna basın.
+Araç, `batch`'i `string` türüyle ekledi; ancak açıklama olmadan ve herhangi bir parametre grubunun dışında.
+Tamamlamak için etkileşimli web arayüzünü başlatmak üzere `y` yazın ve Enter tuşuna basın.
 
 Tarayıcınız Parametre şeması oluşturucusunu göstererek açılacaktır:
 
 ![Şema oluşturucu arayüzü](./img/schema_build.png)
 
-`batch` parametresini eklemek için:
+`batch` parametresini tamamlamak için:
 
-1. Üstteki **"Add parameter"** düğmesine tıklayın
-2. Yeni parametreyi "Input/output options" grubuna, `input` parametresinin altına taşımak için sürükleme tutamacını (⋮⋮) kullanın
-3. Parametre ayrıntılarını doldurun:
-   - **ID**: `batch`
+1. `batch`'i "Input/output options" grubuna, `input` parametresinin altına taşımak için sürükleme tutamacını (⋮⋮) kullanın
+2. Parametre ayrıntılarını doldurun:
    - **Description**: `Name for this batch of greetings`
-   - **Type**: `string`
+   - **Type**: `string` (zaten ayarlı)
    - **Required**: onay kutusunu işaretleyin
    - İsteğe bağlı olarak, simge seçiciden bir simge seçin (örn., `fas fa-layer-group`)
 
@@ -326,7 +357,7 @@ Araç şimdi `nextflow_schema.json` dosyanızı yeni `batch` parametresiyle gün
 grep -A 25 '"input_output_options"' nextflow_schema.json
 ```
 
-```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8" hl_lines="19-23"
+```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8" hl_lines="6 19-23"
         "input_output_options": {
             "title": "Input/output options",
             "type": "object",
@@ -373,6 +404,8 @@ nextflow run . --outdir test-results -profile docker
     The following invalid input values have been detected:
 
     * Missing required parameter(s): input, batch
+
+     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 72 or see '.nextflow.log' file for more details
     ```
 
 Mükemmel! Doğrulama, pipeline çalışmadan önce eksik gerekli parametreyi yakalar.
@@ -460,7 +493,7 @@ Bunu selamlamalar kullanım senaryomuz için daha basit bir şema ile değiştir
 
 === "Sonra"
 
-    ```json title="assets/schema_input.json" linenums="1" hl_lines="10-25 27"
+    ```json title="assets/schema_input.json" linenums="1" hl_lines="5 10-25 27"
     {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json",
@@ -494,7 +527,7 @@ Bunu selamlamalar kullanım senaryomuz için daha basit bir şema ile değiştir
 
 === "Önce"
 
-    ```json title="assets/schema_input.json" linenums="1" hl_lines="10-29 31"
+    ```json title="assets/schema_input.json" linenums="1" hl_lines="5 10-29 31"
     {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json",
@@ -615,10 +648,11 @@ include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipelin
 
 === "Sonra"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="80" hl_lines="4"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5"
         //
         // Create channel from input file provided through params.input
         //
+
         ch_samplesheet = channel.fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
             .map { line -> line[0] }
 
@@ -629,10 +663,11 @@ include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipelin
 
 === "Önce"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="80" hl_lines="4 5"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5 6"
         //
         // Create channel from input file provided through params.input
         //
+
         ch_samplesheet = channel.fromPath(params.input)
             .splitCsv()
             .map { line -> line[0] }
@@ -724,7 +759,7 @@ cp assets/greetings.csv assets/invalid_greetings.csv
 
 === "Sonra"
 
-    ```csv title="tmp_invalid_greetings.csv" hl_lines="1" linenums="1"
+    ```csv title="assets/invalid_greetings.csv" hl_lines="1" linenums="1"
     message,language,score
     Hello,en,87
     Bonjour,fr,96
@@ -733,7 +768,7 @@ cp assets/greetings.csv assets/invalid_greetings.csv
 
 === "Önce"
 
-    ```csv title="tmp_invalid_greetings.csv" hl_lines="1" linenums="1"
+    ```csv title="assets/invalid_greetings.csv" hl_lines="1" linenums="1"
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
@@ -745,7 +780,7 @@ Bu, şemamızla eşleşmez; bu nedenle doğrulama bir hata atmalıdır.
 Pipeline'ı bu geçersiz girdi ile çalıştırmayı deneyin:
 
 ```bash
-nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profile docker
+nextflow run . --input assets/invalid_greetings.csv --outdir test-results --batch my-batch -profile docker
 ```
 
 ??? failure "Komut çıktısı"
@@ -757,6 +792,7 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
 
     Input/output options
       input              : assets/invalid_greetings.csv
+      batch              : my-batch
       outdir             : test-results
 
     Generic options
@@ -779,19 +815,18 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
      -- Check '.nextflow.log' file for details
     The following invalid input values have been detected:
 
-    * Missing required parameter(s): batch
     * --input (assets/invalid_greetings.csv): Validation of file failed:
         -> Entry 1: Missing required field(s): greeting
         -> Entry 2: Missing required field(s): greeting
         -> Entry 3: Missing required field(s): greeting
 
-     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
+     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 72 or see '.nextflow.log' file for more details
     ```
 
 Mükemmel! Doğrulama hatayı yakaladı ve şunları gösteren net, yararlı bir hata mesajı sağladı:
 
 - Hangi dosya doğrulamayı geçemedi
-- Hangi girdinin (satır 1, ilk veri satırı) sorunu var
+- Hangi girdilerin sorunu var (başlık artık `greeting` sütunu içermediğinden üç veri satırının tamamı)
 - Belirli sorunun ne olduğu (gerekli `greeting` alanı eksik)
 
 Şema doğrulaması, pipeline çalışmadan önce girdi dosyalarının doğru yapıya sahip olduğundan emin olarak zaman kazandırır ve yürütme sırasında daha sonra kafa karıştırıcı hataları önler.
@@ -808,6 +843,6 @@ Hem parametre doğrulaması hem de girdi verisi doğrulamasını uyguladınız v
 
 ### Sırada ne var?
 
-Build with nf-core eğitim kursunun beş bölümünün tamamını tamamladınız!
+Build with nf-core eğitim kursunun dört bölümünün tamamını tamamladınız!
 
 Oluşturduklarınızı ve öğrendiklerinizi düşünmek için [Özet](next_steps.md) bölümüne devam edin.

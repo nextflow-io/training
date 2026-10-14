@@ -171,7 +171,7 @@ Produktiven Plugin-Code zu lesen ist eine der besten Möglichkeiten, Muster und 
 
 **Offizielle Dokumentation:**
 
-- [Using plugins](https://www.nextflow.io/docs/latest/plugins/plugins.html): umfassender Leitfaden zur Installation und Konfiguration von Plugins
+- [Using plugins](https://www.nextflow.io/docs/latest/plugins/using-plugins.html): umfassender Leitfaden zur Installation und Konfiguration von Plugins
 - [Developing plugins](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html): detaillierte Referenz zur Plugin-Entwicklung
 - [Config scopes](https://nextflow.io/docs/latest/developer/config-scopes.html): Konfigurationsbereiche für Plugins erstellen
 
@@ -183,4 +183,4 @@ Produktiven Plugin-Code zu lesen ist eine der besten Möglichkeiten, Muster und 
 **Beispiele und Referenzen:**
 
 - [nf-hello](https://github.com/nextflow-io/nf-hello): einfaches Beispiel-Plugin (guter Ausgangspunkt)
-- [Nextflow-Plugins-Repository](https://github.com/nextflow-io/plugins): Sammlung offizieller Plugins als Referenz
+- [Nextflow plugins repository](https://github.com/nextflow-io/plugins): Sammlung offizieller Plugins als Referenz

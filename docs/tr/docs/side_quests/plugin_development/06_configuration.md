@@ -234,6 +234,54 @@ Fabrika, Nextflow oturumuna ve yapılandırmasına erişebildiğinden, `enabled`
 Fabrika artık yapılandırmadan `greeting.enabled` değerini okuyor ve kullanıcı bunu `false` olarak ayarlamışsa boş bir liste döndürüyor.
 Liste boş olduğunda hiçbir gözlemci oluşturulmaz; dolayısıyla eklentinin yaşam döngüsü kancaları sessizce atlanır.
 
+5. Bölüm'deki fabrika testi, yapılandırması olmayan bir `Mock(Session)` kullanıyor; bu nedenle `navigate()` artık `NullPointerException` ile başarısız oluyor.
+   Mock oturuma bir yapılandırma eklemek ve devre dışı bırakma durumu için bir test eklemek üzere `nf-greeting/src/test/groovy/training/plugin/GreetingObserverTest.groovy` dosyasını güncelleyin:
+
+=== "Sonra"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="12" hl_lines="4-6 8 15-25"
+        def 'should create the observer instance' () {
+            given:
+            def factory = new GreetingFactory()
+            def session = Mock(Session) {
+                getConfig() >> [greeting: [enabled: true]]
+            }
+            when:
+            def result = factory.create(session)
+            then:
+            result.size() == 2
+            result[0] instanceof GreetingObserver
+            result[1] instanceof TaskCounterObserver
+        }
+
+        def 'should return empty list when disabled' () {
+            given:
+            def factory = new GreetingFactory()
+            def session = Mock(Session) {
+                getConfig() >> [greeting: [enabled: false]]
+            }
+            when:
+            def result = factory.create(session)
+            then:
+            result.isEmpty()
+        }
+    ```
+
+=== "Önce"
+
+    ```groovy title="GreetingObserverTest.groovy" linenums="12" hl_lines="5"
+        def 'should create the observer instance' () {
+            given:
+            def factory = new GreetingFactory()
+            when:
+            def result = factory.create(Mock(Session))
+            then:
+            result.size() == 2
+            result[0] instanceof GreetingObserver
+            result[1] instanceof TaskCounterObserver
+        }
+    ```
+
 ### 2.1. Derleme ve test
 
 Eklentiyi yeniden derleyin ve yükleyin:

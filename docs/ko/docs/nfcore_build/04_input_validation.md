@@ -144,13 +144,13 @@ graph LR
 
 ### 1.1. 검증 활성화 및 입력 파일 검증 건너뛰기
 
-nf-core 파이프라인 템플릿은 이미 nf-schema가 설치되고 구성되어 제공됩니다:
+nf-core 파이프라인 템플릿은 이미 nf-schema가 설치되고 설정되어 제공됩니다:
 
 - nf-schema 플러그인은 `nextflow.config`의 `plugins{}` 블록을 통해 설치됩니다
 - 매개변수 검증은 `params.validate_params`로 제어됩니다
 - 검증은 파이프라인 초기화 중에 `UTILS_NFSCHEMA_PLUGIN` 서브워크플로우에 의해 수행됩니다
 
-파트 3과 4에서는 스키마를 구성하기 전에 파이프라인을 실행할 수 있도록 `validate_params = false`로 설정했습니다.
+파트 1에서는 스키마를 설정하기 전에 파이프라인을 실행할 수 있도록 `validate_params = false`로 설정했습니다.
 이제 검증을 추가할 준비가 되었으므로, 첫 번째 단계는 이를 활성화하는 것입니다.
 
 `nextflow.config`를 열고 `validate_params` 매개변수를 찾으십시오(37줄 근처). 값을 `true`로 설정하십시오:
@@ -169,13 +169,13 @@ nf-core 파이프라인 템플릿은 이미 nf-schema가 설치되고 구성되�
 
 검증 동작 자체는 `nextflow.config`의 `validation{}` 범위를 통해 제어됩니다.
 
-매개변수 검증을 먼저 작업할 것이고(이 섹션) 섹션 2까지 입력 데이터 스키마를 구성하지 않을 것이므로, 일시적으로 nf-schema에게 `input` 매개변수의 파일 내용 검증을 건너뛰도록 지시해야 합니다.
+매개변수 검증을 먼저 작업할 것이고(이 섹션) 섹션 2까지 입력 데이터 스키마를 설정하지 않을 것이므로, 일시적으로 nf-schema에게 `input` 매개변수의 파일 내용 검증을 건너뛰도록 지시해야 합니다.
 
-`validation` 블록을 찾으십시오(252줄 근처). 입력 파일 검증을 건너뛰기 위해 `ignoreParams`를 추가하십시오:
+`validation` 블록을 찾으십시오(251줄 근처). 입력 파일 검증을 건너뛰기 위해 `ignoreParams`를 추가하십시오:
 
 === "후"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="252"
+    ```groovy title="nextflow.config" hl_lines="3" linenums="251"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
@@ -185,14 +185,14 @@ nf-core 파이프라인 템플릿은 이미 nf-schema가 설치되고 구성되�
 
 === "전"
 
-    ```groovy title="nextflow.config" linenums="252"
+    ```groovy title="nextflow.config" linenums="251"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
     }
     ```
 
-이 구성은 nf-schema에게 다음을 지시합니다:
+이 설정은 nf-schema에게 다음을 지시합니다:
 
 - **`defaultIgnoreParams`**: `genomes`와 같은 복잡한 매개변수의 검증 건너뛰기 (템플릿 개발자가 설정)
 - **`ignoreParams`**: `input` 매개변수의 파일 내용 검증 건너뛰기 (일시적; 섹션 2에서 다시 활성화할 것임)
@@ -201,8 +201,8 @@ nf-core 파이프라인 템플릿은 이미 nf-schema가 설치되고 구성되�
 !!! info "input 매개변수를 무시하는 이유는 무엇입니까?"
 
     `nextflow_schema.json`의 `input` 매개변수는 `"schema": "assets/schema_input.json"`을 가지고 있어 nf-schema에게 해당 스키마에 대해 입력 CSV 파일의 *내용*을 검증하도록 지시합니다.
-    아직 해당 스키마를 구성하지 않았으므로 일시적으로 이 검증을 무시합니다.
-    섹션 2에서 입력 데이터 스키마를 구성한 후 이 설정을 제거할 것입니다.
+    아직 해당 스키마를 설정하지 않았으므로 일시적으로 이 검증을 무시합니다.
+    섹션 2에서 입력 데이터 스키마를 설정한 후 이 설정을 제거할 것입니다.
 
 ### 1.2. 매개변수 스키마 검토
 
@@ -264,6 +264,32 @@ grep -A 25 '"input_output_options"' nextflow_schema.json
 
 ### 1.3. batch 매개변수 추가
 
+#### 1.3.1. `nextflow.config`에서 매개변수 선언
+
+현재 `batch`는 `conf/test.config`에서만 설정되어 있습니다.
+위의 권장 사항에 따라, `nextflow.config`의 `params` 블록에서 `input` 아래에 선언하십시오:
+
+=== "후"
+
+    ```groovy title="nextflow.config" hl_lines="4" linenums="12"
+        // TODO nf-core: Specify your pipeline's command line flags
+        // Input options
+        input                      = null
+        batch                      = null
+    ```
+
+=== "전"
+
+    ```groovy title="nextflow.config" linenums="12"
+        // TODO nf-core: Specify your pipeline's command line flags
+        // Input options
+        input                      = null
+    ```
+
+기본값은 `input`과 마찬가지로 `null`이므로, 사용자는 여전히 `--batch`를 통해 또는 `test`와 같은 프로파일을 통해 값을 제공해야 합니다.
+
+#### 1.3.2. 스키마에 매개변수 추가
+
 스키마는 수동으로 편집할 수 있는 JSON 파일이지만, **수동 편집은 오류가 발생하기 쉽고 권장되지 않습니다**.
 대신 nf-core는 JSON Schema 구문을 처리하고 변경 사항을 검증하는 대화형 GUI 도구를 제공합니다:
 
@@ -271,7 +297,7 @@ grep -A 25 '"input_output_options"' nextflow_schema.json
 nf-core pipelines schema build
 ```
 
-다음과 같은 내용이 표시됩니다:
+도구는 `nextflow.config`의 매개변수와 스키마를 비교하여 새로운 `batch` 매개변수를 찾습니다:
 
 ```console
                                           ,--./,-.
@@ -280,28 +306,33 @@ nf-core pipelines schema build
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 INFO     [✓] Default parameters match schema validation
 INFO     [✓] Pipeline schema looks valid (found 17 params)
-INFO     Writing schema with 17 params: 'nextflow_schema.json'
+✨ Found 'params.batch' in the pipeline config, but not in the schema. Add to pipeline schema? [y/n]:
+```
+
+`y`를 입력하고 Enter를 눌러 `batch`를 스키마에 추가하십시오:
+
+```console
+INFO     Writing schema with 18 params: 'nextflow_schema.json'
 🚀  Launch web builder for customisation and editing? [y/n]:
 ```
 
-`y`를 입력하고 Enter를 눌러 대화형 웹 인터페이스를 실행하십시오.
+도구가 `batch`를 `string` 타입으로 추가했지만, 설명이 없고 매개변수 그룹 외부에 위치합니다.
+`y`를 입력하고 Enter를 눌러 대화형 웹 인터페이스를 실행하여 완성하십시오.
 
 브라우저가 열리면서 Parameter schema builder가 표시됩니다:
 
 ![Schema builder 인터페이스](./img/schema_build.png)
 
-`batch` 매개변수를 추가하려면:
+`batch` 매개변수를 완성하려면:
 
-1. 상단의 **"Add parameter"** 버튼을 클릭하십시오
-2. 드래그 핸들(⋮⋮)을 사용하여 새 매개변수를 "Input/output options" 그룹으로 `input` 매개변수 아래로 이동시키십시오
-3. 매개변수 세부 정보를 입력하십시오:
-   - **ID**: `batch`
+1. 드래그 핸들(⋮⋮)을 사용하여 `batch`를 "Input/output options" 그룹으로 `input` 매개변수 아래로 이동시키십시오
+2. 매개변수 세부 정보를 입력하십시오:
    - **Description**: `Name for this batch of greetings`
-   - **Type**: `string`
+   - **Type**: `string` (이미 설정됨)
    - **Required**: 체크박스 선택
    - 선택적으로, 아이콘 선택기에서 아이콘 선택 (예: `fas fa-layer-group`)
 
@@ -326,7 +357,7 @@ INFO     Writing schema with 18 params: 'nextflow_schema.json'
 grep -A 25 '"input_output_options"' nextflow_schema.json
 ```
 
-```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8" hl_lines="19-23"
+```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8" hl_lines="6 19-23"
         "input_output_options": {
             "title": "Input/output options",
             "type": "object",
@@ -373,6 +404,8 @@ nextflow run . --outdir test-results -profile docker
     The following invalid input values have been detected:
 
     * Missing required parameter(s): input, batch
+
+     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 72 or see '.nextflow.log' file for more details
     ```
 
 완벽합니다! 검증이 파이프라인이 실행되기 전에 누락된 필수 매개변수를 잡아냅니다.
@@ -460,7 +493,7 @@ nf-core 파이프라인 템플릿은 페어드 엔드 시퀀싱 데이터를 위
 
 === "후"
 
-    ```json title="assets/schema_input.json" linenums="1" hl_lines="10-25 27"
+    ```json title="assets/schema_input.json" linenums="1" hl_lines="5 10-25 27"
     {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json",
@@ -494,7 +527,7 @@ nf-core 파이프라인 템플릿은 페어드 엔드 시퀀싱 데이터를 위
 
 === "전"
 
-    ```json title="assets/schema_input.json" linenums="1" hl_lines="10-29 31"
+    ```json title="assets/schema_input.json" linenums="1" hl_lines="5 10-29 31"
     {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json",
@@ -615,10 +648,11 @@ include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipelin
 
 === "후"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="80" hl_lines="4"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5"
         //
         // params.input을 통해 제공된 입력 파일에서 채널 생성
         //
+
         ch_samplesheet = channel.fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
             .map { line -> line[0] }
 
@@ -629,10 +663,11 @@ include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipelin
 
 === "전"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="80" hl_lines="4 5"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5 6"
         //
         // params.input을 통해 제공된 입력 파일에서 채널 생성
         //
+
         ch_samplesheet = channel.fromPath(params.input)
             .splitCsv()
             .map { line -> line[0] }
@@ -644,7 +679,7 @@ include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipelin
 
 변경된 내용을 분석해 보겠습니다:
 
-1. **`samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")`**: 스키마에 대해 입력 파일을 검증하고 리스트를 반환
+1. **`#!groovy samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")`**: 스키마에 대해 입력 파일을 검증하고 리스트를 반환
 2. **`channel.fromList(...)`**: 리스트를 Nextflow 채널로 변환
 
 이것으로 `samplesheetToList`와 JSON 스키마를 사용한 입력 데이터 검증의 구현이 완료됩니다.
@@ -724,7 +759,7 @@ cp assets/greetings.csv assets/invalid_greetings.csv
 
 === "후"
 
-    ```csv title="tmp_invalid_greetings.csv" hl_lines="1" linenums="1"
+    ```csv title="assets/invalid_greetings.csv" hl_lines="1" linenums="1"
     message,language,score
     Hello,en,87
     Bonjour,fr,96
@@ -733,7 +768,7 @@ cp assets/greetings.csv assets/invalid_greetings.csv
 
 === "전"
 
-    ```csv title="tmp_invalid_greetings.csv" hl_lines="1" linenums="1"
+    ```csv title="assets/invalid_greetings.csv" hl_lines="1" linenums="1"
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
@@ -745,7 +780,7 @@ cp assets/greetings.csv assets/invalid_greetings.csv
 이 유효하지 않은 입력으로 파이프라인을 실행해 보십시오:
 
 ```bash
-nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profile docker
+nextflow run . --input assets/invalid_greetings.csv --outdir test-results --batch my-batch -profile docker
 ```
 
 ??? failure "명령 출력"
@@ -757,6 +792,7 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
 
     Input/output options
       input              : assets/invalid_greetings.csv
+      batch              : my-batch
       outdir             : test-results
 
     Generic options
@@ -779,19 +815,18 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
      -- Check '.nextflow.log' file for details
     The following invalid input values have been detected:
 
-    * Missing required parameter(s): batch
     * --input (assets/invalid_greetings.csv): Validation of file failed:
         -> Entry 1: Missing required field(s): greeting
         -> Entry 2: Missing required field(s): greeting
         -> Entry 3: Missing required field(s): greeting
 
-     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
+     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 72 or see '.nextflow.log' file for more details
     ```
 
 완벽합니다! 검증이 오류를 잡아내고 다음을 가리키는 명확하고 도움이 되는 오류 메시지를 제공했습니다:
 
 - 어떤 파일의 검증이 실패했는지
-- 어떤 항목(첫 번째 데이터 행인 row 1)에 문제가 있는지
+- 어떤 항목에 문제가 있는지 (헤더에 더 이상 `greeting` 컬럼이 없으므로 세 개의 데이터 행 모두)
 - 구체적인 문제가 무엇인지 (필수 필드 `greeting` 누락)
 
 스키마 검증은 파이프라인이 실행되기 전에 입력 파일이 올바른 구조를 가지고 있는지 확인하여 시간을 절약하고 나중에 실행 중 혼란스러운 오류를 방지합니다.
@@ -808,6 +843,6 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
 
 ### 다음 단계
 
-Build with nf-core 교육 과정의 다섯 개 파트를 모두 완료했습니다!
+Build with nf-core 교육 과정의 네 개 파트를 모두 완료했습니다!
 
 [Summary](next_steps.md)로 계속 진행하여 구축하고 배운 내용을 돌아보십시오.

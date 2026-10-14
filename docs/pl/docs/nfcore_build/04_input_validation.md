@@ -150,7 +150,7 @@ Szablon pipeline'u nf-core jest dostarczany z już zainstalowanym i skonfigurowa
 - Walidacja parametrów jest kontrolowana przez `params.validate_params`
 - Walidacja jest wykonywana przez subworkflow `UTILS_NFSCHEMA_PLUGIN` podczas inicjalizacji pipeline'u
 
-W Częściach 3 i 4 ustawiliśmy `validate_params = false`, aby pipeline mógł działać przed skonfigurowaniem jakichkolwiek schematów.
+W Części 1 ustawiliśmy `validate_params = false`, aby pipeline mógł działać przed skonfigurowaniem jakichkolwiek schematów.
 Teraz, gdy jesteśmy gotowi dodać walidację, pierwszym krokiem jest jej włączenie.
 
 Otwórz `nextflow.config` i znajdź parametr `validate_params` (około linii 37), a następnie ustaw go na `true`:
@@ -171,11 +171,11 @@ Samo zachowanie walidacji jest kontrolowane przez zakres `validation{}` w `nextf
 
 Ponieważ najpierw będziemy pracować nad walidacją parametrów (ta sekcja) i nie skonfigurujemy schematu danych wejściowych do sekcji 2, musimy również tymczasowo powiedzieć nf-schema, aby pominął walidację zawartości pliku parametru `input`.
 
-Znajdź blok `validation` (około linii 252) i dodaj `ignoreParams`, aby pominąć walidację pliku wejściowego:
+Znajdź blok `validation` (około linii 251) i dodaj `ignoreParams`, aby pominąć walidację pliku wejściowego:
 
 === "Po"
 
-    ```groovy title="nextflow.config" hl_lines="3" linenums="252"
+    ```groovy title="nextflow.config" hl_lines="3" linenums="251"
     validation {
         defaultIgnoreParams = ["genomes"]
         ignoreParams = ['input']
@@ -185,7 +185,7 @@ Znajdź blok `validation` (około linii 252) i dodaj `ignoreParams`, aby pominą
 
 === "Przed"
 
-    ```groovy title="nextflow.config" linenums="252"
+    ```groovy title="nextflow.config" linenums="251"
     validation {
         defaultIgnoreParams = ["genomes"]
         monochromeLogs = params.monochrome_logs
@@ -264,6 +264,32 @@ Dodamy go w następnej sekcji.
 
 ### 1.3. Dodaj parametr batch
 
+#### 1.3.1. Zadeklaruj parametr w `nextflow.config`
+
+Na razie `batch` jest ustawiony tylko w `conf/test.config`.
+Zgodnie z powyższą radą, zadeklaruj go w bloku `params` w `nextflow.config`, poniżej `input`:
+
+=== "Po"
+
+    ```groovy title="nextflow.config" hl_lines="4" linenums="12"
+        // TODO nf-core: Specify your pipeline's command line flags
+        // Input options
+        input                      = null
+        batch                      = null
+    ```
+
+=== "Przed"
+
+    ```groovy title="nextflow.config" linenums="12"
+        // TODO nf-core: Specify your pipeline's command line flags
+        // Input options
+        input                      = null
+    ```
+
+Wartość domyślna to `null`, tak jak dla `input`, więc użytkownik nadal musi podać wartość przez `--batch` lub profil, taki jak `test`.
+
+#### 1.3.2. Dodaj parametr do schematu
+
 Chociaż schemat jest plikiem JSON, który można edytować ręcznie, **ręczna edycja jest podatna na błędy i nie jest zalecana**.
 Zamiast tego nf-core zapewnia interaktywne narzędzie GUI, które obsługuje składnię JSON Schema za Ciebie i waliduje Twoje zmiany:
 
@@ -271,7 +297,7 @@ Zamiast tego nf-core zapewnia interaktywne narzędzie GUI, które obsługuje sk�
 nf-core pipelines schema build
 ```
 
-Powinieneś zobaczyć coś takiego:
+Narzędzie porównuje parametry w `nextflow.config` ze schematem i znajduje nowy parametr `batch`:
 
 ```console
                                           ,--./,-.
@@ -280,28 +306,33 @@ Powinieneś zobaczyć coś takiego:
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 INFO     [✓] Default parameters match schema validation
 INFO     [✓] Pipeline schema looks valid (found 17 params)
-INFO     Writing schema with 17 params: 'nextflow_schema.json'
+✨ Found 'params.batch' in the pipeline config, but not in the schema. Add to pipeline schema? [y/n]:
+```
+
+Wpisz `y` i naciśnij Enter, aby dodać `batch` do schematu:
+
+```console
+INFO     Writing schema with 18 params: 'nextflow_schema.json'
 🚀  Launch web builder for customisation and editing? [y/n]:
 ```
 
-Wpisz `y` i naciśnij Enter, aby uruchomić interaktywny interfejs webowy.
+Narzędzie dodało `batch` z typem `string`, ale bez opisu i poza jakąkolwiek grupą parametrów.
+Wpisz `y` i naciśnij Enter, aby uruchomić interaktywny interfejs webowy i uzupełnić szczegóły.
 
 Twoja przeglądarka otworzy się, pokazując konstruktor schematu parametrów:
 
 ![Interfejs konstruktora schematu](./img/schema_build.png)
 
-Aby dodać parametr `batch`:
+Aby uzupełnić parametr `batch`:
 
-1. Kliknij przycisk **"Add parameter"** na górze
-2. Użyj uchwytu przeciągania (⋮⋮), aby przenieść nowy parametr w górę do grupy "Input/output options", poniżej parametru `input`
-3. Wypełnij szczegóły parametru:
-   - **ID**: `batch`
+1. Użyj uchwytu przeciągania (⋮⋮), aby przenieść `batch` do grupy "Input/output options", poniżej parametru `input`
+2. Wypełnij szczegóły parametru:
    - **Description**: `Name for this batch of greetings`
-   - **Type**: `string`
+   - **Type**: `string` (już ustawione)
    - **Required**: zaznacz pole wyboru
    - Opcjonalnie wybierz ikonę z selektora ikon (np. `fas fa-layer-group`)
 
@@ -326,7 +357,7 @@ Narzędzie zaktualizowało teraz Twój plik `nextflow_schema.json` nowym paramet
 grep -A 25 '"input_output_options"' nextflow_schema.json
 ```
 
-```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8" hl_lines="19-23"
+```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8" hl_lines="6 19-23"
         "input_output_options": {
             "title": "Input/output options",
             "type": "object",
@@ -373,6 +404,8 @@ nextflow run . --outdir test-results -profile docker
     The following invalid input values have been detected:
 
     * Missing required parameter(s): input, batch
+
+     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 72 or see '.nextflow.log' file for more details
     ```
 
 Doskonale! Walidacja wychwytuje brakujący wymagany parametr, zanim pipeline się uruchomi.
@@ -460,7 +493,7 @@ Otwórz `assets/schema_input.json` i zastąp sekcje `properties` i `required`:
 
 === "Po"
 
-    ```json title="assets/schema_input.json" linenums="1" hl_lines="10-25 27"
+    ```json title="assets/schema_input.json" linenums="1" hl_lines="5 10-25 27"
     {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json",
@@ -494,7 +527,7 @@ Otwórz `assets/schema_input.json` i zastąp sekcje `properties` i `required`:
 
 === "Przed"
 
-    ```json title="assets/schema_input.json" linenums="1" hl_lines="10-29 31"
+    ```json title="assets/schema_input.json" linenums="1" hl_lines="5 10-29 31"
     {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://raw.githubusercontent.com/core/hello/master/assets/schema_input.json",
@@ -615,10 +648,11 @@ Teraz zaktualizuj kod tworzenia kanału:
 
 === "Po"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="80" hl_lines="4"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5"
         //
         // Utwórz kanał z pliku wejściowego podanego przez params.input
         //
+
         ch_samplesheet = channel.fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
             .map { line -> line[0] }
 
@@ -629,10 +663,11 @@ Teraz zaktualizuj kod tworzenia kanału:
 
 === "Przed"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="80" hl_lines="4 5"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5 6"
         //
         // Utwórz kanał z pliku wejściowego podanego przez params.input
         //
+
         ch_samplesheet = channel.fromPath(params.input)
             .splitCsv()
             .map { line -> line[0] }
@@ -644,7 +679,7 @@ Teraz zaktualizuj kod tworzenia kanału:
 
 Rozłóżmy, co się zmieniło:
 
-1. **`samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")`**: Waliduje plik wejściowy względem naszego schematu i zwraca listę
+1. **`#!groovy samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")`**: Waliduje plik wejściowy względem naszego schematu i zwraca listę
 2. **`channel.fromList(...)`**: Konwertuje listę na kanał Nextflow'a
 
 To kończy implementację walidacji danych wejściowych używając `samplesheetToList` i schematów JSON.
@@ -724,7 +759,7 @@ Teraz otwórz plik i zmień nazwę pierwszej kolumny, w linii nagłówka, z `gre
 
 === "Po"
 
-    ```csv title="tmp_invalid_greetings.csv" hl_lines="1" linenums="1"
+    ```csv title="assets/invalid_greetings.csv" hl_lines="1" linenums="1"
     message,language,score
     Hello,en,87
     Bonjour,fr,96
@@ -733,7 +768,7 @@ Teraz otwórz plik i zmień nazwę pierwszej kolumny, w linii nagłówka, z `gre
 
 === "Przed"
 
-    ```csv title="tmp_invalid_greetings.csv" hl_lines="1" linenums="1"
+    ```csv title="assets/invalid_greetings.csv" hl_lines="1" linenums="1"
     greeting,language,score
     Hello,en,87
     Bonjour,fr,96
@@ -745,7 +780,7 @@ To nie pasuje do naszego schematu, więc walidacja powinna zgłosić błąd.
 Spróbuj uruchomić pipeline z tym niepoprawnym wejściem:
 
 ```bash
-nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profile docker
+nextflow run . --input assets/invalid_greetings.csv --outdir test-results --batch my-batch -profile docker
 ```
 
 ??? failure "Wyjście polecenia"
@@ -757,6 +792,7 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
 
     Input/output options
       input              : assets/invalid_greetings.csv
+      batch              : my-batch
       outdir             : test-results
 
     Generic options
@@ -779,19 +815,18 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
      -- Check '.nextflow.log' file for details
     The following invalid input values have been detected:
 
-    * Missing required parameter(s): batch
     * --input (assets/invalid_greetings.csv): Validation of file failed:
         -> Entry 1: Missing required field(s): greeting
         -> Entry 2: Missing required field(s): greeting
         -> Entry 3: Missing required field(s): greeting
 
-     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
+     -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 72 or see '.nextflow.log' file for more details
     ```
 
 Doskonale! Walidacja wykryła błąd i dostarczyła jasny, pomocny komunikat o błędzie wskazujący na:
 
 - Który plik nie przeszedł walidacji
-- Który wpis (wiersz 1, pierwszy wiersz danych) ma problem
+- Które wpisy mają problem (wszystkie trzy wiersze danych, ponieważ nagłówek nie zawiera już kolumny `greeting`)
 - Jaki jest konkretny problem (brakujące wymagane pole `greeting`)
 
 Walidacja schematu zapewnia, że pliki wejściowe mają poprawną strukturę, zanim pipeline się uruchomi, oszczędzając czas i zapobiegając mylącym błędom później podczas wykonywania.
@@ -808,6 +843,6 @@ Zaimplementowałeś i przetestowałeś zarówno walidację parametrów, jak i wa
 
 ### Co dalej?
 
-Ukończyłeś wszystkie pięć części kursu szkoleniowego Build with nf-core!
+Ukończyłeś wszystkie cztery części kursu szkoleniowego Build with nf-core!
 
 Przejdź do [Podsumowania](next_steps.md), aby zastanowić się nad tym, co zbudowałeś i czego się nauczyłeś.

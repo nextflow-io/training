@@ -25,7 +25,7 @@ codespace는 VSCode 인터페이스로 설정되어 있으며, 파일 시스템 
 이 교육은 **v2 syntax parser가 활성화된** Nextflow 25.10.2 이상에서 작동하며, v2 parser는 Nextflow 26.04부터 기본값입니다.
 제공하는 교육 환경에서는 별도로 설정할 필요가 없습니다. v2 parser가 적용된 Nextflow 26.04.4가 실행됩니다. 로컬 또는 사용자 지정 환경을 사용하는 경우 [버전 참고 사항](../info/nxf_versions.md)을 확인하십시오.
 
-이 교육에는 추가로 **nf-core tools 4.0.2**가 필요합니다.
+이 교육에는 추가로 **nf-core tools 4.1.0**가 필요합니다.
 다른 버전의 nf-core 도구를 사용하는 경우 따라가기 어려울 수 있습니다.
 
 `nf-core --version` 명령을 사용하여 환경에 설치된 버전을 확인할 수 있습니다.
@@ -104,14 +104,11 @@ tree . -L 2
 ### 파이프라인 참조 설정하기
 
 이 과정의 Part 1에서는 참조용으로 `nf-core/demo` 파이프라인의 소스 코드를 사용합니다.
-파이프라인을 가져오고 쉽게 탐색할 수 있도록 바로 가기를 생성합니다:
+로컬 디렉토리에 clone하여 쉽게 탐색할 수 있도록 합니다:
 
 ```bash
-nextflow pull nf-core/demo
-ln -s $NXF_HOME/assets pipelines
+nextflow clone nf-core/demo pipelines/nf-core/demo
 ```
-
-[Use nf-core](../nfcore_use/index.md) 과정을 이미 완료한 경우 `nf-core/demo`는 이미 로컬에 캐시되어 있지만, 위의 심볼릭 링크는 이 디렉토리에서 새로 생성해야 합니다.
 
 ## 준비 상태 체크리스트
 
@@ -119,7 +116,7 @@ ln -s $NXF_HOME/assets pipelines
 
 - [ ] 이 과정의 목표와 전제 조건을 이해했습니다
 - [ ] 환경이 실행 중입니다
-- [ ] nf-core tools 4.0.2를 사용하고 있습니다(`nf-core --version`으로 확인)
+- [ ] nf-core tools 4.1.0를 사용하고 있습니다(`nf-core --version`으로 확인)
 - [ ] 작업 디렉토리를 적절하게 설정했습니다
 
 모든 항목을 체크할 수 있다면 준비가 완료된 것입니다.

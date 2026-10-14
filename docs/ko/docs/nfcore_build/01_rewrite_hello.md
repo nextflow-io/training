@@ -25,9 +25,9 @@ Hello 파이프라인에 익숙하지 않거나 복습이 필요하시면 [이 �
 nf-core 프로젝트는 파이프라인의 구조, 코드 구성, 설정, 문서화 방식에 대한 엄격한 가이드라인을 적용합니다.
 
 파이프라인 생성 작업을 시작하기 전에 해당 구조와 구성 방식을 이해해야 합니다.
-[시작하기](00_orientation.md) 단계에서 생성한 `pipelines` 심볼릭 링크를 사용하여 `nf-core/demo` 저장소에서 파이프라인 코드가 어떻게 구성되어 있는지 살펴보겠습니다.
+[시작하기](00_orientation.md) 단계에서 클론한 `pipelines/nf-core/demo` 복사본을 사용하여 `nf-core/demo` 저장소에서 파이프라인 코드가 어떻게 구성되어 있는지 살펴보겠습니다.
 
-파일 탐색기를 사용하거나 `tree` 명령으로 `nf-core/demo` 디렉토리를 찾아 열 수 있습니다.
+파일 탐색기를 사용하거나 `tree` 명령으로 `pipelines/nf-core/demo` 디렉토리를 찾아 열 수 있습니다.
 
 ```bash
 tree -L 1 pipelines/nf-core/demo
@@ -129,6 +129,11 @@ tree -L 3 pipelines/nf-core/demo/modules
 
     ```console
     pipelines/nf-core/demo/modules
+    ├── local
+    │   └── cowpy
+    │       ├── environment.yml
+    │       ├── main.nf
+    │       └── meta.yaml
     └── nf-core
         ├── fastqc
         │   ├── environment.yml
@@ -143,11 +148,11 @@ tree -L 3 pipelines/nf-core/demo/modules
         └── seqtk
             └── trim
 
-    7 directories, 6 files
+    9 directories, 9 files
     ```
 
 `fastqc`와 `multiqc` 모듈은 `nf-core` 모듈 내 최상위 수준에 위치하는 반면, `trim` 모듈은 속한 툴킷인 `seqtk` 아래에 위치합니다.
-이 경우 `local` 모듈은 없습니다.
+`local` 아래의 `cowpy` 모듈은 nf-core 모듈 저장소에서 설치된 것이 아니라 이 파이프라인을 위해 특별히 작성된 로컬 모듈입니다.
 
 프로세스를 설명하는 모듈 코드 파일은 항상 `main.nf`라고 불리며, 지금은 무시할 테스트 및 `.yml` 파일이 함께 제공됩니다.
 
@@ -262,17 +267,16 @@ TUI가 닫히면 다음과 같은 콘솔 출력이 표시됩니다.
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 4.0.2 - https://nf-co.re
+        nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Launching interactive nf-core pipeline creation tool.
     ```
 
-TUI가 완료되면 도구가 파이프라인을 생성하고, 컨테이너 설정을 생성했으며, 새 파이프라인의 로컬 git 저장소를 초기화했다고 보고합니다:
+TUI가 완료되면 도구가 파이프라인을 생성하고, 새 파이프라인의 로컬 git 저장소를 초기화했다고 보고합니다:
 
 ```console
 INFO     Creating new pipeline: 'hello'
-INFO     Generated container configs for the pipeline successfully.
 INFO     Initialising local pipeline git repository
 INFO     Pipeline created: ./core-hello
 ```
@@ -394,6 +398,27 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
 
 `WARN: Unrecognized config option 'validation.*'` 줄은 새로 생성된 템플릿에 고정된 nf-schema 플러그인 버전에서 발생합니다.
 이는 무해하며 실행에 영향을 주지 않습니다.
+
+이 과정의 나머지 부분에서는 이러한 경고를 생성하지 않는 nf-schema 2.7.2를 사용합니다.
+`core-hello/nextflow.config`를 열고 `plugins` 블록의 플러그인 버전을 업데이트합니다:
+
+=== "후"
+
+    ```groovy title="core-hello/nextflow.config" linenums="246" hl_lines="3"
+    // Nextflow plugins
+    plugins {
+        id 'nf-schema@2.7.2' // 파이프라인 매개변수 검증 및 샘플 시트에서 입력 채널 생성
+    }
+    ```
+
+=== "전"
+
+    ```groovy title="core-hello/nextflow.config" linenums="246" hl_lines="3"
+    // Nextflow plugins
+    plugins {
+        id 'nf-schema@2.5.1' // 파이프라인 매개변수 검증 및 샘플 시트에서 입력 채널 생성
+    }
+    ```
 
 이는 모든 기본 배선이 제자리에 있음을 보여줍니다.
 그렇다면 출력은 어디에 있을까요? 출력이 있기는 한가요?
@@ -746,7 +771,7 @@ workflow {
 
 === "전"
 
-    ```groovy title="original-hello/hello.nf" linenums="21"
+    ```groovy title="original-hello/hello.nf" linenums="22"
         // 인사말 출력
         sayHello(greeting_ch)
 
@@ -766,7 +791,7 @@ workflow {
 
 마지막으로 workflow의 최종 출력이 무엇인지 선언하는 `emit` 문을 추가합니다.
 
-```groovy title="original-hello/hello.nf" linenums="35"
+```groovy title="original-hello/hello.nf" linenums="36"
     emit:
     cowpy_hellos = cowpy.out
 ```
@@ -915,7 +940,7 @@ nf-core 호환 가능하게 만들기 위한 전제로 기본 구성 가능한 w
 
 ## 4. 업데이트된 workflow 로직을 플레이스홀더 workflow에 맞추기
 
-이제 구성 가능한 workflow가 올바르게 작동하는 것을 확인했으므로, 섹션 1에서 생성한 nf-core 파이프라인 스캐폴드로 돌아가겠습니다.
+이제 구성 가능한 workflow가 올바르게 작동하는 것을 확인했으므로, 섹션 2에서 생성한 nf-core 파이프라인 스캐폴드로 돌아가겠습니다.
 방금 개발한 구성 가능한 workflow를 nf-core 템플릿 구조에 통합하여 최종 결과가 다음과 같이 보이기를 원합니다.
 
 <figure class="excalidraw">
@@ -924,7 +949,7 @@ nf-core 호환 가능하게 만들기 위한 전제로 기본 구성 가능한 w
 
 그렇다면 어떻게 이를 실현할까요? `core-hello/workflows/hello.nf`(nf-core 스캐폴드)에 있는 `HELLO` workflow의 현재 내용을 살펴보겠습니다.
 
-```groovy title="core-hello/workflows/hello.nf" linenums="1"
+```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 21 53"
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -989,10 +1014,10 @@ workflow HELLO {
 ```
 
 강조 표시된 줄은 구성 가능한 workflow 구조를 정의합니다: `workflow HELLO {`, `take:`, `main:`, `emit:`입니다.
-17~34번째 줄 사이의 큰 블록은 더 실질적인 내용으로, topic 채널을 사용하여 소프트웨어 버전을 캡처하는 메커니즘을 처리합니다. 이는 nf-core가 2026년에 모든 파이프라인에 도입할 예정인 기능입니다.
+25~52번째 줄 사이의 큰 블록은 더 실질적인 내용으로, topic 채널을 사용하여 소프트웨어 버전을 캡처하는 메커니즘을 처리합니다. 이는 nf-core가 2026년에 모든 파이프라인에 도입할 예정인 기능입니다.
 3부에서 설명할 예정이므로, 지금은 그대로 두어도 되는 상용구 코드로 취급하세요.
 
-섹션 2에서 개발한 원래 workflow의 구성 가능한 버전에서 관련 코드를 추가해야 합니다.
+섹션 3에서 개발한 원래 workflow의 구성 가능한 버전에서 관련 코드를 추가해야 합니다.
 
 다음 단계로 이 작업을 처리할 것입니다:
 
@@ -1041,7 +1066,7 @@ tree core-hello/modules
 
 `original-hello/hello.nf` workflow의 import 문은 다음과 같았습니다:
 
-```groovy title="original-hello/hello.nf" linenums="9"
+```groovy title="original-hello/hello.nf" linenums="10"
 // 모듈 포함
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
@@ -1089,7 +1114,7 @@ include { cowpy } from './modules/cowpy.nf'
 nf-core 프로젝트에는 일반적으로 열 데이터를 포함하는 CSV 파일인 samplesheet 개념과 관련된 많은 사전 구축 기능이 있습니다.
 본질적으로 우리의 `greetings.csv` 파일이 그러하므로 현재 `take` 선언을 그대로 유지하고 다음 단계에서 입력 채널의 이름만 업데이트하겠습니다.
 
-```groovy title="core-hello/workflows/hello.nf" linenums="17"
+```groovy title="core-hello/workflows/hello.nf" linenums="21"
     take:
     ch_samplesheet // channel: --input에서 읽어온 samplesheet
     outdir
@@ -1127,7 +1152,7 @@ workflow를 실행하는 도구의 버전을 캡처하는 것과 관련된 일�
 
 === "후"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="15" hl_lines="11-21"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="19" hl_lines="11-21"
     workflow HELLO {
 
         take:
@@ -1185,7 +1210,7 @@ workflow를 실행하는 도구의 버전을 캡처하는 것과 관련된 일�
 
 === "전"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="15"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="19"
     workflow HELLO {
 
         take:
@@ -1233,14 +1258,14 @@ workflow를 실행하는 도구의 버전을 캡처하는 것과 관련된 일�
 
 === "후"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="25"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
         // 인사말 출력 (nf-core samplesheet 규칙을 사용하도록 업데이트됨)
         sayHello(ch_samplesheet)
     ```
 
 === "전"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="25"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
         // 인사말 출력
         sayHello(greeting_ch)
     ```
@@ -1253,7 +1278,7 @@ workflow를 실행하는 도구의 버전을 캡처하는 것과 관련된 일�
 
 === "후"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="71" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="69" hl_lines="2"
         emit:
         cowpy_hellos   = cowpy.out
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
@@ -1261,7 +1286,7 @@ workflow를 실행하는 도구의 버전을 캡처하는 것과 관련된 일�
 
 === "전"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="71"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="69"
         emit:
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
@@ -1398,13 +1423,13 @@ nf-core 프로젝트는 내포된 subworkflow를 많이 사용하므로 이 부�
 
 해당 파일을 열고 아래로 스크롤하면 다음 코드 덩어리에 도달합니다:
 
-```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76"
+```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84"
     //
     // params.input을 통해 제공된 입력 파일에서 채널 생성
     //
 
     channel
-        .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+        .fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
         .map {
             meta, fastq_1, fastq_2 ->
                 if (!fastq_2) {
@@ -1463,7 +1488,7 @@ nf-core 프로젝트는 내포된 subworkflow를 많이 사용하므로 이 부�
 
 === "후"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-7"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5-7"
         //
         // params.input을 통해 제공된 입력 파일에서 채널 생성
         //
@@ -1479,13 +1504,13 @@ nf-core 프로젝트는 내포된 subworkflow를 많이 사용하므로 이 부�
 
 === "전"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-23"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5-23"
         //
         // params.input을 통해 제공된 입력 파일에서 채널 생성
         //
 
         channel
-            .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+            .fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
             .map {
                 meta, fastq_1, fastq_2 ->
                     if (!fastq_2) {
@@ -1657,6 +1682,7 @@ nextflow run core-hello --outdir core-hello-results -profile test,docker
     ```console
      N E X T F L O W   ~  version 26.04.4
 
+    Downloading plugin nf-schema@2.7.2
     Launching `core-hello/main.nf` [voluminous_caravaggio] revision: d6bbba9521
 
     Input/output options
@@ -1721,7 +1747,7 @@ tree core-hello-results
         ├── pipeline_dag_2026-06-23_16-56-58.html
         └── pipeline_dag_2026-06-23_16-58-45.html
 
-    1 directory, 12 files
+    1 directory, 11 files
     ```
 
 첫 번째 실행에서 얻은 것 외에도 추가 실행 보고서 세트를 얻은 것을 볼 수 있습니다. 이때 workflow는 여전히 플레이스홀더일 뿐이었습니다.

@@ -35,7 +35,7 @@ Nextflow dokümantasyon kılavuzu, bu bağımlılıkları yüklemek için [Ortam
 Aşağıda bağlantısı verilen makalelerde ayrıntılı olarak açıklandığı gibi Nextflow'un kendisini ve nf-core araçlarını yüklemeniz gerekecektir:
 
 - [Nextflow kurulumu](https://www.nextflow.io/docs/latest/install.html)
-- [nf-core araçları](https://nf-co.re/docs/nf-core-tools/installation)
+- [nf-core araçları](https://nf-co.re/docs/nf-core-tools/cli/installation)
 
 Nextflow için kendi kendine kurulum seçeneğini ve nf-core araçları için PyPI seçeneğini kullanmanızı öneririz.
 

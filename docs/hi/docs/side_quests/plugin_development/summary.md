@@ -171,7 +171,7 @@ Production plugin code पढ़ना उन patterns और conventions को
 
 **आधिकारिक दस्तावेज़ीकरण:**
 
-- [Plugins का उपयोग करना](https://www.nextflow.io/docs/latest/plugins/plugins.html): plugins इंस्टॉल करने और कॉन्फ़िगर करने के लिए व्यापक गाइड
+- [Plugins का उपयोग करना](https://www.nextflow.io/docs/latest/plugins/using-plugins.html): plugins इंस्टॉल करने और कॉन्फ़िगर करने के लिए व्यापक गाइड
 - [Plugins विकसित करना](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html): विस्तृत plugin development संदर्भ
 - [Config scopes](https://nextflow.io/docs/latest/developer/config-scopes.html): plugins के लिए configuration scopes बनाना
 
