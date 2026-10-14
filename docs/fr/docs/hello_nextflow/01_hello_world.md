@@ -732,24 +732,24 @@ Apprendre à fournir une entrée variable via un paramètre de ligne de commande
 
 ## 3. Utiliser une entrée variable passée en ligne de commande
 
-Dans son état actuel, notre workflow utilise une salutation codée en dur dans la commande du **process**.
+Dans son état actuel, notre workflow utilise une salutation codée en dur dans la commande du processus.
 Nous voulons ajouter de la flexibilité en utilisant une variable d'entrée, afin de pouvoir plus facilement changer la salutation au moment de l'exécution.
 
 Cela nécessite que nous apportions trois ensembles de modifications à notre script :
 
-1. Modifier le **process** pour attendre une entrée variable
+1. Modifier le processus pour attendre une entrée variable
 2. Configurer un paramètre de ligne de commande pour capturer l'entrée utilisateur
-3. Passer l'entrée au **process** dans le corps du workflow
+3. Passer l'entrée au processus dans le corps du workflow
 
 Faisons ces modifications une à la fois.
 
 ### 3.1. Modifier le processus `sayHello` pour attendre une entrée variable
 
-Nous devons modifier la définition du **process** pour (1) accepter une variable d'entrée et (2) utiliser cette variable dans la ligne de commande.
+Nous devons modifier la définition du processus pour (1) accepter une variable d'entrée et (2) utiliser cette variable dans la ligne de commande.
 
 #### 3.1.1. Ajouter un bloc input à la définition du processus
 
-D'abord, adaptons la définition du **process** pour accepter une entrée appelée `greeting`.
+D'abord, adaptons la définition du processus pour accepter une entrée appelée `greeting`.
 
 Dans le bloc process, faites la modification de code suivante :
 
@@ -806,11 +806,11 @@ Le symbole `$` et les accolades (`{ }`) indiquent à Nextflow que c'est un nom d
 
     Les accolades (`{ }`) étaient techniquement optionnelles dans les versions précédentes de Nextflow, vous pourriez donc voir des anciens workflows où ceci est écrit comme `echo '$greeting' > output.txt`.
 
-Maintenant que le **process** `sayHello()` est prêt à accepter une entrée variable, nous avons besoin d'un moyen de fournir une valeur d'entrée à l'appel du **process** au niveau du workflow.
+Maintenant que le processus `sayHello()` est prêt à accepter une entrée variable, nous avons besoin d'un moyen de fournir une valeur d'entrée à l'appel du processus au niveau du workflow.
 
 ### 3.2. Configurer un paramètre de ligne de commande pour capturer l'entrée utilisateur
 
-Nous pourrions simplement coder en dur une entrée directement en faisant l'appel de **process** `sayHello('Hello World!')`.
+Nous pourrions simplement coder en dur une entrée directement en faisant l'appel de processus `sayHello('Hello World!')`.
 Cependant, lorsque nous faisons un vrai travail avec notre workflow, nous allons vouloir pouvoir contrôler ses entrées depuis la ligne de commande, afin de pouvoir faire quelque chose comme ceci :
 
 <figure class="excalidraw">
@@ -822,7 +822,7 @@ Bonne nouvelle : Nextflow dispose d'un système de paramètres de workflow inté
 La syntaxe générale est de déclarer `params.<nom_paramètre>` pour indiquer à Nextflow d'attendre un paramètre `--<nom_paramètre>` sur la ligne de commande.
 
 Ici, nous voulons créer un paramètre appelé `--input`, donc nous devons déclarer `params.input` quelque part dans le workflow.
-En principe, nous pouvons l'écrire n'importe où ; mais puisque nous allons vouloir le donner à l'appel du **process** `sayHello()`, nous pouvons le brancher directement là en écrivant `sayHello(params.input)`.
+En principe, nous pouvons l'écrire n'importe où ; mais puisque nous allons vouloir le donner à l'appel du processus `sayHello()`, nous pouvons le brancher directement là en écrivant `sayHello(params.input)`.
 
 Dans le bloc workflow, faites la modification de code suivante :
 
@@ -840,7 +840,7 @@ Dans le bloc workflow, faites la modification de code suivante :
         sayHello()
     ```
 
-Cela indique à Nextflow d'exécuter le **process** `sayHello` sur la valeur fournie via le paramètre `--input`.
+Cela indique à Nextflow d'exécuter le processus `sayHello` sur la valeur fournie via le paramètre `--input`.
 
 En effet, nous avons accompli les étapes (2) et (3) décrites au début de la section en une seule fois.
 
@@ -879,7 +879,7 @@ Assurez-vous d'ouvrir le fichier de sortie pour vérifier que vous avez maintena
     Bonjour le monde!
     ```
 
-Voilà !
+Et voilà !
 
 Notez comment la nouvelle exécution a écrasé le fichier de sortie publié dans le répertoire `results`.
 Cependant, les résultats des exécutions précédentes sont toujours préservés dans les répertoires de tâches sous `work`.
@@ -889,7 +889,7 @@ Cependant, les résultats des exécutions précédentes sont toujours préservé
     Vous pouvez facilement distinguer les paramètres au niveau de Nextflow des paramètres au niveau du pipeline.
 
     - Les paramètres qui s'appliquent à un pipeline prennent toujours un double tiret (`--`).
-    - Les paramètres qui modifient un paramètre Nextflow, _par exemple_ la fonctionnalité `-resume` que nous avons utilisée précédemment, prennent un simple tiret (`-`).
+    - Les paramètres qui modifient un paramètre Nextflow, _par exemple_ la fonctionnalité `-o` mentionnée précédemment, prennent un simple tiret (`-`).
 
 ### 3.4. Utiliser des valeurs par défaut pour les paramètres de ligne de commande
 

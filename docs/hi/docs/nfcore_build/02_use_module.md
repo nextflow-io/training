@@ -63,7 +63,7 @@ nf-core प्रोजेक्ट [https://nf-co.re/modules](https://nf-co.re/
 
 - एक संक्षिप्त विवरण: "A module for concatenation of gzipped or uncompressed files getting around UNIX terminal argument size"
 - इंस्टॉलेशन कमांड: `nf-core modules install find/concatenate`
-- Input और output channel संरचना
+- Input और output चैनल संरचना
 - उपलब्ध पैरामीटर
 
 ### 1.2. कमांड लाइन से उपलब्ध मॉड्यूल की सूची बनाएं
@@ -120,7 +120,7 @@ nf-core modules info find/concatenate
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 4.0.2 - https://nf-co.re
+        nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Reinstalling modules found in 'modules.json' but missing from
@@ -188,7 +188,7 @@ nf-core modules info find/concatenate
 
 यह वही जानकारी है जो आप वेबसाइट पर पा सकते हैं।
 
-`INFO Reinstalling modules found in 'modules.json' but missing from directory` संदेश को आप ignore कर सकते हैं; यह nf-core/tools 4.0.2 द्वारा किसी भी मॉड्यूल के लिए emit किया जाता है जिसे आप `info` से query करते हैं, चाहे वह वास्तव में इंस्टॉल हो या नहीं, और इसका कोई प्रभाव नहीं पड़ता क्योंकि `info` कमांड कोई फ़ाइल नहीं लिखता।
+`INFO Reinstalling modules found in 'modules.json' but missing from directory` संदेश को आप ignore कर सकते हैं; यह nf-core/tools 4.1.0 द्वारा किसी भी मॉड्यूल के लिए emit किया जाता है जिसे आप `info` से query करते हैं, चाहे वह वास्तव में इंस्टॉल हो या नहीं, और इसका कोई प्रभाव नहीं पड़ता क्योंकि `info` कमांड कुछ भी इंस्टॉल नहीं करता।
 
 ### 1.4. find/concatenate मॉड्यूल इंस्टॉल करें
 
@@ -197,10 +197,9 @@ nf-core modules info find/concatenate
 अच्छी खबर यह है कि nf-core प्रोजेक्ट में कुछ tooling शामिल है जो इस भाग को आसान बनाती है।
 विशेष रूप से, `nf-core modules install` कमांड code को retrieve करने और इसे एक ही चरण में आपके प्रोजेक्ट के लिए उपलब्ध कराने को automate करना संभव बनाता है।
 
-सुनिश्चित करें कि आपकी working डायरेक्टरी `core-hello` pipeline प्रोजेक्ट की root है, फिर इंस्टॉलेशन कमांड चलाएं:
+सुनिश्चित करें कि आपकी working डायरेक्टरी `core-hello` pipeline प्रोजेक्ट की root है (यदि आप अभी भी `nfcore-build/` डायरेक्टरी में हैं तो `cd core-hello` चलाएं), फिर इंस्टॉलेशन कमांड चलाएं:
 
 ```bash
-cd core-hello
 nf-core modules install find/concatenate
 ```
 
@@ -214,18 +213,18 @@ nf-core modules install find/concatenate
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 
+    INFO     Reinstalling modules found in 'modules.json' but missing from
+             directory:
     INFO     Installing 'find/concatenate'
-    NotADirectoryError: [Errno 20] Not a directory:
-    'modules/local/cowpy.nf/meta.yml'
+    INFO     Use the following statement to include this module:
+
+     include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
     ```
 
 कमांड मॉड्यूल फ़ाइलों को `modules/nf-core/find/concatenate/` में डाउनलोड करता है और इंस्टॉल किए गए मॉड्यूल को ट्रैक करने के लिए `modules.json` को अपडेट करता है।
-अंत में दिखने वाले `NotADirectoryError` को आप ignore कर सकते हैं; यह इसलिए होता है क्योंकि nf-core/tools 4.0.2 अपेक्षा करता है कि हर local मॉड्यूल अपनी खुद की डायरेक्टरी (`modules/local/<name>/main.nf`) में हो, जबकि `core-hello` अभी भी इस चरण में single-file local मॉड्यूल का उपयोग करता है।
-हालाँकि, `find/concatenate` मॉड्यूल सही तरीके से इंस्टॉल हो जाता है, और `modules.json` अपेक्षा के अनुसार अपडेट हो जाता है।
-हम भाग 4 में `cowpy` को directory layout में convert करेंगे।
 
 आइए जांचें कि मॉड्यूल फ़ाइलें सही जगह पर हैं:
 
@@ -278,7 +277,7 @@ tree -L 4 modules
                     "nf-core": {
                         "utils_nextflow_pipeline": {
                             "branch": "master",
-                            "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                            "git_sha": "c2b22d85f30a706a3073387f30380704fcae013b",
                             "installed_by": [
                                 "subworkflows"
                             ]
@@ -292,7 +291,7 @@ tree -L 4 modules
                         },
                         "utils_nfschema_plugin": {
                             "branch": "master",
-                            "git_sha": "fdc08b8b1ae74f56686ce21f7ea11ad11990ce57",
+                            "git_sha": "a7b27fd25bfa8dcc07d299e88bd790585901a436",
                             "installed_by": [
                                 "subworkflows"
                             ]
@@ -323,7 +322,7 @@ nf-core modules list local
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Repository type: pipeline
@@ -342,9 +341,9 @@ nf-core modules list local
 
 आइए `workflows/hello.nf` workflow के imports सेक्शन में `collectGreetings` मॉड्यूल के लिए `include` statement को `FIND_CONCATENATE` के लिए वाले से बदलें।
 
-याद दिलाने के लिए, मॉड्यूल install tool ने हमें उपयोग करने के लिए सटीक statement दिया:
+import statement मॉड्यूल के `main.nf` को `modules/nf-core/` के अंतर्गत point करता है:
 
-```groovy title="install कमांड द्वारा निर्मित Import statement"
+```groovy title="find/concatenate मॉड्यूल के लिए Import statement"
 include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
 ```
 
@@ -422,28 +421,28 @@ include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
 विशेष रूप से, हमें मॉड्यूल के **interface** की जांच करने की आवश्यकता है, अर्थात इसकी input और output definitions, और इसकी तुलना उस मॉड्यूल के interface से करनी होगी जिसे हम बदलना चाह रहे हैं।
 यह हमें यह निर्धारित करने की अनुमति देगा कि क्या हम नए मॉड्यूल को केवल एक drop-in replacement के रूप में treat कर सकते हैं या क्या हमें wiring के कुछ हिस्सों को adapt करने की आवश्यकता होगी।
 
-आदर्श रूप से यह कुछ ऐसा है जो आपको मॉड्यूल इंस्टॉल करने से _पहले_ भी करना चाहिए, लेकिन अरे, देर से बेहतर कभी नहीं।
-(क्या यह मायने रखता है, उन मॉड्यूल से छुटकारा पाने के लिए एक `uninstall` कमांड है जिन्हें आप तय करते हैं कि आप अब नहीं चाहते हैं।)
+आदर्श रूप से यह कुछ ऐसा है जो तुम्हें मॉड्यूल इंस्टॉल करने से _पहले_ भी करना चाहिए, लेकिन अरे, देर से बेहतर कभी नहीं।
+(क्या यह मायने रखता है, उन मॉड्यूल से छुटकारा पाने के लिए एक `uninstall` कमांड है जिन्हें तुम तय करते हो कि अब नहीं चाहते।)
 
 !!! info "जानकारी"
 
-    FIND_CONCATENATE process में विभिन्न compression प्रकारों, फ़ाइल extensions इत्यादि की कुछ चतुर handling शामिल है जो सख्ती से हम आपको यहां दिखाने की कोशिश कर रहे हैं उससे संबंधित नहीं हैं, इसलिए हम इसमें से अधिकांश को ignore करेंगे और केवल उन हिस्सों पर ध्यान केंद्रित करेंगे जो महत्वपूर्ण हैं।
+    `FIND_CONCATENATE` process में विभिन्न compression प्रकारों, फ़ाइल extensions इत्यादि की कुछ चतुर handling शामिल है जो सख्ती से हम तुम्हें यहां दिखाने की कोशिश कर रहे हैं उससे संबंधित नहीं हैं, इसलिए हम इसमें से अधिकांश को ignore करेंगे और केवल उन हिस्सों पर ध्यान केंद्रित करेंगे जो महत्वपूर्ण हैं।
 
 ### 2.1. दोनों मॉड्यूल के interfaces की तुलना करें
 
 याद दिलाने के लिए, यह है कि हमारे `collectGreetings` मॉड्यूल का interface कैसा दिखता है:
 
-```groovy title="modules/local/collectGreetings.nf (अंश)" linenums="1" hl_lines="6-7 10"
+```groovy title="modules/local/collectGreetings.nf (अंश)" linenums="4" hl_lines="6-7 10"
 process collectGreetings {
 
     publishDir 'results', mode: 'copy'
 
     input:
-        path input_files
-        val batch_name
+    path input_files
+    val batch_name
 
     output:
-        path "COLLECTED-${batch_name}-output.txt" , emit: outfile
+    path "COLLECTED-${batch_name}-output.txt" , emit: outfile
 ```
 
 `collectGreetings` मॉड्यूल दो inputs लेता है:
@@ -466,7 +465,7 @@ process FIND_CONCATENATE {
         : 'community.wave.seqera.io/library/findutils_pigz:c4dd5edc44402661'}"
 
     input:
-    tuple val(meta), path(files_in)
+    tuple val(meta), path(files_in, stageAs: 'to_concatenate/*', arity: '1..*')
 
     output:
     tuple val(meta), path("${prefix}"), emit: file_out
@@ -475,37 +474,38 @@ process FIND_CONCATENATE {
     tuple val("${task.process}"), val("coreutils"), eval("cat --version | sed '1!d; s/.* //'"), topic: versions, emit: versions_coreutils
 ```
 
-FIND_CONCATENATE मॉड्यूल एक एकल input लेता है, लेकिन वह input एक tuple है जिसमें दो चीजें हैं:
+`FIND_CONCATENATE` मॉड्यूल एक एकल input लेता है, लेकिन वह input एक tuple है जिसमें दो चीजें हैं:
 
 - `meta` एक संरचना है जिसमें metadata होता है, जिसे metamap कहा जाता है;
 - `files_in` में process करने के लिए एक या अधिक input फ़ाइलें होती हैं, जो `collectGreetings` के `input_files` के बराबर हैं।
+  `arity: '1..*'` option कम से कम एक फ़ाइल की आवश्यकता रखता है, और `stageAs: 'to_concatenate/*'` फ़ाइलों को task work directory की `to_concatenate/` subdirectory में stage करता है।
 
-पूर्ण होने पर, FIND_CONCATENATE अपने outputs दो भागों में देता है:
+पूर्ण होने पर, `FIND_CONCATENATE` अपने outputs दो भागों में देता है:
 
 - एक tuple जिसमें metamap और concatenated output फ़ाइल होती है, `file_out` tag के साथ emit की गई;
 - तीन version tuples (प्रत्येक उपयोग किए गए tool के लिए एक) जो software version tracking के लिए `versions` topic channel में publish किए जाते हैं।
 
 यह भी ध्यान दें कि default रूप से, output फ़ाइल का नाम metadata का हिस्सा है एक identifier के आधार पर होगा (code यहाँ नहीं दिखाया गया है)।
 
-केवल code को देखते हुए यह बहुत कुछ ट्रैक करने के लिए लग सकता है, इसलिए यहां एक diagram है जो आपको सब कुछ एक साथ कैसे फिट होता है यह visualize करने में मदद करने के लिए है।
+केवल code को देखते हुए यह बहुत कुछ ट्रैक करने के लिए लग सकता है, इसलिए यहां एक diagram है जो तुम्हें सब कुछ एक साथ कैसे फिट होता है यह visualize करने में मदद करने के लिए है।
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nfcore_build/img/module_comparison.svg"
 </figure>
 
-आप देख सकते हैं कि दोनों मॉड्यूल की सामग्री के संदर्भ में समान input आवश्यकताएं हैं (input फ़ाइलों का एक सेट प्लस कुछ metadata) लेकिन उस सामग्री को कैसे package किया जाता है, इसके लिए बहुत अलग अपेक्षाएं हैं।
-अभी के लिए versions आउटपुट को ignore करते हुए, उनका मुख्य output भी समतुल्य है (एक concatenated फ़ाइल), सिवाय FIND_CONCATENATE output फ़ाइल के संयोजन में metamap को भी emit करता है।
+तुम देख सकते हो कि दोनों मॉड्यूल की सामग्री के संदर्भ में समान input आवश्यकताएं हैं (input फ़ाइलों का एक सेट प्लस कुछ metadata) लेकिन उस सामग्री को कैसे package किया जाता है, इसके लिए बहुत अलग अपेक्षाएं हैं।
+अभी के लिए versions आउटपुट को ignore करते हुए, उनका मुख्य output भी समतुल्य है (एक concatenated फ़ाइल), सिवाय `FIND_CONCATENATE` output फ़ाइल के संयोजन में metamap को भी emit करता है।
 
-packaging के अंतर को संभालना काफी आसान होगा, जैसा कि आप थोड़ी देर में देखेंगे।
-हालाँकि, metamap भाग को समझने के लिए, हमें आपको कुछ अतिरिक्त संदर्भ से परिचित कराने की आवश्यकता है।
+packaging के अंतर को संभालना काफी आसान होगा, जैसा कि तुम थोड़ी देर में देखोगे।
+हालाँकि, metamap भाग को समझने के लिए, हमें तुम्हें कुछ अतिरिक्त संदर्भ से परिचित कराने की आवश्यकता है।
 
 ### 2.2. Metamaps को समझना
 
-हमने अभी आपको बताया कि FIND_CONCATENATE मॉड्यूल अपने input tuple के हिस्से के रूप में एक metadata map की अपेक्षा करता है।
+हमने अभी तुम्हें बताया कि `FIND_CONCATENATE` मॉड्यूल अपने input tuple के हिस्से के रूप में एक metadata map की अपेक्षा करता है।
 आइए कुछ मिनट लें और गहराई से देखें कि वह क्या है।
 
 **metadata map**, जिसे अक्सर संक्षेप में **metamap** कहा जाता है, data की units के बारे में जानकारी वाला एक Groovy-style map है।
-Nextflow pipelines के संदर्भ में, data की units कुछ भी हो सकती हैं जो आप चाहते हैं: व्यक्तिगत नमूने, नमूनों के batches, या संपूर्ण datasets।
+Nextflow pipelines के संदर्भ में, data की units कुछ भी हो सकती हैं जो तुम चाहते हो: व्यक्तिगत नमूने, नमूनों के batches, या संपूर्ण datasets।
 
 परंपरा के अनुसार, एक nf-core metamap का नाम `meta` है और इसमें आवश्यक field `id` होता है, जिसका उपयोग outputs का नामकरण और data की units को ट्रैक करने के लिए किया जाता है।
 
@@ -525,7 +525,7 @@ Nextflow pipelines के संदर्भ में, data की units कु
 
 ```groovy title="modules/nf-core/find/concatenate/main.nf (अंश)" linenums="10" hl_lines="2 5"
 input:
-tuple val(meta), path(files_in)
+tuple val(meta), path(files_in, stageAs: 'to_concatenate/*', arity: '1..*')
 
 output:
 tuple val(meta), path("${prefix}"), emit: file_out
@@ -534,16 +534,16 @@ tuple val(meta), path("${prefix}"), emit: file_out
 परिणामस्वरूप, data की प्रत्येक unit संबंधित metadata के साथ जुड़ी हुई pipeline के माध्यम से यात्रा करती है।
 बाद की processes तब उस metadata को भी आसानी से access कर सकती हैं।
 
-याद है कि कैसे हमने आपको बताया कि `FIND_CONCATENATE` द्वारा आउटपुट की गई फ़ाइल का नाम metadata का हिस्सा है एक identifier के आधार पर होगा?
+याद है कि कैसे हमने तुम्हें बताया कि `FIND_CONCATENATE` द्वारा आउटपुट की गई फ़ाइल का नाम metadata का हिस्सा है एक identifier के आधार पर होगा?
 यह संबंधित code है:
 
 ```groovy title="modules/nf-core/find/concatenate/main.nf (अंश)" linenums="37"
 prefix = task.ext.prefix ?: "${meta.id}${file_extensions[0]}"
 ```
 
-यह मोटे तौर पर इस प्रकार अनुवादित होता है: यदि external task पैरामीटर प्रणाली (`task.ext`) के माध्यम से एक `prefix` प्रदान किया जाता है, तो output फ़ाइल का नाम रखने के लिए उसका उपयोग करें; अन्यथा `${meta.id}` का उपयोग करके एक बनाएं, जो metamap में `id` field से मेल खाता है।
+यह मोटे तौर पर इस प्रकार अनुवादित होता है: यदि external task पैरामीटर प्रणाली (`task.ext`) के माध्यम से एक `prefix` प्रदान किया जाता है, तो output फ़ाइल का नाम रखने के लिए उसका उपयोग करें; अन्यथा `#!groovy ${meta.id}` का उपयोग करके एक बनाएं, जो metamap में `id` field से मेल खाता है।
 
-आप इस तरह की सामग्री के साथ इस मॉड्यूल में आने वाली input channel की कल्पना कर सकते हैं:
+तुम इस तरह की सामग्री के साथ इस मॉड्यूल में आने वाली input channel की कल्पना कर सकते हो:
 
 ```groovy title="उदाहरण input channel सामग्री"
 ch_input = [[[id: 'batch1', date: '25.10.01'], ['file1A.txt', 'file1B.txt']],
@@ -554,15 +554,15 @@ ch_input = [[[id: 'batch1', date: '25.10.01'], ['file1A.txt', 'file1B.txt']],
 फिर output channel सामग्री इस तरह बाहर आती है:
 
 ```groovy title="उदाहरण output channel सामग्री"
-ch_input = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
+ch_output = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
             [[id: 'batch2', date: '25.10.26'], 'batch2.txt'],
             [[id: 'batch3', date: '25.11.14'], 'batch3.txt']]
 ```
 
 जैसा कि पहले उल्लेख किया गया है, `tuple val(meta), path(files_in)` input setup सभी nf-core मॉड्यूल में उपयोग किया जाने वाला एक मानक pattern है।
 
-उम्मीद है कि आप यह देखना शुरू कर सकते हैं कि यह कितना उपयोगी हो सकता है।
-न केवल यह आपको metadata के आधार पर outputs का नाम रखने की अनुमति देता है, बल्कि आप विभिन्न पैरामीटर values लागू करने जैसी चीजें भी कर सकते हैं, और specific operators के संयोजन में, आप data को group, sort या filter भी कर सकते हैं क्योंकि यह pipeline के माध्यम से flows करता है।
+उम्मीद है कि तुम यह देखना शुरू कर सकते हो कि यह कितना उपयोगी हो सकता है।
+न केवल यह तुम्हें metadata के आधार पर outputs का नाम रखने की अनुमति देता है, बल्कि तुम विभिन्न पैरामीटर values लागू करने जैसी चीजें भी कर सकते हो, और specific operators के संयोजन में, तुम data को group, sort या filter भी कर सकते हो क्योंकि यह pipeline के माध्यम से flows करता है।
 
 !!! info "Metadata के बारे में अधिक जानें"
 
@@ -573,7 +573,7 @@ ch_input = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
 जो हमने समीक्षा की है उसके आधार पर, ये वे प्रमुख परिवर्तन हैं जो हमें `find/concatenate` मॉड्यूल का उपयोग करने के लिए अपनी pipeline में करने की आवश्यकता है:
 
 - Batch name वाला एक metamap बनाएं;
-- Concatenate करने के लिए input फ़ाइलों के सेट (convertToUpper से आ रही) के साथ metamap को एक tuple में package करें;
+- Concatenate करने के लिए input फ़ाइलों के सेट (`convertToUpper` से आ रही) के साथ metamap को एक tuple में package करें;
 - `collectGreetings()` से `FIND_CONCATENATE` में call switch करें;
 - `FIND_CONCATENATE` process द्वारा निर्मित tuple से output फ़ाइल को `cowpy` में पास करने से पहले extract करें।
 
@@ -581,7 +581,7 @@ ch_input = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
 
 ### सारांश
 
-आप जानते हैं कि एक नए मॉड्यूल के input और output interface का आकलन कैसे करें ताकि इसकी आवश्यकताओं की पहचान की जा सके, और आपने सीखा है कि nf-core pipelines द्वारा metamaps का उपयोग कैसे किया जाता है ताकि metadata को data के साथ निकटता से जुड़ा रखा जा सके क्योंकि यह एक pipeline के माध्यम से flows करता है।
+तुम जानते हो कि एक नए मॉड्यूल के input और output interface का आकलन कैसे करें ताकि इसकी आवश्यकताओं की पहचान की जा सके, और तुमने सीखा है कि nf-core pipelines द्वारा metamaps का उपयोग कैसे किया जाता है ताकि metadata को data के साथ निकटता से जुड़ा रखा जा सके क्योंकि यह एक pipeline के माध्यम से flows करता है।
 
 ### आगे क्या है?
 

@@ -120,7 +120,7 @@ nf-core modules info find/concatenate
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 4.0.2 - https://nf-co.re
+        nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Reinstalling modules found in 'modules.json' but missing from
@@ -188,7 +188,7 @@ nf-core modules info find/concatenate
 
 이것은 웹사이트에서 찾을 수 있는 것과 정확히 동일한 정보입니다.
 
-`INFO Reinstalling modules found in 'modules.json' but missing from directory` 메시지는 무시해도 됩니다. 이 메시지는 nf-core/tools 4.0.2에서 실제로 설치 여부와 관계없이 `info`로 조회하는 모든 모듈에 대해 출력되며, `info` 명령은 파일을 생성하지 않으므로 아무런 영향이 없습니다.
+`INFO Reinstalling modules found in 'modules.json' but missing from directory` 메시지는 무시해도 됩니다. 이 메시지는 nf-core/tools 4.1.0에서 실제로 설치 여부와 관계없이 `info`로 조회하는 모든 모듈에 대해 출력되며, `info` 명령은 파일을 생성하지 않으므로 아무런 영향이 없습니다.
 
 ### 1.4. find/concatenate 모듈 설치하기
 
@@ -197,10 +197,9 @@ nf-core modules info find/concatenate
 좋은 소식은 nf-core 프로젝트에 이 부분을 쉽게 만드는 도구가 포함되어 있다는 것입니다.
 특히, `nf-core modules install` 명령을 사용하면 코드를 검색하고 한 단계로 프로젝트에서 사용할 수 있도록 자동화할 수 있습니다.
 
-현재 작업 디렉토리가 `core-hello` 파이프라인 프로젝트의 루트인지 확인한 후 설치 명령을 실행하세요:
+현재 작업 디렉토리가 `core-hello` 파이프라인 프로젝트의 루트인지 확인하세요 (아직 `nfcore-build/` 디렉토리에 있다면 `cd core-hello`를 실행하세요). 그런 다음 설치 명령을 실행하세요:
 
 ```bash
-cd core-hello
 nf-core modules install find/concatenate
 ```
 
@@ -214,18 +213,18 @@ nf-core modules install find/concatenate
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 
+    INFO     Reinstalling modules found in 'modules.json' but missing from
+             directory:
     INFO     Installing 'find/concatenate'
-    NotADirectoryError: [Errno 20] Not a directory:
-    'modules/local/cowpy.nf/meta.yml'
+    INFO     Use the following statement to include this module:
+
+     include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
     ```
 
 명령은 모듈 파일을 `modules/nf-core/find/concatenate/`에 다운로드하고, 설치된 모듈을 추적하기 위해 `modules.json`을 업데이트합니다.
-마지막에 나타나는 `NotADirectoryError`는 무시해도 됩니다. 이 오류는 nf-core/tools 4.0.2가 모든 로컬 모듈이 각자의 디렉토리(`modules/local/<name>/main.nf`)에 있을 것으로 예상하는 반면, `core-hello`는 이 단계에서 아직 단일 파일 형태의 로컬 모듈을 사용하기 때문에 발생합니다.
-`find/concatenate` 모듈은 올바르게 설치되었으며, `modules.json`도 정상적으로 업데이트됩니다.
-파트 4에서 `cowpy`를 디렉토리 구조로 변환하겠습니다.
 
 모듈 파일이 올바르게 설치되었는지 확인합니다:
 
@@ -278,7 +277,7 @@ tree -L 4 modules
                     "nf-core": {
                         "utils_nextflow_pipeline": {
                             "branch": "master",
-                            "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
+                            "git_sha": "c2b22d85f30a706a3073387f30380704fcae013b",
                             "installed_by": [
                                 "subworkflows"
                             ]
@@ -292,7 +291,7 @@ tree -L 4 modules
                         },
                         "utils_nfschema_plugin": {
                             "branch": "master",
-                            "git_sha": "fdc08b8b1ae74f56686ce21f7ea11ad11990ce57",
+                            "git_sha": "a7b27fd25bfa8dcc07d299e88bd790585901a436",
                             "installed_by": [
                                 "subworkflows"
                             ]
@@ -323,7 +322,7 @@ nf-core modules list local
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 4.0.2 - https://nf-co.re
+    nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Repository type: pipeline
@@ -342,9 +341,9 @@ nf-core modules list local
 
 `workflows/hello.nf` 워크플로우의 임포트 섹션에서 `collectGreetings` 모듈에 대한 `include` 문을 `FIND_CONCATENATE`에 대한 것으로 교체합니다.
 
-참고로, 모듈 설치 도구가 사용할 정확한 문을 제공했습니다:
+임포트 문은 `modules/nf-core/` 아래의 모듈 `main.nf`를 가리킵니다:
 
-```groovy title="Import statement produced by install command"
+```groovy title="Import statement for the find/concatenate module"
 include { FIND_CONCATENATE } from '../modules/nf-core/find/concatenate/main'
 ```
 
@@ -433,17 +432,17 @@ nf-core 모듈을 찾고 프로젝트에서 사용할 수 있도록 만드는 �
 
 참고로, 우리의 `collectGreetings` 모듈의 인터페이스는 다음과 같습니다:
 
-```groovy title="modules/local/collectGreetings.nf (excerpt)" linenums="1" hl_lines="6-7 10"
+```groovy title="modules/local/collectGreetings.nf (excerpt)" linenums="4" hl_lines="6-7 10"
 process collectGreetings {
 
     publishDir 'results', mode: 'copy'
 
     input:
-        path input_files
-        val batch_name
+    path input_files
+    val batch_name
 
     output:
-        path "COLLECTED-${batch_name}-output.txt" , emit: outfile
+    path "COLLECTED-${batch_name}-output.txt" , emit: outfile
 ```
 
 `collectGreetings` 모듈은 두 개의 입력을 받습니다:
@@ -466,7 +465,7 @@ process FIND_CONCATENATE {
         : 'community.wave.seqera.io/library/findutils_pigz:c4dd5edc44402661'}"
 
     input:
-    tuple val(meta), path(files_in)
+    tuple val(meta), path(files_in, stageAs: 'to_concatenate/*', arity: '1..*')
 
     output:
     tuple val(meta), path("${prefix}"), emit: file_out
@@ -479,10 +478,11 @@ FIND_CONCATENATE 모듈은 단일 입력을 받지만, 그 입력은 두 가지�
 
 - `meta`는 metamap이라고 하는 메타데이터를 포함하는 구조입니다;
 - `files_in`은 처리할 하나 이상의 입력 파일을 포함하며, `collectGreetings`의 `input_files`와 동등합니다.
+  `arity: '1..*'` 옵션은 최소 하나의 파일을 요구하며, `stageAs: 'to_concatenate/*'`는 파일을 작업 work directory의 `to_concatenate/` 하위 디렉토리에 staging합니다.
 
 완료되면 FIND_CONCATENATE는 두 부분으로 출력을 전달합니다:
 
-- metamap과 연결된 출력 파일을 포함하는 또 다른 튜플, `file_out` 태그로 방출됩니다;
+- metamap과 연결된 출력 파일을 포함하는 튜플, `file_out` 태그로 방출됩니다;
 - 소프트웨어 버전 추적을 위해 `versions` 토픽 채널에 게시되는 세 개의 버전 튜플(사용된 도구당 하나씩).
 
 또한 기본적으로 출력 파일은 메타데이터의 일부인 식별자를 기반으로 이름이 지정됩니다(여기에는 코드가 표시되지 않음).
@@ -525,7 +525,7 @@ Nextflow 파이프라인의 컨텍스트에서 데이터 단위는 개별 샘플
 
 ```groovy title="modules/nf-core/find/concatenate/main.nf (excerpt)" linenums="10" hl_lines="2 5"
 input:
-tuple val(meta), path(files_in)
+tuple val(meta), path(files_in, stageAs: 'to_concatenate/*', arity: '1..*')
 
 output:
 tuple val(meta), path("${prefix}"), emit: file_out
@@ -541,7 +541,7 @@ tuple val(meta), path("${prefix}"), emit: file_out
 prefix = task.ext.prefix ?: "${meta.id}${file_extensions[0]}"
 ```
 
-이것은 대략 다음과 같이 번역됩니다: `prefix`가 외부 작업 매개변수 시스템(`task.ext`)을 통해 제공되면 출력 파일 이름을 지정하는 데 사용합니다; 그렇지 않으면 metamap의 `id` 필드에 해당하는 `${meta.id}`를 사용하여 생성합니다.
+이것은 대략 다음과 같이 번역됩니다: `prefix`가 외부 작업 매개변수 시스템(`task.ext`)을 통해 제공되면 출력 파일 이름을 지정하는 데 사용합니다; 그렇지 않으면 metamap의 `id` 필드에 해당하는 `#!groovy ${meta.id}`를 사용하여 생성합니다.
 
 다음과 같은 내용으로 이 모듈에 들어오는 입력 채널을 상상할 수 있습니다:
 
@@ -554,7 +554,7 @@ ch_input = [[[id: 'batch1', date: '25.10.01'], ['file1A.txt', 'file1B.txt']],
 그러면 출력 채널 내용은 다음과 같이 나옵니다:
 
 ```groovy title="Example output channel contents"
-ch_input = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
+ch_output = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
             [[id: 'batch2', date: '25.10.26'], 'batch2.txt'],
             [[id: 'batch3', date: '25.11.14'], 'batch3.txt']]
 ```

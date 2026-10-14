@@ -45,11 +45,11 @@ process cowpy {
     conda 'conda-forge::cowpy==1.1.5'
 
     input:
-    path input_file
-    val character
+        path input_file
+        val character
 
     output:
-    path "cowpy-${input_file}"
+        path "cowpy-${input_file}"
 
     script:
     """
@@ -116,7 +116,7 @@ process cowpy {
 
 === "बाद में"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -126,13 +126,13 @@ process cowpy {
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { COWPY                  } from '../modules/local/cowpy.nf'
     include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+    include { COWPY                  } from '../modules/local/cowpy.nf'
     ```
 
 === "पहले"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -142,8 +142,8 @@ process cowpy {
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { cowpy                  } from '../modules/local/cowpy.nf'
     include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+    include { cowpy                  } from '../modules/local/cowpy.nf'
     ```
 
 हम प्रोसेस कॉल को अपडेट करने से बचने के लिए इम्पोर्ट स्टेटमेंट में एक उपनाम का उपयोग कर सकते हैं, लेकिन इससे अपरकेसिंग परंपरा को अपनाने का उद्देश्य कुछ हद तक विफल हो जाएगा।
@@ -154,7 +154,7 @@ process cowpy {
 
 === "बाद में"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 38"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="5 36"
     // tuple से file extract करें क्योंकि cowpy अभी metadata का उपयोग नहीं करता
     ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
@@ -181,24 +181,22 @@ process cowpy {
             "${process}:\n${tool_versions.join('\n')}"
         }
 
-    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
+            storeDir: "${outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
             sort: true,
             newLine: true
-        ).set { ch_collated_versions }
-
-
+        )
     emit:
     cowpy_hellos   = COWPY.out
-    versions       = ch_versions
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
 === "पहले"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 38"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="5 36"
     // tuple से file extract करें क्योंकि cowpy अभी metadata का उपयोग नहीं करता
     ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
@@ -225,19 +223,17 @@ process cowpy {
             "${process}:\n${tool_versions.join('\n')}"
         }
 
-    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
+            storeDir: "${outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
             sort: true,
             newLine: true
-        ).set { ch_collated_versions }
-
-
+        )
     emit:
     cowpy_hellos   = cowpy.out
-    versions       = ch_versions
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
 **दोनों** परिवर्तन करना सुनिश्चित करें, अन्यथा जब आप इसे चलाएंगे तो आपको एक त्रुटि मिलेगी।
@@ -349,14 +345,14 @@ nextflow run . --outdir core-hello-results -profile test,docker
 
 === "बाद में"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="2"
         // cowpy के साथ अभिवादनों का ASCII art generate करें
         COWPY(FIND_CONCATENATE.out.file_out, params.character)
     ```
 
 === "पहले"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="1-2 5"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="1-2 5"
         // tuple से file extract करें क्योंकि cowpy अभी metadata का उपयोग नहीं करता
         ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
@@ -374,18 +370,18 @@ nextflow run . --outdir core-hello-results -profile test,docker
 
 === "बाद में"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="60" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="75" hl_lines="2"
         emit:
         cowpy_hellos   = COWPY.out.cowpy_output
-        versions       = ch_versions
+        versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
 === "पहले"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="60" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="75" hl_lines="2"
         emit:
         cowpy_hellos   = COWPY.out
-        versions       = ch_versions
+        versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
 तकनीकी रूप से यह आवश्यक नहीं है, लेकिन जब भी संभव हो नामांकित आउटपुट का संदर्भ देना अच्छा अभ्यास है।
@@ -405,7 +401,6 @@ nextflow run . --outdir core-hello-results -profile test,docker
 
     Launching `./main.nf` [modest_saha] revision: d6bbba9521
 
-    Downloading plugin nf-schema@2.7.2
     Input/output options
       input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
       outdir                    : core-hello-results
@@ -471,7 +466,7 @@ Nextflow रनटाइम पर उन आर्गुमेंट को उ
 
 === "बाद में"
 
-    ```groovy title="modules/local/cowpy.nf" linenums="1" hl_lines="16 18"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="16 18"
     // cowpy के साथ ASCII art जनरेट करें (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
@@ -601,14 +596,14 @@ withName: 'COWPY' {
 
 === "बाद में"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="2"
         // cowpy के साथ अभिवादनों का ASCII art generate करें
         COWPY(FIND_CONCATENATE.out.file_out)
     ```
 
 === "पहले"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="2"
         // cowpy के साथ अभिवादनों का ASCII art generate करें
         COWPY(FIND_CONCATENATE.out.file_out, params.character)
     ```
@@ -759,7 +754,7 @@ cat work/38/eb29ea*/cowpy-test.txt
 
 === "बाद में"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2 6 8"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="12" hl_lines="2 6 8"
         output:
             tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
 
@@ -774,7 +769,7 @@ cat work/38/eb29ea*/cowpy-test.txt
 
 === "पहले"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2 7"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="12" hl_lines="2 7"
         output:
             tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output
 
@@ -1143,17 +1138,17 @@ Modules `topic:` keyword का उपयोग करके output block मे
 
 === "बाद में"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="13" hl_lines="3"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="10" hl_lines="3"
         output:
-        tuple val(meta), path("${prefix}.txt")                                    , emit: cowpy_output
-        tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions , emit: versions_cowpy
+            tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
+            tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions, emit: versions_cowpy
     ```
 
 === "पहले"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="13"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="10"
         output:
-        tuple val(meta), path("${prefix}.txt")  , emit: cowpy_output
+            tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
     ```
 
 नई लाइन `"versions"` topic channel पर एक `[process_name, tool_name, version]` tuple publish करती है।
@@ -1223,7 +1218,7 @@ Module conventions के बारे में और पढ़ने के �
 
 ## 2. nf-core tooling के साथ एक module बनाएं
 
-अब जब आपने nf-core module patterns को manually लागू करके सीख लिया है, तो आइए देखें कि आप practice में modules कैसे बनाएंगे।
+अब जब तुमने nf-core module patterns को manually लागू करके सीख लिया है, तो आइए देखें कि practice में modules कैसे बनाए जाते हैं।
 
 ### 2.1. एक template से module scaffold generate करें
 
@@ -1231,32 +1226,37 @@ Pipelines बनाने के लिए जो मौजूद है उस�
 
 #### 2.1.1. Module creation command चलाएं
 
-`nf-core modules create` command एक module template generate करता है जो पहले से ही आपके द्वारा सीखी गई सभी conventions का पालन करता है।
+`nf-core modules create` command एक module template generate करता है जो पहले से ही उन सभी conventions का पालन करता है जो तुमने सीखी हैं।
 
 इस command को चलाकर एक minimal template के साथ `COWPY` module का नया version बनाएं:
 
 ```bash
-nf-core modules create --empty-template COWPY
+nf-core modules create --empty-template cowpy
 ```
+
+Tool का नाम lowercase में देना होगा।
+Tool इसे generated code में uppercase process name `COWPY` में convert करता है।
 
 `--empty-template` flag बिना extra code के एक clean starter template बनाता है, जिससे essential structure को देखना आसान हो जाता है।
 
-Command interactively चलता है, setup के माध्यम से आपका मार्गदर्शन करता है।
+Command interactively चलता है, setup के माध्यम से तुम्हारा मार्गदर्शन करता है।
 यह metadata को pre-populate करने के लिए Bioconda और bio.tools जैसे package repositories से tool information को automatically look up करता है।
 
-आपको कई configuration options के लिए prompt किया जाएगा:
+तुम्हें कई configuration options के लिए prompt किया जाएगा:
 
-- **Author information**: Attribution के लिए आपका GitHub username
+- **Bioconda package name**: Tool Bioconda में `cowpy` package नहीं ढूंढ पाता और पूछता है कि क्या तुम कोई अलग package name enter करना चाहते हो।
+  `n` answer करो; हम package information manually भरेंगे।
+- **Author information**: Attribution के लिए तुम्हारा GitHub username
 - **Resource label**: Computational requirements का एक predefined set।
   nf-core project lightweight tools के लिए `process_single` और demanding tools के लिए `process_high` जैसे standard labels प्रदान करता है।
   ये labels विभिन्न execution environments में resource allocation प्रबंधित करने में मदद करते हैं।
 - **Metadata requirement**: क्या module को `meta` map के माध्यम से sample-specific information की आवश्यकता है (data processing modules के लिए आमतौर पर हाँ)।
 
-Tool package information खोजने और structure सेट करने की complexity को संभालता है, जिससे आप tool की specific logic implement करने पर ध्यान केंद्रित कर सकते हैं।
+Tool package information खोजने और structure सेट करने की complexity को संभालता है, जिससे तुम tool की specific logic implement करने पर ध्यान केंद्रित कर सकते हो।
 
 #### 2.1.2. Module scaffold की जांच करें
 
-Tool `modules/local/` में (या `modules/nf-core/` में यदि आप nf-core/modules repository में हैं) एक complete module structure बनाता है:
+Tool `modules/local/` में (या `modules/nf-core/` में यदि तुम nf-core/modules repository में हो) एक complete module structure बनाता है:
 
 ??? abstract "डायरेक्टरी सामग्री"
 
@@ -1280,9 +1280,11 @@ Tool `modules/local/` में (या `modules/nf-core/` में यदि �
 
     Generated test file nf-test का उपयोग करती है, जो Nextflow pipelines और modules के लिए एक testing framework है। इन tests को लिखना और चलाना सीखने के लिए, [nf-test side quest](../side_quests/nf_test/index.md) देखें।
 
-Generated `main.nf` में वे सभी patterns शामिल हैं जो आपने अभी सीखे, साथ ही कुछ अतिरिक्त features:
+Generated `main.nf` में वे सभी patterns शामिल हैं जो तुमने अभी सीखे, साथ ही कुछ अतिरिक्त features:
 
-```groovy title="modules/local/cowpy/main.nf" hl_lines="11 21 22"
+```groovy title="modules/local/cowpy/main.nf" linenums="1" hl_lines="12 23 24"
+
+
 process COWPY {
     tag "$meta.id"
     label 'process_single'
@@ -1292,11 +1294,11 @@ process COWPY {
         'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
         'quay.io/biocontainers/YOUR-TOOL-HERE' }"
 
-    input:
-    tuple val(meta), path(input)        // Pattern 1: Metadata tuples ✓
+    input:tuple val(meta), path(input)        // Pattern 1: Metadata tuples ✓
 
     output:
     tuple val(meta), path("*"), emit: output
+
     tuple val("${task.process}"), val('cowpy'), eval("cowpy --version"), topic: versions, emit: versions_cowpy
 
     when:
@@ -1307,6 +1309,7 @@ process COWPY {
     def prefix = task.ext.prefix ?: "${meta.id}"  // Pattern 3: ext.prefix ✓
 
     """
+
     """
 
     stub:
@@ -1315,11 +1318,15 @@ process COWPY {
 
     """
     echo $args
+
     """
 }
 ```
 
-ध्यान दें कि वे सभी patterns जो आपने ऊपर manually लागू किए थे, पहले से ही मौजूद हैं!
+Generated file दो empty lines से शुरू होती है, और template input declaration को `input:` के साथ same line पर रखता है।
+हम section 2.3.1 में inputs और outputs update करते समय input declaration को अपनी अलग line पर ले जाएंगे।
+
+ध्यान दें कि वे सभी patterns जो तुमने ऊपर manually लागू किए थे, पहले से ही मौजूद हैं!
 
 Template में कई अतिरिक्त nf-core conventions भी शामिल हैं।
 इनमें से कुछ तुरंत काम करते हैं, जबकि अन्य placeholders हैं जिन्हें हमें भरना होगा, जैसा कि नीचे वर्णित है।
@@ -1348,7 +1355,7 @@ nf-core guidelines के अनुसार हमें module के हि�
 
 #### 2.2.1. Container
 
-Container के लिए, आप किसी भी Conda package से automatically container बनाने के लिए [Seqera Containers](https://seqera.io/containers/) का उपयोग कर सकते हैं, जिसमें conda-forge packages भी शामिल हैं।
+Container के लिए, तुम किसी भी Conda package से automatically container बनाने के लिए [Seqera Containers](https://seqera.io/containers/) का उपयोग कर सकते हो, जिसमें conda-forge packages भी शामिल हैं।
 इस मामले में हम पहले जैसा ही prebuilt container उपयोग कर रहे हैं।
 
 Default code Docker और Singularity के बीच toggle करने की पेशकश करता है, लेकिन हम उस line को simplify करेंगे और बस ऊपर Seqera Containers से प्राप्त Docker container specify करेंगे।
@@ -1382,7 +1389,7 @@ Default code Docker और Singularity के बीच toggle करने क�
 Conda environment के लिए, module code `#!groovy conda "${moduleDir}/environment.yml"` specify करता है जिसका अर्थ है कि इसे `environment.yml` file में configure किया जाना चाहिए।
 
 Module creation tool ने हमें चेतावनी दी कि यह Bioconda (bioinformatics tools के लिए primary channel) में `cowpy` package नहीं ढूंढ सका।
-हालांकि, `cowpy` conda-forge में उपलब्ध है, इसलिए आप `environment.yml` को इस प्रकार पूरा कर सकते हैं:
+हालांकि, `cowpy` conda-forge में उपलब्ध है, इसलिए तुम `environment.yml` को इस प्रकार पूरा कर सकते हो:
 
 === "बाद में"
 
@@ -1424,14 +1431,14 @@ nf-core में submission के लिए, हमें defaults का अ�
 
 #### 2.3.1. Inputs और outputs
 
-Generated template में generic input और output declarations शामिल हैं जिन्हें आपको अपने specific tool के लिए customize करना होगा।
+Generated template में generic input और output declarations शामिल हैं जिन्हें तुम्हें अपने specific tool के लिए customize करना होगा।
 Section 1 से हमारे manual `COWPY` module को देखते हुए, हम उसे guide के रूप में उपयोग कर सकते हैं।
 
 Input और output blocks को update करें:
 
 === "बाद में"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="10" hl_lines="1-2 5-6"
     input:
     tuple val(meta), path(input_file)
 
@@ -1442,34 +1449,35 @@ Input और output blocks को update करें:
 
 === "पहले"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5 6"
-    input:
-    tuple val(meta), path(input)
+    ```groovy title="modules/local/cowpy/main.nf" linenums="10" hl_lines="1 4-6"
+    input:tuple val(meta), path(input)
 
     output:
     tuple val(meta), path("*"), emit: output
-    tuple val("${task.process}"), val('cowpy'), eval("cowpy --version"), topic: versions    , emit: versions_cowpy
+
+    tuple val("${task.process}"), val('cowpy'), eval("cowpy --version"), topic: versions, emit: versions_cowpy
     ```
 
 यह specify करता है:
 
+- `input:` के नीचे अपनी अलग line पर input declaration
 - Input file parameter name (`input_file` generic `input` के बजाय)
 - Configurable prefix pattern का उपयोग करके output filename (`#!groovy ${prefix}.txt` wildcard `*` के बजाय)
 - एक descriptive emit name (`cowpy_output` generic `output` के बजाय)
 - Template के `#!groovy eval("cowpy --version")` की जगह एक static version string (`#!groovy val("1.1.5")`), जो section 1.6 के manual module से मेल खाता है (`cowpy` tool `--version` flag expose नहीं करता)
 
-यदि आप syntax validate करने के लिए Nextflow language server का उपयोग कर रहे हैं, तो `#!groovy ${prefix}` part इस stage पर error के रूप में flag किया जाएगा क्योंकि हमने इसे अभी तक script block में नहीं जोड़ा है।
+यदि तुम syntax validate करने के लिए Nextflow language server का उपयोग कर रहे हो, तो `#!groovy ${prefix}` part इस stage पर error के रूप में flag किया जाएगा क्योंकि हमने इसे अभी तक script block में नहीं जोड़ा है।
 अब उस पर आते हैं।
 
 #### 2.3.2. Script block
 
-Template एक खाली script block generate करता है जिसे आपको actual tool command से भरना होगा।
+Template एक खाली script block generate करता है जिसे तुम्हें actual tool command से भरना होगा।
 
 पहले manually लिखे गए module के आधार पर, हमें निम्नलिखित edits करने चाहिए:
 
 === "बाद में"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="15" hl_lines="3 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="20" hl_lines="3 6"
     script:
     def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
@@ -1482,12 +1490,13 @@ Template एक खाली script block generate करता है जिस
 
 === "पहले"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="15" hl_lines="3"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="20" hl_lines="3"
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
+
     """
     ```
 
@@ -1500,15 +1509,15 @@ Template एक खाली script block generate करता है जिस
 
 #### 2.3.3. Stub block implement करना
 
-Nextflow context में, एक [stub](https://www.nextflow.io/docs/latest/process.html#stub) block आपको एक lightweight, dummy script define करने की अनुमति देता है जिसका उपयोग actual command execute किए बिना pipeline logic के rapid prototyping और testing के लिए किया जाता है।
+Nextflow context में, एक [stub](https://www.nextflow.io/docs/latest/process.html#stub) block तुम्हें एक lightweight, dummy script define करने की अनुमति देता है जिसका उपयोग actual command execute किए बिना pipeline logic के rapid prototyping और testing के लिए किया जाता है।
 
 <!-- TODO (future) This is super glossed over but should really be explained or at least link out to an explanation about stubs (the reference doc isn't terribly helpful either). Right now this is likely to be mostly meaningless to anyone who doesn't already know about stubs. -->
 
-यदि यह रहस्यमय लगता है तो बहुत चिंता न करें; हम इसे completeness के लिए शामिल करते हैं लेकिन यदि आप इससे निपटना नहीं चाहते तो stub section को delete भी कर सकते हैं, क्योंकि यह पूरी तरह से optional है।
+यदि यह रहस्यमय लगता है तो बहुत चिंता न करो; हम इसे completeness के लिए शामिल करते हैं लेकिन यदि तुम इससे निपटना नहीं चाहते तो stub section को delete भी कर सकते हो, क्योंकि यह पूरी तरह से optional है।
 
 === "बाद में"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="29" hl_lines="3 6"
     stub:
     def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
@@ -1521,13 +1530,14 @@ Nextflow context में, एक [stub](https://www.nextflow.io/docs/latest/pr
 
 === "पहले"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="29" hl_lines="3 6"
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
     echo $args
+
     """
     ```
 
@@ -1537,9 +1547,9 @@ Nextflow context में, एक [stub](https://www.nextflow.io/docs/latest/pr
 - `echo $args` line हटाएं (जो सिर्फ template placeholder code था)
 - Stub एक खाली `#!groovy ${prefix}.txt` file बनाता है जो script block के output से match करता है
 
-यह आपको actual tool चलने का इंतज़ार किए बिना workflow logic और file handling test करने की अनुमति देता है।
+यह तुम्हें actual tool चलने का इंतज़ार किए बिना workflow logic और file handling test करने की अनुमति देता है।
 
-एक बार जब आपने environment setup (section 2.2), inputs/outputs (section 2.3.1), script block (section 2.3.2), और stub block (section 2.3.3) पूरा कर लिया, तो module test के लिए तैयार है!
+एक बार जब तुमने environment setup (section 2.2), inputs/outputs (section 2.3.1), script block (section 2.3.2), और stub block (section 2.3.3) पूरा कर लिया, तो module test के लिए तैयार है!
 
 ### 2.4. नया `COWPY` module लगाएं और pipeline चलाएं
 
@@ -1547,7 +1557,7 @@ Nextflow context में, एक [stub](https://www.nextflow.io/docs/latest/pr
 
 === "बाद में"
 
-    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -1557,13 +1567,13 @@ Nextflow context में, एक [stub](https://www.nextflow.io/docs/latest/pr
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { COWPY                  } from '../modules/local/cowpy/main.nf'
     include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+    include { COWPY                  } from '../modules/local/cowpy/main.nf'
     ```
 
 === "पहले"
 
-    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -1573,8 +1583,8 @@ Nextflow context में, एक [stub](https://www.nextflow.io/docs/latest/pr
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { COWPY                  } from '../modules/local/cowpy.nf'
     include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+    include { COWPY                  } from '../modules/local/cowpy.nf'
     ```
 
 इसे test करने के लिए pipeline चलाएं।
@@ -1626,7 +1636,7 @@ nextflow run . --outdir core-hello-results -profile test,docker
 
 ### सारांश
 
-अब आप जानते हैं कि सब कुछ scratch से लिखने के बजाय templates का उपयोग करके efficiently modules बनाने के लिए built-in nf-core tooling का उपयोग कैसे करें।
+अब तुम जानते हो कि सब कुछ scratch से लिखने के बजाय templates का उपयोग करके efficiently modules बनाने के लिए built-in nf-core tooling का उपयोग कैसे करें।
 
 ### आगे क्या है?
 

@@ -171,7 +171,7 @@ Nextflow belgeleri, bu eğitimin ötesindeki konuları kapsamaktadır: kanal fab
 
 **Resmi belgeler:**
 
-- [Plugin'leri kullanmak](https://www.nextflow.io/docs/latest/plugins/plugins.html): plugin'leri yükleme ve yapılandırmaya yönelik kapsamlı kılavuz
+- [Plugin'leri kullanmak](https://www.nextflow.io/docs/latest/plugins/using-plugins.html): plugin'leri yükleme ve yapılandırmaya yönelik kapsamlı kılavuz
 - [Plugin geliştirmek](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html): ayrıntılı plugin geliştirme referansı
 - [Yapılandırma kapsamları](https://nextflow.io/docs/latest/developer/config-scopes.html): plugin'ler için yapılandırma kapsamları oluşturma
 

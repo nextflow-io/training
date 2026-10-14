@@ -35,7 +35,7 @@ Das Nextflow-Dokumentationshandbuch enthält Anweisungen zur Installation dieser
 Du musst Nextflow selbst sowie die nf-core tools installieren, wie in den unten verlinkten Artikeln beschrieben:
 
 - [Nextflow-Installation](https://www.nextflow.io/docs/latest/install.html)
-- [nf-core tools](https://nf-co.re/docs/nf-core-tools/installation)
+- [nf-core tools](https://nf-co.re/docs/nf-core-tools/cli/installation)
 
 Wir empfehlen die Self-Install-Option für Nextflow und die PyPI-Option für nf-core tools.
 

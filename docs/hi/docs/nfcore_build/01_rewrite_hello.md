@@ -25,9 +25,9 @@ Build with nf-core प्रशिक्षण पाठ्यक्रम क�
 nf-core project इस बारे में कड़े दिशानिर्देश लागू करता है कि pipelines कैसे structured हों, और code कैसे organize, configure और document किया जाए।
 
 Pipeline निर्माण project शुरू करने से पहले, हमें उस structure और organization को समझना होगा।
-तो आइए देखें कि `nf-core/demo` repository में pipeline code कैसे organize किया गया है, उस `pipelines` symlink का उपयोग करके जो तुमने [Getting started](00_orientation.md) के दौरान बनाया था।
+तो आइए देखें कि `nf-core/demo` repository में pipeline code कैसे organize किया गया है, `pipelines/nf-core/demo` में उस copy का उपयोग करके जिसे तुमने [Getting started](00_orientation.md) के दौरान clone किया था।
 
-याद दिलाने के लिए, तुम `tree` का उपयोग कर सकते हो या file explorer का उपयोग करके `nf-core/demo` डायरेक्टरी खोज सकते हो।
+याद दिलाने के लिए, तुम `tree` का उपयोग कर सकते हो या file explorer का उपयोग करके `pipelines/nf-core/demo` डायरेक्टरी खोज सकते हो।
 
 ```bash
 tree -L 1 pipelines/nf-core/demo
@@ -129,6 +129,11 @@ tree -L 3 pipelines/nf-core/demo/modules
 
     ```console
     pipelines/nf-core/demo/modules
+    ├── local
+    │   └── cowpy
+    │       ├── environment.yml
+    │       ├── main.nf
+    │       └── meta.yaml
     └── nf-core
         ├── fastqc
         │   ├── environment.yml
@@ -143,11 +148,11 @@ tree -L 3 pipelines/nf-core/demo/modules
         └── seqtk
             └── trim
 
-    7 directories, 6 files
+    9 directories, 9 files
     ```
 
 यहाँ तुम देख सकते हो कि `fastqc` और `multiqc` modules `nf-core` modules के भीतर top level पर हैं, जबकि `trim` module उस toolkit के तहत है जिससे वह संबंधित है, `seqtk`।
-इस case में कोई `local` modules नहीं हैं।
+`local` के तहत `cowpy` module एक local module है, जो इस pipeline के लिए विशेष रूप से लिखा गया है न कि nf-core modules repository से install किया गया है।
 
 Process को describe करने वाली module code फ़ाइल को हमेशा `main.nf` कहा जाता है, और इसके साथ tests और `.yml` फ़ाइलें होती हैं जिन्हें हम अभी के लिए ignore करेंगे।
 
@@ -262,17 +267,16 @@ nf-core pipelines create
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 4.0.2 - https://nf-co.re
+        nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Launching interactive nf-core pipeline creation tool.
     ```
 
-एक बार TUI समाप्त हो जाने के बाद, tool रिपोर्ट करता है कि उसने pipeline बनाई, उसका container configuration generate किया, और नई pipeline के लिए एक local git repository initialize की:
+एक बार TUI समाप्त हो जाने के बाद, tool रिपोर्ट करता है कि उसने pipeline बनाई और नई pipeline के लिए एक local git repository initialize की:
 
 ```console
 INFO     Creating new pipeline: 'hello'
-INFO     Generated container configs for the pipeline successfully.
 INFO     Initialising local pipeline git repository
 INFO     Pipeline created: ./core-hello
 ```
@@ -394,6 +398,27 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
 
 `WARN: Unrecognized config option 'validation.*'` लाइनें नए बनाए गए template में pinned nf-schema plugin के version से आती हैं।
 ये harmless हैं और run को प्रभावित नहीं करती हैं।
+
+इस course का बाकी हिस्सा nf-schema 2.7.2 का उपयोग करता है, जो ये warnings produce नहीं करता।
+`core-hello/nextflow.config` खोलो और `plugins` block में plugin version अपडेट करो:
+
+=== "बाद में"
+
+    ```groovy title="core-hello/nextflow.config" linenums="246" hl_lines="3"
+    // Nextflow plugins
+    plugins {
+        id 'nf-schema@2.7.2' // pipeline parameters का validation और sample sheet से input channel का निर्माण
+    }
+    ```
+
+=== "पहले"
+
+    ```groovy title="core-hello/nextflow.config" linenums="246" hl_lines="3"
+    // Nextflow plugins
+    plugins {
+        id 'nf-schema@2.5.1' // pipeline parameters का validation और sample sheet से input channel का निर्माण
+    }
+    ```
 
 यह तुम्हें दिखाता है कि सभी बुनियादी wiring जगह पर है।
 तो outputs कहाँ हैं? क्या कोई हैं?
@@ -746,7 +771,7 @@ workflow {
 
 === "पहले"
 
-    ```groovy title="original-hello/hello.nf" linenums="21"
+    ```groovy title="original-hello/hello.nf" linenums="22"
         // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
@@ -766,7 +791,7 @@ workflow {
 
 अंत में, एक `emit` statement जोड़ो जो घोषित करता है कि workflow के अंतिम outputs क्या हैं।
 
-```groovy title="original-hello/hello.nf" linenums="35"
+```groovy title="original-hello/hello.nf" linenums="36"
     emit:
     cowpy_hellos = cowpy.out
 ```
@@ -915,7 +940,7 @@ nextflow run ./original-hello
 
 ## 4. Updated workflow logic को placeholder workflow में fit करें
 
-अब जब हमने सत्यापित कर लिया है कि हमारी composable workflow सही तरीके से काम करती है, तो आइए section 1 में बनाए गए nf-core pipeline scaffold पर लौटें।
+अब जब हमने सत्यापित कर लिया है कि हमारी composable workflow सही तरीके से काम करती है, तो आइए section 2 में बनाए गए nf-core pipeline scaffold पर लौटें।
 हम अभी विकसित की गई composable workflow को nf-core template structure में integrate करना चाहते हैं, इसलिए अंतिम परिणाम कुछ इस तरह दिखना चाहिए।
 
 <figure class="excalidraw">
@@ -924,7 +949,7 @@ nextflow run ./original-hello
 
 तो हम इसे कैसे होने देते हैं? आइए `core-hello/workflows/hello.nf` (nf-core scaffold) में `HELLO` workflow की वर्तमान सामग्री देखें।
 
-```groovy title="core-hello/workflows/hello.nf" linenums="1"
+```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 21 53"
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -989,10 +1014,10 @@ workflow HELLO {
 ```
 
 Highlighted lines composable workflow की संरचना define करती हैं: `workflow HELLO {`, `take:`, `main:`, और `emit:`।
-Lines 17–34 के बीच का बड़ा block अधिक महत्वपूर्ण है: यह topic channels का उपयोग करके software version capture को handle करता है, एक mechanism जिसे nf-core 2026 में सभी pipelines में लागू कर रहा है।
+Lines 25–52 के बीच का बड़ा block अधिक महत्वपूर्ण है: यह topic channels का उपयोग करके software version capture को handle करता है, एक mechanism जिसे nf-core 2026 में सभी pipelines में लागू कर रहा है।
 हम इसे भाग 3 में समझाएंगे; अभी के लिए, इसे boilerplate मानो जिसे तुम बिना छुए छोड़ सकते हो।
 
-हमें section 2 में विकसित मूल workflow के composable संस्करण से प्रासंगिक कोड जोड़ने की आवश्यकता है।
+हमें section 3 में विकसित मूल workflow के composable संस्करण से प्रासंगिक कोड जोड़ने की आवश्यकता है।
 
 हम इसे निम्नलिखित चरणों में निपटाने जा रहे हैं:
 
@@ -1041,7 +1066,7 @@ tree core-hello/modules
 
 ये `original-hello/hello.nf` workflow में import statements थे:
 
-```groovy title="original-hello/hello.nf" linenums="9"
+```groovy title="original-hello/hello.nf" linenums="10"
 // Modules include करें
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
@@ -1089,7 +1114,7 @@ include { cowpy } from './modules/cowpy.nf'
 nf-core project में samplesheet की अवधारणा के आसपास बहुत सारी पूर्व-निर्मित कार्यक्षमता है, जो आमतौर पर columnar डेटा वाली एक CSV फ़ाइल है।
 चूंकि यह मूल रूप से वही है जो हमारी `greetings.csv` फ़ाइल है, हम वर्तमान `take` घोषणा को जैसा है वैसा रखेंगे, और अगले चरण में बस इनपुट channel के नाम को अपडेट करेंगे।
 
-```groovy title="core-hello/workflows/hello.nf" linenums="17"
+```groovy title="core-hello/workflows/hello.nf" linenums="21"
     take:
     ch_samplesheet // channel: samplesheet read in from --input
     outdir
@@ -1127,7 +1152,7 @@ nf-core project में samplesheet की अवधारणा के आस
 
 === "बाद में"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="15" hl_lines="11-21"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="19" hl_lines="11-21"
     workflow HELLO {
 
         take:
@@ -1185,7 +1210,7 @@ nf-core project में samplesheet की अवधारणा के आस
 
 === "पहले"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="15"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="19"
     workflow HELLO {
 
         take:
@@ -1233,14 +1258,14 @@ nf-core project में samplesheet की अवधारणा के आस
 
 === "बाद में"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="25"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
         // एक अभिवादन emit करें (nf-core samplesheet convention का उपयोग करने के लिए अपडेट किया गया)
         sayHello(ch_samplesheet)
     ```
 
 === "पहले"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="25"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
         // एक अभिवादन emit करें
         sayHello(greeting_ch)
     ```
@@ -1253,7 +1278,7 @@ nf-core project में samplesheet की अवधारणा के आस
 
 === "बाद में"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="71" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="69" hl_lines="2"
         emit:
         cowpy_hellos   = cowpy.out
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
@@ -1261,7 +1286,7 @@ nf-core project में samplesheet की अवधारणा के आस
 
 === "पहले"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="71"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="69"
         emit:
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
@@ -1398,13 +1423,13 @@ nf-core project nested subworkflows का भारी उपयोग कर�
 
 यदि हम उस फ़ाइल को खोलें और नीचे scroll करें, तो हम कोड के इस chunk पर आते हैं:
 
-```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76"
+```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84"
     //
     // params.input के माध्यम से प्रदान की गई इनपुट फ़ाइल से channel बनाएं
     //
 
     channel
-        .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+        .fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
         .map {
             meta, fastq_1, fastq_2 ->
                 if (!fastq_2) {
@@ -1463,7 +1488,7 @@ nf-core project nested subworkflows का भारी उपयोग कर�
 
 === "बाद में"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-7"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5-7"
         //
         // params.input के माध्यम से प्रदान की गई इनपुट फ़ाइल से channel बनाएं
         //
@@ -1479,13 +1504,13 @@ nf-core project nested subworkflows का भारी उपयोग कर�
 
 === "पहले"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-23"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5-23"
         //
         // params.input के माध्यम से प्रदान की गई इनपुट फ़ाइल से channel बनाएं
         //
 
         channel
-            .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+            .fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
             .map {
                 meta, fastq_1, fastq_2 ->
                     if (!fastq_2) {
@@ -1657,6 +1682,7 @@ nextflow run core-hello --outdir core-hello-results -profile test,docker
     ```console
      N E X T F L O W   ~  version 26.04.4
 
+    Downloading plugin nf-schema@2.7.2
     Launching `core-hello/main.nf` [voluminous_caravaggio] revision: d6bbba9521
 
     Input/output options
@@ -1721,7 +1747,7 @@ tree core-hello-results
         ├── pipeline_dag_2026-06-23_16-56-58.html
         └── pipeline_dag_2026-06-23_16-58-45.html
 
-    1 directory, 12 files
+    1 directory, 11 files
     ```
 
 तुम देख सकते हो कि पहले run से मिले reports के अलावा हमें execution reports का एक और set मिला, जब workflow अभी भी सिर्फ एक placeholder था।

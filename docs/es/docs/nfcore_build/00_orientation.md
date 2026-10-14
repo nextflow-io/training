@@ -25,7 +25,7 @@ Si está trabajando en este curso por su cuenta, por favor familiarícese con lo
 Este entrenamiento funciona con **Nextflow 25.10.2** o posterior **con el analizador de sintaxis v2**, que es el predeterminado a partir de Nextflow 26.04.
 En nuestro entorno de entrenamiento no necesita hacer nada: ejecuta Nextflow 26.04.4 con el analizador v2. Si está usando un entorno local o personalizado, consulte las [notas de versión](../info/nxf_versions.md).
 
-El entrenamiento además requiere **nf-core tools 4.0.2**.
+El entrenamiento además requiere **nf-core tools 4.1.0**.
 Si usa una versión diferente de las herramientas nf-core, puede tener dificultades para seguir el curso.
 
 Puede verificar qué versión está instalada en su entorno usando el comando `nf-core --version`.
@@ -104,14 +104,11 @@ Usamos secciones colapsables como esta para incluir la salida esperada de comand
 ### Configurar la referencia del pipeline
 
 La Parte 1 de este curso hace referencia al código fuente del pipeline `nf-core/demo` como referencia.
-Descárguelo y cree un acceso directo para explorarlo fácilmente:
+Clónelo en un directorio local para poder explorarlo fácilmente:
 
 ```bash
-nextflow pull nf-core/demo
-ln -s $NXF_HOME/assets pipelines
+nextflow clone nf-core/demo pipelines/nf-core/demo
 ```
-
-Si ya completó el curso [Use nf-core](../nfcore_use/index.md), `nf-core/demo` ya está almacenado en caché localmente, pero el enlace simbólico anterior aún debe crearse en este directorio.
 
 ## Lista de verificación de preparación
 
@@ -119,7 +116,7 @@ Si ya completó el curso [Use nf-core](../nfcore_use/index.md), `nf-core/demo` y
 
 - [ ] Entiendo el objetivo de este curso y sus requisitos previos
 - [ ] Mi entorno está funcionando
-- [ ] Estoy usando nf-core tools 4.0.2 (verifique con `nf-core --version`)
+- [ ] Estoy usando nf-core tools 4.1.0 (verifique con `nf-core --version`)
 - [ ] He establecido mi directorio de trabajo apropiadamente
 
 Si puede marcar todas las casillas, está listo para comenzar.

@@ -25,7 +25,7 @@ Wenn du diesen Kurs selbstständig durcharbeitest, mache dich bitte mit den [Gru
 Dieses Training funktioniert mit Nextflow 25.10.2 oder neuer **mit dem v2-Syntax-Parser**, der ab Nextflow 26.04 standardmäßig aktiviert ist.
 In unserer Trainingsumgebung musst du nichts weiter tun: Sie läuft mit Nextflow 26.04.4 und dem v2-Parser. Wenn du eine lokale oder benutzerdefinierte Umgebung verwendest, lies die [Versionshinweise](../info/nxf_versions.md).
 
-Das Training erfordert zusätzlich **nf-core tools 4.0.2**.
+Das Training erfordert zusätzlich **nf-core tools 4.1.0**.
 Wenn du eine andere Version der nf-core-Tools verwendest, könntest du Schwierigkeiten haben, dem Training zu folgen.
 
 Du kannst überprüfen, welche Version in deiner Umgebung installiert ist, indem du den Befehl `nf-core --version` verwendest.
@@ -104,14 +104,11 @@ Wir verwenden aufklappbare Abschnitte wie diesen, um die erwartete Befehlsausgab
 ### Die Pipeline-Referenz einrichten
 
 Teil 1 dieses Kurses bezieht sich auf den Quellcode der `nf-core/demo`-Pipeline als Referenz.
-Lade sie herunter und erstelle eine Verknüpfung, um sie einfach zu durchsuchen:
+Klone sie in ein lokales Verzeichnis, um sie einfach zu durchsuchen:
 
 ```bash
-nextflow pull nf-core/demo
-ln -s $NXF_HOME/assets pipelines
+nextflow clone nf-core/demo pipelines/nf-core/demo
 ```
-
-Wenn du den Kurs [Use nf-core](../nfcore_use/index.md) bereits abgeschlossen hast, ist `nf-core/demo` bereits lokal gecacht, aber der Symlink oben muss trotzdem neu in diesem Verzeichnis erstellt werden.
 
 ## Bereitschafts-Checkliste
 
@@ -119,7 +116,7 @@ Denkst du, du bist bereit loszulegen?
 
 - [ ] Ich verstehe das Ziel dieses Kurses und seine Voraussetzungen
 - [ ] Meine Umgebung ist eingerichtet und läuft
-- [ ] Ich verwende nf-core tools 4.0.2 (überprüfen mit `nf-core --version`)
+- [ ] Ich verwende nf-core tools 4.1.0 (überprüfen mit `nf-core --version`)
 - [ ] Ich habe mein Arbeitsverzeichnis entsprechend gesetzt
 
 Wenn du alle Kästchen abhaken kannst, kann es losgehen.

@@ -25,7 +25,7 @@ Bu kursu kendi başınıza takip ediyorsanız, lütfen daha fazla ayrıntı içi
 Bu eğitim, varsayılan olarak Nextflow 26.04 sürümünden itibaren etkin olan **v2 sözdizimi ayrıştırıcısıyla** birlikte **Nextflow 25.10.2 veya sonrası** ile çalışmaktadır.
 Eğitim ortamımızda herhangi bir şey yapmanıza gerek yoktur: v2 ayrıştırıcısıyla Nextflow 26.04.4 çalıştırılmaktadır. Yerel veya özel bir ortam kullanıyorsanız [sürüm notlarına](../info/nxf_versions.md) bakın.
 
-Eğitim ayrıca **nf-core tools 4.0.2** gerektirir.
+Eğitim ayrıca **nf-core tools 4.1.0** gerektirir.
 nf-core araçlarının farklı bir sürümünü kullanırsanız, takip etmekte zorluk yaşayabilirsiniz.
 
 Ortamınızda hangi sürümün yüklü olduğunu `nf-core --version` komutunu kullanarak kontrol edebilirsiniz.
@@ -104,14 +104,11 @@ Beklenen komut çıktısını özlü bir şekilde dahil etmek için bunun gibi d
 ### Pipeline referansını ayarlama
 
 Bu kursun 1. Bölümü, referans olarak `nf-core/demo` pipeline'ının kaynak kodunu kullanır.
-Pipeline'ı indirin ve kolayca göz atabilmek için bir kısayol oluşturun:
+Kolayca göz atabilmek için yerel bir dizine klonlayın:
 
 ```bash
-nextflow pull nf-core/demo
-ln -s $NXF_HOME/assets pipelines
+nextflow clone nf-core/demo pipelines/nf-core/demo
 ```
-
-[nf-core'u Kullanma](../nfcore_use/index.md) kursunu daha önce tamamladıysanız, `nf-core/demo` yerel olarak önbellekte mevcuttur; ancak yukarıdaki sembolik bağlantının bu dizinde yeniden oluşturulması gerekir.
 
 ## Hazırlık kontrol listesi
 
@@ -119,7 +116,7 @@ Başlamaya hazır olduğunuzu mu düşünüyorsunuz?
 
 - [ ] Bu kursun hedefini ve ön koşullarını anlıyorum
 - [ ] Ortamım çalışır durumda
-- [ ] nf-core tools 4.0.2 kullandığımı doğruladım (`nf-core --version` ile kontrol edin)
+- [ ] nf-core tools 4.1.0 kullandığımı doğruladım (`nf-core --version` ile kontrol edin)
 - [ ] Çalışma dizinini uygun şekilde ayarladım
 
 Tüm kutuları işaretleyebiliyorsanız, başlamaya hazırsınız.

@@ -1085,11 +1085,12 @@ workflow {
 }
 ```
 
-**1c.** Usar el [operador](https://www.nextflow.io/docs/latest/reference/operator.html#collect) `collect()`:
+**1c.** Usar el [operador](https://www.nextflow.io/docs/latest/reference/operator.html#collect) `collect()`.
+`collect()` emite una lista, así que usa `map` para extraer el elemento único:
 
 ```groovy title="exhausted.nf (fixed - Option 1c)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference').collect()  // Convertir a value channel
+    reference_ch = channel.of('baseline_reference').collect().map { refs -> refs[0] }  // Convertir a value channel
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1222,9 +1223,44 @@ Puedes ver que estamos generando un canal compuesto de tuplas: `['sample1', 'fil
 
 #### Corregir el código
 
-Para corregir esto, si el proceso requiere ambas entradas podríamos ajustar el proceso para aceptar una tupla:
+Hay dos formas de corregir esto:
 
-=== "Opción 1: Aceptar tupla en el proceso"
+1. Reformar los datos para que se ajusten al proceso
+2. Cambiar el proceso para que se ajuste a los datos
+
+=== "Opción 1: Extraer el primer elemento"
+
+    === "Después"
+
+        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
+        workflow {
+
+            // El canal emite tuplas, pero el proceso espera valores únicos
+            input_ch = channel.of(
+              ['sample1', 'file1.txt'],
+              ['sample2', 'file2.txt'],
+              ['sample3', 'file3.txt']
+            )
+            PROCESS_FILES(input_ch.map { sample_id, file -> sample_id })  // Corregido: Extraer el primer elemento
+        }
+        ```
+
+    === "Antes"
+
+        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
+        workflow {
+
+            // El canal emite tuplas, pero el proceso espera valores únicos
+            input_ch = channel.of(
+              ['sample1', 'file1.txt'],
+              ['sample2', 'file2.txt'],
+              ['sample3', 'file3.txt']
+            )
+            PROCESS_FILES(input_ch)
+        }
+        ```
+
+=== "Opción 2: Aceptar tupla en el proceso"
 
     === "Después"
 
@@ -1286,41 +1322,9 @@ Para corregir esto, si el proceso requiere ambas entradas podríamos ajustar el 
         }
         ```
 
-=== "Opción 2: Extraer el primer elemento"
-
-    === "Después"
-
-        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
-        workflow {
-
-            // El canal emite tuplas, pero el proceso espera valores únicos
-            input_ch = channel.of(
-              ['sample1', 'file1.txt'],
-              ['sample2', 'file2.txt'],
-              ['sample3', 'file3.txt']
-            )
-            PROCESS_FILES(input_ch.map { it[0] })  // Corregido: Extraer el primer elemento
-        }
-        ```
-
-    === "Antes"
-
-        ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
-        workflow {
-
-            // El canal emite tuplas, pero el proceso espera valores únicos
-            input_ch = channel.of(
-              ['sample1', 'file1.txt'],
-              ['sample2', 'file2.txt'],
-              ['sample3', 'file3.txt']
-            )
-            PROCESS_FILES(input_ch)
-        }
-        ```
-
 #### Ejecutar el pipeline
 
-Elige una de las soluciones y vuelve a ejecutar el workflow (la salida a continuación usa la Opción 1):
+Elige una de las soluciones y vuelve a ejecutar el workflow (la salida a continuación usa la Opción 2):
 
 ```bash
 nextflow run bad_channel_shape.nf
@@ -1336,6 +1340,105 @@ nextflow run bad_channel_shape.nf
     executor >  local (3)
     [81/d0f3ea] PROCESS_FILES (1) | 3 of 3 ✔
     ```
+
+#### Más allá: tipos de registro
+
+Las opciones 1 y 2 corrigen esta discrepancia, pero ninguna previene la siguiente.
+Una tupla es posicional, por lo que el proceso solo sabe que recibe una lista de valores.
+Si un canal emite los valores en el orden incorrecto, o deja uno fuera, el error aparece más tarde y apunta al síntoma en lugar de la causa.
+
+Los tipos de registro abordan esto dando a los datos una forma declarada.
+Un registro define campos con nombre y tipo, y un proceso declara el tipo de registro que acepta.
+Nextflow verifica cada valor contra esa declaración.
+
+!!! note "Los tipos de registro son una nueva funcionalidad"
+
+    Los tipos de registro se introdujeron en Nextflow 26.04 y requieren el indicador `nextflow.enable.types`.
+    En la versión 26.04, Nextflow muestra una advertencia de que el tipado estático es una funcionalidad en vista previa.
+    Un futuro curso de capacitación los cubrirá en detalle.
+
+Aquí está el mismo workflow escrito con un registro:
+
+```groovy title="bad_channel_shape.nf" hl_lines="3 5-8 12 15 19 27-29" linenums="1"
+#!/usr/bin/env nextflow
+
+nextflow.enable.types = true
+
+record Sample {
+    id: String
+    file_name: String
+}
+
+process PROCESS_FILES {
+    input:
+        sample: Sample  // Aceptar un registro con campos con nombre
+
+    output:
+        file("${sample.id}_output.txt")
+
+    script:
+    """
+    echo "Processing ${sample.id}" > ${sample.id}_output.txt
+    """
+}
+
+workflow {
+
+    // El canal emite registros con campos con nombre
+    input_ch = channel.of(
+      record(id: 'sample1', file_name: 'file1.txt'),
+      record(id: 'sample2', file_name: 'file2.txt'),
+      record(id: 'sample3', file_name: 'file3.txt')
+    )
+    PROCESS_FILES(input_ch)
+}
+```
+
+Los cambios respecto al original son:
+
+- `nextflow.enable.types = true` habilita la sintaxis tipada
+- `record Sample { ... }` declara los campos que cada muestra debe tener
+- `sample: Sample` declara que el proceso acepta un registro `Sample`
+- `record(id: ..., file_name: ...)` crea cada registro en el canal
+- `sample.id` accede a un campo por nombre en lugar de por posición
+
+Si a un registro le falta un campo, Nextflow nombra el campo en el error.
+Para ver esto, elimina `id` del segundo registro:
+
+```groovy title="bad_channel_shape.nf" hl_lines="3" linenums="26"
+    input_ch = channel.of(
+      record(id: 'sample1', file_name: 'file1.txt'),
+      record(file_name: 'file2.txt'),
+      record(id: 'sample3', file_name: 'file3.txt')
+    )
+```
+
+Ejecuta el workflow:
+
+```bash
+nextflow run bad_channel_shape.nf
+```
+
+??? failure "Salida del comando"
+
+    ```console
+     N E X T F L O W   ~  version 26.10.0
+
+    Launching `bad_channel_shape.nf` [condescending_sammet] revision: 15c9f9aa87
+
+    ERROR ~ Error executing process > 'PROCESS_FILES (2)'
+
+    Caused by:
+      [PROCESS_FILES (2)] input field `id` at index 0 cannot be null -- append `?` to the type annotation to mark it as nullable
+
+
+    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+
+     -- Check '.nextflow.log' file for details
+    ```
+
+Este error requiere Nextflow 26.10 o posterior.
+En Nextflow 26.04, la tarea se ejecuta con `id` establecido en `null` y escribe `null_output.txt`.
 
 ### 2.4. Técnicas de depuración de canales
 
@@ -1381,9 +1484,9 @@ workflow {
       ['sample2', 'file2.txt'],
       ['sample3', 'file3.txt']
     )
-    .view { "Channel content: $it" }  // Depuración: Mostrar el contenido original del canal
-    .map { tuple -> tuple[0] }        // Transformación: Extraer el primer elemento
-    .view { "After mapping: $it" }    // Depuración: Mostrar el contenido del canal transformado
+    .view { item -> "Channel content: ${item}" }  // Depuración: Mostrar el contenido original del canal
+    .map { sample_id, file -> sample_id }         // Transformación: Extraer el primer elemento
+    .view { item -> "After mapping: ${item}" }    // Depuración: Mostrar el contenido del canal transformado
 
     PROCESS_FILES(input_ch)
 }
@@ -2386,7 +2489,7 @@ Ahora es el momento de poner en práctica el enfoque sistemático de depuración
         ```
         **Corrección:** Pasa solo los IDs de muestra
         ```groovy linenums="87"
-        heavy_ch = heavyProcess(input_ch.map{it[0]})
+        heavy_ch = heavyProcess(input_ch.map { sample_id, fastq -> sample_id })
         ```
 
         Ahora `heavyProcess` se ejecuta, pero alcanza su límite de tiempo. En el executor `local`, el mensaje es `process hasn't exited` (junto con un mensaje `WARN: Killing running tasks`) en lugar de un timeout explícito, así que relaciona la tarea cancelada con su directiva `time`:
@@ -2512,7 +2615,7 @@ Ahora es el momento de poner en práctica el enfoque sistemático de depuración
 
             processed_ch = processFiles(input_ch)
 
-            heavy_ch = heavyProcess(input_ch.map{it[0]})
+            heavy_ch = heavyProcess(input_ch.map { sample_id, fastq -> sample_id })
 
             file_ch = handleFiles(heavy_ch)
 
@@ -2591,7 +2694,7 @@ echo "\${bash_var}"          // Variable Bash (escapada)
 
 ```groovy
 // Inspeccionar el contenido del canal
-my_channel.view { "Content: $it" }
+my_channel.view { item -> "Content: ${item}" }
 
 // Convertir queue channel a value channel (previene el agotamiento)
 reference_ch = channel.value('ref.fa')
