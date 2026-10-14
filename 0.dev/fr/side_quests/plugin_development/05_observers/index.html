@@ -2961,9 +2961,37 @@ Examinez-la :</p>
 <p>Nous avons remplacé le style Java <code>List.&lt;TraceObserver&gt;of(...)</code> par le littéral de liste Groovy plus simple <code>[...]</code>.
 Les deux retournent une <code>Collection</code>, mais la syntaxe Groovy est plus lisible lorsqu'on ajoute plusieurs éléments.</p>
 </div>
+<p>Le test unitaire du template pour la factory attend exactement un observateur, il échoue donc maintenant que la factory en crée deux.
+Mettez à jour <code>nf-greeting/src/test/groovy/training/plugin/GreetingObserverTest.groovy</code> pour en attendre deux :</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Après</label><label for="__tabbed_2_2">Avant</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GreetingObserverTest.groovy</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-17">17</a></span>
+<span class="normal"><a href="#__codelineno-9-18">18</a></span>
+<span class="normal"><a href="#__codelineno-9-19">19</a></span>
+<span class="normal"><a href="#__codelineno-9-20">20</a></span>
+<span class="normal"><a href="#__codelineno-9-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-17" name="__codelineno-9-17"></a><span class="w">        </span><span class="nl">then:</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18"></a><span class="hll"><span class="w">        </span><span class="n">result</span><span class="o">.</span><span class="na">size</span><span class="o">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span>
+</span><a id="__codelineno-9-19" name="__codelineno-9-19"></a><span class="hll"><span class="w">        </span><span class="n">result</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">GreetingObserver</span>
+</span><a id="__codelineno-9-20" name="__codelineno-9-20"></a><span class="hll"><span class="w">        </span><span class="n">result</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">TaskCounterObserver</span>
+</span><a id="__codelineno-9-21" name="__codelineno-9-21"></a><span class="w">    </span><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GreetingObserverTest.groovy</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-17">17</a></span>
+<span class="normal"><a href="#__codelineno-10-18">18</a></span>
+<span class="normal"><a href="#__codelineno-10-19">19</a></span>
+<span class="normal"><a href="#__codelineno-10-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="w">        </span><span class="nl">then:</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18"></a><span class="hll"><span class="w">        </span><span class="n">result</span><span class="o">.</span><span class="na">size</span><span class="o">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span>
+</span><a id="__codelineno-10-19" name="__codelineno-10-19"></a><span class="hll"><span class="w">        </span><span class="n">result</span><span class="o">.</span><span class="na">first</span><span class="o">()</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">GreetingObserver</span>
+</span><a id="__codelineno-10-20" name="__codelineno-10-20"></a><span class="w">    </span><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
 <h3 id="23-compiler-installer-et-tester">2.3. Compiler, installer et tester<a class="headerlink" href="#23-compiler-installer-et-tester" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">cd</span><span class="w"> </span>nf-greeting<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>..
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>nextflow<span class="w"> </span>run<span class="w"> </span>greet.nf<span class="w"> </span>-ansi-log<span class="w"> </span><span class="nb">false</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nb">cd</span><span class="w"> </span>nf-greeting<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>..
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>nextflow<span class="w"> </span>run<span class="w"> </span>greet.nf<span class="w"> </span>-ansi-log<span class="w"> </span><span class="nb">false</span>
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Pourquoi <code>-ansi-log false</code> ?</p>
@@ -2972,15 +3000,15 @@ Cela signifie que vous ne verriez que le <em>dernier</em> comptage de tâches, e
 <p>L'utilisation de <code>-ansi-log false</code> désactive ce comportement et affiche toutes les sorties de manière séquentielle, ce qui est indispensable lors du test d'observateurs qui affichent des messages pendant l'exécution.</p>
 </div>
 <p>Vous devriez voir "✓ Task completed!" affiché cinq fois (une fois par tâche), entremêlé avec la sortie existante du pipeline :</p>
-<div class="highlight"><span class="filename">Output (partial)</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">...</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="go">[9b/df7630] Submitted process &gt; SAY_HELLO (4)</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="go">Decorated: *** Hello ***</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="go">✓ Task completed!</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="go">✓ Task completed!</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="go">Decorated: *** Hola ***</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="go">✓ Task completed!</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="go">...</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="go">Pipeline complete! 👋</span>
+<div class="highlight"><span class="filename">Output (partial)</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">...</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="go">[9b/df7630] Submitted process &gt; SAY_HELLO (4)</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="go">Decorated: *** Hello ***</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="go">✓ Task completed!</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="go">✓ Task completed!</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="go">Decorated: *** Hola ***</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="go">✓ Task completed!</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="go">...</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="go">Pipeline complete! 👋</span>
 </code></pre></div>
 <p>L'observateur fonctionne.
 Chaque fois qu'une tâche se termine, Nextflow appelle <code>onProcessComplete</code>, et notre implémentation affiche un message.</p>
@@ -2997,61 +3025,63 @@ Cela signifie qu'un observateur peut accumuler un état à travers plusieurs év
 Chaque fois qu'une tâche se termine, le compteur augmente d'une unité.
 Lorsque l'ensemble du workflow se termine, l'observateur affiche le total final.</p>
 <p>Mettez à jour <code>TaskCounterObserver.groovy</code> avec les modifications mises en évidence :</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-11-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-11-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-11-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-11-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-11-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-11-10">10</a></span>
-<span class="normal"><a href="#__codelineno-11-11">11</a></span>
-<span class="normal"><a href="#__codelineno-11-12">12</a></span>
-<span class="normal"><a href="#__codelineno-11-13">13</a></span>
-<span class="normal"><a href="#__codelineno-11-14">14</a></span>
-<span class="normal"><a href="#__codelineno-11-15">15</a></span>
-<span class="normal"><a href="#__codelineno-11-16">16</a></span>
-<span class="normal"><a href="#__codelineno-11-17">17</a></span>
-<span class="normal"><a href="#__codelineno-11-18">18</a></span>
-<span class="normal"><a href="#__codelineno-11-19">19</a></span>
-<span class="normal"><a href="#__codelineno-11-20">20</a></span>
-<span class="normal"><a href="#__codelineno-11-21">21</a></span>
-<span class="normal"><a href="#__codelineno-11-22">22</a></span>
-<span class="normal"><a href="#__codelineno-11-23">23</a></span>
-<span class="normal"><a href="#__codelineno-11-24">24</a></span>
-<span class="normal"><a href="#__codelineno-11-25">25</a></span>
-<span class="normal"><a href="#__codelineno-11-26">26</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="kn">package</span><span class="w"> </span><span class="n">training</span><span class="o">.</span><span class="na">plugin</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2"></a>
-<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">groovy.transform.CompileStatic</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.processor.TaskHandler</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.trace.TraceObserver</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.trace.TraceRecord</span>
-<a id="__codelineno-11-7" name="__codelineno-11-7"></a>
-<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="cm">/**</span>
-<a id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="cm"> * Observateur qui compte les tâches terminées</span>
-<a id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="cm"> */</span>
-<a id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="nd">@CompileStatic</span>
-<a id="__codelineno-11-12" name="__codelineno-11-12"></a><span class="kd">class</span><span class="w"> </span><span class="nc">TaskCounterObserver</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">TraceObserver</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-11-13" name="__codelineno-11-13"></a>
-<a id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="hll"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">taskCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">                </span><span class="c1">// (1)!</span>
-</span><a id="__codelineno-11-15" name="__codelineno-11-15"></a>
-<a id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="w">    </span><span class="nd">@Override</span>
-<a id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">onProcessComplete</span><span class="o">(</span><span class="n">TaskHandler</span><span class="w"> </span><span class="n">handler</span><span class="o">,</span><span class="w"> </span><span class="n">TraceRecord</span><span class="w"> </span><span class="n">trace</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="hll"><span class="w">        </span><span class="n">taskCount</span><span class="o">++</span><span class="w">                          </span><span class="c1">// (2)!</span>
-</span><a id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"📊 Tasks completed so far: ${taskCount}"</span>
-</span><a id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-11-21" name="__codelineno-11-21"></a>
-<a id="__codelineno-11-22" name="__codelineno-11-22"></a><span class="hll"><span class="w">    </span><span class="nd">@Override</span>
-</span><a id="__codelineno-11-23" name="__codelineno-11-23"></a><span class="hll"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">onFlowComplete</span><span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w">                  </span><span class="c1">// (3)!</span>
-</span><a id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"📈 Final task count: ${taskCount}"</span>
-</span><a id="__codelineno-11-25" name="__codelineno-11-25"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-11-26" name="__codelineno-11-26"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-13-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-13-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-13-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-13-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-13-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-13-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-13-10">10</a></span>
+<span class="normal"><a href="#__codelineno-13-11">11</a></span>
+<span class="normal"><a href="#__codelineno-13-12">12</a></span>
+<span class="normal"><a href="#__codelineno-13-13">13</a></span>
+<span class="normal"><a href="#__codelineno-13-14">14</a></span>
+<span class="normal"><a href="#__codelineno-13-15">15</a></span>
+<span class="normal"><a href="#__codelineno-13-16">16</a></span>
+<span class="normal"><a href="#__codelineno-13-17">17</a></span>
+<span class="normal"><a href="#__codelineno-13-18">18</a></span>
+<span class="normal"><a href="#__codelineno-13-19">19</a></span>
+<span class="normal"><a href="#__codelineno-13-20">20</a></span>
+<span class="normal"><a href="#__codelineno-13-21">21</a></span>
+<span class="normal"><a href="#__codelineno-13-22">22</a></span>
+<span class="normal"><a href="#__codelineno-13-23">23</a></span>
+<span class="normal"><a href="#__codelineno-13-24">24</a></span>
+<span class="normal"><a href="#__codelineno-13-25">25</a></span>
+<span class="normal"><a href="#__codelineno-13-26">26</a></span>
+<span class="normal"><a href="#__codelineno-13-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="kn">package</span><span class="w"> </span><span class="n">training</span><span class="o">.</span><span class="na">plugin</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">groovy.transform.CompileStatic</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.processor.TaskHandler</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="hll"><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.atomic.AtomicInteger</span>
+</span><a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.trace.TraceObserver</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.trace.TraceRecord</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8"></a>
+<a id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="cm">/**</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10"></a><span class="cm"> * Observateur qui compte les tâches terminées</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11"></a><span class="cm"> */</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="nd">@CompileStatic</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13"></a><span class="kd">class</span><span class="w"> </span><span class="nc">TaskCounterObserver</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">TraceObserver</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14"></a>
+<a id="__codelineno-13-15" name="__codelineno-13-15"></a><span class="hll"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AtomicInteger</span><span class="w"> </span><span class="n">taskCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AtomicInteger</span><span class="o">()</span><span class="w">  </span><span class="c1">// (1)!</span>
+</span><a id="__codelineno-13-16" name="__codelineno-13-16"></a>
+<a id="__codelineno-13-17" name="__codelineno-13-17"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">onProcessComplete</span><span class="o">(</span><span class="n">TaskHandler</span><span class="w"> </span><span class="n">handler</span><span class="o">,</span><span class="w"> </span><span class="n">TraceRecord</span><span class="w"> </span><span class="n">trace</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19"></a><span class="hll"><span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">taskCount</span><span class="o">.</span><span class="na">incrementAndGet</span><span class="o">()</span><span class="w">                 </span><span class="c1">// (2)!</span>
+</span><a id="__codelineno-13-20" name="__codelineno-13-20"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"📊 Tasks completed so far: ${count}"</span>
+</span><a id="__codelineno-13-21" name="__codelineno-13-21"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-13-22" name="__codelineno-13-22"></a>
+<a id="__codelineno-13-23" name="__codelineno-13-23"></a><span class="hll"><span class="w">    </span><span class="nd">@Override</span>
+</span><a id="__codelineno-13-24" name="__codelineno-13-24"></a><span class="hll"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">onFlowComplete</span><span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w">                                       </span><span class="c1">// (3)!</span>
+</span><a id="__codelineno-13-25" name="__codelineno-13-25"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"📈 Final task count: ${taskCount.get()}"</span>
+</span><a id="__codelineno-13-26" name="__codelineno-13-26"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-13-27" name="__codelineno-13-27"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <ol>
-<li><code>taskCount</code> est une variable qui appartient à l'objet observateur. Elle conserve sa valeur entre les appels de méthodes, ce qui lui permet d'accumuler un comptage sur l'ensemble de l'exécution du workflow. <code>private</code> signifie que seule cette classe peut y accéder.</li>
-<li><code>taskCount++</code> ajoute un au compteur. Cette ligne s'exécute chaque fois qu'une tâche se termine, de sorte que le comptage augmente au fur et à mesure de la progression du workflow.</li>
+<li><code>taskCount</code> est une variable qui appartient à l'objet observateur. Elle conserve sa valeur entre les appels de méthodes, ce qui lui permet d'accumuler un comptage sur l'ensemble de l'exécution du workflow. <code>private</code> signifie que seule cette classe peut y accéder. Nextflow peut signaler plusieurs fins de tâches simultanément depuis différents threads, c'est pourquoi le compteur est un <code>AtomicInteger</code>, qui reste correct lors de mises à jour concurrentes, là où un simple <code>int</code> peut perdre des incréments.</li>
+<li><code>incrementAndGet()</code> ajoute un au compteur et retourne la nouvelle valeur. Cette ligne s'exécute chaque fois qu'une tâche se termine, de sorte que le comptage augmente au fur et à mesure de la progression du workflow.</li>
 <li><code>onFlowComplete</code> est un second hook du cycle de vie. Il s'exécute une fois lorsque le workflow se termine, ce qui en fait un bon endroit pour afficher un résumé.</li>
 </ol>
 <p>En résumé :</p>
@@ -3061,36 +3091,36 @@ Lorsque l'ensemble du workflow se termine, l'observateur affiche le total final.
 <li><code>onFlowComplete</code> s'exécute une fois à la fin, affichant le comptage final</li>
 </ul>
 <p>Recompilez et testez :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nb">cd</span><span class="w"> </span>nf-greeting<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>..
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>nextflow<span class="w"> </span>run<span class="w"> </span>greet.nf<span class="w"> </span>-ansi-log<span class="w"> </span><span class="nb">false</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nb">cd</span><span class="w"> </span>nf-greeting<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>..
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>nextflow<span class="w"> </span>run<span class="w"> </span>greet.nf<span class="w"> </span>-ansi-log<span class="w"> </span><span class="nb">false</span>
 </code></pre></div>
 <details class="example">
 <summary>Sortie</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W  ~  version 26.04.4</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="go">Launching `greet.nf` [pensive_engelbart] - revision: bef1bea9f0</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Pipeline is starting! 🚀</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="go">Reversed: olleH</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="go">Reversed: ruojnoB</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">Reversed: aloH</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="go">Reversed: oaiC</span>
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="go">Reversed: ollaH</span>
-<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="go">[be/bd8e72] Submitted process &gt; SAY_HELLO (2)</span>
-<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="go">[5b/d24c2b] Submitted process &gt; SAY_HELLO (1)</span>
-<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="go">[14/1f9dbe] Submitted process &gt; SAY_HELLO (3)</span>
-<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="go">Decorated: *** Bonjour ***</span>
-<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="go">Decorated: *** Hello ***</span>
-<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="go">[85/a6b3ad] Submitted process &gt; SAY_HELLO (4)</span>
-<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="go">📊 Tasks completed so far: 1</span>
-<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="go">📊 Tasks completed so far: 2</span>
-<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="go">Decorated: *** Hola ***</span>
-<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="go">📊 Tasks completed so far: 3</span>
-<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="go">Decorated: *** Ciao ***</span>
-<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="go">[3c/be6686] Submitted process &gt; SAY_HELLO (5)</span>
-<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a><span class="go">📊 Tasks completed so far: 4</span>
-<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a><span class="go">Decorated: *** Hallo ***</span>
-<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a><span class="go">📊 Tasks completed so far: 5</span>
-<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a><span class="go">Pipeline complete! 👋</span>
-<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a><span class="go">📈 Final task count: 5</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">N E X T F L O W  ~  version 26.04.4</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="go">Launching `greet.nf` [pensive_engelbart] - revision: bef1bea9f0</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="go">Pipeline is starting! 🚀</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="go">Reversed: olleH</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="go">Reversed: ruojnoB</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="go">Reversed: aloH</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="go">Reversed: oaiC</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="go">Reversed: ollaH</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="go">[be/bd8e72] Submitted process &gt; SAY_HELLO (2)</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="go">[5b/d24c2b] Submitted process &gt; SAY_HELLO (1)</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="go">[14/1f9dbe] Submitted process &gt; SAY_HELLO (3)</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="go">Decorated: *** Bonjour ***</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="go">Decorated: *** Hello ***</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="go">[85/a6b3ad] Submitted process &gt; SAY_HELLO (4)</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="go">📊 Tasks completed so far: 1</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="go">📊 Tasks completed so far: 2</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a><span class="go">Decorated: *** Hola ***</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a><span class="go">📊 Tasks completed so far: 3</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a><span class="go">Decorated: *** Ciao ***</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a><span class="go">[3c/be6686] Submitted process &gt; SAY_HELLO (5)</span>
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a><span class="go">📊 Tasks completed so far: 4</span>
+<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a><span class="go">Decorated: *** Hallo ***</span>
+<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a><span class="go">📊 Tasks completed so far: 5</span>
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a><span class="go">Pipeline complete! 👋</span>
+<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a><span class="go">📈 Final task count: 5</span>
 </code></pre></div>
 <p>Les messages du compteur sont entremêlés avec les soumissions de tâches car les observateurs s'exécutent au fur et à mesure que les tâches se terminent.</p>
 </details>
@@ -3100,76 +3130,10 @@ Lorsque l'ensemble du workflow se termine, l'observateur affiche le total final.
 La méthode <code>onFilePublish</code> reçoit les chemins de destination et de source, que vous pouvez utiliser pour journaliser, valider ou traiter les sorties publiées.</p>
 <h3 id="31-ajouter-un-repertoire-de-publication">3.1. Ajouter un répertoire de publication<a class="headerlink" href="#31-ajouter-un-repertoire-de-publication" title="Permanent link">&para;</a></h3>
 <p>Tout d'abord, mettez à jour <code>greet.nf</code> pour que le processus <code>SAY_HELLO</code> publie ses fichiers de sortie :</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Après</label><label for="__tabbed_2_2">Avant</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Après</label><label for="__tabbed_3_2">Avant</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">greet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-10">10</a></span>
-<span class="normal"><a href="#__codelineno-14-11">11</a></span>
-<span class="normal"><a href="#__codelineno-14-12">12</a></span>
-<span class="normal"><a href="#__codelineno-14-13">13</a></span>
-<span class="normal"><a href="#__codelineno-14-14">14</a></span>
-<span class="normal"><a href="#__codelineno-14-15">15</a></span>
-<span class="normal"><a href="#__codelineno-14-16">16</a></span>
-<span class="normal"><a href="#__codelineno-14-17">17</a></span>
-<span class="normal"><a href="#__codelineno-14-18">18</a></span>
-<span class="normal"><a href="#__codelineno-14-19">19</a></span>
-<span class="normal"><a href="#__codelineno-14-20">20</a></span>
-<span class="normal"><a href="#__codelineno-14-21">21</a></span>
-<span class="normal"><a href="#__codelineno-14-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-10" name="__codelineno-14-10"></a><span class="n">process</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-14-11" name="__codelineno-14-11"></a><span class="hll"><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">'results'</span>
-</span><a id="__codelineno-14-12" name="__codelineno-14-12"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-14-13" name="__codelineno-14-13"></a><span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
-<a id="__codelineno-14-14" name="__codelineno-14-14"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-14-15" name="__codelineno-14-15"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'greeting.txt'</span>
-<a id="__codelineno-14-16" name="__codelineno-14-16"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-14-17" name="__codelineno-14-17"></a><span class="w">    </span><span class="c1">// Utilise notre fonction de plugin personnalisée pour décorer le message</span>
-<a id="__codelineno-14-18" name="__codelineno-14-18"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">decorated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decorateGreeting</span><span class="o">(</span><span class="n">greeting</span><span class="o">)</span>
-<a id="__codelineno-14-19" name="__codelineno-14-19"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-14-20" name="__codelineno-14-20"></a><span class="s2">    echo '$decorated' &gt; greeting.txt</span>
-<a id="__codelineno-14-21" name="__codelineno-14-21"></a><span class="s2">    """</span>
-<a id="__codelineno-14-22" name="__codelineno-14-22"></a><span class="o">}</span>
-</code></pre></div></td></tr></table></div>
-</div>
-<div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">greet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-10">10</a></span>
-<span class="normal"><a href="#__codelineno-15-11">11</a></span>
-<span class="normal"><a href="#__codelineno-15-12">12</a></span>
-<span class="normal"><a href="#__codelineno-15-13">13</a></span>
-<span class="normal"><a href="#__codelineno-15-14">14</a></span>
-<span class="normal"><a href="#__codelineno-15-15">15</a></span>
-<span class="normal"><a href="#__codelineno-15-16">16</a></span>
-<span class="normal"><a href="#__codelineno-15-17">17</a></span>
-<span class="normal"><a href="#__codelineno-15-18">18</a></span>
-<span class="normal"><a href="#__codelineno-15-19">19</a></span>
-<span class="normal"><a href="#__codelineno-15-20">20</a></span>
-<span class="normal"><a href="#__codelineno-15-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="n">process</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-15-11" name="__codelineno-15-11"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-15-12" name="__codelineno-15-12"></a><span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
-<a id="__codelineno-15-13" name="__codelineno-15-13"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-15-14" name="__codelineno-15-14"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'greeting.txt'</span>
-<a id="__codelineno-15-15" name="__codelineno-15-15"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-15-16" name="__codelineno-15-16"></a><span class="w">    </span><span class="c1">// Utilise notre fonction de plugin personnalisée pour décorer le message</span>
-<a id="__codelineno-15-17" name="__codelineno-15-17"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">decorated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decorateGreeting</span><span class="o">(</span><span class="n">greeting</span><span class="o">)</span>
-<a id="__codelineno-15-18" name="__codelineno-15-18"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-15-19" name="__codelineno-15-19"></a><span class="s2">    echo '$decorated' &gt; greeting.txt</span>
-<a id="__codelineno-15-20" name="__codelineno-15-20"></a><span class="s2">    """</span>
-<a id="__codelineno-15-21" name="__codelineno-15-21"></a><span class="o">}</span>
-</code></pre></div></td></tr></table></div>
-</div>
-</div>
-</div>
-<h3 id="32-ajouter-la-methode-onfilepublish">3.2. Ajouter la méthode onFilePublish<a class="headerlink" href="#32-ajouter-la-methode-onfilepublish" title="Permanent link">&para;</a></h3>
-<p>Ajoutez une méthode <code>onFilePublish</code> et l'import requis à <code>TaskCounterObserver.groovy</code> :</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-16-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-16-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-16-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-16-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-16-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-16-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-16-10">10</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">greet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-10">10</a></span>
 <span class="normal"><a href="#__codelineno-16-11">11</a></span>
 <span class="normal"><a href="#__codelineno-16-12">12</a></span>
 <span class="normal"><a href="#__codelineno-16-13">13</a></span>
@@ -3181,62 +3145,130 @@ La méthode <code>onFilePublish</code> reçoit les chemins de destination et de 
 <span class="normal"><a href="#__codelineno-16-19">19</a></span>
 <span class="normal"><a href="#__codelineno-16-20">20</a></span>
 <span class="normal"><a href="#__codelineno-16-21">21</a></span>
-<span class="normal"><a href="#__codelineno-16-22">22</a></span>
-<span class="normal"><a href="#__codelineno-16-23">23</a></span>
-<span class="normal"><a href="#__codelineno-16-24">24</a></span>
-<span class="normal"><a href="#__codelineno-16-25">25</a></span>
-<span class="normal"><a href="#__codelineno-16-26">26</a></span>
-<span class="normal"><a href="#__codelineno-16-27">27</a></span>
-<span class="normal"><a href="#__codelineno-16-28">28</a></span>
-<span class="normal"><a href="#__codelineno-16-29">29</a></span>
-<span class="normal"><a href="#__codelineno-16-30">30</a></span>
-<span class="normal"><a href="#__codelineno-16-31">31</a></span>
-<span class="normal"><a href="#__codelineno-16-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="kn">package</span><span class="w"> </span><span class="n">training</span><span class="o">.</span><span class="na">plugin</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2"></a>
-<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">groovy.transform.CompileStatic</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.processor.TaskHandler</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="hll"><span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span>
-</span><a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.trace.TraceObserver</span>
-<a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.trace.TraceRecord</span>
-<a id="__codelineno-16-8" name="__codelineno-16-8"></a>
-<a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="cm">/**</span>
-<a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="cm"> * Observateur qui compte les tâches terminées</span>
-<a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="cm"> */</span>
-<a id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="nd">@CompileStatic</span>
-<a id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="kd">class</span><span class="w"> </span><span class="nc">TaskCounterObserver</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">TraceObserver</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-16-14" name="__codelineno-16-14"></a>
-<a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">taskCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
-<a id="__codelineno-16-16" name="__codelineno-16-16"></a>
-<a id="__codelineno-16-17" name="__codelineno-16-17"></a><span class="w">    </span><span class="nd">@Override</span>
-<a id="__codelineno-16-18" name="__codelineno-16-18"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">onProcessComplete</span><span class="o">(</span><span class="n">TaskHandler</span><span class="w"> </span><span class="n">handler</span><span class="o">,</span><span class="w"> </span><span class="n">TraceRecord</span><span class="w"> </span><span class="n">trace</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-16-19" name="__codelineno-16-19"></a><span class="w">        </span><span class="n">taskCount</span><span class="o">++</span>
-<a id="__codelineno-16-20" name="__codelineno-16-20"></a><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"📊 Tasks completed so far: ${taskCount}"</span>
-<a id="__codelineno-16-21" name="__codelineno-16-21"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-16-22" name="__codelineno-16-22"></a>
-<a id="__codelineno-16-23" name="__codelineno-16-23"></a><span class="hll"><span class="w">    </span><span class="nd">@Override</span>
-</span><a id="__codelineno-16-24" name="__codelineno-16-24"></a><span class="hll"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">onFilePublish</span><span class="o">(</span><span class="n">Path</span><span class="w"> </span><span class="n">destination</span><span class="o">,</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="n">source</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-16-25" name="__codelineno-16-25"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"📁 Published: ${destination.fileName}"</span>
-</span><a id="__codelineno-16-26" name="__codelineno-16-26"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
-</span><a id="__codelineno-16-27" name="__codelineno-16-27"></a>
-<a id="__codelineno-16-28" name="__codelineno-16-28"></a><span class="w">    </span><span class="nd">@Override</span>
-<a id="__codelineno-16-29" name="__codelineno-16-29"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">onFlowComplete</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-16-30" name="__codelineno-16-30"></a><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"📈 Final task count: ${taskCount}"</span>
-<a id="__codelineno-16-31" name="__codelineno-16-31"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-16-32" name="__codelineno-16-32"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-16-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="n">process</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="hll"><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">'results'</span>
+</span><a id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'greeting.txt'</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-16-17" name="__codelineno-16-17"></a><span class="w">    </span><span class="c1">// Utilise notre fonction de plugin personnalisée pour décorer le message</span>
+<a id="__codelineno-16-18" name="__codelineno-16-18"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">decorated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decorateGreeting</span><span class="o">(</span><span class="n">greeting</span><span class="o">)</span>
+<a id="__codelineno-16-19" name="__codelineno-16-19"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-16-20" name="__codelineno-16-20"></a><span class="s2">    echo '$decorated' &gt; greeting.txt</span>
+<a id="__codelineno-16-21" name="__codelineno-16-21"></a><span class="s2">    """</span>
+<a id="__codelineno-16-22" name="__codelineno-16-22"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">greet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-10">10</a></span>
+<span class="normal"><a href="#__codelineno-17-11">11</a></span>
+<span class="normal"><a href="#__codelineno-17-12">12</a></span>
+<span class="normal"><a href="#__codelineno-17-13">13</a></span>
+<span class="normal"><a href="#__codelineno-17-14">14</a></span>
+<span class="normal"><a href="#__codelineno-17-15">15</a></span>
+<span class="normal"><a href="#__codelineno-17-16">16</a></span>
+<span class="normal"><a href="#__codelineno-17-17">17</a></span>
+<span class="normal"><a href="#__codelineno-17-18">18</a></span>
+<span class="normal"><a href="#__codelineno-17-19">19</a></span>
+<span class="normal"><a href="#__codelineno-17-20">20</a></span>
+<span class="normal"><a href="#__codelineno-17-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="n">process</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12"></a><span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'greeting.txt'</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-17-16" name="__codelineno-17-16"></a><span class="w">    </span><span class="c1">// Utilise notre fonction de plugin personnalisée pour décorer le message</span>
+<a id="__codelineno-17-17" name="__codelineno-17-17"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">decorated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decorateGreeting</span><span class="o">(</span><span class="n">greeting</span><span class="o">)</span>
+<a id="__codelineno-17-18" name="__codelineno-17-18"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-17-19" name="__codelineno-17-19"></a><span class="s2">    echo '$decorated' &gt; greeting.txt</span>
+<a id="__codelineno-17-20" name="__codelineno-17-20"></a><span class="s2">    """</span>
+<a id="__codelineno-17-21" name="__codelineno-17-21"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<h3 id="32-ajouter-la-methode-onfilepublish">3.2. Ajouter la méthode onFilePublish<a class="headerlink" href="#32-ajouter-la-methode-onfilepublish" title="Permanent link">&para;</a></h3>
+<p>Ajoutez une méthode <code>onFilePublish</code> et l'import requis à <code>TaskCounterObserver.groovy</code> :</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-18-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-18-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-18-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-18-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-18-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-18-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-18-10">10</a></span>
+<span class="normal"><a href="#__codelineno-18-11">11</a></span>
+<span class="normal"><a href="#__codelineno-18-12">12</a></span>
+<span class="normal"><a href="#__codelineno-18-13">13</a></span>
+<span class="normal"><a href="#__codelineno-18-14">14</a></span>
+<span class="normal"><a href="#__codelineno-18-15">15</a></span>
+<span class="normal"><a href="#__codelineno-18-16">16</a></span>
+<span class="normal"><a href="#__codelineno-18-17">17</a></span>
+<span class="normal"><a href="#__codelineno-18-18">18</a></span>
+<span class="normal"><a href="#__codelineno-18-19">19</a></span>
+<span class="normal"><a href="#__codelineno-18-20">20</a></span>
+<span class="normal"><a href="#__codelineno-18-21">21</a></span>
+<span class="normal"><a href="#__codelineno-18-22">22</a></span>
+<span class="normal"><a href="#__codelineno-18-23">23</a></span>
+<span class="normal"><a href="#__codelineno-18-24">24</a></span>
+<span class="normal"><a href="#__codelineno-18-25">25</a></span>
+<span class="normal"><a href="#__codelineno-18-26">26</a></span>
+<span class="normal"><a href="#__codelineno-18-27">27</a></span>
+<span class="normal"><a href="#__codelineno-18-28">28</a></span>
+<span class="normal"><a href="#__codelineno-18-29">29</a></span>
+<span class="normal"><a href="#__codelineno-18-30">30</a></span>
+<span class="normal"><a href="#__codelineno-18-31">31</a></span>
+<span class="normal"><a href="#__codelineno-18-32">32</a></span>
+<span class="normal"><a href="#__codelineno-18-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="kn">package</span><span class="w"> </span><span class="n">training</span><span class="o">.</span><span class="na">plugin</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2"></a>
+<a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">groovy.transform.CompileStatic</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.processor.TaskHandler</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="hll"><span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span>
+</span><a id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.atomic.AtomicInteger</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.trace.TraceObserver</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.trace.TraceRecord</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9"></a>
+<a id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="cm">/**</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="cm"> * Observateur qui compte les tâches terminées</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12"></a><span class="cm"> */</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13"></a><span class="nd">@CompileStatic</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="kd">class</span><span class="w"> </span><span class="nc">TaskCounterObserver</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">TraceObserver</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15"></a>
+<a id="__codelineno-18-16" name="__codelineno-18-16"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AtomicInteger</span><span class="w"> </span><span class="n">taskCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AtomicInteger</span><span class="o">()</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17"></a>
+<a id="__codelineno-18-18" name="__codelineno-18-18"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-18-19" name="__codelineno-18-19"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">onProcessComplete</span><span class="o">(</span><span class="n">TaskHandler</span><span class="w"> </span><span class="n">handler</span><span class="o">,</span><span class="w"> </span><span class="n">TraceRecord</span><span class="w"> </span><span class="n">trace</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-18-20" name="__codelineno-18-20"></a><span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">taskCount</span><span class="o">.</span><span class="na">incrementAndGet</span><span class="o">()</span>
+<a id="__codelineno-18-21" name="__codelineno-18-21"></a><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"📊 Tasks completed so far: ${count}"</span>
+<a id="__codelineno-18-22" name="__codelineno-18-22"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-18-23" name="__codelineno-18-23"></a>
+<a id="__codelineno-18-24" name="__codelineno-18-24"></a><span class="hll"><span class="w">    </span><span class="nd">@Override</span>
+</span><a id="__codelineno-18-25" name="__codelineno-18-25"></a><span class="hll"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">onFilePublish</span><span class="o">(</span><span class="n">Path</span><span class="w"> </span><span class="n">destination</span><span class="o">,</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="n">source</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-18-26" name="__codelineno-18-26"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"📁 Published: ${destination.fileName}"</span>
+</span><a id="__codelineno-18-27" name="__codelineno-18-27"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
+</span><a id="__codelineno-18-28" name="__codelineno-18-28"></a>
+<a id="__codelineno-18-29" name="__codelineno-18-29"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-18-30" name="__codelineno-18-30"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">onFlowComplete</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-18-31" name="__codelineno-18-31"></a><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">"📈 Final task count: ${taskCount.get()}"</span>
+<a id="__codelineno-18-32" name="__codelineno-18-32"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-18-33" name="__codelineno-18-33"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="33-compiler-et-tester">3.3. Compiler et tester<a class="headerlink" href="#33-compiler-et-tester" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nb">cd</span><span class="w"> </span>nf-greeting<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>..
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>nextflow<span class="w"> </span>run<span class="w"> </span>greet.nf<span class="w"> </span>-ansi-log<span class="w"> </span><span class="nb">false</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nb">cd</span><span class="w"> </span>nf-greeting<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>..
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>nextflow<span class="w"> </span>run<span class="w"> </span>greet.nf<span class="w"> </span>-ansi-log<span class="w"> </span><span class="nb">false</span>
 </code></pre></div>
 <p>Vous devriez voir des messages "Published:" pour chaque fichier de sortie, aux côtés de la sortie du compteur de tâches :</p>
-<div class="highlight"><span class="filename">Output (partial)</span><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="go">...</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="go">📊 Tasks completed so far: 1</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="go">📁 Published: greeting.txt</span>
-<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="go">📊 Tasks completed so far: 2</span>
-<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="go">📁 Published: greeting.txt</span>
-<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="go">...</span>
-<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="go">📈 Final task count: 5</span>
-<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="go">Pipeline complete! 👋</span>
+<div class="highlight"><span class="filename">Output (partial)</span><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go">...</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="go">📊 Tasks completed so far: 1</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="go">📁 Published: greeting.txt</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="go">📊 Tasks completed so far: 2</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="go">📁 Published: greeting.txt</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="go">...</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="go">📈 Final task count: 5</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="go">Pipeline complete! 👋</span>
 </code></pre></div>
 <p>La méthode <code>onFilePublish</code> se déclenche chaque fois que Nextflow publie un fichier dans le répertoire <code>results</code>.
 Ce modèle est utile pour créer des journaux d'audit, déclencher des actions en aval, ou valider les sorties au fur et à mesure de leur production.</p>

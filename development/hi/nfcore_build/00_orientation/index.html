@@ -2660,7 +2660,7 @@ md-nav__item--active">
 <h3 id="_4">संस्करण आवश्यकताएं<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>यह प्रशिक्षण <strong>v2 syntax parser के साथ</strong> Nextflow 25.10.2 या उसके बाद के संस्करण के लिए काम करता है, जो Nextflow 26.04 से डिफ़ॉल्ट है।
 हमारे प्रशिक्षण वातावरण में तुम्हें कुछ भी करने की आवश्यकता नहीं है: यह v2 parser के साथ Nextflow 26.04.4 चलाता है। यदि तुम लोकल या कस्टम वातावरण का उपयोग कर रहे हो, तो <a href="../../info/nxf_versions/">संस्करण नोट्स</a> देखें।</p>
-<p>इस प्रशिक्षण के लिए अतिरिक्त रूप से <strong>nf-core tools 4.0.2</strong> की आवश्यकता है।
+<p>इस प्रशिक्षण के लिए अतिरिक्त रूप से <strong>nf-core tools 4.1.0</strong> की आवश्यकता है।
 यदि तुम nf-core टूलिंग के एक अलग संस्करण का उपयोग करते हो, तो तुम्हें अनुसरण करने में कठिनाई हो सकती है।</p>
 <p>तुम <code>nf-core --version</code> कमांड का उपयोग करके जांच सकते हो कि तुम्हारे वातावरण में कौन सा संस्करण इंस्टॉल है।</p>
 <div class="admonition warning">
@@ -2723,17 +2723,15 @@ md-nav__item--active">
 </ul>
 <h3 id="_8">पाइपलाइन संदर्भ सेट करें<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>इस पाठ्यक्रम का भाग 1 संदर्भ के लिए <code>nf-core/demo</code> पाइपलाइन के स्रोत कोड का उपयोग करता है।
-इसे प्राप्त करें और इसे आसानी से ब्राउज़ करने के लिए एक शॉर्टकट बनाएं:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>pull<span class="w"> </span>nf-core/demo
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>ln<span class="w"> </span>-s<span class="w"> </span><span class="nv">$NXF_HOME</span>/assets<span class="w"> </span>pipelines
+इसे एक लोकल डायरेक्टरी में clone करें ताकि तुम इसे आसानी से ब्राउज़ कर सको:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>clone<span class="w"> </span>nf-core/demo<span class="w"> </span>pipelines/nf-core/demo
 </code></pre></div>
-<p>यदि तुमने पहले से <a href="../../nfcore_use/">Use nf-core</a> पाठ्यक्रम पूरा कर लिया है, तो <code>nf-core/demo</code> पहले से ही लोकल में cache हो चुकी है, लेकिन ऊपर दिया गया symlink फिर भी इस डायरेक्टरी में नए सिरे से बनाना होगा।</p>
 <h2 id="_9">तैयारी चेकलिस्ट<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p>क्या तुम्हें लगता है कि तुम गोता लगाने के लिए तैयार हो?</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> मैं इस पाठ्यक्रम के लक्ष्य और इसकी पूर्वापेक्षाओं को समझता हूं</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> मेरा वातावरण चालू और चल रहा है</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> मैं nf-core tools 4.0.2 का उपयोग कर रहा हूं (<code>nf-core --version</code> से जांचें)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> मैं nf-core tools 4.1.0 का उपयोग कर रहा हूं (<code>nf-core --version</code> से जांचें)</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> मैंने अपनी कार्य डायरेक्टरी को उचित रूप से सेट किया है</li>
 </ul>
 <p>यदि तुम सभी बॉक्स चेक कर सकते हो, तो तुम जाने के लिए तैयार हो।</p>

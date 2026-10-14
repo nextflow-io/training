@@ -2660,7 +2660,7 @@ Todas as instruções dadas durante o curso (por exemplo, 'abra o arquivo', 'edi
 <h3 id="requisitos-de-versao">Requisitos de versão<a class="headerlink" href="#requisitos-de-versao" title="Permanent link">&para;</a></h3>
 <p>Este treinamento funciona com o Nextflow 25.10.2 ou posterior <strong>com o analisador de sintaxe v2</strong>, que é o padrão a partir do Nextflow 26.04 em diante.
 Em nosso ambiente de treinamento, você não precisa fazer nada: ele executa o Nextflow 26.04.4 com o analisador v2. Se você estiver usando um ambiente local ou personalizado, consulte as <a href="../../info/nxf_versions/">notas de versão</a>.</p>
-<p>Este treinamento adicionalmente requer <strong>nf-core tools 4.0.2</strong>.
+<p>Este treinamento adicionalmente requer <strong>nf-core tools 4.1.0</strong>.
 Se você usar uma versão diferente das ferramentas nf-core, você pode ter dificuldades em acompanhar.</p>
 <p>Você pode verificar qual versão está instalada em seu ambiente usando o comando <code>nf-core --version</code>.</p>
 <div class="admonition warning">
@@ -2723,17 +2723,15 @@ Usamos seções recolhíveis como esta para incluir a saída esperada de comando
 </ul>
 <h3 id="configurar-a-referencia-do-pipeline">Configurar a referência do pipeline<a class="headerlink" href="#configurar-a-referencia-do-pipeline" title="Permanent link">&para;</a></h3>
 <p>A Parte 1 deste curso faz referência ao código fonte do pipeline <code>nf-core/demo</code> como referência.
-Recupere-o e crie um atalho para navegá-lo facilmente:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>pull<span class="w"> </span>nf-core/demo
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>ln<span class="w"> </span>-s<span class="w"> </span><span class="nv">$NXF_HOME</span>/assets<span class="w"> </span>pipelines
+Clone-o em um diretório local para que você possa navegá-lo facilmente:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>clone<span class="w"> </span>nf-core/demo<span class="w"> </span>pipelines/nf-core/demo
 </code></pre></div>
-<p>Se você já concluiu o curso <a href="../../nfcore_use/">Use nf-core</a>, o <code>nf-core/demo</code> já está armazenado em cache localmente, mas o link simbólico acima ainda precisa ser criado neste diretório.</p>
 <h2 id="lista-de-verificacao-de-prontidao">Lista de verificação de prontidão<a class="headerlink" href="#lista-de-verificacao-de-prontidao" title="Permanent link">&para;</a></h2>
 <p>Acha que está pronto para mergulhar?</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Eu entendo o objetivo deste curso e seus pré-requisitos</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Meu ambiente está ativo e funcionando</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Estou usando nf-core tools 4.0.2 (verifique com <code>nf-core --version</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Estou usando nf-core tools 4.1.0 (verifique com <code>nf-core --version</code>)</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Eu configurei meu diretório de trabalho apropriadamente</li>
 </ul>
 <p>Se você pode marcar todas as caixas, você está pronto para começar.</p>

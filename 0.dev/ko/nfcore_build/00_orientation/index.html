@@ -2660,7 +2660,7 @@ md-nav__item--active">
 <h3 id="_4">버전 요구 사항<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>이 교육은 <strong>v2 syntax parser가 활성화된</strong> Nextflow 25.10.2 이상에서 작동하며, v2 parser는 Nextflow 26.04부터 기본값입니다.
 제공하는 교육 환경에서는 별도로 설정할 필요가 없습니다. v2 parser가 적용된 Nextflow 26.04.4가 실행됩니다. 로컬 또는 사용자 지정 환경을 사용하는 경우 <a href="../../info/nxf_versions/">버전 참고 사항</a>을 확인하십시오.</p>
-<p>이 교육에는 추가로 <strong>nf-core tools 4.0.2</strong>가 필요합니다.
+<p>이 교육에는 추가로 <strong>nf-core tools 4.1.0</strong>가 필요합니다.
 다른 버전의 nf-core 도구를 사용하는 경우 따라가기 어려울 수 있습니다.</p>
 <p><code>nf-core --version</code> 명령을 사용하여 환경에 설치된 버전을 확인할 수 있습니다.</p>
 <div class="admonition warning">
@@ -2723,17 +2723,15 @@ md-nav__item--active">
 </ul>
 <h3 id="_8">파이프라인 참조 설정하기<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>이 과정의 Part 1에서는 참조용으로 <code>nf-core/demo</code> 파이프라인의 소스 코드를 사용합니다.
-파이프라인을 가져오고 쉽게 탐색할 수 있도록 바로 가기를 생성합니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>pull<span class="w"> </span>nf-core/demo
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>ln<span class="w"> </span>-s<span class="w"> </span><span class="nv">$NXF_HOME</span>/assets<span class="w"> </span>pipelines
+로컬 디렉토리에 clone하여 쉽게 탐색할 수 있도록 합니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>clone<span class="w"> </span>nf-core/demo<span class="w"> </span>pipelines/nf-core/demo
 </code></pre></div>
-<p><a href="../../nfcore_use/">Use nf-core</a> 과정을 이미 완료한 경우 <code>nf-core/demo</code>는 이미 로컬에 캐시되어 있지만, 위의 심볼릭 링크는 이 디렉토리에서 새로 생성해야 합니다.</p>
 <h2 id="_9">준비 상태 체크리스트<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p>시작할 준비가 되었습니까?</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> 이 과정의 목표와 전제 조건을 이해했습니다</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> 환경이 실행 중입니다</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> nf-core tools 4.0.2를 사용하고 있습니다(<code>nf-core --version</code>으로 확인)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> nf-core tools 4.1.0를 사용하고 있습니다(<code>nf-core --version</code>으로 확인)</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> 작업 디렉토리를 적절하게 설정했습니다</li>
 </ul>
 <p>모든 항목을 체크할 수 있다면 준비가 완료된 것입니다.</p>
