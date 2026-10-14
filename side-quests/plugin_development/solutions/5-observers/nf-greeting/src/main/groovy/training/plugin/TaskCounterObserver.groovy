@@ -3,6 +3,7 @@ package training.plugin
 import groovy.transform.CompileStatic
 import nextflow.processor.TaskHandler
 import java.nio.file.Path
+import java.util.concurrent.atomic.AtomicInteger
 import nextflow.trace.TraceObserver
 import nextflow.trace.TraceRecord
 
@@ -12,12 +13,12 @@ import nextflow.trace.TraceRecord
 @CompileStatic
 class TaskCounterObserver implements TraceObserver {
 
-    private int taskCount = 0
+    private final AtomicInteger taskCount = new AtomicInteger()
 
     @Override
     void onProcessComplete(TaskHandler handler, TraceRecord trace) {
-        taskCount++
-        println "📊 Tasks completed so far: ${taskCount}"
+        final count = taskCount.incrementAndGet()
+        println "📊 Tasks completed so far: ${count}"
     }
 
     @Override
@@ -27,6 +28,6 @@ class TaskCounterObserver implements TraceObserver {
 
     @Override
     void onFlowComplete() {
-        println "📈 Final task count: ${taskCount}"
+        println "📈 Final task count: ${taskCount.get()}"
     }
 }
