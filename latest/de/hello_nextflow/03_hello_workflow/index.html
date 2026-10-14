@@ -1081,10 +1081,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-den-grobuchstaben-schritt-als-nextflow-process-schreiben" class="md-nav__link">
+  <a href="#12-den-grobuchstaben-schritt-als-nextflow-prozess-schreiben" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Den Großbuchstaben-Schritt als Nextflow Process schreiben
+        1.2. Den Großbuchstaben-Schritt als Nextflow-Prozess schreiben
       
     </span>
   </a>
@@ -1092,10 +1092,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-einen-aufruf-des-neuen-process-im-workflow-block-hinzufugen" class="md-nav__link">
+  <a href="#13-einen-aufruf-des-neuen-prozesses-im-workflow-block-hinzufugen" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Einen Aufruf des neuen Process im Workflow-Block hinzufügen
+        1.3. Einen Aufruf des neuen Prozesses im Workflow-Block hinzufügen
       
     </span>
   </a>
@@ -1103,10 +1103,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-die-ausgabe-des-ersten-process-an-den-zweiten-process-ubergeben" class="md-nav__link">
+  <a href="#14-die-ausgabe-des-ersten-prozesses-an-den-zweiten-prozess-ubergeben" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Die Ausgabe des ersten Process an den zweiten Process übergeben
+        1.4. Die Ausgabe des ersten Prozesses an den zweiten Prozess übergeben
       
     </span>
   </a>
@@ -2889,10 +2889,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-den-grobuchstaben-schritt-als-nextflow-process-schreiben" class="md-nav__link">
+  <a href="#12-den-grobuchstaben-schritt-als-nextflow-prozess-schreiben" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Den Großbuchstaben-Schritt als Nextflow Process schreiben
+        1.2. Den Großbuchstaben-Schritt als Nextflow-Prozess schreiben
       
     </span>
   </a>
@@ -2900,10 +2900,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-einen-aufruf-des-neuen-process-im-workflow-block-hinzufugen" class="md-nav__link">
+  <a href="#13-einen-aufruf-des-neuen-prozesses-im-workflow-block-hinzufugen" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Einen Aufruf des neuen Process im Workflow-Block hinzufügen
+        1.3. Einen Aufruf des neuen Prozesses im Workflow-Block hinzufügen
       
     </span>
   </a>
@@ -2911,10 +2911,10 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-die-ausgabe-des-ersten-process-an-den-zweiten-process-ubergeben" class="md-nav__link">
+  <a href="#14-die-ausgabe-des-ersten-prozesses-an-den-zweiten-prozess-ubergeben" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Die Ausgabe des ersten Process an den zweiten Process übergeben
+        1.4. Die Ausgabe des ersten Prozesses an den zweiten Prozess übergeben
       
     </span>
   </a>
@@ -3804,14 +3804,14 @@ Für dieses Kapitel ist es unter <code>results/hello_workflow/</code>.</p>
 <p>Dazu müssen wir drei Dinge tun:</p>
 <ul>
 <li>Den Befehl definieren, den wir für die Großbuchstaben-Umwandlung verwenden werden.</li>
-<li>Einen neuen Process schreiben, der den Großbuchstaben-Befehl umhüllt.</li>
-<li>Den neuen Process im Workflow-Block aufrufen und so einrichten, dass er die Ausgabe des <code>sayHello()</code>-Process als Eingabe nimmt.</li>
+<li>Einen neuen Prozess schreiben, der den Großbuchstaben-Befehl umhüllt.</li>
+<li>Den neuen Prozess im Workflow-Block aufrufen und so einrichten, dass er die Ausgabe des <code>sayHello()</code>-Prozesses als Eingabe nimmt.</li>
 </ul>
 <h3 id="11-den-grobuchstaben-befehl-definieren-und-im-terminal-testen">1.1. Den Großbuchstaben-Befehl definieren und im Terminal testen<a class="headerlink" href="#11-den-grobuchstaben-befehl-definieren-und-im-terminal-testen" title="Permanent link">&para;</a></h3>
 <p>Für die Umwandlung der Begrüßungen in Großbuchstaben werden wir ein klassisches UNIX-Tool namens <code>tr</code> für 'text replacement' verwenden, mit der folgenden Syntax:</p>
 <div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>tr<span class="w"> </span><span class="s1">'[a-z]'</span><span class="w"> </span><span class="s1">'[A-Z]'</span>
 </code></pre></div>
-<p>Dies ist ein sehr naiver Textersetzungs-Einzeiler, der keine akzentuierten Buchstaben berücksichtigt, aber er wird für die Demonstration der Nextflow-Konzepte gut genug funktionieren, und das ist, was zählt.</p>
+<p>Dies ist ein sehr naiver Textersetzungs-Einzeiler, der keine akzentuierten Buchstaben berücksichtigt, aber er wird für die Demonstration der Nextflow-Konzepte gut genug funktionieren – und das ist, was zählt.</p>
 <p>Um es auszuprobieren, können wir den Befehl <code>echo 'Hello World'</code> ausführen und seine Ausgabe an den <code>tr</code>-Befehl pipen:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">'Hello World'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">'[a-z]'</span><span class="w"> </span><span class="s1">'[A-Z]'</span><span class="w"> </span>&gt;<span class="w"> </span>UPPER-output.txt
 </code></pre></div>
@@ -3822,9 +3822,9 @@ Für dieses Kapitel ist es unter <code>results/hello_workflow/</code>.</p>
 </code></pre></div>
 </details>
 <p>Das ist im Grunde das, was wir mit unserem Workflow versuchen werden zu tun.</p>
-<h3 id="12-den-grobuchstaben-schritt-als-nextflow-process-schreiben">1.2. Den Großbuchstaben-Schritt als Nextflow Process schreiben<a class="headerlink" href="#12-den-grobuchstaben-schritt-als-nextflow-process-schreiben" title="Permanent link">&para;</a></h3>
-<p>Wir können unseren neuen Process nach dem ersten modellieren, da wir alle dieselben Komponenten verwenden wollen.</p>
-<p>Füge die folgende Process-Definition zum Workflow-Skript hinzu, direkt unter dem ersten:</p>
+<h3 id="12-den-grobuchstaben-schritt-als-nextflow-prozess-schreiben">1.2. Den Großbuchstaben-Schritt als Nextflow-Prozess schreiben<a class="headerlink" href="#12-den-grobuchstaben-schritt-als-nextflow-prozess-schreiben" title="Permanent link">&para;</a></h3>
+<p>Wir können unseren neuen Prozess nach dem ersten modellieren, da wir alle dieselben Komponenten verwenden wollen.</p>
+<p>Füge die folgende Prozess-Definition zum Workflow-Skript hinzu, direkt unter dem ersten:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-20">20</a></span>
 <span class="normal"><a href="#__codelineno-7-21">21</a></span>
 <span class="normal"><a href="#__codelineno-7-22">22</a></span>
@@ -3853,13 +3853,13 @@ Für dieses Kapitel ist es unter <code>results/hello_workflow/</code>.</p>
 <a id="__codelineno-7-30" name="__codelineno-7-30"></a>
 <a id="__codelineno-7-31" name="__codelineno-7-31"></a><span class="w">    </span><span class="nl">script:</span>
 <a id="__codelineno-7-32" name="__codelineno-7-32"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-7-33" name="__codelineno-7-33"></a><span class="s2">    cat '${input_file}' | tr '[a-z]' '[A-Z]' &gt; 'UPPER-${input_file}'</span>
+<a id="__codelineno-7-33" name="__codelineno-7-33"></a><span class="s2">    cat ${input_file} | tr '[a-z]' '[A-Z]' &gt; UPPER-${input_file}</span>
 <a id="__codelineno-7-34" name="__codelineno-7-34"></a><span class="s2">    """</span>
 <a id="__codelineno-7-35" name="__codelineno-7-35"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>In diesem Fall setzen wir den zweiten Ausgabedateinamen basierend auf dem Eingabedateinamen zusammen, ähnlich wie wir es ursprünglich für die Ausgabe des ersten Process getan haben.</p>
-<h3 id="13-einen-aufruf-des-neuen-process-im-workflow-block-hinzufugen">1.3. Einen Aufruf des neuen Process im Workflow-Block hinzufügen<a class="headerlink" href="#13-einen-aufruf-des-neuen-process-im-workflow-block-hinzufugen" title="Permanent link">&para;</a></h3>
-<p>Jetzt müssen wir Nextflow sagen, dass es den Process, den wir gerade definiert haben, tatsächlich aufrufen soll.</p>
+<p>In diesem Fall setzen wir den zweiten Ausgabedateinamen basierend auf dem Eingabedateinamen zusammen, ähnlich wie wir es ursprünglich für die Ausgabe des ersten Prozesses getan haben.</p>
+<h3 id="13-einen-aufruf-des-neuen-prozesses-im-workflow-block-hinzufugen">1.3. Einen Aufruf des neuen Prozesses im Workflow-Block hinzufügen<a class="headerlink" href="#13-einen-aufruf-des-neuen-prozesses-im-workflow-block-hinzufugen" title="Permanent link">&para;</a></h3>
+<p>Jetzt müssen wir Nextflow sagen, dass es den Prozess, den wir gerade definiert haben, tatsächlich aufrufen soll.</p>
 <p>Nimm im Workflow-Block die folgende Codeänderung vor:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Danach</label><label for="__tabbed_1_2">Vorher</label></div>
 <div class="tabbed-content">
@@ -3925,12 +3925,12 @@ Für dieses Kapitel ist es unter <code>results/hello_workflow/</code>.</p>
 </div>
 </div>
 </div>
-<p>Dies ist noch nicht funktionsfähig, weil wir nicht angegeben haben, was in den <code>convertToUpper()</code>-Process eingegeben werden soll.</p>
-<h3 id="14-die-ausgabe-des-ersten-process-an-den-zweiten-process-ubergeben">1.4. Die Ausgabe des ersten Process an den zweiten Process übergeben<a class="headerlink" href="#14-die-ausgabe-des-ersten-process-an-den-zweiten-process-ubergeben" title="Permanent link">&para;</a></h3>
-<p>Jetzt müssen wir die Ausgabe des <code>sayHello()</code>-Process in den <code>convertToUpper()</code>-Process fließen lassen.</p>
-<p>Praktischerweise verpackt Nextflow automatisch die Ausgabe eines Process in einen Kanal, wie im Diagramm im Aufwärmabschnitt gezeigt.
-Wir können auf den Ausgabekanal eines Process als <code>&lt;process&gt;.out</code> verweisen.</p>
-<p>Also ist die Ausgabe des <code>sayHello</code>-Process ein Kanal namens <code>sayHello.out</code>, den wir direkt in den Aufruf von <code>convertToUpper()</code> einstecken können.</p>
+<p>Dies ist noch nicht funktionsfähig, weil wir nicht angegeben haben, was in den <code>convertToUpper()</code>-Prozess eingegeben werden soll.</p>
+<h3 id="14-die-ausgabe-des-ersten-prozesses-an-den-zweiten-prozess-ubergeben">1.4. Die Ausgabe des ersten Prozesses an den zweiten Prozess übergeben<a class="headerlink" href="#14-die-ausgabe-des-ersten-prozesses-an-den-zweiten-prozess-ubergeben" title="Permanent link">&para;</a></h3>
+<p>Jetzt müssen wir die Ausgabe des <code>sayHello()</code>-Prozesses in den <code>convertToUpper()</code>-Prozess fließen lassen.</p>
+<p>Praktischerweise verpackt Nextflow automatisch die Ausgabe eines Prozesses in einen Kanal, wie im Diagramm im Aufwärmabschnitt gezeigt.
+Wir können auf den Ausgabekanal eines Prozesses als <code>&lt;process&gt;.out</code> verweisen.</p>
+<p>Also ist die Ausgabe des <code>sayHello</code>-Prozesses ein Kanal namens <code>sayHello.out</code>, den wir direkt in den Aufruf von <code>convertToUpper()</code> einstecken können.</p>
 <figure class="excalidraw">
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -3955,9 +3955,9 @@ Wir können auf den Ausgabekanal eines Process als <code>&lt;process&gt;.out</co
 </div>
 </div>
 </div>
-<p>Für einen einfachen Fall wie diesen (eine Ausgabe zu einer Eingabe) ist das alles, was wir tun müssen, um zwei Processes zu verbinden!</p>
+<p>Für einen einfachen Fall wie diesen (eine Ausgabe zu einer Eingabe) ist das alles, was wir tun müssen, um zwei Prozesse zu verbinden!</p>
 <h3 id="15-die-workflow-ausgabeveroffentlichung-einrichten">1.5. Die Workflow-Ausgabeveröffentlichung einrichten<a class="headerlink" href="#15-die-workflow-ausgabeveroffentlichung-einrichten" title="Permanent link">&para;</a></h3>
-<p>Zum Schluss aktualisieren wir die Workflow-Ausgaben, um auch die Ergebnisse des zweiten Process zu veröffentlichen.</p>
+<p>Zum Schluss aktualisieren wir die Workflow-Ausgaben, um auch die Ergebnisse des zweiten Prozesses zu veröffentlichen.</p>
 <h4 id="151-den-publish-abschnitt-des-workflow-blocks-aktualisieren">1.5.1. Den <code>publish:</code>-Abschnitt des <code>workflow</code>-Blocks aktualisieren<a class="headerlink" href="#151-den-publish-abschnitt-des-workflow-blocks-aktualisieren" title="Permanent link">&para;</a></h4>
 <p>Nimm im <code>workflow</code>-Block die folgende Codeänderung vor:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Danach</label><label for="__tabbed_3_2">Vorher</label></div>
@@ -4027,7 +4027,7 @@ Wir können auf den Ausgabekanal eines Process als <code>&lt;process&gt;.out</co
 </div>
 <p>Wieder ist die Logik dieselbe wie zuvor.</p>
 <p>Dies zeigt dir, dass du die Ausgabeeinstellungen auf einer sehr granularen Ebene kontrollieren kannst, für jede einzelne Ausgabe.
-Versuche gerne, die Pfade oder den Veröffentlichungsmodus für einen der Processes zu ändern, um zu sehen, was passiert.</p>
+Versuche gerne, die Pfade oder den Veröffentlichungsmodus für einen der Prozesse zu ändern, um zu sehen, was passiert.</p>
 <p>Natürlich bedeutet das, dass wir hier einige Informationen wiederholen, was unpraktisch werden könnte, wenn wir den Speicherort für alle Ausgaben auf dieselbe Weise aktualisieren wollten.
 Später im Kurs lernst du, wie du diese Einstellungen für mehrere Ausgaben auf strukturierte Weise konfigurierst.</p>
 <h3 id="16-den-workflow-mit-resume-ausfuhren">1.6. Den Workflow mit <code>-resume</code> ausführen<a class="headerlink" href="#16-den-workflow-mit-resume-ausfuhren" title="Permanent link">&para;</a></h3>
@@ -4058,7 +4058,7 @@ Später im Kurs lernst du, wie du diese Einstellungen für mehrere Ausgaben auf 
 <a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a><span class="go">    - hello_workflow/UPPER-Bonjour-output.txt</span>
 </code></pre></div>
 </details>
-<p>In der Konsolenausgabe gibt es jetzt eine zusätzliche Zeile, die dem neuen Process entspricht, den wir gerade hinzugefügt haben.</p>
+<p>In der Konsolenausgabe gibt es jetzt eine zusätzliche Zeile, die dem neuen Prozess entspricht, den wir gerade hinzugefügt haben.</p>
 <p>Du findest die Ausgaben im Verzeichnis <code>results/hello_workflow</code>, wie im <code>output</code>-Block festgelegt.</p>
 <details class="abstract">
 <summary>Verzeichnisinhalt</summary>
@@ -4071,7 +4071,7 @@ Später im Kurs lernst du, wie du diese Einstellungen für mehrere Ausgaben auf 
 <a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="go">└── UPPER-Hola-output.txt</span>
 </code></pre></div>
 </details>
-<p>Das ist praktisch! Aber es lohnt sich trotzdem, einen Blick in das Work-Verzeichnis eines der Aufrufe des zweiten Process zu werfen.</p>
+<p>Das ist praktisch! Aber es lohnt sich trotzdem, einen Blick in das Work-Verzeichnis eines der Aufrufe des zweiten Prozesses zu werfen.</p>
 <details class="abstract">
 <summary>Verzeichnisinhalt</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="go">work/e0/ecf81b4cacc648b9b994218d5b29d7/</span>
@@ -4079,17 +4079,17 @@ Später im Kurs lernst du, wie du diese Einstellungen für mehrere Ausgaben auf 
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="go">└── UPPER-Hola-output.txt</span>
 </code></pre></div>
 </details>
-<p>Beachte, dass es zwei <code>*-output</code>-Dateien gibt: die Ausgabe des ersten Process sowie die Ausgabe des zweiten.</p>
-<p>Die Ausgabe des ersten Process ist dort, weil Nextflow sie dort <strong>gestageed</strong> hat, um alles Notwendige für die Ausführung innerhalb desselben Unterverzeichnisses zu haben.</p>
-<p>Es handelt sich jedoch tatsächlich um einen symbolischen Link, der auf die Originaldatei im Unterverzeichnis des ersten Process-Aufrufs zeigt.
+<p>Beachte, dass es zwei <code>*-output</code>-Dateien gibt: die Ausgabe des ersten Prozesses sowie die Ausgabe des zweiten.</p>
+<p>Die Ausgabe des ersten Prozesses ist dort, weil Nextflow sie dort <strong>gestageed</strong> hat, um alles Notwendige für die Ausführung innerhalb desselben Unterverzeichnisses zu haben.</p>
+<p>Es handelt sich jedoch tatsächlich um einen symbolischen Link, der auf die Originaldatei im Unterverzeichnis des ersten Prozess-Aufrufs zeigt.
 Standardmäßig verwendet Nextflow, wenn es auf einer einzelnen Maschine wie hier ausgeführt wird, symbolische Links anstelle von Kopien, um Eingabe- und Zwischendateien zu stagen.</p>
-<p>Bevor du weitermachst, denke darüber nach, wie wir nur die Ausgabe von <code>sayHello</code> mit der Eingabe von <code>convertToUpper</code> verbunden haben und die beiden Processes nacheinander ausgeführt werden konnten.
+<p>Bevor du weitermachst, denke darüber nach, wie wir nur die Ausgabe von <code>sayHello</code> mit der Eingabe von <code>convertToUpper</code> verbunden haben und die beiden Prozesse nacheinander ausgeführt werden konnten.
 Nextflow hat die harte Arbeit erledigt, einzelne Eingabe- und Ausgabedateien zu handhaben und sie zwischen den beiden Befehlen für uns weiterzugeben.</p>
-<p>Das ist einer der Gründe, warum Nextflow Kanäle so mächtig sind: Sie kümmern sich um die Routinearbeit, die beim Verbinden von Workflow-Schritten anfällt.</p>
+<p>Das ist einer der Gründe, warum Nextflow-Kanäle so mächtig sind: Sie kümmern sich um die Routinearbeit, die beim Verbinden von Workflow-Schritten anfällt.</p>
 <h3 id="fazit">Fazit<a class="headerlink" href="#fazit" title="Permanent link">&para;</a></h3>
-<p>Du weißt, wie du Processes verketten kannst, indem du die Ausgabe eines Schritts als Eingabe für den nächsten Schritt bereitstellst.</p>
+<p>Du weißt, wie du Prozesse verketten kannst, indem du die Ausgabe eines Schritts als Eingabe für den nächsten Schritt bereitstellst.</p>
 <h3 id="wie-geht-es-weiter">Wie geht es weiter?<a class="headerlink" href="#wie-geht-es-weiter" title="Permanent link">&para;</a></h3>
-<p>Lerne, wie du Ausgaben von gestapelten Process-Aufrufen sammelst und sie in einen einzelnen Process einspeist.</p>
+<p>Lerne, wie du Ausgaben von gestapelten Prozess-Aufrufen sammelst und sie in einen einzelnen Prozess einspeist.</p>
 <hr />
 <h2 id="2-einen-dritten-schritt-hinzufugen-um-alle-begruungen-zu-sammeln">2. Einen dritten Schritt hinzufügen, um alle Begrüßungen zu sammeln<a class="headerlink" href="#2-einen-dritten-schritt-hinzufugen-um-alle-begruungen-zu-sammeln" title="Permanent link">&para;</a></h2>
 <p>Wenn wir einen Process verwenden, um eine Transformation auf jedes der Elemente in einem Kanal anzuwenden, wie wir es hier mit den mehreren Begrüßungen tun, wollen wir manchmal Elemente aus dem Ausgabekanal dieses Process sammeln und sie in einen anderen Process einspeisen, der eine Art Analyse oder Zusammenfassung durchführt.</p>

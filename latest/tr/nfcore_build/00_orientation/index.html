@@ -2651,7 +2651,7 @@ md-nav__item--active">
 <p>GitHub Codespaces üzerinde sağladığımız hazır ortamı kullanmak için aşağıdaki "GitHub Codespaces'te Aç" düğmesine tıklayın. Diğer seçenekler için <a href="../../envsetup/">Ortam seçenekleri</a> sayfasına bakın.</p>
 <p>Ortam yüklenirken okumaya devam edebilmeniz için eğitim ortamını yeni bir tarayıcı sekmesinde veya penceresinde açmanızı öneririz (ekipmanınıza bağlı olarak sağ tıklama, ctrl+tıklama veya cmd+tıklama kullanın).
 Kursu takip edebilmek için bu talimatları paralel olarak açık tutmanız gerekecektir.</p>
-<p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=3.8.1"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
+<p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h3 id="ortam-temelleri">Ortam temelleri<a class="headerlink" href="#ortam-temelleri" title="Permanent link">&para;</a></h3>
 <p>Bu eğitim ortamı, eğitim kursu boyunca çalışmak için gerekli tüm yazılım, kod ve veriyi içerir; dolayısıyla kendiniz herhangi bir şey yüklemenize gerek yoktur.</p>
 <p>Codespace, bir dosya sistemi gezgini, bir kod düzenleyici ve bir terminal kabuğu içeren bir VSCode arayüzü ile kurulmuştur.
@@ -2660,7 +2660,7 @@ Kurs boyunca verilen tüm talimatlar (örn. 'dosyayı açın', 'kodu düzenleyin
 <h3 id="surum-gereksinimleri">Sürüm gereksinimleri<a class="headerlink" href="#surum-gereksinimleri" title="Permanent link">&para;</a></h3>
 <p>Bu eğitim, varsayılan olarak Nextflow 26.04 sürümünden itibaren etkin olan <strong>v2 sözdizimi ayrıştırıcısıyla</strong> birlikte <strong>Nextflow 25.10.2 veya sonrası</strong> ile çalışmaktadır.
 Eğitim ortamımızda herhangi bir şey yapmanıza gerek yoktur: v2 ayrıştırıcısıyla Nextflow 26.04.4 çalıştırılmaktadır. Yerel veya özel bir ortam kullanıyorsanız <a href="../../info/nxf_versions/">sürüm notlarına</a> bakın.</p>
-<p>Eğitim ayrıca <strong>nf-core tools 4.0.2</strong> gerektirir.
+<p>Eğitim ayrıca <strong>nf-core tools 4.1.0</strong> gerektirir.
 nf-core araçlarının farklı bir sürümünü kullanırsanız, takip etmekte zorluk yaşayabilirsiniz.</p>
 <p>Ortamınızda hangi sürümün yüklü olduğunu <code>nf-core --version</code> komutunu kullanarak kontrol edebilirsiniz.</p>
 <div class="admonition warning">
@@ -2723,17 +2723,15 @@ Beklenen komut çıktısını özlü bir şekilde dahil etmek için bunun gibi d
 </ul>
 <h3 id="pipeline-referansn-ayarlama">Pipeline referansını ayarlama<a class="headerlink" href="#pipeline-referansn-ayarlama" title="Permanent link">&para;</a></h3>
 <p>Bu kursun 1. Bölümü, referans olarak <code>nf-core/demo</code> pipeline'ının kaynak kodunu kullanır.
-Pipeline'ı indirin ve kolayca göz atabilmek için bir kısayol oluşturun:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>pull<span class="w"> </span>nf-core/demo
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>ln<span class="w"> </span>-s<span class="w"> </span><span class="nv">$NXF_HOME</span>/assets<span class="w"> </span>pipelines
+Kolayca göz atabilmek için yerel bir dizine klonlayın:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>clone<span class="w"> </span>nf-core/demo<span class="w"> </span>pipelines/nf-core/demo
 </code></pre></div>
-<p><a href="../../nfcore_use/">nf-core'u Kullanma</a> kursunu daha önce tamamladıysanız, <code>nf-core/demo</code> yerel olarak önbellekte mevcuttur; ancak yukarıdaki sembolik bağlantının bu dizinde yeniden oluşturulması gerekir.</p>
 <h2 id="hazrlk-kontrol-listesi">Hazırlık kontrol listesi<a class="headerlink" href="#hazrlk-kontrol-listesi" title="Permanent link">&para;</a></h2>
 <p>Başlamaya hazır olduğunuzu mu düşünüyorsunuz?</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Bu kursun hedefini ve ön koşullarını anlıyorum</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Ortamım çalışır durumda</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> nf-core tools 4.0.2 kullandığımı doğruladım (<code>nf-core --version</code> ile kontrol edin)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> nf-core tools 4.1.0 kullandığımı doğruladım (<code>nf-core --version</code> ile kontrol edin)</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Çalışma dizinini uygun şekilde ayarladım</li>
 </ul>
 <p>Tüm kutuları işaretleyebiliyorsanız, başlamaya hazırsınız.</p>

@@ -2651,7 +2651,7 @@ md-nav__item--active">
 <p>Per utilitzar l'entorn preconfigurat que proporcionem a GitHub Codespaces, feu clic al botó "Open in GitHub Codespaces" que apareix a continuació. Per a altres opcions, consulteu <a href="../../envsetup/">Opcions d'entorn</a>.</p>
 <p>Recomanem obrir l'entorn de formació en una pestanya o finestra nova del navegador (utilitzeu clic dret, ctrl+clic o cmd+clic segons el vostre equip) perquè pugueu continuar llegint mentre es carrega l'entorn.
 Haureu de mantenir aquestes instruccions obertes en paral·lel per treballar durant el curs.</p>
-<p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=3.8.1"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
+<p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h3 id="conceptes-basics-de-lentorn">Conceptes bàsics de l'entorn<a class="headerlink" href="#conceptes-basics-de-lentorn" title="Permanent link">&para;</a></h3>
 <p>Aquest entorn de formació conté tot el programari, codi i dades necessaris per treballar durant el curs de formació, de manera que no cal que instal·leu res vosaltres mateixos.</p>
 <p>El codespace està configurat amb una interfície VSCode, que inclou un explorador del sistema de fitxers, un editor de codi i un terminal de línia de comandes.
@@ -2660,7 +2660,7 @@ Totes les instruccions donades durant el curs (per exemple, "obriu el fitxer", "
 <h3 id="requisits-de-versio">Requisits de versió<a class="headerlink" href="#requisits-de-versio" title="Permanent link">&para;</a></h3>
 <p>Aquesta formació funciona amb <strong>Nextflow 25.10.2</strong> o posterior <strong>amb l'analitzador de sintaxi v2</strong>, que és el valor per defecte a partir de Nextflow 26.04.
 Al nostre entorn de formació no cal fer res: s'executa Nextflow 26.04.4 amb l'analitzador v2. Si utilitzeu un entorn local o personalitzat, consulteu les <a href="../../info/nxf_versions/">notes de versió</a>.</p>
-<p>La formació també requereix <strong>nf-core tools 4.0.2</strong>.
+<p>La formació també requereix <strong>nf-core tools 4.1.0</strong>.
 Si utilitzeu una versió diferent de les eines nf-core, podeu tenir dificultats per seguir el curs.</p>
 <p>Podeu comprovar quina versió està instal·lada al vostre entorn utilitzant la comanda <code>nf-core --version</code>.</p>
 <div class="admonition warning">
@@ -2723,17 +2723,15 @@ Utilitzem seccions desplegables com aquesta per incloure la sortida esperada de 
 </ul>
 <h3 id="configurar-la-referencia-del-pipeline">Configurar la referència del pipeline<a class="headerlink" href="#configurar-la-referencia-del-pipeline" title="Permanent link">&para;</a></h3>
 <p>La Part 1 d'aquest curs fa referència al codi font del pipeline <code>nf-core/demo</code> com a referència.
-Recupereu-lo i creeu un accés directe per navegar-hi fàcilment:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>pull<span class="w"> </span>nf-core/demo
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>ln<span class="w"> </span>-s<span class="w"> </span><span class="nv">$NXF_HOME</span>/assets<span class="w"> </span>pipelines
+Cloneu-lo en un directori local per poder navegar-hi fàcilment:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>clone<span class="w"> </span>nf-core/demo<span class="w"> </span>pipelines/nf-core/demo
 </code></pre></div>
-<p>Si ja heu completat el curs <a href="../../nfcore_use/">Use nf-core</a>, <code>nf-core/demo</code> ja està emmagatzemat en memòria cau localment, però l'enllaç simbòlic anterior s'ha de crear de nou en aquest directori.</p>
 <h2 id="llista-de-verificacio-de-preparacio">Llista de verificació de preparació<a class="headerlink" href="#llista-de-verificacio-de-preparacio" title="Permanent link">&para;</a></h2>
 <p>Creieu que esteu preparats per començar?</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Entenc l'objectiu d'aquest curs i els seus prerequisits</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> El meu entorn està en funcionament</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Estic utilitzant nf-core tools 4.0.2 (comproveu-ho amb <code>nf-core --version</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Estic utilitzant nf-core tools 4.1.0 (comproveu-ho amb <code>nf-core --version</code>)</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> He establert el meu directori de treball adequadament</li>
 </ul>
 <p>Si podeu marcar totes les caselles, esteu a punt per començar.</p>

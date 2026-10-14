@@ -4417,19 +4417,19 @@ Cependant, nous ne recommandons pas de l'utiliser dans tout nouveau travail car 
 <p>Apprendre à fournir une entrée variable via un paramètre de ligne de commande et utiliser efficacement les valeurs par défaut.</p>
 <hr />
 <h2 id="3-utiliser-une-entree-variable-passee-en-ligne-de-commande">3. Utiliser une entrée variable passée en ligne de commande<a class="headerlink" href="#3-utiliser-une-entree-variable-passee-en-ligne-de-commande" title="Permanent link">&para;</a></h2>
-<p>Dans son état actuel, notre workflow utilise une salutation codée en dur dans la commande du <strong>process</strong>.
+<p>Dans son état actuel, notre workflow utilise une salutation codée en dur dans la commande du processus.
 Nous voulons ajouter de la flexibilité en utilisant une variable d'entrée, afin de pouvoir plus facilement changer la salutation au moment de l'exécution.</p>
 <p>Cela nécessite que nous apportions trois ensembles de modifications à notre script :</p>
 <ol>
-<li>Modifier le <strong>process</strong> pour attendre une entrée variable</li>
+<li>Modifier le processus pour attendre une entrée variable</li>
 <li>Configurer un paramètre de ligne de commande pour capturer l'entrée utilisateur</li>
-<li>Passer l'entrée au <strong>process</strong> dans le corps du workflow</li>
+<li>Passer l'entrée au processus dans le corps du workflow</li>
 </ol>
 <p>Faisons ces modifications une à la fois.</p>
 <h3 id="31-modifier-le-processus-sayhello-pour-attendre-une-entree-variable">3.1. Modifier le processus <code>sayHello</code> pour attendre une entrée variable<a class="headerlink" href="#31-modifier-le-processus-sayhello-pour-attendre-une-entree-variable" title="Permanent link">&para;</a></h3>
-<p>Nous devons modifier la définition du <strong>process</strong> pour (1) accepter une variable d'entrée et (2) utiliser cette variable dans la ligne de commande.</p>
+<p>Nous devons modifier la définition du processus pour (1) accepter une variable d'entrée et (2) utiliser cette variable dans la ligne de commande.</p>
 <h4 id="311-ajouter-un-bloc-input-a-la-definition-du-processus">3.1.1. Ajouter un bloc input à la définition du processus<a class="headerlink" href="#311-ajouter-un-bloc-input-a-la-definition-du-processus" title="Permanent link">&para;</a></h4>
-<p>D'abord, adaptons la définition du <strong>process</strong> pour accepter une entrée appelée <code>greeting</code>.</p>
+<p>D'abord, adaptons la définition du processus pour accepter une entrée appelée <code>greeting</code>.</p>
 <p>Dans le bloc process, faites la modification de code suivante :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Après</label><label for="__tabbed_5_2">Avant</label></div>
 <div class="tabbed-content">
@@ -4494,9 +4494,9 @@ Nous voulons ajouter de la flexibilité en utilisant une variable d'entrée, afi
 <p class="admonition-title">Astuce</p>
 <p>Les accolades (<code>{ }</code>) étaient techniquement optionnelles dans les versions précédentes de Nextflow, vous pourriez donc voir des anciens workflows où ceci est écrit comme <code>echo '$greeting' &gt; output.txt</code>.</p>
 </div>
-<p>Maintenant que le <strong>process</strong> <code>sayHello()</code> est prêt à accepter une entrée variable, nous avons besoin d'un moyen de fournir une valeur d'entrée à l'appel du <strong>process</strong> au niveau du workflow.</p>
+<p>Maintenant que le processus <code>sayHello()</code> est prêt à accepter une entrée variable, nous avons besoin d'un moyen de fournir une valeur d'entrée à l'appel du processus au niveau du workflow.</p>
 <h3 id="32-configurer-un-parametre-de-ligne-de-commande-pour-capturer-lentree-utilisateur">3.2. Configurer un paramètre de ligne de commande pour capturer l'entrée utilisateur<a class="headerlink" href="#32-configurer-un-parametre-de-ligne-de-commande-pour-capturer-lentree-utilisateur" title="Permanent link">&para;</a></h3>
-<p>Nous pourrions simplement coder en dur une entrée directement en faisant l'appel de <strong>process</strong> <code>sayHello('Hello World!')</code>.
+<p>Nous pourrions simplement coder en dur une entrée directement en faisant l'appel de processus <code>sayHello('Hello World!')</code>.
 Cependant, lorsque nous faisons un vrai travail avec notre workflow, nous allons vouloir pouvoir contrôler ses entrées depuis la ligne de commande, afin de pouvoir faire quelque chose comme ceci :</p>
 <figure class="excalidraw">
 <?xml version="1.0" standalone="no"?>
@@ -4508,7 +4508,7 @@ Cependant, lorsque nous faisons un vrai travail avec notre workflow, nous allons
 <p>Bonne nouvelle : Nextflow dispose d'un système de paramètres de workflow intégré appelé <a href="https://nextflow.io/docs/latest/config.html#params"><code>params</code></a> qui facilite la déclaration et l'utilisation des paramètres CLI.</p>
 <p>La syntaxe générale est de déclarer <code>params.&lt;nom_paramètre&gt;</code> pour indiquer à Nextflow d'attendre un paramètre <code>--&lt;nom_paramètre&gt;</code> sur la ligne de commande.</p>
 <p>Ici, nous voulons créer un paramètre appelé <code>--input</code>, donc nous devons déclarer <code>params.input</code> quelque part dans le workflow.
-En principe, nous pouvons l'écrire n'importe où ; mais puisque nous allons vouloir le donner à l'appel du <strong>process</strong> <code>sayHello()</code>, nous pouvons le brancher directement là en écrivant <code>sayHello(params.input)</code>.</p>
+En principe, nous pouvons l'écrire n'importe où ; mais puisque nous allons vouloir le donner à l'appel du processus <code>sayHello()</code>, nous pouvons le brancher directement là en écrivant <code>sayHello(params.input)</code>.</p>
 <p>Dans le bloc workflow, faites la modification de code suivante :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Après</label><label for="__tabbed_7_2">Avant</label></div>
 <div class="tabbed-content">
@@ -4526,7 +4526,7 @@ En principe, nous pouvons l'écrire n'importe où ; mais puisque nous allons vou
 </div>
 </div>
 </div>
-<p>Cela indique à Nextflow d'exécuter le <strong>process</strong> <code>sayHello</code> sur la valeur fournie via le paramètre <code>--input</code>.</p>
+<p>Cela indique à Nextflow d'exécuter le processus <code>sayHello</code> sur la valeur fournie via le paramètre <code>--input</code>.</p>
 <p>En effet, nous avons accompli les étapes (2) et (3) décrites au début de la section en une seule fois.</p>
 <h3 id="33-executer-la-commande-du-workflow">3.3. Exécuter la commande du workflow<a class="headerlink" href="#33-executer-la-commande-du-workflow" title="Permanent link">&para;</a></h3>
 <p>Exécutons-le !</p>
@@ -4555,7 +4555,7 @@ En principe, nous pouvons l'écrire n'importe où ; mais puisque nous allons vou
 <div class="highlight"><span class="filename">results/hello_world/output.txt</span><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="go">Bonjour le monde!</span>
 </code></pre></div>
 </details>
-<p>Voilà !</p>
+<p>Et voilà !</p>
 <p>Notez comment la nouvelle exécution a écrasé le fichier de sortie publié dans le répertoire <code>results</code>.
 Cependant, les résultats des exécutions précédentes sont toujours préservés dans les répertoires de tâches sous <code>work</code>.</p>
 <div class="admonition tip">
@@ -4563,7 +4563,7 @@ Cependant, les résultats des exécutions précédentes sont toujours préservé
 <p>Vous pouvez facilement distinguer les paramètres au niveau de Nextflow des paramètres au niveau du pipeline.</p>
 <ul>
 <li>Les paramètres qui s'appliquent à un pipeline prennent toujours un double tiret (<code>--</code>).</li>
-<li>Les paramètres qui modifient un paramètre Nextflow, <em>par exemple</em> la fonctionnalité <code>-resume</code> que nous avons utilisée précédemment, prennent un simple tiret (<code>-</code>).</li>
+<li>Les paramètres qui modifient un paramètre Nextflow, <em>par exemple</em> la fonctionnalité <code>-o</code> mentionnée précédemment, prennent un simple tiret (<code>-</code>).</li>
 </ul>
 </div>
 <h3 id="34-utiliser-des-valeurs-par-defaut-pour-les-parametres-de-ligne-de-commande">3.4. Utiliser des valeurs par défaut pour les paramètres de ligne de commande<a class="headerlink" href="#34-utiliser-des-valeurs-par-defaut-pour-les-parametres-de-ligne-de-commande" title="Permanent link">&para;</a></h3>

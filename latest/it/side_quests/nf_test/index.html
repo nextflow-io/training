@@ -3196,7 +3196,7 @@ md-nav__item--active">
 <h2 id="0-iniziamo">0. Iniziamo<a class="headerlink" href="#0-iniziamo" title="Permanent link">&para;</a></h2>
 <h4 id="aprite-il-codespace-di-formazione">Aprite il codespace di formazione<a class="headerlink" href="#aprite-il-codespace-di-formazione" title="Permanent link">&para;</a></h4>
 <p>Se non lo avete ancora fatto, assicuratevi di aprire l'ambiente di formazione come descritto nella sezione <a href="../../envsetup/">Configurazione dell'ambiente</a>.</p>
-<p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=3.8.1"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
+<p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h4 id="spostatevi-nella-directory-del-progetto">Spostatevi nella directory del progetto<a class="headerlink" href="#spostatevi-nella-directory-del-progetto" title="Permanent link">&para;</a></h4>
 <p>Spostiamoci nella directory dove si trovano i file per questo tutorial.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>side-quests/nf-test
@@ -3268,7 +3268,7 @@ Potete vedere il codice completo del flusso di lavoro qui sotto.</p>
 <a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>
 <a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a><span class="w">    </span><span class="nl">script:</span>
 <a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a><span class="s2">    cat '$input_file' | tr '[a-z]' '[A-Z]' &gt; UPPER-${input_file}</span>
+<a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a><span class="s2">    cat $input_file | tr '[a-z]' '[A-Z]' &gt; UPPER-${input_file}</span>
 <a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a><span class="s2">    """</span>
 <a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a><span class="o">}</span>
 <a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a>

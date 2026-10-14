@@ -2651,7 +2651,7 @@ md-nav__item--active">
 <p>Per utilizzare l'ambiente preconfigurato che forniamo su GitHub Codespaces, cliccate sul pulsante "Open in GitHub Codespaces" qui sotto. Per altre opzioni, consultate <a href="../../envsetup/">Opzioni di ambiente</a>.</p>
 <p>Consigliamo di aprire l'ambiente di formazione in una nuova scheda o finestra del browser (utilizzate il clic destro, ctrl-clic o cmd-clic a seconda della vostra dotazione) in modo da poter continuare a leggere mentre l'ambiente si carica.
 Dovrete tenere queste istruzioni aperte in parallelo per seguire il corso.</p>
-<p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=3.8.1"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
+<p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h3 id="nozioni-di-base-sullambiente">Nozioni di base sull'ambiente<a class="headerlink" href="#nozioni-di-base-sullambiente" title="Permanent link">&para;</a></h3>
 <p>Questo ambiente di formazione contiene tutto il software, il codice e i dati necessari per seguire il corso di formazione, quindi non dovrete installare nulla da soli.</p>
 <p>Il codespace è configurato con un'interfaccia VSCode, che include un esploratore del filesystem, un editor di codice e una shell di terminale.
@@ -2660,7 +2660,7 @@ Tutte le istruzioni fornite durante il corso (ad es. 'aprite il file', 'modifica
 <h3 id="requisiti-di-versione">Requisiti di versione<a class="headerlink" href="#requisiti-di-versione" title="Permanent link">&para;</a></h3>
 <p>Questa formazione funziona con Nextflow 25.10.2 o successivo <strong>con il parser di sintassi v2</strong>, che è quello predefinito a partire da Nextflow 26.04.
 Nel nostro ambiente di formazione non dovete fare nulla: esegue Nextflow 26.04.4 con il parser v2. Se state utilizzando un ambiente locale o personalizzato, consultate le <a href="../../info/nxf_versions/">note sulla versione</a>.</p>
-<p>Questa formazione richiede inoltre <strong>nf-core tools 4.0.2</strong>.
+<p>Questa formazione richiede inoltre <strong>nf-core tools 4.1.0</strong>.
 Se utilizzate una versione diversa degli strumenti nf-core, potreste avere difficoltà a seguire.</p>
 <p>Potete verificare quale versione è installata nel vostro ambiente utilizzando il comando <code>nf-core --version</code>.</p>
 <div class="admonition warning">
@@ -2723,17 +2723,15 @@ Utilizziamo sezioni espandibili come questa per includere l'output previsto dei 
 </ul>
 <h3 id="configurare-il-riferimento-alla-pipeline">Configurare il riferimento alla pipeline<a class="headerlink" href="#configurare-il-riferimento-alla-pipeline" title="Permanent link">&para;</a></h3>
 <p>La Parte 1 di questo corso fa riferimento al codice sorgente della pipeline <code>nf-core/demo</code> come riferimento.
-Recuperatela e create un collegamento simbolico per sfogliarla facilmente:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>pull<span class="w"> </span>nf-core/demo
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>ln<span class="w"> </span>-s<span class="w"> </span><span class="nv">$NXF_HOME</span>/assets<span class="w"> </span>pipelines
+Clonate la pipeline in una directory locale in modo da poterla sfogliare facilmente:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>clone<span class="w"> </span>nf-core/demo<span class="w"> </span>pipelines/nf-core/demo
 </code></pre></div>
-<p>Se avete già completato il corso <a href="../../nfcore_use/">Use nf-core</a>, <code>nf-core/demo</code> è già memorizzata nella cache locale, ma il collegamento simbolico sopra indicato deve comunque essere creato nella directory corrente.</p>
 <h2 id="lista-di-controllo-della-preparazione">Lista di controllo della preparazione<a class="headerlink" href="#lista-di-controllo-della-preparazione" title="Permanent link">&para;</a></h2>
 <p>Pensate di essere pronti per iniziare?</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Comprendo l'obiettivo di questo corso e i suoi prerequisiti</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Il mio ambiente è attivo e funzionante</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Sto utilizzando nf-core tools 4.0.2 (verificate con <code>nf-core --version</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Sto utilizzando nf-core tools 4.1.0 (verificate con <code>nf-core --version</code>)</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Ho impostato la mia directory di lavoro in modo appropriato</li>
 </ul>
 <p>Se potete spuntare tutte le caselle, siete pronti per iniziare.</p>

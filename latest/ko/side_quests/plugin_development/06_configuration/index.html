@@ -3013,12 +3013,92 @@ md-nav__item--active">
 </div>
 <p>팩토리는 이제 설정에서 <code>greeting.enabled</code>를 읽고, 사용자가 <code>false</code>로 설정한 경우 빈 목록을 반환합니다.
 목록이 비어 있으면 옵저버가 생성되지 않으므로 플러그인의 라이프사이클 훅이 자동으로 건너뜁니다.</p>
+<p>5부의 팩토리 테스트는 설정이 없는 <code>Mock(Session)</code>을 전달하므로, <code>navigate()</code>가 이제 <code>NullPointerException</code>으로 실패합니다.
+<code>nf-greeting/src/test/groovy/training/plugin/GreetingObserverTest.groovy</code>를 수정하여 mock 세션에 설정을 추가하고, 비활성화 케이스에 대한 테스트를 추가합니다:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">후</label><label for="__tabbed_3_2">전</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GreetingObserverTest.groovy</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-12">12</a></span>
+<span class="normal"><a href="#__codelineno-14-13">13</a></span>
+<span class="normal"><a href="#__codelineno-14-14">14</a></span>
+<span class="normal"><a href="#__codelineno-14-15">15</a></span>
+<span class="normal"><a href="#__codelineno-14-16">16</a></span>
+<span class="normal"><a href="#__codelineno-14-17">17</a></span>
+<span class="normal"><a href="#__codelineno-14-18">18</a></span>
+<span class="normal"><a href="#__codelineno-14-19">19</a></span>
+<span class="normal"><a href="#__codelineno-14-20">20</a></span>
+<span class="normal"><a href="#__codelineno-14-21">21</a></span>
+<span class="normal"><a href="#__codelineno-14-22">22</a></span>
+<span class="normal"><a href="#__codelineno-14-23">23</a></span>
+<span class="normal"><a href="#__codelineno-14-24">24</a></span>
+<span class="normal"><a href="#__codelineno-14-25">25</a></span>
+<span class="normal"><a href="#__codelineno-14-26">26</a></span>
+<span class="normal"><a href="#__codelineno-14-27">27</a></span>
+<span class="normal"><a href="#__codelineno-14-28">28</a></span>
+<span class="normal"><a href="#__codelineno-14-29">29</a></span>
+<span class="normal"><a href="#__codelineno-14-30">30</a></span>
+<span class="normal"><a href="#__codelineno-14-31">31</a></span>
+<span class="normal"><a href="#__codelineno-14-32">32</a></span>
+<span class="normal"><a href="#__codelineno-14-33">33</a></span>
+<span class="normal"><a href="#__codelineno-14-34">34</a></span>
+<span class="normal"><a href="#__codelineno-14-35">35</a></span>
+<span class="normal"><a href="#__codelineno-14-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-12" name="__codelineno-14-12"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="s1">'should create the observer instance'</span><span class="w"> </span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13"></a><span class="w">        </span><span class="nl">given:</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14"></a><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">factory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GreetingFactory</span><span class="o">()</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15"></a><span class="hll"><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mock</span><span class="o">(</span><span class="n">Session</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-14-16" name="__codelineno-14-16"></a><span class="hll"><span class="w">            </span><span class="n">getConfig</span><span class="o">()</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">[</span><span class="nl">greeting:</span><span class="w"> </span><span class="o">[</span><span class="nl">enabled:</span><span class="w"> </span><span class="kc">true</span><span class="o">]]</span>
+</span><a id="__codelineno-14-17" name="__codelineno-14-17"></a><span class="hll"><span class="w">        </span><span class="o">}</span>
+</span><a id="__codelineno-14-18" name="__codelineno-14-18"></a><span class="w">        </span><span class="nl">when:</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19"></a><span class="hll"><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factory</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">session</span><span class="o">)</span>
+</span><a id="__codelineno-14-20" name="__codelineno-14-20"></a><span class="w">        </span><span class="nl">then:</span>
+<a id="__codelineno-14-21" name="__codelineno-14-21"></a><span class="w">        </span><span class="n">result</span><span class="o">.</span><span class="na">size</span><span class="o">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-14-22" name="__codelineno-14-22"></a><span class="w">        </span><span class="n">result</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">GreetingObserver</span>
+<a id="__codelineno-14-23" name="__codelineno-14-23"></a><span class="w">        </span><span class="n">result</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">TaskCounterObserver</span>
+<a id="__codelineno-14-24" name="__codelineno-14-24"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-14-25" name="__codelineno-14-25"></a>
+<a id="__codelineno-14-26" name="__codelineno-14-26"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="nf">'should return empty list when disabled'</span><span class="w"> </span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-14-27" name="__codelineno-14-27"></a><span class="hll"><span class="w">        </span><span class="nl">given:</span>
+</span><a id="__codelineno-14-28" name="__codelineno-14-28"></a><span class="hll"><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">factory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GreetingFactory</span><span class="o">()</span>
+</span><a id="__codelineno-14-29" name="__codelineno-14-29"></a><span class="hll"><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mock</span><span class="o">(</span><span class="n">Session</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-14-30" name="__codelineno-14-30"></a><span class="hll"><span class="w">            </span><span class="n">getConfig</span><span class="o">()</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">[</span><span class="nl">greeting:</span><span class="w"> </span><span class="o">[</span><span class="nl">enabled:</span><span class="w"> </span><span class="kc">false</span><span class="o">]]</span>
+</span><a id="__codelineno-14-31" name="__codelineno-14-31"></a><span class="hll"><span class="w">        </span><span class="o">}</span>
+</span><a id="__codelineno-14-32" name="__codelineno-14-32"></a><span class="hll"><span class="w">        </span><span class="nl">when:</span>
+</span><a id="__codelineno-14-33" name="__codelineno-14-33"></a><span class="hll"><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factory</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">session</span><span class="o">)</span>
+</span><a id="__codelineno-14-34" name="__codelineno-14-34"></a><span class="hll"><span class="w">        </span><span class="nl">then:</span>
+</span><a id="__codelineno-14-35" name="__codelineno-14-35"></a><span class="hll"><span class="w">        </span><span class="n">result</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()</span>
+</span><a id="__codelineno-14-36" name="__codelineno-14-36"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GreetingObserverTest.groovy</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-12">12</a></span>
+<span class="normal"><a href="#__codelineno-15-13">13</a></span>
+<span class="normal"><a href="#__codelineno-15-14">14</a></span>
+<span class="normal"><a href="#__codelineno-15-15">15</a></span>
+<span class="normal"><a href="#__codelineno-15-16">16</a></span>
+<span class="normal"><a href="#__codelineno-15-17">17</a></span>
+<span class="normal"><a href="#__codelineno-15-18">18</a></span>
+<span class="normal"><a href="#__codelineno-15-19">19</a></span>
+<span class="normal"><a href="#__codelineno-15-20">20</a></span>
+<span class="normal"><a href="#__codelineno-15-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-12" name="__codelineno-15-12"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="s1">'should create the observer instance'</span><span class="w"> </span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13"></a><span class="w">        </span><span class="nl">given:</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14"></a><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">factory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GreetingFactory</span><span class="o">()</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15"></a><span class="w">        </span><span class="nl">when:</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16"></a><span class="hll"><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factory</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">Mock</span><span class="o">(</span><span class="n">Session</span><span class="o">))</span>
+</span><a id="__codelineno-15-17" name="__codelineno-15-17"></a><span class="w">        </span><span class="nl">then:</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18"></a><span class="w">        </span><span class="n">result</span><span class="o">.</span><span class="na">size</span><span class="o">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19"></a><span class="w">        </span><span class="n">result</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">GreetingObserver</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20"></a><span class="w">        </span><span class="n">result</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">TaskCounterObserver</span>
+<a id="__codelineno-15-21" name="__codelineno-15-21"></a><span class="w">    </span><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
 <h3 id="21">2.1. 빌드 및 테스트<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p>플러그인을 다시 빌드하고 설치합니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nb">cd</span><span class="w"> </span>nf-greeting<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>..
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nb">cd</span><span class="w"> </span>nf-greeting<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>..
 </code></pre></div>
 <p>파이프라인을 실행하여 모든 것이 정상적으로 작동하는지 확인합니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>greet.nf<span class="w"> </span>-ansi-log<span class="w"> </span><span class="nb">false</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>greet.nf<span class="w"> </span>-ansi-log<span class="w"> </span><span class="nb">false</span>
 </code></pre></div>
 <details class="exercise">
 <summary>플러그인 전체 비활성화</summary>
@@ -3026,15 +3106,15 @@ md-nav__item--active">
 출력에서 무엇이 달라지나요?</p>
 <details class="solution">
 <summary>해결책</summary>
-<div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1">// 플러그인 개발 실습을 위한 설정</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">'nf-schema@2.6.1'</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">'nf-greeting@0.1.0'</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="o">}</span>
-<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
-<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="n">greeting</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="hll"><span class="w">    </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
-</span><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="o">}</span>
+<div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1">// 플러그인 개발 실습을 위한 설정</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">'nf-schema@2.6.1'</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">'nf-greeting@0.1.0'</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="o">}</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="n">greeting</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="hll"><span class="w">    </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+</span><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="o">}</span>
 </code></pre></div>
 <p>팩토리가 <code>enabled</code>가 false일 때 빈 목록을 반환하기 때문에 "Pipeline is starting!", "Pipeline complete!", 그리고 작업 수 메시지가 모두 사라집니다.
 파이프라인 자체는 계속 실행되지만, 활성화된 옵저버가 없습니다.</p>
@@ -3067,90 +3147,90 @@ md-nav__item--active">
 이것은 파트 1에서 사용한 <code class="highlight"><span class="n">validation</span><span class="w"> </span><span class="o">{}</span></code> 및 <code class="highlight"><span class="n">co2footprint</span><span class="w"> </span><span class="o">{}</span></code> 블록의 기반이 되는 동일한 메커니즘입니다.</p>
 <h3 id="31">3.1. 설정 클래스 생성<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
 <p>새 파일을 생성합니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>touch<span class="w"> </span>nf-greeting/src/main/groovy/training/plugin/GreetingConfig.groovy
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>touch<span class="w"> </span>nf-greeting/src/main/groovy/training/plugin/GreetingConfig.groovy
 </code></pre></div>
 <p>세 가지 옵션을 모두 포함하는 설정 클래스를 추가합니다:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GreetingConfig.groovy</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-18-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-18-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-18-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-18-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-18-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-18-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-18-10">10</a></span>
-<span class="normal"><a href="#__codelineno-18-11">11</a></span>
-<span class="normal"><a href="#__codelineno-18-12">12</a></span>
-<span class="normal"><a href="#__codelineno-18-13">13</a></span>
-<span class="normal"><a href="#__codelineno-18-14">14</a></span>
-<span class="normal"><a href="#__codelineno-18-15">15</a></span>
-<span class="normal"><a href="#__codelineno-18-16">16</a></span>
-<span class="normal"><a href="#__codelineno-18-17">17</a></span>
-<span class="normal"><a href="#__codelineno-18-18">18</a></span>
-<span class="normal"><a href="#__codelineno-18-19">19</a></span>
-<span class="normal"><a href="#__codelineno-18-20">20</a></span>
-<span class="normal"><a href="#__codelineno-18-21">21</a></span>
-<span class="normal"><a href="#__codelineno-18-22">22</a></span>
-<span class="normal"><a href="#__codelineno-18-23">23</a></span>
-<span class="normal"><a href="#__codelineno-18-24">24</a></span>
-<span class="normal"><a href="#__codelineno-18-25">25</a></span>
-<span class="normal"><a href="#__codelineno-18-26">26</a></span>
-<span class="normal"><a href="#__codelineno-18-27">27</a></span>
-<span class="normal"><a href="#__codelineno-18-28">28</a></span>
-<span class="normal"><a href="#__codelineno-18-29">29</a></span>
-<span class="normal"><a href="#__codelineno-18-30">30</a></span>
-<span class="normal"><a href="#__codelineno-18-31">31</a></span>
-<span class="normal"><a href="#__codelineno-18-32">32</a></span>
-<span class="normal"><a href="#__codelineno-18-33">33</a></span>
-<span class="normal"><a href="#__codelineno-18-34">34</a></span>
-<span class="normal"><a href="#__codelineno-18-35">35</a></span>
-<span class="normal"><a href="#__codelineno-18-36">36</a></span>
-<span class="normal"><a href="#__codelineno-18-37">37</a></span>
-<span class="normal"><a href="#__codelineno-18-38">38</a></span>
-<span class="normal"><a href="#__codelineno-18-39">39</a></span>
-<span class="normal"><a href="#__codelineno-18-40">40</a></span>
-<span class="normal"><a href="#__codelineno-18-41">41</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="kn">package</span><span class="w"> </span><span class="n">training</span><span class="o">.</span><span class="na">plugin</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2"></a>
-<a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.config.spec.ConfigOption</span>
-<a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.config.spec.ConfigScope</span>
-<a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.config.spec.ScopeName</span>
-<a id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.script.dsl.Description</span>
-<a id="__codelineno-18-7" name="__codelineno-18-7"></a>
-<a id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="cm">/**</span>
-<a id="__codelineno-18-9" name="__codelineno-18-9"></a><span class="cm"> * nf-greeting 플러그인의 설정 옵션.</span>
-<a id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="cm"> *</span>
-<a id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="cm"> * 사용자는 nextflow.config에서 다음과 같이 설정합니다:</span>
-<a id="__codelineno-18-12" name="__codelineno-18-12"></a><span class="cm"> *</span>
-<a id="__codelineno-18-13" name="__codelineno-18-13"></a><span class="cm"> *     greeting {</span>
-<a id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="cm"> *         enabled = true</span>
-<a id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="cm"> *         prefix = '&gt;&gt;&gt;'</span>
-<a id="__codelineno-18-16" name="__codelineno-18-16"></a><span class="cm"> *         suffix = '&lt;&lt;&lt;'</span>
-<a id="__codelineno-18-17" name="__codelineno-18-17"></a><span class="cm"> *     }</span>
-<a id="__codelineno-18-18" name="__codelineno-18-18"></a><span class="cm"> */</span>
-<a id="__codelineno-18-19" name="__codelineno-18-19"></a><span class="nd">@ScopeName</span><span class="o">(</span><span class="s1">'greeting'</span><span class="o">)</span><span class="w">                       </span><span class="c1">// (1)!</span>
-<a id="__codelineno-18-20" name="__codelineno-18-20"></a><span class="kd">class</span><span class="w"> </span><span class="nc">GreetingConfig</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ConfigScope</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="c1">// (2)!</span>
-<a id="__codelineno-18-21" name="__codelineno-18-21"></a>
-<a id="__codelineno-18-22" name="__codelineno-18-22"></a><span class="w">    </span><span class="n">GreetingConfig</span><span class="o">()</span><span class="w"> </span><span class="o">{}</span>
-<a id="__codelineno-18-23" name="__codelineno-18-23"></a>
-<a id="__codelineno-18-24" name="__codelineno-18-24"></a><span class="w">    </span><span class="n">GreetingConfig</span><span class="o">(</span><span class="n">Map</span><span class="w"> </span><span class="n">opts</span><span class="o">)</span><span class="w"> </span><span class="o">{</span><span class="w">               </span><span class="c1">// (3)!</span>
-<a id="__codelineno-18-25" name="__codelineno-18-25"></a><span class="w">        </span><span class="k">this</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opts</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-18-26" name="__codelineno-18-26"></a><span class="w">        </span><span class="k">this</span><span class="o">.</span><span class="na">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opts</span><span class="o">.</span><span class="na">prefix</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">'***'</span>
-<a id="__codelineno-18-27" name="__codelineno-18-27"></a><span class="w">        </span><span class="k">this</span><span class="o">.</span><span class="na">suffix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opts</span><span class="o">.</span><span class="na">suffix</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">'***'</span>
-<a id="__codelineno-18-28" name="__codelineno-18-28"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-18-29" name="__codelineno-18-29"></a>
-<a id="__codelineno-18-30" name="__codelineno-18-30"></a><span class="w">    </span><span class="nd">@ConfigOption</span><span class="w">                            </span><span class="c1">// (4)!</span>
-<a id="__codelineno-18-31" name="__codelineno-18-31"></a><span class="w">    </span><span class="nd">@Description</span><span class="o">(</span><span class="s1">'Enable or disable the plugin entirely'</span><span class="o">)</span>
-<a id="__codelineno-18-32" name="__codelineno-18-32"></a><span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-18-33" name="__codelineno-18-33"></a>
-<a id="__codelineno-18-34" name="__codelineno-18-34"></a><span class="w">    </span><span class="nd">@ConfigOption</span>
-<a id="__codelineno-18-35" name="__codelineno-18-35"></a><span class="w">    </span><span class="nd">@Description</span><span class="o">(</span><span class="s1">'Prefix for decorated greetings'</span><span class="o">)</span>
-<a id="__codelineno-18-36" name="__codelineno-18-36"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'***'</span>
-<a id="__codelineno-18-37" name="__codelineno-18-37"></a>
-<a id="__codelineno-18-38" name="__codelineno-18-38"></a><span class="w">    </span><span class="nd">@ConfigOption</span>
-<a id="__codelineno-18-39" name="__codelineno-18-39"></a><span class="w">    </span><span class="nd">@Description</span><span class="o">(</span><span class="s1">'Suffix for decorated greetings'</span><span class="o">)</span>
-<a id="__codelineno-18-40" name="__codelineno-18-40"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">suffix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'***'</span>
-<a id="__codelineno-18-41" name="__codelineno-18-41"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">GreetingConfig.groovy</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-20-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-20-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-20-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-20-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-20-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-20-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-20-10">10</a></span>
+<span class="normal"><a href="#__codelineno-20-11">11</a></span>
+<span class="normal"><a href="#__codelineno-20-12">12</a></span>
+<span class="normal"><a href="#__codelineno-20-13">13</a></span>
+<span class="normal"><a href="#__codelineno-20-14">14</a></span>
+<span class="normal"><a href="#__codelineno-20-15">15</a></span>
+<span class="normal"><a href="#__codelineno-20-16">16</a></span>
+<span class="normal"><a href="#__codelineno-20-17">17</a></span>
+<span class="normal"><a href="#__codelineno-20-18">18</a></span>
+<span class="normal"><a href="#__codelineno-20-19">19</a></span>
+<span class="normal"><a href="#__codelineno-20-20">20</a></span>
+<span class="normal"><a href="#__codelineno-20-21">21</a></span>
+<span class="normal"><a href="#__codelineno-20-22">22</a></span>
+<span class="normal"><a href="#__codelineno-20-23">23</a></span>
+<span class="normal"><a href="#__codelineno-20-24">24</a></span>
+<span class="normal"><a href="#__codelineno-20-25">25</a></span>
+<span class="normal"><a href="#__codelineno-20-26">26</a></span>
+<span class="normal"><a href="#__codelineno-20-27">27</a></span>
+<span class="normal"><a href="#__codelineno-20-28">28</a></span>
+<span class="normal"><a href="#__codelineno-20-29">29</a></span>
+<span class="normal"><a href="#__codelineno-20-30">30</a></span>
+<span class="normal"><a href="#__codelineno-20-31">31</a></span>
+<span class="normal"><a href="#__codelineno-20-32">32</a></span>
+<span class="normal"><a href="#__codelineno-20-33">33</a></span>
+<span class="normal"><a href="#__codelineno-20-34">34</a></span>
+<span class="normal"><a href="#__codelineno-20-35">35</a></span>
+<span class="normal"><a href="#__codelineno-20-36">36</a></span>
+<span class="normal"><a href="#__codelineno-20-37">37</a></span>
+<span class="normal"><a href="#__codelineno-20-38">38</a></span>
+<span class="normal"><a href="#__codelineno-20-39">39</a></span>
+<span class="normal"><a href="#__codelineno-20-40">40</a></span>
+<span class="normal"><a href="#__codelineno-20-41">41</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="kn">package</span><span class="w"> </span><span class="n">training</span><span class="o">.</span><span class="na">plugin</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2"></a>
+<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.config.spec.ConfigOption</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.config.spec.ConfigScope</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.config.spec.ScopeName</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.script.dsl.Description</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7"></a>
+<a id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="cm">/**</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9"></a><span class="cm"> * nf-greeting 플러그인의 설정 옵션.</span>
+<a id="__codelineno-20-10" name="__codelineno-20-10"></a><span class="cm"> *</span>
+<a id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="cm"> * 사용자는 nextflow.config에서 다음과 같이 설정합니다:</span>
+<a id="__codelineno-20-12" name="__codelineno-20-12"></a><span class="cm"> *</span>
+<a id="__codelineno-20-13" name="__codelineno-20-13"></a><span class="cm"> *     greeting {</span>
+<a id="__codelineno-20-14" name="__codelineno-20-14"></a><span class="cm"> *         enabled = true</span>
+<a id="__codelineno-20-15" name="__codelineno-20-15"></a><span class="cm"> *         prefix = '&gt;&gt;&gt;'</span>
+<a id="__codelineno-20-16" name="__codelineno-20-16"></a><span class="cm"> *         suffix = '&lt;&lt;&lt;'</span>
+<a id="__codelineno-20-17" name="__codelineno-20-17"></a><span class="cm"> *     }</span>
+<a id="__codelineno-20-18" name="__codelineno-20-18"></a><span class="cm"> */</span>
+<a id="__codelineno-20-19" name="__codelineno-20-19"></a><span class="nd">@ScopeName</span><span class="o">(</span><span class="s1">'greeting'</span><span class="o">)</span><span class="w">                       </span><span class="c1">// (1)!</span>
+<a id="__codelineno-20-20" name="__codelineno-20-20"></a><span class="kd">class</span><span class="w"> </span><span class="nc">GreetingConfig</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ConfigScope</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="c1">// (2)!</span>
+<a id="__codelineno-20-21" name="__codelineno-20-21"></a>
+<a id="__codelineno-20-22" name="__codelineno-20-22"></a><span class="w">    </span><span class="n">GreetingConfig</span><span class="o">()</span><span class="w"> </span><span class="o">{}</span>
+<a id="__codelineno-20-23" name="__codelineno-20-23"></a>
+<a id="__codelineno-20-24" name="__codelineno-20-24"></a><span class="w">    </span><span class="n">GreetingConfig</span><span class="o">(</span><span class="n">Map</span><span class="w"> </span><span class="n">opts</span><span class="o">)</span><span class="w"> </span><span class="o">{</span><span class="w">               </span><span class="c1">// (3)!</span>
+<a id="__codelineno-20-25" name="__codelineno-20-25"></a><span class="w">        </span><span class="k">this</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opts</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-20-26" name="__codelineno-20-26"></a><span class="w">        </span><span class="k">this</span><span class="o">.</span><span class="na">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opts</span><span class="o">.</span><span class="na">prefix</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">'***'</span>
+<a id="__codelineno-20-27" name="__codelineno-20-27"></a><span class="w">        </span><span class="k">this</span><span class="o">.</span><span class="na">suffix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opts</span><span class="o">.</span><span class="na">suffix</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">'***'</span>
+<a id="__codelineno-20-28" name="__codelineno-20-28"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-20-29" name="__codelineno-20-29"></a>
+<a id="__codelineno-20-30" name="__codelineno-20-30"></a><span class="w">    </span><span class="nd">@ConfigOption</span><span class="w">                            </span><span class="c1">// (4)!</span>
+<a id="__codelineno-20-31" name="__codelineno-20-31"></a><span class="w">    </span><span class="nd">@Description</span><span class="o">(</span><span class="s1">'Enable or disable the plugin entirely'</span><span class="o">)</span>
+<a id="__codelineno-20-32" name="__codelineno-20-32"></a><span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-20-33" name="__codelineno-20-33"></a>
+<a id="__codelineno-20-34" name="__codelineno-20-34"></a><span class="w">    </span><span class="nd">@ConfigOption</span>
+<a id="__codelineno-20-35" name="__codelineno-20-35"></a><span class="w">    </span><span class="nd">@Description</span><span class="o">(</span><span class="s1">'Prefix for decorated greetings'</span><span class="o">)</span>
+<a id="__codelineno-20-36" name="__codelineno-20-36"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'***'</span>
+<a id="__codelineno-20-37" name="__codelineno-20-37"></a>
+<a id="__codelineno-20-38" name="__codelineno-20-38"></a><span class="w">    </span><span class="nd">@ConfigOption</span>
+<a id="__codelineno-20-39" name="__codelineno-20-39"></a><span class="w">    </span><span class="nd">@Description</span><span class="o">(</span><span class="s1">'Suffix for decorated greetings'</span><span class="o">)</span>
+<a id="__codelineno-20-40" name="__codelineno-20-40"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">suffix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'***'</span>
+<a id="__codelineno-20-41" name="__codelineno-20-41"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <ol>
 <li><code>nextflow.config</code>의 <code class="highlight"><span class="n">greeting</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">}</span></code> 블록에 매핑됩니다</li>
@@ -3169,21 +3249,21 @@ md-nav__item--active">
 <h3 id="32">3.2. 설정 클래스 등록<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <p>클래스를 생성하는 것만으로는 충분하지 않습니다.
 Nextflow가 클래스의 존재를 알 수 있도록 다른 확장 포인트와 함께 <code>build.gradle</code>에 등록해야 합니다.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">후</label><label for="__tabbed_3_2">전</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">후</label><label for="__tabbed_4_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><span class="filename">build.gradle</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">extensionPoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">    </span><span class="s1">'training.plugin.GreetingExtension'</span><span class="o">,</span>
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">    </span><span class="s1">'training.plugin.GreetingFactory'</span><span class="o">,</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="hll"><span class="w">    </span><span class="s1">'training.plugin.GreetingConfig'</span>
-</span><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="o">]</span>
+<div class="highlight"><span class="filename">build.gradle</span><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">extensionPoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">    </span><span class="s1">'training.plugin.GreetingExtension'</span><span class="o">,</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">    </span><span class="s1">'training.plugin.GreetingFactory'</span><span class="o">,</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="hll"><span class="w">    </span><span class="s1">'training.plugin.GreetingConfig'</span>
+</span><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="o">]</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><span class="filename">build.gradle</span><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">extensionPoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">    </span><span class="s1">'training.plugin.GreetingExtension'</span><span class="o">,</span>
-<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">    </span><span class="s1">'training.plugin.GreetingFactory'</span>
-<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="o">]</span>
+<div class="highlight"><span class="filename">build.gradle</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">extensionPoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span><span class="s1">'training.plugin.GreetingExtension'</span><span class="o">,</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">    </span><span class="s1">'training.plugin.GreetingFactory'</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="o">]</span>
 </code></pre></div>
 </div>
 </div>
@@ -3194,8 +3274,8 @@ Nextflow가 클래스의 존재를 알 수 있도록 다른 확장 포인트와 
 <li><strong>팩토리의 <code>create()</code> 메서드</strong>: 런타임 등록. 팩토리는 워크플로우가 실제로 시작될 때 옵저버 인스턴스를 생성합니다.</li>
 </ul>
 <h3 id="33">3.3. 빌드 및 테스트<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nb">cd</span><span class="w"> </span>nf-greeting<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>..
-<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>nextflow<span class="w"> </span>run<span class="w"> </span>greet.nf<span class="w"> </span>-ansi-log<span class="w"> </span><span class="nb">false</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nb">cd</span><span class="w"> </span>nf-greeting<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>..
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>nextflow<span class="w"> </span>run<span class="w"> </span>greet.nf<span class="w"> </span>-ansi-log<span class="w"> </span><span class="nb">false</span>
 </code></pre></div>
 <p>파이프라인 동작은 동일하지만, "Unrecognized config option" 경고가 사라집니다.</p>
 <div class="admonition note">

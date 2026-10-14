@@ -3196,7 +3196,7 @@ md-nav__item--active">
 <h2 id="0-erste-schritte">0. Erste Schritte<a class="headerlink" href="#0-erste-schritte" title="Permanent link">&para;</a></h2>
 <h4 id="den-training-codespace-offnen">Den Training-Codespace öffnen<a class="headerlink" href="#den-training-codespace-offnen" title="Permanent link">&para;</a></h4>
 <p>Falls du das noch nicht getan hast, öffne die Trainingsumgebung wie in der <a href="../../envsetup/">Umgebung einrichten</a> beschrieben.</p>
-<p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=3.8.1"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
+<p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h4 id="in-das-projektverzeichnis-wechseln">In das Projektverzeichnis wechseln<a class="headerlink" href="#in-das-projektverzeichnis-wechseln" title="Permanent link">&para;</a></h4>
 <p>Wechseln wir in das Verzeichnis, in dem sich die Dateien für dieses Tutorial befinden.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>side-quests/nf-test
@@ -3217,7 +3217,7 @@ md-nav__item--active">
 <summary>Was macht der Hello Nextflow Workflow?</summary>
 <p>Falls du das <a href="../../hello_nextflow/">Hello Nextflow</a>-Training nicht gemacht hast, hier ein kurzer Überblick darüber, was dieser einfache Workflow tut.</p>
 <p>Der Workflow nimmt eine CSV-Datei mit Begrüßungen entgegen, führt vier aufeinanderfolgende Transformationsschritte durch und gibt eine einzelne Textdatei aus, die ein ASCII-Bild einer lustigen Figur enthält, die die Begrüßungen sagt.</p>
-<p>Die vier Schritte sind als Nextflow-Prozesse implementiert (<code>sayHello</code>, <code>convertToUpper</code>, <code>collectGreetings</code> und <code>cowpy</code>), die in separaten Moduldateien gespeichert sind.</p>
+<p>Die vier Schritte sind als Nextflow-Prozesse (<code>sayHello</code>, <code>convertToUpper</code>, <code>collectGreetings</code> und <code>cowpy</code>) implementiert, die in separaten Moduldateien gespeichert sind.</p>
 <ol>
 <li><strong><code>sayHello</code>:</strong> Schreibt jede Begrüßung in eine eigene Ausgabedatei (z. B. "Hello-output.txt")</li>
 <li><strong><code>convertToUpper</code>:</strong> Konvertiert jede Begrüßung in Großbuchstaben (z. B. "HELLO")</li>
@@ -3268,7 +3268,7 @@ Den vollständigen Workflow-Code siehst du unten.</p>
 <a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>
 <a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a><span class="w">    </span><span class="nl">script:</span>
 <a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a><span class="s2">    cat '$input_file' | tr '[a-z]' '[A-Z]' &gt; UPPER-${input_file}</span>
+<a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a><span class="s2">    cat $input_file | tr '[a-z]' '[A-Z]' &gt; UPPER-${input_file}</span>
 <a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a><span class="s2">    """</span>
 <a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a><span class="o">}</span>
 <a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a>
