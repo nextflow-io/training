@@ -67,7 +67,16 @@ nav:
       - side_quests/working_with_files/index.md
       - side_quests/metadata/index.md
       - side_quests/splitting_and_grouping/index.md
-      - side_quests/workflows_of_workflows/index.md
+      - Composing Pipelines:
+          - side_quests/composing_pipelines/index.md
+          - side_quests/composing_pipelines/01_workflows_of_workflows.md
+          - side_quests/composing_pipelines/02_typed_interfaces.md
+          - side_quests/composing_pipelines/03_pipelines_as_workflows.md
+          - side_quests/composing_pipelines/04_chaining_pipelines.md
+          - side_quests/composing_pipelines/05_params_and_config.md
+          - side_quests/composing_pipelines/06_making_pipelines_composable.md
+          - side_quests/composing_pipelines/summary.md
+          - side_quests/composing_pipelines/next_steps.md
       - side_quests/nf_test/index.md
       - Plugin Development:
           - side_quests/plugin_development/index.md
@@ -206,7 +215,7 @@ extra:
   nav_section_separators:
     side_quests/dev_environment/index.md: Developer Tools & Tricks
     side_quests/working_with_files/index.md: Deep Dives into Dataflow
-    side_quests/workflows_of_workflows/index.md: Modular Architecture in Action
+    side_quests/composing_pipelines/index.md: Modular Architecture in Action
     side_quests/nf_test/index.md: The Nextflow Extended Universe
   # Announcement banner for upcoming training
   announcement:
@@ -391,6 +400,7 @@ plugins:
         "seqera_run/02_launch_from_cli.md": "seqera_scale/02_launch_from_cli.md"
         "seqera_run/next_steps.md": "seqera_scale/next_steps.md"
         "seqera_run/survey.md": "seqera_scale/survey.md"
+        "side_quests/workflows_of_workflows/index.md": "side_quests/composing_pipelines/01_workflows_of_workflows.md"
 hooks:
   - ../../_scripts/mkdocs_hooks.py
   - ../en/hooks/index_page_hook.py

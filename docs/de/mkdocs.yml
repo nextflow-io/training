@@ -46,5 +46,5 @@ extra:
   nav_section_separators:
     side_quests/dev_environment/index.md: "Entwickler-Tools & Tricks"
     side_quests/working_with_files/index.md: "Vertiefung in den Datenfluss"
-    side_quests/workflows_of_workflows/index.md: "Modulare Architektur in Aktion"
+    side_quests/composing_pipelines/index.md: "Modulare Architektur in Aktion"
     side_quests/nf_test/index.md: "Das erweiterte Nextflow-Universum"

@@ -45,5 +45,5 @@ extra:
   nav_section_separators:
     side_quests/dev_environment/index.md: "डेवलपर टूल्स और ट्रिक्स"
     side_quests/working_with_files/index.md: "डेटाफ्लो में गहराई से जानकारी"
-    side_quests/workflows_of_workflows/index.md: "क्रियान्वित मॉड्यूलर आर्किटेक्चर"
+    side_quests/composing_pipelines/index.md: "क्रियान्वित मॉड्यूलर आर्किटेक्चर"
     side_quests/nf_test/index.md: "Nextflow का विस्तारित ब्रह्मांड"

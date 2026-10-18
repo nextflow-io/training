@@ -46,5 +46,5 @@ extra:
   nav_section_separators:
     side_quests/dev_environment/index.md: "Herramientas y Trucos para Desarrolladores"
     side_quests/working_with_files/index.md: "Inmersión en el Flujo de Datos"
-    side_quests/workflows_of_workflows/index.md: "Arquitectura Modular en Acción"
+    side_quests/composing_pipelines/index.md: "Arquitectura Modular en Acción"
     side_quests/nf_test/index.md: "El Universo Extendido de Nextflow"
