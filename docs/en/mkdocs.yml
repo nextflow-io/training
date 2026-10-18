@@ -66,6 +66,7 @@ nav:
       - side_quests/essential_scripting_patterns/index.md
       - side_quests/working_with_files/index.md
       - side_quests/metadata/index.md
+      - side_quests/types_and_records/index.md
       - side_quests/splitting_and_grouping/index.md
       - side_quests/workflows_of_workflows/index.md
       - side_quests/nf_test/index.md
