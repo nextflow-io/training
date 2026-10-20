@@ -15,8 +15,7 @@ It is probably the most widely used nf-core pipeline to date.
 
 ### 1.1. Pull the pipeline
 
-Run the following command to download it.
-The `-r` option selects a specific release of the pipeline, so that what you see matches this page; we use it in every command in this course.
+Run the following command to download it:
 
 ```bash
 nextflow pull nf-core/rnaseq -r 3.27.0
@@ -30,6 +29,13 @@ nextflow pull nf-core/rnaseq -r 3.27.0
     ```
 
 The pipeline is now cached locally and ready to run.
+
+As mentioned in [Part 1](./01_run_demo.md#22-run-the-pipeline), the `-r` option pins the pipeline to a specific version, here release 3.27.0.
+When you ran `nf-core/demo` without `-r`, Nextflow used whatever version of the pipeline's default branch it had downloaded, which changes as the pipeline is updated.
+
+Pipelines change from one release to the next: parameters, default resource requests, error messages and even results can differ.
+For any real analysis, always pin the version with `-r`, so that your results are reproducible and you can report exactly which version you used.
+In this course, we pin `nf-core/rnaseq` to the release the materials were tested with, so that what you see in your terminal matches this page.
 
 ### 1.2. Run the test profile
 
@@ -96,7 +102,7 @@ The key line in that error is:
 Process requirement exceeds available memory -- req: 12 GB; avail: 7.8 GB
 ```
 
-The default Codespaces machine has 8 GB of RAM, which is also the typical default for Docker Desktop.
+The default Codespaces machine has 8 GB of RAM.
 The pipeline is requesting 12 GB for the `FQ_LINT` process — more than the machine can provide.
 
 That 12 GB comes from the `process_low` resource label defined in `conf/base.config`:
@@ -119,27 +125,8 @@ We provide you with a custom config file that overrides the resource defaults to
 
 ??? full-code "laptop.config"
 
-    ```groovy title="laptop.config" hl_lines="17-19"
-    process {
-        withLabel: 'process_low' {
-            cpus   = 2
-            memory = 6.GB
-        }
-        withLabel: 'process_medium' {
-            cpus   = 2
-            memory = 6.GB
-        }
-        withLabel: 'process_high' {
-            cpus   = 2
-            memory = 6.GB
-        }
-        withLabel: 'process_high_memory' {
-            memory = 6.GB
-        }
-        withName: '.*:TRIMGALORE' {
-            cpus   = 2
-        }
-    }
+    ```groovy title="laptop.config" hl_lines="21-23"
+    --8<-- "nfcore-use/laptop.config"
     ```
 
 [Part 2](./02_configure_execution.md) introduced `withName:` to target a single process by name.
@@ -154,7 +141,8 @@ withName: '.*:FASTQ_FASTQC_UMITOOLS_TRIMGALORE:TRIMGALORE' {
 ```
 
 A `withName` setting takes precedence over a `withLabel` setting, so changing the labels does not affect this process.
-The selector also has to match the full name of the process, as the pipeline's own selector does: `withName: 'TRIMGALORE'` alone would not be enough to override it, but `withName: '.*:TRIMGALORE'` is.
+Among `withName` selectors, one that matches only the simple name of the process, such as `withName: 'TRIMGALORE'`, has lower priority than the pipeline's selector, which matches the full name.
+`withName: '.*:TRIMGALORE'` also matches the full name, and because your config file is applied last, it takes effect.
 
 This file is already present in your working directory.
 Pass it with `-c` to apply the overrides:
@@ -180,8 +168,8 @@ nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker -c laptop.config --ou
     ------------------------------------------------------
     ...
     executor >  local (7)
-    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FQ_LINT (RAP1_IAA_30M_REP1)   | 3 of 5
-    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FASTQC (RAP1_IAA_30M_REP1)    | 2 of 5
+    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FQ_LINT (RAP1_IAA_30M_REP1)                                 | 3 of 5
+    [xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FASTQ_FASTQC_UMITOOLS_TRIMGALORE:FASTQC (RAP1_IAA_30M_REP1) | 2 of 5
     ...
     ```
 
@@ -280,7 +268,7 @@ Alternatively, go to [github.com/codespaces](https://github.com/codespaces), cli
 The change takes effect when the codespace restarts, which can take a few minutes.
 Your files in `/workspaces` are preserved, including the work directory of the run you cancelled, but anything running in the terminal is stopped.
 
-GitHub Codespaces offers the following machine types for this repository:
+The machine types available for this repository include the following (a 16-core machine with 64 GB is also available):
 
 | Machine type | CPUs | Memory | Quota use relative to the default |
 | ------------ | ---- | ------ | --------------------------------- |
@@ -334,9 +322,10 @@ The tasks marked `Cached` completed before you cancelled the previous run, so Ne
 How many tasks are cached depends on how long you let the previous run go.
 
 With 8 CPUs and 32 GB, the default requests fit, so the run proceeds without any overrides.
-In our tests, the full test run took about 14 minutes on the 8-core machine, compared to about 21 minutes on the default machine with `laptop.config`.
+In our tests, the resumed run took about 8 minutes on the 8-core machine, compared to about 20 minutes for a full run on the default machine with `laptop.config`.
+Part of that time goes to downloading the container image for each tool the first time it is used; once the images are downloaded, a full run on the 8-core machine takes about 6.5 minutes.
 
-The difference is smaller than the number of CPUs suggests, for two reasons.
+Four times as many CPUs does not make the run four times faster, for two reasons.
 The `test` profile limits each task to 4 CPUs and 15 GB of memory, and the test dataset is so small that many tasks finish in seconds regardless of the resources they get.
 On a real dataset, the long-running tasks such as read alignment benefit much more from additional resources.
 
@@ -346,14 +335,14 @@ Setting up those environments, however, adds significant complexity.
 
 The Seqera platform (developed by the creators of Nextflow) provides a web-based interface for launching Nextflow pipelines on HPC or cloud infrastructure (either your own or one managed for you), with compute and data management capabilities that streamline the process of running pipelines at scale.
 
-!!! tip
+??? tip "Seqera academic program"
 
     Academic researchers can access Seqera Platform free of charge through the [Seqera academic program](https://seqera.io/academic-program/).
 
 ### 2.4. Switch back to the default machine
 
 When you're done, switch your codespace back to the 2-core machine type, following the same steps as in 2.1, to avoid using up your quota.
-The rest of this course runs on the default machine.
+Parts 4 and 5 run on the default machine; section 2.4 of Part 6 asks you to switch to the 8-core machine again.
 
 ### Takeaway
 
@@ -362,6 +351,7 @@ You can give a pipeline more resources by running it on a bigger machine, and se
 ### What's next?
 
 Find and evaluate a pipeline for a scientific question of your own.
+Head on to [Part 4](./04_choose_pipeline.md).
 
 ---
 
@@ -370,5 +360,6 @@ Find and evaluate a pipeline for a scientific question of your own.
 In this part you learned to:
 
 - Pull and run a production-scale pipeline (nf-core/rnaseq), and override its default resource allocations by label and by process name
+- Pin a pipeline to a specific release with `-r`
 - Cancel a run cleanly, and resume it later
 - Run a pipeline with more compute resources by changing the machine type

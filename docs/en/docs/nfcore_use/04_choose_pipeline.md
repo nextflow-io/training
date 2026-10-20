@@ -130,12 +130,12 @@ You can browse them in the **Results** tab of the pipeline's page on the nf-core
 The results are organized in the same way as when you run the pipeline yourself:
 
 - The output directories contain the files described in the output documentation, including the MultiQC report in `multiqc/`.
-- The `pipeline_info/` directory contains the execution report and trace, as in [Part 3](./03_run_production_pipeline.md).
+- The `pipeline_info/` directory contains the execution report and trace, as in [Part 1](./01_run_demo.md#23-examine-the-pipelines-outputs).
 
 Some pipelines run several test configurations and organize their results in one subdirectory per configuration, for example per aligner in `nf-core/scrnaseq`.
 For some releases, only the `pipeline_info/` directory is published; in that case, select an earlier release from the version menu, or rely on the output documentation.
 
-!!! tip "Viewing runs on Seqera Platform"
+??? tip "Viewing runs on Seqera Platform"
 
     The Community Showcase workspace on [Seqera Platform](https://cloud.seqera.io) contains completed runs of several nf-core pipelines, including `nf-core/rnaseq` and `nf-core/scrnaseq`.
     A run page shows the parameters, the status and resource usage of every task, and the reports the pipeline produced.
@@ -143,7 +143,7 @@ For some releases, only the `pipeline_info/` directory is published; in that cas
 
 ### 3.2. Inputs
 
-Find the samplesheet format in the usage documentation, as you did for `nf-core/demo` in [Part 2](./02_configure_execution.md#14-input-validation).
+Find the samplesheet format in the usage documentation and in `assets/schema_input.json`, the input schema you saw for `nf-core/demo` in [Part 2](./02_configure_execution.md#14-input-validation).
 
 - What columns does the samplesheet require?
 - Does your scenario provide that information, or would you need to collect more?
@@ -214,7 +214,7 @@ There is room for judgment, so a different answer with good reasons is not neces
     **Inputs to prepare**: the samplesheet requires `sample` and `file_path`, and uses `hpo_terms`, `sex`, `phenotype`, `family_id`, `maternal_id` and `paternal_id` to describe the trio and the child's clinical features.
 
     **What to keep in mind**: check the release history; `nf-core/longraredisease` is much younger than `nf-core/raredisease`, so it has less of a track record.
-    The published test results cover one chromosome of a single sample, and do not include the phenotype-based prioritization step; use the output documentation to see what those results look like.
+    The published test results cover one chromosome of a single sample, and do not include the AnnotSV annotation or SvAnna prioritization outputs; use the output documentation to see what those results look like.
 
     **Compute concern**: the published execution report comes from that small test, so it greatly understates the resources a trio of whole genomes requires.
     Plan for read alignment and variant calling on whole genomes to dominate the run.
@@ -228,7 +228,7 @@ There is room for judgment, so a different answer with good reasons is not neces
     The DESeq2 step it runs is a QC step (sample PCA and clustering), not a differential expression test.
     `nf-core/differentialabundance` takes the count matrix from `nf-core/rnaseq`, a sample sheet describing the groups, and a contrasts file defining the comparison, and runs DESeq2 (or limma) to produce differential expression tables, plots and a report.
 
-    **Inputs to prepare**: a samplesheet for `nf-core/rnaseq` (as in Part 5), then a sample sheet with a `condition` column and a contrasts file for `nf-core/differentialabundance`.
+    **Inputs to prepare**: a samplesheet for `nf-core/rnaseq` (covered in Part 5), then a sample sheet with a `condition` column and a contrasts file for `nf-core/differentialabundance`.
 
     **Reference data**: the `nf-core/rnaseq` documentation recommends providing a recent GENCODE or Ensembl FASTA and GTF rather than the built-in `--genome` references, whose annotations are out of date.
 
@@ -271,6 +271,7 @@ Completed runs let you check outputs and compute needs before running anything y
 
 The next parts cover practical challenges of running a pipeline on your own data: preparing the samplesheet, troubleshooting validation errors, and tuning compute resources.
 They use `nf-core/rnaseq` as the example; at the end of each part, you can apply the same steps to the pipeline you chose here.
+Head on to [Part 5](./05_inputs.md).
 
 ---
 

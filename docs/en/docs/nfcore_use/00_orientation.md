@@ -53,13 +53,11 @@ Change directory now by running this command in the terminal:
 cd nfcore-use/
 ```
 
-!!! tip
+If for whatever reason you move out of this directory (e.g. your codespace goes to sleep), you can always use the full path to return to it, assuming you're running this within the GitHub Codespaces training environment:
 
-    If for whatever reason you move out of this directory (e.g. your codespace goes to sleep), you can always use the full path to return to it, assuming you're running this within the Github Codespaces training environment:
-
-    ```bash
-    cd /workspaces/training/nfcore-use
-    ```
+```bash
+cd /workspaces/training/nfcore-use
+```
 
 Next, explore the contents of this directory.
 
@@ -101,7 +99,7 @@ tree .
         └── tuned.config
     ```
 
-- **The `laptop.config` file** is a configuration file we'll use in section 4 to cap resource usage when running a production-scale pipeline locally.
+- **The `laptop.config` file** is a configuration file we'll use in Part 3 to cap resource usage when running a production-scale pipeline locally.
   You can ignore it until then.
 - **The `my_params.yml`, `malformed_samplesheet.csv`, and `custom.config` files** are used in Part 2, to demonstrate setting parameters from a file, input validation, and process-level configuration overrides.
   You can ignore them until then too.
