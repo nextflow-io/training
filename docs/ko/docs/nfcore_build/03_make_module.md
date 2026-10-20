@@ -45,11 +45,11 @@ process cowpy {
     conda 'conda-forge::cowpy==1.1.5'
 
     input:
-    path input_file
-    val character
+        path input_file
+        val character
 
     output:
-    path "cowpy-${input_file}"
+        path "cowpy-${input_file}"
 
     script:
     """
@@ -116,7 +116,7 @@ process cowpy {
 
 === "후"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -126,13 +126,13 @@ process cowpy {
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { COWPY                  } from '../modules/local/cowpy.nf'
     include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+    include { COWPY                  } from '../modules/local/cowpy.nf'
     ```
 
 === "전"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -142,8 +142,8 @@ process cowpy {
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { cowpy                  } from '../modules/local/cowpy.nf'
     include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+    include { cowpy                  } from '../modules/local/cowpy.nf'
     ```
 
 import 문에서 별칭을 사용하여 프로세스 실행을 업데이트하지 않을 수도 있지만, 그렇게 하면 대문자화 규칙을 채택하는 목적이 다소 상실됩니다.
@@ -154,7 +154,7 @@ import 문에서 별칭을 사용하여 프로세스 실행을 업데이트하�
 
 === "후"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 38"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="5 36"
     // cowpy가 아직 메타데이터를 사용하지 않으므로 튜플에서 파일 추출
     ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
@@ -181,24 +181,22 @@ import 문에서 별칭을 사용하여 프로세스 실행을 업데이트하�
             "${process}:\n${tool_versions.join('\n')}"
         }
 
-    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
+            storeDir: "${outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
             sort: true,
             newLine: true
-        ).set { ch_collated_versions }
-
-
+        )
     emit:
     cowpy_hellos   = COWPY.out
-    versions       = ch_versions
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
 === "전"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 38"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="5 36"
     // cowpy가 아직 메타데이터를 사용하지 않으므로 튜플에서 파일 추출
     ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
@@ -225,19 +223,17 @@ import 문에서 별칭을 사용하여 프로세스 실행을 업데이트하�
             "${process}:\n${tool_versions.join('\n')}"
         }
 
-    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
+            storeDir: "${outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
             sort: true,
             newLine: true
-        ).set { ch_collated_versions }
-
-
+        )
     emit:
     cowpy_hellos   = cowpy.out
-    versions       = ch_versions
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
 **두 가지** 변경 사항을 모두 적용해야 합니다. 그렇지 않으면 실행할 때 오류가 발생합니다.
@@ -335,7 +331,7 @@ nextflow run . --outdir core-hello-results -profile test,docker
             path "cowpy-${input_file}"
     ```
 
-보시다시피, **주요 입력**과 **출력** 모두를 Part 2에서 소개한 `tuple val(meta), path(input_file)` 패턴을 따르는 튜플로 변경했습니다.
+보시다시피, **주요 입력**과 **출력** 모두를 이 교육 과정의 Part 2에서 소개한 `tuple val(meta), path(input_file)` 패턴을 따르는 튜플로 변경했습니다.
 출력의 경우, 출력 채널에 설명적인 이름을 부여하기 위해 `emit: cowpy_output`을 추가하는 기회를 가졌습니다.
 
 이제 프로세스가 예상하는 것을 변경했으므로, 프로세스 실행 시 제공하는 것을 업데이트해야 합니다.
@@ -349,14 +345,14 @@ nextflow run . --outdir core-hello-results -profile test,docker
 
 === "후"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="2"
         // cowpy로 인사말의 ASCII 아트 생성
         COWPY(FIND_CONCATENATE.out.file_out, params.character)
     ```
 
 === "전"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="1-2 5"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="1-2 5"
         // cowpy가 아직 메타데이터를 사용하지 않으므로 튜플에서 파일 추출
         ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
@@ -374,18 +370,18 @@ nextflow run . --outdir core-hello-results -profile test,docker
 
 === "후"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="60" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="75" hl_lines="2"
         emit:
         cowpy_hellos   = COWPY.out.cowpy_output
-        versions       = ch_versions
+        versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
 === "전"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="60" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="75" hl_lines="2"
         emit:
         cowpy_hellos   = COWPY.out
-        versions       = ch_versions
+        versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
 이것은 기술적으로 필요하지 않지만, 가능한 한 명명된 출력을 참조하는 것이 좋은 관행입니다.
@@ -405,7 +401,6 @@ nextflow run . --outdir core-hello-results -profile test,docker
 
     Launching `./main.nf` [modest_saha] revision: d6bbba9521
 
-    Downloading plugin nf-schema@2.7.2
     Input/output options
       input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
       outdir                    : core-hello-results
@@ -470,7 +465,7 @@ Nextflow는 런타임에 해당 인수와 값을 도구 명령줄에 추가합�
 
 === "후"
 
-    ```groovy title="modules/local/cowpy.nf" linenums="1" hl_lines="16 18"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="16 18"
     // cowpy로 ASCII 아트 생성 (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
@@ -600,14 +595,14 @@ withName: 'COWPY' {
 
 === "후"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="2"
         // cowpy로 인사말의 ASCII 아트 생성
         COWPY(FIND_CONCATENATE.out.file_out)
     ```
 
 === "전"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="2"
         // cowpy로 인사말의 ASCII 아트 생성
         COWPY(FIND_CONCATENATE.out.file_out, params.character)
     ```
@@ -617,7 +612,7 @@ withName: 'COWPY' {
 
 #### 1.3.4. 파이프라인을 실행하여 테스트
 
-워크플로우가 여전히 예상대로 작동하는지 테스트합니다. `ext.args` 구성이 작동하는지 확인하기 위해 다른 character를 지정합니다.
+`ext.args` 구성이 작동하는지 확인하기 위해 다른 character를 지정하여 워크플로우가 여전히 예상대로 작동하는지 테스트합니다.
 
 더 수수께끼 같은 옵션 중 하나인 `kosh`를 사용하여 이 명령을 실행하십시오:
 
@@ -758,7 +753,7 @@ cat work/38/eb29ea*/cowpy-test.txt
 
 === "후"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2 6 8"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="12" hl_lines="2 6 8"
         output:
             tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
 
@@ -773,7 +768,7 @@ cat work/38/eb29ea*/cowpy-test.txt
 
 === "전"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2 7"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="12" hl_lines="2 7"
         output:
             tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output
 
@@ -1141,17 +1136,17 @@ nf-core는 2026년에 모든 파이프라인에 이를 도입하고 있습니다
 
 === "후"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="13" hl_lines="3"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="10" hl_lines="3"
         output:
-        tuple val(meta), path("${prefix}.txt")                                    , emit: cowpy_output
-        tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions , emit: versions_cowpy
+            tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
+            tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions, emit: versions_cowpy
     ```
 
 === "전"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="13"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="10"
         output:
-        tuple val(meta), path("${prefix}.txt")  , emit: cowpy_output
+            tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
     ```
 
 새 줄은 `[process_name, tool_name, version]` 튜플을 `"versions"` topic 채널에 발행합니다.
@@ -1221,7 +1216,7 @@ nf-core의 내장 템플릿 기반 도구를 사용하여 쉽게 모듈을 생�
 
 ## 2. nf-core 도구로 모듈 만들기
 
-이제 수동으로 nf-core 모듈 패턴을 적용하는 방법을 배웠으니, 실제로 모듈을 만드는 방법을 살펴보겠습니다.
+이제 nf-core 모듈 패턴을 수동으로 적용하는 방법을 배웠으니, 실제로 모듈을 만드는 방법을 살펴보겠습니다.
 
 ### 2.1. 템플릿에서 모듈 스캐폴드 생성하기
 
@@ -1234,8 +1229,11 @@ nf-core의 내장 템플릿 기반 도구를 사용하여 쉽게 모듈을 생�
 다음 명령을 실행하여 최소한의 템플릿으로 `COWPY` 모듈의 새 버전을 만들어 봅시다:
 
 ```bash
-nf-core modules create --empty-template COWPY
+nf-core modules create --empty-template cowpy
 ```
+
+도구 이름은 소문자로 입력해야 합니다.
+도구는 생성된 코드에서 이를 대문자 프로세스 이름 `COWPY`로 변환합니다.
 
 `--empty-template` 플래그는 추가 코드 없이 깔끔한 스타터 템플릿을 생성하여 필수 구조를 더 쉽게 볼 수 있게 합니다.
 
@@ -1244,6 +1242,8 @@ nf-core modules create --empty-template COWPY
 
 여러 설정 옵션에 대한 프롬프트가 표시됩니다:
 
+- **Bioconda 패키지 이름**: 도구가 Bioconda에서 `cowpy` 패키지를 찾을 수 없어 다른 패키지 이름을 입력할지 묻습니다.
+  `n`을 입력하세요. 패키지 정보는 수동으로 채울 것입니다.
 - **작성자 정보**: 귀속을 위한 GitHub 사용자 이름
 - **리소스 레이블**: 사전 정의된 컴퓨팅 요구사항 집합.
   nf-core 프로젝트는 가벼운 도구를 위한 `process_single` 및 요구가 많은 도구를 위한 `process_high`와 같은 표준 레이블을 제공합니다.
@@ -1280,7 +1280,9 @@ nf-core modules create --empty-template COWPY
 
 생성된 `main.nf`는 방금 배운 모든 패턴과 몇 가지 추가 기능을 포함합니다:
 
-```groovy title="modules/local/cowpy/main.nf" hl_lines="11 21 22"
+```groovy title="modules/local/cowpy/main.nf" linenums="1" hl_lines="12 23 24"
+
+
 process COWPY {
     tag "$meta.id"
     label 'process_single'
@@ -1290,11 +1292,11 @@ process COWPY {
         'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
         'quay.io/biocontainers/YOUR-TOOL-HERE' }"
 
-    input:
-    tuple val(meta), path(input)        // 패턴 1: 메타데이터 튜플 ✓
+    input:tuple val(meta), path(input)        // 패턴 1: 메타데이터 튜플 ✓
 
     output:
     tuple val(meta), path("*"), emit: output
+
     tuple val("${task.process}"), val('cowpy'), eval("cowpy --version"), topic: versions, emit: versions_cowpy
 
     when:
@@ -1305,6 +1307,7 @@ process COWPY {
     def prefix = task.ext.prefix ?: "${meta.id}"  // 패턴 3: ext.prefix ✓
 
     """
+
     """
 
     stub:
@@ -1313,9 +1316,13 @@ process COWPY {
 
     """
     echo $args
+
     """
 }
 ```
+
+생성된 파일은 두 개의 빈 줄로 시작하며, 템플릿은 입력 선언을 `input:`과 같은 줄에 배치합니다.
+섹션 2.3.1에서 입력과 출력을 업데이트할 때 입력 선언을 별도의 줄로 이동할 것입니다.
 
 위에서 수동으로 적용한 모든 패턴이 이미 존재하는 것을 확인하세요!
 
@@ -1429,7 +1436,7 @@ nf-core에 제출하려면 기본값을 더 엄격하게 따라야 하지만, �
 
 === "후"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="10" hl_lines="1-2 5-6"
     input:
     tuple val(meta), path(input_file)
 
@@ -1440,17 +1447,18 @@ nf-core에 제출하려면 기본값을 더 엄격하게 따라야 하지만, �
 
 === "전"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5 6"
-    input:
-    tuple val(meta), path(input)
+    ```groovy title="modules/local/cowpy/main.nf" linenums="10" hl_lines="1 4-6"
+    input:tuple val(meta), path(input)
 
     output:
     tuple val(meta), path("*"), emit: output
-    tuple val("${task.process}"), val('cowpy'), eval("cowpy --version"), topic: versions    , emit: versions_cowpy
+
+    tuple val("${task.process}"), val('cowpy'), eval("cowpy --version"), topic: versions, emit: versions_cowpy
     ```
 
 이것은 다음을 지정합니다:
 
+- `input:` 아래 별도의 줄에 입력 선언
 - 입력 파일 매개변수 이름(`input` 대신 `input_file`)
 - 설정 가능한 접두사 패턴을 사용한 출력 파일 이름(와일드카드 `*` 대신 `#!groovy ${prefix}.txt`)
 - 설명적인 emit 이름(일반적인 `output` 대신 `cowpy_output`)
@@ -1467,7 +1475,7 @@ Nextflow 언어 서버를 사용하여 구문을 검증하는 경우, script 블
 
 === "후"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="15" hl_lines="3 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="20" hl_lines="3 6"
     script:
     def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
@@ -1480,12 +1488,13 @@ Nextflow 언어 서버를 사용하여 구문을 검증하는 경우, script 블
 
 === "전"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="15" hl_lines="3"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="20" hl_lines="3"
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
+
     """
     ```
 
@@ -1506,7 +1515,7 @@ Nextflow 컨텍스트에서 [stub](https://www.nextflow.io/docs/latest/process.h
 
 === "후"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="29" hl_lines="3 6"
     stub:
     def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
@@ -1519,13 +1528,14 @@ Nextflow 컨텍스트에서 [stub](https://www.nextflow.io/docs/latest/process.h
 
 === "전"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="29" hl_lines="3 6"
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
     echo $args
+
     """
     ```
 
@@ -1545,7 +1555,7 @@ Nextflow 컨텍스트에서 [stub](https://www.nextflow.io/docs/latest/process.h
 
 === "후"
 
-    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -1555,13 +1565,13 @@ Nextflow 컨텍스트에서 [stub](https://www.nextflow.io/docs/latest/process.h
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { COWPY                  } from '../modules/local/cowpy/main.nf'
     include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+    include { COWPY                  } from '../modules/local/cowpy/main.nf'
     ```
 
 === "전"
 
-    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -1571,8 +1581,8 @@ Nextflow 컨텍스트에서 [stub](https://www.nextflow.io/docs/latest/process.h
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { COWPY                  } from '../modules/local/cowpy.nf'
     include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+    include { COWPY                  } from '../modules/local/cowpy.nf'
     ```
 
 테스트하기 위해 파이프라인을 실행합니다.

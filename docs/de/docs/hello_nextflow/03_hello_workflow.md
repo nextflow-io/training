@@ -111,8 +111,8 @@ Wir werden einen Schritt hinzufügen, um jede Begrüßung in Großbuchstaben umz
 Dazu müssen wir drei Dinge tun:
 
 - Den Befehl definieren, den wir für die Großbuchstaben-Umwandlung verwenden werden.
-- Einen neuen Process schreiben, der den Großbuchstaben-Befehl umhüllt.
-- Den neuen Process im Workflow-Block aufrufen und so einrichten, dass er die Ausgabe des `sayHello()`-Process als Eingabe nimmt.
+- Einen neuen Prozess schreiben, der den Großbuchstaben-Befehl umhüllt.
+- Den neuen Prozess im Workflow-Block aufrufen und so einrichten, dass er die Ausgabe des `sayHello()`-Prozesses als Eingabe nimmt.
 
 ### 1.1. Den Großbuchstaben-Befehl definieren und im Terminal testen
 
@@ -122,7 +122,7 @@ Für die Umwandlung der Begrüßungen in Großbuchstaben werden wir ein klassisc
 tr '[a-z]' '[A-Z]'
 ```
 
-Dies ist ein sehr naiver Textersetzungs-Einzeiler, der keine akzentuierten Buchstaben berücksichtigt, aber er wird für die Demonstration der Nextflow-Konzepte gut genug funktionieren, und das ist, was zählt.
+Dies ist ein sehr naiver Textersetzungs-Einzeiler, der keine akzentuierten Buchstaben berücksichtigt, aber er wird für die Demonstration der Nextflow-Konzepte gut genug funktionieren – und das ist, was zählt.
 
 Um es auszuprobieren, können wir den Befehl `echo 'Hello World'` ausführen und seine Ausgabe an den `tr`-Befehl pipen:
 
@@ -140,11 +140,11 @@ Die Ausgabe ist eine Textdatei namens `UPPER-output.txt`, die die Großbuchstabe
 
 Das ist im Grunde das, was wir mit unserem Workflow versuchen werden zu tun.
 
-### 1.2. Den Großbuchstaben-Schritt als Nextflow Process schreiben
+### 1.2. Den Großbuchstaben-Schritt als Nextflow-Prozess schreiben
 
-Wir können unseren neuen Process nach dem ersten modellieren, da wir alle dieselben Komponenten verwenden wollen.
+Wir können unseren neuen Prozess nach dem ersten modellieren, da wir alle dieselben Komponenten verwenden wollen.
 
-Füge die folgende Process-Definition zum Workflow-Skript hinzu, direkt unter dem ersten:
+Füge die folgende Prozess-Definition zum Workflow-Skript hinzu, direkt unter dem ersten:
 
 ```groovy title="hello-workflow.nf" linenums="20"
 /*
@@ -160,16 +160,16 @@ process convertToUpper {
 
     script:
     """
-    cat '${input_file}' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+    cat ${input_file} | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
     """
 }
 ```
 
-In diesem Fall setzen wir den zweiten Ausgabedateinamen basierend auf dem Eingabedateinamen zusammen, ähnlich wie wir es ursprünglich für die Ausgabe des ersten Process getan haben.
+In diesem Fall setzen wir den zweiten Ausgabedateinamen basierend auf dem Eingabedateinamen zusammen, ähnlich wie wir es ursprünglich für die Ausgabe des ersten Prozesses getan haben.
 
-### 1.3. Einen Aufruf des neuen Process im Workflow-Block hinzufügen
+### 1.3. Einen Aufruf des neuen Prozesses im Workflow-Block hinzufügen
 
-Jetzt müssen wir Nextflow sagen, dass es den Process, den wir gerade definiert haben, tatsächlich aufrufen soll.
+Jetzt müssen wir Nextflow sagen, dass es den Prozess, den wir gerade definiert haben, tatsächlich aufrufen soll.
 
 Nimm im Workflow-Block die folgende Codeänderung vor:
 
@@ -211,16 +211,16 @@ Nimm im Workflow-Block die folgende Codeänderung vor:
     }
     ```
 
-Dies ist noch nicht funktionsfähig, weil wir nicht angegeben haben, was in den `convertToUpper()`-Process eingegeben werden soll.
+Dies ist noch nicht funktionsfähig, weil wir nicht angegeben haben, was in den `convertToUpper()`-Prozess eingegeben werden soll.
 
-### 1.4. Die Ausgabe des ersten Process an den zweiten Process übergeben
+### 1.4. Die Ausgabe des ersten Prozesses an den zweiten Prozess übergeben
 
-Jetzt müssen wir die Ausgabe des `sayHello()`-Process in den `convertToUpper()`-Process fließen lassen.
+Jetzt müssen wir die Ausgabe des `sayHello()`-Prozesses in den `convertToUpper()`-Prozess fließen lassen.
 
-Praktischerweise verpackt Nextflow automatisch die Ausgabe eines Process in einen Kanal, wie im Diagramm im Aufwärmabschnitt gezeigt.
-Wir können auf den Ausgabekanal eines Process als `<process>.out` verweisen.
+Praktischerweise verpackt Nextflow automatisch die Ausgabe eines Prozesses in einen Kanal, wie im Diagramm im Aufwärmabschnitt gezeigt.
+Wir können auf den Ausgabekanal eines Prozesses als `<process>.out` verweisen.
 
-Also ist die Ausgabe des `sayHello`-Process ein Kanal namens `sayHello.out`, den wir direkt in den Aufruf von `convertToUpper()` einstecken können.
+Also ist die Ausgabe des `sayHello`-Prozesses ein Kanal namens `sayHello.out`, den wir direkt in den Aufruf von `convertToUpper()` einstecken können.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-multistep-connector.svg"
@@ -242,11 +242,11 @@ Nimm im Workflow-Block die folgende Codeänderung vor:
         convertToUpper()
     ```
 
-Für einen einfachen Fall wie diesen (eine Ausgabe zu einer Eingabe) ist das alles, was wir tun müssen, um zwei Processes zu verbinden!
+Für einen einfachen Fall wie diesen (eine Ausgabe zu einer Eingabe) ist das alles, was wir tun müssen, um zwei Prozesse zu verbinden!
 
 ### 1.5. Die Workflow-Ausgabeveröffentlichung einrichten
 
-Zum Schluss aktualisieren wir die Workflow-Ausgaben, um auch die Ergebnisse des zweiten Process zu veröffentlichen.
+Zum Schluss aktualisieren wir die Workflow-Ausgaben, um auch die Ergebnisse des zweiten Prozesses zu veröffentlichen.
 
 #### 1.5.1. Den `publish:`-Abschnitt des `workflow`-Blocks aktualisieren
 
@@ -304,7 +304,7 @@ Nimm im `output`-Block die folgende Codeänderung vor:
 Wieder ist die Logik dieselbe wie zuvor.
 
 Dies zeigt dir, dass du die Ausgabeeinstellungen auf einer sehr granularen Ebene kontrollieren kannst, für jede einzelne Ausgabe.
-Versuche gerne, die Pfade oder den Veröffentlichungsmodus für einen der Processes zu ändern, um zu sehen, was passiert.
+Versuche gerne, die Pfade oder den Veröffentlichungsmodus für einen der Prozesse zu ändern, um zu sehen, was passiert.
 
 Natürlich bedeutet das, dass wir hier einige Informationen wiederholen, was unpraktisch werden könnte, wenn wir den Speicherort für alle Ausgaben auf dieselbe Weise aktualisieren wollten.
 Später im Kurs lernst du, wie du diese Einstellungen für mehrere Ausgaben auf strukturierte Weise konfigurierst.
@@ -342,7 +342,7 @@ nextflow run hello-workflow.nf -resume
         - hello_workflow/UPPER-Bonjour-output.txt
     ```
 
-In der Konsolenausgabe gibt es jetzt eine zusätzliche Zeile, die dem neuen Process entspricht, den wir gerade hinzugefügt haben.
+In der Konsolenausgabe gibt es jetzt eine zusätzliche Zeile, die dem neuen Prozess entspricht, den wir gerade hinzugefügt haben.
 
 Du findest die Ausgaben im Verzeichnis `results/hello_workflow`, wie im `output`-Block festgelegt.
 
@@ -358,7 +358,7 @@ Du findest die Ausgaben im Verzeichnis `results/hello_workflow`, wie im `output`
     └── UPPER-Hola-output.txt
     ```
 
-Das ist praktisch! Aber es lohnt sich trotzdem, einen Blick in das Work-Verzeichnis eines der Aufrufe des zweiten Process zu werfen.
+Das ist praktisch! Aber es lohnt sich trotzdem, einen Blick in das Work-Verzeichnis eines der Aufrufe des zweiten Prozesses zu werfen.
 
 ??? abstract "Verzeichnisinhalt"
 
@@ -368,25 +368,25 @@ Das ist praktisch! Aber es lohnt sich trotzdem, einen Blick in das Work-Verzeich
     └── UPPER-Hola-output.txt
     ```
 
-Beachte, dass es zwei `*-output`-Dateien gibt: die Ausgabe des ersten Process sowie die Ausgabe des zweiten.
+Beachte, dass es zwei `*-output`-Dateien gibt: die Ausgabe des ersten Prozesses sowie die Ausgabe des zweiten.
 
-Die Ausgabe des ersten Process ist dort, weil Nextflow sie dort **gestageed** hat, um alles Notwendige für die Ausführung innerhalb desselben Unterverzeichnisses zu haben.
+Die Ausgabe des ersten Prozesses ist dort, weil Nextflow sie dort **gestageed** hat, um alles Notwendige für die Ausführung innerhalb desselben Unterverzeichnisses zu haben.
 
-Es handelt sich jedoch tatsächlich um einen symbolischen Link, der auf die Originaldatei im Unterverzeichnis des ersten Process-Aufrufs zeigt.
+Es handelt sich jedoch tatsächlich um einen symbolischen Link, der auf die Originaldatei im Unterverzeichnis des ersten Prozess-Aufrufs zeigt.
 Standardmäßig verwendet Nextflow, wenn es auf einer einzelnen Maschine wie hier ausgeführt wird, symbolische Links anstelle von Kopien, um Eingabe- und Zwischendateien zu stagen.
 
-Bevor du weitermachst, denke darüber nach, wie wir nur die Ausgabe von `sayHello` mit der Eingabe von `convertToUpper` verbunden haben und die beiden Processes nacheinander ausgeführt werden konnten.
+Bevor du weitermachst, denke darüber nach, wie wir nur die Ausgabe von `sayHello` mit der Eingabe von `convertToUpper` verbunden haben und die beiden Prozesse nacheinander ausgeführt werden konnten.
 Nextflow hat die harte Arbeit erledigt, einzelne Eingabe- und Ausgabedateien zu handhaben und sie zwischen den beiden Befehlen für uns weiterzugeben.
 
-Das ist einer der Gründe, warum Nextflow Kanäle so mächtig sind: Sie kümmern sich um die Routinearbeit, die beim Verbinden von Workflow-Schritten anfällt.
+Das ist einer der Gründe, warum Nextflow-Kanäle so mächtig sind: Sie kümmern sich um die Routinearbeit, die beim Verbinden von Workflow-Schritten anfällt.
 
 ### Fazit
 
-Du weißt, wie du Processes verketten kannst, indem du die Ausgabe eines Schritts als Eingabe für den nächsten Schritt bereitstellst.
+Du weißt, wie du Prozesse verketten kannst, indem du die Ausgabe eines Schritts als Eingabe für den nächsten Schritt bereitstellst.
 
 ### Wie geht es weiter?
 
-Lerne, wie du Ausgaben von gestapelten Process-Aufrufen sammelst und sie in einen einzelnen Process einspeist.
+Lerne, wie du Ausgaben von gestapelten Prozess-Aufrufen sammelst und sie in einen einzelnen Prozess einspeist.
 
 ---
 

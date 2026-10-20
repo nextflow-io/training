@@ -889,7 +889,7 @@ Sin embargo, los resultados de las ejecuciones anteriores todavía se conservan 
     Puede distinguir fácilmente los parámetros a nivel de Nextflow de los parámetros a nivel de pipeline.
 
     - Los parámetros que se aplican a un pipeline siempre llevan un guion doble (`--`).
-    - Los parámetros que modifican una configuración de Nextflow, _p. ej._ la función `-resume` que usamos anteriormente, llevan un solo guion (`-`).
+    - Los parámetros que modifican una configuración de Nextflow, _p. ej._ la opción `-o` que mencionamos anteriormente, llevan un solo guion (`-`).
 
 ### 3.4. Use valores predeterminados para parámetros de línea de comandos
 

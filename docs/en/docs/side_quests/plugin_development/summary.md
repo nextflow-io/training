@@ -169,7 +169,7 @@ Reading production plugin code is one of the best ways to learn patterns and con
 
 **Official documentation:**
 
-- [Using plugins](https://www.nextflow.io/docs/latest/plugins/plugins.html): comprehensive guide to installing and configuring plugins
+- [Using plugins](https://www.nextflow.io/docs/latest/plugins/using-plugins.html): comprehensive guide to installing and configuring plugins
 - [Developing plugins](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html): detailed plugin development reference
 - [Config scopes](https://nextflow.io/docs/latest/developer/config-scopes.html): creating configuration scopes for plugins
 

@@ -105,7 +105,7 @@ Der Workflow, den wir testen werden, ist eine Teilmenge des Hello-Workflows, der
 
     Der Workflow nimmt eine CSV-Datei mit Begrüßungen entgegen, führt vier aufeinanderfolgende Transformationsschritte durch und gibt eine einzelne Textdatei aus, die ein ASCII-Bild einer lustigen Figur enthält, die die Begrüßungen sagt.
 
-    Die vier Schritte sind als Nextflow-Prozesse implementiert (`sayHello`, `convertToUpper`, `collectGreetings` und `cowpy`), die in separaten Moduldateien gespeichert sind.
+    Die vier Schritte sind als Nextflow-Prozesse (`sayHello`, `convertToUpper`, `collectGreetings` und `cowpy`) implementiert, die in separaten Moduldateien gespeichert sind.
 
     1. **`sayHello`:** Schreibt jede Begrüßung in eine eigene Ausgabedatei (z. B. "Hello-output.txt")
     2. **`convertToUpper`:** Konvertiert jede Begrüßung in Großbuchstaben (z. B. "HELLO")
@@ -159,7 +159,7 @@ Den vollständigen Workflow-Code siehst du unten.
 
         script:
         """
-        cat '$input_file' | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
+        cat $input_file | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
         """
     }
 

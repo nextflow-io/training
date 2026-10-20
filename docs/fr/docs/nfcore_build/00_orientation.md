@@ -25,7 +25,7 @@ Si vous suivez ce cours par vous-même, veuillez vous familiariser avec les [not
 Cette formation fonctionne avec **Nextflow 25.10.2** ou version ultérieure **avec l'analyseur de syntaxe v2**, qui est le comportement par défaut à partir de Nextflow 26.04.
 Dans notre environnement de formation, vous n'avez rien à faire : il exécute Nextflow 26.04.4 avec l'analyseur v2. Si vous utilisez un environnement local ou personnalisé, consultez les [notes de version](../info/nxf_versions.md).
 
-La formation nécessite en outre **nf-core tools 4.0.2**.
+La formation nécessite en outre **nf-core tools 4.1.0**.
 Si vous utilisez une version différente des outils nf-core, vous pourriez rencontrer des difficultés à suivre.
 
 Vous pouvez vérifier quelle version est installée dans votre environnement à l'aide de la commande `nf-core --version`.
@@ -104,14 +104,11 @@ Nous utilisons des sections repliables comme celle-ci pour inclure la sortie de 
 ### Configurer la référence du pipeline
 
 La Partie 1 de ce cours fait référence au code source du pipeline `nf-core/demo` à titre de référence.
-Récupérez-le et créez un raccourci pour le parcourir facilement :
+Clonez-le dans un répertoire local pour pouvoir le parcourir facilement :
 
 ```bash
-nextflow pull nf-core/demo
-ln -s $NXF_HOME/assets pipelines
+nextflow clone nf-core/demo pipelines/nf-core/demo
 ```
-
-Si vous avez déjà suivi le cours [Utiliser nf-core](../nfcore_use/index.md), `nf-core/demo` est déjà mis en cache localement, mais le lien symbolique ci-dessus doit tout de même être créé dans ce répertoire.
 
 ## Liste de vérification de préparation
 
@@ -119,7 +116,7 @@ Pensez-vous être prêt·e à vous lancer ?
 
 - [ ] Je comprends l'objectif de ce cours et ses prérequis
 - [ ] Mon environnement est opérationnel
-- [ ] J'utilise nf-core tools 4.0.2 (à vérifier avec `nf-core --version`)
+- [ ] J'utilise nf-core tools 4.1.0 (à vérifier avec `nf-core --version`)
 - [ ] J'ai défini mon répertoire de travail de manière appropriée
 
 Si vous pouvez cocher toutes les cases, vous êtes prêt·e à commencer.

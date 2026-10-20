@@ -171,7 +171,7 @@ Nextflow 문서에는 이 교육 과정 외에도 채널 팩토리, 연산자 �
 
 **공식 문서:**
 
-- [플러그인 사용](https://www.nextflow.io/docs/latest/plugins/plugins.html): 플러그인 설치 및 설정에 대한 종합 가이드
+- [플러그인 사용](https://www.nextflow.io/docs/latest/plugins/using-plugins.html): 플러그인 설치 및 설정에 대한 종합 가이드
 - [플러그인 개발](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html): 상세한 플러그인 개발 참조 자료
 - [Config 스코프](https://nextflow.io/docs/latest/developer/config-scopes.html): 플러그인을 위한 설정 스코프 생성
 

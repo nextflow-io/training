@@ -45,11 +45,11 @@ process cowpy {
     conda 'conda-forge::cowpy==1.1.5'
 
     input:
-    path input_file
-    val character
+        path input_file
+        val character
 
     output:
-    path "cowpy-${input_file}"
+        path "cowpy-${input_file}"
 
     script:
     """
@@ -116,7 +116,7 @@ Os nomes dos processos diferenciam maiúsculas de minúsculas, então agora que 
 
 === "Depois"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -126,13 +126,13 @@ Os nomes dos processos diferenciam maiúsculas de minúsculas, então agora que 
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { COWPY                  } from '../modules/local/cowpy.nf'
     include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+    include { COWPY                  } from '../modules/local/cowpy.nf'
     ```
 
 === "Antes"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -142,8 +142,8 @@ Os nomes dos processos diferenciam maiúsculas de minúsculas, então agora que 
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { cowpy                  } from '../modules/local/cowpy.nf'
     include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+    include { cowpy                  } from '../modules/local/cowpy.nf'
     ```
 
 Poderíamos usar um alias na declaração de importação para evitar ter que atualizar as chamadas ao processo, mas isso de certa forma frustraria o objetivo de adotar a convenção de maiúsculas.
@@ -154,7 +154,7 @@ Então agora vamos atualizar as duas referências ao processo no bloco workflow 
 
 === "Depois"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 38"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="5 36"
     // extrai o arquivo da tupla pois cowpy ainda não usa metadata
     ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
@@ -181,24 +181,22 @@ Então agora vamos atualizar as duas referências ao processo no bloco workflow 
             "${process}:\n${tool_versions.join('\n')}"
         }
 
-    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
+            storeDir: "${outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
             sort: true,
             newLine: true
-        ).set { ch_collated_versions }
-
-
+        )
     emit:
     cowpy_hellos   = COWPY.out
-    versions       = ch_versions
+    versions       = ch_versions                 // canal: [ path(versions.yml) ]
     ```
 
 === "Antes"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 38"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="5 36"
     // extrai o arquivo da tupla pois cowpy ainda não usa metadata
     ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
@@ -225,19 +223,17 @@ Então agora vamos atualizar as duas referências ao processo no bloco workflow 
             "${process}:\n${tool_versions.join('\n')}"
         }
 
-    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
+            storeDir: "${outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
             sort: true,
             newLine: true
-        ).set { ch_collated_versions }
-
-
+        )
     emit:
     cowpy_hellos   = cowpy.out
-    versions       = ch_versions
+    versions       = ch_versions                 // canal: [ path(versions.yml) ]
     ```
 
 Certifique-se de fazer **ambas** as alterações, caso contrário você obterá um erro ao executar isto.
@@ -349,14 +345,14 @@ Abra o arquivo de fluxo de trabalho `hello.nf` (em `core-hello/workflows/`) e at
 
 === "Depois"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="2"
         // gera arte ASCII das saudações com cowpy
         COWPY(FIND_CONCATENATE.out.file_out, params.character)
     ```
 
 === "Antes"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="1-2 5"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="1-2 5"
         // extrai o arquivo da tupla pois cowpy ainda não usa metadata
         ch_for_cowpy = FIND_CONCATENATE.out.file_out.map{ meta, file -> file }
 
@@ -374,18 +370,18 @@ Como `COWPY` agora emite uma saída nomeada, `cowpy_output`, podemos atualizar o
 
 === "Depois"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="60" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="75" hl_lines="2"
         emit:
         cowpy_hellos   = COWPY.out.cowpy_output
-        versions       = ch_versions
+        versions       = ch_versions                 // canal: [ path(versions.yml) ]
     ```
 
 === "Antes"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="60" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="75" hl_lines="2"
         emit:
         cowpy_hellos   = COWPY.out
-        versions       = ch_versions
+        versions       = ch_versions                 // canal: [ path(versions.yml) ]
     ```
 
 Isso não é tecnicamente necessário, mas é uma boa prática referir-se a saídas nomeadas sempre que possível.
@@ -405,7 +401,6 @@ nextflow run . --outdir core-hello-results -profile test,docker
 
     Launching `./main.nf` [modest_saha] revision: d6bbba9521
 
-    Downloading plugin nf-schema@2.7.2
     Input/output options
       input                     : /workspaces/training/nfcore-build/core-hello/assets/greetings.csv
       outdir                    : core-hello-results
@@ -471,7 +466,7 @@ Abra o arquivo do módulo `cowpy.nf` (em `core-hello/modules/local/`) e modifiqu
 
 === "Depois"
 
-    ```groovy title="modules/local/cowpy.nf" linenums="1" hl_lines="16 18"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="16 18"
     // Gera arte ASCII com cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
@@ -601,14 +596,14 @@ Abra o arquivo de fluxo de trabalho `hello.nf` (em `core-hello/workflows/`) e at
 
 === "Depois"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="2"
         // gera arte ASCII das saudações com cowpy
         COWPY(FIND_CONCATENATE.out.file_out)
     ```
 
 === "Antes"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="44" hl_lines="2"
         // gera arte ASCII das saudações com cowpy
         COWPY(FIND_CONCATENATE.out.file_out, params.character)
     ```
@@ -759,7 +754,7 @@ Abra o arquivo do módulo `cowpy.nf` (em `core-hello/modules/local/`) e modifiqu
 
 === "Depois"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2 6 8"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="12" hl_lines="2 6 8"
         output:
             tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
 
@@ -774,7 +769,7 @@ Abra o arquivo do módulo `cowpy.nf` (em `core-hello/modules/local/`) e modifiqu
 
 === "Antes"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2 7"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="12" hl_lines="2 7"
         output:
             tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output
 
@@ -1143,17 +1138,17 @@ Abra o arquivo do módulo `cowpy.nf` e adicione uma linha de saída de versão c
 
 === "Depois"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="13" hl_lines="3"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="10" hl_lines="3"
         output:
-        tuple val(meta), path("${prefix}.txt")                                    , emit: cowpy_output
-        tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions , emit: versions_cowpy
+            tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
+            tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions, emit: versions_cowpy
     ```
 
 === "Antes"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="13"
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="10"
         output:
-        tuple val(meta), path("${prefix}.txt")  , emit: cowpy_output
+            tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
     ```
 
 A nova linha publica uma tupla `[process_name, tool_name, version]` no canal de tópico `"versions"`.
@@ -1236,8 +1231,11 @@ O comando `nf-core modules create` gera um template de módulo que já segue tod
 Vamos criar uma nova versão do módulo `COWPY` com um template mínimo executando este comando:
 
 ```bash
-nf-core modules create --empty-template COWPY
+nf-core modules create --empty-template cowpy
 ```
+
+O nome da ferramenta deve ser fornecido em letras minúsculas.
+A ferramenta o converte para o nome de processo em maiúsculas `COWPY` no código gerado.
 
 A flag `--empty-template` cria um template inicial limpo sem código extra, facilitando ver a estrutura essencial.
 
@@ -1246,6 +1244,8 @@ Ele automaticamente busca informações da ferramenta de repositórios de pacote
 
 Você será solicitado para várias opções de configuração:
 
+- **Nome do pacote Bioconda**: A ferramenta não consegue encontrar um pacote `cowpy` no Bioconda e pergunta se você deseja inserir um nome de pacote diferente.
+  Responda `n`; preencheremos as informações do pacote manualmente.
 - **Informações do autor**: Seu nome de usuário do GitHub para atribuição
 - **Label de recurso**: Um conjunto predefinido de requisitos computacionais.
   O projeto nf-core fornece labels padrão como `process_single` para ferramentas leves e `process_high` para as exigentes.
@@ -1282,7 +1282,9 @@ Cada arquivo serve um propósito específico:
 
 O `main.nf` gerado inclui todos os padrões que você acabou de aprender, mais alguns recursos adicionais:
 
-```groovy title="modules/local/cowpy/main.nf" hl_lines="11 21 22"
+```groovy title="modules/local/cowpy/main.nf" linenums="1" hl_lines="12 23 24"
+
+
 process COWPY {
     tag "$meta.id"
     label 'process_single'
@@ -1292,11 +1294,11 @@ process COWPY {
         'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
         'quay.io/biocontainers/YOUR-TOOL-HERE' }"
 
-    input:
-    tuple val(meta), path(input)        // Padrão 1: Tuplas de metadata ✓
+    input:tuple val(meta), path(input)        // Padrão 1: Tuplas de metadata ✓
 
     output:
     tuple val(meta), path("*"), emit: output
+
     tuple val("${task.process}"), val('cowpy'), eval("cowpy --version"), topic: versions, emit: versions_cowpy
 
     when:
@@ -1307,6 +1309,7 @@ process COWPY {
     def prefix = task.ext.prefix ?: "${meta.id}"  // Padrão 3: ext.prefix ✓
 
     """
+
     """
 
     stub:
@@ -1315,9 +1318,13 @@ process COWPY {
 
     """
     echo $args
+
     """
 }
 ```
+
+O arquivo gerado começa com duas linhas vazias, e o template coloca a declaração de entrada na mesma linha que `input:`.
+Vamos mover a declaração de entrada para sua própria linha quando atualizarmos as entradas e saídas na seção 2.3.1.
 
 Observe como todos os padrões que você aplicou manualmente acima já estão presentes!
 
@@ -1431,7 +1438,7 @@ Atualize os blocos de entrada e saída:
 
 === "Depois"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="10" hl_lines="1-2 5-6"
     input:
     tuple val(meta), path(input_file)
 
@@ -1442,17 +1449,18 @@ Atualize os blocos de entrada e saída:
 
 === "Antes"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5 6"
-    input:
-    tuple val(meta), path(input)
+    ```groovy title="modules/local/cowpy/main.nf" linenums="10" hl_lines="1 4-6"
+    input:tuple val(meta), path(input)
 
     output:
     tuple val(meta), path("*"), emit: output
-    tuple val("${task.process}"), val('cowpy'), eval("cowpy --version"), topic: versions    , emit: versions_cowpy
+
+    tuple val("${task.process}"), val('cowpy'), eval("cowpy --version"), topic: versions, emit: versions_cowpy
     ```
 
 Isso especifica:
 
+- A declaração de entrada em sua própria linha abaixo de `input:`
 - O nome do parâmetro do arquivo de entrada (`input_file` em vez do genérico `input`)
 - O nome do arquivo de saída usando o padrão de prefixo configurável (`#!groovy ${prefix}.txt` em vez do curinga `*`)
 - Um nome de emissão descritivo (`cowpy_output` em vez do genérico `output`)
@@ -1469,7 +1477,7 @@ Com base no módulo que escrevemos manualmente anteriormente, devemos fazer as s
 
 === "Depois"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="15" hl_lines="3 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="20" hl_lines="3 6"
     script:
     def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
@@ -1482,12 +1490,13 @@ Com base no módulo que escrevemos manualmente anteriormente, devemos fazer as s
 
 === "Antes"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="15" hl_lines="3"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="20" hl_lines="3"
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
+
     """
     ```
 
@@ -1508,7 +1517,7 @@ Não se preocupe muito se isso parece misterioso; incluímos isso por completude
 
 === "Depois"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="29" hl_lines="3 6"
     stub:
     def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
@@ -1521,13 +1530,14 @@ Não se preocupe muito se isso parece misterioso; incluímos isso por completude
 
 === "Antes"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="29" hl_lines="3 6"
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
     echo $args
+
     """
     ```
 
@@ -1547,7 +1557,7 @@ Tudo o que precisamos fazer para experimentar esta nova versão do módulo `COWP
 
 === "Depois"
 
-    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -1557,13 +1567,13 @@ Tudo o que precisamos fazer para experimentar esta nova versão do módulo `COWP
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { COWPY                  } from '../modules/local/cowpy/main.nf'
     include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+    include { COWPY                  } from '../modules/local/cowpy/main.nf'
     ```
 
 === "Antes"
 
-    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -1573,8 +1583,8 @@ Tudo o que precisamos fazer para experimentar esta nova versão do módulo `COWP
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { COWPY                  } from '../modules/local/cowpy.nf'
     include { FIND_CONCATENATE       } from '../modules/nf-core/find/concatenate/main'
+    include { COWPY                  } from '../modules/local/cowpy.nf'
     ```
 
 Vamos executar o pipeline para testá-lo.

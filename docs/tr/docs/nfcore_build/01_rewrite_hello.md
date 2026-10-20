@@ -25,9 +25,9 @@ Eğer Hello pipeline'ına aşina değilseniz veya hatırlatmaya ihtiyacınız va
 nf-core projesi, pipeline'ların nasıl yapılandırılacağı, kodun nasıl organize edileceği, yapılandırılacağı ve belgeleneceği konusunda güçlü yönergeler uygular.
 
 Pipeline oluşturma projemize başlamadan önce bu yapıyı ve organizasyonu anlamamız gerekiyor.
-O halde, [Başlarken](00_orientation.md) bölümünde oluşturduğunuz `pipelines` sembolik bağlantısını kullanarak `nf-core/demo` repository'sindeki pipeline kodunun nasıl organize edildiğine bir göz atalım.
+O halde, [Başlarken](00_orientation.md) bölümünde klonladığınız `pipelines/nf-core/demo` kopyasını kullanarak `nf-core/demo` repository'sindeki pipeline kodunun nasıl organize edildiğine bir göz atalım.
 
-Hatırlatma olarak, `nf-core/demo` dizinini bulmak ve açmak için `tree` komutunu ya da dosya gezginini kullanabilirsiniz.
+Hatırlatma olarak, `pipelines/nf-core/demo` dizinini bulmak ve açmak için `tree` komutunu ya da dosya gezginini kullanabilirsiniz.
 
 ```bash
 tree -L 1 pipelines/nf-core/demo
@@ -129,6 +129,11 @@ tree -L 3 pipelines/nf-core/demo/modules
 
     ```console
     pipelines/nf-core/demo/modules
+    ├── local
+    │   └── cowpy
+    │       ├── environment.yml
+    │       ├── main.nf
+    │       └── meta.yaml
     └── nf-core
         ├── fastqc
         │   ├── environment.yml
@@ -143,11 +148,11 @@ tree -L 3 pipelines/nf-core/demo/modules
         └── seqtk
             └── trim
 
-    7 directories, 6 files
+    9 directories, 9 files
     ```
 
 Burada `fastqc` ve `multiqc` modüllerinin `nf-core` modülleri içinde en üst düzeyde yer aldığını, `trim` modülünün ise ait olduğu araç takımı olan `seqtk` altında bulunduğunu görüyorsunuz.
-Bu durumda `local` modül bulunmamaktadır.
+`local` altındaki `cowpy` modülü, nf-core modülleri repository'sinden yüklenmek yerine bu pipeline için özel olarak yazılmış yerel bir modüldür.
 
 Süreci tanımlayan modül kod dosyası her zaman `main.nf` olarak adlandırılır ve şimdilik görmezden geleceğimiz testler ile `.yml` dosyaları ile birlikte gelir.
 
@@ -262,17 +267,16 @@ TUI kapandığında, aşağıdaki konsol çıktısını görmelisiniz.
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 4.0.2 - https://nf-co.re
+        nf-core/tools version 4.1.0 - https://nf-co.re
 
 
     INFO     Launching interactive nf-core pipeline creation tool.
     ```
 
-TUI tamamlandığında, araç pipeline'ın oluşturulduğunu, konteyner yapılandırmasının üretildiğini ve yeni pipeline için yerel bir git repository'sinin başlatıldığını bildirir:
+TUI tamamlandığında, araç pipeline'ın oluşturulduğunu ve yeni pipeline için yerel bir git repository'sinin başlatıldığını bildirir:
 
 ```console
 INFO     Creating new pipeline: 'hello'
-INFO     Generated container configs for the pipeline successfully.
 INFO     Initialising local pipeline git repository
 INFO     Pipeline created: ./core-hello
 ```
@@ -394,6 +398,27 @@ nextflow run ./core-hello -profile docker,test --outdir core-hello-results
 
 `WARN: Unrecognized config option 'validation.*'` satırları, yeni oluşturulan şablonda sabitlenmiş nf-schema eklentisinin sürümünden kaynaklanmaktadır.
 Bu uyarılar zararsızdır ve çalıştırmayı etkilemez.
+
+Kursun geri kalanı, bu uyarıları üretmeyen nf-schema 2.7.2 sürümünü kullanmaktadır.
+`core-hello/nextflow.config` dosyasını açın ve `plugins` bloğundaki eklenti sürümünü güncelleyin:
+
+=== "Sonra"
+
+    ```groovy title="core-hello/nextflow.config" linenums="246" hl_lines="3"
+    // Nextflow plugins
+    plugins {
+        id 'nf-schema@2.7.2' // Pipeline parametrelerinin doğrulanması ve örnek tablosundan girdi kanalı oluşturulması
+    }
+    ```
+
+=== "Önce"
+
+    ```groovy title="core-hello/nextflow.config" linenums="246" hl_lines="3"
+    // Nextflow plugins
+    plugins {
+        id 'nf-schema@2.5.1' // Pipeline parametrelerinin doğrulanması ve örnek tablosundan girdi kanalı oluşturulması
+    }
+    ```
 
 Bu, tüm temel bağlantıların yerinde olduğunu gösterir.
 Peki çıktılar nerede? Var mı?
@@ -745,7 +770,7 @@ Ardından, iş akışı gövdesinde çağrılan işlemlerin geri kalanından ön
 
 === "Önce"
 
-    ```groovy title="original-hello/hello.nf" linenums="21"
+    ```groovy title="original-hello/hello.nf" linenums="22"
         // bir selamlama yayınla
         sayHello(greeting_ch)
 
@@ -765,7 +790,7 @@ Bu temel olarak 'bu iş akışının _yaptığı_ budur' der.
 
 Son olarak, iş akışının son çıktılarının ne olduğunu bildiren bir `emit` ifadesi ekleyin.
 
-```groovy title="original-hello/hello.nf" linenums="35"
+```groovy title="original-hello/hello.nf" linenums="36"
     emit:
     cowpy_hellos = cowpy.out
 ```
@@ -914,7 +939,7 @@ Temel bir birleştirilebilir iş akışını nf-core iskeletine nasıl aşılaya
 
 ## 4. Güncellenmiş iş akışı mantığını yer tutucu iş akışına uydurma
 
-Artık birleştirilebilir iş akışımızın doğru çalıştığını doğruladığımıza göre, 1. bölümde oluşturduğumuz nf-core pipeline iskeletine geri dönelim.
+Artık birleştirilebilir iş akışımızın doğru çalıştığını doğruladığımıza göre, 2. bölümde oluşturduğumuz nf-core pipeline iskeletine geri dönelim.
 Az önce geliştirdiğimiz birleştirilebilir iş akışını nf-core şablon yapısına entegre etmek istiyoruz; böylece sonuç şuna benzer bir şey olmalıdır.
 
 <figure class="excalidraw">
@@ -923,7 +948,7 @@ Az önce geliştirdiğimiz birleştirilebilir iş akışını nf-core şablon ya
 
 Peki bunu nasıl gerçekleştiririz? `core-hello/workflows/hello.nf` içindeki (nf-core iskeleti) `HELLO` iş akışının mevcut içeriğine bir göz atalım.
 
-```groovy title="core-hello/workflows/hello.nf" linenums="1"
+```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 21 53"
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -987,11 +1012,11 @@ workflow HELLO {
 */
 ```
 
-Bu, birleştirilebilir iş akışı yapısıdır: `take:`, `main:` ve `emit:` içeren adlandırılmış bir `workflow HELLO {` bloğu.
-17–34. satırlar arasındaki büyük blok daha önemlidir: nf-core'un 2026 yılında tüm pipeline'lara yaygınlaştırdığı bir mekanizma olan topic kanallarını kullanarak yazılım sürümü yakalamayı yönetir.
+Vurgulanan satırlar birleştirilebilir iş akışı yapısını tanımlar: `workflow HELLO {`, `take:`, `main:` ve `emit:`.
+25–52. satırlar arasındaki büyük blok daha önemlidir: nf-core'un 2026 yılında tüm pipeline'lara yaygınlaştırdığı bir mekanizma olan topic kanallarını kullanarak yazılım sürümü yakalamayı yönetir.
 Bunu 3. Bölümde açıklayacağız; şimdilik dokunmadan bırakabileceğiniz standart bir şablon kodu olarak değerlendirin.
 
-2. bölümde geliştirdiğimiz orijinal iş akışının birleştirilebilir versiyonundan ilgili kodu eklememiz gerekiyor.
+3. bölümde geliştirdiğimiz orijinal iş akışının birleştirilebilir versiyonundan ilgili kodu eklememiz gerekiyor.
 
 Bunu şu aşamalarda ele alacağız:
 
@@ -1040,7 +1065,7 @@ tree core-hello/modules
 
 Bunlar `original-hello/hello.nf` iş akışındaki import ifadeleriydi:
 
-```groovy title="original-hello/hello.nf" linenums="9"
+```groovy title="original-hello/hello.nf" linenums="10"
 // Modülleri dahil et
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
@@ -1088,7 +1113,7 @@ Burada iki ilginç gözlem daha:
 nf-core projesinin, tipik olarak sütunsal veri içeren bir CSV dosyası olan samplesheet kavramı etrafında çok sayıda önceden oluşturulmuş işlevselliği vardır.
 `greetings.csv` dosyamız esasen bu olduğundan, mevcut `take` bildirimini olduğu gibi tutacağız ve bir sonraki adımda sadece girdi kanalının adını güncelleyeceğiz.
 
-```groovy title="core-hello/workflows/hello.nf" linenums="17"
+```groovy title="core-hello/workflows/hello.nf" linenums="21"
     take:
     ch_samplesheet // kanal: --input parametresinden okunan samplesheet
     outdir
@@ -1126,7 +1151,7 @@ Bu sıralama mantıklıdır çünkü gerçek bir pipeline'da, süreçler iş ak�
 
 === "Sonra"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="15" hl_lines="11-21"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="19" hl_lines="11-21"
     workflow HELLO {
 
         take:
@@ -1184,7 +1209,7 @@ Bu sıralama mantıklıdır çünkü gerçek bir pipeline'da, süreçler iş ak�
 
 === "Önce"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="15"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="19"
     workflow HELLO {
 
         take:
@@ -1232,14 +1257,14 @@ Bu harika görünüyor, ancak `sayHello()` sürecine ilettiğimiz kanalın adın
 
 === "Sonra"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="25"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
         // bir selamlama yayınla (samplesheet'ler için nf-core kuralını kullanacak şekilde güncellendi)
         sayHello(ch_samplesheet)
     ```
 
 === "Önce"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="25"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="29"
         // bir selamlama yayınla
         sayHello(greeting_ch)
     ```
@@ -1252,7 +1277,7 @@ Son olarak, iş akışının son çıktılarının bildirimini içerecek şekild
 
 === "Sonra"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="71" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="69" hl_lines="2"
         emit:
         cowpy_hellos   = cowpy.out
         versions       = ch_versions                 // kanal: [ path(versions.yml) ]
@@ -1260,7 +1285,7 @@ Son olarak, iş akışının son çıktılarının bildirimini içerecek şekild
 
 === "Önce"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="71"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="69"
         emit:
         versions       = ch_versions                 // kanal: [ path(versions.yml) ]
     ```
@@ -1397,13 +1422,13 @@ Biraz araştırma, girdi işlemenin uygun bir şekilde `core-hello/subworkflows/
 
 Bu dosyayı açıp aşağı kaydırırsak, bu kod bloğuna geliriz:
 
-```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76"
+```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84"
     //
     // params.input aracılığıyla sağlanan girdi dosyasından kanal oluştur
     //
 
     channel
-        .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+        .fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
         .map {
             meta, fastq_1, fastq_2 ->
                 if (!fastq_2) {
@@ -1462,7 +1487,7 @@ Yani sadece bunu küçük değişikliklerle başlatma iş akışına eklememiz g
 
 === "Sonra"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-7"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5-7"
         //
         // params.input aracılığıyla sağlanan girdi dosyasından kanal oluştur
         //
@@ -1478,13 +1503,13 @@ Yani sadece bunu küçük değişikliklerle başlatma iş akışına eklememiz g
 
 === "Önce"
 
-    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-23"
+    ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="84" hl_lines="5-23"
         //
         // params.input aracılığıyla sağlanan girdi dosyasından kanal oluştur
         //
 
         channel
-            .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+            .fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
             .map {
                 meta, fastq_1, fastq_2 ->
                     if (!fastq_2) {
@@ -1656,6 +1681,7 @@ Tüm değişiklikleri doğru yaptıysanız, tamamlanana kadar çalışmalıdır.
     ```console
      N E X T F L O W   ~  version 26.04.4
 
+    Downloading plugin nf-schema@2.7.2
     Launching `core-hello/main.nf` [voluminous_caravaggio] revision: d6bbba9521
 
     Input/output options
@@ -1720,7 +1746,7 @@ tree core-hello-results
         ├── pipeline_dag_2026-06-23_16-56-58.html
         └── pipeline_dag_2026-06-23_16-58-45.html
 
-    1 directory, 12 files
+    1 directory, 11 files
     ```
 
 İş akışı henüz yalnızca bir yer tutucu iken ilk çalıştırmada elde ettiklerimize ek olarak başka bir yürütme raporu seti aldığımızı görebilirsiniz.
