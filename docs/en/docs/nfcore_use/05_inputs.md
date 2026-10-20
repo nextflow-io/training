@@ -17,7 +17,7 @@ Every nf-core pipeline documents its samplesheet format in two places: the usage
 
 ### 1.1. Read the usage documentation
 
-Open the [nf-core/rnaseq usage documentation](https://nf-co.re/rnaseq/usage) in your browser and find the **Samplesheet input** section.
+Open the [nf-core/rnaseq usage documentation](https://nf-co.re/rnaseq/3.27.0/docs/usage) in your browser and find the **Samplesheet input** section.
 
 It tells you that the samplesheet must be a comma-separated file with the following columns:
 
@@ -39,7 +39,7 @@ The usage documentation is written by the pipeline developers, so it can fall be
 The input schema is what the pipeline actually enforces.
 
 The input schema lives in the pipeline repository at `assets/schema_input.json`.
-You can view it on GitHub at [github.com/nf-core/rnaseq/blob/master/assets/schema_input.json](https://github.com/nf-core/rnaseq/blob/master/assets/schema_input.json).
+You can view it on GitHub at [github.com/nf-core/rnaseq/blob/3.27.0/assets/schema_input.json](https://github.com/nf-core/rnaseq/blob/3.27.0/assets/schema_input.json).
 
 ??? abstract "Input schema (excerpt)"
 
@@ -203,7 +203,7 @@ The `-preview` option runs the pipeline's launch steps, including input validati
 Run the pipeline with your samplesheet and the `-preview` option:
 
 ```bash
-nextflow run nf-core/rnaseq -profile test,docker --input samplesheet.csv --outdir results -preview
+nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --input samplesheet.csv --outdir results -preview
 ```
 
 The `test` profile provides the reference files, and `--input` replaces its samplesheet with yours.
@@ -230,10 +230,12 @@ If you made a mistake, the pipeline stops with a list of errors; sections 4 and 
     Then remove `-preview` and add `-c laptop.config` as in Part 3:
 
     ```bash
-    nextflow run nf-core/rnaseq -profile test,docker --input samplesheet.csv --outdir results -c laptop.config -params-file small_reads.yml
+    nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --input samplesheet.csv --outdir results -c laptop.config -params-file small_reads.yml
     ```
 
     The parameter must be set in a params file rather than as `--min_trimmed_reads 1000` on the command line, because command-line values are passed as strings and the pipeline expects an integer.
+
+    On the default 2-core machine, a full run can fill the disk with container images; see the [disk space warning in Part 3](./03_run_production_pipeline.md#13-re-run-with-a-custom-configuration).
 
 ### Takeaway
 
@@ -265,7 +267,7 @@ They were chosen because their files are only a few megabytes each.
 Run `nf-core/fetchngs` with these accessions, and request a samplesheet for `nf-core/rnaseq`:
 
 ```bash
-nextflow run nf-core/fetchngs -profile docker --input data/sra_ids.csv --outdir fetchngs-results --nf_core_pipeline rnaseq
+nextflow run nf-core/fetchngs -r 1.13.0 -profile docker --input data/sra_ids.csv --outdir fetchngs-results --nf_core_pipeline rnaseq
 ```
 
 The pipeline downloads the FASTQ files from the ENA, so it needs access to the internet.
@@ -321,7 +323,7 @@ The samplesheet is valid as it is.
 You can check it with `-preview`:
 
 ```bash
-nextflow run nf-core/rnaseq -profile test,docker --input fetchngs-results/samplesheet/samplesheet.csv --outdir results -preview
+nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --input fetchngs-results/samplesheet/samplesheet.csv --outdir results -preview
 ```
 
 ```console title="Command output (excerpt)"
@@ -380,7 +382,7 @@ Your working directory contains a samplesheet named `broken_samplesheet_1.csv`.
 Run the pipeline with it, using `-preview` as in section 2.3 so that no tasks run:
 
 ```bash
-nextflow run nf-core/rnaseq -profile test,docker --input broken_samplesheet_1.csv --outdir results -preview
+nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --input broken_samplesheet_1.csv --outdir results -preview
 ```
 
 ```console title="Command output (excerpt)"
@@ -471,7 +473,7 @@ Your working directory also contains `broken_samplesheet_2.csv`.
 Check it with `-preview`:
 
 ```bash
-nextflow run nf-core/rnaseq -profile test,docker --input broken_samplesheet_2.csv --outdir results -preview
+nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --input broken_samplesheet_2.csv --outdir results -preview
 ```
 
 ```console title="Command output (excerpt)"
@@ -487,7 +489,7 @@ To reach them without spending time on real computation, use the `-stub` option.
 It runs the pipeline with placeholder commands that produce empty output files instead of running the actual tools.
 
 ```bash
-nextflow run nf-core/rnaseq -profile test,docker --input broken_samplesheet_2.csv --outdir results -stub
+nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --input broken_samplesheet_2.csv --outdir results -stub
 ```
 
 ```console title="Command output (excerpt)"

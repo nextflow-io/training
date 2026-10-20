@@ -104,8 +104,8 @@ If you haven't found a candidate after about five minutes, open the hint for you
 For each candidate, open its page and note:
 
 - **What it does**: the introduction summarizes the pipeline's purpose and its main steps, often with a diagram.
-- **Release status**: a pipeline with a stable release has been reviewed by the nf-core community.
-  Pipelines still under development are listed in the catalog but have no release yet.
+- **Release status**: a stable release means the pipeline is considered ready for production use.
+  Pipelines still under development are listed in the catalog without a stable release; they may change significantly from one version to the next, so results may not be reproducible across updates.
 - **Last update**: a pipeline that is actively maintained is more likely to support current tool versions and reference data.
 
 ### Takeaway

@@ -165,7 +165,7 @@ A `withName` selector takes precedence over a `withLabel` selector, so `PICARD_M
 Run the test profile again, using `tuned.config` instead of `laptop.config`, with a new output directory:
 
 ```bash
-nextflow run nf-core/rnaseq -profile test,docker -c tuned.config --outdir rnaseq-tuned
+nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker -c tuned.config --outdir rnaseq-tuned
 ```
 
 Compare the run time with the Part 3 run, then open the new execution timeline in `rnaseq-tuned/pipeline_info/`.
