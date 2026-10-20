@@ -90,6 +90,7 @@ tree .
     │   │   ├── WT_2_S2_L001_R1_001.fastq.gz
     │   │   └── WT_2_S2_L001_R2_001.fastq.gz
     │   └── sra_ids.csv
+    ├── INSTRUCTORS.md
     ├── laptop.config
     ├── malformed_samplesheet.csv
     ├── my_params.yml
@@ -106,6 +107,7 @@ tree .
 - **The `data/reads/` directory** contains FASTQ files for a small RNA-seq experiment, and **the `data/sra_ids.csv` file** lists public sequencing runs; both are used in Part 5 to prepare samplesheets.
 - **The `broken_samplesheet_1.csv` and `broken_samplesheet_2.csv` files** contain errors to diagnose and fix in Part 5.
 - **The `solutions/` directory** contains the completed samplesheets from Part 5 and the tuned configuration file from Part 6.
+- **The `INSTRUCTORS.md` file** contains notes for instructors running the course live; you can ignore it.
 
 ## Readiness checklist
 
