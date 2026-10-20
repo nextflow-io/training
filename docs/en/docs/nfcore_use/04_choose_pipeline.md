@@ -21,38 +21,54 @@ Working alone, write down your answers as you go and compare them with the worke
 
 Choose the scenario closest to your own research interests.
 
-#### 1.1.1. Structural variants in an unsolved rare disease trio
+<!-- prettier-ignore-start -->
 
-A clinical research lab is studying a child with a suspected genetic disorder.
-Exome sequencing of the child and both unaffected parents did not find a causal variant, so the family was re-sequenced with long-read whole-genome sequencing, which detects structural variants that short reads miss.
-The lab wants a short list of candidate structural variants, prioritized by their relevance to the child's clinical features, which have been recorded as HPO terms.
+<div class="grid cards" markdown>
 
-- **Data**: Oxford Nanopore whole-genome FASTQ files for three individuals, and HPO terms for the child
-- **Reference**: GRCh38
+-   :material-account-group:{ .lg .middle } __Structural variants in an unsolved rare disease trio__
 
-#### 1.1.2. Differential expression in bulk RNA-seq
+    ---
 
-A neurogenetics group has bulk RNA-seq from iPSC-derived neurons carrying a risk variant and isogenic controls, with four replicates each.
-They want to know which genes are differentially expressed between the two groups.
+    A clinical research lab is studying a child with a suspected genetic disorder.
+    Exome sequencing of the child and both unaffected parents did not find a causal variant, so the family was re-sequenced with long-read whole-genome sequencing, which detects structural variants that short reads miss.
+    The lab wants a short list of candidate structural variants, prioritized by their relevance to the child's clinical features, which have been recorded as HPO terms.
 
-- **Data**: paired-end Illumina FASTQ files for eight samples
-- **Reference**: GRCh38
+    - **Data**: Oxford Nanopore whole-genome FASTQ files for three individuals, and HPO terms for the child
+    - **Reference**: GRCh38
 
-#### 1.1.3. Single-cell RNA-seq of immune cells
+-   :material-flask-outline:{ .lg .middle } __Differential expression in bulk RNA-seq__
 
-An immunology group has 10x Genomics single-cell RNA-seq of peripheral blood mononuclear cells from patients and healthy controls.
-They want to identify cell types and compare their proportions between patients and controls.
+    ---
 
-- **Data**: 10x Chromium 3' FASTQ files for six samples
-- **Reference**: GRCh38
+    A neurogenetics group has bulk RNA-seq from iPSC-derived neurons carrying a risk variant and isogenic controls, with four replicates each.
+    They want to know which genes are differentially expressed between the two groups.
 
-#### 1.1.4. DNA methylation at imprinted loci
+    - **Data**: paired-end Illumina FASTQ files for eight samples
+    - **Reference**: GRCh38
 
-An epigenetics group has whole-genome bisulfite sequencing from patients with a suspected imprinting disorder and matched controls.
-They want methylation levels at known imprinted loci for each sample.
+-   :material-scatter-plot-outline:{ .lg .middle } __Single-cell RNA-seq of immune cells__
 
-- **Data**: paired-end Illumina bisulfite FASTQ files for six samples
-- **Reference**: GRCh38
+    ---
+
+    An immunology group has 10x Genomics single-cell RNA-seq of peripheral blood mononuclear cells from patients and healthy controls.
+    They want to identify cell types and compare their proportions between patients and controls.
+
+    - **Data**: 10x Chromium 3' FASTQ files for six samples
+    - **Reference**: GRCh38
+
+-   :material-dna:{ .lg .middle } __DNA methylation at imprinted loci__
+
+    ---
+
+    An epigenetics group has whole-genome bisulfite sequencing from patients with a suspected imprinting disorder and matched controls.
+    They want methylation levels at known imprinted loci for each sample.
+
+    - **Data**: paired-end Illumina bisulfite FASTQ files for six samples
+    - **Reference**: GRCh38
+
+</div>
+
+<!-- prettier-ignore-end -->
 
 ### 1.2. Define the goal
 
