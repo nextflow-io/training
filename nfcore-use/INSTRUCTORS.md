@@ -76,7 +76,7 @@ Read this before the session; learners don't need it.
 | 2. Configure pipeline execution        | 20 min                                                   |
 | 3. Run a production pipeline           | 25 min                                                   |
 | 4. Choose a pipeline                   | 40 min                                                   |
-| 5. Prepare your inputs                 | 45 min                                                   |
+| 5. Prepare your inputs                 | 40 min                                                   |
 | 6. Scale up and tune compute resources | 40 min, including a machine switch and two pipeline runs |
 
 ## Known upstream issues
