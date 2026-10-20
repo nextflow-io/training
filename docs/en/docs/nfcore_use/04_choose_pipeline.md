@@ -29,7 +29,6 @@ The lab wants a short list of candidate structural variants, prioritized by thei
 
 - **Data**: Oxford Nanopore whole-genome FASTQ files for three individuals, and HPO terms for the child
 - **Reference**: GRCh38
-- **Starting point**: [nf-core/raredisease](https://nf-co.re/raredisease)
 
 #### 1.1.2. Differential expression in bulk RNA-seq
 
@@ -38,7 +37,6 @@ They want to know which genes are differentially expressed between the two group
 
 - **Data**: paired-end Illumina FASTQ files for eight samples
 - **Reference**: GRCh38
-- **Starting points**: [nf-core/rnaseq](https://nf-co.re/rnaseq), [nf-core/differentialabundance](https://nf-co.re/differentialabundance)
 
 #### 1.1.3. Single-cell RNA-seq of immune cells
 
@@ -47,7 +45,6 @@ They want to identify cell types and compare their proportions between patients 
 
 - **Data**: 10x Chromium 3' FASTQ files for six samples
 - **Reference**: GRCh38
-- **Starting point**: [nf-core/scrnaseq](https://nf-co.re/scrnaseq)
 
 #### 1.1.4. DNA methylation at imprinted loci
 
@@ -56,7 +53,6 @@ They want methylation levels at known imprinted loci for each sample.
 
 - **Data**: paired-end Illumina bisulfite FASTQ files for six samples
 - **Reference**: GRCh38
-- **Starting point**: [nf-core/methylseq](https://nf-co.re/methylseq)
 
 ### 1.2. Define the goal
 
@@ -80,10 +76,28 @@ Find pipelines that could produce that result.
 
 ### 2.1. Search the catalog
 
-Open the [nf-core pipelines catalog](https://nf-co.re/pipelines) and search using keywords from your scenario, such as the data type (`exome`, `bisulfite`, `single-cell`) or the analysis (`variant calling`, `differential expression`).
+Open the [nf-core pipelines catalog](https://nf-co.re/pipelines) and search using keywords from your scenario: the data type (`long-read`, `bisulfite`, `single-cell`), the assay or platform (`nanopore`, `10x`), or the analysis (`structural variants`, `differential expression`).
+Try several keywords, since a pipeline's name does not always reflect everything it does.
 
-Your scenario lists one or two starting points, but don't stop there.
-Look for other pipelines that could be relevant, and shortlist up to two candidates.
+Shortlist up to two candidates.
+If you haven't found a candidate after about five minutes, open the hint for your scenario.
+
+??? tip "Hint: Structural variants in an unsolved rare disease trio"
+
+    Compare [nf-core/raredisease](https://nf-co.re/raredisease) and [nf-core/longraredisease](https://nf-co.re/longraredisease).
+    Both address rare disease; which one fits your data?
+
+??? tip "Hint: Differential expression in bulk RNA-seq"
+
+    Look at [nf-core/rnaseq](https://nf-co.re/rnaseq) and [nf-core/differentialabundance](https://nf-co.re/differentialabundance).
+
+??? tip "Hint: Single-cell RNA-seq of immune cells"
+
+    Look at [nf-core/scrnaseq](https://nf-co.re/scrnaseq).
+
+??? tip "Hint: DNA methylation at imprinted loci"
+
+    Look at [nf-core/methylseq](https://nf-co.re/methylseq).
 
 ### 2.2. Check the pipeline status
 
