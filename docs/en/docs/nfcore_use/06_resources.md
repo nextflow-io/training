@@ -278,10 +278,6 @@ On real data, where individual tasks run for minutes or hours, running more of t
 
     Which processes would you right-size for your dataset, and in which direction?
 
-### 3.4. Switch back to the default machine
-
-When you're done, switch your codespace back to the 2-core machine type, following the same steps as in section 1.1, to avoid using up your quota.
-
 ### Takeaway
 
 `resourceLimits` keeps requests within what the machine can provide, and label-level overrides based on the execution report let more tasks run in parallel.
