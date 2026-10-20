@@ -288,6 +288,9 @@ Keeping the `task.attempt` multiplier preserves the pipeline's automatic retry w
 You've completed the Use nf-core course.
 See [Next steps](next_steps.md) for where to go from here.
 
+If you go on to other courses in the same codespace, first switch it back to the 2-core machine type, following the steps in [section 1.1](#11-change-the-machine-type).
+The 8-core machine uses your quota four times faster.
+
 ---
 
 ## Summary
