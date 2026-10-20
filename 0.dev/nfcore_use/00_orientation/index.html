@@ -1000,6 +1000,36 @@ md-nav__item--active">
 </li>
           
 <li class="md-nav__item">
+  <a href="../04_choose_pipeline/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 4: Choose a pipeline for a scientific question   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../05_inputs/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 5: Prepare your inputs   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../06_resources/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 6: Scale up and tune compute resources   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
   <a href="../next_steps/" class="md-nav__link">
       
 <span class="md-ellipsis">
@@ -2631,13 +2661,10 @@ All instructions given during the course (e.g. 'open the file', 'edit the code' 
 <p>This training works with Nextflow 25.10.2 or later <strong>with the v2 syntax parser</strong>, which is the default from Nextflow 26.04 onward.
 In our training environment you don't need to do anything: it runs Nextflow 26.04.4 with the v2 parser. If you are using a local or custom environment, see the <a href="../../info/nxf_versions/">version notes</a>.</p>
 <div class="admonition warning">
-<p class="admonition-title">nf-core/demo requires Nextflow 25.10.4 or later</p>
-<p>The <code>nf-core/demo</code> pipeline used in Part 1 enforces its own minimum Nextflow version (<code>&gt;=25.10.4</code>), which is stricter than the general training floor of 25.10.2.
+<p class="admonition-title">The pipelines in this course require Nextflow 25.10.4 or later</p>
+<p>The <code>nf-core/demo</code>, <code>nf-core/rnaseq</code> and <code>nf-core/fetchngs</code> pipelines used in this course enforce their own minimum Nextflow version (<code>&gt;=25.10.4</code>), which is stricter than the general training floor of 25.10.2.
 Our training environment already satisfies this; if you are using a local or custom environment, make sure you are on Nextflow 25.10.4 or later.</p>
 </div>
-<p>This training additionally requires <strong>nf-core tools 4.0.2</strong>.
-If you use a different version of nf-core tooling, you may have difficulty following along.</p>
-<p>You can check what version is installed in your environment using the command <code>nf-core --version</code>.</p>
 <div class="admonition warning">
 <p class="admonition-title">v2 parser compatibility</p>
 <p>Many nf-core pipelines do not yet support the v2 syntax parser.
@@ -2651,12 +2678,9 @@ See the <a href="../../info/nxf_versions/">version notes</a> for details.</p>
 <p>Change directory now by running this command in the terminal:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>nfcore-use/
 </code></pre></div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>If for whatever reason you move out of this directory (e.g. your codespace goes to sleep), you can always use the full path to return to it, assuming you're running this within the Github Codespaces training environment:</p>
+<p>If for whatever reason you move out of this directory (e.g. your codespace goes to sleep), you can always use the full path to return to it, assuming you're running this within the GitHub Codespaces training environment:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>/workspaces/training/nfcore-use
 </code></pre></div>
-</div>
 <p>Next, explore the contents of this directory.</p>
 <h3 id="explore-the-materials-provided">Explore the materials provided<a class="headerlink" href="#explore-the-materials-provided" title="Permanent link">&para;</a></h3>
 <p>You can explore the contents of this directory by using the file explorer on the left-hand side of the training workspace.
@@ -2666,24 +2690,48 @@ Alternatively, you can use the <code>tree</code> command.</p>
 <details class="abstract">
 <summary>Directory contents</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">.</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="go">├── custom.config</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">├── laptop.config</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="go">├── malformed_samplesheet.csv</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="go">└── my_params.yml</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="go">├── broken_samplesheet_1.csv</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">├── broken_samplesheet_2.csv</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="go">├── custom.config</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="go">├── data</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="go">│   ├── reads</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="go">│   │   ├── KO_1_S3_L001_R1_001.fastq.gz</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="go">│   │   ├── KO_1_S3_L001_R2_001.fastq.gz</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="go">│   │   ├── KO_2_S4_L001_R1_001.fastq.gz</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="go">│   │   ├── KO_2_S4_L001_R2_001.fastq.gz</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="go">│   │   ├── WT_1_S1_L001_R1_001.fastq.gz</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="go">│   │   ├── WT_1_S1_L001_R2_001.fastq.gz</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="go">│   │   ├── WT_1_S1_L002_R1_001.fastq.gz</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="go">│   │   ├── WT_1_S1_L002_R2_001.fastq.gz</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="go">│   │   ├── WT_2_S2_L001_R1_001.fastq.gz</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="go">│   │   └── WT_2_S2_L001_R2_001.fastq.gz</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="go">│   └── sra_ids.csv</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="go">├── INSTRUCTORS.md</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="go">├── laptop.config</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="go">├── malformed_samplesheet.csv</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="go">├── my_params.yml</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="go">└── solutions</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="go">    ├── samplesheet.csv</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="go">    └── tuned.config</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="go">3 directories, 20 files</span>
 </code></pre></div>
 </details>
 <ul>
-<li><strong>The <code>laptop.config</code> file</strong> is a configuration file we'll use in section 4 to cap resource usage when running a production-scale pipeline locally.
+<li><strong>The <code>laptop.config</code> file</strong> is a configuration file we'll use in Parts 3 and 5 to cap resource usage when running a production-scale pipeline locally.
   You can ignore it until then.</li>
 <li><strong>The <code>my_params.yml</code>, <code>malformed_samplesheet.csv</code>, and <code>custom.config</code> files</strong> are used in Part 2, to demonstrate setting parameters from a file, input validation, and process-level configuration overrides.
   You can ignore them until then too.</li>
+<li><strong>The <code>data/reads/</code> directory</strong> contains FASTQ files for a small RNA-seq experiment, and <strong>the <code>data/sra_ids.csv</code> file</strong> lists public sequencing runs; both are used in Part 5 to prepare samplesheets.</li>
+<li><strong>The <code>broken_samplesheet_1.csv</code> and <code>broken_samplesheet_2.csv</code> files</strong> contain errors to diagnose and fix in Part 5.</li>
+<li><strong>The <code>solutions/</code> directory</strong> contains the completed samplesheet from Part 5 and the tuned configuration file from Part 6.</li>
+<li><strong>The <code>INSTRUCTORS.md</code> file</strong> contains notes for instructors running the course live; you can ignore it.</li>
 </ul>
 <h2 id="readiness-checklist">Readiness checklist<a class="headerlink" href="#readiness-checklist" title="Permanent link">&para;</a></h2>
 <p>Think you're ready to dive in?</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I understand the goal of this course and its prerequisites</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> My environment is up and running</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I'm using nf-core tools 4.0.2 (check with <code>nf-core --version</code>)</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> I've set my working directory appropriately</li>
 </ul>
 <p>If you can check all the boxes, you're good to go.</p>

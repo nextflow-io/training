@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://training.nextflow.io/nfcore_use/next_steps/">
       
       
-        <link rel="prev" href="../03_run_production_pipeline/">
+        <link rel="prev" href="../06_resources/">
       
       
         <link rel="next" href="../survey/">
@@ -699,6 +699,36 @@ md-nav__item--active md-nav__item--nested">
       
 <span class="md-ellipsis">
     Part 3: Run a production pipeline   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../04_choose_pipeline/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 4: Choose a pipeline for a scientific question   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../05_inputs/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 5: Prepare your inputs   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../06_resources/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 6: Scale up and tune compute resources   
 </span>
   
   </a>
@@ -2585,7 +2615,9 @@ md-nav__item--active">
 <h2 id="your-journey">Your journey<a class="headerlink" href="#your-journey" title="Permanent link">&para;</a></h2>
 <p>You started by finding and retrieving the <code>nf-core/demo</code> pipeline, then learned to run it using its test profile and examine its outputs.
 Next, you configured its execution through pipeline parameters and configuration files, and saw how nf-core pipelines validate parameters and input data.
-Finally, you applied those same skills to <code>nf-core/rnaseq</code>, a production-scale pipeline, and learned how to override its default resource allocations to fit the hardware available to you.</p>
+Then you applied those same skills to <code>nf-core/rnaseq</code>, a production-scale pipeline: you pinned it to a specific release, overrode its default resource allocations to fit a small machine, and cancelled a run.
+You chose a pipeline for a scientific question by evaluating its documentation and a completed run, prepared samplesheets for your own data and for public data, and diagnosed and fixed samplesheet errors.
+Finally, you ran the pipeline on a bigger machine and used its execution report to tune resource allocations.</p>
 <h3 id="what-you-learned">What you learned<a class="headerlink" href="#what-you-learned" title="Permanent link">&para;</a></h3>
 <p>You are now able to find, retrieve, run, and configure nf-core pipelines.</p>
 <ul>
@@ -2594,6 +2626,12 @@ Finally, you applied those same skills to <code>nf-core/rnaseq</code>, a product
 <li>Pipeline parameters (set via <code>--param_name</code> or <code>-params-file</code>) and configuration (set via <code>-c</code>) serve different purposes: inputs and analysis options versus execution logistics like resource allocation.</li>
 <li>nf-core pipelines validate parameters and input files automatically, catching errors before any work is done.</li>
 <li>Resource defaults are assigned through labels (<code>process_low</code>, <code>process_medium</code>, <code>process_high</code>) defined in <code>conf/base.config</code>, which you can override with a custom configuration file.</li>
+<li>Samplesheet requirements are documented in the usage docs and enforced by the input schema (<code>assets/schema_input.json</code>); some pipelines add their own checks across rows.</li>
+<li><code>-preview</code> and <code>-stub</code> let you check inputs without running the full analysis.</li>
+<li>Choosing a pipeline starts with defining the result you need, then checking that a candidate produces it from the inputs you have.</li>
+<li>Execution reports show how much of its allocation each process actually used, which tells you how to right-size resources.</li>
+<li>Over-allocated resources limit how many tasks can run in parallel; <code>resourceLimits</code> caps requests at what the machine provides.</li>
+<li>When you override resource values, keep the <code>task.attempt</code> multiplier so that failed tasks are retried with more resources.</li>
 </ul>
 <h3 id="skills-acquired">Skills acquired<a class="headerlink" href="#skills-acquired" title="Permanent link">&para;</a></h3>
 <p>Through this hands-on course, you've learned how to:</p>
@@ -2602,7 +2640,14 @@ Finally, you applied those same skills to <code>nf-core/rnaseq</code>, a product
 <li>Run a pipeline using its built-in test profile and examine its outputs</li>
 <li>Get help, set parameters, and understand parameter and input validation</li>
 <li>Customize resource allocation and tool arguments through configuration files</li>
-<li>Pull and run a production-scale pipeline, and override its default resource labels</li>
+<li>Pull and run a production-scale pipeline pinned to a specific release with <code>-r</code>, and override its default resource allocations by label and by process name</li>
+<li>Cancel a run cleanly with <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-c">C</kbd></span> (or <code>kill</code> for a background run)</li>
+<li>Find and evaluate pipelines for a specific scientific question</li>
+<li>Write a samplesheet for your own data, including samples sequenced on multiple lanes</li>
+<li>Generate a samplesheet for public data with <code>nf-core/fetchngs</code></li>
+<li>Diagnose and fix input validation errors</li>
+<li>Run a pipeline with more compute resources by changing the machine type</li>
+<li>Tune resource allocations based on the execution report</li>
 </ul>
 <p>You're now equipped with the foundational knowledge to start running nf-core pipelines for your own analyses.</p>
 <h2 id="next-steps-to-build-your-skills">Next steps to build your skills<a class="headerlink" href="#next-steps-to-build-your-skills" title="Permanent link">&para;</a></h2>
@@ -2610,7 +2655,7 @@ Finally, you applied those same skills to <code>nf-core/rnaseq</code>, a product
 <ul>
 <li>Launch and monitor these pipelines at scale with <a href="../../seqera_scale/">Scale with Seqera</a></li>
 <li>Don't just run nf-core pipelines, develop them! Learn nf-core best practices with <a href="../../nfcore_build/">Build with nf-core</a></li>
-<li>New to Nextflow itself? Start with <a href="../../nextflow_run/">Nextflow Run</a></li>
+<li>Want to write your own pipelines? Start with <a href="../../hello_nextflow/">Hello Nextflow</a></li>
 <li>Apply Nextflow to a scientific analysis use case with <a href="../../nf4_science/">Nextflow for Science</a></li>
 <li>Explore more advanced Nextflow features with the <a href="../../side_quests/">Side Quests</a></li>
 </ul>
@@ -4359,7 +4404,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../03_run_production_pipeline/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Part 3: Run a production pipeline">
+          <a href="../06_resources/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Part 6: Scale up and tune compute resources">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -4369,7 +4414,7 @@ window.mkdocsQuizConfig = {
                 Previous
               </span>
               <div class="md-ellipsis">
-                Part 3: Run a production pipeline
+                Part 6: Scale up and tune compute resources
               </div>
             </div>
           </a>

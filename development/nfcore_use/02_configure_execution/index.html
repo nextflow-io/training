@@ -1094,6 +1094,36 @@ md-nav__item--active">
 </li>
           
 <li class="md-nav__item">
+  <a href="../04_choose_pipeline/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 4: Choose a pipeline for a scientific question   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../05_inputs/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 5: Prepare your inputs   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../06_resources/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 6: Scale up and tune compute resources   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
   <a href="../next_steps/" class="md-nav__link">
       
 <span class="md-ellipsis">
@@ -2807,7 +2837,7 @@ md-nav__item--active">
 <h1 id="part-2-configure-pipeline-execution">Part 2: Configure pipeline execution<a class="headerlink" href="#part-2-configure-pipeline-execution" title="Permanent link">&para;</a></h1>
 <p>In <a href="../01_run_demo/">Part 1</a>, you found and ran the nf-core/demo pipeline using its test profile.
 Now we look at how to configure pipeline execution: setting parameters, understanding validation, and customizing resource allocation and tool arguments.</p>
-<p>As explained in <a href="../../hello_nextflow/06_hello_config/">Hello Config</a>, we want to be able to change what data our pipeline will run on and how it will run without changing the pipeline code itself.
+<p>As explained in <a href="../../nextflow_run/02_configure_pipeline/">Nextflow Run</a>, we want to be able to change what data our pipeline will run on and how it will run without changing the pipeline code itself.
 To that end, Nextflow supports multiple ways of controlling pipeline configuration, which can be a bit overwhelming.</p>
 <p>The nf-core project specifies conventions for organizing configuration elements, distinguishing two kinds of configuration at the top level: <strong>pipeline parameters</strong> and <strong>configuration</strong> in the strict sense.</p>
 <ul>
@@ -2815,102 +2845,102 @@ To that end, Nextflow supports multiple ways of controlling pipeline configurati
 <li><strong>Configuration</strong> in the strict sense refers to the logistics of how the pipeline gets run, i.e. the executor, compute resource allocations and so on.</li>
 </ul>
 <figure class="excalidraw">
-    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 860" width="1100" height="860">
-      <!-- svg-source:excalidraw -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 860" width="1100" height="860">
+  <!-- svg-source:excalidraw -->
 
-      <!-- Arrow markers -->
-      <defs>
-        <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-          <polygon points="0 0, 10 3.5, 0 7" fill="#4a9eed"/>
-        </marker>
-        <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-          <polygon points="0 0, 10 3.5, 0 7" fill="#22c55e"/>
-        </marker>
-        <marker id="arrow-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-          <polygon points="0 0, 10 3.5, 0 7" fill="#f59e0b"/>
-        </marker>
-      </defs>
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4a9eed"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#22c55e"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f59e0b"/>
+    </marker>
+  </defs>
 
-      <!-- Background -->
-      <rect width="1100" height="860" fill="#ffffff"/>
+  <!-- Background -->
+  <rect width="1100" height="860" fill="#ffffff"/>
 
-      <!-- Title -->
-      <text x="550" y="35" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#1e1e1e">Parameters vs Configuration</text>
-      <text x="550" y="58" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#757575">How inputs and settings reach your pipeline</text>
+  <!-- Title -->
+  <text x="550" y="35" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#1e1e1e">Parameters vs Configuration</text>
+  <text x="550" y="58" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#757575">How inputs and settings reach your pipeline</text>
 
-      <!-- Left zone: Parameters -->
-      <rect x="20" y="80" width="510" height="640" rx="16" fill="#dbe4ff" fill-opacity="0.3" stroke="#4a9eed" stroke-width="1"/>
+  <!-- Left zone: Parameters -->
+  <rect x="20" y="80" width="510" height="640" rx="16" fill="#dbe4ff" fill-opacity="0.3" stroke="#4a9eed" stroke-width="1"/>
 
-      <!-- Right zone: Configuration -->
-      <rect x="570" y="80" width="510" height="640" rx="16" fill="#ffd8a8" fill-opacity="0.3" stroke="#f59e0b" stroke-width="1"/>
+  <!-- Right zone: Configuration -->
+  <rect x="570" y="80" width="510" height="640" rx="16" fill="#ffd8a8" fill-opacity="0.3" stroke="#f59e0b" stroke-width="1"/>
 
-      <!-- Parameters header -->
-      <rect x="60" y="100" width="430" height="52" rx="10" fill="#a5d8ff" stroke="#4a9eed" stroke-width="2"/>
-      <text x="275" y="132" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="bold" fill="#1e3a5f">Parameters — What to process</text>
+  <!-- Parameters header -->
+  <rect x="60" y="100" width="430" height="52" rx="10" fill="#a5d8ff" stroke="#4a9eed" stroke-width="2"/>
+  <text x="275" y="132" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="bold" fill="#1e3a5f">Parameters — What to process</text>
 
-      <!-- Configuration header -->
-      <rect x="610" y="100" width="430" height="52" rx="10" fill="#ffd8a8" stroke="#f59e0b" stroke-width="2"/>
-      <text x="825" y="132" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="bold" fill="#7c2d12">Configuration — How to run</text>
+  <!-- Configuration header -->
+  <rect x="610" y="100" width="430" height="52" rx="10" fill="#ffd8a8" stroke="#f59e0b" stroke-width="2"/>
+  <text x="825" y="132" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="bold" fill="#7c2d12">Configuration — How to run</text>
 
-      <!-- Parameter examples -->
-      <text x="80" y="190" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#2563eb">Controls:</text>
-      <text x="100" y="218" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">--input</text>
-      <text x="270" y="218" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1e1e1e">samplesheet path</text>
-      <text x="100" y="243" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">--outdir</text>
-      <text x="270" y="243" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1e1e1e">output directory</text>
-      <text x="100" y="268" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">--genome</text>
-      <text x="270" y="268" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1e1e1e">reference genome</text>
-      <text x="100" y="293" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">--skip_trim</text>
-      <text x="270" y="293" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1e1e1e">skip a step</text>
+  <!-- Parameter examples -->
+  <text x="80" y="190" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#2563eb">Controls:</text>
+  <text x="100" y="218" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">--input</text>
+  <text x="270" y="218" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1e1e1e">samplesheet path</text>
+  <text x="100" y="243" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">--outdir</text>
+  <text x="270" y="243" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1e1e1e">output directory</text>
+  <text x="100" y="268" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">--genome</text>
+  <text x="270" y="268" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1e1e1e">reference genome</text>
+  <text x="100" y="293" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">--skip_trim</text>
+  <text x="270" y="293" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1e1e1e">skip a step</text>
 
-      <!-- Config examples -->
-      <text x="630" y="190" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#c05000">Controls:</text>
-      <text x="650" y="218" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">process.cpus</text>
-      <text x="830" y="218" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1e1e1e">CPU allocation</text>
-      <text x="650" y="243" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">process.memory</text>
-      <text x="830" y="243" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1e1e1e">memory limits</text>
-      <text x="650" y="268" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">ext.args</text>
-      <text x="830" y="268" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1e1e1e">tool arguments</text>
-      <text x="650" y="293" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">executor</text>
-      <text x="830" y="293" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1e1e1e">where to run</text>
+  <!-- Config examples -->
+  <text x="630" y="190" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#c05000">Controls:</text>
+  <text x="650" y="218" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">process.cpus</text>
+  <text x="830" y="218" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1e1e1e">CPU allocation</text>
+  <text x="650" y="243" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">process.memory</text>
+  <text x="830" y="243" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1e1e1e">memory limits</text>
+  <text x="650" y="268" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">ext.args</text>
+  <text x="830" y="268" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1e1e1e">tool arguments</text>
+  <text x="650" y="293" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">executor</text>
+  <text x="830" y="293" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1e1e1e">where to run</text>
 
-      <!-- Set via: Parameters -->
-      <text x="80" y="345" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#2563eb">Set via:</text>
-      <rect x="80" y="360" width="400" height="38" rx="8" fill="#ffffff" stroke="#4a9eed" stroke-width="1"/>
-      <text x="280" y="384" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">nextflow run ... --param value</text>
+  <!-- Set via: Parameters -->
+  <text x="80" y="345" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#2563eb">Set via:</text>
+  <rect x="80" y="360" width="400" height="38" rx="8" fill="#ffffff" stroke="#4a9eed" stroke-width="1"/>
+  <text x="280" y="384" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">nextflow run ... --param value</text>
 
-      <rect x="80" y="408" width="400" height="38" rx="8" fill="#ffffff" stroke="#4a9eed" stroke-width="1"/>
-      <text x="280" y="432" text-anchor="middle" font-family="Courier New, monospace" font-size="13" fill="#1e1e1e">nextflow run ... -params-file params.yaml</text>
+  <rect x="80" y="408" width="400" height="38" rx="8" fill="#ffffff" stroke="#4a9eed" stroke-width="1"/>
+  <text x="280" y="432" text-anchor="middle" font-family="Courier New, monospace" font-size="13" fill="#1e1e1e">nextflow run ... -params-file params.yaml</text>
 
-      <!-- Set via: Config -->
-      <text x="630" y="345" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#c05000">Set via:</text>
-      <rect x="630" y="360" width="400" height="38" rx="8" fill="#ffffff" stroke="#f59e0b" stroke-width="1"/>
-      <text x="830" y="384" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">nextflow run ... -c custom.config</text>
+  <!-- Set via: Config -->
+  <text x="630" y="345" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#c05000">Set via:</text>
+  <rect x="630" y="360" width="400" height="38" rx="8" fill="#ffffff" stroke="#f59e0b" stroke-width="1"/>
+  <text x="830" y="384" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">nextflow run ... -c custom.config</text>
 
-      <rect x="630" y="408" width="400" height="38" rx="8" fill="#ffffff" stroke="#f59e0b" stroke-width="1"/>
-      <text x="830" y="432" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">nextflow run ... -profile name</text>
+  <rect x="630" y="408" width="400" height="38" rx="8" fill="#ffffff" stroke="#f59e0b" stroke-width="1"/>
+  <text x="830" y="432" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">nextflow run ... -profile name</text>
 
-      <!-- Validation box -->
-      <rect x="130" y="500" width="260" height="55" rx="10" fill="#b2f2bb" stroke="#22c55e" stroke-width="2"/>
-      <text x="260" y="534" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="bold" fill="#15803d">nf-schema validates</text>
+  <!-- Validation box -->
+  <rect x="130" y="500" width="260" height="55" rx="10" fill="#b2f2bb" stroke="#22c55e" stroke-width="2"/>
+  <text x="260" y="534" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="bold" fill="#15803d">nf-schema validates</text>
 
-      <!-- Arrow: params to validation -->
-      <line x1="260" y1="460" x2="260" y2="498" stroke="#4a9eed" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <!-- Arrow: params to validation -->
+  <line x1="260" y1="460" x2="260" y2="498" stroke="#4a9eed" stroke-width="2" marker-end="url(#arrow-blue)"/>
 
-      <!-- Arrow: validation to execution -->
-      <path d="M 310 555 C 380 610, 440 640, 500 658" fill="none" stroke="#22c55e" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <!-- Arrow: validation to execution -->
+  <path d="M 310 555 C 380 610, 440 640, 500 658" fill="none" stroke="#22c55e" stroke-width="2" marker-end="url(#arrow-green)"/>
 
-      <!-- Arrow: config to execution -->
-      <path d="M 830 460 C 780 560, 680 630, 600 658" fill="none" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <!-- Arrow: config to execution -->
+  <path d="M 830 460 C 780 560, 680 630, 600 658" fill="none" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-orange)"/>
 
-      <!-- Execution box -->
-      <rect x="420" y="650" width="260" height="60" rx="12" fill="#d0bfff" stroke="#8b5cf6" stroke-width="2"/>
-      <text x="550" y="686" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#5b21b6">Pipeline Execution</text>
+  <!-- Execution box -->
+  <rect x="420" y="650" width="260" height="60" rx="12" fill="#d0bfff" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="550" y="686" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#5b21b6">Pipeline Execution</text>
 
-      <!-- Warning box -->
-      <rect x="240" y="760" width="620" height="45" rx="8" fill="#ffc9c9" stroke="#ef4444" stroke-width="1"/>
-      <text x="550" y="788" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#991b1b">Don't put params in config files — nf-schema can't validate them there</text>
-    </svg>
+  <!-- Warning box -->
+  <rect x="240" y="760" width="620" height="45" rx="8" fill="#ffc9c9" stroke="#ef4444" stroke-width="1"/>
+  <text x="550" y="788" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#991b1b">Don't put params in config files — nf-schema can't validate them there</text>
+</svg>
 
 </figure>
 
@@ -2976,12 +3006,13 @@ To that end, Nextflow supports multiple ways of controlling pipeline configurati
 <p>As you can see, the output groups parameters into categories (Input/output options, Reference genome options, etc.) with types and descriptions for each one.</p>
 <p>This categorization is determined by a schema file, which is covered further below.
 In plain Nextflow pipelines, <code>--help</code> only works if the developer implemented it manually.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Use <code>--help --show_hidden</code> to see additional parameters that are hidden by default, such as <code>--publish_dir_mode</code> or <code>--monochrome_logs</code>.</p>
-</div>
+<details class="tip">
+<summary>Hidden parameters</summary>
+<p>Use <code>--help --show_hidden</code> to see additional parameters that are hidden by default, such as <code>--publish_dir_mode</code> or <code>--monochrome_logs</code>.
+The help message suggests <code>--showHidden</code>, but that spelling does not work; use <code>--show_hidden</code>.</p>
+</details>
 <h3 id="12-set-parameter-values">1.2. Set parameter values<a class="headerlink" href="#12-set-parameter-values" title="Permanent link">&para;</a></h3>
-<p>As covered in <a href="../../hello_nextflow/06_hello_config/">Hello Config</a>, you can set parameter values on the command line with <code>--param_name</code> or collect a set of parameters in a YAML file and pass it with <code>-params-file</code>.
+<p>As covered in <a href="../../nextflow_run/02_configure_pipeline/#22-use-a-parameter-file">Nextflow Run</a>, you can set parameter values on the command line with <code>--param_name</code> or collect a set of parameters in a YAML file and pass it with <code>-params-file</code>.
 Both approaches work the same way with nf-core pipelines.</p>
 <p>For example, to skip the trimming step, we want to set the boolean parameter <code>skip_trim</code> to <code>true</code>.
 A params file called <code>my_params.yml</code> is provided in your working directory with that value already set:</p>
@@ -3054,24 +3085,25 @@ A params file called <code>my_params.yml</code> is provided in your working dire
 <div class="admonition warning">
 <p class="admonition-title">Important limitations about parameter inputs</p>
 <p><strong>Setting boolean parameters on the command line</strong></p>
-<p>Starting with Nextflow version 26.04, all values supplied on the command line are typed as strings.
+<p>With the v2 syntax parser, which is the default from Nextflow 26.04, all values supplied on the command line are typed as strings.
 For a boolean parameter like <code>skip_trim</code>, passing it as a bare flag (<code>--skip_trim</code>) or as <code>--skip_trim true</code> is evaluated as the <strong>string</strong> <code>"true"</code>, which fails schema validation:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">* --skip_trim (true): Value is [string] but should be [boolean]</span>
 </code></pre></div>
 <p>To set a boolean parameter to a genuine <code>true</code>/<code>false</code> value, use a <code>-params-file</code> as shown above, or set it in a config file.
-String, integer and file-path parameters are unaffected and can still be set directly on the command line.
-This course uses this pattern throughout for boolean parameters.</p>
+Integer parameters are affected in the same way, so set them in a params file too.
+String and file-path parameters can still be set directly on the command line.
+This course uses this pattern throughout for boolean and integer parameters.</p>
 <p><strong>Using custom configuration files</strong></p>
 <p>Although it is technically possible to set pipeline parameters in a custom configuration file passed with <code>-c</code>, this may not override defaults already set in the pipeline's own <code>nextflow.config</code>, depending on Nextflow's configuration precedence rules.
 Using <code>--param_name</code> on the command line or <code>-params-file</code> is more reliable, as these always take precedence.</p>
-<p>As a rule of thumb: If it appears in the <code>--help</code> output, set it via the command line or a params file rather than a config file.</p>
+<p>As a rule of thumb: If it appears in the <code>--help</code> output, set it via a params file (or on the command line for string and path values) rather than a config file.</p>
 </div>
 <h3 id="13-parameter-validation">1.3. Parameter validation<a class="headerlink" href="#13-parameter-validation" title="Permanent link">&para;</a></h3>
 <p>Fun fact: the <code>--help</code> command works for all nf-core pipelines because the nf-core project requires developers to define all pipeline parameters formally in a JSON schema file (<code>nextflow_schema.json</code>).
 This schema records each parameter's type, description, default value, and grouping.</p>
 <p>In addition to powering the <code>--help</code> output, the schema file also enables automated validation at launch time.
 This means that Nextflow can check that every parameter you pass exists and has been given an appropriate value (of appropriate type, within the allowed range of values etc).</p>
-<p>We cover this in more detail in <a href="../../nfcore_build/04_input_validation/">input validation section</a>, but you can already see it in action by giving the demo pipeline some invalid parameter input.</p>
+<p>You can see it in action by giving the demo pipeline some invalid parameter input.</p>
 <h4 id="131-unrecognized-parameters">1.3.1. Unrecognized parameters<a class="headerlink" href="#131-unrecognized-parameters" title="Permanent link">&para;</a></h4>
 <p>Try passing a parameter that does not exist:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/demo<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--outdir<span class="w"> </span>demo-results<span class="w"> </span>--foobar<span class="w"> </span><span class="s2">"invalid"</span>
@@ -3103,7 +3135,7 @@ As noted in <a href="#12-set-parameter-values">1.2</a>, boolean parameters shoul
 <p>The same validation logic can also be used to check the validity of input files.
 For example, if a pipeline expects a samplesheet as its main data input (which is the case of many if not most nf-core pipelines), the developer can provide an input schema (distinct from the parameters schema) describing how the input file should be structured.</p>
 <p>Then, at runtime, Nextflow can check that the input file provided is valid.</p>
-<p>We also cover this in more detail in <a href="../../nfcore_build/04_input_validation/">input validation section</a>, but you can already see it in action by giving the demo pipeline an invalid input samplesheet.</p>
+<p>You can see it in action by giving the demo pipeline an invalid input samplesheet.</p>
 <p>The <code>nf-core/demo</code> pipeline expects a CSV file with columns <code>sample</code>, <code>fastq_1</code>, and <code>fastq_2</code>.
 This is defined in a schema file (<code>assets/schema_input.json</code>) that specifies the expected structure, column types, and constraints.</p>
 <details class="abstract">
@@ -3146,9 +3178,9 @@ This is defined in a schema file (<code>assets/schema_input.json</code>) that sp
 <p>The schema specifies that <code>sample</code> and <code>fastq_1</code> are required, while <code>fastq_2</code> is optional (supporting both paired-end and single-end data).
 File paths are validated for existence and extension pattern.</p>
 <p>To demonstrate this, we provide a malformed samplesheet called <code>malformed_samplesheet.csv</code> in your working directory:</p>
-<div class="highlight"><span class="filename">malformed_samplesheet.csv</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sample,fastq_2
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>SAMPLE1,/not/a/real/file.fastq.gz
-</code></pre></div>
+<div class="highlight"><span class="filename">malformed_samplesheet.csv</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="hll">sample,fastq_2
+</span><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="hll">SAMPLE1,/not/a/real/file.fastq.gz
+</span></code></pre></div>
 <p>This samplesheet is missing the required <code>fastq_1</code> column and has a non-existent file path in <code>fastq_2</code>.</p>
 <p>Run the demo pipeline using <code>malformed_samplesheet.csv</code> as the input:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/demo<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--outdir<span class="w"> </span>demo-results<span class="w"> </span>--input<span class="w"> </span>malformed_samplesheet.csv
@@ -3265,7 +3297,7 @@ Using the <code>pipelines</code> symlink you created in <a href="../01_run_demo/
 
   <text x="840" y="290" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#15803d">Test profile settings:</text>
   <text x="855" y="315" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">resourceLimits</text>
-  <text x="870" y="338" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">cpus: 4, memory: 4 GB</text>
+  <text x="870" y="338" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">cpus: 2, memory: 4 GB</text>
   <text x="855" y="370" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">params.input</text>
   <text x="870" y="393" font-family="Courier New, monospace" font-size="13" fill="#1e1e1e">test samplesheet URL</text>
 
@@ -3291,7 +3323,7 @@ Using the <code>pipelines</code> symlink you created in <a href="../01_run_demo/
   There is also a <code>conf/test_full.config</code> for running with a full-sized test dataset, useful for benchmarking.</li>
 </ul>
 <p>The central <code>nextflow.config</code> loads all of the above and sets the appropriate default values for everything.</p>
-<p>If you wish to modify any of the settings specified in these files, do not modify any of them files directly.
+<p>If you wish to modify any of the settings specified in these files, do not modify any of these files directly.
 Instead, create your own config file and pass it with <code>-c</code>.
 The values you specify will override the default values set in those other files.</p>
 <p>Let's try this in practice.</p>
@@ -3310,8 +3342,8 @@ The <code>ext.args</code> convention lets you pass these arguments to the underl
 <span class="normal"><a href="#__codelineno-16-8">8</a></span>
 <span class="normal"><a href="#__codelineno-16-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="w">    </span><span class="nl">withName:</span><span class="w"> </span><span class="s1">'FASTQC'</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="w">        </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="w">        </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="o">.</span><span class="na">GB</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="w">        </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="w">        </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">.</span><span class="na">GB</span>
 <a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="w">    </span><span class="nl">withName:</span><span class="w"> </span><span class="s1">'SEQTK_TRIM'</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="w">        </span><span class="n">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'-b 5'</span>
@@ -3319,7 +3351,8 @@ The <code>ext.args</code> convention lets you pass these arguments to the underl
 <a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>The first block overrides <code>FASTQC</code> resource allocation.
-By default, <code>FASTQC</code> uses the <code>process_medium</code> label from <code>base.config</code>, which allocates 6 CPUs and 36 GB of memory; here we cap it at 2 CPUs and 4 GB.</p>
+By default, <code>FASTQC</code> uses the <code>process_low</code> label from <code>base.config</code>, which allocates 2 CPUs and 12 GB of memory.
+The <code>test</code> profile caps every process at 2 CPUs and 4 GB, and here we lower <code>FASTQC</code> further to 1 CPU and 2 GB.</p>
 <p>The second block passes an extra argument to <code>SEQTK_TRIM</code> via <code>ext.args</code>.
 The <code>-b 5</code> flag tells <code>seqtk trimfq</code> to trim 5 bases from the beginning of each read in addition to quality trimming.</p>
 <p>Run the pipeline with this config:</p>
@@ -3336,8 +3369,9 @@ The <code>-b 5</code> flag tells <code>seqtk trimfq</code> to trim 5 bases from 
 </code></pre></div>
 </details>
 <p>The <code>-c</code> flag adds your config on top of the pipeline's built-in configuration.</p>
-<p>To verify the <code>ext.args</code> override took effect, find the <code>SEQTK_TRIM</code> work directory hash from the run output (e.g. <code>work/17/428668...</code>) and check the <code>.command.sh</code> file inside it:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>cat<span class="w"> </span>work/17/428668/.command.sh
+<p>To verify the <code>ext.args</code> override took effect, find the <code>SEQTK_TRIM</code> work directory hash from the run output (e.g. <code>[17/428668]</code>) and check the <code>.command.sh</code> file inside it.
+The directory name continues past the six characters shown, so use a wildcard, and replace <code>17/428668</code> with the hash from your own output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>cat<span class="w"> </span>work/17/428668*/.command.sh
 </code></pre></div>
 <details class="success">
 <summary>Command output</summary>
@@ -3354,6 +3388,7 @@ The <code>-b 5</code> flag tells <code>seqtk trimfq</code> to trim 5 bases from 
 </code></pre></div>
 </details>
 <p>You should see <code>-b 5</code> in the <code>seqtk trimfq</code> command.</p>
+<p>The resource override can be checked the same way: in the <code>.command.sh</code> file of a <code>FASTQC</code> task, the command includes <code>--threads 1</code>, the number of CPUs allocated to the task.</p>
 <p>One important thing to know about <code>ext.args</code>: if a module already has a default value set, your value will <strong>completely replace</strong> it rather than append to it.
 For example, <code>FASTQC</code> has <code>ext.args = '--quiet'</code> set by default in <code>conf/modules.config</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">conf/modules.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-21">21</a></span>

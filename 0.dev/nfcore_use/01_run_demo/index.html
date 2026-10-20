@@ -1144,6 +1144,36 @@ md-nav__item--active">
 </li>
           
 <li class="md-nav__item">
+  <a href="../04_choose_pipeline/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 4: Choose a pipeline for a scientific question   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../05_inputs/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 5: Prepare your inputs   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../06_resources/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 6: Scale up and tune compute resources   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
   <a href="../next_steps/" class="md-nav__link">
       
 <span class="md-ellipsis">
@@ -3020,10 +3050,7 @@ By default, Nextflow saves pulled pipelines under <code>$NXF_HOME/assets</code>.
 <a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a><span class="go"> &gt; 1.2.0 [t]</span>
 </code></pre></div>
 </details>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
 <p>The full path may differ on your system if you're not using our training environment.</p>
-</div>
 <p>Nextflow keeps the downloaded source code intentionally 'out of the way' on the principle that these pipelines should be used more like libraries than code that you would directly interact with.</p>
 <p>Under the hood, Nextflow stores each pulled pipeline as a git repository under <code>$NXF_HOME/assets/.repos/</code>, and checks out the code for each revision into a <code>clones/&lt;commit&gt;/</code> subdirectory.
 Because <code>.repos</code> is a hidden directory, a plain <code>tree -L 2 $NXF_HOME/assets/</code> will look empty.</p>
@@ -3031,7 +3058,7 @@ Because <code>.repos</code> is a hidden directory, a plain <code>tree -L 2 $NXF_
 <p>We're not going to look at the code in detail, but let's take a quick peek just to get a sense of what the overall organization looks like.</p>
 <p>To make it easier to browse the pipeline source code, create a symbolic link pointing at the checked-out copy of the pipeline:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>pipelines/nf-core
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>ln<span class="w"> </span>-s<span class="w"> </span><span class="s2">"</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$NXF_HOME</span>/assets/.repos/nf-core/demo/clones/*/<span class="k">)</span><span class="s2">"</span><span class="w"> </span>pipelines/nf-core/demo
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>ln<span class="w"> </span>-s<span class="w"> </span><span class="s2">"</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="si">${</span><span class="nv">NXF_HOME</span><span class="k">:-</span><span class="nv">$HOME</span><span class="p">/.nextflow</span><span class="si">}</span>/assets/.repos/nf-core/demo/clones/*/<span class="k">)</span><span class="s2">"</span><span class="w"> </span>pipelines/nf-core/demo
 </code></pre></div>
 <p>This creates a shortcut so you can explore the code with <code>tree -L 2 pipelines/nf-core/demo</code> or open files directly.</p>
 <h4 id="125-overview-of-the-code-organization">1.2.5. Overview of the code organization<a class="headerlink" href="#125-overview-of-the-code-organization" title="Permanent link">&para;</a></h4>
@@ -3075,11 +3102,11 @@ All of this content is used to generate the web pages on the nf-core website pro
 <li>Pipeline parameters / inputs and validation</li>
 </ol>
 <p>We won't go over the pipeline code components in this part of the course, but we will touch on elements of configuration and validation that are likely to be relevant to you as an end user of nf-core pipelines.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<details class="tip">
+<summary>Browsing source code on GitHub</summary>
 <p>You can also browse any nf-core pipeline's source code on GitHub, e.g. <a href="https://github.com/nf-core/demo">github.com/nf-core/demo</a>.
 Every nf-core pipeline follows the same directory layout, so once you know the structure, you can find configuration files, modules, and workflows for any pipeline the same way.</p>
-</div>
+</details>
 <p>For now, on to running the pipeline!</p>
 <h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
 <p>You now know how to find a pipeline via the nf-core website and retrieve a local copy of the source code.</p>
@@ -3090,11 +3117,11 @@ Every nf-core pipeline follows the same directory layout, so once you know the s
 <p>Conveniently, every nf-core pipeline comes with a test profile.
 This is a minimal set of configuration settings for the pipeline to run using a small test dataset hosted in the <a href="https://github.com/nf-core/test-datasets">nf-core/test-datasets</a> repository.
 It's a great way to quickly try out a pipeline at small scale.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<details class="tip">
+<summary>Configuration profiles</summary>
 <p>Nextflow's configuration profile system allows you to easily switch between different container engines or execution environments.
-For more details, see <a href="../../hello_nextflow/06_hello_config/">Hello Nextflow Part 6: Configuration</a>.</p>
-</div>
+For more details, see <a href="../../nextflow_run/02_configure_pipeline/#14-profiles">Nextflow Run Part 2: Configure the pipeline</a>.</p>
+</details>
 <h3 id="21-examine-the-test-profile">2.1. Examine the test profile<a class="headerlink" href="#21-examine-the-test-profile" title="Permanent link">&para;</a></h3>
 <p>It's good practice to check what a pipeline's test profile specifies before running it.
 The <code>test</code> profile for <code>nf-core/demo</code> lives in the configuration file <code>conf/test.config</code>.
@@ -3246,10 +3273,7 @@ Here we'll use Docker for the container system and <code>demo-results</code>, re
 <p>If your output matches that, congratulations! You've just run your first nf-core pipeline.</p>
 <p>You'll notice that there is a lot more console output than when you run a basic Nextflow pipeline.
 There's a header that includes a summary of the pipeline's version, inputs and outputs, and a few elements of configuration.</p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>Your output will show different timestamps, execution names, and file paths, but the overall structure and process execution should be similar.</p>
-</div>
+<p>Your output will show different timestamps, execution names, revision hashes, and file paths, but the overall structure and process execution should be similar.</p>
 <p>Notice the line near the top of the output:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="go">Launching `https://github.com/nf-core/demo` [cranky_curry] revision: 32893afef8 [master]</span>
 </code></pre></div>
@@ -3259,7 +3283,8 @@ For reproducible runs, you should pin a specific release using the <code>-r</cod
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/demo<span class="w"> </span>-r<span class="w"> </span><span class="m">1</span>.2.0<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--outdir<span class="w"> </span>demo-results
 </code></pre></div>
 <p>This ensures that the same pipeline code is used every time, regardless of new commits or releases.
-For this training we omit <code>-r</code> for simplicity, but in production you should always specify it.</p>
+For <code>nf-core/demo</code> we omit <code>-r</code> for simplicity, but in production you should always specify it.
+From Part 3 onward, we pin <code>nf-core/rnaseq</code> to a specific release.</p>
 <p>Moving on to the execution output, let's have a look at the lines that tell us what processes were run:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="go">executor &gt;  local (8)</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="go">[ca/5b0f3e] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔</span>
@@ -3269,7 +3294,7 @@ For this training we omit <code>-r</code> for simplicity, but in production you 
 <a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="go">-[nf-core/demo] Pipeline completed successfully-</span>
 </code></pre></div>
 <p>This tells us that four processes were run, corresponding to the four tools shown in the pipeline documentation page on the nf-core website: <code>FASTQC</code>, <code>SEQTK_TRIM</code>, <code>MULTIQC</code> and <code>COWPY</code>.</p>
-<p>The full process names as shown here, such as <code>NFCORE_DEMO:DEMO:MULTIQC</code>, are longer than what you may have seen in the introductory Hello Nextflow material.
+<p>The full process names as shown here, such as <code>NFCORE_DEMO:DEMO:MULTIQC</code>, are longer than what you may have seen in the <a href="../../nextflow_run/">Nextflow Run</a> course.
 These include the names of their parent workflows and reflect the modularity of the pipeline code.
 If you want to learn to develop nf-core-style pipelines yourself, see the <a href="../../nfcore_build/">Build with nf-core</a> course.</p>
 <h3 id="23-examine-the-pipelines-outputs">2.3. Examine the pipeline's outputs<a class="headerlink" href="#23-examine-the-pipelines-outputs" title="Permanent link">&para;</a></h3>
@@ -3308,11 +3333,8 @@ To learn more about the <code>nf-core/demo</code> pipeline's outputs, check out 
 <p>At this stage, what's important to observe is that the results are organized by module, and there is additionally a directory called <code>pipeline_info</code> containing various timestamped reports about the pipeline execution.</p>
 <p>For example, the <code>execution_timeline_*</code> file shows you what processes were run, in what order and how long they took to run:</p>
 <p><img alt="execution timeline report" src="../img/execution_timeline.png" /></p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>Here the tasks were not run in parallel because we are running on a minimalist machine in Github Codespaces.
-To see these run in parallel, try increasing the CPU allocation of your codespace and the resource limits in the test configuration.</p>
-</div>
+<p>Here the tasks were not run in parallel because we are running on a minimalist machine in GitHub Codespaces.
+Part 2 shows how to override resource settings without editing the pipeline's own configuration files, and Part 6 shows how to run on a machine with more CPUs.</p>
 <p>These reports are generated automatically for all nf-core pipelines.</p>
 <h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
 <p>You know how to run an nf-core pipeline using its built-in test profile and where to find its outputs.</p>

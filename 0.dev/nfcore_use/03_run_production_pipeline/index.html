@@ -14,7 +14,7 @@
         <link rel="prev" href="../02_configure_execution/">
       
       
-        <link rel="next" href="../next_steps/">
+        <link rel="next" href="../04_choose_pipeline/">
       
       
         
@@ -770,6 +770,17 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
+  <a href="#14-cancel-the-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Cancel the run
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#takeaway" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -993,6 +1004,36 @@ md-nav__item--active">
     </li>
   </ul>
 </nav> 
+</li>
+          
+<li class="md-nav__item">
+  <a href="../04_choose_pipeline/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 4: Choose a pipeline for a scientific question   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../05_inputs/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 5: Prepare your inputs   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../06_resources/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 6: Scale up and tune compute resources   
+</span>
+  
+  </a>
 </li>
           
 <li class="md-nav__item">
@@ -2360,6 +2401,17 @@ md-nav__item--active">
 </li>
         
           <li class="md-nav__item">
+  <a href="#14-cancel-the-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Cancel the run
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#takeaway" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2618,25 +2670,30 @@ Now we pull a real production pipeline and run it with its test profile.</p>
 <p>The <code>nf-core/rnaseq</code> pipeline performs the core steps of bulk RNA sequencing analysis: quality control, adapter trimming, read alignment, and gene-level quantification.
 It is probably the most widely used nf-core pipeline to date.</p>
 <h3 id="11-pull-the-pipeline">1.1. Pull the pipeline<a class="headerlink" href="#11-pull-the-pipeline" title="Permanent link">&para;</a></h3>
-<p>Run the following command to download it.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>pull<span class="w"> </span>nf-core/rnaseq
+<p>Run the following command to download it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>pull<span class="w"> </span>nf-core/rnaseq<span class="w"> </span>-r<span class="w"> </span><span class="m">3</span>.27.0
 </code></pre></div>
 <details class="success">
 <summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go">Checking nf-core/rnaseq ...</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="go"> downloaded from https://github.com/nf-core/rnaseq.git - revision: 1f03b53ef7 [master]</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="go"> downloaded from https://github.com/nf-core/rnaseq.git - revision: a1fcdddd3b [3.27.0]</span>
 </code></pre></div>
 </details>
 <p>The pipeline is now cached locally and ready to run.</p>
+<p>As mentioned in <a href="../01_run_demo/#22-run-the-pipeline">Part 1</a>, the <code>-r</code> option pins the pipeline to a specific version, here release 3.27.0.
+When you ran <code>nf-core/demo</code> without <code>-r</code>, Nextflow used whatever version of the pipeline's default branch it had downloaded, which changes as the pipeline is updated.</p>
+<p>Pipelines change from one release to the next: parameters, default resource requests, error messages and even results can differ.
+For any real analysis, always pin the version with <code>-r</code>, so that your results are reproducible and you can report exactly which version you used.
+In this course, we pin <code>nf-core/rnaseq</code> to the release the materials were tested with, so that what you see in your terminal matches this page.</p>
 <h3 id="12-run-the-test-profile">1.2. Run the test profile<a class="headerlink" href="#12-run-the-test-profile" title="Permanent link">&para;</a></h3>
 <p>Run it with the test profile and Docker:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/rnaseq<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--outdir<span class="w"> </span>rnaseq-results
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/rnaseq<span class="w"> </span>-r<span class="w"> </span><span class="m">3</span>.27.0<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--outdir<span class="w"> </span>rnaseq-results
 </code></pre></div>
 <details class="failure">
 <summary>Command output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">Launching `https://github.com/nf-core/rnaseq` [suspicious_dijkstra] revision: 1f03b53ef7 [master]</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">Launching `https://github.com/nf-core/rnaseq` [suspicious_dijkstra] revision: a1fcdddd3b [3.27.0]</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="go">------------------------------------------------------</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="go">                                        ,--./,-.</span>
@@ -2644,7 +2701,7 @@ It is probably the most widely used nf-core pipeline to date.</p>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="go">  |\ | |__  __ /  ` /  \ |__) |__         }  {</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="go">  | \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="go">                                        `._,._,'</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="go">  nf-core/rnaseq 3.26.0</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="go">  nf-core/rnaseq 3.27.0</span>
 <a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="go">------------------------------------------------------</span>
 <a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="go">...</span>
 <a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="go">[-        ] NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FQ_LINT  -</span>
@@ -2655,7 +2712,7 @@ It is probably the most widely used nf-core pipeline to date.</p>
 <a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="go">ERROR ~ Error executing process &gt; 'NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FQ_LINT (WT_REP2)'</span>
 <a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>
 <a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="go">Caused by:</span>
-<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="go">  Process requirement exceeds available memory -- req: 12 GB; avail: 7.7 GB</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="go">  Process requirement exceeds available memory -- req: 12 GB; avail: 7.8 GB</span>
 <a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>
 <a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>
 <a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="go">Command executed:</span>
@@ -2683,9 +2740,9 @@ It is probably the most widely used nf-core pipeline to date.</p>
 </code></pre></div>
 </details>
 <p>The key line in that error is:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">Process requirement exceeds available memory -- req: 12 GB; avail: 7.7 GB</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">Process requirement exceeds available memory -- req: 12 GB; avail: 7.8 GB</span>
 </code></pre></div>
-<p>The default Codespaces machine has 8 GB of RAM, which is also the typical default for Docker Desktop.
+<p>The default Codespaces machine has 8 GB of RAM.
 The pipeline is requesting 12 GB for the <code>FQ_LINT</code> process — more than the machine can provide.</p>
 <p>That 12 GB comes from the <code>process_low</code> resource label defined in <code>conf/base.config</code>:</p>
 <div class="highlight"><span class="filename">conf/base.config</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nl">withLabel:</span><span class="n">process_low</span><span class="w"> </span><span class="o">{</span>
@@ -2694,79 +2751,137 @@ The pipeline is requesting 12 GB for the <code>FQ_LINT</code> process — more t
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="n">time</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="mi">4</span><span class="o">.</span><span class="na">h</span><span class="w">   </span><span class="o">*</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">attempt</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="o">}</span>
 </code></pre></div>
-<p>One option would be to use a larger machine type, but for testing purposes we want to be able to run on whatever hardware is available.
-The better approach is to override the resource defaults in a custom config file.</p>
+<p>There are two ways to deal with this.
+You can make the pipeline's requests fit the machine, which is fine for testing on a small dataset, or you can give the pipeline a bigger machine, which is what you need for real analyses.
+In this part, you use the first approach, which is fine for testing.
+Later in the course, in Part 6, you do a full run on a bigger machine.</p>
 <h3 id="13-re-run-with-a-custom-configuration">1.3. Re-run with a custom configuration<a class="headerlink" href="#13-re-run-with-a-custom-configuration" title="Permanent link">&para;</a></h3>
-<p>We provide you with a custom config file that overrides the label-based resource defaults.</p>
+<p>We provide you with a custom config file that overrides the resource defaults to fit within the default Codespaces machine (2 CPUs, about 8 GB of memory).</p>
 <details class="full-code">
 <summary>laptop.config</summary>
-<div class="highlight"><span class="filename">laptop.config</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nl">withLabel:</span><span class="w"> </span><span class="s1">'process_low'</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">        </span><span class="n">cpus</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">        </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="o">.</span><span class="na">GB</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="nl">withLabel:</span><span class="w"> </span><span class="s1">'process_medium'</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">        </span><span class="n">cpus</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
+<div class="highlight"><span class="filename">laptop.config</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="cm">/*</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="cm"> * Resource limits for laptops and development machines</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="cm"> * Overrides the nf-core default allocations to fit the default Codespaces machine (2 CPUs, 8 GB)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="cm"> */</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="nl">withLabel:</span><span class="w"> </span><span class="s1">'process_low'</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">        </span><span class="n">cpus</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
 <a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">        </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="o">.</span><span class="na">GB</span>
 <a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="nl">withLabel:</span><span class="w"> </span><span class="s1">'process_high'</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">        </span><span class="n">cpus</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="nl">withLabel:</span><span class="w"> </span><span class="s1">'process_medium'</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">        </span><span class="n">cpus</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
 <a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">        </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="o">.</span><span class="na">GB</span>
 <a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">    </span><span class="nl">withLabel:</span><span class="w"> </span><span class="s1">'process_high_memory'</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">        </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="o">.</span><span class="na">GB</span>
-<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="o">}</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">    </span><span class="nl">withLabel:</span><span class="w"> </span><span class="s1">'process_high'</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">        </span><span class="n">cpus</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">        </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="o">.</span><span class="na">GB</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">    </span><span class="nl">withLabel:</span><span class="w"> </span><span class="s1">'process_high_memory'</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">        </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="o">.</span><span class="na">GB</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="hll"><span class="w">    </span><span class="nl">withName:</span><span class="w"> </span><span class="s1">'.*:TRIMGALORE'</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="hll"><span class="w">        </span><span class="n">cpus</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+</span><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
+</span><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="o">}</span>
 </code></pre></div>
 </details>
 <p><a href="../02_configure_execution/">Part 2</a> introduced <code>withName:</code> to target a single process by name.
-Here we use <code>withLabel:</code> to target all processes that share a label at once.</p>
+Here we mostly use <code>withLabel:</code> to target all processes that share a label at once.</p>
+<p>The highlighted <code>withName</code> block is needed because one process, <code>TRIMGALORE</code>, does not get its CPUs from a label.
+The pipeline sets them by name in its <code>conf/modules/trimgalore.config</code> file:</p>
+<div class="highlight"><span class="filename">conf/modules/trimgalore.config (excerpt)</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nl">withName:</span><span class="w"> </span><span class="s1">'.*:FASTQ_FASTQC_UMITOOLS_TRIMGALORE:TRIMGALORE'</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="n">cpus</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">attempt</span><span class="w"> </span><span class="o">}</span>
+</code></pre></div>
+<p>A <code>withName</code> setting takes precedence over a <code>withLabel</code> setting, so changing the labels does not affect this process.
+Among <code>withName</code> selectors, one that matches only the simple name of the process, such as <code>withName: 'TRIMGALORE'</code>, has lower priority than the pipeline's selector, which matches the full name.
+<code>withName: '.*:TRIMGALORE'</code> also matches the full name, and because your config file is applied last, it takes effect.</p>
 <p>This file is already present in your working directory.
 Pass it with <code>-c</code> to apply the overrides:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/rnaseq<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>-c<span class="w"> </span>laptop.config<span class="w"> </span>--outdir<span class="w"> </span>rnaseq-results
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/rnaseq<span class="w"> </span>-r<span class="w"> </span><span class="m">3</span>.27.0<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>-c<span class="w"> </span>laptop.config<span class="w"> </span>--outdir<span class="w"> </span>rnaseq-results
 </code></pre></div>
 <details class="success">
 <summary>Command output (pipeline launching)</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">Launching `https://github.com/nf-core/rnaseq` [romantic_faraday] revision: 1f03b53ef7 [master]</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="go">------------------------------------------------------</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="go">                                        ,--./,-.</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="go">        ___     __   __   __   ___     /,-._.--~'</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="go">  |\ | |__  __ /  ` /  \ |__) |__         }  {</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="go">  | \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="go">                                        `._,._,'</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="go">  nf-core/rnaseq 3.26.0</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="go">------------------------------------------------------</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="go">...</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="go">executor &gt;  local (7)</span>
-<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="go">[xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FQ_LINT (RAP1_IAA_30M_REP1)   | 3 of 5</span>
-<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="go">[xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FASTQC (RAP1_IAA_30M_REP1)    | 2 of 5</span>
-<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="go">...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go"> N E X T F L O W   ~  version 26.04.4</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">Launching `https://github.com/nf-core/rnaseq` [romantic_faraday] revision: a1fcdddd3b [3.27.0]</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="go">------------------------------------------------------</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="go">                                        ,--./,-.</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="go">        ___     __   __   __   ___     /,-._.--~'</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="go">  |\ | |__  __ /  ` /  \ |__) |__         }  {</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="go">  | \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="go">                                        `._,._,'</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="go">  nf-core/rnaseq 3.27.0</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="go">------------------------------------------------------</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="go">...</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="go">executor &gt;  local (7)</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="go">[xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FQ_LINT (RAP1_IAA_30M_REP1)                                 | 3 of 5</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="go">[xx/xxxxxx] NFCORE_RNASEQ:RNASEQ:FASTQ_QC_TRIM_FILTER_SETSTRANDEDNESS:FASTQ_FASTQC_UMITOOLS_TRIMGALORE:FASTQC (RAP1_IAA_30M_REP1) | 2 of 5</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="go">...</span>
 </code></pre></div>
 </details>
 <p>The pipeline is now running, and you can watch tasks completing one by one.
-On this minimal test dataset it will complete in 15–20 minutes, executing over 200 tasks in total.</p>
-<p>Real RNA-seq experiments typically involve dozens of samples and run for hours or days.
-Nextflow supports HPC schedulers (SLURM, PBS, LSF) and cloud platforms (AWS, Google Cloud, Azure), which can dramatically reduce wall-clock time by distributing work across many nodes.
-Setting up those environments, however, adds significant complexity.</p>
-<p>The Seqera platform (developed by the creators of Nextflow) provides a web-based interface for launching Nextflow pipelines on HPC or cloud infrastructure (either your own or one managed for you), with compute and data management capabilities that streamline the process of running pipelines at scale.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Academic researchers can access Seqera Platform free of charge through the <a href="https://seqera.io/academic-program/">Seqera academic program</a>.</p>
-</div>
+On the default Codespaces machine, this minimal test dataset takes about 20 minutes to process, executing over 200 tasks in total.</p>
+<p>Watch it for a minute or two, then move on to the next step.</p>
+<details class="warning">
+<summary>Disk space on the default machine</summary>
+<p>If you let this run go to completion on the default 2-core machine, it may fail near the end with a <code>no space left on device</code> error.
+The pipeline uses a separate container image for each tool, and together they take up most of the 32 GB disk of the default machine.
+The 8-core machine used in Part 6 has a 64 GB disk, so it is not affected.</p>
+<p>To free up space, remove the container images that are not in use:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span>image<span class="w"> </span>prune<span class="w"> </span>-a
+</code></pre></div>
+<p>Answer <code>y</code> when asked to confirm.
+Images that are needed again are downloaded on the next run.</p>
+</details>
+<h3 id="14-cancel-the-run">1.4. Cancel the run<a class="headerlink" href="#14-cancel-the-run" title="Permanent link">&para;</a></h3>
+<p>You don't need to wait for this run to finish.
+Stopping a run is something you will do regularly, for example when you notice a mistake in the parameters, so it is worth seeing what happens.</p>
+<p>Press <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-c">C</kbd></span> once in the terminal where the pipeline is running.</p>
+<details class="failure">
+<summary>Command output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">^C-[nf-core/rnaseq] Pipeline completed with errors-</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="go">ERROR ~ Pipeline failed. Please refer to troubleshooting docs for common issues: https://nf-co.re/docs/running/troubleshooting</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="go"> -- Check '.nextflow.log' file for details</span>
+</code></pre></div>
+</details>
+<p>Nextflow stops submitting new tasks, terminates the tasks that are running, and exits within a few seconds.
+The <code>Pipeline failed</code> message is printed by nf-core pipelines whenever a run does not complete, including when you stop it yourself, so it is expected here.</p>
+<p>Press <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-c">C</kbd></span> only once, and give Nextflow a few seconds to shut down.
+Pressing it again forces Nextflow to exit immediately, which on a cluster or in the cloud can leave tasks running without Nextflow to manage them.</p>
+<p>The tasks that completed before you cancelled the run are cached, so you can pick up where you left off with <code>-resume</code>.</p>
+<details class="tip">
+<summary>Stopping a run launched in the background</summary>
+<p>For long runs, you can launch Nextflow in the background with the <code>-bg</code> option, so that it keeps running after you close the terminal:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/rnaseq<span class="w"> </span>-r<span class="w"> </span><span class="m">3</span>.27.0<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>-c<span class="w"> </span>laptop.config<span class="w"> </span>--outdir<span class="w"> </span>rnaseq-results<span class="w"> </span>-bg
+</code></pre></div>
+<p>Nextflow records the ID of its process in a file named <code>.nextflow.pid</code> in the launch directory.
+To stop the run, send that process a termination signal:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nb">kill</span><span class="w"> </span><span class="k">$(</span>cat<span class="w"> </span>.nextflow.pid<span class="k">)</span>
+</code></pre></div>
+<p>Nextflow shuts down the same way as with <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-c">C</kbd></span>, terminating the running tasks before it exits.
+The output goes to <code>.nextflow.log</code>, where you can see <code>Killing running tasks</code> followed by the same <code>Pipeline failed</code> message.</p>
+</details>
+<details class="tip">
+<summary>Managing runs with Seqera Platform</summary>
+<p>Keeping track of runs from the terminal gets harder as you run more pipelines, especially in the background or on remote infrastructure.
+<a href="https://seqera.io/platform/">Seqera Platform</a> provides a web interface to launch Nextflow pipelines, follow their progress task by task, and cancel or resume runs, on your own HPC or cloud infrastructure.
+See the <a href="../../seqera_scale/">Scale with Seqera</a> course to get started.</p>
+</details>
 <h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
-<p>You have pulled <code>nf-core/rnaseq</code>, seen how nf-core resource labels work, and learned to override them with a custom config file.
-More importantly, you have seen why local execution is a starting point rather than a destination for real-scale analysis.</p>
+<p>You have pulled <code>nf-core/rnaseq</code>, seen how nf-core resource labels and process-specific settings work, and overridden them with a custom config file to fit the pipeline on a small machine.
+You also know how to stop a run cleanly.</p>
 <h3 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h3>
-<p>You've covered the fundamentals of running nf-core pipelines.
-See <a href="../next_steps/">Next steps</a> for where to go from here.</p>
+<p>Find and evaluate a pipeline for a scientific question of your own.
+Head on to <a href="../04_choose_pipeline/">Part 4</a>.</p>
 <hr />
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <p>In this part you learned to:</p>
 <ul>
-<li>Pull and run a production-scale pipeline (nf-core/rnaseq), and override its default resource labels</li>
+<li>Pull and run a production-scale pipeline (nf-core/rnaseq), and override its default resource allocations by label and by process name</li>
+<li>Pin a pipeline to a specific release with <code>-r</code></li>
+<li>Cancel a run cleanly</li>
 </ul><div id="quiz-progress-sidebar" aria-label="Quiz Progress" style="display: none;">
   <!-- mkdocs-quiz progress sidebar (desktop) -->
   <label class="md-nav__title">
@@ -4525,13 +4640,13 @@ window.mkdocsQuizConfig = {
         
         
           
-          <a href="../next_steps/" class="md-footer__link md-footer__link--next" aria-label="Next: Course summary">
+          <a href="../04_choose_pipeline/" class="md-footer__link md-footer__link--next" aria-label="Next: Part 4: Choose a pipeline for a scientific question">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Course summary
+                Part 4: Choose a pipeline for a scientific question
               </div>
             </div>
             <div class="md-footer__button md-icon">

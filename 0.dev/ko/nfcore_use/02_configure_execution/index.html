@@ -1094,6 +1094,36 @@ md-nav__item--active">
 </li>
           
 <li class="md-nav__item">
+  <a href="../04_choose_pipeline/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 4: Choose a pipeline for a scientific question   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../05_inputs/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 5: Prepare your inputs   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
+  <a href="../06_resources/" class="md-nav__link">
+      
+<span class="md-ellipsis">
+    Part 6: Scale up and tune compute resources   
+</span>
+  
+  </a>
+</li>
+          
+<li class="md-nav__item">
   <a href="../next_steps/" class="md-nav__link">
       
 <span class="md-ellipsis">
@@ -2817,7 +2847,7 @@ md-nav__item--active">
 이제 파이프라인 실행 설정 방법을 살펴봅니다. 매개변수 설정, 유효성 검사 이해, 리소스 할당 및 도구 인자 맞춤화를 다룹니다.</p>
 <p><a href="../../hello_nextflow/06_hello_config/">Hello Config</a>에서 설명한 것처럼, 파이프라인 코드 자체를 변경하지 않고도 파이프라인이 실행할 데이터와 실행 방식을 변경할 수 있어야 합니다.
 이를 위해 Nextflow는 파이프라인 설정을 제어하는 여러 방법을 지원하는데, 처음에는 다소 복잡하게 느껴질 수 있습니다.</p>
-<p>nf-core 프로젝트는 설정 요소를 구성하는 규칙을 정의하며, 최상위 수준에서 두 가지 종류의 설정을 구분합니다. 바로 <strong>파이프라인 매개변수</strong>와 엄밀한 의미의 **설정(configuration)**입니다.</p>
+<p>nf-core 프로젝트는 설정 요소를 구성하는 규칙을 정의하며, 최상위 수준에서 두 가지 종류의 설정을 구분합니다. 바로 <strong>파이프라인 매개변수</strong>와 엄밀한 의미의 <strong>설정(configuration)</strong>입니다.</p>
 <ul>
 <li><strong>파이프라인 매개변수</strong> (<code>params</code> 시스템을 통해 설정)는 일반적으로 입력 파일, 도구 동작 플래그, 분석 매개변수 등을 포함합니다.</li>
 <li>엄밀한 의미의 <strong>설정</strong>은 파이프라인이 실행되는 방식, 즉 executor, 컴퓨팅 리소스 할당 등의 운영 측면을 의미합니다.</li>
@@ -3273,7 +3303,7 @@ nf-schema는 첫 번째 오류에서 멈추지 않고 모든 문제를 수집하
 
   <text x="840" y="290" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#15803d">Test profile settings:</text>
   <text x="855" y="315" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">resourceLimits</text>
-  <text x="870" y="338" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">cpus: 4, memory: 4 GB</text>
+  <text x="870" y="338" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">cpus: 2, memory: 4 GB</text>
   <text x="855" y="370" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">params.input</text>
   <text x="870" y="393" font-family="Courier New, monospace" font-size="13" fill="#1e1e1e">test samplesheet URL</text>
 
