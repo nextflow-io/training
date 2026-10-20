@@ -267,8 +267,11 @@ They were chosen because their files are only a few megabytes each.
 Run `nf-core/fetchngs` with these accessions, and request a samplesheet for `nf-core/rnaseq`:
 
 ```bash
-nextflow run nf-core/fetchngs -r 1.13.0 -profile docker --input data/sra_ids.csv --outdir fetchngs-results --nf_core_pipeline rnaseq
+nextflow run nf-core/fetchngs -r 1.13.0 -profile docker -c laptop.config --input data/sra_ids.csv --outdir fetchngs-results --nf_core_pipeline rnaseq
 ```
+
+`nf-core/fetchngs` uses the same nf-core resource labels as `nf-core/rnaseq`, and by default requests 12 GB of memory for each download, more than the default machine has.
+`laptop.config` from Part 3 caps those requests, so the command uses it too.
 
 The pipeline downloads the FASTQ files from the ENA, so it needs access to the internet.
 It finishes in about a minute, then prints a warning:
@@ -490,9 +493,10 @@ Every row is individually valid, so the samplesheet passes schema validation.
 The pipeline's own checks run as part of the workflow, which `-preview` skips.
 To reach them without spending time on real computation, use the `-stub` option.
 It runs the pipeline with placeholder commands that produce empty output files instead of running the actual tools.
+The placeholder tasks still request the pipeline's default resources, so add `laptop.config` as in Part 3.
 
 ```bash
-nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --input broken_samplesheet_2.csv --outdir results -stub
+nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker -c laptop.config --input broken_samplesheet_2.csv --outdir results -stub
 ```
 
 ```console title="Command output (excerpt)"
@@ -508,7 +512,7 @@ It is a convenient way to test the logic of a pipeline run, but the outputs it p
 
 ??? exercise
 
-    Fix `broken_samplesheet_2.csv` and verify the fix with `-stub`.
+    Fix `broken_samplesheet_2.csv` and verify the fix by running the same `-stub` command again.
 
 ??? solution
 

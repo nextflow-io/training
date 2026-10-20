@@ -99,7 +99,7 @@ tree .
         └── tuned.config
     ```
 
-- **The `laptop.config` file** is a configuration file we'll use in Part 3 to cap resource usage when running a production-scale pipeline locally.
+- **The `laptop.config` file** is a configuration file we'll use in Parts 3 and 5 to cap resource usage when running a production-scale pipeline locally.
   You can ignore it until then.
 - **The `my_params.yml`, `malformed_samplesheet.csv`, and `custom.config` files** are used in Part 2, to demonstrate setting parameters from a file, input validation, and process-level configuration overrides.
   You can ignore them until then too.

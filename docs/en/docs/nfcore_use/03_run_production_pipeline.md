@@ -179,7 +179,7 @@ On the default Codespaces machine, this minimal test dataset takes about 20 minu
 
 Watch it for a minute or two, then move on to the next step.
 
-!!! warning "Disk space on the default machine"
+??? warning "Disk space on the default machine"
 
     If you let this run go to completion on the default 2-core machine, it may fail near the end with a `no space left on device` error.
     The pipeline uses a separate container image for each tool, and together they take up most of the 32 GB disk of the default machine.

@@ -34,12 +34,12 @@ Through this hands-on course, you've learned how to:
 - Get help, set parameters, and understand parameter and input validation
 - Customize resource allocation and tool arguments through configuration files
 - Pull and run a production-scale pipeline pinned to a specific release with `-r`, and override its default resource allocations by label and by process name
-- Cancel a run cleanly with ++ctrl+c++ (or `kill` for a background run), and pick up where you left off with `-resume`
-- Run a pipeline with more compute resources by changing the machine type
+- Cancel a run cleanly with ++ctrl+c++ (or `kill` for a background run)
 - Find and evaluate pipelines for a specific scientific question
 - Write a samplesheet for your own data, including samples sequenced on multiple lanes
 - Generate a samplesheet for public data with `nf-core/fetchngs`, and curate it before use
 - Diagnose and fix input validation errors
+- Run a pipeline with more compute resources by changing the machine type
 - Tune resource allocations based on the execution report
 
 You're now equipped with the foundational knowledge to start running nf-core pipelines for your own analyses.

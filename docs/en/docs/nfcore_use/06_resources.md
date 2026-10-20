@@ -186,7 +186,7 @@ Write a configuration that matches resource requests to actual usage.
 A request above the cap is reduced to the cap instead of failing.
 
 The `test` profile of `nf-core/rnaseq` sets `resourceLimits` to 4 CPUs and 15 GB of memory.
-That is why the run in Part 3 failed on the default machine, which has less than 8 GB: a 12 GB request is within the profile's limits, but not within the machine's.
+That is why the run in Part 3 failed on the default machine, which has 8 GB, of which about 7.8 GB is available: a 12 GB request is within the profile's limits, but not within the machine's.
 
 The 8-core machine provides 8 CPUs and 32 GB of memory.
 Create a file named `tuned.config` that sets the limits to what it can provide:
