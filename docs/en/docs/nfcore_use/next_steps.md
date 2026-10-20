@@ -40,7 +40,7 @@ Through this hands-on course, you've learned how to:
 - Cancel a run cleanly with ++ctrl+c++ (or `kill` for a background run)
 - Find and evaluate pipelines for a specific scientific question
 - Write a samplesheet for your own data, including samples sequenced on multiple lanes
-- Generate a samplesheet for public data with `nf-core/fetchngs`, and curate it before use
+- Generate a samplesheet for public data with `nf-core/fetchngs`
 - Diagnose and fix input validation errors
 - Run a pipeline with more compute resources by changing the machine type
 - Tune resource allocations based on the execution report

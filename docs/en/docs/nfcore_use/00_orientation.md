@@ -91,10 +91,9 @@ tree .
     ├── my_params.yml
     └── solutions
         ├── samplesheet.csv
-        ├── samplesheet_public.csv
         └── tuned.config
 
-    3 directories, 21 files
+    3 directories, 20 files
     ```
 
 - **The `laptop.config` file** is a configuration file we'll use in Parts 3 and 5 to cap resource usage when running a production-scale pipeline locally.

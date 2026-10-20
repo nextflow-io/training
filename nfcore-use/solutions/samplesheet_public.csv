@@ -1,5 +1,0 @@
-sample,fastq_1,fastq_2,strandedness
-DMSO_1,fetchngs-results/fastq/SRX15815612_SRR19770955_1.fastq.gz,fetchngs-results/fastq/SRX15815612_SRR19770955_2.fastq.gz,auto
-DMSO_2,fetchngs-results/fastq/SRX15815530_SRR19771036_1.fastq.gz,fetchngs-results/fastq/SRX15815530_SRR19771036_2.fastq.gz,auto
-TRAMETINIB_1,fetchngs-results/fastq/SRX15815525_SRR19771041_1.fastq.gz,fetchngs-results/fastq/SRX15815525_SRR19771041_2.fastq.gz,auto
-TRAMETINIB_2,fetchngs-results/fastq/SRX15815511_SRR19771055_1.fastq.gz,fetchngs-results/fastq/SRX15815511_SRR19771055_2.fastq.gz,auto

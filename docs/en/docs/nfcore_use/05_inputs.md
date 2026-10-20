@@ -338,31 +338,10 @@ WARN: Found the following unidentified headers in fetchngs-results/samplesheet/s
 
 The pipeline passes validation, with a warning listing the columns it does not use.
 
-### 3.3. Curate the samplesheet
-
-The generated samplesheet works, but the accession numbers make the pipeline's outputs hard to interpret: every report and output file will be named after them.
-Curating the samplesheet means giving the samples meaningful names and keeping only the columns the pipeline uses.
-
-??? exercise
-
-    Create a file named `samplesheet_public.csv` with the four columns required by `nf-core/rnaseq`.
-    Name each sample after its treatment, using the `sample_title` column to find out which is which.
-    Check the result with `-preview`.
-
-??? solution
-
-    ```csv title="samplesheet_public.csv"
-    --8<-- "nfcore-use/solutions/samplesheet_public.csv"
-    ```
-
-    The `-preview` run now completes without the warning about unidentified headers.
-
-Keep the generated samplesheet alongside the curated one: its metadata columns record where each sample came from.
-
 ### Takeaway
 
 `nf-core/fetchngs` downloads public data and writes a samplesheet for a downstream pipeline.
-The generated samplesheet is a starting point: check the values the archives cannot provide reliably, and rename the samples before running the analysis.
+The generated samplesheet is a starting point: check the values the archives cannot provide reliably, such as strandedness, before running the analysis.
 
 ### What's next?
 
@@ -563,7 +542,7 @@ In this part you learned to:
 
 - Find a pipeline's samplesheet requirements in its usage documentation and input schema
 - Write a samplesheet for paired-end data, including samples sequenced on multiple lanes
-- Generate a samplesheet for public data with `nf-core/fetchngs`, and curate it before use
+- Generate a samplesheet for public data with `nf-core/fetchngs`
 - Check a samplesheet with `-preview` without running the pipeline
 - Interpret schema validation errors by row, field and rule, and fix common samplesheet errors
 - Use `-stub` to trigger pipeline-specific checks that span multiple rows
