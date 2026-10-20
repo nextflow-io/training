@@ -1,26 +1,115 @@
-# Part 6: Tune compute resources
+# Part 6: Scale up and tune compute resources
 
-In [Part 3](./03_run_production_pipeline.md), you saw two ways of getting `nf-core/rnaseq` to run: constraining its resource requests with `laptop.config` to fit the default machine, and moving to an 8-core machine where its default requests fit.
+In [Part 3](./03_run_production_pipeline.md), you got `nf-core/rnaseq` running on the default machine by constraining its resource requests with `laptop.config`.
+That is fine for testing, but real analyses need more resources, not fewer.
 
-Neither approach is based on what each process actually needs.
-nf-core pipelines record how much CPU and memory every task used, so you can do better.
+In this part, you move to a bigger machine and run the pipeline with its default resource requests.
+You then read the execution report from that run to see how much of those resources each process actually used, write a configuration that matches requests to usage, and see how that affects the run.
 
-In this part, you read the execution report from the 8-core run in [Part 3, section 2](./03_run_production_pipeline.md#2-optional-run-with-more-compute-resources), use it to write a configuration file that matches resource requests to actual usage, and see how that affects the run.
-
-If you skipped section 2 of Part 3, you can still follow along using the values shown in this part.
-Section 2.4, which runs the pipeline again, requires the 8-core machine.
+This part uses a bigger codespace machine, which uses more of your GitHub Codespaces quota, as explained below.
 
 ---
 
-## 1. Read the execution report
+## 1. Run on a bigger machine
 
-### 1.1. Find the reports
+### 1.1. Change the machine type
+
+You can change the machine type of your codespace from the editor:
+
+1. Open the Command Palette with ++ctrl+shift+p++ (++cmd+shift+p++ on macOS).
+2. Type `Codespaces: Change Machine Type` and select it.
+3. Select the **8-core** machine type.
+4. Confirm that you want to restart the codespace when prompted.
+
+Alternatively, go to [github.com/codespaces](https://github.com/codespaces), click the **...** menu next to your codespace, and select **Change machine type**.
+
+The change takes effect when the codespace restarts, which can take a few minutes.
+Your files in `/workspaces` are preserved, but anything running in the terminal is stopped.
+
+The machine types available for this repository include the following (a 16-core machine with 64 GB is also available):
+
+| Machine type | CPUs | Memory | Quota use relative to the default |
+| ------------ | ---- | ------ | --------------------------------- |
+| 2-core       | 2    | 8 GB   | 1x (default)                      |
+| 4-core       | 4    | 16 GB  | 2x                                |
+| 8-core       | 8    | 32 GB  | 4x                                |
+
+Your quota is counted in core-hours, so a bigger machine uses it up faster: the free allowance of 120 core-hours per month gives you about 60 hours on the default machine, but only 15 hours on an 8-core machine.
+The rest of this part uses the 8-core machine.
+
+### 1.2. Check the new resources
+
+Once the codespace has restarted, open a terminal and return to the working directory:
+
+```bash
+cd /workspaces/training/nfcore-use
+```
+
+Check the number of CPUs and the amount of memory available:
+
+```bash
+nproc
+free -g
+```
+
+```console title="Command output"
+8
+               total        used        free      shared  buff/cache   available
+Mem:              31           2           0           0          28          28
+```
+
+### 1.3. Run the pipeline with its default resource requests
+
+Run the pipeline without `laptop.config`, so that each process gets the resources the pipeline requests by default:
+
+```bash
+nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker --outdir rnaseq-default
+```
+
+??? success "Command output (excerpt)"
+
+    ```console
+    ...
+    -[nf-core/rnaseq] Pipeline completed successfully-
+    ```
+
+With 8 CPUs and 32 GB, the default requests fit, so the run proceeds without any overrides.
+In our tests on a newly created 8-core codespace, the run took about 14 minutes.
+Much of that time goes to downloading the container image for each tool the first time it is used; once the images are downloaded, a full run takes about 6.5 minutes.
+
+Four times as many CPUs as the default machine does not make the run four times faster, for two reasons.
+The `test` profile limits each task to 4 CPUs and 15 GB of memory, and the test dataset is so small that many tasks finish in seconds regardless of the resources they get.
+On a real dataset, the long-running tasks such as read alignment benefit much more from additional resources.
+
+Real RNA-seq experiments typically involve dozens of samples and run for hours or days.
+Nextflow supports HPC schedulers (SLURM, PBS, LSF) and cloud platforms (AWS, Google Cloud, Azure), which can dramatically reduce wall-clock time by distributing work across many machines.
+Setting up those environments, however, adds significant complexity.
+
+The Seqera platform (developed by the creators of Nextflow) provides a web-based interface for launching Nextflow pipelines on HPC or cloud infrastructure (either your own or one managed for you), with compute and data management capabilities that streamline the process of running pipelines at scale.
+
+??? tip "Seqera academic program"
+
+    Academic researchers can access Seqera Platform free of charge through the [Seqera academic program](https://seqera.io/academic-program/).
+
+### Takeaway
+
+You can give a pipeline more resources by running it on a bigger machine, and local execution is a starting point rather than a destination for real-scale analysis.
+
+### What's next?
+
+Check how much of those resources the pipeline actually used.
+
+---
+
+## 2. Read the execution report
+
+### 2.1. Find the reports
 
 nf-core pipelines generate execution reports automatically; you don't need to add `-with-report`.
 They are written to the `pipeline_info/` directory inside the output directory:
 
 ```bash
-ls rnaseq-results/pipeline_info/
+ls rnaseq-default/pipeline_info/
 ```
 
 ```console title="Directory contents"
@@ -37,9 +126,8 @@ pipeline_dag_<timestamp>.html
 - **The execution trace** is a tab-separated table with one row per task, convenient for further analysis.
 
 There is one set of files per run, identified by its timestamp.
-Use the most recent one, from the run that completed on the 8-core machine.
 
-### 1.2. Compare usage with allocation
+### 2.2. Compare usage with allocation
 
 Open the execution report in your browser.
 In the **Resource Usage** section, the **Memory** plot has two tabs:
@@ -50,7 +138,7 @@ In the **Resource Usage** section, the **Memory** plot has two tabs:
 <!-- TODO: screenshot of the % Allocated memory plot from a Codespaces run -->
 
 With the pipeline's default requests, most processes use a small fraction of their allocation.
-Here are a few representative processes from our test run on an 8-core Codespace:
+Here are a few representative processes from our own test run on the 8-core machine:
 
 | Process                 | Label            | Requested     | Peak usage |
 | ----------------------- | ---------------- | ------------- | ---------- |
@@ -63,7 +151,7 @@ Here are a few representative processes from our test run on an 8-core Codespace
 The requests of 15 GB and 4 CPUs are lower than what `conf/base.config` specifies for these labels because the `test` profile caps every request at those values.
 Your numbers will differ somewhat, but the pattern is the same: the requests are far higher than the usage.
 
-### 1.3. Understand the cost of over-allocation
+### 2.3. Understand the cost of over-allocation
 
 Over-allocating memory does not make a task run any faster.
 It does limit how many tasks can run at the same time.
@@ -90,23 +178,9 @@ Write a configuration that matches resource requests to actual usage.
 
 ---
 
-## 2. Right-size the resource allocations
+## 3. Right-size the resource allocations
 
-This section writes a configuration for the 8-core machine.
-You can work through sections 2.1 to 2.3 on any machine, but to run the pipeline in section 2.4, switch your codespace to the 8-core machine type first, as described in [Part 3, section 2.1](./03_run_production_pipeline.md#21-change-the-machine-type).
-
-### 2.1. Check what the machine provides
-
-Find out how many CPUs and how much memory your machine has:
-
-```bash
-nproc
-free -g
-```
-
-The 8-core Codespaces machine provides 8 CPUs and 32 GB of memory, which `free -g` reports as 31 GB in total.
-
-### 2.2. Set a ceiling with `resourceLimits`
+### 3.1. Set a ceiling with `resourceLimits`
 
 `resourceLimits` caps every resource request at the values you give it, whatever the pipeline asks for.
 A request above the cap is reduced to the cap instead of failing.
@@ -114,7 +188,8 @@ A request above the cap is reduced to the cap instead of failing.
 The `test` profile of `nf-core/rnaseq` sets `resourceLimits` to 4 CPUs and 15 GB of memory.
 That is why the run in Part 3 failed on the default machine, which has less than 8 GB: a 12 GB request is within the profile's limits, but not within the machine's.
 
-Create a file named `tuned.config` that sets the limits to what the 8-core machine provides:
+The 8-core machine provides 8 CPUs and 32 GB of memory.
+Create a file named `tuned.config` that sets the limits to what it can provide:
 
 ```groovy title="tuned.config" linenums="1"
 process {
@@ -125,7 +200,7 @@ process {
 
 On its own, this does not help parallelism: every process still requests far more memory than it uses.
 
-### 2.3. Right-size each label
+### 3.2. Right-size each label
 
 The pipeline assigns resources through labels defined in `conf/base.config`.
 Each label definition multiplies its values by `task.attempt`:
@@ -168,16 +243,16 @@ Each value leaves headroom above the peak usage in the report, and the `task.att
 A `withName` selector takes precedence over a `withLabel` selector, so `PICARD_MARKDUPLICATES` gets 6 GB while the other `process_medium` processes get 2 GB.
 The simple name is enough here because, unlike `TRIMGALORE` in Part 3, the pipeline does not set resources for `PICARD_MARKDUPLICATES` by name.
 
-### 2.4. Run the pipeline with the tuned configuration
+### 3.3. Run the pipeline with the tuned configuration
 
-On the 8-core machine, run the test profile again with `tuned.config` and a new output directory:
+Run the test profile again with `tuned.config` and a new output directory:
 
 ```bash
 nextflow run nf-core/rnaseq -r 3.27.0 -profile test,docker -c tuned.config --outdir rnaseq-tuned
 ```
 
 Note the run time, then open the new execution timeline in `rnaseq-tuned/pipeline_info/`.
-The run in Part 3 also had to download the container images, so its run time is not directly comparable.
+The run in section 1.3 also had to download the container images, so its run time is not directly comparable.
 Tasks now overlap more, because several of them fit in memory at once.
 
 In our tests on the 8-core machine, with the container images already downloaded, the run took about 5.5 minutes with `tuned.config` compared to about 6.5 minutes with the default requests, and no task ran out of memory.
@@ -199,6 +274,10 @@ On real data, where individual tasks run for minutes or hours, running more of t
 
     Which processes would you right-size for your dataset, and in which direction?
 
+### 3.4. Switch back to the default machine
+
+When you're done, switch your codespace back to the 2-core machine type, following the same steps as in section 1.1, to avoid using up your quota.
+
 ### Takeaway
 
 `resourceLimits` keeps requests within what the machine can provide, and label-level overrides based on the execution report let more tasks run in parallel.
@@ -215,6 +294,7 @@ See [Next steps](next_steps.md) for where to go from here.
 
 In this part you learned to:
 
+- Run a pipeline with more compute resources by changing the machine type
 - Find and read the execution report and timeline generated by nf-core pipelines
 - Recognize over-allocation and its effect on parallel execution
 - Cap resource requests with `resourceLimits` and right-size them by label and by process name, while preserving automatic retries

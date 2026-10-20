@@ -485,7 +485,7 @@ For example, the `execution_timeline_*` file shows you what processes were run, 
 ![execution timeline report](./img/execution_timeline.png)
 
 Here the tasks were not run in parallel because we are running on a minimalist machine in GitHub Codespaces.
-Part 3 shows how to run on a machine with more CPUs, and Part 2 shows how to override resource settings without editing the pipeline's own configuration files.
+Part 6 shows how to run on a machine with more CPUs, and Part 2 shows how to override resource settings without editing the pipeline's own configuration files.
 
 These reports are generated automatically for all nf-core pipelines.
 

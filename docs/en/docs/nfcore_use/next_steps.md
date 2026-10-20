@@ -8,8 +8,9 @@ Congratulations on completing the Use nf-core training course! 🎉
 
 You started by finding and retrieving the `nf-core/demo` pipeline, then learned to run it using its test profile and examine its outputs.
 Next, you configured its execution through pipeline parameters and configuration files, and saw how nf-core pipelines validate parameters and input data.
-Then you applied those same skills to `nf-core/rnaseq`, a production-scale pipeline: you pinned it to a specific release, overrode its default resource allocations to fit a small machine, cancelled and resumed a run, and gave it more resources on a bigger machine.
-Finally, you chose a pipeline for a scientific question by evaluating its documentation and a completed run, prepared samplesheets for your own data and for public data, diagnosed and fixed samplesheet errors, and used execution reports to tune resource allocations.
+Then you applied those same skills to `nf-core/rnaseq`, a production-scale pipeline: you pinned it to a specific release, overrode its default resource allocations to fit a small machine, and cancelled a run.
+You chose a pipeline for a scientific question by evaluating its documentation and a completed run, prepared samplesheets for your own data and for public data, and diagnosed and fixed samplesheet errors.
+Finally, you ran the pipeline on a bigger machine and used its execution report to tune resource allocations.
 
 ### What you learned
 
