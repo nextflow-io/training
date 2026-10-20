@@ -236,6 +236,12 @@ The tasks that completed before you cancelled the run are cached, so you can pic
     Nextflow shuts down the same way as with ++ctrl+c++, terminating the running tasks before it exits.
     The output goes to `.nextflow.log`, where you can see `Killing running tasks` followed by the same `Pipeline failed` message.
 
+??? tip "Managing runs with Seqera Platform"
+
+    Keeping track of runs from the terminal gets harder as you run more pipelines, especially in the background or on remote infrastructure.
+    [Seqera Platform](https://seqera.io/platform/) provides a web interface to launch Nextflow pipelines, follow their progress task by task, and cancel or resume runs, on your own HPC or cloud infrastructure.
+    See the [Scale with Seqera](../seqera_scale/index.md) course to get started.
+
 ### Takeaway
 
 You have pulled `nf-core/rnaseq`, seen how nf-core resource labels and process-specific settings work, and overridden them with a custom config file to fit the pipeline on a small machine.
