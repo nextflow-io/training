@@ -155,9 +155,7 @@ nextflow info nf-core/demo
      > 1.2.0 [t]
     ```
 
-!!! info
-
-    The full path may differ on your system if you're not using our training environment.
+The full path may differ on your system if you're not using our training environment.
 
 Nextflow keeps the downloaded source code intentionally 'out of the way' on the principle that these pipelines should be used more like libraries than code that you would directly interact with.
 
@@ -172,7 +170,7 @@ To make it easier to browse the pipeline source code, create a symbolic link poi
 
 ```bash
 mkdir -p pipelines/nf-core
-ln -s "$(echo $NXF_HOME/assets/.repos/nf-core/demo/clones/*/)" pipelines/nf-core/demo
+ln -s "$(echo ${NXF_HOME:-$HOME/.nextflow}/assets/.repos/nf-core/demo/clones/*/)" pipelines/nf-core/demo
 ```
 
 This creates a shortcut so you can explore the code with `tree -L 2 pipelines/nf-core/demo` or open files directly.
@@ -226,7 +224,7 @@ For the rest, we can distinguish three functional groups of code files:
 
 We won't go over the pipeline code components in this part of the course, but we will touch on elements of configuration and validation that are likely to be relevant to you as an end user of nf-core pipelines.
 
-!!! tip
+??? tip "Browsing source code on GitHub"
 
     You can also browse any nf-core pipeline's source code on GitHub, e.g. [github.com/nf-core/demo](https://github.com/nf-core/demo).
     Every nf-core pipeline follows the same directory layout, so once you know the structure, you can find configuration files, modules, and workflows for any pipeline the same way.
@@ -249,10 +247,10 @@ Conveniently, every nf-core pipeline comes with a test profile.
 This is a minimal set of configuration settings for the pipeline to run using a small test dataset hosted in the [nf-core/test-datasets](https://github.com/nf-core/test-datasets) repository.
 It's a great way to quickly try out a pipeline at small scale.
 
-!!! tip
+??? tip "Configuration profiles"
 
     Nextflow's configuration profile system allows you to easily switch between different container engines or execution environments.
-    For more details, see [Hello Nextflow Part 6: Configuration](../hello_nextflow/06_hello_config.md).
+    For more details, see [Nextflow Run Part 2: Configure the pipeline](../nextflow_run/02_configure_pipeline.md#14-profiles).
 
 ### 2.1. Examine the test profile
 
@@ -404,9 +402,7 @@ If your output matches that, congratulations! You've just run your first nf-core
 You'll notice that there is a lot more console output than when you run a basic Nextflow pipeline.
 There's a header that includes a summary of the pipeline's version, inputs and outputs, and a few elements of configuration.
 
-!!! info
-
-    Your output will show different timestamps, execution names, and file paths, but the overall structure and process execution should be similar.
+Your output will show different timestamps, execution names, revision hashes, and file paths, but the overall structure and process execution should be similar.
 
 Notice the line near the top of the output:
 
@@ -423,7 +419,8 @@ nextflow run nf-core/demo -r 1.2.0 -profile test,docker --outdir demo-results
 ```
 
 This ensures that the same pipeline code is used every time, regardless of new commits or releases.
-For this training we omit `-r` for simplicity, but in production you should always specify it.
+For `nf-core/demo` we omit `-r` for simplicity, but in production you should always specify it.
+From Part 3 onward, we pin `nf-core/rnaseq` to a specific release.
 
 Moving on to the execution output, let's have a look at the lines that tell us what processes were run:
 
@@ -438,7 +435,7 @@ executor >  local (8)
 
 This tells us that four processes were run, corresponding to the four tools shown in the pipeline documentation page on the nf-core website: `FASTQC`, `SEQTK_TRIM`, `MULTIQC` and `COWPY`.
 
-The full process names as shown here, such as `NFCORE_DEMO:DEMO:MULTIQC`, are longer than what you may have seen in the introductory Hello Nextflow material.
+The full process names as shown here, such as `NFCORE_DEMO:DEMO:MULTIQC`, are longer than what you may have seen in the [Nextflow Run](../nextflow_run/index.md) course.
 These include the names of their parent workflows and reflect the modularity of the pipeline code.
 If you want to learn to develop nf-core-style pipelines yourself, see the [Build with nf-core](../nfcore_build/index.md) course.
 
@@ -487,10 +484,8 @@ For example, the `execution_timeline_*` file shows you what processes were run, 
 
 ![execution timeline report](./img/execution_timeline.png)
 
-!!! info
-
-    Here the tasks were not run in parallel because we are running on a minimalist machine in Github Codespaces.
-    To see these run in parallel, try increasing the CPU allocation of your codespace and the resource limits in the test configuration.
+Here the tasks were not run in parallel because we are running on a minimalist machine in GitHub Codespaces.
+Part 2 shows how to override resource settings without editing the pipeline's own configuration files, and Part 6 shows how to run on a machine with more CPUs.
 
 These reports are generated automatically for all nf-core pipelines.
 

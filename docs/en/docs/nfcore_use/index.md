@@ -11,6 +11,9 @@ additional_information:
     - Configure pipeline execution using parameters and configuration files
     - Understand how nf-core pipelines validate parameters and input data
     - Run a production-scale pipeline (nf-core/rnaseq) and override its default resource allocations
+    - Find and evaluate nf-core pipelines for a specific scientific question
+    - Prepare and troubleshoot input samplesheets for your own data
+    - Tune resource allocations based on execution reports
   audience_prerequisites:
     - "**Audience:** This course is designed for learners who already know how to run local Nextflow pipelines and are new to nf-core, and want to run existing community pipelines."
     - "**Skills:** Some familiarity with the command line, basic scripting concepts and common file formats is assumed."
@@ -39,11 +42,14 @@ If you're looking for an intro to developing nf-core-compatible pipelines, see [
 
 ### Lesson plan
 
-| Course chapter                                                       | Summary                                                                                     | Estimated duration |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------ |
-| [Part 1: Run a demo pipeline](./01_run_demo.md)                      | Find and retrieve an nf-core pipeline and run it using its test profile                     | 20 mins            |
-| [Part 2: Configure pipeline execution](./02_configure_execution.md)  | Set parameters, understand validation, and customize resource allocation and tool arguments | 20 mins            |
-| [Part 3: Run a production pipeline](./03_run_production_pipeline.md) | Pull and run nf-core/rnaseq, and override its default resource allocations                  | 20 mins            |
+| Course chapter                                                                 | Summary                                                                                      | Estimated duration |
+| ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- | ------------------ |
+| [Part 1: Run a demo pipeline](./01_run_demo.md)                                | Find and retrieve an nf-core pipeline and run it using its test profile                      | 20 mins            |
+| [Part 2: Configure pipeline execution](./02_configure_execution.md)            | Set parameters, understand validation, and customize resource allocation and tool arguments  | 20 mins            |
+| [Part 3: Run a production pipeline](./03_run_production_pipeline.md)           | Pin and run nf-core/rnaseq, fit it to a small machine, and cancel a run                      | 25 mins            |
+| [Part 4: Choose a pipeline for a scientific question](./04_choose_pipeline.md) | Find candidate pipelines for a scientific question and evaluate whether they fit             | 40 mins            |
+| [Part 5: Prepare your inputs](./05_inputs.md)                                  | Write a samplesheet for your own data or for public data, and troubleshoot validation errors | 40 mins            |
+| [Part 6: Scale up and tune compute resources](./06_resources.md)               | Run on a bigger machine, then use execution reports to right-size resource allocations       | 40 mins            |
 
 By the end of this course, you will be able to take advantage of the wealth of community pipelines offered by the nf-core project.
 
