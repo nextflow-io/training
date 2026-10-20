@@ -23,15 +23,10 @@ If you are working through this course by yourself, please acquaint yourself wit
 This training works with Nextflow 25.10.2 or later **with the v2 syntax parser**, which is the default from Nextflow 26.04 onward.
 In our training environment you don't need to do anything: it runs Nextflow 26.04.4 with the v2 parser. If you are using a local or custom environment, see the [version notes](../info/nxf_versions.md).
 
-!!! warning "nf-core/demo requires Nextflow 25.10.4 or later"
+!!! warning "The pipelines in this course require Nextflow 25.10.4 or later"
 
-    The `nf-core/demo` pipeline used in Part 1 enforces its own minimum Nextflow version (`>=25.10.4`), which is stricter than the general training floor of 25.10.2.
+    The `nf-core/demo`, `nf-core/rnaseq` and `nf-core/fetchngs` pipelines used in this course enforce their own minimum Nextflow version (`>=25.10.4`), which is stricter than the general training floor of 25.10.2.
     Our training environment already satisfies this; if you are using a local or custom environment, make sure you are on Nextflow 25.10.4 or later.
-
-This training additionally requires **nf-core tools 4.1.0**.
-If you use a different version of nf-core tooling, you may have difficulty following along.
-
-You can check what version is installed in your environment using the command `nf-core --version`.
 
 !!! warning "v2 parser compatibility"
 
@@ -98,6 +93,8 @@ tree .
         ├── samplesheet.csv
         ├── samplesheet_public.csv
         └── tuned.config
+
+    3 directories, 21 files
     ```
 
 - **The `laptop.config` file** is a configuration file we'll use in Parts 3 and 5 to cap resource usage when running a production-scale pipeline locally.
@@ -115,7 +112,6 @@ Think you're ready to dive in?
 
 - [ ] I understand the goal of this course and its prerequisites
 - [ ] My environment is up and running
-- [ ] I'm using nf-core tools 4.1.0 (check with `nf-core --version`)
 - [ ] I've set my working directory appropriately
 
 If you can check all the boxes, you're good to go.

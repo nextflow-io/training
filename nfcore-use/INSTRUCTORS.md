@@ -47,7 +47,7 @@ Read this before the session; learners don't need it.
 
 - Nothing runs in the codespace; everything happens in the browser on nf-co.re.
 - Each scenario has a collapsed hint listing candidate pipelines.
-  In a timed session, suggest opening it if a group has no candidate after about 10 minutes.
+  The lesson suggests opening it after about five minutes; in a group session, about 10 minutes works better, since groups spend time discussing.
 - Some published test results are incomplete: recent `nf-core/raredisease` releases only publish `pipeline_info/`, and the `nf-core/longraredisease` test covers one chromosome of one sample, without the AnnotSV or SvAnna outputs.
   Point learners to the output documentation for those.
 - Worked answers are in the collapsed solution blocks at the end of the page.
@@ -62,9 +62,9 @@ Read this before the session; learners don't need it.
 
 ### Part 6
 
-- The default-requests run takes about 15 minutes on a new 8-core codespace, mostly downloading container images.
+- The default-requests run takes about 14 minutes on a new 8-core codespace, mostly downloading container images.
   In a timed session, have learners start it before a break.
-- The run with `tuned.config` takes about 6 minutes.
+- The run with `tuned.config` takes about 5.5 minutes, compared to about 6.5 minutes with the default requests once the images are downloaded.
   The time saved on this tiny test dataset is modest; the point is the memory reservation and the number of tasks running in parallel, visible in the execution timeline.
 - Learners' resource numbers will differ slightly from the tables in the lesson.
 
@@ -81,8 +81,8 @@ Read this before the session; learners don't need it.
 
 ## Known upstream issues
 
-These don't affect the course as written, but may come up if learners explore further:
+These may come up if learners explore further, or ask why the course works around them:
 
-- `nf-core/fetchngs` 1.13.0 requests 12 GB and 2 CPUs per download (up to 36 GB on retry) for a task that uses about 15 MB.
+- `nf-core/fetchngs` 1.13.0 requests 12 GB and 2 CPUs per download (up to 36 GB on retry) for a task that uses about 15 MB; this is why Part 5 runs it with `-c laptop.config`.
 - `nf-core/differentialabundance` 2.0.0: the Quarto report step fails on Seqera Platform with Fusion enabled (`attempt to write a readonly database`); the analysis itself completes.
 - `nf-core/raredisease` 3.1.2: `PREP_MITOSALT` has no container and fails on AWS Batch.

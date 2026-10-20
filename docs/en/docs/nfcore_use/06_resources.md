@@ -168,7 +168,8 @@ Each bar is a task; many tasks wait for memory to be released before they can st
 The same problem appears on HPC clusters and in the cloud in a different form: oversized requests wait longer in the scheduler queue and cost more.
 
 Generic labels are a common cause of over-allocation.
-In Part 5, `nf-core/fetchngs` requested 12 GB of memory for each download because its download process uses the `process_low` label from the nf-core pipeline template, while each download actually used about 15 MB.
+For example, `nf-core/fetchngs` requests 12 GB of memory for each download by default, because its download process uses the `process_low` label from the nf-core pipeline template, while each download actually uses about 15 MB.
+You capped it at 6 GB with `laptop.config` in Part 5.
 
 ### Takeaway
 

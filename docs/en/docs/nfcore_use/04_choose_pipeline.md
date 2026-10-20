@@ -124,7 +124,7 @@ For each candidate, work through the questions below, using the pipeline's **Usa
 
 ### 3.1. Open the results of a completed run
 
-For every release, the nf-core project runs each pipeline on a full-size dataset in the cloud and publishes the results.
+For every release, the nf-core project runs each pipeline on a test dataset in the cloud, usually a full-size one, and publishes the results.
 You can browse them in the **Results** tab of the pipeline's page on the nf-core website.
 
 The results are organized in the same way as when you run the pipeline yourself:
@@ -244,7 +244,7 @@ There is room for judgment, so a different answer with good reasons is not neces
     The nf-core community is developing `nf-core/scdownstream` for these steps, but at the time of writing it has no stable release.
     Until then, the group would do the downstream analysis interactively, for example with Scanpy or Seurat.
 
-    **Inputs to prepare**: a samplesheet with `sample`, `fastq_1` and `fastq_2`, and optionally `expected_cells`; you also need to know the 10x chemistry version for the `--protocol` parameter.
+    **Inputs to prepare**: a samplesheet with `sample`, `fastq_1` and `fastq_2`, and optionally `expected_cells`; knowing the 10x chemistry version also helps, although the `--protocol` parameter can detect it automatically.
 
     **Compute concern**: index building and alignment are memory-intensive for the human genome.
 

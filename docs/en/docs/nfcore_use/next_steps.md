@@ -23,7 +23,10 @@ You are now able to find, retrieve, run, and configure nf-core pipelines.
 - Resource defaults are assigned through labels (`process_low`, `process_medium`, `process_high`) defined in `conf/base.config`, which you can override with a custom configuration file.
 - Samplesheet requirements are documented in the usage docs and enforced by the input schema (`assets/schema_input.json`); some pipelines add their own checks across rows.
 - `-preview` and `-stub` let you check inputs without running the full analysis.
+- Choosing a pipeline starts with defining the result you need, then checking that a candidate produces it from the inputs you have.
 - Execution reports show how much of its allocation each process actually used, which tells you how to right-size resources.
+- Over-allocated resources limit how many tasks can run in parallel; `resourceLimits` caps requests at what the machine provides.
+- When you override resource values, keep the `task.attempt` multiplier so that failed tasks are retried with more resources.
 
 ### Skills acquired
 

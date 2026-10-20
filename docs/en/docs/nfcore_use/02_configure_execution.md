@@ -12,7 +12,7 @@ The nf-core project specifies conventions for organizing configuration elements,
 - **Configuration** in the strict sense refers to the logistics of how the pipeline gets run, i.e. the executor, compute resource allocations and so on.
 
 <figure class="excalidraw">
-    --8<-- "docs/en/docs/nfcore_use/img/params_vs_config.excalidraw.svg"
+--8<-- "docs/en/docs/nfcore_use/img/params_vs_config.excalidraw.svg"
 </figure>
 
 Let's start by tackling pipeline parameters, then we'll look at configuration in the strict sense.
@@ -178,7 +178,7 @@ The `SEQTK_TRIM` process no longer appears in the output.
 
     **Setting boolean parameters on the command line**
 
-    Starting with Nextflow version 26.04, all values supplied on the command line are typed as strings.
+    With the v2 syntax parser, which is the default from Nextflow 26.04, all values supplied on the command line are typed as strings.
     For a boolean parameter like `skip_trim`, passing it as a bare flag (`--skip_trim`) or as `--skip_trim true` is evaluated as the **string** `"true"`, which fails schema validation:
 
     ```console

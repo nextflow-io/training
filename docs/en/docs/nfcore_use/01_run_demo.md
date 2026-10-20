@@ -402,7 +402,7 @@ If your output matches that, congratulations! You've just run your first nf-core
 You'll notice that there is a lot more console output than when you run a basic Nextflow pipeline.
 There's a header that includes a summary of the pipeline's version, inputs and outputs, and a few elements of configuration.
 
-Your output will show different timestamps, execution names, and file paths, but the overall structure and process execution should be similar.
+Your output will show different timestamps, execution names, revision hashes, and file paths, but the overall structure and process execution should be similar.
 
 Notice the line near the top of the output:
 
