@@ -360,7 +360,7 @@ At launch, the pipeline checks every row of the samplesheet against those rules 
 
 Your working directory contains a samplesheet named `broken_samplesheet_1.csv`.
 
-```csv title="broken_samplesheet_1.csv" linenums="1"
+```csv title="broken_samplesheet_1.csv" linenums="1" hl_lines="3-6"
 --8<-- "nfcore-use/broken_samplesheet_1.csv"
 ```
 
@@ -451,7 +451,7 @@ Pipelines that need such rules implement them in their own code, which runs afte
 
 Your working directory also contains `broken_samplesheet_2.csv`.
 
-```csv title="broken_samplesheet_2.csv" linenums="1"
+```csv title="broken_samplesheet_2.csv" linenums="1" hl_lines="2-3"
 --8<-- "nfcore-use/broken_samplesheet_2.csv"
 ```
 

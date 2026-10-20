@@ -304,7 +304,7 @@ File paths are validated for existence and extension pattern.
 
 To demonstrate this, we provide a malformed samplesheet called `malformed_samplesheet.csv` in your working directory:
 
-```csv title="malformed_samplesheet.csv"
+```csv title="malformed_samplesheet.csv" hl_lines="1 2"
 sample,fastq_2
 SAMPLE1,/not/a/real/file.fastq.gz
 ```
