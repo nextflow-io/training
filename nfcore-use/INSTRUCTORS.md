@@ -55,7 +55,7 @@ Read this before the session; learners don't need it.
 ### Part 5
 
 - `nf-core/fetchngs` downloads from the ENA, so it needs internet access to `ftp.sra.ebi.ac.uk`.
-  If the network blocks it, demo the step from your screen and have learners do the curation exercise from the samplesheet shown in the lesson.
+  If the network blocks it, demo the step from your screen; learners can follow section 3.2 from the generated samplesheet shown in the lesson.
 - The fetchngs and `-stub` commands include `-c laptop.config`: without it, they fail on the default machine with the same 12 GB memory error as in Part 3.
 - `-preview` only triggers schema validation; the cross-row check (mismatched strandedness) only appears with `-stub`.
 - When the fixed samplesheet passes the `-stub` run, tasks start running; learners can stop it with Ctrl+C.

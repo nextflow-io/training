@@ -102,7 +102,7 @@ tree .
   You can ignore them until then too.
 - **The `data/reads/` directory** contains FASTQ files for a small RNA-seq experiment, and **the `data/sra_ids.csv` file** lists public sequencing runs; both are used in Part 5 to prepare samplesheets.
 - **The `broken_samplesheet_1.csv` and `broken_samplesheet_2.csv` files** contain errors to diagnose and fix in Part 5.
-- **The `solutions/` directory** contains the completed samplesheets from Part 5 and the tuned configuration file from Part 6.
+- **The `solutions/` directory** contains the completed samplesheet from Part 5 and the tuned configuration file from Part 6.
 - **The `INSTRUCTORS.md` file** contains notes for instructors running the course live; you can ignore it.
 
 ## Readiness checklist
