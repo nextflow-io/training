@@ -1,0 +1,36 @@
+```nextflow {1,3-5} title="hello.nf" showLineNumbers
+#!/usr/bin/env nextflow
+```
+
+```nextflow {2} title="hello.nf" showLineNumbers startLineNumber=27
+    script:
+```
+
+```bash {2}
+nextflow run hello.nf
+nextflow run hello.nf -resume
+```
+
+```console title="Directory contents"
+results/
+```
+
+```csv title="greetings.csv"
+Hello
+```
+
+```
+plain
+```
+
+=== "After"
+
+    ```nextflow {4-6,14} title="hello.nf" showLineNumbers startLineNumber=3
+    process SAYHELLO {
+    ```
+
+!!! note
+
+    ```nextflow
+    channel.of(1)
+    ```

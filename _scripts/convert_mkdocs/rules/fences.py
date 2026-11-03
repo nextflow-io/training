@@ -1,4 +1,8 @@
-"""A4. Fence lines (language, hl_lines, linenums), code annotations and inline highlight."""
+"""A4. Fence lines (language, hl_lines, linenums), code annotations and inline highlight.
+
+`groovy` blocks are Nextflow unless they are real Groovy (plugin sources, Gradle, nf-test).
+A file name in the title decides; titles are translated, so blocks without one go by content.
+"""
 
 import re
 
@@ -8,41 +12,46 @@ ATTR = re.compile(r'(?P<key>[\w.-]+)="(?P<value>[^"]*)"')
 ANNOTATION = re.compile(r"\((?P<n>\d+)\)!")
 LIST_ITEM = re.compile(r"^(?P<n>\d+)\.\s+(?P<text>.*)$")
 INLINE = re.compile(r"`#!(?P<lang>\w+) (?P<code>[^`]+)`")
-GROOVY_TITLE = re.compile(r"\.(groovy|gradle|nf\.test|java)$|^build\.gradle|\.test$", re.I)
-GROOVY_CODE = re.compile(r"^\s*(package |import |@\w+|class \w+|(public |protected |private )?(static )?(void|String|def) \w+\()", re.M)
-# Pages about the Groovy that sits under Nextflow: untitled snippets there are Groovy.
-GROOVY_PAGES = ("side_quests/plugin_development/",)
+TITLE_EXT = re.compile(r"\.(nf|config|groovy|gradle|test|java)\b(?!\.)")
+GROOVY_EXT = {"groovy", "gradle", "test", "java"}
+GROOVY_CODE = re.compile(
+    r"^\s*(package [\w.]+|import [\w.]+|@[A-Z]\w*|(public|protected|private|static|final|abstract) |class \w+"
+    r"|def '|nextflow_(process|workflow|pipeline|function) \{|nextflowPlugin \{|dependencies \{)",
+    re.M,
+)
+SCOPES = (
+    "process|profiles|plugins|docker|singularity|apptainer|podman|charliecloud|conda|spack|executor"
+    "|manifest|env|aws|azure|google|k8s|wave|fusion|tower|timeline|report|trace|dag|notification|mail|lineage"
+)
+# Not `params.x = ...`: old-style scripts set params that way too.
+CONFIG_START = re.compile(rf"^((withName|withLabel)\s*:|(params|{SCOPES})\s*\{{|({SCOPES})\.\w|ext\.\w|(outputDir|workDir|includeConfig)\b)")
 
 
-def nextflow_or_groovy(title: str | None, code: str, rel: str) -> str:
-    if title:
-        return "groovy" if GROOVY_TITLE.search(title.strip()) else "nextflow"
-    if rel.startswith(GROOVY_PAGES) or GROOVY_CODE.search(code):
-        return "groovy"
-    return "nextflow"
+def classify(title: str | None, code: str) -> tuple[str, bool]:
+    """(language, is a config block) for a `groovy` block."""
+    m = TITLE_EXT.search(title or "")
+    if m:
+        return ("groovy", False) if m[1] in GROOVY_EXT else ("nextflow", m[1] == "config")
+    if GROOVY_CODE.search(code):
+        return "groovy", False
+    first = next((s for s in (l.strip() for l in code.split("\n")) if s and not s.startswith(("//", "/*", "*"))), "")
+    return "nextflow", bool(CONFIG_START.match(first))
 
 
-def is_config_title(title: str | None) -> bool:
-    return bool(title) and "config" in title.lower() and not title.strip().endswith(".config")
-
-
-def ranges(spec: str) -> str:
-    return ",".join(spec.split())
-
-
-def fence_line(page, info: str, code: str) -> str:
+def fence_line(info: str, code: str) -> str:
     lang, _, rest = info.partition(" ")
     attrs = dict((m["key"], m["value"]) for m in ATTR.finditer(rest))
     leftover = ATTR.sub("", rest).strip()
     title = attrs.get("title")
+    config = False
     if lang == "groovy":
-        lang = nextflow_or_groovy(title, code, page.rel)
+        lang, config = classify(title, code)
     parts = [lang]
     if "hl_lines" in attrs:
-        parts.append("{" + ranges(attrs["hl_lines"]) + "}")
+        parts.append("{" + ",".join(attrs["hl_lines"].split()) + "}")
     if title is not None:
         parts.append(f'title="{title}"')
-    if lang == "nextflow" and is_config_title(title):
+    if config and not (title or "").strip().endswith(".config"):
         parts.append('nextflow="config"')
     if "linenums" in attrs:
         parts.append("showLineNumbers")
@@ -56,11 +65,11 @@ def fence_line(page, info: str, code: str) -> str:
     return " ".join(parts)
 
 
-def inline(text: str, rel: str) -> str:
+def inline(text: str) -> str:
     def sub(m):
         lang = m["lang"]
         if lang == "groovy":
-            lang = "groovy" if rel.startswith(GROOVY_PAGES) else "nextflow"
+            lang = classify(None, m["code"])[0]
         return f"`{m['code']}{{:{lang}}}`"
 
     return INLINE.sub(sub, text)
@@ -102,17 +111,16 @@ def apply(page) -> None:
     lines = page.body.split("\n")
     for f in reversed(fences(lines)):
         code_lines = lines[f.start + 1 : f.end]
-        code = "\n".join(code_lines)
-        if any(ANNOTATION.search(l) for l in code_lines):
+        markers = sorted({int(m["n"]) for l in code_lines for m in ANNOTATION.finditer(l)})
+        if markers:
             notes, after = annotation_list(lines, f.end + 1, f.indent)
+            if missing := [n for n in markers if n not in notes]:
+                page.warn(f"annotation markers {missing} have no list item after the block at line {f.start + 1}")
             if notes:
                 for k, l in enumerate(code_lines):
                     code_lines[k] = ANNOTATION.sub(lambda m: f"[!annotate] {annotate(notes.get(int(m['n']), ''))}".rstrip(), l)
-                lines = lines[: f.start + 1] + code_lines + [lines[f.end]] + [""] + lines[after:]
-            else:
-                page.warn(f"annotation markers with no list after the block at line {f.start + 1}")
-        pad = " " * f.indent
-        lines[f.start] = pad + f.marker + fence_line(page, f.info, code)
+                lines = lines[: f.start + 1] + code_lines + [lines[f.end]] + lines[after:]
+        lines[f.start] = " " * f.indent + f.marker + fence_line(f.info, "\n".join(code_lines))
 
     in_fence = fenced_lines(lines)
-    page.body = "\n".join(l if i in in_fence else inline(l, page.rel) for i, l in enumerate(lines))
+    page.body = "\n".join(l if i in in_fence else inline(l) for i, l in enumerate(lines))

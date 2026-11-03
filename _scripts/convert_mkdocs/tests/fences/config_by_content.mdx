@@ -1,0 +1,42 @@
+```nextflow title="Built-in configuration" nextflow="config"
+process {
+    executor = 'local'
+}
+```
+
+```nextflow nextflow="config"
+docker.enabled = true
+process {
+    resourceLimits = [cpus: 2]
+}
+```
+
+```nextflow nextflow="config"
+outputDir = params.outdir
+```
+
+```nextflow nextflow="config"
+plugins {
+    id 'nf-schema@2.7.2'
+}
+```
+
+```nextflow title="Code to add" nextflow="config"
+withName: 'COWPY' {
+    ext.args = { "-c ${params.character}" }
+}
+```
+
+```nextflow title="Code to add" nextflow="config"
+ext.prefix = { "cowpy-${meta.id}" }
+```
+
+Process directives and old-style params are script code:
+
+```nextflow
+container 'ghcr.io/schapirolabor/molkart-local:v0.0.4'
+```
+
+```nextflow
+params.input = 'greetings.csv'
+```
