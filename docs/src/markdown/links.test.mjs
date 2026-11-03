@@ -7,7 +7,10 @@ const ptPage = 'pt/hello_nextflow/01_hello_world.mdx';
 
 test('relative .md and .mdx links resolve to the page URL under the base', () => {
   assert.equal(resolveHref('00_orientation.md', page, '/latest/'), '/latest/hello_nextflow/00_orientation/');
-  assert.equal(resolveHref('./02_hello_channels.mdx#21-foo', page, '/latest/'), '/latest/hello_nextflow/02_hello_channels/#21-foo');
+  assert.equal(
+    resolveHref('./02_hello_channels.mdx#21-foo', page, '/latest/'),
+    '/latest/hello_nextflow/02_hello_channels/#21-foo',
+  );
   assert.equal(resolveHref('../envsetup/index.md', page, '/3.9/'), '/3.9/envsetup/');
   assert.equal(resolveHref('../index.md', page, '/'), '/');
   assert.equal(resolveHref('README.md', page, '/'), '/hello_nextflow/readme/');
@@ -25,7 +28,14 @@ test('root-absolute links get the base once', () => {
 });
 
 test('other links are left alone', () => {
-  for (const href of ['#anchor', 'https://nextflow.io/docs/', 'mailto:a@b.c', '//cdn.example/x', 'img/x.png', undefined]) {
+  for (const href of [
+    '#anchor',
+    'https://nextflow.io/docs/',
+    'mailto:a@b.c',
+    '//cdn.example/x',
+    'img/x.png',
+    undefined,
+  ]) {
     assert.equal(resolveHref(href, page, '/latest/'), undefined, String(href));
   }
 });

@@ -27,20 +27,22 @@ export const collections = {
   i18n: defineCollection({
     loader: i18nLoader(),
     schema: i18nSchema({
-      extend: z.object({
-        'courseInfo.courseSummary': z.string(),
-        'courseInfo.additionalInformation': z.string(),
-        'courseInfo.technicalRequirements': z.string(),
-        'courseInfo.learningObjectives': z.string(),
-        'courseInfo.audiencePrerequisites': z.string(),
-        'courseInfo.courseVideos': z.string(),
-        'courseInfo.defaultTechnicalRequirements': z.string(),
-        'courseInfo.defaultVideos': z.string(),
-        'courseInfo.viewPlaylist': z.string(),
-        'consent.title': z.string(),
-        'consent.description': z.string(),
-        'consent.posthog': z.string(),
-      }).partial(),
+      extend: z
+        .object({
+          'courseInfo.courseSummary': z.string(),
+          'courseInfo.additionalInformation': z.string(),
+          'courseInfo.technicalRequirements': z.string(),
+          'courseInfo.learningObjectives': z.string(),
+          'courseInfo.audiencePrerequisites': z.string(),
+          'courseInfo.courseVideos': z.string(),
+          'courseInfo.defaultTechnicalRequirements': z.string(),
+          'courseInfo.defaultVideos': z.string(),
+          'courseInfo.viewPlaylist': z.string(),
+          'consent.title': z.string(),
+          'consent.description': z.string(),
+          'consent.posthog': z.string(),
+        })
+        .partial(),
     }),
   }),
 };

@@ -101,7 +101,12 @@ function checkFile(file, plugins) {
 
     for (const { re, pkg } of PLUGIN_ATTRS) {
       if (re.test(meta) && !plugins.has(pkg)) {
-        report('error', file, i + 1, `uses ${re.source.replace(/\\b|\\{/g, '')} but ${pkg} is not installed — silently ignored`);
+        report(
+          'error',
+          file,
+          i + 1,
+          `uses ${re.source.replace(/\\b|\\{/g, '')} but ${pkg} is not installed — silently ignored`,
+        );
       }
     }
 
@@ -116,10 +121,20 @@ function checkFile(file, plugins) {
       }
       // A long label needs a blank line of its own; otherwise it collides with code.
       if (r.label && r.label.length > 3 && body[r.from - 1].trim() !== '') {
-        report('error', file, i + 1, `labelled marker "${r.label.slice(0, 32)}…" starts on line ${r.from}, which is not blank`);
+        report(
+          'error',
+          file,
+          i + 1,
+          `labelled marker "${r.label.slice(0, 32)}…" starts on line ${r.from}, which is not blank`,
+        );
       }
       if (r.collapse && r.to - r.from + 1 <= 5) {
-        report('warn', file, i + 1, `collapse={${r.from}-${r.to}} hides only ${r.to - r.from + 1} lines — below the six-line floor`);
+        report(
+          'warn',
+          file,
+          i + 1,
+          `collapse={${r.from}-${r.to}} hides only ${r.to - r.from + 1} lines — below the six-line floor`,
+        );
       }
     }
 
@@ -141,12 +156,22 @@ function checkFile(file, plugins) {
       const isMarked =
         marked.some((r) => n >= r.from && n <= r.to) || inlineMarkers.some((text) => body[n - 1].includes(text));
       if (isMarked && !/\bwrap\b/.test(meta)) {
-        report('warn', file, i + 1, `marked line ${n} is ${width} chars — the highlight may scroll out of view (add \`wrap\` or break the line)`);
+        report(
+          'warn',
+          file,
+          i + 1,
+          `marked line ${n} is ${width} chars — the highlight may scroll out of view (add \`wrap\` or break the line)`,
+        );
       }
     }
 
     if (/\bins=|\bdel=/.test(meta) && lang !== 'diff') {
-      report('warn', file, i + 1, `uses ins=/del= — confirm this block shows a real before/after, not a from-scratch example`);
+      report(
+        'warn',
+        file,
+        i + 1,
+        `uses ins=/del= — confirm this block shows a real before/after, not a from-scratch example`,
+      );
     }
   }
 }
