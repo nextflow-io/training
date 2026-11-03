@@ -84,7 +84,7 @@ export default defineConfig({
     // Must come after starlight(): it only injects imports when MDX is already registered.
     AutoImport({
       imports: [
-        { '@astrojs/starlight/components': ['Aside', 'Tabs', 'TabItem', 'Code', 'CardGrid', 'LinkCard', 'LinkButton'] },
+        { '@astrojs/starlight/components': ['Aside', 'Tabs', 'TabItem', 'Code', 'Card', 'CardGrid', 'LinkCard', 'LinkButton'] },
         { 'starlight-codeblocks/components': ['CodeWalkthrough', 'Scrollycoding', 'Step'] },
         { 'starlight-quiz/components': ['Quiz', 'QuizResults'] },
         './src/components/CourseInfo.astro',
